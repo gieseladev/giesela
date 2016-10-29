@@ -1,5 +1,7 @@
 @ECHO off
 
+:start
+
 CHCP 65001 > NUL
 CD /d "%~dp0"
 
@@ -35,4 +37,4 @@ GOTO end
 ECHO ERROR: Python has either not been installed or not added to your PATH.
 
 :end
-PAUSE
+GOTO start
