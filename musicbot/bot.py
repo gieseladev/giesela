@@ -73,7 +73,7 @@ class Response:
 class MusicBot(discord.Client):
     trueStringList = ["true", "1", "t", "y", "yes", "yeah", "yup", "certainly", "uh-huh", "affirmitive", "activate"]
     channelFreeCommands =  ["say"]
-    privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say"]
+    privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast"]
     lonelyModeRunning = False
 
     def __init__(self, config_file=ConfigDefaults.options_file, perms_file=PermissionsDefaults.perms_file):
