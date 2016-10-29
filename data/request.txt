@@ -1,0 +1,11 @@
+2016-10-13 02:02:06 <siku2#7390>
+"Hello Log num 2"
+
+2016-10-13 02:00:28 <siku2#7390>
+"hello log"
+
+2016-10-10 06:53:57 <siku2#7390>
+"why do I even bother, no one's gonna use this function"
+
+2016-10-10 06:53:15 <siku2#7390>
+"some weather shit"
