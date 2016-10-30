@@ -1287,11 +1287,23 @@ class MusicBot(discord.Client):
             song_total = str(timedelta(seconds=player.current_entry.duration)).lstrip('0').lstrip(':')
             prog_str = '`[%s/%s]`' % (song_progress, song_total)
 
+            prog_bar_len = 50;
+            prog_full_char = "■"
+            prog_empty_char = "□"
+            progress_perc = player.progress / player.current_entry.duration
+            prog_bar_str = ""
+
+            for i in range (progress_bar_len):
+                if i < progress_bar_len * progress_perc:
+                    prog_bar_str += prog_full_char
+                else
+                    prog_bar_str += prog_empty_char
+
             if player.current_entry.meta.get('channel', False) and player.current_entry.meta.get('author', False):
-                np_text = "Now Playing: **%s** added by **%s** %s\n" % (
-                    player.current_entry.title, player.current_entry.meta['author'].name, prog_str)
+                np_text = "Now Playing: **%s** added by **%s** %s\n%s" % (
+                    player.current_entry.title, player.current_entry.meta['author'].name, prog_str, prog_bar_str)
             else:
-                np_text = "Now Playing: **%s** %s\n" % (player.current_entry.title, prog_str)
+                np_text = "Now Playing: **%s** %s\n%s" % (player.current_entry.title, prog_str, prog_bar_str)
 
             self.server_specific_data[server]['last_np_msg'] = await self.safe_send_message(channel, np_text)
             await self._manual_delete_check(message)
