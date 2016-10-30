@@ -193,10 +193,10 @@ def main():
             if hasattr(e, '__module__') and e.__module__ == 'musicbot.exceptions':
                 if e.__class__.__name__ == 'HelpfulError':
                     print(e.message)
-                    break
+                    #break
 
-                elif e.__class__.__name__ == "TerminateSignal":
-                    break
+                #elif e.__class__.__name__ == "TerminateSignal":
+                    #break
 
                 elif e.__class__.__name__ == "RestartSignal":
                     loops = -1
@@ -204,8 +204,8 @@ def main():
                 traceback.print_exc()
 
         finally:
-            if not m or not m.init_ok:
-                break
+            #if not m or not m.init_ok:
+                #break
 
             asyncio.set_event_loop(asyncio.new_event_loop())
             loops += 1
