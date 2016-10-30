@@ -1296,7 +1296,7 @@ class MusicBot(discord.Client):
             for i in range (progress_bar_len):
                 if i < progress_bar_len * progress_perc:
                     prog_bar_str += prog_full_char
-                else
+                else:
                     prog_bar_str += prog_empty_char
 
             if player.current_entry.meta.get('channel', False) and player.current_entry.meta.get('author', False):
