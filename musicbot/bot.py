@@ -1294,7 +1294,7 @@ class MusicBot(discord.Client):
             prog_bar_str = ""
 
             for i in range (prog_bar_len):
-                if i < progress_bar_len * progress_perc:
+                if i < prog_bar_len * progress_perc:
                     prog_bar_str += prog_full_char
                 else:
                     prog_bar_str += prog_empty_char
