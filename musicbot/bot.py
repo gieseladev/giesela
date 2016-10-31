@@ -2155,21 +2155,6 @@ class MusicBot(discord.Client):
             minutes, seconds = divmod (player.progress + 3, 60)
             await self.safe_send_message (channel, player.current_entry.url + "#t=***REMOVED***0***REMOVED***m***REMOVED***1***REMOVED***s".format (minutes, seconds))
 
-    async def cmd_remove (self, player, message, channel, author, leftover_args):
-        """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***remove index
-
-        Sends the video link that gets you to the current location of the bot. Use "pause video" as argument to help you sync up the video.
-        """
-
-        index = int (leftover_args [0])
-
-        if index <= 0 and index > len (player.playlist.entries):
-            await self.safe_send_message (channel, "Can't do it...")
-
-        await player.playlist.remove_entry (index - 1)
-
     async def cmd_disconnect(self, server):
         await self.disconnect_voice_client(server)
         return Response(":hear_no_evil:", delete_after=20)
