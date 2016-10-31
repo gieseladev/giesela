@@ -2,11 +2,10 @@
 *.pyc
 ~*/
 
-config\options.ini
-
 audio_cache/
 audio_cache.7z
 audio_cache.zip
 dectalk/
 
 discord.log
+config/options.ini
