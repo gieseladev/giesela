@@ -137,9 +137,6 @@ class Playlist(EventEmitter):
         self._add_entry_next(entry)
         return entry, len(self.entries)
 
-    async def remove_entry (self, index):
-        del self.entries [index]
-
     async def import_from(self, playlist_url, **meta):
         """
             Imports the songs from `playlist_url` and queues them to be played.
