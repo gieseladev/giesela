@@ -2110,17 +2110,17 @@ class MusicBot(discord.Client):
 
         await player.playlist.add_entry (message.attachments [0] ["url"])
 
-    async def cmd_halloween (self, player, message, channel, permissions, author):
-        """
-        Usage:
-            {command_prefix}halloween
-
-        Activate the mighty spirit of the halloween festival.
-        """
-        await self.safe_send_message (channel, "Halloween is upon you! :jack_o_lantern:")
-        await self.cmd_ask (channel, message, ["Halloween"])
-        player.volume = .15
-        await self.cmd_play (player, channel, author, permissions, ["https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g"], "https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g")
+    # async def cmd_halloween (self, player, message, channel, permissions, author):
+    #     """
+    #     Usage:
+    #         {command_prefix}halloween
+    #
+    #     Activate the mighty spirit of the halloween festival.
+    #     """
+    #     await self.safe_send_message (channel, "Halloween is upon you! :jack_o_lantern:")
+    #     await self.cmd_ask (channel, message, ["Halloween"])
+    #     player.volume = .15
+    #     await self.cmd_play (player, channel, author, permissions, ["https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g"], "https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g")
 
     async def cmd_getvideolink (self, player, message, channel, author, leftover_args):
         """
@@ -2154,6 +2154,46 @@ class MusicBot(discord.Client):
         else:
             minutes, seconds = divmod (player.progress + 3, 60)
             await self.safe_send_message (channel, player.current_entry.url + "#t={0}m{1}s".format (minutes, seconds))
+
+    async def cmd_remove (self, player, message, channel, author, leftover_args):
+        """
+        Usage:
+            {command_prefix}remove index or url
+
+        Remove a index or a url from the playlist.
+        """
+
+        if len (player.playlist.entries) < 0:
+            await self.safe_send_message (channel, "There are no entries in the playlist!", expire_in=15)
+            return
+
+        try:
+            index = int (leftover_args [0]) - 1
+
+            if index > len (player.playlist.entries) - 1 or index < 0:
+                await self.safe_send_message (channel, "This index cannot be found in the playlist", expire_in=15)
+                return
+
+            video = player.playlist.entries [index].title
+            del player.playlist.entries [index]
+            await self.safe_send_message (channel, "Removed *{0}* from the playlist".format (video))
+            return
+
+        except:
+            strindex = leftover_args [0]
+            iteration = 1
+
+            for entry in player.playlist.entries:
+                self.safe_print ("Looking at {0}. [{1}]".format (entry.title, entry.url))
+
+                if entry.title == strindex or entry.url == strindex:
+                    self.safe_print ("Found {0} and will remove it".format (leftover_args [0]))
+                    await self.cmd_remove (player, message, channel, author, [iteration])
+                    return
+                iteration += 1
+
+        await self.safe_send_message (channel, "Didn't find anything that goes by {0}".format (leftover_args [0]), expire_in=15)
+
 
     async def cmd_disconnect(self, server):
         await self.disconnect_voice_client(server)
