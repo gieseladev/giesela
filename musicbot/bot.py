@@ -11,6 +11,9 @@ import traceback
 import tungsten
 import goslate
 import datetime
+import configparser
+import json
+import operator
 
 from discord import utils
 from discord.object import Object
@@ -732,7 +735,7 @@ class MusicBot(discord.Client):
         print()
         # t-t-th-th-that's all folks!
 
-    async def cmd_help(self, command=None):
+    async def cmd_help(self, channel, leftover_args):
         """
         Usage:
             {command_prefix}help [command]
@@ -741,19 +744,54 @@ class MusicBot(discord.Client):
         If a command is specified, it prints a help message for that command.
         Otherwise, it lists the available commands.
         """
+        command = None
+
+        if len(leftover_args) > 0:
+            command = leftover_args [0]
 
         if command:
             cmd = getattr(self, 'cmd_' + command, None)
             if cmd:
                 return Response(
                     "```\n{}```".format(
-                        dedent(cmd.__doc__),
-                        command_prefix=self.config.command_prefix
+                        dedent(cmd.__doc__).format (command_prefix=self.config.command_prefix)
                     ),
                     delete_after=60
                 )
             else:
-                return Response("No such command", delete_after=10)
+                #return Response("No such command", delete_after=10)
+                self.safe_print ("Didn't find a command like that")
+                config = configparser.ConfigParser (interpolation=None)
+                if not config.read("config/helper.ini", encoding='utf-8'):
+                    await self.safe_send_message (channel, "Something went wrong here. I cannot help you with this")
+                    return
+
+                funcs = {}
+
+                for section in config.sections():
+                    tags = json.loads (config.get (section, "tags"))
+                    funcs [str (section)] = 0;
+                    for arg in leftover_args:
+                        if arg.lower () in tags:
+                            funcs [str (section)] += 1
+
+                funcs = {k: v for k, v in funcs.items() if v > 0}
+
+                if len (funcs) <= 0:
+                    await self.safe_send_message (channel, "Didn't find anything that may satisfy your wishes")
+                    return
+
+                sorted_funcs = sorted (funcs.items (), key = operator.itemgetter (1), reverse = True)
+
+                resp_str = "**You might wanna take a look at these functions:**\n\n"
+
+                for func in sorted_funcs [:3]:
+                    cmd = getattr(self, 'cmd_' + func [0], None)
+                    helpText = dedent (cmd.__doc__).format (command_prefix=self.config.command_prefix)
+                    resp_str += "*{0}:*\n```\n{1}```\n\n".format (func [0], helpText)
+
+                await self.safe_send_message (channel, resp_str, expire_in = 60)
+
 
         else:
             helpmsg = "**Commands**\n```"
@@ -2105,22 +2143,22 @@ class MusicBot(discord.Client):
         """
 
         if len (message.attachments) < 1:
-            await self.safe_send_message (channel, "You didn't attach anything, idiot.")
+            await self.safe_send_message (channel, "You didn't attach anything, idiot.", expire_in=15)
             return
 
         await player.playlist.add_entry (message.attachments [0] ["url"])
 
-    async def cmd_halloween (self, player, message, channel, permissions, author):
-        """
-        Usage:
-            {command_prefix}halloween
-
-        Activate the mighty spirit of the halloween festival.
-        """
-        await self.safe_send_message (channel, "Halloween is upon you! :jack_o_lantern:")
-        await self.cmd_ask (channel, message, ["Halloween"])
-        player.volume = .15
-        await self.cmd_play (player, channel, author, permissions, ["https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g"], "https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g")
+    # async def cmd_halloween (self, player, message, channel, permissions, author):
+    #     """
+    #     Usage:
+    #         {command_prefix}halloween
+    #
+    #     Activate the mighty spirit of the halloween festival.
+    #     """
+    #     await self.safe_send_message (channel, "Halloween is upon you! :jack_o_lantern:")
+    #     await self.cmd_ask (channel, message, ["Halloween"])
+    #     player.volume = .15
+    #     await self.cmd_play (player, channel, author, permissions, ["https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g"], "https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g")
 
     async def cmd_getvideolink (self, player, message, channel, author, leftover_args):
         """
@@ -2130,8 +2168,8 @@ class MusicBot(discord.Client):
         Sends the video link that gets you to the current location of the bot. Use "pause video" as argument to help you sync up the video.
         """
 
-        if not player.is_playing:
-            await self.safe_send_message (channel, "WHAT THE FUCK DO YOU WANT FROM ME?! THERE'S NOTHING PLAYING!")
+        if not player.current_entry:
+            await self.safe_send_message (channel, "Can't give you a link for FUCKING NOTHING", expire_in=15)
             return
 
         if "pause video" in " ".join (leftover_args).lower ():
@@ -2155,7 +2193,52 @@ class MusicBot(discord.Client):
             minutes, seconds = divmod (player.progress + 3, 60)
             await self.safe_send_message (channel, player.current_entry.url + "#t={0}m{1}s".format (minutes, seconds))
 
+    async def cmd_remove (self, player, message, channel, author, leftover_args):
+        """
+        Usage:
+            {command_prefix}remove index or url
+
+        Remove a index or a url from the playlist.
+        """
+
+        if len (player.playlist.entries) < 0:
+            await self.safe_send_message (channel, "There are no entries in the playlist!", expire_in=15)
+            return
+
+        try:
+            index = int (leftover_args [0]) - 1
+
+            if index > len (player.playlist.entries) - 1 or index < 0:
+                await self.safe_send_message (channel, "This index cannot be found in the playlist", expire_in=15)
+                return
+
+            video = player.playlist.entries [index].title
+            del player.playlist.entries [index]
+            await self.safe_send_message (channel, "Removed *{0}* from the playlist".format (video))
+            return
+
+        except:
+            strindex = leftover_args [0]
+            iteration = 1
+
+            for entry in player.playlist.entries:
+                self.safe_print ("Looking at {0}. [{1}]".format (entry.title, entry.url))
+
+                if entry.title == strindex or entry.url == strindex:
+                    self.safe_print ("Found {0} and will remove it".format (leftover_args [0]))
+                    await self.cmd_remove (player, message, channel, author, [iteration])
+                    return
+                iteration += 1
+
+        await self.safe_send_message (channel, "Didn't find anything that goes by {0}".format (leftover_args [0]), expire_in=15)
+
     async def cmd_disconnect(self, server):
+        """
+        Usage:
+            {command_prefix}disconnect
+
+        Make the bot leave his current voice channel.
+        """
         await self.disconnect_voice_client(server)
         return Response(":hear_no_evil:", delete_after=20)
 
