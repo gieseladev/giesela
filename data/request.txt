@@ -1,0 +1,20 @@
+2016-10-30 22:22:28 <siku2#7390>
+"a better help function where you can provide it with something you want to do (like in Excel)"
+
+2016-10-30 22:21:30 <siku2#7390>
+"also maybe a "sort" feature to sort the playlist"
+
+2016-10-30 22:21:05 <siku2#7390>
+"Add a refined "remove" feature to remove an index from the playlist or a link"
+
+2016-10-13 02:02:06 <siku2#7390>
+"Hello Log num 2"
+
+2016-10-13 02:00:28 <siku2#7390>
+"hello log"
+
+2016-10-10 06:53:57 <siku2#7390>
+"why do I even bother, no one's gonna use this function"
+
+2016-10-10 06:53:15 <siku2#7390>
+"some weather shit"
