@@ -747,7 +747,7 @@ class MusicBot(discord.Client):
         command = None
 
         if len(leftover_args) > 0:
-            command = leftover_args [0]
+            command = " ".join (leftover_args)
 
         if command:
             cmd = getattr(self, 'cmd_' + command, None)
