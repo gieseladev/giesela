@@ -418,7 +418,7 @@ class MusicBot(discord.Client):
                 self.server_specific_data[channel.server]['last_np_msg'] = await self.safe_edit_message(last_np_msg, newmsg, send_if_fail=True)
             else:
                 self.server_specific_data[channel.server]['last_np_msg'] = await self.safe_send_message(channel, newmsg)
-                await self.safe_send_message(channel, "Now Playing " + entry.title, tts=True, expire_in=1)
+                #await self.safe_send_message(channel, "Now Playing " + entry.title, tts=True, expire_in=1)
 
     async def on_player_resume(self, entry, **_):
         await self.update_now_playing(entry)
@@ -747,7 +747,7 @@ class MusicBot(discord.Client):
         command = None
 
         if len(leftover_args) > 0:
-            command = leftover_args [0]
+            command = " ".join (leftover_args)
 
         if command:
             cmd = getattr(self, 'cmd_' + command, None)
