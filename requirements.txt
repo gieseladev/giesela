@@ -7,3 +7,4 @@ Tungsten
 goslate
 cleverbot
 pyshorteners
+newspaper3k
