@@ -2251,17 +2251,77 @@ class MusicBot(discord.Client):
 
         if not self.papers.get_paper (paper):
             try:
-                npaper = newspaper.build (paper)
+                npaper = newspaper.build (paper, memoize_articles = False)
                 await self.safe_send_message (channel, "**" + npaper.brand + "**")
             except:
                 self.safe_send_message (channel, "Something went wrong while looking at the url")
                 return
         else:
             paperinfo = self.papers.get_paper (paper)
-            npaper = newspaper.build (paperinfo.url, language = paperinfo.language)
+            npaper = newspaper.build (paperinfo.url, language = paperinfo.language, memoize_articles = False)
             await self.send_file (channel, str (paperinfo.cover), content = "**" + str (paperinfo.name) + "**")
 
-        await self.safe_send_message (channel, npaper.description)
+        await self.safe_send_message (channel, npaper.description + "\n*Found " + str (len (npaper.articles)) + " articles*\n=========================\n\n")
+
+        def check(m):
+            return (
+                m.content.lower()[0] in 'yn' or
+                # hardcoded function name weeee
+                m.content.lower().startswith('{}{}'.format(self.config.command_prefix, 'news')) or
+                m.content.lower().startswith('exit'))
+
+        for article in npaper.articles:
+            article.download ()
+            article.parse ()
+            article.nlp ()
+
+            if len (article.authors) > 0:
+                article_author = "Written by: {0}".format (", ".join (article.authors))
+            else:
+                article_author = "Couldn't determine the author of this article."
+
+            if len (article.keywords) > 0:
+                article_keyword = "Keywords: {0}".format (", ".join (article.keywords))
+            else:
+                article_keyword = "Couldn't make out any keywords"
+
+            article_title = article.title
+            article_summary = article.summary
+            article_image = article.top_image
+
+            article_text = "\n\n**{}**\n*{}*\n```\n\n{}\n```\n{}\n".format (article_title, article_keyword, article_summary, article_author)
+
+            article_message = await self.safe_send_message (channel, article_text)
+
+            confirm_message = await self.safe_send_message(channel, "Do you want to read this? Type `y`, `n` or `exit`")
+            response_message = await self.wait_for_message(300, author=author, channel=channel, check=check)
+
+            if not response_message:
+                await self.safe_delete_message(article_message)
+                await self.safe_delete_message(confirm_message)
+                return Response("Ok nevermind.", delete_after=30)
+
+            elif response_message.content.startswith(self.config.command_prefix) or \
+                    response_message.content.lower().startswith('exit'):
+
+                await self.safe_delete_message(article_message)
+                await self.safe_delete_message(confirm_message)
+                return
+
+            if response_message.content.lower().startswith('y'):
+                await self.safe_delete_message(article_message)
+                await self.safe_delete_message(confirm_message)
+                await self.safe_delete_message(response_message)
+
+                fullarticle_text = "**{}**\n*{}*\n\n<{}>\n\n*{}*".format (article_title, article_author, article.url, "The full article exceeds the limits of Discord so I can only provide you with this link")
+
+                return Response (fullarticle_text)
+            else:
+                await self.safe_delete_message(article_message)
+                await self.safe_delete_message(confirm_message)
+                await self.safe_delete_message(response_message)
+
+        return Response("Can't find any more articles :frowning:", delete_after=30)
 
     async def cmd_disconnect(self, server):
         """
