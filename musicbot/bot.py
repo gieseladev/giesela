@@ -14,6 +14,7 @@ import datetime
 import configparser
 import json
 import operator
+import newspaper
 
 from discord import utils
 from discord.object import Object
@@ -31,6 +32,7 @@ from collections import defaultdict
 from musicbot.playlist import Playlist
 from musicbot.player import MusicPlayer
 from musicbot.config import Config, ConfigDefaults
+from musicbot.papers import Papers
 from musicbot.permissions import Permissions, PermissionsDefaults
 from musicbot.utils import load_file, write_file, sane_round_int
 
@@ -76,10 +78,10 @@ class Response:
 class MusicBot(discord.Client):
     trueStringList = ["true", "1", "t", "y", "yes", "yeah", "yup", "certainly", "uh-huh", "affirmitive", "activate"]
     channelFreeCommands =  ["say"]
-    privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast"]
+    privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast", "news"]
     lonelyModeRunning = False
 
-    def __init__(self, config_file=ConfigDefaults.options_file, perms_file=PermissionsDefaults.perms_file):
+    def __init__(self, config_file=ConfigDefaults.options_file, papers_file = ConfigDefaults.papers_file, perms_file=PermissionsDefaults.perms_file):
         self.players = ***REMOVED******REMOVED***
         self.the_voice_clients = ***REMOVED******REMOVED***
         self.locks = defaultdict(asyncio.Lock)
@@ -87,6 +89,7 @@ class MusicBot(discord.Client):
         self.voice_client_move_lock = asyncio.Lock()
 
         self.config = Config(config_file)
+        self.papers = Papers (papers_file)
         self.permissions = Permissions(perms_file, grant_all=[self.config.owner_id])
 
         self.blacklist = set(load_file(self.config.blacklist_file))
@@ -2231,6 +2234,128 @@ class MusicBot(discord.Client):
                 iteration += 1
 
         await self.safe_send_message (channel, "Didn't find anything that goes by ***REMOVED***0***REMOVED***".format (leftover_args [0]), expire_in=15)
+
+    async def cmd_news (self, message, channel, author, paper = None):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***paper url or name
+
+        WIP
+        """
+
+        if not paper:
+            def check(m):
+                return (
+                    m.content.lower()[0] in 'yn' or
+                    # hardcoded function name weeee
+                    m.content.lower().startswith('***REMOVED******REMOVED******REMOVED******REMOVED***'.format(self.config.command_prefix, 'news')) or
+                    m.content.lower().startswith('exit'))
+
+            for section in self.papers.config.sections ():
+                paperinfo = self.papers.get_paper (section)
+                paper_message = await self.send_file (channel, str (paperinfo.cover), content = "**" + str (paperinfo.name) + "**")
+
+                confirm_message = await self.safe_send_message(channel, "Do you want to read these papers? Type `y`, `n` or `exit`")
+                response_message = await self.wait_for_message(300, author=author, channel=channel, check=check)
+
+                if not response_message:
+                    await self.safe_delete_message(paper_message)
+                    await self.safe_delete_message(confirm_message)
+                    return Response("Ok nevermind.", delete_after=30)
+
+                elif response_message.content.startswith(self.config.command_prefix) or \
+                        response_message.content.lower().startswith('exit'):
+
+                    await self.safe_delete_message(paper_message)
+                    await self.safe_delete_message(confirm_message)
+                    return
+
+                if response_message.content.lower().startswith('y'):
+                    await self.safe_delete_message(paper_message)
+                    await self.safe_delete_message(confirm_message)
+                    await self.safe_delete_message(response_message)
+
+                    return Response ((await self.cmd_news (message, channel, author, paper = section)).content)
+                else:
+                    await self.safe_delete_message(paper_message)
+                    await self.safe_delete_message(confirm_message)
+                    await self.safe_delete_message(response_message)
+
+            return Response("I don't have any more papers :frowning:", delete_after=30)
+
+        if not self.papers.get_paper (paper):
+            try:
+                npaper = newspaper.build (paper, memoize_articles = False)
+                await self.safe_send_message (channel, "**" + npaper.brand + "**")
+            except:
+                self.safe_send_message (channel, "Something went wrong while looking at the url")
+                return
+        else:
+            paperinfo = self.papers.get_paper (paper)
+            npaper = newspaper.build (paperinfo.url, language = paperinfo.language, memoize_articles = False)
+            await self.send_file (channel, str (paperinfo.cover), content = "**" + str (paperinfo.name) + "**")
+
+        await self.safe_send_message (channel, npaper.description + "\n*Found " + str (len (npaper.articles)) + " articles*\n=========================\n\n")
+
+        def check(m):
+            return (
+                m.content.lower()[0] in 'yn' or
+                # hardcoded function name weeee
+                m.content.lower().startswith('***REMOVED******REMOVED******REMOVED******REMOVED***'.format(self.config.command_prefix, 'news')) or
+                m.content.lower().startswith('exit'))
+
+        for article in npaper.articles:
+            article.download ()
+            article.parse ()
+            article.nlp ()
+
+            if len (article.authors) > 0:
+                article_author = "Written by: ***REMOVED***0***REMOVED***".format (", ".join (article.authors))
+            else:
+                article_author = "Couldn't determine the author of this article."
+
+            if len (article.keywords) > 0:
+                article_keyword = "Keywords: ***REMOVED***0***REMOVED***".format (", ".join (article.keywords))
+            else:
+                article_keyword = "Couldn't make out any keywords"
+
+            article_title = article.title
+            article_summary = article.summary
+            article_image = article.top_image
+
+            article_text = "\n\n*****REMOVED******REMOVED*****\n****REMOVED******REMOVED****\n```\n\n***REMOVED******REMOVED***\n```\n***REMOVED******REMOVED***\n".format (article_title, article_keyword, article_summary, article_author)
+
+            article_message = await self.safe_send_message (channel, article_text)
+
+            confirm_message = await self.safe_send_message(channel, "Do you want to read this? Type `y`, `n` or `exit`")
+            response_message = await self.wait_for_message(300, author=author, channel=channel, check=check)
+
+            if not response_message:
+                await self.safe_delete_message(article_message)
+                await self.safe_delete_message(confirm_message)
+                return Response("Ok nevermind.", delete_after=30)
+
+            elif response_message.content.startswith(self.config.command_prefix) or \
+                    response_message.content.lower().startswith('exit'):
+
+                await self.safe_delete_message(article_message)
+                await self.safe_delete_message(confirm_message)
+                return
+
+            if response_message.content.lower().startswith('y'):
+                await self.safe_delete_message(article_message)
+                await self.safe_delete_message(confirm_message)
+                await self.safe_delete_message(response_message)
+
+                fullarticle_text = "*****REMOVED******REMOVED*****\n****REMOVED******REMOVED****\n\n<***REMOVED******REMOVED***>\n\n****REMOVED******REMOVED****".format (article_title, article_author, article.url, "The full article exceeds the limits of Discord so I can only provide you with this link")
+
+                return Response (fullarticle_text)
+            else:
+                await self.safe_delete_message(article_message)
+                await self.safe_delete_message(confirm_message)
+                await self.safe_delete_message(response_message)
+
+        return Response("Can't find any more articles :frowning:", delete_after=30)
 
     async def cmd_disconnect(self, server):
         """
