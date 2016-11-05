@@ -7,5 +7,3 @@ Tungsten
 goslate
 cleverbot
 pyshorteners
-newspaper3k
-lxml-3.6.4-cp35-cp35m-win_amd64.whl
