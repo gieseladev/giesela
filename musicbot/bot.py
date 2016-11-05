@@ -14,6 +14,7 @@ import datetime
 import configparser
 import json
 import operator
+import newspaper
 
 from discord import utils
 from discord.object import Object
@@ -31,6 +32,7 @@ from collections import defaultdict
 from musicbot.playlist import Playlist
 from musicbot.player import MusicPlayer
 from musicbot.config import Config, ConfigDefaults
+from musicbot.papers import Papers
 from musicbot.permissions import Permissions, PermissionsDefaults
 from musicbot.utils import load_file, write_file, sane_round_int
 
@@ -79,7 +81,7 @@ class MusicBot(discord.Client):
     privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast"]
     lonelyModeRunning = False
 
-    def __init__(self, config_file=ConfigDefaults.options_file, perms_file=PermissionsDefaults.perms_file):
+    def __init__(self, config_file=ConfigDefaults.options_file, papers_file = ConfigDefaults.papers_file, perms_file=PermissionsDefaults.perms_file):
         self.players = {}
         self.the_voice_clients = {}
         self.locks = defaultdict(asyncio.Lock)
@@ -87,6 +89,7 @@ class MusicBot(discord.Client):
         self.voice_client_move_lock = asyncio.Lock()
 
         self.config = Config(config_file)
+        self.papers = Papers (papers_file)
         self.permissions = Permissions(perms_file, grant_all=[self.config.owner_id])
 
         self.blacklist = set(load_file(self.config.blacklist_file))
@@ -2231,6 +2234,34 @@ class MusicBot(discord.Client):
                 iteration += 1
 
         await self.safe_send_message (channel, "Didn't find anything that goes by {0}".format (leftover_args [0]), expire_in=15)
+
+    async def cmd_news (self, message, channel, author, paper = None):
+        """
+        Usage:
+            {command_prefix}paper url or name
+
+        WIP
+        """
+
+        if not paper:
+            #cmd_news (message, channel, author, paper =)
+            self.safe_print ("Paper isn't set")
+            #TODO help the user find a paper
+
+
+        if not self.papers.get_paper (paper):
+            try:
+                npaper = newspaper.build (paper)
+                await self.safe_send_message (channel, "**" + npaper.brand + "**")
+            except:
+                self.safe_send_message (channel, "Something went wrong while looking at the url")
+                return
+        else:
+            paperinfo = self.papers.get_paper (paper)
+            npaper = newspaper.build (paperinfo.url, language = paperinfo.language)
+            await self.send_file (channel, str (paperinfo.cover), content = "**" + str (paperinfo.name) + "**")
+
+        await self.safe_send_message (channel, npaper.description)
 
     async def cmd_disconnect(self, server):
         """
