@@ -78,7 +78,7 @@ class Response:
 class MusicBot(discord.Client):
     trueStringList = ["true", "1", "t", "y", "yes", "yeah", "yup", "certainly", "uh-huh", "affirmitive", "activate"]
     channelFreeCommands =  ["say"]
-    privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast"]
+    privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast", "news"]
     lonelyModeRunning = False
 
     def __init__(self, config_file=ConfigDefaults.options_file, papers_file = ConfigDefaults.papers_file, perms_file=PermissionsDefaults.perms_file):
@@ -2244,10 +2244,44 @@ class MusicBot(discord.Client):
         """
 
         if not paper:
-            #cmd_news (message, channel, author, paper =)
-            self.safe_print ("Paper isn't set")
-            #TODO help the user find a paper
+            def check(m):
+                return (
+                    m.content.lower()[0] in 'yn' or
+                    # hardcoded function name weeee
+                    m.content.lower().startswith('***REMOVED******REMOVED******REMOVED******REMOVED***'.format(self.config.command_prefix, 'news')) or
+                    m.content.lower().startswith('exit'))
 
+            for section in self.papers.config.sections ():
+                paperinfo = self.papers.get_paper (section)
+                paper_message = await self.send_file (channel, str (paperinfo.cover), content = "**" + str (paperinfo.name) + "**")
+
+                confirm_message = await self.safe_send_message(channel, "Do you want to read these papers? Type `y`, `n` or `exit`")
+                response_message = await self.wait_for_message(300, author=author, channel=channel, check=check)
+
+                if not response_message:
+                    await self.safe_delete_message(paper_message)
+                    await self.safe_delete_message(confirm_message)
+                    return Response("Ok nevermind.", delete_after=30)
+
+                elif response_message.content.startswith(self.config.command_prefix) or \
+                        response_message.content.lower().startswith('exit'):
+
+                    await self.safe_delete_message(paper_message)
+                    await self.safe_delete_message(confirm_message)
+                    return
+
+                if response_message.content.lower().startswith('y'):
+                    await self.safe_delete_message(paper_message)
+                    await self.safe_delete_message(confirm_message)
+                    await self.safe_delete_message(response_message)
+
+                    return Response ((await self.cmd_news (message, channel, author, paper = section)).content)
+                else:
+                    await self.safe_delete_message(paper_message)
+                    await self.safe_delete_message(confirm_message)
+                    await self.safe_delete_message(response_message)
+
+            return Response("I don't have any more papers :frowning:", delete_after=30)
 
         if not self.papers.get_paper (paper):
             try:
