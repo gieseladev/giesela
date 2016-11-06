@@ -2305,9 +2305,13 @@ class MusicBot(discord.Client):
                 m.content.lower().startswith('exit'))
 
         for article in npaper.articles:
-            article.download ()
-            article.parse ()
-            article.nlp ()
+            try:
+                article.download ()
+                article.parse ()
+                article.nlp ()
+            except:
+                self.safe_print ("Something went wrong while parsing \"" + str (article) + "\", skipping it")
+                continue
 
             if len (article.authors) > 0:
                 article_author = "Written by: ***REMOVED***0***REMOVED***".format (", ".join (article.authors))
@@ -2347,7 +2351,10 @@ class MusicBot(discord.Client):
                 await self.safe_delete_message(confirm_message)
                 await self.safe_delete_message(response_message)
 
-                fullarticle_text = "*****REMOVED******REMOVED*****\n****REMOVED******REMOVED****\n\n<***REMOVED******REMOVED***>\n\n****REMOVED******REMOVED****".format (article_title, article_author, article.url, "The full article exceeds the limits of Discord so I can only provide you with this link")
+                if len (article.text) > 1500:
+                    fullarticle_text = "*****REMOVED******REMOVED*****\n****REMOVED******REMOVED****\n\n<***REMOVED******REMOVED***>\n\n****REMOVED******REMOVED****".format (article_title, article_author, article.url, "The full article exceeds the limits of Discord so I can only provide you with this link")
+                else:
+                    fullarticle_text = "*****REMOVED******REMOVED*****\n****REMOVED******REMOVED****\n\n***REMOVED******REMOVED***".format (article_title, article_author, article.text)
 
                 return Response (fullarticle_text)
             else:
