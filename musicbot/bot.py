@@ -2305,9 +2305,13 @@ class MusicBot(discord.Client):
                 m.content.lower().startswith('exit'))
 
         for article in npaper.articles:
-            article.download ()
-            article.parse ()
-            article.nlp ()
+            try:
+                article.download ()
+                article.parse ()
+                article.nlp ()
+            except:
+                self.safe_print ("Something went wrong while parsing \"" + str (article) + "\", skipping it")
+                continue
 
             if len (article.authors) > 0:
                 article_author = "Written by: {0}".format (", ".join (article.authors))
