@@ -79,7 +79,7 @@ class Response:
 class MusicBot(discord.Client):
     trueStringList = ["true", "1", "t", "y", "yes", "yeah", "yup", "certainly", "uh-huh", "affirmitive", "activate"]
     channelFreeCommands =  ["say"]
-    privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast", "news"]
+    privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast", "news", "game"]
     lonelyModeRunning = False
 
     def __init__(self, config_file=ConfigDefaults.options_file, papers_file = ConfigDefaults.papers_file, perms_file=PermissionsDefaults.perms_file):
@@ -2460,6 +2460,7 @@ class MusicBot(discord.Client):
                 game_running = False
 
         await self.send_file (channel, game.getImage (cache_location) + ".gif", content = "**2048**\nYour replay:")
+        await self.safe_delete_message (msg)
 
     @owner_only
     async def cmd_getemojicode (self, channel, message, emoji = ""):
@@ -2649,9 +2650,9 @@ class MusicBot(discord.Client):
         if reaction.me:
             return
 
-        await self.add_reaction (reaction.message, discord.Emoji (name = "Bubo", id = "234022157569490945", server = reaction.message.server))
+        #await self.add_reaction (reaction.message, discord.Emoji (name = "Bubo", id = "234022157569490945", server = reaction.message.server))
         #self.safe_print ("{} ({})".format (reaction.emoji.name, reaction.emoji.id))
-        self.safe_print ("{}".format (reaction.emoji))
+        #self.safe_print ("{}".format (reaction.emoji))
 
     async def on_voice_state_update(self, before, after):
         if not all([before, after]):
