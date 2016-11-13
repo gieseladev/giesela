@@ -1,5 +1,5 @@
 import random, colorsys
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageSequence
 
 class Game2048:
     def __init__(self, size):
@@ -7,6 +7,7 @@ class Game2048:
         self.addRandomTile()
         self.addRandomTile()
         self.size = size
+        self.new_game = True
 
     def __str__(self):
         ret = ''
@@ -40,13 +41,30 @@ class Game2048:
                 draw.text (textrec, str (number), self.findColors (number) [1])
 
         img.save (loc + ".png", "PNG")
+
+        if self.new_game:
+            gif = Image.new ('RGBA', (self.size * fieldSize, self.size * fieldSize), "#cdc1b5")
+            self.new_game = False
+        else:
+            gif = Image.open(loc + ".gif")
+
+        frames = [frame.copy () for frame in ImageSequence.Iterator(gif)]
+        # last = frames [len (frames) - 1].convert (mode = "RGBA")
+        #
+        # for i in range (10, 1, -1):
+        #     frames.append (Image.blend (last, img, 1 / i))
+
+        frames.append (img)
+
+        gif.save (loc + ".gif", "GIF", save_all = True, append_images = frames, duration = 500)
+
         return loc
 
     def findColors(self, num):
         if (num != 0 and ((num & (num - 1)) == 0)):
             bi = bin(num)
             po = len(bi)
-            hue = 30.0 * po - 200
+            hue = 30.0 * po - 100
             rgb = colorsys.hls_to_rgb(hue/256.0, 0.5, 0.5)
             rgb = [str(hex(int(256*x)))[2:3] for x in rgb]
             return "#" + str(rgb[0]) + str(rgb[1]) + str(rgb[2]), "#FFFFFF"

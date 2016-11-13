@@ -2166,17 +2166,17 @@ class MusicBot(discord.Client):
     #     player.volume = .15
     #     await self.cmd_play (player, channel, author, permissions, ["https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g"], "https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g")
 
-    # async def cmd_christmas (self, player, message, channel, permissions, author):
-    #     """
-    #     Usage:
-    #         {command_prefix}christmas
-    #
-    #     Activate the mighty spirit of the christmas festival.
-    #     """
-    #     await self.safe_send_message (channel, "Christmas is upon you! :christmas_tree:")
-    #     await self.cmd_ask (channel, message, ["Christmas"])
-    #     player.volume = .15
-    #     await self.cmd_play (player, channel, author, permissions, ["https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw"], "https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw")
+    async def cmd_christmas (self, player, message, channel, permissions, author):
+        """
+        Usage:
+            {command_prefix}christmas
+
+        Activate the mighty spirit of the christmas festival.
+        """
+        await self.safe_send_message (channel, "Christmas is upon you! :christmas_tree:")
+        await self.cmd_ask (channel, message, ["Christmas"])
+        player.volume = .15
+        await self.cmd_play (player, channel, author, permissions, ["https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw"], "https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw")
 
     async def cmd_getvideolink (self, player, message, channel, author, leftover_args):
         """
@@ -2396,13 +2396,14 @@ class MusicBot(discord.Client):
         game = Game2048 (size)
         game_running = True
         turn_index = 1
+        cache_location = "cache/pictures/g2048_img" + str (author.id)
 
         def check (reaction, user):
             if reaction.custom_emoji:
                 #self.safe_print (str (reaction.emoji) + " is a custom emoji")
                 return False
 
-            if str (reaction.emoji).startswith ("✅") and reaction.count > 1 and user == author:
+            if (str (reaction.emoji).startswith ("✅") or str (reaction.emoji).startswith ("📽")) and reaction.count > 1 and user == author:
                 return True
 
             # self.safe_print (str (reaction.emoji) + " was the wrong type of emoji")
@@ -2416,23 +2417,29 @@ class MusicBot(discord.Client):
             await self.send_typing (channel)
 
             while direction is None:
-                msg = await self.send_file (channel, game.getImage () + ".png", content = "**2048**\n{} turn {}".format (str (turn_index) + ("th" if 4<=turn_index%100<=20 else {1:"st",2:"nd",3:"rd"}.get(turn_index%10, "th")), turn_information))
+                msg = await self.send_file (channel, game.getImage (cache_location) + ".png", content = "**2048**\n{} turn {}".format (str (turn_index) + ("th" if 4<=turn_index%100<=20 else {1:"st",2:"nd",3:"rd"}.get(turn_index%10, "th")), turn_information))
                 turn_information = ""
                 await self.add_reaction (msg, "⬅")
                 await self.add_reaction (msg, "⬆")
                 await self.add_reaction (msg, "➡")
                 await self.add_reaction (msg, "⬇")
                 await self.add_reaction (msg, "✅")
+                await self.add_reaction (msg, "📽")
 
                 reaction, user = await self.wait_for_reaction (check = check, message = msg)
                 msg = reaction.message #for some reason this has to be like this
                 #self.safe_print ("User accepted. There are " + str (len (msg.reactions)) + " reactions. [" + ", ".join ([str (r.count) for r in msg.reactions]) + "]")
 
                 for reaction in msg.reactions:
+                    if str (reaction.emoji) == "📽":
+                        await self.send_file (author, game.getImage (cache_location) + ".gif", content = "**2048**\nYour replay:")
+                        break
+
                     if str (reaction.emoji) in ("⬇", "➡", "⬆", "⬅") and reaction.count > 1:
                         direction = ("⬇", "➡", "⬆", "⬅").index (str (reaction.emoji))
                         #self.safe_print ("Found direction " + str (direction))
                         break
+
                     #self.safe_print ("This did not match a direction: " + str (reaction.emoji))
 
                 if direction is None:
@@ -2452,6 +2459,8 @@ class MusicBot(discord.Client):
                 await self.safe_send_message (channel, "**2048**\nYou lost after {} turns".format (str (turn_index)))
                 game_running = False
 
+        await self.send_file (channel, game.getImage (cache_location) + ".gif", content = "**2048**\nYour replay:")
+
     @owner_only
     async def cmd_getemojicode (self, channel, message, emoji = ""):
         """
@@ -2462,7 +2471,7 @@ class MusicBot(discord.Client):
         """
 
         self.safe_print (emoji)
-        self.safe_delete_message (message)
+        await self.safe_delete_message (message)
 
     async def cmd_disconnect(self, server):
         """
