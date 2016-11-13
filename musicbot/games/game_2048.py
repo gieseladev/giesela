@@ -1,0 +1,261 @@
+import random, colorsys
+from PIL import Image, ImageDraw, ImageSequence
+
+class Game2048:
+    def __init__(self, size):
+        self.grid = [[Tile() for i in range(size)] for j in range(size)]
+        self.addRandomTile()
+        self.addRandomTile()
+        self.size = size
+        self.new_game = True
+
+    def __str__(self):
+        ret = ''
+        iS = {}
+        for j in self.grid:
+            for i in range(len(j)):
+                iS[i] = max((iS.get(i) if iS.get(i) is not None else -1), len(str(j[i])))
+        for j in self.grid:
+            for i in range(len(j)):
+                ret = ret + str(j[i]) + ' ' + ' '*(iS[i]-len(str(j[i])))
+            ret = ret + '\n'
+        return ret.replace(' 0', '  ').replace('0 ', '  ')
+        return '\n'.join([' '.join([str(i) for i in j]) for j in self.grid]).replace(' 0', '  ').replace('0 ', '  ')
+
+    def getImage (self, loc = "cache/pictures/g2048_img"):
+        fieldSize = 50
+        img = Image.new('RGBA', (self.size * fieldSize, self.size * fieldSize))
+        draw = ImageDraw.Draw(img)
+        for i in range(len(self.grid)):
+            for j in range(len(self.grid[i])):
+                number = self.grid[i][j].value if self.grid[i][j].value is not None else 0
+                rec_top = (j * fieldSize, i * fieldSize)
+                rec = [rec_top, (rec_top [0] + fieldSize, rec_top [1] + fieldSize)]
+                draw.rectangle(rec, fill = self.findColors (number) [0])
+
+                if number == 0:
+                    continue
+
+                textsize = draw.textsize (str (number))
+                textrec = (rec_top [0] + fieldSize / 2 - textsize [0] / 2, rec_top [1] + fieldSize / 2 - textsize [1] / 2)
+                draw.text (textrec, str (number), self.findColors (number) [1])
+
+        img.save (loc + ".png", "PNG")
+
+        if self.new_game:
+            gif = Image.new ('RGBA', (self.size * fieldSize, self.size * fieldSize), "#cdc1b5")
+            self.new_game = False
+        else:
+            gif = Image.open(loc + ".gif")
+
+        frames = [frame.copy () for frame in ImageSequence.Iterator(gif)]
+        # last = frames [len (frames) - 1].convert (mode = "RGBA")
+        #
+        # for i in range (10, 1, -1):
+        #     frames.append (Image.blend (last, img, 1 / i))
+
+        frames.append (img)
+
+        gif.save (loc + ".gif", "GIF", save_all = True, append_images = frames, duration = 500)
+
+        return loc
+
+    def findColors(self, num):
+        if (num != 0 and ((num & (num - 1)) == 0)):
+            bi = bin(num)
+            po = len(bi)
+            hue = 30.0 * po - 100
+            rgb = colorsys.hls_to_rgb(hue/256.0, 0.5, 0.5)
+            rgb = [str(hex(int(256*x)))[2:3] for x in rgb]
+            return "#" + str(rgb[0]) + str(rgb[1]) + str(rgb[2]), "#FFFFFF"
+        else:
+            return "#cdc1b5", "#000000"
+
+    def addRandomTile(self):
+        availableTiles = self.getAvailableTiles()
+        findTile = self.findTile(random.choice(availableTiles))
+        self.grid[findTile[0]][findTile[1]] = Tile(2)
+
+    def getAvailableTiles(self):
+        ret = []
+        for i in self.grid:
+            for j in i:
+                if j.value == 0:
+                    ret.append(j)
+        return ret
+
+    def findTile(self, tile):
+        for i in range(len(self.grid)):
+            for j in range(len(self.grid[i])):
+                if self.grid[i][j] == tile:
+                    return i, j
+
+    def move(self, direction):
+        merged = []
+        moved = False
+        lines = rotate(self.grid, direction+1)
+        for line in lines:
+            while len(line) and line[-1].value == 0:
+                line.pop(-1)
+            i = len(line)-1
+            while i >= 0:
+                if line[i].value == 0:
+                    moved = True
+                    line.pop(i)
+                i -= 1
+            i = 0
+            while i < len(line)-1:
+                if line[i].value == line[i+1].value and not (line[i] in merged or line[i+1] in merged):
+                    moved = True
+                    line[i] = Tile(line[i].value*2)
+                    merged.append(line[i])
+                    line.pop(i+1)
+                else:
+                    i += 1
+            while len(line) < len(self.grid):
+                line.append(Tile())
+        for line in lines:
+            if not len(lines):
+                line = [Tile() for i in self.grid]
+        self.grid = rotate(lines, 0-(direction+1))
+        if moved:
+            self.addRandomTile()
+
+    def playGame(self):
+        done = False
+        while not done:
+            print (self)
+            inp = raw_input()
+            if inp == 'q':
+                break
+            elif inp in ['0', '1', '2', '3']:
+                self.move(int(inp))
+            if self.lost():
+                print ("You have lost")
+                break
+            if self.won():
+                print ("You have won")
+                break
+
+    def lost(self):
+        s = len(self.grid)-1
+        b = True
+        for i in range(len(self.grid)):
+            for j in range(len(self.grid[i])):
+                val = self.grid[i][j].value
+                if val == 0:
+                    b = False
+                if i > 0 and self.grid[i-1][j].value == val:
+                    b = False
+                if j > 0 and self.grid[i][j-1].value == val:
+                    b = False
+                if i < s and self.grid[i+1][j].value == val:
+                    b = False
+                if j < s and self.grid[i][j+1].value == val:
+                    b = False
+        return b
+
+    def won(self):
+        for i in range(len(self.grid)):
+            for j in range(len(self.grid[i])):
+                if self.grid[i][j].value == 2048:
+                    return True
+        return False
+
+    def getValues(self):
+        ret = []
+        for i in self.grid:
+            for j in i:
+                ret.append(j)
+        return ret
+
+class Tile:
+    def __init__(self, value=0):
+        self.value = value
+
+    def __str__(self):
+        return str(self.value)
+
+def rotate(l, num):
+    num = num % 4
+    s = len(l)-1
+    l2 = []
+    if num == 0:
+        l2 = l
+    elif num == 1:
+        l2 = [[None for i in j] for j in l]
+        for y in range(len(l)):
+            for x in range(len(l[y])):
+                l2[x][s-y] = l[y][x]
+    elif num == 2:
+        l2 = l
+        l2.reverse()
+        for i in l:
+            i.reverse()
+    elif num == 3:
+        l2 = [[None for i in j] for j in l]
+        for y in range(len(l)):
+            for x in range(len(l[y])):
+                l2[y][x] = l[x][s-y]
+    return l2
+
+
+# def onKeyPress(event):
+#     global g
+#     global b
+#     for i in b:
+#         for j in i:
+#             j.destroy()
+#     if event.keycode == 37:
+#         g.move(3)
+#     elif event.keycode == 38:
+#         g.move(2)
+#     elif event.keycode == 39:
+#         g.move(1)
+#     elif event.keycode == 40:
+#         g.move(0)
+#     makeButtons(g)
+#     if g.lost():
+#         for i in range(len(b)):
+#             for j in range(len(b[i])):
+#                 if b[i][j].config('text')[-1] != str(g.grid[i][j]):
+#                     b[i][j].destroy()
+#                     b[i][j] = None
+#         try:
+#             g.q.destroy()
+#         except Exception as e:
+#             pass
+#         g.q = Button(root, text="You lost")
+#         g.q.pack()
+#
+# def makeButtons(g):
+#     global b
+#     for i in range(len(g.grid)):
+#         for j in range(len(g.grid[i])):
+#             if g.grid[i][j].value:
+#                 b[i][j] = Button(root, text=str(g.grid[i][j].value), bg=findColors(g.grid[i][j].value)[0], fg=findColors(g.grid[i][j].value)[1])
+#             else:
+#                 b[i][j] = Button(root, text='')
+#             b[i][j].config(width=max(len(str(i)) for i in g.getValues()))
+#             b[i][j].grid(row=i, column=j)
+#
+# def findColors(num):
+#     if (num != 0 and ((num & (num - 1)) == 0)):
+#         bi = bin(num)
+#         po = len(bi)
+#         hue = 30.0 * po
+#         rgb = colorsys.hls_to_rgb(hue/256.0, 0.5, 0.5)
+#         rgb = [str(hex(int(256*x)))[2:3] for x in rgb]
+#         return "#" + str(rgb[0]) + str(rgb[1]) + str(rgb[2]), "#FFFFFF"
+#     else:
+#         return "#000000", "#FFFFFF"
+#
+# g = Game(4)
+# b = [[None for i in j] for j in g.grid]
+#
+# root = Tk()
+# root.bind('<KeyPress>', onKeyPress)
+#
+# makeButtons(g)
+#
+# root.mainloop()
