@@ -15,6 +15,7 @@ import configparser
 import json
 import operator
 import newspaper
+from musicbot.games.game_2048 import Game2048
 
 from discord import utils
 from discord.object import Object
@@ -1931,6 +1932,8 @@ class MusicBot(discord.Client):
         translate something from any language to the target language
         """
 
+        await self.send_typing(channel)
+
         gs = goslate.Goslate()
         languages = gs.get_languages ()
 
@@ -2163,6 +2166,18 @@ class MusicBot(discord.Client):
     #     player.volume = .15
     #     await self.cmd_play (player, channel, author, permissions, ["https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g"], "https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g")
 
+    # async def cmd_christmas (self, player, message, channel, permissions, author):
+    #     """
+    #     Usage:
+    #         {command_prefix}christmas
+    #
+    #     Activate the mighty spirit of the christmas festival.
+    #     """
+    #     await self.safe_send_message (channel, "Christmas is upon you! :christmas_tree:")
+    #     await self.cmd_ask (channel, message, ["Christmas"])
+    #     player.volume = .15
+    #     await self.cmd_play (player, channel, author, permissions, ["https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw"], "https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw")
+
     async def cmd_getvideolink (self, player, message, channel, author, leftover_args):
         """
         Usage:
@@ -2238,10 +2253,12 @@ class MusicBot(discord.Client):
     async def cmd_news (self, message, channel, author, paper = None):
         """
         Usage:
-            {command_prefix}paper url or name
+            {command_prefix}news (if you already now what you want to read: url or name)
 
-        WIP
+        Get the latest news with this function!
         """
+
+        await self.send_typing(channel)
 
         if not paper:
             def check(m):
@@ -2252,6 +2269,7 @@ class MusicBot(discord.Client):
                     m.content.lower().startswith('exit'))
 
             for section in self.papers.config.sections ():
+                await self.send_typing(channel)
                 paperinfo = self.papers.get_paper (section)
                 paper_message = await self.send_file (channel, str (paperinfo.cover), content = "**" + str (paperinfo.name) + "**")
 
@@ -2305,6 +2323,7 @@ class MusicBot(discord.Client):
                 m.content.lower().startswith('exit'))
 
         for article in npaper.articles:
+            await self.send_typing(channel)
             try:
                 article.download ()
                 article.parse ()
@@ -2363,6 +2382,87 @@ class MusicBot(discord.Client):
                 await self.safe_delete_message(response_message)
 
         return Response("Can't find any more articles :frowning:", delete_after=30)
+
+    async def cmd_game (self, message, channel, author, size = 4):
+        """
+        Usage:
+            {command_prefix}game
+
+        WIP
+        """
+        await self.g2048 (author, channel, int (size))
+
+    async def g2048 (self, author, channel, size):
+        game = Game2048 (size)
+        game_running = True
+        turn_index = 1
+
+        def check (reaction, user):
+            if reaction.custom_emoji:
+                #self.safe_print (str (reaction.emoji) + " is a custom emoji")
+                return False
+
+            if str (reaction.emoji).startswith ("✅") and reaction.count > 1 and user == author:
+                return True
+
+            # self.safe_print (str (reaction.emoji) + " was the wrong type of emoji")
+            return False
+
+        while game_running:
+            direction = None
+            turn_information = ""
+            #self.safe_print (str (game))
+
+            await self.send_typing (channel)
+
+            while direction is None:
+                msg = await self.send_file (channel, game.getImage () + ".png", content = "**2048**\n{} turn {}".format (str (turn_index) + ("th" if 4<=turn_index%100<=20 else {1:"st",2:"nd",3:"rd"}.get(turn_index%10, "th")), turn_information))
+                turn_information = ""
+                await self.add_reaction (msg, "⬅")
+                await self.add_reaction (msg, "⬆")
+                await self.add_reaction (msg, "➡")
+                await self.add_reaction (msg, "⬇")
+                await self.add_reaction (msg, "✅")
+
+                reaction, user = await self.wait_for_reaction (check = check, message = msg)
+                msg = reaction.message #for some reason this has to be like this
+                #self.safe_print ("User accepted. There are " + str (len (msg.reactions)) + " reactions. [" + ", ".join ([str (r.count) for r in msg.reactions]) + "]")
+
+                for reaction in msg.reactions:
+                    if str (reaction.emoji) in ("⬇", "➡", "⬆", "⬅") and reaction.count > 1:
+                        direction = ("⬇", "➡", "⬆", "⬅").index (str (reaction.emoji))
+                        #self.safe_print ("Found direction " + str (direction))
+                        break
+                    #self.safe_print ("This did not match a direction: " + str (reaction.emoji))
+
+                if direction is None:
+                    await self.safe_delete_message (msg)
+                    turn_information = "| *You didn't specifiy the direction*"
+
+            #self.safe_print ("Chose the direction " + str (direction))
+            game.move (direction)
+            turn_index += 1
+            await self.safe_delete_message (msg)
+
+            if game.won ():
+                await self.safe_send_message (channel, "**2048**\nCongratulations, you won after {} turns".format (str (turn_index)))
+                game_running = False
+
+            if game.lost ():
+                await self.safe_send_message (channel, "**2048**\nYou lost after {} turns".format (str (turn_index)))
+                game_running = False
+
+    @owner_only
+    async def cmd_getemojicode (self, channel, message, emoji = ""):
+        """
+        Usage:
+            {command_prefix}getemojicode emoji
+
+        Prints the emoji to the console so that you can retrieve the unicode symbol.
+        """
+
+        self.safe_print (emoji)
+        self.safe_delete_message (message)
 
     async def cmd_disconnect(self, server):
         """
@@ -2535,6 +2635,14 @@ class MusicBot(discord.Client):
             traceback.print_exc()
             if self.config.debug_mode:
                 await self.safe_send_message(message.channel, '```\n%s\n```' % traceback.format_exc())
+
+    async def on_reaction_add (self, reaction, user):
+        if reaction.me:
+            return
+
+        await self.add_reaction (reaction.message, discord.Emoji (name = "Bubo", id = "234022157569490945", server = reaction.message.server))
+        #self.safe_print ("{} ({})".format (reaction.emoji.name, reaction.emoji.id))
+        self.safe_print ("{}".format (reaction.emoji))
 
     async def on_voice_state_update(self, before, after):
         if not all([before, after]):

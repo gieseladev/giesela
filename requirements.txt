@@ -8,3 +8,4 @@ goslate
 cleverbot
 pyshorteners
 newspaper3k
+pillow
