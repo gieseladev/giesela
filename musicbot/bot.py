@@ -15,7 +15,7 @@ import configparser
 import json
 import operator
 import newspaper
-from musicbot.games.game_2048 import Game2048
+import urllib
 
 from discord import utils
 from discord.object import Object
@@ -36,6 +36,8 @@ from musicbot.config import Config, ConfigDefaults
 from musicbot.papers import Papers
 from musicbot.permissions import Permissions, PermissionsDefaults
 from musicbot.utils import load_file, write_file, sane_round_int
+from musicbot.games.game_2048 import Game2048
+from musicbot.nine_gag import *
 
 from . import exceptions
 from . import downloader
@@ -45,6 +47,7 @@ from .constants import DISCORD_MSG_CHAR_LIMIT, AUDIO_CACHE_PATH
 
 from cleverbot import Cleverbot
 from pyshorteners import Shortener
+from moviepy import editor, video
 
 
 load_opus_lib()
@@ -97,6 +100,7 @@ class MusicBot(discord.Client):
         self.autoplaylist = load_file(self.config.auto_playlist_file)
         self.downloader = downloader.Downloader(download_folder='audio_cache')
         self.cb = Cleverbot ()
+        self.shortener = Shortener("Google", api_key = "AIzaSyCU67YMHlfTU_PX2ngHeLd-_dUds-m502k")
 
         self.exit_signal = None
         self.init_ok = False
@@ -1915,13 +1919,12 @@ class MusicBot(discord.Client):
         msgContent = " ".join (leftover_args)
         client = tungsten.Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
-        shortener = Shortener("Google", api_key = "AIzaSyCU67YMHlfTU_PX2ngHeLd-_dUds-m502k")
         if not res.success:
             await self.safe_send_message (channel, "Couldn't find anything useful on that subject, sorry.")
             self.safe_print ("Didn't find an answer to: " + msgContent)
             return
         for pod in res.pods:
-            await self.safe_send_message (channel, " ".join (["**" + pod.title + "**", shortener.short(pod.format ["img"][0] ["url"])]))
+            await self.safe_send_message (channel, " ".join (["**" + pod.title + "**", self.shortener.short(pod.format ["img"][0] ["url"])]))
         #await self.safe_send_message(channel, answer)
         self.safe_print ("Answered " + message.author.name + "'s question with: " + msgContent)
 
@@ -2473,6 +2476,33 @@ class MusicBot(discord.Client):
 
         self.safe_print (emoji)
         await self.safe_delete_message (message)
+
+    async def cmd_9gag (self, channel, message):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***9gag
+
+        WIP
+        """
+        current_post = get_posts_from_page (number_of_pages = 5) [4]
+
+        cached_file = urllib.request.URLopener()
+        saveloc = "cache/pictures/9gag" + current_post ["file_format"]
+        cached_file.retrieve(current_post ["media_url"], saveloc)
+
+        if current_post ["file_format"] == ".mp4":
+            clip = editor.VideoFileClip(saveloc)
+            clip = video.fx.all.resize (clip, newsize = .3)
+            clip.write_gif("cache/pictures/9gag.gif")
+            if os.path.exists(saveloc):
+                os.remove(saveloc)
+            saveloc = "cache/pictures/9gag.gif"
+
+
+        await self.send_file (channel, saveloc, content = "*****REMOVED******REMOVED*****\nUpvotes: ****REMOVED******REMOVED****\nComments: ****REMOVED******REMOVED****".format (re.sub ("\*", "\*", current_post ["title"]), current_post ["votes"], current_post ["comments"]))
+
+        if os.path.exists(saveloc):
+            os.remove(saveloc)
 
     async def cmd_disconnect(self, server):
         """
