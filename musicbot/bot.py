@@ -2222,6 +2222,10 @@ class MusicBot(discord.Client):
         Remove a index or a url from the playlist.
         """
 
+        if len (leftover_args) < 1:
+            leftover_args = ["0"]
+
+
         if len (player.playlist.entries) < 0:
             await self.safe_send_message (channel, "There are no entries in the playlist!", expire_in=15)
             return
@@ -2477,14 +2481,16 @@ class MusicBot(discord.Client):
         self.safe_print (emoji)
         await self.safe_delete_message (message)
 
-    async def cmd_9gag (self, channel, message):
+    async def cmd_9gag (self, channel, message, leftover_args):
         """
         Usage:
             {command_prefix}9gag
 
         WIP
         """
-        current_post = get_posts_from_page (number_of_pages = 5) [4]
+        await self.safe_send_message (channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n        Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
+        return
+        current_post = get_posts_from_page (number_of_pages = 1) [0]
 
         cached_file = urllib.request.URLopener()
         saveloc = "cache/pictures/9gag" + current_post ["file_format"]
@@ -2503,6 +2509,96 @@ class MusicBot(discord.Client):
 
         if os.path.exists(saveloc):
             os.remove(saveloc)
+
+    async def nine_gag_get_section (self, channel, message):
+        category_dict = {"🔥" : "hot", "📈" : "trending", "🆕" : "new"}
+        def check (reaction, user):
+            if reaction.custom_emoji:
+                return False
+
+            if str (reaction.emoji) in category_dict.keys () and reaction.count > 1 and user == author:
+                return True
+
+            return False
+
+        msg = await self.safe_send_message ("What section would you like to switch to?")
+        await self.add_reaction (msg, "🔥")
+        await self.add_reaction (msg, "📈")
+        await self.add_reaction (msg, "🆕")
+
+        reaction, user = await self.wait_for_reaction (check = check, message = msg)
+
+        await self.safe_delete_message (msg)
+
+        return category_dict [str (reaction.emoji)]
+
+    async def cmd_repeat(self, player):
+        """
+        Usage:
+            {command_prefix}repeat
+
+        Cycles through the repeat options. Default is no repeat, switchable to repeat all or repeat current song.
+        """
+
+        if player.is_stopped:
+            raise exceptions.CommandError("Can't change repeat mode! The player is not playing!", expire_in=20)
+
+        player.repeat()
+
+        if player.is_repeatNone:
+            return Response(":play_pause: Repeat mode: None", delete_after=20)
+        if player.is_repeatAll:
+            return Response(":repeat: Repeat mode: All", delete_after=20)
+        if player.is_repeatSingle:
+            return Response(":repeat_one: Repeat mode: Single", delete_after=20)
+
+    async def cmd_promote(self, player, position=None):
+        """
+        Usage:
+            {command_prefix}promote
+            {command_prefix}promote [song position]
+
+        Promotes the last song in the queue to the front.
+        If you specify a position, it promotes the song at that position to the front.
+        """
+
+        if player.is_stopped:
+            raise exceptions.CommandError("Can't modify the queue! The player is not playing!", expire_in=20)
+
+        length = len(player.playlist.entries)
+
+        if length < 2:
+            raise exceptions.CommandError("Can't promote! Please add at least 2 songs to the queue!", expire_in=20)
+
+        if not position:
+            entry = player.playlist.promote_last()
+        else:
+            try:
+                position = int(position)
+            except ValueError:
+                raise exceptions.CommandError("This is not a valid song number! Please choose a song \
+                    number between 2 and %s!" % length, expire_in=20)
+
+            if position == 1:
+                raise exceptions.CommandError("This song is already at the top of the queue!", expire_in=20)
+            if position < 1 or position > length:
+                raise exceptions.CommandError("Can't promote a song not in the queue! Please choose a song \
+                    number between 2 and %s!" % length, expire_in=20)
+
+            entry = player.playlist.promote_position(position)
+
+        reply_text = "Promoted **%s** to the :top: of the queue. Estimated time until playing: %s"
+        btext = entry.title
+
+        try:
+            time_until = await player.playlist.estimate_time_until(1, player)
+        except:
+            traceback.print_exc()
+            time_until = ''
+
+        reply_text %= (btext, time_until)
+
+        return Response(reply_text, delete_after=30)
 
     async def cmd_disconnect(self, server):
         """

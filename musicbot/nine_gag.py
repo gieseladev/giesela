@@ -10,17 +10,6 @@ PAGE_DICT = {
   'hot' : '/hot',
   'trending' : '/trending',
   'fresh' : '/fresh',
-  'nsfw' : '/nsfw',
-  'cute' : '/cute',
-  'geeky': '/geeky',
-  'meme' : '/meme',
-  'cute' : '/cosplay',
-  'comic': '/comic',
-  'cosplay': '/cosplay',
-  'timely': '/timely',
-  'wtf' : '/wtf',
-  'girl': '/girl',
-  'fresh' : '/fresh'
   }
 def get_page(page_url = ""):
   try:
