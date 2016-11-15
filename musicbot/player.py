@@ -85,6 +85,14 @@ class MusicPlayerState(Enum):
     def __str__(self):
         return self.name
 
+class MusicPlayerRepeatState(Enum):
+    NONE = 0    # Playlist plays as normal
+    ALL = 1     # Entire playlist repeats
+    SINGLE = 2  # Currently playing song repeats
+
+    def __str__(self):
+        return self.name
+
 
 class MusicPlayer(EventEmitter):
     def __init__(self, bot, voice_client, playlist):
@@ -100,6 +108,8 @@ class MusicPlayer(EventEmitter):
         self._current_player = None
         self._current_entry = None
         self.state = MusicPlayerState.STOPPED
+        self.repeatState = MusicPlayerRepeatState.NONE
+        self.skipRepeat = False
 
         self.loop.create_task(self.websocket_check())
 
@@ -119,6 +129,17 @@ class MusicPlayer(EventEmitter):
 
     def skip(self):
         self._kill_current_player()
+
+    def repeat(self):
+        if self.is_repeatNone:
+            self.repeatState = MusicPlayerRepeatState.ALL
+            return
+        if self.is_repeatAll:
+            self.repeatState = MusicPlayerRepeatState.SINGLE
+            return
+        if self.is_repeatSingle:
+            self.repeatState = MusicPlayerRepeatState.NONE
+            return
 
     def stop(self):
         self.state = MusicPlayerState.STOPPED
@@ -163,6 +184,12 @@ class MusicPlayer(EventEmitter):
 
     def _playback_finished(self):
         entry = self._current_entry
+
+        if self.is_repeatAll or (self.is_repeatSingle and not self.skipRepeat):
+            self.playlist._add_entry(entry)
+            if self.is_repeatSingle:
+                self.playlist.promote_last()
+        self.skipRepeat = False
 
         if self._current_player:
             self._current_player.after = None
@@ -296,6 +323,18 @@ class MusicPlayer(EventEmitter):
     @property
     def current_entry(self):
         return self._current_entry
+
+    @property
+    def is_repeatNone(self):
+        return self.repeatState == MusicPlayerRepeatState.NONE
+
+    @property
+    def is_repeatAll(self):
+        return self.repeatState == MusicPlayerRepeatState.ALL
+
+    @property
+    def is_repeatSingle(self):
+        return self.repeatState == MusicPlayerRepeatState.SINGLE
 
     @property
     def is_playing(self):
