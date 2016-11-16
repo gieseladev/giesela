@@ -469,6 +469,15 @@ class MusicBot(discord.Client):
     async def on_player_entry_added(self, playlist, entry, **_):
         pass
 
+    async def on_server_join (self, server):
+        for channel in server.channels:
+            if channel.type is not ChannelType.text:
+                continue
+
+            msg = await self.safe_send_message (channel, "Hello there,\nMy name is ***REMOVED******REMOVED***!\n\n*Type ***REMOVED******REMOVED***help to find out more.".format (self.user.mention, self.config.command_prefix))
+            if msg is not None:
+                return
+
     async def update_now_playing(self, entry=None, is_paused=False):
         game = None
 
