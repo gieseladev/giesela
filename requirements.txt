@@ -9,3 +9,4 @@ cleverbot
 pyshorteners
 newspaper3k
 pillow
+moviepy
