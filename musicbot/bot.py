@@ -15,7 +15,7 @@ import configparser
 import json
 import operator
 import newspaper
-from musicbot.games.game_2048 import Game2048
+import urllib
 
 from discord import utils
 from discord.object import Object
@@ -36,6 +36,8 @@ from musicbot.config import Config, ConfigDefaults
 from musicbot.papers import Papers
 from musicbot.permissions import Permissions, PermissionsDefaults
 from musicbot.utils import load_file, write_file, sane_round_int
+from musicbot.games.game_2048 import Game2048
+from musicbot.nine_gag import *
 
 from . import exceptions
 from . import downloader
@@ -45,6 +47,7 @@ from .constants import DISCORD_MSG_CHAR_LIMIT, AUDIO_CACHE_PATH
 
 from cleverbot import Cleverbot
 from pyshorteners import Shortener
+from moviepy import editor, video
 
 
 load_opus_lib()
@@ -79,7 +82,7 @@ class Response:
 class MusicBot(discord.Client):
     trueStringList = ["true", "1", "t", "y", "yes", "yeah", "yup", "certainly", "uh-huh", "affirmitive", "activate"]
     channelFreeCommands =  ["say"]
-    privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast", "news"]
+    privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast", "news", "game"]
     lonelyModeRunning = False
 
     def __init__(self, config_file=ConfigDefaults.options_file, papers_file = ConfigDefaults.papers_file, perms_file=PermissionsDefaults.perms_file):
@@ -97,6 +100,7 @@ class MusicBot(discord.Client):
         self.autoplaylist = load_file(self.config.auto_playlist_file)
         self.downloader = downloader.Downloader(download_folder='audio_cache')
         self.cb = Cleverbot ()
+        self.shortener = Shortener("Google", api_key = "AIzaSyCU67YMHlfTU_PX2ngHeLd-_dUds-m502k")
 
         self.exit_signal = None
         self.init_ok = False
@@ -464,6 +468,15 @@ class MusicBot(discord.Client):
 
     async def on_player_entry_added(self, playlist, entry, **_):
         pass
+
+    async def on_server_join (self, server):
+        for channel in server.channels:
+            if channel.type is not ChannelType.text:
+                continue
+
+            msg = await self.safe_send_message (channel, "Hello there,\nMy name is ***REMOVED******REMOVED***!\n\n*Type ***REMOVED******REMOVED***help to find out more.".format (self.user.mention, self.config.command_prefix))
+            if msg is not None:
+                return
 
     async def update_now_playing(self, entry=None, is_paused=False):
         game = None
@@ -1915,13 +1928,12 @@ class MusicBot(discord.Client):
         msgContent = " ".join (leftover_args)
         client = tungsten.Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
-        shortener = Shortener("Google", api_key = "AIzaSyCU67YMHlfTU_PX2ngHeLd-_dUds-m502k")
         if not res.success:
             await self.safe_send_message (channel, "Couldn't find anything useful on that subject, sorry.")
             self.safe_print ("Didn't find an answer to: " + msgContent)
             return
         for pod in res.pods:
-            await self.safe_send_message (channel, " ".join (["**" + pod.title + "**", shortener.short(pod.format ["img"][0] ["url"])]))
+            await self.safe_send_message (channel, " ".join (["**" + pod.title + "**", self.shortener.short(pod.format ["img"][0] ["url"])]))
         #await self.safe_send_message(channel, answer)
         self.safe_print ("Answered " + message.author.name + "'s question with: " + msgContent)
 
@@ -2219,6 +2231,10 @@ class MusicBot(discord.Client):
         Remove a index or a url from the playlist.
         """
 
+        if len (leftover_args) < 1:
+            leftover_args = ["0"]
+
+
         if len (player.playlist.entries) < 0:
             await self.safe_send_message (channel, "There are no entries in the playlist!", expire_in=15)
             return
@@ -2460,6 +2476,7 @@ class MusicBot(discord.Client):
                 game_running = False
 
         await self.send_file (channel, game.getImage (cache_location) + ".gif", content = "**2048**\nYour replay:")
+        await self.safe_delete_message (msg)
 
     @owner_only
     async def cmd_getemojicode (self, channel, message, emoji = ""):
@@ -2472,6 +2489,125 @@ class MusicBot(discord.Client):
 
         self.safe_print (emoji)
         await self.safe_delete_message (message)
+
+    async def cmd_9gag (self, channel, message, leftover_args):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***9gag
+
+        WIP
+        """
+        await self.safe_send_message (channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n        Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
+        return
+        current_post = get_posts_from_page (number_of_pages = 1) [0]
+
+        cached_file = urllib.request.URLopener()
+        saveloc = "cache/pictures/9gag" + current_post ["file_format"]
+        cached_file.retrieve(current_post ["media_url"], saveloc)
+
+        if current_post ["file_format"] == ".mp4":
+            clip = editor.VideoFileClip(saveloc)
+            clip = video.fx.all.resize (clip, newsize = .3)
+            clip.write_gif("cache/pictures/9gag.gif")
+            if os.path.exists(saveloc):
+                os.remove(saveloc)
+            saveloc = "cache/pictures/9gag.gif"
+
+
+        await self.send_file (channel, saveloc, content = "*****REMOVED******REMOVED*****\nUpvotes: ****REMOVED******REMOVED****\nComments: ****REMOVED******REMOVED****".format (re.sub ("\*", "\*", current_post ["title"]), current_post ["votes"], current_post ["comments"]))
+
+        if os.path.exists(saveloc):
+            os.remove(saveloc)
+
+    async def nine_gag_get_section (self, channel, message):
+        category_dict = ***REMOVED***"🔥" : "hot", "📈" : "trending", "🆕" : "new"***REMOVED***
+        def check (reaction, user):
+            if reaction.custom_emoji:
+                return False
+
+            if str (reaction.emoji) in category_dict.keys () and reaction.count > 1 and user == author:
+                return True
+
+            return False
+
+        msg = await self.safe_send_message ("What section would you like to switch to?")
+        await self.add_reaction (msg, "🔥")
+        await self.add_reaction (msg, "📈")
+        await self.add_reaction (msg, "🆕")
+
+        reaction, user = await self.wait_for_reaction (check = check, message = msg)
+
+        await self.safe_delete_message (msg)
+
+        return category_dict [str (reaction.emoji)]
+
+    async def cmd_repeat(self, player):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***repeat
+
+        Cycles through the repeat options. Default is no repeat, switchable to repeat all or repeat current song.
+        """
+
+        if player.is_stopped:
+            raise exceptions.CommandError("Can't change repeat mode! The player is not playing!", expire_in=20)
+
+        player.repeat()
+
+        if player.is_repeatNone:
+            return Response(":play_pause: Repeat mode: None", delete_after=20)
+        if player.is_repeatAll:
+            return Response(":repeat: Repeat mode: All", delete_after=20)
+        if player.is_repeatSingle:
+            return Response(":repeat_one: Repeat mode: Single", delete_after=20)
+
+    async def cmd_promote(self, player, position=None):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***promote
+            ***REMOVED***command_prefix***REMOVED***promote [song position]
+
+        Promotes the last song in the queue to the front.
+        If you specify a position, it promotes the song at that position to the front.
+        """
+
+        if player.is_stopped:
+            raise exceptions.CommandError("Can't modify the queue! The player is not playing!", expire_in=20)
+
+        length = len(player.playlist.entries)
+
+        if length < 2:
+            raise exceptions.CommandError("Can't promote! Please add at least 2 songs to the queue!", expire_in=20)
+
+        if not position:
+            entry = player.playlist.promote_last()
+        else:
+            try:
+                position = int(position)
+            except ValueError:
+                raise exceptions.CommandError("This is not a valid song number! Please choose a song \
+                    number between 2 and %s!" % length, expire_in=20)
+
+            if position == 1:
+                raise exceptions.CommandError("This song is already at the top of the queue!", expire_in=20)
+            if position < 1 or position > length:
+                raise exceptions.CommandError("Can't promote a song not in the queue! Please choose a song \
+                    number between 2 and %s!" % length, expire_in=20)
+
+            entry = player.playlist.promote_position(position)
+
+        reply_text = "Promoted **%s** to the :top: of the queue. Estimated time until playing: %s"
+        btext = entry.title
+
+        try:
+            time_until = await player.playlist.estimate_time_until(1, player)
+        except:
+            traceback.print_exc()
+            time_until = ''
+
+        reply_text %= (btext, time_until)
+
+        return Response(reply_text, delete_after=30)
 
     async def cmd_disconnect(self, server):
         """
@@ -2649,9 +2785,9 @@ class MusicBot(discord.Client):
         if reaction.me:
             return
 
-        await self.add_reaction (reaction.message, discord.Emoji (name = "Bubo", id = "234022157569490945", server = reaction.message.server))
+        #await self.add_reaction (reaction.message, discord.Emoji (name = "Bubo", id = "234022157569490945", server = reaction.message.server))
         #self.safe_print ("***REMOVED******REMOVED*** (***REMOVED******REMOVED***)".format (reaction.emoji.name, reaction.emoji.id))
-        self.safe_print ("***REMOVED******REMOVED***".format (reaction.emoji))
+        #self.safe_print ("***REMOVED******REMOVED***".format (reaction.emoji))
 
     async def on_voice_state_update(self, before, after):
         if not all([before, after]):

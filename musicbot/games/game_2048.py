@@ -43,20 +43,16 @@ class Game2048:
         img.save (loc + ".png", "PNG")
 
         if self.new_game:
-            gif = Image.new ('RGBA', (self.size * fieldSize, self.size * fieldSize), "#cdc1b5")
+            gif = img
             self.new_game = False
         else:
             gif = Image.open(loc + ".gif")
 
         frames = [frame.copy () for frame in ImageSequence.Iterator(gif)]
-        # last = frames [len (frames) - 1].convert (mode = "RGBA")
-        #
-        # for i in range (10, 1, -1):
-        #     frames.append (Image.blend (last, img, 1 / i))
 
         frames.append (img)
 
-        gif.save (loc + ".gif", "GIF", save_all = True, append_images = frames, duration = 500)
+        gif.save (loc + ".gif", "GIF", save_all = True, append_images = frames, duration = 700)
 
         return loc
 
