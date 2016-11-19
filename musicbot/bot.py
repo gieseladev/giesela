@@ -38,6 +38,7 @@ from musicbot.permissions import Permissions, PermissionsDefaults
 from musicbot.utils import load_file, write_file, sane_round_int
 from musicbot.games.game_2048 import Game2048
 from musicbot.nine_gag import *
+from musicbot.saved_playlists import Playlists
 
 from . import exceptions
 from . import downloader
@@ -85,7 +86,7 @@ class MusicBot(discord.Client):
     privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast", "news", "game"]
     lonelyModeRunning = False
 
-    def __init__(self, config_file=ConfigDefaults.options_file, papers_file = ConfigDefaults.papers_file, perms_file=PermissionsDefaults.perms_file):
+    def __init__(self, config_file=ConfigDefaults.options_file, papers_file = ConfigDefaults.papers_file, playlists_file = ConfigDefaults.playlists_file, perms_file=PermissionsDefaults.perms_file):
         self.players = ***REMOVED******REMOVED***
         self.the_voice_clients = ***REMOVED******REMOVED***
         self.locks = defaultdict(asyncio.Lock)
@@ -94,6 +95,7 @@ class MusicBot(discord.Client):
 
         self.config = Config(config_file)
         self.papers = Papers (papers_file)
+        self.playlists = Playlists (playlists_file)
         self.permissions = Permissions(perms_file, grant_all=[self.config.owner_id])
 
         self.blacklist = set(load_file(self.config.blacklist_file))
@@ -2608,6 +2610,69 @@ class MusicBot(discord.Client):
         reply_text %= (btext, time_until)
 
         return Response(reply_text, delete_after=30)
+
+    async def cmd_playlist (self, server, player, leftover_args):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***playlist showall
+            ***REMOVED***command_prefix***REMOVED***playlist savename
+            ***REMOVED***command_prefix***REMOVED***playlist save savename
+            ***REMOVED***command_prefix***REMOVED***playlist load savename [add, replace]
+            ***REMOVED***command_prefix***REMOVED***playlist delete savename
+
+        Save the current playlist so you can load it again later. Every savename has to be unique. Just typing the savename after the commands gives you some information of the playlist.
+        """
+
+        argument = leftover_args [0] if len (leftover_args) > 0 else None
+        savename = leftover_args [1] if len (leftover_args) > 1 else ""
+        load_mode = leftover_args [2] if len (leftover_args) > 2 else "add"
+        additional_args = leftover_args [3:] if len (leftover_args) > 3 else None
+
+        forbidden_savenames = ["showall", "savename", "save", "load", "delete"]
+
+        if argument == "save":
+            if savename in self.playlists.saved_playlists:
+                return Response ("Can't save this playlist, there's already a playlist with this name.", delete_after = 20)
+            if len (savename) < 3:
+                return Response ("Can't save this playlist, the name must be longer than 3 characters", delete_after = 20)
+            if savename in forbidden_savenames:
+                return Response ("Can't save this playlist, this name is forbidden!", delete_after = 20)
+
+
+        elif argument == "load":
+            if savename not in self.playlists.saved_playlists:
+                return Response ("Can't load this playlist, there's no playlist with this name.", delete_after = 20)
+
+            if load_mode == "replace":
+                self.playlist.clear ()
+
+            await player.playlist.add_entries (self.playlists.get_playlist (savename) ["entries"])
+
+            return Response ("Done. Enjoy your music!", delete_after = 10)
+
+        elif argument == "delete":
+            if savename not in self.playlists.saved_playlists:
+                return Response ("Can't delete this playlist, there's no playlist with this name.", delete_after = 20)
+
+        elif argument == "showall":
+            response_text = "**Found the following playlists:**\n\n"
+            iteration = 1
+
+            for pl in self.playlists.saved_playlists:
+                infos = self.playlists.get_playlist (pl)
+                response_text += "  ***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entries\n".format (iteration, pl, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]))
+                iteration += 1
+
+            #self.safe_print (response_text)
+            return Response (response_text, delete_after = 60)
+
+        elif argument in self.playlists.saved_playlists:
+            infos = self.playlists.get_playlist (argument)
+            response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entries\n".format (argument, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]))
+            return Response (response_text, reply = True, delete_after = 40)
+
+
+        return Response ("I don't... uhm... what the fuck do you want me to do???", delete_after = 20)
 
     async def cmd_disconnect(self, server):
         """
