@@ -48,7 +48,6 @@ class Downloader:
             otmpl = self.safe_ytdl.params['outtmpl']
             self.safe_ytdl.params['outtmpl'] = os.path.join(download_folder, otmpl)
 
-
     @property
     def ytdl(self):
         return self.safe_ytdl
