@@ -2611,7 +2611,7 @@ class MusicBot(discord.Client):
 
         return Response(reply_text, delete_after=30)
 
-    async def cmd_playlist (self, server, player, leftover_args):
+    async def cmd_playlist (self, channel, author, server, player, leftover_args):
         """
         Usage:
             {command_prefix}playlist showall
@@ -2637,14 +2637,20 @@ class MusicBot(discord.Client):
                 return Response ("Can't save this playlist, the name must be longer than 3 characters", delete_after = 20)
             if savename in forbidden_savenames:
                 return Response ("Can't save this playlist, this name is forbidden!", delete_after = 20)
+            if len (player.playlist.entries) < 1:
+                return Response ("Can't save this playlist, there are no entries in the queue!", delete_after = 20)
 
+            if self.playlists.set_playlist ([player.current_entry.url] + [x.url for x in player.playlist.entries], savename, author.id):
+                return Response ("Saved your playlist...", delete_after = 20)
+
+            return Response ("Uhm, something went wrong I guess :D", delete_after = 20)
 
         elif argument == "load":
             if savename not in self.playlists.saved_playlists:
                 return Response ("Can't load this playlist, there's no playlist with this name.", delete_after = 20)
 
             if load_mode == "replace":
-                self.playlist.clear ()
+                player.playlist.clear ()
 
             await player.playlist.add_entries (self.playlists.get_playlist (savename) ["entries"])
 
@@ -2654,7 +2660,12 @@ class MusicBot(discord.Client):
             if savename not in self.playlists.saved_playlists:
                 return Response ("Can't delete this playlist, there's no playlist with this name.", delete_after = 20)
 
+            self.playlists.remove_playlist (savename)
+
         elif argument == "showall":
+            if len (self.playlists.saved_playlists) < 1:
+                return Response ("There are no saved playlists.\n**You** could add one though. Type *!help playlist* to see how!", delete_after = 40)
+
             response_text = "**Found the following playlists:**\n\n"
             iteration = 1
 
@@ -2671,8 +2682,7 @@ class MusicBot(discord.Client):
             response_text = "\"{}\" added by *{}* with {} entries\n".format (argument, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]))
             return Response (response_text, reply = True, delete_after = 40)
 
-
-        return Response ("I don't... uhm... what the fuck do you want me to do???", delete_after = 20)
+        await self.cmd_help(channel, ["playlist"])
 
     async def cmd_disconnect(self, server):
         """
