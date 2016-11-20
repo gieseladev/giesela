@@ -190,6 +190,7 @@ class ConfigDefaults:
 
     options_file = 'config/options.ini'
     papers_file = "config/papers.ini"
+    playlists_file = "config/playlists.ini"
     blacklist_file = 'config/blacklist.txt'
     auto_playlist_file = 'config/autoplaylist.txt' # this will change when I add playlists
 

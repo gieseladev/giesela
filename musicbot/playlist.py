@@ -137,6 +137,13 @@ class Playlist(EventEmitter):
         self._add_entry_next(entry)
         return entry, len(self.entries)
 
+    async def add_entries (self, entries):
+        for entry in entries:
+            try:
+                await self.add_entry (entry)
+            except:
+                pass
+
     async def import_from(self, playlist_url, **meta):
         """
             Imports the songs from `playlist_url` and queues them to be played.
