@@ -16,6 +16,7 @@ import json
 import operator
 import newspaper
 import urllib
+import wikipedia
 
 from discord import utils
 from discord.object import Object
@@ -1931,9 +1932,9 @@ class MusicBot(discord.Client):
         client = tungsten.Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
         if not res.success:
-            await self.safe_send_message (channel, "Couldn't find anything useful on that subject, sorry.")
+            await self.safe_send_message (channel, "Couldn't find anything useful on that subject, sorry.\n**I'm now including Wikipedia!**")
             self.safe_print ("Didn't find an answer to: " + msgContent)
-            return
+            return self.cmd_wiki (channel, message, ["summarize", msgContent, "5"])
         for pod in res.pods:
             await self.safe_send_message (channel, " ".join (["**" + pod.title + "**", self.shortener.short(pod.format ["img"][0] ["url"])]))
         #await self.safe_send_message(channel, answer)
@@ -2499,7 +2500,7 @@ class MusicBot(discord.Client):
 
         WIP
         """
-        await self.safe_send_message (channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n        Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
+        await self.safe_send_message (channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n     Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
         return
         current_post = get_posts_from_page (number_of_pages = 1) [0]
 
@@ -2683,6 +2684,49 @@ class MusicBot(discord.Client):
             return Response (response_text, reply = True, delete_after = 40)
 
         await self.cmd_help(channel, ["playlist"])
+
+    async def cmd_wiki (self, channel, message, leftover_args):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***wiki [language] search query [results]
+                -This function helps you find the right article.
+
+            ***REMOVED***command_prefix***REMOVED***wiki [language] summarize query [sentences]
+                -This function summarizes the content of a Wikipedia page
+
+            ***REMOVED***command_prefix***REMOVED***wiki [language] query
+                -This function provides the full Wikipedia article.
+        """
+
+        wikipedia_page = None
+        wikipedia_page_title = None
+        wikipedia.set_lang ("en")
+
+        if leftover_args [0].lower () in wikipedia.languages ().keys ():
+            wikipedia.set_lang (leftover_args [0].lower ())
+            del (leftover_args [0])
+        elif leftover_args [0].lower () in wikipedia.languages ().values ():
+            wikipedia.set_lang (list (mydict.keys ()) [list (mydict.values ()).index (leftover_args [0].lower ())])
+            del (leftover_args [0])
+
+        search_query = " ".join (leftover_args)
+        #self.safe_print (search_query)
+
+        if leftover_args [0] == "search":
+            search_query = " ".join (leftover_args [1:])
+            #TODO: help the user find the right article.
+        else:
+            title = wikipedia.search (search_query, results = 1, suggestion = True) [0]
+            #self.safe_print (str (title))
+            if title:
+                wikipedia_page = wikipedia.page (title = title)
+                wikipedia_page_title = title
+
+        if not wikipedia_page:
+            return Response ("I didn't really find anything under ****REMOVED******REMOVED****.".format (search_query), delete_after = 20)
+
+        return Response ("I found this :" + str (wikipedia.summary (wikipedia_page_title, sentences = 3)))
+
 
     async def cmd_disconnect(self, server):
         """
