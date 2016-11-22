@@ -1,0 +1,109 @@
+***REMOVED***
+  "url": "https://www.youtube.com/watch?v=YQHsXMglC9A",
+  "type": "URLPlaylistEntry",
+  "title": "Adele - Hello",
+  "filename": "audio_cache\\youtube-YQHsXMglC9A-Adele_-_Hello.webm",
+  "version": 1,
+  "duration": 367,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "name": "musicbot",
+      "id": "226402503422509058",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "name": "siku2",
+      "id": "203302899277627392",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "downloaded": true
+***REMOVED***
+;
+***REMOVED***
+  "url": "https://www.youtube.com/watch?v=YQHsXMglC9A",
+  "type": "URLPlaylistEntry",
+  "title": "Adele - Hello",
+  "filename": "audio_cache\\youtube-YQHsXMglC9A-Adele_-_Hello.webm",
+  "version": 1,
+  "duration": 367,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "name": "musicbot",
+      "id": "226402503422509058",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "name": "siku2",
+      "id": "203302899277627392",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "downloaded": true
+***REMOVED***
+;
+***REMOVED***
+  "url": "https://www.youtube.com/watch?v=YQHsXMglC9A",
+  "type": "URLPlaylistEntry",
+  "title": "Adele - Hello",
+  "filename": null,
+  "version": 1,
+  "duration": 367,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "name": "musicbot",
+      "id": "226402503422509058",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "name": "siku2",
+      "id": "203302899277627392",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "downloaded": false
+***REMOVED***
+;
+***REMOVED***
+  "url": "https://www.youtube.com/watch?v=YQHsXMglC9A",
+  "type": "URLPlaylistEntry",
+  "title": "Adele - Hello",
+  "filename": null,
+  "version": 1,
+  "duration": 367,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "name": "musicbot",
+      "id": "226402503422509058",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "name": "siku2",
+      "id": "203302899277627392",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "downloaded": false
+***REMOVED***
+;
+***REMOVED***
+  "url": "https://www.youtube.com/watch?v=YQHsXMglC9A",
+  "type": "URLPlaylistEntry",
+  "title": "Adele - Hello",
+  "filename": null,
+  "version": 1,
+  "duration": 367,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "name": "musicbot",
+      "id": "226402503422509058",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "name": "siku2",
+      "id": "203302899277627392",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "downloaded": false
+***REMOVED***
