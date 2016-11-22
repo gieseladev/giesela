@@ -1950,7 +1950,7 @@ class MusicBot(discord.Client):
         if not res.success:
             await self.safe_send_message (channel, "Couldn't find anything useful on that subject, sorry.\n**I'm now including Wikipedia!**")
             self.safe_print ("Didn't find an answer to: " + msgContent)
-            return self.cmd_wiki (channel, message, ["summarize", msgContent, "5"])
+            return self.cmd_wiki (channel, message, ["summarize", msgContent])
         for pod in res.pods:
             await self.safe_send_message (channel, " ".join (["**" + pod.title + "**", self.shortener.short(pod.format ["img"][0] ["url"])]))
         #await self.safe_send_message(channel, answer)
@@ -2637,6 +2637,8 @@ class MusicBot(discord.Client):
             {command_prefix}playlist load savename [add, replace]
             {command_prefix}playlist delete savename
 
+            {command_prefix}playlist builder savename
+
         Save the current playlist so you can load it again later. Every savename has to be unique. Just typing the savename after the commands gives you some information of the playlist.
         """
 
@@ -2645,7 +2647,7 @@ class MusicBot(discord.Client):
         load_mode = leftover_args [2] if len (leftover_args) > 2 else "add"
         additional_args = leftover_args [3:] if len (leftover_args) > 3 else None
 
-        forbidden_savenames = ["showall", "savename", "save", "load", "delete"]
+        forbidden_savenames = ["showall", "savename", "save", "load", "delete", "builder"]
 
         if argument == "save":
             if savename in self.playlists.saved_playlists:
@@ -2669,7 +2671,7 @@ class MusicBot(discord.Client):
             if load_mode == "replace":
                 player.playlist.clear ()
 
-            await player.playlist.add_entries (self.playlists.get_playlist (player.playlist, savename) ["entries"])
+            await player.playlist.add_entries (self.playlists.get_playlist (savename, player.playlist) ["entries"])
 
             return Response ("Done. Enjoy your music!", delete_after = 10)
 
@@ -2678,6 +2680,7 @@ class MusicBot(discord.Client):
                 return Response ("Can't delete this playlist, there's no playlist with this name.", delete_after = 20)
 
             self.playlists.remove_playlist (savename)
+            return Response ("*{}* has been deleted".format (savename), delete_after = 20)
 
         elif argument == "showall":
             if len (self.playlists.saved_playlists) < 1:
@@ -2687,27 +2690,46 @@ class MusicBot(discord.Client):
             iteration = 1
 
             for pl in self.playlists.saved_playlists:
-                infos = self.playlists.get_playlist (player.playlist, pl)
+                infos = self.playlists.get_playlist (pl, player.playlist)
                 response_text += "  {}. \"{}\" added by *{}* with {} entries\n".format (iteration, pl, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]))
                 iteration += 1
 
             #self.safe_print (response_text)
             return Response (response_text, delete_after = 60)
 
+        elif argument == "builder":
+            if len (savename) < 3:
+                return Response ("Can't build on this playlist, the name must be longer than 3 characters", delete_after = 20)
+            if savename in forbidden_savenames:
+                return Response ("Can't build on this playlist, this name is forbidden!", delete_after = 20)
+
+            self.safe_print ("Starting the playlist builder")
+            self.playlist_builder (channel, author, player, savename)
+            return
+
         elif argument in self.playlists.saved_playlists:
-            infos = self.playlists.get_playlist (argument)
-            response_text = "\"{}\" added by *{}* with {} entries\n".format (argument, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]))
+            infos = self.playlists.get_playlist (argument, player.playlist)
+
+            entries_text = ""
+            entries = infos ["entries"]
+            for i in range (len (entries)):
+                entries_text += str (i + 1) + ". " +  entries [i].title + "\n"
+
+            response_text = "\"{}\" added by *{}* with {} entries\n\n{}\n```\nTo edit this playlist type \"{}playlist builder {}\"```".format (argument, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), entries_text, self.config.command_prefix, argument)
             return Response (response_text, reply = True, delete_after = 40)
 
         await self.cmd_help(channel, ["playlist"])
 
+    async def playlist_builder (self, channel, author, player, savename):
+        pass
+
     async def cmd_wiki (self, channel, message, leftover_args):
         """
         Usage:
-            {command_prefix}wiki [language] search query [results]
+            {command_prefix}wiki [language] search [results] query
                 -This function helps you find the right article.
 
-            {command_prefix}wiki [language] summarize query [sentences]
+            {command_prefix}wiki [language] summarize [number of sentences] query
                 -This function summarizes the content of a Wikipedia page
 
             {command_prefix}wiki [language] query
@@ -2731,6 +2753,11 @@ class MusicBot(discord.Client):
         if leftover_args [0] == "search":
             search_query = " ".join (leftover_args [1:])
             #TODO: help the user find the right article.
+        elif leftover_args [0] == "summarize":
+            sent_num = int (leftover_args [1]) if str (type (leftover_args [1])) == "int" else 5
+            search = leftover_args [2:] if str (type (leftover_args [1])) == "int" else leftover_args [1:]
+            title = wikipedia.search (search, results = 1, suggestion = True) [0]
+            return Response ("**{}**\n{}".format (title, wikipedia.summary (title, sentences = sent_num)))
         else:
             title = wikipedia.search (search_query, results = 1, suggestion = True) [0]
             #self.safe_print (str (title))
@@ -2741,7 +2768,7 @@ class MusicBot(discord.Client):
         if not wikipedia_page:
             return Response ("I didn't really find anything under *{}*.".format (search_query), delete_after = 20)
 
-        return Response ("I found this :" + str (wikipedia.summary (wikipedia_page_title, sentences = 3)))
+        return Response ("**{}**\n{}".format (wikipedia_page_title, wikipedia.summary (wikipedia_page_title, sentences = 3)))
 
     async def cmd_disconnect(self, server):
         """
