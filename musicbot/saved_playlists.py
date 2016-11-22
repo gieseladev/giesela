@@ -32,7 +32,7 @@ class Playlists:
         with open (self.playlists_file, "w") as pl_file:
             self.playlists.write (pl_file)
 
-    def get_playlist (self, playlist, playlistname):
+    def get_playlist (self, playlistname, playlist):
         if not self.playlists.has_section (playlistname):
             return None
 
@@ -74,3 +74,20 @@ class Playlists:
         self.playlists.remove_section (name)
         self.save_playlist ()
         self.update_playlist ()
+
+    def edit_playlist (self, name, playlist, remove_entries_indexes = None, new_entries = None, new_name = None):
+        old_playlist = self.get_playlist (name, playlist)
+        old_entries = old_playlist ["entries"]
+
+        if remove_entries_indexes is not None:
+            for index in remove_entries_indexes:
+                del (old_entries [index])
+
+        if new_entries is not None:
+            old_entries.extend (new_entries)
+
+        next_entries = old_entries
+        next_name = new_name if new_name is not None else name
+        next_author_id = old_playlist ["author"]
+
+        self.set_playlist (next_entries, next_name, next_author_id)
