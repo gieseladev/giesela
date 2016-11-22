@@ -1,0 +1,527 @@
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": true,
+  "filename": "audio_cache\\youtube-34Na4j8AVgA-The_Weeknd_-_Starboy_official_ft._Daft_Punk.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": true,
+  "filename": "audio_cache\\youtube-34Na4j8AVgA-The_Weeknd_-_Starboy_official_ft._Daft_Punk.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 273,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***

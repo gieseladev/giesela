@@ -43,10 +43,11 @@ class Playlists:
         playlist_informations ["author"] = plsection ["author"]
         playlist_informations ["entry_count"] = plsection ["entries"]
         entries = []
-        with open (playlist_informations ["location"], "r") as file:
-            serialized_json = re.split("\n;\n", file.read ())
-        for entry in serialized_json:
-            entries.append (urlEntry.entry_from_json (playlist, entry))
+        if not os.stat (playlist_informations ["location"]).st_size == 0:
+            with open (playlist_informations ["location"], "r") as file:
+                serialized_json = re.split("\n;\n", file.read ())
+            for entry in serialized_json:
+                entries.append (urlEntry.entry_from_json (playlist, entry))
 
         playlist_informations ["entries"] = entries
 
@@ -60,7 +61,8 @@ class Playlists:
             raise ValueError (str (e))
             return False
 
-        self.playlists.add_section (name)
+        if not self.playlists.has_section (name):
+            self.playlists.add_section (name)
         self.playlists.set (name, "location", self.playlist_save_location + str (name) + ".txt")
         self.playlists.set (name, "author", str (author_id))
         self.playlists.set (name, "entries", str (len (entries)))
