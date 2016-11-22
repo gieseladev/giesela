@@ -505,13 +505,13 @@ class MusicBot(discord.Client):
     async def safe_send_message(self, dest, content, *, max_letters = 1900, split_message = True, tts=False, expire_in=0, also_delete=None, quiet=False):
         msg = None
         try:
-            if split_message and len (content) > 1900:
+            if split_message and len (content) > max_letters:
                 self.safe_print ("Message too long, splitting it up")
-                iterations, overflow = divmod (len (content), 1900)
+                iterations, overflow = divmod (len (content), max_letters)
                 for i in range (iterations + 1):
-                    start = (i * 1900)
-                    end = start + (overflow if i >= iterations else 1900)
-                    this_content = content [i * 1900 : end]
+                    start = (i * max_letters)
+                    end = start + (overflow if i >= iterations else max_letters)
+                    this_content = content [start : end]
                     #self.safe_print (str (i) + ". message (from " + str (start) + " to " + str (end) + "):\n" + this_content)
                     msg = await self.send_message(dest, this_content, tts=tts)
 
@@ -1119,6 +1119,46 @@ class MusicBot(discord.Client):
             reply_text %= (btext, position, time_until)
 
         return Response(reply_text, delete_after=30)
+
+    async def get_play_entry (self, player, channel, author, leftover_args, song_url):
+        song_url = song_url.strip('<>')
+        if leftover_args:
+            song_url = ' '.join([song_url, *leftover_args])
+
+        try:
+            info = await self.downloader.extract_info(player.playlist.loop, song_url, download=False, process=False)
+        except Exception as e:
+            raise exceptions.CommandError(e, expire_in=30)
+
+        if not info:
+            raise exceptions.CommandError("That video cannot be played.", expire_in=30)
+
+        if info.get('url', '').startswith('ytsearch'):
+            # print("[Command:play] Searching for \"%s\"" % song_url)
+            info = await self.downloader.extract_info(
+                player.playlist.loop,
+                song_url,
+                download=False,
+                process=True,    # ASYNC LAMBDAS WHEN
+                on_error=lambda e: asyncio.ensure_future(
+                    self.safe_send_message(channel, "```\n%s\n```" % e, expire_in=120), loop=self.loop),
+                retry_on_error=True
+            )
+
+            if not info:
+                raise exceptions.CommandError(
+                    "Error extracting info from search string, youtubedl returned no data.  "
+                    "You may need to restart the bot if this continues to happen.", expire_in=30
+                )
+
+            if not all(info.get('entries', [])):
+                # empty list, no data
+                return
+
+            song_url = info['entries'][0]['webpage_url']
+            info = await self.downloader.extract_info(player.playlist.loop, song_url, download=False, process=False)
+
+        return await player.playlist.get_entry (song_url, channel=channel, author=author)
 
     async def _cmd_play_playlist_async(self, player, channel, author, permissions, playlist_url, extractor_type):
         """
@@ -2704,8 +2744,8 @@ class MusicBot(discord.Client):
                 return Response ("Can't build on this playlist, this name is forbidden!", delete_after = 20)
 
             self.safe_print ("Starting the playlist builder")
-            self.playlist_builder (channel, author, player, savename)
-            return
+            response = await self.playlist_builder (channel, author, server, player, savename)
+            return response
 
         elif argument in self.playlists.saved_playlists:
             infos = self.playlists.get_playlist (argument, player.playlist)
@@ -2720,8 +2760,45 @@ class MusicBot(discord.Client):
 
         await self.cmd_help(channel, ["playlist"])
 
-    async def playlist_builder (self, channel, author, player, savename):
-        pass
+    async def playlist_builder (self, channel, author, server, player, savename):
+        if savename not in self.playlists.saved_playlists:
+            self.playlists.set_playlist ([], savename, author.id)
+
+        def check(m):
+            return (
+                        m.content.split () [0] in ["add", "remove", "exit"]
+                    )
+
+        abort = False
+
+        interface_string = "**{}** by *{}* ({} songs)\n\n{}\n\nYou can use the following commands:\n`add`: Add a song to the playlist (this command works like the normal `{}play` command)\n`remove index`: Remove a song from the playlist by it's index"
+
+        while not abort:
+            playlist = self.playlists.get_playlist (savename, player.playlist)
+            entries = playlist ["entries"]
+            entries_text = ""
+
+            entries_page = 0
+            items_per_page = 20
+            iterations, overflow = divmod (len (entries), items_per_page)
+            start = (entries_page * items_per_page)
+            end = start + (overflow if entries_page >= iterations else items_per_page)
+            this_page_entries = entries [start : end]
+
+            for i in range (start, end):
+                entries_text += str (i + 1) + ". " +  this_page_entries [i].title + "\n"
+            entries_text += "\nPage {} of {}".format (entries_page + 1, iterations + 1)
+
+            interface_message = await self.safe_send_message (channel, interface_string.format (savename, server.get_member (playlist ["author"]).mention, playlist ["entry_count"], entries_text, self.config.command_prefix))
+            response_message = await self.wait_for_message (120, author=author, channel=channel, check=check)
+
+            if not response_message:
+                await self.safe_delete_message(interface_message)
+                return Response("Closing the builder.", delete_after=30)
+
+
+
+            await self.safe_delete_message(interface_message)
 
     async def cmd_wiki (self, channel, message, leftover_args):
         """
