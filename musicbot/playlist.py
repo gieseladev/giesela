@@ -140,7 +140,7 @@ class Playlist(EventEmitter):
     async def add_entries (self, entries):
         for entry in entries:
             try:
-                await self.add_entry (entry)
+                await self._add_entry (entry)
             except:
                 pass
 

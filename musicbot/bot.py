@@ -502,16 +502,32 @@ class MusicBot(discord.Client):
 
         await self.change_presence(game=game)
 
-    async def safe_send_message(self, dest, content, *, tts=False, expire_in=0, also_delete=None, quiet=False):
+    async def safe_send_message(self, dest, content, *, max_letters = 1900, split_message = True, tts=False, expire_in=0, also_delete=None, quiet=False):
         msg = None
         try:
-            msg = await self.send_message(dest, content, tts=tts)
+            if split_message and len (content) > 1900:
+                self.safe_print ("Message too long, splitting it up")
+                iterations, overflow = divmod (len (content), 1900)
+                for i in range (iterations + 1):
+                    start = (i * 1900)
+                    end = start + (overflow if i >= iterations else 1900)
+                    this_content = content [i * 1900 : end]
+                    #self.safe_print (str (i) + ". message (from " + str (start) + " to " + str (end) + "):\n" + this_content)
+                    msg = await self.send_message(dest, this_content, tts=tts)
 
-            if msg and expire_in:
-                asyncio.ensure_future(self._wait_delete_msg(msg, expire_in))
+                    if msg and expire_in:
+                        asyncio.ensure_future(self._wait_delete_msg(msg, expire_in))
 
-            if also_delete and isinstance(also_delete, discord.Message):
-                asyncio.ensure_future(self._wait_delete_msg(also_delete, expire_in))
+                    if also_delete and isinstance(also_delete, discord.Message):
+                        asyncio.ensure_future(self._wait_delete_msg(also_delete, expire_in))
+            else:
+                msg = await self.send_message(dest, content, tts=tts)
+
+                if msg and expire_in:
+                    asyncio.ensure_future(self._wait_delete_msg(msg, expire_in))
+
+                if also_delete and isinstance(also_delete, discord.Message):
+                    asyncio.ensure_future(self._wait_delete_msg(also_delete, expire_in))
 
         except discord.Forbidden:
             if not quiet:
@@ -2641,7 +2657,7 @@ class MusicBot(discord.Client):
             if len (player.playlist.entries) < 1:
                 return Response ("Can't save this playlist, there are no entries in the queue!", delete_after = 20)
 
-            if self.playlists.set_playlist ([player.current_entry.url] + [x.url for x in player.playlist.entries], savename, author.id):
+            if self.playlists.set_playlist ([player.current_entry] + list (player.playlist.entries), savename, author.id):
                 return Response ("Saved your playlist...", delete_after = 20)
 
             return Response ("Uhm, something went wrong I guess :D", delete_after = 20)
@@ -2653,7 +2669,7 @@ class MusicBot(discord.Client):
             if load_mode == "replace":
                 player.playlist.clear ()
 
-            await player.playlist.add_entries (self.playlists.get_playlist (savename) ["entries"])
+            await player.playlist.add_entries (self.playlists.get_playlist (player.playlist, savename) ["entries"])
 
             return Response ("Done. Enjoy your music!", delete_after = 10)
 
@@ -2671,7 +2687,7 @@ class MusicBot(discord.Client):
             iteration = 1
 
             for pl in self.playlists.saved_playlists:
-                infos = self.playlists.get_playlist (pl)
+                infos = self.playlists.get_playlist (player.playlist, pl)
                 response_text += "  {}. \"{}\" added by *{}* with {} entries\n".format (iteration, pl, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]))
                 iteration += 1
 
@@ -2726,7 +2742,6 @@ class MusicBot(discord.Client):
             return Response ("I didn't really find anything under *{}*.".format (search_query), delete_after = 20)
 
         return Response ("I found this :" + str (wikipedia.summary (wikipedia_page_title, sentences = 3)))
-
 
     async def cmd_disconnect(self, server):
         """
