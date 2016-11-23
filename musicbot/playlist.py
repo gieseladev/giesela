@@ -242,6 +242,54 @@ class Playlist(EventEmitter):
 
         return entry_list, position
 
+    async def get_playlist_entries(self, playlist_url, **meta):
+        entry_list = []
+
+        try:
+            info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False)
+        except Exception as e:
+            raise ExtractionError('Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
+
+        if not info:
+            raise ExtractionError('Could not extract information from %s' % playlist_url)
+
+        # Once again, the generic extractor fucks things up.
+        if info.get('extractor', None) == 'generic':
+            url_field = 'url'
+        else:
+            url_field = 'webpage_url'
+
+        if "entries" not in info:
+            return None
+
+        baditems = 0
+        for items in info['entries']:
+            if items:
+                try:
+                    entry = URLPlaylistEntry(
+                        self,
+                        items[url_field],
+                        items.get('title', 'Untitled'),
+                        items.get('duration', 0) or 0,
+                        self.downloader.ytdl.prepare_filename(items),
+                        **meta
+                    )
+
+                    entry_list.append(entry)
+                except:
+                    baditems += 1
+                    # Once I know more about what's happening here I can add a proper message
+                    traceback.print_exc()
+                    print(items)
+                    print("Could not add item")
+            else:
+                baditems += 1
+
+        if baditems:
+            print("Skipped %s bad entries" % baditems)
+
+        return entry_list
+
     async def async_process_youtube_playlist(self, playlist_url, **meta):
         """
             Processes youtube playlists links from `playlist_url` in a questionable, async fashion.
