@@ -16,6 +16,7 @@ import json
 import operator
 import newspaper
 import urllib
+import wikipedia
 
 from discord import utils
 from discord.object import Object
@@ -501,16 +502,32 @@ class MusicBot(discord.Client):
 
         await self.change_presence(game=game)
 
-    async def safe_send_message(self, dest, content, *, tts=False, expire_in=0, also_delete=None, quiet=False):
+    async def safe_send_message(self, dest, content, *, max_letters = 1900, split_message = True, tts=False, expire_in=0, also_delete=None, quiet=False):
         msg = None
         try:
-            msg = await self.send_message(dest, content, tts=tts)
+            if split_message and len (content) > max_letters:
+                self.safe_print ("Message too long, splitting it up")
+                iterations, overflow = divmod (len (content), max_letters)
+                for i in range (iterations + 1):
+                    start = (i * max_letters)
+                    end = start + (overflow if i >= iterations else max_letters)
+                    this_content = content [start : end]
+                    #self.safe_print (str (i) + ". message (from " + str (start) + " to " + str (end) + "):\n" + this_content)
+                    msg = await self.send_message(dest, this_content, tts=tts)
 
-            if msg and expire_in:
-                asyncio.ensure_future(self._wait_delete_msg(msg, expire_in))
+                    if msg and expire_in:
+                        asyncio.ensure_future(self._wait_delete_msg(msg, expire_in))
 
-            if also_delete and isinstance(also_delete, discord.Message):
-                asyncio.ensure_future(self._wait_delete_msg(also_delete, expire_in))
+                    if also_delete and isinstance(also_delete, discord.Message):
+                        asyncio.ensure_future(self._wait_delete_msg(also_delete, expire_in))
+            else:
+                msg = await self.send_message(dest, content, tts=tts)
+
+                if msg and expire_in:
+                    asyncio.ensure_future(self._wait_delete_msg(msg, expire_in))
+
+                if also_delete and isinstance(also_delete, discord.Message):
+                    asyncio.ensure_future(self._wait_delete_msg(also_delete, expire_in))
 
         except discord.Forbidden:
             if not quiet:
@@ -1102,6 +1119,48 @@ class MusicBot(discord.Client):
             reply_text %= (btext, position, time_until)
 
         return Response(reply_text, delete_after=30)
+
+    async def get_play_entry (self, player, channel, author, leftover_args, song_url):
+        song_url = song_url.strip('<>')
+        if leftover_args:
+            song_url = ' '.join([song_url, *leftover_args])
+
+        try:
+            info = await self.downloader.extract_info(player.playlist.loop, song_url, download=False, process=False)
+        except Exception as e:
+            raise exceptions.CommandError(e, expire_in=30)
+
+        if not info:
+            raise exceptions.CommandError("That video cannot be played.", expire_in=30)
+
+        if info.get('url', '').startswith('ytsearch'):
+            # print("[Command:play] Searching for \"%s\"" % song_url)
+            info = await self.downloader.extract_info(
+                player.playlist.loop,
+                song_url,
+                download=False,
+                process=True,    # ASYNC LAMBDAS WHEN
+                on_error=lambda e: asyncio.ensure_future(
+                    self.safe_send_message(channel, "```\n%s\n```" % e, expire_in=120), loop=self.loop),
+                retry_on_error=True
+            )
+
+            if not info:
+                raise exceptions.CommandError(
+                    "Error extracting info from search string, youtubedl returned no data.  "
+                    "You may need to restart the bot if this continues to happen.", expire_in=30
+                )
+
+            if not all(info.get('entries', [])):
+                # empty list, no data
+                return
+
+            song_url = info['entries'][0]['webpage_url']
+            return [await player.playlist.get_entry (song_url, channel=channel, author=author)]
+
+        if 'entries' in info:
+            entry_list = await player.playlist.get_playlist_entries (song_url, channel=channel, author=author)
+            return entry_list
 
     async def _cmd_play_playlist_async(self, player, channel, author, permissions, playlist_url, extractor_type):
         """
@@ -1931,9 +1990,9 @@ class MusicBot(discord.Client):
         client = tungsten.Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
         if not res.success:
-            await self.safe_send_message (channel, "Couldn't find anything useful on that subject, sorry.")
+            await self.safe_send_message (channel, "Couldn't find anything useful on that subject, sorry.\n**I'm now including Wikipedia!**")
             self.safe_print ("Didn't find an answer to: " + msgContent)
-            return
+            return self.cmd_wiki (channel, message, ["summarize", msgContent])
         for pod in res.pods:
             await self.safe_send_message (channel, " ".join (["**" + pod.title + "**", self.shortener.short(pod.format ["img"][0] ["url"])]))
         #await self.safe_send_message(channel, answer)
@@ -2499,7 +2558,7 @@ class MusicBot(discord.Client):
 
         WIP
         """
-        await self.safe_send_message (channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n        Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
+        await self.safe_send_message (channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n     Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
         return
         current_post = get_posts_from_page (number_of_pages = 1) [0]
 
@@ -2620,6 +2679,8 @@ class MusicBot(discord.Client):
             {command_prefix}playlist load savename [add, replace]
             {command_prefix}playlist delete savename
 
+            {command_prefix}playlist builder savename
+
         Save the current playlist so you can load it again later. Every savename has to be unique. Just typing the savename after the commands gives you some information of the playlist.
         """
 
@@ -2628,7 +2689,7 @@ class MusicBot(discord.Client):
         load_mode = leftover_args [2] if len (leftover_args) > 2 else "add"
         additional_args = leftover_args [3:] if len (leftover_args) > 3 else None
 
-        forbidden_savenames = ["showall", "savename", "save", "load", "delete"]
+        forbidden_savenames = ["showall", "savename", "save", "load", "delete", "builder"]
 
         if argument == "save":
             if savename in self.playlists.saved_playlists:
@@ -2640,7 +2701,7 @@ class MusicBot(discord.Client):
             if len (player.playlist.entries) < 1:
                 return Response ("Can't save this playlist, there are no entries in the queue!", delete_after = 20)
 
-            if self.playlists.set_playlist ([player.current_entry.url] + [x.url for x in player.playlist.entries], savename, author.id):
+            if self.playlists.set_playlist ([player.current_entry] + list (player.playlist.entries), savename, author.id):
                 return Response ("Saved your playlist...", delete_after = 20)
 
             return Response ("Uhm, something went wrong I guess :D", delete_after = 20)
@@ -2652,7 +2713,7 @@ class MusicBot(discord.Client):
             if load_mode == "replace":
                 player.playlist.clear ()
 
-            await player.playlist.add_entries (self.playlists.get_playlist (savename) ["entries"])
+            await player.playlist.add_entries (self.playlists.get_playlist (savename, player.playlist) ["entries"])
 
             return Response ("Done. Enjoy your music!", delete_after = 10)
 
@@ -2661,6 +2722,7 @@ class MusicBot(discord.Client):
                 return Response ("Can't delete this playlist, there's no playlist with this name.", delete_after = 20)
 
             self.playlists.remove_playlist (savename)
+            return Response ("*{}* has been deleted".format (savename), delete_after = 20)
 
         elif argument == "showall":
             if len (self.playlists.saved_playlists) < 1:
@@ -2670,19 +2732,164 @@ class MusicBot(discord.Client):
             iteration = 1
 
             for pl in self.playlists.saved_playlists:
-                infos = self.playlists.get_playlist (pl)
+                infos = self.playlists.get_playlist (pl, player.playlist)
                 response_text += "  {}. \"{}\" added by *{}* with {} entries\n".format (iteration, pl, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]))
                 iteration += 1
 
             #self.safe_print (response_text)
             return Response (response_text, delete_after = 60)
 
+        elif argument == "builder":
+            if len (savename) < 3:
+                return Response ("Can't build on this playlist, the name must be longer than 3 characters", delete_after = 20)
+            if savename in forbidden_savenames:
+                return Response ("Can't build on this playlist, this name is forbidden!", delete_after = 20)
+
+            self.safe_print ("Starting the playlist builder")
+            response = await self.playlist_builder (channel, author, server, player, savename)
+            return response
+
         elif argument in self.playlists.saved_playlists:
-            infos = self.playlists.get_playlist (argument)
-            response_text = "\"{}\" added by *{}* with {} entries\n".format (argument, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]))
+            infos = self.playlists.get_playlist (argument, player.playlist)
+
+            entries_text = ""
+            entries = infos ["entries"]
+            for i in range (len (entries)):
+                entries_text += str (i + 1) + ". " +  entries [i].title + "\n"
+
+            response_text = "\"{}\" added by *{}* with {} entries\n\n{}\n```\nTo edit this playlist type \"{}playlist builder {}\"```".format (argument, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), entries_text, self.config.command_prefix, argument)
             return Response (response_text, reply = True, delete_after = 40)
 
-        await self.cmd_help(channel, ["playlist"])
+        return await self.cmd_help(channel, ["playlist"])
+
+    async def playlist_builder (self, channel, author, server, player, savename):
+        if savename not in self.playlists.saved_playlists:
+            self.playlists.set_playlist ([], savename, author.id)
+
+        def check(m):
+            return (
+                        m.content.split () [0] in ["add", "remove", "rename", "exit", "p", "n"]
+                    )
+
+        abort = False
+        entries_page = 0
+
+        interface_string = "**{}** by *{}* ({} songs)\n\n{}\n\n**You can use the following commands:**\n`add`: Add a song to the playlist (this command works like the normal `{}play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n\n`p`: previous page\n`n`: next page\n`exit`: leave the builder"
+
+        while not abort:
+            playlist = self.playlists.get_playlist (savename, player.playlist)
+            entries = playlist ["entries"]
+            entries_text = ""
+
+            items_per_page = 20
+            iterations, overflow = divmod (len (entries), items_per_page)
+            start = (entries_page * items_per_page)
+            end = start + (overflow if entries_page >= iterations else items_per_page)
+            #this_page_entries = entries [start : end]
+
+            #self.safe_print ("I have {} entries in the whole list and now I'm viewing from {} to {} ({} entries)".format (str (len (entries)), str (start), str (end), str (end - start)))
+
+            for i in range (start, end):
+                entries_text += str (i + 1) + ". " +  entries [i].title + "\n"
+            entries_text += "\nPage {} of {}".format (entries_page + 1, iterations + 1)
+
+            interface_message = await self.safe_send_message (channel, interface_string.format (savename, server.get_member (playlist ["author"]).mention, playlist ["entry_count"], entries_text, self.config.command_prefix))
+            response_message = await self.wait_for_message (120, author=author, channel=channel, check=check)
+
+            if not response_message:
+                await self.safe_delete_message(interface_message)
+                return Response("Closing the builder.", delete_after=30)
+
+            elif response_message.content.startswith(self.config.command_prefix) or \
+                    response_message.content.lower().startswith('exit'):
+
+                await self.safe_delete_message(response_message)
+                await self.safe_delete_message(interface_message)
+                return Response("Successfully saved **{}**.".format (savename), delete_after=30)
+
+            split_message = response_message.content.split ()
+            arguments = split_message [1:] if len (split_message) > 1 else None
+
+            if response_message.content.lower().startswith("add"):
+                if arguments is not None:
+                    msg = await self.safe_send_message (channel, "I'm working on it.")
+                    entries = await self.get_play_entry (player, channel, author, arguments [1:], arguments [0])
+                    self.playlists.edit_playlist (savename, player.playlist, new_entries = entries)
+                    await self.safe_delete_message(msg)
+
+            elif response_message.content.lower().startswith("remove"):
+                if arguments is not None:
+                    indieces = []
+                    for arg in arguments:
+                        try:
+                            index = int (arguments [0]) - 1
+                        except:
+                            index = -1
+
+                        if index >= 0 and index < int (playlist ["entry_count"]):
+                            indieces.append (index)
+
+                    self.playlists.edit_playlist (savename, player.playlist, remove_entries_indexes = indieces)
+
+            elif response_message.content.lower().startswith("rename"):
+                if arguments is not None:
+                    self.playlists.edit_playlist (savename, player.playlist, new_name = arguments [0])
+
+            elif response_message.content.lower().startswith("p"):
+                entries_page = (entries_page - 1) % (iterations + 1)
+
+            elif response_message.content.lower().startswith("n"):
+                entries_page = (entries_page + 1) % (iterations + 1)
+
+            await self.safe_delete_message(response_message)
+            await self.safe_delete_message(interface_message)
+
+    async def cmd_wiki (self, channel, message, leftover_args):
+        """
+        Usage:
+            {command_prefix}wiki [language] search [results] query
+                -This function helps you find the right article.
+
+            {command_prefix}wiki [language] summarize [number of sentences] query
+                -This function summarizes the content of a Wikipedia page
+
+            {command_prefix}wiki [language] query
+                -This function provides the full Wikipedia article.
+        """
+
+        wikipedia_page = None
+        wikipedia_page_title = None
+        wikipedia.set_lang ("en")
+
+        if leftover_args [0].lower () in wikipedia.languages ().keys ():
+            wikipedia.set_lang (leftover_args [0].lower ())
+            del (leftover_args [0])
+        elif leftover_args [0].lower () in wikipedia.languages ().values ():
+            wikipedia.set_lang (list (mydict.keys ()) [list (mydict.values ()).index (leftover_args [0].lower ())])
+            del (leftover_args [0])
+
+        search_query = " ".join (leftover_args)
+        #self.safe_print (search_query)
+
+        if leftover_args [0] == "search":
+            search_query = " ".join (leftover_args [1:])
+            #TODO: help the user find the right article.
+        elif leftover_args [0] == "summarize":
+            sent_num = int (leftover_args [1]) if str (type (leftover_args [1])) == "int" else 5
+            search = leftover_args [2:] if str (type (leftover_args [1])) == "int" else leftover_args [1:]
+            title = wikipedia.search (search, results = 1, suggestion = True) [0]
+            return Response ("**{}**\n{}".format (title, wikipedia.summary (title, sentences = sent_num)))
+        else:
+            title = wikipedia.search (search_query, results = 1, suggestion = True) [0]
+            #self.safe_print (str (title))
+            if title:
+                wikipedia_page = wikipedia.page (title = title)
+                wikipedia_page_title = title
+
+        if not wikipedia_page:
+            return Response ("I didn't really find anything under *{}*.".format (search_query), delete_after = 20)
+
+        return Response ("**{}**\n{}".format (wikipedia_page_title, wikipedia.summary (wikipedia_page_title, sentences = 3)))
 
     async def cmd_disconnect(self, server):
         """
