@@ -83,6 +83,8 @@ class Playlists:
 
         if remove_entries_indexes is not None:
             for index in remove_entries_indexes:
+                if index >= len (old_entries) or index < 0:
+                    continue
                 del (old_entries [index])
 
         if new_entries is not None:
@@ -91,5 +93,8 @@ class Playlists:
         next_entries = old_entries
         next_name = new_name if new_name is not None else name
         next_author_id = old_playlist ["author"]
+
+        if next_name is not name:
+            self.remove_playlist (name)
 
         self.set_playlist (next_entries, next_name, next_author_id)
