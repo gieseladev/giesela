@@ -1,0 +1,527 @@
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 273,
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Adele - Hello",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 367,
+  "url": "https://www.youtube.com/watch?v=YQHsXMglC9A",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Fergie - Big Girls Don't Cry (Personal)",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 307,
+  "url": "https://www.youtube.com/watch?v=agrXgrAgQ0U",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 273,
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 273,
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 273,
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \"Infiltration\"",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 380,
+  "url": "https://www.youtube.com/watch?v=Og5-Pm4HNlI",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \"The Last Bastion\"",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 443,
+  "url": "https://www.youtube.com/watch?v=to8yh83jlXg",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \u201cHero\u201d",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 402,
+  "url": "https://www.youtube.com/watch?v=cPRRupAM4DI",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \u201cDragons\u201d",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 483,
+  "url": "https://www.youtube.com/watch?v=oJ09xdxzIJQ",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \u201cAlive\u201d",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 385,
+  "url": "https://www.youtube.com/watch?v=U130wnpi-C0",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \"Recall\"",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 481,
+  "url": "https://www.youtube.com/watch?v=sB5zlHMsM7k",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \"Infiltration\"",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 380,
+  "url": "https://www.youtube.com/watch?v=Og5-Pm4HNlI",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \"The Last Bastion\"",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 443,
+  "url": "https://www.youtube.com/watch?v=to8yh83jlXg",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \u201cHero\u201d",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 402,
+  "url": "https://www.youtube.com/watch?v=cPRRupAM4DI",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \u201cDragons\u201d",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 483,
+  "url": "https://www.youtube.com/watch?v=oJ09xdxzIJQ",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \u201cAlive\u201d",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 385,
+  "url": "https://www.youtube.com/watch?v=U130wnpi-C0",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \"Recall\"",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 481,
+  "url": "https://www.youtube.com/watch?v=sB5zlHMsM7k",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \"Infiltration\"",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 380,
+  "url": "https://www.youtube.com/watch?v=Og5-Pm4HNlI",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \"The Last Bastion\"",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 443,
+  "url": "https://www.youtube.com/watch?v=to8yh83jlXg",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \u201cHero\u201d",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 402,
+  "url": "https://www.youtube.com/watch?v=cPRRupAM4DI",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \u201cDragons\u201d",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 483,
+  "url": "https://www.youtube.com/watch?v=oJ09xdxzIJQ",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \u201cAlive\u201d",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 385,
+  "url": "https://www.youtube.com/watch?v=U130wnpi-C0",
+  "version": 1
+***REMOVED***
+;
+***REMOVED***
+  "type": "URLPlaylistEntry",
+  "title": "Overwatch Animated Short | \"Recall\"",
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 481,
+  "url": "https://www.youtube.com/watch?v=sB5zlHMsM7k",
+  "version": 1
+***REMOVED***

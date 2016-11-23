@@ -10,3 +10,4 @@ pyshorteners
 newspaper3k
 pillow
 moviepy
+wikipedia

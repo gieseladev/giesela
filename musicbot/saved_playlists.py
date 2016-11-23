@@ -2,6 +2,9 @@ import os
 import shutil
 import traceback
 import configparser
+import re
+
+from .entry import URLPlaylistEntry as urlEntry
 
 from .exceptions import HelpfulError
 
@@ -29,7 +32,7 @@ class Playlists:
         with open (self.playlists_file, "w") as pl_file:
             self.playlists.write (pl_file)
 
-    def get_playlist (self, playlistname):
+    def get_playlist (self, playlistname, playlist):
         if not self.playlists.has_section (playlistname):
             return None
 
@@ -39,8 +42,12 @@ class Playlists:
         playlist_informations ["location"] = plsection ["location"]
         playlist_informations ["author"] = plsection ["author"]
         playlist_informations ["entry_count"] = plsection ["entries"]
-        with open (playlist_informations ["location"], "r") as file:
-            entries = file.read ().splitlines ()
+        entries = []
+        if not os.stat (playlist_informations ["location"]).st_size == 0:
+            with open (playlist_informations ["location"], "r") as file:
+                serialized_json = re.split("\n;\n", file.read ())
+            for entry in serialized_json:
+                entries.append (urlEntry.entry_from_json (playlist, entry))
 
         playlist_informations ["entries"] = entries
 
@@ -49,13 +56,13 @@ class Playlists:
     def set_playlist (self, entries, name, author_id):
         try:
             with open (self.playlist_save_location + str (name) + ".txt", "w") as f:
-                for entry in entries:
-                    f.write (entry + "\n")
+                f.write ("\n;\n".join ([entry.to_json () for entry in entries]))
         except Exception as e:
             raise ValueError (str (e))
             return False
 
-        self.playlists.add_section (name)
+        if not self.playlists.has_section (name):
+            self.playlists.add_section (name)
         self.playlists.set (name, "location", self.playlist_save_location + str (name) + ".txt")
         self.playlists.set (name, "author", str (author_id))
         self.playlists.set (name, "entries", str (len (entries)))
@@ -69,3 +76,25 @@ class Playlists:
         self.playlists.remove_section (name)
         self.save_playlist ()
         self.update_playlist ()
+
+    def edit_playlist (self, name, playlist, remove_entries_indexes = None, new_entries = None, new_name = None):
+        old_playlist = self.get_playlist (name, playlist)
+        old_entries = old_playlist ["entries"]
+
+        if remove_entries_indexes is not None:
+            for index in remove_entries_indexes:
+                if index >= len (old_entries) or index < 0:
+                    continue
+                del (old_entries [index])
+
+        if new_entries is not None:
+            old_entries.extend (new_entries)
+
+        next_entries = old_entries
+        next_name = new_name if new_name is not None else name
+        next_author_id = old_playlist ["author"]
+
+        if next_name is not name:
+            self.remove_playlist (name)
+
+        self.set_playlist (next_entries, next_name, next_author_id)

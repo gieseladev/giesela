@@ -106,6 +106,28 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
         return cls(playlist, url, title, duration, filename, **meta)
 
+    @staticmethod
+    def entry_from_json(playlist, jsonstring):
+        data = json.loads(jsonstring)
+        #print(data)
+        # TODO: version check
+        url = data['url']
+        title = data['title']
+        duration = data['duration']
+        downloaded = data['downloaded']
+        filename = data['filename'] if downloaded else None
+        meta = ***REMOVED******REMOVED***
+
+        # TODO: Better [name] fallbacks
+        if 'channel' in data['meta']:
+            ch = playlist.bot.get_channel(data['meta']['channel']['id'])
+            meta['channel'] = ch or data['meta']['channel']['name']
+
+        if 'author' in data['meta']:
+            meta['author'] = meta['channel'].server.get_member(data['meta']['author']['id'])
+
+        return URLPlaylistEntry (playlist, url, title, duration, filename, **meta)
+
     def to_json(self):
         data = ***REMOVED***
             'version': 1,
@@ -232,6 +254,3 @@ class URLPlaylistEntry(BasePlaylistEntry):
             else:
                 # Move the temporary file to it's final location.
                 os.rename(unhashed_fname, self.filename)
-
-
-

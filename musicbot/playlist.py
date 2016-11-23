@@ -84,6 +84,49 @@ class Playlist(EventEmitter):
         self._add_entry(entry)
         return entry, len(self.entries)
 
+    async def get_entry (self, song_url, **meta):
+        try:
+            info = await self.downloader.extract_info(self.loop, song_url, download=False)
+        except Exception as e:
+            raise ExtractionError('Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(song_url, e))
+
+        if not info:
+            raise ExtractionError('Could not extract information from %s' % song_url)
+
+        # TODO: Sort out what happens next when this happens
+        if info.get('_type', None) == 'playlist':
+            raise WrongEntryTypeError("This is a playlist.", True, info.get('webpage_url', None) or info.get('url', None))
+
+        if info['extractor'] in ['generic', 'Dropbox']:
+            try:
+                # unfortunately this is literally broken
+                # https://github.com/KeepSafe/aiohttp/issues/758
+                # https://github.com/KeepSafe/aiohttp/issues/852
+                content_type = await get_header(self.bot.aiosession, info['url'], 'CONTENT-TYPE')
+                print("Got content type", content_type)
+
+            except Exception as e:
+                print("[Warning] Failed to get content type for url %s (%s)" % (song_url, e))
+                content_type = None
+
+            if content_type:
+                if content_type.startswith(('application/', 'image/')):
+                    if '/ogg' not in content_type:  # How does a server say `application/ogg` what the actual fuck
+                        raise ExtractionError("Invalid content type \"%s\" for url %s" % (content_type, song_url))
+
+                elif not content_type.startswith(('audio/', 'video/')):
+                    print("[Warning] Questionable content type \"%s\" for url %s" % (content_type, song_url))
+
+        entry = URLPlaylistEntry(
+            self,
+            song_url,
+            info.get('title', 'Untitled'),
+            info.get('duration', 0) or 0,
+            self.downloader.ytdl.prepare_filename(info),
+            **meta
+        )
+        return entry
+
     async def add_entry_next (self, song_url, **meta):
         """
             Validates and adds a song_url to be played. This does not start the download of the song.
@@ -140,7 +183,7 @@ class Playlist(EventEmitter):
     async def add_entries (self, entries):
         for entry in entries:
             try:
-                await self.add_entry (entry)
+                await self._add_entry (entry)
             except:
                 pass
 
@@ -198,6 +241,54 @@ class Playlist(EventEmitter):
             print("Skipped %s bad entries" % baditems)
 
         return entry_list, position
+
+    async def get_playlist_entries(self, playlist_url, **meta):
+        entry_list = []
+
+        try:
+            info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False)
+        except Exception as e:
+            raise ExtractionError('Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
+
+        if not info:
+            raise ExtractionError('Could not extract information from %s' % playlist_url)
+
+        # Once again, the generic extractor fucks things up.
+        if info.get('extractor', None) == 'generic':
+            url_field = 'url'
+        else:
+            url_field = 'webpage_url'
+
+        if "entries" not in info:
+            return None
+
+        baditems = 0
+        for items in info['entries']:
+            if items:
+                try:
+                    entry = URLPlaylistEntry(
+                        self,
+                        items[url_field],
+                        items.get('title', 'Untitled'),
+                        items.get('duration', 0) or 0,
+                        self.downloader.ytdl.prepare_filename(items),
+                        **meta
+                    )
+
+                    entry_list.append(entry)
+                except:
+                    baditems += 1
+                    # Once I know more about what's happening here I can add a proper message
+                    traceback.print_exc()
+                    print(items)
+                    print("Could not add item")
+            else:
+                baditems += 1
+
+        if baditems:
+            print("Skipped %s bad entries" % baditems)
+
+        return entry_list
 
     async def async_process_youtube_playlist(self, playlist_url, **meta):
         """
