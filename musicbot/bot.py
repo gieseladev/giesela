@@ -2934,6 +2934,40 @@ class MusicBot(discord.Client):
 
         return Response ("**{}**\n{}".format (wikipedia_page_title, wikipedia.summary (wikipedia_page_title, sentences = 3)))
 
+    async def cmd_getmusicfile (self, channel, author, player, index = 0):
+        """
+        Usage:
+            {command_prefix}getmusicfile
+            {command_prefix}getmusicfile index
+
+        Get the music file of the current song.
+        You may provide an index to get that file.
+        """
+
+        try:
+            index = int (index) - 1
+        except:
+            return Response ("Please provide a valid index")
+
+        if index == -1:
+            entry = player.current_entry
+        else:
+            if index < 0 or index >= len (player.playlist.entries):
+                return Response ("Your index is out of range")
+            entry = player.playlist.entries [index]
+
+        if not entry:
+            return Response ("This entry is currently being worked on. Please retry again later")
+
+        if not entry.is_downloaded:
+            try:
+                await entry._download ()
+            except:
+                return Response ("Could not download the file. This really shouldn't happen")
+
+        await self.safe_send_message (author, "The file is being uploaded. Please wait a second.", delete_after = 15)
+        await self.send_file (author, entry.filename, content = "Here you go:")
+
     async def cmd_disconnect(self, server):
         """
         Usage:
