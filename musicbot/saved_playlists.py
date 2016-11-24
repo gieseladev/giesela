@@ -82,13 +82,13 @@ class Playlists:
         old_entries = old_playlist ["entries"]
 
         if remove_entries_indexes is not None:
-            for index in remove_entries_indexes:
-                if index >= len (old_entries) or index < 0:
-                    continue
-                del (old_entries [index])
+            old_entries = [old_entries [x] for x in range (len (old_entries)) if x not in remove_entries_indexes]
 
         if new_entries is not None:
-            old_entries.extend (new_entries)
+            try:
+                old_entries.extend (new_entries)
+            except:
+                print ("I guess something went wrong while extending the playlist...")
 
         next_entries = old_entries
         next_name = new_name if new_name is not None else name
