@@ -73,6 +73,7 @@ class Playlist(EventEmitter):
                 elif not content_type.startswith(('audio/', 'video/')):
                     print("[Warning] Questionable content type \"%s\" for url %s" % (content_type, song_url))
 
+
         entry = URLPlaylistEntry(
             self,
             song_url,
@@ -116,6 +117,8 @@ class Playlist(EventEmitter):
 
                 elif not content_type.startswith(('audio/', 'video/')):
                     print("[Warning] Questionable content type \"%s\" for url %s" % (content_type, song_url))
+
+        #print ("HEY I GOT THIS: " + self.downloader.ytdl.prepare_filename(info) + "\n\n\n{}\n\n\n".format (str (info)))
 
         entry = URLPlaylistEntry(
             self,

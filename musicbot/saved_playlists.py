@@ -47,6 +47,7 @@ class Playlists:
             with open (playlist_informations ["location"], "r") as file:
                 serialized_json = re.split("\n;\n", file.read ())
             for entry in serialized_json:
+                #print (str (urlEntry.entry_from_json (playlist, entry).title))
                 entries.append (urlEntry.entry_from_json (playlist, entry))
 
         playlist_informations ["entries"] = entries
