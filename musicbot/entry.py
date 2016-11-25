@@ -4,7 +4,7 @@ import os
 import traceback
 
 from .exceptions import ExtractionError
-from .utils import get_header, md5sum
+from .utils import get_header, md5sum, slugify
 
 
 class BasePlaylistEntry:
@@ -115,7 +115,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         title = data['title']
         duration = data['duration']
         downloaded = data['downloaded']
-        filename = data['filename'] if downloaded else None
+        filename = data['filename'] if downloaded else (data ["expected_filename"] if data ["expected_filename"] is not None else None)
         meta = {}
 
         # TODO: Better [name] fallbacks
@@ -137,6 +137,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
             'duration': self.duration,
             'downloaded': self.is_downloaded,
             'filename': self.filename,
+            "expected_filename": self.expected_filename,
             'meta': {
                 i: {
                     'type': self.meta[i].__class__.__name__,
@@ -160,6 +161,10 @@ class URLPlaylistEntry(BasePlaylistEntry):
                 os.makedirs(self.download_folder)
 
             # self.expected_filename: audio_cache\youtube-9R8aSKwTEMg-NOMA_-_Brain_Power.m4a
+
+            if self.expected_filename is None:
+                self.expected_filename = slugify ("unknown" + self.title)
+
             extractor = os.path.basename(self.expected_filename).split('-')[0]
 
             # the generic extractor requires special handling
