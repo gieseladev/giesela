@@ -2819,7 +2819,7 @@ class MusicBot(discord.Client):
                 if arguments is not None:
                     msg = await self.safe_send_message (channel, "I'm working on it.")
                     entries = await self.get_play_entry (player, channel, author, arguments [1:], arguments [0])
-                    pl_changes ["new_entries"].append (entries)
+                    pl_changes ["new_entries"].extend (entries)
                     playlist ["entries"].extend (entries)
                     playlist ["entry_count"] = str (int (playlist ["entry_count"]) + len (entries))
                     await self.safe_delete_message(msg)
