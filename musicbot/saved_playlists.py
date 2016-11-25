@@ -78,12 +78,19 @@ class Playlists:
         self.save_playlist ()
         self.update_playlist ()
 
-    def edit_playlist (self, name, playlist, remove_entries_indexes = None, new_entries = None, new_name = None):
+    def edit_playlist (self, name, playlist, remove_entries = None, remove_entries_indexes = None, new_entries = None, new_name = None):
         old_playlist = self.get_playlist (name, playlist)
         old_entries = old_playlist ["entries"]
 
         if remove_entries_indexes is not None:
             old_entries = [old_entries [x] for x in range (len (old_entries)) if x not in remove_entries_indexes]
+
+        if remove_entries is not None:
+            for entry in remove_entries:
+                try:
+                    old_entries.remove (entry)
+                except:
+                    continue
 
         if new_entries is not None:
             try:
@@ -91,7 +98,7 @@ class Playlists:
             except:
                 print ("I guess something went wrong while extending the playlist...")
 
-        print (str (old_entries))
+        #print (str (old_entries))
         next_entries = old_entries
         next_name = new_name if new_name is not None else name
         next_author_id = old_playlist ["author"]
