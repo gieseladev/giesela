@@ -2733,7 +2733,7 @@ class MusicBot(discord.Client):
 
             for pl in self.playlists.saved_playlists:
                 infos = self.playlists.get_playlist (pl, player.playlist)
-                response_text += "  ***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entries\n".format (iteration, pl, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]))
+                response_text += "  ***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n".format (iteration, pl, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y")
                 iteration += 1
 
             #self.safe_print (response_text)
@@ -2757,7 +2757,8 @@ class MusicBot(discord.Client):
             for i in range (len (entries)):
                 entries_text += str (i + 1) + ". " +  entries [i].title + "\n"
 
-            response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entries\n\n***REMOVED******REMOVED***\n```\nTo edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"```".format (argument, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), entries_text, self.config.command_prefix, argument)
+            minutes, seconds = divmod (sum ([x.duration for x in entries]), 60)
+            response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n*playtime: ***REMOVED******REMOVED*** min ***REMOVED******REMOVED*** sec*\n\n***REMOVED******REMOVED***\n```\nTo edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"```".format (argument, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y", minutes, seconds, entries_text, self.config.command_prefix, argument)
             return Response (response_text, reply = True, delete_after = 40)
 
         return await self.cmd_help(channel, ["playlist"])
@@ -2777,7 +2778,7 @@ class MusicBot(discord.Client):
         pl_changes = ***REMOVED***"remove_entries_indexes" : [], "new_entries" : [], "new_name" : None***REMOVED***
         savename = _savename
 
-        interface_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** songs)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add`: Add a song to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
+        interface_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED*** min and ***REMOVED******REMOVED*** sec)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add`: Add a song to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
 
         playlist = self.playlists.get_playlist (_savename, player.playlist)
 
@@ -2797,8 +2798,10 @@ class MusicBot(discord.Client):
                 entries_text += str (i + 1) + ". " +  entries [i].title + "\n"
             entries_text += "\nPage ***REMOVED******REMOVED*** of ***REMOVED******REMOVED***".format (entries_page + 1, iterations + 1)
 
-            interface_message = await self.safe_send_message (channel, interface_string.format (savename, server.get_member (playlist ["author"]).mention, playlist ["entry_count"], entries_text, self.config.command_prefix))
-            response_message = await self.wait_for_message (120, author=author, channel=channel, check=check)
+            minutes, seconds = divmod (sum ([x.duration for x in entries]), 60)
+
+            interface_message = await self.safe_send_message (channel, interface_string.format (savename, server.get_member (playlist ["author"]).mention, playlist ["entry_count"], "s" if int (playlist ["entry_count"]) is not 1 else "", minutes, seconds, entries_text, self.config.command_prefix))
+            response_message = await self.wait_for_message (500, author=author, channel=channel, check=check)
 
             if not response_message:
                 await self.safe_delete_message(interface_message)
@@ -2841,7 +2844,7 @@ class MusicBot(discord.Client):
                     playlist ["entries"] = [playlist ["entries"] [x] for x in range (len (playlist ["entries"])) if x not in indieces]
 
             elif response_message.content.lower().startswith("rename"):
-                if arguments is not None and len (arguments [0]) >= 3:
+                if arguments is not None and len (arguments [0]) >= 3 and arguments [0] not in self.playlists.saved_playlists:
                     pl_changes ["new_name"] = arguments [0]
                     savename = arguments [0]
 
@@ -2859,7 +2862,7 @@ class MusicBot(discord.Client):
             self.safe_print ("Closed the playlist builder")
 
         if save:
-            self.safe_print ("Going to remove the following entries: ***REMOVED******REMOVED*** | Adding these entries: ***REMOVED******REMOVED*** | Changing the name to: ***REMOVED******REMOVED***".format (pl_changes ["remove_entries_indexes"], ", ".join ([x.title for x in pl_changes ["new_entries"]]), pl_changes ["new_name"]))
+            #self.safe_print ("Going to remove the following entries: ***REMOVED******REMOVED*** | Adding these entries: ***REMOVED******REMOVED*** | Changing the name to: ***REMOVED******REMOVED***".format (pl_changes ["remove_entries_indexes"], ", ".join ([x.title for x in pl_changes ["new_entries"]]), pl_changes ["new_name"]))
             self.playlists.edit_playlist (savename, player.playlist, new_entries = pl_changes ["new_entries"], remove_entries_indexes = pl_changes ["remove_entries_indexes"], new_name = pl_changes ["new_name"])
             self.safe_print ("Closed the playlist builder and saved the playlist")
             return Response ("Successfully saved ****REMOVED******REMOVED****".format (savename))
@@ -2884,8 +2887,28 @@ class MusicBot(discord.Client):
             self.playlists.set_playlist ([player.current_entry], playlistname, author.id)
             return Response ("Created a new playlist and added the currently playing song.")
 
-        self.playlists.edit_playlist (playlistname, self.playlists, new_entries = [player.current_entry])
+        self.playlists.edit_playlist (playlistname, player.playlist, new_entries = [player.current_entry])
         return Response ("Added the current song to the playlist.")
+
+    async def cmd_removeplayingfromplaylist(self, channel, author, player, playlistname = None):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***removeplayingfromplaylist playlistname
+
+        Remove the current entry to a playlist
+        """
+
+        if playlistname is None:
+            return Response ("Please specify the playlist's name!", delete_after = 20)
+
+        if not player.current_entry:
+            return Response ("There's nothing playing right now so I can't add it to your playlist...")
+
+        if playlistname not in self.playlists.saved_playlists:
+            return Response ("There's no playlist with this name.")
+
+        self.playlists.edit_playlist (playlistname, player.playlist, remove_entries = [player.current_entry])
+        return Response ("Removed the current song from the playlist.")
 
     async def cmd_wiki (self, channel, message, leftover_args):
         """
