@@ -90,6 +90,7 @@ class Playlists:
             except:
                 print ("I guess something went wrong while extending the playlist...")
 
+        print (str (old_entries))
         next_entries = old_entries
         next_name = new_name if new_name is not None else name
         next_author_id = old_playlist ["author"]
