@@ -31,4 +31,4 @@ class GameHangman:
         self.tries += 1
 
     def get_beautified_string (self):
-        return " ".join [letter if letter in self.right_letters else "_" for letter in self.word]
+        return " ".join ([letter if letter in self.right_letters else "_" for letter in self.word])
