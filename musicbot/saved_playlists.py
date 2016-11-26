@@ -103,6 +103,10 @@ class Playlists:
         next_name = new_name if new_name is not None else name
         next_author_id = old_playlist ["author"]
 
+        if len (next_entries) < 1:
+            self.remove_playlist (name)
+            return
+
         if next_name is not name:
             self.remove_playlist (name)
 
