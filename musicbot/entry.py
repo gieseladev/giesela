@@ -141,8 +141,8 @@ class URLPlaylistEntry(BasePlaylistEntry):
             'meta': ***REMOVED***
                 i: ***REMOVED***
                     'type': self.meta[i].__class__.__name__,
-                    'id': self.meta[i].id,
-                    'name': self.meta[i].name
+                    'id': self.meta[i].id if self.meta[i].id is not None else "unknown",
+                    'name': self.meta[i].name if self.meta[i].name is not None else "unknown"
                     ***REMOVED*** for i in self.meta
                 ***REMOVED***
             # Actually I think I can just getattr instead, getattr(discord, type)
