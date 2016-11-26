@@ -132,6 +132,14 @@ class URLPlaylistEntry(BasePlaylistEntry):
         return URLPlaylistEntry (playlist, url, title, duration, filename, **meta)
 
     def to_json(self):
+        meta_dict = ***REMOVED******REMOVED***
+        for i in self.meta:
+            if i is None or self.meta [i] is None:
+                continue
+
+            meta_dict [i] = ***REMOVED***'type': self.meta[i].__class__.__name__, 'id': self.meta[i].id, 'name': self.meta[i].name***REMOVED***
+
+
         data = ***REMOVED***
             'version': 1,
             'type': self.__class__.__name__,
@@ -141,13 +149,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
             'downloaded': self.is_downloaded,
             'filename': self.filename,
             "expected_filename": self.expected_filename,
-            'meta': ***REMOVED***
-                i: ***REMOVED***
-                    'type': self.meta[i].__class__.__name__,
-                    'id': self.meta[i].id,
-                    'name': self.meta[i].name
-                    ***REMOVED*** for i in self.meta if i is not None
-                ***REMOVED***
+            'meta': meta_dict
             # Actually I think I can just getattr instead, getattr(discord, type)
         ***REMOVED***
         return json.dumps(data, indent=2)
