@@ -17,6 +17,7 @@ import operator
 import newspaper
 import urllib
 import wikipedia
+import enchant
 
 from discord import utils
 from discord.object import Object
@@ -38,6 +39,7 @@ from musicbot.papers import Papers
 from musicbot.permissions import Permissions, PermissionsDefaults
 from musicbot.utils import load_file, write_file, sane_round_int
 from musicbot.games.game_2048 import Game2048
+from musicbot.games.game_hangman import GameHangman
 from musicbot.nine_gag import *
 from musicbot.saved_playlists import Playlists
 
@@ -2539,6 +2541,9 @@ class MusicBot(discord.Client):
         await self.send_file (channel, game.getImage (cache_location) + ".gif", content = "**2048**\nYour replay:")
         await self.safe_delete_message (msg)
 
+    async def gHangman (self, author, channel, word):
+        game = GameHangman (word)
+
     @owner_only
     async def cmd_getemojicode (self, channel, message, emoji = ""):
         """
@@ -2870,7 +2875,7 @@ class MusicBot(discord.Client):
     async def cmd_addplayingtoplaylist(self, channel, author, player, playlistname = None):
         """
         Usage:
-            {command_prefix}saveplayingtoplaylist playlistname
+            {command_prefix}addplayingtoplaylist playlistname
 
         Add the current entry to a playlist
         """
