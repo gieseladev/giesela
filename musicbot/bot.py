@@ -17,7 +17,6 @@ import operator
 import newspaper
 import urllib
 import wikipedia
-import enchant
 
 from discord import utils
 from discord.object import Object
