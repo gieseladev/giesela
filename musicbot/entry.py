@@ -124,7 +124,10 @@ class URLPlaylistEntry(BasePlaylistEntry):
             meta['channel'] = ch or data['meta']['channel']['name']
 
         if 'author' in data['meta']:
-            meta['author'] = meta['channel'].server.get_member(data['meta']['author']['id'])
+            try:
+                meta['author'] = meta['channel'].server.get_member(data['meta']['author']['id'])
+            except:
+                meta['author'] = "unknown"
 
         return URLPlaylistEntry (playlist, url, title, duration, filename, **meta)
 
@@ -141,9 +144,9 @@ class URLPlaylistEntry(BasePlaylistEntry):
             'meta': {
                 i: {
                     'type': self.meta[i].__class__.__name__,
-                    'id': self.meta[i].id if self.meta[i] is not None else "unknown",
-                    'name': self.meta[i].name if self.meta[i] is not None else "unknown"
-                    } for i in self.meta
+                    'id': self.meta[i].id,
+                    'name': self.meta[i].name
+                    } for i in self.meta if i is not None
                 }
             # Actually I think I can just getattr instead, getattr(discord, type)
         }
