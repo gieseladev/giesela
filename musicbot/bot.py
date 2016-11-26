@@ -2685,7 +2685,7 @@ class MusicBot(discord.Client):
         """
 
         argument = leftover_args [0] if len (leftover_args) > 0 else None
-        savename = leftover_args [1] if len (leftover_args) > 1 else ""
+        savename = leftover_args [1].lower () if len (leftover_args) > 1 else ""
         load_mode = leftover_args [2] if len (leftover_args) > 2 else "add"
         additional_args = leftover_args [3:] if len (leftover_args) > 3 else None
 
@@ -2878,6 +2878,8 @@ class MusicBot(discord.Client):
         if playlistname is None:
             return Response ("Please specify the playlist's name!", delete_after = 20)
 
+        playlistname = playlistname.lower ()
+
         if not player.current_entry:
             return Response ("There's nothing playing right now so I can't add it to your playlist...")
 
@@ -2900,6 +2902,8 @@ class MusicBot(discord.Client):
 
         if playlistname is None:
             return Response ("Please specify the playlist's name!", delete_after = 20)
+
+        playlistname = playlistname.lower ()
 
         if not player.current_entry:
             return Response ("There's nothing playing right now so I can't add it to your playlist...")

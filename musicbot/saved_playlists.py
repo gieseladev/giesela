@@ -55,9 +55,6 @@ class Playlists:
         return playlist_informations
 
     def set_playlist (self, entries, name, author_id):
-        if len (entries) < 1:
-            return False
-
         try:
             with open (self.playlist_save_location + str (name) + ".txt", "w") as f:
                 f.write ("\n;\n".join ([entry.to_json () for entry in entries]))
