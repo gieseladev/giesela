@@ -11,4 +11,3 @@ newspaper3k
 pillow
 moviepy
 wikipedia
-pyenchant
