@@ -2685,7 +2685,7 @@ class MusicBot(discord.Client):
         """
 
         argument = leftover_args [0] if len (leftover_args) > 0 else None
-        savename = leftover_args [1] if len (leftover_args) > 1 else ""
+        savename = leftover_args [1].lower () if len (leftover_args) > 1 else ""
         load_mode = leftover_args [2] if len (leftover_args) > 2 else "add"
         additional_args = leftover_args [3:] if len (leftover_args) > 3 else None
 
@@ -2733,7 +2733,7 @@ class MusicBot(discord.Client):
 
             for pl in self.playlists.saved_playlists:
                 infos = self.playlists.get_playlist (pl, player.playlist)
-                response_text += "  ***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n".format (iteration, pl, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y")
+                response_text += "  ***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n".format (iteration, pl.title (), server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y")
                 iteration += 1
 
             #self.safe_print (response_text)
@@ -2758,7 +2758,7 @@ class MusicBot(discord.Client):
                 entries_text += str (i + 1) + ". " +  entries [i].title + "\n"
 
             minutes, seconds = divmod (sum ([x.duration for x in entries]), 60)
-            response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n*playtime: ***REMOVED******REMOVED*** min ***REMOVED******REMOVED*** sec*\n\n***REMOVED******REMOVED***\n```\nTo edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"```".format (argument, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y", minutes, seconds, entries_text, self.config.command_prefix, argument)
+            response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n*playtime: ***REMOVED******REMOVED*** min ***REMOVED******REMOVED*** sec*\n\n***REMOVED******REMOVED***\n```\nTo edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"```".format (argument.title (), server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y", minutes, seconds, entries_text, self.config.command_prefix, argument)
             return Response (response_text, reply = True, delete_after = 40)
 
         return await self.cmd_help(channel, ["playlist"])
@@ -2800,7 +2800,7 @@ class MusicBot(discord.Client):
 
             minutes, seconds = divmod (sum ([x.duration for x in entries]), 60)
 
-            interface_message = await self.safe_send_message (channel, interface_string.format (savename, server.get_member (playlist ["author"]).mention, playlist ["entry_count"], "s" if int (playlist ["entry_count"]) is not 1 else "", minutes, seconds, entries_text, self.config.command_prefix))
+            interface_message = await self.safe_send_message (channel, interface_string.format (savename.title (), server.get_member (playlist ["author"]).mention, playlist ["entry_count"], "s" if int (playlist ["entry_count"]) is not 1 else "", minutes, seconds, entries_text, self.config.command_prefix))
             response_message = await self.wait_for_message (500, author=author, channel=channel, check=check)
 
             if not response_message:
@@ -2878,6 +2878,8 @@ class MusicBot(discord.Client):
         if playlistname is None:
             return Response ("Please specify the playlist's name!", delete_after = 20)
 
+        playlistname = playlistname.lower ()
+
         if not player.current_entry:
             return Response ("There's nothing playing right now so I can't add it to your playlist...")
 
@@ -2900,6 +2902,8 @@ class MusicBot(discord.Client):
 
         if playlistname is None:
             return Response ("Please specify the playlist's name!", delete_after = 20)
+
+        playlistname = playlistname.lower ()
 
         if not player.current_entry:
             return Response ("There's nothing playing right now so I can't add it to your playlist...")
