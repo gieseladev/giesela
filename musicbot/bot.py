@@ -2733,7 +2733,7 @@ class MusicBot(discord.Client):
 
             for pl in self.playlists.saved_playlists:
                 infos = self.playlists.get_playlist (pl, player.playlist)
-                response_text += "  {}. \"{}\" added by *{}* with {} entr{}\n".format (iteration, pl, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y")
+                response_text += "  {}. \"{}\" added by *{}* with {} entr{}\n".format (iteration, pl.title (), server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y")
                 iteration += 1
 
             #self.safe_print (response_text)
@@ -2758,7 +2758,7 @@ class MusicBot(discord.Client):
                 entries_text += str (i + 1) + ". " +  entries [i].title + "\n"
 
             minutes, seconds = divmod (sum ([x.duration for x in entries]), 60)
-            response_text = "\"{}\" added by *{}* with {} entr{}\n*playtime: {} min {} sec*\n\n{}\n```\nTo edit this playlist type \"{}playlist builder {}\"```".format (argument, server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y", minutes, seconds, entries_text, self.config.command_prefix, argument)
+            response_text = "\"{}\" added by *{}* with {} entr{}\n*playtime: {} min {} sec*\n\n{}\n```\nTo edit this playlist type \"{}playlist builder {}\"```".format (argument.title (), server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y", minutes, seconds, entries_text, self.config.command_prefix, argument)
             return Response (response_text, reply = True, delete_after = 40)
 
         return await self.cmd_help(channel, ["playlist"])
@@ -2800,7 +2800,7 @@ class MusicBot(discord.Client):
 
             minutes, seconds = divmod (sum ([x.duration for x in entries]), 60)
 
-            interface_message = await self.safe_send_message (channel, interface_string.format (savename, server.get_member (playlist ["author"]).mention, playlist ["entry_count"], "s" if int (playlist ["entry_count"]) is not 1 else "", minutes, seconds, entries_text, self.config.command_prefix))
+            interface_message = await self.safe_send_message (channel, interface_string.format (savename.title (), server.get_member (playlist ["author"]).mention, playlist ["entry_count"], "s" if int (playlist ["entry_count"]) is not 1 else "", minutes, seconds, entries_text, self.config.command_prefix))
             response_message = await self.wait_for_message (500, author=author, channel=channel, check=check)
 
             if not response_message:
