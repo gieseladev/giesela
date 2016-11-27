@@ -1,0 +1,95 @@
+***REMOVED***
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=a7SouU3ECpU",
+  "meta": ***REMOVED******REMOVED***,
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "duration": 294,
+  "expected_filename": "audio_cache\\youtube-a7SouU3ECpU-Alesso_-_Heroes_we_could_be_ft._Tove_Lo.webm",
+  "filename": null,
+  "title": "Alesso - Heroes (we could be) ft. Tove Lo"
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=XC3ahd6Di3M",
+  "meta": ***REMOVED******REMOVED***,
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "duration": 219,
+  "expected_filename": "audio_cache\\youtube-XC3ahd6Di3M-U2_-_Ordinary_Love_From_Mandela_OST_Lyric_Video.webm",
+  "filename": null,
+  "title": "U2 - Ordinary Love (From Mandela OST) Lyric Video"
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=JwQZQygg3Lk",
+  "meta": ***REMOVED******REMOVED***,
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "duration": 313,
+  "expected_filename": "audio_cache\\youtube-JwQZQygg3Lk-The_Black_Eyed_Peas_-_The_Time_Dirty_Bit.webm",
+  "filename": null,
+  "title": "The Black Eyed Peas - The Time (Dirty Bit)"
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=GNgpTJFa1ws",
+  "meta": ***REMOVED******REMOVED***,
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "duration": 259,
+  "expected_filename": "audio_cache\\youtube-GNgpTJFa1ws-Just_So_You_Know.webm",
+  "filename": null,
+  "title": "Just So You Know"
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=8WYHDfJDPDc",
+  "meta": ***REMOVED******REMOVED***,
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "duration": 283,
+  "expected_filename": "audio_cache\\youtube-8WYHDfJDPDc-Nelly_-_Dilemma_ft._Kelly_Rowland.webm",
+  "filename": null,
+  "title": "Nelly - Dilemma ft. Kelly Rowland"
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Xq-knHXSKYY",
+  "meta": ***REMOVED******REMOVED***,
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "duration": 253,
+  "expected_filename": "audio_cache\\youtube-Xq-knHXSKYY-Avicii_-_For_A_Better_Day.webm",
+  "filename": null,
+  "title": "Avicii - For A Better Day"
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=oh2LWWORoiM",
+  "meta": ***REMOVED******REMOVED***,
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "duration": 208,
+  "expected_filename": "audio_cache\\youtube-oh2LWWORoiM-Tove_Lo_-_Habits_Stay_High.webm",
+  "filename": null,
+  "title": "Tove Lo - Habits (Stay High)"
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=CX0TL7gPFMw",
+  "meta": ***REMOVED******REMOVED***,
+  "downloaded": true,
+  "type": "URLPlaylistEntry",
+  "duration": 189,
+  "expected_filename": "audio_cache\\youtube-CX0TL7gPFMw-This_Is_Me_From_Camp_Rock.webm",
+  "filename": "audio_cache\\youtube-CX0TL7gPFMw-This_Is_Me_From_Camp_Rock.webm",
+  "title": "This Is Me (From \"Camp Rock\")"
+***REMOVED***
