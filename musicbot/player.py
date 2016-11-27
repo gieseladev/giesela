@@ -128,6 +128,7 @@ class MusicPlayer(EventEmitter):
             self.loop.call_later(2, self.play)
 
     def skip(self):
+        self.skipRepeat = True
         self._kill_current_player()
 
     def repeat(self):

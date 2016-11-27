@@ -41,6 +41,24 @@ def sane_round_int(x):
     return int(decimal.Decimal(x).quantize(1, rounding=decimal.ROUND_HALF_UP))
 
 
+def format_time (s):
+    minutes, seconds = divmod (s, 60)
+    hours, minutes = divmod (minutes, 60)
+    days, hours = divmod (hours, 24)
+
+    return_list = []
+    if days > 0:
+        return_list.append ("{} day{}".format (days, "s" if days is not 1 else ""))
+    if hours > 0:
+        return_list.append ("{} hour{}".format (hours, "s" if hours is not 1 else ""))
+    if minutes > 0:
+        return_list.append ("{} minute{}".format (minutes, "s" if minutes is not 1 else ""))
+    if seconds > 0 or s is 0:
+        return_list.append ("{} second{}".format (seconds, "s" if seconds is not 1 else ""))
+
+    return " ".join (return_list)
+
+
 def paginate(content, *, length=DISCORD_MSG_CHAR_LIMIT, reserve=0):
     """
     Split up a large string or list of strings into chunks for sending to discord.
