@@ -2468,7 +2468,8 @@ class MusicBot(discord.Client):
 
         WIP
         """
-        await self.g2048 (author, channel, int (size))
+        await self.gHangman (author, channel, choice (["Stomach", "Cow", "Mother", "Death", "Fun", "House", "MusicBot", "Hair", "Father", "Rowlet", "Brain", "Acid", "illfated", "act", "maddening", "zesty", "improve", "strange", "mushy", "shivering", "spicy", "nondescript", "sun", "cause", "system", "exchange", "lunchroom", "rod", "incompetent", "squirrel", "parallel", "program", "rule", "electric", "pull", "guarded", "cherry", "ragged", "run", "slip", "practise", "near", "decisive", "explain", "calculate", "treat", "name", "book", "gate", "poke", "null", "tie", "purple", "unite", "mine", "clever", "toothbrush", "lewd", "expansion", "step", "courageous", "grouchy", "berry", "dance", "experience", "accept", "thrill", "heat", "attack", "line", "fair", "resolute", "desk", "brown", "mountainous", "nose", "chilly", "thirsty", "scarf", "sign", "fork", "hapless", "infamous", "wilderness", "shape", "spark", "jellyfish", "industry", "loss", "abrasive", "twig", "lonely", "far", "uptight", "brake", "deserve", "excited", "knotty", "truthful", "day", "voice", "radiate", "throne", "loutish", "hydrant", "spare", "sleep", "makeshift", "advise", "thought", "sleet", "wrist"]), 10)
+        #await self.g2048 (author, channel, int (size))
 
     async def g2048 (self, author, channel, size):
         game = Game2048 (size)
@@ -2540,8 +2541,38 @@ class MusicBot(discord.Client):
         await self.send_file (channel, game.getImage (cache_location) + ".gif", content = "**2048**\nYour replay:")
         await self.safe_delete_message (msg)
 
-    async def gHangman (self, author, channel, word):
-        game = GameHangman (word)
+    async def gHangman (self, author, channel, word, tries = 10):
+        alphabet = list ("abcdefghijklmnopqrstuvwxyz")
+
+        game = GameHangman (word, tries)
+        running = True
+
+        def check (m):
+            return (m.content.lower () in alphabet or m.content.lower () is "exit")
+
+        while running:
+            current_status = game.get_beautified_string ()
+            msg = await self.safe_send_message (channel, "**Hangman**\n****REMOVED******REMOVED*** tries left*\n\n***REMOVED******REMOVED***\n\n`Send the letter you want to guess or type \"exit\" to exit.`".format (game.tries_left, current_status))
+            response = await self.wait_for_message (author=author, channel=channel, check=check)
+
+            if not response or response.content.startswith (self.config.command_prefix) or response.content.lower ().startswith ('exit'):
+                await self.safe_delete_message (msg)
+                await self.safe_send_message (channel, "Aborting this Hangman game. Thanks for playing!")
+                running = False
+
+            letter = response.content [0]
+            game.guess (letter)
+
+            if game.won:
+                await self.safe_delete_message (msg)
+                await self.safe_send_message (channel, "Congratulations, you got it!\nThe word is: ****REMOVED******REMOVED****".format (word))
+                running = False
+
+            if game.lost:
+                await self.safe_delete_message (msg)
+                await self.safe_send_message (channel, "You lost!")
+                running = False
+
 
     @owner_only
     async def cmd_getemojicode (self, channel, message, emoji = ""):
@@ -2753,8 +2784,8 @@ class MusicBot(discord.Client):
             response = await self.playlist_builder (channel, author, server, player, savename)
             return response
 
-        elif argument in self.playlists.saved_playlists:
-            infos = self.playlists.get_playlist (argument, player.playlist)
+        elif argument.lower () in self.playlists.saved_playlists:
+            infos = self.playlists.get_playlist (argument.lower (), player.playlist)
 
             entries_text = ""
             entries = infos ["entries"]
@@ -2782,7 +2813,7 @@ class MusicBot(discord.Client):
         pl_changes = ***REMOVED***"remove_entries_indexes" : [], "new_entries" : [], "new_name" : None***REMOVED***
         savename = _savename
 
-        interface_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED*** min and ***REMOVED******REMOVED*** sec)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add`: Add a song to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
+        interface_string = "*****REMOVED***0***REMOVED***** by ****REMOVED***1***REMOVED**** (***REMOVED***2***REMOVED*** song***REMOVED***3***REMOVED*** with a total length of ***REMOVED***4***REMOVED*** hour***REMOVED***3***REMOVED*** ***REMOVED***5***REMOVED*** minute***REMOVED***3***REMOVED*** and ***REMOVED***6***REMOVED*** second***REMOVED***3***REMOVED***)\n\n***REMOVED***7***REMOVED***\n\n**You can use the following commands:**\n`add`: Add a song to the playlist (this command works like the normal `***REMOVED***8***REMOVED***play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
 
         playlist = self.playlists.get_playlist (_savename, player.playlist)
 
@@ -2803,8 +2834,9 @@ class MusicBot(discord.Client):
             entries_text += "\nPage ***REMOVED******REMOVED*** of ***REMOVED******REMOVED***".format (entries_page + 1, iterations + 1)
 
             minutes, seconds = divmod (sum ([x.duration for x in entries]), 60)
+            hours, minutes = divmod (minutes, 60)
 
-            interface_message = await self.safe_send_message (channel, interface_string.format (savename.title (), server.get_member (playlist ["author"]).mention, playlist ["entry_count"], "s" if int (playlist ["entry_count"]) is not 1 else "", minutes, seconds, entries_text, self.config.command_prefix))
+            interface_message = await self.safe_send_message (channel, interface_string.format (savename.title (), server.get_member (playlist ["author"]).mention, playlist ["entry_count"], "s" if int (playlist ["entry_count"]) is not 1 else "", hours, minutes, seconds, entries_text, self.config.command_prefix))
             response_message = await self.wait_for_message (500, author=author, channel=channel, check=check)
 
             if not response_message:

@@ -22,13 +22,15 @@ class GameHangman:
         letter = letter.lower ()
 
         if letter in self.word:
-            self.right_letters.append (letter)
-            return True
+            if letter not in self.right_letters:
+                self.right_letters.append (letter)
+                return True
         else:
-            self.wrong_letters.append (letter)
-            return False
+            if letter not in self.wrong_letters:
+                self.wrong_letters.append (letter)
+                self.tries += 1
+                return False
 
-        self.tries += 1
 
     def get_beautified_string (self):
-        return " ".join ([letter if letter in self.right_letters else "_" for letter in self.word])
+        return " ".join ([letter if letter in self.right_letters else "\_" for letter in list (self.word)])
