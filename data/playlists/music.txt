@@ -1,95 +1,294 @@
 {
-  "version": 1,
   "url": "https://www.youtube.com/watch?v=a7SouU3ECpU",
-  "meta": {},
-  "downloaded": false,
   "type": "URLPlaylistEntry",
   "duration": 294,
-  "expected_filename": "audio_cache\\youtube-a7SouU3ECpU-Alesso_-_Heroes_we_could_be_ft._Tove_Lo.webm",
+  "downloaded": false,
+  "title": "Alesso - Heroes (we could be) ft. Tove Lo",
   "filename": null,
-  "title": "Alesso - Heroes (we could be) ft. Tove Lo"
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-a7SouU3ECpU-Alesso_-_Heroes_we_could_be_ft._Tove_Lo.webm"
 }
 ;
 {
-  "version": 1,
   "url": "https://www.youtube.com/watch?v=XC3ahd6Di3M",
-  "meta": {},
-  "downloaded": false,
   "type": "URLPlaylistEntry",
   "duration": 219,
-  "expected_filename": "audio_cache\\youtube-XC3ahd6Di3M-U2_-_Ordinary_Love_From_Mandela_OST_Lyric_Video.webm",
+  "downloaded": false,
+  "title": "U2 - Ordinary Love (From Mandela OST) Lyric Video",
   "filename": null,
-  "title": "U2 - Ordinary Love (From Mandela OST) Lyric Video"
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-XC3ahd6Di3M-U2_-_Ordinary_Love_From_Mandela_OST_Lyric_Video.webm"
 }
 ;
 {
-  "version": 1,
   "url": "https://www.youtube.com/watch?v=JwQZQygg3Lk",
-  "meta": {},
-  "downloaded": false,
   "type": "URLPlaylistEntry",
   "duration": 313,
-  "expected_filename": "audio_cache\\youtube-JwQZQygg3Lk-The_Black_Eyed_Peas_-_The_Time_Dirty_Bit.webm",
+  "downloaded": false,
+  "title": "The Black Eyed Peas - The Time (Dirty Bit)",
   "filename": null,
-  "title": "The Black Eyed Peas - The Time (Dirty Bit)"
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-JwQZQygg3Lk-The_Black_Eyed_Peas_-_The_Time_Dirty_Bit.webm"
 }
 ;
 {
-  "version": 1,
   "url": "https://www.youtube.com/watch?v=GNgpTJFa1ws",
-  "meta": {},
-  "downloaded": false,
   "type": "URLPlaylistEntry",
   "duration": 259,
-  "expected_filename": "audio_cache\\youtube-GNgpTJFa1ws-Just_So_You_Know.webm",
+  "downloaded": false,
+  "title": "Just So You Know",
   "filename": null,
-  "title": "Just So You Know"
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-GNgpTJFa1ws-Just_So_You_Know.webm"
 }
 ;
 {
-  "version": 1,
   "url": "https://www.youtube.com/watch?v=8WYHDfJDPDc",
-  "meta": {},
-  "downloaded": false,
   "type": "URLPlaylistEntry",
   "duration": 283,
-  "expected_filename": "audio_cache\\youtube-8WYHDfJDPDc-Nelly_-_Dilemma_ft._Kelly_Rowland.webm",
+  "downloaded": false,
+  "title": "Nelly - Dilemma ft. Kelly Rowland",
   "filename": null,
-  "title": "Nelly - Dilemma ft. Kelly Rowland"
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-8WYHDfJDPDc-Nelly_-_Dilemma_ft._Kelly_Rowland.webm"
 }
 ;
 {
-  "version": 1,
   "url": "https://www.youtube.com/watch?v=Xq-knHXSKYY",
-  "meta": {},
-  "downloaded": false,
   "type": "URLPlaylistEntry",
   "duration": 253,
-  "expected_filename": "audio_cache\\youtube-Xq-knHXSKYY-Avicii_-_For_A_Better_Day.webm",
+  "downloaded": false,
+  "title": "Avicii - For A Better Day",
   "filename": null,
-  "title": "Avicii - For A Better Day"
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-Xq-knHXSKYY-Avicii_-_For_A_Better_Day.webm"
 }
 ;
 {
-  "version": 1,
   "url": "https://www.youtube.com/watch?v=oh2LWWORoiM",
-  "meta": {},
-  "downloaded": false,
   "type": "URLPlaylistEntry",
   "duration": 208,
-  "expected_filename": "audio_cache\\youtube-oh2LWWORoiM-Tove_Lo_-_Habits_Stay_High.webm",
+  "downloaded": false,
+  "title": "Tove Lo - Habits (Stay High)",
   "filename": null,
-  "title": "Tove Lo - Habits (Stay High)"
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-oh2LWWORoiM-Tove_Lo_-_Habits_Stay_High.webm"
 }
 ;
 {
-  "version": 1,
   "url": "https://www.youtube.com/watch?v=CX0TL7gPFMw",
-  "meta": {},
-  "downloaded": true,
   "type": "URLPlaylistEntry",
   "duration": 189,
-  "expected_filename": "audio_cache\\youtube-CX0TL7gPFMw-This_Is_Me_From_Camp_Rock.webm",
-  "filename": "audio_cache\\youtube-CX0TL7gPFMw-This_Is_Me_From_Camp_Rock.webm",
-  "title": "This Is Me (From \"Camp Rock\")"
+  "downloaded": false,
+  "title": "This Is Me (From \"Camp Rock\")",
+  "filename": null,
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-CX0TL7gPFMw-This_Is_Me_From_Camp_Rock.webm"
+}
+;
+{
+  "url": "https://www.youtube.com/watch?v=2i2khp_npdE",
+  "type": "URLPlaylistEntry",
+  "duration": 192,
+  "downloaded": false,
+  "title": "Alan Walker - Sing Me To Sleep",
+  "filename": null,
+  "meta": {
+    "author": {
+      "name": "siku2",
+      "type": "Member",
+      "id": "203302899277627392"
+    },
+    "channel": {
+      "name": "musicbot",
+      "type": "Channel",
+      "id": "226402503422509058"
+    }
+  },
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-2i2khp_npdE-Alan_Walker_-_Sing_Me_To_Sleep.webm"
+}
+;
+{
+  "url": "https://www.youtube.com/watch?v=CfihYWRWRTQ",
+  "type": "URLPlaylistEntry",
+  "duration": 235,
+  "downloaded": false,
+  "title": "John Newman - Love Me Again",
+  "filename": null,
+  "meta": {
+    "author": {
+      "name": "siku2",
+      "type": "Member",
+      "id": "203302899277627392"
+    },
+    "channel": {
+      "name": "musicbot",
+      "type": "Channel",
+      "id": "226402503422509058"
+    }
+  },
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-CfihYWRWRTQ-John_Newman_-_Love_Me_Again.webm"
+}
+;
+{
+  "url": "https://www.youtube.com/watch?v=4ht80uzIhNs",
+  "type": "URLPlaylistEntry",
+  "duration": 214,
+  "downloaded": false,
+  "title": "Imagine Dragons - I Bet My Life",
+  "filename": null,
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-4ht80uzIhNs-Imagine_Dragons_-_I_Bet_My_Life.webm"
+}
+;
+{
+  "url": "https://www.youtube.com/watch?v=rp4UwPZfRis",
+  "type": "URLPlaylistEntry",
+  "duration": 295,
+  "downloaded": false,
+  "title": "Rihanna - Unfaithful",
+  "filename": null,
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-rp4UwPZfRis-Rihanna_-_Unfaithful.webm"
+}
+;
+{
+  "url": "https://www.youtube.com/watch?v=TOrnUquxtwA",
+  "type": "URLPlaylistEntry",
+  "duration": 561,
+  "downloaded": false,
+  "title": "Justin Timberlake - What Goes Around...Comes Around",
+  "filename": null,
+  "meta": {
+    "author": {
+      "name": "siku2",
+      "type": "Member",
+      "id": "203302899277627392"
+    },
+    "channel": {
+      "name": "musicbot",
+      "type": "Channel",
+      "id": "226402503422509058"
+    }
+  },
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-TOrnUquxtwA-Justin_Timberlake_-_What_Goes_Around...Comes_Around.webm"
+}
+;
+{
+  "url": "https://www.youtube.com/watch?v=nlR0MkrRklg",
+  "type": "URLPlaylistEntry",
+  "duration": 340,
+  "downloaded": false,
+  "title": "Ariana Grande - Santa Tell Me",
+  "filename": null,
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-nlR0MkrRklg-Ariana_Grande_-_Santa_Tell_Me.webm"
+}
+;
+{
+  "url": "https://www.youtube.com/watch?v=WpYeekQkAdc",
+  "type": "URLPlaylistEntry",
+  "duration": 252,
+  "downloaded": false,
+  "title": "The Black Eyed Peas - Where Is The Love?",
+  "filename": null,
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-WpYeekQkAdc-The_Black_Eyed_Peas_-_Where_Is_The_Love.webm"
+}
+;
+{
+  "url": "https://www.youtube.com/watch?v=oh2LWWORoiM",
+  "type": "URLPlaylistEntry",
+  "duration": 208,
+  "downloaded": false,
+  "title": "Tove Lo - Habits (Stay High)",
+  "filename": null,
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-oh2LWWORoiM-Tove_Lo_-_Habits_Stay_High.webm"
+}
+;
+{
+  "url": "https://www.youtube.com/watch?v=xSaLtRksFlM",
+  "type": "URLPlaylistEntry",
+  "duration": 169,
+  "downloaded": false,
+  "title": "Vexento - Pixel Party",
+  "filename": null,
+  "meta": {
+    "author": {
+      "name": "siku2",
+      "type": "Member",
+      "id": "203302899277627392"
+    },
+    "channel": {
+      "name": "musicbot",
+      "type": "Channel",
+      "id": "226402503422509058"
+    }
+  },
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-xSaLtRksFlM-Vexento_-_Pixel_Party.webm"
+}
+;
+{
+  "url": "https://www.youtube.com/watch?v=6JCLY0Rlx6Q",
+  "type": "URLPlaylistEntry",
+  "duration": 246,
+  "downloaded": false,
+  "title": "WALK THE MOON - Shut Up and Dance",
+  "filename": null,
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-6JCLY0Rlx6Q-WALK_THE_MOON_-_Shut_Up_and_Dance.webm"
+}
+;
+{
+  "url": "https://www.youtube.com/watch?v=e12KryuLcbs",
+  "type": "URLPlaylistEntry",
+  "duration": 310,
+  "downloaded": false,
+  "title": "The Vamps - Wake Up",
+  "filename": null,
+  "meta": {},
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-e12KryuLcbs-The_Vamps_-_Wake_Up.webm"
+}
+;
+{
+  "url": "https://www.youtube.com/watch?v=_ovdm2yX4MA",
+  "type": "URLPlaylistEntry",
+  "duration": 198,
+  "downloaded": true,
+  "title": "Avicii - Levels",
+  "filename": "audio_cache\\youtube-_ovdm2yX4MA-Avicii_-_Levels.webm",
+  "meta": {
+    "author": {
+      "name": "siku2",
+      "type": "Member",
+      "id": "203302899277627392"
+    },
+    "channel": {
+      "name": "musicbot",
+      "type": "Channel",
+      "id": "226402503422509058"
+    }
+  },
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-_ovdm2yX4MA-Avicii_-_Levels.webm"
 }
