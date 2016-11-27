@@ -36,7 +36,7 @@ from musicbot.player import MusicPlayer
 from musicbot.config import Config, ConfigDefaults
 from musicbot.papers import Papers
 from musicbot.permissions import Permissions, PermissionsDefaults
-from musicbot.utils import load_file, write_file, sane_round_int
+from musicbot.utils import load_file, write_file, sane_round_int, format_time
 from musicbot.games.game_2048 import Game2048
 from musicbot.games.game_hangman import GameHangman
 from musicbot.nine_gag import *
@@ -2565,14 +2565,18 @@ class MusicBot(discord.Client):
 
             if game.won:
                 await self.safe_delete_message (msg)
+                await self.safe_delete_message (response)
                 await self.safe_send_message (channel, "Congratulations, you got it!\nThe word is: ****REMOVED******REMOVED****".format (word))
                 running = False
 
             if game.lost:
                 await self.safe_delete_message (msg)
+                await self.safe_delete_message (response)
                 await self.safe_send_message (channel, "You lost!")
                 running = False
 
+            await self.safe_delete_message (msg)
+            await self.safe_delete_message (response)
 
     @owner_only
     async def cmd_getemojicode (self, channel, message, emoji = ""):
@@ -2724,7 +2728,7 @@ class MusicBot(discord.Client):
         load_mode = leftover_args [2] if len (leftover_args) > 2 else "add"
         additional_args = leftover_args [3:] if len (leftover_args) > 3 else None
 
-        forbidden_savenames = ["showall", "savename", "save", "load", "delete", "builder"]
+        forbidden_savenames = ["showall", "savename", "save", "load", "delete", "builder", "extras","add", "remove", "save", "exit"]
 
         if argument == "save":
             if savename in self.playlists.saved_playlists:
@@ -2768,7 +2772,7 @@ class MusicBot(discord.Client):
 
             for pl in self.playlists.saved_playlists:
                 infos = self.playlists.get_playlist (pl, player.playlist)
-                response_text += "  ***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n".format (iteration, pl.title (), server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y")
+                response_text += "  ***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED*** and a playtime of ***REMOVED******REMOVED***\n".format (iteration, pl.title (), server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y", format_time (sum ([x.duration for x in infos ["entries"]])))
                 iteration += 1
 
             #self.safe_print (response_text)
@@ -2792,8 +2796,7 @@ class MusicBot(discord.Client):
             for i in range (len (entries)):
                 entries_text += str (i + 1) + ". " +  entries [i].title + "\n"
 
-            minutes, seconds = divmod (sum ([x.duration for x in entries]), 60)
-            response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n*playtime: ***REMOVED******REMOVED*** min ***REMOVED******REMOVED*** sec*\n\n***REMOVED******REMOVED***\n```\nTo edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"```".format (argument.title (), server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y", minutes, seconds, entries_text, self.config.command_prefix, argument)
+            response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n*playtime: ***REMOVED******REMOVED****\n\n***REMOVED******REMOVED***\n```\nTo edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"```".format (argument.title (), server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y", format_time (sum ([x.duration for x in entries])), entries_text, self.config.command_prefix, argument)
             return Response (response_text, reply = True, delete_after = 40)
 
         return await self.cmd_help(channel, ["playlist"])
@@ -2804,7 +2807,7 @@ class MusicBot(discord.Client):
 
         def check(m):
             return (
-                        m.content.split () [0] in ["add", "remove", "rename", "exit", "p", "n", "save"]
+                        m.content.split () [0] in ["add", "remove", "rename", "exit", "p", "n", "save", "extras"]
                     )
 
         abort = False
@@ -2813,7 +2816,8 @@ class MusicBot(discord.Client):
         pl_changes = ***REMOVED***"remove_entries_indexes" : [], "new_entries" : [], "new_name" : None***REMOVED***
         savename = _savename
 
-        interface_string = "*****REMOVED***0***REMOVED***** by ****REMOVED***1***REMOVED**** (***REMOVED***2***REMOVED*** song***REMOVED***3***REMOVED*** with a total length of ***REMOVED***4***REMOVED*** hour***REMOVED***3***REMOVED*** ***REMOVED***5***REMOVED*** minute***REMOVED***3***REMOVED*** and ***REMOVED***6***REMOVED*** second***REMOVED***3***REMOVED***)\n\n***REMOVED***7***REMOVED***\n\n**You can use the following commands:**\n`add`: Add a song to the playlist (this command works like the normal `***REMOVED***8***REMOVED***play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
+        interface_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add`: Add a song to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n`extras`: view the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
+        extras_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n**Extra functions:**\n`sort [alphabetical, length, random]`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n\n`abort`: return to main screen"
 
         playlist = self.playlists.get_playlist (_savename, player.playlist)
 
@@ -2833,25 +2837,22 @@ class MusicBot(discord.Client):
                 entries_text += str (i + 1) + ". " +  entries [i].title + "\n"
             entries_text += "\nPage ***REMOVED******REMOVED*** of ***REMOVED******REMOVED***".format (entries_page + 1, iterations + 1)
 
-            minutes, seconds = divmod (sum ([x.duration for x in entries]), 60)
-            hours, minutes = divmod (minutes, 60)
-
-            interface_message = await self.safe_send_message (channel, interface_string.format (savename.title (), server.get_member (playlist ["author"]).mention, playlist ["entry_count"], "s" if int (playlist ["entry_count"]) is not 1 else "", hours, minutes, seconds, entries_text, self.config.command_prefix))
-            response_message = await self.wait_for_message (500, author=author, channel=channel, check=check)
+            interface_message = await self.safe_send_message (channel, interface_string.format (savename.title (), server.get_member (playlist ["author"]).mention, playlist ["entry_count"], "s" if int (playlist ["entry_count"]) is not 1 else "", format_time (sum ([x.duration for x in entries])), entries_text, self.config.command_prefix))
+            response_message = await self.wait_for_message (author=author, channel=channel, check=check)
 
             if not response_message:
                 await self.safe_delete_message(interface_message)
                 abort = True
                 break
 
-            elif response_message.content.startswith(self.config.command_prefix) or \
+            elif response_message.content.lower ().startswith(self.config.command_prefix) or \
                     response_message.content.lower().startswith('exit'):
                 abort = True
 
-            elif response_message.content.startswith("save"):
+            elif response_message.content.lower ().startswith("save"):
                 save = True
 
-            split_message = response_message.content.split ()
+            split_message = response_message.content.lower ().split ()
             arguments = split_message [1:] if len (split_message) > 1 else None
 
             if response_message.content.lower().startswith("add"):
@@ -2883,6 +2884,49 @@ class MusicBot(discord.Client):
                 if arguments is not None and len (arguments [0]) >= 3 and arguments [0] not in self.playlists.saved_playlists:
                     pl_changes ["new_name"] = arguments [0]
                     savename = arguments [0]
+
+            elif response_message.content.lower().startswith("extras"):
+                def extras_check (m):
+                    return (m.content.split () [0].lower () in ["abort", "sort", "removeduplicates"])
+
+                extras_message = await self.safe_send_message (channel, extras_string.format (savename.title (), server.get_member (playlist ["author"]).mention, playlist ["entry_count"], "s" if int (playlist ["entry_count"]) is not 1 else "", format_time (sum ([x.duration for x in entries]))))
+                resp = await self.wait_for_message (author=author, channel=channel, check=extras_check)
+
+                if not resp.content.lower ().startswith (self.config.command_prefix) and not resp.content.lower().startswith ('abort'):
+                    _cmd = resp.content.split ()
+                    cmd = _cmd [0].lower ()
+                    args = _cmd [1:] if len (_cmd) > 1 else None
+
+                    if cmd == "sort":
+                        sort_method = args [0].lower () if args is not None and args [0].lower () in ["alphabetical", "length", "random"] else "alphabetical"
+                        pl_changes ["remove_entries_indexes"] = list (range (len (entries)))
+
+                        if sort_method == "alphabetical":
+                            pl_changes ["new_entries"] = sorted (entries, key = lambda entry: entry.title)
+                            playlist ["entries"] = sorted (entries, key = lambda entry: entry.title)
+                        elif sort_method == "length":
+                            pl_changes ["new_entries"] = sorted (entries, key = lambda entry: entry.duration)
+                            playlist ["entries"] = sorted (entries, key = lambda entry: entry.duration)
+                        elif sort_method == "random":
+                            new_ordered = entries
+                            shuffle (new_ordered)
+                            pl_changes ["new_entries"] = new_ordered
+                            playlist ["entries"] = new_ordered
+
+                    if cmd == "removeduplicates":
+                        pl_changes ["remove_entries_indexes"] = list (range (len (entries)))
+                        urls = []
+                        new_list = []
+                        for entry in entries:
+                            if entry.url not in urls:
+                                urls.append (entry.url)
+                                new_list.append (entry)
+
+                        pl_changes ["new_entries"] = new_list
+                        playlist ["entries"] = new_list
+
+                await self.safe_delete_message(extras_message)
+                await self.safe_delete_message(resp)
 
             elif response_message.content.lower().startswith("p"):
                 entries_page = (entries_page - 1) % (iterations + 1)
