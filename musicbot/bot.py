@@ -2717,6 +2717,7 @@ class MusicBot(discord.Client):
             {command_prefix}playlist save savename
             {command_prefix}playlist load savename [add, replace]
             {command_prefix}playlist delete savename
+            {command_prefix}playlist clone fromname savename [startindex, endindex (inclusive)]
 
             {command_prefix}playlist builder savename
 
@@ -2726,9 +2727,9 @@ class MusicBot(discord.Client):
         argument = leftover_args [0] if len (leftover_args) > 0 else None
         savename = leftover_args [1].lower () if len (leftover_args) > 1 else ""
         load_mode = leftover_args [2] if len (leftover_args) > 2 else "add"
-        additional_args = leftover_args [3:] if len (leftover_args) > 3 else None
+        additional_args = leftover_args [2:] if len (leftover_args) > 2 else None
 
-        forbidden_savenames = ["showall", "savename", "save", "load", "delete", "builder", "extras","add", "remove", "save", "exit"]
+        forbidden_savenames = ["showall", "savename", "save", "load", "delete", "builder", "extras","add", "remove", "save", "exit", "clone"]
 
         if argument == "save":
             if savename in self.playlists.saved_playlists:
@@ -2762,6 +2763,43 @@ class MusicBot(discord.Client):
 
             self.playlists.remove_playlist (savename)
             return Response ("*{}* has been deleted".format (savename), delete_after = 20)
+
+        elif argument == "clone":
+            if savename not in self.playlists.saved_playlists:
+                return Response ("Can't clone this playlist, there's no playlist with this name.", delete_after = 20)
+            clone_playlist = self.playlists.get_playlist (savename, player.playlist)
+            clone_entries = clone_playlist ["entries"]
+            extend_existing = False
+
+            if additional_args is None:
+                return Response ("Please provide a name to save the playlist to", delete_after = 20)
+
+            if additional_args [0].lower () in self.playlists.saved_playlists:
+                extend_existing = True
+            if len (additional_args [0]) < 3:
+                return Response ("This is not a valid playlist name, the name must be longer than 3 characters", delete_after = 20)
+            if additional_args [0].lower () in forbidden_savenames:
+                return Response ("This is not a valid playlist name, this name is forbidden!", delete_after = 20)
+
+
+            from_index = int (additional_args [1]) - 1 if len (additional_args) > 1 else 0
+            if from_index >= len (clone_entries) or from_index < 0:
+                return Response ("Can't clone the playlist starting from entry {}. This entry is out of bounds.".format (from_index), delete_after = 20)
+
+            to_index = int (additional_args [2]) if len (additional_args) > 2 else len (clone_entries)
+            if to_index > len (clone_entries) or to_index < 0:
+                return Response ("Can't clone the playlist from the {}. to the {}. entry. These values are out of bounds.".format (from_index, to_index), delete_after = 20)
+
+            if to_index - from_index <= 0:
+                return Response ("That's not enough entries to create a new playlist.", delete_after = 20)
+
+            clone_entries = clone_entries [from_index:to_index]
+            if extend_existing:
+                self.playlists.edit_playlist (additional_args [0].lower (), player.playlist, new_entries = clone_entries)
+            else:
+                self.playlists.set_playlist (clone_entries, additional_args [0].lower (), author.id)
+                
+            return Response ("*{}* {}has been cloned to {}".format (savename, "(from the {}. to the {}. index) ".format (str (from_index + 1), str (to_index + 1)) if from_index is not 0 or to_index is not len (clone_entries) else "", additional_args [0].lower ()), delete_after = 20)
 
         elif argument == "showall":
             if len (self.playlists.saved_playlists) < 1:
@@ -2807,7 +2845,7 @@ class MusicBot(discord.Client):
 
         def check(m):
             return (
-                        m.content.split () [0] in ["add", "remove", "rename", "exit", "p", "n", "save", "extras"]
+                        m.content.split () [0].lower () in ["add", "remove", "rename", "exit", "p", "n", "save", "extras"]
                     )
 
         abort = False
@@ -2817,6 +2855,7 @@ class MusicBot(discord.Client):
         savename = _savename
 
         interface_string = "**{}** by *{}* ({} song{} with a total length of {})\n\n{}\n\n**You can use the following commands:**\n`add`: Add a song to the playlist (this command works like the normal `{}play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n`extras`: view the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
+
         extras_string = "**{}** by *{}* ({} song{} with a total length of {})\n\n**Extra functions:**\n`sort [alphabetical, length, random]`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n\n`abort`: return to main screen"
 
         playlist = self.playlists.get_playlist (_savename, player.playlist)
@@ -2855,7 +2894,7 @@ class MusicBot(discord.Client):
             split_message = response_message.content.lower ().split ()
             arguments = split_message [1:] if len (split_message) > 1 else None
 
-            if response_message.content.lower().startswith("add"):
+            if split_message [0] is "add":
                 if arguments is not None:
                     msg = await self.safe_send_message (channel, "I'm working on it.")
                     entries = await self.get_play_entry (player, channel, author, arguments [1:], arguments [0])
@@ -2864,7 +2903,7 @@ class MusicBot(discord.Client):
                     playlist ["entry_count"] = str (int (playlist ["entry_count"]) + len (entries))
                     await self.safe_delete_message(msg)
 
-            elif response_message.content.lower().startswith("remove"):
+            elif split_message [0] is "remove":
                 if arguments is not None:
                     indieces = []
                     for arg in arguments:
@@ -2880,12 +2919,12 @@ class MusicBot(discord.Client):
                     playlist ["entry_count"] = str (int (playlist ["entry_count"]) - len (indieces))
                     playlist ["entries"] = [playlist ["entries"] [x] for x in range (len (playlist ["entries"])) if x not in indieces]
 
-            elif response_message.content.lower().startswith("rename"):
+            elif split_message [0] is "rename":
                 if arguments is not None and len (arguments [0]) >= 3 and arguments [0] not in self.playlists.saved_playlists:
                     pl_changes ["new_name"] = arguments [0]
                     savename = arguments [0]
 
-            elif response_message.content.lower().startswith("extras"):
+            elif split_message [0] is "extras":
                 def extras_check (m):
                     return (m.content.split () [0].lower () in ["abort", "sort", "removeduplicates"])
 
@@ -2928,10 +2967,10 @@ class MusicBot(discord.Client):
                 await self.safe_delete_message(extras_message)
                 await self.safe_delete_message(resp)
 
-            elif response_message.content.lower().startswith("p"):
+            elif split_message [0] is "p":
                 entries_page = (entries_page - 1) % (iterations + 1)
 
-            elif response_message.content.lower().startswith("n"):
+            elif split_message [0] is "n":
                 entries_page = (entries_page + 1) % (iterations + 1)
 
             await self.safe_delete_message(response_message)
