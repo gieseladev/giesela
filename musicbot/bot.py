@@ -2553,7 +2553,7 @@ class MusicBot(discord.Client):
         while running:
             current_status = game.get_beautified_string ()
             msg = await self.safe_send_message (channel, "**Hangman**\n****REMOVED******REMOVED*** tries left*\n\n***REMOVED******REMOVED***\n\n`Send the letter you want to guess or type \"exit\" to exit.`".format (game.tries_left, current_status))
-            response = await self.wait_for_message (author=author, channel=channel, check=check)
+            response = await self.wait_for_message (300, author=author, channel=channel, check=check)
 
             if not response or response.content.startswith (self.config.command_prefix) or response.content.lower ().startswith ('exit'):
                 await self.safe_delete_message (msg)
@@ -2798,8 +2798,8 @@ class MusicBot(discord.Client):
                 self.playlists.edit_playlist (additional_args [0].lower (), player.playlist, new_entries = clone_entries)
             else:
                 self.playlists.set_playlist (clone_entries, additional_args [0].lower (), author.id)
-                
-            return Response ("****REMOVED******REMOVED**** ***REMOVED******REMOVED***has been cloned to ***REMOVED******REMOVED***".format (savename, "(from the ***REMOVED******REMOVED***. to the ***REMOVED******REMOVED***. index) ".format (str (from_index + 1), str (to_index + 1)) if from_index is not 0 or to_index is not len (clone_entries) else "", additional_args [0].lower ()), delete_after = 20)
+
+            return Response ("****REMOVED******REMOVED**** ***REMOVED******REMOVED***has been cloned to ****REMOVED******REMOVED****".format (savename, "(from the ***REMOVED******REMOVED***. to the ***REMOVED******REMOVED***. index) ".format (str (from_index + 1), str (to_index + 1)) if from_index is not 0 or to_index is not len (clone_entries) else "", additional_args [0].lower ()), delete_after = 20)
 
         elif argument == "showall":
             if len (self.playlists.saved_playlists) < 1:
@@ -2894,7 +2894,7 @@ class MusicBot(discord.Client):
             split_message = response_message.content.lower ().split ()
             arguments = split_message [1:] if len (split_message) > 1 else None
 
-            if split_message [0] is "add":
+            if split_message [0] == "add":
                 if arguments is not None:
                     msg = await self.safe_send_message (channel, "I'm working on it.")
                     entries = await self.get_play_entry (player, channel, author, arguments [1:], arguments [0])
@@ -2903,7 +2903,7 @@ class MusicBot(discord.Client):
                     playlist ["entry_count"] = str (int (playlist ["entry_count"]) + len (entries))
                     await self.safe_delete_message(msg)
 
-            elif split_message [0] is "remove":
+            elif split_message [0] == "remove":
                 if arguments is not None:
                     indieces = []
                     for arg in arguments:
@@ -2919,12 +2919,12 @@ class MusicBot(discord.Client):
                     playlist ["entry_count"] = str (int (playlist ["entry_count"]) - len (indieces))
                     playlist ["entries"] = [playlist ["entries"] [x] for x in range (len (playlist ["entries"])) if x not in indieces]
 
-            elif split_message [0] is "rename":
+            elif split_message [0] == "rename":
                 if arguments is not None and len (arguments [0]) >= 3 and arguments [0] not in self.playlists.saved_playlists:
                     pl_changes ["new_name"] = arguments [0]
                     savename = arguments [0]
 
-            elif split_message [0] is "extras":
+            elif split_message [0] == "extras":
                 def extras_check (m):
                     return (m.content.split () [0].lower () in ["abort", "sort", "removeduplicates"])
 
@@ -2967,10 +2967,10 @@ class MusicBot(discord.Client):
                 await self.safe_delete_message(extras_message)
                 await self.safe_delete_message(resp)
 
-            elif split_message [0] is "p":
+            elif split_message [0] == "p":
                 entries_page = (entries_page - 1) % (iterations + 1)
 
-            elif split_message [0] is "n":
+            elif split_message [0] == "n":
                 entries_page = (entries_page + 1) % (iterations + 1)
 
             await self.safe_delete_message(response_message)
