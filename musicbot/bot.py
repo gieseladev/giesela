@@ -2866,8 +2866,12 @@ class MusicBot(discord.Client):
 
             items_per_page = 20
             iterations, overflow = divmod (len (entries), items_per_page)
+
+            if iterations > 0 and overflow == 0:
+                iterations -= 1
+
             start = (entries_page * items_per_page)
-            end = start + (overflow if entries_page >= iterations else items_per_page)
+            end = (start + (overflow if entries_page > iterations else items_per_page)) if len (entries) > 0 else 0
             #this_page_entries = entries [start : end]
 
             #self.safe_print ("I have {} entries in the whole list and now I'm viewing from {} to {} ({} entries)".format (str (len (entries)), str (start), str (end), str (end - start)))
