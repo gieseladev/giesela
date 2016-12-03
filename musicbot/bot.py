@@ -36,7 +36,7 @@ from musicbot.player import MusicPlayer
 from musicbot.config import Config, ConfigDefaults
 from musicbot.papers import Papers
 from musicbot.permissions import Permissions, PermissionsDefaults
-from musicbot.utils import load_file, write_file, sane_round_int, format_time
+from musicbot.utils import load_file, write_file, sane_round_int, format_time, random_line
 from musicbot.games.game_2048 import Game2048
 from musicbot.games.game_hangman import GameHangman
 from musicbot.nine_gag import *
@@ -2461,15 +2461,29 @@ class MusicBot(discord.Client):
 
         return Response("Can't find any more articles :frowning:", delete_after=30)
 
-    async def cmd_game (self, message, channel, author, size = 4):
+    async def cmd_game (self, message, channel, author, game = None, leftover_args):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***game
 
         WIP
         """
-        await self.gHangman (author, channel, choice (["Stomach", "Cow", "Mother", "Death", "Fun", "House", "MusicBot", "Hair", "Father", "Rowlet", "Brain", "Acid", "illfated", "act", "maddening", "zesty", "improve", "strange", "mushy", "shivering", "spicy", "nondescript", "sun", "cause", "system", "exchange", "lunchroom", "rod", "incompetent", "squirrel", "parallel", "program", "rule", "electric", "pull", "guarded", "cherry", "ragged", "run", "slip", "practise", "near", "decisive", "explain", "calculate", "treat", "name", "book", "gate", "poke", "null", "tie", "purple", "unite", "mine", "clever", "toothbrush", "lewd", "expansion", "step", "courageous", "grouchy", "berry", "dance", "experience", "accept", "thrill", "heat", "attack", "line", "fair", "resolute", "desk", "brown", "mountainous", "nose", "chilly", "thirsty", "scarf", "sign", "fork", "hapless", "infamous", "wilderness", "shape", "spark", "jellyfish", "industry", "loss", "abrasive", "twig", "lonely", "far", "uptight", "brake", "deserve", "excited", "knotty", "truthful", "day", "voice", "radiate", "throne", "loutish", "hydrant", "spare", "sleep", "makeshift", "advise", "thought", "sleet", "wrist"]), 10)
-        #await self.g2048 (author, channel, int (size))
+        if game is None:
+            return Response ("Not yet implemented.")
+
+        game = game.lower ()
+
+        if game == "hangman":
+            await self.gHangman (author, channel)
+        elif game == "2048"
+            size = 4
+            if leftover_args is not None and len (leftover_args) > 0:
+                try:
+                    size = int (leftover_args [0])
+                except:
+                    pass
+
+            await self.g2048 (author, channel, size)
 
     async def g2048 (self, author, channel, size):
         game = Game2048 (size)
@@ -2541,8 +2555,12 @@ class MusicBot(discord.Client):
         await self.send_file (channel, game.getImage (cache_location) + ".gif", content = "**2048**\nYour replay:")
         await self.safe_delete_message (msg)
 
-    async def gHangman (self, author, channel, word, tries = 10):
+    async def gHangman (self, author, channel, word = None, tries = 10):
+        if word is None:
+            word = re.sub('[^a-zA-Z]', '', random_line (ConfigDefaults.hangman_wordlist))
+
         alphabet = list ("abcdefghijklmnopqrstuvwxyz")
+        print ("Started a Hangman game with \"" + word + "\"")
 
         game = GameHangman (word, tries)
         running = True
@@ -2564,14 +2582,10 @@ class MusicBot(discord.Client):
             game.guess (letter)
 
             if game.won:
-                await self.safe_delete_message (msg)
-                await self.safe_delete_message (response)
                 await self.safe_send_message (channel, "Congratulations, you got it!\nThe word is: ****REMOVED******REMOVED****".format (word))
                 running = False
 
             if game.lost:
-                await self.safe_delete_message (msg)
-                await self.safe_delete_message (response)
                 await self.safe_send_message (channel, "You lost!")
                 running = False
 

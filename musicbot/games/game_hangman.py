@@ -23,7 +23,7 @@ class GameHangman:
 
         if letter in self.word:
             if letter not in self.right_letters:
-                self.right_letters.extend ([letter for letter in range (self.word.count (letter))])
+                self.right_letters.extend ([letter for x in range (self.word.count (letter))])
                 return True
         else:
             if letter not in self.wrong_letters:
