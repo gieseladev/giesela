@@ -86,11 +86,10 @@ class Playlists:
             old_entries = [old_entries [x] for x in range (len (old_entries)) if x not in remove_entries_indexes]
 
         if remove_entries is not None:
-            for entry in remove_entries:
-                try:
+            urls = [x.url for x in remove_entries]
+            for entry in old_entries:
+                if entry.url in urls:
                     old_entries.remove (entry)
-                except:
-                    continue
 
         if new_entries is not None:
             try:
