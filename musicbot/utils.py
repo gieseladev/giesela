@@ -2,6 +2,7 @@ import re
 import aiohttp
 import decimal
 import unicodedata
+import random
 
 from hashlib import md5
 from .constants import DISCORD_MSG_CHAR_LIMIT
@@ -57,6 +58,15 @@ def format_time (s):
         return_list.append ("{} second{}".format (seconds, "s" if seconds is not 1 else ""))
 
     return " ".join (return_list)
+
+
+def random_line(afile):
+    with open (afile) as myfile:
+        line = next(myfile)
+        for num, aline in enumerate(myfile):
+          if random.randrange(num + 2): continue
+          line = aline
+        return line
 
 
 def paginate(content, *, length=DISCORD_MSG_CHAR_LIMIT, reserve=0):
