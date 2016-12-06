@@ -36,7 +36,7 @@ from musicbot.player import MusicPlayer
 from musicbot.config import Config, ConfigDefaults
 from musicbot.papers import Papers
 from musicbot.permissions import Permissions, PermissionsDefaults
-from musicbot.utils import load_file, write_file, sane_round_int, format_time
+from musicbot.utils import load_file, write_file, sane_round_int, format_time, random_line
 from musicbot.games.game_2048 import Game2048
 from musicbot.games.game_hangman import GameHangman
 from musicbot.nine_gag import *
@@ -1123,6 +1123,7 @@ class MusicBot(discord.Client):
 
     async def get_play_entry (self, player, channel, author, leftover_args, song_url):
         song_url = song_url.strip('<>')
+
         if leftover_args:
             song_url = ' '.join([song_url, *leftover_args])
 
@@ -1134,6 +1135,8 @@ class MusicBot(discord.Client):
         if not info:
             raise exceptions.CommandError("That video cannot be played.", expire_in=30)
 
+        # abstract the search handling away from the user
+        # our ytdl options allow us to use search strings as input urls
         if info.get('url', '').startswith('ytsearch'):
             # print("[Command:play] Searching for \"%s\"" % song_url)
             info = await self.downloader.extract_info(
@@ -1157,11 +1160,125 @@ class MusicBot(discord.Client):
                 return
 
             song_url = info['entries'][0]['webpage_url']
-            return [await player.playlist.get_entry (song_url, channel=channel, author=author)]
+            info = await self.downloader.extract_info(player.playlist.loop, song_url, download=False, process=False)
+            # Now I could just do: return await self.cmd_play(player, channel, author, song_url)
+            # But this is probably fine
 
         if 'entries' in info:
-            entry_list = await player.playlist.get_playlist_entries (song_url, channel=channel, author=author)
+            # The only reason we would use this over `len(info['entries'])` is if we add `if _` to this one
+            num_songs = sum(1 for _ in info['entries'])
+
+            if info['extractor'].lower() in ['youtube:playlist', 'soundcloud:set', 'bandcamp:album']:
+                try:
+                    return await self._get_play_playlist_async_entries (player, channel, author, song_url, info['extractor']) ####################MAGIC
+                except exceptions.CommandError:
+                    raise
+                except Exception as e:
+                    traceback.print_exc()
+                    raise exceptions.CommandError("Error queuing playlist:\n%s" % e, expire_in=30)
+
+            t0 = time.time()
+
+            # My test was 1.2 seconds per song, but we maybe should fudge it a bit, unless we can
+            # monitor it and edit the message with the estimated time, but that's some ADVANCED SHIT
+            # I don't think we can hook into it anyways, so this will have to do.
+            # It would probably be a thread to check a few playlists and get the speed from that
+            # Different playlists might download at different speeds though
+            wait_per_song = 1.2
+
+            entry_list = await player.playlist.entries_import_from(song_url, channel=channel, author=author)
+
+            tnow = time.time()
+            ttime = tnow - t0
+            listlen = len(entry_list)
+            drop_count = 0
+
+            print("Processed ***REMOVED******REMOVED*** songs in ***REMOVED******REMOVED*** seconds at ***REMOVED***:.2f***REMOVED***s/song, ***REMOVED***:+.2g***REMOVED***/song from expected (***REMOVED******REMOVED***s)".format(
+                listlen,
+                self._fixg(ttime),
+                ttime / listlen,
+                ttime / listlen - wait_per_song,
+                self._fixg(wait_per_song * num_songs))
+            )
+
+            reply_text = "Enqueued **%s** songs to be played. Position in queue: %s"
+            btext = str(listlen - drop_count)
             return entry_list
+
+        else:
+            try:
+                return [await player.playlist.get_entry(song_url, channel=channel, author=author)]
+
+            except exceptions.WrongEntryTypeError as e:
+                if e.use_url == song_url:
+                    print("[Warning] Determined incorrect entry type, but suggested url is the same.  Help.")
+
+                if self.config.debug_mode:
+                    print("[Info] Assumed url \"%s\" was a single entry, was actually a playlist" % song_url)
+                    print("[Info] Using \"%s\" instead" % e.use_url)
+
+                return await self.cmd_play(player, channel, author, permissions, leftover_args, e.use_url)
+
+        self.safe_print ("I reached code which I shouldn't have...")
+
+    async def _get_play_playlist_async_entries (self, player, channel, author, playlist_url, extractor_type):
+        info = await self.downloader.extract_info(player.playlist.loop, playlist_url, download=False, process=False)
+
+        if not info:
+            raise exceptions.CommandError("That playlist cannot be played.")
+
+        num_songs = sum(1 for _ in info['entries'])
+        t0 = time.time()
+
+        entries_added = 0
+        if extractor_type == 'youtube:playlist':
+            try:
+                entries_added = await player.playlist.entries_async_process_youtube_playlist(
+                    playlist_url, channel=channel, author=author)
+
+            except Exception:
+                traceback.print_exc()
+                raise exceptions.CommandError('Error handling playlist %s queuing.' % playlist_url, expire_in=30)
+
+        elif extractor_type.lower() in ['soundcloud:set', 'bandcamp:album']:
+            try:
+                entries_added = await player.playlist.entries_async_process_sc_bc_playlist(
+                    playlist_url, channel=channel, author=author)
+                # TODO: Add hook to be called after each song
+                # TODO: Add permissions
+
+            except Exception:
+                traceback.print_exc()
+                raise exceptions.CommandError('Error handling playlist %s queuing.' % playlist_url, expire_in=30)
+
+
+        songs_processed = len(entries_added)
+        drop_count = 0
+        skipped = False
+
+        songs_added = len(entries_added)
+        tnow = time.time()
+        ttime = tnow - t0
+        wait_per_song = 1.2
+
+        # This is technically inaccurate since bad songs are ignored but still take up time
+        print("Processed ***REMOVED******REMOVED***/***REMOVED******REMOVED*** songs in ***REMOVED******REMOVED*** seconds at ***REMOVED***:.2f***REMOVED***s/song, ***REMOVED***:+.2g***REMOVED***/song from expected (***REMOVED******REMOVED***s)".format(
+            songs_processed,
+            num_songs,
+            self._fixg(ttime),
+            ttime / num_songs,
+            ttime / num_songs - wait_per_song,
+            self._fixg(wait_per_song * num_songs))
+        )
+
+        if not songs_added:
+            basetext = "No songs were added, all songs were over max duration (%ss)" % permissions.max_song_length
+            if skipped:
+                basetext += "\nAdditionally, the current song was skipped for being too long."
+
+            raise exceptions.CommandError(basetext, expire_in=30)
+
+        return entries_added
 
     async def _cmd_play_playlist_async(self, player, channel, author, permissions, playlist_url, extractor_type):
         """
@@ -1296,7 +1413,7 @@ class MusicBot(discord.Client):
             raise exceptions.CommandError("Please quote your search query properly.", expire_in=30)
 
         service = 'youtube'
-        items_requested = 3
+        items_requested = 5
         max_items = 10  # this can be whatever, but since ytdl uses about 1000, a small number might be better
         services = ***REMOVED***
             'youtube': 'ytsearch',
@@ -2461,15 +2578,29 @@ class MusicBot(discord.Client):
 
         return Response("Can't find any more articles :frowning:", delete_after=30)
 
-    async def cmd_game (self, message, channel, author, size = 4):
+    async def cmd_game (self, message, channel, author, leftover_args, game = None):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***game
 
         WIP
         """
-        await self.gHangman (author, channel, choice (["Stomach", "Cow", "Mother", "Death", "Fun", "House", "MusicBot", "Hair", "Father", "Rowlet", "Brain", "Acid", "illfated", "act", "maddening", "zesty", "improve", "strange", "mushy", "shivering", "spicy", "nondescript", "sun", "cause", "system", "exchange", "lunchroom", "rod", "incompetent", "squirrel", "parallel", "program", "rule", "electric", "pull", "guarded", "cherry", "ragged", "run", "slip", "practise", "near", "decisive", "explain", "calculate", "treat", "name", "book", "gate", "poke", "null", "tie", "purple", "unite", "mine", "clever", "toothbrush", "lewd", "expansion", "step", "courageous", "grouchy", "berry", "dance", "experience", "accept", "thrill", "heat", "attack", "line", "fair", "resolute", "desk", "brown", "mountainous", "nose", "chilly", "thirsty", "scarf", "sign", "fork", "hapless", "infamous", "wilderness", "shape", "spark", "jellyfish", "industry", "loss", "abrasive", "twig", "lonely", "far", "uptight", "brake", "deserve", "excited", "knotty", "truthful", "day", "voice", "radiate", "throne", "loutish", "hydrant", "spare", "sleep", "makeshift", "advise", "thought", "sleet", "wrist"]), 10)
-        #await self.g2048 (author, channel, int (size))
+        if game is None:
+            return Response ("Not yet implemented.")
+
+        game = game.lower ()
+
+        if game == "hangman":
+            await self.gHangman (author, channel)
+        elif game == "2048":
+            size = 4
+            if leftover_args is not None and len (leftover_args) > 0:
+                try:
+                    size = int (leftover_args [0])
+                except:
+                    pass
+
+            await self.g2048 (author, channel, size)
 
     async def g2048 (self, author, channel, size):
         game = Game2048 (size)
@@ -2541,8 +2672,12 @@ class MusicBot(discord.Client):
         await self.send_file (channel, game.getImage (cache_location) + ".gif", content = "**2048**\nYour replay:")
         await self.safe_delete_message (msg)
 
-    async def gHangman (self, author, channel, word, tries = 10):
+    async def gHangman (self, author, channel, word = None, tries = 10):
+        if word is None:
+            word = re.sub('[^a-zA-Z]', '', random_line (ConfigDefaults.hangman_wordlist))
+
         alphabet = list ("abcdefghijklmnopqrstuvwxyz")
+        print ("Started a Hangman game with \"" + word + "\"")
 
         game = GameHangman (word, tries)
         running = True
@@ -2553,7 +2688,7 @@ class MusicBot(discord.Client):
         while running:
             current_status = game.get_beautified_string ()
             msg = await self.safe_send_message (channel, "**Hangman**\n****REMOVED******REMOVED*** tries left*\n\n***REMOVED******REMOVED***\n\n`Send the letter you want to guess or type \"exit\" to exit.`".format (game.tries_left, current_status))
-            response = await self.wait_for_message (author=author, channel=channel, check=check)
+            response = await self.wait_for_message (300, author=author, channel=channel, check=check)
 
             if not response or response.content.startswith (self.config.command_prefix) or response.content.lower ().startswith ('exit'):
                 await self.safe_delete_message (msg)
@@ -2564,14 +2699,10 @@ class MusicBot(discord.Client):
             game.guess (letter)
 
             if game.won:
-                await self.safe_delete_message (msg)
-                await self.safe_delete_message (response)
                 await self.safe_send_message (channel, "Congratulations, you got it!\nThe word is: ****REMOVED******REMOVED****".format (word))
                 running = False
 
             if game.lost:
-                await self.safe_delete_message (msg)
-                await self.safe_delete_message (response)
                 await self.safe_send_message (channel, "You lost!")
                 running = False
 
@@ -2717,6 +2848,7 @@ class MusicBot(discord.Client):
             ***REMOVED***command_prefix***REMOVED***playlist save savename
             ***REMOVED***command_prefix***REMOVED***playlist load savename [add, replace]
             ***REMOVED***command_prefix***REMOVED***playlist delete savename
+            ***REMOVED***command_prefix***REMOVED***playlist clone fromname savename [startindex, endindex (inclusive)]
 
             ***REMOVED***command_prefix***REMOVED***playlist builder savename
 
@@ -2726,9 +2858,9 @@ class MusicBot(discord.Client):
         argument = leftover_args [0] if len (leftover_args) > 0 else None
         savename = leftover_args [1].lower () if len (leftover_args) > 1 else ""
         load_mode = leftover_args [2] if len (leftover_args) > 2 else "add"
-        additional_args = leftover_args [3:] if len (leftover_args) > 3 else None
+        additional_args = leftover_args [2:] if len (leftover_args) > 2 else None
 
-        forbidden_savenames = ["showall", "savename", "save", "load", "delete", "builder", "extras","add", "remove", "save", "exit"]
+        forbidden_savenames = ["showall", "savename", "save", "load", "delete", "builder", "extras","add", "remove", "save", "exit", "clone"]
 
         if argument == "save":
             if savename in self.playlists.saved_playlists:
@@ -2762,6 +2894,43 @@ class MusicBot(discord.Client):
 
             self.playlists.remove_playlist (savename)
             return Response ("****REMOVED******REMOVED**** has been deleted".format (savename), delete_after = 20)
+
+        elif argument == "clone":
+            if savename not in self.playlists.saved_playlists:
+                return Response ("Can't clone this playlist, there's no playlist with this name.", delete_after = 20)
+            clone_playlist = self.playlists.get_playlist (savename, player.playlist)
+            clone_entries = clone_playlist ["entries"]
+            extend_existing = False
+
+            if additional_args is None:
+                return Response ("Please provide a name to save the playlist to", delete_after = 20)
+
+            if additional_args [0].lower () in self.playlists.saved_playlists:
+                extend_existing = True
+            if len (additional_args [0]) < 3:
+                return Response ("This is not a valid playlist name, the name must be longer than 3 characters", delete_after = 20)
+            if additional_args [0].lower () in forbidden_savenames:
+                return Response ("This is not a valid playlist name, this name is forbidden!", delete_after = 20)
+
+
+            from_index = int (additional_args [1]) - 1 if len (additional_args) > 1 else 0
+            if from_index >= len (clone_entries) or from_index < 0:
+                return Response ("Can't clone the playlist starting from entry ***REMOVED******REMOVED***. This entry is out of bounds.".format (from_index), delete_after = 20)
+
+            to_index = int (additional_args [2]) if len (additional_args) > 2 else len (clone_entries)
+            if to_index > len (clone_entries) or to_index < 0:
+                return Response ("Can't clone the playlist from the ***REMOVED******REMOVED***. to the ***REMOVED******REMOVED***. entry. These values are out of bounds.".format (from_index, to_index), delete_after = 20)
+
+            if to_index - from_index <= 0:
+                return Response ("That's not enough entries to create a new playlist.", delete_after = 20)
+
+            clone_entries = clone_entries [from_index:to_index]
+            if extend_existing:
+                self.playlists.edit_playlist (additional_args [0].lower (), player.playlist, new_entries = clone_entries)
+            else:
+                self.playlists.set_playlist (clone_entries, additional_args [0].lower (), author.id)
+
+            return Response ("****REMOVED******REMOVED**** ***REMOVED******REMOVED***has been cloned to ****REMOVED******REMOVED****".format (savename, "(from the ***REMOVED******REMOVED***. to the ***REMOVED******REMOVED***. index) ".format (str (from_index + 1), str (to_index + 1)) if from_index is not 0 or to_index is not len (clone_entries) else "", additional_args [0].lower ()), delete_after = 20)
 
         elif argument == "showall":
             if len (self.playlists.saved_playlists) < 1:
@@ -2807,7 +2976,7 @@ class MusicBot(discord.Client):
 
         def check(m):
             return (
-                        m.content.split () [0] in ["add", "remove", "rename", "exit", "p", "n", "save", "extras"]
+                        m.content.split () [0].lower () in ["add", "remove", "rename", "exit", "p", "n", "save", "extras"]
                     )
 
         abort = False
@@ -2817,6 +2986,7 @@ class MusicBot(discord.Client):
         savename = _savename
 
         interface_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add`: Add a song to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n`extras`: view the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
+
         extras_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n**Extra functions:**\n`sort [alphabetical, length, random]`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n\n`abort`: return to main screen"
 
         playlist = self.playlists.get_playlist (_savename, player.playlist)
@@ -2827,8 +2997,12 @@ class MusicBot(discord.Client):
 
             items_per_page = 20
             iterations, overflow = divmod (len (entries), items_per_page)
+
+            if iterations > 0 and overflow == 0:
+                iterations -= 1
+
             start = (entries_page * items_per_page)
-            end = start + (overflow if entries_page >= iterations else items_per_page)
+            end = (start + (overflow if entries_page >= iterations else items_per_page)) if len (entries) > 0 else 0
             #this_page_entries = entries [start : end]
 
             #self.safe_print ("I have ***REMOVED******REMOVED*** entries in the whole list and now I'm viewing from ***REMOVED******REMOVED*** to ***REMOVED******REMOVED*** (***REMOVED******REMOVED*** entries)".format (str (len (entries)), str (start), str (end), str (end - start)))
@@ -2852,19 +3026,20 @@ class MusicBot(discord.Client):
             elif response_message.content.lower ().startswith("save"):
                 save = True
 
-            split_message = response_message.content.lower ().split ()
+            split_message = response_message.content.split ()
             arguments = split_message [1:] if len (split_message) > 1 else None
 
-            if response_message.content.lower().startswith("add"):
+            if split_message [0].lower () == "add":
                 if arguments is not None:
                     msg = await self.safe_send_message (channel, "I'm working on it.")
-                    entries = await self.get_play_entry (player, channel, author, arguments [1:], arguments [0])
+                    query = arguments [1:]
+                    entries = await self.get_play_entry (player, channel, author, query, arguments [0])
                     pl_changes ["new_entries"].extend (entries)
                     playlist ["entries"].extend (entries)
                     playlist ["entry_count"] = str (int (playlist ["entry_count"]) + len (entries))
                     await self.safe_delete_message(msg)
 
-            elif response_message.content.lower().startswith("remove"):
+            elif split_message [0].lower () == "remove":
                 if arguments is not None:
                     indieces = []
                     for arg in arguments:
@@ -2880,12 +3055,12 @@ class MusicBot(discord.Client):
                     playlist ["entry_count"] = str (int (playlist ["entry_count"]) - len (indieces))
                     playlist ["entries"] = [playlist ["entries"] [x] for x in range (len (playlist ["entries"])) if x not in indieces]
 
-            elif response_message.content.lower().startswith("rename"):
+            elif split_message [0].lower () == "rename":
                 if arguments is not None and len (arguments [0]) >= 3 and arguments [0] not in self.playlists.saved_playlists:
                     pl_changes ["new_name"] = arguments [0]
                     savename = arguments [0]
 
-            elif response_message.content.lower().startswith("extras"):
+            elif split_message [0].lower () == "extras":
                 def extras_check (m):
                     return (m.content.split () [0].lower () in ["abort", "sort", "removeduplicates"])
 
@@ -2928,10 +3103,10 @@ class MusicBot(discord.Client):
                 await self.safe_delete_message(extras_message)
                 await self.safe_delete_message(resp)
 
-            elif response_message.content.lower().startswith("p"):
+            elif split_message [0].lower () == "p":
                 entries_page = (entries_page - 1) % (iterations + 1)
 
-            elif response_message.content.lower().startswith("n"):
+            elif split_message [0].lower () == "n":
                 entries_page = (entries_page + 1) % (iterations + 1)
 
             await self.safe_delete_message(response_message)
