@@ -1186,7 +1186,7 @@ class MusicBot(discord.Client):
             # Different playlists might download at different speeds though
             wait_per_song = 1.2
 
-            entry_list, position = await player.playlist.entries_import_from(song_url, channel=channel, author=author)
+            entry_list = await player.playlist.entries_import_from(song_url, channel=channel, author=author)
 
             tnow = time.time()
             ttime = tnow - t0
@@ -1203,6 +1203,7 @@ class MusicBot(discord.Client):
 
             reply_text = "Enqueued **%s** songs to be played. Position in queue: %s"
             btext = str(listlen - drop_count)
+            return entry_list
 
         else:
             try:
@@ -1412,7 +1413,7 @@ class MusicBot(discord.Client):
             raise exceptions.CommandError("Please quote your search query properly.", expire_in=30)
 
         service = 'youtube'
-        items_requested = 3
+        items_requested = 5
         max_items = 10  # this can be whatever, but since ytdl uses about 1000, a small number might be better
         services = ***REMOVED***
             'youtube': 'ytsearch',
