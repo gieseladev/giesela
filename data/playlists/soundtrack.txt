@@ -1,0 +1,367 @@
+{
+  "expected_filename": "audio_cache\\youtube-A4RX6nnBvAQ-12._Things_To_Consider_During_Freefall.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 171,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=A4RX6nnBvAQ",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "12. Things To Consider During Freefall"
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube-mfbZua8vpf0-03._Breakfast_Of_Champignons.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 132,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=mfbZua8vpf0",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "03. Breakfast Of Champignons"
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube-M6BPjlW2r_A-02._Theories_Of_An_Eager_Heart.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 247,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=M6BPjlW2r_A",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "02. Theories Of An Eager Heart"
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube-1MC5yGDYCGo-04._With_Friendship_Peace.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 155,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=1MC5yGDYCGo",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "04. With Friendship & Peace"
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube-Ik4SeVpOh0w-01._The_Light_In_Us_All.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 190,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=Ik4SeVpOh0w",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "01. The Light In Us All"
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube-NZ3Oa9yAB9I-13._You_Me_Gravity.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 323,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=NZ3Oa9yAB9I",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "13. You, Me & Gravity"
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube-SIzXMq9KL2o-09._Sink_Cat.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 203,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=SIzXMq9KL2o",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "09. Sink Cat"
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube--QlVkaJa3wY-10._You_ll_Know_When_It_Turns_Invisible.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 274,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=-QlVkaJa3wY",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "10. You'll Know When It Turns Invisible"
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube-NTerDwbsK2I-08._Clever_Candles_Steal_The_Light.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 140,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=NTerDwbsK2I",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "08. Clever Candles Steal The Light"
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube-tBAPn2nb2PE-07._Aspect_Imaginarium.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 269,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=tBAPn2nb2PE",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "07. Aspect Imaginarium"
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube-a-OiWFuRVf0-05._Small_Hands_Make_Big_Things.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 168,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=a-OiWFuRVf0",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "05. Small Hands Make Big Things"
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube-C0pTqV0fU6s-11._Theme_Parks_After_Dark.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 215,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=C0pTqV0fU6s",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "11. Theme Parks After Dark"
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube-r2-dZwSLTaA-16._And_So_We_See_The_Truth_The_Beauty.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 291,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=r2-dZwSLTaA",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "16. And So We See The Truth & The Beauty"
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube-uK4zw64B-qk-06._Dream._Build._Repeat..webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 231,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=uK4zw64B-qk",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "06. Dream. Build. Repeat."
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube-yC0BO0mbb2M-14._Pride_Of_Pimlico.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 160,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=yC0BO0mbb2M",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "14. Pride Of Pimlico"
+}
+;
+{
+  "expected_filename": "audio_cache\\youtube-S9Gi1Bstc2s-15._Heisenberg_s_Entryway_To_Matrix_Mechanics.webm",
+  "type": "URLPlaylistEntry",
+  "filename": null,
+  "duration": 217,
+  "downloaded": false,
+  "url": "https://www.youtube.com/watch?v=S9Gi1Bstc2s",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    },
+    "author": {
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    }
+  },
+  "version": 1,
+  "title": "15. Heisenberg's Entryway To Matrix Mechanics"
+}
