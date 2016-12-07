@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=LqlXkJBIZMI",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-LqlXkJBIZMI-Life_of_Pi_Audiobooks_Part_1_Yann_Martel.m4a",
+  "downloaded": false,
+  "title": "Life of Pi Audiobooks Part 1 // Yann Martel",
+  "duration": 19520,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=xRSwHGdJwKA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-xRSwHGdJwKA-Life_of_Pi_Audiobooks_Part_2_Yann_Martel.m4a",
+  "downloaded": false,
+  "title": "Life of Pi Audiobooks Part 2 // Yann Martel",
+  "duration": 24683,
+  "filename": null
+}
