@@ -2591,7 +2591,7 @@ class MusicBot(discord.Client):
             print (str (game_list))
             for game in game_list:
                 pass
-                
+
             return
 
         game = game.lower ()
@@ -2957,7 +2957,7 @@ class MusicBot(discord.Client):
 
             for pl in self.playlists.saved_playlists:
                 infos = self.playlists.get_playlist (pl, player.playlist)
-                response_text += "  ***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED*** and a playtime of ***REMOVED******REMOVED***\n".format (iteration, pl.title (), server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y", format_time (sum ([x.duration for x in infos ["entries"]])))
+                response_text += "  ***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED*** and a playtime of ***REMOVED******REMOVED***\n".format (iteration, pl.title (), server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y", format_time (sum ([x.duration for x in infos ["entries"]]), round_seconds = True, max_specifications = 2))
                 iteration += 1
 
             #self.safe_print (response_text)
