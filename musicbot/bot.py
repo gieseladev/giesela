@@ -36,7 +36,7 @@ from musicbot.player import MusicPlayer
 from musicbot.config import Config, ConfigDefaults
 from musicbot.papers import Papers
 from musicbot.permissions import Permissions, PermissionsDefaults
-from musicbot.utils import load_file, write_file, sane_round_int, format_time, random_line
+from musicbot.utils import load_file, write_file, sane_round_int, format_time, random_line, paginate
 from musicbot.games.game_2048 import Game2048
 from musicbot.games.game_hangman import GameHangman
 from musicbot.nine_gag import *
@@ -503,21 +503,18 @@ class MusicBot(discord.Client):
 
         await self.change_presence(game=game)
 
-    async def safe_send_message(self, dest, content, *, max_letters = 1900, split_message = True, tts=False, expire_in=0, also_delete=None, quiet=False):
+    async def safe_send_message(self, dest, content, *, max_letters = DISCORD_MSG_CHAR_LIMIT, split_message = True, tts=False, expire_in=0, also_delete=None, quiet=False):
         msg = None
         try:
             if split_message and len (content) > max_letters:
                 self.safe_print ("Message too long, splitting it up")
-                iterations, overflow = divmod (len (content), max_letters)
-                for i in range (iterations + 1):
-                    start = (i * max_letters)
-                    end = start + (overflow if i >= iterations else max_letters)
-                    this_content = content [start : end]
-                    #self.safe_print (str (i) + ". message (from " + str (start) + " to " + str (end) + "):\n" + this_content)
-                    msg = await self.send_message(dest, this_content, tts=tts)
+                msgs = paginate (content, length = DISCORD_MSG_CHAR_LIMIT)
 
-                    if msg and expire_in:
-                        asyncio.ensure_future(self._wait_delete_msg(msg, expire_in))
+                for msg in msgs:
+                    nmsg = await self.send_message(dest, msg, tts=tts)
+
+                    if nmsg and expire_in:
+                        asyncio.ensure_future(self._wait_delete_msg(nmsg, expire_in))
 
                     if also_delete and isinstance(also_delete, discord.Message):
                         asyncio.ensure_future(self._wait_delete_msg(also_delete, expire_in))
@@ -2582,16 +2579,25 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}game
+            {command_prefix}game name
 
-        WIP
+        Play a game I guess... Whaddya expect?
         """
         if game is None:
-            return Response ("Not yet implemented.")
+            #return Response ("Not yet implemented.")
+            all_funcs = dir (self)
+            all_games = list (filter (lambda x: re.search ("^g_\w+", x), all_funcs))
+            game_list = [{"name" : x [2:], "handler" : getattr (self, x, None), "description" : getattr (self, x, None).__doc__.strip (' \t\n\r')} for x in all_games]
+            print (str (game_list))
+            for game in game_list:
+                pass
+                
+            return
 
         game = game.lower ()
 
         if game == "hangman":
-            await self.gHangman (author, channel)
+            await self.g_Hangman (author, channel)
         elif game == "2048":
             size = 4
             if leftover_args is not None and len (leftover_args) > 0:
@@ -2600,9 +2606,12 @@ class MusicBot(discord.Client):
                 except:
                     pass
 
-            await self.g2048 (author, channel, size)
+            await self.g_2048 (author, channel, size)
 
-    async def g2048 (self, author, channel, size):
+    async def g_2048 (self, author, channel, size):
+        """
+        Join the same numbers and get to the 2048 tile!
+        """
         game = Game2048 (size)
         game_running = True
         turn_index = 1
@@ -2672,7 +2681,10 @@ class MusicBot(discord.Client):
         await self.send_file (channel, game.getImage (cache_location) + ".gif", content = "**2048**\nYour replay:")
         await self.safe_delete_message (msg)
 
-    async def gHangman (self, author, channel, word = None, tries = 10):
+    async def g_Hangman (self, author, channel, word = None, tries = 10):
+        """
+        Guess a word by guessing each and every letter
+        """
         if word is None:
             word = re.sub('[^a-zA-Z]', '', random_line (ConfigDefaults.hangman_wordlist))
 
@@ -2683,7 +2695,7 @@ class MusicBot(discord.Client):
         running = True
 
         def check (m):
-            return (m.content.lower () in alphabet or m.content.lower () is "exit")
+            return (m.content.lower () in alphabet or m.content.lower () == word or m.content.lower () == "exit")
 
         while running:
             current_status = game.get_beautified_string ()
@@ -2694,6 +2706,10 @@ class MusicBot(discord.Client):
                 await self.safe_delete_message (msg)
                 await self.safe_send_message (channel, "Aborting this Hangman game. Thanks for playing!")
                 running = False
+
+            if response.content == word:
+                await self.safe_send_message (channel, "Congratulations, you got it!\nThe word is: *{}*".format (word))
+                return
 
             letter = response.content [0]
             game.guess (letter)

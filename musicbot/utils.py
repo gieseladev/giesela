@@ -42,7 +42,14 @@ def sane_round_int(x):
     return int(decimal.Decimal(x).quantize(1, rounding=decimal.ROUND_HALF_UP))
 
 
-def format_time (s):
+def round_to_interval (num, interval = 5):
+    return int (interval * round (float (num) / interval))
+
+
+def format_time (s, round_seconds = False, round_base = 5, max_specifications = None):
+    if round_seconds:
+        s = round_to_interval (s, round_base)
+
     minutes, seconds = divmod (s, 60)
     hours, minutes = divmod (minutes, 60)
     days, hours = divmod (hours, 24)
@@ -56,6 +63,9 @@ def format_time (s):
         return_list.append ("{} minute{}".format (minutes, "s" if minutes is not 1 else ""))
     if seconds > 0 or s is 0:
         return_list.append ("{} second{}".format (seconds, "s" if seconds is not 1 else ""))
+
+    if max_specifications is not None:
+        return_list = return_list [:max_specifications]
 
     return " ".join (return_list)
 
