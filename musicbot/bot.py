@@ -85,7 +85,7 @@ class Response:
 class MusicBot(discord.Client):
     trueStringList = ["true", "1", "t", "y", "yes", "yeah", "yup", "certainly", "uh-huh", "affirmitive", "activate"]
     channelFreeCommands =  ["say"]
-    privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast", "news", "game"]
+    privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast", "news", "game", "wiki"]
     lonelyModeRunning = False
 
     def __init__(self, config_file=ConfigDefaults.options_file, papers_file = ConfigDefaults.papers_file, playlists_file = ConfigDefaults.playlists_file, perms_file=PermissionsDefaults.perms_file):
@@ -3263,7 +3263,7 @@ class MusicBot(discord.Client):
             except:
                 return Response ("Could not download the file. This really shouldn't happen")
 
-        await self.safe_send_message (author, "The file is being uploaded. Please wait a second.", delete_after = 15)
+        await self.safe_send_message (author, "The file is being uploaded. Please wait a second.", expire_in = 15)
         await self.send_file (author, entry.filename, content = "Here you go:")
 
     async def cmd_disconnect(self, server):
