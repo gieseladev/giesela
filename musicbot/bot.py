@@ -2107,7 +2107,7 @@ class MusicBot(discord.Client):
         if not res.success:
             await self.safe_send_message (channel, "Couldn't find anything useful on that subject, sorry.\n**I'm now including Wikipedia!**")
             self.safe_print ("Didn't find an answer to: " + msgContent)
-            return self.cmd_wiki (channel, message, ["en" , "summarize", "5", msgContent])
+            return await self.cmd_wiki (channel, message, ["en" , "summarize", "5", msgContent])
         for pod in res.pods:
             await self.safe_send_message (channel, " ".join (["**" + pod.title + "**", self.shortener.short(pod.format ["img"][0] ["url"])]))
         #await self.safe_send_message(channel, answer)
