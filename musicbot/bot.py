@@ -2107,7 +2107,7 @@ class MusicBot(discord.Client):
         if not res.success:
             await self.safe_send_message (channel, "Couldn't find anything useful on that subject, sorry.\n**I'm now including Wikipedia!**")
             self.safe_print ("Didn't find an answer to: " + msgContent)
-            return self.cmd_wiki (channel, message, ["summarize", msgContent])
+            return self.cmd_wiki (channel, message, ["en" , "summarize", "5", msgContent])
         for pod in res.pods:
             await self.safe_send_message (channel, " ".join (["**" + pod.title + "**", self.shortener.short(pod.format ["img"][0] ["url"])]))
         #await self.safe_send_message(channel, answer)
@@ -2583,32 +2583,45 @@ class MusicBot(discord.Client):
 
         Play a game I guess... Whaddya expect?
         """
-        if game is None:
-            #return Response ("Not yet implemented.")
-            all_funcs = dir (self)
-            all_games = list (filter (lambda x: re.search ("^g_\w+", x), all_funcs))
-            game_list = [***REMOVED***"name" : x [2:], "handler" : getattr (self, x, None), "description" : getattr (self, x, None).__doc__.strip (' \t\n\r')***REMOVED*** for x in all_games]
-            print (str (game_list))
-            for game in game_list:
-                pass
 
-            return
+        all_funcs = dir (self)
+        all_games = list (filter (lambda x: re.search ("^g_\w+", x), all_funcs))
+        all_game_names = [x [2:] for x in all_games]
+        game_list = [***REMOVED***"name" : x [2:], "handler" : getattr (self, x, None), "description" : getattr (self, x, None).__doc__.strip (' \t\n\r')***REMOVED*** for x in all_games]
+
+        if game is None:
+            shuffle (game_list)
+
+            def check (m):
+                return (m.content.lower () in ["y", "n", "exit"])
+
+            for current_game in game_list:
+                msg = await self.safe_send_message (channel, "*How about this game:*\n\n*****REMOVED******REMOVED*****\n***REMOVED******REMOVED***\n\nType *y*, *n* or *exit*".format (current_game ["name"], current_game ["description"]))
+                response = await self.wait_for_message (100, author=author, channel=channel, check=check)
+
+                if not response or response.content.startswith (self.config.command_prefix) or response.content.lower ().startswith ('exit'):
+                    await self.safe_delete_message (msg)
+                    await self.safe_send_message (channel, "Nevermind then.")
+
+                if response.content.lower () == "y":
+                    await self.safe_delete_message (msg)
+                    game = current_game ["name"]
+                    break
+
+                await self.safe_delete_message (msg)
+
+            if game is None:
+                await self.safe_send_message (channel, "That was all of them.", expire_in = 20)
+                return
 
         game = game.lower ()
+        handler = getattr (self, "g_" + game.title (), None)
+        if handler is None:
+            return Response ("There's no game like that...", delete_after = 20)
 
-        if game == "hangman":
-            await self.g_Hangman (author, channel)
-        elif game == "2048":
-            size = 4
-            if leftover_args is not None and len (leftover_args) > 0:
-                try:
-                    size = int (leftover_args [0])
-                except:
-                    pass
+        await handler (author, channel)
 
-            await self.g_2048 (author, channel, size)
-
-    async def g_2048 (self, author, channel, size):
+    async def g_2048 (self, author, channel, size = 5):
         """
         Join the same numbers and get to the 2048 tile!
         """
@@ -2702,12 +2715,12 @@ class MusicBot(discord.Client):
             msg = await self.safe_send_message (channel, "**Hangman**\n****REMOVED******REMOVED*** tries left*\n\n***REMOVED******REMOVED***\n\n`Send the letter you want to guess or type \"exit\" to exit.`".format (game.tries_left, current_status))
             response = await self.wait_for_message (300, author=author, channel=channel, check=check)
 
-            if not response or response.content.startswith (self.config.command_prefix) or response.content.lower ().startswith ('exit'):
+            if not response or response.content.lower ().startswith (self.config.command_prefix) or response.content.lower ().startswith ('exit'):
                 await self.safe_delete_message (msg)
                 await self.safe_send_message (channel, "Aborting this Hangman game. Thanks for playing!")
                 running = False
 
-            if response.content == word:
+            if response.content.lower () == word:
                 await self.safe_send_message (channel, "Congratulations, you got it!\nThe word is: ****REMOVED******REMOVED****".format (word))
                 return
 
@@ -3188,9 +3201,6 @@ class MusicBot(discord.Client):
     async def cmd_wiki (self, channel, message, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***wiki [language] search [results] query
-                -This function helps you find the right article.
-
             ***REMOVED***command_prefix***REMOVED***wiki [language] summarize [number of sentences] query
                 -This function summarizes the content of a Wikipedia page
 
@@ -3212,23 +3222,19 @@ class MusicBot(discord.Client):
         search_query = " ".join (leftover_args)
         #self.safe_print (search_query)
 
-        if leftover_args [0] == "search":
-            search_query = " ".join (leftover_args [1:])
-            #TODO: help the user find the right article.
-        elif leftover_args [0] == "summarize":
+        if leftover_args [0] == "summarize":
             sent_num = int (leftover_args [1]) if str (type (leftover_args [1])) == "int" else 5
             search = leftover_args [2:] if str (type (leftover_args [1])) == "int" else leftover_args [1:]
             title = wikipedia.search (search, results = 1, suggestion = True) [0]
-            return Response ("*****REMOVED******REMOVED*****\n***REMOVED******REMOVED***".format (title, wikipedia.summary (title, sentences = sent_num)))
+            return Response ("*****REMOVED******REMOVED*****\n***REMOVED******REMOVED***".format (title [0], wikipedia.summary (title, sentences = sent_num)))
         else:
             title = wikipedia.search (search_query, results = 1, suggestion = True) [0]
-            #self.safe_print (str (title))
             if title:
                 wikipedia_page = wikipedia.page (title = title)
-                wikipedia_page_title = title
+                wikipedia_page_title = title [0]
 
         if not wikipedia_page:
-            return Response ("I didn't really find anything under ****REMOVED******REMOVED****.".format (search_query), delete_after = 20)
+            return Response ("I didn't find anything called ****REMOVED******REMOVED****.".format (search_query), delete_after = 20)
 
         return Response ("*****REMOVED******REMOVED*****\n***REMOVED******REMOVED***".format (wikipedia_page_title, wikipedia.summary (wikipedia_page_title, sentences = 3)))
 
