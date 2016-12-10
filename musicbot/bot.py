@@ -36,7 +36,7 @@ from musicbot.player import MusicPlayer
 from musicbot.config import Config, ConfigDefaults
 from musicbot.papers import Papers
 from musicbot.permissions import Permissions, PermissionsDefaults
-from musicbot.utils import load_file, write_file, sane_round_int, format_time, random_line
+from musicbot.utils import load_file, write_file, sane_round_int, format_time, random_line, paginate
 from musicbot.games.game_2048 import Game2048
 from musicbot.games.game_hangman import GameHangman
 from musicbot.nine_gag import *
@@ -85,7 +85,7 @@ class Response:
 class MusicBot(discord.Client):
     trueStringList = ["true", "1", "t", "y", "yes", "yeah", "yup", "certainly", "uh-huh", "affirmitive", "activate"]
     channelFreeCommands =  ["say"]
-    privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast", "news", "game"]
+    privateChatCommands = ["c", "ask", "requestfeature", "random", "translate", "help", "say", "broadcast", "news", "game", "wiki"]
     lonelyModeRunning = False
 
     def __init__(self, config_file=ConfigDefaults.options_file, papers_file = ConfigDefaults.papers_file, playlists_file = ConfigDefaults.playlists_file, perms_file=PermissionsDefaults.perms_file):
@@ -167,7 +167,6 @@ class MusicBot(discord.Client):
 
         return True
 
-    # TODO: autosummon option to a specific channel
     async def _auto_summon(self):
         owner = self._get_owner(voice=True)
         if owner:
@@ -503,21 +502,18 @@ class MusicBot(discord.Client):
 
         await self.change_presence(game=game)
 
-    async def safe_send_message(self, dest, content, *, max_letters = 1900, split_message = True, tts=False, expire_in=0, also_delete=None, quiet=False):
+    async def safe_send_message(self, dest, content, *, max_letters = DISCORD_MSG_CHAR_LIMIT, split_message = True, tts=False, expire_in=0, also_delete=None, quiet=False):
         msg = None
         try:
             if split_message and len (content) > max_letters:
                 self.safe_print ("Message too long, splitting it up")
-                iterations, overflow = divmod (len (content), max_letters)
-                for i in range (iterations + 1):
-                    start = (i * max_letters)
-                    end = start + (overflow if i >= iterations else max_letters)
-                    this_content = content [start : end]
-                    #self.safe_print (str (i) + ". message (from " + str (start) + " to " + str (end) + "):\n" + this_content)
-                    msg = await self.send_message(dest, this_content, tts=tts)
+                msgs = paginate (content, length = DISCORD_MSG_CHAR_LIMIT)
 
-                    if msg and expire_in:
-                        asyncio.ensure_future(self._wait_delete_msg(msg, expire_in))
+                for msg in msgs:
+                    nmsg = await self.send_message(dest, msg, tts=tts)
+
+                    if nmsg and expire_in:
+                        asyncio.ensure_future(self._wait_delete_msg(nmsg, expire_in))
 
                     if also_delete and isinstance(also_delete, discord.Message):
                         asyncio.ensure_future(self._wait_delete_msg(also_delete, expire_in))
@@ -1729,7 +1725,8 @@ class MusicBot(discord.Client):
         """
 
         if not new_volume:
-            return Response('Current volume: `%s%%`' % int(player.volume * 100), reply=True, delete_after=20)
+            bar_len = 20
+            return Response("Current volume: ***REMOVED******REMOVED***%\n***REMOVED******REMOVED***".format (int (player.volume * 100), "".join (["■" if (x / 20) < player.volume else "□" for x in range (bar_len)])), reply=True, delete_after=20)
 
         relative = False
         if new_volume[0] in '+-':
@@ -2108,11 +2105,11 @@ class MusicBot(discord.Client):
         client = tungsten.Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
         if not res.success:
-            await self.safe_send_message (channel, "Couldn't find anything useful on that subject, sorry.\n**I'm now including Wikipedia!**")
+            await self.safe_send_message (channel, "Couldn't find anything useful on that subject, sorry.\n**I'm now including Wikipedia!**", expire_in = 15)
             self.safe_print ("Didn't find an answer to: " + msgContent)
-            return self.cmd_wiki (channel, message, ["summarize", msgContent])
+            return await self.cmd_wiki (channel, message, ["en" , "summarize", "5", msgContent])
         for pod in res.pods:
-            await self.safe_send_message (channel, " ".join (["**" + pod.title + "**", self.shortener.short(pod.format ["img"][0] ["url"])]))
+            await self.safe_send_message (channel, " ".join (["**" + pod.title + "**", self.shortener.short(pod.format ["img"][0] ["url"])]), expire_in = 100)
         #await self.safe_send_message(channel, answer)
         self.safe_print ("Answered " + message.author.name + "'s question with: " + msgContent)
 
@@ -2582,27 +2579,56 @@ class MusicBot(discord.Client):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***game
+            ***REMOVED***command_prefix***REMOVED***game name
 
-        WIP
+        Play a game I guess... Whaddya expect?
         """
+
+        all_funcs = dir (self)
+        all_games = list (filter (lambda x: re.search ("^g_\w+", x), all_funcs))
+        all_game_names = [x [2:] for x in all_games]
+        game_list = [***REMOVED***"name" : x [2:], "handler" : getattr (self, x, None), "description" : getattr (self, x, None).__doc__.strip (' \t\n\r')***REMOVED*** for x in all_games]
+
         if game is None:
-            return Response ("Not yet implemented.")
+            shuffle (game_list)
+
+            def check (m):
+                return (m.content.lower () in ["y", "n", "exit"])
+
+            for current_game in game_list:
+                msg = await self.safe_send_message (channel, "*How about this game:*\n\n*****REMOVED******REMOVED*****\n***REMOVED******REMOVED***\n\nType *y*, *n* or *exit*".format (current_game ["name"], current_game ["description"]))
+                response = await self.wait_for_message (100, author=author, channel=channel, check=check)
+
+                if not response or response.content.startswith (self.config.command_prefix) or response.content.lower ().startswith ('exit'):
+                    await self.safe_delete_message (msg)
+                    await self.safe_delete_message (response)
+                    await self.safe_send_message (channel, "Nevermind then.")
+                    return
+
+                if response.content.lower () == "y":
+                    await self.safe_delete_message (msg)
+                    await self.safe_delete_message (response)
+                    game = current_game ["name"]
+                    break
+
+                await self.safe_delete_message (msg)
+                await self.safe_delete_message (response)
+
+            if game is None:
+                await self.safe_send_message (channel, "That was all of them.", expire_in = 20)
+                return
 
         game = game.lower ()
+        handler = getattr (self, "g_" + game.title (), None)
+        if handler is None:
+            return Response ("There's no game like that...", delete_after = 20)
 
-        if game == "hangman":
-            await self.gHangman (author, channel)
-        elif game == "2048":
-            size = 4
-            if leftover_args is not None and len (leftover_args) > 0:
-                try:
-                    size = int (leftover_args [0])
-                except:
-                    pass
+        await handler (author, channel)
 
-            await self.g2048 (author, channel, size)
-
-    async def g2048 (self, author, channel, size):
+    async def g_2048 (self, author, channel, size = 5):
+        """
+        Join the same numbers and get to the 2048 tile!
+        """
         game = Game2048 (size)
         game_running = True
         turn_index = 1
@@ -2672,7 +2698,10 @@ class MusicBot(discord.Client):
         await self.send_file (channel, game.getImage (cache_location) + ".gif", content = "**2048**\nYour replay:")
         await self.safe_delete_message (msg)
 
-    async def gHangman (self, author, channel, word = None, tries = 10):
+    async def g_Hangman (self, author, channel, word = None, tries = 10):
+        """
+        Guess a word by guessing each and every letter
+        """
         if word is None:
             word = re.sub('[^a-zA-Z]', '', random_line (ConfigDefaults.hangman_wordlist))
 
@@ -2683,17 +2712,21 @@ class MusicBot(discord.Client):
         running = True
 
         def check (m):
-            return (m.content.lower () in alphabet or m.content.lower () is "exit")
+            return (m.content.lower () in alphabet or m.content.lower () == word or m.content.lower () == "exit")
 
         while running:
             current_status = game.get_beautified_string ()
             msg = await self.safe_send_message (channel, "**Hangman**\n****REMOVED******REMOVED*** tries left*\n\n***REMOVED******REMOVED***\n\n`Send the letter you want to guess or type \"exit\" to exit.`".format (game.tries_left, current_status))
             response = await self.wait_for_message (300, author=author, channel=channel, check=check)
 
-            if not response or response.content.startswith (self.config.command_prefix) or response.content.lower ().startswith ('exit'):
+            if not response or response.content.lower ().startswith (self.config.command_prefix) or response.content.lower ().startswith ('exit'):
                 await self.safe_delete_message (msg)
                 await self.safe_send_message (channel, "Aborting this Hangman game. Thanks for playing!")
                 running = False
+
+            if response.content.lower () == word:
+                await self.safe_send_message (channel, "Congratulations, you got it!\nThe word is: ****REMOVED******REMOVED****".format (word))
+                return
 
             letter = response.content [0]
             game.guess (letter)
@@ -2941,7 +2974,7 @@ class MusicBot(discord.Client):
 
             for pl in self.playlists.saved_playlists:
                 infos = self.playlists.get_playlist (pl, player.playlist)
-                response_text += "  ***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED*** and a playtime of ***REMOVED******REMOVED***\n".format (iteration, pl.title (), server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y", format_time (sum ([x.duration for x in infos ["entries"]])))
+                response_text += "  ***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED*** and a playtime of ***REMOVED******REMOVED***\n".format (iteration, pl.title (), server.get_member (infos ["author"]).mention, str (infos ["entry_count"]), "ies" if int (infos ["entry_count"]) is not 1 else "y", format_time (sum ([x.duration for x in infos ["entries"]]), round_seconds = True, max_specifications = 2))
                 iteration += 1
 
             #self.safe_print (response_text)
@@ -3172,9 +3205,6 @@ class MusicBot(discord.Client):
     async def cmd_wiki (self, channel, message, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***wiki [language] search [results] query
-                -This function helps you find the right article.
-
             ***REMOVED***command_prefix***REMOVED***wiki [language] summarize [number of sentences] query
                 -This function summarizes the content of a Wikipedia page
 
@@ -3196,23 +3226,19 @@ class MusicBot(discord.Client):
         search_query = " ".join (leftover_args)
         #self.safe_print (search_query)
 
-        if leftover_args [0] == "search":
-            search_query = " ".join (leftover_args [1:])
-            #TODO: help the user find the right article.
-        elif leftover_args [0] == "summarize":
+        if leftover_args [0] == "summarize":
             sent_num = int (leftover_args [1]) if str (type (leftover_args [1])) == "int" else 5
             search = leftover_args [2:] if str (type (leftover_args [1])) == "int" else leftover_args [1:]
             title = wikipedia.search (search, results = 1, suggestion = True) [0]
-            return Response ("*****REMOVED******REMOVED*****\n***REMOVED******REMOVED***".format (title, wikipedia.summary (title, sentences = sent_num)))
+            return Response ("*****REMOVED******REMOVED*****\n***REMOVED******REMOVED***".format (title [0], wikipedia.summary (title, sentences = sent_num)))
         else:
             title = wikipedia.search (search_query, results = 1, suggestion = True) [0]
-            #self.safe_print (str (title))
             if title:
                 wikipedia_page = wikipedia.page (title = title)
-                wikipedia_page_title = title
+                wikipedia_page_title = title [0]
 
         if not wikipedia_page:
-            return Response ("I didn't really find anything under ****REMOVED******REMOVED****.".format (search_query), delete_after = 20)
+            return Response ("I didn't find anything called ****REMOVED******REMOVED****.".format (search_query), delete_after = 20)
 
         return Response ("*****REMOVED******REMOVED*****\n***REMOVED******REMOVED***".format (wikipedia_page_title, wikipedia.summary (wikipedia_page_title, sentences = 3)))
 
@@ -3247,7 +3273,7 @@ class MusicBot(discord.Client):
             except:
                 return Response ("Could not download the file. This really shouldn't happen")
 
-        await self.safe_send_message (author, "The file is being uploaded. Please wait a second.", delete_after = 15)
+        await self.safe_send_message (author, "The file is being uploaded. Please wait a second.", expire_in = 15)
         await self.send_file (author, entry.filename, content = "Here you go:")
 
     async def cmd_disconnect(self, server):

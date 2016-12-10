@@ -193,7 +193,7 @@ class ConfigDefaults:
     playlists_file = "config/playlists.ini"
     blacklist_file = 'config/blacklist.txt'
     auto_playlist_file = 'config/autoplaylist.txt' # this will change when I add playlists it did change ;)
-    hangan_wordlist = "data/hangman_wordlist.txt"
+    hangman_wordlist = "data/hangman_wordlist.txt"
 
 # These two are going to be wrappers for the id lists, with add/remove/load/save functions
 # and id/object conversion so types aren't an issue
