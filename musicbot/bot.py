@@ -167,7 +167,6 @@ class MusicBot(discord.Client):
 
         return True
 
-    # TODO: autosummon option to a specific channel
     async def _auto_summon(self):
         owner = self._get_owner(voice=True)
         if owner:
@@ -1726,7 +1725,8 @@ class MusicBot(discord.Client):
         """
 
         if not new_volume:
-            return Response('Current volume: `%s%%`' % int(player.volume * 100), reply=True, delete_after=20)
+            bar_len = 20
+            return Response("Current volume: {}%\n{}".format (int (player.volume * 100), "".join (["■" if (x / 20) < player.volume else "□" for x in range (bar_len)])), reply=True, delete_after=20)
 
         relative = False
         if new_volume[0] in '+-':
@@ -2105,11 +2105,11 @@ class MusicBot(discord.Client):
         client = tungsten.Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
         if not res.success:
-            await self.safe_send_message (channel, "Couldn't find anything useful on that subject, sorry.\n**I'm now including Wikipedia!**")
+            await self.safe_send_message (channel, "Couldn't find anything useful on that subject, sorry.\n**I'm now including Wikipedia!**", expire_in = 15)
             self.safe_print ("Didn't find an answer to: " + msgContent)
             return await self.cmd_wiki (channel, message, ["en" , "summarize", "5", msgContent])
         for pod in res.pods:
-            await self.safe_send_message (channel, " ".join (["**" + pod.title + "**", self.shortener.short(pod.format ["img"][0] ["url"])]))
+            await self.safe_send_message (channel, " ".join (["**" + pod.title + "**", self.shortener.short(pod.format ["img"][0] ["url"])]), expire_in = 100)
         #await self.safe_send_message(channel, answer)
         self.safe_print ("Answered " + message.author.name + "'s question with: " + msgContent)
 
@@ -2601,14 +2601,18 @@ class MusicBot(discord.Client):
 
                 if not response or response.content.startswith (self.config.command_prefix) or response.content.lower ().startswith ('exit'):
                     await self.safe_delete_message (msg)
+                    await self.safe_delete_message (response)
                     await self.safe_send_message (channel, "Nevermind then.")
+                    return
 
                 if response.content.lower () == "y":
                     await self.safe_delete_message (msg)
+                    await self.safe_delete_message (response)
                     game = current_game ["name"]
                     break
 
                 await self.safe_delete_message (msg)
+                await self.safe_delete_message (response)
 
             if game is None:
                 await self.safe_send_message (channel, "That was all of them.", expire_in = 20)
