@@ -1,367 +1,5588 @@
 {
-  "expected_filename": "audio_cache\\youtube-A4RX6nnBvAQ-12._Things_To_Consider_During_Freefall.webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 171,
-  "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=A4RX6nnBvAQ",
   "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
     "author": {
+      "id": "203302899277627392",
       "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
     }
   },
   "version": 1,
-  "title": "12. Things To Consider During Freefall"
-}
-;
-{
-  "expected_filename": "audio_cache\\youtube-mfbZua8vpf0-03._Breakfast_Of_Champignons.webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 132,
-  "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=mfbZua8vpf0",
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    }
-  },
-  "version": 1,
-  "title": "03. Breakfast Of Champignons"
-}
-;
-{
-  "expected_filename": "audio_cache\\youtube-M6BPjlW2r_A-02._Theories_Of_An_Eager_Heart.webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 247,
-  "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=M6BPjlW2r_A",
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    }
-  },
-  "version": 1,
-  "title": "02. Theories Of An Eager Heart"
-}
-;
-{
-  "expected_filename": "audio_cache\\youtube-1MC5yGDYCGo-04._With_Friendship_Peace.webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 155,
-  "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=1MC5yGDYCGo",
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    }
-  },
-  "version": 1,
-  "title": "04. With Friendship & Peace"
-}
-;
-{
-  "expected_filename": "audio_cache\\youtube-Ik4SeVpOh0w-01._The_Light_In_Us_All.webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 190,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=Ik4SeVpOh0w",
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    }
-  },
-  "version": 1,
-  "title": "01. The Light In Us All"
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Ik4SeVpOh0w-01._The_Light_In_Us_All.webm",
+  "downloaded": false,
+  "title": "01. The Light In Us All",
+  "duration": 190,
+  "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-NZ3Oa9yAB9I-13._You_Me_Gravity.webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 323,
-  "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=NZ3Oa9yAB9I",
   "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
     "author": {
+      "id": "203302899277627392",
       "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
     }
   },
   "version": 1,
-  "title": "13. You, Me & Gravity"
+  "url": "https://www.youtube.com/watch?v=M6BPjlW2r_A",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-M6BPjlW2r_A-02._Theories_Of_An_Eager_Heart.webm",
+  "downloaded": false,
+  "title": "02. Theories Of An Eager Heart",
+  "duration": 247,
+  "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-SIzXMq9KL2o-09._Sink_Cat.webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 203,
-  "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=SIzXMq9KL2o",
   "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
     "author": {
+      "id": "203302899277627392",
       "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
     }
   },
   "version": 1,
-  "title": "09. Sink Cat"
+  "url": "https://www.youtube.com/watch?v=mfbZua8vpf0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-mfbZua8vpf0-03._Breakfast_Of_Champignons.webm",
+  "downloaded": false,
+  "title": "03. Breakfast Of Champignons",
+  "duration": 132,
+  "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube--QlVkaJa3wY-10._You_ll_Know_When_It_Turns_Invisible.webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 274,
-  "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=-QlVkaJa3wY",
   "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
     "author": {
+      "id": "203302899277627392",
       "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
     }
   },
   "version": 1,
-  "title": "10. You'll Know When It Turns Invisible"
+  "url": "https://www.youtube.com/watch?v=1MC5yGDYCGo",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-1MC5yGDYCGo-04._With_Friendship_Peace.webm",
+  "downloaded": false,
+  "title": "04. With Friendship & Peace",
+  "duration": 155,
+  "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-NTerDwbsK2I-08._Clever_Candles_Steal_The_Light.webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 140,
-  "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=NTerDwbsK2I",
   "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
     "author": {
+      "id": "203302899277627392",
       "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
     }
   },
   "version": 1,
-  "title": "08. Clever Candles Steal The Light"
-}
-;
-{
-  "expected_filename": "audio_cache\\youtube-tBAPn2nb2PE-07._Aspect_Imaginarium.webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 269,
-  "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=tBAPn2nb2PE",
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    }
-  },
-  "version": 1,
-  "title": "07. Aspect Imaginarium"
-}
-;
-{
-  "expected_filename": "audio_cache\\youtube-a-OiWFuRVf0-05._Small_Hands_Make_Big_Things.webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 168,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=a-OiWFuRVf0",
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    }
-  },
-  "version": 1,
-  "title": "05. Small Hands Make Big Things"
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-a-OiWFuRVf0-05._Small_Hands_Make_Big_Things.webm",
+  "downloaded": false,
+  "title": "05. Small Hands Make Big Things",
+  "duration": 168,
+  "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-C0pTqV0fU6s-11._Theme_Parks_After_Dark.webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 215,
-  "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=C0pTqV0fU6s",
   "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
     "author": {
+      "id": "203302899277627392",
       "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
     }
   },
   "version": 1,
-  "title": "11. Theme Parks After Dark"
-}
-;
-{
-  "expected_filename": "audio_cache\\youtube-r2-dZwSLTaA-16._And_So_We_See_The_Truth_The_Beauty.webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 291,
-  "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=r2-dZwSLTaA",
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    }
-  },
-  "version": 1,
-  "title": "16. And So We See The Truth & The Beauty"
-}
-;
-{
-  "expected_filename": "audio_cache\\youtube-uK4zw64B-qk-06._Dream._Build._Repeat..webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 231,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=uK4zw64B-qk",
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    }
-  },
-  "version": 1,
-  "title": "06. Dream. Build. Repeat."
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-uK4zw64B-qk-06._Dream._Build._Repeat..webm",
+  "downloaded": false,
+  "title": "06. Dream. Build. Repeat.",
+  "duration": 231,
+  "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-yC0BO0mbb2M-14._Pride_Of_Pimlico.webm",
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=tBAPn2nb2PE",
   "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 160,
+  "expected_filename": "audio_cache\\youtube-tBAPn2nb2PE-07._Aspect_Imaginarium.webm",
   "downloaded": false,
+  "title": "07. Aspect Imaginarium",
+  "duration": 269,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=NTerDwbsK2I",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-NTerDwbsK2I-08._Clever_Candles_Steal_The_Light.webm",
+  "downloaded": false,
+  "title": "08. Clever Candles Steal The Light",
+  "duration": 140,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=SIzXMq9KL2o",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-SIzXMq9KL2o-09._Sink_Cat.webm",
+  "downloaded": false,
+  "title": "09. Sink Cat",
+  "duration": 203,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=-QlVkaJa3wY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube--QlVkaJa3wY-10._You_ll_Know_When_It_Turns_Invisible.webm",
+  "downloaded": false,
+  "title": "10. You'll Know When It Turns Invisible",
+  "duration": 274,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=C0pTqV0fU6s",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-C0pTqV0fU6s-11._Theme_Parks_After_Dark.webm",
+  "downloaded": false,
+  "title": "11. Theme Parks After Dark",
+  "duration": 215,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=A4RX6nnBvAQ",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-A4RX6nnBvAQ-12._Things_To_Consider_During_Freefall.webm",
+  "downloaded": false,
+  "title": "12. Things To Consider During Freefall",
+  "duration": 171,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=NZ3Oa9yAB9I",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-NZ3Oa9yAB9I-13._You_Me_Gravity.webm",
+  "downloaded": false,
+  "title": "13. You, Me & Gravity",
+  "duration": 323,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
   "url": "https://www.youtube.com/watch?v=yC0BO0mbb2M",
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    }
-  },
-  "version": 1,
-  "title": "14. Pride Of Pimlico"
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-yC0BO0mbb2M-14._Pride_Of_Pimlico.webm",
+  "downloaded": false,
+  "title": "14. Pride Of Pimlico",
+  "duration": 160,
+  "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-S9Gi1Bstc2s-15._Heisenberg_s_Entryway_To_Matrix_Mechanics.webm",
-  "type": "URLPlaylistEntry",
-  "filename": null,
-  "duration": 217,
-  "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=S9Gi1Bstc2s",
   "meta": {
-    "channel": {
-      "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
-    },
     "author": {
+      "id": "203302899277627392",
       "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
     }
   },
   "version": 1,
-  "title": "15. Heisenberg's Entryway To Matrix Mechanics"
+  "url": "https://www.youtube.com/watch?v=S9Gi1Bstc2s",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-S9Gi1Bstc2s-15._Heisenberg_s_Entryway_To_Matrix_Mechanics.webm",
+  "downloaded": false,
+  "title": "15. Heisenberg's Entryway To Matrix Mechanics",
+  "duration": 217,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=r2-dZwSLTaA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-r2-dZwSLTaA-16._And_So_We_See_The_Truth_The_Beauty.webm",
+  "downloaded": false,
+  "title": "16. And So We See The Truth & The Beauty",
+  "duration": 291,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=8s1F523S2lw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-8s1F523S2lw-Bastion_OST_-_01_-_Get_Used_To_It.m4a",
+  "downloaded": false,
+  "title": "Bastion [OST] - 01 - Get Used To It",
+  "duration": 55,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Yxiz_BgU_tE",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Yxiz_BgU_tE-Bastion_OST_-_02_-_A_Proper_Story.webm",
+  "downloaded": false,
+  "title": "Bastion [OST] - 02 - A Proper Story",
+  "duration": 69,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=hMBLXyVJy8Y",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-hMBLXyVJy8Y-Bastion_OST_-_03_-_In_Case_Of_Trouble.m4a",
+  "downloaded": false,
+  "title": "Bastion [OST] - 03 - In Case Of Trouble",
+  "duration": 177,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=F3yGbspPdOQ",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-F3yGbspPdOQ-Bastion_OST_-_04_-_Bynn_The_Breaker.m4a",
+  "downloaded": false,
+  "title": "Bastion [OST] - 04 - Bynn The Breaker",
+  "duration": 250,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=qyUokbOxBPY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-qyUokbOxBPY-Bastion_OST_-_05_-_The_Sole_Regret.m4a",
+  "downloaded": false,
+  "title": "Bastion [OST] - 05 - The Sole Regret",
+  "duration": 148,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=OpdiqUvEYcw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-OpdiqUvEYcw-Bastion_OST_-_06_-_Twisted_Streets.webm",
+  "downloaded": false,
+  "title": "Bastion [OST] - 06 - Twisted Streets",
+  "duration": 210,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=wYTl0WxrbQY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-wYTl0WxrbQY-Bastion_OST_-_07_-_Terminal_March.webm",
+  "downloaded": false,
+  "title": "Bastion [OST] - 07 - Terminal March",
+  "duration": 247,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=77JP_QoTpGQ",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-77JP_QoTpGQ-Bastion_OST_-_08_-_Percy_s_Escape.webm",
+  "downloaded": false,
+  "title": "Bastion [OST] - 08 - Percy's Escape",
+  "duration": 101,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=WzvOLxRAAQE",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-WzvOLxRAAQE-Bastion_OST_-_09_-_Faith_Of_Jevel.webm",
+  "downloaded": false,
+  "title": "Bastion [OST] - 09 - Faith Of Jevel",
+  "duration": 91,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=VSijggSeQow",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-VSijggSeQow-Bastion_OST_-_10_-_Mine_Windbag_Mine.m4a",
+  "downloaded": false,
+  "title": "Bastion [OST] - 10 - Mine, Windbag, Mine",
+  "duration": 187,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=rS9hAtg4EgU",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-rS9hAtg4EgU-Bastion_OST_-_11_-_Slinger_s_Song.m4a",
+  "downloaded": false,
+  "title": "Bastion [OST] - 11 - Slinger's Song",
+  "duration": 247,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=XkI1AvH7ro4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-XkI1AvH7ro4-Bastion_OST_-_12_-_Build_That_Wall_Zia_s_Theme.m4a",
+  "downloaded": false,
+  "title": "Bastion [OST] - 12 - Build That Wall (Zia's Theme)",
+  "duration": 165,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=yMGlMCYdZ-Y",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-yMGlMCYdZ-Y-Bastion_OST_-_13_-_Spike_In_A_Rail.webm",
+  "downloaded": false,
+  "title": "Bastion [OST] - 13 - Spike In A Rail",
+  "duration": 174,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=TIFI_MXJ_U8",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-TIFI_MXJ_U8-Bastion_OST_-_14_-_What_s_Left_Undone.m4a",
+  "downloaded": false,
+  "title": "Bastion [OST] - 14 - What's Left Undone",
+  "duration": 22,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=AVc_60HNMJY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-AVc_60HNMJY-Bastion_OST_-_15_-_Brusher_Patrol.webm",
+  "downloaded": false,
+  "title": "Bastion [OST] - 15 - Brusher Patrol",
+  "duration": 273,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=h7LBbstByzE",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-h7LBbstByzE-Bastion_OST_-_16_-_The_Mancer_s_Dilemma.m4a",
+  "downloaded": false,
+  "title": "Bastion [OST] - 16 - The Mancer's Dilemma",
+  "duration": 122,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=-y9FQUzCZPg",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube--y9FQUzCZPg-Bastion_OST_-_17_-_Mother_I_m_Here_Zulf_s_Theme.m4a",
+  "downloaded": false,
+  "title": "Bastion [OST] - 17 - Mother, I'm Here (Zulf's Theme)",
+  "duration": 137,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=8WlzLcJonDA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-8WlzLcJonDA-Bastion_OST_-_18_-_Pale_Watchers.webm",
+  "downloaded": false,
+  "title": "Bastion [OST] - 18 - Pale Watchers",
+  "duration": 269,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=9ZgY-hYoYto",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-9ZgY-hYoYto-Bastion_OST_-_19_-_The_Bottom_Feeders.webm",
+  "downloaded": false,
+  "title": "Bastion [OST] - 19 - The Bottom Feeders",
+  "duration": 285,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=OEyEFIpb4i0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-OEyEFIpb4i0-Bastion_OST_-_20_-_From_Wharf_To_Wilds.webm",
+  "downloaded": false,
+  "title": "Bastion [OST] - 20 - From Wharf To Wilds",
+  "duration": 82,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=5SwAGaKn7CA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-5SwAGaKn7CA-Bastion_OST_-_21_-_Setting_Sail_Coming_Home_End_Theme.webm",
+  "downloaded": false,
+  "title": "Bastion [OST] - 21 - Setting Sail, Coming Home (End Theme)",
+  "duration": 175,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=8k2foqt4rb0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-8k2foqt4rb0-Bastion_OST_-_22_-_The_Pantheon_Ain_t_Gonna_Catch_You.m4a",
+  "downloaded": false,
+  "title": "Bastion [OST] - 22 - The Pantheon (Ain't Gonna Catch You)",
+  "duration": 148,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=kCl73OxCVO4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-kCl73OxCVO4-Chrono_Trigger_Walkthrough_-_Part_105_Credits.webm",
+  "downloaded": false,
+  "title": "Chrono Trigger Walkthrough - Part 105 (Credits)",
+  "duration": 395,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=76GnOwHorn0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-76GnOwHorn0-Fez_-_Original_Game_Soundtrack_-_Adventure_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Adventure [HD]",
+  "duration": 199,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=WX1KtANvIAc",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-WX1KtANvIAc-Fez_-_Original_Game_Soundtrack_-_Age_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Age [HD]",
+  "duration": 179,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=KeWFzsqLsH0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-KeWFzsqLsH0-Fez_-_Original_Game_Soundtrack_-_Beacon_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Beacon [HD]",
+  "duration": 153,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=aFb7rp4egM4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-aFb7rp4egM4-Fez_-_Original_Game_Soundtrack_-_Beyond_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Beyond [HD]",
+  "duration": 186,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=1y5szNZehps",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-1y5szNZehps-Fez_-_Original_Game_Soundtrack_-_Compass_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Compass [HD]",
+  "duration": 163,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=EDr2_VyYUdk",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-EDr2_VyYUdk-Fez_-_Original_Game_Soundtrack_-_Continuum_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Continuum [HD]",
+  "duration": 156,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=mV7njzhLAsQ",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-mV7njzhLAsQ-Fez_-_Original_Game_Soundtrack_-_Death_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Death [HD]",
+  "duration": 211,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Bp-mbeTiG1E",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Bp-mbeTiG1E-Fez_-_Original_Game_Soundtrack_-_Fear_HD.m4a",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Fear [HD]",
+  "duration": 212,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=IlBQh6N7RDw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-IlBQh6N7RDw-Fez_-_Original_Game_Soundtrack_-_Flow_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Flow [HD]",
+  "duration": 228,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=zrLbkX6QcQo",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-zrLbkX6QcQo-Fez_-_Original_Game_Soundtrack_-_Forgotten_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Forgotten [HD]",
+  "duration": 155,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=kRTJoouX2z8",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-kRTJoouX2z8-Fez_-_Original_Game_Soundtrack_-_Formations_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Formations [HD]",
+  "duration": 141,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=xnbKfyOQoGk",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-xnbKfyOQoGk-Fez_-_Original_Game_Soundtrack_-_Glitch_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Glitch [HD]",
+  "duration": 206,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=TA-SGTmKnP0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-TA-SGTmKnP0-Fez_-_Original_Game_Soundtrack_-_Home_HD.m4a",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Home [HD]",
+  "duration": 96,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Lgt-7pAlesc",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Lgt-7pAlesc-Fez_-_Original_Game_Soundtrack_-_Knowledge_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Knowledge [HD]",
+  "duration": 109,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=rHW2mtuc6pc",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-rHW2mtuc6pc-Fez_-_Original_Game_Soundtrack_-_Legend_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Legend [HD]",
+  "duration": 79,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=laSJ1zgMDC0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-laSJ1zgMDC0-Fez_-_Original_Game_Soundtrack_-_Love_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Love [HD]",
+  "duration": 69,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=4_DFp-XbKQo",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-4_DFp-XbKQo-Fez_-_Original_Game_Soundtrack_-_Majesty_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Majesty [HD]",
+  "duration": 202,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=_ZlE3PydZ1E",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-_ZlE3PydZ1E-Fez_-_Original_Game_Soundtrack_-_Memory_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Memory [HD]",
+  "duration": 77,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=0UDkdQ39XTc",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-0UDkdQ39XTc-Fez_-_Original_Game_Soundtrack_-_Nature_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Nature [HD]",
+  "duration": 251,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Pl-fz_cRL6M",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Pl-fz_cRL6M-Fez_-_Original_Game_Soundtrack_-_Nocturne_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Nocturne [HD]",
+  "duration": 134,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=aw8W2mYhAMA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-aw8W2mYhAMA-Fez_-_Original_Game_Soundtrack_-_Pressure_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Pressure [HD]",
+  "duration": 241,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=6lWqchH05HA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-6lWqchH05HA-Fez_-_Original_Game_Soundtrack_-_Progress_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Progress [HD]",
+  "duration": 256,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=MdY-iueFsoo",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-MdY-iueFsoo-Fez_-_Original_Game_Soundtrack_-_Puzzle_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Puzzle [HD]",
+  "duration": 135,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=QoLCL6yvIvY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-QoLCL6yvIvY-Fez_-_Original_Game_Soundtrack_-_Reflection_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Reflection [HD]",
+  "duration": 543,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=eA36OFxe-uY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-eA36OFxe-uY-Fez_-_Original_Game_Soundtrack_-_Spirit_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Spirit [HD]",
+  "duration": 173,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=ylJ_IIvCQD4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-ylJ_IIvCQD4-Fez_-_Original_Game_Soundtrack_-_Sync_HD.webm",
+  "downloaded": false,
+  "title": "Fez - Original Game Soundtrack - Sync [HD]",
+  "duration": 139,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=aAsxUkcHCVU",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-aAsxUkcHCVU-Firewatch_OST_-_Beartooth_Point.webm",
+  "downloaded": false,
+  "title": "Firewatch OST - Beartooth Point",
+  "duration": 82,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=kgsUHqc904Y",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-kgsUHqc904Y-Firewatch_OST_-_North_Backcountry.webm",
+  "downloaded": false,
+  "title": "Firewatch OST - North Backcountry",
+  "duration": 95,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=l457ryBheyc",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-l457ryBheyc-Firewatch_Soundtrack_-_An_Unfortunate_Discovery.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - An Unfortunate Discovery",
+  "duration": 42,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=jRq88vLsCRQ",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-jRq88vLsCRQ-Firewatch_Soundtrack_-_Calm_After_the_Storm.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - Calm After the Storm",
+  "duration": 105,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=TrFVC1jrxp0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-TrFVC1jrxp0-Firewatch_Soundtrack_-_Camp_Approach.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - Camp Approach",
+  "duration": 163,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=BqS9ijX1PrA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-BqS9ijX1PrA-Firewatch_Soundtrack_-_Canyon_Sunset.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - Canyon Sunset",
+  "duration": 117,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=hh4qOQ0L9Wk",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-hh4qOQ0L9Wk-Firewatch_Soundtrack_-_Conversation_Interrupted.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - Conversation, Interrupted",
+  "duration": 21,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=f08KE7WkkDY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-f08KE7WkkDY-Firewatch_Soundtrack_-_Cottonwood_Hike.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - Cottonwood Hike",
+  "duration": 66,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=KQx1meoySvU",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-KQx1meoySvU-Firewatch_Soundtrack_-_Exfiltration.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - Exfiltration",
+  "duration": 159,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=y_xwmmuPkIM",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-y_xwmmuPkIM-Firewatch_Soundtrack_-_Hidden_Away.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - Hidden Away",
+  "duration": 129,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=5E7od7C0rb4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-5E7od7C0rb4-Firewatch_Soundtrack_-_Infiltration.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - Infiltration",
+  "duration": 133,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=hC8z0kkqZ0Y",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-hC8z0kkqZ0Y-Firewatch_Soundtrack_-_New_Equipment.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - New Equipment",
+  "duration": 70,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=fXOk6DhI__w",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-fXOk6DhI__w-Firewatch_Soundtrack_-_Ol_Shoshone.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - Ol' Shoshone",
+  "duration": 126,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=PGcWfpUDl30",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-PGcWfpUDl30-Firewatch_Soundtrack_-_Prologue.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - Prologue",
+  "duration": 215,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=0G02enKDmyE",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-0G02enKDmyE-Firewatch_Soundtrack_-_Shoshone_Overlook.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - Shoshone Overlook",
+  "duration": 67,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=JRFaW8DQTQA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-JRFaW8DQTQA-Firewatch_Soundtrack_-_Something_s_Wrong.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - Something's Wrong",
+  "duration": 56,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=2GHenNAJzLA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-2GHenNAJzLA-Firewatch_Soundtrack_-_Stay_in_Your_Tower_and_Watch.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - Stay in Your Tower and Watch",
+  "duration": 116,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=jPvFceuhO54",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-jPvFceuhO54-Firewatch_Soundtrack_-_Thorofare_Hike.webm",
+  "downloaded": false,
+  "title": "Firewatch Soundtrack - Thorofare Hike",
+  "duration": 156,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=M3hFN8UrBPw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-M3hFN8UrBPw-Journey_OST_-_Complete_Soundtrack.webm",
+  "downloaded": false,
+  "title": "Journey OST - Complete Soundtrack",
+  "duration": 3483,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Qol4JrBUAAk",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Qol4JrBUAAk-Portal_2_OST_Volume_1_-_15_Acres_of_Broken_Glass.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - 15 Acres of Broken Glass",
+  "duration": 300,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=wgVTmt6t3hg",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-wgVTmt6t3hg-Portal_2_OST_Volume_1_-_9999999.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - 9999999",
+  "duration": 191,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=bju0gS-YjkU",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-bju0gS-YjkU-Portal_2_OST_Volume_1_-_Adrenal_Vapor.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - Adrenal Vapor",
+  "duration": 156,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=SGCwU-Z9nU4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-SGCwU-Z9nU4-Portal_2_OST_Volume_1_-_Comedy_=_Tragedy_+_Time.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - Comedy = Tragedy + Time",
+  "duration": 210,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=leiumR0GIvk",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-leiumR0GIvk-Portal_2_OST_Volume_1_-_Concentration_Enhancing_Menu_Initialiser.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - Concentration Enhancing Menu Initialiser",
+  "duration": 137,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=1g2cGQirOr4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-1g2cGQirOr4-Portal_2_OST_Volume_1_-_Ghost_of_Rattman.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - Ghost of Rattman",
+  "duration": 246,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=bynKVT9HaOY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-bynKVT9HaOY-Portal_2_OST_Volume_1_-_Hard_Sunshine.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - Hard Sunshine",
+  "duration": 168,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=IoWYuehVzVs",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-IoWYuehVzVs-Portal_2_OST_Volume_1_-_Haunted_Panels.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - Haunted Panels",
+  "duration": 97,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=K5PKR4QhUyg",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-K5PKR4QhUyg-Portal_2_OST_Volume_1_-_I_Made_It_All_Up.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - I Made It All Up",
+  "duration": 236,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=lTb_EzeCVwI",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-lTb_EzeCVwI-Portal_2_OST_Volume_1_-_I_Saw_a_Deer_Today.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - I Saw a Deer Today",
+  "duration": 193,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=OE9SN5kCfR8",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-OE9SN5kCfR8-Portal_2_OST_Volume_1_-_I_m_Different.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - I'm Different",
+  "duration": 269,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=dg3JakqJWHU",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-dg3JakqJWHU-Portal_2_OST_Volume_1_-_Love_as_a_Construct.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - Love as a Construct",
+  "duration": 297,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Lwntb4zcEmw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Lwntb4zcEmw-Portal_2_OST_Volume_1_-_Overgrowth.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - Overgrowth",
+  "duration": 171,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=oAg4yjEmerU",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-oAg4yjEmerU-Portal_2_OST_Volume_1_-_Science_is_Fun.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - Science is Fun",
+  "duration": 153,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=-EQsK-v_6aA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube--EQsK-v_6aA-Portal_2_OST_Volume_1_-_Technical_Difficulties.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - Technical Difficulties",
+  "duration": 202,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=DuC6fqK1swQ",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-DuC6fqK1swQ-Portal_2_OST_Volume_1_-_The_Courtesy_Call.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - The Courtesy Call",
+  "duration": 217,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=jIDY5Tx3GyQ",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-jIDY5Tx3GyQ-Portal_2_OST_Volume_1_-_The_Friendly_Faith_Plate.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - The Friendly Faith Plate",
+  "duration": 179,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=XJIgHWnkcnA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-XJIgHWnkcnA-Portal_2_OST_Volume_1_-_The_Future_Starts_With_You.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - The Future Starts With You",
+  "duration": 202,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=m2SF9e23ApQ",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-m2SF9e23ApQ-Portal_2_OST_Volume_1_-_There_She_Is.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - There She Is",
+  "duration": 261,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=HjJxHClOzrs",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-HjJxHClOzrs-Portal_2_OST_Volume_1_-_Turret_Wife_Serenade.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - Turret Wife Serenade",
+  "duration": 99,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=yVXwqsJHHFA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-yVXwqsJHHFA-Portal_2_OST_Volume_1_-_You_Know_Her.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 1 - You Know Her?",
+  "duration": 191,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=919EON4IEQk",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-919EON4IEQk-Portal_2_OST_Volume_2_-_Almost_At_Fifty_Percent.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - Almost At Fifty Percent",
+  "duration": 119,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=p2vc7Zunsvk",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-p2vc7Zunsvk-Portal_2_OST_Volume_2_-_An_Accent_Beyond.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - An Accent Beyond",
+  "duration": 179,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=abZq7kWzZus",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-abZq7kWzZus-Portal_2_OST_Volume_2_-_Bots_Build_Bots.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - Bots Build Bots",
+  "duration": 247,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=dT07bexTkak",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-dT07bexTkak-Portal_2_OST_Volume_2_-_Bring_Your_Daughter_To_Work_Day.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - Bring Your Daughter To Work Day",
+  "duration": 160,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=MIcASFQPj0E",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-MIcASFQPj0E-Portal_2_OST_Volume_2_-_Die_Cut_Laser_Dance.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - Die Cut Laser Dance",
+  "duration": 120,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=vXjIIv1KCfw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-vXjIIv1KCfw-Portal_2_OST_Volume_2_-_Don_t_Do_it.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - Don't Do it",
+  "duration": 317,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=G0nxHMAV5wI",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-G0nxHMAV5wI-Portal_2_OST_Volume_2_-_Forwarding_the_Cause_of_Science.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - Forwarding the Cause of Science",
+  "duration": 221,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=-vZ2OMh-YkA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube--vZ2OMh-YkA-Portal_2_OST_Volume_2_-_Halls_Of_Science_4.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - Halls Of Science 4",
+  "duration": 275,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=0XpgchQnaUY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-0XpgchQnaUY-Portal_2_OST_Volume_2_-_I_AM_NOT_A_MORON.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - I AM NOT A MORON!",
+  "duration": 227,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Ar72ybiZMCY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Ar72ybiZMCY-Portal_2_OST_Volume_2_-_Music_of_the_Spheres.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - Music of the Spheres",
+  "duration": 219,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=SklcDsh0Ip4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-SklcDsh0Ip4-Portal_2_OST_Volume_2_-_Music_of_the_Spheres_2_Incendiary_Lemons.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - Music of the Spheres 2 (Incendiary Lemons)",
+  "duration": 164,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=IcBVf5Nq-To",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-IcBVf5Nq-To-Portal_2_OST_Volume_2_-_PotatOS_Lament.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - PotatOS Lament",
+  "duration": 119,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=LwpToM3xlW8",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-LwpToM3xlW8-Portal_2_OST_Volume_2_-_Robot_Ghost_Story.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - Robot Ghost Story",
+  "duration": 187,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=nrX0qxIynDo",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-nrX0qxIynDo-Portal_2_OST_Volume_2_-_The_Reunion.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - The Reunion",
+  "duration": 226,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=p6Vw3RFilxU",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-p6Vw3RFilxU-Portal_2_OST_Volume_2_-_Turret_Redemption_Line.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - Turret Redemption Line",
+  "duration": 203,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=TMqZKe-LEH0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-TMqZKe-LEH0-Portal_2_OST_Volume_2_-_Vitrification_Order.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - Vitrification Order",
+  "duration": 394,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=R5DgrFXPI2Y",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-R5DgrFXPI2Y-Portal_2_OST_Volume_2_-_You_Will_Be_Perfect.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - You Will Be Perfect",
+  "duration": 160,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=gj9eKbIEZTY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-gj9eKbIEZTY-Portal_2_OST_Volume_2_-_You_are_Not_Part_of_the_Control_Group.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 2 - You are Not Part of the Control Group",
+  "duration": 204,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=0uAsD6lQV1I",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-0uAsD6lQV1I-Portal_2_OST_Volume_3_-_Bombs_for_Throwing_at_You_Four_Part_Plan.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Bombs for Throwing at You (Four Part Plan)",
+  "duration": 348,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=kis6V6qwYxI",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-kis6V6qwYxI-Portal_2_OST_Volume_3_-_Cara_Mia_Addio.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Cara Mia Addio",
+  "duration": 154,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=aZsD6CfY1_I",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-aZsD6CfY1_I-Portal_2_OST_Volume_3_-_Caroline_Deleted.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Caroline Deleted",
+  "duration": 111,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=1SiHQMGDfAM",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-1SiHQMGDfAM-Portal_2_OST_Volume_3_-_Excursion_Funnel.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Excursion Funnel",
+  "duration": 272,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=6pBrdRQbzQA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-6pBrdRQbzQA-Portal_2_OST_Volume_3_-_Franken_Turrets.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Franken Turrets",
+  "duration": 248,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=nrnmgMdvI6U",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-nrnmgMdvI6U-Portal_2_OST_Volume_3_-_Machiavellian_Bach.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Machiavellian Bach",
+  "duration": 242,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=TipclsHkYhg",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-TipclsHkYhg-Portal_2_OST_Volume_3_-_Omg_What_has_He_Done.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Omg, What has He Done?",
+  "duration": 145,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=WAeiqxNH3W0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-WAeiqxNH3W0-Portal_2_OST_Volume_3_-_Reconstructing_More_Science.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Reconstructing More Science",
+  "duration": 157,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Z4Jy-TfAdB8",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Z4Jy-TfAdB8-Portal_2_OST_Volume_3_-_Robot_Waiting_Room_1.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Robot Waiting Room #1",
+  "duration": 134,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=ZXLydwgPGT0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-ZXLydwgPGT0-Portal_2_OST_Volume_3_-_Robot_Waiting_Room_2.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Robot Waiting Room #2",
+  "duration": 135,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=V7tRoFqs95U",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-V7tRoFqs95U-Portal_2_OST_Volume_3_-_Robot_Waiting_Room_3.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Robot Waiting Room #3",
+  "duration": 135,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=lCrok_f3AP4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-lCrok_f3AP4-Portal_2_OST_Volume_3_-_Robot_Waiting_Room_4.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Robot Waiting Room #4",
+  "duration": 134,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=FM8ibnOMj7M",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-FM8ibnOMj7M-Portal_2_OST_Volume_3_-_Robot_Waiting_Room_5.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Robot Waiting Room #5",
+  "duration": 135,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=iA8PR9F2gBk",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-iA8PR9F2gBk-Portal_2_OST_Volume_3_-_Robot_Waiting_Room_6.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Robot Waiting Room #6",
+  "duration": 126,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=2EP3fDx644w",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-2EP3fDx644w-Portal_2_OST_Volume_3_-_Robots_FTW.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Robots FTW",
+  "duration": 219,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=KKqp-FZuwtw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-KKqp-FZuwtw-Portal_2_OST_Volume_3_-_Some_Assembly_Required.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Some Assembly Required",
+  "duration": 111,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=hcHeHZiye3g",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-hcHeHZiye3g-Portal_2_OST_Volume_3_-_Spaaaaace.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Spaaaaace",
+  "duration": 46,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=zYVRvC4X03k",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-zYVRvC4X03k-Portal_2_OST_Volume_3_-_Space_Phase.m4a",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Space Phase",
+  "duration": 93,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=-xPR66tcKVQ",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube--xPR66tcKVQ-Portal_2_OST_Volume_3_-_TEST.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - TEST",
+  "duration": 374,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=hOXrgDDLpYw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-hOXrgDDLpYw-Portal_2_OST_Volume_3_-_The_Part_Where_He_Kills_You.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - The Part Where He Kills You",
+  "duration": 203,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=ao7GG8FXWqQ",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-ao7GG8FXWqQ-Portal_2_OST_Volume_3_-_Want_You_Gone.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Want You Gone",
+  "duration": 142,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=_tQyP3BVcL4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-_tQyP3BVcL4-Portal_2_OST_Volume_3_-_Wheatley_Science.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Wheatley Science",
+  "duration": 149,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=ZYsD0iDbEag",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-ZYsD0iDbEag-Portal_2_OST_Volume_3_-_You_Saved_Science.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - You Saved Science",
+  "duration": 48,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=c624QWR3CXI",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-c624QWR3CXI-Portal_2_OST_Volume_3_-_Your_Precious_Moon.webm",
+  "downloaded": false,
+  "title": "Portal 2 OST Volume 3 - Your Precious Moon",
+  "duration": 115,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=ZX0gJcpSjSE",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-ZX0gJcpSjSE-TEAM_FORTRESS_2_FAIL_A_Team_Fortress_2_Parody.m4a",
+  "downloaded": false,
+  "title": "TEAM FORTRESS 2 FAIL, A Team Fortress 2 Parody",
+  "duration": 186,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Vf4B5Ab_S00",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Vf4B5Ab_S00-The_History_of_Chrono_Trigger_Best_Game_EVER_-_A_Brief_History_Feat._MatPat.webm",
+  "downloaded": false,
+  "title": "The History of Chrono Trigger (Best Game EVER!) - A Brief History (Feat. MatPat)",
+  "duration": 530,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=xhAPTJyCac8",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-xhAPTJyCac8-The_Imitation_Game_Soundtrack_-_A_Different_Equation.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - A Different Equation",
+  "duration": 175,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=iQWTTfniUsk",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-iQWTTfniUsk-The_Imitation_Game_Soundtrack_-_Alan.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - Alan",
+  "duration": 178,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=uFDRL73sgcs",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-uFDRL73sgcs-The_Imitation_Game_Soundtrack_-_Alan_Turing_s_Legacy.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - Alan Turing's Legacy",
+  "duration": 117,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=U4GzpCMusC0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-U4GzpCMusC0-The_Imitation_Game_Soundtrack_-_Alone_with_Numbers.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - Alone with Numbers",
+  "duration": 179,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=KZhgqCibrIQ",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-KZhgqCibrIQ-The_Imitation_Game_Soundtrack_-_Because_of_You.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - Because of You",
+  "duration": 96,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=i8fzLmdfl-I",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-i8fzLmdfl-I-The_Imitation_Game_Soundtrack_-_Becoming_a_Spy.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - Becoming a Spy",
+  "duration": 249,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=3eBFtQvPfMc",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-3eBFtQvPfMc-The_Imitation_Game_Soundtrack_-_Carrots_and_Peas.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - Carrots and Peas",
+  "duration": 140,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=2DpnHqnLAS8",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-2DpnHqnLAS8-The_Imitation_Game_Soundtrack_-_Crosswords.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - Crosswords",
+  "duration": 173,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=1AfcvDXTf68",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-1AfcvDXTf68-The_Imitation_Game_Soundtrack_-_Decrypting.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - Decrypting",
+  "duration": 121,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=vKa_STKqK0c",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-vKa_STKqK0c-The_Imitation_Game_Soundtrack_-_End_of_War.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - End of War",
+  "duration": 128,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Iy-_01O9eEU",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Iy-_01O9eEU-The_Imitation_Game_Soundtrack_-_Enigma.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - Enigma",
+  "duration": 171,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=JUzeoxazdRw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-JUzeoxazdRw-The_Imitation_Game_Soundtrack_-_Farewell_to_Christopher.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - Farewell to Christopher",
+  "duration": 161,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=vSNUKRc5jIU",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-vSNUKRc5jIU-The_Imitation_Game_Soundtrack_-_Joan.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - Joan",
+  "duration": 106,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=57J9_st8bGM",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-57J9_st8bGM-The_Imitation_Game_Soundtrack_-_Mission.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - Mission",
+  "duration": 97,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=XDY8LavQ6tE",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-XDY8LavQ6tE-The_Imitation_Game_Soundtrack_-_Night_Research.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - Night Research",
+  "duration": 100,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=YnAfmIoIHfg",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-YnAfmIoIHfg-The_Imitation_Game_Soundtrack_-_Running.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - Running",
+  "duration": 182,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=3Z4GfNnpUGY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-3Z4GfNnpUGY-The_Imitation_Game_Soundtrack_-_The_Apple.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - The Apple",
+  "duration": 141,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=-j7s0gaXR80",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube--j7s0gaXR80-The_Imitation_Game_Soundtrack_-_The_Headmaster.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - The Headmaster",
+  "duration": 148,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=tyezUnJnYYQ",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-tyezUnJnYYQ-The_Imitation_Game_Soundtrack_-_The_Imitation_Game.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - The Imitation Game",
+  "duration": 157,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=2Wk6RzI39is",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-2Wk6RzI39is-The_Imitation_Game_Soundtrack_-_The_Machine_Christopher.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - The Machine Christopher",
+  "duration": 118,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=P0Vrm82oLzY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-P0Vrm82oLzY-The_Imitation_Game_Soundtrack_-_U-Boats.webm",
+  "downloaded": false,
+  "title": "The Imitation Game Soundtrack - U-Boats",
+  "duration": 133,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=bPBXXzCnwTY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-bPBXXzCnwTY-High_Quality_Journey_OST_Extract_-_Apotheosis.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST (Extract) - Apotheosis",
+  "duration": 360,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=4JyCSy1vBhk",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-4JyCSy1vBhk-High_Quality_Journey_OST_Extract_-_Atonement.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST (Extract) - Atonement",
+  "duration": 68,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=6M1bCHHpwzE",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-6M1bCHHpwzE-High_Quality_Journey_OST_Extract_-_Final_Confluence.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST (Extract) - Final Confluence",
+  "duration": 67,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=ci-L4ns4om8",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-ci-L4ns4om8-High_Quality_Journey_OST_Extract_-_I_Was_Born_For_This_End_Titles.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST (Extract) - I Was Born For This (End Titles)",
+  "duration": 270,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=u8QG2AAQRMA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-u8QG2AAQRMA-High_Quality_Journey_OST_Extract_-_Nascence.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST (Extract) - Nascence",
+  "duration": 108,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=GrW8exhs7QA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-GrW8exhs7QA-High_Quality_Journey_OST_Extract_-_Road_Of_Trials.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST (Extract) - Road Of Trials",
+  "duration": 129,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=ns3EUrC8EK8",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-ns3EUrC8EK8-High_Quality_Journey_OST_Extract_-_Threshold.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST (Extract) - Threshold",
+  "duration": 365,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=kUJQsshRxOA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-kUJQsshRxOA-High_Quality_Journey_OST_Transfiguration_Album_01_-_Nascence.m4a",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST (Transfiguration Album) 01 - Nascence",
+  "duration": 134,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=zyTLsGML5TM",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-zyTLsGML5TM-High_Quality_Journey_OST_Transfiguration_Album_02_-_Threshold.m4a",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST (Transfiguration Album) 02 - Threshold",
+  "duration": 411,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=9HviLFTySHs",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-9HviLFTySHs-High_Quality_Journey_OST_Transfiguration_Album_03_-_Road_Of_Trials.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST (Transfiguration Album) 03 - Road Of Trials",
+  "duration": 298,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=ziqRj5KJbrc",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-ziqRj5KJbrc-High_Quality_Journey_OST_Transfiguration_Album_04_-_Final_Confluence.m4a",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST (Transfiguration Album) 04 - Final Confluence",
+  "duration": 135,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=s-Vx1duYZ5Q",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-s-Vx1duYZ5Q-High_Quality_Journey_OST_Transfiguration_Album_05_-_Apotheosis.m4a",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST (Transfiguration Album) 05 - Apotheosis",
+  "duration": 390,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=4GZUQFcht78",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-4GZUQFcht78-High_Quality_Journey_OST_Transfiguration_Album_06_-_I_Was_Born_For_This.m4a",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST (Transfiguration Album) 06 - I Was Born For This",
+  "duration": 298,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=sXD2eWLqzU0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-sXD2eWLqzU0-High_Quality_Journey_OST_01_-_Nascence.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 01 - Nascence",
+  "duration": 107,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=scKMZgXhpH0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-scKMZgXhpH0-High_Quality_Journey_OST_02_-_The_Call.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 02 - The Call",
+  "duration": 219,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=WBGHgVE3a7g",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-WBGHgVE3a7g-High_Quality_Journey_OST_03_-_First_Confluence.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 03 - First Confluence",
+  "duration": 101,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=NNpmCOdq9pI",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-NNpmCOdq9pI-High_Quality_Journey_OST_04_-_Second_Confluence.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 04 - Second Confluence",
+  "duration": 140,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=xG3f4MaVbyw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-xG3f4MaVbyw-High_Quality_Journey_OST_05_-_Threshold.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 05 - Threshold",
+  "duration": 365,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=brR2uG3xw1c",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-brR2uG3xw1c-High_Quality_Journey_OST_06_-_Third_Confluence.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 06 - Third Confluence",
+  "duration": 100,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=mhFL96Yl0bw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-mhFL96Yl0bw-High_Quality_Journey_OST_07_-_The_Road_of_Trials.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 07 - The Road of Trials",
+  "duration": 256,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=-c4N7bYIu1w",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube--c4N7bYIu1w-High_Quality_Journey_OST_08_-_Fourth_Confluence.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 08 - Fourth Confluence",
+  "duration": 67,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=KRXr5DZXaxk",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-KRXr5DZXaxk-High_Quality_Journey_OST_09_-_Temptations.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 09 - Temptations",
+  "duration": 253,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=CUZjo7ZWLKk",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-CUZjo7ZWLKk-High_Quality_Journey_OST_10_-_Descent.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 10 - Descent",
+  "duration": 160,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=_jiM0dM3ETc",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-_jiM0dM3ETc-High_Quality_Journey_OST_11_-_Fifth_Confluence.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 11 - Fifth Confluence",
+  "duration": 83,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=pCAad5OledU",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-pCAad5OledU-High_Quality_Journey_OST_12_-_Atonement.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 12 - Atonement",
+  "duration": 371,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Ju2aGVkZnoE",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Ju2aGVkZnoE-High_Quality_Journey_OST_13_-_Final_Confluence.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 13 - Final Confluence",
+  "duration": 126,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Ia80PYVUAQ4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Ia80PYVUAQ4-High_Quality_Journey_OST_14_-_The_Crossing.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 14 - The Crossing",
+  "duration": 118,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Q9hpZ8vK554",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Q9hpZ8vK554-High_Quality_Journey_OST_15_-_Reclamation.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 15 - Reclamation",
+  "duration": 136,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=GZe4udzZGYg",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-GZe4udzZGYg-High_Quality_Journey_OST_16_-_Nadir.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 16 - Nadir",
+  "duration": 217,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=rkRAAiJnXCE",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-rkRAAiJnXCE-High_Quality_Journey_OST_17_-_Apotheosis.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 17 - Apotheosis",
+  "duration": 427,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Qimp6DtxWn0",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Qimp6DtxWn0-High_Quality_Journey_OST_18_-_I_was_Born_for_This.webm",
+  "downloaded": false,
+  "title": "[High Quality] Journey OST 18 - I was Born for This",
+  "duration": 281,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=VJnfkb1hKv4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-VJnfkb1hKv4-High_Quality_Shadow_of_the_Colossus_OST_01_-_Prologue.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 01 - Prologue",
+  "duration": 207,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=2Uo7OziwwGQ",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-2Uo7OziwwGQ-High_Quality_Shadow_of_the_Colossus_OST_02_-_Prohibited_Arts.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 02 - Prohibited Arts",
+  "duration": 114,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Bq3q8uOzisw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-Bq3q8uOzisw-High_Quality_Shadow_of_the_Colossus_OST_03_-_Commandment.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 03 - Commandment",
+  "duration": 114,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=8vEH6GK2cBY",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-8vEH6GK2cBY-High_Quality_Shadow_of_the_Colossus_OST_04_-_Black_Blood.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 04 - Black Blood",
+  "duration": 123,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=zgk7Spv8VgE",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-zgk7Spv8VgE-High_Quality_Shadow_of_the_Colossus_OST_05_-_Resurrection.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 05 - Resurrection",
+  "duration": 115,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=DUpa5FhBFkA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-DUpa5FhBFkA-High_Quality_Shadow_of_the_Colossus_OST_06_-_Sign_of_the_Colossus.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 06 - Sign of the Colossus",
+  "duration": 113,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=yt4xI70zC-c",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-yt4xI70zC-c-High_Quality_Shadow_of_the_Colossus_OST_07_-_Grotesque_Figures.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 07 - Grotesque Figures",
+  "duration": 126,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=sr2nK06zZkg",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-sr2nK06zZkg-High_Quality_Shadow_of_the_Colossus_OST_08_-_The_Opened_Way.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 08 - The Opened Way",
+  "duration": 118,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=-7UmysdD260",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube--7UmysdD260-High_Quality_Shadow_of_the_Colossus_OST_09_-_The_End_of_the_Battle.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 09 - The End of the Battle",
+  "duration": 103,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=wyLFu2pHm_w",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-wyLFu2pHm_w-High_Quality_Shadow_of_the_Colossus_OST_10_-_Idol_Collapse.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 10 - Idol Collapse",
+  "duration": 35,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=tiEvWdHJG-A",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-tiEvWdHJG-A-High_Quality_Shadow_of_the_Colossus_OST_11_-_Green_Hills.m4a",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 11 - Green Hills",
+  "duration": 34,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=93O8a5sOTM4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-93O8a5sOTM4-High_Quality_Shadow_of_the_Colossus_OST_12_-_A_Violent_Encounter.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 12 - A Violent Encounter",
+  "duration": 118,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=dVNcmGjNW6c",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-dVNcmGjNW6c-High_Quality_Shadow_of_the_Colossus_OST_13_-_Revived_Power.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 13 - Revived Power",
+  "duration": 139,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=JIcp1L0uI0Y",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-JIcp1L0uI0Y-High_Quality_Shadow_of_the_Colossus_OST_14_-_Lakeside.m4a",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 14 - Lakeside",
+  "duration": 27,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=NczhWO7OIuM",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-NczhWO7OIuM-High_Quality_Shadow_of_the_Colossus_OST_15_-_Silence.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 15 - Silence",
+  "duration": 110,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=BapzzE2HWlM",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-BapzzE2HWlM-High_Quality_Shadow_of_the_Colossus_OST_16_-_In_Awe_of_the_Power.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 16 - In Awe of the Power",
+  "duration": 133,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=WDCGCH-SMI8",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-WDCGCH-SMI8-High_Quality_Shadow_of_the_Colossus_OST_17_-_Wander_s_Death.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 17 - Wander's Death",
+  "duration": 46,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=vk5Q7ALNQpc",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-vk5Q7ALNQpc-High_Quality_Shadow_of_the_Colossus_OST_18_-_The_Farthest_Land.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 18 - The Farthest Land",
+  "duration": 204,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=70RNkaajLus",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-70RNkaajLus-High_Quality_Shadow_of_the_Colossus_OST_19_-_Creeping_Shadow.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 19 - Creeping Shadow",
+  "duration": 107,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=v-gBSL0yr6w",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-v-gBSL0yr6w-High_Quality_Shadow_of_the_Colossus_OST_20_-_A_Messenger_From_Behind.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 20 - A Messenger From Behind",
+  "duration": 113,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=ERW6ePVI-As",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-ERW6ePVI-As-High_Quality_Shadow_of_the_Colossus_OST_21_-_Counterattack.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 21 - Counterattack",
+  "duration": 124,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=-OEkG1dKmYw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube--OEkG1dKmYw-High_Quality_Shadow_of_the_Colossus_OST_22_-_Sky_Burial.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 22 - Sky Burial",
+  "duration": 105,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=B85fC5lSI8E",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-B85fC5lSI8E-High_Quality_Shadow_of_the_Colossus_OST_23_-_A_Closed-off_City.m4a",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 23 - A Closed-off City",
+  "duration": 31,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=7PZnSXtFf0U",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-7PZnSXtFf0U-High_Quality_Shadow_of_the_Colossus_OST_24_-_Liberated_Guardian.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 24 - Liberated Guardian",
+  "duration": 127,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=tWxYnyT4sLA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-tWxYnyT4sLA-High_Quality_Shadow_of_the_Colossus_OST_25_-_A_Despair-filled_Farewell.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 25 - A Despair-filled Farewell",
+  "duration": 133,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=jbv3P9kSdLA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-jbv3P9kSdLA-High_Quality_Shadow_of_the_Colossus_OST_26_-_Prayer.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 26 - Prayer",
+  "duration": 112,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=w09sKTkyAOk",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-w09sKTkyAOk-High_Quality_Shadow_of_the_Colossus_OST_27_-_Swift_Horse.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 27 - Swift Horse",
+  "duration": 105,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=WmEhEM_3GSM",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-WmEhEM_3GSM-High_Quality_Shadow_of_the_Colossus_OST_28_-_Gatekeeper_of_the_Castle_Ruins.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 28 - Gatekeeper of the Castle Ruins",
+  "duration": 123,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=uZbN5NCDuf4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-uZbN5NCDuf4-High_Quality_Shadow_of_the_Colossus_OST_29_-_Sanctuary.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 29 - Sanctuary",
+  "duration": 33,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=QzbvcsNPEEE",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-QzbvcsNPEEE-High_Quality_Shadow_of_the_Colossus_OST_30_-_Demise_of_the_Ritual.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 30 - Demise of the Ritual",
+  "duration": 141,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=k-B0i710h4U",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-k-B0i710h4U-High_Quality_Shadow_of_the_Colossus_OST_31_-_A_Pursuer.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 31 - A Pursuer",
+  "duration": 31,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=4aPw9HxCc9Q",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-4aPw9HxCc9Q-High_Quality_Shadow_of_the_Colossus_OST_32_-_Premonition_of_Revival.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 32 - Premonition of Revival",
+  "duration": 51,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=RhruUsKa1Dg",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-RhruUsKa1Dg-High_Quality_Shadow_of_the_Colossus_OST_33_-_Epilogue.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 33 - Epilogue",
+  "duration": 429,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=wID1uwXDag4",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-wID1uwXDag4-High_Quality_Shadow_of_the_Colossus_OST_34_-_Hope.m4a",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 34 - Hope",
+  "duration": 130,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=MMlXOPrlGuM",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-MMlXOPrlGuM-High_Quality_Shadow_of_the_Colossus_OST_35_-_The_Sunlit_Earth.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 35 - The Sunlit Earth",
+  "duration": 92,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=2K64Lern8iM",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-2K64Lern8iM-High_Quality_Shadow_of_the_Colossus_OST_36_-_Memories.m4a",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 36 - Memories",
+  "duration": 81,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=KCm3MS0PtcA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-KCm3MS0PtcA-High_Quality_Shadow_of_the_Colossus_OST_37_-_Wilderness.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 37 - Wilderness",
+  "duration": 28,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=XMGhkuWj2Gw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-XMGhkuWj2Gw-High_Quality_Shadow_of_the_Colossus_OST_38_-_Voice_of_the_Earth.m4a",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 38 - Voice of the Earth",
+  "duration": 27,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=NHEh4tWE--U",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-NHEh4tWE--U-High_Quality_Shadow_of_the_Colossus_OST_39_-_Marshlands.m4a",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 39 - Marshlands",
+  "duration": 30,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=2ZNbipcOdxA",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-2ZNbipcOdxA-High_Quality_Shadow_of_the_Colossus_OST_40_-_Anger.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 40 - Anger",
+  "duration": 113,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=rd-rZmR6VRI",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-rd-rZmR6VRI-High_Quality_Shadow_of_the_Colossus_OST_41_-_Final_Battle.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 41 - Final Battle",
+  "duration": 114,
+  "filename": null
+}
+;
+{
+  "meta": {
+    "author": {
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    },
+    "channel": {
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    }
+  },
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=PdV3k8i1Cyw",
+  "type": "URLPlaylistEntry",
+  "expected_filename": "audio_cache\\youtube-PdV3k8i1Cyw-High_Quality_Shadow_of_the_Colossus_OST_42_-_The_Farthest_Land_Reprise.webm",
+  "downloaded": false,
+  "title": "[High Quality] Shadow of the Colossus OST 42 - The Farthest Land (Reprise)",
+  "duration": 202,
+  "filename": null
 }
