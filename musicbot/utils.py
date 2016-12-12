@@ -1,10 +1,11 @@
-import re
-import aiohttp
 import decimal
-import unicodedata
 import random
-
+import re
+import unicodedata
 from hashlib import md5
+
+import aiohttp
+
 from .constants import DISCORD_MSG_CHAR_LIMIT
 
 
@@ -33,7 +34,8 @@ def write_file(filename, contents):
 
 
 def slugify(value):
-    value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
+    value = unicodedata.normalize('NFKD', value).encode(
+        'ascii', 'ignore').decode('ascii')
     value = re.sub('[^\w\s-]', '', value).strip().lower()
     return re.sub('[-\s]+', '-', value)
 
@@ -42,40 +44,45 @@ def sane_round_int(x):
     return int(decimal.Decimal(x).quantize(1, rounding=decimal.ROUND_HALF_UP))
 
 
-def round_to_interval (num, interval = 5):
-    return int (interval * round (float (num) / interval))
+def round_to_interval(num, interval=5):
+    return int(interval * round(float(num) / interval))
 
 
-def format_time (s, round_seconds = False, round_base = 5, max_specifications = None):
+def format_time(s, round_seconds=False, round_base=5, max_specifications=None):
     if round_seconds:
-        s = round_to_interval (s, round_base)
+        s = round_to_interval(s, round_base)
 
-    minutes, seconds = divmod (s, 60)
-    hours, minutes = divmod (minutes, 60)
-    days, hours = divmod (hours, 24)
+    minutes, seconds = divmod(s, 60)
+    hours, minutes = divmod(minutes, 60)
+    days, hours = divmod(hours, 24)
 
     return_list = []
     if days > 0:
-        return_list.append ("***REMOVED******REMOVED*** day***REMOVED******REMOVED***".format (days, "s" if days is not 1 else ""))
+        return_list.append("***REMOVED******REMOVED*** day***REMOVED******REMOVED***".format(
+            days, "s" if days is not 1 else ""))
     if hours > 0:
-        return_list.append ("***REMOVED******REMOVED*** hour***REMOVED******REMOVED***".format (hours, "s" if hours is not 1 else ""))
+        return_list.append("***REMOVED******REMOVED*** hour***REMOVED******REMOVED***".format(
+            hours, "s" if hours is not 1 else ""))
     if minutes > 0:
-        return_list.append ("***REMOVED******REMOVED*** minute***REMOVED******REMOVED***".format (minutes, "s" if minutes is not 1 else ""))
+        return_list.append("***REMOVED******REMOVED*** minute***REMOVED******REMOVED***".format(
+            minutes, "s" if minutes is not 1 else ""))
     if seconds > 0 or s is 0:
-        return_list.append ("***REMOVED******REMOVED*** second***REMOVED******REMOVED***".format (seconds, "s" if seconds is not 1 else ""))
+        return_list.append("***REMOVED******REMOVED*** second***REMOVED******REMOVED***".format(
+            seconds, "s" if seconds is not 1 else ""))
 
     if max_specifications is not None:
-        return_list = return_list [:max_specifications]
+        return_list = return_list[:max_specifications]
 
-    return " ".join (return_list)
+    return " ".join(return_list)
 
 
 def random_line(afile):
-    with open (afile) as myfile:
+    with open(afile) as myfile:
         line = next(myfile)
         for num, aline in enumerate(myfile):
-          if random.randrange(num + 2): continue
-          line = aline
+            if random.randrange(num + 2):
+                continue
+            line = aline
         return line
 
 

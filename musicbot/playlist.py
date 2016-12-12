@@ -4,10 +4,10 @@ from collections import deque
 from itertools import islice
 from random import shuffle
 
-from .utils import get_header
 from .entry import URLPlaylistEntry
 from .exceptions import ExtractionError, WrongEntryTypeError
 from .lib.event_emitter import EventEmitter
+from .utils import get_header
 
 
 class Playlist(EventEmitter):
@@ -44,14 +44,17 @@ class Playlist(EventEmitter):
         try:
             info = await self.downloader.extract_info(self.loop, song_url, download=False)
         except Exception as e:
-            raise ExtractionError('Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(song_url, e))
+            raise ExtractionError(
+                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(song_url, e))
 
         if not info:
-            raise ExtractionError('Could not extract information from %s' % song_url)
+            raise ExtractionError(
+                'Could not extract information from %s' % song_url)
 
         # TODO: Sort out what happens next when this happens
         if info.get('_type', None) == 'playlist':
-            raise WrongEntryTypeError("This is a playlist.", True, info.get('webpage_url', None) or info.get('url', None))
+            raise WrongEntryTypeError("This is a playlist.", True, info.get(
+                'webpage_url', None) or info.get('url', None))
 
         if info['extractor'] in ['generic', 'Dropbox']:
             try:
@@ -62,17 +65,19 @@ class Playlist(EventEmitter):
                 print("Got content type", content_type)
 
             except Exception as e:
-                print("[Warning] Failed to get content type for url %s (%s)" % (song_url, e))
+                print("[Warning] Failed to get content type for url %s (%s)" % (
+                    song_url, e))
                 content_type = None
 
             if content_type:
                 if content_type.startswith(('application/', 'image/')):
                     if '/ogg' not in content_type:  # How does a server say `application/ogg` what the actual fuck
-                        raise ExtractionError("Invalid content type \"%s\" for url %s" % (content_type, song_url))
+                        raise ExtractionError(
+                            "Invalid content type \"%s\" for url %s" % (content_type, song_url))
 
                 elif not content_type.startswith(('audio/', 'video/')):
-                    print("[Warning] Questionable content type \"%s\" for url %s" % (content_type, song_url))
-
+                    print("[Warning] Questionable content type \"%s\" for url %s" % (
+                        content_type, song_url))
 
         entry = URLPlaylistEntry(
             self,
@@ -85,18 +90,21 @@ class Playlist(EventEmitter):
         self._add_entry(entry)
         return entry, len(self.entries)
 
-    async def get_entry (self, song_url, **meta):
+    async def get_entry(self, song_url, **meta):
         try:
             info = await self.downloader.extract_info(self.loop, song_url, download=False)
         except Exception as e:
-            raise ExtractionError('Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(song_url, e))
+            raise ExtractionError(
+                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(song_url, e))
 
         if not info:
-            raise ExtractionError('Could not extract information from %s' % song_url)
+            raise ExtractionError(
+                'Could not extract information from %s' % song_url)
 
         # TODO: Sort out what happens next when this happens
         if info.get('_type', None) == 'playlist':
-            raise WrongEntryTypeError("This is a playlist.", True, info.get('webpage_url', None) or info.get('url', None))
+            raise WrongEntryTypeError("This is a playlist.", True, info.get(
+                'webpage_url', None) or info.get('url', None))
 
         if info['extractor'] in ['generic', 'Dropbox']:
             try:
@@ -107,16 +115,19 @@ class Playlist(EventEmitter):
                 print("Got content type", content_type)
 
             except Exception as e:
-                print("[Warning] Failed to get content type for url %s (%s)" % (song_url, e))
+                print("[Warning] Failed to get content type for url %s (%s)" % (
+                    song_url, e))
                 content_type = None
 
             if content_type:
                 if content_type.startswith(('application/', 'image/')):
                     if '/ogg' not in content_type:  # How does a server say `application/ogg` what the actual fuck
-                        raise ExtractionError("Invalid content type \"%s\" for url %s" % (content_type, song_url))
+                        raise ExtractionError(
+                            "Invalid content type \"%s\" for url %s" % (content_type, song_url))
 
                 elif not content_type.startswith(('audio/', 'video/')):
-                    print("[Warning] Questionable content type \"%s\" for url %s" % (content_type, song_url))
+                    print("[Warning] Questionable content type \"%s\" for url %s" % (
+                        content_type, song_url))
 
         #print ("HEY I GOT THIS: " + self.downloader.ytdl.prepare_filename(info) + "\n\n\n***REMOVED******REMOVED***\n\n\n".format (str (info)))
 
@@ -130,7 +141,7 @@ class Playlist(EventEmitter):
         )
         return entry
 
-    async def add_entry_next (self, song_url, **meta):
+    async def add_entry_next(self, song_url, **meta):
         """
             Validates and adds a song_url to be played. This does not start the download of the song.
 
@@ -143,14 +154,17 @@ class Playlist(EventEmitter):
         try:
             info = await self.downloader.extract_info(self.loop, song_url, download=False)
         except Exception as e:
-            raise ExtractionError('Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(song_url, e))
+            raise ExtractionError(
+                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(song_url, e))
 
         if not info:
-            raise ExtractionError('Could not extract information from %s' % song_url)
+            raise ExtractionError(
+                'Could not extract information from %s' % song_url)
 
         # TODO: Sort out what happens next when this happens
         if info.get('_type', None) == 'playlist':
-            raise WrongEntryTypeError("This is a playlist.", True, info.get('webpage_url', None) or info.get('url', None))
+            raise WrongEntryTypeError("This is a playlist.", True, info.get(
+                'webpage_url', None) or info.get('url', None))
 
         if info['extractor'] in ['generic', 'Dropbox']:
             try:
@@ -161,16 +175,19 @@ class Playlist(EventEmitter):
                 print("Got content type", content_type)
 
             except Exception as e:
-                print("[Warning] Failed to get content type for url %s (%s)" % (song_url, e))
+                print("[Warning] Failed to get content type for url %s (%s)" % (
+                    song_url, e))
                 content_type = None
 
             if content_type:
                 if content_type.startswith(('application/', 'image/')):
                     if '/ogg' not in content_type:  # How does a server say `application/ogg` what the actual fuck
-                        raise ExtractionError("Invalid content type \"%s\" for url %s" % (content_type, song_url))
+                        raise ExtractionError(
+                            "Invalid content type \"%s\" for url %s" % (content_type, song_url))
 
                 elif not content_type.startswith(('audio/', 'video/')):
-                    print("[Warning] Questionable content type \"%s\" for url %s" % (content_type, song_url))
+                    print("[Warning] Questionable content type \"%s\" for url %s" % (
+                        content_type, song_url))
 
         entry = URLPlaylistEntry(
             self,
@@ -183,10 +200,10 @@ class Playlist(EventEmitter):
         self._add_entry_next(entry)
         return entry, len(self.entries)
 
-    async def add_entries (self, entries):
+    async def add_entries(self, entries):
         for entry in entries:
             try:
-                await self._add_entry (entry)
+                await self._add_entry(entry)
             except:
                 pass
 
@@ -204,10 +221,12 @@ class Playlist(EventEmitter):
         try:
             info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False)
         except Exception as e:
-            raise ExtractionError('Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
+            raise ExtractionError(
+                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
 
         if not info:
-            raise ExtractionError('Could not extract information from %s' % playlist_url)
+            raise ExtractionError(
+                'Could not extract information from %s' % playlist_url)
 
         # Once again, the generic extractor fucks things up.
         if info.get('extractor', None) == 'generic':
@@ -230,7 +249,8 @@ class Playlist(EventEmitter):
                     entry_list.append(entry)
                 except:
                     baditems += 1
-                    # Once I know more about what's happening here I can add a proper message
+                    # Once I know more about what's happening here I can add a
+                    # proper message
                     traceback.print_exc()
                     print(items)
                     print("Could not add item")
@@ -253,10 +273,12 @@ class Playlist(EventEmitter):
         try:
             info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False, process=False)
         except Exception as e:
-            raise ExtractionError('Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
+            raise ExtractionError(
+                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
 
         if not info:
-            raise ExtractionError('Could not extract information from %s' % playlist_url)
+            raise ExtractionError(
+                'Could not extract information from %s' % playlist_url)
 
         gooditems = []
         baditems = 0
@@ -293,10 +315,12 @@ class Playlist(EventEmitter):
         try:
             info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False, process=False)
         except Exception as e:
-            raise ExtractionError('Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
+            raise ExtractionError(
+                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
 
         if not info:
-            raise ExtractionError('Could not extract information from %s' % playlist_url)
+            raise ExtractionError(
+                'Could not extract information from %s' % playlist_url)
 
         gooditems = []
         baditems = 0
@@ -336,10 +360,12 @@ class Playlist(EventEmitter):
         try:
             info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False)
         except Exception as e:
-            raise ExtractionError('Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
+            raise ExtractionError(
+                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
 
         if not info:
-            raise ExtractionError('Could not extract information from %s' % playlist_url)
+            raise ExtractionError(
+                'Could not extract information from %s' % playlist_url)
 
         # Once again, the generic extractor fucks things up.
         if info.get('extractor', None) == 'generic':
@@ -364,7 +390,8 @@ class Playlist(EventEmitter):
                     entry_list.append(entry)
                 except:
                     baditems += 1
-                    # Once I know more about what's happening here I can add a proper message
+                    # Once I know more about what's happening here I can add a
+                    # proper message
                     traceback.print_exc()
                     print(items)
                     print("Could not add item")
@@ -387,10 +414,12 @@ class Playlist(EventEmitter):
         try:
             info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False, process=False)
         except Exception as e:
-            raise ExtractionError('Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
+            raise ExtractionError(
+                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
 
         if not info:
-            raise ExtractionError('Could not extract information from %s' % playlist_url)
+            raise ExtractionError(
+                'Could not extract information from %s' % playlist_url)
 
         gooditems = []
         baditems = 0
@@ -427,10 +456,12 @@ class Playlist(EventEmitter):
         try:
             info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False, process=False)
         except Exception as e:
-            raise ExtractionError('Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
+            raise ExtractionError(
+                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
 
         if not info:
-            raise ExtractionError('Could not extract information from %s' % playlist_url)
+            raise ExtractionError(
+                'Could not extract information from %s' % playlist_url)
 
         gooditems = []
         baditems = 0
@@ -462,7 +493,7 @@ class Playlist(EventEmitter):
         if self.peek() is entry:
             entry.get_ready_future()
 
-    def _add_entry_next (self, entry):
+    def _add_entry_next(self, entry):
         self.entries.insert(0, entry)
         self.emit('entry-added', playlist=self, entry=entry)
 
@@ -538,9 +569,11 @@ class Playlist(EventEmitter):
         """
             (very) Roughly estimates the time till the queue will 'position'
         """
-        estimated_time = sum([e.duration for e in islice(self.entries, position - 1)])
+        estimated_time = sum(
+            [e.duration for e in islice(self.entries, position - 1)])
 
-        # When the player plays a song, it eats the first playlist item, so we just have to add the time back
+        # When the player plays a song, it eats the first playlist item, so we
+        # just have to add the time back
         if not player.is_stopped and player.current_entry:
             estimated_time += player.current_entry.duration - player.progress
 

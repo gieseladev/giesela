@@ -1,57 +1,54 @@
-import os
-import sys
-import time
-import shlex
-import shutil
-import inspect
-import aiohttp
-import discord
 import asyncio
-import traceback
-import tungsten
-import goslate
-import datetime
 import configparser
+import datetime
+import inspect
 import json
 import operator
-import newspaper
+import os
+import shlex
+import shutil
+import sys
+import time
+import traceback
 import urllib
-import wikipedia
-
-from discord import utils
-from discord.object import Object
-from discord.enums import ChannelType
-from discord.voice_client import VoiceClient
-from discord.ext.commands.bot import _get_variable
-
-from io import BytesIO
-from functools import wraps
-from textwrap import dedent
-from datetime import timedelta
-from random import choice, shuffle
 from collections import defaultdict
+from datetime import timedelta
+from functools import wraps
+from io import BytesIO
+from random import choice, shuffle
+from textwrap import dedent
 
-from musicbot.playlist import Playlist
-from musicbot.player import MusicPlayer
+import aiohttp
+import discord
+import goslate
+import newspaper
+import tungsten
+import wikipedia
+from cleverbot import Cleverbot
+from discord import utils
+from discord.enums import ChannelType
+from discord.ext.commands.bot import _get_variable
+from discord.object import Object
+from discord.voice_client import VoiceClient
+from moviepy import editor, video
+from pyshorteners import Shortener
+
 from musicbot.config import Config, ConfigDefaults
-from musicbot.papers import Papers
-from musicbot.permissions import Permissions, PermissionsDefaults
-from musicbot.utils import load_file, write_file, sane_round_int, format_time, random_line, paginate
 from musicbot.games.game_2048 import Game2048
 from musicbot.games.game_hangman import GameHangman
 from musicbot.nine_gag import *
+from musicbot.papers import Papers
+from musicbot.permissions import Permissions, PermissionsDefaults
+from musicbot.player import MusicPlayer
+from musicbot.playlist import Playlist
 from musicbot.saved_playlists import Playlists
+from musicbot.utils import (format_time, load_file, paginate, random_line,
+                            sane_round_int, write_file)
 
-from . import exceptions
-from . import downloader
-from .opus_loader import load_opus_lib
+from . import downloader, exceptions
 from .constants import VERSION as BOTVERSION
-from .constants import DISCORD_MSG_CHAR_LIMIT, AUDIO_CACHE_PATH
-
-from cleverbot import Cleverbot
-from pyshorteners import Shortener
-from moviepy import editor, video
-
+from .constants import AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT
+from .opus_loader import load_opus_lib
 
 load_opus_lib()
 
@@ -2386,7 +2383,12 @@ class MusicBot(discord.Client):
 
         Choose a random item out of a list
         """
-        items = [x.strip() for x in " ".join(leftover_args).split(",")]
+        items = [x.strip()
+                 for x in " ".join(leftover_args).split(",") if x is not ""]
+
+        if len(items) <= 0:
+            return Response("Is your name \"***REMOVED***0***REMOVED***\" by any chance?\n(This is not how this command works. Use `***REMOVED***1***REMOVED***help random` to find out how not to be a stupid ****REMOVED***0***REMOVED**** anymore)".format(author.name, self.config.command_prefix), delete_after=30)
+
         await self.safe_send_message(channel, "I choose **" + choice(items) + "**")
 
     async def cmd_requestfeature(self, channel, author, leftover_args):
@@ -3025,10 +3027,10 @@ class MusicBot(discord.Client):
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***playlist showall
+            ***REMOVED***command_prefix***REMOVED***playlist showall [alphabetical, author, entries, playtime, random]
             ***REMOVED***command_prefix***REMOVED***playlist savename
             ***REMOVED***command_prefix***REMOVED***playlist save savename
-            ***REMOVED***command_prefix***REMOVED***playlist load savename [add, replace]
+            ***REMOVED***command_prefix***REMOVED***playlist load savename [add, replace] [startindex, endindex (inclusive)]
             ***REMOVED***command_prefix***REMOVED***playlist delete savename
             ***REMOVED***command_prefix***REMOVED***playlist clone fromname savename [startindex, endindex (inclusive)]
 
@@ -3043,7 +3045,7 @@ class MusicBot(discord.Client):
         additional_args = leftover_args[2:] if len(leftover_args) > 2 else None
 
         forbidden_savenames = ["showall", "savename", "save", "load", "delete",
-                               "builder", "extras", "add", "remove", "save", "exit", "clone"]
+                               "builder", "extras", "add", "remove", "save", "exit", "clone", "rename", "extras", "alphabetical", "author", "entries", "playtime", "random"]
 
         if argument == "save":
             if savename in self.playlists.saved_playlists:
@@ -3067,7 +3069,20 @@ class MusicBot(discord.Client):
             if load_mode == "replace":
                 player.playlist.clear()
 
-            await player.playlist.add_entries(self.playlists.get_playlist(savename, player.playlist)["entries"])
+            from_index = int(additional_args[1]) - \
+                1 if len(additional_args) > 1 else 0
+            if from_index >= len(clone_entries) or from_index < 0:
+                return Response("Can't load the playlist starting from entry ***REMOVED******REMOVED***. This entry is out of bounds.".format(from_index), delete_after=20)
+
+            to_index = int(additional_args[2]) if len(
+                additional_args) > 2 else len(clone_entries)
+            if to_index > len(clone_entries) or to_index < 0:
+                return Response("Can't load the playlist from the ***REMOVED******REMOVED***. to the ***REMOVED******REMOVED***. entry. These values are out of bounds.".format(from_index, to_index), delete_after=20)
+
+            if to_index - from_index <= 0:
+                return Response("No songs to play. RIP.", delete_after=20)
+
+            await player.playlist.add_entries(self.playlists.get_playlist(savename, player.playlist)["entries"][from_index:to_index])
 
             return Response("Done. Enjoy your music!", delete_after=10)
 
@@ -3126,7 +3141,20 @@ class MusicBot(discord.Client):
             response_text = "**Found the following playlists:**\n\n"
             iteration = 1
 
-            for pl in self.playlists.saved_playlists:
+            sort_modes = ***REMOVED***"alphabetical": (lambda playlist: playlist, False), "entries": (lambda playlist: int(
+                self.playlists.get_playlist(playlist, player.playlist)["entry_count"]), True), "author": (lambda playlist: server.get_member(self.playlists.get_playlist(playlist, player.playlist)["author"]).name, False), "random": None, "playtime": (lambda playlist: sum([x.duration for x in self.playlists.get_playlist(playlist, player.playlist)["entries"]]), True)***REMOVED***
+
+            sort_mode = leftover_args[1].lower() if len(
+                leftover_args) > 1 and leftover_args[1].lower() in sort_modes.keys() else "random"
+
+            if sort_mode == "random":
+                sorted_saved_playlists = self.playlists.saved_playlists
+                shuffle(sorted_saved_playlists)
+            else:
+                sorted_saved_playlists = sorted(self.playlists.saved_playlists, key=sort_modes[
+                                                sort_mode][0], reverse=sort_modes[sort_mode][1])
+
+            for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.playlist)
                 response_text += "  ***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED*** and a playtime of ***REMOVED******REMOVED***\n".format(iteration, pl.title(), server.get_member(infos["author"]).mention, str(
                     infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", format_time(sum([x.duration for x in infos["entries"]]), round_seconds=True, max_specifications=2))
@@ -3178,7 +3206,7 @@ class MusicBot(discord.Client):
         savename = _savename
         user_savename = savename
 
-        interface_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add`: Add a song to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n`extras`: view the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
+        interface_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add`: Add a video to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n`extras`: view the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
 
         extras_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n**Extra functions:**\n`sort [alphabetical, length, random]`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n\n`abort`: return to main screen"
 
