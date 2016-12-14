@@ -41,6 +41,7 @@ from musicbot.papers import Papers
 from musicbot.permissions import Permissions, PermissionsDefaults
 from musicbot.player import MusicPlayer
 from musicbot.playlist import Playlist
+from musicbot.radio import Radio
 from musicbot.saved_playlists import Playlists
 from musicbot.utils import (format_time, load_file, paginate, random_line,
                             sane_round_int, write_file)
@@ -106,12 +107,14 @@ class MusicBot(discord.Client):
         self.autoplaylist = load_file(self.config.auto_playlist_file)
         self.downloader = downloader.Downloader(download_folder='audio_cache')
         self.cb = Cleverbot()
+        self.radio = Radio()
         self.shortener = Shortener(
             "Google", api_key="AIzaSyCU67YMHlfTU_PX2ngHeLd-_dUds-m502k")
 
         self.exit_signal = None
         self.init_ok = False
         self.cached_client_id = None
+        self.use_radio = False
 
         if not self.autoplaylist:
             print("Warning: Autoplaylist is empty, disabling.")
@@ -460,35 +463,43 @@ class MusicBot(discord.Client):
         await self.update_now_playing()
 
     async def on_player_finished_playing(self, player, **_):
-        if not player.playlist.entries and not player.current_entry and self.config.auto_playlist:
-            while self.autoplaylist:
-                song_url = choice(self.autoplaylist)
-                info = await self.downloader.safe_extract_info(player.playlist.loop, song_url, download=False, process=False)
+        if not player.playlist.entries and not player.current_entry and (self.config.auto_playlist or self.use_radio):
+            if self.use_radio:
+                song_data = self.radio.get_next_song()
+                if song_data is not None:
+                    search_split_stuff = "***REMOVED***arg[1]***REMOVED*** ***REMOVED***arg[0]***REMOVED***".format(
+                        arg=song_data).split()
+                    await self.cmd_forceplay(player, search_split_stuff [1:], search_split_stuff [0])
+            elif self.config.auto_playlist:
+                while self.autoplaylist:
+                    song_url = choice(self.autoplaylist)
+                    info = await self.downloader.safe_extract_info(player.playlist.loop, song_url, download=False, process=False)
 
-                if not info:
-                    self.autoplaylist.remove(song_url)
-                    self.safe_print(
-                        "[Info] Removing unplayable song from autoplaylist: %s" % song_url)
-                    write_file(self.config.auto_playlist_file,
-                               self.autoplaylist)
-                    continue
+                    if not info:
+                        self.autoplaylist.remove(song_url)
+                        self.safe_print(
+                            "[Info] Removing unplayable song from autoplaylist: %s" % song_url)
+                        write_file(self.config.auto_playlist_file,
+                                   self.autoplaylist)
+                        continue
 
-                if info.get('entries', None):  # or .get('_type', '') == 'playlist'
-                    pass  # Wooo playlist
-                    # Blarg how do I want to do this
+                    if info.get('entries', None):  # or .get('_type', '') == 'playlist'
+                        pass  # Wooo playlist
+                        # Blarg how do I want to do this
 
-                # TODO: better checks here
-                try:
-                    await player.playlist.add_entry(song_url, channel=None, author=None)
-                except exceptions.ExtractionError as e:
-                    print("Error adding song from autoplaylist:", e)
-                    continue
+                    # TODO: better checks here
+                    try:
+                        await player.playlist.add_entry(song_url, channel=None, author=None)
+                    except exceptions.ExtractionError as e:
+                        print("Error adding song from autoplaylist:", e)
+                        continue
 
-                break
+                    break
 
-            if not self.autoplaylist:
-                print("[Warning] No playable songs in the autoplaylist, disabling.")
-                self.config.auto_playlist = False
+                if not self.autoplaylist:
+                    print(
+                        "[Warning] No playable songs in the autoplaylist, disabling.")
+                    self.config.auto_playlist = False
 
     async def on_player_entry_added(self, playlist, entry, **_):
         pass
@@ -1192,6 +1203,72 @@ class MusicBot(discord.Client):
             reply_text %= (btext, position, time_until)
 
         return Response(reply_text, delete_after=30)
+
+    async def cmd_forceplay(self, player, leftover_args, song_url):
+        song_url = song_url.strip('<>')
+
+        if leftover_args:
+            song_url = ' '.join([song_url, *leftover_args])
+
+        try:
+            info = await self.downloader.extract_info(player.playlist.loop, song_url, download=False, process=False)
+        except Exception as e:
+            raise exceptions.CommandError(e, expire_in=30)
+
+        if not info:
+            raise exceptions.CommandError(
+                "That video cannot be played.", expire_in=30)
+
+        # abstract the search handling away from the user
+        # our ytdl options allow us to use search strings as input urls
+        if info.get('url', '').startswith('ytsearch'):
+            # print("[Command:play] Searching for \"%s\"" % song_url)
+            info = await self.downloader.extract_info(
+                player.playlist.loop,
+                song_url,
+                download=False,
+                process=True,    # ASYNC LAMBDAS WHEN
+                on_error=lambda e: asyncio.ensure_future(
+                    self.safe_send_message(channel, "```\n%s\n```" % e, expire_in=120), loop=self.loop),
+                retry_on_error=True
+            )
+
+            if not info:
+                raise exceptions.CommandError(
+                    "Error extracting info from search string, youtubedl returned no data.  "
+                    "You may need to restart the bot if this continues to happen.", expire_in=30
+                )
+
+            if not all(info.get('entries', [])):
+                return
+
+            song_url = info['entries'][0]['webpage_url']
+            info = await self.downloader.extract_info(player.playlist.loop, song_url, download=False, process=False)
+
+        if 'entries' in info:
+            if info['extractor'].lower() in ['youtube:playlist', 'soundcloud:set', 'bandcamp:album']:
+                try:
+                    return await self._cmd_play_playlist_async(player, channel, author, permissions, song_url, info['extractor'])
+                except exceptions.CommandError:
+                    raise
+                except Exception as e:
+                    traceback.print_exc()
+                    raise exceptions.CommandError(
+                        "Error queuing playlist:\n%s" % e, expire_in=30)
+
+            entry_list, position = await player.playlist.import_from(song_url)
+
+        else:
+
+            try:
+                entry, position = await player.playlist.add_entry(song_url)
+
+            except exceptions.WrongEntryTypeError as e:
+                if e.use_url == song_url:
+                    print(
+                        "[Warning] Determined incorrect entry type, but suggested url is the same.  Help.")
+
+                return await self.cmd_forceplay(player, leftover_args, e.use_url)
 
     async def get_play_entry(self, player, channel, author, leftover_args, song_url):
         song_url = song_url.strip('<>')
@@ -2186,6 +2263,14 @@ class MusicBot(discord.Client):
             await self.safe_send_message(channel, "Won't play from the autoplaylist anymore")
 
         # await self.safe_send_message (channel, msgState)
+
+    async def cmd_radio (self, channel, player):
+        if self.use_radio:
+            self.use_radio = False
+        else:
+            self.use_radio = True
+            await self.on_player_finished_playing(player)
+            return Response ("Now playing songs from live radio powered by *CapitalFM*\n <http://www.capitalfm.com>", delete_after = 40)
 
     async def cmd_say(self, channel, message, leftover_args):
         """
