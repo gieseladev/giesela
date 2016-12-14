@@ -30,7 +30,7 @@ class Radio:
             self.update_list_capitalfm (replay_songs)
 
     def get_next_song(self, update=True, replay_songs=True):
-        if len(self.song_list) < 1 and update:
+        if len(self.song_list) < 1 or update:
             self.update_list()
 
             if len(self.song_list) < 1 and replay_songs:
