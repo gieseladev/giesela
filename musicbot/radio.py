@@ -21,7 +21,7 @@ class Radio:
                 if name is not None:
                     information = (name.text.strip(), author.text.strip()
                                    if author is not None else "Unknown")
-                    if information not in self.song_list and (not replay_songs or information not in self.old_songs):
+                    if (information not in self.song_list and information not in self.old_songs) or (replay_songs and information not in self.song_list):
                         self.song_list.append(information)
 
     def update_list (self, replay_songs=False):
