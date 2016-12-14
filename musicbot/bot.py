@@ -469,7 +469,7 @@ class MusicBot(discord.Client):
                 if song_data is not None:
                     search_split_stuff = "{arg[1]} {arg[0]}".format(
                         arg=song_data).split()
-                    await self.cmd_forceplay(player, search_split_stuff [1:], search_split_stuff [0])
+                    await self.cmd_forceplay(player, search_split_stuff[1:], search_split_stuff[0])
             elif self.config.auto_playlist:
                 while self.autoplaylist:
                     song_url = choice(self.autoplaylist)
@@ -2264,13 +2264,14 @@ class MusicBot(discord.Client):
 
         # await self.safe_send_message (channel, msgState)
 
-    async def cmd_radio (self, channel, player):
+    async def cmd_radio(self, channel, player):
         if self.use_radio:
             self.use_radio = False
         else:
             self.use_radio = True
+            self.radio.refresh()
             await self.on_player_finished_playing(player)
-            return Response ("Now playing songs from live radio powered by *CapitalFM*\n <http://www.capitalfm.com>", delete_after = 40)
+            return Response("Now playing songs from live radio powered by *CapitalFM*\n <http://www.capitalfm.com>", delete_after=40)
 
     async def cmd_say(self, channel, message, leftover_args):
         """
