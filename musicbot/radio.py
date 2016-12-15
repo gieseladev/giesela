@@ -32,6 +32,7 @@ class Radio:
         self.update_list_capitalfm(replay_songs)
 
     def refresh(self):
+        print("Refreshing!")
         self.song_list = []
         self.old_songs = []
 
@@ -40,14 +41,20 @@ class Radio:
             self.update_list()
 
             if len(self.song_list) < 1 and replay_songs:
-                self.update_list(replay_songs=True)
+                print("capitalfm couldn't keep up\nReplaying songs (cleaning the lists)")
+                self.refresh()
+                self.update_list()
 
-                if len(self.song_list) < 1 and len(self.old_songs) > 0:
-                    return self.old_songs.pop()
-                else:
-                    print(
-                        "Is the radio station offline or something? I don't have any kind of entries...")
-                    return None
+                if len(self.song_list) < 1:
+                    if len(self.old_songs) > 0:
+                        print("Still nothing. Going to replay the oldest song now")
+                        return self.old_songs.pop()
+                    else:
+                        print(
+                            "Still nothing. Something must either be wrong with capitalfm or there is no music being played")
+                        return None
+            elif not replay_songs:
+                return None
 
         song = self.song_list.pop(0)
         self.old_songs.append(song)
