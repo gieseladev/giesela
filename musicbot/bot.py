@@ -2354,7 +2354,7 @@ class MusicBot(discord.Client):
         # await self.safe_send_message (channel, targetLanguage)
         await self.safe_send_message(channel, gs.translate(msgContent, targetLanguage))
 
-    async def cmd_goto(self, server, channel, author, leftover_args):
+    async def cmd_goto(self, server, channel, user_mentions, author, leftover_args):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***goto id/name
@@ -2376,11 +2376,24 @@ class MusicBot(discord.Client):
                     targetChannel = chnl
                     break
             else:
-                self.safe_print("Cannot find channel \"%s\"" % channelID)
-                return Response(
-                    "```Cannot find channel \"%s\"```" % channelID,
-                    delete_after=25
-                )
+                if user_mentions is not None:
+                    for ch in server.channels:
+                        for guy in ch.voice_members:
+                            for u in user_mentions:
+                                if guy.id == u.id:
+                                    targetChannel = ch
+                    if targetChannel is None:
+                        return Response(
+                            "Cannot find ****REMOVED******REMOVED**** in any voice channel".format(
+                                ", ".join([x.mention for x in user_mentions])),
+                            delete_after=25
+                    )
+                else:
+                    self.safe_print("Cannot find channel \"%s\"" % channelID)
+                    return Response(
+                        "```Cannot find channel \"%s\"```" % channelID,
+                        delete_after=25
+                    )
 
         voice_client = await self.get_voice_client(targetChannel)
         self.safe_print("Will join channel \"%s\"" % targetChannel.name)
