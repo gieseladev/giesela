@@ -1686,7 +1686,7 @@ class MusicBot(discord.Client):
                 '0').lstrip(':')
             prog_str = '`[%s/%s]`' % (song_progress, song_total)
 
-            prog_bar_len = 50
+            prog_bar_len = 20
             prog_full_char = "■"
             prog_empty_char = "□"
             progress_perc = player.progress / player.current_entry.duration
@@ -1904,7 +1904,7 @@ class MusicBot(discord.Client):
 
         if not new_volume:
             bar_len = 20
-            return Response("Current volume: ***REMOVED******REMOVED***%\n***REMOVED******REMOVED***".format(int(player.volume * 100), "".join(["■" if (x / 20) < player.volume else "□" for x in range(bar_len)])), reply=True, delete_after=20)
+            return Response("Current volume: ***REMOVED******REMOVED***%\n***REMOVED******REMOVED***".format(int(player.volume * 100), "".join(["■" if (x / bar_len) < player.volume else "□" for x in range(bar_len)])), reply=True, delete_after=20)
 
         relative = False
         if new_volume[0] in '+-':
