@@ -1,12 +1,12 @@
-import os
 import asyncio
-import audioop
+import os
 import traceback
-
-from enum import Enum
 from array import array
 from collections import deque
+from enum import Enum
 from shutil import get_terminal_size
+
+import audioop
 
 from .lib.event_emitter import EventEmitter
 
@@ -28,7 +28,7 @@ class PatchedBuff:
 
     def __del__(self):
         if self.draw:
-            print(' ' * (get_terminal_size().columns-1), end='\r')
+            print(' ' * (get_terminal_size().columns - 1), end='\r')
 
     def read(self, frame_size):
         self.frame_count += 1
@@ -44,8 +44,10 @@ class PatchedBuff:
             self.rmss.append(rms)
 
             max_rms = sorted(self.rmss)[-1]
-            meter_text = 'avg rms: {:.2f}, max rms: {:.2f} '.format(self._avg(self.rmss), max_rms)
-            self._pprint_meter(rms / max(1, max_rms), text=meter_text, shift=True)
+            meter_text = 'avg rms: {:.2f}, max rms: {:.2f} '.format(
+                self._avg(self.rmss), max_rms)
+            self._pprint_meter(rms / max(1, max_rms),
+                               text=meter_text, shift=True)
 
         return frame
 
@@ -68,9 +70,11 @@ class PatchedBuff:
         tx, ty = get_terminal_size()
 
         if shift:
-            outstr = text + "{}".format(char * (int((tx - len(text)) * perc) - 1))
+            outstr = text + \
+                "{}".format(char * (int((tx - len(text)) * perc) - 1))
         else:
-            outstr = text + "{}".format(char * (int(tx * perc) - 1))[len(text):]
+            outstr = text + \
+                "{}".format(char * (int(tx * perc) - 1))[len(text):]
 
         print(outstr.ljust(tx - 1), end='\r')
 
@@ -85,6 +89,7 @@ class MusicPlayerState(Enum):
     def __str__(self):
         return self.name
 
+
 class MusicPlayerRepeatState(Enum):
     NONE = 0    # Playlist plays as normal
     ALL = 1     # Entire playlist repeats
@@ -95,6 +100,7 @@ class MusicPlayerRepeatState(Enum):
 
 
 class MusicPlayer(EventEmitter):
+
     def __init__(self, bot, voice_client, playlist):
         super().__init__()
         self.bot = bot
@@ -280,8 +286,10 @@ class MusicPlayer(EventEmitter):
                     entry.filename,
                     before_options="-nostdin",
                     options="-vn -b:a 128k",
-                    # Threadsafe call soon, b/c after will be called from the voice playback thread.
-                    after=lambda: self.loop.call_soon_threadsafe(self._playback_finished)
+                    # Threadsafe call soon, b/c after will be called from the
+                    # voice playback thread.
+                    after=lambda: self.loop.call_soon_threadsafe(
+                        self._playback_finished)
                 ))
                 self._current_player.setDaemon(True)
                 self._current_player.buff.volume = self.volume
@@ -315,7 +323,8 @@ class MusicPlayer(EventEmitter):
                 assert self.voice_client.ws.open
             except:
                 if self.bot.config.debug_mode:
-                    print("[Debug] Voice websocket is %s, reconnecting" % self.voice_client.ws.state_name)
+                    print("[Debug] Voice websocket is %s, reconnecting" %
+                          self.voice_client.ws.state_name)
                 await self.bot.reconnect_voice_client(self.voice_client.channel.server)
                 await asyncio.sleep(4)
             finally:

@@ -8,6 +8,7 @@ from .utils import get_header, md5sum, slugify
 
 
 class BasePlaylistEntry:
+
     def __init__(self):
         self.filename = None
         self._is_downloading = False
@@ -37,11 +38,13 @@ class BasePlaylistEntry:
         """
         future = asyncio.Future()
         if self.is_downloaded:
-            # In the event that we're downloaded, we're already ready for playback.
+            # In the event that we're downloaded, we're already ready for
+            # playback.
             future.set_result(self)
 
         else:
-            # If we request a ready future, let's ensure that it'll actually resolve at one point.
+            # If we request a ready future, let's ensure that it'll actually
+            # resolve at one point.
             asyncio.ensure_future(self._download())
             self._waiting_futures.append(future)
 
@@ -72,6 +75,7 @@ class BasePlaylistEntry:
 
 
 class URLPlaylistEntry(BasePlaylistEntry):
+
     def __init__(self, playlist, url, title, duration=0, expected_filename=None, **meta):
         super().__init__()
 
@@ -102,20 +106,22 @@ class URLPlaylistEntry(BasePlaylistEntry):
             meta['channel'] = ch or data['meta']['channel']['name']
 
         if 'author' in data['meta']:
-            meta['author'] = meta['channel'].server.get_member(data['meta']['author']['id'])
+            meta['author'] = meta['channel'].server.get_member(
+                data['meta']['author']['id'])
 
         return cls(playlist, url, title, duration, filename, **meta)
 
     @staticmethod
     def entry_from_json(playlist, jsonstring):
         data = json.loads(jsonstring)
-        #print(data)
+        # print(data)
         # TODO: version check
         url = data['url']
         title = data['title']
         duration = data['duration']
         downloaded = data['downloaded']
-        filename = data['filename'] if downloaded else (data ["expected_filename"] if data ["expected_filename"] is not None else None)
+        filename = data['filename'] if downloaded else (
+            data["expected_filename"] if data["expected_filename"] is not None else None)
         meta = {}
 
         # TODO: Better [name] fallbacks
@@ -125,20 +131,21 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
         if 'author' in data['meta']:
             try:
-                meta['author'] = meta['channel'].server.get_member(data['meta']['author']['id'])
+                meta['author'] = meta['channel'].server.get_member(
+                    data['meta']['author']['id'])
             except:
                 meta['author'] = "unknown"
 
-        return URLPlaylistEntry (playlist, url, title, duration, filename, **meta)
+        return URLPlaylistEntry(playlist, url, title, duration, filename, **meta)
 
     def to_json(self):
         meta_dict = {}
         for i in self.meta:
-            if i is None or self.meta [i] is None:
+            if i is None or self.meta[i] is None:
                 continue
 
-            meta_dict [i] = {'type': self.meta[i].__class__.__name__, 'id': self.meta[i].id, 'name': self.meta[i].name}
-
+            meta_dict[i] = {'type': self.meta[i].__class__.__name__,
+                            'id': self.meta[i].id, 'name': self.meta[i].name}
 
         data = {
             'version': 1,
@@ -150,7 +157,8 @@ class URLPlaylistEntry(BasePlaylistEntry):
             'filename': self.filename,
             "expected_filename": self.expected_filename,
             'meta': meta_dict
-            # Actually I think I can just getattr instead, getattr(discord, type)
+            # Actually I think I can just getattr instead, getattr(discord,
+            # type)
         }
         return json.dumps(data, indent=2)
 
@@ -165,18 +173,21 @@ class URLPlaylistEntry(BasePlaylistEntry):
             if not os.path.exists(self.download_folder):
                 os.makedirs(self.download_folder)
 
-            # self.expected_filename: audio_cache\youtube-9R8aSKwTEMg-NOMA_-_Brain_Power.m4a
+            # self.expected_filename:
+            # audio_cache\youtube-9R8aSKwTEMg-NOMA_-_Brain_Power.m4a
 
             if self.expected_filename is None:
-                self.expected_filename = slugify ("unknown" + self.title)
+                self.expected_filename = slugify("unknown" + self.title)
 
             extractor = os.path.basename(self.expected_filename).split('-')[0]
 
             # the generic extractor requires special handling
             if extractor == 'generic':
                 # print("Handling generic")
-                flistdir = [f.rsplit('-', 1)[0] for f in os.listdir(self.download_folder)]
-                expected_fname_noex, fname_ex = os.path.basename(self.expected_filename).rsplit('.', 1)
+                flistdir = [f.rsplit('-', 1)[0]
+                            for f in os.listdir(self.download_folder)]
+                expected_fname_noex, fname_ex = os.path.basename(
+                    self.expected_filename).rsplit('.', 1)
 
                 if expected_fname_noex in flistdir:
                     try:
@@ -186,7 +197,8 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
                     lfile = os.path.join(
                         self.download_folder,
-                        os.listdir(self.download_folder)[flistdir.index(expected_fname_noex)]
+                        os.listdir(self.download_folder)[
+                            flistdir.index(expected_fname_noex)]
                     )
 
                     # print("Resolved %s to %s" % (self.expected_filename, lfile))
@@ -213,12 +225,14 @@ class URLPlaylistEntry(BasePlaylistEntry):
                 # or i have youtube to blame for changing shit again
 
                 if expected_fname_base in ldir:
-                    self.filename = os.path.join(self.download_folder, expected_fname_base)
+                    self.filename = os.path.join(
+                        self.download_folder, expected_fname_base)
                     print("[Download] Cached:", self.url)
 
                 elif expected_fname_noex in flistdir:
                     print("[Download] Cached (different extension):", self.url)
-                    self.filename = os.path.join(self.download_folder, ldir[flistdir.index(expected_fname_noex)])
+                    self.filename = os.path.join(self.download_folder, ldir[
+                                                 flistdir.index(expected_fname_noex)])
                     print("Expected %s, got %s" % (
                         self.expected_filename.rsplit('.', 1)[-1],
                         self.filename.rsplit('.', 1)[-1]
@@ -252,11 +266,14 @@ class URLPlaylistEntry(BasePlaylistEntry):
             raise ExtractionError("ytdl broke and hell if I know why")
             # What the fuck do I do now?
 
-        self.filename = unhashed_fname = self.playlist.downloader.ytdl.prepare_filename(result)
+        self.filename = unhashed_fname = self.playlist.downloader.ytdl.prepare_filename(
+            result)
 
         if hash:
-            # insert the 8 last characters of the file hash to the file name to ensure uniqueness
-            self.filename = md5sum(unhashed_fname, 8).join('-.').join(unhashed_fname.rsplit('.', 1))
+            # insert the 8 last characters of the file hash to the file name to
+            # ensure uniqueness
+            self.filename = md5sum(unhashed_fname, 8).join(
+                '-.').join(unhashed_fname.rsplit('.', 1))
 
             if os.path.isfile(self.filename):
                 # Oh bother it was actually there.

@@ -1,9 +1,9 @@
-import os
 import asyncio
 import functools
-import youtube_dl
-
+import os
 from concurrent.futures import ThreadPoolExecutor
+
+import youtube_dl
 
 ytdl_format_options = {
     'format': 'bestaudio/best',
@@ -21,7 +21,8 @@ ytdl_format_options = {
     'source_address': '0.0.0.0'
 }
 
-# Fuck your useless bugreports message that gets two link embeds and confuses users
+# Fuck your useless bugreports message that gets two link embeds and
+# confuses users
 youtube_dl.utils.bug_reports_message = lambda: ''
 
 '''
@@ -32,7 +33,9 @@ youtube_dl.utils.bug_reports_message = lambda: ''
 
 '''
 
+
 class Downloader:
+
     def __init__(self, download_folder=None):
         self.thread_pool = ThreadPoolExecutor(max_workers=2)
         self.unsafe_ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
@@ -42,11 +45,13 @@ class Downloader:
 
         if download_folder:
             otmpl = self.unsafe_ytdl.params['outtmpl']
-            self.unsafe_ytdl.params['outtmpl'] = os.path.join(download_folder, otmpl)
+            self.unsafe_ytdl.params['outtmpl'] = os.path.join(
+                download_folder, otmpl)
             # print("setting template to " + os.path.join(download_folder, otmpl))
 
             otmpl = self.safe_ytdl.params['outtmpl']
-            self.safe_ytdl.params['outtmpl'] = os.path.join(download_folder, otmpl)
+            self.safe_ytdl.params['outtmpl'] = os.path.join(
+                download_folder, otmpl)
 
     @property
     def ytdl(self):
