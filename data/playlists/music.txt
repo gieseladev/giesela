@@ -1,397 +1,1133 @@
 {
-  "expected_filename": "audio_cache\\youtube-rp4UwPZfRis-Rihanna_-_Unfaithful.webm",
-  "downloaded": false,
-  "meta": {},
   "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Rihanna - Unfaithful",
+  "meta": {},
   "url": "https://www.youtube.com/watch?v=rp4UwPZfRis",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-rp4UwPZfRis-Rihanna_-_Unfaithful.webm",
+  "title": "Rihanna - Unfaithful",
   "duration": 295,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-e12KryuLcbs-The_Vamps_-_Wake_Up.webm",
-  "downloaded": false,
-  "meta": {},
   "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "The Vamps - Wake Up",
+  "meta": {},
   "url": "https://www.youtube.com/watch?v=e12KryuLcbs",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-e12KryuLcbs-The_Vamps_-_Wake_Up.webm",
+  "title": "The Vamps - Wake Up",
   "duration": 310,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-CfihYWRWRTQ-John_Newman_-_Love_Me_Again.webm",
-  "downloaded": false,
+  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    },
     "channel": {
       "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
     }
   },
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "John Newman - Love Me Again",
   "url": "https://www.youtube.com/watch?v=CfihYWRWRTQ",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-CfihYWRWRTQ-John_Newman_-_Love_Me_Again.webm",
+  "title": "John Newman - Love Me Again",
   "duration": 235,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-sJQYoGyEtDs-Fool_s_Garden-Lemon_Tree_lyrics.webm",
-  "downloaded": false,
+  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    },
     "channel": {
       "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
     }
   },
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Fool's Garden-Lemon Tree lyrics",
   "url": "https://www.youtube.com/watch?v=sJQYoGyEtDs",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-sJQYoGyEtDs-Fool_s_Garden-Lemon_Tree_lyrics.webm",
+  "title": "Fool's Garden-Lemon Tree lyrics",
   "duration": 185,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-nlR0MkrRklg-Ariana_Grande_-_Santa_Tell_Me.webm",
-  "downloaded": false,
-  "meta": {},
   "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Ariana Grande - Santa Tell Me",
+  "meta": {},
   "url": "https://www.youtube.com/watch?v=nlR0MkrRklg",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-nlR0MkrRklg-Ariana_Grande_-_Santa_Tell_Me.webm",
+  "title": "Ariana Grande - Santa Tell Me",
   "duration": 340,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-hxuCLopcEy4-Good_People_-_Jack_Johnson_-_With_Lyrics.webm",
-  "downloaded": false,
+  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "type": "Member",
-      "name": "grelor",
-      "id": "210488226777923585"
-    },
     "channel": {
       "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
     }
   },
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Good People - Jack Johnson - With Lyrics",
   "url": "https://www.youtube.com/watch?v=hxuCLopcEy4",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-hxuCLopcEy4-Good_People_-_Jack_Johnson_-_With_Lyrics.webm",
+  "title": "Good People - Jack Johnson - With Lyrics",
   "duration": 216,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-xSaLtRksFlM-Vexento_-_Pixel_Party.webm",
-  "downloaded": false,
+  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    },
     "channel": {
       "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
     }
   },
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Vexento - Pixel Party",
   "url": "https://www.youtube.com/watch?v=xSaLtRksFlM",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-xSaLtRksFlM-Vexento_-_Pixel_Party.webm",
+  "title": "Vexento - Pixel Party",
   "duration": 169,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-CX0TL7gPFMw-This_Is_Me_From_Camp_Rock.webm",
-  "downloaded": false,
-  "meta": {},
   "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "This Is Me (From \"Camp Rock\")",
+  "meta": {},
   "url": "https://www.youtube.com/watch?v=CX0TL7gPFMw",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-CX0TL7gPFMw-This_Is_Me_From_Camp_Rock.webm",
+  "title": "This Is Me (From \"Camp Rock\")",
   "duration": 189,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-SufAKh_bHsU-Abstract_-_Scars_ft._RoZe_Prod._Drumma_Battalion.webm",
-  "downloaded": false,
+  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "type": "Member",
-      "name": "grelor",
-      "id": "210488226777923585"
-    },
     "channel": {
       "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
     }
   },
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Abstract - Scars (ft. RoZe) (Prod. Drumma Battalion)",
   "url": "https://www.youtube.com/watch?v=SufAKh_bHsU",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-SufAKh_bHsU-Abstract_-_Scars_ft._RoZe_Prod._Drumma_Battalion.webm",
+  "title": "Abstract - Scars (ft. RoZe) (Prod. Drumma Battalion)",
   "duration": 276,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-6JCLY0Rlx6Q-WALK_THE_MOON_-_Shut_Up_and_Dance.webm",
-  "downloaded": false,
-  "meta": {},
   "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "WALK THE MOON - Shut Up and Dance",
+  "meta": {},
   "url": "https://www.youtube.com/watch?v=6JCLY0Rlx6Q",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-6JCLY0Rlx6Q-WALK_THE_MOON_-_Shut_Up_and_Dance.webm",
+  "title": "WALK THE MOON - Shut Up and Dance",
   "duration": 246,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-8WYHDfJDPDc-Nelly_-_Dilemma_ft._Kelly_Rowland.webm",
-  "downloaded": false,
-  "meta": {},
   "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Nelly - Dilemma ft. Kelly Rowland",
+  "meta": {},
   "url": "https://www.youtube.com/watch?v=8WYHDfJDPDc",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-8WYHDfJDPDc-Nelly_-_Dilemma_ft._Kelly_Rowland.webm",
+  "title": "Nelly - Dilemma ft. Kelly Rowland",
   "duration": 283,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-6tu4wWSbnIs-X_Ambassadors_-_Renegades_Audio.webm",
-  "downloaded": false,
+  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "type": "Member",
-      "name": "grelor",
-      "id": "210488226777923585"
-    },
     "channel": {
       "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
     }
   },
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "X Ambassadors - Renegades (Audio)",
   "url": "https://www.youtube.com/watch?v=6tu4wWSbnIs",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-6tu4wWSbnIs-X_Ambassadors_-_Renegades_Audio.webm",
+  "title": "X Ambassadors - Renegades (Audio)",
   "duration": 195,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-qak_RGVERbc-Standing_still_-_Jewel_lyrics.webm",
-  "downloaded": false,
+  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    },
     "channel": {
       "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
     }
   },
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Standing still - Jewel (lyrics)",
   "url": "https://www.youtube.com/watch?v=qak_RGVERbc",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-qak_RGVERbc-Standing_still_-_Jewel_lyrics.webm",
+  "title": "Standing still - Jewel (lyrics)",
   "duration": 272,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-TOrnUquxtwA-Justin_Timberlake_-_What_Goes_Around...Comes_Around.webm",
-  "downloaded": false,
+  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    },
     "channel": {
       "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
     }
   },
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Justin Timberlake - What Goes Around...Comes Around",
   "url": "https://www.youtube.com/watch?v=TOrnUquxtwA",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-TOrnUquxtwA-Justin_Timberlake_-_What_Goes_Around...Comes_Around.webm",
+  "title": "Justin Timberlake - What Goes Around...Comes Around",
   "duration": 561,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-GNgpTJFa1ws-Just_So_You_Know.webm",
-  "downloaded": false,
-  "meta": {},
   "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Just So You Know",
+  "meta": {},
   "url": "https://www.youtube.com/watch?v=GNgpTJFa1ws",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-GNgpTJFa1ws-Just_So_You_Know.webm",
+  "title": "Just So You Know",
   "duration": 259,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-XC3ahd6Di3M-U2_-_Ordinary_Love_From_Mandela_OST_Lyric_Video.webm",
-  "downloaded": false,
-  "meta": {},
   "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "U2 - Ordinary Love (From Mandela OST) Lyric Video",
+  "meta": {},
   "url": "https://www.youtube.com/watch?v=XC3ahd6Di3M",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-XC3ahd6Di3M-U2_-_Ordinary_Love_From_Mandela_OST_Lyric_Video.webm",
+  "title": "U2 - Ordinary Love (From Mandela OST) Lyric Video",
   "duration": 219,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-_ovdm2yX4MA-Avicii_-_Levels.webm",
-  "downloaded": false,
+  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    },
     "channel": {
       "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
     }
   },
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Avicii - Levels",
   "url": "https://www.youtube.com/watch?v=_ovdm2yX4MA",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-_ovdm2yX4MA-Avicii_-_Levels.webm",
+  "title": "Avicii - Levels",
   "duration": 198,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-Xq-knHXSKYY-Avicii_-_For_A_Better_Day.webm",
-  "downloaded": false,
-  "meta": {},
   "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Avicii - For A Better Day",
+  "meta": {},
   "url": "https://www.youtube.com/watch?v=Xq-knHXSKYY",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-Xq-knHXSKYY-Avicii_-_For_A_Better_Day.webm",
+  "title": "Avicii - For A Better Day",
   "duration": 253,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-WpYeekQkAdc-The_Black_Eyed_Peas_-_Where_Is_The_Love.webm",
-  "downloaded": false,
-  "meta": {},
   "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "The Black Eyed Peas - Where Is The Love?",
+  "meta": {},
   "url": "https://www.youtube.com/watch?v=WpYeekQkAdc",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-WpYeekQkAdc-The_Black_Eyed_Peas_-_Where_Is_The_Love.webm",
+  "title": "The Black Eyed Peas - Where Is The Love?",
   "duration": 252,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-JwQZQygg3Lk-The_Black_Eyed_Peas_-_The_Time_Dirty_Bit.webm",
-  "downloaded": false,
-  "meta": {},
   "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "The Black Eyed Peas - The Time (Dirty Bit)",
+  "meta": {},
   "url": "https://www.youtube.com/watch?v=JwQZQygg3Lk",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-JwQZQygg3Lk-The_Black_Eyed_Peas_-_The_Time_Dirty_Bit.webm",
+  "title": "The Black Eyed Peas - The Time (Dirty Bit)",
   "duration": 313,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-oh2LWWORoiM-Tove_Lo_-_Habits_Stay_High.webm",
-  "downloaded": false,
-  "meta": {},
   "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Tove Lo - Habits (Stay High)",
+  "meta": {},
   "url": "https://www.youtube.com/watch?v=oh2LWWORoiM",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-oh2LWWORoiM-Tove_Lo_-_Habits_Stay_High.webm",
+  "title": "Tove Lo - Habits (Stay High)",
   "duration": 208,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-a7SouU3ECpU-Alesso_-_Heroes_we_could_be_ft._Tove_Lo.webm",
-  "downloaded": false,
-  "meta": {},
   "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Alesso - Heroes (we could be) ft. Tove Lo",
+  "meta": {},
   "url": "https://www.youtube.com/watch?v=a7SouU3ECpU",
-  "duration": 294,
-  "filename": null
-}
-;
-{
-  "expected_filename": "audio_cache\\youtube-4ht80uzIhNs-Imagine_Dragons_-_I_Bet_My_Life.webm",
-  "downloaded": false,
-  "meta": {},
-  "type": "URLPlaylistEntry",
   "version": 1,
-  "title": "Imagine Dragons - I Bet My Life",
-  "url": "https://www.youtube.com/watch?v=4ht80uzIhNs",
-  "duration": 214,
+  "expected_filename": "audio_cache\\youtube-a7SouU3ECpU-Alesso_-_Heroes_we_could_be_ft._Tove_Lo.webm",
+  "title": "Alesso - Heroes (we could be) ft. Tove Lo",
+  "duration": 294,
+  "downloaded": false,
   "filename": null
 }
 ;
 {
-  "expected_filename": "audio_cache\\youtube-2i2khp_npdE-Alan_Walker_-_Sing_Me_To_Sleep.webm",
+  "type": "URLPlaylistEntry",
+  "meta": {},
+  "url": "https://www.youtube.com/watch?v=4ht80uzIhNs",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-4ht80uzIhNs-Imagine_Dragons_-_I_Bet_My_Life.webm",
+  "title": "Imagine Dragons - I Bet My Life",
+  "duration": 214,
   "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "type": "Member",
-      "name": "siku2",
-      "id": "203302899277627392"
-    },
     "channel": {
       "type": "Channel",
-      "name": "musicbot",
-      "id": "226402503422509058"
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
     }
   },
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "title": "Alan Walker - Sing Me To Sleep",
   "url": "https://www.youtube.com/watch?v=2i2khp_npdE",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-2i2khp_npdE-Alan_Walker_-_Sing_Me_To_Sleep.webm",
+  "title": "Alan Walker - Sing Me To Sleep",
   "duration": 192,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=Zx4Hjq6KwO0",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-Zx4Hjq6KwO0-Keane_-_Everybody_s_Changing.webm",
+  "title": "Keane - Everybody's Changing",
+  "duration": 218,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=Oextk-If8HQ",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-Oextk-If8HQ-Keane_-_Somewhere_Only_We_Know.webm",
+  "title": "Keane - Somewhere Only We Know",
+  "duration": 235,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=GemKqzILV4w",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-GemKqzILV4w-Snow_Patrol_-_Chasing_Cars.webm",
+  "title": "Snow Patrol - Chasing Cars",
+  "duration": 221,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=gRLv6zvyE48",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-gRLv6zvyE48-Keane_-_Perfect_Symmetry.webm",
+  "title": "Keane - Perfect Symmetry",
+  "duration": 244,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=1MwjX4dG72s",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-1MwjX4dG72s-Coldplay_-_Yellow.webm",
+  "title": "Coldplay - Yellow",
+  "duration": 271,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=fk1Q9y6VVy0",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-fk1Q9y6VVy0-Snow_Patrol_-_Open_Your_Eyes.webm",
+  "title": "Snow Patrol - Open Your Eyes",
+  "duration": 351,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=k4V3Mo61fJM",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-k4V3Mo61fJM-Coldplay_-_Fix_You.m4a",
+  "title": "Coldplay - Fix You",
+  "duration": 296,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=gnIZ7RMuLpU",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-gnIZ7RMuLpU-Coldplay_-_In_My_Place.webm",
+  "title": "Coldplay - In My Place",
+  "duration": 229,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=yWeuUwpEQfs",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-yWeuUwpEQfs-Coldplay_-_Don_t_Panic.webm",
+  "title": "Coldplay - Don't Panic",
+  "duration": 196,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=PXatLOWjr-k",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-PXatLOWjr-k-Travis_-_Why_Does_It_Always_Rain_On_Me_Official_Video.webm",
+  "title": "Travis - Why Does It Always Rain On Me? (Official Video)",
+  "duration": 280,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=eYO1-gGWJyo",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-eYO1-gGWJyo-Travis_-_Sing_Official_Video.webm",
+  "title": "Travis - Sing (Official Video)",
+  "duration": 229,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=u2hYn_4yuhc",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-u2hYn_4yuhc-Travis_-_Closer_Official_Video.webm",
+  "title": "Travis - Closer (Official Video)",
+  "duration": 281,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=gKvxLP7TMLI",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-gKvxLP7TMLI-Travis_-_Love_Will_Come_Through_Official_Video.webm",
+  "title": "Travis - Love Will Come Through (Official Video)",
+  "duration": 220,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=zewhl70Olfg",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-zewhl70Olfg-Travis_-_Boxes.m4a",
+  "title": "Travis - Boxes",
+  "duration": 261,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=OiBoeXI-R9k",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-OiBoeXI-R9k-Snow_Patrol_-_You_Could_Be_Happy_Lyrics.webm",
+  "title": "Snow Patrol - You Could Be Happy(Lyrics!)",
+  "duration": 185,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=LORhwk03P9k",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-LORhwk03P9k-Coldplay_-_Ink_Ghost_Stories.webm",
+  "title": "Coldplay - Ink (Ghost Stories)",
+  "duration": 228,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=JugGmkvhsKQ",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-JugGmkvhsKQ-Keane_-_Bedshaped.webm",
+  "title": "Keane - Bedshaped",
+  "duration": 282,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=u86VdOc3asA",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-u86VdOc3asA-Keane_-_This_Is_The_Last_Time.webm",
+  "title": "Keane - This Is The Last Time",
+  "duration": 214,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=y5l-GSDo72c",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-y5l-GSDo72c-Keane_-_Nothing_In_My_Way.webm",
+  "title": "Keane - Nothing In My Way",
+  "duration": 242,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=5HrV_B0qrdY",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-5HrV_B0qrdY-Keane_-_Silenced_By_The_Night.webm",
+  "title": "Keane - Silenced By The Night",
+  "duration": 211,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=bH13eUiDhmo",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-bH13eUiDhmo-Keane_-_Sovereign_Light_Cafe.webm",
+  "title": "Keane - Sovereign Light Caf\u00e9",
+  "duration": 219,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=WbLoYVnh4sY",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-WbLoYVnh4sY-Keane_-_A_Bad_Dream.webm",
+  "title": "Keane - A Bad Dream",
+  "duration": 252,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=fVe_KVzBFOo",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-fVe_KVzBFOo-Keane_-_Is_It_Any_Wonder.webm",
+  "title": "Keane - Is It Any Wonder?",
+  "duration": 188,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=lKrFfp67NDQ",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-lKrFfp67NDQ-Keane_-_Crystal_Ball_Band_Version.webm",
+  "title": "Keane - Crystal Ball (Band Version)",
+  "duration": 228,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=CXH5yL8bDbU",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-CXH5yL8bDbU-Keane_-_The_Lovers_Are_Losing.webm",
+  "title": "Keane - The Lovers Are Losing",
+  "duration": 204,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=50LOhILlLMQ",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-50LOhILlLMQ-Keane_-_Bend_Break.webm",
+  "title": "Keane - Bend & Break",
+  "duration": 227,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=zI9C9j0QgU4",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-zI9C9j0QgU4-Keane_K_NAAN_-_Stop_For_A_Minute.webm",
+  "title": "Keane, K'NAAN - Stop For A Minute",
+  "duration": 228,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=otNqnVgEs9M",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-otNqnVgEs9M-Shiver_-_Coldplay.webm",
+  "title": "Shiver - Coldplay",
+  "duration": 299,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=8hI_rBJ72qg",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-8hI_rBJ72qg-Clocks_Relojes_Haitian_Mix_-_Rhythms_del_Mundo_featuring_Coldplay_Lele.webm",
+  "title": "Clocks / Relojes (Haitian Mix) - Rhythms del Mundo featuring Coldplay & Lele",
+  "duration": 236,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=dME2YkXUD78",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-dME2YkXUD78-Atlas_-_Coldplay_Official_Video_with_Lyrics_-_Hunger_Games_-_Catching_Fire_Soundtrack.m4a",
+  "title": "Atlas - Coldplay Official Video with Lyrics - Hunger Games: Catching Fire ! Soundtrack",
+  "duration": 240,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=Y0IfIRq3-N8",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-Y0IfIRq3-N8-Coldplay_-_O.m4a",
+  "title": "Coldplay - O",
+  "duration": 322,
+  "downloaded": false,
+  "filename": null
+}
+;
+{
+  "type": "URLPlaylistEntry",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "url": "https://www.youtube.com/watch?v=79eNyWgQywo",
+  "version": 1,
+  "expected_filename": "audio_cache\\youtube-79eNyWgQywo-Ron_Sexsmith_Feat._Chris_Martin_-_Gold_In_Them_Hills.m4a",
+  "title": "Ron Sexsmith (Feat. Chris Martin) - Gold In Them Hills",
+  "duration": 222,
+  "downloaded": false,
   "filename": null
 }
