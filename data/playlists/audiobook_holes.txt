@@ -1,0 +1,574 @@
+***REMOVED***
+  "title": "Holes Chapters 1-3",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 629,
+  "expected_filename": "audio_cache\\youtube-rUW2ld0OrHg-Holes_Chapters_1-3.m4a",
+  "url": "https://www.youtube.com/watch?v=rUW2ld0OrHg",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapter 4 and 5",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 836,
+  "expected_filename": "audio_cache\\youtube-J1NPHZQdC-I-Holes_Chapter_4_and_5.webm",
+  "url": "https://www.youtube.com/watch?v=J1NPHZQdC-I",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapter 6",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 437,
+  "expected_filename": "audio_cache\\youtube-sq97GRl6qFU-Holes_Chapter_6.webm",
+  "url": "https://www.youtube.com/watch?v=sq97GRl6qFU",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapter 7- Part 1",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 811,
+  "expected_filename": "audio_cache\\youtube-REiGpK6oMCI-Holes_Chapter_7-_Part_1.webm",
+  "url": "https://www.youtube.com/watch?v=REiGpK6oMCI",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes- Chapter 7 part 2 and Chapter 8",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 771,
+  "expected_filename": "audio_cache\\youtube-LDyMNLimFfc-Holes-_Chapter_7_part_2_and_Chapter_8.webm",
+  "url": "https://www.youtube.com/watch?v=LDyMNLimFfc",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes- Chapters 9-11",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 899,
+  "expected_filename": "audio_cache\\youtube-9vY7sNuxLH0-Holes-_Chapters_9-11.webm",
+  "url": "https://www.youtube.com/watch?v=9vY7sNuxLH0",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 12 and 13",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 670,
+  "expected_filename": "audio_cache\\youtube-l_ph9ajq1TQ-Holes_Chapters_12_and_13.m4a",
+  "url": "https://www.youtube.com/watch?v=l_ph9ajq1TQ",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 14 and 15",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 617,
+  "expected_filename": "audio_cache\\youtube-7NDxB_gKGQY-Holes_Chapters_14_and_15.m4a",
+  "url": "https://www.youtube.com/watch?v=7NDxB_gKGQY",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 16 and 17",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 524,
+  "expected_filename": "audio_cache\\youtube-FJpXs3FtNeY-Holes_Chapters_16_and_17.m4a",
+  "url": "https://www.youtube.com/watch?v=FJpXs3FtNeY",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 18-20",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 893,
+  "expected_filename": "audio_cache\\youtube-1zHtcg4UwB8-Holes_Chapters_18-20.m4a",
+  "url": "https://www.youtube.com/watch?v=1zHtcg4UwB8",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 21 and 22",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 646,
+  "expected_filename": "audio_cache\\youtube-RKiDj5hnhE8-Holes_Chapters_21_and_22.m4a",
+  "url": "https://www.youtube.com/watch?v=RKiDj5hnhE8",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 23 and 24",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 442,
+  "expected_filename": "audio_cache\\youtube-Kn0A7XWET1k-Holes_Chapters_23_and_24.m4a",
+  "url": "https://www.youtube.com/watch?v=Kn0A7XWET1k",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 25 and 26",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 700,
+  "expected_filename": "audio_cache\\youtube-MlsP3D0gOzg-Holes_Chapters_25_and_26.m4a",
+  "url": "https://www.youtube.com/watch?v=MlsP3D0gOzg",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 27 and 28",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 641,
+  "expected_filename": "audio_cache\\youtube-vWTUrQEwCNY-Holes_Chapters_27_and_28.m4a",
+  "url": "https://www.youtube.com/watch?v=vWTUrQEwCNY",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 29 and 30 pt. 1",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 888,
+  "expected_filename": "audio_cache\\youtube-vS77Ia4LDj4-Holes_Chapters_29_and_30_pt._1.m4a",
+  "url": "https://www.youtube.com/watch?v=vS77Ia4LDj4",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 31-33",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 784,
+  "expected_filename": "audio_cache\\youtube-MuPDQW9GfVA-Holes_Chapters_31-33.m4a",
+  "url": "https://www.youtube.com/watch?v=MuPDQW9GfVA",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapter 34 and 35",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 617,
+  "expected_filename": "audio_cache\\youtube-yyZdrT0Cz8Y-Holes_Chapter_34_and_35.m4a",
+  "url": "https://www.youtube.com/watch?v=yyZdrT0Cz8Y",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 36 and 37",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 758,
+  "expected_filename": "audio_cache\\youtube-o3sNiJjCZlQ-Holes_Chapters_36_and_37.m4a",
+  "url": "https://www.youtube.com/watch?v=o3sNiJjCZlQ",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 38 and 39",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 482,
+  "expected_filename": "audio_cache\\youtube-SuPwOB3f-3M-Holes_Chapters_38_and_39.m4a",
+  "url": "https://www.youtube.com/watch?v=SuPwOB3f-3M",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 40-41",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 608,
+  "expected_filename": "audio_cache\\youtube-b8_q6OgL_N8-Holes_Chapters_40-41.m4a",
+  "url": "https://www.youtube.com/watch?v=b8_q6OgL_N8",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 42 and 43 pt. 1",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 822,
+  "expected_filename": "audio_cache\\youtube-Gq5zv0VVEc8-Holes_Chapters_42_and_43_pt._1.m4a",
+  "url": "https://www.youtube.com/watch?v=Gq5zv0VVEc8",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 43pt. 2 and 44",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 643,
+  "expected_filename": "audio_cache\\youtube-jM5P1dD5sZk-Holes_Chapters_43pt._2_and_44.m4a",
+  "url": "https://www.youtube.com/watch?v=jM5P1dD5sZk",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes- Chapters 45-46",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 522,
+  "expected_filename": "audio_cache\\youtube-UV0Ohwq-PDc-Holes-_Chapters_45-46.m4a",
+  "url": "https://www.youtube.com/watch?v=UV0Ohwq-PDc",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes Chapters 47 and 48",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 865,
+  "expected_filename": "audio_cache\\youtube-kYQ77tMg0ks-Holes_Chapters_47_and_48.m4a",
+  "url": "https://www.youtube.com/watch?v=kYQ77tMg0ks",
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "title": "Holes- Chapters 49 and 50",
+  "downloaded": false,
+  "version": 1,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "name": "siku2",
+      "type": "Member"
+    ***REMOVED***
+  ***REMOVED***,
+  "filename": null,
+  "duration": 614,
+  "expected_filename": "audio_cache\\youtube-onpk8E3hL7M-Holes-_Chapters_49_and_50.m4a",
+  "url": "https://www.youtube.com/watch?v=onpk8E3hL7M",
+  "type": "URLPlaylistEntry"
+***REMOVED***
