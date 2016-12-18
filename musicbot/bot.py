@@ -2267,6 +2267,7 @@ class MusicBot(discord.Client):
     async def cmd_radio(self, channel, player):
         if self.use_radio:
             self.use_radio = False
+            return Response("Thanks for listening to *CapitalFM*", delete_after=40)
         else:
             self.use_radio = True
             self.radio.refresh()
@@ -2376,7 +2377,7 @@ class MusicBot(discord.Client):
                     targetChannel = chnl
                     break
             else:
-                if user_mentions is not None:
+                if len(user_mentions) > 0:
                     for ch in server.channels:
                         for guy in ch.voice_members:
                             for u in user_mentions:
@@ -2387,7 +2388,7 @@ class MusicBot(discord.Client):
                             "Cannot find *{}* in any voice channel".format(
                                 ", ".join([x.mention for x in user_mentions])),
                             delete_after=25
-                    )
+                        )
                 else:
                     self.safe_print("Cannot find channel \"%s\"" % channelID)
                     return Response(
@@ -3141,7 +3142,7 @@ class MusicBot(discord.Client):
         argument = leftover_args[0] if len(leftover_args) > 0 else None
         savename = leftover_args[1].lower() if len(leftover_args) > 1 else ""
         load_mode = leftover_args[2] if len(leftover_args) > 2 else "add"
-        additional_args = leftover_args[2:] if len(leftover_args) > 2 else None
+        additional_args = leftover_args[2:] if len(leftover_args) > 2 else []
 
         forbidden_savenames = ["showall", "savename", "save", "load", "delete",
                                "builder", "extras", "add", "remove", "save", "exit", "clone", "rename", "extras", "alphabetical", "author", "entries", "playtime", "random"]
@@ -3165,6 +3166,9 @@ class MusicBot(discord.Client):
             if savename not in self.playlists.saved_playlists:
                 return Response("Can't load this playlist, there's no playlist with this name.", delete_after=20)
 
+            clone_entries = self.playlists.get_playlist(
+                savename, player.playlist)["entries"]
+
             if load_mode == "replace":
                 player.playlist.clear()
 
@@ -3181,7 +3185,7 @@ class MusicBot(discord.Client):
             if to_index - from_index <= 0:
                 return Response("No songs to play. RIP.", delete_after=20)
 
-            await player.playlist.add_entries(self.playlists.get_playlist(savename, player.playlist)["entries"][from_index:to_index])
+            await player.playlist.add_entries(clone_entries[from_index:to_index])
 
             return Response("Done. Enjoy your music!", delete_after=10)
 

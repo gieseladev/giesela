@@ -1,4 +1,5 @@
 import urllib.request
+from random import shuffle
 
 from bs4 import BeautifulSoup
 
@@ -44,6 +45,7 @@ class Radio:
                 print("capitalfm couldn't keep up\nReplaying songs (cleaning the lists)")
                 self.refresh()
                 self.update_list()
+                shuffle(self.song_list)
 
                 if len(self.song_list) < 1:
                     if len(self.old_songs) > 0:
