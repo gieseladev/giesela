@@ -4,7 +4,9 @@ from collections import deque
 from itertools import islice
 from random import shuffle
 
-from .entry import URLPlaylistEntry
+from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
+
+from .entry import StreamPlaylistEntry, URLPlaylistEntry
 from .exceptions import ExtractionError, WrongEntryTypeError
 from .lib.event_emitter import EventEmitter
 from .utils import get_header
@@ -30,6 +32,57 @@ class Playlist(EventEmitter):
 
     def clear(self):
         self.entries.clear()
+
+    async def add_stream_entry(self, song_url, info=None, **meta):
+        if info is None:
+            info = {'title': song_url, 'extractor': None}
+
+            try:
+                info = await self.downloader.extract_info(self.loop, song_url, download=False)
+
+            except DownloadError as e:
+                # ytdl doesn't like it but its probably a stream
+                if e.exc_info[0] == UnsupportedError:
+                    print("Assuming content is a direct stream")
+
+                elif e.exc_info[0] == URLError:
+                    if os.path.exists(os.path.abspath(song_url)):
+                        raise ExtractionError(
+                            "This is not a stream, this is a file path.")
+
+                    else:  # it might be a file path that just doesn't exist
+                        raise ExtractionError(
+                            "Invalid input: {0.exc_info[0]}: {0.exc_info[1].reason}".format(e))
+
+                else:
+                    # traceback.print_exc()
+                    raise ExtractionError("Unknown error: {}".format(e))
+
+            except Exception as e:
+                print('Could not extract information from {} ({}), falling back to direct'.format(
+                    song_url, e))
+
+        dest_url = song_url
+        if info.get('extractor'):
+            dest_url = info.get('url')
+
+        if info.get('extractor', None) == 'twitch:stream':  # may need to add other twitch types
+            title = info.get('description')
+        else:
+            title = info.get('title', 'Untitled')
+
+        # TODO: A bit more validation, "~stream some_url" should not just say
+        # :ok_hand:
+
+        entry = StreamPlaylistEntry(
+            self,
+            song_url,
+            title,
+            destination=dest_url,
+            **meta
+        )
+        self._add_entry(entry)
+        return entry, len(self.entries)
 
     async def add_entry(self, song_url, **meta):
         """

@@ -1203,6 +1203,29 @@ class MusicBot(discord.Client):
 
         return Response(reply_text, delete_after=30)
 
+    async def cmd_stream(self, player, channel, author, permissions, song_url):
+        """
+        Usage:
+            {command_prefix}stream song_link
+
+        Enqueue a media stream.
+        This could mean an actual stream like Twitch or shoutcast, or simply streaming
+        media without predownloading it.  Note: FFmpeg is notoriously bad at handling
+        streams, especially on poor connections.  You have been warned.
+        """
+
+        song_url = song_url.strip('<>')
+
+        if permissions.max_songs and player.playlist.count_for_user(author) >= permissions.max_songs:
+            raise exceptions.PermissionsError(
+                "You have reached your enqueued song limit (%s)" % permissions.max_songs, expire_in=30
+            )
+
+        await self.send_typing(channel)
+        await player.playlist.add_stream_entry(song_url, channel=channel, author=author)
+
+        return Response(":+1:", delete_after=6)
+
     async def cmd_forceplay(self, player, leftover_args, song_url):
         song_url = song_url.strip('<>')
 
@@ -2253,15 +2276,15 @@ class MusicBot(discord.Client):
         """
 
         if self.use_radio:
-            return Response ("Can't use `{0}radio` and `{0}autoplay` at the same time".format (self.config.command_prefix), delete_after = 20)
+            return Response("Can't use `{0}radio` and `{0}autoplay` at the same time".format(self.config.command_prefix), delete_after=20)
 
         if not self.config.auto_playlist:
             await self.on_player_finished_playing(player)
             self.config.auto_playlist = True
-            return Response("Playing from the autoplaylist", delete_after = 20)
+            return Response("Playing from the autoplaylist", delete_after=20)
         else:
             self.config.auto_playlist = False
-            return Response("Won't play from the autoplaylist anymore", delete_after = 20)
+            return Response("Won't play from the autoplaylist anymore", delete_after=20)
 
         # await self.safe_send_message (channel, msgState)
 
@@ -2273,7 +2296,7 @@ class MusicBot(discord.Client):
         """
 
         if self.config.auto_playlist:
-            return Response ("Can't use `{0}radio` and `{0}autoplay` at the same time".format (self.config.command_prefix), delete_after = 20)
+            return Response("Can't use `{0}radio` and `{0}autoplay` at the same time".format(self.config.command_prefix), delete_after=20)
 
         if self.use_radio:
             self.use_radio = False
@@ -3623,7 +3646,7 @@ class MusicBot(discord.Client):
 
         message_content = message.content.strip()
         if not message_content.startswith(self.config.command_prefix):
-            if message.channel.is_private and message.author != self.user:
+            if message.channel.id in self.config.bound_channels and message.author != self.user:
                 await self.cmd_c(message.author, message.channel, message_content.split())
             return
 
