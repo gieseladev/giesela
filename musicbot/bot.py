@@ -33,23 +33,22 @@ from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from pyshorteners import Shortener
 
-from musicbot.config import Config, ConfigDefaults
-from musicbot.games.game_2048 import Game2048
-from musicbot.games.game_hangman import GameHangman
-from musicbot.nine_gag import *
-from musicbot.papers import Papers
-from musicbot.permissions import Permissions, PermissionsDefaults
-from musicbot.player import MusicPlayer
-from musicbot.playlist import Playlist
-from musicbot.radio import Radio
-from musicbot.saved_playlists import Playlists
-from musicbot.utils import (format_time, load_file, paginate, random_line,
-                            sane_round_int, write_file)
-
 from . import downloader, exceptions
+from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
 from .constants import AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT
+from .games.game_2048 import Game2048
+from .games.game_hangman import GameHangman
+from .nine_gag import *
 from .opus_loader import load_opus_lib
+from .papers import Papers
+from .permissions import Permissions, PermissionsDefaults
+from .player import MusicPlayer
+from .playlist import Playlist
+from .radio import Radio
+from .saved_playlists import Playlists
+from .utils import (format_time, load_file, paginate, random_line,
+                    sane_round_int, write_file)
 
 load_opus_lib()
 
@@ -1204,6 +1203,29 @@ class MusicBot(discord.Client):
 
         return Response(reply_text, delete_after=30)
 
+    async def cmd_stream(self, player, channel, author, permissions, song_url):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***stream song_link
+
+        Enqueue a media stream.
+        This could mean an actual stream like Twitch or shoutcast, or simply streaming
+        media without predownloading it.  Note: FFmpeg is notoriously bad at handling
+        streams, especially on poor connections.  You have been warned.
+        """
+
+        song_url = song_url.strip('<>')
+
+        if permissions.max_songs and player.playlist.count_for_user(author) >= permissions.max_songs:
+            raise exceptions.PermissionsError(
+                "You have reached your enqueued song limit (%s)" % permissions.max_songs, expire_in=30
+            )
+
+        await self.send_typing(channel)
+        await player.playlist.add_stream_entry(song_url, channel=channel, author=author)
+
+        return Response(":+1:", delete_after=6)
+
     async def cmd_forceplay(self, player, leftover_args, song_url):
         song_url = song_url.strip('<>')
 
@@ -2246,25 +2268,36 @@ class MusicBot(discord.Client):
 
         return Response(":ok_hand:", delete_after=20)
 
-    async def cmd_autoplay(self, channel, message, player, msgState):
+    async def cmd_autoplay(self, player):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***autoPlay [bool]
-        Use True or False to set whether the bot uses the autoplaylist.
+            ***REMOVED***command_prefix***REMOVED***autoplay
+        Play from the autoplaylist.
         """
 
-        newState = msgState.lower() in self.trueStringList
-        self.config.auto_playlist = newState
+        if self.use_radio:
+            return Response("Can't use `***REMOVED***0***REMOVED***radio` and `***REMOVED***0***REMOVED***autoplay` at the same time".format(self.config.command_prefix), delete_after=20)
 
-        if newState:
+        if not self.config.auto_playlist:
             await self.on_player_finished_playing(player)
-            await self.safe_send_message(channel, "Playing from the autoplaylist")
+            self.config.auto_playlist = True
+            return Response("Playing from the autoplaylist", delete_after=20)
         else:
-            await self.safe_send_message(channel, "Won't play from the autoplaylist anymore")
+            self.config.auto_playlist = False
+            return Response("Won't play from the autoplaylist anymore", delete_after=20)
 
         # await self.safe_send_message (channel, msgState)
 
-    async def cmd_radio(self, channel, player):
+    async def cmd_radio(self, player):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***radio
+        Play from a radio stream.
+        """
+
+        if self.config.auto_playlist:
+            return Response("Can't use `***REMOVED***0***REMOVED***radio` and `***REMOVED***0***REMOVED***autoplay` at the same time".format(self.config.command_prefix), delete_after=20)
+
         if self.use_radio:
             self.use_radio = False
             return Response("Thanks for listening to *CapitalFM*", delete_after=40)
@@ -3613,7 +3646,7 @@ class MusicBot(discord.Client):
 
         message_content = message.content.strip()
         if not message_content.startswith(self.config.command_prefix):
-            if message.channel.is_private and message.author != self.user:
+            if message.channel.id in self.config.bound_channels and message.author != self.user:
                 await self.cmd_c(message.author, message.channel, message_content.split())
             return
 
