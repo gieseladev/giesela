@@ -41,9 +41,18 @@ class WrongEntryTypeError(ExtractionError):
         self.is_playlist = is_playlist
         self.use_url = use_url
 
+
+class FFmpegError(MusicbotException):
+    pass
+
+# FFmpeg complained about something but we don't care
+
+
+class FFmpegWarning(MusicbotException):
+    pass
+
+
 # The user doesn't have permission to use a command
-
-
 class PermissionsError(CommandError):
 
     @property

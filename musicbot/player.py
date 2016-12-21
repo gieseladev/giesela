@@ -1,13 +1,17 @@
 import asyncio
 import os
+import subprocess
+import sys
 import traceback
 from array import array
 from collections import deque
 from enum import Enum
 from shutil import get_terminal_size
+from threading import Thread
 
 import audioop
 
+from .exceptions import FFmpegError, FFmpegWarning
 from .lib.event_emitter import EventEmitter
 
 
@@ -286,6 +290,7 @@ class MusicPlayer(EventEmitter):
                     entry.filename,
                     before_options="-nostdin",
                     options="-vn -b:a 128k",
+                    stderr=subprocess.PIPE,
                     # Threadsafe call soon, b/c after will be called from the
                     # voice playback thread.
                     after=lambda: self.loop.call_soon_threadsafe(
@@ -297,7 +302,15 @@ class MusicPlayer(EventEmitter):
                 # I need to add ytdl hooks
                 self.state = MusicPlayerState.PLAYING
                 self._current_entry = entry
+                self._stderr_future = asyncio.Future()
 
+                stderr_thread = Thread(
+                    target=filter_stderr,
+                    args=(self._current_player.process, self._stderr_future),
+                    name="{} stderr reader".format(self._current_player.name)
+                )
+
+                stderr_thread.start()
                 self._current_player.start()
                 self.emit('play', player=self, entry=entry)
 
@@ -371,6 +384,64 @@ class MusicPlayer(EventEmitter):
         #       Change frame_count to bytes_read in the PatchedBuff
 
 
+def filter_stderr(popen: subprocess.Popen, future: asyncio.Future):
+    last_ex = None
+
+    while True:
+        data = popen.stderr.readline()
+        if data:
+            print("Data from ffmpeg: {}".format(data))
+            try:
+                if check_stderr(data):
+                    sys.stderr.buffer.write(data)
+                    sys.stderr.buffer.flush()
+
+            except FFmpegError as e:
+                print("Error from ffmpeg: %s", str(e).strip())
+                last_ex = e
+
+            except FFmpegWarning:
+                pass  # useless message
+        else:
+            break
+
+    if last_ex:
+        future.set_exception(last_ex)
+    else:
+        future.set_result(True)
+
+
+def check_stderr(data: bytes):
+    try:
+        data = data.decode('utf8')
+    except:
+        print("Unknown error decoding message from ffmpeg", exc_info=True)
+        return True  # fuck it
+
+    # log.ffmpeg("Decoded data from ffmpeg: {}".format(data))
+
+    # TODO: Regex
+    warnings = [
+        "Header missing",
+        "Estimating duration from birate, this may be inaccurate",
+        "Using AVStream.codec to pass codec parameters to muxers is deprecated, use AVStream.codecpar instead.",
+        "Application provided invalid, non monotonically increasing dts to muxer in stream",
+        "Last message repeated",
+        "Failed to send close message",
+        "decode_band_types: Input buffer exhausted before END element found"
+    ]
+    errors = [
+        # need to regex this properly, its both a warning and an error
+        "Invalid data found when processing input",
+    ]
+
+    if any(msg in data for msg in warnings):
+        raise FFmpegWarning(data)
+
+    if any(msg in data for msg in errors):
+        raise FFmpegError(data)
+
+    return True
 # if redistributing ffmpeg is an issue, it can be downloaded from here:
 #  - http://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-latest-win32-static.7z
 #  - http://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-latest-win64-static.7z
