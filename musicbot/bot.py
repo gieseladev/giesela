@@ -1698,6 +1698,13 @@ class MusicBot(discord.Client):
         """
 
         if player.current_entry:
+            if type(player.current_entry).__name__ == "StreamPlaylistEntry":
+                return Response(
+                    'Playing live stream: {} for {}'.format(
+                        player.current_entry.title, format_time(player.progress)),
+                    delete_after=30
+                )
+
             if self.server_specific_data[server]['last_np_msg']:
                 await self.safe_delete_message(self.server_specific_data[server]['last_np_msg'])
                 self.server_specific_data[server]['last_np_msg'] = None
@@ -2622,17 +2629,17 @@ class MusicBot(discord.Client):
     # ["https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g"],
     # "https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g")
 
-    async def cmd_christmas(self, player, message, channel, permissions, author):
-        """
-        Usage:
-            {command_prefix}christmas
-
-        Activate the mighty spirit of the christmas festival.
-        """
-        await self.safe_send_message(channel, "Christmas is upon you! :christmas_tree:")
-        await self.cmd_ask(channel, message, ["Christmas"])
-        player.volume = .15
-        await self.cmd_play(player, channel, author, permissions, ["https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw"], "https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw")
+    # async def cmd_christmas(self, player, message, channel, permissions, author):
+    #     """
+    #     Usage:
+    #         {command_prefix}christmas
+    #
+    #     Activate the mighty spirit of the christmas festival.
+    #     """
+    #     await self.safe_send_message(channel, "Christmas is upon you! :christmas_tree:")
+    #     await self.cmd_ask(channel, message, ["Christmas"])
+    #     player.volume = .15
+    #     await self.cmd_play(player, channel, author, permissions, ["https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw"], "https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw")
 
     async def cmd_getvideolink(self, player, message, channel, author, leftover_args):
         """
@@ -2901,13 +2908,17 @@ class MusicBot(discord.Client):
         if handler is None:
             return Response("There's no game like that...", delete_after=20)
 
-        await handler(author, channel)
+        await handler(author, channel, leftover_args)
 
-    async def g_2048(self, author, channel, size=5):
+    async def g_2048(self, author, channel, additional_args):
         """
         Join the same numbers and get to the 2048 tile!
         """
-        game = Game2048(size)
+
+        save_code = additional_args[0] if len(additional_args) > 0 else None
+        size = additional_args[1] if len(additional_args) > 1 else 5
+
+        game = Game2048(size, save_code)
         game_running = True
         turn_index = 1
         cache_location = "cache/pictures/g2048_img" + str(author.id)
@@ -2917,7 +2928,7 @@ class MusicBot(discord.Client):
                 #self.safe_print (str (reaction.emoji) + " is a custom emoji")
                 return False
 
-            if (str(reaction.emoji).startswith("✅") or str(reaction.emoji).startswith("📽")) and reaction.count > 1 and user == author:
+            if ((str(reaction.emoji).startswith("✅") and user == author) or str(reaction.emoji).startswith("📽") or str(reaction.emoji).startswith("💾")) and reaction.count > 1:
                 return True
 
             # self.safe_print (str (reaction.emoji) + " was the wrong type of emoji")
@@ -2939,14 +2950,21 @@ class MusicBot(discord.Client):
                 await self.add_reaction(msg, "⬇")
                 await self.add_reaction(msg, "✅")
                 await self.add_reaction(msg, "📽")
+                await self.add_reaction(msg, "💾")
 
                 reaction, user = await self.wait_for_reaction(check=check, message=msg)
                 msg = reaction.message  # for some reason this has to be like this
                 #self.safe_print ("User accepted. There are " + str (len (msg.reactions)) + " reactions. [" + ", ".join ([str (r.count) for r in msg.reactions]) + "]")
 
                 for reaction in msg.reactions:
-                    if str(reaction.emoji) == "📽":
-                        await self.send_file(author, game.getImage(cache_location) + ".gif", content="**2048**\nYour replay:")
+                    if str(reaction.emoji) == "📽" and reaction.count > 1:
+                        await self.send_file(user, game.getImage(cache_location) + ".gif", content="**2048**\nYour replay:")
+                        turn_information = "| *replay has been sent*"
+                        break
+
+                    if str(reaction.emoji) == "💾" and reaction.count > 1:
+                        await self.safe_send_message(user, "The save code is: `{0}`\nUse `{1}game 2048 {0}` to continue your current game".format(game.get_save(), self.config.command_prefix))
+                        turn_information = "| *save code has been sent*"
                         break
 
                     if str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") and reaction.count > 1:
@@ -2977,13 +2995,15 @@ class MusicBot(discord.Client):
         await self.send_file(channel, game.getImage(cache_location) + ".gif", content="**2048**\nYour replay:")
         await self.safe_delete_message(msg)
 
-    async def g_Hangman(self, author, channel, word=None, tries=10):
+    async def g_Hangman(self, author, channel, additional_args):
         """
         Guess a word by guessing each and every letter
         """
-        if word is None:
-            word = re.sub('[^a-zA-Z]', '',
-                          random_line(ConfigDefaults.hangman_wordlist))
+
+        tries = additional_args[0] if len(additional_args) > 0 else 10
+
+        word = re.sub('[^a-zA-Z]', '',
+                      random_line(ConfigDefaults.hangman_wordlist))
 
         alphabet = list("abcdefghijklmnopqrstuvwxyz")
         print("Started a Hangman game with \"" + word + "\"")
@@ -3646,7 +3666,7 @@ class MusicBot(discord.Client):
 
         message_content = message.content.strip()
         if not message_content.startswith(self.config.command_prefix):
-            if message.channel.id in self.config.bound_channels and message.author != self.user:
+            if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
                 await self.cmd_c(message.author, message.channel, message_content.split())
             return
 
