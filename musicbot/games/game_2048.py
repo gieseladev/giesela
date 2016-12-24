@@ -1,15 +1,20 @@
 import colorsys
 import random
+from math import pow, sqrt, log2
 
 from PIL import Image, ImageDraw, ImageSequence
 
 
 class Game2048:
 
-    def __init__(self, size):
-        self.grid = [[Tile() for i in range(size)] for j in range(size)]
-        self.addRandomTile()
-        self.addRandomTile()
+    def __init__(self, size=None, save_string=None):
+        if save_string is None:
+            self.grid = [[Tile() for i in range(size)] for j in range(size)]
+            self.addRandomTile()
+            self.addRandomTile()
+        else:
+            self.grid, size = self.from_save(save_string)
+
         self.size = size
         self.new_game = True
 
@@ -75,6 +80,47 @@ class Game2048:
             return "#" + str(rgb[0]) + str(rgb[1]) + str(rgb[2]), "#FFFFFF"
         else:
             return "#cdc1b5", "#000000"
+
+    def get_save(self):
+        encoded = []
+        empty = 0
+        for row in self.grid:
+            for tile in row:
+                if tile.value <= 0:
+                    empty += 1
+                    continue
+                else:
+                    if empty > 0:
+                        encoded.append("_" + encode52(empty))
+                        empty = 0
+
+                v = log2(tile.value)
+                encoded.append(encode52(int(v)))
+
+        if empty > 0:
+            encoded.append("_" + encode52(empty))
+
+        return "-".join(encoded)
+
+    def from_save(self, save_code):
+        elements = save_code.split("-")
+        n_grid = []
+        for el in elements:
+            if el.startswith("_"):
+                empties = decode52(el[1:])
+                n_grid.extend([0 for x in range(empties)])
+            else:
+                n_grid.append(int(pow(2, decode52(el))))
+
+        new_size = int(sqrt(len(n_grid)))
+        r_grid = []
+        for row in range(new_size):
+            r = []
+            for column in range(new_size):
+                r.append(Tile(n_grid[row * new_size + column]))
+            r_grid.append(r)
+
+        return r_grid, new_size
 
     def addRandomTile(self):
         availableTiles = self.getAvailableTiles()
@@ -163,7 +209,7 @@ class Game2048:
     def won(self):
         for i in range(len(self.grid)):
             for j in range(len(self.grid[i])):
-                if self.grid[i][j].value == 2048:
+                if self.grid[i][j].value >= 2048:
                     return True
         return False
 
@@ -208,62 +254,21 @@ def rotate(l, num):
     return l2
 
 
-# def onKeyPress(event):
-#     global g
-#     global b
-#     for i in b:
-#         for j in i:
-#             j.destroy()
-#     if event.keycode == 37:
-#         g.move(3)
-#     elif event.keycode == 38:
-#         g.move(2)
-#     elif event.keycode == 39:
-#         g.move(1)
-#     elif event.keycode == 40:
-#         g.move(0)
-#     makeButtons(g)
-#     if g.lost():
-#         for i in range(len(b)):
-#             for j in range(len(b[i])):
-#                 if b[i][j].config('text')[-1] != str(g.grid[i][j]):
-#                     b[i][j].destroy()
-#                     b[i][j] = None
-#         try:
-#             g.q.destroy()
-#         except Exception as e:
-#             pass
-#         g.q = Button(root, text="You lost")
-#         g.q.pack()
-#
-# def makeButtons(g):
-#     global b
-#     for i in range(len(g.grid)):
-#         for j in range(len(g.grid[i])):
-#             if g.grid[i][j].value:
-#                 b[i][j] = Button(root, text=str(g.grid[i][j].value), bg=findColors(g.grid[i][j].value)[0], fg=findColors(g.grid[i][j].value)[1])
-#             else:
-#                 b[i][j] = Button(root, text='')
-#             b[i][j].config(width=max(len(str(i)) for i in g.getValues()))
-#             b[i][j].grid(row=i, column=j)
-#
-# def findColors(num):
-#     if (num != 0 and ((num & (num - 1)) == 0)):
-#         bi = bin(num)
-#         po = len(bi)
-#         hue = 30.0 * po
-#         rgb = colorsys.hls_to_rgb(hue/256.0, 0.5, 0.5)
-#         rgb = [str(hex(int(256*x)))[2:3] for x in rgb]
-#         return "#" + str(rgb[0]) + str(rgb[1]) + str(rgb[2]), "#FFFFFF"
-#     else:
-#         return "#000000", "#FFFFFF"
-#
-# g = Game(4)
-# b = [[None for i in j] for j in g.grid]
-#
-# root = Tk()
-# root.bind('<KeyPress>', onKeyPress)
-#
-# makeButtons(g)
-#
-# root.mainloop()
+def encode52(n):
+    n -= 1
+    r_str = ""
+    e_table = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
+    a, b = divmod(n, 52)
+    for i in range(a + 1):
+        r_str += str(e_table[b if i >= a else 51])
+
+    return r_str
+
+
+def decode52(s):
+    e_table = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
+    num = 0
+    for c in s:
+        num += e_table.index(c) + 1
+
+    return num
