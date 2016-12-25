@@ -282,7 +282,9 @@ class URLPlaylistEntry(BasePlaylistEntry):
                 # Move the temporary file to it's final location.
                 os.rename(unhashed_fname, self.filename)
 
+
 class StreamPlaylistEntry(BasePlaylistEntry):
+
     def __init__(self, playlist, url, title, *, destination=None, **meta):
         super().__init__()
 
@@ -330,7 +332,8 @@ class StreamPlaylistEntry(BasePlaylistEntry):
                 meta['channel'] = ch or data['meta']['channel']['name']
 
             if 'author' in data['meta']:
-                meta['author'] = meta['channel'].server.get_member(data['meta']['author']['id'])
+                meta['author'] = meta['channel'].server.get_member(
+                    data['meta']['author']['id'])
 
             entry = cls(playlist, url, title, destination=destination, **meta)
             if not destination and filename:
