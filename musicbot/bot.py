@@ -2926,9 +2926,10 @@ class MusicBot(discord.Client):
         def check(reaction, user):
             if reaction.custom_emoji:
                 #self.safe_print (str (reaction.emoji) + " is a custom emoji")
+                #print("Ignoring my own reaction")
                 return False
 
-            if ((str(reaction.emoji).startswith("✅") and user == author) or str(reaction.emoji).startswith("📽") or str(reaction.emoji).startswith("💾")) and reaction.count > 1:
+            if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or str(reaction.emoji).startswith("📽") or str(reaction.emoji).startswith("💾")) and reaction.count > 1 and user == author:
                 return True
 
             # self.safe_print (str (reaction.emoji) + " was the wrong type of emoji")
@@ -2948,7 +2949,6 @@ class MusicBot(discord.Client):
                 await self.add_reaction(msg, "⬆")
                 await self.add_reaction(msg, "➡")
                 await self.add_reaction(msg, "⬇")
-                await self.add_reaction(msg, "✅")
                 await self.add_reaction(msg, "📽")
                 await self.add_reaction(msg, "💾")
 
@@ -2960,18 +2960,14 @@ class MusicBot(discord.Client):
                     if str(reaction.emoji) == "📽" and reaction.count > 1:
                         await self.send_file(user, game.getImage(cache_location) + ".gif", content="**2048**\nYour replay:")
                         turn_information = "| *replay has been sent*"
-                        break
 
                     if str(reaction.emoji) == "💾" and reaction.count > 1:
-                        await self.safe_send_message(user, "The save code is: `{0}`\nUse `{1}game 2048 {0}` to continue your current game".format(game.get_save(), self.config.command_prefix))
+                        await self.safe_send_message(user, "The save code is: `{0}`\n*Use *`{1}game 2048 {0}`* to continue your current game*".format(game.get_save(), self.config.command_prefix))
                         turn_information = "| *save code has been sent*"
-                        break
 
                     if str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") and reaction.count > 1:
                         direction = ("⬇", "➡", "⬆", "⬅").index(
                             str(reaction.emoji))
-                        #self.safe_print ("Found direction " + str (direction))
-                        break
 
                     #self.safe_print ("This did not match a direction: " + str (reaction.emoji))
 
@@ -3062,7 +3058,7 @@ class MusicBot(discord.Client):
         WIP
         """
         await self.safe_send_message(channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n     Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
-        return
+        #return
         current_post = get_posts_from_page(number_of_pages=1)[0]
 
         cached_file = urllib.request.URLopener()
@@ -3666,8 +3662,8 @@ class MusicBot(discord.Client):
 
         message_content = message.content.strip()
         if not message_content.startswith(self.config.command_prefix):
-            if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
-                await self.cmd_c(message.author, message.channel, message_content.split())
+            # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
+            #     await self.cmd_c(message.author, message.channel, message_content.split())
             return
 
         if message.author == self.user:
