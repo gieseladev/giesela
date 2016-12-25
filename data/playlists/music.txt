@@ -1,1133 +1,1133 @@
 ***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED******REMOVED***,
-  "url": "https://www.youtube.com/watch?v=rp4UwPZfRis",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-rp4UwPZfRis-Rihanna_-_Unfaithful.webm",
-  "title": "Rihanna - Unfaithful",
-  "duration": 295,
   "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED******REMOVED***,
-  "url": "https://www.youtube.com/watch?v=e12KryuLcbs",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-e12KryuLcbs-The_Vamps_-_Wake_Up.webm",
-  "title": "The Vamps - Wake Up",
-  "duration": 310,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=CfihYWRWRTQ",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-CfihYWRWRTQ-John_Newman_-_Love_Me_Again.webm",
-  "title": "John Newman - Love Me Again",
-  "duration": 235,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=sJQYoGyEtDs",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-sJQYoGyEtDs-Fool_s_Garden-Lemon_Tree_lyrics.webm",
-  "title": "Fool's Garden-Lemon Tree lyrics",
-  "duration": 185,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED******REMOVED***,
-  "url": "https://www.youtube.com/watch?v=nlR0MkrRklg",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-nlR0MkrRklg-Ariana_Grande_-_Santa_Tell_Me.webm",
-  "title": "Ariana Grande - Santa Tell Me",
-  "duration": 340,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "210488226777923585",
-      "name": "grelor"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=hxuCLopcEy4",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-hxuCLopcEy4-Good_People_-_Jack_Johnson_-_With_Lyrics.webm",
-  "title": "Good People - Jack Johnson - With Lyrics",
-  "duration": 216,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=xSaLtRksFlM",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-xSaLtRksFlM-Vexento_-_Pixel_Party.webm",
-  "title": "Vexento - Pixel Party",
-  "duration": 169,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED******REMOVED***,
-  "url": "https://www.youtube.com/watch?v=CX0TL7gPFMw",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-CX0TL7gPFMw-This_Is_Me_From_Camp_Rock.webm",
-  "title": "This Is Me (From \"Camp Rock\")",
-  "duration": 189,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "210488226777923585",
-      "name": "grelor"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=SufAKh_bHsU",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-SufAKh_bHsU-Abstract_-_Scars_ft._RoZe_Prod._Drumma_Battalion.webm",
-  "title": "Abstract - Scars (ft. RoZe) (Prod. Drumma Battalion)",
-  "duration": 276,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED******REMOVED***,
-  "url": "https://www.youtube.com/watch?v=6JCLY0Rlx6Q",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-6JCLY0Rlx6Q-WALK_THE_MOON_-_Shut_Up_and_Dance.webm",
-  "title": "WALK THE MOON - Shut Up and Dance",
-  "duration": 246,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED******REMOVED***,
-  "url": "https://www.youtube.com/watch?v=8WYHDfJDPDc",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-8WYHDfJDPDc-Nelly_-_Dilemma_ft._Kelly_Rowland.webm",
-  "title": "Nelly - Dilemma ft. Kelly Rowland",
-  "duration": 283,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "210488226777923585",
-      "name": "grelor"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=6tu4wWSbnIs",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-6tu4wWSbnIs-X_Ambassadors_-_Renegades_Audio.webm",
-  "title": "X Ambassadors - Renegades (Audio)",
-  "duration": 195,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=qak_RGVERbc",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-qak_RGVERbc-Standing_still_-_Jewel_lyrics.webm",
-  "title": "Standing still - Jewel (lyrics)",
-  "duration": 272,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=TOrnUquxtwA",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-TOrnUquxtwA-Justin_Timberlake_-_What_Goes_Around...Comes_Around.webm",
-  "title": "Justin Timberlake - What Goes Around...Comes Around",
-  "duration": 561,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED******REMOVED***,
-  "url": "https://www.youtube.com/watch?v=GNgpTJFa1ws",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-GNgpTJFa1ws-Just_So_You_Know.webm",
-  "title": "Just So You Know",
-  "duration": 259,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED******REMOVED***,
-  "url": "https://www.youtube.com/watch?v=XC3ahd6Di3M",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-XC3ahd6Di3M-U2_-_Ordinary_Love_From_Mandela_OST_Lyric_Video.webm",
-  "title": "U2 - Ordinary Love (From Mandela OST) Lyric Video",
-  "duration": 219,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=_ovdm2yX4MA",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-_ovdm2yX4MA-Avicii_-_Levels.webm",
-  "title": "Avicii - Levels",
-  "duration": 198,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED******REMOVED***,
-  "url": "https://www.youtube.com/watch?v=Xq-knHXSKYY",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-Xq-knHXSKYY-Avicii_-_For_A_Better_Day.webm",
+  "filename": null,
   "title": "Avicii - For A Better Day",
+  "url": "https://www.youtube.com/watch?v=Xq-knHXSKYY",
+  "expected_filename": "audio_cache\\youtube-Xq-knHXSKYY-Avicii_-_For_A_Better_Day.webm",
+  "version": 1,
+  "meta": ***REMOVED******REMOVED***,
   "duration": 253,
-  "downloaded": false,
-  "filename": null
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED******REMOVED***,
-  "url": "https://www.youtube.com/watch?v=WpYeekQkAdc",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-WpYeekQkAdc-The_Black_Eyed_Peas_-_Where_Is_The_Love.webm",
-  "title": "The Black Eyed Peas - Where Is The Love?",
-  "duration": 252,
   "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED******REMOVED***,
-  "url": "https://www.youtube.com/watch?v=JwQZQygg3Lk",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-JwQZQygg3Lk-The_Black_Eyed_Peas_-_The_Time_Dirty_Bit.webm",
-  "title": "The Black Eyed Peas - The Time (Dirty Bit)",
-  "duration": 313,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED******REMOVED***,
-  "url": "https://www.youtube.com/watch?v=oh2LWWORoiM",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-oh2LWWORoiM-Tove_Lo_-_Habits_Stay_High.webm",
-  "title": "Tove Lo - Habits (Stay High)",
-  "duration": 208,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED******REMOVED***,
-  "url": "https://www.youtube.com/watch?v=a7SouU3ECpU",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-a7SouU3ECpU-Alesso_-_Heroes_we_could_be_ft._Tove_Lo.webm",
-  "title": "Alesso - Heroes (we could be) ft. Tove Lo",
-  "duration": 294,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED******REMOVED***,
-  "url": "https://www.youtube.com/watch?v=4ht80uzIhNs",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-4ht80uzIhNs-Imagine_Dragons_-_I_Bet_My_Life.webm",
-  "title": "Imagine Dragons - I Bet My Life",
-  "duration": 214,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=2i2khp_npdE",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-2i2khp_npdE-Alan_Walker_-_Sing_Me_To_Sleep.webm",
-  "title": "Alan Walker - Sing Me To Sleep",
-  "duration": 192,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=Zx4Hjq6KwO0",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-Zx4Hjq6KwO0-Keane_-_Everybody_s_Changing.webm",
-  "title": "Keane - Everybody's Changing",
-  "duration": 218,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=Oextk-If8HQ",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-Oextk-If8HQ-Keane_-_Somewhere_Only_We_Know.webm",
-  "title": "Keane - Somewhere Only We Know",
-  "duration": 235,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=GemKqzILV4w",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-GemKqzILV4w-Snow_Patrol_-_Chasing_Cars.webm",
-  "title": "Snow Patrol - Chasing Cars",
-  "duration": 221,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=gRLv6zvyE48",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-gRLv6zvyE48-Keane_-_Perfect_Symmetry.webm",
-  "title": "Keane - Perfect Symmetry",
-  "duration": 244,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=1MwjX4dG72s",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-1MwjX4dG72s-Coldplay_-_Yellow.webm",
-  "title": "Coldplay - Yellow",
-  "duration": 271,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=fk1Q9y6VVy0",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-fk1Q9y6VVy0-Snow_Patrol_-_Open_Your_Eyes.webm",
-  "title": "Snow Patrol - Open Your Eyes",
-  "duration": 351,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=k4V3Mo61fJM",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-k4V3Mo61fJM-Coldplay_-_Fix_You.m4a",
-  "title": "Coldplay - Fix You",
-  "duration": 296,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=gnIZ7RMuLpU",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-gnIZ7RMuLpU-Coldplay_-_In_My_Place.webm",
-  "title": "Coldplay - In My Place",
-  "duration": 229,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=yWeuUwpEQfs",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-yWeuUwpEQfs-Coldplay_-_Don_t_Panic.webm",
-  "title": "Coldplay - Don't Panic",
-  "duration": 196,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=PXatLOWjr-k",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-PXatLOWjr-k-Travis_-_Why_Does_It_Always_Rain_On_Me_Official_Video.webm",
-  "title": "Travis - Why Does It Always Rain On Me? (Official Video)",
-  "duration": 280,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=eYO1-gGWJyo",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-eYO1-gGWJyo-Travis_-_Sing_Official_Video.webm",
-  "title": "Travis - Sing (Official Video)",
-  "duration": 229,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=u2hYn_4yuhc",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-u2hYn_4yuhc-Travis_-_Closer_Official_Video.webm",
-  "title": "Travis - Closer (Official Video)",
-  "duration": 281,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=gKvxLP7TMLI",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-gKvxLP7TMLI-Travis_-_Love_Will_Come_Through_Official_Video.webm",
-  "title": "Travis - Love Will Come Through (Official Video)",
-  "duration": 220,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=zewhl70Olfg",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-zewhl70Olfg-Travis_-_Boxes.m4a",
-  "title": "Travis - Boxes",
-  "duration": 261,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=OiBoeXI-R9k",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-OiBoeXI-R9k-Snow_Patrol_-_You_Could_Be_Happy_Lyrics.webm",
-  "title": "Snow Patrol - You Could Be Happy(Lyrics!)",
-  "duration": 185,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=LORhwk03P9k",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-LORhwk03P9k-Coldplay_-_Ink_Ghost_Stories.webm",
-  "title": "Coldplay - Ink (Ghost Stories)",
-  "duration": 228,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=JugGmkvhsKQ",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-JugGmkvhsKQ-Keane_-_Bedshaped.webm",
-  "title": "Keane - Bedshaped",
-  "duration": 282,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=u86VdOc3asA",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-u86VdOc3asA-Keane_-_This_Is_The_Last_Time.webm",
-  "title": "Keane - This Is The Last Time",
-  "duration": 214,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=y5l-GSDo72c",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-y5l-GSDo72c-Keane_-_Nothing_In_My_Way.webm",
-  "title": "Keane - Nothing In My Way",
-  "duration": 242,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=5HrV_B0qrdY",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-5HrV_B0qrdY-Keane_-_Silenced_By_The_Night.webm",
-  "title": "Keane - Silenced By The Night",
-  "duration": 211,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=bH13eUiDhmo",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-bH13eUiDhmo-Keane_-_Sovereign_Light_Cafe.webm",
-  "title": "Keane - Sovereign Light Caf\u00e9",
-  "duration": 219,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=WbLoYVnh4sY",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-WbLoYVnh4sY-Keane_-_A_Bad_Dream.webm",
-  "title": "Keane - A Bad Dream",
-  "duration": 252,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=fVe_KVzBFOo",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-fVe_KVzBFOo-Keane_-_Is_It_Any_Wonder.webm",
-  "title": "Keane - Is It Any Wonder?",
-  "duration": 188,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=lKrFfp67NDQ",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-lKrFfp67NDQ-Keane_-_Crystal_Ball_Band_Version.webm",
-  "title": "Keane - Crystal Ball (Band Version)",
-  "duration": 228,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=CXH5yL8bDbU",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-CXH5yL8bDbU-Keane_-_The_Lovers_Are_Losing.webm",
+  "filename": null,
   "title": "Keane - The Lovers Are Losing",
+  "url": "https://www.youtube.com/watch?v=CXH5yL8bDbU",
+  "expected_filename": "audio_cache\\youtube-CXH5yL8bDbU-Keane_-_The_Lovers_Are_Losing.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
   "duration": 204,
-  "downloaded": false,
-  "filename": null
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
-  "type": "URLPlaylistEntry",
+  "downloaded": false,
+  "filename": null,
+  "title": "Travis - Why Does It Always Rain On Me? (Official Video)",
+  "url": "https://www.youtube.com/watch?v=PXatLOWjr-k",
+  "expected_filename": "audio_cache\\youtube-PXatLOWjr-k-Travis_-_Why_Does_It_Always_Rain_On_Me_Official_Video.webm",
+  "version": 1,
   "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
     "author": ***REMOVED***
       "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
     ***REMOVED***
   ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=50LOhILlLMQ",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-50LOhILlLMQ-Keane_-_Bend_Break.webm",
-  "title": "Keane - Bend & Break",
-  "duration": 227,
-  "downloaded": false,
-  "filename": null
+  "duration": 280,
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=zI9C9j0QgU4",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-zI9C9j0QgU4-Keane_K_NAAN_-_Stop_For_A_Minute.webm",
-  "title": "Keane, K'NAAN - Stop For A Minute",
-  "duration": 228,
   "downloaded": false,
-  "filename": null
+  "filename": null,
+  "title": "Tove Lo - Habits (Stay High)",
+  "url": "https://www.youtube.com/watch?v=oh2LWWORoiM",
+  "expected_filename": "audio_cache\\youtube-oh2LWWORoiM-Tove_Lo_-_Habits_Stay_High.webm",
+  "version": 1,
+  "meta": ***REMOVED******REMOVED***,
+  "duration": 208,
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=otNqnVgEs9M",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-otNqnVgEs9M-Shiver_-_Coldplay.webm",
-  "title": "Shiver - Coldplay",
-  "duration": 299,
   "downloaded": false,
-  "filename": null
+  "filename": null,
+  "title": "This Is Me (From \"Camp Rock\")",
+  "url": "https://www.youtube.com/watch?v=CX0TL7gPFMw",
+  "expected_filename": "audio_cache\\youtube-CX0TL7gPFMw-This_Is_Me_From_Camp_Rock.webm",
+  "version": 1,
+  "meta": ***REMOVED******REMOVED***,
+  "duration": 189,
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=8hI_rBJ72qg",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-8hI_rBJ72qg-Clocks_Relojes_Haitian_Mix_-_Rhythms_del_Mundo_featuring_Coldplay_Lele.webm",
-  "title": "Clocks / Relojes (Haitian Mix) - Rhythms del Mundo featuring Coldplay & Lele",
-  "duration": 236,
   "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=dME2YkXUD78",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-dME2YkXUD78-Atlas_-_Coldplay_Official_Video_with_Lyrics_-_Hunger_Games_-_Catching_Fire_Soundtrack.m4a",
-  "title": "Atlas - Coldplay Official Video with Lyrics - Hunger Games: Catching Fire ! Soundtrack",
-  "duration": 240,
-  "downloaded": false,
-  "filename": null
-***REMOVED***
-;
-***REMOVED***
-  "type": "URLPlaylistEntry",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=Y0IfIRq3-N8",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-Y0IfIRq3-N8-Coldplay_-_O.m4a",
+  "filename": null,
   "title": "Coldplay - O",
+  "url": "https://www.youtube.com/watch?v=Y0IfIRq3-N8",
+  "expected_filename": "audio_cache\\youtube-Y0IfIRq3-N8-Coldplay_-_O.m4a",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
   "duration": 322,
-  "downloaded": false,
-  "filename": null
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
-  "type": "URLPlaylistEntry",
+  "downloaded": false,
+  "filename": null,
+  "title": "Keane, K'NAAN - Stop For A Minute",
+  "url": "https://www.youtube.com/watch?v=zI9C9j0QgU4",
+  "expected_filename": "audio_cache\\youtube-zI9C9j0QgU4-Keane_K_NAAN_-_Stop_For_A_Minute.webm",
+  "version": 1,
   "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
     "author": ***REMOVED***
       "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
     ***REMOVED***
   ***REMOVED***,
-  "url": "https://www.youtube.com/watch?v=79eNyWgQywo",
-  "version": 1,
-  "expected_filename": "audio_cache\\youtube-79eNyWgQywo-Ron_Sexsmith_Feat._Chris_Martin_-_Gold_In_Them_Hills.m4a",
-  "title": "Ron Sexsmith (Feat. Chris Martin) - Gold In Them Hills",
-  "duration": 222,
+  "duration": 228,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
   "downloaded": false,
-  "filename": null
+  "filename": null,
+  "title": "Keane - Somewhere Only We Know",
+  "url": "https://www.youtube.com/watch?v=Oextk-If8HQ",
+  "expected_filename": "audio_cache\\youtube-Oextk-If8HQ-Keane_-_Somewhere_Only_We_Know.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 235,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Keane - Silenced By The Night",
+  "url": "https://www.youtube.com/watch?v=5HrV_B0qrdY",
+  "expected_filename": "audio_cache\\youtube-5HrV_B0qrdY-Keane_-_Silenced_By_The_Night.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 211,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "U2 - Ordinary Love (From Mandela OST) Lyric Video",
+  "url": "https://www.youtube.com/watch?v=XC3ahd6Di3M",
+  "expected_filename": "audio_cache\\youtube-XC3ahd6Di3M-U2_-_Ordinary_Love_From_Mandela_OST_Lyric_Video.webm",
+  "version": 1,
+  "meta": ***REMOVED******REMOVED***,
+  "duration": 219,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Shiver - Coldplay",
+  "url": "https://www.youtube.com/watch?v=otNqnVgEs9M",
+  "expected_filename": "audio_cache\\youtube-otNqnVgEs9M-Shiver_-_Coldplay.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 299,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Travis - Sing (Official Video)",
+  "url": "https://www.youtube.com/watch?v=eYO1-gGWJyo",
+  "expected_filename": "audio_cache\\youtube-eYO1-gGWJyo-Travis_-_Sing_Official_Video.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 229,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Rihanna - Unfaithful",
+  "url": "https://www.youtube.com/watch?v=rp4UwPZfRis",
+  "expected_filename": "audio_cache\\youtube-rp4UwPZfRis-Rihanna_-_Unfaithful.webm",
+  "version": 1,
+  "meta": ***REMOVED******REMOVED***,
+  "duration": 295,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Nelly - Dilemma ft. Kelly Rowland",
+  "url": "https://www.youtube.com/watch?v=8WYHDfJDPDc",
+  "expected_filename": "audio_cache\\youtube-8WYHDfJDPDc-Nelly_-_Dilemma_ft._Kelly_Rowland.webm",
+  "version": 1,
+  "meta": ***REMOVED******REMOVED***,
+  "duration": 283,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Keane - Is It Any Wonder?",
+  "url": "https://www.youtube.com/watch?v=fVe_KVzBFOo",
+  "expected_filename": "audio_cache\\youtube-fVe_KVzBFOo-Keane_-_Is_It_Any_Wonder.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 188,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Coldplay - Don't Panic",
+  "url": "https://www.youtube.com/watch?v=yWeuUwpEQfs",
+  "expected_filename": "audio_cache\\youtube-yWeuUwpEQfs-Coldplay_-_Don_t_Panic.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 196,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Coldplay - Yellow",
+  "url": "https://www.youtube.com/watch?v=1MwjX4dG72s",
+  "expected_filename": "audio_cache\\youtube-1MwjX4dG72s-Coldplay_-_Yellow.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 271,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Fool's Garden-Lemon Tree lyrics",
+  "url": "https://www.youtube.com/watch?v=sJQYoGyEtDs",
+  "expected_filename": "audio_cache\\youtube-sJQYoGyEtDs-Fool_s_Garden-Lemon_Tree_lyrics.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 185,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Coldplay - In My Place",
+  "url": "https://www.youtube.com/watch?v=gnIZ7RMuLpU",
+  "expected_filename": "audio_cache\\youtube-gnIZ7RMuLpU-Coldplay_-_In_My_Place.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 229,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Keane - Nothing In My Way",
+  "url": "https://www.youtube.com/watch?v=y5l-GSDo72c",
+  "expected_filename": "audio_cache\\youtube-y5l-GSDo72c-Keane_-_Nothing_In_My_Way.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 242,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Vexento - Pixel Party",
+  "url": "https://www.youtube.com/watch?v=xSaLtRksFlM",
+  "expected_filename": "audio_cache\\youtube-xSaLtRksFlM-Vexento_-_Pixel_Party.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 169,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "The Black Eyed Peas - Where Is The Love?",
+  "url": "https://www.youtube.com/watch?v=WpYeekQkAdc",
+  "expected_filename": "audio_cache\\youtube-WpYeekQkAdc-The_Black_Eyed_Peas_-_Where_Is_The_Love.webm",
+  "version": 1,
+  "meta": ***REMOVED******REMOVED***,
+  "duration": 252,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Keane - Bedshaped",
+  "url": "https://www.youtube.com/watch?v=JugGmkvhsKQ",
+  "expected_filename": "audio_cache\\youtube-JugGmkvhsKQ-Keane_-_Bedshaped.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 282,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Keane - Perfect Symmetry",
+  "url": "https://www.youtube.com/watch?v=gRLv6zvyE48",
+  "expected_filename": "audio_cache\\youtube-gRLv6zvyE48-Keane_-_Perfect_Symmetry.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 244,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "John Newman - Love Me Again",
+  "url": "https://www.youtube.com/watch?v=CfihYWRWRTQ",
+  "expected_filename": "audio_cache\\youtube-CfihYWRWRTQ-John_Newman_-_Love_Me_Again.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 235,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Keane - Everybody's Changing",
+  "url": "https://www.youtube.com/watch?v=Zx4Hjq6KwO0",
+  "expected_filename": "audio_cache\\youtube-Zx4Hjq6KwO0-Keane_-_Everybody_s_Changing.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 218,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Avicii - Levels",
+  "url": "https://www.youtube.com/watch?v=_ovdm2yX4MA",
+  "expected_filename": "audio_cache\\youtube-_ovdm2yX4MA-Avicii_-_Levels.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 198,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Keane - This Is The Last Time",
+  "url": "https://www.youtube.com/watch?v=u86VdOc3asA",
+  "expected_filename": "audio_cache\\youtube-u86VdOc3asA-Keane_-_This_Is_The_Last_Time.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 214,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Travis - Closer (Official Video)",
+  "url": "https://www.youtube.com/watch?v=u2hYn_4yuhc",
+  "expected_filename": "audio_cache\\youtube-u2hYn_4yuhc-Travis_-_Closer_Official_Video.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 281,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Alan Walker - Sing Me To Sleep",
+  "url": "https://www.youtube.com/watch?v=2i2khp_npdE",
+  "expected_filename": "audio_cache\\youtube-2i2khp_npdE-Alan_Walker_-_Sing_Me_To_Sleep.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 192,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Snow Patrol - You Could Be Happy(Lyrics!)",
+  "url": "https://www.youtube.com/watch?v=OiBoeXI-R9k",
+  "expected_filename": "audio_cache\\youtube-OiBoeXI-R9k-Snow_Patrol_-_You_Could_Be_Happy_Lyrics.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 185,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Clocks / Relojes (Haitian Mix) - Rhythms del Mundo featuring Coldplay & Lele",
+  "url": "https://www.youtube.com/watch?v=8hI_rBJ72qg",
+  "expected_filename": "audio_cache\\youtube-8hI_rBJ72qg-Clocks_Relojes_Haitian_Mix_-_Rhythms_del_Mundo_featuring_Coldplay_Lele.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 236,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Ron Sexsmith (Feat. Chris Martin) - Gold In Them Hills",
+  "url": "https://www.youtube.com/watch?v=79eNyWgQywo",
+  "expected_filename": "audio_cache\\youtube-79eNyWgQywo-Ron_Sexsmith_Feat._Chris_Martin_-_Gold_In_Them_Hills.m4a",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 222,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Travis - Boxes",
+  "url": "https://www.youtube.com/watch?v=zewhl70Olfg",
+  "expected_filename": "audio_cache\\youtube-zewhl70Olfg-Travis_-_Boxes.m4a",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 261,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Abstract - Scars (ft. RoZe) (Prod. Drumma Battalion)",
+  "url": "https://www.youtube.com/watch?v=SufAKh_bHsU",
+  "expected_filename": "audio_cache\\youtube-SufAKh_bHsU-Abstract_-_Scars_ft._RoZe_Prod._Drumma_Battalion.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "grelor",
+      "id": "210488226777923585"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 276,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Travis - Love Will Come Through (Official Video)",
+  "url": "https://www.youtube.com/watch?v=gKvxLP7TMLI",
+  "expected_filename": "audio_cache\\youtube-gKvxLP7TMLI-Travis_-_Love_Will_Come_Through_Official_Video.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 220,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Alesso - Heroes (we could be) ft. Tove Lo",
+  "url": "https://www.youtube.com/watch?v=a7SouU3ECpU",
+  "expected_filename": "audio_cache\\youtube-a7SouU3ECpU-Alesso_-_Heroes_we_could_be_ft._Tove_Lo.webm",
+  "version": 1,
+  "meta": ***REMOVED******REMOVED***,
+  "duration": 294,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Keane - Bend & Break",
+  "url": "https://www.youtube.com/watch?v=50LOhILlLMQ",
+  "expected_filename": "audio_cache\\youtube-50LOhILlLMQ-Keane_-_Bend_Break.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 227,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Good People - Jack Johnson - With Lyrics",
+  "url": "https://www.youtube.com/watch?v=hxuCLopcEy4",
+  "expected_filename": "audio_cache\\youtube-hxuCLopcEy4-Good_People_-_Jack_Johnson_-_With_Lyrics.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "grelor",
+      "id": "210488226777923585"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 216,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Ariana Grande - Santa Tell Me",
+  "url": "https://www.youtube.com/watch?v=nlR0MkrRklg",
+  "expected_filename": "audio_cache\\youtube-nlR0MkrRklg-Ariana_Grande_-_Santa_Tell_Me.webm",
+  "version": 1,
+  "meta": ***REMOVED******REMOVED***,
+  "duration": 340,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Keane - Crystal Ball (Band Version)",
+  "url": "https://www.youtube.com/watch?v=lKrFfp67NDQ",
+  "expected_filename": "audio_cache\\youtube-lKrFfp67NDQ-Keane_-_Crystal_Ball_Band_Version.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 228,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Snow Patrol - Open Your Eyes",
+  "url": "https://www.youtube.com/watch?v=fk1Q9y6VVy0",
+  "expected_filename": "audio_cache\\youtube-fk1Q9y6VVy0-Snow_Patrol_-_Open_Your_Eyes.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 351,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Coldplay - Fix You",
+  "url": "https://www.youtube.com/watch?v=k4V3Mo61fJM",
+  "expected_filename": "audio_cache\\youtube-k4V3Mo61fJM-Coldplay_-_Fix_You.m4a",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 296,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "WALK THE MOON - Shut Up and Dance",
+  "url": "https://www.youtube.com/watch?v=6JCLY0Rlx6Q",
+  "expected_filename": "audio_cache\\youtube-6JCLY0Rlx6Q-WALK_THE_MOON_-_Shut_Up_and_Dance.webm",
+  "version": 1,
+  "meta": ***REMOVED******REMOVED***,
+  "duration": 246,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Standing still - Jewel (lyrics)",
+  "url": "https://www.youtube.com/watch?v=qak_RGVERbc",
+  "expected_filename": "audio_cache\\youtube-qak_RGVERbc-Standing_still_-_Jewel_lyrics.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 272,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Atlas - Coldplay Official Video with Lyrics - Hunger Games: Catching Fire ! Soundtrack",
+  "url": "https://www.youtube.com/watch?v=dME2YkXUD78",
+  "expected_filename": "audio_cache\\youtube-dME2YkXUD78-Atlas_-_Coldplay_Official_Video_with_Lyrics_-_Hunger_Games_-_Catching_Fire_Soundtrack.m4a",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 240,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Keane - Sovereign Light Caf\u00e9",
+  "url": "https://www.youtube.com/watch?v=bH13eUiDhmo",
+  "expected_filename": "audio_cache\\youtube-bH13eUiDhmo-Keane_-_Sovereign_Light_Cafe.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 219,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Keane - A Bad Dream",
+  "url": "https://www.youtube.com/watch?v=WbLoYVnh4sY",
+  "expected_filename": "audio_cache\\youtube-WbLoYVnh4sY-Keane_-_A_Bad_Dream.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 252,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "The Vamps - Wake Up",
+  "url": "https://www.youtube.com/watch?v=e12KryuLcbs",
+  "expected_filename": "audio_cache\\youtube-e12KryuLcbs-The_Vamps_-_Wake_Up.webm",
+  "version": 1,
+  "meta": ***REMOVED******REMOVED***,
+  "duration": 310,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Snow Patrol - Chasing Cars",
+  "url": "https://www.youtube.com/watch?v=GemKqzILV4w",
+  "expected_filename": "audio_cache\\youtube-GemKqzILV4w-Snow_Patrol_-_Chasing_Cars.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 221,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Just So You Know",
+  "url": "https://www.youtube.com/watch?v=GNgpTJFa1ws",
+  "expected_filename": "audio_cache\\youtube-GNgpTJFa1ws-Just_So_You_Know.webm",
+  "version": 1,
+  "meta": ***REMOVED******REMOVED***,
+  "duration": 259,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Coldplay - Ink (Ghost Stories)",
+  "url": "https://www.youtube.com/watch?v=LORhwk03P9k",
+  "expected_filename": "audio_cache\\youtube-LORhwk03P9k-Coldplay_-_Ink_Ghost_Stories.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 228,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Justin Timberlake - What Goes Around...Comes Around",
+  "url": "https://www.youtube.com/watch?v=TOrnUquxtwA",
+  "expected_filename": "audio_cache\\youtube-TOrnUquxtwA-Justin_Timberlake_-_What_Goes_Around...Comes_Around.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "siku2",
+      "id": "203302899277627392"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 561,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "Imagine Dragons - I Bet My Life",
+  "url": "https://www.youtube.com/watch?v=4ht80uzIhNs",
+  "expected_filename": "audio_cache\\youtube-4ht80uzIhNs-Imagine_Dragons_-_I_Bet_My_Life.webm",
+  "version": 1,
+  "meta": ***REMOVED******REMOVED***,
+  "duration": 214,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "The Black Eyed Peas - The Time (Dirty Bit)",
+  "url": "https://www.youtube.com/watch?v=JwQZQygg3Lk",
+  "expected_filename": "audio_cache\\youtube-JwQZQygg3Lk-The_Black_Eyed_Peas_-_The_Time_Dirty_Bit.webm",
+  "version": 1,
+  "meta": ***REMOVED******REMOVED***,
+  "duration": 313,
+  "type": "URLPlaylistEntry"
+***REMOVED***
+;
+***REMOVED***
+  "downloaded": false,
+  "filename": null,
+  "title": "X Ambassadors - Renegades (Audio)",
+  "url": "https://www.youtube.com/watch?v=6tu4wWSbnIs",
+  "expected_filename": "audio_cache\\youtube-6tu4wWSbnIs-X_Ambassadors_-_Renegades_Audio.webm",
+  "version": 1,
+  "meta": ***REMOVED***
+    "author": ***REMOVED***
+      "type": "Member",
+      "name": "grelor",
+      "id": "210488226777923585"
+    ***REMOVED***,
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "name": "musicbot",
+      "id": "226402503422509058"
+    ***REMOVED***
+  ***REMOVED***,
+  "duration": 195,
+  "type": "URLPlaylistEntry"
 ***REMOVED***
