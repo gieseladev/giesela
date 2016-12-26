@@ -76,6 +76,15 @@ def format_time(s, round_seconds=False, round_base=5, max_specifications=None):
     return " ".join(return_list)
 
 
+def escape_dis(s):
+    escape_char = "\\"
+    escape_list = ["_", "*"]
+    for c in escape_list:
+        s = re.sub(re.escape(c), escape_char + c, s)
+
+    return s
+
+
 def random_line(afile):
     with open(afile) as myfile:
         line = next(myfile)

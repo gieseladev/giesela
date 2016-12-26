@@ -1,6 +1,6 @@
 import colorsys
 import random
-from math import pow, sqrt, log2
+from math import log2, pow, sqrt
 
 from PIL import Image, ImageDraw, ImageSequence
 
@@ -125,7 +125,8 @@ class Game2048:
     def addRandomTile(self):
         availableTiles = self.getAvailableTiles()
         findTile = self.findTile(random.choice(availableTiles))
-        self.grid[findTile[0]][findTile[1]] = Tile(2)
+        self.grid[findTile[0]][findTile[1]] = Tile(
+            int(pow(2, random.randint(1, 2))))
 
     def getAvailableTiles(self):
         ret = []
@@ -254,21 +255,28 @@ def rotate(l, num):
     return l2
 
 
-def encode52(n):
-    n -= 1
-    r_str = ""
-    e_table = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
-    a, b = divmod(n, 52)
-    for i in range(a + 1):
-        r_str += str(e_table[b if i >= a else 51])
+e_table = list(
+    "cᴚfΌɹb9vO¢YQMT%8ɥЯ!P¥∀ɾ/ß⅁Ԁh^xן⋊ЖBsqnʞƒr®¡∩Am]u_oʎ£ทWLގᄅKdX6⊥¿×lC◖\EИɐ;zpwʇШikSㄣaƜ|ㄥ⅄5Z1၁ɟ<µʌЧjJɯıʍℲƃ2ᴧ4ǝUFyɔ@Ↄ3HſRᴎVt⇂€=0eNᄐ7g[")
+l = len(e_table)
 
-    return r_str
+
+def encode52(n):
+    if n < l:
+        return e_table[n]
+
+    a, b = divmod(n, l)
+    if a > 0:
+        return encode52(a) + e_table[b]
+
+    return e_table[b]
 
 
 def decode52(s):
-    e_table = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
     num = 0
+    p = len(s) - 1
     for c in s:
-        num += e_table.index(c) + 1
+        v = e_table.index(c)
+        num += int(v * pow(l, p))
+        p -= 1
 
     return num
