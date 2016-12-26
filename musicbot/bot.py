@@ -48,7 +48,7 @@ from .playlist import Playlist
 from .radio import Radio
 from .saved_playlists import Playlists
 from .utils import (format_time, load_file, paginate, random_line,
-                    sane_round_int, write_file)
+                    sane_round_int, write_file, escape_dis)
 
 load_opus_lib()
 
@@ -2962,7 +2962,7 @@ class MusicBot(discord.Client):
                         turn_information = "| *replay has been sent*"
 
                     if str(reaction.emoji) == "💾" and reaction.count > 1:
-                        await self.safe_send_message(user, "The save code is: `***REMOVED***0***REMOVED***`\n*Use *`***REMOVED***1***REMOVED***game 2048 ***REMOVED***0***REMOVED***`* to continue your current game*".format(game.get_save(), self.config.command_prefix))
+                        await self.safe_send_message(user, "The save code is: ****REMOVED***0***REMOVED****\nUse `***REMOVED***1***REMOVED***game 2048 ***REMOVED***0***REMOVED***` to continue your current game".format(escape_dis(game.get_save()), self.config.command_prefix))
                         turn_information = "| *save code has been sent*"
 
                     if str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") and reaction.count > 1:
