@@ -12,7 +12,7 @@ import time
 import traceback
 import urllib
 from collections import defaultdict
-from datetime import timedelta
+from datetime import timedelta, datetime
 from functools import wraps
 from io import BytesIO
 from random import choice, shuffle
@@ -46,9 +46,10 @@ from .permissions import Permissions, PermissionsDefaults
 from .player import MusicPlayer
 from .playlist import Playlist
 from .radio import Radio
+from .reminder import Action, Calendar
 from .saved_playlists import Playlists
-from .utils import (format_time, load_file, paginate, random_line,
-                    sane_round_int, write_file, escape_dis)
+from .utils import (escape_dis, format_time, load_file, paginate, random_line,
+                    sane_round_int, write_file)
 
 load_opus_lib()
 
@@ -107,6 +108,7 @@ class MusicBot(discord.Client):
         self.downloader = downloader.Downloader(download_folder='audio_cache')
         self.cb = Cleverbot()
         self.radio = Radio()
+        self.calendar = Calendar(self, asyncio.get_event_loop())
         self.shortener = Shortener(
             "Google", api_key="AIzaSyCU67YMHlfTU_PX2ngHeLd-_dUds-m502k")
 
@@ -468,7 +470,7 @@ class MusicBot(discord.Client):
                 if song_data is not None:
                     search_split_stuff = "***REMOVED***arg[1]***REMOVED*** ***REMOVED***arg[0]***REMOVED***".format(
                         arg=song_data).split()
-                    await self.cmd_forceplay(player, search_split_stuff[1:], search_split_stuff[0])
+                    await self.forceplay(player, search_split_stuff[1:], search_split_stuff[0])
             elif self.config.auto_playlist:
                 while self.autoplaylist:
                     song_url = choice(self.autoplaylist)
@@ -1226,7 +1228,8 @@ class MusicBot(discord.Client):
 
         return Response(":+1:", delete_after=6)
 
-    async def cmd_forceplay(self, player, leftover_args, song_url):
+    async def forceplay(self, player, leftover_args, song_url):
+        print("forcing me to play")
         song_url = song_url.strip('<>')
 
         if leftover_args:
@@ -1290,7 +1293,7 @@ class MusicBot(discord.Client):
                     print(
                         "[Warning] Determined incorrect entry type, but suggested url is the same.  Help.")
 
-                return await self.cmd_forceplay(player, leftover_args, e.use_url)
+                return await self.forceplay(player, leftover_args, e.use_url)
 
     async def get_play_entry(self, player, channel, author, leftover_args, song_url):
         song_url = song_url.strip('<>')
@@ -2639,7 +2642,9 @@ class MusicBot(discord.Client):
     #     await self.safe_send_message(channel, "Christmas is upon you! :christmas_tree:")
     #     await self.cmd_ask(channel, message, ["Christmas"])
     #     player.volume = .15
-    #     await self.cmd_play(player, channel, author, permissions, ["https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw"], "https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw")
+    # await self.cmd_play(player, channel, author, permissions,
+    # ["https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw"],
+    # "https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw")
 
     async def cmd_getvideolink(self, player, message, channel, author, leftover_args):
         """
@@ -3039,7 +3044,7 @@ class MusicBot(discord.Client):
             await self.safe_delete_message(response)
 
     @owner_only
-    async def cmd_getemojicode(self, channel, message, emoji=""):
+    async def cmd_getemojicode(self, channel, message, emoji):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***getemojicode emoji
@@ -3058,7 +3063,7 @@ class MusicBot(discord.Client):
         WIP
         """
         await self.safe_send_message(channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n     Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
-        #return
+        # return
         current_post = get_posts_from_page(number_of_pages=1)[0]
 
         cached_file = urllib.request.URLopener()
@@ -3408,11 +3413,14 @@ class MusicBot(discord.Client):
                 if arguments is not None:
                     msg = await self.safe_send_message(channel, "I'm working on it.")
                     query = arguments[1:]
-                    entries = await self.get_play_entry(player, channel, author, query, arguments[0])
-                    pl_changes["new_entries"].extend(entries)
-                    playlist["entries"].extend(entries)
-                    playlist["entry_count"] = str(
-                        int(playlist["entry_count"]) + len(entries))
+                    try:
+                        entries = await self.get_play_entry(player, channel, author, query, arguments[0])
+                        pl_changes["new_entries"].extend(entries)
+                        playlist["entries"].extend(entries)
+                        playlist["entry_count"] = str(
+                            int(playlist["entry_count"]) + len(entries))
+                    except:
+                        await self.send_message(channel, "Something went terribly wrong there.", expire_in=20)
                     await self.safe_delete_message(msg)
 
             elif split_message[0].lower() == "remove":
@@ -3509,7 +3517,7 @@ class MusicBot(discord.Client):
                 "Closed the playlist builder and saved the playlist")
             return Response("Successfully saved ****REMOVED******REMOVED****".format(user_savename.title()))
 
-    async def cmd_addplayingtoplaylist(self, channel, author, player, playlistname=None):
+    async def cmd_addplayingtoplaylist(self, channel, author, player, playlistname):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***addplayingtoplaylist playlistname
@@ -3536,7 +3544,7 @@ class MusicBot(discord.Client):
             playlistname, player.playlist, new_entries=[player.current_entry])
         return Response("Added the current song to the playlist.")
 
-    async def cmd_removeplayingfromplaylist(self, channel, author, player, playlistname=None):
+    async def cmd_removeplayingfromplaylist(self, channel, author, player, playlistname):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***removeplayingfromplaylist playlistname
@@ -3637,6 +3645,10 @@ class MusicBot(discord.Client):
         await self.safe_send_message(author, "The file is being uploaded. Please wait a second.", expire_in=15)
         await self.send_file(author, entry.filename, content="Here you go:")
 
+    async def cmd_reminder(self, channel, author, player):
+        action = Action(channel=author, msg_content="Time's up, buckaroo!")#Action(channel=player.voice_client.channel, entry=await player.playlist.get_entry("https://www.youtube.com/watch?v=Z1iOusznthU")
+        self.calendar.create_reminder("test", datetime.now() + timedelta(seconds=5), action, repeat_every=timedelta(seconds=10))
+
     async def cmd_disconnect(self, server):
         """
         Usage:
@@ -3663,7 +3675,8 @@ class MusicBot(discord.Client):
         message_content = message.content.strip()
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
-            #     await self.cmd_c(message.author, message.channel, message_content.split())
+            # await self.cmd_c(message.author, message.channel,
+            # message_content.split())
             return
 
         if message.author == self.user:
