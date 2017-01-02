@@ -553,6 +553,16 @@ class Playlist(EventEmitter):
         if self.peek() is entry:
             entry.get_ready_future()
 
+    def _add_entry_now(self, entry, player):
+        self.entries.insert(0, entry)
+        self.emit('entry-added', playlist=self, entry=entry)
+
+        if player.current_entry:
+            player.skip()
+
+        if self.peek() is entry:
+            entry.get_ready_future()
+
     def promote_position(self, position):
         rotDist = -1 * (position - 1)
         self.entries.rotate(rotDist)
