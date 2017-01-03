@@ -6,11 +6,17 @@ from threading import Thread
 
 class Action:
 
-    def __init__(self, channel=None, msg_content=None, source_url=None, source_location=None, entry=None):
+    def __init__(self, channel=None, msg_content=None, source_url=None, source_location=None, entry=None, callback=None, playlist_name=None):
         self.send_message = False
         self.play_online_media = False
         self.play_local_media = False
         self.play_entry = False
+        self.call_back = False
+        self.play_playlist = False
+
+        if callback is not None:
+            self.call_back = True
+            self.callback = callback
 
         if channel is not None:
             self.channel = channel
@@ -22,6 +28,9 @@ class Action:
                 self.play_entry = True
                 self.entry = entry
                 entry.get_ready_future()
+            elif playlist_name is not None:
+                self.play_playlist = True
+                self.playlist_name = playlist_name
             elif source_url is not None:
                 self.play_online_media = True
                 self.source_url = source_url
@@ -33,9 +42,16 @@ class Action:
         if self.send_message:
             await musicbot.safe_send_message(self.channel, self.msg_content)
 
+        if self.call_back:
+            await callback()
+
         if self.play_entry:
             pl = await musicbot.get_player(self.channel, create=True)
             await pl.playlist._add_entry_now(self.entry, pl)
+
+        if self.play_playlist:
+            pl = await musicbot.get_player(self.channel, create=True)
+            await musicbot.cmd_playlist(self.channel, None, None, pl, ["load", self.playlist_name])
 
         if self.play_online_media:
             pl = await musicbot.get_player(self.channel, create=True)
