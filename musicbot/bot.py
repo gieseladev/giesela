@@ -3200,9 +3200,9 @@ class MusicBot(discord.Client):
         Save the current playlist so you can load it again later. Every savename has to be unique. Just typing the savename after the commands gives you some information of the playlist.
         """
 
-        argument = leftover_args[0] if len(leftover_args) > 0 else None
+        argument = leftover_args[0].lower() if len(leftover_args) > 0 else ""
         savename = leftover_args[1].lower() if len(leftover_args) > 1 else ""
-        load_mode = leftover_args[2] if len(leftover_args) > 2 else "add"
+        load_mode = leftover_args[2].lower() if len(leftover_args) > 2 else "add"
         additional_args = leftover_args[2:] if len(leftover_args) > 2 else []
 
         forbidden_savenames = ["showall", "savename", "save", "load", "delete",
@@ -3351,7 +3351,7 @@ class MusicBot(discord.Client):
             response = await self.playlist_builder(channel, author, server, player, savename)
             return response
 
-        elif argument.lower() in self.playlists.saved_playlists:
+        elif argument in self.playlists.saved_playlists:
             infos = self.playlists.get_playlist(
                 argument.lower(), player.playlist)
 
