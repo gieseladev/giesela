@@ -128,6 +128,7 @@ class SocketServer:
         else:
             print("[SOCKETSERVER] Couldn't remove this connection from list")
 
+        self.server_ids.pop(c_socket, None)
         c_socket.shutdown(SHUT_RDWR)
         c_socket.close()
 
@@ -141,6 +142,13 @@ class SocketServer:
                 playing = "STOPPED"
                 duration = "0"
                 progress = "0"
+            elif type(player.current_entry).__name__ == "StreamPlaylistEntry":
+                artist = "STREAM"
+                song_title = player.current_entry.title.upper()
+                cover_url = "http://i.imgur.com/nszu54A.jpg"
+                playing = "PLAYING" if player.is_playing else "PAUSED"
+                duration = "0"
+                progress = str(player.progress)
             else:
                 spotify_track = SpotifyTrack.from_query(
                     player.current_entry.title)
@@ -150,7 +158,7 @@ class SocketServer:
                     cover_url = spotify_track.cover_url
                 else:
                     artist = " "
-                    song_title = player.current_entry.title
+                    song_title = player.current_entry.title.upper()
                     cover_url = "http://i.imgur.com/nszu54A.jpg"
 
                 playing = "PLAYING" if player.is_playing else "PAUSED"
