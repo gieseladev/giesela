@@ -46,7 +46,7 @@ class SocketServer:
                                        cover_url=cover_url, progress=progress, duration=duration, volume=volume)
             #print("I sent\n\n{}\n\n========".format(response))
             print("[SOCKETSERVER] Broadcasted information")
-            sock.sendall(response.encode("utf-8"))
+            sock.sendall("{}=={}".format(len(response), response).encode("utf-8"))
 
     def connection_accepter(self):
         while not self.stop_threads:
@@ -96,7 +96,7 @@ class SocketServer:
                 response = response.format(artist=artist, song_title=song_title, play_status=playing,
                                            cover_url=cover_url, progress=progress, duration=duration, volume=volume)
                 print("[SOCKETSERVER] Socket sent data")
-                c_socket.send(response.encode("utf-8"))
+                c_socket.send("{}=={}".format(len(response), response).encode("utf-8"))
             elif request == "COMMAND":
                 if server_id in self.musicbot.players:
                     player = self.musicbot.players[server_id]
