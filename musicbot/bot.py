@@ -1210,12 +1210,11 @@ class MusicBot(discord.Client):
     async def cmd_stream(self, player, channel, author, permissions, song_url):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***stream song_link
+            ***REMOVED***command_prefix***REMOVED***stream media_link
 
         Enqueue a media stream.
-        This could mean an actual stream like Twitch or shoutcast, or simply streaming
-        media without predownloading it.  Note: FFmpeg is notoriously bad at handling
-        streams, especially on poor connections.  You have been warned.
+        This could mean an actual stream like Twitch, Youtube Gaming or even a radio stream, or simply streaming
+        media without predownloading it.
         """
 
         song_url = song_url.strip('<>')
@@ -3192,7 +3191,7 @@ class MusicBot(discord.Client):
             ***REMOVED***command_prefix***REMOVED***playlist showall [alphabetical, author, entries, playtime, random]
             ***REMOVED***command_prefix***REMOVED***playlist savename
             ***REMOVED***command_prefix***REMOVED***playlist save savename
-            ***REMOVED***command_prefix***REMOVED***playlist load savename [add, replace] [startindex, endindex (inclusive)]
+            ***REMOVED***command_prefix***REMOVED***playlist load savename [add, replace] [alphabetical, length, random] [startindex, endindex (inclusive)]
             ***REMOVED***command_prefix***REMOVED***playlist delete savename
             ***REMOVED***command_prefix***REMOVED***playlist clone fromname savename [startindex, endindex (inclusive)]
 
@@ -3234,20 +3233,34 @@ class MusicBot(discord.Client):
             if load_mode == "replace":
                 player.playlist.clear()
 
-            from_index = int(additional_args[1]) - \
-                1 if len(additional_args) > 1 else 0
+            from_index = int(additional_args[2]) - \
+                1 if len(additional_args) > 2 else 0
             if from_index >= len(clone_entries) or from_index < 0:
                 return Response("Can't load the playlist starting from entry ***REMOVED******REMOVED***. This entry is out of bounds.".format(from_index), delete_after=20)
 
-            to_index = int(additional_args[2]) if len(
-                additional_args) > 2 else len(clone_entries)
+            to_index = int(additional_args[3]) if len(
+                additional_args) > 3 else len(clone_entries)
             if to_index > len(clone_entries) or to_index < 0:
                 return Response("Can't load the playlist from the ***REMOVED******REMOVED***. to the ***REMOVED******REMOVED***. entry. These values are out of bounds.".format(from_index, to_index), delete_after=20)
 
             if to_index - from_index <= 0:
                 return Response("No songs to play. RIP.", delete_after=20)
 
-            await player.playlist.add_entries(clone_entries[from_index:to_index])
+            clone_entries = clone_entries[from_index:to_index]
+
+            sort_modes = ***REMOVED***"alphabetical": (lambda entry: entry.title, False), "random": None, "length": (
+                lambda entry: entry.duration, True)***REMOVED***
+
+            sort_mode = additional_args[1].lower() if len(
+                additional_args) > 1 and additional_args[1].lower() in sort_modes.keys() else "none"
+
+            if sort_mode == "random":
+                shuffle(clone_entries)
+            elif sort_mode != "none":
+                clone_entries = sorted(clone_entries, key=sort_modes[sort_mode][
+                                       0], reverse=sort_modes[sort_mode][1])
+
+            await player.playlist.add_entries(clone_entries)
 
             return Response("Done. Enjoy your music!", delete_after=10)
 
