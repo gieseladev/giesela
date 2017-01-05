@@ -48,6 +48,7 @@ from .playlist import Playlist
 from .radio import Radio
 from .reminder import Action, Calendar
 from .saved_playlists import Playlists
+from .socket_server import SocketServer
 from .utils import (escape_dis, format_time, load_file, paginate, random_line,
                     sane_round_int, write_file)
 
@@ -109,6 +110,7 @@ class MusicBot(discord.Client):
         self.cb = Cleverbot()
         self.radio = Radio()
         self.calendar = Calendar(self, asyncio.get_event_loop())
+        self.socket_server = SocketServer(self, asyncio.get_event_loop())
         self.shortener = Shortener(
             "Google", api_key="AIzaSyCU67YMHlfTU_PX2ngHeLd-_dUds-m502k")
 
@@ -3658,12 +3660,28 @@ class MusicBot(discord.Client):
         await self.send_file(author, entry.filename, content="Here you go:")
 
     async def cmd_reminder(self, channel, author, player, server):
+        """
+        Usage:
+            {command_prefix}reminder
+
+        WIP
+        """
         # Action(channel=player.voice_client.channel, entry=await player.playlist.get_entry("https://www.youtube.com/watch?v=Z1iOusznthU"))
         # Action(channel=server.get_member("203510202421477376"),
         # msg_content="Is this le works?!")
         action = Action(channel=channel, msg_content="**An hour has passed!**")
         self.calendar.create_reminder("test", datetime.now(
         ) + timedelta(seconds=0), action, repeat_every=timedelta(hours=1))
+
+    async def cmd_mobile(self, channel):
+        """
+        Usage:
+            {command_prefix}mobile
+
+        WIP
+        """
+        count = len(self.socket_server.connections)
+        return Response("There {} currently {} mobile user{}".format("is" if count == 1 else "are", count, "s" if count != 1 else ""))
 
     async def cmd_disconnect(self, server):
         """
@@ -3688,7 +3706,7 @@ class MusicBot(discord.Client):
     async def on_message(self, message):
         await self.wait_until_ready()
 
-        message_content=message.content.strip()
+        message_content = message.content.strip()
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
             # await self.cmd_c(message.author, message.channel,
@@ -3706,10 +3724,10 @@ class MusicBot(discord.Client):
 
         # Uh, doesn't this break prefixes with spaces in them (it doesn't,
         # config parser already breaks them)
-        command, *args=message_content.split()
-        command=command[len(self.config.command_prefix):].lower().strip()
+        command, *args = message_content.split()
+        command = command[len(self.config.command_prefix):].lower().strip()
 
-        handler=getattr(self, 'cmd_%s' % command, None)
+        handler = getattr(self, 'cmd_%s' % command, None)
         if not handler:
             return
 
@@ -3727,53 +3745,53 @@ class MusicBot(discord.Client):
             self.safe_print(
                 "[Command] {0.id}/{0.name} ({1})".format(message.author, message_content))
 
-        user_permissions=self.permissions.for_user(message.author)
+        user_permissions = self.permissions.for_user(message.author)
 
-        argspec=inspect.signature(handler)
-        params=argspec.parameters.copy()
+        argspec = inspect.signature(handler)
+        params = argspec.parameters.copy()
 
         # noinspection PyBroadException
         try:
             if user_permissions.ignore_non_voice and command in user_permissions.ignore_non_voice:
                 await self._check_ignore_non_voice(message)
 
-            handler_kwargs={}
+            handler_kwargs = {}
             if params.pop('message', None):
-                handler_kwargs['message']=message
+                handler_kwargs['message'] = message
 
             if params.pop('channel', None):
-                handler_kwargs['channel']=message.channel
+                handler_kwargs['channel'] = message.channel
 
             if params.pop('author', None):
-                handler_kwargs['author']=message.author
+                handler_kwargs['author'] = message.author
 
             if params.pop('server', None):
-                handler_kwargs['server']=message.server
+                handler_kwargs['server'] = message.server
 
             if params.pop('player', None):
-                handler_kwargs['player']=await self.get_player(message.channel)
+                handler_kwargs['player'] = await self.get_player(message.channel)
 
             if params.pop('permissions', None):
-                handler_kwargs['permissions']=user_permissions
+                handler_kwargs['permissions'] = user_permissions
 
             if params.pop('user_mentions', None):
-                handler_kwargs['user_mentions']=list(
+                handler_kwargs['user_mentions'] = list(
                     map(message.server.get_member, message.raw_mentions))
 
             if params.pop('channel_mentions', None):
-                handler_kwargs['channel_mentions']=list(
+                handler_kwargs['channel_mentions'] = list(
                     map(message.server.get_channel, message.raw_channel_mentions))
 
             if params.pop('voice_channel', None):
                 handler_kwargs[
-                    'voice_channel']=message.server.me.voice_channel
+                    'voice_channel'] = message.server.me.voice_channel
 
             if params.pop('leftover_args', None):
-                handler_kwargs['leftover_args']=args
+                handler_kwargs['leftover_args'] = args
 
-            args_expected=[]
+            args_expected = []
             for key, param in list(params.items()):
-                doc_key='[%s=%s]' % (
+                doc_key = '[%s=%s]' % (
                     key, param.default) if param.default is not inspect.Parameter.empty else key
                 args_expected.append(doc_key)
 
@@ -3782,8 +3800,8 @@ class MusicBot(discord.Client):
                     continue
 
                 if args:
-                    arg_value=args.pop(0)
-                    handler_kwargs[key]=arg_value
+                    arg_value = args.pop(0)
+                    handler_kwargs[key] = arg_value
                     params.pop(key)
 
             if message.author.id != self.config.owner_id:
@@ -3798,15 +3816,15 @@ class MusicBot(discord.Client):
                         expire_in=20)
 
             if params:
-                docs=getattr(handler, '__doc__', None)
+                docs = getattr(handler, '__doc__', None)
                 if not docs:
-                    docs='Usage: {}{} {}'.format(
+                    docs = 'Usage: {}{} {}'.format(
                         self.config.command_prefix,
                         command,
                         ' '.join(args_expected)
                     )
 
-                docs='\n'.join(l.strip() for l in docs.split('\n'))
+                docs = '\n'.join(l.strip() for l in docs.split('\n'))
                 await self.safe_send_message(
                     message.channel,
                     '```\n%s\n```' % docs.format(
@@ -3815,13 +3833,13 @@ class MusicBot(discord.Client):
                 )
                 return
 
-            response=await handler(**handler_kwargs)
+            response = await handler(**handler_kwargs)
             if response and isinstance(response, Response):
-                content=response.content
+                content = response.content
                 if response.reply:
-                    content='%s, %s' % (message.author.mention, content)
+                    content = '%s, %s' % (message.author.mention, content)
 
-                sentmsg=await self.safe_send_message(
+                sentmsg = await self.safe_send_message(
                     message.channel, content,
                     expire_in=response.delete_after if self.config.delete_messages else 0,
                     also_delete=message if self.config.delete_invoking else None
@@ -3830,8 +3848,8 @@ class MusicBot(discord.Client):
         except (exceptions.CommandError, exceptions.HelpfulError, exceptions.ExtractionError) as e:
             print("{0.__class__}: {0.message}".format(e))
 
-            expirein=e.expire_in if self.config.delete_messages else None
-            alsodelete=message if self.config.delete_invoking else None
+            expirein = e.expire_in if self.config.delete_messages else None
+            alsodelete = message if self.config.delete_invoking else None
 
             await self.safe_send_message(
                 message.channel,
@@ -3867,25 +3885,25 @@ class MusicBot(discord.Client):
             return
 
         # This should always work, right?
-        my_voice_channel=after.server.me.voice_channel
+        my_voice_channel = after.server.me.voice_channel
 
         if not my_voice_channel:
             return
 
         if before.voice_channel == my_voice_channel:
-            joining=False
+            joining = False
         elif after.voice_channel == my_voice_channel:
-            joining=True
+            joining = True
         else:
             return  # Not my channel
 
-        moving=before == before.server.me
+        moving = before == before.server.me
 
-        auto_paused=self.server_specific_data[after.server]['auto_paused']
-        player=await self.get_player(my_voice_channel)
+        auto_paused = self.server_specific_data[after.server]['auto_paused']
+        player = await self.get_player(my_voice_channel)
 
         if after == after.server.me and after.voice_channel:
-            player.voice_client.channel=after.voice_channel
+            player.voice_client.channel = after.voice_channel
 
         if not self.config.auto_pause:
             return
@@ -3893,12 +3911,12 @@ class MusicBot(discord.Client):
         if sum(1 for m in my_voice_channel.voice_members if m != after.server.me):
             if auto_paused and player.is_paused:
                 print("[config:autopause] Unpausing")
-                self.server_specific_data[after.server]['auto_paused']=False
+                self.server_specific_data[after.server]['auto_paused'] = False
                 player.resume()
         else:
             if not auto_paused and player.is_playing:
                 print("[config:autopause] Pausing")
-                self.server_specific_data[after.server]['auto_paused']=True
+                self.server_specific_data[after.server]['auto_paused'] = True
                 player.pause()
 
     async def on_server_update(self, before: discord.Server, after: discord.Server):
@@ -3909,5 +3927,5 @@ class MusicBot(discord.Client):
             await self.reconnect_voice_client(after)
 
 if __name__ == '__main__':
-    bot=MusicBot()
+    bot = MusicBot()
     bot.run()
