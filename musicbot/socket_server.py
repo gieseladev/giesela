@@ -148,7 +148,7 @@ class SocketServer:
                 cover_url = "http://i.imgur.com/nszu54A.jpg"
                 playing = "PLAYING" if player.is_playing else "PAUSED"
                 duration = "0"
-                progress = str(player.progress)
+                progress = str(round(player.progress, 2))
             else:
                 spotify_track = SpotifyTrack.from_query(
                     player.current_entry.title)
@@ -158,13 +158,13 @@ class SocketServer:
                     cover_url = spotify_track.cover_url
                 else:
                     artist = " "
-                    song_title = player.current_entry.title.upper()
+                    song_title = spotify_track.song_name
                     cover_url = "http://i.imgur.com/nszu54A.jpg"
 
                 playing = "PLAYING" if player.is_playing else "PAUSED"
                 duration = str(player.current_entry.duration)
-                progress = str(player.progress)
+                progress = str(round(player.progress, 2))
 
-            volume = player.volume
+            volume = str(round(player.volume, 2))
 
         return artist, song_title, cover_url, playing, duration, progress, volume
