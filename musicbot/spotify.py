@@ -1,6 +1,7 @@
 from difflib import SequenceMatcher
 
 import spotipy
+import re
 
 
 class SpotifyTrack:
@@ -13,12 +14,13 @@ class SpotifyTrack:
 
     @classmethod
     def from_query(cls, query, strip_query=True):
-        for chr in ["(", "[", "{", "/", ";", ":", "."]:
+        for chr in ["(", "["]:
             found_index = query.find(chr)
             query = query[:found_index if found_index > 3 else len(query)]
 
         query = query.replace("-", "")
         query = query.strip()
+        query = " ".join(query.split())
 
         spotify = spotipy.Spotify()
         search_result = spotify.search(query, limit=1, type="track")
