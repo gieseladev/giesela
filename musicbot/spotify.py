@@ -14,7 +14,7 @@ class SpotifyTrack:
 
     @classmethod
     def from_query(cls, query, strip_query=True):
-        for chr in ["(", "["]:
+        for chr in ["()", "[]"]:
             query = re.sub("\{0[0]}.+\{0[1]}".format(chr), "", query)
 
         query = re.sub("'", "", query)
@@ -26,6 +26,8 @@ class SpotifyTrack:
         query = query[:index if index > 3 else len(query)]
         index = query.lower().find("feat")
         query = query[:index if index > 3 else len(query)]
+        index = query.lower().find("&")
+        query = query[index + 1 if index > 0 else 0:]
 
         query = query.replace("-", "", 1)
         index = query.find("-")
