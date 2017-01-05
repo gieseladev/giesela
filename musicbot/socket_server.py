@@ -46,7 +46,8 @@ class SocketServer:
                                        cover_url=cover_url, progress=progress, duration=duration, volume=volume)
             #print("I sent\n\n***REMOVED******REMOVED***\n\n========".format(response))
             #print("[SOCKETSERVER] Broadcasted information")
-            sock.sendall("***REMOVED******REMOVED***==***REMOVED******REMOVED***".format(len(response), response).encode("utf-8"))
+            sock.sendall("***REMOVED******REMOVED***==***REMOVED******REMOVED***".format(
+                len(response), response).encode("utf-8"))
 
     def connection_accepter(self):
         while not self.stop_threads:
@@ -96,7 +97,8 @@ class SocketServer:
                 response = response.format(artist=artist, song_title=song_title, play_status=playing,
                                            cover_url=cover_url, progress=progress, duration=duration, volume=volume)
                 #print("[SOCKETSERVER] Socket sent data")
-                c_socket.send("***REMOVED******REMOVED***==***REMOVED******REMOVED***".format(len(response), response).encode("utf-8"))
+                c_socket.send("***REMOVED******REMOVED***==***REMOVED******REMOVED***".format(
+                    len(response), response).encode("utf-8"))
             elif request == "COMMAND":
                 if server_id in self.musicbot.players:
                     player = self.musicbot.players[server_id]
@@ -117,9 +119,8 @@ class SocketServer:
                     elif leftover[0] == "VOLUMECHANGE":
                         before_vol = player.volume
                         player.volume = float(leftover[1])
-                        print("[SOCKETSERVER] Changed volume from ***REMOVED******REMOVED*** to ***REMOVED******REMOVED***".format(before_vol, player.volume))
-
-                    self.threaded_broadcast_information()
+                        print("[SOCKETSERVER] Changed volume from ***REMOVED******REMOVED*** to ***REMOVED******REMOVED***".format(
+                            before_vol, player.volume))
 
         to_delete = None
         for i in range(len(self.connections)):
