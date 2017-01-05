@@ -24,6 +24,9 @@ class SpotifyTrack:
         index = query.lower().find("download")
         query = query[:index if index > 3 else len(query)]
 
+        index = query.lower().find("and")
+        query = query[:index if index > 3 else len(query)]
+
         index = query.lower().find(" ft")
         query = query[:index if index > 3 else len(query)]
         index = query.lower().find("feat")
