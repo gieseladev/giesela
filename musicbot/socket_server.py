@@ -164,7 +164,7 @@ class SocketServer:
                     cover_url = spotify_track.cover_url
                 else:
                     artist = " "
-                    song_title = spotify_track.song_name
+                    song_title = spotify_track.query
                     cover_url = "http://i.imgur.com/nszu54A.jpg"
 
                 playing = "PLAYING" if player.is_playing else "PAUSED"
