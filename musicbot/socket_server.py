@@ -46,7 +46,7 @@ class SocketServer:
                                        cover_url=cover_url, progress=progress, duration=duration, volume=volume)
             #print("I sent\n\n{}\n\n========".format(response))
             print("[SOCKETSERVER] Broadcasted information")
-            sock.send(response.encode("utf-8"))
+            sock.sendall(response.encode("utf-8"))
 
     def connection_accepter(self):
         while not self.stop_threads:
