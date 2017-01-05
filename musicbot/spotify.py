@@ -14,22 +14,34 @@ class SpotifyTrack:
 
     @classmethod
     def from_query(cls, query, strip_query=True):
-        for chr in ["()", "[]"]:
+        for chr in ["()", "[]", "<>"]:
             query = re.sub("\***REMOVED***0[0]***REMOVED***.+\***REMOVED***0[1]***REMOVED***".format(chr), "", query)
 
         query = re.sub("'", "", query)
+
         index = query.find("|")
         query = query[:index if index > 3 else len(query)]
+
         index = query.lower().find("download")
         query = query[:index if index > 3 else len(query)]
+
         index = query.lower().find("ft")
         query = query[:index if index > 3 else len(query)]
         index = query.lower().find("feat")
         query = query[:index if index > 3 else len(query)]
-        index = query.lower().find("&")
-        query = query[index + 1 if index > 0 else 0:]
 
-        query = query.replace("-", "", 1)
+        index = query.lower().find("lyric")
+        query = query[:index if index > 3 else len(query)]
+
+        index = query.lower().find("&") if query.lower().find(
+            "&") != -1 else query.lower().find("x")
+        dash = query.find("-")
+        if dash == -1:
+            query = query[index + 1 if index > 0 else 0:]
+        else:
+            query = query[:index if index > 0 else len(query)] + query[dash:]
+
+        query = query.replace("-", " ", 1)
         index = query.find("-")
         query = query[:index if index > 3 else len(query)]
         query = query.strip()
@@ -53,7 +65,10 @@ class SpotifyTrack:
         artists = track["artists"][:2]
         artist_text = " & ".join([x["name"] for x in artists])
 
-        return cls(artist_text.upper(), song_name.upper(), cover, similar(query, "***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".format(artists[0]["name"], song_name)))
+        song_name_edited = re.sub(
+            "\***REMOVED***0[0]***REMOVED***.+\***REMOVED***0[1]***REMOVED***".format("()"), "", song_name)
+
+        return cls(artist_text.upper(), song_name.upper(), cover, max(similar(query, "***REMOVED***0***REMOVED*** ***REMOVED***1***REMOVED***".format(artists[0]["name"], song_name_edited)), similar(query, "***REMOVED***1***REMOVED*** ***REMOVED***0***REMOVED***".format(artists[0]["name"], song_name_edited))))
 
 
 def similar(a, b):

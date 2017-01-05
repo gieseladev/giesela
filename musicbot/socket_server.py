@@ -158,7 +158,7 @@ class SocketServer:
             else:
                 spotify_track = SpotifyTrack.from_query(
                     player.current_entry.title)
-                if spotify_track.certainty > .6:
+                if spotify_track.certainty > .4:
                     artist = spotify_track.artist
                     song_title = spotify_track.song_name
                     cover_url = spotify_track.cover_url
