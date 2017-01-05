@@ -17,6 +17,9 @@ class SpotifyTrack:
         search_result = spotify.search(query, limit=1, type="track")
         if len(search_result) < 1:
             return cls("", query.upper(), "", 0)
+        if len(search_result["tracks"]["items"]) < 1:
+            return cls("", query.upper(), "", 0)
+            
         track = search_result["tracks"]["items"][0]
         album = track["album"]
         cover = album["images"][0]["url"]
