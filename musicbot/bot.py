@@ -12,7 +12,7 @@ import time
 import traceback
 import urllib
 from collections import defaultdict
-from datetime import timedelta
+from datetime import datetime, timedelta
 from functools import wraps
 from io import BytesIO
 from random import choice, shuffle
@@ -46,8 +46,10 @@ from .permissions import Permissions, PermissionsDefaults
 from .player import MusicPlayer
 from .playlist import Playlist
 from .radio import Radio
+from .reminder import Action, Calendar
 from .saved_playlists import Playlists
-from .utils import (format_time, load_file, paginate, random_line,
+from .socket_server import SocketServer
+from .utils import (escape_dis, format_time, load_file, paginate, random_line,
                     sane_round_int, write_file)
 
 load_opus_lib()
@@ -107,6 +109,8 @@ class MusicBot(discord.Client):
         self.downloader = downloader.Downloader(download_folder='audio_cache')
         self.cb = Cleverbot()
         self.radio = Radio()
+        self.calendar = Calendar(self, asyncio.get_event_loop())
+        self.socket_server = SocketServer(self, asyncio.get_event_loop())
         self.shortener = Shortener(
             "Google", api_key="AIzaSyCU67YMHlfTU_PX2ngHeLd-_dUds-m502k")
 
@@ -468,7 +472,7 @@ class MusicBot(discord.Client):
                 if song_data is not None:
                     search_split_stuff = "{arg[1]} {arg[0]}".format(
                         arg=song_data).split()
-                    await self.cmd_forceplay(player, search_split_stuff[1:], search_split_stuff[0])
+                    await self.forceplay(player, search_split_stuff[1:], search_split_stuff[0])
             elif self.config.auto_playlist:
                 while self.autoplaylist:
                     song_url = choice(self.autoplaylist)
@@ -1226,7 +1230,8 @@ class MusicBot(discord.Client):
 
         return Response(":+1:", delete_after=6)
 
-    async def cmd_forceplay(self, player, leftover_args, song_url):
+    async def forceplay(self, player, leftover_args, song_url):
+        print("forcing me to play")
         song_url = song_url.strip('<>')
 
         if leftover_args:
@@ -1290,7 +1295,7 @@ class MusicBot(discord.Client):
                     print(
                         "[Warning] Determined incorrect entry type, but suggested url is the same.  Help.")
 
-                return await self.cmd_forceplay(player, leftover_args, e.use_url)
+                return await self.forceplay(player, leftover_args, e.use_url)
 
     async def get_play_entry(self, player, channel, author, leftover_args, song_url):
         song_url = song_url.strip('<>')
@@ -2529,6 +2534,9 @@ class MusicBot(discord.Client):
         if len(items) <= 0:
             return Response("Is your name \"{0}\" by any chance?\n(This is not how this command works. Use `{1}help random` to find out how not to be a stupid *{0}* anymore)".format(author.name, self.config.command_prefix), delete_after=30)
 
+        if len(items) <= 1:
+            return Response("Only you could use `{1}random` for one item... Well done, {0}!".format(author.name, self.config.command_prefix), delete_after=30)
+
         await self.safe_send_message(channel, "I choose **" + choice(items) + "**")
 
     async def cmd_requestfeature(self, channel, author, leftover_args):
@@ -2639,7 +2647,9 @@ class MusicBot(discord.Client):
     #     await self.safe_send_message(channel, "Christmas is upon you! :christmas_tree:")
     #     await self.cmd_ask(channel, message, ["Christmas"])
     #     player.volume = .15
-    #     await self.cmd_play(player, channel, author, permissions, ["https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw"], "https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw")
+    # await self.cmd_play(player, channel, author, permissions,
+    # ["https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw"],
+    # "https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw")
 
     async def cmd_getvideolink(self, player, message, channel, author, leftover_args):
         """
@@ -2925,20 +2935,21 @@ class MusicBot(discord.Client):
 
         def check(reaction, user):
             if reaction.custom_emoji:
-                #self.safe_print (str (reaction.emoji) + " is a custom emoji")
-                #print("Ignoring my own reaction")
+                # self.safe_print (str (reaction.emoji) + " is a custom emoji")
+                # print("Ignoring my own reaction")
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or str(reaction.emoji).startswith("📽") or str(reaction.emoji).startswith("💾")) and reaction.count > 1 and user == author:
                 return True
 
-            # self.safe_print (str (reaction.emoji) + " was the wrong type of emoji")
+            # self.safe_print (str (reaction.emoji) + " was the wrong type of
+            # emoji")
             return False
 
         while game_running:
             direction = None
             turn_information = ""
-            #self.safe_print (str (game))
+            # self.safe_print (str (game))
 
             await self.send_typing(channel)
 
@@ -2954,7 +2965,9 @@ class MusicBot(discord.Client):
 
                 reaction, user = await self.wait_for_reaction(check=check, message=msg)
                 msg = reaction.message  # for some reason this has to be like this
-                #self.safe_print ("User accepted. There are " + str (len (msg.reactions)) + " reactions. [" + ", ".join ([str (r.count) for r in msg.reactions]) + "]")
+                # self.safe_print ("User accepted. There are " + str (len
+                # (msg.reactions)) + " reactions. [" + ", ".join ([str
+                # (r.count) for r in msg.reactions]) + "]")
 
                 for reaction in msg.reactions:
                     if str(reaction.emoji) == "📽" and reaction.count > 1:
@@ -2962,20 +2975,21 @@ class MusicBot(discord.Client):
                         turn_information = "| *replay has been sent*"
 
                     if str(reaction.emoji) == "💾" and reaction.count > 1:
-                        await self.safe_send_message(user, "The save code is: `{0}`\n*Use *`{1}game 2048 {0}`* to continue your current game*".format(game.get_save(), self.config.command_prefix))
+                        await self.safe_send_message(user, "The save code is: *{0}*\nUse `{1}game 2048 {0}` to continue your current game".format(escape_dis(game.get_save()), self.config.command_prefix))
                         turn_information = "| *save code has been sent*"
 
                     if str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") and reaction.count > 1:
                         direction = ("⬇", "➡", "⬆", "⬅").index(
                             str(reaction.emoji))
 
-                    #self.safe_print ("This did not match a direction: " + str (reaction.emoji))
+                    # self.safe_print ("This did not match a direction: " + str
+                    # (reaction.emoji))
 
                 if direction is None:
                     await self.safe_delete_message(msg)
                     turn_information = "| *You didn't specifiy the direction*"
 
-            #self.safe_print ("Chose the direction " + str (direction))
+            # self.safe_print ("Chose the direction " + str (direction))
             game.move(direction)
             turn_index += 1
             await self.safe_delete_message(msg)
@@ -3039,7 +3053,7 @@ class MusicBot(discord.Client):
             await self.safe_delete_message(response)
 
     @owner_only
-    async def cmd_getemojicode(self, channel, message, emoji=""):
+    async def cmd_getemojicode(self, channel, message, emoji):
         """
         Usage:
             {command_prefix}getemojicode emoji
@@ -3058,7 +3072,7 @@ class MusicBot(discord.Client):
         WIP
         """
         await self.safe_send_message(channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n     Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
-        #return
+        # return
         current_post = get_posts_from_page(number_of_pages=1)[0]
 
         cached_file = urllib.request.URLopener()
@@ -3312,7 +3326,7 @@ class MusicBot(discord.Client):
                     infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", format_time(sum([x.duration for x in infos["entries"]]), round_seconds=True, max_specifications=2))
                 iteration += 1
 
-            #self.safe_print (response_text)
+            # self.safe_print (response_text)
             return Response(response_text, delete_after=100)
 
         elif argument == "builder":
@@ -3377,9 +3391,11 @@ class MusicBot(discord.Client):
             start = (entries_page * items_per_page)
             end = (start + (overflow if entries_page >=
                             iterations else items_per_page)) if len(entries) > 0 else 0
-            #this_page_entries = entries [start : end]
+            # this_page_entries = entries [start : end]
 
-            #self.safe_print ("I have {} entries in the whole list and now I'm viewing from {} to {} ({} entries)".format (str (len (entries)), str (start), str (end), str (end - start)))
+            # self.safe_print ("I have {} entries in the whole list and now I'm
+            # viewing from {} to {} ({} entries)".format (str (len (entries)),
+            # str (start), str (end), str (end - start)))
 
             for i in range(start, end):
                 entries_text += str(i + 1) + ". " + entries[i].title + "\n"
@@ -3408,11 +3424,14 @@ class MusicBot(discord.Client):
                 if arguments is not None:
                     msg = await self.safe_send_message(channel, "I'm working on it.")
                     query = arguments[1:]
-                    entries = await self.get_play_entry(player, channel, author, query, arguments[0])
-                    pl_changes["new_entries"].extend(entries)
-                    playlist["entries"].extend(entries)
-                    playlist["entry_count"] = str(
-                        int(playlist["entry_count"]) + len(entries))
+                    try:
+                        entries = await self.get_play_entry(player, channel, author, query, arguments[0])
+                        pl_changes["new_entries"].extend(entries)
+                        playlist["entries"].extend(entries)
+                        playlist["entry_count"] = str(
+                            int(playlist["entry_count"]) + len(entries))
+                    except:
+                        await self.send_message(channel, "Something went terribly wrong there.", expire_in=20)
                     await self.safe_delete_message(msg)
 
             elif split_message[0].lower() == "remove":
@@ -3502,14 +3521,17 @@ class MusicBot(discord.Client):
             self.safe_print("Closed the playlist builder")
 
         if save:
-            #self.safe_print ("Going to remove the following entries: {} | Adding these entries: {} | Changing the name to: {}".format (pl_changes ["remove_entries_indexes"], ", ".join ([x.title for x in pl_changes ["new_entries"]]), pl_changes ["new_name"]))
+            # self.safe_print ("Going to remove the following entries: {} |
+            # Adding these entries: {} | Changing the name to: {}".format
+            # (pl_changes ["remove_entries_indexes"], ", ".join ([x.title for x
+            # in pl_changes ["new_entries"]]), pl_changes ["new_name"]))
             self.playlists.edit_playlist(savename, player.playlist, new_entries=pl_changes[
                                          "new_entries"], remove_entries_indexes=pl_changes["remove_entries_indexes"], new_name=pl_changes["new_name"])
             self.safe_print(
                 "Closed the playlist builder and saved the playlist")
             return Response("Successfully saved *{}*".format(user_savename.title()))
 
-    async def cmd_addplayingtoplaylist(self, channel, author, player, playlistname=None):
+    async def cmd_addplayingtoplaylist(self, channel, author, player, playlistname):
         """
         Usage:
             {command_prefix}addplayingtoplaylist playlistname
@@ -3536,7 +3558,7 @@ class MusicBot(discord.Client):
             playlistname, player.playlist, new_entries=[player.current_entry])
         return Response("Added the current song to the playlist.")
 
-    async def cmd_removeplayingfromplaylist(self, channel, author, player, playlistname=None):
+    async def cmd_removeplayingfromplaylist(self, channel, author, player, playlistname):
         """
         Usage:
             {command_prefix}removeplayingfromplaylist playlistname
@@ -3582,7 +3604,7 @@ class MusicBot(discord.Client):
             del (leftover_args[0])
 
         search_query = " ".join(leftover_args)
-        #self.safe_print (search_query)
+        # self.safe_print (search_query)
 
         if leftover_args[0] == "summarize":
             sent_num = int(leftover_args[1]) if str(
@@ -3637,6 +3659,30 @@ class MusicBot(discord.Client):
         await self.safe_send_message(author, "The file is being uploaded. Please wait a second.", expire_in=15)
         await self.send_file(author, entry.filename, content="Here you go:")
 
+    async def cmd_reminder(self, channel, author, player, server):
+        """
+        Usage:
+            {command_prefix}reminder
+
+        WIP
+        """
+        # Action(channel=player.voice_client.channel, entry=await player.playlist.get_entry("https://www.youtube.com/watch?v=Z1iOusznthU"))
+        # Action(channel=server.get_member("203510202421477376"),
+        # msg_content="Is this le works?!")
+        action = Action(channel=channel, msg_content="**An hour has passed!**")
+        self.calendar.create_reminder("test", datetime.now(
+        ) + timedelta(seconds=0), action, repeat_every=timedelta(hours=1))
+
+    async def cmd_mobile(self, channel):
+        """
+        Usage:
+            {command_prefix}mobile
+
+        WIP
+        """
+        count = len(self.socket_server.connections)
+        return Response("There {} currently {} mobile user{}".format("is" if count == 1 else "are", count, "s" if count != 1 else ""))
+
     async def cmd_disconnect(self, server):
         """
         Usage:
@@ -3663,7 +3709,8 @@ class MusicBot(discord.Client):
         message_content = message.content.strip()
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
-            #     await self.cmd_c(message.author, message.channel, message_content.split())
+            # await self.cmd_c(message.author, message.channel,
+            # message_content.split())
             return
 
         if message.author == self.user:
@@ -3824,8 +3871,8 @@ class MusicBot(discord.Client):
             return
 
         # await self.add_reaction (reaction.message, discord.Emoji (name = "Bubo", id = "234022157569490945", server = reaction.message.server))
-        #self.safe_print ("{} ({})".format (reaction.emoji.name, reaction.emoji.id))
-        #self.safe_print ("{}".format (reaction.emoji))
+        # self.safe_print ("{} ({})".format (reaction.emoji.name, reaction.emoji.id))
+        # self.safe_print ("{}".format (reaction.emoji))
 
     async def on_voice_state_update(self, before, after):
         if not all([before, after]):

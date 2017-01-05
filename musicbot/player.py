@@ -313,6 +313,7 @@ class MusicPlayer(EventEmitter):
                 stderr_thread.start()
                 self._current_player.start()
                 self.emit('play', player=self, entry=entry)
+                self.bot.socket_server.threaded_broadcast_information()
 
     def _monkeypatch_player(self, player):
         original_buff = player.buff
