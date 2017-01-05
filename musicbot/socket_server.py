@@ -45,7 +45,7 @@ class SocketServer:
             response = response.format(artist=artist, song_title=song_title, play_status=playing,
                                        cover_url=cover_url, progress=progress, duration=duration, volume=volume)
             #print("I sent\n\n***REMOVED******REMOVED***\n\n========".format(response))
-            print("[SOCKETSERVER] Broadcasted information")
+            #print("[SOCKETSERVER] Broadcasted information")
             sock.sendall("***REMOVED******REMOVED***==***REMOVED******REMOVED***".format(len(response), response).encode("utf-8"))
 
     def connection_accepter(self):
@@ -76,7 +76,7 @@ class SocketServer:
             msg = data.decode("utf-8")
             if msg in ["exit", "sdown", ""]:
                 break
-            print("[SOCKETSERVER] Socket received message: ***REMOVED******REMOVED***".format(msg))
+            #print("[SOCKETSERVER] Socket received message: ***REMOVED******REMOVED***".format(msg))
             try:
                 parts = msg.split(";")
                 request = parts[0]
@@ -84,7 +84,7 @@ class SocketServer:
                 self.server_ids[c_socket] = server_id
                 leftover = parts[2:]
             except:
-                print("[SOCKETSERVER] Socket sent malformed message")
+                print("[SOCKETSERVER] Socket received malformed message")
                 break
 
             if request == "REQUEST" and leftover[0] == "SEND_INFORMATION":
@@ -95,7 +95,7 @@ class SocketServer:
 
                 response = response.format(artist=artist, song_title=song_title, play_status=playing,
                                            cover_url=cover_url, progress=progress, duration=duration, volume=volume)
-                print("[SOCKETSERVER] Socket sent data")
+                #print("[SOCKETSERVER] Socket sent data")
                 c_socket.send("***REMOVED******REMOVED***==***REMOVED******REMOVED***".format(len(response), response).encode("utf-8"))
             elif request == "COMMAND":
                 if server_id in self.musicbot.players:
@@ -107,12 +107,17 @@ class SocketServer:
                     if leftover[0] == "PLAY_PAUSE":
                         if player.is_paused:
                             player.resume()
+                            print("[SOCKETSERVER] Resumed")
                         elif player.is_playing:
                             player.pause()
+                            print("[SOCKETSERVER] Paused")
                     elif leftover[0] == "SKIP":
                         player.skip()
+                        print("[SOCKETSERVER] Skipped")
                     elif leftover[0] == "VOLUMECHANGE":
+                        before_vol = player.volume
                         player.volume = float(leftover[1])
+                        print("[SOCKETSERVER] Changed volume from ***REMOVED******REMOVED*** to ***REMOVED******REMOVED***".format(before_vol, player.volume))
 
                     self.threaded_broadcast_information()
 

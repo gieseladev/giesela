@@ -1,7 +1,7 @@
+import re
 from difflib import SequenceMatcher
 
 import spotipy
-import re
 
 
 class SpotifyTrack:
@@ -15,10 +15,21 @@ class SpotifyTrack:
     @classmethod
     def from_query(cls, query, strip_query=True):
         for chr in ["(", "["]:
-            found_index = query.find(chr)
-            query = query[:found_index if found_index > 3 else len(query)]
+            query = re.sub("\***REMOVED***0[0]***REMOVED***.+\***REMOVED***0[1]***REMOVED***".format(chr), "", query)
 
-        query = query.replace("-", "")
+        query = re.sub("'", "", query)
+        index = query.find("|")
+        query = query[:index if index > 3 else len(query)]
+        index = query.lower().find("download")
+        query = query[:index if index > 3 else len(query)]
+        index = query.lower().find("ft")
+        query = query[:index if index > 3 else len(query)]
+        index = query.lower().find("feat")
+        query = query[:index if index > 3 else len(query)]
+
+        query = query.replace("-", "", 1)
+        index = query.find("-")
+        query = query[:index if index > 3 else len(query)]
         query = query.strip()
         query = " ".join(query.split())
 
@@ -30,10 +41,14 @@ class SpotifyTrack:
             return cls("", query.upper(), "", 0)
 
         track = search_result["tracks"]["items"][0]
-        album = track["album"]
-        cover = album["images"][0]["url"]
+        try:
+            album = track["album"]
+            cover = album["images"][0]["url"]
+        except:
+            cover = None
+
         song_name = track["name"]
-        artists = track["artists"]
+        artists = track["artists"][:2]
         artist_text = " & ".join([x["name"] for x in artists])
 
         return cls(artist_text.upper(), song_name.upper(), cover, similar(query, "***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".format(artists[0]["name"], song_name)))
