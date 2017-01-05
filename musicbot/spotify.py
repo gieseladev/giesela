@@ -1,6 +1,7 @@
 from difflib import SequenceMatcher
 
 import spotipy
+import re
 
 
 class SpotifyTrack:
@@ -12,14 +13,22 @@ class SpotifyTrack:
         self.certainty = certainty
 
     @classmethod
-    def from_query(cls, query):
+    def from_query(cls, query, strip_query=True):
+        for chr in ["(", "["]:
+            found_index = query.find(chr)
+            query = query[:found_index if found_index > 3 else len(query)]
+
+        query = query.replace("-", "")
+        query = query.strip()
+        query = " ".join(query.split())
+
         spotify = spotipy.Spotify()
         search_result = spotify.search(query, limit=1, type="track")
         if len(search_result) < 1:
             return cls("", query.upper(), "", 0)
         if len(search_result["tracks"]["items"]) < 1:
             return cls("", query.upper(), "", 0)
-            
+
         track = search_result["tracks"]["items"][0]
         album = track["album"]
         cover = album["images"][0]["url"]

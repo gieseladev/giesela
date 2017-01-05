@@ -1231,7 +1231,6 @@ class MusicBot(discord.Client):
         return Response(":+1:", delete_after=6)
 
     async def forceplay(self, player, leftover_args, song_url):
-        print("forcing me to play")
         song_url = song_url.strip('<>')
 
         if leftover_args:
@@ -3913,11 +3912,13 @@ class MusicBot(discord.Client):
                 print("[config:autopause] Unpausing")
                 self.server_specific_data[after.server]['auto_paused'] = False
                 player.resume()
+                self.socket_server.threaded_broadcast_information()
         else:
             if not auto_paused and player.is_playing:
                 print("[config:autopause] Pausing")
                 self.server_specific_data[after.server]['auto_paused'] = True
                 player.pause()
+                self.socket_server.threaded_broadcast_information()
 
     async def on_server_update(self, before: discord.Server, after: discord.Server):
         if before.region != after.region:
