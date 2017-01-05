@@ -133,6 +133,8 @@ class MusicPlayer(EventEmitter):
         if self._current_player:
             self._current_player.buff.volume = value
 
+        self.bot.socket_server.threaded_broadcast_information()
+
     def on_entry_added(self, playlist, entry):
         if self.is_stopped:
             self.loop.call_later(2, self.play)
@@ -163,6 +165,7 @@ class MusicPlayer(EventEmitter):
             self._current_player.resume()
             self.state = MusicPlayerState.PLAYING
             self.emit('resume', player=self, entry=self.current_entry)
+            self.bot.socket_server.threaded_broadcast_information()
             return
 
         if self.is_paused and not self._current_player:
@@ -180,6 +183,7 @@ class MusicPlayer(EventEmitter):
                 self._current_player.pause()
 
             self.emit('pause', player=self, entry=self.current_entry)
+            self.bot.socket_server.threaded_broadcast_information()
             return
 
         elif self.is_paused:
