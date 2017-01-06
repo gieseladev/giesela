@@ -11,6 +11,7 @@ class SpotifyTrack:
         self.song_name = song_name
         self.cover_url = cover_url
         self.certainty = certainty
+        self.query = query
 
     @classmethod
     def from_query(cls, query, strip_query=True):
@@ -33,7 +34,7 @@ class SpotifyTrack:
           query = query[index + 1 if index > 0 else 0:]
         else:
           query = query[:index + 1 if index > 0 else len(query)] + query[dash:]
-          
+
         index = query.lower().find("feat")
         query = query[:index if index > 3 else len(query)]
 
