@@ -3201,8 +3201,10 @@ class MusicBot(discord.Client):
         """
 
         argument = leftover_args[0].lower() if len(leftover_args) > 0 else ""
-        savename = leftover_args[1].lower() if len(leftover_args) > 1 else ""
-        load_mode = leftover_args[2].lower() if len(leftover_args) > 2 else "add"
+        savename = re.sub("\W", "", leftover_args[1].lower()) if len(
+            leftover_args) > 1 else ""
+        load_mode = leftover_args[2].lower() if len(
+            leftover_args) > 2 else "add"
         additional_args = leftover_args[2:] if len(leftover_args) > 2 else []
 
         forbidden_savenames = ["showall", "savename", "save", "load", "delete",
@@ -3466,7 +3468,8 @@ class MusicBot(discord.Client):
 
             elif split_message[0].lower() == "rename":
                 if arguments is not None and len(arguments[0]) >= 3 and arguments[0] not in self.playlists.saved_playlists:
-                    pl_changes["new_name"] = arguments[0].lower()
+                    pl_changes["new_name"] = re.sub(
+                        "\W", "", arguments[0].lower())
                     user_savename = pl_changes["new_name"]
 
             elif split_message[0].lower() == "extras":
