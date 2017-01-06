@@ -28,7 +28,12 @@ class SpotifyTrack:
         query = query[:index if index > 3 else len(query)]
 
         index = query.lower().find(" ft")
-        query = query[:index if index > 3 else len(query)]
+        dash = query.find("-")
+        if dash == -1:
+          query = query[index + 1 if index > 0 else 0:]
+        else:
+          query = query[:index + 1 if index > 0 else len(query)] + query[dash:]
+          
         index = query.lower().find("feat")
         query = query[:index if index > 3 else len(query)]
 
