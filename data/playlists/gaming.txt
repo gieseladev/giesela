@@ -1,919 +1,919 @@
 {
+  "duration": 210,
   "expected_filename": "audio_cache\\youtube-fVEo74CwiG4-Alesso_We_could_be_-_Heroes_Lyrics.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Alesso (We could be) - Heroes | Lyrics",
-  "url": "https://www.youtube.com/watch?v=fVEo74CwiG4",
-  "duration": 210
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=fVEo74CwiG4"
 }
 ;
 {
+  "duration": 230,
   "expected_filename": "audio_cache\\youtube-cHHLHGNpCSA-Avicii_-_Waiting_For_Love.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Avicii - Waiting For Love",
-  "url": "https://www.youtube.com/watch?v=cHHLHGNpCSA",
-  "duration": 230
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=cHHLHGNpCSA"
 }
 ;
 {
+  "duration": 202,
   "expected_filename": "audio_cache\\youtube-ZoClf0HmEBw-K.A.A.N._-_Mary_Jane_prod._SGULL.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "K.A.A.N. - Mary Jane (prod. SGULL)",
-  "url": "https://www.youtube.com/watch?v=ZoClf0HmEBw",
-  "duration": 202
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=ZoClf0HmEBw"
 }
 ;
 {
+  "duration": 253,
   "expected_filename": "audio_cache\\youtube-k9elZm_EH_4-Luke_Christopher_-_Lot_To_Learn.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Luke Christopher - Lot To Learn",
-  "url": "https://www.youtube.com/watch?v=k9elZm_EH_4",
-  "duration": 253
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=k9elZm_EH_4"
 }
 ;
 {
+  "duration": 276,
   "expected_filename": "audio_cache\\youtube-SufAKh_bHsU-Abstract_-_Scars_ft._RoZe_Prod._Drumma_Battalion.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Abstract - Scars (ft. RoZe) (Prod. Drumma Battalion)",
-  "url": "https://www.youtube.com/watch?v=SufAKh_bHsU",
-  "duration": 276
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=SufAKh_bHsU"
 }
 ;
 {
+  "duration": 258,
   "expected_filename": "audio_cache\\youtube-MrTz5xjmso4-Sean_Kingston_-_Beautiful_Girls.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Sean Kingston - Beautiful Girls",
-  "url": "https://www.youtube.com/watch?v=MrTz5xjmso4",
-  "duration": 258
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=MrTz5xjmso4"
 }
 ;
 {
+  "duration": 213,
   "expected_filename": "audio_cache\\youtube-0vsnwUJjunU-Abstract_-_I_m_Good_ft._RoZe_Prod._Drumma_Battalion.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Abstract - I'm Good (ft. RoZe) (Prod. Drumma Battalion)",
-  "url": "https://www.youtube.com/watch?v=0vsnwUJjunU",
-  "duration": 213
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=0vsnwUJjunU"
 }
 ;
 {
+  "duration": 244,
   "expected_filename": "audio_cache\\youtube-b4Bj7Zb-YD4-Calvin_Harris_-_My_Way_Official_Video.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Calvin Harris - My Way (Official Video)",
-  "url": "https://www.youtube.com/watch?v=b4Bj7Zb-YD4",
-  "duration": 244
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=b4Bj7Zb-YD4"
 }
 ;
 {
+  "duration": 262,
   "expected_filename": "audio_cache\\youtube-PT2_F-1esPk-The_Chainsmokers_-_Closer_Lyric_ft._Halsey.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "The Chainsmokers - Closer (Lyric) ft. Halsey",
-  "url": "https://www.youtube.com/watch?v=PT2_F-1esPk",
-  "duration": 262
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=PT2_F-1esPk"
 }
 ;
 {
+  "duration": 296,
   "expected_filename": "audio_cache\\youtube-_KmWZXNDx5s-kid_cudi_-_pursuit_of_happiness_Download_Lyrics.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "kid cudi - pursuit of happiness Download&Lyrics",
-  "url": "https://www.youtube.com/watch?v=_KmWZXNDx5s",
-  "duration": 296
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=_KmWZXNDx5s"
 }
 ;
 {
+  "duration": 293,
   "expected_filename": "audio_cache\\youtube-Owd9kNsNVEI-Michigan_Moonlight.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Michigan Moonlight",
-  "url": "https://www.youtube.com/watch?v=Owd9kNsNVEI",
-  "duration": 293
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Owd9kNsNVEI"
 }
 ;
 {
+  "duration": 181,
   "expected_filename": "audio_cache\\youtube-GQ0X7_rv38s-Julian_Perretta_-_Miracle.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Julian Perretta - Miracle",
-  "url": "https://www.youtube.com/watch?v=GQ0X7_rv38s",
-  "duration": 181
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=GQ0X7_rv38s"
 }
 ;
 {
+  "duration": 255,
   "expected_filename": "audio_cache\\youtube-w5h4yJ-BpL4-Walking_On_Cars_-_Speeding_Cars.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Walking On Cars - Speeding Cars",
-  "url": "https://www.youtube.com/watch?v=w5h4yJ-BpL4",
-  "duration": 255
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=w5h4yJ-BpL4"
 }
 ;
 {
+  "duration": 194,
   "expected_filename": "audio_cache\\youtube-VcDy8HEg1QY-Rednex_-_Cotton_Eye_Joe.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Rednex - Cotton Eye Joe",
-  "url": "https://www.youtube.com/watch?v=VcDy8HEg1QY",
-  "duration": 194
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=VcDy8HEg1QY"
 }
 ;
 {
+  "duration": 195,
   "expected_filename": "audio_cache\\youtube-8gbImG50oIc-Matt_Simons_-_Catch_Release_Deepend_Remix.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Matt Simons - Catch & Release (Deepend Remix)",
-  "url": "https://www.youtube.com/watch?v=8gbImG50oIc",
-  "duration": 195
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=8gbImG50oIc"
 }
 ;
 {
+  "duration": 311,
   "expected_filename": "audio_cache\\youtube-28GpKacWLWI-Abstract_-_Neverland_ft._Ruth_B_Prod._Blulake.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Abstract - Neverland (ft. Ruth B) (Prod. Blulake)",
-  "url": "https://www.youtube.com/watch?v=28GpKacWLWI",
-  "duration": 311
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=28GpKacWLWI"
 }
 ;
 {
+  "duration": 192,
   "expected_filename": "audio_cache\\youtube-2i2khp_npdE-Alan_Walker_-_Sing_Me_To_Sleep.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Alan Walker - Sing Me To Sleep",
-  "url": "https://www.youtube.com/watch?v=2i2khp_npdE",
-  "duration": 192
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=2i2khp_npdE"
 }
 ;
 {
+  "duration": 269,
   "expected_filename": "audio_cache\\youtube-VscvdooUCTA-Alligatoah_-_Musik_ist_keine_Losung_Official_Video.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Alligatoah - Musik ist keine L\u00f6sung (Official Video)",
-  "url": "https://www.youtube.com/watch?v=VscvdooUCTA",
-  "duration": 269
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=VscvdooUCTA"
 }
 ;
 {
+  "duration": 250,
   "expected_filename": "audio_cache\\youtube-nbXgHAzUWB0-Axwell_Ingrosso_-_Sun_Is_Shining.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Axwell /\\ Ingrosso - Sun Is Shining",
-  "url": "https://www.youtube.com/watch?v=nbXgHAzUWB0",
-  "duration": 250
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=nbXgHAzUWB0"
 }
 ;
 {
+  "duration": 245,
   "expected_filename": "audio_cache\\youtube-xat1GVnl8-k-Bloodhound_Gang_-_The_Bad_Touch.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Bloodhound Gang - The Bad Touch",
-  "url": "https://www.youtube.com/watch?v=xat1GVnl8-k",
-  "duration": 245
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=xat1GVnl8-k"
 }
 ;
 {
+  "duration": 251,
   "expected_filename": "audio_cache\\youtube-c3rLrFC8igY-Dame_-_Auf_die_guten_alten_Zeiten_Official_HD_Video.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Dame - Auf die guten alten Zeiten [Official HD Video]",
-  "url": "https://www.youtube.com/watch?v=c3rLrFC8igY",
-  "duration": 251
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=c3rLrFC8igY"
 }
 ;
 {
+  "duration": 189,
   "expected_filename": "audio_cache\\youtube-byfU8qO3yvg-Hendersin_-_Lonely_Road.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Hendersin - Lonely Road",
-  "url": "https://www.youtube.com/watch?v=byfU8qO3yvg",
-  "duration": 189
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=byfU8qO3yvg"
 }
 ;
 {
+  "duration": 198,
   "expected_filename": "audio_cache\\youtube-lP077RitNAc-Hollywood_Undead_-_Bullet_Lyric_Video.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Hollywood Undead - Bullet (Lyric Video)",
-  "url": "https://www.youtube.com/watch?v=lP077RitNAc",
-  "duration": 198
-}
-;
-{
-  "expected_filename": "audio_cache\\youtube-uWIvKIUaHv4-Good_People_ft._Jamal_Hakeem_Lyon_Season_2_Ep._12_EMPIRE.webm",
   "downloaded": false,
   "type": "URLPlaylistEntry",
-  "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
-    "channel": {
-      "name": "musicbot",
-      "id": "226402503422509058",
-      "type": "Channel"
-    }
-  },
-  "filename": null,
   "version": 1,
-  "title": "Good People ft. Jamal & Hakeem Lyon | Season 2 Ep. 12 | EMPIRE",
-  "url": "https://www.youtube.com/watch?v=uWIvKIUaHv4",
-  "duration": 163
+  "url": "https://www.youtube.com/watch?v=lP077RitNAc"
 }
 ;
 {
+  "duration": 216,
   "expected_filename": "audio_cache\\youtube-hxuCLopcEy4-Good_People_-_Jack_Johnson_-_With_Lyrics.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Good People - Jack Johnson - With Lyrics",
-  "url": "https://www.youtube.com/watch?v=hxuCLopcEy4",
-  "duration": 216
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=hxuCLopcEy4"
 }
 ;
 {
+  "duration": 247,
   "expected_filename": "audio_cache\\youtube-SQ2HstgvzZ4-Machine_Gun_Kelly_-_Mind_of_a_Stoner_ft._Wiz_Khalifa_OFFICIAL_MUSIC_VIDEO.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Machine Gun Kelly - Mind of a Stoner ft. Wiz Khalifa (OFFICIAL MUSIC VIDEO)",
-  "url": "https://www.youtube.com/watch?v=SQ2HstgvzZ4",
-  "duration": 247
-}
-;
-{
-  "expected_filename": "audio_cache\\youtube-s4QL0L9fgbg-Candlebox-Far_Behind.webm",
   "downloaded": false,
   "type": "URLPlaylistEntry",
-  "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
-    "channel": {
-      "name": "musicbot",
-      "id": "226402503422509058",
-      "type": "Channel"
-    }
-  },
-  "filename": null,
   "version": 1,
-  "title": "Candlebox-Far Behind",
-  "url": "https://www.youtube.com/watch?v=s4QL0L9fgbg",
-  "duration": 294
+  "url": "https://www.youtube.com/watch?v=SQ2HstgvzZ4"
 }
 ;
 {
+  "duration": 244,
   "expected_filename": "audio_cache\\youtube-eI3UF_HcTNo-Oleska_X_Otter_Berry_-_Far_Behind_Original_Mix.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Oleska X Otter Berry - Far Behind (Original Mix)",
-  "url": "https://www.youtube.com/watch?v=eI3UF_HcTNo",
-  "duration": 244
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=eI3UF_HcTNo"
 }
 ;
 {
+  "duration": 218,
   "expected_filename": "audio_cache\\youtube-rG18P6wOtTQ-Sido_-_Hamdullah_Official_Video.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Sido - Hamdullah (Official Video)",
-  "url": "https://www.youtube.com/watch?v=rG18P6wOtTQ",
-  "duration": 218
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=rG18P6wOtTQ"
 }
 ;
 {
+  "duration": 240,
   "expected_filename": "audio_cache\\youtube-VbfpW0pbvaU-Shawn_Mendes_-_Stitches_Official_Video.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Shawn Mendes - Stitches (Official Video)",
-  "url": "https://www.youtube.com/watch?v=VbfpW0pbvaU",
-  "duration": 240
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=VbfpW0pbvaU"
 }
 ;
 {
+  "duration": 216,
   "expected_filename": "audio_cache\\youtube-F9kXstb9FF4-The_Strumbellas_-_Spirits.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "The Strumbellas - Spirits",
-  "url": "https://www.youtube.com/watch?v=F9kXstb9FF4",
-  "duration": 216
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=F9kXstb9FF4"
 }
 ;
 {
+  "duration": 252,
   "expected_filename": "audio_cache\\youtube-WpYeekQkAdc-The_Black_Eyed_Peas_-_Where_Is_The_Love.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "The Black Eyed Peas - Where Is The Love?",
-  "url": "https://www.youtube.com/watch?v=WpYeekQkAdc",
-  "duration": 252
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=WpYeekQkAdc"
 }
 ;
 {
+  "duration": 180,
   "expected_filename": "audio_cache\\youtube-BEm0AjTbsac-The_Misty_Mountains_Cold_-_The_Hobbit.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "The Misty Mountains Cold - The Hobbit",
-  "url": "https://www.youtube.com/watch?v=BEm0AjTbsac",
-  "duration": 180
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=BEm0AjTbsac"
 }
 ;
 {
+  "duration": 202,
   "expected_filename": "audio_cache\\youtube-iUI5uLysKaE-Vance_Joy_-_Riptide_Lyrics_on_Screen.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Vance Joy - Riptide (Lyrics on Screen)",
-  "url": "https://www.youtube.com/watch?v=iUI5uLysKaE",
-  "duration": 202
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=iUI5uLysKaE"
 }
 ;
 {
+  "duration": 159,
   "expected_filename": "audio_cache\\youtube-YV3XnVcEgZY-Vigiland_-_Pong_Dance_Lyric_Video.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Vigiland - Pong Dance (Lyric Video)",
-  "url": "https://www.youtube.com/watch?v=YV3XnVcEgZY",
-  "duration": 159
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=YV3XnVcEgZY"
 }
 ;
 {
+  "duration": 213,
   "expected_filename": "audio_cache\\youtube-KuVAeTHqijk-Wiz_Khalifa_-_No_Sleep_Music_Video.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Wiz Khalifa - No Sleep [Music Video]",
-  "url": "https://www.youtube.com/watch?v=KuVAeTHqijk",
-  "duration": 213
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=KuVAeTHqijk"
 }
 ;
 {
+  "duration": 249,
   "expected_filename": "audio_cache\\youtube-uvLSj4gRq-Q-Wiz_Khalifa_-_So_High_ft._Ghost_Loft_Official_Audio.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Wiz Khalifa - So High ft. Ghost Loft [Official Audio]",
-  "url": "https://www.youtube.com/watch?v=uvLSj4gRq-Q",
-  "duration": 249
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=uvLSj4gRq-Q"
 }
 ;
 {
+  "duration": 195,
   "expected_filename": "audio_cache\\youtube-6tu4wWSbnIs-X_Ambassadors_-_Renegades_Audio.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "X Ambassadors - Renegades (Audio)",
-  "url": "https://www.youtube.com/watch?v=6tu4wWSbnIs",
-  "duration": 195
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=6tu4wWSbnIs"
 }
 ;
 {
+  "duration": 257,
   "expected_filename": "audio_cache\\youtube-Wa5B22KAkEk-Snoop_Dogg_Wiz_Khalifa_-_Young_Wild_and_Free_ft._Bruno_Mars_Official_Video.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "Snoop Dogg & Wiz Khalifa - Young, Wild and Free ft. Bruno Mars [Official Video]",
-  "url": "https://www.youtube.com/watch?v=Wa5B22KAkEk",
-  "duration": 257
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=Wa5B22KAkEk"
 }
 ;
 {
+  "duration": 225,
   "expected_filename": "audio_cache\\youtube-pXRviuL6vMY-twenty_one_pilots_-_Stressed_Out_OFFICIAL_VIDEO.webm",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "meta": {
-    "author": {
-      "name": "grelor",
-      "id": "210488226777923585",
-      "type": "Member"
-    },
     "channel": {
-      "name": "musicbot",
       "id": "226402503422509058",
+      "name": "musicbot",
       "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
     }
   },
   "filename": null,
-  "version": 1,
   "title": "twenty one pilots: Stressed Out [OFFICIAL VIDEO]",
-  "url": "https://www.youtube.com/watch?v=pXRviuL6vMY",
-  "duration": 225
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=pXRviuL6vMY"
+}
+;
+{
+  "duration": 281,
+  "expected_filename": "audio_cache\\youtube-drIWW4hXV34-Life_is_Strange_Soundtrack_-_To_All_Of_You_by_Syd_Matters.webm",
+  "meta": {
+    "channel": {
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
+    }
+  },
+  "filename": null,
+  "title": "Life is Strange Soundtrack - To All Of You by Syd Matters",
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=drIWW4hXV34"
+}
+;
+{
+  "duration": 1687,
+  "expected_filename": "audio_cache\\youtube-fQynBmK_has-Al_Maghrib.webm",
+  "meta": {
+    "channel": {
+      "id": "226402503422509058",
+      "name": "musicbot",
+      "type": "Channel"
+    },
+    "author": {
+      "id": "210488226777923585",
+      "name": "grelor",
+      "type": "Member"
+    }
+  },
+  "filename": null,
+  "title": "Al Maghrib",
+  "downloaded": false,
+  "type": "URLPlaylistEntry",
+  "version": 1,
+  "url": "https://www.youtube.com/watch?v=fQynBmK_has"
 }
