@@ -19,10 +19,6 @@ class SocketServer:
         self.stop_threads = False
 
         try:
-            self.shutdown()
-        except:
-            pass
-        try:
             main_socket = socket(AF_INET, SOCK_STREAM)
             main_socket.bind((self.host, self.port))
             main_socket.listen(1)
