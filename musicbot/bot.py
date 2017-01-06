@@ -664,6 +664,7 @@ class MusicBot(discord.Client):
 
     async def logout(self):
         await self.disconnect_all_voice_clients()
+        self.socket_server.shutdown()
         return await super().logout()
 
     async def on_error(self, event, *args, **kwargs):
@@ -3444,6 +3445,8 @@ class MusicBot(discord.Client):
                         playlist["entries"].extend(entries)
                         playlist["entry_count"] = str(
                             int(playlist["entry_count"]) + len(entries))
+                        it, ov = divmod(int(playlist["entry_count"]) + len(entries), items_per_page)
+                        entries_page = it
                     except:
                         await self.send_message(channel, "Something went terribly wrong there.", expire_in=20)
                     await self.safe_delete_message(msg)

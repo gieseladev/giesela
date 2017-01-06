@@ -18,18 +18,31 @@ class SocketServer:
         self.server_ids = ***REMOVED******REMOVED***
         self.stop_threads = False
 
-        main_socket = socket(AF_INET, SOCK_STREAM)
-        main_socket.bind((self.host, self.port))
-        main_socket.listen(1)
+        try:
+            self.shutdown()
+        except:
+            pass
+        try:
+            main_socket = socket(AF_INET, SOCK_STREAM)
+            main_socket.bind((self.host, self.port))
+            main_socket.listen(1)
+        except:
+            print("[SOCKETSERVER] Can't connect. Socket Address already in use.")
+            return
 
         self.main_socket = main_socket
         self.main_thread = Thread(target=self.connection_accepter)
         self.main_thread.start()
 
     def shutdown(self):
-        self.main_socket.shutdown(SHUT_RDWR)
-        self.main_socket.close()
         self.stop_threads = True
+        try:
+            self.main_socket.shutdown(SHUT_RDWR)
+        except:
+            pass
+
+        self.main_socket.close()
+        print("[SOCKETSERVER] Shutdown!")
 
     def threaded_broadcast_information(self):
         work_thread = Thread(target=self._broadcast_information)
@@ -50,13 +63,21 @@ class SocketServer:
                 len(response), response).encode("utf-8"))
 
     def connection_accepter(self):
+        print("[SOCKETSERVER] Listening!")
         while not self.stop_threads:
             # print(len(self.connections))
             if len(self.connections) >= self.max_connections:
                 print("[SOCKETSERVER] Too many parallel connections!")
                 time.sleep(5)
             else:
-                (connected_socket, connected_address) = self.main_socket.accept()
+                try:
+                    (connected_socket, connected_address) = self.main_socket.accept()
+                except:
+                    print("[SOCKETSERVER] Can't use this socket")
+                    self.stop_threads = True
+                    self.shutdown()
+                    break
+
                 thread = Thread(target=self.connection_maintainer,
                                 args=(connected_socket,))
                 thread.start()
