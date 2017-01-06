@@ -22,13 +22,12 @@ class SocketServer:
             main_socket = socket(AF_INET, SOCK_STREAM)
             main_socket.bind((self.host, self.port))
             main_socket.listen(1)
+            self.main_socket = main_socket
+            self.main_thread = Thread(target=self.connection_accepter)
+            self.main_thread.start()
         except:
             print("[SOCKETSERVER] Can't connect. Socket Address already in use.")
             return
-
-        self.main_socket = main_socket
-        self.main_thread = Thread(target=self.connection_accepter)
-        self.main_thread.start()
 
     def shutdown(self):
         self.stop_threads = True
@@ -70,9 +69,7 @@ class SocketServer:
                     (connected_socket, connected_address) = self.main_socket.accept()
                 except:
                     print("[SOCKETSERVER] Can't use this socket")
-                    self.stop_threads = True
-                    self.shutdown()
-                    break
+                    continue
 
                 thread = Thread(target=self.connection_maintainer,
                                 args=(connected_socket,))
@@ -80,6 +77,7 @@ class SocketServer:
                 self.connections.append(
                     (thread, connected_socket, connected_address))
                 print("[SOCKETSERVER] Connected to {}".format(connected_address))
+        print("[SOCKETSERVER] Stopping accepter thread")
 
     def connection_maintainer(self, *args):
         c_socket = args[0]
