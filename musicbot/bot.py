@@ -664,6 +664,7 @@ class MusicBot(discord.Client):
 
     async def logout(self):
         await self.disconnect_all_voice_clients()
+        self.socket_server.shutdown()
         return await super().logout()
 
     async def on_error(self, event, *args, **kwargs):

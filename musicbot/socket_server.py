@@ -18,6 +18,11 @@ class SocketServer:
         self.server_ids = ***REMOVED******REMOVED***
         self.stop_threads = False
 
+        try:
+            self.shutdown()
+        except:
+            pass
+
         main_socket = socket(AF_INET, SOCK_STREAM)
         main_socket.bind((self.host, self.port))
         main_socket.listen(1)
@@ -30,6 +35,7 @@ class SocketServer:
         self.main_socket.shutdown(SHUT_RDWR)
         self.main_socket.close()
         self.stop_threads = True
+        print("[SOCKETSERVER] Shutdown!")
 
     def threaded_broadcast_information(self):
         work_thread = Thread(target=self._broadcast_information)
