@@ -44,10 +44,10 @@ class SpotifyTrack:
         song_name_edited = song_name_edited.strip()
 
         poss = []
-        poss.append(similar(query.lower(), "***REMOVED***0***REMOVED*** ***REMOVED***1***REMOVED***".format(song_name_edited.lower(), artists[0].lower())))
-        poss.append(similar(query.lower(), "***REMOVED***1***REMOVED*** ***REMOVED***0***REMOVED***".format(song_name_edited.lower(), artists[0].lower())))
-        poss.append(similar(query.lower(), "***REMOVED***0***REMOVED*** \n ***REMOVED***1***REMOVED***".format(song_name_edited.lower(), artists[0].lower())))
-        poss.append(similar(query.lower(), "***REMOVED***1***REMOVED*** \n ***REMOVED***0***REMOVED***".format(song_name_edited.lower(), artists[0].lower())))
+        poss.append(similar(query.lower(), "***REMOVED***0***REMOVED*** ***REMOVED***1***REMOVED***".format(song_name_edited.lower(), artists[0]["name"].lower())))
+        poss.append(similar(query.lower(), "***REMOVED***1***REMOVED*** ***REMOVED***0***REMOVED***".format(song_name_edited.lower(), artists[0]["name"].lower())))
+        poss.append(similar(query.lower(), "***REMOVED***0***REMOVED*** \n ***REMOVED***1***REMOVED***".format(song_name_edited.lower(), artists[0]["name"].lower())))
+        poss.append(similar(query.lower(), "***REMOVED***1***REMOVED*** \n ***REMOVED***0***REMOVED***".format(song_name_edited.lower(), artists[0]["name"].lower())))
 
         cer = max(poss)
 
