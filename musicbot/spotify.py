@@ -76,7 +76,7 @@ def parse_query(query):
     query = query.replace(" Ost ", "")
     query = re.sub("\d+", "", query)
 
-    index = query.lower().find("download")
+    index = query.lower().find(" download ")
     query = query[:index if index > 3 else len(query)]
 
     index = query.lower().find(" and ")
