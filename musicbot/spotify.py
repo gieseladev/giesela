@@ -44,10 +44,10 @@ class SpotifyTrack:
         song_name_edited = song_name_edited.strip()
 
         poss = []
-        poss.append(similar(query.lower(), "{0} {1}".format(song_name_edited.lower(), artist.lower())))
-        poss.append(similar(query.lower(), "{1} {0}".format(song_name_edited.lower(), artist.lower())))
-        poss.append(similar(query.lower(), "{0} \n {1}".format(song_name_edited.lower(), artist.lower())))
-        poss.append(similar(query.lower(), "{1} \n {0}".format(song_name_edited.lower(), artist.lower())))
+        poss.append(similar(query.lower(), "{0} {1}".format(song_name_edited.lower(), artists[0].lower())))
+        poss.append(similar(query.lower(), "{1} {0}".format(song_name_edited.lower(), artists[0].lower())))
+        poss.append(similar(query.lower(), "{0} \n {1}".format(song_name_edited.lower(), artists[0].lower())))
+        poss.append(similar(query.lower(), "{1} \n {0}".format(song_name_edited.lower(), artists[0].lower())))
 
         cer = max(poss)
 
