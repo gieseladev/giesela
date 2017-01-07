@@ -187,7 +187,7 @@ class SocketServer:
                     cover_url = spotify_track.cover_url
                 else:
                     artist = " "
-                    song_title = spotify_track.query
+                    song_title = spotify_track.query.upper()
                     cover_url = "http://i.imgur.com/nszu54A.jpg"
 
                 playing = "PLAYING" if player.is_playing else "PAUSED"
@@ -197,7 +197,7 @@ class SocketServer:
             volume = str(round(player.volume, 2))
         else:
             artist = " "
-            song_title = "Not Playing"
+            song_title = "NOT PLAYING"
             cover_url = "http://i.imgur.com/nszu54A.jpg"
             playing = "STOPPED"
             duration = "0"
