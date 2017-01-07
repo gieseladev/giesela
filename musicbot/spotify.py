@@ -70,6 +70,10 @@ def parse_query(query):
 
     query = query.replace("|", " ", 1)
 
+    query = query.replace(":", "")
+    query = query.replace("OST", "")
+    query = re.sub("\d+", "", query)
+
     index = query.lower().find("download")
     query = query[:index if index > 3 else len(query)]
 
