@@ -71,9 +71,9 @@ def parse_query(query):
     query = query.replace("|", " ", 1)
 
     query = query.replace(":", "")
-    query = query.replace("OST", "")
-    query = query.replace("ost", "")
-    query = query.replace("Ost", "")
+    query = query.replace(" OST ", "")
+    query = query.replace(" ost ", "")
+    query = query.replace(" Ost ", "")
     query = re.sub("\d+", "", query)
 
     index = query.lower().find("download")
