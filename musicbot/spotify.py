@@ -44,19 +44,23 @@ class SpotifyTrack:
         song_name_edited = song_name_edited.strip()
 
         poss = []
-        poss.append(similar(query.lower(), "{0} {1}".format(song_name_edited.lower(), artists[0]["name"].lower())))
-        poss.append(similar(query.lower(), "{1} {0}".format(song_name_edited.lower(), artists[0]["name"].lower())))
-        poss.append(similar(query.lower(), "{0} \n {1}".format(song_name_edited.lower(), artists[0]["name"].lower())))
-        poss.append(similar(query.lower(), "{1} \n {0}".format(song_name_edited.lower(), artists[0]["name"].lower())))
+        poss.append(similar(query.lower(), "{0} {1}".format(
+            song_name_edited.lower(), artists[0]["name"].lower())))
+        poss.append(similar(query.lower(), "{1} {0}".format(
+            song_name_edited.lower(), artists[0]["name"].lower())))
+        poss.append(similar(query.lower(), "{0} \n {1}".format(
+            song_name_edited.lower(), artists[0]["name"].lower())))
+        poss.append(similar(query.lower(), "{1} \n {0}".format(
+            song_name_edited.lower(), artists[0]["name"].lower())))
 
         cer = max(poss)
-
 
         return cls(artist_text.upper(), song_name.upper(), cover, query, cer)
 
 
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
+
 
 def parse_query(query):
     for chr in ["()", "[]", "<>"]:
@@ -74,10 +78,10 @@ def parse_query(query):
 
     index = query.lower().find(" ft ")
     dash = query.find("-")
-    if dash == -1:
-      query = query[index + 1 if index > 0 else 0:]
-    else:
-      query = query[:index + 1 if index > 0 else len(query)] + query[dash:]
+    if dash == -1 and index > 0:
+        query = query[index + 1 if index > 0 else 0:]
+    elif index > 0:
+        query = query[:index + 1 if index > 0 else len(query)] + query[dash:]
 
     index = query.lower().find(" feat ")
     query = query[:index if index > 3 else len(query)]
@@ -89,18 +93,17 @@ def parse_query(query):
     query = query[:index if index > 3 else len(query)]
 
     index = query.lower().find("&") if query.lower().find(
-        "&") != -1 else query.lower().find("x")
+        "&") != -1 else query.lower().find(" x ")
     dash = query.find("-")
-    if dash == -1:
+    if dash == -1 and index > 0:
         query = query[index + 1 if index > 0 else 0:]
-    else:
+    elif index > 0:
         query = query[:index if index > 0 else len(query)] + query[dash:]
 
     query = query.replace("-", "\n", 1)
-    index = query.find("-")
+    index = query.find(" - ")
     query = query[:index if index > 3 else len(query)]
     query = query.strip()
     query = re.sub(" {2,}", " ", query)
-    #query = " ".join(query.split())
 
     return query

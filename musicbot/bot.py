@@ -3445,7 +3445,8 @@ class MusicBot(discord.Client):
                         playlist["entries"].extend(entries)
                         playlist["entry_count"] = str(
                             int(playlist["entry_count"]) + len(entries))
-                        it, ov = divmod(int(playlist["entry_count"]), items_per_page)
+                        it, ov = divmod(
+                            int(playlist["entry_count"]), items_per_page)
                         entries_page = it
                     except:
                         await self.send_message(channel, "Something went terribly wrong there.", expire_in=20)

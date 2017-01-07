@@ -65,8 +65,6 @@ class SocketServer:
             print("[SOCKETSERVER] Socket didn't want to receive my broadcast!")
             self.server_ids.pop(key)
 
-
-
     def connection_accepter(self):
         print("[SOCKETSERVER] Listening!")
         while not self.stop_threads:
