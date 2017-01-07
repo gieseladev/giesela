@@ -58,9 +58,11 @@ class SocketServer:
                 sock.sendall("***REMOVED******REMOVED***==***REMOVED******REMOVED***".format(
                     len(response), response).encode("utf-8"))
             except:
+                raise
                 to_delete.append(sock)
 
         for key in to_delete:
+            print("[SOCKETSERVER] Socket didn't want to receive my broadcast!")
             self.server_ids.pop(key)
 
 
