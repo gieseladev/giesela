@@ -100,6 +100,10 @@ class SocketServer:
             msg = data.decode("utf-8")
             if msg in ["exit", "sdown", ""]:
                 break
+
+            if msg == "ping":
+                c_socket.sendall("4==pong")
+                continue
             #print("[SOCKETSERVER] Socket received message: ***REMOVED******REMOVED***".format(msg))
             try:
                 parts = msg.split(";")
