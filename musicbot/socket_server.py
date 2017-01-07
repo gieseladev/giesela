@@ -44,18 +44,27 @@ class SocketServer:
         work_thread.start()
 
     def _broadcast_information(self):
+        to_delete = []
         for sock, server_id in self.server_ids.items():
-            response = "INFORMATION;{artist};{song_title};{play_status};{cover_url};{progress};{duration};{volume}"
+            try:
+                response = "INFORMATION;{artist};{song_title};{play_status};{cover_url};{progress};{duration};{volume}"
 
-            artist, song_title, cover_url, playing, duration, progress, volume = self.get_player_values(
-                server_id)
+                artist, song_title, cover_url, playing, duration, progress, volume = self.get_player_values(
+                    server_id)
 
-            response = response.format(artist=artist, song_title=song_title, play_status=playing,
-                                       cover_url=cover_url, progress=progress, duration=duration, volume=volume)
-            #print("I sent\n\n{}\n\n========".format(response))
-            #print("[SOCKETSERVER] Broadcasted information")
-            sock.sendall("{}=={}".format(
-                len(response), response).encode("utf-8"))
+                response = response.format(artist=artist, song_title=song_title, play_status=playing,
+                                           cover_url=cover_url, progress=progress, duration=duration, volume=volume)
+                #print("I sent\n\n{}\n\n========".format(response))
+                #print("[SOCKETSERVER] Broadcasted information")
+                sock.sendall("{}=={}".format(
+                    len(response), response).encode("utf-8"))
+            except:
+                to_delete.append(sock)
+
+        for key in to_delete:
+            self.server_ids.pop(key)
+
+
 
     def connection_accepter(self):
         print("[SOCKETSERVER] Listening!")
@@ -112,7 +121,7 @@ class SocketServer:
                 response = response.format(artist=artist, song_title=song_title, play_status=playing,
                                            cover_url=cover_url, progress=progress, duration=duration, volume=volume)
                 #print("[SOCKETSERVER] Socket sent data")
-                c_socket.send("{}=={}".format(
+                c_socket.sendall("{}=={}".format(
                     len(response), response).encode("utf-8"))
             elif request == "COMMAND":
                 if server_id in self.musicbot.players:
@@ -187,5 +196,13 @@ class SocketServer:
                 progress = str(round(player.progress, 2))
 
             volume = str(round(player.volume, 2))
+        else:
+            artist = " "
+            song_title = "Not Playing"
+            cover_url = "http://i.imgur.com/nszu54A.jpg"
+            playing = "STOPPED"
+            duration = "0"
+            progress = "0"
+            volume = ".5"
 
         return artist, song_title, cover_url, playing, duration, progress, volume
