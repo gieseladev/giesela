@@ -102,7 +102,7 @@ class SocketServer:
                 break
 
             if msg == "ping":
-                c_socket.sendall("4==pong")
+                c_socket.sendall("4==pong".encode("utf-8"))
                 continue
             #print("[SOCKETSERVER] Socket received message: {}".format(msg))
             try:
