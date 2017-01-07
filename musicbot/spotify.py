@@ -43,7 +43,16 @@ class SpotifyTrack:
             :index if index > 3 else len(song_name_edited)]
         song_name_edited = song_name_edited.strip()
 
-        return cls(artist_text.upper(), song_name.upper(), cover, query, max(similar(query.lower(), "***REMOVED***0***REMOVED*** ***REMOVED***1***REMOVED***".format(artists[0]["name"].lower(), song_name_edited.lower())), similar(query.lower(), "***REMOVED***1***REMOVED*** ***REMOVED***0***REMOVED***".format(artists[0]["name"].lower(), song_name_edited.lower()))))
+        poss = []
+        poss.append(similar(query.lower(), "***REMOVED***0***REMOVED*** ***REMOVED***1***REMOVED***".format(song_name_edited.lower(), artist.lower())))
+        poss.append(similar(query.lower(), "***REMOVED***1***REMOVED*** ***REMOVED***0***REMOVED***".format(song_name_edited.lower(), artist.lower())))
+        poss.append(similar(query.lower(), "***REMOVED***0***REMOVED*** \n ***REMOVED***1***REMOVED***".format(song_name_edited.lower(), artist.lower())))
+        poss.append(similar(query.lower(), "***REMOVED***1***REMOVED*** \n ***REMOVED***0***REMOVED***".format(song_name_edited.lower(), artist.lower())))
+
+        cer = max(poss)
+
+
+        return cls(artist_text.upper(), song_name.upper(), cover, query, cer)
 
 
 def similar(a, b):
@@ -60,23 +69,23 @@ def parse_query(query):
     index = query.lower().find("download")
     query = query[:index if index > 3 else len(query)]
 
-    index = query.lower().find("and")
+    index = query.lower().find(" and ")
     query = query[:index if index > 3 else len(query)]
 
-    index = query.lower().find(" ft")
+    index = query.lower().find(" ft ")
     dash = query.find("-")
     if dash == -1:
       query = query[index + 1 if index > 0 else 0:]
     else:
       query = query[:index + 1 if index > 0 else len(query)] + query[dash:]
 
-    index = query.lower().find("feat")
+    index = query.lower().find(" feat ")
     query = query[:index if index > 3 else len(query)]
 
-    index = query.lower().find("lyric")
+    index = query.lower().find(" lyric")
     query = query[:index if index > 3 else len(query)]
 
-    index = query.lower().find("official")
+    index = query.lower().find(" official")
     query = query[:index if index > 3 else len(query)]
 
     index = query.lower().find("&") if query.lower().find(
@@ -91,6 +100,7 @@ def parse_query(query):
     index = query.find("-")
     query = query[:index if index > 3 else len(query)]
     query = query.strip()
-    query = " ".join(query.split())
+    query = re.sub(" ***REMOVED***2,***REMOVED***", " ", query)
+    #query = " ".join(query.split())
 
     return query
