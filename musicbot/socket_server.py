@@ -26,8 +26,7 @@ class SocketServer:
             self.main_thread = Thread(target=self.connection_accepter)
             self.main_thread.start()
         except:
-            print("[SOCKETSERVER] Can't connect. Socket Address already in use.")
-            return
+            print("[SOCKETSERVER] Can't connect. Address already in use.")
 
     def shutdown(self):
         self.stop_threads = True
