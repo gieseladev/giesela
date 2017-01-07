@@ -43,7 +43,16 @@ class SpotifyTrack:
             :index if index > 3 else len(song_name_edited)]
         song_name_edited = song_name_edited.strip()
 
-        return cls(artist_text.upper(), song_name.upper(), cover, query, max(similar(query.lower(), "{0} {1}".format(artists[0]["name"].lower(), song_name_edited.lower())), similar(query.lower(), "{1} {0}".format(artists[0]["name"].lower(), song_name_edited.lower()))))
+        poss = []
+        poss.append(similar(query.lower(), "{0} {1}".format(song_name_edited.lower(), artist.lower())))
+        poss.append(similar(query.lower(), "{1} {0}".format(song_name_edited.lower(), artist.lower())))
+        poss.append(similar(query.lower(), "{0} \n {1}".format(song_name_edited.lower(), artist.lower())))
+        poss.append(similar(query.lower(), "{1} \n {0}".format(song_name_edited.lower(), artist.lower())))
+
+        cer = max(poss)
+
+
+        return cls(artist_text.upper(), song_name.upper(), cover, query, cer)
 
 
 def similar(a, b):
