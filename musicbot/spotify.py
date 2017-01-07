@@ -15,48 +15,7 @@ class SpotifyTrack:
 
     @classmethod
     def from_query(cls, query, strip_query=True):
-        for chr in ["()", "[]", "<>"]:
-            query = re.sub("\{0[0]}.+\{0[1]}".format(chr), "", query)
-
-        query = re.sub("'", "", query)
-
-        query = query.replace("|", " ", 1)
-
-        index = query.lower().find("download")
-        query = query[:index if index > 3 else len(query)]
-
-        index = query.lower().find("and")
-        query = query[:index if index > 3 else len(query)]
-
-        index = query.lower().find(" ft")
-        dash = query.find("-")
-        if dash == -1:
-          query = query[index + 1 if index > 0 else 0:]
-        else:
-          query = query[:index + 1 if index > 0 else len(query)] + query[dash:]
-
-        index = query.lower().find("feat")
-        query = query[:index if index > 3 else len(query)]
-
-        index = query.lower().find("lyric")
-        query = query[:index if index > 3 else len(query)]
-
-        index = query.lower().find("official")
-        query = query[:index if index > 3 else len(query)]
-
-        index = query.lower().find("&") if query.lower().find(
-            "&") != -1 else query.lower().find("x")
-        dash = query.find("-")
-        if dash == -1:
-            query = query[index + 1 if index > 0 else 0:]
-        else:
-            query = query[:index if index > 0 else len(query)] + query[dash:]
-
-        query = query.replace("-", " ", 1)
-        index = query.find("-")
-        query = query[:index if index > 3 else len(query)]
-        query = query.strip()
-        query = " ".join(query.split())
+        query = parse_query(query)
 
         spotify = spotipy.Spotify()
         search_result = spotify.search(query, limit=1, type="track")
@@ -89,3 +48,49 @@ class SpotifyTrack:
 
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
+
+def parse_query(query):
+    for chr in ["()", "[]", "<>"]:
+        query = re.sub("\{0[0]}.+\{0[1]}".format(chr), "", query)
+
+    query = re.sub("'", "", query)
+
+    query = query.replace("|", " ", 1)
+
+    index = query.lower().find("download")
+    query = query[:index if index > 3 else len(query)]
+
+    index = query.lower().find("and")
+    query = query[:index if index > 3 else len(query)]
+
+    index = query.lower().find(" ft")
+    dash = query.find("-")
+    if dash == -1:
+      query = query[index + 1 if index > 0 else 0:]
+    else:
+      query = query[:index + 1 if index > 0 else len(query)] + query[dash:]
+
+    index = query.lower().find("feat")
+    query = query[:index if index > 3 else len(query)]
+
+    index = query.lower().find("lyric")
+    query = query[:index if index > 3 else len(query)]
+
+    index = query.lower().find("official")
+    query = query[:index if index > 3 else len(query)]
+
+    index = query.lower().find("&") if query.lower().find(
+        "&") != -1 else query.lower().find("x")
+    dash = query.find("-")
+    if dash == -1:
+        query = query[index + 1 if index > 0 else 0:]
+    else:
+        query = query[:index if index > 0 else len(query)] + query[dash:]
+
+    query = query.replace("-", "\n", 1)
+    index = query.find("-")
+    query = query[:index if index > 3 else len(query)]
+    query = query.strip()
+    query = " ".join(query.split())
+
+    return query
