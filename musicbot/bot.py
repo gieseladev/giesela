@@ -3399,6 +3399,7 @@ class MusicBot(discord.Client):
 
             items_per_page = 20
             iterations, overflow = divmod(len(entries), items_per_page)
+            print(iterations, overflow)
 
             if iterations > 0 and overflow == 0:
                 iterations -= 1
@@ -3406,6 +3407,8 @@ class MusicBot(discord.Client):
             start = (entries_page * items_per_page)
             end = (start + (overflow if entries_page >=
                             iterations else items_per_page)) if len(entries) > 0 else 0
+
+            print(start, end)
             # this_page_entries = entries [start : end]
 
             # self.safe_print ("I have ***REMOVED******REMOVED*** entries in the whole list and now I'm
@@ -3446,7 +3449,8 @@ class MusicBot(discord.Client):
                         playlist["entry_count"] = str(
                             int(playlist["entry_count"]) + len(entries))
                         it, ov = divmod(int(playlist["entry_count"]) + len(entries), items_per_page)
-                        entries_page = it - 1
+                        print(it)
+                        entries_page = (it - 1) % (it + 1)
                     except:
                         await self.send_message(channel, "Something went terribly wrong there.", expire_in=20)
                     await self.safe_delete_message(msg)
