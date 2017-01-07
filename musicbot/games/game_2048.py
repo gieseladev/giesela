@@ -82,43 +82,50 @@ class Game2048:
             return "#cdc1b5", "#000000"
 
     def get_save(self):
-        encoded = []
-        empty = 0
-        for row in self.grid:
-            for tile in row:
-                if tile.value <= 0:
-                    empty += 1
-                    continue
-                else:
-                    if empty > 0:
-                        encoded.append("_" + encode52(empty))
-                        empty = 0
+        try:
+            encoded = []
+            empty = 0
+            for row in self.grid:
+                for tile in row:
+                    if tile.value <= 0:
+                        empty += 1
+                        continue
+                    else:
+                        if empty > 0:
+                            encoded.append("_" + encode52(empty))
+                            empty = 0
 
-                v = log2(tile.value)
-                encoded.append(encode52(int(v)))
+                    v = log2(tile.value)
+                    encoded.append(encode52(int(v)))
 
-        if empty > 0:
-            encoded.append("_" + encode52(empty))
+            if empty > 0:
+                encoded.append("_" + encode52(empty))
+        except:
+            encoded = []
 
         return "-".join(encoded)
 
     def from_save(self, save_code):
-        elements = save_code.split("-")
-        n_grid = []
-        for el in elements:
-            if el.startswith("_"):
-                empties = decode52(el[1:])
-                n_grid.extend([0 for x in range(empties)])
-            else:
-                n_grid.append(int(pow(2, decode52(el))))
+        try:
+            elements = save_code.split("-")
+            n_grid = []
+            for el in elements:
+                if el.startswith("_"):
+                    empties = decode52(el[1:])
+                    n_grid.extend([0 for x in range(empties)])
+                else:
+                    n_grid.append(int(pow(2, decode52(el))))
 
-        new_size = int(sqrt(len(n_grid)))
-        r_grid = []
-        for row in range(new_size):
-            r = []
-            for column in range(new_size):
-                r.append(Tile(n_grid[row * new_size + column]))
-            r_grid.append(r)
+            new_size = int(sqrt(len(n_grid)))
+            r_grid = []
+            for row in range(new_size):
+                r = []
+                for column in range(new_size):
+                    r.append(Tile(n_grid[row * new_size + column]))
+                r_grid.append(r)
+        except:
+            new_size = 5
+            r_grid = [[Tile() for i in range(new_size)] for j in range(new_size)]
 
         return r_grid, new_size
 
