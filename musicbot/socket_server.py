@@ -201,7 +201,7 @@ class SocketServer:
             volume = str(round(player.volume, 2))
         else:
             artist = " "
-            song_title = "NOT PLAYING"
+            song_title = "NOT CONNECTED TO A CHANNEL"
             cover_url = "http://i.imgur.com/nszu54A.jpg"
             playing = "STOPPED"
             duration = "0"
