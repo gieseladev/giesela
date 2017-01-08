@@ -110,7 +110,7 @@ class MusicBot(discord.Client):
         self.cb = Cleverbot()
         self.radio = Radio()
         self.calendar = Calendar(self, asyncio.get_event_loop())
-        self.socket_server = SocketServer(self, asyncio.get_event_loop())
+        self.socket_server = SocketServer(self)
         self.shortener = Shortener(
             "Google", api_key="AIzaSyCU67YMHlfTU_PX2ngHeLd-_dUds-m502k")
 
@@ -836,6 +836,40 @@ class MusicBot(discord.Client):
 
         print()
         # t-t-th-th-that's all folks!
+
+    async def socket_summon(self, server_id):
+        server = self.get_server(server_id)
+        if server == None:
+            return
+
+        channels = server.channels
+        target_channel = None
+        max_members = 0
+
+        for ch in channels:
+            if len(ch.voice_members) > max_members:
+                target_channel = ch
+                max_members = len(ch.voice_members)
+                if any([x.bot for x in ch.voice_members]):
+                    max_members -= .5
+
+        if target_channel == None:
+            return
+
+        voice_client = self.the_voice_clients.get(server.id, None)
+        if voice_client is not None and voice_client.channel.server == server:
+            await self.move_voice_client(target_channel)
+            return
+
+        chperms = target_channel.permissions_for(server.me)
+
+        if not chperms.connect:
+            return
+        elif not chperms.speak:
+            return
+
+        await self.get_player(target_channel, create=True)
+        self.socket_server.threaded_broadcast_information()
 
     async def cmd_help(self, channel, leftover_args):
         """
@@ -2408,6 +2442,8 @@ class MusicBot(discord.Client):
         """
 
         channelID = " ".join(leftover_args)
+        if channelID.lower() == "home":
+            channelID = "MusicBot's reign"
 
         if channelID.lower() in ["bed", "sleep", "hell", "church", "school", "work", "666666666666666666"]:
             await self.cmd_c(channel, author, "go to" + channelID)

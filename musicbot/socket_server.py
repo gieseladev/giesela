@@ -1,3 +1,4 @@
+import asyncio
 import time
 from socket import *
 from threading import Thread
@@ -7,9 +8,8 @@ from .spotify import SpotifyTrack
 
 class SocketServer:
 
-    def __init__(self, musicbot, loop):
+    def __init__(self, musicbot):
         self.musicbot = musicbot
-        self.loop = loop
         self.host = ""
         self.port = 5005
         self.buf_size = 1024
@@ -131,6 +131,12 @@ class SocketServer:
                     player = self.musicbot.players[server_id]
                 else:
                     player = None
+
+                if leftover[0] == "SUMMON":
+                    try:
+                        asyncio.run_coroutine_threadsafe(self.musicbot.socket_summon(server_id), self.musicbot.loop)
+                    except:
+                        pass
 
                 if player is not None:
                     if leftover[0] == "PLAY_PAUSE":
