@@ -122,6 +122,7 @@ class MusicPlayer(EventEmitter):
         self.skipRepeat = False
 
         self.loop.create_task(self.websocket_check())
+        self.bot.socket_server.threaded_broadcast_information()
 
     @property
     def volume(self):
@@ -196,6 +197,7 @@ class MusicPlayer(EventEmitter):
         self.playlist.clear()
         self._events.clear()
         self._kill_current_player()
+        self.bot.socket_server.threaded_broadcast_information()
 
     def _playback_finished(self):
         entry = self._current_entry
