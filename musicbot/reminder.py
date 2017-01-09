@@ -72,8 +72,8 @@ class Reminder:
     def __repr__(self):
         return "Reminder(***REMOVED******REMOVED***, ***REMOVED******REMOVED***, ***REMOVED******REMOVED***, ***REMOVED******REMOVED***, ***REMOVED******REMOVED***)".format(repr(self.name), repr(self.expiry_date), repr(self.action), repr(self.repeat_every), repr(self.repeat_end))
 
-    def on_expire(self, musicbot, loop):
-        asyncio.run_coroutine_threadsafe(self.action.act(musicbot), loop)
+    def on_expire(self, musicbot):
+        asyncio.run_coroutine_threadsafe(self.action.act(musicbot), musicbot.loop)
 
         if self.repeat_every is not None:
             next_expiry_date = datetime.now() + self.repeat_every
@@ -95,9 +95,8 @@ class Reminder:
 
 class Calendar:
 
-    def __init__(self, musicbot, e_loop):
+    def __init__(self, musicbot):
         self.musicbot = musicbot
-        self.e_loop = e_loop
         self.reminders = []
         self.run_loop = None
         self.running = False
@@ -139,7 +138,7 @@ class Calendar:
                 delete_reminders = []
                 for reminder in self.reminders:
                     if reminder.is_due:
-                        if reminder.on_expire(self.musicbot, self.e_loop):
+                        if reminder.on_expire(self.musicbot):
                             delete_reminders.append(reminder)
                     if lowest_delay is None or reminder.seconds_until < lowest_delay:
                         lowest_delay = reminder.seconds_until
