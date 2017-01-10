@@ -109,7 +109,7 @@ class MusicBot(discord.Client):
         self.downloader = downloader.Downloader(download_folder='audio_cache')
         self.cb = Cleverbot()
         self.radio = Radio()
-        self.calendar = Calendar(self, asyncio.get_event_loop())
+        self.calendar = Calendar(self)
         self.socket_server = SocketServer(self)
         self.shortener = Shortener(
             "Google", api_key="AIzaSyCU67YMHlfTU_PX2ngHeLd-_dUds-m502k")
