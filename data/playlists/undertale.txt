@@ -1,2322 +1,2253 @@
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 89,
   "expected_filename": "audio_cache\\youtube-s7RRgF5Ve_E-Undertale_OST_-_001_-_Once_Upon_A_Time.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=s7RRgF5Ve_E",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 001 - Once Upon A Time",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 32,
   "expected_filename": "audio_cache\\youtube-kRT9vY2f7tg-Undertale_OST_-_002_-_Start_Menu.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=kRT9vY2f7tg",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 002 - Start Menu",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 23,
   "expected_filename": "audio_cache\\youtube-83jGCWCcBzc-Undertale_OST_-_003_-_Your_Best_Friend.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=83jGCWCcBzc",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 003 - Your Best Friend",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 58,
   "expected_filename": "audio_cache\\youtube-B69GfSqEZEs-Undertale_OST_-_004_-_Fallen_Down.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=B69GfSqEZEs",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 004 - Fallen Down",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 92,
   "expected_filename": "audio_cache\\youtube-QyPR77rg1to-Undertale_OST_-_005_-_Ruins.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=QyPR77rg1to",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 005 - Ruins",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 57,
   "expected_filename": "audio_cache\\youtube-rHU4rpQUshg-Undertale_OST_-_006_-_Uwa_So_Temperate.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=rHU4rpQUshg",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 006 - Uwa!! So Temperate\u266b",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
-  "duration": 22,
-  "expected_filename": "audio_cache\\youtube-t62zFJATVPM-Undertale_OST_-_007_-_Anticipation.webm",
-  "filename": null,
-  "version": 1,
   "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=t62zFJATVPM",
-  "type": "URLPlaylistEntry",
-  "title": "Undertale OST: 007 - Anticipation",
   "meta": ***REMOVED***
     "channel": ***REMOVED***
-      "type": "Channel",
       "id": "226402503422509058",
+      "type": "Channel",
       "name": "musicbot"
     ***REMOVED***,
     "author": ***REMOVED***
-      "type": "Member",
       "id": "203302899277627392",
+      "type": "Member",
       "name": "siku2"
     ***REMOVED***
-  ***REMOVED***
-***REMOVED***
-;
-***REMOVED***
-  "duration": 17,
-  "expected_filename": "audio_cache\\youtube-OSPbX0lkTmQ-Undertale_OST_-_008_-_Unnecessary_Tension.webm",
-  "filename": null,
+  ***REMOVED***,
   "version": 1,
-  "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=OSPbX0lkTmQ",
-  "type": "URLPlaylistEntry",
-  "title": "Undertale OST: 008 - Unnecessary Tension",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
-;
-***REMOVED***
+  "filename": null,
   "duration": 57,
   "expected_filename": "audio_cache\\youtube-JRU6GnETSN4-Undertale_OST_-_009_-_Enemy_Approaching.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=JRU6GnETSN4",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 009 - Enemy Approaching",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 57,
   "expected_filename": "audio_cache\\youtube-Zz1bfhtKsHM-Undertale_OST_-_010_-_Ghost_Fight.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=Zz1bfhtKsHM",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 010 - Ghost Fight",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 50,
   "expected_filename": "audio_cache\\youtube-W1i4mTyidOc-Undertale_OST_-_011_-_Determination.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=W1i4mTyidOc",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 011 - Determination",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 123,
   "expected_filename": "audio_cache\\youtube-5_E_y1AWAfc-Undertale_OST_-_012_-_Home.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=5_E_y1AWAfc",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 012 - Home",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 123,
   "expected_filename": "audio_cache\\youtube-ANEsXjSiYxI-Undertale_OST_-_013_-_Home_Music_Box.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=ANEsXjSiYxI",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 013 - Home (Music Box)",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 109,
   "expected_filename": "audio_cache\\youtube-xflkF-sqNaM-Undertale_OST_-_014_-_Heartache.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=xflkF-sqNaM",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 014 - Heartache",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 51,
   "expected_filename": "audio_cache\\youtube-Zzo6L3wsf8c-Undertale_OST_-_015_-_sans..webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=Zzo6L3wsf8c",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 015 - sans.",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 33,
   "expected_filename": "audio_cache\\youtube-FKdtstAo6iU-Undertale_OST_-_016_-_Nyeh_Heh_Heh.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=FKdtstAo6iU",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 016 - Nyeh Heh Heh!",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 104,
   "expected_filename": "audio_cache\\youtube-8BIeGdBjJiU-Undertale_OST_-_017_-_Snowy.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=8BIeGdBjJiU",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 017 - Snowy",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 30,
   "expected_filename": "audio_cache\\youtube-XnG7HG8bmkU-Undertale_OST_-_018_-_Uwa_So_Holiday.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=XnG7HG8bmkU",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 018 - Uwa!! So Holiday\u266b",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 7,
   "expected_filename": "audio_cache\\youtube-a1OLiuNLpEs-Undertale_OST_-_019_-_Dogbass.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=a1OLiuNLpEs",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 019 - Dogbass",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 45,
   "expected_filename": "audio_cache\\youtube-gC11HJ99Egs-Undertale_OST_-_020_-_Mysterious_Place.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=gC11HJ99Egs",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 020 - Mysterious Place",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 37,
   "expected_filename": "audio_cache\\youtube-woPff-Tpkns-Undertale_OST_-_021_-_Dogsong.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=woPff-Tpkns",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 021 - Dogsong",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 76,
   "expected_filename": "audio_cache\\youtube-z6LmMCuGjfA-Undertale_OST_-_022_-_Snowdin_Town.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=z6LmMCuGjfA",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 022 - Snowdin Town",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 50,
   "expected_filename": "audio_cache\\youtube-jCQ_5Gj6jlg-Undertale_OST_-_023_-_Shop.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=jCQ_5Gj6jlg",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 023 - Shop",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 58,
   "expected_filename": "audio_cache\\youtube-zdeZwAk6ULE-Undertale_OST_-_024_-_Bonetrousle.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=zdeZwAk6ULE",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 024 - Bonetrousle",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 117,
   "expected_filename": "audio_cache\\youtube-dtYwq4aBr0E-Undertale_OST_-_025_-_Dating_Start.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=dtYwq4aBr0E",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 025 - Dating Start!",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 26,
   "expected_filename": "audio_cache\\youtube-ShK_Tj-Ee3Y-Undertale_OST_-_026_-_Dating_Tense.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=ShK_Tj-Ee3Y",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 026 - Dating Tense!",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 36,
   "expected_filename": "audio_cache\\youtube-JQ8bpWkoC7A-Undertale_OST_-_027_-_Dating_Fight.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=JQ8bpWkoC7A",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 027 - Dating Fight!",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 62,
   "expected_filename": "audio_cache\\youtube-sQDiDDb1_9k-Undertale_OST_-_028_-_Premonition.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=sQDiDDb1_9k",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 028 - Premonition",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 19,
   "expected_filename": "audio_cache\\youtube-FhpJN6Khesw-Undertale_OST_-_029_-_Danger_Mystery.m4a",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=FhpJN6Khesw",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 029 - Danger Mystery",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 46,
   "expected_filename": "audio_cache\\youtube-VH6HIHmhvQU-Undertale_OST_-_030_-_Undyne.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=VH6HIHmhvQU",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 030 - Undyne",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 127,
   "expected_filename": "audio_cache\\youtube-v712NiVK5uY-Undertale_OST_-_031_-_Waterfall.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=v712NiVK5uY",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 031 - Waterfall",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 27,
   "expected_filename": "audio_cache\\youtube-PPapt88_3aU-Undertale_OST_-_032_-_Run.m4a",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=PPapt88_3aU",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 032 - Run!",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 32,
   "expected_filename": "audio_cache\\youtube-AsvhQ-soLdg-Undertale_OST_-_033_-_Quiet_Water.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=AsvhQ-soLdg",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 033 - Quiet Water",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 75,
   "expected_filename": "audio_cache\\youtube-eijdNQMYikY-Undertale_OST_-_034_-_Memory.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=eijdNQMYikY",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 034 - Memory",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 25,
   "expected_filename": "audio_cache\\youtube-Z51lfE2k7jU-Undertale_OST_-_035_-_Bird_That_Carries_You_Over_A_Disproportionately_Small_Gap.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=Z51lfE2k7jU",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 035 - Bird That Carries You Over A Disproportionately Small Gap",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 146,
   "expected_filename": "audio_cache\\youtube-N3epEVMNJdY-Undertale_OST_-_036_-_Dummy.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=N3epEVMNJdY",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 036 - Dummy!",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 39,
   "expected_filename": "audio_cache\\youtube-nu_ruGyTNEs-Undertale_OST_-_037_-_Pathetic_House.m4a",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=nu_ruGyTNEs",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 037 - Pathetic House",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 24,
   "expected_filename": "audio_cache\\youtube-K1qjt_1geiI-Undertale_OST_-_038_-_Spooktune.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=K1qjt_1geiI",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 038 - Spooktune",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 25,
   "expected_filename": "audio_cache\\youtube-o251comtNfk-Undertale_OST_-_039_-_Spookwave.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=o251comtNfk",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 039 - Spookwave",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 13,
   "expected_filename": "audio_cache\\youtube-lWP9s44i-YA-Undertale_OST_-_040_-_Ghouliday.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=lWP9s44i-YA",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 040 - Ghouliday",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 56,
   "expected_filename": "audio_cache\\youtube-D4Ximn7nZdc-Undertale_OST_-_041_-_Chill.m4a",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=D4Ximn7nZdc",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 041 - Chill",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 42,
   "expected_filename": "audio_cache\\youtube-ewxyxByJPP0-Undertale_OST_-_042_-_Thundersnail.m4a",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=ewxyxByJPP0",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 042 - Thundersnail",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 58,
   "expected_filename": "audio_cache\\youtube-rNlyF43Te6U-Undertale_OST_-_043_-_Temmie_Village.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=rNlyF43Te6U",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 043 - Temmie Village",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 45,
   "expected_filename": "audio_cache\\youtube-y_qHuDjE3CQ-Undertale_OST_-_044_-_Tem_Shop.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=y_qHuDjE3CQ",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 044 - Tem Shop",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 83,
   "expected_filename": "audio_cache\\youtube-PLDyWLbuptQ-Undertale_OST_-_045_-_NGAHHH.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=PLDyWLbuptQ",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 045 - NGAHHH!!",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 116,
   "expected_filename": "audio_cache\\youtube-qrBB3_rFPjg-Undertale_OST_-_046_-_Spear_of_Justice.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=qrBB3_rFPjg",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 046 - Spear of Justice",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 14,
   "expected_filename": "audio_cache\\youtube-vdE3R3BeH-I-Undertale_OST_-_047_-_Ooo.m4a",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=vdE3R3BeH-I",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 047 - Ooo",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 85,
   "expected_filename": "audio_cache\\youtube-xG2AtyD3elY-Undertale_OST_-_048_-_Alphys.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=xG2AtyD3elY",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 048 - Alphys",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 46,
   "expected_filename": "audio_cache\\youtube-9uwEAugeH8w-Undertale_OST_-_049_-_It_s_Showtime.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=9uwEAugeH8w",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 049 - It's Showtime!",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 63,
   "expected_filename": "audio_cache\\youtube-P0PpyUsvT9w-Undertale_OST_-_050_-_Metal_Crusher.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=P0PpyUsvT9w",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 050 - Metal Crusher",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 142,
   "expected_filename": "audio_cache\\youtube-xLsuam9o9BA-Undertale_OST_-_051_-_Another_Medium.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=xLsuam9o9BA",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 051 - Another Medium",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 34,
   "expected_filename": "audio_cache\\youtube-wyShNqRkQ1I-Undertale_OST_-_052_-_Uwa_So_HEATS.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=wyShNqRkQ1I",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 052 - Uwa!! So HEATS!!?",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 63,
   "expected_filename": "audio_cache\\youtube-HnmHqWU0z5M-Undertale_OST_-_053_-_Stronger_Monsters.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=HnmHqWU0z5M",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 053 - Stronger Monsters",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 88,
   "expected_filename": "audio_cache\\youtube-8wSYwqbp4S4-Undertale_OST_-_054_-_Hotel.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=8wSYwqbp4S4",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 054 - Hotel",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 62,
   "expected_filename": "audio_cache\\youtube-wRUdj1WgwIE-Undertale_OST_-_055_-_Can_You_Really_Call_This_A_Hotel_I_Didn_t_Receive_A_Mint_On_My_Pillow.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=wRUdj1WgwIE",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 055 - Can You Really Call This A Hotel I Didn't Receive A Mint On My Pillow",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 42,
   "expected_filename": "audio_cache\\youtube-qzQyP99Q0pE-Undertale_OST_-_056_-_Confession.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=qzQyP99Q0pE",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 056 - Confession",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 18,
   "expected_filename": "audio_cache\\youtube-4oi_XcH2sAw-Undertale_OST_-_057_-_Live_Report.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=4oi_XcH2sAw",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 057 - Live Report",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 47,
   "expected_filename": "audio_cache\\youtube-Z3ZULqzMutw-Undertale_OST_-_058_-_Death_Report.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=Z3ZULqzMutw",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 058 - Death Report",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 107,
   "expected_filename": "audio_cache\\youtube-YZ3XjVVNagU-Undertale_OST_-_059_-_Spider_Dance.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=YZ3XjVVNagU",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 059 - Spider Dance",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 59,
   "expected_filename": "audio_cache\\youtube-gTCSQevpuOg-Undertale_OST_-_060_-_Wrong_Enemy.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=gTCSQevpuOg",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 060 - Wrong Enemy",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 84,
   "expected_filename": "audio_cache\\youtube-JlKHChbEcps-Undertale_OST_-_061_-_Oh_One_True_Love.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=JlKHChbEcps",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 061 - Oh! One True Love",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 33,
   "expected_filename": "audio_cache\\youtube-5aRE_J4UvYM-Undertale_OST_-_062_-_Oh_Dungeon.m4a",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=5aRE_J4UvYM",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 062 - Oh! Dungeon",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 170,
   "expected_filename": "audio_cache\\youtube-zNd4apsr3WE-Undertale_OST_-_063_-_It_s_Raining_Somewhere_Else.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=zNd4apsr3WE",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 063 - It's Raining Somewhere Else",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 12,
   "expected_filename": "audio_cache\\youtube-qNi_6kXc2cc-Undertale_OST_-_064_-_CORE_Approach.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=qNi_6kXc2cc",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 064 - CORE Approach",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 167,
   "expected_filename": "audio_cache\\youtube-tDuEWw648jo-Undertale_OST_-_065_-_CORE.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=tDuEWw648jo",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 065 - CORE",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 8,
   "expected_filename": "audio_cache\\youtube-pzhYcYwg4vE-Undertale_OST_-_066_-_Last_Episode.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=pzhYcYwg4vE",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 066 - Last Episode!",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 15,
   "expected_filename": "audio_cache\\youtube-r-IvDZ8Wljo-Undertale_OST_-_067_-_Oh_My....webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=r-IvDZ8Wljo",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 067 - Oh My...",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 135,
   "expected_filename": "audio_cache\\youtube-2TgO-tN5wAM-Undertale_OST_-_068_-_Death_by_Glamour.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=2TgO-tN5wAM",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 068 - Death by Glamour",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 107,
   "expected_filename": "audio_cache\\youtube-6nOHNgotIPM-Undertale_OST_-_069_-_For_the_Fans.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=6nOHNgotIPM",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 069 - For the Fans",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
-  "duration": 20,
-  "expected_filename": "audio_cache\\youtube-XDQGK6ztbLs-Undertale_OST_-_070_-_Long_Elevator.m4a",
-  "filename": null,
-  "version": 1,
   "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=XDQGK6ztbLs",
-  "type": "URLPlaylistEntry",
-  "title": "Undertale OST: 070 - Long Elevator",
   "meta": ***REMOVED***
     "channel": ***REMOVED***
-      "type": "Channel",
       "id": "226402503422509058",
+      "type": "Channel",
       "name": "musicbot"
     ***REMOVED***,
     "author": ***REMOVED***
-      "type": "Member",
       "id": "203302899277627392",
+      "type": "Member",
       "name": "siku2"
     ***REMOVED***
-  ***REMOVED***
-***REMOVED***
-;
-***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 382,
   "expected_filename": "audio_cache\\youtube-EBhFHJMVfiI-Undertale_OST_-_071_-_Undertale.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=EBhFHJMVfiI",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 071 - Undertale",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 62,
   "expected_filename": "audio_cache\\youtube-41YOknSl0zw-Undertale_OST_-_072_-_Song_That_Might_Play_When_You_Fight_Sans.m4a",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=41YOknSl0zw",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 072 - Song That Might Play When You Fight Sans",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 133,
   "expected_filename": "audio_cache\\youtube-C4Wv5M9JPao-Undertale_OST_-_073_-_The_Choice.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=C4Wv5M9JPao",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 073 - The Choice",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 14,
   "expected_filename": "audio_cache\\youtube-EUJA3xRyVVM-Undertale_OST_-_074_-_Small_Shock.m4a",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=EUJA3xRyVVM",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 074 - Small Shock",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 31,
   "expected_filename": "audio_cache\\youtube-nJfzf--xqeQ-Undertale_OST_-_075_-_Barrier.m4a",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=nJfzf--xqeQ",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 075 - Barrier",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 21,
   "expected_filename": "audio_cache\\youtube-YivzBeEwzWI-Undertale_Ost_-_076_-_Bergentruckung.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=YivzBeEwzWI",
-  "type": "URLPlaylistEntry",
   "title": "Undertale Ost: 076 - Bergentr\u00fcckung",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 156,
   "expected_filename": "audio_cache\\youtube-hMa4hZQbrms-Undertale_Ost_-_077_-_ASGORE.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=hMa4hZQbrms",
-  "type": "URLPlaylistEntry",
   "title": "Undertale Ost: 077 - ASGORE",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 35,
   "expected_filename": "audio_cache\\youtube-eOqq5kNBVoM-Undertale_Ost_-_078_-_You_Idiot.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=eOqq5kNBVoM",
-  "type": "URLPlaylistEntry",
   "title": "Undertale Ost: 078 - You Idiot",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 240,
   "expected_filename": "audio_cache\\youtube-eUcThHVbrXY-Undertale_Ost_-_079_-_Your_Best_Nightmare.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=eUcThHVbrXY",
-  "type": "URLPlaylistEntry",
   "title": "Undertale Ost: 079 - Your Best Nightmare",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 113,
   "expected_filename": "audio_cache\\youtube-yWjavxcGfqM-Undertale_OST_-_080_-_Finale.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=yWjavxcGfqM",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 080 - Finale",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 209,
   "expected_filename": "audio_cache\\youtube-l3sJ79C1Zyo-Undertale_OST_-_081_-_An_Ending.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=l3sJ79C1Zyo",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 081 - An Ending",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 19,
   "expected_filename": "audio_cache\\youtube-zEAN2dna9To-Undertale_OST_-_082_-_She_s_Playing_Piano.m4a",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=zEAN2dna9To",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 082 - She's Playing Piano",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 126,
   "expected_filename": "audio_cache\\youtube-y49b8aiQVBg-Undertale_OST_-_083_-_Here_We_Are.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=y49b8aiQVBg",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 083 - Here We Are",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 80,
   "expected_filename": "audio_cache\\youtube-71u0i6J-Qes-Undertale_OST_-_084_-_Amalgam.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=71u0i6J-Qes",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 084 - Amalgam",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 151,
   "expected_filename": "audio_cache\\youtube-cGBMTAGzWPs-Undertale_OST_-_085_-_Fallen_Down_Reprise.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=cGBMTAGzWPs",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 085 - Fallen Down (Reprise)",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 122,
   "expected_filename": "audio_cache\\youtube-B4qdpiad_Q0-Undertale_Ost_-_086_-_Don_t_Give_Up.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=B4qdpiad_Q0",
-  "type": "URLPlaylistEntry",
   "title": "Undertale Ost: 086 - Don't Give Up",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 181,
   "expected_filename": "audio_cache\\youtube-tz82xbLvK_k-Undertale_Ost_-_087_-_Hopes_and_Dreams.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=tz82xbLvK_k",
-  "type": "URLPlaylistEntry",
   "title": "Undertale Ost: 087 - Hopes and Dreams",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 21,
   "expected_filename": "audio_cache\\youtube-pumVu-WWhKM-Undertale_Ost_-_088_-_Burn_in_Despair.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=pumVu-WWhKM",
-  "type": "URLPlaylistEntry",
   "title": "Undertale Ost: 088 - Burn in Despair!",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 113,
   "expected_filename": "audio_cache\\youtube-mZRP7nQkfrM-Undertale_Ost_-_089_-_SAVE_the_World.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=mZRP7nQkfrM",
-  "type": "URLPlaylistEntry",
   "title": "Undertale Ost: 089 - SAVE the World",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 125,
   "expected_filename": "audio_cache\\youtube-IkOK8tdEsFY-Undertale_OST_-_090_-_His_Theme.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=IkOK8tdEsFY",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 090 - His Theme",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 19,
   "expected_filename": "audio_cache\\youtube-6nQbkE1DS0o-Undertale_OST_-_091_-_Final_Power.m4a",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=6nQbkE1DS0o",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 091 - Final Power",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 284,
   "expected_filename": "audio_cache\\youtube-WgRfPc1lfJk-Undertale_OST_-_092_-_Reunited.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=WgRfPc1lfJk",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 092 - Reunited",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 32,
   "expected_filename": "audio_cache\\youtube-brP9Q08kEfk-Undertale_OST_-_093_-_Menu_Full.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=brP9Q08kEfk",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 093 - Menu (Full)",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 114,
   "expected_filename": "audio_cache\\youtube-E-fyLcHg4iM-Undertale_OST_-_094_-_Respite.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=E-fyLcHg4iM",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 094 - Respite",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 252,
   "expected_filename": "audio_cache\\youtube-x_P5smsopK0-Undertale_OST_-_095_-_Bring_It_In_Guys.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=x_P5smsopK0",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 095 - Bring It In, Guys!",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 135,
   "expected_filename": "audio_cache\\youtube-5P8V4mP5RLg-Undertale_Ost_-_096_-_Last_Goodbye.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=5P8V4mP5RLg",
-  "type": "URLPlaylistEntry",
   "title": "Undertale Ost: 096 - Last Goodbye",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 34,
   "expected_filename": "audio_cache\\youtube-ML6OV8fG74w-Undertale_Ost_-_097_-_But_the_Earth_Refused_to_Die.m4a",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=ML6OV8fG74w",
-  "type": "URLPlaylistEntry",
   "title": "Undertale Ost: 097 - But the Earth Refused to Die",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 157,
   "expected_filename": "audio_cache\\youtube-aWBtpBwzzdM-Undertale_Ost_-_098_-_Battle_Against_a_True_Hero.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=aWBtpBwzzdM",
-  "type": "URLPlaylistEntry",
   "title": "Undertale Ost: 098 - Battle Against a True Hero",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 31,
   "expected_filename": "audio_cache\\youtube-mwrUem9vM_A-Undertale_Ost_-_099_-_Power_of_-NEO-.m4a",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=mwrUem9vM_A",
-  "type": "URLPlaylistEntry",
   "title": "Undertale Ost: 099 - Power of -NEO-",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
+  "downloaded": false,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "id": "226402503422509058",
+      "type": "Channel",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "id": "203302899277627392",
+      "type": "Member",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
   "duration": 156,
   "expected_filename": "audio_cache\\youtube-c5daGZ96QGU-Undertale_OST_-_100_-_Megalovania.webm",
-  "filename": null,
-  "version": 1,
-  "downloaded": false,
   "url": "https://www.youtube.com/watch?v=c5daGZ96QGU",
-  "type": "URLPlaylistEntry",
   "title": "Undertale OST: 100 - Megalovania",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    ***REMOVED***
-  ***REMOVED***
+  "type": "URLPlaylistEntry"
 ***REMOVED***
 ;
 ***REMOVED***
-  "duration": 31,
-  "expected_filename": "audio_cache\\youtube-BGpJrPY563A-Undertale_OST_-_101_-_Good_Night.webm",
-  "filename": null,
-  "version": 1,
   "downloaded": false,
-  "url": "https://www.youtube.com/watch?v=BGpJrPY563A",
-  "type": "URLPlaylistEntry",
-  "title": "Undertale OST: 101 - Good Night",
   "meta": ***REMOVED***
     "channel": ***REMOVED***
-      "type": "Channel",
       "id": "226402503422509058",
+      "type": "Channel",
       "name": "musicbot"
     ***REMOVED***,
     "author": ***REMOVED***
-      "type": "Member",
       "id": "203302899277627392",
+      "type": "Member",
       "name": "siku2"
     ***REMOVED***
-  ***REMOVED***
+  ***REMOVED***,
+  "version": 1,
+  "filename": null,
+  "duration": 31,
+  "expected_filename": "audio_cache\\youtube-BGpJrPY563A-Undertale_OST_-_101_-_Good_Night.webm",
+  "url": "https://www.youtube.com/watch?v=BGpJrPY563A",
+  "title": "Undertale OST: 101 - Good Night",
+  "type": "URLPlaylistEntry"
 ***REMOVED***
