@@ -1,3 +1,4 @@
+import asyncio
 import time
 from socket import *
 from threading import Thread
@@ -7,9 +8,8 @@ from .spotify import SpotifyTrack
 
 class SocketServer:
 
-    def __init__(self, musicbot, loop):
+    def __init__(self, musicbot):
         self.musicbot = musicbot
-        self.loop = loop
         self.host = ""
         self.port = 5005
         self.buf_size = 1024
@@ -132,6 +132,12 @@ class SocketServer:
                 else:
                     player = None
 
+                if leftover[0] == "SUMMON":
+                    try:
+                        asyncio.run_coroutine_threadsafe(self.musicbot.socket_summon(server_id), self.musicbot.loop)
+                    except:
+                        pass
+
                 if player is not None:
                     if leftover[0] == "PLAY_PAUSE":
                         if player.is_paused:
@@ -166,21 +172,23 @@ class SocketServer:
         c_socket.close()
 
     def get_player_values(self, server_id):
+        artist = " "
+        song_title = "NOT CONNECTED TO A CHANNEL"
+        cover_url = "http://i.imgur.com/nszu54A.jpg"
+        playing = "UNCONNECTED"
+        duration = "0"
+        progress = "0"
+        volume = ".5"
+
         if server_id in self.musicbot.players:
             player = self.musicbot.players[server_id]
             if player.current_entry is None:
-                artist = " "
-                song_title = "None"
-                cover_url = "http://i.imgur.com/nszu54A.jpg"
+                song_title = "NONE"
                 playing = "STOPPED"
-                duration = "0"
-                progress = "0"
             elif type(player.current_entry).__name__ == "StreamPlaylistEntry":
                 artist = "STREAM"
                 song_title = player.current_entry.title.upper()
-                cover_url = "http://i.imgur.com/nszu54A.jpg"
                 playing = "PLAYING" if player.is_playing else "PAUSED"
-                duration = "0"
                 progress = str(round(player.progress, 2))
             else:
                 spotify_track = SpotifyTrack.from_query(
@@ -190,22 +198,12 @@ class SocketServer:
                     song_title = spotify_track.song_name
                     cover_url = spotify_track.cover_url
                 else:
-                    artist = " "
                     song_title = spotify_track.query.upper()
-                    cover_url = "http://i.imgur.com/nszu54A.jpg"
 
                 playing = "PLAYING" if player.is_playing else "PAUSED"
                 duration = str(player.current_entry.duration)
                 progress = str(round(player.progress, 2))
 
             volume = str(round(player.volume, 2))
-        else:
-            artist = " "
-            song_title = "NOT CONNECTED TO A CHANNEL"
-            cover_url = "http://i.imgur.com/nszu54A.jpg"
-            playing = "UNCONNECTED"
-            duration = "0"
-            progress = "0"
-            volume = ".5"
 
         return artist, song_title, cover_url, playing, duration, progress, volume
