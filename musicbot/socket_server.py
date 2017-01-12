@@ -128,14 +128,14 @@ class SocketServer:
                 request = parts[0]
                 server_id = parts[1]
                 author_id = parts[2]
+                leftover = parts[3:]
                 if server_id.lower() not in ["USER_IDENTIFICATION"]:
                     self.server_ids[c_socket] = server_id
-                leftover = parts[3:]
             except:
                 print("[SOCKETSERVER] Socket received malformed message")
                 break
 
-            if request == "REQUEST" and leftover[0] == "SEND_INFORMATION":
+            if request == "REQUEST" and len(leftover) > 0 and leftover[0] == "SEND_INFORMATION":
                 response = "INFORMATION;***REMOVED***artist***REMOVED***;***REMOVED***song_title***REMOVED***;***REMOVED***play_status***REMOVED***;***REMOVED***cover_url***REMOVED***;***REMOVED***progress***REMOVED***;***REMOVED***duration***REMOVED***;***REMOVED***volume***REMOVED***"
 
                 artist, song_title, cover_url, playing, duration, progress, volume = self.get_player_values(
