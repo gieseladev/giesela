@@ -47,11 +47,10 @@ class SocketServer:
                 sck = sock
                 break
 
-        self.awaiting_registeration.pop(sck)
-
         if sck is None:
             return False
         else:
+            self.awaiting_registeration.pop(sck)
             response = "USERINFORMATION;{};{}".format(server_id, author_id)
             sck.sendall("{}=={}".format(
                 len(response), response).encode("utf-8"))
