@@ -147,7 +147,7 @@ class SocketServer:
                 c_socket.sendall("***REMOVED******REMOVED***==***REMOVED******REMOVED***".format(
                     len(response), response).encode("utf-8"))
             elif request == "REQUEST" and server_id == "USER_IDENTIFICATION":
-                token = leftover[author_id]
+                token = author_id
                 print("[SOCKETSERVER] requested a user identification with token " + token)
                 self.awaiting_registeration[c_socket] = token.lower()
 
