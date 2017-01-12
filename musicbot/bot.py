@@ -512,7 +512,7 @@ class MusicBot(discord.Client):
             if channel.type is not ChannelType.text:
                 continue
 
-            msg = await self.safe_send_message(channel, "Hello there,\nMy name is {}!\n\n*Type {}help to find out more.".format(self.user.mention, self.config.command_prefix))
+            msg = await self.safe_send_message(channel, "Hello there,\nMy name is {}!\n\n*Type {}help to find out more.*".format(self.user.mention, self.config.command_prefix))
             if msg is not None:
                 return
 
@@ -3724,7 +3724,8 @@ class MusicBot(discord.Client):
         # Action(channel=player.voice_client.channel, entry=await player.playlist.get_entry("https://www.youtube.com/watch?v=Z1iOusznthU"))
         # Action(channel=server.get_member("203510202421477376"),
         # msg_content="Is this le works?!")
-        action = Action(channel=channel, msg_content="**An hour has passed!**")
+        action = Action(
+            channel=channel, msg_content="**An hour has passed!**", delete_msg_after=5)
         self.calendar.create_reminder("test", datetime.now(
         ) + timedelta(seconds=0), action, repeat_every=timedelta(hours=1))
 
@@ -3737,6 +3738,19 @@ class MusicBot(discord.Client):
         """
         count = len(self.socket_server.connections)
         return Response("There {} currently {} mobile user{}".format("is" if count == 1 else "are", count, "s" if count != 1 else ""))
+
+    async def cmd_register(self, author, server, token):
+        """
+        Usage:
+            {command_prefix}register token
+
+        Use this function to register your phone in order to control the musicbot
+        """
+
+        if await self.socket_server.register_handler(token, server.id, author.id):
+            return Response("Successful")
+        else:
+            return Response("Something went wrong there")
 
     async def cmd_disconnect(self, server):
         """

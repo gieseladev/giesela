@@ -6,7 +6,7 @@ from threading import Thread
 
 class Action:
 
-    def __init__(self, channel=None, msg_content=None, source_url=None, source_location=None, entry=None, callback=None, playlist_name=None):
+    def __init__(self, channel=None, msg_content=None, delete_msg_after=0, delete_old_message=True, source_url=None, source_location=None, entry=None, callback=None, playlist_name=None):
         self.send_message = False
         self.play_online_media = False
         self.play_local_media = False
@@ -23,6 +23,8 @@ class Action:
             if msg_content is not None:
                 self.send_message = True
                 self.msg_content = msg_content
+                self.delete_old = delete_old_message
+                self.delete_after = delete_msg_after
 
             if entry is not None:
                 self.play_entry = True
@@ -38,9 +40,16 @@ class Action:
                 self.play_local_media = True
                 self.source_location = source_location
 
-    async def act(self, musicbot):
+    async def act(self, musicbot, reminder):
         if self.send_message:
-            await musicbot.safe_send_message(self.channel, self.msg_content)
+            expire_in = 0
+            if self.delete_old:
+                if reminder.repeat_every is not None:
+                    expire_in = reminder.repeat_every.total_seconds()
+            if self.delete_after > 0:
+                expire_in = min(expire_in, self.delete_after)
+
+            await musicbot.safe_send_message(self.channel, self.msg_content, expire_in=expire_in)
 
         if self.call_back:
             await callback()
@@ -73,7 +82,7 @@ class Reminder:
         return "Reminder({}, {}, {}, {}, {})".format(repr(self.name), repr(self.expiry_date), repr(self.action), repr(self.repeat_every), repr(self.repeat_end))
 
     def on_expire(self, musicbot):
-        asyncio.run_coroutine_threadsafe(self.action.act(musicbot), musicbot.loop)
+        asyncio.run_coroutine_threadsafe(self.action.act(musicbot, self), musicbot.loop)
 
         if self.repeat_every is not None:
             next_expiry_date = datetime.now() + self.repeat_every
