@@ -17,6 +17,7 @@ class SocketServer:
         self.connections = []
         self.server_ids = {}
         self.stop_threads = False
+        self.awaiting_registeration = {}
 
         try:
             main_socket = socket(AF_INET, SOCK_STREAM)
@@ -37,6 +38,24 @@ class SocketServer:
 
         self.main_socket.close()
         print("[SOCKETSERVER] Shutdown!")
+
+    async def register_handler(self, token, server_id, author_id):
+        sck = None
+
+        for sock, tok in self.awaiting_registeration.items():
+            if tok.lower() == token.lower():
+                sck = sock
+                break
+
+        self.awaiting_registeration.pop(sck)
+
+        if sck is None:
+            return False
+        else:
+            response = "USERINFORMATION;{};{}".format(server_id, author_id)
+            sck.sendall("{}=={}".format(
+                len(response), response).encode("utf-8"))
+            return True
 
     def threaded_broadcast_information(self):
         work_thread = Thread(target=self._broadcast_information)
@@ -109,8 +128,10 @@ class SocketServer:
                 parts = msg.split(";")
                 request = parts[0]
                 server_id = parts[1]
-                self.server_ids[c_socket] = server_id
-                leftover = parts[2:]
+                author_id = parts[2]
+                if server_id.lower() not in ["USER_IDENTIFICATION"]:
+                    self.server_ids[c_socket] = server_id
+                leftover = parts[3:]
             except:
                 print("[SOCKETSERVER] Socket received malformed message")
                 break
@@ -126,6 +147,11 @@ class SocketServer:
                 #print("[SOCKETSERVER] Socket sent data")
                 c_socket.sendall("{}=={}".format(
                     len(response), response).encode("utf-8"))
+            elif request == "REQUEST" and server_id == "USER_IDENTIFICATION":
+                token = leftover[author_id]
+                print("[SOCKETSERVER] requested a user identification with token " + token)
+                self.awaiting_registeration[c_socket] = token.lower()
+
             elif request == "COMMAND":
                 if server_id in self.musicbot.players:
                     player = self.musicbot.players[server_id]
@@ -134,7 +160,8 @@ class SocketServer:
 
                 if leftover[0] == "SUMMON":
                     try:
-                        asyncio.run_coroutine_threadsafe(self.musicbot.socket_summon(server_id), self.musicbot.loop)
+                        asyncio.run_coroutine_threadsafe(
+                            self.musicbot.socket_summon(server_id), self.musicbot.loop)
                     except:
                         pass
 
@@ -142,30 +169,30 @@ class SocketServer:
                     if leftover[0] == "PLAY_PAUSE":
                         if player.is_paused:
                             player.resume()
-                            print("[SOCKETSERVER] Resumed")
+                            print("[SOCKETSERVER] " + author_id + " Resumed")
                         elif player.is_playing:
                             player.pause()
-                            print("[SOCKETSERVER] Paused")
+                            print("[SOCKETSERVER] " + author_id + " Paused")
                     elif leftover[0] == "SKIP":
                         player.skip()
-                        print("[SOCKETSERVER] Skipped")
+                        print("[SOCKETSERVER] " + author_id + " Skipped")
                     elif leftover[0] == "VOLUMECHANGE":
                         before_vol = player.volume
                         player.volume = float(leftover[1])
-                        print("[SOCKETSERVER] Changed volume from {} to {}".format(
+                        print("[SOCKETSERVER] " + author_id + " Changed volume from {} to {}".format(
                             before_vol, player.volume))
 
         to_delete = None
         for i in range(len(self.connections)):
             if self.connections[i][1] == c_socket:
                 to_delete = self.connections[i]
-                print("[SOCKETSERVER] Shutting down connection: " +
+                print("[SOCKETSERVER] " + author_id + " Shutting down connection: " +
                       str(self.connections[i][2]))
 
         if to_delete is not None:
             self.connections.remove(to_delete)
         else:
-            print("[SOCKETSERVER] Couldn't remove this connection from list")
+            print("[SOCKETSERVER] " + author_id + " Couldn't remove this connection from list")
 
         self.server_ids.pop(c_socket, None)
         c_socket.shutdown(SHUT_RDWR)
