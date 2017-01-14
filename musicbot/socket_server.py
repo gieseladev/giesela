@@ -64,12 +64,12 @@ class SocketServer:
         to_delete = []
         for sock, server_id in self.server_ids.items():
             try:
-                response = "INFORMATION;{artist};{song_title};{video_url};{play_status};{cover_url};{progress};{duration};{volume}"
+                response = "INFORMATION;{artist};{song_title};{video_id};{play_status};{cover_url};{progress};{duration};{volume}"
 
-                artist, song_title, video_url, cover_url, playing, duration, progress, volume = self.get_player_values(
+                artist, song_title, video_id, cover_url, playing, duration, progress, volume = self.get_player_values(
                     server_id)
 
-                response = response.format(artist=artist, song_title=song_title, video_url=video_url,
+                response = response.format(artist=artist, song_title=song_title, video_id=video_id,
                                            play_status=playing, cover_url=cover_url, progress=progress, duration=duration, volume=volume)
                 #print("I sent\n\n{}\n\n========".format(response))
                 #print("[SOCKETSERVER] Broadcasted information")
@@ -136,12 +136,12 @@ class SocketServer:
                 break
 
             if request == "REQUEST" and len(leftover) > 0 and leftover[0] == "SEND_INFORMATION":
-                response = "INFORMATION;{artist};{song_title};{video_url};{play_status};{cover_url};{progress};{duration};{volume}"
+                response = "INFORMATION;{artist};{song_title};{video_id};{play_status};{cover_url};{progress};{duration};{volume}"
 
-                artist, song_title, video_url, cover_url, playing, duration, progress, volume = self.get_player_values(
+                artist, song_title, video_id, cover_url, playing, duration, progress, volume = self.get_player_values(
                     server_id)
 
-                response = response.format(artist=artist, song_title=song_title, video_url=video_url,
+                response = response.format(artist=artist, song_title=song_title, video_id=video_id,
                                            play_status=playing, cover_url=cover_url, progress=progress, duration=duration, volume=volume)
                 #print("[SOCKETSERVER] Socket sent data")
                 c_socket.sendall("{}=={}".format(
@@ -202,7 +202,7 @@ class SocketServer:
     def get_player_values(self, server_id):
         artist = " "
         song_title = "NOT CONNECTED TO A CHANNEL"
-        video_url = " "
+        video_id = " "
         cover_url = "http://i.imgur.com/nszu54A.jpg"
         playing = "UNCONNECTED"
         duration = "0"
@@ -219,7 +219,9 @@ class SocketServer:
                 song_title = player.current_entry.title.upper()
                 playing = "PLAYING" if player.is_playing else "PAUSED"
                 progress = str(round(player.progress, 2))
-                video_url = player.current_entry.url
+                matches = re.search(
+                    r"(?:[?&]v=|\/embed\/|\/1\/|\/v\/|https:\/\/(?:www\.)?youtu\.be\/)([^&\n?#]+)", player.current_entry.url)
+                video_id = matches.group(1) if matches is not None else " "
             elif type(player.current_entry).__name__ == "URLPlaylistEntry":
                 spotify_track = SpotifyTrack.from_query(
                     player.current_entry.title)
@@ -233,8 +235,10 @@ class SocketServer:
                 playing = "PLAYING" if player.is_playing else "PAUSED"
                 duration = str(player.current_entry.duration)
                 progress = str(round(player.progress, 2))
-                video_url = player.current_entry.url
+                matches = re.search(
+                    r"(?:[?&]v=|\/embed\/|\/1\/|\/v\/|https:\/\/(?:www\.)?youtu\.be\/)([^&\n?#]+)", player.current_entry.url)
+                video_id = matches.group(1) if matches is not None else " "
 
             volume = str(round(player.volume, 2))
 
-        return artist, song_title, video_url, cover_url, playing, duration, progress, volume
+        return artist, song_title, video_id, cover_url, playing, duration, progress, volume
