@@ -1,4 +1,5 @@
 import asyncio
+import re
 import time
 from socket import *
 from threading import Thread
@@ -64,13 +65,13 @@ class SocketServer:
         to_delete = []
         for sock, server_id in self.server_ids.items():
             try:
-                response = "INFORMATION;***REMOVED***artist***REMOVED***;***REMOVED***song_title***REMOVED***;***REMOVED***play_status***REMOVED***;***REMOVED***cover_url***REMOVED***;***REMOVED***progress***REMOVED***;***REMOVED***duration***REMOVED***;***REMOVED***volume***REMOVED***"
+                response = "INFORMATION;***REMOVED***artist***REMOVED***;***REMOVED***song_title***REMOVED***;***REMOVED***video_id***REMOVED***;***REMOVED***play_status***REMOVED***;***REMOVED***cover_url***REMOVED***;***REMOVED***progress***REMOVED***;***REMOVED***duration***REMOVED***;***REMOVED***volume***REMOVED***"
 
-                artist, song_title, cover_url, playing, duration, progress, volume = self.get_player_values(
+                artist, song_title, video_id, cover_url, playing, duration, progress, volume = self.get_player_values(
                     server_id)
 
-                response = response.format(artist=artist, song_title=song_title, play_status=playing,
-                                           cover_url=cover_url, progress=progress, duration=duration, volume=volume)
+                response = response.format(artist=artist, song_title=song_title, video_id=video_id,
+                                           play_status=playing, cover_url=cover_url, progress=progress, duration=duration, volume=volume)
                 #print("I sent\n\n***REMOVED******REMOVED***\n\n========".format(response))
                 #print("[SOCKETSERVER] Broadcasted information")
                 sock.sendall("***REMOVED******REMOVED***==***REMOVED******REMOVED***".format(
@@ -136,19 +137,20 @@ class SocketServer:
                 break
 
             if request == "REQUEST" and len(leftover) > 0 and leftover[0] == "SEND_INFORMATION":
-                response = "INFORMATION;***REMOVED***artist***REMOVED***;***REMOVED***song_title***REMOVED***;***REMOVED***play_status***REMOVED***;***REMOVED***cover_url***REMOVED***;***REMOVED***progress***REMOVED***;***REMOVED***duration***REMOVED***;***REMOVED***volume***REMOVED***"
+                response = "INFORMATION;***REMOVED***artist***REMOVED***;***REMOVED***song_title***REMOVED***;***REMOVED***video_id***REMOVED***;***REMOVED***play_status***REMOVED***;***REMOVED***cover_url***REMOVED***;***REMOVED***progress***REMOVED***;***REMOVED***duration***REMOVED***;***REMOVED***volume***REMOVED***"
 
-                artist, song_title, cover_url, playing, duration, progress, volume = self.get_player_values(
+                artist, song_title, video_id, cover_url, playing, duration, progress, volume = self.get_player_values(
                     server_id)
 
-                response = response.format(artist=artist, song_title=song_title, play_status=playing,
-                                           cover_url=cover_url, progress=progress, duration=duration, volume=volume)
+                response = response.format(artist=artist, song_title=song_title, video_id=video_id,
+                                           play_status=playing, cover_url=cover_url, progress=progress, duration=duration, volume=volume)
                 #print("[SOCKETSERVER] Socket sent data")
                 c_socket.sendall("***REMOVED******REMOVED***==***REMOVED******REMOVED***".format(
                     len(response), response).encode("utf-8"))
             elif request == "REQUEST" and server_id == "USER_IDENTIFICATION":
                 token = author_id
-                print("[SOCKETSERVER] requested a user identification with token " + token)
+                print(
+                    "[SOCKETSERVER] requested a user identification with token " + token)
                 self.awaiting_registeration[c_socket] = token.lower()
 
             elif request == "COMMAND":
@@ -180,6 +182,21 @@ class SocketServer:
                         player.volume = float(leftover[1])
                         print("[SOCKETSERVER] " + author_id + " Changed volume from ***REMOVED******REMOVED*** to ***REMOVED******REMOVED***".format(
                             before_vol, player.volume))
+                    elif leftover[0] == "PLAY":
+                        video_url = leftover[1]
+                        try:
+                            asyncio.run_coroutine_threadsafe(
+                                player.playlist.add_entry(video_url), self.musicbot.loop)
+                        except WrongEntryTypeError:
+                            try:
+                                asyncio.run_coroutine_threadsafe(
+                                    player.playlist.import_from(video_url), self.musicbot.loop)
+                            except:
+                                print("[SOCKETSERVER] " + author_id +
+                                      " Could not play \"***REMOVED******REMOVED***\"".format(video_url))
+
+                        print("[SOCKETSERVER] " + author_id +
+                              " Playing \"***REMOVED******REMOVED***\"".format(video_url))
 
         to_delete = None
         for i in range(len(self.connections)):
@@ -191,7 +208,8 @@ class SocketServer:
         if to_delete is not None:
             self.connections.remove(to_delete)
         else:
-            print("[SOCKETSERVER] " + author_id + " Couldn't remove this connection from list")
+            print("[SOCKETSERVER] " + author_id +
+                  " Couldn't remove this connection from list")
 
         self.server_ids.pop(c_socket, None)
         c_socket.shutdown(SHUT_RDWR)
@@ -200,6 +218,7 @@ class SocketServer:
     def get_player_values(self, server_id):
         artist = " "
         song_title = "NOT CONNECTED TO A CHANNEL"
+        video_id = " "
         cover_url = "http://i.imgur.com/nszu54A.jpg"
         playing = "UNCONNECTED"
         duration = "0"
@@ -216,7 +235,10 @@ class SocketServer:
                 song_title = player.current_entry.title.upper()
                 playing = "PLAYING" if player.is_playing else "PAUSED"
                 progress = str(round(player.progress, 2))
-            else:
+                matches = re.search(
+                    r"(?:[?&]v=|\/embed\/|\/1\/|\/v\/|https:\/\/(?:www\.)?youtu\.be\/)([^&\n?#]+)", player.current_entry.url)
+                video_id = matches.group(1) if matches is not None else " "
+            elif type(player.current_entry).__name__ == "URLPlaylistEntry":
                 spotify_track = SpotifyTrack.from_query(
                     player.current_entry.title)
                 if spotify_track.certainty > .4:
@@ -229,7 +251,10 @@ class SocketServer:
                 playing = "PLAYING" if player.is_playing else "PAUSED"
                 duration = str(player.current_entry.duration)
                 progress = str(round(player.progress, 2))
+                matches = re.search(
+                    r"(?:[?&]v=|\/embed\/|\/1\/|\/v\/|https:\/\/(?:www\.)?youtu\.be\/)([^&\n?#]+)", player.current_entry.url)
+                video_id = matches.group(1) if matches is not None else " "
 
             volume = str(round(player.volume, 2))
 
-        return artist, song_title, cover_url, playing, duration, progress, volume
+        return artist, song_title, video_id, cover_url, playing, duration, progress, volume
