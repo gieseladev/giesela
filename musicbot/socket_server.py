@@ -181,6 +181,21 @@ class SocketServer:
                         player.volume = float(leftover[1])
                         print("[SOCKETSERVER] " + author_id + " Changed volume from {} to {}".format(
                             before_vol, player.volume))
+                    elif leftover[0] == "PLAY":
+                        video_url = leftover[1]
+                        try:
+                            asyncio.run_coroutine_threadsafe(
+                                player.playlist.add_entry(video_url), self.musicbot.loop)
+                        except WrongEntryTypeError:
+                            try:
+                                asyncio.run_coroutine_threadsafe(
+                                    player.playlist.import_from(video_url), self.musicbot.loop)
+                            except:
+                                print("[SOCKETSERVER] " + author_id +
+                                      " Could not play \"{}\"".format(video_url))
+
+                        print("[SOCKETSERVER] " + author_id +
+                              " Playing \"{}\"".format(video_url))
 
         to_delete = None
         for i in range(len(self.connections)):
