@@ -76,13 +76,19 @@ class BasePlaylistEntry:
 
 class URLPlaylistEntry(BasePlaylistEntry):
 
-    def __init__(self, playlist, url, title, duration=0, expected_filename=None, **meta):
+    def __init__(self, playlist, url, title, duration=0, start_seconds=0, end_seconds=None, expected_filename=None, **meta):
         super().__init__()
 
         self.playlist = playlist
         self.url = url
         self.title = title
         self.duration = duration
+        if end_seconds is None:
+            self.end_seconds = duration
+        else:
+            self.end_seconds = end_seconds
+
+        self.start_seconds = start_seconds
         self.expected_filename = expected_filename
         self.meta = meta
 
@@ -156,7 +162,9 @@ class URLPlaylistEntry(BasePlaylistEntry):
             'downloaded': self.is_downloaded,
             'filename': self.filename,
             "expected_filename": self.expected_filename,
-            'meta': meta_dict
+            'meta': meta_dict,
+            "start_seconds": self.start_seconds,
+            "end_seconds": self.end_seconds
             # Actually I think I can just getattr instead, getattr(discord,
             # type)
         }

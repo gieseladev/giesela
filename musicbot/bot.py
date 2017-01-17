@@ -3739,6 +3739,20 @@ class MusicBot(discord.Client):
         count = len(self.socket_server.connections)
         return Response("There {} currently {} mobile user{}".format("is" if count == 1 else "are", count, "s" if count != 1 else ""))
 
+    @owner_only
+    async def cmd_execute(self, player, channel, author, server, leftover_args):
+        statement = " ".join(leftover_args)
+        try:
+            result = eval(statement)
+            return Response(str(result))
+        except:
+            return Response("Something went wrong with your code.")
+
+    async def cmd_test(self, player, channel, author):
+        en = await player.playlist.get_entry("https://www.youtube.com/watch?v=6Mgqbai3fKo")
+        en.start_seconds = 120
+        player.playlist.add_entry(en)
+
     async def cmd_register(self, author, server, token):
         """
         Usage:
