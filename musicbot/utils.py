@@ -44,6 +44,19 @@ def sane_round_int(x):
     return int(decimal.Decimal(x).quantize(1, rounding=decimal.ROUND_HALF_UP))
 
 
+def format_time_ffmpeg(s):
+    total_msec = s * 1000
+    total_seconds = s
+    total_minutes = s / 60
+    total_hours = s / 3600
+    msec = int(total_msec % 1000)
+    sec = int(total_seconds % 60 - (msec / 3600000))
+    mins = int(total_minutes % 60 - (sec / 3600) - (msec / 3600000))
+    hours = int(total_hours - (mins / 60) - (sec / 3600) - (msec / 3600000))
+
+    return "***REMOVED***:02d***REMOVED***:***REMOVED***:02d***REMOVED***:***REMOVED***:02d***REMOVED***.***REMOVED***:03d***REMOVED***".format(hours, mins, sec, msec)
+
+
 def round_to_interval(num, interval=5):
     return int(interval * round(float(num) / interval))
 
