@@ -295,10 +295,10 @@ class MusicPlayer(EventEmitter):
 
                 self._current_player = self._monkeypatch_player(self.voice_client.create_ffmpeg_player(
                     entry.filename,
-                    before_options="-nostdin -ss " +
-                    format_time_ffmpeg(int(entry.start_seconds)),
-                    options="-vn -t ***REMOVED******REMOVED*** -b:a 128k".format(
-                        format_time_ffmpeg(int(entry.end_seconds))),
+                    #before_options="-nostdin -ss " + format_time_ffmpeg(int(entry.start_seconds)),
+                    before_options="-nostdin",
+                    #options="-vn -t ***REMOVED******REMOVED*** -b:a 128k".format(format_time_ffmpeg(int(entry.end_seconds))),
+                    options="-vn -b:a 128k",
                     stderr=subprocess.PIPE,
                     # Threadsafe call soon, b/c after will be called from the
                     # voice playback thread.
