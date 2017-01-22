@@ -107,7 +107,7 @@ class MusicBot(discord.Client):
         self.blacklist = set(load_file(self.config.blacklist_file))
         self.autoplaylist = load_file(self.config.auto_playlist_file)
         self.downloader = downloader.Downloader(download_folder='audio_cache')
-        self.cb = Cleverbot()
+        self.cb = Cleverbot("musicbot")
         self.radio = Radio()
         self.calendar = Calendar(self)
         self.socket_server = SocketServer(self)
