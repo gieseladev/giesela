@@ -3714,20 +3714,232 @@ class MusicBot(discord.Client):
         await self.safe_send_message(author, "The file is being uploaded. Please wait a second.", expire_in=15)
         await self.send_file(author, entry.filename, content="Here you go:")
 
-    async def cmd_reminder(self, channel, author, player, server):
+    async def cmd_reminder(self, channel, author, player, server, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***reminder
+            ***REMOVED***command_prefix***REMOVED***reminder create
+            ***REMOVED***command_prefic***REMOVED***reminder list
 
-        WIP
+        Create a reminder!
         """
-        # Action(channel=player.voice_client.channel, entry=await player.playlist.get_entry("https://www.youtube.com/watch?v=Z1iOusznthU"))
-        # Action(channel=server.get_member("203510202421477376"),
-        # msg_content="Is this le works?!")
-        action = Action(
-            channel=channel, msg_content="**An hour has passed!**", delete_msg_after=5)
-        self.calendar.create_reminder("test", datetime.now(
-        ) + timedelta(seconds=0), action, repeat_every=timedelta(hours=1))
+
+        if len(leftover_args) < 1:
+            return Response("Please git gud!")
+
+        command = leftover_args[0].lower().strip()
+
+        if(command == "create"):
+            import parsedatetime
+            cal = parsedatetime.Calendar()
+
+            reminder_name = None
+            reminder_due = None
+            reminder_repeat = None
+            reminder_end = None
+            reminder_action = None
+
+            # find out the name
+            def check(m):
+                return len(m.content) > 3
+
+            msg = await self.safe_send_message(channel, "How do you want to call your reminder?")
+            response = await self.wait_for_message(author=author, channel=channel, check=check)
+            reminder_name = response.content
+            await self.safe_delete_message(msg)
+            await self.safe_delete_message(response)
+
+            # find out the due date
+            while True:
+                msg = await self.safe_send_message(channel, "When is it due?")
+                response = await self.wait_for_message(author=author, channel=channel)
+
+                reminder_due = datetime(
+                    *cal.parse(response.content.strip().lower())[0][:6])
+                await self.safe_delete_message(msg)
+                if reminder_due is not None:
+                    self.safe_delete_message(response)
+                    break
+
+                self.safe_delete_message(response)
+
+            # repeated reminder
+            while True:
+                msg = await self.safe_send_message(channel, "When should this reminder be repeated? (\"never\" if not at all)")
+                response = await self.wait_for_message(author=author, channel=channel)
+                await self.safe_delete_message(msg)
+                if(response.content.lower().strip() in ("n", "no", "nope", "never")):
+                    self.safe_delete_message(response)
+                    reminder_repeat = None
+                    break
+
+                reminder_repeat = datetime(
+                    *cal.parse(response.content.strip().lower())[0][:6]) - datetime.now()
+                if reminder_repeat is not None:
+                    self.safe_delete_message(response)
+                    break
+
+                self.safe_delete_message(response)
+
+            # reminder end
+            if reminder_repeat is not None:
+                while True:
+                    msg = await self.safe_send_message(channel, "When should this reminder stop being repeated? (\"never\" if not at all)")
+                    response = await self.wait_for_message(author=author, channel=channel)
+                    await self.safe_delete_message(msg)
+                    if(response.content.lower().strip() in ("n", "no", "nope", "never")):
+                        self.safe_delete_message(response)
+                        reminder_end = None
+                        break
+
+                    reminder_end = datetime(
+                        *cal.parse(response.content.strip().lower())[0][:6])
+                    if reminder_end is not None:
+                        self.safe_delete_message(response)
+                        break
+
+                    self.safe_delete_message(response)
+
+            # action
+            def check(m):
+                try:
+                    if 4 > int(m.content) > 0:
+                        return True
+                    else:
+                        return False
+                except:
+                    return False
+
+            selected_action = 0
+
+            while True:
+                msg = await self.safe_send_message(channel, "**Select one:**\n```\n1: Send a message\n2: Play a video\n3: Play an alarm sound```")
+                response = await self.wait_for_message(author=author, channel=channel)
+                await self.safe_delete_message(msg)
+                selected_action = int(response.content)
+
+                if selected_action is not None:
+                    self.safe_delete_message(response)
+                    break
+
+                self.safe_delete_message(response)
+
+            # action 1 (message)
+            if selected_action == 1:
+                action_message = "Your reminder ****REMOVED***reminder.name***REMOVED**** is due"
+                action_channel = None
+                action_delete_after = 0
+                action_delete_previous = False
+
+                # find message
+                msg = await self.safe_send_message(channel, "What should the message say?")
+                response = await self.wait_for_message(author=author, channel=channel)
+                action_message = response.content
+                await self.safe_delete_message(msg)
+                await self.safe_delete_message(response)
+
+                # find channel
+                msg = await self.safe_send_message(channel, "To which channel should the message be sent?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"me\" for a private message\n:white_small_square: \"this\" to select the current channel\n:white_small_square: You can also @mention people or #mention a channel")
+                response = await self.wait_for_message(author=author, channel=channel)
+
+                if len(response.channel_mentions) > 0:
+                    action_channel = response.channel_mentions[0]
+                elif len(response.mentions) > 0:
+                    action_channel = response.mentions[0]
+                elif response.content.lower().strip() == "me":
+                    action_channel = author
+                elif response.content.lower().strip() == "this":
+                    action_channel = channel
+                else:
+                    return Response("not yet implemented :P")
+
+                await self.safe_delete_message(msg)
+                await self.safe_delete_message(response)
+
+                # find delete after time
+                def check(m):
+                    try:
+                        if m.content.lower().strip() in ["never", "no"] or int(m.content.strip()) >= 0:
+                            return True
+                        else:
+                            return False
+                    except:
+                        return False
+
+                msg = await self.safe_send_message(channel, "When should the message be deleted? (\"never\" for not at all)")
+                response = await self.wait_for_message(author=author, channel=channel, check=check)
+                if response.content.lower().strip() in ["never", "no"]:
+                    action_delete_after = 0
+                else:
+                    action_delete_after = int(response.content.strip())
+
+                await self.safe_delete_message(msg)
+                await self.safe_delete_message(response)
+
+                # find if delete old message
+                if reminder_repeat is not None:
+                    msg = await self.safe_send_message(channel, "Before sending a new message, should the old one be deleted?")
+                    response = await self.wait_for_message(author=author, channel=channel)
+                    if response.content.lower().strip() in ["y", "yes"]:
+                        action_delete_previous = True
+
+                    await self.safe_delete_message(msg)
+                    await self.safe_delete_message(response)
+
+                reminder_action = Action(channel=action_channel, msg_content=action_message,
+                                         delete_msg_after=action_delete_after, delete_old_message=action_delete_previous)
+
+            # action 2 (play url)
+            elif selected_action == 2:
+                pass
+
+            # action 3 (play predefined)
+            elif selected_action == 3:
+                pass
+
+            # finalizing
+            self.calendar.create_reminder(
+                reminder_name, reminder_due, reminder_action, repeat_every=reminder_repeat, repeat_end=reminder_end)
+            return Response("Created a reminder called ****REMOVED******REMOVED****\ndue: ***REMOVED******REMOVED***\nrepeat: ***REMOVED******REMOVED***\nrepeat end: ***REMOVED******REMOVED***\naction: ***REMOVED******REMOVED***".format(reminder_name, reminder_due, reminder_repeat, reminder_end, reminder_action))
+
+        elif(command == "list"):
+            if len(self.calendar.reminders) < 1:
+                return Response("There are no reminders")
+
+            text = ""
+            for reminder in self.calendar.reminders:
+                text += "****REMOVED***.name***REMOVED****".format(reminder)
+
+            return Response(text)
+        #
+        #
+        # return
+        #
+        # real_args = " ".join(leftover_args).split(",")
+        #
+        # if len(real_args) < 2:
+        #     return Response("You're a failure!")
+        #
+        # reminder_name = real_args[0].strip()
+        # due_date_string = real_args[1].strip().lower()
+        #
+        # repeat_date_string = real_args[2].strip().lower() if len(real_args) > 2 else None
+        # repeat_end_string = real_args[3].strip().lower() if len(real_args) > 3 else None
+        #
+        # import parsedatetime
+        #
+        # cal = parsedatetime.Calendar()
+        #
+        # due_date = datetime(*cal.parse(due_date_string)[0][:6])
+        # repeat_every = datetime(*cal.parse(repeat_date_string)[0][:6]) - datetime.now() if repeat_date_string is not None else None
+        # repeat_end = datetime(*cal.parse(repeat_end_string)[0][:6]) if repeat_end_string is not None else None
+        #
+        # print("\n***REMOVED******REMOVED***\nin: ***REMOVED******REMOVED***;\nevery: ***REMOVED******REMOVED***;\nuntil: ***REMOVED******REMOVED***".format(reminder_name, due_date, repeat_every, repeat_end))
+        #
+        # action = Action(
+        #     channel=channel, msg_content="**Reminder ***REMOVED***reminder.name***REMOVED*** is due!**", delete_msg_after=5)
+        #
+        # self.calendar.create_reminder(reminder_name, due_date, action, repeat_every=repeat_every, repeat_end=repeat_end)
+        # return Response("Got it, I'll remind you!")
 
     async def cmd_mobile(self, channel):
         """
@@ -3747,11 +3959,6 @@ class MusicBot(discord.Client):
             return Response(str(result))
         except:
             return Response("Something went wrong with your code.")
-
-    async def cmd_test(self, player, channel, author):
-        en = await player.playlist.get_entry("https://www.youtube.com/watch?v=6Mgqbai3fKo")
-        en.start_seconds = 120
-        player.playlist.add_entry(en)
 
     async def cmd_register(self, author, server, token):
         """
