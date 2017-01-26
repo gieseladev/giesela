@@ -3755,12 +3755,12 @@ class MusicBot(discord.Client):
 
                 reminder_due = datetime(
                     *cal.parse(response.content.strip().lower())[0][:6])
-                await self.safe_delete_message(msg)
+                await await self.safe_delete_message(msg)
                 if reminder_due is not None:
-                    self.safe_delete_message(response)
+                    await self.safe_delete_message(response)
                     break
 
-                self.safe_delete_message(response)
+                await self.safe_delete_message(response)
 
             # repeated reminder
             while True:
@@ -3768,17 +3768,17 @@ class MusicBot(discord.Client):
                 response = await self.wait_for_message(author=author, channel=channel)
                 await self.safe_delete_message(msg)
                 if(response.content.lower().strip() in ("n", "no", "nope", "never")):
-                    self.safe_delete_message(response)
+                    await self.safe_delete_message(response)
                     reminder_repeat = None
                     break
 
                 reminder_repeat = datetime(
                     *cal.parse(response.content.strip().lower())[0][:6]) - datetime.now()
                 if reminder_repeat is not None:
-                    self.safe_delete_message(response)
+                    await self.safe_delete_message(response)
                     break
 
-                self.safe_delete_message(response)
+                await self.safe_delete_message(response)
 
             # reminder end
             if reminder_repeat is not None:
@@ -3787,17 +3787,17 @@ class MusicBot(discord.Client):
                     response = await self.wait_for_message(author=author, channel=channel)
                     await self.safe_delete_message(msg)
                     if(response.content.lower().strip() in ("n", "no", "nope", "never")):
-                        self.safe_delete_message(response)
+                        await self.safe_delete_message(response)
                         reminder_end = None
                         break
 
                     reminder_end = datetime(
                         *cal.parse(response.content.strip().lower())[0][:6])
                     if reminder_end is not None:
-                        self.safe_delete_message(response)
+                        await self.safe_delete_message(response)
                         break
 
-                    self.safe_delete_message(response)
+                    await self.safe_delete_message(response)
 
             # action
             def check(m):
@@ -3818,10 +3818,10 @@ class MusicBot(discord.Client):
                 selected_action = int(response.content)
 
                 if selected_action is not None:
-                    self.safe_delete_message(response)
+                    await self.safe_delete_message(response)
                     break
 
-                self.safe_delete_message(response)
+                await self.safe_delete_message(response)
 
             # action 1 (message)
             if selected_action == 1:
