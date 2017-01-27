@@ -21,11 +21,18 @@ class Radios:
 
     def get_station(self, station_name):
         for section in self.config.sections():
-            if section == paper_name or self.config.get(section, "name").lower() == station_name:
+            if section == station_name or self.config.get(section, "name").lower() == station_name:
                 return StationInfo(self.config.get(section, "name"), self.config.get(section, "language"), self.config.get(section, "cover"), self.config.get(section, "url"))
 
         return None
 
+    def get_all_stations(self):
+        return_list = []
+
+        for section in self.config.sections():
+            return_list.append(StationInfo(self.config.get(section, "name"), self.config.get(section, "language"), self.config.get(section, "cover"), self.config.get(section, "url")))
+
+        return return_list
 
 class StationInfo:
 
