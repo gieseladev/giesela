@@ -45,7 +45,7 @@ from .papers import Papers
 from .permissions import Permissions, PermissionsDefaults
 from .player import MusicPlayer
 from .playlist import Playlist
-from .radio import Radio
+from .radios import Radios
 from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .socket_server import SocketServer
@@ -91,7 +91,7 @@ class MusicBot(discord.Client):
                            "translate", "help", "say", "broadcast", "news", "game", "wiki"]
     lonelyModeRunning = False
 
-    def __init__(self, config_file=ConfigDefaults.options_file, papers_file=ConfigDefaults.papers_file, playlists_file=ConfigDefaults.playlists_file, perms_file=PermissionsDefaults.perms_file):
+    def __init__(self, config_file=ConfigDefaults.options_file, radios_file=ConfigDefaults.radios_file, papers_file=ConfigDefaults.papers_file, playlists_file=ConfigDefaults.playlists_file, perms_file=PermissionsDefaults.perms_file):
         self.players = {}
         self.the_voice_clients = {}
         self.locks = defaultdict(asyncio.Lock)
@@ -100,6 +100,7 @@ class MusicBot(discord.Client):
 
         self.config = Config(config_file)
         self.papers = Papers(papers_file)
+        self.radios = Radios(radios_file)
         self.playlists = Playlists(playlists_file)
         self.permissions = Permissions(
             perms_file, grant_all=[self.config.owner_id])
@@ -117,7 +118,6 @@ class MusicBot(discord.Client):
         self.exit_signal = None
         self.init_ok = False
         self.cached_client_id = None
-        self.use_radio = False
 
         if not self.autoplaylist:
             print("Warning: Autoplaylist is empty, disabling.")
@@ -467,13 +467,7 @@ class MusicBot(discord.Client):
 
     async def on_player_finished_playing(self, player, **_):
         if not player.playlist.entries and not player.current_entry and (self.config.auto_playlist or self.use_radio):
-            if self.use_radio:
-                song_data = self.radio.get_next_song()
-                if song_data is not None:
-                    search_split_stuff = "{arg[1]} {arg[0]}".format(
-                        arg=song_data).split()
-                    await self.forceplay(player, search_split_stuff[1:], search_split_stuff[0])
-            elif self.config.auto_playlist:
+            if self.config.auto_playlist:
                 while self.autoplaylist:
                     song_url = choice(self.autoplaylist)
                     info = await self.downloader.safe_extract_info(player.playlist.loop, song_url, download=False, process=False)
@@ -2320,9 +2314,6 @@ class MusicBot(discord.Client):
         Play from the autoplaylist.
         """
 
-        if self.use_radio:
-            return Response("Can't use `{0}radio` and `{0}autoplay` at the same time".format(self.config.command_prefix), delete_after=20)
-
         if not self.config.auto_playlist:
             await self.on_player_finished_playing(player)
             self.config.auto_playlist = True
@@ -2333,24 +2324,29 @@ class MusicBot(discord.Client):
 
         # await self.safe_send_message (channel, msgState)
 
-    async def cmd_radio(self, player):
+    async def cmd_radio(self, channel, author, leftover_args):
         """
         Usage:
             {command_prefix}radio
-        Play from a radio stream.
+            {command_prefix}radio station name
+            {command_prefix}radio random
+        Play live radio.
         """
+        if len(leftover_args) > 0 and leftover_args[0].lower().strip() == "random":
+            station = self.radios.get_random_station()
+            await player.playlist.add_stream_entry(station.url, channel=channel, author=author)
+            return Response("Playing\n**{.name}**".format(station), delete_after=60)
+        elif len(leftover_args) > 0:
+            #try to find the radio station
+            search_name = " ".join(leftover_args)
+            station = self.radios.get_station(search_name.lower().strip())
+            if station is not None:
+                await player.playlist.add_stream_entry(station.url, channel=channel, author=author)
+                return Response("Playing\n**{.name}**".format(station), delete_after=60)
 
-        if self.config.auto_playlist:
-            return Response("Can't use `{0}radio` and `{0}autoplay` at the same time".format(self.config.command_prefix), delete_after=20)
+        #help the user find the right station
 
-        if self.use_radio:
-            self.use_radio = False
-            return Response("Thanks for listening to *CapitalFM*", delete_after=40)
-        else:
-            self.use_radio = True
-            self.radio.refresh()
-            await self.on_player_finished_playing(player)
-            return Response("Now playing songs from live radio powered by *CapitalFM*\n <http://www.capitalfm.com>", delete_after=40)
+
 
     async def cmd_say(self, channel, message, leftover_args):
         """
