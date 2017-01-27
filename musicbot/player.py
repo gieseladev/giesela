@@ -178,7 +178,7 @@ class MusicPlayer(EventEmitter):
         raise ValueError('Cannot resume playback from state %s' % self.state)
 
     def pause(self):
-        if str(type(self.current_entry)) == "StreamPlaylistEntry":
+        if type(self.current_entry).__name__ == "StreamPlaylistEntry":
             print("Won't pause because I'm playing a stream")
             return
 

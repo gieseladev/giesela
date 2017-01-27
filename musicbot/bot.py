@@ -2324,7 +2324,7 @@ class MusicBot(discord.Client):
 
         # await self.safe_send_message (channel, msgState)
 
-    async def cmd_radio(self, channel, author, leftover_args):
+    async def cmd_radio(self, player, channel, author, leftover_args):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***radio
@@ -2335,16 +2335,40 @@ class MusicBot(discord.Client):
         if len(leftover_args) > 0 and leftover_args[0].lower().strip() == "random":
             station = self.radios.get_random_station()
             await player.playlist.add_stream_entry(station.url, channel=channel, author=author)
-            return Response("Playing\n*****REMOVED***.name***REMOVED*****".format(station), delete_after=60)
+            return Response("Playing\n*****REMOVED***.name***REMOVED*****".format(station), delete_after=5)
         elif len(leftover_args) > 0:
             #try to find the radio station
             search_name = " ".join(leftover_args)
             station = self.radios.get_station(search_name.lower().strip())
             if station is not None:
                 await player.playlist.add_stream_entry(station.url, channel=channel, author=author)
-                return Response("Playing\n*****REMOVED***.name***REMOVED*****".format(station), delete_after=60)
+                return Response("Playing\n*****REMOVED***.name***REMOVED*****".format(station), delete_after=5)
 
         #help the user find the right station
+
+        def check(m):
+            true = ["y", "yes", "yeah", "yep", "sure"]
+            false = ["n", "no", "nope", "never"]
+
+            return m.content.lower().strip() in true or m.content.lower().strip() in false
+
+        possible_stations = self.radios.get_all_stations()
+        shuffle(possible_stations)
+
+        interface_string = "*****REMOVED***.name***REMOVED*****\n*language:* ***REMOVED***.language***REMOVED***"
+
+        for station in possible_stations:
+            msg = await self.safe_send_message(channel, interface_string.format(station))
+            response = await self.wait_for_message(author=author, channel=channel, check=check)
+            await self.safe_delete_message(msg)
+            play_station = response.content.lower().strip() in ["y", "yes", "yeah", "yep", "sure"]
+            await self.safe_delete_message(response)
+
+            if play_station:
+                await player.playlist.add_stream_entry(station.url, channel=channel, author=author)
+                return Response("Playing\n*****REMOVED***.name***REMOVED*****".format(station), delete_after=5)
+            else:
+                continue
 
     async def cmd_say(self, channel, message, leftover_args):
         """
@@ -3093,33 +3117,33 @@ class MusicBot(discord.Client):
         self.safe_print(emoji)
         await self.safe_delete_message(message)
 
-    async def cmd_9gag(self, channel, message, leftover_args):
-        """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***9gag
-
-        WIP
-        """
-        await self.safe_send_message(channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n     Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
-        # return
-        current_post = get_posts_from_page(number_of_pages=1)[0]
-
-        cached_file = urllib.request.URLopener()
-        saveloc = "cache/pictures/9gag" + current_post["file_format"]
-        cached_file.retrieve(current_post["media_url"], saveloc)
-
-        if current_post["file_format"] == ".mp4":
-            clip = editor.VideoFileClip(saveloc)
-            clip = video.fx.all.resize(clip, newsize=.3)
-            clip.write_gif("cache/pictures/9gag.gif")
-            if os.path.exists(saveloc):
-                os.remove(saveloc)
-            saveloc = "cache/pictures/9gag.gif"
-
-        await self.send_file(channel, saveloc, content="*****REMOVED******REMOVED*****\nUpvotes: ****REMOVED******REMOVED****\nComments: ****REMOVED******REMOVED****".format(re.sub("\*", "\*", current_post["title"]), current_post["votes"], current_post["comments"]))
-
-        if os.path.exists(saveloc):
-            os.remove(saveloc)
+    # async def cmd_9gag(self, channel, message, leftover_args):
+    #     """
+    #     Usage:
+    #         ***REMOVED***command_prefix***REMOVED***9gag
+    #
+    #     WIP
+    #     """
+    #     await self.safe_send_message(channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n     Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
+    #     # return
+    #     current_post = get_posts_from_page(number_of_pages=1)[0]
+    #
+    #     cached_file = urllib.request.URLopener()
+    #     saveloc = "cache/pictures/9gag" + current_post["file_format"]
+    #     cached_file.retrieve(current_post["media_url"], saveloc)
+    #
+    #     if current_post["file_format"] == ".mp4":
+    #         clip = editor.VideoFileClip(saveloc)
+    #         clip = video.fx.all.resize(clip, newsize=.3)
+    #         clip.write_gif("cache/pictures/9gag.gif")
+    #         if os.path.exists(saveloc):
+    #             os.remove(saveloc)
+    #         saveloc = "cache/pictures/9gag.gif"
+    #
+    #     await self.send_file(channel, saveloc, content="*****REMOVED******REMOVED*****\nUpvotes: ****REMOVED******REMOVED****\nComments: ****REMOVED******REMOVED****".format(re.sub("\*", "\*", current_post["title"]), current_post["votes"], current_post["comments"]))
+    #
+    #     if os.path.exists(saveloc):
+    #         os.remove(saveloc)
 
     async def nine_gag_get_section(self, channel, message):
         category_dict = ***REMOVED***"🔥": "hot", "📈": "trending", "🆕": "new"***REMOVED***
@@ -3953,24 +3977,29 @@ class MusicBot(discord.Client):
         # self.calendar.create_reminder(reminder_name, due_date, action, repeat_every=repeat_every, repeat_end=repeat_end)
         # return Response("Got it, I'll remind you!")
 
-    async def cmd_moveus(self, author, message, search_channel = None):
+    async def cmd_moveus(self, server, author, message, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***moveus @mention
-            ***REMOVED***command_prefix***REMOVED***moveus channel id or channel name
+            ***REMOVED***command_prefix***REMOVED***moveus channel name
 
         Move everyone in your current channel to another one!
         """
 
+        if len(leftover_args < 1):
+            return Response("You need to provide a target channel")
+
+        search_channel = " ".join(leftover_args)
+
         if author.voice.voice_channel is None:
             return Response("You're incredibly incompetent to do such a thing!")
 
+        author_channel = author.voice.voice_channel
         target_channel = None
         if len(message.channel_mentions) > 0 and message.channel_mentions[0].type == ChannelType.voice:
             target_channel = message.channel_mentions[0]
         else:
             target_channel = self.get_channel(search_channel)
-            if targetChannel is None:
+            if target_channel is None:
                 for chnl in server.channels:
                     if chnl.name == search_channel and chnl.type == ChannelType.voice:
                         target_channel = chnl
@@ -3980,8 +4009,16 @@ class MusicBot(discord.Client):
         if target_channel is None:
             return Response("Can't resolve the target channel!", delete_after=20)
 
+        s = 0
         for voice_member in author.voice.voice_channel.voice_members:
-            self.move_member(voice_member, target_channel)
+            await self.move_member(voice_member, target_channel)
+            s += 1
+
+        print("moved ***REMOVED******REMOVED*** users from ***REMOVED******REMOVED*** to ***REMOVED******REMOVED***".format(s, author.voice.voice_channel, target_channel))
+
+        if server.me.voice.voice_channel.id == author_channel.id:
+            print("moving myself")
+            await self.get_voice_client(target_channel)
 
     async def cmd_mobile(self, channel):
         """
