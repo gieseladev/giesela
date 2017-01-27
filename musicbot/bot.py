@@ -2445,7 +2445,7 @@ class MusicBot(discord.Client):
         if channelID.lower() == "home":
             channelID = "MusicBot's reign"
 
-        if channelID.lower() in ["bed", "sleep", "hell", "church", "school", "work", "666666666666666666"]:
+        if channelID.lower() in ["bed", "sleep", "hell", "church", "school", "work", "666"]:
             await self.cmd_c(channel, author, "go to" + channelID)
             await self.cmd_shutdown(channel)
             return
@@ -3755,7 +3755,7 @@ class MusicBot(discord.Client):
 
                 reminder_due = datetime(
                     *cal.parse(response.content.strip().lower())[0][:6])
-                await await self.safe_delete_message(msg)
+                await self.safe_delete_message(msg)
                 if reminder_due is not None:
                     await self.safe_delete_message(response)
                     break
@@ -3890,7 +3890,27 @@ class MusicBot(discord.Client):
 
             # action 2 (play url)
             elif selected_action == 2:
-                pass
+                action_source_url = ""
+                action_voice_channel = None
+
+                #find video url
+                msg = await self.safe_send_message(channel, "What's the url of the video you want to play?")
+                response = await self.wait_for_message(author=author, channel=channel)
+                action_source_url = response.content
+                await self.safe_delete_message(msg)
+                await self.safe_delete_message(response)
+
+                #find playback channel
+                msg = await self.safe_send_message(channel, "To which channel should the video be played?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"this\" to select your current channel\n:white_small_square: You can also @mention a voice channel channel")
+                response = await self.wait_for_message(author=author, channel=channel)
+
+                if len(response.channel_mentions) > 0:
+                    action_voice_channel = response.channel_mentions[0]
+                elif response.content.lower().strip() == "this":
+                    return Response("not yet implemented :P")
+                else:
+                    return Response("not yet implemented :P")
+
 
             # action 3 (play predefined)
             elif selected_action == 3:
@@ -3910,8 +3930,6 @@ class MusicBot(discord.Client):
                 text += "*{.name}*".format(reminder)
 
             return Response(text)
-        #
-        #
         # return
         #
         # real_args = " ".join(leftover_args).split(",")
@@ -3940,6 +3958,36 @@ class MusicBot(discord.Client):
         #
         # self.calendar.create_reminder(reminder_name, due_date, action, repeat_every=repeat_every, repeat_end=repeat_end)
         # return Response("Got it, I'll remind you!")
+
+    async def cmd_moveus(self, author, message, search_channel = None):
+        """
+        Usage:
+            {command_prefix}moveus @mention
+            {command_prefix}moveus channel id or channel name
+
+        Move everyone in your current channel to another one!
+        """
+
+        if author.voice.voice_channel is None:
+            return Response("You're incredibly incompetent to do such a thing!")
+
+        target_channel = None
+        if len(message.channel_mentions) > 0 and message.channel_mentions[0].type == ChannelType.voice:
+            target_channel = message.channel_mentions[0]
+        else:
+            target_channel = self.get_channel(search_channel)
+            if targetChannel is None:
+                for chnl in server.channels:
+                    if chnl.name == search_channel and chnl.type == ChannelType.voice:
+                        target_channel = chnl
+                        break
+
+
+        if target_channel is None:
+            return Response("Can't resolve the target channel!", delete_after=20)
+
+        for voice_member in author.voice.voice_channel.voice_members:
+            self.move_member(voice_member, target_channel)
 
     async def cmd_mobile(self, channel):
         """
