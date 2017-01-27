@@ -231,8 +231,15 @@ class SocketServer:
                 song_title = "NONE"
                 playing = "STOPPED"
             elif type(player.current_entry).__name__ == "StreamPlaylistEntry":
-                artist = "STREAM"
-                song_title = player.current_entry.title.upper()
+                if player.current_entry.radio_station_data is not None:
+                    station_data = player.current_entry.radio_station_data
+                    artist = "RADIO"
+                    song_title = station_data.name.upper()
+                    cover_url = station_data.cover
+                else:
+                    artist = "STREAM"
+                    song_title = player.current_entry.title.upper()
+
                 playing = "PLAYING" if player.is_playing else "PAUSED"
                 progress = str(round(player.progress, 2))
                 matches = re.search(
