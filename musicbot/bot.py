@@ -109,7 +109,7 @@ class MusicBot(discord.Client):
         self.autoplaylist = load_file(self.config.auto_playlist_file)
         self.downloader = downloader.Downloader(download_folder='audio_cache')
         self.cb = Cleverbot("musicbot")
-        self.radio = Radio()
+        # self.radio = Radio()
         self.calendar = Calendar(self)
         self.socket_server = SocketServer(self)
         self.shortener = Shortener(
@@ -2345,8 +2345,6 @@ class MusicBot(discord.Client):
                 return Response("Playing\n*****REMOVED***.name***REMOVED*****".format(station), delete_after=60)
 
         #help the user find the right station
-
-
 
     async def cmd_say(self, channel, message, leftover_args):
         """
