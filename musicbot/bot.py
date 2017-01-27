@@ -45,7 +45,7 @@ from .papers import Papers
 from .permissions import Permissions, PermissionsDefaults
 from .player import MusicPlayer
 from .playlist import Playlist
-from .radio import Radio
+from .radios import Radios
 from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .socket_server import SocketServer
@@ -91,7 +91,7 @@ class MusicBot(discord.Client):
                            "translate", "help", "say", "broadcast", "news", "game", "wiki"]
     lonelyModeRunning = False
 
-    def __init__(self, config_file=ConfigDefaults.options_file, papers_file=ConfigDefaults.papers_file, playlists_file=ConfigDefaults.playlists_file, perms_file=PermissionsDefaults.perms_file):
+    def __init__(self, config_file=ConfigDefaults.options_file, radios_file=ConfigDefaults.radios_file, papers_file=ConfigDefaults.papers_file, playlists_file=ConfigDefaults.playlists_file, perms_file=PermissionsDefaults.perms_file):
         self.players = ***REMOVED******REMOVED***
         self.the_voice_clients = ***REMOVED******REMOVED***
         self.locks = defaultdict(asyncio.Lock)
@@ -100,6 +100,7 @@ class MusicBot(discord.Client):
 
         self.config = Config(config_file)
         self.papers = Papers(papers_file)
+        self.radios = Radios(radios_file)
         self.playlists = Playlists(playlists_file)
         self.permissions = Permissions(
             perms_file, grant_all=[self.config.owner_id])
@@ -108,7 +109,7 @@ class MusicBot(discord.Client):
         self.autoplaylist = load_file(self.config.auto_playlist_file)
         self.downloader = downloader.Downloader(download_folder='audio_cache')
         self.cb = Cleverbot("musicbot")
-        self.radio = Radio()
+        # self.radio = Radio()
         self.calendar = Calendar(self)
         self.socket_server = SocketServer(self)
         self.shortener = Shortener(
@@ -117,7 +118,6 @@ class MusicBot(discord.Client):
         self.exit_signal = None
         self.init_ok = False
         self.cached_client_id = None
-        self.use_radio = False
 
         if not self.autoplaylist:
             print("Warning: Autoplaylist is empty, disabling.")
@@ -467,13 +467,7 @@ class MusicBot(discord.Client):
 
     async def on_player_finished_playing(self, player, **_):
         if not player.playlist.entries and not player.current_entry and (self.config.auto_playlist or self.use_radio):
-            if self.use_radio:
-                song_data = self.radio.get_next_song()
-                if song_data is not None:
-                    search_split_stuff = "***REMOVED***arg[1]***REMOVED*** ***REMOVED***arg[0]***REMOVED***".format(
-                        arg=song_data).split()
-                    await self.forceplay(player, search_split_stuff[1:], search_split_stuff[0])
-            elif self.config.auto_playlist:
+            if self.config.auto_playlist:
                 while self.autoplaylist:
                     song_url = choice(self.autoplaylist)
                     info = await self.downloader.safe_extract_info(player.playlist.loop, song_url, download=False, process=False)
@@ -2320,9 +2314,6 @@ class MusicBot(discord.Client):
         Play from the autoplaylist.
         """
 
-        if self.use_radio:
-            return Response("Can't use `***REMOVED***0***REMOVED***radio` and `***REMOVED***0***REMOVED***autoplay` at the same time".format(self.config.command_prefix), delete_after=20)
-
         if not self.config.auto_playlist:
             await self.on_player_finished_playing(player)
             self.config.auto_playlist = True
@@ -2333,24 +2324,51 @@ class MusicBot(discord.Client):
 
         # await self.safe_send_message (channel, msgState)
 
-    async def cmd_radio(self, player):
+    async def cmd_radio(self, player, channel, author, leftover_args):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***radio
-        Play from a radio stream.
+            ***REMOVED***command_prefix***REMOVED***radio station name
+            ***REMOVED***command_prefix***REMOVED***radio random
+        Play live radio.
         """
+        if len(leftover_args) > 0 and leftover_args[0].lower().strip() == "random":
+            station = self.radios.get_random_station()
+            await player.playlist.add_stream_entry(station.url, channel=channel, author=author)
+            return Response("Playing\n*****REMOVED***.name***REMOVED*****".format(station), delete_after=5)
+        elif len(leftover_args) > 0:
+            #try to find the radio station
+            search_name = " ".join(leftover_args)
+            station = self.radios.get_station(search_name.lower().strip())
+            if station is not None:
+                await player.playlist.add_stream_entry(station.url, channel=channel, author=author)
+                return Response("Playing\n*****REMOVED***.name***REMOVED*****".format(station), delete_after=5)
 
-        if self.config.auto_playlist:
-            return Response("Can't use `***REMOVED***0***REMOVED***radio` and `***REMOVED***0***REMOVED***autoplay` at the same time".format(self.config.command_prefix), delete_after=20)
+        #help the user find the right station
 
-        if self.use_radio:
-            self.use_radio = False
-            return Response("Thanks for listening to *CapitalFM*", delete_after=40)
-        else:
-            self.use_radio = True
-            self.radio.refresh()
-            await self.on_player_finished_playing(player)
-            return Response("Now playing songs from live radio powered by *CapitalFM*\n <http://www.capitalfm.com>", delete_after=40)
+        def check(m):
+            true = ["y", "yes", "yeah", "yep", "sure"]
+            false = ["n", "no", "nope", "never"]
+
+            return m.content.lower().strip() in true or m.content.lower().strip() in false
+
+        possible_stations = self.radios.get_all_stations()
+        shuffle(possible_stations)
+
+        interface_string = "*****REMOVED***.name***REMOVED*****\n*language:* ***REMOVED***.language***REMOVED***"
+
+        for station in possible_stations:
+            msg = await self.safe_send_message(channel, interface_string.format(station))
+            response = await self.wait_for_message(author=author, channel=channel, check=check)
+            await self.safe_delete_message(msg)
+            play_station = response.content.lower().strip() in ["y", "yes", "yeah", "yep", "sure"]
+            await self.safe_delete_message(response)
+
+            if play_station:
+                await player.playlist.add_stream_entry(station.url, channel=channel, author=author)
+                return Response("Playing\n*****REMOVED***.name***REMOVED*****".format(station), delete_after=5)
+            else:
+                continue
 
     async def cmd_say(self, channel, message, leftover_args):
         """
@@ -2445,7 +2463,7 @@ class MusicBot(discord.Client):
         if channelID.lower() == "home":
             channelID = "MusicBot's reign"
 
-        if channelID.lower() in ["bed", "sleep", "hell", "church", "school", "work", "666666666666666666"]:
+        if channelID.lower() in ["bed", "sleep", "hell", "church", "school", "work", "666"]:
             await self.cmd_c(channel, author, "go to" + channelID)
             await self.cmd_shutdown(channel)
             return
@@ -3099,33 +3117,33 @@ class MusicBot(discord.Client):
         self.safe_print(emoji)
         await self.safe_delete_message(message)
 
-    async def cmd_9gag(self, channel, message, leftover_args):
-        """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***9gag
-
-        WIP
-        """
-        await self.safe_send_message(channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n     Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
-        # return
-        current_post = get_posts_from_page(number_of_pages=1)[0]
-
-        cached_file = urllib.request.URLopener()
-        saveloc = "cache/pictures/9gag" + current_post["file_format"]
-        cached_file.retrieve(current_post["media_url"], saveloc)
-
-        if current_post["file_format"] == ".mp4":
-            clip = editor.VideoFileClip(saveloc)
-            clip = video.fx.all.resize(clip, newsize=.3)
-            clip.write_gif("cache/pictures/9gag.gif")
-            if os.path.exists(saveloc):
-                os.remove(saveloc)
-            saveloc = "cache/pictures/9gag.gif"
-
-        await self.send_file(channel, saveloc, content="*****REMOVED******REMOVED*****\nUpvotes: ****REMOVED******REMOVED****\nComments: ****REMOVED******REMOVED****".format(re.sub("\*", "\*", current_post["title"]), current_post["votes"], current_post["comments"]))
-
-        if os.path.exists(saveloc):
-            os.remove(saveloc)
+    # async def cmd_9gag(self, channel, message, leftover_args):
+    #     """
+    #     Usage:
+    #         ***REMOVED***command_prefix***REMOVED***9gag
+    #
+    #     WIP
+    #     """
+    #     await self.safe_send_message(channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n     Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
+    #     # return
+    #     current_post = get_posts_from_page(number_of_pages=1)[0]
+    #
+    #     cached_file = urllib.request.URLopener()
+    #     saveloc = "cache/pictures/9gag" + current_post["file_format"]
+    #     cached_file.retrieve(current_post["media_url"], saveloc)
+    #
+    #     if current_post["file_format"] == ".mp4":
+    #         clip = editor.VideoFileClip(saveloc)
+    #         clip = video.fx.all.resize(clip, newsize=.3)
+    #         clip.write_gif("cache/pictures/9gag.gif")
+    #         if os.path.exists(saveloc):
+    #             os.remove(saveloc)
+    #         saveloc = "cache/pictures/9gag.gif"
+    #
+    #     await self.send_file(channel, saveloc, content="*****REMOVED******REMOVED*****\nUpvotes: ****REMOVED******REMOVED****\nComments: ****REMOVED******REMOVED****".format(re.sub("\*", "\*", current_post["title"]), current_post["votes"], current_post["comments"]))
+    #
+    #     if os.path.exists(saveloc):
+    #         os.remove(saveloc)
 
     async def nine_gag_get_section(self, channel, message):
         category_dict = ***REMOVED***"🔥": "hot", "📈": "trending", "🆕": "new"***REMOVED***
@@ -3714,20 +3732,293 @@ class MusicBot(discord.Client):
         await self.safe_send_message(author, "The file is being uploaded. Please wait a second.", expire_in=15)
         await self.send_file(author, entry.filename, content="Here you go:")
 
-    async def cmd_reminder(self, channel, author, player, server):
+    async def cmd_reminder(self, channel, author, player, server, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***reminder
+            ***REMOVED***command_prefix***REMOVED***reminder create
+            ***REMOVED***command_prefic***REMOVED***reminder list
 
-        WIP
+        Create a reminder!
         """
-        # Action(channel=player.voice_client.channel, entry=await player.playlist.get_entry("https://www.youtube.com/watch?v=Z1iOusznthU"))
-        # Action(channel=server.get_member("203510202421477376"),
-        # msg_content="Is this le works?!")
-        action = Action(
-            channel=channel, msg_content="**An hour has passed!**", delete_msg_after=5)
-        self.calendar.create_reminder("test", datetime.now(
-        ) + timedelta(seconds=0), action, repeat_every=timedelta(hours=1))
+
+        if len(leftover_args) < 1:
+            return Response("Please git gud!")
+
+        command = leftover_args[0].lower().strip()
+
+        if(command == "create"):
+            import parsedatetime
+            cal = parsedatetime.Calendar()
+
+            reminder_name = None
+            reminder_due = None
+            reminder_repeat = None
+            reminder_end = None
+            reminder_action = None
+
+            # find out the name
+            def check(m):
+                return len(m.content) > 3
+
+            msg = await self.safe_send_message(channel, "How do you want to call your reminder?")
+            response = await self.wait_for_message(author=author, channel=channel, check=check)
+            reminder_name = response.content
+            await self.safe_delete_message(msg)
+            await self.safe_delete_message(response)
+
+            # find out the due date
+            while True:
+                msg = await self.safe_send_message(channel, "When is it due?")
+                response = await self.wait_for_message(author=author, channel=channel)
+
+                reminder_due = datetime(
+                    *cal.parse(response.content.strip().lower())[0][:6])
+                await self.safe_delete_message(msg)
+                if reminder_due is not None:
+                    await self.safe_delete_message(response)
+                    break
+
+                await self.safe_delete_message(response)
+
+            # repeated reminder
+            while True:
+                msg = await self.safe_send_message(channel, "When should this reminder be repeated? (\"never\" if not at all)")
+                response = await self.wait_for_message(author=author, channel=channel)
+                await self.safe_delete_message(msg)
+                if(response.content.lower().strip() in ("n", "no", "nope", "never")):
+                    await self.safe_delete_message(response)
+                    reminder_repeat = None
+                    break
+
+                reminder_repeat = datetime(
+                    *cal.parse(response.content.strip().lower())[0][:6]) - datetime.now()
+                if reminder_repeat is not None:
+                    await self.safe_delete_message(response)
+                    break
+
+                await self.safe_delete_message(response)
+
+            # reminder end
+            if reminder_repeat is not None:
+                while True:
+                    msg = await self.safe_send_message(channel, "When should this reminder stop being repeated? (\"never\" if not at all)")
+                    response = await self.wait_for_message(author=author, channel=channel)
+                    await self.safe_delete_message(msg)
+                    if(response.content.lower().strip() in ("n", "no", "nope", "never")):
+                        await self.safe_delete_message(response)
+                        reminder_end = None
+                        break
+
+                    reminder_end = datetime(
+                        *cal.parse(response.content.strip().lower())[0][:6])
+                    if reminder_end is not None:
+                        await self.safe_delete_message(response)
+                        break
+
+                    await self.safe_delete_message(response)
+
+            # action
+            def check(m):
+                try:
+                    if 4 > int(m.content) > 0:
+                        return True
+                    else:
+                        return False
+                except:
+                    return False
+
+            selected_action = 0
+
+            while True:
+                msg = await self.safe_send_message(channel, "**Select one:**\n```\n1: Send a message\n2: Play a video\n3: Play an alarm sound```")
+                response = await self.wait_for_message(author=author, channel=channel)
+                await self.safe_delete_message(msg)
+                selected_action = int(response.content)
+
+                if selected_action is not None:
+                    await self.safe_delete_message(response)
+                    break
+
+                await self.safe_delete_message(response)
+
+            # action 1 (message)
+            if selected_action == 1:
+                action_message = "Your reminder ****REMOVED***reminder.name***REMOVED**** is due"
+                action_channel = None
+                action_delete_after = 0
+                action_delete_previous = False
+
+                # find message
+                msg = await self.safe_send_message(channel, "What should the message say?")
+                response = await self.wait_for_message(author=author, channel=channel)
+                action_message = response.content
+                await self.safe_delete_message(msg)
+                await self.safe_delete_message(response)
+
+                # find channel
+                msg = await self.safe_send_message(channel, "To which channel should the message be sent?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"me\" for a private message\n:white_small_square: \"this\" to select the current channel\n:white_small_square: You can also @mention people or #mention a channel")
+                response = await self.wait_for_message(author=author, channel=channel)
+
+                if len(response.channel_mentions) > 0:
+                    action_channel = response.channel_mentions[0]
+                elif len(response.mentions) > 0:
+                    action_channel = response.mentions[0]
+                elif response.content.lower().strip() == "me":
+                    action_channel = author
+                elif response.content.lower().strip() == "this":
+                    action_channel = channel
+                else:
+                    return Response("not yet implemented :P")
+
+                await self.safe_delete_message(msg)
+                await self.safe_delete_message(response)
+
+                # find delete after time
+                def check(m):
+                    try:
+                        if m.content.lower().strip() in ["never", "no"] or int(m.content.strip()) >= 0:
+                            return True
+                        else:
+                            return False
+                    except:
+                        return False
+
+                msg = await self.safe_send_message(channel, "When should the message be deleted? (\"never\" for not at all)")
+                response = await self.wait_for_message(author=author, channel=channel, check=check)
+                if response.content.lower().strip() in ["never", "no"]:
+                    action_delete_after = 0
+                else:
+                    action_delete_after = int(response.content.strip())
+
+                await self.safe_delete_message(msg)
+                await self.safe_delete_message(response)
+
+                # find if delete old message
+                if reminder_repeat is not None:
+                    msg = await self.safe_send_message(channel, "Before sending a new message, should the old one be deleted?")
+                    response = await self.wait_for_message(author=author, channel=channel)
+                    if response.content.lower().strip() in ["y", "yes"]:
+                        action_delete_previous = True
+
+                    await self.safe_delete_message(msg)
+                    await self.safe_delete_message(response)
+
+                reminder_action = Action(channel=action_channel, msg_content=action_message,
+                                         delete_msg_after=action_delete_after, delete_old_message=action_delete_previous)
+
+            # action 2 (play url)
+            elif selected_action == 2:
+                action_source_url = ""
+                action_voice_channel = None
+
+                #find video url
+                msg = await self.safe_send_message(channel, "What's the url of the video you want to play?")
+                response = await self.wait_for_message(author=author, channel=channel)
+                action_source_url = response.content
+                await self.safe_delete_message(msg)
+                await self.safe_delete_message(response)
+
+                #find playback channel
+                msg = await self.safe_send_message(channel, "To which channel should the video be played?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"this\" to select your current channel\n:white_small_square: You can also @mention a voice channel channel")
+                response = await self.wait_for_message(author=author, channel=channel)
+
+                if len(response.channel_mentions) > 0:
+                    action_voice_channel = response.channel_mentions[0]
+                elif response.content.lower().strip() == "this":
+                    return Response("not yet implemented :P")
+                else:
+                    return Response("not yet implemented :P")
+
+
+            # action 3 (play predefined)
+            elif selected_action == 3:
+                pass
+
+            # finalizing
+            self.calendar.create_reminder(
+                reminder_name, reminder_due, reminder_action, repeat_every=reminder_repeat, repeat_end=reminder_end)
+            return Response("Created a reminder called ****REMOVED******REMOVED****\ndue: ***REMOVED******REMOVED***\nrepeat: ***REMOVED******REMOVED***\nrepeat end: ***REMOVED******REMOVED***\naction: ***REMOVED******REMOVED***".format(reminder_name, reminder_due, reminder_repeat, reminder_end, reminder_action))
+
+        elif(command == "list"):
+            if len(self.calendar.reminders) < 1:
+                return Response("There are no reminders")
+
+            text = ""
+            for reminder in self.calendar.reminders:
+                text += "****REMOVED***.name***REMOVED****".format(reminder)
+
+            return Response(text)
+        # return
+        #
+        # real_args = " ".join(leftover_args).split(",")
+        #
+        # if len(real_args) < 2:
+        #     return Response("You're a failure!")
+        #
+        # reminder_name = real_args[0].strip()
+        # due_date_string = real_args[1].strip().lower()
+        #
+        # repeat_date_string = real_args[2].strip().lower() if len(real_args) > 2 else None
+        # repeat_end_string = real_args[3].strip().lower() if len(real_args) > 3 else None
+        #
+        # import parsedatetime
+        #
+        # cal = parsedatetime.Calendar()
+        #
+        # due_date = datetime(*cal.parse(due_date_string)[0][:6])
+        # repeat_every = datetime(*cal.parse(repeat_date_string)[0][:6]) - datetime.now() if repeat_date_string is not None else None
+        # repeat_end = datetime(*cal.parse(repeat_end_string)[0][:6]) if repeat_end_string is not None else None
+        #
+        # print("\n***REMOVED******REMOVED***\nin: ***REMOVED******REMOVED***;\nevery: ***REMOVED******REMOVED***;\nuntil: ***REMOVED******REMOVED***".format(reminder_name, due_date, repeat_every, repeat_end))
+        #
+        # action = Action(
+        #     channel=channel, msg_content="**Reminder ***REMOVED***reminder.name***REMOVED*** is due!**", delete_msg_after=5)
+        #
+        # self.calendar.create_reminder(reminder_name, due_date, action, repeat_every=repeat_every, repeat_end=repeat_end)
+        # return Response("Got it, I'll remind you!")
+
+    async def cmd_moveus(self, server, author, message, leftover_args):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***moveus channel name
+
+        Move everyone in your current channel to another one!
+        """
+
+        if len(leftover_args < 1):
+            return Response("You need to provide a target channel")
+
+        search_channel = " ".join(leftover_args)
+
+        if author.voice.voice_channel is None:
+            return Response("You're incredibly incompetent to do such a thing!")
+
+        author_channel = author.voice.voice_channel
+        target_channel = None
+        if len(message.channel_mentions) > 0 and message.channel_mentions[0].type == ChannelType.voice:
+            target_channel = message.channel_mentions[0]
+        else:
+            target_channel = self.get_channel(search_channel)
+            if target_channel is None:
+                for chnl in server.channels:
+                    if chnl.name == search_channel and chnl.type == ChannelType.voice:
+                        target_channel = chnl
+                        break
+
+
+        if target_channel is None:
+            return Response("Can't resolve the target channel!", delete_after=20)
+
+        s = 0
+        for voice_member in author.voice.voice_channel.voice_members:
+            await self.move_member(voice_member, target_channel)
+            s += 1
+
+        print("moved ***REMOVED******REMOVED*** users from ***REMOVED******REMOVED*** to ***REMOVED******REMOVED***".format(s, author.voice.voice_channel, target_channel))
+
+        if server.me.voice.voice_channel.id == author_channel.id:
+            print("moving myself")
+            await self.get_voice_client(target_channel)
 
     async def cmd_mobile(self, channel):
         """
@@ -3747,11 +4038,6 @@ class MusicBot(discord.Client):
             return Response(str(result))
         except:
             return Response("Something went wrong with your code.")
-
-    async def cmd_test(self, player, channel, author):
-        en = await player.playlist.get_entry("https://www.youtube.com/watch?v=6Mgqbai3fKo")
-        en.start_seconds = 120
-        player.playlist.add_entry(en)
 
     async def cmd_register(self, author, server, token):
         """

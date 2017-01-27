@@ -41,31 +41,48 @@ class Action:
                 self.source_location = source_location
 
     async def act(self, musicbot, reminder):
-        if self.send_message:
-            expire_in = 0
-            if self.delete_old:
-                if reminder.repeat_every is not None:
-                    expire_in = reminder.repeat_every.total_seconds()
-            if self.delete_after > 0:
-                expire_in = min(expire_in, self.delete_after)
+        try:
+            if self.send_message:
+                expire_in = 0
+                if self.delete_old:
+                    if reminder.repeat_every is not None:
+                        expire_in = reminder.repeat_every.total_seconds()
+                if self.delete_after > 0:
+                    expire_in = min(expire_in, self.delete_after)
 
-            await musicbot.safe_send_message(self.channel, self.msg_content, expire_in=expire_in)
+                await musicbot.safe_send_message(self.channel, self.msg_content.format(*****REMOVED***"reminder": reminder, "action": self***REMOVED***), expire_in=expire_in)
 
-        if self.call_back:
-            await callback()
+            if self.call_back:
+                await callback()
 
-        if self.play_entry:
-            pl = await musicbot.get_player(self.channel, create=True)
-            await pl.playlist._add_entry_now(self.entry, pl)
+            if self.play_entry:
+                pl = await musicbot.get_player(self.channel, create=True)
+                await pl.playlist._add_entry_now(self.entry, pl)
 
-        if self.play_playlist:
-            pl = await musicbot.get_player(self.channel, create=True)
-            await musicbot.cmd_playlist(self.channel, None, None, pl, ["load", self.playlist_name])
+            if self.play_playlist:
+                pl = await musicbot.get_player(self.channel, create=True)
+                await musicbot.cmd_playlist(self.channel, None, None, pl, ["load", self.playlist_name])
 
-        if self.play_online_media:
-            pl = await musicbot.get_player(self.channel, create=True)
-            entry = await pl.playlist.get_entry(self.source_url)
-            await pl.playlist._add_entry_now(entry, pl)
+            if self.play_online_media:
+                pl = await musicbot.get_player(self.channel, create=True)
+                entry = await pl.playlist.get_entry(self.source_url)
+                await pl.playlist._add_entry_now(entry, pl)
+        except Exception as e:
+            print(e)
+
+    def __str__(self):
+        act = ""
+        if self.msg_content is not None:
+            act = "sending a message to the channel ***REMOVED******REMOVED*** which is***REMOVED******REMOVED*** and does***REMOVED******REMOVED*** delete the old message".format(
+                self.channel, "n't being deleted" if self.delete_after < 1 else " being deleted after ***REMOVED******REMOVED*** seconds".format(self.delete_after), "" if self.delete_old else "n't")
+        elif self.source_url is not None:
+            act = "playing a video from url ***REMOVED******REMOVED*** to the channel ***REMOVED******REMOVED***".format(
+                self.source_url, self.channel)
+        elif self.playlist_name is not None:
+            act = "playing a playlist called ***REMOVED******REMOVED*** to the channel ***REMOVED******REMOVED***".format(
+                self.playlist_name, self.channel)
+
+        return "Action ***REMOVED******REMOVED***".format(act)
 
 
 class Reminder:
@@ -82,7 +99,9 @@ class Reminder:
         return "Reminder(***REMOVED******REMOVED***, ***REMOVED******REMOVED***, ***REMOVED******REMOVED***, ***REMOVED******REMOVED***, ***REMOVED******REMOVED***)".format(repr(self.name), repr(self.expiry_date), repr(self.action), repr(self.repeat_every), repr(self.repeat_end))
 
     def on_expire(self, musicbot):
-        asyncio.run_coroutine_threadsafe(self.action.act(musicbot, self), musicbot.loop)
+        print("[REMINDER] " + self.name + " fired!")
+        asyncio.run_coroutine_threadsafe(
+            self.action.act(musicbot, self), musicbot.loop)
 
         if self.repeat_every is not None:
             next_expiry_date = datetime.now() + self.repeat_every
