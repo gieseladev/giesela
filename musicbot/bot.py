@@ -2355,7 +2355,7 @@ class MusicBot(discord.Client):
         possible_stations = self.radios.get_all_stations()
         shuffle(possible_stations)
 
-        interface_string = "**{.name}**\n*language:* {.language}"
+        interface_string = "**{0.name}**\n*language:* {0.language}\n\n`Type \"yes\" or \"no\"`"
 
         for station in possible_stations:
             msg = await self.safe_send_message(channel, interface_string.format(station))
