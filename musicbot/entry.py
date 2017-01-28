@@ -76,11 +76,10 @@ class BasePlaylistEntry:
 
 class URLPlaylistEntry(BasePlaylistEntry):
 
-    def __init__(self, playlist, url, title, station_data = None, duration=0, start_seconds=0, end_seconds=None, expected_filename=None, **meta):
+    def __init__(self, playlist, url, title, duration=0, start_seconds=0, end_seconds=None, expected_filename=None, **meta):
         super().__init__()
 
         self.playlist = playlist
-        self.radio_station_data = station_data
         self.url = url
         self.title = title
         self.duration = duration
@@ -294,12 +293,17 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
 class StreamPlaylistEntry(BasePlaylistEntry):
 
-    def __init__(self, playlist, url, title, *, destination=None, **meta):
+    def __init__(self, playlist, url, title, station_data = None, *, destination=None, **meta):
         super().__init__()
 
         self.playlist = playlist
         self.url = url
-        self.title = title
+        if station_data is None:
+            self.title = title
+        else:
+            self.title = station_data.name
+            
+        self.radio_station_data = station_data
         self.destination = destination
         self.duration = 0
         self.meta = meta

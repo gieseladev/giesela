@@ -79,7 +79,7 @@ class Playlist(EventEmitter):
             song_url,
             title,
             destination=dest_url,
-            station_data=meta.get("station", default=None),
+            station_data=meta.get("station", None),
             **meta
         )
         self._add_entry(entry)
