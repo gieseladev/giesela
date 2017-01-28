@@ -3994,7 +3994,7 @@ class MusicBot(discord.Client):
         Move everyone in your current channel to another one!
         """
 
-        if len(leftover_args < 1):
+        if len(leftover_args) < 1:
             return Response("You need to provide a target channel")
 
         search_channel = " ".join(leftover_args)
