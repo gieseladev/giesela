@@ -466,7 +466,7 @@ class MusicBot(discord.Client):
         await self.update_now_playing()
 
     async def on_player_finished_playing(self, player, **_):
-        if not player.playlist.entries and not player.current_entry and (self.config.auto_playlist or self.use_radio):
+        if not player.playlist.entries and not player.current_entry and self.config.auto_playlist:
             if self.config.auto_playlist:
                 while self.autoplaylist:
                     song_url = choice(self.autoplaylist)
