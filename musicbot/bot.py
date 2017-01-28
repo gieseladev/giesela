@@ -528,8 +528,12 @@ class MusicBot(discord.Client):
         if entry:
             prefix = u'\u275A\u275A ' if is_paused else ''
 
-            name = u'{}{}'.format(prefix, entry.title)[:128]
-            game = discord.Game(name=name)
+            if entry.radio_station_data is not None:
+                name = u'{}'.format(entry.radio_station_data.name)[:128]
+                game = discord.Game(name=name)
+            else:
+                name = u'{}{}'.format(prefix, entry.title)[:128]
+                game = discord.Game(name=name)
 
         await self.change_presence(game=game)
 
@@ -1731,11 +1735,14 @@ class MusicBot(discord.Client):
 
         if player.current_entry:
             if type(player.current_entry).__name__ == "StreamPlaylistEntry":
-                return Response(
-                    'Playing live stream: {} for {}'.format(
-                        player.current_entry.title, format_time(player.progress)),
-                    delete_after=30
-                )
+                if player.current_entry.radio_station_data is not None:
+                    return Response("Playing *radio* **{}** for {}".format(player.current_entry.radio_station_data.name, format_time(player.progress)))
+                else:
+                    return Response(
+                        'Playing live stream: {} for {}'.format(
+                            player.current_entry.title, format_time(player.progress)),
+                        delete_after=30
+                    )
 
             if self.server_specific_data[server]['last_np_msg']:
                 await self.safe_delete_message(self.server_specific_data[server]['last_np_msg'])
@@ -2331,20 +2338,22 @@ class MusicBot(discord.Client):
             {command_prefix}radio station name
             {command_prefix}radio random
         Play live radio.
+        You can leave the parameters blank in order to get a tour around all the channels,
+        you can specify the station you want to listen to or you can let the bot choose for you by entering \"random\"
         """
         if len(leftover_args) > 0 and leftover_args[0].lower().strip() == "random":
             station = self.radios.get_random_station()
-            await player.playlist.add_stream_entry(station.url, channel=channel, author=author)
-            return Response("Playing\n**{.name}**".format(station), delete_after=5)
+            await player.playlist.add_stream_entry(station.url, channel=channel, author=author, station=station)
+            return Response("I choose\n**{.name}**".format(station), delete_after=5)
         elif len(leftover_args) > 0:
-            #try to find the radio station
+            # try to find the radio station
             search_name = " ".join(leftover_args)
             station = self.radios.get_station(search_name.lower().strip())
             if station is not None:
-                await player.playlist.add_stream_entry(station.url, channel=channel, author=author)
-                return Response("Playing\n**{.name}**".format(station), delete_after=5)
+                await player.playlist.add_stream_entry(station.url, channel=channel, author=author, station=station)
+                return Response("Your favourite:\n**{.name}**".format(station), delete_after=5)
 
-        #help the user find the right station
+        # help the user find the right station
 
         def check(m):
             true = ["y", "yes", "yeah", "yep", "sure"]
@@ -2361,12 +2370,13 @@ class MusicBot(discord.Client):
             msg = await self.safe_send_message(channel, interface_string.format(station))
             response = await self.wait_for_message(author=author, channel=channel, check=check)
             await self.safe_delete_message(msg)
-            play_station = response.content.lower().strip() in ["y", "yes", "yeah", "yep", "sure"]
+            play_station = response.content.lower().strip() in [
+                "y", "yes", "yeah", "yep", "sure"]
             await self.safe_delete_message(response)
 
             if play_station:
-                await player.playlist.add_stream_entry(station.url, channel=channel, author=author)
-                return Response("Playing\n**{.name}**".format(station), delete_after=5)
+                await player.playlist.add_stream_entry(station.url, channel=channel, author=author, station=station)
+                return Response("There you go fam!\n**{.name}**".format(station), delete_after=5)
             else:
                 continue
 
@@ -3911,14 +3921,14 @@ class MusicBot(discord.Client):
                 action_source_url = ""
                 action_voice_channel = None
 
-                #find video url
+                # find video url
                 msg = await self.safe_send_message(channel, "What's the url of the video you want to play?")
                 response = await self.wait_for_message(author=author, channel=channel)
                 action_source_url = response.content
                 await self.safe_delete_message(msg)
                 await self.safe_delete_message(response)
 
-                #find playback channel
+                # find playback channel
                 msg = await self.safe_send_message(channel, "To which channel should the video be played?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"this\" to select your current channel\n:white_small_square: You can also @mention a voice channel channel")
                 response = await self.wait_for_message(author=author, channel=channel)
 
@@ -3928,7 +3938,6 @@ class MusicBot(discord.Client):
                     return Response("not yet implemented :P")
                 else:
                     return Response("not yet implemented :P")
-
 
             # action 3 (play predefined)
             elif selected_action == 3:
@@ -3985,7 +3994,7 @@ class MusicBot(discord.Client):
         Move everyone in your current channel to another one!
         """
 
-        if len(leftover_args < 1):
+        if len(leftover_args) < 1:
             return Response("You need to provide a target channel")
 
         search_channel = " ".join(leftover_args)
@@ -4005,7 +4014,6 @@ class MusicBot(discord.Client):
                         target_channel = chnl
                         break
 
-
         if target_channel is None:
             return Response("Can't resolve the target channel!", delete_after=20)
 
@@ -4014,7 +4022,8 @@ class MusicBot(discord.Client):
             await self.move_member(voice_member, target_channel)
             s += 1
 
-        print("moved {} users from {} to {}".format(s, author.voice.voice_channel, target_channel))
+        print("moved {} users from {} to {}".format(
+            s, author.voice.voice_channel, target_channel))
 
         if server.me.voice.voice_channel.id == author_channel.id:
             print("moving myself")
