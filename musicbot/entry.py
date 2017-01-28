@@ -293,12 +293,17 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
 class StreamPlaylistEntry(BasePlaylistEntry):
 
-    def __init__(self, playlist, url, title, *, destination=None, **meta):
+    def __init__(self, playlist, url, title, station_data = None, *, destination=None, **meta):
         super().__init__()
 
         self.playlist = playlist
         self.url = url
-        self.title = title
+        if station_data is None:
+            self.title = title
+        else:
+            self.title = station_data.name
+            
+        self.radio_station_data = station_data
         self.destination = destination
         self.duration = 0
         self.meta = meta

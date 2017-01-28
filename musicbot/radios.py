@@ -2,9 +2,9 @@ import configparser
 import os
 import shutil
 import traceback
+from random import choice
 
 from .exceptions import HelpfulError
-from random import choice
 
 
 class Radios:
@@ -30,9 +30,11 @@ class Radios:
         return_list = []
 
         for section in self.config.sections():
-            return_list.append(StationInfo(self.config.get(section, "name"), self.config.get(section, "language"), self.config.get(section, "cover"), self.config.get(section, "url")))
+            return_list.append(StationInfo(self.config.get(section, "name"), self.config.get(
+                section, "language"), self.config.get(section, "cover"), self.config.get(section, "url")))
 
         return return_list
+
 
 class StationInfo:
 
