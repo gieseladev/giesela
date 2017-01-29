@@ -528,7 +528,7 @@ class MusicBot(discord.Client):
         if entry:
             prefix = u'\u275A\u275A ' if is_paused else ''
 
-            if entry.radio_station_data is not None:
+            if type(entry).__name__ == "StreamPlaylistEntry" and entry.radio_station_data is not None:
                 name = u'{}'.format(entry.radio_station_data.name)[:128]
                 game = discord.Game(name=name)
             else:
