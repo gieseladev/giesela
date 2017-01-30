@@ -3746,7 +3746,7 @@ class MusicBot(discord.Client):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***reminder create
-            ***REMOVED***command_prefic***REMOVED***reminder list
+            ***REMOVED***command_prefix***REMOVED***reminder list
 
         Create a reminder!
         """
@@ -3893,7 +3893,7 @@ class MusicBot(discord.Client):
                     except:
                         return False
 
-                msg = await self.safe_send_message(channel, "When should the message be deleted? (\"never\" for not at all)")
+                msg = await self.safe_send_message(channel, "After how many seconds should the message be deleted? (\"never\" for not at all)")
                 response = await self.wait_for_message(author=author, channel=channel, check=check)
                 if response.content.lower().strip() in ["never", "no"]:
                     action_delete_after = 0
@@ -3929,12 +3929,10 @@ class MusicBot(discord.Client):
                 await self.safe_delete_message(response)
 
                 # find playback channel
-                msg = await self.safe_send_message(channel, "To which channel should the video be played?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"this\" to select your current channel\n:white_small_square: You can also @mention a voice channel channel")
+                msg = await self.safe_send_message(channel, "To which channel should the video be played?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"this\" to select your current channel")
                 response = await self.wait_for_message(author=author, channel=channel)
 
-                if len(response.channel_mentions) > 0:
-                    action_voice_channel = response.channel_mentions[0]
-                elif response.content.lower().strip() == "this":
+                if response.content.lower().strip() == "this":
                     return Response("not yet implemented :P")
                 else:
                     return Response("not yet implemented :P")
@@ -3954,7 +3952,7 @@ class MusicBot(discord.Client):
 
             text = ""
             for reminder in self.calendar.reminders:
-                text += "****REMOVED***.name***REMOVED****".format(reminder)
+                text += "****REMOVED***.name***REMOVED****\n".format(reminder)
 
             return Response(text)
         # return
@@ -4003,16 +4001,13 @@ class MusicBot(discord.Client):
             return Response("You're incredibly incompetent to do such a thing!")
 
         author_channel = author.voice.voice_channel
-        target_channel = None
-        if len(message.channel_mentions) > 0 and message.channel_mentions[0].type == ChannelType.voice:
-            target_channel = message.channel_mentions[0]
-        else:
-            target_channel = self.get_channel(search_channel)
-            if target_channel is None:
-                for chnl in server.channels:
-                    if chnl.name == search_channel and chnl.type == ChannelType.voice:
-                        target_channel = chnl
-                        break
+
+        target_channel = self.get_channel(search_channel)
+        if target_channel is None:
+            for chnl in server.channels:
+                if chnl.name == search_channel and chnl.type == ChannelType.voice:
+                    target_channel = chnl
+                    break
 
         if target_channel is None:
             return Response("Can't resolve the target channel!", delete_after=20)
