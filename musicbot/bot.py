@@ -3328,6 +3328,7 @@ class MusicBot(discord.Client):
                                        0], reverse=sort_modes[sort_mode][1])
 
             await player.playlist.add_entries(clone_entries)
+            self.playlists.bump_replay_count(savename)
 
             return Response("Done. Enjoy your music!", delete_after=10)
 
