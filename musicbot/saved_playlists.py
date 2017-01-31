@@ -42,6 +42,7 @@ class Playlists:
         playlist_informations["location"] = plsection["location"]
         playlist_informations["author"] = plsection["author"]
         playlist_informations["entry_count"] = plsection["entries"]
+        playlist_informations["replay_count"] = self.playlists.getint(playlistname, "replays", fallback=0)
         entries = []
         if not os.stat(playlist_informations["location"]).st_size == 0:
             with open(playlist_informations["location"], "r") as file:
@@ -72,6 +73,18 @@ class Playlists:
         self.save_playlist()
         self.update_playlist()
         return True
+
+    def bump_replay_count(self, playlist_name):
+            if self.playlists.has_section(playlist_name):
+                prevCount = 0
+                if(self.playlists.has_option(playlist_name, "replays")):
+                    prevCount = self.playlists.get(playlist_name, "replays")
+
+                self.playlists.set(playlist_name, "replays", prevCount + 1)
+                save_playlist()
+                return True
+
+            return False
 
     def remove_playlist(self, name):
         os.remove(self.playlists[name]["location"])
