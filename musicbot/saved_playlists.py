@@ -80,8 +80,8 @@ class Playlists:
                 if(self.playlists.has_option(playlist_name, "replays")):
                     prevCount = self.playlists.get(playlist_name, "replays")
 
-                self.playlists.set(playlist_name, "replays", prevCount + 1)
-                save_playlist()
+                self.playlists.set(playlist_name, "replays", str(prevCount + 1))
+                self.save_playlist()
                 return True
 
             return False

@@ -3253,7 +3253,7 @@ class MusicBot(discord.Client):
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***playlist showall [alphabetical, author, entries, playtime, random]
+            ***REMOVED***command_prefix***REMOVED***playlist showall [alphabetical, author, entries, playtime, random, replays]
             ***REMOVED***command_prefix***REMOVED***playlist savename
             ***REMOVED***command_prefix***REMOVED***playlist save savename
             ***REMOVED***command_prefix***REMOVED***playlist load savename [add, replace] [alphabetical, length, random] [startindex, endindex (inclusive)]
@@ -3388,7 +3388,7 @@ class MusicBot(discord.Client):
             iteration = 1
 
             sort_modes = ***REMOVED***"alphabetical": (lambda playlist: playlist, False), "entries": (lambda playlist: int(
-                self.playlists.get_playlist(playlist, player.playlist)["entry_count"]), True), "author": (lambda playlist: server.get_member(self.playlists.get_playlist(playlist, player.playlist)["author"]).name, False), "random": None, "playtime": (lambda playlist: sum([x.duration for x in self.playlists.get_playlist(playlist, player.playlist)["entries"]]), True)***REMOVED***
+                self.playlists.get_playlist(playlist, player.playlist)["entry_count"]), True), "author": (lambda playlist: server.get_member(self.playlists.get_playlist(playlist, player.playlist)["author"]).name, False), "random": None, "playtime": (lambda playlist: sum([x.duration for x in self.playlists.get_playlist(playlist, player.playlist)["entries"]]), True), "replays": (lambda playlist: self.playlists.get_playlist(playlist, player.playlist)["replay_count"], False)***REMOVED***
 
             sort_mode = leftover_args[1].lower() if len(
                 leftover_args) > 1 and leftover_args[1].lower() in sort_modes.keys() else "random"
@@ -3400,10 +3400,16 @@ class MusicBot(discord.Client):
                 sorted_saved_playlists = sorted(self.playlists.saved_playlists, key=sort_modes[
                                                 sort_mode][0], reverse=sort_modes[sort_mode][1])
 
+            longest_name = max(sorted_saved_playlists, key=lambda pl: len(pl))
+            longest_author = server.get_member(self.playlists.get_playlist(max(sorted_saved_playlists, key=lambda pl: server.get_member(self.playlists.get_playlist(pl, player.playlist)["author"]).mention), player.playlist)["author"]).mention
+            longest_first_part = "***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" by ****REMOVED******REMOVED****   ".format(len(sorted_saved_playlists), longest_name, longest_author)
+
             for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.playlist)
-                response_text += "  ***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED*** and a playtime of ***REMOVED******REMOVED***\n".format(iteration, pl.title(), server.get_member(infos["author"]).mention, str(
-                    infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", format_time(sum([x.duration for x in infos["entries"]]), round_seconds=True, max_specifications=2))
+                first_part = "***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" by ****REMOVED******REMOVED****".format(iteration, pl.title(), server.get_member(infos["author"]).mention)
+                response_text += first_part + "".join([" " for x in range(len(longest_first_part) - len(first_part))]) + "|"
+                response_text += "***REMOVED******REMOVED*** entr***REMOVED******REMOVED***   |   played ***REMOVED******REMOVED*** time***REMOVED******REMOVED***   |   ***REMOVED******REMOVED***\n".format(str(
+                    infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", infos["replay_count"], "s" if int(infos["replay_count"]) != 1 else "", format_time(sum([x.duration for x in infos["entries"]]), round_seconds=True, max_specifications=2))
                 iteration += 1
 
             # self.safe_print (response_text)
@@ -3867,22 +3873,23 @@ class MusicBot(discord.Client):
                 await self.safe_delete_message(response)
 
                 # find channel
-                msg = await self.safe_send_message(channel, "To which channel should the message be sent?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"me\" for a private message\n:white_small_square: \"this\" to select the current channel\n:white_small_square: You can also @mention people or #mention a channel")
-                response = await self.wait_for_message(author=author, channel=channel)
+                while action_channel is None:
+                    msg = await self.safe_send_message(channel, "To which channel should the message be sent?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"me\" for a private message\n:white_small_square: \"this\" to select the current channel\n:white_small_square: You can also @mention people or #mention a channel")
+                    response = await self.wait_for_message(author=author, channel=channel)
 
-                if len(response.channel_mentions) > 0:
-                    action_channel = response.channel_mentions[0]
-                elif len(response.mentions) > 0:
-                    action_channel = response.mentions[0]
-                elif response.content.lower().strip() == "me":
-                    action_channel = author
-                elif response.content.lower().strip() == "this":
-                    action_channel = channel
-                else:
-                    return Response("not yet implemented :P")
+                    if len(response.channel_mentions) > 0:
+                        action_channel = response.channel_mentions[0]
+                    elif len(response.mentions) > 0:
+                        action_channel = response.mentions[0]
+                    elif response.content.lower().strip() == "me":
+                        action_channel = author
+                    elif response.content.lower().strip() == "this":
+                        action_channel = channel
+                    else:
+                        return Response("not yet implemented :P")
 
-                await self.safe_delete_message(msg)
-                await self.safe_delete_message(response)
+                    await self.safe_delete_message(msg)
+                    await self.safe_delete_message(response)
 
                 # find delete after time
                 def check(m):
@@ -4038,11 +4045,12 @@ class MusicBot(discord.Client):
     @owner_only
     async def cmd_execute(self, player, channel, author, server, leftover_args):
         statement = " ".join(leftover_args)
+        await self.safe_send_message(channel, "```python\n***REMOVED******REMOVED***\n```".format(statement))
         try:
             result = eval(statement)
             return Response(str(result))
-        except:
-            return Response("Something went wrong with your code.")
+        except Exception as e:
+            return Response("Something went wrong with your code:\n```\n***REMOVED******REMOVED***\n```".format(str(e)))
 
     async def cmd_register(self, author, server, token):
         """
