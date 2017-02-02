@@ -1,5 +1,3 @@
-import asyncio
-import configparser
 import datetime
 import inspect
 import json
@@ -33,6 +31,9 @@ from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from pyshorteners import Shortener
 
+import asyncio
+import configparser
+
 from . import downloader, exceptions
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
@@ -45,6 +46,7 @@ from .papers import Papers
 from .permissions import Permissions, PermissionsDefaults
 from .player import MusicPlayer
 from .playlist import Playlist
+from .random_sets import RandomSets
 from .radios import Radios
 from .reminder import Action, Calendar
 from .saved_playlists import Playlists
@@ -91,7 +93,7 @@ class MusicBot(discord.Client):
                            "translate", "help", "say", "broadcast", "news", "game", "wiki"]
     lonelyModeRunning = False
 
-    def __init__(self, config_file=ConfigDefaults.options_file, radios_file=ConfigDefaults.radios_file, papers_file=ConfigDefaults.papers_file, playlists_file=ConfigDefaults.playlists_file, perms_file=PermissionsDefaults.perms_file):
+    def __init__(self, config_file=ConfigDefaults.options_file, random_file=ConfigDefaults.random_sets, radios_file=ConfigDefaults.radios_file, papers_file=ConfigDefaults.papers_file, playlists_file=ConfigDefaults.playlists_file, perms_file=PermissionsDefaults.perms_file):
         self.players = ***REMOVED******REMOVED***
         self.the_voice_clients = ***REMOVED******REMOVED***
         self.locks = defaultdict(asyncio.Lock)
@@ -102,6 +104,7 @@ class MusicBot(discord.Client):
         self.papers = Papers(papers_file)
         self.radios = Radios(radios_file)
         self.playlists = Playlists(playlists_file)
+        self.random_sets = RandomSets(random_file)
         self.permissions = Permissions(
             perms_file, grant_all=[self.config.owner_id])
 
@@ -2588,17 +2591,44 @@ class MusicBot(discord.Client):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***random item1, item2, item3...
+            ***REMOVED***command_prefix***REMOVED***random name of the set ¯\_(ツ)_/¯
+            ***REMOVED***command_prefix***REMOVED***random create name, option1, option2, option3...
+            ***REMOVED***command_prefix***REMOVED***random list
 
-        Choose a random item out of a list
+        Choose a random item out of a list or use a pre-defined list.
+        Use `list` to see all the different lists out there or create your own.
         """
-        items = [x.strip()
-                 for x in " ".join(leftover_args).split(",") if x is not ""]
+
+
+        items = [x.strip() for x in " ".join(leftover_args).split(",") if x is not ""]
+
+        if items[0].split()[0].lower().strip() == "create":
+            if len(items) < 2:
+                return Response("Can't create a set with the given arguments", delete_after=20)
+
+            set_name = "_".join(items[0].split()[1:]).lower().strip()
+            set_items = items[1:]
+            if self.random_sets.create_set(set_name, set_items):
+                return Response("Created set ****REMOVED***0***REMOVED****\nUse `***REMOVED***1***REMOVED***random ***REMOVED***0***REMOVED***` to use it!".format(set_name, self.config.command_prefix), delete_after=60)
+            else:
+                return Response("OMG, shit went bad quickly! Everything's burning!\nDUCK there he goes again, the dragon's coming. Eat HIM not me. PLEEEEEEEEEEEEEASE!")
+        elif items[0].split()[0].lower().strip() == "list":
+            return_string = ""
+            for s in self.random_sets.get_sets():
+                return_string += "*****REMOVED******REMOVED*****\n```\n***REMOVED******REMOVED***```\n\n".format(s[0], ", ".join(s[1]))
+
+            return Response(return_string)
 
         if len(items) <= 0:
             return Response("Is your name \"***REMOVED***0***REMOVED***\" by any chance?\n(This is not how this command works. Use `***REMOVED***1***REMOVED***help random` to find out how not to be a stupid ****REMOVED***0***REMOVED**** anymore)".format(author.name, self.config.command_prefix), delete_after=30)
 
         if len(items) <= 1:
-            return Response("Only you could use `***REMOVED***1***REMOVED***random` for one item... Well done, ***REMOVED***0***REMOVED***!".format(author.name, self.config.command_prefix), delete_after=30)
+            # return Response("Only you could use `***REMOVED***1***REMOVED***random` for one item... Well done, ***REMOVED***0***REMOVED***!".format(author.name, self.config.command_prefix), delete_after=30)
+
+            query = "_".join(items[0].split())
+            items = self.random_sets.get_set(query.lower().strip())
+            if items is None:
+                return Response("Something went wrong", delete_after=30)
 
         await self.safe_send_message(channel, "I choose **" + choice(items) + "**")
 
@@ -3401,13 +3431,18 @@ class MusicBot(discord.Client):
                                                 sort_mode][0], reverse=sort_modes[sort_mode][1])
 
             longest_name = max(sorted_saved_playlists, key=lambda pl: len(pl))
-            longest_author = server.get_member(self.playlists.get_playlist(max(sorted_saved_playlists, key=lambda pl: server.get_member(self.playlists.get_playlist(pl, player.playlist)["author"]).mention), player.playlist)["author"]).mention
-            longest_first_part = "***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" by ****REMOVED******REMOVED****   ".format(len(sorted_saved_playlists), longest_name, longest_author)
+            longest_author = server.get_member(self.playlists.get_playlist(max(sorted_saved_playlists, key=lambda pl: server.get_member(
+                self.playlists.get_playlist(pl, player.playlist)["author"]).mention), player.playlist)["author"]).mention
+            longest_first_part = "***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" by ****REMOVED******REMOVED****   ".format(
+                len(sorted_saved_playlists), longest_name, longest_author)
 
             for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.playlist)
-                first_part = "***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" by ****REMOVED******REMOVED****".format(iteration, pl.title(), server.get_member(infos["author"]).mention)
-                response_text += first_part + "".join([" " for x in range(len(longest_first_part) - len(first_part))]) + "|"
+                first_part = "***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" by ****REMOVED******REMOVED****".format(
+                    iteration, pl.title(), server.get_member(infos["author"]).mention)
+                response_text += first_part + \
+                    "".join(
+                        [" " for x in range(len(longest_first_part) - len(first_part))]) + "|"
                 response_text += "***REMOVED******REMOVED*** entr***REMOVED******REMOVED***   |   played ***REMOVED******REMOVED*** time***REMOVED******REMOVED***   |   ***REMOVED******REMOVED***\n".format(str(
                     infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", infos["replay_count"], "s" if int(infos["replay_count"]) != 1 else "", format_time(sum([x.duration for x in infos["entries"]]), round_seconds=True, max_specifications=2))
                 iteration += 1
@@ -3728,17 +3763,20 @@ class MusicBot(discord.Client):
         try:
             index = int(index) - 1
         except:
-            return Response("Please provide a valid index")
+            return Response("Please provide a valid index", delete_after=30)
 
         if index == -1:
             entry = player.current_entry
         else:
             if index < 0 or index >= len(player.playlist.entries):
-                return Response("Your index is out of range")
+                return Response("Your index is out of range", delete_after=15)
             entry = player.playlist.entries[index]
 
         if not entry:
-            return Response("This entry is currently being worked on. Please retry again later")
+            return Response("This entry is currently being worked on. Please retry again later", delete_after=15)
+
+        if type(entry).__name__ == "StreamPlaylistEntry":
+            return Response("Can't send you this because it's a live stream", delete_after=15)
 
         if not entry.is_downloaded:
             try:
@@ -3746,7 +3784,7 @@ class MusicBot(discord.Client):
             except:
                 return Response("Could not download the file. This really shouldn't happen")
 
-        await self.safe_send_message(author, "The file is being uploaded. Please wait a second.", expire_in=15)
+        await self.safe_send_message(author, "The file is being uploaded. Please wait a second.", delete_after=15)
         await self.send_file(author, entry.filename, content="Here you go:")
 
     async def cmd_reminder(self, channel, author, player, server, leftover_args):
