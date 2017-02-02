@@ -2383,6 +2383,19 @@ class MusicBot(discord.Client):
             else:
                 continue
 
+    async def socket_radio(self, radio_station_name):
+        if radio_station_name.lower().strip() == "random":
+            station = self.radios.get_random_station()
+            await player.playlist.add_stream_entry(station.url, station=station)
+            return True
+
+        station = self.radios.get_station(radio_station_name.lower().strip())
+        if station is not None:
+            await player.playlist.add_stream_entry(station.url, station=station)
+            return True
+
+        return False
+
     async def cmd_say(self, channel, message, leftover_args):
         """
         Usage:
