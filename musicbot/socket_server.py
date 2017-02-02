@@ -221,10 +221,13 @@ class SocketServer:
 
                         print("[SOCKETSERVER] " + author_id +
                               " Playing \"{}\"".format(video_url))
+                    elif leftover[0] == "RADIO":
+                        pass  # RADIO FTW I guess nvm fam
 
         if self.sockets_by_user.pop("{}_{}".format(author_id, server_id), None) is None:
-            print("[SOCKETSERVER] failed to remove {} ({}) from sockets_by_user list".format(str(c_socket), author_id))
-            
+            print("[SOCKETSERVER] failed to remove {} ({}) from sockets_by_user list".format(
+                str(c_socket), author_id))
+
         to_delete = None
         for i in range(len(self.connections)):
             if self.connections[i][1] == c_socket:
