@@ -89,7 +89,7 @@ class SocketServer:
     def broadcast_message(self, message):
         to_delete = []
         for author in self.sockets_by_user:
-            if !self.send_message(author, message):
+            if not self.send_message(author, message):
                 to_delete.append(author)
 
         for key in to_delete:
@@ -222,7 +222,9 @@ class SocketServer:
                         print("[SOCKETSERVER] " + author_id +
                               " Playing \"{}\"".format(video_url))
                     elif leftover[0] == "RADIO":
-                        pass  # RADIO FTW I guess nvm fam
+                        radio_name = leftover[1]
+                        asyncio.run_coroutine_threadsafe(self.musicbot.socket_radio(radio_name), self.musicbot.loop)
+                        print("[SOCKETSERVER] {} Radio station {}".format(author_id, radio_name))
 
         if self.sockets_by_user.pop("{}_{}".format(author_id, server_id), None) is None:
             print("[SOCKETSERVER] failed to remove {} ({}) from sockets_by_user list".format(
