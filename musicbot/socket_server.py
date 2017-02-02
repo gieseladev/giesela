@@ -222,7 +222,9 @@ class SocketServer:
                         print("[SOCKETSERVER] " + author_id +
                               " Playing \"***REMOVED******REMOVED***\"".format(video_url))
 
-        self.sockets_by_user.pop("***REMOVED******REMOVED***_***REMOVED******REMOVED***".format(author_id, server_id), None)
+        if self.sockets_by_user.pop("***REMOVED******REMOVED***_***REMOVED******REMOVED***".format(author_id, server_id), None) is None:
+            print("[SOCKETSERVER] failed to remove ***REMOVED******REMOVED*** (***REMOVED******REMOVED***) from sockets_by_user list".format(str(c_socket), author_id))
+            
         to_delete = None
         for i in range(len(self.connections)):
             if self.connections[i][1] == c_socket:
