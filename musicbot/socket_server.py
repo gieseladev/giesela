@@ -1,8 +1,9 @@
-import asyncio
 import re
 import time
 from socket import *
 from threading import Thread
+
+import asyncio
 
 from .spotify import SpotifyTrack
 
@@ -19,6 +20,7 @@ class SocketServer:
         self.server_ids = {}
         self.stop_threads = False
         self.awaiting_registeration = {}
+        self.sockets_by_user = {}
 
         try:
             main_socket = socket(AF_INET, SOCK_STREAM)
@@ -84,6 +86,27 @@ class SocketServer:
             print("[SOCKETSERVER] Socket didn't want to receive my broadcast!")
             self.server_ids.pop(key)
 
+    def broadcast_message(self, message):
+        to_delete = []
+        for author in self.sockets_by_user:
+            if not self.send_message(author, message):
+                to_delete.append(author)
+
+        for key in to_delete:
+            self.sockets_by_user.pop(key, None)
+
+    def send_message(self, author_id, message):
+        s = self.sockets_by_user.get(str(author_id), None)
+        if s is None:
+            return False
+
+        try:
+            msg = "MESSAGE;{}".format(message)
+            s.sendall("{}=={}".format(len(msg), msg).encode("utf-8"))
+            return True
+        except:
+            return False
+
     def connection_accepter(self):
         print("[SOCKETSERVER] Listening!")
         while not self.stop_threads:
@@ -132,6 +155,7 @@ class SocketServer:
                 leftover = parts[3:]
                 if server_id.lower() not in ["USER_IDENTIFICATION"]:
                     self.server_ids[c_socket] = server_id
+                    self.sockets_by_user[author_id] = c_socket
             except:
                 print("[SOCKETSERVER] Socket received malformed message")
                 break
@@ -197,6 +221,14 @@ class SocketServer:
 
                         print("[SOCKETSERVER] " + author_id +
                               " Playing \"{}\"".format(video_url))
+                    elif leftover[0] == "RADIO":
+                        radio_name = leftover[1]
+                        asyncio.run_coroutine_threadsafe(self.musicbot.socket_radio(radio_name), self.musicbot.loop)
+                        print("[SOCKETSERVER] {} Radio station {}".format(author_id, radio_name))
+
+        if self.sockets_by_user.pop("{}_{}".format(author_id, server_id), None) is None:
+            print("[SOCKETSERVER] failed to remove {} ({}) from sockets_by_user list".format(
+                str(c_socket), author_id))
 
         to_delete = None
         for i in range(len(self.connections)):
