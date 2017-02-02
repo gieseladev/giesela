@@ -223,6 +223,7 @@ class ConfigDefaults:
     papers_file = "config/papers.ini"
     radios_file = "config/radio_stations.ini"
     playlists_file = "config/playlists.ini"
+    random_sets = "config/random_sets.ini"
     blacklist_file = 'config/blacklist.txt'
     # this will change when I add playlists it did change ;)
     auto_playlist_file = 'config/autoplaylist.txt'
