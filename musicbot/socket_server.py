@@ -19,6 +19,7 @@ class SocketServer:
         self.server_ids = {}
         self.stop_threads = False
         self.awaiting_registeration = {}
+        self.sockets_by_user = {}
 
         try:
             main_socket = socket(AF_INET, SOCK_STREAM)
@@ -84,6 +85,17 @@ class SocketServer:
             print("[SOCKETSERVER] Socket didn't want to receive my broadcast!")
             self.server_ids.pop(key)
 
+    def send_message(self, author_id, server_id, message):
+        s = self.sockets_by_user.get("{}_{}".format(author_id, server_id), None)
+        if s is None:
+            return False
+
+        try:
+            s.sendall("{}=={}".format(len(message), message).encode("utf-8"))
+            return True
+        except:
+            return False
+
     def connection_accepter(self):
         print("[SOCKETSERVER] Listening!")
         while not self.stop_threads:
@@ -132,6 +144,7 @@ class SocketServer:
                 leftover = parts[3:]
                 if server_id.lower() not in ["USER_IDENTIFICATION"]:
                     self.server_ids[c_socket] = server_id
+                    self.sockets_by_user["{}_{}".format(author_id, server_id)] = c_socket
             except:
                 print("[SOCKETSERVER] Socket received malformed message")
                 break
@@ -198,6 +211,7 @@ class SocketServer:
                         print("[SOCKETSERVER] " + author_id +
                               " Playing \"{}\"".format(video_url))
 
+        self.sockets_by_user.pop("{}_{}".format(author_id, server_id), None)
         to_delete = None
         for i in range(len(self.connections)):
             if self.connections[i][1] == c_socket:
