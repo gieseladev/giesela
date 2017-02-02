@@ -85,13 +85,14 @@ class SocketServer:
             print("[SOCKETSERVER] Socket didn't want to receive my broadcast!")
             self.server_ids.pop(key)
 
-    def send_message(self, author_id, server_id, message):
-        s = self.sockets_by_user.get("{}_{}".format(author_id, server_id), None)
+    def send_message(self, author_id, message):
+        s = self.sockets_by_user.get(str(author_id), None)
         if s is None:
             return False
 
         try:
-            s.sendall("{}=={}".format(len(message), message).encode("utf-8"))
+            msg = "MESSAGE;{}".format(message)
+            s.sendall("{}=={}".format(len(msg), msg).encode("utf-8"))
             return True
         except:
             return False
@@ -144,7 +145,7 @@ class SocketServer:
                 leftover = parts[3:]
                 if server_id.lower() not in ["USER_IDENTIFICATION"]:
                     self.server_ids[c_socket] = server_id
-                    self.sockets_by_user["{}_{}".format(author_id, server_id)] = c_socket
+                    self.sockets_by_user[author_id] = c_socket
             except:
                 print("[SOCKETSERVER] Socket received malformed message")
                 break
