@@ -1,8 +1,9 @@
-import asyncio
 import re
 import time
 from socket import *
 from threading import Thread
+
+import asyncio
 
 from .spotify import SpotifyTrack
 
@@ -84,6 +85,15 @@ class SocketServer:
         for key in to_delete:
             print("[SOCKETSERVER] Socket didn't want to receive my broadcast!")
             self.server_ids.pop(key)
+
+    def broadcast_message(self, message):
+        to_delete = []
+        for author in self.sockets_by_user:
+            if !self.send_message(author, message):
+                to_delete.append(author)
+
+        for key in to_delete:
+            self.sockets_by_user.pop(key, None)
 
     def send_message(self, author_id, message):
         s = self.sockets_by_user.get(str(author_id), None)
