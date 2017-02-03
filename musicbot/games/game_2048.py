@@ -263,7 +263,7 @@ def rotate(l, num):
 
 
 e_table = list(
-    "cᴚfΌɹb9vO¢YQMT%8ɥЯ!P¥∀ɾ/ß⅁Ԁh^xן⋊ЖBsqnʞƒr®¡∩Am]u_oʎ£ทWLގᄅKdX6⊥¿×lC◖\EИɐ;zpwʇШikSㄣaƜ|ㄥ⅄5Z1၁ɟ<µʌЧjJɯıʍℲƃ2ᴧ4ǝUFyɔ@Ↄ3HſRᴎVt⇂€=0eNᄐ7g[")
+    "eEz8iKJOcwNlAyXhnPq9DkST6bmsg#QadWGUIFRuofrLvjZMpC7VB02435@txYH1")
 l = len(e_table)
 
 
