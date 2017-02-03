@@ -3559,7 +3559,11 @@ class MusicBot(discord.Client):
                     msg = await self.safe_send_message(channel, "I'm working on it.")
                     query = arguments[1:]
                     try:
+                        start_time = datetime.now()
                         entries = await self.get_play_entry(player, channel, author, query, arguments[0])
+                        if (datetime.now() - start_time).total_seconds > 40:
+                            await self.safe_send_message(author, "Wow, that took quite a while.\nI'm done now though so come check it out!", expire_in=70)
+
                         pl_changes["new_entries"].extend(entries)
                         playlist["entries"].extend(entries)
                         playlist["entry_count"] = str(
