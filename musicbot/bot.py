@@ -3457,11 +3457,11 @@ class MusicBot(discord.Client):
             for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.playlist)
                 first_part = "***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" by ****REMOVED******REMOVED****".format(
-                    iteration, pl.title(), server.get_member(infos["author"]).mention)
+                    iteration, pl.replace("_", " ").title(), server.get_member(infos["author"]).mention)
                 response_text += first_part + \
                     "".join(
                         [" " for x in range(len(longest_first_part) - len(first_part))]) + "|"
-                response_text += "***REMOVED******REMOVED*** entr***REMOVED******REMOVED***   |   played ***REMOVED******REMOVED*** time***REMOVED******REMOVED***   |   ***REMOVED******REMOVED***\n".format(str(
+                response_text += "   ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***   |   played ***REMOVED******REMOVED*** time***REMOVED******REMOVED***   |   ***REMOVED******REMOVED***\n".format(str(
                     infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", infos["replay_count"], "s" if int(infos["replay_count"]) != 1 else "", format_time(sum([x.duration for x in infos["entries"]]), round_seconds=True, max_specifications=2))
                 iteration += 1
 
@@ -3487,7 +3487,7 @@ class MusicBot(discord.Client):
             for i in range(len(entries)):
                 entries_text += str(i + 1) + ". " + entries[i].title + "\n"
 
-            response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n*playtime: ***REMOVED******REMOVED****\n\n***REMOVED******REMOVED***\n```\nTo edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"```".format(argument.title(), server.get_member(
+            response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n*playtime: ***REMOVED******REMOVED****\n\n***REMOVED******REMOVED***\n```\nTo edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"```".format(argument.replace("_", " ").title(), server.get_member(
                 infos["author"]).mention, str(infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", format_time(sum([x.duration for x in entries])), entries_text, self.config.command_prefix, argument)
             return Response(response_text, reply=True, delete_after=40)
 
@@ -3541,7 +3541,7 @@ class MusicBot(discord.Client):
             entries_text += "\nPage ***REMOVED******REMOVED*** of ***REMOVED******REMOVED***".format(
                 entries_page + 1, iterations + 1)
 
-            interface_message = await self.safe_send_message(channel, interface_string.format(user_savename.title(), server.get_member(playlist["author"]).mention, playlist["entry_count"], "s" if int(playlist["entry_count"]) is not 1 else "", format_time(sum([x.duration for x in entries])), entries_text, self.config.command_prefix))
+            interface_message = await self.safe_send_message(channel, interface_string.format(user_savename.replace("_", " ").title(), server.get_member(playlist["author"]).mention, playlist["entry_count"], "s" if int(playlist["entry_count"]) is not 1 else "", format_time(sum([x.duration for x in entries])), entries_text, self.config.command_prefix))
             response_message = await self.wait_for_message(author=author, channel=channel, check=check)
 
             if not response_message:
@@ -3608,7 +3608,7 @@ class MusicBot(discord.Client):
                 def extras_check(m):
                     return (m.content.split()[0].lower() in ["abort", "sort", "removeduplicates"])
 
-                extras_message = await self.safe_send_message(channel, extras_string.format(user_savename.title(), server.get_member(playlist["author"]).mention, playlist["entry_count"], "s" if int(playlist["entry_count"]) is not 1 else "", format_time(sum([x.duration for x in entries]))))
+                extras_message = await self.safe_send_message(channel, extras_string.format(user_savename.replace("_", " ").title(), server.get_member(playlist["author"]).mention, playlist["entry_count"], "s" if int(playlist["entry_count"]) is not 1 else "", format_time(sum([x.duration for x in entries]))))
                 resp = await self.wait_for_message(author=author, channel=channel, check=extras_check)
 
                 if not resp.content.lower().startswith(self.config.command_prefix) and not resp.content.lower().startswith('abort'):
@@ -3676,7 +3676,7 @@ class MusicBot(discord.Client):
                                          "new_entries"], remove_entries_indexes=pl_changes["remove_entries_indexes"], new_name=pl_changes["new_name"])
             self.safe_print(
                 "Closed the playlist builder and saved the playlist")
-            return Response("Successfully saved ****REMOVED******REMOVED****".format(user_savename.title()))
+            return Response("Successfully saved ****REMOVED******REMOVED****".format(user_savename.replace("_", " ").title()))
 
     async def cmd_addplayingtoplaylist(self, channel, author, player, playlistname):
         """
