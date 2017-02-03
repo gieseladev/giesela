@@ -1,15 +1,15 @@
-import asyncio
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
-from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
 
+import asyncio
 import audioop
+from enum import Enum
 
 from .exceptions import FFmpegError, FFmpegWarning
 from .lib.event_emitter import EventEmitter

@@ -1,7 +1,8 @@
-import configparser
 import os
 import shutil
 import traceback
+
+import configparser
 
 from .exceptions import HelpfulError
 
