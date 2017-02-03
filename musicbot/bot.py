@@ -3710,7 +3710,7 @@ class MusicBot(discord.Client):
         Usage:
             {command_prefix}removeplayingfromplaylist playlistname
 
-        Remove the current entry to a playlist
+        Remove the current entry from a playlist
         """
 
         if playlistname is None:
