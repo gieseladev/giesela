@@ -1,8 +1,9 @@
-import configparser
 import os
 import re
 import shutil
 import traceback
+
+import configparser
 
 from .entry import URLPlaylistEntry as urlEntry
 from .exceptions import HelpfulError
@@ -33,6 +34,7 @@ class Playlists:
             self.playlists.write(pl_file)
 
     def get_playlist(self, playlistname, playlist):
+        playlistname = playlistname.lower().strip().replace(" ", "_")
         if not self.playlists.has_section(playlistname):
             return None
 
@@ -42,7 +44,8 @@ class Playlists:
         playlist_informations["location"] = plsection["location"]
         playlist_informations["author"] = plsection["author"]
         playlist_informations["entry_count"] = plsection["entries"]
-        playlist_informations["replay_count"] = self.playlists.getint(playlistname, "replays", fallback=0)
+        playlist_informations["replay_count"] = self.playlists.getint(
+            playlistname, "replays", fallback=0)
         entries = []
         if not os.stat(playlist_informations["location"]).st_size == 0:
             with open(playlist_informations["location"], "r") as file:
@@ -56,6 +59,8 @@ class Playlists:
         return playlist_informations
 
     def set_playlist(self, entries, name, author_id):
+        name = name.lower().strip().replace(" ", "_")
+
         try:
             with open(self.playlist_save_location + str(name) + ".txt", "w") as f:
                 f.write("\n;\n".join([entry.to_json() for entry in entries]))
@@ -75,24 +80,29 @@ class Playlists:
         return True
 
     def bump_replay_count(self, playlist_name):
-            if self.playlists.has_section(playlist_name):
-                prevCount = 0
-                if(self.playlists.has_option(playlist_name, "replays")):
-                    prevCount = self.playlists.get(playlist_name, "replays")
+        playlist_name = playlist_name.lower().strip().replace(" ", "_")
 
-                self.playlists.set(playlist_name, "replays", str(prevCount + 1))
-                self.save_playlist()
-                return True
+        if self.playlists.has_section(playlist_name):
+            prevCount = 0
+            if(self.playlists.has_option(playlist_name, "replays")):
+                prevCount = self.playlists.get(playlist_name, "replays")
 
-            return False
+            self.playlists.set(playlist_name, "replays", str(prevCount + 1))
+            self.save_playlist()
+            return True
+
+        return False
 
     def remove_playlist(self, name):
+        name = name.lower().strip().replace(" ", "_")
+
         os.remove(self.playlists[name]["location"])
         self.playlists.remove_section(name)
         self.save_playlist()
         self.update_playlist()
 
     def edit_playlist(self, name, playlist, remove_entries=None, remove_entries_indexes=None, new_entries=None, new_name=None):
+        name = name.lower().strip().replace(" ", "_")
         old_playlist = self.get_playlist(name, playlist)
         old_entries = old_playlist[
             "entries"] if old_playlist is not None else []

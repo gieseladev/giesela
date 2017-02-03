@@ -3448,20 +3448,9 @@ class MusicBot(discord.Client):
                 sorted_saved_playlists = sorted(self.playlists.saved_playlists, key=sort_modes[
                                                 sort_mode][0], reverse=sort_modes[sort_mode][1])
 
-            longest_name = max(sorted_saved_playlists, key=lambda pl: len(pl))
-            longest_author = server.get_member(self.playlists.get_playlist(max(sorted_saved_playlists, key=lambda pl: server.get_member(
-                self.playlists.get_playlist(pl, player.playlist)["author"]).mention), player.playlist)["author"]).mention
-            longest_first_part = "***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" by ****REMOVED******REMOVED****   ".format(
-                len(sorted_saved_playlists), longest_name, longest_author)
-
             for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.playlist)
-                first_part = "***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" by ****REMOVED******REMOVED****".format(
-                    iteration, pl.title(), server.get_member(infos["author"]).mention)
-                response_text += first_part + \
-                    "".join(
-                        [" " for x in range(len(longest_first_part) - len(first_part))]) + "|"
-                response_text += "***REMOVED******REMOVED*** entr***REMOVED******REMOVED***   |   played ***REMOVED******REMOVED*** time***REMOVED******REMOVED***   |   ***REMOVED******REMOVED***\n".format(str(
+                response_text += "*****REMOVED******REMOVED***.** **\"***REMOVED******REMOVED***\"** *by ***REMOVED******REMOVED****\n```\n  ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n  played ***REMOVED******REMOVED*** time***REMOVED******REMOVED***\n  ***REMOVED******REMOVED***```\n\n".format(iteration, pl.replace("_", " ").title(), server.get_member(infos["author"]).mention, str(
                     infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", infos["replay_count"], "s" if int(infos["replay_count"]) != 1 else "", format_time(sum([x.duration for x in infos["entries"]]), round_seconds=True, max_specifications=2))
                 iteration += 1
 
@@ -3487,7 +3476,7 @@ class MusicBot(discord.Client):
             for i in range(len(entries)):
                 entries_text += str(i + 1) + ". " + entries[i].title + "\n"
 
-            response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n*playtime: ***REMOVED******REMOVED****\n\n***REMOVED******REMOVED***\n```\nTo edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"```".format(argument.title(), server.get_member(
+            response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n*playtime: ***REMOVED******REMOVED****\n\n***REMOVED******REMOVED***\n```\nTo edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"```".format(argument.replace("_", " ").title(), server.get_member(
                 infos["author"]).mention, str(infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", format_time(sum([x.duration for x in entries])), entries_text, self.config.command_prefix, argument)
             return Response(response_text, reply=True, delete_after=40)
 
@@ -3541,7 +3530,7 @@ class MusicBot(discord.Client):
             entries_text += "\nPage ***REMOVED******REMOVED*** of ***REMOVED******REMOVED***".format(
                 entries_page + 1, iterations + 1)
 
-            interface_message = await self.safe_send_message(channel, interface_string.format(user_savename.title(), server.get_member(playlist["author"]).mention, playlist["entry_count"], "s" if int(playlist["entry_count"]) is not 1 else "", format_time(sum([x.duration for x in entries])), entries_text, self.config.command_prefix))
+            interface_message = await self.safe_send_message(channel, interface_string.format(user_savename.replace("_", " ").title(), server.get_member(playlist["author"]).mention, playlist["entry_count"], "s" if int(playlist["entry_count"]) is not 1 else "", format_time(sum([x.duration for x in entries])), entries_text, self.config.command_prefix))
             response_message = await self.wait_for_message(author=author, channel=channel, check=check)
 
             if not response_message:
@@ -3608,7 +3597,7 @@ class MusicBot(discord.Client):
                 def extras_check(m):
                     return (m.content.split()[0].lower() in ["abort", "sort", "removeduplicates"])
 
-                extras_message = await self.safe_send_message(channel, extras_string.format(user_savename.title(), server.get_member(playlist["author"]).mention, playlist["entry_count"], "s" if int(playlist["entry_count"]) is not 1 else "", format_time(sum([x.duration for x in entries]))))
+                extras_message = await self.safe_send_message(channel, extras_string.format(user_savename.replace("_", " ").title(), server.get_member(playlist["author"]).mention, playlist["entry_count"], "s" if int(playlist["entry_count"]) is not 1 else "", format_time(sum([x.duration for x in entries]))))
                 resp = await self.wait_for_message(author=author, channel=channel, check=extras_check)
 
                 if not resp.content.lower().startswith(self.config.command_prefix) and not resp.content.lower().startswith('abort'):
@@ -3676,7 +3665,7 @@ class MusicBot(discord.Client):
                                          "new_entries"], remove_entries_indexes=pl_changes["remove_entries_indexes"], new_name=pl_changes["new_name"])
             self.safe_print(
                 "Closed the playlist builder and saved the playlist")
-            return Response("Successfully saved ****REMOVED******REMOVED****".format(user_savename.title()))
+            return Response("Successfully saved ****REMOVED******REMOVED****".format(user_savename.replace("_", " ").title()))
 
     async def cmd_addplayingtoplaylist(self, channel, author, player, playlistname):
         """
@@ -4052,7 +4041,7 @@ class MusicBot(discord.Client):
         # self.calendar.create_reminder(reminder_name, due_date, action, repeat_every=repeat_every, repeat_end=repeat_end)
         # return Response("Got it, I'll remind you!")
 
-    async def cmd_moveus(self, server, author, message, leftover_args):
+    async def cmd_moveus(self, channel, server, author, message, leftover_args):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***moveus channel name
@@ -4064,11 +4053,13 @@ class MusicBot(discord.Client):
             return Response("You need to provide a target channel")
 
         search_channel = " ".join(leftover_args)
+        if search_channel.lower().strip() == "home":
+            search_channel = "MusicBot's reign"
 
         if author.voice.voice_channel is None:
             return Response("You're incredibly incompetent to do such a thing!")
 
-        author_channel = author.voice.voice_channel
+        author_channel = author.voice.voice_channel.id
 
         target_channel = self.get_channel(search_channel)
         if target_channel is None:
@@ -4080,15 +4071,18 @@ class MusicBot(discord.Client):
         if target_channel is None:
             return Response("Can't resolve the target channel!", delete_after=20)
 
+        print("there are ***REMOVED******REMOVED*** members in this voice chat".format(
+            len(self.get_channel(author_channel).voice_members)))
+
         s = 0
-        for voice_member in author.voice.voice_channel.voice_members:
+        for voice_member in self.get_channel(author_channel).voice_members:
             await self.move_member(voice_member, target_channel)
             s += 1
 
         print("moved ***REMOVED******REMOVED*** users from ***REMOVED******REMOVED*** to ***REMOVED******REMOVED***".format(
             s, author.voice.voice_channel, target_channel))
 
-        if server.me.voice.voice_channel.id == author_channel.id:
+        if server.me.voice.voice_channel.id == self.get_channel(author_channel).id:
             print("moving myself")
             await self.get_voice_client(target_channel)
 
