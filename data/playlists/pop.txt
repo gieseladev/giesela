@@ -7769,7 +7769,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-PIh2xe4jnpk-MAGIC_-_Rude.webm",
+  "start_seconds": null,
   "end_seconds": 225
 }
 ;
@@ -7794,7 +7794,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-oh2LWWORoiM-Tove_Lo_-_Habits_Stay_High.webm",
+  "start_seconds": null,
   "end_seconds": 208
 }
 ;
@@ -7819,7 +7819,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-2fngvQS_PmQ-Ed_Sheeran_-_I_See_Fire_Music_Video.webm",
+  "start_seconds": null,
   "end_seconds": 295
 }
 ;
@@ -7844,7 +7844,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-J9NQFACZYEU-Calvin_Harris_-_Outside_ft._Ellie_Goulding.webm",
+  "start_seconds": null,
   "end_seconds": 226
 }
 ;
@@ -7869,7 +7869,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-hXI8RQYC36Q-21._El_Perdon_-_Nicky_Jam_y_Enrique_Iglesias_Official_Music_Video_YTMAs.webm",
+  "start_seconds": null,
   "end_seconds": 227
 }
 ;
@@ -7894,7 +7894,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-MYSVMgRr6pw-Hozier_-_Take_Me_To_Church.webm",
+  "start_seconds": null,
   "end_seconds": 243
 }
 ;
@@ -7919,6 +7919,356 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-6JCLY0Rlx6Q-WALK_THE_MOON_-_Shut_Up_and_Dance.webm",
+  "start_seconds": null,
   "end_seconds": 246
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=RBumgq5yVrA",
+  "title": "Passenger | Let Her Go (Official Video)",
+  "duration": 254,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-RBumgq5yVrA-Passenger_Let_Her_Go_Official_Video.webm",
+  "end_seconds": 254
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Ix8ocFEMa1o",
+  "title": "Adam Lambert - \"Ghost Town\" [Official Music Video]",
+  "duration": 217,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-Ix8ocFEMa1o-Adam_Lambert_-_Ghost_Town_Official_Music_Video.webm",
+  "end_seconds": 217
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=uelHwf8o7_U",
+  "title": "Eminem - Love The Way You Lie ft. Rihanna",
+  "duration": 267,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-uelHwf8o7_U-Eminem_-_Love_The_Way_You_Lie_ft._Rihanna.webm",
+  "end_seconds": 267
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=H202k7KfZL0",
+  "title": "Ellie Goulding - On My Mind",
+  "duration": 245,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-H202k7KfZL0-Ellie_Goulding_-_On_My_Mind.webm",
+  "end_seconds": 245
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=LmK0WHkFIo8",
+  "title": "Daya - Hide Away (Official Music Video \u2013 International Version)",
+  "duration": 191,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-LmK0WHkFIo8-Daya_-_Hide_Away_Official_Music_Video_International_Version.webm",
+  "end_seconds": 191
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=uPHKkewD1G0",
+  "title": "Daya - Sit Still, Look Pretty",
+  "duration": 215,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-uPHKkewD1G0-Daya_-_Sit_Still_Look_Pretty.webm",
+  "end_seconds": 215
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=liwCttfeJ7E",
+  "title": "Hailee Steinfeld - Rock Bottom ft. DNCE",
+  "duration": 218,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-liwCttfeJ7E-Hailee_Steinfeld_-_Rock_Bottom_ft._DNCE.webm",
+  "end_seconds": 218
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=AOPMlIIg_38",
+  "title": "The Fault In Our Stars - Charli XCX - Boom Clap",
+  "duration": 177,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-AOPMlIIg_38-The_Fault_In_Our_Stars_-_Charli_XCX_-_Boom_Clap.webm",
+  "end_seconds": 177
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=m1g4SpPGUBU",
+  "title": "Maty Noyes - In My Mind",
+  "duration": 217,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-m1g4SpPGUBU-Maty_Noyes_-_In_My_Mind.webm",
+  "end_seconds": 217
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=KCy7lLQwToI",
+  "title": "Journey - Don't Stop Believing Lyrics",
+  "duration": 251,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-KCy7lLQwToI-Journey_-_Don_t_Stop_Believing_Lyrics.webm",
+  "end_seconds": 251
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=uJ_1HMAGb4k",
+  "title": "Vance Joy - 'Riptide' Official Video",
+  "duration": 204,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-uJ_1HMAGb4k-Vance_Joy_-_Riptide_Official_Video.webm",
+  "end_seconds": 204
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xo1VInw-SKc",
+  "title": "Rachel Platten - Fight Song (Official Video)",
+  "duration": 205,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-xo1VInw-SKc-Rachel_Platten_-_Fight_Song_Official_Video.webm",
+  "end_seconds": 205
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=YxIiPLVR6NA",
+  "title": "Avicii - Hey Brother (Lyric)",
+  "duration": 259,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-YxIiPLVR6NA-Avicii_-_Hey_Brother_Lyric.webm",
+  "end_seconds": 259
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=JaAWdljhD5o",
+  "title": "SAIL - AWOLNATION (Unofficial Video)",
+  "duration": 249,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-JaAWdljhD5o-SAIL_-_AWOLNATION_Unofficial_Video.webm",
+  "end_seconds": 249
 }

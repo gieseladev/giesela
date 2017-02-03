@@ -3460,7 +3460,7 @@ class MusicBot(discord.Client):
                     iteration, pl.replace("_", " ").title(), server.get_member(infos["author"]).mention)
                 response_text += first_part + \
                     "".join(
-                        [" " for x in range(len(longest_first_part) - len(first_part))]) + "|"
+                        [" " for x in range((len(longest_first_part) - len(first_part))**1.75)]) + "|"
                 response_text += "   {} entr{}   |   played {} time{}   |   {}\n".format(str(
                     infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", infos["replay_count"], "s" if int(infos["replay_count"]) != 1 else "", format_time(sum([x.duration for x in infos["entries"]]), round_seconds=True, max_specifications=2))
                 iteration += 1
