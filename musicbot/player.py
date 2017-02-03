@@ -180,6 +180,7 @@ class MusicPlayer(EventEmitter):
     def pause(self):
         if type(self.current_entry).__name__ == "StreamPlaylistEntry":
             print("Won't pause because I'm playing a stream")
+            self.stop()
             self.bot.socket_server.threaded_broadcast_information()
             return
 
