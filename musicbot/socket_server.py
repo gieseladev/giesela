@@ -223,10 +223,10 @@ class SocketServer:
                               " Playing \"{}\"".format(video_url))
                     elif leftover[0] == "RADIO":
                         radio_name = leftover[1]
-                        asyncio.run_coroutine_threadsafe(self.musicbot.socket_radio(radio_name), self.musicbot.loop)
+                        asyncio.run_coroutine_threadsafe(self.musicbot.socket_radio(player, radio_name), self.musicbot.loop)
                         print("[SOCKETSERVER] {} Radio station {}".format(author_id, radio_name))
 
-        if self.sockets_by_user.pop("{}_{}".format(author_id, server_id), None) is None:
+        if self.sockets_by_user.pop(author_id, None) is None:
             print("[SOCKETSERVER] failed to remove {} ({}) from sockets_by_user list".format(
                 str(c_socket), author_id))
 
