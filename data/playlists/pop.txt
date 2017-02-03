@@ -1,0 +1,2499 @@
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=euCqAq6BRa4",
+  "title": "DJ Snake - Let Me Love You ft. Justin Bieber",
+  "duration": 205,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-euCqAq6BRa4-DJ_Snake_-_Let_Me_Love_You_ft._Justin_Bieber.webm",
+  "end_seconds": 205
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=NmugSMBh_iI",
+  "title": "Maroon 5 - Maps (Explicit)",
+  "duration": 208,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-NmugSMBh_iI-Maroon_5_-_Maps_Explicit.webm",
+  "end_seconds": 208
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=fwK7ggA3-bU",
+  "title": "Maroon 5 - One More Night",
+  "duration": 223,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-fwK7ggA3-bU-Maroon_5_-_One_More_Night.webm",
+  "end_seconds": 223
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=JGwWNGJdvx8",
+  "title": "Ed Sheeran - Shape of You [Official Video]",
+  "duration": 263,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-JGwWNGJdvx8-Ed_Sheeran_-_Shape_of_You_Official_Video.webm",
+  "end_seconds": 263
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=UprcpdwuwCg",
+  "title": "twenty one pilots: Heathens (from Suicide Squad: The Album) [OFFICIAL VIDEO]",
+  "duration": 218,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-UprcpdwuwCg-twenty_one_pilots_-_Heathens_from_Suicide_Squad_-_The_Album_OFFICIAL_VIDEO.webm",
+  "end_seconds": 218
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=31crA53Dgu0",
+  "title": "Sia - Cheap Thrills (Performance Edit)",
+  "duration": 218,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-31crA53Dgu0-Sia_-_Cheap_Thrills_Performance_Edit.webm",
+  "end_seconds": 218
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=fWNaR-rxAic",
+  "title": "Carly Rae Jepsen - Call Me Maybe",
+  "duration": 199,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-fWNaR-rxAic-Carly_Rae_Jepsen_-_Call_Me_Maybe.webm",
+  "end_seconds": 199
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=0zGcUoRlhmw",
+  "title": "The Chainsmokers - Closer ft. Halsey",
+  "duration": 247,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-0zGcUoRlhmw-The_Chainsmokers_-_Closer_ft._Halsey.webm",
+  "end_seconds": 247
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=e-ORhEE9VVg",
+  "title": "Taylor Swift - Blank Space",
+  "duration": 272,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-e-ORhEE9VVg-Taylor_Swift_-_Blank_Space.webm",
+  "end_seconds": 272
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "duration": 273,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-34Na4j8AVgA-The_Weeknd_-_Starboy_official_ft._Daft_Punk.webm",
+  "end_seconds": 273
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=AJtDXIazrMo",
+  "title": "Ellie Goulding - Love Me Like You Do (Official Video)",
+  "duration": 249,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-AJtDXIazrMo-Ellie_Goulding_-_Love_Me_Like_You_Do_Official_Video.webm",
+  "end_seconds": 249
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=7F37r50VUTQ",
+  "title": "ZAYN, Taylor Swift - I Don\u2019t Wanna Live Forever (Fifty Shades Darker)",
+  "duration": 257,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-7F37r50VUTQ-ZAYN_Taylor_Swift_-_I_Don_t_Wanna_Live_Forever_Fifty_Shades_Darker.webm",
+  "end_seconds": 257
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=MWASeaYuHZo",
+  "title": "Alessia Cara - Scars To Your Beautiful",
+  "duration": 310,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-MWASeaYuHZo-Alessia_Cara_-_Scars_To_Your_Beautiful.webm",
+  "end_seconds": 310
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=0KSOMA3QBU0",
+  "title": "Katy Perry - Dark Horse (Official) ft. Juicy J",
+  "duration": 225,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-0KSOMA3QBU0-Katy_Perry_-_Dark_Horse_Official_ft._Juicy_J.webm",
+  "end_seconds": 225
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=5GL9JoH4Sws",
+  "title": "Fifth Harmony - Work from Home ft. Ty Dolla $ign",
+  "duration": 220,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-5GL9JoH4Sws-Fifth_Harmony_-_Work_from_Home_ft._Ty_Dolla_ign.webm",
+  "end_seconds": 220
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ANS9sSJA9Yc",
+  "title": "Maroon 5 - Don't Wanna Know",
+  "duration": 379,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-ANS9sSJA9Yc-Maroon_5_-_Don_t_Wanna_Know.webm",
+  "end_seconds": 379
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=nBtDsQ4fhXY",
+  "title": "Major Lazer - Cold Water (feat. Justin Bieber & M\u00d8) (Official Dance Video)",
+  "duration": 185,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-nBtDsQ4fhXY-Major_Lazer_-_Cold_Water_feat._Justin_Bieber_MO_Official_Dance_Video.webm",
+  "end_seconds": 185
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=3AtDnEC4zak",
+  "title": "Charlie Puth - We Don't Talk Anymore (feat. Selena Gomez) [Official Video]",
+  "duration": 231,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-3AtDnEC4zak-Charlie_Puth_-_We_Don_t_Talk_Anymore_feat._Selena_Gomez_Official_Video.webm",
+  "end_seconds": 231
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=2vjPBrBU-TM",
+  "title": "Sia - Chandelier (Official Video)",
+  "duration": 231,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-2vjPBrBU-TM-Sia_-_Chandelier_Official_Video.webm",
+  "end_seconds": 231
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=UqyT8IEBkvY",
+  "title": "Bruno Mars - 24K Magic [Official Video]",
+  "duration": 227,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-UqyT8IEBkvY-Bruno_Mars_-_24K_Magic_Official_Video.webm",
+  "end_seconds": 227
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=fLexgOxsZu0",
+  "title": "Bruno Mars - The Lazy Song [OFFICIAL VIDEO]",
+  "duration": 208,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-fLexgOxsZu0-Bruno_Mars_-_The_Lazy_Song_OFFICIAL_VIDEO.webm",
+  "end_seconds": 208
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=kTHNpusq654",
+  "title": "Katy Perry - Hot N Cold (Official)",
+  "duration": 284,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-kTHNpusq654-Katy_Perry_-_Hot_N_Cold_Official.webm",
+  "end_seconds": 284
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=lY2yjAdbvdQ",
+  "title": "Shawn Mendes - Treat You Better",
+  "duration": 256,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-lY2yjAdbvdQ-Shawn_Mendes_-_Treat_You_Better.webm",
+  "end_seconds": 256
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=SXiSVQZLje8",
+  "title": "Ariana Grande - Side To Side ft. Nicki Minaj",
+  "duration": 238,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-SXiSVQZLje8-Ariana_Grande_-_Side_To_Side_ft._Nicki_Minaj.webm",
+  "end_seconds": 238
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=nfWlot6h_JM",
+  "title": "Taylor Swift - Shake It Off",
+  "duration": 242,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-nfWlot6h_JM-Taylor_Swift_-_Shake_It_Off.webm",
+  "end_seconds": 242
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ru0K8uYEZWw",
+  "title": "CAN'T STOP THE FEELING! (From DreamWorks Animation's \"Trolls\") (Official Video)",
+  "duration": 286,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-ru0K8uYEZWw-CAN_T_STOP_THE_FEELING_From_DreamWorks_Animation_s_Trolls_Official_Video.webm",
+  "end_seconds": 286
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=VuNIsY6JdUw",
+  "title": "Taylor Swift - You Belong With Me",
+  "duration": 229,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-VuNIsY6JdUw-Taylor_Swift_-_You_Belong_With_Me.webm",
+  "end_seconds": 229
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=uuwfgXD8qV8",
+  "title": "Katy Perry - Part Of Me (Official)",
+  "duration": 252,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-uuwfgXD8qV8-Katy_Perry_-_Part_Of_Me_Official.webm",
+  "end_seconds": 252
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Io0fBr1XBUA",
+  "title": "The Chainsmokers - Don't Let Me Down ft. Daya",
+  "duration": 218,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-Io0fBr1XBUA-The_Chainsmokers_-_Don_t_Let_Me_Down_ft._Daya.webm",
+  "end_seconds": 218
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=QcIy9NiNbmo",
+  "title": "Taylor Swift - Bad Blood ft. Kendrick Lamar",
+  "duration": 245,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-QcIy9NiNbmo-Taylor_Swift_-_Bad_Blood_ft._Kendrick_Lamar.webm",
+  "end_seconds": 245
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=fRh_vgS2dFE",
+  "title": "Justin Bieber - Sorry (PURPOSE : The Movement)",
+  "duration": 205,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-fRh_vgS2dFE-Justin_Bieber_-_Sorry_PURPOSE_-_The_Movement.webm",
+  "end_seconds": 205
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=rhcc1KQlCS4",
+  "title": "Andra - Why (Official Video)",
+  "duration": 178,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-rhcc1KQlCS4-Andra_-_Why_Official_Video.webm",
+  "end_seconds": 178
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=DBcVPsTmG5I",
+  "title": "Andra - Love Can Save It All (Official Video)",
+  "duration": 247,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-DBcVPsTmG5I-Andra_-_Love_Can_Save_It_All_Official_Video.webm",
+  "end_seconds": 247
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=e3Qu5C0pcGA",
+  "title": "Andra & Mara - Sweet Dreams (Radio Killer Remix)",
+  "duration": 208,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-e3Qu5C0pcGA-Andra_Mara_-_Sweet_Dreams_Radio_Killer_Remix.webm",
+  "end_seconds": 208
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Vnoz5uBEWOA",
+  "title": "Kiesza - Hideaway",
+  "duration": 275,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-Vnoz5uBEWOA-Kiesza_-_Hideaway.webm",
+  "end_seconds": 275
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=CevxZvSJLk8",
+  "title": "Katy Perry - Roar (Official)",
+  "duration": 269,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-CevxZvSJLk8-Katy_Perry_-_Roar_Official.webm",
+  "end_seconds": 269
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=b8m9zhNAgKs",
+  "title": "Rae Sremmurd - Black Beatles ft. Gucci Mane",
+  "duration": 293,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-b8m9zhNAgKs-Rae_Sremmurd_-_Black_Beatles_ft._Gucci_Mane.webm",
+  "end_seconds": 293
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=hNBlfyYHu80",
+  "title": "Niall Horan - This Town (Live, 1 Mic 1 Take)",
+  "duration": 230,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-hNBlfyYHu80-Niall_Horan_-_This_Town_Live_1_Mic_1_Take.webm",
+  "end_seconds": 230
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=rTCwL0Wsvyw",
+  "title": "Andra - Forget Me Not (feat. Dorian) (Official Video)",
+  "duration": 237,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-rTCwL0Wsvyw-Andra_-_Forget_Me_Not_feat._Dorian_Official_Video.webm",
+  "end_seconds": 237
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=kOkQ4T5WO9E",
+  "title": "Calvin Harris - This Is What You Came For (Official Video) ft. Rihanna",
+  "duration": 239,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-kOkQ4T5WO9E-Calvin_Harris_-_This_Is_What_You_Came_For_Official_Video_ft._Rihanna.webm",
+  "end_seconds": 239
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=KkGVmN68ByU",
+  "title": "Shawn Mendes - Mercy",
+  "duration": 250,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-KkGVmN68ByU-Shawn_Mendes_-_Mercy.webm",
+  "end_seconds": 250
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=a2v_zGWawP0",
+  "title": "Zay Hilfigerrr & Zayion McCall \u2013 Juju On That Beat (Official Music Video)",
+  "duration": 166,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-a2v_zGWawP0-Zay_Hilfigerrr_Zayion_McCall_Juju_On_That_Beat_Official_Music_Video.webm",
+  "end_seconds": 166
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=IdneKLhsWOQ",
+  "title": "Taylor Swift - Wildest Dreams",
+  "duration": 235,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-IdneKLhsWOQ-Taylor_Swift_-_Wildest_Dreams.webm",
+  "end_seconds": 235
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xwjwCFZpdns",
+  "title": "Hailee Steinfeld, Grey - Starving ft. Zedd",
+  "duration": 185,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-xwjwCFZpdns-Hailee_Steinfeld_Grey_-_Starving_ft._Zedd.webm",
+  "end_seconds": 185
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=oyEuk8j8imI",
+  "title": "Justin Bieber - Love Yourself  (PURPOSE : The Movement)",
+  "duration": 272,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-oyEuk8j8imI-Justin_Bieber_-_Love_Yourself_PURPOSE_-_The_Movement.webm",
+  "end_seconds": 272
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=BiQIc7fG9pA",
+  "title": "gnash - i hate u, i love u ft. olivia o'brien [music video]",
+  "duration": 227,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-BiQIc7fG9pA-gnash_-_i_hate_u_i_love_u_ft._olivia_o_brien_music_video.webm",
+  "end_seconds": 227
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=YBHQbu5rbdQ",
+  "title": "Fifth Harmony - Worth It ft. Kid Ink",
+  "duration": 225,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-YBHQbu5rbdQ-Fifth_Harmony_-_Worth_It_ft._Kid_Ink.webm",
+  "end_seconds": 225
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=LHCob76kigA",
+  "title": "Lukas Graham - 7 Years [OFFICIAL MUSIC VIDEO]",
+  "duration": 239,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-LHCob76kigA-Lukas_Graham_-_7_Years_OFFICIAL_MUSIC_VIDEO.webm",
+  "end_seconds": 239
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=MkElfR_NPBI",
+  "title": "Little Mix - Black Magic",
+  "duration": 226,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-MkElfR_NPBI-Little_Mix_-_Black_Magic.webm",
+  "end_seconds": 226
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=fk4BbF7B29w",
+  "title": "Adele - Send My Love (To Your New Lover)",
+  "duration": 225,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-fk4BbF7B29w-Adele_-_Send_My_Love_To_Your_New_Lover.webm",
+  "end_seconds": 225
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=qDRORgoZxZU",
+  "title": "Meghan Trainor - Me Too",
+  "duration": 182,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-qDRORgoZxZU-Meghan_Trainor_-_Me_Too.webm",
+  "end_seconds": 182
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=rYEDA3JcQqw",
+  "title": "Adele - Rolling in the Deep",
+  "duration": 234,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-rYEDA3JcQqw-Adele_-_Rolling_in_the_Deep.webm",
+  "end_seconds": 234
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=YqeW9_5kURI",
+  "title": "Major Lazer & DJ Snake - Lean On (feat. M\u00d8) (Official Music Video)",
+  "duration": 179,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-YqeW9_5kURI-Major_Lazer_DJ_Snake_-_Lean_On_feat._MO_Official_Music_Video.webm",
+  "end_seconds": 179
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=1ekZEVeXwek",
+  "title": "Ariana Grande - Into You",
+  "duration": 255,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-1ekZEVeXwek-Ariana_Grande_-_Into_You.webm",
+  "end_seconds": 255
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=E5ONTXHS2mM",
+  "title": "Desiigner - Panda",
+  "duration": 243,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-E5ONTXHS2mM-Desiigner_-_Panda.webm",
+  "end_seconds": 243
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=F57P9C4SAW4",
+  "title": "Katy Perry - California Gurls (Official) ft. Snoop Dogg",
+  "duration": 234,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-F57P9C4SAW4-Katy_Perry_-_California_Gurls_Official_ft._Snoop_Dogg.webm",
+  "end_seconds": 234
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=IC-bSbXZBcU",
+  "title": "Lukas Graham - You're Not There [OFFICIAL MUSIC VIDEO]",
+  "duration": 224,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-IC-bSbXZBcU-Lukas_Graham_-_You_re_Not_There_OFFICIAL_MUSIC_VIDEO.webm",
+  "end_seconds": 224
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=jGflUbPQfW8",
+  "title": "OMI - Cheerleader (Felix Jaehn Remix) [Official Video]",
+  "duration": 189,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-jGflUbPQfW8-OMI_-_Cheerleader_Felix_Jaehn_Remix_Official_Video.webm",
+  "end_seconds": 189
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=jqYxyd1iSNk",
+  "title": "Katy Perry - Birthday (Lyric Video)",
+  "duration": 216,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-jqYxyd1iSNk-Katy_Perry_-_Birthday_Lyric_Video.webm",
+  "end_seconds": 216
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=5Nrv5teMc9Y",
+  "title": "P!nk - Just Like Fire (From the Original Motion Picture \"Alice Through The Looking Glass\")",
+  "duration": 233,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-5Nrv5teMc9Y-P_nk_-_Just_Like_Fire_From_the_Original_Motion_Picture_Alice_Through_The_Looking_Glass.webm",
+  "end_seconds": 233
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=OPf0YbXqDm0",
+  "title": "Mark Ronson - Uptown Funk ft. Bruno Mars",
+  "duration": 270,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-OPf0YbXqDm0-Mark_Ronson_-_Uptown_Funk_ft._Bruno_Mars.m4a",
+  "end_seconds": 270
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=foE1mO2yM04",
+  "title": "Mike Posner - I Took A Pill In Ibiza (Seeb Remix) (Explicit)",
+  "duration": 236,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-foE1mO2yM04-Mike_Posner_-_I_Took_A_Pill_In_Ibiza_Seeb_Remix_Explicit.webm",
+  "end_seconds": 236
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=RgKAFK5djSk",
+  "title": "Wiz Khalifa - See You Again ft. Charlie Puth [Official Video] Furious 7 Soundtrack",
+  "duration": 237,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-RgKAFK5djSk-Wiz_Khalifa_-_See_You_Again_ft._Charlie_Puth_Official_Video_Furious_7_Soundtrack.webm",
+  "end_seconds": 237
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=igNVdlXhKcI",
+  "title": "Charlie Puth - Marvin Gaye ft. Meghan Trainor [Official Video]",
+  "duration": 209,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-igNVdlXhKcI-Charlie_Puth_-_Marvin_Gaye_ft._Meghan_Trainor_Official_Video.webm",
+  "end_seconds": 209
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=oydff0QlXSM",
+  "title": "Britney Spears - Make Me... (Audio) ft. G-Eazy",
+  "duration": 233,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-oydff0QlXSM-Britney_Spears_-_Make_Me..._Audio_ft._G-Eazy.webm",
+  "end_seconds": 233
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=iTno21crSsY",
+  "title": "PARTYNEXTDOOR - Not Nice [Official Music Video]",
+  "duration": 188,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-iTno21crSsY-PARTYNEXTDOOR_-_Not_Nice_Official_Music_Video.webm",
+  "end_seconds": 188
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=HL1UzIK-flA",
+  "title": "Rihanna - Work (Explicit) ft. Drake",
+  "duration": 454,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-HL1UzIK-flA-Rihanna_-_Work_Explicit_ft._Drake.webm",
+  "end_seconds": 454
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=pRpeEdMmmQ0",
+  "title": "Shakira - Waka Waka (This Time for Africa) (The Official 2010 FIFA World Cup\u2122 Song)",
+  "duration": 211,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-pRpeEdMmmQ0-Shakira_-_Waka_Waka_This_Time_for_Africa_The_Official_2010_FIFA_World_Cup_Song.webm",
+  "end_seconds": 211
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=gdx7gN1UyX0",
+  "title": "Justin Bieber - Company",
+  "duration": 208,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-gdx7gN1UyX0-Justin_Bieber_-_Company.webm",
+  "end_seconds": 208
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=GsPq9mzFNGY",
+  "title": "James Bay - Let It Go",
+  "duration": 258,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-GsPq9mzFNGY-James_Bay_-_Let_It_Go.webm",
+  "end_seconds": 258
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=pXRviuL6vMY",
+  "title": "twenty one pilots: Stressed Out [OFFICIAL VIDEO]",
+  "duration": 225,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-pXRviuL6vMY-twenty_one_pilots_-_Stressed_Out_OFFICIAL_VIDEO.webm",
+  "end_seconds": 225
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ipADNlW7yBM",
+  "title": "The Beatles - I Want To Hold your Hand [HD]",
+  "duration": 143,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-ipADNlW7yBM-The_Beatles_-_I_Want_To_Hold_your_Hand_HD.webm",
+  "end_seconds": 143
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Jwgf3wmiA04",
+  "title": "One Direction - Drag Me Down",
+  "duration": 192,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-Jwgf3wmiA04-One_Direction_-_Drag_Me_Down.webm",
+  "end_seconds": 192
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=9WbCfHutDSE",
+  "title": "Ariana Grande - Dangerous Woman",
+  "duration": 236,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-9WbCfHutDSE-Ariana_Grande_-_Dangerous_Woman.webm",
+  "end_seconds": 236
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=LrUvu1mlWco",
+  "title": "Miley Cyrus - We Can't Stop",
+  "duration": 213,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-LrUvu1mlWco-Miley_Cyrus_-_We_Can_t_Stop.webm",
+  "end_seconds": 213
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Bznxx12Ptl0",
+  "title": "AronChupa - I'm an Albatraoz | OFFICIAL VIDEO",
+  "duration": 149,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-Bznxx12Ptl0-AronChupa_-_I_m_an_Albatraoz_OFFICIAL_VIDEO.webm",
+  "end_seconds": 149
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=QGJuMBdaqIw",
+  "title": "Katy Perry - Firework (Official)",
+  "duration": 234,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-QGJuMBdaqIw-Katy_Perry_-_Firework_Official.webm",
+  "end_seconds": 234
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=BxuY9FET9Y4",
+  "title": "Charlie Puth - One Call Away [Official Video]",
+  "duration": 242,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-BxuY9FET9Y4-Charlie_Puth_-_One_Call_Away_Official_Video.webm",
+  "end_seconds": 242
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=XgJFqVvb2Ws",
+  "title": "Nick Jonas - Close ft. Tove Lo",
+  "duration": 238,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-XgJFqVvb2Ws-Nick_Jonas_-_Close_ft._Tove_Lo.webm",
+  "end_seconds": 238
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=9bZkp7q19f0",
+  "title": "PSY - GANGNAM STYLE(\uac15\ub0a8\uc2a4\ud0c0\uc77c) M/V",
+  "duration": 252,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-9bZkp7q19f0-PSY_-_GANGNAM_STYLE_M_V.webm",
+  "end_seconds": 252
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=YykjpeuMNEk",
+  "title": "Coldplay - Hymn For The Weekend (Official Video)",
+  "duration": 261,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-YykjpeuMNEk-Coldplay_-_Hymn_For_The_Weekend_Official_Video.webm",
+  "end_seconds": 261
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=cMTAUr3Nm6I",
+  "title": "Meghan Trainor - NO",
+  "duration": 222,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-cMTAUr3Nm6I-Meghan_Trainor_-_NO.webm",
+  "end_seconds": 222
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=PAzH-YAlFYc",
+  "title": "DNCE - Cake By The Ocean",
+  "duration": 219,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-PAzH-YAlFYc-DNCE_-_Cake_By_The_Ocean.webm",
+  "end_seconds": 219
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=C_3d6GntKbk",
+  "title": "ZAYN - PILLOWTALK",
+  "duration": 207,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-C_3d6GntKbk-ZAYN_-_PILLOWTALK.webm",
+  "end_seconds": 207
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Pgmx7z49OEk",
+  "title": "Jennifer Lopez - Ain't Your Mama",
+  "duration": 309,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-Pgmx7z49OEk-Jennifer_Lopez_-_Ain_t_Your_Mama.webm",
+  "end_seconds": 309
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=YQHsXMglC9A",
+  "title": "Adele - Hello",
+  "duration": 367,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-YQHsXMglC9A-Adele_-_Hello.webm",
+  "end_seconds": 367
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=09R8_2nJtjg",
+  "title": "Maroon 5 - Sugar",
+  "duration": 301,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-09R8_2nJtjg-Maroon_5_-_Sugar.webm",
+  "end_seconds": 301
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=-YICuUtkjlg",
+  "title": "Miley Cyrus - Wrecking Ball (Director's Cut)",
+  "duration": 236,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube--YICuUtkjlg-Miley_Cyrus_-_Wrecking_Ball_Director_s_Cut.webm",
+  "end_seconds": 236
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=DK_0jXPuIr0",
+  "title": "Justin Bieber - What Do You Mean?",
+  "duration": 298,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-DK_0jXPuIr0-Justin_Bieber_-_What_Do_You_Mean.webm",
+  "end_seconds": 298
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=tD4HCZe-tew",
+  "title": "Zara Larsson - Lush Life",
+  "duration": 202,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-tD4HCZe-tew-Zara_Larsson_-_Lush_Life.webm",
+  "end_seconds": 202
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=IvPT2QuCIOA",
+  "title": "DJ Snake - Middle ft. Bipolar Sunshine",
+  "duration": 300,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-IvPT2QuCIOA-DJ_Snake_-_Middle_ft._Bipolar_Sunshine.webm",
+  "end_seconds": 300
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=iS1g8G_njx8",
+  "title": "Ariana Grande - Problem ft. Iggy Azalea",
+  "duration": 207,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-iS1g8G_njx8-Ariana_Grande_-_Problem_ft._Iggy_Azalea.webm",
+  "end_seconds": 207
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=yjmp8CoZBIo",
+  "title": "One Direction - History (Official Video)",
+  "duration": 195,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-yjmp8CoZBIo-One_Direction_-_History_Official_Video.webm",
+  "end_seconds": 195
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=KRaWnd3LJfs",
+  "title": "Maroon 5 - Payphone (Explicit) ft. Wiz Khalifa",
+  "duration": 279,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-KRaWnd3LJfs-Maroon_5_-_Payphone_Explicit_ft._Wiz_Khalifa.webm",
+  "end_seconds": 279
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=o3mP3mJDL2k",
+  "title": "Shakira - Can't Remember to Forget You ft. Rihanna",
+  "duration": 206,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-o3mP3mJDL2k-Shakira_-_Can_t_Remember_to_Forget_You_ft._Rihanna.webm",
+  "end_seconds": 206
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=bESGLojNYSo",
+  "title": "Lady Gaga - Poker Face",
+  "duration": 215,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-bESGLojNYSo-Lady_Gaga_-_Poker_Face.webm",
+  "end_seconds": 215
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=5yXQJBU8A28",
+  "title": "Jonas Blue - Fast Car ft. Dakota",
+  "duration": 216,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-5yXQJBU8A28-Jonas_Blue_-_Fast_Car_ft._Dakota.webm",
+  "end_seconds": 216
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=hHUbLv4ThOo",
+  "title": "Pitbull - Timber ft. Ke$ha",
+  "duration": 214,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-hHUbLv4ThOo-Pitbull_-_Timber_ft._Ke_ha.m4a",
+  "end_seconds": 214
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=bvC_0foemLY",
+  "title": "Robin Schulz - Sugar (feat. Francesco Yates) (OFFICIAL MUSIC VIDEO)",
+  "duration": 223,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-bvC_0foemLY-Robin_Schulz_-_Sugar_feat._Francesco_Yates_OFFICIAL_MUSIC_VIDEO.webm",
+  "end_seconds": 223
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=60ItHLz5WEA",
+  "title": "Alan Walker - Faded",
+  "duration": 213,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-60ItHLz5WEA-Alan_Walker_-_Faded.webm",
+  "end_seconds": 213
+***REMOVED***
