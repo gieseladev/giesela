@@ -1,15 +1,15 @@
-import asyncio
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
-from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
 
+import asyncio
 import audioop
+from enum import Enum
 
 from .exceptions import FFmpegError, FFmpegWarning
 from .lib.event_emitter import EventEmitter
@@ -180,6 +180,7 @@ class MusicPlayer(EventEmitter):
     def pause(self):
         if type(self.current_entry).__name__ == "StreamPlaylistEntry":
             print("Won't pause because I'm playing a stream")
+            self.stop()
             self.bot.socket_server.threaded_broadcast_information()
             return
 

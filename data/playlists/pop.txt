@@ -19,7 +19,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-euCqAq6BRa4-DJ_Snake_-_Let_Me_Love_You_ft._Justin_Bieber.webm",
+  "start_seconds": null,
   "end_seconds": 205
 }
 ;
@@ -44,7 +44,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-NmugSMBh_iI-Maroon_5_-_Maps_Explicit.webm",
+  "start_seconds": null,
   "end_seconds": 208
 }
 ;
@@ -69,7 +69,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-fwK7ggA3-bU-Maroon_5_-_One_More_Night.webm",
+  "start_seconds": null,
   "end_seconds": 223
 }
 ;
@@ -94,7 +94,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-JGwWNGJdvx8-Ed_Sheeran_-_Shape_of_You_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 263
 }
 ;
@@ -119,7 +119,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-UprcpdwuwCg-twenty_one_pilots_-_Heathens_from_Suicide_Squad_-_The_Album_OFFICIAL_VIDEO.webm",
+  "start_seconds": null,
   "end_seconds": 218
 }
 ;
@@ -144,7 +144,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-31crA53Dgu0-Sia_-_Cheap_Thrills_Performance_Edit.webm",
+  "start_seconds": null,
   "end_seconds": 218
 }
 ;
@@ -169,7 +169,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-fWNaR-rxAic-Carly_Rae_Jepsen_-_Call_Me_Maybe.webm",
+  "start_seconds": null,
   "end_seconds": 199
 }
 ;
@@ -194,7 +194,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-0zGcUoRlhmw-The_Chainsmokers_-_Closer_ft._Halsey.webm",
+  "start_seconds": null,
   "end_seconds": 247
 }
 ;
@@ -219,7 +219,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-e-ORhEE9VVg-Taylor_Swift_-_Blank_Space.webm",
+  "start_seconds": null,
   "end_seconds": 272
 }
 ;
@@ -244,7 +244,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-34Na4j8AVgA-The_Weeknd_-_Starboy_official_ft._Daft_Punk.webm",
+  "start_seconds": null,
   "end_seconds": 273
 }
 ;
@@ -269,7 +269,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-AJtDXIazrMo-Ellie_Goulding_-_Love_Me_Like_You_Do_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 249
 }
 ;
@@ -294,7 +294,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-7F37r50VUTQ-ZAYN_Taylor_Swift_-_I_Don_t_Wanna_Live_Forever_Fifty_Shades_Darker.webm",
+  "start_seconds": null,
   "end_seconds": 257
 }
 ;
@@ -319,7 +319,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-MWASeaYuHZo-Alessia_Cara_-_Scars_To_Your_Beautiful.webm",
+  "start_seconds": null,
   "end_seconds": 310
 }
 ;
@@ -344,7 +344,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-0KSOMA3QBU0-Katy_Perry_-_Dark_Horse_Official_ft._Juicy_J.webm",
+  "start_seconds": null,
   "end_seconds": 225
 }
 ;
@@ -369,7 +369,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-5GL9JoH4Sws-Fifth_Harmony_-_Work_from_Home_ft._Ty_Dolla_ign.webm",
+  "start_seconds": null,
   "end_seconds": 220
 }
 ;
@@ -394,7 +394,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-ANS9sSJA9Yc-Maroon_5_-_Don_t_Wanna_Know.webm",
+  "start_seconds": null,
   "end_seconds": 379
 }
 ;
@@ -419,7 +419,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-nBtDsQ4fhXY-Major_Lazer_-_Cold_Water_feat._Justin_Bieber_MO_Official_Dance_Video.webm",
+  "start_seconds": null,
   "end_seconds": 185
 }
 ;
@@ -444,7 +444,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-3AtDnEC4zak-Charlie_Puth_-_We_Don_t_Talk_Anymore_feat._Selena_Gomez_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 231
 }
 ;
@@ -469,7 +469,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-2vjPBrBU-TM-Sia_-_Chandelier_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 231
 }
 ;
@@ -494,7 +494,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-UqyT8IEBkvY-Bruno_Mars_-_24K_Magic_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 227
 }
 ;
@@ -519,7 +519,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-fLexgOxsZu0-Bruno_Mars_-_The_Lazy_Song_OFFICIAL_VIDEO.webm",
+  "start_seconds": null,
   "end_seconds": 208
 }
 ;
@@ -544,7 +544,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-kTHNpusq654-Katy_Perry_-_Hot_N_Cold_Official.webm",
+  "start_seconds": null,
   "end_seconds": 284
 }
 ;
@@ -569,7 +569,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-lY2yjAdbvdQ-Shawn_Mendes_-_Treat_You_Better.webm",
+  "start_seconds": null,
   "end_seconds": 256
 }
 ;
@@ -594,7 +594,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-SXiSVQZLje8-Ariana_Grande_-_Side_To_Side_ft._Nicki_Minaj.webm",
+  "start_seconds": null,
   "end_seconds": 238
 }
 ;
@@ -619,7 +619,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-nfWlot6h_JM-Taylor_Swift_-_Shake_It_Off.webm",
+  "start_seconds": null,
   "end_seconds": 242
 }
 ;
@@ -644,7 +644,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-ru0K8uYEZWw-CAN_T_STOP_THE_FEELING_From_DreamWorks_Animation_s_Trolls_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 286
 }
 ;
@@ -669,7 +669,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-VuNIsY6JdUw-Taylor_Swift_-_You_Belong_With_Me.webm",
+  "start_seconds": null,
   "end_seconds": 229
 }
 ;
@@ -694,7 +694,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-uuwfgXD8qV8-Katy_Perry_-_Part_Of_Me_Official.webm",
+  "start_seconds": null,
   "end_seconds": 252
 }
 ;
@@ -719,7 +719,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-Io0fBr1XBUA-The_Chainsmokers_-_Don_t_Let_Me_Down_ft._Daya.webm",
+  "start_seconds": null,
   "end_seconds": 218
 }
 ;
@@ -744,7 +744,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-QcIy9NiNbmo-Taylor_Swift_-_Bad_Blood_ft._Kendrick_Lamar.webm",
+  "start_seconds": null,
   "end_seconds": 245
 }
 ;
@@ -769,7 +769,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-fRh_vgS2dFE-Justin_Bieber_-_Sorry_PURPOSE_-_The_Movement.webm",
+  "start_seconds": null,
   "end_seconds": 205
 }
 ;
@@ -794,7 +794,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-rhcc1KQlCS4-Andra_-_Why_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 178
 }
 ;
@@ -819,7 +819,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-DBcVPsTmG5I-Andra_-_Love_Can_Save_It_All_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 247
 }
 ;
@@ -844,7 +844,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-e3Qu5C0pcGA-Andra_Mara_-_Sweet_Dreams_Radio_Killer_Remix.webm",
+  "start_seconds": null,
   "end_seconds": 208
 }
 ;
@@ -869,7 +869,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-Vnoz5uBEWOA-Kiesza_-_Hideaway.webm",
+  "start_seconds": null,
   "end_seconds": 275
 }
 ;
@@ -894,7 +894,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-CevxZvSJLk8-Katy_Perry_-_Roar_Official.webm",
+  "start_seconds": null,
   "end_seconds": 269
 }
 ;
@@ -919,7 +919,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-b8m9zhNAgKs-Rae_Sremmurd_-_Black_Beatles_ft._Gucci_Mane.webm",
+  "start_seconds": null,
   "end_seconds": 293
 }
 ;
@@ -944,7 +944,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-hNBlfyYHu80-Niall_Horan_-_This_Town_Live_1_Mic_1_Take.webm",
+  "start_seconds": null,
   "end_seconds": 230
 }
 ;
@@ -969,7 +969,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-rTCwL0Wsvyw-Andra_-_Forget_Me_Not_feat._Dorian_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 237
 }
 ;
@@ -994,7 +994,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-kOkQ4T5WO9E-Calvin_Harris_-_This_Is_What_You_Came_For_Official_Video_ft._Rihanna.webm",
+  "start_seconds": null,
   "end_seconds": 239
 }
 ;
@@ -1019,7 +1019,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-KkGVmN68ByU-Shawn_Mendes_-_Mercy.webm",
+  "start_seconds": null,
   "end_seconds": 250
 }
 ;
@@ -1044,7 +1044,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-a2v_zGWawP0-Zay_Hilfigerrr_Zayion_McCall_Juju_On_That_Beat_Official_Music_Video.webm",
+  "start_seconds": null,
   "end_seconds": 166
 }
 ;
@@ -1069,7 +1069,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-IdneKLhsWOQ-Taylor_Swift_-_Wildest_Dreams.webm",
+  "start_seconds": null,
   "end_seconds": 235
 }
 ;
@@ -1094,7 +1094,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-xwjwCFZpdns-Hailee_Steinfeld_Grey_-_Starving_ft._Zedd.webm",
+  "start_seconds": null,
   "end_seconds": 185
 }
 ;
@@ -1119,7 +1119,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-oyEuk8j8imI-Justin_Bieber_-_Love_Yourself_PURPOSE_-_The_Movement.webm",
+  "start_seconds": null,
   "end_seconds": 272
 }
 ;
@@ -1144,7 +1144,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-BiQIc7fG9pA-gnash_-_i_hate_u_i_love_u_ft._olivia_o_brien_music_video.webm",
+  "start_seconds": null,
   "end_seconds": 227
 }
 ;
@@ -1169,7 +1169,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-YBHQbu5rbdQ-Fifth_Harmony_-_Worth_It_ft._Kid_Ink.webm",
+  "start_seconds": null,
   "end_seconds": 225
 }
 ;
@@ -1194,7 +1194,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-LHCob76kigA-Lukas_Graham_-_7_Years_OFFICIAL_MUSIC_VIDEO.webm",
+  "start_seconds": null,
   "end_seconds": 239
 }
 ;
@@ -1219,7 +1219,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-MkElfR_NPBI-Little_Mix_-_Black_Magic.webm",
+  "start_seconds": null,
   "end_seconds": 226
 }
 ;
@@ -1244,7 +1244,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-fk4BbF7B29w-Adele_-_Send_My_Love_To_Your_New_Lover.webm",
+  "start_seconds": null,
   "end_seconds": 225
 }
 ;
@@ -1269,7 +1269,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-qDRORgoZxZU-Meghan_Trainor_-_Me_Too.webm",
+  "start_seconds": null,
   "end_seconds": 182
 }
 ;
@@ -1294,7 +1294,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-rYEDA3JcQqw-Adele_-_Rolling_in_the_Deep.webm",
+  "start_seconds": null,
   "end_seconds": 234
 }
 ;
@@ -1319,7 +1319,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-YqeW9_5kURI-Major_Lazer_DJ_Snake_-_Lean_On_feat._MO_Official_Music_Video.webm",
+  "start_seconds": null,
   "end_seconds": 179
 }
 ;
@@ -1344,7 +1344,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-1ekZEVeXwek-Ariana_Grande_-_Into_You.webm",
+  "start_seconds": null,
   "end_seconds": 255
 }
 ;
@@ -1369,7 +1369,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-E5ONTXHS2mM-Desiigner_-_Panda.webm",
+  "start_seconds": null,
   "end_seconds": 243
 }
 ;
@@ -1394,7 +1394,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-F57P9C4SAW4-Katy_Perry_-_California_Gurls_Official_ft._Snoop_Dogg.webm",
+  "start_seconds": null,
   "end_seconds": 234
 }
 ;
@@ -1419,7 +1419,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-IC-bSbXZBcU-Lukas_Graham_-_You_re_Not_There_OFFICIAL_MUSIC_VIDEO.webm",
+  "start_seconds": null,
   "end_seconds": 224
 }
 ;
@@ -1444,7 +1444,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-jGflUbPQfW8-OMI_-_Cheerleader_Felix_Jaehn_Remix_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 189
 }
 ;
@@ -1469,7 +1469,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-jqYxyd1iSNk-Katy_Perry_-_Birthday_Lyric_Video.webm",
+  "start_seconds": null,
   "end_seconds": 216
 }
 ;
@@ -1494,7 +1494,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-5Nrv5teMc9Y-P_nk_-_Just_Like_Fire_From_the_Original_Motion_Picture_Alice_Through_The_Looking_Glass.webm",
+  "start_seconds": null,
   "end_seconds": 233
 }
 ;
@@ -1519,7 +1519,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-OPf0YbXqDm0-Mark_Ronson_-_Uptown_Funk_ft._Bruno_Mars.m4a",
+  "start_seconds": null,
   "end_seconds": 270
 }
 ;
@@ -1544,7 +1544,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-foE1mO2yM04-Mike_Posner_-_I_Took_A_Pill_In_Ibiza_Seeb_Remix_Explicit.webm",
+  "start_seconds": null,
   "end_seconds": 236
 }
 ;
@@ -1569,7 +1569,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-RgKAFK5djSk-Wiz_Khalifa_-_See_You_Again_ft._Charlie_Puth_Official_Video_Furious_7_Soundtrack.webm",
+  "start_seconds": null,
   "end_seconds": 237
 }
 ;
@@ -1594,7 +1594,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-igNVdlXhKcI-Charlie_Puth_-_Marvin_Gaye_ft._Meghan_Trainor_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 209
 }
 ;
@@ -1619,7 +1619,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-oydff0QlXSM-Britney_Spears_-_Make_Me..._Audio_ft._G-Eazy.webm",
+  "start_seconds": null,
   "end_seconds": 233
 }
 ;
@@ -1644,7 +1644,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-iTno21crSsY-PARTYNEXTDOOR_-_Not_Nice_Official_Music_Video.webm",
+  "start_seconds": null,
   "end_seconds": 188
 }
 ;
@@ -1669,7 +1669,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-HL1UzIK-flA-Rihanna_-_Work_Explicit_ft._Drake.webm",
+  "start_seconds": null,
   "end_seconds": 454
 }
 ;
@@ -1694,7 +1694,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-pRpeEdMmmQ0-Shakira_-_Waka_Waka_This_Time_for_Africa_The_Official_2010_FIFA_World_Cup_Song.webm",
+  "start_seconds": null,
   "end_seconds": 211
 }
 ;
@@ -1719,7 +1719,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-gdx7gN1UyX0-Justin_Bieber_-_Company.webm",
+  "start_seconds": null,
   "end_seconds": 208
 }
 ;
@@ -1744,7 +1744,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-GsPq9mzFNGY-James_Bay_-_Let_It_Go.webm",
+  "start_seconds": null,
   "end_seconds": 258
 }
 ;
@@ -1769,7 +1769,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-pXRviuL6vMY-twenty_one_pilots_-_Stressed_Out_OFFICIAL_VIDEO.webm",
+  "start_seconds": null,
   "end_seconds": 225
 }
 ;
@@ -1794,7 +1794,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-ipADNlW7yBM-The_Beatles_-_I_Want_To_Hold_your_Hand_HD.webm",
+  "start_seconds": null,
   "end_seconds": 143
 }
 ;
@@ -1819,7 +1819,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-Jwgf3wmiA04-One_Direction_-_Drag_Me_Down.webm",
+  "start_seconds": null,
   "end_seconds": 192
 }
 ;
@@ -1844,7 +1844,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-9WbCfHutDSE-Ariana_Grande_-_Dangerous_Woman.webm",
+  "start_seconds": null,
   "end_seconds": 236
 }
 ;
@@ -1869,7 +1869,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-LrUvu1mlWco-Miley_Cyrus_-_We_Can_t_Stop.webm",
+  "start_seconds": null,
   "end_seconds": 213
 }
 ;
@@ -1894,7 +1894,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-Bznxx12Ptl0-AronChupa_-_I_m_an_Albatraoz_OFFICIAL_VIDEO.webm",
+  "start_seconds": null,
   "end_seconds": 149
 }
 ;
@@ -1919,7 +1919,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-QGJuMBdaqIw-Katy_Perry_-_Firework_Official.webm",
+  "start_seconds": null,
   "end_seconds": 234
 }
 ;
@@ -1944,7 +1944,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-BxuY9FET9Y4-Charlie_Puth_-_One_Call_Away_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 242
 }
 ;
@@ -1969,7 +1969,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-XgJFqVvb2Ws-Nick_Jonas_-_Close_ft._Tove_Lo.webm",
+  "start_seconds": null,
   "end_seconds": 238
 }
 ;
@@ -1994,7 +1994,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-9bZkp7q19f0-PSY_-_GANGNAM_STYLE_M_V.webm",
+  "start_seconds": null,
   "end_seconds": 252
 }
 ;
@@ -2019,7 +2019,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-YykjpeuMNEk-Coldplay_-_Hymn_For_The_Weekend_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 261
 }
 ;
@@ -2044,7 +2044,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-cMTAUr3Nm6I-Meghan_Trainor_-_NO.webm",
+  "start_seconds": null,
   "end_seconds": 222
 }
 ;
@@ -2069,7 +2069,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-PAzH-YAlFYc-DNCE_-_Cake_By_The_Ocean.webm",
+  "start_seconds": null,
   "end_seconds": 219
 }
 ;
@@ -2094,7 +2094,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-C_3d6GntKbk-ZAYN_-_PILLOWTALK.webm",
+  "start_seconds": null,
   "end_seconds": 207
 }
 ;
@@ -2119,7 +2119,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-Pgmx7z49OEk-Jennifer_Lopez_-_Ain_t_Your_Mama.webm",
+  "start_seconds": null,
   "end_seconds": 309
 }
 ;
@@ -2144,7 +2144,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-YQHsXMglC9A-Adele_-_Hello.webm",
+  "start_seconds": null,
   "end_seconds": 367
 }
 ;
@@ -2169,7 +2169,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-09R8_2nJtjg-Maroon_5_-_Sugar.webm",
+  "start_seconds": null,
   "end_seconds": 301
 }
 ;
@@ -2194,7 +2194,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube--YICuUtkjlg-Miley_Cyrus_-_Wrecking_Ball_Director_s_Cut.webm",
+  "start_seconds": null,
   "end_seconds": 236
 }
 ;
@@ -2219,7 +2219,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-DK_0jXPuIr0-Justin_Bieber_-_What_Do_You_Mean.webm",
+  "start_seconds": null,
   "end_seconds": 298
 }
 ;
@@ -2244,7 +2244,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-tD4HCZe-tew-Zara_Larsson_-_Lush_Life.webm",
+  "start_seconds": null,
   "end_seconds": 202
 }
 ;
@@ -2269,7 +2269,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-IvPT2QuCIOA-DJ_Snake_-_Middle_ft._Bipolar_Sunshine.webm",
+  "start_seconds": null,
   "end_seconds": 300
 }
 ;
@@ -2294,7 +2294,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-iS1g8G_njx8-Ariana_Grande_-_Problem_ft._Iggy_Azalea.webm",
+  "start_seconds": null,
   "end_seconds": 207
 }
 ;
@@ -2319,7 +2319,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-yjmp8CoZBIo-One_Direction_-_History_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 195
 }
 ;
@@ -2344,7 +2344,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-KRaWnd3LJfs-Maroon_5_-_Payphone_Explicit_ft._Wiz_Khalifa.webm",
+  "start_seconds": null,
   "end_seconds": 279
 }
 ;
@@ -2369,7 +2369,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-o3mP3mJDL2k-Shakira_-_Can_t_Remember_to_Forget_You_ft._Rihanna.webm",
+  "start_seconds": null,
   "end_seconds": 206
 }
 ;
@@ -2394,7 +2394,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-bESGLojNYSo-Lady_Gaga_-_Poker_Face.webm",
+  "start_seconds": null,
   "end_seconds": 215
 }
 ;
@@ -2419,7 +2419,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-5yXQJBU8A28-Jonas_Blue_-_Fast_Car_ft._Dakota.webm",
+  "start_seconds": null,
   "end_seconds": 216
 }
 ;
@@ -2444,7 +2444,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-hHUbLv4ThOo-Pitbull_-_Timber_ft._Ke_ha.m4a",
+  "start_seconds": null,
   "end_seconds": 214
 }
 ;
@@ -2469,7 +2469,7 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-bvC_0foemLY-Robin_Schulz_-_Sugar_feat._Francesco_Yates_OFFICIAL_MUSIC_VIDEO.webm",
+  "start_seconds": null,
   "end_seconds": 223
 }
 ;
@@ -2494,6 +2494,5781 @@
       "name": "Lophorius"
     }
   },
-  "start_seconds": "audio_cache\\youtube-60ItHLz5WEA-Alan_Walker_-_Faded.webm",
+  "start_seconds": null,
   "end_seconds": 213
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=K0ibBPhiaG0",
+  "title": "Ed Sheeran - Castle On The Hill [Official Video]",
+  "duration": 288,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 288
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=papuvlVeZg8",
+  "title": "Clean Bandit - Rockabye ft. Sean Paul & Anne-Marie [Official Video]",
+  "duration": 254,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 254
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=LELFIuhSPCI",
+  "title": "Ariana Grande - Everyday (Lyric Video) ft. Future",
+  "duration": 195,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 195
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=PT2_F-1esPk",
+  "title": "The Chainsmokers - Closer (Lyric) ft. Halsey",
+  "duration": 262,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 262
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=XTWDTBkj6xU",
+  "title": "Zara Larsson - So Good ft. Ty Dolla $ign",
+  "duration": 174,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 174
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=S-sJp1FfG7Q",
+  "title": "Migos - Bad and Boujee ft Lil Uzi Vert [Official Video]",
+  "duration": 335,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 335
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=RhU9MZ98jxo",
+  "title": "The Chainsmokers - Paris (Lyric)",
+  "duration": 229,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 229
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=gBAfejjUQoA",
+  "title": "Little Mix - Touch (Official Video)",
+  "duration": 218,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 218
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=e2vBLd5Egnk",
+  "title": "Martin Garrix & Dua Lipa - Scared To Be Lonely (Official Video)",
+  "duration": 230,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 230
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=AXnqkVTFUqY",
+  "title": "Jon Bellion - All Time Low (Video)",
+  "duration": 219,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 219
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=0-7IHOXkiV8",
+  "title": "Kaleo - Way Down We Go (Official Video)",
+  "duration": 214,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 214
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=oNWOC_Pvo4w",
+  "title": "Ofenbach - Be Mine (Official Video)",
+  "duration": 175,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 175
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=fWGD2Cr9StM",
+  "title": "Marian Hill - Down",
+  "duration": 201,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 201
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=_C7UgR_sIW0",
+  "title": "Parov Stelar - All Night (Official Audio)",
+  "duration": 165,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 165
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=NJlOmDWyoA8",
+  "title": "Martin Solveig - Places ft. Ina Wroldsen",
+  "duration": 255,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 255
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=vScUbKoE-qs",
+  "title": "Ariana Grande, John Legend - Beauty and the Beast (From \"Beauty and the Beast\"/Audio Only)",
+  "duration": 230,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 230
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=9ORWF5RkdO0",
+  "title": "JP Cooper - September Song",
+  "duration": 215,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 215
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=IhP3J0j9JmY",
+  "title": "Imagine Dragons - Believer (Audio)",
+  "duration": 203,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 203
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=SCnsEy0tpbw",
+  "title": "Rag'n'Bone Man - Grace (Official Audio)",
+  "duration": 210,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 210
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=1-xGerv5FOk",
+  "title": "Alan Walker - Alone",
+  "duration": 163,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 163
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=6Mgqbai3fKo",
+  "title": "Shakira - Chantaje (Official video) ft. Maluma",
+  "duration": 199,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 199
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=oiQ68AW0LMY",
+  "title": "Mariah Carey - I Don't ft. YG",
+  "duration": 256,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 256
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=0yW7w8F2TVA",
+  "title": "James Arthur - Say You Won't Let Go",
+  "duration": 211,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 211
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=a59gmGkq_pw",
+  "title": "Major Lazer - Cold Water (feat. Justin Bieber & M\u00d8) (Official Lyric Video)",
+  "duration": 189,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 189
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=uEJuoEs1UxY",
+  "title": "Bebe Rexha - I Got You [Official Music Video]",
+  "duration": 197,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 197
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=L3wKzyIN1yk",
+  "title": "Rag'n'Bone Man - Human (Official Video)",
+  "duration": 198,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 198
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=TwyPsUd9LAk",
+  "title": "Missy Elliott - I'm Better ft. Lamb [Official Video]",
+  "duration": 219,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 219
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=PKB4cioGs98",
+  "title": "Jax Jones - You Don't Know Me ft. RAYE",
+  "duration": 271,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 271
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ALZHF5UqnU4",
+  "title": "Marshmello - Alone (Official Music Video)",
+  "duration": 200,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 200
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=_dK2tDK9grQ",
+  "title": "Ed Sheeran - Shape Of You [Official Lyric Video]",
+  "duration": 235,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 235
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=GzU8KqOY8YA",
+  "title": "Sean Paul - No Lie ft. Dua Lipa",
+  "duration": 229,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 229
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=2xpAd6kfJGU",
+  "title": "Jeremih - I Think Of You (Audio) ft. Chris Brown, Big Sean",
+  "duration": 218,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 218
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Jr4TMIU9oQ4",
+  "title": "INNA - Gimme Gimme | Official Music Video",
+  "duration": 177,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 177
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=GKSRyLdjsPA",
+  "title": "Sia - The Greatest",
+  "duration": 352,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 352
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=7Qp5vcuMIlk",
+  "title": "Ed Sheeran - Castle On The Hill [Official Lyric Video]",
+  "duration": 260,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 260
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=AY9blLYMKnI",
+  "title": "ZAYN, Taylor Swift - I Don\u2019t Wanna Live Forever (Fifty Shades Darker)",
+  "duration": 256,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 256
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=nYh-n7EOtMA",
+  "title": "Sia - Cheap Thrills (Lyric Video) ft. Sean Paul",
+  "duration": 262,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 262
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=QpbQ4I3Eidg",
+  "title": "Machine Gun Kelly, Camila Cabello - Bad Things",
+  "duration": 279,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 279
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=cPAbx5kgCJo",
+  "title": "Auli'i Cravalho - How Far I'll Go (From \"Moana\")",
+  "duration": 156,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 156
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Y1_VsyLAGuk",
+  "title": "Burak Yeter - Tuesday ft. Danelle Sandoval",
+  "duration": 190,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 190
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=bFDzhKdrN9M",
+  "title": "Little Mix - Shout Out to My Ex (Official Video)",
+  "duration": 248,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 248
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=SC4xMk98Pdc",
+  "title": "Post Malone - Congratulations ft. Quavo",
+  "duration": 227,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 227
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=cedoBlUvBlI",
+  "title": "Era Istrefi - Bonbon (Official Video)",
+  "duration": 179,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 179
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=b4Bj7Zb-YD4",
+  "title": "Calvin Harris - My Way (Official Video)",
+  "duration": 244,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 244
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=mKzLoZFz8PE",
+  "title": "Marshmello - Keep it Mello ft. Omar LinX (Official Music Video)",
+  "duration": 190,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 190
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=LKroRc-gZVA",
+  "title": "Major Lazer - Run Up (feat. PARTYNEXTDOOR & Nicki Minaj) (Official Lyric Video)",
+  "duration": 204,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 204
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Z9eMk051dYg",
+  "title": "Chris Brown - Party (Official Video) ft. Gucci Mane, Usher",
+  "duration": 303,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 303
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ypPSrRYOAj4",
+  "title": "JoJo Siwa - BOOMERANG (Official Video)",
+  "duration": 211,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 211
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Pw-0pbY9JeU",
+  "title": "twenty one pilots: Ride (Video)",
+  "duration": 225,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 225
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=1VUa99-tJqs",
+  "title": "Migos - T-Shirt [Official Video]",
+  "duration": 293,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 293
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=-59jGD4WrmE",
+  "title": "Sucker for Pain - Lil Wayne, Wiz Khalifa & Imagine Dragons w/ Logic & Ty Dolla $ign ft X Ambassadors",
+  "duration": 298,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 298
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=K44j-sb1SRY",
+  "title": "Big Baby D.R.A.M. - Broccoli feat. Lil Yachty (Official Music Video)",
+  "duration": 230,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 230
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=2i2khp_npdE",
+  "title": "Alan Walker - Sing Me To Sleep",
+  "duration": 192,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 192
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=q31tGyBJhRY",
+  "title": "Calum Scott - Dancing On My Own",
+  "duration": 221,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 221
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=79DijItQXMM",
+  "title": "Dwayne Johnson - You're Welcome (From \"Moana\")",
+  "duration": 169,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 169
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=3j8ecF8Wt4E",
+  "title": "Amin\u00e9 - Caroline",
+  "duration": 249,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 249
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=gVf_4Ns3qLU",
+  "title": "Young M.A \"OOOUUU\" (Official Video)",
+  "duration": 301,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 301
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=phr1pOFK1V8",
+  "title": "Big Sean - Bounce Back",
+  "duration": 227,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 227
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=RnBT9uUYb1w",
+  "title": "Martin Garrix & Bebe Rexha - In The Name Of Love (Official Video)",
+  "duration": 205,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 205
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=2vMH8lITTCE",
+  "title": "Marshmello - Summer (Official Music Video) with Lele Pons",
+  "duration": 170,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 170
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=rmlmOk4ubcU",
+  "title": "Jamiroquai - Automaton",
+  "duration": 302,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 302
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=VbfpW0pbvaU",
+  "title": "Shawn Mendes - Stitches (Official Video)",
+  "duration": 240,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 240
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=eC-F_VZ2T1c",
+  "title": "Zara Larsson - Ain't My Fault (Official Video)",
+  "duration": 223,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 223
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Ey_hgKCCYU4",
+  "title": "Jonas Blue - Perfect Strangers ft. JP Cooper",
+  "duration": 208,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 208
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=diW6jXhLE0E",
+  "title": "The Weeknd - Party Monster",
+  "duration": 258,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 258
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=5WL672bjJgM",
+  "title": "Ariana Grande - Let Me Love You (Official) ft. Lil Wayne",
+  "duration": 231,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 231
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=d2UZlwTDGbY",
+  "title": "Bruno Mars - Versace on The Floor [Official Audio]",
+  "duration": 261,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 261
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=uCTWBHP6lV0",
+  "title": "Lindsey Stirling - Hold My Heart feat. ZZ Ward",
+  "duration": 232,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 232
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=c6rP-YP4c5I",
+  "title": "Shakira - Try Everything (Official Video)",
+  "duration": 202,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 202
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=NmCFY1oYDeM",
+  "title": "John Legend - Love Me Now",
+  "duration": 255,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 255
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ZNra8eK0K6k",
+  "title": "Alessia Cara - How Far I'll Go (Official Video)",
+  "duration": 182,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 182
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=JVpTp8IHdEg",
+  "title": "Alok, Bruno Martini feat. Zeeba - Hear Me Now (Official Music Video)",
+  "duration": 264,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 264
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=93lrosBEW-Q",
+  "title": "Jemaine Clement - Shiny (From \"Moana\")",
+  "duration": 204,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 204
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=hn3wJ1_1Zsg",
+  "title": "LP - Lost On You [Official Video]",
+  "duration": 271,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 271
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ZkqyIoYAXV8",
+  "title": "Skrillex & Rick Ross - Purple Lamborghini [Official Video]",
+  "duration": 262,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 262
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=kgUpRwMeRr4",
+  "title": "Little Mix - Hair (Official Video) ft. Sean Paul",
+  "duration": 236,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 236
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=XoiEkEuCWog",
+  "title": "Bebe Rexha - \"No Broken Hearts\" ft. Nicki Minaj (Official Music Video)",
+  "duration": 249,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 249
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xUVz4nRmxn4",
+  "title": "Galantis - No Money (Official Video)",
+  "duration": 202,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 202
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=2Y6Nne8RvaA",
+  "title": "Kungs vs Cookin\u2019 on 3 Burners - This Girl",
+  "duration": 198,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 198
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=u9Dg-g7t2l4",
+  "title": "Disturbed  - The Sound Of Silence [Official Music Video]",
+  "duration": 259,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 259
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=_xGhK6qgPtM",
+  "title": "DJ Khaled - Do You Mind ft. Nicki Minaj, Chris Brown, August Alsina, Jeremih, Future, Rick Ross",
+  "duration": 420,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 420
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=jPajWtrDRFk",
+  "title": "Migos - Slippery ft Gucci Mane [Audio Only]",
+  "duration": 305,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 305
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=0GoGcVs6pbU",
+  "title": "Sia - Move Your Body (Single Mix) [Lyric]",
+  "duration": 249,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 249
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=nIEUJouS_Ig",
+  "title": "Kodak Black \"There He Go\"",
+  "duration": 227,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 227
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=sY3rIlrTTh8",
+  "title": "Fifth Harmony - That's My Girl",
+  "duration": 224,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 224
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=_9L3j-lVLwk",
+  "title": "Young Thug - Wyclef Jean [Official Video]",
+  "duration": 293,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 293
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=SZDmuHSqwtg",
+  "title": "Future - Used to This ft. Drake",
+  "duration": 230,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 230
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=LAYgZEMMWxo",
+  "title": "Kehlani - Gangsta (From Suicide Squad: The Album) [Official Video]",
+  "duration": 180,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 180
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=vXyBcKV0UIo",
+  "title": "Noah Cyrus - Make Me (Cry) ft. Labrinth",
+  "duration": 257,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 257
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=zmFm9Yp80dE",
+  "title": "Travis Scott - beibs in the trap ft. NAV",
+  "duration": 217,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 217
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ubZrAmRxy_M",
+  "title": "Lin-Manuel Miranda, Opetaia Foa'i - We Know The Way (From \"Moana\")",
+  "duration": 156,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 156
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=6wtwpUwxQik",
+  "title": "21 Savage & Metro Boomin - No Heart (Official Music Video)",
+  "duration": 256,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 256
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=mt3JP8sFbP0",
+  "title": "W&W - Whatcha Need (Official Music Video)",
+  "duration": 152,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 152
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=NQunCjYdAcU",
+  "title": "Gallant x Tablo x Eric Nam - Cave Me In (Official Video)",
+  "duration": 214,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 214
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=NtzrLpxM298",
+  "title": "Skillet -\u201cStars\u201d (The Shack Version) [Official Music Video]",
+  "duration": 238,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 238
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=YvOROjBu8ms",
+  "title": "Machine Gun Kelly - Dopeman (Official Video)",
+  "duration": 300,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 300
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=yU6gG-p5FZc",
+  "title": "Rag'n'Bone Man - Skin (Audio)",
+  "duration": 240,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 240
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=GGUxMJFwE8s",
+  "title": "Breathe Carolina & Bassjackers feat. CADE - Can't Take It (Official Music Video)",
+  "duration": 192,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 192
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=8VNV__mV38s",
+  "title": "Troye Sivan - HEAVEN ft. Betty Who",
+  "duration": 261,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 261
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=CQGcfudKBBs",
+  "title": "Snakehips & M\u00d8 - Don't Leave (Official Video)",
+  "duration": 231,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 231
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=SpXw0qiy3Wo",
+  "title": "21 Savage & Metro Boomin - X ft Future (Official Music Video)",
+  "duration": 315,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 315
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=CDUrpPvU1_4",
+  "title": "Hallelujah Money (feat. Benjamin Clementine) - Gorillaz",
+  "duration": 270,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 270
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=20y_RhUq9C0",
+  "title": "Kris Wu - Juice (Official Music Video)",
+  "duration": 222,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 222
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=r2LpOUwca94",
+  "title": "Major Lazer \u2013 Light it Up (feat. Nyla & Fuse ODG) [Music Video Remix] by Method Studios",
+  "duration": 171,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 171
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=HxKFI7FONNw",
+  "title": "Future - Poppin' Tags",
+  "duration": 224,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 224
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=hXs1fWCgOW4",
+  "title": "2 Chainz - Good Drank ft. Gucci Mane, Quavo",
+  "duration": 238,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 238
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=qYiAfxa95dQ",
+  "title": "Marcus & Martinus - Hey You",
+  "duration": 181,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 181
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=NTayABOrFrk",
+  "title": "Young Thug - Guwop feat. Quavo, Offset, and Young Scooter [Official Video]",
+  "duration": 317,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 317
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=od-aFPZ0w9A",
+  "title": "Migos - What The Price [Audio Only]",
+  "duration": 249,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 249
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=fruXsHEXKS8",
+  "title": "Shakira - Chantaje (John-Blake Remix)[Audio] ft. Maluma",
+  "duration": 198,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 198
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Z0wBrJHd9-A",
+  "title": "John Mayer - Moving On and Getting Over (Audio)",
+  "duration": 264,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 264
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=lXYU948b_b8",
+  "title": "Fetty Wap feat. Monty -  Shit I Like | shot by @directorjrsaint",
+  "duration": 264,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 264
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=PPUdX8v8u0U",
+  "title": "August Alsina - Drugs",
+  "duration": 205,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 205
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=qq9ZO9VN1AI",
+  "title": "Don Diablo - Switch (Official Music Video)",
+  "duration": 178,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 178
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xAqxgK-fa4E",
+  "title": "August Alsina - Wait",
+  "duration": 218,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 218
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=9cVJr3eQfXc",
+  "title": "Green Day - Troubled Times (Official Lyric Video)",
+  "duration": 188,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 188
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=7hIG5xhPwGQ",
+  "title": "Kehlani  - Do U Dirty [Official Audio]",
+  "duration": 197,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 197
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=8kOS4Ng48pY",
+  "title": "Lil Bibby \"Thought It Was A Drought\" (WSHH Exclusive - Official Music Video)",
+  "duration": 178,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 178
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=jAFGTOhfR7Y",
+  "title": "Young M.A \"Get This Money\" (Official Video)",
+  "duration": 278,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 278
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=abCRTqCKmy0",
+  "title": "Jacob Sartorius - Last Text (Official Music Video)",
+  "duration": 198,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 198
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=RetJFlNGbkQ",
+  "title": "Lil Bibby \"You Ain't Gang (Remix)\" Feat. Kevin Gates, Lil Durk & DeJ Loaf (WSHH Exclusive - Audio)",
+  "duration": 275,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 275
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=lz78_YCd3_s",
+  "title": "Big Sean - Living Single (Audio) ft. Chance The Rapper, Jeremih",
+  "duration": 276,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 276
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=KiiPnHic5WI",
+  "title": "Famous Dex x Rich The Kid \"So Mad\" (WSHH Exclusive - Official Music Video)",
+  "duration": 186,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 186
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=U1rgr6rumn8",
+  "title": "Yo Gotti - 81",
+  "duration": 214,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 214
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=vMX3TJV_Tew",
+  "title": "A Boogie Wit Da Hoodie x Lil Bibby \"Proud Of Me Now\" (WSHH Exclusive - Official Music Video)",
+  "duration": 214,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 214
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=6-2W5gvfBcs",
+  "title": "Dave East \"No Hook\" Feat. G Herbo & Don Q (WSHH Exclusive - Official Audio)",
+  "duration": 182,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 182
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=nwpj9_hrK_A",
+  "title": "Tinashe - Company",
+  "duration": 268,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 268
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=U5pzC_gUlpA",
+  "title": "Ex's & Oh's | feat. Vanessa Hudgens",
+  "duration": 299,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 299
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=-UV0QGLmYys",
+  "title": "Carlos Vives, Shakira - La Bicicleta (Official Video)",
+  "duration": 238,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 238
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xFutjZEBTXs",
+  "title": "Enrique Iglesias - DUELE EL CORAZON ft. Wisin",
+  "duration": 239,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 239
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=iIPH8LFYFRk",
+  "title": "BIGBANG - \u2018\uc5d0\ub77c \ubaa8\ub974\uaca0\ub2e4(FXXK IT)\u2019 M/V",
+  "duration": 243,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 243
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=h6Ol3eprKiw",
+  "title": "Sia - Never Give Up (from the Lion Soundtrack) [Lyric Video]",
+  "duration": 222,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 222
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=h1DgPSJnXm4",
+  "title": "DJ Snake - The Half ft. Jeremih, Young Thug, Swizz Beatz",
+  "duration": 225,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 225
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=7cIkC7s3d2o",
+  "title": "Big Sean - Moves",
+  "duration": 146,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 146
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=E_SeMqLaL6o",
+  "title": "Starset - Ricochet (360 Lyric Video)",
+  "duration": 322,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 322
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=cAmtm4Ir0Vk",
+  "title": "Lil Yachty - Shoot Out The Roof",
+  "duration": 158,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 158
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=vi5wR--nuhA",
+  "title": "flor: Hold On [OFFICIAL VIDEO]",
+  "duration": 203,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 203
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Aa8p_6BJ4R4",
+  "title": "Major Lazer & Showtek - Believer (Official Music Video)",
+  "duration": 255,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 255
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=en2D_5TzXCA",
+  "title": "Lady Gaga - Million Reasons",
+  "duration": 252,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 252
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=x0fFzqX_Xgo",
+  "title": "Lil Uzi Vert - Ps & Qs [Official Music Video]",
+  "duration": 284,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 284
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=jsbeemdD2rQ",
+  "title": "Fifth Harmony - All In My Head (Flex) ft. Fetty Wap",
+  "duration": 211,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 211
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=VEou0QBeHlk",
+  "title": "Marshmello - Ritual (feat. Wrabel) [Official Music Video]",
+  "duration": 242,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 242
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=7mWQ38SpEf8",
+  "title": "The Chainsmokers - All We Know ft. Phoebe Ryan",
+  "duration": 216,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 216
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=K_9tX4eHztY",
+  "title": "Future - Low Life ft. The Weeknd",
+  "duration": 323,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 323
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=55iN4H6kRN4",
+  "title": "Lil Uzi Vert - You Was Right [Official Music Video]",
+  "duration": 164,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 164
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=QxsmWxxouIM",
+  "title": "Beyonc\u00e9 - Sorry",
+  "duration": 265,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 265
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=uMhalar35IY",
+  "title": "Rae Sremmurd - Real Chill ft. Kodak Black",
+  "duration": 267,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 267
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=u0pmV7GoTjc",
+  "title": "David Guetta, Cedric Gervais & Chris Willis - Would I Lie To You (Lyric Video)",
+  "duration": 196,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 196
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=251cxou3yR4",
+  "title": "Lil Yachty - 1 NIGHT (Official Video)",
+  "duration": 256,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 256
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=J_8xCOSekog",
+  "title": "Mac Miller - My Favorite Part (feat. Ariana Grande)",
+  "duration": 275,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 275
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ProbPpO_8oo",
+  "title": "Desiigner - Tiimmy Turner (Official Audio)",
+  "duration": 240,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 240
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=2RRY3OVqtwc",
+  "title": "Britney Spears - Slumber Party ft. Tinashe",
+  "duration": 245,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 245
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=2TtgkKZNTa8",
+  "title": "James Arthur - Safe Inside",
+  "duration": 222,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 222
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ZgnClGC8-WQ",
+  "title": "Jane Zhang - Dust My Shoulders Off (Official Video)",
+  "duration": 221,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 221
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=J7IMwop3RHs",
+  "title": "Rob $tone - Chill Bill ft. J.Davis & Spooks (Dir. Alex Vibe)",
+  "duration": 199,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 199
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=8wGN7D03Nho",
+  "title": "OneRepublic - Let's Hurt Tonight",
+  "duration": 208,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 208
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=AeA0ZKzAeH4",
+  "title": "Haschak Sisters - Gossip Girl",
+  "duration": 197,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 197
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Mw9U7FPaZho",
+  "title": "Alan Walker x David Whistle - Routine",
+  "duration": 167,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 167
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=cD-0y9WRY8E",
+  "title": "CD9 - Get Dumb ft. Crayon Pop",
+  "duration": 211,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 211
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xAQ-fuwB_JM",
+  "title": "Fifty Shades Darker - Zayn and Taylor Swift Lyric Video - \"I Don't Wanna Live Forever\" (2017)",
+  "duration": 246,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 246
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=haFHrfmfHbc",
+  "title": "Hallelujah \u2013 Pentatonix (From A Pentatonix Christmas Special)",
+  "duration": 269,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 269
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Mj7Pr42rliI",
+  "title": "[OFFICIAL VIDEO] O Come, All Ye Faithful - Pentatonix",
+  "duration": 242,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 242
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=hNMMN46uFCc",
+  "title": "Stevie Wonder - Faith ft. Ariana Grande",
+  "duration": 164,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 164
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=N-hHvlIQWPk",
+  "title": "Champs Sports: The Moment Pt. 2 - Desiigner \"Outlet\" OFFICIAL VIDEO",
+  "duration": 121,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 121
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Z7CTnA3dTU0",
+  "title": "G-Eazy & Bebe Rexha - Me, Myself & I (No Sleep Remix)",
+  "duration": 240,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 240
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ku7ohU1IGls",
+  "title": "[OFFICIAL VIDEO] God Rest Ye Merry Gentlemen - Pentatonix",
+  "duration": 176,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 176
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=vuT_bXzhqhY",
+  "title": "Starboy (Live From The Victoria\u2019s Secret Fashion Show 2016 in Paris)",
+  "duration": 244,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 244
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=vYv7-TSioQM",
+  "title": "Shawn Mendes - Mercy (Acoustic)",
+  "duration": 215,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 215
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=6X_C9E55CfM",
+  "title": "Fergie - Life Goes On",
+  "duration": 239,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 239
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=HHP5MKgK0o8",
+  "title": "Selena Gomez - Kill Em With Kindness",
+  "duration": 224,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 224
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=3w0yqAdJ1iY",
+  "title": "Usher - No Limit ft. Young Thug",
+  "duration": 236,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 236
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=uQ_DHRI-Xp0",
+  "title": "ScHoolboy Q - THat Part ft. Kanye West",
+  "duration": 315,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 315
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=DVkkYlQNmbc",
+  "title": "Chance the Rapper ft. 2 Chainz & Lil Wayne - No Problem (Official Video)",
+  "duration": 284,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 284
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=JWESLtAKKlU",
+  "title": "J Balvin - Safari ft. Pharrell Williams, BIA, Sky",
+  "duration": 204,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 204
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=yztX1jvtm_4",
+  "title": "Dawin - Jumpshot (Dance Video)",
+  "duration": 212,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 212
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=rPZtXYaY4do",
+  "title": "Rae Sremmurd - Look Alive",
+  "duration": 226,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 226
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=WDZJPJV__bQ",
+  "title": "Beyonc\u00e9 - Formation",
+  "duration": 288,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 288
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=SoIKv3xxuMA",
+  "title": "Keith Urban - Blue Ain't Your Color",
+  "duration": 247,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 247
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=KT7W9oJP6BI",
+  "title": "Future - Too Much Sauce ft. Lil Uzi Vert (Project E.T. Esco Terrestrial)",
+  "duration": 218,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 218
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Xn599R0ZBwg",
+  "title": "Lady Gaga - Perfect Illusion",
+  "duration": 184,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 184
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=AQ4MQ_uhBSs",
+  "title": "Jonas Blue - By Your Side ft. RAYE",
+  "duration": 205,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 205
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=zXDAYlhdkyg",
+  "title": "Florida Georgia Line - H.O.L.Y.",
+  "duration": 229,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 229
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=pvP_OwVSFpk",
+  "title": "Ellie Goulding - Still Falling For You",
+  "duration": 252,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 252
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=1eoSanFCU-M",
+  "title": "Lil Uzi Vert - Money Longer",
+  "duration": 241,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 241
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=v6IAJOOmDMg",
+  "title": "The Chainsmokers - Setting Fires (Lyric) ft. XYL\u00d8",
+  "duration": 261,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 261
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=gM89Q5Eng_M",
+  "title": "Beyonc\u00e9 - All Night",
+  "duration": 382,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 382
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=5JxgDJvqGmM",
+  "title": "Mike Perry - The Ocean ft. Shy Martin",
+  "duration": 184,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 184
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=8SeRU_ZPDkE",
+  "title": "Grace - You Don't Own Me ft. G-Eazy",
+  "duration": 203,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 203
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=P9rFeGAdX0A",
+  "title": "Tory Lanez - LUV",
+  "duration": 240,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 240
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=oorK4RPgZ8Q",
+  "title": "Russ - What They Want (Official Video)",
+  "duration": 170,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 170
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=PeonBmeFR8o",
+  "title": "Beyonc\u00e9 - Hold Up",
+  "duration": 316,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 316
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=9u14-QBPzSE",
+  "title": "Melanie Martinez - Pacify Her (Official Video)",
+  "duration": 226,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 226
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=wkri1NUq9ro",
+  "title": "Melanie Martinez - Mrs. Potato Head [Official Video]",
+  "duration": 332,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 332
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=dB1w9Yiu3zo",
+  "title": "Alessia Cara - Seventeen",
+  "duration": 219,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 219
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=bWZ8Itjy7Qw",
+  "title": "Rae Sremmurd - Now That I Know",
+  "duration": 244,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 244
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=6n7cL1jokAE",
+  "title": "Sak Noel & Salvi ft. Sean Paul - Trumpets (Official Video)",
+  "duration": 186,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 186
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=TXRCGKFCH-0",
+  "title": "ROBIN SCHULZ & DAVID GUETTA & CHEAT CODES \u2013 SHED A LIGHT (OFFICIAL LYRIC VIDEO)",
+  "duration": 204,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 204
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=bsUWK-fixiA",
+  "title": "Fergie - M.I.L.F. $",
+  "duration": 220,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 220
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=BUu8u7fX8Pc",
+  "title": "Rick Ross - Buy Back the Block ft. 2 Chainz, Gucci Mane",
+  "duration": 480,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 480
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=-5slZHLSnow",
+  "title": "J. Cole - Everybody Dies",
+  "duration": 165,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 165
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=bYBLt_1HcQE",
+  "title": "gnash - home ft. johnny yukon [music video]",
+  "duration": 255,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 255
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=oiY_iKSpWLM",
+  "title": "Kevin Gates - 2 Phones (Official Video)",
+  "duration": 264,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 264
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=bSfpSOBD30U",
+  "title": "G-Eazy x Bebe Rexha - Me, Myself & I",
+  "duration": 349,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 349
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=n49qi-dU9IE",
+  "title": "Kent Jones - Dont Mind (EXPLICIT)",
+  "duration": 199,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 199
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=WsptdUFthWI",
+  "title": "Closer - The Chainsmokers ft. Halsey (Boyce Avenue ft. Sarah Hyland cover) on Spotify & iTunes",
+  "duration": 244,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 244
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=RvK8SKZbBWg",
+  "title": "Feder feat. Alex Aiono - Lordly (Official Video)",
+  "duration": 195,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 195
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=yuBbGyWSc-c",
+  "title": "Gucci Mane - St. Brick Intro [Official Music Video]",
+  "duration": 278,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 278
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=QvW61K2s0tA",
+  "title": "OK Go \u2013 The One Moment \u2013 Official Video",
+  "duration": 252,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 252
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ACPd7HSZkc0",
+  "title": "Sage the Gemini - Now & Later [Official Music Video]",
+  "duration": 198,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 198
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=TBXQu8ORnBQ",
+  "title": "Charlie Puth - Dangerously [Official Video]",
+  "duration": 203,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 203
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=PIh2xe4jnpk",
+  "title": "MAGIC! - Rude",
+  "duration": 225,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 225
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=oh2LWWORoiM",
+  "title": "Tove Lo - Habits (Stay High)",
+  "duration": 208,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 208
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=2fngvQS_PmQ",
+  "title": "Ed Sheeran - I See Fire (Music Video)",
+  "duration": 295,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 295
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=J9NQFACZYEU",
+  "title": "Calvin Harris - Outside ft. Ellie Goulding",
+  "duration": 226,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 226
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=hXI8RQYC36Q",
+  "title": "21. El Perd\u00f3n - Nicky Jam y Enrique Iglesias  [Official Music Video YTMAs]",
+  "duration": 227,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 227
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=MYSVMgRr6pw",
+  "title": "Hozier - Take Me To Church",
+  "duration": 243,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 243
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=6JCLY0Rlx6Q",
+  "title": "WALK THE MOON - Shut Up and Dance",
+  "duration": 246,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 246
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=RBumgq5yVrA",
+  "title": "Passenger | Let Her Go (Official Video)",
+  "duration": 254,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-RBumgq5yVrA-Passenger_Let_Her_Go_Official_Video.webm",
+  "end_seconds": 254
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Ix8ocFEMa1o",
+  "title": "Adam Lambert - \"Ghost Town\" [Official Music Video]",
+  "duration": 217,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-Ix8ocFEMa1o-Adam_Lambert_-_Ghost_Town_Official_Music_Video.webm",
+  "end_seconds": 217
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=uelHwf8o7_U",
+  "title": "Eminem - Love The Way You Lie ft. Rihanna",
+  "duration": 267,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-uelHwf8o7_U-Eminem_-_Love_The_Way_You_Lie_ft._Rihanna.webm",
+  "end_seconds": 267
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=H202k7KfZL0",
+  "title": "Ellie Goulding - On My Mind",
+  "duration": 245,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-H202k7KfZL0-Ellie_Goulding_-_On_My_Mind.webm",
+  "end_seconds": 245
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=LmK0WHkFIo8",
+  "title": "Daya - Hide Away (Official Music Video \u2013 International Version)",
+  "duration": 191,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-LmK0WHkFIo8-Daya_-_Hide_Away_Official_Music_Video_International_Version.webm",
+  "end_seconds": 191
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=uPHKkewD1G0",
+  "title": "Daya - Sit Still, Look Pretty",
+  "duration": 215,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-uPHKkewD1G0-Daya_-_Sit_Still_Look_Pretty.webm",
+  "end_seconds": 215
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=liwCttfeJ7E",
+  "title": "Hailee Steinfeld - Rock Bottom ft. DNCE",
+  "duration": 218,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-liwCttfeJ7E-Hailee_Steinfeld_-_Rock_Bottom_ft._DNCE.webm",
+  "end_seconds": 218
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=AOPMlIIg_38",
+  "title": "The Fault In Our Stars - Charli XCX - Boom Clap",
+  "duration": 177,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-AOPMlIIg_38-The_Fault_In_Our_Stars_-_Charli_XCX_-_Boom_Clap.webm",
+  "end_seconds": 177
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=m1g4SpPGUBU",
+  "title": "Maty Noyes - In My Mind",
+  "duration": 217,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-m1g4SpPGUBU-Maty_Noyes_-_In_My_Mind.webm",
+  "end_seconds": 217
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=KCy7lLQwToI",
+  "title": "Journey - Don't Stop Believing Lyrics",
+  "duration": 251,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-KCy7lLQwToI-Journey_-_Don_t_Stop_Believing_Lyrics.webm",
+  "end_seconds": 251
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=uJ_1HMAGb4k",
+  "title": "Vance Joy - 'Riptide' Official Video",
+  "duration": 204,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-uJ_1HMAGb4k-Vance_Joy_-_Riptide_Official_Video.webm",
+  "end_seconds": 204
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xo1VInw-SKc",
+  "title": "Rachel Platten - Fight Song (Official Video)",
+  "duration": 205,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-xo1VInw-SKc-Rachel_Platten_-_Fight_Song_Official_Video.webm",
+  "end_seconds": 205
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=YxIiPLVR6NA",
+  "title": "Avicii - Hey Brother (Lyric)",
+  "duration": 259,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-YxIiPLVR6NA-Avicii_-_Hey_Brother_Lyric.webm",
+  "end_seconds": 259
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=JaAWdljhD5o",
+  "title": "SAIL - AWOLNATION (Unofficial Video)",
+  "duration": 249,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": "audio_cache\\youtube-JaAWdljhD5o-SAIL_-_AWOLNATION_Unofficial_Video.webm",
+  "end_seconds": 249
 }
