@@ -46,8 +46,8 @@ from .papers import Papers
 from .permissions import Permissions, PermissionsDefaults
 from .player import MusicPlayer
 from .playlist import Playlist
-from .random_sets import RandomSets
 from .radios import Radios
+from .random_sets import RandomSets
 from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .socket_server import SocketServer
@@ -1964,7 +1964,7 @@ class MusicBot(discord.Client):
                 delete_after=20
             )
 
-    async def cmd_volume(self, message, player, new_volume=None):
+    async def cmd_volume(self, message, player, leftover_args):
         """
         Usage:
             {command_prefix}volume (+/-)[volume]
@@ -1972,6 +1972,8 @@ class MusicBot(discord.Client):
         Sets the playback volume. Accepted values are from 1 to 100.
         Putting + or - before the volume will make the volume change relative to the current volume.
         """
+
+        new_volume = "".join(leftover_args)
 
         if not new_volume:
             bar_len = 20
@@ -2612,8 +2614,8 @@ class MusicBot(discord.Client):
         Use `list` to see all the different lists out there or create your own.
         """
 
-
-        items = [x.strip() for x in " ".join(leftover_args).split(",") if x is not ""]
+        items = [x.strip()
+                 for x in " ".join(leftover_args).split(",") if x is not ""]
 
         if items[0].split()[0].lower().strip() == "create":
             if len(items) < 2:
@@ -2628,7 +2630,8 @@ class MusicBot(discord.Client):
         elif items[0].split()[0].lower().strip() == "list":
             return_string = ""
             for s in self.random_sets.get_sets():
-                return_string += "**{}**\n```\n{}```\n\n".format(s[0], ", ".join(s[1]))
+                return_string += "**{}**\n```\n{}```\n\n".format(
+                    s[0], ", ".join(s[1]))
 
             return Response(return_string)
 
@@ -2636,7 +2639,9 @@ class MusicBot(discord.Client):
             return Response("Is your name \"{0}\" by any chance?\n(This is not how this command works. Use `{1}help random` to find out how not to be a stupid *{0}* anymore)".format(author.name, self.config.command_prefix), delete_after=30)
 
         if len(items) <= 1:
-            # return Response("Only you could use `{1}random` for one item... Well done, {0}!".format(author.name, self.config.command_prefix), delete_after=30)
+            # return Response("Only you could use `{1}random` for one item...
+            # Well done, {0}!".format(author.name, self.config.command_prefix),
+            # delete_after=30)
 
             query = "_".join(items[0].split())
             items = self.random_sets.get_set(query.lower().strip())
@@ -3506,7 +3511,7 @@ class MusicBot(discord.Client):
         savename = _savename
         user_savename = savename
 
-        interface_string = "**{}** by *{}* ({} song{} with a total length of {})\n\n{}\n\n**You can use the following commands:**\n`add`: Add a video to the playlist (this command works like the normal `{}play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n`extras`: view the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
+        interface_string = "**{}** by *{}* ({} song{} with a total length of {})\n\n{}\n\n**You can use the following commands:**\n`add`: Add a video to the playlist (this command works like the normal `{}play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
 
         extras_string = "**{}** by *{}* ({} song{} with a total length of {})\n\n**Extra functions:**\n`sort [alphabetical, length, random]`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n\n`abort`: return to main screen"
 
@@ -3561,7 +3566,7 @@ class MusicBot(discord.Client):
                     try:
                         start_time = datetime.now()
                         entries = await self.get_play_entry(player, channel, author, query, arguments[0])
-                        if (datetime.now() - start_time).total_seconds > 40:
+                        if (datetime.now() - start_time).total_seconds() > 40:
                             await self.safe_send_message(author, "Wow, that took quite a while.\nI'm done now though so come check it out!", expire_in=70)
 
                         pl_changes["new_entries"].extend(entries)
@@ -3572,7 +3577,7 @@ class MusicBot(discord.Client):
                             int(playlist["entry_count"]), items_per_page)
                         entries_page = it
                     except:
-                        await self.send_message(channel, "Something went terribly wrong there.", expire_in=20)
+                        await self.safe_send_message(channel, "Something went terribly wrong there.", expire_in=20)
                     await self.safe_delete_message(msg)
 
             elif split_message[0].lower() == "remove":
