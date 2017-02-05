@@ -3436,7 +3436,7 @@ class MusicBot(discord.Client):
             iteration = 1
 
             sort_modes = {"alphabetical": (lambda playlist: playlist, False), "entries": (lambda playlist: int(
-                self.playlists.get_playlist(playlist, player.playlist)["entry_count"]), True), "author": (lambda playlist: server.get_member(self.playlists.get_playlist(playlist, player.playlist)["author"]).name, False), "random": None, "playtime": (lambda playlist: sum([x.duration for x in self.playlists.get_playlist(playlist, player.playlist)["entries"]]), True), "replays": (lambda playlist: self.playlists.get_playlist(playlist, player.playlist)["replay_count"], False)}
+                self.playlists.get_playlist(playlist, player.playlist)["entry_count"]), True), "author": (lambda playlist: server.get_member(self.playlists.get_playlist(playlist, player.playlist)["author"]).name, False), "random": None, "playtime": (lambda playlist: sum([x.duration for x in self.playlists.get_playlist(playlist, player.playlist)["entries"]]), True), "replays": (lambda playlist: self.playlists.get_playlist(playlist, player.playlist)["replay_count"], True)}
 
             sort_mode = leftover_args[1].lower() if len(
                 leftover_args) > 1 and leftover_args[1].lower() in sort_modes.keys() else "random"
