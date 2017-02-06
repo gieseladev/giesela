@@ -3482,6 +3482,16 @@ class MusicBot(discord.Client):
 
         return await self.cmd_help(channel, ["playlist"])
 
+    async def socket_playlist_load(self, player, playlist_name):
+        playlist_name = playlist_name.lower().strip()
+        if playlist_name not in self.playlists.saved_playlists:
+            return False
+
+        clone_entries = self.playlists.get_playlist(
+            playlist_name, player.playlist)["entries"]
+        await player.playlist.add_entries(clone_entries)
+        self.playlists.bump_replay_count(playlist_name)
+
     async def playlist_builder(self, channel, author, server, player, _savename):
         if _savename not in self.playlists.saved_playlists:
             self.playlists.set_playlist([], _savename, author.id)
@@ -4086,13 +4096,14 @@ class MusicBot(discord.Client):
             print("moving myself")
             await self.get_voice_client(target_channel)
 
-    async def cmd_mobile(self, channel):
+    async def cmd_mobile(self, channel, player, server):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***mobile
 
         WIP
         """
+
         count = len(self.socket_server.connections)
         return Response("There ***REMOVED******REMOVED*** currently ***REMOVED******REMOVED*** mobile user***REMOVED******REMOVED***".format("is" if count == 1 else "are", count, "s" if count != 1 else ""))
 

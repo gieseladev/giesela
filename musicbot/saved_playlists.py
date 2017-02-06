@@ -101,6 +101,13 @@ class Playlists:
         self.save_playlist()
         self.update_playlist()
 
+    def get_all_playlists(self, playlist):
+        pls = []
+        for pl in self.saved_playlists:
+            pls.append((pl, self.get_playlist(pl, playlist)))
+
+        return pls
+
     def edit_playlist(self, name, playlist, remove_entries=None, remove_entries_indexes=None, new_entries=None, new_name=None):
         name = name.lower().strip().replace(" ", "_")
         old_playlist = self.get_playlist(name, playlist)
