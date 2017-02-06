@@ -176,6 +176,15 @@ class SocketServer:
                 print(
                     "[SOCKETSERVER] requested a user identification with token " + token)
                 self.awaiting_registeration[c_socket] = token.lower()
+            elif request == "REQUEST" and len(leftover) > 0 and leftover[0] == "SEND_PLAYLISTS":
+                if server_id in self.musicbot.players:
+                    player = self.musicbot.players[server_id]
+                else:
+                    continue
+
+                response = "INFORMATION;PLAYLISTS;***REMOVED******REMOVED***".format(self.get_playlists_string(player, server_id))
+                c_socket.sendall("***REMOVED******REMOVED***==***REMOVED******REMOVED***".format(
+                    len(response), response).encode("utf-8"))
 
             elif request == "COMMAND":
                 if server_id in self.musicbot.players:
@@ -227,6 +236,12 @@ class SocketServer:
                             player, radio_name), self.musicbot.loop)
                         print("[SOCKETSERVER] ***REMOVED******REMOVED*** Radio station ***REMOVED******REMOVED***".format(
                             author_id, radio_name))
+                    elif leftover[0] == "PLAYLIST":
+                        playlist_name = leftover[1]
+                        asyncio.run_coroutine_threadsafe(self.musicbot.socket_playlist_load(
+                            player, playlist_name), self.musicbot.loop)
+                        print("[SOCKETSERVER] ***REMOVED******REMOVED*** Playlist ***REMOVED******REMOVED***".format(
+                            author_id, playlist_name))
 
         if self.sockets_by_user.pop(author_id, None) is None:
             print("[SOCKETSERVER] failed to remove ***REMOVED******REMOVED*** (***REMOVED******REMOVED***) from sockets_by_user list".format(
@@ -299,3 +314,20 @@ class SocketServer:
             volume = str(round(player.volume, 2))
 
         return artist, song_title, video_id, cover_url, playing, duration, progress, volume
+
+    def get_playlists_string(self, player, server_id):
+        base_playlist_layout = "***REMOVED***name***REMOVED***;***REMOVED***author***REMOVED***;***REMOVED***replays***REMOVED***;***REMOVED***entry_count***REMOVED***;***REMOVED***playtime***REMOVED***"
+        playlists = self.musicbot.playlists.get_all_playlists(player.playlist)
+        workString = "***REMOVED******REMOVED***;".format(len(playlists))
+        playlist_strings = []
+        for playlist in playlists:
+            values = ***REMOVED******REMOVED***
+            values["name"] = playlist[0]
+            values["author"] = self.musicbot.get_server(server_id).get_member(playlist[1].get("author"))
+            values["replays"] = playlist[1].get("replay_count")
+            values["entry_count"] = playlist[1].get("entry_count")
+            values["playtime"] = str(sum([x.duration for x in playlist[1].get("entries")]))
+            playlist_strings.append(base_playlist_layout.format(**values))
+
+        workString += ";".join(playlist_strings)
+        return workString
