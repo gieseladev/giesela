@@ -3304,7 +3304,7 @@ class MusicBot(discord.Client):
             {command_prefix}playlist showall [alphabetical, author, entries, playtime, random, replays]
             {command_prefix}playlist savename
             {command_prefix}playlist save savename
-            {command_prefix}playlist load savename [add, replace] [alphabetical, length, random] [startindex, endindex (inclusive)]
+            {command_prefix}playlist load savename [add, replace] [none, alphabetical, length, random] [startindex, endindex (inclusive)]
             {command_prefix}playlist delete savename
             {command_prefix}playlist clone fromname savename [startindex, endindex (inclusive)]
 
@@ -3436,7 +3436,7 @@ class MusicBot(discord.Client):
             iteration = 1
 
             sort_modes = {"alphabetical": (lambda playlist: playlist, False), "entries": (lambda playlist: int(
-                self.playlists.get_playlist(playlist, player.playlist)["entry_count"]), True), "author": (lambda playlist: server.get_member(self.playlists.get_playlist(playlist, player.playlist)["author"]).name, False), "random": None, "playtime": (lambda playlist: sum([x.duration for x in self.playlists.get_playlist(playlist, player.playlist)["entries"]]), True), "replays": (lambda playlist: self.playlists.get_playlist(playlist, player.playlist)["replay_count"], False)}
+                self.playlists.get_playlist(playlist, player.playlist)["entry_count"]), True), "author": (lambda playlist: server.get_member(self.playlists.get_playlist(playlist, player.playlist)["author"]).name, False), "random": None, "playtime": (lambda playlist: sum([x.duration for x in self.playlists.get_playlist(playlist, player.playlist)["entries"]]), True), "replays": (lambda playlist: self.playlists.get_playlist(playlist, player.playlist)["replay_count"], True)}
 
             sort_mode = leftover_args[1].lower() if len(
                 leftover_args) > 1 and leftover_args[1].lower() in sort_modes.keys() else "random"
@@ -3481,6 +3481,16 @@ class MusicBot(discord.Client):
             return Response(response_text, reply=True, delete_after=40)
 
         return await self.cmd_help(channel, ["playlist"])
+
+    async def socket_playlist_load(self, player, playlist_name):
+        playlist_name = playlist_name.lower().strip()
+        if playlist_name not in self.playlists.saved_playlists:
+            return False
+
+        clone_entries = self.playlists.get_playlist(
+            playlist_name, player.playlist)["entries"]
+        await player.playlist.add_entries(clone_entries)
+        self.playlists.bump_replay_count(playlist_name)
 
     async def playlist_builder(self, channel, author, server, player, _savename):
         if _savename not in self.playlists.saved_playlists:
@@ -4086,13 +4096,14 @@ class MusicBot(discord.Client):
             print("moving myself")
             await self.get_voice_client(target_channel)
 
-    async def cmd_mobile(self, channel):
+    async def cmd_mobile(self, channel, player, server):
         """
         Usage:
             {command_prefix}mobile
 
         WIP
         """
+
         count = len(self.socket_server.connections)
         return Response("There {} currently {} mobile user{}".format("is" if count == 1 else "are", count, "s" if count != 1 else ""))
 
