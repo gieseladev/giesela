@@ -3304,7 +3304,7 @@ class MusicBot(discord.Client):
             ***REMOVED***command_prefix***REMOVED***playlist showall [alphabetical, author, entries, playtime, random, replays]
             ***REMOVED***command_prefix***REMOVED***playlist savename
             ***REMOVED***command_prefix***REMOVED***playlist save savename
-            ***REMOVED***command_prefix***REMOVED***playlist load savename [add, replace] [alphabetical, length, random] [startindex, endindex (inclusive)]
+            ***REMOVED***command_prefix***REMOVED***playlist load savename [add, replace] [none, alphabetical, length, random] [startindex, endindex (inclusive)]
             ***REMOVED***command_prefix***REMOVED***playlist delete savename
             ***REMOVED***command_prefix***REMOVED***playlist clone fromname savename [startindex, endindex (inclusive)]
 
