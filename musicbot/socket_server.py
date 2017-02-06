@@ -323,7 +323,7 @@ class SocketServer:
         for playlist in playlists:
             values = {}
             values["name"] = playlist[0]
-            values["author"] = self.musicbot.get_server(server_id).get_member(playlist[1].get("author"))
+            values["author"] = self.musicbot.get_server(server_id).get_member(playlist[1].get("author")).name
             values["replays"] = playlist[1].get("replay_count")
             values["entry_count"] = playlist[1].get("entry_count")
             values["playtime"] = str(sum([x.duration for x in playlist[1].get("entries")]))
