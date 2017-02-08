@@ -3474,7 +3474,7 @@ class MusicBot(discord.Client):
             entries_text = ""
             entries = infos["entries"]
             for i in range(len(entries)):
-                entries_text += str(i + 1) + ". " + entries[i].title + "\n"
+                entries_text += str(i + 1) + ". " + entries[i].title + " | " + format_time(entries[i].duration, round_seconds=True, max_specifications=2) +"\n"
 
             response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n*playtime: ***REMOVED******REMOVED****\n\n***REMOVED******REMOVED***\n```\nTo edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"```".format(argument.replace("_", " ").title(), server.get_member(
                 infos["author"]).mention, str(infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", format_time(sum([x.duration for x in entries])), entries_text, self.config.command_prefix, argument)
