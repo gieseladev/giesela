@@ -2388,12 +2388,12 @@ class MusicBot(discord.Client):
     async def socket_radio(self, player, radio_station_name):
         if radio_station_name.lower().strip() == "random":
             station = self.radios.get_random_station()
-            await player.playlist.add_stream_entry(station.url, station=station)
+            await player.playlist.add_stream_entry(station.url, play_now=True, player=player, station=station)
             return True
 
         station = self.radios.get_station(radio_station_name.lower().strip())
         if station is not None:
-            await player.playlist.add_stream_entry(station.url, station=station)
+            await player.playlist.add_stream_entry(station.url, play_now=True, player=player, station=station)
             return True
 
         return False
