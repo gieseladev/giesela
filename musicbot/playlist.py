@@ -33,7 +33,7 @@ class Playlist(EventEmitter):
     def clear(self):
         self.entries.clear()
 
-    async def add_stream_entry(self, song_url, info=None, **meta):
+    async def add_stream_entry(self, song_url, info=None, play_now=False, player=None, **meta):
         if info is None:
             info = {'title': song_url, 'extractor': None}
 
@@ -82,7 +82,10 @@ class Playlist(EventEmitter):
             station_data=meta.get("station", None),
             **meta
         )
-        self._add_entry(entry)
+        if play_now and player is not None:
+            self._add_entry_now(entry, player)
+        else:
+            self._add_entry(entry)
         return entry, len(self.entries)
 
     async def add_entry(self, song_url, **meta):

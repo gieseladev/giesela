@@ -2348,14 +2348,14 @@ class MusicBot(discord.Client):
         """
         if len(leftover_args) > 0 and leftover_args[0].lower().strip() == "random":
             station = self.radios.get_random_station()
-            await player.playlist.add_stream_entry(station.url, channel=channel, author=author, station=station)
+            await player.playlist.add_stream_entry(station.url, play_now=True, player=player, channel=channel, author=author, station=station)
             return Response("I choose\n**{.name}**".format(station), delete_after=5)
         elif len(leftover_args) > 0:
             # try to find the radio station
             search_name = " ".join(leftover_args)
             station = self.radios.get_station(search_name.lower().strip())
             if station is not None:
-                await player.playlist.add_stream_entry(station.url, channel=channel, author=author, station=station)
+                await player.playlist.add_stream_entry(station.url, play_now=True, player=player, channel=channel, author=author, station=station)
                 return Response("Your favourite:\n**{.name}**".format(station), delete_after=5)
 
         # help the user find the right station
@@ -2380,7 +2380,7 @@ class MusicBot(discord.Client):
             await self.safe_delete_message(response)
 
             if play_station:
-                await player.playlist.add_stream_entry(station.url, channel=channel, author=author, station=station)
+                await player.playlist.add_stream_entry(station.url, play_now=True, player=player, channel=channel, author=author, station=station)
                 return Response("There you go fam!\n**{.name}**".format(station), delete_after=5)
             else:
                 continue
