@@ -2348,14 +2348,14 @@ class MusicBot(discord.Client):
         """
         if len(leftover_args) > 0 and leftover_args[0].lower().strip() == "random":
             station = self.radios.get_random_station()
-            await player.playlist.add_stream_entry(station.url, channel=channel, author=author, station=station)
+            await player.playlist.add_stream_entry(station.url, play_now=True, player=player, channel=channel, author=author, station=station)
             return Response("I choose\n*****REMOVED***.name***REMOVED*****".format(station), delete_after=5)
         elif len(leftover_args) > 0:
             # try to find the radio station
             search_name = " ".join(leftover_args)
             station = self.radios.get_station(search_name.lower().strip())
             if station is not None:
-                await player.playlist.add_stream_entry(station.url, channel=channel, author=author, station=station)
+                await player.playlist.add_stream_entry(station.url, play_now=True, player=player, channel=channel, author=author, station=station)
                 return Response("Your favourite:\n*****REMOVED***.name***REMOVED*****".format(station), delete_after=5)
 
         # help the user find the right station
@@ -2380,7 +2380,7 @@ class MusicBot(discord.Client):
             await self.safe_delete_message(response)
 
             if play_station:
-                await player.playlist.add_stream_entry(station.url, channel=channel, author=author, station=station)
+                await player.playlist.add_stream_entry(station.url, play_now=True, player=player, channel=channel, author=author, station=station)
                 return Response("There you go fam!\n*****REMOVED***.name***REMOVED*****".format(station), delete_after=5)
             else:
                 continue
@@ -2388,12 +2388,12 @@ class MusicBot(discord.Client):
     async def socket_radio(self, player, radio_station_name):
         if radio_station_name.lower().strip() == "random":
             station = self.radios.get_random_station()
-            await player.playlist.add_stream_entry(station.url, station=station)
+            await player.playlist.add_stream_entry(station.url, play_now=True, player=player, station=station)
             return True
 
         station = self.radios.get_station(radio_station_name.lower().strip())
         if station is not None:
-            await player.playlist.add_stream_entry(station.url, station=station)
+            await player.playlist.add_stream_entry(station.url, play_now=True, player=player, station=station)
             return True
 
         return False
@@ -3474,7 +3474,7 @@ class MusicBot(discord.Client):
             entries_text = ""
             entries = infos["entries"]
             for i in range(len(entries)):
-                entries_text += str(i + 1) + ". " + entries[i].title + "\n"
+                entries_text += str(i + 1) + ". " + entries[i].title + " | " + format_time(entries[i].duration, round_seconds=True, max_specifications=2) +"\n"
 
             response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n*playtime: ***REMOVED******REMOVED****\n\n***REMOVED******REMOVED***\n```\nTo edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"```".format(argument.replace("_", " ").title(), server.get_member(
                 infos["author"]).mention, str(infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", format_time(sum([x.duration for x in entries])), entries_text, self.config.command_prefix, argument)
@@ -4145,6 +4145,7 @@ class MusicBot(discord.Client):
         await self.disconnect_all_voice_clients()
         raise exceptions.RestartSignal
 
+    @owner_only
     async def cmd_shutdown(self, channel):
         await self.safe_send_message(channel, ":wave:")
         await self.disconnect_all_voice_clients()
