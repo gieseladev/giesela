@@ -3347,6 +3347,8 @@ class MusicBot(discord.Client):
 
             if load_mode == "replace":
                 player.playlist.clear()
+                if player.current_entry is not None:
+                    player.skip()
 
             from_index = int(additional_args[2]) - \
                 1 if len(additional_args) > 2 else 0
@@ -3489,6 +3491,11 @@ class MusicBot(discord.Client):
 
         clone_entries = self.playlists.get_playlist(
             playlist_name, player.playlist)["entries"]
+
+        player.playlist.clear()
+        if player.current_entry is not None:
+            player.skip()
+            
         await player.playlist.add_entries(clone_entries)
         self.playlists.bump_replay_count(playlist_name)
 
