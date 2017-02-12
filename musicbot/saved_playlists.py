@@ -85,7 +85,7 @@ class Playlists:
         if self.playlists.has_section(playlist_name):
             prevCount = 0
             if(self.playlists.has_option(playlist_name, "replays")):
-                prevCount = self.playlists.get(playlist_name, "replays")
+                prevCount = int(self.playlists.get(playlist_name, "replays"))
 
             self.playlists.set(playlist_name, "replays", str(prevCount + 1))
             self.save_playlist()
