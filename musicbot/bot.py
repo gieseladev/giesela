@@ -22,7 +22,6 @@ import goslate
 import newspaper
 import tungsten
 import wikipedia
-from cleverbot import Cleverbot
 from discord import utils
 from discord.enums import ChannelType
 from discord.ext.commands.bot import _get_variable
@@ -35,10 +34,12 @@ import asyncio
 import configparser
 
 from . import downloader, exceptions
+from .cleverbot import Cleverbot
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
 from .constants import AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT
 from .games.game_2048 import Game2048
+from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
 from .nine_gag import *
 from .opus_loader import load_opus_lib
@@ -105,13 +106,14 @@ class MusicBot(discord.Client):
         self.radios = Radios(radios_file)
         self.playlists = Playlists(playlists_file)
         self.random_sets = RandomSets(random_file)
+        self.cah = GameCAH(self)
         self.permissions = Permissions(
             perms_file, grant_all=[self.config.owner_id])
 
         self.blacklist = set(load_file(self.config.blacklist_file))
         self.autoplaylist = load_file(self.config.auto_playlist_file)
         self.downloader = downloader.Downloader(download_folder='audio_cache')
-        self.cb = Cleverbot("musicbot")
+        self.cb = Cleverbot()
         # self.radio = Radio()
         self.calendar = Calendar(self)
         self.socket_server = SocketServer(self)
@@ -3476,7 +3478,8 @@ class MusicBot(discord.Client):
             entries_text = ""
             entries = infos["entries"]
             for i in range(len(entries)):
-                entries_text += str(i + 1) + ". " + entries[i].title + " | " + format_time(entries[i].duration, round_seconds=True, max_specifications=2) +"\n"
+                entries_text += str(i + 1) + ". " + entries[i].title + " | " + format_time(
+                    entries[i].duration, round_seconds=True, max_specifications=2) + "\n"
 
             response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n*playtime: ***REMOVED******REMOVED****\n\n***REMOVED******REMOVED***\n```\nTo edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"```".format(argument.replace("_", " ").title(), server.get_member(
                 infos["author"]).mention, str(infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", format_time(sum([x.duration for x in entries])), entries_text, self.config.command_prefix, argument)
@@ -3495,7 +3498,7 @@ class MusicBot(discord.Client):
         player.playlist.clear()
         if player.current_entry is not None:
             player.skip()
-            
+
         await player.playlist.add_entries(clone_entries)
         self.playlists.bump_replay_count(playlist_name)
 
