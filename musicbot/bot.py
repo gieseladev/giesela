@@ -3010,13 +3010,15 @@ class MusicBot(discord.Client):
         Here you manage the non question cards
         """
 
-        argument = leftover_args[0].lower().strip() if len(leftover_args) > 0 else None
+        argument = leftover_args[0].lower().strip() if len(
+            leftover_args) > 0 else None
 
         if argument == "list":
             card_string = "{0.id}. *[{0.text}]* used **{0.occurences}** time{1}"
             cards = []
             for card in self.cah.cards.cards:
-                cards.append(card_string.format(card, "s" if card.occurences != 1 else ""))
+                cards.append(card_string.format(
+                    card, "s" if card.occurences != 1 else ""))
 
             return Response("**These are the available cards:**\n\n" + "\n".join(cards))
         elif argument is None:
@@ -3035,6 +3037,19 @@ class MusicBot(discord.Client):
         Here you manage the question cards
         """
 
+        argument = leftover_args[0].lower().strip() if len(
+            leftover_args) > 0 else None
+
+        if argument == "list":
+            card_string = "{0.id}. *[{0.text}]* (draw {0.cards_to_draw} card{1}) used **{0.occurences}** time{2}"
+            cards = []
+            for card in self.cah.cards.question_cards:
+                cards.append(card_string.format(
+                    card, "s" if card.cards_to_draw != 1 else "", "s" if card.occurences != 1 else ""))
+
+            return Response("**These are the available question cards:**\n\n" + "\n".join(cards))
+        elif argument is None:
+            return await self.cmd_help(channel, ["qcards"])
 
     async def cmd_game(self, message, channel, author, leftover_args, game=None):
         """
