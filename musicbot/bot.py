@@ -2982,6 +2982,48 @@ class MusicBot(discord.Client):
 
         return Response("Can't find any more articles :frowning:", delete_after=30)
 
+    async def cmd_cah(self, message, channel, author, leftover_args):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***cah create
+            ***REMOVED***command_prefix***REMOVED***cah join [token]
+
+        Play a cards against humanity game
+
+        References:
+            ***REMOVED***command_prefix***REMOVED***help cards
+                *learn about how to create/edit cards*
+            ***REMOVED***command_prefix***REMOVED***help qcards
+                *learn about how to create/edit question cards*
+        """
+
+    async def cmd_cards(self, channel, leftover_args):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***cards list
+                *list all the available cards*
+            ***REMOVED***command_prefix***REMOVED***cards edit id
+                *edit a card by its id*
+            ***REMOVED***command_prefix***REMOVED***cards create text
+                *create a new card with text*
+
+        Here you manage the non question cards
+        """
+
+    async def cmd_qcards(self, channel, leftover_args):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***qcards list
+                *list all the available question cards*
+            ***REMOVED***command_prefix***REMOVED***qcards edit id
+                *edit a question card by its id*
+            ***REMOVED***command_prefix***REMOVED***qcards create text (use $ for blanks) [number of cards to draw]
+                *create a new question card with text and if you want the number of cards to draw*
+
+        Here you manage the question cards
+        """
+
+
     async def cmd_game(self, message, channel, author, leftover_args, game=None):
         """
         Usage:

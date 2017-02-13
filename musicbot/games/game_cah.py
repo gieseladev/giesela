@@ -1,5 +1,8 @@
 import random
 
+import configparser
+from musicbot.config import ConfigDefaults
+
 vowels = tuple("aeiou")
 a_list =\
     ***REMOVED***
@@ -29,11 +32,124 @@ a_list =\
     ***REMOVED***
 
 
+class QuestionCard:
+
+    def __init__(self, card_id, text, cards_to_draw, occurances):
+        self.id = card_id
+        self.text = text
+        self.cards_to_draw = cards_to_draw
+        self.occurances = occurances
+
+    def __repr__(self):
+        return "<***REMOVED***0.id***REMOVED***> \"***REMOVED***0.text***REMOVED***\" [***REMOVED***0.cards_to_draw***REMOVED*** | ***REMOVED***0.occurances***REMOVED***]".format(self)
+
+
+class Card:
+
+    def __init__(self, card_id, text, occurances):
+        self.id = card_id
+        self.text = text
+        self.occurances = occurances
+
+    def __repr__(self):
+        return "<***REMOVED***0.id***REMOVED***> \"***REMOVED***0.text***REMOVED***\" [***REMOVED***0.occurances***REMOVED***]".format(self)
+
+
+class Cards:
+
+    def __init__(self):
+        self.question_cards = []
+        self.cards = []
+        self.ids_used = []
+
+        self.update_question_cards()
+        self.update_cards()
+
+    def update_question_cards(self):
+        self.question_cards = []
+        config_parser = configparser.ConfigParser(interpolation=None)
+        config_parser.read(ConfigDefaults.question_cards, encoding='utf-8')
+
+        for section in config_parser.sections():
+            card_id = int(section)
+            if card_id not in self.ids_used:
+                self.ids_used.append(card_id)
+            text = config_parser.get(section, "text")
+            cards_to_draw = int(config_parser.get(
+                section, "number_of_cards", fallback=1))
+            occurances = int(config_parser.get(
+                section, "occurances", fallback=0))
+
+            self.question_cards.append(QuestionCard(
+                card_id, text, cards_to_draw, occurances))
+
+    def save_question_cards(self):
+        config_parser = configparser.ConfigParser(interpolation=None)
+
+        for card in self.question_cards:
+            sec = str(card.id)
+            config_parser.add_section(sec)
+            config_parser.set(sec, "text", card.text)
+            config_parser.set(sec, "number_of_cards", str(card.cards_to_draw))
+            config_parser.set(sec, "occurances", str(card.occurances))
+
+        with open(ConfigDefaults.question_cards, "w+", encoding="utf-8") as question_file:
+            config_parser.write(question_file)
+
+    def update_cards(self):
+        self.cards = []
+        config_parser = configparser.ConfigParser(interpolation=None)
+        config_parser.read(ConfigDefaults.cards_file, encoding='utf-8')
+
+        for section in config_parser.sections():
+            card_id = int(section)
+            if card_id not in self.ids_used:
+                self.ids_used.append(card_id)
+            text = config_parser.get(section, "text")
+            occurances = int(config_parser.get(
+                section, "occurances", fallback=0))
+
+            self.cards.append(Card(
+                card_id, text, occurances))
+
+    def save_cards(self):
+        config_parser = configparser.ConfigParser(interpolation=None)
+
+        for card in self.cards:
+            sec = str(card.id)
+            config_parser.add_section(sec)
+            config_parser.set(sec, "text", card.text)
+            config_parser.set(sec, "occurances", str(card.occurances))
+
+        with open(ConfigDefaults.cards_file, "w+", encoding="utf-8") as cards_file:
+            config_parser.write(cards_file)
+
+    def add_question_card(self, text, cards_to_draw):
+        card_id = self.get_unique_id()
+        self.ids_used.append(card_id)
+        self.question_cards.append(
+            QuestionCard(card_id, text, cards_to_draw, 0))
+        self.save_question_cards()
+
+    def add_card(self, text):
+        card_id = self.get_unique_id()
+        self.ids_used.append(card_id)
+        self.cards.append(Card(card_id, text, 0))
+        self.save_cards()
+
+    def get_unique_id(self):
+        while True:
+            i = random.randint(100, 1000000000)
+            if i not in self.ids_used:
+                return i
+
+
 class GameCAH:
 
     def __init__(self, musicbot):
         self.musicbot = musicbot
         self.running_games = ***REMOVED******REMOVED***
+        self.cards = Cards()
 
     def new_game(self, operator_id):
         token = self.generate_token()
@@ -76,9 +192,6 @@ class GameCAH:
                 return game
         return None
 
-    def get_all_question_cards(self):
-        return []
-
 
 class Game:
 
@@ -88,10 +201,11 @@ class Game:
         self.players = []
         self.operator_id = operator_id
         self.players.append(Player(operator_id))
-        self.question_cards = manager.get_all_question_cards()
+        # self.question_cards = manager.get_all_question_cards()
+        self.current_round = None
 
     def start_game(self):
-        pass
+        self.current_round = Round(self)
 
     def get_player(self, id):
         for player in self.players:
