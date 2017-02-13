@@ -3010,6 +3010,18 @@ class MusicBot(discord.Client):
         Here you manage the non question cards
         """
 
+        argument = leftover_args[0].lower().strip() if len(leftover_args) > 0 else None
+
+        if argument == "list":
+            card_string = "***REMOVED***0.id***REMOVED***. *[***REMOVED***0.text***REMOVED***]* used *****REMOVED***0.occurences***REMOVED***** time***REMOVED***1***REMOVED***"
+            cards = []
+            for card in self.cah.cards.cards:
+                cards.append(card_string.format(card, "s" if card.occurences != 1 else ""))
+
+            return Response("**These are the available cards:**\n\n" + "\n".join(cards))
+        elif argument is None:
+            return await self.cmd_help(channel, ["cards"])
+
     async def cmd_qcards(self, channel, leftover_args):
         """
         Usage:

@@ -34,25 +34,25 @@ a_list =\
 
 class QuestionCard:
 
-    def __init__(self, card_id, text, cards_to_draw, occurances):
+    def __init__(self, card_id, text, cards_to_draw, occurences):
         self.id = card_id
         self.text = text
         self.cards_to_draw = cards_to_draw
-        self.occurances = occurances
+        self.occurences = occurences
 
     def __repr__(self):
-        return "<***REMOVED***0.id***REMOVED***> \"***REMOVED***0.text***REMOVED***\" [***REMOVED***0.cards_to_draw***REMOVED*** | ***REMOVED***0.occurances***REMOVED***]".format(self)
+        return "<***REMOVED***0.id***REMOVED***> \"***REMOVED***0.text***REMOVED***\" [***REMOVED***0.cards_to_draw***REMOVED*** | ***REMOVED***0.occurences***REMOVED***]".format(self)
 
 
 class Card:
 
-    def __init__(self, card_id, text, occurances):
+    def __init__(self, card_id, text, occurences):
         self.id = card_id
         self.text = text
-        self.occurances = occurances
+        self.occurences = occurences
 
     def __repr__(self):
-        return "<***REMOVED***0.id***REMOVED***> \"***REMOVED***0.text***REMOVED***\" [***REMOVED***0.occurances***REMOVED***]".format(self)
+        return "<***REMOVED***0.id***REMOVED***> \"***REMOVED***0.text***REMOVED***\" [***REMOVED***0.occurences***REMOVED***]".format(self)
 
 
 class Cards:
@@ -78,7 +78,7 @@ class Cards:
             cards_to_draw = int(config_parser.get(
                 section, "number_of_cards", fallback=1))
             occurances = int(config_parser.get(
-                section, "occurances", fallback=0))
+                section, "occurences", fallback=0))
 
             self.question_cards.append(QuestionCard(
                 card_id, text, cards_to_draw, occurances))
@@ -91,7 +91,7 @@ class Cards:
             config_parser.add_section(sec)
             config_parser.set(sec, "text", card.text)
             config_parser.set(sec, "number_of_cards", str(card.cards_to_draw))
-            config_parser.set(sec, "occurances", str(card.occurances))
+            config_parser.set(sec, "occurences", str(card.occurances))
 
         with open(ConfigDefaults.question_cards, "w+", encoding="utf-8") as question_file:
             config_parser.write(question_file)
@@ -107,7 +107,7 @@ class Cards:
                 self.ids_used.append(card_id)
             text = config_parser.get(section, "text")
             occurances = int(config_parser.get(
-                section, "occurances", fallback=0))
+                section, "occurences", fallback=0))
 
             self.cards.append(Card(
                 card_id, text, occurances))
@@ -119,7 +119,7 @@ class Cards:
             sec = str(card.id)
             config_parser.add_section(sec)
             config_parser.set(sec, "text", card.text)
-            config_parser.set(sec, "occurances", str(card.occurances))
+            config_parser.set(sec, "occurences", str(card.occurances))
 
         with open(ConfigDefaults.cards_file, "w+", encoding="utf-8") as cards_file:
             config_parser.write(cards_file)
