@@ -1,4 +1,6 @@
+import json
 import random
+from datetime import datetime
 
 import configparser
 from musicbot.config import ConfigDefaults
@@ -34,25 +36,29 @@ a_list =\
 
 class QuestionCard:
 
-    def __init__(self, card_id, text, cards_to_draw, occurences):
+    def __init__(self, card_id, text, cards_to_draw, occurences, creator_id, creation_date=datetime.now()):
         self.id = card_id
         self.text = text
         self.cards_to_draw = cards_to_draw
         self.occurences = occurences
+        self.creator_id = creator_id
+        self.creation_date = creation_date
 
     def __repr__(self):
-        return "<***REMOVED***0.id***REMOVED***> \"***REMOVED***0.text***REMOVED***\" [***REMOVED***0.cards_to_draw***REMOVED*** | ***REMOVED***0.occurences***REMOVED***]".format(self)
+        return "<***REMOVED***0.id***REMOVED***> \"***REMOVED***0.text***REMOVED***\" [***REMOVED***0.cards_to_draw***REMOVED*** | ***REMOVED***0.creator_id***REMOVED*** | ***REMOVED***0.creation_date***REMOVED*** | ***REMOVED***0.occurences***REMOVED***]".format(self)
 
 
 class Card:
 
-    def __init__(self, card_id, text, occurences):
+    def __init__(self, card_id, text, occurences, creator_id, creation_date=datetime.now()):
         self.id = card_id
         self.text = text
         self.occurences = occurences
+        self.creator_id = creator_id
+        self.creation_date = creation_date
 
     def __repr__(self):
-        return "<***REMOVED***0.id***REMOVED***> \"***REMOVED***0.text***REMOVED***\" [***REMOVED***0.occurences***REMOVED***]".format(self)
+        return "<***REMOVED***0.id***REMOVED***> \"***REMOVED***0.text***REMOVED***\" [***REMOVED***0.creator_id***REMOVED*** | ***REMOVED***0.creation_date***REMOVED*** | ***REMOVED***0.occurences***REMOVED***]".format(self)
 
 
 class Cards:
@@ -79,9 +85,20 @@ class Cards:
                 section, "number_of_cards", fallback=1))
             occurances = int(config_parser.get(
                 section, "occurences", fallback=0))
+            creator_id = config_parser.get(
+                section, "creator_id", fallback="0")
+            creation_date_string = config_parser.get(
+                section, "creation_datetime", fallback=None)
+
+            if creation_date_string is None:
+                creation_date = datetime.now()
+            else:
+                m_date = json.loads(creation_date_string)
+                creation_date = datetime(m_date["year"], m_date["month"], m_date["day"], m_date[
+                                         "hour"], m_date["minute"], m_date["second"])
 
             self.question_cards.append(QuestionCard(
-                card_id, text, cards_to_draw, occurances))
+                card_id, text, cards_to_draw, occurances, creator_id, creation_date))
 
     def save_question_cards(self):
         config_parser = configparser.ConfigParser(interpolation=None)
@@ -92,6 +109,9 @@ class Cards:
             config_parser.set(sec, "text", card.text)
             config_parser.set(sec, "number_of_cards", str(card.cards_to_draw))
             config_parser.set(sec, "occurences", str(card.occurances))
+            config_parser.set(sec, "creator_id", str(card.creator_id))
+            config_parser.set(sec, "creation_datetime", json.dumps(***REMOVED***"year": card.creation_date.year, "month": card.creation_date.month,
+                                                                    "day": card.creation_date.day, "hour": card.creation_date.hour, "minute": card.creation_date.minute, "second": card.creation_date.second***REMOVED***))
 
         with open(ConfigDefaults.question_cards, "w+", encoding="utf-8") as question_file:
             config_parser.write(question_file)
@@ -108,9 +128,20 @@ class Cards:
             text = config_parser.get(section, "text")
             occurances = int(config_parser.get(
                 section, "occurences", fallback=0))
+            creator_id = config_parser.get(
+                section, "creator_id", fallback="0")
+            creation_date_string = config_parser.get(
+                section, "creation_datetime", fallback=None)
+
+            if creation_date_string is None:
+                creation_date = datetime.now()
+            else:
+                m_date = json.loads(creation_date_string)
+                creation_date = datetime(m_date["year"], m_date["month"], m_date["day"], m_date[
+                                         "hour"], m_date["minute"], m_date["second"])
 
             self.cards.append(Card(
-                card_id, text, occurances))
+                card_id, text, occurances, creator_id, creation_date))
 
     def save_cards(self):
         config_parser = configparser.ConfigParser(interpolation=None)
@@ -120,6 +151,9 @@ class Cards:
             config_parser.add_section(sec)
             config_parser.set(sec, "text", card.text)
             config_parser.set(sec, "occurences", str(card.occurances))
+            config_parser.set(sec, "creator_id", str(card.creator_id))
+            config_parser.set(sec, "creation_datetime", json.dumps(***REMOVED***"year": card.creation_date.year, "month": card.creation_date.month,
+                                                                    "day": card.creation_date.day, "hour": card.creation_date.hour, "minute": card.creation_date.minute, "second": card.creation_date.second***REMOVED***))
 
         with open(ConfigDefaults.cards_file, "w+", encoding="utf-8") as cards_file:
             config_parser.write(cards_file)
@@ -136,6 +170,30 @@ class Cards:
         self.ids_used.append(card_id)
         self.cards.append(Card(card_id, text, 0))
         self.save_cards()
+
+    def get_question_card(self, card_id):
+        try:
+            card_id = int(card_id)
+        except:
+            return None
+
+        for card in self.question_cards:
+            if card.id == card_id:
+                return card
+
+        return None
+
+    def get_card(self, card_id):
+        try:
+            card_id = int(card_id)
+        except:
+            return None
+
+        for card in self.cards:
+            if card.id == card_id:
+                return card
+
+        return None
 
     def get_unique_id(self):
         while True:
