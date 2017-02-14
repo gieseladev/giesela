@@ -2997,7 +2997,7 @@ class MusicBot(discord.Client):
                 *learn about how to create/edit question cards*
         """
 
-    async def cmd_cards(self, server, channel, leftover_args):
+    async def cmd_cards(self, server, channel, author, leftover_args):
         """
         Usage:
             {command_prefix}cards list
@@ -3012,7 +3012,7 @@ class MusicBot(discord.Client):
         Here you manage the non question cards
         """
 
-        argument = leftover_args[0].lower().strip() if len(
+        argument = leftover_args[0].lower() if len(
             leftover_args) > 0 else None
 
         if argument == "list":
@@ -3032,16 +3032,26 @@ class MusicBot(discord.Client):
                 return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date)))
 
             return Response("There's no card with that id. Use `{}cards list` to list all the possible cards".format(self.config.command_prefix))
+        elif argument == "create":
+            text = " ".join(leftover_args[1:]) if len(leftover_args) > 1 else None
+            if text is None:
+                return Response("You might want to actually add some text to your card", delete_after=20)
+            if len(text) < 3:
+                return Response("I think that's a bit too short...", delete_after=20)
+            if len(text) > 140:
+                return Response("Maybe a bit too long?", delete_after=20)
 
+            card_id = self.cah.cards.add_card(text, author.id)
+            return Response("Successfully created card **{}**".format(card_id))
         else:
             return await self.cmd_help(channel, ["cards"])
 
-    async def cmd_qcards(self, server, channel, leftover_args):
+    async def cmd_qcards(self, server, channel, author, leftover_args):
         """
         Usage:
             {command_prefix}qcards list
                 *list all the available question cards*
-            {command_prefix}qcards create text (use $ for blanks) [number of cards to draw]
+            {command_prefix}qcards create text (use $ for blanks)
                 *create a new question card with text and if you want the number of cards to draw*
             {command_prefix}qcards edit id
                 *edit a question card by its id*
@@ -3051,24 +3061,38 @@ class MusicBot(discord.Client):
         Here you manage the question cards
         """
 
-        argument = leftover_args[0].lower().strip() if len(
+        argument = leftover_args[0].lower() if len(
             leftover_args) > 0 else None
 
         if argument == "list":
-            card_string = "{0.id}. \"*{2}*\" (draw {0.cards_to_draw} card{1})"
+            card_string = "{0.id}. \"*{1}*\""
             cards = []
             for card in self.cah.cards.question_cards:
                 cards.append(card_string.format(
-                    card, "s" if card.cards_to_draw != 1 else "", card.text.replace("$", "BLANK")))
+                    card, card.text.replace("$", "BLANK")))
 
             return Response("**These are the available question cards:**\n\n" + "\n".join(cards))
         elif argument == "info":
             card_id = leftover_args[1].lower().strip() if len(leftover_args) > 1 else None
 
-            card = self.cah.cards.get_card(card_id)
+            card = self.cah.cards.get_question_card(card_id)
             if card is not None:
-                info = "Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ncreated {3}```"
+                info = "Question Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ncreated {3}```"
                 return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date)))
+        elif argument == "create":
+            text = " ".join(leftover_args[1:]) if len(leftover_args) > 1 else None
+            if text is None:
+                return Response("You might want to actually add some text to your card", delete_after=20)
+            if len(text) < 3:
+                return Response("I think that's a bit too short...", delete_after=20)
+            if len(text) > 500:
+                return Response("Maybe a bit too long?", delete_after=20)
+
+            if text.count("$") < 1:
+                return Response("You need to have at least one blank ($) space", delete_after=20)
+
+            card_id = self.cah.cards.add_question_card(text, author.id)
+            return Response("Successfully created question card **{}**".format(card_id))
         else:
             return await self.cmd_help(channel, ["qcards"])
 

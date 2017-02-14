@@ -36,10 +36,9 @@ a_list =\
 
 class QuestionCard:
 
-    def __init__(self, card_id, text, cards_to_draw, occurences, creator_id, creation_date=datetime.now()):
+    def __init__(self, card_id, text, occurences, creator_id, creation_date=datetime.now()):
         self.id = card_id
         self.text = text
-        self.cards_to_draw = cards_to_draw
         self.occurences = occurences
         self.creator_id = creator_id
         self.creation_date = creation_date
@@ -81,8 +80,6 @@ class Cards:
             if card_id not in self.ids_used:
                 self.ids_used.append(card_id)
             text = config_parser.get(section, "text")
-            cards_to_draw = int(config_parser.get(
-                section, "number_of_cards", fallback=1))
             occurances = int(config_parser.get(
                 section, "occurences", fallback=0))
             creator_id = config_parser.get(
@@ -98,7 +95,7 @@ class Cards:
                                          "hour"], m_date["minute"], m_date["second"])
 
             self.question_cards.append(QuestionCard(
-                card_id, text, cards_to_draw, occurances, creator_id, creation_date))
+                card_id, text, occurances, creator_id, creation_date))
 
     def save_question_cards(self):
         config_parser = configparser.ConfigParser(interpolation=None)
@@ -107,8 +104,7 @@ class Cards:
             sec = str(card.id)
             config_parser.add_section(sec)
             config_parser.set(sec, "text", card.text)
-            config_parser.set(sec, "number_of_cards", str(card.cards_to_draw))
-            config_parser.set(sec, "occurences", str(card.occurances))
+            config_parser.set(sec, "occurences", str(card.occurences))
             config_parser.set(sec, "creator_id", str(card.creator_id))
             config_parser.set(sec, "creation_datetime", json.dumps({"year": card.creation_date.year, "month": card.creation_date.month,
                                                                     "day": card.creation_date.day, "hour": card.creation_date.hour, "minute": card.creation_date.minute, "second": card.creation_date.second}))
@@ -150,7 +146,7 @@ class Cards:
             sec = str(card.id)
             config_parser.add_section(sec)
             config_parser.set(sec, "text", card.text)
-            config_parser.set(sec, "occurences", str(card.occurances))
+            config_parser.set(sec, "occurences", str(card.occurences))
             config_parser.set(sec, "creator_id", str(card.creator_id))
             config_parser.set(sec, "creation_datetime", json.dumps({"year": card.creation_date.year, "month": card.creation_date.month,
                                                                     "day": card.creation_date.day, "hour": card.creation_date.hour, "minute": card.creation_date.minute, "second": card.creation_date.second}))
@@ -158,18 +154,20 @@ class Cards:
         with open(ConfigDefaults.cards_file, "w+", encoding="utf-8") as cards_file:
             config_parser.write(cards_file)
 
-    def add_question_card(self, text, cards_to_draw):
+    def add_question_card(self, text, creator_id):
         card_id = self.get_unique_id()
         self.ids_used.append(card_id)
         self.question_cards.append(
-            QuestionCard(card_id, text, cards_to_draw, 0))
+            QuestionCard(card_id, text, 0, creator_id))
         self.save_question_cards()
+        return card_id
 
-    def add_card(self, text):
+    def add_card(self, text, creator_id):
         card_id = self.get_unique_id()
         self.ids_used.append(card_id)
-        self.cards.append(Card(card_id, text, 0))
+        self.cards.append(Card(card_id, text, 0, creator_id))
         self.save_cards()
+        return card_id
 
     def get_question_card(self, card_id):
         try:
@@ -197,7 +195,7 @@ class Cards:
 
     def get_unique_id(self):
         while True:
-            i = random.randint(100, 1000000000)
+            i = random.randint(100, 100000)
             if i not in self.ids_used:
                 return i
 
