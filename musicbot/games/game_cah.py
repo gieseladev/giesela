@@ -270,11 +270,11 @@ class Game:
 
         return None
 
-    def add_user(self, id):
-        if g.get_player(user_id) is not None:
+    def add_user(self, user_id):
+        if self.get_player(user_id) is not None:
             return False
 
-        self.players.append(Player(id))
+        self.players.append(Player(user_id))
         return True
 
     def remove_user(self, id):
