@@ -53,7 +53,7 @@ from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .socket_server import SocketServer
 from .utils import (escape_dis, format_time, load_file, paginate, random_line,
-                    sane_round_int, write_file)
+                    sane_round_int, write_file, prettydate)
 
 load_opus_lib()
 
@@ -2997,15 +2997,17 @@ class MusicBot(discord.Client):
                 *learn about how to create/edit question cards*
         """
 
-    async def cmd_cards(self, channel, leftover_args):
+    async def cmd_cards(self, server, channel, leftover_args):
         """
         Usage:
             {command_prefix}cards list
                 *list all the available cards*
-            {command_prefix}cards edit id
-                *edit a card by its id*
             {command_prefix}cards create text
                 *create a new card with text*
+            {command_prefix}cards edit id
+                *edit a card by its id*
+            {command_prefix}cards info id
+                *Get more detailed information about a card*
 
         Here you manage the non question cards
         """
@@ -3014,25 +3016,37 @@ class MusicBot(discord.Client):
             leftover_args) > 0 else None
 
         if argument == "list":
-            card_string = "{0.id}. *[{0.text}]* used **{0.occurences}** time{1}"
+            card_string = "{0.id}. *[{0.text}]*"
             cards = []
             for card in self.cah.cards.cards:
                 cards.append(card_string.format(
-                    card, "s" if card.occurences != 1 else ""))
+                    card))
 
             return Response("**These are the available cards:**\n\n" + "\n".join(cards))
-        elif argument is None:
+        elif argument == "info":
+            card_id = leftover_args[1].lower().strip() if len(leftover_args) > 1 else None
+
+            card = self.cah.cards.get_card(card_id)
+            if card is not None:
+                info = "Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ncreated {3}```"
+                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date)))
+
+            return Response("There's no card with that id. Use `{}cards list` to list all the possible cards".format(self.config.command_prefix))
+
+        else:
             return await self.cmd_help(channel, ["cards"])
 
-    async def cmd_qcards(self, channel, leftover_args):
+    async def cmd_qcards(self, server, channel, leftover_args):
         """
         Usage:
             {command_prefix}qcards list
                 *list all the available question cards*
-            {command_prefix}qcards edit id
-                *edit a question card by its id*
             {command_prefix}qcards create text (use $ for blanks) [number of cards to draw]
                 *create a new question card with text and if you want the number of cards to draw*
+            {command_prefix}qcards edit id
+                *edit a question card by its id*
+            {command_prefix}qcards info id
+                *Get more detailed information about a question card*
 
         Here you manage the question cards
         """
@@ -3041,14 +3055,21 @@ class MusicBot(discord.Client):
             leftover_args) > 0 else None
 
         if argument == "list":
-            card_string = "{0.id}. *[{0.text}]* (draw {0.cards_to_draw} card{1}) used **{0.occurences}** time{2}"
+            card_string = "{0.id}. \"*{2}*\" (draw {0.cards_to_draw} card{1})"
             cards = []
             for card in self.cah.cards.question_cards:
                 cards.append(card_string.format(
-                    card, "s" if card.cards_to_draw != 1 else "", "s" if card.occurences != 1 else ""))
+                    card, "s" if card.cards_to_draw != 1 else "", card.text.replace("$", "BLANK")))
 
             return Response("**These are the available question cards:**\n\n" + "\n".join(cards))
-        elif argument is None:
+        elif argument == "info":
+            card_id = leftover_args[1].lower().strip() if len(leftover_args) > 1 else None
+
+            card = self.cah.cards.get_card(card_id)
+            if card is not None:
+                info = "Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ncreated {3}```"
+                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date)))
+        else:
             return await self.cmd_help(channel, ["qcards"])
 
     async def cmd_game(self, message, channel, author, leftover_args, game=None):
