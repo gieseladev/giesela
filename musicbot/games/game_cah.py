@@ -1,5 +1,6 @@
 import json
 import random
+import asyncio
 from datetime import datetime
 
 import configparser
@@ -226,6 +227,21 @@ class GameCAH:
 
         return g.add_user(user_id)
 
+    def stop_game(self, token):
+        g = self.get_game(token)
+        g.stop_game()
+        self.running_games.pop(token, None)
+
+    def get_game(self, token):
+        if token is None:
+            return None
+
+        token = token.lower().strip()
+        if token in self.running_games:
+            return self.running_games[token]
+
+        return None
+
     def generate_token(self):
         max_tries = 5000
         i = 0
@@ -248,6 +264,18 @@ class GameCAH:
                 return game
         return None
 
+    def send_message_to_user(self, user_id, message, request_result=False):
+        user = self.musicbot.get_global_user(user_id)
+
+        if user is None:
+            return None
+
+        fut = asyncio.run_coroutine_threadsafe(self.musicbot.safe_send_message(user, message), self.musicbot.loop=)
+        if request_result:
+            return fut.result()
+        else
+            return None
+
 
 class Game:
 
@@ -260,6 +288,13 @@ class Game:
         # self.question_cards = manager.get_all_question_cards()
         self.current_round = None
 
+    def stop_game(self):
+        if self.current_round is not None:
+            self.current_round.end_round()
+
+        for pl in self.players:
+            self.manager.send_message_to_user(pl.player_id, "The operator has stopped this game. Thanks for playing!")
+
     def start_game(self):
         self.current_round = Round(self)
 
@@ -269,6 +304,12 @@ class Game:
                 return player
 
         return None
+
+    def is_owner(self, user_id):
+        return user_id == self.operator_id
+
+    def in_game(self, user_id):
+        return self.get_player(user_id) != None
 
     def add_user(self, user_id):
         if self.get_player(user_id) is not None:
@@ -293,6 +334,7 @@ class Round:
         self.master = random.choice(game.players)
         self.card = game.question_cards.pop(
             random.randint(0, len(game.question_cards) - 1))
+        self.messages_to_delete = []
 
     def start_round(self):
         pass

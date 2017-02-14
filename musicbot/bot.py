@@ -328,6 +328,14 @@ class MusicBot(discord.Client):
 
             return voice_client
 
+    def get_global_user(self, user_id):
+        for server in self.servers:
+            mem = server.get_member(user_id)
+            if mem is not None:
+                return mem
+
+        return None
+
     async def mute_voice_client(self, channel, mute):
         await self._update_voice_state(channel, mute=mute)
 
@@ -2987,6 +2995,10 @@ class MusicBot(discord.Client):
         Usage:
             ***REMOVED***command_prefix***REMOVED***cah create
             ***REMOVED***command_prefix***REMOVED***cah join [token]
+            ***REMOVED***command_prefix***REMOVED***cah leave [token]
+            ***REMOVED***command_prefix***REMOVED***cah pause [token]
+            ***REMOVED***command_prefix***REMOVED***cah resume [token]
+            ***REMOVED***command_prefix***REMOVED***cah stop [token]
 
         Play a cards against humanity game
 
@@ -3004,13 +3016,26 @@ class MusicBot(discord.Client):
             if token is None:
                 return Response("You need to provide a token", delete_after=15)
 
-            if token not in self.cah.running_games:
+            g = self.cah.get_game(token)
+
+            if g is None:
                 return Response("This game does not exist *shrugs*", delete_after=15)
+
+            if g.in_game(author.id):
+                return Response("You're already in this game!", delete_after=15)
 
             if self.cah.user_join_game(author.id, token):
                 return Response("Successfully joined the game *****REMOVED******REMOVED*****".format(token.upper()))
             else:
                 return Response("Failed to join game *****REMOVED******REMOVED*****".format(token.upper()))
+        elif arugemnt == "stop":
+            token = leftover_args[1].lower() if len(leftover_args) > 1 else None
+            g = self.cah.get_game(token)
+            if g is None:
+                return Response("This game does not exist!", delete_after=15)
+
+            if not g.is_owner(author.id):
+                return Response("Only the owner may stop a game!", delete_after=15)
 
     async def cmd_cards(self, server, channel, author, leftover_args):
         """
