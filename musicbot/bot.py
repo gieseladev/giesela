@@ -2997,6 +2997,21 @@ class MusicBot(discord.Client):
                 *learn about how to create/edit question cards*
         """
 
+        argument = leftover_args[0].lower() if len(leftover_args) > 0 else None
+
+        if argument == "join":
+            token = leftover_args[1].lower() if len(leftover_args) > 1 else None
+            if token is None:
+                return Response("You need to provide a token", delete_after=15)
+
+            if token not in self.cah.running_games:
+                return Response("This game does not exist *shrugs*", delete_after=15)
+
+            if self.cah.user_join_game(author.id, token):
+                return Response("Successfully joined the game **{}**".format(token.upper()))
+            else:
+                return Response("Failed to join game **{}**".format(token.upper()))
+
     async def cmd_cards(self, server, channel, author, leftover_args):
         """
         Usage:
