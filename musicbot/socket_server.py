@@ -66,7 +66,7 @@ class SocketServer:
     def _broadcast_information(self):
         to_delete = []
         for sock, server_id in self.server_ids.items():
-            try:
+    try:
                 response = "INFORMATION;{artist};{song_title};{video_id};{play_status};{cover_url};{progress};{duration};{volume}"
 
                 artist, song_title, video_id, cover_url, playing, duration, progress, volume = self.get_player_values(
