@@ -222,6 +222,8 @@ class ConfigDefaults:
 
     options_file = 'config/options.ini'
     papers_file = "config/papers.ini"
+    cards_file = "data/cah/cards.ini"
+    question_cards = "data/cah/question_cards.ini"
     radios_file = "config/radio_stations.ini"
     playlists_file = "config/playlists.ini"
     random_sets = "config/random_sets.ini"

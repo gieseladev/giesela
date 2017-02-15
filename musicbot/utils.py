@@ -1,3 +1,4 @@
+import datetime
 import decimal
 import random
 import re
@@ -31,6 +32,29 @@ def write_file(filename, contents):
         for item in contents:
             f.write(str(item))
             f.write('\n')
+
+
+def prettydate(d):
+    diff = datetime.datetime.now() - d
+    s = diff.seconds
+    if diff.days > 7 or diff.days < 0:
+        return d.strftime('%d %b %y')
+    elif diff.days == 1:
+        return '1 day ago'
+    elif diff.days > 1:
+        return '{} days ago'.format(diff.days)
+    elif s <= 1:
+        return 'just now'
+    elif s < 60:
+        return '{} seconds ago'.format(round_to_interval(s))
+    elif s < 120:
+        return '1 minute ago'
+    elif s < 3600:
+        return '{} minutes ago'.format(round_to_interval(s / 60))
+    elif s < 7200:
+        return '1 hour ago'
+    else:
+        return '{} hours ago'.format(round_to_interval(s / 3600))
 
 
 def slugify(value):
