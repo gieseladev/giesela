@@ -52,8 +52,8 @@ from .random_sets import RandomSets
 from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .socket_server import SocketServer
-from .utils import (escape_dis, format_time, load_file, paginate, random_line,
-                    sane_round_int, write_file, prettydate)
+from .utils import (escape_dis, format_time, load_file, paginate, prettydate,
+                    random_line, sane_round_int, write_file)
 
 load_opus_lib()
 
@@ -2996,25 +2996,37 @@ class MusicBot(discord.Client):
             ***REMOVED***command_prefix***REMOVED***cah create
             ***REMOVED***command_prefix***REMOVED***cah join [token]
             ***REMOVED***command_prefix***REMOVED***cah leave [token]
-            ***REMOVED***command_prefix***REMOVED***cah pause [token]
-            ***REMOVED***command_prefix***REMOVED***cah resume [token]
+
+            ***REMOVED***command_prefix***REMOVED***cah start [token]
             ***REMOVED***command_prefix***REMOVED***cah stop [token]
 
         Play a cards against humanity game
 
         References:
             ***REMOVED***command_prefix***REMOVED***help cards
-                *learn about how to create/edit cards*
+                -learn about how to create/edit cards
             ***REMOVED***command_prefix***REMOVED***help qcards
-                *learn about how to create/edit question cards*
+                -learn about how to create/edit question cards
         """
 
         argument = leftover_args[0].lower() if len(leftover_args) > 0 else None
 
-        if argument == "join":
-            token = leftover_args[1].lower() if len(leftover_args) > 1 else None
+        if argument == "create":
+            if self.cah.is_user_in_game(author.id):
+                g = self.cah.get_game(author.id)
+                return Response("You can't host a game if you're already in one\nUse `***REMOVED******REMOVED***cah leave ***REMOVED******REMOVED***` to leave your current game".format(self.config.command_prefix, g.token), delete_after=15)
+
+            token = self.cah.new_game(author.id)
+            return Response("Created a new game.\nUse `***REMOVED***0***REMOVED***cah join ***REMOVED***1***REMOVED***` to join this game and\nwhen everyone's in use `***REMOVED***0***REMOVED***cah start ***REMOVED***1***REMOVED***`".format(self.config.command_prefix, token), delete_after=1000)
+        elif argument == "join":
+            token = leftover_args[1].lower() if len(
+                leftover_args) > 1 else None
             if token is None:
                 return Response("You need to provide a token", delete_after=15)
+
+            if self.cah.is_user_in_game(author.id):
+                g = self.cah.get_game_from_user_id(author.id)
+                return Response("You can only be part of one game at a time!\nUse `***REMOVED******REMOVED***cah leave ***REMOVED******REMOVED***` to leave your current game".format(self.config.command_prefix, g.token), delete_after=15)
 
             g = self.cah.get_game(token)
 
@@ -3028,8 +3040,27 @@ class MusicBot(discord.Client):
                 return Response("Successfully joined the game *****REMOVED******REMOVED*****".format(token.upper()))
             else:
                 return Response("Failed to join game *****REMOVED******REMOVED*****".format(token.upper()))
-        elif arugemnt == "stop":
-            token = leftover_args[1].lower() if len(leftover_args) > 1 else None
+        elif argument == "start":
+            token = leftover_args[1].lower() if len(
+                leftover_args) > 1 else None
+            if token is None:
+                return Response("You need to provide a token", delete_after=15)
+
+            g = self.cah.get_game(token)
+            if g is None:
+                return Response("This game does not exist!", delete_after=15)
+
+            if not g.is_owner(author.id):
+                return Response("Only the owner may start a game!", delete_after=15)
+
+            if not g.enough_players():
+                return Response("There are not enough players to start this game.\nUse `***REMOVED******REMOVED***cah join ***REMOVED******REMOVED***` to join a game".format(self.config.command_prefix, g.token), delete_after=15)
+
+            if not g.start_game():
+                return Response("This game has already started!", delete_after=15)
+        elif argument == "stop":
+            token = leftover_args[1].lower() if len(
+                leftover_args) > 1 else None
             g = self.cah.get_game(token)
             if g is None:
                 return Response("This game does not exist!", delete_after=15)
@@ -3064,7 +3095,8 @@ class MusicBot(discord.Client):
 
             return Response("**These are the available cards:**\n\n" + "\n".join(cards))
         elif argument == "info":
-            card_id = leftover_args[1].lower().strip() if len(leftover_args) > 1 else None
+            card_id = leftover_args[1].lower().strip() if len(
+                leftover_args) > 1 else None
 
             card = self.cah.cards.get_card(card_id)
             if card is not None:
@@ -3073,7 +3105,8 @@ class MusicBot(discord.Client):
 
             return Response("There's no card with that id. Use `***REMOVED******REMOVED***cards list` to list all the possible cards".format(self.config.command_prefix))
         elif argument == "create":
-            text = " ".join(leftover_args[1:]) if len(leftover_args) > 1 else None
+            text = " ".join(leftover_args[1:]) if len(
+                leftover_args) > 1 else None
             if text is None:
                 return Response("You might want to actually add some text to your card", delete_after=20)
             if len(text) < 3:
@@ -3113,14 +3146,16 @@ class MusicBot(discord.Client):
 
             return Response("**These are the available question cards:**\n\n" + "\n".join(cards))
         elif argument == "info":
-            card_id = leftover_args[1].lower().strip() if len(leftover_args) > 1 else None
+            card_id = leftover_args[1].lower().strip() if len(
+                leftover_args) > 1 else None
 
             card = self.cah.cards.get_question_card(card_id)
             if card is not None:
                 info = "Question Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ncreated ***REMOVED***3***REMOVED***```"
                 return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date)))
         elif argument == "create":
-            text = " ".join(leftover_args[1:]) if len(leftover_args) > 1 else None
+            text = " ".join(leftover_args[1:]) if len(
+                leftover_args) > 1 else None
             if text is None:
                 return Response("You might want to actually add some text to your card", delete_after=20)
             if len(text) < 3:

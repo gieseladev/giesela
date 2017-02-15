@@ -1,8 +1,8 @@
 import json
 import random
-import asyncio
 from datetime import datetime
 
+import asyncio
 import configparser
 from musicbot.config import ConfigDefaults
 
@@ -10,9 +10,9 @@ vowels = tuple("aeiou")
 a_list =\
     ***REMOVED***
         "a": tuple("bcdefghiklmnoprstuvwxz"),
-        "b": tuple("aeiou"),
+        "b": vowels,
         "c": tuple("aeiouhk"),
-        "d": tuple("aeiou"),
+        "d": vowels,
         "e": tuple("abdfghiklmnprstuvxz"),
         "f": vowels,
         "g": vowels,
@@ -44,8 +44,15 @@ class QuestionCard:
         self.creator_id = creator_id
         self.creation_date = creation_date
 
+    def bump_occurences(self):
+        self.occurences += 1
+
     def __repr__(self):
         return "<***REMOVED***0.id***REMOVED***> \"***REMOVED***0.text***REMOVED***\" [***REMOVED***0.cards_to_draw***REMOVED*** | ***REMOVED***0.creator_id***REMOVED*** | ***REMOVED***0.creation_date***REMOVED*** | ***REMOVED***0.occurences***REMOVED***]".format(self)
+
+    @property
+    def number_of_blanks(self):
+        return self.text.count("$")
 
 
 class Card:
@@ -56,6 +63,9 @@ class Card:
         self.occurences = occurences
         self.creator_id = creator_id
         self.creation_date = creation_date
+
+    def bump_occurences(self):
+        self.occurences += 1
 
     def __repr__(self):
         return "<***REMOVED***0.id***REMOVED***> \"***REMOVED***0.text***REMOVED***\" [***REMOVED***0.creator_id***REMOVED*** | ***REMOVED***0.creation_date***REMOVED*** | ***REMOVED***0.occurences***REMOVED***]".format(self)
@@ -194,6 +204,25 @@ class Cards:
 
         return None
 
+    def bump_card_occurences(self, card_id):
+        c = self.get_card_global(card_id)
+        if c is None:
+            return False
+
+        c.bump_occurences()
+        return True
+
+    def get_card_global(self, card_id):
+        c = self.get_card(card_id)
+        if c is not None:
+            return c
+
+        qc = self.get_question_card(card_id)
+        if qc is not None:
+            return qc
+
+        return None
+
     def get_unique_id(self):
         while True:
             i = random.randint(100, 100000)
@@ -209,6 +238,9 @@ class GameCAH:
         self.cards = Cards()
 
     def new_game(self, operator_id):
+        if self.is_user_in_game(operator_id):
+            return False
+
         token = self.generate_token()
         g = Game(self, token, operator_id)
 
@@ -219,6 +251,9 @@ class GameCAH:
         return token
 
     def user_join_game(self, user_id, game_token):
+        if self.is_user_in_game(user_id):
+            return False
+
         game_token = game_token.lower().strip()
 
         if game_token not in self.running_games:
@@ -248,7 +283,7 @@ class GameCAH:
         while i < max_tries:
             token = random.choice(list(a_list.keys()))
             w_string = ""
-            for x in range(6):
+            for x in range(4):
                 w_string += token
                 token = random.choice(a_list[token])
 
@@ -258,23 +293,30 @@ class GameCAH:
 
         return None
 
+    def is_user_in_game(self, user_id):
+        return self.get_game_from_user_id(user_id) != None
+
     def get_game_from_user_id(self, user_id):
-        for game in self.running_games:
-            if user_id in game.players:
+        for game in self.running_games.values():
+            if game.get_player(user_id) is not None:
                 return game
         return None
 
-    def send_message_to_user(self, user_id, message, request_result=False):
+    def send_message_to_user(self, user_id, message, callback=None):
         user = self.musicbot.get_global_user(user_id)
 
         if user is None:
             return None
 
-        fut = asyncio.run_coroutine_threadsafe(self.musicbot.safe_send_message(user, message), self.musicbot.loop=)
-        if request_result:
-            return fut.result()
-        else
-            return None
+        task = self.musicbot.loop.create_task(
+            self.musicbot.safe_send_message(user, message))
+        if callback is not None:
+            return task.add_done_callback(callback)
+
+    def wait_for_message(self, callback, timeout=None, check=None):
+        task = self.musicbot.loop.create_task(
+            self.musicbot.wait_for_message(timeout=timeout, check=check))
+        task.add_done_callback(callback)
 
 
 class Game:
@@ -287,16 +329,39 @@ class Game:
         self.players.append(Player(operator_id))
         # self.question_cards = manager.get_all_question_cards()
         self.current_round = None
+        self.started = False
+        self.round_index = 0
+        self.number_of_cards = 7
+
+        self.cards = self.manager.cards.cards.copy()
+        self.question_cards = self.manager.cards.question_cards.copy()
 
     def stop_game(self):
         if self.current_round is not None:
             self.current_round.end_round()
 
         for pl in self.players:
-            self.manager.send_message_to_user(pl.player_id, "The operator has stopped this game. Thanks for playing!")
+            self.manager.send_message_to_user(
+                pl.player_id, "The operator has stopped this game. Thanks for playing!")
 
     def start_game(self):
-        self.current_round = Round(self)
+        if self.started or not self.enough_players():
+            return False
+        else:
+            self.bump_round_index()
+            self.current_round = Round(self, self.round_index)
+            self.started = True
+            return True
+
+    def next_round(self):
+        self.bump_round_index()
+        self.current_round = Round(self, self.round_index)
+
+    def enough_players(self):
+        return len(self.players) >= 2
+
+    def round_finished(self):
+        pass
 
     def get_player(self, id):
         for player in self.players:
@@ -316,6 +381,8 @@ class Game:
             return False
 
         self.players.append(Player(user_id))
+        self.manager.send_message_to_user(
+            user_id, "You've joined the game *****REMOVED******REMOVED*****".format(self.token.upper()))
         return True
 
     def remove_user(self, id):
@@ -326,25 +393,81 @@ class Game:
         self.players.remove(pl)
         return True
 
+    def pick_card(self):
+        i = random.randint(0, len(self.cards) - 1)
+        card = self.cards.pop(i)
+
+        if len(self.cards) < 1:
+            self.cards = self.manager.cards.cards.copy()
+
+        return card
+
+    def pick_question_card(self):
+        i = random.randint(0, len(self.question_cards) - 1)
+        card = self.question_cards.pop(i)
+
+        if len(self.question_cards) < 1:
+            self.question_cards = self.manager.cards.question_cards.copy()
+
+        return card
+
+    def bump_round_index(self):
+        self.round_index += 1
+
 
 class Round:
 
-    def __init__(self, game):
+    def __init__(self, game, round_index):
         self.game = game
         self.master = random.choice(game.players)
-        self.card = game.question_cards.pop(
-            random.randint(0, len(game.question_cards) - 1))
+        self.question_card = game.pick_question_card()
         self.messages_to_delete = []
+        self.round_index = round_index
 
-    def start_round(self):
+        self.assign_cards()
+        self.master.bump_master()
+
+        players = self.game.players.copy()
+        round_text_player = "**Round ***REMOVED***0***REMOVED*****\n***REMOVED***1***REMOVED***\n*Pick ***REMOVED***2***REMOVED*** card***REMOVED***3***REMOVED****\n\nYou can use the following commands:\n`***REMOVED***4***REMOVED***pick [index]`: Pick one of your cards\n\n**Your cards**\n***REMOVED***5***REMOVED***"
+        round_text_master = "**Round ***REMOVED***0***REMOVED*** || YOU ARE THE MASTER**\n***REMOVED***1***REMOVED***\n*Wait for the players to choose a card*"
+        for pl in players:
+            pl.bump_played()
+
+            card_texts = []
+            for i in range(len(pl.cards)):
+                card_texts.append("***REMOVED******REMOVED***. [***REMOVED******REMOVED***] *<***REMOVED******REMOVED***>*".format(i + 1, pl.cards[i].text, pl.cards[i].id))
+            text = round_text_player.format(self.round_index, self.question_card.text, self.question_card.number_of_blanks,
+                                            "s" if self.question_card.number_of_blanks != 1 else "", self.game.manager.musicbot.config.command_prefix, "\n".join(card_texts))
+            if pl == self.master:
+                text = round_text_master.format(
+                    self.round_index, self.question_card.text)
+
+            self.game.manager.send_message_to_user(pl.player_id, text, callback=(
+                lambda x: self.messages_to_delete.append(x.result())))
+        players.remove(self.master)
+
+    def player_message(self, player, message):
         pass
+
+    def assign_cards(self):
+        for player in self.game.players:
+            if len(player.cards) < self.game.number_of_cards:
+                for i in range(self.game.number_of_cards - len(player.cards)):
+                    player.cards.append(self.game.pick_card())
 
 
 class Player:
 
-    def __init__(self, player_id, score=0, rounds_played=0, rounds_won=0, cards=[]):
+    def __init__(self, player_id, score=0, rounds_played=0, rounds_won=0, rounds_master=0, cards=[]):
         self.player_id = player_id
         self.score = score
         self.rounds_played = rounds_played
         self.rounds_won = rounds_won
+        self.rounds_master = rounds_master
         self.cards = cards
+
+    def bump_master(self):
+        self.rounds_master += 1
+
+    def bump_played(self):
+        self.rounds_played += 1
