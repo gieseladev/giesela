@@ -3151,31 +3151,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=TwyPsUd9LAk",
-  "title": "Missy Elliott - I'm Better ft. Lamb [Official Video]",
-  "duration": 219,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 219
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=PKB4cioGs98",
   "title": "Jax Jones - You Don't Know Me ft. RAYE",
   "duration": 271,
@@ -4576,31 +4551,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=nIEUJouS_Ig",
-  "title": "Kodak Black \"There He Go\"",
-  "duration": 227,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 227
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=sY3rIlrTTh8",
   "title": "Fifth Harmony - That's My Girl",
   "duration": 224,
@@ -5576,31 +5526,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=U1rgr6rumn8",
-  "title": "Yo Gotti - 81",
-  "duration": 214,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 214
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=vMX3TJV_Tew",
   "title": "A Boogie Wit Da Hoodie x Lil Bibby \"Proud Of Me Now\" (WSHH Exclusive - Official Music Video)",
   "duration": 214,
@@ -6151,31 +6076,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=uMhalar35IY",
-  "title": "Rae Sremmurd - Real Chill ft. Kodak Black",
-  "duration": 267,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 267
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=u0pmV7GoTjc",
   "title": "David Guetta, Cedric Gervais & Chris Willis - Would I Lie To You (Lyric Video)",
   "duration": 196,
@@ -6526,31 +6426,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=Mj7Pr42rliI",
-  "title": "[OFFICIAL VIDEO] O Come, All Ye Faithful - Pentatonix",
-  "duration": 242,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 242
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=hNMMN46uFCc",
   "title": "Stevie Wonder - Faith ft. Ariana Grande",
   "duration": 164,
@@ -6646,31 +6521,6 @@
   ***REMOVED***,
   "start_seconds": null,
   "end_seconds": 176
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=vuT_bXzhqhY",
-  "title": "Starboy (Live From The Victoria\u2019s Secret Fashion Show 2016 in Paris)",
-  "duration": 244,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 244
 ***REMOVED***
 ;
 ***REMOVED***
@@ -7944,7 +7794,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-RBumgq5yVrA-Passenger_Let_Her_Go_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 254
 ***REMOVED***
 ;
@@ -7969,7 +7819,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-Ix8ocFEMa1o-Adam_Lambert_-_Ghost_Town_Official_Music_Video.webm",
+  "start_seconds": null,
   "end_seconds": 217
 ***REMOVED***
 ;
@@ -7994,7 +7844,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-uelHwf8o7_U-Eminem_-_Love_The_Way_You_Lie_ft._Rihanna.webm",
+  "start_seconds": null,
   "end_seconds": 267
 ***REMOVED***
 ;
@@ -8019,7 +7869,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-H202k7KfZL0-Ellie_Goulding_-_On_My_Mind.webm",
+  "start_seconds": null,
   "end_seconds": 245
 ***REMOVED***
 ;
@@ -8044,7 +7894,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-LmK0WHkFIo8-Daya_-_Hide_Away_Official_Music_Video_International_Version.webm",
+  "start_seconds": null,
   "end_seconds": 191
 ***REMOVED***
 ;
@@ -8069,7 +7919,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-uPHKkewD1G0-Daya_-_Sit_Still_Look_Pretty.webm",
+  "start_seconds": null,
   "end_seconds": 215
 ***REMOVED***
 ;
@@ -8094,7 +7944,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-liwCttfeJ7E-Hailee_Steinfeld_-_Rock_Bottom_ft._DNCE.webm",
+  "start_seconds": null,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -8119,7 +7969,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-AOPMlIIg_38-The_Fault_In_Our_Stars_-_Charli_XCX_-_Boom_Clap.webm",
+  "start_seconds": null,
   "end_seconds": 177
 ***REMOVED***
 ;
@@ -8144,7 +7994,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-m1g4SpPGUBU-Maty_Noyes_-_In_My_Mind.webm",
+  "start_seconds": null,
   "end_seconds": 217
 ***REMOVED***
 ;
@@ -8169,7 +8019,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-KCy7lLQwToI-Journey_-_Don_t_Stop_Believing_Lyrics.webm",
+  "start_seconds": null,
   "end_seconds": 251
 ***REMOVED***
 ;
@@ -8194,7 +8044,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-uJ_1HMAGb4k-Vance_Joy_-_Riptide_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 204
 ***REMOVED***
 ;
@@ -8219,7 +8069,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-xo1VInw-SKc-Rachel_Platten_-_Fight_Song_Official_Video.webm",
+  "start_seconds": null,
   "end_seconds": 205
 ***REMOVED***
 ;
@@ -8244,7 +8094,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-YxIiPLVR6NA-Avicii_-_Hey_Brother_Lyric.webm",
+  "start_seconds": null,
   "end_seconds": 259
 ***REMOVED***
 ;
@@ -8269,6 +8119,31 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-JaAWdljhD5o-SAIL_-_AWOLNATION_Unofficial_Video.webm",
+  "start_seconds": null,
   "end_seconds": 249
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=34Na4j8AVgA",
+  "title": "The Weeknd - Starboy (official) ft. Daft Punk",
+  "duration": 273,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": null,
+  "end_seconds": 273
 ***REMOVED***
