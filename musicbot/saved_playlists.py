@@ -1,9 +1,8 @@
+import configparser
 import os
 import re
 import shutil
 import traceback
-
-import configparser
 
 from .entry import URLPlaylistEntry as urlEntry
 from .exceptions import HelpfulError

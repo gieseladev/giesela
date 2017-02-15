@@ -1,9 +1,9 @@
+import asyncio
+import configparser
 import json
 import random
 from datetime import datetime
 
-import asyncio
-import configparser
 from musicbot.config import ConfigDefaults
 
 vowels = tuple("aeiou")
@@ -302,14 +302,14 @@ class GameCAH:
                 return game
         return None
 
-    def send_message_to_user(self, user_id, message, callback=None):
+    def send_message_to_user(self, user_id, message, callback=None, delete_after=0):
         user = self.musicbot.get_global_user(user_id)
 
         if user is None:
             return None
 
         task = self.musicbot.loop.create_task(
-            self.musicbot.safe_send_message(user, message))
+            self.musicbot.safe_send_message(user, message, expire_in=delete_after))
         if callback is not None:
             return task.add_done_callback(callback)
 
@@ -435,7 +435,8 @@ class Round:
 
             card_texts = []
             for i in range(len(pl.cards)):
-                card_texts.append("***REMOVED******REMOVED***. [***REMOVED******REMOVED***] *<***REMOVED******REMOVED***>*".format(i + 1, pl.cards[i].text, pl.cards[i].id))
+                card_texts.append(
+                    "***REMOVED******REMOVED***. [***REMOVED******REMOVED***] *<***REMOVED******REMOVED***>*".format(i + 1, pl.cards[i].text, pl.cards[i].id))
             text = round_text_player.format(self.round_index, self.question_card.text, self.question_card.number_of_blanks,
                                             "s" if self.question_card.number_of_blanks != 1 else "", self.game.manager.musicbot.config.command_prefix, "\n".join(card_texts))
             if pl == self.master:

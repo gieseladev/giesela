@@ -1,3 +1,5 @@
+import asyncio
+import configparser
 import datetime
 import inspect
 import json
@@ -29,9 +31,6 @@ from discord.object import Object
 from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from pyshorteners import Shortener
-
-import asyncio
-import configparser
 
 from . import downloader, exceptions
 from .cleverbot import Cleverbot
@@ -3072,13 +3071,15 @@ class MusicBot(discord.Client):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***cards list
-                *list all the available cards*
+                -list all the available cards
             ***REMOVED***command_prefix***REMOVED***cards create text
-                *create a new card with text*
+                -create a new card with text
             ***REMOVED***command_prefix***REMOVED***cards edit id
-                *edit a card by its id*
+                -edit a card by its id
             ***REMOVED***command_prefix***REMOVED***cards info id
-                *Get more detailed information about a card*
+                -Get more detailed information about a card
+            ***REMOVED***command_prefix***REMOVED***cards delete id
+                -Delete a question card
 
         Here you manage the non question cards
         """
@@ -3100,8 +3101,8 @@ class MusicBot(discord.Client):
 
             card = self.cah.cards.get_card(card_id)
             if card is not None:
-                info = "Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ncreated ***REMOVED***3***REMOVED***```"
-                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date)))
+                info = "Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ncreated ***REMOVED***3***REMOVED***```\nUse `***REMOVED***4***REMOVED***cards edit ***REMOVED***0.id***REMOVED***` to edit this card"
+                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date), self.config.command_prefix))
 
             return Response("There's no card with that id. Use `***REMOVED******REMOVED***cards list` to list all the possible cards".format(self.config.command_prefix))
         elif argument == "create":
@@ -3123,13 +3124,15 @@ class MusicBot(discord.Client):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***qcards list
-                *list all the available question cards*
+                -list all the available question cards
             ***REMOVED***command_prefix***REMOVED***qcards create text (use $ for blanks)
-                *create a new question card with text and if you want the number of cards to draw*
+                -create a new question card with text and if you want the number of cards to draw
             ***REMOVED***command_prefix***REMOVED***qcards edit id
-                *edit a question card by its id*
+                -edit a question card by its id
             ***REMOVED***command_prefix***REMOVED***qcards info id
-                *Get more detailed information about a question card*
+                -Get more detailed information about a question card
+            ***REMOVED***command_prefix***REMOVED***qcards delete id
+                -Delete a question card
 
         Here you manage the question cards
         """
@@ -3142,7 +3145,7 @@ class MusicBot(discord.Client):
             cards = []
             for card in self.cah.cards.question_cards:
                 cards.append(card_string.format(
-                    card, card.text.replace("$", "BLANK")))
+                    card, card.text.replace("$", "_____")))
 
             return Response("**These are the available question cards:**\n\n" + "\n".join(cards))
         elif argument == "info":
@@ -3151,8 +3154,8 @@ class MusicBot(discord.Client):
 
             card = self.cah.cards.get_question_card(card_id)
             if card is not None:
-                info = "Question Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ncreated ***REMOVED***3***REMOVED***```"
-                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date)))
+                info = "Question Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ncreated ***REMOVED***3***REMOVED***``\nUse `***REMOVED***4***REMOVED***cards edit ***REMOVED***0.id***REMOVED***` to edit this card`"
+                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date), self.config.command_prefix))
         elif argument == "create":
             text = " ".join(leftover_args[1:]) if len(
                 leftover_args) > 1 else None
