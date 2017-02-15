@@ -7,7 +7,6 @@ parsedatetime
 spotipy
 Tungsten
 goslate
-cleverbot
 pyshorteners
 newspaper3k
 pillow

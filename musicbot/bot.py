@@ -22,7 +22,6 @@ import goslate
 import newspaper
 import tungsten
 import wikipedia
-from cleverbot import Cleverbot
 from discord import utils
 from discord.enums import ChannelType
 from discord.ext.commands.bot import _get_variable
@@ -35,10 +34,12 @@ import asyncio
 import configparser
 
 from . import downloader, exceptions
+from .cleverbot import Cleverbot
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
 from .constants import AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT
 from .games.game_2048 import Game2048
+from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
 from .nine_gag import *
 from .opus_loader import load_opus_lib
@@ -51,8 +52,8 @@ from .random_sets import RandomSets
 from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .socket_server import SocketServer
-from .utils import (escape_dis, format_time, load_file, paginate, random_line,
-                    sane_round_int, write_file)
+from .utils import (escape_dis, format_time, load_file, paginate, prettydate,
+                    random_line, sane_round_int, write_file)
 
 load_opus_lib()
 
@@ -105,13 +106,14 @@ class MusicBot(discord.Client):
         self.radios = Radios(radios_file)
         self.playlists = Playlists(playlists_file)
         self.random_sets = RandomSets(random_file)
+        self.cah = GameCAH(self)
         self.permissions = Permissions(
             perms_file, grant_all=[self.config.owner_id])
 
         self.blacklist = set(load_file(self.config.blacklist_file))
         self.autoplaylist = load_file(self.config.auto_playlist_file)
         self.downloader = downloader.Downloader(download_folder='audio_cache')
-        self.cb = Cleverbot("musicbot")
+        self.cb = Cleverbot()
         # self.radio = Radio()
         self.calendar = Calendar(self)
         self.socket_server = SocketServer(self)
@@ -325,6 +327,14 @@ class MusicBot(discord.Client):
                         )
 
             return voice_client
+
+    def get_global_user(self, user_id):
+        for server in self.servers:
+            mem = server.get_member(user_id)
+            if mem is not None:
+                return mem
+
+        return None
 
     async def mute_voice_client(self, channel, mute):
         await self._update_voice_state(channel, mute=mute)
@@ -2980,6 +2990,187 @@ class MusicBot(discord.Client):
 
         return Response("Can't find any more articles :frowning:", delete_after=30)
 
+    async def cmd_cah(self, message, channel, author, leftover_args):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***cah create
+            ***REMOVED***command_prefix***REMOVED***cah join [token]
+            ***REMOVED***command_prefix***REMOVED***cah leave [token]
+
+            ***REMOVED***command_prefix***REMOVED***cah start [token]
+            ***REMOVED***command_prefix***REMOVED***cah stop [token]
+
+        Play a cards against humanity game
+
+        References:
+            ***REMOVED***command_prefix***REMOVED***help cards
+                -learn about how to create/edit cards
+            ***REMOVED***command_prefix***REMOVED***help qcards
+                -learn about how to create/edit question cards
+        """
+
+        argument = leftover_args[0].lower() if len(leftover_args) > 0 else None
+
+        if argument == "create":
+            if self.cah.is_user_in_game(author.id):
+                g = self.cah.get_game(author.id)
+                return Response("You can't host a game if you're already in one\nUse `***REMOVED******REMOVED***cah leave ***REMOVED******REMOVED***` to leave your current game".format(self.config.command_prefix, g.token), delete_after=15)
+
+            token = self.cah.new_game(author.id)
+            return Response("Created a new game.\nUse `***REMOVED***0***REMOVED***cah join ***REMOVED***1***REMOVED***` to join this game and\nwhen everyone's in use `***REMOVED***0***REMOVED***cah start ***REMOVED***1***REMOVED***`".format(self.config.command_prefix, token), delete_after=1000)
+        elif argument == "join":
+            token = leftover_args[1].lower() if len(
+                leftover_args) > 1 else None
+            if token is None:
+                return Response("You need to provide a token", delete_after=15)
+
+            if self.cah.is_user_in_game(author.id):
+                g = self.cah.get_game_from_user_id(author.id)
+                return Response("You can only be part of one game at a time!\nUse `***REMOVED******REMOVED***cah leave ***REMOVED******REMOVED***` to leave your current game".format(self.config.command_prefix, g.token), delete_after=15)
+
+            g = self.cah.get_game(token)
+
+            if g is None:
+                return Response("This game does not exist *shrugs*", delete_after=15)
+
+            if g.in_game(author.id):
+                return Response("You're already in this game!", delete_after=15)
+
+            if self.cah.user_join_game(author.id, token):
+                return Response("Successfully joined the game *****REMOVED******REMOVED*****".format(token.upper()))
+            else:
+                return Response("Failed to join game *****REMOVED******REMOVED*****".format(token.upper()))
+        elif argument == "start":
+            token = leftover_args[1].lower() if len(
+                leftover_args) > 1 else None
+            if token is None:
+                return Response("You need to provide a token", delete_after=15)
+
+            g = self.cah.get_game(token)
+            if g is None:
+                return Response("This game does not exist!", delete_after=15)
+
+            if not g.is_owner(author.id):
+                return Response("Only the owner may start a game!", delete_after=15)
+
+            if not g.enough_players():
+                return Response("There are not enough players to start this game.\nUse `***REMOVED******REMOVED***cah join ***REMOVED******REMOVED***` to join a game".format(self.config.command_prefix, g.token), delete_after=15)
+
+            if not g.start_game():
+                return Response("This game has already started!", delete_after=15)
+        elif argument == "stop":
+            token = leftover_args[1].lower() if len(
+                leftover_args) > 1 else None
+            g = self.cah.get_game(token)
+            if g is None:
+                return Response("This game does not exist!", delete_after=15)
+
+            if not g.is_owner(author.id):
+                return Response("Only the owner may stop a game!", delete_after=15)
+
+    async def cmd_cards(self, server, channel, author, leftover_args):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***cards list
+                *list all the available cards*
+            ***REMOVED***command_prefix***REMOVED***cards create text
+                *create a new card with text*
+            ***REMOVED***command_prefix***REMOVED***cards edit id
+                *edit a card by its id*
+            ***REMOVED***command_prefix***REMOVED***cards info id
+                *Get more detailed information about a card*
+
+        Here you manage the non question cards
+        """
+
+        argument = leftover_args[0].lower() if len(
+            leftover_args) > 0 else None
+
+        if argument == "list":
+            card_string = "***REMOVED***0.id***REMOVED***. *[***REMOVED***0.text***REMOVED***]*"
+            cards = []
+            for card in self.cah.cards.cards:
+                cards.append(card_string.format(
+                    card))
+
+            return Response("**These are the available cards:**\n\n" + "\n".join(cards))
+        elif argument == "info":
+            card_id = leftover_args[1].lower().strip() if len(
+                leftover_args) > 1 else None
+
+            card = self.cah.cards.get_card(card_id)
+            if card is not None:
+                info = "Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ncreated ***REMOVED***3***REMOVED***```"
+                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date)))
+
+            return Response("There's no card with that id. Use `***REMOVED******REMOVED***cards list` to list all the possible cards".format(self.config.command_prefix))
+        elif argument == "create":
+            text = " ".join(leftover_args[1:]) if len(
+                leftover_args) > 1 else None
+            if text is None:
+                return Response("You might want to actually add some text to your card", delete_after=20)
+            if len(text) < 3:
+                return Response("I think that's a bit too short...", delete_after=20)
+            if len(text) > 140:
+                return Response("Maybe a bit too long?", delete_after=20)
+
+            card_id = self.cah.cards.add_card(text, author.id)
+            return Response("Successfully created card *****REMOVED******REMOVED*****".format(card_id))
+        else:
+            return await self.cmd_help(channel, ["cards"])
+
+    async def cmd_qcards(self, server, channel, author, leftover_args):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***qcards list
+                *list all the available question cards*
+            ***REMOVED***command_prefix***REMOVED***qcards create text (use $ for blanks)
+                *create a new question card with text and if you want the number of cards to draw*
+            ***REMOVED***command_prefix***REMOVED***qcards edit id
+                *edit a question card by its id*
+            ***REMOVED***command_prefix***REMOVED***qcards info id
+                *Get more detailed information about a question card*
+
+        Here you manage the question cards
+        """
+
+        argument = leftover_args[0].lower() if len(
+            leftover_args) > 0 else None
+
+        if argument == "list":
+            card_string = "***REMOVED***0.id***REMOVED***. \"****REMOVED***1***REMOVED****\""
+            cards = []
+            for card in self.cah.cards.question_cards:
+                cards.append(card_string.format(
+                    card, card.text.replace("$", "BLANK")))
+
+            return Response("**These are the available question cards:**\n\n" + "\n".join(cards))
+        elif argument == "info":
+            card_id = leftover_args[1].lower().strip() if len(
+                leftover_args) > 1 else None
+
+            card = self.cah.cards.get_question_card(card_id)
+            if card is not None:
+                info = "Question Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ncreated ***REMOVED***3***REMOVED***```"
+                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date)))
+        elif argument == "create":
+            text = " ".join(leftover_args[1:]) if len(
+                leftover_args) > 1 else None
+            if text is None:
+                return Response("You might want to actually add some text to your card", delete_after=20)
+            if len(text) < 3:
+                return Response("I think that's a bit too short...", delete_after=20)
+            if len(text) > 500:
+                return Response("Maybe a bit too long?", delete_after=20)
+
+            if text.count("$") < 1:
+                return Response("You need to have at least one blank ($) space", delete_after=20)
+
+            card_id = self.cah.cards.add_question_card(text, author.id)
+            return Response("Successfully created question card *****REMOVED******REMOVED*****".format(card_id))
+        else:
+            return await self.cmd_help(channel, ["qcards"])
+
     async def cmd_game(self, message, channel, author, leftover_args, game=None):
         """
         Usage:
@@ -3476,7 +3667,8 @@ class MusicBot(discord.Client):
             entries_text = ""
             entries = infos["entries"]
             for i in range(len(entries)):
-                entries_text += str(i + 1) + ". " + entries[i].title + " | " + format_time(entries[i].duration, round_seconds=True, max_specifications=2) +"\n"
+                entries_text += str(i + 1) + ". " + entries[i].title + " | " + format_time(
+                    entries[i].duration, round_seconds=True, max_specifications=2) + "\n"
 
             response_text = "\"***REMOVED******REMOVED***\" added by ****REMOVED******REMOVED**** with ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n*playtime: ***REMOVED******REMOVED****\n\n***REMOVED******REMOVED***\n```\nTo edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"```".format(argument.replace("_", " ").title(), server.get_member(
                 infos["author"]).mention, str(infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", format_time(sum([x.duration for x in entries])), entries_text, self.config.command_prefix, argument)
@@ -3495,7 +3687,7 @@ class MusicBot(discord.Client):
         player.playlist.clear()
         if player.current_entry is not None:
             player.skip()
-            
+
         await player.playlist.add_entries(clone_entries)
         self.playlists.bump_replay_count(playlist_name)
 
