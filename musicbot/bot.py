@@ -1,5 +1,3 @@
-import asyncio
-import configparser
 import datetime
 import inspect
 import json
@@ -31,6 +29,9 @@ from discord.object import Object
 from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from pyshorteners import Shortener
+
+import asyncio
+import configparser
 
 from . import downloader, exceptions
 from .cleverbot import Cleverbot
@@ -3074,10 +3075,12 @@ class MusicBot(discord.Client):
                 -list all the available cards
             {command_prefix}cards create text
                 -create a new card with text
-            {command_prefix}cards edit id
+            {command_prefix}cards edit id new_text
                 -edit a card by its id
             {command_prefix}cards info id
                 -Get more detailed information about a card
+            {command_prefix}cards search query
+                -Search for a card
             {command_prefix}cards delete id
                 -Delete a question card
 
@@ -3095,6 +3098,22 @@ class MusicBot(discord.Client):
                     card))
 
             return Response("**These are the available cards:**\n\n" + "\n".join(cards))
+        elif argument == "search":
+            search_query = " ".join(leftover_args[1:]) if len(
+                leftover_args) > 1 else None
+
+            if search_query is None:
+                return Response("You need to provide a query to search for!", delete_after=15)
+
+            results = self.cah.cards.search_card(search_query, 3)
+
+            card_string = "{0.id}. \"*{1}*\""
+            cards = []
+            for card in results:
+                cards.append(card_string.format(
+                    card, card.text.replace("$", "_____")))
+
+            return Response("**I found the following cards:**\n\n" + "\n".join(cards), delete_after=40)
         elif argument == "info":
             card_id = leftover_args[1].lower().strip() if len(
                 leftover_args) > 1 else None
@@ -3115,8 +3134,52 @@ class MusicBot(discord.Client):
             if len(text) > 140:
                 return Response("Maybe a bit too long?", delete_after=20)
 
+            already_has_card, card = self.cah.cards.card_with_text(text)
+            if already_has_card:
+                return Response("There's already a card with a fairly similar content. <{0}>\nUse `{1}cards info {0}` to find out more about this card".format(card.id, self.config.command_prefix))
+
             card_id = self.cah.cards.add_card(text, author.id)
             return Response("Successfully created card **{}**".format(card_id))
+        elif argument == "edit":
+            card_id = leftover_args[1].lower().strip() if len(
+                leftover_args) > 1 else None
+
+            try:
+                card_id_value = int(card_id)
+            except:
+                return Response("An id must be a number", delete_after=20)
+
+            if card_id is None:
+                return Response("You need to provide the card's id!", delete_after=20)
+
+            text = " ".join(leftover_args[2:]) if len(
+                leftover_args) > 1 else None
+            if text is None:
+                return Response("You might want to actually add some text to your card", delete_after=20)
+            if len(text) < 3:
+                return Response("I think that's a bit too short...", delete_after=20)
+            if len(text) > 140:
+                return Response("Maybe a bit too long?", delete_after=20)
+
+            already_has_card, card = self.cah.cards.card_with_text(text)
+            if already_has_card and card.id != card_id_value:
+                return Response("There's already a card with a fairly similar content. <{0}>\nUse `{1}cards info {0}` to find out more about this card".format(card.id, self.config.command_prefix))
+
+            if self.cah.cards.edit_card(card_id, text):
+                return Response("Edited card <**{}**>".format(card_id), delete_after=15)
+            else:
+                return Response("There's no card with that id", delete_after=15)
+        elif argument == "delete":
+            card_id = leftover_args[1].lower().strip() if len(
+                leftover_args) > 1 else None
+
+            if card_id is None:
+                return Response("You must specify the card id", delete_after=15)
+
+            if self.cah.cards.remove_card(card_id):
+                return Response("Deleted card <**{}**>".format(card_id), delete_after=15)
+            else:
+                return Response("Could not remove card <**{}**>".format(card_id), delete_after=15)
         else:
             return await self.cmd_help(channel, ["cards"])
 
@@ -3127,10 +3190,12 @@ class MusicBot(discord.Client):
                 -list all the available question cards
             {command_prefix}qcards create text (use $ for blanks)
                 -create a new question card with text and if you want the number of cards to draw
-            {command_prefix}qcards edit id
+            {command_prefix}qcards edit id new_text
                 -edit a question card by its id
             {command_prefix}qcards info id
                 -Get more detailed information about a question card
+            {command_prefix}qcards search query
+                -Search for a question card
             {command_prefix}qcards delete id
                 -Delete a question card
 
@@ -3148,6 +3213,22 @@ class MusicBot(discord.Client):
                     card, card.text.replace("$", "_____")))
 
             return Response("**These are the available question cards:**\n\n" + "\n".join(cards))
+        elif argument == "search":
+            search_query = " ".join(leftover_args[1:]) if len(
+                leftover_args) > 1 else None
+
+            if search_query is None:
+                return Response("You need to provide a query to search for!", delete_after=15)
+
+            results = self.cah.cards.search_question_card(search_query, 3)
+
+            card_string = "{0.id}. \"*{1}*\""
+            cards = []
+            for card in results:
+                cards.append(card_string.format(
+                    card, card.text.replace("$", "_____")))
+
+            return Response("**I found the following question cards:**\n\n" + "\n".join(cards), delete_after=40)
         elif argument == "info":
             card_id = leftover_args[1].lower().strip() if len(
                 leftover_args) > 1 else None
@@ -3169,8 +3250,57 @@ class MusicBot(discord.Client):
             if text.count("$") < 1:
                 return Response("You need to have at least one blank ($) space", delete_after=20)
 
+            already_has_card, card = self.cah.cards.question_card_with_text(
+                text)
+            if already_has_card:
+                return Response("There's already a question card with a fairly similar content. <{0}>\nUse `{1}qcards info {0}` to find out more about this card".format(card.id, self.config.command_prefix))
+
             card_id = self.cah.cards.add_question_card(text, author.id)
             return Response("Successfully created question card **{}**".format(card_id))
+        elif argument == "edit":
+            card_id = leftover_args[1].lower().strip() if len(
+                leftover_args) > 1 else None
+
+            try:
+                card_id_value = int(card_id)
+            except:
+                return Response("An id must be a number", delete_after=20)
+
+            if card_id is None:
+                return Response("You need to provide the question card's id!", delete_after=20)
+
+            text = " ".join(leftover_args[2:]) if len(
+                leftover_args) > 2 else None
+            if text is None:
+                return Response("You might want to actually add some text to your question card", delete_after=20)
+            if len(text) < 3:
+                return Response("I think that's a bit too short...", delete_after=20)
+            if len(text) > 500:
+                return Response("Maybe a bit too long?", delete_after=20)
+
+            if text.count("$") < 1:
+                return Response("You need to have at least one blank ($) space", delete_after=20)
+
+            already_has_card, card = self.cah.cards.question_card_with_text(
+                text)
+            if already_has_card and card.id != card_id_value:
+                return Response("There's already a question card with a fairly similar content. <{0}>\nUse `{1}qcards info {0}` to find out more about this question card".format(card.id, self.config.command_prefix))
+
+            if self.cah.cards.edit_question_card(card_id, text):
+                return Response("Edited question card <**{}**>".format(card_id), delete_after=15)
+            else:
+                return Response("There's no question card with that id", delete_after=15)
+        elif argument == "delete":
+            card_id = leftover_args[1].lower().strip() if len(
+                leftover_args) > 1 else None
+
+            if card_id is None:
+                return Response("You must specify the question card id", delete_after=15)
+
+            if self.cah.cards.remove_question_card(card_id):
+                return Response("Deleted question card <**{}**>".format(card_id), delete_after=15)
+            else:
+                return Response("Could not remove question card <**{}**>".format(card_id), delete_after=15)
         else:
             return await self.cmd_help(channel, ["qcards"])
 

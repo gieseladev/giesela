@@ -1,9 +1,10 @@
-import asyncio
-import configparser
 import json
 import random
+import re
 from datetime import datetime
 
+import asyncio
+import configparser
 from musicbot.config import ConfigDefaults
 
 vowels = tuple("aeiou")
@@ -37,7 +38,7 @@ a_list =\
 
 class QuestionCard:
 
-    def __init__(self, card_id, text, occurences, creator_id, creation_date=datetime.now()):
+    def __init__(self, card_id, text, occurences, creator_id, creation_date):
         self.id = card_id
         self.text = text
         self.occurences = occurences
@@ -48,7 +49,7 @@ class QuestionCard:
         self.occurences += 1
 
     def __repr__(self):
-        return "<{0.id}> \"{0.text}\" [{0.cards_to_draw} | {0.creator_id} | {0.creation_date} | {0.occurences}]".format(self)
+        return "<{0.id}> \"{0.text}\" [{0.creator_id} | {0.creation_date} | {0.occurences}]".format(self)
 
     @property
     def number_of_blanks(self):
@@ -57,7 +58,7 @@ class QuestionCard:
 
 class Card:
 
-    def __init__(self, card_id, text, occurences, creator_id, creation_date=datetime.now()):
+    def __init__(self, card_id, text, occurences, creator_id, creation_date):
         self.id = card_id
         self.text = text
         self.occurences = occurences
@@ -166,19 +167,77 @@ class Cards:
             config_parser.write(cards_file)
 
     def add_question_card(self, text, creator_id):
+        if self.question_card_with_text(text)[0]:
+            return False
+
         card_id = self.get_unique_id()
         self.ids_used.append(card_id)
         self.question_cards.append(
-            QuestionCard(card_id, text, 0, creator_id))
+            QuestionCard(card_id, text, 0, creator_id, datetime.now()))
         self.save_question_cards()
         return card_id
 
     def add_card(self, text, creator_id):
+        if self.card_with_text(text)[0]:
+            return False
+
         card_id = self.get_unique_id()
         self.ids_used.append(card_id)
-        self.cards.append(Card(card_id, text, 0, creator_id))
+        self.cards.append(Card(card_id, text, 0, creator_id, datetime.now()))
         self.save_cards()
         return card_id
+
+    def remove_question_card(self, card_id):
+        c = self.get_question_card(card_id)
+        if c is None:
+            return False
+
+        self.question_cards.remove(c)
+        self.save_question_cards()
+        return True
+
+    def remove_card(self, card_id):
+        c = self.get_card(card_id)
+        if c is None:
+            return False
+
+        self.cards.remove(c)
+        self.save_cards()
+        return True
+
+    def edit_card(self, card_id, new_text):
+        c = self.get_card(card_id)
+        if c is None:
+            return False
+
+        c.text = new_text
+        self.save_cards()
+        return True
+
+    def edit_question_card(self, card_id, new_text):
+        c = self.get_question_card(card_id)
+        if c is None:
+            return False
+
+        c.text = new_text
+        self.save_question_cards()
+        return True
+
+    def card_with_text(self, text):
+        text = re.sub("[^\w\s]", "", text.lower().strip())
+        for c in self.cards:
+            if text == re.sub("[^\w\s]", "", c.text.lower().strip()):
+                return True, c
+
+        return False, None
+
+    def question_card_with_text(self, text):
+        text = re.sub("[^\w\s]", "", text.lower().strip())
+        for c in self.question_cards:
+            if text == re.sub("[^\w\s]", "", c.text.lower().strip()):
+                return True, c
+
+        return False, None
 
     def get_question_card(self, card_id):
         try:
@@ -203,6 +262,30 @@ class Cards:
                 return card
 
         return None
+
+    def search_question_card(self, query, results=5):
+        items = re.sub("[^\w\s]", "", query.lower().strip()).split()
+        search_list = []
+
+        for c in self.question_cards:
+            c_items = re.sub("[^\w\s]", "", c.text.lower().strip()).split()
+            overlaps = [part for part in items if part in c_items]
+            search_list.append((len(overlaps), c))
+
+        search_list.sort(key=lambda res: res[0], reverse=True)
+        return [res[1] for res in search_list][:results]
+
+    def search_card(self, query, results=5):
+        items = re.sub("[^\w\s]", "", query.lower().strip()).split()
+        search_list = []
+
+        for c in self.cards:
+            c_items = re.sub("[^\w\s]", "", c.text.lower().strip()).split()
+            overlaps = [part for part in items if part in c_items]
+            search_list.append((len(overlaps), c))
+
+        search_list.sort(key=lambda res: res[0], reverse=True)
+        return [res[1] for res in search_list if res[0] > 0][:results]
 
     def bump_card_occurences(self, card_id):
         c = self.get_card_global(card_id)
@@ -480,11 +563,12 @@ class Round:
             self.game.manager.send_message_to_user(pl.player_id, text, callback=(
                 lambda x: self.messages_to_delete.append(x.result())))
 
-            if not pl == self.master:
+            if pl != self.master:
                 self.game.manager.wait_for_message(lambda fut: self.on_player_message(
                     pl, fut.result()), check=lambda msg: msg.author.id == pl.player_id)
 
-    def on_player_message(player, message):
+    def on_player_message(self, player, message):
+        print(str(player.player_id) + " wrote: " + message.content)
         content = message.content.strip().lower()
         args = content.split()
 
