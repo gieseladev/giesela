@@ -65,6 +65,10 @@ class Card:
         self.creator_id = creator_id
         self.creation_date = creation_date
 
+    @classmethod
+    def blank_card(cls):
+        return cls(0, "BLANK", 0, 0, datetime.now())
+
     def bump_occurences(self):
         self.occurences += 1
 
@@ -431,9 +435,10 @@ class Game:
         self.started = False
         self.round_index = 0
         self.number_of_cards = 7
-        self.number_of_blanks = 40
+        self.number_of_blanks = 4
 
         self.cards = self.manager.cards.cards.copy()
+        self.cards.extend([Card.blank_card() for _ in range(self.number_of_blanks)])
         self.question_cards = self.manager.cards.question_cards.copy()
 
     def stop_game(self):
@@ -480,6 +485,7 @@ class Game:
         if self.get_player(user_id) is not None:
             return False
 
+        self.broadcast("*" + self.manager.musicbot.get_global_user(user_id).mention + " has joined the game*", delete_after=15)
         self.players.append(Player(user_id))
         self.manager.send_message_to_user(
             user_id, "You've joined the game *****REMOVED******REMOVED*****".format(self.token.upper()))
@@ -494,22 +500,16 @@ class Game:
             self.current_round.player_left(pl)
 
         self.players.remove(pl)
+        self.broadcast("*" + self.manager.musicbot.get_global_user(user_id).mention + " has left the game*", delete_after=15)
 
         self.manager.send_message_to_user(
             user_id, "You've left the game *****REMOVED******REMOVED*****".format(self.token.upper()))
         return True
 
-    def remove_user(self, id):
-        pl = self.get_player(id)
-        if pl is None:
-            return False
-
-        self.players.remove(pl)
-        return True
-
     def pick_card(self):
         if len(self.cards) < 1:
             self.cards = self.manager.cards.cards.copy()
+            self.cards.extend([Card.blank_card() for _ in range(self.number_of_blanks)])
 
         i = random.randint(0, len(self.cards) - 1)
         card = self.cards.pop(i)
@@ -529,6 +529,11 @@ class Game:
     def bump_round_index(self):
         self.round_index += 1
 
+    def broadcast(self, message, delete_after=0):
+        for player in self.players:
+            self.manager.send_message_to_user(
+                player.player_id, message, delete_after=delete_after)
+
 
 class Round:
 
@@ -540,36 +545,32 @@ class Round:
         self.round_index = round_index
         self.answers = ***REMOVED******REMOVED***
         self.players_to_answer = self.game.players.copy()
+        self.players_to_answer.remove(self.master)
 
         self.assign_cards()
         self.master.bump_master()
 
-        players = self.game.players.copy()
-        round_text_player = "**Round ***REMOVED***0***REMOVED*****\n***REMOVED***1***REMOVED***\n*Pick ***REMOVED***2***REMOVED*** card***REMOVED***3***REMOVED****\n\nYou can use the following commands:\n`pick [index]`: Pick one of your cards\n\n**Your cards**\n***REMOVED***4***REMOVED***"
-        round_text_master = "**Round ***REMOVED***0***REMOVED*** || YOU ARE THE MASTER**\n***REMOVED***1***REMOVED***\n*Wait for the players to choose*"
-        for pl in players:
+        round_text_player = "**Round ***REMOVED***0***REMOVED*****\n\n=====================\n***REMOVED***1***REMOVED*** *<***REMOVED***5***REMOVED***>*\n=====================\n\n*Pick ***REMOVED***2***REMOVED*** card***REMOVED***3***REMOVED****\n\nYou can use the following commands:\n`pick index [text_for_blanks]`: Pick one of your cards\n\n**Your cards**\n***REMOVED***4***REMOVED***"
+        round_text_master = "**Round ***REMOVED***0***REMOVED*** || YOU ARE THE MASTER**\n\n=====================\n***REMOVED***1***REMOVED*** *<***REMOVED***2***REMOVED***>*\n=====================\n\n*Wait for the players to choose*"
+        for pl in self.game.players:
             pl.bump_played()
 
-            card_texts = []
-            for i in range(len(pl.cards)):
-                card_texts.append(
-                    "***REMOVED******REMOVED***. [***REMOVED******REMOVED***] *<***REMOVED******REMOVED***>*".format(i + 1, pl.cards[i].text, pl.cards[i].id))
-            text = round_text_player.format(self.round_index, self.question_card.text, self.question_card.number_of_blanks,
-                                            "s" if self.question_card.number_of_blanks != 1 else "", "\n".join(card_texts))
             if pl == self.master:
-                text = round_text_master.format(
-                    self.round_index, self.question_card.text)
+                print(str(pl)  + " is the master!")
+                card_texts = self.get_card_texts(pl)
+                self.game.manager.send_message_to_user(pl.player_id, round_text_master.format(self.round_index, self.question_card.text, self.question_card.id), callback=(lambda x: self.messages_to_delete.append(x.result())))
+            else:
+                self.send_player_information(pl)
 
-            self.game.manager.send_message_to_user(pl.player_id, text, callback=(
-                lambda x: self.messages_to_delete.append(x.result())))
+                print("about to wait for message from player " + pl.player_id)
 
-            if pl != self.master:
-                self.game.manager.wait_for_message(lambda fut: self.on_player_message(
-                    pl, fut.result()), check=lambda msg: msg.author.id == pl.player_id)
+                check = lambda msg: msg.author.id == pl.player_id
+                self.game.manager.wait_for_message(lambda fut: self.on_player_message(pl, fut.result()), check=check)
 
     def on_player_message(self, player, message):
         print(str(player.player_id) + " wrote: " + message.content)
         content = message.content.strip().lower()
+        print(content)
         args = content.split()
 
         if args[0] == "pick":
@@ -577,19 +578,74 @@ class Round:
             try:
                 num = int(args[1]) - 1
             except:
-                pass
+                self.game.master.send_message_to_user(player.player_id, "This is not a number!".format(len(player.cards)), delete_after=5)
+                self.game.manager.wait_for_message(lambda fut: self.on_player_message(
+                    player, fut.result()), check=lambda msg: msg.author.id == player.player_id)
+                return
 
             if num < 0 or num >= len(player.cards):
-                pass
+                self.game.master.send_message_to_user(player.player_id, "Please provide an index between 1 and ***REMOVED******REMOVED***".format(len(player.cards)), delete_after=5)
+                self.game.manager.wait_for_message(lambda fut: self.on_player_message(
+                    player, fut.result()), check=lambda msg: msg.author.id == player.player_id)
+                return
 
-            card_chosen = player.get_card[num]
+            card_chosen = player.get_card(num)
+            print("player used card " + str(card_chosen))
+
+            if card_chosen.id == 0:
+                blank_text = " ".join(args[1:])
+                print("player used a blank card w/ " + blank_text)
+                card_chose.text = blank_text
+
             self.game.manager.cards.bump_card_occurences(card_chosen.id)
-            self.answers[player].append(card_chosen)
-            if len(self.answers[player]) >= self.question_card.number_of_blanks:
-                self.players_to_answer.remove(player)
+            try:
+                self.answers[player].append(card_chosen)
+            except:
+                self.answers[player] = [card_chosen,]
+
+            if len(self.answers.get(player, [])) >= self.question_card.number_of_blanks:
+                self.player_answered(player)
+            else:
+                self.send_player_information(player)
+                self.game.manager.wait_for_message(lambda fut: self.on_player_message(
+                    player, fut.result()), check=lambda msg: msg.author.id == player.player_id)
+                return
 
             if len(self.players_to_answer) < 1:
                 self.start_judging()
+        else:
+            self.game.manager.wait_for_message(lambda fut: self.on_player_message(
+                player, fut.result()), check=lambda msg: msg.author.id == player.player_id)
+
+    def player_answered(self, player):
+        to_delete = None
+
+        for pl in self.players_to_answer:
+            if pl.player_id == player.player_id:
+                to_delete = pl
+                break
+
+        if to_delete is None:
+            return False
+
+        self.players_to_answer.remove(to_delete)
+        return True
+
+    def get_card_texts(self, player):
+        card_texts = []
+        for i in range(len(player.cards)):
+            card_texts.append(
+                "***REMOVED******REMOVED***. [***REMOVED******REMOVED***] *<***REMOVED******REMOVED***>*".format(i + 1, player.cards[i].text, player.cards[i].id))
+
+        return card_texts
+
+    def send_player_information(self, player):
+        cards_given = len(self.answers[player])
+        cards_to_assign = self.question_card.number_of_blanks - cards_given
+
+        cards_text = self.get_card_texts(player)
+
+        self.game.manager.send_message_to_user(player.player_id, round_text_player.format(self.round_index, self.question_card.text, cards_to_assign, "s" if cards_to_assign != 1 else "", "\n".join(card_texts), self.question_card.id), callback=(lambda x: self.messages_to_delete.append(x.result())))
 
     def assign_cards(self):
         for player in self.game.players:
@@ -603,14 +659,9 @@ class Round:
 
         self.messages_to_delete = []
 
-    def broadcast(self, message, delete_after=0):
-        for player in self.game.players:
-            self.game.manager.send_message_to_user(
-                player.player_id, message, delete_after=delete_after)
-
     def player_left(self, pl):
         if pl == self.master:
-            self.broadcast(
+            self.game.broadcast(
                 "The current master has left the game. Switching to the next round!", 15)
             self.clean_up()
             self.game.round_finished()
@@ -622,6 +673,7 @@ class Round:
 
     def start_judging(self):
         self.clean_up()
+        print("starting to judge")
 
 
 class Player:
@@ -633,6 +685,9 @@ class Player:
         self.rounds_won = rounds_won
         self.rounds_master = rounds_master
         self.cards = cards
+
+    def __repr__(self):
+        return "<***REMOVED******REMOVED***> ***REMOVED******REMOVED*** points; ***REMOVED******REMOVED*** rounds; ***REMOVED******REMOVED*** won; ***REMOVED******REMOVED*** master".format(self.player_id, self.score, self.rounds_played, self.rounds_won, self.rounds_master)
 
     def bump_master(self):
         self.rounds_master += 1
