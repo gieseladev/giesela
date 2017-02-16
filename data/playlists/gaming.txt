@@ -1,919 +1,1249 @@
 ***REMOVED***
-  "duration": 210,
-  "expected_filename": "audio_cache\\youtube-fVEo74CwiG4-Alesso_We_could_be_-_Heroes_Lyrics.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=fVEo74CwiG4",
   "title": "Alesso (We could be) - Heroes | Lyrics",
+  "duration": 210,
   "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=fVEo74CwiG4"
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-fVEo74CwiG4-Alesso_We_could_be_-_Heroes_Lyrics.webm",
+  "end_seconds": 210
 ***REMOVED***
 ;
 ***REMOVED***
-  "duration": 230,
-  "expected_filename": "audio_cache\\youtube-cHHLHGNpCSA-Avicii_-_Waiting_For_Love.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=cHHLHGNpCSA",
   "title": "Avicii - Waiting For Love",
+  "duration": 230,
   "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=cHHLHGNpCSA"
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-cHHLHGNpCSA-Avicii_-_Waiting_For_Love.webm",
+  "end_seconds": 230
 ***REMOVED***
 ;
 ***REMOVED***
-  "duration": 202,
-  "expected_filename": "audio_cache\\youtube-ZoClf0HmEBw-K.A.A.N._-_Mary_Jane_prod._SGULL.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ZoClf0HmEBw",
   "title": "K.A.A.N. - Mary Jane (prod. SGULL)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=ZoClf0HmEBw"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 253,
-  "expected_filename": "audio_cache\\youtube-k9elZm_EH_4-Luke_Christopher_-_Lot_To_Learn.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Luke Christopher - Lot To Learn",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=k9elZm_EH_4"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 276,
-  "expected_filename": "audio_cache\\youtube-SufAKh_bHsU-Abstract_-_Scars_ft._RoZe_Prod._Drumma_Battalion.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Abstract - Scars (ft. RoZe) (Prod. Drumma Battalion)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=SufAKh_bHsU"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 258,
-  "expected_filename": "audio_cache\\youtube-MrTz5xjmso4-Sean_Kingston_-_Beautiful_Girls.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Sean Kingston - Beautiful Girls",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=MrTz5xjmso4"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 213,
-  "expected_filename": "audio_cache\\youtube-0vsnwUJjunU-Abstract_-_I_m_Good_ft._RoZe_Prod._Drumma_Battalion.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Abstract - I'm Good (ft. RoZe) (Prod. Drumma Battalion)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=0vsnwUJjunU"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 244,
-  "expected_filename": "audio_cache\\youtube-b4Bj7Zb-YD4-Calvin_Harris_-_My_Way_Official_Video.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Calvin Harris - My Way (Official Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=b4Bj7Zb-YD4"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 262,
-  "expected_filename": "audio_cache\\youtube-PT2_F-1esPk-The_Chainsmokers_-_Closer_Lyric_ft._Halsey.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "The Chainsmokers - Closer (Lyric) ft. Halsey",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=PT2_F-1esPk"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 296,
-  "expected_filename": "audio_cache\\youtube-_KmWZXNDx5s-kid_cudi_-_pursuit_of_happiness_Download_Lyrics.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "kid cudi - pursuit of happiness Download&Lyrics",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=_KmWZXNDx5s"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 293,
-  "expected_filename": "audio_cache\\youtube-Owd9kNsNVEI-Michigan_Moonlight.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Michigan Moonlight",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=Owd9kNsNVEI"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 181,
-  "expected_filename": "audio_cache\\youtube-GQ0X7_rv38s-Julian_Perretta_-_Miracle.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Julian Perretta - Miracle",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=GQ0X7_rv38s"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 255,
-  "expected_filename": "audio_cache\\youtube-w5h4yJ-BpL4-Walking_On_Cars_-_Speeding_Cars.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Walking On Cars - Speeding Cars",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=w5h4yJ-BpL4"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 194,
-  "expected_filename": "audio_cache\\youtube-VcDy8HEg1QY-Rednex_-_Cotton_Eye_Joe.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Rednex - Cotton Eye Joe",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=VcDy8HEg1QY"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 195,
-  "expected_filename": "audio_cache\\youtube-8gbImG50oIc-Matt_***REMOVED***s_-_Catch_Release_Deepend_Remix.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Matt ***REMOVED***s - Catch & Release (Deepend Remix)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=8gbImG50oIc"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 311,
-  "expected_filename": "audio_cache\\youtube-28GpKacWLWI-Abstract_-_Neverland_ft._Ruth_B_Prod._Blulake.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Abstract - Neverland (ft. Ruth B) (Prod. Blulake)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=28GpKacWLWI"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 192,
-  "expected_filename": "audio_cache\\youtube-2i2khp_npdE-Alan_Walker_-_Sing_Me_To_Sleep.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Alan Walker - Sing Me To Sleep",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=2i2khp_npdE"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 269,
-  "expected_filename": "audio_cache\\youtube-VscvdooUCTA-Alligatoah_-_Musik_ist_keine_Losung_Official_Video.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Alligatoah - Musik ist keine L\u00f6sung (Official Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=VscvdooUCTA"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 250,
-  "expected_filename": "audio_cache\\youtube-nbXgHAzUWB0-Axwell_Ingrosso_-_Sun_Is_Shining.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Axwell /\\ Ingrosso - Sun Is Shining",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=nbXgHAzUWB0"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 245,
-  "expected_filename": "audio_cache\\youtube-xat1GVnl8-k-Bloodhound_Gang_-_The_Bad_Touch.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Bloodhound Gang - The Bad Touch",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=xat1GVnl8-k"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 251,
-  "expected_filename": "audio_cache\\youtube-c3rLrFC8igY-Dame_-_Auf_die_guten_alten_Zeiten_Official_HD_Video.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Dame - Auf die guten alten Zeiten [Official HD Video]",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=c3rLrFC8igY"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 189,
-  "expected_filename": "audio_cache\\youtube-byfU8qO3yvg-Hendersin_-_Lonely_Road.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Hendersin - Lonely Road",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=byfU8qO3yvg"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 198,
-  "expected_filename": "audio_cache\\youtube-lP077RitNAc-Hollywood_Undead_-_Bullet_Lyric_Video.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Hollywood Undead - Bullet (Lyric Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=lP077RitNAc"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 216,
-  "expected_filename": "audio_cache\\youtube-hxuCLopcEy4-Good_People_-_Jack_Johnson_-_With_Lyrics.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Good People - Jack Johnson - With Lyrics",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=hxuCLopcEy4"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 247,
-  "expected_filename": "audio_cache\\youtube-SQ2HstgvzZ4-Machine_Gun_Kelly_-_Mind_of_a_Stoner_ft._Wiz_Khalifa_OFFICIAL_MUSIC_VIDEO.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Machine Gun Kelly - Mind of a Stoner ft. Wiz Khalifa (OFFICIAL MUSIC VIDEO)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=SQ2HstgvzZ4"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 244,
-  "expected_filename": "audio_cache\\youtube-eI3UF_HcTNo-Oleska_X_Otter_Berry_-_Far_Behind_Original_Mix.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Oleska X Otter Berry - Far Behind (Original Mix)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=eI3UF_HcTNo"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 218,
-  "expected_filename": "audio_cache\\youtube-rG18P6wOtTQ-Sido_-_Hamdullah_Official_Video.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Sido - Hamdullah (Official Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=rG18P6wOtTQ"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 240,
-  "expected_filename": "audio_cache\\youtube-VbfpW0pbvaU-Shawn_Mendes_-_Stitches_Official_Video.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "Shawn Mendes - Stitches (Official Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=VbfpW0pbvaU"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 216,
-  "expected_filename": "audio_cache\\youtube-F9kXstb9FF4-The_Strumbellas_-_Spirits.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "The Strumbellas - Spirits",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=F9kXstb9FF4"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 252,
-  "expected_filename": "audio_cache\\youtube-WpYeekQkAdc-The_Black_Eyed_Peas_-_Where_Is_The_Love.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "The Black Eyed Peas - Where Is The Love?",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=WpYeekQkAdc"
-***REMOVED***
-;
-***REMOVED***
-  "duration": 180,
-  "expected_filename": "audio_cache\\youtube-BEm0AjTbsac-The_Misty_Mountains_Cold_-_The_Hobbit.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
-  "title": "The Misty Mountains Cold - The Hobbit",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=BEm0AjTbsac"
-***REMOVED***
-;
-***REMOVED***
   "duration": 202,
-  "expected_filename": "audio_cache\\youtube-iUI5uLysKaE-Vance_Joy_-_Riptide_Lyrics_on_Screen.webm",
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
   "meta": ***REMOVED***
     "channel": ***REMOVED***
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     ***REMOVED***,
     "author": ***REMOVED***
+      "type": "Member",
       "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
+      "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "filename": null,
-  "title": "Vance Joy - Riptide (Lyrics on Screen)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=iUI5uLysKaE"
+  "start_seconds": "audio_cache\\youtube-ZoClf0HmEBw-K.A.A.N._-_Mary_Jane_prod._SGULL.webm",
+  "end_seconds": 202
 ***REMOVED***
 ;
 ***REMOVED***
-  "duration": 159,
-  "expected_filename": "audio_cache\\youtube-YV3XnVcEgZY-Vigiland_-_Pong_Dance_Lyric_Video.webm",
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=k9elZm_EH_4",
+  "title": "Luke Christopher - Lot To Learn",
+  "duration": 253,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
   "meta": ***REMOVED***
     "channel": ***REMOVED***
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     ***REMOVED***,
     "author": ***REMOVED***
+      "type": "Member",
       "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
+      "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "filename": null,
-  "title": "Vigiland - Pong Dance (Lyric Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=YV3XnVcEgZY"
+  "start_seconds": "audio_cache\\youtube-k9elZm_EH_4-Luke_Christopher_-_Lot_To_Learn.webm",
+  "end_seconds": 253
 ***REMOVED***
 ;
 ***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=SufAKh_bHsU",
+  "title": "Abstract - Scars (ft. RoZe) (Prod. Drumma Battalion)",
+  "duration": 276,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-SufAKh_bHsU-Abstract_-_Scars_ft._RoZe_Prod._Drumma_Battalion.webm",
+  "end_seconds": 276
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=MrTz5xjmso4",
+  "title": "Sean Kingston - Beautiful Girls",
+  "duration": 258,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-MrTz5xjmso4-Sean_Kingston_-_Beautiful_Girls.webm",
+  "end_seconds": 258
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=0vsnwUJjunU",
+  "title": "Abstract - I'm Good (ft. RoZe) (Prod. Drumma Battalion)",
   "duration": 213,
-  "expected_filename": "audio_cache\\youtube-KuVAeTHqijk-Wiz_Khalifa_-_No_Sleep_Music_Video.webm",
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
   "meta": ***REMOVED***
     "channel": ***REMOVED***
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     ***REMOVED***,
     "author": ***REMOVED***
+      "type": "Member",
       "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
+      "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "filename": null,
-  "title": "Wiz Khalifa - No Sleep [Music Video]",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=KuVAeTHqijk"
+  "start_seconds": "audio_cache\\youtube-0vsnwUJjunU-Abstract_-_I_m_Good_ft._RoZe_Prod._Drumma_Battalion.webm",
+  "end_seconds": 213
 ***REMOVED***
 ;
 ***REMOVED***
-  "duration": 249,
-  "expected_filename": "audio_cache\\youtube-uvLSj4gRq-Q-Wiz_Khalifa_-_So_High_ft._Ghost_Loft_Official_Audio.webm",
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=b4Bj7Zb-YD4",
+  "title": "Calvin Harris - My Way (Official Video)",
+  "duration": 244,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
   "meta": ***REMOVED***
     "channel": ***REMOVED***
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     ***REMOVED***,
     "author": ***REMOVED***
+      "type": "Member",
       "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
+      "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "filename": null,
-  "title": "Wiz Khalifa - So High ft. Ghost Loft [Official Audio]",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=uvLSj4gRq-Q"
+  "start_seconds": "audio_cache\\youtube-b4Bj7Zb-YD4-Calvin_Harris_-_My_Way_Official_Video.webm",
+  "end_seconds": 244
 ***REMOVED***
 ;
 ***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=PT2_F-1esPk",
+  "title": "The Chainsmokers - Closer (Lyric) ft. Halsey",
+  "duration": 262,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-PT2_F-1esPk-The_Chainsmokers_-_Closer_Lyric_ft._Halsey.webm",
+  "end_seconds": 262
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=_KmWZXNDx5s",
+  "title": "kid cudi - pursuit of happiness Download&Lyrics",
+  "duration": 296,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-_KmWZXNDx5s-kid_cudi_-_pursuit_of_happiness_Download_Lyrics.webm",
+  "end_seconds": 296
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Owd9kNsNVEI",
+  "title": "Michigan Moonlight",
+  "duration": 293,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-Owd9kNsNVEI-Michigan_Moonlight.webm",
+  "end_seconds": 293
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=GQ0X7_rv38s",
+  "title": "Julian Perretta - Miracle",
+  "duration": 181,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-GQ0X7_rv38s-Julian_Perretta_-_Miracle.webm",
+  "end_seconds": 181
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=w5h4yJ-BpL4",
+  "title": "Walking On Cars - Speeding Cars",
+  "duration": 255,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-w5h4yJ-BpL4-Walking_On_Cars_-_Speeding_Cars.webm",
+  "end_seconds": 255
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=VcDy8HEg1QY",
+  "title": "Rednex - Cotton Eye Joe",
+  "duration": 194,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-VcDy8HEg1QY-Rednex_-_Cotton_Eye_Joe.webm",
+  "end_seconds": 194
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=8gbImG50oIc",
+  "title": "Matt ***REMOVED***s - Catch & Release (Deepend Remix)",
   "duration": 195,
-  "expected_filename": "audio_cache\\youtube-6tu4wWSbnIs-X_Ambassadors_-_Renegades_Audio.webm",
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
   "meta": ***REMOVED***
     "channel": ***REMOVED***
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     ***REMOVED***,
     "author": ***REMOVED***
+      "type": "Member",
       "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
+      "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-8gbImG50oIc-Matt_***REMOVED***s_-_Catch_Release_Deepend_Remix.webm",
+  "end_seconds": 195
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=28GpKacWLWI",
+  "title": "Abstract - Neverland (ft. Ruth B) (Prod. Blulake)",
+  "duration": 311,
+  "downloaded": false,
   "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-28GpKacWLWI-Abstract_-_Neverland_ft._Ruth_B_Prod._Blulake.webm",
+  "end_seconds": 311
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=2i2khp_npdE",
+  "title": "Alan Walker - Sing Me To Sleep",
+  "duration": 192,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-2i2khp_npdE-Alan_Walker_-_Sing_Me_To_Sleep.webm",
+  "end_seconds": 192
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=VscvdooUCTA",
+  "title": "Alligatoah - Musik ist keine L\u00f6sung (Official Video)",
+  "duration": 269,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-VscvdooUCTA-Alligatoah_-_Musik_ist_keine_Losung_Official_Video.webm",
+  "end_seconds": 269
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=nbXgHAzUWB0",
+  "title": "Axwell /\\ Ingrosso - Sun Is Shining",
+  "duration": 250,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-nbXgHAzUWB0-Axwell_Ingrosso_-_Sun_Is_Shining.webm",
+  "end_seconds": 250
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xat1GVnl8-k",
+  "title": "Bloodhound Gang - The Bad Touch",
+  "duration": 245,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-xat1GVnl8-k-Bloodhound_Gang_-_The_Bad_Touch.webm",
+  "end_seconds": 245
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=c3rLrFC8igY",
+  "title": "Dame - Auf die guten alten Zeiten [Official HD Video]",
+  "duration": 251,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-c3rLrFC8igY-Dame_-_Auf_die_guten_alten_Zeiten_Official_HD_Video.webm",
+  "end_seconds": 251
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=byfU8qO3yvg",
+  "title": "Hendersin - Lonely Road",
+  "duration": 189,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-byfU8qO3yvg-Hendersin_-_Lonely_Road.webm",
+  "end_seconds": 189
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=lP077RitNAc",
+  "title": "Hollywood Undead - Bullet (Lyric Video)",
+  "duration": 198,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-lP077RitNAc-Hollywood_Undead_-_Bullet_Lyric_Video.webm",
+  "end_seconds": 198
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=hxuCLopcEy4",
+  "title": "Good People - Jack Johnson - With Lyrics",
+  "duration": 216,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-hxuCLopcEy4-Good_People_-_Jack_Johnson_-_With_Lyrics.webm",
+  "end_seconds": 216
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=SQ2HstgvzZ4",
+  "title": "Machine Gun Kelly - Mind of a Stoner ft. Wiz Khalifa (OFFICIAL MUSIC VIDEO)",
+  "duration": 247,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-SQ2HstgvzZ4-Machine_Gun_Kelly_-_Mind_of_a_Stoner_ft._Wiz_Khalifa_OFFICIAL_MUSIC_VIDEO.webm",
+  "end_seconds": 247
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=eI3UF_HcTNo",
+  "title": "Oleska X Otter Berry - Far Behind (Original Mix)",
+  "duration": 244,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-eI3UF_HcTNo-Oleska_X_Otter_Berry_-_Far_Behind_Original_Mix.webm",
+  "end_seconds": 244
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=rG18P6wOtTQ",
+  "title": "Sido - Hamdullah (Official Video)",
+  "duration": 218,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-rG18P6wOtTQ-Sido_-_Hamdullah_Official_Video.webm",
+  "end_seconds": 218
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=VbfpW0pbvaU",
+  "title": "Shawn Mendes - Stitches (Official Video)",
+  "duration": 240,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-VbfpW0pbvaU-Shawn_Mendes_-_Stitches_Official_Video.webm",
+  "end_seconds": 240
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=F9kXstb9FF4",
+  "title": "The Strumbellas - Spirits",
+  "duration": 216,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-F9kXstb9FF4-The_Strumbellas_-_Spirits.webm",
+  "end_seconds": 216
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=WpYeekQkAdc",
+  "title": "The Black Eyed Peas - Where Is The Love?",
+  "duration": 252,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-WpYeekQkAdc-The_Black_Eyed_Peas_-_Where_Is_The_Love.webm",
+  "end_seconds": 252
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=BEm0AjTbsac",
+  "title": "The Misty Mountains Cold - The Hobbit",
+  "duration": 180,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-BEm0AjTbsac-The_Misty_Mountains_Cold_-_The_Hobbit.webm",
+  "end_seconds": 180
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=iUI5uLysKaE",
+  "title": "Vance Joy - Riptide (Lyrics on Screen)",
+  "duration": 202,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-iUI5uLysKaE-Vance_Joy_-_Riptide_Lyrics_on_Screen.webm",
+  "end_seconds": 202
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=YV3XnVcEgZY",
+  "title": "Vigiland - Pong Dance (Lyric Video)",
+  "duration": 159,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-YV3XnVcEgZY-Vigiland_-_Pong_Dance_Lyric_Video.webm",
+  "end_seconds": 159
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=KuVAeTHqijk",
+  "title": "Wiz Khalifa - No Sleep [Music Video]",
+  "duration": 213,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-KuVAeTHqijk-Wiz_Khalifa_-_No_Sleep_Music_Video.webm",
+  "end_seconds": 213
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=uvLSj4gRq-Q",
+  "title": "Wiz Khalifa - So High ft. Ghost Loft [Official Audio]",
+  "duration": 249,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-uvLSj4gRq-Q-Wiz_Khalifa_-_So_High_ft._Ghost_Loft_Official_Audio.webm",
+  "end_seconds": 249
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=6tu4wWSbnIs",
   "title": "X Ambassadors - Renegades (Audio)",
+  "duration": 195,
   "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=6tu4wWSbnIs"
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-6tu4wWSbnIs-X_Ambassadors_-_Renegades_Audio.webm",
+  "end_seconds": 195
 ***REMOVED***
 ;
 ***REMOVED***
-  "duration": 257,
-  "expected_filename": "audio_cache\\youtube-Wa5B22KAkEk-Snoop_Dogg_Wiz_Khalifa_-_Young_Wild_and_Free_ft._Bruno_Mars_Official_Video.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Wa5B22KAkEk",
   "title": "Snoop Dogg & Wiz Khalifa - Young, Wild and Free ft. Bruno Mars [Official Video]",
+  "duration": 257,
   "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=Wa5B22KAkEk"
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-Wa5B22KAkEk-Snoop_Dogg_Wiz_Khalifa_-_Young_Wild_and_Free_ft._Bruno_Mars_Official_Video.webm",
+  "end_seconds": 257
 ***REMOVED***
 ;
 ***REMOVED***
-  "duration": 225,
-  "expected_filename": "audio_cache\\youtube-pXRviuL6vMY-twenty_one_pilots_-_Stressed_Out_OFFICIAL_VIDEO.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=pXRviuL6vMY",
   "title": "twenty one pilots: Stressed Out [OFFICIAL VIDEO]",
+  "duration": 225,
   "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=pXRviuL6vMY"
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-pXRviuL6vMY-twenty_one_pilots_-_Stressed_Out_OFFICIAL_VIDEO.webm",
+  "end_seconds": 225
 ***REMOVED***
 ;
 ***REMOVED***
-  "duration": 281,
-  "expected_filename": "audio_cache\\youtube-drIWW4hXV34-Life_is_Strange_Soundtrack_-_To_All_Of_You_by_Syd_Matters.webm",
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
-    ***REMOVED***
-  ***REMOVED***,
-  "filename": null,
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=drIWW4hXV34",
   "title": "Life is Strange Soundtrack - To All Of You by Syd Matters",
+  "duration": 281,
   "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=drIWW4hXV34"
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-drIWW4hXV34-Life_is_Strange_Soundtrack_-_To_All_Of_You_by_Syd_Matters.webm",
+  "end_seconds": 281
 ***REMOVED***
 ;
 ***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=fQynBmK_has",
+  "title": "Al Maghrib",
   "duration": 1687,
-  "expected_filename": "audio_cache\\youtube-fQynBmK_has-Al_Maghrib.webm",
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
   "meta": ***REMOVED***
     "channel": ***REMOVED***
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     ***REMOVED***,
     "author": ***REMOVED***
+      "type": "Member",
       "id": "210488226777923585",
-      "name": "grelor",
-      "type": "Member"
+      "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "filename": null,
-  "title": "Al Maghrib",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
+  "start_seconds": "audio_cache\\youtube-fQynBmK_has-Al_Maghrib.webm",
+  "end_seconds": 1687
+***REMOVED***
+;
+***REMOVED***
   "version": 1,
-  "url": "https://www.youtube.com/watch?v=fQynBmK_has"
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=kVpv8-5XWOI",
+  "title": "Train - Hey, Soul Sister",
+  "duration": 217,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-kVpv8-5XWOI-Train_-_Hey_Soul_Sister.webm",
+  "end_seconds": 217
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=_dK2tDK9grQ",
+  "title": "Ed Sheeran - Shape Of You [Official Lyric Video]",
+  "duration": 235,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-_dK2tDK9grQ-Ed_Sheeran_-_Shape_Of_You_Official_Lyric_Video.webm",
+  "end_seconds": 235
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=moKBdBLdNCI",
+  "title": "Alex's Hen Night- Crazy In Love",
+  "duration": 245,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-moKBdBLdNCI-Alex_s_Hen_Night-_Crazy_In_Love.webm",
+  "end_seconds": 245
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=s3Oyagx8Stw",
+  "title": "Hendersin - In Love",
+  "duration": 208,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-s3Oyagx8Stw-Hendersin_-_In_Love.m4a",
+  "end_seconds": 208
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=0nouhZQqtx4",
+  "title": "AnnenMayKantereit & K.I.Z. - Hurra die Welt geht unter",
+  "duration": 262,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-0nouhZQqtx4-AnnenMayKantereit_K.I.Z._-_Hurra_die_Welt_geht_unter.webm",
+  "end_seconds": 262
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=bSfpSOBD30U",
+  "title": "G-Eazy x Bebe Rexha - Me, Myself & I",
+  "duration": 349,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-bSfpSOBD30U-G-Eazy_x_Bebe_Rexha_-_Me_Myself_I.webm",
+  "end_seconds": 349
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=6Zbw86Xts5Q",
+  "title": "G-Eazy x Bebe Rexha - Me, Myself & I - LYRICS [HD]",
+  "duration": 252,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-6Zbw86Xts5Q-G-Eazy_x_Bebe_Rexha_-_Me_Myself_I_-_LYRICS_HD.webm",
+  "end_seconds": 252
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=L3wKzyIN1yk",
+  "title": "Rag'n'Bone Man - Human (Official Video)",
+  "duration": 198,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-L3wKzyIN1yk-Rag_n_Bone_Man_-_Human_Official_Video.webm",
+  "end_seconds": 198
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=BgfcToAjfdc",
+  "title": "Kygo - Stole The Show feat. Parson James [Official Music Video - YTMAs]",
+  "duration": 325,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-BgfcToAjfdc-Kygo_-_Stole_The_Show_feat._Parson_James_Official_Music_Video_-_YTMAs.webm",
+  "end_seconds": 325
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=c3rLrFC8igY",
+  "title": "Dame - Auf die guten alten Zeiten [Official HD Video]",
+  "duration": 251,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "210488226777923585",
+      "name": "grelor"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": "audio_cache\\youtube-c3rLrFC8igY-Dame_-_Auf_die_guten_alten_Zeiten_Official_HD_Video.webm",
+  "end_seconds": 251
 ***REMOVED***
