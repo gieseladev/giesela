@@ -438,7 +438,8 @@ class Game:
         self.number_of_blanks = 4
 
         self.cards = self.manager.cards.cards.copy()
-        self.cards.extend([Card.blank_card() for _ in range(self.number_of_blanks)])
+        self.cards.extend([Card.blank_card()
+                           for _ in range(self.number_of_blanks)])
         self.question_cards = self.manager.cards.question_cards.copy()
 
     def stop_game(self):
@@ -485,7 +486,8 @@ class Game:
         if self.get_player(user_id) is not None:
             return False
 
-        self.broadcast("*" + self.manager.musicbot.get_global_user(user_id).mention + " has joined the game*", delete_after=15)
+        self.broadcast("*" + self.manager.musicbot.get_global_user(
+            user_id).mention + " has joined the game*", delete_after=15)
         self.players.append(Player(user_id))
         self.manager.send_message_to_user(
             user_id, "You've joined the game **{}**".format(self.token.upper()))
@@ -500,7 +502,8 @@ class Game:
             self.current_round.player_left(pl)
 
         self.players.remove(pl)
-        self.broadcast("*" + self.manager.musicbot.get_global_user(user_id).mention + " has left the game*", delete_after=15)
+        self.broadcast("*" + self.manager.musicbot.get_global_user(
+            user_id).mention + " has left the game*", delete_after=15)
 
         self.manager.send_message_to_user(
             user_id, "You've left the game **{}**".format(self.token.upper()))
@@ -509,7 +512,8 @@ class Game:
     def pick_card(self):
         if len(self.cards) < 1:
             self.cards = self.manager.cards.cards.copy()
-            self.cards.extend([Card.blank_card() for _ in range(self.number_of_blanks)])
+            self.cards.extend([Card.blank_card()
+                               for _ in range(self.number_of_blanks)])
 
         i = random.randint(0, len(self.cards) - 1)
         card = self.cards.pop(i)
@@ -550,22 +554,23 @@ class Round:
         self.assign_cards()
         self.master.bump_master()
 
-        round_text_player = "**Round {0}**\n\n=====================\n{1} *<{5}>*\n=====================\n\n*Pick {2} card{3}*\n\nYou can use the following commands:\n`pick index [text_for_blanks]`: Pick one of your cards\n\n**Your cards**\n{4}"
         round_text_master = "**Round {0} || YOU ARE THE MASTER**\n\n=====================\n{1} *<{2}>*\n=====================\n\n*Wait for the players to choose*"
         for pl in self.game.players:
             pl.bump_played()
 
             if pl == self.master:
-                print(str(pl)  + " is the master!")
+                print(str(pl) + " is the master!")
                 card_texts = self.get_card_texts(pl)
-                self.game.manager.send_message_to_user(pl.player_id, round_text_master.format(self.round_index, self.question_card.text, self.question_card.id), callback=(lambda x: self.messages_to_delete.append(x.result())))
+                self.game.manager.send_message_to_user(pl.player_id, round_text_master.format(
+                    self.round_index, self.question_card.text, self.question_card.id), callback=(lambda x: self.messages_to_delete.append(x.result())))
             else:
                 self.send_player_information(pl)
 
                 print("about to wait for message from player " + pl.player_id)
 
                 check = lambda msg: msg.author.id == pl.player_id
-                self.game.manager.wait_for_message(lambda fut: self.on_player_message(pl, fut.result()), check=check)
+                self.game.manager.wait_for_message(
+                    lambda fut: self.on_player_message(pl, fut.result()), check=check)
 
     def on_player_message(self, player, message):
         print(str(player.player_id) + " wrote: " + message.content)
@@ -578,13 +583,15 @@ class Round:
             try:
                 num = int(args[1]) - 1
             except:
-                self.game.master.send_message_to_user(player.player_id, "This is not a number!".format(len(player.cards)), delete_after=5)
+                self.game.master.send_message_to_user(
+                    player.player_id, "This is not a number!".format(len(player.cards)), delete_after=5)
                 self.game.manager.wait_for_message(lambda fut: self.on_player_message(
                     player, fut.result()), check=lambda msg: msg.author.id == player.player_id)
                 return
 
             if num < 0 or num >= len(player.cards):
-                self.game.master.send_message_to_user(player.player_id, "Please provide an index between 1 and {}".format(len(player.cards)), delete_after=5)
+                self.game.master.send_message_to_user(
+                    player.player_id, "Please provide an index between 1 and {}".format(len(player.cards)), delete_after=5)
                 self.game.manager.wait_for_message(lambda fut: self.on_player_message(
                     player, fut.result()), check=lambda msg: msg.author.id == player.player_id)
                 return
@@ -601,11 +608,13 @@ class Round:
             try:
                 self.answers[player].append(card_chosen)
             except:
-                self.answers[player] = [card_chosen,]
+                self.answers[player] = [card_chosen, ]
 
-            if len(self.answers.get(player, [])) >= self.question_card.number_of_blanks:
+            if self.number_of_answers_from_player(player) >= self.question_card.number_of_blanks:
+                print(str(player) + " player answered all the questions")
                 self.player_answered(player)
             else:
+                print(str(player) + " ain't done yet")
                 self.send_player_information(player)
                 self.game.manager.wait_for_message(lambda fut: self.on_player_message(
                     player, fut.result()), check=lambda msg: msg.author.id == player.player_id)
@@ -639,13 +648,20 @@ class Round:
 
         return card_texts
 
+    def number_of_answers_from_player(self, player):
+        ans = self.answers.get(player, [])
+        return len(ans)
+
     def send_player_information(self, player):
-        cards_given = len(self.answers[player])
+        cards_given = self.number_of_answers_from_player(player)
         cards_to_assign = self.question_card.number_of_blanks - cards_given
 
-        cards_text = self.get_card_texts(player)
+        card_texts = self.get_card_texts(player)
 
-        self.game.manager.send_message_to_user(player.player_id, round_text_player.format(self.round_index, self.question_card.text, cards_to_assign, "s" if cards_to_assign != 1 else "", "\n".join(card_texts), self.question_card.id), callback=(lambda x: self.messages_to_delete.append(x.result())))
+        round_text_player = "**Round {0}**\n\n=====================\n{1} *<{5}>*\n=====================\n\n*Pick {2} card{3}*\n\nYou can use the following commands:\n`pick index [text_for_blanks]`: Pick one of your cards\n\n**Your cards**\n{4}"
+
+        self.game.manager.send_message_to_user(player.player_id, round_text_player.format(self.round_index, self.question_card.text, cards_to_assign,
+                                                                                          "s" if cards_to_assign != 1 else "", "\n".join(card_texts), self.question_card.id), callback=(lambda x: self.messages_to_delete.append(x.result())))
 
     def assign_cards(self):
         for player in self.game.players:
