@@ -1,9 +1,8 @@
+import asyncio
 import re
 import time
 from socket import *
 from threading import Thread
-
-import asyncio
 
 from .spotify import SpotifyTrack
 
@@ -66,7 +65,7 @@ class SocketServer:
     def _broadcast_information(self):
         to_delete = []
         for sock, server_id in self.server_ids.items():
-    try:
+            try:
                 response = "INFORMATION;***REMOVED***artist***REMOVED***;***REMOVED***song_title***REMOVED***;***REMOVED***video_id***REMOVED***;***REMOVED***play_status***REMOVED***;***REMOVED***cover_url***REMOVED***;***REMOVED***progress***REMOVED***;***REMOVED***duration***REMOVED***;***REMOVED***volume***REMOVED***"
 
                 artist, song_title, video_id, cover_url, playing, duration, progress, volume = self.get_player_values(
@@ -182,7 +181,8 @@ class SocketServer:
                 else:
                     continue
 
-                response = "INFORMATION;PLAYLISTS;***REMOVED******REMOVED***".format(self.get_playlists_string(player, server_id))
+                response = "INFORMATION;PLAYLISTS;***REMOVED******REMOVED***".format(
+                    self.get_playlists_string(player, server_id))
                 c_socket.sendall("***REMOVED******REMOVED***==***REMOVED******REMOVED***".format(
                     len(response), response).encode("utf-8"))
 
@@ -323,10 +323,12 @@ class SocketServer:
         for playlist in playlists:
             values = ***REMOVED******REMOVED***
             values["name"] = playlist[0]
-            values["author"] = self.musicbot.get_server(server_id).get_member(playlist[1].get("author")).name
+            values["author"] = self.musicbot.get_server(
+                server_id).get_member(playlist[1].get("author")).name
             values["replays"] = playlist[1].get("replay_count")
             values["entry_count"] = playlist[1].get("entry_count")
-            values["playtime"] = str(sum([x.duration for x in playlist[1].get("entries")]))
+            values["playtime"] = str(
+                sum([x.duration for x in playlist[1].get("entries")]))
             playlist_strings.append(base_playlist_layout.format(**values))
 
         workString += ";".join(playlist_strings)
