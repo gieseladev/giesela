@@ -2,6 +2,7 @@ import json
 import random
 import re
 from datetime import datetime
+from functools import partial
 
 import asyncio
 import configparser
@@ -413,6 +414,8 @@ class GameCAH:
             return task.add_done_callback(callback)
 
     def wait_for_message(self, callback, timeout=None, check=None):
+        # print("::::::::::::::::::" + str(check))
+        # print(";;;;;;;;;;;;;;;;;;" + str(callback))
         task = self.musicbot.loop.create_task(
             self.musicbot.wait_for_message(timeout=timeout, check=check))
         task.add_done_callback(callback)
@@ -435,9 +438,11 @@ class Game:
         self.started = False
         self.round_index = 0
         self.number_of_cards = 7
-        self.number_of_blanks = 4
+        self.number_of_blanks = int(.05 * len(self.manager.cards.cards))
 
         self.cards = self.manager.cards.cards.copy()
+        print(str(self.number_of_blanks) + " blanks out of " +
+              str(len(self.cards)) + " total cards in this game!")
         self.cards.extend([Card.blank_card()
                            for _ in range(self.number_of_blanks)])
         self.question_cards = self.manager.cards.question_cards.copy()
@@ -467,7 +472,8 @@ class Game:
         return len(self.players) >= 2
 
     def round_finished(self):
-        pass
+        print("round finished-playing")
+        self.next_round()
 
     def get_player(self, id):
         for player in self.players:
@@ -538,6 +544,8 @@ class Game:
             self.manager.send_message_to_user(
                 player.player_id, message, delete_after=delete_after)
 
+    def pick_master(self):
+        pass
 
 class Round:
 
@@ -568,39 +576,50 @@ class Round:
 
                 print("about to wait for message from player " + pl.player_id)
 
-                check = lambda msg: msg.author.id == pl.player_id
+                check = lambda msg, pl=pl: msg.author.id == pl.player_id
                 self.game.manager.wait_for_message(
-                    lambda fut: self.on_player_message(pl, fut.result()), check=check)
+                    lambda fut, pl=pl: self.on_player_message(pl, fut.result()), check=check)
 
     def on_player_message(self, player, message):
+        if player.player_id == self.master.player_id:
+            print("ignoring master")
+            return
+
         print(str(player.player_id) + " wrote: " + message.content)
+
+        def wait_again():
+            self.game.manager.wait_for_message(lambda fut, player=player: self.on_player_message(
+                player, fut.result()), check=lambda msg, player=player: msg.author.id == player.player_id)
+
         content = message.content.strip().lower()
-        print(content)
         args = content.split()
 
         if args[0] == "pick":
-            self.messages_to_delete.append(message)
             try:
                 num = int(args[1]) - 1
             except:
-                self.game.master.send_message_to_user(
+                self.game.manager.send_message_to_user(
                     player.player_id, "This is not a number!".format(len(player.cards)), delete_after=5)
-                self.game.manager.wait_for_message(lambda fut: self.on_player_message(
-                    player, fut.result()), check=lambda msg: msg.author.id == player.player_id)
+                wait_again()
                 return
 
             if num < 0 or num >= len(player.cards):
-                self.game.master.send_message_to_user(
+                self.game.manager.send_message_to_user(
                     player.player_id, "Please provide an index between 1 and {}".format(len(player.cards)), delete_after=5)
-                self.game.manager.wait_for_message(lambda fut: self.on_player_message(
-                    player, fut.result()), check=lambda msg: msg.author.id == player.player_id)
+                wait_again()
                 return
 
             card_chosen = player.get_card(num)
             print("player used card " + str(card_chosen))
 
             if card_chosen.id == 0:
-                blank_text = " ".join(args[1:])
+                blank_text = " ".join(args[1:]) if len(args) > 1 else None
+                if blank_text is None or len(blank_text) < 3 or len(blank_text) > 140:
+                    self.game.manager.send_message_to_user(
+                        player.player_id, "This is not a valid text for a blank card!\n".format(len(player.cards)), delete_after=5)
+                    wait_again()
+                    return
+
                 print("player used a blank card w/ " + blank_text)
                 card_chose.text = blank_text
 
@@ -616,15 +635,11 @@ class Round:
             else:
                 print(str(player) + " ain't done yet")
                 self.send_player_information(player)
-                self.game.manager.wait_for_message(lambda fut: self.on_player_message(
-                    player, fut.result()), check=lambda msg: msg.author.id == player.player_id)
-                return
 
             if len(self.players_to_answer) < 1:
                 self.start_judging()
-        else:
-            self.game.manager.wait_for_message(lambda fut: self.on_player_message(
-                player, fut.result()), check=lambda msg: msg.author.id == player.player_id)
+
+        wait_again()
 
     def player_answered(self, player):
         to_delete = None
@@ -672,6 +687,7 @@ class Round:
     def clean_up(self):
         for msg in self.messages_to_delete:
             self.game.manager.delete_message(msg)
+            print("deleting msg " + str(msg))
 
         self.messages_to_delete = []
 
@@ -687,9 +703,87 @@ class Round:
 
         self.answers.pop(pl, None)
 
+    def master_picks(self, index):
+        print("master chose " + str(index))
+        self.clean_up()
+        player_key = list(self.answers.keys())[index]
+        player_key.bump_won()
+        answers = self.answers.get(player_key)
+
+        self.game.broadcast("{} won the game with the card{} {}".format(self.game.manager.musicbot.get_global_user(player_key.player_id).mention, "s" if len(
+            answers) != 1 else "", ", ".join(["[{}] *<{}>*".format(ans.text, ans.id) for ans in answers])), delete_after=15)
+        self.game.round_finished()
+
     def start_judging(self):
         self.clean_up()
         print("starting to judge")
+
+        player_judge_text = "**Time to be judged!**\n\n=====================\n{0} *<{1}>*\n=====================\n\n**The answers are**\n{2}"
+        master_judge_text = "**Time to judge \'em**\n\n=====================\n{0} *<{1}>*\n=====================\n\n*Pick a winner*\n\nYou can use the following commands:\n`pick index`: Pick the winner\n\n**The answers are**\n{2}"
+
+        answer_texts = []
+        answer_text = "[{1.text}] *<{1.id}>*"
+
+        i = 1
+        for pl_key in self.answers:
+            pl_answers = self.answers.get(pl_key, None)
+            if pl_answers is None:
+                continue
+
+            answer_texts.append(
+                "{}. ".format(i) + ", ".join([answer_text.format(i, ans) for ans in pl_answers]))
+            i += 1
+
+        for pl in self.game.players:
+            if pl == self.master:
+                self.game.manager.send_message_to_user(pl.player_id, master_judge_text.format(
+                    self.question_card.text, self.question_card.id, "\n".join(answer_texts)), callback=lambda x: self.messages_to_delete.append(x.result()))
+
+                check = lambda msg, pl=pl: msg.author.id == pl.player_id and msg.content.lower(
+                ).startswith("pick")
+                self.game.manager.wait_for_message(
+                    lambda fut, pl=pl: self.on_master_message(pl, fut.result()), check=check)
+            else:
+                self.game.manager.send_message_to_user(pl.player_id, player_judge_text.format(
+                    self.question_card.text, self.question_card.id, "\n".join(answer_texts)), callback=lambda x: self.messages_to_delete.append(x.result()))
+
+    def on_master_message(self, player, message):
+        print(str(player.player_id) + " wrote (master): " + message.content)
+
+        def wait_again():
+            self.game.manager.wait_for_message(lambda fut, player=player: self.on_master_message(
+                player, fut.result()), check=lambda msg, player=player: msg.author.id == player.player_id)
+
+        content = message.content.strip().lower()
+        args = content.split()
+
+        if args[0] == "pick":
+            card_index = args[1].lower().strip() if len(args) > 1 else None
+
+            if card_index is None:
+                self.game.manager.send_message_to_user(
+                    player.player_id, "Please provide an index!", delete_after=5)
+                wait_again()
+                return
+
+            try:
+                card_index = int(card_index) - 1
+            except:
+                self.game.manager.send_message_to_user(
+                    player.player_id, "Index needs to be a number!", delete_after=5)
+                wait_again()
+                return
+
+            if card_index < 0 or card_index >= len(self.answers):
+                self.game.manager.send_message_to_user(
+                    player.player_id, "Please provide an index between 1 and {}".format(len(self.answers)), delete_after=5)
+                wait_again()
+                return
+
+            self.master_picks(card_index - 1)
+            return
+
+        wait_again()
 
 
 class Player:
@@ -710,6 +804,9 @@ class Player:
 
     def bump_played(self):
         self.rounds_played += 1
+
+    def bump_won(self):
+        self.rounds_won += 1
 
     def get_card(self, index):
         if index >= 0 and index < len(self.cards):
