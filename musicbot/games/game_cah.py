@@ -447,6 +447,9 @@ class Game:
                            for _ in range(self.number_of_blanks)])
         self.question_cards = self.manager.cards.question_cards.copy()
 
+        self.manager.send_message_to_user(
+            operator_id, "*Created the game ***REMOVED******REMOVED****".format(token.upper()), delete_after=20)
+
     def stop_game(self):
         if self.current_round is not None:
             self.current_round.end_round()
@@ -546,6 +549,7 @@ class Game:
 
     def pick_master(self):
         pass
+
 
 class Round:
 
@@ -707,7 +711,8 @@ class Round:
         print("master chose " + str(index))
         self.clean_up()
         player_key = list(self.answers.keys())[index]
-        player_key.bump_won()
+        player_key.bump_won(
+            self.question_card.number_of_blanks, len(self.answers))
         answers = self.answers.get(player_key)
 
         self.game.broadcast("***REMOVED******REMOVED*** won the game with the card***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(self.game.manager.musicbot.get_global_user(player_key.player_id).mention, "s" if len(
@@ -805,8 +810,9 @@ class Player:
     def bump_played(self):
         self.rounds_played += 1
 
-    def bump_won(self):
+    def bump_won(self, cards_needed, players_facing):
         self.rounds_won += 1
+        self.score += cards_needed * players_facing
 
     def get_card(self, index):
         if index >= 0 and index < len(self.cards):

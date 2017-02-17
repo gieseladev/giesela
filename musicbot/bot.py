@@ -3235,7 +3235,7 @@ class MusicBot(discord.Client):
 
             card = self.cah.cards.get_question_card(card_id)
             if card is not None:
-                info = "Question Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ncreated ***REMOVED***3***REMOVED***``\nUse `***REMOVED***4***REMOVED***cards edit ***REMOVED***0.id***REMOVED***` to edit this card`"
+                info = "Question Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ncreated ***REMOVED***3***REMOVED***```\nUse `***REMOVED***4***REMOVED***cards edit ***REMOVED***0.id***REMOVED***` to edit this card`"
                 return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date), self.config.command_prefix))
         elif argument == "create":
             text = " ".join(leftover_args[1:]) if len(
