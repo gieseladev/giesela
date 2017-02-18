@@ -3026,31 +3026,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=oiQ68AW0LMY",
-  "title": "Mariah Carey - I Don't ft. YG",
-  "duration": 256,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 256
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=0yW7w8F2TVA",
   "title": "James Arthur - Say You Won't Let Go",
   "duration": 211,
@@ -3176,31 +3151,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=ALZHF5UqnU4",
-  "title": "Marshmello - Alone (Official Music Video)",
-  "duration": 200,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 200
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=_dK2tDK9grQ",
   "title": "Ed Sheeran - Shape Of You [Official Lyric Video]",
   "duration": 235,
@@ -3226,31 +3176,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=GzU8KqOY8YA",
-  "title": "Sean Paul - No Lie ft. Dua Lipa",
-  "duration": 229,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 229
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=2xpAd6kfJGU",
   "title": "Jeremih - I Think Of You (Audio) ft. Chris Brown, Big Sean",
   "duration": 218,
@@ -3271,31 +3196,6 @@
   ***REMOVED***,
   "start_seconds": null,
   "end_seconds": 218
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=Jr4TMIU9oQ4",
-  "title": "INNA - Gimme Gimme | Official Music Video",
-  "duration": 177,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 177
 ***REMOVED***
 ;
 ***REMOVED***
@@ -3526,31 +3426,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=cedoBlUvBlI",
-  "title": "Era Istrefi - Bonbon (Official Video)",
-  "duration": 179,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 179
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=b4Bj7Zb-YD4",
   "title": "Calvin Harris - My Way (Official Video)",
   "duration": 244,
@@ -3701,31 +3576,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=1VUa99-tJqs",
-  "title": "Migos - T-Shirt [Official Video]",
-  "duration": 293,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 293
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=-59jGD4WrmE",
   "title": "Sucker for Pain - Lil Wayne, Wiz Khalifa & Imagine Dragons w/ Logic & Ty Dolla $ign ft X Ambassadors",
   "duration": 298,
@@ -3821,31 +3671,6 @@
   ***REMOVED***,
   "start_seconds": null,
   "end_seconds": 221
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=79DijItQXMM",
-  "title": "Dwayne Johnson - You're Welcome (From \"Moana\")",
-  "duration": 169,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 169
 ***REMOVED***
 ;
 ***REMOVED***
@@ -4126,31 +3951,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=d2UZlwTDGbY",
-  "title": "Bruno Mars - Versace on The Floor [Official Audio]",
-  "duration": 261,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 261
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=uCTWBHP6lV0",
   "title": "Lindsey Stirling - Hold My Heart feat. ZZ Ward",
   "duration": 232,
@@ -4326,31 +4126,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=ZkqyIoYAXV8",
-  "title": "Skrillex & Rick Ross - Purple Lamborghini [Official Video]",
-  "duration": 262,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 262
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=kgUpRwMeRr4",
   "title": "Little Mix - Hair (Official Video) ft. Sean Paul",
   "duration": 236,
@@ -4371,31 +4146,6 @@
   ***REMOVED***,
   "start_seconds": null,
   "end_seconds": 236
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=XoiEkEuCWog",
-  "title": "Bebe Rexha - \"No Broken Hearts\" ft. Nicki Minaj (Official Music Video)",
-  "duration": 249,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 249
 ***REMOVED***
 ;
 ***REMOVED***
@@ -4496,31 +4246,6 @@
   ***REMOVED***,
   "start_seconds": null,
   "end_seconds": 420
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=jPajWtrDRFk",
-  "title": "Migos - Slippery ft Gucci Mane [Audio Only]",
-  "duration": 305,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 305
 ***REMOVED***
 ;
 ***REMOVED***
@@ -4826,31 +4551,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=YvOROjBu8ms",
-  "title": "Machine Gun Kelly - Dopeman (Official Video)",
-  "duration": 300,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 300
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=yU6gG-p5FZc",
   "title": "Rag'n'Bone Man - Skin (Audio)",
   "duration": 240,
@@ -4976,56 +4676,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=CDUrpPvU1_4",
-  "title": "Hallelujah Money (feat. Benjamin Clementine) - Gorillaz",
-  "duration": 270,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 270
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=20y_RhUq9C0",
-  "title": "Kris Wu - Juice (Official Music Video)",
-  "duration": 222,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 222
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=r2LpOUwca94",
   "title": "Major Lazer \u2013 Light it Up (feat. Nyla & Fuse ODG) [Music Video Remix] by Method Studios",
   "duration": 171,
@@ -5121,31 +4771,6 @@
   ***REMOVED***,
   "start_seconds": null,
   "end_seconds": 181
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=NTayABOrFrk",
-  "title": "Young Thug - Guwop feat. Quavo, Offset, and Young Scooter [Official Video]",
-  "duration": 317,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 317
 ***REMOVED***
 ;
 ***REMOVED***
@@ -5376,56 +5001,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=8kOS4Ng48pY",
-  "title": "Lil Bibby \"Thought It Was A Drought\" (WSHH Exclusive - Official Music Video)",
-  "duration": 178,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 178
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=jAFGTOhfR7Y",
-  "title": "Young M.A \"Get This Money\" (Official Video)",
-  "duration": 278,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 278
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=abCRTqCKmy0",
   "title": "Jacob Sartorius - Last Text (Official Music Video)",
   "duration": 198,
@@ -5446,31 +5021,6 @@
   ***REMOVED***,
   "start_seconds": null,
   "end_seconds": 198
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=RetJFlNGbkQ",
-  "title": "Lil Bibby \"You Ain't Gang (Remix)\" Feat. Kevin Gates, Lil Durk & DeJ Loaf (WSHH Exclusive - Audio)",
-  "duration": 275,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 275
 ***REMOVED***
 ;
 ***REMOVED***
@@ -5671,31 +5221,6 @@
   ***REMOVED***,
   "start_seconds": null,
   "end_seconds": 239
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=iIPH8LFYFRk",
-  "title": "BIGBANG - \u2018\uc5d0\ub77c \ubaa8\ub974\uaca0\ub2e4(FXXK IT)\u2019 M/V",
-  "duration": 243,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 243
 ***REMOVED***
 ;
 ***REMOVED***
@@ -7196,31 +6721,6 @@
   ***REMOVED***,
   "start_seconds": null,
   "end_seconds": 219
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=bWZ8Itjy7Qw",
-  "title": "Rae Sremmurd - Now That I Know",
-  "duration": 244,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 244
 ***REMOVED***
 ;
 ***REMOVED***
