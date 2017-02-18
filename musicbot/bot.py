@@ -1,3 +1,5 @@
+import asyncio
+import configparser
 import datetime
 import inspect
 import json
@@ -29,9 +31,6 @@ from discord.object import Object
 from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from pyshorteners import Shortener
-
-import asyncio
-import configparser
 
 from . import downloader, exceptions
 from .cleverbot import Cleverbot
@@ -2618,6 +2617,8 @@ class MusicBot(discord.Client):
             {command_prefix}random item1, item2, item3...
             {command_prefix}random name of the set ¯\_(ツ)_/¯
             {command_prefix}random create name, option1, option2, option3...
+            {command_prefix}random edit name, [add/remove/replace], item [, item2, item3]
+            {command_prefix}random remove name
             {command_prefix}random list
 
         Choose a random item out of a list or use a pre-defined list.
@@ -2644,6 +2645,45 @@ class MusicBot(discord.Client):
                     s[0], ", ".join(s[1]))
 
             return Response(return_string)
+        elif items[0].split()[0].lower().strip() == "edit":
+            if len(items[0].split()) < 2:
+                return Response("Please provide the name of the list you wish to edit!", delete_after=20)
+
+            set_name = "_".join(items[0].split()[1:]).lower().strip()
+
+            existing_items = self.random_sets.get_set(set_name)
+            if existing_items is None:
+                return Response("This set does not exist!", delete_after=30)
+
+            edit_mode = items[1].strip().lower() if len(items) > 1 else None
+            if edit_mode is None:
+                return Response("You need to provide the way you want to edit the list", delete_after=20)
+
+            if len(items) < 3:
+                return Response("You have to specify the items you want to add/remove or set as the new items")
+
+            if edit_mode == "add":
+                for option in items[2:]:
+                    self.random_sets.add_option(set_name, option)
+            elif edit_mode == "remove":
+                for option in items[2:]:
+                    self.random_sets.remove_option(set_name, option)
+            elif edit_mode == "replace":
+                self.random_sets.replace_options(set_name, items[2:])
+            else:
+                return Response("This is not a valid edit mode!", delete_after=20)
+
+            return Response("Edited your set!", delete_after=20)
+        elif items[0].split()[0].lower().strip() == "remove":
+            set_name = "_".join(items[0].split()[1:]).lower().strip()
+            set_items = items[1:]
+            res = self.random_sets.remove_set(set_name, set_items):
+            if res:
+                return Response("Removed set!", delete_after=20)
+            elif res is None:
+                return Response("No such set!", delete_after=20)
+            else:
+                return Response("OMG, shit went bad quickly! Everything's burning!\nDUCK there he goes again, the dragon's coming. Eat HIM not me. PLEEEEEEEEEEEEEASE!")
 
         if len(items) <= 0:
             return Response("Is your name \"{0}\" by any chance?\n(This is not how this command works. Use `{1}help random` to find out how not to be a stupid *{0}* anymore)".format(author.name, self.config.command_prefix), delete_after=30)
