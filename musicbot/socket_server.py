@@ -1,9 +1,8 @@
+import asyncio
 import re
 import time
 from socket import *
 from threading import Thread
-
-import asyncio
 
 from .spotify import SpotifyTrack
 
@@ -182,7 +181,8 @@ class SocketServer:
                 else:
                     continue
 
-                response = "INFORMATION;PLAYLISTS;{}".format(self.get_playlists_string(player, server_id))
+                response = "INFORMATION;PLAYLISTS;{}".format(
+                    self.get_playlists_string(player, server_id))
                 c_socket.sendall("{}=={}".format(
                     len(response), response).encode("utf-8"))
 
@@ -323,10 +323,12 @@ class SocketServer:
         for playlist in playlists:
             values = {}
             values["name"] = playlist[0]
-            values["author"] = self.musicbot.get_server(server_id).get_member(playlist[1].get("author")).name
+            values["author"] = self.musicbot.get_server(
+                server_id).get_member(playlist[1].get("author")).name
             values["replays"] = playlist[1].get("replay_count")
             values["entry_count"] = playlist[1].get("entry_count")
-            values["playtime"] = str(sum([x.duration for x in playlist[1].get("entries")]))
+            values["playtime"] = str(
+                sum([x.duration for x in playlist[1].get("entries")]))
             playlist_strings.append(base_playlist_layout.format(**values))
 
         workString += ";".join(playlist_strings)

@@ -3040,6 +3040,24 @@ class MusicBot(discord.Client):
                 return Response("Successfully joined the game **{}**".format(token.upper()))
             else:
                 return Response("Failed to join game **{}**".format(token.upper()))
+        elif argument == "leave":
+            token = leftover_args[1].lower() if len(
+                leftover_args) > 1 else None
+            if token is None:
+                return Response("You need to provide a token", delete_after=15)
+
+            g = self.cah.get_game(token)
+
+            if g is None:
+                return Response("This game does not exist *shrugs*", delete_after=15)
+
+            if not g.in_game(author.id):
+                return Response("You're not part of this game!", delete_after=15)
+
+            if self.cah.player_leave_game(author.id, token):
+                return Response("Successfully left the game **{}**".format(token.upper()))
+            else:
+                return Response("Failed to leave game **{}**".format(token.upper()))
         elif argument == "start":
             token = leftover_args[1].lower() if len(
                 leftover_args) > 1 else None
@@ -3068,17 +3086,24 @@ class MusicBot(discord.Client):
             if not g.is_owner(author.id):
                 return Response("Only the owner may stop a game!", delete_after=15)
 
+            self.cah.stop_game(g.token)
+            return Response("Stopped the game **{}**".format(token), delete_after=15)
+
     async def cmd_cards(self, server, channel, author, leftover_args):
         """
         Usage:
-            {command_prefix}cards list
-                *list all the available cards*
+            {command_prefix}cards list [text/occurences/date/random/none/author/id]
+                -list all the available cards
             {command_prefix}cards create text
-                *create a new card with text*
-            {command_prefix}cards edit id
-                *edit a card by its id*
+                -create a new card with text
+            {command_prefix}cards edit id new_text
+                -edit a card by its id
             {command_prefix}cards info id
-                *Get more detailed information about a card*
+                -Get more detailed information about a card
+            {command_prefix}cards search query
+                -Search for a card
+            {command_prefix}cards delete id
+                -Delete a question card
 
         Here you manage the non question cards
         """
@@ -3087,21 +3112,47 @@ class MusicBot(discord.Client):
             leftover_args) > 0 else None
 
         if argument == "list":
-            card_string = "{0.id}. *[{0.text}]*"
-            cards = []
-            for card in self.cah.cards.cards:
-                cards.append(card_string.format(
-                    card))
+            sort_modes = {"text": (lambda entry: entry.text, False), "random": None, "occurences": (lambda entry: entry.occurences, True), "date": (
+                lambda entry: entry.creation_date, False), "date": (lambda entry: entry.creation_date, False), "author": (lambda entry: entry.author_id, False), "id": (lambda entry: entry.id, False)}
 
-            return Response("**These are the available cards:**\n\n" + "\n".join(cards))
+            cards = self.cah.cards.cards.copy()
+            sort_mode = leftover_args[1].lower() if len(leftover_args) > 1 and leftover_args[
+                1].lower() in sort_modes.keys() else "none"
+
+            if sort_mode == "random":
+                shuffle(cards)
+            elif sort_mode != "none":
+                cards = sorted(cards, key=sort_modes[sort_mode][
+                               0], reverse=sort_modes[sort_mode][1])
+
+            await self.card_viewer(channel, author, cards)
+        elif argument == "search":
+            search_query = " ".join(leftover_args[1:]) if len(
+                leftover_args) > 1 else None
+
+            if search_query is None:
+                return Response("You need to provide a query to search for!", delete_after=15)
+
+            results = self.cah.cards.search_card(search_query, 3)
+
+            if len(results) < 1:
+                return Response("**Didn't find any cards!**", delete_after=15)
+
+            card_string = "{0.id}. \"*{1}*\""
+            cards = []
+            for card in results:
+                cards.append(card_string.format(
+                    card, card.text.replace("$", "_____")))
+
+            return Response("**I found the following cards:**\n\n" + "\n".join(cards), delete_after=40)
         elif argument == "info":
             card_id = leftover_args[1].lower().strip() if len(
                 leftover_args) > 1 else None
 
             card = self.cah.cards.get_card(card_id)
             if card is not None:
-                info = "Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ncreated {3}```"
-                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date)))
+                info = "Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ncreated {3}```\nUse `{4}cards edit {0.id}` to edit this card"
+                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date), self.config.command_prefix))
 
             return Response("There's no card with that id. Use `{}cards list` to list all the possible cards".format(self.config.command_prefix))
         elif argument == "create":
@@ -3114,22 +3165,119 @@ class MusicBot(discord.Client):
             if len(text) > 140:
                 return Response("Maybe a bit too long?", delete_after=20)
 
+            already_has_card, card = self.cah.cards.card_with_text(text)
+            if already_has_card:
+                return Response("There's already a card with a fairly similar content. <{0}>\nUse `{1}cards info {0}` to find out more about this card".format(card.id, self.config.command_prefix))
+
             card_id = self.cah.cards.add_card(text, author.id)
             return Response("Successfully created card **{}**".format(card_id))
+        elif argument == "edit":
+            card_id = leftover_args[1].lower().strip() if len(
+                leftover_args) > 1 else None
+
+            try:
+                card_id_value = int(card_id)
+            except:
+                return Response("An id must be a number", delete_after=20)
+
+            if card_id is None:
+                return Response("You need to provide the card's id!", delete_after=20)
+
+            text = " ".join(leftover_args[2:]) if len(
+                leftover_args) > 1 else None
+            if text is None:
+                return Response("You might want to actually add some text to your card", delete_after=20)
+            if len(text) < 3:
+                return Response("I think that's a bit too short...", delete_after=20)
+            if len(text) > 140:
+                return Response("Maybe a bit too long?", delete_after=20)
+
+            already_has_card, card = self.cah.cards.card_with_text(text)
+            if already_has_card and card.id != card_id_value:
+                return Response("There's already a card with a fairly similar content. <{0}>\nUse `{1}cards info {0}` to find out more about this card".format(card.id, self.config.command_prefix))
+
+            if self.cah.cards.edit_card(card_id, text):
+                return Response("Edited card <**{}**>".format(card_id), delete_after=15)
+            else:
+                return Response("There's no card with that id", delete_after=15)
+        elif argument == "delete":
+            card_id = leftover_args[1].lower().strip() if len(
+                leftover_args) > 1 else None
+
+            if card_id is None:
+                return Response("You must specify the card id", delete_after=15)
+
+            if self.cah.cards.remove_card(card_id):
+                return Response("Deleted card <**{}**>".format(card_id), delete_after=15)
+            else:
+                return Response("Could not remove card <**{}**>".format(card_id), delete_after=15)
         else:
             return await self.cmd_help(channel, ["cards"])
+
+    async def card_viewer(self, channel, author, cards):
+        cmds = ("n", "p", "exit")
+        site_interface = "**Cards | Page {0} of {1}**\n```\n{2}\n```\nShit you can do:\n`n`: Switch to the next page\n`p`: Switch to the previous page\n`exit`: Exit the viewer"
+        card_string = "<{}> [{}]"
+
+        items_per_page = 20
+        timeout = 60
+        current_page = 0
+
+        total_pages, items_on_last_page = divmod(len(cards), items_per_page)
+
+        def msg_check(msg):
+            return msg.content.lower().strip().startswith(cmds)
+
+        while True:
+            start_index = current_page * items_per_page
+            end_index = start_index + \
+                (items_per_page if current_page !=
+                 total_pages - 1 else items_on_last_page)
+            page_cards = cards[start_index:end_index]
+
+            page_cards_texts = []
+            for p_c in page_cards:
+                page_cards_texts.append(card_string.format(p_c.id, p_c.text))
+
+            interface_msg = await self.safe_send_message(channel, site_interface.format(current_page + 1, total_pages, "\n".join(page_cards_texts)))
+            user_msg = await self.wait_for_message(timeout, author=author, channel=channel, check=msg_check)
+
+            if not user_msg:
+                await self.safe_delete_message(interface_msg)
+                break
+
+            content = user_msg.content.lower().strip()
+
+            if content.startswith("n"):
+                await self.safe_delete_message(interface_msg)
+                await self.safe_delete_message(user_msg)
+                current_page = (current_page + 1) % total_pages
+            elif content.startswith("p"):
+                await self.safe_delete_message(interface_msg)
+                await self.safe_delete_message(user_msg)
+                current_page = (current_page - 1) % total_pages
+            elif content.startswith("exit"):
+                await self.safe_delete_message(interface_msg)
+                await self.safe_delete_message(user_msg)
+                break
+
+        await self.safe_send_message(channel, "Closed the card viewer!", expire_in=20)
 
     async def cmd_qcards(self, server, channel, author, leftover_args):
         """
         Usage:
-            {command_prefix}qcards list
-                *list all the available question cards*
+            {command_prefix}qcards list [text/occurences/date/random/none/author/id/blanks]
+                -list all the available question cards
             {command_prefix}qcards create text (use $ for blanks)
-                *create a new question card with text and if you want the number of cards to draw*
-            {command_prefix}qcards edit id
-                *edit a question card by its id*
+                -create a new question card with text and if you want the number of cards to draw
+            {command_prefix}qcards edit id new_text
+                -edit a question card by its id
             {command_prefix}qcards info id
-                *Get more detailed information about a question card*
+                -Get more detailed information about a question card
+            {command_prefix}qcards search query
+                -Search for a question card
+            {command_prefix}qcards delete id
+                -Delete a question card
 
         Here you manage the question cards
         """
@@ -3138,21 +3286,47 @@ class MusicBot(discord.Client):
             leftover_args) > 0 else None
 
         if argument == "list":
+            sort_modes = {"text": (lambda entry: entry.text, False), "random": None, "occurences": (lambda entry: entry.occurences, True), "date": (lambda entry: entry.creation_date, False), "date": (
+                lambda entry: entry.creation_date, False), "author": (lambda entry: entry.author_id, False), "id": (lambda entry: entry.id, False), "blanks": (lambda entry: entry.number_of_blanks, False)}
+
+            cards = self.cah.cards.question_cards.copy()
+            sort_mode = leftover_args[1].lower() if len(leftover_args) > 1 and leftover_args[
+                1].lower() in sort_modes.keys() else "none"
+
+            if sort_mode == "random":
+                shuffle(cards)
+            elif sort_mode != "none":
+                cards = sorted(cards, key=sort_modes[sort_mode][
+                               0], reverse=sort_modes[sort_mode][1])
+
+            await self.qcard_viewer(channel, author, cards)
+        elif argument == "search":
+            search_query = " ".join(leftover_args[1:]) if len(
+                leftover_args) > 1 else None
+
+            if search_query is None:
+                return Response("You need to provide a query to search for!", delete_after=15)
+
+            results = self.cah.cards.search_question_card(search_query, 3)
+
+            if len(results) < 1:
+                return Response("**Didn't find any question cards!**", delete_after=15)
+
             card_string = "{0.id}. \"*{1}*\""
             cards = []
-            for card in self.cah.cards.question_cards:
+            for card in results:
                 cards.append(card_string.format(
-                    card, card.text.replace("$", "BLANK")))
+                    card, card.text.replace("$", "\_\_\_\_\_")))
 
-            return Response("**These are the available question cards:**\n\n" + "\n".join(cards))
+            return Response("**I found the following question cards:**\n\n" + "\n".join(cards), delete_after=40)
         elif argument == "info":
             card_id = leftover_args[1].lower().strip() if len(
                 leftover_args) > 1 else None
 
             card = self.cah.cards.get_question_card(card_id)
             if card is not None:
-                info = "Question Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ncreated {3}```"
-                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date)))
+                info = "Question Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ncreated {3}```\nUse `{4}cards edit {0.id}` to edit this card`"
+                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date), self.config.command_prefix))
         elif argument == "create":
             text = " ".join(leftover_args[1:]) if len(
                 leftover_args) > 1 else None
@@ -3166,10 +3340,109 @@ class MusicBot(discord.Client):
             if text.count("$") < 1:
                 return Response("You need to have at least one blank ($) space", delete_after=20)
 
+            already_has_card, card = self.cah.cards.question_card_with_text(
+                text)
+            if already_has_card:
+                return Response("There's already a question card with a fairly similar content. <{0}>\nUse `{1}qcards info {0}` to find out more about this card".format(card.id, self.config.command_prefix))
+
             card_id = self.cah.cards.add_question_card(text, author.id)
             return Response("Successfully created question card **{}**".format(card_id))
+        elif argument == "edit":
+            card_id = leftover_args[1].lower().strip() if len(
+                leftover_args) > 1 else None
+
+            try:
+                card_id_value = int(card_id)
+            except:
+                return Response("An id must be a number", delete_after=20)
+
+            if card_id is None:
+                return Response("You need to provide the question card's id!", delete_after=20)
+
+            text = " ".join(leftover_args[2:]) if len(
+                leftover_args) > 2 else None
+            if text is None:
+                return Response("You might want to actually add some text to your question card", delete_after=20)
+            if len(text) < 3:
+                return Response("I think that's a bit too short...", delete_after=20)
+            if len(text) > 500:
+                return Response("Maybe a bit too long?", delete_after=20)
+
+            if text.count("$") < 1:
+                return Response("You need to have at least one blank ($) space", delete_after=20)
+
+            already_has_card, card = self.cah.cards.question_card_with_text(
+                text)
+            if already_has_card and card.id != card_id_value:
+                return Response("There's already a question card with a fairly similar content. <{0}>\nUse `{1}qcards info {0}` to find out more about this question card".format(card.id, self.config.command_prefix))
+
+            if self.cah.cards.edit_question_card(card_id, text):
+                return Response("Edited question card <**{}**>".format(card_id), delete_after=15)
+            else:
+                return Response("There's no question card with that id", delete_after=15)
+        elif argument == "delete":
+            card_id = leftover_args[1].lower().strip() if len(
+                leftover_args) > 1 else None
+
+            if card_id is None:
+                return Response("You must specify the question card id", delete_after=15)
+
+            if self.cah.cards.remove_question_card(card_id):
+                return Response("Deleted question card <**{}**>".format(card_id), delete_after=15)
+            else:
+                return Response("Could not remove question card <**{}**>".format(card_id), delete_after=15)
         else:
             return await self.cmd_help(channel, ["qcards"])
+
+    async def qcard_viewer(self, channel, author, cards):
+        cmds = ("n", "p", "exit")
+        site_interface = "**Question Cards | Page {0} of {1}**\n```\n{2}\n```\nShit you can do:\n`n`: Switch to the next page\n`p`: Switch to the previous page\n`exit`: Exit the viewer"
+        card_string = "<{}> \"{}\""
+
+        items_per_page = 20
+        timeout = 60
+        current_page = 0
+
+        total_pages, items_on_last_page = divmod(len(cards), items_per_page)
+
+        def msg_check(msg):
+            return msg.content.lower().strip().startswith(cmds)
+
+        while True:
+            start_index = current_page * items_per_page
+            end_index = start_index + \
+                (items_per_page if current_page !=
+                 total_pages - 1 else items_on_last_page)
+            page_cards = cards[start_index:end_index]
+
+            page_cards_texts = []
+            for p_c in page_cards:
+                page_cards_texts.append(card_string.format(
+                    p_c.id, p_c.text.replace("$", "_____")))
+
+            interface_msg = await self.safe_send_message(channel, site_interface.format(current_page + 1, total_pages, "\n".join(page_cards_texts)))
+            user_msg = await self.wait_for_message(timeout, author=author, channel=channel, check=msg_check)
+
+            if not user_msg:
+                await self.safe_delete_message(interface_msg)
+                break
+
+            content = user_msg.content.lower().strip()
+
+            if content.startswith("n"):
+                await self.safe_delete_message(interface_msg)
+                await self.safe_delete_message(user_msg)
+                current_page = (current_page + 1) % total_pages
+            elif content.startswith("p"):
+                await self.safe_delete_message(interface_msg)
+                await self.safe_delete_message(user_msg)
+                current_page = (current_page - 1) % total_pages
+            elif content.startswith("exit"):
+                await self.safe_delete_message(interface_msg)
+                await self.safe_delete_message(user_msg)
+                break
+
+        await self.safe_send_message(channel, "Closed the question card viewer!", expire_in=20)
 
     async def cmd_game(self, message, channel, author, leftover_args, game=None):
         """
