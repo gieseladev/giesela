@@ -63,12 +63,13 @@ class QuestionCard:
 
 class Card:
 
-    def __init__(self, card_id, text, occurences, creator_id, creation_date):
+    def __init__(self, card_id, text, occurences, creator_id, creation_date, picked_up_count):
         self.id = card_id
         self.text = text
         self.occurences = occurences
         self.creator_id = creator_id
         self.creation_date = creation_date
+        self.picked_up_count = picked_up_count
 
     @classmethod
     def blank_card(cls):
@@ -77,8 +78,11 @@ class Card:
     def bump_occurences(self):
         self.occurences += 1
 
+    def picked_card(self):
+        self.picked_up_count += 1
+
     def __repr__(self):
-        return "<{0.id}> \"{0.text}\" [{0.creator_id} | {0.creation_date} | {0.occurences}]".format(self)
+        return "<{0.id}> \"{0.text}\" [{0.creator_id} | {0.creation_date} | {0.occurences} / {0.picked_up_count}]".format(self)
 
 
 class Cards:
@@ -145,6 +149,8 @@ class Cards:
             text = config_parser.get(section, "text")
             occurances = int(config_parser.get(
                 section, "occurences", fallback=0))
+            picked_up_count = int(config_parser.get(
+                section, "picked_up_count", fallback=0))
             creator_id = config_parser.get(
                 section, "creator_id", fallback="0")
             creation_date_string = config_parser.get(
@@ -158,7 +164,7 @@ class Cards:
                                          "hour"], m_date["minute"], m_date["second"])
 
             self.cards.append(Card(
-                card_id, text, occurances, creator_id, creation_date))
+                card_id, text, occurances, creator_id, creation_date, picked_up_count))
 
     def save_cards(self):
         config_parser = configparser.ConfigParser(interpolation=None)
@@ -168,6 +174,8 @@ class Cards:
             config_parser.add_section(sec)
             config_parser.set(sec, "text", card.text)
             config_parser.set(sec, "occurences", str(card.occurences))
+            config_parser.set(sec, "picked_up_count",
+                              str(card.picked_up_count))
             config_parser.set(sec, "creator_id", str(card.creator_id))
             config_parser.set(sec, "creation_datetime", json.dumps({"year": card.creation_date.year, "month": card.creation_date.month,
                                                                     "day": card.creation_date.day, "hour": card.creation_date.hour, "minute": card.creation_date.minute, "second": card.creation_date.second}))
@@ -192,7 +200,8 @@ class Cards:
 
         card_id = self.get_unique_id()
         self.ids_used.append(card_id)
-        self.cards.append(Card(card_id, text, 0, creator_id, datetime.now()))
+        self.cards.append(
+            Card(card_id, text, 0, creator_id, datetime.now(), 0))
         self.save_cards()
         return card_id
 
@@ -304,6 +313,15 @@ class Cards:
         c.bump_occurences()
         self.save_cards()
         self.save_question_cards()
+        return True
+
+    def bump_card_pick_count(self, card_id):
+        c = self.get_card(card_id)
+        if c is None:
+            return False
+
+        c.picked_card()
+        self.save_cards()
         return True
 
     def get_card_global(self, card_id):
@@ -552,6 +570,7 @@ class Game:
 
         i = random.randint(0, len(self.cards) - 1)
         card = self.cards.pop(i)
+        self.manager.cards.bump_card_pick_count(card.id)
 
         return card
 
@@ -757,7 +776,8 @@ class Round:
     def master_picks(self, index):
         self.clean_up()
         player_key, answers = self.answers_by_index[index]
-        player_key.bump_won(self.question_card.number_of_blanks, len(self.answers.keys()))
+        player_key.bump_won(
+            self.question_card.number_of_blanks, len(self.answers.keys()))
         print("[CAH] <{}: {}> Master ({}) has picked ({})\'s answer ({})".format(
             self.game.token, self.round_index, self.master, player_key, answers))
 

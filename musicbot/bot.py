@@ -3151,8 +3151,8 @@ class MusicBot(discord.Client):
 
             card = self.cah.cards.get_card(card_id)
             if card is not None:
-                info = "Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ncreated {3}```\nUse `{4}cards edit {0.id}` to edit this card"
-                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date), self.config.command_prefix))
+                info = "Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ndrawn {0.picked_up_count} time{5}\ncreated {3}```\nUse `{4}cards edit {0.id}` to edit this card"
+                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date), self.config.command_prefix, "s" if card.picked_up_count != 1 else ""))
 
             return Response("There's no card with that id. Use `{}cards list` to list all the possible cards".format(self.config.command_prefix))
         elif argument == "create":
