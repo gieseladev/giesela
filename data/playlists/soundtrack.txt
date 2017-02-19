@@ -1,9 +1,9 @@
 {
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=sFWpX4y9sZ0",
-  "title": "(CD2) The Amazing Spider-Man 2 OST 24 - No Place Like Home by Hans Zimmer And The Magnificent Six",
-  "duration": 112,
+  "url": "https://www.youtube.com/watch?v=1JHrNHGFIdc",
+  "title": "\u30a2\u30e1\u30a4\u30b8\u30f3\u30b0\u30b9\u30d1\u30a4\u30c0\u30fc\u30de\u30f32\u66f2  Electro Remix",
+  "duration": 194,
   "downloaded": false,
   "filename": null,
   "expected_filename": null,
@@ -20,7 +20,7 @@
     }
   },
   "start_seconds": null,
-  "end_seconds": 112
+  "end_seconds": 194
 }
 ;
 {
