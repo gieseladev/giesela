@@ -3264,7 +3264,7 @@ class MusicBot(discord.Client):
         timeout = 60
         current_page = 0
 
-        total_pages, items_on_last_page = divmod(len(cards), items_per_page)
+        total_pages, items_on_last_page = divmod(len(cards) - 1, items_per_page)
 
         def msg_check(msg):
             return msg.content.lower().strip().startswith(cmds)
@@ -3272,15 +3272,15 @@ class MusicBot(discord.Client):
         while True:
             start_index = current_page * items_per_page
             end_index = start_index + \
-                (items_per_page if current_page !=
-                 total_pages - 1 else items_on_last_page)
+                (items_per_page - 1 if current_page <
+                 total_pages else items_on_last_page)
             page_cards = cards[start_index:end_index]
 
             page_cards_texts = []
             for p_c in page_cards:
                 page_cards_texts.append(card_string.format(p_c.id, p_c.text))
 
-            interface_msg = await self.safe_send_message(channel, site_interface.format(current_page + 1, total_pages, "\n".join(page_cards_texts)))
+            interface_msg = await self.safe_send_message(channel, site_interface.format(current_page + 1, total_pages + 1, "\n".join(page_cards_texts)))
             user_msg = await self.wait_for_message(timeout, author=author, channel=channel, check=msg_check)
 
             if not user_msg:
@@ -3292,11 +3292,12 @@ class MusicBot(discord.Client):
             if content.startswith("n"):
                 await self.safe_delete_message(interface_msg)
                 await self.safe_delete_message(user_msg)
-                current_page = (current_page + 1) % total_pages
+                current_page = (current_page + 1) % (total_pages + 1)
             elif content.startswith("p"):
                 await self.safe_delete_message(interface_msg)
                 await self.safe_delete_message(user_msg)
-                current_page = (current_page - 1) % total_pages
+                current_page = (current_page - 1) % (total_pages + 1
+)
             elif content.startswith("exit"):
                 await self.safe_delete_message(interface_msg)
                 await self.safe_delete_message(user_msg)
@@ -3444,7 +3445,7 @@ class MusicBot(discord.Client):
         timeout = 60
         current_page = 0
 
-        total_pages, items_on_last_page = divmod(len(cards), items_per_page)
+        total_pages, items_on_last_page = divmod(len(cards) - 1, items_per_page)
 
         def msg_check(msg):
             return msg.content.lower().strip().startswith(cmds)
@@ -3452,8 +3453,8 @@ class MusicBot(discord.Client):
         while True:
             start_index = current_page * items_per_page
             end_index = start_index + \
-                (items_per_page if current_page !=
-                 total_pages - 1 else items_on_last_page)
+                (items_per_page - 1 if current_page <
+                 total_pages else items_on_last_page)
             page_cards = cards[start_index:end_index]
 
             page_cards_texts = []
@@ -3461,7 +3462,7 @@ class MusicBot(discord.Client):
                 page_cards_texts.append(card_string.format(
                     p_c.id, p_c.text.replace("$", "_____")))
 
-            interface_msg = await self.safe_send_message(channel, site_interface.format(current_page + 1, total_pages, "\n".join(page_cards_texts)))
+            interface_msg = await self.safe_send_message(channel, site_interface.format(current_page + 1, total_pages + 1, "\n".join(page_cards_texts)))
             user_msg = await self.wait_for_message(timeout, author=author, channel=channel, check=msg_check)
 
             if not user_msg:
@@ -3473,11 +3474,11 @@ class MusicBot(discord.Client):
             if content.startswith("n"):
                 await self.safe_delete_message(interface_msg)
                 await self.safe_delete_message(user_msg)
-                current_page = (current_page + 1) % total_pages
+                current_page = (current_page + 1) % (total_pages + 1)
             elif content.startswith("p"):
                 await self.safe_delete_message(interface_msg)
                 await self.safe_delete_message(user_msg)
-                current_page = (current_page - 1) % total_pages
+                current_page = (current_page - 1) % (total_pages + 1)
             elif content.startswith("exit"):
                 await self.safe_delete_message(interface_msg)
                 await self.safe_delete_message(user_msg)
