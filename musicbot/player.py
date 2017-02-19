@@ -183,7 +183,7 @@ class MusicPlayer(EventEmitter):
             return False
 
         c_entry = self.current_entry
-        c_entry.start_seconds = secs
+        c_entry.set_start(secs)
         self.play_entry(c_entry)
         return True
 

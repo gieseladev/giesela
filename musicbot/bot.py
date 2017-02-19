@@ -4681,22 +4681,37 @@ class MusicBot(discord.Client):
         except Exception as e:
             return Response("Something went wrong with your code:\n```\n***REMOVED******REMOVED***\n```".format(str(e)))
 
-    async def cmd_advanceto(self, player, seconds):
+    async def cmd_skipto(self, player, timestamp):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***advanceto seconds
+            ***REMOVED***command_prefix***REMOVED***skipto timestamp
 
-        Skip to x seconds in to the video
+        Go to the given timestamp formatted (minutes:seconds)
         """
-        try:
-            seconds=int(seconds)
-        except:
-            return Response("Must be a number", delete_after = 20)
+
+        parts=timestamp.split(":")
+        if len(parts) < 1:  # Shouldn't occur, but who knows?
+            return Response("Please provide a valid timestamp", delete_after = 20)
+
+        # seconds, minutes, hours, days
+        values=(1, 60, 60 * 60, 60 * 60 * 24)
+
+        secs=0
+        for i in range(len(parts)):
+            try:
+                v=int(parts[i])
+            except:
+                continue
+
+          j=len(parts) - i - 1
+          if j >= len(values):  # If I don't have a conversion from this to seconds
+              continue
+          secs += v * values[j]
 
         if player.current_entry is None:
             return Response("Nothing playing!", delete_after = 20)
 
-        if not player.goto_seconds(seconds):
+        if not player.goto_seconds(secs):
             return Response("Timestamp exceeds song duration!", delete_after = 20)
 
     async def cmd_register(self, author, server, token):
