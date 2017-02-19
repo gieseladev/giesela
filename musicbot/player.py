@@ -124,6 +124,7 @@ class MusicPlayer(EventEmitter):
 
         self.loop.create_task(self.websocket_check())
         self.bot.socket_server.threaded_broadcast_information()
+        self.handle_manually = False
 
     @property
     def volume(self):
@@ -177,6 +178,15 @@ class MusicPlayer(EventEmitter):
 
         raise ValueError('Cannot resume playback from state %s' % self.state)
 
+    def goto_seconds(self, secs):
+        if (not self.current_entry) or secs >= self.current_entry.end_seconds:
+            return False
+
+        c_entry = self.current_entry
+        c_entry.start_seconds = secs
+        self.play_entry(c_entry)
+        return True
+
     def pause(self):
         if type(self.current_entry).__name__ == "StreamPlaylistEntry":
             print("Won't pause because I'm playing a stream")
@@ -207,6 +217,10 @@ class MusicPlayer(EventEmitter):
         self.bot.socket_server.threaded_broadcast_information()
 
     def _playback_finished(self):
+        if self.handle_manually:
+            self.handle_manually = False
+            return
+
         entry = self._current_entry
 
         if self.is_repeatAll or (self.is_repeatSingle and not self.skipRepeat):
@@ -301,10 +315,12 @@ class MusicPlayer(EventEmitter):
 
                 self._current_player = self._monkeypatch_player(self.voice_client.create_ffmpeg_player(
                     entry.filename,
-                    #before_options="-nostdin -ss " + format_time_ffmpeg(int(entry.start_seconds)),
-                    before_options="-nostdin",
-                    #options="-vn -t {} -b:a 128k".format(format_time_ffmpeg(int(entry.end_seconds))),
-                    options="-vn -b:a 128k",
+                    before_options="-nostdin -ss {}".format(
+                        format_time_ffmpeg(int(entry.start_seconds))),
+                    # before_options="-nostdin",
+                    options="-vn -to {} -b:a 128k".format(format_time_ffmpeg(
+                        int(entry.end_seconds - entry.start_seconds))),
+                    # options="-vn -b:a 128k",
                     stderr=subprocess.PIPE,
                     # Threadsafe call soon, b/c after will be called from the
                     # voice playback thread.
@@ -329,6 +345,53 @@ class MusicPlayer(EventEmitter):
                 self._current_player.start()
                 self.emit('play', player=self, entry=entry)
                 self.bot.socket_server.threaded_broadcast_information()
+
+    def play_entry(self, entry):
+        self.loop.create_task(self._play_entry(entry))
+
+    async def _play_entry(self, entry):
+        self.handle_manually = True
+
+        if self.is_dead:
+            print("ded")
+            return
+
+        with await self._play_lock:
+            # In-case there was a player, kill it. RIP.
+            self._kill_current_player()
+
+            self._current_player = self._monkeypatch_player(self.voice_client.create_ffmpeg_player(
+                entry.filename,
+                before_options="-nostdin -ss {}".format(
+                    format_time_ffmpeg(int(entry.start_seconds))),
+                # before_options="-nostdin",
+                options="-vn -to {} -b:a 128k".format(format_time_ffmpeg(
+                    int(entry.end_seconds - entry.start_seconds))),
+                # options="-vn -b:a 128k",
+                stderr=subprocess.PIPE,
+                # Threadsafe call soon, b/c after will be called from the
+                # voice playback thread.
+                after=lambda: self.loop.call_soon_threadsafe(
+                    self._playback_finished)
+            ))
+            self._current_player.setDaemon(True)
+            self._current_player.buff.volume = self.volume
+
+            # I need to add ytdl hooks
+            self.state = MusicPlayerState.PLAYING
+            self._current_entry = entry
+            self._stderr_future = asyncio.Future()
+
+            stderr_thread = Thread(
+                target=filter_stderr,
+                args=(self._current_player.process, self._stderr_future),
+                name="{} stderr reader".format(self._current_player.name)
+            )
+
+            stderr_thread.start()
+            self._current_player.start()
+            self.emit('play', player=self, entry=entry)
+            self.bot.socket_server.threaded_broadcast_information()
 
     def _monkeypatch_player(self, player):
         original_buff = player.buff
@@ -393,7 +456,7 @@ class MusicPlayer(EventEmitter):
 
     @property
     def progress(self):
-        return round(self._current_player.buff.frame_count * 0.02)
+        return round(self._current_player.buff.frame_count * 0.02) + (self.current_entry.start_seconds if self.current_entry is not None else 0)
         # TODO: Properly implement this
         #       Correct calculation should be bytes_read/192k
         #       192k AKA sampleRate * (bitDepth / 8) * channelCount
