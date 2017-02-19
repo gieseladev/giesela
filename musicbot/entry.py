@@ -1,7 +1,8 @@
-import asyncio
 import json
 import os
 import traceback
+
+import asyncio
 
 from .exceptions import ExtractionError
 from .utils import get_header, md5sum, slugify
@@ -128,6 +129,8 @@ class URLPlaylistEntry(BasePlaylistEntry):
         downloaded = data['downloaded']
         filename = data['filename'] if downloaded else (
             data["expected_filename"] if data["expected_filename"] is not None else None)
+        start_seconds = data["start_seconds"]
+        end_seconds = data["end_seconds"]
         meta = ***REMOVED******REMOVED***
 
         # TODO: Better [name] fallbacks
@@ -142,7 +145,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
             except:
                 meta['author'] = "unknown"
 
-        return URLPlaylistEntry(playlist, url, title, duration, filename, **meta)
+        return URLPlaylistEntry(playlist, url, title, duration, filename, start_seconds, end_seconds, **meta)
 
     def to_json(self):
         meta_dict = ***REMOVED******REMOVED***
@@ -171,7 +174,18 @@ class URLPlaylistEntry(BasePlaylistEntry):
         return json.dumps(data, indent=2)
 
     def set_start(self, sec):
+        if sec >= self.end_seconds:
+            return False
+
         self.start_seconds = sec
+        return True
+
+    def set_end(self, sec):
+        if sec <= self.start_seconds:
+            return False
+
+        self.end_seconds = sec
+        return True
 
     # noinspection PyTypeChecker
     async def _download(self):
@@ -296,7 +310,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
 class StreamPlaylistEntry(BasePlaylistEntry):
 
-    def __init__(self, playlist, url, title, station_data = None, *, destination=None, **meta):
+    def __init__(self, playlist, url, title, station_data=None, *, destination=None, **meta):
         super().__init__()
 
         self.playlist = playlist
