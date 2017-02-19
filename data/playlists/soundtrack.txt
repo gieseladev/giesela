@@ -1,6 +1,56 @@
 {
   "version": 1,
   "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=1JHrNHGFIdc",
+  "title": "\u30a2\u30e1\u30a4\u30b8\u30f3\u30b0\u30b9\u30d1\u30a4\u30c0\u30fc\u30de\u30f32\u66f2  Electro Remix",
+  "duration": 194,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 194
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ats1VhmOESQ",
+  "title": "01 - Man Of Steel Soundtrack - Look to the Stars - Hans Zimmer",
+  "duration": 178,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 178
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=whewL7obhFM",
   "title": "01 I See Everything - Hans Zimmer - Sherlock Holmes A Game of Shadows Score",
   "duration": 39,
@@ -71,6 +121,31 @@
   },
   "start_seconds": null,
   "end_seconds": 190
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=i0yR4Eam3d8",
+  "title": "02 - Man Of Steel Soundtrack - Oil Rig - Hans Zimmer",
+  "duration": 106,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 106
 }
 ;
 {
@@ -15921,6 +15996,31 @@
   },
   "start_seconds": null,
   "end_seconds": 75
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Z51lfE2k7jU",
+  "title": "Undertale OST: 035 - Bird That Carries You Over A Disproportionately Small Gap",
+  "duration": 25,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "start_seconds": null,
+  "end_seconds": 25
 }
 ;
 {
