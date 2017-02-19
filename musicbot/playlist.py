@@ -623,7 +623,10 @@ class Playlist(EventEmitter):
             if next_entry:
                 next_entry.get_ready_future()
 
-        return await entry.get_ready_future()
+        try:
+            return await entry.get_ready_future()
+        except:
+            return await get_next_entry(self, predownload_next)
 
     def peek(self):
         """

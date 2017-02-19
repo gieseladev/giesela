@@ -2677,7 +2677,7 @@ class MusicBot(discord.Client):
         elif items[0].split()[0].lower().strip() == "remove":
             set_name = "_".join(items[0].split()[1:]).lower().strip()
             set_items = items[1:]
-            res = self.random_sets.remove_set(set_name, set_items):
+            res = self.random_sets.remove_set(set_name, set_items)
             if res:
                 return Response("Removed set!", delete_after=20)
             elif res is None:
@@ -2779,7 +2779,7 @@ class MusicBot(discord.Client):
         """
 
         if len(message.attachments) < 1:
-            await self.safe_send_message(channel, "You didn't attach anything, idiot.", expire_in=15)
+            return Response("You didn't attach anything, idiot.", delete_after=15)
             return
 
         await player.playlist.add_entry(message.attachments[0]["url"])
