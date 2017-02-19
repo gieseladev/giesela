@@ -70,7 +70,8 @@ class RandomSets:
         try:
             existing_items = self.get_set(name)
             existing_items.append(option)
-            self.random_sets.set(str(name), "items", str(json.dumps(existing_items)))
+            self.random_sets.set(str(name), "items",
+                                 str(json.dumps(existing_items)))
             self.save_sets()
             self.update_sets()
             return True
@@ -84,7 +85,8 @@ class RandomSets:
         try:
             existing_items = self.get_set(name)
             existing_items.remove(option)
-            self.random_sets.set(str(name), "items", str(json.dumps(existing_items)))
+            self.random_sets.set(str(name), "items",
+                                 str(json.dumps(existing_items)))
             self.save_sets()
             self.update_sets()
             return True
@@ -96,7 +98,8 @@ class RandomSets:
             return None
 
         try:
-            self.random_sets.set(str(name), "items", str(json.dumps(new_options)))
+            self.random_sets.set(str(name), "items",
+                                 str(json.dumps(new_options)))
             self.save_sets()
             self.update_sets()
             return True

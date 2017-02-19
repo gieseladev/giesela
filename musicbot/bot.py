@@ -1,5 +1,3 @@
-import asyncio
-import configparser
 import datetime
 import inspect
 import json
@@ -31,6 +29,9 @@ from discord.object import Object
 from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from pyshorteners import Shortener
+
+import asyncio
+import configparser
 
 from . import downloader, exceptions
 from .cleverbot import Cleverbot
@@ -2336,8 +2337,8 @@ class MusicBot(discord.Client):
         """
 
         if not self.config.auto_playlist:
-            await self.on_player_finished_playing(player)
             self.config.auto_playlist = True
+            await self.on_player_finished_playing(player)
             return Response("Playing from the autoplaylist", delete_after=20)
         else:
             self.config.auto_playlist = False
@@ -3153,7 +3154,7 @@ class MusicBot(discord.Client):
 
         if argument == "list":
             sort_modes = ***REMOVED***"text": (lambda entry: entry.text, False), "random": None, "occurences": (lambda entry: entry.occurences, True), "date": (
-                lambda entry: entry.creation_date, False), "date": (lambda entry: entry.creation_date, False), "author": (lambda entry: entry.author_id, False), "id": (lambda entry: entry.id, False)***REMOVED***
+                lambda entry: entry.creation_date, False), "date": (lambda entry: entry.creation_date, True), "author": (lambda entry: entry.author_id, False), "id": (lambda entry: entry.id, False)***REMOVED***
 
             cards = self.cah.cards.cards.copy()
             sort_mode = leftover_args[1].lower() if len(leftover_args) > 1 and leftover_args[
@@ -3327,7 +3328,7 @@ class MusicBot(discord.Client):
 
         if argument == "list":
             sort_modes = ***REMOVED***"text": (lambda entry: entry.text, False), "random": None, "occurences": (lambda entry: entry.occurences, True), "date": (lambda entry: entry.creation_date, False), "date": (
-                lambda entry: entry.creation_date, False), "author": (lambda entry: entry.author_id, False), "id": (lambda entry: entry.id, False), "blanks": (lambda entry: entry.number_of_blanks, False)***REMOVED***
+                lambda entry: entry.creation_date, True), "author": (lambda entry: entry.author_id, False), "id": (lambda entry: entry.id, False), "blanks": (lambda entry: entry.number_of_blanks, False)***REMOVED***
 
             cards = self.cah.cards.question_cards.copy()
             sort_mode = leftover_args[1].lower() if len(leftover_args) > 1 and leftover_args[
