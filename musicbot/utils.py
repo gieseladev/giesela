@@ -78,7 +78,7 @@ def format_time_ffmpeg(s):
     mins = int(total_minutes % 60 - (sec / 3600) - (msec / 3600000))
     hours = int(total_hours - (mins / 60) - (sec / 3600) - (msec / 3600000))
 
-    return "***REMOVED***:02d***REMOVED***:***REMOVED***:02d***REMOVED***:***REMOVED***:02d***REMOVED***.***REMOVED***:03d***REMOVED***".format(hours, mins, sec, msec)
+    return "***REMOVED***:02d***REMOVED***:***REMOVED***:02d***REMOVED***:***REMOVED***:02d***REMOVED***".format(hours, mins, sec)
 
 
 def round_to_interval(num, interval=5):

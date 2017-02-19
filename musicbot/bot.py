@@ -4631,6 +4631,24 @@ class MusicBot(discord.Client):
         except Exception as e:
             return Response("Something went wrong with your code:\n```\n***REMOVED******REMOVED***\n```".format(str(e)))
 
+    async def cmd_advanceto(self, player, seconds):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***advanceto seconds
+
+        Skip to x seconds in to the video
+        """
+        try:
+            seconds = int(seconds)
+        except:
+            return Response("Must be a number", delete_after=20)
+
+        if player.current_entry is None:
+            return Response("Nothing playing!", delete_after=20)
+
+        if not player.goto_seconds(seconds):
+            return Response("Timestamp exceeds song duration!", delete_after=20)
+
     async def cmd_register(self, author, server, token):
         """
         Usage:

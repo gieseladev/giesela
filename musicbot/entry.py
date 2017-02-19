@@ -76,7 +76,7 @@ class BasePlaylistEntry:
 
 class URLPlaylistEntry(BasePlaylistEntry):
 
-    def __init__(self, playlist, url, title, duration=0, start_seconds=0, end_seconds=None, expected_filename=None, **meta):
+    def __init__(self, playlist, url, title, duration=0, expected_filename=None, start_seconds=0, end_seconds=None, **meta):
         super().__init__()
 
         self.playlist = playlist
@@ -169,6 +169,9 @@ class URLPlaylistEntry(BasePlaylistEntry):
             # type)
         ***REMOVED***
         return json.dumps(data, indent=2)
+
+    def set_start(self, sec):
+        self.start_seconds = sec
 
     # noinspection PyTypeChecker
     async def _download(self):
@@ -302,7 +305,7 @@ class StreamPlaylistEntry(BasePlaylistEntry):
             self.title = title
         else:
             self.title = station_data.name
-            
+
         self.radio_station_data = station_data
         self.destination = destination
         self.duration = 0
