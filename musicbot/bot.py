@@ -1763,7 +1763,7 @@ class MusicBot(discord.Client):
 
             song_progress = str(
                 timedelta(seconds=player.progress)).lstrip('0').lstrip(':')
-            song_total = str(timedelta(seconds=player.current_entry.duration)).lstrip(
+            song_total = str(timedelta(seconds=player.current_entry.end_seconds)).lstrip(
                 '0').lstrip(':')
             prog_str = '`[%s/%s]`' % (song_progress, song_total)
 
@@ -3264,7 +3264,8 @@ class MusicBot(discord.Client):
         timeout = 60
         current_page = 0
 
-        total_pages, items_on_last_page = divmod(len(cards) - 1, items_per_page)
+        total_pages, items_on_last_page = divmod(
+            len(cards) - 1, items_per_page)
 
         def msg_check(msg):
             return msg.content.lower().strip().startswith(cmds)
@@ -3296,8 +3297,7 @@ class MusicBot(discord.Client):
             elif content.startswith("p"):
                 await self.safe_delete_message(interface_msg)
                 await self.safe_delete_message(user_msg)
-                current_page = (current_page - 1) % (total_pages + 1
-)
+                current_page = (current_page - 1) % (total_pages + 1)
             elif content.startswith("exit"):
                 await self.safe_delete_message(interface_msg)
                 await self.safe_delete_message(user_msg)
@@ -3445,7 +3445,8 @@ class MusicBot(discord.Client):
         timeout = 60
         current_page = 0
 
-        total_pages, items_on_last_page = divmod(len(cards) - 1, items_per_page)
+        total_pages, items_on_last_page = divmod(
+            len(cards) - 1, items_per_page)
 
         def msg_check(msg):
             return msg.content.lower().strip().startswith(cmds)
@@ -4241,6 +4242,55 @@ class MusicBot(discord.Client):
             playlistname, player.playlist, remove_entries=[player.current_entry])
         return Response("Removed the current song from the playlist.")
 
+    async def cmd_setentrystart(self, player, playlistname):
+        """
+        Usage:
+            {command_prefix}setentrystart playlistname
+
+        Set the start time for the current entry in the playlist to the current time
+        """
+
+        if playlistname is None:
+            return Response("Please specify the playlist's name!", delete_after=20)
+
+        playlistname = playlistname.lower()
+
+        if not player.current_entry:
+            return Response("There's nothing playing right now...", delete_after=20)
+
+        new_start = player.progress
+        new_entry = player.current_entry
+        new_entry.set_start(new_start)
+        self.playlists.edit_playlist(
+            playlistname, player.playlist, remove_entries=[player.current_entry], new_entries=[new_entry])
+
+        return Response("Set the starting point to {} seconds.".format(new_start)), delete_after = 20)
+
+    async def cmd_setentryend(self, player, playlistname):
+        """
+        Usage:
+            {command_prefix}setentryend playlistname
+
+        Set the end time for the current entry in the playlist to the current time
+        """
+
+        if playlistname is None:
+            return Response("Please specify the playlist's name!", delete_after = 20)
+
+        playlistname=playlistname.lower()
+
+        if not player.current_entry:
+            return Response("There's nothing playing right now...", delete_after = 20)
+
+        new_end=player.progress
+        new_entry=player.current_entry
+        new_entry.set_end(new_end)
+        self.playlists.edit_playlist(
+            playlistname, player.playlist, remove_entries = [player.current_entry], new_entries = [new_entry])
+
+
+        return Response("Set the ending point to {} seconds.".format(new_start), delete_after = 20)
+
     async def cmd_wiki(self, channel, message, leftover_args):
         """
         Usage:
@@ -4251,8 +4301,8 @@ class MusicBot(discord.Client):
                 -This function provides the full Wikipedia article.
         """
 
-        wikipedia_page = None
-        wikipedia_page_title = None
+        wikipedia_page=None
+        wikipedia_page_title=None
         wikipedia.set_lang("en")
 
         if leftover_args[0].lower() in wikipedia.languages().keys():
@@ -4263,29 +4313,29 @@ class MusicBot(discord.Client):
                 mydict.values()).index(leftover_args[0].lower())])
             del (leftover_args[0])
 
-        search_query = " ".join(leftover_args)
+        search_query=" ".join(leftover_args)
         # self.safe_print (search_query)
 
         if leftover_args[0] == "summarize":
-            sent_num = int(leftover_args[1]) if str(
+            sent_num=int(leftover_args[1]) if str(
                 type(leftover_args[1])) == "int" else 5
-            search = leftover_args[2:] if str(
+            search=leftover_args[2:] if str(
                 type(leftover_args[1])) == "int" else leftover_args[1:]
-            title = wikipedia.search(search, results=1, suggestion=True)[0]
+            title=wikipedia.search(search, results = 1, suggestion = True)[0]
             return Response("**{}**\n{}".format(title[0], wikipedia.summary(title, sentences=sent_num)))
         else:
-            title = wikipedia.search(
-                search_query, results=1, suggestion=True)[0]
+            title=wikipedia.search(
+                search_query, results = 1, suggestion = True)[0]
             if title:
-                wikipedia_page = wikipedia.page(title=title)
-                wikipedia_page_title = title[0]
+                wikipedia_page=wikipedia.page(title = title)
+                wikipedia_page_title=title[0]
 
         if not wikipedia_page:
-            return Response("I didn't find anything called *{}*.".format(search_query), delete_after=20)
+            return Response("I didn't find anything called *{}*.".format(search_query), delete_after = 20)
 
         return Response("**{}**\n{}".format(wikipedia_page_title, wikipedia.summary(wikipedia_page_title, sentences=3)))
 
-    async def cmd_getmusicfile(self, channel, author, player, index=0):
+    async def cmd_getmusicfile(self, channel, author, player, index = 0):
         """
         Usage:
             {command_prefix}getmusicfile
@@ -4296,22 +4346,22 @@ class MusicBot(discord.Client):
         """
 
         try:
-            index = int(index) - 1
+            index=int(index) - 1
         except:
-            return Response("Please provide a valid index", delete_after=30)
+            return Response("Please provide a valid index", delete_after = 30)
 
         if index == -1:
-            entry = player.current_entry
+            entry=player.current_entry
         else:
             if index < 0 or index >= len(player.playlist.entries):
-                return Response("Your index is out of range", delete_after=15)
-            entry = player.playlist.entries[index]
+                return Response("Your index is out of range", delete_after = 15)
+            entry=player.playlist.entries[index]
 
         if not entry:
-            return Response("This entry is currently being worked on. Please retry again later", delete_after=15)
+            return Response("This entry is currently being worked on. Please retry again later", delete_after = 15)
 
         if type(entry).__name__ == "StreamPlaylistEntry":
-            return Response("Can't send you this because it's a live stream", delete_after=15)
+            return Response("Can't send you this because it's a live stream", delete_after = 15)
 
         if not entry.is_downloaded:
             try:
@@ -4319,8 +4369,8 @@ class MusicBot(discord.Client):
             except:
                 return Response("Could not download the file. This really shouldn't happen")
 
-        await self.safe_send_message(author, "The file is being uploaded. Please wait a second.", delete_after=15)
-        await self.send_file(author, entry.filename, content="Here you go:")
+        await self.safe_send_message(author, "The file is being uploaded. Please wait a second.", delete_after = 15)
+        await self.send_file(author, entry.filename, content = "Here you go:")
 
     async def cmd_reminder(self, channel, author, player, server, leftover_args):
         """
@@ -4334,34 +4384,34 @@ class MusicBot(discord.Client):
         if len(leftover_args) < 1:
             return Response("Please git gud!")
 
-        command = leftover_args[0].lower().strip()
+        command=leftover_args[0].lower().strip()
 
         if(command == "create"):
             import parsedatetime
-            cal = parsedatetime.Calendar()
+            cal=parsedatetime.Calendar()
 
-            reminder_name = None
-            reminder_due = None
-            reminder_repeat = None
-            reminder_end = None
-            reminder_action = None
+            reminder_name=None
+            reminder_due=None
+            reminder_repeat=None
+            reminder_end=None
+            reminder_action=None
 
             # find out the name
             def check(m):
                 return len(m.content) > 3
 
-            msg = await self.safe_send_message(channel, "How do you want to call your reminder?")
-            response = await self.wait_for_message(author=author, channel=channel, check=check)
-            reminder_name = response.content
+            msg=await self.safe_send_message(channel, "How do you want to call your reminder?")
+            response=await self.wait_for_message(author = author, channel = channel, check = check)
+            reminder_name=response.content
             await self.safe_delete_message(msg)
             await self.safe_delete_message(response)
 
             # find out the due date
             while True:
-                msg = await self.safe_send_message(channel, "When is it due?")
-                response = await self.wait_for_message(author=author, channel=channel)
+                msg=await self.safe_send_message(channel, "When is it due?")
+                response=await self.wait_for_message(author = author, channel = channel)
 
-                reminder_due = datetime(
+                reminder_due=datetime(
                     *cal.parse(response.content.strip().lower())[0][:6])
                 await self.safe_delete_message(msg)
                 if reminder_due is not None:
@@ -4372,15 +4422,15 @@ class MusicBot(discord.Client):
 
             # repeated reminder
             while True:
-                msg = await self.safe_send_message(channel, "When should this reminder be repeated? (\"never\" if not at all)")
-                response = await self.wait_for_message(author=author, channel=channel)
+                msg=await self.safe_send_message(channel, "When should this reminder be repeated? (\"never\" if not at all)")
+                response=await self.wait_for_message(author = author, channel = channel)
                 await self.safe_delete_message(msg)
                 if(response.content.lower().strip() in ("n", "no", "nope", "never")):
                     await self.safe_delete_message(response)
-                    reminder_repeat = None
+                    reminder_repeat=None
                     break
 
-                reminder_repeat = datetime(
+                reminder_repeat=datetime(
                     *cal.parse(response.content.strip().lower())[0][:6]) - datetime.now()
                 if reminder_repeat is not None:
                     await self.safe_delete_message(response)
@@ -4391,15 +4441,15 @@ class MusicBot(discord.Client):
             # reminder end
             if reminder_repeat is not None:
                 while True:
-                    msg = await self.safe_send_message(channel, "When should this reminder stop being repeated? (\"never\" if not at all)")
-                    response = await self.wait_for_message(author=author, channel=channel)
+                    msg=await self.safe_send_message(channel, "When should this reminder stop being repeated? (\"never\" if not at all)")
+                    response=await self.wait_for_message(author = author, channel = channel)
                     await self.safe_delete_message(msg)
                     if(response.content.lower().strip() in ("n", "no", "nope", "never")):
                         await self.safe_delete_message(response)
-                        reminder_end = None
+                        reminder_end=None
                         break
 
-                    reminder_end = datetime(
+                    reminder_end=datetime(
                         *cal.parse(response.content.strip().lower())[0][:6])
                     if reminder_end is not None:
                         await self.safe_delete_message(response)
@@ -4417,13 +4467,13 @@ class MusicBot(discord.Client):
                 except:
                     return False
 
-            selected_action = 0
+            selected_action=0
 
             while True:
-                msg = await self.safe_send_message(channel, "**Select one:**\n```\n1: Send a message\n2: Play a video\n3: Play an alarm sound```")
-                response = await self.wait_for_message(author=author, channel=channel)
+                msg=await self.safe_send_message(channel, "**Select one:**\n```\n1: Send a message\n2: Play a video\n3: Play an alarm sound```")
+                response=await self.wait_for_message(author = author, channel = channel)
                 await self.safe_delete_message(msg)
-                selected_action = int(response.content)
+                selected_action=int(response.content)
 
                 if selected_action is not None:
                     await self.safe_delete_message(response)
@@ -4433,31 +4483,31 @@ class MusicBot(discord.Client):
 
             # action 1 (message)
             if selected_action == 1:
-                action_message = "Your reminder *{reminder.name}* is due"
-                action_channel = None
-                action_delete_after = 0
-                action_delete_previous = False
+                action_message="Your reminder *{reminder.name}* is due"
+                action_channel=None
+                action_delete_after=0
+                action_delete_previous=False
 
                 # find message
-                msg = await self.safe_send_message(channel, "What should the message say?")
-                response = await self.wait_for_message(author=author, channel=channel)
-                action_message = response.content
+                msg=await self.safe_send_message(channel, "What should the message say?")
+                response=await self.wait_for_message(author = author, channel = channel)
+                action_message=response.content
                 await self.safe_delete_message(msg)
                 await self.safe_delete_message(response)
 
                 # find channel
                 while action_channel is None:
-                    msg = await self.safe_send_message(channel, "To which channel should the message be sent?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"me\" for a private message\n:white_small_square: \"this\" to select the current channel\n:white_small_square: You can also @mention people or #mention a channel")
-                    response = await self.wait_for_message(author=author, channel=channel)
+                    msg=await self.safe_send_message(channel, "To which channel should the message be sent?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"me\" for a private message\n:white_small_square: \"this\" to select the current channel\n:white_small_square: You can also @mention people or #mention a channel")
+                    response=await self.wait_for_message(author = author, channel = channel)
 
                     if len(response.channel_mentions) > 0:
-                        action_channel = response.channel_mentions[0]
+                        action_channel=response.channel_mentions[0]
                     elif len(response.mentions) > 0:
-                        action_channel = response.mentions[0]
+                        action_channel=response.mentions[0]
                     elif response.content.lower().strip() == "me":
-                        action_channel = author
+                        action_channel=author
                     elif response.content.lower().strip() == "this":
-                        action_channel = channel
+                        action_channel=channel
                     else:
                         return Response("not yet implemented :P")
 
@@ -4474,44 +4524,44 @@ class MusicBot(discord.Client):
                     except:
                         return False
 
-                msg = await self.safe_send_message(channel, "After how many seconds should the message be deleted? (\"never\" for not at all)")
-                response = await self.wait_for_message(author=author, channel=channel, check=check)
+                msg=await self.safe_send_message(channel, "After how many seconds should the message be deleted? (\"never\" for not at all)")
+                response=await self.wait_for_message(author = author, channel = channel, check = check)
                 if response.content.lower().strip() in ["never", "no"]:
-                    action_delete_after = 0
+                    action_delete_after=0
                 else:
-                    action_delete_after = int(response.content.strip())
+                    action_delete_after=int(response.content.strip())
 
                 await self.safe_delete_message(msg)
                 await self.safe_delete_message(response)
 
                 # find if delete old message
                 if reminder_repeat is not None:
-                    msg = await self.safe_send_message(channel, "Before sending a new message, should the old one be deleted?")
-                    response = await self.wait_for_message(author=author, channel=channel)
+                    msg=await self.safe_send_message(channel, "Before sending a new message, should the old one be deleted?")
+                    response=await self.wait_for_message(author = author, channel = channel)
                     if response.content.lower().strip() in ["y", "yes"]:
-                        action_delete_previous = True
+                        action_delete_previous=True
 
                     await self.safe_delete_message(msg)
                     await self.safe_delete_message(response)
 
-                reminder_action = Action(channel=action_channel, msg_content=action_message,
-                                         delete_msg_after=action_delete_after, delete_old_message=action_delete_previous)
+                reminder_action=Action(channel = action_channel, msg_content = action_message,
+                                         delete_msg_after = action_delete_after, delete_old_message = action_delete_previous)
 
             # action 2 (play url)
             elif selected_action == 2:
-                action_source_url = ""
-                action_voice_channel = None
+                action_source_url=""
+                action_voice_channel=None
 
                 # find video url
-                msg = await self.safe_send_message(channel, "What's the url of the video you want to play?")
-                response = await self.wait_for_message(author=author, channel=channel)
-                action_source_url = response.content
+                msg=await self.safe_send_message(channel, "What's the url of the video you want to play?")
+                response=await self.wait_for_message(author = author, channel = channel)
+                action_source_url=response.content
                 await self.safe_delete_message(msg)
                 await self.safe_delete_message(response)
 
                 # find playback channel
-                msg = await self.safe_send_message(channel, "To which channel should the video be played?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"this\" to select your current channel")
-                response = await self.wait_for_message(author=author, channel=channel)
+                msg=await self.safe_send_message(channel, "To which channel should the video be played?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"this\" to select your current channel")
+                response=await self.wait_for_message(author = author, channel = channel)
 
                 if response.content.lower().strip() == "this":
                     return Response("not yet implemented :P")
@@ -4524,14 +4574,14 @@ class MusicBot(discord.Client):
 
             # finalizing
             self.calendar.create_reminder(
-                reminder_name, reminder_due, reminder_action, repeat_every=reminder_repeat, repeat_end=reminder_end)
+                reminder_name, reminder_due, reminder_action, repeat_every = reminder_repeat, repeat_end = reminder_end)
             return Response("Created a reminder called *{}*\ndue: {}\nrepeat: {}\nrepeat end: {}\naction: {}".format(reminder_name, reminder_due, reminder_repeat, reminder_end, reminder_action))
 
         elif(command == "list"):
             if len(self.calendar.reminders) < 1:
                 return Response("There are no reminders")
 
-            text = ""
+            text=""
             for reminder in self.calendar.reminders:
                 text += "*{.name}*\n".format(reminder)
 
@@ -4576,29 +4626,29 @@ class MusicBot(discord.Client):
         if len(leftover_args) < 1:
             return Response("You need to provide a target channel")
 
-        search_channel = " ".join(leftover_args)
+        search_channel=" ".join(leftover_args)
         if search_channel.lower().strip() == "home":
-            search_channel = "MusicBot's reign"
+            search_channel="MusicBot's reign"
 
         if author.voice.voice_channel is None:
             return Response("You're incredibly incompetent to do such a thing!")
 
-        author_channel = author.voice.voice_channel.id
+        author_channel=author.voice.voice_channel.id
 
-        target_channel = self.get_channel(search_channel)
+        target_channel=self.get_channel(search_channel)
         if target_channel is None:
             for chnl in server.channels:
                 if chnl.name == search_channel and chnl.type == ChannelType.voice:
-                    target_channel = chnl
+                    target_channel=chnl
                     break
 
         if target_channel is None:
-            return Response("Can't resolve the target channel!", delete_after=20)
+            return Response("Can't resolve the target channel!", delete_after = 20)
 
         print("there are {} members in this voice chat".format(
             len(self.get_channel(author_channel).voice_members)))
 
-        s = 0
+        s=0
         for voice_member in self.get_channel(author_channel).voice_members:
             await self.move_member(voice_member, target_channel)
             s += 1
@@ -4618,15 +4668,15 @@ class MusicBot(discord.Client):
         WIP
         """
 
-        count = len(self.socket_server.connections)
+        count=len(self.socket_server.connections)
         return Response("There {} currently {} mobile user{}".format("is" if count == 1 else "are", count, "s" if count != 1 else ""))
 
     @owner_only
     async def cmd_execute(self, player, channel, author, server, leftover_args):
-        statement = " ".join(leftover_args)
+        statement=" ".join(leftover_args)
         await self.safe_send_message(channel, "```python\n{}\n```".format(statement))
         try:
-            result = eval(statement)
+            result=eval(statement)
             return Response(str(result))
         except Exception as e:
             return Response("Something went wrong with your code:\n```\n{}\n```".format(str(e)))
@@ -4639,15 +4689,15 @@ class MusicBot(discord.Client):
         Skip to x seconds in to the video
         """
         try:
-            seconds = int(seconds)
+            seconds=int(seconds)
         except:
-            return Response("Must be a number", delete_after=20)
+            return Response("Must be a number", delete_after = 20)
 
         if player.current_entry is None:
-            return Response("Nothing playing!", delete_after=20)
+            return Response("Nothing playing!", delete_after = 20)
 
         if not player.goto_seconds(seconds):
-            return Response("Timestamp exceeds song duration!", delete_after=20)
+            return Response("Timestamp exceeds song duration!", delete_after = 20)
 
     async def cmd_register(self, author, server, token):
         """
@@ -4670,7 +4720,7 @@ class MusicBot(discord.Client):
         Make the bot leave his current voice channel.
         """
         await self.disconnect_voice_client(server)
-        return Response(":hear_no_evil:", delete_after=20)
+        return Response(":hear_no_evil:", delete_after = 20)
 
     async def cmd_restart(self, channel):
         await self.safe_send_message(channel, ":wave:")
@@ -4686,7 +4736,7 @@ class MusicBot(discord.Client):
     async def on_message(self, message):
         await self.wait_until_ready()
 
-        message_content = message.content.strip()
+        message_content=message.content.strip()
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
             # await self.cmd_c(message.author, message.channel,
@@ -4704,10 +4754,10 @@ class MusicBot(discord.Client):
 
         # Uh, doesn't this break prefixes with spaces in them (it doesn't,
         # config parser already breaks them)
-        command, *args = message_content.split()
-        command = command[len(self.config.command_prefix):].lower().strip()
+        command, *args=message_content.split()
+        command=command[len(self.config.command_prefix):].lower().strip()
 
-        handler = getattr(self, 'cmd_%s' % command, None)
+        handler=getattr(self, 'cmd_%s' % command, None)
         if not handler:
             return
 
@@ -4725,41 +4775,41 @@ class MusicBot(discord.Client):
             self.safe_print(
                 "[Command] {0.id}/{0.name} ({1})".format(message.author, message_content))
 
-        user_permissions = self.permissions.for_user(message.author)
+        user_permissions=self.permissions.for_user(message.author)
 
-        argspec = inspect.signature(handler)
-        params = argspec.parameters.copy()
+        argspec=inspect.signature(handler)
+        params=argspec.parameters.copy()
 
         # noinspection PyBroadException
         try:
             if user_permissions.ignore_non_voice and command in user_permissions.ignore_non_voice:
                 await self._check_ignore_non_voice(message)
 
-            handler_kwargs = {}
+            handler_kwargs={}
             if params.pop('message', None):
-                handler_kwargs['message'] = message
+                handler_kwargs['message']=message
 
             if params.pop('channel', None):
-                handler_kwargs['channel'] = message.channel
+                handler_kwargs['channel']=message.channel
 
             if params.pop('author', None):
-                handler_kwargs['author'] = message.author
+                handler_kwargs['author']=message.author
 
             if params.pop('server', None):
-                handler_kwargs['server'] = message.server
+                handler_kwargs['server']=message.server
 
             if params.pop('player', None):
-                handler_kwargs['player'] = await self.get_player(message.channel)
+                handler_kwargs['player']=await self.get_player(message.channel)
 
             if params.pop('permissions', None):
-                handler_kwargs['permissions'] = user_permissions
+                handler_kwargs['permissions']=user_permissions
 
             if params.pop('user_mentions', None):
-                handler_kwargs['user_mentions'] = list(
+                handler_kwargs['user_mentions']=list(
                     map(message.server.get_member, message.raw_mentions))
 
             if params.pop('channel_mentions', None):
-                handler_kwargs['channel_mentions'] = list(
+                handler_kwargs['channel_mentions']=list(
                     map(message.server.get_channel, message.raw_channel_mentions))
 
             if params.pop('voice_channel', None):
@@ -4780,62 +4830,62 @@ class MusicBot(discord.Client):
                     continue
 
                 if args:
-                    arg_value = args.pop(0)
-                    handler_kwargs[key] = arg_value
+                    arg_value=args.pop(0)
+                    handler_kwargs[key]=arg_value
                     params.pop(key)
 
             if message.author.id != self.config.owner_id:
                 if user_permissions.command_whitelist and command not in user_permissions.command_whitelist:
                     raise exceptions.PermissionsError(
                         "This command is not enabled for your group (%s)." % user_permissions.name,
-                        expire_in=20)
+                        expire_in = 20)
 
                 elif user_permissions.command_blacklist and command in user_permissions.command_blacklist:
                     raise exceptions.PermissionsError(
                         "This command is disabled for your group (%s)." % user_permissions.name,
-                        expire_in=20)
+                        expire_in = 20)
 
             if params:
-                docs = getattr(handler, '__doc__', None)
+                docs=getattr(handler, '__doc__', None)
                 if not docs:
-                    docs = 'Usage: {}{} {}'.format(
+                    docs='Usage: {}{} {}'.format(
                         self.config.command_prefix,
                         command,
                         ' '.join(args_expected)
                     )
 
-                docs = '\n'.join(l.strip() for l in docs.split('\n'))
+                docs='\n'.join(l.strip() for l in docs.split('\n'))
                 await self.safe_send_message(
                     message.channel,
                     '```\n%s\n```' % docs.format(
                         command_prefix=self.config.command_prefix),
-                    expire_in=60
+                    expire_in = 60
                 )
                 return
 
-            response = await handler(**handler_kwargs)
+            response=await handler(**handler_kwargs)
             if response and isinstance(response, Response):
-                content = response.content
+                content=response.content
                 if response.reply:
-                    content = '%s, %s' % (message.author.mention, content)
+                    content='%s, %s' % (message.author.mention, content)
 
-                sentmsg = await self.safe_send_message(
+                sentmsg=await self.safe_send_message(
                     message.channel, content,
-                    expire_in=response.delete_after if self.config.delete_messages else 0,
-                    also_delete=message if self.config.delete_invoking else None
+                    expire_in = response.delete_after if self.config.delete_messages else 0,
+                    also_delete = message if self.config.delete_invoking else None
                 )
 
         except (exceptions.CommandError, exceptions.HelpfulError, exceptions.ExtractionError) as e:
             print("{0.__class__}: {0.message}".format(e))
 
-            expirein = e.expire_in if self.config.delete_messages else None
-            alsodelete = message if self.config.delete_invoking else None
+            expirein=e.expire_in if self.config.delete_messages else None
+            alsodelete=message if self.config.delete_invoking else None
 
             await self.safe_send_message(
                 message.channel,
                 '```\n%s\n```' % e.message,
-                expire_in=expirein,
-                also_delete=alsodelete
+                expire_in = expirein,
+                also_delete = alsodelete
             )
 
         except exceptions.Signal:
@@ -4865,25 +4915,25 @@ class MusicBot(discord.Client):
             return
 
         # This should always work, right?
-        my_voice_channel = after.server.me.voice_channel
+        my_voice_channel=after.server.me.voice_channel
 
         if not my_voice_channel:
             return
 
         if before.voice_channel == my_voice_channel:
-            joining = False
+            joining=False
         elif after.voice_channel == my_voice_channel:
-            joining = True
+            joining=True
         else:
             return  # Not my channel
 
-        moving = before == before.server.me
+        moving=before == before.server.me
 
-        auto_paused = self.server_specific_data[after.server]['auto_paused']
-        player = await self.get_player(my_voice_channel)
+        auto_paused=self.server_specific_data[after.server]['auto_paused']
+        player=await self.get_player(my_voice_channel)
 
         if after == after.server.me and after.voice_channel:
-            player.voice_client.channel = after.voice_channel
+            player.voice_client.channel=after.voice_channel
 
         if not self.config.auto_pause:
             return
@@ -4891,13 +4941,13 @@ class MusicBot(discord.Client):
         if sum(1 for m in my_voice_channel.voice_members if m != after.server.me):
             if auto_paused and player.is_paused:
                 print("[config:autopause] Unpausing")
-                self.server_specific_data[after.server]['auto_paused'] = False
+                self.server_specific_data[after.server]['auto_paused']=False
                 player.resume()
                 self.socket_server.threaded_broadcast_information()
         else:
             if not auto_paused and player.is_playing:
                 print("[config:autopause] Pausing")
-                self.server_specific_data[after.server]['auto_paused'] = True
+                self.server_specific_data[after.server]['auto_paused']=True
                 player.pause()
                 self.socket_server.threaded_broadcast_information()
 
@@ -4909,5 +4959,5 @@ class MusicBot(discord.Client):
             await self.reconnect_voice_client(after)
 
 if __name__ == '__main__':
-    bot = MusicBot()
+    bot=MusicBot()
     bot.run()
