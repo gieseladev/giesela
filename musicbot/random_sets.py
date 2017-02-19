@@ -49,7 +49,61 @@ class RandomSets:
             self.update_sets()
             return True
         except:
-            raise
+            return False
+
+    def remove_set(self, name):
+        if not self.random_sets.has_section(name):
+            return None
+
+        try:
+            self.random_sets.remove_section(str(name))
+            self.save_sets()
+            self.update_sets()
+            return True
+        except:
+            return False
+
+    def add_option(self, name, option):
+        if not self.random_sets.has_section(name):
+            return None
+
+        try:
+            existing_items = self.get_set(name)
+            existing_items.append(option)
+            self.random_sets.set(str(name), "items",
+                                 str(json.dumps(existing_items)))
+            self.save_sets()
+            self.update_sets()
+            return True
+        except:
+            return False
+
+    def remove_option(self, name, option):
+        if not self.random_sets.has_section(name):
+            return None
+
+        try:
+            existing_items = self.get_set(name)
+            existing_items.remove(option)
+            self.random_sets.set(str(name), "items",
+                                 str(json.dumps(existing_items)))
+            self.save_sets()
+            self.update_sets()
+            return True
+        except:
+            return False
+
+    def replace_options(self, name, new_options):
+        if not self.random_sets.has_section(name):
+            return None
+
+        try:
+            self.random_sets.set(str(name), "items",
+                                 str(json.dumps(new_options)))
+            self.save_sets()
+            self.update_sets()
+            return True
+        except:
             return False
 
     def get_sets(self):
