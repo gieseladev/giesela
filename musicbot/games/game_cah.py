@@ -65,6 +65,17 @@ class QuestionCard:
     def number_of_blanks(self):
         return self.text.count("$")
 
+    @property
+    def like_dislike_ratio(self):
+        if self.total_interactions <= 0:
+            return 1
+
+        return self.likes / self.total_interactions
+
+    @property
+    def total_interactions(self):
+        return self.likes + self.dislikes
+
     def beautified_text(self, answers=None):
         text = self.text
         if answers is not None:

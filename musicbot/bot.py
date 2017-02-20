@@ -3153,7 +3153,7 @@ class MusicBot(discord.Client):
 
         if argument == "list":
             sort_modes = {"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (
-                lambda entry: entry.creation_date, False, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "likes": (lambda entry: entry.like_dislike_ratio, False, lambda entry: int(entry.like_dislike_ratio * 100))}
+                lambda entry: entry.creation_date, True, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "likes": (lambda entry: entry.like_dislike_ratio, False, lambda entry: "{}%".format(int(entry.like_dislike_ratio * 100)))}
 
             cards = self.cah.cards.cards.copy() if message.mentions is None or len(message.mentions) < 1 else [
                 x for x in self.cah.cards.cards.copy() if x.creator_id in [u.id for u in message.mentions]]
@@ -3309,7 +3309,7 @@ class MusicBot(discord.Client):
 
         await self.safe_send_message(channel, "Closed the card viewer!", expire_in=20)
 
-    async def cmd_qcards(self, server, channel, author, leftover_args):
+    async def cmd_qcards(self, server, channel, author, message, leftover_args):
         """
         Usage:
             {command_prefix}qcards list [@mention] [text | likes | occurences | date | author | id | blanks | random | none]
@@ -3332,8 +3332,7 @@ class MusicBot(discord.Client):
             leftover_args) > 0 else None
 
         if argument == "list":
-            sort_modes = {"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (lambda entry: entry.creation_date, False, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False,
-                                                                                                                                                                                                                                                                                                             lambda entry: self.get_global_user(entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "blanks": (lambda entry: entry.number_of_blanks, False, lambda entry: entry.number_of_blanks), "likes": (lambda entry: entry.like_dislike_ratio, False, lambda entry: int(entry.like_dislike_ratio * 100))}
+            sort_modes = {"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (lambda entry: entry.creation_date, True, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "blanks": (lambda entry: entry.number_of_blanks, True, lambda entry: entry.number_of_blanks), "likes": (lambda entry: entry.like_dislike_ratio, False, lambda entry: "{}%".format(int(entry.like_dislike_ratio * 100)))}
 
             cards = self.cah.cards.question_cards.copy() if message.mentions is None or len(message.mentions) < 1 else [
                 x for x in self.cah.cards.question_cards.copy() if x.creator_id in [u.id for u in message.mentions]]
