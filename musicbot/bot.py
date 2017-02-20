@@ -3152,21 +3152,24 @@ class MusicBot(discord.Client):
             leftover_args) > 0 else None
 
         if argument == "list":
-            sort_modes = ***REMOVED***"text": (lambda entry: entry.text, False), "random": None, "occurences": (lambda entry: entry.occurences, True), "date": (
-                lambda entry: entry.creation_date, False), "date": (lambda entry: entry.creation_date, True), "author": (lambda entry: entry.creator_id, False), "id": (lambda entry: entry.id, False), "likes": (lambda entry: entry.like_dislike_ratio, False)***REMOVED***
+            sort_modes = ***REMOVED***"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (
+                lambda entry: entry.creation_date, False, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "likes": (lambda entry: entry.like_dislike_ratio, False, lambda entry: int(entry.like_dislike_ratio * 100))***REMOVED***
 
             cards = self.cah.cards.cards.copy() if message.mentions is None or len(message.mentions) < 1 else [
                 x for x in self.cah.cards.cards.copy() if x.creator_id in [u.id for u in message.mentions]]
             sort_mode = leftover_args[1].lower() if len(leftover_args) > 1 and leftover_args[
                 1].lower() in sort_modes.keys() else "none"
 
+            display_info = None
+
             if sort_mode == "random":
                 shuffle(cards)
             elif sort_mode != "none":
                 cards = sorted(cards, key=sort_modes[sort_mode][
                                0], reverse=sort_modes[sort_mode][1])
+                display_info = sort_modes[sort_mode][2]
 
-            await self.card_viewer(channel, author, cards)
+            await self.card_viewer(channel, author, cards, display_info)
         elif argument == "search":
             search_query = " ".join(leftover_args[1:]) if len(
                 leftover_args) > 1 else None
@@ -3255,10 +3258,10 @@ class MusicBot(discord.Client):
         else:
             return await self.cmd_help(channel, ["cards"])
 
-    async def card_viewer(self, channel, author, cards):
+    async def card_viewer(self, channel, author, cards, display_additional=None):
         cmds = ("n", "p", "exit")
         site_interface = "**Cards | Page ***REMOVED***0***REMOVED*** of ***REMOVED***1***REMOVED*****\n```\n***REMOVED***2***REMOVED***\n```\nShit you can do:\n`n`: Switch to the next page\n`p`: Switch to the previous page\n`exit`: Exit the viewer"
-        card_string = "<***REMOVED******REMOVED***> [***REMOVED******REMOVED***]"
+        card_string = "<***REMOVED******REMOVED***> [***REMOVED******REMOVED***]***REMOVED******REMOVED***"
 
         items_per_page = 20
         timeout = 60
@@ -3279,7 +3282,8 @@ class MusicBot(discord.Client):
 
             page_cards_texts = []
             for p_c in page_cards:
-                page_cards_texts.append(card_string.format(p_c.id, p_c.text))
+                page_cards_texts.append(card_string.format(p_c.id, p_c.text, "" if display_additional is None or display_additional(
+                    p_c) is None else " | ***REMOVED******REMOVED***".format(display_additional(p_c))))
 
             interface_msg = await self.safe_send_message(channel, site_interface.format(current_page + 1, total_pages + 1, "\n".join(page_cards_texts)))
             user_msg = await self.wait_for_message(timeout, author=author, channel=channel, check=msg_check)
@@ -3328,21 +3332,24 @@ class MusicBot(discord.Client):
             leftover_args) > 0 else None
 
         if argument == "list":
-            sort_modes = ***REMOVED***"text": (lambda entry: entry.text, False), "random": None, "occurences": (lambda entry: entry.occurences, True), "date": (lambda entry: entry.creation_date, False), "date": (
-                lambda entry: entry.creation_date, True), "author": (lambda entry: entry.creator_id, False), "id": (lambda entry: entry.id, False), "blanks": (lambda entry: entry.number_of_blanks, False), "likes": (lambda entry: entry.like_dislike_ratio, False)***REMOVED***
+            sort_modes = ***REMOVED***"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (lambda entry: entry.creation_date, False, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False,
+                                                                                                                                                                                                                                                                                                             lambda entry: self.get_global_user(entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "blanks": (lambda entry: entry.number_of_blanks, False, lambda entry: entry.number_of_blanks), "likes": (lambda entry: entry.like_dislike_ratio, False, lambda entry: int(entry.like_dislike_ratio * 100))***REMOVED***
 
             cards = self.cah.cards.question_cards.copy() if message.mentions is None or len(message.mentions) < 1 else [
                 x for x in self.cah.cards.question_cards.copy() if x.creator_id in [u.id for u in message.mentions]]
             sort_mode = leftover_args[1].lower() if len(leftover_args) > 1 and leftover_args[
                 1].lower() in sort_modes.keys() else "none"
 
+            display_info = None
+
             if sort_mode == "random":
                 shuffle(cards)
             elif sort_mode != "none":
                 cards = sorted(cards, key=sort_modes[sort_mode][
                                0], reverse=sort_modes[sort_mode][1])
+                display_info = sort_modes[sort_mode][2]
 
-            await self.qcard_viewer(channel, author, cards)
+            await self.qcard_viewer(channel, author, cards, display_info)
         elif argument == "search":
             search_query = " ".join(leftover_args[1:]) if len(
                 leftover_args) > 1 else None
@@ -3437,10 +3444,10 @@ class MusicBot(discord.Client):
         else:
             return await self.cmd_help(channel, ["qcards"])
 
-    async def qcard_viewer(self, channel, author, cards):
+    async def qcard_viewer(self, channel, author, cards, display_additional=None):
         cmds = ("n", "p", "exit")
         site_interface = "**Question Cards | Page ***REMOVED***0***REMOVED*** of ***REMOVED***1***REMOVED*****\n```\n***REMOVED***2***REMOVED***\n```\nShit you can do:\n`n`: Switch to the next page\n`p`: Switch to the previous page\n`exit`: Exit the viewer"
-        card_string = "<***REMOVED******REMOVED***> \"***REMOVED******REMOVED***\""
+        card_string = "<***REMOVED******REMOVED***> \"***REMOVED******REMOVED***\"***REMOVED******REMOVED***"
 
         items_per_page = 20
         timeout = 60
@@ -3462,7 +3469,7 @@ class MusicBot(discord.Client):
             page_cards_texts = []
             for p_c in page_cards:
                 page_cards_texts.append(card_string.format(
-                    p_c.id, p_c.text.replace("$", "_____")))
+                    p_c.id, p_c.text.replace("$", "_____"), "" if display_additional is None or display_additional(p_c) is None else " | ***REMOVED******REMOVED***".format(display_additional(p_c))))
 
             interface_msg = await self.safe_send_message(channel, site_interface.format(current_page + 1, total_pages + 1, "\n".join(page_cards_texts)))
             user_msg = await self.wait_for_message(timeout, author=author, channel=channel, check=msg_check)
