@@ -3132,7 +3132,7 @@ class MusicBot(discord.Client):
     async def cmd_cards(self, server, channel, author, leftover_args):
         """
         Usage:
-            {command_prefix}cards list [text | occurences | date | random | id | author | none]
+            {command_prefix}cards list [text | likes | occurences | date | random | id | author | none]
                 -list all the available cards
             {command_prefix}cards create <text>
                 -create a new card with text
@@ -3153,7 +3153,7 @@ class MusicBot(discord.Client):
 
         if argument == "list":
             sort_modes = {"text": (lambda entry: entry.text, False), "random": None, "occurences": (lambda entry: entry.occurences, True), "date": (
-                lambda entry: entry.creation_date, False), "date": (lambda entry: entry.creation_date, True), "author": (lambda entry: entry.author_id, False), "id": (lambda entry: entry.id, False)}
+                lambda entry: entry.creation_date, False), "date": (lambda entry: entry.creation_date, True), "author": (lambda entry: entry.author_id, False), "id": (lambda entry: entry.id, False), "likes": (lambda entry: entry.like_dislike_ratio, False)}
 
             cards = self.cah.cards.cards.copy()
             sort_mode = leftover_args[1].lower() if len(leftover_args) > 1 and leftover_args[
@@ -3307,7 +3307,7 @@ class MusicBot(discord.Client):
     async def cmd_qcards(self, server, channel, author, leftover_args):
         """
         Usage:
-            {command_prefix}qcards list [text | occurences | date | author | id | blanks | random | none]
+            {command_prefix}qcards list [text | likes | occurences | date | author | id | blanks | random | none]
                 -list all the available question cards
             {command_prefix}qcards create <text (use $ for blanks)>
                 -create a new question card with text and if you want the number of cards to draw
@@ -3328,7 +3328,7 @@ class MusicBot(discord.Client):
 
         if argument == "list":
             sort_modes = {"text": (lambda entry: entry.text, False), "random": None, "occurences": (lambda entry: entry.occurences, True), "date": (lambda entry: entry.creation_date, False), "date": (
-                lambda entry: entry.creation_date, True), "author": (lambda entry: entry.author_id, False), "id": (lambda entry: entry.id, False), "blanks": (lambda entry: entry.number_of_blanks, False)}
+                lambda entry: entry.creation_date, True), "author": (lambda entry: entry.author_id, False), "id": (lambda entry: entry.id, False), "blanks": (lambda entry: entry.number_of_blanks, False), "likes": (lambda entry: entry.like_dislike_ratio, False)}
 
             cards = self.cah.cards.question_cards.copy()
             sort_mode = leftover_args[1].lower() if len(leftover_args) > 1 and leftover_args[
