@@ -7,6 +7,7 @@ from functools import partial
 import asyncio
 import configparser
 from musicbot.config import ConfigDefaults
+from musicbot.utils import prettydate
 
 vowels = tuple("aeiou")
 a_list =\
@@ -39,15 +40,23 @@ a_list =\
 
 class QuestionCard:
 
-    def __init__(self, card_id, text, occurences, creator_id, creation_date):
+    def __init__(self, card_id, text, occurences, creator_id, creation_date, likes, dislikes):
         self.id = card_id
         self.text = text
         self.occurences = occurences
         self.creator_id = creator_id
         self.creation_date = creation_date
+        self.likes = likes
+        self.dislikes = dislikes
 
     def bump_occurences(self):
         self.occurences += 1
+
+    def like_card(self):
+        self.likes += 1
+
+    def dislike_card(self):
+        self.dislikes += 1
 
     def __repr__(self):
         return "<{0.id}> \"{0.text}\" [{0.creator_id} | {0.creation_date} | {0.occurences}]".format(self)
@@ -56,33 +65,56 @@ class QuestionCard:
     def number_of_blanks(self):
         return self.text.count("$")
 
-    @property
-    def beautified_text(self):
-        return self.text.replace("$", "\_\_\_\_\_")
+    def beautified_text(self, answers=None):
+        text = self.text
+        if answers is not None:
+            for a in answers:
+                text = text.replace("$", a.text, 1)
+
+        return text.replace("$", "\_\_\_\_\_")
 
 
 class Card:
 
-    def __init__(self, card_id, text, occurences, creator_id, creation_date, picked_up_count):
+    def __init__(self, card_id, text, occurences, creator_id, creation_date, picked_up_count, likes, dislikes):
         self.id = card_id
         self.text = text
         self.occurences = occurences
         self.creator_id = creator_id
         self.creation_date = creation_date
         self.picked_up_count = picked_up_count
+        self.likes = likes
+        self.dislikes = dislikes
 
     @classmethod
     def blank_card(cls):
-        return cls(0, "BLANK", 0, 0, datetime.now(), 1)
+        return cls(0, "BLANK", 0, 0, datetime.now(), 1, 0, 0)
 
     def bump_occurences(self):
         self.occurences += 1
+
+    def like_card(self):
+        self.likes += 1
+
+    def dislike_card(self):
+        self.dislikes += 1
 
     def picked_card(self):
         self.picked_up_count += 1
 
     def __repr__(self):
         return "<{0.id}> \"{0.text}\" [{0.creator_id} | {0.creation_date} | {0.occurences} / {0.picked_up_count}]".format(self)
+
+    @property
+    def like_dislike_ratio(self):
+        if self.total_interactions <= 0:
+            return 1
+
+        return self.likes / self.total_interactions
+
+    @property
+    def total_interactions(self):
+        return self.likes + self.dislikes
 
 
 class Cards:
@@ -111,6 +143,10 @@ class Cards:
                 section, "creator_id", fallback="0")
             creation_date_string = config_parser.get(
                 section, "creation_datetime", fallback=None)
+            likes = int(config_parser.get(
+                section, "likes", fallback=0))
+            dislikes = int(config_parser.get(
+                section, "dislikes", fallback=0))
 
             if creation_date_string is None:
                 creation_date = datetime.now()
@@ -120,7 +156,7 @@ class Cards:
                                          "hour"], m_date["minute"], m_date["second"])
 
             self.question_cards.append(QuestionCard(
-                card_id, text, occurances, creator_id, creation_date))
+                card_id, text, occurances, creator_id, creation_date, likes, dislikes))
 
     def save_question_cards(self):
         config_parser = configparser.ConfigParser(interpolation=None)
@@ -133,6 +169,8 @@ class Cards:
             config_parser.set(sec, "creator_id", str(card.creator_id))
             config_parser.set(sec, "creation_datetime", json.dumps({"year": card.creation_date.year, "month": card.creation_date.month,
                                                                     "day": card.creation_date.day, "hour": card.creation_date.hour, "minute": card.creation_date.minute, "second": card.creation_date.second}))
+            config_parser.set(sec, "likes", str(card.likes))
+            config_parser.set(sec, "dislikes", str(card.dislikes))
 
         with open(ConfigDefaults.question_cards, "w+", encoding="utf-8") as question_file:
             config_parser.write(question_file)
@@ -155,6 +193,10 @@ class Cards:
                 section, "creator_id", fallback="0")
             creation_date_string = config_parser.get(
                 section, "creation_datetime", fallback=None)
+            likes = int(config_parser.get(
+                section, "likes", fallback=0))
+            dislikes = int(config_parser.get(
+                section, "dislikes", fallback=0))
 
             if creation_date_string is None:
                 creation_date = datetime.now()
@@ -164,7 +206,7 @@ class Cards:
                                          "hour"], m_date["minute"], m_date["second"])
 
             self.cards.append(Card(
-                card_id, text, occurances, creator_id, creation_date, picked_up_count))
+                card_id, text, occurances, creator_id, creation_date, picked_up_count, likes, dislikes))
 
     def save_cards(self):
         config_parser = configparser.ConfigParser(interpolation=None)
@@ -179,6 +221,8 @@ class Cards:
             config_parser.set(sec, "creator_id", str(card.creator_id))
             config_parser.set(sec, "creation_datetime", json.dumps({"year": card.creation_date.year, "month": card.creation_date.month,
                                                                     "day": card.creation_date.day, "hour": card.creation_date.hour, "minute": card.creation_date.minute, "second": card.creation_date.second}))
+            config_parser.set(sec, "likes", str(card.likes))
+            config_parser.set(sec, "dislikes", str(card.dislikes))
 
         with open(ConfigDefaults.cards_file, "w+", encoding="utf-8") as cards_file:
             config_parser.write(cards_file)
@@ -321,6 +365,24 @@ class Cards:
             return False
 
         c.picked_card()
+        self.save_cards()
+        return True
+
+    def bump_card_likes(self, card_id):
+        c = self.get_card(card_id)
+        if c is None:
+            return False
+
+        c.like_card()
+        self.save_cards()
+        return True
+
+    def bump_card_dislikes(self, card_id):
+        c = self.get_card(card_id)
+        if c is None:
+            return False
+
+        c.dislike_card()
         self.save_cards()
         return True
 
@@ -522,7 +584,7 @@ class Game:
             return False
 
         self.broadcast("*" + self.manager.musicbot.get_global_user(
-            user_id).mention + " has joined the game*", delete_after=15)
+            user_id).name + " has joined the game*", delete_after=15)
         self.players.append(Player(user_id))
         self.manager.send_message_to_user(
             user_id, "You've joined the game **{}**".format(self.token.upper()))
@@ -547,7 +609,7 @@ class Game:
 
         self.players.remove(pl)
         self.broadcast("*" + self.manager.musicbot.get_global_user(
-            user_id).mention + " has left the game*", delete_after=15)
+            user_id).name + " has left the game*", delete_after=15)
 
         if not self.enough_players():
             self.broadcast(
@@ -576,6 +638,12 @@ class Game:
 
     def pick_question_card(self):
         i = random.randint(0, len(self.question_cards) - 1)
+
+        if self.question_cards[i].number_of_blanks > self.number_of_cards:
+            print("[CAH] Card ({}) can't be used as it has too many number of blanks ({})".format(
+                self.question_cards[i], self.number_of_cards))
+            return self.pick_question_card()
+
         card = self.question_cards.pop(i)
         self.manager.cards.bump_card_occurences(card.id)
 
@@ -628,7 +696,7 @@ class Round:
                     self.game.token, self.round_index, pl))
                 card_texts = self.get_card_texts(pl)
                 self.game.manager.send_message_to_user(pl.player_id, round_text_master.format(
-                    self.round_index, self.question_card.beautified_text, self.question_card.id), callback=(lambda x: self.messages_to_delete.append(x.result())))
+                    self.round_index, self.question_card.beautified_text(), self.question_card.id), callback=(lambda x: self.messages_to_delete.append(x.result())))
             else:
                 self.send_player_information(pl)
 
@@ -705,6 +773,30 @@ class Round:
                 return
             else:
                 self.send_player_information(player)
+        elif args[0] == "info":
+            try:
+                num = int(args[1]) - 1
+            except:
+                self.game.manager.send_message_to_user(
+                    player.player_id, "This is not a number!".format(len(player.cards)), delete_after=5)
+                wait_again()
+                return
+
+            if num < 0 or num >= len(player.cards):
+                self.game.manager.send_message_to_user(
+                    player.player_id, "Please provide an index between 1 and {}".format(len(player.cards)), delete_after=5)
+                wait_again()
+                return
+
+            card_chosen = player.get_card(num)
+
+            print("[CAH] <{}: {}> ({}) requests information about card ({})".format(
+                self.game.token, self.round_index, player, card_chosen))
+
+            self.game.manager.send_message_to_user(
+                player.player_id, "Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ndrawn {0.picked_up_count} time{5}\nlike ratio: {4}%\ncreated {3}```".format(card_chosen, server.get_member(card_chosen.creator_id).mention, "s" if card_chosen.occurences != 1 else "", prettydate(card_chosen.creation_date), int(card_chosen.like_dislike_ratio * 100), "s" if card.picked_up_count != 1 else ""), delete_after=5)
+            wait_again()
+            return
 
         wait_again()
 
@@ -726,7 +818,7 @@ class Round:
         card_texts = []
         for i in range(len(player.cards)):
             card_texts.append(
-                "{}. [{}] *<{}>*".format(i + 1, player.cards[i].text, player.cards[i].id))
+                "{}. [{}]".format(i + 1, player.cards[i].text))
 
         return card_texts
 
@@ -740,9 +832,9 @@ class Round:
 
         card_texts = self.get_card_texts(player)
 
-        round_text_player = "**Round {0}**\n\n=====================\n{1} *<{5}>*\n=====================\n\n*Pick {2} card{3}*\n\nYou can use the following commands:\n`pick index [text_for_blanks]`: Pick one of your cards\n\n**Your cards**\n{4}"
+        round_text_player = "**Round {0}**\n\n```\n{1}```*<{5}>*\n\n*Pick {2} card{3}*\n\nYou can use the following commands:\n`pick <index> [text_for_blanks]`: Pick one of your cards\n`info <index>`: Get some more info about one of your cards\n\n**Your cards**\n{4}"
 
-        self.game.manager.send_message_to_user(player.player_id, round_text_player.format(self.round_index, self.question_card.beautified_text, cards_to_assign,
+        self.game.manager.send_message_to_user(player.player_id, round_text_player.format(self.round_index, self.question_card.beautified_text(self.answers.get(player, d=None)), cards_to_assign,
                                                                                           "s" if cards_to_assign != 1 else "", "\n".join(card_texts), self.question_card.id), callback=(lambda x: self.messages_to_delete.append(x.result())))
 
     def assign_cards(self):
@@ -781,7 +873,7 @@ class Round:
         print("[CAH] <{}: {}> Master ({}) has picked ({})\'s answer ({})".format(
             self.game.token, self.round_index, self.master, player_key, answers))
 
-        self.game.broadcast("{} won the game with the card{} {}".format(self.game.manager.musicbot.get_global_user(player_key.player_id).mention, "s" if len(
+        self.game.broadcast("**{}** won the game with the card{} {}".format(self.game.manager.musicbot.get_global_user(player_key.player_id).name, "s" if len(
             answers) != 1 else "", ", ".join(["[{}] *<{}>*".format(ans.text, ans.id) for ans in answers])), delete_after=15)
         self.game.round_finished()
 
@@ -813,7 +905,7 @@ class Round:
         for pl in self.game.players:
             if pl == self.master:
                 self.game.manager.send_message_to_user(pl.player_id, master_judge_text.format(
-                    self.question_card.beautified_text, self.question_card.id, "\n".join(answer_texts)), callback=lambda x: self.messages_to_delete.append(x.result()))
+                    self.question_card.beautified_text(), self.question_card.id, "\n".join(answer_texts)), callback=lambda x: self.messages_to_delete.append(x.result()))
 
                 check = lambda msg, pl=pl: msg.author.id == pl.player_id and msg.content.lower(
                 ).startswith("pick")
@@ -821,7 +913,7 @@ class Round:
                     lambda fut, pl=pl: self.on_master_message(pl, fut.result()), check=check)
             else:
                 self.game.manager.send_message_to_user(pl.player_id, player_judge_text.format(
-                    self.question_card.beautified_text, self.question_card.id, "\n".join(answer_texts)), callback=lambda x: self.messages_to_delete.append(x.result()))
+                    self.question_card.beautified_text(), self.question_card.id, "\n".join(answer_texts)), callback=lambda x: self.messages_to_delete.append(x.result()))
 
     def on_master_message(self, player, message):
         if self.round_stopped:
