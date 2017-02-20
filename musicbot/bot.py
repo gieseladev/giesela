@@ -1763,7 +1763,7 @@ class MusicBot(discord.Client):
 
             song_progress = str(
                 timedelta(seconds=player.progress)).lstrip('0').lstrip(':')
-            song_total = str(timedelta(seconds=player.current_entry.duration)).lstrip(
+            song_total = str(timedelta(seconds=player.current_entry.end_seconds)).lstrip(
                 '0').lstrip(':')
             prog_str = '`[%s/%s]`' % (song_progress, song_total)
 
@@ -2349,8 +2349,7 @@ class MusicBot(discord.Client):
     async def cmd_radio(self, player, channel, author, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***radio
-            ***REMOVED***command_prefix***REMOVED***radio station name
+            ***REMOVED***command_prefix***REMOVED***radio [station name]
             ***REMOVED***command_prefix***REMOVED***radio random
         Play live radio.
         You can leave the parameters blank in order to get a tour around all the channels,
@@ -2615,11 +2614,11 @@ class MusicBot(discord.Client):
     async def cmd_random(self, channel, author, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***random item1, item2, item3...
-            ***REMOVED***command_prefix***REMOVED***random name of the set ¯\_(ツ)_/¯
-            ***REMOVED***command_prefix***REMOVED***random create name, option1, option2, option3...
-            ***REMOVED***command_prefix***REMOVED***random edit name, [add/remove/replace], item [, item2, item3]
-            ***REMOVED***command_prefix***REMOVED***random remove name
+            ***REMOVED***command_prefix***REMOVED***random <item1>, <item2>, [item3], [item4]...
+            ***REMOVED***command_prefix***REMOVED***random <name of the set>
+            ***REMOVED***command_prefix***REMOVED***random create <name>, <option1>, <option2>, [option3], [option4]...
+            ***REMOVED***command_prefix***REMOVED***random edit <name>, [add | remove | replace], <item> [, item2, item3]
+            ***REMOVED***command_prefix***REMOVED***random remove <name>
             ***REMOVED***command_prefix***REMOVED***random list
 
         Choose a random item out of a list or use a pre-defined list.
@@ -3035,11 +3034,11 @@ class MusicBot(discord.Client):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***cah create
-            ***REMOVED***command_prefix***REMOVED***cah join [token]
-            ***REMOVED***command_prefix***REMOVED***cah leave [token]
+            ***REMOVED***command_prefix***REMOVED***cah join <token>
+            ***REMOVED***command_prefix***REMOVED***cah leave <token>
 
-            ***REMOVED***command_prefix***REMOVED***cah start [token]
-            ***REMOVED***command_prefix***REMOVED***cah stop [token]
+            ***REMOVED***command_prefix***REMOVED***cah start <token>
+            ***REMOVED***command_prefix***REMOVED***cah stop <token>
 
         Play a cards against humanity game
 
@@ -3130,20 +3129,20 @@ class MusicBot(discord.Client):
             self.cah.stop_game(g.token)
             return Response("Stopped the game *****REMOVED******REMOVED*****".format(token), delete_after=15)
 
-    async def cmd_cards(self, server, channel, author, leftover_args):
+    async def cmd_cards(self, server, channel, author, message, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***cards list [text/occurences/date/random/none/author/id]
+            ***REMOVED***command_prefix***REMOVED***cards list [@mention] [text | likes | occurences | date | random | id | author | none]
                 -list all the available cards
-            ***REMOVED***command_prefix***REMOVED***cards create text
+            ***REMOVED***command_prefix***REMOVED***cards create <text>
                 -create a new card with text
-            ***REMOVED***command_prefix***REMOVED***cards edit id new_text
+            ***REMOVED***command_prefix***REMOVED***cards edit <id> <new_text>
                 -edit a card by its id
-            ***REMOVED***command_prefix***REMOVED***cards info id
+            ***REMOVED***command_prefix***REMOVED***cards info <id>
                 -Get more detailed information about a card
-            ***REMOVED***command_prefix***REMOVED***cards search query
+            ***REMOVED***command_prefix***REMOVED***cards search <query>
                 -Search for a card
-            ***REMOVED***command_prefix***REMOVED***cards delete id
+            ***REMOVED***command_prefix***REMOVED***cards delete <id>
                 -Delete a question card
 
         Here you manage the non question cards
@@ -3153,20 +3152,24 @@ class MusicBot(discord.Client):
             leftover_args) > 0 else None
 
         if argument == "list":
-            sort_modes = ***REMOVED***"text": (lambda entry: entry.text, False), "random": None, "occurences": (lambda entry: entry.occurences, True), "date": (
-                lambda entry: entry.creation_date, False), "date": (lambda entry: entry.creation_date, True), "author": (lambda entry: entry.author_id, False), "id": (lambda entry: entry.id, False)***REMOVED***
+            sort_modes = ***REMOVED***"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (
+                lambda entry: entry.creation_date, True, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "likes": (lambda entry: entry.like_dislike_ratio, False, lambda entry: "***REMOVED******REMOVED***%".format(int(entry.like_dislike_ratio * 100)))***REMOVED***
 
-            cards = self.cah.cards.cards.copy()
+            cards = self.cah.cards.cards.copy() if message.mentions is None or len(message.mentions) < 1 else [
+                x for x in self.cah.cards.cards.copy() if x.creator_id in [u.id for u in message.mentions]]
             sort_mode = leftover_args[1].lower() if len(leftover_args) > 1 and leftover_args[
                 1].lower() in sort_modes.keys() else "none"
+
+            display_info = None
 
             if sort_mode == "random":
                 shuffle(cards)
             elif sort_mode != "none":
                 cards = sorted(cards, key=sort_modes[sort_mode][
                                0], reverse=sort_modes[sort_mode][1])
+                display_info = sort_modes[sort_mode][2]
 
-            await self.card_viewer(channel, author, cards)
+            await self.card_viewer(channel, author, cards, display_info)
         elif argument == "search":
             search_query = " ".join(leftover_args[1:]) if len(
                 leftover_args) > 1 else None
@@ -3192,8 +3195,8 @@ class MusicBot(discord.Client):
 
             card = self.cah.cards.get_card(card_id)
             if card is not None:
-                info = "Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ndrawn ***REMOVED***0.picked_up_count***REMOVED*** time***REMOVED***5***REMOVED***\ncreated ***REMOVED***3***REMOVED***```\nUse `***REMOVED***4***REMOVED***cards edit ***REMOVED***0.id***REMOVED***` to edit this card"
-                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date), self.config.command_prefix, "s" if card.picked_up_count != 1 else ""))
+                info = "Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ndrawn ***REMOVED***0.picked_up_count***REMOVED*** time***REMOVED***5***REMOVED***\nliked by ***REMOVED***6***REMOVED***% of players\ncreated ***REMOVED***3***REMOVED***```\nUse `***REMOVED***4***REMOVED***cards edit ***REMOVED***0.id***REMOVED***` to edit this card"
+                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date), self.config.command_prefix, "s" if card.picked_up_count != 1 else "", int(card.like_dislike_ratio * 100)))
 
             return Response("There's no card with that id. Use `***REMOVED******REMOVED***cards list` to list all the possible cards".format(self.config.command_prefix))
         elif argument == "create":
@@ -3255,16 +3258,17 @@ class MusicBot(discord.Client):
         else:
             return await self.cmd_help(channel, ["cards"])
 
-    async def card_viewer(self, channel, author, cards):
+    async def card_viewer(self, channel, author, cards, display_additional=None):
         cmds = ("n", "p", "exit")
         site_interface = "**Cards | Page ***REMOVED***0***REMOVED*** of ***REMOVED***1***REMOVED*****\n```\n***REMOVED***2***REMOVED***\n```\nShit you can do:\n`n`: Switch to the next page\n`p`: Switch to the previous page\n`exit`: Exit the viewer"
-        card_string = "<***REMOVED******REMOVED***> [***REMOVED******REMOVED***]"
+        card_string = "<***REMOVED******REMOVED***> [***REMOVED******REMOVED***]***REMOVED******REMOVED***"
 
         items_per_page = 20
         timeout = 60
         current_page = 0
 
-        total_pages, items_on_last_page = divmod(len(cards) - 1, items_per_page)
+        total_pages, items_on_last_page = divmod(
+            len(cards) - 1, items_per_page)
 
         def msg_check(msg):
             return msg.content.lower().strip().startswith(cmds)
@@ -3278,7 +3282,8 @@ class MusicBot(discord.Client):
 
             page_cards_texts = []
             for p_c in page_cards:
-                page_cards_texts.append(card_string.format(p_c.id, p_c.text))
+                page_cards_texts.append(card_string.format(p_c.id, p_c.text, "" if display_additional is None or display_additional(
+                    p_c) is None else " | ***REMOVED******REMOVED***".format(display_additional(p_c))))
 
             interface_msg = await self.safe_send_message(channel, site_interface.format(current_page + 1, total_pages + 1, "\n".join(page_cards_texts)))
             user_msg = await self.wait_for_message(timeout, author=author, channel=channel, check=msg_check)
@@ -3296,8 +3301,7 @@ class MusicBot(discord.Client):
             elif content.startswith("p"):
                 await self.safe_delete_message(interface_msg)
                 await self.safe_delete_message(user_msg)
-                current_page = (current_page - 1) % (total_pages + 1
-)
+                current_page = (current_page - 1) % (total_pages + 1)
             elif content.startswith("exit"):
                 await self.safe_delete_message(interface_msg)
                 await self.safe_delete_message(user_msg)
@@ -3305,20 +3309,20 @@ class MusicBot(discord.Client):
 
         await self.safe_send_message(channel, "Closed the card viewer!", expire_in=20)
 
-    async def cmd_qcards(self, server, channel, author, leftover_args):
+    async def cmd_qcards(self, server, channel, author, message, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***qcards list [text/occurences/date/random/none/author/id/blanks]
+            ***REMOVED***command_prefix***REMOVED***qcards list [@mention] [text | likes | occurences | date | author | id | blanks | random | none]
                 -list all the available question cards
-            ***REMOVED***command_prefix***REMOVED***qcards create text (use $ for blanks)
+            ***REMOVED***command_prefix***REMOVED***qcards create <text (use $ for blanks)>
                 -create a new question card with text and if you want the number of cards to draw
-            ***REMOVED***command_prefix***REMOVED***qcards edit id new_text
+            ***REMOVED***command_prefix***REMOVED***qcards edit <id> <new_text>
                 -edit a question card by its id
-            ***REMOVED***command_prefix***REMOVED***qcards info id
+            ***REMOVED***command_prefix***REMOVED***qcards info <id>
                 -Get more detailed information about a question card
-            ***REMOVED***command_prefix***REMOVED***qcards search query
+            ***REMOVED***command_prefix***REMOVED***qcards search <query>
                 -Search for a question card
-            ***REMOVED***command_prefix***REMOVED***qcards delete id
+            ***REMOVED***command_prefix***REMOVED***qcards delete <id>
                 -Delete a question card
 
         Here you manage the question cards
@@ -3328,20 +3332,23 @@ class MusicBot(discord.Client):
             leftover_args) > 0 else None
 
         if argument == "list":
-            sort_modes = ***REMOVED***"text": (lambda entry: entry.text, False), "random": None, "occurences": (lambda entry: entry.occurences, True), "date": (lambda entry: entry.creation_date, False), "date": (
-                lambda entry: entry.creation_date, True), "author": (lambda entry: entry.author_id, False), "id": (lambda entry: entry.id, False), "blanks": (lambda entry: entry.number_of_blanks, False)***REMOVED***
+            sort_modes = ***REMOVED***"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (lambda entry: entry.creation_date, True, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "blanks": (lambda entry: entry.number_of_blanks, True, lambda entry: entry.number_of_blanks), "likes": (lambda entry: entry.like_dislike_ratio, False, lambda entry: "***REMOVED******REMOVED***%".format(int(entry.like_dislike_ratio * 100)))***REMOVED***
 
-            cards = self.cah.cards.question_cards.copy()
+            cards = self.cah.cards.question_cards.copy() if message.mentions is None or len(message.mentions) < 1 else [
+                x for x in self.cah.cards.question_cards.copy() if x.creator_id in [u.id for u in message.mentions]]
             sort_mode = leftover_args[1].lower() if len(leftover_args) > 1 and leftover_args[
                 1].lower() in sort_modes.keys() else "none"
+
+            display_info = None
 
             if sort_mode == "random":
                 shuffle(cards)
             elif sort_mode != "none":
                 cards = sorted(cards, key=sort_modes[sort_mode][
                                0], reverse=sort_modes[sort_mode][1])
+                display_info = sort_modes[sort_mode][2]
 
-            await self.qcard_viewer(channel, author, cards)
+            await self.qcard_viewer(channel, author, cards, display_info)
         elif argument == "search":
             search_query = " ".join(leftover_args[1:]) if len(
                 leftover_args) > 1 else None
@@ -3436,16 +3443,17 @@ class MusicBot(discord.Client):
         else:
             return await self.cmd_help(channel, ["qcards"])
 
-    async def qcard_viewer(self, channel, author, cards):
+    async def qcard_viewer(self, channel, author, cards, display_additional=None):
         cmds = ("n", "p", "exit")
         site_interface = "**Question Cards | Page ***REMOVED***0***REMOVED*** of ***REMOVED***1***REMOVED*****\n```\n***REMOVED***2***REMOVED***\n```\nShit you can do:\n`n`: Switch to the next page\n`p`: Switch to the previous page\n`exit`: Exit the viewer"
-        card_string = "<***REMOVED******REMOVED***> \"***REMOVED******REMOVED***\""
+        card_string = "<***REMOVED******REMOVED***> \"***REMOVED******REMOVED***\"***REMOVED******REMOVED***"
 
         items_per_page = 20
         timeout = 60
         current_page = 0
 
-        total_pages, items_on_last_page = divmod(len(cards) - 1, items_per_page)
+        total_pages, items_on_last_page = divmod(
+            len(cards) - 1, items_per_page)
 
         def msg_check(msg):
             return msg.content.lower().strip().startswith(cmds)
@@ -3460,7 +3468,7 @@ class MusicBot(discord.Client):
             page_cards_texts = []
             for p_c in page_cards:
                 page_cards_texts.append(card_string.format(
-                    p_c.id, p_c.text.replace("$", "_____")))
+                    p_c.id, p_c.text.replace("$", "_____"), "" if display_additional is None or display_additional(p_c) is None else " | ***REMOVED******REMOVED***".format(display_additional(p_c))))
 
             interface_msg = await self.safe_send_message(channel, site_interface.format(current_page + 1, total_pages + 1, "\n".join(page_cards_texts)))
             user_msg = await self.wait_for_message(timeout, author=author, channel=channel, check=msg_check)
@@ -3489,8 +3497,7 @@ class MusicBot(discord.Client):
     async def cmd_game(self, message, channel, author, leftover_args, game=None):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***game
-            ***REMOVED***command_prefix***REMOVED***game name
+            ***REMOVED***command_prefix***REMOVED***game [name]
 
         Play a game I guess... Whaddya expect?
         """
@@ -3709,28 +3716,28 @@ class MusicBot(discord.Client):
     #     if os.path.exists(saveloc):
     #         os.remove(saveloc)
 
-    async def nine_gag_get_section(self, channel, message):
-        category_dict = ***REMOVED***"🔥": "hot", "📈": "trending", "🆕": "new"***REMOVED***
-
-        def check(reaction, user):
-            if reaction.custom_emoji:
-                return False
-
-            if str(reaction.emoji) in category_dict.keys() and reaction.count > 1 and user == author:
-                return True
-
-            return False
-
-        msg = await self.safe_send_message("What section would you like to switch to?")
-        await self.add_reaction(msg, "🔥")
-        await self.add_reaction(msg, "📈")
-        await self.add_reaction(msg, "🆕")
-
-        reaction, user = await self.wait_for_reaction(check=check, message=msg)
-
-        await self.safe_delete_message(msg)
-
-        return category_dict[str(reaction.emoji)]
+    # async def nine_gag_get_section(self, channel, message):
+        # category_dict = ***REMOVED***"🔥": "hot", "📈": "trending", "🆕": "new"***REMOVED***
+        #
+        # def check(reaction, user):
+        #     if reaction.custom_emoji:
+        #         return False
+        #
+        #     if str(reaction.emoji) in category_dict.keys() and reaction.count > 1 and user == author:
+        #         return True
+        #
+        #     return False
+        #
+        # msg = await self.safe_send_message("What section would you like to switch to?")
+        # await self.add_reaction(msg, "🔥")
+        # await self.add_reaction(msg, "📈")
+        # await self.add_reaction(msg, "🆕")
+        #
+        # reaction, user = await self.wait_for_reaction(check=check, message=msg)
+        #
+        # await self.safe_delete_message(msg)
+        #
+        # return category_dict[str(reaction.emoji)]
 
     async def cmd_repeat(self, player):
         """
@@ -3807,14 +3814,14 @@ class MusicBot(discord.Client):
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***playlist showall [alphabetical, author, entries, playtime, random, replays]
-            ***REMOVED***command_prefix***REMOVED***playlist savename
-            ***REMOVED***command_prefix***REMOVED***playlist save savename
-            ***REMOVED***command_prefix***REMOVED***playlist load savename [add, replace] [none, alphabetical, length, random] [startindex, endindex (inclusive)]
-            ***REMOVED***command_prefix***REMOVED***playlist delete savename
-            ***REMOVED***command_prefix***REMOVED***playlist clone fromname savename [startindex, endindex (inclusive)]
+            ***REMOVED***command_prefix***REMOVED***playlist showall [alphabetical | author | entries | playtime | random | replays]
+            ***REMOVED***command_prefix***REMOVED***playlist <savename>
+            ***REMOVED***command_prefix***REMOVED***playlist save <savename>
+            ***REMOVED***command_prefix***REMOVED***playlist load <savename> [add | replace] [none | alphabetical | length | random] [startindex | endindex (inclusive)]
+            ***REMOVED***command_prefix***REMOVED***playlist delete <savename>
+            ***REMOVED***command_prefix***REMOVED***playlist clone <fromname> <savename> [startindex | endindex (inclusive)]
 
-            ***REMOVED***command_prefix***REMOVED***playlist builder savename
+            ***REMOVED***command_prefix***REMOVED***playlist builder <savename>
 
         Save the current playlist so you can load it again later. Every savename has to be unique. Just typing the savename after the commands gives you some information of the playlist.
         """
@@ -4194,7 +4201,7 @@ class MusicBot(discord.Client):
     async def cmd_addplayingtoplaylist(self, channel, author, player, playlistname):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***addplayingtoplaylist playlistname
+            ***REMOVED***command_prefix***REMOVED***addplayingtoplaylist <playlistname>
 
         Add the current entry to a playlist
         """
@@ -4221,7 +4228,7 @@ class MusicBot(discord.Client):
     async def cmd_removeplayingfromplaylist(self, channel, author, player, playlistname):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***removeplayingfromplaylist playlistname
+            ***REMOVED***command_prefix***REMOVED***removeplayingfromplaylist <playlistname>
 
         Remove the current entry from a playlist
         """
@@ -4240,6 +4247,54 @@ class MusicBot(discord.Client):
         self.playlists.edit_playlist(
             playlistname, player.playlist, remove_entries=[player.current_entry])
         return Response("Removed the current song from the playlist.")
+
+    async def cmd_setentrystart(self, player, playlistname):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***setentrystart <playlistname>
+
+        Set the start time for the current entry in the playlist to the current time
+        """
+
+        if playlistname is None:
+            return Response("Please specify the playlist's name!", delete_after=20)
+
+        playlistname = playlistname.lower()
+
+        if not player.current_entry:
+            return Response("There's nothing playing right now...", delete_after=20)
+
+        new_start = player.progress
+        new_entry = player.current_entry
+        new_entry.set_start(new_start)
+        self.playlists.edit_playlist(
+            playlistname, player.playlist, remove_entries=[player.current_entry], new_entries=[new_entry])
+
+        return Response("Set the starting point to ***REMOVED******REMOVED*** seconds.".format(new_start), delete_after=20)
+
+    async def cmd_setentryend(self, player, playlistname):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***setentryend <playlistname>
+
+        Set the end time for the current entry in the playlist to the current time
+        """
+
+        if playlistname is None:
+            return Response("Please specify the playlist's name!", delete_after=20)
+
+        playlistname = playlistname.lower()
+
+        if not player.current_entry:
+            return Response("There's nothing playing right now...", delete_after=20)
+
+        new_end = player.progress
+        new_entry = player.current_entry
+        new_entry.set_end(new_end)
+        self.playlists.edit_playlist(
+            playlistname, player.playlist, remove_entries=[player.current_entry], new_entries=[new_entry])
+
+        return Response("Set the ending point to ***REMOVED******REMOVED*** seconds.".format(new_start), delete_after=20)
 
     async def cmd_wiki(self, channel, message, leftover_args):
         """
@@ -4631,10 +4686,43 @@ class MusicBot(discord.Client):
         except Exception as e:
             return Response("Something went wrong with your code:\n```\n***REMOVED******REMOVED***\n```".format(str(e)))
 
+    async def cmd_skipto(self, player, timestamp):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***skipto <timestamp>
+
+        Go to the given timestamp formatted (minutes:seconds)
+        """
+
+        parts = timestamp.split(":")
+        if len(parts) < 1:  # Shouldn't occur, but who knows?
+            return Response("Please provide a valid timestamp", delete_after=20)
+
+        # seconds, minutes, hours, days
+        values = (1, 60, 60 * 60, 60 * 60 * 24)
+
+        secs = 0
+        for i in range(len(parts)):
+            try:
+                v = int(parts[i])
+            except:
+                continue
+
+            j = len(parts) - i - 1
+            if j >= len(values):  # If I don't have a conversion from this to seconds
+                continue
+            secs += v * values[j]
+
+        if player.current_entry is None:
+            return Response("Nothing playing!", delete_after=20)
+
+        if not player.goto_seconds(secs):
+            return Response("Timestamp exceeds song duration!", delete_after=20)
+
     async def cmd_register(self, author, server, token):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***register token
+            ***REMOVED***command_prefix***REMOVED***register <token>
 
         Use this function to register your phone in order to control the musicbot
         """
