@@ -234,7 +234,7 @@ class Cards:
         card_id = self.get_unique_id()
         self.ids_used.append(card_id)
         self.question_cards.append(
-            QuestionCard(card_id, text, 0, creator_id, datetime.now()))
+            QuestionCard(card_id, text, 0, creator_id, datetime.now(), 0, 0))
         self.save_question_cards()
         return card_id
 
@@ -245,7 +245,7 @@ class Cards:
         card_id = self.get_unique_id()
         self.ids_used.append(card_id)
         self.cards.append(
-            Card(card_id, text, 0, creator_id, datetime.now(), 0))
+            Card(card_id, text, 0, creator_id, datetime.now(), 0, 0, 0))
         self.save_cards()
         return card_id
 
