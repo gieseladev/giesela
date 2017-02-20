@@ -119,7 +119,8 @@ class Card:
 
 class Cards:
 
-    def __init__(self):
+    def __init__(self, cah):
+        self.cah = cah
         self.question_cards = []
         self.cards = []
         self.ids_used = []
@@ -233,8 +234,13 @@ class Cards:
 
         card_id = self.get_unique_id()
         self.ids_used.append(card_id)
-        self.question_cards.append(
-            QuestionCard(card_id, text, 0, creator_id, datetime.now(), 0, 0))
+        new_card = QuestionCard(
+            card_id, text, 0, creator_id, datetime.now(), 0, 0)
+
+        for g in self.cah.running_games:
+            g.add_card(new_card)
+
+        self.question_cards.append(new_card)
         self.save_question_cards()
         return card_id
 
@@ -244,8 +250,12 @@ class Cards:
 
         card_id = self.get_unique_id()
         self.ids_used.append(card_id)
-        self.cards.append(
-            Card(card_id, text, 0, creator_id, datetime.now(), 0, 0, 0))
+        new_card = Card(card_id, text, 0, creator_id, datetime.now(), 0, 0, 0)
+
+        for g in self.cah.running_games:
+            g.add_card(new_card)
+
+        self.cards.append(new_card)
         self.save_cards()
         return card_id
 
@@ -409,7 +419,7 @@ class GameCAH:
     def __init__(self, musicbot):
         self.musicbot = musicbot
         self.running_games = ***REMOVED******REMOVED***
-        self.cards = Cards()
+        self.cards = Cards(self)
 
     def new_game(self, operator_id):
         if self.is_user_in_game(operator_id):
@@ -623,6 +633,12 @@ class Game:
             self.current_round.player_left(pl)
 
         return True
+
+    def add_card(self, card):
+        self.cards.append(card.copy())
+
+    def add_question_card(self, card):
+        self.question_cards.append(card.copy())
 
     def pick_card(self):
         if len(self.cards) < 1:
