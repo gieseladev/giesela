@@ -73,7 +73,7 @@ class Card:
 
     @classmethod
     def blank_card(cls):
-        return cls(0, "BLANK", 0, 0, datetime.now())
+        return cls(0, "BLANK", 0, 0, datetime.now(), 1)
 
     def bump_occurences(self):
         self.occurences += 1
