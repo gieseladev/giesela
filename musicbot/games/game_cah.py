@@ -714,7 +714,7 @@ class Round:
         self.master.bump_master()
         self.round_stopped = False
 
-        round_text_master = "**Round ***REMOVED***0***REMOVED*** || YOU ARE THE MASTER**\n\n=====================\n***REMOVED***1***REMOVED*** *<***REMOVED***2***REMOVED***>*\n=====================\n\n*Wait for the players to choose*"
+        round_text_master = "**Round ***REMOVED***0***REMOVED*** || YOU ARE THE MASTER**\n\n```\n***REMOVED***1***REMOVED***```*<***REMOVED***2***REMOVED***>*\n\n*Wait for the players to choose*"
         for pl in self.game.players:
             pl.bump_played()
 
@@ -821,7 +821,7 @@ class Round:
                 self.game.token, self.round_index, player, card_chosen))
 
             self.game.manager.send_message_to_user(
-                player.player_id, "Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ndrawn ***REMOVED***0.picked_up_count***REMOVED*** time***REMOVED***5***REMOVED***\nlike ratio: ***REMOVED***4***REMOVED***%\ncreated ***REMOVED***3***REMOVED***```".format(card_chosen, self.game.manager.musicbot.get_global_user(card_chosen.creator_id).name, "s" if card_chosen.occurences != 1 else "", prettydate(card_chosen.creation_date), int(card_chosen.like_dislike_ratio * 100), "s" if card_chosen.picked_up_count != 1 else ""), delete_after=5)
+                player.player_id, "Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ndrawn ***REMOVED***0.picked_up_count***REMOVED*** time***REMOVED***5***REMOVED***\nlike ratio: ***REMOVED***4***REMOVED***%\ncreated ***REMOVED***3***REMOVED***```".format(card_chosen, self.game.manager.musicbot.get_global_user(card_chosen.creator_id).name, "s" if card_chosen.occurences != 1 else "", prettydate(card_chosen.creation_date), int(card_chosen.like_dislike_ratio * 100), "s" if card_chosen.picked_up_count != 1 else ""), delete_after=20)
             wait_again()
             return
         elif args[0] == "like":
@@ -846,7 +846,7 @@ class Round:
                 self.game.token, self.round_index, player, card_chosen))
 
             self.game.manager.send_message_to_user(
-                player.player_id, "Thanks for voting!".format(card_chosen, self.game.manager.musicbot.get_global_user(card_chosen.creator_id).name, "s" if card_chosen.occurences != 1 else "", prettydate(card_chosen.creation_date), int(card_chosen.like_dislike_ratio * 100), "s" if card_chosen.picked_up_count != 1 else ""), delete_after=5)
+                player.player_id, "Thanks for voting!", delete_after=5)
             wait_again()
             return
         elif args[0] == "dislike":
@@ -871,7 +871,7 @@ class Round:
                 self.game.token, self.round_index, player, card_chosen))
 
             self.game.manager.send_message_to_user(
-                player.player_id, "Thanks for voting!".format(card_chosen, self.game.manager.musicbot.get_global_user(card_chosen.creator_id).name, "s" if card_chosen.occurences != 1 else "", prettydate(card_chosen.creation_date), int(card_chosen.like_dislike_ratio * 100), "s" if card_chosen.picked_up_count != 1 else ""), delete_after=5)
+                player.player_id, "Thanks for voting!", delete_after=5)
             wait_again()
             return
 
