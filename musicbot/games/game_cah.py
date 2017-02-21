@@ -1,11 +1,11 @@
-import asyncio
-import configparser
 import json
 import random
 import re
 from datetime import datetime
 from functools import partial
 
+import asyncio
+import configparser
 from musicbot.config import ConfigDefaults
 from musicbot.utils import prettydate
 
@@ -80,7 +80,7 @@ class QuestionCard:
         text = self.text
         if answers is not None:
             for a in answers:
-                text = text.replace("$", a.text, 1)
+                text = text.replace("$", "\"***REMOVED******REMOVED***\"".format(a.text), 1)
 
         return text.replace("$", "_____")
 
@@ -702,6 +702,9 @@ class Round:
             game.token, round_index))
         self.game = game
         self.master = game.pick_master()
+        self.game.broadcast("******REMOVED******REMOVED***** is the master this round*".format(
+            self.game.manager.musicbot.get_global_user(self.master).name), delete_after=15)
+
         self.question_card = game.pick_question_card()
         self.messages_to_delete = []
         self.round_index = round_index
@@ -753,14 +756,20 @@ class Round:
         print("[CAH] <***REMOVED******REMOVED***: ***REMOVED******REMOVED***> (***REMOVED******REMOVED***) sent: \"***REMOVED******REMOVED***\"".format(
             self.game.token, self.round_index, player, content))
 
-        if args[0] == "pick":
-            try:
-                num = int(args[1]) - 1
-            except:
-                self.game.manager.send_message_to_user(
-                    player.player_id, "This is not a number!".format(len(player.cards)), delete_after=5)
-                wait_again()
-                return
+        try:
+            num = int(args[0]) - 1
+        except:
+            num = None
+
+        if args[0] == "pick" or num is not None:
+            if num is None:
+                try:
+                    num = int(args[1]) - 1
+                except:
+                    self.game.manager.send_message_to_user(
+                        player.player_id, "This is not a number!".format(len(player.cards)), delete_after=5)
+                    wait_again()
+                    return
 
             if num < 0 or num >= len(player.cards):
                 self.game.manager.send_message_to_user(
@@ -874,6 +883,8 @@ class Round:
                 player.player_id, "Thanks for voting!", delete_after=5)
             wait_again()
             return
+        elif args[0] == "stats":
+            pass
 
         wait_again()
 
@@ -889,6 +900,7 @@ class Round:
             return False
 
         self.players_to_answer.remove(to_delete)
+        self.send_player_information(player)
         return True
 
     def get_card_texts(self, player):
@@ -909,7 +921,7 @@ class Round:
 
         card_texts = self.get_card_texts(player)
 
-        round_text_player = "**Round ***REMOVED***0***REMOVED*****\n\n```\n***REMOVED***1***REMOVED***```*<***REMOVED***5***REMOVED***>*\n\n*Pick ***REMOVED***2***REMOVED*** card***REMOVED***3***REMOVED****\n\nYou can use the following commands:\n`pick <index> [text_for_blanks]`: Pick one of your cards\n`info <index>`: Get some more info about one of your cards\n`like <index>`: Upvote a card\n`dislike <index>`: Downvote a card\n\n**Your cards**\n***REMOVED***4***REMOVED***"
+        round_text_player = "**Round ***REMOVED***0***REMOVED*****\n\n```\n***REMOVED***1***REMOVED***```*<***REMOVED***5***REMOVED***>*\n\n*Pick ***REMOVED***2***REMOVED*** card***REMOVED***3***REMOVED****\n\nYou can use the following commands:\n`pick <index> [text_for_blanks]`: Pick one of your cards\n`info <index>`: Get some more info about one of your cards\n`like <index>`: Upvote a card\n`dislike <index>`: Downvote a card\n`stats`: Get some stats about the current game\n\n**Your cards**\n***REMOVED***4***REMOVED***"
 
         self.game.manager.send_message_to_user(player.player_id, round_text_player.format(self.round_index, self.question_card.beautified_text(self.answers.get(player, None)), cards_to_assign,
                                                                                           "s" if cards_to_assign != 1 else "", "\n".join(card_texts), self.question_card.id), callback=(lambda x: self.messages_to_delete.append(x.result())))
