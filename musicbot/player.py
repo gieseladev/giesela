@@ -1,15 +1,15 @@
+import asyncio
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
+from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
 
-import asyncio
 import audioop
-from enum import Enum
 
 from .exceptions import FFmpegError, FFmpegWarning
 from .lib.event_emitter import EventEmitter
@@ -125,13 +125,15 @@ class MusicPlayer(EventEmitter):
         self.loop.create_task(self.websocket_check())
         self.bot.socket_server.threaded_broadcast_information()
         self.handle_manually = False
+        self.volume_scale = 20
 
     @property
     def volume(self):
-        return self._volume
+        return self._volume * self.volume_scale
 
     @volume.setter
     def volume(self, value):
+        value /= self.volume_scale
         self._volume = value
         if self._current_player:
             self._current_player.buff.volume = value
@@ -183,7 +185,9 @@ class MusicPlayer(EventEmitter):
             return False
 
         c_entry = self.current_entry
-        c_entry.set_start(secs)
+        if not c_entry.set_start(secs):
+            return False
+
         self.play_entry(c_entry)
         return True
 
