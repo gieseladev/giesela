@@ -80,9 +80,9 @@ class QuestionCard:
         text = self.text
         if answers is not None:
             for a in answers:
-                text = text.replace("$", a.text, 1)
+                text = text.replace("$", "\"***REMOVED******REMOVED***\"".format(a.text), 1)
 
-        return text.replace("$", "\_\_\_\_\_")
+        return text.replace("$", "_____")
 
 
 class Card:
@@ -702,6 +702,9 @@ class Round:
             game.token, round_index))
         self.game = game
         self.master = game.pick_master()
+        self.game.broadcast("******REMOVED******REMOVED***** is the master this round*".format(
+            self.game.manager.musicbot.get_global_user(self.master).name), delete_after=15)
+
         self.question_card = game.pick_question_card()
         self.messages_to_delete = []
         self.round_index = round_index
@@ -714,7 +717,7 @@ class Round:
         self.master.bump_master()
         self.round_stopped = False
 
-        round_text_master = "**Round ***REMOVED***0***REMOVED*** || YOU ARE THE MASTER**\n\n=====================\n***REMOVED***1***REMOVED*** *<***REMOVED***2***REMOVED***>*\n=====================\n\n*Wait for the players to choose*"
+        round_text_master = "**Round ***REMOVED***0***REMOVED*** || YOU ARE THE MASTER**\n\n```\n***REMOVED***1***REMOVED***```*<***REMOVED***2***REMOVED***>*\n\n*Wait for the players to choose*"
         for pl in self.game.players:
             pl.bump_played()
 
@@ -753,14 +756,20 @@ class Round:
         print("[CAH] <***REMOVED******REMOVED***: ***REMOVED******REMOVED***> (***REMOVED******REMOVED***) sent: \"***REMOVED******REMOVED***\"".format(
             self.game.token, self.round_index, player, content))
 
-        if args[0] == "pick":
-            try:
-                num = int(args[1]) - 1
-            except:
-                self.game.manager.send_message_to_user(
-                    player.player_id, "This is not a number!".format(len(player.cards)), delete_after=5)
-                wait_again()
-                return
+        try:
+            num = int(args[0]) - 1
+        except:
+            num = None
+
+        if args[0] == "pick" or num is not None:
+            if num is None:
+                try:
+                    num = int(args[1]) - 1
+                except:
+                    self.game.manager.send_message_to_user(
+                        player.player_id, "This is not a number!".format(len(player.cards)), delete_after=5)
+                    wait_again()
+                    return
 
             if num < 0 or num >= len(player.cards):
                 self.game.manager.send_message_to_user(
@@ -815,15 +824,67 @@ class Round:
                 wait_again()
                 return
 
-            card_chosen = player.get_card(num)
+            card_chosen = player.get_card(num, True)
 
             print("[CAH] <***REMOVED******REMOVED***: ***REMOVED******REMOVED***> (***REMOVED******REMOVED***) requests information about card (***REMOVED******REMOVED***)".format(
                 self.game.token, self.round_index, player, card_chosen))
 
             self.game.manager.send_message_to_user(
-                player.player_id, "Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ndrawn ***REMOVED***0.picked_up_count***REMOVED*** time***REMOVED***5***REMOVED***\nlike ratio: ***REMOVED***4***REMOVED***%\ncreated ***REMOVED***3***REMOVED***```".format(card_chosen, server.get_member(card_chosen.creator_id).mention, "s" if card_chosen.occurences != 1 else "", prettydate(card_chosen.creation_date), int(card_chosen.like_dislike_ratio * 100), "s" if card.picked_up_count != 1 else ""), delete_after=5)
+                player.player_id, "Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ndrawn ***REMOVED***0.picked_up_count***REMOVED*** time***REMOVED***5***REMOVED***\nlike ratio: ***REMOVED***4***REMOVED***%\ncreated ***REMOVED***3***REMOVED***```".format(card_chosen, self.game.manager.musicbot.get_global_user(card_chosen.creator_id).name, "s" if card_chosen.occurences != 1 else "", prettydate(card_chosen.creation_date), int(card_chosen.like_dislike_ratio * 100), "s" if card_chosen.picked_up_count != 1 else ""), delete_after=20)
             wait_again()
             return
+        elif args[0] == "like":
+            try:
+                num = int(args[1]) - 1
+            except:
+                self.game.manager.send_message_to_user(
+                    player.player_id, "This is not a number!".format(len(player.cards)), delete_after=5)
+                wait_again()
+                return
+
+            if num < 0 or num >= len(player.cards):
+                self.game.manager.send_message_to_user(
+                    player.player_id, "Please provide an index between 1 and ***REMOVED******REMOVED***".format(len(player.cards)), delete_after=5)
+                wait_again()
+                return
+
+            card_chosen = player.get_card(num, True)
+            self.game.manager.cards.bump_card_likes(card_chosen.id)
+
+            print("[CAH] <***REMOVED******REMOVED***: ***REMOVED******REMOVED***> (***REMOVED******REMOVED***) likes card (***REMOVED******REMOVED***)".format(
+                self.game.token, self.round_index, player, card_chosen))
+
+            self.game.manager.send_message_to_user(
+                player.player_id, "Thanks for voting!", delete_after=5)
+            wait_again()
+            return
+        elif args[0] == "dislike":
+            try:
+                num = int(args[1]) - 1
+            except:
+                self.game.manager.send_message_to_user(
+                    player.player_id, "This is not a number!".format(len(player.cards)), delete_after=5)
+                wait_again()
+                return
+
+            if num < 0 or num >= len(player.cards):
+                self.game.manager.send_message_to_user(
+                    player.player_id, "Please provide an index between 1 and ***REMOVED******REMOVED***".format(len(player.cards)), delete_after=5)
+                wait_again()
+                return
+
+            card_chosen = player.get_card(num, True)
+            self.game.manager.cards.bump_card_dislikes(card_chosen.id)
+
+            print("[CAH] <***REMOVED******REMOVED***: ***REMOVED******REMOVED***> (***REMOVED******REMOVED***) dislikes card (***REMOVED******REMOVED***)".format(
+                self.game.token, self.round_index, player, card_chosen))
+
+            self.game.manager.send_message_to_user(
+                player.player_id, "Thanks for voting!", delete_after=5)
+            wait_again()
+            return
+        elif args[0] == "stats":
+            pass
 
         wait_again()
 
@@ -839,6 +900,7 @@ class Round:
             return False
 
         self.players_to_answer.remove(to_delete)
+        self.send_player_information(player)
         return True
 
     def get_card_texts(self, player):
@@ -859,9 +921,9 @@ class Round:
 
         card_texts = self.get_card_texts(player)
 
-        round_text_player = "**Round ***REMOVED***0***REMOVED*****\n\n```\n***REMOVED***1***REMOVED***```*<***REMOVED***5***REMOVED***>*\n\n*Pick ***REMOVED***2***REMOVED*** card***REMOVED***3***REMOVED****\n\nYou can use the following commands:\n`pick <index> [text_for_blanks]`: Pick one of your cards\n`info <index>`: Get some more info about one of your cards\n\n**Your cards**\n***REMOVED***4***REMOVED***"
+        round_text_player = "**Round ***REMOVED***0***REMOVED*****\n\n```\n***REMOVED***1***REMOVED***```*<***REMOVED***5***REMOVED***>*\n\n*Pick ***REMOVED***2***REMOVED*** card***REMOVED***3***REMOVED****\n\nYou can use the following commands:\n`pick <index> [text_for_blanks]`: Pick one of your cards\n`info <index>`: Get some more info about one of your cards\n`like <index>`: Upvote a card\n`dislike <index>`: Downvote a card\n`stats`: Get some stats about the current game\n\n**Your cards**\n***REMOVED***4***REMOVED***"
 
-        self.game.manager.send_message_to_user(player.player_id, round_text_player.format(self.round_index, self.question_card.beautified_text(self.answers.get(player, d=None)), cards_to_assign,
+        self.game.manager.send_message_to_user(player.player_id, round_text_player.format(self.round_index, self.question_card.beautified_text(self.answers.get(player, None)), cards_to_assign,
                                                                                           "s" if cards_to_assign != 1 else "", "\n".join(card_texts), self.question_card.id), callback=(lambda x: self.messages_to_delete.append(x.result())))
 
     def assign_cards(self):
@@ -917,7 +979,10 @@ class Round:
 
         i = 1
         self.answers_by_index = []
-        for pl_key in self.answers:
+        ans_keys = list(self.answers.keys())
+        random.shuffle(ans_keys)
+
+        for pl_key in ans_keys:
             pl_answers = self.answers.get(pl_key, None)
             if pl_answers is None:
                 continue
@@ -1011,8 +1076,8 @@ class Player:
         self.rounds_won += 1
         self.score += cards_needed * players_facing
 
-    def get_card(self, index):
+    def get_card(self, index, no_pop=False):
         if index >= 0 and index < len(self.cards):
-            return self.cards.pop(index)
+            return self.cards.pop(index) if not no_pop else self.cards[index]
 
         return None
