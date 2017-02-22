@@ -4304,7 +4304,7 @@ class MusicBot(discord.Client):
 
         Set the name of the current song
         """
-        new_title = new_name + " ".join(leftover_args)
+        new_title = new_name + " " + " ".join(leftover_args)
 
         if playlistname is None:
             return Response("Please specify the playlist's name!", delete_after=20)

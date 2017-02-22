@@ -1,56 +1,6 @@
 {
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=pF2s8rJkyVE",
-  "title": "\"Demise\" - Evanescence",
-  "duration": 97,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    },
-    "author": {
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    }
-  },
-  "start_seconds": 0,
-  "end_seconds": 97
-}
-;
-{
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=Qocb3_cc2Cw",
-  "title": "\"Origin\" - Evanescence",
-  "duration": 35,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    },
-    "author": {
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    }
-  },
-  "start_seconds": 0,
-  "end_seconds": 35
-}
-;
-{
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=M1Y4WCONbBU",
   "title": "12 Stones - Broken",
   "duration": 191,
@@ -71,31 +21,6 @@
   },
   "start_seconds": 0,
   "end_seconds": 191
-}
-;
-{
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=hXs1fWCgOW4",
-  "title": "2 Chainz - Good Drank ft. Gucci Mane, Quavo",
-  "duration": 238,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    },
-    "author": {
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    }
-  },
-  "start_seconds": 0,
-  "end_seconds": 238
 }
 ;
 {
@@ -18742,4 +18667,29 @@
   },
   "start_seconds": 0,
   "end_seconds": 225
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=hXs1fWCgOW4",
+  "title": "2Chainz- Good Drank",
+  "duration": 238,
+  "downloaded": true,
+  "filename": "audio_cache\\youtube-hXs1fWCgOW4-2_Chainz_-_Good_Drank_ft._Gucci_Mane_Quavo.webm",
+  "expected_filename": "unknown2-chainz-good-drank-ft-gucci-mane-quavo",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "206459363739566080",
+      "name": "Lophorius"
+    }
+  },
+  "start_seconds": 0,
+  "end_seconds": 238
 }
