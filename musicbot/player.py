@@ -125,7 +125,7 @@ class MusicPlayer(EventEmitter):
         self.loop.create_task(self.websocket_check())
         self.bot.socket_server.threaded_broadcast_information()
         self.handle_manually = False
-        self.volume_scale = 20
+        self.volume_scale = 15
 
     @property
     def volume(self):
