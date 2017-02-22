@@ -130,6 +130,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         filename = data['filename'] if downloaded else (
             data["expected_filename"] if data["expected_filename"] is not None else None)
         start_seconds = data.get("start_seconds", 0)
+        start_seconds = 0 if start_seconds is None else start_seconds
         end_seconds = data.get("end_seconds", duration)
         meta = ***REMOVED******REMOVED***
 
@@ -185,6 +186,15 @@ class URLPlaylistEntry(BasePlaylistEntry):
             return False
 
         self.end_seconds = sec
+        return True
+
+    def set_title(self, new_title):
+        new_title = new_title.strip()
+
+        if len(new_title) > 300 or len(new_title) < 3:
+            return False
+
+        self.title = new_title
         return True
 
     # noinspection PyTypeChecker

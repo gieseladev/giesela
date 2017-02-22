@@ -3332,7 +3332,8 @@ class MusicBot(discord.Client):
             leftover_args) > 0 else None
 
         if argument == "list":
-            sort_modes = ***REMOVED***"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (lambda entry: entry.creation_date, True, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "blanks": (lambda entry: entry.number_of_blanks, True, lambda entry: entry.number_of_blanks), "likes": (lambda entry: entry.like_dislike_ratio, False, lambda entry: "***REMOVED******REMOVED***%".format(int(entry.like_dislike_ratio * 100)))***REMOVED***
+            sort_modes = ***REMOVED***"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (lambda entry: entry.creation_date, True, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(
+                entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "blanks": (lambda entry: entry.number_of_blanks, True, lambda entry: entry.number_of_blanks), "likes": (lambda entry: entry.like_dislike_ratio, False, lambda entry: "***REMOVED******REMOVED***%".format(int(entry.like_dislike_ratio * 100)))***REMOVED***
 
             cards = self.cah.cards.question_cards.copy() if message.mentions is None or len(message.mentions) < 1 else [
                 x for x in self.cah.cards.question_cards.copy() if x.creator_id in [u.id for u in message.mentions]]
@@ -4295,6 +4296,33 @@ class MusicBot(discord.Client):
             playlistname, player.playlist, remove_entries=[player.current_entry], new_entries=[new_entry])
 
         return Response("Set the ending point to ***REMOVED******REMOVED*** seconds.".format(new_start), delete_after=20)
+
+    async def cmd_setplayingname(self, player, playlistname, new_name, leftover_args):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***setplayingname <playlistname> <new name>
+
+        Set the name of the current song
+        """
+        new_title = new_name + " ".join(leftover_args)
+
+        if playlistname is None:
+            return Response("Please specify the playlist's name!", delete_after=20)
+
+        playlistname = playlistname.lower()
+
+        if not player.current_entry:
+            return Response("There's nothing playing right now...", delete_after=20)
+
+        if len(new_title) > 500 or len(new_title) < 3:
+            return Response("The new title has to be at least 3 characters long", delete_after=20)
+
+        new_entry = player.current_entry
+        new_entry.set_title(new_title)
+        self.playlists.edit_playlist(
+            playlistname, player.playlist, remove_entries=[player.current_entry], new_entries=[new_entry])
+
+        return Response("The new title is \"***REMOVED******REMOVED***\"".format(new_title), delete_after=20)
 
     async def cmd_wiki(self, channel, message, leftover_args):
         """

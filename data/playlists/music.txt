@@ -1,31 +1,6 @@
 ***REMOVED***
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=tbIHf6JHdcA",
-  "title": "\"All That I'm Living For\" - Evanescence",
-  "duration": 229,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": ***REMOVED***
-    "channel": ***REMOVED***
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    ***REMOVED***,
-    "author": ***REMOVED***
-      "type": "Member",
-      "id": "206459363739566080",
-      "name": "Lophorius"
-    ***REMOVED***
-  ***REMOVED***,
-  "start_seconds": null,
-  "end_seconds": 229
-***REMOVED***
-;
-***REMOVED***
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=pF2s8rJkyVE",
   "title": "\"Demise\" - Evanescence",
   "duration": 97,
@@ -44,7 +19,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 97
 ***REMOVED***
 ;
@@ -69,7 +44,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 35
 ***REMOVED***
 ;
@@ -94,7 +69,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 191
 ***REMOVED***
 ;
@@ -119,7 +94,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 238
 ***REMOVED***
 ;
@@ -144,7 +119,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 256
 ***REMOVED***
 ;
@@ -169,7 +144,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 315
 ***REMOVED***
 ;
@@ -194,7 +169,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 ***REMOVED***
 ;
@@ -219,7 +194,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 236
 ***REMOVED***
 ;
@@ -244,7 +219,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 235
 ***REMOVED***
 ;
@@ -269,7 +244,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 214
 ***REMOVED***
 ;
@@ -294,7 +269,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 279
 ***REMOVED***
 ;
@@ -319,7 +294,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 276
 ***REMOVED***
 ;
@@ -344,7 +319,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 217
 ***REMOVED***
 ;
@@ -369,7 +344,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 367
 ***REMOVED***
 ;
@@ -394,7 +369,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 234
 ***REMOVED***
 ;
@@ -419,7 +394,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 ***REMOVED***
 ;
@@ -444,7 +419,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 254
 ***REMOVED***
 ;
@@ -469,7 +444,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 163
 ***REMOVED***
 ;
@@ -494,7 +469,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 213
 ***REMOVED***
 ;
@@ -519,7 +494,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 192
 ***REMOVED***
 ;
@@ -544,7 +519,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 167
 ***REMOVED***
 ;
@@ -569,7 +544,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 182
 ***REMOVED***
 ;
@@ -594,7 +569,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 310
 ***REMOVED***
 ;
@@ -619,7 +594,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 219
 ***REMOVED***
 ;
@@ -633,7 +608,7 @@
   "filename": null,
   "expected_filename": null,
   "meta": ***REMOVED******REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 294
 ***REMOVED***
 ;
@@ -658,7 +633,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 264
 ***REMOVED***
 ;
@@ -683,7 +658,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 286
 ***REMOVED***
 ;
@@ -708,7 +683,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 214
 ***REMOVED***
 ;
@@ -733,7 +708,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 249
 ***REMOVED***
 ;
@@ -758,7 +733,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 208
 ***REMOVED***
 ;
@@ -783,7 +758,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 237
 ***REMOVED***
 ;
@@ -808,7 +783,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 247
 ***REMOVED***
 ;
@@ -833,7 +808,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 178
 ***REMOVED***
 ;
@@ -858,7 +833,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 266
 ***REMOVED***
 ;
@@ -883,7 +858,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 236
 ***REMOVED***
 ;
@@ -908,7 +883,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 195
 ***REMOVED***
 ;
@@ -933,7 +908,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 255
 ***REMOVED***
 ;
@@ -958,7 +933,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 231
 ***REMOVED***
 ;
@@ -983,7 +958,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 207
 ***REMOVED***
 ;
@@ -997,7 +972,7 @@
   "filename": null,
   "expected_filename": null,
   "meta": ***REMOVED******REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 340
 ***REMOVED***
 ;
@@ -1022,7 +997,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 238
 ***REMOVED***
 ;
@@ -1047,7 +1022,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 230
 ***REMOVED***
 ;
@@ -1072,7 +1047,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 149
 ***REMOVED***
 ;
@@ -1097,7 +1072,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 182
 ***REMOVED***
 ;
@@ -1122,7 +1097,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 234
 ***REMOVED***
 ;
@@ -1147,7 +1122,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 223
 ***REMOVED***
 ;
@@ -1172,7 +1147,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 172
 ***REMOVED***
 ;
@@ -1197,7 +1172,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 222
 ***REMOVED***
 ;
@@ -1222,7 +1197,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 239
 ***REMOVED***
 ;
@@ -1247,7 +1222,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 186
 ***REMOVED***
 ;
@@ -1272,7 +1247,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 202
 ***REMOVED***
 ;
@@ -1297,7 +1272,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 173
 ***REMOVED***
 ;
@@ -1322,7 +1297,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 179
 ***REMOVED***
 ;
@@ -1347,7 +1322,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 181
 ***REMOVED***
 ;
@@ -1372,7 +1347,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 175
 ***REMOVED***
 ;
@@ -1397,7 +1372,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 174
 ***REMOVED***
 ;
@@ -1422,7 +1397,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 258
 ***REMOVED***
 ;
@@ -1447,7 +1422,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 162
 ***REMOVED***
 ;
@@ -1472,7 +1447,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 188
 ***REMOVED***
 ;
@@ -1497,7 +1472,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 231
 ***REMOVED***
 ;
@@ -1522,7 +1497,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 240
 ***REMOVED***
 ;
@@ -1547,7 +1522,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 205
 ***REMOVED***
 ;
@@ -1572,7 +1547,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -1597,7 +1572,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 156
 ***REMOVED***
 ;
@@ -1611,7 +1586,7 @@
   "filename": null,
   "expected_filename": null,
   "meta": ***REMOVED******REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 253
 ***REMOVED***
 ;
@@ -1636,7 +1611,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 259
 ***REMOVED***
 ;
@@ -1661,7 +1636,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 198
 ***REMOVED***
 ;
@@ -1686,7 +1661,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -1711,7 +1686,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 243
 ***REMOVED***
 ;
@@ -1736,7 +1711,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 320
 ***REMOVED***
 ;
@@ -1761,7 +1736,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 251
 ***REMOVED***
 ;
@@ -1786,7 +1761,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 237
 ***REMOVED***
 ;
@@ -1811,7 +1786,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 233
 ***REMOVED***
 ;
@@ -1836,7 +1811,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 ***REMOVED***
 ;
@@ -1861,7 +1836,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 261
 ***REMOVED***
 ;
@@ -1886,7 +1861,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 283
 ***REMOVED***
 ;
@@ -1911,7 +1886,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 ***REMOVED***
 ;
@@ -1936,7 +1911,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 249
 ***REMOVED***
 ;
@@ -1961,7 +1936,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 197
 ***REMOVED***
 ;
@@ -1986,7 +1961,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 758
 ***REMOVED***
 ;
@@ -2011,7 +1986,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 280
 ***REMOVED***
 ;
@@ -2036,7 +2011,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 239
 ***REMOVED***
 ;
@@ -2061,7 +2036,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 248
 ***REMOVED***
 ;
@@ -2086,7 +2061,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 382
 ***REMOVED***
 ;
@@ -2111,7 +2086,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 288
 ***REMOVED***
 ;
@@ -2136,7 +2111,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 316
 ***REMOVED***
 ;
@@ -2161,7 +2136,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 265
 ***REMOVED***
 ;
@@ -2186,7 +2161,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 230
 ***REMOVED***
 ;
@@ -2211,7 +2186,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 ***REMOVED***
 ;
@@ -2236,7 +2211,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 276
 ***REMOVED***
 ;
@@ -2261,7 +2236,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 146
 ***REMOVED***
 ;
@@ -2286,7 +2261,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 209
 ***REMOVED***
 ;
@@ -2311,7 +2286,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 259
 ***REMOVED***
 ;
@@ -2336,7 +2311,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 252
 ***REMOVED***
 ;
@@ -2361,7 +2336,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 193
 ***REMOVED***
 ;
@@ -2386,7 +2361,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 249
 ***REMOVED***
 ;
@@ -2411,7 +2386,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 234
 ***REMOVED***
 ;
@@ -2436,7 +2411,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 275
 ***REMOVED***
 ;
@@ -2461,7 +2436,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 242
 ***REMOVED***
 ;
@@ -2486,7 +2461,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 209
 ***REMOVED***
 ;
@@ -2511,7 +2486,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 234
 ***REMOVED***
 ;
@@ -2536,7 +2511,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 249
 ***REMOVED***
 ;
@@ -2561,7 +2536,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 192
 ***REMOVED***
 ;
@@ -2586,7 +2561,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 233
 ***REMOVED***
 ;
@@ -2611,7 +2586,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 245
 ***REMOVED***
 ;
@@ -2636,7 +2611,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 207
 ***REMOVED***
 ;
@@ -2661,7 +2636,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 301
 ***REMOVED***
 ;
@@ -2686,7 +2661,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 ***REMOVED***
 ;
@@ -2711,7 +2686,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 208
 ***REMOVED***
 ;
@@ -2736,7 +2711,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 261
 ***REMOVED***
 ;
@@ -2761,7 +2736,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 190
 ***REMOVED***
 ;
@@ -2786,7 +2761,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 286
 ***REMOVED***
 ;
@@ -2811,7 +2786,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 211
 ***REMOVED***
 ;
@@ -2836,7 +2811,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 221
 ***REMOVED***
 ;
@@ -2861,7 +2836,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 244
 ***REMOVED***
 ;
@@ -2886,7 +2861,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 226
 ***REMOVED***
 ;
@@ -2911,7 +2886,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 239
 ***REMOVED***
 ;
@@ -2936,7 +2911,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 226
 ***REMOVED***
 ;
@@ -2961,7 +2936,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 238
 ***REMOVED***
 ;
@@ -2986,7 +2961,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 199
 ***REMOVED***
 ;
@@ -3011,7 +2986,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 189
 ***REMOVED***
 ;
@@ -3036,7 +3011,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 241
 ***REMOVED***
 ;
@@ -3061,7 +3036,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 121
 ***REMOVED***
 ;
@@ -3086,7 +3061,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 284
 ***REMOVED***
 ;
@@ -3111,7 +3086,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 203
 ***REMOVED***
 ;
@@ -3136,7 +3111,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 209
 ***REMOVED***
 ;
@@ -3161,7 +3136,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 242
 ***REMOVED***
 ;
@@ -3186,7 +3161,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 231
 ***REMOVED***
 ;
@@ -3211,7 +3186,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 252
 ***REMOVED***
 ;
@@ -3236,7 +3211,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 257
 ***REMOVED***
 ;
@@ -3261,7 +3236,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 303
 ***REMOVED***
 ;
@@ -3286,7 +3261,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 211
 ***REMOVED***
 ;
@@ -3311,7 +3286,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 254
 ***REMOVED***
 ;
@@ -3336,7 +3311,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 236
 ***REMOVED***
 ;
@@ -3361,7 +3336,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 244
 ***REMOVED***
 ;
@@ -3386,7 +3361,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 195
 ***REMOVED***
 ;
@@ -3411,7 +3386,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 176
 ***REMOVED***
 ;
@@ -3436,7 +3411,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 214
 ***REMOVED***
 ;
@@ -3461,7 +3436,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 195
 ***REMOVED***
 ;
@@ -3486,7 +3461,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 220
 ***REMOVED***
 ;
@@ -3511,7 +3486,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 198
 ***REMOVED***
 ;
@@ -3536,7 +3511,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 316
 ***REMOVED***
 ;
@@ -3561,7 +3536,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 196
 ***REMOVED***
 ;
@@ -3586,7 +3561,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 296
 ***REMOVED***
 ;
@@ -3611,7 +3586,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 261
 ***REMOVED***
 ;
@@ -3636,7 +3611,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 229
 ***REMOVED***
 ;
@@ -3661,7 +3636,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 228
 ***REMOVED***
 ;
@@ -3686,7 +3661,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 322
 ***REMOVED***
 ;
@@ -3711,7 +3686,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 271
 ***REMOVED***
 ;
@@ -3736,7 +3711,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 217
 ***REMOVED***
 ;
@@ -3761,7 +3736,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 282
 ***REMOVED***
 ;
@@ -3786,7 +3761,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 279
 ***REMOVED***
 ;
@@ -3811,7 +3786,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 239
 ***REMOVED***
 ;
@@ -3836,7 +3811,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 289
 ***REMOVED***
 ;
@@ -3861,7 +3836,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 279
 ***REMOVED***
 ;
@@ -3886,7 +3861,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 233
 ***REMOVED***
 ;
@@ -3911,7 +3886,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 287
 ***REMOVED***
 ;
@@ -3936,7 +3911,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 331
 ***REMOVED***
 ;
@@ -3961,7 +3936,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 420
 ***REMOVED***
 ;
@@ -3986,7 +3961,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 205
 ***REMOVED***
 ;
@@ -4011,7 +3986,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 300
 ***REMOVED***
 ;
@@ -4036,7 +4011,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 ***REMOVED***
 ;
@@ -4061,7 +4036,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 219
 ***REMOVED***
 ;
@@ -4086,7 +4061,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 294
 ***REMOVED***
 ;
@@ -4111,7 +4086,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 182
 ***REMOVED***
 ;
@@ -4136,7 +4111,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 196
 ***REMOVED***
 ;
@@ -4161,7 +4136,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 212
 ***REMOVED***
 ;
@@ -4186,7 +4161,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 191
 ***REMOVED***
 ;
@@ -4211,7 +4186,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 215
 ***REMOVED***
 ;
@@ -4236,7 +4211,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 234
 ***REMOVED***
 ;
@@ -4261,7 +4236,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 236
 ***REMOVED***
 ;
@@ -4286,7 +4261,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 242
 ***REMOVED***
 ;
@@ -4311,7 +4286,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 243
 ***REMOVED***
 ;
@@ -4336,7 +4311,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 240
 ***REMOVED***
 ;
@@ -4361,7 +4336,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 259
 ***REMOVED***
 ;
@@ -4386,7 +4361,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 216
 ***REMOVED***
 ;
@@ -4411,7 +4386,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 271
 ***REMOVED***
 ;
@@ -4436,7 +4411,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 300
 ***REMOVED***
 ;
@@ -4461,7 +4436,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 251
 ***REMOVED***
 ;
@@ -4486,7 +4461,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 247
 ***REMOVED***
 ;
@@ -4511,7 +4486,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 262
 ***REMOVED***
 ;
@@ -4536,7 +4511,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 178
 ***REMOVED***
 ;
@@ -4561,7 +4536,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 275
 ***REMOVED***
 ;
@@ -4586,7 +4561,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 254
 ***REMOVED***
 ;
@@ -4611,7 +4586,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 237
 ***REMOVED***
 ;
@@ -4636,7 +4611,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 213
 ***REMOVED***
 ;
@@ -4661,7 +4636,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 169
 ***REMOVED***
 ;
@@ -4686,7 +4661,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 236
 ***REMOVED***
 ;
@@ -4711,7 +4686,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 241
 ***REMOVED***
 ;
@@ -4736,7 +4711,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 230
 ***REMOVED***
 ;
@@ -4761,7 +4736,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 279
 ***REMOVED***
 ;
@@ -4786,7 +4761,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 215
 ***REMOVED***
 ;
@@ -4811,7 +4786,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 230
 ***REMOVED***
 ;
@@ -4836,7 +4811,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 182
 ***REMOVED***
 ;
@@ -4861,7 +4836,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 ***REMOVED***
 ;
@@ -4886,7 +4861,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 260
 ***REMOVED***
 ;
@@ -4911,7 +4886,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 288
 ***REMOVED***
 ;
@@ -4936,7 +4911,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 263
 ***REMOVED***
 ;
@@ -4961,7 +4936,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 295
 ***REMOVED***
 ;
@@ -4986,7 +4961,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 235
 ***REMOVED***
 ;
@@ -5011,7 +4986,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 263
 ***REMOVED***
 ;
@@ -5036,7 +5011,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 249
 ***REMOVED***
 ;
@@ -5061,7 +5036,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 245
 ***REMOVED***
 ;
@@ -5086,7 +5061,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 252
 ***REMOVED***
 ;
@@ -5111,7 +5086,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 267
 ***REMOVED***
 ;
@@ -5136,7 +5111,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 239
 ***REMOVED***
 ;
@@ -5161,7 +5136,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 179
 ***REMOVED***
 ;
@@ -5186,7 +5161,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 249
 ***REMOVED***
 ;
@@ -5211,7 +5186,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 206
 ***REMOVED***
 ;
@@ -5236,7 +5211,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 710
 ***REMOVED***
 ;
@@ -5261,7 +5236,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 197
 ***REMOVED***
 ;
@@ -5286,7 +5261,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 593
 ***REMOVED***
 ;
@@ -5311,7 +5286,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 253
 ***REMOVED***
 ;
@@ -5336,7 +5311,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 212
 ***REMOVED***
 ;
@@ -5361,7 +5336,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 266
 ***REMOVED***
 ;
@@ -5386,7 +5361,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 234
 ***REMOVED***
 ;
@@ -5411,7 +5386,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 255
 ***REMOVED***
 ;
@@ -5436,7 +5411,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 215
 ***REMOVED***
 ;
@@ -5461,7 +5436,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 183
 ***REMOVED***
 ;
@@ -5486,7 +5461,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 210
 ***REMOVED***
 ;
@@ -5511,7 +5486,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 311
 ***REMOVED***
 ;
@@ -5536,7 +5511,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 207
 ***REMOVED***
 ;
@@ -5561,7 +5536,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 278
 ***REMOVED***
 ;
@@ -5586,7 +5561,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 98
 ***REMOVED***
 ;
@@ -5611,7 +5586,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 221
 ***REMOVED***
 ;
@@ -5636,7 +5611,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 273
 ***REMOVED***
 ;
@@ -5661,7 +5636,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 260
 ***REMOVED***
 ;
@@ -5686,7 +5661,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 228
 ***REMOVED***
 ;
@@ -5711,7 +5686,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 290
 ***REMOVED***
 ;
@@ -5736,7 +5711,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 279
 ***REMOVED***
 ;
@@ -5761,7 +5736,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 ***REMOVED***
 ;
@@ -5786,7 +5761,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 228
 ***REMOVED***
 ;
@@ -5811,7 +5786,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 272
 ***REMOVED***
 ;
@@ -5836,7 +5811,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 241
 ***REMOVED***
 ;
@@ -5861,7 +5836,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 ***REMOVED***
 ;
@@ -5886,7 +5861,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 217
 ***REMOVED***
 ;
@@ -5911,7 +5886,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 387
 ***REMOVED***
 ;
@@ -5936,7 +5911,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 215
 ***REMOVED***
 ;
@@ -5961,7 +5936,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 202
 ***REMOVED***
 ;
@@ -5986,7 +5961,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 207
 ***REMOVED***
 ;
@@ -6011,7 +5986,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 188
 ***REMOVED***
 ;
@@ -6036,7 +6011,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 219
 ***REMOVED***
 ;
@@ -6061,7 +6036,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 123
 ***REMOVED***
 ;
@@ -6086,7 +6061,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 245
 ***REMOVED***
 ;
@@ -6111,7 +6086,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 204
 ***REMOVED***
 ;
@@ -6136,7 +6111,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 445
 ***REMOVED***
 ;
@@ -6161,7 +6136,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 221
 ***REMOVED***
 ;
@@ -6186,7 +6161,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 258
 ***REMOVED***
 ;
@@ -6211,7 +6186,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 185
 ***REMOVED***
 ;
@@ -6236,7 +6211,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 443
 ***REMOVED***
 ;
@@ -6261,7 +6236,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 291
 ***REMOVED***
 ;
@@ -6286,7 +6261,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 233
 ***REMOVED***
 ;
@@ -6311,7 +6286,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 177
 ***REMOVED***
 ;
@@ -6336,7 +6311,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 349
 ***REMOVED***
 ;
@@ -6361,7 +6336,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 197
 ***REMOVED***
 ;
@@ -6386,7 +6361,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 237
 ***REMOVED***
 ;
@@ -6411,7 +6386,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 217
 ***REMOVED***
 ;
@@ -6436,7 +6411,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 185
 ***REMOVED***
 ;
@@ -6461,7 +6436,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 299
 ***REMOVED***
 ;
@@ -6486,7 +6461,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 207
 ***REMOVED***
 ;
@@ -6511,7 +6486,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 233
 ***REMOVED***
 ;
@@ -6536,7 +6511,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 186
 ***REMOVED***
 ;
@@ -6561,7 +6536,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 195
 ***REMOVED***
 ;
@@ -6586,7 +6561,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 239
 ***REMOVED***
 ;
@@ -6611,7 +6586,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 220
 ***REMOVED***
 ;
@@ -6636,7 +6611,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 264
 ***REMOVED***
 ;
@@ -6661,7 +6636,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 211
 ***REMOVED***
 ;
@@ -6686,7 +6661,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 224
 ***REMOVED***
 ;
@@ -6711,7 +6686,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 220
 ***REMOVED***
 ;
@@ -6736,7 +6711,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 ***REMOVED***
 ;
@@ -6761,7 +6736,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 246
 ***REMOVED***
 ;
@@ -6786,7 +6761,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 272
 ***REMOVED***
 ;
@@ -6811,7 +6786,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 263
 ***REMOVED***
 ;
@@ -6836,7 +6811,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 229
 ***REMOVED***
 ;
@@ -6861,7 +6836,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 267
 ***REMOVED***
 ;
@@ -6886,7 +6861,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 185
 ***REMOVED***
 ;
@@ -6911,7 +6886,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 204
 ***REMOVED***
 ;
@@ -6936,7 +6911,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 250
 ***REMOVED***
 ;
@@ -6961,7 +6936,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 233
 ***REMOVED***
 ;
@@ -6986,7 +6961,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 207
 ***REMOVED***
 ;
@@ -7011,7 +6986,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 239
 ***REMOVED***
 ;
@@ -7036,7 +7011,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 323
 ***REMOVED***
 ;
@@ -7061,7 +7036,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 224
 ***REMOVED***
 ;
@@ -7086,7 +7061,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -7111,7 +7086,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 230
 ***REMOVED***
 ;
@@ -7136,7 +7111,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 240
 ***REMOVED***
 ;
@@ -7161,7 +7136,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 349
 ***REMOVED***
 ;
@@ -7186,7 +7161,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 202
 ***REMOVED***
 ;
@@ -7211,7 +7186,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 214
 ***REMOVED***
 ;
@@ -7236,7 +7211,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 292
 ***REMOVED***
 ;
@@ -7261,7 +7236,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 295
 ***REMOVED***
 ;
@@ -7286,7 +7261,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 216
 ***REMOVED***
 ;
@@ -7311,7 +7286,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 244
 ***REMOVED***
 ;
@@ -7336,7 +7311,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 203
 ***REMOVED***
 ;
@@ -7361,7 +7336,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 367
 ***REMOVED***
 ;
@@ -7386,7 +7361,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 188
 ***REMOVED***
 ;
@@ -7411,7 +7386,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 360
 ***REMOVED***
 ;
@@ -7436,7 +7411,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 231
 ***REMOVED***
 ;
@@ -7461,7 +7436,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 278
 ***REMOVED***
 ;
@@ -7486,7 +7461,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -7511,7 +7486,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 185
 ***REMOVED***
 ;
@@ -7536,7 +7511,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 192
 ***REMOVED***
 ;
@@ -7561,7 +7536,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 285
 ***REMOVED***
 ;
@@ -7586,7 +7561,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 270
 ***REMOVED***
 ;
@@ -7611,7 +7586,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 269
 ***REMOVED***
 ;
@@ -7636,7 +7611,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 220
 ***REMOVED***
 ;
@@ -7661,7 +7636,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 197
 ***REMOVED***
 ;
@@ -7686,7 +7661,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 259
 ***REMOVED***
 ;
@@ -7711,7 +7686,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 210
 ***REMOVED***
 ;
@@ -7736,7 +7711,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 243
 ***REMOVED***
 ;
@@ -7761,7 +7736,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 219
 ***REMOVED***
 ;
@@ -7786,7 +7761,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 259
 ***REMOVED***
 ;
@@ -7811,7 +7786,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 259
 ***REMOVED***
 ;
@@ -7836,7 +7811,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 294
 ***REMOVED***
 ;
@@ -7861,7 +7836,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 235
 ***REMOVED***
 ;
@@ -7886,7 +7861,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 262
 ***REMOVED***
 ;
@@ -7911,7 +7886,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 177
 ***REMOVED***
 ;
@@ -7936,7 +7911,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 203
 ***REMOVED***
 ;
@@ -7961,7 +7936,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 228
 ***REMOVED***
 ;
@@ -7986,7 +7961,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 217
 ***REMOVED***
 ;
@@ -8000,7 +7975,7 @@
   "filename": null,
   "expected_filename": null,
   "meta": ***REMOVED******REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 214
 ***REMOVED***
 ;
@@ -8025,7 +8000,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 246
 ***REMOVED***
 ;
@@ -8050,7 +8025,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 198
 ***REMOVED***
 ;
@@ -8075,7 +8050,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 261
 ***REMOVED***
 ;
@@ -8100,7 +8075,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 174
 ***REMOVED***
 ;
@@ -8125,7 +8100,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 241
 ***REMOVED***
 ;
@@ -8150,7 +8125,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 232
 ***REMOVED***
 ;
@@ -8175,7 +8150,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -8200,7 +8175,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 234
 ***REMOVED***
 ;
@@ -8225,7 +8200,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 209
 ***REMOVED***
 ;
@@ -8250,7 +8225,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 213
 ***REMOVED***
 ;
@@ -8275,7 +8250,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 249
 ***REMOVED***
 ;
@@ -8300,7 +8275,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 204
 ***REMOVED***
 ;
@@ -8325,7 +8300,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 165
 ***REMOVED***
 ;
@@ -8350,7 +8325,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 215
 ***REMOVED***
 ;
@@ -8375,7 +8350,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 198
 ***REMOVED***
 ;
@@ -8400,7 +8375,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 222
 ***REMOVED***
 ;
@@ -8425,7 +8400,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 211
 ***REMOVED***
 ;
@@ -8450,7 +8425,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 258
 ***REMOVED***
 ;
@@ -8475,7 +8450,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 242
 ***REMOVED***
 ;
@@ -8500,7 +8475,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 302
 ***REMOVED***
 ;
@@ -8525,7 +8500,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 221
 ***REMOVED***
 ;
@@ -8550,7 +8525,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 271
 ***REMOVED***
 ;
@@ -8575,7 +8550,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 204
 ***REMOVED***
 ;
@@ -8600,7 +8575,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 309
 ***REMOVED***
 ;
@@ -8625,7 +8600,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -8650,7 +8625,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 211
 ***REMOVED***
 ;
@@ -8675,7 +8650,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 255
 ***REMOVED***
 ;
@@ -8700,7 +8675,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 264
 ***REMOVED***
 ;
@@ -8725,7 +8700,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 235
 ***REMOVED***
 ;
@@ -8750,7 +8725,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 216
 ***REMOVED***
 ;
@@ -8775,7 +8750,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 219
 ***REMOVED***
 ;
@@ -8800,7 +8775,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 214
 ***REMOVED***
 ;
@@ -8825,7 +8800,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 222
 ***REMOVED***
 ;
@@ -8850,7 +8825,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 191
 ***REMOVED***
 ;
@@ -8875,7 +8850,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 206
 ***REMOVED***
 ;
@@ -8900,7 +8875,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 205
 ***REMOVED***
 ;
@@ -8925,7 +8900,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 216
 ***REMOVED***
 ;
@@ -8950,7 +8925,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 208
 ***REMOVED***
 ;
@@ -8975,7 +8950,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 251
 ***REMOVED***
 ;
@@ -8989,7 +8964,7 @@
   "filename": null,
   "expected_filename": null,
   "meta": ***REMOVED******REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 259
 ***REMOVED***
 ;
@@ -9014,7 +8989,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 208
 ***REMOVED***
 ;
@@ -9039,7 +9014,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 272
 ***REMOVED***
 ;
@@ -9064,7 +9039,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 205
 ***REMOVED***
 ;
@@ -9089,7 +9064,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 298
 ***REMOVED***
 ;
@@ -9114,7 +9089,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 561
 ***REMOVED***
 ;
@@ -9139,7 +9114,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 214
 ***REMOVED***
 ;
@@ -9164,7 +9139,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 216
 ***REMOVED***
 ;
@@ -9189,7 +9164,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 234
 ***REMOVED***
 ;
@@ -9214,7 +9189,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 ***REMOVED***
 ;
@@ -9239,7 +9214,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 234
 ***REMOVED***
 ;
@@ -9264,7 +9239,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 284
 ***REMOVED***
 ;
@@ -9289,7 +9264,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 252
 ***REMOVED***
 ;
@@ -9314,7 +9289,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 269
 ***REMOVED***
 ;
@@ -9339,7 +9314,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 255
 ***REMOVED***
 ;
@@ -9364,7 +9339,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 252
 ***REMOVED***
 ;
@@ -9389,7 +9364,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 282
 ***REMOVED***
 ;
@@ -9414,7 +9389,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 ***REMOVED***
 ;
@@ -9439,7 +9414,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 228
 ***REMOVED***
 ;
@@ -9464,7 +9439,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -9489,7 +9464,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 188
 ***REMOVED***
 ;
@@ -9514,7 +9489,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 242
 ***REMOVED***
 ;
@@ -9539,7 +9514,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 244
 ***REMOVED***
 ;
@@ -9564,7 +9539,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 211
 ***REMOVED***
 ;
@@ -9589,7 +9564,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 235
 ***REMOVED***
 ;
@@ -9614,7 +9589,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 219
 ***REMOVED***
 ;
@@ -9639,7 +9614,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 204
 ***REMOVED***
 ;
@@ -9664,7 +9639,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 214
 ***REMOVED***
 ;
@@ -9689,7 +9664,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 228
 ***REMOVED***
 ;
@@ -9714,7 +9689,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 197
 ***REMOVED***
 ;
@@ -9739,7 +9714,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 180
 ***REMOVED***
 ;
@@ -9764,7 +9739,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 247
 ***REMOVED***
 ;
@@ -9789,7 +9764,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 199
 ***REMOVED***
 ;
@@ -9814,7 +9789,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 264
 ***REMOVED***
 ;
@@ -9839,7 +9814,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 275
 ***REMOVED***
 ;
@@ -9864,7 +9839,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 244
 ***REMOVED***
 ;
@@ -9889,7 +9864,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 252
 ***REMOVED***
 ;
@@ -9914,7 +9889,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 245
 ***REMOVED***
 ;
@@ -9939,7 +9914,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 51
 ***REMOVED***
 ;
@@ -9964,7 +9939,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 ***REMOVED***
 ;
@@ -9989,7 +9964,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 210
 ***REMOVED***
 ;
@@ -10014,7 +9989,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 266
 ***REMOVED***
 ;
@@ -10039,7 +10014,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 305
 ***REMOVED***
 ;
@@ -10064,7 +10039,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 170
 ***REMOVED***
 ;
@@ -10089,7 +10064,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 222
 ***REMOVED***
 ;
@@ -10114,7 +10089,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 198
 ***REMOVED***
 ;
@@ -10139,7 +10114,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 283
 ***REMOVED***
 ;
@@ -10164,7 +10139,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 271
 ***REMOVED***
 ;
@@ -10189,7 +10164,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -10214,7 +10189,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 252
 ***REMOVED***
 ;
@@ -10239,7 +10214,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 184
 ***REMOVED***
 ;
@@ -10264,7 +10239,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 215
 ***REMOVED***
 ;
@@ -10289,7 +10264,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 283
 ***REMOVED***
 ;
@@ -10314,7 +10289,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 239
 ***REMOVED***
 ;
@@ -10339,7 +10314,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 143
 ***REMOVED***
 ;
@@ -10364,7 +10339,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 245
 ***REMOVED***
 ;
@@ -10389,7 +10364,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 247
 ***REMOVED***
 ;
@@ -10414,7 +10389,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 185
 ***REMOVED***
 ;
@@ -10439,7 +10414,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 228
 ***REMOVED***
 ;
@@ -10464,7 +10439,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 178
 ***REMOVED***
 ;
@@ -10489,7 +10464,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 275
 ***REMOVED***
 ;
@@ -10514,7 +10489,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 241
 ***REMOVED***
 ;
@@ -10539,7 +10514,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 284
 ***REMOVED***
 ;
@@ -10564,7 +10539,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 164
 ***REMOVED***
 ;
@@ -10589,7 +10564,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 256
 ***REMOVED***
 ;
@@ -10614,7 +10589,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 158
 ***REMOVED***
 ;
@@ -10639,7 +10614,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 278
 ***REMOVED***
 ;
@@ -10664,7 +10639,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 295
 ***REMOVED***
 ;
@@ -10689,7 +10664,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 244
 ***REMOVED***
 ;
@@ -10714,7 +10689,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 156
 ***REMOVED***
 ;
@@ -10739,7 +10714,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 232
 ***REMOVED***
 ;
@@ -10764,7 +10739,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 222
 ***REMOVED***
 ;
@@ -10789,7 +10764,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 194
 ***REMOVED***
 ;
@@ -10814,7 +10789,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 226
 ***REMOVED***
 ;
@@ -10839,7 +10814,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 236
 ***REMOVED***
 ;
@@ -10864,7 +10839,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 248
 ***REMOVED***
 ;
@@ -10889,7 +10864,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -10914,7 +10889,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 293
 ***REMOVED***
 ;
@@ -10939,7 +10914,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 200
 ***REMOVED***
 ;
@@ -10964,7 +10939,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 314
 ***REMOVED***
 ;
@@ -10989,7 +10964,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 239
 ***REMOVED***
 ;
@@ -11014,7 +10989,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 224
 ***REMOVED***
 ;
@@ -11039,7 +11014,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 340
 ***REMOVED***
 ;
@@ -11064,7 +11039,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 243
 ***REMOVED***
 ;
@@ -11089,7 +11064,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 424
 ***REMOVED***
 ;
@@ -11114,7 +11089,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 233
 ***REMOVED***
 ;
@@ -11139,7 +11114,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 ***REMOVED***
 ;
@@ -11164,7 +11139,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 275
 ***REMOVED***
 ;
@@ -11189,7 +11164,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 300
 ***REMOVED***
 ;
@@ -11214,7 +11189,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 279
 ***REMOVED***
 ;
@@ -11239,7 +11214,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 179
 ***REMOVED***
 ;
@@ -11264,7 +11239,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 255
 ***REMOVED***
 ;
@@ -11289,7 +11264,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 185
 ***REMOVED***
 ;
@@ -11314,7 +11289,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 189
 ***REMOVED***
 ;
@@ -11339,7 +11314,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 204
 ***REMOVED***
 ;
@@ -11364,7 +11339,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 171
 ***REMOVED***
 ;
@@ -11389,7 +11364,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 181
 ***REMOVED***
 ;
@@ -11414,7 +11389,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 256
 ***REMOVED***
 ;
@@ -11439,7 +11414,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 201
 ***REMOVED***
 ;
@@ -11464,7 +11439,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 226
 ***REMOVED***
 ;
@@ -11489,7 +11464,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 270
 ***REMOVED***
 ;
@@ -11514,7 +11489,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 379
 ***REMOVED***
 ;
@@ -11539,7 +11514,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 208
 ***REMOVED***
 ;
@@ -11564,7 +11539,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 223
 ***REMOVED***
 ;
@@ -11589,7 +11564,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 279
 ***REMOVED***
 ;
@@ -11614,7 +11589,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 301
 ***REMOVED***
 ;
@@ -11639,7 +11614,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 200
 ***REMOVED***
 ;
@@ -11664,7 +11639,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 242
 ***REMOVED***
 ;
@@ -11689,7 +11664,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 170
 ***REMOVED***
 ;
@@ -11714,7 +11689,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 205
 ***REMOVED***
 ;
@@ -11739,7 +11714,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 230
 ***REMOVED***
 ;
@@ -11764,7 +11739,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 255
 ***REMOVED***
 ;
@@ -11789,7 +11764,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 217
 ***REMOVED***
 ;
@@ -11814,7 +11789,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 182
 ***REMOVED***
 ;
@@ -11839,7 +11814,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 222
 ***REMOVED***
 ;
@@ -11864,7 +11839,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 332
 ***REMOVED***
 ;
@@ -11889,7 +11864,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 226
 ***REMOVED***
 ;
@@ -11914,7 +11889,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 181
 ***REMOVED***
 ;
@@ -11939,7 +11914,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 236
 ***REMOVED***
 ;
@@ -11964,7 +11939,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 260
 ***REMOVED***
 ;
@@ -11989,7 +11964,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 335
 ***REMOVED***
 ;
@@ -12014,7 +11989,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 305
 ***REMOVED***
 ;
@@ -12039,7 +12014,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 293
 ***REMOVED***
 ;
@@ -12064,7 +12039,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 249
 ***REMOVED***
 ;
@@ -12089,7 +12064,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 184
 ***REMOVED***
 ;
@@ -12114,7 +12089,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 236
 ***REMOVED***
 ;
@@ -12139,7 +12114,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 213
 ***REMOVED***
 ;
@@ -12164,7 +12139,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 236
 ***REMOVED***
 ;
@@ -12189,7 +12164,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 219
 ***REMOVED***
 ;
@@ -12214,7 +12189,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 344
 ***REMOVED***
 ;
@@ -12239,7 +12214,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 274
 ***REMOVED***
 ;
@@ -12264,7 +12239,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 239
 ***REMOVED***
 ;
@@ -12289,7 +12264,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 51
 ***REMOVED***
 ;
@@ -12314,7 +12289,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 244
 ***REMOVED***
 ;
@@ -12328,7 +12303,7 @@
   "filename": null,
   "expected_filename": null,
   "meta": ***REMOVED******REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 283
 ***REMOVED***
 ;
@@ -12353,7 +12328,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 230
 ***REMOVED***
 ;
@@ -12378,7 +12353,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 238
 ***REMOVED***
 ;
@@ -12403,7 +12378,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 228
 ***REMOVED***
 ;
@@ -12428,7 +12403,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 220
 ***REMOVED***
 ;
@@ -12453,7 +12428,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 389
 ***REMOVED***
 ;
@@ -12478,7 +12453,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 257
 ***REMOVED***
 ;
@@ -12503,7 +12478,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 186
 ***REMOVED***
 ;
@@ -12528,7 +12503,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 252
 ***REMOVED***
 ;
@@ -12553,7 +12528,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 189
 ***REMOVED***
 ;
@@ -12578,7 +12553,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 254
 ***REMOVED***
 ;
@@ -12603,7 +12578,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 275
 ***REMOVED***
 ;
@@ -12628,7 +12603,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 175
 ***REMOVED***
 ;
@@ -12653,7 +12628,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 192
 ***REMOVED***
 ;
@@ -12678,7 +12653,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 195
 ***REMOVED***
 ;
@@ -12703,7 +12678,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 283
 ***REMOVED***
 ;
@@ -12728,7 +12703,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 208
 ***REMOVED***
 ;
@@ -12753,7 +12728,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 274
 ***REMOVED***
 ;
@@ -12778,7 +12753,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 233
 ***REMOVED***
 ;
@@ -12803,7 +12778,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 171
 ***REMOVED***
 ;
@@ -12828,7 +12803,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 188
 ***REMOVED***
 ;
@@ -12853,7 +12828,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 252
 ***REMOVED***
 ;
@@ -12878,7 +12853,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 186
 ***REMOVED***
 ;
@@ -12903,7 +12878,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 290
 ***REMOVED***
 ;
@@ -12928,7 +12903,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 165
 ***REMOVED***
 ;
@@ -12953,7 +12928,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 254
 ***REMOVED***
 ;
@@ -12978,7 +12953,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 214
 ***REMOVED***
 ;
@@ -13003,7 +12978,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 ***REMOVED***
 ;
@@ -13028,7 +13003,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 281
 ***REMOVED***
 ;
@@ -13053,7 +13028,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 210
 ***REMOVED***
 ;
@@ -13078,7 +13053,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 309
 ***REMOVED***
 ;
@@ -13103,7 +13078,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 204
 ***REMOVED***
 ;
@@ -13128,7 +13103,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 205
 ***REMOVED***
 ;
@@ -13153,7 +13128,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 265
 ***REMOVED***
 ;
@@ -13178,7 +13153,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 293
 ***REMOVED***
 ;
@@ -13203,7 +13178,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 226
 ***REMOVED***
 ;
@@ -13228,7 +13203,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 244
 ***REMOVED***
 ;
@@ -13253,7 +13228,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 267
 ***REMOVED***
 ;
@@ -13278,7 +13253,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 216
 ***REMOVED***
 ;
@@ -13303,7 +13278,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 210
 ***REMOVED***
 ;
@@ -13328,7 +13303,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 226
 ***REMOVED***
 ;
@@ -13353,7 +13328,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 234
 ***REMOVED***
 ;
@@ -13378,7 +13353,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 198
 ***REMOVED***
 ;
@@ -13403,7 +13378,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 240
 ***REMOVED***
 ;
@@ -13428,7 +13403,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 214
 ***REMOVED***
 ;
@@ -13453,7 +13428,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 179
 ***REMOVED***
 ;
@@ -13478,7 +13453,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 191
 ***REMOVED***
 ;
@@ -13503,7 +13478,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 349
 ***REMOVED***
 ;
@@ -13528,7 +13503,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 267
 ***REMOVED***
 ;
@@ -13553,7 +13528,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 480
 ***REMOVED***
 ;
@@ -13567,7 +13542,7 @@
   "filename": null,
   "expected_filename": null,
   "meta": ***REMOVED******REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 295
 ***REMOVED***
 ;
@@ -13592,7 +13567,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 454
 ***REMOVED***
 ;
@@ -13617,7 +13592,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 207
 ***REMOVED***
 ;
@@ -13642,7 +13617,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 199
 ***REMOVED***
 ;
@@ -13667,7 +13642,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 223
 ***REMOVED***
 ;
@@ -13692,7 +13667,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 222
 ***REMOVED***
 ;
@@ -13717,7 +13692,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 315
 ***REMOVED***
 ;
@@ -13742,7 +13717,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 170
 ***REMOVED***
 ;
@@ -13767,7 +13742,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 249
 ***REMOVED***
 ;
@@ -13792,7 +13767,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 198
 ***REMOVED***
 ;
@@ -13817,7 +13792,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 186
 ***REMOVED***
 ;
@@ -13842,7 +13817,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 234
 ***REMOVED***
 ;
@@ -13867,7 +13842,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 238
 ***REMOVED***
 ;
@@ -13892,7 +13867,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -13917,7 +13892,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 233
 ***REMOVED***
 ;
@@ -13942,7 +13917,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 261
 ***REMOVED***
 ;
@@ -13967,7 +13942,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 196
 ***REMOVED***
 ;
@@ -13992,7 +13967,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 202
 ***REMOVED***
 ;
@@ -14017,7 +13992,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 315
 ***REMOVED***
 ;
@@ -14042,7 +14017,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 288
 ***REMOVED***
 ;
@@ -14067,7 +14042,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 229
 ***REMOVED***
 ;
@@ -14092,7 +14067,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 261
 ***REMOVED***
 ;
@@ -14117,7 +14092,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 201
 ***REMOVED***
 ;
@@ -14142,7 +14117,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 244
 ***REMOVED***
 ;
@@ -14167,7 +14142,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 206
 ***REMOVED***
 ;
@@ -14192,7 +14167,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 222
 ***REMOVED***
 ;
@@ -14217,7 +14192,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 224
 ***REMOVED***
 ;
@@ -14242,7 +14217,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 270
 ***REMOVED***
 ;
@@ -14267,7 +14242,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 179
 ***REMOVED***
 ;
@@ -14292,7 +14267,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 206
 ***REMOVED***
 ;
@@ -14317,7 +14292,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 198
 ***REMOVED***
 ;
@@ -14342,7 +14317,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 199
 ***REMOVED***
 ;
@@ -14367,7 +14342,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 202
 ***REMOVED***
 ;
@@ -14392,7 +14367,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 211
 ***REMOVED***
 ;
@@ -14417,7 +14392,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 250
 ***REMOVED***
 ;
@@ -14442,7 +14417,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 215
 ***REMOVED***
 ;
@@ -14467,7 +14442,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 240
 ***REMOVED***
 ;
@@ -14492,7 +14467,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 256
 ***REMOVED***
 ;
@@ -14517,7 +14492,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 212
 ***REMOVED***
 ;
@@ -14542,7 +14517,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 299
 ***REMOVED***
 ;
@@ -14567,7 +14542,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 231
 ***REMOVED***
 ;
@@ -14592,7 +14567,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 262
 ***REMOVED***
 ;
@@ -14617,7 +14592,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -14642,7 +14617,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 249
 ***REMOVED***
 ;
@@ -14667,7 +14642,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 222
 ***REMOVED***
 ;
@@ -14692,7 +14667,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 352
 ***REMOVED***
 ;
@@ -14717,7 +14692,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 295
 ***REMOVED***
 ;
@@ -14742,7 +14717,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 238
 ***REMOVED***
 ;
@@ -14767,7 +14742,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 262
 ***REMOVED***
 ;
@@ -14792,7 +14767,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 236
 ***REMOVED***
 ;
@@ -14817,7 +14792,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 204
 ***REMOVED***
 ;
@@ -14842,7 +14817,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 231
 ***REMOVED***
 ;
@@ -14867,7 +14842,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 221
 ***REMOVED***
 ;
@@ -14892,7 +14867,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 351
 ***REMOVED***
 ;
@@ -14917,7 +14892,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 185
 ***REMOVED***
 ;
@@ -14942,7 +14917,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 209
 ***REMOVED***
 ;
@@ -14967,7 +14942,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 258
 ***REMOVED***
 ;
@@ -14992,7 +14967,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 303
 ***REMOVED***
 ;
@@ -15017,7 +14992,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 295
 ***REMOVED***
 ;
@@ -15042,7 +15017,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -15067,7 +15042,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 283
 ***REMOVED***
 ;
@@ -15092,7 +15067,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 272
 ***REMOVED***
 ;
@@ -15117,7 +15092,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 244
 ***REMOVED***
 ;
@@ -15142,7 +15117,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 322
 ***REMOVED***
 ;
@@ -15167,7 +15142,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 164
 ***REMOVED***
 ;
@@ -15192,7 +15167,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 152
 ***REMOVED***
 ;
@@ -15217,7 +15192,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 233
 ***REMOVED***
 ;
@@ -15242,7 +15217,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 298
 ***REMOVED***
 ;
@@ -15267,7 +15242,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 234
 ***REMOVED***
 ;
@@ -15292,7 +15267,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 244
 ***REMOVED***
 ;
@@ -15317,7 +15292,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 243
 ***REMOVED***
 ;
@@ -15342,7 +15317,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 207
 ***REMOVED***
 ;
@@ -15367,7 +15342,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 193
 ***REMOVED***
 ;
@@ -15392,7 +15367,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 174
 ***REMOVED***
 ;
@@ -15417,7 +15392,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 232
 ***REMOVED***
 ;
@@ -15442,7 +15417,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 245
 ***REMOVED***
 ;
@@ -15467,7 +15442,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 272
 ***REMOVED***
 ;
@@ -15492,7 +15467,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 242
 ***REMOVED***
 ;
@@ -15517,7 +15492,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 235
 ***REMOVED***
 ;
@@ -15542,7 +15517,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 229
 ***REMOVED***
 ;
@@ -15567,7 +15542,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 143
 ***REMOVED***
 ;
@@ -15581,7 +15556,7 @@
   "filename": null,
   "expected_filename": null,
   "meta": ***REMOVED******REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 313
 ***REMOVED***
 ;
@@ -15595,7 +15570,7 @@
   "filename": null,
   "expected_filename": null,
   "meta": ***REMOVED******REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 252
 ***REMOVED***
 ;
@@ -15620,7 +15595,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 216
 ***REMOVED***
 ;
@@ -15645,7 +15620,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 262
 ***REMOVED***
 ;
@@ -15670,7 +15645,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 247
 ***REMOVED***
 ;
@@ -15695,7 +15670,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -15720,7 +15695,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 229
 ***REMOVED***
 ;
@@ -15745,7 +15720,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 261
 ***REMOVED***
 ;
@@ -15770,7 +15745,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 217
 ***REMOVED***
 ;
@@ -15795,7 +15770,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 267
 ***REMOVED***
 ;
@@ -15820,7 +15795,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 260
 ***REMOVED***
 ;
@@ -15845,7 +15820,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 247
 ***REMOVED***
 ;
@@ -15870,7 +15845,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 310
 ***REMOVED***
 ;
@@ -15895,7 +15870,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 163
 ***REMOVED***
 ;
@@ -15920,7 +15895,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 204
 ***REMOVED***
 ;
@@ -15945,7 +15920,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 177
 ***REMOVED***
 ;
@@ -15970,7 +15945,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 221
 ***REMOVED***
 ;
@@ -15995,7 +15970,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 267
 ***REMOVED***
 ;
@@ -16020,7 +15995,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 ***REMOVED***
 ;
@@ -16045,7 +16020,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 252
 ***REMOVED***
 ;
@@ -16070,7 +16045,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 203
 ***REMOVED***
 ;
@@ -16095,7 +16070,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 219
 ***REMOVED***
 ;
@@ -16109,7 +16084,7 @@
   "filename": null,
   "expected_filename": null,
   "meta": ***REMOVED******REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 310
 ***REMOVED***
 ;
@@ -16134,7 +16109,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 270
 ***REMOVED***
 ;
@@ -16159,7 +16134,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 182
 ***REMOVED***
 ;
@@ -16184,7 +16159,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 ***REMOVED***
 ;
@@ -16209,7 +16184,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 258
 ***REMOVED***
 ;
@@ -16234,7 +16209,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 273
 ***REMOVED***
 ;
@@ -16259,7 +16234,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 345
 ***REMOVED***
 ;
@@ -16284,7 +16259,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 173
 ***REMOVED***
 ;
@@ -16309,7 +16284,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 336
 ***REMOVED***
 ;
@@ -16323,7 +16298,7 @@
   "filename": null,
   "expected_filename": null,
   "meta": ***REMOVED******REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 189
 ***REMOVED***
 ;
@@ -16348,7 +16323,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 231
 ***REMOVED***
 ;
@@ -16373,7 +16348,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 220
 ***REMOVED***
 ;
@@ -16398,7 +16373,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 211
 ***REMOVED***
 ;
@@ -16423,7 +16398,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 208
 ***REMOVED***
 ;
@@ -16448,7 +16423,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 189
 ***REMOVED***
 ;
@@ -16473,7 +16448,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 268
 ***REMOVED***
 ;
@@ -16498,7 +16473,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 252
 ***REMOVED***
 ;
@@ -16523,7 +16498,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 205
 ***REMOVED***
 ;
@@ -16548,7 +16523,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 233
 ***REMOVED***
 ;
@@ -16573,7 +16548,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 295
 ***REMOVED***
 ;
@@ -16598,7 +16573,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 277
 ***REMOVED***
 ;
@@ -16623,7 +16598,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 343
 ***REMOVED***
 ;
@@ -16648,7 +16623,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 343
 ***REMOVED***
 ;
@@ -16673,7 +16648,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -16698,7 +16673,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 229
 ***REMOVED***
 ;
@@ -16723,7 +16698,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 287
 ***REMOVED***
 ;
@@ -16748,7 +16723,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 304
 ***REMOVED***
 ;
@@ -16773,7 +16748,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 255
 ***REMOVED***
 ;
@@ -16798,7 +16773,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 248
 ***REMOVED***
 ;
@@ -16823,7 +16798,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 236
 ***REMOVED***
 ;
@@ -16848,7 +16823,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 223
 ***REMOVED***
 ;
@@ -16873,7 +16848,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 314
 ***REMOVED***
 ;
@@ -16898,7 +16873,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 240
 ***REMOVED***
 ;
@@ -16912,7 +16887,7 @@
   "filename": null,
   "expected_filename": null,
   "meta": ***REMOVED******REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 208
 ***REMOVED***
 ;
@@ -16937,7 +16912,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 217
 ***REMOVED***
 ;
@@ -16962,7 +16937,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 261
 ***REMOVED***
 ;
@@ -16987,7 +16962,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 281
 ***REMOVED***
 ;
@@ -17012,7 +16987,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 220
 ***REMOVED***
 ;
@@ -17037,7 +17012,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 229
 ***REMOVED***
 ;
@@ -17062,7 +17037,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 280
 ***REMOVED***
 ;
@@ -17087,7 +17062,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 217
 ***REMOVED***
 ;
@@ -17112,7 +17087,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 261
 ***REMOVED***
 ;
@@ -17137,7 +17112,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 208
 ***REMOVED***
 ;
@@ -17151,7 +17126,7 @@
   "filename": null,
   "expected_filename": null,
   "meta": ***REMOVED******REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 219
 ***REMOVED***
 ;
@@ -17176,7 +17151,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 236
 ***REMOVED***
 ;
@@ -17201,7 +17176,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 204
 ***REMOVED***
 ;
@@ -17226,7 +17201,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 169
 ***REMOVED***
 ;
@@ -17251,7 +17226,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 152
 ***REMOVED***
 ;
@@ -17265,7 +17240,7 @@
   "filename": null,
   "expected_filename": null,
   "meta": ***REMOVED******REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 246
 ***REMOVED***
 ;
@@ -17290,7 +17265,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 278
 ***REMOVED***
 ;
@@ -17315,7 +17290,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 219
 ***REMOVED***
 ;
@@ -17340,7 +17315,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 239
 ***REMOVED***
 ;
@@ -17365,7 +17340,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 212
 ***REMOVED***
 ;
@@ -17390,7 +17365,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 242
 ***REMOVED***
 ;
@@ -17415,7 +17390,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 216
 ***REMOVED***
 ;
@@ -17440,7 +17415,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 207
 ***REMOVED***
 ;
@@ -17465,7 +17440,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 237
 ***REMOVED***
 ;
@@ -17490,7 +17465,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 250
 ***REMOVED***
 ;
@@ -17515,7 +17490,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 212
 ***REMOVED***
 ;
@@ -17540,7 +17515,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 209
 ***REMOVED***
 ;
@@ -17565,7 +17540,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 335
 ***REMOVED***
 ;
@@ -17590,7 +17565,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 335
 ***REMOVED***
 ;
@@ -17615,7 +17590,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 216
 ***REMOVED***
 ;
@@ -17640,7 +17615,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 311
 ***REMOVED***
 ;
@@ -17665,7 +17640,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 ***REMOVED***
 ;
@@ -17690,7 +17665,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 200
 ***REMOVED***
 ;
@@ -17715,7 +17690,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 222
 ***REMOVED***
 ;
@@ -17740,7 +17715,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 215
 ***REMOVED***
 ;
@@ -17765,7 +17740,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 195
 ***REMOVED***
 ;
@@ -17790,7 +17765,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 242
 ***REMOVED***
 ;
@@ -17815,7 +17790,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 214
 ***REMOVED***
 ;
@@ -17840,7 +17815,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 278
 ***REMOVED***
 ;
@@ -17865,7 +17840,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 301
 ***REMOVED***
 ;
@@ -17890,7 +17865,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 317
 ***REMOVED***
 ;
@@ -17915,7 +17890,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 293
 ***REMOVED***
 ;
@@ -17940,7 +17915,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 278
 ***REMOVED***
 ;
@@ -17965,7 +17940,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 250
 ***REMOVED***
 ;
@@ -17990,7 +17965,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 207
 ***REMOVED***
 ;
@@ -18015,7 +17990,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 257
 ***REMOVED***
 ;
@@ -18040,7 +18015,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 256
 ***REMOVED***
 ;
@@ -18065,7 +18040,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -18090,7 +18065,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 212
 ***REMOVED***
 ;
@@ -18115,7 +18090,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 197
 ***REMOVED***
 ;
@@ -18140,7 +18115,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 237
 ***REMOVED***
 ;
@@ -18165,7 +18140,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 226
 ***REMOVED***
 ;
@@ -18190,7 +18165,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 237
 ***REMOVED***
 ;
@@ -18215,7 +18190,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 206
 ***REMOVED***
 ;
@@ -18240,7 +18215,7 @@
       "name": "ZyLect"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 ***REMOVED***
 ;
@@ -18265,7 +18240,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 223
 ***REMOVED***
 ;
@@ -18290,7 +18265,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 202
 ***REMOVED***
 ;
@@ -18315,7 +18290,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 174
 ***REMOVED***
 ;
@@ -18340,7 +18315,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 166
 ***REMOVED***
 ;
@@ -18365,7 +18340,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 176
 ***REMOVED***
 ;
@@ -18390,7 +18365,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 242
 ***REMOVED***
 ;
@@ -18415,7 +18390,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 ***REMOVED***
 ;
@@ -18440,7 +18415,7 @@
       "name": "siku2"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 188
 ***REMOVED***
 ;
@@ -18465,7 +18440,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 171
 ***REMOVED***
 ;
@@ -18490,7 +18465,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 175
 ***REMOVED***
 ;
@@ -18515,7 +18490,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 266
 ***REMOVED***
 ;
@@ -18540,7 +18515,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 91
 ***REMOVED***
 ;
@@ -18565,7 +18540,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 208
 ***REMOVED***
 ;
@@ -18590,7 +18565,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 260
 ***REMOVED***
 ;
@@ -18615,7 +18590,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 203
 ***REMOVED***
 ;
@@ -18640,7 +18615,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 255
 ***REMOVED***
 ;
@@ -18665,7 +18640,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 ***REMOVED***
 ;
@@ -18690,7 +18665,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 263
 ***REMOVED***
 ;
@@ -18715,7 +18690,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -18740,7 +18715,7 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 ***REMOVED***
 ;
@@ -18765,6 +18740,6 @@
       "name": "Lophorius"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 ***REMOVED***
