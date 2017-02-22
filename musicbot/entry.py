@@ -129,8 +129,8 @@ class URLPlaylistEntry(BasePlaylistEntry):
         downloaded = data['downloaded']
         filename = data['filename'] if downloaded else (
             data["expected_filename"] if data["expected_filename"] is not None else None)
-        start_seconds = data["start_seconds"]
-        end_seconds = data["end_seconds"]
+        start_seconds = data["start_seconds"] if data["start_seconds"] is not None else 0
+        end_seconds = data["end_seconds"] if data["end_seconds"] is not None else duration
         meta = ***REMOVED******REMOVED***
 
         # TODO: Better [name] fallbacks
