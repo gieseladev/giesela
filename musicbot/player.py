@@ -113,7 +113,6 @@ class MusicPlayer(EventEmitter):
         self.voice_client = voice_client
         self.playlist = playlist
         self.playlist.on('entry-added', self.on_entry_added)
-        self._volume = bot.config.default_volume
 
         self._play_lock = asyncio.Lock()
         self._current_player = None
@@ -125,7 +124,9 @@ class MusicPlayer(EventEmitter):
         self.loop.create_task(self.websocket_check())
         self.bot.socket_server.threaded_broadcast_information()
         self.handle_manually = False
+        
         self.volume_scale = 20
+        self.volume = bot.config.default_volume
 
     @property
     def volume(self):
