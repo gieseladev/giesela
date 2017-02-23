@@ -716,6 +716,7 @@ class Round:
         self.assign_cards()
         self.master.bump_master()
         self.round_stopped = False
+        self.judging_phase = False
 
         round_text_master = "**Round {0} || YOU ARE THE MASTER**\n\n```\n{1}```*<{2}>*\n\n*Wait for the players to choose*"
         for pl in self.game.players:
@@ -971,8 +972,8 @@ class Round:
         print("[CAH] <{}: {}> Starting the judgement".format(
             self.game.token, self.round_index))
 
-        player_judge_text = "**Time to be judged!**\n\n=====================\n{0} *<{1}>*\n=====================\n\n**The answers are**\n{2}"
-        master_judge_text = "**Time to judge \'em**\n\n=====================\n{0} *<{1}>*\n=====================\n\n*Pick a winner*\n\nYou can use the following commands:\n`pick index`: Pick the winner\n\n**The answers are**\n{2}"
+        player_judge_text = "**Time to be judged by *{3}*!**\n\n```\n{0}```*<{1}>*\n\n**The answers are**\n{2}"
+        master_judge_text = "**Time to judge \'em**\n\n```\n{0}```*<{1}>*\n\n*Pick a winner*\n\nYou can use the following commands:\n`pick index`: Pick the winner\n\n**The answers are**\n{2}"
 
         answer_texts = []
         answer_text = "[{}] *<{}>*"
@@ -992,7 +993,7 @@ class Round:
                 "{}. ".format(i) + ", ".join([answer_text.format(ans.text, ans.id) for ans in pl_answers]))
             i += 1
 
-        print(self.answers_by_index)
+        self.judging_phase = True
 
         for pl in self.game.players:
             if pl == self.master:
@@ -1005,7 +1006,7 @@ class Round:
                     lambda fut, pl=pl: self.on_master_message(pl, fut.result()), check=check)
             else:
                 self.game.manager.send_message_to_user(pl.player_id, player_judge_text.format(
-                    self.question_card.beautified_text(), self.question_card.id, "\n".join(answer_texts)), callback=lambda x: self.messages_to_delete.append(x.result()))
+                    self.question_card.beautified_text(), self.question_card.id, "\n".join(answer_texts), self.game.manager.musicbot.get_global_user(self.master.player_id).name), callback=lambda x: self.messages_to_delete.append(x.result()))
 
     def on_master_message(self, player, message):
         if self.round_stopped:
@@ -1021,7 +1022,12 @@ class Round:
         print("[CAH] <{}: {}> Master ({}) sent message: \"{}\"".format(
             self.game.token, self.round_index, self.master, message.content))
 
-        if args[0] == "pick":
+        try:
+            num = int(args[0]) - 1
+        except:
+            num = None
+
+        if args[0] == "pick" or num is not None:
             card_index = args[1].lower().strip() if len(args) > 1 else None
 
             if card_index is None:
