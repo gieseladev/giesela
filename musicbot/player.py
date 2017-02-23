@@ -124,7 +124,7 @@ class MusicPlayer(EventEmitter):
         self.loop.create_task(self.websocket_check())
         self.bot.socket_server.threaded_broadcast_information()
         self.handle_manually = False
-        
+
         self.volume_scale = 20
         self.volume = bot.config.default_volume
 
@@ -323,7 +323,7 @@ class MusicPlayer(EventEmitter):
                     before_options="-nostdin -ss ***REMOVED******REMOVED***".format(
                         format_time_ffmpeg(int(entry.start_seconds))),
                     # before_options="-nostdin",
-                    options="-vn -to ***REMOVED******REMOVED*** -b:a 128k".format(format_time_ffmpeg(
+                    options="-vn -t ***REMOVED******REMOVED*** -b:a 128k".format(format_time_ffmpeg(
                         int(entry.end_seconds - entry.start_seconds))),
                     # options="-vn -b:a 128k",
                     stderr=subprocess.PIPE,
@@ -370,7 +370,7 @@ class MusicPlayer(EventEmitter):
                 before_options="-nostdin -ss ***REMOVED******REMOVED***".format(
                     format_time_ffmpeg(int(entry.start_seconds))),
                 # before_options="-nostdin",
-                options="-vn -to ***REMOVED******REMOVED*** -b:a 128k".format(format_time_ffmpeg(
+                options="-vn -t ***REMOVED******REMOVED*** -b:a 128k".format(format_time_ffmpeg(
                     int(entry.end_seconds - entry.start_seconds))),
                 # options="-vn -b:a 128k",
                 stderr=subprocess.PIPE,
