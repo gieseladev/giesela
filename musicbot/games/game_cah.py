@@ -985,6 +985,7 @@ class Round:
         self.answers.pop(pl, None)
 
     def master_picks(self, index):
+        self.round_stopped = True
         self.clean_up()
         player_key, answers = self.answers_by_index[index]
         player_key.bump_won(
