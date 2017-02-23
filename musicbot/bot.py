@@ -1763,14 +1763,15 @@ class MusicBot(discord.Client):
 
             song_progress = str(
                 timedelta(seconds=player.progress)).lstrip('0').lstrip(':')
-            song_total = str(timedelta(seconds=player.current_entry.end_seconds)).lstrip(
+            end_seconds = player.current_entry.end_seconds if player.current_entry.end_seconds is not None else 0
+            song_total = str(timedelta(seconds=end_seconds)).lstrip(
                 '0').lstrip(':')
             prog_str = '`[%s/%s]`' % (song_progress, song_total)
 
             prog_bar_len = 20
             prog_full_char = "■"
             prog_empty_char = "□"
-            progress_perc = player.progress / player.current_entry.duration
+            progress_perc = (player.progress / end_seconds) if end_seconds is not None else 0
             prog_bar_str = ""
 
             for i in range(prog_bar_len):
