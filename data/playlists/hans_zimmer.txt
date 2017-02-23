@@ -19,7 +19,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 112
 }
 ;
@@ -44,7 +44,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 178
 }
 ;
@@ -69,7 +69,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 39
 }
 ;
@@ -94,7 +94,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 156
 }
 ;
@@ -119,7 +119,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 106
 }
 ;
@@ -144,7 +144,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 173
 }
 ;
@@ -169,7 +169,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 76
 }
 ;
@@ -194,7 +194,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 }
 ;
@@ -219,7 +219,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 346
 }
 ;
@@ -244,7 +244,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 104
 }
 ;
@@ -269,7 +269,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 493
 }
 ;
@@ -294,7 +294,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 215
 }
 ;
@@ -319,7 +319,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 454
 }
 ;
@@ -344,7 +344,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 297
 }
 ;
@@ -369,7 +369,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 122
 }
 ;
@@ -394,7 +394,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 136
 }
 ;
@@ -419,7 +419,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 200
 }
 ;
@@ -444,7 +444,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 145
 }
 ;
@@ -469,7 +469,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 203
 }
 ;
@@ -494,7 +494,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 173
 }
 ;
@@ -519,7 +519,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 116
 }
 ;
@@ -544,7 +544,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 91
 }
 ;
@@ -569,7 +569,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 118
 }
 ;
@@ -594,7 +594,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 163
 }
 ;
@@ -619,7 +619,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 590
 }
 ;
@@ -644,7 +644,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 118
 }
 ;
@@ -669,7 +669,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 173
 }
 ;
@@ -694,7 +694,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 102
 }
 ;
@@ -719,7 +719,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 193
 }
 ;
@@ -744,7 +744,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 156
 }
 ;
@@ -769,7 +769,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 80
 }
 ;
@@ -794,7 +794,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 406
 }
 ;
@@ -819,7 +819,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 177
 }
 ;
@@ -844,7 +844,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 384
 }
 ;
@@ -869,7 +869,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 107
 }
 ;
@@ -894,7 +894,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 }
 ;
@@ -919,7 +919,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 241
 }
 ;
@@ -944,7 +944,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 227
 }
 ;
@@ -969,7 +969,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 91
 }
 ;
@@ -994,7 +994,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 167
 }
 ;
@@ -1019,7 +1019,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 132
 }
 ;
@@ -1044,7 +1044,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 1697
 }
 ;
@@ -1069,7 +1069,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 340
 }
 ;
@@ -1094,7 +1094,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 169
 }
 ;
@@ -1119,7 +1119,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 441
 }
 ;
@@ -1144,7 +1144,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 179
 }
 ;
@@ -1169,7 +1169,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 228
 }
 ;
@@ -1194,7 +1194,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 160
 }
 ;
@@ -1219,7 +1219,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 371
 }
 ;
@@ -1244,7 +1244,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 446
 }
 ;
@@ -1269,7 +1269,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 213
 }
 ;
@@ -1294,7 +1294,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 318
 }
 ;
@@ -1319,7 +1319,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 180
 }
 ;
@@ -1344,33 +1344,8 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 170
-}
-;
-{
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=UlCjdusPTXQ",
-  "title": "Aj\u00e4x- Waiting for a Train (INCEPTION DUB REMIX)",
-  "duration": 355,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    },
-    "author": {
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    }
-  },
-  "start_seconds": null,
-  "end_seconds": 355
 }
 ;
 {
@@ -1394,7 +1369,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 235
 }
 ;
@@ -1419,7 +1394,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 164
 }
 ;
@@ -1444,7 +1419,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 283
 }
 ;
@@ -1469,7 +1444,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 282
 }
 ;
@@ -1494,7 +1469,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 263
 }
 ;
@@ -1519,7 +1494,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 214
 }
 ;
@@ -1544,7 +1519,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 311
 }
 ;
@@ -1569,7 +1544,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 192
 }
 ;
@@ -1594,7 +1569,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 62
 }
 ;
@@ -1619,7 +1594,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 260
 }
 ;
@@ -1644,7 +1619,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 173
 }
 ;
@@ -1669,7 +1644,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 285
 }
 ;
@@ -1694,7 +1669,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 449
 }
 ;
@@ -1719,7 +1694,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 239
 }
 ;
@@ -1744,7 +1719,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 305
 }
 ;
@@ -1769,7 +1744,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 266
 }
 ;
@@ -1794,7 +1769,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 213
 }
 ;
@@ -1819,7 +1794,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 311
 }
 ;
@@ -1844,7 +1819,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 392
 }
 ;
@@ -1869,7 +1844,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 134
 }
 ;
@@ -1894,7 +1869,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 280
 }
 ;
@@ -1919,7 +1894,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 533
 }
 ;
@@ -1944,7 +1919,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 157
 }
 ;
@@ -1969,7 +1944,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 146
 }
 ;
@@ -1994,7 +1969,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 381
 }
 ;
@@ -2019,7 +1994,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 124
 }
 ;
@@ -2044,7 +2019,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 77
 }
 ;
@@ -2069,7 +2044,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 207
 }
 ;
@@ -2094,7 +2069,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 154
 }
 ;
@@ -2119,7 +2094,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 462
 }
 ;
@@ -2144,7 +2119,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 289
 }
 ;
@@ -2169,7 +2144,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 129
 }
 ;
@@ -2194,7 +2169,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 237
 }
 ;
@@ -2219,7 +2194,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 189
 }
 ;
@@ -2244,7 +2219,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 260
 }
 ;
@@ -2269,7 +2244,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 455
 }
 ;
@@ -2294,7 +2269,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 262
 }
 ;
@@ -2319,7 +2294,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 365
 }
 ;
@@ -2344,7 +2319,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 248
 }
 ;
@@ -2369,7 +2344,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 267
 }
 ;
@@ -2394,7 +2369,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 211
 }
 ;
@@ -2419,7 +2394,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 269
 }
 ;
@@ -2444,7 +2419,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 266
 }
 ;
@@ -2469,7 +2444,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 409
 }
 ;
@@ -2494,7 +2469,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 147
 }
 ;
@@ -2519,7 +2494,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 143
 }
 ;
@@ -2544,7 +2519,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 74
 }
 ;
@@ -2569,7 +2544,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 248
 }
 ;
@@ -2594,7 +2569,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 393
 }
 ;
@@ -2619,7 +2594,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 80
 }
 ;
@@ -2644,7 +2619,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 633
 }
 ;
@@ -2669,7 +2644,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 281
 }
 ;
@@ -2694,7 +2669,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 160
 }
 ;
@@ -2719,7 +2694,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 45
 }
 ;
@@ -2744,7 +2719,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 78
 }
 ;
@@ -2769,7 +2744,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 228
 }
 ;
@@ -2794,7 +2769,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 253
 }
 ;
@@ -2819,7 +2794,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 407
 }
 ;
@@ -2844,7 +2819,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 156
 }
 ;
@@ -2869,7 +2844,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 107
 }
 ;
@@ -2894,7 +2869,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 158
 }
 ;
@@ -2919,7 +2894,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 399
 }
 ;
@@ -2944,7 +2919,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 580
 }
 ;
@@ -2969,7 +2944,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 249
 }
 ;
@@ -2994,7 +2969,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 535
 }
 ;
@@ -3019,7 +2994,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 201
 }
 ;
@@ -3044,7 +3019,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 107
 }
 ;
@@ -3069,7 +3044,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 254
 }
 ;
@@ -3094,7 +3069,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 119
 }
 ;
@@ -3119,7 +3094,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 210
 }
 ;
@@ -3144,7 +3119,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 291
 }
 ;
@@ -3169,7 +3144,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 554
 }
 ;
@@ -3194,7 +3169,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 254
 }
 ;
@@ -3219,7 +3194,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 498
 }
 ;
@@ -3244,7 +3219,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 605
 }
 ;
@@ -3269,7 +3244,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 367
 }
 ;
@@ -3294,7 +3269,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 234
 }
 ;
@@ -3319,7 +3294,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 154
 }
 ;
@@ -3344,7 +3319,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 219
 }
 ;
@@ -3369,7 +3344,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 240
 }
 ;
@@ -3394,7 +3369,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 616
 }
 ;
@@ -3419,7 +3394,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 75
 }
 ;
@@ -3444,7 +3419,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 335
 }
 ;
@@ -3469,7 +3444,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 884
 }
 ;
@@ -3494,7 +3469,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 358
 }
 ;
@@ -3519,7 +3494,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 399
 }
 ;
@@ -3544,7 +3519,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 84
 }
 ;
@@ -3569,7 +3544,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 976
 }
 ;
@@ -3594,7 +3569,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 240
 }
 ;
@@ -3619,7 +3594,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 356
 }
 ;
@@ -3644,7 +3619,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 406
 }
 ;
@@ -3669,7 +3644,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 115
 }
 ;
@@ -3694,7 +3669,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 245
 }
 ;
@@ -3719,7 +3694,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 228
 }
 ;
@@ -3744,7 +3719,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 524
 }
 ;
@@ -3769,7 +3744,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 271
 }
 ;
@@ -3794,7 +3769,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 156
 }
 ;
@@ -3819,7 +3794,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 195
 }
 ;
@@ -3844,7 +3819,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 220
 }
 ;
@@ -3869,7 +3844,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 101
 }
 ;
@@ -3894,7 +3869,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 194
 }
 ;
@@ -3919,7 +3894,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 119
 }
 ;
@@ -3944,7 +3919,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 263
 }
 ;
@@ -3969,7 +3944,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 104
 }
 ;
@@ -3994,7 +3969,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 258
 }
 ;
@@ -4019,7 +3994,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 229
 }
 ;
@@ -4044,7 +4019,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 37
 }
 ;
@@ -4069,7 +4044,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 130
 }
 ;
@@ -4094,7 +4069,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 108
 }
 ;
@@ -4119,7 +4094,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 248
 }
 ;
@@ -4144,7 +4119,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 55
 }
 ;
@@ -4169,7 +4144,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 136
 }
 ;
@@ -4194,7 +4169,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 156
 }
 ;
@@ -4219,7 +4194,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 73
 }
 ;
@@ -4244,7 +4219,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 58
 }
 ;
@@ -4269,7 +4244,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 241
 }
 ;
@@ -4294,7 +4269,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 222
 }
 ;
@@ -4319,7 +4294,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 243
 }
 ;
@@ -4344,7 +4319,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 210
 }
 ;
@@ -4369,7 +4344,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 366
 }
 ;
@@ -4394,7 +4369,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 342
 }
 ;
@@ -4419,7 +4394,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 142
 }
 ;
@@ -4444,7 +4419,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 269
 }
 ;
@@ -4469,7 +4444,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 108
 }
 ;
@@ -4494,7 +4469,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 127
 }
 ;
@@ -4519,7 +4494,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 507
 }
 ;
@@ -4544,7 +4519,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 402
 }
 ;
@@ -4569,7 +4544,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 461
 }
 ;
@@ -4594,7 +4569,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 144
 }
 ;
@@ -4619,7 +4594,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 408
 }
 ;
@@ -4644,7 +4619,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 385
 }
 ;
@@ -4669,7 +4644,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 183
 }
 ;
@@ -4694,7 +4669,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 113
 }
 ;
@@ -4719,7 +4694,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 359
 }
 ;
@@ -4744,7 +4719,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 274
 }
 ;
@@ -4769,7 +4744,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 308
 }
 ;
@@ -4794,7 +4769,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 235
 }
 ;
@@ -4819,7 +4794,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 198
 }
 ;
@@ -4844,7 +4819,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 129
 }
 ;
@@ -4869,7 +4844,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 267
 }
 ;
@@ -4894,7 +4869,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 344
 }
 ;
@@ -4919,7 +4894,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 146
 }
 ;
@@ -4944,7 +4919,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 3705
 }
 ;
@@ -4969,7 +4944,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 236
 }
 ;
@@ -4994,7 +4969,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 342
 }
 ;
@@ -5019,7 +4994,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 101
 }
 ;
@@ -5044,7 +5019,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 91
 }
 ;
@@ -5069,7 +5044,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 153
 }
 ;
@@ -5094,7 +5069,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 207
 }
 ;
@@ -5119,7 +5094,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 117
 }
 ;
@@ -5144,7 +5119,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 349
 }
 ;
@@ -5169,7 +5144,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 113
 }
 ;
@@ -5194,7 +5169,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 101
 }
 ;
@@ -5219,7 +5194,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 273
 }
 ;
@@ -5244,7 +5219,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 415
 }
 ;
@@ -5269,7 +5244,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 146
 }
 ;
@@ -5294,7 +5269,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 158
 }
 ;
@@ -5319,7 +5294,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 246
 }
 ;
@@ -5344,7 +5319,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 434
 }
 ;
@@ -5369,7 +5344,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 121
 }
 ;
@@ -5394,7 +5369,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 76
 }
 ;
@@ -5419,7 +5394,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 252
 }
 ;
@@ -5444,7 +5419,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 194
 }
 ;
@@ -5469,7 +5444,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 180
 }
 ;
@@ -5494,7 +5469,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 242
 }
 ;
@@ -5519,7 +5494,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 220
 }
 ;
@@ -5544,7 +5519,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 125
 }
 ;
@@ -5569,7 +5544,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 234
 }
 ;
@@ -5594,7 +5569,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 109
 }
 ;
@@ -5619,7 +5594,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 173
 }
 ;
@@ -5644,7 +5619,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 196
 }
 ;
@@ -5669,7 +5644,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 192
 }
 ;
@@ -5694,7 +5669,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 212
 }
 ;
@@ -5719,7 +5694,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 199
 }
 ;
@@ -5744,7 +5719,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 255
 }
 ;
@@ -5769,7 +5744,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 180
 }
 ;
@@ -5794,7 +5769,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 104
 }
 ;
@@ -5819,7 +5794,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 176
 }
 ;
@@ -5844,7 +5819,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 596
 }
 ;
@@ -5869,7 +5844,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 223
 }
 ;
@@ -5894,7 +5869,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 224
 }
 ;
@@ -5919,7 +5894,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 54
 }
 ;
@@ -5944,7 +5919,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 485
 }
 ;
@@ -5969,7 +5944,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 173
 }
 ;
@@ -5994,7 +5969,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 180
 }
 ;
@@ -6019,7 +5994,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 80
 }
 ;
@@ -6044,7 +6019,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 295
 }
 ;
@@ -6069,7 +6044,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 469
 }
 ;
@@ -6094,7 +6069,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 347
 }
 ;
@@ -6119,7 +6094,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 212
 }
 ;
@@ -6144,7 +6119,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 112
 }
 ;
@@ -6169,7 +6144,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 374
 }
 ;
@@ -6194,7 +6169,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 205
 }
 ;
@@ -6219,7 +6194,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 95
 }
 ;
@@ -6244,7 +6219,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 253
 }
 ;
@@ -6269,7 +6244,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 123
 }
 ;
@@ -6294,7 +6269,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 646
 }
 ;
@@ -6319,7 +6294,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 222
 }
 ;
@@ -6344,7 +6319,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 141
 }
 ;
@@ -6369,7 +6344,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 487
 }
 ;
@@ -6394,7 +6369,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 233
 }
 ;
@@ -6419,7 +6394,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 162
 }
 ;
@@ -6444,7 +6419,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 130
 }
 ;
@@ -6469,7 +6444,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 184
 }
 ;
@@ -6494,7 +6469,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 429
 }
 ;
@@ -6519,7 +6494,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 102
 }
 ;
@@ -6544,7 +6519,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 186
 }
 ;
@@ -6569,7 +6544,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 306
 }
 ;
@@ -6594,7 +6569,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 120
 }
 ;
@@ -6619,7 +6594,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 242
 }
 ;
@@ -6644,7 +6619,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 304
 }
 ;
@@ -6669,33 +6644,8 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 359
-}
-;
-{
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=5wtX49JFiSo",
-  "title": "Rango \"Rango Returns\" OST (HD)",
-  "duration": 78,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": null,
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    },
-    "author": {
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    }
-  },
-  "start_seconds": null,
-  "end_seconds": 78
 }
 ;
 {
@@ -6719,7 +6669,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 268
 }
 ;
@@ -6744,7 +6694,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 472
 }
 ;
@@ -6769,7 +6719,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 217
 }
 ;
@@ -6794,7 +6744,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 261
 }
 ;
@@ -6819,7 +6769,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 157
 }
 ;
@@ -6844,7 +6794,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 364
 }
 ;
@@ -6869,7 +6819,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 213
 }
 ;
@@ -6894,7 +6844,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 180
 }
 ;
@@ -6919,7 +6869,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 157
 }
 ;
@@ -6944,7 +6894,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 169
 }
 ;
@@ -6969,7 +6919,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 45
 }
 ;
@@ -6994,7 +6944,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 211
 }
 ;
@@ -7019,7 +6969,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 196
 }
 ;
@@ -7044,7 +6994,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 }
 ;
@@ -7069,7 +7019,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 153
 }
 ;
@@ -7094,7 +7044,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 334
 }
 ;
@@ -7119,7 +7069,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 66
 }
 ;
@@ -7144,7 +7094,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 186
 }
 ;
@@ -7169,7 +7119,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 54
 }
 ;
@@ -7194,7 +7144,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 90
 }
 ;
@@ -7219,7 +7169,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 110
 }
 ;
@@ -7244,7 +7194,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 625
 }
 ;
@@ -7269,7 +7219,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 221
 }
 ;
@@ -7294,7 +7244,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 143
 }
 ;
@@ -7319,7 +7269,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 110
 }
 ;
@@ -7344,7 +7294,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 145
 }
 ;
@@ -7369,7 +7319,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 195
 }
 ;
@@ -7394,7 +7344,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 }
 ;
@@ -7419,7 +7369,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 272
 }
 ;
@@ -7444,7 +7394,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 134
 }
 ;
@@ -7469,7 +7419,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 159
 }
 ;
@@ -7494,7 +7444,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 151
 }
 ;
@@ -7519,7 +7469,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 64
 }
 ;
@@ -7544,7 +7494,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 130
 }
 ;
@@ -7569,7 +7519,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 168
 }
 ;
@@ -7594,7 +7544,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 221
 }
 ;
@@ -7619,7 +7569,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 318
 }
 ;
@@ -7644,7 +7594,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 304
 }
 ;
@@ -7669,7 +7619,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 244
 }
 ;
@@ -7694,7 +7644,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 162
 }
 ;
@@ -7719,7 +7669,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 522
 }
 ;
@@ -7744,7 +7694,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 64
 }
 ;
@@ -7769,7 +7719,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 138
 }
 ;
@@ -7794,7 +7744,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 608
 }
 ;
@@ -7819,7 +7769,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 756
 }
 ;
@@ -7844,7 +7794,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 49
 }
 ;
@@ -7869,7 +7819,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 175
 }
 ;
@@ -7894,7 +7844,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 196
 }
 ;
@@ -7919,7 +7869,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 224
 }
 ;
@@ -7944,7 +7894,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 175
 }
 ;
@@ -7969,7 +7919,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 208
 }
 ;
@@ -7994,7 +7944,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 94
 }
 ;
@@ -8019,7 +7969,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 191
 }
 ;
@@ -8044,7 +7994,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 148
 }
 ;
@@ -8069,7 +8019,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 197
 }
 ;
@@ -8094,7 +8044,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 181
 }
 ;
@@ -8119,7 +8069,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 33
 }
 ;
@@ -8144,7 +8094,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 121
 }
 ;
@@ -8169,7 +8119,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 770
 }
 ;
@@ -8194,7 +8144,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 128
 }
 ;
@@ -8219,7 +8169,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 266
 }
 ;
@@ -8244,7 +8194,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 77
 }
 ;
@@ -8269,7 +8219,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 377
 }
 ;
@@ -8294,7 +8244,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 182
 }
 ;
@@ -8319,7 +8269,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 155
 }
 ;
@@ -8344,7 +8294,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 325
 }
 ;
@@ -8369,7 +8319,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 164
 }
 ;
@@ -8394,7 +8344,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 416
 }
 ;
@@ -8419,7 +8369,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 277
 }
 ;
@@ -8444,7 +8394,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 101
 }
 ;
@@ -8469,7 +8419,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 150
 }
 ;
@@ -8494,7 +8444,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 138
 }
 ;
@@ -8519,7 +8469,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 378
 }
 ;
@@ -8544,7 +8494,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 121
 }
 ;
@@ -8569,7 +8519,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 224
 }
 ;
@@ -8594,7 +8544,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 229
 }
 ;
@@ -8619,7 +8569,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 353
 }
 ;
@@ -8644,7 +8594,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 445
 }
 ;
@@ -8669,7 +8619,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 193
 }
 ;
@@ -8694,7 +8644,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 201
 }
 ;
@@ -8719,7 +8669,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 176
 }
 ;
@@ -8744,7 +8694,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 194
 }
 ;
@@ -8769,7 +8719,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 37
 }
 ;
@@ -8794,7 +8744,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 175
 }
 ;
@@ -8819,7 +8769,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 248
 }
 ;
@@ -8844,7 +8794,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 207
 }
 ;
@@ -8869,7 +8819,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 192
 }
 ;
@@ -8894,7 +8844,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 117
 }
 ;
@@ -8919,7 +8869,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 333
 }
 ;
@@ -8944,7 +8894,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 322
 }
 ;
@@ -8969,7 +8919,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 176
 }
 ;
@@ -8994,7 +8944,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 291
 }
 ;
@@ -9019,7 +8969,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 393
 }
 ;
@@ -9044,7 +8994,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 291
 }
 ;
@@ -9069,7 +9019,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 171
 }
 ;
@@ -9094,7 +9044,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 295
 }
 ;
@@ -9119,7 +9069,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 87
 }
 ;
@@ -9144,7 +9094,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 49
 }
 ;
@@ -9169,7 +9119,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 88
 }
 ;
@@ -9194,7 +9144,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 153
 }
 ;
@@ -9219,7 +9169,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 215
 }
 ;
@@ -9244,7 +9194,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 95
 }
 ;
@@ -9269,7 +9219,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 87
 }
 ;
@@ -9294,7 +9244,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 226
 }
 ;
@@ -9319,7 +9269,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 110
 }
 ;
@@ -9344,7 +9294,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 204
 }
 ;
@@ -9369,7 +9319,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 61
 }
 ;
@@ -9394,7 +9344,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 91
 }
 ;
@@ -9419,7 +9369,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 153
 }
 ;
@@ -9444,7 +9394,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 74
 }
 ;
@@ -9469,7 +9419,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 100
 }
 ;
@@ -9494,7 +9444,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 107
 }
 ;
@@ -9519,7 +9469,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 163
 }
 ;
@@ -9544,7 +9494,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 165
 }
 ;
@@ -9569,7 +9519,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 119
 }
 ;
@@ -9594,7 +9544,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 164
 }
 ;
@@ -9619,7 +9569,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 240
 }
 ;
@@ -9644,7 +9594,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 136
 }
 ;
@@ -9669,7 +9619,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 168
 }
 ;
@@ -9694,7 +9644,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 203
 }
 ;
@@ -9719,7 +9669,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 708
 }
 ;
@@ -9744,7 +9694,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 183
 }
 ;
@@ -9769,7 +9719,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 225
 }
 ;
@@ -9794,7 +9744,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 55
 }
 ;
@@ -9819,7 +9769,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 358
 }
 ;
@@ -9844,7 +9794,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 260
 }
 ;
@@ -9869,7 +9819,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 416
 }
 ;
@@ -9894,7 +9844,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 72
 }
 ;
@@ -9919,7 +9869,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 178
 }
 ;
@@ -9944,7 +9894,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 202
 }
 ;
@@ -9969,7 +9919,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 369
 }
 ;
@@ -9994,7 +9944,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 521
 }
 ;
@@ -10019,7 +9969,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 613
 }
 ;
@@ -10044,7 +9994,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 387
 }
 ;
@@ -10069,7 +10019,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 853
 }
 ;
@@ -10094,7 +10044,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 282
 }
 ;
@@ -10119,7 +10069,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 98
 }
 ;
@@ -10144,7 +10094,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 574
 }
 ;
@@ -10169,7 +10119,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 119
 }
 ;
@@ -10194,7 +10144,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 453
 }
 ;
@@ -10219,7 +10169,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 61
 }
 ;
@@ -10244,7 +10194,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 88
 }
 ;
@@ -10269,7 +10219,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 126
 }
 ;
@@ -10294,7 +10244,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 353
 }
 ;
@@ -10319,7 +10269,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 480
 }
 ;
@@ -10344,7 +10294,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 517
 }
 ;
@@ -10369,7 +10319,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 224
 }
 ;
@@ -10394,7 +10344,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 141
 }
 ;
@@ -10419,7 +10369,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 268
 }
 ;
@@ -10444,7 +10394,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 127
 }
 ;
@@ -10469,7 +10419,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 146
 }
 ;
@@ -10494,7 +10444,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 243
 }
 ;
@@ -10519,7 +10469,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 3700
 }
 ;
@@ -10544,7 +10494,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 417
 }
 ;
@@ -10569,7 +10519,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 222
 }
 ;
@@ -10594,7 +10544,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 185
 }
 ;
@@ -10619,7 +10569,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 278
 }
 ;
@@ -10644,7 +10594,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 229
 }
 ;
@@ -10669,7 +10619,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 137
 }
 ;
@@ -10694,7 +10644,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 222
 }
 ;
@@ -10719,7 +10669,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 554
 }
 ;
@@ -10744,7 +10694,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 368
 }
 ;
@@ -10769,7 +10719,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 563
 }
 ;
@@ -10794,7 +10744,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 291
 }
 ;
@@ -10819,7 +10769,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 442
 }
 ;
@@ -10844,7 +10794,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 471
 }
 ;
@@ -10869,7 +10819,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 314
 }
 ;
@@ -10894,7 +10844,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 112
 }
 ;
@@ -10919,7 +10869,7 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 458
 }
 ;
@@ -10944,6 +10894,31 @@
       "name": "siku2"
     }
   },
-  "start_seconds": null,
+  "start_seconds": 0,
   "end_seconds": 194
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=5wtX49JFiSo",
+  "title": "Rango - Rango Returns",
+  "duration": 78,
+  "downloaded": true,
+  "filename": "audio_cache\\youtube-5wtX49JFiSo-Rango_Rango_Returns_OST_HD.webm",
+  "expected_filename": "unknownrango-rango-returns-ost-hd",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "start_seconds": 0,
+  "end_seconds": 78
 }
