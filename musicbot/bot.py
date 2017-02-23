@@ -4713,7 +4713,11 @@ class MusicBot(discord.Client):
             result = eval(statement)
             return Response(str(result))
         except Exception as e:
-            return Response("Something went wrong with your code:\n```\n***REMOVED******REMOVED***\n```".format(str(e)))
+            try:
+                result = exec(statement)
+                return Response(str(result))
+            except:
+                return Response("Something went wrong with your code:\n```\n***REMOVED******REMOVED***\n```".format(str(e)))
 
     async def cmd_skipto(self, player, timestamp):
         """
