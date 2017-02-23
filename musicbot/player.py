@@ -323,8 +323,8 @@ class MusicPlayer(EventEmitter):
                     before_options="-nostdin -ss ***REMOVED******REMOVED***".format(
                         format_time_ffmpeg(int(entry.start_seconds))),
                     # before_options="-nostdin",
-                    options="-vn -t ***REMOVED******REMOVED*** -b:a 128k".format(format_time_ffmpeg(
-                        int(entry.end_seconds - entry.start_seconds))),
+                    options="-vn -to ***REMOVED******REMOVED*** -b:a 128k".format(format_time_ffmpeg(
+                        int(entry.end_seconds - entry.start_seconds))) if entry.end_seconds is not None else "-vn -b:a 128k",
                     # options="-vn -b:a 128k",
                     stderr=subprocess.PIPE,
                     # Threadsafe call soon, b/c after will be called from the
@@ -370,8 +370,8 @@ class MusicPlayer(EventEmitter):
                 before_options="-nostdin -ss ***REMOVED******REMOVED***".format(
                     format_time_ffmpeg(int(entry.start_seconds))),
                 # before_options="-nostdin",
-                options="-vn -t ***REMOVED******REMOVED*** -b:a 128k".format(format_time_ffmpeg(
-                    int(entry.end_seconds - entry.start_seconds))),
+                options="-vn -to ***REMOVED******REMOVED*** -b:a 128k".format(format_time_ffmpeg(
+                    int(entry.end_seconds - entry.start_seconds))) if entry.end_seconds is not None else "-vn -b:a 128k",
                 # options="-vn -b:a 128k",
                 stderr=subprocess.PIPE,
                 # Threadsafe call soon, b/c after will be called from the
