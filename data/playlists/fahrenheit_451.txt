@@ -20,7 +20,7 @@
     }
   },
   "start_seconds": 0,
-  "end_seconds": 0
+  "end_seconds": null
 }
 ;
 {
@@ -45,7 +45,7 @@
     }
   },
   "start_seconds": 0,
-  "end_seconds": 0
+  "end_seconds": null
 }
 ;
 {
@@ -70,5 +70,5 @@
     }
   },
   "start_seconds": 0,
-  "end_seconds": 0
+  "end_seconds": null
 }
