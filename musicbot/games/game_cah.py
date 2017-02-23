@@ -703,7 +703,7 @@ class Round:
         self.game = game
         self.master = game.pick_master()
         self.game.broadcast("***{}** is the master this round*".format(
-            self.game.manager.musicbot.get_global_user(self.master).name), delete_after=15)
+            self.game.manager.musicbot.get_global_user(self.master.player_id).name), delete_after=15)
 
         self.question_card = game.pick_question_card()
         self.messages_to_delete = []
