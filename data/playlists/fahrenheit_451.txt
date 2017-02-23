@@ -20,7 +20,7 @@
     ***REMOVED***
   ***REMOVED***,
   "start_seconds": 0,
-  "end_seconds": 0
+  "end_seconds": null
 ***REMOVED***
 ;
 ***REMOVED***
@@ -45,7 +45,7 @@
     ***REMOVED***
   ***REMOVED***,
   "start_seconds": 0,
-  "end_seconds": 0
+  "end_seconds": null
 ***REMOVED***
 ;
 ***REMOVED***
@@ -70,5 +70,5 @@
     ***REMOVED***
   ***REMOVED***,
   "start_seconds": 0,
-  "end_seconds": 0
+  "end_seconds": null
 ***REMOVED***
