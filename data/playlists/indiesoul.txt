@@ -1,1954 +1,2124 @@
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=5uxq2yjoSRo",
+  "title": "Tom Misch - Watch Me Dance",
   "duration": 304,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-5uxq2yjoSRo-Tom_Misch_-_Watch_Me_Dance.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Misch - Watch Me Dance",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=5uxq2yjoSRo"
+  "start_seconds": 0,
+  "end_seconds": 304
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=SsAJHPmBirw",
+  "title": "Tom Misch & Carmody - Easy Love",
   "duration": 252,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-SsAJHPmBirw-Tom_Misch_Carmody_-_Easy_Love.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Misch & Carmody - Easy Love",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=SsAJHPmBirw"
+  "start_seconds": 0,
+  "end_seconds": 252
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=vrbaZ7dpJyg",
+  "title": "Tom Misch - Beautiful Escape (feat. Zak Abel)",
   "duration": 277,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-vrbaZ7dpJyg-Tom_Misch_-_Beautiful_Escape_feat._Zak_Abel.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Misch - Beautiful Escape (feat. Zak Abel)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=vrbaZ7dpJyg"
+  "start_seconds": 0,
+  "end_seconds": 277
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=n10G_yWo8BY",
+  "title": "Bearcubs x Tom Misch - Colours Of Freedom",
   "duration": 227,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-n10G_yWo8BY-Bearcubs_x_Tom_Misch_-_Colours_Of_Freedom.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Bearcubs x Tom Misch - Colours Of Freedom",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=n10G_yWo8BY"
+  "start_seconds": 0,
+  "end_seconds": 227
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=bgBktBE4pp8",
+  "title": "Tom Misch - Your Love (feat. Alexa Harley)",
   "duration": 255,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-bgBktBE4pp8-Tom_Misch_-_Your_Love_feat._Alexa_Harley.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Misch - Your Love (feat. Alexa Harley)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=bgBktBE4pp8"
+  "start_seconds": 0,
+  "end_seconds": 255
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=VJvPkqULlvM",
+  "title": "Tom Misch - Wake Up This Day (feat. Jordan Rakei)",
   "duration": 229,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-VJvPkqULlvM-Tom_Misch_-_Wake_Up_This_Day_feat._Jordan_Rakei.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Misch - Wake Up This Day (feat. Jordan Rakei)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=VJvPkqULlvM"
+  "start_seconds": 0,
+  "end_seconds": 229
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=BVvljrWpNiI",
+  "title": "Tom Misch - Wander With Me (feat. Carmody)",
   "duration": 287,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-BVvljrWpNiI-Tom_Misch_-_Wander_With_Me_feat._Carmody.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Misch - Wander With Me (feat. Carmody)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=BVvljrWpNiI"
+  "start_seconds": 0,
+  "end_seconds": 287
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=PItbZklYYNQ",
+  "title": "Tom Misch - In The Midst Of It All (feat. Sam Wills)",
   "duration": 343,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-PItbZklYYNQ-Tom_Misch_-_In_The_Midst_Of_It_All_feat._Sam_Wills.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Misch - In The Midst Of It All (feat. Sam Wills)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=PItbZklYYNQ"
+  "start_seconds": 0,
+  "end_seconds": 343
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=dXFuETBPFfY",
+  "title": "Tom Misch - Sunshine",
   "duration": 218,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-dXFuETBPFfY-Tom_Misch_-_Sunshine.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Misch - Sunshine",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=dXFuETBPFfY"
+  "start_seconds": 0,
+  "end_seconds": 218
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=QrMOluY6yZc",
+  "title": "Tom Misch & Carmody - Release You",
   "duration": 233,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-QrMOluY6yZc-Tom_Misch_Carmody_-_Release_You.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Misch & Carmody - Release You",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=QrMOluY6yZc"
+  "start_seconds": 0,
+  "end_seconds": 233
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=x1MXDSXoQes",
+  "title": "Tom Misch & Carmody - Outro",
   "duration": 205,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-x1MXDSXoQes-Tom_Misch_Carmody_-_Outro.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Misch & Carmody - Outro",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=x1MXDSXoQes"
+  "start_seconds": 0,
+  "end_seconds": 205
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ka8efFrjfh4",
+  "title": "Tom Misch - Memory",
   "duration": 343,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-ka8efFrjfh4-Tom_Misch_-_Memory.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Misch - Memory",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=ka8efFrjfh4"
+  "start_seconds": 0,
+  "end_seconds": 343
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=cC7rEd5dfwk",
+  "title": "Zak Abel - Unstable [Official Audio]",
   "duration": 225,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-cC7rEd5dfwk-Zak_Abel_-_Unstable_Official_Audio.m4a",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Zak Abel - Unstable [Official Audio]",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=cC7rEd5dfwk"
+  "start_seconds": 0,
+  "end_seconds": 225
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=hppndGC_yHc",
+  "title": "Zak Abel - Flow",
   "duration": 237,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-hppndGC_yHc-Zak_Abel_-_Flow.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Zak Abel - Flow",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=hppndGC_yHc"
+  "start_seconds": 0,
+  "end_seconds": 237
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Tq56g5lTg_w",
+  "title": "Zak Abel & Joker - Wise Enough [Official Video]",
   "duration": 218,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-Tq56g5lTg_w-Zak_Abel_Joker_-_Wise_Enough_Official_Video.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Zak Abel & Joker - Wise Enough [Official Video]",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=Tq56g5lTg_w"
+  "start_seconds": 0,
+  "end_seconds": 218
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=v7u3bFV1Wk4",
+  "title": "Zak Abel - Everybody Needs Love [Official Video]",
   "duration": 197,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-v7u3bFV1Wk4-Zak_Abel_-_Everybody_Needs_Love_Official_Video.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Zak Abel - Everybody Needs Love [Official Video]",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=v7u3bFV1Wk4"
+  "start_seconds": 0,
+  "end_seconds": 197
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ZgzuBGAwr5w",
+  "title": "Zak Abel - Soul Child",
   "duration": 237,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-ZgzuBGAwr5w-Zak_Abel_-_Soul_Child.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Zak Abel - Soul Child",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=ZgzuBGAwr5w"
+  "start_seconds": 0,
+  "end_seconds": 237
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=o1lqqkosbQY",
+  "title": "Zak Abel - These Are The Days",
   "duration": 206,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-o1lqqkosbQY-Zak_Abel_-_These_Are_The_Days.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Zak Abel - These Are The Days",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=o1lqqkosbQY"
+  "start_seconds": 0,
+  "end_seconds": 206
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xG5J_C4ltRc",
+  "title": "Zak Abel - Alchemy",
   "duration": 212,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-xG5J_C4ltRc-Zak_Abel_-_Alchemy.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Zak Abel - Alchemy",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=xG5J_C4ltRc"
+  "start_seconds": 0,
+  "end_seconds": 212
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=XN8SAh0PGNU",
+  "title": "Zak Abel - Say Sumthin [Official Audio]",
   "duration": 226,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-XN8SAh0PGNU-Zak_Abel_-_Say_Sumthin_Official_Audio.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Zak Abel - Say Sumthin [Official Audio]",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=XN8SAh0PGNU"
+  "start_seconds": 0,
+  "end_seconds": 226
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=TymjpPmvmRM",
+  "title": "Kwabs - Cheating On Me (Tom Misch Refix feat. Zak Abel)",
   "duration": 283,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-TymjpPmvmRM-Kwabs_-_Cheating_On_Me_Tom_Misch_Refix_feat._Zak_Abel.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Kwabs - Cheating On Me (Tom Misch Refix feat. Zak Abel)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=TymjpPmvmRM"
+  "start_seconds": 0,
+  "end_seconds": 283
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=bymCootn7mk",
+  "title": "Wookie ft. Zak Abel - Higher",
   "duration": 215,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-bymCootn7mk-Wookie_ft._Zak_Abel_-_Higher.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Wookie ft. Zak Abel - Higher",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=bymCootn7mk"
+  "start_seconds": 0,
+  "end_seconds": 215
 }
 ;
 {
-  "duration": 196,
-  "expected_filename": "audio_cache\\youtube-Z5-8dffKBoY-Samm_Henshaw_-_Our_Love_Official_Video.webm",
-  "meta": {
-    "channel": {
-      "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
-    },
-    "author": {
-      "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
-    }
-  },
-  "filename": null,
-  "title": "Samm Henshaw - Our Love (Official Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
   "version": 1,
-  "url": "https://www.youtube.com/watch?v=Z5-8dffKBoY"
-}
-;
-{
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=x9Eoxcv35Ww",
+  "title": "Samm Henshaw - These Hands (Audio)",
   "duration": 202,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-x9Eoxcv35Ww-Samm_Henshaw_-_These_Hands_Audio.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Samm Henshaw - These Hands (Audio)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=x9Eoxcv35Ww"
+  "start_seconds": 0,
+  "end_seconds": 202
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=MTrKkqE9p1o",
+  "title": "Leon Bridges - Coming Home",
   "duration": 245,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-MTrKkqE9p1o-Leon_Bridges_-_Coming_Home.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Leon Bridges - Coming Home",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=MTrKkqE9p1o"
+  "start_seconds": 0,
+  "end_seconds": 245
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=pgS_xob1x4A",
+  "title": "Leon Bridges - Better Man",
   "duration": 143,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-pgS_xob1x4A-Leon_Bridges_-_Better_Man.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Leon Bridges - Better Man",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=pgS_xob1x4A"
+  "start_seconds": 0,
+  "end_seconds": 143
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=HYplnRjMVhM",
+  "title": "Leon Bridges - Smooth Sailin'",
   "duration": 185,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-HYplnRjMVhM-Leon_Bridges_-_Smooth_Sailin.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Leon Bridges - Smooth Sailin'",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=HYplnRjMVhM"
+  "start_seconds": 0,
+  "end_seconds": 185
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=jPdzSFEVQss",
+  "title": "Leon Bridges - Lisa Sawyer (Audio)",
   "duration": 247,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-jPdzSFEVQss-Leon_Bridges_-_Lisa_Sawyer_Audio.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Leon Bridges - Lisa Sawyer (Audio)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=jPdzSFEVQss"
+  "start_seconds": 0,
+  "end_seconds": 247
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=J2FV99yk8ZY",
+  "title": "Chris Brown - Brown Skin Girl (Ft. Rock City & Sean Paul)",
   "duration": 257,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-J2FV99yk8ZY-Chris_Brown_-_Brown_Skin_Girl_Ft._Rock_City_Sean_Paul.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Chris Brown - Brown Skin Girl (Ft. Rock City & Sean Paul)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=J2FV99yk8ZY"
+  "start_seconds": 0,
+  "end_seconds": 257
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=7gbR5VSD5P0",
+  "title": "Brown Skin Girl",
   "duration": 207,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-7gbR5VSD5P0-Brown_Skin_Girl.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Brown Skin Girl",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=7gbR5VSD5P0"
+  "start_seconds": 0,
+  "end_seconds": 207
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=qxVzVdGw1tI",
+  "title": "Carmody - Skin",
   "duration": 241,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-qxVzVdGw1tI-Carmody_-_Skin.m4a",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Carmody - Skin",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=qxVzVdGw1tI"
+  "start_seconds": 0,
+  "end_seconds": 241
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Z6Xvf8uZ4nI",
+  "title": "Carmody - For Desire",
   "duration": 189,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-Z6Xvf8uZ4nI-Carmody_-_For_Desire.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Carmody - For Desire",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=Z6Xvf8uZ4nI"
+  "start_seconds": 0,
+  "end_seconds": 189
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=FuB00XfRNjo",
+  "title": "Tom Misch & Carmody - The Last Song",
   "duration": 295,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-FuB00XfRNjo-Tom_Misch_Carmody_-_The_Last_Song.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Misch & Carmody - The Last Song",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=FuB00XfRNjo"
+  "start_seconds": 0,
+  "end_seconds": 295
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=4eWOxxkHHyM",
+  "title": "Melvv - Not Me (feat. Two Feet)",
   "duration": 181,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-4eWOxxkHHyM-Melvv_-_Not_Me_feat._Two_Feet.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Melvv - Not Me (feat. Two Feet)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=4eWOxxkHHyM"
+  "start_seconds": 0,
+  "end_seconds": 181
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=h2ymJcCwS_s",
+  "title": "Jon Bellion - Guillotine ft. Travis Mendes",
   "duration": 222,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-h2ymJcCwS_s-Jon_Bellion_-_Guillotine_ft._Travis_Mendes.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Jon Bellion - Guillotine ft. Travis Mendes",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=h2ymJcCwS_s"
+  "start_seconds": 0,
+  "end_seconds": 222
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=AXnqkVTFUqY",
+  "title": "Jon Bellion - All Time Low (Video)",
   "duration": 219,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-AXnqkVTFUqY-Jon_Bellion_-_All_Time_Low_Video.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Jon Bellion - All Time Low (Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=AXnqkVTFUqY"
+  "start_seconds": 0,
+  "end_seconds": 219
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=qmSiJxEOVGs",
+  "title": "Jon Bellion - 80's Films (Audio)",
   "duration": 216,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-qmSiJxEOVGs-Jon_Bellion_-_80_s_Films_Audio.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Jon Bellion - 80's Films (Audio)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=qmSiJxEOVGs"
+  "start_seconds": 0,
+  "end_seconds": 216
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xI_bxix-6Xo",
+  "title": "Jon Bellion - Carry Your Throne",
   "duration": 214,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-xI_bxix-6Xo-Jon_Bellion_-_Carry_Your_Throne.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Jon Bellion - Carry Your Throne",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=xI_bxix-6Xo"
+  "start_seconds": 0,
+  "end_seconds": 214
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=HXUaoDl3Rgs",
+  "title": "Jon Bellion - Simple and Sweet",
   "duration": 191,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-HXUaoDl3Rgs-Jon_Bellion_-_Simple_and_Sweet.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Jon Bellion - Simple and Sweet",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=HXUaoDl3Rgs"
+  "start_seconds": 0,
+  "end_seconds": 191
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=HvCQWS84jkM",
+  "title": "Jon Bellion - Ungrateful Eyes (Official Music Video)",
   "duration": 206,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-HvCQWS84jkM-Jon_Bellion_-_Ungrateful_Eyes_Official_Music_Video.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Jon Bellion - Ungrateful Eyes (Official Music Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=HvCQWS84jkM"
+  "start_seconds": 0,
+  "end_seconds": 206
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=YthChN1Wq8M",
+  "title": "EDEN - Wake Up",
   "duration": 279,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-YthChN1Wq8M-EDEN_-_Wake_Up.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "EDEN - Wake Up",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=YthChN1Wq8M"
+  "start_seconds": 0,
+  "end_seconds": 279
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=f1eMI0d-1Hs",
+  "title": "EDEN - Gravity",
   "duration": 230,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-f1eMI0d-1Hs-EDEN_-_Gravity.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "EDEN - Gravity",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=f1eMI0d-1Hs"
+  "start_seconds": 0,
+  "end_seconds": 230
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=0pVABElms84",
+  "title": "EDEN - End Credits (feat. Leah Kelly)",
   "duration": 241,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-0pVABElms84-EDEN_-_End_Credits_feat._Leah_Kelly.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "EDEN - End Credits (feat. Leah Kelly)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=0pVABElms84"
+  "start_seconds": 0,
+  "end_seconds": 241
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=t0i4QRGDTbc",
+  "title": "The Eden Project - Statues ft. Leah Kelly",
   "duration": 310,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-t0i4QRGDTbc-The_Eden_Project_-_Statues_ft._Leah_Kelly.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "The Eden Project - Statues ft. Leah Kelly",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=t0i4QRGDTbc"
+  "start_seconds": 0,
+  "end_seconds": 310
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=9_EvN5n5xwE",
+  "title": "The Eden Project - Crazy in Love ft. Leah Kelly",
   "duration": 267,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-9_EvN5n5xwE-The_Eden_Project_-_Crazy_in_Love_ft._Leah_Kelly.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "The Eden Project - Crazy in Love ft. Leah Kelly",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=9_EvN5n5xwE"
+  "start_seconds": 0,
+  "end_seconds": 267
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=syXq0ICfFDg",
+  "title": "The Eden Project - XO",
   "duration": 163,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-syXq0ICfFDg-The_Eden_Project_-_XO.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "The Eden Project - XO",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=syXq0ICfFDg"
+  "start_seconds": 0,
+  "end_seconds": 163
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Nud5WD_nUY8",
+  "title": "EDEN - Billie Jean",
   "duration": 236,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-Nud5WD_nUY8-EDEN_-_Billie_Jean.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "EDEN - Billie Jean",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=Nud5WD_nUY8"
+  "start_seconds": 0,
+  "end_seconds": 236
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=IKaNodcBiLA",
+  "title": "The Eden Project - Drowning",
   "duration": 260,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-IKaNodcBiLA-The_Eden_Project_-_Drowning.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "The Eden Project - Drowning",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=IKaNodcBiLA"
+  "start_seconds": 0,
+  "end_seconds": 260
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=rFrgyKmOUmc",
+  "title": "EDEN - fumes (feat. gnash) (official audio)",
   "duration": 215,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-rFrgyKmOUmc-EDEN_-_fumes_feat._gnash_official_audio.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "EDEN - fumes (feat. gnash) (official audio)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=rFrgyKmOUmc"
+  "start_seconds": 0,
+  "end_seconds": 215
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=sN8WUtc1W7E",
+  "title": "The Eden Project - Blank Space",
   "duration": 217,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-sN8WUtc1W7E-The_Eden_Project_-_Blank_Space.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "The Eden Project - Blank Space",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=sN8WUtc1W7E"
+  "start_seconds": 0,
+  "end_seconds": 217
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Z71h3IzoO8s",
+  "title": "The Eden Project - Jupiter",
   "duration": 247,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-Z71h3IzoO8s-The_Eden_Project_-_Jupiter.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "The Eden Project - Jupiter",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=Z71h3IzoO8s"
+  "start_seconds": 0,
+  "end_seconds": 247
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=L3wKzyIN1yk",
+  "title": "Rag'n'Bone Man - Human (Official Video)",
   "duration": 198,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-L3wKzyIN1yk-Rag_n_Bone_Man_-_Human_Official_Video.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Rag'n'Bone Man - Human (Official Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=L3wKzyIN1yk"
+  "start_seconds": 0,
+  "end_seconds": 198
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=kI1-E6Bm-70",
+  "title": "Rag'N'Bone Man - Lay My Body Down",
   "duration": 216,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-kI1-E6Bm-70-Rag_N_Bone_Man_-_Lay_My_Body_Down.m4a",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Rag'N'Bone Man - Lay My Body Down",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=kI1-E6Bm-70"
+  "start_seconds": 0,
+  "end_seconds": 216
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=nM35X5hdzEs",
+  "title": "Rag\u2019n\u2019Bone Man - Wolves",
   "duration": 179,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-nM35X5hdzEs-Rag_n_Bone_Man_-_Wolves.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Rag\u2019n\u2019Bone Man - Wolves",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=nM35X5hdzEs"
+  "start_seconds": 0,
+  "end_seconds": 179
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=-F44NxiGAqg",
+  "title": "Rag'n'Bone Man - Hard Came The Rain",
   "duration": 226,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube--F44NxiGAqg-Rag_n_Bone_Man_-_Hard_Came_The_Rain.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Rag'n'Bone Man - Hard Came The Rain",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=-F44NxiGAqg"
+  "start_seconds": 0,
+  "end_seconds": 226
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=5lsSDHljV9s",
+  "title": "Rag'n'Bone Man - Hell Yeah ft. Vince Staples",
   "duration": 234,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-5lsSDHljV9s-Rag_n_Bone_Man_-_Hell_Yeah_ft._Vince_Staples.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Rag'n'Bone Man - Hell Yeah ft. Vince Staples",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=5lsSDHljV9s"
+  "start_seconds": 0,
+  "end_seconds": 234
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=TgKSUQDwEqc",
+  "title": "Rag\u2019n\u2019Bone Man - Guilty",
   "duration": 214,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-TgKSUQDwEqc-Rag_n_Bone_Man_-_Guilty.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Rag\u2019n\u2019Bone Man - Guilty",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=TgKSUQDwEqc"
+  "start_seconds": 0,
+  "end_seconds": 214
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=GitZmW2kBEQ",
+  "title": "Rag\u2019n\u2019Bone Man - Wolves featuring Stig Of The Dump",
   "duration": 191,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-GitZmW2kBEQ-Rag_n_Bone_Man_-_Wolves_featuring_Stig_Of_The_Dump.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Rag\u2019n\u2019Bone Man - Wolves featuring Stig Of The Dump",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=GitZmW2kBEQ"
+  "start_seconds": 0,
+  "end_seconds": 191
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ugGN_Z1jPoM",
+  "title": "Benjamin Clementine - Nemesis",
   "duration": 248,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-ugGN_Z1jPoM-Benjamin_Clementine_-_Nemesis.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Benjamin Clementine - Nemesis",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=ugGN_Z1jPoM"
+  "start_seconds": 0,
+  "end_seconds": 248
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=JQ4mFaI17pk",
+  "title": "Benjamin Clementine - I Won\u2019t Complain",
   "duration": 280,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-JQ4mFaI17pk-Benjamin_Clementine_-_I_Won_t_Complain.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Benjamin Clementine - I Won\u2019t Complain",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=JQ4mFaI17pk"
+  "start_seconds": 0,
+  "end_seconds": 280
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=6RJMhYtYKMQ",
+  "title": "Benjamin Clementine - London",
   "duration": 239,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-6RJMhYtYKMQ-Benjamin_Clementine_-_London.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Benjamin Clementine - London",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=6RJMhYtYKMQ"
+  "start_seconds": 0,
+  "end_seconds": 239
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=a68KJWe_Tfk",
+  "title": "Benjamin Clementine - Condolence | A Take Away Show",
   "duration": 758,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-a68KJWe_Tfk-Benjamin_Clementine_-_Condolence_A_Take_Away_Show.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Benjamin Clementine - Condolence | A Take Away Show",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=a68KJWe_Tfk"
+  "start_seconds": 0,
+  "end_seconds": 758
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=MYSVMgRr6pw",
+  "title": "Hozier - Take Me To Church",
   "duration": 243,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-MYSVMgRr6pw-Hozier_-_Take_Me_To_Church.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Hozier - Take Me To Church",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=MYSVMgRr6pw"
+  "start_seconds": 0,
+  "end_seconds": 243
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=5_JUReD3QoE",
+  "title": "Hozier - Sedated",
   "duration": 210,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-5_JUReD3QoE-Hozier_-_Sedated.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Hozier - Sedated",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=5_JUReD3QoE"
+  "start_seconds": 0,
+  "end_seconds": 210
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=z0a9k1gSMsw",
+  "title": "Imagine Dragons - Levitate (Audio)",
   "duration": 198,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-z0a9k1gSMsw-Imagine_Dragons_-_Levitate_Audio.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Imagine Dragons - Levitate (Audio)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=z0a9k1gSMsw"
+  "start_seconds": 0,
+  "end_seconds": 198
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=qQrgto184Tk",
+  "title": "Imagine Dragons - Shots",
   "duration": 241,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-qQrgto184Tk-Imagine_Dragons_-_Shots.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Imagine Dragons - Shots",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=qQrgto184Tk"
+  "start_seconds": 0,
+  "end_seconds": 241
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=e4RMh7NLHPY",
+  "title": "Imagine Dragons - Roots (Audio)",
   "duration": 174,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-e4RMh7NLHPY-Imagine_Dragons_-_Roots_Audio.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Imagine Dragons - Roots (Audio)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=e4RMh7NLHPY"
+  "start_seconds": 0,
+  "end_seconds": 174
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Rl3ELiPXFRo",
+  "title": "Imagine Dragons - Gold",
   "duration": 228,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-Rl3ELiPXFRo-Imagine_Dragons_-_Gold.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Imagine Dragons - Gold",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=Rl3ELiPXFRo"
+  "start_seconds": 0,
+  "end_seconds": 228
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=M2EIjONNjIU",
+  "title": "Imagine Dragons - Gold (Audio)",
   "duration": 217,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-M2EIjONNjIU-Imagine_Dragons_-_Gold_Audio.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Imagine Dragons - Gold (Audio)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=M2EIjONNjIU"
+  "start_seconds": 0,
+  "end_seconds": 217
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ndtQ6ReXO-s",
+  "title": "Imagine Dragons - Shots (Audio)",
   "duration": 232,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-ndtQ6ReXO-s-Imagine_Dragons_-_Shots_Audio.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Imagine Dragons - Shots (Audio)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=ndtQ6ReXO-s"
+  "start_seconds": 0,
+  "end_seconds": 232
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Iys9IHmDJ1w",
+  "title": "Bastille - Blame",
   "duration": 320,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-Iys9IHmDJ1w-Bastille_-_Blame.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Bastille - Blame",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=Iys9IHmDJ1w"
+  "start_seconds": 0,
+  "end_seconds": 320
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=vn-6fiVkAcA",
+  "title": "Bastille - Send Them Off!",
   "duration": 225,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-vn-6fiVkAcA-Bastille_-_Send_Them_Off.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Bastille - Send Them Off!",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=vn-6fiVkAcA"
+  "start_seconds": 0,
+  "end_seconds": 225
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ZWCB3hpJDXM",
+  "title": "Bastille - Good Grief",
   "duration": 237,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-ZWCB3hpJDXM-Bastille_-_Good_Grief.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Bastille - Good Grief",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=ZWCB3hpJDXM"
+  "start_seconds": 0,
+  "end_seconds": 237
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=GIwyqsqHsic",
+  "title": "Bastille - Fake It",
   "duration": 251,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-GIwyqsqHsic-Bastille_-_Fake_It.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Bastille - Fake It",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=GIwyqsqHsic"
+  "start_seconds": 0,
+  "end_seconds": 251
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=jtVPa5baudI",
+  "title": "Bastille - bad_news",
   "duration": 283,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-jtVPa5baudI-Bastille_-_bad_news.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Bastille - bad_news",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=jtVPa5baudI"
+  "start_seconds": 0,
+  "end_seconds": 283
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=MGR4U7W1dZU",
+  "title": "Bastille - Things We Lost In The Fire",
   "duration": 261,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-MGR4U7W1dZU-Bastille_-_Things_We_Lost_In_The_Fire.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Bastille - Things We Lost In The Fire",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=MGR4U7W1dZU"
+  "start_seconds": 0,
+  "end_seconds": 261
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=bpOSxM0rNPM",
+  "title": "Arctic Monkeys - Do I Wanna Know? (Official Video)",
   "duration": 266,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-bpOSxM0rNPM-Arctic_Monkeys_-_Do_I_Wanna_Know_Official_Video.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Arctic Monkeys - Do I Wanna Know? (Official Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=bpOSxM0rNPM"
+  "start_seconds": 0,
+  "end_seconds": 266
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=QtXby3twMmI",
+  "title": "Coldplay - Adventure Of A Lifetime (Official video)",
   "duration": 316,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-QtXby3twMmI-Coldplay_-_Adventure_Of_A_Lifetime_Official_video.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Coldplay - Adventure Of A Lifetime (Official video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=QtXby3twMmI"
+  "start_seconds": 0,
+  "end_seconds": 316
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=un4fHfBgyvo",
+  "title": "Tom Odell - Here I Am (Official Video)",
   "duration": 223,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-un4fHfBgyvo-Tom_Odell_-_Here_I_Am_Official_Video.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Odell - Here I Am (Official Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=un4fHfBgyvo"
+  "start_seconds": 0,
+  "end_seconds": 223
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=bnZxWpwvFEk",
+  "title": "Tom Odell - Concrete (Official Video)",
   "duration": 236,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-bnZxWpwvFEk-Tom_Odell_-_Concrete_Official_Video.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Odell - Concrete (Official Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=bnZxWpwvFEk"
+  "start_seconds": 0,
+  "end_seconds": 236
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=uvosjKUKCLo",
+  "title": "Tom Odell - Wrong Crowd (Official Video)",
   "duration": 314,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-uvosjKUKCLo-Tom_Odell_-_Wrong_Crowd_Official_Video.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Odell - Wrong Crowd (Official Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=uvosjKUKCLo"
+  "start_seconds": 0,
+  "end_seconds": 314
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=MwpMEbgC7DA",
+  "title": "Tom Odell - Another Love",
   "duration": 248,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-MwpMEbgC7DA-Tom_Odell_-_Another_Love.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "Tom Odell - Another Love",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=MwpMEbgC7DA"
+  "start_seconds": 0,
+  "end_seconds": 248
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=yNVuUrOKESw",
+  "title": "The Vernons - I Want Her Back At Home (Official Music Video)",
   "duration": 270,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-yNVuUrOKESw-The_Vernons_-_I_Want_Her_Back_At_Home_Official_Music_Video.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "The Vernons - I Want Her Back At Home (Official Music Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=yNVuUrOKESw"
+  "start_seconds": 0,
+  "end_seconds": 270
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Gvo7thT2yfo",
+  "title": "The Vernons - White Wine (Official Music Video)",
   "duration": 225,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-Gvo7thT2yfo-The_Vernons_-_White_Wine_Official_Music_Video.webm",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "The Vernons - White Wine (Official Music Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
-  "version": 1,
-  "url": "https://www.youtube.com/watch?v=Gvo7thT2yfo"
+  "start_seconds": 0,
+  "end_seconds": 225
 }
 ;
 {
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=oDKrp4lhepw",
+  "title": "The Vernons - Standing in Line (Official Music Video)",
   "duration": 182,
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-oDKrp4lhepw-The_Vernons_-_Standing_in_Line_Official_Music_Video.m4a",
   "meta": {
     "channel": {
+      "type": "Channel",
       "id": "226402503422509058",
-      "name": "musicbot",
-      "type": "Channel"
+      "name": "musicbot"
     },
     "author": {
+      "type": "Member",
       "id": "203510202421477376",
-      "name": "ZyLect",
-      "type": "Member"
+      "name": "ZyLect"
     }
   },
-  "filename": null,
-  "title": "The Vernons - Standing in Line (Official Music Video)",
-  "downloaded": false,
-  "type": "URLPlaylistEntry",
+  "start_seconds": 0,
+  "end_seconds": 182
+}
+;
+{
   "version": 1,
-  "url": "https://www.youtube.com/watch?v=oDKrp4lhepw"
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Z5-8dffKBoY",
+  "title": "Samm Henshaw - Our Love (Official Video)",
+  "duration": 196,
+  "downloaded": true,
+  "filename": "audio_cache\\youtube-Z5-8dffKBoY-Samm_Henshaw_-_Our_Love_Official_Video.webm",
+  "expected_filename": "audio_cache\\youtube-Z5-8dffKBoY-Samm_Henshaw_-_Our_Love_Official_Video.webm",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203510202421477376",
+      "name": "ZyLect"
+    }
+  },
+  "start_seconds": 9,
+  "end_seconds": 196
 }
