@@ -1771,7 +1771,8 @@ class MusicBot(discord.Client):
             prog_bar_len = 20
             prog_full_char = "■"
             prog_empty_char = "□"
-            progress_perc = (player.progress / end_seconds) if end_seconds is not None else 0
+            progress_perc = (player.progress /
+                             end_seconds) if end_seconds is not None else 0
             prog_bar_str = ""
 
             for i in range(prog_bar_len):
@@ -3652,7 +3653,7 @@ class MusicBot(discord.Client):
 
         while running:
             current_status = game.get_beautified_string()
-            msg = await self.safe_send_message(channel, "**Hangman**\n****REMOVED******REMOVED*** tries left*\n\n***REMOVED******REMOVED***\n\n`Send the letter you want to guess or type \"exit\" to exit.`".format(game.tries_left, current_status))
+            msg = await self.safe_send_message(channel, "**Hangman**\n****REMOVED******REMOVED*** trie***REMOVED******REMOVED*** left*\n\n***REMOVED******REMOVED***\n\n`Send the letter you want to guess or type \"exit\" to exit.`".format(game.tries_left, "s" if game.tries_left != 1 else "", current_status))
             response = await self.wait_for_message(300, author=author, channel=channel, check=check)
 
             if not response or response.content.lower().startswith(self.config.command_prefix) or response.content.lower().startswith('exit'):
@@ -4036,6 +4037,8 @@ class MusicBot(discord.Client):
         interface_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add`: Add a video to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
 
         extras_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n**Extra functions:**\n`sort [alphabetical, length, random]`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n\n`abort`: return to main screen"
+
+        edit_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n```\nentry_information\n```\n\n**Edit functions:**\n`rename <newname>`: rename the entry\n`setstart <timestamp>`: set the starting time of the song\n`setend <timestamp>`: set the ending time of the song\n\n`abort`: return to main screen"
 
         playlist = self.playlists.get_playlist(_savename, player.playlist)
 

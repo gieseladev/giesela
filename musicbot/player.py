@@ -1,15 +1,15 @@
-import asyncio
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
-from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
 
+import asyncio
 import audioop
+from enum import Enum
 
 from .exceptions import FFmpegError, FFmpegWarning
 from .lib.event_emitter import EventEmitter
@@ -333,7 +333,7 @@ class MusicPlayer(EventEmitter):
                         self._playback_finished)
                 ))
                 self._current_player.setDaemon(True)
-                self._current_player.buff.volume = self.volume
+                self._current_player.buff.volume = self._volume
 
                 # I need to add ytdl hooks
                 self.state = MusicPlayerState.PLAYING
@@ -380,7 +380,7 @@ class MusicPlayer(EventEmitter):
                     self._playback_finished)
             ))
             self._current_player.setDaemon(True)
-            self._current_player.buff.volume = self.volume
+            self._current_player.buff.volume = self._volume
 
             # I need to add ytdl hooks
             self.state = MusicPlayerState.PLAYING
