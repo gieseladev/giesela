@@ -14,6 +14,8 @@ class BasePlaylistEntry:
         self.filename = None
         self._is_downloading = False
         self._waiting_futures = []
+        self.start_seconds = 0
+        self.end_seconds = None
 
     @property
     def is_downloaded(self):
