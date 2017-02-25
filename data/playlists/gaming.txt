@@ -19,7 +19,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-fVEo74CwiG4-Alesso_We_could_be_-_Heroes_Lyrics.webm",
+  "start_seconds": 0,
   "end_seconds": 210
 ***REMOVED***
 ;
@@ -44,7 +44,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-cHHLHGNpCSA-Avicii_-_Waiting_For_Love.webm",
+  "start_seconds": 0,
   "end_seconds": 230
 ***REMOVED***
 ;
@@ -69,7 +69,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-ZoClf0HmEBw-K.A.A.N._-_Mary_Jane_prod._SGULL.webm",
+  "start_seconds": 0,
   "end_seconds": 202
 ***REMOVED***
 ;
@@ -94,7 +94,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-k9elZm_EH_4-Luke_Christopher_-_Lot_To_Learn.webm",
+  "start_seconds": 0,
   "end_seconds": 253
 ***REMOVED***
 ;
@@ -119,7 +119,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-SufAKh_bHsU-Abstract_-_Scars_ft._RoZe_Prod._Drumma_Battalion.webm",
+  "start_seconds": 0,
   "end_seconds": 276
 ***REMOVED***
 ;
@@ -144,7 +144,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-MrTz5xjmso4-Sean_Kingston_-_Beautiful_Girls.webm",
+  "start_seconds": 0,
   "end_seconds": 258
 ***REMOVED***
 ;
@@ -169,7 +169,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-0vsnwUJjunU-Abstract_-_I_m_Good_ft._RoZe_Prod._Drumma_Battalion.webm",
+  "start_seconds": 0,
   "end_seconds": 213
 ***REMOVED***
 ;
@@ -194,7 +194,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-b4Bj7Zb-YD4-Calvin_Harris_-_My_Way_Official_Video.webm",
+  "start_seconds": 0,
   "end_seconds": 244
 ***REMOVED***
 ;
@@ -219,7 +219,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-PT2_F-1esPk-The_Chainsmokers_-_Closer_Lyric_ft._Halsey.webm",
+  "start_seconds": 0,
   "end_seconds": 262
 ***REMOVED***
 ;
@@ -244,7 +244,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-_KmWZXNDx5s-kid_cudi_-_pursuit_of_happiness_Download_Lyrics.webm",
+  "start_seconds": 0,
   "end_seconds": 296
 ***REMOVED***
 ;
@@ -269,7 +269,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-Owd9kNsNVEI-Michigan_Moonlight.webm",
+  "start_seconds": 0,
   "end_seconds": 293
 ***REMOVED***
 ;
@@ -294,7 +294,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-GQ0X7_rv38s-Julian_Perretta_-_Miracle.webm",
+  "start_seconds": 0,
   "end_seconds": 181
 ***REMOVED***
 ;
@@ -319,7 +319,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-w5h4yJ-BpL4-Walking_On_Cars_-_Speeding_Cars.webm",
+  "start_seconds": 0,
   "end_seconds": 255
 ***REMOVED***
 ;
@@ -344,7 +344,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-VcDy8HEg1QY-Rednex_-_Cotton_Eye_Joe.webm",
+  "start_seconds": 0,
   "end_seconds": 194
 ***REMOVED***
 ;
@@ -369,7 +369,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-8gbImG50oIc-Matt_***REMOVED***s_-_Catch_Release_Deepend_Remix.webm",
+  "start_seconds": 0,
   "end_seconds": 195
 ***REMOVED***
 ;
@@ -394,7 +394,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-28GpKacWLWI-Abstract_-_Neverland_ft._Ruth_B_Prod._Blulake.webm",
+  "start_seconds": 0,
   "end_seconds": 311
 ***REMOVED***
 ;
@@ -419,7 +419,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-2i2khp_npdE-Alan_Walker_-_Sing_Me_To_Sleep.webm",
+  "start_seconds": 0,
   "end_seconds": 192
 ***REMOVED***
 ;
@@ -444,7 +444,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-VscvdooUCTA-Alligatoah_-_Musik_ist_keine_Losung_Official_Video.webm",
+  "start_seconds": 0,
   "end_seconds": 269
 ***REMOVED***
 ;
@@ -469,7 +469,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-nbXgHAzUWB0-Axwell_Ingrosso_-_Sun_Is_Shining.webm",
+  "start_seconds": 0,
   "end_seconds": 250
 ***REMOVED***
 ;
@@ -494,7 +494,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-xat1GVnl8-k-Bloodhound_Gang_-_The_Bad_Touch.webm",
+  "start_seconds": 0,
   "end_seconds": 245
 ***REMOVED***
 ;
@@ -519,7 +519,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-c3rLrFC8igY-Dame_-_Auf_die_guten_alten_Zeiten_Official_HD_Video.webm",
+  "start_seconds": 0,
   "end_seconds": 251
 ***REMOVED***
 ;
@@ -544,7 +544,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-byfU8qO3yvg-Hendersin_-_Lonely_Road.webm",
+  "start_seconds": 0,
   "end_seconds": 189
 ***REMOVED***
 ;
@@ -569,7 +569,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-lP077RitNAc-Hollywood_Undead_-_Bullet_Lyric_Video.webm",
+  "start_seconds": 0,
   "end_seconds": 198
 ***REMOVED***
 ;
@@ -594,7 +594,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-hxuCLopcEy4-Good_People_-_Jack_Johnson_-_With_Lyrics.webm",
+  "start_seconds": 0,
   "end_seconds": 216
 ***REMOVED***
 ;
@@ -619,7 +619,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-SQ2HstgvzZ4-Machine_Gun_Kelly_-_Mind_of_a_Stoner_ft._Wiz_Khalifa_OFFICIAL_MUSIC_VIDEO.webm",
+  "start_seconds": 0,
   "end_seconds": 247
 ***REMOVED***
 ;
@@ -644,7 +644,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-eI3UF_HcTNo-Oleska_X_Otter_Berry_-_Far_Behind_Original_Mix.webm",
+  "start_seconds": 0,
   "end_seconds": 244
 ***REMOVED***
 ;
@@ -669,7 +669,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-rG18P6wOtTQ-Sido_-_Hamdullah_Official_Video.webm",
+  "start_seconds": 0,
   "end_seconds": 218
 ***REMOVED***
 ;
@@ -694,7 +694,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-VbfpW0pbvaU-Shawn_Mendes_-_Stitches_Official_Video.webm",
+  "start_seconds": 0,
   "end_seconds": 240
 ***REMOVED***
 ;
@@ -719,7 +719,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-F9kXstb9FF4-The_Strumbellas_-_Spirits.webm",
+  "start_seconds": 0,
   "end_seconds": 216
 ***REMOVED***
 ;
@@ -744,7 +744,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-WpYeekQkAdc-The_Black_Eyed_Peas_-_Where_Is_The_Love.webm",
+  "start_seconds": 0,
   "end_seconds": 252
 ***REMOVED***
 ;
@@ -769,7 +769,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-BEm0AjTbsac-The_Misty_Mountains_Cold_-_The_Hobbit.webm",
+  "start_seconds": 0,
   "end_seconds": 180
 ***REMOVED***
 ;
@@ -794,7 +794,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-iUI5uLysKaE-Vance_Joy_-_Riptide_Lyrics_on_Screen.webm",
+  "start_seconds": 0,
   "end_seconds": 202
 ***REMOVED***
 ;
@@ -819,7 +819,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-YV3XnVcEgZY-Vigiland_-_Pong_Dance_Lyric_Video.webm",
+  "start_seconds": 0,
   "end_seconds": 159
 ***REMOVED***
 ;
@@ -844,7 +844,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-KuVAeTHqijk-Wiz_Khalifa_-_No_Sleep_Music_Video.webm",
+  "start_seconds": 0,
   "end_seconds": 213
 ***REMOVED***
 ;
@@ -869,7 +869,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-uvLSj4gRq-Q-Wiz_Khalifa_-_So_High_ft._Ghost_Loft_Official_Audio.webm",
+  "start_seconds": 0,
   "end_seconds": 249
 ***REMOVED***
 ;
@@ -894,7 +894,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-6tu4wWSbnIs-X_Ambassadors_-_Renegades_Audio.webm",
+  "start_seconds": 0,
   "end_seconds": 195
 ***REMOVED***
 ;
@@ -919,7 +919,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-Wa5B22KAkEk-Snoop_Dogg_Wiz_Khalifa_-_Young_Wild_and_Free_ft._Bruno_Mars_Official_Video.webm",
+  "start_seconds": 0,
   "end_seconds": 257
 ***REMOVED***
 ;
@@ -944,7 +944,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-pXRviuL6vMY-twenty_one_pilots_-_Stressed_Out_OFFICIAL_VIDEO.webm",
+  "start_seconds": 0,
   "end_seconds": 225
 ***REMOVED***
 ;
@@ -969,7 +969,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-drIWW4hXV34-Life_is_Strange_Soundtrack_-_To_All_Of_You_by_Syd_Matters.webm",
+  "start_seconds": 0,
   "end_seconds": 281
 ***REMOVED***
 ;
@@ -994,7 +994,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-fQynBmK_has-Al_Maghrib.webm",
+  "start_seconds": 0,
   "end_seconds": 1687
 ***REMOVED***
 ;
@@ -1019,7 +1019,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-kVpv8-5XWOI-Train_-_Hey_Soul_Sister.webm",
+  "start_seconds": 0,
   "end_seconds": 217
 ***REMOVED***
 ;
@@ -1044,7 +1044,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-_dK2tDK9grQ-Ed_Sheeran_-_Shape_Of_You_Official_Lyric_Video.webm",
+  "start_seconds": 0,
   "end_seconds": 235
 ***REMOVED***
 ;
@@ -1069,7 +1069,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-moKBdBLdNCI-Alex_s_Hen_Night-_Crazy_In_Love.webm",
+  "start_seconds": 0,
   "end_seconds": 245
 ***REMOVED***
 ;
@@ -1094,7 +1094,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-s3Oyagx8Stw-Hendersin_-_In_Love.m4a",
+  "start_seconds": 0,
   "end_seconds": 208
 ***REMOVED***
 ;
@@ -1119,7 +1119,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-0nouhZQqtx4-AnnenMayKantereit_K.I.Z._-_Hurra_die_Welt_geht_unter.webm",
+  "start_seconds": 0,
   "end_seconds": 262
 ***REMOVED***
 ;
@@ -1144,7 +1144,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-bSfpSOBD30U-G-Eazy_x_Bebe_Rexha_-_Me_Myself_I.webm",
+  "start_seconds": 0,
   "end_seconds": 349
 ***REMOVED***
 ;
@@ -1169,7 +1169,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-6Zbw86Xts5Q-G-Eazy_x_Bebe_Rexha_-_Me_Myself_I_-_LYRICS_HD.webm",
+  "start_seconds": 0,
   "end_seconds": 252
 ***REMOVED***
 ;
@@ -1194,7 +1194,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-L3wKzyIN1yk-Rag_n_Bone_Man_-_Human_Official_Video.webm",
+  "start_seconds": 0,
   "end_seconds": 198
 ***REMOVED***
 ;
@@ -1219,7 +1219,7 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-BgfcToAjfdc-Kygo_-_Stole_The_Show_feat._Parson_James_Official_Music_Video_-_YTMAs.webm",
+  "start_seconds": 0,
   "end_seconds": 325
 ***REMOVED***
 ;
@@ -1244,6 +1244,6 @@
       "name": "grelor"
     ***REMOVED***
   ***REMOVED***,
-  "start_seconds": "audio_cache\\youtube-c3rLrFC8igY-Dame_-_Auf_die_guten_alten_Zeiten_Official_HD_Video.webm",
+  "start_seconds": 0,
   "end_seconds": 251
 ***REMOVED***
