@@ -542,12 +542,12 @@ class Game:
         self.operator_id = operator_id
         self.players.append(Player(operator_id))
         self.masters = []
-        # self.question_cards = manager.get_all_question_cards()
         self.current_round = None
         self.started = False
         self.round_index = 0
         self.number_of_cards = 7
         self.number_of_blanks = int(.05 * len(self.manager.cards.cards))
+        self.throwing_card_cost = 5
 
         self.cards = self.manager.cards.cards.copy()
         print(str(self.number_of_blanks) + " blanks out of " +
@@ -565,6 +565,9 @@ class Game:
 
         self.broadcast(
             "This game has stopped. Thanks for playing!", delete_after=15)
+
+        for player in self.players:
+            self.send_player_stats(player)
 
         print("[CAH] <{}> Stopped!".format(self.token))
 
@@ -644,6 +647,8 @@ class Game:
         if self.current_round is not None:
             self.current_round.player_left(pl)
 
+        self.send_player_stats(pl)
+
         return True
 
     def add_card(self, card):
@@ -699,6 +704,24 @@ class Game:
         m_id = self.masters.pop(i)
         return self.get_player(m_id)
 
+    def send_player_stats(self, player):
+        stats_interface = "**Stats for Game <{}>**\n{}"
+        player_stats_interface = "```\nPlayer: {}\n---------------\nRounds played: {}\nRounds master: {}\nRounds won: {}\nScore: {}\n```"
+
+        player_stats = []
+
+        player_stats.append(player_stats_interface.format(self.game.manager.musicbot.get_global_user(
+            player.player_id), player.rounds_played, player.rounds_master, player.rounds_won, player.score))
+
+        for pl in self.game.players:
+            if pl.player_id == player.player_id:
+                continue
+            player_stats.append(player_stats_interface.format(self.game.manager.musicbot.get_global_user(
+                pl.player_id), pl.rounds_played, pl.rounds_master, pl.rounds_won, pl.score))
+
+        self.game.manager.send_message_to_user(player.player_id, stats_interface.format(
+            self.game.token, "\n".join(player_stats)), delete_after=30)
+
 
 class Round:
 
@@ -723,7 +746,7 @@ class Round:
         self.round_stopped = False
         self.judging_phase = False
 
-        round_text_master = "**Round {0} || YOU ARE THE MASTER**\n\n```\n{1}```*<{2}>*\n\n*Wait for the players to choose*\n\nYou can use the following commands:\n`like`: upvote the question card\n`dislike`: downvote the question card\n`stats`: show some stats"
+        round_text_master = "**Round {0} ###YOU ARE THE MASTER###**\n\n```\n{1}```*<{2}>*\n\n*Wait for the players to choose*\n\nYou can use the following commands:\n`info`: learn more about the question card\n`like`: upvote the question card\n`dislike`: downvote the question card\n`stats`: show some stats\n`leave`: leave the game"
         for pl in self.game.players:
             pl.bump_played()
 
@@ -899,9 +922,11 @@ class Round:
             wait_again()
             return
         elif args[0] == "stats":
-            self.send_player_stats(player)
+            self.game.send_player_stats(player)
             wait_again()
             return
+        elif args[0] == "leave":
+            self.game.remove_user(player.player_id)
 
         wait_again()
 
@@ -939,7 +964,7 @@ class Round:
         card_texts = self.get_card_texts(player)
 
         if cards_to_assign > 0:
-            round_text_player = "**Round {0}**\n\nYou can use the following commands:\n`pick <index> [text_for_blanks]`: Pick one of your cards\n`info <index>`: Get some more info about one of your cards\n`like <index>`: Upvote a card\n`dislike <index>`: Downvote a card\n`stats`: Get some stats about the current game\n\n```\n{1}```*<{5}>*\n\n*Pick {2} card{3}*\n\n**Your cards**\n{4}"
+            round_text_player = "**Round {0}**\n\nYou can use the following commands:\n`pick <index> [text_for_blanks]`: Pick one of your cards\n`info <index>`: Get some more info about one of your cards\n`like <index>`: Upvote a card\n`dislike <index>`: Downvote a card\n`stats`: Get some stats about the current game\n`leave`: leave the game\n\n```\n{1}```*<{5}>*\n\n*Pick {2} card{3}*\n\n**Your cards**\n{4}"
 
             self.game.manager.send_message_to_user(player.player_id, round_text_player.format(self.round_index, self.question_card.beautified_text(self.answers.get(player, None)), cards_to_assign,
                                                                                               "s" if cards_to_assign != 1 else "", "\n".join(card_texts), self.question_card.id), callback=(lambda x: self.messages_to_delete.append(x.result())))
@@ -947,24 +972,6 @@ class Round:
             finished_round_text_player = "**Round {0}**\n\n```\n{1}```*<{2}>*\n\n*Wait for the others to answer!*\n\n**Your cards**\n{3}"
             self.game.manager.send_message_to_user(player.player_id, round_text_player.format(self.round_index, self.question_card.beautified_text(
                 self.answers.get(player, None)), self.question_card.id, "\n".join(card_texts)), callback=(lambda x: self.messages_to_delete.append(x.result())))
-
-    def send_player_stats(self, player):
-        stats_interface = "**Stats for Game <{}>**\n{}"
-        player_stats_interface = "```\nPlayer: {}\n---------------\nRounds played: {}\nRounds master: {}\nRounds won: {}\nScore: {}\n```"
-
-        player_stats = []
-
-        player_stats.append(player_stats_interface.format(self.game.manager.musicbot.get_global_user(
-            player.player_id), player.rounds_played, player.rounds_master, player.rounds_won, player.score))
-
-        for pl in self.game.players:
-            if pl.player_id == player.player_id:
-                continue
-            player_stats.append(player_stats_interface.format(self.game.manager.musicbot.get_global_user(
-                pl.player_id), pl.rounds_played, pl.rounds_master, pl.rounds_won, pl.score))
-
-        self.game.manager.send_message_to_user(player.player_id, stats_interface.format(
-            self.game.token, "\n".join(player_stats)), delete_after=30)
 
     def assign_cards(self):
         for player in self.game.players:
@@ -1014,7 +1021,7 @@ class Round:
             self.game.token, self.round_index))
 
         player_judge_text = "**Time to be judged by *{3}*!**\n\n```\n{0}```*<{1}>*\n\n**The answers are**\n{2}"
-        master_judge_text = "**Time to judge \'em**\n\n```\n{0}```*<{1}>*\n\n*Pick a winner*\n\nYou can use the following commands:\n`pick index`: Pick the winner\n`like`: upvote the question card\n`dislike`: downvote the question card\n`stats`: show some stats\n\n**The answers are**\n{2}"
+        master_judge_text = "**Time to judge \'em**\n\n```\n{0}```*<{1}>*\n\n*Pick a winner*\n\nYou can use the following command:\n`pick index`: Pick the winner\n\n**The answers are**\n{2}"
 
         answer_texts = []
         answer_text = "[{}] *<{}>*"
@@ -1117,10 +1124,20 @@ class Round:
                 player.player_id, "Thanks for voting!", delete_after=10)
             wait_again()
             return
-        elif args[0] == "stats":
-            self.send_player_stats(player)
+        elif args[0] == "info":
+            print("[CAH] <{}: {}> ({}) requests information about question card".format(
+                self.game.token, self.round_index, player, card_chosen))
+
+            self.game.manager.send_message_to_user(
+                player.player_id, "Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ndrawn {0.picked_up_count} time{5}\nlike ratio: {4}%\ncreated {3}```".format(self.question_card, self.game.manager.musicbot.get_global_user(self.question_card.creator_id).name, "s" if self.question_card.occurences != 1 else "", prettydate(self.question_card.creation_date), int(self.question_card.like_dislike_ratio * 100), "s" if self.question_card.picked_up_count != 1 else ""), delete_after=20)
             wait_again()
             return
+        elif args[0] == "stats":
+            self.game.send_player_stats(player)
+            wait_again()
+            return
+        elif args[0] == "leave":
+            self.game.remove_user(player.player_id)
 
         wait_again()
 
