@@ -18675,9 +18675,9 @@
   "url": "https://www.youtube.com/watch?v=hXs1fWCgOW4",
   "title": "2Chainz- Good Drank",
   "duration": 238,
-  "downloaded": true,
-  "filename": "audio_cache\\youtube-hXs1fWCgOW4-2_Chainz_-_Good_Drank_ft._Gucci_Mane_Quavo.webm",
-  "expected_filename": "unknown2-chainz-good-drank-ft-gucci-mane-quavo",
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-hXs1fWCgOW4-2_Chainz_-_Good_Drank_ft._Gucci_Mane_Quavo.webm",
   "meta": {
     "channel": {
       "type": "Channel",
@@ -18692,4 +18692,54 @@
   },
   "start_seconds": 0,
   "end_seconds": 238
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=XuzVekaCFB8",
+  "title": "Frenship - 1000 Nights (Audio)",
+  "duration": 242,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-XuzVekaCFB8-Frenship_-_1000_Nights_Audio.webm",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "277112528159637515",
+      "name": "Acesy"
+    }
+  },
+  "start_seconds": 0,
+  "end_seconds": null
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=826kv4IQSd4",
+  "title": "Martin Jensen - Solo Dance (Cover Art)",
+  "duration": 175,
+  "downloaded": true,
+  "filename": "audio_cache\\youtube-826kv4IQSd4-Martin_Jensen_-_Solo_Dance_Cover_Art.webm",
+  "expected_filename": "audio_cache\\youtube-826kv4IQSd4-Martin_Jensen_-_Solo_Dance_Cover_Art.webm",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "277112528159637515",
+      "name": "Acesy"
+    }
+  },
+  "start_seconds": 0,
+  "end_seconds": null
 }
