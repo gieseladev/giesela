@@ -174,7 +174,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         return json.dumps(data, indent=2)
 
     def set_start(self, sec):
-        if sec >= self.end_seconds:
+        if sec >= (self.end_seconds if self.end_seconds is not None else self.duration):
             return False
 
         self.start_seconds = sec

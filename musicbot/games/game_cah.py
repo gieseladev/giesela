@@ -1,3 +1,5 @@
+import asyncio
+import configparser
 import json
 import random
 import re
@@ -5,8 +7,6 @@ import threading
 from datetime import datetime
 from functools import partial
 
-import asyncio
-import configparser
 from musicbot.config import ConfigDefaults
 from musicbot.utils import prettydate
 
@@ -120,7 +120,7 @@ class Card:
     @property
     def like_dislike_ratio(self):
         if self.total_interactions <= 0:
-            return 1
+            return 0
 
         return self.likes / self.total_interactions
 
@@ -624,7 +624,7 @@ class Game:
             self.operator_id = random.choice(
                 [pl.player_id for pl in self.players if pl.player_id != self.operator_id])
             self.manager.send_message_to_user(
-                user_id, "You're the new operator of the game *****REMOVED******REMOVED*****".format(self.token.upper()))
+                self.operator_id, "You're the new operator of the game *****REMOVED******REMOVED*****".format(self.token.upper()))
 
         self.manager.send_message_to_user(
             user_id, "You've left the game *****REMOVED******REMOVED*****".format(self.token.upper()))
@@ -704,7 +704,7 @@ class Round:
         self.game = game
         self.master = game.pick_master()
         self.game.broadcast("******REMOVED******REMOVED***** is the master this round*".format(
-            self.game.manager.musicbot.get_global_user(self.master.player_id).name), delete_after=15)
+            self.game.manager.musicbot.get_global_user(self.master.player_id).name), delete_after=60)
 
         self.question_card = game.pick_question_card()
         self.messages_to_delete = []
@@ -768,6 +768,7 @@ class Round:
 
         try:
             num = int(args[0]) - 1
+            args.insert(0, "pick")
         except:
             num = None
 
