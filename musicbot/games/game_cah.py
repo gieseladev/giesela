@@ -1,5 +1,3 @@
-import asyncio
-import configparser
 import json
 import random
 import re
@@ -7,6 +5,8 @@ import threading
 from datetime import datetime
 from functools import partial
 
+import asyncio
+import configparser
 from musicbot.config import ConfigDefaults
 from musicbot.utils import prettydate
 
@@ -652,14 +652,18 @@ class Game:
     def add_question_card(self, card):
         self.question_cards.append(card.copy())
 
-    def pick_card(self):
+    def pick_card(self, card_ids=None):
         if len(self.cards) < 1:
             self.cards = self.manager.cards.cards.copy()
             self.cards.extend([Card.blank_card()
                                for _ in range(self.number_of_blanks)])
 
-        i = random.randint(0, len(self.cards) - 1)
-        card = self.cards.pop(i)
+        while True:
+            i = random.randint(0, len(self.cards) - 1)
+            if (card_ids is None) or (self.cards[i].id not in card_ids):
+                card = self.cards.pop(i)
+                break
+
         self.manager.cards.bump_card_pick_count(card.id)
 
         return card
@@ -934,10 +938,15 @@ class Round:
 
         card_texts = self.get_card_texts(player)
 
-        round_text_player = "**Round ***REMOVED***0***REMOVED*****\n\n```\n***REMOVED***1***REMOVED***```*<***REMOVED***5***REMOVED***>*\n\n*Pick ***REMOVED***2***REMOVED*** card***REMOVED***3***REMOVED****\n\nYou can use the following commands:\n`pick <index> [text_for_blanks]`: Pick one of your cards\n`info <index>`: Get some more info about one of your cards\n`like <index>`: Upvote a card\n`dislike <index>`: Downvote a card\n`stats`: Get some stats about the current game\n\n**Your cards**\n***REMOVED***4***REMOVED***"
+        if cards_to_assign > 0:
+            round_text_player = "**Round ***REMOVED***0***REMOVED*****\n\nYou can use the following commands:\n`pick <index> [text_for_blanks]`: Pick one of your cards\n`info <index>`: Get some more info about one of your cards\n`like <index>`: Upvote a card\n`dislike <index>`: Downvote a card\n`stats`: Get some stats about the current game\n\n```\n***REMOVED***1***REMOVED***```*<***REMOVED***5***REMOVED***>*\n\n*Pick ***REMOVED***2***REMOVED*** card***REMOVED***3***REMOVED****\n\n**Your cards**\n***REMOVED***4***REMOVED***"
 
-        self.game.manager.send_message_to_user(player.player_id, round_text_player.format(self.round_index, self.question_card.beautified_text(self.answers.get(player, None)), cards_to_assign,
-                                                                                          "s" if cards_to_assign != 1 else "", "\n".join(card_texts), self.question_card.id), callback=(lambda x: self.messages_to_delete.append(x.result())))
+            self.game.manager.send_message_to_user(player.player_id, round_text_player.format(self.round_index, self.question_card.beautified_text(self.answers.get(player, None)), cards_to_assign,
+                                                                                              "s" if cards_to_assign != 1 else "", "\n".join(card_texts), self.question_card.id), callback=(lambda x: self.messages_to_delete.append(x.result())))
+        else:
+            finished_round_text_player = "**Round ***REMOVED***0***REMOVED*****\n\n```\n***REMOVED***1***REMOVED***```*<***REMOVED***2***REMOVED***>*\n\n*Wait for the others to answer!*\n\n**Your cards**\n***REMOVED***3***REMOVED***"
+            self.game.manager.send_message_to_user(player.player_id, round_text_player.format(self.round_index, self.question_card.beautified_text(
+                self.answers.get(player, None)), self.question_card.id, "\n".join(card_texts)), callback=(lambda x: self.messages_to_delete.append(x.result())))
 
     def send_player_stats(self, player):
         stats_interface = "**Stats for Game <***REMOVED******REMOVED***>**\n***REMOVED******REMOVED***"
@@ -961,7 +970,8 @@ class Round:
         for player in self.game.players:
             if len(player.cards) < self.game.number_of_cards:
                 for i in range(self.game.number_of_cards - len(player.cards)):
-                    player.cards.append(self.game.pick_card())
+                    player.cards.append(self.game.pick_card(
+                        [x.id for x in player.cards]))
 
     def clean_up(self):
         for msg in self.messages_to_delete:
