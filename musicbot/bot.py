@@ -1763,7 +1763,7 @@ class MusicBot(discord.Client):
 
             song_progress = str(
                 timedelta(seconds=player.progress)).lstrip('0').lstrip(':')
-            end_seconds = player.current_entry.end_seconds if player.current_entry.end_seconds is not None else 0
+            end_seconds = player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration
             song_total = str(timedelta(seconds=end_seconds)).lstrip(
                 '0').lstrip(':')
             prog_str = '`[%s/%s]`' % (song_progress, song_total)
@@ -1772,7 +1772,7 @@ class MusicBot(discord.Client):
             prog_full_char = "■"
             prog_empty_char = "□"
             progress_perc = (player.progress /
-                             end_seconds) if end_seconds is not None else 0
+                             end_seconds) if end_seconds > 0 else 0
             prog_bar_str = ""
 
             for i in range(prog_bar_len):
@@ -3155,7 +3155,7 @@ class MusicBot(discord.Client):
 
         if argument == "list":
             sort_modes = {"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (
-                lambda entry: entry.creation_date, True, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "likes": (lambda entry: entry.like_dislike_ratio, False, lambda entry: "{}%".format(int(entry.like_dislike_ratio * 100)))}
+                lambda entry: entry.creation_date, True, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "likes": (lambda entry: entry.like_dislike_ratio, True, lambda entry: "{}%".format(int(entry.like_dislike_ratio * 100)))}
 
             cards = self.cah.cards.cards.copy() if message.mentions is None or len(message.mentions) < 1 else [
                 x for x in self.cah.cards.cards.copy() if x.creator_id in [u.id for u in message.mentions]]
@@ -3335,7 +3335,7 @@ class MusicBot(discord.Client):
 
         if argument == "list":
             sort_modes = {"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (lambda entry: entry.creation_date, True, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(
-                entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "blanks": (lambda entry: entry.number_of_blanks, True, lambda entry: entry.number_of_blanks), "likes": (lambda entry: entry.like_dislike_ratio, False, lambda entry: "{}%".format(int(entry.like_dislike_ratio * 100)))}
+                entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "blanks": (lambda entry: entry.number_of_blanks, True, lambda entry: entry.number_of_blanks), "likes": (lambda entry: entry.like_dislike_ratio, True, lambda entry: "{}%".format(int(entry.like_dislike_ratio * 100)))}
 
             cards = self.cah.cards.question_cards.copy() if message.mentions is None or len(message.mentions) < 1 else [
                 x for x in self.cah.cards.question_cards.copy() if x.creator_id in [u.id for u in message.mentions]]
