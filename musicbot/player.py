@@ -182,7 +182,7 @@ class MusicPlayer(EventEmitter):
         raise ValueError('Cannot resume playback from state %s' % self.state)
 
     def goto_seconds(self, secs):
-        if (not self.current_entry) or secs >= self.current_entry.end_seconds:
+        if (not self.current_entry) or (self.current_entry.end_seconds is None) or secs >= self.current_entry.end_seconds:
             return False
 
         c_entry = self.current_entry
