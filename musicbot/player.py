@@ -1,15 +1,15 @@
+import asyncio
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
+from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
 
-import asyncio
 import audioop
-from enum import Enum
 
 from .exceptions import FFmpegError, FFmpegWarning
 from .lib.event_emitter import EventEmitter
@@ -182,7 +182,7 @@ class MusicPlayer(EventEmitter):
         raise ValueError('Cannot resume playback from state %s' % self.state)
 
     def goto_seconds(self, secs):
-        if (not self.current_entry) or (self.current_entry.end_seconds is None) or secs >= self.current_entry.end_seconds:
+        if (not self.current_entry) or secs >= self.current_entry.duration or (self.current_entry.end_seconds is not None and secs >= self.current_entry.end_seconds):
             return False
 
         c_entry = self.current_entry
