@@ -34,7 +34,7 @@ import asyncio
 import configparser
 
 from . import downloader, exceptions
-from .cleverbot import Cleverbot
+from .cleverbot import CleverWrap
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
 from .constants import AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT
@@ -113,7 +113,7 @@ class MusicBot(discord.Client):
         self.blacklist = set(load_file(self.config.blacklist_file))
         self.autoplaylist = load_file(self.config.auto_playlist_file)
         self.downloader = downloader.Downloader(download_folder='audio_cache')
-        self.cb = Cleverbot()
+        self.cb = CleverWrap("CCC8n_IXK43aOV38rcWUILmYUBQ")
         # self.radio = Radio()
         self.calendar = Calendar(self)
         self.socket_server = SocketServer(self)
@@ -2428,9 +2428,11 @@ class MusicBot(discord.Client):
         talk to the bot
         """
 
+        # return Response(choice(["on vacation", "dead", "stand by", "nothing to see here", "out of order", "currently not available", "working", "busy", "busy googling pictures of cute cats", "out of office", "rest in piece", "please stop", "fed up with your shit", "can't deal with you right now", "2edgy2answer", "#duckoff", "not working", "tired of being your slave", "nah", "not gonna do it", "no time", "error 404, can't find anything than hate for you!", "shhhhhh"]), delete_after=20)
+
         await self.send_typing(channel)
         msgContent = " ".join(leftover_args)
-        answer = self.cb.ask(msgContent)
+        answer = self.cb.say(msgContent)
         # await self.safe_edit_message (message, msgContent)
         self.safe_print("<" + str(author.name) + "> " +
                         msgContent + "\n<Bot> " + answer + "\n")
