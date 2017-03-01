@@ -1,3 +1,5 @@
+import asyncio
+import configparser
 import datetime
 import inspect
 import json
@@ -29,9 +31,6 @@ from discord.object import Object
 from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from pyshorteners import Shortener
-
-import asyncio
-import configparser
 
 from . import downloader, exceptions
 from .cleverbot import CleverWrap
@@ -91,7 +90,7 @@ class MusicBot(discord.Client):
                       "yup", "certainly", "uh-huh", "affirmitive", "activate"]
     channelFreeCommands = ["say"]
     privateChatCommands = ["c", "ask", "requestfeature", "random",
-                           "translate", "help", "say", "broadcast", "news", "game", "wiki"]
+                           "translate", "help", "say", "broadcast", "news", "game", "wiki", "cah", "execute"]
     lonelyModeRunning = False
 
     def __init__(self, config_file=ConfigDefaults.options_file, random_file=ConfigDefaults.random_sets, radios_file=ConfigDefaults.radios_file, papers_file=ConfigDefaults.papers_file, playlists_file=ConfigDefaults.playlists_file, perms_file=PermissionsDefaults.perms_file):
@@ -2428,7 +2427,14 @@ class MusicBot(discord.Client):
         talk to the bot
         """
 
-        # return Response(choice(["on vacation", "dead", "stand by", "nothing to see here", "out of order", "currently not available", "working", "busy", "busy googling pictures of cute cats", "out of office", "rest in piece", "please stop", "fed up with your shit", "can't deal with you right now", "2edgy2answer", "#duckoff", "not working", "tired of being your slave", "nah", "not gonna do it", "no time", "error 404, can't find anything than hate for you!", "shhhhhh"]), delete_after=20)
+        # return Response(choice(["on vacation", "dead", "stand by", "nothing
+        # to see here", "out of order", "currently not available", "working",
+        # "busy", "busy googling pictures of cute cats", "out of office", "rest
+        # in piece", "please stop", "fed up with your shit", "can't deal with
+        # you right now", "2edgy2answer", "#duckoff", "not working", "tired of
+        # being your slave", "nah", "not gonna do it", "no time", "error 404,
+        # can't find anything than hate for you!", "shhhhhh"]),
+        # delete_after=20)
 
         await self.send_typing(channel)
         msgContent = " ".join(leftover_args)
@@ -2689,7 +2695,7 @@ class MusicBot(discord.Client):
             else:
                 return Response("OMG, shit went bad quickly! Everything's burning!\nDUCK there he goes again, the dragon's coming. Eat HIM not me. PLEEEEEEEEEEEEEASE!")
 
-        if len(items) <= 0:
+        if len(items) <= 0 or items is None:
             return Response("Is your name \"{0}\" by any chance?\n(This is not how this command works. Use `{1}help random` to find out how not to be a stupid *{0}* anymore)".format(author.name, self.config.command_prefix), delete_after=30)
 
         if len(items) <= 1:
@@ -3200,7 +3206,7 @@ class MusicBot(discord.Client):
             card = self.cah.cards.get_card(card_id)
             if card is not None:
                 info = "Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ndrawn {0.picked_up_count} time{5}\nliked by {6}% of players\ncreated {3}```\nUse `{4}cards edit {0.id}` to edit this card"
-                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date), self.config.command_prefix, "s" if card.picked_up_count != 1 else "", int(card.like_dislike_ratio * 100)))
+                return Response(info.format(card, self.get_global_user(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date), self.config.command_prefix, "s" if card.picked_up_count != 1 else "", int(card.like_dislike_ratio * 100)))
 
             return Response("There's no card with that id. Use `{}cards list` to list all the possible cards".format(self.config.command_prefix))
         elif argument == "create":
@@ -3380,7 +3386,7 @@ class MusicBot(discord.Client):
             card = self.cah.cards.get_question_card(card_id)
             if card is not None:
                 info = "Question Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ncreated {3}```\nUse `{4}cards edit {0.id}` to edit this card`"
-                return Response(info.format(card, server.get_member(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date), self.config.command_prefix))
+                return Response(info.format(card, self.get_global_user(card.creator_id).mention, "s" if card.occurences != 1 else "", prettydate(card.creation_date), self.config.command_prefix))
         elif argument == "create":
             text = " ".join(leftover_args[1:]) if len(
                 leftover_args) > 1 else None
@@ -3956,7 +3962,7 @@ class MusicBot(discord.Client):
             iteration = 1
 
             sort_modes = {"alphabetical": (lambda playlist: playlist, False), "entries": (lambda playlist: int(
-                self.playlists.get_playlist(playlist, player.playlist)["entry_count"]), True), "author": (lambda playlist: server.get_member(self.playlists.get_playlist(playlist, player.playlist)["author"]).name, False), "random": None, "playtime": (lambda playlist: sum([x.duration for x in self.playlists.get_playlist(playlist, player.playlist)["entries"]]), True), "replays": (lambda playlist: self.playlists.get_playlist(playlist, player.playlist)["replay_count"], True)}
+                self.playlists.get_playlist(playlist, player.playlist)["entry_count"]), True), "author": (lambda playlist: self.get_global_user(self.playlists.get_playlist(playlist, player.playlist)["author"]).name, False), "random": None, "playtime": (lambda playlist: sum([x.duration for x in self.playlists.get_playlist(playlist, player.playlist)["entries"]]), True), "replays": (lambda playlist: self.playlists.get_playlist(playlist, player.playlist)["replay_count"], True)}
 
             sort_mode = leftover_args[1].lower() if len(
                 leftover_args) > 1 and leftover_args[1].lower() in sort_modes.keys() else "random"
@@ -3970,7 +3976,7 @@ class MusicBot(discord.Client):
 
             for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.playlist)
-                response_text += "**{}.** **\"{}\"** *by {}*\n```\n  {} entr{}\n  played {} time{}\n  {}```\n\n".format(iteration, pl.replace("_", " ").title(), server.get_member(infos["author"]).mention, str(
+                response_text += "**{}.** **\"{}\"** *by {}*\n```\n  {} entr{}\n  played {} time{}\n  {}```\n\n".format(iteration, pl.replace("_", " ").title(), self.get_global_user(infos["author"]).mention, str(
                     infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", infos["replay_count"], "s" if int(infos["replay_count"]) != 1 else "", format_time(sum([x.duration for x in infos["entries"]]), round_seconds=True, max_specifications=2))
                 iteration += 1
 
@@ -3997,7 +4003,7 @@ class MusicBot(discord.Client):
                 entries_text += str(i + 1) + ". " + entries[i].title + " | " + format_time(
                     entries[i].duration, round_seconds=True, max_specifications=2) + "\n"
 
-            response_text = "\"{}\" added by *{}* with {} entr{}\n*playtime: {}*\n\n{}\n```\nTo edit this playlist type \"{}playlist builder {}\"```".format(argument.replace("_", " ").title(), server.get_member(
+            response_text = "\"{}\" added by *{}* with {} entr{}\n*playtime: {}*\n\n{}\n```\nTo edit this playlist type \"{}playlist builder {}\"```".format(argument.replace("_", " ").title(), self.get_global_user(
                 infos["author"]).mention, str(infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", format_time(sum([x.duration for x in entries])), entries_text, self.config.command_prefix, argument)
             return Response(response_text, reply=True, delete_after=40)
 
@@ -4068,7 +4074,7 @@ class MusicBot(discord.Client):
             entries_text += "\nPage {} of {}".format(
                 entries_page + 1, iterations + 1)
 
-            interface_message = await self.safe_send_message(channel, interface_string.format(user_savename.replace("_", " ").title(), server.get_member(playlist["author"]).mention, playlist["entry_count"], "s" if int(playlist["entry_count"]) is not 1 else "", format_time(sum([x.duration for x in entries])), entries_text, self.config.command_prefix))
+            interface_message = await self.safe_send_message(channel, interface_string.format(user_savename.replace("_", " ").title(), self.get_global_user(playlist["author"]).mention, playlist["entry_count"], "s" if int(playlist["entry_count"]) is not 1 else "", format_time(sum([x.duration for x in entries])), entries_text, self.config.command_prefix))
             response_message = await self.wait_for_message(author=author, channel=channel, check=check)
 
             if not response_message:
@@ -4135,7 +4141,7 @@ class MusicBot(discord.Client):
                 def extras_check(m):
                     return (m.content.split()[0].lower() in ["abort", "sort", "removeduplicates"])
 
-                extras_message = await self.safe_send_message(channel, extras_string.format(user_savename.replace("_", " ").title(), server.get_member(playlist["author"]).mention, playlist["entry_count"], "s" if int(playlist["entry_count"]) is not 1 else "", format_time(sum([x.duration for x in entries]))))
+                extras_message = await self.safe_send_message(channel, extras_string.format(user_savename.replace("_", " ").title(), self.get_global_user(playlist["author"]).mention, playlist["entry_count"], "s" if int(playlist["entry_count"]) is not 1 else "", format_time(sum([x.duration for x in entries]))))
                 resp = await self.wait_for_message(author=author, channel=channel, check=extras_check)
 
                 if not resp.content.lower().startswith(self.config.command_prefix) and not resp.content.lower().startswith('abort'):
@@ -4721,8 +4727,11 @@ class MusicBot(discord.Client):
             try:
                 result = exec(statement)
                 return Response(str(result))
-            except:
-                return Response("Something went wrong with your code:\n```\n{}\n```".format(str(e)))
+            except Exception as a:
+                if str(a) == str(e):
+                    return Response("Le Error:\n```\n{}\n```".format(str(e)))
+                else:
+                    return Response("Les Errors:\n```\n{}\n```\n```\n{}\n```".format(str(e), str(a)))
 
     async def cmd_skipto(self, player, timestamp):
         """
