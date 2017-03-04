@@ -126,7 +126,7 @@ class MusicPlayer(EventEmitter):
         self.bot.socket_server.threaded_broadcast_information()
         self.handle_manually = False
 
-        self.volume_scale = 20
+        self.volume_scale = 10
         self.volume = bot.config.default_volume
 
     @property

@@ -4720,6 +4720,9 @@ class MusicBot(discord.Client):
     @owner_only
     async def cmd_execute(self, player, channel, author, server, leftover_args):
         statement = " ".join(leftover_args)
+        statement = statement.replace("/n/", "\n")
+        statement = statement.replace("/t/", "\t")
+
         await self.safe_send_message(channel, "```python\n***REMOVED******REMOVED***\n```".format(statement))
         try:
             result = eval(statement)
