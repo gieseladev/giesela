@@ -10,7 +10,7 @@ from functools import partial
 from musicbot.config import ConfigDefaults
 from musicbot.utils import prettydate
 
-from .logger import log
+from ..logger import log
 
 vowels = tuple("aeiou")
 a_list =\

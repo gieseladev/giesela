@@ -8,6 +8,10 @@ logs = []
 
 
 def save_logs():
+    global logs
+    if logs is None or len(logs) < 1:
+        return
+
     file_loc = ConfigDefaults.log_file + datetime.now().date().isoformat() + ".txt"
     log_str = ""
 
