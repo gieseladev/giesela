@@ -228,6 +228,7 @@ class ConfigDefaults:
     playlists_file = "config/playlists.ini"
     random_sets = "config/random_sets.ini"
     blacklist_file = 'config/blacklist.txt'
+    log_file = "cache/logs/"
     # this will change when I add playlists it did change ;)
     auto_playlist_file = 'config/autoplaylist.txt'
     hangman_wordlist = "data/hangman_wordlist.txt"

@@ -13,6 +13,7 @@ import audioop
 
 from .exceptions import FFmpegError, FFmpegWarning
 from .lib.event_emitter import EventEmitter
+from .logger import log
 from .utils import format_time_ffmpeg
 
 
@@ -33,7 +34,7 @@ class PatchedBuff:
 
     def __del__(self):
         if self.draw:
-            print(' ' * (get_terminal_size().columns - 1), end='\r')
+            log(' ' * (get_terminal_size().columns - 1), end='\r')
 
     def read(self, frame_size):
         self.frame_count += 1
@@ -81,7 +82,7 @@ class PatchedBuff:
             outstr = text + \
                 "***REMOVED******REMOVED***".format(char * (int(tx * perc) - 1))[len(text):]
 
-        print(outstr.ljust(tx - 1), end='\r')
+        log(outstr.ljust(tx - 1), end='\r')
 
 
 class MusicPlayerState(Enum):
@@ -125,7 +126,7 @@ class MusicPlayer(EventEmitter):
         self.bot.socket_server.threaded_broadcast_information()
         self.handle_manually = False
 
-        self.volume_scale = 20
+        self.volume_scale = 10
         self.volume = bot.config.default_volume
 
     @property
@@ -194,7 +195,7 @@ class MusicPlayer(EventEmitter):
 
     def pause(self):
         if type(self.current_entry).__name__ == "StreamPlaylistEntry":
-            print("Won't pause because I'm playing a stream")
+            log("Won't pause because I'm playing a stream")
             self.stop()
             self.bot.socket_server.threaded_broadcast_information()
             return
@@ -245,10 +246,10 @@ class MusicPlayer(EventEmitter):
 
         if not self.bot.config.save_videos and entry:
             if any([entry.filename == e.filename for e in self.playlist.entries]):
-                print("[Config:SaveVideos] Skipping deletion, found song in queue")
+                log("[Config:SaveVideos] Skipping deletion, found song in queue")
 
             else:
-                # print("[Config:SaveVideos] Deleting file: %s" % os.path.relpath(entry.filename))
+                # log("[Config:SaveVideos] Deleting file: %s" % os.path.relpath(entry.filename))
                 asyncio.ensure_future(self._delete_file(entry.filename))
 
         self.emit('finished-playing', player=self, entry=entry)
@@ -279,10 +280,10 @@ class MusicPlayer(EventEmitter):
 
             except Exception as e:
                 traceback.print_exc()
-                print("Error trying to delete " + filename)
+                log("Error trying to delete " + filename)
                 break
         else:
-            print("[Config:SaveVideos] Could not delete file ***REMOVED******REMOVED***, giving up and moving on".format(
+            log("[Config:SaveVideos] Could not delete file ***REMOVED******REMOVED***, giving up and moving on".format(
                 os.path.relpath(filename)))
 
     def play(self, _continue=False):
@@ -304,7 +305,7 @@ class MusicPlayer(EventEmitter):
                     entry = await self.playlist.get_next_entry()
 
                 except Exception as e:
-                    print("Failed to get entry.")
+                    log("Failed to get entry.")
                     traceback.print_exc()
                     # Retry playing the next entry in a sec.
                     self.loop.call_later(0.1, self.play)
@@ -358,7 +359,7 @@ class MusicPlayer(EventEmitter):
         self.handle_manually = True
 
         if self.is_dead:
-            print("ded")
+            log("ded")
             return
 
         with await self._play_lock:
@@ -412,7 +413,7 @@ class MusicPlayer(EventEmitter):
 
     async def websocket_check(self):
         if self.bot.config.debug_mode:
-            print("[Debug] Creating websocket check loop")
+            log("[Debug] Creating websocket check loop")
 
         while not self.is_dead:
             try:
@@ -420,8 +421,8 @@ class MusicPlayer(EventEmitter):
                 assert self.voice_client.ws.open
             except:
                 if self.bot.config.debug_mode:
-                    print("[Debug] Voice websocket is %s, reconnecting" %
-                          self.voice_client.ws.state_name)
+                    log("[Debug] Voice websocket is %s, reconnecting" %
+                        self.voice_client.ws.state_name)
                 await self.bot.reconnect_voice_client(self.voice_client.channel.server)
                 await asyncio.sleep(4)
             finally:
@@ -474,14 +475,14 @@ def filter_stderr(popen: subprocess.Popen, future: asyncio.Future):
     while True:
         data = popen.stderr.readline()
         if data:
-            print("Data from ffmpeg: ***REMOVED******REMOVED***".format(data))
+            log("Data from ffmpeg: ***REMOVED******REMOVED***".format(data))
             try:
                 if check_stderr(data):
                     sys.stderr.buffer.write(data)
                     sys.stderr.buffer.flush()
 
             except FFmpegError as e:
-                print("Error from ffmpeg: %s", str(e).strip())
+                log("Error from ffmpeg: %s", str(e).strip())
                 last_ex = e
 
             except FFmpegWarning:
@@ -499,7 +500,7 @@ def check_stderr(data: bytes):
     try:
         data = data.decode('utf8')
     except:
-        print("Unknown error decoding message from ffmpeg", exc_info=True)
+        log("Unknown error decoding message from ffmpeg", exc_info=True)
         return True  # fuck it
 
     # log.ffmpeg("Decoded data from ffmpeg: ***REMOVED******REMOVED***".format(data))
