@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=1fqImvenVgM",
+  "title": "Overwatch - Dragons Theme Orchestral Remix",
+  "duration": 208,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-1fqImvenVgM-Overwatch_-_Dragons_Theme_Orchestral_Remix.webm",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "regis"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "start_seconds": 0,
+  "end_seconds": null
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=MDXoZMS81I8",
+  "title": "OVERWATCH [I]: Drachenbr\u00fcder \u266b The Dragons Theme Orchestral Mix (from the animated short) Part 1",
+  "duration": 224,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-MDXoZMS81I8-OVERWATCH_I_-_Drachenbruder_The_Dragons_Theme_Orchestral_Mix_from_the_animated_short_Part_1.webm",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "regis"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "start_seconds": 0,
+  "end_seconds": null
+}
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=beZhAL_Fcx8",
+  "title": "Overwatch Remix - Trailer Theme Epic Orchestral Remix (2016 Remake)",
+  "duration": 214,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-beZhAL_Fcx8-Overwatch_Remix_-_Trailer_Theme_Epic_Orchestral_Remix_2016_Remake.webm",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "regis"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "start_seconds": 0,
+  "end_seconds": null
+}
