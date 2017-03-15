@@ -24,7 +24,7 @@ def save_logs():
     logs = []
 
 
-def log(msg = "\n"):
+def log(msg = "\n", *args, **kwargs):
     s_msg = str(msg)
     logs.append((datetime.now(), msg))
     print(msg)
