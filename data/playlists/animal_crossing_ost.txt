@@ -1,0 +1,3324 @@
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=J1skvGAxZFo",
+  "title": "12AM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 201,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-J1skvGAxZFo-12AM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=QIikNy3QYS8",
+  "title": "12AM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 69,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-QIikNy3QYS8-12AM_Snow_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ejycOdBz4f8",
+  "title": "12AM Dream - Animal Crossing: New Leaf Music",
+  "duration": 90,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-ejycOdBz4f8-12AM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ogZOuyEUaqM",
+  "title": "1AM - Animal Crossing: New Leaf Music",
+  "duration": 88,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-ogZOuyEUaqM-1AM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=T-zjYEazCCs",
+  "title": "1AM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 173,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-T-zjYEazCCs-1AM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=FToPLuHFaTs",
+  "title": "1AM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 116,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-FToPLuHFaTs-1AM_Snow_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=9SxqMMx-5T4",
+  "title": "1AM Dream - Animal Crossing: New Leaf Music",
+  "duration": 144,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-9SxqMMx-5T4-1AM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=6ctYQ2giDfw",
+  "title": "2AM - Animal Crossing: New Leaf Music",
+  "duration": 172,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-6ctYQ2giDfw-2AM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=tzWfZJsb-pQ",
+  "title": "2AM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 249,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-tzWfZJsb-pQ-2AM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=BkCidTLwDJY",
+  "title": "2AM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 167,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-BkCidTLwDJY-2AM_Snow_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Ooq1-pX8-XA",
+  "title": "2AM Dream - Animal Crossing: New Leaf Music",
+  "duration": 188,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-Ooq1-pX8-XA-2AM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=rjoi8HzYjnY",
+  "title": "3AM - Animal Crossing: New Leaf Music",
+  "duration": 96,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-rjoi8HzYjnY-3AM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=bur-_mKc6A4",
+  "title": "3AM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 167,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-bur-_mKc6A4-3AM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=azWFASCLcsU",
+  "title": "3AM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 80,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-azWFASCLcsU-3AM_Snow_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Etd9YMzYeAM",
+  "title": "3AM Dream - Animal Crossing: New Leaf Music",
+  "duration": 96,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-Etd9YMzYeAM-3AM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=yL2diojhue8",
+  "title": "Animal Crossing: New Leaf OST - 4 AM",
+  "duration": 179,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-yL2diojhue8-Animal_Crossing_-_New_Leaf_OST_-_4_AM.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=FP1ZjjXym6U",
+  "title": "4AM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 208,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-FP1ZjjXym6U-4AM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xOXJVRDsFCk",
+  "title": "4AM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 103,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-xOXJVRDsFCk-4AM_Snow_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=DzbY8rgWbwY",
+  "title": "4AM Dream - Animal Crossing: New Leaf Music",
+  "duration": 137,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-DzbY8rgWbwY-4AM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ZZk2CyGgbR0",
+  "title": "Animal Crossing: New Leaf OST - 5 AM",
+  "duration": 179,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-ZZk2CyGgbR0-Animal_Crossing_-_New_Leaf_OST_-_5_AM.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=weUxHr7XvJg",
+  "title": "5AM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 216,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-weUxHr7XvJg-5AM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=5bHp4hpKyj0",
+  "title": "5AM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 106,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-5bHp4hpKyj0-5AM_Snow_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=9w5TbGrn28c",
+  "title": "5AM Dream - Animal Crossing: New Leaf Music",
+  "duration": 130,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-9w5TbGrn28c-5AM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=j4JrrHgnCb8",
+  "title": "Animal Crossing: New Leaf OST - 6 AM",
+  "duration": 179,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-j4JrrHgnCb8-Animal_Crossing_-_New_Leaf_OST_-_6_AM.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=h_F-hICYAFc",
+  "title": "6AM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 222,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-h_F-hICYAFc-6AM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=P0U06a5FXBo",
+  "title": "6AM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 73,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-P0U06a5FXBo-6AM_Snow_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xJ5Z5uMMU-U",
+  "title": "6AM Dream - Animal Crossing: New Leaf Music",
+  "duration": 94,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-xJ5Z5uMMU-U-6AM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=DHskPDrg-fQ",
+  "title": "7AM - Animal Crossing: New Leaf Music",
+  "duration": 105,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-DHskPDrg-fQ-7AM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=GZBAsPINEQM",
+  "title": "7AM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 179,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-GZBAsPINEQM-7AM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=a4iOF0N98IU",
+  "title": "7AM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 89,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-a4iOF0N98IU-7AM_Snow_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=fboaqwPwWzg",
+  "title": "7AM Dream - Animal Crossing: New Leaf Music",
+  "duration": 105,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-fboaqwPwWzg-7AM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=r7Ncy-yY9Uw",
+  "title": "8AM - Animal Crossing: New Leaf Music",
+  "duration": 106,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-r7Ncy-yY9Uw-8AM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=QZgVb0cdeCk",
+  "title": "8AM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 216,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-QZgVb0cdeCk-8AM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Gn8kdLZ5tRE",
+  "title": "8AM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 85,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-Gn8kdLZ5tRE-8AM_Snow_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Ksc0BCzyrvI",
+  "title": "8AM Dream - Animal Crossing: New Leaf Music",
+  "duration": 106,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-Ksc0BCzyrvI-8AM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=qRAt72y7Dl0",
+  "title": "9AM - Animal Crossing: New Leaf Music",
+  "duration": 78,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-qRAt72y7Dl0-9AM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Lj6me5QDHQs",
+  "title": "9AM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 144,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-Lj6me5QDHQs-9AM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=p3KPQpN5goc",
+  "title": "9AM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 86,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-p3KPQpN5goc-9AM_Snow_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=0FiavFQTnGo",
+  "title": "9AM Dream - Animal Crossing: New Leaf Music",
+  "duration": 78,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-0FiavFQTnGo-9AM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=BtxRvNYYUUo",
+  "title": "10AM - Animal Crossing: New Leaf Music",
+  "duration": 97,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-BtxRvNYYUUo-10AM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=SYRkUIvvk_o",
+  "title": "10AM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 120,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-SYRkUIvvk_o-10AM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=7f9K5cOlvbY",
+  "title": "10AM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 89,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-7f9K5cOlvbY-10AM_Snow_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=fHl8szJR5ck",
+  "title": "10AM Dream - Animal Crossing: New Leaf Music",
+  "duration": 97,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-fHl8szJR5ck-10AM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=1ZXwbqjoHQ8",
+  "title": "11AM - Animal Crossing: New Leaf Music",
+  "duration": 105,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-1ZXwbqjoHQ8-11AM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=-ez8ptNa5dQ",
+  "title": "11AM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 128,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube--ez8ptNa5dQ-11AM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Fay6YM1jw8g",
+  "title": "11AM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 82,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-Fay6YM1jw8g-11AM_Snow_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=wVY0um0ZCNc",
+  "title": "11AM Dream - Animal Crossing: New Leaf Music",
+  "duration": 105,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-wVY0um0ZCNc-11AM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=fKFRr3vJWWU",
+  "title": "Animal Crossing: New Leaf OST - 12 PM",
+  "duration": 179,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-fKFRr3vJWWU-Animal_Crossing_-_New_Leaf_OST_-_12_PM.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=gwsoFiM36cI",
+  "title": "12PM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 127,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-gwsoFiM36cI-12PM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=IdLKwXWOAHA",
+  "title": "12PM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 81,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-IdLKwXWOAHA-12PM_Snow_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=AWqeiMl_yq8",
+  "title": "12PM Dream - Animal Crossing: New Leaf Music",
+  "duration": 100,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-AWqeiMl_yq8-12PM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=JkHgU_O6f64",
+  "title": "1PM - Animal Crossing: New Leaf Music",
+  "duration": 138,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-JkHgU_O6f64-1PM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ziUOS-voVlU",
+  "title": "1PM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 122,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-ziUOS-voVlU-1PM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=URRQaIIVof0",
+  "title": "1PM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 87,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-URRQaIIVof0-1PM_Snow_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=SA2igD2FKwg",
+  "title": "1PM Dream - Animal Crossing: New Leaf Music",
+  "duration": 138,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-SA2igD2FKwg-1PM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=nJB0OvU_vkg",
+  "title": "Animal Crossing: New Leaf OST - 2 PM",
+  "duration": 179,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-nJB0OvU_vkg-Animal_Crossing_-_New_Leaf_OST_-_2_PM.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=lA8AheKHE4E",
+  "title": "2PM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 86,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-lA8AheKHE4E-2PM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=WR30ycJ0PP4",
+  "title": "2PM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 91,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-WR30ycJ0PP4-2PM_Snow_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=tzDCd2MlPsI",
+  "title": "2PM Dream - Animal Crossing: New Leaf Music",
+  "duration": 108,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-tzDCd2MlPsI-2PM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=WalIFXKCmHU",
+  "title": "3PM - Animal Crossing: New Leaf Music",
+  "duration": 76,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-WalIFXKCmHU-3PM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=bKI-7J4FV6k",
+  "title": "3PM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 123,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-bKI-7J4FV6k-3PM_Rain_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Ud8bYUcVazE",
+  "title": "3PM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 91,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-Ud8bYUcVazE-3PM_Snow_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=0ICZX42jjOM",
+  "title": "3PM Dream - Animal Crossing: New Leaf Music",
+  "duration": 76,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-0ICZX42jjOM-3PM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=N5Xx8r2uTLI",
+  "title": "4PM - Animal Crossing: New Leaf Music",
+  "duration": 105,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-N5Xx8r2uTLI-4PM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=_OX5Vvrh2ZA",
+  "title": "4PM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 126,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-_OX5Vvrh2ZA-4PM_Rain_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=T2LojNV5IrE",
+  "title": "4PM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 88,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-T2LojNV5IrE-4PM_Snow_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=9XvcnoATuX4",
+  "title": "4PM Dream - Animal Crossing: New Leaf Music",
+  "duration": 105,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-9XvcnoATuX4-4PM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=37UjXU-3wZ8",
+  "title": "5PM - Animal Crossing: New Leaf Music",
+  "duration": 160,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-37UjXU-3wZ8-5PM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=C-7R5CdsSwk",
+  "title": "5PM (Rain) Re-upload - Animal Crossing: New Leaf Music",
+  "duration": 234,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-C-7R5CdsSwk-5PM_Rain_Re-upload_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=haz-ij6cOYw",
+  "title": "5PM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 142,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-haz-ij6cOYw-5PM_Snow_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=SpZbVdgcSCM",
+  "title": "5PM Dream - Animal Crossing: New Leaf Music",
+  "duration": 160,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-SpZbVdgcSCM-5PM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=5QJaWg5fOAo",
+  "title": "6PM - Animal Crossing: New Leaf Music",
+  "duration": 113,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-5QJaWg5fOAo-6PM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=P1RQrcmYObA",
+  "title": "6PM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 134,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-P1RQrcmYObA-6PM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=_B_l8NWgJ_A",
+  "title": "6PM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 89,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-_B_l8NWgJ_A-6PM_Snow_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=KmFkOi0oYpg",
+  "title": "6PM Dream - Animal Crossing: New Leaf Music",
+  "duration": 113,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-KmFkOi0oYpg-6PM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=qYhA2QqFDS8",
+  "title": "7PM - Animal Crossing: New Leaf Music",
+  "duration": 122,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-qYhA2QqFDS8-7PM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=cssKnNSTL1A",
+  "title": "7PM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 90,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-cssKnNSTL1A-7PM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=aeBYh_MKfEE",
+  "title": "7PM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 89,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-aeBYh_MKfEE-7PM_Snow_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=N3odUfSfu-A",
+  "title": "7PM Dream - Animal Crossing: New Leaf Music",
+  "duration": 122,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-N3odUfSfu-A-7PM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Fksz_uENt9U",
+  "title": "8PM - Animal Crossing: New Leaf Music",
+  "duration": 100,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-Fksz_uENt9U-8PM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=NMWzpzJKf60",
+  "title": "8PM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 125,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-NMWzpzJKf60-8PM_Rain_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=dAsv3vHoPyo",
+  "title": "8PM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 87,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-dAsv3vHoPyo-8PM_Snow_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=a-1_k7Bs-KY",
+  "title": "8PM Dream - Animal Crossing: New Leaf Music",
+  "duration": 100,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-a-1_k7Bs-KY-8PM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ZUPm4MT64VU",
+  "title": "9PM - Animal Crossing: New Leaf Music",
+  "duration": 117,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-ZUPm4MT64VU-9PM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ug33dg9ft90",
+  "title": "9PM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 200,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-ug33dg9ft90-9PM_Rain_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=q_InwtbpytE",
+  "title": "9PM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 116,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-q_InwtbpytE-9PM_Snow_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=a79f4q51IrQ",
+  "title": "9PM Dream - Animal Crossing: New Leaf Music",
+  "duration": 117,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-a79f4q51IrQ-9PM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=YukcuUPS05U",
+  "title": "10PM - Animal Crossing: New Leaf Music",
+  "duration": 97,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-YukcuUPS05U-10PM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=jVFJaLpH74o",
+  "title": "10PM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 182,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-jVFJaLpH74o-10PM_Rain_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Bw3RBl7q67Y",
+  "title": "10PM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 85,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-Bw3RBl7q67Y-10PM_Snow_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=PXeksDNdzyQ",
+  "title": "10PM Dream - Animal Crossing: New Leaf Music",
+  "duration": 98,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-PXeksDNdzyQ-10PM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xbjbGNa-7eE",
+  "title": "11PM - Animal Crossing: New Leaf Music",
+  "duration": 145,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-xbjbGNa-7eE-11PM_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=lWe7RKDo6dU",
+  "title": "11PM (Rain) - Animal Crossing: New Leaf Music",
+  "duration": 187,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-lWe7RKDo6dU-11PM_Rain_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=FdPRldm2F9Y",
+  "title": "11PM (Snow) - Animal Crossing: New Leaf Music",
+  "duration": 117,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-FdPRldm2F9Y-11PM_Snow_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=y8QscSvli_w",
+  "title": "11PM Dream - Animal Crossing: New Leaf Music",
+  "duration": 145,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-y8QscSvli_w-11PM_Dream_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=7a5LXIaoSoo",
+  "title": "Island (Day) - Animal Crossing: New Leaf Music",
+  "duration": 96,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-7a5LXIaoSoo-Island_Day_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=dXCdhy_V44s",
+  "title": "Island (Night) - Animal Crossing: New Leaf Music",
+  "duration": 202,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-dXCdhy_V44s-Island_Night_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=lhls3RWPBZM",
+  "title": "Island Shop - Animal Crossing: New Leaf Music",
+  "duration": 174,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-lhls3RWPBZM-Island_Shop_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xErxzByzvHU",
+  "title": "Main Street #1 (DAY) - Animal Crossing: New Leaf Music",
+  "duration": 72,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-xErxzByzvHU-Main_Street_1_DAY_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=3OHeLQhQikg",
+  "title": "Main Street #2 (DAY) - Animal Crossing: New Leaf Music",
+  "duration": 67,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-3OHeLQhQikg-Main_Street_2_DAY_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=NShdWj7c_Mo",
+  "title": "Main Street #3 (DAY) - Animal Crossing: New Leaf Music",
+  "duration": 72,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-NShdWj7c_Mo-Main_Street_3_DAY_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=NFhr0Ax42Vs",
+  "title": "Main Street #1 (NIGHT) - Animal Crossing: New Leaf Music",
+  "duration": 211,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-NFhr0Ax42Vs-Main_Street_1_NIGHT_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=J27cd9ih4zY",
+  "title": "Main Street #2 (NIGHT) - Animal Crossing: New Leaf Music",
+  "duration": 211,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-J27cd9ih4zY-Main_Street_2_NIGHT_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=QGN0f-1E1tw",
+  "title": "Main Street #3 (NIGHT) Rain - Animal Crossing: New Leaf Music",
+  "duration": 182,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-QGN0f-1E1tw-Main_Street_3_NIGHT_Rain_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Op0Y180jKng",
+  "title": "Title Screen - Animal Crossing: New Leaf Music",
+  "duration": 181,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-Op0Y180jKng-Title_Screen_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=utRcW6i6gSA",
+  "title": "Start Your Game / File Select Screen (Isabelle) - Animal Crossing: New Leaf Music",
+  "duration": 81,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-utRcW6i6gSA-Start_Your_Game_File_Select_Screen_Isabelle_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=KbxG9IJlh-U",
+  "title": "House Location Chosen - Animal Crossing: New Leaf Music",
+  "duration": 300,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-KbxG9IJlh-U-House_Location_Chosen_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=QQGTlJsm3Ho",
+  "title": "Train Station - Animal Crossing: New Leaf Music",
+  "duration": 96,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-QQGTlJsm3Ho-Train_Station_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=GjzKmQ9_HX8",
+  "title": "Town Hall - Animal Crossing: New Leaf Music",
+  "duration": 95,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-GjzKmQ9_HX8-Town_Hall_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=4yKxBTxFrj8",
+  "title": "Post Office (Day/Pelly) - Animal Crossing: New Leaf Music",
+  "duration": 84,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-4yKxBTxFrj8-Post_Office_Day_Pelly_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=g8uVab621DM",
+  "title": "Post Office (Night/Phyllis) - Animal Crossing: New Leaf Music",
+  "duration": 129,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-g8uVab621DM-Post_Office_Night_Phyllis_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=usxtjHO_MK4",
+  "title": "HH Showcase - Animal Crossing: New Leaf Music",
+  "duration": 132,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-usxtjHO_MK4-HH_Showcase_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=rUgZTMNmZIc",
+  "title": "Town Tree - Animal Crossing: New Leaf Music",
+  "duration": 127,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-rUgZTMNmZIc-Town_Tree_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=0keRG5peoNk",
+  "title": "Museum (Custom Exhibits) - Animal Crossing: New Leaf Music",
+  "duration": 108,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-0keRG5peoNk-Museum_Custom_Exhibits_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=4FSKBDIHee8",
+  "title": "Club LOL - Animal Crossing: New Leaf Music",
+  "duration": 75,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-4FSKBDIHee8-Club_LOL_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=-xbwNR-0A0I",
+  "title": "Dream Suite - Animal Crossing: New Leaf Music",
+  "duration": 142,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube--xbwNR-0A0I-Dream_Suite_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=9KAFTh5zqF4",
+  "title": "The Roost / Caf\u00e9  - Animal Crossing: New Leaf Music",
+  "duration": 72,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-9KAFTh5zqF4-The_Roost_Cafe_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=HpRXnOCNNa0",
+  "title": "Working at The Roost - Animal Crossing: New Leaf Music",
+  "duration": 235,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-HpRXnOCNNa0-Working_at_The_Roost_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=QVLNlMQWd1E",
+  "title": "Re-Tail - Animal Crossing: New Leaf Music",
+  "duration": 149,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-QVLNlMQWd1E-Re-Tail_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=h6IWY-qyRXo",
+  "title": "Kicks - Animal Crossing: New Leaf Music",
+  "duration": 181,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-h6IWY-qyRXo-Kicks_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=6yTBrAknJ70",
+  "title": "Nookling Junction - Animal Crossing: New Leaf Music",
+  "duration": 199,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-6yTBrAknJ70-Nookling_Junction_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=RPUg8sqYaFg",
+  "title": "Nook Store (10 Minutes Before Closing) - Animal Crossing: New Leaf Music",
+  "duration": 223,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-RPUg8sqYaFg-Nook_Store_10_Minutes_Before_Closing_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=TD9noSR1lZ8",
+  "title": "T&T Mart - Animal Crossing: New Leaf Music",
+  "duration": 182,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-TD9noSR1lZ8-T_T_Mart_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=KQWt8sUA2x8",
+  "title": "Super T&T - Animal Crossing: New Leaf Music",
+  "duration": 194,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-KQWt8sUA2x8-Super_T_T_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=ddCtwUkH2Mo",
+  "title": "T.I.Y - Animal Crossing: New Leaf Music",
+  "duration": 149,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-ddCtwUkH2Mo-T.I.Y_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=GDcRbJdYBmQ",
+  "title": "T&T Emporium - Animal Crossing: New Leaf Music",
+  "duration": 172,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-GDcRbJdYBmQ-T_T_Emporium_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=c0RfIy9hPt4",
+  "title": "Garden Shop - Animal Crossing: New Leaf Music",
+  "duration": 199,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-c0RfIy9hPt4-Garden_Shop_-_Animal_Crossing_-_New_Leaf_Music.m4a",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=WCw1mdtUqy4",
+  "title": "Fireworks Show / Festival - Animal Crossing: New Leaf Music",
+  "duration": 154,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-WCw1mdtUqy4-Fireworks_Show_Festival_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=AwlXvNvC3Xo",
+  "title": "Halloween - Animal Crossing: New Leaf Music",
+  "duration": 136,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-AwlXvNvC3Xo-Halloween_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=xM5WLcEZ7kw",
+  "title": "Toy Day (Christmas Eve) - Animal Crossing: New Leaf Music",
+  "duration": 157,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-xM5WLcEZ7kw-Toy_Day_Christmas_Eve_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=jYS-GdCPPoA",
+  "title": "New Year's Eve Countdown - Animal Crossing: New Leaf Music",
+  "duration": 554,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-jYS-GdCPPoA-New_Year_s_Eve_Countdown_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=tRYXwqc-tew",
+  "title": "New Year's Day (2AM onward) - Animal Crossing: New Leaf Music",
+  "duration": 195,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-tRYXwqc-tew-New_Year_s_Day_2AM_onward_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=57sOs1cwwFQ",
+  "title": "Bunny Day (Easter) - Animal Crossing: New Leaf Music",
+  "duration": 198,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-57sOs1cwwFQ-Bunny_Day_Easter_-_Animal_Crossing_-_New_Leaf_Music.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
