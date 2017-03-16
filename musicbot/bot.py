@@ -4799,6 +4799,14 @@ class MusicBot(discord.Client):
         raise exceptions.RestartSignal
 
     @owner_only
+    async def cmd_countmsgs(self, server, channel_id, number):
+        msgs_by_member = {}
+        channel = server.get_channel(channel_id)
+        async for msg in self.logs_from(channel, limit=int(number)):
+            msgs_by_member[msg.author.id] = msgs_by_member.get(msg.author.id, 0) + 1
+        return Response("\n".join(["{}: {}".format(self.get_global_user(x).name if self.get_global_user(x) is not None else "Unknown", msgs_by_member[x]) for x in msgs_by_member.keys()]))
+
+    @owner_only
     async def cmd_shutdown(self, channel):
         await self.safe_send_message(channel, ":wave:")
         await self.disconnect_all_voice_clients()
