@@ -2239,7 +2239,6 @@ class MusicBot(discord.Client):
             sdata.writelines(d.encode('utf8') + b'\n' for d in data)
             sdata.seek(0)
 
-            # TODO: Fix naming (Discord20API-ids.txt)
             await self.send_file(author, sdata, filename='%s-ids-%s.txt' % (server.name.replace(' ', '_'), cat))
 
         return Response(":mailbox_with_mail:", delete_after=20)
@@ -4799,12 +4798,25 @@ class MusicBot(discord.Client):
         raise exceptions.RestartSignal
 
     @owner_only
-    async def cmd_countmsgs(self, server, channel_id, number):
+    async def cmd_countmsgs(self, server, author, channel_id, number):
         msgs_by_member = ***REMOVED******REMOVED***
+        msgs_by_date = ***REMOVED******REMOVED***
         channel = server.get_channel(channel_id)
         async for msg in self.logs_from(channel, limit=int(number)):
-            msgs_by_member[msg.author.id] = msgs_by_member.get(msg.author.id, 0) + 1
-        return Response("\n".join(["***REMOVED******REMOVED***: ***REMOVED******REMOVED***".format(self.get_global_user(x).name if self.get_global_user(x) is not None else "Unknown", msgs_by_member[x]) for x in msgs_by_member.keys()]))
+            msgs_by_member[msg.author.id] = msgs_by_member.get(
+                msg.author.id, 0) + 1
+            msgs_by_date["***REMOVED***0.day***REMOVED***/***REMOVED***0.month***REMOVED***/***REMOVED***0.year***REMOVED***".format(msg.timestamp)] = msgs_by_date.get(
+                "***REMOVED***0.day***REMOVED***/***REMOVED***0.month***REMOVED***/***REMOVED***0.year***REMOVED***".format(msg.timestamp), 0) + 1
+
+        with BytesIO() as sdata:
+            sdata.writelines("***REMOVED******REMOVED***: ***REMOVED******REMOVED***\n".format(self.get_global_user(x).name if self.get_global_user(
+                x) is not None else "Unknown", msgs_by_member[x]).encode('utf8') for x in msgs_by_member.keys())
+            sdata.writelines(["\n\n".encode("utf8"),])
+            sdata.writelines("***REMOVED******REMOVED***: ***REMOVED******REMOVED***\n".format(
+                x, msgs_by_date[x]).encode('utf8') for x in msgs_by_date.keys())
+            sdata.seek(0)
+
+            await self.send_file(author, sdata, filename='%s-msgs.txt' % (server.name.replace(' ', '_')))
 
     @owner_only
     async def cmd_shutdown(self, channel):
