@@ -5,6 +5,7 @@ cffi==1.6.0; sys_platform == 'win32'
 
 parsedatetime
 spotipy
+openpyxl
 Tungsten
 goslate
 pyshorteners
