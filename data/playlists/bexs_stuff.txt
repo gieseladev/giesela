@@ -179,8 +179,8 @@
   "url": "https://www.youtube.com/watch?v=Ym0hZG-zNOk",
   "title": "Michael Jackson - Beat It (Official Video)",
   "duration": 298,
-  "downloaded": true,
-  "filename": "audio_cache\\youtube-Ym0hZG-zNOk-Michael_Jackson_-_Beat_It_Official_Video.webm",
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-Ym0hZG-zNOk-Michael_Jackson_-_Beat_It_Official_Video.webm",
   "meta": ***REMOVED***
     "channel": ***REMOVED***
@@ -192,6 +192,31 @@
       "type": "Member",
       "id": "284838538556604418",
       "name": "Deathfang"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Su3URPuga0s",
+  "title": "Centhron - Dreckst\u00fcck",
+  "duration": 281,
+  "downloaded": true,
+  "filename": "audio_cache\\youtube-Su3URPuga0s-Centhron_-_Dreckstuck.webm",
+  "expected_filename": "audio_cache\\youtube-Su3URPuga0s-Centhron_-_Dreckstuck.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "277112984919212035",
+      "name": "Havoc"
     ***REMOVED***
   ***REMOVED***,
   "start_seconds": 0,

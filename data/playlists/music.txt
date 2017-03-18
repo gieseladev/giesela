@@ -18707,7 +18707,7 @@
     "channel": ***REMOVED***
       "type": "Channel",
       "id": "285177182404214786",
-      "name": "musicbot"
+      "name": "giesela"
     ***REMOVED***,
     "author": ***REMOVED***
       "type": "Member",
@@ -18725,14 +18725,39 @@
   "url": "https://www.youtube.com/watch?v=826kv4IQSd4",
   "title": "Martin Jensen - Solo Dance (Cover Art)",
   "duration": 175,
-  "downloaded": true,
-  "filename": "audio_cache\\youtube-826kv4IQSd4-Martin_Jensen_-_Solo_Dance_Cover_Art.webm",
+  "downloaded": false,
+  "filename": null,
   "expected_filename": "audio_cache\\youtube-826kv4IQSd4-Martin_Jensen_-_Solo_Dance_Cover_Art.webm",
   "meta": ***REMOVED***
     "channel": ***REMOVED***
       "type": "Channel",
       "id": "285177182404214786",
-      "name": "musicbot"
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "277112528159637515",
+      "name": "Acesy"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=5N1_mJvF_8Y",
+  "title": "Jon Bellion - Hand Of God Outro (The Human Condition)",
+  "duration": 338,
+  "downloaded": true,
+  "filename": "audio_cache\\youtube-5N1_mJvF_8Y-Jon_Bellion_-_Hand_Of_God_Outro_The_Human_Condition.webm",
+  "expected_filename": "audio_cache\\youtube-5N1_mJvF_8Y-Jon_Bellion_-_Hand_Of_God_Outro_The_Human_Condition.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
     ***REMOVED***,
     "author": ***REMOVED***
       "type": "Member",

@@ -11,7 +11,7 @@ import sys
 import time
 import traceback
 import urllib
-from collections import defaultdict
+from collections import OrderedDict, defaultdict
 from datetime import datetime, timedelta
 from functools import wraps
 from io import BytesIO
@@ -30,6 +30,7 @@ from discord.ext.commands.bot import _get_variable
 from discord.object import Object
 from discord.voice_client import VoiceClient
 from moviepy import editor, video
+from openpyxl import Workbook
 from pyshorteners import Shortener
 
 from . import downloader, exceptions
@@ -4799,24 +4800,51 @@ class MusicBot(discord.Client):
 
     @owner_only
     async def cmd_countmsgs(self, server, author, channel_id, number):
+        alphabet = list("abcdefghijklmnopqrstuvwxyz")
+
+        def index_to_alphabet(ind):
+            if ind < len(alphabet):
+                return alphabet[ind].upper()
+
+            remainder = ind % len(alphabet)
+            return index_to_alphabet(ind - remainder) + alphabet[remainder].upper()
+
         msgs_by_member = ***REMOVED******REMOVED***
-        msgs_by_date = ***REMOVED******REMOVED***
+        msgs_by_date = OrderedDict()
         channel = server.get_channel(channel_id)
         async for msg in self.logs_from(channel, limit=int(number)):
             msgs_by_member[msg.author.id] = msgs_by_member.get(
                 msg.author.id, 0) + 1
-            msgs_by_date["***REMOVED***0.day***REMOVED***/***REMOVED***0.month***REMOVED***/***REMOVED***0.year***REMOVED***".format(msg.timestamp)] = msgs_by_date.get(
-                "***REMOVED***0.day***REMOVED***/***REMOVED***0.month***REMOVED***/***REMOVED***0.year***REMOVED***".format(msg.timestamp), 0) + 1
+            dt = msgs_by_date.get(
+                "***REMOVED***0.day***REMOVED***/***REMOVED***0.month***REMOVED***/***REMOVED***0.year***REMOVED***".format(msg.timestamp), ***REMOVED******REMOVED***)
+            dt[msg.author.id] = dt.get(msg.author.id, 0) + 1
+            msgs_by_date[
+                "***REMOVED***0.day***REMOVED***/***REMOVED***0.month***REMOVED***/***REMOVED***0.year***REMOVED***".format(msg.timestamp)] = dt
 
-        with BytesIO() as sdata:
-            sdata.writelines("***REMOVED******REMOVED***: ***REMOVED******REMOVED***\n".format(self.get_global_user(x).name if self.get_global_user(
-                x) is not None else "Unknown", msgs_by_member[x]).encode('utf8') for x in msgs_by_member.keys())
-            sdata.writelines(["\n\n".encode("utf8"),])
-            sdata.writelines("***REMOVED******REMOVED***: ***REMOVED******REMOVED***\n".format(
-                x, msgs_by_date[x]).encode('utf8') for x in msgs_by_date.keys())
-            sdata.seek(0)
+        wb = Workbook()
+        ws = wb.active
+        ws["A2"] = "TOTAL"
+        sorted_user_index = ***REMOVED******REMOVED***
+        i = 1
+        for member in msgs_by_member:
+            data = msgs_by_member[member]
+            ws["***REMOVED******REMOVED******REMOVED******REMOVED***".format(index_to_alphabet(i), 1)] = server.get_member(
+                member).name if server.get_member(member) is not None else "Unknown"
+            ws["***REMOVED******REMOVED******REMOVED******REMOVED***".format(index_to_alphabet(i), 2)] = data
+            sorted_user_index[member] = index_to_alphabet(i)
+            i += 1
 
-            await self.send_file(author, sdata, filename='%s-msgs.txt' % (server.name.replace(' ', '_')))
+        i = 4
+        for date in reversed(msgs_by_date.keys()):
+            ws["A" + str(i)] = date
+            for mem in msgs_by_date[date]:
+                ws["***REMOVED******REMOVED******REMOVED******REMOVED***".format(sorted_user_index.get(mem), i)
+                   ] = msgs_by_date[date][mem]
+            i += 1
+
+        wb.save("cache/last_data.xlsx")
+
+        await self.send_file(author, open("cache/last_data.xlsx", "rb"), filename='%s-msgs.xlsx' % (server.name.replace(' ', '_')))
 
     @owner_only
     async def cmd_shutdown(self, channel):
