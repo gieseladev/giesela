@@ -1,5 +1,3 @@
-import asyncio
-import configparser
 import datetime
 import inspect
 import json
@@ -32,6 +30,9 @@ from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from openpyxl import Workbook
 from pyshorteners import Shortener
+
+import asyncio
+import configparser
 
 from . import downloader, exceptions
 from .cleverbot import CleverWrap
@@ -2859,7 +2860,7 @@ class MusicBot(discord.Client):
     async def cmd_remove(self, player, message, channel, author, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***remove index or url
+            ***REMOVED***command_prefix***REMOVED***remove <index | start index | url> [end index]
 
         Remove a index or a url from the playlist.
         """
@@ -2870,6 +2871,29 @@ class MusicBot(discord.Client):
         if len(player.playlist.entries) < 0:
             await self.safe_send_message(channel, "There are no entries in the playlist!", expire_in=15)
             return
+
+        if len(leftover_args) >= 2:
+            try:
+                start_index = int(leftover_args[0]) - 1
+                end_index = int(leftover_args[1]) - 1
+
+                if start_index > end_index:
+                    return Response("Your start index shouldn't be bigger than the end index", delete_after=15)
+
+                if start_index > len(player.playlist.entries) - 1 or start_index < 0:
+                    await self.safe_send_message(channel, "The start index is out of bounds", expire_in=15)
+                    return
+                if end_index > len(player.playlist.entries) - 1 or end_index < 0:
+                    await self.safe_send_message(channel, "The end index is out of bounds", expire_in=15)
+                    return
+
+                for i in range(end_index, start_index - 1, -1):
+                    del player.playlist.entries[i]
+
+                return Response("Removed ***REMOVED******REMOVED*** entries from the playlist".format(end_index - start_index + 1), delete_after=30)
+            except:
+                raise
+                pass
 
         try:
             index = int(leftover_args[0]) - 1
