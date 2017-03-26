@@ -4837,7 +4837,7 @@ class MusicBot(discord.Client):
         msgs_by_date = OrderedDict()
         channel = server.get_channel(channel_id)
         async for msg in self.logs_from(channel, limit=int(number)):
-            existing_msgs = msgs_by_member.get(msg.author.id, [0, ])
+            existing_msgs = msgs_by_member.get(msg.author.id, [0, 0])
             existing_msgs[0] += 1
             existing_msgs[1] += len(msg.content)
             msgs_by_member[msg.author.id] = existing_msgs
@@ -4857,7 +4857,7 @@ class MusicBot(discord.Client):
             ws["***REMOVED******REMOVED******REMOVED******REMOVED***".format(index_to_alphabet(i), 1)] = server.get_member(
                 member).name if server.get_member(member) is not None else "Unknown"
             ws["***REMOVED******REMOVED******REMOVED******REMOVED***".format(index_to_alphabet(i), 2)] = data[0]
-            ws["***REMOVED******REMOVED******REMOVED******REMOVED***".format(index_to_alphabet(i), 2)] = data[1]
+            ws["***REMOVED******REMOVED******REMOVED******REMOVED***".format(index_to_alphabet(i), 3)] = data[1]
             sorted_user_index[member] = index_to_alphabet(i)
             i += 1
 
