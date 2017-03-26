@@ -11,7 +11,7 @@
     "channel": ***REMOVED***
       "type": "Channel",
       "id": "285177182404214786",
-      "name": "regis"
+      "name": "giesela"
     ***REMOVED***,
     "author": ***REMOVED***
       "type": "Member",
@@ -36,7 +36,7 @@
     "channel": ***REMOVED***
       "type": "Channel",
       "id": "285177182404214786",
-      "name": "regis"
+      "name": "giesela"
     ***REMOVED***,
     "author": ***REMOVED***
       "type": "Member",
@@ -61,7 +61,32 @@
     "channel": ***REMOVED***
       "type": "Channel",
       "id": "285177182404214786",
-      "name": "regis"
+      "name": "giesela"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null
+***REMOVED***
+;
+***REMOVED***
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=07oD1jeysao",
+  "title": "Overwatch - Trailer Theme 2016 Orchestral Remix (Extended)",
+  "duration": 1860,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-07oD1jeysao-Overwatch_-_Trailer_Theme_2016_Orchestral_Remix_Extended.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
     ***REMOVED***,
     "author": ***REMOVED***
       "type": "Member",
