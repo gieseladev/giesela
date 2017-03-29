@@ -4836,16 +4836,28 @@ class MusicBot(discord.Client):
         msgs_by_member = ***REMOVED******REMOVED***
         msgs_by_date = OrderedDict()
         channel = server.get_channel(channel_id)
+        last_msg = None
+        spam = 0
+
         async for msg in self.logs_from(channel, limit=int(number)):
+            increment = 1
+            if last_msg is not None and msg.author.id == last_msg.author.id and abs((last_msg.timestamp - msg.timestamp).total_seconds()) < 10:
+                spam += 1
+                last_msg = msg
+                increment = 0
+
             existing_msgs = msgs_by_member.get(msg.author.id, [0, 0])
-            existing_msgs[0] += 1
-            existing_msgs[1] += len(msg.content)
+            existing_msgs[0] += increment
+            existing_msgs[1] += len(re.sub(r"\W", r"", msg.content))
             msgs_by_member[msg.author.id] = existing_msgs
             dt = msgs_by_date.get(
                 "***REMOVED***0.day***REMOVED***/***REMOVED***0.month***REMOVED***/***REMOVED***0.year***REMOVED***".format(msg.timestamp), ***REMOVED******REMOVED***)
             dt[msg.author.id] = dt.get(msg.author.id, 0) + 1
             msgs_by_date[
                 "***REMOVED***0.day***REMOVED***/***REMOVED***0.month***REMOVED***/***REMOVED***0.year***REMOVED***".format(msg.timestamp)] = dt
+            last_msg = msg
+
+        print("While counting messages I found ***REMOVED******REMOVED*** of them to be spam".format(spam))
 
         wb = Workbook()
         ws = wb.active
@@ -4861,7 +4873,7 @@ class MusicBot(discord.Client):
             sorted_user_index[member] = index_to_alphabet(i)
             i += 1
 
-        i = 4
+        i = 5
         for date in reversed(msgs_by_date.keys()):
             ws["A" + str(i)] = date
             for mem in msgs_by_date[date]:
