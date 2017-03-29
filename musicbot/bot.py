@@ -2613,14 +2613,14 @@ class MusicBot(discord.Client):
         cbOne = CleverWrap("CCC8n_IXK43aOV38rcWUILmYUBQ")
         cbTwo = CleverWrap("CCC8n_IXK43aOV38rcWUILmYUBQ")
         answer = cbOne.say(choice["hey", "salut", "hallo", "hello", "hi there", "hello there", "good evening"])
-        await self.safe_send_message(channel, "Bot #1: Hello there")
+        await self.safe_send_message(channel, "Regi: Hello there")
 
         while self.newLonelyState:
             await asyncio.sleep(1.8)
-            await self.safe_send_message(channel, 'Bot #2: {}'.format(answer))
+            await self.safe_send_message(channel, 'Giesela: {}'.format(answer))
             answer = cbOne.say(answer)
             await asyncio.sleep(1.8)
-            await self.safe_send_message(channel, 'Bot #1: {}'.format(answer))
+            await self.safe_send_message(channel, 'Regi: {}'.format(answer))
             answer = cbTwo.say(answer)
 
     async def cmd_random(self, channel, author, leftover_args):
