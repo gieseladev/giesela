@@ -4852,7 +4852,7 @@ class MusicBot(discord.Client):
             msgs_by_member[msg.author.id] = existing_msgs
             dt = msgs_by_date.get(
                 "***REMOVED***0.day***REMOVED***/***REMOVED***0.month***REMOVED***/***REMOVED***0.year***REMOVED***".format(msg.timestamp), ***REMOVED******REMOVED***)
-            dt[msg.author.id] = dt.get(msg.author.id, 0) + 1
+            dt[msg.author.id] = dt.get(msg.author.id, 0) + increment
             msgs_by_date[
                 "***REMOVED***0.day***REMOVED***/***REMOVED***0.month***REMOVED***/***REMOVED***0.year***REMOVED***".format(msg.timestamp)] = dt
             last_msg = msg
