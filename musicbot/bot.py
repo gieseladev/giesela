@@ -2610,18 +2610,18 @@ class MusicBot(discord.Client):
 
     async def lonelymodeloop(self, channel):
         self.lonelyModeRunning = True
-        cbOne = Cleverbot()
-        cbTwo = Cleverbot()
-        answer = cbOne.ask("What do you think of Halloween?")
-        await self.safe_send_message(channel, "Bot #1: Hello there")
+        cbOne = CleverWrap("CCC8n_IXK43aOV38rcWUILmYUBQ")
+        cbTwo = CleverWrap("CCC8n_IXK43aOV38rcWUILmYUBQ")
+        answer = cbOne.say(choice["hey", "salut", "hallo", "hello", "hi there", "hello there", "good evening"])
+        await self.safe_send_message(channel, "Regi: Hello there")
 
         while self.newLonelyState:
             await asyncio.sleep(1.8)
-            await self.safe_send_message(channel, 'Bot #2: ***REMOVED******REMOVED***'.format(answer))
-            answer = cbOne.ask(answer)
+            await self.safe_send_message(channel, 'Giesela: ***REMOVED******REMOVED***'.format(answer))
+            answer = cbOne.say(answer)
             await asyncio.sleep(1.8)
-            await self.safe_send_message(channel, 'Bot #1: ***REMOVED******REMOVED***'.format(answer))
-            answer = cbTwo.ask(answer)
+            await self.safe_send_message(channel, 'Regi: ***REMOVED******REMOVED***'.format(answer))
+            answer = cbTwo.say(answer)
 
     async def cmd_random(self, channel, author, leftover_args):
         """
@@ -4836,23 +4836,35 @@ class MusicBot(discord.Client):
         msgs_by_member = ***REMOVED******REMOVED***
         msgs_by_date = OrderedDict()
         channel = server.get_channel(channel_id)
+        last_msg = None
+        spam = 0
+
         async for msg in self.logs_from(channel, limit=int(number)):
+            increment = 1
+            if last_msg is not None and msg.author.id == last_msg.author.id and abs((last_msg.timestamp - msg.timestamp).total_seconds()) < 10:
+                spam += 1
+                last_msg = msg
+                increment = 0
+
             existing_msgs = msgs_by_member.get(msg.author.id, [0, 0])
-            existing_msgs[0] += 1
-            existing_msgs[1] += len(msg.content)
+            existing_msgs[0] += increment
+            existing_msgs[1] += len(re.sub(r"\W", r"", msg.content))
             msgs_by_member[msg.author.id] = existing_msgs
             dt = msgs_by_date.get(
                 "***REMOVED***0.day***REMOVED***/***REMOVED***0.month***REMOVED***/***REMOVED***0.year***REMOVED***".format(msg.timestamp), ***REMOVED******REMOVED***)
-            dt[msg.author.id] = dt.get(msg.author.id, 0) + 1
+            dt[msg.author.id] = dt.get(msg.author.id, 0) + increment
             msgs_by_date[
                 "***REMOVED***0.day***REMOVED***/***REMOVED***0.month***REMOVED***/***REMOVED***0.year***REMOVED***".format(msg.timestamp)] = dt
+            last_msg = msg
+
+        print("While counting messages I found ***REMOVED******REMOVED*** of them to be spam".format(spam))
 
         wb = Workbook()
         ws = wb.active
         ws["A2"] = "TOTAL"
         sorted_user_index = ***REMOVED******REMOVED***
         i = 1
-        for member in msgs_by_member:
+        for member in sorted(msgs_by_member):
             data = msgs_by_member[member]
             ws["***REMOVED******REMOVED******REMOVED******REMOVED***".format(index_to_alphabet(i), 1)] = server.get_member(
                 member).name if server.get_member(member) is not None else "Unknown"
@@ -4861,7 +4873,7 @@ class MusicBot(discord.Client):
             sorted_user_index[member] = index_to_alphabet(i)
             i += 1
 
-        i = 4
+        i = 5
         for date in reversed(msgs_by_date.keys()):
             ws["A" + str(i)] = date
             for mem in msgs_by_date[date]:
