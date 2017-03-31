@@ -4864,7 +4864,7 @@ class MusicBot(discord.Client):
         ws["A2"] = "TOTAL"
         sorted_user_index = {}
         i = 1
-        for member in msgs_by_member:
+        for member in sorted(msgs_by_member):
             data = msgs_by_member[member]
             ws["{}{}".format(index_to_alphabet(i), 1)] = server.get_member(
                 member).name if server.get_member(member) is not None else "Unknown"
