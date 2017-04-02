@@ -2595,14 +2595,14 @@ class MusicBot(discord.Client):
             self.log("Something went wrong: " + str(e))
             await self.safe_send_message(channel, "Can't replay " + player.current_entry.title)
 
-    async def cmd_lonelymode(self, channel, author, msgState):
+    async def cmd_lonelymode(self, channel, author, msgState = None):
         """
         Usage:
             {command_prefix}lonelymode [bool]
 
-        Let the bot talk to himself
+        Let the bot talk to itself
         """
-        self.newLonelyState = msgState.lower() in self.trueStringList
+        self.newLonelyState = (msgState.lower() in self.trueStringList) if msgState is not None else not self.lonelyModeRunning
         if self.newLonelyState and not self.lonelyModeRunning:
             await self.lonelymodeloop(channel)
         else:
@@ -2612,7 +2612,7 @@ class MusicBot(discord.Client):
         self.lonelyModeRunning = True
         cbOne = CleverWrap("CCC8n_IXK43aOV38rcWUILmYUBQ")
         cbTwo = CleverWrap("CCC8n_IXK43aOV38rcWUILmYUBQ")
-        answer = cbOne.say(choice["hey", "salut", "hallo", "hello", "hi there", "hello there", "good evening"])
+        answer = cbOne.say(
         await self.safe_send_message(channel, "Regi: Hello there")
 
         while self.newLonelyState:
@@ -4835,8 +4835,10 @@ class MusicBot(discord.Client):
 
         msgs_by_member = {}
         msgs_by_date = OrderedDict()
+        answers_by_date = OrderedDict()
         channel = server.get_channel(channel_id)
         last_msg = None
+        last_answer = None
         spam = 0
 
         async for msg in self.logs_from(channel, limit=int(number)):
@@ -4846,39 +4848,55 @@ class MusicBot(discord.Client):
                 last_msg = msg
                 increment = 0
 
+            if last_answer is None or last_answer.author != msg.author:
+                dt = answers_by_date.get(
+                    "{0.day:0>2}/{0.month:0>2}/{0.year:0>4}".format(msg.timestamp), {})
+                dt[msg.author.id] = dt.get(msg.author.id, 0) + increment
+                answers_by_date[
+                    "{0.day:0>2}/{0.month:0>2}/{0.year:0>4}".format(msg.timestamp)] = dt
+                last_answer = msg
+
             existing_msgs = msgs_by_member.get(msg.author.id, [0, 0])
             existing_msgs[0] += increment
             existing_msgs[1] += len(re.sub(r"\W", r"", msg.content))
             msgs_by_member[msg.author.id] = existing_msgs
             dt = msgs_by_date.get(
-                "{0.day}/{0.month}/{0.year}".format(msg.timestamp), {})
+                "{0.day:0>2}/{0.month:0>2}/{0.year:0>4}".format(msg.timestamp), {})
             dt[msg.author.id] = dt.get(msg.author.id, 0) + increment
             msgs_by_date[
-                "{0.day}/{0.month}/{0.year}".format(msg.timestamp)] = dt
+                "{0.day:0>2}/{0.month:0>2}/{0.year:0>4}".format(msg.timestamp)] = dt
             last_msg = msg
-
-        print("While counting messages I found {} of them to be spam".format(spam))
 
         wb = Workbook()
         ws = wb.active
+        ws.title = "Messages"
+        ws2 = wb.create_sheet("Answers")
         ws["A2"] = "TOTAL"
         sorted_user_index = {}
         i = 1
         for member in sorted(msgs_by_member):
             data = msgs_by_member[member]
-            ws["{}{}".format(index_to_alphabet(i), 1)] = server.get_member(
+            ws["{}{}".format("A", i)] = server.get_member(
                 member).name if server.get_member(member) is not None else "Unknown"
-            ws["{}{}".format(index_to_alphabet(i), 2)] = data[0]
-            ws["{}{}".format(index_to_alphabet(i), 3)] = data[1]
+            ws["{}{}".format("B", i)] = data[0]
+            ws["{}{}".format("C", i)] = data[1]
             sorted_user_index[member] = index_to_alphabet(i)
             i += 1
 
-        i = 5
+        i += 1
         for date in reversed(msgs_by_date.keys()):
             ws["A" + str(i)] = date
             for mem in msgs_by_date[date]:
                 ws["{}{}".format(sorted_user_index.get(mem), i)
                    ] = msgs_by_date[date][mem]
+            i += 1
+
+        i = 1
+        for date in reversed(answers_by_date.keys()):
+            ws2["A" + str(i)] = date
+            for mem in answers_by_date[date]:
+                ws2["{}{}".format(sorted_user_index.get(mem), i)
+                    ] = answers_by_date[date][mem]
             i += 1
 
         wb.save("cache/last_data.xlsx")
