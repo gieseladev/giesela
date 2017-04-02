@@ -2613,6 +2613,7 @@ class MusicBot(discord.Client):
         cbOne = CleverWrap("CCC8n_IXK43aOV38rcWUILmYUBQ")
         cbTwo = CleverWrap("CCC8n_IXK43aOV38rcWUILmYUBQ")
         answer = cbOne.say(
+            choice(["hey", "salut", "hallo", "hello", "hi there", "hello there", "good evening"]))
         await self.safe_send_message(channel, "Regi: Hello there")
 
         while self.newLonelyState:
