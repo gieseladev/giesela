@@ -122,3 +122,28 @@
   "start_seconds": 0,
   "end_seconds": null
 }
+;
+{
+  "version": 1,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=6Z97Y_AQzWQ",
+  "title": "Sword Art Online Best Epic Battle Music/Ost",
+  "duration": 581,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-6Z97Y_AQzWQ-Sword_Art_Online_Best_Epic_Battle_Music_Ost.webm",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "285177182404214786",
+      "name": "giesela"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "start_seconds": 0,
+  "end_seconds": null
+}
