@@ -164,9 +164,9 @@ class PlayingPhase:
 
     def __str__(self):
         if self.end is None:
-            return "Started playing \"***REMOVED***0***REMOVED***\" at ***REMOVED***1.year***REMOVED***-***REMOVED***1.month***REMOVED***-***REMOVED***1.day***REMOVED*** ***REMOVED***1.hour***REMOVED***:***REMOVED***1.minute***REMOVED***".format(self.game.name, self.start)
+            return "Started playing \"***REMOVED***0***REMOVED***\" at ***REMOVED***1.year:0>4***REMOVED***-***REMOVED***1.month:0>2***REMOVED***-***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.game.name, self.start)
 
-        return "Played \"***REMOVED***0***REMOVED***\" from ***REMOVED***1.year***REMOVED***-***REMOVED***1.month***REMOVED***-***REMOVED***1.day***REMOVED*** ***REMOVED***1.hour***REMOVED***:***REMOVED***1.minute***REMOVED*** to ***REMOVED***2.year***REMOVED***-***REMOVED***2.month***REMOVED***-***REMOVED***2.day***REMOVED*** ***REMOVED***2.hour***REMOVED***:***REMOVED***2.minute***REMOVED***".format(self.game.name, self.start, self.end)
+        return "Played \"***REMOVED***0***REMOVED***\" from ***REMOVED***1.year:0>4***REMOVED***-***REMOVED***1.month:0>2***REMOVED***-***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED*** to ***REMOVED***2.year:0>4***REMOVED***-***REMOVED***2.month:0>2***REMOVED***-***REMOVED***2.day:0>2***REMOVED*** ***REMOVED***2.hour:0>2***REMOVED***:***REMOVED***2.minute:0>2***REMOVED***".format(self.game.name, self.start, self.end)
 
 
 class OnlinePhase:
@@ -180,6 +180,6 @@ class OnlinePhase:
 
     def __str__(self):
         if self.end is None:
-            return "Came online at ***REMOVED***0.year***REMOVED***-***REMOVED***0.month***REMOVED***-***REMOVED***0.day***REMOVED*** ***REMOVED***0.hour***REMOVED***:***REMOVED***0.minute***REMOVED***".format(self.start)
+            return "Came online at ***REMOVED***0.year:0>4***REMOVED***-***REMOVED***0.month:0>2***REMOVED***-***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(self.start)
 
-        return "Came was online from ***REMOVED***0.year***REMOVED***-***REMOVED***0.month***REMOVED***-***REMOVED***0.day***REMOVED*** ***REMOVED***0.hour***REMOVED***:***REMOVED***0.minute***REMOVED*** to ***REMOVED***1.year***REMOVED***-***REMOVED***1.month***REMOVED***-***REMOVED***1.day***REMOVED*** ***REMOVED***1.hour***REMOVED***:***REMOVED***1.minute***REMOVED***".format(self.start, self.end)
+        return "Was online from ***REMOVED***0.year:0>4***REMOVED***-***REMOVED***0.month:0>2***REMOVED***-***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED*** to ***REMOVED***1.year:0>4***REMOVED***-***REMOVED***1.month:0>2***REMOVED***-***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.start, self.end)
