@@ -164,9 +164,9 @@ class PlayingPhase:
 
     def __str__(self):
         if self.end is None:
-            return "Started playing \"{0}\" at {1.year}-{1.month}-{1.day} {1.hour}:{1.minute}".format(self.game.name, self.start)
+            return "Started playing \"{0}\" at {1.year:0>4}-{1.month:0>2}-{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.game.name, self.start)
 
-        return "Played \"{0}\" from {1.year}-{1.month}-{1.day} {1.hour}:{1.minute} to {2.year}-{2.month}-{2.day} {2.hour}:{2.minute}".format(self.game.name, self.start, self.end)
+        return "Played \"{0}\" from {1.year:0>4}-{1.month:0>2}-{1.day:0>2} {1.hour:0>2}:{1.minute:0>2} to {2.year:0>4}-{2.month:0>2}-{2.day:0>2} {2.hour:0>2}:{2.minute:0>2}".format(self.game.name, self.start, self.end)
 
 
 class OnlinePhase:
@@ -180,6 +180,6 @@ class OnlinePhase:
 
     def __str__(self):
         if self.end is None:
-            return "Came online at {0.year}-{0.month}-{0.day} {0.hour}:{0.minute}".format(self.start)
+            return "Came online at {0.year:0>4}-{0.month:0>2}-{0.day:0>2} {0.hour:0>2}:{0.minute:0>2}".format(self.start)
 
-        return "Came was online from {0.year}-{0.month}-{0.day} {0.hour}:{0.minute} to {1.year}-{1.month}-{1.day} {1.hour}:{1.minute}".format(self.start, self.end)
+        return "Was online from {0.year:0>4}-{0.month:0>2}-{0.day:0>2} {0.hour:0>2}:{0.minute:0>2} to {1.year:0>4}-{1.month:0>2}-{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.start, self.end)
