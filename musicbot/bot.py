@@ -4911,7 +4911,7 @@ class MusicBot(discord.Client):
         if self.online_loggers.get(server.id, None) is not None:
             return Response("I'm already looking at this server")
         else:
-            await self.online_member_checker(server)
+            asyncio.ensure_future(self.online_member_checker(server))
             return Response("okay, okay!")
 
     @owner_only
