@@ -42,7 +42,7 @@ from .constants import AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT
 from .games.game_2048 import Game2048
 from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
-from .logger import log
+from .logger import OnlineLogger, log
 from .nine_gag import *
 from .opus_loader import load_opus_lib
 from .papers import Papers
@@ -108,6 +108,7 @@ class MusicBot(discord.Client):
         self.radios = Radios(radios_file)
         self.playlists = Playlists(playlists_file)
         self.random_sets = RandomSets(random_file)
+        self.online_loggers = ***REMOVED******REMOVED***
         self.cah = GameCAH(self)
         self.permissions = Permissions(
             perms_file, grant_all=[self.config.owner_id])
@@ -2595,14 +2596,15 @@ class MusicBot(discord.Client):
             self.log("Something went wrong: " + str(e))
             await self.safe_send_message(channel, "Can't replay " + player.current_entry.title)
 
-    async def cmd_lonelymode(self, channel, author, msgState = None):
+    async def cmd_lonelymode(self, channel, author, msgState=None):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***lonelymode [bool]
 
         Let the bot talk to itself
         """
-        self.newLonelyState = (msgState.lower() in self.trueStringList) if msgState is not None else not self.lonelyModeRunning
+        self.newLonelyState = (msgState.lower(
+        ) in self.trueStringList) if msgState is not None else not self.lonelyModeRunning
         if self.newLonelyState and not self.lonelyModeRunning:
             await self.lonelymodeloop(channel)
         else:
@@ -4903,6 +4905,43 @@ class MusicBot(discord.Client):
         wb.save("cache/last_data.xlsx")
 
         await self.send_file(author, open("cache/last_data.xlsx", "rb"), filename='%s-msgs.xlsx' % (server.name.replace(' ', '_')))
+
+    @owner_only
+    async def cmd_surveyserver(self, server):
+        if self.online_loggers.get(server.id, None) is not None:
+            return Response("I'm already looking at this server")
+        else:
+            await self.online_member_checker(server)
+            return Response("okay, okay!")
+
+    @owner_only
+    async def cmd_evalsurvey(self, server, author):
+        online_logger = self.online_loggers.get(server.id, None)
+        if online_logger is None:
+            return Response("I'm not even spying here")
+        online_logger.create_output()
+        await self.send_file(author, open("cache/last_survey_data.xlsx", "rb"), filename='%s-msgs.xlsx' % (server.name.replace(' ', '_')))
+        return Response("There you go, fam", delete_after=10)
+
+    @owner_only
+    async def cmd_resetsurvey(self, server):
+        online_logger = self.online_loggers.get(server.id, None)
+        if online_logger is None:
+            return Response("I'm not even spying here")
+        online_logger.reset()
+        return Response("Well then")
+
+    async def online_member_checker(self, server):
+        online_logger = self.online_loggers.get(server.id, None)
+        if online_logger is None:
+            online_logger = OnlineLogger(self)
+            self.online_loggers[server.id] = online_logger
+
+        while True:
+            for member in server.members:
+                online_logger.update_stats(
+                    member.id, member.status != discord.Status.offline, member.game)
+            await asyncio.sleep(120)
 
     @owner_only
     async def cmd_shutdown(self, channel):
