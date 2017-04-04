@@ -3,6 +3,7 @@ from datetime import datetime
 from openpyxl import Workbook
 
 from .config import ConfigDefaults
+from .utils import format_time
 
 logger_version = "1.0"
 
@@ -59,7 +60,11 @@ class OnlineLogger:
             ws = wb.create_sheet(self.musicbot.get_global_user(member).name)
             index = 1
             for action in all_phases[member]:
-                ws["A{}".format(index)] = str(action)
+                ws["A{}".format(index)] = action.type_string
+                ws["B{}".format(index)] = action.detailed_string
+                ws["C{}".format(index)] = action.start_string
+                ws["D{}".format(index)] = action.end_string
+                ws["E{}".format(index)] = action.duration_string
                 index += 1
 
         wb.save("cache/last_survey_data.xlsx")
@@ -116,6 +121,17 @@ class OnlineLogger:
         else:
             self.action_phases[user_id].append(action_phase)
 
+        try:
+            self.ongoing_online_phases[user_id].pop(action_phase)
+        except:
+            print("Couldn't remove action phase from ongoing phases")
+            return
+
+        try:
+            self.ongoing_playing_phases[user_id].pop(action_phase)
+        except:
+            print("Couldn't remove action phase from ongoing playing phases")
+
     def push_ongoing_online_phase(self, user_id, phase):
         phases = self.ongoing_online_phases.get(user_id, None)
         if phases is None:
@@ -164,9 +180,29 @@ class PlayingPhase:
 
     def __str__(self):
         if self.end is None:
-            return "Started playing \"{0}\" at {1.year:0>4}-{1.month:0>2}-{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.game.name, self.start)
+            return "Started \"{0}\" at {1.month:0>2}-{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.game.name, self.start)
 
-        return "Played \"{0}\" from {1.year:0>4}-{1.month:0>2}-{1.day:0>2} {1.hour:0>2}:{1.minute:0>2} to {2.year:0>4}-{2.month:0>2}-{2.day:0>2} {2.hour:0>2}:{2.minute:0>2}".format(self.game.name, self.start, self.end)
+        return "Played \"{0}\" from {1.month:0>2}-{1.day:0>2} {1.hour:0>2}:{1.minute:0>2} to {2.month:0>2}-{2.day:0>2} {2.hour:0>2}:{2.minute:0>2}".format(self.game.name, self.start, self.end)
+
+    @property
+    def duration_string(self):
+        return format_time(self.end - self.start) if self.end is not None else "Ongoing"
+
+    @property
+    def type_string(self):
+        return "PLAYING"
+
+    @property
+    def detailed_string(self):
+        return self.game.name
+
+    @property
+    def start_string(self):
+        return "{1.year:0>4}/{1.month:0>2}/{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.start)
+
+    @property
+    def end_string(self):
+        return "{1.year:0>4}/{1.month:0>2}/{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.end) if self.end is not None else "Until now"
 
 
 class OnlinePhase:
@@ -180,6 +216,26 @@ class OnlinePhase:
 
     def __str__(self):
         if self.end is None:
-            return "Came online at {0.year:0>4}-{0.month:0>2}-{0.day:0>2} {0.hour:0>2}:{0.minute:0>2}".format(self.start)
+            return "Came online at {0.month:0>2}-{0.day:0>2} {0.hour:0>2}:{0.minute:0>2}".format(self.start)
 
-        return "Was online from {0.year:0>4}-{0.month:0>2}-{0.day:0>2} {0.hour:0>2}:{0.minute:0>2} to {1.year:0>4}-{1.month:0>2}-{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.start, self.end)
+        return "Was online from {0.month:0>2}-{0.day:0>2} {0.hour:0>2}:{0.minute:0>2} to {1.month:0>2}-{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.start, self.end)
+
+    @property
+    def duration_string(self):
+        return format_time(self.end - self.start) if self.end is not None else "Ongoing"
+
+    @property
+    def type_string(self):
+        return "ONLINE"
+
+    @property
+    def detailed_string(self):
+        return ""
+
+    @property
+    def start_string(self):
+        return "{1.year:0>4}/{1.month:0>2}/{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.start)
+
+    @property
+    def end_string(self):
+        return "{1.year:0>4}/{1.month:0>2}/{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.end) if self.end is not None else "Until now"
