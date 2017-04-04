@@ -198,11 +198,11 @@ class PlayingPhase:
 
     @property
     def start_string(self):
-        return "{1.year:0>4}/{1.month:0>2}/{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.start)
+        return "{0.year:0>4}/{0.month:0>2}/{0.day:0>2} {0.hour:0>2}:{0.minute:0>2}".format(self.start)
 
     @property
     def end_string(self):
-        return "{1.year:0>4}/{1.month:0>2}/{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.end) if self.end is not None else "Until now"
+        return "{0.year:0>4}/{0.month:0>2}/{0.day:0>2} {0.hour:0>2}:{0.minute:0>2}".format(self.end) if self.end is not None else "Until now"
 
 
 class OnlinePhase:
@@ -234,8 +234,8 @@ class OnlinePhase:
 
     @property
     def start_string(self):
-        return "{1.year:0>4}/{1.month:0>2}/{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.start)
+        return "{0.year:0>4}/{0.month:0>2}/{0.day:0>2} {0.hour:0>2}:{0.minute:0>2}".format(self.start)
 
     @property
     def end_string(self):
-        return "{1.year:0>4}/{1.month:0>2}/{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.end) if self.end is not None else "Until now"
+        return "{0.year:0>4}/{0.month:0>2}/{0.day:0>2} {0.hour:0>2}:{0.minute:0>2}".format(self.end) if self.end is not None else "Until now"
