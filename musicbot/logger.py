@@ -3,6 +3,7 @@ from datetime import datetime
 from openpyxl import Workbook
 
 from .config import ConfigDefaults
+from .utils import format_time
 
 logger_version = "1.0"
 
@@ -59,7 +60,11 @@ class OnlineLogger:
             ws = wb.create_sheet(self.musicbot.get_global_user(member).name)
             index = 1
             for action in all_phases[member]:
-                ws["A***REMOVED******REMOVED***".format(index)] = str(action)
+                ws["A***REMOVED******REMOVED***".format(index)] = action.type_string
+                ws["B***REMOVED******REMOVED***".format(index)] = action.detailed_string
+                ws["C***REMOVED******REMOVED***".format(index)] = action.start_string
+                ws["D***REMOVED******REMOVED***".format(index)] = action.end_string
+                ws["E***REMOVED******REMOVED***".format(index)] = action.duration_string
                 index += 1
 
         wb.save("cache/last_survey_data.xlsx")
@@ -116,6 +121,17 @@ class OnlineLogger:
         else:
             self.action_phases[user_id].append(action_phase)
 
+        try:
+            self.ongoing_online_phases[user_id].pop(action_phase)
+        except:
+            print("Couldn't remove action phase from ongoing phases")
+            return
+
+        try:
+            self.ongoing_playing_phases[user_id].pop(action_phase)
+        except:
+            print("Couldn't remove action phase from ongoing playing phases")
+
     def push_ongoing_online_phase(self, user_id, phase):
         phases = self.ongoing_online_phases.get(user_id, None)
         if phases is None:
@@ -164,9 +180,29 @@ class PlayingPhase:
 
     def __str__(self):
         if self.end is None:
-            return "Started playing \"***REMOVED***0***REMOVED***\" at ***REMOVED***1.year:0>4***REMOVED***-***REMOVED***1.month:0>2***REMOVED***-***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.game.name, self.start)
+            return "Started \"***REMOVED***0***REMOVED***\" at ***REMOVED***1.month:0>2***REMOVED***-***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.game.name, self.start)
 
-        return "Played \"***REMOVED***0***REMOVED***\" from ***REMOVED***1.year:0>4***REMOVED***-***REMOVED***1.month:0>2***REMOVED***-***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED*** to ***REMOVED***2.year:0>4***REMOVED***-***REMOVED***2.month:0>2***REMOVED***-***REMOVED***2.day:0>2***REMOVED*** ***REMOVED***2.hour:0>2***REMOVED***:***REMOVED***2.minute:0>2***REMOVED***".format(self.game.name, self.start, self.end)
+        return "Played \"***REMOVED***0***REMOVED***\" from ***REMOVED***1.month:0>2***REMOVED***-***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED*** to ***REMOVED***2.month:0>2***REMOVED***-***REMOVED***2.day:0>2***REMOVED*** ***REMOVED***2.hour:0>2***REMOVED***:***REMOVED***2.minute:0>2***REMOVED***".format(self.game.name, self.start, self.end)
+
+    @property
+    def duration_string(self):
+        return format_time(self.end - self.start) if self.end is not None else "Ongoing"
+
+    @property
+    def type_string(self):
+        return "PLAYING"
+
+    @property
+    def detailed_string(self):
+        return self.game.name
+
+    @property
+    def start_string(self):
+        return "***REMOVED***1.year:0>4***REMOVED***/***REMOVED***1.month:0>2***REMOVED***/***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.start)
+
+    @property
+    def end_string(self):
+        return "***REMOVED***1.year:0>4***REMOVED***/***REMOVED***1.month:0>2***REMOVED***/***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.end) if self.end is not None else "Until now"
 
 
 class OnlinePhase:
@@ -180,6 +216,26 @@ class OnlinePhase:
 
     def __str__(self):
         if self.end is None:
-            return "Came online at ***REMOVED***0.year:0>4***REMOVED***-***REMOVED***0.month:0>2***REMOVED***-***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(self.start)
+            return "Came online at ***REMOVED***0.month:0>2***REMOVED***-***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(self.start)
 
-        return "Was online from ***REMOVED***0.year:0>4***REMOVED***-***REMOVED***0.month:0>2***REMOVED***-***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED*** to ***REMOVED***1.year:0>4***REMOVED***-***REMOVED***1.month:0>2***REMOVED***-***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.start, self.end)
+        return "Was online from ***REMOVED***0.month:0>2***REMOVED***-***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED*** to ***REMOVED***1.month:0>2***REMOVED***-***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.start, self.end)
+
+    @property
+    def duration_string(self):
+        return format_time(self.end - self.start) if self.end is not None else "Ongoing"
+
+    @property
+    def type_string(self):
+        return "ONLINE"
+
+    @property
+    def detailed_string(self):
+        return ""
+
+    @property
+    def start_string(self):
+        return "***REMOVED***1.year:0>4***REMOVED***/***REMOVED***1.month:0>2***REMOVED***/***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.start)
+
+    @property
+    def end_string(self):
+        return "***REMOVED***1.year:0>4***REMOVED***/***REMOVED***1.month:0>2***REMOVED***/***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.end) if self.end is not None else "Until now"
