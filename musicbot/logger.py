@@ -198,11 +198,11 @@ class PlayingPhase:
 
     @property
     def start_string(self):
-        return "***REMOVED***1.year:0>4***REMOVED***/***REMOVED***1.month:0>2***REMOVED***/***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.start)
+        return "***REMOVED***0.year:0>4***REMOVED***/***REMOVED***0.month:0>2***REMOVED***/***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(self.start)
 
     @property
     def end_string(self):
-        return "***REMOVED***1.year:0>4***REMOVED***/***REMOVED***1.month:0>2***REMOVED***/***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.end) if self.end is not None else "Until now"
+        return "***REMOVED***0.year:0>4***REMOVED***/***REMOVED***0.month:0>2***REMOVED***/***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(self.end) if self.end is not None else "Until now"
 
 
 class OnlinePhase:
@@ -234,8 +234,8 @@ class OnlinePhase:
 
     @property
     def start_string(self):
-        return "***REMOVED***1.year:0>4***REMOVED***/***REMOVED***1.month:0>2***REMOVED***/***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.start)
+        return "***REMOVED***0.year:0>4***REMOVED***/***REMOVED***0.month:0>2***REMOVED***/***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(self.start)
 
     @property
     def end_string(self):
-        return "***REMOVED***1.year:0>4***REMOVED***/***REMOVED***1.month:0>2***REMOVED***/***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.end) if self.end is not None else "Until now"
+        return "***REMOVED***0.year:0>4***REMOVED***/***REMOVED***0.month:0>2***REMOVED***/***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(self.end) if self.end is not None else "Until now"
