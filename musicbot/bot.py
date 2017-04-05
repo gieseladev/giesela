@@ -2619,9 +2619,11 @@ class MusicBot(discord.Client):
         await self.safe_send_message(channel, "Regi: Hello there")
 
         while self.newLonelyState:
+            await self.send_typing(channel)
             await asyncio.sleep(1.8)
             await self.safe_send_message(channel, 'Giesela: ***REMOVED******REMOVED***'.format(answer))
             answer = cbOne.say(answer)
+            await self.send_typing(channel)
             await asyncio.sleep(1.8)
             await self.safe_send_message(channel, 'Regi: ***REMOVED******REMOVED***'.format(answer))
             answer = cbTwo.say(answer)
