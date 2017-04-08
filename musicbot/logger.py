@@ -56,11 +56,23 @@ class OnlineLogger:
         wb = Workbook()
         all_phases = ***REMOVED******REMOVED***
         for mem in self.action_phases:
-            all_phases[mem] = all_phases.get(mem, []).extend(self.action_phases[mem]))
+            phases = all_phases.get(mem, None)
+            if phases is None:
+                all_phases[mem] = self.action_phases[mem]
+            else:
+                all_phases[mem].extend(self.action_phases[mem])
         for mem in self.ongoing_online_phases:
-            all_phases[mem] = all_phases.get(mem, []).extend(self.ongoing_online_phases[mem]))
+            phases = all_phases.get(mem, None)
+            if phases is None:
+                all_phases[mem] = self.ongoing_online_phases[mem]
+            else:
+                all_phases[mem].extend(self.ongoing_online_phases[mem])
         for mem in self.ongoing_playing_phases:
-            all_phases[mem] = all_phases.get(mem, []).extend(self.ongoing_playing_phases[mem]))
+            phases = all_phases.get(mem, None)
+            if phases is None:
+                all_phases[mem] = self.ongoing_playing_phases[mem]
+            else:
+                all_phases[mem].extend(self.ongoing_playing_phases[mem])
 
         for member in all_phases:
             ws = wb.create_sheet(self.musicbot.get_global_user(member).name)
