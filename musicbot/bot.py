@@ -4922,7 +4922,7 @@ class MusicBot(discord.Client):
         if online_logger is None:
             return Response("I'm not even spying here")
         online_logger.create_output()
-        await self.send_file(author, open("cache/last_survey_data.xlsx", "rb"), filename='%s-msgs.xlsx' % (server.name.replace(' ', '_')))
+        await self.send_file(author, open("cache/last_survey_data.xlsx", "rb"), filename='%s-survey.xlsx' % (server.name.replace(' ', '_')))
         return Response("There you go, fam", delete_after=10)
 
     @owner_only
