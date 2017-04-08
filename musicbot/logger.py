@@ -54,10 +54,18 @@ class OnlineLogger:
             return index_to_alphabet(ind - remainder) + alphabet[remainder].upper()
 
         wb = Workbook()
-        all_phases = {**self.action_phases, **
-                      self.ongoing_online_phases, **self.ongoing_playing_phases}
+        all_phases = {}
+        for mem in self.action_phases:
+            all_phases[mem] = all_phases.get(mem, []).extend(self.action_phases[mem]))
+        for mem in self.ongoing_online_phases:
+            all_phases[mem] = all_phases.get(mem, []).extend(self.ongoing_online_phases[mem]))
+        for mem in self.ongoing_playing_phases:
+            all_phases[mem] = all_phases.get(mem, []).extend(self.ongoing_playing_phases[mem]))
+
         for member in all_phases:
             ws = wb.create_sheet(self.musicbot.get_global_user(member).name)
+            for dimension in ws.column_dimensions.values():
+                dimension.auto_size = True
             index = 1
             for action in all_phases[member]:
                 ws["A{}".format(index)] = action.type_string
@@ -186,7 +194,7 @@ class PlayingPhase:
 
     @property
     def duration_string(self):
-        return format_time((self.end - self.start).total_seconds()) if self.end is not None else "Ongoing"
+        return format_time((self.end - self.start).total_seconds(), round_seconds=True, max_specifications=3) if self.end is not None else "Ongoing"
 
     @property
     def type_string(self):
@@ -222,7 +230,7 @@ class OnlinePhase:
 
     @property
     def duration_string(self):
-        return format_time((self.end - self.start).total_seconds()) if self.end is not None else "Ongoing"
+        return format_time((self.end - self.start).total_seconds(), round_seconds=True, max_specifications=3) if self.end is not None else "Ongoing"
 
     @property
     def type_string(self):
