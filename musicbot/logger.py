@@ -38,7 +38,6 @@ class OnlineLogger:
 
     def __init__(self, musicbot):
         self.member_data = ***REMOVED******REMOVED***
-        self.action_phases = ***REMOVED******REMOVED***
         self.ongoing_online_phases = ***REMOVED******REMOVED***
         self.ongoing_playing_phases = ***REMOVED******REMOVED***
         self.musicbot = musicbot
@@ -55,12 +54,12 @@ class OnlineLogger:
 
         wb = Workbook()
         all_phases = ***REMOVED******REMOVED***
-        for mem in self.action_phases:
-            phases = all_phases.get(mem, None)
-            if phases is None:
-                all_phases[mem] = self.action_phases[mem]
-            else:
-                all_phases[mem].extend(self.action_phases[mem])
+        # for mem in self.action_phases:
+        #     phases = all_phases.get(mem, None)
+        #     if phases is None:
+        #         all_phases[mem] = self.action_phases[mem]
+        #     else:
+        #         all_phases[mem].extend(self.action_phases[mem])
         for mem in self.ongoing_online_phases:
             phases = all_phases.get(mem, None)
             if phases is None:
@@ -79,7 +78,7 @@ class OnlineLogger:
             for dimension in ws.column_dimensions.values():
                 dimension.auto_size = True
             index = 1
-            for action in all_phases[member]:
+            for action in sorted(all_phases[member], key=lambda phase: phase.start):
                 ws["A***REMOVED******REMOVED***".format(index)] = action.type_string
                 ws["B***REMOVED******REMOVED***".format(index)] = action.detailed_string
                 ws["C***REMOVED******REMOVED***".format(index)] = action.start_string
@@ -108,7 +107,7 @@ class OnlineLogger:
             # went offline
             if last_online_phase is not None:
                 last_online_phase.set_end(datetime.now())
-                self.push_action_phase(user_id, last_online_phase)
+                # self.push_action_phase(user_id, last_online_phase)
             # print("  -went offline")
 
         if game_playing is not None and user_data.game_playing is None:
@@ -121,7 +120,7 @@ class OnlineLogger:
             # stopped playing
             if last_playing_phase is not None:
                 last_playing_phase.set_end(datetime.now())
-                self.push_action_phase(user_id, last_playing_phase)
+                # self.push_action_phase(user_id, last_playing_phase)
             # print("  -stopped playing " + game_playing.name)
 
         self.member_data[user_id] = MemberStaus(is_online, game_playing)
@@ -134,7 +133,7 @@ class OnlineLogger:
 
         return user_data
 
-    def push_action_phase(self, user_id, action_phase):
+    # def push_action_phase(self, user_id, action_phase):
         phases = self.action_phases.get(user_id, None)
         if phases is None:
             self.action_phases[user_id] = [action_phase, ]
