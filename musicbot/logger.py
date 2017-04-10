@@ -75,8 +75,6 @@ class OnlineLogger:
 
         for member in all_phases:
             ws = wb.create_sheet(self.musicbot.get_global_user(member).name)
-            for dimension in ws.column_dimensions.values():
-                dimension.auto_size = True
             index = 1
             for action in sorted(all_phases[member], key=lambda phase: phase.start):
                 ws["A***REMOVED******REMOVED***".format(index)] = action.type_string
@@ -85,6 +83,9 @@ class OnlineLogger:
                 ws["D***REMOVED******REMOVED***".format(index)] = action.end_string
                 ws["E***REMOVED******REMOVED***".format(index)] = action.duration_string
                 index += 1
+
+            for dimension in ws.column_dimensions.values():
+                dimension.auto_size = True
 
         wb.save("cache/last_survey_data.xlsx")
 
