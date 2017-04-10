@@ -206,7 +206,7 @@ class PlayingPhase:
 
     @property
     def duration_string(self):
-        return format_time((self.end - self.start).total_seconds(), round_seconds=True, max_specifications=3) if self.end is not None else "Ongoing"
+        return format_time(((self.end if self.end is not None else datetime.now()) - self.start).total_seconds(), round_seconds=True, max_specifications=3)
 
     @property
     def type_string(self):
@@ -242,7 +242,7 @@ class OnlinePhase:
 
     @property
     def duration_string(self):
-        return format_time((self.end - self.start).total_seconds(), round_seconds=True, max_specifications=3) if self.end is not None else "Ongoing"
+        return format_time(((self.end if self.end is not None else datetime.now()) - self.start).total_seconds(), round_seconds=True, max_specifications=3)
 
     @property
     def type_string(self):
