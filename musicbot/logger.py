@@ -89,7 +89,8 @@ class OnlineLogger:
         wb.save("cache/last_survey_data.xlsx")
 
     def reset(self):
-        self.action_phases = {}
+        self.ongoing_online_phases = {}
+        self.ongoing_playing_phases = {}
 
     def update_stats(self, user_id, is_online, game_playing):
         # print("looking at " + self.musicbot.get_global_user(user_id).name)
@@ -134,22 +135,22 @@ class OnlineLogger:
         return user_data
 
     # def push_action_phase(self, user_id, action_phase):
-        phases = self.action_phases.get(user_id, None)
-        if phases is None:
-            self.action_phases[user_id] = [action_phase, ]
-        else:
-            self.action_phases[user_id].append(action_phase)
-
-        try:
-            self.ongoing_online_phases[user_id].pop(action_phase)
-        except:
-            print("Couldn't remove action phase from ongoing phases")
-            return
-
-        try:
-            self.ongoing_playing_phases[user_id].pop(action_phase)
-        except:
-            print("Couldn't remove action phase from ongoing playing phases")
+        # phases = self.action_phases.get(user_id, None)
+        # if phases is None:
+        #     self.action_phases[user_id] = [action_phase, ]
+        # else:
+        #     self.action_phases[user_id].append(action_phase)
+        #
+        # try:
+        #     self.ongoing_online_phases[user_id].pop(action_phase)
+        # except:
+        #     print("Couldn't remove action phase from ongoing phases")
+        #     return
+        #
+        # try:
+        #     self.ongoing_playing_phases[user_id].pop(action_phase)
+        # except:
+        #     print("Couldn't remove action phase from ongoing playing phases")
 
     def push_ongoing_online_phase(self, user_id, phase):
         phases = self.ongoing_online_phases.get(user_id, None)
