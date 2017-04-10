@@ -3549,6 +3549,9 @@ class MusicBot(discord.Client):
         game_list = [{"name": x[2:], "handler": getattr(self, x, None), "description": getattr(
             self, x, None).__doc__.strip(' \t\n\r')} for x in all_games]
 
+        if message.mentions is not None and len(message.mentions) > 0:
+            author = message.mentions[0]
+
         if game is None:
             shuffle(game_list)
 
@@ -3677,7 +3680,7 @@ class MusicBot(discord.Client):
 
         tries = additional_args[0] if len(additional_args) > 0 else 10
 
-        word = re.sub('[^a-zA-Z]', '',
+        word = additional_args[1] if len(additional_args) > 1 else re.sub('[^a-zA-Z]', '',
                       random_line(ConfigDefaults.hangman_wordlist))
 
         alphabet = list("abcdefghijklmnopqrstuvwxyz")
