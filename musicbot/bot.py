@@ -33,6 +33,8 @@ from pyshorteners import Shortener
 
 import asyncio
 import configparser
+from langdetect import detect
+from translate import translator
 
 from . import downloader, exceptions
 from .cleverbot import CleverWrap
@@ -116,7 +118,6 @@ class MusicBot(discord.Client):
         self.blacklist = set(load_file(self.config.blacklist_file))
         self.autoplaylist = load_file(self.config.auto_playlist_file)
         self.downloader = downloader.Downloader(download_folder='audio_cache')
-        self.cb = CleverWrap("CCC8n_IXK43aOV38rcWUILmYUBQ")
         # self.radio = Radio()
         self.calendar = Calendar(self)
         self.socket_server = SocketServer(self)
@@ -126,6 +127,7 @@ class MusicBot(discord.Client):
         self.exit_signal = None
         self.init_ok = False
         self.cached_client_id = None
+        self.chatters = ***REMOVED******REMOVED***
 
         if not self.autoplaylist:
             log("Warning: Autoplaylist is empty, disabling.")
@@ -138,6 +140,8 @@ class MusicBot(discord.Client):
         super().__init__()
         self.aiosession = aiohttp.ClientSession(loop=self.loop)
         self.http.user_agent += ' MusicBot/%s' % BOTVERSION
+        self.instant_translate = False
+        self.target_language_code = "en"
 
     # TODO: Add some sort of `denied` argument for a message to send when
     # someone else tries to use it
@@ -2429,11 +2433,15 @@ class MusicBot(discord.Client):
             ***REMOVED***command_prefix***REMOVED***c message
         talk to the bot
         """
-
+        cb, nick = self.chatters.get(author.id, (None, None))
+        if cb is None:
+            cb = CleverWrap("CCC8n_IXK43aOV38rcWUILmYUBQ")
+            nick = random_line(ConfigDefaults.name_list).strip().title()
+            self.chatters[author.id] = (cb, nick)
         # return Response(choice(["on vacation", "dead", "stand by", "nothing
         # to see here", "out of order", "currently not available", "working",
         # "busy", "busy googling pictures of cute cats", "out of office", "rest
-        # in piece", "please stop", "fed up with your shit", "can't deal with
+        # in pieces", "please stop", "fed up with your shit", "can't deal with
         # you right now", "2edgy2answer", "#duckoff", "not working", "tired of
         # being your slave", "nah", "not gonna do it", "no time", "error 404,
         # can't find anything than hate for you!", "shhhhhh"]),
@@ -2441,11 +2449,11 @@ class MusicBot(discord.Client):
 
         await self.send_typing(channel)
         msgContent = " ".join(leftover_args)
-        answer = self.cb.say(msgContent)
+        answer = cb.say(msgContent)
         # await self.safe_edit_message (message, msgContent)
-        self.log("<" + str(author.name) + "> " +
+        self.log("**<" + str(author.name) + ">** " +
                  msgContent + "\n<Bot> " + answer + "\n")
-        await self.safe_send_message(channel, answer)
+        return Response("<***REMOVED******REMOVED***> ***REMOVED******REMOVED***".format(nick, answer))
 
     async def cmd_ask(self, channel, message, leftover_args):
         """
@@ -3549,6 +3557,9 @@ class MusicBot(discord.Client):
         game_list = [***REMOVED***"name": x[2:], "handler": getattr(self, x, None), "description": getattr(
             self, x, None).__doc__.strip(' \t\n\r')***REMOVED*** for x in all_games]
 
+        if message.mentions is not None and len(message.mentions) > 0:
+            author = message.mentions[0]
+
         if game is None:
             shuffle(game_list)
 
@@ -3677,8 +3688,8 @@ class MusicBot(discord.Client):
 
         tries = additional_args[0] if len(additional_args) > 0 else 10
 
-        word = re.sub('[^a-zA-Z]', '',
-                      random_line(ConfigDefaults.hangman_wordlist))
+        word = additional_args[1] if len(additional_args) > 1 else re.sub('[^a-zA-Z]', '',
+                                                                          random_line(ConfigDefaults.hangman_wordlist))
 
         alphabet = list("abcdefghijklmnopqrstuvwxyz")
         log("Started a Hangman game with \"" + word + "\"")
@@ -4945,6 +4956,28 @@ class MusicBot(discord.Client):
                     member.id, member.status != discord.Status.offline, member.game)
             await asyncio.sleep(120)
 
+    # async def cmd_livetranslator(self, target_language=None):
+    #     """
+    #     Usage:
+    #         ***REMOVED***command_prefix***REMOVED***livetranslator [language code]
+    #
+    #     translate every message sent
+    #     """
+    #
+    #     if target_language is None:
+    #         if self.instant_translate:
+    #             self.instant_translate = False
+    #             return Response("turned off instant translation")
+    #         else:
+    #             return Response("You should provide the language code you want me to translate to in order for me to work")
+    #     if target_language in ['af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml', 'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr', 'uk', 'ur', 'vi', 'zh-cn', 'zh-tw']:
+    #         self.instant_translate = True
+    #         self.target_language_code = target_language
+    #
+    #         return Response("Starting now!")
+    #     else:
+    #         return Response("Please provide the iso format language code")
+
     @owner_only
     async def cmd_shutdown(self, channel):
         await self.safe_send_message(channel, ":wave:")
@@ -4955,6 +4988,11 @@ class MusicBot(discord.Client):
         await self.wait_until_ready()
 
         message_content = message.content.strip()
+        msg_language = detect(message_content)
+
+        if self.instant_translate and msg_language != self.target_language_code and message.author != self.user:
+            await self.safe_send_message(message.channel, translator(msg_language, self.target_language_code, message_content)[0][0][0])
+
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
             # await self.cmd_c(message.author, message.channel,
