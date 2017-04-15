@@ -2440,7 +2440,7 @@ class MusicBot(discord.Client):
         # return Response(choice(["on vacation", "dead", "stand by", "nothing
         # to see here", "out of order", "currently not available", "working",
         # "busy", "busy googling pictures of cute cats", "out of office", "rest
-        # in piece", "please stop", "fed up with your shit", "can't deal with
+        # in pieces", "please stop", "fed up with your shit", "can't deal with
         # you right now", "2edgy2answer", "#duckoff", "not working", "tired of
         # being your slave", "nah", "not gonna do it", "no time", "error 404,
         # can't find anything than hate for you!", "shhhhhh"]),
