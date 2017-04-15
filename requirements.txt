@@ -13,3 +13,5 @@ newspaper3k
 pillow
 moviepy
 wikipedia
+langdetect
+py-translate
