@@ -232,6 +232,7 @@ class ConfigDefaults:
     # this will change when I add playlists it did change ;)
     auto_playlist_file = 'config/autoplaylist.txt'
     hangman_wordlist = "data/hangman_wordlist.txt"
+    name_list = "data/names.txt"
 
 # These two are going to be wrappers for the id lists, with add/remove/load/save functions
 # and id/object conversion so types aren't an issue

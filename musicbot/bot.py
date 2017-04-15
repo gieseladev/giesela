@@ -15,8 +15,6 @@ from functools import wraps
 from io import BytesIO
 from random import choice, shuffle
 from textwrap import dedent
-from langdetect import detect
-from translate import translator
 
 import aiohttp
 import discord
@@ -35,6 +33,8 @@ from pyshorteners import Shortener
 
 import asyncio
 import configparser
+from langdetect import detect
+from translate import translator
 
 from . import downloader, exceptions
 from .cleverbot import CleverWrap
@@ -2433,10 +2433,11 @@ class MusicBot(discord.Client):
             ***REMOVED***command_prefix***REMOVED***c message
         talk to the bot
         """
-        cb = self.chatters.get(author.id, None)
+        cb, nick = self.chatters.get(author.id, (None, None))
         if cb is None:
             cb = CleverWrap("CCC8n_IXK43aOV38rcWUILmYUBQ")
-            self.chatters[author.id] = cb
+            nick = random_line(ConfigDefaults.name_list).strip().title()
+            self.chatters[author.id] = (cb, nick)
         # return Response(choice(["on vacation", "dead", "stand by", "nothing
         # to see here", "out of order", "currently not available", "working",
         # "busy", "busy googling pictures of cute cats", "out of office", "rest
@@ -2450,9 +2451,9 @@ class MusicBot(discord.Client):
         msgContent = " ".join(leftover_args)
         answer = cb.say(msgContent)
         # await self.safe_edit_message (message, msgContent)
-        self.log("<" + str(author.name) + "> " +
+        self.log("**<" + str(author.name) + ">** " +
                  msgContent + "\n<Bot> " + answer + "\n")
-        await self.safe_send_message(channel, answer)
+        return Response("<***REMOVED******REMOVED***> ***REMOVED******REMOVED***".format(nick, answer))
 
     async def cmd_ask(self, channel, message, leftover_args):
         """
@@ -3688,7 +3689,7 @@ class MusicBot(discord.Client):
         tries = additional_args[0] if len(additional_args) > 0 else 10
 
         word = additional_args[1] if len(additional_args) > 1 else re.sub('[^a-zA-Z]', '',
-                      random_line(ConfigDefaults.hangman_wordlist))
+                                                                          random_line(ConfigDefaults.hangman_wordlist))
 
         alphabet = list("abcdefghijklmnopqrstuvwxyz")
         log("Started a Hangman game with \"" + word + "\"")
@@ -4977,7 +4978,6 @@ class MusicBot(discord.Client):
     #     else:
     #         return Response("Please provide the iso format language code")
 
-
     @owner_only
     async def cmd_shutdown(self, channel):
         await self.safe_send_message(channel, ":wave:")
@@ -4992,7 +4992,6 @@ class MusicBot(discord.Client):
 
         if self.instant_translate and msg_language != self.target_language_code and message.author != self.user:
             await self.safe_send_message(message.channel, translator(msg_language, self.target_language_code, message_content)[0][0][0])
-
 
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
