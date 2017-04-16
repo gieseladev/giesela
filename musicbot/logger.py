@@ -40,6 +40,8 @@ class OnlineLogger:
         self.member_data = {}
         self.ongoing_online_phases = {}
         self.ongoing_playing_phases = {}
+        self.listeners = []
+        self.notification = None
         self.musicbot = musicbot
 
     def create_output(self):
@@ -93,6 +95,14 @@ class OnlineLogger:
         self.ongoing_online_phases = {}
         self.ongoing_playing_phases = {}
 
+    def add_listener(self, member_id):
+        self.listeners.append(member_id)
+
+    def get_notification(self):
+        notification = self.notification
+        self.notification = None
+        return notification
+
     def update_stats(self, user_id, is_online, game_playing):
         # print("looking at " + self.musicbot.get_global_user(user_id).name)
         user_data = self.get_user_data(user_id)
@@ -116,6 +126,7 @@ class OnlineLogger:
             # started playing
             self.push_ongoing_playing_phase(
                 user_id, PlayingPhase(game_playing, datetime.now()))
+            self.notification = (game_playing.name, user_id, self.listeners)
             # print("  -started playing " + game_playing.name)
 
         if game_playing is None and user_data.game_playing is not None:

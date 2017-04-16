@@ -10,7 +10,7 @@ Tungsten
 goslate
 pyshorteners
 newspaper3k
-pillow
+pillow==4.0.0
 moviepy
 wikipedia
 langdetect
