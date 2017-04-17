@@ -94,6 +94,7 @@ class OnlineLogger:
     def reset(self):
         self.ongoing_online_phases = ***REMOVED******REMOVED***
         self.ongoing_playing_phases = ***REMOVED******REMOVED***
+        self.member_data = ***REMOVED******REMOVED***
 
     def add_listener(self, member_id):
         self.listeners.append(member_id)
