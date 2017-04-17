@@ -4959,7 +4959,8 @@ class MusicBot(discord.Client):
                 if notification is not None:
                     game_name, user_id, receiver_ids = notification
                     user_name = self.get_global_user(user_id).name
-                    message_text = "{} started playing {}".format(user_name, game_name)
+                    message_text = "{} started playing {}".format(
+                        user_name, game_name)
                     for recv in receiver_ids:
                         if recv == user_id:
                             continue
@@ -4980,8 +4981,6 @@ class MusicBot(discord.Client):
             return Response("I'm not even spying here")
         online_logger.add_listener(author.id)
         return Response("Got'cha!")
-
-
 
     # async def cmd_livetranslator(self, target_language=None):
     #     """
