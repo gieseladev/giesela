@@ -1,8 +1,9 @@
-import colorsys
 import random
 from math import log2, pow, sqrt
 
 from PIL import Image, ImageDraw, ImageSequence
+
+import colorsys
 
 
 class Game2048:
@@ -125,7 +126,8 @@ class Game2048:
                 r_grid.append(r)
         except:
             new_size = 5
-            r_grid = [[Tile() for i in range(new_size)] for j in range(new_size)]
+            r_grid = [[Tile() for i in range(new_size)]
+                      for j in range(new_size)]
 
         return r_grid, new_size
 
