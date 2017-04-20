@@ -1999,8 +1999,12 @@ class MusicBot(discord.Client):
             return Response("Current volume: {}%\n{}".format(int(player.volume * 100), "".join(["■" if (x / bar_len) < player.volume else "□" for x in range(bar_len)])), reply=True, delete_after=20)
 
         relative = False
+        special_operation = None
         if new_volume[0] in '+-':
             relative = True
+        if new_volume[0] in '*/%':
+            special_operation = new_volume[0]
+            new_volume = new_volume[1:]
 
         try:
             new_volume = int(new_volume)
@@ -2012,6 +2016,12 @@ class MusicBot(discord.Client):
         if relative:
             vol_change = new_volume
             new_volume += (player.volume * 100)
+
+        if special_operation is not None:
+            operations = {"*": lambda x, y: x * y, "/": lambda x,
+                          y: x / y, "%": lambda x, y: x % y, }
+            op = operations[special_operation]
+            new_volume = op(player.volume * 100, new_volume)
 
         old_volume = int(player.volume * 100)
 

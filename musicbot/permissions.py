@@ -1,8 +1,9 @@
-import configparser
 import shutil
 import traceback
 
 from discord import User as discord_User
+
+import configparser
 
 
 class PermissionsDefaults:
