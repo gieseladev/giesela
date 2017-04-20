@@ -3652,7 +3652,7 @@ class MusicBot(discord.Client):
                         turn_information = "| *replay has been sent*"
 
                     if str(reaction.emoji) == "💾" and reaction.count > 1:
-                        await self.safe_send_message(user, "The save code is: *{0}*\nUse `{1}game 2048 {0}` to continue your current game".format(escape_dis(game.get_save()), self.config.command_prefix))
+                        await self.safe_send_message(user, "The save code is: *{0}*\nUse `{1}game 2048 {2}` to continue your current game".format(escape_dis(game.get_save()), self.config.command_prefix, game.get_save()))
                         turn_information = "| *save code has been sent*"
 
                     if str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") and reaction.count > 1:
@@ -3664,7 +3664,7 @@ class MusicBot(discord.Client):
 
                 if direction is None:
                     await self.safe_delete_message(msg)
-                    turn_information = "| *You didn't specifiy the direction*"
+                    turn_information = "| *You didn't specifiy the direction*" if turn_information is not "" else turn_information
 
             # self.log ("Chose the direction " + str (direction))
             game.move(direction)
@@ -4955,6 +4955,7 @@ class MusicBot(discord.Client):
             for member in server.members:
                 online_logger.update_stats(
                     member.id, member.status != discord.Status.offline, member.game)
+                await asyncio.sleep(1)
                 notification = online_logger.get_notification()
                 if notification is not None:
                     game_name, user_id, receiver_ids = notification
@@ -4967,7 +4968,7 @@ class MusicBot(discord.Client):
 
                         await self.safe_send_message(self.get_global_user(recv), message_text)
 
-            await asyncio.sleep(120)
+            await asyncio.sleep(65)
 
     async def cmd_notifyme(self, server, author):
         """
