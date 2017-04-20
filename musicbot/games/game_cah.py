@@ -1,5 +1,3 @@
-import asyncio
-import configparser
 import json
 import random
 import re
@@ -7,6 +5,8 @@ import threading
 from datetime import datetime
 from functools import partial
 
+import asyncio
+import configparser
 from musicbot.config import ConfigDefaults
 from musicbot.utils import prettydate
 

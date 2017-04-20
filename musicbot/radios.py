@@ -1,8 +1,9 @@
-import configparser
 import os
 import shutil
 import traceback
 from random import choice
+
+import configparser
 
 from .exceptions import HelpfulError
 

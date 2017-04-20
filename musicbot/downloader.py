@@ -1,9 +1,10 @@
-import asyncio
 import functools
 import os
-from concurrent.futures import ThreadPoolExecutor
 
 import youtube_dl
+
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 
 ytdl_format_options = ***REMOVED***
     'format': 'bestaudio/best',
