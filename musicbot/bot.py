@@ -5035,19 +5035,19 @@ class MusicBot(discord.Client):
 
         message_content = message.content.strip()
 
-        try:
-            msg_language = detect(message_content)
-
-            if self.instant_translate and msg_language != self.translator.to_lang and message.author != self.user:
-                self.translator.from_lang = msg_language
-                await self.safe_send_message(message.channel, "Translation: `***REMOVED******REMOVED***`".format(self.translator.translate(message_content)))
-        except:
-            print("couldn't translate the message")
-
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
             # await self.cmd_c(message.author, message.channel,
             # message_content.split())
+            try:
+                msg_language = detect(message_content)
+
+                if self.instant_translate and msg_language != self.translator.to_lang and message.author != self.user:
+                    self.translator.from_lang = msg_language
+                    await self.safe_send_message(message.channel, "Translation: `***REMOVED******REMOVED***`".format(self.translator.translate(message_content)))
+            except:
+                print("couldn't translate the message")
+
             return
 
         if message.author == self.user:
