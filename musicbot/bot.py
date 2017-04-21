@@ -27,11 +27,9 @@ from discord.enums import ChannelType
 from discord.ext.commands.bot import _get_variable
 from discord.object import Object
 from discord.voice_client import VoiceClient
-from langdetect import detect
 from moviepy import editor, video
 from openpyxl import Workbook
 from pyshorteners import Shortener
-from translate import translator
 
 import asyncio
 import configparser
@@ -2432,7 +2430,7 @@ class MusicBot(discord.Client):
     async def cmd_say(self, channel, message, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***say message
+            ***REMOVED***command_prefix***REMOVED***say <message>
         Make the bot say something
         """
 
@@ -2470,7 +2468,7 @@ class MusicBot(discord.Client):
 
         while True:
             answer = cb.say(msgContent)
-            base_answer = re.sub("[^A-Z|a-z| ]+|\s***REMOVED***2,***REMOVED***", "", answer)
+            base_answer = re.sub("[^a-z| ]+|\s***REMOVED***2,***REMOVED***", "", answer.lower())
             if base_answer not in "whats your name".split(";") and not any(q in base_answer for q in "whats your name".split(";")):
                 break
         # await self.safe_edit_message (message, msgContent)
@@ -2481,7 +2479,7 @@ class MusicBot(discord.Client):
     async def cmd_ask(self, channel, message, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***ask question
+            ***REMOVED***command_prefix***REMOVED***ask <question>
         ask something
         """
 
@@ -2502,7 +2500,7 @@ class MusicBot(discord.Client):
     async def cmd_translate(self, channel, message, targetLanguage, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***translate targetLanguage message
+            ***REMOVED***command_prefix***REMOVED***translate <targetLanguage> <message>
         translate something from any language to the target language
         """
 
@@ -2512,25 +2510,22 @@ class MusicBot(discord.Client):
         languages = gs.get_languages()
 
         if len(targetLanguage) == 2 and (targetLanguage not in list(languages.keys())):
-            await self.safe_send_message(channel, "I don't know this language")
-            return
+            return Response("I don't know this language")
 
         if len(targetLanguage) > 2:
             if targetLanguage.title() in list(languages.values()):
                 targetLanguage = list(languages.keys())[list(
                     languages.values()).index(targetLanguage.title())]
             else:
-                await self.safe_send_message(channel, "I don't know this language")
-                return
+                return Response("I don't know this language")
 
         if len(leftover_args) < 1:
-            await self.safe_send_message(channel, "Nothing to translate...")
-            return
+            return Response("There's nothing to translate")
 
         msgContent = " ".join(leftover_args)
         # await self.safe_send_message (channel, msgContent)
         # await self.safe_send_message (channel, targetLanguage)
-        await self.safe_send_message(channel, gs.translate(msgContent, targetLanguage))
+        return Response(gs.translate(msgContent, targetLanguage))
 
     async def cmd_goto(self, server, channel, user_mentions, author, leftover_args):
         """
