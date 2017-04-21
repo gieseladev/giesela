@@ -5038,7 +5038,7 @@ class MusicBot(discord.Client):
 
         if self.instant_translate and msg_language != self.translator.to_lang and message.author != self.user:
             self.translator.from_lang = msg_language
-            await self.safe_send_message(message.channel, self.translator.translate(message_content))
+            await self.safe_send_message(message.channel, "*Translation:* `{}`".format(self.translator.translate(message_content)))
 
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
