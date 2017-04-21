@@ -82,7 +82,8 @@ def parse_query(query):
     index = query.lower().find(" and ")
     query = query[:index if index > 3 else len(query)]
 
-    index = query.lower().find(" ft ") if query.lower().find(" ft ") > 0 else query.lower().find(" ft.")
+    index = query.lower().find(" ft ") if query.lower().find(
+        " ft ") > 0 else query.lower().find(" ft.")
     dash = query.find("-")
     if dash == -1 and index > 0:
         query = query[index + 1 if index > 0 else 0:]
