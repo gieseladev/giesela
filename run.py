@@ -1,14 +1,15 @@
 from __future__ import print_function
 
-import os
 import gc
+import os
+import subprocess
 import sys
 import time
 import traceback
-import subprocess
 
 
 class GIT(object):
+
     @classmethod
     def works(cls):
         try:
@@ -18,6 +19,7 @@ class GIT(object):
 
 
 class PIP(object):
+
     @classmethod
     def run(cls, command, check_output=False):
         if not cls.works():
@@ -104,12 +106,14 @@ class PIP(object):
 
 def main():
     if not sys.version_info >= (3, 5):
-        print("Python 3.5+ is required. This version is %s" % sys.version.split()[0])
+        print("Python 3.5+ is required. This version is %s" %
+              sys.version.split()[0])
         print("Attempting to locate python 3.5...")
 
         pycom = None
 
-        # Maybe I should check for if the current dir is the musicbot folder, just in case
+        # Maybe I should check for if the current dir is the musicbot folder,
+        # just in case
 
         if sys.platform.startswith('win'):
             try:
@@ -130,7 +134,8 @@ def main():
 
         else:
             try:
-                pycom = subprocess.check_output(['which', 'python3.5']).strip().decode()
+                pycom = subprocess.check_output(
+                    ['which', 'python3.5']).strip().decode()
             except:
                 pass
 
@@ -155,7 +160,8 @@ def main():
 
     while tryagain:
         # Maybe I need to try to import stuff first, then actually import stuff
-        # It'd save me a lot of pain with all that awful exception type checking
+        # It'd save me a lot of pain with all that awful exception type
+        # checking
 
         m = None
         try:
@@ -194,10 +200,10 @@ def main():
             if hasattr(e, '__module__') and e.__module__ == 'musicbot.exceptions':
                 if e.__class__.__name__ == 'HelpfulError':
                     print(e.message)
-                    #break
+                    # break
 
-                #elif e.__class__.__name__ == "TerminateSignal":
-                    #break
+                # elif e.__class__.__name__ == "TerminateSignal":
+                    # break
 
                 elif e.__class__.__name__ == "RestartSignal":
                     loops = -1
@@ -205,8 +211,8 @@ def main():
                 traceback.print_exc()
 
         finally:
-            #if not m or not m.init_ok:
-                #break
+            # if not m or not m.init_ok:
+                # break
 
             asyncio.set_event_loop(asyncio.new_event_loop())
             loops += 1
@@ -217,7 +223,7 @@ def main():
 
         sleeptime = min(loops * 2, max_wait_time)
         if sleeptime:
-            print("Restarting in ***REMOVED******REMOVED*** seconds...".format(loops*2))
+            print("Restarting in ***REMOVED******REMOVED*** seconds...".format(loops * 2))
             time.sleep(sleeptime)
 
 
