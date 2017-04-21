@@ -2459,11 +2459,16 @@ class MusicBot(discord.Client):
 
         await self.send_typing(channel)
         msgContent = " ".join(leftover_args)
-        answer = cb.say(msgContent)
+
+        while True:
+            answer = cb.say(msgContent)
+            base_answer = re.sub("[^A-Z|a-z| ]+|\s***REMOVED***2,***REMOVED***", "", answer)
+            if base_answer not in "whats your name".split(";") and not any(q in base_answer for q in "whats your name".split(";")):
+                break
         # await self.safe_edit_message (message, msgContent)
         self.log("<" + str(author.name) + "> " +
                  msgContent + "\n<Bot> " + answer + "\n")
-        await self.safe_send_message(channel, answer)
+        return Response(answer)
 
     async def cmd_ask(self, channel, message, leftover_args):
         """
