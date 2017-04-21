@@ -56,6 +56,7 @@ from .random_sets import RandomSets
 from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .socket_server import SocketServer
+from .translate import Translator
 from .utils import (escape_dis, format_time, load_file, paginate, prettydate,
                     random_line, sane_round_int, write_file)
 
@@ -123,6 +124,7 @@ class MusicBot(discord.Client):
         self.socket_server = SocketServer(self)
         self.shortener = Shortener(
             "Google", api_key="AIzaSyCU67YMHlfTU_PX2ngHeLd-_dUds-m502k")
+        self.translator = Translator("en")
 
         self.exit_signal = None
         self.init_ok = False
@@ -141,7 +143,6 @@ class MusicBot(discord.Client):
         self.aiosession = aiohttp.ClientSession(loop=self.loop)
         self.http.user_agent += ' MusicBot/%s' % BOTVERSION
         self.instant_translate = False
-        self.target_language_code = "en"
 
     # TODO: Add some sort of `denied` argument for a message to send when
     # someone else tries to use it
@@ -2440,9 +2441,13 @@ class MusicBot(discord.Client):
     async def cmd_c(self, author, channel, leftover_args):
         """
         Usage:
-            {command_prefix}c message
-        talk to the bot
+            {command_prefix}c <message>
+
+        have a chat
         """
+        if len(leftover_args) < 1:
+            return Response("You need to actually say something...")
+
         cb, nick = self.chatters.get(author.id, (None, None))
         if cb is None:
             cb = CleverWrap("CCC8n_IXK43aOV38rcWUILmYUBQ")
@@ -4997,27 +5002,27 @@ class MusicBot(discord.Client):
         online_logger.add_listener(author.id)
         return Response("Got'cha!")
 
-    # async def cmd_livetranslator(self, target_language=None):
-    #     """
-    #     Usage:
-    #         {command_prefix}livetranslator [language code]
-    #
-    #     translate every message sent
-    #     """
-    #
-    #     if target_language is None:
-    #         if self.instant_translate:
-    #             self.instant_translate = False
-    #             return Response("turned off instant translation")
-    #         else:
-    #             return Response("You should provide the language code you want me to translate to in order for me to work")
-    #     if target_language in ['af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml', 'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr', 'uk', 'ur', 'vi', 'zh-cn', 'zh-tw']:
-    #         self.instant_translate = True
-    #         self.target_language_code = target_language
-    #
-    #         return Response("Starting now!")
-    #     else:
-    #         return Response("Please provide the iso format language code")
+    async def cmd_livetranslator(self, target_language=None):
+        """
+        Usage:
+            {command_prefix}livetranslator [language code]
+
+        translate every message sent
+        """
+
+        if target_language is None:
+            if self.instant_translate:
+                self.instant_translate = False
+                return Response("turned off instant translation")
+            else:
+                return Response("You should provide the language code you want me to translate to in order for me to work")
+        if target_language in ['af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml', 'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr', 'uk', 'ur', 'vi', 'zh-cn', 'zh-tw']:
+            self.instant_translate = True
+            self.translator.to_lang = target_language
+
+            return Response("Starting now!")
+        else:
+            return Response("Please provide the iso format language code")
 
     @owner_only
     async def cmd_shutdown(self, channel):
@@ -5031,8 +5036,9 @@ class MusicBot(discord.Client):
         message_content = message.content.strip()
         msg_language = detect(message_content)
 
-        if self.instant_translate and msg_language != self.target_language_code and message.author != self.user:
-            await self.safe_send_message(message.channel, translator(msg_language, self.target_language_code, message_content)[0][0][0])
+        if self.instant_translate and msg_language != self.translator.to_lang and message.author != self.user:
+            self.translator.from_lang = msg_language
+            await self.safe_send_message(message.channel, self.translator.translate(message_content))
 
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
