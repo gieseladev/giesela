@@ -44,7 +44,7 @@ from .constants import AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT
 from .games.game_2048 import Game2048
 from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
-from .langid import classify
+from .langid import LanguageIdentifier, model
 from .logger import OnlineLogger, log
 from .nine_gag import *
 from .opus_loader import load_opus_lib
@@ -126,6 +126,8 @@ class MusicBot(discord.Client):
         self.shortener = Shortener(
             "Google", api_key="AIzaSyCU67YMHlfTU_PX2ngHeLd-_dUds-m502k")
         self.translator = Translator("en")
+        self.lang_identifier = LanguageIdentifier.from_modelstring(
+            model, norm_probs=True)
 
         self.exit_signal = None
         self.init_ok = False
@@ -5041,7 +5043,8 @@ class MusicBot(discord.Client):
             # await self.cmd_c(message.author, message.channel,
             # message_content.split())
             try:
-                msg_language, probability = classify(message_content)
+                msg_language, probability = self.lang_identifier.classify(
+                    message_content)
 
                 if probability > .7 and self.instant_translate and msg_language != self.translator.to_lang and message.author != self.user:
                     self.translator.from_lang = msg_language
