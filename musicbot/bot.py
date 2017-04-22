@@ -22,7 +22,7 @@ import goslate
 import newspaper
 import tungsten
 import wikipedia
-from discord import utils
+from discord import Embed, utils
 from discord.enums import ChannelType
 from discord.ext.commands.bot import _get_variable
 from discord.object import Object
@@ -144,6 +144,7 @@ class MusicBot(discord.Client):
         self.aiosession = aiohttp.ClientSession(loop=self.loop)
         self.http.user_agent += ' MusicBot/%s' % BOTVERSION
         self.instant_translate = False
+        self.instant_translate_mode = 1
 
     # TODO: Add some sort of `denied` argument for a message to send when
     # someone else tries to use it
@@ -2491,8 +2492,17 @@ class MusicBot(discord.Client):
             await self.safe_send_message(channel, "Couldn't find anything useful on that subject, sorry.\n**I'm now including Wikipedia!**", expire_in=15)
             self.log("Didn't find an answer to: " + msgContent)
             return await self.cmd_wiki(channel, message, ["en", "summarize", "5", msgContent])
+
+        col = choice([9699539, 4915330, 255, 65280,
+                      16776960, 16744192, 16711680])
         for pod in res.pods:
-            await self.safe_send_message(channel, " ".join(["**" + pod.title + "**", self.shortener.short(pod.format["img"][0]["url"])]), expire_in=100)
+            em = Embed(title=pod.title, colour=col)
+            em.set_image(url=pod.format["img"][0]["url"])
+            em.set_footer(text=pod.format["img"][0]["alt"])
+            await self.send_message(channel, embed=em)
+        # return
+
+        # await self.safe_send_message(channel, "\n".join(["*****REMOVED******REMOVED***** ***REMOVED******REMOVED***".format(pod.title, self.shortener.short(pod.format["img"][0]["url"])) for pod in res.pods]), expire_in=100)
         # await self.safe_send_message(channel, answer)
         self.log("Answered " + message.author.name +
                  "'s question with: " + msgContent)
@@ -5000,12 +5010,16 @@ class MusicBot(discord.Client):
         online_logger.add_listener(author.id)
         return Response("Got'cha!")
 
-    async def cmd_livetranslator(self, target_language=None):
+    async def cmd_livetranslator(self, target_language=None, mode="1"):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***livetranslator [language code]
+            ***REMOVED***command_prefix***REMOVED***livetranslator [language code] [mode]
 
         translate every message sent
+
+        modes:
+            1: send a message with the translation
+            2: replace the original message with the translation
         """
 
         if target_language is None:
@@ -5017,6 +5031,13 @@ class MusicBot(discord.Client):
         if target_language in ['af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml', 'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr', 'uk', 'ur', 'vi', 'zh-cn', 'zh-tw']:
             self.instant_translate = True
             self.translator.to_lang = target_language
+            try:
+                mode = int(mode)
+            except:
+                mode = 1
+            if not (0 <= mode <= 2):
+                mode = 1
+            self.instant_translate_mode = mode
 
             return Response("Starting now!")
         else:
@@ -5043,8 +5064,20 @@ class MusicBot(discord.Client):
 
                 if probability > .7 and self.instant_translate and msg_language != self.translator.to_lang and message.author != self.user:
                     self.translator.from_lang = msg_language
-                    await self.safe_send_message(message.channel, "Translation: `***REMOVED******REMOVED***`".format(self.translator.translate(message_content)))
+                    if self.instant_translate_mode == 1:
+                        await self.safe_send_message(message.channel, "Translation: `***REMOVED******REMOVED***`".format(self.translator.translate(message_content)))
+                    elif self.instant_translate_mode == 2:
+                        em = Embed(colour=message.author.colour)
+                        em.set_author(name=message.author.display_name,
+                                      icon_url=message.author.avatar_url)
+                        em.add_field(
+                            value=self.translator.translate(message_content), name="Translated")
+                        # em.set_footer(text=message.content)
+                        await self.send_message(message.channel, embed=em)
+                        await self.safe_delete_message(message)
+                        return
             except:
+                raise
                 print("couldn't translate the message")
 
             return
