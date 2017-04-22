@@ -22,16 +22,14 @@ import goslate
 import newspaper
 import tungsten
 import wikipedia
-from discord import utils
+from discord import Embed, utils
 from discord.enums import ChannelType
 from discord.ext.commands.bot import _get_variable
 from discord.object import Object
 from discord.voice_client import VoiceClient
-from langdetect import detect
 from moviepy import editor, video
 from openpyxl import Workbook
 from pyshorteners import Shortener
-from translate import translator
 
 import asyncio
 import configparser
@@ -146,6 +144,7 @@ class MusicBot(discord.Client):
         self.aiosession = aiohttp.ClientSession(loop=self.loop)
         self.http.user_agent += ' MusicBot/%s' % BOTVERSION
         self.instant_translate = False
+        self.instant_translate_mode = 1
 
     # TODO: Add some sort of `denied` argument for a message to send when
     # someone else tries to use it
@@ -2432,7 +2431,7 @@ class MusicBot(discord.Client):
     async def cmd_say(self, channel, message, leftover_args):
         """
         Usage:
-            {command_prefix}say message
+            {command_prefix}say <message>
         Make the bot say something
         """
 
@@ -2470,7 +2469,7 @@ class MusicBot(discord.Client):
 
         while True:
             answer = cb.say(msgContent)
-            base_answer = re.sub("[^A-Z|a-z| ]+|\s{2,}", "", answer)
+            base_answer = re.sub("[^a-z| ]+|\s{2,}", "", answer.lower())
             if base_answer not in "whats your name".split(";") and not any(q in base_answer for q in "whats your name".split(";")):
                 break
         # await self.safe_edit_message (message, msgContent)
@@ -2481,7 +2480,7 @@ class MusicBot(discord.Client):
     async def cmd_ask(self, channel, message, leftover_args):
         """
         Usage:
-            {command_prefix}ask question
+            {command_prefix}ask <question>
         ask something
         """
 
@@ -2493,8 +2492,17 @@ class MusicBot(discord.Client):
             await self.safe_send_message(channel, "Couldn't find anything useful on that subject, sorry.\n**I'm now including Wikipedia!**", expire_in=15)
             self.log("Didn't find an answer to: " + msgContent)
             return await self.cmd_wiki(channel, message, ["en", "summarize", "5", msgContent])
+
+        col = choice([9699539, 4915330, 255, 65280,
+                      16776960, 16744192, 16711680])
         for pod in res.pods:
-            await self.safe_send_message(channel, " ".join(["**" + pod.title + "**", self.shortener.short(pod.format["img"][0]["url"])]), expire_in=100)
+            em = Embed(title=pod.title, colour=col)
+            em.set_image(url=pod.format["img"][0]["url"])
+            em.set_footer(text=pod.format["img"][0]["alt"])
+            await self.send_message(channel, embed=em)
+        # return
+
+        # await self.safe_send_message(channel, "\n".join(["**{}** {}".format(pod.title, self.shortener.short(pod.format["img"][0]["url"])) for pod in res.pods]), expire_in=100)
         # await self.safe_send_message(channel, answer)
         self.log("Answered " + message.author.name +
                  "'s question with: " + msgContent)
@@ -2502,7 +2510,7 @@ class MusicBot(discord.Client):
     async def cmd_translate(self, channel, message, targetLanguage, leftover_args):
         """
         Usage:
-            {command_prefix}translate targetLanguage message
+            {command_prefix}translate <targetLanguage> <message>
         translate something from any language to the target language
         """
 
@@ -2512,25 +2520,22 @@ class MusicBot(discord.Client):
         languages = gs.get_languages()
 
         if len(targetLanguage) == 2 and (targetLanguage not in list(languages.keys())):
-            await self.safe_send_message(channel, "I don't know this language")
-            return
+            return Response("I don't know this language")
 
         if len(targetLanguage) > 2:
             if targetLanguage.title() in list(languages.values()):
                 targetLanguage = list(languages.keys())[list(
                     languages.values()).index(targetLanguage.title())]
             else:
-                await self.safe_send_message(channel, "I don't know this language")
-                return
+                return Response("I don't know this language")
 
         if len(leftover_args) < 1:
-            await self.safe_send_message(channel, "Nothing to translate...")
-            return
+            return Response("There's nothing to translate")
 
         msgContent = " ".join(leftover_args)
         # await self.safe_send_message (channel, msgContent)
         # await self.safe_send_message (channel, targetLanguage)
-        await self.safe_send_message(channel, gs.translate(msgContent, targetLanguage))
+        return Response(gs.translate(msgContent, targetLanguage))
 
     async def cmd_goto(self, server, channel, user_mentions, author, leftover_args):
         """
@@ -5005,12 +5010,16 @@ class MusicBot(discord.Client):
         online_logger.add_listener(author.id)
         return Response("Got'cha!")
 
-    async def cmd_livetranslator(self, target_language=None):
+    async def cmd_livetranslator(self, target_language=None, mode="1"):
         """
         Usage:
-            {command_prefix}livetranslator [language code]
+            {command_prefix}livetranslator [language code] [mode]
 
         translate every message sent
+
+        modes:
+            1: send a message with the translation
+            2: replace the original message with the translation
         """
 
         if target_language is None:
@@ -5022,6 +5031,13 @@ class MusicBot(discord.Client):
         if target_language in ['af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml', 'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr', 'uk', 'ur', 'vi', 'zh-cn', 'zh-tw']:
             self.instant_translate = True
             self.translator.to_lang = target_language
+            try:
+                mode = int(mode)
+            except:
+                mode = 1
+            if not (0 <= mode <= 2):
+                mode = 1
+            self.instant_translate_mode = mode
 
             return Response("Starting now!")
         else:
@@ -5048,8 +5064,20 @@ class MusicBot(discord.Client):
 
                 if probability > .7 and self.instant_translate and msg_language != self.translator.to_lang and message.author != self.user:
                     self.translator.from_lang = msg_language
-                    await self.safe_send_message(message.channel, "Translation: `{}`".format(self.translator.translate(message_content)))
+                    if self.instant_translate_mode == 1:
+                        await self.safe_send_message(message.channel, "Translation: `{}`".format(self.translator.translate(message_content)))
+                    elif self.instant_translate_mode == 2:
+                        em = Embed(colour=message.author.colour)
+                        em.set_author(name=message.author.display_name,
+                                      icon_url=message.author.avatar_url)
+                        em.add_field(
+                            value=self.translator.translate(message_content), name="Translated")
+                        # em.set_footer(text=message.content)
+                        await self.send_message(message.channel, embed=em)
+                        await self.safe_delete_message(message)
+                        return
             except:
+                raise
                 print("couldn't translate the message")
 
             return
