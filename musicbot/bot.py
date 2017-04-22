@@ -4981,14 +4981,14 @@ class MusicBot(discord.Client):
         while True:
             for member in server.members:
                 online_logger.update_stats(
-                    member.id, member.status != discord.Status.offline, member.game)
+                    member.id, member.status == discord.Status.online, member.game)
                 await asyncio.sleep(1)
                 notification = online_logger.get_notification()
                 if notification is not None:
                     game_name, user_id, receiver_ids = notification
                     user_name = self.get_global_user(user_id).name
-                    message_text = "***REMOVED******REMOVED*** started playing ***REMOVED******REMOVED***".format(
-                        user_name, game_name)
+                    message_text = "***REMOVED******REMOVED*** started playing ***REMOVED******REMOVED*** at ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(
+                        user_name, game_name, datetime.now())
                     for recv in receiver_ids:
                         if recv == user_id:
                             continue
