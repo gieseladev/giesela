@@ -2509,7 +2509,7 @@ class MusicBot(discord.Client):
                       16776960, 16744192, 16711680])
 
         if msgContent.lower() == "simon berger" or msgContent.lower() == "simon jonas berger":
-            conv = "okay...|7;;so you've finally figured out that you could just ask Giesela...|3;;great.|1;;well uh...|6;;I programmed this in exactly for this reason...|2;;good on you!|4"
+            conv = "okay...|5.5;;so you've finally figured out that you could just ask Giesela...|3;;great.|1;;well uh...|6;;I programmed this in exactly for this reason...|2;;good on you!|4"
             prev_msg = None
             for part in conv.split(";;"):
                 # if prev_msg is not None:
@@ -2519,13 +2519,14 @@ class MusicBot(discord.Client):
                 await self.send_typing(channel)
                 await asyncio.sleep(float(delay))
 
-            simon_info = "Input Interpretation\;"
+            simon_info = "Input Interpretation\;https://github.com/siku2/MusicBot/blob/master/data/pictures/custom%20ask/simon%20berger/simon_berger_input_interpretation.png\;Simon Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;https://github.com/siku2/MusicBot/blob/master/data/pictures/custom%20ask/simon%20berger/simon_berger_basic_information.png\;full name | Simon Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;https://github.com/siku2/MusicBot/blob/master/data/pictures/custom%20ask/simon%20berger/simon_berger_image.png\;\nPhysical Characteristics\;https://github.com/siku2/MusicBot/blob/master/data/pictures/custom%20ask/simon%20berger/simon_berger_physical_characteristics.png\;height | 6\' 01\'\'"
             for pod in simon_info.split("\n"):
                 title, img, foot = pod.split("\;")
                 em = Embed(title=title, colour=col)
-                em.set_image(url=pod.format["img"][0]["url"])
-                em.set_footer(text=pod.format["img"][0]["alt"])
+                em.set_image(url=img)
+                em.set_footer(text=foot)
                 await self.send_message(channel, embed=em)
+            return
 
         client = tungsten.Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
