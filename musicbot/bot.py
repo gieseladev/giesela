@@ -894,12 +894,11 @@ class MusicBot(discord.Client):
 
     async def cmd_help(self, channel, leftover_args):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***help [command]
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***help [command]`
 
-        logs a help message.
-        If a command is specified, it logs a help message for that command.
-        Otherwise, it lists the available commands.
+        ///|Explanation
+        Logs a help message.
         """
         command = None
 
@@ -909,13 +908,33 @@ class MusicBot(discord.Client):
         if command:
             cmd = getattr(self, 'cmd_' + command, None)
             if cmd:
-                return Response(
-                    "```\n***REMOVED******REMOVED***```".format(
-                        dedent(cmd.__doc__).format(
-                            command_prefix=self.config.command_prefix)
-                    ),
-                    delete_after=60
-                )
+                documentation = cmd.__doc__.format(
+                    command_prefix=self.config.command_prefix)
+                em = Embed(title="*****REMOVED******REMOVED*****".format(command.upper()))
+                fields = documentation.split("///")
+                if len(fields) < 1:  # backward compatibility
+                    return Response("```\n***REMOVED******REMOVED***```".format(dedent(cmd.__doc__).format(command_prefix=self.config.command_prefix)), delete_after=60)
+
+                for field in fields:
+                    if field is None or field is "":
+                        continue
+                    inline = True
+                    if field.startswith("(NL)"):
+                        inline = False
+                        field = field[4:]
+                        # print(field)
+
+                    match = re.match("\|(.+)\n((?:.|\n)+)", field)
+                    if match is None:
+                        continue
+                    title, text = match.group(1, 2)
+
+                    em.add_field(name="*****REMOVED******REMOVED*****".format(title),
+                                 value=text, inline=inline)
+                await self.send_message(channel, embed=em)
+                return
+                # return
+                # Response("```\n***REMOVED******REMOVED***```".format(dedent(cmd.__doc__).format(command_prefix=self.config.command_prefix)),delete_after=60)
             else:
                 # return Response("No such command", delete_after=10)
                 self.log("Didn't find a command like that")
@@ -971,11 +990,10 @@ class MusicBot(discord.Client):
 
     async def cmd_blacklist(self, message, user_mentions, option, something):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***blacklist [ + | - | add | remove ] @UserName [@UserName2 ...]
-
+        ///|Usage
+        ***REMOVED***command_prefix***REMOVED***blacklist [ + | - | add | remove ] @UserName [@UserName2 ...]
+        ///|Explanation
         Add or remove users to the blacklist.
-        Blacklisted users are forbidden from using bot commands.
         """
 
         if not user_mentions:
@@ -1021,9 +1039,9 @@ class MusicBot(discord.Client):
 
     async def cmd_id(self, author, user_mentions):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***id [@user]
-
+        ///|Usage
+        ***REMOVED***command_prefix***REMOVED***id [@user]
+        ///|Explanation
         Tells the user their id or the id of another user.
         """
         if not user_mentions:
@@ -1750,9 +1768,9 @@ class MusicBot(discord.Client):
 
     async def cmd_np(self, player, channel, server, message):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***np
-
+        ///|Usage
+        ***REMOVED***command_prefix***REMOVED***np
+        ///|Explanation
         Displays the current song in chat.
         """
 
@@ -3893,17 +3911,20 @@ class MusicBot(discord.Client):
 
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***playlist showall [alphabetical | author | entries | playtime | random | replays]
-            ***REMOVED***command_prefix***REMOVED***playlist <savename>
-            ***REMOVED***command_prefix***REMOVED***playlist save <savename>
-            ***REMOVED***command_prefix***REMOVED***playlist load <savename> [add | replace] [none | alphabetical | length | random] [startindex | endindex (inclusive)]
-            ***REMOVED***command_prefix***REMOVED***playlist delete <savename>
-            ***REMOVED***command_prefix***REMOVED***playlist clone <fromname> <savename> [startindex | endindex (inclusive)]
-
-            ***REMOVED***command_prefix***REMOVED***playlist builder <savename>
-
-        Save the current playlist so you can load it again later. Every savename has to be unique. Just typing the savename after the commands gives you some information of the playlist.
+        ///|Load
+        `***REMOVED***command_prefix***REMOVED***playlist load <savename> [add | replace] [none | alphabetical | length | random] [startindex | endindex (inclusive)]`
+        ///(NL)|List all playlists
+        `***REMOVED***command_prefix***REMOVED***playlist showall [alphabetical | author | entries | playtime | random | replays]`
+        ///(NL)|Build a new playlist
+        `***REMOVED***command_prefix***REMOVED***playlist builder <savename>`
+        ///(NL)|Save the current queue
+        `***REMOVED***command_prefix***REMOVED***playlist save <savename>`
+        ///(NL)|Clone
+        `***REMOVED***command_prefix***REMOVED***playlist clone <fromname> <savename> [startindex | endindex (inclusive)]`
+        ///(NL)|Delete a playlist
+        `***REMOVED***command_prefix***REMOVED***playlist delete <savename>`
+        ///(NL)|Information
+        `***REMOVED***command_prefix***REMOVED***playlist <savename>`
         """
 
         argument = leftover_args[0].lower() if len(leftover_args) > 0 else ""
