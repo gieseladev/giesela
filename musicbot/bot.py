@@ -2509,6 +2509,14 @@ class MusicBot(discord.Client):
                       16776960, 16744192, 16711680])
 
         if msgContent.lower() == "simon berger" or msgContent.lower() == "simon jonas berger":
+            already_used = load_file("data/simon_berger_asked.txt")
+
+            if author.id in already_used:
+                return Response("I mustn't betray my master twice for you!")
+            else:
+                already_used.append(author.id)
+                write_file("data/simon_berger_asked.txt", already_used)
+
             conv = "okay...|4.5;;so you've finally figured out that you could just ask Giesela...|3;;great.|1;;well uh...|5;;I programmed this in exactly for this reason...|2;;good on you!|3"
             prev_msg = None
             for part in conv.split(";;"):
@@ -4497,6 +4505,14 @@ class MusicBot(discord.Client):
         search_query = " ".join(leftover_args)
 
         if "simon berger" in search_query.lower() or "simon jonas berger" in search_query.lower():
+            already_used = load_file("data/simon_berger_wikied.txt")
+
+            if author.id in already_used:
+                return Response("I mustn't betray my master twice for you!")
+            else:
+                already_used.append(author.id)
+                write_file("data/simon_berger_wikied.txt", already_used)
+
             return Response("*****REMOVED*** Berger**\n***REMOVED*** Jonas Berger (born March 28, 1992) is a computer scientist and works at Google London as head of the Technical Solutions team.\nI didn't actually expect anyone to read this far, but apparently you are...\nLet me tell you something about my past then. I went to Kindergarten one year earlier than normal. This is due to the fact, that one Doctor\nthought that I was a genius (of course that turned out to be wrong). I skipped 4th grade, not because I wanted, but because my teacher\npersuaded my parents to do so. I especially loved that teacher and was sincerely upset about that. I went to the gymnasium after 8th grade.Shortly after, at the age of 15, my parents passed away in a car accident so I went to live with my grandparents but 2 months later\nI lived in a flat in Zurich to study at ETH. Because I practically skipped 2 years of education I was merely 16 while everyone around me was already 18. With the age of 20 I got my Bachelor's degree and at the age of 22 I finished my Master's degree. While I was studying at ETH I got the chance to take part in a Google Interview. After 2 interviews they offered me a job as a Technical Solutions Consultant. June 25th 2016 they promoted me to head of Technical Solutions.\n\nWhy am I telling you this? Well... If you went ahead and looked me up I'm sure you were just a little bit interested.")
 
         # self.log (search_query)
