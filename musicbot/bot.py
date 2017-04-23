@@ -5064,6 +5064,54 @@ class MusicBot(discord.Client):
         else:
             return Response("Please provide the iso format language code")
 
+    async def cmd_translatehistory(self, author, message, leftover_args):
+        """
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***translatehistory <channel> <start date | number of messages> <target language>`
+        ///|Explanation
+        Request messages in a channel to be translated.\nYou can specify the amount of messages either by number or by a starting point formated like `DAY/MONTH/YEAR HOUR:MINUTE`
+        """
+        starting_point = " ".join(leftover_args[1:-1])
+        target_language = leftover_args[-1].lower()
+
+        if target_language not in ['af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml', 'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr', 'uk', 'ur', 'vi', 'zh-cn', 'zh-tw']:
+            return Response("Please provide the target language")
+
+        if message.channel_mentions is None or len(message.channel_mentions) < 1:
+            return Response("Please provide a channel to take the messages from", delete_after=20)
+        channel = message.channel_mentions[0]
+
+        limit = 500
+        start_point = None
+        try:
+            limit = int(starting_point)
+        except:
+            match = re.match(
+                "(\d***REMOVED***1,2***REMOVED***)\/(\d***REMOVED***1,2***REMOVED***)\/(\d***REMOVED***4***REMOVED***).***REMOVED***1***REMOVED***(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***1,2***REMOVED***)", starting_point)
+            if match is None:
+                return Response("I don't understand your starting point...\nBe sure to format it like `DAY/MONTH/YEAR HOUR:MINUTE`", delete_after=20)
+            day, month, year, hour, minute = match.group(1, 2, 3, 4, 5)
+            start_point = datetime(year, month, day, hour, minute)
+
+        em = Embed(title="TRANSLATION")
+        translator = Translator(target_language)
+        async for message in self.logs_from(channel, limit=limit, after=start_point):
+            n = "*****REMOVED***0***REMOVED***** - ***REMOVED***1.year:0>4***REMOVED***/***REMOVED***1.month:0>2***REMOVED***/***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(
+                message.author.display_name, message.timestamp)
+
+            message_content = message.content.strip()
+            msg_language, probability = self.lang_identifier.classify(
+                message_content)
+            self.translator.from_lang = msg_language
+            try:
+                v = "`***REMOVED******REMOVED***`".format(translator.translate(message_content))
+            except:
+                continue
+            em.add_field(name=n, value=v, inline=False)
+        em._fields = em._fields[::-1]
+        await self.send_message(author, embed=em)
+        return Response("Done!")
+
     @owner_only
     async def cmd_shutdown(self, channel):
         await self.safe_send_message(channel, ":wave:")
