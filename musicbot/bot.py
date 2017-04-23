@@ -4999,10 +4999,15 @@ class MusicBot(discord.Client):
             online_logger = OnlineLogger(self)
             self.online_loggers[server.id] = online_logger
 
+        next_autosave = datetime.now() + timedelta(minutes=5)
+
         while True:
             for member in server.members:
                 online_logger.update_stats(
                     member.id, member.status == discord.Status.online, member.game)
+                if datetime.now() > next_autosave:
+                    next_autosave = datetime.now() + timedelta(minutes=5)
+                    online_logger.create_output()
                 await asyncio.sleep(1)
                 notification = online_logger.get_notification()
                 if notification is not None:
