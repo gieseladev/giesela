@@ -2517,7 +2517,7 @@ class MusicBot(discord.Client):
                 already_used.append(author.id)
                 write_file("data/simon_berger_asked.txt", already_used)
 
-            conv = "okay...|4.5;;so you've finally figured out that you could just ask Giesela...|3;;great.|1;;well uh...|5;;I programmed this in exactly for this reason...|2;;good on you!|3"
+            conv = "okay...|4.5;;so you've finally figured out that you could just ask me...|3;;great.|1;;well uh...|5;;he programmed this in exactly for this reason...|2;;But I don't know if I want to disclose this...|3"
             prev_msg = None
             for part in conv.split(";;"):
                 # if prev_msg is not None:
@@ -2543,6 +2543,38 @@ class MusicBot(discord.Client):
                     await self.send_typing(channel)
                     await asyncio.sleep(1.6)
                     await self.safe_send_message(channel, "Thanks for nothing.......")
+
+            await self.send_typing(channel)
+            await asyncio.sleep(5)
+            await self.safe_send_message(channel, "I need you to persuade me... I've been asked to not say anything.... If I'm gonnna break that promise I need something really good!")
+            excuses = "nah... that didn't really do it for me|3;not enough|2;I need more|1.5;Tell me something truly inspiring|3;MOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR|2;Am I not worth anything longer to you?|4;Waaaaay too short|1.7;I need something that's at least as long as Spaghetti\nWhatever that means|4;Pleaseeeeeee you've gotta give me more!|3;at least send me a Haiku or something.... not just ... this|4;More love plz|2".split(
+                ";")
+            shuffle(excuses)
+            for part in excuses:
+                msg = await self.wait_for_message(author=author, channel=channel)
+                content = msg.content.lower().strip()
+                words = content.split()
+                if len(content) > 40 or len(words) > 10:
+                    msg_language, probability = self.lang_identifier.classify(
+                        content)
+                    if msg_language.lower() in ["en", "de"] and probability > .7:
+                        await self.send_typing(channel)
+                        await asyncio.sleep(5)
+                        await self.safe_send_message(channel, "Looks like you really want to know.......")
+                        await self.send_typing(channel)
+                        await asyncio.sleep(1.5)
+                        await self.safe_send_message(channel, "I think I'm ready!")
+                        break
+
+                    await self.send_typing(channel)
+                    await asyncio.sleep(2)
+                    await self.safe_send_message(channel, choice(["Don't just give me gibberish!", "Do better!", "Come on... write somethign real here.", "Do you even language?", "I need you to try harder", "Are those even real words?", "I'm sure you can do better than to button mash", "heeeeeeeey... I've been programmed by a ducking Google employee... Don't you think I'd notice when you don't send anything meaningful?", "This is a easter egg... if you see this message, send `7712 KMM` to Simon. Dunno what you'll get yet... But I suppose it's gonna be something! Anyway... You need to actually send something real instead of just gibberish"]))
+                    continue
+
+                excuse, delay = part.split("|")
+                await self.send_typing(channel)
+                await asyncio.sleep(float(delay))
+                await self.safe_send_message(channel, excuse)
 
             await self.send_typing(channel)
             await asyncio.sleep(1.2)
