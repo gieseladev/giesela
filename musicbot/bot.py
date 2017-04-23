@@ -2504,6 +2504,29 @@ class MusicBot(discord.Client):
 
         await self.send_typing(channel)
         msgContent = " ".join(leftover_args)
+
+        col = choice([9699539, 4915330, 255, 65280,
+                      16776960, 16744192, 16711680])
+
+        if msgContent.lower() == "simon berger" or msgContent.lower() == "simon jonas berger":
+            conv = "okay...|7;;so you've finally figured out that you could just ask Giesela...|3;;great.|1;;well uh...|6;;I programmed this in exactly for this reason...|2;;good on you!|4"
+            prev_msg = None
+            for part in conv.split(";;"):
+                # if prev_msg is not None:
+                    # await self.safe_delete_message(prev_msg)
+                msg, delay = part.split("|")
+                prev_msg = await self.safe_send_message(channel, msg)
+                await self.send_typing(channel)
+                await asyncio.sleep(float(delay))
+
+            simon_info = "Input Interpretation\;"
+            for pod in simon_info.split("\n"):
+                title, img, foot = pod.split("\;")
+                em = Embed(title=title, colour=col)
+                em.set_image(url=pod.format["img"][0]["url"])
+                em.set_footer(text=pod.format["img"][0]["alt"])
+                await self.send_message(channel, embed=em)
+
         client = tungsten.Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
         if not res.success:
@@ -2511,8 +2534,6 @@ class MusicBot(discord.Client):
             self.log("Didn't find an answer to: " + msgContent)
             return await self.cmd_wiki(channel, message, ["en", "summarize", "5", msgContent])
 
-        col = choice([9699539, 4915330, 255, 65280,
-                      16776960, 16744192, 16711680])
         for pod in res.pods:
             em = Embed(title=pod.title, colour=col)
             em.set_image(url=pod.format["img"][0]["url"])
