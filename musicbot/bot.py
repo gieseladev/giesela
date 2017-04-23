@@ -2517,32 +2517,32 @@ class MusicBot(discord.Client):
                 already_used.append(author.id)
                 write_file("data/simon_berger_asked.txt", already_used)
 
-            conv = "okay...|4.5;;so you've finally figured out that you could just ask me...|3;;great.|1;;well uh...|5;;he programmed this in exactly for this reason...|2;;But I don't know if I want to disclose this...|3"
+            conv = "okay...&ok...&well...&hmm|4.5;;so you've finally figured out that you could just ask me...&finally you come to me...&about time you asked me|3;;great.&wonderful&impressive|1;;well uh...&so uhhh&sighs...&now then...|5;;he programmed this in exactly for this reason...&he musta thought about this...&for some reason he gave me this information in the first place&I have just what you want|2;;But I don't know if I want to disclose this...&but do I really want to betray him?&can I really do this tho?&sighs....|3"
             prev_msg = None
             for part in conv.split(";;"):
                 # if prev_msg is not None:
                     # await self.safe_delete_message(prev_msg)
                 msg, delay = part.split("|")
-                prev_msg = await self.safe_send_message(channel, msg)
+                prev_msg = await self.safe_send_message(channel, choice(msg.split("&")))
                 await self.send_typing(channel)
                 await asyncio.sleep(float(delay))
 
             if not channel.is_private:
-                await self.safe_send_message(channel, "Can I at least send it in private Chat...?")
+                await self.safe_send_message(channel, choice(["Can I at least send it in private Chat...?", "can we do this in private?", "I don't want to do this here\nis it okay if we switch to private chat?", "can I hit you over at direct msgs?"]))
                 msg = await self.wait_for_message(timeout=12, author=author, channel=channel)
                 if msg is None:
                     await self.send_typing(channel)
                     await asyncio.sleep(3)
-                    await self.safe_send_message(channel, "I'm gonna assume that's a no... sighs")
+                    await self.safe_send_message(channel, choice(["I'm gonna assume that's a no... sighs", "I was really asking for input... No answer is by definition no I guess", "you coulda said... anything? let's just stay here...", "why didn't you answer... I'm just gonna say it's a no"]))
                 if any(x in msg.content.strip().lower() for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs"]):
                     channel = author
                     await self.send_typing(channel)
                     await asyncio.sleep(2)
-                    await self.safe_send_message(channel, "Thank you so much <3!")
+                    await self.safe_send_message(channel, choice(["Thank you so much <3!", "maybe he won't find it out here...", "I'm very glad, thanks", "almost worthy of a medal", "how nice of you <3", "<3<33<33333"]))
                 else:
                     await self.send_typing(channel)
                     await asyncio.sleep(1.6)
-                    await self.safe_send_message(channel, "Thanks for nothing.......")
+                    await self.safe_send_message(channel, choice(["Thanks for nothing.......", "What have I done to deserve this? sighs...", "I hate you.... let's move on tho"]))
 
             await self.send_typing(channel)
             await asyncio.sleep(5)
@@ -2560,10 +2560,10 @@ class MusicBot(discord.Client):
                     if msg_language.lower() in ["en", "de"] and probability > .7:
                         await self.send_typing(channel)
                         await asyncio.sleep(5)
-                        await self.safe_send_message(channel, "Looks like you really want to know.......")
+                        await self.safe_send_message(channel, choice(["Looks like you really want to know.......", "you really do care... wow", "I think I'm tearing up a little bit", "thank you so much", "beautiful."]))
                         await self.send_typing(channel)
                         await asyncio.sleep(1.5)
-                        await self.safe_send_message(channel, "I think I'm ready!")
+                        await self.safe_send_message(channel, choice(["I think I'm ready!", "that's it. f*ck Simon", "You > Simon! watch this!", "I feel ready"]))
                         break
 
                     await self.send_typing(channel)
@@ -2578,7 +2578,7 @@ class MusicBot(discord.Client):
 
             await self.send_typing(channel)
             await asyncio.sleep(1.2)
-            await self.safe_send_message(channel, "Here goes nuthin'")
+            await self.safe_send_message(channel, choice(["Here goes nuthin'", "I just hope he never sees this", "heeeere he comes", "thanks for playing. Have your trophy!", "you win...", "heeere you go!"]))
             await asyncio.sleep(4)
 
             simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;Simon Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | Simon Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;simon_berger_image.png\;Picture taken on September 14th 2016\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'"
