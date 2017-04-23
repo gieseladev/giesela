@@ -2495,7 +2495,7 @@ class MusicBot(discord.Client):
                  msgContent + "\n<Bot> " + answer + "\n")
         return Response(answer)
 
-    async def cmd_ask(self, channel, message, leftover_args):
+    async def cmd_ask(self, author, channel, message, leftover_args):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***ask <question>
@@ -2509,7 +2509,7 @@ class MusicBot(discord.Client):
                       16776960, 16744192, 16711680])
 
         if msgContent.lower() == "simon berger" or msgContent.lower() == "simon jonas berger":
-            conv = "okay...|5.5;;so you've finally figured out that you could just ask Giesela...|3;;great.|1;;well uh...|6;;I programmed this in exactly for this reason...|2;;good on you!|4"
+            conv = "okay...|4.5;;so you've finally figured out that you could just ask Giesela...|3;;great.|1;;well uh...|5;;I programmed this in exactly for this reason...|2;;good on you!|3"
             prev_msg = None
             for part in conv.split(";;"):
                 # if prev_msg is not None:
@@ -2519,13 +2519,37 @@ class MusicBot(discord.Client):
                 await self.send_typing(channel)
                 await asyncio.sleep(float(delay))
 
-            simon_info = "Input Interpretation\;https://github.com/siku2/MusicBot/blob/master/data/pictures/custom%20ask/simon%20berger/simon_berger_input_interpretation.png\;***REMOVED*** Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;https://github.com/siku2/MusicBot/blob/master/data/pictures/custom%20ask/simon%20berger/simon_berger_basic_information.png\;full name | ***REMOVED*** Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;https://github.com/siku2/MusicBot/blob/master/data/pictures/custom%20ask/simon%20berger/simon_berger_image.png\;\nPhysical Characteristics\;https://github.com/siku2/MusicBot/blob/master/data/pictures/custom%20ask/simon%20berger/simon_berger_physical_characteristics.png\;height | 6\' 01\'\'"
+            if not channel.is_private:
+                await self.safe_send_message(channel, "Can I at least send it in private Chat...?")
+                msg = await self.wait_for_message(timeout=12, author=author, channel=channel)
+                if msg is None:
+                    await self.send_typing(channel)
+                    await asyncio.sleep(3)
+                    await self.safe_send_message(channel, "I'm gonna assume that's a no... sighs")
+                if any(x in msg.content.strip().lower() for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs"]):
+                    channel = author
+                    await self.send_typing(channel)
+                    await asyncio.sleep(2)
+                    await self.safe_send_message(channel, "Thank you so much <3!")
+                else:
+                    await self.send_typing(channel)
+                    await asyncio.sleep(1.6)
+                    await self.safe_send_message(channel, "Thanks for nothing.......")
+
+            await self.send_typing(channel)
+            await asyncio.sleep(1.2)
+            await self.safe_send_message(channel, "Here goes nuthin'")
+            await asyncio.sleep(4)
+
+            simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;***REMOVED*** Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | ***REMOVED*** Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;simon_berger_image.png\;\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'"
             for pod in simon_info.split("\n"):
                 title, img, foot = pod.split("\;")
                 em = Embed(title=title, colour=col)
-                em.set_image(url=img)
+                em.set_image(
+                    url="https://raw.githubusercontent.com/siku2/MusicBot/master/data/pictures/custom%20ask/simon%20berger/" + img)
                 em.set_footer(text=foot)
                 await self.send_message(channel, embed=em)
+                await asyncio.sleep(1)
             return
 
         client = tungsten.Tungsten("EH8PUT-67PJ967LG8")
