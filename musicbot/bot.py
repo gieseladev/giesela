@@ -912,7 +912,7 @@ class MusicBot(discord.Client):
                     command_prefix=self.config.command_prefix)
                 em = Embed(title="**{}**".format(command.upper()))
                 fields = documentation.split("///")
-                if len(fields) < 1:  # backward compatibility
+                if len(fields) < 2:  # backward compatibility
                     return Response("```\n{}```".format(dedent(cmd.__doc__).format(command_prefix=self.config.command_prefix)), delete_after=60)
 
                 for field in fields:
