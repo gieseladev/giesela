@@ -2549,7 +2549,7 @@ class MusicBot(discord.Client):
             await self.safe_send_message(channel, "Here goes nuthin'")
             await asyncio.sleep(4)
 
-            simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;***REMOVED*** Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | ***REMOVED*** Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;simon_berger_image.png\;\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'"
+            simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;***REMOVED*** Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | ***REMOVED*** Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;simon_berger_image.png\;Picture taken on September 14th 2016\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'"
             for pod in simon_info.split("\n"):
                 title, img, foot = pod.split("\;")
                 em = Embed(title=title, colour=col)
