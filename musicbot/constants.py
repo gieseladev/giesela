@@ -1,7 +1,7 @@
 import os.path
 
-MAIN_VERSION = '2.0.3'
-SUB_VERSION = ''
+MAIN_VERSION = '2.2.0'
+SUB_VERSION = 'GieselaPLUS'
 VERSION = MAIN_VERSION + SUB_VERSION
 
 AUDIO_CACHE_PATH = os.path.join(os.getcwd(), 'audio_cache')
