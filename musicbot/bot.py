@@ -2627,7 +2627,7 @@ class MusicBot(discord.Client):
             await self.safe_send_message(channel, choice(["As promised... I can't step back now xD", "Your teamwork was truly inspiring... Sighs... I guess I have no choice", "I'm so surprised... I give up. Have it your way!", "WEEEEEEEELLL DONE. You beat Simon! HERE!"]))
             await asyncio.sleep(3)
 
-            simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;Simon Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | Simon Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;simon_berger_image_2.png\;Picture taken on September 14th 2016\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'\nWikipedia Summary\;simon_berger_wikipedia_summary.png\;"
+            simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;Simon Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | Simon Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;simon_berger_image_3.png\;Picture taken on September 14th 2016\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'\nWikipedia Summary\;simon_berger_wikipedia_summary.png\;"
             for pod in simon_info.split("\n"):
                 title, img, foot = pod.split("\;")
                 em = Embed(title=title, colour=col)
