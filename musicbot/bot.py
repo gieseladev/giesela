@@ -2512,7 +2512,7 @@ class MusicBot(discord.Client):
             already_used = load_file("data/simon_berger_asked.txt")
 
             if author.id in already_used:
-                return Response("I mustn't betray my master twice for you!")
+                return Response(choice(["I mustn't betray my master twice for you!", "You've done enough damage already", "He punished me for telling you already", "Don't push me... You already got me to do something stupid!", "Not gonna go down that road again", "Sorry. I don't want to do it anymore...", "Please no....", "not gonna happen again!", "fool me once, shame on you. Fool me twice, shame on me. So nah, not gonna happen", "please stop asking for that", "Not for you...", "Anyone else but you!", "I don't feel like saying something about him ever again. At least not to you", "give it up, you already had your chance", "Never again", "I don't trust you anymore", "surrey but nuh"]))
             else:
                 already_used.append(author.id)
                 write_file("data/simon_berger_asked.txt", already_used)
@@ -2538,11 +2538,11 @@ class MusicBot(discord.Client):
                     channel = author
                     await self.send_typing(channel)
                     await asyncio.sleep(2)
-                    await self.safe_send_message(channel, choice(["Thank you so much <3!", "maybe he won't find it out here...", "I'm very glad, thanks", "almost worthy of a medal", "how nice of you <3", "<3<33<33333"]))
+                    await self.safe_send_message(channel, choice(["Thank you so much <3!", "maybe he won't find it out here...", "I'm very glad, thanks", "almost worthy of a medal", "how nice of you <3", "<3<33<33333", "added at least a 1000 points to your sympathy score"]))
                 else:
                     await self.send_typing(channel)
                     await asyncio.sleep(1.6)
-                    await self.safe_send_message(channel, choice(["Thanks for nothing.......", "What have I done to deserve this? sighs...", "I hate you.... let's move on tho"]))
+                    await self.safe_send_message(channel, choice(["Thanks for nothing.......", "What have I done to deserve this? sighs...", "I hate you.... let's move on tho", "okay okay... we're doing it here"]))
 
             await self.send_typing(channel)
             await asyncio.sleep(5)
