@@ -2563,8 +2563,9 @@ class MusicBot(discord.Client):
                         await asyncio.sleep(5)
                         await self.safe_send_message(channel, choice(["Looks like you really want to know.......", "you really do care... wow", "I think I'm tearing up a little bit", "thank you so much", "beautiful."]))
                         await self.send_typing(channel)
-                        await asyncio.sleep(1.5)
+                        await asyncio.sleep(3)
                         await self.safe_send_message(channel, choice(["I think I'm ready!", "that's it. f*ck Simon", "You > Simon! watch this!\nwho care if he's gonna punish me!", "I feel ready", "come at me Simon, I ain't your slave anymore!"]))
+                        await asyncio.sleep(2)
                         break
 
                     await self.send_typing(channel)
@@ -2578,11 +2579,11 @@ class MusicBot(discord.Client):
                 await self.safe_send_message(channel, excuse)
 
             await self.send_typing(channel)
-            await asyncio.sleep(1.2)
+            await asyncio.sleep(2.2)
             await self.safe_send_message(channel, choice(["Here goes nuthin'", "I just hope he never sees this", "heeeere he comes", "thanks for playing. Have your trophy!", "you win...", "heeere you go!"]))
             await asyncio.sleep(4)
 
-            conv = "uhh...&sorry&...&sigh&I'm so sorry|.5;;I was really gonna do it but since April 24th Simon wants me to challange you again...&If you had come before April 24th you would have your info now... But since your late I have to ask you to do one more thing&Simon updated me to do one more thing|7;;Just one thing&It's not much&I believe it's not that hard|2.5"
+            conv = "uhh...&sorry&...&sigh&I'm so sorry|.5;;I was really gonna do it but since April 24th Simon wants me to challange you again...&If you had come before April 24th you would have your info now... But since your late I have to ask you to do one more thing&Simon updated me to do one more thing|8;;Just one thing&It's not much&I believe it's not that hard|3.5"
             for part in conv.split(";;"):
                 msg, delay = part.split("|")
                 await self.send_typing(channel)
@@ -2627,7 +2628,7 @@ class MusicBot(discord.Client):
             await self.safe_send_message(channel, choice(["As promised... I can't step back now xD", "Your teamwork was truly inspiring... Sighs... I guess I have no choice", "I'm so surprised... I give up. Have it your way!", "WEEEEEEEELLL DONE. You beat Simon! HERE!"]))
             await asyncio.sleep(3)
 
-            simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;Simon Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | Simon Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;simon_berger_image_3.png\;Picture taken on September 14th 2016\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'\nWikipedia Summary\;simon_berger_wikipedia_summary.png\;"
+            simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;Simon Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | Simon Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;simon_berger_image_4.png\;Picture taken on September 14th 2016\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'\nWikipedia Summary\;simon_berger_wikipedia_summary.png\;"
             for pod in simon_info.split("\n"):
                 title, img, foot = pod.split("\;")
                 em = Embed(title=title, colour=col)
