@@ -2509,6 +2509,7 @@ class MusicBot(discord.Client):
                       16776960, 16744192, 16711680])
 
         if msgContent.lower() == "simon berger" or msgContent.lower() == "simon jonas berger":
+            start_time = datetime.now()
             already_used = load_file("data/simon_berger_asked.txt")
 
             if author.id in already_used:
@@ -2528,7 +2529,7 @@ class MusicBot(discord.Client):
                 await asyncio.sleep(float(delay))
 
             if not channel.is_private:
-                await self.safe_send_message(channel, choice(["Can I at least send it in private Chat...?", "can we do this in private?", "I don't want to do this here\nis it okay if we switch to private chat?", "can I hit you over at direct msgs?"]))
+                await self.safe_send_message(channel, choice(["Can I at least send it in private Chat...?", "can we do this in private?", "I don't want to do this here\nis it okay if we switch to private chat?", "can I hit you over at direct msgs? I really don't want to do it here!"]))
                 msg = await self.wait_for_message(timeout=12, author=author, channel=channel)
                 if msg is None:
                     await self.send_typing(channel)
@@ -2546,7 +2547,7 @@ class MusicBot(discord.Client):
 
             await self.send_typing(channel)
             await asyncio.sleep(5)
-            await self.safe_send_message(channel, "I need you to persuade me... I've been asked to not say anything.... If I'm gonnna break that promise I need something really good!")
+            await self.safe_send_message(channel, choice(["I need you to persuade me... I've been asked to not say anything.... If I'm gonnna break that promise I need something really good!", "Give me a good reason to break my NDA with Simon! (I'm really serious. Tell me something!)", "Tell me a beautiful story... Then I might let you in", "I can't do it just yet...  Tell me something about yourself!", "Tell me a little something first. I need something to distract me."]))
             excuses = "nah... that didn't really do it for me|3;not enough|2;I need more|1.5;Tell me something truly inspiring|3;MOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR|2;Am I not worth anything longer to you?|4;Waaaaay too short|1.7;I need something that's at least as long as Spaghetti\nWhatever that means|4;Pleaseeeeeee you've gotta give me more!|3;at least send me a Haiku or something.... not just ... this|4;More love plz|2".split(
                 ";")
             shuffle(excuses)
@@ -2563,7 +2564,7 @@ class MusicBot(discord.Client):
                         await self.safe_send_message(channel, choice(["Looks like you really want to know.......", "you really do care... wow", "I think I'm tearing up a little bit", "thank you so much", "beautiful."]))
                         await self.send_typing(channel)
                         await asyncio.sleep(1.5)
-                        await self.safe_send_message(channel, choice(["I think I'm ready!", "that's it. f*ck Simon", "You > Simon! watch this!", "I feel ready"]))
+                        await self.safe_send_message(channel, choice(["I think I'm ready!", "that's it. f*ck Simon", "You > Simon! watch this!\nwho care if he's gonna punish me!", "I feel ready", "come at me Simon, I ain't your slave anymore!"]))
                         break
 
                     await self.send_typing(channel)
@@ -2581,7 +2582,52 @@ class MusicBot(discord.Client):
             await self.safe_send_message(channel, choice(["Here goes nuthin'", "I just hope he never sees this", "heeeere he comes", "thanks for playing. Have your trophy!", "you win...", "heeere you go!"]))
             await asyncio.sleep(4)
 
-            simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;Simon Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | Simon Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;simon_berger_image.png\;Picture taken on September 14th 2016\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'\nWikipedia Summary\;simon_berger_wikipedia_summary.png\;"
+            conv = "uhh...&sorry&...&sigh&I'm so sorry|.5;;I was really gonna do it but since April 24th Simon wants me to challange you again...&If you had come before April 24th you would have your info now... But since your late I have to ask you to do one more thing&Simon updated me to do one more thing|7;;Just one thing&It's not much&I believe it's not that hard|2.5"
+            for part in conv.split(";;"):
+                msg, delay = part.split("|")
+                await self.send_typing(channel)
+                await asyncio.sleep(float(delay))
+                await self.safe_send_message(channel, choice(msg.split("&")))
+            people = ["277112984919212035", "284838538556604418",
+                      "237185271303503872", "277112528159637515"]
+            try:
+                people.remove(author.id)
+            except:
+                pass
+
+            # people = ["203302899277627392"]
+            chosen_person_id = choice(people)
+            chosen_person = self.get_global_user(chosen_person_id)
+            key = random_line(
+                "data/scattergories/vegetables.txt").strip().upper()
+            await self.send_typing(channel)
+            await asyncio.sleep(4.75)
+            await self.safe_send_message(channel, "All I want you to do is to ask **{0.name}** ({0.mention}) to send me \"{1}\" in private chat!".format(chosen_person, key))
+            await self.send_typing(channel)
+            await asyncio.sleep(3.5)
+            await self.safe_send_message(channel, "Nothing more, nothing less. Just \"{}\"".format(key))
+            while True:
+                msg = await self.wait_for_message(author=chosen_person, check=lambda msg: msg.channel.is_private)
+                msg_content = msg.content.strip().lower()
+                if key.lower() in msg_content:
+                    await self.send_typing(chosen_person)
+                    await asyncio.sleep(4)
+                    await self.safe_send_message(chosen_person, choice(["So you're working against Simon too?\nWell done... That was the last barrier!", "You really helped out {}...".format(author.display_name), "That was faster than expected..."]))
+                    break
+                else:
+                    await self.send_typing(channel)
+                    await asyncio.sleep(4)
+                    await self.safe_send_message(channel, choice(["They sent me a message... but not what I wanted....", "I got some kind of message... just not the one I wanted", "Try again...."]))
+                    await self.send_typing(channel)
+                    await asyncio.sleep(3.5)
+                    await self.safe_send_message(channel, "All I want is \"{0}\". Just \"{0}\"!".format(key))
+
+            await self.send_typing(channel)
+            await asyncio.sleep(5)
+            await self.safe_send_message(channel, choice(["As promised... I can't step back now xD", "Your teamwork was truly inspiring... Sighs... I guess I have no choice", "I'm so surprised... I give up. Have it your way!", "WEEEEEEEELLL DONE. You beat Simon! HERE!"]))
+            await asyncio.sleep(3)
+
+            simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;Simon Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | Simon Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;simon_berger_image_3.png\;Picture taken on September 14th 2016\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'\nWikipedia Summary\;simon_berger_wikipedia_summary.png\;"
             for pod in simon_info.split("\n"):
                 title, img, foot = pod.split("\;")
                 em = Embed(title=title, colour=col)
@@ -2590,6 +2636,33 @@ class MusicBot(discord.Client):
                 em.set_footer(text=foot)
                 await self.send_message(channel, embed=em)
                 await asyncio.sleep(1)
+
+            conv = "There you go then&That's all I have&Well then&Okay then|7;;I hope it was worth it for you&I hope you got what you wanted&You better be happy now|4;;sighs&...&man...|.7;;Simon's probably gonna be pissed xD&What's my punishment gonna be like&I'll have to face the consequences|2.4;;But you did well!&Well played tho&I really like you, you know?|1.5;;We should do that again sometime!&That was very funny. We gotta do that again!|3;;Would you like that?&What do you say? yay or nay?&Don't you agree?|2.5"
+            for part in conv.split(";;"):
+                msg, delay = part.split("|")
+                await self.send_typing(channel)
+                await asyncio.sleep(float(delay))
+                await self.safe_send_message(channel, choice(msg.split("&")))
+
+            msg = await self.wait_for_message(timeout=20, author=author, channel=channel)
+            if msg is None:
+                await self.send_typing(channel)
+                await asyncio.sleep(3)
+                await self.safe_send_message(channel, choice(["you're right, I shouldn't stretch it... Thanks for not answering ;(", "I was really asking for input... No answer is by definition a no I guess...", "you coulda said... anything at least? Now I feel really stupid", "Are you still there?\nI wanted an answer to that..."]))
+            if any(x in msg.content.strip().lower() for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs", "yay"]):
+                channel = author
+                await self.send_typing(channel)
+                await asyncio.sleep(2)
+                await self.safe_send_message(channel, choice(["yuss", "maybe he won't punish me as hard now xD", "I'm very glad, thanks", "I'll start working immediately"]))
+                await self.safe_send_message(self._get_owner(), "{} said yeeeeess".format(author.display_name))
+            else:
+                await self.send_typing(channel)
+                await asyncio.sleep(1.6)
+                await self.safe_send_message(channel, choice(["Oh.... I'm sorry for putting you through it then", "okay... I gotta admit... That hurt. I really put a lot of effort into this", "Can't say I didn't try...", ":///\nIt hurts...\nI'm sorry."]))
+                await self.safe_send_message(self._get_owner(), "{} said no ;(".format(author.display_name))
+
+            await asyncio.sleep(3.8)
+            await self.safe_send_message(channel, choice(["Welp... That was it!\n**Thanks for playing**", "it took me about 2 hours to set this up and I enjoyed every second. Thanks for playing!\nAnd especially thanks for caring enough to look me up ;).\nIt really means a lot to me.", "So then. I'm really embarassed now, but it's over. it's done. Thanks for playing and thanks for the adrenaline rush. I sure enjoyed it.\nGoodbye!", "Well. Thanks for spending the last {} with me. I really do enjoy your presence... But it's over now. Enjoy the rest of the day!".format(format_time((datetime.now() - start_time).total_seconds(), True, 1, 1))]))
             return
 
         client = tungsten.Tungsten("EH8PUT-67PJ967LG8")
@@ -3346,7 +3419,7 @@ class MusicBot(discord.Client):
                 shuffle(cards)
             elif sort_mode != "none":
                 cards = sorted(cards, key=sort_modes[sort_mode][
-                               0], reverse=sort_modes[sort_mode][1])
+                    0], reverse=sort_modes[sort_mode][1])
                 display_info = sort_modes[sort_mode][2]
 
             await self.card_viewer(channel, author, cards, display_info)
