@@ -2593,14 +2593,14 @@ class MusicBot(discord.Client):
                 await self.send_typing(channel)
                 await asyncio.sleep(float(delay))
                 await self.safe_send_message(channel, choice(msg.split("&")))
-            # people = ["277112984919212035", "284838538556604418",
-            #           "237185271303503872", "277112528159637515"]
-            # try:
-            #     people.remove(author.id)
-            # except:
-            #     pass
+            people = ["277112984919212035", "284838538556604418",
+                      "237185271303503872", "277112528159637515"]
+            try:
+                people.remove(author.id)
+            except:
+                pass
 
-            people = ["203302899277627392"]
+            # people = ["203302899277627392"]
             chosen_person_id = choice(people)
             chosen_person = self.get_global_user(chosen_person_id)
             key = random_line(
@@ -2614,7 +2614,7 @@ class MusicBot(discord.Client):
 
             while True:
                 msg = await self.wait_for_message(check=lambda msg: key.lower() in msg.content.lower() and msg.author.id in [author.id, chosen_person_id])
-                if msg.server is not None and msg.server.id == "203304535949574154":
+                if msg.server is not None and msg.server.id == "285176027855192065":
                     print("they asked them on the server. yay!")
                     break
                 else:
