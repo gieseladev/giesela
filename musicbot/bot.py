@@ -2513,6 +2513,8 @@ class MusicBot(discord.Client):
             already_used = load_file("data/simon_berger_asked.txt")
 
             if author.id in already_used:
+                if author.id == "203302899277627392":
+                    return Response(choice(["why would you ask about yourself?", "I'm only gonna tell someone else", "Ye sure. Not gonna tell you ***REMOVED***", "I know you're just asking because you want to remove the information I have. I only answer this to someone else", "NUUUUUPE simon. You gotta try harder. I don't fall for these tricks"]))
                 return Response(choice(["I mustn't betray my master twice for you!", "You've done enough damage already", "He punished me for telling you already", "Don't push me... You already got me to do something stupid!", "Not gonna go down that road again", "Sorry. I don't want to do it anymore...", "Please no....", "not gonna happen again!", "fool me once, shame on you. Fool me twice, shame on me. So nah, not gonna happen", "please stop asking for that", "Not for you...", "Anyone else but you!", "I don't feel like saying something about him ever again. At least not to you", "give it up, you already had your chance", "Never again", "I don't trust you anymore", "surrey but nuh"]))
             else:
                 already_used.append(author.id)
@@ -2530,20 +2532,22 @@ class MusicBot(discord.Client):
 
             if not channel.is_private:
                 await self.safe_send_message(channel, choice(["Can I at least send it in private Chat...?", "can we do this in private?", "I don't want to do this here\nis it okay if we switch to private chat?", "can I hit you over at direct msgs? I really don't want to do it here!"]))
-                msg = await self.wait_for_message(timeout=12, author=author, channel=channel)
+                msg = await self.wait_for_message(timeout=20, author=author, channel=channel)
                 if msg is None:
                     await self.send_typing(channel)
                     await asyncio.sleep(3)
                     await self.safe_send_message(channel, choice(["I'm gonna assume that's a no... sighs", "I was really asking for input... No answer is by definition no I guess", "you coulda said... anything? let's just stay here...", "why didn't you answer... I'm just gonna say it's a no"]))
-                if any(x in msg.content.strip().lower() for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs"]):
-                    channel = author
-                    await self.send_typing(channel)
-                    await asyncio.sleep(2)
-                    await self.safe_send_message(channel, choice(["Thank you so much <3!", "maybe he won't find it out here...", "I'm very glad, thanks", "almost worthy of a medal", "how nice of you <3", "<3<33<33333", "added at least a 1000 points to your sympathy score"]))
                 else:
-                    await self.send_typing(channel)
-                    await asyncio.sleep(1.6)
-                    await self.safe_send_message(channel, choice(["Thanks for nothing.......", "What have I done to deserve this? sighs...", "I hate you.... let's move on tho", "okay okay... we're doing it here"]))
+                    msg_content = msg.content.lower().replace("!c", "").strip()
+                    if any(x in msg_content for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs"]):
+                        channel = author
+                        await self.send_typing(channel)
+                        await asyncio.sleep(2)
+                        await self.safe_send_message(channel, choice(["Thank you so much <3!", "maybe he won't find it out here...", "I'm very glad, thanks", "almost worthy of a medal", "how nice of you <3", "<3<33<33333", "added at least a 1000 points to your sympathy score"]))
+                    else:
+                        await self.send_typing(channel)
+                        await asyncio.sleep(1.6)
+                        await self.safe_send_message(channel, choice(["Thanks for nothing.......", "What have I done to deserve this? sighs...", "I hate you.... let's move on tho", "okay okay... we're doing it here"]))
 
             await self.send_typing(channel)
             await asyncio.sleep(5)
@@ -2553,7 +2557,7 @@ class MusicBot(discord.Client):
             shuffle(excuses)
             for part in excuses:
                 msg = await self.wait_for_message(author=author, channel=channel)
-                content = msg.content.lower().strip()
+                content = msg.content.lower().replace("!c", "").strip()
                 words = content.split()
                 if len(content) > 40 or len(words) > 10:
                     msg_language, probability = self.lang_identifier.classify(
@@ -2583,33 +2587,44 @@ class MusicBot(discord.Client):
             await self.safe_send_message(channel, choice(["Here goes nuthin'", "I just hope he never sees this", "heeeere he comes", "thanks for playing. Have your trophy!", "you win...", "heeere you go!"]))
             await asyncio.sleep(4)
 
-            conv = "uhh...&sorry&...&sigh&I'm so sorry|.5;;I was really gonna do it but since April 24th ***REMOVED*** wants me to challange you again...&If you had come before April 24th you would have your info now... But since your late I have to ask you to do one more thing&***REMOVED*** updated me to do one more thing|8;;Just one thing&It's not much&I believe it's not that hard|3.5"
+            conv = "uhh...&sorry&...&sigh&I'm so sorry|.5;;I was really gonna do it but since April 24th ***REMOVED*** wants me to challange you again...&If you had come before April 24th you would have your info now... But since you're late I have to ask you to do one more thing&***REMOVED*** updated me to do one more thing|8;;Just one thing&It's not much&I believe it's not that hard|3.5"
             for part in conv.split(";;"):
                 msg, delay = part.split("|")
                 await self.send_typing(channel)
                 await asyncio.sleep(float(delay))
                 await self.safe_send_message(channel, choice(msg.split("&")))
-            people = ["277112984919212035", "284838538556604418",
-                      "237185271303503872", "277112528159637515"]
-            try:
-                people.remove(author.id)
-            except:
-                pass
+            # people = ["277112984919212035", "284838538556604418",
+            #           "237185271303503872", "277112528159637515"]
+            # try:
+            #     people.remove(author.id)
+            # except:
+            #     pass
 
-            # people = ["203302899277627392"]
+            people = ["203302899277627392"]
             chosen_person_id = choice(people)
             chosen_person = self.get_global_user(chosen_person_id)
             key = random_line(
                 "data/scattergories/vegetables.txt").strip().upper()
             await self.send_typing(channel)
-            await asyncio.sleep(4.75)
-            await self.safe_send_message(channel, "All I want you to do is to ask *****REMOVED***0.name***REMOVED***** (***REMOVED***0.mention***REMOVED***) to send me \"***REMOVED***1***REMOVED***\" in private chat!".format(chosen_person, key))
+            await asyncio.sleep(5.75)
+            await self.safe_send_message(channel, "All I want you to do is to ask *****REMOVED***0.name***REMOVED***** (***REMOVED***0.mention***REMOVED***) to send me \"***REMOVED***1***REMOVED***\" in private chat! But you have to ask them on the server!".format(chosen_person, key))
             await self.send_typing(channel)
             await asyncio.sleep(3.5)
             await self.safe_send_message(channel, "Nothing more, nothing less. Just \"***REMOVED******REMOVED***\"".format(key))
+
+            while True:
+                msg = await self.wait_for_message(check=lambda msg: key.lower() in msg.content.lower() and msg.author.id in [author.id, chosen_person_id])
+                if msg.server is not None and msg.server.id == "203304535949574154":
+                    print("they asked them on the server. yay!")
+                    break
+                else:
+                    await self.send_typing(chosen_person)
+                    await asyncio.sleep(4)
+                    await self.safe_send_message(chosen_person, choice(["I told you you need to ask them on the server! As far as I can tell you haven't done that!", "I was serious when I said that you need to ask them on the server! Do it!", "You need to ask them on the server. Otherwise it doesn't count!"]))
+
             while True:
                 msg = await self.wait_for_message(author=chosen_person, check=lambda msg: msg.channel.is_private)
-                msg_content = msg.content.strip().lower()
+                msg_content = msg.content.lower().replace("!c", "").strip()
                 if key.lower() in msg_content:
                     await self.send_typing(chosen_person)
                     await asyncio.sleep(4)
@@ -2650,17 +2665,19 @@ class MusicBot(discord.Client):
                 await self.send_typing(channel)
                 await asyncio.sleep(3)
                 await self.safe_send_message(channel, choice(["you're right, I shouldn't stretch it... Thanks for not answering ;(", "I was really asking for input... No answer is by definition a no I guess...", "you coulda said... anything at least? Now I feel really stupid", "Are you still there?\nI wanted an answer to that..."]))
-            if any(x in msg.content.strip().lower() for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs", "yay"]):
-                channel = author
-                await self.send_typing(channel)
-                await asyncio.sleep(2)
-                await self.safe_send_message(channel, choice(["yuss", "maybe he won't punish me as hard now xD", "I'm very glad, thanks", "I'll start working immediately"]))
-                await self.safe_send_message(self._get_owner(), "***REMOVED******REMOVED*** said yeeeeess".format(author.display_name))
             else:
-                await self.send_typing(channel)
-                await asyncio.sleep(1.6)
-                await self.safe_send_message(channel, choice(["Oh.... I'm sorry for putting you through it then", "okay... I gotta admit... That hurt. I really put a lot of effort into this", "Can't say I didn't try...", ":///\nIt hurts...\nI'm sorry."]))
-                await self.safe_send_message(self._get_owner(), "***REMOVED******REMOVED*** said no ;(".format(author.display_name))
+                msg_content = msg.content.lower().replace("!c", "").strip()
+                if any(x in msg_content for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs", "yay"]):
+                    channel = author
+                    await self.send_typing(channel)
+                    await asyncio.sleep(2)
+                    await self.safe_send_message(channel, choice(["yuss", "maybe he won't punish me as hard now xD", "I'm very glad, thanks", "I'll start working immediately"]))
+                    await self.safe_send_message(self._get_owner(), "***REMOVED******REMOVED*** said yeeeeess:\n***REMOVED******REMOVED***".format(author.display_name, msg_content))
+                else:
+                    await self.send_typing(channel)
+                    await asyncio.sleep(1.6)
+                    await self.safe_send_message(channel, choice(["Oh.... I'm sorry for putting you through it then", "okay... I gotta admit... That hurt. I really put a lot of effort into this", "Can't say I didn't try...", ":///\nIt hurts...\nI'm sorry."]))
+                    await self.safe_send_message(self._get_owner(), "***REMOVED******REMOVED*** said no ;(:\n***REMOVED******REMOVED***".format(author.display_name, msg_content))
 
             await asyncio.sleep(3.8)
             await self.safe_send_message(channel, choice(["Welp... That was it!\n**Thanks for playing**", "it took me about 2 hours to set this up and I enjoyed every second. Thanks for playing!\nAnd especially thanks for caring enough to look me up ;).\nIt really means a lot to me.", "So then. I'm really embarassed now, but it's over. it's done. Thanks for playing and thanks for the adrenaline rush. I sure enjoyed it.\nGoodbye!", "Well. Thanks for spending the last ***REMOVED******REMOVED*** with me. I really do enjoy your presence... But it's over now. Enjoy the rest of the day!".format(format_time((datetime.now() - start_time).total_seconds(), True, 1, 1))]))
