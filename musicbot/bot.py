@@ -2513,6 +2513,8 @@ class MusicBot(discord.Client):
             already_used = load_file("data/simon_berger_asked.txt")
 
             if author.id in already_used:
+                if author.id == "203302899277627392":
+                    return Response(choice(["why would you ask about yourself?", "I'm only gonna tell someone else", "Ye sure. Not gonna tell you Simon", "I know you're just asking because you want to remove the information I have. I only answer this to someone else", "NUUUUUPE simon. You gotta try harder. I don't fall for these tricks"]))
                 return Response(choice(["I mustn't betray my master twice for you!", "You've done enough damage already", "He punished me for telling you already", "Don't push me... You already got me to do something stupid!", "Not gonna go down that road again", "Sorry. I don't want to do it anymore...", "Please no....", "not gonna happen again!", "fool me once, shame on you. Fool me twice, shame on me. So nah, not gonna happen", "please stop asking for that", "Not for you...", "Anyone else but you!", "I don't feel like saying something about him ever again. At least not to you", "give it up, you already had your chance", "Never again", "I don't trust you anymore", "surrey but nuh"]))
             else:
                 already_used.append(author.id)
@@ -2604,11 +2606,21 @@ class MusicBot(discord.Client):
             key = random_line(
                 "data/scattergories/vegetables.txt").strip().upper()
             await self.send_typing(channel)
-            await asyncio.sleep(4.75)
-            await self.safe_send_message(channel, "All I want you to do is to ask **{0.name}** ({0.mention}) to send me \"{1}\" in private chat!".format(chosen_person, key))
+            await asyncio.sleep(5.75)
+            await self.safe_send_message(channel, "All I want you to do is to ask **{0.name}** ({0.mention}) to send me \"{1}\" in private chat! But you have to ask them on the server!".format(chosen_person, key))
             await self.send_typing(channel)
             await asyncio.sleep(3.5)
             await self.safe_send_message(channel, "Nothing more, nothing less. Just \"{}\"".format(key))
+
+            while True:
+                msg = await self.wait_for_message(check=lambda msg: key.lower() in msg.content.lower())
+                if msg.server is None:
+                    await self.send_typing(chosen_person)
+                    await asyncio.sleep(4)
+                    await self.safe_send_message(chosen_person, choice(["I told you you need to ask them on the server! As far as I can tell you haven't done that!", "I was serious when I said that you need to ask them on the server! Do it!", "You need to ask them on the server. Otherwise it doesn't count!"]))
+                elif msg.server.id == "285176027855192065":
+                    break
+
             while True:
                 msg = await self.wait_for_message(author=chosen_person, check=lambda msg: msg.channel.is_private)
                 msg_content = msg.content.lower().replace("!c", "").strip()
