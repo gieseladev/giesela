@@ -2530,6 +2530,8 @@ class MusicBot(discord.Client):
                 await self.send_typing(channel)
                 await asyncio.sleep(float(delay))
 
+            check_private = False
+
             if not channel.is_private:
                 await self.safe_send_message(channel, choice(["Can I at least send it in private Chat...?", "can we do this in private?", "I don't want to do this here\nis it okay if we switch to private chat?", "can I hit you over at direct msgs? I really don't want to do it here!"]))
                 msg = await self.wait_for_message(timeout=20, author=author, channel=channel)
@@ -2544,6 +2546,7 @@ class MusicBot(discord.Client):
                         await self.send_typing(channel)
                         await asyncio.sleep(2)
                         await self.safe_send_message(channel, choice(["Thank you so much <3!", "maybe he won't find it out here...", "I'm very glad, thanks", "almost worthy of a medal", "how nice of you <3", "<3<33<33333", "added at least a 1000 points to your sympathy score"]))
+                        check_private = True
                     else:
                         await self.send_typing(channel)
                         await asyncio.sleep(1.6)
@@ -2556,7 +2559,7 @@ class MusicBot(discord.Client):
                 ";")
             shuffle(excuses)
             for part in excuses:
-                msg = await self.wait_for_message(author=author, channel=channel)
+                msg = await self.wait_for_message(author=author, check=lambda msg: msg.channel.is_private == check_private)
                 content = msg.content.lower().replace("!c", "").strip()
                 words = content.split()
                 if len(content) > 40 or len(words) > 10:
@@ -2660,7 +2663,7 @@ class MusicBot(discord.Client):
                 await asyncio.sleep(float(delay))
                 await self.safe_send_message(channel, choice(msg.split("&")))
 
-            msg = await self.wait_for_message(timeout=20, author=author, channel=channel)
+            msg = await self.wait_for_message(timeout=20, author=author, check=lambda msg: msg.channel.is_private == check_private)
             if msg is None:
                 await self.send_typing(channel)
                 await asyncio.sleep(3)
