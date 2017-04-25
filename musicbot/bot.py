@@ -2530,20 +2530,22 @@ class MusicBot(discord.Client):
 
             if not channel.is_private:
                 await self.safe_send_message(channel, choice(["Can I at least send it in private Chat...?", "can we do this in private?", "I don't want to do this here\nis it okay if we switch to private chat?", "can I hit you over at direct msgs? I really don't want to do it here!"]))
-                msg = await self.wait_for_message(timeout=12, author=author, channel=channel)
+                msg = await self.wait_for_message(timeout=20, author=author, channel=channel)
                 if msg is None:
                     await self.send_typing(channel)
                     await asyncio.sleep(3)
                     await self.safe_send_message(channel, choice(["I'm gonna assume that's a no... sighs", "I was really asking for input... No answer is by definition no I guess", "you coulda said... anything? let's just stay here...", "why didn't you answer... I'm just gonna say it's a no"]))
-                if any(x in msg.content.strip().lower() for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs"]):
-                    channel = author
-                    await self.send_typing(channel)
-                    await asyncio.sleep(2)
-                    await self.safe_send_message(channel, choice(["Thank you so much <3!", "maybe he won't find it out here...", "I'm very glad, thanks", "almost worthy of a medal", "how nice of you <3", "<3<33<33333", "added at least a 1000 points to your sympathy score"]))
                 else:
-                    await self.send_typing(channel)
-                    await asyncio.sleep(1.6)
-                    await self.safe_send_message(channel, choice(["Thanks for nothing.......", "What have I done to deserve this? sighs...", "I hate you.... let's move on tho", "okay okay... we're doing it here"]))
+                    msg_content = msg.content.lower().replace("!c", "").strip()
+                    if any(x in msg_content for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs"]):
+                        channel = author
+                        await self.send_typing(channel)
+                        await asyncio.sleep(2)
+                        await self.safe_send_message(channel, choice(["Thank you so much <3!", "maybe he won't find it out here...", "I'm very glad, thanks", "almost worthy of a medal", "how nice of you <3", "<3<33<33333", "added at least a 1000 points to your sympathy score"]))
+                    else:
+                        await self.send_typing(channel)
+                        await asyncio.sleep(1.6)
+                        await self.safe_send_message(channel, choice(["Thanks for nothing.......", "What have I done to deserve this? sighs...", "I hate you.... let's move on tho", "okay okay... we're doing it here"]))
 
             await self.send_typing(channel)
             await asyncio.sleep(5)
@@ -2553,7 +2555,7 @@ class MusicBot(discord.Client):
             shuffle(excuses)
             for part in excuses:
                 msg = await self.wait_for_message(author=author, channel=channel)
-                content = msg.content.lower().strip()
+                content = msg.content.lower().replace("!c", "").strip()
                 words = content.split()
                 if len(content) > 40 or len(words) > 10:
                     msg_language, probability = self.lang_identifier.classify(
@@ -2609,7 +2611,7 @@ class MusicBot(discord.Client):
             await self.safe_send_message(channel, "Nothing more, nothing less. Just \"{}\"".format(key))
             while True:
                 msg = await self.wait_for_message(author=chosen_person, check=lambda msg: msg.channel.is_private)
-                msg_content = msg.content.strip().lower()
+                msg_content = msg.content.lower().replace("!c", "").strip()
                 if key.lower() in msg_content:
                     await self.send_typing(chosen_person)
                     await asyncio.sleep(4)
@@ -2650,17 +2652,19 @@ class MusicBot(discord.Client):
                 await self.send_typing(channel)
                 await asyncio.sleep(3)
                 await self.safe_send_message(channel, choice(["you're right, I shouldn't stretch it... Thanks for not answering ;(", "I was really asking for input... No answer is by definition a no I guess...", "you coulda said... anything at least? Now I feel really stupid", "Are you still there?\nI wanted an answer to that..."]))
-            if any(x in msg.content.strip().lower() for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs", "yay"]):
-                channel = author
-                await self.send_typing(channel)
-                await asyncio.sleep(2)
-                await self.safe_send_message(channel, choice(["yuss", "maybe he won't punish me as hard now xD", "I'm very glad, thanks", "I'll start working immediately"]))
-                await self.safe_send_message(self._get_owner(), "{} said yeeeeess".format(author.display_name))
             else:
-                await self.send_typing(channel)
-                await asyncio.sleep(1.6)
-                await self.safe_send_message(channel, choice(["Oh.... I'm sorry for putting you through it then", "okay... I gotta admit... That hurt. I really put a lot of effort into this", "Can't say I didn't try...", ":///\nIt hurts...\nI'm sorry."]))
-                await self.safe_send_message(self._get_owner(), "{} said no ;(".format(author.display_name))
+                msg_content = msg.content.lower().replace("!c", "").strip()
+                if any(x in msg_content for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs", "yay"]):
+                    channel = author
+                    await self.send_typing(channel)
+                    await asyncio.sleep(2)
+                    await self.safe_send_message(channel, choice(["yuss", "maybe he won't punish me as hard now xD", "I'm very glad, thanks", "I'll start working immediately"]))
+                    await self.safe_send_message(self._get_owner(), "{} said yeeeeess:\n{}".format(author.display_name, msg_content))
+                else:
+                    await self.send_typing(channel)
+                    await asyncio.sleep(1.6)
+                    await self.safe_send_message(channel, choice(["Oh.... I'm sorry for putting you through it then", "okay... I gotta admit... That hurt. I really put a lot of effort into this", "Can't say I didn't try...", ":///\nIt hurts...\nI'm sorry."]))
+                    await self.safe_send_message(self._get_owner(), "{} said no ;(:\n{}".format(author.display_name, msg_content))
 
             await asyncio.sleep(3.8)
             await self.safe_send_message(channel, choice(["Welp... That was it!\n**Thanks for playing**", "it took me about 2 hours to set this up and I enjoyed every second. Thanks for playing!\nAnd especially thanks for caring enough to look me up ;).\nIt really means a lot to me.", "So then. I'm really embarassed now, but it's over. it's done. Thanks for playing and thanks for the adrenaline rush. I sure enjoyed it.\nGoodbye!", "Well. Thanks for spending the last {} with me. I really do enjoy your presence... But it's over now. Enjoy the rest of the day!".format(format_time((datetime.now() - start_time).total_seconds(), True, 1, 1))]))
