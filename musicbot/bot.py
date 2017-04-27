@@ -5017,9 +5017,9 @@ class MusicBot(discord.Client):
                 return Response(str(result))
             except Exception as a:
                 if str(a) == str(e):
-                    return Response("Le Error:\n```\n{}\n```".format(str(e)))
+                    return Response("Error:\n```\n{}\n```".format(str(e)))
                 else:
-                    return Response("Les Errors:\n```\n{}\n```\n```\n{}\n```".format(str(e), str(a)))
+                    return Response("Errors:\n```\n{}\n```\n```\n{}\n```".format(str(e), str(a)))
 
     async def cmd_skipto(self, player, timestamp):
         """
