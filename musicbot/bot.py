@@ -5200,11 +5200,8 @@ class MusicBot(discord.Client):
             for member in server.members:
                 online_logger.update_stats(
                     member.id, member.status == discord.Status.online, member.game)
-                if datetime.now() > next_autosave:
-                    next_autosave = datetime.now() + timedelta(minutes=5)
-                    online_logger.create_output()
-                await asyncio.sleep(1)
                 notification = online_logger.get_notification()
+                await asyncio.sleep(.5)
                 if notification is not None:
                     game_name, user_id, receiver_ids = notification
                     user_name = self.get_global_user(user_id).name
@@ -5216,6 +5213,9 @@ class MusicBot(discord.Client):
 
                         await self.safe_send_message(self.get_global_user(recv), message_text)
 
+            if datetime.now() > next_autosave:
+                next_autosave = datetime.now() + timedelta(minutes=5)
+                online_logger.create_output()
             await asyncio.sleep(65)
 
     async def cmd_notifyme(self, server, author):
