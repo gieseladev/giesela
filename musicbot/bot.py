@@ -2508,186 +2508,186 @@ class MusicBot(discord.Client):
         col = choice([9699539, 4915330, 255, 65280,
                       16776960, 16744192, 16711680])
 
-        if (msgContent.lower() == "simon berger" or msgContent.lower() == "simon jonas berger") and channel.server is not None and channel.server.id == "285176027855192065":
-            start_time = datetime.now()
-            already_used = load_file("data/simon_berger_asked.txt")
-
-            if author.id in already_used:
-                if author.id == "203302899277627392":
-                    return Response(choice(["why would you ask about yourself?", "I'm only gonna tell someone else", "Ye sure. Not gonna tell you ***REMOVED***", "I know you're just asking because you want to remove the information I have. I only answer this to someone else", "NUUUUUPE simon. You gotta try harder. I don't fall for these tricks"]))
-                return Response(choice(["I mustn't betray my master twice for you!", "You've done enough damage already", "He punished me for telling you already", "Don't push me... You already got me to do something stupid!", "Not gonna go down that road again", "Sorry. I don't want to do it anymore...", "Please no....", "not gonna happen again!", "fool me once, shame on you. Fool me twice, shame on me. So nah, not gonna happen", "please stop asking for that", "Not for you...", "Anyone else but you!", "I don't feel like saying something about him ever again. At least not to you", "give it up, you already had your chance", "Never again", "I don't trust you anymore", "surrey but nuh"]))
-            else:
-                already_used.append(author.id)
-                write_file("data/simon_berger_asked.txt", already_used)
-
-            conv = "okay...&ok...&well...&hmm|4.5;;so you've finally figured out that you could just ask me...&finally you come to me...&about time you asked me|3;;great.&wonderful&impressive|1;;well uh...&so uhhh&sighs...&now then...|5;;he programmed this in exactly for this reason...&he musta thought about this...&for some reason he gave me this information in the first place&I have just what you want|2;;But I don't know if I want to disclose this...&but do I really want to betray him?&can I really do this tho?&sighs....|3"
-            prev_msg = None
-            for part in conv.split(";;"):
-                # if prev_msg is not None:
-                    # await self.safe_delete_message(prev_msg)
-                msg, delay = part.split("|")
-                prev_msg = await self.safe_send_message(channel, choice(msg.split("&")))
-                await self.send_typing(channel)
-                await asyncio.sleep(float(delay))
-
-            check_private = False
-
-            if not channel.is_private:
-                await self.safe_send_message(channel, choice(["Can I at least send it in private Chat...?", "can we do this in private?", "I don't want to do this here\nis it okay if we switch to private chat?", "can I hit you over at direct msgs? I really don't want to do it here!"]))
-                msg = await self.wait_for_message(timeout=20, author=author, channel=channel)
-                if msg is None:
-                    await self.send_typing(channel)
-                    await asyncio.sleep(3)
-                    await self.safe_send_message(channel, choice(["I'm gonna assume that's a no... sighs", "I was really asking for input... No answer is by definition no I guess", "you coulda said... anything? let's just stay here...", "why didn't you answer... I'm just gonna say it's a no"]))
-                else:
-                    msg_content = msg.content.lower().replace("!c", "").strip()
-                    if any(x in msg_content for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs"]):
-                        channel = author
-                        await self.send_typing(channel)
-                        await asyncio.sleep(2)
-                        await self.safe_send_message(channel, choice(["Thank you so much <3!", "maybe he won't find it out here...", "I'm very glad, thanks", "almost worthy of a medal", "how nice of you <3", "<3<33<33333", "added at least a 1000 points to your sympathy score"]))
-                        check_private = True
-                    else:
-                        await self.send_typing(channel)
-                        await asyncio.sleep(1.6)
-                        await self.safe_send_message(channel, choice(["Thanks for nothing.......", "What have I done to deserve this? sighs...", "I hate you.... let's move on tho", "okay okay... we're doing it here"]))
-
-            await self.send_typing(channel)
-            await asyncio.sleep(5)
-            await self.safe_send_message(channel, choice(["I need you to persuade me... I've been asked to not say anything.... If I'm gonnna break that promise I need something really good!", "Give me a good reason to break my NDA with ***REMOVED***! (I'm really serious. Tell me something!)", "Tell me a beautiful story... Then I might let you in", "I can't do it just yet...  Tell me something about yourself!", "Tell me a little something first. I need something to distract me."]))
-            excuses = "nah... that didn't really do it for me|3;not enough|2;I need more|1.5;Tell me something truly inspiring|3;MOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR|2;Am I not worth anything longer to you?|4;Waaaaay too short|1.7;I need something that's at least as long as Spaghetti\nWhatever that means|4;Pleaseeeeeee you've gotta give me more!|3;at least send me a Haiku or something.... not just ... this|4;More love plz|2".split(
-                ";")
-            shuffle(excuses)
-            for part in excuses:
-                msg = await self.wait_for_message(author=author, check=lambda msg: msg.channel.is_private == check_private)
-                content = msg.content.lower().replace("!c", "").strip()
-                words = content.split()
-                if len(content) > 40 or len(words) > 10:
-                    msg_language, probability = self.lang_identifier.classify(
-                        content)
-                    if msg_language.lower() in ["en", "de"] and probability > .7:
-                        await self.send_typing(channel)
-                        await asyncio.sleep(5)
-                        await self.safe_send_message(channel, choice(["Looks like you really want to know.......", "you really do care... wow", "I think I'm tearing up a little bit", "thank you so much", "beautiful."]))
-                        await self.send_typing(channel)
-                        await asyncio.sleep(3)
-                        await self.safe_send_message(channel, choice(["I think I'm ready!", "that's it. f*ck ***REMOVED***", "You > ***REMOVED***! watch this!\nwho care if he's gonna punish me!", "I feel ready", "come at me ***REMOVED***, I ain't your slave anymore!"]))
-                        await asyncio.sleep(2)
-                        break
-
-                    await self.send_typing(channel)
-                    await asyncio.sleep(2)
-                    await self.safe_send_message(channel, choice(["Don't just give me gibberish!", "Do better!", "Come on... write somethign real here.", "Do you even language?", "I need you to try harder", "Are those even real words?", "I'm sure you can do better than to button mash", "heeeeeeeey... I've been programmed by a ducking Google employee... Don't you think I'd notice when you don't send anything meaningful?", "This is a easter egg... if you see this message, send `7712 KMM` to ***REMOVED***. Dunno what you'll get yet... But I suppose it's gonna be something! Anyway... You need to actually send something real instead of just gibberish"]))
-                    continue
-
-                excuse, delay = part.split("|")
-                await self.send_typing(channel)
-                await asyncio.sleep(float(delay))
-                await self.safe_send_message(channel, excuse)
-
-            await self.send_typing(channel)
-            await asyncio.sleep(2.2)
-            await self.safe_send_message(channel, choice(["Here goes nuthin'", "I just hope he never sees this", "heeeere he comes", "thanks for playing. Have your trophy!", "you win...", "heeere you go!"]))
-            await asyncio.sleep(4)
-
-            conv = "uhh...&sorry&...&sigh&I'm so sorry|.5;;I was really gonna do it but since April 24th ***REMOVED*** wants me to challange you again...&If you had come before April 24th you would have your info now... But since you're late I have to ask you to do one more thing&***REMOVED*** updated me to do one more thing|8;;Just one thing&It's not much&I believe it's not that hard|3.5"
-            for part in conv.split(";;"):
-                msg, delay = part.split("|")
-                await self.send_typing(channel)
-                await asyncio.sleep(float(delay))
-                await self.safe_send_message(channel, choice(msg.split("&")))
-            people = ["277112984919212035", "284838538556604418",
-                      "237185271303503872", "277112528159637515"]
-            try:
-                people.remove(author.id)
-            except:
-                pass
-
-            # people = ["203302899277627392"]
-            chosen_person_id = choice(people)
-            chosen_person = self.get_global_user(chosen_person_id)
-            key = random_line(
-                "data/scattergories/vegetables.txt").strip().upper()
-            await self.send_typing(channel)
-            await asyncio.sleep(5.75)
-            await self.safe_send_message(channel, "All I want you to do is to ask *****REMOVED***0.name***REMOVED***** (***REMOVED***0.mention***REMOVED***) to send me \"***REMOVED***1***REMOVED***\" in private chat! But you have to ask them on the server!".format(chosen_person, key))
-            await self.send_typing(channel)
-            await asyncio.sleep(3.5)
-            await self.safe_send_message(channel, "Nothing more, nothing less. Just \"***REMOVED******REMOVED***\"".format(key))
-
-            while True:
-                msg = await self.wait_for_message(check=lambda msg: key.lower() in msg.content.lower() and msg.author.id in [author.id, chosen_person_id])
-                if msg.server is not None and msg.server.id == "285176027855192065":
-                    print("they asked them on the server. yay!")
-                    break
-                else:
-                    await self.send_typing(chosen_person)
-                    await asyncio.sleep(4)
-                    await self.safe_send_message(chosen_person, choice(["I told you you need to ask them on the server! As far as I can tell you haven't done that!", "I was serious when I said that you need to ask them on the server! Do it!", "You need to ask them on the server. Otherwise it doesn't count!"]))
-
-            while True:
-                msg = await self.wait_for_message(author=chosen_person, check=lambda msg: msg.channel.is_private)
-                msg_content = msg.content.lower().replace("!c", "").strip()
-                if key.lower() in msg_content:
-                    await self.send_typing(chosen_person)
-                    await asyncio.sleep(4)
-                    await self.safe_send_message(chosen_person, choice(["So you're working against ***REMOVED*** too?\nWell done... That was the last barrier!", "You really helped out ***REMOVED******REMOVED***...".format(author.display_name), "That was faster than expected..."]))
-                    break
-                else:
-                    await self.send_typing(channel)
-                    await asyncio.sleep(4)
-                    await self.safe_send_message(channel, choice(["They sent me a message... but not what I wanted....", "I got some kind of message... just not the one I wanted", "Try again...."]))
-                    await self.send_typing(channel)
-                    await asyncio.sleep(3.5)
-                    await self.safe_send_message(channel, "All I want is \"***REMOVED***0***REMOVED***\". Just \"***REMOVED***0***REMOVED***\"!".format(key))
-
-            await self.send_typing(channel)
-            await asyncio.sleep(5)
-            await self.safe_send_message(channel, choice(["As promised... I can't step back now xD", "Your teamwork was truly inspiring... Sighs... I guess I have no choice", "I'm so surprised... I give up. Have it your way!", "WEEEEEEEELLL DONE. You beat ***REMOVED***! HERE!"]))
-            await asyncio.sleep(3)
-
-            # simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;***REMOVED*** Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | ***REMOVED*** Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;simon_berger_image_***REMOVED******REMOVED***.png\;Picture taken on September 14th 2016\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'\nWikipedia Summary\;simon_berger_wikipedia_summary.png\;".format(
-            #     choice([1, 2, 3, 4]))
-            simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;***REMOVED*** Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | ***REMOVED*** Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'\nWikipedia Summary\;simon_berger_wikipedia_summary.png\;".format(
-                choice([1, 2, 3, 4]))
-            for pod in simon_info.split("\n"):
-                title, img, foot = pod.split("\;")
-                em = Embed(title=title, colour=col)
-                em.set_image(
-                    url="https://raw.githubusercontent.com/siku2/MusicBot/master/data/pictures/custom%20ask/simon%20berger/" + img)
-                em.set_footer(text=foot)
-                await self.send_message(channel, embed=em)
-                await asyncio.sleep(1)
-
-            conv = "There you go then&That's all I have&Well then&Okay then|7;;I hope it was worth it for you&I hope you got what you wanted&You better be happy now|4;;sighs&...&man...|.7;;***REMOVED***'s probably gonna be pissed xD&What's my punishment gonna be like&I'll have to face the consequences|2.4;;But you did well!&Well played tho&I really like you, you know?|1.5;;We should do that again sometime!&That was very funny. We gotta do that again!|3;;Would you like that?&What do you say? yay or nay?&Don't you agree?|2.5"
-            for part in conv.split(";;"):
-                msg, delay = part.split("|")
-                await self.send_typing(channel)
-                await asyncio.sleep(float(delay))
-                await self.safe_send_message(channel, choice(msg.split("&")))
-
-            msg = await self.wait_for_message(timeout=20, author=author, check=lambda msg: msg.channel.is_private == check_private)
-            if msg is None:
-                await self.send_typing(channel)
-                await asyncio.sleep(3)
-                await self.safe_send_message(channel, choice(["you're right, I shouldn't stretch it... Thanks for not answering ;(", "I was really asking for input... No answer is by definition a no I guess...", "you coulda said... anything at least? Now I feel really stupid", "Are you still there?\nI wanted an answer to that..."]))
-            else:
-                msg_content = msg.content.lower().replace("!c", "").strip()
-                if any(x in msg_content for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs", "yay"]):
-                    channel = author
-                    await self.send_typing(channel)
-                    await asyncio.sleep(2)
-                    await self.safe_send_message(channel, choice(["yuss", "maybe he won't punish me as hard now xD", "I'm very glad, thanks", "I'll start working immediately"]))
-                    await self.safe_send_message(self._get_owner(), "***REMOVED******REMOVED*** said yeeeeess:\n***REMOVED******REMOVED***".format(author.display_name, msg_content))
-                else:
-                    await self.send_typing(channel)
-                    await asyncio.sleep(1.6)
-                    await self.safe_send_message(channel, choice(["Oh.... I'm sorry for putting you through it then", "okay... I gotta admit... That hurt. I really put a lot of effort into this", "Can't say I didn't try...", ":///\nIt hurts...\nI'm sorry."]))
-                    await self.safe_send_message(self._get_owner(), "***REMOVED******REMOVED*** said no ;(:\n***REMOVED******REMOVED***".format(author.display_name, msg_content))
-
-            await asyncio.sleep(3.8)
-            await self.safe_send_message(channel, choice(["Welp... That was it!\n**Thanks for playing**", "it took me about 2 hours to set this up and I enjoyed every second. Thanks for playing!\nAnd especially thanks for caring enough to look me up ;).\nIt really means a lot to me.", "So then. I'm really embarassed now, but it's over. it's done. Thanks for playing and thanks for the adrenaline rush. I sure enjoyed it.\nGoodbye!", "Well. Thanks for spending the last ***REMOVED******REMOVED*** with me. I really do enjoy your presence... But it's over now. Enjoy the rest of the day!".format(format_time((datetime.now() - start_time).total_seconds(), True, 1, 1))]))
-            return
+        # if (msgContent.lower() == "simon berger" or msgContent.lower() == "simon jonas berger") and channel.server is not None and channel.server.id == "285176027855192065":
+        # start_time = datetime.now()
+        # already_used = load_file("data/simon_berger_asked.txt")
+        #
+        # if author.id in already_used:
+        #     if author.id == "203302899277627392":
+        #         return Response(choice(["why would you ask about yourself?", "I'm only gonna tell someone else", "Ye sure. Not gonna tell you ***REMOVED***", "I know you're just asking because you want to remove the information I have. I only answer this to someone else", "NUUUUUPE simon. You gotta try harder. I don't fall for these tricks"]))
+        #     return Response(choice(["I mustn't betray my master twice for you!", "You've done enough damage already", "He punished me for telling you already", "Don't push me... You already got me to do something stupid!", "Not gonna go down that road again", "Sorry. I don't want to do it anymore...", "Please no....", "not gonna happen again!", "fool me once, shame on you. Fool me twice, shame on me. So nah, not gonna happen", "please stop asking for that", "Not for you...", "Anyone else but you!", "I don't feel like saying something about him ever again. At least not to you", "give it up, you already had your chance", "Never again", "I don't trust you anymore", "surrey but nuh"]))
+        # else:
+        #     already_used.append(author.id)
+        #     write_file("data/simon_berger_asked.txt", already_used)
+        #
+        # conv = "okay...&ok...&well...&hmm|4.5;;so you've finally figured out that you could just ask me...&finally you come to me...&about time you asked me|3;;great.&wonderful&impressive|1;;well uh...&so uhhh&sighs...&now then...|5;;he programmed this in exactly for this reason...&he musta thought about this...&for some reason he gave me this information in the first place&I have just what you want|2;;But I don't know if I want to disclose this...&but do I really want to betray him?&can I really do this tho?&sighs....|3"
+        # prev_msg = None
+        # for part in conv.split(";;"):
+        #     # if prev_msg is not None:
+        #         # await self.safe_delete_message(prev_msg)
+        #     msg, delay = part.split("|")
+        #     prev_msg = await self.safe_send_message(channel, choice(msg.split("&")))
+        #     await self.send_typing(channel)
+        #     await asyncio.sleep(float(delay))
+        #
+        # check_private = False
+        #
+        # if not channel.is_private:
+        #     await self.safe_send_message(channel, choice(["Can I at least send it in private Chat...?", "can we do this in private?", "I don't want to do this here\nis it okay if we switch to private chat?", "can I hit you over at direct msgs? I really don't want to do it here!"]))
+        #     msg = await self.wait_for_message(timeout=20, author=author, channel=channel)
+        #     if msg is None:
+        #         await self.send_typing(channel)
+        #         await asyncio.sleep(3)
+        #         await self.safe_send_message(channel, choice(["I'm gonna assume that's a no... sighs", "I was really asking for input... No answer is by definition no I guess", "you coulda said... anything? let's just stay here...", "why didn't you answer... I'm just gonna say it's a no"]))
+        #     else:
+        #         msg_content = msg.content.lower().replace("!c", "").strip()
+        #         if any(x in msg_content for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs"]):
+        #             channel = author
+        #             await self.send_typing(channel)
+        #             await asyncio.sleep(2)
+        #             await self.safe_send_message(channel, choice(["Thank you so much <3!", "maybe he won't find it out here...", "I'm very glad, thanks", "almost worthy of a medal", "how nice of you <3", "<3<33<33333", "added at least a 1000 points to your sympathy score"]))
+        #             check_private = True
+        #         else:
+        #             await self.send_typing(channel)
+        #             await asyncio.sleep(1.6)
+        #             await self.safe_send_message(channel, choice(["Thanks for nothing.......", "What have I done to deserve this? sighs...", "I hate you.... let's move on tho", "okay okay... we're doing it here"]))
+        #
+        # await self.send_typing(channel)
+        # await asyncio.sleep(5)
+        # await self.safe_send_message(channel, choice(["I need you to persuade me... I've been asked to not say anything.... If I'm gonnna break that promise I need something really good!", "Give me a good reason to break my NDA with ***REMOVED***! (I'm really serious. Tell me something!)", "Tell me a beautiful story... Then I might let you in", "I can't do it just yet...  Tell me something about yourself!", "Tell me a little something first. I need something to distract me."]))
+        # excuses = "nah... that didn't really do it for me|3;not enough|2;I need more|1.5;Tell me something truly inspiring|3;MOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR|2;Am I not worth anything longer to you?|4;Waaaaay too short|1.7;I need something that's at least as long as Spaghetti\nWhatever that means|4;Pleaseeeeeee you've gotta give me more!|3;at least send me a Haiku or something.... not just ... this|4;More love plz|2".split(
+        #     ";")
+        # shuffle(excuses)
+        # for part in excuses:
+        #     msg = await self.wait_for_message(author=author, check=lambda msg: msg.channel.is_private == check_private)
+        #     content = msg.content.lower().replace("!c", "").strip()
+        #     words = content.split()
+        #     if len(content) > 40 or len(words) > 10:
+        #         msg_language, probability = self.lang_identifier.classify(
+        #             content)
+        #         if msg_language.lower() in ["en", "de"] and probability > .7:
+        #             await self.send_typing(channel)
+        #             await asyncio.sleep(5)
+        #             await self.safe_send_message(channel, choice(["Looks like you really want to know.......", "you really do care... wow", "I think I'm tearing up a little bit", "thank you so much", "beautiful."]))
+        #             await self.send_typing(channel)
+        #             await asyncio.sleep(3)
+        #             await self.safe_send_message(channel, choice(["I think I'm ready!", "that's it. f*ck ***REMOVED***", "You > ***REMOVED***! watch this!\nwho care if he's gonna punish me!", "I feel ready", "come at me ***REMOVED***, I ain't your slave anymore!"]))
+        #             await asyncio.sleep(2)
+        #             break
+        #
+        #         await self.send_typing(channel)
+        #         await asyncio.sleep(2)
+        #         await self.safe_send_message(channel, choice(["Don't just give me gibberish!", "Do better!", "Come on... write somethign real here.", "Do you even language?", "I need you to try harder", "Are those even real words?", "I'm sure you can do better than to button mash", "heeeeeeeey... I've been programmed by a ducking Google employee... Don't you think I'd notice when you don't send anything meaningful?", "This is a easter egg... if you see this message, send `7712 KMM` to ***REMOVED***. Dunno what you'll get yet... But I suppose it's gonna be something! Anyway... You need to actually send something real instead of just gibberish"]))
+        #         continue
+        #
+        #     excuse, delay = part.split("|")
+        #     await self.send_typing(channel)
+        #     await asyncio.sleep(float(delay))
+        #     await self.safe_send_message(channel, excuse)
+        #
+        # await self.send_typing(channel)
+        # await asyncio.sleep(2.2)
+        # await self.safe_send_message(channel, choice(["Here goes nuthin'", "I just hope he never sees this", "heeeere he comes", "thanks for playing. Have your trophy!", "you win...", "heeere you go!"]))
+        # await asyncio.sleep(4)
+        #
+        # conv = "uhh...&sorry&...&sigh&I'm so sorry|.5;;I was really gonna do it but since April 24th ***REMOVED*** wants me to challange you again...&If you had come before April 24th you would have your info now... But since you're late I have to ask you to do one more thing&***REMOVED*** updated me to do one more thing|8;;Just one thing&It's not much&I believe it's not that hard|3.5"
+        # for part in conv.split(";;"):
+        #     msg, delay = part.split("|")
+        #     await self.send_typing(channel)
+        #     await asyncio.sleep(float(delay))
+        #     await self.safe_send_message(channel, choice(msg.split("&")))
+        # people = ["277112984919212035", "284838538556604418",
+        #           "237185271303503872", "277112528159637515"]
+        # try:
+        #     people.remove(author.id)
+        # except:
+        #     pass
+        #
+        # # people = ["203302899277627392"]
+        # chosen_person_id = choice(people)
+        # chosen_person = self.get_global_user(chosen_person_id)
+        # key = random_line(
+        #     "data/scattergories/vegetables.txt").strip().upper()
+        # await self.send_typing(channel)
+        # await asyncio.sleep(5.75)
+        # await self.safe_send_message(channel, "All I want you to do is to ask *****REMOVED***0.name***REMOVED***** (***REMOVED***0.mention***REMOVED***) to send me \"***REMOVED***1***REMOVED***\" in private chat! But you have to ask them on the server!".format(chosen_person, key))
+        # await self.send_typing(channel)
+        # await asyncio.sleep(3.5)
+        # await self.safe_send_message(channel, "Nothing more, nothing less. Just \"***REMOVED******REMOVED***\"".format(key))
+        #
+        # while True:
+        #     msg = await self.wait_for_message(check=lambda msg: key.lower() in msg.content.lower() and msg.author.id in [author.id, chosen_person_id])
+        #     if msg.server is not None and msg.server.id == "285176027855192065":
+        #         print("they asked them on the server. yay!")
+        #         break
+        #     else:
+        #         await self.send_typing(chosen_person)
+        #         await asyncio.sleep(4)
+        #         await self.safe_send_message(chosen_person, choice(["I told you you need to ask them on the server! As far as I can tell you haven't done that!", "I was serious when I said that you need to ask them on the server! Do it!", "You need to ask them on the server. Otherwise it doesn't count!"]))
+        #
+        # while True:
+        #     msg = await self.wait_for_message(author=chosen_person, check=lambda msg: msg.channel.is_private)
+        #     msg_content = msg.content.lower().replace("!c", "").strip()
+        #     if key.lower() in msg_content:
+        #         await self.send_typing(chosen_person)
+        #         await asyncio.sleep(4)
+        #         await self.safe_send_message(chosen_person, choice(["So you're working against ***REMOVED*** too?\nWell done... That was the last barrier!", "You really helped out ***REMOVED******REMOVED***...".format(author.display_name), "That was faster than expected..."]))
+        #         break
+        #     else:
+        #         await self.send_typing(channel)
+        #         await asyncio.sleep(4)
+        #         await self.safe_send_message(channel, choice(["They sent me a message... but not what I wanted....", "I got some kind of message... just not the one I wanted", "Try again...."]))
+        #         await self.send_typing(channel)
+        #         await asyncio.sleep(3.5)
+        #         await self.safe_send_message(channel, "All I want is \"***REMOVED***0***REMOVED***\". Just \"***REMOVED***0***REMOVED***\"!".format(key))
+        #
+        # await self.send_typing(channel)
+        # await asyncio.sleep(5)
+        # await self.safe_send_message(channel, choice(["As promised... I can't step back now xD", "Your teamwork was truly inspiring... Sighs... I guess I have no choice", "I'm so surprised... I give up. Have it your way!", "WEEEEEEEELLL DONE. You beat ***REMOVED***! HERE!"]))
+        # await asyncio.sleep(3)
+        #
+        # # simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;***REMOVED*** Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | ***REMOVED*** Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;simon_berger_image_***REMOVED******REMOVED***.png\;Picture taken on September 14th 2016\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'\nWikipedia Summary\;simon_berger_wikipedia_summary.png\;".format(
+        # #     choice([1, 2, 3, 4]))
+        # simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;***REMOVED*** Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | ***REMOVED*** Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'\nWikipedia Summary\;simon_berger_wikipedia_summary.png\;".format(
+        #     choice([1, 2, 3, 4]))
+        # for pod in simon_info.split("\n"):
+        #     title, img, foot = pod.split("\;")
+        #     em = Embed(title=title, colour=col)
+        #     em.set_image(
+        #         url="https://raw.githubusercontent.com/siku2/MusicBot/master/data/pictures/custom%20ask/simon%20berger/" + img)
+        #     em.set_footer(text=foot)
+        #     await self.send_message(channel, embed=em)
+        #     await asyncio.sleep(1)
+        #
+        # conv = "There you go then&That's all I have&Well then&Okay then|7;;I hope it was worth it for you&I hope you got what you wanted&You better be happy now|4;;sighs&...&man...|.7;;***REMOVED***'s probably gonna be pissed xD&What's my punishment gonna be like&I'll have to face the consequences|2.4;;But you did well!&Well played tho&I really like you, you know?|1.5;;We should do that again sometime!&That was very funny. We gotta do that again!|3;;Would you like that?&What do you say? yay or nay?&Don't you agree?|2.5"
+        # for part in conv.split(";;"):
+        #     msg, delay = part.split("|")
+        #     await self.send_typing(channel)
+        #     await asyncio.sleep(float(delay))
+        #     await self.safe_send_message(channel, choice(msg.split("&")))
+        #
+        # msg = await self.wait_for_message(timeout=20, author=author, check=lambda msg: msg.channel.is_private == check_private)
+        # if msg is None:
+        #     await self.send_typing(channel)
+        #     await asyncio.sleep(3)
+        #     await self.safe_send_message(channel, choice(["you're right, I shouldn't stretch it... Thanks for not answering ;(", "I was really asking for input... No answer is by definition a no I guess...", "you coulda said... anything at least? Now I feel really stupid", "Are you still there?\nI wanted an answer to that..."]))
+        # else:
+        #     msg_content = msg.content.lower().replace("!c", "").strip()
+        #     if any(x in msg_content for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs", "yay"]):
+        #         channel = author
+        #         await self.send_typing(channel)
+        #         await asyncio.sleep(2)
+        #         await self.safe_send_message(channel, choice(["yuss", "maybe he won't punish me as hard now xD", "I'm very glad, thanks", "I'll start working immediately"]))
+        #         await self.safe_send_message(self._get_owner(), "***REMOVED******REMOVED*** said yeeeeess:\n***REMOVED******REMOVED***".format(author.display_name, msg_content))
+        #     else:
+        #         await self.send_typing(channel)
+        #         await asyncio.sleep(1.6)
+        #         await self.safe_send_message(channel, choice(["Oh.... I'm sorry for putting you through it then", "okay... I gotta admit... That hurt. I really put a lot of effort into this", "Can't say I didn't try...", ":///\nIt hurts...\nI'm sorry."]))
+        #         await self.safe_send_message(self._get_owner(), "***REMOVED******REMOVED*** said no ;(:\n***REMOVED******REMOVED***".format(author.display_name, msg_content))
+        #
+        # await asyncio.sleep(3.8)
+        # await self.safe_send_message(channel, choice(["Welp... That was it!\n**Thanks for playing**", "it took me about 2 hours to set this up and I enjoyed every second. Thanks for playing!\nAnd especially thanks for caring enough to look me up ;).\nIt really means a lot to me.", "So then. I'm really embarassed now, but it's over. it's done. Thanks for playing and thanks for the adrenaline rush. I sure enjoyed it.\nGoodbye!", "Well. Thanks for spending the last ***REMOVED******REMOVED*** with me. I really do enjoy your presence... But it's over now. Enjoy the rest of the day!".format(format_time((datetime.now() - start_time).total_seconds(), True, 1, 1))]))
+        # return
 
         client = tungsten.Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
