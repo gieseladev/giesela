@@ -5540,10 +5540,17 @@ class MusicBot(discord.Client):
             await self.reconnect_voice_client(after)
 
     async def on_member_update(self, before, after):
+        await self.on_any_update(before, after)
         if before.server.id in self.online_loggers:
-            timestamp = "***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(datetime.now())
             self.online_loggers[before.server.id].update_stats(
                 after.id, after.status == discord.Status.online, after.game)
+
+    async def on_voice_state_update(self, before, after):
+        await self.on_any_update(before, after)
+
+    async def on_any_update(self, before, after):
+        if before.server.id in self.online_loggers:
+            timestamp = "***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(datetime.now())
             notification = None
             if before.status != after.status:
                 notification = "`***REMOVED******REMOVED***` ***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(timestamp, after.display_name, ***REMOVED***discord.Status.online: "came **online**", discord.Status.offline: "went **offline**",
@@ -5559,6 +5566,21 @@ class MusicBot(discord.Client):
                         timestamp, after.display_name, text)
                 else:
                     notification += "\nand ***REMOVED******REMOVED***".format(text)
+
+            if before.voice.voice_channel != after.voice.voice_channel:
+                text = ""
+                if after.voice.voice_channel is None:
+                    text = "quit *****REMOVED******REMOVED***** (voice channel)".format(
+                        before.voice.voice_channel.name)
+                else:
+                    text = "joined *****REMOVED******REMOVED***** (voice channel)".format(
+                        after.voice.voice_channel.name)
+                if notification is None:
+                    notification = "`***REMOVED******REMOVED***` ***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(
+                        timestamp, after.display_name, text)
+                else:
+                    notification += "\nand ***REMOVED******REMOVED***".format(text)
+
             if notification is not None:
                 for listener in self.online_loggers[before.server.id].listeners:
                     if before.id == listener:
