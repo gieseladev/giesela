@@ -5552,9 +5552,11 @@ class MusicBot(discord.Client):
         if before.server.id in self.online_loggers:
             timestamp = "{0.hour:0>2}:{0.minute:0>2}".format(datetime.now())
             notification = None
+            mem_name = "\"{}\"".format(after.display_name) if len(
+                after.display_name.split()) > 1 else after.display_name
             if before.status != after.status:
-                notification = "`{}` {} {}".format(timestamp, after.display_name, {discord.Status.online: "came **online**", discord.Status.offline: "went **offline**",
-                                                                                   discord.Status.idle: "went **away**", discord.Status.dnd: "doesn't want to be disturbed"}[after.status])
+                notification = "`{}` {} {}".format(timestamp, mem_name, {discord.Status.online: "came **online**", discord.Status.offline: "went **offline**",
+                                                                         discord.Status.idle: "went **away**", discord.Status.dnd: "doesn't want to be disturbed"}[after.status])
             if before.game != after.game:
                 text = ""
                 if after.game is None:
@@ -5563,7 +5565,7 @@ class MusicBot(discord.Client):
                     text = "started playing **{}**".format(after.game.name)
                 if notification is None:
                     notification = "`{}` {} {}".format(
-                        timestamp, after.display_name, text)
+                        timestamp, mem_name, text)
                 else:
                     notification += "\nand {}".format(text)
 
@@ -5577,7 +5579,7 @@ class MusicBot(discord.Client):
                         after.voice.voice_channel.name)
                 if notification is None:
                     notification = "`{}` {} {}".format(
-                        timestamp, after.display_name, text)
+                        timestamp, mem_name, text)
                 else:
                     notification += "\nand {}".format(text)
 
