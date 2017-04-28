@@ -5168,7 +5168,8 @@ class MusicBot(discord.Client):
         if self.online_loggers.get(server.id, None) is not None:
             return Response("I'm already looking at this server")
         else:
-            asyncio.ensure_future(self.online_member_checker(server))
+            online_logger = OnlineLogger(self)
+            self.online_loggers[server.id] = online_logger
             return Response("okay, okay!")
 
     @owner_only
@@ -5188,36 +5189,6 @@ class MusicBot(discord.Client):
         online_logger.reset()
         return Response("Well then")
 
-    async def online_member_checker(self, server):
-        online_logger = self.online_loggers.get(server.id, None)
-        if online_logger is None:
-            online_logger = OnlineLogger(self)
-            self.online_loggers[server.id] = online_logger
-
-        next_autosave = datetime.now() + timedelta(minutes=5)
-
-        while True:
-            for member in server.members:
-                online_logger.update_stats(
-                    member.id, member.status == discord.Status.online, member.game)
-                notification = online_logger.get_notification()
-                await asyncio.sleep(.5)
-                if notification is not None:
-                    game_name, user_id, receiver_ids = notification
-                    user_name = self.get_global_user(user_id).name
-                    message_text = "***REMOVED******REMOVED*** started playing ***REMOVED******REMOVED*** at ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(
-                        user_name, game_name, datetime.now())
-                    for recv in receiver_ids:
-                        if recv == user_id:
-                            continue
-
-                        await self.safe_send_message(self.get_global_user(recv), message_text)
-
-            if datetime.now() > next_autosave:
-                next_autosave = datetime.now() + timedelta(minutes=5)
-                online_logger.create_output()
-            await asyncio.sleep(65)
-
     async def cmd_notifyme(self, server, author):
         """
         Usage:
@@ -5228,8 +5199,10 @@ class MusicBot(discord.Client):
         online_logger = self.online_loggers.get(server.id, None)
         if online_logger is None:
             return Response("I'm not even spying here")
-        online_logger.add_listener(author.id)
-        return Response("Got'cha!")
+        if online_logger.add_listener(author.id):
+            return Response("Got'cha!")
+        else:
+            return Response("Nevermore you shall be annoyed!")
 
     async def cmd_livetranslator(self, target_language=None, mode="1"):
         """
@@ -5565,6 +5538,34 @@ class MusicBot(discord.Client):
                      (after.name, before.region, after.region))
 
             await self.reconnect_voice_client(after)
+
+    async def on_member_update(self, before, after):
+        if before.server.id in self.online_loggers:
+            timestamp = "***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(datetime.now())
+            self.online_loggers[before.server.id].update_stats(
+                after.id, after.status == discord.Status.online, after.game)
+            notification = None
+            if before.status != after.status:
+                notification = "`***REMOVED******REMOVED***` ***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(timestamp, after.display_name, ***REMOVED***discord.Status.online: "came **online**", discord.Status.offline: "went **offline**",
+                                                                                   discord.Status.idle: "went **away**", discord.Status.dnd: "doesn't want to be disturbed"***REMOVED***[after.status])
+            if before.game != after.game:
+                text = ""
+                if after.game is None:
+                    text = "stopped playing *****REMOVED******REMOVED*****".format(before.game.name)
+                else:
+                    text = "started playing *****REMOVED******REMOVED*****".format(after.game.name)
+                if notification is None:
+                    notification = "`***REMOVED******REMOVED***` ***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(
+                        timestamp, after.display_name, text)
+                else:
+                    notification += "\nand ***REMOVED******REMOVED***".format(text)
+            if notification is not None:
+                for listener in self.online_loggers[before.server.id].listeners:
+                    if before.id == listener:
+                        continue
+
+                    mem = self.get_global_user(listener)
+                    await self.safe_send_message(mem, notification)
 
 if __name__ == '__main__':
     bot = MusicBot()
