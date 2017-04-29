@@ -50,14 +50,16 @@ from .papers import Papers
 from .permissions import Permissions, PermissionsDefaults
 from .player import MusicPlayer
 from .playlist import Playlist
+from .radio import Radio
 from .radios import Radios
 from .random_sets import RandomSets
 from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .socket_server import SocketServer
 from .translate import Translator
-from .utils import (escape_dis, format_time, load_file, paginate, prettydate,
-                    random_line, sane_round_int, write_file)
+from .utils import (escape_dis, format_time, load_file, paginate,
+                    parse_timestamp, prettydate, random_line, sane_round_int,
+                    write_file)
 
 load_opus_lib()
 
@@ -1775,6 +1777,22 @@ class MusicBot(discord.Client):
         """
 
         if player.current_entry:
+            if type(player.current_entry).__name__ == "StreamPlaylistEntry" and Radio.has_station_data(player.current_entry.title):
+                current_entry = await Radio.get_current_song(self.loop, player.current_entry.title)
+                if current_entry is not None:
+                    progress = current_entry["progress"]
+                    length = current_entry["duration"]
+
+                    prog_str = '[***REMOVED******REMOVED***/***REMOVED******REMOVED***]'.format(*list(map(lambda x: "***REMOVED***0:0>2***REMOVED***:***REMOVED***1:0>2***REMOVED***".format(
+                        (x.seconds // 60) % 60, x.seconds % 60), [timedelta(seconds=progress), timedelta(seconds=length)])))
+
+                    em = Embed(title=current_entry["title"], url=current_entry[
+                               "youtube"], description="\n\n*Playing from* ***REMOVED******REMOVED***".format(player.current_entry.title))
+                    em.set_thumbnail(url=current_entry["cover"])
+                    em.set_author(name=current_entry["artist"])
+                    em.set_footer(text=prog_str)
+                    await self.send_message(channel, embed=em)
+                    return
             if type(player.current_entry).__name__ == "StreamPlaylistEntry":
                 if player.current_entry.radio_station_data is not None:
                     return Response("Playing *radio* *****REMOVED******REMOVED***** for ***REMOVED******REMOVED***".format(player.current_entry.radio_station_data.name, format_time(player.progress)))
@@ -5029,24 +5047,9 @@ class MusicBot(discord.Client):
         Go to the given timestamp formatted (minutes:seconds)
         """
 
-        parts = timestamp.split(":")
-        if len(parts) < 1:  # Shouldn't occur, but who knows?
+        secs = parse_timestamp(timestamp)
+        if secs is None:
             return Response("Please provide a valid timestamp", delete_after=20)
-
-        # seconds, minutes, hours, days
-        values = (1, 60, 60 * 60, 60 * 60 * 24)
-
-        secs = 0
-        for i in range(len(parts)):
-            try:
-                v = int(parts[i])
-            except:
-                continue
-
-            j = len(parts) - i - 1
-            if j >= len(values):  # If I don't have a conversion from this to seconds
-                continue
-            secs += v * values[j]
 
         if player.current_entry is None:
             return Response("Nothing playing!", delete_after=20)
@@ -5540,14 +5543,23 @@ class MusicBot(discord.Client):
             await self.reconnect_voice_client(after)
 
     async def on_member_update(self, before, after):
+        await self.on_any_update(before, after)
         if before.server.id in self.online_loggers:
-            timestamp = "***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(datetime.now())
             self.online_loggers[before.server.id].update_stats(
                 after.id, after.status == discord.Status.online, after.game)
+
+    async def on_voice_state_update(self, before, after):
+        await self.on_any_update(before, after)
+
+    async def on_any_update(self, before, after):
+        if before.server.id in self.online_loggers:
+            timestamp = "***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(datetime.now())
             notification = None
+            mem_name = "\"***REMOVED******REMOVED***\"".format(after.display_name) if len(
+                after.display_name.split()) > 1 else after.display_name
             if before.status != after.status:
-                notification = "`***REMOVED******REMOVED***` ***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(timestamp, after.display_name, ***REMOVED***discord.Status.online: "came **online**", discord.Status.offline: "went **offline**",
-                                                                                   discord.Status.idle: "went **away**", discord.Status.dnd: "doesn't want to be disturbed"***REMOVED***[after.status])
+                notification = "`***REMOVED******REMOVED***` ***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(timestamp, mem_name, ***REMOVED***discord.Status.online: "came **online**", discord.Status.offline: "went **offline**",
+                                                                         discord.Status.idle: "went **away**", discord.Status.dnd: "doesn't want to be disturbed"***REMOVED***[after.status])
             if before.game != after.game:
                 text = ""
                 if after.game is None:
@@ -5556,9 +5568,24 @@ class MusicBot(discord.Client):
                     text = "started playing *****REMOVED******REMOVED*****".format(after.game.name)
                 if notification is None:
                     notification = "`***REMOVED******REMOVED***` ***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(
-                        timestamp, after.display_name, text)
+                        timestamp, mem_name, text)
                 else:
                     notification += "\nand ***REMOVED******REMOVED***".format(text)
+
+            if before.voice.voice_channel != after.voice.voice_channel:
+                text = ""
+                if after.voice.voice_channel is None:
+                    text = "quit *****REMOVED******REMOVED***** (voice channel)".format(
+                        before.voice.voice_channel.name)
+                else:
+                    text = "joined *****REMOVED******REMOVED***** (voice channel)".format(
+                        after.voice.voice_channel.name)
+                if notification is None:
+                    notification = "`***REMOVED******REMOVED***` ***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(
+                        timestamp, mem_name, text)
+                else:
+                    notification += "\nand ***REMOVED******REMOVED***".format(text)
+
             if notification is not None:
                 for listener in self.online_loggers[before.server.id].listeners:
                     if before.id == listener:
