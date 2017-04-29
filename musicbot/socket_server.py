@@ -1,11 +1,14 @@
 import re
 import time
+from datetime import datetime, timedelta
 from socket import *
 from threading import Thread
 
 import asyncio
 
+from .radio import Radio
 from .spotify import SpotifyTrack
+from .utils import parse_timestamp
 
 
 class SocketServer:
@@ -282,7 +285,8 @@ class SocketServer:
                 playing = "STOPPED"
             elif type(player.current_entry).__name__ == "StreamPlaylistEntry":
                 if Radio.has_station_data(player.current_entry.title):
-                    current_entry = await Radio.get_current_song(self.loop, player.current_entry.title)
+                    current_entry = asyncio.run_coroutine_threadsafe(Radio.get_current_song(
+                        self.musicbot.loop, player.current_entry.title), self.musicbot.loop).result()
                     if current_entry is not None:
                         start_time = datetime.fromtimestamp(
                             int(current_entry["timestamp"]))
