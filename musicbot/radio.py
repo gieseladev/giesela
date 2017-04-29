@@ -48,7 +48,7 @@ class Radio:
                     artist = soup.find_all("div", attrs=***REMOVED***"itemprop":"byArtist", "class":"artist"***REMOVED***)[0].text.strip()
                     cover = soup.find_all("img", itemprop="image")[0]["data-src"]
 
-                    return ***REMOVED***"title": title, "artist": artist, "cover": cover, "youtube": None, "duration": None, "progress": None***REMOVED***
+                    return ***REMOVED***"title": title, "artist": artist, "cover": cover, "youtube": " ", "duration": 0, "progress": 0***REMOVED***
         except:
             raise
             return None
