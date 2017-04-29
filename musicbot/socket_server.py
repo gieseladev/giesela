@@ -288,11 +288,8 @@ class SocketServer:
                     current_entry = asyncio.run_coroutine_threadsafe(Radio.get_current_song(
                         self.musicbot.loop, player.current_entry.title), self.musicbot.loop).result()
                     if current_entry is not None:
-                        start_time = datetime.fromtimestamp(
-                            int(current_entry["timestamp"]))
-                        progress = str((datetime.now() - start_time).seconds)
-                        duration = str(parse_timestamp(
-                            current_entry["duration"]))
+                        progress = str(current_entry["progress"])
+                        duration = str(current_entry["duration"])
                         playing = "PLAYING"
                         song_title = current_entry["title"]
                         cover_url = current_entry["cover"]
