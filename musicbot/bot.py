@@ -1780,13 +1780,11 @@ class MusicBot(discord.Client):
             if type(player.current_entry).__name__ == "StreamPlaylistEntry" and Radio.has_station_data(player.current_entry.title):
                 current_entry = await Radio.get_current_song(self.loop, player.current_entry.title)
                 if current_entry is not None:
-                    start_time = datetime.fromtimestamp(
-                        int(current_entry["timestamp"]))
-                    progress = datetime.now() - start_time
-                    length = parse_timestamp(current_entry["duration"])
+                    progress = current_entry["progress"]
+                    length = current_entry["duration"]
 
                     prog_str = '[{}/{}]'.format(*list(map(lambda x: "{0:0>2}:{1:0>2}".format(
-                        (x.seconds // 60) % 60, x.seconds % 60), [progress, timedelta(seconds=length)])))
+                        (x.seconds // 60) % 60, x.seconds % 60), [timedelta(seconds=progress), timedelta(seconds=length)])))
 
                     em = Embed(title=current_entry["title"], url=current_entry[
                                "youtube"], description="\n\n*Playing from* {}".format(player.current_entry.title))
