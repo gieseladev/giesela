@@ -1,11 +1,14 @@
 import re
 import time
+from datetime import datetime, timedelta
 from socket import *
 from threading import Thread
 
 import asyncio
 
+from .radio import Radio
 from .spotify import SpotifyTrack
+from .utils import parse_timestamp
 
 
 class SocketServer:
@@ -281,6 +284,24 @@ class SocketServer:
                 song_title = "NONE"
                 playing = "STOPPED"
             elif type(player.current_entry).__name__ == "StreamPlaylistEntry":
+                if Radio.has_station_data(player.current_entry.title):
+                    current_entry = asyncio.run_coroutine_threadsafe(Radio.get_current_song(
+                        self.musicbot.loop, player.current_entry.title), self.musicbot.loop).result()
+                    if current_entry is not None:
+                        progress = str(current_entry["progress"])
+                        duration = str(current_entry["duration"])
+                        playing = "PLAYING"
+                        song_title = current_entry["title"]
+                        cover_url = current_entry["cover"]
+                        artist = current_entry["artist"]
+                        matches = re.search(
+                            r"(?:[?&]v=|\/embed\/|\/1\/|\/v\/|https:\/\/(?:www\.)?youtu\.be\/)([^&\n?#]+)", current_entry["youtube"])
+                        video_id = matches.group(
+                            1) if matches is not None else " "
+                        volume = str(round(player.volume, 2))
+
+                        return artist, song_title, video_id, cover_url, playing, duration, progress, volume
+
                 if player.current_entry.radio_station_data is not None:
                     station_data = player.current_entry.radio_station_data
                     artist = "RADIO"
