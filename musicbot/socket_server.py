@@ -281,6 +281,26 @@ class SocketServer:
                 song_title = "NONE"
                 playing = "STOPPED"
             elif type(player.current_entry).__name__ == "StreamPlaylistEntry":
+                if Radio.has_station_data(player.current_entry.title):
+                    current_entry = await Radio.get_current_song(self.loop, player.current_entry.title)
+                    if current_entry is not None:
+                        start_time = datetime.fromtimestamp(
+                            int(current_entry["timestamp"]))
+                        progress = str((datetime.now() - start_time).seconds)
+                        duration = str(parse_timestamp(
+                            current_entry["duration"]))
+                        playing = "PLAYING"
+                        song_title = current_entry["title"]
+                        cover_url = current_entry["cover"]
+                        artist = current_entry["artist"]
+                        matches = re.search(
+                            r"(?:[?&]v=|\/embed\/|\/1\/|\/v\/|https:\/\/(?:www\.)?youtu\.be\/)([^&\n?#]+)", current_entry["youtube"])
+                        video_id = matches.group(
+                            1) if matches is not None else " "
+                        volume = str(round(player.volume, 2))
+
+                        return artist, song_title, video_id, cover_url, playing, duration, progress, volume
+
                 if player.current_entry.radio_station_data is not None:
                     station_data = player.current_entry.radio_station_data
                     artist = "RADIO"
