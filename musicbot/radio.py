@@ -1,11 +1,11 @@
 import json
+from datetime import datetime, timedelta
 
 import aiohttp
 from bs4 import BeautifulSoup
 
 import asyncio
 
-from datetime import datetime, timedelta
 from .utils import parse_timestamp
 
 
@@ -45,11 +45,14 @@ class Radio:
             async with aiohttp.ClientSession(loop=loop) as client:
                 async with client.get('http://www.capitalfm.com/dynamic/now-playing-card/digital/') as resp:
                     soup = BeautifulSoup(await resp.text())
-                    title = soup.find_all("div", attrs={"itemprop":"name", "class":"track"})[0].text.strip()
-                    artist = soup.find_all("div", attrs={"itemprop":"byArtist", "class":"artist"})[0].text.strip()
-                    cover = soup.find_all("img", itemprop="image")[0]["data-src"]
+                    title = " ".join(soup.find_all("div", attrs={"itemprop": "name", "class": "track"})[
+                        0].text.strip().split())
+                    artist = " ".join(soup.find_all("div", attrs={"itemprop": "byArtist", "class": "artist"})[
+                        0].text.strip().split())
+                    cover = soup.find_all("img", itemprop="image")[
+                        0]["data-src"]
 
-                    return {"title": title, "artist": artist, "cover": cover, "youtube": " ", "duration": 0, "progress": 0}
+                    return {"title": title, "artist": artist, "cover": cover, "youtube": "http://www.capitalfm.com", "duration": 0, "progress": 0}
         except:
             raise
             return None
