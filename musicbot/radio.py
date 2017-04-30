@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 
 import asyncio
 
+from datetime import datetime, timedelta
 from .utils import parse_timestamp
 
 
@@ -34,7 +35,7 @@ class Radio:
                     progress = datetime.now() - start_time
                     duration = parse_timestamp(current_entry["duration"])
 
-                    return {"title": entry["title"], "artist": entry["artist"], "cover": entry["cover"], "youtube": entry["youtube"], "duration": duration, "progress": progress}
+                    return {"title": entry["title"].strip(), "artist": entry["artist"].strip(), "cover": entry["cover"], "youtube": entry["youtube"], "duration": duration, "progress": progress}
         except:
             raise
             return None
@@ -54,5 +55,5 @@ class Radio:
             return None
 
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(Radio.get_current_song(loop, "capital_fm"))
+# loop = asyncio.get_event_loop()
+# loop.run_until_complete(Radio.get_current_song(loop, "capital_fm"))
