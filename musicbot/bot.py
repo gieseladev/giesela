@@ -55,6 +55,7 @@ from .radios import Radios
 from .random_sets import RandomSets
 from .reminder import Action, Calendar
 from .saved_playlists import Playlists
+from .settings import Settings
 from .socket_server import SocketServer
 from .translate import Translator
 from .utils import (escape_dis, format_time, load_file, paginate,
