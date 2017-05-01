@@ -1,4 +1,5 @@
 import json
+import re
 from datetime import datetime, timedelta
 
 import aiohttp
@@ -13,7 +14,7 @@ class Radio:
 
     def has_station_data(radio_station):
         radio_station = "_".join(radio_station.lower().split())
-        return radio_station in ["energy_bern", "capital_fm"]
+        return radio_station in ["energy_bern", "capital_fm", "bbc"]
 
     async def get_current_song(loop, radio_station):
         radio_station = "_".join(radio_station.lower().split())
@@ -21,6 +22,8 @@ class Radio:
             return await Radio._get_current_song_energy_bern(loop)
         elif radio_station == "capital_fm":
             return await Radio._get_current_song_capital_fm(loop)
+        elif radio_station == "bbc":
+            return await Radio._get_current_song_bbc(loop)
 
         return None
 
@@ -31,9 +34,10 @@ class Radio:
                     queue = json.loads(await resp.text())
                     entry = queue[0]
                     start_time = datetime.fromtimestamp(
-                        int(current_entry["timestamp"]))
-                    progress = datetime.now() - start_time
-                    duration = parse_timestamp(current_entry["duration"])
+                        int(entry["timestamp"]))
+                    progress = round(
+                        (datetime.now() - start_time).total_seconds())
+                    duration = parse_timestamp(entry["duration"])
 
                     return ***REMOVED***"title": entry["title"].strip(), "artist": entry["artist"].strip(), "cover": entry["cover"], "youtube": entry["youtube"], "duration": duration, "progress": progress***REMOVED***
         except:
@@ -57,6 +61,25 @@ class Radio:
             raise
             return None
 
+    async def _get_current_song_bbc(loop):
+        try:
+            async with aiohttp.ClientSession(loop=loop) as client:
+                async with client.get('http://np.radioplayer.co.uk/qp/v3/onair?rpIds=340', ) as resp:
+                    data = json.loads(re.match(r"callback\((.+)\)", await resp.text()).group(1))
+                    song_data = data["results"]["340"][-1]
+                    start_time = datetime.fromtimestamp(
+                        int(song_data["startTime"]))
+                    stop_time = datetime.fromtimestamp(
+                        int(song_data["stopTime"]))
+                    duration = round((stop_time - start_time).total_seconds())
+                    progress = round(
+                        (datetime.now() - start_time).total_seconds())
+
+                    return ***REMOVED***"title": song_data["name"], "artist": song_data["artistName"], "cover": song_data["imageUrl"], "youtube": "http://www.bbc.co.uk/radio", "duration": duration, "progress": progress***REMOVED***
+        except:
+            raise
+            return None
+
 
 # loop = asyncio.get_event_loop()
-# loop.run_until_complete(Radio.get_current_song(loop, "capital_fm"))
+# loop.run_until_complete(Radio.get_current_song(loop, "bbc"))
