@@ -31,9 +31,9 @@ class Radio:
                     queue = json.loads(await resp.text())
                     entry = queue[0]
                     start_time = datetime.fromtimestamp(
-                        int(current_entry["timestamp"]))
+                        int(entry["timestamp"]))
                     progress = datetime.now() - start_time
-                    duration = parse_timestamp(current_entry["duration"])
+                    duration = parse_timestamp(entry["duration"])
 
                     return ***REMOVED***"title": entry["title"].strip(), "artist": entry["artist"].strip(), "cover": entry["cover"], "youtube": entry["youtube"], "duration": duration, "progress": progress***REMOVED***
         except:
