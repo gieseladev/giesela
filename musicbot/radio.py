@@ -32,7 +32,8 @@ class Radio:
                     entry = queue[0]
                     start_time = datetime.fromtimestamp(
                         int(entry["timestamp"]))
-                    progress = datetime.now() - start_time
+                    progress = round(
+                        (datetime.now() - start_time).total_seconds())
                     duration = parse_timestamp(entry["duration"])
 
                     return {"title": entry["title"].strip(), "artist": entry["artist"].strip(), "cover": entry["cover"], "youtube": entry["youtube"], "duration": duration, "progress": progress}
