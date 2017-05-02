@@ -199,7 +199,7 @@ class SocketServer:
                 if leftover[0] == "SUMMON":
                     try:
                         asyncio.run_coroutine_threadsafe(
-                            self.musicbot.socket_summon(server_id), self.musicbot.loop)
+                            self.musicbot.socket_summon(server_id, author_id), self.musicbot.loop)
                     except:
                         pass
 
