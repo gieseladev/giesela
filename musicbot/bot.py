@@ -875,7 +875,7 @@ class MusicBot(discord.Client):
                 target_channel = ch
                 break
 
-            if len(ch.voice_members) -= sum([.5 for x in ch.voice_members if x.bot]) > max_members:
+            if len(ch.voice_members) - sum([.5 for x in ch.voice_members if x.bot]) > max_members:
                 target_channel = ch
                 max_members = len(ch.voice_members)
 
@@ -5011,16 +5011,35 @@ class MusicBot(discord.Client):
             log("moving myself")
             await self.get_voice_client(target_channel)
 
-    async def cmd_mobile(self, channel, player, server):
+    async def cmd_mobile(self, message, channel, player, server, leftover_args):
         """
         Usage:
             {command_prefix}mobile
+            {command_prefix}mobile message @mention <message>
 
         WIP
         """
 
-        count = len(self.socket_server.connections)
-        return Response("There {} currently {} mobile user{}".format("is" if count == 1 else "are", count, "s" if count != 1 else ""))
+        if len(leftover_args) < 1:
+            count = len(self.socket_server.connections)
+            return Response("There {} currently {} mobile user{}".format("is" if count == 1 else "are", count, "s" if count != 1 else ""))
+        elif leftover_args[0].lower() == "message":
+            if len(leftover_args) < 2:
+                return Response("No message provided!")
+            else:
+                if len(message.mentions) < 1:
+                    return Response("No mentions")
+                else:
+                    target_user = message.mentions[0].id
+                msg = " ".join(leftover_args[2:])
+
+                res = self.socket_server.send_message(target_user, msg)
+                if res is None:
+                    return Response("This user probably doesn't have the app open")
+                elif not res:
+                    return Response("Something went wrong when trying to contact the user")
+                else:
+                    return Response("Successfully sent the message!")
 
     @owner_only
     async def cmd_execute(self, player, channel, author, server, leftover_args):
