@@ -5310,25 +5310,41 @@ class MusicBot(discord.Client):
         await self.send_message(author, embed=em)
         return Response("Done!")
 
-    async def cmd_quote(self, channel, message, message_id):
+    async def cmd_quote(self, author, channel, message, leftover_args):
         """
         ///|Usage
-        `{command_prefix}quote <message id>`
+        `{command_prefix}quote <message id> [message id...]`
         ///|Explanation
         Quote a message
         """
-        try:
-            quote_message = await self.get_message(channel, message_id)
-        except:
-            return Response("Didn't find a message with the id `{}`".format(message_id))
+        if len(leftover_args) < 1:
+            return Response("Please specify the message you want to quote")
+        elif len(leftover_args) == 1:
+            message_id = leftover_args[0]
+            try:
+                quote_message = await self.get_message(channel, message_id)
+            except:
+                return Response("Didn't find a message with the id `{}`".format(message_id))
 
+            author_data = {"name": quote_message.author.display_name,
+                           "icon_url": quote_message.author.avatar_url}
+            embed_data = {"description": quote_message.content,
+                          "timestamp": quote_message.timestamp}
+            em = Embed(**embed_data)
+            em.set_author(**author_data)
+        else:
+            em = Embed(title="**Quote**")
+            for message_id in leftover_args:
+                try:
+                    quote_message = await self.get_message(channel, message_id)
+                except:
+                    return Response("Didn't find a message with the id `{}`".format(message_id))
+
+                em.add_field(name="**{}** - *{}*".format(quote_message.author.display_name, "{0.hour:0>2}:{0.minute:0>2}".format(quote_message.timestamp)),
+                             value="`{}`".format(quote_message.content), inline=False)
+
+        em.set_footer(text="Quoted by {}".format(author.display_name))
         await self.safe_delete_message(message)
-        author_data = {"name": quote_message.author.display_name,
-                       "icon_url": quote_message.author.avatar_url}
-        embed_data = {"description": quote_message.content,
-                      "timestamp": quote_message.timestamp}
-        em = Embed(**embed_data)
-        em.set_author(**author_data)
         await self.send_message(channel, embed=em)
         return
 
