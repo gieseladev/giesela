@@ -861,7 +861,7 @@ class MusicBot(discord.Client):
         log()
         # t-t-th-th-that's all folks!
 
-    async def socket_summon(self, server_id):
+    async def socket_summon(self, server_id, summoner_id=None):
         server = self.get_server(server_id)
         if server == None:
             return
@@ -871,11 +871,13 @@ class MusicBot(discord.Client):
         max_members = 0
 
         for ch in channels:
-            if len(ch.voice_members) > max_members:
+            if summoner_id is not None and any([x.id == summoner_id for x in ch.voice_members]):
+                target_channel = ch
+                break
+
+            if len(ch.voice_members) -= sum([.5 for x in ch.voice_members if x.bot]) > max_members:
                 target_channel = ch
                 max_members = len(ch.voice_members)
-                if any([x.bot for x in ch.voice_members]):
-                    max_members -= .5
 
         if target_channel == None:
             return
@@ -5294,6 +5296,15 @@ class MusicBot(discord.Client):
         await self.safe_send_message(channel, ":wave:")
         await self.disconnect_all_voice_clients()
         raise exceptions.TerminateSignal
+
+    # async def cmd_test(self):
+    #     message = "hello there, this is a test"
+    #     max_chars = 15
+    #     moves = len(message) - max_chars + 1
+    #     for i in range(moves):
+    #         msg_slice = message[i:i + max_chars]
+    #         await self.change_presence(game=discord.Game(name=msg_slice))
+    #         await asyncio.sleep(1)
 
     async def on_message(self, message):
         await self.wait_until_ready()
