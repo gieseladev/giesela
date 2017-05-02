@@ -101,7 +101,7 @@ class SocketServer:
     def send_message(self, author_id, message):
         s = self.sockets_by_user.get(str(author_id), None)
         if s is None:
-            return False
+            return None
 
         try:
             msg = "MESSAGE;{}".format(message)
@@ -199,7 +199,7 @@ class SocketServer:
                 if leftover[0] == "SUMMON":
                     try:
                         asyncio.run_coroutine_threadsafe(
-                            self.musicbot.socket_summon(server_id), self.musicbot.loop)
+                            self.musicbot.socket_summon(server_id, author_id), self.musicbot.loop)
                     except:
                         pass
 
