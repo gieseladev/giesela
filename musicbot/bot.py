@@ -96,7 +96,7 @@ class Response:
 class MusicBot(discord.Client):
     trueStringList = ["true", "1", "t", "y", "yes", "yeah",
                       "yup", "certainly", "uh-huh", "affirmitive", "activate"]
-    channelFreeCommands = ["say"]
+    channelFreeCommands = ["say", "quote"]
     privateChatCommands = ["c", "ask", "requestfeature", "random",
                            "translate", "help", "say", "broadcast", "news", "game", "wiki", "cah", "execute"]
     lonelyModeRunning = False
