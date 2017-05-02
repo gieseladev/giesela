@@ -101,7 +101,7 @@ class SocketServer:
     def send_message(self, author_id, message):
         s = self.sockets_by_user.get(str(author_id), None)
         if s is None:
-            return False
+            return None
 
         try:
             msg = "MESSAGE;***REMOVED******REMOVED***".format(message)
