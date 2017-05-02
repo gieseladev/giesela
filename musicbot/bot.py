@@ -5310,6 +5310,28 @@ class MusicBot(discord.Client):
         await self.send_message(author, embed=em)
         return Response("Done!")
 
+    async def cmd_quote(self, channel, message, message_id):
+        """
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***quote <message id>`
+        ///|Explanation
+        Quote a message
+        """
+        try:
+            quote_message = await self.get_message(channel, message_id)
+        except:
+            return Response("Didn't find a message with the id `***REMOVED******REMOVED***`".format(message_id))
+
+        await self.safe_delete_message(message)
+        author_data = ***REMOVED***"name": quote_message.author.display_name,
+                       "icon_url": quote_message.author.avatar_url***REMOVED***
+        embed_data = ***REMOVED***"description": quote_message.content,
+                      "timestamp": quote_message.timestamp***REMOVED***
+        em = Embed(**embed_data)
+        em.set_author(**author_data)
+        await self.send_message(channel, embed=em)
+        return
+
     @owner_only
     async def cmd_shutdown(self, channel):
         await self.safe_send_message(channel, ":wave:")
