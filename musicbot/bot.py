@@ -96,7 +96,7 @@ class Response:
 class MusicBot(discord.Client):
     trueStringList = ["true", "1", "t", "y", "yes", "yeah",
                       "yup", "certainly", "uh-huh", "affirmitive", "activate"]
-    channelFreeCommands = ["say"]
+    channelFreeCommands = ["say", "quote"]
     privateChatCommands = ["c", "ask", "requestfeature", "random",
                            "translate", "help", "say", "broadcast", "news", "game", "wiki", "cah", "execute"]
     lonelyModeRunning = False
@@ -861,7 +861,7 @@ class MusicBot(discord.Client):
         log()
         # t-t-th-th-that's all folks!
 
-    async def socket_summon(self, server_id):
+    async def socket_summon(self, server_id, summoner_id=None):
         server = self.get_server(server_id)
         if server == None:
             return
@@ -871,11 +871,13 @@ class MusicBot(discord.Client):
         max_members = 0
 
         for ch in channels:
-            if len(ch.voice_members) > max_members:
+            if summoner_id is not None and any([x.id == summoner_id for x in ch.voice_members]):
+                target_channel = ch
+                break
+
+            if len(ch.voice_members) - sum([.5 for x in ch.voice_members if x.bot]) > max_members:
                 target_channel = ch
                 max_members = len(ch.voice_members)
-                if any([x.bot for x in ch.voice_members]):
-                    max_members -= .5
 
         if target_channel == None:
             return
@@ -5009,16 +5011,35 @@ class MusicBot(discord.Client):
             log("moving myself")
             await self.get_voice_client(target_channel)
 
-    async def cmd_mobile(self, channel, player, server):
+    async def cmd_mobile(self, message, channel, player, server, leftover_args):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***mobile
+            ***REMOVED***command_prefix***REMOVED***mobile message @mention <message>
 
         WIP
         """
 
-        count = len(self.socket_server.connections)
-        return Response("There ***REMOVED******REMOVED*** currently ***REMOVED******REMOVED*** mobile user***REMOVED******REMOVED***".format("is" if count == 1 else "are", count, "s" if count != 1 else ""))
+        if len(leftover_args) < 1:
+            count = len(self.socket_server.connections)
+            return Response("There ***REMOVED******REMOVED*** currently ***REMOVED******REMOVED*** mobile user***REMOVED******REMOVED***".format("is" if count == 1 else "are", count, "s" if count != 1 else ""))
+        elif leftover_args[0].lower() == "message":
+            if len(leftover_args) < 2:
+                return Response("No message provided!")
+            else:
+                if len(message.mentions) < 1:
+                    return Response("No mentions")
+                else:
+                    target_user = message.mentions[0].id
+                msg = " ".join(leftover_args[2:])
+
+                res = self.socket_server.send_message(target_user, msg)
+                if res is None:
+                    return Response("This user probably doesn't have the app open")
+                elif not res:
+                    return Response("Something went wrong when trying to contact the user")
+                else:
+                    return Response("Successfully sent the message!")
 
     @owner_only
     async def cmd_execute(self, player, channel, author, server, leftover_args):
@@ -5289,11 +5310,42 @@ class MusicBot(discord.Client):
         await self.send_message(author, embed=em)
         return Response("Done!")
 
+    async def cmd_quote(self, channel, message, message_id):
+        """
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***quote <message id>`
+        ///|Explanation
+        Quote a message
+        """
+        try:
+            quote_message = await self.get_message(channel, message_id)
+        except:
+            return Response("Didn't find a message with the id `***REMOVED******REMOVED***`".format(message_id))
+
+        await self.safe_delete_message(message)
+        author_data = ***REMOVED***"name": quote_message.author.display_name,
+                       "icon_url": quote_message.author.avatar_url***REMOVED***
+        embed_data = ***REMOVED***"description": quote_message.content,
+                      "timestamp": quote_message.timestamp***REMOVED***
+        em = Embed(**embed_data)
+        em.set_author(**author_data)
+        await self.send_message(channel, embed=em)
+        return
+
     @owner_only
     async def cmd_shutdown(self, channel):
         await self.safe_send_message(channel, ":wave:")
         await self.disconnect_all_voice_clients()
         raise exceptions.TerminateSignal
+
+    # async def cmd_test(self):
+    #     message = "hello there, this is a test"
+    #     max_chars = 15
+    #     moves = len(message) - max_chars + 1
+    #     for i in range(moves):
+    #         msg_slice = message[i:i + max_chars]
+    #         await self.change_presence(game=discord.Game(name=msg_slice))
+    #         await asyncio.sleep(1)
 
     async def on_message(self, message):
         await self.wait_until_ready()
