@@ -5319,8 +5319,9 @@ class MusicBot(discord.Client):
         """
         if len(leftover_args) < 1:
             return Response("Please specify the message you want to quote")
-        elif len(leftover_args) == 1:
-            message_id = leftover_args[0]
+
+        await self.safe_delete_message(message)
+        for message_id in leftover_args:
             try:
                 quote_message = await self.get_message(channel, message_id)
             except:
@@ -5332,20 +5333,7 @@ class MusicBot(discord.Client):
                           "timestamp": quote_message.timestamp***REMOVED***
             em = Embed(**embed_data)
             em.set_author(**author_data)
-        else:
-            em = Embed(title="**Quote**")
-            for message_id in leftover_args:
-                try:
-                    quote_message = await self.get_message(channel, message_id)
-                except:
-                    return Response("Didn't find a message with the id `***REMOVED******REMOVED***`".format(message_id))
-
-                em.add_field(name="*****REMOVED******REMOVED***** - ****REMOVED******REMOVED****".format(quote_message.author.display_name, "***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(quote_message.timestamp)),
-                             value="`***REMOVED******REMOVED***`".format(quote_message.content), inline=False)
-
-        em.set_footer(text="Quoted by ***REMOVED******REMOVED***".format(author.display_name))
-        await self.safe_delete_message(message)
-        await self.send_message(channel, embed=em)
+            await self.send_message(channel, embed=em)
         return
 
     @owner_only
