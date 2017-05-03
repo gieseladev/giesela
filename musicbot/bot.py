@@ -5369,11 +5369,10 @@ class MusicBot(discord.Client):
                     if self.instant_translate_mode == 1:
                         await self.safe_send_message(message.channel, "Translation: `{}`".format(self.translator.translate(message_content)))
                     elif self.instant_translate_mode == 2:
-                        em = Embed(colour=message.author.colour)
+                        em = Embed(colour=message.author.colour, description=self.translator.translate(
+                            message_content))
                         em.set_author(name=message.author.display_name,
                                       icon_url=message.author.avatar_url)
-                        em.add_field(
-                            value=self.translator.translate(message_content), name="Translated")
                         # em.set_footer(text=message.content)
                         await self.send_message(message.channel, embed=em)
                         await self.safe_delete_message(message)
