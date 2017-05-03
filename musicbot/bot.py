@@ -5340,7 +5340,8 @@ class MusicBot(discord.Client):
             author_data = ***REMOVED***"name": quote_message.author.display_name,
                            "icon_url": quote_message.author.avatar_url***REMOVED***
             embed_data = ***REMOVED***"description": quote_message.content,
-                          "timestamp": quote_message.timestamp***REMOVED***
+                          "timestamp": quote_message.timestamp,
+                          "colour" = quote_message.author.colour***REMOVED***
             em = Embed(**embed_data)
             em.set_author(**author_data)
             await self.send_message(channel, embed=em)
