@@ -148,6 +148,7 @@ class MusicBot(discord.Client):
         self.http.user_agent += ' MusicBot/%s' % BOTVERSION
         self.instant_translate = False
         self.instant_translate_mode = 1
+        self.instant_translate_certainty = .7
 
     # TODO: Add some sort of `denied` argument for a message to send when
     # someone else tries to use it
@@ -5229,10 +5230,10 @@ class MusicBot(discord.Client):
         else:
             return Response("Nevermore you shall be annoyed!")
 
-    async def cmd_livetranslator(self, target_language=None, mode="1"):
+    async def cmd_livetranslator(self, target_language=None, mode="1", required_certainty="70"):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***livetranslator [language code] [mode]
+            ***REMOVED***command_prefix***REMOVED***livetranslator [language code] [mode] [required certainty]
 
         translate every message sent
 
@@ -5257,6 +5258,15 @@ class MusicBot(discord.Client):
             if not (0 <= mode <= 2):
                 mode = 1
             self.instant_translate_mode = mode
+
+            try:
+                required_certainty = int(required_certainty) / 100
+            except:
+                required_certainty = .7
+            if not (0 <= required_certainty <= 1):
+                required_certainty = .7
+
+            self.instant_translate_certainty = required_certainty
 
             return Response("Starting now!")
         else:
@@ -5364,7 +5374,7 @@ class MusicBot(discord.Client):
                 msg_language, probability = self.lang_identifier.classify(
                     message_content)
 
-                if probability > .7 and self.instant_translate and msg_language != self.translator.to_lang and message.author != self.user:
+                if probability > self.instant_translate_certainty and self.instant_translate and msg_language != self.translator.to_lang and message.author != self.user:
                     self.translator.from_lang = msg_language
                     if self.instant_translate_mode == 1:
                         await self.safe_send_message(message.channel, "Translation: `***REMOVED******REMOVED***`".format(self.translator.translate(message_content)))
