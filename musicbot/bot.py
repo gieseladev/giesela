@@ -2976,29 +2976,29 @@ class MusicBot(discord.Client):
 
         await self.safe_send_message(channel, "I choose **" + choice(items) + "**")
 
-    async def cmd_requestfeature(self, channel, author, leftover_args):
-        """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***requestfeature description
-
-        Request a feature to be added to the bot
-        """
-
-        await self.send_typing(channel)
-
-        if os.path.isfile("data/request.txt"):
-            with open("data/request.txt", "r") as orgFile:
-                orgContent = orgFile.read()
-        else:
-            orgContent = ""
-
-        with open("data/request.txt", "w") as newFile:
-            newContent = datetime.datetime.strftime(datetime.datetime.now(
-            ), "%Y-%m-%d %H:%M:%S") + " <" + str(author) + ">\n" + "\"" + " ".join(leftover_args) + "\"" + 2 * "\n"
-            newFile.write(newContent + orgContent)
-
-        await self.safe_send_message(self._get_owner(), "You have a new feature request: " + 2 * "\n" + newContent)
-        await self.safe_send_message(channel, "Successfully received your request!")
+    # async def cmd_requestfeature(self, channel, author, leftover_args):
+    #     """
+    #     Usage:
+    #         ***REMOVED***command_prefix***REMOVED***requestfeature description
+    #
+    #     Request a feature to be added to the bot
+    #     """
+    #
+    #     await self.send_typing(channel)
+    #
+    #     if os.path.isfile("data/request.txt"):
+    #         with open("data/request.txt", "r") as orgFile:
+    #             orgContent = orgFile.read()
+    #     else:
+    #         orgContent = ""
+    #
+    #     with open("data/request.txt", "w") as newFile:
+    #         newContent = datetime.datetime.strftime(datetime.datetime.now(
+    #         ), "%Y-%m-%d %H:%M:%S") + " <" + str(author) + ">\n" + "\"" + " ".join(leftover_args) + "\"" + 2 * "\n"
+    #         newFile.write(newContent + orgContent)
+    #
+    #     await self.safe_send_message(self._get_owner(), "You have a new feature request: " + 2 * "\n" + newContent)
+    #     await self.safe_send_message(channel, "Successfully received your request!")
 
     async def cmd_broadcast(self, server, message, leftover_args):
         """
@@ -5047,6 +5047,9 @@ class MusicBot(discord.Client):
         statement = " ".join(leftover_args)
         statement = statement.replace("/n/", "\n")
         statement = statement.replace("/t/", "\t")
+        matches = re.match(r"return (.*)", statement)
+        if matches is not None:
+            statement = re.sub(r"return (.*)", "asyncio.run_coroutine_threadsafe(self.safe_send_message(channel, str(***REMOVED******REMOVED***)), self.loop)".format(matches.group(1)))
 
         await self.safe_send_message(channel, "```python\n***REMOVED******REMOVED***\n```".format(statement))
         try:
@@ -5078,6 +5081,42 @@ class MusicBot(discord.Client):
             return Response("Nothing playing!", delete_after=20)
 
         if not player.goto_seconds(secs):
+            return Response("Timestamp exceeds song duration!", delete_after=20)
+
+    async def cmd_fwd(self, player, timestamp):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***fwd <timestamp>
+
+        Forward <timestamp> into the current entry
+        """
+
+        secs = parse_timestamp(timestamp)
+        if secs is None:
+            return Response("Please provide a valid timestamp", delete_after=20)
+
+        if player.current_entry is None:
+            return Response("Nothing playing!", delete_after=20)
+
+        if not player.goto_seconds(player.progress + secs):
+            return Response("Timestamp exceeds song duration!", delete_after=20)
+
+    async def cmd_rwd(self, player, timestamp):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***fwd <timestamp>
+
+        Rewind <timestamp> into the current entry
+        """
+
+        secs = parse_timestamp(timestamp)
+        if secs is None:
+            return Response("Please provide a valid timestamp", delete_after=20)
+
+        if player.current_entry is None:
+            return Response("Nothing playing!", delete_after=20)
+
+        if not player.goto_seconds(player.progress - secs):
             return Response("Timestamp exceeds song duration!", delete_after=20)
 
     async def cmd_register(self, author, server, token):
@@ -5327,6 +5366,12 @@ class MusicBot(discord.Client):
         ///|Explanation
         Quote a message
         """
+
+        if message.channel_mentions is not None and len(message.channel_mentions) > 0:
+            channel = message.channel_mentions[0]
+            leftover_args = leftover_args[1:]
+
+
         if len(leftover_args) < 1:
             return Response("Please specify the message you want to quote")
 

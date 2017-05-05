@@ -10,12 +10,12 @@ class Settings:
     def save_settings():
         pickle.dump(Settings.settings, open("config/settings.bin", "wb+"))
 
-    def get_setting(key, default=None):
+    def get_setting(key,*, default):
         Settings.load_settings()
         if key in Settings.settings:
             return Settings.settings[key]
         else:
-            return default
+            raise ValueError
 
     def set_setting(key, value):
         Settings.settings[key] = value
