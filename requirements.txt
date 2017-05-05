@@ -15,3 +15,4 @@ moviepy
 wikipedia
 langdetect
 py-translate
+aiohttp
