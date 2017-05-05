@@ -5231,7 +5231,7 @@ class MusicBot(discord.Client):
 
         await self.send_file(author, open("cache/last_data.xlsx", "rb"), filename='%s-msgs.xlsx' % (server.name.replace(' ', '_')))
 
-    async def cmd_archivechat(self, author, message, number=1000000):
+    async def cmd_archivechat(self, server, author, message, placeholder=None, number=1000000):
         if message.channel_mentions is None or len(message.channel_mentions) < 1:
             return Response("Stupid duck")
 
@@ -5242,7 +5242,7 @@ class MusicBot(discord.Client):
                         "timestamp": str(round(msg.timestamp.timestamp())), "content": msg.content}
             msgs.append(msg_data)
 
-        json.dump(reversed(msgs), open(
+        json.dump(msgs[::-1], open(
             "cache/last_message_archive.json", "w+"))
         await self.send_file(author, open("cache/last_message_archive.json", "rb"), filename='%s-msg-archive.json' % (server.name.replace(' ', '_')))
 
@@ -5403,7 +5403,7 @@ class MusicBot(discord.Client):
                            "icon_url": quote_message.author.avatar_url}
             embed_data = {"description": quote_message.content,
                           "timestamp": quote_message.timestamp,
-                          "colour" = quote_message.author.colour}
+                          "colour": quote_message.author.colour}
             em = Embed(**embed_data)
             em.set_author(**author_data)
             await self.send_message(channel, embed=em)
