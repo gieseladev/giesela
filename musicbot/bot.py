@@ -2510,9 +2510,10 @@ class MusicBot(discord.Client):
         while True:
             answer = cb.say(msgContent)
             base_answer = re.sub("[^a-z| ]+|\s{2,}", "", answer.lower())
-            if base_answer not in "whats your name".split(";") and not any(q in base_answer for q in "whats your name".split(";")):
+            if base_answer not in "whats your name;what is your name;tell me your name".split(";") and not any(q in base_answer for q in "whats your name; what is your name;tell me your name".split(";")):
                 break
         # await self.safe_edit_message (message, msgContent)
+        await asyncio.sleep(len(answer) / 5.5)
         self.log("<" + str(author.name) + "> " +
                  msgContent + "\n<Bot> " + answer + "\n")
         return Response(answer)
@@ -2998,7 +2999,8 @@ class MusicBot(discord.Client):
     #         newFile.write(newContent + orgContent)
     #
     #     await self.safe_send_message(self._get_owner(), "You have a new feature request: " + 2 * "\n" + newContent)
-    #     await self.safe_send_message(channel, "Successfully received your request!")
+    # await self.safe_send_message(channel, "Successfully received your
+    # request!")
 
     async def cmd_broadcast(self, server, message, leftover_args):
         """
@@ -5049,7 +5051,8 @@ class MusicBot(discord.Client):
         statement = statement.replace("/t/", "\t")
         matches = re.match(r"return (.*)", statement)
         if matches is not None:
-            statement = re.sub(r"return (.*)", "asyncio.run_coroutine_threadsafe(self.safe_send_message(channel, str({})), self.loop)".format(matches.group(1)))
+            statement = re.sub(
+                r"return (.*)", "asyncio.run_coroutine_threadsafe(self.safe_send_message(channel, str({})), self.loop)".format(matches.group(1)))
 
         await self.safe_send_message(channel, "```python\n{}\n```".format(statement))
         try:
@@ -5228,6 +5231,21 @@ class MusicBot(discord.Client):
 
         await self.send_file(author, open("cache/last_data.xlsx", "rb"), filename='%s-msgs.xlsx' % (server.name.replace(' ', '_')))
 
+    async def cmd_archivechat(self, author, message, number=1000000):
+        if message.channel_mentions is None or len(message.channel_mentions) < 1:
+            return Response("Stupid duck")
+
+        channel = message.channel_mentions[0]
+        msgs = []
+        async for msg in self.logs_from(channel, limit=int(number)):
+            msg_data = {"name": msg.author.name,
+                        "timestamp": str(round(msg.timestamp.timestamp())), "content": msg.content}
+            msgs.append(msg_data)
+
+        json.dump(reversed(msgs), open(
+            "cache/last_message_archive.json", "w+"))
+        await self.send_file(author, open("cache/last_message_archive.json", "rb"), filename='%s-msg-archive.json' % (server.name.replace(' ', '_')))
+
     @owner_only
     async def cmd_surveyserver(self, server):
         if self.online_loggers.get(server.id, None) is not None:
@@ -5370,7 +5388,6 @@ class MusicBot(discord.Client):
         if message.channel_mentions is not None and len(message.channel_mentions) > 0:
             channel = message.channel_mentions[0]
             leftover_args = leftover_args[1:]
-
 
         if len(leftover_args) < 1:
             return Response("Please specify the message you want to quote")
