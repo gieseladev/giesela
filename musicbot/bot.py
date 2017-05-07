@@ -4119,7 +4119,7 @@ class MusicBot(discord.Client):
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         ///|Load
-        `***REMOVED***command_prefix***REMOVED***playlist load <savename> [add | replace] [none | alphabetical | length | random] [startindex | endindex (inclusive)]`
+        `***REMOVED***command_prefix***REMOVED***playlist load <savename> [add | replace] [none | alphabetical | length | random] [startindex] [endindex (inclusive)]`
         ///(NL)|List all playlists
         `***REMOVED***command_prefix***REMOVED***playlist showall [alphabetical | author | entries | playtime | random | replays]`
         ///(NL)|Build a new playlist
@@ -4174,7 +4174,7 @@ class MusicBot(discord.Client):
             from_index = int(additional_args[2]) - \
                 1 if len(additional_args) > 2 else 0
             if from_index >= len(clone_entries) or from_index < 0:
-                return Response("Can't load the playlist starting from entry ***REMOVED******REMOVED***. This entry is out of bounds.".format(from_index), delete_after=20)
+                return Response("Can't load the playlist starting from entry ***REMOVED******REMOVED***. This value is out of bounds.".format(from_index), delete_after=20)
 
             to_index = int(additional_args[3]) if len(
                 additional_args) > 3 else len(clone_entries)
