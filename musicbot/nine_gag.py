@@ -60,7 +60,10 @@ class Post:
 
 
 def get_post(post_id):
-    return Post.from_id(post_id)
+    try:
+        return Post.from_id(post_id)
+    except:
+        return False
 
 
 # print(get_post("aVq4XWy"))
