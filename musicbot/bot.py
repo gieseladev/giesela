@@ -4007,6 +4007,8 @@ class MusicBot(discord.Client):
         """
 
         post = get_post(post_id)
+        if not post:
+            return Response("couldn't find that 9gag post, sorreyyyy!")
         em = Embed(title=post.title, url=post.hyperlink)
         em.set_image(url=post.content_url)
         em.set_footer(
