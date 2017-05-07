@@ -45,7 +45,7 @@ class Post:
         post_video = container.findAll("video")
         if len(post_video) > 0:
             post_video = post_video[0].findAll(
-                "source", ***REMOVED***"type": "video/webm"***REMOVED***)[0]["src"]
+                "source", ***REMOVED***"type": "video/mp4"***REMOVED***)[0]["src"]
             post_content_type = ContentType.VIDEO
             post_content_url = post_video
 
