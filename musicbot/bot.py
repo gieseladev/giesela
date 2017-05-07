@@ -3,6 +3,7 @@ import inspect
 import json
 import operator
 import os
+import re
 import shlex
 import shutil
 import sys
@@ -44,7 +45,7 @@ from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
 from .langid import LanguageIdentifier, model
 from .logger import OnlineLogger, log
-from .nine_gag import *
+from .nine_gag import ContentType, get_post
 from .opus_loader import load_opus_lib
 from .papers import Papers
 from .permissions import Permissions, PermissionsDefaults
@@ -96,7 +97,7 @@ class Response:
 class MusicBot(discord.Client):
     trueStringList = ["true", "1", "t", "y", "yes", "yeah",
                       "yup", "certainly", "uh-huh", "affirmitive", "activate"]
-    channelFreeCommands = ["say", "quote"]
+    channelFreeCommands = ["say", "quote", "9gag"]
     privateChatCommands = ["c", "ask", "requestfeature", "random",
                            "translate", "help", "say", "broadcast", "news", "game", "wiki", "cah", "execute"]
     lonelyModeRunning = False
@@ -148,6 +149,7 @@ class MusicBot(discord.Client):
         self.http.user_agent += ' MusicBot/%s' % BOTVERSION
         self.instant_translate = False
         self.instant_translate_mode = 1
+        self.instant_translate_certainty = .7
 
     # TODO: Add some sort of `denied` argument for a message to send when
     # someone else tries to use it
@@ -2128,6 +2130,10 @@ class MusicBot(discord.Client):
         if unlisted:
             lines.append('\n*... and %s more*' % unlisted)
 
+        if len(lines) > 0:
+            lines.append("\n*Queue has a total duration of *****REMOVED******REMOVED******".format(
+                format_time(sum([entry.duration for entry in player.playlist.entries]), True, 5, 2)))
+
         if not lines:
             lines.append(
                 'There are no songs queued! Queue something with ***REMOVED******REMOVED***play.'.format(self.config.command_prefix))
@@ -2509,9 +2515,10 @@ class MusicBot(discord.Client):
         while True:
             answer = cb.say(msgContent)
             base_answer = re.sub("[^a-z| ]+|\s***REMOVED***2,***REMOVED***", "", answer.lower())
-            if base_answer not in "whats your name".split(";") and not any(q in base_answer for q in "whats your name".split(";")):
+            if base_answer not in "whats your name;what is your name;tell me your name".split(";") and not any(q in base_answer for q in "whats your name; what is your name;tell me your name".split(";")):
                 break
         # await self.safe_edit_message (message, msgContent)
+        await asyncio.sleep(len(answer) / 5.5)
         self.log("<" + str(author.name) + "> " +
                  msgContent + "\n<Bot> " + answer + "\n")
         return Response(answer)
@@ -2975,29 +2982,30 @@ class MusicBot(discord.Client):
 
         await self.safe_send_message(channel, "I choose **" + choice(items) + "**")
 
-    async def cmd_requestfeature(self, channel, author, leftover_args):
-        """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***requestfeature description
-
-        Request a feature to be added to the bot
-        """
-
-        await self.send_typing(channel)
-
-        if os.path.isfile("data/request.txt"):
-            with open("data/request.txt", "r") as orgFile:
-                orgContent = orgFile.read()
-        else:
-            orgContent = ""
-
-        with open("data/request.txt", "w") as newFile:
-            newContent = datetime.datetime.strftime(datetime.datetime.now(
-            ), "%Y-%m-%d %H:%M:%S") + " <" + str(author) + ">\n" + "\"" + " ".join(leftover_args) + "\"" + 2 * "\n"
-            newFile.write(newContent + orgContent)
-
-        await self.safe_send_message(self._get_owner(), "You have a new feature request: " + 2 * "\n" + newContent)
-        await self.safe_send_message(channel, "Successfully received your request!")
+    # async def cmd_requestfeature(self, channel, author, leftover_args):
+    #     """
+    #     Usage:
+    #         ***REMOVED***command_prefix***REMOVED***requestfeature description
+    #
+    #     Request a feature to be added to the bot
+    #     """
+    #
+    #     await self.send_typing(channel)
+    #
+    #     if os.path.isfile("data/request.txt"):
+    #         with open("data/request.txt", "r") as orgFile:
+    #             orgContent = orgFile.read()
+    #     else:
+    #         orgContent = ""
+    #
+    #     with open("data/request.txt", "w") as newFile:
+    #         newContent = datetime.datetime.strftime(datetime.datetime.now(
+    #         ), "%Y-%m-%d %H:%M:%S") + " <" + str(author) + ">\n" + "\"" + " ".join(leftover_args) + "\"" + 2 * "\n"
+    #         newFile.write(newContent + orgContent)
+    #
+    #     await self.safe_send_message(self._get_owner(), "You have a new feature request: " + 2 * "\n" + newContent)
+    # await self.safe_send_message(channel, "Successfully received your
+    # request!")
 
     async def cmd_broadcast(self, server, message, leftover_args):
         """
@@ -3990,33 +3998,36 @@ class MusicBot(discord.Client):
         self.log(emoji)
         await self.safe_delete_message(message)
 
-    # async def cmd_9gag(self, channel, message, leftover_args):
-    #     """
-    #     Usage:
-    #         ***REMOVED***command_prefix***REMOVED***9gag
-    #
-    #     WIP
-    #     """
-    #     await self.safe_send_message(channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n     Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
-    #     # return
-    #     current_post = get_posts_from_page(number_of_pages=1)[0]
-    #
-    #     cached_file = urllib.request.URLopener()
-    #     saveloc = "cache/pictures/9gag" + current_post["file_format"]
-    #     cached_file.retrieve(current_post["media_url"], saveloc)
-    #
-    #     if current_post["file_format"] == ".mp4":
-    #         clip = editor.VideoFileClip(saveloc)
-    #         clip = video.fx.all.resize(clip, newsize=.3)
-    #         clip.write_gif("cache/pictures/9gag.gif")
-    #         if os.path.exists(saveloc):
-    #             os.remove(saveloc)
-    #         saveloc = "cache/pictures/9gag.gif"
-    #
-    #     await self.send_file(channel, saveloc, content="*****REMOVED******REMOVED*****\nUpvotes: ****REMOVED******REMOVED****\nComments: ****REMOVED******REMOVED****".format(re.sub("\*", "\*", current_post["title"]), current_post["votes"], current_post["comments"]))
-    #
-    #     if os.path.exists(saveloc):
-    #         os.remove(saveloc)
+    async def cmd_9gag(self, channel, author, post_id):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***9gag <id>
+
+        WIP
+        """
+
+        post = get_post(post_id)
+        if not post:
+            return Response("couldn't find that 9gag post, sorreyyyy!")
+
+        if post.content_type == ContentType.IMAGE:
+            em = Embed(title=post.title, url=post.hyperlink)
+            em.set_author(name=author.display_name, icon_url=author.avatar_url)
+            em.set_image(url=post.content_url)
+            em.set_footer(
+                text="***REMOVED******REMOVED*** upvotes | ***REMOVED******REMOVED*** comments".format(post.upvotes, post.comments))
+
+            await self.send_message(channel, embed=em)
+        else:
+            downloader = urllib.request.URLopener()
+            saveloc = "cache/pictures/9gag.mp4"
+            downloader.retrieve(post.content_url, saveloc)
+            clip = editor.VideoFileClip(saveloc)
+            # clip.resize(.5)
+            clip = video.fx.all.resize(clip, newsize=.55)
+            clip.write_gif("cache/pictures/9gag.gif", fps=10)
+            saveloc = "cache/pictures/9gag.gif"
+            await self.send_file(channel, saveloc, content="*****REMOVED******REMOVED*****".format(post.title))
 
     # async def nine_gag_get_section(self, channel, message):
         # category_dict = ***REMOVED***"🔥": "hot", "📈": "trending", "🆕": "new"***REMOVED***
@@ -4116,7 +4127,7 @@ class MusicBot(discord.Client):
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         ///|Load
-        `***REMOVED***command_prefix***REMOVED***playlist load <savename> [add | replace] [none | alphabetical | length | random] [startindex | endindex (inclusive)]`
+        `***REMOVED***command_prefix***REMOVED***playlist load <savename> [add | replace] [none | alphabetical | length | random] [startindex] [endindex (inclusive)]`
         ///(NL)|List all playlists
         `***REMOVED***command_prefix***REMOVED***playlist showall [alphabetical | author | entries | playtime | random | replays]`
         ///(NL)|Build a new playlist
@@ -4171,7 +4182,7 @@ class MusicBot(discord.Client):
             from_index = int(additional_args[2]) - \
                 1 if len(additional_args) > 2 else 0
             if from_index >= len(clone_entries) or from_index < 0:
-                return Response("Can't load the playlist starting from entry ***REMOVED******REMOVED***. This entry is out of bounds.".format(from_index), delete_after=20)
+                return Response("Can't load the playlist starting from entry ***REMOVED******REMOVED***. This value is out of bounds.".format(from_index), delete_after=20)
 
             to_index = int(additional_args[3]) if len(
                 additional_args) > 3 else len(clone_entries)
@@ -5046,6 +5057,10 @@ class MusicBot(discord.Client):
         statement = " ".join(leftover_args)
         statement = statement.replace("/n/", "\n")
         statement = statement.replace("/t/", "\t")
+        matches = re.match(r"return (.*)", statement)
+        if matches is not None:
+            statement = re.sub(
+                r"return (.*)", "asyncio.run_coroutine_threadsafe(self.safe_send_message(channel, str(***REMOVED******REMOVED***)), self.loop)".format(matches.group(1)))
 
         await self.safe_send_message(channel, "```python\n***REMOVED******REMOVED***\n```".format(statement))
         try:
@@ -5077,6 +5092,42 @@ class MusicBot(discord.Client):
             return Response("Nothing playing!", delete_after=20)
 
         if not player.goto_seconds(secs):
+            return Response("Timestamp exceeds song duration!", delete_after=20)
+
+    async def cmd_fwd(self, player, timestamp):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***fwd <timestamp>
+
+        Forward <timestamp> into the current entry
+        """
+
+        secs = parse_timestamp(timestamp)
+        if secs is None:
+            return Response("Please provide a valid timestamp", delete_after=20)
+
+        if player.current_entry is None:
+            return Response("Nothing playing!", delete_after=20)
+
+        if not player.goto_seconds(player.progress + secs):
+            return Response("Timestamp exceeds song duration!", delete_after=20)
+
+    async def cmd_rwd(self, player, timestamp):
+        """
+        Usage:
+            ***REMOVED***command_prefix***REMOVED***fwd <timestamp>
+
+        Rewind <timestamp> into the current entry
+        """
+
+        secs = parse_timestamp(timestamp)
+        if secs is None:
+            return Response("Please provide a valid timestamp", delete_after=20)
+
+        if player.current_entry is None:
+            return Response("Nothing playing!", delete_after=20)
+
+        if not player.goto_seconds(player.progress - secs):
             return Response("Timestamp exceeds song duration!", delete_after=20)
 
     async def cmd_register(self, author, server, token):
@@ -5188,6 +5239,21 @@ class MusicBot(discord.Client):
 
         await self.send_file(author, open("cache/last_data.xlsx", "rb"), filename='%s-msgs.xlsx' % (server.name.replace(' ', '_')))
 
+    async def cmd_archivechat(self, server, author, message, placeholder=None, number=1000000):
+        if message.channel_mentions is None or len(message.channel_mentions) < 1:
+            return Response("Stupid duck")
+
+        channel = message.channel_mentions[0]
+        msgs = []
+        async for msg in self.logs_from(channel, limit=int(number)):
+            msg_data = ***REMOVED***"name": msg.author.name,
+                        "timestamp": str(round(msg.timestamp.timestamp())), "content": msg.content***REMOVED***
+            msgs.append(msg_data)
+
+        json.dump(msgs[::-1], open(
+            "cache/last_message_archive.json", "w+"))
+        await self.send_file(author, open("cache/last_message_archive.json", "rb"), filename='%s-msg-archive.json' % (server.name.replace(' ', '_')))
+
     @owner_only
     async def cmd_surveyserver(self, server):
         if self.online_loggers.get(server.id, None) is not None:
@@ -5229,10 +5295,10 @@ class MusicBot(discord.Client):
         else:
             return Response("Nevermore you shall be annoyed!")
 
-    async def cmd_livetranslator(self, target_language=None, mode="1"):
+    async def cmd_livetranslator(self, target_language=None, mode="1", required_certainty="70"):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***livetranslator [language code] [mode]
+            ***REMOVED***command_prefix***REMOVED***livetranslator [language code] [mode] [required certainty]
 
         translate every message sent
 
@@ -5257,6 +5323,15 @@ class MusicBot(discord.Client):
             if not (0 <= mode <= 2):
                 mode = 1
             self.instant_translate_mode = mode
+
+            try:
+                required_certainty = int(required_certainty) / 100
+            except:
+                required_certainty = .7
+            if not (0 <= required_certainty <= 1):
+                required_certainty = .7
+
+            self.instant_translate_certainty = required_certainty
 
             return Response("Starting now!")
         else:
@@ -5313,14 +5388,20 @@ class MusicBot(discord.Client):
     async def cmd_quote(self, author, channel, message, leftover_args):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***quote <message id> [message id...]`
+        `***REMOVED***command_prefix***REMOVED***quote [channel] <message id> [message id...]`
         ///|Explanation
         Quote a message
         """
+
+        if message.channel_mentions is not None and len(message.channel_mentions) > 0:
+            channel = message.channel_mentions[0]
+            leftover_args = leftover_args[1:]
+
         if len(leftover_args) < 1:
             return Response("Please specify the message you want to quote")
-        elif len(leftover_args) == 1:
-            message_id = leftover_args[0]
+
+        await self.safe_delete_message(message)
+        for message_id in leftover_args:
             try:
                 quote_message = await self.get_message(channel, message_id)
             except:
@@ -5329,23 +5410,11 @@ class MusicBot(discord.Client):
             author_data = ***REMOVED***"name": quote_message.author.display_name,
                            "icon_url": quote_message.author.avatar_url***REMOVED***
             embed_data = ***REMOVED***"description": quote_message.content,
-                          "timestamp": quote_message.timestamp***REMOVED***
+                          "timestamp": quote_message.timestamp,
+                          "colour": quote_message.author.colour***REMOVED***
             em = Embed(**embed_data)
             em.set_author(**author_data)
-        else:
-            em = Embed(title="**Quote**")
-            for message_id in leftover_args:
-                try:
-                    quote_message = await self.get_message(channel, message_id)
-                except:
-                    return Response("Didn't find a message with the id `***REMOVED******REMOVED***`".format(message_id))
-
-                em.add_field(name="*****REMOVED******REMOVED***** - ****REMOVED******REMOVED****".format(quote_message.author.display_name, "***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(quote_message.timestamp)),
-                             value="`***REMOVED******REMOVED***`".format(quote_message.content), inline=False)
-
-        em.set_footer(text="Quoted by ***REMOVED******REMOVED***".format(author.display_name))
-        await self.safe_delete_message(message)
-        await self.send_message(channel, embed=em)
+            await self.send_message(channel, embed=em)
         return
 
     @owner_only
@@ -5368,6 +5437,25 @@ class MusicBot(discord.Client):
 
         message_content = message.content.strip()
 
+        nine_gag_match = re.match(
+            r".+?[http|https]:\/\/9gag.com\/gag\/(\w+)", message_content)
+        if nine_gag_match is not None:
+            post_id = nine_gag_match.group(1)
+            await self.cmd_9gag(message.channel, message.author, post_id)
+            await self.safe_delete_message(message)
+            return
+
+        # gif_match = re.match(r"((?:http|https):\/\/.+\.gif)", message_content)
+        # if gif_match is not None:
+        #     gif_link = gif_match.group(1)
+        #     em = Embed()
+        #     em._video = ***REMOVED***"url": gif_link***REMOVED***
+        #     em.set_author(name=message.author.display_name,
+        #                   icon_url=message.author.avatar_url)
+        #     await self.send_message(message.channel, embed=em)
+        #     await self.safe_delete_message(message)
+        #     return
+
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
             # await self.cmd_c(message.author, message.channel,
@@ -5376,16 +5464,15 @@ class MusicBot(discord.Client):
                 msg_language, probability = self.lang_identifier.classify(
                     message_content)
 
-                if probability > .7 and self.instant_translate and msg_language != self.translator.to_lang and message.author != self.user:
+                if probability > self.instant_translate_certainty and self.instant_translate and msg_language != self.translator.to_lang and message.author != self.user:
                     self.translator.from_lang = msg_language
                     if self.instant_translate_mode == 1:
                         await self.safe_send_message(message.channel, "Translation: `***REMOVED******REMOVED***`".format(self.translator.translate(message_content)))
                     elif self.instant_translate_mode == 2:
-                        em = Embed(colour=message.author.colour)
+                        em = Embed(colour=message.author.colour, description=self.translator.translate(
+                            message_content))
                         em.set_author(name=message.author.display_name,
                                       icon_url=message.author.avatar_url)
-                        em.add_field(
-                            value=self.translator.translate(message_content), name="Translated")
                         # em.set_footer(text=message.content)
                         await self.send_message(message.channel, embed=em)
                         await self.safe_delete_message(message)

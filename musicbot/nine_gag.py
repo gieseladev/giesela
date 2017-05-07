@@ -1,102 +1,69 @@
-import json
 import re
+from urllib import request
 
-import requests
-from bs4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup
 
-BASE_URL = "https://9gag.com"
-
-PAGE_DICT = ***REMOVED***
-    'hot': '/hot',
-    'trending': '/trending',
-    'fresh': '/fresh',
-***REMOVED***
+from enum import Enum
 
 
-def get_page(page_url=""):
+class ContentType(Enum):
+    IMAGE = 1
+    VIDEO = 2
+
+
+class Post:
+
+    def __init__(self, id, title, upvotes, comments, content_type, content_url):
+        self.id = id
+        self.title = title
+        self.upvotes = upvotes
+        self.comments = comments
+        self.content_type = content_type
+        self.content_url = content_url
+
+    @classmethod
+    def from_id(cls, post_id):
+        with request.urlopen("https://9gag.com/gag/" + post_id) as f:
+            data = f.read().decode("utf-8")
+
+        soup = BeautifulSoup(data, "lxml")
+        post_title = soup.h2.text
+        post_upvotes = int(re.sub(r"\W", "", soup.findAll(
+            "span", ***REMOVED***"class": "badge-item-love-count"***REMOVED***)[0].text))
+        post_comments = int(re.sub(r"\W", "", soup.findAll(
+            "span", ***REMOVED***"class": "badge-item-comment-count"***REMOVED***)[0].text))
+
+        container = soup.findAll(
+            "div", ***REMOVED***"class": "badge-post-container"***REMOVED***)[0]
+
+        post_image = container.findAll(
+            "img", ***REMOVED***"class": "badge-item-img"***REMOVED***)[0]["src"]
+
+        post_content_type = ContentType.IMAGE
+        post_content_url = post_image
+
+        post_video = container.findAll("video")
+        if len(post_video) > 0:
+            post_video = post_video[0].findAll(
+                "source", ***REMOVED***"type": "video/mp4"***REMOVED***)[0]["src"]
+            post_content_type = ContentType.VIDEO
+            post_content_url = post_video
+
+        return cls(post_id, post_title, post_upvotes, post_comments, post_content_type, post_content_url)
+
+    @property
+    def hyperlink(self):
+        return "https://9gag.com/gag/" + self.id
+
+    def __repr__(self):
+        return "Post(\"***REMOVED***0.id***REMOVED***\", \"***REMOVED***0.title***REMOVED***\", ***REMOVED***0.upvotes***REMOVED***, ***REMOVED***0.comments***REMOVED***, ***REMOVED***0.content_type***REMOVED***, \"***REMOVED***0.content_url***REMOVED***\")".format(self)
+
+
+def get_post(post_id):
     try:
-        # Solved the inifnite scrolling problem.
-        content = requests.get("%s%s" % (BASE_URL, page_url)).text
-        return bs(content, "lxml")
+        return Post.from_id(post_id)
     except:
-        return None
+        return False
 
 
-def retrieve_articles(number_of_pages, page_type):
-    extend_url = ""
-    if page_type != None:
-        try:
-            extend_url = PAGE_DICT[page_type]
-        except:
-            extenf_url = ""
-    # print extend_url
-    all_articles = list()
-    while number_of_pages > 0:
-        content = get_page(extend_url)
-        if content == None:
-            return None
-        extend_url = content.find(
-            'a', attrs=***REMOVED***'class': 'btn badge-load-more-post'***REMOVED***)['href']
-        # print extend_url
-        all_articles += content.findAll("article")
-        number_of_pages -= 1
-        # print all_articles[0]
-    return all_articles
-
-# Add filters such that the user can go ahead and limit whether
-# they want only gifs, images, posts with comments above this number,#posts with comments greater than
-# Make sure that the page number limit is 100.
-
-
-def annotate(number_of_pages, page_type):
-    final_result = list()
-    for ii in retrieve_articles(number_of_pages, page_type):
-        # TODO : Make the dictionary by getting other elements out.
-        try:
-            type = ii.find(
-                'span', attrs=***REMOVED***'class': 'play badge-gif-play hide'***REMOVED***).text
-            media_url = ii.find(
-                'img', attrs=***REMOVED***'class': 'badge-item-animated-img'***REMOVED***)['src']
-            file_format = ".gif"
-        except:
-            try:
-                type = "video/mp4"
-                media_url = ii.find(
-                    'source', attrs=***REMOVED***'type': 'video/mp4'***REMOVED***)['src']
-                file_format = ".mp4"
-            except:
-                type = 'Image'
-                media_url = ii.find(
-                    'img', attrs=***REMOVED***'class': 'badge-item-img'***REMOVED***)['src']
-                file_format = ".jpg"
-        post_url = ii['data-entry-url']
-        votes = ii['data-entry-votes']
-        comments = ii['data-entry-comments']
-        title = ii.find('img', attrs=***REMOVED***'class': 'badge-item-img'***REMOVED***)['alt']
-        # print title
-        final_result.append(***REMOVED***
-            "type": type,
-            "post_url": post_url,
-            "votes": int(votes),
-            "comments": int(comments),
-            "title": title,
-            "media_url": media_url,
-            "file_format": file_format
-        ***REMOVED***)
-    return final_result
-
-
-def get_posts_from_page(number_of_pages=1, media_type='all', page_type=None, more_votes_than=0, more_comments_than=0):
-    data = annotate(number_of_pages, page_type)
-    if media_type == 'gif':
-        data = [el for el in data if el['type'] == 'GIF']
-    elif media_type == 'image':
-        data = [el for el in data if el['type'] == 'Image']
-    else:
-        pass
-    if more_votes_than > 0:
-        data = [el for el in data if el['votes'] > more_votes_than]
-    if more_comments_than > 0:
-        data = [el for el in data if el['comments'] > more_comments_than]
-    # return json.dumps(data)
-    return data
+# print(get_post("aVq4XWy"))
