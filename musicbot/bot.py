@@ -3998,7 +3998,7 @@ class MusicBot(discord.Client):
         self.log(emoji)
         await self.safe_delete_message(message)
 
-    async def cmd_9gag(self, channel, post_id):
+    async def cmd_9gag(self, channel, author, post_id):
         """
         Usage:
             {command_prefix}9gag <id>
@@ -4009,12 +4009,25 @@ class MusicBot(discord.Client):
         post = get_post(post_id)
         if not post:
             return Response("couldn't find that 9gag post, sorreyyyy!")
-        em = Embed(title=post.title, url=post.hyperlink)
-        em.set_image(url=post.content_url)
-        em.set_footer(
-            text="{} upvotes | {} comments".format(post.upvotes, post.comments))
 
-        await self.send_message(channel, embed=em)
+        if post.content_type == ContentType.IMAGE:
+            em = Embed(title=post.title, url=post.hyperlink)
+            em.set_author(name=author.display_name, icon_url=author.avatar_url)
+            em.set_image(url=post.content_url)
+            em.set_footer(
+                text="{} upvotes | {} comments".format(post.upvotes, post.comments))
+
+            await self.send_message(channel, embed=em)
+        else:
+            downloader = urllib.request.URLopener()
+            saveloc = "cache/pictures/9gag.mp4"
+            downloader.retrieve(post.content_url, saveloc)
+            clip = editor.VideoFileClip(saveloc)
+            # clip.resize(.5)
+            clip = video.fx.all.resize(clip, newsize=.55)
+            clip.write_gif("cache/pictures/9gag.gif", fps=10)
+            saveloc = "cache/pictures/9gag.gif"
+            await self.send_file(channel, saveloc, content="**{}**".format(post.title))
 
     # async def nine_gag_get_section(self, channel, message):
         # category_dict = {"🔥": "hot", "📈": "trending", "🆕": "new"}
@@ -5428,9 +5441,20 @@ class MusicBot(discord.Client):
             r".+?[http|https]:\/\/9gag.com\/gag\/(\w+)", message_content)
         if nine_gag_match is not None:
             post_id = nine_gag_match.group(1)
-            await self.cmd_9gag(message.channel, post_id)
+            await self.cmd_9gag(message.channel, message.author, post_id)
             await self.safe_delete_message(message)
             return
+
+        # gif_match = re.match(r"((?:http|https):\/\/.+\.gif)", message_content)
+        # if gif_match is not None:
+        #     gif_link = gif_match.group(1)
+        #     em = Embed()
+        #     em._video = {"url": gif_link}
+        #     em.set_author(name=message.author.display_name,
+        #                   icon_url=message.author.avatar_url)
+        #     await self.send_message(message.channel, embed=em)
+        #     await self.safe_delete_message(message)
+        #     return
 
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
