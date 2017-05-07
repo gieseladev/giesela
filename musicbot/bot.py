@@ -2129,6 +2129,10 @@ class MusicBot(discord.Client):
         if unlisted:
             lines.append('\n*... and %s more*' % unlisted)
 
+        if len(lines) > 0:
+            lines.append("\n*Queue has a total duration of **{}***".format(
+                format_time(sum([entry.duration for entry in player.playlist.entries]), True, 5, 2)))
+
         if not lines:
             lines.append(
                 'There are no songs queued! Queue something with {}play.'.format(self.config.command_prefix))
