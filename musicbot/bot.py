@@ -3,6 +3,7 @@ import inspect
 import json
 import operator
 import os
+import re
 import shlex
 import shutil
 import sys
@@ -44,7 +45,7 @@ from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
 from .langid import LanguageIdentifier, model
 from .logger import OnlineLogger, log
-from .nine_gag import *
+from .nine_gag import ContentType, get_post
 from .opus_loader import load_opus_lib
 from .papers import Papers
 from .permissions import Permissions, PermissionsDefaults
@@ -96,7 +97,7 @@ class Response:
 class MusicBot(discord.Client):
     trueStringList = ["true", "1", "t", "y", "yes", "yeah",
                       "yup", "certainly", "uh-huh", "affirmitive", "activate"]
-    channelFreeCommands = ["say", "quote"]
+    channelFreeCommands = ["say", "quote", "9gag"]
     privateChatCommands = ["c", "ask", "requestfeature", "random",
                            "translate", "help", "say", "broadcast", "news", "game", "wiki", "cah", "execute"]
     lonelyModeRunning = False
@@ -3997,33 +3998,21 @@ class MusicBot(discord.Client):
         self.log(emoji)
         await self.safe_delete_message(message)
 
-    # async def cmd_9gag(self, channel, message, leftover_args):
-    #     """
-    #     Usage:
-    #         {command_prefix}9gag
-    #
-    #     WIP
-    #     """
-    #     await self.safe_send_message(channel, "Hello there, unworthy peasent.\nThe development of this function has been put on halt. This is due to the following:\n  -9gag currently provides it's animations in a *.webm* format which is not supported by discord.\n   -The conversion of a file to a *.gif* format takes at least 5 seconds which is not acceptable.\n     Also the filesize blows away all of my f\*cking drive space so f\*ck off, kthx.\n  -The 9gag html code has not been formatted in a *MusicBot certified* reading matter. This means\n    that I cannot tell the differences between the website logo and the actual post.\n\n<www.9gag.com>")
-    #     # return
-    #     current_post = get_posts_from_page(number_of_pages=1)[0]
-    #
-    #     cached_file = urllib.request.URLopener()
-    #     saveloc = "cache/pictures/9gag" + current_post["file_format"]
-    #     cached_file.retrieve(current_post["media_url"], saveloc)
-    #
-    #     if current_post["file_format"] == ".mp4":
-    #         clip = editor.VideoFileClip(saveloc)
-    #         clip = video.fx.all.resize(clip, newsize=.3)
-    #         clip.write_gif("cache/pictures/9gag.gif")
-    #         if os.path.exists(saveloc):
-    #             os.remove(saveloc)
-    #         saveloc = "cache/pictures/9gag.gif"
-    #
-    #     await self.send_file(channel, saveloc, content="**{}**\nUpvotes: *{}*\nComments: *{}*".format(re.sub("\*", "\*", current_post["title"]), current_post["votes"], current_post["comments"]))
-    #
-    #     if os.path.exists(saveloc):
-    #         os.remove(saveloc)
+    async def cmd_9gag(self, channel, post_id):
+        """
+        Usage:
+            {command_prefix}9gag <id>
+
+        WIP
+        """
+
+        post = get_post(post_id)
+        em = Embed(title=post.title, url=post.hyperlink)
+        em.set_image(url=post.content_url)
+        em.set_footer(
+            text="{} upvotes | {} comments".format(post.upvotes, post.comments))
+
+        await self.send_message(channel, embed=em)
 
     # async def nine_gag_get_section(self, channel, message):
         # category_dict = {"🔥": "hot", "📈": "trending", "🆕": "new"}
@@ -5384,7 +5373,7 @@ class MusicBot(discord.Client):
     async def cmd_quote(self, author, channel, message, leftover_args):
         """
         ///|Usage
-        `{command_prefix}quote <message id> [message id...]`
+        `{command_prefix}quote [channel] <message id> [message id...]`
         ///|Explanation
         Quote a message
         """
@@ -5432,6 +5421,14 @@ class MusicBot(discord.Client):
         await self.wait_until_ready()
 
         message_content = message.content.strip()
+
+        nine_gag_match = re.match(
+            r".+?[http|https]:\/\/9gag.com\/gag\/(\w+)", message_content)
+        if nine_gag_match is not None:
+            post_id = nine_gag_match.group(1)
+            await self.cmd_9gag(message.channel, post_id)
+            await self.safe_delete_message(message)
+            return
 
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
