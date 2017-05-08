@@ -14,7 +14,7 @@ class Radio:
 
     def has_station_data(radio_station):
         radio_station = "_".join(radio_station.lower().split())
-        return radio_station in ["energy_bern", "capital_fm", "bbc"]
+        return radio_station in ["energy_bern", "capital_fm", "bbc", "heart_london"]
 
     async def get_current_song(loop, radio_station):
         radio_station = "_".join(radio_station.lower().split())
@@ -24,6 +24,8 @@ class Radio:
             return await Radio._get_current_song_capital_fm(loop)
         elif radio_station == "bbc":
             return await Radio._get_current_song_bbc(loop)
+        elif radio_station == "heart_london":
+            return await Radio._get_current_song_heart_london(loop)
 
         return None
 
@@ -80,6 +82,32 @@ class Radio:
             raise
             return None
 
+    async def _get_current_song_heart_london(loop):
+        try:
+            async with aiohttp.ClientSession(loop=loop) as client:
+                async with client.get('http://www.heart.co.uk/london/on-air/last-played-songs/', ) as resp:
+                    soup = BeautifulSoup(await resp.text())
+                    title = soup.findAll("h3", {"class": "track"})[
+                        0].text.strip()
+                    artist = soup.findAll("p", {"class": "artist"})[
+                        0].text.strip()
+                    cover = soup.findAll("li", {"class": "clearfix odd first"})[
+                        0].findAll("img")[0]["src"]
+                    start_hour, start_minute = soup.findAll("p", {"class": "dtstart"})[
+                        0].text.strip().split(":")
+                    time_now = datetime.now()
+                    start_time = datetime(time_now.year, time_now.month, time_now.day, int(
+                        start_hour) + 1, int(start_minute))
+                    progress = round((time_now - start_time).total_seconds())
+
+                    return {"title": title, "artist":
+                            artist, "cover": cover,
+                            "youtube": "http://www.heart.co.uk/london/on-air/last-played-songs/", "duration":
+                            0, "progress": progress}
+        except:
+            raise
+            return None
+
 
 # loop = asyncio.get_event_loop()
-# loop.run_until_complete(Radio.get_current_song(loop, "bbc"))
+# print(loop.run_until_complete(Radio.get_current_song(loop, "heart_london")))
