@@ -1,9 +1,13 @@
+import json
 import re
+from datetime import datetime
 from urllib import request
+from urllib.parse import urlencode
 
 from bs4 import BeautifulSoup
 
 from enum import Enum
+from html import unescape
 
 
 class ContentType(Enum):
@@ -11,15 +15,42 @@ class ContentType(Enum):
     VIDEO = 2
 
 
+class Comment:
+
+    def __init__(self, name, avatar, profile_url, content, likes, dislikes, timestamp, permalink, reply_count):
+        self.name = name
+        self.avatar = avatar
+        self.profile_url = profile_url
+        self.content = content
+        self.likes = likes
+        self.dislikes = dislikes
+        self.timestamp = datetime.fromtimestamp(timestamp)
+        self.permalink = permalink
+        self.reply_count = reply_count
+
+    @classmethod
+    def from_json(cls, json_data):
+        user_data = json_data["user"]
+        return cls(user_data["displayName"], user_data["avatarUrl"], list(user_data["profileUrls"].values())[0], unescape(json_data["text"]), json_data["likeCount"], json_data["dislikeCount"], json_data["timestamp"], json_data["permalink"], json_data["childrenTotal"])
+
+    @property
+    def score(self):
+        return self.likes - self.dislikes
+
+    def __repr__(self):
+        return "Comment(***REMOVED***0.name***REMOVED***, ***REMOVED***0.avatar***REMOVED***, ***REMOVED***0.profile_url***REMOVED***, ***REMOVED***0.content***REMOVED***, ***REMOVED***0.likes***REMOVED***, ***REMOVED***0.dislikes***REMOVED***, ***REMOVED***0.timestamp***REMOVED***)".format(self)
+
+
 class Post:
 
-    def __init__(self, id, title, upvotes, comments, content_type, content_url):
+    def __init__(self, id, title, upvotes, comments, content_type, content_url, comment_count):
         self.id = id
         self.title = title
         self.upvotes = upvotes
         self.comments = comments
         self.content_type = content_type
         self.content_url = content_url
+        self.comment_count = comment_count
 
     @classmethod
     def from_id(cls, post_id):
@@ -30,8 +61,15 @@ class Post:
         post_title = soup.h2.text
         post_upvotes = int(re.sub(r"\W", "", soup.findAll(
             "span", ***REMOVED***"class": "badge-item-love-count"***REMOVED***)[0].text))
-        post_comments = int(re.sub(r"\W", "", soup.findAll(
-            "span", ***REMOVED***"class": "badge-item-comment-count"***REMOVED***)[0].text))
+
+        with request.urlopen("https://comment-cdn.9gag.com/v1/cacheable/comment-list.json?url=http%3A%2F%2F9gag.com%2Fgag%2F***REMOVED******REMOVED***&level=2&count=10&appId=a_dd8f2b7d304a10edaf6f29517ea0ca4100a43d1b&order=score".format(post_id)) as f:
+            response = json.loads(f.read().decode("utf-8"))
+
+        post_comments = []
+        for comment in response["payload"]["comments"]:
+            post_comments.append(Comment.from_json(comment))
+
+        post_comments.sort(key=lambda comment: comment.score, reverse=True)
 
         container = soup.findAll(
             "div", ***REMOVED***"class": "badge-post-container"***REMOVED***)[0]
@@ -49,7 +87,10 @@ class Post:
             post_content_type = ContentType.VIDEO
             post_content_url = post_video
 
-        return cls(post_id, post_title, post_upvotes, post_comments, post_content_type, post_content_url)
+        comment_count = int(re.sub(r"\W", "", soup.findAll(
+            "span", ***REMOVED***"class": "badge-item-comment-count"***REMOVED***)[0].text))
+
+        return cls(post_id, post_title, post_upvotes, post_comments, post_content_type, post_content_url, comment_count)
 
     @property
     def hyperlink(self):
@@ -63,7 +104,8 @@ def get_post(post_id):
     try:
         return Post.from_id(post_id)
     except:
+        raise
         return False
 
 
-# print(get_post("aVq4XWy"))
+# print(get_post("aRm8j8y"))
