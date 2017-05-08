@@ -4011,13 +4011,23 @@ class MusicBot(discord.Client):
             return Response("couldn't find that 9gag post, sorreyyyy!")
 
         if post.content_type == ContentType.IMAGE:
-            em = Embed(title=post.title, url=post.hyperlink)
+            em = Embed(title=post.title, url=post.hyperlink, colour=9316352)
             em.set_author(name=author.display_name, icon_url=author.avatar_url)
             em.set_image(url=post.content_url)
             em.set_footer(
-                text="***REMOVED******REMOVED*** upvotes | ***REMOVED******REMOVED*** comments".format(post.upvotes, post.comments))
+                text="***REMOVED******REMOVED*** upvotes | ***REMOVED******REMOVED*** comments".format(post.upvotes, post.comment_count))
 
             await self.send_message(channel, embed=em)
+
+            for comment in post.comments[:3]:
+                em = Embed(description=comment.content,
+                           timestamp=comment.timestamp, colour=11946278, url=comment.permalink)
+                em.set_author(name=comment.name,
+                              icon_url=comment.avatar, url=comment.profile_url)
+                em.set_footer(text="***REMOVED******REMOVED*** likes | ***REMOVED******REMOVED*** dislikes | ***REMOVED******REMOVED*** replies".format(
+                    comment.likes, comment.dislikes, comment.reply_count))
+                await self.send_message(channel, embed=em)
+
         else:
             downloader = urllib.request.URLopener()
             saveloc = "cache/pictures/9gag.mp4"
@@ -4027,7 +4037,22 @@ class MusicBot(discord.Client):
             clip = video.fx.all.resize(clip, newsize=.55)
             clip.write_gif("cache/pictures/9gag.gif", fps=10)
             saveloc = "cache/pictures/9gag.gif"
-            await self.send_file(channel, saveloc, content="*****REMOVED******REMOVED*****".format(post.title))
+
+            em = Embed(title=post.title, url=post.hyperlink, colour=9316352)
+            em.set_author(name=author.display_name, icon_url=author.avatar_url)
+            em.set_footer(
+                text="***REMOVED******REMOVED*** upvotes | ***REMOVED******REMOVED*** comments".format(post.upvotes, post.comment_count))
+
+            await self.send_message(channel, embed=em)
+            await self.send_file(channel, saveloc)
+            for comment in post.comments[:3]:
+                em = Embed(description=comment.content,
+                           timestamp=comment.timestamp, colour=11946278, url=comment.permalink)
+                em.set_author(name=comment.name,
+                              icon_url=comment.avatar, url=comment.profile_url)
+                em.set_footer(text="***REMOVED******REMOVED*** upvotes | ***REMOVED******REMOVED*** replies".format(
+                    comment.score, comment.reply_count))
+                await self.send_message(channel, embed=em)
 
     # async def nine_gag_get_section(self, channel, message):
         # category_dict = ***REMOVED***"🔥": "hot", "📈": "trending", "🆕": "new"***REMOVED***
