@@ -5078,7 +5078,7 @@ class MusicBot(discord.Client):
         statement = " ".join(leftover_args)
         statement = statement.replace("/n/", "\n")
         statement = statement.replace("/t/", "\t")
-        beautiful_statement = "```python3\n***REMOVED******REMOVED***\n```".format(statement)
+        beautiful_statement = "```python\n***REMOVED******REMOVED***\n```".format(statement)
 
         statement = "async def func():\n***REMOVED******REMOVED***".format(indent(statement, "\t"))
 
@@ -5089,15 +5089,15 @@ class MusicBot(discord.Client):
         try:
             exec(statement, env)
         except SyntaxError as e:
-            return Response("**While compiling the statement the following error occured**\n```python3\n***REMOVED******REMOVED***\n```".format(str(e)))
+            return Response("**While compiling the statement the following error occured**\n```python\n***REMOVED******REMOVED***\n```".format(str(e)))
 
         func = env["func"]
         try:
             ret = await func()
         except Exception as e:
-            return Response("**While executing the statement the following error occured**\n```python3\n***REMOVED******REMOVED***\n```".format(str(e)))
+            return Response("**While executing the statement the following error occured**\n```python\n***REMOVED******REMOVED***\n```".format(str(e)))
 
-        return Response("**CODE**\n***REMOVED******REMOVED***\n**RESULT**\n```python3\n***REMOVED******REMOVED***\n```".format(beautiful_statement, str(ret)))
+        return Response("**CODE**\n***REMOVED******REMOVED***\n**RESULT**\n```python\n***REMOVED******REMOVED***\n```".format(beautiful_statement, str(ret)))
 
     async def cmd_skipto(self, player, timestamp):
         """
