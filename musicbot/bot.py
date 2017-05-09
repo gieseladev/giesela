@@ -15,7 +15,7 @@ from datetime import datetime, timedelta
 from functools import wraps
 from io import BytesIO
 from random import choice, shuffle
-from textwrap import dedent
+from textwrap import dedent, indent
 
 import aiohttp
 import discord
@@ -5074,24 +5074,30 @@ class MusicBot(discord.Client):
                     return Response("Successfully sent the message!")
 
     @owner_only
-    async def cmd_execute(self, player, channel, author, server, leftover_args):
+    async def cmd_execute(self, channel, author, server, leftover_args, player=None):
         statement = " ".join(leftover_args)
         statement = statement.replace("/n/", "\n")
         statement = statement.replace("/t/", "\t")
+        beautiful_statement = "```python3\n{}\n```".format(statement)
 
-        await self.safe_send_message(channel, "```python\n{}\n```".format(statement))
+        statement = "async def func():\n{}".format(indent(statement, "\t"))
+
+        env = {}
+        env.update(globals())
+        env.update(locals())
+
         try:
-            result = eval(statement)
-            return Response(str(result))
+            exec(statement, env)
+        except SyntaxError as e:
+            return Response("**While compiling the statement the following error occured**\n```python3\n{}\n```".format(str(e)))
+
+        func = env["func"]
+        try:
+            ret = await func()
         except Exception as e:
-            try:
-                result = exec(statement)
-                return Response(str(result))
-            except Exception as a:
-                if str(a) == str(e):
-                    return Response("Error:\n```\n{}\n```".format(str(e)))
-                else:
-                    return Response("Errors:\n```\n{}\n```\n```\n{}\n```".format(str(e), str(a)))
+            return Response("**While executing the statement the following error occured**\n```python3\n{}\n```".format(str(e)))
+
+        return Response("**CODE**\n{}\n**RESULT**\n```python3\n{}\n```".format(beautiful_statement, str(ret)))
 
     async def cmd_skipto(self, player, timestamp):
         """
