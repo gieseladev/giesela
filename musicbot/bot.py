@@ -5414,6 +5414,8 @@ class MusicBot(discord.Client):
         Quote a message
         """
 
+        quote_to_channel = channel
+
         if message.channel_mentions is not None and len(message.channel_mentions) > 0:
             channel = message.channel_mentions[0]
             leftover_args = leftover_args[1:]
@@ -5435,7 +5437,7 @@ class MusicBot(discord.Client):
                           "colour": quote_message.author.colour}
             em = Embed(**embed_data)
             em.set_author(**author_data)
-            await self.send_message(channel, embed=em)
+            await self.send_message(quote_to_channel, embed=em)
         return
 
     @owner_only
