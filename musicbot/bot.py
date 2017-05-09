@@ -5078,10 +5078,6 @@ class MusicBot(discord.Client):
         statement = " ".join(leftover_args)
         statement = statement.replace("/n/", "\n")
         statement = statement.replace("/t/", "\t")
-        matches = re.match(r"return (.*)", statement)
-        if matches is not None:
-            statement = re.sub(
-                r"return (.*)", "asyncio.run_coroutine_threadsafe(self.safe_send_message(channel, str({})), self.loop)".format(matches.group(1)))
 
         await self.safe_send_message(channel, "```python\n{}\n```".format(statement))
         try:
@@ -5409,7 +5405,8 @@ class MusicBot(discord.Client):
     async def cmd_quote(self, author, channel, message, leftover_args):
         """
         ///|Usage
-        `{command_prefix}quote [channel] <message id> [message id...]`
+        `{command_prefix}quote [#channel] <message id> [message id...]`
+        `{command_prefix}quote [#channel] \"<message content>\"`
         ///|Explanation
         Quote a message
         """
@@ -5422,6 +5419,10 @@ class MusicBot(discord.Client):
 
         if len(leftover_args) < 1:
             return Response("Please specify the message you want to quote")
+
+        message_content = " ".join(leftover_args)
+        if message_content[0] == "\"" and message_content[-1] == "\"":
+            return Response("Well sorry, this way of quoting is still being worked on. Come back in {}".format(format_time((datetime(2017, 5, 15) - datetime.now()).total_seconds(), True, 5, 2, True)))
 
         await self.safe_delete_message(message)
         for message_id in leftover_args:
