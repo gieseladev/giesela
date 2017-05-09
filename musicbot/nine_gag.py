@@ -13,11 +13,13 @@ from html import unescape
 class ContentType(Enum):
     IMAGE = 1
     VIDEO = 2
+    TEXT = 3
+    GIF = 4
 
 
 class Comment:
 
-    def __init__(self, name, avatar, profile_url, content, likes, dislikes, timestamp, permalink, reply_count):
+    def __init__(self, name, avatar, profile_url, content, likes, dislikes, timestamp, permalink, reply_count, content_type=ContentType.TEXT):
         self.name = name
         self.avatar = avatar
         self.profile_url = profile_url
@@ -27,11 +29,28 @@ class Comment:
         self.timestamp = datetime.fromtimestamp(timestamp)
         self.permalink = permalink
         self.reply_count = reply_count
+        self.content_type = content_type
 
     @classmethod
     def from_json(cls, json_data):
         user_data = json_data["user"]
-        return cls(user_data["displayName"], user_data["avatarUrl"], list(user_data["profileUrls"].values())[0], unescape(json_data["text"]), json_data["likeCount"], json_data["dislikeCount"], json_data["timestamp"], json_data["permalink"], json_data["childrenTotal"])
+        content_type = json_data["type"]
+        content = unescape(json_data["text"])
+
+        if content_type == "text":
+            content_type = ContentType.TEXT
+        elif content_type == "media":
+            media = json_data["embedMediaMeta"]["embedImage"]
+            if "animated" in media:
+                content_type = ContentType.GIF
+                content = media["animated"]["url"]
+            elif "image" in media:
+                content_type = ContentType.IMAGE
+                content = media["image"]["url"]
+            else:
+                content_type = ContentType.TEXT
+
+        return cls(user_data["displayName"], user_data["avatarUrl"], list(user_data["profileUrls"].values())[0], content, json_data["likeCount"], json_data["dislikeCount"], json_data["timestamp"], json_data["permalink"], json_data["childrenTotal"], content_type)
 
     @property
     def score(self):

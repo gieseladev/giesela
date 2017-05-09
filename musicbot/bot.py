@@ -4018,16 +4018,6 @@ class MusicBot(discord.Client):
                 text="{} upvotes | {} comments".format(post.upvotes, post.comment_count))
 
             await self.send_message(channel, embed=em)
-
-            for comment in post.comments[:3]:
-                em = Embed(description=comment.content,
-                           timestamp=comment.timestamp, colour=11946278, url=comment.permalink)
-                em.set_author(name=comment.name,
-                              icon_url=comment.avatar, url=comment.profile_url)
-                em.set_footer(text="{} likes | {} dislikes | {} replies".format(
-                    comment.likes, comment.dislikes, comment.reply_count))
-                await self.send_message(channel, embed=em)
-
         else:
             downloader = urllib.request.URLopener()
             saveloc = "cache/pictures/9gag.mp4"
@@ -4045,14 +4035,20 @@ class MusicBot(discord.Client):
 
             await self.send_message(channel, embed=em)
             await self.send_file(channel, saveloc)
-            for comment in post.comments[:3]:
-                em = Embed(description=comment.content,
-                           timestamp=comment.timestamp, colour=11946278, url=comment.permalink)
-                em.set_author(name=comment.name,
-                              icon_url=comment.avatar, url=comment.profile_url)
-                em.set_footer(text="{} upvotes | {} replies".format(
-                    comment.score, comment.reply_count))
-                await self.send_message(channel, embed=em)
+
+        for comment in post.comments[:3]:
+            em = Embed(timestamp=comment.timestamp,
+                       colour=11946278, url=comment.permalink)
+            em.set_author(name=comment.name,
+                          icon_url=comment.avatar, url=comment.profile_url)
+            em.set_footer(text="{} upvotes | {} replies".format(
+                comment.score, comment.reply_count))
+            if comment.content_type == ContentType.TEXT:
+                em.description = comment.content
+            elif comment.content_type in (ContentType.IMAGE, ContentType.GIF):
+                em.set_image(url=comment.content)
+
+            await self.send_message(channel, embed=em)
 
     # async def nine_gag_get_section(self, channel, message):
         # category_dict = {"🔥": "hot", "📈": "trending", "🆕": "new"}
