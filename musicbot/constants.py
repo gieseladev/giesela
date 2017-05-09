@@ -1,6 +1,6 @@
 import os.path
 
-MAIN_VERSION = '2.3.5'
+MAIN_VERSION = '2.3.7'
 SUB_VERSION = 'Giesela-PLUS'
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
