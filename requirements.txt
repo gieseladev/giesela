@@ -16,3 +16,4 @@ wikipedia
 langdetect
 py-translate
 aiohttp
+python-twitter
