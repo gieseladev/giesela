@@ -6,6 +6,7 @@ import os
 import re
 import shlex
 import shutil
+import subprocess
 import sys
 import time
 import traceback
@@ -59,6 +60,7 @@ from .saved_playlists import Playlists
 from .settings import Settings
 from .socket_server import SocketServer
 from .translate import Translator
+from .twitter_api import get_tweet
 from .utils import (escape_dis, format_time, load_file, paginate,
                     parse_timestamp, prettydate, random_line, sane_round_int,
                     write_file)
@@ -4027,6 +4029,8 @@ class MusicBot(discord.Client):
             clip = video.fx.all.resize(clip, newsize=.55)
             clip.write_gif("cache/pictures/9gag.gif", fps=10)
             saveloc = "cache/pictures/9gag.gif"
+            # subprocess.run(
+            #     ["gifsicle", "-b", "cache/pictures/9gag.gif", "--colors", "256"])
 
             em = Embed(title=post.title, url=post.hyperlink, colour=9316352)
             em.set_author(name=author.display_name, icon_url=author.avatar_url)
@@ -4072,6 +4076,21 @@ class MusicBot(discord.Client):
         # await self.safe_delete_message(msg)
         #
         # return category_dict[str(reaction.emoji)]
+
+    async def cmd_twitter(self, channel, tweet_id):
+        """
+        ///|Usage
+        ***REMOVED***command_prefix***REMOVED***twitter <tweet_id>
+        ///|Explanation
+        Embed a tweet
+        """
+
+        tweet = get_tweet(tweet_id)
+        em = Embed(title="TWEEET", timestamp=tweet.created_at,
+                   description=tweet.text)
+        em.set_author(url=tweet.user.url, name=tweet.user.name,
+                      icon_url=tweet.user.avatar_url)
+        await self.send_message(channel, embed=em)
 
     async def cmd_repeat(self, player):
         """
