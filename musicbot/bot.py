@@ -15,7 +15,7 @@ from datetime import datetime, timedelta
 from functools import wraps
 from io import BytesIO
 from random import choice, shuffle
-from textwrap import dedent
+from textwrap import dedent, indent
 
 import aiohttp
 import discord
@@ -97,7 +97,7 @@ class Response:
 class MusicBot(discord.Client):
     trueStringList = ["true", "1", "t", "y", "yes", "yeah",
                       "yup", "certainly", "uh-huh", "affirmitive", "activate"]
-    channelFreeCommands = ["say", "quote", "9gag"]
+    channelFreeCommands = ["say", "quote", "9gag", "execute"]
     privateChatCommands = ["c", "ask", "requestfeature", "random",
                            "translate", "help", "say", "broadcast", "news", "game", "wiki", "cah", "execute"]
     lonelyModeRunning = False
@@ -4018,16 +4018,6 @@ class MusicBot(discord.Client):
                 text="{} upvotes | {} comments".format(post.upvotes, post.comment_count))
 
             await self.send_message(channel, embed=em)
-
-            for comment in post.comments[:3]:
-                em = Embed(description=comment.content,
-                           timestamp=comment.timestamp, colour=11946278, url=comment.permalink)
-                em.set_author(name=comment.name,
-                              icon_url=comment.avatar, url=comment.profile_url)
-                em.set_footer(text="{} likes | {} dislikes | {} replies".format(
-                    comment.likes, comment.dislikes, comment.reply_count))
-                await self.send_message(channel, embed=em)
-
         else:
             downloader = urllib.request.URLopener()
             saveloc = "cache/pictures/9gag.mp4"
@@ -4045,14 +4035,20 @@ class MusicBot(discord.Client):
 
             await self.send_message(channel, embed=em)
             await self.send_file(channel, saveloc)
-            for comment in post.comments[:3]:
-                em = Embed(description=comment.content,
-                           timestamp=comment.timestamp, colour=11946278, url=comment.permalink)
-                em.set_author(name=comment.name,
-                              icon_url=comment.avatar, url=comment.profile_url)
-                em.set_footer(text="{} upvotes | {} replies".format(
-                    comment.score, comment.reply_count))
-                await self.send_message(channel, embed=em)
+
+        for comment in post.comments[:3]:
+            em = Embed(timestamp=comment.timestamp,
+                       colour=11946278, url=comment.permalink)
+            em.set_author(name=comment.name,
+                          icon_url=comment.avatar, url=comment.profile_url)
+            em.set_footer(text="{} upvotes | {} replies".format(
+                comment.score, comment.reply_count))
+            if comment.content_type == ContentType.TEXT:
+                em.description = comment.content
+            elif comment.content_type in (ContentType.IMAGE, ContentType.GIF):
+                em.set_image(url=comment.content)
+
+            await self.send_message(channel, embed=em)
 
     # async def nine_gag_get_section(self, channel, message):
         # category_dict = {"🔥": "hot", "📈": "trending", "🆕": "new"}
@@ -5078,28 +5074,30 @@ class MusicBot(discord.Client):
                     return Response("Successfully sent the message!")
 
     @owner_only
-    async def cmd_execute(self, player, channel, author, server, leftover_args):
+    async def cmd_execute(self, channel, author, server, leftover_args, player=None):
         statement = " ".join(leftover_args)
         statement = statement.replace("/n/", "\n")
         statement = statement.replace("/t/", "\t")
-        matches = re.match(r"return (.*)", statement)
-        if matches is not None:
-            statement = re.sub(
-                r"return (.*)", "asyncio.run_coroutine_threadsafe(self.safe_send_message(channel, str({})), self.loop)".format(matches.group(1)))
+        beautiful_statement = "```python\n{}\n```".format(statement)
 
-        await self.safe_send_message(channel, "```python\n{}\n```".format(statement))
+        statement = "async def func():\n{}".format(indent(statement, "\t"))
+
+        env = {}
+        env.update(globals())
+        env.update(locals())
+
         try:
-            result = eval(statement)
-            return Response(str(result))
+            exec(statement, env)
+        except SyntaxError as e:
+            return Response("**While compiling the statement the following error occured**\n```python\n{}\n```".format(str(e)))
+
+        func = env["func"]
+        try:
+            ret = await func()
         except Exception as e:
-            try:
-                result = exec(statement)
-                return Response(str(result))
-            except Exception as a:
-                if str(a) == str(e):
-                    return Response("Error:\n```\n{}\n```".format(str(e)))
-                else:
-                    return Response("Errors:\n```\n{}\n```\n```\n{}\n```".format(str(e), str(a)))
+            return Response("**While executing the statement the following error occured**\n```python\n{}\n```".format(str(e)))
+
+        return Response("**CODE**\n{}\n**RESULT**\n```python\n{}\n```".format(beautiful_statement, str(ret)))
 
     async def cmd_skipto(self, player, timestamp):
         """
@@ -5413,10 +5411,13 @@ class MusicBot(discord.Client):
     async def cmd_quote(self, author, channel, message, leftover_args):
         """
         ///|Usage
-        `{command_prefix}quote [channel] <message id> [message id...]`
+        `{command_prefix}quote [#channel] <message id> [message id...]`
+        `{command_prefix}quote [#channel] \"<message content>\"`
         ///|Explanation
         Quote a message
         """
+
+        quote_to_channel = channel
 
         if message.channel_mentions is not None and len(message.channel_mentions) > 0:
             channel = message.channel_mentions[0]
@@ -5424,6 +5425,10 @@ class MusicBot(discord.Client):
 
         if len(leftover_args) < 1:
             return Response("Please specify the message you want to quote")
+
+        message_content = " ".join(leftover_args)
+        if message_content[0] == "\"" and message_content[-1] == "\"":
+            return Response("Well sorry, this way of quoting is still being worked on. Come back in {}".format(format_time((datetime(2017, 5, 15) - datetime.now()).total_seconds(), True, 5, 2, True)))
 
         await self.safe_delete_message(message)
         for message_id in leftover_args:
@@ -5439,7 +5444,7 @@ class MusicBot(discord.Client):
                           "colour": quote_message.author.colour}
             em = Embed(**embed_data)
             em.set_author(**author_data)
-            await self.send_message(channel, embed=em)
+            await self.send_message(quote_to_channel, embed=em)
         return
 
     @owner_only

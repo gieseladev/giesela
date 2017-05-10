@@ -108,7 +108,7 @@ def round_to_interval(num, interval=5):
     return int(interval * round(float(num) / interval))
 
 
-def format_time(s, round_seconds=False, round_base=5, max_specifications=None):
+def format_time(s, round_seconds=False, round_base=5, max_specifications=None, combine_with_and=False):
     if round_seconds:
         s = round_to_interval(s, round_base)
 
@@ -132,6 +132,9 @@ def format_time(s, round_seconds=False, round_base=5, max_specifications=None):
 
     if max_specifications is not None:
         return_list = return_list[:max_specifications]
+
+    if combine_with_and:
+        return_list.insert(-1, "and")
 
     return " ".join(return_list)
 
