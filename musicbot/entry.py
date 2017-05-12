@@ -5,6 +5,7 @@ import traceback
 import asyncio
 
 from .exceptions import ExtractionError
+from .spotify import SpotifyTrack
 from .utils import get_header, md5sum, slugify
 
 
@@ -16,6 +17,7 @@ class BasePlaylistEntry:
         self._waiting_futures = []
         self.start_seconds = 0
         self.end_seconds = None
+        self.spotify_track = None
 
     @property
     def is_downloaded(self):
@@ -84,15 +86,23 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
         self.playlist = playlist
         self.url = url
-        self.title = title
+        self._title = title
         self.duration = duration
         self.end_seconds = end_seconds
 
         self.start_seconds = start_seconds
         self.expected_filename = expected_filename
         self.meta = meta
+        self.spotify_track = SpotifyTrack.from_query(title)
 
         self.download_folder = self.playlist.downloader.download_folder
+
+    @property
+    def title(self):
+        if self.spotify_track.certainty > .7:
+            return self.spotify_track.song_name + " - " + self.spotify_track.artist
+        else:
+            return self.spotify_track.query
 
     @classmethod
     def from_json(cls, playlist, jsonstring):
