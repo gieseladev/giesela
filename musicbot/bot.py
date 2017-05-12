@@ -5722,7 +5722,7 @@ class MusicBot(discord.Client):
         # self.log ("***REMOVED******REMOVED*** (***REMOVED******REMOVED***)".format (reaction.emoji.name, reaction.emoji.id))
         # self.log ("***REMOVED******REMOVED***".format (reaction.emoji))
 
-    async def on_voice_state_update(self, before, after):
+    async def autopause(self, before, after):
         if not all([before, after]):
             return
 
@@ -5784,6 +5784,7 @@ class MusicBot(discord.Client):
 
     async def on_voice_state_update(self, before, after):
         await self.on_any_update(before, after)
+        await self.autopause(before, after)
 
     async def on_any_update(self, before, after):
         if before.server.id in self.online_loggers:
