@@ -153,6 +153,8 @@ class MusicBot(discord.Client):
         self.instant_translate_mode = 1
         self.instant_translate_certainty = .7
 
+        self.load_online_loggers()
+
     # TODO: Add some sort of `denied` argument for a message to send when
     # someone else tries to use it
     def owner_only(func):
@@ -5303,7 +5305,15 @@ class MusicBot(discord.Client):
         else:
             online_logger = OnlineLogger(self)
             self.online_loggers[server.id] = online_logger
+            Settings["online_loggers"] = list(self.online_loggers.keys())
             return Response("okay, okay!")
+
+    def load_online_loggers(self):
+        for server_id in Settings.get_setting("online_loggers", default=[]):
+            online_logger = OnlineLogger(self)
+            self.online_loggers[server_id] = online_logger
+            for listener in Settings.get_setting("online_logger_listeners_" + server_id, default=[]):
+                online_logger.add_listener(listener)
 
     @owner_only
     async def cmd_evalsurvey(self, server, author):
@@ -5333,8 +5343,16 @@ class MusicBot(discord.Client):
         if online_logger is None:
             return Response("I'm not even spying here")
         if online_logger.add_listener(author.id):
+            Settings["online_logger_listeners_" + server.id] = [*Settings.get_setting(
+                "online_logger_listeners_" + server.id, default=[]), author.id]
             return Response("Got'cha!")
         else:
+            try:
+                Settings["online_logger_listeners_" + server.id] = [x for x in Settings.get_setting(
+                    "online_logger_listeners_" + server.id, default=[]) if x != author.id]
+            except ValueError:
+                pass
+
             return Response("Nevermore you shall be annoyed!")
 
     async def cmd_livetranslator(self, target_language=None, mode="1", required_certainty="70"):
