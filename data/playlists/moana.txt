@@ -1076,62 +1076,12 @@
 {
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=TFmwGQfifC0",
-  "title": "Lin-Manuel Miranda - Where You Are",
-  "duration": 182,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": "audio_cache\\youtube-TFmwGQfifC0-Lin-Manuel_Miranda_-_Where_You_Are.webm",
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    },
-    "author": {
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    }
-  },
-  "start_seconds": 0,
-  "end_seconds": null
-}
-;
-{
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=JythPfPjJcQ",
   "title": "Lin-Manuel Miranda - You're Welcome (From \"Moana\"/Demo/Audio Only)",
   "duration": 158,
   "downloaded": false,
   "filename": null,
   "expected_filename": "audio_cache\\youtube-JythPfPjJcQ-Lin-Manuel_Miranda_-_You_re_Welcome_From_Moana_Demo_Audio_Only.webm",
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    },
-    "author": {
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    }
-  },
-  "start_seconds": 0,
-  "end_seconds": null
-}
-;
-{
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=DnOUgFjs9sg",
-  "title": "Lin-Manuel Miranda - Shiny (From \"Moana\"/Demo/Audio Only)",
-  "duration": 184,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": "audio_cache\\youtube-DnOUgFjs9sg-Lin-Manuel_Miranda_-_Shiny_From_Moana_Demo_Audio_Only.webm",
   "meta": {
     "channel": {
       "type": "Channel",
