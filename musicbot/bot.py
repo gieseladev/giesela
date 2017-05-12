@@ -1816,35 +1816,46 @@ class MusicBot(discord.Client):
                 await self.safe_delete_message(self.server_specific_data[server]['last_np_msg'])
                 self.server_specific_data[server]['last_np_msg'] = None
 
-            song_progress = str(
-                timedelta(seconds=player.progress)).lstrip('0').lstrip(':')
-            end_seconds = player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration
-            song_total = str(timedelta(seconds=end_seconds)).lstrip(
-                '0').lstrip(':')
-            prog_str = '`[%s/%s]`' % (song_progress, song_total)
+            if player.current_entry.spotify_track is not None and player.current_entry.spotify_track.certainty > .8:
+                d = player.current_entry.spotify_track
+                em = Embed(title=d.song_name, description="".join("■" if x > 20 * (player.progress /
+                                                                                   player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration) else "□" for x in range(20)))
+                em.set_author(name=d.artist)
+                em.set_thumbnail(url=d.cover_url)
+                em.set_footer(text='[***REMOVED******REMOVED***/***REMOVED******REMOVED***]'.format(*list(map(lambda x: "***REMOVED***0:0>2***REMOVED***:***REMOVED***1:0>2***REMOVED***".format(
+                    (x // 60) % 60, x % 60), [player.progress, player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration]))))
 
-            prog_bar_len = 20
-            prog_full_char = "■"
-            prog_empty_char = "□"
-            progress_perc = (player.progress /
-                             end_seconds) if end_seconds > 0 else 0
-            prog_bar_str = ""
-
-            for i in range(prog_bar_len):
-                if i < prog_bar_len * progress_perc:
-                    prog_bar_str += prog_full_char
-                else:
-                    prog_bar_str += prog_empty_char
-
-            if player.current_entry.meta.get('channel', False) and player.current_entry.meta.get('author', False):
-                np_text = "Now Playing: **%s** added by **%s** %s\n%s" % (
-                    player.current_entry.title, player.current_entry.meta['author'].name, prog_str, prog_bar_str)
+                await self.send_message(channel, embed=em)
             else:
-                np_text = "Now Playing: **%s** %s\n%s" % (
-                    player.current_entry.title, prog_str, prog_bar_str)
+                song_progress = str(
+                    timedelta(seconds=player.progress)).lstrip('0').lstrip(':')
+                end_seconds = player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration
+                song_total = str(timedelta(seconds=end_seconds)).lstrip(
+                    '0').lstrip(':')
+                prog_str = '`[%s/%s]`' % (song_progress, song_total)
 
-            self.server_specific_data[server]['last_np_msg'] = await self.safe_send_message(channel, np_text)
-            await self._manual_delete_check(message)
+                prog_bar_len = 20
+                prog_full_char = "■"
+                prog_empty_char = "□"
+                progress_perc = (player.progress /
+                                 end_seconds) if end_seconds > 0 else 0
+                prog_bar_str = ""
+
+                for i in range(prog_bar_len):
+                    if i < prog_bar_len * progress_perc:
+                        prog_bar_str += prog_full_char
+                    else:
+                        prog_bar_str += prog_empty_char
+
+                if player.current_entry.meta.get('channel', False) and player.current_entry.meta.get('author', False):
+                    np_text = "Now Playing: **%s** added by **%s** %s\n%s" % (
+                        player.current_entry.title, player.current_entry.meta['author'].name, prog_str, prog_bar_str)
+                else:
+                    np_text = "Now Playing: **%s** %s\n%s" % (
+                        player.current_entry.title, prog_str, prog_bar_str)
+
+                self.server_specific_data[server]['last_np_msg'] = await self.safe_send_message(channel, np_text)
+                await self._manual_delete_check(message)
         else:
             return Response(
                 'There are no songs queued! Queue something with ***REMOVED******REMOVED***play.'.format(
@@ -3656,7 +3667,7 @@ class MusicBot(discord.Client):
                 shuffle(cards)
             elif sort_mode != "none":
                 cards = sorted(cards, key=sort_modes[sort_mode][
-                               0], reverse=sort_modes[sort_mode][1])
+                    0], reverse=sort_modes[sort_mode][1])
                 display_info = sort_modes[sort_mode][2]
 
             await self.qcard_viewer(channel, author, cards, display_info)
@@ -4246,7 +4257,7 @@ class MusicBot(discord.Client):
                 shuffle(clone_entries)
             elif sort_mode != "none":
                 clone_entries = sorted(clone_entries, key=sort_modes[sort_mode][
-                                       0], reverse=sort_modes[sort_mode][1])
+                    0], reverse=sort_modes[sort_mode][1])
 
             await player.playlist.add_entries(clone_entries)
             self.playlists.bump_replay_count(savename)
@@ -4319,7 +4330,7 @@ class MusicBot(discord.Client):
                 shuffle(sorted_saved_playlists)
             else:
                 sorted_saved_playlists = sorted(self.playlists.saved_playlists, key=sort_modes[
-                                                sort_mode][0], reverse=sort_modes[sort_mode][1])
+                    sort_mode][0], reverse=sort_modes[sort_mode][1])
 
             for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.playlist)
