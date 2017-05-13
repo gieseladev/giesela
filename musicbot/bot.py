@@ -2529,7 +2529,8 @@ class MusicBot(discord.Client):
 
         while True:
             answer = cb.say(msgContent)
-            answer = re.sub(r"\b[C|c]leverbot\b", "Bot", answer)
+            answer = re.sub(r"\b[C|c]leverbot\b", "you", answer)
+            answer = re.sub(r"\b[C|c][B|b]\b", "you", answer)
             base_answer = re.sub("[^a-z| ]+|\s{2,}", "", answer.lower())
             if base_answer not in "whats your name;what is your name;tell me your name".split(";") and not any(q in base_answer for q in "whats your name; what is your name;tell me your name".split(";")):
                 break
