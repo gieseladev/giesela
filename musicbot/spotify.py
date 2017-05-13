@@ -14,7 +14,7 @@ class SpotifyTrack:
         self.query = query
 
     @classmethod
-    def from_query(cls, query, strip_query=True):
+    def from_query(cls, query):
         query = parse_query(query)
 
         spotify = spotipy.Spotify()
@@ -55,7 +55,7 @@ class SpotifyTrack:
 
         cer = max(poss)
 
-        return cls(artist_text.upper(), song_name.upper(), cover, query, cer)
+        return cls(artist_text, song_name, cover, query, cer)
 
 
 def similar(a, b):

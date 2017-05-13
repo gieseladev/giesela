@@ -6,6 +6,7 @@ import os
 import re
 import shlex
 import shutil
+import subprocess
 import sys
 import time
 import traceback
@@ -39,7 +40,7 @@ from . import downloader, exceptions
 from .cleverbot import CleverWrap
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
-from .constants import AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT
+from .constants import AUDIO_CACHE_PATH, DEV_VERSION, DISCORD_MSG_CHAR_LIMIT
 from .games.game_2048 import Game2048
 from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
@@ -59,6 +60,7 @@ from .saved_playlists import Playlists
 from .settings import Settings
 from .socket_server import SocketServer
 from .translate import Translator
+from .twitter_api import get_tweet
 from .utils import (escape_dis, format_time, load_file, paginate,
                     parse_timestamp, prettydate, random_line, sane_round_int,
                     write_file)
@@ -150,6 +152,8 @@ class MusicBot(discord.Client):
         self.instant_translate = False
         self.instant_translate_mode = 1
         self.instant_translate_certainty = .7
+
+        self.load_online_loggers()
 
     # TODO: Add some sort of `denied` argument for a message to send when
     # someone else tries to use it
@@ -1812,35 +1816,46 @@ class MusicBot(discord.Client):
                 await self.safe_delete_message(self.server_specific_data[server]['last_np_msg'])
                 self.server_specific_data[server]['last_np_msg'] = None
 
-            song_progress = str(
-                timedelta(seconds=player.progress)).lstrip('0').lstrip(':')
-            end_seconds = player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration
-            song_total = str(timedelta(seconds=end_seconds)).lstrip(
-                '0').lstrip(':')
-            prog_str = '`[%s/%s]`' % (song_progress, song_total)
+            if player.current_entry.spotify_track is not None and player.current_entry.spotify_track.certainty > .8:
+                d = player.current_entry.spotify_track
+                em = Embed(title=d.song_name, description="".join("■" if x > 20 * (player.progress /
+                                                                                   player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration) else "□" for x in range(20)))
+                em.set_author(name=d.artist)
+                em.set_thumbnail(url=d.cover_url)
+                em.set_footer(text='[{}/{}]'.format(*list(map(lambda x: "{0:0>2}:{1:0>2}".format(
+                    (x // 60) % 60, x % 60), [player.progress, player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration]))))
 
-            prog_bar_len = 20
-            prog_full_char = "■"
-            prog_empty_char = "□"
-            progress_perc = (player.progress /
-                             end_seconds) if end_seconds > 0 else 0
-            prog_bar_str = ""
-
-            for i in range(prog_bar_len):
-                if i < prog_bar_len * progress_perc:
-                    prog_bar_str += prog_full_char
-                else:
-                    prog_bar_str += prog_empty_char
-
-            if player.current_entry.meta.get('channel', False) and player.current_entry.meta.get('author', False):
-                np_text = "Now Playing: **%s** added by **%s** %s\n%s" % (
-                    player.current_entry.title, player.current_entry.meta['author'].name, prog_str, prog_bar_str)
+                await self.send_message(channel, embed=em)
             else:
-                np_text = "Now Playing: **%s** %s\n%s" % (
-                    player.current_entry.title, prog_str, prog_bar_str)
+                song_progress = str(
+                    timedelta(seconds=player.progress)).lstrip('0').lstrip(':')
+                end_seconds = player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration
+                song_total = str(timedelta(seconds=end_seconds)).lstrip(
+                    '0').lstrip(':')
+                prog_str = '`[%s/%s]`' % (song_progress, song_total)
 
-            self.server_specific_data[server]['last_np_msg'] = await self.safe_send_message(channel, np_text)
-            await self._manual_delete_check(message)
+                prog_bar_len = 20
+                prog_full_char = "■"
+                prog_empty_char = "□"
+                progress_perc = (player.progress /
+                                 end_seconds) if end_seconds > 0 else 0
+                prog_bar_str = ""
+
+                for i in range(prog_bar_len):
+                    if i < prog_bar_len * progress_perc:
+                        prog_bar_str += prog_full_char
+                    else:
+                        prog_bar_str += prog_empty_char
+
+                if player.current_entry.meta.get('channel', False) and player.current_entry.meta.get('author', False):
+                    np_text = "Now Playing: **%s** added by **%s** %s\n%s" % (
+                        player.current_entry.title, player.current_entry.meta['author'].name, prog_str, prog_bar_str)
+                else:
+                    np_text = "Now Playing: **%s** %s\n%s" % (
+                        player.current_entry.title, prog_str, prog_bar_str)
+
+                self.server_specific_data[server]['last_np_msg'] = await self.safe_send_message(channel, np_text)
+                await self._manual_delete_check(message)
         else:
             return Response(
                 'There are no songs queued! Queue something with {}play.'.format(
@@ -2514,6 +2529,8 @@ class MusicBot(discord.Client):
 
         while True:
             answer = cb.say(msgContent)
+            answer = re.sub(r"\b[C|c]leverbot\b", "you", answer)
+            answer = re.sub(r"\b[C|c][B|b]\b", "you", answer)
             base_answer = re.sub("[^a-z| ]+|\s{2,}", "", answer.lower())
             if base_answer not in "whats your name;what is your name;tell me your name".split(";") and not any(q in base_answer for q in "whats your name; what is your name;tell me your name".split(";")):
                 break
@@ -3652,7 +3669,7 @@ class MusicBot(discord.Client):
                 shuffle(cards)
             elif sort_mode != "none":
                 cards = sorted(cards, key=sort_modes[sort_mode][
-                               0], reverse=sort_modes[sort_mode][1])
+                    0], reverse=sort_modes[sort_mode][1])
                 display_info = sort_modes[sort_mode][2]
 
             await self.qcard_viewer(channel, author, cards, display_info)
@@ -4027,6 +4044,8 @@ class MusicBot(discord.Client):
             clip = video.fx.all.resize(clip, newsize=.55)
             clip.write_gif("cache/pictures/9gag.gif", fps=10)
             saveloc = "cache/pictures/9gag.gif"
+            # subprocess.run(
+            #     ["gifsicle", "-b", "cache/pictures/9gag.gif", "--colors", "256"])
 
             em = Embed(title=post.title, url=post.hyperlink, colour=9316352)
             em.set_author(name=author.display_name, icon_url=author.avatar_url)
@@ -4072,6 +4091,21 @@ class MusicBot(discord.Client):
         # await self.safe_delete_message(msg)
         #
         # return category_dict[str(reaction.emoji)]
+
+    async def cmd_twitter(self, channel, tweet_id):
+        """
+        ///|Usage
+        {command_prefix}twitter <tweet_id>
+        ///|Explanation
+        Embed a tweet
+        """
+
+        tweet = get_tweet(tweet_id)
+        em = Embed(title="TWEEET", timestamp=tweet.created_at,
+                   description=tweet.text)
+        em.set_author(url=tweet.user.url, name=tweet.user.name,
+                      icon_url=tweet.user.avatar_url)
+        await self.send_message(channel, embed=em)
 
     async def cmd_repeat(self, player):
         """
@@ -4225,7 +4259,7 @@ class MusicBot(discord.Client):
                 shuffle(clone_entries)
             elif sort_mode != "none":
                 clone_entries = sorted(clone_entries, key=sort_modes[sort_mode][
-                                       0], reverse=sort_modes[sort_mode][1])
+                    0], reverse=sort_modes[sort_mode][1])
 
             await player.playlist.add_entries(clone_entries)
             self.playlists.bump_replay_count(savename)
@@ -4298,7 +4332,7 @@ class MusicBot(discord.Client):
                 shuffle(sorted_saved_playlists)
             else:
                 sorted_saved_playlists = sorted(self.playlists.saved_playlists, key=sort_modes[
-                                                sort_mode][0], reverse=sort_modes[sort_mode][1])
+                    sort_mode][0], reverse=sort_modes[sort_mode][1])
 
             for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.playlist)
@@ -5284,7 +5318,15 @@ class MusicBot(discord.Client):
         else:
             online_logger = OnlineLogger(self)
             self.online_loggers[server.id] = online_logger
+            Settings["online_loggers"] = list(self.online_loggers.keys())
             return Response("okay, okay!")
+
+    def load_online_loggers(self):
+        for server_id in Settings.get_setting("online_loggers", default=[]):
+            online_logger = OnlineLogger(self)
+            self.online_loggers[server_id] = online_logger
+            for listener in Settings.get_setting("online_logger_listeners_" + server_id, default=[]):
+                online_logger.add_listener(listener)
 
     @owner_only
     async def cmd_evalsurvey(self, server, author):
@@ -5314,8 +5356,16 @@ class MusicBot(discord.Client):
         if online_logger is None:
             return Response("I'm not even spying here")
         if online_logger.add_listener(author.id):
+            Settings["online_logger_listeners_" + server.id] = [*Settings.get_setting(
+                "online_logger_listeners_" + server.id, default=[]), author.id]
             return Response("Got'cha!")
         else:
+            try:
+                Settings["online_logger_listeners_" + server.id] = [x for x in Settings.get_setting(
+                    "online_logger_listeners_" + server.id, default=[]) if x != author.id]
+            except ValueError:
+                pass
+
             return Response("Nevermore you shall be annoyed!")
 
     async def cmd_livetranslator(self, target_language=None, mode="1", required_certainty="70"):
@@ -5674,7 +5724,7 @@ class MusicBot(discord.Client):
         # self.log ("{} ({})".format (reaction.emoji.name, reaction.emoji.id))
         # self.log ("{}".format (reaction.emoji))
 
-    async def on_voice_state_update(self, before, after):
+    async def autopause(self, before, after):
         if not all([before, after]):
             return
 
@@ -5736,6 +5786,7 @@ class MusicBot(discord.Client):
 
     async def on_voice_state_update(self, before, after):
         await self.on_any_update(before, after)
+        await self.autopause(before, after)
 
     async def on_any_update(self, before, after):
         if before.server.id in self.online_loggers:
