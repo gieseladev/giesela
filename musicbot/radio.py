@@ -45,7 +45,7 @@ class Radio:
                     f.write(str(existing_data))
             else:
                 print("not playing symphony")
-            await asyncio.sleep(80)
+            await asyncio.sleep(145)
 
     async def _get_current_song_energy_bern(loop):
         try:

@@ -5520,15 +5520,6 @@ class MusicBot(discord.Client):
         await self.disconnect_all_voice_clients()
         raise exceptions.TerminateSignal
 
-    # async def cmd_test(self):
-    #     message = "hello there, this is a test"
-    #     max_chars = 15
-    #     moves = len(message) - max_chars + 1
-    #     for i in range(moves):
-    #         msg_slice = message[i:i + max_chars]
-    #         await self.change_presence(game=discord.Game(name=msg_slice))
-    #         await asyncio.sleep(1)
-
     async def on_message(self, message):
         await self.wait_until_ready()
 
