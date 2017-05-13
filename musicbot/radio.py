@@ -29,6 +29,24 @@ class Radio:
 
         return None
 
+    async def symphony_counter(loop):
+        while True:
+            print("checking symphony")
+            song_data = await Radio._get_current_song_capital_fm(loop)
+            if True:  # song_data["title"].lower() == "symphony":
+                print("symphony is playing")
+                try:
+                    with open("cache/symphony_counter.txt", "r+") as f:
+                        existing_data = int(f.read()) + 1
+                except:
+                    existing_data = 1
+
+                with open("cache/symphony_counter.txt", "w+") as f:
+                    f.write(str(existing_data))
+            else:
+                print("not playing symphony")
+            await asyncio.sleep(3)
+
     async def _get_current_song_energy_bern(loop):
         try:
             async with aiohttp.ClientSession(loop=loop) as client:
@@ -109,5 +127,6 @@ class Radio:
             return None
 
 
-# loop = asyncio.get_event_loop()
+loop = asyncio.get_event_loop()
+asyncio.ensure_future(Radio.symphony_counter(loop))
 # print(loop.run_until_complete(Radio.get_current_song(loop, "heart_london")))
