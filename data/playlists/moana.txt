@@ -1051,56 +1051,6 @@
 {
   "version": 1,
   "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=glh2cpUWSIg",
-  "title": "Lin-Manuel Miranda - Warrior Face (From \"Moana\"/Outtake/Audio Only)",
-  "duration": 137,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": "audio_cache\\youtube-glh2cpUWSIg-Lin-Manuel_Miranda_-_Warrior_Face_From_Moana_Outtake_Audio_Only.webm",
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    },
-    "author": {
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    }
-  },
-  "start_seconds": 0,
-  "end_seconds": null
-}
-;
-{
-  "version": 1,
-  "type": "URLPlaylistEntry",
-  "url": "https://www.youtube.com/watch?v=JythPfPjJcQ",
-  "title": "Lin-Manuel Miranda - You're Welcome (From \"Moana\"/Demo/Audio Only)",
-  "duration": 158,
-  "downloaded": false,
-  "filename": null,
-  "expected_filename": "audio_cache\\youtube-JythPfPjJcQ-Lin-Manuel_Miranda_-_You_re_Welcome_From_Moana_Demo_Audio_Only.webm",
-  "meta": {
-    "channel": {
-      "type": "Channel",
-      "id": "226402503422509058",
-      "name": "musicbot"
-    },
-    "author": {
-      "type": "Member",
-      "id": "203302899277627392",
-      "name": "siku2"
-    }
-  },
-  "start_seconds": 0,
-  "end_seconds": null
-}
-;
-{
-  "version": 1,
-  "type": "URLPlaylistEntry",
   "url": "https://www.youtube.com/watch?v=MJ3rniBavgY",
   "title": "Mark Mancina - Prologue (From \"Moana\"/Score Demo/Audio Only)",
   "duration": 148,
