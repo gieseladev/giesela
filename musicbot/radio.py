@@ -33,7 +33,7 @@ class Radio:
         while True:
             print("checking symphony")
             song_data = await Radio._get_current_song_capital_fm(loop)
-            if True:  # song_data["title"].lower() == "symphony":
+            if song_data["title"].lower() == "symphony":
                 print("symphony is playing")
                 try:
                     with open("cache/symphony_counter.txt", "r+") as f:
