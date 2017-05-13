@@ -119,26 +119,22 @@ def format_time(s, round_seconds=False, round_base=5, max_specifications=None, c
     return_list = []
     if days > 0:
         return_list.append("{} day{}".format(
-            days, "s" if days is not 1 else ""))
+            "a" if days == 1 and replace_one else days, "s" if days is not 1 else ""))
     if hours > 0:
         return_list.append("{} hour{}".format(
-            hours, "s" if hours is not 1 else ""))
+            "an" if hours == 1 and replace_one else hours, "s" if hours is not 1 else ""))
     if minutes > 0:
         return_list.append("{} minute{}".format(
-            minutes, "s" if minutes is not 1 else ""))
+            "a" if minutes == 1 and replace_one else minutes, "s" if minutes is not 1 else ""))
     if seconds > 0 or s is 0:
         return_list.append("{} second{}".format(
-            seconds, "s" if seconds is not 1 else ""))
+            "a" if seconds == 1 and replace_one else seconds, "s" if seconds is not 1 else ""))
 
     if max_specifications is not None:
         return_list = return_list[:max_specifications]
 
     if combine_with_and:
         return_list.insert(-1, "and")
-
-    if replace_one:
-        return_list = [re.sub(r"\b1\b", "a" if x.split()[
-                              1] not in "hour" else "an", x) for x in return_list]
 
     return " ".join(return_list)
 
