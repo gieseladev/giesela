@@ -108,7 +108,7 @@ def round_to_interval(num, interval=5):
     return int(interval * round(float(num) / interval))
 
 
-def format_time(s, round_seconds=False, round_base=5, max_specifications=None, combine_with_and=False):
+def format_time(s, round_seconds=False, round_base=5, max_specifications=None, combine_with_and=False, replace_one=False):
     if round_seconds:
         s = round_to_interval(s, round_base)
 
@@ -135,6 +135,10 @@ def format_time(s, round_seconds=False, round_base=5, max_specifications=None, c
 
     if combine_with_and:
         return_list.insert(-1, "and")
+
+    if replace_one:
+        return_list = [re.sub(r"\b1\b", "a" if x.split()[
+                              1] not in "hour" else "an", x) for x in return_list]
 
     return " ".join(return_list)
 
