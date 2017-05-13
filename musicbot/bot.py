@@ -5462,23 +5462,40 @@ class MusicBot(discord.Client):
         """
         ///|Usage
         `***REMOVED***command_prefix***REMOVED***quote [#channel] <message id> [message id...]`
-        `***REMOVED***command_prefix***REMOVED***quote [#channel] \"<message content>\"`
+        `***REMOVED***command_prefix***REMOVED***quote [#channel] [@mention] \"<message content>\"`
         ///|Explanation
         Quote a message
         """
 
         quote_to_channel = channel
+        target_author = None
 
         if message.channel_mentions is not None and len(message.channel_mentions) > 0:
             channel = message.channel_mentions[0]
+            leftover_args = leftover_args[1:]
+
+        if message.mentions is not None and len(message.mentions) > 0:
+            target_author = message.mentions[0]
             leftover_args = leftover_args[1:]
 
         if len(leftover_args) < 1:
             return Response("Please specify the message you want to quote")
 
         message_content = " ".join(leftover_args)
-        if message_content[0] == "\"" and message_content[-1] == "\"":
-            return Response("Well sorry, this way of quoting is still being worked on. Come back in ***REMOVED******REMOVED***".format(format_time((datetime(2017, 5, 15) - datetime.now()).total_seconds(), True, 5, 2, True)))
+        if (message_content[0] == "\"" and message_content[-1] == "\"") or re.search(r"\D", message_content) is not None:
+            message_content = message_content.replace("\"", "")
+            if datetime.now() < datetime(2017, 5, 15):
+                return Response("Well sorry, this way of quoting is not yet available. It will be released in ***REMOVED******REMOVED***".format(format_time((datetime(2017, 5, 15) - datetime.now()).total_seconds(), True, 5, 2, True, True)))
+            async for msg in self.logs_from(channel, limit=1000):
+                if msg.id != message.id and message_content.lower().strip() in msg.content.lower().strip():
+                    if target_author is None or target_author.id == message.author.id:
+                        leftover_args = [msg.id, ]
+                        break
+            else:
+                if target_author is not None:
+                    return Response("Didn't find a message with that content from ***REMOVED******REMOVED***".format(target_author.mention))
+
+                return Response("Didn't find a message that matched this content")
 
         await self.safe_delete_message(message)
         for message_id in leftover_args:
