@@ -32,7 +32,12 @@ class Radio:
     async def symphony_counter(loop):
         while True:
             print("checking symphony")
-            song_data = await Radio._get_current_song_capital_fm(loop)
+            try:
+                song_data = await Radio._get_current_song_capital_fm(loop)
+            except:
+                await asyncio.sleep(200)
+                continue
+
             if song_data["title"].lower() == "symphony":
                 print("symphony is playing")
                 try:
