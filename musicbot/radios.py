@@ -1,3 +1,4 @@
+import json
 import os
 import shutil
 import traceback
@@ -22,7 +23,7 @@ class Radios:
 
     def get_station(self, station_name):
         for section in self.config.sections():
-            if section == station_name or self.config.get(section, "name").lower() == station_name:
+            if section == station_name or self.config.get(section, "name").lower() == station_name or station_name.lower() in json.loads(self.config.get(section, "aliases", fallback=[])):
                 return StationInfo(self.config.get(section, "name"), self.config.get(section, "language"), self.config.get(section, "cover"), self.config.get(section, "url"))
 
         return None
