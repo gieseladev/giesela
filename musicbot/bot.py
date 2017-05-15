@@ -4101,8 +4101,8 @@ class MusicBot(discord.Client):
         """
 
         tweet = get_tweet(tweet_id)
-        em = Embed(title="TWEEET", timestamp=tweet.created_at,
-                   description=tweet.text)
+        print(tweet.created_at.year)
+        em = Embed(description=tweet.text)
         em.set_author(url=tweet.user.url, name=tweet.user.name,
                       icon_url=tweet.user.avatar_url)
         await self.send_message(channel, embed=em)
@@ -5304,7 +5304,7 @@ class MusicBot(discord.Client):
         msgs = []
         async for msg in self.logs_from(channel, limit=int(number)):
             msg_data = {"name": msg.author.name,
-                        "timestamp": str(round(msg.timestamp.timestamp())), "content": msg.content}
+                        "timestamp": str(round(msg.timestamp.timestamp())), "content": msg.content, "attachments": msg.attachments}
             msgs.append(msg_data)
 
         json.dump(msgs[::-1], open(
