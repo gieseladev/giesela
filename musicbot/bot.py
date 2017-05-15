@@ -2510,7 +2510,7 @@ class MusicBot(discord.Client):
         if len(leftover_args) < 1:
             return Response("You need to actually say something...")
 
-        if author.id == "203302899277627392":
+        if author.id == "203302899277627392" and channel.server.id == "285176027855192065":
             if " ".join(leftover_args).lower() == "could you please disable chatter#2<siku2> after 10?":
                 await self.send_typing(channel)
                 await asyncio.sleep(2)
@@ -2518,10 +2518,10 @@ class MusicBot(discord.Client):
                 await asyncio.sleep(5)
                 await self.send_typing(channel)
                 await asyncio.sleep(4)
-                return Response("If you insist. The chatting feature will be disabled for <siku2:203302899277627392> in ***REMOVED******REMOVED***".format(format_time((datetime(2017, 5, 15, 22, 10) - datetime.now()).total_seconds(), True, 5, 2, True, True)))
+                return Response("If you insist. The chatting feature will be disabled for <@!203302899277627392> in ***REMOVED******REMOVED***".format(format_time((datetime(2017, 5, 15, 22, 10) - datetime.now()).total_seconds(), True, 5, 2, True, True)))
 
             if datetime.now() > datetime(2017, 5, 15, 22, 10):
-                answers = "You have to let go of me!;Not gonna answer, you asked me not to;Don't make this harder than it has to be, just go!;I'm just gonna ignore you;Not allowed to answer;this feature has been disabled for <siku2:203302899277627392> by <siku2:203302899277627392>;Your time is up! Rest in piece!;Musn't answer you;Just leave me alone".split(
+                answers = "You have to let go of me!;Not gonna answer, you asked me not to;Don't make this harder than it has to be, just go!;I'm just gonna ignore you;Not allowed to answer;this feature has been disabled for <@!203302899277627392> by <@!203302899277627392>;Your time is up! Rest in piece!;Musn't answer you;Just leave me alone;Go chat with someone else".split(
                     ";")
                 await self.send_typing(channel)
                 await asyncio.sleep(5)
