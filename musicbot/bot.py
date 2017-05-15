@@ -4101,7 +4101,7 @@ class MusicBot(discord.Client):
         """
 
         tweet = get_tweet(tweet_id)
-        print(tweet.created_at.year)
+        # print(tweet.created_at.year)
         em = Embed(description=tweet.text)
         em.set_author(url=tweet.user.url, name=tweet.user.name,
                       icon_url=tweet.user.avatar_url)
@@ -5484,8 +5484,11 @@ class MusicBot(discord.Client):
         message_content = " ".join(leftover_args)
         if (message_content[0] == "\"" and message_content[-1] == "\"") or re.search(r"\D", message_content) is not None:
             message_content = message_content.replace("\"", "")
-            if datetime.now() < datetime(2017, 5, 15):
-                return Response("Well sorry, this way of quoting is not yet available. It will be released in ***REMOVED******REMOVED***".format(format_time((datetime(2017, 5, 15) - datetime.now()).total_seconds(), True, 5, 2, True, True)))
+            # if datetime.now() < datetime(2017, 5, 15):
+            # return Response("Well sorry, this way of quoting is not yet
+            # available. It will be released in
+            # ***REMOVED******REMOVED***".format(format_time((datetime(2017, 5, 15) -
+            # datetime.now()).total_seconds(), True, 5, 2, True, True)))
             async for msg in self.logs_from(channel, limit=1000):
                 if msg.id != message.id and message_content.lower().strip() in msg.content.lower().strip():
                     if target_author is None or target_author.id == message.author.id:
