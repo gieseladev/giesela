@@ -15,7 +15,7 @@ from collections import OrderedDict, defaultdict
 from datetime import datetime, timedelta
 from functools import wraps
 from io import BytesIO
-from random import choice, shuffle
+from random import choice, random, shuffle
 from textwrap import dedent, indent
 
 import aiohttp
@@ -101,7 +101,7 @@ class MusicBot(discord.Client):
                       "yup", "certainly", "uh-huh", "affirmitive", "activate"]
     channelFreeCommands = ["say", "quote", "9gag", "execute"]
     privateChatCommands = ["c", "ask", "requestfeature", "random",
-                           "translate", "help", "say", "broadcast", "news", "game", "wiki", "cah", "execute"]
+                           "translate", "help", "say", "broadcast", "news", "game", "wiki", "cah", "execute", "secret"]
     lonelyModeRunning = False
 
     def __init__(self, config_file=ConfigDefaults.options_file, random_file=ConfigDefaults.random_sets, radios_file=ConfigDefaults.radios_file, papers_file=ConfigDefaults.papers_file, playlists_file=ConfigDefaults.playlists_file, perms_file=PermissionsDefaults.perms_file):
@@ -5533,6 +5533,28 @@ class MusicBot(discord.Client):
             em.set_author(**author_data)
             await self.send_message(quote_to_channel, embed=em)
         return
+
+    async def cmd_secret(self, author, channel, secret_id):
+        if secret_id == "48856":
+            if not channel.is_private:
+                return Response("I said private chat!")
+            author_answers = {
+                "277112528159637515": "Ich hatte leider keine Zeit mehr hier was sinnvolles hinzuschreiben...;;Es war mir eine Ehre",
+                "277112984919212035": "I was gonna write something nice here but because what happened *happened*....;;Well, I'm not in the mood to write something at all...;;Goodbye Talal, it was nice knowing you!",
+                "284838538556604418": "Hallo!;;Wenn ich mich nicht komplett irre, sollte dieser Text an Bex geschickt werden.;;Falls du nicht Bex bist, dann w00ps, das wär dann wohl blöd gelaufen.;;Ich traue mir eigentlich schon zu, dass ich das richtig hinbekomme. *hust*.;;Hmm... Das ist der zweite Text den ich schreibe (der erste ging an Annie falls du dich fragst) und ich habe auch bei dir keine Ahnung was ich hier rein schreiben soll.;;Ich kenne dich (leider) kaum und daher trau ich mich jetzt nicht einfach irgendwas draufloszuschreiben... Sonst langweile/nerve ich dich noch zu tode.;;Eigentlich hast du dir das ja selbst zuzuschreiben, schliesslich hast du den Command eingegeben... Und ich glaube auch, dass du diesen Text hier gar nie liest, was das was ich hier mache zu einem Monolog macht.;;Das klingt fast ein wenig traurig.;;Aber! Da ich mir fast 100%ig sicher bin, dass du das sowieso nicht liest, kann ich sehrwohl auch etwas chaotischer und offen sein.;;uuund ich hab grad jegliche Lust zu schreiben verloren, da Diana mich wieder fertig macht....;;Seufz...;;Das wär's wohl dann auch gewesen. Eigentlich wollte ich schon ein wenig mehr schreiben;;aber ich kann die notwendige Motivation nicht aufbringen, wenn ich mich so mies fühle.;;Gute Nacht/Tag/was_auch_immer!;;Der Idiot der sich so sehr von anderen Leuten beeinflussen lässt, dass er jegliche Motivation verliert",
+                "237185271303503872": "Oh;;Ich hab eigentlich nicht damit gerechnet, dass du diesen Command ausführen würdest. Ich wollte eigentlich nur Diana überraschen, falls sie wirklich meine traurigen Konversationen mit Giesela lesen sollte.;;Was könnte ich denn jetzt hier für dich hinterlassen... Vielleicht könnte ich dir eine Geschichte erzählen...;;Aber ich hab das Gefühl, dass ich dich nur langweilen würde und das möchte ich sowas von nicht. Ich fühl mich gerade relativ sicher, weil ich davon ausgehe, dass du diese Nachricht gar nie liest.;;Wahrscheinlich wäre es das Beste...;;Ich liebe es einfach solche dummen *Spiele* zu machen und du hast den Fehler gemacht und diesen Command ausgeführt...;;Sorry, mir kommt echt nichts mehr in den Sinn, darum laber ich jetzt einfach ganz dumm drauf los.;;Ich weiss nicht wie du im Moment zu mir stehst, ich hab absolut keine Ahnung, aber ich habe das starke Gefühl, dass du mich nicht besonders magst.;;Du hättest auch allen Grund dazu, ich weiss gar nicht warum ich mir das überhaupt überlegen muss...;;Was ich aber unbedingt noch sagen wollte;;Ich hätte furchtbar gerne mit dir HOTS gespielt. Ich bin mir bewusst, dass du das Spiel nicht magst und ich will dich da auch gar nicht umstimmen, eigentlich wollte ich nur diese blöden Skins für Overwatch haben.;;Aber du hast da immer nur Talal angesprochen und mir fehlte zu dieser Zeit jegliches Selbstvertrauen um irgendetwas zu fragen, vorallem weil ich eben das Gefühl hatte, dass du nicht sonderlich gut auf mich zu sprechen seist.;;Wie du siehst ist dieser Text ein absolutes Durcheinander und das hauptsächlich weil ich nicht davon ausgehe, dass das hier überhaupt liest.;;Jeder hat seinen eigenen kleinen Text hier, deiner ist der Erste den ich schreibe. Wenn du das weitersagen möchtest, nur zu!;;Ich habe mir jede Möglichkeit genommen zu überprüfen ob du das jemals liest oder nicht und daher bitte ich dich auch mir das nicht mitzuteilen.;;Wenn ich erfahren würde, dass du all dies wirklich gelesen hast, würd ich wahrscheinlich erstmal in Ohnmacht fallen.;;Jedenfalls, uhm... gute Abschiedsworte waren nie meine Stärke. Eigentlich sollte ich mich ja auch nicht von dir verabschieden.;;Mein heimliches Ziel wäre sogar, dass dieser Text endlich mal ein Gespräch anzetteln würde, es ist seit längerem ein kleiner Wunsch von mir, mal mit dir ein wenig zu schreiben.;;Der Text hört hier jetzt einfach auf. Fertig. Schluss. Und weiterhin schönen Tag :);;Simon."
+            }
+            if author.id in author_answers:
+                story = author_answers[author.id]
+                for block in story.split(";;"):
+                    write_time = 60 * len(block) / 250
+                    await self.send_typing(channel)
+                    await asyncio.sleep(write_time)
+                    await self.safe_send_message(author, block)
+                    await asyncio.sleep(random() * 2 + .2)
+                return
+            else:
+                return Response("No idea who you are... bugger off!")
 
     @owner_only
     async def cmd_shutdown(self, channel):
