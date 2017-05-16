@@ -3,7 +3,7 @@ import re
 
 import requests
 
-MAIN_VERSION = '2.6.3'
+MAIN_VERSION = '2.6.4'
 SUB_VERSION = 'Giesela-PLUS'
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
