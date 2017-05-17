@@ -5506,7 +5506,7 @@ class MusicBot(discord.Client):
             # available. It will be released in
             # {}".format(format_time((datetime(2017, 5, 15) -
             # datetime.now()).total_seconds(), True, 5, 2, True, True)))
-            async for msg in self.logs_from(channel, limit=1000):
+            async for msg in self.logs_from(channel, limit=100000):
                 if msg.id != message.id and message_content.lower().strip() in msg.content.lower().strip():
                     if target_author is None or target_author.id == message.author.id:
                         leftover_args = [msg.id, ]
