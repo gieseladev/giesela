@@ -5508,7 +5508,7 @@ class MusicBot(discord.Client):
             # datetime.now()).total_seconds(), True, 5, 2, True, True)))
             async for msg in self.logs_from(channel, limit=100000):
                 if msg.id != message.id and message_content.lower().strip() in msg.content.lower().strip():
-                    if target_author is None or target_author.id == message.author.id:
+                    if target_author is None or target_author.id == msg.author.id:
                         leftover_args = [msg.id, ]
                         break
             else:
