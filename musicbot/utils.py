@@ -133,7 +133,7 @@ def format_time(s, round_seconds=False, round_base=5, max_specifications=None, c
     if max_specifications is not None:
         return_list = return_list[:max_specifications]
 
-    if combine_with_and:
+    if combine_with_and and len(return_list) > 1:
         return_list.insert(-1, "and")
 
     return " ".join(return_list)
