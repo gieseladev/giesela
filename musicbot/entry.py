@@ -101,12 +101,12 @@ class URLPlaylistEntry(BasePlaylistEntry):
         if self.spotify_track.certainty > .7:
             return self.spotify_track.song_name + " - " + self.spotify_track.artist
         else:
-            return self.spotify_track.query
+            return self._title
 
     @property
     def spotify_track(self):
         if self._spotify_track is None:
-            self._spotify_track = SpotifyTrack.from_query(title)
+            self._spotify_track = SpotifyTrack.from_query(self._title)
 
         return self._spotify_track
 
