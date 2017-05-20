@@ -17,7 +17,7 @@ class BasePlaylistEntry:
         self._waiting_futures = []
         self.start_seconds = 0
         self.end_seconds = None
-        self.spotify_track = None
+        self._spotify_track = None
 
     @property
     def is_downloaded(self):
@@ -93,7 +93,6 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.start_seconds = start_seconds
         self.expected_filename = expected_filename
         self.meta = meta
-        self.spotify_track = SpotifyTrack.from_query(title)
 
         self.download_folder = self.playlist.downloader.download_folder
 
@@ -103,6 +102,13 @@ class URLPlaylistEntry(BasePlaylistEntry):
             return self.spotify_track.song_name + " - " + self.spotify_track.artist
         else:
             return self.spotify_track.query
+
+    @property
+    def spotify_track(self):
+        if self._spotify_track is None:
+            self._spotify_track = SpotifyTrack.from_query(title)
+
+        return self._spotify_track
 
     @classmethod
     def from_json(cls, playlist, jsonstring):
