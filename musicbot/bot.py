@@ -4124,6 +4124,24 @@ class MusicBot(discord.Client):
                       icon_url=tweet.user.avatar_url)
         await self.send_message(channel, embed=em)
 
+    async def cmd_giphy(self, channel, gif_id):
+        async with aiohttp.ClientSession() as session:
+            async with session.get("http://api.giphy.com/v1/gifs/" + gif_id + "?api_key=dc6zaTOxFJmzC") as resp:
+                response = await resp.json()
+        data = response["data"]
+        url = data["url"]
+        username = data["username"]
+        source = data["source"]
+        caption = data["caption"] if "caption" in data else "GIPHY"
+        timestamp = datetime.strptime(
+            data["import_datetime"], "%Y-%m-%d %H:%M:%S")
+        gif = data["images"]["original"]["url"]
+
+        em = Embed(title=caption, timestamp=timestamp, url=url)
+        em.set_image(url=gif)
+        em.set_author(url=source, name=username)
+        await self.send_message(channel, embed=em)
+
     async def cmd_repeat(self, player):
         """
         Usage:
@@ -5575,16 +5593,16 @@ class MusicBot(discord.Client):
             await self.safe_delete_message(message)
             return
 
-        # gif_match = re.match(r"((?:http|https):\/\/.+\.gif)", message_content)
-        # if gif_match is not None:
-        #     gif_link = gif_match.group(1)
-        #     em = Embed()
-        #     em._video = ***REMOVED***"url": gif_link***REMOVED***
-        #     em.set_author(name=message.author.display_name,
-        #                   icon_url=message.author.avatar_url)
-        #     await self.send_message(message.channel, embed=em)
-        #     await self.safe_delete_message(message)
-        #     return
+        gif_match = re.match(r"((?:http|https):\/\/.+\.gif)", message_content)
+        if gif_match is not None:
+            gif_link = gif_match.group(1)
+            em = Embed()
+            em.set_image(url=gif_link)
+            em.set_author(name=message.author.display_name,
+                          icon_url=message.author.avatar_url)
+            await self.send_message(message.channel, embed=em)
+            await self.safe_delete_message(message)
+            return
 
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
