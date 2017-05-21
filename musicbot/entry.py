@@ -1,6 +1,7 @@
 import json
 import os
 import traceback
+from threading import Thread
 
 import asyncio
 
@@ -95,20 +96,24 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.meta = meta
 
         self.download_folder = self.playlist.downloader.download_folder
+        Thread(target=self.threaded_spotify_search).start()
 
     @property
     def title(self):
-        if self.spotify_track.certainty > .7:
+        if self.spotify_track is not None and self.spotify_track.certainty > .7:
             return self.spotify_track.song_name + " - " + self.spotify_track.artist
         else:
             return self._title
 
     @property
     def spotify_track(self):
-        if self._spotify_track is None:
-            self._spotify_track = SpotifyTrack.from_query(self._title)
+        # if self._spotify_track is None:
+        #     self._spotify_track = SpotifyTrack.from_query(self._title)
 
         return self._spotify_track
+
+    def threaded_spotify_search(self):
+        self._spotify_track = SpotifyTrack.from_query(self._title)
 
     @classmethod
     def from_json(cls, playlist, jsonstring):
