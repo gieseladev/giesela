@@ -2128,9 +2128,9 @@ class MusicBot(discord.Client):
         for i, item in enumerate(player.playlist, 1):
             if item.meta.get('channel', False) and item.meta.get('author', False):
                 nextline = '`{}.` **{}** added by **{}**'.format(
-                    i, item._title, item.meta['author'].name).strip()
+                    i, item.title, item.meta['author'].name).strip()
             else:
-                nextline = '`{}.` **{}**'.format(i, item._title).strip()
+                nextline = '`{}.` **{}**'.format(i, item.title).strip()
 
             # +1 is for newline char
             currentlinesum = sum(len(x) + 1 for x in lines)
