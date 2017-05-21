@@ -5142,7 +5142,6 @@ class MusicBot(discord.Client):
                 else:
                     return Response("Successfully sent the message!")
 
-    @owner_only
     async def cmd_execute(self, channel, author, server, leftover_args, player=None):
         statement = " ".join(leftover_args)
         statement = statement.replace("/n/", "\n")
