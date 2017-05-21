@@ -19,9 +19,7 @@ class SpotifyTrack:
 
         spotify = spotipy.Spotify()
         search_result = spotify.search(query, limit=1, type="track")
-        if len(search_result) < 1:
-            return cls("", query.upper(), "", query, 0)
-        if len(search_result["tracks"]["items"]) < 1:
+        if len(search_result) < 1 or len(search_result["tracks"]["items"]) < 1:
             return cls("", query.upper(), "", query, 0)
 
         track = search_result["tracks"]["items"][0]
