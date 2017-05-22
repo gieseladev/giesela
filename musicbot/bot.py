@@ -1818,8 +1818,8 @@ class MusicBot(discord.Client):
 
             if player.current_entry.spotify_track is not None and player.current_entry.spotify_track.certainty > .8:
                 d = player.current_entry.spotify_track
-                em = Embed(title=d.song_name, description="".join("■" if x > 20 * (player.progress /
-                                                                                   player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration) else "□" for x in range(20)))
+                em = Embed(title=d.name, description="".join("■" if x < 20 * (player.progress /
+                                                                              (player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration)) else "□" for x in range(1, 21)))
                 em.set_author(name=d.artist)
                 em.set_thumbnail(url=d.cover_url)
                 em.set_footer(text='[{}/{}]'.format(*list(map(lambda x: "{0:0>2}:{1:0>2}".format(
