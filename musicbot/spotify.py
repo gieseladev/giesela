@@ -59,7 +59,7 @@ class SpotifyTrack:
 
     @classmethod
     def EmptyTrack(cls, query):
-        return cls(None, query, None, None, None, None, None)
+        return cls(None, query, None, None, None, None, None, certainty=0)
 
     @classmethod
     def from_query(cls, query):
