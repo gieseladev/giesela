@@ -3,9 +3,12 @@ import decimal
 import random
 import re
 import unicodedata
+from datetime import timedelta
 from hashlib import md5
 
 import aiohttp
+import requests
+from bs4 import BeautifulSoup
 
 from .constants import DISCORD_MSG_CHAR_LIMIT
 
@@ -57,6 +60,15 @@ def prettydate(d):
         return '{} hours ago'.format(round_to_interval(s / 3600))
 
 
+def get_video_description(url):
+    resp = requests.get(url)
+    bs = BeautifulSoup(resp.text, "lxml")
+    bs = bs.find("p", attrs={"id": "eow-description"})
+    for br in bs.find_all("br"):
+        br.replace_with("\n")
+    return bs.text
+
+
 def parse_timestamp(timestamp):
     parts = timestamp.split(":")
     if len(parts) < 1:  # Shouldn't occur, but who knows?
@@ -78,6 +90,26 @@ def parse_timestamp(timestamp):
         secs += v * values[j]
 
     return secs
+
+
+def hex_to_dec(hex_code):
+    return int(hex_code, 16)
+
+
+def to_timestamp(seconds):
+    sec = int(seconds)
+    s = "{0:0>2}".format(sec % 60)
+    m = (sec // 60) % 60
+    h = (sec // 60 // 60) % 24
+    d = (sec // 60 // 60 // 24)
+
+    work_string = ""
+    if d > 0:
+        return ":".join(str(x) for x in (d, h, m, s))
+    elif h > 0:
+        return ":".join(str(x) for x in (h, m, s))
+    else:
+        return ":".join(str(x) for x in (m, s))
 
 
 def slugify(value):

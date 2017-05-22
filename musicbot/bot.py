@@ -63,7 +63,7 @@ from .translate import Translator
 from .twitter_api import get_tweet
 from .utils import (escape_dis, format_time, load_file, paginate,
                     parse_timestamp, prettydate, random_line, sane_round_int,
-                    write_file)
+                    to_timestamp, write_file)
 
 load_opus_lib()
 
@@ -1825,6 +1825,14 @@ class MusicBot(discord.Client):
                 em.set_footer(text='[{}/{}]'.format(*list(map(lambda x: "{0:0>2}:{1:0>2}".format(
                     (x // 60) % 60, x % 60), [player.progress, player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration]))))
 
+                await self.send_message(channel, embed=em)
+            elif player.current_entry.provides_timestamps:
+                local_progress = player.current_entry.get_local_progress(
+                    player.progress)
+                em = Embed(title=player.current_entry.get_current_song_from_timestamp(player.progress)["name"], colour=65535, description="".join(
+                    "■" if x < 20 * (local_progress[0] / local_progress[1]) else "□" for x in range(1, 21)) + ' [{}/{}]'.format(to_timestamp(local_progress[0]), to_timestamp(local_progress[1])))
+                em.set_footer(text="Playing from \"{}\" [{}/{}]".format(
+                    player.current_entry.title, to_timestamp(player.progress), to_timestamp(player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration)))
                 await self.send_message(channel, embed=em)
             else:
                 song_progress = str(
