@@ -2142,7 +2142,7 @@ class MusicBot(discord.Client):
                              (player.current_entry.title, prog_str))
 
         if player.current_entry.provides_timestamps:
-            for i, item in enumerate(player.current_entry.sub_queue(), 1):
+            for i, item in enumerate(player.current_entry.sub_queue(player.progress), 1):
                 nextline = "   ►{}. **{}**".format(i, item["name"])
                 currentlinesum = sum(len(x) + 1 for x in lines)
 

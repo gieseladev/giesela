@@ -107,7 +107,7 @@ class BasePlaylistEntry:
 
         current_title = None
         for entry in self.sub_queue():
-            if progress >= entry["start"]:
+            if progress >= entry["start"] or current_title is None:
                 current_title = entry
 
         return current_title
