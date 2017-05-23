@@ -219,7 +219,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
             return
 
         songs = {}
-        for match in re.finditer(r"(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?\s(.+?)\n", desc):
+        for match in re.finditer(r"(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?\s(.+?)(?:\n|$)", desc):
             timestamp = int(match.group(3))
             timestamp += (int(match.group(2)) *
                           60) if match.group(2) is not None else 0
