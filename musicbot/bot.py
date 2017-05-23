@@ -2140,6 +2140,18 @@ class MusicBot(discord.Client):
                 lines.append("Now Playing: **%s** %s\n" %
                              (player.current_entry.title, prog_str))
 
+        if player.current_entry.provides_timestamps:
+            for i, item in enumerate(player.current_entry.sub_queue, 1):
+                nextline = "   ►***REMOVED******REMOVED***. *****REMOVED******REMOVED*****".format(i, item["name"])
+                currentlinesum = sum(len(x) + 1 for x in lines)
+
+                if currentlinesum + len(nextline) + len(andmoretext) > DISCORD_MSG_CHAR_LIMIT:
+                    if currentlinesum + len(andmoretext):
+                        unlisted += 1
+                        continue
+
+                lines.append(nextline)
+
         for i, item in enumerate(player.playlist, 1):
             if item.meta.get('channel', False) and item.meta.get('author', False):
                 nextline = '`***REMOVED******REMOVED***.` *****REMOVED******REMOVED***** added by *****REMOVED******REMOVED*****'.format(
