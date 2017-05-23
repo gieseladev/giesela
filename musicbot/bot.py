@@ -482,8 +482,9 @@ class MusicBot(discord.Client):
                     e = entry.get_current_song_from_timestamp(player.progress)
                     newmsg = "Now playing *****REMOVED***0***REMOVED***** (****REMOVED***1***REMOVED******REMOVED***2***REMOVED**** entry) from \"***REMOVED***3***REMOVED***\"".format(
                         e["name"], e["index"], ordinal(e["index"]), entry.title)
-                newmsg = 'Now playing in %s: **%s**' % (
-                    player.voice_client.channel.name, entry.title)
+                else:
+                    newmsg = 'Now playing in %s: **%s**' % (
+                        player.voice_client.channel.name, entry.title)
 
             if self.server_specific_data[channel.server]['last_np_msg']:
                 self.server_specific_data[channel.server]['last_np_msg'] = await self.safe_edit_message(last_np_msg, newmsg, send_if_fail=True)
@@ -2141,7 +2142,7 @@ class MusicBot(discord.Client):
                              (player.current_entry.title, prog_str))
 
         if player.current_entry.provides_timestamps:
-            for i, item in enumerate(player.current_entry.sub_queue, 1):
+            for i, item in enumerate(player.current_entry.sub_queue(), 1):
                 nextline = "   ►***REMOVED******REMOVED***. *****REMOVED******REMOVED*****".format(i, item["name"])
                 currentlinesum = sum(len(x) + 1 for x in lines)
 
