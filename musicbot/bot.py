@@ -481,7 +481,7 @@ class MusicBot(discord.Client):
                 if entry.provides_timestamps:
                     e = entry.get_current_song_from_timestamp(player.progress)
                     newmsg = "Now playing **{0}** (*{1}{2}* entry) from \"{3}\"".format(
-                        e["name"], e["index"], ordinal(e["index"]), entry.title)
+                        e["name"], e["index"] + 1, ordinal(e["index"] + 1), entry.title)
                 else:
                     newmsg = 'Now playing in %s: **%s**' % (
                         player.voice_client.channel.name, entry.title)
@@ -2157,6 +2157,18 @@ class MusicBot(discord.Client):
             if item.meta.get('channel', False) and item.meta.get('author', False):
                 nextline = '`{}.` **{}** added by **{}**'.format(
                     i, item.title, item.meta['author'].name).strip()
+                if item.provides_timestamps:
+                    for ind, sub_item in enumerate(item.sub_queue(), 1)[:3]:
+                        nextline = "   ►{}. **{}**".format(
+                            ind, sub_item["name"])
+                        currentlinesum = sum(len(x) + 1 for x in lines)
+
+                        if currentlinesum + len(nextline) + len(andmoretext) > DISCORD_MSG_CHAR_LIMIT:
+                            if currentlinesum + len(andmoretext):
+                                unlisted += 1
+                                continue
+
+                        lines.append(nextline)
             else:
                 nextline = '`{}.` **{}**'.format(i, item.title).strip()
 
