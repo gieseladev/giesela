@@ -2005,6 +2005,9 @@ class MusicBot(discord.Client):
                 log("Something strange is happening.  "
                     "You might want to restart the bot if it doesn't start working.")
 
+        if player.current_entry.provides_timestamps:
+            return await self.cmd_skipto(player, str(player.current_entry.get_current_song_from_timestamp(player.progress)["end"]))
+
         if author.id == self.config.owner_id \
                 or permissions.instaskip \
                 or author == player.current_entry.meta.get('author', None):

@@ -44,7 +44,7 @@ class BasePlaylistEntry:
             dur = (entries[index + 1] if index + 1 <
                    len(entries) else self.duration) - entry
             e = ***REMOVED***"name": self.provided_song_timestamps[
-                entry], "duration": dur, "start": entry, "index": index***REMOVED***
+                entry], "duration": dur, "start": entry, "index": index, "end": dur + entry***REMOVED***
             queue.append(e)
 
         return queue
@@ -111,6 +111,9 @@ class BasePlaylistEntry:
                 current_title = entry
 
         return current_title
+
+    def get_timestamped_song(self, index):
+        return self.sub_queue[index]
 
     def get_local_progress(self, progress):
         if not self.provides_timestamps:
@@ -209,9 +212,14 @@ class URLPlaylistEntry(BasePlaylistEntry):
         return URLPlaylistEntry(playlist, url, title, duration, filename, start_seconds, end_seconds, **meta)
 
     def search_for_timestamps(self):
-        desc = get_video_description(self.url)
+        try:
+            desc = get_video_description(self.url)
+        except:
+            raise
+            return
+
         songs = ***REMOVED******REMOVED***
-        for match in re.finditer(r"(?:(\d***REMOVED***2***REMOVED***):)?(\d***REMOVED***2***REMOVED***):(\d***REMOVED***2***REMOVED***) (.+?)\n", desc):
+        for match in re.finditer(r"(?:(\d***REMOVED***1,2***REMOVED***):)?(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***2***REMOVED***)(?:\s?.?\s?(?:\d***REMOVED***1,2***REMOVED***:)?(?:\d***REMOVED***1,2***REMOVED***):(?:\d***REMOVED***2***REMOVED***))?\s(.+?)\n", desc):
             timestamp = int(match.group(3))
             timestamp += (int(match.group(2)) *
                           60) if match.group(2) is not None else 0
