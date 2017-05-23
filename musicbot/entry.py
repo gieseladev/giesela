@@ -1,12 +1,14 @@
 import json
 import os
+import re
 import traceback
+from threading import Thread
 
 import asyncio
 
 from .exceptions import ExtractionError
 from .spotify import SpotifyTrack
-from .utils import get_header, md5sum, slugify
+from .utils import get_header, get_video_description, md5sum, slugify
 
 
 class BasePlaylistEntry:
@@ -17,7 +19,9 @@ class BasePlaylistEntry:
         self._waiting_futures = []
         self.start_seconds = 0
         self.end_seconds = None
+        self.duration = 0
         self._spotify_track = None
+        self.provided_song_timestamps = None
 
     @property
     def is_downloaded(self):
@@ -25,6 +29,25 @@ class BasePlaylistEntry:
             return False
 
         return bool(self.filename)
+
+    @property
+    def provides_timestamps(self):
+        return self.provided_song_timestamps is not None
+
+    def sub_queue(self, min_progress=-1):
+        queue = []
+        entries = sorted(list(self.provided_song_timestamps.keys()))
+        for index, entry in enumerate(entries):
+            if entry < min_progress:
+                continue
+
+            dur = (entries[index + 1] if index + 1 <
+                   len(entries) else self.duration) - entry
+            e = ***REMOVED***"name": self.provided_song_timestamps[
+                entry], "duration": dur, "start": entry, "index": index, "end": dur + entry***REMOVED***
+            queue.append(e)
+
+        return queue
 
     @classmethod
     def from_json(cls, playlist, jsonstring):
@@ -78,6 +101,26 @@ class BasePlaylistEntry:
     def __hash__(self):
         return id(self)
 
+    def get_current_song_from_timestamp(self, progress):
+        if not self.provides_timestamps:
+            return False
+
+        current_title = None
+        for entry in self.sub_queue():
+            if progress >= entry["start"] or current_title is None:
+                current_title = entry
+
+        return current_title
+
+    def get_timestamped_song(self, index):
+        return self.sub_queue[index]
+
+    def get_local_progress(self, progress):
+        if not self.provides_timestamps:
+            return False
+        entry = self.get_current_song_from_timestamp(progress)
+        return progress - entry["start"], entry["duration"]
+
 
 class URLPlaylistEntry(BasePlaylistEntry):
 
@@ -95,20 +138,25 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.meta = meta
 
         self.download_folder = self.playlist.downloader.download_folder
+        Thread(target=self.threaded_spotify_search).start()
+        Thread(target=self.search_for_timestamps).start()
 
     @property
     def title(self):
-        if self.spotify_track.certainty > .7:
-            return self.spotify_track.song_name + " - " + self.spotify_track.artist
+        if self.spotify_track is not None and self.spotify_track.certainty > .7:
+            return self.spotify_track.name + " - " + self.spotify_track.artist
         else:
             return self._title
 
     @property
     def spotify_track(self):
-        if self._spotify_track is None:
-            self._spotify_track = SpotifyTrack.from_query(self._title)
+        # if self._spotify_track is None:
+        #     self._spotify_track = SpotifyTrack.from_query(self._title)
 
         return self._spotify_track
+
+    def threaded_spotify_search(self):
+        self._spotify_track = SpotifyTrack.from_query(self._title)
 
     @classmethod
     def from_json(cls, playlist, jsonstring):
@@ -162,6 +210,23 @@ class URLPlaylistEntry(BasePlaylistEntry):
                 meta['author'] = "unknown"
 
         return URLPlaylistEntry(playlist, url, title, duration, filename, start_seconds, end_seconds, **meta)
+
+    def search_for_timestamps(self):
+        try:
+            desc = get_video_description(self.url)
+        except:
+            raise
+            return
+
+        songs = ***REMOVED******REMOVED***
+        for match in re.finditer(r"(?:(\d***REMOVED***1,2***REMOVED***):)?(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***2***REMOVED***)(?:\s?.?\s?(?:\d***REMOVED***1,2***REMOVED***:)?(?:\d***REMOVED***1,2***REMOVED***):(?:\d***REMOVED***2***REMOVED***))?\s(.+?)(?:\n|$)", desc):
+            timestamp = int(match.group(3))
+            timestamp += (int(match.group(2)) *
+                          60) if match.group(2) is not None else 0
+            timestamp += (int(match.group(1)) *
+                          3600) if match.group(1) is not None else 0
+            songs[timestamp] = match.group(4)
+        self.provided_song_timestamps = songs
 
     def to_json(self):
         meta_dict = ***REMOVED******REMOVED***
