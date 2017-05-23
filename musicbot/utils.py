@@ -60,6 +60,13 @@ def prettydate(d):
         return '{} hours ago'.format(round_to_interval(s / 3600))
 
 
+def ordinal(n):
+    special_cases = {1: "st", 2: "nd", 3: "rd"}
+    if not 10 <= n % 100 <= 20 and n % 10 in special_cases:
+        return special_cases[n % 10]
+    return "th"
+
+
 def get_video_description(url):
     resp = requests.get(url)
     bs = BeautifulSoup(resp.text, "lxml")
