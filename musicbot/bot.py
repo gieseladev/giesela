@@ -61,9 +61,9 @@ from .settings import Settings
 from .socket_server import SocketServer
 from .translate import Translator
 from .twitter_api import get_tweet
-from .utils import (escape_dis, format_time, load_file, paginate,
+from .utils import (escape_dis, format_time, load_file, ordinal, paginate,
                     parse_timestamp, prettydate, random_line, sane_round_int,
-                    write_file)
+                    to_timestamp, write_file)
 
 load_opus_lib()
 
@@ -478,8 +478,13 @@ class MusicBot(discord.Client):
                 newmsg = '%s - your song **%s** is now playing in %s!' % (
                     entry.meta['author'].mention, entry.title, player.voice_client.channel.name)
             else:
-                newmsg = 'Now playing in %s: **%s**' % (
-                    player.voice_client.channel.name, entry.title)
+                if entry.provides_timestamps:
+                    e = entry.get_current_song_from_timestamp(player.progress)
+                    newmsg = "Now playing **{0}** (*{1}{2}* entry) from \"{3}\"".format(
+                        e["name"], e["index"] + 1, ordinal(e["index"] + 1), entry.title)
+                else:
+                    newmsg = 'Now playing in %s: **%s**' % (
+                        player.voice_client.channel.name, entry.title)
 
             if self.server_specific_data[channel.server]['last_np_msg']:
                 self.server_specific_data[channel.server]['last_np_msg'] = await self.safe_edit_message(last_np_msg, newmsg, send_if_fail=True)
@@ -1818,13 +1823,21 @@ class MusicBot(discord.Client):
 
             if player.current_entry.spotify_track is not None and player.current_entry.spotify_track.certainty > .8:
                 d = player.current_entry.spotify_track
-                em = Embed(title=d.song_name, description="".join("■" if x > 20 * (player.progress /
-                                                                                   player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration) else "□" for x in range(20)))
+                em = Embed(title=d.name, description="".join("■" if x < 20 * (player.progress /
+                                                                              (player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration)) else "□" for x in range(1, 21)))
                 em.set_author(name=d.artist)
                 em.set_thumbnail(url=d.cover_url)
                 em.set_footer(text='[{}/{}]'.format(*list(map(lambda x: "{0:0>2}:{1:0>2}".format(
                     (x // 60) % 60, x % 60), [player.progress, player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration]))))
 
+                await self.send_message(channel, embed=em)
+            elif player.current_entry.provides_timestamps:
+                local_progress = player.current_entry.get_local_progress(
+                    player.progress)
+                em = Embed(title=player.current_entry.get_current_song_from_timestamp(player.progress)["name"], colour=65535, description="".join(
+                    "■" if x < 20 * (local_progress[0] / local_progress[1]) else "□" for x in range(1, 21)) + ' [{}/{}]'.format(to_timestamp(local_progress[0]), to_timestamp(local_progress[1])))
+                em.set_footer(text="Playing from \"{}\" [{}/{}]".format(
+                    player.current_entry.title, to_timestamp(player.progress), to_timestamp(player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration)))
                 await self.send_message(channel, embed=em)
             else:
                 song_progress = str(
@@ -1997,6 +2010,9 @@ class MusicBot(discord.Client):
                 log("Something strange is happening.  "
                     "You might want to restart the bot if it doesn't start working.")
 
+        if player.current_entry.provides_timestamps:
+            return await self.cmd_skipto(player, str(player.current_entry.get_current_song_from_timestamp(player.progress)["end"]))
+
         if author.id == self.config.owner_id \
                 or permissions.instaskip \
                 or author == player.current_entry.meta.get('author', None):
@@ -2125,10 +2141,34 @@ class MusicBot(discord.Client):
                 lines.append("Now Playing: **%s** %s\n" %
                              (player.current_entry.title, prog_str))
 
+        if player.current_entry.provides_timestamps:
+            for i, item in enumerate(player.current_entry.sub_queue(player.progress), 1):
+                nextline = "   ►{}. **{}**".format(i, item["name"])
+                currentlinesum = sum(len(x) + 1 for x in lines)
+
+                if currentlinesum + len(nextline) + len(andmoretext) > DISCORD_MSG_CHAR_LIMIT:
+                    if currentlinesum + len(andmoretext):
+                        unlisted += 1
+                        continue
+
+                lines.append(nextline)
+
         for i, item in enumerate(player.playlist, 1):
             if item.meta.get('channel', False) and item.meta.get('author', False):
                 nextline = '`{}.` **{}** added by **{}**'.format(
                     i, item.title, item.meta['author'].name).strip()
+                if item.provides_timestamps:
+                    for ind, sub_item in enumerate(item.sub_queue(), 1)[:3]:
+                        nextline = "   ►{}. **{}**".format(
+                            ind, sub_item["name"])
+                        currentlinesum = sum(len(x) + 1 for x in lines)
+
+                        if currentlinesum + len(nextline) + len(andmoretext) > DISCORD_MSG_CHAR_LIMIT:
+                            if currentlinesum + len(andmoretext):
+                                unlisted += 1
+                                continue
+
+                        lines.append(nextline)
             else:
                 nextline = '`{}.` **{}**'.format(i, item.title).strip()
 
@@ -5142,7 +5182,6 @@ class MusicBot(discord.Client):
                 else:
                     return Response("Successfully sent the message!")
 
-    @owner_only
     async def cmd_execute(self, channel, author, server, leftover_args, player=None):
         statement = " ".join(leftover_args)
         statement = statement.replace("/n/", "\n")
