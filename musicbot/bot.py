@@ -61,7 +61,7 @@ from .settings import Settings
 from .socket_server import SocketServer
 from .translate import Translator
 from .twitter_api import get_tweet
-from .utils import (escape_dis, format_time, load_file, paginate,
+from .utils import (escape_dis, format_time, load_file, ordinal, paginate,
                     parse_timestamp, prettydate, random_line, sane_round_int,
                     to_timestamp, write_file)
 
@@ -478,6 +478,10 @@ class MusicBot(discord.Client):
                 newmsg = '%s - your song **%s** is now playing in %s!' % (
                     entry.meta['author'].mention, entry.title, player.voice_client.channel.name)
             else:
+                if entry.provides_timestamps:
+                    e = entry.get_current_song_from_timestamp(player.progress)
+                    newmsg = "Now playing *****REMOVED***0***REMOVED***** (****REMOVED***1***REMOVED******REMOVED***2***REMOVED**** entry) from \"***REMOVED***3***REMOVED***\"".format(
+                        e["name"], e["index"], ordinal(e["index"]), entry.title)
                 newmsg = 'Now playing in %s: **%s**' % (
                     player.voice_client.channel.name, entry.title)
 
