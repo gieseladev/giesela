@@ -11,3 +11,4 @@ discord.log
 config/options.ini
 cache
 count_lines.py
+config/settings.bin
