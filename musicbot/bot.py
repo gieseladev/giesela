@@ -61,9 +61,9 @@ from .settings import Settings
 from .socket_server import SocketServer
 from .translate import Translator
 from .twitter_api import get_tweet
-from .utils import (escape_dis, format_time, load_file, ordinal, paginate,
-                    parse_timestamp, prettydate, random_line, sane_round_int,
-                    to_timestamp, write_file)
+from .utils import (create_bar, escape_dis, format_time, load_file, ordinal,
+                    paginate, parse_timestamp, prettydate, random_line,
+                    sane_round_int, to_timestamp, write_file)
 
 load_opus_lib()
 
@@ -1825,26 +1825,26 @@ class MusicBot(discord.Client):
             if player.current_entry.spotify_track is not None and player.current_entry.spotify_track.certainty > .8:
                 d = player.current_entry.spotify_track
 
-                progress_bar = "".join("■" if x < 20 * (player.progress / (
-                    player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration)) else "□" for x in range(1, 21))
-                progress_text = " [{}/{}]".format(to_timestamp(player.progress), to_timestamp(
-                    player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration))
+                end = player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration
+                progress_bar = create_bar(player.progress / end, 20)
+                progress_text = " [{}/{}]".format(
+                    to_timestamp(player.progress), to_timestamp(end))
 
                 em = Embed(title="**" + d.name + "**",
                            description=progress_bar + progress_text)
                 em.set_author(name=d.artist)
                 em.set_thumbnail(url=d.cover_url)
                 em.add_field(name="Album", value=d.album.name)
-                popularity_bar = "".join(
-                    "★" if x < d.popularity / 10 else "☆" for x in range(1, 11))
+                popularity_bar = create_bar(
+                    d.popularity / 10, 10, "★", "⭐", "☆")
                 em.add_field(name="Popularity", value=popularity_bar)
 
                 await self.send_message(channel, embed=em)
             elif player.current_entry.provides_timestamps:
                 local_progress = player.current_entry.get_local_progress(
                     player.progress)
-                em = Embed(title=player.current_entry.get_current_song_from_timestamp(player.progress)["name"], colour=65535, description="".join(
-                    "■" if x < 20 * (local_progress[0] / local_progress[1]) else "□" for x in range(1, 21)) + ' [{}/{}]'.format(to_timestamp(local_progress[0]), to_timestamp(local_progress[1])))
+                em = Embed(title=player.current_entry.get_current_song_from_timestamp(player.progress)["name"], colour=65535, description=create_bar(
+                    local_progress[0] / local_progress[1], 20) + ' [{}/{}]'.format(to_timestamp(local_progress[0]), to_timestamp(local_progress[1])))
                 em.set_footer(text="Playing from \"{}\" [{}/{}]".format(
                     player.current_entry.title, to_timestamp(player.progress), to_timestamp(player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration)))
                 await self.send_message(channel, embed=em)
@@ -1856,18 +1856,7 @@ class MusicBot(discord.Client):
                     '0').lstrip(':')
                 prog_str = '`[%s/%s]`' % (song_progress, song_total)
 
-                prog_bar_len = 20
-                prog_full_char = "■"
-                prog_empty_char = "□"
-                progress_perc = (player.progress /
-                                 end_seconds) if end_seconds > 0 else 0
-                prog_bar_str = ""
-
-                for i in range(prog_bar_len):
-                    if i < prog_bar_len * progress_perc:
-                        prog_bar_str += prog_full_char
-                    else:
-                        prog_bar_str += prog_empty_char
+                prog_bar_str = create_bar(player.progress / end_seconds, 20)
 
                 if player.current_entry.meta.get('channel', False) and player.current_entry.meta.get('author', False):
                     np_text = "Now Playing: **%s** added by **%s** %s\n%s" % (
