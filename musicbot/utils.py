@@ -37,6 +37,23 @@ def write_file(filename, contents):
             f.write('\n')
 
 
+def create_bar(progress, length=10, full_char="■", half_char=None, empty_char="□"):
+    use_halves = half_char is not None
+    fill_to = int(2 * length * progress)
+    residue = fill_to % 2
+    chrs = []
+    for i in range(1, length + 1):
+        if i <= fill_to / 2:
+            chrs.append(full_char)
+        else:
+            break
+
+    if residue > 0 and use_halves:
+        chrs.append(half_char)
+
+    return ("{0:" + empty_char + "<" + str(length) + "}").format("".join(chrs))
+
+
 def prettydate(d):
     diff = datetime.datetime.now() - d
     s = diff.seconds
@@ -112,9 +129,9 @@ def to_timestamp(seconds):
 
     work_string = ""
     if d > 0:
-        return ":".join(str(x) for x in (d, h, m, s))
+        return ":".join(str(x) for x in (d, "{0:0>2}".format(h), "{0:0>2}".format(m), s))
     elif h > 0:
-        return ":".join(str(x) for x in (h, m, s))
+        return ":".join(str(x) for x in (h, "{0:0>2}".format(m), s))
     else:
         return ":".join(str(x) for x in (m, s))
 
