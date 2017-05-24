@@ -61,9 +61,9 @@ from .settings import Settings
 from .socket_server import SocketServer
 from .translate import Translator
 from .twitter_api import get_tweet
-from .utils import (create_bar, escape_dis, format_time, load_file, ordinal,
-                    paginate, parse_timestamp, prettydate, random_line,
-                    sane_round_int, to_timestamp, write_file)
+from .utils import (create_bar, escape_dis, format_time, hex_to_dec, load_file,
+                    ordinal, paginate, parse_timestamp, prettydate,
+                    random_line, sane_round_int, to_timestamp, write_file)
 
 load_opus_lib()
 
@@ -1831,12 +1831,12 @@ class MusicBot(discord.Client):
                     to_timestamp(player.progress), to_timestamp(end))
 
                 em = Embed(title="**" + d.name + "**",
-                           description=progress_bar + progress_text)
+                           description=progress_bar + progress_text, colour=hex_to_dec("F9FF6E"))
                 em.set_author(name=d.artist)
                 em.set_thumbnail(url=d.cover_url)
                 em.add_field(name="Album", value=d.album.name)
                 popularity_bar = create_bar(
-                    d.popularity / 10, 10, "★", "⭐", "☆")
+                    d.popularity / 100, 10, "★", "✬", "☆")
                 em.add_field(name="Popularity", value=popularity_bar)
 
                 await self.send_message(channel, embed=em)

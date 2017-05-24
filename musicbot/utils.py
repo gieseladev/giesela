@@ -37,7 +37,7 @@ def write_file(filename, contents):
             f.write('\n')
 
 
-def create_bar(progress, length=10, full_char="■", half_char="◩", empty_char="□"):
+def create_bar(progress, length=10, full_char="■", half_char=None, empty_char="□"):
     use_halves = half_char is not None
     fill_to = int(2 * length * progress)
     residue = fill_to % 2
