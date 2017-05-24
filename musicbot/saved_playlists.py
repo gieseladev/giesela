@@ -33,7 +33,7 @@ class Playlists:
         with open(self.playlists_file, "w") as pl_file:
             self.playlists.write(pl_file)
 
-    def get_playlist(self, playlistname, playlist):
+    def get_playlist(self, playlistname, playlist, load_entries=True):
         playlistname = playlistname.lower().strip().replace(" ", "_")
         if not self.playlists.has_section(playlistname):
             return None
@@ -47,12 +47,12 @@ class Playlists:
         playlist_informations["replay_count"] = self.playlists.getint(
             playlistname, "replays", fallback=0)
         entries = []
-        if not os.stat(playlist_informations["location"]).st_size == 0:
+        if load_entries and not os.stat(playlist_informations["location"]).st_size == 0:
             with open(playlist_informations["location"], "r") as file:
                 serialized_json = re.split("\n;\n", file.read())
             for entry in serialized_json:
                 #print (str (urlEntry.entry_from_json (playlist, entry).title))
-                entries.append(urlEntry.entry_from_json(playlist, entry))
+                entries.append(urlEntry.from_json(playlist, entry, False))
 
         playlist_informations["entries"] = entries
 
@@ -104,7 +104,7 @@ class Playlists:
     def get_all_playlists(self, playlist):
         pls = []
         for pl in self.saved_playlists:
-            pls.append((pl, self.get_playlist(pl, playlist)))
+            pls.append((pl, self.get_playlist(pl, playlist, False)))
 
         return pls
 
