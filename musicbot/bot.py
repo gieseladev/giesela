@@ -1832,7 +1832,8 @@ class MusicBot(discord.Client):
 
                 em = Embed(title="**" + d.name + "**",
                            description=progress_bar + progress_text, colour=hex_to_dec("F9FF6E"))
-                em.set_author(name=d.artist)
+                em.set_author(name=d.artist, icon_url=choice(d.artists[
+                              0].images)["url"])
                 em.set_thumbnail(url=d.cover_url)
                 em.add_field(name="Album", value=d.album.name)
                 popularity_bar = create_bar(
