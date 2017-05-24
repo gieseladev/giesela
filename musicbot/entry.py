@@ -22,6 +22,7 @@ class BasePlaylistEntry:
         self.duration = 0
         self._spotify_track = None
         self.provided_song_timestamps = None
+        self.searched_additional_information = False
 
     @property
     def is_downloaded(self):
@@ -124,7 +125,7 @@ class BasePlaylistEntry:
 
 class URLPlaylistEntry(BasePlaylistEntry):
 
-    def __init__(self, playlist, url, title, duration=0, expected_filename=None, start_seconds=0, end_seconds=None, **meta):
+    def __init__(self, playlist, url, title, duration=0, expected_filename=None, start_seconds=0, end_seconds=None, spotify_track=None, provided_song_timestamps=None, update_additional_information=True, **meta):
         super().__init__()
 
         self.playlist = playlist
@@ -138,8 +139,12 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.meta = meta
 
         self.download_folder = self.playlist.downloader.download_folder
-        Thread(target=self.threaded_spotify_search).start()
-        Thread(target=self.search_for_timestamps).start()
+
+        self.provided_song_timestamps = provided_song_timestamps
+        self._spotify_track = spotify_track
+
+        if update_additional_information:
+            self.search_additional_info()
 
     @property
     def title(self):
@@ -159,39 +164,16 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self._spotify_track = SpotifyTrack.from_query(self._title)
 
     @classmethod
-    def from_json(cls, playlist, jsonstring):
+    def from_json(cls, playlist, jsonstring, update_additional_information=True):
         data = json.loads(jsonstring)
-        print(data)
         # TODO: version check
         url = data['url']
         title = data['title']
         duration = data['duration']
         downloaded = data['downloaded']
         filename = data['filename'] if downloaded else None
-        meta = ***REMOVED******REMOVED***
-
-        # TODO: Better [name] fallbacks
-        if 'channel' in data['meta']:
-            ch = playlist.bot.get_channel(data['meta']['channel']['id'])
-            meta['channel'] = ch or data['meta']['channel']['name']
-
-        if 'author' in data['meta']:
-            meta['author'] = meta['channel'].server.get_member(
-                data['meta']['author']['id'])
-
-        return cls(playlist, url, title, duration, filename, **meta)
-
-    @staticmethod
-    def entry_from_json(playlist, jsonstring):
-        data = json.loads(jsonstring)
-        # print(data)
-        # TODO: version check
-        url = data['url']
-        title = data['title']
-        duration = data['duration']
-        downloaded = data['downloaded']
-        filename = data['filename'] if downloaded else (
-            data["expected_filename"] if data["expected_filename"] is not None else None)
+        spotify_track = SpotifyTrack.from_dict(data.get("spotify_track", None))
+        provided_song_timestamps = data.get("provided_song_timestamps", None)
         start_seconds = data.get("start_seconds", 0)
         start_seconds = 0 if start_seconds is None else start_seconds
         end_seconds = data.get("end_seconds", duration)
@@ -209,7 +191,47 @@ class URLPlaylistEntry(BasePlaylistEntry):
             except:
                 meta['author'] = "unknown"
 
-        return URLPlaylistEntry(playlist, url, title, duration, filename, start_seconds, end_seconds, **meta)
+        return cls(playlist, url, title, duration, filename, start_seconds, end_seconds, spotify_track=spotify_track, provided_song_timestamps=provided_song_timestamps, update_additional_information=update_additional_information, **meta)
+
+    # @staticmethod
+    # def entry_from_json(playlist, jsonstring):
+    #     data = json.loads(jsonstring)
+    #     # print(data)
+    #     # TODO: version check
+    #     url = data['url']
+    #     title = data['title']
+    #     duration = data['duration']
+    #     downloaded = data['downloaded']
+    #     filename = data['filename'] if downloaded else (
+    #         data["expected_filename"] if data["expected_filename"] is not None else None)
+    #     start_seconds = data.get("start_seconds", 0)
+    #     start_seconds = 0 if start_seconds is None else start_seconds
+    #     end_seconds = data.get("end_seconds", duration)
+    #     meta = ***REMOVED******REMOVED***
+    #
+    #     # TODO: Better [name] fallbacks
+    #     if 'channel' in data['meta']:
+    #         ch = playlist.bot.get_channel(data['meta']['channel']['id'])
+    #         meta['channel'] = ch or data['meta']['channel']['name']
+    #
+    #     if 'author' in data['meta']:
+    #         try:
+    #             meta['author'] = meta['channel'].server.get_member(
+    #                 data['meta']['author']['id'])
+    #         except:
+    #             meta['author'] = "unknown"
+    #
+    # return URLPlaylistEntry(playlist, url, title, duration, filename,
+    # start_seconds, end_seconds, **meta)
+
+    def search_additional_info(self):
+        if self._spotify_track is None:
+            Thread(target=self.threaded_spotify_search).start()
+
+        if self.provided_song_timestamps is None:
+            Thread(target=self.search_for_timestamps).start()
+
+        self.searched_additional_information = True
 
     def search_for_timestamps(self):
         try:
@@ -226,6 +248,8 @@ class URLPlaylistEntry(BasePlaylistEntry):
             timestamp += (int(match.group(1)) *
                           3600) if match.group(1) is not None else 0
             songs[timestamp] = match.group(4)
+        if len(songs) < 1:
+            return
         self.provided_song_timestamps = songs
 
     def to_json(self):
@@ -248,7 +272,9 @@ class URLPlaylistEntry(BasePlaylistEntry):
             "expected_filename": self.expected_filename,
             'meta': meta_dict,
             "start_seconds": self.start_seconds,
-            "end_seconds": self.end_seconds
+            "end_seconds": self.end_seconds,
+            "spotify_track": self.spotify_track.get_dict(),
+            "provided_song_timestamps": self.provided_song_timestamps
             # Actually I think I can just getattr instead, getattr(discord,
             # type)
         ***REMOVED***

@@ -8,23 +8,40 @@ spotify = spotipy.Spotify()
 
 class SpotifyArtist:
 
-    def __init__(self, id, name, images, popularity, genres, uri):
+    def __init__(self, id, name, images, popularity, genres, uri, href):
         self.id = id
         self.name = name
         self.images = images
         self.popularity = popularity
         self.genres = genres
         self.uri = uri
+        self.href = href
 
     @classmethod
     def from_data(cls, data):
         artist_id = data["id"]
 
         data = spotify.artist("spotify:artist:" + artist_id)
-        return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"])
+        return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["external_urls"]["spotify"])
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["href"])
 
     def __str__(self):
         return "Artist \"***REMOVED***0.name***REMOVED***\" [***REMOVED***0.popularity***REMOVED***]".format(self)
+
+    def get_dict(self):
+        data = ***REMOVED***
+            "id": self.id,
+            "name": self.name,
+            "images": self.images,
+            "genres": self.genres,
+            "popularity": self.popularity,
+            "uri": self.uri,
+            "href": self.href
+        ***REMOVED***
+        return data
 
 
 class SpotifyAlbum:
@@ -40,8 +57,22 @@ class SpotifyAlbum:
     def from_data(cls, data):
         return cls(data["id"], data["name"], [SpotifyArtist.from_data(artist) for artist in data["artists"]], data["images"], data["uri"])
 
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["id"], data["name"], [SpotifyArtist.from_dict(artist) for artist in data["artists"]], data["duration"], data["images"], data["uri"])
+
     def __str__(self):
         return "Album \"***REMOVED***0.name***REMOVED***\" by ***REMOVED***0.artists***REMOVED***".format(self)
+
+    def get_dict(self):
+        data = ***REMOVED***
+            "id": self.id,
+            "name": self.name,
+            "artists": [artist.get_dict() for artist in self.artists],
+            "images": self.images,
+            "uri": self.uri
+        ***REMOVED***
+        return data
 
 
 class SpotifyTrack:
@@ -79,6 +110,13 @@ class SpotifyTrack:
 
         return cls(track["id"], track["name"], artists, track["duration_ms"] / 1000, album, track["popularity"], track["uri"], query, cer)
 
+    @classmethod
+    def from_dict(cls, data):
+        if data is None:
+            return None
+
+        return cls(data["id"], data["name"], [SpotifyArtist.from_dict(artist) for artist in data["artists"]], data["duration"], SpotifyAlbum.from_dict(data["album"]), data["popularity"], data["uri"], data["query"], data["certainty"])
+
     @property
     def cover_url(self):
         return self.album.images[0]["url"]
@@ -86,6 +124,20 @@ class SpotifyTrack:
     @property
     def artist(self):
         return ", ".join(artist.name for artist in self.artists)
+
+    def get_dict(self):
+        data = ***REMOVED***
+            "id": self.id,
+            "name": self.name,
+            "artists": [artist.get_dict() for artist in self.artists],
+            "duration": self.duration,
+            "album": self.album.get_dict(),
+            "popularity": self.popularity,
+            "uri": self.uri,
+            "query": self.query,
+            "certainty": self.certainty
+        ***REMOVED***
+        return data
 
 
 def similar(a, b):
