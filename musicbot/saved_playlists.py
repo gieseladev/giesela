@@ -62,7 +62,7 @@ class Playlists:
         name = name.lower().strip().replace(" ", "_")
 
         try:
-            with open(self.playlist_save_location + str(name) + ".txt", "w") as f:
+            with open(self.playlist_save_location + str(name) + ".gpl", "w") as f:
                 f.write("\n;\n".join([entry.to_json() for entry in entries]))
         except Exception as e:
             raise ValueError(str(e))
@@ -71,7 +71,7 @@ class Playlists:
         if not self.playlists.has_section(name):
             self.playlists.add_section(name)
         self.playlists.set(
-            name, "location", self.playlist_save_location + str(name) + ".txt")
+            name, "location", self.playlist_save_location + str(name) + ".gpl")
         self.playlists.set(name, "author", str(author_id))
         self.playlists.set(name, "entries", str(len(entries)))
 
