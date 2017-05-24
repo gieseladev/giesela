@@ -8,24 +8,25 @@ spotify = spotipy.Spotify()
 
 class SpotifyArtist:
 
-    def __init__(self, id, name, images, popularity, genres, uri):
+    def __init__(self, id, name, images, popularity, genres, uri, href):
         self.id = id
         self.name = name
         self.images = images
         self.popularity = popularity
         self.genres = genres
         self.uri = uri
+        self.href = href
 
     @classmethod
     def from_data(cls, data):
         artist_id = data["id"]
 
         data = spotify.artist("spotify:artist:" + artist_id)
-        return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"])
+        return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["external_urls"]["spotify"])
 
     @classmethod
     def from_dict(cls, data):
-        return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"])
+        return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["href"])
 
     def __str__(self):
         return "Artist \"***REMOVED***0.name***REMOVED***\" [***REMOVED***0.popularity***REMOVED***]".format(self)
@@ -37,7 +38,8 @@ class SpotifyArtist:
             "images": self.images,
             "genres": self.genres,
             "popularity": self.popularity,
-            "uri": self.uri
+            "uri": self.uri,
+            "href": self.href
         ***REMOVED***
         return data
 
