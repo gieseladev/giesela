@@ -112,9 +112,9 @@ def to_timestamp(seconds):
 
     work_string = ""
     if d > 0:
-        return ":".join(str(x) for x in (d, h, m, s))
+        return ":".join(str(x) for x in (d, "***REMOVED***0:0>2***REMOVED***".format(h), "***REMOVED***0:0>2***REMOVED***".format(m), s))
     elif h > 0:
-        return ":".join(str(x) for x in (h, m, s))
+        return ":".join(str(x) for x in (h, "***REMOVED***0:0>2***REMOVED***".format(m), s))
     else:
         return ":".join(str(x) for x in (m, s))
 
