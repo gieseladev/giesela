@@ -22,6 +22,7 @@ class BasePlaylistEntry:
         self.duration = 0
         self._spotify_track = None
         self.provided_song_timestamps = None
+        self.searched_additional_information = False
 
     @property
     def is_downloaded(self):
@@ -139,15 +140,11 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
         self.download_folder = self.playlist.downloader.download_folder
 
+        self.provided_song_timestamps = provided_song_timestamps
+        self._spotify_track = spotify_track
+
         if update_additional_information:
-            self.provided_song_timestamps = provided_song_timestamps
-            self._spotify_track = spotify_track
-
-            if self._spotify_track is None:
-                Thread(target=self.threaded_spotify_search).start()
-
-            if self.provided_song_timestamps is None:
-                Thread(target=self.search_for_timestamps).start()
+            self.search_additional_info()
 
     @property
     def title(self):
@@ -226,6 +223,15 @@ class URLPlaylistEntry(BasePlaylistEntry):
     #
     # return URLPlaylistEntry(playlist, url, title, duration, filename,
     # start_seconds, end_seconds, **meta)
+
+    def search_additional_info(self):
+        if self._spotify_track is None:
+            Thread(target=self.threaded_spotify_search).start()
+
+        if self.provided_song_timestamps is None:
+            Thread(target=self.search_for_timestamps).start()
+
+        self.searched_additional_information = True
 
     def search_for_timestamps(self):
         try:
