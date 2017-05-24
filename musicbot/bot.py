@@ -1791,23 +1791,24 @@ class MusicBot(discord.Client):
         """
 
         if player.current_entry:
-            if type(player.current_entry).__name__ == "StreamPlaylistEntry" and Radio.has_station_data(player.current_entry.title):
-                current_entry = await Radio.get_current_song(self.loop, player.current_entry.title)
-                if current_entry is not None:
-                    progress = current_entry["progress"]
-                    length = current_entry["duration"]
-
-                    prog_str = '[***REMOVED******REMOVED***/***REMOVED******REMOVED***]'.format(*list(map(lambda x: "***REMOVED***0:0>2***REMOVED***:***REMOVED***1:0>2***REMOVED***".format(
-                        (x.seconds // 60) % 60, x.seconds % 60), [timedelta(seconds=progress), timedelta(seconds=length)])))
-
-                    em = Embed(title=current_entry["title"], url=current_entry[
-                               "youtube"], description="\n\n*Playing from* ***REMOVED******REMOVED***".format(player.current_entry.title))
-                    em.set_thumbnail(url=current_entry["cover"])
-                    em.set_author(name=current_entry["artist"])
-                    em.set_footer(text=prog_str)
-                    await self.send_message(channel, embed=em)
-                    return
             if type(player.current_entry).__name__ == "StreamPlaylistEntry":
+                if Radio.has_station_data(player.current_entry.title):
+                    current_entry = await Radio.get_current_song(self.loop, player.current_entry.title)
+                    if current_entry is not None:
+                        progress = current_entry["progress"]
+                        length = current_entry["duration"]
+
+                        prog_str = '[***REMOVED******REMOVED***/***REMOVED******REMOVED***]'.format(*list(map(lambda x: "***REMOVED***0:0>2***REMOVED***:***REMOVED***1:0>2***REMOVED***".format(
+                            (x.seconds // 60) % 60, x.seconds % 60), [timedelta(seconds=progress), timedelta(seconds=length)])))
+
+                        em = Embed(title=current_entry["title"], url=current_entry[
+                                   "youtube"], description="\n\n*Playing from* ***REMOVED******REMOVED***".format(player.current_entry.title))
+                        em.set_thumbnail(url=current_entry["cover"])
+                        em.set_author(name=current_entry["artist"])
+                        em.set_footer(text=prog_str)
+                        await self.send_message(channel, embed=em)
+                        return
+
                 if player.current_entry.radio_station_data is not None:
                     return Response("Playing *radio* *****REMOVED******REMOVED***** for ***REMOVED******REMOVED***".format(player.current_entry.radio_station_data.name, format_time(player.progress)))
                 else:
@@ -1823,12 +1824,20 @@ class MusicBot(discord.Client):
 
             if player.current_entry.spotify_track is not None and player.current_entry.spotify_track.certainty > .8:
                 d = player.current_entry.spotify_track
-                em = Embed(title=d.name, description="".join("■" if x < 20 * (player.progress /
-                                                                              (player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration)) else "□" for x in range(1, 21)))
+
+                progress_bar = "".join("■" if x < 20 * (player.progress / (
+                    player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration)) else "□" for x in range(1, 21))
+                progress_text = " [***REMOVED******REMOVED***/***REMOVED******REMOVED***]".format(to_timestamp(player.progress), to_timestamp(
+                    player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration))
+
+                em = Embed(title="**" + d.name + "**",
+                           description=progress_bar + progress_text)
                 em.set_author(name=d.artist)
                 em.set_thumbnail(url=d.cover_url)
-                em.set_footer(text='[***REMOVED******REMOVED***/***REMOVED******REMOVED***]'.format(*list(map(lambda x: "***REMOVED***0:0>2***REMOVED***:***REMOVED***1:0>2***REMOVED***".format(
-                    (x // 60) % 60, x % 60), [player.progress, player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration]))))
+                em.add_field(name="Album", value=d.album.name)
+                popularity_bar = "".join(
+                    "★" if x < d.popularity / 10 else "☆" for x in range(1, 11))
+                em.add_field(name="Popularity", value=popularity_bar)
 
                 await self.send_message(channel, embed=em)
             elif player.current_entry.provides_timestamps:
@@ -2186,8 +2195,11 @@ class MusicBot(discord.Client):
             lines.append('\n*... and %s more*' % unlisted)
 
         if len(lines) > 0:
-            lines.append("\n*Queue has a total duration of *****REMOVED******REMOVED******".format(
-                format_time(sum([entry.duration for entry in player.playlist.entries]), True, 5, 2)))
+            total_time = sum(
+                [entry.duration for entry in player.playlist.entries])
+            if total_time > 0:
+                lines.append("\n*Queue has a total duration of *****REMOVED******REMOVED******".format(
+                    format_time(total_time), True, 5, 2))
 
         if not lines:
             lines.append(
