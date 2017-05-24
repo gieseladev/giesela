@@ -59,7 +59,7 @@ class SpotifyAlbum:
 
     @classmethod
     def from_dict(cls, data):
-        return cls(data["id"], data["name"], [SpotifyArtist.from_dict(artist) for artist in data["artists"]], data["duration"], data["images"], data["uri"])
+        return cls(data["id"], data["name"], [SpotifyArtist.from_dict(artist) for artist in data["artists"]], data["images"], data["uri"])
 
     def __str__(self):
         return "Album \"{0.name}\" by {0.artists}".format(self)
