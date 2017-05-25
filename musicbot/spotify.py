@@ -20,10 +20,13 @@ class SpotifyArtist:
 
     @classmethod
     def from_data(cls, data):
-        artist_id = data["id"]
-
-        data = spotify.artist(artist_id)
-        return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["external_urls"]["spotify"])
+        try:
+            return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["external_urls"]["spotify"])
+        except KeyError:
+            # if the provided data isn't the full data then just go and get it
+            # yourself
+            data = spotify.artist(data["id"])
+            return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["external_urls"]["spotify"])
 
     @classmethod
     def from_dict(cls, data):
@@ -114,7 +117,8 @@ class SpotifyTrack:
 
         spotify_track = cls.from_data(track)
 
-        spotify_track.certainty = get_certainty(query, track["name"], artists)
+        spotify_track.certainty = get_certainty(
+            query, track["name"], spotify_track.artists)
         spotify_track.query = query
 
         return spotify_track
