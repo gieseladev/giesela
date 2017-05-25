@@ -99,7 +99,8 @@ class Response:
 class MusicBot(discord.Client):
     trueStringList = ["true", "1", "t", "y", "yes", "yeah",
                       "yup", "certainly", "uh-huh", "affirmitive", "activate"]
-    channelFreeCommands = ["say", "quote", "9gag", "execute"]
+    channelFreeCommands = ["say", "quote",
+                           "9gag", "execute", "giphy", "twitter"]
     privateChatCommands = ["c", "ask", "requestfeature", "random",
                            "translate", "help", "say", "broadcast", "news", "game", "wiki", "cah", "execute", "secret"]
     lonelyModeRunning = False
@@ -1801,7 +1802,7 @@ class MusicBot(discord.Client):
                         prog_str = '[***REMOVED******REMOVED***/***REMOVED******REMOVED***]'.format(*list(map(lambda x: "***REMOVED***0:0>2***REMOVED***:***REMOVED***1:0>2***REMOVED***".format(
                             (x.seconds // 60) % 60, x.seconds % 60), [timedelta(seconds=progress), timedelta(seconds=length)])))
 
-                        em = Embed(title=current_entry["title"], url=current_entry[
+                        em = Embed(title=current_entry["title"], colour=hex_to_dec(FF88F0), url=current_entry[
                                    "youtube"], description="\n\n*Playing from* ***REMOVED******REMOVED***".format(player.current_entry.title))
                         em.set_thumbnail(url=current_entry["cover"])
                         em.set_author(name=current_entry["artist"])
