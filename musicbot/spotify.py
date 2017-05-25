@@ -176,7 +176,8 @@ class SpotifyTrack:
 #
 #
 # def get_featured_playlist():
-#     return [SpotifyPlaylist.from_data(playlist) for playlist in spotify.featured_playlists()]
+# return [SpotifyPlaylist.from_data(playlist) for playlist in
+# spotify.featured_playlists()]
 
 
 def similar(a, b):
