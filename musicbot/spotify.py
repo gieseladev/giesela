@@ -37,7 +37,7 @@ class SpotifyArtist:
         if self._top_tracks is None:
             data = spotify.artist_top_tracks(self.id, "CH")
             self._top_tracks = [
-                SpotifyTrack.from_data(entry) for entry in data]
+                SpotifyTrack.from_data(entry) for entry in data["tracks"]]
 
         return self._top_tracks
 
