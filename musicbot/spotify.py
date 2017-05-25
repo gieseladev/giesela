@@ -8,7 +8,7 @@ spotify = spotipy.Spotify()
 
 class SpotifyArtist:
 
-    def __init__(self, id, name, images, popularity, genres, uri, href):
+    def __init__(self, id, name, images, popularity, genres, uri, href, top_tracks=None):
         self.id = id
         self.name = name
         self.images = images
@@ -16,17 +16,27 @@ class SpotifyArtist:
         self.genres = genres
         self.uri = uri
         self.href = href
+        self._top_tracks = top_tracks
 
     @classmethod
     def from_data(cls, data):
         artist_id = data["id"]
 
-        data = spotify.artist("spotify:artist:" + artist_id)
+        data = spotify.artist(artist_id)
         return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["external_urls"]["spotify"])
 
     @classmethod
     def from_dict(cls, data):
         return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["href"])
+
+    @property
+    def top_tracks(self):
+        if self._top_tracks is None:
+            data = spotify.artist_top_tracks(self.id, "CH")
+            self._top_tracks = [
+                SpotifyTrack.from_data(entry) for entry in data]
+
+        return self._top_tracks
 
     def __str__(self):
         return "Artist \"***REMOVED***0.name***REMOVED***\" [***REMOVED***0.popularity***REMOVED***]".format(self)
@@ -138,6 +148,35 @@ class SpotifyTrack:
             "certainty": self.certainty
         ***REMOVED***
         return data
+
+
+# class SpotifyPlaylist:
+#
+#     def __init__(self, id, name, images, tracks):
+#         self.id = id
+#         self.name = name
+#         self.images = images
+#         self.tracks = tracks
+#
+#     @classmethod
+#     def from_data(cls, data):
+#         return cls(data["id"], data["name"], data["images"], [SpotifyTrack.from_data(entry) for entry in data["tracks"]])
+#
+#     @classmethod
+#     def from_dict(cls, data):
+#         return cls(data["id"], data["name"], data["images"], data["tracks"])
+#
+#     def get_dict(self):
+#         data = ***REMOVED***
+#             "id": self.id,
+#             "name": self.name,
+#             "images": self.images,
+#             "tracks": [track.get_dict() for track in self.tracks]
+#         ***REMOVED***
+#
+#
+# def get_featured_playlist():
+#     return [SpotifyPlaylist.from_data(playlist) for playlist in spotify.featured_playlists()]
 
 
 def similar(a, b):
