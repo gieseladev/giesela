@@ -1822,7 +1822,7 @@ class MusicBot(discord.Client):
                 await self.safe_delete_message(self.server_specific_data[server]['last_np_msg'])
                 self.server_specific_data[server]['last_np_msg'] = None
 
-            if player.current_entry.spotify_track is not None and player.current_entry.spotify_track.certainty > .8:
+            if player.current_entry.spotify_track is not None and player.current_entry.spotify_track.certainty > .6:
                 d = player.current_entry.spotify_track
 
                 end = player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration
