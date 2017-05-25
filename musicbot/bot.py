@@ -1982,10 +1982,10 @@ class MusicBot(discord.Client):
         player.playlist.clear()
         return Response(':put_litter_in_its_place:', delete_after=20)
 
-    async def cmd_skip(self, player, channel, author, message, permissions, voice_channel):
+    async def cmd_skip(self, player, channel, author, message, permissions, voice_channel, skip_amount=None):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***skip
+            ***REMOVED***command_prefix***REMOVED***skip [all]
 
         Skips the current song when enough votes are cast, or by the bot owner.
         """
@@ -2009,7 +2009,7 @@ class MusicBot(discord.Client):
                 log("Something strange is happening.  "
                     "You might want to restart the bot if it doesn't start working.")
 
-        if player.current_entry.provides_timestamps:
+        if player.current_entry.provides_timestamps and (skip_amount is None or skip_amount.lower() != "all"):
             return await self.cmd_skipto(player, str(player.current_entry.get_current_song_from_timestamp(player.progress)["end"]))
 
         if author.id == self.config.owner_id \
