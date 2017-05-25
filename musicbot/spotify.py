@@ -108,17 +108,25 @@ class SpotifyTrack:
 
         search_result = spotify.search(query, limit=1, type="track")
         if len(search_result) < 1 or len(search_result["tracks"]["items"]) < 1:
-            return SpotifyTrack.EmptyTrack(query)
+            return cls.EmptyTrack(query)
 
         track = search_result["tracks"]["items"][0]
-        album = SpotifyAlbum.from_data(track["album"])
+
+        spotify_track = cls.from_data(track)
+
+        spotify_track.certainty = get_certainty(query, track["name"], artists)
+        spotify_track.query = query
+
+        return spotify_track
+
+    @classmethod
+    def from_data(cls, data):
+        album = SpotifyAlbum.from_data(data["album"])
 
         artists = [SpotifyArtist.from_data(artist)
-                   for artist in track["artists"]]
+                   for artist in data["artists"]]
 
-        cer = get_certainty(query, track["name"], artists)
-
-        return cls(track["id"], track["name"], artists, track["duration_ms"] / 1000, album, track["popularity"], track["uri"], query, cer)
+        return cls(data["id"], data["name"], artists, data["duration_ms"] / 1000, album, data["popularity"], data["uri"])
 
     @classmethod
     def from_dict(cls, data):
