@@ -14,7 +14,7 @@ class Radio:
 
     def has_station_data(radio_station):
         radio_station = "_".join(radio_station.lower().split())
-        return radio_station in ["energy_bern", "capital_fm", "bbc", "heart_london"]
+        return radio_station in ["energy_bern", "capital_fm", "bbc", "heart_london", "radio_32"]
 
     async def get_current_song(loop, radio_station):
         radio_station = "_".join(radio_station.lower().split())
@@ -26,6 +26,8 @@ class Radio:
             return await Radio._get_current_song_bbc(loop)
         elif radio_station == "heart_london":
             return await Radio._get_current_song_heart_london(loop)
+        elif radio_station == "radio_32":
+            return await Radio._get_current_song_radio32(loop)
 
         return None
 
@@ -131,6 +133,15 @@ class Radio:
             raise
             return None
 
+    async def _get_current_song_radio32(loop):
+        try:
+            async with aiohttp.ClientSession(loop=loop) as client:
+                async with client.get("http://www.radio32.ch/pages/rpc/rpc_panorama_programm_2015.cfm") as resp:
+                    cover_url, artist, song_name = re.search(r"<td class="cover".+?background-image: url\((.+?)\).+\n.+\n<p class="next">Zurzeit läuft<\/p>\n<p class=.+?>(.+?)<\/p>\n<p><p>(.+?)<\/p><\/p>", await resp.text()).groups(1, 2, 3)
+                    return ***REMOVED***"title": song_name, "artist": artist, "cover": "http://www.radio32.ch" + cover_url, "youtube": "http://www.radio32.ch/", "duration": 0, "progress": 0***REMOVED***
+        except:
+            raise
+            return None
 
 # loop = asyncio.get_event_loop()
 # asyncio.ensure_future(Radio.symphony_counter(loop))
