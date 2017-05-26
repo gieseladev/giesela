@@ -1,3 +1,3 @@
 # Links
 ---
-- [Changelog](changelogs.html)
+- [Changelog]({{ site.url}}{{ site.posts[0].url }})
