@@ -1845,10 +1845,12 @@ class MusicBot(discord.Client):
             elif player.current_entry.provides_timestamps:
                 local_progress = player.current_entry.get_local_progress(
                     player.progress)
-                em = Embed(title=player.current_entry.get_current_song_from_timestamp(player.progress)["name"], colour=65535, description=create_bar(
+                entry = player.current_entry.get_current_song_from_timestamp(
+                    player.progress)
+                em = Embed(title=entry["name"], colour=65535, description=create_bar(
                     local_progress[0] / local_progress[1], 20) + ' [{}/{}]'.format(to_timestamp(local_progress[0]), to_timestamp(local_progress[1])))
-                em.set_footer(text="Playing from \"{}\" [{}/{}]".format(
-                    player.current_entry.title, to_timestamp(player.progress), to_timestamp(player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration)))
+                em.set_footer(text="{}{} entry of \"{}\" [{}/{}]".format(entry["index"] + 1, ordinal(entry["index"] + 1),
+                                                                           player.current_entry.title, to_timestamp(player.progress), to_timestamp(player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration)))
                 await self.send_message(channel, embed=em)
             else:
                 song_progress = str(
