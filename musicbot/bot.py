@@ -40,7 +40,8 @@ from . import downloader, exceptions
 from .cleverbot import CleverWrap
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
-from .constants import AUDIO_CACHE_PATH, DEV_VERSION, DISCORD_MSG_CHAR_LIMIT
+from .constants import (AUDIO_CACHE_PATH, DEV_VERSION, DISCORD_MSG_CHAR_LIMIT,
+                        MASTER_VERSION)
 from .games.game_2048 import Game2048
 from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
