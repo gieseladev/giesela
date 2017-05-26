@@ -3,7 +3,7 @@ import re
 
 import requests
 
-MAIN_VERSION = '3.0.8'
+MAIN_VERSION = '3.0.9'
 SUB_VERSION = 'unstable'
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
