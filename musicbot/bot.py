@@ -2761,7 +2761,7 @@ class MusicBot(discord.Client):
         #     title, img, foot = pod.split("\;")
         #     em = Embed(title=title, colour=col)
         #     em.set_image(
-        #         url="https://raw.githubusercontent.com/siku2/MusicBot/master/data/pictures/custom%20ask/simon%20berger/" + img)
+        #         url="https://raw.githubusercontent.com/siku2/Giesela/master/data/pictures/custom%20ask/simon%20berger/" + img)
         #     em.set_footer(text=foot)
         #     await self.send_message(channel, embed=em)
         #     await asyncio.sleep(1)

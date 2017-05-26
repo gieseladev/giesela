@@ -13,7 +13,7 @@ DISCORD_MSG_CHAR_LIMIT = 2000
 
 def DEV_VERSION():
     page = requests.get(
-        "https://raw.githubusercontent.com/siku2/MusicBot/dev/musicbot/constants.py")
+        "https://raw.githubusercontent.com/siku2/Giesela/dev/musicbot/constants.py")
     matches = re.search(
         r"MAIN_VERSION = '(\d.\d.\d)'\nSUB_VERSION = '(.+?)'", page.content.decode("utf-8"))
 
