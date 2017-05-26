@@ -1,3 +1,3 @@
 # Links
 ---
-- [Changelog](changelogs.md)
+- [Changelog]({{ site.url}}{{ site.pages[0].url }})
