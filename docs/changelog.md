@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Changelog"
+date: 2017-05-26 02:21:00 +0000
+---
+
 # What's new
 
 - "Now Playing" Embeds have a different colour depending on their type:
