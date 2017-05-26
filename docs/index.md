@@ -1,3 +1,3 @@
 # Links
 ---
-- [Changelog](changelog.md)
+- [Changelog](changelogs.html)
