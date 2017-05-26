@@ -9,4 +9,4 @@ A timestamp-entry is an [entry](***REMOVED******REMOVED*** site.url ***REMOVED**
 ### Trivia
 Timestamp-Entry [Embed](***REMOVED******REMOVED*** site.url ***REMOVED******REMOVED***/reference/embed)s -when using [`!np`](***REMOVED******REMOVED*** site.url ***REMOVED******REMOVED***/reference/commands/np)- have the colour **<span style="color:#00FFFF">cyan</span>**
 ### Example
-![Timestamp-Entry example image](https://raw.githubusercontent.com/siku2/MusicBot/master/docs/assets/timestamp-entry.PNG)
+![Timestamp-Entry example image](***REMOVED******REMOVED*** site.url ***REMOVED******REMOVED***/assets/timestamp-entry.PNG)

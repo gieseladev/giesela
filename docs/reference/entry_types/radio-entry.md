@@ -9,4 +9,4 @@ A radio-entry is a special type of a [Stream-entry](***REMOVED******REMOVED*** s
 ### Trivia
 Radio-Entry [Embed](***REMOVED******REMOVED*** site.url ***REMOVED******REMOVED***/reference/embed)s -when using [`!np`](***REMOVED******REMOVED*** site.url ***REMOVED******REMOVED***/reference/commands/np)- have the colour **<span style="color:#FF88F0">magenta</span>**
 ### Example
-![Radio-Entry example image](https://raw.githubusercontent.com/siku2/MusicBot/master/docs/assets/radio-entry.PNG)
+![Radio-Entry example image](***REMOVED******REMOVED*** site.url ***REMOVED******REMOVED***/assets/radio-entry.PNG)

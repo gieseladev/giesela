@@ -1,6 +1,6 @@
 theme: jekyll-theme-tactile
 title: Giesela
-url: https://siku2.github.io/MusicBot
+url: &url https://siku2.github.io/MusicBot
 google_analytics: UA-100028815-1
 permalink: /:title
-favicon: https://raw.githubusercontent.com/siku2/MusicBot/master/docs/assets/favicon.png
+favicon: *url/assets/favicon.png
