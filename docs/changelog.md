@@ -1,7 +1,6 @@
 ---
-layout: default
-title: "Changelog"
-description: "Even the best need some changes sometimes"
+title: Changelog
+description: Even the best need some changes sometimes
 ---
 
 # What's new
