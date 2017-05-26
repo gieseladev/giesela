@@ -9,4 +9,4 @@ A complex-entry is an [entry]({{ site.url }}/reference/entry_types/entry) which 
 ### Trivia
 Complex-Entry [Embed]({{ site.url }}/reference/embed)s -when using [`!np`]({{ site.url }}/reference/commands/np)- have the colour **<span style="color:#F9FF6E">yellow</span>**
 ### Example
-![Complex-Entry example image](https://raw.githubusercontent.com/siku2/MusicBot/master/docs/assets/complex-entry.PNG)
+![Complex-Entry example image]({{ site.url }}/assets/complex-entry.PNG)
