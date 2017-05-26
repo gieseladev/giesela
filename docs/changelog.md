@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Changelog"
-date: 2017-05-26 02:21:00 +0000
+description: "Even the best need some changes sometimes"
 ---
 
 # What's new
