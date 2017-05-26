@@ -112,16 +112,19 @@ def get_video_timestamps(url):
         if songs is not None:
             return songs
 
-    video_id = re.match(
-        r"(?:(?:https?:\/\/)(?:www)?\.?(?:youtu\.?be)(?:\.com)?\/(?:.*[=/])*)([^= &?/\r\n]{8,11})", url).group(1)
-    resp = requests.get(
-        "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo&part=snippet&order=relevance&textFormat=plainText&videoId=" + video_id)
-    data = resp.json()
-    for comment in data["items"]:
-        songs = _run_timestamp_matcher(
-            comment["snippet"]["topLevelComment"]["snippet"]["textDisplay"])
-        if songs is not None and len(songs) > 1:
-            return songs
+    try:
+        video_id = re.match(
+            r"(?:(?:https?:\/\/)(?:www)?\.?(?:youtu\.?be)(?:\.com)?\/(?:.*[=/])*)([^= &?/\r\n]{8,11})", url).group(1)
+        resp = requests.get(
+            "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo&part=snippet&order=relevance&textFormat=plainText&videoId=" + video_id)
+        data = resp.json()
+        for comment in data["items"]:
+            songs = _run_timestamp_matcher(
+                comment["snippet"]["topLevelComment"]["snippet"]["textDisplay"])
+            if songs is not None and len(songs) > 1:
+                return songs
+    except:
+        pass
 
     return None
 
