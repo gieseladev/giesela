@@ -2,7 +2,6 @@
 title: Changelog
 description: Even the best need some changes sometimes
 ---
-
 # What's new
 
 - "Now Playing" Embeds have a different colour depending on their type:
