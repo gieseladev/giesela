@@ -99,7 +99,8 @@ class Response:
 class MusicBot(discord.Client):
     trueStringList = ["true", "1", "t", "y", "yes", "yeah",
                       "yup", "certainly", "uh-huh", "affirmitive", "activate"]
-    channelFreeCommands = ["say", "quote", "9gag", "execute"]
+    channelFreeCommands = ["say", "quote",
+                           "9gag", "execute", "giphy", "twitter"]
     privateChatCommands = ["c", "ask", "requestfeature", "random",
                            "translate", "help", "say", "broadcast", "news", "game", "wiki", "cah", "execute", "secret"]
     lonelyModeRunning = False
@@ -1801,7 +1802,7 @@ class MusicBot(discord.Client):
                         prog_str = '[***REMOVED******REMOVED***/***REMOVED******REMOVED***]'.format(*list(map(lambda x: "***REMOVED***0:0>2***REMOVED***:***REMOVED***1:0>2***REMOVED***".format(
                             (x.seconds // 60) % 60, x.seconds % 60), [timedelta(seconds=progress), timedelta(seconds=length)])))
 
-                        em = Embed(title=current_entry["title"], url=current_entry[
+                        em = Embed(title=current_entry["title"], colour=hex_to_dec(FF88F0), url=current_entry[
                                    "youtube"], description="\n\n*Playing from* ***REMOVED******REMOVED***".format(player.current_entry.title))
                         em.set_thumbnail(url=current_entry["cover"])
                         em.set_author(name=current_entry["artist"])
@@ -1822,7 +1823,7 @@ class MusicBot(discord.Client):
                 await self.safe_delete_message(self.server_specific_data[server]['last_np_msg'])
                 self.server_specific_data[server]['last_np_msg'] = None
 
-            if player.current_entry.spotify_track is not None and player.current_entry.spotify_track.certainty > .8:
+            if player.current_entry.spotify_track is not None and player.current_entry.spotify_track.certainty > .6:
                 d = player.current_entry.spotify_track
 
                 end = player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration
@@ -1844,10 +1845,12 @@ class MusicBot(discord.Client):
             elif player.current_entry.provides_timestamps:
                 local_progress = player.current_entry.get_local_progress(
                     player.progress)
-                em = Embed(title=player.current_entry.get_current_song_from_timestamp(player.progress)["name"], colour=65535, description=create_bar(
+                entry = player.current_entry.get_current_song_from_timestamp(
+                    player.progress)
+                em = Embed(title=entry["name"], colour=65535, description=create_bar(
                     local_progress[0] / local_progress[1], 20) + ' [***REMOVED******REMOVED***/***REMOVED******REMOVED***]'.format(to_timestamp(local_progress[0]), to_timestamp(local_progress[1])))
-                em.set_footer(text="Playing from \"***REMOVED******REMOVED***\" [***REMOVED******REMOVED***/***REMOVED******REMOVED***]".format(
-                    player.current_entry.title, to_timestamp(player.progress), to_timestamp(player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration)))
+                em.set_footer(text="***REMOVED******REMOVED******REMOVED******REMOVED*** entry of \"***REMOVED******REMOVED***\" [***REMOVED******REMOVED***/***REMOVED******REMOVED***]".format(entry["index"] + 1, ordinal(entry["index"] + 1),
+                                                                           player.current_entry.title, to_timestamp(player.progress), to_timestamp(player.current_entry.end_seconds if player.current_entry.end_seconds is not None else player.current_entry.duration)))
                 await self.send_message(channel, embed=em)
             else:
                 song_progress = str(
@@ -1982,10 +1985,10 @@ class MusicBot(discord.Client):
         player.playlist.clear()
         return Response(':put_litter_in_its_place:', delete_after=20)
 
-    async def cmd_skip(self, player, channel, author, message, permissions, voice_channel):
+    async def cmd_skip(self, player, channel, author, message, permissions, voice_channel, skip_amount=None):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***skip
+            ***REMOVED***command_prefix***REMOVED***skip [all]
 
         Skips the current song when enough votes are cast, or by the bot owner.
         """
@@ -2009,7 +2012,7 @@ class MusicBot(discord.Client):
                 log("Something strange is happening.  "
                     "You might want to restart the bot if it doesn't start working.")
 
-        if player.current_entry.provides_timestamps:
+        if player.current_entry.provides_timestamps and (skip_amount is None or skip_amount.lower() != "all"):
             return await self.cmd_skipto(player, str(player.current_entry.get_current_song_from_timestamp(player.progress)["end"]))
 
         if author.id == self.config.owner_id \
