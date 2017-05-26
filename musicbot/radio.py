@@ -137,7 +137,7 @@ class Radio:
         try:
             async with aiohttp.ClientSession(loop=loop) as client:
                 async with client.get("http://www.radio32.ch/pages/rpc/rpc_panorama_programm_2015.cfm") as resp:
-                    cover_url, artist, song_name = re.search(r"<td class="cover".+?background-image: url\((.+?)\).+\n.+\n<p class="next">Zurzeit läuft<\/p>\n<p class=.+?>(.+?)<\/p>\n<p><p>(.+?)<\/p><\/p>", await resp.text()).groups(1, 2, 3)
+                    cover_url, artist, song_name = re.search(r"<td class=\"cover\".+?background-image: url\((.+?)\).+\n.+\n<p class=\"next\">Zurzeit läuft<\/p>\n<p class=.+?>(.+?)<\/p>\n<p><p>(.+?)<\/p><\/p>", await resp.text()).groups((1, 2, 3))
                     return {"title": song_name, "artist": artist, "cover": "http://www.radio32.ch" + cover_url, "youtube": "http://www.radio32.ch/", "duration": 0, "progress": 0}
         except:
             raise
