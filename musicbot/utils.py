@@ -84,6 +84,51 @@ def ordinal(n):
     return "th"
 
 
+def _run_timestamp_matcher(text):
+    songs = {}
+    for match in re.finditer(r"(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?\W+(.+?)(?:\n|$)", text):
+        timestamp = int(match.group(3))
+        timestamp += (int(match.group(2)) *
+                      60) if match.group(2) is not None else 0
+        timestamp += (int(match.group(1)) *
+                      3600) if match.group(1) is not None else 0
+        songs[timestamp] = match.group(4)
+
+    if len(songs) > 0:
+        return songs
+
+    return None
+
+
+def get_video_timestamps(url):
+    try:
+        desc = get_video_description(url)
+    except:
+        desc = None
+
+    if desc is not None:
+        songs = _run_timestamp_matcher(desc)
+
+        if songs is not None:
+            return songs
+
+    try:
+        video_id = re.match(
+            r"(?:(?:https?:\/\/)(?:www)?\.?(?:youtu\.?be)(?:\.com)?\/(?:.*[=/])*)([^= &?/\r\n]{8,11})", url).group(1)
+        resp = requests.get(
+            "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo&part=snippet&order=relevance&textFormat=plainText&videoId=" + video_id)
+        data = resp.json()
+        for comment in data["items"]:
+            songs = _run_timestamp_matcher(
+                comment["snippet"]["topLevelComment"]["snippet"]["textDisplay"])
+            if songs is not None and len(songs) > 1:
+                return songs
+    except:
+        pass
+
+    return None
+
+
 def get_video_description(url):
     resp = requests.get(url)
     bs = BeautifulSoup(resp.text, "lxml")

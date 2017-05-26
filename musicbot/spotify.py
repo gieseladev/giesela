@@ -8,7 +8,7 @@ spotify = spotipy.Spotify()
 
 class SpotifyArtist:
 
-    def __init__(self, id, name, images, popularity, genres, uri, href):
+    def __init__(self, id, name, images, popularity, genres, uri, href, top_tracks=None):
         self.id = id
         self.name = name
         self.images = images
@@ -16,17 +16,30 @@ class SpotifyArtist:
         self.genres = genres
         self.uri = uri
         self.href = href
+        self._top_tracks = top_tracks
 
     @classmethod
     def from_data(cls, data):
-        artist_id = data["id"]
-
-        data = spotify.artist("spotify:artist:" + artist_id)
-        return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["external_urls"]["spotify"])
+        try:
+            return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["external_urls"]["spotify"])
+        except KeyError:
+            # if the provided data isn't the full data then just go and get it
+            # yourself
+            data = spotify.artist(data["id"])
+            return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["external_urls"]["spotify"])
 
     @classmethod
     def from_dict(cls, data):
         return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["href"])
+
+    @property
+    def top_tracks(self):
+        if self._top_tracks is None:
+            data = spotify.artist_top_tracks(self.id, "CH")
+            self._top_tracks = [
+                SpotifyTrack.from_data(entry) for entry in data["tracks"]]
+
+        return self._top_tracks
 
     def __str__(self):
         return "Artist \"{0.name}\" [{0.popularity}]".format(self)
@@ -98,17 +111,26 @@ class SpotifyTrack:
 
         search_result = spotify.search(query, limit=1, type="track")
         if len(search_result) < 1 or len(search_result["tracks"]["items"]) < 1:
-            return SpotifyTrack.EmptyTrack(query)
+            return cls.EmptyTrack(query)
 
         track = search_result["tracks"]["items"][0]
-        album = SpotifyAlbum.from_data(track["album"])
+
+        spotify_track = cls.from_data(track)
+
+        spotify_track.certainty = get_certainty(
+            query, track["name"], spotify_track.artists)
+        spotify_track.query = query
+
+        return spotify_track
+
+    @classmethod
+    def from_data(cls, data):
+        album = SpotifyAlbum.from_data(data["album"])
 
         artists = [SpotifyArtist.from_data(artist)
-                   for artist in track["artists"]]
+                   for artist in data["artists"]]
 
-        cer = get_certainty(query, track["name"], artists)
-
-        return cls(track["id"], track["name"], artists, track["duration_ms"] / 1000, album, track["popularity"], track["uri"], query, cer)
+        return cls(data["id"], data["name"], artists, data["duration_ms"] / 1000, album, data["popularity"], data["uri"])
 
     @classmethod
     def from_dict(cls, data):
@@ -138,6 +160,36 @@ class SpotifyTrack:
             "certainty": self.certainty
         }
         return data
+
+
+# class SpotifyPlaylist:
+#
+#     def __init__(self, id, name, images, tracks):
+#         self.id = id
+#         self.name = name
+#         self.images = images
+#         self.tracks = tracks
+#
+#     @classmethod
+#     def from_data(cls, data):
+#         return cls(data["id"], data["name"], data["images"], [SpotifyTrack.from_data(entry) for entry in data["tracks"]])
+#
+#     @classmethod
+#     def from_dict(cls, data):
+#         return cls(data["id"], data["name"], data["images"], data["tracks"])
+#
+#     def get_dict(self):
+#         data = {
+#             "id": self.id,
+#             "name": self.name,
+#             "images": self.images,
+#             "tracks": [track.get_dict() for track in self.tracks]
+#         }
+#
+#
+# def get_featured_playlist():
+# return [SpotifyPlaylist.from_data(playlist) for playlist in
+# spotify.featured_playlists()]
 
 
 def similar(a, b):

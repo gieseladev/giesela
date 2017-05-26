@@ -4,11 +4,13 @@ import re
 import traceback
 from threading import Thread
 
+import requests
+
 import asyncio
 
 from .exceptions import ExtractionError
 from .spotify import SpotifyTrack
-from .utils import get_header, get_video_description, md5sum, slugify
+from .utils import get_header, get_video_timestamps, md5sum, slugify
 
 
 class BasePlaylistEntry:
@@ -148,16 +150,13 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
     @property
     def title(self):
-        if self.spotify_track is not None and self.spotify_track.certainty > .7:
+        if self.spotify_track is not None and self.spotify_track.certainty > .6:
             return self.spotify_track.name + " - " + self.spotify_track.artist
         else:
             return self._title
 
     @property
     def spotify_track(self):
-        # if self._spotify_track is None:
-        #     self._spotify_track = SpotifyTrack.from_query(self._title)
-
         return self._spotify_track
 
     def threaded_spotify_search(self):
@@ -234,22 +233,11 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.searched_additional_information = True
 
     def search_for_timestamps(self):
-        try:
-            desc = get_video_description(self.url)
-        except:
-            raise
-            return
+        songs = get_video_timestamps(self.url)
 
-        songs = {}
-        for match in re.finditer(r"(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?\s(.+?)(?:\n|$)", desc):
-            timestamp = int(match.group(3))
-            timestamp += (int(match.group(2)) *
-                          60) if match.group(2) is not None else 0
-            timestamp += (int(match.group(1)) *
-                          3600) if match.group(1) is not None else 0
-            songs[timestamp] = match.group(4)
         if len(songs) < 1:
             return
+
         self.provided_song_timestamps = songs
 
     def to_json(self):
