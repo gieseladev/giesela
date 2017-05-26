@@ -1,3 +1,3 @@
-# This is a test
+# Links
 ---
-And I'm just testing things because I [can](changelog.md)
+- [Changelog](changelog.md)
