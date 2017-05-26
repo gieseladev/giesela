@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="***REMOVED******REMOVED*** site.lang | default: "en-US" ***REMOVED******REMOVED***">
+  ***REMOVED***% if site.favicon %***REMOVED***
+    <link rel="icon" type="image/png" href="***REMOVED******REMOVED*** site.favicon ***REMOVED******REMOVED***">
+  ***REMOVED***% endif %***REMOVED***
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -27,7 +30,7 @@
 
         <footer>
         ***REMOVED***% if site.github.is_project_page %***REMOVED***
-          ***REMOVED******REMOVED*** site.title | default: site.github.repository_name ***REMOVED******REMOVED*** is maintained by <a href="***REMOVED******REMOVED*** site.github.owner_url ***REMOVED******REMOVED***">***REMOVED******REMOVED*** site.github.owner_name ***REMOVED******REMOVED***</a><br>
+          by <a href="***REMOVED******REMOVED*** site.github.owner_url ***REMOVED******REMOVED***">***REMOVED******REMOVED*** site.github.owner_name ***REMOVED******REMOVED***</a><br>
         ***REMOVED***% endif %***REMOVED***
         </footer>
 
