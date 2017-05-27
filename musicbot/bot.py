@@ -2161,7 +2161,7 @@ class MusicBot(discord.Client):
                 nextline = '`{}.` **{}** added by **{}**'.format(
                     i, item.title, item.meta['author'].name).strip()
                 if item.provides_timestamps:
-                    for ind, sub_item in enumerate(item.sub_queue(), 1)[:3]:
+                    for ind, sub_item in list(enumerate(item.sub_queue(), 1))[:3]:
                         nextline = "   ►{}. **{}**".format(
                             ind, sub_item["name"])
                         currentlinesum = sum(len(x) + 1 for x in lines)
