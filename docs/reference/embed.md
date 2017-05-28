@@ -27,4 +27,4 @@ The standard embed can have:
   - Text
 
 ### Example
-![Example Image of an Embed]({{ site.url }}/assets/embed.png)
+![Example Image of an Embed]({{ site.url }}/assets/embed.PNG)
