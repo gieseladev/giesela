@@ -116,7 +116,7 @@ class BasePlaylistEntry:
         return current_title
 
     def get_timestamped_song(self, index):
-        return self.sub_queue[index]
+        return self.sub_queue()[index]
 
     def get_local_progress(self, progress):
         if not self.provides_timestamps:
