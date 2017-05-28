@@ -2,6 +2,7 @@
 title: Command np
 layout: reference
 ---
+
 # "Now Playing" `np`
 ---
 ### Command Structure

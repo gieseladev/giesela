@@ -1,5 +1,5 @@
 ---
-title: Timestamp-Entry
+title: Radio-Entry
 layout: reference
 ---
 # Timestamp-Entry
