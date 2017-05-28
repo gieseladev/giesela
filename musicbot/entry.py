@@ -256,10 +256,8 @@ class URLPlaylistEntry(BasePlaylistEntry):
             'meta': meta_dict,
             "start_seconds": self.start_seconds,
             "end_seconds": self.end_seconds,
-            "spotify_track": self.spotify_track.get_dict(),
+            "spotify_track": self.spotify_track.get_dict() if self.spotify_track is not None else None,
             "provided_song_timestamps": self.provided_song_timestamps
-            # Actually I think I can just getattr instead, getattr(discord,
-            # type)
         }
         return data
 
