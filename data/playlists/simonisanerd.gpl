@@ -76,7 +76,7 @@
   "duration": 936,
   "downloaded": false,
   "filename": null,
-  "expected_filename": "audio_cache\\youtube-17Zz7cXdVXs-Luminous_Sword_-_Sword_Art_Online_Music_Extended.webm",
+  "expected_filename": null,
   "meta": ***REMOVED***
     "channel": ***REMOVED***
       "type": "Channel",
@@ -111,7 +111,7 @@
   "duration": 864,
   "downloaded": false,
   "filename": null,
-  "expected_filename": "audio_cache\\youtube-c0XBTkC15DM-We_Have_to_Defeat_It_-_Sword_Art_Online_Music_Extended.webm",
+  "expected_filename": null,
   "meta": ***REMOVED***
     "channel": ***REMOVED***
       "type": "Channel",
@@ -146,7 +146,7 @@
   "duration": 2641,
   "downloaded": false,
   "filename": null,
-  "expected_filename": "audio_cache\\youtube-Xyq2jWEd1yI-Confront_Battle_-_Sword_Art_Online_Music_Extended.webm",
+  "expected_filename": null,
   "meta": ***REMOVED***
     "channel": ***REMOVED***
       "type": "Channel",
@@ -181,7 +181,7 @@
   "duration": 848,
   "downloaded": false,
   "filename": null,
-  "expected_filename": "audio_cache\\youtube-byFkvbz2Za0-Swordland_-_Sword_Art_Online_Music_Extended.webm",
+  "expected_filename": null,
   "meta": ***REMOVED***
     "channel": ***REMOVED***
       "type": "Channel",
@@ -199,6 +199,111 @@
   "spotify_track": ***REMOVED***
     "id": null,
     "name": "Swordland \n Sword Art Online Music Extended",
+    "artists": null,
+    "duration": null,
+    "album": null,
+    "popularity": null,
+    "uri": null,
+    "query": null,
+    "certainty": 0
+  ***REMOVED***,
+  "provided_song_timestamps": null
+***REMOVED***, ***REMOVED***
+  "version": 2,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=655j9WXi4DA",
+  "title": "One of the top Ost: Fate Zero - Tragedy And Fate",
+  "duration": 110,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null,
+  "spotify_track": ***REMOVED***
+    "id": null,
+    "name": "One of the topFate Zero \n Tragedy",
+    "artists": null,
+    "duration": null,
+    "album": null,
+    "popularity": null,
+    "uri": null,
+    "query": null,
+    "certainty": 0
+  ***REMOVED***,
+  "provided_song_timestamps": null
+***REMOVED***, ***REMOVED***
+  "version": 2,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=0hbz7_ls4d0",
+  "title": "[Guilty Crown] \u03barOn\u0451 (krone)",
+  "duration": 342,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null,
+  "spotify_track": ***REMOVED***
+    "id": null,
+    "name": "\u03barOn\u0451",
+    "artists": null,
+    "duration": null,
+    "album": null,
+    "popularity": null,
+    "uri": null,
+    "query": null,
+    "certainty": 0
+  ***REMOVED***,
+  "provided_song_timestamps": null
+***REMOVED***, ***REMOVED***
+  "version": 2,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=scqSanbCV-Q",
+  "title": "Code Geass - Madder Sky",
+  "duration": 177,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-scqSanbCV-Q-Code_Geass_-_Madder_Sky.webm",
+  "meta": ***REMOVED***
+    "channel": ***REMOVED***
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    ***REMOVED***,
+    "author": ***REMOVED***
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    ***REMOVED***
+  ***REMOVED***,
+  "start_seconds": 0,
+  "end_seconds": null,
+  "spotify_track": ***REMOVED***
+    "id": null,
+    "name": "Code Geass \n Madder Sky",
     "artists": null,
     "duration": null,
     "album": null,
