@@ -28,6 +28,7 @@ from discord import Embed, utils
 from discord.enums import ChannelType
 from discord.ext.commands.bot import _get_variable
 from discord.object import Object
+from discord.utils import find
 from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from openpyxl import Workbook
@@ -433,14 +434,17 @@ class MusicBot(discord.Client):
             await self.ws.send(utils.to_json(payload))
             self.the_voice_clients[server.id].channel = channel
 
-    async def get_player(self, channel, create=False) -> MusicPlayer:
+    async def get_player(self, channel, create=False, auto_summon=True) -> MusicPlayer:
         server = channel.server
 
         if server.id not in self.players:
             if not create:
-                raise exceptions.CommandError(
-                    'The bot is not in a voice channel.  '
-                    'Use %ssummon to summon it to your voice channel.' % self.config.command_prefix)
+                if auto_summon:
+                    channel = await self.socket_summon(channel.server) or await self.goto_home(channel.server)
+                else:
+                    raise exceptions.CommandError(
+                        'The bot is not in a voice channel.  '
+                        'Use %ssummon to summon it to your voice channel.' % self.config.command_prefix)
 
             voice_client = await self.get_voice_client(channel)
 
@@ -878,7 +882,7 @@ class MusicBot(discord.Client):
     async def socket_summon(self, server_id, summoner_id=None):
         server = self.get_server(server_id)
         if server == None:
-            return
+            return False
 
         channels = server.channels
         target_channel = None
@@ -894,22 +898,23 @@ class MusicBot(discord.Client):
                 max_members = len(ch.voice_members)
 
         if target_channel == None:
-            return
+            return False
 
         voice_client = self.the_voice_clients.get(server.id, None)
         if voice_client is not None and voice_client.channel.server == server:
             await self.move_voice_client(target_channel)
-            return
+            return False
 
         chperms = target_channel.permissions_for(server.me)
 
         if not chperms.connect:
-            return
+            return False
         elif not chperms.speak:
-            return
+            return False
 
         await self.get_player(target_channel, create=True)
         self.socket_server.threaded_broadcast_information()
+        return target_channel
 
     async def cmd_help(self, channel, leftover_args):
         """
@@ -2857,7 +2862,8 @@ class MusicBot(discord.Client):
 
         channelID = " ".join(leftover_args)
         if channelID.lower() == "home":
-            channelID = "MusicBot's reign"
+            await self.goto_home(server)
+            return Response("yep")
 
         if channelID.lower() in ["bed", "sleep", "hell", "church", "school", "work", "666"]:
             await self.cmd_c(channel, author, "go to" + channelID)
@@ -2922,6 +2928,15 @@ class MusicBot(discord.Client):
 
         if self.config.auto_playlist:
             await self.on_player_finished_playing(player)
+
+    async def goto_home(self, server):
+        channel = find(lambda c: c.type == ChannelType.voice and any(x in c.name.lower().split(
+        ) for x in ["giesela", "musicbot", "bot", "music", "reign"]), server.channels)
+        if channel is None:
+            channel = choice(
+                filter(lambda c: c.type == ChannelType.voice, server.channels))
+        await self.get_player(channel, create=True)
+        return channel
 
     async def cmd_replay(self, player, channel, author):
         """
