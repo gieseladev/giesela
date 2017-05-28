@@ -69,7 +69,7 @@ class Playlists:
             with open(self.playlist_save_location + str(name) + ".gpl", "w") as f:
                 f.write(json.dumps([entry.to_dict() for entry in entries]))
         except Exception as e:
-            raise ValueError(str(e))
+            raise
             return False
 
         if not self.playlists.has_section(name):

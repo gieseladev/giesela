@@ -151,9 +151,9 @@ class SpotifyTrack:
         data = ***REMOVED***
             "id": self.id,
             "name": self.name,
-            "artists": [artist.get_dict() for artist in self.artists],
+            "artists": [artist.get_dict() for artist in self.artists] if self.artists is not None else None,
             "duration": self.duration,
-            "album": self.album.get_dict(),
+            "album": self.album.get_dict() if self.album is not None else None,
             "popularity": self.popularity,
             "uri": self.uri,
             "query": self.query,
