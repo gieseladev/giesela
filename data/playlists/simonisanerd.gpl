@@ -1,1 +1,211 @@
-[{"version": 1, "type": "URLPlaylistEntry", "url": "https://www.youtube.com/watch?v=PxZov8-DBHo", "title": "Greatest Battle Music OF All Times: Rule The Battlefield", "duration": 196, "downloaded": false, "filename": null, "expected_filename": "audio_cache\\youtube-PxZov8-DBHo-Greatest_Battle_Music_OF_All_Times_-_Rule_The_Battlefield.webm", "start_seconds": 0, "end_seconds": null}, {"version": 1, "type": "URLPlaylistEntry", "url": "https://www.youtube.com/watch?v=QCB7pUsEghg", "title": "Hiromi Mizutani Blessing (Kamisama no Inai Nichiyoubi OST) EpicMusicVn", "duration": 271, "downloaded": false, "filename": null, "expected_filename": "audio_cache\\youtube-QCB7pUsEghg-Hiromi_Mizutani_Blessing_Kamisama_no_Inai_Nichiyoubi_OST_EpicMusicVn.webm", "start_seconds": 0, "end_seconds": null}, {"version": 1, "type": "URLPlaylistEntry", "url": "https://www.youtube.com/watch?v=CaksNlNniis", "title": "No Game No Life Opening Full", "duration": 280, "downloaded": false, "filename": null, "expected_filename": "audio_cache\\youtube-CaksNlNniis-No_Game_No_Life_Opening_Full.webm", "start_seconds": 0, "end_seconds": null}, {"version": 1, "type": "URLPlaylistEntry", "url": "https://www.youtube.com/watch?v=1R80SH4VVLA", "title": "\"BYE BYE YESTERDAY\" Full Japanese + English Lyrics (Assassination Classroom/Ansatsu Kyoushitsu \u6697\u6bba\u6559\u5ba4)", "duration": 249, "downloaded": false, "filename": null, "expected_filename": "audio_cache\\youtube-1R80SH4VVLA-BYE_BYE_YESTERDAY_Full_Japanese_+_English_Lyrics_Assassination_Classroom_Ansatsu_Kyoushitsu.m4a", "start_seconds": 0, "end_seconds": null}, {"version": 1, "type": "URLPlaylistEntry", "url": "https://www.youtube.com/watch?v=9vx69Pe7Ncs", "title": "Fullmetal Alchemist Brotherhood Opening 4 (Chemistry - Period)", "duration": 218, "downloaded": false, "filename": null, "expected_filename": "audio_cache\\youtube-9vx69Pe7Ncs-Fullmetal_Alchemist_Brotherhood_Opening_4_Chemistry_-_Period.webm", "start_seconds": 0, "end_seconds": null}, {"version": 1, "type": "URLPlaylistEntry", "url": "https://www.youtube.com/watch?v=6Z97Y_AQzWQ", "title": "Sword Art Online Best Epic Battle Music/Ost", "duration": 581, "downloaded": false, "filename": null, "expected_filename": "audio_cache\\youtube-6Z97Y_AQzWQ-Sword_Art_Online_Best_Epic_Battle_Music_Ost.webm", "start_seconds": 0, "end_seconds": null}]
+[{
+  "version": 2,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=PxZov8-DBHo",
+  "title": "Greatest Battle Music OF All Times: Rule The Battlefield",
+  "duration": 196,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {},
+  "start_seconds": 0,
+  "end_seconds": null,
+  "spotify_track": null,
+  "provided_song_timestamps": null
+}, {
+  "version": 2,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=QCB7pUsEghg",
+  "title": "Hiromi Mizutani Blessing (Kamisama no Inai Nichiyoubi OST) EpicMusicVn",
+  "duration": 271,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {},
+  "start_seconds": 0,
+  "end_seconds": null,
+  "spotify_track": null,
+  "provided_song_timestamps": null
+}, {
+  "version": 2,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=CaksNlNniis",
+  "title": "No Game No Life Opening Full",
+  "duration": 280,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {},
+  "start_seconds": 0,
+  "end_seconds": null,
+  "spotify_track": null,
+  "provided_song_timestamps": null
+}, {
+  "version": 2,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=1R80SH4VVLA",
+  "title": "\"BYE BYE YESTERDAY\" Full Japanese + English Lyrics (Assassination Classroom/Ansatsu Kyoushitsu \u6697\u6bba\u6559\u5ba4)",
+  "duration": 249,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {},
+  "start_seconds": 0,
+  "end_seconds": null,
+  "spotify_track": null,
+  "provided_song_timestamps": null
+}, {
+  "version": 2,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=9vx69Pe7Ncs",
+  "title": "Fullmetal Alchemist Brotherhood Opening 4 (Chemistry - Period)",
+  "duration": 218,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": null,
+  "meta": {},
+  "start_seconds": 0,
+  "end_seconds": null,
+  "spotify_track": null,
+  "provided_song_timestamps": null
+}, {
+  "version": 2,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=17Zz7cXdVXs",
+  "title": "Luminous Sword - Sword Art Online Music Extended",
+  "duration": 936,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-17Zz7cXdVXs-Luminous_Sword_-_Sword_Art_Online_Music_Extended.webm",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "start_seconds": 0,
+  "end_seconds": null,
+  "spotify_track": {
+    "id": null,
+    "name": "Luminous Sword \n Sword Art Online Music Extended",
+    "artists": null,
+    "duration": null,
+    "album": null,
+    "popularity": null,
+    "uri": null,
+    "query": null,
+    "certainty": 0
+  },
+  "provided_song_timestamps": null
+}, {
+  "version": 2,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=c0XBTkC15DM",
+  "title": "We Have to Defeat It - Sword Art Online Music Extended",
+  "duration": 864,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-c0XBTkC15DM-We_Have_to_Defeat_It_-_Sword_Art_Online_Music_Extended.webm",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "start_seconds": 0,
+  "end_seconds": null,
+  "spotify_track": {
+    "id": null,
+    "name": "We Have to Defeat It \n Sword Art Online Music Extended",
+    "artists": null,
+    "duration": null,
+    "album": null,
+    "popularity": null,
+    "uri": null,
+    "query": null,
+    "certainty": 0
+  },
+  "provided_song_timestamps": null
+}, {
+  "version": 2,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=Xyq2jWEd1yI",
+  "title": "Confront Battle - Sword Art Online Music Extended",
+  "duration": 2641,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-Xyq2jWEd1yI-Confront_Battle_-_Sword_Art_Online_Music_Extended.webm",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "start_seconds": 0,
+  "end_seconds": null,
+  "spotify_track": {
+    "id": null,
+    "name": "Confront Battle \n Sword Art Online Music Extended",
+    "artists": null,
+    "duration": null,
+    "album": null,
+    "popularity": null,
+    "uri": null,
+    "query": null,
+    "certainty": 0
+  },
+  "provided_song_timestamps": null
+}, {
+  "version": 2,
+  "type": "URLPlaylistEntry",
+  "url": "https://www.youtube.com/watch?v=byFkvbz2Za0",
+  "title": "Swordland - Sword Art Online Music Extended",
+  "duration": 848,
+  "downloaded": false,
+  "filename": null,
+  "expected_filename": "audio_cache\\youtube-byFkvbz2Za0-Swordland_-_Sword_Art_Online_Music_Extended.webm",
+  "meta": {
+    "channel": {
+      "type": "Channel",
+      "id": "226402503422509058",
+      "name": "musicbot"
+    },
+    "author": {
+      "type": "Member",
+      "id": "203302899277627392",
+      "name": "siku2"
+    }
+  },
+  "start_seconds": 0,
+  "end_seconds": null,
+  "spotify_track": {
+    "id": null,
+    "name": "Swordland \n Sword Art Online Music Extended",
+    "artists": null,
+    "duration": null,
+    "album": null,
+    "popularity": null,
+    "uri": null,
+    "query": null,
+    "certainty": 0
+  },
+  "provided_song_timestamps": null
+}]
