@@ -1,5 +1,5 @@
 ---
-title: Timestamp-Entry
+title: Entry
 layout: reference
 ---
 # Entry
