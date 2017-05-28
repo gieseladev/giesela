@@ -1,5 +1,5 @@
 ---
-title: Timestamp-Entry
+title: Stream-Entry
 layout: reference
 ---
 # Stream-Entry
