@@ -1,3 +1,4 @@
+import json
 import os
 import re
 import shutil
@@ -33,7 +34,7 @@ class Playlists:
         with open(self.playlists_file, "w") as pl_file:
             self.playlists.write(pl_file)
 
-    def get_playlist(self, playlistname, playlist, load_entries=True):
+    def get_playlist(self, playlistname, playlist, channel=None, author=None, load_entries=True):
         playlistname = playlistname.lower().strip().replace(" ", "_")
         if not self.playlists.has_section(playlistname):
             return None
@@ -49,10 +50,13 @@ class Playlists:
         entries = []
         if load_entries and not os.stat(playlist_informations["location"]).st_size == 0:
             with open(playlist_informations["location"], "r") as file:
-                serialized_json = re.split("\n;\n", file.read())
+                serialized_json = json.loads(file.read())
             for entry in serialized_json:
                 #print (str (urlEntry.entry_from_json (playlist, entry).title))
-                entries.append(urlEntry.from_json(playlist, entry, False))
+                if channel and author is not None:
+                    entry.update(***REMOVED***"meta":
+                                  ***REMOVED***"channel": ***REMOVED***"type": "channel", "name": channel.name, "id": channel.id***REMOVED***, "author": ***REMOVED***"type": "author", "name": author.name, "id": author.id***REMOVED******REMOVED******REMOVED***)
+                entries.append(urlEntry.from_dict(playlist, entry, False))
 
         playlist_informations["entries"] = entries
 
@@ -63,7 +67,7 @@ class Playlists:
 
         try:
             with open(self.playlist_save_location + str(name) + ".gpl", "w") as f:
-                f.write("\n;\n".join([entry.to_json() for entry in entries]))
+                f.write(json.dumps([entry.to_dict() for entry in entries]))
         except Exception as e:
             raise ValueError(str(e))
             return False

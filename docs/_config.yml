@@ -1,6 +1,7 @@
 theme: jekyll-theme-tactile
 title: Giesela
+permalink: /:title
+
 url: https://siku2.github.io/Giesela
 google_analytics: UA-100028815-1
-permalink: /:title
 favicon: https://siku2.github.io/Giesela/assets/favicon.png
