@@ -163,7 +163,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self._spotify_track = SpotifyTrack.from_query(self._title)
 
     @classmethod
-    def from_dict(cls, data, jsonstring, update_additional_information=True):
+    def from_dict(cls, playlist, data, update_additional_information=True):
         url = data['url']
         title = data['title']
         duration = data['duration']
