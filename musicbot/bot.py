@@ -139,6 +139,7 @@ class MusicBot(discord.Client):
         self.init_ok = False
         self.cached_client_id = None
         self.chatters = ***REMOVED******REMOVED***
+        self.blocked_commands = ***REMOVED******REMOVED***
 
         if not self.autoplaylist:
             log("Warning: Autoplaylist is empty, disabling.")
@@ -5634,6 +5635,26 @@ class MusicBot(discord.Client):
                 return Response("No idea who you are... bugger off!")
 
     @owner_only
+    async def cmd_blockcommand(self, command, leftover_args):
+        """
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***blockcommand <command> <reason>`
+        ///|Explanation
+        Block a command
+        """
+        if len(leftover_args) < 1:
+            return Response("Reason plz")
+
+        reason = " ".join(leftover_args)
+
+        if command.lower() in self.blocked_commands:
+            self.blocked_commands.pop(command.lower())
+            return Response("Block lifted")
+        else:
+            self.blocked_commands[command.lower()] = reason
+            return Response("Blocked command")
+
+    @owner_only
     async def cmd_shutdown(self, channel):
         await self.safe_send_message(channel, ":wave:")
         await self.disconnect_all_voice_clients()
@@ -5652,16 +5673,16 @@ class MusicBot(discord.Client):
             await self.safe_delete_message(message)
             return
 
-        gif_match = re.match(r"((?:http|https):\/\/.+\.gif)", message_content)
-        if gif_match is not None:
-            gif_link = gif_match.group(1)
-            em = Embed()
-            em.set_image(url=gif_link)
-            em.set_author(name=message.author.display_name,
-                          icon_url=message.author.avatar_url)
-            await self.send_message(message.channel, embed=em)
-            await self.safe_delete_message(message)
-            return
+        # gif_match = re.match(r"((?:http|https):\/\/.+\.gif)", message_content)
+        # if gif_match is not None:
+        #     gif_link = gif_match.group(1)
+        #     em = Embed()
+        #     em.set_image(url=gif_link)
+        #     em.set_author(name=message.author.display_name,
+        #                   icon_url=message.author.avatar_url)
+        #     await self.send_message(message.channel, embed=em)
+        #     await self.safe_delete_message(message)
+        #     return
 
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
@@ -5697,15 +5718,17 @@ class MusicBot(discord.Client):
 
         if self.config.bound_channels and message.channel.id not in self.config.bound_channels and not message.channel.is_private:
             if message_content.split()[0][len(self.config.command_prefix):].lower().strip() not in self.channelFreeCommands:
-                return  # if I want to log this I just move it under the prefix check
+                return
 
-        # Uh, doesn't this break prefixes with spaces in them (it doesn't,
-        # config parser already breaks them)
         command, *args = message_content.split()
         command = command[len(self.config.command_prefix):].lower().strip()
 
         handler = getattr(self, 'cmd_%s' % command, None)
         if not handler:
+            return
+
+        if command in self.blocked_commands:
+            await self.send_message(message.channel, self.blocked_commands[command])
             return
 
         if message.channel.is_private:
