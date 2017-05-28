@@ -137,7 +137,7 @@ class SpotifyTrack:
         if data is None:
             return None
 
-        return cls(data["id"], data["name"], [SpotifyArtist.from_dict(artist) for artist in data["artists"]], data["duration"], SpotifyAlbum.from_dict(data["album"]), data["popularity"], data["uri"], data["query"], data["certainty"])
+        return cls(data["id"], data["name"], [SpotifyArtist.from_dict(artist) for artist in data["artists"]] if data["artists"] is not None else None, data["duration"], SpotifyAlbum.from_dict(data["album"]) if data["album"] is not None else None, data["popularity"], data["uri"], data["query"], data["certainty"])
 
     @property
     def cover_url(self):
@@ -151,9 +151,9 @@ class SpotifyTrack:
         data = ***REMOVED***
             "id": self.id,
             "name": self.name,
-            "artists": [artist.get_dict() for artist in self.artists],
+            "artists": [artist.get_dict() for artist in self.artists] if self.artists is not None else None,
             "duration": self.duration,
-            "album": self.album.get_dict(),
+            "album": self.album.get_dict() if self.album is not None else None,
             "popularity": self.popularity,
             "uri": self.uri,
             "query": self.query,
