@@ -4437,16 +4437,30 @@ class MusicBot(discord.Client):
         elif argument in self.playlists.saved_playlists:
             infos = self.playlists.get_playlist(
                 argument.lower(), player.playlist)
-
-            entries_text = ""
             entries = infos["entries"]
-            for i in range(len(entries)):
-                entries_text += str(i + 1) + ". " + entries[i].title + " | " + format_time(
-                    entries[i].duration, round_seconds=True, max_specifications=2) + "\n"
 
-            response_text = "\"{}\" added by *{}* with {} entr{}\n*playtime: {}*\n\n{}\n```\nTo edit this playlist type \"{}playlist builder {}\"```".format(argument.replace("_", " ").title(), self.get_global_user(
-                infos["author"]).mention, str(infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", format_time(sum([x.duration for x in entries])), entries_text, self.config.command_prefix, argument)
-            return Response(response_text, reply=True, delete_after=40)
+            desc_text = "{} entr{}\n{} long".format(str(infos["entry_count"]), "ies" if int(infos["entry_count"]) is not 1 else "y", format_time(
+                sum([x.duration for x in entries]), round_seconds=True, combine_with_and=True, replace_one=True, max_specifications=2))
+            em = Embed(title=argument.replace(
+                "_", " ").title(), description=desc_text)
+            pl_author = self.get_global_user(infos["author"])
+            em.set_author(name=pl_author.display_name,
+                          icon_url=pl_author.avatar_url)
+
+            for i in range(min(len(entries), 20)):
+                em.add_field(name="{0:>3}. {1:<50}".format(i + 1, entries[i].title[:50]), value="duration: " + format_time(
+                    entries[i].duration, round_seconds=True, round_base=1, max_specifications=2), inline=False)
+
+            if len(entries) > 20:
+                em.add_field(name="**And {} more**".format(len(entries) - 20),
+                             value="To view them, open the playlist builder")
+
+            em.set_footer(text="To edit this playlist type \"{}playlist builder {}\"".format(
+                self.config.command_prefix, argument))
+
+            await self.send_message(channel, embed=em)
+
+            return
 
         return await self.cmd_help(channel, ["playlist"])
 
