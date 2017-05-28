@@ -1,5 +1,5 @@
 ---
-title: Command `skip`
+title: Command skip
 layout: reference
 ---
 # "Now Playing" `skip`
