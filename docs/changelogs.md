@@ -6,5 +6,5 @@ layout: default
 
 # Changelogs
 {% for post in site.posts %}
-  - [{{ post.version | default: post.title }}]({{ site.url }}{{ post.url }})
+  - [{{ post.title }}]({{ site.url }}{{ post.url }})
 {% endfor %}
