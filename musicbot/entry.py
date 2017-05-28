@@ -163,9 +163,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self._spotify_track = SpotifyTrack.from_query(self._title)
 
     @classmethod
-    def from_json(cls, playlist, jsonstring, update_additional_information=True):
-        data = json.loads(jsonstring)
-        # TODO: version check
+    def from_dict(cls, data, jsonstring, update_additional_information=True):
         url = data['url']
         title = data['title']
         duration = data['duration']
@@ -178,17 +176,14 @@ class URLPlaylistEntry(BasePlaylistEntry):
         end_seconds = data.get("end_seconds", duration)
         meta = {}
 
-        # TODO: Better [name] fallbacks
-        if 'channel' in data['meta']:
-            ch = playlist.bot.get_channel(data['meta']['channel']['id'])
-            meta['channel'] = ch or data['meta']['channel']['name']
+        if "meta" in data:
+            if 'channel' in data['meta']:
+                ch = playlist.bot.get_channel(data['meta']['channel']['id'])
+                meta['channel'] = ch or data['meta']['channel']['name']
 
-        if 'author' in data['meta']:
-            try:
-                meta['author'] = meta['channel'].server.get_member(
+            if 'author' in data['meta']:
+                meta['author'] = playlist.bot.get_global_user(
                     data['meta']['author']['id'])
-            except:
-                meta['author'] = "unknown"
 
         return cls(playlist, url, title, duration, filename, start_seconds, end_seconds, spotify_track=spotify_track, provided_song_timestamps=provided_song_timestamps, update_additional_information=update_additional_information, **meta)
 
@@ -235,12 +230,12 @@ class URLPlaylistEntry(BasePlaylistEntry):
     def search_for_timestamps(self):
         songs = get_video_timestamps(self.url)
 
-        if len(songs) < 1:
+        if songs is None or len(songs) < 1:
             return
 
         self.provided_song_timestamps = songs
 
-    def to_json(self):
+    def to_dict(self):
         meta_dict = {}
         for i in self.meta:
             if i is None or self.meta[i] is None:
@@ -250,7 +245,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
                             'id': self.meta[i].id, 'name': self.meta[i].name}
 
         data = {
-            'version': 1,
+            'version': 2,
             'type': self.__class__.__name__,
             'url': self.url,
             'title': self.title,
@@ -266,7 +261,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
             # Actually I think I can just getattr instead, getattr(discord,
             # type)
         }
-        return json.dumps(data, indent=2)
+        return data
 
     def set_start(self, sec):
         if sec >= (self.end_seconds if self.end_seconds is not None else self.duration):
@@ -290,6 +285,10 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
         self.title = new_title
         return True
+
+    def get_ready_future(self):
+        self.search_additional_info()
+        return BasePlaylistEntry.get_ready_future(self)
 
     # noinspection PyTypeChecker
     async def _download(self):

@@ -622,8 +622,6 @@ class Playlist(EventEmitter):
             next_entry = self.peek()
             if next_entry:
                 next_entry.get_ready_future()
-                if not next_entry.searched_additional_information:
-                    next_entry.search_additional_info()
 
         try:
             return await entry.get_ready_future()
