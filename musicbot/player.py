@@ -186,6 +186,8 @@ class MusicPlayer(EventEmitter):
         if (not self.current_entry) or secs >= self.current_entry.duration or (self.current_entry.end_seconds is not None and secs >= self.current_entry.end_seconds):
             return False
 
+        secs = max(0, secs)
+
         c_entry = self.current_entry
         if not c_entry.set_start(secs):
             return False
