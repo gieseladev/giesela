@@ -1,3 +1,4 @@
+import json
 import os
 import re
 import shutil
@@ -49,10 +50,10 @@ class Playlists:
         entries = []
         if load_entries and not os.stat(playlist_informations["location"]).st_size == 0:
             with open(playlist_informations["location"], "r") as file:
-                serialized_json = re.split("\n;\n", file.read())
+                serialized_json = json.loads(file.read())
             for entry in serialized_json:
                 #print (str (urlEntry.entry_from_json (playlist, entry).title))
-                entries.append(urlEntry.from_json(playlist, entry, False))
+                entries.append(urlEntry.from_dict(playlist, entry, False))
 
         playlist_informations["entries"] = entries
 
@@ -63,7 +64,7 @@ class Playlists:
 
         try:
             with open(self.playlist_save_location + str(name) + ".gpl", "w") as f:
-                f.write("\n;\n".join([entry.to_json() for entry in entries]))
+                f.write(json.dumps([entry.to_dict() for entry in entries]))
         except Exception as e:
             raise ValueError(str(e))
             return False

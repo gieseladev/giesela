@@ -23,7 +23,7 @@ def DEV_VERSION():
     return "_".join(matches.groups((1, 2)))
 
 
-def MASTER_VERSION()
+def MASTER_VERSION():
     page = requests.get(
         "https://raw.githubusercontent.com/siku2/Giesela/master/musicbot/constants.py")
     matches = re.search(
