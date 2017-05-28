@@ -3,7 +3,7 @@ import re
 
 import requests
 
-MAIN_VERSION = '3.1.7'
+MAIN_VERSION = '3.1.8'
 SUB_VERSION = 'age_of_Giesela'
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 

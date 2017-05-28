@@ -5264,22 +5264,42 @@ class MusicBot(discord.Client):
         if not player.goto_seconds(player.progress + secs):
             return Response("Timestamp exceeds song duration!", delete_after=20)
 
-    async def cmd_rwd(self, player, timestamp):
+    async def cmd_rwd(self, player, timestamp=None):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***fwd <timestamp>
+            ***REMOVED***command_prefix***REMOVED***fwd [timestamp]
 
-        Rewind <timestamp> into the current entry
+        Rewind <timestamp> into the current entry or if the current entry is a timestamp-entry, rewind to the previous song
         """
-
-        secs = parse_timestamp(timestamp)
-        if secs is None:
-            return Response("Please provide a valid timestamp", delete_after=20)
 
         if player.current_entry is None:
             return Response("Nothing playing!", delete_after=20)
 
-        if not player.goto_seconds(player.progress - secs):
+        if timestamp is None:
+            if player.current_entry.provides_timestamps:
+                current_song = player.current_entry.get_current_song_from_timestamp(
+                    player.progress)
+                ind = current_song["index"]
+                local_progress, duration = player.current_entry.get_local_progress(
+                    player.progress)
+                if ind == 0:
+                    secs = 0
+                else:
+                    if local_progress < 15:
+                        secs = player.current_entry.get_timestamped_song(
+                            ind - 1)["start"]
+                    else:
+                        secs = current_song["start"]
+
+            else:
+                return Response("Please provide a valid timestamp")
+        else:
+            secs = player.progress - parse_timestamp(timestamp)
+
+        if secs is None:
+            return Response("Please provide a valid timestamp", delete_after=20)
+
+        if not player.goto_seconds(secs):
             return Response("Timestamp exceeds song duration!", delete_after=20)
 
     async def cmd_register(self, author, server, token):
