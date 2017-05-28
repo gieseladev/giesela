@@ -1,5 +1,5 @@
 ---
-title: Command `np`
+title: Command np
 layout: reference
 ---
 # "Now Playing" `np`
