@@ -4308,7 +4308,7 @@ class MusicBot(discord.Client):
                 return Response("Can't load this playlist, there's no playlist with this name.", delete_after=20)
 
             clone_entries = self.playlists.get_playlist(
-                savename, player.playlist)["entries"]
+                savename, player.playlist, channel=channel, author=author)["entries"]
 
             if load_mode == "replace":
                 player.playlist.clear()

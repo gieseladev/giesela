@@ -34,7 +34,7 @@ class Playlists:
         with open(self.playlists_file, "w") as pl_file:
             self.playlists.write(pl_file)
 
-    def get_playlist(self, playlistname, playlist, load_entries=True):
+    def get_playlist(self, playlistname, playlist, channel=None, author=None, load_entries=True):
         playlistname = playlistname.lower().strip().replace(" ", "_")
         if not self.playlists.has_section(playlistname):
             return None
@@ -53,6 +53,9 @@ class Playlists:
                 serialized_json = json.loads(file.read())
             for entry in serialized_json:
                 #print (str (urlEntry.entry_from_json (playlist, entry).title))
+                if channel and author is not None:
+                    entry.update(***REMOVED***"meta":
+                                  ***REMOVED***"channel": ***REMOVED***"type": "channel", "name": channel.name, "id": channel.id***REMOVED***, "author": ***REMOVED***"type": "author", "name": author.name, "id": author.id***REMOVED******REMOVED******REMOVED***)
                 entries.append(urlEntry.from_dict(playlist, entry, False))
 
         playlist_informations["entries"] = entries
