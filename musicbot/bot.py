@@ -40,7 +40,8 @@ from . import downloader, exceptions
 from .cleverbot import CleverWrap
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
-from .constants import AUDIO_CACHE_PATH, DEV_VERSION, DISCORD_MSG_CHAR_LIMIT
+from .constants import (AUDIO_CACHE_PATH, DEV_VERSION, DISCORD_MSG_CHAR_LIMIT,
+                        MASTER_VERSION)
 from .games.game_2048 import Game2048
 from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
@@ -2160,7 +2161,7 @@ class MusicBot(discord.Client):
                 nextline = '`{}.` **{}** added by **{}**'.format(
                     i, item.title, item.meta['author'].name).strip()
                 if item.provides_timestamps:
-                    for ind, sub_item in enumerate(item.sub_queue(), 1)[:3]:
+                    for ind, sub_item in list(enumerate(item.sub_queue(), 1))[:3]:
                         nextline = "   ►{}. **{}**".format(
                             ind, sub_item["name"])
                         currentlinesum = sum(len(x) + 1 for x in lines)
@@ -4307,7 +4308,7 @@ class MusicBot(discord.Client):
                 return Response("Can't load this playlist, there's no playlist with this name.", delete_after=20)
 
             clone_entries = self.playlists.get_playlist(
-                savename, player.playlist)["entries"]
+                savename, player.playlist, channel=channel, author=author)["entries"]
 
             if load_mode == "replace":
                 player.playlist.clear()
