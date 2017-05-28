@@ -1,5 +1,5 @@
 ---
-title: Timestamp-Entry
+title: Complex-Entry
 layout: reference
 ---
 # Timestamp-Entry
