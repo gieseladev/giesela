@@ -41,6 +41,7 @@ class BasePlaylistEntry:
         queue = []
         entries = sorted(list(self.provided_song_timestamps.keys()))
         for index, entry in enumerate(entries):
+            entry = int(entry)
             if entry < min_progress:
                 continue
 
