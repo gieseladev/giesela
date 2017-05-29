@@ -40,15 +40,15 @@ class BasePlaylistEntry:
     def sub_queue(self, min_progress=-1):
         queue = []
         entries = sorted(list(self.provided_song_timestamps.keys()))
-        for index, entry in enumerate(entries):
-            entry = int(entry)
+        for index, key in enumerate(entries):
+            entry = int(key)
             if entry < min_progress:
                 continue
 
-            dur = (entries[index + 1] if index + 1 <
+            dur = (int(entries[index + 1]) if index + 1 <
                    len(entries) else self.duration) - entry
             e = ***REMOVED***"name": self.provided_song_timestamps[
-                entry], "duration": dur, "start": entry, "index": index, "end": dur + entry***REMOVED***
+                key], "duration": dur, "start": entry, "index": index, "end": dur + entry***REMOVED***
             queue.append(e)
 
         return queue

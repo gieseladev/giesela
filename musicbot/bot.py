@@ -2162,11 +2162,15 @@ class MusicBot(discord.Client):
 
                 lines.append(nextline)
 
+            lines.append("\n")
+
         for i, item in enumerate(player.playlist, 1):
             if item.meta.get('channel', False) and item.meta.get('author', False):
                 nextline = '`***REMOVED******REMOVED***.` *****REMOVED******REMOVED***** added by *****REMOVED******REMOVED*****'.format(
                     i, item.title, item.meta['author'].name).strip()
                 if item.provides_timestamps:
+                    lines.append(
+                        "`***REMOVED******REMOVED***.` *****REMOVED******REMOVED*****".format(i, item.title).strip())
                     for ind, sub_item in list(enumerate(item.sub_queue(), 1))[:3]:
                         nextline = "   ►***REMOVED******REMOVED***. *****REMOVED******REMOVED*****".format(
                             ind, sub_item["name"])
@@ -2178,6 +2182,9 @@ class MusicBot(discord.Client):
                                 continue
 
                         lines.append(nextline)
+
+                    lines.append("\n")
+                    continue
             else:
                 nextline = '`***REMOVED******REMOVED***.` *****REMOVED******REMOVED*****'.format(i, item.title).strip()
 
