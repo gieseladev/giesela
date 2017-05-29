@@ -4520,9 +4520,9 @@ class MusicBot(discord.Client):
         savename = _savename
         user_savename = savename
 
-        interface_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add`: Add a video to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove index (index2 index3 index4)`: Remove a song from the playlist by it's index\n`rename newname`: rename the current playlist\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
+        interface_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add <query>`: Add a video to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index\n`rename <newname>`: rename the current playlist\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
 
-        extras_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n**Extra functions:**\n`sort [alphabetical, length, random]`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n`split-timestamp-entry <index>`: split a timestamp-entry into its sub-entries\n\n`abort`: return to main screen"
+        extras_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n**Extra functions:**\n`sort <alphabetical | length | random>`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n\n`abort`: return to main screen"
 
         edit_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n```\nentry_information\n```\n\n**Edit functions:**\n`rename <newname>`: rename the entry\n`setstart <timestamp>`: set the starting time of the song\n`setend <timestamp>`: set the ending time of the song\n\n`abort`: return to main screen"
 
@@ -4662,27 +4662,35 @@ class MusicBot(discord.Client):
                         pl_changes["new_entries"] = new_list
                         playlist["entries"] = new_list
 
-                    if cmd == "split-timestamp-entry":
-                        if args is not None:
-                            ind = int(args[0]) - 1
-                            entry = entries[ind]
-                            if entry.provides_timestamp:
-                                pl_changes[
-                                    "remove_entries_indexes"].append(ind)
-                                msg = await self.safe_send_message(channel, "I'm working on it.")
-                                start_time = datetime.now()
-                                for sub in entry.sub_queue():
-                                    entries = await self.get_play_entry(player, channel, author, query, arguments[0])
-                                    pl_changes["new_entries"].extend(entries)
-                                    playlist["entries"].extend(entries)
-                                    playlist["entry_count"] = str(
-                                        int(playlist["entry_count"]) + len(entries))
-                                    it, ov = divmod(
-                                        int(playlist["entry_count"]), items_per_page)
-                                    entries_page = it
-
-                                if (datetime.now() - start_time).total_seconds() > 40:
-                                    await self.safe_send_message(author, "Wow, that took quite a while.\nI'm done now though so come check it out!", expire_in=70)
+                    # if cmd == "split-timestamp-entry":
+                    #     if args is not None:
+                    #         ind = int(args[0]) - 1
+                    #         entry = entries[ind]
+                    #         if entry.provides_timestamps:
+                    #             pl_changes[
+                    #                 "remove_entries_indexes"].append(ind)
+                    #             msg = await self.safe_send_message(channel, "I'm working on it.")
+                    #             start_time = datetime.now()
+                    #             for sub in entry.sub_queue():
+                    #                 try:
+                    #                     a_s = re.sub(r"\W", "", sub[
+                    #                                  "name"]).split()
+                    #                     entries = await self.get_play_entry(player, channel, author, a_s[1:], a_s[0])
+                    #                     pl_changes["new_entries"].extend(
+                    #                         entries)
+                    #                     playlist["entries"].extend(entries)
+                    #                     playlist["entry_count"] = str(
+                    #                         int(playlist["entry_count"]) + len(entries))
+                    #                     it, ov = divmod(
+                    #                         int(playlist["entry_count"]), items_per_page)
+                    #                     entries_page = it
+                    #                 except:
+                    #                     continue
+                    #
+                    #             if (datetime.now() - start_time).total_seconds() > 40:
+                    # await self.safe_send_message(author, "Wow, that took
+                    # quite a while.\nI'm done now though so come check it
+                    # out!", expire_in=70)
 
                 await self.safe_delete_message(extras_message)
                 await self.safe_delete_message(resp)
