@@ -27,4 +27,4 @@ The standard embed can have:
   - Text
 
 ### Example
-![Example Image of an Embed](***REMOVED******REMOVED*** site.url ***REMOVED******REMOVED***/assets/embed.png)
+![Example Image of an Embed](***REMOVED******REMOVED*** site.url ***REMOVED******REMOVED***/assets/embed.PNG)
