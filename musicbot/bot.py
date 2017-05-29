@@ -28,6 +28,7 @@ from discord import Embed, utils
 from discord.enums import ChannelType
 from discord.ext.commands.bot import _get_variable
 from discord.object import Object
+from discord.utils import find
 from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from openpyxl import Workbook
@@ -433,14 +434,17 @@ class MusicBot(discord.Client):
             await self.ws.send(utils.to_json(payload))
             self.the_voice_clients[server.id].channel = channel
 
-    async def get_player(self, channel, create=False) -> MusicPlayer:
+    async def get_player(self, channel, create=False, auto_summon=True) -> MusicPlayer:
         server = channel.server
 
         if server.id not in self.players:
             if not create:
-                raise exceptions.CommandError(
-                    'The bot is not in a voice channel.  '
-                    'Use %ssummon to summon it to your voice channel.' % self.config.command_prefix)
+                if auto_summon:
+                    channel = await self.socket_summon(channel.server) or await self.goto_home(channel.server)
+                else:
+                    raise exceptions.CommandError(
+                        'The bot is not in a voice channel.  '
+                        'Use %ssummon to summon it to your voice channel.' % self.config.command_prefix)
 
             voice_client = await self.get_voice_client(channel)
 
@@ -878,7 +882,7 @@ class MusicBot(discord.Client):
     async def socket_summon(self, server_id, summoner_id=None):
         server = self.get_server(server_id)
         if server == None:
-            return
+            return False
 
         channels = server.channels
         target_channel = None
@@ -894,22 +898,23 @@ class MusicBot(discord.Client):
                 max_members = len(ch.voice_members)
 
         if target_channel == None:
-            return
+            return False
 
         voice_client = self.the_voice_clients.get(server.id, None)
         if voice_client is not None and voice_client.channel.server == server:
             await self.move_voice_client(target_channel)
-            return
+            return False
 
         chperms = target_channel.permissions_for(server.me)
 
         if not chperms.connect:
-            return
+            return False
         elif not chperms.speak:
-            return
+            return False
 
         await self.get_player(target_channel, create=True)
         self.socket_server.threaded_broadcast_information()
+        return target_channel
 
     async def cmd_help(self, channel, leftover_args):
         """
@@ -2157,11 +2162,15 @@ class MusicBot(discord.Client):
 
                 lines.append(nextline)
 
+            lines.append("\n")
+
         for i, item in enumerate(player.playlist, 1):
             if item.meta.get('channel', False) and item.meta.get('author', False):
                 nextline = '`{}.` **{}** added by **{}**'.format(
                     i, item.title, item.meta['author'].name).strip()
                 if item.provides_timestamps:
+                    lines.append(
+                        "`{}.` **{}**".format(i, item.title).strip())
                     for ind, sub_item in list(enumerate(item.sub_queue(), 1))[:3]:
                         nextline = "   ►{}. **{}**".format(
                             ind, sub_item["name"])
@@ -2173,6 +2182,9 @@ class MusicBot(discord.Client):
                                 continue
 
                         lines.append(nextline)
+
+                    lines.append("\n")
+                    continue
             else:
                 nextline = '`{}.` **{}**'.format(i, item.title).strip()
 
@@ -2857,7 +2869,8 @@ class MusicBot(discord.Client):
 
         channelID = " ".join(leftover_args)
         if channelID.lower() == "home":
-            channelID = "MusicBot's reign"
+            await self.goto_home(server)
+            return Response("yep")
 
         if channelID.lower() in ["bed", "sleep", "hell", "church", "school", "work", "666"]:
             await self.cmd_c(channel, author, "go to" + channelID)
@@ -2922,6 +2935,15 @@ class MusicBot(discord.Client):
 
         if self.config.auto_playlist:
             await self.on_player_finished_playing(player)
+
+    async def goto_home(self, server):
+        channel = find(lambda c: c.type == ChannelType.voice and any(x in c.name.lower().split(
+        ) for x in ["giesela", "musicbot", "bot", "music", "reign"]), server.channels)
+        if channel is None:
+            channel = choice(
+                filter(lambda c: c.type == ChannelType.voice, server.channels))
+        await self.get_player(channel, create=True)
+        return channel
 
     async def cmd_replay(self, player, channel, author):
         """
@@ -5264,22 +5286,42 @@ class MusicBot(discord.Client):
         if not player.goto_seconds(player.progress + secs):
             return Response("Timestamp exceeds song duration!", delete_after=20)
 
-    async def cmd_rwd(self, player, timestamp):
+    async def cmd_rwd(self, player, timestamp=None):
         """
         Usage:
-            {command_prefix}fwd <timestamp>
+            {command_prefix}fwd [timestamp]
 
-        Rewind <timestamp> into the current entry
+        Rewind <timestamp> into the current entry or if the current entry is a timestamp-entry, rewind to the previous song
         """
-
-        secs = parse_timestamp(timestamp)
-        if secs is None:
-            return Response("Please provide a valid timestamp", delete_after=20)
 
         if player.current_entry is None:
             return Response("Nothing playing!", delete_after=20)
 
-        if not player.goto_seconds(player.progress - secs):
+        if timestamp is None:
+            if player.current_entry.provides_timestamps:
+                current_song = player.current_entry.get_current_song_from_timestamp(
+                    player.progress)
+                ind = current_song["index"]
+                local_progress, duration = player.current_entry.get_local_progress(
+                    player.progress)
+                if ind == 0:
+                    secs = 0
+                else:
+                    if local_progress < 15:
+                        secs = player.current_entry.get_timestamped_song(
+                            ind - 1)["start"]
+                    else:
+                        secs = current_song["start"]
+
+            else:
+                return Response("Please provide a valid timestamp")
+        else:
+            secs = player.progress - parse_timestamp(timestamp)
+
+        if secs is None:
+            return Response("Please provide a valid timestamp", delete_after=20)
+
+        if not player.goto_seconds(secs):
             return Response("Timestamp exceeds song duration!", delete_after=20)
 
     async def cmd_register(self, author, server, token):
