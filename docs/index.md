@@ -1,4 +1,4 @@
 # Links
 ---
-- [Newest Changelog]({{ site.url }}{{ site.posts[0].url }})
+- [Newest Changelog]({{ site.url }}/newest_changelog)
 - [All Changelogs]({{ site.url }}/changelogs)
