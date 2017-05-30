@@ -3,8 +3,8 @@ import re
 
 import requests
 
-MAIN_VERSION = '3.2.1'
-SUB_VERSION = 'age_of_Giesela'
+MAIN_VERSION = '3.2.3'
+SUB_VERSION = 'GG_iesela'
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
 AUDIO_CACHE_PATH = os.path.join(os.getcwd(), 'audio_cache')
