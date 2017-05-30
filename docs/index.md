@@ -1,4 +1,4 @@
 # Links
 ---
-- [Newest Changelog](***REMOVED******REMOVED*** site.url ***REMOVED******REMOVED******REMOVED******REMOVED*** site.posts[0].url ***REMOVED******REMOVED***)
+- [Newest Changelog](***REMOVED******REMOVED*** site.url ***REMOVED******REMOVED***/newest_changelog)
 - [All Changelogs](***REMOVED******REMOVED*** site.url ***REMOVED******REMOVED***/changelogs)
