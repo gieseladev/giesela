@@ -38,11 +38,13 @@ import asyncio
 import configparser
 
 from . import downloader, exceptions
+from .bookmarks import bookmark
 from .cleverbot import CleverWrap
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
 from .constants import (AUDIO_CACHE_PATH, DEV_VERSION, DISCORD_MSG_CHAR_LIMIT,
                         MASTER_VERSION)
+from .entry import URLPlaylistEntry
 from .games.game_2048 import Game2048
 from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
@@ -61,6 +63,7 @@ from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .settings import Settings
 from .socket_server import SocketServer
+from .spotify import parse_query
 from .translate import Translator
 from .twitter_api import get_tweet
 from .utils import (create_bar, escape_dis, format_time, hex_to_dec, load_file,
@@ -92,10 +95,11 @@ class SkipState:
 
 class Response:
 
-    def __init__(self, content, reply=False, delete_after=0):
+    def __init__(self, content=None, reply=False, delete_after=0, embed=None):
         self.content = content
         self.reply = reply
         self.delete_after = delete_after
+        self.embed = embed
 
 
 class MusicBot(discord.Client):
@@ -581,10 +585,10 @@ class MusicBot(discord.Client):
 
         await self.change_presence(game=game)
 
-    async def safe_send_message(self, dest, content, *, max_letters=DISCORD_MSG_CHAR_LIMIT, split_message=True, tts=False, expire_in=0, also_delete=None, quiet=False):
+    async def safe_send_message(self, dest, content=None, *, max_letters=DISCORD_MSG_CHAR_LIMIT, split_message=True, tts=False, expire_in=0, also_delete=None, quiet=False, embed=None):
         msg = None
         try:
-            if split_message and len(content) > max_letters:
+            if split_message and content and len(content) > max_letters:
                 self.log("Message too long, splitting it up")
                 msgs = paginate(content, length=DISCORD_MSG_CHAR_LIMIT)
 
@@ -599,7 +603,7 @@ class MusicBot(discord.Client):
                         asyncio.ensure_future(
                             self._wait_delete_msg(also_delete, expire_in))
             else:
-                msg = await self.send_message(dest, content, tts=tts)
+                msg = await self.send_message(dest, content, tts=tts, embed=embed)
 
                 if msg and expire_in:
                     asyncio.ensure_future(
@@ -4868,16 +4872,36 @@ class MusicBot(discord.Client):
 
         search_query = " ".join(leftover_args)
 
-        if "simon berger" in search_query.lower() or "simon jonas berger" in search_query.lower():
-            already_used = load_file("data/simon_berger_wikied.txt")
-
-            if author.id in already_used:
-                return Response("I mustn't betray my master twice for you!")
-            else:
-                already_used.append(author.id)
-                write_file("data/simon_berger_wikied.txt", already_used)
-
-            return Response("**Simon Berger**\nSimon Jonas Berger (born March 28, 1992) is a computer scientist and works at Google London as head of the Technical Solutions team.\nI didn't actually expect anyone to read this far, but apparently you are...\nLet me tell you something about my past then. I went to Kindergarten one year earlier than normal. This is due to the fact, that one Doctor thought that I was a genius (of course that turned out to be wrong). I skipped 4th grade, not because I wanted, but because my teacher persuaded my parents to do so. I especially loved that teacher and was sincerely upset about that. I went to the gymnasium after 8th grade.Shortly after, at the age of 15, my parents passed away in a car accident so I went to live with my grandparents but 2 months later I lived in a flat in Zurich to study at ETH. Because I practically skipped 2 years of education I was merely 16 while everyone around me was already 18. With the age of 20 I got my Bachelor's degree and at the age of 22 I finished my Master's degree. While I was studying at ETH I got the chance to take part in a Google Interview. After 2 interviews they offered me a job as a Technical Solutions Consultant. June 25th 2016 they promoted me to head of Technical Solutions.\n\nWhy am I telling you this? Well... If you went ahead and looked me up I'm sure you were just a little bit interested.")
+        # if "simon berger" in search_query.lower() or "simon jonas berger" in search_query.lower():
+        #     already_used = load_file("data/simon_berger_wikied.txt")
+        #
+        #     if author.id in already_used:
+        #         return Response("I mustn't betray my master twice for you!")
+        #     else:
+        #         already_used.append(author.id)
+        #         write_file("data/simon_berger_wikied.txt", already_used)
+        #
+        # return Response("**Simon Berger**\nSimon Jonas Berger (born March 28,
+        # 1992) is a computer scientist and works at Google London as head of
+        # the Technical Solutions team.\nI didn't actually expect anyone to
+        # read this far, but apparently you are...\nLet me tell you something
+        # about my past then. I went to Kindergarten one year earlier than
+        # normal. This is due to the fact, that one Doctor thought that I was a
+        # genius (of course that turned out to be wrong). I skipped 4th grade,
+        # not because I wanted, but because my teacher persuaded my parents to
+        # do so. I especially loved that teacher and was sincerely upset about
+        # that. I went to the gymnasium after 8th grade.Shortly after, at the
+        # age of 15, my parents passed away in a car accident so I went to live
+        # with my grandparents but 2 months later I lived in a flat in Zurich
+        # to study at ETH. Because I practically skipped 2 years of education I
+        # was merely 16 while everyone around me was already 18. With the age
+        # of 20 I got my Bachelor's degree and at the age of 22 I finished my
+        # Master's degree. While I was studying at ETH I got the chance to take
+        # part in a Google Interview. After 2 interviews they offered me a job
+        # as a Technical Solutions Consultant. June 25th 2016 they promoted me
+        # to head of Technical Solutions.\n\nWhy am I telling you this? Well...
+        # If you went ahead and looked me up I'm sure you were just a little
+        # bit interested.")
 
         # self.log (search_query)
 
@@ -5319,7 +5343,7 @@ class MusicBot(discord.Client):
     async def cmd_rwd(self, player, timestamp=None):
         """
         Usage:
-            {command_prefix}fwd [timestamp]
+            {command_prefix}rwd [timestamp]
 
         Rewind <timestamp> into the current entry or if the current entry is a timestamp-entry, rewind to the previous song
         """
@@ -5706,6 +5730,79 @@ class MusicBot(discord.Client):
             else:
                 return Response("No idea who you are... bugger off!")
 
+    async def cmd_bookmark(self, author, player, leftover_args):
+        """
+        ///|Creation
+        {command_prefix}bookmark [name] [timestamp]
+        ///|Explanation
+        Create a new bookmark for the current entry. If no name is provided the entry's title will be used and if there's no timestamp provided the current timestamp will be used.
+        ///|Use a bookmark
+        {command_prefix}bookmark <id | name>
+        ///|List available bookmarks
+        {command_prefix}bookmark list
+        ///|Remove a bookmark
+        {command_prefix}bookmark remove <id | name>
+        """
+        if len(leftover_args) > 0:
+            arg = leftover_args[0].lower()
+            if arg in ["list", "showall"]:
+                em = Embed(title="Bookmarks")
+                for bm in bookmark.all_bookmarks:
+                    bm_name = parse_query(bm["name"])
+                    bm_author = self.get_global_user(
+                        bm["author_id"]).display_name
+                    bm_timestamp = to_timestamp(bm["timestamp"])
+                    bm_id = bm["id"]
+                    t = "**{}** *by **{}***".format(bm_name, bm_author)
+                    v = "`{}` *from* \"{}\"".format(bm_timestamp,
+                                                    bm_id)
+                    em.add_field(name=t, value=v)
+                return Response(embed=em)
+            elif arg in ["remove", "delete"]:
+                if len(leftover_args) < 2:
+                    return Response("Please provide an id or a name")
+                bm = bookmark.get_bookmark(" ".join(leftover_args[1:]))
+                if not bm:
+                    return Response("Didn't find a bookmark with that query")
+                print(bm)
+                if bookmark.remove_bookmark(bm["id"]):
+                    return Response("Removed bookmark `{}`".format(bm["name"]))
+                else:
+                    return Response("Something went wrong")
+            else:
+                bm = bookmark.get_bookmark(" ".join(leftover_args))
+                if bm:
+                    player.playlist._add_entry(
+                        URLPlaylistEntry.from_dict(player.playlist, bm["entry"]))
+                    return Response("Loaded bookmark `{0}` *by **{1}***".format(bm["name"], self.get_global_user(bm["author_id"]).display_name))
+                else:
+                    bm_timestamp = player.progress
+                    bm_name = None
+                    if len(leftover_args) > 1:
+                        timestamp = parse_timestamp(leftover_args[-1])
+                        if timestamp:
+                            bm_timestamp = timestamp
+                        bm_name = " ".join(
+                            leftover_args[:-1]) if timestamp else " ".join(leftover_args)
+                    else:
+                        timestamp = parse_timestamp(leftover_args[-1])
+                        if timestamp:
+                            bm_timestamp = timestamp
+                        else:
+                            bm_name = " ".join(leftover_args)
+
+                    id = bookmark.add_bookmark(
+                        player.current_entry, bm_timestamp, author.id, bm_name)
+                    return Response("Created a new bookmark with the id `{0}` (\"{2}\", `{3}`)\nUse `{1}bookmark {0}` to load it ".format(id, self.config.command_prefix, bm_name, to_timestamp(bm_timestamp)))
+
+        else:
+            if player.current_entry:
+                id = bookmark.add_bookmark(
+                    player.current_entry, player.progress, author.id)
+                return Response("Created a new bookmark with the id `{0}`\nUse `{1}bookmark {0}` to load it ".format(id, self.config.command_prefix))
+            else:
+                return await self.cmd_bookmark(author, player, ["list", ])
+
     @owner_only
     async def cmd_blockcommand(self, command, leftover_args):
         """
@@ -5908,13 +6005,14 @@ class MusicBot(discord.Client):
             response = await handler(**handler_kwargs)
             if response and isinstance(response, Response):
                 content = response.content
-                if response.reply:
+                if content and response.reply:
                     content = '%s, %s' % (message.author.mention, content)
 
                 sentmsg = await self.safe_send_message(
                     message.channel, content,
                     expire_in=response.delete_after if self.config.delete_messages else 0,
-                    also_delete=message if self.config.delete_invoking else None
+                    also_delete=message if self.config.delete_invoking else None,
+                    embed=response.embed
                 )
 
         except (exceptions.CommandError, exceptions.HelpfulError, exceptions.ExtractionError) as e:
