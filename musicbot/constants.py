@@ -3,7 +3,7 @@ import re
 
 import requests
 
-MAIN_VERSION = '3.2.4'
+MAIN_VERSION = '3.2.6'
 SUB_VERSION = 'GG_iesela'
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 

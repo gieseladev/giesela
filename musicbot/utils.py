@@ -4,6 +4,7 @@ import random
 import re
 import unicodedata
 from datetime import timedelta
+from difflib import SequenceMatcher
 from hashlib import md5
 
 import aiohttp
@@ -11,6 +12,10 @@ import requests
 from bs4 import BeautifulSoup
 
 from .constants import DISCORD_MSG_CHAR_LIMIT
+
+
+def similarity(a, b):
+    return SequenceMatcher(None, a, b).ratio()
 
 
 def load_file(filename, skip_commented_lines=True, comment_char='#'):
