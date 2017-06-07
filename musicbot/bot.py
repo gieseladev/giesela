@@ -4739,15 +4739,21 @@ class MusicBot(discord.Client):
         if not player.current_entry:
             return Response("There's nothing playing right now so I can't add it to your playlist...")
 
+        add_entry = player.current_entry
+        if add_entry.provides_timestamp:
+            current_timestamp = add_entry.get_current_song_from_timestamp(player.progress)[
+                "name"]
+            add_entry = await self.get_play_entry(player, channel, author, current_timestamp[1:], current_timestamp[0])
+
         if playlistname not in self.playlists.saved_playlists:
             if len(playlistname) < 3:
                 return Response("Your name is too short. Please choose one with at least three letters.")
             self.playlists.set_playlist(
-                [player.current_entry], playlistname, author.id)
+                [add_entry], playlistname, author.id)
             return Response("Created a new playlist and added the currently playing song.")
 
         self.playlists.edit_playlist(
-            playlistname, player.playlist, new_entries=[player.current_entry])
+            playlistname, player.playlist, new_entries=[add_entry])
         return Response("Added the current song to the playlist.")
 
     async def cmd_removeplayingfromplaylist(self, channel, author, player, playlistname):
@@ -4764,13 +4770,19 @@ class MusicBot(discord.Client):
         playlistname = playlistname.lower()
 
         if not player.current_entry:
-            return Response("There's nothing playing right now so I can't add it to your playlist...")
+            return Response("There's nothing playing right now so I can't remove it from your playlist...")
+
+        remove_entry = player.current_entry
+        if remove_entry.provides_timestamp:
+            current_timestamp = remove_entry.get_current_song_from_timestamp(player.progress)[
+                "name"]
+            remove_entry = await self.get_play_entry(player, channel, author, current_timestamp[1:], current_timestamp[0])
 
         if playlistname not in self.playlists.saved_playlists:
             return Response("There's no playlist with this name.")
 
         self.playlists.edit_playlist(
-            playlistname, player.playlist, remove_entries=[player.current_entry])
+            playlistname, player.playlist, remove_entries=[remove_entry])
         return Response("Removed the current song from the playlist.")
 
     async def cmd_setentrystart(self, player, playlistname):
