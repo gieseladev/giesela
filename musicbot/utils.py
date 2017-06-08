@@ -4,6 +4,7 @@ import random
 import re
 import unicodedata
 from datetime import timedelta
+from difflib import SequenceMatcher
 from hashlib import md5
 
 import aiohttp
@@ -11,6 +12,10 @@ import requests
 from bs4 import BeautifulSoup
 
 from .constants import DISCORD_MSG_CHAR_LIMIT
+
+
+def similarity(a, b):
+    return SequenceMatcher(None, a, b).ratio()
 
 
 def load_file(filename, skip_commented_lines=True, comment_char='#'):
@@ -86,13 +91,22 @@ def ordinal(n):
 
 def _run_timestamp_matcher(text):
     songs = {}
-    for match in re.finditer(r"(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?\W+(.+?)(?:\n|$)", text):
+    for match in re.finditer(r"^(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?\W+(.+?)$", text, flags=re.MULTILINE):
         timestamp = int(match.group(3))
         timestamp += (int(match.group(2)) *
                       60) if match.group(2) is not None else 0
         timestamp += (int(match.group(1)) *
                       3600) if match.group(1) is not None else 0
         songs[timestamp] = match.group(4)
+
+    if len(songs) < 0:
+        for match in re.finditer(r"^(.+)\s(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?$", text, flags=re.MULTILINE):
+            timestamp = int(match.group(4))
+            timestamp += (int(match.group(3)) *
+                          60) if match.group(3) is not None else 0
+            timestamp += (int(match.group(2)) *
+                          3600) if match.group(2) is not None else 0
+            songs[timestamp] = match.group(1)
 
     if len(songs) > 0:
         return songs
