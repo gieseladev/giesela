@@ -103,10 +103,6 @@ class Response:
 
 
 class MusicBot(discord.Client):
-    trueStringList = ["true", "1", "t", "y", "yes", "yeah",
-                      "yup", "certainly", "uh-huh", "affirmitive", "activate"]
-    channelFreeCommands = ["say", "quote",
-                           "9gag", "execute", "giphy", "twitter"]
     privateChatCommands = ["c", "ask", "requestfeature", "random",
                            "translate", "help", "say", "broadcast", "news", "game", "wiki", "cah", "execute", "secret"]
     lonelyModeRunning = False
@@ -2976,7 +2972,7 @@ class MusicBot(discord.Client):
         Let the bot talk to itself
         """
         self.newLonelyState = (msgState.lower(
-        ) in self.trueStringList) if msgState is not None else not self.lonelyModeRunning
+        ) in ["y", "yes", "yep"]) if msgState is not None else not self.lonelyModeRunning
         if self.newLonelyState and not self.lonelyModeRunning:
             await self.lonelymodeloop(channel)
         else:
@@ -4182,20 +4178,20 @@ class MusicBot(discord.Client):
         #
         # return category_dict[str(reaction.emoji)]
 
-    async def cmd_twitter(self, channel, tweet_id):
-        """
-        ///|Usage
-        ***REMOVED***command_prefix***REMOVED***twitter <tweet_id>
-        ///|Explanation
-        Embed a tweet
-        """
-
-        tweet = get_tweet(tweet_id)
-        # print(tweet.created_at.year)
-        em = Embed(description=tweet.text)
-        em.set_author(url=tweet.user.url, name=tweet.user.name,
-                      icon_url=tweet.user.avatar_url)
-        await self.send_message(channel, embed=em)
+    # async def cmd_twitter(self, channel, tweet_id):
+    #     """
+    #     ///|Usage
+    #     ***REMOVED***command_prefix***REMOVED***twitter <tweet_id>
+    #     ///|Explanation
+    #     Embed a tweet
+    #     """
+    #
+    #     tweet = get_tweet(tweet_id)
+    #     # print(tweet.created_at.year)
+    #     em = Embed(description=tweet.text)
+    #     em.set_author(url=tweet.user.url, name=tweet.user.name,
+    #                   icon_url=tweet.user.avatar_url)
+    #     await self.send_message(channel, embed=em)
 
     async def cmd_giphy(self, channel, gif_id):
         async with aiohttp.ClientSession() as session:
@@ -5229,7 +5225,7 @@ class MusicBot(discord.Client):
 
         search_channel = " ".join(leftover_args)
         if search_channel.lower().strip() == "home":
-            search_channel = "MusicBot's reign"
+            search_channel = "Giesela's reign"
 
         if author.voice.voice_channel is None:
             return Response("You're incredibly incompetent to do such a thing!")
@@ -5890,7 +5886,8 @@ class MusicBot(discord.Client):
                 raise
                 print("couldn't translate the message")
 
-            return
+            if self.config.owned_channels and message.channel.id not in self.config.owned_channels:
+                return
 
         if message.author == self.user:
             self.log("Ignoring command from myself (%s)" %
@@ -5902,7 +5899,8 @@ class MusicBot(discord.Client):
                 return
 
         command, *args = message_content.split()
-        command = command[len(self.config.command_prefix):].lower().strip()
+        command = command[len(self.config.command_prefix):].lower().strip(
+        ) if message_content.startswith(self.config.command_prefix) else command.lower().strip()
 
         handler = getattr(self, 'cmd_%s' % command, None)
         if not handler:
