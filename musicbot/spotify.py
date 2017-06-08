@@ -1,11 +1,16 @@
 import re
-from difflib import SequenceMatcher
 
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
+from .utils import similarity as similar
+
 cred = SpotifyClientCredentials(
     "df9e44098b934c028ea085227c3ec3f6", "f9d02852fb1a4dacaa50d14e915c5d0e")
+
+
+def get_spotify_client():
+    return spotipy.Spotify(auth=cred.get_access_token())
 
 
 class SpotifyArtist:
@@ -27,8 +32,7 @@ class SpotifyArtist:
         except KeyError:
             # if the provided data isn't the full data then just go and get it
             # yourself
-            data = spotipy.Spotify(
-                auth=cred.get_access_token()).artist(data["id"])
+            data = get_spotify_client().artist(data["id"])
             return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["external_urls"]["spotify"])
 
     @classmethod
@@ -38,8 +42,7 @@ class SpotifyArtist:
     @property
     def top_tracks(self):
         if self._top_tracks is None:
-            data = spotipy.Spotify(
-                auth=cred.get_access_token()).artist_top_tracks(self.id, "CH")
+            data = get_spotify_client().artist_top_tracks(self.id, "CH")
             self._top_tracks = [
                 SpotifyTrack.from_data(entry) for entry in data["tracks"]]
 
@@ -113,7 +116,7 @@ class SpotifyTrack:
     def from_query(cls, query):
         query = parse_query(query)
 
-        search_result = spotipy.Spotify(auth=cred.get_access_token()).search(
+        search_result = get_spotify_client().search(
             query, limit=1, type="track")
         if len(search_result) < 1 or len(search_result["tracks"]["items"]) < 1:
             return cls.EmptyTrack(query)
@@ -195,10 +198,6 @@ class SpotifyTrack:
 # def get_featured_playlist():
 # return [SpotifyPlaylist.from_data(playlist) for playlist in
 # spotify.featured_playlists()]
-
-
-def similar(a, b):
-    return SequenceMatcher(None, a, b).ratio()
 
 
 def get_certainty(query, song_name, artists):

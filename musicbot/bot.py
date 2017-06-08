@@ -38,11 +38,13 @@ import asyncio
 import configparser
 
 from . import downloader, exceptions
+from .bookmarks import bookmark
 from .cleverbot import CleverWrap
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
 from .constants import (AUDIO_CACHE_PATH, DEV_VERSION, DISCORD_MSG_CHAR_LIMIT,
                         MASTER_VERSION)
+from .entry import URLPlaylistEntry
 from .games.game_2048 import Game2048
 from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
@@ -61,6 +63,7 @@ from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .settings import Settings
 from .socket_server import SocketServer
+from .spotify import parse_query
 from .translate import Translator
 from .twitter_api import get_tweet
 from .utils import (create_bar, escape_dis, format_time, hex_to_dec, load_file,
@@ -92,17 +95,14 @@ class SkipState:
 
 class Response:
 
-    def __init__(self, content, reply=False, delete_after=0):
+    def __init__(self, content=None, reply=False, delete_after=0, embed=None):
         self.content = content
         self.reply = reply
         self.delete_after = delete_after
+        self.embed = embed
 
 
 class MusicBot(discord.Client):
-    trueStringList = ["true", "1", "t", "y", "yes", "yeah",
-                      "yup", "certainly", "uh-huh", "affirmitive", "activate"]
-    channelFreeCommands = ["say", "quote",
-                           "9gag", "execute", "giphy", "twitter"]
     privateChatCommands = ["c", "ask", "requestfeature", "random",
                            "translate", "help", "say", "broadcast", "news", "game", "wiki", "cah", "execute", "secret"]
     lonelyModeRunning = False
@@ -581,10 +581,10 @@ class MusicBot(discord.Client):
 
         await self.change_presence(game=game)
 
-    async def safe_send_message(self, dest, content, *, max_letters=DISCORD_MSG_CHAR_LIMIT, split_message=True, tts=False, expire_in=0, also_delete=None, quiet=False):
+    async def safe_send_message(self, dest, content=None, *, max_letters=DISCORD_MSG_CHAR_LIMIT, split_message=True, tts=False, expire_in=0, also_delete=None, quiet=False, embed=None):
         msg = None
         try:
-            if split_message and len(content) > max_letters:
+            if split_message and content and len(content) > max_letters:
                 self.log("Message too long, splitting it up")
                 msgs = paginate(content, length=DISCORD_MSG_CHAR_LIMIT)
 
@@ -599,7 +599,7 @@ class MusicBot(discord.Client):
                         asyncio.ensure_future(
                             self._wait_delete_msg(also_delete, expire_in))
             else:
-                msg = await self.send_message(dest, content, tts=tts)
+                msg = await self.send_message(dest, content, tts=tts, embed=embed)
 
                 if msg and expire_in:
                     asyncio.ensure_future(
@@ -2936,13 +2936,14 @@ class MusicBot(discord.Client):
         if self.config.auto_playlist:
             await self.on_player_finished_playing(player)
 
-    async def goto_home(self, server):
+    async def goto_home(self, server, join=True):
         channel = find(lambda c: c.type == ChannelType.voice and any(x in c.name.lower().split(
         ) for x in ["giesela", "musicbot", "bot", "music", "reign"]), server.channels)
         if channel is None:
             channel = choice(
                 filter(lambda c: c.type == ChannelType.voice, server.channels))
-        await self.get_player(channel, create=True)
+        if join:
+            await self.get_player(channel, create=True)
         return channel
 
     async def cmd_replay(self, player, channel, author):
@@ -2972,7 +2973,7 @@ class MusicBot(discord.Client):
         Let the bot talk to itself
         """
         self.newLonelyState = (msgState.lower(
-        ) in self.trueStringList) if msgState is not None else not self.lonelyModeRunning
+        ) in ["y", "yes", "yep"]) if msgState is not None else not self.lonelyModeRunning
         if self.newLonelyState and not self.lonelyModeRunning:
             await self.lonelymodeloop(channel)
         else:
@@ -4178,20 +4179,20 @@ class MusicBot(discord.Client):
         #
         # return category_dict[str(reaction.emoji)]
 
-    async def cmd_twitter(self, channel, tweet_id):
-        """
-        ///|Usage
-        ***REMOVED***command_prefix***REMOVED***twitter <tweet_id>
-        ///|Explanation
-        Embed a tweet
-        """
-
-        tweet = get_tweet(tweet_id)
-        # print(tweet.created_at.year)
-        em = Embed(description=tweet.text)
-        em.set_author(url=tweet.user.url, name=tweet.user.name,
-                      icon_url=tweet.user.avatar_url)
-        await self.send_message(channel, embed=em)
+    # async def cmd_twitter(self, channel, tweet_id):
+    #     """
+    #     ///|Usage
+    #     ***REMOVED***command_prefix***REMOVED***twitter <tweet_id>
+    #     ///|Explanation
+    #     Embed a tweet
+    #     """
+    #
+    #     tweet = get_tweet(tweet_id)
+    #     # print(tweet.created_at.year)
+    #     em = Embed(description=tweet.text)
+    #     em.set_author(url=tweet.user.url, name=tweet.user.name,
+    #                   icon_url=tweet.user.avatar_url)
+    #     await self.send_message(channel, embed=em)
 
     async def cmd_giphy(self, channel, gif_id):
         async with aiohttp.ClientSession() as session:
@@ -4735,15 +4736,21 @@ class MusicBot(discord.Client):
         if not player.current_entry:
             return Response("There's nothing playing right now so I can't add it to your playlist...")
 
+        add_entry = player.current_entry
+        if add_entry.provides_timestamp:
+            current_timestamp = add_entry.get_current_song_from_timestamp(player.progress)[
+                "name"]
+            add_entry = await self.get_play_entry(player, channel, author, current_timestamp[1:], current_timestamp[0])
+
         if playlistname not in self.playlists.saved_playlists:
             if len(playlistname) < 3:
                 return Response("Your name is too short. Please choose one with at least three letters.")
             self.playlists.set_playlist(
-                [player.current_entry], playlistname, author.id)
+                [add_entry], playlistname, author.id)
             return Response("Created a new playlist and added the currently playing song.")
 
         self.playlists.edit_playlist(
-            playlistname, player.playlist, new_entries=[player.current_entry])
+            playlistname, player.playlist, new_entries=[add_entry])
         return Response("Added the current song to the playlist.")
 
     async def cmd_removeplayingfromplaylist(self, channel, author, player, playlistname):
@@ -4760,13 +4767,19 @@ class MusicBot(discord.Client):
         playlistname = playlistname.lower()
 
         if not player.current_entry:
-            return Response("There's nothing playing right now so I can't add it to your playlist...")
+            return Response("There's nothing playing right now so I can't remove it from your playlist...")
+
+        remove_entry = player.current_entry
+        if remove_entry.provides_timestamp:
+            current_timestamp = remove_entry.get_current_song_from_timestamp(player.progress)[
+                "name"]
+            remove_entry = await self.get_play_entry(player, channel, author, current_timestamp[1:], current_timestamp[0])
 
         if playlistname not in self.playlists.saved_playlists:
             return Response("There's no playlist with this name.")
 
         self.playlists.edit_playlist(
-            playlistname, player.playlist, remove_entries=[player.current_entry])
+            playlistname, player.playlist, remove_entries=[remove_entry])
         return Response("Removed the current song from the playlist.")
 
     async def cmd_setentrystart(self, player, playlistname):
@@ -4868,16 +4881,36 @@ class MusicBot(discord.Client):
 
         search_query = " ".join(leftover_args)
 
-        if "simon berger" in search_query.lower() or "simon jonas berger" in search_query.lower():
-            already_used = load_file("data/simon_berger_wikied.txt")
-
-            if author.id in already_used:
-                return Response("I mustn't betray my master twice for you!")
-            else:
-                already_used.append(author.id)
-                write_file("data/simon_berger_wikied.txt", already_used)
-
-            return Response("*****REMOVED*** Berger**\n***REMOVED*** Jonas Berger (born March 28, 1992) is a computer scientist and works at Google London as head of the Technical Solutions team.\nI didn't actually expect anyone to read this far, but apparently you are...\nLet me tell you something about my past then. I went to Kindergarten one year earlier than normal. This is due to the fact, that one Doctor thought that I was a genius (of course that turned out to be wrong). I skipped 4th grade, not because I wanted, but because my teacher persuaded my parents to do so. I especially loved that teacher and was sincerely upset about that. I went to the gymnasium after 8th grade.Shortly after, at the age of 15, my parents passed away in a car accident so I went to live with my grandparents but 2 months later I lived in a flat in Zurich to study at ETH. Because I practically skipped 2 years of education I was merely 16 while everyone around me was already 18. With the age of 20 I got my Bachelor's degree and at the age of 22 I finished my Master's degree. While I was studying at ETH I got the chance to take part in a Google Interview. After 2 interviews they offered me a job as a Technical Solutions Consultant. June 25th 2016 they promoted me to head of Technical Solutions.\n\nWhy am I telling you this? Well... If you went ahead and looked me up I'm sure you were just a little bit interested.")
+        # if "simon berger" in search_query.lower() or "simon jonas berger" in search_query.lower():
+        #     already_used = load_file("data/simon_berger_wikied.txt")
+        #
+        #     if author.id in already_used:
+        #         return Response("I mustn't betray my master twice for you!")
+        #     else:
+        #         already_used.append(author.id)
+        #         write_file("data/simon_berger_wikied.txt", already_used)
+        #
+        # return Response("*****REMOVED*** Berger**\n***REMOVED*** Jonas Berger (born March 28,
+        # 1992) is a computer scientist and works at Google London as head of
+        # the Technical Solutions team.\nI didn't actually expect anyone to
+        # read this far, but apparently you are...\nLet me tell you something
+        # about my past then. I went to Kindergarten one year earlier than
+        # normal. This is due to the fact, that one Doctor thought that I was a
+        # genius (of course that turned out to be wrong). I skipped 4th grade,
+        # not because I wanted, but because my teacher persuaded my parents to
+        # do so. I especially loved that teacher and was sincerely upset about
+        # that. I went to the gymnasium after 8th grade.Shortly after, at the
+        # age of 15, my parents passed away in a car accident so I went to live
+        # with my grandparents but 2 months later I lived in a flat in Zurich
+        # to study at ETH. Because I practically skipped 2 years of education I
+        # was merely 16 while everyone around me was already 18. With the age
+        # of 20 I got my Bachelor's degree and at the age of 22 I finished my
+        # Master's degree. While I was studying at ETH I got the chance to take
+        # part in a Google Interview. After 2 interviews they offered me a job
+        # as a Technical Solutions Consultant. June 25th 2016 they promoted me
+        # to head of Technical Solutions.\n\nWhy am I telling you this? Well...
+        # If you went ahead and looked me up I'm sure you were just a little
+        # bit interested.")
 
         # self.log (search_query)
 
@@ -5193,7 +5226,7 @@ class MusicBot(discord.Client):
 
         search_channel = " ".join(leftover_args)
         if search_channel.lower().strip() == "home":
-            search_channel = "MusicBot's reign"
+            search_channel = "Giesela's reign"
 
         if author.voice.voice_channel is None:
             return Response("You're incredibly incompetent to do such a thing!")
@@ -5319,7 +5352,7 @@ class MusicBot(discord.Client):
     async def cmd_rwd(self, player, timestamp=None):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***fwd [timestamp]
+            ***REMOVED***command_prefix***REMOVED***rwd [timestamp]
 
         Rewind <timestamp> into the current entry or if the current entry is a timestamp-entry, rewind to the previous song
         """
@@ -5706,6 +5739,79 @@ class MusicBot(discord.Client):
             else:
                 return Response("No idea who you are... bugger off!")
 
+    async def cmd_bookmark(self, author, player, leftover_args):
+        """
+        ///|Creation
+        ***REMOVED***command_prefix***REMOVED***bookmark [name] [timestamp]
+        ///|Explanation
+        Create a new bookmark for the current entry. If no name is provided the entry's title will be used and if there's no timestamp provided the current timestamp will be used.
+        ///|Use a bookmark
+        ***REMOVED***command_prefix***REMOVED***bookmark <id | name>
+        ///|List available bookmarks
+        ***REMOVED***command_prefix***REMOVED***bookmark list
+        ///|Remove a bookmark
+        ***REMOVED***command_prefix***REMOVED***bookmark remove <id | name>
+        """
+        if len(leftover_args) > 0:
+            arg = leftover_args[0].lower()
+            if arg in ["list", "showall"]:
+                em = Embed(title="Bookmarks")
+                for bm in bookmark.all_bookmarks:
+                    bm_name = parse_query(bm["name"])
+                    bm_author = self.get_global_user(
+                        bm["author_id"]).display_name
+                    bm_timestamp = to_timestamp(bm["timestamp"])
+                    bm_id = bm["id"]
+                    t = "*****REMOVED******REMOVED***** *by *****REMOVED******REMOVED******".format(bm_name, bm_author)
+                    v = "`***REMOVED******REMOVED***` *from* \"***REMOVED******REMOVED***\"".format(bm_timestamp,
+                                                    bm_id)
+                    em.add_field(name=t, value=v)
+                return Response(embed=em)
+            elif arg in ["remove", "delete"]:
+                if len(leftover_args) < 2:
+                    return Response("Please provide an id or a name")
+                bm = bookmark.get_bookmark(" ".join(leftover_args[1:]))
+                if not bm:
+                    return Response("Didn't find a bookmark with that query")
+                print(bm)
+                if bookmark.remove_bookmark(bm["id"]):
+                    return Response("Removed bookmark `***REMOVED******REMOVED***`".format(bm["name"]))
+                else:
+                    return Response("Something went wrong")
+            else:
+                bm = bookmark.get_bookmark(" ".join(leftover_args))
+                if bm:
+                    player.playlist._add_entry(
+                        URLPlaylistEntry.from_dict(player.playlist, bm["entry"]))
+                    return Response("Loaded bookmark `***REMOVED***0***REMOVED***` *by *****REMOVED***1***REMOVED******".format(bm["name"], self.get_global_user(bm["author_id"]).display_name))
+                else:
+                    bm_timestamp = player.progress
+                    bm_name = None
+                    if len(leftover_args) > 1:
+                        timestamp = parse_timestamp(leftover_args[-1])
+                        if timestamp:
+                            bm_timestamp = timestamp
+                        bm_name = " ".join(
+                            leftover_args[:-1]) if timestamp else " ".join(leftover_args)
+                    else:
+                        timestamp = parse_timestamp(leftover_args[-1])
+                        if timestamp:
+                            bm_timestamp = timestamp
+                        else:
+                            bm_name = " ".join(leftover_args)
+
+                    id = bookmark.add_bookmark(
+                        player.current_entry, bm_timestamp, author.id, bm_name)
+                    return Response("Created a new bookmark with the id `***REMOVED***0***REMOVED***` (\"***REMOVED***2***REMOVED***\", `***REMOVED***3***REMOVED***`)\nUse `***REMOVED***1***REMOVED***bookmark ***REMOVED***0***REMOVED***` to load it ".format(id, self.config.command_prefix, bm_name, to_timestamp(bm_timestamp)))
+
+        else:
+            if player.current_entry:
+                id = bookmark.add_bookmark(
+                    player.current_entry, player.progress, author.id)
+                return Response("Created a new bookmark with the id `***REMOVED***0***REMOVED***`\nUse `***REMOVED***1***REMOVED***bookmark ***REMOVED***0***REMOVED***` to load it ".format(id, self.config.command_prefix))
+            else:
+                return await self.cmd_bookmark(author, player, ["list", ])
+
     @owner_only
     async def cmd_blockcommand(self, command, leftover_args):
         """
@@ -5781,7 +5887,8 @@ class MusicBot(discord.Client):
                 raise
                 print("couldn't translate the message")
 
-            return
+            if self.config.owned_channels and message.channel.id not in self.config.owned_channels:
+                return
 
         if message.author == self.user:
             self.log("Ignoring command from myself (%s)" %
@@ -5793,7 +5900,8 @@ class MusicBot(discord.Client):
                 return
 
         command, *args = message_content.split()
-        command = command[len(self.config.command_prefix):].lower().strip()
+        command = command[len(self.config.command_prefix):].lower().strip(
+        ) if message_content.startswith(self.config.command_prefix) else command.lower().strip()
 
         handler = getattr(self, 'cmd_%s' % command, None)
         if not handler:
@@ -5908,13 +6016,14 @@ class MusicBot(discord.Client):
             response = await handler(**handler_kwargs)
             if response and isinstance(response, Response):
                 content = response.content
-                if response.reply:
+                if content and response.reply:
                     content = '%s, %s' % (message.author.mention, content)
 
                 sentmsg = await self.safe_send_message(
                     message.channel, content,
                     expire_in=response.delete_after if self.config.delete_messages else 0,
-                    also_delete=message if self.config.delete_invoking else None
+                    also_delete=message if self.config.delete_invoking else None,
+                    embed=response.embed
                 )
 
         except (exceptions.CommandError, exceptions.HelpfulError, exceptions.ExtractionError) as e:
