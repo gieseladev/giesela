@@ -2936,13 +2936,14 @@ class MusicBot(discord.Client):
         if self.config.auto_playlist:
             await self.on_player_finished_playing(player)
 
-    async def goto_home(self, server):
+    async def goto_home(self, server, join=True):
         channel = find(lambda c: c.type == ChannelType.voice and any(x in c.name.lower().split(
         ) for x in ["giesela", "musicbot", "bot", "music", "reign"]), server.channels)
         if channel is None:
             channel = choice(
                 filter(lambda c: c.type == ChannelType.voice, server.channels))
-        await self.get_player(channel, create=True)
+        if join:
+            await self.get_player(channel, create=True)
         return channel
 
     async def cmd_replay(self, player, channel, author):
