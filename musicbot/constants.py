@@ -3,7 +3,7 @@ import re
 
 import requests
 
-MAIN_VERSION = '3.3.0'
+MAIN_VERSION = '3.3.1'
 SUB_VERSION = 'Gieselator'
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 

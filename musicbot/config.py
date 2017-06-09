@@ -4,13 +4,14 @@ import configparser
 
 
 def encode_setting(value):
+    json_handler = lambda v: json.dumps(v) + "\\json"
+
     handlers = {
         "int": lambda v: str(v) + "\\i",
         "float": lambda v: str(v) + "\\f",
-        "json": lambda v: json.dumps(v) + "\\json",
-        "list": handlers["json"],
-        "tuple": handlers["json"],
-        "dict": handlers["json"]
+        "list": json_handler,
+        "tuple": json_handler,
+        "dict": json_handler
     }
     return handlers.get(type(value).__name__, lambda v: v)(value)
 
@@ -53,6 +54,7 @@ class Config:
     def __setattr__(self, name, value):
         if name in dir(ConfigDefaults):
             self.config.set("Settings", name, encode_setting(value))
+            self.config.write(open(self.config_file, "w+"))
         else:
             self.__dict__[name] = value
 
