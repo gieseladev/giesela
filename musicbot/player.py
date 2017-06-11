@@ -231,6 +231,8 @@ class MusicPlayer(EventEmitter):
 
         entry = self._current_entry
 
+        self.playlist.push_history(entry)
+
         if self.is_repeatAll or (self.is_repeatSingle and not self.skipRepeat):
             self.playlist._add_entry(entry)
             if self.is_repeatSingle:

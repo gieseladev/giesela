@@ -135,7 +135,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.url = url
         self._title = title
         self.duration = duration
-        self.end_seconds = end_seconds
+        self.end_seconds = end_seconds if end_seconds else duration
 
         self.start_seconds = start_seconds
         self.expected_filename = expected_filename

@@ -23,6 +23,7 @@ class Playlist(EventEmitter):
         self.loop = bot.loop
         self.downloader = bot.downloader
         self.entries = deque()
+        self.history = []
 
     def __iter__(self):
         return iter(self.entries)
@@ -32,6 +33,9 @@ class Playlist(EventEmitter):
 
     def clear(self):
         self.entries.clear()
+
+    def push_history(self, entry):
+        self.history = [entry, *self.history[:9]]
 
     async def add_stream_entry(self, song_url, info=None, play_now=False, player=None, **meta):
         if info is None:
