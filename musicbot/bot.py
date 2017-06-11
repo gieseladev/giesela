@@ -5844,8 +5844,8 @@ class MusicBot(discord.Client):
         message_content = message.content.strip()
 
         nine_gag_match = re.match(
-            r".+?[http|https]:\/\/(?:m\.)?9gag.com\/gag\/(\w+)", message_content)
-        if nine_gag_match is not None:
+            r".+?[http|https]:\/\/(?:m\.)?9gag.com\/gag\/(\w+)(?:\?.+)", message_content)
+        if nine_gag_match:
             post_id = nine_gag_match.group(1)
             await self.cmd_9gag(message.channel, message.author, post_id)
             await self.safe_delete_message(message)
