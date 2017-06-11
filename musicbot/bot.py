@@ -175,6 +175,16 @@ class MusicBot(discord.Client):
 
         return wrapper
 
+    def command_info(version, timestamp, changelog = {}):
+        def function_decorator(func):
+            func.version = version
+            func.timestamp = datetime.from_timestamp(timestamp)
+            func.changelog = changelog
+
+            return func
+
+        return command_info
+
     @staticmethod
     def _fixg(x, dp=2):
         return ('{:.%sf}' % dp).format(x).rstrip('0').rstrip('.')
@@ -2125,10 +2135,10 @@ class MusicBot(discord.Client):
 
     async def cmd_queue(self, channel, player):
         """
-        Usage:
-            {command_prefix}queue
-
-        logs the current song queue.
+        ///|Usage
+        {command_prefix}queue
+        ///|Explanation
+        Show the current song queue
         """
 
         lines = []
@@ -2214,6 +2224,25 @@ class MusicBot(discord.Client):
 
         message = '\n'.join(lines)
         return Response(message, delete_after=30)
+
+    @command_info("3.3.3", 1497197957)
+    async def cmd_history(self, channel, player):
+        """
+        ///|Usage
+        {command_prefix}history
+        ///|Explanation
+        Show the last 10 songs
+        """
+
+        seconds_passed = player.progress
+
+        lines = []
+        for ind, entry in enumerate(player.playlist.history, 1):
+            lines.append("{}. \"{}\" **{} ago**".format(ind, entry.title, seconds_passed))
+            seconds_passed += entry.end_seonds
+
+        return Response("\n".join(lines))
+
 
     async def cmd_clean(self, message, channel, server, author, search_range=50):
         """
