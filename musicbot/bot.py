@@ -141,6 +141,7 @@ class MusicBot(discord.Client):
         self.cached_client_id = None
         self.chatters = ***REMOVED******REMOVED***
         self.blocked_commands = ***REMOVED******REMOVED***
+        self.users_in_menu = set()
 
         if not self.autoplaylist:
             log("Warning: Autoplaylist is empty, disabling.")
@@ -175,15 +176,29 @@ class MusicBot(discord.Client):
 
         return wrapper
 
-    def command_info(version, timestamp, changelog = ***REMOVED******REMOVED***):
+    def command_info(version, timestamp, changelog=***REMOVED******REMOVED***):
         def function_decorator(func):
             func.version = version
-            func.timestamp = datetime.from_timestamp(timestamp)
+            func.timestamp = datetime.fromtimestamp(timestamp)
             func.changelog = changelog
 
             return func
 
-        return command_info
+        return function_decorator
+
+    def block_user(func):
+        @wraps(func)
+        async def wrapper(self, *args, **kwargs):
+            orig_msg = _get_variable("message")
+
+            self.users_in_menu.add(orig_msg.author.id)
+            print("Now blocking " + str(orig_msg.author))
+            res = await func(self, *args, **kwargs)
+            self.users_in_menu.remove(orig_msg.author.id)
+            print("Unblocking " + str(orig_msg.author))
+            return res
+
+        return wrapper
 
     @staticmethod
     def _fixg(x, dp=2):
@@ -1667,6 +1682,7 @@ class MusicBot(discord.Client):
         return Response("Enqueued ***REMOVED******REMOVED*** songs to be played in ***REMOVED******REMOVED*** seconds".format(
             songs_added, self._fixg(ttime, 1)), delete_after=30)
 
+    @block_user
     async def cmd_search(self, player, channel, author, permissions, leftover_args):
         """
         Usage:
@@ -2238,11 +2254,11 @@ class MusicBot(discord.Client):
 
         lines = []
         for ind, entry in enumerate(player.playlist.history, 1):
-            lines.append("***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" *****REMOVED******REMOVED*** ago**".format(ind, entry.title, seconds_passed))
-            seconds_passed += entry.end_seonds
+            lines.append("***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" *****REMOVED******REMOVED*** ago**".format(ind,
+                                                        entry.title, format_time(seconds_passed, round_seconds=True, round_base=1, max_specifications=2)))
+            seconds_passed += entry.end_seconds
 
         return Response("\n".join(lines))
-
 
     async def cmd_clean(self, message, channel, server, author, search_range=50):
         """
@@ -2515,6 +2531,7 @@ class MusicBot(discord.Client):
 
         # await self.safe_send_message (channel, msgState)
 
+    @block_user
     async def cmd_radio(self, player, channel, author, leftover_args):
         """
         Usage:
@@ -3026,6 +3043,7 @@ class MusicBot(discord.Client):
             await self.safe_send_message(channel, 'Regi: ***REMOVED******REMOVED***'.format(answer))
             answer = cbTwo.say(answer)
 
+    @block_user
     async def cmd_random(self, channel, author, leftover_args):
         """
         Usage:
@@ -3328,6 +3346,7 @@ class MusicBot(discord.Client):
 
         await self.safe_send_message(channel, "Didn't find anything that goes by ***REMOVED***0***REMOVED***".format(leftover_args[0]), expire_in=15)
 
+    @block_user
     async def cmd_news(self, message, channel, author, paper=None):
         """
         Usage:
@@ -3469,6 +3488,7 @@ class MusicBot(discord.Client):
 
         return Response("Can't find any more articles :frowning:", delete_after=30)
 
+    @block_user
     async def cmd_cah(self, message, channel, author, leftover_args):
         """
         Usage:
@@ -3568,6 +3588,7 @@ class MusicBot(discord.Client):
             self.cah.stop_game(g.token)
             return Response("Stopped the game *****REMOVED******REMOVED*****".format(token), delete_after=15)
 
+    @block_user
     async def cmd_cards(self, server, channel, author, message, leftover_args):
         """
         Usage:
@@ -3748,6 +3769,7 @@ class MusicBot(discord.Client):
 
         await self.safe_send_message(channel, "Closed the card viewer!", expire_in=20)
 
+    @block_user
     async def cmd_qcards(self, server, channel, author, message, leftover_args):
         """
         Usage:
@@ -3934,6 +3956,7 @@ class MusicBot(discord.Client):
 
         await self.safe_send_message(channel, "Closed the question card viewer!", expire_in=20)
 
+    @block_user
     async def cmd_game(self, message, channel, author, leftover_args, game=None):
         """
         Usage:
@@ -4313,6 +4336,7 @@ class MusicBot(discord.Client):
 
         return Response(reply_text, delete_after=30)
 
+    @block_user
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         ///|Load
@@ -4999,6 +5023,7 @@ class MusicBot(discord.Client):
         await self.safe_send_message(author, "The file is being uploaded. Please wait a second.", delete_after=15)
         await self.send_file(author, entry.filename, content="Here you go:")
 
+    @block_user
     async def cmd_reminder(self, channel, author, player, server, leftover_args):
         """
         Usage:
@@ -5317,6 +5342,7 @@ class MusicBot(discord.Client):
                 else:
                     return Response("Successfully sent the message!")
 
+    @block_user
     async def cmd_execute(self, channel, author, server, leftover_args, player=None):
         statement = " ".join(leftover_args)
         statement = statement.replace("/n/", "\n")
@@ -5746,6 +5772,7 @@ class MusicBot(discord.Client):
             await self.send_message(quote_to_channel, embed=em)
         return
 
+    @block_user
     async def cmd_secret(self, author, channel, secret_id):
         if secret_id == "48856":
             if not channel.is_private:
@@ -5890,6 +5917,10 @@ class MusicBot(discord.Client):
         #     await self.send_message(message.channel, embed=em)
         #     await self.safe_delete_message(message)
         #     return
+
+        if message.author.id in self.users_in_menu:
+            print("User is currently in a menu")
+            return
 
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
