@@ -4986,6 +4986,7 @@ class MusicBot(discord.Client):
 
         return Response("*****REMOVED******REMOVED*****\n***REMOVED******REMOVED***".format(wikipedia_page_title, wikipedia.summary(wikipedia_page_title, sentences=3)))
 
+    @command_info("1.9.5", 1479945600, ***REMOVED***"3.3.5": (1497284850, "removed delete_after keywords which was the reason this command was broken")***REMOVED***)
     async def cmd_getmusicfile(self, channel, author, player, index=0):
         """
         Usage:
@@ -4999,20 +5000,20 @@ class MusicBot(discord.Client):
         try:
             index = int(index) - 1
         except:
-            return Response("Please provide a valid index", delete_after=30)
+            return Response("Please provide a valid index")
 
         if index == -1:
             entry = player.current_entry
         else:
             if index < 0 or index >= len(player.playlist.entries):
-                return Response("Your index is out of range", delete_after=15)
+                return Response("Your index is out of range")
             entry = player.playlist.entries[index]
 
         if not entry:
-            return Response("This entry is currently being worked on. Please retry again later", delete_after=15)
+            return Response("This entry is currently being worked on. Please retry again later")
 
         if type(entry).__name__ == "StreamPlaylistEntry":
-            return Response("Can't send you this because it's a live stream", delete_after=15)
+            return Response("Can't send you this because it's a live stream")
 
         if not entry.is_downloaded:
             try:
@@ -5020,7 +5021,7 @@ class MusicBot(discord.Client):
             except:
                 return Response("Could not download the file. This really shouldn't happen")
 
-        await self.safe_send_message(author, "The file is being uploaded. Please wait a second.", delete_after=15)
+        await self.safe_send_message(author, "The file is being uploaded. Please wait a second.")
         await self.send_file(author, entry.filename, content="Here you go:")
 
     @block_user
