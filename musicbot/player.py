@@ -355,6 +355,25 @@ class MusicPlayer(EventEmitter):
                 self._current_player.start()
                 self.emit('play', player=self, entry=entry)
                 self.bot.socket_server.threaded_broadcast_information()
+                asyncio.ensure_future(self.update_timestamp(2))
+
+    async def update_timestamp(self, delay=None):
+        if not delay:
+            if self.current_entry and self.current_entry.provides_timestamps:
+                prg, dur = self.current_entry.get_local_progress(self.progress)
+                # just to be sure, add an extra 2 seconds
+                next_delay = (dur - prg) + 2
+                return await self.update_timestamp(next_delay)
+            else:
+                return
+
+        print("WAITING for " + str(delay) + " secs")
+        await asyncio.sleep(delay)
+        print("emitting")
+        if not self.current_entry:
+            return
+        self.emit('play', player=self, entry=self.current_entry)
+        await self.update_timestamp()
 
     def play_entry(self, entry):
         self.loop.create_task(self._play_entry(entry))

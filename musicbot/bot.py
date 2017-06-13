@@ -601,7 +601,12 @@ class MusicBot(discord.Client):
                 name = u'***REMOVED******REMOVED***'.format(entry.radio_station_data.name)[:128]
                 game = discord.Game(name=name)
             else:
-                name = u'***REMOVED******REMOVED******REMOVED******REMOVED***'.format(prefix, entry.title)[:128]
+                n = entry.title
+                if entry.provides_timestamps:
+                    e = entry.get_current_song_from_timestamp(player.progress)
+                    n = e["name"]
+
+                name = u'***REMOVED******REMOVED******REMOVED******REMOVED***'.format(prefix, n)[:128]
                 game = discord.Game(name=name)
 
         await self.change_presence(game=game)
@@ -4773,6 +4778,7 @@ class MusicBot(discord.Client):
                 "Closed the playlist builder and saved the playlist")
             return Response("Successfully saved ****REMOVED******REMOVED****".format(user_savename.replace("_", " ").title()))
 
+    @command_info("1.9.2", 1479945600, ***REMOVED***"3.3.6": (1497387101, "added the missing \"s\", should be working again")***REMOVED***)
     async def cmd_addplayingtoplaylist(self, channel, author, player, playlistname):
         """
         Usage:
@@ -4790,7 +4796,7 @@ class MusicBot(discord.Client):
             return Response("There's nothing playing right now so I can't add it to your playlist...")
 
         add_entry = player.current_entry
-        if add_entry.provides_timestamp:
+        if add_entry.provides_timestamps:
             current_timestamp = add_entry.get_current_song_from_timestamp(player.progress)[
                 "name"]
             add_entry = await self.get_play_entry(player, channel, author, current_timestamp[1:], current_timestamp[0])
@@ -4806,6 +4812,7 @@ class MusicBot(discord.Client):
             playlistname, player.playlist, new_entries=[add_entry])
         return Response("Added the current song to the playlist.")
 
+    @command_info("1.9.2", 1479945600, ***REMOVED***"3.3.6": (1497387101, "added the missing \"s\", should be working again")***REMOVED***)
     async def cmd_removeplayingfromplaylist(self, channel, author, player, playlistname):
         """
         Usage:
@@ -4823,7 +4830,7 @@ class MusicBot(discord.Client):
             return Response("There's nothing playing right now so I can't remove it from your playlist...")
 
         remove_entry = player.current_entry
-        if remove_entry.provides_timestamp:
+        if remove_entry.provides_timestamps:
             current_timestamp = remove_entry.get_current_song_from_timestamp(player.progress)[
                 "name"]
             remove_entry = await self.get_play_entry(player, channel, author, current_timestamp[1:], current_timestamp[0])
@@ -5952,8 +5959,8 @@ class MusicBot(discord.Client):
                 return
 
         if message.author == self.user:
-            self.log("Ignoring command from myself (%s)" %
-                     message.content)
+            # self.log("Ignoring command from myself (%s)" %
+            #          message.content)
             return
 
         if self.config.bound_channels and message.channel.id not in self.config.bound_channels and not message.channel.is_private:
