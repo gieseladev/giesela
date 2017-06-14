@@ -2,5 +2,5 @@
 ---
 
 <head>
-  <meta http-equiv="refresh" content="0; url={{ site.url }}{{ site.posts[0].url }}" />
+  <meta http-equiv="refresh" content="0; url={{ site.url }}{{ {{% site.posts | where: "released", "yes" %}}[0].url }}" />
 </head>
