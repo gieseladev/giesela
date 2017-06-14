@@ -365,13 +365,15 @@ class MusicPlayer(EventEmitter):
                 next_delay = (dur - prg) + 2
                 return await self.update_timestamp(next_delay)
             else:
+                print("[TIMESTAMP-ENTRY] Not going to emit another now playing event")
                 return
 
-        print("WAITING for " + str(delay) + " secs")
+        print("[TIMESTAMP-ENTRY] Waiting for " + str(delay) +
+              " seconds before emitting now playing event")
         await asyncio.sleep(delay)
-        print("emitting")
         if not self.current_entry:
             return
+        print("[TIMESTAMP-ENTRY] Emitting next now playing event")
         self.emit('play', player=self, entry=self.current_entry)
         await self.update_timestamp()
 
