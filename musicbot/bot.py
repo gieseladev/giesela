@@ -2023,6 +2023,7 @@ class MusicBot(discord.Client):
         player.playlist.clear()
         return Response(':put_litter_in_its_place:', delete_after=20)
 
+    @command_info("1.0.0", 1477180800, {"3.3.7": (1497471674, "adapted the new \"seek\" command instead of \"skipto\"")})
     async def cmd_skip(self, player, channel, author, message, permissions, voice_channel, skip_amount=None):
         """
         Usage:
@@ -2051,7 +2052,7 @@ class MusicBot(discord.Client):
                     "You might want to restart the bot if it doesn't start working.")
 
         if player.current_entry.provides_timestamps and (skip_amount is None or skip_amount.lower() != "all"):
-            return await self.cmd_skipto(player, str(player.current_entry.get_current_song_from_timestamp(player.progress)["end"]))
+            return await self.cmd_seek(player, str(player.current_entry.get_current_song_from_timestamp(player.progress)["end"]))
 
         if author.id == self.config.owner_id \
                 or permissions.instaskip \
@@ -5377,10 +5378,11 @@ class MusicBot(discord.Client):
 
         return Response("**CODE**\n{}\n**RESULT**\n```python\n{}\n```".format(beautiful_statement, str(ret)))
 
-    async def cmd_skipto(self, player, timestamp):
+    @command_info("2.0.3", 1487538840, {"3.3.7": (1497471402, "changed command from \"skipto\" to \"seek\"")})
+    async def cmd_seek(self, player, timestamp):
         """
         Usage:
-            {command_prefix}skipto <timestamp>
+            {command_prefix}seek <timestamp>
 
         Go to the given timestamp formatted (minutes:seconds)
         """
