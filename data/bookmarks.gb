@@ -1,0 +1,105 @@
+***REMOVED***
+  "version": "2",
+  "bookmarks": ***REMOVED***
+    "17b2": ***REMOVED***
+      "id": "17b2",
+      "name": "Pirates of the Caribbean Soundtrack Compilation",
+      "entry": ***REMOVED***
+        "version": 2,
+        "type": "URLPlaylistEntry",
+        "url": "https://www.youtube.com/watch?v=NMQh-rhWaz8#t=0m12s",
+        "title": "Pirates of the Caribbean Soundtrack Compilation",
+        "duration": 6900,
+        "downloaded": true,
+        "filename": "audio_cache\\youtube-NMQh-rhWaz8-Pirates_of_the_Caribbean_Soundtrack_Compilation.webm",
+        "expected_filename": "audio_cache\\youtube-NMQh-rhWaz8-Pirates_of_the_Caribbean_Soundtrack_Compilation.webm",
+        "meta": ***REMOVED***
+          "channel": ***REMOVED***
+            "type": "Channel",
+            "id": "226402503422509058",
+            "name": "giesela"
+          ***REMOVED***,
+          "author": ***REMOVED***
+            "type": "Member",
+            "id": "203302899277627392",
+            "name": "siku2"
+          ***REMOVED***
+        ***REMOVED***,
+        "start_seconds": 2395,
+        "end_seconds": null,
+        "spotify_track": ***REMOVED***
+          "id": "7bqtma7nIJMRyfkNE3g0mO",
+          "name": "He's a Pirate - From \"Pirates Of The Caribbean\"",
+          "artists": [
+            ***REMOVED***
+              "id": "4LvvJ0nW91Ucm1MOvIirdl",
+              "name": "Dutch Trance Force",
+              "images": [
+                ***REMOVED***
+                  "height": 640,
+                  "url": "https://i.scdn.co/image/f2ada54a468275dfaef6e5fd3cb75ec019e84db2",
+                  "width": 640
+                ***REMOVED***,
+                ***REMOVED***
+                  "height": 300,
+                  "url": "https://i.scdn.co/image/a90c56d415a92ae07cfd6c12687e0ae2ca14d2f5",
+                  "width": 300
+                ***REMOVED***,
+                ***REMOVED***
+                  "height": 64,
+                  "url": "https://i.scdn.co/image/bcf0da532ad183dbb72ed25c1efb33dda288d1c1",
+                  "width": 64
+                ***REMOVED***
+              ],
+              "genres": [],
+              "popularity": 10,
+              "uri": "spotify:artist:4LvvJ0nW91Ucm1MOvIirdl",
+              "href": "https://open.spotify.com/artist/4LvvJ0nW91Ucm1MOvIirdl"
+            ***REMOVED***
+          ],
+          "duration": 210.136,
+          "album": ***REMOVED***
+            "id": "24YXjtqeDUOoUwx8m7xRuw",
+            "name": "Best of Movie Soundtrack & TV Playlist - The Dance Track Hit Compilation",
+            "artists": [
+              ***REMOVED***
+                "id": "0LyfQWJT6nXafLPZqxe9Of",
+                "name": "Various Artists",
+                "images": [],
+                "genres": [],
+                "popularity": 0,
+                "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of",
+                "href": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+              ***REMOVED***
+            ],
+            "images": [
+              ***REMOVED***
+                "height": 640,
+                "url": "https://i.scdn.co/image/7dffee01e0162db0838f30720b9ff11a343c64e2",
+                "width": 640
+              ***REMOVED***,
+              ***REMOVED***
+                "height": 300,
+                "url": "https://i.scdn.co/image/59a3df303656f5e18b6f828447535948e46de172",
+                "width": 300
+              ***REMOVED***,
+              ***REMOVED***
+                "height": 64,
+                "url": "https://i.scdn.co/image/58e38ed0b71db6c9a782038c2a9a4cb9a9fa302d",
+                "width": 64
+              ***REMOVED***
+            ],
+            "uri": "spotify:album:24YXjtqeDUOoUwx8m7xRuw"
+          ***REMOVED***,
+          "popularity": 4,
+          "uri": "spotify:track:7bqtma7nIJMRyfkNE3g0mO",
+          "query": "Pirates of the Caribbean Soundtrack Compilation",
+          "certainty": 0.41975308641975306
+        ***REMOVED***,
+        "provided_song_timestamps": null
+      ***REMOVED***,
+      "timestamp": 2395,
+      "author_id": "203302899277627392"
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***
