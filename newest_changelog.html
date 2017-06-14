@@ -1,8 +1,13 @@
 ---
 ---
 
-{% assign released_posts = site.posts | where: "development", no %}
+{% for post in site.posts %}
+  {% unless post.development %}
+    {% assign released_post = post %}
+    {% break %}
+  {% endunless %}
+{% endfor %}
 
 <head>
-  <meta http-equiv="refresh" content="0; url={{ site.url }}{{ released_posts[0].url }}" />
+  <meta http-equiv="refresh" content="0; url={{ site.url }}{{ released_post.url }}" />
 </head>
