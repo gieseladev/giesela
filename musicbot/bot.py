@@ -141,6 +141,7 @@ class MusicBot(discord.Client):
         self.cached_client_id = None
         self.chatters = ***REMOVED******REMOVED***
         self.blocked_commands = ***REMOVED******REMOVED***
+        self.users_in_menu = set()
 
         if not self.autoplaylist:
             log("Warning: Autoplaylist is empty, disabling.")
@@ -172,6 +173,30 @@ class MusicBot(discord.Client):
             else:
                 raise exceptions.PermissionsError(
                     "only the owner can use this command", expire_in=30)
+
+        return wrapper
+
+    def command_info(version, timestamp, changelog=***REMOVED******REMOVED***):
+        def function_decorator(func):
+            func.version = version
+            func.timestamp = datetime.fromtimestamp(timestamp)
+            func.changelog = changelog
+
+            return func
+
+        return function_decorator
+
+    def block_user(func):
+        @wraps(func)
+        async def wrapper(self, *args, **kwargs):
+            orig_msg = _get_variable("message")
+
+            self.users_in_menu.add(orig_msg.author.id)
+            print("Now blocking " + str(orig_msg.author))
+            res = await func(self, *args, **kwargs)
+            self.users_in_menu.remove(orig_msg.author.id)
+            print("Unblocking " + str(orig_msg.author))
+            return res
 
         return wrapper
 
@@ -576,7 +601,12 @@ class MusicBot(discord.Client):
                 name = u'***REMOVED******REMOVED***'.format(entry.radio_station_data.name)[:128]
                 game = discord.Game(name=name)
             else:
-                name = u'***REMOVED******REMOVED******REMOVED******REMOVED***'.format(prefix, entry.title)[:128]
+                n = entry.title
+                if entry.provides_timestamps:
+                    e = entry.get_current_song_from_timestamp(player.progress)
+                    n = e["name"]
+
+                name = u'***REMOVED******REMOVED******REMOVED******REMOVED***'.format(prefix, n)[:128]
                 game = discord.Game(name=name)
 
         await self.change_presence(game=game)
@@ -1657,6 +1687,7 @@ class MusicBot(discord.Client):
         return Response("Enqueued ***REMOVED******REMOVED*** songs to be played in ***REMOVED******REMOVED*** seconds".format(
             songs_added, self._fixg(ttime, 1)), delete_after=30)
 
+    @block_user
     async def cmd_search(self, player, channel, author, permissions, leftover_args):
         """
         Usage:
@@ -1992,6 +2023,7 @@ class MusicBot(discord.Client):
         player.playlist.clear()
         return Response(':put_litter_in_its_place:', delete_after=20)
 
+    @command_info("1.0.0", 1477180800, ***REMOVED***"3.3.7": (1497471674, "adapted the new \"seek\" command instead of \"skipto\"")***REMOVED***)
     async def cmd_skip(self, player, channel, author, message, permissions, voice_channel, skip_amount=None):
         """
         Usage:
@@ -2020,7 +2052,7 @@ class MusicBot(discord.Client):
                     "You might want to restart the bot if it doesn't start working.")
 
         if player.current_entry.provides_timestamps and (skip_amount is None or skip_amount.lower() != "all"):
-            return await self.cmd_skipto(player, str(player.current_entry.get_current_song_from_timestamp(player.progress)["end"]))
+            return await self.cmd_seek(player, str(player.current_entry.get_current_song_from_timestamp(player.progress)["end"]))
 
         if author.id == self.config.owner_id \
                 or permissions.instaskip \
@@ -2125,10 +2157,10 @@ class MusicBot(discord.Client):
 
     async def cmd_queue(self, channel, player):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***queue
-
-        logs the current song queue.
+        ///|Usage
+        ***REMOVED***command_prefix***REMOVED***queue
+        ///|Explanation
+        Show the current song queue
         """
 
         lines = []
@@ -2214,6 +2246,25 @@ class MusicBot(discord.Client):
 
         message = '\n'.join(lines)
         return Response(message, delete_after=30)
+
+    @command_info("3.3.3", 1497197957)
+    async def cmd_history(self, channel, player):
+        """
+        ///|Usage
+        ***REMOVED***command_prefix***REMOVED***history
+        ///|Explanation
+        Show the last 10 songs
+        """
+
+        seconds_passed = player.progress
+
+        lines = []
+        for ind, entry in enumerate(player.playlist.history, 1):
+            lines.append("***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" *****REMOVED******REMOVED*** ago**".format(ind,
+                                                        entry.title, format_time(seconds_passed, round_seconds=True, round_base=1, max_specifications=2)))
+            seconds_passed += entry.end_seconds
+
+        return Response("\n".join(lines))
 
     async def cmd_clean(self, message, channel, server, author, search_range=50):
         """
@@ -2486,6 +2537,7 @@ class MusicBot(discord.Client):
 
         # await self.safe_send_message (channel, msgState)
 
+    @block_user
     async def cmd_radio(self, player, channel, author, leftover_args):
         """
         Usage:
@@ -2997,6 +3049,7 @@ class MusicBot(discord.Client):
             await self.safe_send_message(channel, 'Regi: ***REMOVED******REMOVED***'.format(answer))
             answer = cbTwo.say(answer)
 
+    @block_user
     async def cmd_random(self, channel, author, leftover_args):
         """
         Usage:
@@ -3299,6 +3352,7 @@ class MusicBot(discord.Client):
 
         await self.safe_send_message(channel, "Didn't find anything that goes by ***REMOVED***0***REMOVED***".format(leftover_args[0]), expire_in=15)
 
+    @block_user
     async def cmd_news(self, message, channel, author, paper=None):
         """
         Usage:
@@ -3440,6 +3494,7 @@ class MusicBot(discord.Client):
 
         return Response("Can't find any more articles :frowning:", delete_after=30)
 
+    @block_user
     async def cmd_cah(self, message, channel, author, leftover_args):
         """
         Usage:
@@ -3539,6 +3594,7 @@ class MusicBot(discord.Client):
             self.cah.stop_game(g.token)
             return Response("Stopped the game *****REMOVED******REMOVED*****".format(token), delete_after=15)
 
+    @block_user
     async def cmd_cards(self, server, channel, author, message, leftover_args):
         """
         Usage:
@@ -3719,6 +3775,7 @@ class MusicBot(discord.Client):
 
         await self.safe_send_message(channel, "Closed the card viewer!", expire_in=20)
 
+    @block_user
     async def cmd_qcards(self, server, channel, author, message, leftover_args):
         """
         Usage:
@@ -3905,6 +3962,7 @@ class MusicBot(discord.Client):
 
         await self.safe_send_message(channel, "Closed the question card viewer!", expire_in=20)
 
+    @block_user
     async def cmd_game(self, message, channel, author, leftover_args, game=None):
         """
         Usage:
@@ -4284,6 +4342,7 @@ class MusicBot(discord.Client):
 
         return Response(reply_text, delete_after=30)
 
+    @block_user
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         ///|Load
@@ -4720,6 +4779,7 @@ class MusicBot(discord.Client):
                 "Closed the playlist builder and saved the playlist")
             return Response("Successfully saved ****REMOVED******REMOVED****".format(user_savename.replace("_", " ").title()))
 
+    @command_info("1.9.2", 1479945600, ***REMOVED***"3.3.6": (1497387101, "added the missing \"s\", should be working again")***REMOVED***)
     async def cmd_addplayingtoplaylist(self, channel, author, player, playlistname):
         """
         Usage:
@@ -4737,10 +4797,11 @@ class MusicBot(discord.Client):
             return Response("There's nothing playing right now so I can't add it to your playlist...")
 
         add_entry = player.current_entry
-        if add_entry.provides_timestamp:
+        if add_entry.provides_timestamps:
             current_timestamp = add_entry.get_current_song_from_timestamp(player.progress)[
                 "name"]
-            add_entry = await self.get_play_entry(player, channel, author, current_timestamp[1:], current_timestamp[0])
+            # this looks ugly but eh, it works
+            add_entry = (await self.get_play_entry(player, channel, author, current_timestamp[1:], current_timestamp[0]))[0]
 
         if playlistname not in self.playlists.saved_playlists:
             if len(playlistname) < 3:
@@ -4753,6 +4814,7 @@ class MusicBot(discord.Client):
             playlistname, player.playlist, new_entries=[add_entry])
         return Response("Added the current song to the playlist.")
 
+    @command_info("1.9.2", 1479945600, ***REMOVED***"3.3.6": (1497387101, "added the missing \"s\", should be working again")***REMOVED***)
     async def cmd_removeplayingfromplaylist(self, channel, author, player, playlistname):
         """
         Usage:
@@ -4770,7 +4832,7 @@ class MusicBot(discord.Client):
             return Response("There's nothing playing right now so I can't remove it from your playlist...")
 
         remove_entry = player.current_entry
-        if remove_entry.provides_timestamp:
+        if remove_entry.provides_timestamps:
             current_timestamp = remove_entry.get_current_song_from_timestamp(player.progress)[
                 "name"]
             remove_entry = await self.get_play_entry(player, channel, author, current_timestamp[1:], current_timestamp[0])
@@ -4933,6 +4995,7 @@ class MusicBot(discord.Client):
 
         return Response("*****REMOVED******REMOVED*****\n***REMOVED******REMOVED***".format(wikipedia_page_title, wikipedia.summary(wikipedia_page_title, sentences=3)))
 
+    @command_info("1.9.5", 1479945600, ***REMOVED***"3.3.5": (1497284850, "removed delete_after keywords which was the reason this command was broken")***REMOVED***)
     async def cmd_getmusicfile(self, channel, author, player, index=0):
         """
         Usage:
@@ -4946,20 +5009,20 @@ class MusicBot(discord.Client):
         try:
             index = int(index) - 1
         except:
-            return Response("Please provide a valid index", delete_after=30)
+            return Response("Please provide a valid index")
 
         if index == -1:
             entry = player.current_entry
         else:
             if index < 0 or index >= len(player.playlist.entries):
-                return Response("Your index is out of range", delete_after=15)
+                return Response("Your index is out of range")
             entry = player.playlist.entries[index]
 
         if not entry:
-            return Response("This entry is currently being worked on. Please retry again later", delete_after=15)
+            return Response("This entry is currently being worked on. Please retry again later")
 
         if type(entry).__name__ == "StreamPlaylistEntry":
-            return Response("Can't send you this because it's a live stream", delete_after=15)
+            return Response("Can't send you this because it's a live stream")
 
         if not entry.is_downloaded:
             try:
@@ -4967,9 +5030,10 @@ class MusicBot(discord.Client):
             except:
                 return Response("Could not download the file. This really shouldn't happen")
 
-        await self.safe_send_message(author, "The file is being uploaded. Please wait a second.", delete_after=15)
+        await self.safe_send_message(author, "The file is being uploaded. Please wait a second.")
         await self.send_file(author, entry.filename, content="Here you go:")
 
+    @block_user
     async def cmd_reminder(self, channel, author, player, server, leftover_args):
         """
         Usage:
@@ -5288,6 +5352,7 @@ class MusicBot(discord.Client):
                 else:
                     return Response("Successfully sent the message!")
 
+    @block_user
     async def cmd_execute(self, channel, author, server, leftover_args, player=None):
         statement = " ".join(leftover_args)
         statement = statement.replace("/n/", "\n")
@@ -5313,10 +5378,11 @@ class MusicBot(discord.Client):
 
         return Response("**CODE**\n***REMOVED******REMOVED***\n**RESULT**\n```python\n***REMOVED******REMOVED***\n```".format(beautiful_statement, str(ret)))
 
-    async def cmd_skipto(self, player, timestamp):
+    @command_info("2.0.3", 1487538840, ***REMOVED***"3.3.7": (1497471402, "changed command from \"skipto\" to \"seek\"")***REMOVED***)
+    async def cmd_seek(self, player, timestamp):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***skipto <timestamp>
+            ***REMOVED***command_prefix***REMOVED***seek <timestamp>
 
         Go to the given timestamp formatted (minutes:seconds)
         """
@@ -5717,6 +5783,7 @@ class MusicBot(discord.Client):
             await self.send_message(quote_to_channel, embed=em)
         return
 
+    @block_user
     async def cmd_secret(self, author, channel, secret_id):
         if secret_id == "48856":
             if not channel.is_private:
@@ -5844,8 +5911,8 @@ class MusicBot(discord.Client):
         message_content = message.content.strip()
 
         nine_gag_match = re.match(
-            r".+?[http|https]:\/\/(?:m\.)?9gag.com\/gag\/(\w+)", message_content)
-        if nine_gag_match is not None:
+            r".+?[http|https]:\/\/(?:m\.)?9gag.com\/gag\/(\w+)(?:\?.+)", message_content)
+        if nine_gag_match:
             post_id = nine_gag_match.group(1)
             await self.cmd_9gag(message.channel, message.author, post_id)
             await self.safe_delete_message(message)
@@ -5861,6 +5928,10 @@ class MusicBot(discord.Client):
         #     await self.send_message(message.channel, embed=em)
         #     await self.safe_delete_message(message)
         #     return
+
+        if message.author.id in self.users_in_menu:
+            print("User is currently in a menu")
+            return
 
         if not message_content.startswith(self.config.command_prefix):
             # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
@@ -5891,8 +5962,8 @@ class MusicBot(discord.Client):
                 return
 
         if message.author == self.user:
-            self.log("Ignoring command from myself (%s)" %
-                     message.content)
+            # self.log("Ignoring command from myself (%s)" %
+            #          message.content)
             return
 
         if self.config.bound_channels and message.channel.id not in self.config.bound_channels and not message.channel.is_private:
