@@ -4799,7 +4799,8 @@ class MusicBot(discord.Client):
         if add_entry.provides_timestamps:
             current_timestamp = add_entry.get_current_song_from_timestamp(player.progress)[
                 "name"]
-            add_entry = await self.get_play_entry(player, channel, author, current_timestamp[1:], current_timestamp[0])
+            # this looks ugly but eh, it works
+            add_entry = (await self.get_play_entry(player, channel, author, current_timestamp[1:], current_timestamp[0]))[0]
 
         if playlistname not in self.playlists.saved_playlists:
             if len(playlistname) < 3:
