@@ -2247,7 +2247,7 @@ class MusicBot(discord.Client):
         message = '\n'.join(lines)
         return Response(message, delete_after=30)
 
-    @command_info("3.3.3", 1497197957)
+    @command_info("3.3.3", 1497197957, {"3.3.8": (1497474312, "added failsafe for player not currently playing something")})
     async def cmd_history(self, channel, player):
         """
         ///|Usage
@@ -2256,7 +2256,7 @@ class MusicBot(discord.Client):
         Show the last 10 songs
         """
 
-        seconds_passed = player.progress
+        seconds_passed = player.progress if player.current_entry else 0:
 
         lines = []
         for ind, entry in enumerate(player.playlist.history, 1):
