@@ -1,7 +1,7 @@
 ---
 ---
 
-{% assign released_posts = site.posts | where: "development", false %}
+{% assign released_posts = site.posts | where: "development", no %}
 
 <head>
   <meta http-equiv="refresh" content="0; url={{ site.url }}{{ released_posts[0].url }}" />
