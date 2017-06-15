@@ -5778,7 +5778,7 @@ class MusicBot(discord.Client):
             else:
                 return Response("No idea who you are... bugger off!")
 
-    @command_info("3.2.5", 1496428380, ***REMOVED***"3.3.9": (1497521393, "Added edit sub-command")***REMOVED***)
+    @command_info("3.2.5", 1496428380, ***REMOVED***"3.3.9": (1497521393, "Added edit sub-command"), "3.4.1": (1497550771, "Added the filter \"mine\" to the listing function")***REMOVED***)
     async def cmd_bookmark(self, author, player, leftover_args):
         """
         ///|Creation
@@ -5790,7 +5790,7 @@ class MusicBot(discord.Client):
         ///|Editing
         ***REMOVED***command_prefix***REMOVED***bookmark edit <id> [new name] [new timestamp]
         ///|Listing
-        ***REMOVED***command_prefix***REMOVED***bookmark list
+        ***REMOVED***command_prefix***REMOVED***bookmark list [mine]
         ///|Removal
         ***REMOVED***command_prefix***REMOVED***bookmark remove <id | name>
         """
@@ -5798,7 +5798,13 @@ class MusicBot(discord.Client):
             arg = leftover_args[0].lower()
             if arg in ["list", "showall"]:
                 em = Embed(title="Bookmarks")
-                for bm in bookmark.all_bookmarks:
+                bookmarks = bookmark.all_bookmarks
+
+                if "mine" in leftover_args:
+                    bookmarks = filter(lambda x: bookmark.get_bookmark(x)[
+                                       "author_id"] == author.id, bookmarks)
+
+                for bm in bookmarks:
                     bm_name = parse_query(bm["name"])
                     bm_author = self.get_global_user(
                         bm["author_id"]).display_name
