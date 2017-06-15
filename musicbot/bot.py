@@ -2256,7 +2256,7 @@ class MusicBot(discord.Client):
         Show the last 10 songs
         """
 
-        seconds_passed = player.progress if player.current_entry else 0:
+        seconds_passed = player.progress if player.current_entry else 0
 
         lines = []
         for ind, entry in enumerate(player.playlist.history, 1):
@@ -5806,17 +5806,20 @@ class MusicBot(discord.Client):
             else:
                 return Response("No idea who you are... bugger off!")
 
+    @command_info("3.2.5", 1496428380, {"3.3.9": (1497521393, "Added bookmark edit command")})
     async def cmd_bookmark(self, author, player, leftover_args):
         """
         ///|Creation
         {command_prefix}bookmark [name] [timestamp]
         ///|Explanation
         Create a new bookmark for the current entry. If no name is provided the entry's title will be used and if there's no timestamp provided the current timestamp will be used.
-        ///|Use a bookmark
+        ///|Using
         {command_prefix}bookmark <id | name>
-        ///|List available bookmarks
+        ///|Editing
+        {command_prefix}bookmark edit <id> [new name] [new timestamp]
+        ///|Listing
         {command_prefix}bookmark list
-        ///|Remove a bookmark
+        ///|Removal
         {command_prefix}bookmark remove <id | name>
         """
         if len(leftover_args) > 0:
@@ -5829,9 +5832,9 @@ class MusicBot(discord.Client):
                         bm["author_id"]).display_name
                     bm_timestamp = to_timestamp(bm["timestamp"])
                     bm_id = bm["id"]
-                    t = "**{}** *by **{}***".format(bm_name, bm_author)
-                    v = "`{}` *from* \"{}\"".format(bm_timestamp,
-                                                    bm_id)
+                    t = "**{}**".format(bm_name)
+                    v = "`{}` *starting at* `{}` *by* **{}**".format(
+                        bm_id, bm_timestamp, bm_author)
                     em.add_field(name=t, value=v)
                 return Response(embed=em)
             elif arg in ["remove", "delete"]:
@@ -5840,11 +5843,31 @@ class MusicBot(discord.Client):
                 bm = bookmark.get_bookmark(" ".join(leftover_args[1:]))
                 if not bm:
                     return Response("Didn't find a bookmark with that query")
-                print(bm)
                 if bookmark.remove_bookmark(bm["id"]):
                     return Response("Removed bookmark `{}`".format(bm["name"]))
                 else:
                     return Response("Something went wrong")
+            elif arg in ["edit", "change"]:
+                if len(leftover_args) < 2:
+                    return Response("Please provide an id")
+
+                bm_id = leftover_args[1]
+                if bm_id not in bookmark:
+                    return Response("No bookmark with id `{}` found".format(bm_id))
+
+                if len(leftover_args) < 3:
+                    return Response("Please also specify what you want to change")
+
+                new_timestamp = parse_timestamp(leftover_args[-1])
+                if new_timestamp:
+                    new_name = " ".join(leftover_args[2:-1]) or None
+                else:
+                    new_name = " ".join(leftover_args[2:]) or None
+
+                if bookmark.edit_bookmark(bm_id, new_name, new_timestamp):
+                    return Response("Successfully edited bookmark `{}`".format(bm_id))
+                else:
+                    return Response("Something went wrong while editing `{}`".format(bm_id))
             else:
                 bm = bookmark.get_bookmark(" ".join(leftover_args))
                 if bm:
