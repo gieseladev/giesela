@@ -147,7 +147,6 @@ class MusicBot(discord.Client):
             log("Warning: Autoplaylist is empty, disabling.")
             self.config.auto_playlist = False
 
-        # TODO: Do these properly
         ssd_defaults = {'last_np_msg': None, 'auto_paused': False}
         self.server_specific_data = defaultdict(lambda: dict(ssd_defaults))
 
@@ -160,8 +159,6 @@ class MusicBot(discord.Client):
 
         self.load_online_loggers()
 
-    # TODO: Add some sort of `denied` argument for a message to send when
-    # someone else tries to use it
     def owner_only(func):
         @wraps(func)
         async def wrapper(self, *args, **kwargs):
@@ -236,7 +233,6 @@ class MusicBot(discord.Client):
         if owner:
             self.log(
                 "Found owner in \"%s\", attempting to join..." % owner.voice_channel.name)
-            # TODO: Effort
             await self.cmd_summon(owner.voice_channel, owner, None)
             return owner.voice_channel
 
@@ -291,8 +287,6 @@ class MusicBot(discord.Client):
         await asyncio.sleep(after)
         await self.safe_delete_message(message)
 
-    # TODO: Check to see if I can just move this to on_message after the
-    # response check
     async def _manual_delete_check(self, message, *, quiet=False):
         if self.config.delete_invoking:
             await self.safe_delete_message(message, quiet=quiet)
@@ -553,7 +547,6 @@ class MusicBot(discord.Client):
                         pass  # Wooo playlist
                         # Blarg how do I want to do this
 
-                    # TODO: better checks here
                     try:
                         await player.playlist.add_entry(song_url, channel=None, author=None)
                     except exceptions.ExtractionError as e:
@@ -898,7 +891,6 @@ class MusicBot(discord.Client):
             owner_vc = await self._auto_summon()
 
             if owner_vc:
-                # TODO: Change this to "Joined server/channel"
                 log("Done!", flush=True)
                 if self.config.auto_playlist:
                     log("Starting auto-playlist")
@@ -1190,8 +1182,6 @@ class MusicBot(discord.Client):
             # Now I could just do: return await self.cmd_play(player, channel, author, song_url)
             # But this is probably fine
 
-        # TODO: Possibly add another check here to see about things like the bandcamp issue
-        # TODO: Where ytdl gets the generic extractor version with no
         # processing, but finds two different urls
 
         if 'entries' in info:
@@ -1250,10 +1240,6 @@ class MusicBot(discord.Client):
             # We don't have a pretty way of doing this yet.  We need either a loop
             # that sends these every 10 seconds or a nice context manager.
             await self.send_typing(channel)
-
-            # TODO: I can create an event emitter object instead, add event functions, and every play list might be asyncified
-            # Also have a "verify_entry" hook with the entry as an arg and
-            # returns the entry if its ok
 
             entry_list, position = await player.playlist.import_from(song_url, channel=channel, author=author)
 
@@ -1553,8 +1539,6 @@ class MusicBot(discord.Client):
             try:
                 entries_added = await player.playlist.entries_async_process_sc_bc_playlist(
                     playlist_url, channel=channel, author=author)
-                # TODO: Add hook to be called after each song
-                # TODO: Add permissions
 
             except Exception:
                 traceback.print_exc()
@@ -1605,7 +1589,7 @@ class MusicBot(discord.Client):
         t0 = time.time()
 
         busymsg = await self.safe_send_message(
-            channel, "Processing %s songs..." % num_songs)  # TODO: From playlist_title
+            channel, "Processing %s songs..." % num_songs)
         await self.send_typing(channel)
 
         entries_added = 0
@@ -1613,8 +1597,6 @@ class MusicBot(discord.Client):
             try:
                 entries_added = await player.playlist.async_process_youtube_playlist(
                     playlist_url, channel=channel, author=author)
-                # TODO: Add hook to be called after each song
-                # TODO: Add permissions
 
             except Exception:
                 traceback.print_exc()
@@ -1625,8 +1607,6 @@ class MusicBot(discord.Client):
             try:
                 entries_added = await player.playlist.async_process_sc_bc_playlist(
                     playlist_url, channel=channel, author=author)
-                # TODO: Add hook to be called after each song
-                # TODO: Add permissions
 
             except Exception:
                 traceback.print_exc()
@@ -1663,8 +1643,6 @@ class MusicBot(discord.Client):
         tnow = time.time()
         ttime = tnow - t0
         wait_per_song = 1.2
-        # TODO: actually calculate wait per song in the process function and
-        # return that too
 
         # This is technically inaccurate since bad songs are ignored but still
         # take up time
@@ -2062,9 +2040,6 @@ class MusicBot(discord.Client):
             await self._manual_delete_check(message)
             return
 
-        # TODO: ignore person if they're deaf or take them out of the list or something?
-        # Currently is recounted if they vote, deafen, then vote
-
         num_voice = sum(1 for m in voice_channel.voice_members if not (
             m.deaf or m.self_deaf or m.id in [self.config.owner_id, self.user.id]))
 
@@ -2086,8 +2061,6 @@ class MusicBot(discord.Client):
             )
 
         else:
-            # TODO: When a song gets skipped, delete the old x needed to skip
-            # messages
             return Response(
                 'your skip for **{}** was acknowledged.'
                 '\n**{}** more {} required to vote to skip this song.'.format(
@@ -2344,8 +2317,6 @@ class MusicBot(discord.Client):
                 "Could not extract info from input url, no data.", expire_in=25)
 
         if not info.get('entries', None):
-            # TODO: Retarded playlist checking
-            # set(url, webpageurl).difference(set(url))
 
             if info.get('url', None) != info.get('webpage_url', info.get('url', None)):
                 raise exceptions.CommandError(
