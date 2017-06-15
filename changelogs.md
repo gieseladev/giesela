@@ -1,6 +1,6 @@
 ---
 title: Changelog
-description: Even the best need some changes sometimes
+description: Even the best need some changes every once in a while
 layout: default
 ---
 
