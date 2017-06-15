@@ -2970,18 +2970,26 @@ class MusicBot(discord.Client):
             await self.get_player(channel, create=True)
         return channel
 
-    async def cmd_replay(self, player, channel, author):
+    @command_info("1.9.5", 1477774380, {"3.4.2": (1497552134, "Added a way to not only replay the current song, but also the last one")})
+    async def cmd_replay(self, player, choose_last=""):
         """
-        Usage:
-            {command_prefix}replay
-
-        Replay the current song
+        ///|Usage
+        {command_prefix}replay [last]
+        ///|Explanation
+        Replay the currently playing song. If there's nothing playing, or the \"last\" keyword is given, replay the last song
         """
-        if not player.current_entry:
-            await self.safe_send_message(channel, "There's nothing for me to replay")
 
+        replay_entry = player.current_entry
+        if not player.current_entry or choose_last.lower() == "last":
+            if not player.playlist.history:
+                return Response("Cannot replay the last song as there is no last song")
+
+            replay_entry = player.playlist.history[0]
+
+        if not replay_entry:
+            return Response("There's nothing for me to replay")
         try:
-            player.playlist._add_entry_next(player.current_entry)
+            player.playlist._add_entry_next(replay_entry)
             await self.safe_send_message(channel, "Replaying the current song")
             self.log("Will replay " + player.current_entry.title)
 
