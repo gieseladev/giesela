@@ -177,7 +177,8 @@ class MusicBot(discord.Client):
         def function_decorator(func):
             func.version = version
             func.timestamp = datetime.fromtimestamp(timestamp)
-            func.changelog = changelog
+            func.changelog = [(ver, datetime.fromtimestamp(time), log)
+                              for ver, (time, log) in changelog.items()]
 
             return func
 
@@ -5892,6 +5893,33 @@ class MusicBot(discord.Client):
         else:
             self.blocked_commands[command.lower()] = reason
             return Response("Blocked command")
+
+    @command_info("4.0.0", 1497533758)
+    async def cmd_commandinfo(self, command):
+        """
+        ///|Usage
+        `{command_prefix}commandinfo <command>`
+        ///|Explanation
+        More information on a command
+        """
+
+        c_info = getattr(self, "cmd_" + command, None)
+        if not c_info:
+            return Response("Couldn't find a command called \"{}\"".format(command))
+
+        try:
+            em = Embed(title=command.upper(), colour=hex_to_dec("ffd700"))
+            em.add_field(name="Version `{}`".format(
+                c_info.version), value="`{}`\nCommand has been added".format(c_info.timestamp))
+
+            for cl in c_info.changelog:
+                v, t, l = cl
+                em.add_field(name="Version `{}`".format(v),
+                             value="`{}`\n{}".format(t, l))
+
+            return Response(embed=em)
+        except:
+            return Response("Couldn't find any information on the `{}` command".format(command))
 
     @owner_only
     async def cmd_shutdown(self, channel):
