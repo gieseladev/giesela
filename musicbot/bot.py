@@ -5778,7 +5778,7 @@ class MusicBot(discord.Client):
             else:
                 return Response("No idea who you are... bugger off!")
 
-    @command_info("3.2.5", 1496428380, ***REMOVED***"3.3.9": (1497521393, "Added bookmark edit command")***REMOVED***)
+    @command_info("3.2.5", 1496428380, ***REMOVED***"3.3.9": (1497521393, "Added edit sub-command")***REMOVED***)
     async def cmd_bookmark(self, author, player, leftover_args):
         """
         ///|Creation
