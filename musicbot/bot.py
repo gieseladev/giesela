@@ -5377,6 +5377,7 @@ class MusicBot(discord.Client):
         if not player.goto_seconds(secs):
             return Response("Timestamp exceeds song duration!", delete_after=20)
 
+    @command_info("2.2.1", 1493975700)
     async def cmd_fwd(self, player, timestamp):
         """
         Usage:
@@ -5395,11 +5396,12 @@ class MusicBot(discord.Client):
         if not player.goto_seconds(player.progress + secs):
             return Response("Timestamp exceeds song duration!", delete_after=20)
 
+    @command_info("2.2.1", 1493975700, {"3.4.3": (1497609912, "Can now rewind past the last song")})
     async def cmd_rwd(self, player, timestamp=None):
         """
-        Usage:
-            {command_prefix}rwd [timestamp]
-
+        ///|Usage
+        `{command_prefix}rwd [timestamp]`
+        ///|Explanation
         Rewind <timestamp> into the current entry or if the current entry is a timestamp-entry, rewind to the previous song
         """
 
@@ -5427,8 +5429,21 @@ class MusicBot(discord.Client):
         else:
             secs = player.progress - parse_timestamp(timestamp)
 
-        if secs is None:
+        if not secs:
             return Response("Please provide a valid timestamp", delete_after=20)
+
+        if secs < 0:
+            if not player.playlist.history:
+                secs = 0
+            else:
+                last_entry = player.playlist.history[0]
+                last_entry.start_seconds = last_entry.end_seconds + \
+                    secs  # since secs is negative I can just add it
+                if last_entry.start_seconds < 0:
+                    # mostly because I'm lazy
+                    return Response("I won't go further back than one song, that's just mad")
+                player.play_entry(last_entry)
+                return
 
         if not player.goto_seconds(secs):
             return Response("Timestamp exceeds song duration!", delete_after=20)
