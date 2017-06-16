@@ -1,5 +1,5 @@
 {
-  "version": "2",
+  "version": "3",
   "bookmarks": {
     "17b2": {
       "id": "17b2",
@@ -99,6 +99,90 @@
         "provided_song_timestamps": null
       },
       "timestamp": 2395,
+      "author_id": "203302899277627392"
+    },
+    "f84a": {
+      "id": "f84a",
+      "name": "Sanic The Tank Engine",
+      "entry": {
+        "version": 2,
+        "type": "URLPlaylistEntry",
+        "url": "https://www.youtube.com/watch?v=EB9ZiPAlHEQ",
+        "title": "Sanic The Tank Engine",
+        "duration": 116,
+        "downloaded": true,
+        "filename": "audio_cache\\youtube-EB9ZiPAlHEQ-Sanic_The_Tank_Engine.webm",
+        "expected_filename": "audio_cache\\youtube-EB9ZiPAlHEQ-Sanic_The_Tank_Engine.webm",
+        "meta": {
+          "channel": {
+            "type": "Channel",
+            "id": "226402503422509058",
+            "name": "giesela"
+          },
+          "author": {
+            "type": "Member",
+            "id": "203302899277627392",
+            "name": "siku2"
+          }
+        },
+        "start_seconds": 3,
+        "end_seconds": 116,
+        "spotify_track": {
+          "id": null,
+          "name": "Sanic The Tank Engine",
+          "artists": null,
+          "duration": null,
+          "album": null,
+          "popularity": null,
+          "uri": null,
+          "query": null,
+          "certainty": 0
+        },
+        "provided_song_timestamps": null
+      },
+      "timestamp": 3,
+      "author_id": "203302899277627392"
+    },
+    "17639": {
+      "id": "17639",
+      "name": "condolences",
+      "entry": {
+        "version": 2,
+        "type": "URLPlaylistEntry",
+        "url": "https://www.youtube.com/watch?v=a68KJWe_Tfk",
+        "title": "Benjamin Clementine - Condolence | A Take Away Show",
+        "duration": 758,
+        "downloaded": true,
+        "filename": "audio_cache\\youtube-a68KJWe_Tfk-Benjamin_Clementine_-_Condolence_A_Take_Away_Show.webm",
+        "expected_filename": "unknownbenjamin-clementine-condolence-a-take-away-show",
+        "meta": {
+          "channel": {
+            "type": "Channel",
+            "id": "226402503422509058",
+            "name": "giesela"
+          },
+          "author": {
+            "type": "Member",
+            "id": "203302899277627392",
+            "name": "siku2"
+          }
+        },
+        "start_seconds": 231,
+        "end_seconds": 758,
+        "spotify_track": {
+          "id": null,
+          "name": "Benjamin Clementine \n Condolence A Take Away Show",
+          "artists": null,
+          "duration": null,
+          "album": null,
+          "popularity": null,
+          "uri": null,
+          "query": null,
+          "certainty": 0
+        },
+        "provided_song_timestamps": null
+      },
+      "timestamp": 231,
       "author_id": "203302899277627392"
     }
   }
