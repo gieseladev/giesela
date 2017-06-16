@@ -99,7 +99,7 @@ def _run_timestamp_matcher(text):
                       3600) if match.group(1) is not None else 0
         songs[timestamp] = match.group(4)
 
-    if len(songs) < 0:
+    if len(songs) < 1:
         for match in re.finditer(r"^(.+)\s(?:(\d***REMOVED***1,2***REMOVED***):)?(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***2***REMOVED***)(?:\s?.?\s?(?:\d***REMOVED***1,2***REMOVED***:)?(?:\d***REMOVED***1,2***REMOVED***):(?:\d***REMOVED***2***REMOVED***))?$", text, flags=re.MULTILINE):
             timestamp = int(match.group(4))
             timestamp += (int(match.group(3)) *
