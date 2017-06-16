@@ -5259,9 +5259,9 @@ class MusicBot(discord.Client):
 
     async def cmd_moveus(self, channel, server, author, message, leftover_args):
         """
-        Usage:
-            {command_prefix}moveus channel name
-
+        ///|Usage
+        `{command_prefix}moveus <channel name>`
+        ///|Explanation
         Move everyone in your current channel to another one!
         """
 
@@ -5304,11 +5304,10 @@ class MusicBot(discord.Client):
 
     async def cmd_mobile(self, message, channel, player, server, leftover_args):
         """
-        Usage:
-            {command_prefix}mobile
-            {command_prefix}mobile message @mention <message>
-
-        WIP
+        ///|Users
+        `{command_prefix}mobile`
+        ///|Send a message to a user
+        `{command_prefix}mobile message <@mention> <message>`
         """
 
         if len(leftover_args) < 1:
@@ -5361,9 +5360,9 @@ class MusicBot(discord.Client):
     @command_info("2.0.3", 1487538840, {"3.3.7": (1497471402, "changed command from \"skipto\" to \"seek\"")})
     async def cmd_seek(self, player, timestamp):
         """
-        Usage:
-            {command_prefix}seek <timestamp>
-
+        ///|Usage
+        `{command_prefix}seek <timestamp>`
+        ///|Explanation
         Go to the given timestamp formatted (minutes:seconds)
         """
 
@@ -5380,9 +5379,9 @@ class MusicBot(discord.Client):
     @command_info("2.2.1", 1493975700)
     async def cmd_fwd(self, player, timestamp):
         """
-        Usage:
-            {command_prefix}fwd <timestamp>
-
+        ///|Usage
+        `{command_prefix}fwd <timestamp>`
+        ///|Explanation
         Forward <timestamp> into the current entry
         """
 
@@ -5430,7 +5429,13 @@ class MusicBot(discord.Client):
             secs = player.progress - parse_timestamp(timestamp)
 
         if not secs:
-            return Response("Please provide a valid timestamp", delete_after=20)
+            if not player.playlist.history:
+                return Response("Please provide a valid timestamp (no history to rewind into)", delete_after=20)
+            else:
+                last_entry = player.playlist.history[
+                    0]  # just replay the last entry
+                player.play_entry(last_entry)
+                return
 
         if secs < 0:
             if not player.playlist.history:
