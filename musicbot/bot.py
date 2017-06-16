@@ -21,7 +21,7 @@ from textwrap import dedent, indent
 import aiohttp
 import discord
 import goslate
-import newspaper
+# import newspaper
 import tungsten
 import wikipedia
 from discord import Embed, utils
