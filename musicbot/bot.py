@@ -2512,9 +2512,11 @@ class MusicBot(discord.Client):
     @block_user
     async def cmd_radio(self, player, channel, author, leftover_args):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***radio [station name]
-            ***REMOVED***command_prefix***REMOVED***radio random
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***radio [station name]`
+        ///|Random station
+        `***REMOVED***command_prefix***REMOVED***radio random`
+        ///|Explanation
         Play live radio.
         You can leave the parameters blank in order to get a tour around all the channels,
         you can specify the station you want to listen to or you can let the bot choose for you by entering \"random\"
@@ -2642,9 +2644,10 @@ class MusicBot(discord.Client):
 
     async def cmd_ask(self, author, channel, message, leftover_args):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***ask <question>
-        ask something
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***ask <query>`
+        ///|Explanation
+        You can ask anything from science, maths, to culture
         """
 
         await self.send_typing(channel)
@@ -3032,16 +3035,20 @@ class MusicBot(discord.Client):
     @block_user
     async def cmd_random(self, channel, author, leftover_args):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***random <item1>, <item2>, [item3], [item4]...
-            ***REMOVED***command_prefix***REMOVED***random <name of the set>
-            ***REMOVED***command_prefix***REMOVED***random create <name>, <option1>, <option2>, [option3], [option4]...
-            ***REMOVED***command_prefix***REMOVED***random edit <name>, [add | remove | replace], <item> [, item2, item3]
-            ***REMOVED***command_prefix***REMOVED***random remove <name>
-            ***REMOVED***command_prefix***REMOVED***random list
-
+        ///|Basic
+        `***REMOVED***command_prefix***REMOVED***random <item1>, <item2>, [item3], [item4]`
+        ///|Use an existing set
+        `***REMOVED***command_prefix***REMOVED***random <setname>`
+        ///|List all the existing sets
+        `***REMOVED***command_prefix***REMOVED***random list`
+        ///|Creation
+        `***REMOVED***command_prefix***REMOVED***random create <name>, <option1>, <option2>, [option3], [option4]`
+        ///|Editing
+        `***REMOVED***command_prefix***REMOVED***random edit <name>, [add | remove | replace], <item> [, item2, item3]`
+        ///|Removal
+        `***REMOVED***command_prefix***REMOVED***random remove <name>`
+        ///|Explanation
         Choose a random item out of a list or use a pre-defined list.
-        Use `list` to see all the different lists out there or create your own.
         """
 
         items = [x.strip()
@@ -3332,147 +3339,148 @@ class MusicBot(discord.Client):
 
         await self.safe_send_message(channel, "Didn't find anything that goes by ***REMOVED***0***REMOVED***".format(leftover_args[0]), expire_in=15)
 
-    @block_user
-    async def cmd_news(self, message, channel, author, paper=None):
-        """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***news (if you already now what you want to read: url or name)
-
-        Get the latest news with this function!
-        """
-
-        await self.send_typing(channel)
-
-        if not paper:
-            def check(m):
-                return (
-                    m.content.lower()[0] in 'yn' or
-                    # hardcoded function name weeee
-                    m.content.lower().startswith('***REMOVED******REMOVED******REMOVED******REMOVED***'.format(self.config.command_prefix, 'news')) or
-                    m.content.lower().startswith('exit'))
-
-            for section in self.papers.config.sections():
-                await self.send_typing(channel)
-                paperinfo = self.papers.get_paper(section)
-                paper_message = await self.send_file(channel, str(paperinfo.cover), content="**" + str(paperinfo.name) + "**")
-
-                confirm_message = await self.safe_send_message(channel, "Do you want to read these papers? Type `y`, `n` or `exit`")
-                response_message = await self.wait_for_message(300, author=author, channel=channel, check=check)
-
-                if not response_message:
-                    await self.safe_delete_message(paper_message)
-                    await self.safe_delete_message(confirm_message)
-                    return Response("Ok nevermind.", delete_after=30)
-
-                elif response_message.content.startswith(self.config.command_prefix) or \
-                        response_message.content.lower().startswith('exit'):
-
-                    await self.safe_delete_message(paper_message)
-                    await self.safe_delete_message(confirm_message)
-                    return
-
-                if response_message.content.lower().startswith('y'):
-                    await self.safe_delete_message(paper_message)
-                    await self.safe_delete_message(confirm_message)
-                    await self.safe_delete_message(response_message)
-
-                    return Response((await self.cmd_news(message, channel, author, paper=section)).content)
-                else:
-                    await self.safe_delete_message(paper_message)
-                    await self.safe_delete_message(confirm_message)
-                    await self.safe_delete_message(response_message)
-
-            return Response("I don't have any more papers :frowning:", delete_after=30)
-
-        if not self.papers.get_paper(paper):
-            try:
-                npaper = newspaper.build(paper, memoize_articles=False)
-                await self.safe_send_message(channel, "**" + npaper.brand + "**")
-            except:
-                self.safe_send_message(
-                    channel, "Something went wrong while looking at the url")
-                return
-        else:
-            paperinfo = self.papers.get_paper(paper)
-            npaper = newspaper.build(
-                paperinfo.url, language=paperinfo.language, memoize_articles=False)
-            await self.send_file(channel, str(paperinfo.cover), content="**" + str(paperinfo.name) + "**")
-
-        await self.safe_send_message(channel, npaper.description + "\n*Found " + str(len(npaper.articles)) + " articles*\n=========================\n\n")
-
-        def check(m):
-            return (
-                m.content.lower()[0] in 'yn' or
-                # hardcoded function name weeee
-                m.content.lower().startswith('***REMOVED******REMOVED******REMOVED******REMOVED***'.format(self.config.command_prefix, 'news')) or
-                m.content.lower().startswith('exit'))
-
-        for article in npaper.articles:
-            await self.send_typing(channel)
-            try:
-                article.download()
-                article.parse()
-                article.nlp()
-            except:
-                self.log(
-                    "Something went wrong while parsing \"" + str(article) + "\", skipping it")
-                continue
-
-            if len(article.authors) > 0:
-                article_author = "Written by: ***REMOVED***0***REMOVED***".format(
-                    ", ".join(article.authors))
-            else:
-                article_author = "Couldn't determine the author of this article."
-
-            if len(article.keywords) > 0:
-                article_keyword = "Keywords: ***REMOVED***0***REMOVED***".format(
-                    ", ".join(article.keywords))
-            else:
-                article_keyword = "Couldn't make out any keywords"
-
-            article_title = article.title
-            article_summary = article.summary
-            article_image = article.top_image
-
-            article_text = "\n\n*****REMOVED******REMOVED*****\n****REMOVED******REMOVED****\n```\n\n***REMOVED******REMOVED***\n```\n***REMOVED******REMOVED***\n".format(
-                article_title, article_keyword, article_summary, article_author)
-
-            article_message = await self.safe_send_message(channel, article_text)
-
-            confirm_message = await self.safe_send_message(channel, "Do you want to read this? Type `y`, `n` or `exit`")
-            response_message = await self.wait_for_message(300, author=author, channel=channel, check=check)
-
-            if not response_message:
-                await self.safe_delete_message(article_message)
-                await self.safe_delete_message(confirm_message)
-                return Response("Ok nevermind.", delete_after=30)
-
-            elif response_message.content.startswith(self.config.command_prefix) or \
-                    response_message.content.lower().startswith('exit'):
-
-                await self.safe_delete_message(article_message)
-                await self.safe_delete_message(confirm_message)
-                return
-
-            if response_message.content.lower().startswith('y'):
-                await self.safe_delete_message(article_message)
-                await self.safe_delete_message(confirm_message)
-                await self.safe_delete_message(response_message)
-
-                if len(article.text) > 1500:
-                    fullarticle_text = "*****REMOVED******REMOVED*****\n****REMOVED******REMOVED****\n\n<***REMOVED******REMOVED***>\n\n****REMOVED******REMOVED****".format(
-                        article_title, article_author, article.url, "The full article exceeds the limits of Discord so I can only provide you with this link")
-                else:
-                    fullarticle_text = "*****REMOVED******REMOVED*****\n****REMOVED******REMOVED****\n\n***REMOVED******REMOVED***".format(
-                        article_title, article_author, article.text)
-
-                return Response(fullarticle_text)
-            else:
-                await self.safe_delete_message(article_message)
-                await self.safe_delete_message(confirm_message)
-                await self.safe_delete_message(response_message)
-
-        return Response("Can't find any more articles :frowning:", delete_after=30)
+    # @block_user
+    # async def cmd_news(self, message, channel, author, paper=None):
+    #     """
+    #     Usage:
+    #         ***REMOVED***command_prefix***REMOVED***news (if you already now what you want to read: url or name)
+    #
+    #     Get the latest news with this function!
+    #     """
+    #
+    #     await self.send_typing(channel)
+    #
+    #     if not paper:
+    #         def check(m):
+    #             return (
+    #                 m.content.lower()[0] in 'yn' or
+    #                 # hardcoded function name weeee
+    #                 m.content.lower().startswith('***REMOVED******REMOVED******REMOVED******REMOVED***'.format(self.config.command_prefix, 'news')) or
+    #                 m.content.lower().startswith('exit'))
+    #
+    #         for section in self.papers.config.sections():
+    #             await self.send_typing(channel)
+    #             paperinfo = self.papers.get_paper(section)
+    #             paper_message = await self.send_file(channel, str(paperinfo.cover), content="**" + str(paperinfo.name) + "**")
+    #
+    #             confirm_message = await self.safe_send_message(channel, "Do you want to read these papers? Type `y`, `n` or `exit`")
+    #             response_message = await self.wait_for_message(300, author=author, channel=channel, check=check)
+    #
+    #             if not response_message:
+    #                 await self.safe_delete_message(paper_message)
+    #                 await self.safe_delete_message(confirm_message)
+    #                 return Response("Ok nevermind.", delete_after=30)
+    #
+    #             elif response_message.content.startswith(self.config.command_prefix) or \
+    #                     response_message.content.lower().startswith('exit'):
+    #
+    #                 await self.safe_delete_message(paper_message)
+    #                 await self.safe_delete_message(confirm_message)
+    #                 return
+    #
+    #             if response_message.content.lower().startswith('y'):
+    #                 await self.safe_delete_message(paper_message)
+    #                 await self.safe_delete_message(confirm_message)
+    #                 await self.safe_delete_message(response_message)
+    #
+    #                 return Response((await self.cmd_news(message, channel, author, paper=section)).content)
+    #             else:
+    #                 await self.safe_delete_message(paper_message)
+    #                 await self.safe_delete_message(confirm_message)
+    #                 await self.safe_delete_message(response_message)
+    #
+    #         return Response("I don't have any more papers :frowning:", delete_after=30)
+    #
+    #     if not self.papers.get_paper(paper):
+    #         try:
+    #             npaper = newspaper.build(paper, memoize_articles=False)
+    #             await self.safe_send_message(channel, "**" + npaper.brand + "**")
+    #         except:
+    #             self.safe_send_message(
+    #                 channel, "Something went wrong while looking at the url")
+    #             return
+    #     else:
+    #         paperinfo = self.papers.get_paper(paper)
+    #         npaper = newspaper.build(
+    #             paperinfo.url, language=paperinfo.language, memoize_articles=False)
+    #         await self.send_file(channel, str(paperinfo.cover), content="**" + str(paperinfo.name) + "**")
+    #
+    #     await self.safe_send_message(channel, npaper.description + "\n*Found " + str(len(npaper.articles)) + " articles*\n=========================\n\n")
+    #
+    #     def check(m):
+    #         return (
+    #             m.content.lower()[0] in 'yn' or
+    #             # hardcoded function name weeee
+    #             m.content.lower().startswith('***REMOVED******REMOVED******REMOVED******REMOVED***'.format(self.config.command_prefix, 'news')) or
+    #             m.content.lower().startswith('exit'))
+    #
+    #     for article in npaper.articles:
+    #         await self.send_typing(channel)
+    #         try:
+    #             article.download()
+    #             article.parse()
+    #             article.nlp()
+    #         except:
+    #             self.log(
+    #                 "Something went wrong while parsing \"" + str(article) + "\", skipping it")
+    #             continue
+    #
+    #         if len(article.authors) > 0:
+    #             article_author = "Written by: ***REMOVED***0***REMOVED***".format(
+    #                 ", ".join(article.authors))
+    #         else:
+    #             article_author = "Couldn't determine the author of this article."
+    #
+    #         if len(article.keywords) > 0:
+    #             article_keyword = "Keywords: ***REMOVED***0***REMOVED***".format(
+    #                 ", ".join(article.keywords))
+    #         else:
+    #             article_keyword = "Couldn't make out any keywords"
+    #
+    #         article_title = article.title
+    #         article_summary = article.summary
+    #         article_image = article.top_image
+    #
+    #         article_text = "\n\n*****REMOVED******REMOVED*****\n****REMOVED******REMOVED****\n```\n\n***REMOVED******REMOVED***\n```\n***REMOVED******REMOVED***\n".format(
+    #             article_title, article_keyword, article_summary, article_author)
+    #
+    #         article_message = await self.safe_send_message(channel, article_text)
+    #
+    #         confirm_message = await self.safe_send_message(channel, "Do you want to read this? Type `y`, `n` or `exit`")
+    #         response_message = await self.wait_for_message(300, author=author, channel=channel, check=check)
+    #
+    #         if not response_message:
+    #             await self.safe_delete_message(article_message)
+    #             await self.safe_delete_message(confirm_message)
+    #             return Response("Ok nevermind.", delete_after=30)
+    #
+    #         elif response_message.content.startswith(self.config.command_prefix) or \
+    #                 response_message.content.lower().startswith('exit'):
+    #
+    #             await self.safe_delete_message(article_message)
+    #             await self.safe_delete_message(confirm_message)
+    #             return
+    #
+    #         if response_message.content.lower().startswith('y'):
+    #             await self.safe_delete_message(article_message)
+    #             await self.safe_delete_message(confirm_message)
+    #             await self.safe_delete_message(response_message)
+    #
+    #             if len(article.text) > 1500:
+    #                 fullarticle_text = "*****REMOVED******REMOVED*****\n****REMOVED******REMOVED****\n\n<***REMOVED******REMOVED***>\n\n****REMOVED******REMOVED****".format(
+    #                     article_title, article_author, article.url, "The full article exceeds the limits of Discord so I can only provide you with this link")
+    #             else:
+    #                 fullarticle_text = "*****REMOVED******REMOVED*****\n****REMOVED******REMOVED****\n\n***REMOVED******REMOVED***".format(
+    #                     article_title, article_author, article.text)
+    #
+    #             return Response(fullarticle_text)
+    #         else:
+    #             await self.safe_delete_message(article_message)
+    #             await self.safe_delete_message(confirm_message)
+    #             await self.safe_delete_message(response_message)
+    #
+    # return Response("Can't find any more articles :frowning:",
+    # delete_after=30)
 
     @block_user
     async def cmd_cah(self, message, channel, author, leftover_args):
@@ -3489,7 +3497,7 @@ class MusicBot(discord.Client):
 
         References:
             ***REMOVED***command_prefix***REMOVED***help cards
-                -learn about how to create/edit cards
+                -learn how to create/edit cards
             ***REMOVED***command_prefix***REMOVED***help qcards
                 -learn about how to create/edit question cards
         """
@@ -4128,24 +4136,24 @@ class MusicBot(discord.Client):
             await self.safe_delete_message(msg)
             await self.safe_delete_message(response)
 
-    @owner_only
-    async def cmd_getemojicode(self, channel, message, emoji):
-        """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***getemojicode emoji
-
-        logs the emoji to the console so that you can retrieve the unicode symbol.
-        """
-
-        self.log(emoji)
-        await self.safe_delete_message(message)
+    # @owner_only
+    # async def cmd_getemojicode(self, channel, message, emoji):
+    #     """
+    #     Usage:
+    #         ***REMOVED***command_prefix***REMOVED***getemojicode emoji
+    #
+    #     logs the emoji to the console so that you can retrieve the unicode symbol.
+    #     """
+    #
+    #     self.log(emoji)
+    #     await self.safe_delete_message(message)
 
     async def cmd_9gag(self, channel, author, post_id):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***9gag <id>
-
-        WIP
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***9gag <id>`
+        ///|Explanation
+        Display the 9gag post with the specified id
         """
 
         post = get_post(post_id)
@@ -4232,29 +4240,29 @@ class MusicBot(discord.Client):
     #                   icon_url=tweet.user.avatar_url)
     #     await self.send_message(channel, embed=em)
 
-    async def cmd_giphy(self, channel, gif_id):
-        async with aiohttp.ClientSession() as session:
-            async with session.get("http://api.giphy.com/v1/gifs/" + gif_id + "?api_key=dc6zaTOxFJmzC") as resp:
-                response = await resp.json()
-        data = response["data"]
-        url = data["url"]
-        username = data["username"]
-        source = data["source"]
-        caption = data["caption"] if "caption" in data else "GIPHY"
-        timestamp = datetime.strptime(
-            data["import_datetime"], "%Y-%m-%d %H:%M:%S")
-        gif = data["images"]["original"]["url"]
-
-        em = Embed(title=caption, timestamp=timestamp, url=url)
-        em.set_image(url=gif)
-        em.set_author(url=source, name=username)
-        await self.send_message(channel, embed=em)
+    # async def cmd_giphy(self, channel, gif_id):
+    #     async with aiohttp.ClientSession() as session:
+    #         async with session.get("http://api.giphy.com/v1/gifs/" + gif_id + "?api_key=dc6zaTOxFJmzC") as resp:
+    #             response = await resp.json()
+    #     data = response["data"]
+    #     url = data["url"]
+    #     username = data["username"]
+    #     source = data["source"]
+    #     caption = data["caption"] if "caption" in data else "GIPHY"
+    #     timestamp = datetime.strptime(
+    #         data["import_datetime"], "%Y-%m-%d %H:%M:%S")
+    #     gif = data["images"]["original"]["url"]
+    #
+    #     em = Embed(title=caption, timestamp=timestamp, url=url)
+    #     em.set_image(url=gif)
+    #     em.set_author(url=source, name=username)
+    #     await self.send_message(channel, embed=em)
 
     async def cmd_repeat(self, player):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***repeat
-
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***repeat`
+        ///|Explanation
         Cycles through the repeat options. Default is no repeat, switchable to repeat all or repeat current song.
         """
 
@@ -4273,10 +4281,9 @@ class MusicBot(discord.Client):
 
     async def cmd_promote(self, player, position=None):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***promote
-            ***REMOVED***command_prefix***REMOVED***promote [song position]
-
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***promote [song position]`
+        ///|Explanation
         Promotes the last song in the queue to the front.
         If you specify a position, it promotes the song at that position to the front.
         """
@@ -4759,12 +4766,12 @@ class MusicBot(discord.Client):
                 "Closed the playlist builder and saved the playlist")
             return Response("Successfully saved ****REMOVED******REMOVED****".format(user_savename.replace("_", " ").title()))
 
-    @command_info("1.9.2", 1479945600, ***REMOVED***"3.3.6": (1497387101, "added the missing \"s\", should be working again")***REMOVED***)
-    async def cmd_addplayingtoplaylist(self, channel, author, player, playlistname):
+    @command_info("1.9.2", 1479945600, ***REMOVED***"3.3.6": (1497387101, "added the missing \"s\", should be working again"), "3.4.4": (1497611753, "Changed command name from \"addplayingtoplaylist\" to \"addtoplaylist\", thanks Paulo")***REMOVED***)
+    async def cmd_addtoplaylist(self, channel, author, player, playlistname):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***addplayingtoplaylist <playlistname>
-
+        ///|Usage:
+        `***REMOVED***command_prefix***REMOVED***addtoplaylist <playlistname>`
+        ///|Explanation
         Add the current entry to a playlist
         """
 
@@ -4794,12 +4801,12 @@ class MusicBot(discord.Client):
             playlistname, player.playlist, new_entries=[add_entry])
         return Response("Added the current song to the playlist.")
 
-    @command_info("1.9.2", 1479945600, ***REMOVED***"3.3.6": (1497387101, "added the missing \"s\", should be working again")***REMOVED***)
-    async def cmd_removeplayingfromplaylist(self, channel, author, player, playlistname):
+    @command_info("1.9.2", 1479945600, ***REMOVED***"3.3.6": (1497387101, "added the missing \"s\", should be working again"), "3.4.4": (1497611753, "Changed command name from \"removeplayingfromplaylist\" to \"removefromplaylist\", thanks Paulo")***REMOVED***)
+    async def cmd_removefromplaylist(self, channel, author, player, playlistname):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***removeplayingfromplaylist <playlistname>
-
+        ///|Usage:
+        `***REMOVED***command_prefix***REMOVED***removefromplaylist <playlistname>`
+        ///|Explanation
         Remove the current entry from a playlist
         """
 
@@ -4872,32 +4879,33 @@ class MusicBot(discord.Client):
 
         return Response("Set the ending point to ***REMOVED******REMOVED*** seconds.".format(new_start), delete_after=20)
 
-    async def cmd_setplayingname(self, player, playlistname, new_name, leftover_args):
-        """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***setplayingname <playlistname> <new name>
-
-        Set the name of the current song
-        """
-        new_title = new_name + " " + " ".join(leftover_args)
-
-        if playlistname is None:
-            return Response("Please specify the playlist's name!", delete_after=20)
-
-        playlistname = playlistname.lower()
-
-        if not player.current_entry:
-            return Response("There's nothing playing right now...", delete_after=20)
-
-        if len(new_title) > 500 or len(new_title) < 3:
-            return Response("The new title has to be at least 3 characters long", delete_after=20)
-
-        new_entry = player.current_entry
-        new_entry.set_title(new_title)
-        self.playlists.edit_playlist(
-            playlistname, player.playlist, remove_entries=[player.current_entry], new_entries=[new_entry])
-
-        return Response("The new title is \"***REMOVED******REMOVED***\"".format(new_title), delete_after=20)
+    # async def cmd_setplayingname(self, player, playlistname, new_name, leftover_args):
+    #     """
+    #     Usage:
+    #         ***REMOVED***command_prefix***REMOVED***setplayingname <playlistname> <new name>
+    #
+    #     Set the name of the current song
+    #     """
+    #     new_title = new_name + " " + " ".join(leftover_args)
+    #
+    #     if playlistname is None:
+    #         return Response("Please specify the playlist's name!", delete_after=20)
+    #
+    #     playlistname = playlistname.lower()
+    #
+    #     if not player.current_entry:
+    #         return Response("There's nothing playing right now...", delete_after=20)
+    #
+    #     if len(new_title) > 500 or len(new_title) < 3:
+    #         return Response("The new title has to be at least 3 characters long", delete_after=20)
+    #
+    #     new_entry = player.current_entry
+    #     new_entry.set_title(new_title)
+    #     self.playlists.edit_playlist(
+    #         playlistname, player.playlist, remove_entries=[player.current_entry], new_entries=[new_entry])
+    #
+    # return Response("The new title is \"***REMOVED******REMOVED***\"".format(new_title),
+    # delete_after=20)
 
     async def cmd_wiki(self, channel, message, leftover_args):
         """
