@@ -355,7 +355,7 @@ class MusicPlayer(EventEmitter):
                 self._current_player.start()
                 self.emit('play', player=self, entry=entry)
                 self.bot.socket_server.threaded_broadcast_information()
-                asyncio.ensure_future(self.update_timestamp(2))
+                asyncio.ensure_future(self.update_timestamp())
 
     async def update_timestamp(self, delay=None):
         if not delay:
@@ -423,6 +423,7 @@ class MusicPlayer(EventEmitter):
             self._current_player.start()
             self.emit('play', player=self, entry=entry)
             self.bot.socket_server.threaded_broadcast_information()
+            asyncio.ensure_future(self.update_timestamp())
 
     def _monkeypatch_player(self, player):
         original_buff = player.buff
