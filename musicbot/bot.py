@@ -3004,7 +3004,7 @@ class MusicBot(discord.Client):
             await self.get_player(channel, create=True)
         return channel
 
-    @command_info("1.9.5", 1477774380, ***REMOVED***"3.4.2": (1497552134, "Added a way to not only replay the current song, but also the last one")***REMOVED***)
+    @command_info("1.9.5", 1477774380, ***REMOVED***"3.4.2": (1497552134, "Added a way to not only replay the current song, but also the last one"), "3.4.8": (1497649772, "Fixed the issue which blocked Giesela from replaying the last song")***REMOVED***)
     async def cmd_replay(self, player, choose_last=""):
         """
         ///|Usage
@@ -3014,7 +3014,7 @@ class MusicBot(discord.Client):
         """
 
         replay_entry = player.current_entry
-        if not player.current_entry or choose_last.lower() == "last":
+        if (not player.current_entry) or choose_last.lower() == "last":
             if not player.playlist.history:
                 return Response("Cannot replay the last song as there is no last song")
 
@@ -3024,12 +3024,10 @@ class MusicBot(discord.Client):
             return Response("There's nothing for me to replay")
         try:
             player.playlist._add_entry_next(replay_entry)
-            await self.safe_send_message(channel, "Replaying the current song")
-            self.log("Will replay " + player.current_entry.title)
+            return Response("Replaying the song")
 
         except Exception as e:
-            self.log("Something went wrong: " + str(e))
-            await self.safe_send_message(channel, "Can't replay " + player.current_entry.title)
+            return Response("Can't replay ***REMOVED******REMOVED***:\n```\n***REMOVED******REMOVED***\n```".format(player.current_entry.title, e))
 
     async def cmd_lonelymode(self, channel, author, msgState=None):
         """
