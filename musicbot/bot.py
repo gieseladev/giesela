@@ -21,7 +21,7 @@ from textwrap import dedent, indent
 import aiohttp
 import discord
 import goslate
-import newspaper
+# import newspaper
 import tungsten
 import wikipedia
 from discord import Embed, utils
@@ -939,6 +939,7 @@ class MusicBot(discord.Client):
         self.socket_server.threaded_broadcast_information()
         return target_channel
 
+    @command_info("1.9.5", 1477774380, {"3.4.5": (1497616203, "Improved default help message using embeds")})
     async def cmd_help(self, channel, leftover_args):
         """
         ///|Usage
@@ -971,7 +972,7 @@ class MusicBot(discord.Client):
                         field = field[4:]
                         # print(field)
 
-                    match = re.match("\|(.+)\n((?:.|\n)+)", field)
+                    match = re.match(r"\|(.+)\n((?:.|\n)+)", field)
                     if match is None:
                         continue
                     title, text = match.group(1, 2)
@@ -1020,20 +1021,50 @@ class MusicBot(discord.Client):
                 await self.safe_send_message(channel, resp_str, expire_in=60)
 
         else:
-            helpmsg = "**Commands**\n```"
-            commands = []
+            em = Embed(title="GIESELA HELP",
+                       url="http://siku2.github.io/Giesela/",
+                       colour=hex_to_dec("828c51"),
+                       description="plz be welcum to mah new list of the **most fab** commands\nYou can always use `{0}help <cmd>` to get more detailed information on a command".format(self.config.command_prefix))
 
-            for att in dir(self):
-                if att.startswith('cmd_') and att != 'cmd_help':
-                    command_name = att.replace('cmd_', '').lower()
-                    commands.append("{}{}".format(
-                        self.config.command_prefix, command_name))
+            music_commands = "`{0}play` play dem shit\n`{0}search` make sure you get ur shit\n`{0}stream` when u wanna go live\n`{0}pause` need a break?\n`{0}volume` oh shit turn it up\n`{0}seek` hide and snaek\n`{0}fwd` sanic fast, sanic skip\n`{0}rwd` go baek in tiem".format(
+                self.config.command_prefix)
+            em.add_field(name="Music",
+                         value=music_commands,
+                         inline=False)
 
-            helpmsg += ", ".join(commands)
-            helpmsg += "```"
-            helpmsg += "A Discord Bot by siku2"
+            queue_commands = "`{0}queue` taky a looky bruh\n`{0}history` care to see the past?\n`{0}np` look at dem shit\n`{0}skip` skip regretful shit\n`{0}replay` when it's stuck in ur head\n`{0}repeat` over and over and over\n`{0}remove` \"that's not what I wanted\"\n`{0}clear` burn it all down\n`{0}shuffle` maek it random plz\n`{0}promote` I want it right now!".format(
+                self.config.command_prefix)
+            em.add_field(name="Queue",
+                         value=queue_commands,
+                         inline=False)
 
-            return Response(helpmsg, reply=True, delete_after=60)
+            playlist_commands = "`{0}playlist` create/edit/list playlists\n`{0}addtoplaylist` add shit to a playlist\n`{0}removefromplaylist` remove shit from a playlist".format(
+                self.config.command_prefix)
+            em.add_field(name="Playlist",
+                         value=playlist_commands,
+                         inline=False)
+
+            misc_commands = "`{0}random` for when you can't decide\n`{0}game` when u're bored\n`{0}ask` when you don't know shit\n`{0}c` have a chat".format(
+                self.config.command_prefix)
+            em.add_field(name="Misc",
+                         value=misc_commands,
+                         inline=False)
+
+            return Response(embed=em)
+            # helpmsg = "**Commands**\n```"
+            # commands = []
+            #
+            # for att in dir(self):
+            #     if att.startswith('cmd_') and att != 'cmd_help':
+            #         command_name = att.replace('cmd_', '').lower()
+            #         commands.append("{}{}".format(
+            #             self.config.command_prefix, command_name))
+            #
+            # helpmsg += ", ".join(commands)
+            # helpmsg += "```"
+            # helpmsg += "A Discord Bot by siku2"
+            #
+            # return Response(helpmsg, reply=True, delete_after=60)
 
     async def cmd_blacklist(self, message, user_mentions, option, something):
         """
@@ -2973,7 +3004,7 @@ class MusicBot(discord.Client):
             await self.get_player(channel, create=True)
         return channel
 
-    @command_info("1.9.5", 1477774380, {"3.4.2": (1497552134, "Added a way to not only replay the current song, but also the last one")})
+    @command_info("1.9.5", 1477774380, {"3.4.2": (1497552134, "Added a way to not only replay the current song, but also the last one"), "3.4.8": (1497649772, "Fixed the issue which blocked Giesela from replaying the last song")})
     async def cmd_replay(self, player, choose_last=""):
         """
         ///|Usage
@@ -2983,7 +3014,7 @@ class MusicBot(discord.Client):
         """
 
         replay_entry = player.current_entry
-        if not player.current_entry or choose_last.lower() == "last":
+        if (not player.current_entry) or choose_last.lower() == "last":
             if not player.playlist.history:
                 return Response("Cannot replay the last song as there is no last song")
 
@@ -2993,12 +3024,10 @@ class MusicBot(discord.Client):
             return Response("There's nothing for me to replay")
         try:
             player.playlist._add_entry_next(replay_entry)
-            await self.safe_send_message(channel, "Replaying the current song")
-            self.log("Will replay " + player.current_entry.title)
+            return Response("Replaying the song")
 
         except Exception as e:
-            self.log("Something went wrong: " + str(e))
-            await self.safe_send_message(channel, "Can't replay " + player.current_entry.title)
+            return Response("Can't replay {}:\n```\n{}\n```".format(player.current_entry.title, e))
 
     async def cmd_lonelymode(self, channel, author, msgState=None):
         """
@@ -4330,10 +4359,11 @@ class MusicBot(discord.Client):
         return Response(reply_text, delete_after=30)
 
     @block_user
+    @command_info("1.9.5", 1479599760, {"3.4.6": (1497617827, "when Giesela can't add the entry to the playlsit she tries to figure out **why** it didn't work"), "3.4.7": (1497619770, "Fixed an annoying bug in which the builder wouldn't show any entries if the amount of entries was a multiple of 20")})
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         ///|Load
-        `{command_prefix}playlist load <savename> [add | replace] [none | alphabetical | length | random] [startindex] [endindex (inclusive)]`
+        `{command_prefix}playlist load <savename> [add | replace] [none | alphabetical | length | random] [startindex] [endindex (inclusive)]`\n\nTrust me, it's more complicated than it looks
         ///(NL)|List all playlists
         `{command_prefix}playlist showall [alphabetical | author | entries | playtime | random | replays]`
         ///(NL)|Build a new playlist
@@ -4584,15 +4614,17 @@ class MusicBot(discord.Client):
 
             if iterations > 0 and overflow == 0:
                 iterations -= 1
+                overflow += items_per_page
+
+            # print(iterations, overflow)
 
             start = (entries_page * items_per_page)
             end = (start + (overflow if entries_page >=
                             iterations else items_per_page)) if len(entries) > 0 else 0
             # this_page_entries = entries [start : end]
 
-            # self.log ("I have {} entries in the whole list and now I'm
-            # viewing from {} to {} ({} entries)".format (str (len (entries)),
-            # str (start), str (end), str (end - start)))
+            # self.log("I have {} entries in the whole list and now I'm viewing from {} to {} ({} entries)".format(
+            #     str(len(entries)), str(start), str(end), str(end - start)))
 
             for i in range(start, end):
                 entries_text += str(i + 1) + ". " + entries[i].title + "\n"
@@ -4633,9 +4665,9 @@ class MusicBot(discord.Client):
                             int(playlist["entry_count"]) + len(entries))
                         it, ov = divmod(
                             int(playlist["entry_count"]), items_per_page)
-                        entries_page = it
-                    except:
-                        await self.safe_send_message(channel, "Something went terribly wrong there.", expire_in=20)
+                        entries_page = it - 1 if ov == 0 else it
+                    except Exception as e:
+                        await self.safe_send_message(channel, "**Something went terribly wrong there:**\n```\n{}\n```".format(e), expire_in=20)
                     await self.safe_delete_message(msg)
 
             elif split_message[0].lower() == "remove":
@@ -4655,6 +4687,9 @@ class MusicBot(discord.Client):
                         int(playlist["entry_count"]) - len(indieces))
                     playlist["entries"] = [playlist["entries"][x] for x in range(
                         len(playlist["entries"])) if x not in indieces]
+                    it, ov = divmod(
+                        int(playlist["entry_count"]), items_per_page)
+                    entries_page = it - 1 if ov == 0 else it
 
             elif split_message[0].lower() == "rename":
                 if arguments is not None and len(arguments[0]) >= 3 and arguments[0] not in self.playlists.saved_playlists:
@@ -4769,7 +4804,7 @@ class MusicBot(discord.Client):
     @command_info("1.9.2", 1479945600, {"3.3.6": (1497387101, "added the missing \"s\", should be working again"), "3.4.4": (1497611753, "Changed command name from \"addplayingtoplaylist\" to \"addtoplaylist\", thanks Paulo")})
     async def cmd_addtoplaylist(self, channel, author, player, playlistname):
         """
-        ///|Usage:
+        ///|Usage
         `{command_prefix}addtoplaylist <playlistname>`
         ///|Explanation
         Add the current entry to a playlist
@@ -4804,7 +4839,7 @@ class MusicBot(discord.Client):
     @command_info("1.9.2", 1479945600, {"3.3.6": (1497387101, "added the missing \"s\", should be working again"), "3.4.4": (1497611753, "Changed command name from \"removeplayingfromplaylist\" to \"removefromplaylist\", thanks Paulo")})
     async def cmd_removefromplaylist(self, channel, author, player, playlistname):
         """
-        ///|Usage:
+        ///|Usage
         `{command_prefix}removefromplaylist <playlistname>`
         ///|Explanation
         Remove the current entry from a playlist
@@ -5814,7 +5849,7 @@ class MusicBot(discord.Client):
             else:
                 return Response("No idea who you are... bugger off!")
 
-    @command_info("3.2.5", 1496428380, {"3.3.9": (1497521393, "Added edit sub-command"), "3.4.1": (1497550771, "Added the filter \"mine\" to the listing function")})
+    @command_info("3.2.5", 1496428380, {"3.3.9": (1497521393, "Added edit sub-command"), "3.4.1": (1497550771, "Added the filter \"mine\" to the listing function"), "3.4.6": (1497617827, "when listing bookmarks, they musn't be \"inline\".")})
     async def cmd_bookmark(self, author, player, leftover_args):
         """
         ///|Creation
@@ -5849,7 +5884,7 @@ class MusicBot(discord.Client):
                     t = "**{}**".format(bm_name)
                     v = "`{}` *starting at* `{}` *by* **{}**".format(
                         bm_id, bm_timestamp, bm_author)
-                    em.add_field(name=t, value=v)
+                    em.add_field(name=t, value=v, inline=False)
                 return Response(embed=em)
             elif arg in ["remove", "delete"]:
                 if len(leftover_args) < 2:
@@ -5936,7 +5971,7 @@ class MusicBot(discord.Client):
             self.blocked_commands[command.lower()] = reason
             return Response("Blocked command")
 
-    @command_info("4.0.0", 1497533758)
+    @command_info("3.4.0", 1497533758, {"3.4.8": (1497650090, "When showing changelogs, two logs can't be on the same line anymore")})
     async def cmd_commandinfo(self, command):
         """
         ///|Usage
@@ -5952,12 +5987,13 @@ class MusicBot(discord.Client):
         try:
             em = Embed(title=command.upper(), colour=hex_to_dec("ffd700"))
             em.add_field(name="Version `{}`".format(
-                c_info.version), value="`{}`\nCommand has been added".format(c_info.timestamp))
+                c_info.version), value="`{}`\nCommand has been added".format(c_info.timestamp), inline=False)
 
             for cl in c_info.changelog:
                 v, t, l = cl
                 em.add_field(name="Version `{}`".format(v),
-                             value="`{}`\n{}".format(t, l))
+                             value="`{}`\n{}".format(t, l),
+                             inline=False)
 
             return Response(embed=em)
         except:
