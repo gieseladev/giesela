@@ -30,6 +30,10 @@ class Bookmarks:
         self.version = 0
         self.bookmarks = {}
 
+    @ensure_loaded
+    def __contains__(self, key):
+        return key in self.bookmarks
+
     @property
     @ensure_loaded
     def all_bookmarks(self):
@@ -107,6 +111,26 @@ class Bookmarks:
         self.bookmarks[bookmark_id] = data
 
         return bookmark_id
+
+    @ensure_loaded
+    @ensure_saving
+    def edit_bookmark(self, id, new_name=None, new_timestamp=None):
+        if id not in self.bookmarks:
+            return False
+
+        data = self.bookmarks[id]  # grab previous data
+
+        new_data = {}
+        if new_name:
+            new_data["name"] = new_name
+        if new_timestamp:
+            new_data["timestamp"] = new_timestamp
+            data["entry"]["start_seconds"] = new_timestamp
+
+        data.update(new_data)  # override the values with the new ones
+
+        self.bookmarks[id] = data  # save it
+        return True
 
     @ensure_loaded
     @ensure_saving
