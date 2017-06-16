@@ -939,6 +939,7 @@ class MusicBot(discord.Client):
         self.socket_server.threaded_broadcast_information()
         return target_channel
 
+    @command_info("1.9.5", 1477774380, {"3.4.5": (1497616203, "Improved default help message using embeds")})
     async def cmd_help(self, channel, leftover_args):
         """
         ///|Usage
@@ -971,7 +972,7 @@ class MusicBot(discord.Client):
                         field = field[4:]
                         # print(field)
 
-                    match = re.match("\|(.+)\n((?:.|\n)+)", field)
+                    match = re.match(r"\|(.+)\n((?:.|\n)+)", field)
                     if match is None:
                         continue
                     title, text = match.group(1, 2)
@@ -1020,20 +1021,50 @@ class MusicBot(discord.Client):
                 await self.safe_send_message(channel, resp_str, expire_in=60)
 
         else:
-            helpmsg = "**Commands**\n```"
-            commands = []
+            em = Embed(title="GIESELA HELP",
+                       url="http://siku2.github.io/Giesela/",
+                       colour=hex_to_dec("828c51"),
+                       description="plz be welcum to mah new list of the **most fab** commands\nYou can always use `{0}help <cmd>` to get more detailed information on a command".format(self.config.command_prefix))
 
-            for att in dir(self):
-                if att.startswith('cmd_') and att != 'cmd_help':
-                    command_name = att.replace('cmd_', '').lower()
-                    commands.append("{}{}".format(
-                        self.config.command_prefix, command_name))
+            music_commands = "`{0}play` play dem shit\n`{0}search` make sure you get ur shit\n`{0}stream` when u wanna go live\n`{0}pause` need a break?\n`{0}volume` oh shit turn it up\n`{0}seek` hide and snaek\n`{0}fwd` sanic fast, sanic skip\n`{0}rwd` go baek in tiem".format(
+                self.config.command_prefix)
+            em.add_field(name="Music",
+                         value=music_commands,
+                         inline=False)
 
-            helpmsg += ", ".join(commands)
-            helpmsg += "```"
-            helpmsg += "A Discord Bot by siku2"
+            queue_commands = "`{0}queue` taky a looky bruh\n`{0}history` care to see the past?\n`{0}np` look at dem shit\n`{0}skip` skip regretful shit\n`{0}replay` when it's stuck in ur head\n`{0}repeat` over and over and over\n`{0}remove` \"that's not what I wanted\"\n`{0}clear` burn it all down\n`{0}shuffle` maek it random plz\n`{0}promote` I want it right now!".format(
+                self.config.command_prefix)
+            em.add_field(name="Queue",
+                         value=queue_commands,
+                         inline=False)
 
-            return Response(helpmsg, reply=True, delete_after=60)
+            playlist_commands = "`{0}playlist` create/edit/list playlists\n`{0}addtoplaylist` add shit to a playlist\n`{0}removefromplaylist` remove shit from a playlist".format(
+                self.config.command_prefix)
+            em.add_field(name="Playlist",
+                         value=playlist_commands,
+                         inline=False)
+
+            misc_commands = "`{0}random` for when you can't decide\n`{0}game` when u're bored\n`{0}ask` when you don't know shit\n`{0}c` have a chat".format(
+                self.config.command_prefix)
+            em.add_field(name="Misc",
+                         value=misc_commands,
+                         inline=False)
+
+            return Response(embed=em)
+            # helpmsg = "**Commands**\n```"
+            # commands = []
+            #
+            # for att in dir(self):
+            #     if att.startswith('cmd_') and att != 'cmd_help':
+            #         command_name = att.replace('cmd_', '').lower()
+            #         commands.append("{}{}".format(
+            #             self.config.command_prefix, command_name))
+            #
+            # helpmsg += ", ".join(commands)
+            # helpmsg += "```"
+            # helpmsg += "A Discord Bot by siku2"
+            #
+            # return Response(helpmsg, reply=True, delete_after=60)
 
     async def cmd_blacklist(self, message, user_mentions, option, something):
         """
@@ -4333,7 +4364,7 @@ class MusicBot(discord.Client):
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         ///|Load
-        `{command_prefix}playlist load <savename> [add | replace] [none | alphabetical | length | random] [startindex] [endindex (inclusive)]`
+        `{command_prefix}playlist load <savename> [add | replace] [none | alphabetical | length | random] [startindex] [endindex (inclusive)]`\n\nTrust me, it's more complicated than it looks
         ///(NL)|List all playlists
         `{command_prefix}playlist showall [alphabetical | author | entries | playtime | random | replays]`
         ///(NL)|Build a new playlist
@@ -4769,7 +4800,7 @@ class MusicBot(discord.Client):
     @command_info("1.9.2", 1479945600, {"3.3.6": (1497387101, "added the missing \"s\", should be working again"), "3.4.4": (1497611753, "Changed command name from \"addplayingtoplaylist\" to \"addtoplaylist\", thanks Paulo")})
     async def cmd_addtoplaylist(self, channel, author, player, playlistname):
         """
-        ///|Usage:
+        ///|Usage
         `{command_prefix}addtoplaylist <playlistname>`
         ///|Explanation
         Add the current entry to a playlist
@@ -4804,7 +4835,7 @@ class MusicBot(discord.Client):
     @command_info("1.9.2", 1479945600, {"3.3.6": (1497387101, "added the missing \"s\", should be working again"), "3.4.4": (1497611753, "Changed command name from \"removeplayingfromplaylist\" to \"removefromplaylist\", thanks Paulo")})
     async def cmd_removefromplaylist(self, channel, author, player, playlistname):
         """
-        ///|Usage:
+        ///|Usage
         `{command_prefix}removefromplaylist <playlistname>`
         ///|Explanation
         Remove the current entry from a playlist
