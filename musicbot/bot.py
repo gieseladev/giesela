@@ -5971,7 +5971,7 @@ class MusicBot(discord.Client):
             self.blocked_commands[command.lower()] = reason
             return Response("Blocked command")
 
-    @command_info("4.0.0", 1497533758)
+    @command_info("3.4.0", 1497533758, ***REMOVED***"3.4.8": (1497650090, "When showing changelogs, two logs can't be on the same line anymore")***REMOVED***)
     async def cmd_commandinfo(self, command):
         """
         ///|Usage
@@ -5987,12 +5987,13 @@ class MusicBot(discord.Client):
         try:
             em = Embed(title=command.upper(), colour=hex_to_dec("ffd700"))
             em.add_field(name="Version `***REMOVED******REMOVED***`".format(
-                c_info.version), value="`***REMOVED******REMOVED***`\nCommand has been added".format(c_info.timestamp))
+                c_info.version), value="`***REMOVED******REMOVED***`\nCommand has been added".format(c_info.timestamp), inline=False)
 
             for cl in c_info.changelog:
                 v, t, l = cl
                 em.add_field(name="Version `***REMOVED******REMOVED***`".format(v),
-                             value="`***REMOVED******REMOVED***`\n***REMOVED******REMOVED***".format(t, l))
+                             value="`***REMOVED******REMOVED***`\n***REMOVED******REMOVED***".format(t, l),
+                             inline=False)
 
             return Response(embed=em)
         except:
