@@ -62,7 +62,7 @@ class Playlists:
 
         return playlist_informations
 
-    def set_playlist(self, entries, name, author_id):
+    def set_playlist(self, entries, name, author_id, replays=0):
         name = name.lower().strip().replace(" ", "_")
 
         try:
@@ -78,6 +78,7 @@ class Playlists:
             name, "location", self.playlist_save_location + str(name) + ".gpl")
         self.playlists.set(name, "author", str(author_id))
         self.playlists.set(name, "entries", str(len(entries)))
+        self.playlists.set(name, "replays", str(replays))
 
         self.save_playlist()
         self.update_playlist()
@@ -146,4 +147,5 @@ class Playlists:
         if next_name != name:
             self.remove_playlist(name)
 
-        self.set_playlist(next_entries, next_name, next_author_id)
+        self.set_playlist(next_entries, next_name,
+                          next_author_id, old_playlist["replay_count"])

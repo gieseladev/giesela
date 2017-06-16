@@ -4361,6 +4361,7 @@ class MusicBot(discord.Client):
         return Response(reply_text, delete_after=30)
 
     @block_user
+    @command_info("1.9.5", 1479599760, {"3.4.6": (1497617827, "when Giesela can't add the entry to the playlsit she tries to figure out **why** it didn't work"), "3.4.7": (1497619770, "Fixed an annoying bug in which the builder wouldn't show any entries if the amount of entries was a multiple of 20")})
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         ///|Load
@@ -4615,15 +4616,17 @@ class MusicBot(discord.Client):
 
             if iterations > 0 and overflow == 0:
                 iterations -= 1
+                overflow += items_per_page
+
+            # print(iterations, overflow)
 
             start = (entries_page * items_per_page)
             end = (start + (overflow if entries_page >=
                             iterations else items_per_page)) if len(entries) > 0 else 0
             # this_page_entries = entries [start : end]
 
-            # self.log ("I have {} entries in the whole list and now I'm
-            # viewing from {} to {} ({} entries)".format (str (len (entries)),
-            # str (start), str (end), str (end - start)))
+            # self.log("I have {} entries in the whole list and now I'm viewing from {} to {} ({} entries)".format(
+            #     str(len(entries)), str(start), str(end), str(end - start)))
 
             for i in range(start, end):
                 entries_text += str(i + 1) + ". " + entries[i].title + "\n"
@@ -4664,9 +4667,9 @@ class MusicBot(discord.Client):
                             int(playlist["entry_count"]) + len(entries))
                         it, ov = divmod(
                             int(playlist["entry_count"]), items_per_page)
-                        entries_page = it
-                    except:
-                        await self.safe_send_message(channel, "Something went terribly wrong there.", expire_in=20)
+                        entries_page = it - 1 if ov == 0 else it
+                    except Exception as e:
+                        await self.safe_send_message(channel, "**Something went terribly wrong there:**\n```\n{}\n```".format(e), expire_in=20)
                     await self.safe_delete_message(msg)
 
             elif split_message[0].lower() == "remove":
@@ -4686,6 +4689,9 @@ class MusicBot(discord.Client):
                         int(playlist["entry_count"]) - len(indieces))
                     playlist["entries"] = [playlist["entries"][x] for x in range(
                         len(playlist["entries"])) if x not in indieces]
+                    it, ov = divmod(
+                        int(playlist["entry_count"]), items_per_page)
+                    entries_page = it - 1 if ov == 0 else it
 
             elif split_message[0].lower() == "rename":
                 if arguments is not None and len(arguments[0]) >= 3 and arguments[0] not in self.playlists.saved_playlists:
@@ -5845,7 +5851,7 @@ class MusicBot(discord.Client):
             else:
                 return Response("No idea who you are... bugger off!")
 
-    @command_info("3.2.5", 1496428380, {"3.3.9": (1497521393, "Added edit sub-command"), "3.4.1": (1497550771, "Added the filter \"mine\" to the listing function")})
+    @command_info("3.2.5", 1496428380, {"3.3.9": (1497521393, "Added edit sub-command"), "3.4.1": (1497550771, "Added the filter \"mine\" to the listing function"), "3.4.6": (1497617827, "when listing bookmarks, they musn't be \"inline\".")})
     async def cmd_bookmark(self, author, player, leftover_args):
         """
         ///|Creation
@@ -5880,7 +5886,7 @@ class MusicBot(discord.Client):
                     t = "**{}**".format(bm_name)
                     v = "`{}` *starting at* `{}` *by* **{}**".format(
                         bm_id, bm_timestamp, bm_author)
-                    em.add_field(name=t, value=v)
+                    em.add_field(name=t, value=v, inline=False)
                 return Response(embed=em)
             elif arg in ["remove", "delete"]:
                 if len(leftover_args) < 2:
