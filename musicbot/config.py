@@ -71,10 +71,7 @@ class ConfigDefaults:
     autojoin_channels = set()
 
     default_volume = 0.3
-    skips_required = 4
-    skip_ratio_required = 0.5
     save_videos = True
-    now_playing_mentions = False
     auto_summon = True
     auto_playlist = False
     auto_pause = True
