@@ -2957,14 +2957,33 @@ class MusicBot(discord.Client):
             await self.get_player(channel, create=True)
         return channel
 
-    @command_info("1.9.5", 1477774380, ***REMOVED***"3.4.2": (1497552134, "Added a way to not only replay the current song, but also the last one"), "3.4.8": (1497649772, "Fixed the issue which blocked Giesela from replaying the last song")***REMOVED***)
+    @command_info("1.9.5", 1477774380, ***REMOVED***
+        "3.4.2": (1497552134, "Added a way to not only replay the current song, but also the last one"),
+        "3.4.8": (1497649772, "Fixed the issue which blocked Giesela from replaying the last song"),
+        "3.5.2": (1497714171, "Can now replay an index from the history")***REMOVED***)
     async def cmd_replay(self, player, choose_last=""):
         """
         ///|Usage
-        ***REMOVED***command_prefix***REMOVED***replay [last]
+        `***REMOVED***command_prefix***REMOVED***replay [last]`
+        ///|Replay history
+        `***REMOVED***command_prefix***REMOVED***replay <index>`
+        Replay a song from the history
         ///|Explanation
         Replay the currently playing song. If there's nothing playing, or the \"last\" keyword is given, replay the last song
         """
+
+        try:
+            index = int(choose_last) + 1
+            if index > len(player.playlist.history):
+                return Response("History doesn't go back that far.")
+            if index < 1:
+                return Response("Am I supposed to replay the future or what...?")
+
+            replay_entry = player.playlist.history[index]
+            player.playlist._add_entry_next(replay_entry)
+            return Response("Replaying *****REMOVED******REMOVED*****".format(replay_entry.title))
+        except:
+            pass
 
         replay_entry = player.current_entry
         if (not player.current_entry) or choose_last.lower() == "last":
