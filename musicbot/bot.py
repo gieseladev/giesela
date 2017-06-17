@@ -1154,13 +1154,14 @@ class MusicBot(discord.Client):
             raise exceptions.CommandError(
                 'Invalid URL provided:\n***REMOVED******REMOVED***\n'.format(server_link), expire_in=30)
 
+    @command_info("1.0.0", 1477180800, ***REMOVED***"3.5.2": (1497712233, "Updated documentaion for this command")***REMOVED***)
     async def cmd_play(self, player, channel, author, permissions, leftover_args, song_url):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***play song_link
-            ***REMOVED***command_prefix***REMOVED***play text to search for
-
-        Adds the song to the playlist.  If a link is not provided, the first
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***play <song link>
+        `***REMOVED***command_prefix***REMOVED***play <query>
+        ///|Explanation
+        Adds the song to the playlist.  If no link is provided, the first
         result from a youtube search is added to the queue.
         """
 
@@ -1353,22 +1354,18 @@ class MusicBot(discord.Client):
 
         return Response(reply_text, delete_after=30)
 
+    @command_info("2.0.2", 1482252120, ***REMOVED***"3.5.2": (1497712808, "Updated help text")***REMOVED***)
     async def cmd_stream(self, player, channel, author, permissions, song_url):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***stream media_link
-
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***stream <media link>`
+        ///|Explanation
         Enqueue a media stream.
         This could mean an actual stream like Twitch, Youtube Gaming or even a radio stream, or simply streaming
         media without predownloading it.
         """
 
         song_url = song_url.strip('<>')
-
-        if permissions.max_songs and player.playlist.count_for_user(author) >= permissions.max_songs:
-            raise exceptions.PermissionsError(
-                "You have reached your enqueued song limit (%s)" % permissions.max_songs, expire_in=30
-            )
 
         await self.send_typing(channel)
         await player.playlist.add_stream_entry(song_url, channel=channel, author=author)
@@ -1698,21 +1695,22 @@ class MusicBot(discord.Client):
             songs_added, self._fixg(ttime, 1)), delete_after=30)
 
     @block_user
+    @command_info("1.0.0", 1477180800, ***REMOVED***"3.5.2": (1497712233, "Updated documentaion for this command")***REMOVED***)
     async def cmd_search(self, player, channel, author, permissions, leftover_args):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***search [service] [number] query
-
-        Searches a service for a video and adds it to the queue.
-        - service: any one of the following services:
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***search [service] [number] <query>`
+        ///|Explanation
+        Searches a service for a video and adds the one you choose.
+        ///|Specifications
+        [service]: any one of the following services:
             - youtube (yt) (default if unspecified)
             - soundcloud (sc)
             - yahoo (yh)
-        - number: return a number of video results and waits for user to choose one
-          - defaults to 1 if unspecified
+        [number]: return a number of video results and waits for user to choose one
+          - defaults to 5 if unspecified
           - note: If your search query starts with a number,
                   you must put your query in quotes
-            - ex: ***REMOVED***command_prefix***REMOVED***search 2 "I ran seagulls"
         """
 
         if permissions.max_songs and player.playlist.count_for_user(author) > permissions.max_songs:
@@ -1970,12 +1968,13 @@ class MusicBot(discord.Client):
         if self.config.auto_playlist:
             await self.on_player_finished_playing(player)
 
+    @command_info("1.0.0", 1477180800, ***REMOVED***"3.5.2": (1497712233, "Updated documentaion for this command")***REMOVED***)
     async def cmd_pause(self, player):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***pause
-
-        Pauses playback of the current song.
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***pause`
+        ///|Explanation
+        Pause playback of the current song.
         """
 
         if player.is_playing:
@@ -1985,12 +1984,13 @@ class MusicBot(discord.Client):
             raise exceptions.CommandError(
                 'Player is not playing.', expire_in=30)
 
+    @command_info("1.0.0", 1477180800, ***REMOVED***"3.5.2": (1497712233, "Updated documentaion for this command")***REMOVED***)
     async def cmd_resume(self, player):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***resume
-
-        Resumes playback of a paused song.
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***resume`
+        ///|Explanation
+        Resumes playback of the current song.
         """
 
         if player.is_paused:
@@ -2002,9 +2002,9 @@ class MusicBot(discord.Client):
 
     async def cmd_shuffle(self, channel, player):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***shuffle
-
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***shuffle`
+        ///|Explanation
         Shuffles the playlist.
         """
 
@@ -2022,11 +2022,12 @@ class MusicBot(discord.Client):
         await self.safe_delete_message(hand, quiet=True)
         return Response(":ok_hand:", delete_after=15)
 
+    @command_info("1.0.0", 1477180800, ***REMOVED***"3.5.2": (1497712233, "Updated documentaion for this command")***REMOVED***)
     async def cmd_clear(self, player, author):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***clear
-
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***clear`
+        ///|Explanation
         Clears the playlist.
         """
 
@@ -2104,11 +2105,12 @@ class MusicBot(discord.Client):
                 delete_after=20
             )
 
+    @command_info("1.0.0", 1477180800, ***REMOVED***"3.5.2": (1497712233, "Updated documentaion for this command")***REMOVED***)
     async def cmd_volume(self, message, player, leftover_args):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***volume (+/-)[volume]
-
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***volume [+ | -][volume]`
+        ///|Explanation
         Sets the playback volume. Accepted values are from 1 to 100.
         Putting + or - before the volume will make the volume change relative to the current volume.
         """
@@ -3931,12 +3933,18 @@ class MusicBot(discord.Client):
         await self.safe_send_message(channel, "Closed the question card viewer!", expire_in=20)
 
     @block_user
+    @command_info("1.9.5", 1478998740, ***REMOVED***
+        "2.0.2": (1481387640, "Added Hangman game and generalised game hub command"),
+        "3.5.2": (1497712233, "Updated documentaion for this command")***REMOVED***)
     async def cmd_game(self, message, channel, author, leftover_args, game=None):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***game [name]
-
-        Play a game I guess... Whaddya expect?
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***game [name]`
+        ///|Explanation
+        Play a game
+        ///|References
+        Cards against humanity can be played with the `cah` command.
+        Use `***REMOVED***command_prefix***REMOVED***help cah` to learn more
         """
 
         all_funcs = dir(self)
