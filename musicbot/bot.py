@@ -63,12 +63,12 @@ from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .settings import Settings
 from .socket_server import SocketServer
-from .spotify import parse_query
 from .translate import Translator
 from .twitter_api import get_tweet
-from .utils import (create_bar, escape_dis, format_time, hex_to_dec, load_file,
-                    ordinal, paginate, parse_timestamp, prettydate,
-                    random_line, sane_round_int, to_timestamp, write_file)
+from .utils import (clean_songname, create_bar, escape_dis, format_time,
+                    hex_to_dec, load_file, nice_cut, ordinal, paginate,
+                    parse_timestamp, prettydate, random_line, sane_round_int,
+                    to_timestamp, write_file)
 
 load_opus_lib()
 
@@ -2160,6 +2160,7 @@ class MusicBot(discord.Client):
                 raise exceptions.CommandError(
                     'Unreasonable volume provided: ***REMOVED******REMOVED***%. Provide a value between 1 and 100.'.format(new_volume), expire_in=20)
 
+    @command_info("1.0.0", 1477180800, ***REMOVED***"3.5.1": (1497706997, "Queue doesn't show the current entry anymore and shows an entry's playlist if it has one")***REMOVED***)
     async def cmd_queue(self, channel, player):
         """
         ///|Usage
@@ -2169,88 +2170,38 @@ class MusicBot(discord.Client):
         """
 
         lines = []
-        unlisted = 0
-        andmoretext = '* ... and %s more*' % ('x' *
-                                              len(player.playlist.entries))
 
-        if player.current_entry:
-            song_progress = str(
-                timedelta(seconds=player.progress)).lstrip('0').lstrip(':')
-            song_total = str(timedelta(seconds=player.current_entry.duration)).lstrip(
-                '0').lstrip(':')
-            prog_str = '`[%s/%s]`' % (song_progress, song_total)
+        lines.append("**QUEUE**\n")
 
-            if player.current_entry.meta.get('channel', False) and player.current_entry.meta.get('author', False):
-                lines.append("Now Playing: **%s** added by **%s** %s\n" % (
-                    player.current_entry.title, player.current_entry.meta['author'].name, prog_str))
-            else:
-                lines.append("Now Playing: **%s** %s\n" %
-                             (player.current_entry.title, prog_str))
-
-        if player.current_entry.provides_timestamps:
+        if player.current_entry and player.current_entry.provides_timestamps:
             for i, item in enumerate(player.current_entry.sub_queue(player.progress), 1):
-                nextline = "   ►***REMOVED******REMOVED***. *****REMOVED******REMOVED*****".format(i, item["name"])
-                currentlinesum = sum(len(x) + 1 for x in lines)
-
-                if currentlinesum + len(nextline) + len(andmoretext) > DISCORD_MSG_CHAR_LIMIT:
-                    if currentlinesum + len(andmoretext):
-                        unlisted += 1
-                        continue
-
-                lines.append(nextline)
-
-            lines.append("\n")
+                lines.append(
+                    "            ►`***REMOVED******REMOVED***.` *****REMOVED******REMOVED*****".format(i, item["name"]))
 
         for i, item in enumerate(player.playlist, 1):
-            if item.meta.get('channel', False) and item.meta.get('author', False):
-                nextline = '`***REMOVED******REMOVED***.` *****REMOVED******REMOVED***** added by *****REMOVED******REMOVED*****'.format(
-                    i, item.title, item.meta['author'].name).strip()
-                if item.provides_timestamps:
-                    lines.append(
-                        "`***REMOVED******REMOVED***.` *****REMOVED******REMOVED*****".format(i, item.title).strip())
-                    for ind, sub_item in list(enumerate(item.sub_queue(), 1))[:3]:
-                        nextline = "   ►***REMOVED******REMOVED***. *****REMOVED******REMOVED*****".format(
-                            ind, sub_item["name"])
-                        currentlinesum = sum(len(x) + 1 for x in lines)
+            origin_text = ""
+            if "playlist" in item.meta:
+                origin_text = "from playlist *****REMOVED******REMOVED*****".format(
+                    item.meta["playlist"]["name"].title())
+            elif "author" in item.meta:
+                origin_text = "by *****REMOVED******REMOVED*****".format(item.meta["author"].name)
 
-                        if currentlinesum + len(nextline) + len(andmoretext) > DISCORD_MSG_CHAR_LIMIT:
-                            if currentlinesum + len(andmoretext):
-                                unlisted += 1
-                                continue
+            lines.append("`***REMOVED******REMOVED***.` *****REMOVED******REMOVED***** ***REMOVED******REMOVED***".format(i,
+                                                  nice_cut(clean_songname(item.title), 40), origin_text))
 
-                        lines.append(nextline)
-
-                    lines.append("\n")
-                    continue
-            else:
-                nextline = '`***REMOVED******REMOVED***.` *****REMOVED******REMOVED*****'.format(i, item.title).strip()
-
-            # +1 is for newline char
-            currentlinesum = sum(len(x) + 1 for x in lines)
-
-            if currentlinesum + len(nextline) + len(andmoretext) > DISCORD_MSG_CHAR_LIMIT:
-                if currentlinesum + len(andmoretext):
-                    unlisted += 1
-                    continue
-
-            lines.append(nextline)
-
-        if unlisted:
-            lines.append('\n*... and %s more*' % unlisted)
-
-        if len(lines) > 0:
-            total_time = sum(
-                [entry.duration for entry in player.playlist.entries])
-            if total_time > 0:
-                lines.append("\n*Queue has a total duration of *****REMOVED******REMOVED******".format(
-                    format_time(total_time), True, 5, 2))
+            # if item.provides_timestamps:
+            #     for ind, sub_item in enumerate(item.sub_queue(), 1):
+            #         lines.append(
+            #             "            ►***REMOVED******REMOVED***. *****REMOVED******REMOVED*****".format(ind, sub_item["name"]))
 
         if not lines:
-            lines.append(
-                'There are no songs queued! Queue something with ***REMOVED******REMOVED***play.'.format(self.config.command_prefix))
+            return Response("There are no songs queued! Use `***REMOVED******REMOVED***help` to find out how to queue something.".format(self.config.command_prefix))
 
-        message = '\n'.join(lines)
-        return Response(message, delete_after=30)
+        total_time = sum([entry.duration for entry in player.playlist.entries])
+        lines.append(
+            "\n**Total duration:** `***REMOVED******REMOVED***`".format(format_time(total_time), True, 5, 2))
+
+        return Response("\n".join(lines))
 
     @command_info("3.3.3", 1497197957, ***REMOVED***"3.3.8": (1497474312, "added failsafe for player not currently playing something")***REMOVED***)
     async def cmd_history(self, channel, player):
@@ -4359,7 +4310,10 @@ class MusicBot(discord.Client):
         return Response(reply_text, delete_after=30)
 
     @block_user
-    @command_info("1.9.5", 1479599760, ***REMOVED***"3.4.6": (1497617827, "when Giesela can't add the entry to the playlsit she tries to figure out **why** it didn't work"), "3.4.7": (1497619770, "Fixed an annoying bug in which the builder wouldn't show any entries if the amount of entries was a multiple of 20")***REMOVED***)
+    @command_info("1.9.5", 1479599760, ***REMOVED***
+        "3.4.6": (1497617827, "when Giesela can't add the entry to the playlsit she tries to figure out **why** it didn't work"),
+        "3.4.7": (1497619770, "Fixed an annoying bug in which the builder wouldn't show any entries if the amount of entries was a multiple of 20"),
+        "3.5.1": (1497706811, "Giesela finally keeps track whether a certain entry comes from a playlist or not")***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         ///|Load
@@ -4801,7 +4755,9 @@ class MusicBot(discord.Client):
                 "Closed the playlist builder and saved the playlist")
             return Response("Successfully saved ****REMOVED******REMOVED****".format(user_savename.replace("_", " ").title()))
 
-    @command_info("1.9.2", 1479945600, ***REMOVED***"3.3.6": (1497387101, "added the missing \"s\", should be working again"), "3.4.4": (1497611753, "Changed command name from \"addplayingtoplaylist\" to \"addtoplaylist\", thanks Paulo")***REMOVED***)
+    @command_info("1.9.2", 1479945600, ***REMOVED***
+        "3.3.6": (1497387101, "added the missing \"s\", should be working again"),
+        "3.4.4": (1497611753, "Changed command name from \"addplayingtoplaylist\" to \"addtoplaylist\", thanks Paulo")***REMOVED***)
     async def cmd_addtoplaylist(self, channel, author, player, playlistname):
         """
         ///|Usage
@@ -4836,7 +4792,9 @@ class MusicBot(discord.Client):
             playlistname, player.playlist, new_entries=[add_entry])
         return Response("Added the current song to the playlist.")
 
-    @command_info("1.9.2", 1479945600, ***REMOVED***"3.3.6": (1497387101, "added the missing \"s\", should be working again"), "3.4.4": (1497611753, "Changed command name from \"removeplayingfromplaylist\" to \"removefromplaylist\", thanks Paulo")***REMOVED***)
+    @command_info("1.9.2", 1479945600, ***REMOVED***
+        "3.3.6": (1497387101, "added the missing \"s\", should be working again"),
+        "3.4.4": (1497611753, "Changed command name from \"removeplayingfromplaylist\" to \"removefromplaylist\", thanks Paulo")***REMOVED***)
     async def cmd_removefromplaylist(self, channel, author, player, playlistname):
         """
         ///|Usage
@@ -5849,7 +5807,10 @@ class MusicBot(discord.Client):
             else:
                 return Response("No idea who you are... bugger off!")
 
-    @command_info("3.2.5", 1496428380, ***REMOVED***"3.3.9": (1497521393, "Added edit sub-command"), "3.4.1": (1497550771, "Added the filter \"mine\" to the listing function"), "3.4.6": (1497617827, "when listing bookmarks, they musn't be \"inline\".")***REMOVED***)
+    @command_info("3.2.5", 1496428380, ***REMOVED***
+        "3.3.9": (1497521393, "Added edit sub-command"),
+        "3.4.1": (1497550771, "Added the filter \"mine\" to the listing function"),
+        "3.4.6": (1497617827, "when listing bookmarks, they musn't be \"inline\".")***REMOVED***)
     async def cmd_bookmark(self, author, player, leftover_args):
         """
         ///|Creation
@@ -5876,7 +5837,7 @@ class MusicBot(discord.Client):
                                        "author_id"] == author.id, bookmarks)
 
                 for bm in bookmarks:
-                    bm_name = parse_query(bm["name"])
+                    bm_name = clean_songname(bm["name"])
                     bm_author = self.get_global_user(
                         bm["author_id"]).display_name
                     bm_timestamp = to_timestamp(bm["timestamp"])

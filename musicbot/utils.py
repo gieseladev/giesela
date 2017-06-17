@@ -18,6 +18,23 @@ def similarity(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
 
+def nice_cut(s, max_length, ending="..."):
+    if len(s) <= max_length:
+        return s
+
+    parts = s.split()
+    chunk = ""
+    for part in parts:
+        # if there's enough space to fit in EVERYTHING
+        if len(chunk) + len(part) + len(ending) <= max_length:
+            chunk += part + " "
+        else:
+            chunk = chunk.rstrip() + ending
+            return chunk
+
+    return chunk  # this really shouldn't happen...
+
+
 def load_file(filename, skip_commented_lines=True, comment_char='#'):
     try:
         with open(filename, encoding='utf8') as f:
@@ -89,6 +106,19 @@ def ordinal(n):
     return "th"
 
 
+def clean_songname(query):
+    to_remove = ["ost", "original sound track", "original soundtrack", "from", "with lyrics", "lyrics", "hd", "soundtrack", "original",
+                 "official", "feat", "ft", "creditless", "music", "video", "edition", "special", "version", "ver", "dvd", "new", "raw", "textless", "mp3", "avi", "mp4", "english", "eng", "with", "album", "theme"]
+
+    for key in to_remove:
+        query = re.sub(key, " ", query, flags=re.IGNORECASE)
+
+    query = re.sub(r"[^\w\s-]|\d", " ", query)
+    query = re.sub(r"\s+", " ", query)
+
+    return query.strip()
+
+
 def _run_timestamp_matcher(text):
     songs = ***REMOVED******REMOVED***
     for match in re.finditer(r"^(?:(\d***REMOVED***1,2***REMOVED***):)?(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***2***REMOVED***)(?:\s?.?\s?(?:\d***REMOVED***1,2***REMOVED***:)?(?:\d***REMOVED***1,2***REMOVED***):(?:\d***REMOVED***2***REMOVED***))?\W+(.+?)$", text, flags=re.MULTILINE):
@@ -114,7 +144,10 @@ def _run_timestamp_matcher(text):
     return None
 
 
-def get_video_timestamps(url):
+def get_video_timestamps(url, song_dur=None):
+    if song_dur:
+        song_dur += 5  # I'm not that harsh, one second more or less ain't that bad
+
     try:
         desc = get_video_description(url)
     except:
@@ -127,6 +160,9 @@ def get_video_timestamps(url):
             return songs
 
     try:
+        if song_dur and song_dur < 200:  # I don't trust comments when the song is only about 3 mins loading
+            return None
+
         video_id = re.match(
             r"(?:(?:https?:\/\/)(?:www)?\.?(?:youtu\.?be)(?:\.com)?\/(?:.*[=/])*)([^= &?/\r\n]***REMOVED***8,11***REMOVED***)", url).group(1)
         resp = requests.get(
@@ -135,7 +171,13 @@ def get_video_timestamps(url):
         for comment in data["items"]:
             songs = _run_timestamp_matcher(
                 comment["snippet"]["topLevelComment"]["snippet"]["textDisplay"])
-            if songs is not None and len(songs) > 1:
+            if songs is not None and len(songs) > 2:
+                if song_dur:  # If we know the song duration I don't want ANY of those duckers to be out of bounds. That's the amount of distrust I have
+                    for ts in songs.keys():
+                        if ts > song_dur:
+                            print(
+                                "[TIMESTAMPS] Won't use comment-timestamps because at least one of them is totally out of bounds")
+                            return None  # Yes **NONE**!
                 return songs
     except:
         pass
@@ -292,7 +334,7 @@ def paginate(content, *, length=DISCORD_MSG_CHAR_LIMIT, reserve=0):
             currentchunk += line + '\n'
         else:
             chunks.append(currentchunk)
-            currentchunk = ''
+            currentchunk = line + "\n"
 
     if currentchunk:
         chunks.append(currentchunk)

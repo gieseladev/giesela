@@ -184,7 +184,8 @@ class MusicPlayer(EventEmitter):
 
     def goto_seconds(self, secs):
         if (not self.current_entry) or secs >= self.current_entry.duration or (self.current_entry.end_seconds is not None and secs >= self.current_entry.end_seconds):
-            return False
+            self.skip()
+            return True
 
         secs = max(0, secs)
 

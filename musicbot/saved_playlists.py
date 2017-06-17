@@ -41,26 +41,28 @@ class Playlists:
 
         plsection = self.playlists[playlistname]
 
-        playlist_informations = ***REMOVED******REMOVED***
-        playlist_informations["location"] = plsection["location"]
-        playlist_informations["author"] = plsection["author"]
-        playlist_informations["entry_count"] = plsection["entries"]
-        playlist_informations["replay_count"] = self.playlists.getint(
+        playlist_information = ***REMOVED******REMOVED***
+        playlist_information["location"] = plsection["location"]
+        playlist_information["author"] = plsection["author"]
+        playlist_information["entry_count"] = plsection["entries"]
+        playlist_information["replay_count"] = self.playlists.getint(
             playlistname, "replays", fallback=0)
         entries = []
-        if load_entries and not os.stat(playlist_informations["location"]).st_size == 0:
-            with open(playlist_informations["location"], "r") as file:
+        if load_entries and not os.stat(playlist_information["location"]).st_size == 0:
+            with open(playlist_information["location"], "r") as file:
                 serialized_json = json.loads(file.read())
             for entry in serialized_json:
                 #print (str (urlEntry.entry_from_json (playlist, entry).title))
                 if channel and author is not None:
                     entry.update(***REMOVED***"meta":
-                                  ***REMOVED***"channel": ***REMOVED***"type": "channel", "name": channel.name, "id": channel.id***REMOVED***, "author": ***REMOVED***"type": "author", "name": author.name, "id": author.id***REMOVED******REMOVED******REMOVED***)
+                                  ***REMOVED***"channel": ***REMOVED***"type": "channel", "name": channel.name, "id": channel.id***REMOVED***,
+                                   "author": ***REMOVED***"type": "author", "name": author.name, "id": author.id***REMOVED***,
+                                   "playlist": ***REMOVED***"name": playlistname, "author": playlist_information["author"]***REMOVED******REMOVED******REMOVED***)
                 entries.append(urlEntry.from_dict(playlist, entry, False))
 
-        playlist_informations["entries"] = entries
+        playlist_information["entries"] = entries
 
-        return playlist_informations
+        return playlist_information
 
     def set_playlist(self, entries, name, author_id, replays=0):
         name = name.lower().strip().replace(" ", "_")
