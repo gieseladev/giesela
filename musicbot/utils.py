@@ -113,7 +113,7 @@ def clean_songname(query):
     for key in to_remove:
         query = re.sub(key, " ", query, flags=re.IGNORECASE)
 
-    query = re.sub(r"[^\w\s-]|\d", " ", query)
+    query = re.sub(r"[^\w\s-&]|\d", " ", query)
     query = re.sub(r"\s+", " ", query)
 
     return query.strip()
