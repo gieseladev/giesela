@@ -128,10 +128,10 @@ class BasePlaylistEntry:
 
 class URLPlaylistEntry(BasePlaylistEntry):
 
-    def __init__(self, playlist, url, title, duration=0, expected_filename=None, start_seconds=0, end_seconds=None, spotify_track=None, provided_song_timestamps=None, update_additional_information=True, **meta):
+    def __init__(self, queue, url, title, duration=0, expected_filename=None, start_seconds=0, end_seconds=None, spotify_track=None, provided_song_timestamps=None, update_additional_information=True, **meta):
         super().__init__()
 
-        self.playlist = playlist
+        self.playlist = queue
         self.url = url
         self._title = title
         self.duration = duration
@@ -186,6 +186,9 @@ class URLPlaylistEntry(BasePlaylistEntry):
                 meta['author'] = playlist.bot.get_global_user(
                     data['meta']['author']['id'])
 
+            if "playlist" in data["meta"]:
+                meta["playlist"] = data["meta"]["playlist"]
+
         return cls(playlist, url, title, duration, filename, start_seconds, end_seconds, spotify_track=spotify_track, provided_song_timestamps=provided_song_timestamps, update_additional_information=update_additional_information, **meta)
 
     # @staticmethod
@@ -229,7 +232,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.searched_additional_information = True
 
     def search_for_timestamps(self):
-        songs = get_video_timestamps(self.url)
+        songs = get_video_timestamps(self.url, self.duration)
 
         if songs is None or len(songs) < 1:
             return
