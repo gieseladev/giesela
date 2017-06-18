@@ -4114,7 +4114,7 @@ class MusicBot(discord.Client):
 
     @block_user
     @command_info("1.9.5", 1479599760, ***REMOVED***
-        "3.4.6": (1497617827, "when Giesela can't add the entry to the playlsit she tries to figure out **why** it didn't work"),
+        "3.4.6": (1497617827, "when Giesela can't add the entry to the playlist she tries to figure out **why** it didn't work"),
         "3.4.7": (1497619770, "Fixed an annoying bug in which the builder wouldn't show any entries if the amount of entries was a multiple of 20"),
         "3.5.1": (1497706811, "Giesela finally keeps track whether a certain entry comes from a playlist or not")***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
@@ -5908,22 +5908,7 @@ class MusicBot(discord.Client):
                     params.pop(key)
 
             if params:
-                docs = getattr(handler, '__doc__', None)
-                if not docs:
-                    docs = 'Usage: ***REMOVED******REMOVED******REMOVED******REMOVED*** ***REMOVED******REMOVED***'.format(
-                        self.config.command_prefix,
-                        command,
-                        ' '.join(args_expected)
-                    )
-
-                docs = '\n'.join(l.strip() for l in docs.split('\n'))
-                await self.safe_send_message(
-                    message.channel,
-                    '```\n%s\n```' % docs.format(
-                        command_prefix=self.config.command_prefix),
-                    expire_in=60
-                )
-                return
+                return await self.cmd_help(message.channel, [command,])
 
             response = await handler(**handler_kwargs)
             if response and isinstance(response, Response):
