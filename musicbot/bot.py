@@ -5315,7 +5315,8 @@ class MusicBot(discord.Client):
          "Changed command name from \"addplayingtoplaylist\" to \"addtoplaylist\", thanks Paulo"
          ),
         "3.5.5": (1497792167,
-                  "Now displaying what entry has been added to the playlist")
+                  "Now displaying what entry has been added to the playlist"),
+        "3.5.8": (1497826743, "Even more information displaying")
     })
     async def cmd_addtoplaylist(self, channel, author, player, playlistname):
         """
@@ -5351,12 +5352,12 @@ class MusicBot(discord.Client):
                     "Your name is too short. Please choose one with at least three letters."
                 )
             self.playlists.set_playlist([add_entry], playlistname, author.id)
-            return Response("Created a new playlist and added `{}`.".format(
+            return Response("Created a new playlist \"{}\" and added `{}`.".format(playlistname.title(),
                 add_entry.title))
 
         self.playlists.edit_playlist(
             playlistname, player.playlist, new_entries=[add_entry])
-        return Response("Added `{}` to the playlist.".format(add_entry.title))
+        return Response("Added `{}` to playlist \"{}\".".format(add_entry.title, playlistname.title()))
 
     @command_info("1.9.2", 1479945600, {
         "3.3.6": (1497387101,
@@ -5364,7 +5365,8 @@ class MusicBot(discord.Client):
         "3.4.4":
         (1497611753,
          "Changed command name from \"removeplayingfromplaylist\" to \"removefromplaylist\", thanks Paulo"
-         )
+         ),
+         "3.5.8": (1497826917, "Now displaying the names of the song and the playlist")
     })
     async def cmd_removefromplaylist(self, channel, author, player,
                                      playlistname):
@@ -5395,11 +5397,11 @@ class MusicBot(discord.Client):
                                                      current_timestamp[0])
 
         if playlistname not in self.playlists.saved_playlists:
-            return Response("There's no playlist with this name.")
+            return Response("There's no playlist the name \"{}\".".format(playlistname.title()))
 
         self.playlists.edit_playlist(
             playlistname, player.playlist, remove_entries=[remove_entry])
-        return Response("Removed the current song from the playlist.")
+        return Response("Removed `{}` from playlist \"{}\".".format(remove_entry.title, playlistname))
 
     async def cmd_setentrystart(self, player, playlistname):
         """
@@ -6577,7 +6579,8 @@ class MusicBot(discord.Client):
         "3.4.1": (1497550771,
                   "Added the filter \"mine\" to the listing function"),
         "3.4.6": (1497617827,
-                  "when listing bookmarks, they musn't be \"inline\".")
+                  "when listing bookmarks, they musn't be \"inline\"."),
+        "3.5.8": (1497827057, "Editing bookmarks now works as expected")
     })
     async def cmd_bookmark(self, author, player, leftover_args):
         """
@@ -6640,10 +6643,10 @@ class MusicBot(discord.Client):
                         "Please also specify what you want to change")
 
                 new_timestamp = parse_timestamp(leftover_args[-1])
-                if new_timestamp:
-                    new_name = " ".join(leftover_args[2:-1]) or None
+                if new_timestamp is not None: # 0 evaluates to false so I need to check this oldschool-like
+                    new_name = " ".join(leftover_args[2:-1]) if len(leftover_args) > 3 else None
                 else:
-                    new_name = " ".join(leftover_args[2:]) or None
+                    new_name = " ".join(leftover_args[2:])
 
                 if bookmark.edit_bookmark(bm_id, new_name, new_timestamp):
                     return Response(
