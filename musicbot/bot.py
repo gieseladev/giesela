@@ -6589,7 +6589,7 @@ class MusicBot(discord.Client):
                         bookmarks)
 
                 for bm in bookmarks:
-                    bm_name = clean_songname(bm["name"])
+                    bm_name = bm["name"]
                     bm_author = self.get_global_user(
                         bm["author_id"]).display_name
                     bm_timestamp = to_timestamp(bm["timestamp"])

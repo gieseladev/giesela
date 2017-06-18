@@ -2,7 +2,7 @@ import json
 import re
 from random import randint
 
-from .utils import similarity
+from .utils import (similarity, clean_songname)
 
 
 def ensure_saving(func):
@@ -97,7 +97,7 @@ class Bookmarks:
         #     return False
 
         bookmark_id = self.get_id()
-        bookmark_name = bookmark_name if bookmark_name else entry.title
+        bookmark_name = bookmark_name if bookmark_name else clean_songname(entry.title)
         entry_data = entry.to_dict()
         entry_data["start_seconds"] = timestamp
 
