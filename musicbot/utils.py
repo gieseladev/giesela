@@ -42,7 +42,8 @@ def load_file(filename, skip_commented_lines=True, comment_char='#'):
             for line in f:
                 line = line.strip()
 
-                if line and not (skip_commented_lines and line.startswith(comment_char)):
+                if line and not (skip_commented_lines and
+                                 line.startswith(comment_char)):
                     results.append(line)
 
             return results
@@ -59,7 +60,11 @@ def write_file(filename, contents):
             f.write('\n')
 
 
-def create_bar(progress, length=10, full_char="■", half_char=None, empty_char="□"):
+def create_bar(progress,
+               length=10,
+               full_char="■",
+               half_char=None,
+               empty_char="□"):
     use_halves = half_char is not None
     fill_to = int(2 * length * progress)
     residue = fill_to % 2
@@ -107,8 +112,13 @@ def ordinal(n):
 
 
 def clean_songname(query):
-    to_remove = ["ost", "original sound track", "original soundtrack", "from", "with lyrics", "lyrics", "hd", "soundtrack", "original",
-                 "official", "feat", "ft", "creditless", "music", "video", "edition", "special", "version", "ver", "dvd", "new", "raw", "textless", "mp3", "avi", "mp4", "english", "eng", "with", "album", "theme"]
+    to_remove = [
+        "ost", "original sound track", "original soundtrack", "from",
+        "with lyrics", "lyrics", "hd", "soundtrack", "original", "official",
+        "feat", "ft", "creditless", "music", "video", "edition", "special",
+        "version", "ver", "dvd", "new", "raw", "textless", "mp3", "avi", "mp4",
+        "english", "eng", "with", "album", "theme"
+    ]
 
     for key in to_remove:
         query = re.sub(key, " ", query, flags=re.IGNORECASE)
@@ -121,19 +131,25 @@ def clean_songname(query):
 
 def _run_timestamp_matcher(text):
     songs = {}
-    for match in re.finditer(r"^(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?\W+(.+?)$", text, flags=re.MULTILINE):
+    for match in re.finditer(
+            r"^(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?\W+(.+?)$",
+            text,
+            flags=re.MULTILINE):
         timestamp = int(match.group(3))
-        timestamp += (int(match.group(2)) *
-                      60) if match.group(2) is not None else 0
-        timestamp += (int(match.group(1)) *
-                      3600) if match.group(1) is not None else 0
+        timestamp += (
+            int(match.group(2)) * 60) if match.group(2) is not None else 0
+        timestamp += (
+            int(match.group(1)) * 3600) if match.group(1) is not None else 0
         songs[timestamp] = match.group(4)
 
     if len(songs) < 1:
-        for match in re.finditer(r"^(.+)\s[\(]?(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?[\)]?$", text, flags=re.MULTILINE):
+        for match in re.finditer(
+                r"^(.+)\s[\(]?(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?[\)]?$",
+                text,
+                flags=re.MULTILINE):
             timestamp = int(match.group(4))
-            timestamp += (int(match.group(3)) *
-                          60) if match.group(3) is not None else 0
+            timestamp += (
+                int(match.group(3)) * 60) if match.group(3) is not None else 0
             timestamp += (int(match.group(2)) *
                           3600) if match.group(2) is not None else 0
             songs[timestamp] = match.group(1)
@@ -164,19 +180,22 @@ def get_video_timestamps(url, song_dur=None):
             return None
 
         video_id = re.match(
-            r"(?:(?:https?:\/\/)(?:www)?\.?(?:youtu\.?be)(?:\.com)?\/(?:.*[=/])*)([^= &?/\r\n]{8,11})", url).group(1)
+            r"(?:(?:https?:\/\/)(?:www)?\.?(?:youtu\.?be)(?:\.com)?\/(?:.*[=/])*)([^= &?/\r\n]{8,11})",
+            url).group(1)
         resp = requests.get(
-            "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo&part=snippet&order=relevance&textFormat=plainText&videoId=" + video_id)
+            "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo&part=snippet&order=relevance&textFormat=plainText&videoId="
+            + video_id)
         data = resp.json()
         for comment in data["items"]:
-            songs = _run_timestamp_matcher(
-                comment["snippet"]["topLevelComment"]["snippet"]["textDisplay"])
+            songs = _run_timestamp_matcher(comment["snippet"][
+                "topLevelComment"]["snippet"]["textDisplay"])
             if songs is not None and len(songs) > 2:
                 if song_dur:  # If we know the song duration I don't want ANY of those duckers to be out of bounds. That's the amount of distrust I have
                     for ts in songs.keys():
                         if ts > song_dur:
                             print(
-                                "[TIMESTAMPS] Won't use comment-timestamps because at least one of them is totally out of bounds")
+                                "[TIMESTAMPS] Won't use comment-timestamps because at least one of them is totally out of bounds"
+                            )
                             return None  # Yes **NONE**!
                 return songs
     except:
@@ -210,7 +229,8 @@ def parse_timestamp(timestamp):
             continue
 
         j = len(parts) - i - 1
-        if j >= len(values):  # If I don't have a conversion from this to seconds
+        if j >= len(
+                values):  # If I don't have a conversion from this to seconds
             continue
         secs += v * values[j]
 
@@ -230,7 +250,8 @@ def to_timestamp(seconds):
 
     work_string = ""
     if d > 0:
-        return ":".join(str(x) for x in (d, "{0:0>2}".format(h), "{0:0>2}".format(m), s))
+        return ":".join(
+            str(x) for x in (d, "{0:0>2}".format(h), "{0:0>2}".format(m), s))
     elif h > 0:
         return ":".join(str(x) for x in (h, "{0:0>2}".format(m), s))
     else:
@@ -265,7 +286,12 @@ def round_to_interval(num, interval=5):
     return int(interval * round(float(num) / interval))
 
 
-def format_time(s, round_seconds=False, round_base=5, max_specifications=None, combine_with_and=False, replace_one=False):
+def format_time(s,
+                round_seconds=False,
+                round_base=5,
+                max_specifications=None,
+                combine_with_and=False,
+                replace_one=False):
     if round_seconds:
         s = round_to_interval(s, round_base)
 
@@ -275,17 +301,21 @@ def format_time(s, round_seconds=False, round_base=5, max_specifications=None, c
 
     return_list = []
     if days > 0:
-        return_list.append("{} day{}".format(
-            "a" if days == 1 and replace_one else days, "s" if days is not 1 else ""))
+        return_list.append(
+            "{} day{}".format("a" if days == 1 and replace_one else days, "s"
+                              if days is not 1 else ""))
     if hours > 0:
-        return_list.append("{} hour{}".format(
-            "an" if hours == 1 and replace_one else hours, "s" if hours is not 1 else ""))
+        return_list.append(
+            "{} hour{}".format("an" if hours == 1 and replace_one else hours,
+                               "s" if hours is not 1 else ""))
     if minutes > 0:
-        return_list.append("{} minute{}".format(
-            "a" if minutes == 1 and replace_one else minutes, "s" if minutes is not 1 else ""))
+        return_list.append(
+            "{} minute{}".format("a" if minutes == 1 and replace_one else
+                                 minutes, "s" if minutes is not 1 else ""))
     if seconds > 0 or s is 0:
-        return_list.append("{} second{}".format(
-            "a" if seconds == 1 and replace_one else seconds, "s" if seconds is not 1 else ""))
+        return_list.append(
+            "{} second{}".format("a" if seconds == 1 and replace_one else
+                                 seconds, "s" if seconds is not 1 else ""))
 
     if max_specifications is not None:
         return_list = return_list[:max_specifications]
