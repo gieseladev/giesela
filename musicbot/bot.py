@@ -466,7 +466,7 @@ class MusicBot(discord.Client):
                 'last_np_msg']
             if last_np_msg and last_np_msg.channel == channel:
 
-                async for lmsg in self.logs_from(channel, limit=1):
+                async for lmsg in self.logs_from(channel, limit=1): #if the last np message isn't the last message in the channel; delete it
                     if lmsg != last_np_msg and last_np_msg:
                         await self.safe_delete_message(last_np_msg)
                         self.server_specific_data[channel.server][
@@ -1927,7 +1927,7 @@ class MusicBot(discord.Client):
                     ordinal(entry["index"] + 1), player.current_entry.title,
                     to_timestamp(player.progress),
                     to_timestamp(player.current_entry.end_seconds)))
-                await self.send_message(channel, embed=em)
+                self.server_specific_data[channel.server]["last_np_msg"] = await self.send_message(channel, embed=em)
             else:
                 prog_str = "`[***REMOVED******REMOVED***/***REMOVED******REMOVED***]`".format(
                     to_timestamp(player.progress),
@@ -2236,7 +2236,7 @@ class MusicBot(discord.Client):
             #         lines.append(
             #             "            ►***REMOVED******REMOVED***. *****REMOVED******REMOVED*****".format(ind, sub_item["name"]))
 
-        if not lines:
+        if len(lines) < 2:
             return Response(
                 "There are no songs queued! Use `***REMOVED******REMOVED***help` to find out how to queue something.".
                 format(self.config.command_prefix))
