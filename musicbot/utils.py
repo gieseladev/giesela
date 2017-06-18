@@ -287,11 +287,12 @@ def round_to_interval(num, interval=5):
 
 
 def format_time(s,
-                round_seconds=False,
-                round_base=5,
-                max_specifications=None,
+                round_seconds=True,
+                round_base=1,
+                max_specifications=3,
                 combine_with_and=False,
-                replace_one=False):
+                replace_one=False,
+                unit_length=2):
     if round_seconds:
         s = round_to_interval(s, round_base)
 
@@ -302,20 +303,20 @@ def format_time(s,
     return_list = []
     if days > 0:
         return_list.append(
-            "{} day{}".format("a" if days == 1 and replace_one else days, "s"
-                              if days is not 1 else ""))
+            "{} {}{}".format("a" if days == 1 and replace_one else days, ["d", "day", "day"][unit_length], "s"
+                              if days is not 1 and unit_length != 0 else ""))
     if hours > 0:
         return_list.append(
-            "{} hour{}".format("an" if hours == 1 and replace_one else hours,
-                               "s" if hours is not 1 else ""))
+            "{} {}{}".format("an" if hours == 1 and replace_one else hours, ["h", "hr", "hour"][unit_length],
+                               "s" if hours is not 1 and unit_length != 0 else ""))
     if minutes > 0:
         return_list.append(
-            "{} minute{}".format("a" if minutes == 1 and replace_one else
-                                 minutes, "s" if minutes is not 1 else ""))
+            "{} {}{}".format("a" if minutes == 1 and replace_one else
+                                 minutes, ["m", "min", "minute"][unit_length], "s" if minutes is not 1 and unit_length != 0 else ""))
     if seconds > 0 or s is 0:
         return_list.append(
-            "{} second{}".format("a" if seconds == 1 and replace_one else
-                                 seconds, "s" if seconds is not 1 else ""))
+            "{} {}{}".format("a" if seconds == 1 and replace_one else
+                                 seconds, ["s", "sec", "second"][unit_length], "s" if seconds is not 1 and unit_length != 0 else ""))
 
     if max_specifications is not None:
         return_list = return_list[:max_specifications]
