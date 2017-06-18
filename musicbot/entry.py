@@ -14,7 +14,6 @@ from .utils import get_header, get_video_timestamps, md5sum, slugify
 
 
 class BasePlaylistEntry:
-
     def __init__(self):
         self.filename = None
         self._is_downloading = False
@@ -25,6 +24,7 @@ class BasePlaylistEntry:
         self._spotify_track = None
         self.provided_song_timestamps = None
         self.searched_additional_information = False
+        self._sub_queue = None
 
     @property
     def is_downloaded(self):
@@ -38,18 +38,36 @@ class BasePlaylistEntry:
         return self.provided_song_timestamps is not None
 
     def sub_queue(self, min_progress=-1):
-        queue = []
-        entries = sorted(list(self.provided_song_timestamps.keys()))
-        for index, key in enumerate(entries):
-            entry = int(key)
-            if entry < min_progress:
-                continue
+        if not self.provides_timestamps:
+            return None
 
-            dur = (int(entries[index + 1]) if index + 1 <
-                   len(entries) else self.duration) - entry
-            e = {"name": self.provided_song_timestamps[
-                key], "duration": dur, "start": entry, "index": index, "end": dur + entry}
-            queue.append(e)
+        if not self._sub_queue:
+            queue = []
+            entries = sorted(list(self.provided_song_timestamps.keys()))
+            for index, key in enumerate(entries):
+                entry = int(key)
+
+                dur = (int(entries[index + 1])
+                       if index + 1 < len(entries) else self.duration) - entry
+                e = {
+                    "name": self.provided_song_timestamps[key],
+                    "duration": dur,
+                    "start": entry,
+                    "index": index,
+                    "end": dur + entry
+                }
+                queue.append(e)
+
+            self._sub_queue = queue
+
+        if min_progress >= 0:
+            queue = []
+            for sub_entry in self._sub_queue:
+                if sub_entry["duration"] < min_progress:
+                    continue
+                queue.append(sub_entry)
+        else:
+            queue = self._sub_queue
 
         return queue
 
@@ -127,11 +145,21 @@ class BasePlaylistEntry:
 
 
 class URLPlaylistEntry(BasePlaylistEntry):
-
-    def __init__(self, playlist, url, title, duration=0, expected_filename=None, start_seconds=0, end_seconds=None, spotify_track=None, provided_song_timestamps=None, update_additional_information=True, **meta):
+    def __init__(self,
+                 queue,
+                 url,
+                 title,
+                 duration=0,
+                 expected_filename=None,
+                 start_seconds=0,
+                 end_seconds=None,
+                 spotify_track=None,
+                 provided_song_timestamps=None,
+                 update_additional_information=True,
+                 **meta):
         super().__init__()
 
-        self.playlist = playlist
+        self.playlist = queue
         self.url = url
         self._title = title
         self.duration = duration
@@ -186,7 +214,21 @@ class URLPlaylistEntry(BasePlaylistEntry):
                 meta['author'] = playlist.bot.get_global_user(
                     data['meta']['author']['id'])
 
-        return cls(playlist, url, title, duration, filename, start_seconds, end_seconds, spotify_track=spotify_track, provided_song_timestamps=provided_song_timestamps, update_additional_information=update_additional_information, **meta)
+            if "playlist" in data["meta"]:
+                meta["playlist"] = data["meta"]["playlist"]
+
+        return cls(
+            playlist,
+            url,
+            title,
+            duration,
+            filename,
+            start_seconds,
+            end_seconds,
+            spotify_track=spotify_track,
+            provided_song_timestamps=provided_song_timestamps,
+            update_additional_information=update_additional_information,
+            **meta)
 
     # @staticmethod
     # def entry_from_json(playlist, jsonstring):
@@ -229,7 +271,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.searched_additional_information = True
 
     def search_for_timestamps(self):
-        songs = get_video_timestamps(self.url)
+        songs = get_video_timestamps(self.url, self.duration)
 
         if songs is None or len(songs) < 1:
             return
@@ -242,28 +284,46 @@ class URLPlaylistEntry(BasePlaylistEntry):
             if i is None or self.meta[i] is None:
                 continue
 
-            meta_dict[i] = {'type': self.meta[i].__class__.__name__,
-                            'id': self.meta[i].id, 'name': self.meta[i].name}
+            meta_dict[i] = {
+                'type': self.meta[i].__class__.__name__,
+                'id': self.meta[i].id,
+                'name': self.meta[i].name
+            }
 
         data = {
-            'version': 2,
-            'type': self.__class__.__name__,
-            'url': self.url,
-            'title': self.title,
-            'duration': self.duration,
-            'downloaded': self.is_downloaded,
-            'filename': self.filename,
-            "expected_filename": self.expected_filename,
-            'meta': meta_dict,
-            "start_seconds": self.start_seconds,
-            "end_seconds": self.end_seconds,
-            "spotify_track": self.spotify_track.get_dict() if self.spotify_track is not None else None,
-            "provided_song_timestamps": self.provided_song_timestamps
+            'version':
+            2,
+            'type':
+            self.__class__.__name__,
+            'url':
+            self.url,
+            'title':
+            self.title,
+            'duration':
+            self.duration,
+            'downloaded':
+            self.is_downloaded,
+            'filename':
+            self.filename,
+            "expected_filename":
+            self.expected_filename,
+            'meta':
+            meta_dict,
+            "start_seconds":
+            self.start_seconds,
+            "end_seconds":
+            self.end_seconds,
+            "spotify_track":
+            self.spotify_track.get_dict()
+            if self.spotify_track is not None else None,
+            "provided_song_timestamps":
+            self.provided_song_timestamps
         }
         return data
 
     def set_start(self, sec):
-        if sec >= (self.end_seconds if self.end_seconds is not None else self.duration):
+        if sec >= (self.end_seconds
+                   if self.end_seconds is not None else self.duration):
             return False
 
         self.start_seconds = sec
@@ -311,22 +371,24 @@ class URLPlaylistEntry(BasePlaylistEntry):
             # the generic extractor requires special handling
             if extractor == 'generic':
                 # print("Handling generic")
-                flistdir = [f.rsplit('-', 1)[0]
-                            for f in os.listdir(self.download_folder)]
+                flistdir = [
+                    f.rsplit('-', 1)[0]
+                    for f in os.listdir(self.download_folder)
+                ]
                 expected_fname_noex, fname_ex = os.path.basename(
                     self.expected_filename).rsplit('.', 1)
 
                 if expected_fname_noex in flistdir:
                     try:
-                        rsize = int(await get_header(self.playlist.bot.aiosession, self.url, 'CONTENT-LENGTH'))
+                        rsize = int(
+                            await get_header(self.playlist.bot.aiosession,
+                                             self.url, 'CONTENT-LENGTH'))
                     except:
                         rsize = 0
 
-                    lfile = os.path.join(
-                        self.download_folder,
-                        os.listdir(self.download_folder)[
-                            flistdir.index(expected_fname_noex)]
-                    )
+                    lfile = os.path.join(self.download_folder,
+                                         os.listdir(self.download_folder)
+                                         [flistdir.index(expected_fname_noex)])
 
                     # print("Resolved %s to %s" % (self.expected_filename, lfile))
                     lsize = os.path.getsize(lfile)
@@ -352,18 +414,18 @@ class URLPlaylistEntry(BasePlaylistEntry):
                 # or i have youtube to blame for changing shit again
 
                 if expected_fname_base in ldir:
-                    self.filename = os.path.join(
-                        self.download_folder, expected_fname_base)
+                    self.filename = os.path.join(self.download_folder,
+                                                 expected_fname_base)
                     print("[Download] Cached:", self.url)
 
                 elif expected_fname_noex in flistdir:
                     print("[Download] Cached (different extension):", self.url)
-                    self.filename = os.path.join(self.download_folder, ldir[
-                                                 flistdir.index(expected_fname_noex)])
-                    print("Expected %s, got %s" % (
-                        self.expected_filename.rsplit('.', 1)[-1],
-                        self.filename.rsplit('.', 1)[-1]
-                    ))
+                    self.filename = os.path.join(
+                        self.download_folder,
+                        ldir[flistdir.index(expected_fname_noex)])
+                    print("Expected %s, got %s" %
+                          (self.expected_filename.rsplit('.', 1)[-1],
+                           self.filename.rsplit('.', 1)[-1]))
 
                 else:
                     await self._really_download()
@@ -383,7 +445,8 @@ class URLPlaylistEntry(BasePlaylistEntry):
         print("[Download] Started:", self.url)
 
         try:
-            result = await self.playlist.downloader.extract_info(self.playlist.loop, self.url, download=True)
+            result = await self.playlist.downloader.extract_info(
+                self.playlist.loop, self.url, download=True)
         except Exception as e:
             raise ExtractionError(e)
 
@@ -399,8 +462,9 @@ class URLPlaylistEntry(BasePlaylistEntry):
         if hash:
             # insert the 8 last characters of the file hash to the file name to
             # ensure uniqueness
-            self.filename = md5sum(unhashed_fname, 8).join(
-                '-.').join(unhashed_fname.rsplit('.', 1))
+            self.filename = md5sum(
+                unhashed_fname,
+                8).join('-.').join(unhashed_fname.rsplit('.', 1))
 
             if os.path.isfile(self.filename):
                 # Oh bother it was actually there.
@@ -411,8 +475,14 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
 
 class StreamPlaylistEntry(BasePlaylistEntry):
-
-    def __init__(self, playlist, url, title, station_data=None, *, destination=None, **meta):
+    def __init__(self,
+                 playlist,
+                 url,
+                 title,
+                 station_data=None,
+                 *,
+                 destination=None,
+                 **meta):
         super().__init__()
 
         self.playlist = playlist
@@ -442,7 +512,8 @@ class StreamPlaylistEntry(BasePlaylistEntry):
                     'type': obj.__class__.__name__,
                     'id': obj.id,
                     'name': obj.name
-                } for name, obj in self.meta.items() if obj
+                }
+                for name, obj in self.meta.items() if obj
             }
         })
 
@@ -482,7 +553,8 @@ class StreamPlaylistEntry(BasePlaylistEntry):
         url = self.destination if fallback else self.url
 
         try:
-            result = await self.playlist.downloader.extract_info(self.playlist.loop, url, download=False)
+            result = await self.playlist.downloader.extract_info(
+                self.playlist.loop, url, download=False)
         except Exception as e:
             if not fallback and self.destination:
                 return await self._download(fallback=True)
