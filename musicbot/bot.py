@@ -5291,7 +5291,9 @@ class MusicBot(discord.Client):
         "3.4.4":
         (1497611753,
          "Changed command name from \"addplayingtoplaylist\" to \"addtoplaylist\", thanks Paulo"
-         )
+         ),
+        "3.5.5": (1497792167,
+                  "Now displaying what entry has been added to the playlist")
     ***REMOVED***)
     async def cmd_addtoplaylist(self, channel, author, player, playlistname):
         """
