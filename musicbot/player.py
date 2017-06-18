@@ -128,7 +128,7 @@ class MusicPlayer(EventEmitter):
         self.bot.socket_server.threaded_broadcast_information()
         self.handle_manually = False
 
-        self.volume_scale = 1
+        self.volume_scale = 1 # volume is divided by this value
         self.volume = bot.config.default_volume
 
     @property
@@ -408,6 +408,8 @@ class MusicPlayer(EventEmitter):
         print("[TIMESTAMP-ENTRY] Waiting for " + str(delay) +
               " seconds before emitting now playing event")
         before_data = {"url": self.current_entry.url, "song_name": await self._absolute_current_song()}
+        expected_progress = self.progress + delay
+        # print("I expect to have a progress of {} once I wake up".format(expected_progress))
         await asyncio.sleep(delay)
         if not self.current_entry:
             return
@@ -415,6 +417,10 @@ class MusicPlayer(EventEmitter):
         if not (self.current_entry.url == before_data["url"] and await self._absolute_current_song() != before_data["song_name"]):
             print("[TIMESTAMP-ENTRY] nothing's changed since last time!")
         else:
+            # print("Expected: {}, Got: {}".format(expected_progress, self.progress))
+            if not ((expected_progress + .75) > self.progress > (expected_progress - .75)):
+                print("[TIMESTAMP-ENTRY] Expected progress {} but got {}; assuming there's already another one running".format(expected_progress, self.progress))
+                return
             print("[TIMESTAMP-ENTRY] Emitting next now playing event")
             self.emit('play', player=self, entry=self.current_entry)
         await self.update_timestamp()
