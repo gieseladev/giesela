@@ -4725,7 +4725,7 @@ class MusicBot(discord.Client):
         (1497706811,
          "Giesela finally keeps track whether a certain entry comes from a playlist or not"
          ),
-         "3.5.8": (1497827857, "Default sort mode when loading playlists is now random")
+         "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page.")
     ***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player,
                            leftover_args):
@@ -5173,9 +5173,9 @@ class MusicBot(discord.Client):
                         for x in range(len(playlist["entries"]))
                         if x not in indieces
                     ]
-                    it, ov = divmod(
-                        int(playlist["entry_count"]), items_per_page)
-                    entries_page = it - 1 if ov == 0 else it
+                    # it, ov = divmod(
+                    #     int(playlist["entry_count"]), items_per_page)
+                    # entries_page = it - 1 if ov == 0 else it
 
             elif split_message[0].lower() == "rename":
                 if arguments is not None and len(
