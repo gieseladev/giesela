@@ -11,9 +11,11 @@ import asyncio
 import audioop
 from enum import Enum
 
+from .entry import StreamPlaylistEntry
 from .exceptions import FFmpegError, FFmpegWarning
 from .lib.event_emitter import EventEmitter
 from .logger import log
+from .radio import Radio
 from .utils import format_time_ffmpeg
 
 
@@ -126,7 +128,7 @@ class MusicPlayer(EventEmitter):
         self.bot.socket_server.threaded_broadcast_information()
         self.handle_manually = False
 
-        self.volume_scale = 1
+        self.volume_scale = 1 # volume is divided by this value
         self.volume = bot.config.default_volume
 
     @property
@@ -184,7 +186,8 @@ class MusicPlayer(EventEmitter):
 
     def goto_seconds(self, secs):
         if (not self.current_entry) or secs >= self.current_entry.duration or (self.current_entry.end_seconds is not None and secs >= self.current_entry.end_seconds):
-            return False
+            self.skip()
+            return True
 
         secs = max(0, secs)
 
@@ -357,24 +360,69 @@ class MusicPlayer(EventEmitter):
                 self.bot.socket_server.threaded_broadcast_information()
                 asyncio.ensure_future(self.update_timestamp())
 
+    async def _absolute_current_song(self):
+        if not self.current_entry:
+            return None
+        if type(self.current_entry) == StreamPlaylistEntry:
+            if self.current_entry.radio_station_data:
+                data = await Radio.get_current_song(self.loop, self.current_entry.radio_station_data.name)
+                if data:
+                    return data["title"]  # it's title, not name idiot
+        elif self.current_entry.provides_timestamps:
+            try:
+                return self.current_entry.get_current_song_from_timestamp(self.progress)["name"]
+            except:
+                pass
+
+        return self.current_entry.title
+
     async def update_timestamp(self, delay=None):
         if not delay:
-            if self.current_entry and self.current_entry.provides_timestamps:
-                prg, dur = self.current_entry.get_local_progress(self.progress)
-                # just to be sure, add an extra 2 seconds
-                next_delay = (dur - prg) + 2
-                return await self.update_timestamp(next_delay)
+            if self.current_entry:
+                if self.current_entry.provides_timestamps:
+                    prg, dur = self.current_entry.get_local_progress(
+                        self.progress)
+                    # just to be sure, add an extra 2 seconds
+                    next_delay = (dur - prg) + 2
+                    return await self.update_timestamp(next_delay)
+
+                elif type(self.current_entry) == StreamPlaylistEntry:
+                    if self.current_entry.radio_station_data:
+                        next_delay = 40  # I don't want this to be too fast...
+                        if Radio.has_station_data(self.current_entry.radio_station_data.name):
+                            data = await Radio.get_current_song(
+                                self.bot.loop, self.current_entry.radio_station_data.name)
+                            # proto sounds cool, doesn't it?
+                            proto_delay = (data["duration"] - data["progress"])
+                            # just making sure that it's not somehow ducked up
+                            # (like capitalfm)
+                            if proto_delay > 0:
+                                next_delay = proto_delay + 2  # adding those extra 2 seconds just to be safe
+                        return await self.update_timestamp(next_delay)
+
+                return  # this is not the kind of entry that requires an update
             else:
                 print("[TIMESTAMP-ENTRY] Not going to emit another now playing event")
                 return
 
         print("[TIMESTAMP-ENTRY] Waiting for " + str(delay) +
               " seconds before emitting now playing event")
+        before_data = ***REMOVED***"url": self.current_entry.url, "song_name": await self._absolute_current_song()***REMOVED***
+        expected_progress = self.progress + delay
+        # print("I expect to have a progress of ***REMOVED******REMOVED*** once I wake up".format(expected_progress))
         await asyncio.sleep(delay)
-        if not self.current_entry or not self.current_entry.provides_timestamps:
+        if not self.current_entry:
             return
-        print("[TIMESTAMP-ENTRY] Emitting next now playing event")
-        self.emit('play', player=self, entry=self.current_entry)
+        # gotta be sure to be on the same entry but not on the same sub entry
+        if not (self.current_entry.url == before_data["url"] and await self._absolute_current_song() != before_data["song_name"]):
+            print("[TIMESTAMP-ENTRY] nothing's changed since last time!")
+        else:
+            # print("Expected: ***REMOVED******REMOVED***, Got: ***REMOVED******REMOVED***".format(expected_progress, self.progress))
+            if not ((expected_progress + .75) > self.progress > (expected_progress - .75)):
+                print("[TIMESTAMP-ENTRY] Expected progress ***REMOVED******REMOVED*** but got ***REMOVED******REMOVED***; assuming there's already another one running".format(expected_progress, self.progress))
+                return
+            print("[TIMESTAMP-ENTRY] Emitting next now playing event")
+            self.emit('play', player=self, entry=self.current_entry)
         await self.update_timestamp()
 
     def play_entry(self, entry):
