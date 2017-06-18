@@ -2215,8 +2215,8 @@ class MusicBot(discord.Client):
         if player.current_entry and player.current_entry.provides_timestamps:
             for i, item in enumerate(
                     player.current_entry.sub_queue(player.progress), 1):
-                lines.append(
-                    "            ►`{}.` **{}**".format(i, item["name"]))
+                lines.append("            ►`{}.` **{}**".format(
+                    i, nice_cut(item["name"], 35)))
 
         for i, item in enumerate(player.playlist, 1):
             origin_text = ""
@@ -5327,12 +5327,12 @@ class MusicBot(discord.Client):
                     "Your name is too short. Please choose one with at least three letters."
                 )
             self.playlists.set_playlist([add_entry], playlistname, author.id)
-            return Response(
-                "Created a new playlist and added the currently playing song.")
+            return Response("Created a new playlist and added `{}`.".format(
+                add_entry.title))
 
         self.playlists.edit_playlist(
             playlistname, player.playlist, new_entries=[add_entry])
-        return Response("Added the current song to the playlist.")
+        return Response("Added `{}` to the playlist.".format(add_entry.title))
 
     @command_info("1.9.2", 1479945600, {
         "3.3.6": (1497387101,
