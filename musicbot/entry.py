@@ -38,6 +38,9 @@ class BasePlaylistEntry:
         return self.provided_song_timestamps is not None
 
     def sub_queue(self, min_progress=-1):
+        if not self.provides_timestamps:
+            return None
+
         if not self._sub_queue:
             queue = []
             entries = sorted(list(self.provided_song_timestamps.keys()))
