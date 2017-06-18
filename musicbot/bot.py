@@ -6491,10 +6491,10 @@ class MusicBot(discord.Client):
                         ]
                         break
                 else:
-                if target_author is not None:
-                    return Response(
-                        "Didn't find a message with that content from ***REMOVED******REMOVED***".
-                        format(target_author.mention))
+                    if target_author is not None:
+                        return Response(
+                            "Didn't find a message with that content from ***REMOVED******REMOVED***".
+                            format(target_author.mention))
 
                 return Response(
                     "Didn't find a message that matched this content")
