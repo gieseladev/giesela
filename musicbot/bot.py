@@ -36,6 +36,7 @@ from pyshorteners import Shortener
 
 import asyncio
 import configparser
+import requests
 
 from . import downloader, exceptions
 from .bookmarks import bookmark
@@ -6755,6 +6756,39 @@ class MusicBot(discord.Client):
         em = Embed(title="Version " + v_name, description=desc, url="https://siku2.github.io/Giesela", colour=hex_to_dec("67BE2E"))
 
         return Response(embed=em)
+
+    @command_info("3.5.7", 1497823283)
+    async def cmd_interact(self, message):
+        """
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***interact <query>`
+        ///|Explanation
+        Use every day language to control Giesela
+        ///|Disclaimer
+        **Help out with the development of a "smarter" Giesela by testing out this new future!**
+        """
+
+        matcher = "^\***REMOVED******REMOVED***?interact".format(self.config.command_prefix)
+        query = re.sub(matcher, "", message.content, flags=re.MULTILINE)
+        if not query:
+            return Response("Please provide a query for me to work with")
+
+        print("[INTERACT] \"***REMOVED******REMOVED***\"".format(query))
+
+        params = ***REMOVED***"v":"18/06/2017", "q":query***REMOVED***
+        headers = ***REMOVED***"Authorization": "Bearer 47J7GSQPY2DJPLGUNFZVNHAMGU7ARCRD"***REMOVED***
+        resp = requests.get("https://api.wit.ai/message", params=params, headers=headers)
+        data = resp.json()
+        entities = data["entities"]
+
+        msg = ""
+
+        for entity, data in entities.items():
+            d = data[0]
+            msg += "*****REMOVED******REMOVED***** [***REMOVED******REMOVED***] (***REMOVED******REMOVED***% sure)\n".format(entity, d["value"], round(d["confidence"] * 100, 1))
+
+        return Response(msg)
+
 
     @owner_only
     async def cmd_shutdown(self, channel):
