@@ -42,8 +42,8 @@ from .bookmarks import bookmark
 from .cleverbot import CleverWrap
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
-from .constants import (AUDIO_CACHE_PATH, DEV_VERSION, DISCORD_MSG_CHAR_LIMIT,
-                        MASTER_VERSION)
+from .constants import (AUDIO_CACHE_PATH, get_dev_version, DISCORD_MSG_CHAR_LIMIT,
+                        get_master_version, get_dev_changelog)
 from .entry import URLPlaylistEntry
 from .games.game_2048 import Game2048
 from .games.game_cah import GameCAH
@@ -6737,6 +6737,24 @@ class MusicBot(discord.Client):
             return Response(
                 "Couldn't find any information on the `***REMOVED******REMOVED***` command".format(
                     command))
+
+    @command_info("3.5.6", 1497819288)
+    async def cmd_version(self):
+        """
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***version`
+        ///|Explanation
+        Some more informat about the current version and what's to come.
+        """
+        v_code, v_name = BOTVERSION.split("_")
+        dev_code, dev_name = get_dev_version()
+        changelog = get_dev_changelog()
+
+        desc = "Current Version is `***REMOVED******REMOVED***`\nDevelopment is at `***REMOVED******REMOVED***`\n\n**What's to come:**\n\n".format(BOTVERSION, dev_code+"_"+dev_name)
+        desc += "\n".join("● " + l for l in changelog)
+        em = Embed(title="Version " + v_name, description=desc, url="https://siku2.github.io/Giesela", colour=hex_to_dec("67BE2E"))
+
+        return Response(embed=em)
 
     @owner_only
     async def cmd_shutdown(self, channel):
