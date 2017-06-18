@@ -123,7 +123,7 @@ class Bookmarks:
         new_data = ***REMOVED******REMOVED***
         if new_name:
             new_data["name"] = new_name
-        if new_timestamp:
+        if new_timestamp is not None: # again, 0=False thus I need to check it this way
             new_data["timestamp"] = new_timestamp
             data["entry"]["start_seconds"] = new_timestamp
 
