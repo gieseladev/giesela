@@ -22,7 +22,7 @@ import aiohttp
 import discord
 import goslate
 # import newspaper
-import tungsten
+from .tungsten import Tungsten
 import wikipedia
 from discord import Embed, utils
 from discord.enums import ChannelType
