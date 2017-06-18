@@ -2197,8 +2197,10 @@ class MusicBot(discord.Client):
     @command_info("1.0.0", 1477180800, ***REMOVED***
         "3.5.1":
         (1497706997,
-         "Queue doesn't show the current entry anymore and shows an entry's playlist if it has one"
-         )
+         "Queue doesn't show the current entry anymore, always shows the whole playlist and a bit of cleanup"
+         ),
+         "3.5.5":
+         (1497795534, "Total time takes current entry into account")
     ***REMOVED***)
     async def cmd_queue(self, channel, player):
         """
@@ -2240,6 +2242,9 @@ class MusicBot(discord.Client):
                 format(self.config.command_prefix))
 
         total_time = sum([entry.duration for entry in player.playlist.entries])
+        if player.current_entry:
+            total_time += player.current_entry.end_seconds - player.progress
+
         lines.append("\n**Total duration:** `***REMOVED******REMOVED***`".format(
             format_time(total_time), True, 5, 2))
 
