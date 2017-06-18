@@ -4724,13 +4724,14 @@ class MusicBot(discord.Client):
         "3.5.1":
         (1497706811,
          "Giesela finally keeps track whether a certain entry comes from a playlist or not"
-         )
+         ),
+         "3.5.8": (1497827857, "Default sort mode when loading playlists is now random")
     ***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player,
                            leftover_args):
         """
         ///|Load
-        `***REMOVED***command_prefix***REMOVED***playlist load <savename> [add | replace] [none | alphabetical | length | random] [startindex] [endindex (inclusive)]`\n\nTrust me, it's more complicated than it looks
+        `***REMOVED***command_prefix***REMOVED***playlist load <savename> [add | replace] [none | random] [startindex] [endindex (inclusive)]`\n\nTrust me, it's more complicated than it looks
         ///(NL)|List all playlists
         `***REMOVED***command_prefix***REMOVED***playlist showall [alphabetical | author | entries | playtime | random | replays]`
         ///(NL)|Build a new playlist
@@ -4829,7 +4830,7 @@ class MusicBot(discord.Client):
 
             sort_mode = additional_args[1].lower(
             ) if len(additional_args) > 1 and additional_args[1].lower(
-            ) in sort_modes.keys() else "none"
+            ) in sort_modes.keys() else "random"
 
             if sort_mode == "random":
                 shuffle(clone_entries)
