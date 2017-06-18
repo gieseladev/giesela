@@ -2201,15 +2201,28 @@ class MusicBot(discord.Client):
          "Queue doesn't show the current entry anymore, always shows the whole playlist and a bit of cleanup"
          ),
          "3.5.5":
-         (1497795534, "Total time takes current entry into account")
+         (1497795534, "Total time takes current entry into account"),
+         "3.5.8":(1497825017, "Doesn't show the whole queue right away anymore, instead the queue command takes a quantity argument which defaults to 15")
     ***REMOVED***)
-    async def cmd_queue(self, channel, player):
+    async def cmd_queue(self, channel, player, num="15"):
         """
         ///|Usage
-        ***REMOVED***command_prefix***REMOVED***queue
+        ***REMOVED***command_prefix***REMOVED***queue [quantity]
         ///|Explanation
-        Show the current song queue
+        Show the first 15 entries of the current song queue.
+        One can specify the amount of entries to be shown.
         """
+
+        try:
+            quantity = int(num)
+
+            if quantity < 1:
+                return Response("Please provide a reasonable quantity")
+        except ValueError:
+            if num.lower() == "all":
+                quantity = len(player.playlist.entries)
+            else:
+                return Response("Quantity must be a number")
 
         lines = []
 
@@ -2221,7 +2234,8 @@ class MusicBot(discord.Client):
                 lines.append("            ►`***REMOVED******REMOVED***.` *****REMOVED******REMOVED*****".format(
                     i, nice_cut(item["name"], 35)))
 
-        for i, item in enumerate(player.playlist, 1):
+        entries = list(player.playlist.entries)[:quantity]
+        for i, item in enumerate(entries, 1):
             origin_text = ""
             if "playlist" in item.meta:
                 origin_text = "from playlist *****REMOVED******REMOVED*****".format(
@@ -2246,14 +2260,16 @@ class MusicBot(discord.Client):
         if player.current_entry:
             total_time += player.current_entry.end_seconds - player.progress
 
-        lines.append("\n**Total duration:** `***REMOVED******REMOVED***`".format(
+        lines.append("\nShowing ***REMOVED******REMOVED*** out of ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***".format(len(entries), len(player.playlist.entries), "y" if len(entries) == 1 else "ies"))
+        lines.append("**Total duration:** `***REMOVED******REMOVED***`".format(
             format_time(total_time), True, 5, 2))
 
         return Response("\n".join(lines))
 
     @command_info("3.3.3", 1497197957, ***REMOVED***
         "3.3.8": (1497474312,
-                  "added failsafe for player not currently playing something")
+                  "added failsafe for player not currently playing something"),
+        "3.5.8":(1497825334, "Adjusted design to look more like `queue`'s style")
     ***REMOVED***)
     async def cmd_history(self, channel, player):
         """
@@ -2268,7 +2284,7 @@ class MusicBot(discord.Client):
         lines = []
         for ind, entry in enumerate(player.playlist.history, 1):
             lines.append(
-                "***REMOVED******REMOVED***. \"***REMOVED******REMOVED***\" *****REMOVED******REMOVED*** ago**".format(ind, entry.title,
+                "`***REMOVED******REMOVED***.` *****REMOVED******REMOVED***** ***REMOVED******REMOVED*** ago".format(ind, nice_cut(clean_songname(entry.title), 40),
                                                format_time(
                                                    seconds_passed,
                                                    round_seconds=True,
