@@ -63,7 +63,7 @@ class BasePlaylistEntry:
         if min_progress >= 0:
             queue = []
             for sub_entry in self._sub_queue:
-                if sub_entry["duration"] < min_progress:
+                if sub_entry["start"] < min_progress:
                     continue
                 queue.append(sub_entry)
         else:
