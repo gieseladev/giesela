@@ -3077,7 +3077,8 @@ class MusicBot(discord.Client):
          ),
         "3.4.8": (1497649772, "Fixed the issue which blocked Giesela from replaying the last song"),
         "3.5.2": (1497714171, "Can now replay an index from the history"),
-        "3.5.9": (1497899132, "Now showing the tile of the entry that is going to be replayed")
+        "3.5.9": (1497899132, "Now showing the tile of the entry that is going to be replayed"),
+        "3.6.0": (1497903889, "Replay <inde> didn't work correctly")
     })
     async def cmd_replay(self, player, choose_last=""):
         """
@@ -3091,7 +3092,7 @@ class MusicBot(discord.Client):
         """
 
         try:
-            index = int(choose_last) + 1
+            index = int(choose_last) - 1
             if index > len(player.playlist.history):
                 return Response("History doesn't go back that far.")
             if index < 1:
