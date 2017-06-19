@@ -304,19 +304,19 @@ def format_time(s,
     if days > 0:
         return_list.append(
             "***REMOVED******REMOVED*** ***REMOVED******REMOVED******REMOVED******REMOVED***".format("a" if days == 1 and replace_one else days, ["d", "day", "day"][unit_length], "s"
-                              if days is not 1 and unit_length != 0 else ""))
+                             if days is not 1 and unit_length != 0 else ""))
     if hours > 0:
         return_list.append(
             "***REMOVED******REMOVED*** ***REMOVED******REMOVED******REMOVED******REMOVED***".format("an" if hours == 1 and replace_one else hours, ["h", "hr", "hour"][unit_length],
-                               "s" if hours is not 1 and unit_length != 0 else ""))
+                             "s" if hours is not 1 and unit_length != 0 else ""))
     if minutes > 0:
         return_list.append(
             "***REMOVED******REMOVED*** ***REMOVED******REMOVED******REMOVED******REMOVED***".format("a" if minutes == 1 and replace_one else
-                                 minutes, ["m", "min", "minute"][unit_length], "s" if minutes is not 1 and unit_length != 0 else ""))
+                             minutes, ["m", "min", "minute"][unit_length], "s" if minutes is not 1 and unit_length != 0 else ""))
     if seconds > 0 or s is 0:
         return_list.append(
             "***REMOVED******REMOVED*** ***REMOVED******REMOVED******REMOVED******REMOVED***".format("a" if seconds == 1 and replace_one else
-                                 seconds, ["s", "sec", "second"][unit_length], "s" if seconds is not 1 and unit_length != 0 else ""))
+                             seconds, ["s", "sec", "second"][unit_length], "s" if seconds is not 1 and unit_length != 0 else ""))
 
     if max_specifications is not None:
         return_list = return_list[:max_specifications]

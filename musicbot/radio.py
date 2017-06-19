@@ -1,11 +1,10 @@
+import asyncio
 import json
 import re
 from datetime import datetime, timedelta
 
 import aiohttp
 from bs4 import BeautifulSoup
-
-import asyncio
 
 from .utils import parse_timestamp
 

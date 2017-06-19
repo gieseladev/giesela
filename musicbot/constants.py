@@ -39,13 +39,16 @@ def get_master_version():
 
     return matches.groups((1, 2))
 
+
 def get_dev_changelog():
     base_url = "https://siku2.github.io/Giesela/changelogs/changelog-"
     dev_version = re.sub(r"\D", "", get_dev_version()[0])
 
-    changelog_page = requests.get(base_url + dev_version).content.decode("utf-8")
+    changelog_page = requests.get(
+        base_url + dev_version).content.decode("utf-8")
     bs = BeautifulSoup(changelog_page, "lxml")
-    html_to_markdown = [(r"<\/?li>","\t"), (r"<\/?ul>", ""), (r"<strong>(.+?)<\/strong>", r"**\1**"), (r"<a.+?>(.+?)<\/a>", r"`\1`"), (r"\n\W+\n", "\n")]
+    html_to_markdown = [(r"<\/?li>", "\t"), (r"<\/?ul>", ""), (r"<strong>(.+?)<\/strong>",
+                                                               r"**\1**"), (r"<a.+?>(.+?)<\/a>", r"`\1`"), (r"\n\W+\n", "\n")]
 
     changes = []
 
