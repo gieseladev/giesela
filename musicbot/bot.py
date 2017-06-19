@@ -964,7 +964,8 @@ class MusicBot(discord.Client):
         return target_channel
 
     @command_info("1.9.5", 1477774380, {
-        "3.4.5": (1497616203, "Improved default help message using embeds")
+        "3.4.5": (1497616203, "Improved default help message using embeds"),
+        "3.6.0": (1497904733, "Fixed weird indent of some help texts")
     })
     async def cmd_help(self, channel, leftover_args):
         """
@@ -1008,7 +1009,7 @@ class MusicBot(discord.Client):
                     title, text = match.group(1, 2)
 
                     em.add_field(
-                        name="**{}**".format(title), value=text, inline=inline)
+                        name="**{}**".format(title), value=dedent(text), inline=inline)
                 await self.send_message(channel, embed=em)
                 return
                 # return
