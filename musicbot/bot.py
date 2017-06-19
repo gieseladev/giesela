@@ -1,3 +1,5 @@
+import asyncio
+import configparser
 import datetime
 import inspect
 import json
@@ -21,8 +23,7 @@ from textwrap import dedent, indent
 import aiohttp
 import discord
 import goslate
-# import newspaper
-from .tungsten import Tungsten
+import requests
 import wikipedia
 from discord import Embed, utils
 from discord.enums import ChannelType
@@ -34,16 +35,13 @@ from moviepy import editor, video
 from openpyxl import Workbook
 from pyshorteners import Shortener
 
-import asyncio
-import configparser
-
 from . import downloader, exceptions
 from .bookmarks import bookmark
 from .cleverbot import CleverWrap
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
-from .constants import (AUDIO_CACHE_PATH, DEV_VERSION, DISCORD_MSG_CHAR_LIMIT,
-                        MASTER_VERSION)
+from .constants import (AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT,
+                        get_dev_changelog, get_dev_version, get_master_version)
 from .entry import URLPlaylistEntry
 from .games.game_2048 import Game2048
 from .games.game_cah import GameCAH
@@ -63,6 +61,8 @@ from .saved_playlists import Playlists
 from .settings import Settings
 from .socket_server import SocketServer
 from .translate import Translator
+# import newspaper
+from .tungsten import Tungsten
 from .twitter_api import get_tweet
 from .utils import (clean_songname, create_bar, escape_dis, format_time,
                     hex_to_dec, load_file, nice_cut, ordinal, paginate,
@@ -466,7 +466,8 @@ class MusicBot(discord.Client):
                 'last_np_msg']
             if last_np_msg and last_np_msg.channel == channel:
 
-                async for lmsg in self.logs_from(channel, limit=1): #if the last np message isn't the last message in the channel; delete it
+                # if the last np message isn't the last message in the channel; delete it
+                async for lmsg in self.logs_from(channel, limit=1):
                     if lmsg != last_np_msg and last_np_msg:
                         await self.safe_delete_message(last_np_msg)
                         self.server_specific_data[channel.server][
@@ -475,7 +476,7 @@ class MusicBot(discord.Client):
 
             if entry.provides_timestamps:
                 e = entry.get_current_song_from_timestamp(player.progress)
-                newmsg = "Now playing **{0}** (*{1}{2}* entry) from \"{3}\"".format(
+                newmsg = "Now playing **{0}** ({1}{2} entry) from \"{3}\"".format(
                     e["name"], e["index"] + 1,
                     ordinal(e["index"] + 1), entry.title)
             else:
@@ -934,12 +935,12 @@ class MusicBot(discord.Client):
 
         for ch in channels:
             if summoner_id is not None and any(
-                [x.id == summoner_id for x in ch.voice_members]):
+                    [x.id == summoner_id for x in ch.voice_members]):
                 target_channel = ch
                 break
 
             if len(ch.voice_members) - sum(
-                [.5 for x in ch.voice_members if x.bot]) > max_members:
+                    [.5 for x in ch.voice_members if x.bot]) > max_members:
                 target_channel = ch
                 max_members = len(ch.voice_members)
 
@@ -1059,8 +1060,7 @@ class MusicBot(discord.Client):
                 title="GIESELA HELP",
                 url="http://siku2.github.io/Giesela/",
                 colour=hex_to_dec("828c51"),
-                description=
-                "plz be welcum to mah new list of the **most fab** commands\nYou can always use `{0}help <cmd>` to get more detailed information on a command".
+                description="plz be welcum to mah new list of the **most fab** commands\nYou can always use `{0}help <cmd>` to get more detailed information on a command".
                 format(self.config.command_prefix))
 
             music_commands = "`{0}play` play dem shit\n`{0}search` make sure you get ur shit\n`{0}stream` when u wanna go live\n`{0}pause` need a break?\n`{0}volume` oh shit turn it up\n`{0}seek` hide and snaek\n`{0}fwd` sanic fast, sanic skip\n`{0}rwd` go baek in tiem".format(
@@ -1684,80 +1684,36 @@ class MusicBot(discord.Client):
 
     @block_user
     @command_info("1.0.0", 1477180800, {
-        "3.5.2": (1497712233, "Updated documentaion for this command")
+        "3.5.2": (1497712233, "Updated documentaion for this command"),
+        "3.5.9": (1497890999, "Revamped design and functions making this command more useful")
     })
     async def cmd_search(self, player, channel, author, leftover_args):
         """
         ///|Usage
-        `{command_prefix}search [service] [number] <query>`
+        `{command_prefix}search [number] <query>`
         ///|Explanation
-        Searches a service for a video and adds the one you choose.
-        ///|Specifications
-        [service]: any one of the following services:
-            - youtube (yt) (default if unspecified)
-            - soundcloud (sc)
-            - yahoo (yh)
-        [number]: return a number of video results and waits for user to choose one
-          - defaults to 5 if unspecified
-          - note: If your search query starts with a number,
-                  you must put your query in quotes
+        Searches for a video and adds the one you choose.
         """
 
-        def argcheck():
-            if not leftover_args:
-                raise exceptions.CommandError(
-                    "Please specify a search query.\n%s" % dedent(
-                        self.cmd_search.__doc__.format(
-                            command_prefix=self.config.command_prefix)),
-                    expire_in=60)
-
-        argcheck()
+        if not leftover_args:
+            return Response("Please specify a search query.")
 
         try:
-            leftover_args = shlex.split(' '.join(leftover_args))
-        except ValueError:
-            raise exceptions.CommandError(
-                "Please quote your search query properly.", expire_in=30)
+            number = int(leftover_args[0])
+            if number > 20:
+                return Response("You musn't search for more than 20 videos")
 
-        service = 'youtube'
-        items_requested = 5
-        max_items = 10  # this can be whatever, but since ytdl uses about 1000, a small number might be better
-        services = {
-            'youtube': 'ytsearch',
-            'soundcloud': 'scsearch',
-            'yahoo': 'yvsearch',
-            'yt': 'ytsearch',
-            'sc': 'scsearch',
-            'yh': 'yvsearch'
-        }
+            query = " ".join(leftover_args[1:])
 
-        if leftover_args[0] in services:
-            service = leftover_args.pop(0)
-            argcheck()
+            if not query:
+                return Response("You have to specify the query too.")
+        except:
+            number = 5
+            query = " ".join(leftover_args)
 
-        if leftover_args[0].isdigit():
-            items_requested = int(leftover_args.pop(0))
-            argcheck()
+        search_query = "ytsearch{}:{}".format(number, query)
 
-            if items_requested > max_items:
-                raise exceptions.CommandError(
-                    "You cannot search for more than %s videos" % max_items)
-
-        # Look jake, if you see this and go "what the fuck are you doing"
-        # and have a better idea on how to do this, i'd be delighted to know.
-        # I don't want to just do ' '.join(leftover_args).strip("\"'")
-        # Because that eats both quotes if they're there
-        # where I only want to eat the outermost ones
-        if leftover_args[0][0] in '\'"':
-            lchar = leftover_args[0][0]
-            leftover_args[0] = leftover_args[0].lstrip(lchar)
-            leftover_args[-1] = leftover_args[-1].rstrip(lchar)
-
-        search_query = '%s%s:%s' % (services[service], items_requested,
-                                    ' '.join(leftover_args))
-
-        search_msg = await self.send_message(channel,
-                                             "Searching for videos...")
+        search_msg = await self.safe_send_message(channel, "Searching for videos...")
         await self.send_typing(channel)
 
         try:
@@ -1774,54 +1730,77 @@ class MusicBot(discord.Client):
             await self.safe_delete_message(search_msg)
 
         if not info:
-            return Response("No videos found.", delete_after=30)
+            return Response("No videos found.")
 
-        def check(m):
-            return (m.content.lower()[0] in 'yn' or
-                    # hardcoded function name weeee
-                    m.content.lower().startswith(
-                        '{}{}'.format(self.config.command_prefix, 'search')) or
-                    m.content.lower().startswith('exit'))
+        result_string = "**Result {0}/{1}**\n{2}"
+        interface_string = "**Commands:**\n`play` play this result\n`addtoplaylist <playlist name>` add this result to a playlist\n\n`n` next result\n`p` previous result\n`exit` abort and exit"
 
-        for e in info['entries']:
-            result_message = await self.safe_send_message(
-                channel,
-                "Result %s/%s: %s" % (info['entries'].index(e) + 1,
-                                      len(info['entries']), e['webpage_url']))
+        current_result_index = 0
+        total_results = len(info["entries"])
 
-            confirm_message = await self.safe_send_message(
-                channel, "Is this ok? Type `y`, `n` or `exit`")
-            response_message = await self.wait_for_message(
-                30, author=author, channel=channel, check=check)
+        while True:
+            current_result = info["entries"][current_result_index]
+
+            result_message = await self.safe_send_message(channel, result_string.format(current_result_index + 1, total_results, current_result["webpage_url"]))
+            interface_message = await self.safe_send_message(channel, interface_string)
+            response_message = await self.wait_for_message(100, author=author, channel=channel, check=lambda msg: msg.content.strip().lower().split()[0] in ("play", "addtoplaylist", "n", "p", "exit"))
 
             if not response_message:
                 await self.safe_delete_message(result_message)
-                await self.safe_delete_message(confirm_message)
-                return Response("Ok nevermind.", delete_after=30)
-
-            # They started a new search query so lets clean up and bugger off
-            elif response_message.content.startswith(self.config.command_prefix) or \
-                    response_message.content.lower().startswith('exit'):
-
-                await self.safe_delete_message(result_message)
-                await self.safe_delete_message(confirm_message)
-                return
-
-            if response_message.content.lower().startswith('y'):
-                await self.safe_delete_message(result_message)
-                await self.safe_delete_message(confirm_message)
+                await self.safe_delete_message(interface_message)
                 await self.safe_delete_message(response_message)
+                return Response("Aborting search. [Timeout]")
 
-                await self.cmd_play(player, channel, author, [],
-                                    e['webpage_url'])
+            content = response_message.content.strip()
+            command, *args = content.lower().split()
 
-                return Response("Alright, coming right up!", delete_after=30)
-            else:
+            if command == "exit":
                 await self.safe_delete_message(result_message)
-                await self.safe_delete_message(confirm_message)
+                await self.safe_delete_message(interface_message)
                 await self.safe_delete_message(response_message)
+                return Response("Okay then. Search again soon")
+            elif command in "np":
+                # feels hacky but is actully genius
+                current_result_index += {"n": 1, "p": -1}[command]
+                current_result_index %= total_results
+            elif command == "play":
+                await self.cmd_play(player, channel, author, [], current_result["webpage_url"])
+                return Response("Alright, coming right up!")
+            elif command == "addtoplaylist":
+                if len(args) < 1:
+                    err_msg = await self.safe_send_message(channel, "You have to specify the playlist which you would like to add this result to")
+                    await asyncio.sleep(3)
+                    await self.safe_delete_message(err_msg)
+                    await self.safe_delete_message(result_message)
+                    await self.safe_delete_message(interface_message)
+                    await self.safe_delete_message(response_message)
+                    continue
 
-        return Response("Oh well :frowning:", delete_after=30)
+                playlistname = args[0]
+                add_entry = (await self.get_play_entry(player, channel, author, [],  current_result["webpage_url"]))[0]
+
+                if playlistname not in self.playlists.saved_playlists:
+                    if len(playlistname) < 3:
+                        err_msg = await self.safe_send_message(channel, "Your name is too short. Please choose one with at least three letters.")
+                        await asyncio.sleep(3)
+                        await self.safe_delete_message(err_msg)
+                        await self.safe_delete_message(result_message)
+                        await self.safe_delete_message(interface_message)
+                        await self.safe_delete_message(response_message)
+                        continue
+
+                    self.playlists.set_playlist(
+                        [add_entry], playlistname, author.id)
+                    return Response("Created a new playlist \"{}\" and added `{}`.".format(playlistname.title(),
+                                                                                           add_entry.title))
+
+                self.playlists.edit_playlist(
+                    playlistname, player.playlist, new_entries=[add_entry])
+                return Response("Added `{}` to playlist \"{}\".".format(add_entry.title, playlistname.title()))
+
+            await self.safe_delete_message(result_message)
+            await self.safe_delete_message(interface_message)
+            await self.safe_delete_message(response_message)
 
     @command_info("1.0.0", 1477180800, {
         "3.5.4":
@@ -1858,7 +1837,7 @@ class MusicBot(discord.Client):
                             title=current_entry["title"],
                             colour=hex_to_dec("FF88F0"),
                             url=current_entry["youtube"],
-                            description="\n\n*Playing from* {}".format(
+                            description="\n\nPlaying from **{}**".format(
                                 player.current_entry.title))
                         em.set_thumbnail(url=current_entry["cover"])
                         em.set_author(name=current_entry["artist"])
@@ -2199,16 +2178,29 @@ class MusicBot(discord.Client):
         (1497706997,
          "Queue doesn't show the current entry anymore, always shows the whole playlist and a bit of cleanup"
          ),
-         "3.5.5":
-         (1497795534, "Total time takes current entry into account")
+        "3.5.5":
+        (1497795534, "Total time takes current entry into account"),
+        "3.5.8": (1497825017, "Doesn't show the whole queue right away anymore, instead the queue command takes a quantity argument which defaults to 15")
     })
-    async def cmd_queue(self, channel, player):
+    async def cmd_queue(self, channel, player, num="15"):
         """
         ///|Usage
-        {command_prefix}queue
+        {command_prefix}queue [quantity]
         ///|Explanation
-        Show the current song queue
+        Show the first 15 entries of the current song queue.
+        One can specify the amount of entries to be shown.
         """
+
+        try:
+            quantity = int(num)
+
+            if quantity < 1:
+                return Response("Please provide a reasonable quantity")
+        except ValueError:
+            if num.lower() == "all":
+                quantity = len(player.playlist.entries)
+            else:
+                return Response("Quantity must be a number")
 
         lines = []
 
@@ -2220,7 +2212,8 @@ class MusicBot(discord.Client):
                 lines.append("            ►`{}.` **{}**".format(
                     i, nice_cut(item["name"], 35)))
 
-        for i, item in enumerate(player.playlist, 1):
+        entries = list(player.playlist.entries)[:quantity]
+        for i, item in enumerate(entries, 1):
             origin_text = ""
             if "playlist" in item.meta:
                 origin_text = "from playlist **{}**".format(
@@ -2245,14 +2238,17 @@ class MusicBot(discord.Client):
         if player.current_entry:
             total_time += player.current_entry.end_seconds - player.progress
 
-        lines.append("\n**Total duration:** `{}`".format(
+        lines.append("\nShowing {} out of {} entr{}".format(len(entries), len(
+            player.playlist.entries), "y" if len(entries) == 1 else "ies"))
+        lines.append("**Total duration:** `{}`".format(
             format_time(total_time), True, 5, 2))
 
         return Response("\n".join(lines))
 
     @command_info("3.3.3", 1497197957, {
         "3.3.8": (1497474312,
-                  "added failsafe for player not currently playing something")
+                  "added failsafe for player not currently playing something"),
+        "3.5.8": (1497825334, "Adjusted design to look more like `queue`'s style")
     })
     async def cmd_history(self, channel, player):
         """
@@ -2267,12 +2263,12 @@ class MusicBot(discord.Client):
         lines = []
         for ind, entry in enumerate(player.playlist.history, 1):
             lines.append(
-                "{}. \"{}\" **{} ago**".format(ind, entry.title,
-                                               format_time(
-                                                   seconds_passed,
-                                                   round_seconds=True,
-                                                   round_base=1,
-                                                   max_specifications=2)))
+                "`{}.` **{}** {} ago".format(ind, nice_cut(clean_songname(entry.title), 40),
+                                             format_time(
+                    seconds_passed,
+                    round_seconds=True,
+                    round_base=1,
+                    max_specifications=2)))
             seconds_passed += entry.end_seconds
 
         return Response("\n".join(lines))
@@ -2327,7 +2323,7 @@ class MusicBot(discord.Client):
 
         deleted = 0
         async for entry in self.logs_from(
-            channel, search_range, before=message):
+                channel, search_range, before=message):
             if entry == self.server_specific_data[channel.server][
                     'last_np_msg']:
                 continue
@@ -2617,7 +2613,7 @@ class MusicBot(discord.Client):
         possible_stations = self.radios.get_all_stations()
         shuffle(possible_stations)
 
-        interface_string = "**{0.name}**\n*language:* {0.language}\n\n`Type \"yes\" or \"no\"`"
+        interface_string = "**{0.name}**\nlanguage: `{0.language}`\n\n`Type `yes` or `no`"
 
         for station in possible_stations:
             msg = await self.safe_send_message(
@@ -3019,7 +3015,7 @@ class MusicBot(discord.Client):
                                     targetChannel = ch
                     if targetChannel is None:
                         return Response(
-                            "Cannot find *{}* in any voice channel".format(
+                            "Cannot find **{}** in any voice channel".format(
                                 ", ".join([x.mention for x in user_mentions])),
                             delete_after=25)
                 else:
@@ -3079,10 +3075,9 @@ class MusicBot(discord.Client):
         (1497552134,
          "Added a way to not only replay the current song, but also the last one"
          ),
-        "3.4.8":
-        (1497649772,
-         "Fixed the issue which blocked Giesela from replaying the last song"),
-        "3.5.2": (1497714171, "Can now replay an index from the history")
+        "3.4.8": (1497649772, "Fixed the issue which blocked Giesela from replaying the last song"),
+        "3.5.2": (1497714171, "Can now replay an index from the history"),
+        "3.5.9": (1497899132, "Now showing the tile of the entry that is going to be replayed")
     })
     async def cmd_replay(self, player, choose_last=""):
         """
@@ -3121,7 +3116,7 @@ class MusicBot(discord.Client):
             return Response("There's nothing for me to replay")
         try:
             player.playlist._add_entry_next(replay_entry)
-            return Response("Replaying the song")
+            return Response("Replaying **{}**".format(replay_entry.title))
 
         except Exception as e:
             return Response("Can't replay {}:\n```\n{}\n```".format(
@@ -3161,7 +3156,7 @@ class MusicBot(discord.Client):
             set_items = items[1:]
             if self.random_sets.create_set(set_name, set_items):
                 return Response(
-                    "Created set *{0}*\nUse `{1}random {0}` to use it!".format(
+                    "Created set **{0}**\nUse `{1}random {0}` to use it!".format(
                         set_name, self.config.command_prefix),
                     delete_after=60)
             else:
@@ -3226,7 +3221,7 @@ class MusicBot(discord.Client):
 
         if len(items) <= 0 or items is None:
             return Response(
-                "Is your name \"{0}\" by any chance?\n(This is not how this command works. Use `{1}help random` to find out how not to be a stupid *{0}* anymore)".
+                "Is your name \"{0}\" by any chance?\n(This is not how this command works. Use `{1}help random` to find out how not to be a stupid **{0}** anymore)".
                 format(author.name, self.config.command_prefix),
                 delete_after=30)
 
@@ -3470,7 +3465,7 @@ class MusicBot(discord.Client):
             video = player.playlist.entries[index].title
             del player.playlist.entries[index]
             await self.safe_send_message(
-                channel, "Removed *{0}* from the playlist".format(video))
+                channel, "Removed **{0}** from the playlist".format(video))
             return
 
         except:
@@ -3822,7 +3817,7 @@ class MusicBot(discord.Client):
             if len(results) < 1:
                 return Response("**Didn't find any cards!**", delete_after=15)
 
-            card_string = "{0.id}. \"*{1}*\""
+            card_string = "{0.id}. \"{1}\""
             cards = []
             for card in results:
                 cards.append(
@@ -4051,7 +4046,7 @@ class MusicBot(discord.Client):
                 return Response(
                     "**Didn't find any question cards!**", delete_after=15)
 
-            card_string = "{0.id}. \"*{1}*\""
+            card_string = "{0.id}. \"{1}\""
             cards = []
             for card in results:
                 cards.append(
@@ -4277,14 +4272,14 @@ class MusicBot(discord.Client):
             for current_game in game_list:
                 msg = await self.safe_send_message(
                     channel,
-                    "*How about this game:*\n\n**{}**\n{}\n\nType *y*, *n* or *exit*".
+                    "How about this game:\n\n**{}**\n{}\n\nType `y`, `n` or `exit`".
                     format(current_game["name"], current_game["description"]))
                 response = await self.wait_for_message(
                     100, author=author, channel=channel, check=check)
 
                 if not response or response.content.startswith(
                         self.config.command_prefix) or response.content.lower(
-                        ).startswith('exit'):
+                ).startswith('exit'):
                     await self.safe_delete_message(msg)
                     await self.safe_delete_message(response)
                     await self.safe_send_message(channel, "Nevermind then.")
@@ -4384,7 +4379,7 @@ class MusicBot(discord.Client):
                     if str(reaction.emoji) == "💾" and reaction.count > 1:
                         await self.safe_send_message(
                             user,
-                            "The save code is: *{0}*\nUse `{1}game 2048 {2}` to continue your current game".
+                            "The save code is: **{0}**\nUse `{1}game 2048 {2}` to continue your current game".
                             format(
                                 escape_dis(game.get_save()),
                                 self.config.command_prefix, game.get_save()))
@@ -4400,7 +4395,7 @@ class MusicBot(discord.Client):
 
                 if direction is None:
                     await self.safe_delete_message(msg)
-                    turn_information = "| *You didn't specifiy the direction*" if turn_information is not "" else turn_information
+                    turn_information = "| You didn't specifiy the direction" if turn_information is not "" else turn_information
 
             # self.log ("Chose the direction " + str (direction))
             game.move(direction)
@@ -4450,7 +4445,7 @@ class MusicBot(discord.Client):
             current_status = game.get_beautified_string()
             msg = await self.safe_send_message(
                 channel,
-                "**Hangman**\n*{} trie{} left*\n\n{}\n\n`Send the letter you want to guess or type \"exit\" to exit.`".
+                "**Hangman**\n{} trie{} left\n\n{}\n\n`Send the letter you want to guess or type \"exit\" to exit.`".
                 format(game.tries_left, "s"
                        if game.tries_left != 1 else "", current_status))
             response = await self.wait_for_message(
@@ -4458,7 +4453,7 @@ class MusicBot(discord.Client):
 
             if not response or response.content.lower().startswith(
                     self.config.command_prefix) or response.content.lower(
-                    ).startswith('exit'):
+            ).startswith('exit'):
                 await self.safe_delete_message(msg)
                 await self.safe_send_message(
                     channel, "Aborting this Hangman game. Thanks for playing!")
@@ -4707,13 +4702,14 @@ class MusicBot(discord.Client):
         "3.5.1":
         (1497706811,
          "Giesela finally keeps track whether a certain entry comes from a playlist or not"
-         )
+         ),
+        "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page.")
     })
     async def cmd_playlist(self, channel, author, server, player,
                            leftover_args):
         """
         ///|Load
-        `{command_prefix}playlist load <savename> [add | replace] [none | alphabetical | length | random] [startindex] [endindex (inclusive)]`\n\nTrust me, it's more complicated than it looks
+        `{command_prefix}playlist load <savename> [add | replace] [none | random] [startindex] [endindex (inclusive)]`\n\nTrust me, it's more complicated than it looks
         ///(NL)|List all playlists
         `{command_prefix}playlist showall [alphabetical | author | entries | playtime | random | replays]`
         ///(NL)|Build a new playlist
@@ -4812,7 +4808,7 @@ class MusicBot(discord.Client):
 
             sort_mode = additional_args[1].lower(
             ) if len(additional_args) > 1 and additional_args[1].lower(
-            ) in sort_modes.keys() else "none"
+            ) in sort_modes.keys() else "random"
 
             if sort_mode == "random":
                 shuffle(clone_entries)
@@ -4895,7 +4891,7 @@ class MusicBot(discord.Client):
                     clone_entries, additional_args[0].lower(), author.id)
 
             return Response(
-                "*{}* {}has been cloned to *{}*".format(
+                "**{}** {}has been cloned to **{}**".format(
                     savename, "(from the {}. to the {}. index) ".format(
                         str(from_index + 1), str(to_index + 1)) if
                     from_index is not 0 or to_index is not len(clone_entries)
@@ -4905,7 +4901,8 @@ class MusicBot(discord.Client):
         elif argument == "showall":
             if len(self.playlists.saved_playlists) < 1:
                 return Response(
-                    "There are no saved playlists.\n**You** could add one though. Type *!help playlist* to see how!",
+                    "There are no saved playlists.\n**You** could add one though. Type `{}help playlist` to see how!".format(
+                        self.config.command_prefix),
                     delete_after=40)
 
             response_text = "**Found the following playlists:**\n\n"
@@ -4929,7 +4926,7 @@ class MusicBot(discord.Client):
 
             for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.playlist)
-                response_text += "**{}.** **\"{}\"** *by {}*\n```\n  {} entr{}\n  played {} time{}\n  {}```\n\n".format(
+                response_text += "**{}.** **\"{}\"** by {}\n```\n  {} entr{}\n  played {} time{}\n  {}```\n\n".format(
                     iteration,
                     pl.replace("_", " ").title(),
                     self.get_global_user(infos["author"]).mention,
@@ -5044,11 +5041,11 @@ class MusicBot(discord.Client):
         savename = _savename
         user_savename = savename
 
-        interface_string = "**{}** by *{}* ({} song{} with a total length of {})\n\n{}\n\n**You can use the following commands:**\n`add <query>`: Add a video to the playlist (this command works like the normal `{}play` command)\n`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index\n`rename <newname>`: rename the current playlist\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
+        interface_string = "**{}** by **{}** ({} song{} with a total length of {})\n\n{}\n\n**You can use the following commands:**\n`add <query>`: Add a video to the playlist (this command works like the normal `{}play` command)\n`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index\n`rename <newname>`: rename the current playlist\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
 
-        extras_string = "**{}** by *{}* ({} song{} with a total length of {})\n\n**Extra functions:**\n`sort <alphabetical | length | random>`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n\n`abort`: return to main screen"
+        extras_string = "**{}** by **{}** ({} song{} with a total length of {})\n\n**Extra functions:**\n`sort <alphabetical | length | random>`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n\n`abort`: return to main screen"
 
-        edit_string = "**{}** by *{}* ({} song{} with a total length of {})\n```\nentry_information\n```\n\n**Edit functions:**\n`rename <newname>`: rename the entry\n`setstart <timestamp>`: set the starting time of the song\n`setend <timestamp>`: set the ending time of the song\n\n`abort`: return to main screen"
+        edit_string = "**{}** by **{}** ({} song{} with a total length of {})\n```\nentry_information\n```\n\n**Edit functions:**\n`rename <newname>`: rename the entry\n`setstart <timestamp>`: set the starting time of the song\n`setend <timestamp>`: set the ending time of the song\n\n`abort`: return to main screen"
 
         playlist = self.playlists.get_playlist(_savename, player.playlist)
 
@@ -5095,7 +5092,7 @@ class MusicBot(discord.Client):
                 abort = True
                 break
 
-            elif response_message.content.lower ().startswith(self.config.command_prefix) or \
+            elif response_message.content.lower().startswith(self.config.command_prefix) or \
                     response_message.content.lower().startswith('exit'):
                 abort = True
 
@@ -5155,9 +5152,9 @@ class MusicBot(discord.Client):
                         for x in range(len(playlist["entries"]))
                         if x not in indieces
                     ]
-                    it, ov = divmod(
-                        int(playlist["entry_count"]), items_per_page)
-                    entries_page = it - 1 if ov == 0 else it
+                    # it, ov = divmod(
+                    #     int(playlist["entry_count"]), items_per_page)
+                    # entries_page = it - 1 if ov == 0 else it
 
             elif split_message[0].lower() == "rename":
                 if arguments is not None and len(
@@ -5187,7 +5184,7 @@ class MusicBot(discord.Client):
 
                 if not resp.content.lower().startswith(
                         self.config.command_prefix) and not resp.content.lower(
-                        ).startswith('abort'):
+                ).startswith('abort'):
                     _cmd = resp.content.split()
                     cmd = _cmd[0].lower()
                     args = _cmd[1:] if len(_cmd) > 1 else None
@@ -5272,7 +5269,7 @@ class MusicBot(discord.Client):
             await self.safe_delete_message(interface_message)
 
         if abort:
-            return Response("Closed *{}* without saving".format(savename))
+            return Response("Closed **{}** without saving".format(savename))
             self.log("Closed the playlist builder")
 
         if save:
@@ -5298,7 +5295,8 @@ class MusicBot(discord.Client):
          "Changed command name from \"addplayingtoplaylist\" to \"addtoplaylist\", thanks Paulo"
          ),
         "3.5.5": (1497792167,
-                  "Now displaying what entry has been added to the playlist")
+                  "Now displaying what entry has been added to the playlist"),
+        "3.5.8": (1497826743, "Even more information displaying")
     })
     async def cmd_addtoplaylist(self, channel, author, player, playlistname):
         """
@@ -5334,12 +5332,12 @@ class MusicBot(discord.Client):
                     "Your name is too short. Please choose one with at least three letters."
                 )
             self.playlists.set_playlist([add_entry], playlistname, author.id)
-            return Response("Created a new playlist and added `{}`.".format(
-                add_entry.title))
+            return Response("Created a new playlist \"{}\" and added `{}`.".format(playlistname.title(),
+                                                                                   add_entry.title))
 
         self.playlists.edit_playlist(
             playlistname, player.playlist, new_entries=[add_entry])
-        return Response("Added `{}` to the playlist.".format(add_entry.title))
+        return Response("Added `{}` to playlist \"{}\".".format(add_entry.title, playlistname.title()))
 
     @command_info("1.9.2", 1479945600, {
         "3.3.6": (1497387101,
@@ -5347,7 +5345,8 @@ class MusicBot(discord.Client):
         "3.4.4":
         (1497611753,
          "Changed command name from \"removeplayingfromplaylist\" to \"removefromplaylist\", thanks Paulo"
-         )
+         ),
+        "3.5.8": (1497826917, "Now displaying the names of the song and the playlist")
     })
     async def cmd_removefromplaylist(self, channel, author, player,
                                      playlistname):
@@ -5378,11 +5377,11 @@ class MusicBot(discord.Client):
                                                      current_timestamp[0])
 
         if playlistname not in self.playlists.saved_playlists:
-            return Response("There's no playlist with this name.")
+            return Response("There's no playlist the name \"{}\".".format(playlistname.title()))
 
         self.playlists.edit_playlist(
             playlistname, player.playlist, remove_entries=[remove_entry])
-        return Response("Removed the current song from the playlist.")
+        return Response("Removed `{}` from playlist \"{}\".".format(remove_entry.title, playlistname))
 
     async def cmd_setentrystart(self, player, playlistname):
         """
@@ -5734,7 +5733,7 @@ class MusicBot(discord.Client):
 
             # action 1 (message)
             if selected_action == 1:
-                action_message = "Your reminder *{reminder.name}* is due"
+                action_message = "Your reminder **{reminder.name}** is due"
                 action_channel = None
                 action_delete_after = 0
                 action_delete_previous = False
@@ -5752,7 +5751,7 @@ class MusicBot(discord.Client):
                 while action_channel is None:
                     msg = await self.safe_send_message(
                         channel,
-                        "To which channel should the message be sent?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"me\" for a private message\n:white_small_square: \"this\" to select the current channel\n:white_small_square: You can also @mention people or #mention a channel"
+                        "To which channel should the message be sent?\nPossible inputs:\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"me\" for a private message\n:white_small_square: \"this\" to select the current channel\n:white_small_square: You can also @mention people or #mention a channel"
                     )
                     response = await self.wait_for_message(
                         author=author, channel=channel)
@@ -5834,7 +5833,7 @@ class MusicBot(discord.Client):
                 # find playback channel
                 msg = await self.safe_send_message(
                     channel,
-                    "To which channel should the video be played?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"this\" to select your current channel"
+                    "To which channel should the video be played?\nPossible inputs:\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"this\" to select your current channel"
                 )
                 response = await self.wait_for_message(
                     author=author, channel=channel)
@@ -5856,7 +5855,7 @@ class MusicBot(discord.Client):
                 repeat_every=reminder_repeat,
                 repeat_end=reminder_end)
             return Response(
-                "Created a reminder called *{}*\ndue: {}\nrepeat: {}\nrepeat end: {}\naction: {}".
+                "Created a reminder called **{}**\ndue: {}\nrepeat: {}\nrepeat end: {}\naction: {}".
                 format(reminder_name, reminder_due, reminder_repeat,
                        reminder_end, reminder_action))
 
@@ -6177,7 +6176,7 @@ class MusicBot(discord.Client):
         async for msg in self.logs_from(channel, limit=int(number)):
             increment = 1
             if last_msg is not None and msg.author.id == last_msg.author.id and abs(
-                (last_msg.timestamp - msg.timestamp).total_seconds()) < 10:
+                    (last_msg.timestamp - msg.timestamp).total_seconds()) < 10:
                 spam += 1
                 last_msg = msg
                 increment = 0
@@ -6437,7 +6436,7 @@ class MusicBot(discord.Client):
         em = Embed(title="TRANSLATION")
         translator = Translator(target_language)
         async for message in self.logs_from(
-            channel, limit=limit, after=start_point):
+                channel, limit=limit, after=start_point):
             n = "**{0}** - {1.year:0>4}/{1.month:0>2}/{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(
                 message.author.display_name, message.timestamp)
 
@@ -6489,7 +6488,7 @@ class MusicBot(discord.Client):
             # {}".format(format_time((datetime(2017, 5, 15) -
             # datetime.now()).total_seconds(), True, 5, 2, True, True)))
             async for msg in self.logs_from(
-                channel, limit=100000):
+                    channel, limit=100000):
                 if msg.id != message.id and message_content.lower().strip(
                 ) in msg.content.lower().strip():
                     if target_author is None or target_author.id == msg.author.id:
@@ -6528,39 +6527,13 @@ class MusicBot(discord.Client):
             await self.send_message(quote_to_channel, embed=em)
         return
 
-    @block_user
-    async def cmd_secret(self, author, channel, secret_id):
-        if secret_id == "48856":
-            if not channel.is_private:
-                return Response("I said private chat!")
-            author_answers = {
-                "277112528159637515":
-                "Ich hatte leider keine Zeit mehr hier was sinnvolles hinzuschreiben...;;Es war mir eine Ehre",
-                "277112984919212035":
-                "I was gonna write something nice here but because what happened *happened*....;;Well, I'm not in the mood to write something at all...;;Goodbye Talal, it was nice knowing you!",
-                "284838538556604418":
-                "Hallo!;;Wenn ich mich nicht komplett irre, sollte dieser Text an Bex geschickt werden.;;Falls du nicht Bex bist, dann w00ps, das wär dann wohl blöd gelaufen.;;Ich traue mir eigentlich schon zu, dass ich das richtig hinbekomme. *hust*.;;Hmm... Das ist der zweite Text den ich schreibe (der erste ging an Annie falls du dich fragst) und ich habe auch bei dir keine Ahnung was ich hier rein schreiben soll.;;Ich kenne dich (leider) kaum und daher trau ich mich jetzt nicht einfach irgendwas draufloszuschreiben... Sonst langweile/nerve ich dich noch zu tode.;;Eigentlich hast du dir das ja selbst zuzuschreiben, schliesslich hast du den Command eingegeben... Und ich glaube auch, dass du diesen Text hier gar nie liest, was das was ich hier mache zu einem Monolog macht.;;Das klingt fast ein wenig traurig.;;Aber! Da ich mir fast 100%ig sicher bin, dass du das sowieso nicht liest, kann ich sehrwohl auch etwas chaotischer und offen sein.;;uuund ich hab grad jegliche Lust zu schreiben verloren, da Diana mich wieder fertig macht....;;Seufz...;;Das wär's wohl dann auch gewesen. Eigentlich wollte ich schon ein wenig mehr schreiben;;aber ich kann die notwendige Motivation nicht aufbringen, wenn ich mich so mies fühle.;;Gute Nacht/Tag/was_auch_immer!;;Der Idiot der sich so sehr von anderen Leuten beeinflussen lässt, dass er jegliche Motivation verliert",
-                "237185271303503872":
-                "Oh;;Ich hab eigentlich nicht damit gerechnet, dass du diesen Command ausführen würdest. Ich wollte eigentlich nur Diana überraschen, falls sie wirklich meine traurigen Konversationen mit Giesela lesen sollte.;;Was könnte ich denn jetzt hier für dich hinterlassen... Vielleicht könnte ich dir eine Geschichte erzählen...;;Aber ich hab das Gefühl, dass ich dich nur langweilen würde und das möchte ich sowas von nicht. Ich fühl mich gerade relativ sicher, weil ich davon ausgehe, dass du diese Nachricht gar nie liest.;;Wahrscheinlich wäre es das Beste...;;Ich liebe es einfach solche dummen *Spiele* zu machen und du hast den Fehler gemacht und diesen Command ausgeführt...;;Sorry, mir kommt echt nichts mehr in den Sinn, darum laber ich jetzt einfach ganz dumm drauf los.;;Ich weiss nicht wie du im Moment zu mir stehst, ich hab absolut keine Ahnung, aber ich habe das starke Gefühl, dass du mich nicht besonders magst.;;Du hättest auch allen Grund dazu, ich weiss gar nicht warum ich mir das überhaupt überlegen muss...;;Was ich aber unbedingt noch sagen wollte;;Ich hätte furchtbar gerne mit dir HOTS gespielt. Ich bin mir bewusst, dass du das Spiel nicht magst und ich will dich da auch gar nicht umstimmen, eigentlich wollte ich nur diese blöden Skins für Overwatch haben.;;Aber du hast da immer nur Talal angesprochen und mir fehlte zu dieser Zeit jegliches Selbstvertrauen um irgendetwas zu fragen, vorallem weil ich eben das Gefühl hatte, dass du nicht sonderlich gut auf mich zu sprechen seist.;;Wie du siehst ist dieser Text ein absolutes Durcheinander und das hauptsächlich weil ich nicht davon ausgehe, dass das hier überhaupt liest.;;Jeder hat seinen eigenen kleinen Text hier, deiner ist der Erste den ich schreibe. Wenn du das weitersagen möchtest, nur zu!;;Ich habe mir jede Möglichkeit genommen zu überprüfen ob du das jemals liest oder nicht und daher bitte ich dich auch mir das nicht mitzuteilen.;;Wenn ich erfahren würde, dass du all dies wirklich gelesen hast, würd ich wahrscheinlich erstmal in Ohnmacht fallen.;;Jedenfalls, uhm... gute Abschiedsworte waren nie meine Stärke. Eigentlich sollte ich mich ja auch nicht von dir verabschieden.;;Mein heimliches Ziel wäre sogar, dass dieser Text endlich mal ein Gespräch anzetteln würde, es ist seit längerem ein kleiner Wunsch von mir, mal mit dir ein wenig zu schreiben.;;Der Text hört hier jetzt einfach auf. Fertig. Schluss. Und weiterhin schönen Tag :);;Simon."
-            }
-            if author.id in author_answers:
-                story = author_answers[author.id]
-                for block in story.split(";;"):
-                    write_time = 60 * len(block) / 250
-                    await self.send_typing(channel)
-                    await asyncio.sleep(write_time)
-                    await self.safe_send_message(author, block)
-                    await asyncio.sleep(random() * 2 + .2)
-                return
-            else:
-                return Response("No idea who you are... bugger off!")
-
     @command_info("3.2.5", 1496428380, {
         "3.3.9": (1497521393, "Added edit sub-command"),
         "3.4.1": (1497550771,
                   "Added the filter \"mine\" to the listing function"),
         "3.4.6": (1497617827,
-                  "when listing bookmarks, they musn't be \"inline\".")
+                  "when listing bookmarks, they musn't be \"inline\"."),
+        "3.5.8": (1497827057, "Editing bookmarks now works as expected")
     })
     async def cmd_bookmark(self, author, player, leftover_args):
         """
@@ -6585,17 +6558,18 @@ class MusicBot(discord.Client):
 
                 if "mine" in leftover_args:
                     bookmarks = filter(
-                        lambda x: bookmark.get_bookmark(x)["author_id"] == author.id,
+                        lambda x: bookmark.get_bookmark(
+                            x)["author_id"] == author.id,
                         bookmarks)
 
                 for bm in bookmarks:
-                    bm_name = clean_songname(bm["name"])
+                    bm_name = bm["name"]
                     bm_author = self.get_global_user(
                         bm["author_id"]).display_name
                     bm_timestamp = to_timestamp(bm["timestamp"])
                     bm_id = bm["id"]
                     t = "**{}**".format(bm_name)
-                    v = "`{}` *starting at* `{}` *by* **{}**".format(
+                    v = "`{}` starting at `{}` *by* **{}**".format(
                         bm_id, bm_timestamp, bm_author)
                     em.add_field(name=t, value=v, inline=False)
                 return Response(embed=em)
@@ -6623,10 +6597,11 @@ class MusicBot(discord.Client):
                         "Please also specify what you want to change")
 
                 new_timestamp = parse_timestamp(leftover_args[-1])
-                if new_timestamp:
-                    new_name = " ".join(leftover_args[2:-1]) or None
+                if new_timestamp is not None:  # 0 evaluates to false so I need to check this oldschool-like
+                    new_name = " ".join(
+                        leftover_args[2:-1]) if len(leftover_args) > 3 else None
                 else:
-                    new_name = " ".join(leftover_args[2:]) or None
+                    new_name = " ".join(leftover_args[2:])
 
                 if bookmark.edit_bookmark(bm_id, new_name, new_timestamp):
                     return Response(
@@ -6640,7 +6615,7 @@ class MusicBot(discord.Client):
                     player.playlist._add_entry(
                         URLPlaylistEntry.from_dict(player.playlist, bm[
                             "entry"]))
-                    return Response("Loaded bookmark `{0}` *by **{1}***".
+                    return Response("Loaded bookmark `{0}` by **{1}**".
                                     format(bm["name"],
                                            self.get_global_user(
                                                bm["author_id"]).display_name))
@@ -6738,6 +6713,60 @@ class MusicBot(discord.Client):
                 "Couldn't find any information on the `{}` command".format(
                     command))
 
+    @command_info("3.5.6", 1497819288)
+    async def cmd_version(self):
+        """
+        ///|Usage
+        `{command_prefix}version`
+        ///|Explanation
+        Some more informat about the current version and what's to come.
+        """
+        v_code, v_name = BOTVERSION.split("_")
+        dev_code, dev_name = get_dev_version()
+        changelog = get_dev_changelog()
+
+        desc = "Current Version is `{}`\nDevelopment is at `{}`\n\n**What's to come:**\n\n".format(
+            BOTVERSION, dev_code + "_" + dev_name)
+        desc += "\n".join("● " + l for l in changelog)
+        em = Embed(title="Version " + v_name, description=desc,
+                   url="https://siku2.github.io/Giesela", colour=hex_to_dec("67BE2E"))
+
+        return Response(embed=em)
+
+    @command_info("3.5.7", 1497823283)
+    async def cmd_interact(self, message):
+        """
+        ///|Usage
+        `{command_prefix}interact <query>`
+        ///|Explanation
+        Use every day language to control Giesela
+        ///|Disclaimer
+        **Help out with the development of a "smarter" Giesela by testing out this new future!**
+        """
+
+        matcher = "^\{}?interact".format(self.config.command_prefix)
+        query = re.sub(matcher, "", message.content, flags=re.MULTILINE)
+        if not query:
+            return Response("Please provide a query for me to work with")
+
+        print("[INTERACT] \"{}\"".format(query))
+
+        params = {"v": "18/06/2017", "q": query}
+        headers = {"Authorization": "Bearer 47J7GSQPY2DJPLGUNFZVNHAMGU7ARCRD"}
+        resp = requests.get("https://api.wit.ai/message",
+                            params=params, headers=headers)
+        data = resp.json()
+        entities = data["entities"]
+
+        msg = ""
+
+        for entity, data in entities.items():
+            d = data[0]
+            msg += "**{}** [{}] ({}% sure)\n".format(entity,
+                                                     d["value"], round(d["confidence"] * 100, 1))
+
+        return Response(msg)
+
     @owner_only
     async def cmd_shutdown(self, channel):
         await self.safe_send_message(channel, ":wave:")
@@ -6806,7 +6835,8 @@ class MusicBot(discord.Client):
             if self.config.owned_channels and message.channel.id not in self.config.owned_channels:
                 return
 
-        if message.author == self.user:
+        # don't react to own messages or messages from bots
+        if message.author == self.user or message.author.bot:
             # self.log("Ignoring command from myself (%s)" %
             #          message.content)
             return

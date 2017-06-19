@@ -1,6 +1,5 @@
-import json
-
 import configparser
+import json
 
 from .exceptions import HelpfulError
 
