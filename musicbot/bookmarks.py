@@ -2,7 +2,7 @@ import json
 import re
 from random import randint
 
-from .utils import (similarity, clean_songname)
+from .utils import clean_songname, similarity
 
 
 def ensure_saving(func):
@@ -97,7 +97,8 @@ class Bookmarks:
         #     return False
 
         bookmark_id = self.get_id()
-        bookmark_name = bookmark_name if bookmark_name else clean_songname(entry.title)
+        bookmark_name = bookmark_name if bookmark_name else clean_songname(
+            entry.title)
         entry_data = entry.to_dict()
         entry_data["start_seconds"] = timestamp
 
@@ -123,7 +124,7 @@ class Bookmarks:
         new_data = {}
         if new_name:
             new_data["name"] = new_name
-        if new_timestamp is not None: # again, 0=False thus I need to check it this way
+        if new_timestamp is not None:  # again, 0=False thus I need to check it this way
             new_data["timestamp"] = new_timestamp
             data["entry"]["start_seconds"] = new_timestamp
 
@@ -139,6 +140,7 @@ class Bookmarks:
             return False
 
         return self.bookmarks.pop(id)
+
 
 bookmark = Bookmarks()
 # bookmark_singleton = Bookmarks()

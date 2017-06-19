@@ -1,3 +1,5 @@
+import asyncio
+import configparser
 import datetime
 import inspect
 import json
@@ -21,8 +23,7 @@ from textwrap import dedent, indent
 import aiohttp
 import discord
 import goslate
-# import newspaper
-from .tungsten import Tungsten
+import requests
 import wikipedia
 from discord import Embed, utils
 from discord.enums import ChannelType
@@ -34,17 +35,13 @@ from moviepy import editor, video
 from openpyxl import Workbook
 from pyshorteners import Shortener
 
-import asyncio
-import configparser
-import requests
-
 from . import downloader, exceptions
 from .bookmarks import bookmark
 from .cleverbot import CleverWrap
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
-from .constants import (AUDIO_CACHE_PATH, get_dev_version, DISCORD_MSG_CHAR_LIMIT,
-                        get_master_version, get_dev_changelog)
+from .constants import (AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT,
+                        get_dev_changelog, get_dev_version, get_master_version)
 from .entry import URLPlaylistEntry
 from .games.game_2048 import Game2048
 from .games.game_cah import GameCAH
@@ -64,6 +61,8 @@ from .saved_playlists import Playlists
 from .settings import Settings
 from .socket_server import SocketServer
 from .translate import Translator
+# import newspaper
+from .tungsten import Tungsten
 from .twitter_api import get_tweet
 from .utils import (clean_songname, create_bar, escape_dis, format_time,
                     hex_to_dec, load_file, nice_cut, ordinal, paginate,
@@ -467,7 +466,8 @@ class MusicBot(discord.Client):
                 'last_np_msg']
             if last_np_msg and last_np_msg.channel == channel:
 
-                async for lmsg in self.logs_from(channel, limit=1): #if the last np message isn't the last message in the channel; delete it
+                # if the last np message isn't the last message in the channel; delete it
+                async for lmsg in self.logs_from(channel, limit=1):
                     if lmsg != last_np_msg and last_np_msg:
                         await self.safe_delete_message(last_np_msg)
                         self.server_specific_data[channel.server][
@@ -935,12 +935,12 @@ class MusicBot(discord.Client):
 
         for ch in channels:
             if summoner_id is not None and any(
-                [x.id == summoner_id for x in ch.voice_members]):
+                    [x.id == summoner_id for x in ch.voice_members]):
                 target_channel = ch
                 break
 
             if len(ch.voice_members) - sum(
-                [.5 for x in ch.voice_members if x.bot]) > max_members:
+                    [.5 for x in ch.voice_members if x.bot]) > max_members:
                 target_channel = ch
                 max_members = len(ch.voice_members)
 
@@ -1060,8 +1060,7 @@ class MusicBot(discord.Client):
                 title="GIESELA HELP",
                 url="http://siku2.github.io/Giesela/",
                 colour=hex_to_dec("828c51"),
-                description=
-                "plz be welcum to mah new list of the **most fab** commands\nYou can always use `{0}help <cmd>` to get more detailed information on a command".
+                description="plz be welcum to mah new list of the **most fab** commands\nYou can always use `{0}help <cmd>` to get more detailed information on a command".
                 format(self.config.command_prefix))
 
             music_commands = "`{0}play` play dem shit\n`{0}search` make sure you get ur shit\n`{0}stream` when u wanna go live\n`{0}pause` need a break?\n`{0}volume` oh shit turn it up\n`{0}seek` hide and snaek\n`{0}fwd` sanic fast, sanic skip\n`{0}rwd` go baek in tiem".format(
@@ -2200,9 +2199,9 @@ class MusicBot(discord.Client):
         (1497706997,
          "Queue doesn't show the current entry anymore, always shows the whole playlist and a bit of cleanup"
          ),
-         "3.5.5":
-         (1497795534, "Total time takes current entry into account"),
-         "3.5.8":(1497825017, "Doesn't show the whole queue right away anymore, instead the queue command takes a quantity argument which defaults to 15")
+        "3.5.5":
+        (1497795534, "Total time takes current entry into account"),
+        "3.5.8": (1497825017, "Doesn't show the whole queue right away anymore, instead the queue command takes a quantity argument which defaults to 15")
     })
     async def cmd_queue(self, channel, player, num="15"):
         """
@@ -2260,7 +2259,8 @@ class MusicBot(discord.Client):
         if player.current_entry:
             total_time += player.current_entry.end_seconds - player.progress
 
-        lines.append("\nShowing {} out of {} entr{}".format(len(entries), len(player.playlist.entries), "y" if len(entries) == 1 else "ies"))
+        lines.append("\nShowing {} out of {} entr{}".format(len(entries), len(
+            player.playlist.entries), "y" if len(entries) == 1 else "ies"))
         lines.append("**Total duration:** `{}`".format(
             format_time(total_time), True, 5, 2))
 
@@ -2269,7 +2269,7 @@ class MusicBot(discord.Client):
     @command_info("3.3.3", 1497197957, {
         "3.3.8": (1497474312,
                   "added failsafe for player not currently playing something"),
-        "3.5.8":(1497825334, "Adjusted design to look more like `queue`'s style")
+        "3.5.8": (1497825334, "Adjusted design to look more like `queue`'s style")
     })
     async def cmd_history(self, channel, player):
         """
@@ -2285,11 +2285,11 @@ class MusicBot(discord.Client):
         for ind, entry in enumerate(player.playlist.history, 1):
             lines.append(
                 "`{}.` **{}** {} ago".format(ind, nice_cut(clean_songname(entry.title), 40),
-                                               format_time(
-                                                   seconds_passed,
-                                                   round_seconds=True,
-                                                   round_base=1,
-                                                   max_specifications=2)))
+                                             format_time(
+                    seconds_passed,
+                    round_seconds=True,
+                    round_base=1,
+                    max_specifications=2)))
             seconds_passed += entry.end_seconds
 
         return Response("\n".join(lines))
@@ -2344,7 +2344,7 @@ class MusicBot(discord.Client):
 
         deleted = 0
         async for entry in self.logs_from(
-            channel, search_range, before=message):
+                channel, search_range, before=message):
             if entry == self.server_specific_data[channel.server][
                     'last_np_msg']:
                 continue
@@ -4301,7 +4301,7 @@ class MusicBot(discord.Client):
 
                 if not response or response.content.startswith(
                         self.config.command_prefix) or response.content.lower(
-                        ).startswith('exit'):
+                ).startswith('exit'):
                     await self.safe_delete_message(msg)
                     await self.safe_delete_message(response)
                     await self.safe_send_message(channel, "Nevermind then.")
@@ -4350,7 +4350,7 @@ class MusicBot(discord.Client):
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
                     str(reaction.emoji).startswith("📽") or
                     str(reaction.emoji).startswith("💾")
-                ) and reaction.count > 1 and user == author:
+                    ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
@@ -4475,7 +4475,7 @@ class MusicBot(discord.Client):
 
             if not response or response.content.lower().startswith(
                     self.config.command_prefix) or response.content.lower(
-                    ).startswith('exit'):
+            ).startswith('exit'):
                 await self.safe_delete_message(msg)
                 await self.safe_send_message(
                     channel, "Aborting this Hangman game. Thanks for playing!")
@@ -4725,7 +4725,7 @@ class MusicBot(discord.Client):
         (1497706811,
          "Giesela finally keeps track whether a certain entry comes from a playlist or not"
          ),
-         "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page.")
+        "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page.")
     })
     async def cmd_playlist(self, channel, author, server, player,
                            leftover_args):
@@ -5113,7 +5113,7 @@ class MusicBot(discord.Client):
                 abort = True
                 break
 
-            elif response_message.content.lower ().startswith(self.config.command_prefix) or \
+            elif response_message.content.lower().startswith(self.config.command_prefix) or \
                     response_message.content.lower().startswith('exit'):
                 abort = True
 
@@ -5205,7 +5205,7 @@ class MusicBot(discord.Client):
 
                 if not resp.content.lower().startswith(
                         self.config.command_prefix) and not resp.content.lower(
-                        ).startswith('abort'):
+                ).startswith('abort'):
                     _cmd = resp.content.split()
                     cmd = _cmd[0].lower()
                     args = _cmd[1:] if len(_cmd) > 1 else None
@@ -5354,7 +5354,7 @@ class MusicBot(discord.Client):
                 )
             self.playlists.set_playlist([add_entry], playlistname, author.id)
             return Response("Created a new playlist \"{}\" and added `{}`.".format(playlistname.title(),
-                add_entry.title))
+                                                                                   add_entry.title))
 
         self.playlists.edit_playlist(
             playlistname, player.playlist, new_entries=[add_entry])
@@ -5367,7 +5367,7 @@ class MusicBot(discord.Client):
         (1497611753,
          "Changed command name from \"removeplayingfromplaylist\" to \"removefromplaylist\", thanks Paulo"
          ),
-         "3.5.8": (1497826917, "Now displaying the names of the song and the playlist")
+        "3.5.8": (1497826917, "Now displaying the names of the song and the playlist")
     })
     async def cmd_removefromplaylist(self, channel, author, player,
                                      playlistname):
@@ -6197,7 +6197,7 @@ class MusicBot(discord.Client):
         async for msg in self.logs_from(channel, limit=int(number)):
             increment = 1
             if last_msg is not None and msg.author.id == last_msg.author.id and abs(
-                (last_msg.timestamp - msg.timestamp).total_seconds()) < 10:
+                    (last_msg.timestamp - msg.timestamp).total_seconds()) < 10:
                 spam += 1
                 last_msg = msg
                 increment = 0
@@ -6457,7 +6457,7 @@ class MusicBot(discord.Client):
         em = Embed(title="TRANSLATION")
         translator = Translator(target_language)
         async for message in self.logs_from(
-            channel, limit=limit, after=start_point):
+                channel, limit=limit, after=start_point):
             n = "**{0}** - {1.year:0>4}/{1.month:0>2}/{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(
                 message.author.display_name, message.timestamp)
 
@@ -6509,7 +6509,7 @@ class MusicBot(discord.Client):
             # {}".format(format_time((datetime(2017, 5, 15) -
             # datetime.now()).total_seconds(), True, 5, 2, True, True)))
             async for msg in self.logs_from(
-                channel, limit=100000):
+                    channel, limit=100000):
                 if msg.id != message.id and message_content.lower().strip(
                 ) in msg.content.lower().strip():
                     if target_author is None or target_author.id == msg.author.id:
@@ -6606,7 +6606,8 @@ class MusicBot(discord.Client):
 
                 if "mine" in leftover_args:
                     bookmarks = filter(
-                        lambda x: bookmark.get_bookmark(x)["author_id"] == author.id,
+                        lambda x: bookmark.get_bookmark(
+                            x)["author_id"] == author.id,
                         bookmarks)
 
                 for bm in bookmarks:
@@ -6644,8 +6645,9 @@ class MusicBot(discord.Client):
                         "Please also specify what you want to change")
 
                 new_timestamp = parse_timestamp(leftover_args[-1])
-                if new_timestamp is not None: # 0 evaluates to false so I need to check this oldschool-like
-                    new_name = " ".join(leftover_args[2:-1]) if len(leftover_args) > 3 else None
+                if new_timestamp is not None:  # 0 evaluates to false so I need to check this oldschool-like
+                    new_name = " ".join(
+                        leftover_args[2:-1]) if len(leftover_args) > 3 else None
                 else:
                     new_name = " ".join(leftover_args[2:])
 
@@ -6771,9 +6773,11 @@ class MusicBot(discord.Client):
         dev_code, dev_name = get_dev_version()
         changelog = get_dev_changelog()
 
-        desc = "Current Version is `{}`\nDevelopment is at `{}`\n\n**What's to come:**\n\n".format(BOTVERSION, dev_code+"_"+dev_name)
+        desc = "Current Version is `{}`\nDevelopment is at `{}`\n\n**What's to come:**\n\n".format(
+            BOTVERSION, dev_code + "_" + dev_name)
         desc += "\n".join("● " + l for l in changelog)
-        em = Embed(title="Version " + v_name, description=desc, url="https://siku2.github.io/Giesela", colour=hex_to_dec("67BE2E"))
+        em = Embed(title="Version " + v_name, description=desc,
+                   url="https://siku2.github.io/Giesela", colour=hex_to_dec("67BE2E"))
 
         return Response(embed=em)
 
@@ -6795,9 +6799,10 @@ class MusicBot(discord.Client):
 
         print("[INTERACT] \"{}\"".format(query))
 
-        params = {"v":"18/06/2017", "q":query}
+        params = {"v": "18/06/2017", "q": query}
         headers = {"Authorization": "Bearer 47J7GSQPY2DJPLGUNFZVNHAMGU7ARCRD"}
-        resp = requests.get("https://api.wit.ai/message", params=params, headers=headers)
+        resp = requests.get("https://api.wit.ai/message",
+                            params=params, headers=headers)
         data = resp.json()
         entities = data["entities"]
 
@@ -6805,10 +6810,10 @@ class MusicBot(discord.Client):
 
         for entity, data in entities.items():
             d = data[0]
-            msg += "**{}** [{}] ({}% sure)\n".format(entity, d["value"], round(d["confidence"] * 100, 1))
+            msg += "**{}** [{}] ({}% sure)\n".format(entity,
+                                                     d["value"], round(d["confidence"] * 100, 1))
 
         return Response(msg)
-
 
     @owner_only
     async def cmd_shutdown(self, channel):

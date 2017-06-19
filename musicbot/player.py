@@ -1,15 +1,14 @@
+import asyncio
+import audioop
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
+from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
-
-import asyncio
-import audioop
-from enum import Enum
 
 from .entry import StreamPlaylistEntry
 from .exceptions import FFmpegError, FFmpegWarning
@@ -128,7 +127,7 @@ class MusicPlayer(EventEmitter):
         self.bot.socket_server.threaded_broadcast_information()
         self.handle_manually = False
 
-        self.volume_scale = 1 # volume is divided by this value
+        self.volume_scale = 1  # volume is divided by this value
         self.volume = bot.config.default_volume
 
     @property
@@ -409,7 +408,10 @@ class MusicPlayer(EventEmitter):
               " seconds before emitting now playing event")
         before_data = {"url": self.current_entry.url, "song_name": await self._absolute_current_song()}
         expected_progress = self.progress + delay
-        # print("I expect to have a progress of {} once I wake up".format(expected_progress))
+
+
+        # print(
+"I expect to have a progress of {} once I wake up".format(expected_progress))
         await asyncio.sleep(delay)
         if not self.current_entry:
             return
@@ -419,17 +421,18 @@ class MusicPlayer(EventEmitter):
         else:
             # print("Expected: {}, Got: {}".format(expected_progress, self.progress))
             if not ((expected_progress + .75) > self.progress > (expected_progress - .75)):
-                print("[TIMESTAMP-ENTRY] Expected progress {} but got {}; assuming there's already another one running".format(expected_progress, self.progress))
+                print("[TIMESTAMP-ENTRY] Expected progress {} but got {}; assuming there's already another one running".format(
+                    expected_progress, self.progress))
                 return
             print("[TIMESTAMP-ENTRY] Emitting next now playing event")
-            self.emit('play', player=self, entry=self.current_entry)
+            self.emit('play', player = self, entry = self.current_entry)
         await self.update_timestamp()
 
     def play_entry(self, entry):
         self.loop.create_task(self._play_entry(entry))
 
     async def _play_entry(self, entry):
-        self.handle_manually = True
+        self.handle_manually=True
 
         if self.is_dead:
             log("ded")
@@ -439,7 +442,7 @@ class MusicPlayer(EventEmitter):
             # In-case there was a player, kill it. RIP.
             self._kill_current_player()
 
-            self._current_player = self._monkeypatch_player(self.voice_client.create_ffmpeg_player(
+            self._current_player=self._monkeypatch_player(self.voice_client.create_ffmpeg_player(
                 entry.filename,
                 before_options="-nostdin -ss {}".format(
                     format_time_ffmpeg(int(entry.start_seconds))),
@@ -462,9 +465,9 @@ class MusicPlayer(EventEmitter):
             self._stderr_future = asyncio.Future()
 
             stderr_thread = Thread(
-                target=filter_stderr,
-                args=(self._current_player.process, self._stderr_future),
-                name="{} stderr reader".format(self._current_player.name)
+                target = filter_stderr,
+                args = (self._current_player.process, self._stderr_future),
+                name = "{} stderr reader".format(self._current_player.name)
             )
 
             stderr_thread.start()

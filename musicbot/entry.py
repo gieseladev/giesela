@@ -1,3 +1,4 @@
+import asyncio
 import json
 import os
 import re
@@ -5,8 +6,6 @@ import traceback
 from threading import Thread
 
 import requests
-
-import asyncio
 
 from .exceptions import ExtractionError
 from .spotify import SpotifyTrack

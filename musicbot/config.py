@@ -1,10 +1,9 @@
-import json
-
 import configparser
+import json
 
 
 def encode_setting(value):
-    json_handler = lambda v: json.dumps(v) + "\\json"
+    def json_handler(v): return json.dumps(v) + "\\json"
 
     handlers = {
         "int": lambda v: str(v) + "\\i",
