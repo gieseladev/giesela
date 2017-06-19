@@ -1,13 +1,12 @@
 import json
 import re
 from datetime import datetime
+from enum import Enum
+from html import unescape
 from urllib import request
 from urllib.parse import urlencode
 
 from bs4 import BeautifulSoup
-
-from enum import Enum
-from html import unescape
 
 
 class ContentType(Enum):

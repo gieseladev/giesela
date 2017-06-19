@@ -93,5 +93,6 @@ def main(defvals=None):
         sys.stdout.write(translation)
         sys.stdout.write("\n")
 
+
 if __name__ == "__main__":
     main()

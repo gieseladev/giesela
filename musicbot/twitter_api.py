@@ -77,6 +77,7 @@ class Tweet:
 def get_tweet(tweet_id):
     return Tweet.from_id(tweet_id)
 
+
 credentials = ***REMOVED***"consumer_key": "CcleNL3BCTXxGVr39fdK5SBBH", "consumer_secret": "tcF3bWoAcgRaCYOZGy4jNpzHPTdWBUL9RjtYCoqGq6Q3tm4Kbj",
                "access_token_key": "3027865895-eWngTcWlnZnZgK5HHd9FBgIW4ywEgrkdb5pHDTd", "access_token_secret": "YOakSjoSFPPIwt6kimoWLWgNuGj2tJXNSafKjMwTca1pR"***REMOVED***
 api = twitter.Api(**credentials)

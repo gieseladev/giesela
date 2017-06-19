@@ -1,10 +1,9 @@
+import asyncio
 import re
 import time
 from datetime import datetime, timedelta
 from socket import *
 from threading import Thread
-
-import asyncio
 
 from .radio import Radio
 from .spotify import SpotifyTrack

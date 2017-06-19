@@ -1,9 +1,8 @@
+import colorsys
 import random
 from math import log2, pow, sqrt
 
 from PIL import Image, ImageDraw, ImageSequence
-
-import colorsys
 
 
 class Game2048:

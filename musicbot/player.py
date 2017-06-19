@@ -1,15 +1,14 @@
+import asyncio
+import audioop
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
+from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
-
-import asyncio
-import audioop
-from enum import Enum
 
 from .entry import StreamPlaylistEntry
 from .exceptions import FFmpegError, FFmpegWarning
@@ -128,7 +127,7 @@ class MusicPlayer(EventEmitter):
         self.bot.socket_server.threaded_broadcast_information()
         self.handle_manually = False
 
-        self.volume_scale = 1 # volume is divided by this value
+        self.volume_scale = 1  # volume is divided by this value
         self.volume = bot.config.default_volume
 
     @property
@@ -409,6 +408,7 @@ class MusicPlayer(EventEmitter):
               " seconds before emitting now playing event")
         before_data = ***REMOVED***"url": self.current_entry.url, "song_name": await self._absolute_current_song()***REMOVED***
         expected_progress = self.progress + delay
+
         # print("I expect to have a progress of ***REMOVED******REMOVED*** once I wake up".format(expected_progress))
         await asyncio.sleep(delay)
         if not self.current_entry:
@@ -419,7 +419,8 @@ class MusicPlayer(EventEmitter):
         else:
             # print("Expected: ***REMOVED******REMOVED***, Got: ***REMOVED******REMOVED***".format(expected_progress, self.progress))
             if not ((expected_progress + .75) > self.progress > (expected_progress - .75)):
-                print("[TIMESTAMP-ENTRY] Expected progress ***REMOVED******REMOVED*** but got ***REMOVED******REMOVED***; assuming there's already another one running".format(expected_progress, self.progress))
+                print("[TIMESTAMP-ENTRY] Expected progress ***REMOVED******REMOVED*** but got ***REMOVED******REMOVED***; assuming there's already another one running".format(
+                    expected_progress, self.progress))
                 return
             print("[TIMESTAMP-ENTRY] Emitting next now playing event")
             self.emit('play', player=self, entry=self.current_entry)
