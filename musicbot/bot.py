@@ -476,7 +476,7 @@ class MusicBot(discord.Client):
 
             if entry.provides_timestamps:
                 e = entry.get_current_song_from_timestamp(player.progress)
-                newmsg = "Now playing *****REMOVED***0***REMOVED***** (****REMOVED***1***REMOVED******REMOVED***2***REMOVED**** entry) from \"***REMOVED***3***REMOVED***\"".format(
+                newmsg = "Now playing *****REMOVED***0***REMOVED***** (***REMOVED***1***REMOVED******REMOVED***2***REMOVED*** entry) from \"***REMOVED***3***REMOVED***\"".format(
                     e["name"], e["index"] + 1,
                     ordinal(e["index"] + 1), entry.title)
             else:
@@ -1858,7 +1858,7 @@ class MusicBot(discord.Client):
                             title=current_entry["title"],
                             colour=hex_to_dec("FF88F0"),
                             url=current_entry["youtube"],
-                            description="\n\n*Playing from* ***REMOVED******REMOVED***".format(
+                            description="\n\nPlaying from *****REMOVED******REMOVED*****".format(
                                 player.current_entry.title))
                         em.set_thumbnail(url=current_entry["cover"])
                         em.set_author(name=current_entry["artist"])
@@ -2634,7 +2634,7 @@ class MusicBot(discord.Client):
         possible_stations = self.radios.get_all_stations()
         shuffle(possible_stations)
 
-        interface_string = "*****REMOVED***0.name***REMOVED*****\n*language:* ***REMOVED***0.language***REMOVED***\n\n`Type \"yes\" or \"no\"`"
+        interface_string = "*****REMOVED***0.name***REMOVED*****\nlanguage: `***REMOVED***0.language***REMOVED***`\n\n`Type `yes` or `no`"
 
         for station in possible_stations:
             msg = await self.safe_send_message(
@@ -3036,7 +3036,7 @@ class MusicBot(discord.Client):
                                     targetChannel = ch
                     if targetChannel is None:
                         return Response(
-                            "Cannot find ****REMOVED******REMOVED**** in any voice channel".format(
+                            "Cannot find *****REMOVED******REMOVED***** in any voice channel".format(
                                 ", ".join([x.mention for x in user_mentions])),
                             delete_after=25)
                 else:
@@ -3178,7 +3178,7 @@ class MusicBot(discord.Client):
             set_items = items[1:]
             if self.random_sets.create_set(set_name, set_items):
                 return Response(
-                    "Created set ****REMOVED***0***REMOVED****\nUse `***REMOVED***1***REMOVED***random ***REMOVED***0***REMOVED***` to use it!".format(
+                    "Created set *****REMOVED***0***REMOVED*****\nUse `***REMOVED***1***REMOVED***random ***REMOVED***0***REMOVED***` to use it!".format(
                         set_name, self.config.command_prefix),
                     delete_after=60)
             else:
@@ -3243,7 +3243,7 @@ class MusicBot(discord.Client):
 
         if len(items) <= 0 or items is None:
             return Response(
-                "Is your name \"***REMOVED***0***REMOVED***\" by any chance?\n(This is not how this command works. Use `***REMOVED***1***REMOVED***help random` to find out how not to be a stupid ****REMOVED***0***REMOVED**** anymore)".
+                "Is your name \"***REMOVED***0***REMOVED***\" by any chance?\n(This is not how this command works. Use `***REMOVED***1***REMOVED***help random` to find out how not to be a stupid *****REMOVED***0***REMOVED***** anymore)".
                 format(author.name, self.config.command_prefix),
                 delete_after=30)
 
@@ -3487,7 +3487,7 @@ class MusicBot(discord.Client):
             video = player.playlist.entries[index].title
             del player.playlist.entries[index]
             await self.safe_send_message(
-                channel, "Removed ****REMOVED***0***REMOVED**** from the playlist".format(video))
+                channel, "Removed *****REMOVED***0***REMOVED***** from the playlist".format(video))
             return
 
         except:
@@ -3839,7 +3839,7 @@ class MusicBot(discord.Client):
             if len(results) < 1:
                 return Response("**Didn't find any cards!**", delete_after=15)
 
-            card_string = "***REMOVED***0.id***REMOVED***. \"****REMOVED***1***REMOVED****\""
+            card_string = "***REMOVED***0.id***REMOVED***. \"***REMOVED***1***REMOVED***\""
             cards = []
             for card in results:
                 cards.append(
@@ -4068,7 +4068,7 @@ class MusicBot(discord.Client):
                 return Response(
                     "**Didn't find any question cards!**", delete_after=15)
 
-            card_string = "***REMOVED***0.id***REMOVED***. \"****REMOVED***1***REMOVED****\""
+            card_string = "***REMOVED***0.id***REMOVED***. \"***REMOVED***1***REMOVED***\""
             cards = []
             for card in results:
                 cards.append(
@@ -4294,7 +4294,7 @@ class MusicBot(discord.Client):
             for current_game in game_list:
                 msg = await self.safe_send_message(
                     channel,
-                    "*How about this game:*\n\n*****REMOVED******REMOVED*****\n***REMOVED******REMOVED***\n\nType *y*, *n* or *exit*".
+                    "How about this game:\n\n*****REMOVED******REMOVED*****\n***REMOVED******REMOVED***\n\nType `y`, `n` or `exit`".
                     format(current_game["name"], current_game["description"]))
                 response = await self.wait_for_message(
                     100, author=author, channel=channel, check=check)
@@ -4350,7 +4350,7 @@ class MusicBot(discord.Client):
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
                     str(reaction.emoji).startswith("📽") or
                     str(reaction.emoji).startswith("💾")
-                    ) and reaction.count > 1 and user == author:
+                ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
@@ -4401,7 +4401,7 @@ class MusicBot(discord.Client):
                     if str(reaction.emoji) == "💾" and reaction.count > 1:
                         await self.safe_send_message(
                             user,
-                            "The save code is: ****REMOVED***0***REMOVED****\nUse `***REMOVED***1***REMOVED***game 2048 ***REMOVED***2***REMOVED***` to continue your current game".
+                            "The save code is: *****REMOVED***0***REMOVED*****\nUse `***REMOVED***1***REMOVED***game 2048 ***REMOVED***2***REMOVED***` to continue your current game".
                             format(
                                 escape_dis(game.get_save()),
                                 self.config.command_prefix, game.get_save()))
@@ -4417,7 +4417,7 @@ class MusicBot(discord.Client):
 
                 if direction is None:
                     await self.safe_delete_message(msg)
-                    turn_information = "| *You didn't specifiy the direction*" if turn_information is not "" else turn_information
+                    turn_information = "| You didn't specifiy the direction" if turn_information is not "" else turn_information
 
             # self.log ("Chose the direction " + str (direction))
             game.move(direction)
@@ -4467,7 +4467,7 @@ class MusicBot(discord.Client):
             current_status = game.get_beautified_string()
             msg = await self.safe_send_message(
                 channel,
-                "**Hangman**\n****REMOVED******REMOVED*** trie***REMOVED******REMOVED*** left*\n\n***REMOVED******REMOVED***\n\n`Send the letter you want to guess or type \"exit\" to exit.`".
+                "**Hangman**\n***REMOVED******REMOVED*** trie***REMOVED******REMOVED*** left\n\n***REMOVED******REMOVED***\n\n`Send the letter you want to guess or type \"exit\" to exit.`".
                 format(game.tries_left, "s"
                        if game.tries_left != 1 else "", current_status))
             response = await self.wait_for_message(
@@ -4913,7 +4913,7 @@ class MusicBot(discord.Client):
                     clone_entries, additional_args[0].lower(), author.id)
 
             return Response(
-                "****REMOVED******REMOVED**** ***REMOVED******REMOVED***has been cloned to ****REMOVED******REMOVED****".format(
+                "*****REMOVED******REMOVED***** ***REMOVED******REMOVED***has been cloned to *****REMOVED******REMOVED*****".format(
                     savename, "(from the ***REMOVED******REMOVED***. to the ***REMOVED******REMOVED***. index) ".format(
                         str(from_index + 1), str(to_index + 1)) if
                     from_index is not 0 or to_index is not len(clone_entries)
@@ -4923,7 +4923,8 @@ class MusicBot(discord.Client):
         elif argument == "showall":
             if len(self.playlists.saved_playlists) < 1:
                 return Response(
-                    "There are no saved playlists.\n**You** could add one though. Type *!help playlist* to see how!",
+                    "There are no saved playlists.\n**You** could add one though. Type `***REMOVED******REMOVED***help playlist` to see how!".format(
+                        self.config.command_prefix),
                     delete_after=40)
 
             response_text = "**Found the following playlists:**\n\n"
@@ -4947,7 +4948,7 @@ class MusicBot(discord.Client):
 
             for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.playlist)
-                response_text += "*****REMOVED******REMOVED***.** **\"***REMOVED******REMOVED***\"** *by ***REMOVED******REMOVED****\n```\n  ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n  played ***REMOVED******REMOVED*** time***REMOVED******REMOVED***\n  ***REMOVED******REMOVED***```\n\n".format(
+                response_text += "*****REMOVED******REMOVED***.** **\"***REMOVED******REMOVED***\"** by ***REMOVED******REMOVED***\n```\n  ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***\n  played ***REMOVED******REMOVED*** time***REMOVED******REMOVED***\n  ***REMOVED******REMOVED***```\n\n".format(
                     iteration,
                     pl.replace("_", " ").title(),
                     self.get_global_user(infos["author"]).mention,
@@ -5062,11 +5063,11 @@ class MusicBot(discord.Client):
         savename = _savename
         user_savename = savename
 
-        interface_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add <query>`: Add a video to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index\n`rename <newname>`: rename the current playlist\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
+        interface_string = "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add <query>`: Add a video to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index\n`rename <newname>`: rename the current playlist\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
 
-        extras_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n**Extra functions:**\n`sort <alphabetical | length | random>`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n\n`abort`: return to main screen"
+        extras_string = "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n**Extra functions:**\n`sort <alphabetical | length | random>`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n\n`abort`: return to main screen"
 
-        edit_string = "*****REMOVED******REMOVED***** by ****REMOVED******REMOVED**** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n```\nentry_information\n```\n\n**Edit functions:**\n`rename <newname>`: rename the entry\n`setstart <timestamp>`: set the starting time of the song\n`setend <timestamp>`: set the ending time of the song\n\n`abort`: return to main screen"
+        edit_string = "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n```\nentry_information\n```\n\n**Edit functions:**\n`rename <newname>`: rename the entry\n`setstart <timestamp>`: set the starting time of the song\n`setend <timestamp>`: set the ending time of the song\n\n`abort`: return to main screen"
 
         playlist = self.playlists.get_playlist(_savename, player.playlist)
 
@@ -5290,7 +5291,7 @@ class MusicBot(discord.Client):
             await self.safe_delete_message(interface_message)
 
         if abort:
-            return Response("Closed ****REMOVED******REMOVED**** without saving".format(savename))
+            return Response("Closed *****REMOVED******REMOVED***** without saving".format(savename))
             self.log("Closed the playlist builder")
 
         if save:
@@ -5754,7 +5755,7 @@ class MusicBot(discord.Client):
 
             # action 1 (message)
             if selected_action == 1:
-                action_message = "Your reminder ****REMOVED***reminder.name***REMOVED**** is due"
+                action_message = "Your reminder *****REMOVED***reminder.name***REMOVED***** is due"
                 action_channel = None
                 action_delete_after = 0
                 action_delete_previous = False
@@ -5772,7 +5773,7 @@ class MusicBot(discord.Client):
                 while action_channel is None:
                     msg = await self.safe_send_message(
                         channel,
-                        "To which channel should the message be sent?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"me\" for a private message\n:white_small_square: \"this\" to select the current channel\n:white_small_square: You can also @mention people or #mention a channel"
+                        "To which channel should the message be sent?\nPossible inputs:\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"me\" for a private message\n:white_small_square: \"this\" to select the current channel\n:white_small_square: You can also @mention people or #mention a channel"
                     )
                     response = await self.wait_for_message(
                         author=author, channel=channel)
@@ -5854,7 +5855,7 @@ class MusicBot(discord.Client):
                 # find playback channel
                 msg = await self.safe_send_message(
                     channel,
-                    "To which channel should the video be played?\n*Possible inputs:*\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"this\" to select your current channel"
+                    "To which channel should the video be played?\nPossible inputs:\n\n:white_small_square: Channel id or channel name\n:white_small_square: \"this\" to select your current channel"
                 )
                 response = await self.wait_for_message(
                     author=author, channel=channel)
@@ -5876,7 +5877,7 @@ class MusicBot(discord.Client):
                 repeat_every=reminder_repeat,
                 repeat_end=reminder_end)
             return Response(
-                "Created a reminder called ****REMOVED******REMOVED****\ndue: ***REMOVED******REMOVED***\nrepeat: ***REMOVED******REMOVED***\nrepeat end: ***REMOVED******REMOVED***\naction: ***REMOVED******REMOVED***".
+                "Created a reminder called *****REMOVED******REMOVED*****\ndue: ***REMOVED******REMOVED***\nrepeat: ***REMOVED******REMOVED***\nrepeat end: ***REMOVED******REMOVED***\naction: ***REMOVED******REMOVED***".
                 format(reminder_name, reminder_due, reminder_repeat,
                        reminder_end, reminder_action))
 
@@ -6617,7 +6618,7 @@ class MusicBot(discord.Client):
                     bm_timestamp = to_timestamp(bm["timestamp"])
                     bm_id = bm["id"]
                     t = "*****REMOVED******REMOVED*****".format(bm_name)
-                    v = "`***REMOVED******REMOVED***` *starting at* `***REMOVED******REMOVED***` *by* *****REMOVED******REMOVED*****".format(
+                    v = "`***REMOVED******REMOVED***` starting at `***REMOVED******REMOVED***` *by* *****REMOVED******REMOVED*****".format(
                         bm_id, bm_timestamp, bm_author)
                     em.add_field(name=t, value=v, inline=False)
                 return Response(embed=em)
@@ -6663,7 +6664,7 @@ class MusicBot(discord.Client):
                     player.playlist._add_entry(
                         URLPlaylistEntry.from_dict(player.playlist, bm[
                             "entry"]))
-                    return Response("Loaded bookmark `***REMOVED***0***REMOVED***` *by *****REMOVED***1***REMOVED******".
+                    return Response("Loaded bookmark `***REMOVED***0***REMOVED***` by *****REMOVED***1***REMOVED*****".
                                     format(bm["name"],
                                            self.get_global_user(
                                                bm["author_id"]).display_name))

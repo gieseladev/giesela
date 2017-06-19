@@ -409,9 +409,7 @@ class MusicPlayer(EventEmitter):
         before_data = ***REMOVED***"url": self.current_entry.url, "song_name": await self._absolute_current_song()***REMOVED***
         expected_progress = self.progress + delay
 
-
-        # print(
-"I expect to have a progress of ***REMOVED******REMOVED*** once I wake up".format(expected_progress))
+        # print("I expect to have a progress of ***REMOVED******REMOVED*** once I wake up".format(expected_progress))
         await asyncio.sleep(delay)
         if not self.current_entry:
             return
@@ -425,14 +423,14 @@ class MusicPlayer(EventEmitter):
                     expected_progress, self.progress))
                 return
             print("[TIMESTAMP-ENTRY] Emitting next now playing event")
-            self.emit('play', player = self, entry = self.current_entry)
+            self.emit('play', player=self, entry=self.current_entry)
         await self.update_timestamp()
 
     def play_entry(self, entry):
         self.loop.create_task(self._play_entry(entry))
 
     async def _play_entry(self, entry):
-        self.handle_manually=True
+        self.handle_manually = True
 
         if self.is_dead:
             log("ded")
@@ -442,7 +440,7 @@ class MusicPlayer(EventEmitter):
             # In-case there was a player, kill it. RIP.
             self._kill_current_player()
 
-            self._current_player=self._monkeypatch_player(self.voice_client.create_ffmpeg_player(
+            self._current_player = self._monkeypatch_player(self.voice_client.create_ffmpeg_player(
                 entry.filename,
                 before_options="-nostdin -ss ***REMOVED******REMOVED***".format(
                     format_time_ffmpeg(int(entry.start_seconds))),
@@ -465,9 +463,9 @@ class MusicPlayer(EventEmitter):
             self._stderr_future = asyncio.Future()
 
             stderr_thread = Thread(
-                target = filter_stderr,
-                args = (self._current_player.process, self._stderr_future),
-                name = "***REMOVED******REMOVED*** stderr reader".format(self._current_player.name)
+                target=filter_stderr,
+                args=(self._current_player.process, self._stderr_future),
+                name="***REMOVED******REMOVED*** stderr reader".format(self._current_player.name)
             )
 
             stderr_thread.start()
