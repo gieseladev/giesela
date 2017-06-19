@@ -3075,10 +3075,9 @@ class MusicBot(discord.Client):
         (1497552134,
          "Added a way to not only replay the current song, but also the last one"
          ),
-        "3.4.8":
-        (1497649772,
-         "Fixed the issue which blocked Giesela from replaying the last song"),
-        "3.5.2": (1497714171, "Can now replay an index from the history")
+        "3.4.8": (1497649772, "Fixed the issue which blocked Giesela from replaying the last song"),
+        "3.5.2": (1497714171, "Can now replay an index from the history"),
+        "3.5.9": (1497899132, "Now showing the tile of the entry that is going to be replayed")
     ***REMOVED***)
     async def cmd_replay(self, player, choose_last=""):
         """
@@ -3117,7 +3116,7 @@ class MusicBot(discord.Client):
             return Response("There's nothing for me to replay")
         try:
             player.playlist._add_entry_next(replay_entry)
-            return Response("Replaying the song")
+            return Response("Replaying *****REMOVED******REMOVED*****".format(replay_entry.title))
 
         except Exception as e:
             return Response("Can't replay ***REMOVED******REMOVED***:\n```\n***REMOVED******REMOVED***\n```".format(
