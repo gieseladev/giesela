@@ -47,8 +47,8 @@ def get_dev_changelog():
     changelog_page = requests.get(
         base_url + dev_version).content.decode("utf-8")
     bs = BeautifulSoup(changelog_page, "lxml")
-    html_to_markdown = [(r"<\/?li>", "\t"), (r"<\/?ul>", ""), (r"<strong>(.+?)<\/strong>",
-                                                               r"**\1**"), (r"<a.+?>(.+?)<\/a>", r"`\1`"), (r"\n\W+\n", "\n")]
+    html_to_markdown = [(r"<\/?li>", "\t"), (r"<\/?ul>", ""), (r"<code.+?>(.+?)<\/code>", r"`\1`"), (r"<strong>(.+?)<\/strong>",
+                                                                                                     r"**\1**"), (r"<a.+?>(.+?)<\/a>", r"`\1`"), (r"\n\W+\n", "\n")]
 
     changes = []
 
