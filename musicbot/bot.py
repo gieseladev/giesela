@@ -6711,7 +6711,9 @@ class MusicBot(discord.Client):
                 "Couldn't find any information on the `***REMOVED******REMOVED***` command".format(
                     command))
 
-    @command_info("3.5.6", 1497819288)
+    @command_info("3.5.6", 1497819288, ***REMOVED***
+        "3.6.2": (1497978696, "references are now clickable")
+    ***REMOVED***)
     async def cmd_version(self, channel):
         """
         ///|Usage
