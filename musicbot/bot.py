@@ -5304,6 +5304,8 @@ class MusicBot(discord.Client):
 
         playlistname = playlistname.lower()
 
+        await self.send_typing(channel)
+
         if query:
             add_entry = (await self.get_play_entry(player, query, channel=channel, author=author))[0]
         else:
@@ -6708,13 +6710,15 @@ class MusicBot(discord.Client):
                     command))
 
     @command_info("3.5.6", 1497819288)
-    async def cmd_version(self):
+    async def cmd_version(self, channel):
         """
         ///|Usage
         `***REMOVED***command_prefix***REMOVED***version`
         ///|Explanation
         Some more informat about the current version and what's to come.
         """
+
+        await self.send_typing(channel)
         v_code, v_name = BOTVERSION.split("_")
         dev_code, dev_name = get_dev_version()
         changelog = get_dev_changelog()
@@ -6728,7 +6732,7 @@ class MusicBot(discord.Client):
         return Response(embed=em)
 
     @command_info("3.5.7", 1497823283)
-    async def cmd_interact(self, message):
+    async def cmd_interact(self, channel, message):
         """
         ///|Usage
         `***REMOVED***command_prefix***REMOVED***interact <query>`
@@ -6737,6 +6741,8 @@ class MusicBot(discord.Client):
         ///|Disclaimer
         **Help out with the development of a "smarter" Giesela by testing out this new future!**
         """
+
+        await self.send_typing(channel)
 
         matcher = "^\***REMOVED******REMOVED***?interact".format(self.config.command_prefix)
         query = re.sub(matcher, "", message.content, flags=re.MULTILINE)
