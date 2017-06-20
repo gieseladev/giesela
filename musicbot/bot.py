@@ -6711,7 +6711,9 @@ class MusicBot(discord.Client):
                 "Couldn't find any information on the `{}` command".format(
                     command))
 
-    @command_info("3.5.6", 1497819288)
+    @command_info("3.5.6", 1497819288, {
+        "3.6.2": (1497978696, "references are now clickable")
+    })
     async def cmd_version(self, channel):
         """
         ///|Usage
