@@ -479,6 +479,8 @@ class MusicBot(discord.Client):
                 newmsg = "Now playing *****REMOVED***0***REMOVED***** (***REMOVED***1***REMOVED******REMOVED***2***REMOVED*** entry) from \"***REMOVED***3***REMOVED***\"".format(
                     e["name"], e["index"] + 1,
                     ordinal(e["index"] + 1), entry.title)
+            elif type(entry).__name__ == "StreamPlaylistEntry" and entry.radio_station_data is not None:
+                newmsg = "Now playing *****REMOVED******REMOVED***** from `***REMOVED******REMOVED***`".format(await player._absolute_current_song(), entry.radio_station_data.name)
             else:
                 newmsg = 'Now playing in %s: **%s**' % (
                     player.voice_client.channel.name, entry.title)
@@ -4307,8 +4309,8 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                str(reaction.emoji).startswith("📽") or
-                str(reaction.emoji).startswith("💾")
+                    str(reaction.emoji).startswith("📽") or
+                    str(reaction.emoji).startswith("💾")
                 ) and reaction.count > 1 and user == author:
                 return True
 

@@ -70,7 +70,7 @@ class Downloader:
             except Exception as e:
 
                 # (youtube_dl.utils.ExtractorError, youtube_dl.utils.DownloadError)
-                # I hope I don't have to deal with ContentTooShortError's
+                # I hope I don't have to deal with ContentTooShortErrors
                 if asyncio.iscoroutinefunction(on_error):
                     asyncio.ensure_future(on_error(e), loop=loop)
 
