@@ -1686,7 +1686,7 @@ class MusicBot(discord.Client):
     @block_user
     @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command"),
-        "3.5.9": (1497890999, "Revamped design and functions making this command more useful")
+        "3.5.9": (1497890999, "Revamped design and functions making this command more useful"),
         "3.6.1": (1497967505, "deleting messages when leaving search")
     })
     async def cmd_search(self, player, channel, author, leftover_args):
@@ -4338,8 +4338,8 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                    str(reaction.emoji).startswith("📽") or
-                    str(reaction.emoji).startswith("💾")
+                str(reaction.emoji).startswith("📽") or
+                str(reaction.emoji).startswith("💾")
                 ) and reaction.count > 1 and user == author:
                 return True
 
@@ -4703,19 +4703,11 @@ class MusicBot(discord.Client):
 
     @block_user
     @command_info("1.9.5", 1479599760, {
-        "3.4.6":
-        (1497617827,
-         "when Giesela can't add the entry to the playlist she tries to figure out **why** it didn't work"
-         ),
-        "3.4.7":
-        (1497619770,
-         "Fixed an annoying bug in which the builder wouldn't show any entries if the amount of entries was a multiple of 20"
-         ),
-        "3.5.1":
-        (1497706811,
-         "Giesela finally keeps track whether a certain entry comes from a playlist or not"
-         ),
-        "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page.")
+        "3.4.6":    (1497617827, "when Giesela can't add the entry to the playlist she tries to figure out **why** it didn't work"),
+        "3.4.7":    (1497619770, "Fixed an annoying bug in which the builder wouldn't show any entries if the amount of entries was a multiple of 20"),
+        "3.5.1": (1497706811, "Giesela finally keeps track whether a certain entry comes from a playlist or not"),
+        "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page."),
+        "3.6.1": (1497969463, "when saving a playlist, list all changes")
     })
     async def cmd_playlist(self, channel, author, server, player,
                            leftover_args):
@@ -5047,6 +5039,7 @@ class MusicBot(discord.Client):
         entries_page = 0
         pl_changes = {
             "remove_entries_indexes": [],
+            "remove_entries": [],  # used for changelog
             "new_entries": [],
             "new_name": None
         }
@@ -5157,6 +5150,8 @@ class MusicBot(discord.Client):
                             indieces.append(index)
 
                     pl_changes["remove_entries_indexes"].extend(indieces)
+                    pl_changes["remove_entries"].extend(
+                        [playlist["entries"][ind] for ind in indieces])  # for the changelog
                     playlist["entry_count"] = str(
                         int(playlist["entry_count"]) - len(indieces))
                     playlist["entries"] = [
@@ -5289,6 +5284,24 @@ class MusicBot(discord.Client):
             # Adding these entries: {} | Changing the name to: {}".format
             # (pl_changes ["remove_entries_indexes"], ", ".join ([x.title for x
             # in pl_changes ["new_entries"]]), pl_changes ["new_name"]))
+
+            if pl_changes["new_entries"] or pl_changes["remove_entries_indexes"] or pl_changes["new_name"]:
+                c_log = "**CHANGES**\n\n"
+                if pl_changes["new_entries"]:
+                    new_entries_string = "\n".join(["    {}. `{}`".format(ind, nice_cut(
+                        entry.title, 40)) for ind, entry in enumerate(pl_changes["new_entries"], 1)])
+                    c_log += "**New entries**\n{}\n".format(new_entries_string)
+                if pl_changes["remove_entries_indexes"]:
+                    removed_entries_string = "\n".join(
+                        ["    {}. `{}`".format(ind, nice_cut(entry.title, 40)) for ind, entry in enumerate(pl_changes["remove_entries"], 1)])
+                    c_log += "**Removed entries**\n{}\n".format(
+                        removed_entries_string)
+                if pl_changes["new_name"]:
+                    c_log += "**Renamed playlist**\n  From `{}` to `{}`".format(
+                        savename.title(), pl_changes["new_name"].title())
+            else:
+                c_log = "No changes were made"
+
             self.playlists.edit_playlist(
                 savename,
                 player.playlist,
@@ -5296,8 +5309,9 @@ class MusicBot(discord.Client):
                 remove_entries_indexes=pl_changes["remove_entries_indexes"],
                 new_name=pl_changes["new_name"])
             self.log("Closed the playlist builder and saved the playlist")
-            return Response("Successfully saved *{}*".format(
-                user_savename.replace("_", " ").title()))
+
+            return Response("Successfully saved **{}**\n\n{}".format(
+                user_savename.replace("_", " ").title(), c_log))
 
     @command_info("1.9.2", 1479945600, {
         "3.3.6": (1497387101,
