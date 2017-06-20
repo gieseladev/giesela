@@ -1448,22 +1448,17 @@ class MusicBot(discord.Client):
 
                 return await self.forceplay(player, leftover_args, e.use_url)
 
-    async def get_play_entry(self, player, channel, author, leftover_args,
-                             song_url):
-        song_url = song_url.strip('<>')
-
-        if leftover_args:
-            song_url = ' '.join([song_url, *leftover_args])
+    async def get_play_entry(self, player, query, channel=None, author=None, playlist=None):
+        song_url = query
 
         try:
             info = await self.downloader.extract_info(
                 player.playlist.loop, song_url, download=False, process=False)
         except Exception as e:
-            raise exceptions.CommandError(e, expire_in=30)
+            raise e
 
         if not info:
-            raise exceptions.CommandError(
-                "That video cannot be played.", expire_in=30)
+            return False
 
         # abstract the search handling away from the user
         # our ytdl options allow us to use search strings as input urls
@@ -1480,10 +1475,7 @@ class MusicBot(discord.Client):
             )
 
             if not info:
-                raise exceptions.CommandError(
-                    "Error extracting info from search string, youtubedl returned no data.  "
-                    "You may need to restart the bot if this continues to happen.",
-                    expire_in=30)
+                return False
 
             if not all(info.get('entries', [])):
                 # empty list, no data
@@ -1514,31 +1506,8 @@ class MusicBot(discord.Client):
                     raise exceptions.CommandError(
                         "Error queuing playlist:\n%s" % e, expire_in=30)
 
-            t0 = time.time()
-
-            # My test was 1.2 seconds per song, but we maybe should fudge it a bit, unless we can
-            # monitor it and edit the message with the estimated time, but that's some ADVANCED SHIT
-            # I don't think we can hook into it anyways, so this will have to do.
-            # It would probably be a thread to check a few playlists and get the speed from that
-            # Different playlists might download at different speeds though
-            wait_per_song = 1.2
-
             entry_list = await player.playlist.entries_import_from(
                 song_url, channel=channel, author=author)
-
-            tnow = time.time()
-            ttime = tnow - t0
-            listlen = len(entry_list)
-            drop_count = 0
-
-            self.log(
-                "Processed ***REMOVED******REMOVED*** songs in ***REMOVED******REMOVED*** seconds at ***REMOVED***:.2f***REMOVED***s/song, ***REMOVED***:+.2g***REMOVED***/song from expected (***REMOVED******REMOVED***s)".
-                format(listlen,
-                       self._fixg(ttime), ttime / listlen, ttime / listlen -
-                       wait_per_song, self._fixg(wait_per_song * num_songs)))
-
-            reply_text = "Enqueued **%s** songs to be played. Position in queue: %s"
-            btext = str(listlen - drop_count)
             return entry_list
 
         else:
@@ -1560,10 +1529,7 @@ class MusicBot(discord.Client):
                         % song_url)
                     self.log("[Info] Using \"%s\" instead" % e.use_url)
 
-                return await self.cmd_play(player, channel, author,
-                                           leftover_args, e.use_url)
-
-        self.log("I reached code which I shouldn't have...")
+                raise e
 
     async def _get_play_playlist_async_entries(self, player, channel, author,
                                                playlist_url, extractor_type):
@@ -1782,7 +1748,7 @@ class MusicBot(discord.Client):
                     continue
 
                 playlistname = args[0]
-                add_entry = (await self.get_play_entry(player, channel, author, [],  current_result["webpage_url"]))[0]
+                add_entry = (await self.get_play_entry(player, current_result["webpage_url"], channel=channel, author=author))[0]
 
                 if playlistname not in self.playlists.saved_playlists:
                     if len(playlistname) < 3:
@@ -2740,6 +2706,9 @@ class MusicBot(discord.Client):
                  answer + "\n")
         return Response(answer)
 
+    @command_info("1.9.5", 1477774380, ***REMOVED***
+        "3.6.1": (1497971656, "Fixed broken line wrap")
+    ***REMOVED***)
     async def cmd_ask(self, author, channel, message, leftover_args):
         """
         ///|Usage
@@ -2935,7 +2904,7 @@ class MusicBot(discord.Client):
         # await self.safe_send_message(channel, choice(["Welp... That was it!\n**Thanks for playing**", "it took me about 2 hours to set this up and I enjoyed every second. Thanks for playing!\nAnd especially thanks for caring enough to look me up ;).\nIt really means a lot to me.", "So then. I'm really embarassed now, but it's over. it's done. Thanks for playing and thanks for the adrenaline rush. I sure enjoyed it.\nGoodbye!", "Well. Thanks for spending the last ***REMOVED******REMOVED*** with me. I really do enjoy your presence... But it's over now. Enjoy the rest of the day!".format(format_time((datetime.now() - start_time).total_seconds(), True, 1, 1))]))
         # return
 
-        client = tungsten.Tungsten("EH8PUT-67PJ967LG8")
+        client = Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
         if not res.success:
             await self.safe_send_message(
@@ -5111,11 +5080,11 @@ class MusicBot(discord.Client):
                 if arguments is not None:
                     msg = await self.safe_send_message(channel,
                                                        "I'm working on it.")
-                    query = arguments[1:]
+                    query = " ".join(arguments)
                     try:
                         start_time = datetime.now()
                         entries = await self.get_play_entry(
-                            player, channel, author, query, arguments[0])
+                            player, query, author=author, channel=channel)
                         if (datetime.now() - start_time).total_seconds() > 40:
                             await self.safe_send_message(
                                 author,
@@ -5293,7 +5262,7 @@ class MusicBot(discord.Client):
                     c_log += "**New entries**\n***REMOVED******REMOVED***\n".format(new_entries_string)
                 if pl_changes["remove_entries_indexes"]:
                     removed_entries_string = "\n".join(
-                        ["    ***REMOVED******REMOVED***. `***REMOVED******REMOVED***`".format(ind, nice_cut(entry.title, 40)) for ind, entry in enumerate(pl_changes["remove_entries"], 1)])
+                        ["    ***REMOVED******REMOVED***. `***REMOVED******REMOVED***`".format(pl_changes["remove_entries_indexes"][ind], nice_cut(entry.title, 40)) for ind, entry in enumerate(pl_changes["remove_entries"])])
                     c_log += "**Removed entries**\n***REMOVED******REMOVED***\n".format(
                         removed_entries_string)
                 if pl_changes["new_name"]:
@@ -5313,23 +5282,20 @@ class MusicBot(discord.Client):
             return Response("Successfully saved *****REMOVED******REMOVED*****\n\n***REMOVED******REMOVED***".format(
                 user_savename.replace("_", " ").title(), c_log))
 
-    @command_info("1.9.2", 1479945600, ***REMOVED***
-        "3.3.6": (1497387101,
-                  "added the missing \"s\", should be working again"),
-        "3.4.4":
-        (1497611753,
-         "Changed command name from \"addplayingtoplaylist\" to \"addtoplaylist\", thanks Paulo"
-         ),
-        "3.5.5": (1497792167,
-                  "Now displaying what entry has been added to the playlist"),
-        "3.5.8": (1497826743, "Even more information displaying")
+    @command_info("2.9.2", 1479945600, ***REMOVED***
+        "3.3.6": (1497387101, "added the missing \"s\", should be working again"),
+        "3.4.4": (1497611753, "Changed command name from \"addplayingtoplaylist\" to \"addtoplaylist\", thanks Paulo"),
+        "3.5.5": (1497792167, "Now displaying what entry has been added to the playlist"),
+        "3.5.8": (1497826743, "Even more information displaying"),
+        "3.6.1": (1497972538, "now accepts a query parameter which adds a song to the playlist like the `play` command does so for the queue")
     ***REMOVED***)
-    async def cmd_addtoplaylist(self, channel, author, player, playlistname):
+    async def cmd_addtoplaylist(self, channel, author, player, playlistname, query=None):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***addtoplaylist <playlistname>`
+        `***REMOVED***command_prefix***REMOVED***addtoplaylist <playlistname>` [link | name]
         ///|Explanation
-        Add the current entry to a playlist
+        Add the current entry to a playlist.
+        If you either provide a link or a name, that song is added to the queue.
         """
 
         if playlistname is None:
@@ -5338,19 +5304,23 @@ class MusicBot(discord.Client):
 
         playlistname = playlistname.lower()
 
-        if not player.current_entry:
-            return Response(
-                "There's nothing playing right now so I can't add it to your playlist..."
-            )
+        if query:
+            add_entry = (await self.get_play_entry(player, query, channel=channel, author=author))[0]
+        else:
+            if not player.current_entry:
+                return Response(
+                    "There's nothing playing right now so I can't add it to your playlist..."
+                )
 
-        add_entry = player.current_entry
-        if add_entry.provides_timestamps:
-            current_timestamp = add_entry.get_current_song_from_timestamp(
-                player.progress)["name"]
-            # this looks ugly but eh, it works
-            add_entry = (await self.get_play_entry(player, channel, author,
-                                                   current_timestamp[1:],
-                                                   current_timestamp[0]))[0]
+            add_entry = player.current_entry
+            if add_entry.provides_timestamps:
+                current_timestamp = add_entry.get_current_song_from_timestamp(
+                    player.progress)["name"]
+                # this looks ugly but eh, it works
+                try:
+                    add_entry = (await self.get_play_entry(player, current_timestamp, channel=channel, author=author))[0]
+                except:
+                    pass  # just go ahead and add the whole thing, what do I care :3
 
         if playlistname not in self.playlists.saved_playlists:
             if len(playlistname) < 3:
@@ -5365,7 +5335,7 @@ class MusicBot(discord.Client):
             playlistname, player.playlist, new_entries=[add_entry])
         return Response("Added `***REMOVED******REMOVED***` to playlist \"***REMOVED******REMOVED***\".".format(add_entry.title, playlistname.title()))
 
-    @command_info("1.9.2", 1479945600, ***REMOVED***
+    @command_info("2.9.2", 1479945600, ***REMOVED***
         "3.3.6": (1497387101,
                   "added the missing \"s\", should be working again"),
         "3.4.4":
@@ -5398,9 +5368,7 @@ class MusicBot(discord.Client):
         if remove_entry.provides_timestamps:
             current_timestamp = remove_entry.get_current_song_from_timestamp(
                 player.progress)["name"]
-            remove_entry = await self.get_play_entry(player, channel, author,
-                                                     current_timestamp[1:],
-                                                     current_timestamp[0])
+            remove_entry = await self.get_play_entry(player, current_timestamp, channel=channel, author=author)
 
         if playlistname not in self.playlists.saved_playlists:
             return Response("There's no playlist the name \"***REMOVED******REMOVED***\".".format(playlistname.title()))
