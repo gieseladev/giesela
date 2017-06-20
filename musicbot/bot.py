@@ -1687,6 +1687,7 @@ class MusicBot(discord.Client):
     @command_info("1.0.0", 1477180800, ***REMOVED***
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "3.5.9": (1497890999, "Revamped design and functions making this command more useful")
+        "3.6.1": (1497967505, "deleting messages when leaving search")
     ***REMOVED***)
     async def cmd_search(self, player, channel, author, leftover_args):
         """
@@ -1766,6 +1767,9 @@ class MusicBot(discord.Client):
                 current_result_index %= total_results
             elif command == "play":
                 await self.cmd_play(player, channel, author, [], current_result["webpage_url"])
+                await self.safe_delete_message(result_message)
+                await self.safe_delete_message(interface_message)
+                await self.safe_delete_message(response_message)
                 return Response("Alright, coming right up!")
             elif command == "addtoplaylist":
                 if len(args) < 1:
@@ -1792,11 +1796,17 @@ class MusicBot(discord.Client):
 
                     self.playlists.set_playlist(
                         [add_entry], playlistname, author.id)
+                    await self.safe_delete_message(result_message)
+                    await self.safe_delete_message(interface_message)
+                    await self.safe_delete_message(response_message)
                     return Response("Created a new playlist \"***REMOVED******REMOVED***\" and added `***REMOVED******REMOVED***`.".format(playlistname.title(),
                                                                                            add_entry.title))
 
                 self.playlists.edit_playlist(
                     playlistname, player.playlist, new_entries=[add_entry])
+                await self.safe_delete_message(result_message)
+                await self.safe_delete_message(interface_message)
+                await self.safe_delete_message(response_message)
                 return Response("Added `***REMOVED******REMOVED***` to playlist \"***REMOVED******REMOVED***\".".format(add_entry.title, playlistname.title()))
 
             await self.safe_delete_message(result_message)
