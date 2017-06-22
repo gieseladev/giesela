@@ -16,7 +16,7 @@ The standard embed can have:
 - Url (which opens when clicking on the title of the embed)
 - Timestamp
 - Image
-- Thumbnail *A smaller imaged displayed at the top-right of the embed*
+- Thumbnail *A smaller image displayed at the top-right of the embed*
 - Author with these attributes
   - Name
   - Picture
