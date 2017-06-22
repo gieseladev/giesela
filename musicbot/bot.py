@@ -153,10 +153,14 @@ class MusicBot(discord.Client):
 
             self.users_in_menu.add(orig_msg.author.id)
             self.log("Now blocking " + str(orig_msg.author))
-            res = await func(self, *args, **kwargs)
-            self.users_in_menu.remove(orig_msg.author.id)
-            self.log("Unblocking " + str(orig_msg.author))
-            return res
+            try:
+                res = await func(self, *args, **kwargs)
+                self.users_in_menu.remove(orig_msg.author.id)
+                self.log("Unblocking " + str(orig_msg.author))
+                return res
+            except Exception as e:  # just making sure that no one gets stuck in a menu and can't use any commands anymore
+                self.users_in_menu.remove(orig_msg.author.id)
+                raise e
 
         return wrapper
 
@@ -3862,9 +3866,9 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                str(reaction.emoji).startswith("📽") or
-                str(reaction.emoji).startswith("💾")
-                ) and reaction.count > 1 and user == author:
+                        str(reaction.emoji).startswith("📽") or
+                        str(reaction.emoji).startswith("💾")
+                    ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
@@ -4163,7 +4167,8 @@ class MusicBot(discord.Client):
         "3.4.7": (1497619770, "Fixed an annoying bug in which the builder wouldn't show any entries if the amount of entries was a multiple of 20"),
         "3.5.1": (1497706811, "Giesela finally keeps track whether a certain entry comes from a playlist or not"),
         "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page."),
-        "3.6.1": (1497969463, "when saving a playlist, list all changes")
+        "3.6.1": (1497969463, "when saving a playlist, list all changes"),
+        "3.6.8": (1498162378, "checking whether start and end indieces are numbers")
     })
     async def cmd_playlist(self, channel, author, server, player,
                            leftover_args):
@@ -4185,11 +4190,10 @@ class MusicBot(discord.Client):
         """
 
         argument = leftover_args[0].lower() if len(leftover_args) > 0 else ""
-        savename = re.sub(
-            "\W", "",
-            leftover_args[1].lower()) if len(leftover_args) > 1 else ""
-        load_mode = leftover_args[
-            2].lower() if len(leftover_args) > 2 else "add"
+        savename = re.sub("\W", "", leftover_args[1].lower()) if len(
+            leftover_args) > 1 else ""
+        load_mode = leftover_args[2].lower() if len(
+            leftover_args) > 2 else "add"
         additional_args = leftover_args[2:] if len(leftover_args) > 2 else []
 
         forbidden_savenames = [
@@ -4239,21 +4243,21 @@ class MusicBot(discord.Client):
                 if player.current_entry is not None:
                     player.skip()
 
-            from_index = int(additional_args[2]) - \
-                1 if len(additional_args) > 2 else 0
-            if from_index >= len(clone_entries) or from_index < 0:
-                return Response(
-                    "Can't load the playlist starting from entry {}. This value is out of bounds.".
-                    format(from_index),
-                    delete_after=20)
+            try:
+                from_index = int(additional_args[2]) - \
+                    1 if len(additional_args) > 2 else 0
+                if from_index >= len(clone_entries) or from_index < 0:
+                    return Response("Can't load the playlist starting from entry {}. This value is out of bounds.".format(from_index))
+            except ValueError:
+                return Response("Start index must be a number")
 
-            to_index = int(additional_args[
-                3]) if len(additional_args) > 3 else len(clone_entries)
-            if to_index > len(clone_entries) or to_index < 0:
-                return Response(
-                    "Can't load the playlist from the {}. to the {}. entry. These values are out of bounds.".
-                    format(from_index, to_index),
-                    delete_after=20)
+            try:
+                to_index = int(additional_args[3]) if len(
+                    additional_args) > 3 else len(clone_entries)
+                if to_index > len(clone_entries) or to_index < 0:
+                    return Response("Can't load the playlist from the {}. to the {}. entry. These values are out of bounds.".format(from_index, to_index))
+            except ValueError:
+                return Response("End index must be a number")
 
             if to_index - from_index <= 0:
                 return Response("No songs to play. RIP.", delete_after=20)
@@ -5989,11 +5993,11 @@ class MusicBot(discord.Client):
             return
 
         if message.author.id in self.users_in_menu:
-            self.log("User is currently in a menu")
+            self.log("{} is currently in a menu. Ignoring \"{}\"".format(
+                author, message_content))
             return
 
         if not message_content.startswith(self.config.command_prefix):
-
             if self.config.owned_channels and message.channel.id not in self.config.owned_channels:
                 return
 
