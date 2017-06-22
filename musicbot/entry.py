@@ -9,7 +9,8 @@ import requests
 
 from .exceptions import ExtractionError
 from .spotify import SpotifyTrack
-from .utils import get_header, get_video_timestamps, md5sum, slugify
+from .utils import (clean_songname, get_header, get_video_timestamps, md5sum,
+                    slugify)
 
 
 class BasePlaylistEntry:
@@ -70,12 +71,25 @@ class BasePlaylistEntry:
 
         return queue
 
-    @classmethod
-    def from_json(cls, playlist, jsonstring):
-        raise NotImplementedError
+    def get_current_song_from_timestamp(self, progress):
+        if not self.provides_timestamps:
+            return False
 
-    def to_json(self):
-        raise NotImplementedError
+        current_title = None
+        for entry in self.sub_queue():
+            if progress >= entry["start"] or current_title is None:
+                current_title = entry
+
+        return current_title
+
+    def get_timestamped_song(self, index):
+        return self.sub_queue()[index]
+
+    def get_local_progress(self, progress):
+        if not self.provides_timestamps:
+            return False
+        entry = self.get_current_song_from_timestamp(progress)
+        return progress - entry["start"], entry["duration"]
 
     async def _download(self):
         raise NotImplementedError
@@ -122,26 +136,6 @@ class BasePlaylistEntry:
     def __hash__(self):
         return id(self)
 
-    def get_current_song_from_timestamp(self, progress):
-        if not self.provides_timestamps:
-            return False
-
-        current_title = None
-        for entry in self.sub_queue():
-            if progress >= entry["start"] or current_title is None:
-                current_title = entry
-
-        return current_title
-
-    def get_timestamped_song(self, index):
-        return self.sub_queue()[index]
-
-    def get_local_progress(self, progress):
-        if not self.provides_timestamps:
-            return False
-        entry = self.get_current_song_from_timestamp(progress)
-        return progress - entry["start"], entry["duration"]
-
 
 class URLPlaylistEntry(BasePlaylistEntry):
     def __init__(self, queue, url, title, duration=0, expected_filename=None, start_seconds=0, end_seconds=None, spotify_track=None, provided_song_timestamps=None, youtube_data=None, update_additional_information=True, **meta):
@@ -173,7 +167,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         if self.spotify_track is not None and self.spotify_track.certainty > .6:
             return self.spotify_track.name + " - " + self.spotify_track.artist
         else:
-            return self._title
+            return clean_songname(self._title)
 
     @property
     def thumbnail(self):
@@ -282,11 +276,9 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.provided_song_timestamps = songs
 
     def get_youtube_data(self):
-        print("getting data")
         resp = requests.get(
             "https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo&part=snippet,statistics&id=" + self.video_id)
         self.youtube_data = resp.json()["items"][0]
-        # print("found data:\n" + str(self.youtube_data))
 
     def to_dict(self):
         meta_dict = ***REMOVED******REMOVED***

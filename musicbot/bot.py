@@ -1734,12 +1734,14 @@ class MusicBot(discord.Client):
                 current_result_index += ***REMOVED***"n": 1, "p": -1***REMOVED***[command]
                 current_result_index %= total_results
             elif command == "play":
+                await self.send_typing(channel)
                 await self.cmd_play(player, channel, author, [], current_result["webpage_url"])
                 await self.safe_delete_message(result_message)
                 await self.safe_delete_message(interface_message)
                 await self.safe_delete_message(response_message)
                 return Response("Alright, coming right up!")
             elif command == "addtoplaylist":
+                await self.send_typing(channel)
                 if len(args) < 1:
                     err_msg = await self.safe_send_message(channel, "You have to specify the playlist which you would like to add this result to")
                     await asyncio.sleep(3)
