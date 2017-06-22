@@ -50,13 +50,13 @@ class Playlists:
         if load_entries and not os.stat(playlist_information["location"]).st_size == 0:
             with open(playlist_information["location"], "r") as file:
                 serialized_json = json.loads(file.read())
-            for entry in serialized_json:
+            for ind, entry in enumerate(serialized_json):
                 #print (str (urlEntry.entry_from_json (playlist, entry).title))
                 if channel and author is not None:
                     entry.update(***REMOVED***"meta":
                                   ***REMOVED***"channel": ***REMOVED***"type": "channel", "name": channel.name, "id": channel.id***REMOVED***,
                                    "author": ***REMOVED***"type": "author", "name": author.name, "id": author.id***REMOVED***,
-                                   "playlist": ***REMOVED***"name": playlistname, "author": playlist_information["author"]***REMOVED******REMOVED******REMOVED***)
+                                   "playlist": ***REMOVED***"name": playlistname, "author": playlist_information["author"], "index": ind***REMOVED******REMOVED******REMOVED***)
                 entries.append(urlEntry.from_dict(playlist, entry, False))
 
         playlist_information["entries"] = entries

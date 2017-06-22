@@ -4,9 +4,12 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-MAIN_VERSION = "3.5.9"
-SUB_VERSION = "Veggiesela"
+MAIN_VERSION = "3.6.7"
+SUB_VERSION = "Weebiesela"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
+
+past_sub_versions = ***REMOVED***"3.6.0": "Weebiesela", "3.5.0": "Veggiesela", "3.4.0": "Gunzulalela", "3.3.0": "Giselator",
+                     "3.2.0": "GG_iesela", "3.1.0": "age_of_Giesela", "3.0.0": "Giesela-PLUS"***REMOVED***
 
 AUDIO_CACHE_PATH = os.path.join(os.getcwd(), "audio_cache")
 DISCORD_MSG_CHAR_LIMIT = 2000
@@ -48,7 +51,7 @@ def get_dev_changelog():
         base_url + dev_version).content.decode("utf-8")
     bs = BeautifulSoup(changelog_page, "lxml")
     html_to_markdown = [(r"<\/?li>", "\t"), (r"<\/?ul>", ""), (r"<code.+?>(.+?)<\/code>", r"`\1`"), (r"<strong>(.+?)<\/strong>",
-                                                                                                     r"**\1**"), (r"<a.+?>(.+?)<\/a>", r"`\1`"), (r"\n\W+\n", "\n")]
+                                                                                                     r"**\1**"), (r"<a\shref=\"(.+?)\">(.+?)<\/a>", r"[`\2`](\1)"), (r"\n\W+\n", "\n")]
 
     changes = []
 

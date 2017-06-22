@@ -60,11 +60,7 @@ def write_file(filename, contents):
             f.write('\n')
 
 
-def create_bar(progress,
-               length=10,
-               full_char="■",
-               half_char=None,
-               empty_char="□"):
+def create_bar(progress, length=10, full_char="■", half_char=None, empty_char="□"):
     use_halves = half_char is not None
     fill_to = int(2 * length * progress)
     residue = fill_to % 2
@@ -117,13 +113,15 @@ def clean_songname(query):
         "with lyrics", "lyrics", "hd", "soundtrack", "original", "official",
         "feat", "ft", "creditless", "music", "video", "edition", "special",
         "version", "ver", "dvd", "new", "raw", "textless", "mp3", "avi", "mp4",
-        "english", "eng", "with", "album", "theme"
+        "english", "eng", "with", "album", "theme", "full"
     ]
 
     for key in to_remove:
-        query = re.sub(key, " ", query, flags=re.IGNORECASE)
+        # mainly using \W over \b because I want to match [HD] too
+        query = re.sub(r"(^|\W)" + key + r"(\W|$)",
+                       " ", query, flags=re.IGNORECASE)
 
-    query = re.sub(r"[^\w\s\-\&]|\d", " ", query)
+    query = re.sub(r"[^\w\s\-\&']|\d", " ", query)
     query = re.sub(r"\s+", " ", query)
 
     return query.strip()
@@ -238,7 +236,7 @@ def parse_timestamp(timestamp):
 
 
 def hex_to_dec(hex_code):
-    return int(hex_code, 16)
+    return int(hex_code.lstrip("#"), 16)
 
 
 def to_timestamp(seconds):
@@ -263,10 +261,6 @@ def slugify(value):
         'ascii', 'ignore').decode('ascii')
     value = re.sub('[^\w\s-]', '', value).strip().lower()
     return re.sub('[-\s]+', '-', value)
-
-
-def sane_round_int(x):
-    return int(decimal.Decimal(x).quantize(1, rounding=decimal.ROUND_HALF_UP))
 
 
 def format_time_ffmpeg(s):
