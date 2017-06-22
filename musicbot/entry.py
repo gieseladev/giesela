@@ -177,6 +177,8 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
     @property
     def thumbnail(self):
+        if not self.youtube_data:
+            self.youtube_data_thread.join()
         return self.youtube_data["snippet"]["thumbnails"]["default"]["url"]
 
     @property
@@ -266,7 +268,8 @@ class URLPlaylistEntry(BasePlaylistEntry):
             Thread(target=self.search_for_timestamps).start()
 
         if self.youtube_data is None:
-            Thread(target=self.get_youtube_data).start()
+            self.youtube_data_thread = Thread(target=self.get_youtube_data)
+            self.youtube_data_thread.start()
 
         self.searched_additional_information = True
 
