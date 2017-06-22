@@ -33,7 +33,6 @@ from discord.utils import find
 from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from openpyxl import Workbook
-from pyshorteners import Shortener
 
 from . import downloader, exceptions
 from .bookmarks import bookmark
@@ -46,11 +45,9 @@ from .entry import URLPlaylistEntry
 from .games.game_2048 import Game2048
 from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
-from .langid import LanguageIdentifier, model
 from .logger import OnlineLogger
 from .nine_gag import ContentType, get_post
 from .opus_loader import load_opus_lib
-from .papers import Papers
 from .player import MusicPlayer
 from .playlist import Playlist
 from .radio import Radio
@@ -60,10 +57,7 @@ from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .settings import Settings
 from .socket_server import SocketServer
-# from .translate import Translator
-# import newspaper
 from .tungsten import Tungsten
-from .twitter_api import get_tweet
 from .utils import (clean_songname, create_bar, escape_dis, format_time,
                     hex_to_dec, load_file, nice_cut, ordinal, paginate,
                     parse_timestamp, prettydate, random_line, to_timestamp,
@@ -94,7 +88,6 @@ class MusicBot(discord.Client):
         self.voice_client_move_lock = asyncio.Lock()
 
         self.config = Config(ConfigDefaults.options_file)
-        # self.papers = Papers(ConfigDefaults.papers_file)
         self.radios = Radios(ConfigDefaults.radios_file)
         self.playlists = Playlists(ConfigDefaults.playlists_file)
         self.random_sets = RandomSets(ConfigDefaults.random_sets)
@@ -104,14 +97,8 @@ class MusicBot(discord.Client):
         self.blacklist = set(load_file(self.config.blacklist_file))
         self.autoplaylist = load_file(self.config.auto_playlist_file)
         self.downloader = downloader.Downloader(download_folder='audio_cache')
-        # self.radio = Radio()
         self.calendar = Calendar(self)
         self.socket_server = SocketServer(self)
-        # self.shortener = Shortener(
-        #     "Google", api_key="AIzaSyCU67YMHlfTU_PX2ngHeLd-_dUds-m502k")
-        self.translator = Translator("en")
-        self.lang_identifier = LanguageIdentifier.from_modelstring(
-            model, norm_probs=True)
 
         self.exit_signal = None
         self.init_ok = False
@@ -2970,38 +2957,6 @@ class MusicBot(discord.Client):
         self.log("Answered " + message.author.name + "'s question with: " +
                  msgContent)
 
-    # async def cmd_translate(self, channel, message, targetLanguage,
-    #                         leftover_args):
-    #     """
-    #     Usage:
-    #         ***REMOVED***command_prefix***REMOVED***translate <targetLanguage> <message>
-    #     translate something from any language to the target language
-    #     """
-    #
-    #     await self.send_typing(channel)
-    #
-    #     gs = goslate.Goslate()
-    #     languages = gs.get_languages()
-    #
-    #     if len(targetLanguage) == 2 and (
-    #             targetLanguage not in list(languages.keys())):
-    #         return Response("I don't know this language")
-    #
-    #     if len(targetLanguage) > 2:
-    #         if targetLanguage.title() in list(languages.values()):
-    #             targetLanguage = list(languages.keys())[list(
-    #                 languages.values()).index(targetLanguage.title())]
-    #         else:
-    #             return Response("I don't know this language")
-    #
-    #     if len(leftover_args) < 1:
-    #         return Response("There's nothing to translate")
-    #
-    #     msgContent = " ".join(leftover_args)
-    #     # await self.safe_send_message (channel, msgContent)
-    #     # await self.safe_send_message (channel, targetLanguage)
-    #     return Response(gs.translate(msgContent, targetLanguage))
-
     async def cmd_goto(self, server, channel, user_mentions, author,
                        leftover_args):
         """
@@ -3262,31 +3217,6 @@ class MusicBot(discord.Client):
         await self.safe_send_message(channel,
                                      "I choose **" + choice(items) + "**")
 
-    # async def cmd_requestfeature(self, channel, author, leftover_args):
-    #     """
-    #     Usage:
-    #         ***REMOVED***command_prefix***REMOVED***requestfeature description
-    #
-    #     Request a feature to be added to the bot
-    #     """
-    #
-    #     await self.send_typing(channel)
-    #
-    #     if os.path.isfile("data/request.txt"):
-    #         with open("data/request.txt", "r") as orgFile:
-    #             orgContent = orgFile.read()
-    #     else:
-    #         orgContent = ""
-    #
-    #     with open("data/request.txt", "w") as newFile:
-    #         newContent = datetime.datetime.strftime(datetime.datetime.now(
-    #         ), "%Y-%m-%d %H:%M:%S") + " <" + str(author) + ">\n" + "\"" + " ".join(leftover_args) + "\"" + 2 * "\n"
-    #         newFile.write(newContent + orgContent)
-    #
-    #     await self.safe_send_message(self._get_owner(), "You have a new feature request: " + 2 * "\n" + newContent)
-    # await self.safe_send_message(channel, "Successfully received your
-    # request!")
-
     async def cmd_broadcast(self, server, message, leftover_args):
         """
         Usage:
@@ -3350,34 +3280,6 @@ class MusicBot(discord.Client):
             return
 
         await player.playlist.add_entry(message.attachments[0]["url"])
-
-    # async def cmd_halloween (self, player, message, channel, author):
-    #     """
-    #     Usage:
-    #         ***REMOVED***command_prefix***REMOVED***halloween
-    #
-    #     Activate the mighty spirit of the halloween festival.
-    #     """
-    #     await self.safe_send_message (channel, "Halloween is upon you! :jack_o_lantern:")
-    #     await self.cmd_ask (channel, message, ["Halloween"])
-    #     player.volume = .15
-    # await self.cmd_play (player, channel, author, permissions,
-    # ["https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g"],
-    # "https://www.youtube.com/playlist?list=PLOz0HiZO93naR5dcZqJ-r9Ul0LA2Tpt7g")
-
-    # async def cmd_christmas(self, player, message, channel, author):
-    #     """
-    #     Usage:
-    #         ***REMOVED***command_prefix***REMOVED***christmas
-    #
-    #     Activate the mighty spirit of the christmas festival.
-    #     """
-    #     await self.safe_send_message(channel, "Christmas is upon you! :christmas_tree:")
-    #     await self.cmd_ask(channel, message, ["Christmas"])
-    #     player.volume = .15
-    # await self.cmd_play(player, channel, author,
-    # ["https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw"],
-    # "https://www.youtube.com/playlist?list=PLOz0HiZO93nae_euTdaeQwnVq0P01U_vw")
 
     async def cmd_getvideolink(self, player, message, channel, author,
                                leftover_args):
@@ -3512,149 +3414,6 @@ class MusicBot(discord.Client):
             channel,
             "Didn't find anything that goes by ***REMOVED***0***REMOVED***".format(leftover_args[0]),
             expire_in=15)
-
-    # @block_user
-    # async def cmd_news(self, message, channel, author, paper=None):
-    #     """
-    #     Usage:
-    #         ***REMOVED***command_prefix***REMOVED***news (if you already now what you want to read: url or name)
-    #
-    #     Get the latest news with this function!
-    #     """
-    #
-    #     await self.send_typing(channel)
-    #
-    #     if not paper:
-    #         def check(m):
-    #             return (
-    #                 m.content.lower()[0] in 'yn' or
-    #                 # hardcoded function name weeee
-    #                 m.content.lower().startswith('***REMOVED******REMOVED******REMOVED******REMOVED***'.format(self.config.command_prefix, 'news')) or
-    #                 m.content.lower().startswith('exit'))
-    #
-    #         for section in self.papers.config.sections():
-    #             await self.send_typing(channel)
-    #             paperinfo = self.papers.get_paper(section)
-    #             paper_message = await self.send_file(channel, str(paperinfo.cover), content="**" + str(paperinfo.name) + "**")
-    #
-    #             confirm_message = await self.safe_send_message(channel, "Do you want to read these papers? Type `y`, `n` or `exit`")
-    #             response_message = await self.wait_for_message(300, author=author, channel=channel, check=check)
-    #
-    #             if not response_message:
-    #                 await self.safe_delete_message(paper_message)
-    #                 await self.safe_delete_message(confirm_message)
-    #                 return Response("Ok nevermind.", delete_after=30)
-    #
-    #             elif response_message.content.startswith(self.config.command_prefix) or \
-    #                     response_message.content.lower().startswith('exit'):
-    #
-    #                 await self.safe_delete_message(paper_message)
-    #                 await self.safe_delete_message(confirm_message)
-    #                 return
-    #
-    #             if response_message.content.lower().startswith('y'):
-    #                 await self.safe_delete_message(paper_message)
-    #                 await self.safe_delete_message(confirm_message)
-    #                 await self.safe_delete_message(response_message)
-    #
-    #                 return Response((await self.cmd_news(message, channel, author, paper=section)).content)
-    #             else:
-    #                 await self.safe_delete_message(paper_message)
-    #                 await self.safe_delete_message(confirm_message)
-    #                 await self.safe_delete_message(response_message)
-    #
-    #         return Response("I don't have any more papers :frowning:", delete_after=30)
-    #
-    #     if not self.papers.get_paper(paper):
-    #         try:
-    #             npaper = newspaper.build(paper, memoize_articles=False)
-    #             await self.safe_send_message(channel, "**" + npaper.brand + "**")
-    #         except:
-    #             self.safe_send_message(
-    #                 channel, "Something went wrong while looking at the url")
-    #             return
-    #     else:
-    #         paperinfo = self.papers.get_paper(paper)
-    #         npaper = newspaper.build(
-    #             paperinfo.url, language=paperinfo.language, memoize_articles=False)
-    #         await self.send_file(channel, str(paperinfo.cover), content="**" + str(paperinfo.name) + "**")
-    #
-    #     await self.safe_send_message(channel, npaper.description + "\n*Found " + str(len(npaper.articles)) + " articles*\n=========================\n\n")
-    #
-    #     def check(m):
-    #         return (
-    #             m.content.lower()[0] in 'yn' or
-    #             # hardcoded function name weeee
-    #             m.content.lower().startswith('***REMOVED******REMOVED******REMOVED******REMOVED***'.format(self.config.command_prefix, 'news')) or
-    #             m.content.lower().startswith('exit'))
-    #
-    #     for article in npaper.articles:
-    #         await self.send_typing(channel)
-    #         try:
-    #             article.download()
-    #             article.parse()
-    #             article.nlp()
-    #         except:
-    #             self.log(
-    #                 "Something went wrong while parsing \"" + str(article) + "\", skipping it")
-    #             continue
-    #
-    #         if len(article.authors) > 0:
-    #             article_author = "Written by: ***REMOVED***0***REMOVED***".format(
-    #                 ", ".join(article.authors))
-    #         else:
-    #             article_author = "Couldn't determine the author of this article."
-    #
-    #         if len(article.keywords) > 0:
-    #             article_keyword = "Keywords: ***REMOVED***0***REMOVED***".format(
-    #                 ", ".join(article.keywords))
-    #         else:
-    #             article_keyword = "Couldn't make out any keywords"
-    #
-    #         article_title = article.title
-    #         article_summary = article.summary
-    #         article_image = article.top_image
-    #
-    #         article_text = "\n\n*****REMOVED******REMOVED*****\n****REMOVED******REMOVED****\n```\n\n***REMOVED******REMOVED***\n```\n***REMOVED******REMOVED***\n".format(
-    #             article_title, article_keyword, article_summary, article_author)
-    #
-    #         article_message = await self.safe_send_message(channel, article_text)
-    #
-    #         confirm_message = await self.safe_send_message(channel, "Do you want to read this? Type `y`, `n` or `exit`")
-    #         response_message = await self.wait_for_message(300, author=author, channel=channel, check=check)
-    #
-    #         if not response_message:
-    #             await self.safe_delete_message(article_message)
-    #             await self.safe_delete_message(confirm_message)
-    #             return Response("Ok nevermind.", delete_after=30)
-    #
-    #         elif response_message.content.startswith(self.config.command_prefix) or \
-    #                 response_message.content.lower().startswith('exit'):
-    #
-    #             await self.safe_delete_message(article_message)
-    #             await self.safe_delete_message(confirm_message)
-    #             return
-    #
-    #         if response_message.content.lower().startswith('y'):
-    #             await self.safe_delete_message(article_message)
-    #             await self.safe_delete_message(confirm_message)
-    #             await self.safe_delete_message(response_message)
-    #
-    #             if len(article.text) > 1500:
-    #                 fullarticle_text = "*****REMOVED******REMOVED*****\n****REMOVED******REMOVED****\n\n<***REMOVED******REMOVED***>\n\n****REMOVED******REMOVED****".format(
-    #                     article_title, article_author, article.url, "The full article exceeds the limits of Discord so I can only provide you with this link")
-    #             else:
-    #                 fullarticle_text = "*****REMOVED******REMOVED*****\n****REMOVED******REMOVED****\n\n***REMOVED******REMOVED***".format(
-    #                     article_title, article_author, article.text)
-    #
-    #             return Response(fullarticle_text)
-    #         else:
-    #             await self.safe_delete_message(article_message)
-    #             await self.safe_delete_message(confirm_message)
-    #             await self.safe_delete_message(response_message)
-    #
-    # return Response("Can't find any more articles :frowning:",
-    # delete_after=30)
 
     @block_user
     async def cmd_cah(self, message, channel, author, leftover_args):
@@ -4350,9 +4109,9 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                        str(reaction.emoji).startswith("📽") or
-                        str(reaction.emoji).startswith("💾")
-                    ) and reaction.count > 1 and user == author:
+                str(reaction.emoji).startswith("📽") or
+                str(reaction.emoji).startswith("💾")
+                ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
@@ -4507,18 +4266,6 @@ class MusicBot(discord.Client):
             await self.safe_delete_message(msg)
             await self.safe_delete_message(response)
 
-    # @owner_only
-    # async def cmd_getemojicode(self, channel, message, emoji):
-    #     """
-    #     Usage:
-    #         ***REMOVED***command_prefix***REMOVED***getemojicode emoji
-    #
-    #     logs the emoji to the console so that you can retrieve the unicode symbol.
-    #     """
-    #
-    #     self.log(emoji)
-    #     await self.safe_delete_message(message)
-
     async def cmd_9gag(self, channel, author, post_id):
         """
         ///|Usage
@@ -4576,62 +4323,6 @@ class MusicBot(discord.Client):
                 em.set_image(url=comment.content)
 
             await self.send_message(channel, embed=em)
-
-    # async def nine_gag_get_section(self, channel, message):
-    # category_dict = ***REMOVED***"🔥": "hot", "📈": "trending", "🆕": "new"***REMOVED***
-    #
-    # def check(reaction, user):
-    #     if reaction.custom_emoji:
-    #         return False
-    #
-    #     if str(reaction.emoji) in category_dict.keys() and reaction.count > 1 and user == author:
-    #         return True
-    #
-    #     return False
-    #
-    # msg = await self.safe_send_message("What section would you like to switch to?")
-    # await self.add_reaction(msg, "🔥")
-    # await self.add_reaction(msg, "📈")
-    # await self.add_reaction(msg, "🆕")
-    #
-    # reaction, user = await self.wait_for_reaction(check=check, message=msg)
-    #
-    # await self.safe_delete_message(msg)
-    #
-    # return category_dict[str(reaction.emoji)]
-
-    # async def cmd_twitter(self, channel, tweet_id):
-    #     """
-    #     ///|Usage
-    #     ***REMOVED***command_prefix***REMOVED***twitter <tweet_id>
-    #     ///|Explanation
-    #     Embed a tweet
-    #     """
-    #
-    #     tweet = get_tweet(tweet_id)
-    #     # self.log(tweet.created_at.year)
-    #     em = Embed(description=tweet.text)
-    #     em.set_author(url=tweet.user.url, name=tweet.user.name,
-    #                   icon_url=tweet.user.avatar_url)
-    #     await self.send_message(channel, embed=em)
-
-    # async def cmd_giphy(self, channel, gif_id):
-    #     async with aiohttp.ClientSession() as session:
-    #         async with session.get("http://api.giphy.com/v1/gifs/" + gif_id + "?api_key=dc6zaTOxFJmzC") as resp:
-    #             response = await resp.json()
-    #     data = response["data"]
-    #     url = data["url"]
-    #     username = data["username"]
-    #     source = data["source"]
-    #     caption = data["caption"] if "caption" in data else "GIPHY"
-    #     timestamp = datetime.strptime(
-    #         data["import_datetime"], "%Y-%m-%d %H:%M:%S")
-    #     gif = data["images"]["original"]["url"]
-    #
-    #     em = Embed(title=caption, timestamp=timestamp, url=url)
-    #     em.set_image(url=gif)
-    #     em.set_author(url=source, name=username)
-    #     await self.send_message(channel, embed=em)
 
     async def cmd_repeat(self, player):
         """
@@ -5422,96 +5113,6 @@ class MusicBot(discord.Client):
         self.playlists.edit_playlist(
             playlistname, player.playlist, remove_entries=[remove_entry])
         return Response("Removed `***REMOVED******REMOVED***` from playlist \"***REMOVED******REMOVED***\".".format(remove_entry.title, playlistname))
-
-    # async def cmd_setentrystart(self, player, playlistname):
-    #     """
-    #     Usage:
-    #         ***REMOVED***command_prefix***REMOVED***setentrystart <playlistname>
-    #
-    #     Set the start time for the current entry in the playlist to the current time
-    #     """
-    #
-    #     if playlistname is None:
-    #         return Response(
-    #             "Please specify the playlist's name!", delete_after=20)
-    #
-    #     playlistname = playlistname.lower()
-    #
-    #     if not player.current_entry:
-    #         return Response(
-    #             "There's nothing playing right now...", delete_after=20)
-    #
-    #     new_start = player.progress
-    #     new_entry = player.current_entry
-    #     new_entry.set_start(new_start)
-    #     self.playlists.edit_playlist(
-    #         playlistname,
-    #         player.playlist,
-    #         remove_entries=[player.current_entry],
-    #         new_entries=[new_entry])
-    #
-    #     return Response(
-    #         "Set the starting point to ***REMOVED******REMOVED*** seconds.".format(new_start),
-    #         delete_after=20)
-    #
-    # async def cmd_setentryend(self, player, playlistname):
-    #     """
-    #     Usage:
-    #         ***REMOVED***command_prefix***REMOVED***setentryend <playlistname>
-    #
-    #     Set the end time for the current entry in the playlist to the current time
-    #     """
-    #
-    #     if playlistname is None:
-    #         return Response(
-    #             "Please specify the playlist's name!", delete_after=20)
-    #
-    #     playlistname = playlistname.lower()
-    #
-    #     if not player.current_entry:
-    #         return Response(
-    #             "There's nothing playing right now...", delete_after=20)
-    #
-    #     new_end = player.progress
-    #     new_entry = player.current_entry
-    #     new_entry.set_end(new_end)
-    #     self.playlists.edit_playlist(
-    #         playlistname,
-    #         player.playlist,
-    #         remove_entries=[player.current_entry],
-    #         new_entries=[new_entry])
-    #
-    #     return Response(
-    #         "Set the ending point to ***REMOVED******REMOVED*** seconds.".format(new_start),
-    #         delete_after=20)
-
-    # async def cmd_setplayingname(self, player, playlistname, new_name, leftover_args):
-    #     """
-    #     Usage:
-    #         ***REMOVED***command_prefix***REMOVED***setplayingname <playlistname> <new name>
-    #
-    #     Set the name of the current song
-    #     """
-    #     new_title = new_name + " " + " ".join(leftover_args)
-    #
-    #     if playlistname is None:
-    #         return Response("Please specify the playlist's name!", delete_after=20)
-    #
-    #     playlistname = playlistname.lower()
-    #
-    #     if not player.current_entry:
-    #         return Response("There's nothing playing right now...", delete_after=20)
-    #
-    #     if len(new_title) > 500 or len(new_title) < 3:
-    #         return Response("The new title has to be at least 3 characters long", delete_after=20)
-    #
-    #     new_entry = player.current_entry
-    #     new_entry.set_title(new_title)
-    #     self.playlists.edit_playlist(
-    #         playlistname, player.playlist, remove_entries=[player.current_entry], new_entries=[new_entry])
-    #
-    # return Response("The new title is \"***REMOVED******REMOVED***\"".format(new_title),
-    # delete_after=20)
 
     async def cmd_wiki(self, channel, message, leftover_args):
         """
@@ -6371,122 +5972,6 @@ class MusicBot(discord.Client):
 
             return Response("Nevermore you shall be annoyed!")
 
-    # async def cmd_livetranslator(self,
-    #                              target_language=None,
-    #                              mode="1",
-    #                              required_certainty="70"):
-    #     """
-    #     Usage:
-    #         ***REMOVED***command_prefix***REMOVED***livetranslator [language code] [mode] [required certainty]
-    #
-    #     translate every message sent
-    #
-    #     modes:
-    #         1: send a message with the translation
-    #         2: replace the original message with the translation
-    #     """
-    #
-    #     if target_language is None:
-    #         if self.instant_translate:
-    #             self.instant_translate = False
-    #             return Response("turned off instant translation")
-    #         else:
-    #             return Response(
-    #                 "You should provide the language code you want me to translate to in order for me to work"
-    #             )
-    #     if target_language in [
-    #             'af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el',
-    #             'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr',
-    #             'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml',
-    #             'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk',
-    #             'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr',
-    #             'uk', 'ur', 'vi', 'zh-cn', 'zh-tw'
-    #     ]:
-    #         self.instant_translate = True
-    #         self.translator.to_lang = target_language
-    #         try:
-    #             mode = int(mode)
-    #         except:
-    #             mode = 1
-    #         if not (0 <= mode <= 2):
-    #             mode = 1
-    #         self.instant_translate_mode = mode
-    #
-    #         try:
-    #             required_certainty = int(required_certainty) / 100
-    #         except:
-    #             required_certainty = .7
-    #         if not (0 <= required_certainty <= 1):
-    #             required_certainty = .7
-    #
-    #         self.instant_translate_certainty = required_certainty
-    #
-    #         return Response("Starting now!")
-    #     else:
-    #         return Response("Please provide the iso format language code")
-
-    # async def cmd_translatehistory(self, author, message, leftover_args):
-    #     """
-    #     ///|Usage
-    #     `***REMOVED***command_prefix***REMOVED***translatehistory <channel> <start date | number of messages> <target language>`
-    #     ///|Explanation
-    #     Request messages in a channel to be translated.\nYou can specify the amount of messages either by number or by a starting point formated like `DAY/MONTH/YEAR HOUR:MINUTE`
-    #     """
-    #     starting_point = " ".join(leftover_args[1:-1])
-    #     target_language = leftover_args[-1].lower()
-    #
-    #     if target_language not in [
-    #             'af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el',
-    #             'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr',
-    #             'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml',
-    #             'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk',
-    #             'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr',
-    #             'uk', 'ur', 'vi', 'zh-cn', 'zh-tw'
-    #     ]:
-    #         return Response("Please provide the target language")
-    #
-    #     if message.channel_mentions is None or len(
-    #             message.channel_mentions) < 1:
-    #         return Response(
-    #             "Please provide a channel to take the messages from",
-    #             delete_after=20)
-    #     channel = message.channel_mentions[0]
-    #
-    #     limit = 500
-    #     start_point = None
-    #     try:
-    #         limit = int(starting_point)
-    #     except:
-    #         match = re.match(
-    #             "(\d***REMOVED***1,2***REMOVED***)\/(\d***REMOVED***1,2***REMOVED***)\/(\d***REMOVED***4***REMOVED***).***REMOVED***1***REMOVED***(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***1,2***REMOVED***)",
-    #             starting_point)
-    #         if match is None:
-    #             return Response(
-    #                 "I don't understand your starting point...\nBe sure to format it like `DAY/MONTH/YEAR HOUR:MINUTE`",
-    #                 delete_after=20)
-    #         day, month, year, hour, minute = match.group(1, 2, 3, 4, 5)
-    #         start_point = datetime(year, month, day, hour, minute)
-    #
-    #     em = Embed(title="TRANSLATION")
-    #     translator = Translator(target_language)
-    #     async for message in self.logs_from(
-    #             channel, limit=limit, after=start_point):
-    #         n = "*****REMOVED***0***REMOVED***** - ***REMOVED***1.year:0>4***REMOVED***/***REMOVED***1.month:0>2***REMOVED***/***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(
-    #             message.author.display_name, message.timestamp)
-    #
-    #         message_content = message.content.strip()
-    #         msg_language, probability = self.lang_identifier.classify(
-    #             message_content)
-    #         self.translator.from_lang = msg_language
-    #         try:
-    #             v = "`***REMOVED******REMOVED***`".format(translator.translate(message_content))
-    #         except:
-    #             continue
-    #         em.add_field(name=n, value=v, inline=False)
-    #     em._fields = em._fields[::-1]
-    #     await self.send_message(author, embed=em)
-    #     return Response("Done!")
-
     async def cmd_quote(self, author, channel, message, leftover_args):
         """
         ///|Usage
@@ -6798,7 +6283,8 @@ class MusicBot(discord.Client):
         await self.send_typing(channel)
 
         matcher = "^\***REMOVED******REMOVED***?interact".format(self.config.command_prefix)
-        query = re.sub(matcher, "", message.content, flags=re.MULTILINE)
+        query = re.sub(matcher, "", message.content,
+                       flags=re.MULTILINE).strip()
         if not query:
             return Response("Please provide a query for me to work with")
 
@@ -6820,19 +6306,6 @@ class MusicBot(discord.Client):
 
         return Response(msg)
 
-    # @command_info("3.6.2", 1497979507)
-    # async def cmd_ping(self, channel):
-    #     """
-    #     ///|Usage
-    #     `***REMOVED***command_prefix***REMOVED***ping
-    #     ///|Explanation
-    #     Get Giesela's latency
-    #     """
-    #     start_time = time.time()
-    #     msg = await self.safe_send_message(channel, "Calculating ping...")
-    #     ping = time.time() - start_time
-    #     await self.safe_edit_message(msg, "The ping is `***REMOVED******REMOVED***s`".format(round(ping, 2)))
-
     @owner_only
     async def cmd_shutdown(self, channel):
         await self.safe_send_message(channel, ":wave:")
@@ -6853,50 +6326,11 @@ class MusicBot(discord.Client):
             await self.safe_delete_message(message)
             return
 
-        # gif_match = re.match(r"((?:http|https):\/\/.+\.gif)", message_content)
-        # if gif_match is not None:
-        #     gif_link = gif_match.group(1)
-        #     em = Embed()
-        #     em.set_image(url=gif_link)
-        #     em.set_author(name=message.author.display_name,
-        #                   icon_url=message.author.avatar_url)
-        #     await self.send_message(message.channel, embed=em)
-        #     await self.safe_delete_message(message)
-        #     return
-
         if message.author.id in self.users_in_menu:
             self.log("User is currently in a menu")
             return
 
         if not message_content.startswith(self.config.command_prefix):
-            # if message.channel.id in self.config.bound_channels and message.author != self.user and not message.author.bot:
-            # await self.cmd_c(message.author, message.channel,
-            # message_content.split())
-            try:
-                msg_language, probability = self.lang_identifier.classify(
-                    message_content)
-
-                if probability > self.instant_translate_certainty and self.instant_translate and msg_language != self.translator.to_lang and message.author != self.user:
-                    self.translator.from_lang = msg_language
-                    if self.instant_translate_mode == 1:
-                        await self.safe_send_message(
-                            message.channel, "Translation: `***REMOVED******REMOVED***`".format(
-                                self.translator.translate(message_content)))
-                    elif self.instant_translate_mode == 2:
-                        em = Embed(
-                            colour=message.author.colour,
-                            description=self.translator.translate(
-                                message_content))
-                        em.set_author(
-                            name=message.author.display_name,
-                            icon_url=message.author.avatar_url)
-                        # em.set_footer(text=message.content)
-                        await self.send_message(message.channel, embed=em)
-                        await self.safe_delete_message(message)
-                        return
-            except:
-                raise
-                self.log("couldn't translate the message")
 
             if self.config.owned_channels and message.channel.id not in self.config.owned_channels:
                 return
