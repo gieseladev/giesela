@@ -6790,7 +6790,7 @@ class MusicBot(discord.Client):
         ///|Usage
         `{command_prefix}interact <query>`
         ///|Explanation
-        Use every day language to control Giesela
+        Use everyday language to control Giesela
         ///|Disclaimer
         **Help out with the development of a "smarter" Giesela by testing out this new future!**
         """
@@ -6804,7 +6804,7 @@ class MusicBot(discord.Client):
 
         print("[INTERACT] \"{}\"".format(query))
 
-        params = {"v": "18/06/2017", "q": query}
+        params = {"v": "22/06/2017", "q": query}
         headers = {"Authorization": "Bearer 47J7GSQPY2DJPLGUNFZVNHAMGU7ARCRD"}
         resp = requests.get("https://api.wit.ai/message",
                             params=params, headers=headers)
