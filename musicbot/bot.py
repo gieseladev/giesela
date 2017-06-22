@@ -22,7 +22,7 @@ from textwrap import dedent, indent
 
 import aiohttp
 import discord
-import goslate
+# import goslate
 import requests
 import wikipedia
 from discord import Embed, utils
@@ -60,7 +60,7 @@ from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .settings import Settings
 from .socket_server import SocketServer
-from .translate import Translator
+# from .translate import Translator
 # import newspaper
 from .tungsten import Tungsten
 from .twitter_api import get_tweet
@@ -1062,25 +1062,46 @@ class MusicBot(discord.Client):
             em = Embed(
                 title="GIESELA HELP",
                 url="http://siku2.github.io/Giesela/",
-                colour=hex_to_dec("828c51"),
+                colour=hex_to_dec("#828c51"),
                 description="plz be welcum to mah new list of the **most fab** commands\nYou can always use `***REMOVED***0***REMOVED***help <cmd>` to get more detailed information on a command".
                 format(self.config.command_prefix))
 
-            music_commands = "`***REMOVED***0***REMOVED***play` play dem shit\n`***REMOVED***0***REMOVED***search` make sure you get ur shit\n`***REMOVED***0***REMOVED***stream` when u wanna go live\n`***REMOVED***0***REMOVED***pause` need a break?\n`***REMOVED***0***REMOVED***volume` oh shit turn it up\n`***REMOVED***0***REMOVED***seek` hide and snaek\n`***REMOVED***0***REMOVED***fwd` sanic fast, sanic skip\n`***REMOVED***0***REMOVED***rwd` go baek in tiem".format(
-                self.config.command_prefix)
+            music_commands = "\n".join([
+                "`***REMOVED***0***REMOVED***play` play dem shit",
+                "`***REMOVED***0***REMOVED***search` make sure you get ur shit",
+                "`***REMOVED***0***REMOVED***stream` when u wanna go live",
+                "`***REMOVED***0***REMOVED***pause` need a break?",
+                "`***REMOVED***0***REMOVED***volume` oh shit turn it up",
+                "`***REMOVED***0***REMOVED***seek` hide and snaek",
+                "`***REMOVED***0***REMOVED***fwd` sanic fast, sanic skip",
+                "`***REMOVED***0***REMOVED***rwd` go baek in tiem"]).format(self.config.command_prefix)
             em.add_field(name="Music", value=music_commands, inline=False)
 
-            queue_commands = "`***REMOVED***0***REMOVED***queue` taky a looky bruh\n`***REMOVED***0***REMOVED***history` care to see the past?\n`***REMOVED***0***REMOVED***np` look at dem shit\n`***REMOVED***0***REMOVED***skip` skip regretful shit\n`***REMOVED***0***REMOVED***replay` when it's stuck in ur head\n`***REMOVED***0***REMOVED***repeat` over and over and over\n`***REMOVED***0***REMOVED***remove` \"that's not what I wanted\"\n`***REMOVED***0***REMOVED***clear` burn it all down\n`***REMOVED***0***REMOVED***shuffle` maek it random plz\n`***REMOVED***0***REMOVED***promote` I want it right now!".format(
-                self.config.command_prefix)
+            queue_commands = "\n".join([
+                "`***REMOVED***0***REMOVED***queue` taky a looky bruh",
+                "`***REMOVED***0***REMOVED***history` care to see the past?",
+                "`***REMOVED***0***REMOVED***np` look at dem shit",
+                "`***REMOVED***0***REMOVED***skip` skip regretful shit",
+                "`***REMOVED***0***REMOVED***replay` when it's stuck in ur head",
+                "`***REMOVED***0***REMOVED***repeat` over and over and over",
+                "`***REMOVED***0***REMOVED***remove` \"that's not what I wanted\"",
+                "`***REMOVED***0***REMOVED***clear` burn it all down",
+                "`***REMOVED***0***REMOVED***shuffle` maek it random plz",
+                "`***REMOVED***0***REMOVED***promote` I want it right now!"]).format(self.config.command_prefix)
             em.add_field(name="Queue", value=queue_commands, inline=False)
 
-            playlist_commands = "`***REMOVED***0***REMOVED***playlist` create/edit/list playlists\n`***REMOVED***0***REMOVED***addtoplaylist` add shit to a playlist\n`***REMOVED***0***REMOVED***removefromplaylist` remove shit from a playlist".format(
-                self.config.command_prefix)
-            em.add_field(
-                name="Playlist", value=playlist_commands, inline=False)
+            playlist_commands = "\n".join([
+                "`***REMOVED***0***REMOVED***playlist` create/edit/list playlists",
+                "`***REMOVED***0***REMOVED***addtoplaylist` add shit to a playlist",
+                "`***REMOVED***0***REMOVED***removefromplaylist` remove shit from a playlist"]).format(self.config.command_prefix)
+            em.add_field(name="Playlist",
+                         value=playlist_commands, inline=False)
 
-            misc_commands = "`***REMOVED***0***REMOVED***random` for when you can't decide\n`***REMOVED***0***REMOVED***game` when u're bored\n`***REMOVED***0***REMOVED***ask` when you don't know shit\n`***REMOVED***0***REMOVED***c` have a chat".format(
-                self.config.command_prefix)
+            misc_commands = "\n".join([
+                "`***REMOVED***0***REMOVED***random` for when you can't decide",
+                "`***REMOVED***0***REMOVED***game` when u're bored",
+                "`***REMOVED***0***REMOVED***ask` when you don't know shit",
+                "`***REMOVED***0***REMOVED***c` have a chat"]).format(self.config.command_prefix)
             em.add_field(name="Misc", value=misc_commands, inline=False)
 
             return Response(embed=em)
@@ -1815,7 +1836,7 @@ class MusicBot(discord.Client):
 
                         em = Embed(
                             title=current_entry["title"],
-                            colour=hex_to_dec("FF88F0"),
+                            colour=hex_to_dec("#FF88F0"),
                             url=current_entry["youtube"],
                             description="\n\nPlaying from *****REMOVED******REMOVED*****".format(
                                 player.current_entry.title))
@@ -1854,7 +1875,7 @@ class MusicBot(discord.Client):
                 em = Embed(
                     title="**" + d.name + "**",
                     description=progress_bar + progress_text,
-                    colour=hex_to_dec("F9FF6E"),
+                    colour=hex_to_dec("#F9FF6E"),
                     url=player.current_entry.url)
                 em.set_author(
                     name=d.artist,
@@ -1895,7 +1916,7 @@ class MusicBot(discord.Client):
                 desc = "***REMOVED******REMOVED*** `[***REMOVED******REMOVED***/***REMOVED******REMOVED***]`".format(create_bar(player.progress / entry.end_seconds, 20),
                                              to_timestamp(player.progress), to_timestamp(entry.end_seconds))
                 em = Embed(title=entry.title, description=desc,
-                           url=entry.url, colour=hex_to_dec("a9b244"))
+                           url=entry.url, colour=hex_to_dec("#a9b244"))
                 em.set_thumbnail(
                     url=entry.thumbnail)
                 if "playlist" in entry.meta:
@@ -2949,37 +2970,37 @@ class MusicBot(discord.Client):
         self.log("Answered " + message.author.name + "'s question with: " +
                  msgContent)
 
-    async def cmd_translate(self, channel, message, targetLanguage,
-                            leftover_args):
-        """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***translate <targetLanguage> <message>
-        translate something from any language to the target language
-        """
-
-        await self.send_typing(channel)
-
-        gs = goslate.Goslate()
-        languages = gs.get_languages()
-
-        if len(targetLanguage) == 2 and (
-                targetLanguage not in list(languages.keys())):
-            return Response("I don't know this language")
-
-        if len(targetLanguage) > 2:
-            if targetLanguage.title() in list(languages.values()):
-                targetLanguage = list(languages.keys())[list(
-                    languages.values()).index(targetLanguage.title())]
-            else:
-                return Response("I don't know this language")
-
-        if len(leftover_args) < 1:
-            return Response("There's nothing to translate")
-
-        msgContent = " ".join(leftover_args)
-        # await self.safe_send_message (channel, msgContent)
-        # await self.safe_send_message (channel, targetLanguage)
-        return Response(gs.translate(msgContent, targetLanguage))
+    # async def cmd_translate(self, channel, message, targetLanguage,
+    #                         leftover_args):
+    #     """
+    #     Usage:
+    #         ***REMOVED***command_prefix***REMOVED***translate <targetLanguage> <message>
+    #     translate something from any language to the target language
+    #     """
+    #
+    #     await self.send_typing(channel)
+    #
+    #     gs = goslate.Goslate()
+    #     languages = gs.get_languages()
+    #
+    #     if len(targetLanguage) == 2 and (
+    #             targetLanguage not in list(languages.keys())):
+    #         return Response("I don't know this language")
+    #
+    #     if len(targetLanguage) > 2:
+    #         if targetLanguage.title() in list(languages.values()):
+    #             targetLanguage = list(languages.keys())[list(
+    #                 languages.values()).index(targetLanguage.title())]
+    #         else:
+    #             return Response("I don't know this language")
+    #
+    #     if len(leftover_args) < 1:
+    #         return Response("There's nothing to translate")
+    #
+    #     msgContent = " ".join(leftover_args)
+    #     # await self.safe_send_message (channel, msgContent)
+    #     # await self.safe_send_message (channel, targetLanguage)
+    #     return Response(gs.translate(msgContent, targetLanguage))
 
     async def cmd_goto(self, server, channel, user_mentions, author,
                        leftover_args):
@@ -4329,9 +4350,9 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                    str(reaction.emoji).startswith("📽") or
-                    str(reaction.emoji).startswith("💾")
-                ) and reaction.count > 1 and user == author:
+                        str(reaction.emoji).startswith("📽") or
+                        str(reaction.emoji).startswith("💾")
+                    ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
@@ -5965,8 +5986,7 @@ class MusicBot(discord.Client):
             self.log("moving myself")
             await self.get_voice_client(target_channel)
 
-    async def cmd_mobile(self, message, channel, player, server,
-                         leftover_args):
+    async def cmd_mobile(self, message, channel, player, server, leftover_args):
         """
         ///|Users
         `***REMOVED***command_prefix***REMOVED***mobile`
@@ -6000,12 +6020,7 @@ class MusicBot(discord.Client):
                     return Response("Successfully sent the message!")
 
     @block_user
-    async def cmd_execute(self,
-                          channel,
-                          author,
-                          server,
-                          leftover_args,
-                          player=None):
+    async def cmd_execute(self, channel, author, server, leftover_args, player=None):
         statement = " ".join(leftover_args)
         statement = statement.replace("/n/", "\n")
         statement = statement.replace("/t/", "\t")
@@ -6356,121 +6371,121 @@ class MusicBot(discord.Client):
 
             return Response("Nevermore you shall be annoyed!")
 
-    async def cmd_livetranslator(self,
-                                 target_language=None,
-                                 mode="1",
-                                 required_certainty="70"):
-        """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***livetranslator [language code] [mode] [required certainty]
+    # async def cmd_livetranslator(self,
+    #                              target_language=None,
+    #                              mode="1",
+    #                              required_certainty="70"):
+    #     """
+    #     Usage:
+    #         ***REMOVED***command_prefix***REMOVED***livetranslator [language code] [mode] [required certainty]
+    #
+    #     translate every message sent
+    #
+    #     modes:
+    #         1: send a message with the translation
+    #         2: replace the original message with the translation
+    #     """
+    #
+    #     if target_language is None:
+    #         if self.instant_translate:
+    #             self.instant_translate = False
+    #             return Response("turned off instant translation")
+    #         else:
+    #             return Response(
+    #                 "You should provide the language code you want me to translate to in order for me to work"
+    #             )
+    #     if target_language in [
+    #             'af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el',
+    #             'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr',
+    #             'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml',
+    #             'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk',
+    #             'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr',
+    #             'uk', 'ur', 'vi', 'zh-cn', 'zh-tw'
+    #     ]:
+    #         self.instant_translate = True
+    #         self.translator.to_lang = target_language
+    #         try:
+    #             mode = int(mode)
+    #         except:
+    #             mode = 1
+    #         if not (0 <= mode <= 2):
+    #             mode = 1
+    #         self.instant_translate_mode = mode
+    #
+    #         try:
+    #             required_certainty = int(required_certainty) / 100
+    #         except:
+    #             required_certainty = .7
+    #         if not (0 <= required_certainty <= 1):
+    #             required_certainty = .7
+    #
+    #         self.instant_translate_certainty = required_certainty
+    #
+    #         return Response("Starting now!")
+    #     else:
+    #         return Response("Please provide the iso format language code")
 
-        translate every message sent
-
-        modes:
-            1: send a message with the translation
-            2: replace the original message with the translation
-        """
-
-        if target_language is None:
-            if self.instant_translate:
-                self.instant_translate = False
-                return Response("turned off instant translation")
-            else:
-                return Response(
-                    "You should provide the language code you want me to translate to in order for me to work"
-                )
-        if target_language in [
-                'af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el',
-                'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr',
-                'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml',
-                'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk',
-                'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr',
-                'uk', 'ur', 'vi', 'zh-cn', 'zh-tw'
-        ]:
-            self.instant_translate = True
-            self.translator.to_lang = target_language
-            try:
-                mode = int(mode)
-            except:
-                mode = 1
-            if not (0 <= mode <= 2):
-                mode = 1
-            self.instant_translate_mode = mode
-
-            try:
-                required_certainty = int(required_certainty) / 100
-            except:
-                required_certainty = .7
-            if not (0 <= required_certainty <= 1):
-                required_certainty = .7
-
-            self.instant_translate_certainty = required_certainty
-
-            return Response("Starting now!")
-        else:
-            return Response("Please provide the iso format language code")
-
-    async def cmd_translatehistory(self, author, message, leftover_args):
-        """
-        ///|Usage
-        `***REMOVED***command_prefix***REMOVED***translatehistory <channel> <start date | number of messages> <target language>`
-        ///|Explanation
-        Request messages in a channel to be translated.\nYou can specify the amount of messages either by number or by a starting point formated like `DAY/MONTH/YEAR HOUR:MINUTE`
-        """
-        starting_point = " ".join(leftover_args[1:-1])
-        target_language = leftover_args[-1].lower()
-
-        if target_language not in [
-                'af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el',
-                'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr',
-                'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml',
-                'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk',
-                'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr',
-                'uk', 'ur', 'vi', 'zh-cn', 'zh-tw'
-        ]:
-            return Response("Please provide the target language")
-
-        if message.channel_mentions is None or len(
-                message.channel_mentions) < 1:
-            return Response(
-                "Please provide a channel to take the messages from",
-                delete_after=20)
-        channel = message.channel_mentions[0]
-
-        limit = 500
-        start_point = None
-        try:
-            limit = int(starting_point)
-        except:
-            match = re.match(
-                "(\d***REMOVED***1,2***REMOVED***)\/(\d***REMOVED***1,2***REMOVED***)\/(\d***REMOVED***4***REMOVED***).***REMOVED***1***REMOVED***(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***1,2***REMOVED***)",
-                starting_point)
-            if match is None:
-                return Response(
-                    "I don't understand your starting point...\nBe sure to format it like `DAY/MONTH/YEAR HOUR:MINUTE`",
-                    delete_after=20)
-            day, month, year, hour, minute = match.group(1, 2, 3, 4, 5)
-            start_point = datetime(year, month, day, hour, minute)
-
-        em = Embed(title="TRANSLATION")
-        translator = Translator(target_language)
-        async for message in self.logs_from(
-                channel, limit=limit, after=start_point):
-            n = "*****REMOVED***0***REMOVED***** - ***REMOVED***1.year:0>4***REMOVED***/***REMOVED***1.month:0>2***REMOVED***/***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(
-                message.author.display_name, message.timestamp)
-
-            message_content = message.content.strip()
-            msg_language, probability = self.lang_identifier.classify(
-                message_content)
-            self.translator.from_lang = msg_language
-            try:
-                v = "`***REMOVED******REMOVED***`".format(translator.translate(message_content))
-            except:
-                continue
-            em.add_field(name=n, value=v, inline=False)
-        em._fields = em._fields[::-1]
-        await self.send_message(author, embed=em)
-        return Response("Done!")
+    # async def cmd_translatehistory(self, author, message, leftover_args):
+    #     """
+    #     ///|Usage
+    #     `***REMOVED***command_prefix***REMOVED***translatehistory <channel> <start date | number of messages> <target language>`
+    #     ///|Explanation
+    #     Request messages in a channel to be translated.\nYou can specify the amount of messages either by number or by a starting point formated like `DAY/MONTH/YEAR HOUR:MINUTE`
+    #     """
+    #     starting_point = " ".join(leftover_args[1:-1])
+    #     target_language = leftover_args[-1].lower()
+    #
+    #     if target_language not in [
+    #             'af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el',
+    #             'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr',
+    #             'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml',
+    #             'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk',
+    #             'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr',
+    #             'uk', 'ur', 'vi', 'zh-cn', 'zh-tw'
+    #     ]:
+    #         return Response("Please provide the target language")
+    #
+    #     if message.channel_mentions is None or len(
+    #             message.channel_mentions) < 1:
+    #         return Response(
+    #             "Please provide a channel to take the messages from",
+    #             delete_after=20)
+    #     channel = message.channel_mentions[0]
+    #
+    #     limit = 500
+    #     start_point = None
+    #     try:
+    #         limit = int(starting_point)
+    #     except:
+    #         match = re.match(
+    #             "(\d***REMOVED***1,2***REMOVED***)\/(\d***REMOVED***1,2***REMOVED***)\/(\d***REMOVED***4***REMOVED***).***REMOVED***1***REMOVED***(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***1,2***REMOVED***)",
+    #             starting_point)
+    #         if match is None:
+    #             return Response(
+    #                 "I don't understand your starting point...\nBe sure to format it like `DAY/MONTH/YEAR HOUR:MINUTE`",
+    #                 delete_after=20)
+    #         day, month, year, hour, minute = match.group(1, 2, 3, 4, 5)
+    #         start_point = datetime(year, month, day, hour, minute)
+    #
+    #     em = Embed(title="TRANSLATION")
+    #     translator = Translator(target_language)
+    #     async for message in self.logs_from(
+    #             channel, limit=limit, after=start_point):
+    #         n = "*****REMOVED***0***REMOVED***** - ***REMOVED***1.year:0>4***REMOVED***/***REMOVED***1.month:0>2***REMOVED***/***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(
+    #             message.author.display_name, message.timestamp)
+    #
+    #         message_content = message.content.strip()
+    #         msg_language, probability = self.lang_identifier.classify(
+    #             message_content)
+    #         self.translator.from_lang = msg_language
+    #         try:
+    #             v = "`***REMOVED******REMOVED***`".format(translator.translate(message_content))
+    #         except:
+    #             continue
+    #         em.add_field(name=n, value=v, inline=False)
+    #     em._fields = em._fields[::-1]
+    #     await self.send_message(author, embed=em)
+    #     return Response("Done!")
 
     async def cmd_quote(self, author, channel, message, leftover_args):
         """
@@ -6726,7 +6741,7 @@ class MusicBot(discord.Client):
                 "Couldn't find a command called \"***REMOVED******REMOVED***\"".format(command))
 
         try:
-            em = Embed(title=command.upper(), colour=hex_to_dec("ffd700"))
+            em = Embed(title=command.upper(), colour=hex_to_dec("#ffd700"))
             em.add_field(
                 name="Version `***REMOVED******REMOVED***`".format(c_info.version),
                 value="`***REMOVED******REMOVED***`\nCommand has been added".format(c_info.timestamp),
@@ -6765,7 +6780,7 @@ class MusicBot(discord.Client):
             BOTVERSION, dev_code + "_" + dev_name)
         desc += "\n".join("● " + l for l in changelog)
         em = Embed(title="Version " + v_name, description=desc,
-                   url="https://siku2.github.io/Giesela", colour=hex_to_dec("67BE2E"))
+                   url="https://siku2.github.io/Giesela", colour=hex_to_dec("#67BE2E"))
 
         return Response(embed=em)
 
