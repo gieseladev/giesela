@@ -144,22 +144,13 @@ class BasePlaylistEntry:
 
 
 class URLPlaylistEntry(BasePlaylistEntry):
-    def __init__(self,
-                 queue,
-                 url,
-                 title,
-                 duration=0,
-                 expected_filename=None,
-                 start_seconds=0,
-                 end_seconds=None,
-                 spotify_track=None,
-                 provided_song_timestamps=None,
-                 update_additional_information=True,
-                 **meta):
+    def __init__(self, queue, url, title, duration=0, expected_filename=None, start_seconds=0, end_seconds=None, spotify_track=None, provided_song_timestamps=None, youtube_data=None, update_additional_information=True, **meta):
         super().__init__()
 
         self.playlist = queue
         self.url = url
+        self.video_id = re.match(
+            r"(?:(?:https?:\/\/)(?:www)?\.?(?:youtu\.?be)(?:\.com)?\/(?:.*[=/])*)([^= &?/\r\n]{8,11})", url).group(1)
         self._title = title
         self.duration = duration
         self.end_seconds = end_seconds if end_seconds else duration
@@ -172,6 +163,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
         self.provided_song_timestamps = provided_song_timestamps
         self._spotify_track = spotify_track
+        self.youtube_data = youtube_data
 
         if update_additional_information:
             self.search_additional_info()
@@ -182,6 +174,10 @@ class URLPlaylistEntry(BasePlaylistEntry):
             return self.spotify_track.name + " - " + self.spotify_track.artist
         else:
             return self._title
+
+    @property
+    def thumbnail(self):
+        return self.youtube_data["snippet"]["thumbnails"]["default"]["url"]
 
     @property
     def spotify_track(self):
@@ -199,6 +195,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         filename = data['filename'] if downloaded else None
         spotify_track = SpotifyTrack.from_dict(data.get("spotify_track", None))
         provided_song_timestamps = data.get("provided_song_timestamps", None)
+        youtube_data = data.get("youtube_data", None)
         start_seconds = data.get("start_seconds", 0)
         start_seconds = 0 if start_seconds is None else start_seconds
         end_seconds = data.get("end_seconds", duration)
@@ -226,6 +223,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
             end_seconds,
             spotify_track=spotify_track,
             provided_song_timestamps=provided_song_timestamps,
+            youtube_data=youtube_data,
             update_additional_information=update_additional_information,
             **meta)
 
@@ -267,6 +265,9 @@ class URLPlaylistEntry(BasePlaylistEntry):
         if self.provided_song_timestamps is None:
             Thread(target=self.search_for_timestamps).start()
 
+        if self.youtube_data is None:
+            Thread(target=self.get_youtube_data).start()
+
         self.searched_additional_information = True
 
     def search_for_timestamps(self):
@@ -276,6 +277,13 @@ class URLPlaylistEntry(BasePlaylistEntry):
             return
 
         self.provided_song_timestamps = songs
+
+    def get_youtube_data(self):
+        print("getting data")
+        resp = requests.get(
+            "https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo&part=snippet,statistics&id=" + self.video_id)
+        self.youtube_data = resp.json()["items"][0]
+        # print("found data:\n" + str(self.youtube_data))
 
     def to_dict(self):
         meta_dict = {}
@@ -290,33 +298,20 @@ class URLPlaylistEntry(BasePlaylistEntry):
             }
 
         data = {
-            'version':
-            2,
-            'type':
-            self.__class__.__name__,
-            'url':
-            self.url,
-            'title':
-            self.title,
-            'duration':
-            self.duration,
-            'downloaded':
-            self.is_downloaded,
-            'filename':
-            self.filename,
-            "expected_filename":
-            self.expected_filename,
-            'meta':
-            meta_dict,
-            "start_seconds":
-            self.start_seconds,
-            "end_seconds":
-            self.end_seconds,
-            "spotify_track":
-            self.spotify_track.get_dict()
-            if self.spotify_track is not None else None,
-            "provided_song_timestamps":
-            self.provided_song_timestamps
+            'version': 2,
+            'type': self.__class__.__name__,
+            'url': self.url,
+            'title': self.title,
+            'duration': self.duration,
+            'downloaded': self.is_downloaded,
+            'filename': self.filename,
+            "expected_filename": self.expected_filename,
+            'meta': meta_dict,
+            "start_seconds": self.start_seconds,
+            "end_seconds": self.end_seconds,
+            "spotify_track": self.spotify_track.get_dict() if self.spotify_track is not None else None,
+            "provided_song_timestamps": self.provided_song_timestamps,
+            "youtube_data": self.youtube_data
         }
         return data
 
@@ -348,7 +343,6 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.search_additional_info()
         return BasePlaylistEntry.get_ready_future(self)
 
-    # noinspection PyTypeChecker
     async def _download(self):
         if self._is_downloading:
             return
@@ -439,7 +433,6 @@ class URLPlaylistEntry(BasePlaylistEntry):
         finally:
             self._is_downloading = False
 
-    # noinspection PyShadowingBuiltins
     async def _really_download(self, *, hash=False):
         print("[Download] Started:", self.url)
 
@@ -499,53 +492,6 @@ class StreamPlaylistEntry(BasePlaylistEntry):
         if self.destination:
             self.filename = self.destination
 
-    def __json__(self):
-        return self._enclose_json({
-            'version': 1,
-            'url': self.url,
-            'filename': self.filename,
-            'title': self.title,
-            'destination': self.destination,
-            'meta': {
-                name: {
-                    'type': obj.__class__.__name__,
-                    'id': obj.id,
-                    'name': obj.name
-                }
-                for name, obj in self.meta.items() if obj
-            }
-        })
-
-    @classmethod
-    def _deserialize(cls, data, playlist=None):
-        assert playlist is not None, cls._bad('playlist')
-
-        try:
-            # TODO: version check
-            url = data['url']
-            title = data['title']
-            destination = data['destination']
-            filename = data['filename']
-            meta = {}
-
-            # TODO: Better [name] fallbacks
-            if 'channel' in data['meta']:
-                ch = playlist.bot.get_channel(data['meta']['channel']['id'])
-                meta['channel'] = ch or data['meta']['channel']['name']
-
-            if 'author' in data['meta']:
-                meta['author'] = meta['channel'].server.get_member(
-                    data['meta']['author']['id'])
-
-            entry = cls(playlist, url, title, destination=destination, **meta)
-            if not destination and filename:
-                entry.filename = destination
-
-            return entry
-        except Exception as e:
-            log.error("Could not load {}".format(cls.__name__), exc_info=e)
-
-    # noinspection PyMethodOverriding
     async def _download(self, *, fallback=False):
         self._is_downloading = True
 
