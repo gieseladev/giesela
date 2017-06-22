@@ -6670,24 +6670,37 @@ class MusicBot(discord.Client):
                 ])
 
     @owner_only
+    @command_info("3.1.6", 1498672140, {
+        "3.6.4": (1498146841, "Can now specify the required arguments in order to block a command")
+    })
     async def cmd_blockcommand(self, command, leftover_args):
         """
         ///|Usage
-        `{command_prefix}blockcommand <command> <reason>`
+        `{command_prefix}blockcommand <command> [args] <"reason">`
         ///|Explanation
         Block a command
         """
         if len(leftover_args) < 1:
             return Response("Reason plz")
 
-        reason = " ".join(leftover_args)
+        args = []
+
+        for i, el in enumerate(leftover_args):
+            if not el.startswith("\""):
+                args.append(el)
+            else:
+                reason = " ".join(leftover_args[i:]).strip("\"")
+                break
+
+        if not reason:
+            return Response("Put your reason in quotes, idiot!")
 
         if command.lower() in self.blocked_commands:
             self.blocked_commands.pop(command.lower())
             return Response("Block lifted")
         else:
-            self.blocked_commands[command.lower()] = reason
-            return Response("Blocked command")
+            self.blocked_commands[command.lower()] = (args, reason)
+            return Response("Blocked command `{} {}`".format(command, " ".join(args)))
 
     @command_info("3.4.0", 1497533758, {
         "3.4.8":
@@ -6884,9 +6897,10 @@ class MusicBot(discord.Client):
             return
 
         if command in self.blocked_commands:
-            await self.send_message(message.channel,
-                                    self.blocked_commands[command])
-            return
+            required_args, reason = self.blocked_commands[command]
+            if all(arg in args for arg in required_args):
+                await self.send_message(message.channel, reason)
+                return
 
         if message.channel.is_private:
             if not (message.author.id == self.config.owner_id and command ==
