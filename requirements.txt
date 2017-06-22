@@ -6,13 +6,8 @@ cffi==1.6.0; sys_platform == 'win32'
 parsedatetime
 spotipy
 openpyxl
-goslate
-pyshorteners
 newspaper3k
 pillow==4.0.0
 moviepy
 wikipedia
-langdetect
-py-translate
 aiohttp
-python-twitter
