@@ -236,7 +236,7 @@ def parse_timestamp(timestamp):
 
 
 def hex_to_dec(hex_code):
-    return int(hex_code, 16)
+    return int(hex_code.lstrip("#"), 16)
 
 
 def to_timestamp(seconds):
