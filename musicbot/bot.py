@@ -66,8 +66,8 @@ from .tungsten import Tungsten
 from .twitter_api import get_tweet
 from .utils import (clean_songname, create_bar, escape_dis, format_time,
                     hex_to_dec, load_file, nice_cut, ordinal, paginate,
-                    parse_timestamp, prettydate, random_line, sane_round_int,
-                    to_timestamp, write_file)
+                    parse_timestamp, prettydate, random_line, to_timestamp,
+                    write_file)
 
 load_opus_lib()
 
@@ -1782,10 +1782,8 @@ class MusicBot(discord.Client):
             await self.safe_delete_message(response_message)
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
-        "3.5.4":
-        (1497721686,
-         "Updating the looks of the \"now playing\" message and a bit of cleanup"
-         )
+        "3.5.4": (1497721686, "Updating the looks of the \"now playing\" message and a bit of cleanup"),
+        "3.6.2": (1498143480, "Updated design of default entry and included a link to the video")
     ***REMOVED***)
     async def cmd_np(self, player, channel, server, message):
         """
@@ -1853,7 +1851,8 @@ class MusicBot(discord.Client):
                 em = Embed(
                     title="**" + d.name + "**",
                     description=progress_bar + progress_text,
-                    colour=hex_to_dec("F9FF6E"))
+                    colour=hex_to_dec("F9FF6E"),
+                    url=player.current_entry.url)
                 em.set_author(
                     name=d.artist,
                     url=d.artists[0].href,
@@ -1875,6 +1874,7 @@ class MusicBot(discord.Client):
                 em = Embed(
                     title=entry["name"],
                     colour=65535,
+                    url=player.current_entry.url,
                     description=create_bar(
                         local_progress[0] / local_progress[1], 20) +
                     ' [***REMOVED******REMOVED***/***REMOVED******REMOVED***]'.format(
@@ -1887,30 +1887,46 @@ class MusicBot(discord.Client):
                     to_timestamp(player.current_entry.end_seconds)))
                 self.server_specific_data[channel.server]["last_np_msg"] = await self.send_message(channel, embed=em)
             else:
-                prog_str = "`[***REMOVED******REMOVED***/***REMOVED******REMOVED***]`".format(
-                    to_timestamp(player.progress),
-                    to_timestamp(player.current_entry.end_seconds))
+                entry = player.current_entry
+                desc = "***REMOVED******REMOVED*** `[***REMOVED******REMOVED***/***REMOVED******REMOVED***]`".format(create_bar(player.progress / entry.end_seconds, 20),
+                                             to_timestamp(player.progress), to_timestamp(entry.end_seconds))
+                em = Embed(title=entry.title, description=desc,
+                           url=entry.url, colour=hex_to_dec("a9b244"))
+                em.set_thumbnail(
+                    url=entry.thumbnail)
+                if "playlist" in entry.meta:
+                    em.set_author(name=entry.meta["playlist"]["name"].title())
+                elif "author" in entry.meta:
+                    em.set_author(
+                        name=entry.meta["author"].display_name, icon_url=entry.meta["author"].avatar_url)
 
-                prog_bar_str = create_bar(
-                    player.progress / player.current_entry.end_seconds, 20)
+                self.server_specific_data[server]["last_np_msg"] = await self.safe_send_message(channel, embed=em)
+                return
 
-                if "playlist" in player.current_entry.meta:
-                    np_text = "Now Playing:\n*****REMOVED******REMOVED***** from playlist *****REMOVED******REMOVED*****".format(
-                        player.current_entry.title,
-                        player.current_entry.meta["playlist"]["name"].title())
-                elif "author" in player.current_entry.meta:
-                    np_text = "Now Playing:\n*****REMOVED******REMOVED***** by *****REMOVED******REMOVED*****".format(
-                        player.current_entry.title,
-                        player.current_entry.meta["author"].name)
-                else:
-                    np_text = "Now Playing:\n*****REMOVED******REMOVED*****".format(
-                        player.current_entry.title)
-
-                np_text += "\n***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(prog_bar_str, prog_str)
-
-                self.server_specific_data[server][
-                    'last_np_msg'] = await self.safe_send_message(
-                        channel, np_text)
+                # prog_str = "`[***REMOVED******REMOVED***/***REMOVED******REMOVED***]`".format(
+                #     to_timestamp(player.progress),
+                #     to_timestamp(player.current_entry.end_seconds))
+                #
+                # prog_bar_str = create_bar(
+                #     player.progress / player.current_entry.end_seconds, 20)
+                #
+                # if "playlist" in player.current_entry.meta:
+                #     np_text = "Now Playing:\n*****REMOVED******REMOVED***** from playlist *****REMOVED******REMOVED*****".format(
+                #         player.current_entry.title,
+                #         player.current_entry.meta["playlist"]["name"].title())
+                # elif "author" in player.current_entry.meta:
+                #     np_text = "Now Playing:\n*****REMOVED******REMOVED***** by *****REMOVED******REMOVED*****".format(
+                #         player.current_entry.title,
+                #         player.current_entry.meta["author"].name)
+                # else:
+                #     np_text = "Now Playing:\n*****REMOVED******REMOVED*****".format(
+                #         player.current_entry.title)
+                #
+                # np_text += "\n***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(prog_bar_str, prog_str)
+                #
+                # self.server_specific_data[server][
+                #     'last_np_msg'] = await self.safe_send_message(
+                #         channel, np_text)
         else:
             return Response(
                 'There are no songs queued! Queue something with ***REMOVED******REMOVED***play.'.
@@ -4309,8 +4325,8 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                    str(reaction.emoji).startswith("📽") or
-                    str(reaction.emoji).startswith("💾")
+                str(reaction.emoji).startswith("📽") or
+                str(reaction.emoji).startswith("💾")
                 ) and reaction.count > 1 and user == author:
                 return True
 
@@ -6770,6 +6786,19 @@ class MusicBot(discord.Client):
                                                      d["value"], round(d["confidence"] * 100, 1))
 
         return Response(msg)
+
+    # @command_info("3.6.2", 1497979507)
+    # async def cmd_ping(self, channel):
+    #     """
+    #     ///|Usage
+    #     `***REMOVED***command_prefix***REMOVED***ping
+    #     ///|Explanation
+    #     Get Giesela's latency
+    #     """
+    #     start_time = time.time()
+    #     msg = await self.safe_send_message(channel, "Calculating ping...")
+    #     ping = time.time() - start_time
+    #     await self.safe_edit_message(msg, "The ping is `***REMOVED******REMOVED***s`".format(round(ping, 2)))
 
     @owner_only
     async def cmd_shutdown(self, channel):
