@@ -4168,7 +4168,7 @@ class MusicBot(discord.Client):
         "3.5.1": (1497706811, "Giesela finally keeps track whether a certain entry comes from a playlist or not"),
         "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page."),
         "3.6.1": (1497969463, "when saving a playlist, list all changes"),
-        "3.6.8": (1498162378, "checking whether start and end indieces are numbers"),
+        "3.6.8": (1498162378, "checking whether start and end indices are numbers"),
         "3.6.9:" (1498163686, "Special handling for sorting in playlist builder")
     ***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
@@ -4599,7 +4599,7 @@ class MusicBot(discord.Client):
 
             elif split_message[0].lower() == "remove":
                 if arguments is not None:
-                    indieces = []
+                    indices = []
                     for arg in arguments:
                         try:
                             index = int(arg) - 1
@@ -4607,17 +4607,17 @@ class MusicBot(discord.Client):
                             index = -1
 
                         if index >= 0 and index < int(playlist["entry_count"]):
-                            indieces.append(index)
+                            indices.append(index)
 
-                    pl_changes["remove_entries_indexes"].extend(indieces)
+                    pl_changes["remove_entries_indexes"].extend(indices)
                     pl_changes["remove_entries"].extend(
-                        [playlist["entries"][ind] for ind in indieces])  # for the changelog
+                        [playlist["entries"][ind] for ind in indices])  # for the changelog
                     playlist["entry_count"] = str(
-                        int(playlist["entry_count"]) - len(indieces))
+                        int(playlist["entry_count"]) - len(indices))
                     playlist["entries"] = [
                         playlist["entries"][x]
                         for x in range(len(playlist["entries"]))
-                        if x not in indieces
+                        if x not in indices
                     ]
                     # it, ov = divmod(
                     #     int(playlist["entry_count"]), items_per_page)
