@@ -149,7 +149,10 @@ class SpotifyTrack:
 
     @property
     def cover_url(self):
-        return self.album.images[0]["url"]
+        try:
+            return self.album.images[0]["url"]
+        except:
+            return None
 
     @property
     def artist(self):

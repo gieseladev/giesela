@@ -22,7 +22,7 @@ from textwrap import dedent, indent
 
 import aiohttp
 import discord
-import goslate
+# import goslate
 import requests
 import wikipedia
 from discord import Embed, utils
@@ -60,14 +60,14 @@ from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .settings import Settings
 from .socket_server import SocketServer
-from .translate import Translator
+# from .translate import Translator
 # import newspaper
 from .tungsten import Tungsten
 from .twitter_api import get_tweet
 from .utils import (clean_songname, create_bar, escape_dis, format_time,
                     hex_to_dec, load_file, nice_cut, ordinal, paginate,
-                    parse_timestamp, prettydate, random_line, sane_round_int,
-                    to_timestamp, write_file)
+                    parse_timestamp, prettydate, random_line, to_timestamp,
+                    write_file)
 
 load_opus_lib()
 
@@ -479,6 +479,8 @@ class MusicBot(discord.Client):
                 newmsg = "Now playing **{0}** ({1}{2} entry) from \"{3}\"".format(
                     e["name"], e["index"] + 1,
                     ordinal(e["index"] + 1), entry.title)
+            elif type(entry).__name__ == "StreamPlaylistEntry" and entry.radio_station_data is not None:
+                newmsg = "Now playing **{}** from `{}`".format(await player._absolute_current_song(), entry.radio_station_data.name)
             else:
                 newmsg = 'Now playing in %s: **%s**' % (
                     player.voice_client.channel.name, entry.title)
@@ -964,7 +966,8 @@ class MusicBot(discord.Client):
         return target_channel
 
     @command_info("1.9.5", 1477774380, {
-        "3.4.5": (1497616203, "Improved default help message using embeds")
+        "3.4.5": (1497616203, "Improved default help message using embeds"),
+        "3.6.0": (1497904733, "Fixed weird indent of some help texts")
     })
     async def cmd_help(self, channel, leftover_args):
         """
@@ -1008,7 +1011,7 @@ class MusicBot(discord.Client):
                     title, text = match.group(1, 2)
 
                     em.add_field(
-                        name="**{}**".format(title), value=text, inline=inline)
+                        name="**{}**".format(title), value=dedent(text), inline=inline)
                 await self.send_message(channel, embed=em)
                 return
                 # return
@@ -1059,25 +1062,46 @@ class MusicBot(discord.Client):
             em = Embed(
                 title="GIESELA HELP",
                 url="http://siku2.github.io/Giesela/",
-                colour=hex_to_dec("828c51"),
+                colour=hex_to_dec("#828c51"),
                 description="plz be welcum to mah new list of the **most fab** commands\nYou can always use `{0}help <cmd>` to get more detailed information on a command".
                 format(self.config.command_prefix))
 
-            music_commands = "`{0}play` play dem shit\n`{0}search` make sure you get ur shit\n`{0}stream` when u wanna go live\n`{0}pause` need a break?\n`{0}volume` oh shit turn it up\n`{0}seek` hide and snaek\n`{0}fwd` sanic fast, sanic skip\n`{0}rwd` go baek in tiem".format(
-                self.config.command_prefix)
+            music_commands = "\n".join([
+                "`{0}play` play dem shit",
+                "`{0}search` make sure you get ur shit",
+                "`{0}stream` when u wanna go live",
+                "`{0}pause` need a break?",
+                "`{0}volume` oh shit turn it up",
+                "`{0}seek` hide and snaek",
+                "`{0}fwd` sanic fast, sanic skip",
+                "`{0}rwd` go baek in tiem"]).format(self.config.command_prefix)
             em.add_field(name="Music", value=music_commands, inline=False)
 
-            queue_commands = "`{0}queue` taky a looky bruh\n`{0}history` care to see the past?\n`{0}np` look at dem shit\n`{0}skip` skip regretful shit\n`{0}replay` when it's stuck in ur head\n`{0}repeat` over and over and over\n`{0}remove` \"that's not what I wanted\"\n`{0}clear` burn it all down\n`{0}shuffle` maek it random plz\n`{0}promote` I want it right now!".format(
-                self.config.command_prefix)
+            queue_commands = "\n".join([
+                "`{0}queue` taky a looky bruh",
+                "`{0}history` care to see the past?",
+                "`{0}np` look at dem shit",
+                "`{0}skip` skip regretful shit",
+                "`{0}replay` when it's stuck in ur head",
+                "`{0}repeat` over and over and over",
+                "`{0}remove` \"that's not what I wanted\"",
+                "`{0}clear` burn it all down",
+                "`{0}shuffle` maek it random plz",
+                "`{0}promote` I want it right now!"]).format(self.config.command_prefix)
             em.add_field(name="Queue", value=queue_commands, inline=False)
 
-            playlist_commands = "`{0}playlist` create/edit/list playlists\n`{0}addtoplaylist` add shit to a playlist\n`{0}removefromplaylist` remove shit from a playlist".format(
-                self.config.command_prefix)
-            em.add_field(
-                name="Playlist", value=playlist_commands, inline=False)
+            playlist_commands = "\n".join([
+                "`{0}playlist` create/edit/list playlists",
+                "`{0}addtoplaylist` add shit to a playlist",
+                "`{0}removefromplaylist` remove shit from a playlist"]).format(self.config.command_prefix)
+            em.add_field(name="Playlist",
+                         value=playlist_commands, inline=False)
 
-            misc_commands = "`{0}random` for when you can't decide\n`{0}game` when u're bored\n`{0}ask` when you don't know shit\n`{0}c` have a chat".format(
-                self.config.command_prefix)
+            misc_commands = "\n".join([
+                "`{0}random` for when you can't decide",
+                "`{0}game` when u're bored",
+                "`{0}ask` when you don't know shit",
+                "`{0}c` have a chat"]).format(self.config.command_prefix)
             em.add_field(name="Misc", value=misc_commands, inline=False)
 
             return Response(embed=em)
@@ -1447,22 +1471,17 @@ class MusicBot(discord.Client):
 
                 return await self.forceplay(player, leftover_args, e.use_url)
 
-    async def get_play_entry(self, player, channel, author, leftover_args,
-                             song_url):
-        song_url = song_url.strip('<>')
-
-        if leftover_args:
-            song_url = ' '.join([song_url, *leftover_args])
+    async def get_play_entry(self, player, query, channel=None, author=None, playlist=None):
+        song_url = query
 
         try:
             info = await self.downloader.extract_info(
                 player.playlist.loop, song_url, download=False, process=False)
         except Exception as e:
-            raise exceptions.CommandError(e, expire_in=30)
+            raise e
 
         if not info:
-            raise exceptions.CommandError(
-                "That video cannot be played.", expire_in=30)
+            return False
 
         # abstract the search handling away from the user
         # our ytdl options allow us to use search strings as input urls
@@ -1479,10 +1498,7 @@ class MusicBot(discord.Client):
             )
 
             if not info:
-                raise exceptions.CommandError(
-                    "Error extracting info from search string, youtubedl returned no data.  "
-                    "You may need to restart the bot if this continues to happen.",
-                    expire_in=30)
+                return False
 
             if not all(info.get('entries', [])):
                 # empty list, no data
@@ -1513,31 +1529,8 @@ class MusicBot(discord.Client):
                     raise exceptions.CommandError(
                         "Error queuing playlist:\n%s" % e, expire_in=30)
 
-            t0 = time.time()
-
-            # My test was 1.2 seconds per song, but we maybe should fudge it a bit, unless we can
-            # monitor it and edit the message with the estimated time, but that's some ADVANCED SHIT
-            # I don't think we can hook into it anyways, so this will have to do.
-            # It would probably be a thread to check a few playlists and get the speed from that
-            # Different playlists might download at different speeds though
-            wait_per_song = 1.2
-
             entry_list = await player.playlist.entries_import_from(
                 song_url, channel=channel, author=author)
-
-            tnow = time.time()
-            ttime = tnow - t0
-            listlen = len(entry_list)
-            drop_count = 0
-
-            self.log(
-                "Processed {} songs in {} seconds at {:.2f}s/song, {:+.2g}/song from expected ({}s)".
-                format(listlen,
-                       self._fixg(ttime), ttime / listlen, ttime / listlen -
-                       wait_per_song, self._fixg(wait_per_song * num_songs)))
-
-            reply_text = "Enqueued **%s** songs to be played. Position in queue: %s"
-            btext = str(listlen - drop_count)
             return entry_list
 
         else:
@@ -1559,10 +1552,7 @@ class MusicBot(discord.Client):
                         % song_url)
                     self.log("[Info] Using \"%s\" instead" % e.use_url)
 
-                return await self.cmd_play(player, channel, author,
-                                           leftover_args, e.use_url)
-
-        self.log("I reached code which I shouldn't have...")
+                raise e
 
     async def _get_play_playlist_async_entries(self, player, channel, author,
                                                playlist_url, extractor_type):
@@ -1685,7 +1675,8 @@ class MusicBot(discord.Client):
     @block_user
     @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command"),
-        "3.5.9": (1497890999, "Revamped design and functions making this command more useful")
+        "3.5.9": (1497890999, "Revamped design and functions making this command more useful"),
+        "3.6.1": (1497967505, "deleting messages when leaving search")
     })
     async def cmd_search(self, player, channel, author, leftover_args):
         """
@@ -1764,9 +1755,14 @@ class MusicBot(discord.Client):
                 current_result_index += {"n": 1, "p": -1}[command]
                 current_result_index %= total_results
             elif command == "play":
+                await self.send_typing(channel)
                 await self.cmd_play(player, channel, author, [], current_result["webpage_url"])
+                await self.safe_delete_message(result_message)
+                await self.safe_delete_message(interface_message)
+                await self.safe_delete_message(response_message)
                 return Response("Alright, coming right up!")
             elif command == "addtoplaylist":
+                await self.send_typing(channel)
                 if len(args) < 1:
                     err_msg = await self.safe_send_message(channel, "You have to specify the playlist which you would like to add this result to")
                     await asyncio.sleep(3)
@@ -1777,7 +1773,7 @@ class MusicBot(discord.Client):
                     continue
 
                 playlistname = args[0]
-                add_entry = (await self.get_play_entry(player, channel, author, [],  current_result["webpage_url"]))[0]
+                add_entry = (await self.get_play_entry(player, current_result["webpage_url"], channel=channel, author=author))[0]
 
                 if playlistname not in self.playlists.saved_playlists:
                     if len(playlistname) < 3:
@@ -1791,11 +1787,17 @@ class MusicBot(discord.Client):
 
                     self.playlists.set_playlist(
                         [add_entry], playlistname, author.id)
+                    await self.safe_delete_message(result_message)
+                    await self.safe_delete_message(interface_message)
+                    await self.safe_delete_message(response_message)
                     return Response("Created a new playlist \"{}\" and added `{}`.".format(playlistname.title(),
                                                                                            add_entry.title))
 
                 self.playlists.edit_playlist(
                     playlistname, player.playlist, new_entries=[add_entry])
+                await self.safe_delete_message(result_message)
+                await self.safe_delete_message(interface_message)
+                await self.safe_delete_message(response_message)
                 return Response("Added `{}` to playlist \"{}\".".format(add_entry.title, playlistname.title()))
 
             await self.safe_delete_message(result_message)
@@ -1803,10 +1805,9 @@ class MusicBot(discord.Client):
             await self.safe_delete_message(response_message)
 
     @command_info("1.0.0", 1477180800, {
-        "3.5.4":
-        (1497721686,
-         "Updating the looks of the \"now playing\" message and a bit of cleanup"
-         )
+        "3.5.4": (1497721686, "Updating the looks of the \"now playing\" message and a bit of cleanup"),
+        "3.6.2": (1498143480, "Updated design of default entry and included a link to the video"),
+        "3.6.5": (1498152579, "Timestamp-entries now also include a thumbnail")
     })
     async def cmd_np(self, player, channel, server, message):
         """
@@ -1835,7 +1836,7 @@ class MusicBot(discord.Client):
 
                         em = Embed(
                             title=current_entry["title"],
-                            colour=hex_to_dec("FF88F0"),
+                            colour=hex_to_dec("#FF88F0"),
                             url=current_entry["youtube"],
                             description="\n\nPlaying from **{}**".format(
                                 player.current_entry.title))
@@ -1874,7 +1875,8 @@ class MusicBot(discord.Client):
                 em = Embed(
                     title="**" + d.name + "**",
                     description=progress_bar + progress_text,
-                    colour=hex_to_dec("F9FF6E"))
+                    colour=hex_to_dec("#F9FF6E"),
+                    url=player.current_entry.url)
                 em.set_author(
                     name=d.artist,
                     url=d.artists[0].href,
@@ -1896,6 +1898,7 @@ class MusicBot(discord.Client):
                 em = Embed(
                     title=entry["name"],
                     colour=65535,
+                    url=player.current_entry.url,
                     description=create_bar(
                         local_progress[0] / local_progress[1], 20) +
                     ' [{}/{}]'.format(
@@ -1906,32 +1909,49 @@ class MusicBot(discord.Client):
                     ordinal(entry["index"] + 1), player.current_entry.title,
                     to_timestamp(player.progress),
                     to_timestamp(player.current_entry.end_seconds)))
+                em.set_thumbnail(url=player.current_entry.thumbnail)
                 self.server_specific_data[channel.server]["last_np_msg"] = await self.send_message(channel, embed=em)
             else:
-                prog_str = "`[{}/{}]`".format(
-                    to_timestamp(player.progress),
-                    to_timestamp(player.current_entry.end_seconds))
+                entry = player.current_entry
+                desc = "{} `[{}/{}]`".format(create_bar(player.progress / entry.end_seconds, 20),
+                                             to_timestamp(player.progress), to_timestamp(entry.end_seconds))
+                em = Embed(title=entry.title, description=desc,
+                           url=entry.url, colour=hex_to_dec("#a9b244"))
+                em.set_thumbnail(
+                    url=entry.thumbnail)
+                if "playlist" in entry.meta:
+                    em.set_author(name=entry.meta["playlist"]["name"].title())
+                elif "author" in entry.meta:
+                    em.set_author(
+                        name=entry.meta["author"].display_name, icon_url=entry.meta["author"].avatar_url)
 
-                prog_bar_str = create_bar(
-                    player.progress / player.current_entry.end_seconds, 20)
+                self.server_specific_data[server]["last_np_msg"] = await self.safe_send_message(channel, embed=em)
+                return
 
-                if "playlist" in player.current_entry.meta:
-                    np_text = "Now Playing:\n**{}** from playlist **{}**".format(
-                        player.current_entry.title,
-                        player.current_entry.meta["playlist"]["name"].title())
-                elif "author" in player.current_entry.meta:
-                    np_text = "Now Playing:\n**{}** by **{}**".format(
-                        player.current_entry.title,
-                        player.current_entry.meta["author"].name)
-                else:
-                    np_text = "Now Playing:\n**{}**".format(
-                        player.current_entry.title)
-
-                np_text += "\n{} {}".format(prog_bar_str, prog_str)
-
-                self.server_specific_data[server][
-                    'last_np_msg'] = await self.safe_send_message(
-                        channel, np_text)
+                # prog_str = "`[{}/{}]`".format(
+                #     to_timestamp(player.progress),
+                #     to_timestamp(player.current_entry.end_seconds))
+                #
+                # prog_bar_str = create_bar(
+                #     player.progress / player.current_entry.end_seconds, 20)
+                #
+                # if "playlist" in player.current_entry.meta:
+                #     np_text = "Now Playing:\n**{}** from playlist **{}**".format(
+                #         player.current_entry.title,
+                #         player.current_entry.meta["playlist"]["name"].title())
+                # elif "author" in player.current_entry.meta:
+                #     np_text = "Now Playing:\n**{}** by **{}**".format(
+                #         player.current_entry.title,
+                #         player.current_entry.meta["author"].name)
+                # else:
+                #     np_text = "Now Playing:\n**{}**".format(
+                #         player.current_entry.title)
+                #
+                # np_text += "\n{} {}".format(prog_bar_str, prog_str)
+                #
+                # self.server_specific_data[server][
+                #     'last_np_msg'] = await self.safe_send_message(
+                #         channel, np_text)
         else:
             return Response(
                 'There are no songs queued! Queue something with {}play.'.
@@ -2729,6 +2749,9 @@ class MusicBot(discord.Client):
                  answer + "\n")
         return Response(answer)
 
+    @command_info("1.9.5", 1477774380, {
+        "3.6.1": (1497971656, "Fixed broken line wrap")
+    })
     async def cmd_ask(self, author, channel, message, leftover_args):
         """
         ///|Usage
@@ -2924,7 +2947,7 @@ class MusicBot(discord.Client):
         # await self.safe_send_message(channel, choice(["Welp... That was it!\n**Thanks for playing**", "it took me about 2 hours to set this up and I enjoyed every second. Thanks for playing!\nAnd especially thanks for caring enough to look me up ;).\nIt really means a lot to me.", "So then. I'm really embarassed now, but it's over. it's done. Thanks for playing and thanks for the adrenaline rush. I sure enjoyed it.\nGoodbye!", "Well. Thanks for spending the last {} with me. I really do enjoy your presence... But it's over now. Enjoy the rest of the day!".format(format_time((datetime.now() - start_time).total_seconds(), True, 1, 1))]))
         # return
 
-        client = tungsten.Tungsten("EH8PUT-67PJ967LG8")
+        client = Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
         if not res.success:
             await self.safe_send_message(
@@ -2947,37 +2970,37 @@ class MusicBot(discord.Client):
         self.log("Answered " + message.author.name + "'s question with: " +
                  msgContent)
 
-    async def cmd_translate(self, channel, message, targetLanguage,
-                            leftover_args):
-        """
-        Usage:
-            {command_prefix}translate <targetLanguage> <message>
-        translate something from any language to the target language
-        """
-
-        await self.send_typing(channel)
-
-        gs = goslate.Goslate()
-        languages = gs.get_languages()
-
-        if len(targetLanguage) == 2 and (
-                targetLanguage not in list(languages.keys())):
-            return Response("I don't know this language")
-
-        if len(targetLanguage) > 2:
-            if targetLanguage.title() in list(languages.values()):
-                targetLanguage = list(languages.keys())[list(
-                    languages.values()).index(targetLanguage.title())]
-            else:
-                return Response("I don't know this language")
-
-        if len(leftover_args) < 1:
-            return Response("There's nothing to translate")
-
-        msgContent = " ".join(leftover_args)
-        # await self.safe_send_message (channel, msgContent)
-        # await self.safe_send_message (channel, targetLanguage)
-        return Response(gs.translate(msgContent, targetLanguage))
+    # async def cmd_translate(self, channel, message, targetLanguage,
+    #                         leftover_args):
+    #     """
+    #     Usage:
+    #         {command_prefix}translate <targetLanguage> <message>
+    #     translate something from any language to the target language
+    #     """
+    #
+    #     await self.send_typing(channel)
+    #
+    #     gs = goslate.Goslate()
+    #     languages = gs.get_languages()
+    #
+    #     if len(targetLanguage) == 2 and (
+    #             targetLanguage not in list(languages.keys())):
+    #         return Response("I don't know this language")
+    #
+    #     if len(targetLanguage) > 2:
+    #         if targetLanguage.title() in list(languages.values()):
+    #             targetLanguage = list(languages.keys())[list(
+    #                 languages.values()).index(targetLanguage.title())]
+    #         else:
+    #             return Response("I don't know this language")
+    #
+    #     if len(leftover_args) < 1:
+    #         return Response("There's nothing to translate")
+    #
+    #     msgContent = " ".join(leftover_args)
+    #     # await self.safe_send_message (channel, msgContent)
+    #     # await self.safe_send_message (channel, targetLanguage)
+    #     return Response(gs.translate(msgContent, targetLanguage))
 
     async def cmd_goto(self, server, channel, user_mentions, author,
                        leftover_args):
@@ -3077,7 +3100,8 @@ class MusicBot(discord.Client):
          ),
         "3.4.8": (1497649772, "Fixed the issue which blocked Giesela from replaying the last song"),
         "3.5.2": (1497714171, "Can now replay an index from the history"),
-        "3.5.9": (1497899132, "Now showing the tile of the entry that is going to be replayed")
+        "3.5.9": (1497899132, "Now showing the tile of the entry that is going to be replayed"),
+        "3.6.0": (1497903889, "Replay <inde> didn't work correctly")
     })
     async def cmd_replay(self, player, choose_last=""):
         """
@@ -3091,7 +3115,7 @@ class MusicBot(discord.Client):
         """
 
         try:
-            index = int(choose_last) + 1
+            index = int(choose_last) - 1
             if index > len(player.playlist.history):
                 return Response("History doesn't go back that far.")
             if index < 1:
@@ -4326,9 +4350,9 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                    str(reaction.emoji).startswith("📽") or
-                    str(reaction.emoji).startswith("💾")
-                ) and reaction.count > 1 and user == author:
+                        str(reaction.emoji).startswith("📽") or
+                        str(reaction.emoji).startswith("💾")
+                    ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
@@ -4691,19 +4715,11 @@ class MusicBot(discord.Client):
 
     @block_user
     @command_info("1.9.5", 1479599760, {
-        "3.4.6":
-        (1497617827,
-         "when Giesela can't add the entry to the playlist she tries to figure out **why** it didn't work"
-         ),
-        "3.4.7":
-        (1497619770,
-         "Fixed an annoying bug in which the builder wouldn't show any entries if the amount of entries was a multiple of 20"
-         ),
-        "3.5.1":
-        (1497706811,
-         "Giesela finally keeps track whether a certain entry comes from a playlist or not"
-         ),
-        "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page.")
+        "3.4.6":    (1497617827, "when Giesela can't add the entry to the playlist she tries to figure out **why** it didn't work"),
+        "3.4.7":    (1497619770, "Fixed an annoying bug in which the builder wouldn't show any entries if the amount of entries was a multiple of 20"),
+        "3.5.1": (1497706811, "Giesela finally keeps track whether a certain entry comes from a playlist or not"),
+        "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page."),
+        "3.6.1": (1497969463, "when saving a playlist, list all changes")
     })
     async def cmd_playlist(self, channel, author, server, player,
                            leftover_args):
@@ -5035,6 +5051,7 @@ class MusicBot(discord.Client):
         entries_page = 0
         pl_changes = {
             "remove_entries_indexes": [],
+            "remove_entries": [],  # used for changelog
             "new_entries": [],
             "new_name": None
         }
@@ -5106,11 +5123,11 @@ class MusicBot(discord.Client):
                 if arguments is not None:
                     msg = await self.safe_send_message(channel,
                                                        "I'm working on it.")
-                    query = arguments[1:]
+                    query = " ".join(arguments)
                     try:
                         start_time = datetime.now()
                         entries = await self.get_play_entry(
-                            player, channel, author, query, arguments[0])
+                            player, query, author=author, channel=channel)
                         if (datetime.now() - start_time).total_seconds() > 40:
                             await self.safe_send_message(
                                 author,
@@ -5145,6 +5162,8 @@ class MusicBot(discord.Client):
                             indieces.append(index)
 
                     pl_changes["remove_entries_indexes"].extend(indieces)
+                    pl_changes["remove_entries"].extend(
+                        [playlist["entries"][ind] for ind in indieces])  # for the changelog
                     playlist["entry_count"] = str(
                         int(playlist["entry_count"]) - len(indieces))
                     playlist["entries"] = [
@@ -5277,6 +5296,24 @@ class MusicBot(discord.Client):
             # Adding these entries: {} | Changing the name to: {}".format
             # (pl_changes ["remove_entries_indexes"], ", ".join ([x.title for x
             # in pl_changes ["new_entries"]]), pl_changes ["new_name"]))
+
+            if pl_changes["new_entries"] or pl_changes["remove_entries_indexes"] or pl_changes["new_name"]:
+                c_log = "**CHANGES**\n\n"
+                if pl_changes["new_entries"]:
+                    new_entries_string = "\n".join(["    {}. `{}`".format(ind, nice_cut(
+                        entry.title, 40)) for ind, entry in enumerate(pl_changes["new_entries"], 1)])
+                    c_log += "**New entries**\n{}\n".format(new_entries_string)
+                if pl_changes["remove_entries_indexes"]:
+                    removed_entries_string = "\n".join(
+                        ["    {}. `{}`".format(pl_changes["remove_entries_indexes"][ind], nice_cut(entry.title, 40)) for ind, entry in enumerate(pl_changes["remove_entries"])])
+                    c_log += "**Removed entries**\n{}\n".format(
+                        removed_entries_string)
+                if pl_changes["new_name"]:
+                    c_log += "**Renamed playlist**\n  From `{}` to `{}`".format(
+                        savename.title(), pl_changes["new_name"].title())
+            else:
+                c_log = "No changes were made"
+
             self.playlists.edit_playlist(
                 savename,
                 player.playlist,
@@ -5284,26 +5321,24 @@ class MusicBot(discord.Client):
                 remove_entries_indexes=pl_changes["remove_entries_indexes"],
                 new_name=pl_changes["new_name"])
             self.log("Closed the playlist builder and saved the playlist")
-            return Response("Successfully saved *{}*".format(
-                user_savename.replace("_", " ").title()))
 
-    @command_info("1.9.2", 1479945600, {
-        "3.3.6": (1497387101,
-                  "added the missing \"s\", should be working again"),
-        "3.4.4":
-        (1497611753,
-         "Changed command name from \"addplayingtoplaylist\" to \"addtoplaylist\", thanks Paulo"
-         ),
-        "3.5.5": (1497792167,
-                  "Now displaying what entry has been added to the playlist"),
-        "3.5.8": (1497826743, "Even more information displaying")
+            return Response("Successfully saved **{}**\n\n{}".format(
+                user_savename.replace("_", " ").title(), c_log))
+
+    @command_info("2.9.2", 1479945600, {
+        "3.3.6": (1497387101, "added the missing \"s\", should be working again"),
+        "3.4.4": (1497611753, "Changed command name from \"addplayingtoplaylist\" to \"addtoplaylist\", thanks Paulo"),
+        "3.5.5": (1497792167, "Now displaying what entry has been added to the playlist"),
+        "3.5.8": (1497826743, "Even more information displaying"),
+        "3.6.1": (1497972538, "now accepts a query parameter which adds a song to the playlist like the `play` command does so for the queue")
     })
-    async def cmd_addtoplaylist(self, channel, author, player, playlistname):
+    async def cmd_addtoplaylist(self, channel, author, player, playlistname, query=None):
         """
         ///|Usage
-        `{command_prefix}addtoplaylist <playlistname>`
+        `{command_prefix}addtoplaylist <playlistname>` [link | name]
         ///|Explanation
-        Add the current entry to a playlist
+        Add the current entry to a playlist.
+        If you either provide a link or a name, that song is added to the queue.
         """
 
         if playlistname is None:
@@ -5312,19 +5347,25 @@ class MusicBot(discord.Client):
 
         playlistname = playlistname.lower()
 
-        if not player.current_entry:
-            return Response(
-                "There's nothing playing right now so I can't add it to your playlist..."
-            )
+        await self.send_typing(channel)
 
-        add_entry = player.current_entry
-        if add_entry.provides_timestamps:
-            current_timestamp = add_entry.get_current_song_from_timestamp(
-                player.progress)["name"]
-            # this looks ugly but eh, it works
-            add_entry = (await self.get_play_entry(player, channel, author,
-                                                   current_timestamp[1:],
-                                                   current_timestamp[0]))[0]
+        if query:
+            add_entry = (await self.get_play_entry(player, query, channel=channel, author=author))[0]
+        else:
+            if not player.current_entry:
+                return Response(
+                    "There's nothing playing right now so I can't add it to your playlist..."
+                )
+
+            add_entry = player.current_entry
+            if add_entry.provides_timestamps:
+                current_timestamp = add_entry.get_current_song_from_timestamp(
+                    player.progress)["name"]
+                # this looks ugly but eh, it works
+                try:
+                    add_entry = (await self.get_play_entry(player, current_timestamp, channel=channel, author=author))[0]
+                except:
+                    pass  # just go ahead and add the whole thing, what do I care :3
 
         if playlistname not in self.playlists.saved_playlists:
             if len(playlistname) < 3:
@@ -5339,42 +5380,41 @@ class MusicBot(discord.Client):
             playlistname, player.playlist, new_entries=[add_entry])
         return Response("Added `{}` to playlist \"{}\".".format(add_entry.title, playlistname.title()))
 
-    @command_info("1.9.2", 1479945600, {
-        "3.3.6": (1497387101,
-                  "added the missing \"s\", should be working again"),
-        "3.4.4":
-        (1497611753,
-         "Changed command name from \"removeplayingfromplaylist\" to \"removefromplaylist\", thanks Paulo"
-         ),
-        "3.5.8": (1497826917, "Now displaying the names of the song and the playlist")
+    @command_info("2.9.2", 1479945600, {
+        "3.3.6": (1497387101, "added the missing \"s\", should be working again"),
+        "3.4.4": (1497611753, "Changed command name from \"removeplayingfromplaylist\" to \"removefromplaylist\", thanks Paulo"),
+        "3.5.8": (1497826917, "Now displaying the names of the song and the playlist"),
+        "3.6.5": (1498152365, "Don't require a playlistname argument anymore but take it from the entry itself")
     })
-    async def cmd_removefromplaylist(self, channel, author, player,
-                                     playlistname):
+    async def cmd_removefromplaylist(self, channel, author, player, playlistname=None):
         """
         ///|Usage
-        `{command_prefix}removefromplaylist <playlistname>`
+        `{command_prefix}removefromplaylist [playlistname]`
         ///|Explanation
-        Remove the current entry from a playlist
+        Remove the current entry from its playlist or from the specified playlist.
         """
 
-        if playlistname is None:
-            return Response(
-                "Please specify the playlist's name!", delete_after=20)
+        if not player.current_entry:
+            return Response("There's nothing playing right now so I can hardly remove it from your playlist...")
+
+        if not playlistname:
+            if "playlist" in player.current_entry.meta:
+                # because why make it easy when you can have it complicated
+                playlist_name, index = (
+                    player.current_entry.meta["playlist"][x] for x in ["name", "index"])
+                self.playlists.edit_playlist(
+                    playlist_name, player.playlist, remove_entries_indexes=[index, ])
+                return Response("Removed **{}** from playlist `{}`".format(player.current_entry.title, playlist_name.title()))
+            else:
+                return Response("Please specify the playlist's name!")
 
         playlistname = playlistname.lower()
-
-        if not player.current_entry:
-            return Response(
-                "There's nothing playing right now so I can't remove it from your playlist..."
-            )
 
         remove_entry = player.current_entry
         if remove_entry.provides_timestamps:
             current_timestamp = remove_entry.get_current_song_from_timestamp(
                 player.progress)["name"]
-            remove_entry = await self.get_play_entry(player, channel, author,
-                                                     current_timestamp[1:],
-                                                     current_timestamp[0])
+            remove_entry = await self.get_play_entry(player, current_timestamp, channel=channel, author=author)
 
         if playlistname not in self.playlists.saved_playlists:
             return Response("There's no playlist the name \"{}\".".format(playlistname.title()))
@@ -5383,67 +5423,67 @@ class MusicBot(discord.Client):
             playlistname, player.playlist, remove_entries=[remove_entry])
         return Response("Removed `{}` from playlist \"{}\".".format(remove_entry.title, playlistname))
 
-    async def cmd_setentrystart(self, player, playlistname):
-        """
-        Usage:
-            {command_prefix}setentrystart <playlistname>
-
-        Set the start time for the current entry in the playlist to the current time
-        """
-
-        if playlistname is None:
-            return Response(
-                "Please specify the playlist's name!", delete_after=20)
-
-        playlistname = playlistname.lower()
-
-        if not player.current_entry:
-            return Response(
-                "There's nothing playing right now...", delete_after=20)
-
-        new_start = player.progress
-        new_entry = player.current_entry
-        new_entry.set_start(new_start)
-        self.playlists.edit_playlist(
-            playlistname,
-            player.playlist,
-            remove_entries=[player.current_entry],
-            new_entries=[new_entry])
-
-        return Response(
-            "Set the starting point to {} seconds.".format(new_start),
-            delete_after=20)
-
-    async def cmd_setentryend(self, player, playlistname):
-        """
-        Usage:
-            {command_prefix}setentryend <playlistname>
-
-        Set the end time for the current entry in the playlist to the current time
-        """
-
-        if playlistname is None:
-            return Response(
-                "Please specify the playlist's name!", delete_after=20)
-
-        playlistname = playlistname.lower()
-
-        if not player.current_entry:
-            return Response(
-                "There's nothing playing right now...", delete_after=20)
-
-        new_end = player.progress
-        new_entry = player.current_entry
-        new_entry.set_end(new_end)
-        self.playlists.edit_playlist(
-            playlistname,
-            player.playlist,
-            remove_entries=[player.current_entry],
-            new_entries=[new_entry])
-
-        return Response(
-            "Set the ending point to {} seconds.".format(new_start),
-            delete_after=20)
+    # async def cmd_setentrystart(self, player, playlistname):
+    #     """
+    #     Usage:
+    #         {command_prefix}setentrystart <playlistname>
+    #
+    #     Set the start time for the current entry in the playlist to the current time
+    #     """
+    #
+    #     if playlistname is None:
+    #         return Response(
+    #             "Please specify the playlist's name!", delete_after=20)
+    #
+    #     playlistname = playlistname.lower()
+    #
+    #     if not player.current_entry:
+    #         return Response(
+    #             "There's nothing playing right now...", delete_after=20)
+    #
+    #     new_start = player.progress
+    #     new_entry = player.current_entry
+    #     new_entry.set_start(new_start)
+    #     self.playlists.edit_playlist(
+    #         playlistname,
+    #         player.playlist,
+    #         remove_entries=[player.current_entry],
+    #         new_entries=[new_entry])
+    #
+    #     return Response(
+    #         "Set the starting point to {} seconds.".format(new_start),
+    #         delete_after=20)
+    #
+    # async def cmd_setentryend(self, player, playlistname):
+    #     """
+    #     Usage:
+    #         {command_prefix}setentryend <playlistname>
+    #
+    #     Set the end time for the current entry in the playlist to the current time
+    #     """
+    #
+    #     if playlistname is None:
+    #         return Response(
+    #             "Please specify the playlist's name!", delete_after=20)
+    #
+    #     playlistname = playlistname.lower()
+    #
+    #     if not player.current_entry:
+    #         return Response(
+    #             "There's nothing playing right now...", delete_after=20)
+    #
+    #     new_end = player.progress
+    #     new_entry = player.current_entry
+    #     new_entry.set_end(new_end)
+    #     self.playlists.edit_playlist(
+    #         playlistname,
+    #         player.playlist,
+    #         remove_entries=[player.current_entry],
+    #         new_entries=[new_entry])
+    #
+    #     return Response(
+    #         "Set the ending point to {} seconds.".format(new_start),
+    #         delete_after=20)
 
     # async def cmd_setplayingname(self, player, playlistname, new_name, leftover_args):
     #     """
@@ -5946,8 +5986,7 @@ class MusicBot(discord.Client):
             self.log("moving myself")
             await self.get_voice_client(target_channel)
 
-    async def cmd_mobile(self, message, channel, player, server,
-                         leftover_args):
+    async def cmd_mobile(self, message, channel, player, server, leftover_args):
         """
         ///|Users
         `{command_prefix}mobile`
@@ -5981,12 +6020,7 @@ class MusicBot(discord.Client):
                     return Response("Successfully sent the message!")
 
     @block_user
-    async def cmd_execute(self,
-                          channel,
-                          author,
-                          server,
-                          leftover_args,
-                          player=None):
+    async def cmd_execute(self, channel, author, server, leftover_args, player=None):
         statement = " ".join(leftover_args)
         statement = statement.replace("/n/", "\n")
         statement = statement.replace("/t/", "\t")
@@ -6337,121 +6371,121 @@ class MusicBot(discord.Client):
 
             return Response("Nevermore you shall be annoyed!")
 
-    async def cmd_livetranslator(self,
-                                 target_language=None,
-                                 mode="1",
-                                 required_certainty="70"):
-        """
-        Usage:
-            {command_prefix}livetranslator [language code] [mode] [required certainty]
+    # async def cmd_livetranslator(self,
+    #                              target_language=None,
+    #                              mode="1",
+    #                              required_certainty="70"):
+    #     """
+    #     Usage:
+    #         {command_prefix}livetranslator [language code] [mode] [required certainty]
+    #
+    #     translate every message sent
+    #
+    #     modes:
+    #         1: send a message with the translation
+    #         2: replace the original message with the translation
+    #     """
+    #
+    #     if target_language is None:
+    #         if self.instant_translate:
+    #             self.instant_translate = False
+    #             return Response("turned off instant translation")
+    #         else:
+    #             return Response(
+    #                 "You should provide the language code you want me to translate to in order for me to work"
+    #             )
+    #     if target_language in [
+    #             'af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el',
+    #             'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr',
+    #             'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml',
+    #             'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk',
+    #             'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr',
+    #             'uk', 'ur', 'vi', 'zh-cn', 'zh-tw'
+    #     ]:
+    #         self.instant_translate = True
+    #         self.translator.to_lang = target_language
+    #         try:
+    #             mode = int(mode)
+    #         except:
+    #             mode = 1
+    #         if not (0 <= mode <= 2):
+    #             mode = 1
+    #         self.instant_translate_mode = mode
+    #
+    #         try:
+    #             required_certainty = int(required_certainty) / 100
+    #         except:
+    #             required_certainty = .7
+    #         if not (0 <= required_certainty <= 1):
+    #             required_certainty = .7
+    #
+    #         self.instant_translate_certainty = required_certainty
+    #
+    #         return Response("Starting now!")
+    #     else:
+    #         return Response("Please provide the iso format language code")
 
-        translate every message sent
-
-        modes:
-            1: send a message with the translation
-            2: replace the original message with the translation
-        """
-
-        if target_language is None:
-            if self.instant_translate:
-                self.instant_translate = False
-                return Response("turned off instant translation")
-            else:
-                return Response(
-                    "You should provide the language code you want me to translate to in order for me to work"
-                )
-        if target_language in [
-                'af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el',
-                'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr',
-                'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml',
-                'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk',
-                'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr',
-                'uk', 'ur', 'vi', 'zh-cn', 'zh-tw'
-        ]:
-            self.instant_translate = True
-            self.translator.to_lang = target_language
-            try:
-                mode = int(mode)
-            except:
-                mode = 1
-            if not (0 <= mode <= 2):
-                mode = 1
-            self.instant_translate_mode = mode
-
-            try:
-                required_certainty = int(required_certainty) / 100
-            except:
-                required_certainty = .7
-            if not (0 <= required_certainty <= 1):
-                required_certainty = .7
-
-            self.instant_translate_certainty = required_certainty
-
-            return Response("Starting now!")
-        else:
-            return Response("Please provide the iso format language code")
-
-    async def cmd_translatehistory(self, author, message, leftover_args):
-        """
-        ///|Usage
-        `{command_prefix}translatehistory <channel> <start date | number of messages> <target language>`
-        ///|Explanation
-        Request messages in a channel to be translated.\nYou can specify the amount of messages either by number or by a starting point formated like `DAY/MONTH/YEAR HOUR:MINUTE`
-        """
-        starting_point = " ".join(leftover_args[1:-1])
-        target_language = leftover_args[-1].lower()
-
-        if target_language not in [
-                'af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el',
-                'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr',
-                'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml',
-                'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk',
-                'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr',
-                'uk', 'ur', 'vi', 'zh-cn', 'zh-tw'
-        ]:
-            return Response("Please provide the target language")
-
-        if message.channel_mentions is None or len(
-                message.channel_mentions) < 1:
-            return Response(
-                "Please provide a channel to take the messages from",
-                delete_after=20)
-        channel = message.channel_mentions[0]
-
-        limit = 500
-        start_point = None
-        try:
-            limit = int(starting_point)
-        except:
-            match = re.match(
-                "(\d{1,2})\/(\d{1,2})\/(\d{4}).{1}(\d{1,2}):(\d{1,2})",
-                starting_point)
-            if match is None:
-                return Response(
-                    "I don't understand your starting point...\nBe sure to format it like `DAY/MONTH/YEAR HOUR:MINUTE`",
-                    delete_after=20)
-            day, month, year, hour, minute = match.group(1, 2, 3, 4, 5)
-            start_point = datetime(year, month, day, hour, minute)
-
-        em = Embed(title="TRANSLATION")
-        translator = Translator(target_language)
-        async for message in self.logs_from(
-                channel, limit=limit, after=start_point):
-            n = "**{0}** - {1.year:0>4}/{1.month:0>2}/{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(
-                message.author.display_name, message.timestamp)
-
-            message_content = message.content.strip()
-            msg_language, probability = self.lang_identifier.classify(
-                message_content)
-            self.translator.from_lang = msg_language
-            try:
-                v = "`{}`".format(translator.translate(message_content))
-            except:
-                continue
-            em.add_field(name=n, value=v, inline=False)
-        em._fields = em._fields[::-1]
-        await self.send_message(author, embed=em)
-        return Response("Done!")
+    # async def cmd_translatehistory(self, author, message, leftover_args):
+    #     """
+    #     ///|Usage
+    #     `{command_prefix}translatehistory <channel> <start date | number of messages> <target language>`
+    #     ///|Explanation
+    #     Request messages in a channel to be translated.\nYou can specify the amount of messages either by number or by a starting point formated like `DAY/MONTH/YEAR HOUR:MINUTE`
+    #     """
+    #     starting_point = " ".join(leftover_args[1:-1])
+    #     target_language = leftover_args[-1].lower()
+    #
+    #     if target_language not in [
+    #             'af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el',
+    #             'en', 'es', 'et', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr',
+    #             'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml',
+    #             'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk',
+    #             'sl', 'so', 'sq', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr',
+    #             'uk', 'ur', 'vi', 'zh-cn', 'zh-tw'
+    #     ]:
+    #         return Response("Please provide the target language")
+    #
+    #     if message.channel_mentions is None or len(
+    #             message.channel_mentions) < 1:
+    #         return Response(
+    #             "Please provide a channel to take the messages from",
+    #             delete_after=20)
+    #     channel = message.channel_mentions[0]
+    #
+    #     limit = 500
+    #     start_point = None
+    #     try:
+    #         limit = int(starting_point)
+    #     except:
+    #         match = re.match(
+    #             "(\d{1,2})\/(\d{1,2})\/(\d{4}).{1}(\d{1,2}):(\d{1,2})",
+    #             starting_point)
+    #         if match is None:
+    #             return Response(
+    #                 "I don't understand your starting point...\nBe sure to format it like `DAY/MONTH/YEAR HOUR:MINUTE`",
+    #                 delete_after=20)
+    #         day, month, year, hour, minute = match.group(1, 2, 3, 4, 5)
+    #         start_point = datetime(year, month, day, hour, minute)
+    #
+    #     em = Embed(title="TRANSLATION")
+    #     translator = Translator(target_language)
+    #     async for message in self.logs_from(
+    #             channel, limit=limit, after=start_point):
+    #         n = "**{0}** - {1.year:0>4}/{1.month:0>2}/{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(
+    #             message.author.display_name, message.timestamp)
+    #
+    #         message_content = message.content.strip()
+    #         msg_language, probability = self.lang_identifier.classify(
+    #             message_content)
+    #         self.translator.from_lang = msg_language
+    #         try:
+    #             v = "`{}`".format(translator.translate(message_content))
+    #         except:
+    #             continue
+    #         em.add_field(name=n, value=v, inline=False)
+    #     em._fields = em._fields[::-1]
+    #     await self.send_message(author, embed=em)
+    #     return Response("Done!")
 
     async def cmd_quote(self, author, channel, message, leftover_args):
         """
@@ -6656,24 +6690,37 @@ class MusicBot(discord.Client):
                 ])
 
     @owner_only
+    @command_info("3.1.6", 1498672140, {
+        "3.6.4": (1498146841, "Can now specify the required arguments in order to block a command")
+    })
     async def cmd_blockcommand(self, command, leftover_args):
         """
         ///|Usage
-        `{command_prefix}blockcommand <command> <reason>`
+        `{command_prefix}blockcommand <command> [args] <"reason">`
         ///|Explanation
         Block a command
         """
         if len(leftover_args) < 1:
             return Response("Reason plz")
 
-        reason = " ".join(leftover_args)
+        args = []
+
+        for i, el in enumerate(leftover_args):
+            if not el.startswith("\""):
+                args.append(el)
+            else:
+                reason = " ".join(leftover_args[i:]).strip("\"")
+                break
+
+        if not reason:
+            return Response("Put your reason in quotes, idiot!")
 
         if command.lower() in self.blocked_commands:
             self.blocked_commands.pop(command.lower())
             return Response("Block lifted")
         else:
-            self.blocked_commands[command.lower()] = reason
-            return Response("Blocked command")
+            self.blocked_commands[command.lower()] = (args, reason)
+            return Response("Blocked command `{} {}`".format(command, " ".join(args)))
 
     @command_info("3.4.0", 1497533758, {
         "3.4.8":
@@ -6694,7 +6741,7 @@ class MusicBot(discord.Client):
                 "Couldn't find a command called \"{}\"".format(command))
 
         try:
-            em = Embed(title=command.upper(), colour=hex_to_dec("ffd700"))
+            em = Embed(title=command.upper(), colour=hex_to_dec("#ffd700"))
             em.add_field(
                 name="Version `{}`".format(c_info.version),
                 value="`{}`\nCommand has been added".format(c_info.timestamp),
@@ -6713,14 +6760,18 @@ class MusicBot(discord.Client):
                 "Couldn't find any information on the `{}` command".format(
                     command))
 
-    @command_info("3.5.6", 1497819288)
-    async def cmd_version(self):
+    @command_info("3.5.6", 1497819288, {
+        "3.6.2": (1497978696, "references are now clickable")
+    })
+    async def cmd_version(self, channel):
         """
         ///|Usage
         `{command_prefix}version`
         ///|Explanation
         Some more informat about the current version and what's to come.
         """
+
+        await self.send_typing(channel)
         v_code, v_name = BOTVERSION.split("_")
         dev_code, dev_name = get_dev_version()
         changelog = get_dev_changelog()
@@ -6729,20 +6780,22 @@ class MusicBot(discord.Client):
             BOTVERSION, dev_code + "_" + dev_name)
         desc += "\n".join("● " + l for l in changelog)
         em = Embed(title="Version " + v_name, description=desc,
-                   url="https://siku2.github.io/Giesela", colour=hex_to_dec("67BE2E"))
+                   url="https://siku2.github.io/Giesela", colour=hex_to_dec("#67BE2E"))
 
         return Response(embed=em)
 
     @command_info("3.5.7", 1497823283)
-    async def cmd_interact(self, message):
+    async def cmd_interact(self, channel, message):
         """
         ///|Usage
         `{command_prefix}interact <query>`
         ///|Explanation
-        Use every day language to control Giesela
+        Use everyday language to control Giesela
         ///|Disclaimer
         **Help out with the development of a "smarter" Giesela by testing out this new future!**
         """
+
+        await self.send_typing(channel)
 
         matcher = "^\{}?interact".format(self.config.command_prefix)
         query = re.sub(matcher, "", message.content, flags=re.MULTILINE)
@@ -6751,7 +6804,7 @@ class MusicBot(discord.Client):
 
         print("[INTERACT] \"{}\"".format(query))
 
-        params = {"v": "18/06/2017", "q": query}
+        params = {"v": "22/06/2017", "q": query}
         headers = {"Authorization": "Bearer 47J7GSQPY2DJPLGUNFZVNHAMGU7ARCRD"}
         resp = requests.get("https://api.wit.ai/message",
                             params=params, headers=headers)
@@ -6766,6 +6819,19 @@ class MusicBot(discord.Client):
                                                      d["value"], round(d["confidence"] * 100, 1))
 
         return Response(msg)
+
+    # @command_info("3.6.2", 1497979507)
+    # async def cmd_ping(self, channel):
+    #     """
+    #     ///|Usage
+    #     `{command_prefix}ping
+    #     ///|Explanation
+    #     Get Giesela's latency
+    #     """
+    #     start_time = time.time()
+    #     msg = await self.safe_send_message(channel, "Calculating ping...")
+    #     ping = time.time() - start_time
+    #     await self.safe_edit_message(msg, "The ping is `{}s`".format(round(ping, 2)))
 
     @owner_only
     async def cmd_shutdown(self, channel):
@@ -6851,9 +6917,10 @@ class MusicBot(discord.Client):
             return
 
         if command in self.blocked_commands:
-            await self.send_message(message.channel,
-                                    self.blocked_commands[command])
-            return
+            required_args, reason = self.blocked_commands[command]
+            if all(arg in args for arg in required_args):
+                await self.send_message(message.channel, reason)
+                return
 
         if message.channel.is_private:
             if not (message.author.id == self.config.owner_id and command ==
