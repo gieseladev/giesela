@@ -1783,7 +1783,8 @@ class MusicBot(discord.Client):
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
         "3.5.4": (1497721686, "Updating the looks of the \"now playing\" message and a bit of cleanup"),
-        "3.6.2": (1498143480, "Updated design of default entry and included a link to the video")
+        "3.6.2": (1498143480, "Updated design of default entry and included a link to the video"),
+        "3.6.5": (1498152579, "Timestamp-entries now also include a thumbnail")
     ***REMOVED***)
     async def cmd_np(self, player, channel, server, message):
         """
@@ -1885,6 +1886,7 @@ class MusicBot(discord.Client):
                     ordinal(entry["index"] + 1), player.current_entry.title,
                     to_timestamp(player.progress),
                     to_timestamp(player.current_entry.end_seconds)))
+                em.set_thumbnail(url=player.current_entry.thumbnail)
                 self.server_specific_data[channel.server]["last_np_msg"] = await self.send_message(channel, embed=em)
             else:
                 entry = player.current_entry
@@ -4325,8 +4327,8 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                str(reaction.emoji).startswith("📽") or
-                str(reaction.emoji).startswith("💾")
+                    str(reaction.emoji).startswith("📽") or
+                    str(reaction.emoji).startswith("💾")
                 ) and reaction.count > 1 and user == author:
                 return True
 
@@ -5356,33 +5358,34 @@ class MusicBot(discord.Client):
         return Response("Added `***REMOVED******REMOVED***` to playlist \"***REMOVED******REMOVED***\".".format(add_entry.title, playlistname.title()))
 
     @command_info("2.9.2", 1479945600, ***REMOVED***
-        "3.3.6": (1497387101,
-                  "added the missing \"s\", should be working again"),
-        "3.4.4":
-        (1497611753,
-         "Changed command name from \"removeplayingfromplaylist\" to \"removefromplaylist\", thanks Paulo"
-         ),
-        "3.5.8": (1497826917, "Now displaying the names of the song and the playlist")
+        "3.3.6": (1497387101, "added the missing \"s\", should be working again"),
+        "3.4.4": (1497611753, "Changed command name from \"removeplayingfromplaylist\" to \"removefromplaylist\", thanks Paulo"),
+        "3.5.8": (1497826917, "Now displaying the names of the song and the playlist"),
+        "3.6.5": (1498152365, "Don't require a playlistname argument anymore but take it from the entry itself")
     ***REMOVED***)
-    async def cmd_removefromplaylist(self, channel, author, player,
-                                     playlistname):
+    async def cmd_removefromplaylist(self, channel, author, player, playlistname=None):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***removefromplaylist <playlistname>`
+        `***REMOVED***command_prefix***REMOVED***removefromplaylist [playlistname]`
         ///|Explanation
-        Remove the current entry from a playlist
+        Remove the current entry from its playlist or from the specified playlist.
         """
 
-        if playlistname is None:
-            return Response(
-                "Please specify the playlist's name!", delete_after=20)
+        if not player.current_entry:
+            return Response("There's nothing playing right now so I can hardly remove it from your playlist...")
+
+        if not playlistname:
+            if "playlist" in player.current_entry.meta:
+                # because why make it easy when you can have it complicated
+                playlist_name, index = (
+                    player.current_entry.meta["playlist"][x] for x in ["name", "index"])
+                self.playlists.edit_playlist(
+                    playlist_name, player.playlist, remove_entries_indexes=[index, ])
+                return Response("Removed *****REMOVED******REMOVED***** from playlist `***REMOVED******REMOVED***`".format(player.current_entry.title, playlist_name.title()))
+            else:
+                return Response("Please specify the playlist's name!")
 
         playlistname = playlistname.lower()
-
-        if not player.current_entry:
-            return Response(
-                "There's nothing playing right now so I can't remove it from your playlist..."
-            )
 
         remove_entry = player.current_entry
         if remove_entry.provides_timestamps:
@@ -5397,67 +5400,67 @@ class MusicBot(discord.Client):
             playlistname, player.playlist, remove_entries=[remove_entry])
         return Response("Removed `***REMOVED******REMOVED***` from playlist \"***REMOVED******REMOVED***\".".format(remove_entry.title, playlistname))
 
-    async def cmd_setentrystart(self, player, playlistname):
-        """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***setentrystart <playlistname>
-
-        Set the start time for the current entry in the playlist to the current time
-        """
-
-        if playlistname is None:
-            return Response(
-                "Please specify the playlist's name!", delete_after=20)
-
-        playlistname = playlistname.lower()
-
-        if not player.current_entry:
-            return Response(
-                "There's nothing playing right now...", delete_after=20)
-
-        new_start = player.progress
-        new_entry = player.current_entry
-        new_entry.set_start(new_start)
-        self.playlists.edit_playlist(
-            playlistname,
-            player.playlist,
-            remove_entries=[player.current_entry],
-            new_entries=[new_entry])
-
-        return Response(
-            "Set the starting point to ***REMOVED******REMOVED*** seconds.".format(new_start),
-            delete_after=20)
-
-    async def cmd_setentryend(self, player, playlistname):
-        """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***setentryend <playlistname>
-
-        Set the end time for the current entry in the playlist to the current time
-        """
-
-        if playlistname is None:
-            return Response(
-                "Please specify the playlist's name!", delete_after=20)
-
-        playlistname = playlistname.lower()
-
-        if not player.current_entry:
-            return Response(
-                "There's nothing playing right now...", delete_after=20)
-
-        new_end = player.progress
-        new_entry = player.current_entry
-        new_entry.set_end(new_end)
-        self.playlists.edit_playlist(
-            playlistname,
-            player.playlist,
-            remove_entries=[player.current_entry],
-            new_entries=[new_entry])
-
-        return Response(
-            "Set the ending point to ***REMOVED******REMOVED*** seconds.".format(new_start),
-            delete_after=20)
+    # async def cmd_setentrystart(self, player, playlistname):
+    #     """
+    #     Usage:
+    #         ***REMOVED***command_prefix***REMOVED***setentrystart <playlistname>
+    #
+    #     Set the start time for the current entry in the playlist to the current time
+    #     """
+    #
+    #     if playlistname is None:
+    #         return Response(
+    #             "Please specify the playlist's name!", delete_after=20)
+    #
+    #     playlistname = playlistname.lower()
+    #
+    #     if not player.current_entry:
+    #         return Response(
+    #             "There's nothing playing right now...", delete_after=20)
+    #
+    #     new_start = player.progress
+    #     new_entry = player.current_entry
+    #     new_entry.set_start(new_start)
+    #     self.playlists.edit_playlist(
+    #         playlistname,
+    #         player.playlist,
+    #         remove_entries=[player.current_entry],
+    #         new_entries=[new_entry])
+    #
+    #     return Response(
+    #         "Set the starting point to ***REMOVED******REMOVED*** seconds.".format(new_start),
+    #         delete_after=20)
+    #
+    # async def cmd_setentryend(self, player, playlistname):
+    #     """
+    #     Usage:
+    #         ***REMOVED***command_prefix***REMOVED***setentryend <playlistname>
+    #
+    #     Set the end time for the current entry in the playlist to the current time
+    #     """
+    #
+    #     if playlistname is None:
+    #         return Response(
+    #             "Please specify the playlist's name!", delete_after=20)
+    #
+    #     playlistname = playlistname.lower()
+    #
+    #     if not player.current_entry:
+    #         return Response(
+    #             "There's nothing playing right now...", delete_after=20)
+    #
+    #     new_end = player.progress
+    #     new_entry = player.current_entry
+    #     new_entry.set_end(new_end)
+    #     self.playlists.edit_playlist(
+    #         playlistname,
+    #         player.playlist,
+    #         remove_entries=[player.current_entry],
+    #         new_entries=[new_entry])
+    #
+    #     return Response(
+    #         "Set the ending point to ***REMOVED******REMOVED*** seconds.".format(new_start),
+    #         delete_after=20)
 
     # async def cmd_setplayingname(self, player, playlistname, new_name, leftover_args):
     #     """
