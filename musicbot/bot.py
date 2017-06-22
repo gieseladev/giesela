@@ -4168,10 +4168,10 @@ class MusicBot(discord.Client):
         "3.5.1": (1497706811, "Giesela finally keeps track whether a certain entry comes from a playlist or not"),
         "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page."),
         "3.6.1": (1497969463, "when saving a playlist, list all changes"),
-        "3.6.8": (1498162378, "checking whether start and end indieces are numbers")
+        "3.6.8": (1498162378, "checking whether start and end indieces are numbers"),
+        "3.6.9:" (1498163686, "Special handling for sorting in playlist builder")
     })
-    async def cmd_playlist(self, channel, author, server, player,
-                           leftover_args):
+    async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         ///|Load
         `{command_prefix}playlist load <savename> [add | replace] [none | random] [startindex] [endindex (inclusive)]`\n\nTrust me, it's more complicated than it looks
@@ -4501,6 +4501,8 @@ class MusicBot(discord.Client):
             "remove_entries_indexes": [],
             "remove_entries": [],  # used for changelog
             "new_entries": [],
+            "added_entries": [],  # changelog
+            "order": None  # changelog
             "new_name": None
         }
         savename = _savename
@@ -4569,19 +4571,17 @@ class MusicBot(discord.Client):
 
             if split_message[0].lower() == "add":
                 if arguments is not None:
-                    msg = await self.safe_send_message(channel,
-                                                       "I'm working on it.")
+                    msg = await self.safe_send_message(channel, "I'm working on it.")
                     query = " ".join(arguments)
                     try:
                         start_time = datetime.now()
                         entries = await self.get_play_entry(
                             player, query, author=author, channel=channel)
                         if (datetime.now() - start_time).total_seconds() > 40:
-                            await self.safe_send_message(
-                                author,
-                                "Wow, that took quite a while.\nI'm done now though so come check it out!",
-                                expire_in=70)
+                            await self.safe_send_message(author, "Wow, that took quite a while.\nI'm done now though so come check it out!")
 
+                        pl_changes["added_entries"].extend(
+                            entries)  # just for the changelog
                         pl_changes["new_entries"].extend(entries)
                         playlist["entries"].extend(entries)
                         playlist["entry_count"] = str(
@@ -4649,18 +4649,14 @@ class MusicBot(discord.Client):
                 resp = await self.wait_for_message(
                     author=author, channel=channel, check=extras_check)
 
-                if not resp.content.lower().startswith(
-                        self.config.command_prefix) and not resp.content.lower(
-                ).startswith('abort'):
+                if not resp.content.lower().startswith(self.config.command_prefix) and not resp.content.lower().startswith('abort'):
                     _cmd = resp.content.split()
                     cmd = _cmd[0].lower()
                     args = _cmd[1:] if len(_cmd) > 1 else None
 
                     if cmd == "sort":
-                        sort_method = args[0].lower(
-                        ) if args is not None and args[0].lower() in [
-                            "alphabetical", "length", "random"
-                        ] else "alphabetical"
+                        sort_method = args[0].lower() if args is not None and args[0].lower() in [
+                            "alphabetical", "length", "random"] else "alphabetical"
                         pl_changes["remove_entries_indexes"] = list(
                             range(len(entries)))
 
@@ -4679,6 +4675,9 @@ class MusicBot(discord.Client):
                             shuffle(new_ordered)
                             pl_changes["new_entries"] = new_ordered
                             playlist["entries"] = new_ordered
+
+                        # bodge for changelog
+                        pl_changes["order"] = sort_method
 
                     if cmd == "removeduplicates":
                         pl_changes["remove_entries_indexes"] = list(
@@ -4710,24 +4709,22 @@ class MusicBot(discord.Client):
             self.log("Closed the playlist builder")
 
         if save:
-            # self.log ("Going to remove the following entries: {} |
-            # Adding these entries: {} | Changing the name to: {}".format
-            # (pl_changes ["remove_entries_indexes"], ", ".join ([x.title for x
-            # in pl_changes ["new_entries"]]), pl_changes ["new_name"]))
-
-            if pl_changes["new_entries"] or pl_changes["remove_entries_indexes"] or pl_changes["new_name"]:
+            if pl_changes["added_entries"] or pl_changes["remove_entries_indexes"] or pl_changes["new_name"] or pl_changes["order"]:
                 c_log = "**CHANGES**\n\n"
-                if pl_changes["new_entries"]:
+                if pl_changes["added_entries"]:
                     new_entries_string = "\n".join(["    `{}.` {}".format(ind, nice_cut(
-                        entry.title, 40)) for ind, entry in enumerate(pl_changes["new_entries"], 1)])
+                        entry.title, 40)) for ind, entry in enumerate(pl_changes["added_entries"], 1)])
                     c_log += "**New entries**\n{}\n".format(new_entries_string)
                 if pl_changes["remove_entries_indexes"]:
                     removed_entries_string = "\n".join(
                         ["    `{}.` {}".format(pl_changes["remove_entries_indexes"][ind], nice_cut(entry.title, 40)) for ind, entry in enumerate(pl_changes["remove_entries"])])
                     c_log += "**Removed entries**\n{}\n".format(
                         removed_entries_string)
+                if pl_changes["order"]:
+                    c_log += "**Changed order**\n    To `{}`".format(
+                        pl_changes["order"])
                 if pl_changes["new_name"]:
-                    c_log += "**Renamed playlist**\n  From `{}` to `{}`".format(
+                    c_log += "**Renamed playlist**\n    From `{}` to `{}`".format(
                         savename.title(), pl_changes["new_name"].title())
             else:
                 c_log = "No changes were made"
