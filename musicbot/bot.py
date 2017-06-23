@@ -957,7 +957,8 @@ class MusicBot(discord.Client):
     @command_info("1.9.5", 1477774380, ***REMOVED***
         "3.4.5": (1497616203, "Improved default help message using embeds"),
         "3.6.0": (1497904733, "Fixed weird indent of some help texts"),
-        "3.7.0": (1498233256, "Some better help texts")
+        "3.7.0": (1498233256, "Some better help texts"),
+        "3.7.1": (1498237739, "Added interactive help")
     ***REMOVED***)
     async def cmd_help(self, channel, leftover_args):
         """
@@ -965,6 +966,8 @@ class MusicBot(discord.Client):
         `***REMOVED***command_prefix***REMOVED***help [command]`
         ///|Explanation
         Logs a help message.
+        ///|Interactive
+        `***REMOVED***command_prefix***REMOVED***help <query>`
         """
         command = None
 
@@ -1006,46 +1009,20 @@ class MusicBot(discord.Client):
                 # return
                 # Response("```\n***REMOVED******REMOVED***```".format(dedent(cmd.__doc__).format(command_prefix=self.config.command_prefix)),delete_after=60)
             else:
-                # return Response("No such command", delete_after=10)
-                self.log("Didn't find a command like that")
-                config = configparser.ConfigParser(interpolation=None)
-                if not config.read("config/helper.ini", encoding='utf-8'):
-                    await self.safe_send_message(
-                        channel,
-                        "Something went wrong here. I cannot help you with this"
-                    )
-                    return
+                await self.send_typing(channel)
+                params = ***REMOVED***"v": "23/06/2017", "q": command***REMOVED***
+                headers = ***REMOVED***
+                    "Authorization": "Bearer CU4UAUCKWN37QLXHMBOYZ425NOGBMIYK"***REMOVED***
+                resp = requests.get("https://api.wit.ai/message",
+                                    params=params, headers=headers)
+                data = resp.json()
+                entities = data["entities"]
 
-                funcs = ***REMOVED******REMOVED***
+                if "command" in entities:
+                    cmd = entities["command"][0]["value"]
+                    return await self.cmd_help(channel, [cmd, ])
 
-                for section in config.sections():
-                    tags = json.loads(config.get(section, "tags"))
-                    funcs[str(section)] = 0
-                    for arg in leftover_args:
-                        if arg.lower() in tags:
-                            funcs[str(section)] += 1
-
-                funcs = ***REMOVED***k: v for k, v in funcs.items() if v > 0***REMOVED***
-
-                if len(funcs) <= 0:
-                    await self.safe_send_message(
-                        channel,
-                        "Didn't find anything that may satisfy your wishes")
-                    return
-
-                sorted_funcs = sorted(
-                    funcs.items(), key=operator.itemgetter(1), reverse=True)
-
-                resp_str = "**You might wanna take a look at these functions:**\n\n"
-
-                for func in sorted_funcs[:3]:
-                    cmd = getattr(self, 'cmd_' + func[0], None)
-                    helpText = dedent(cmd.__doc__).format(
-                        command_prefix=self.config.command_prefix)
-                    resp_str += "****REMOVED***0***REMOVED***:*\n```\n***REMOVED***1***REMOVED***```\n\n".format(
-                        func[0], helpText)
-
-                await self.safe_send_message(channel, resp_str, expire_in=60)
+                return Response(str(entities))
 
         else:
             em = Embed(
@@ -3867,8 +3844,8 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                        str(reaction.emoji).startswith("📽") or
-                        str(reaction.emoji).startswith("💾")
+                    str(reaction.emoji).startswith("📽") or
+                    str(reaction.emoji).startswith("💾")
                     ) and reaction.count > 1 and user == author:
                 return True
 
@@ -4170,7 +4147,7 @@ class MusicBot(discord.Client):
         "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page."),
         "3.6.1": (1497969463, "when saving a playlist, list all changes"),
         "3.6.8": (1498162378, "checking whether start and end indices are numbers"),
-        "3.6.9:" (1498163686, "Special handling for sorting in playlist builder"),
+        "3.6.9": (1498163686, "Special handling for sorting in playlist builder"),
         "3.7.0": (1498233256, "Changelog bug fixes")
     ***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
@@ -4501,7 +4478,7 @@ class MusicBot(discord.Client):
             "remove_entries": [],  # used for changelog
             "new_entries": [],
             "added_entries": [],  # changelog
-            "order": None  # changelog
+            "order": None,  # changelog
             "new_name": None
         ***REMOVED***
         savename = _savename
