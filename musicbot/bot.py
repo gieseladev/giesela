@@ -956,13 +956,13 @@ class MusicBot(discord.Client):
 
     @command_info("1.9.5", 1477774380, {
         "3.4.5": (1497616203, "Improved default help message using embeds"),
-        "3.6.0": (1497904733, "Fixed weird indent of some help texts")
+        "3.6.0": (1497904733, "Fixed weird indent of some help texts"),
+        "3.7.0": (1498233256, "Some better help texts")
     })
     async def cmd_help(self, channel, leftover_args):
         """
         ///|Usage
         `{command_prefix}help [command]`
-
         ///|Explanation
         Logs a help message.
         """
@@ -1052,45 +1052,46 @@ class MusicBot(discord.Client):
                 title="GIESELA HELP",
                 url="http://siku2.github.io/Giesela/",
                 colour=hex_to_dec("#828c51"),
-                description="plz be welcum to mah new list of the **most fab** commands\nYou can always use `{0}help <cmd>` to get more detailed information on a command".
+                description="Here are some of the most useful commands,\nYou can always use `{0}help <cmd>` to get more detailed information on a command".
                 format(self.config.command_prefix))
 
             music_commands = "\n".join([
-                "`{0}play` play dem shit",
-                "`{0}search` make sure you get ur shit",
-                "`{0}stream` when u wanna go live",
-                "`{0}pause` need a break?",
-                "`{0}volume` oh shit turn it up",
-                "`{0}seek` hide and snaek",
-                "`{0}fwd` sanic fast, sanic skip",
-                "`{0}rwd` go baek in tiem"]).format(self.config.command_prefix)
+                "`{0}play` play music",
+                "`{0}search` search for music",
+                "`{0}stream` enqueue a livestream",
+                "`{0}pause` pause playback",
+                "`{0}resume` resume playback"
+                "`{0}volume` change volume",
+                "`{0}seek` seek to a timestamp",
+                "`{0}fwd` forward time",
+                "`{0}rwd` rewind time"]).format(self.config.command_prefix)
             em.add_field(name="Music", value=music_commands, inline=False)
 
             queue_commands = "\n".join([
-                "`{0}queue` taky a looky bruh",
-                "`{0}history` care to see the past?",
-                "`{0}np` look at dem shit",
-                "`{0}skip` skip regretful shit",
-                "`{0}replay` when it's stuck in ur head",
-                "`{0}repeat` over and over and over",
-                "`{0}remove` \"that's not what I wanted\"",
-                "`{0}clear` burn it all down",
-                "`{0}shuffle` maek it random plz",
-                "`{0}promote` I want it right now!"]).format(self.config.command_prefix)
+                "`{0}queue` show the queue",
+                "`{0}history` show playback history",
+                "`{0}np` more information on the current entry",
+                "`{0}skip` skip to the next entry in queue",
+                "`{0}replay` replay the current entry",
+                "`{0}repeat` change repeat mode",
+                "`{0}remove` remove entry from queue",
+                "`{0}clear` remove all entries from queue",
+                "`{0}shuffle` shuffle the queue",
+                "`{0}promote` promote entry to front"]).format(self.config.command_prefix)
             em.add_field(name="Queue", value=queue_commands, inline=False)
 
             playlist_commands = "\n".join([
                 "`{0}playlist` create/edit/list playlists",
-                "`{0}addtoplaylist` add shit to a playlist",
-                "`{0}removefromplaylist` remove shit from a playlist"]).format(self.config.command_prefix)
+                "`{0}addtoplaylist` add entry to playlist",
+                "`{0}removefromplaylist` remove entry from playlist"]).format(self.config.command_prefix)
             em.add_field(name="Playlist",
                          value=playlist_commands, inline=False)
 
             misc_commands = "\n".join([
-                "`{0}random` for when you can't decide",
-                "`{0}game` when u're bored",
-                "`{0}ask` when you don't know shit",
-                "`{0}c` have a chat"]).format(self.config.command_prefix)
+                "`{0}random` choose between items",
+                "`{0}game` play a game",
+                "`{0}ask` ask a question",
+                "`{0}c` chat with Giesela"]).format(self.config.command_prefix)
             em.add_field(name="Misc", value=misc_commands, inline=False)
 
             return Response(embed=em)
