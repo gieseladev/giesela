@@ -956,13 +956,13 @@ class MusicBot(discord.Client):
 
     @command_info("1.9.5", 1477774380, ***REMOVED***
         "3.4.5": (1497616203, "Improved default help message using embeds"),
-        "3.6.0": (1497904733, "Fixed weird indent of some help texts")
+        "3.6.0": (1497904733, "Fixed weird indent of some help texts"),
+        "3.7.0": (1498233256, "Some better help texts")
     ***REMOVED***)
     async def cmd_help(self, channel, leftover_args):
         """
         ///|Usage
         `***REMOVED***command_prefix***REMOVED***help [command]`
-
         ///|Explanation
         Logs a help message.
         """
@@ -1052,45 +1052,46 @@ class MusicBot(discord.Client):
                 title="GIESELA HELP",
                 url="http://siku2.github.io/Giesela/",
                 colour=hex_to_dec("#828c51"),
-                description="plz be welcum to mah new list of the **most fab** commands\nYou can always use `***REMOVED***0***REMOVED***help <cmd>` to get more detailed information on a command".
+                description="Here are some of the most useful commands,\nYou can always use `***REMOVED***0***REMOVED***help <cmd>` to get more detailed information on a command".
                 format(self.config.command_prefix))
 
             music_commands = "\n".join([
-                "`***REMOVED***0***REMOVED***play` play dem shit",
-                "`***REMOVED***0***REMOVED***search` make sure you get ur shit",
-                "`***REMOVED***0***REMOVED***stream` when u wanna go live",
-                "`***REMOVED***0***REMOVED***pause` need a break?",
-                "`***REMOVED***0***REMOVED***volume` oh shit turn it up",
-                "`***REMOVED***0***REMOVED***seek` hide and snaek",
-                "`***REMOVED***0***REMOVED***fwd` sanic fast, sanic skip",
-                "`***REMOVED***0***REMOVED***rwd` go baek in tiem"]).format(self.config.command_prefix)
+                "`***REMOVED***0***REMOVED***play` play music",
+                "`***REMOVED***0***REMOVED***search` search for music",
+                "`***REMOVED***0***REMOVED***stream` enqueue a livestream",
+                "`***REMOVED***0***REMOVED***pause` pause playback",
+                "`***REMOVED***0***REMOVED***resume` resume playback"
+                "`***REMOVED***0***REMOVED***volume` change volume",
+                "`***REMOVED***0***REMOVED***seek` seek to a timestamp",
+                "`***REMOVED***0***REMOVED***fwd` forward time",
+                "`***REMOVED***0***REMOVED***rwd` rewind time"]).format(self.config.command_prefix)
             em.add_field(name="Music", value=music_commands, inline=False)
 
             queue_commands = "\n".join([
-                "`***REMOVED***0***REMOVED***queue` taky a looky bruh",
-                "`***REMOVED***0***REMOVED***history` care to see the past?",
-                "`***REMOVED***0***REMOVED***np` look at dem shit",
-                "`***REMOVED***0***REMOVED***skip` skip regretful shit",
-                "`***REMOVED***0***REMOVED***replay` when it's stuck in ur head",
-                "`***REMOVED***0***REMOVED***repeat` over and over and over",
-                "`***REMOVED***0***REMOVED***remove` \"that's not what I wanted\"",
-                "`***REMOVED***0***REMOVED***clear` burn it all down",
-                "`***REMOVED***0***REMOVED***shuffle` maek it random plz",
-                "`***REMOVED***0***REMOVED***promote` I want it right now!"]).format(self.config.command_prefix)
+                "`***REMOVED***0***REMOVED***queue` show the queue",
+                "`***REMOVED***0***REMOVED***history` show playback history",
+                "`***REMOVED***0***REMOVED***np` more information on the current entry",
+                "`***REMOVED***0***REMOVED***skip` skip to the next entry in queue",
+                "`***REMOVED***0***REMOVED***replay` replay the current entry",
+                "`***REMOVED***0***REMOVED***repeat` change repeat mode",
+                "`***REMOVED***0***REMOVED***remove` remove entry from queue",
+                "`***REMOVED***0***REMOVED***clear` remove all entries from queue",
+                "`***REMOVED***0***REMOVED***shuffle` shuffle the queue",
+                "`***REMOVED***0***REMOVED***promote` promote entry to front"]).format(self.config.command_prefix)
             em.add_field(name="Queue", value=queue_commands, inline=False)
 
             playlist_commands = "\n".join([
                 "`***REMOVED***0***REMOVED***playlist` create/edit/list playlists",
-                "`***REMOVED***0***REMOVED***addtoplaylist` add shit to a playlist",
-                "`***REMOVED***0***REMOVED***removefromplaylist` remove shit from a playlist"]).format(self.config.command_prefix)
+                "`***REMOVED***0***REMOVED***addtoplaylist` add entry to playlist",
+                "`***REMOVED***0***REMOVED***removefromplaylist` remove entry from playlist"]).format(self.config.command_prefix)
             em.add_field(name="Playlist",
                          value=playlist_commands, inline=False)
 
             misc_commands = "\n".join([
-                "`***REMOVED***0***REMOVED***random` for when you can't decide",
-                "`***REMOVED***0***REMOVED***game` when u're bored",
-                "`***REMOVED***0***REMOVED***ask` when you don't know shit",
-                "`***REMOVED***0***REMOVED***c` have a chat"]).format(self.config.command_prefix)
+                "`***REMOVED***0***REMOVED***random` choose between items",
+                "`***REMOVED***0***REMOVED***game` play a game",
+                "`***REMOVED***0***REMOVED***ask` ask a question",
+                "`***REMOVED***0***REMOVED***c` chat with Giesela"]).format(self.config.command_prefix)
             em.add_field(name="Misc", value=misc_commands, inline=False)
 
             return Response(embed=em)
