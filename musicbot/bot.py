@@ -983,10 +983,7 @@ class MusicBot(discord.Client):
                 fields = documentation.split("///")
                 if len(fields) < 2:  # backward compatibility
                     return Response(
-                        "```\n{}```".format(
-                            dedent(cmd.__doc__).format(
-                                command_prefix=self.config.command_prefix)),
-                        delete_after=60)
+                        "```\n{}```".format(dedent(cmd.__doc__).format(command_prefix=self.config.command_prefix)))
 
                 for field in fields:
                     if field is None or field is "":
@@ -1010,7 +1007,9 @@ class MusicBot(discord.Client):
                 # Response("```\n{}```".format(dedent(cmd.__doc__).format(command_prefix=self.config.command_prefix)),delete_after=60)
             else:
                 await self.send_typing(channel)
-                params = {"v": "23/06/2017", "q": command}
+                params = {
+                    "v": "23/06/2017",
+                    "q": command}
                 headers = {
                     "Authorization": "Bearer CU4UAUCKWN37QLXHMBOYZ425NOGBMIYK"}
                 resp = requests.get("https://api.wit.ai/message",
@@ -5286,8 +5285,8 @@ class MusicBot(discord.Client):
             return Response(
                 "Timestamp exceeds song duration!", delete_after=20)
 
-    @command_info("2.2.1", 1493975700,
-                  {"3.4.3": (1497609912, "Can now rewind past the last song")})
+    @command_info("2.2.1", 1493975700, {
+        "3.4.3": (1497609912, "Can now rewind past the last song")})
     async def cmd_rwd(self, player, timestamp=None):
         """
         ///|Usage
@@ -5639,10 +5638,8 @@ class MusicBot(discord.Client):
 
     @command_info("3.2.5", 1496428380, {
         "3.3.9": (1497521393, "Added edit sub-command"),
-        "3.4.1": (1497550771,
-                  "Added the filter \"mine\" to the listing function"),
-        "3.4.6": (1497617827,
-                  "when listing bookmarks, they musn't be \"inline\"."),
+        "3.4.1": (1497550771, "Added the filter \"mine\" to the listing function"),
+        "3.4.6": (1497617827, "when listing bookmarks, they musn't be \"inline\"."),
         "3.5.8": (1497827057, "Editing bookmarks now works as expected")
     })
     async def cmd_bookmark(self, author, player, leftover_args):
@@ -5799,9 +5796,7 @@ class MusicBot(discord.Client):
             return Response("Blocked command `{} {}`".format(command, " ".join(args)))
 
     @command_info("3.4.0", 1497533758, {
-        "3.4.8":
-        (1497650090,
-         "When showing changelogs, two logs can't be on the same line anymore")
+        "3.4.8": (1497650090, "When showing changelogs, two logs can't be on the same line anymore")
     })
     async def cmd_commandinfo(self, command):
         """
