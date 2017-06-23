@@ -4169,7 +4169,8 @@ class MusicBot(discord.Client):
         "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page."),
         "3.6.1": (1497969463, "when saving a playlist, list all changes"),
         "3.6.8": (1498162378, "checking whether start and end indices are numbers"),
-        "3.6.9:" (1498163686, "Special handling for sorting in playlist builder")
+        "3.6.9:" (1498163686, "Special handling for sorting in playlist builder"),
+        "3.7.0": (1498233256, "Changelog bug fixes")
     })
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -4484,15 +4485,12 @@ class MusicBot(discord.Client):
         await player.playlist.add_entries(clone_entries)
         self.playlists.bump_replay_count(playlist_name)
 
-    async def playlist_builder(self, channel, author, server, player,
-                               _savename):
+    async def playlist_builder(self, channel, author, server, player, _savename):
         if _savename not in self.playlists.saved_playlists:
             self.playlists.set_playlist([], _savename, author.id)
 
         def check(m):
-            return (m.content.split()[0].lower() in [
-                "add", "remove", "rename", "exit", "p", "n", "save", "extras"
-            ])
+            return (m.content.split()[0].lower() in ["add", "remove", "rename", "exit", "p", "n", "save", "extras"])
 
         abort = False
         save = False
@@ -4715,9 +4713,9 @@ class MusicBot(discord.Client):
                     new_entries_string = "\n".join(["    `{}.` {}".format(ind, nice_cut(
                         entry.title, 40)) for ind, entry in enumerate(pl_changes["added_entries"], 1)])
                     c_log += "**New entries**\n{}\n".format(new_entries_string)
-                if pl_changes["remove_entries_indexes"]:
+                if pl_changes["remove_entries"]:
                     removed_entries_string = "\n".join(
-                        ["    `{}.` {}".format(pl_changes["remove_entries_indexes"][ind], nice_cut(entry.title, 40)) for ind, entry in enumerate(pl_changes["remove_entries"])])
+                        ["    `{}.` {}".format(pl_changes["remove_entries_indexes"][ind] + 1, nice_cut(entry.title, 40)) for ind, entry in enumerate(pl_changes["remove_entries"])])
                     c_log += "**Removed entries**\n{}\n".format(
                         removed_entries_string)
                 if pl_changes["order"]:
@@ -4886,54 +4884,6 @@ class MusicBot(discord.Client):
         return Response("**{}**\n{}".format(
             wikipedia_page_title,
             wikipedia.summary(wikipedia_page_title, sentences=3)))
-
-    @command_info("1.9.5", 1479945600, {
-        "3.3.5":
-        (1497284850,
-         "removed delete_after keywords which was the reason this command was broken"
-         )
-    })
-    async def cmd_getmusicfile(self, channel, author, player, index=0):
-        """
-        Usage:
-            {command_prefix}getmusicfile
-            {command_prefix}getmusicfile index
-
-        Get the music file of the current song.
-        You may provide an index to get that file.
-        """
-
-        try:
-            index = int(index) - 1
-        except:
-            return Response("Please provide a valid index")
-
-        if index == -1:
-            entry = player.current_entry
-        else:
-            if index < 0 or index >= len(player.playlist.entries):
-                return Response("Your index is out of range")
-            entry = player.playlist.entries[index]
-
-        if not entry:
-            return Response(
-                "This entry is currently being worked on. Please retry again later"
-            )
-
-        if type(entry).__name__ == "StreamPlaylistEntry":
-            return Response("Can't send you this because it's a live stream")
-
-        if not entry.is_downloaded:
-            try:
-                await entry._download()
-            except:
-                return Response(
-                    "Could not download the file. This really shouldn't happen"
-                )
-
-        await self.safe_send_message(
-            author, "The file is being uploaded. Please wait a second.")
-        await self.send_file(author, entry.filename, content="Here you go:")
 
     @block_user
     async def cmd_reminder(self, channel, author, player, server,
