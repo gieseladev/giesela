@@ -296,7 +296,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
             'version': 2,
             'type': self.__class__.__name__,
             'url': self.url,
-            'title': self.title,
+            'title': self._title,
             'duration': self.duration,
             'downloaded': self.is_downloaded,
             'filename': self.filename,
