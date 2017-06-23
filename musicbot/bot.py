@@ -5863,7 +5863,7 @@ class MusicBot(discord.Client):
         ///|Explanation
         Use everyday language to control Giesela
         ///|Disclaimer
-        **Help out with the development of a "smarter" Giesela by testing out this new future!**
+        **Help out with the development of a "smarter" Giesela by testing out this new feature!**
         """
 
         await self.send_typing(channel)

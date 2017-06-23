@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 
 MAIN_VERSION = "3.7.1"
-SUB_VERSION = "Weebiesela"
+SUB_VERSION = "Giese_La_La_Land"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
 past_sub_versions = {
