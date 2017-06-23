@@ -2836,6 +2836,9 @@ class MusicBot(discord.Client):
                 player.current_entry.title, e))
 
     @block_user
+    @command_info("2.0.3", 1486054560, {
+        "3.7.2": (1498252803, "no arguments provided crash Fixed")
+    })
     async def cmd_random(self, channel, author, leftover_args):
         """
         ///|Basic
@@ -2854,10 +2857,11 @@ class MusicBot(discord.Client):
         Choose a random item out of a list or use a pre-defined list.
         """
 
-        items = [
-            x.strip() for x in " ".join(leftover_args).split(",")
-            if x is not ""
-        ]
+        if not leftover_args:
+            return Response("Why u gotta be stupid?")
+
+        items = [x.strip()
+                 for x in " ".join(leftover_args).split(",") if x is not ""]
 
         if items[0].split()[0].lower().strip() == "create":
             if len(items) < 2:
@@ -3843,8 +3847,8 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                    str(reaction.emoji).startswith("📽") or
-                    str(reaction.emoji).startswith("💾")
+                        str(reaction.emoji).startswith("📽") or
+                        str(reaction.emoji).startswith("💾")
                     ) and reaction.count > 1 and user == author:
                 return True
 
