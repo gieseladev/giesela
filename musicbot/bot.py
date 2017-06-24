@@ -45,6 +45,7 @@ from .games.game_2048 import Game2048
 from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
 from .logger import OnlineLogger
+from .lyrics import search_for_lyrics
 from .nine_gag import ContentType, get_post
 from .opus_loader import load_opus_lib
 from .player import MusicPlayer
@@ -568,9 +569,7 @@ class MusicBot(discord.Client):
         if entry:
             prefix = u'\u275A\u275A ' if is_paused else ''
 
-            if type(
-                    entry
-            ).__name__ == "StreamPlaylistEntry" and entry.radio_station_data is not None:
+            if type(entry).__name__ == "StreamPlaylistEntry" and entry.radio_station_data is not None:
                 name = u'{}'.format(
                     await player._absolute_current_song())[:128]
                 game = discord.Game(name=name)
@@ -5895,6 +5894,28 @@ class MusicBot(discord.Client):
                                                      d["value"], round(d["confidence"] * 100, 1))
 
         return Response(msg)
+
+    @command_info("3.7.3", 1498306682)
+    async def cmd_lyrics(self, player, channel):
+        """
+        ///|Usage
+        `{command_prefix}lyrics`
+        ///|Explanation
+        Try to find lyrics for the current entry and display 'em
+        """
+
+        await self.send_typing(channel)
+
+        if not player.current_entry:
+            return Response("There's no way for me to find lyrics for something that doesn't even exist!")
+
+        title = await player._absolute_current_song()
+        lyrics = search_for_lyrics(title)
+
+        if not lyrics:
+            return Response("Couldn't find any lyrics for **{}**".format(title))
+        else:
+            return Response("**{}**\n\n{}".format(title, lyrics))
 
     @owner_only
     async def cmd_shutdown(self, channel):
