@@ -114,7 +114,7 @@ def clean_songname(query):
         "feat", "ft", "creditless", "music", "video", "edition", "special",
         "version", "ver", "dvd", "new", "raw", "textless", "mp3", "avi", "mp4",
         "english", "eng", "with", "album", "theme", "full", "1080", "1080p",
-        "720", "720p", "4k"
+        "720", "720p", "4k", "japanese"
     ]
 
     for key in to_remove:
