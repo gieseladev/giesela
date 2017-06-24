@@ -4,12 +4,19 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-MAIN_VERSION = "3.6.7"
-SUB_VERSION = "Weebiesela"
+MAIN_VERSION = "3.7.3"
+SUB_VERSION = "Giese_La_La_Land"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
-past_sub_versions = {"3.6.0": "Weebiesela", "3.5.0": "Veggiesela", "3.4.0": "Gunzulalela", "3.3.0": "Giselator",
-                     "3.2.0": "GG_iesela", "3.1.0": "age_of_Giesela", "3.0.0": "Giesela-PLUS"}
+past_sub_versions = {
+    "3.7.0": "Giese_La_La_Land",
+    "3.6.0": "Weebiesela",
+    "3.5.0": "Veggiesela",
+    "3.4.0": "Gunzulalela",
+    "3.3.0": "Giselator",
+    "3.2.0": "GG_iesela",
+    "3.1.0": "age_of_Giesela",
+    "3.0.0": "Giesela-PLUS"}
 
 AUDIO_CACHE_PATH = os.path.join(os.getcwd(), "audio_cache")
 DISCORD_MSG_CHAR_LIMIT = 2000

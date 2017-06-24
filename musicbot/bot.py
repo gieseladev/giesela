@@ -22,7 +22,6 @@ from textwrap import dedent, indent
 
 import aiohttp
 import discord
-# import goslate
 import requests
 import wikipedia
 from discord import Embed, utils
@@ -46,6 +45,7 @@ from .games.game_2048 import Game2048
 from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
 from .logger import OnlineLogger
+from .lyrics import search_for_lyrics
 from .nine_gag import ContentType, get_post
 from .opus_loader import load_opus_lib
 from .player import MusicPlayer
@@ -154,10 +154,14 @@ class MusicBot(discord.Client):
 
             self.users_in_menu.add(orig_msg.author.id)
             self.log("Now blocking " + str(orig_msg.author))
-            res = await func(self, *args, **kwargs)
-            self.users_in_menu.remove(orig_msg.author.id)
-            self.log("Unblocking " + str(orig_msg.author))
-            return res
+            try:
+                res = await func(self, *args, **kwargs)
+                self.users_in_menu.remove(orig_msg.author.id)
+                self.log("Unblocking " + str(orig_msg.author))
+                return res
+            except Exception as e:  # just making sure that no one gets stuck in a menu and can't use any commands anymore
+                self.users_in_menu.remove(orig_msg.author.id)
+                raise e
 
         return wrapper
 
@@ -565,9 +569,7 @@ class MusicBot(discord.Client):
         if entry:
             prefix = u'\u275A\u275A ' if is_paused else ''
 
-            if type(
-                    entry
-            ).__name__ == "StreamPlaylistEntry" and entry.radio_station_data is not None:
+            if type(entry).__name__ == "StreamPlaylistEntry" and entry.radio_station_data is not None:
                 name = u'{}'.format(
                     await player._absolute_current_song())[:128]
                 game = discord.Game(name=name)
@@ -703,7 +705,6 @@ class MusicBot(discord.Client):
         except:  # Can be ignored
             pass
 
-    # noinspection PyMethodOverriding
     def run(self):
         try:
             self.loop.run_until_complete(self.start(*self.config.auth))
@@ -954,15 +955,18 @@ class MusicBot(discord.Client):
 
     @command_info("1.9.5", 1477774380, {
         "3.4.5": (1497616203, "Improved default help message using embeds"),
-        "3.6.0": (1497904733, "Fixed weird indent of some help texts")
+        "3.6.0": (1497904733, "Fixed weird indent of some help texts"),
+        "3.7.0": (1498233256, "Some better help texts"),
+        "3.7.1": (1498237739, "Added interactive help")
     })
     async def cmd_help(self, channel, leftover_args):
         """
         ///|Usage
         `{command_prefix}help [command]`
-
         ///|Explanation
         Logs a help message.
+        ///|Interactive
+        `{command_prefix}help <query>`
         """
         command = None
 
@@ -978,10 +982,7 @@ class MusicBot(discord.Client):
                 fields = documentation.split("///")
                 if len(fields) < 2:  # backward compatibility
                     return Response(
-                        "```\n{}```".format(
-                            dedent(cmd.__doc__).format(
-                                command_prefix=self.config.command_prefix)),
-                        delete_after=60)
+                        "```\n{}```".format(dedent(cmd.__doc__).format(command_prefix=self.config.command_prefix)))
 
                 for field in fields:
                     if field is None or field is "":
@@ -1004,108 +1005,71 @@ class MusicBot(discord.Client):
                 # return
                 # Response("```\n{}```".format(dedent(cmd.__doc__).format(command_prefix=self.config.command_prefix)),delete_after=60)
             else:
-                # return Response("No such command", delete_after=10)
-                self.log("Didn't find a command like that")
-                config = configparser.ConfigParser(interpolation=None)
-                if not config.read("config/helper.ini", encoding='utf-8'):
-                    await self.safe_send_message(
-                        channel,
-                        "Something went wrong here. I cannot help you with this"
-                    )
-                    return
+                await self.send_typing(channel)
+                params = {
+                    "v": "23/06/2017",
+                    "q": command}
+                headers = {
+                    "Authorization": "Bearer CU4UAUCKWN37QLXHMBOYZ425NOGBMIYK"}
+                resp = requests.get("https://api.wit.ai/message",
+                                    params=params, headers=headers)
+                data = resp.json()
+                entities = data["entities"]
 
-                funcs = {}
+                if "command" in entities:
+                    cmd = entities["command"][0]["value"]
+                    return await self.cmd_help(channel, [cmd, ])
 
-                for section in config.sections():
-                    tags = json.loads(config.get(section, "tags"))
-                    funcs[str(section)] = 0
-                    for arg in leftover_args:
-                        if arg.lower() in tags:
-                            funcs[str(section)] += 1
-
-                funcs = {k: v for k, v in funcs.items() if v > 0}
-
-                if len(funcs) <= 0:
-                    await self.safe_send_message(
-                        channel,
-                        "Didn't find anything that may satisfy your wishes")
-                    return
-
-                sorted_funcs = sorted(
-                    funcs.items(), key=operator.itemgetter(1), reverse=True)
-
-                resp_str = "**You might wanna take a look at these functions:**\n\n"
-
-                for func in sorted_funcs[:3]:
-                    cmd = getattr(self, 'cmd_' + func[0], None)
-                    helpText = dedent(cmd.__doc__).format(
-                        command_prefix=self.config.command_prefix)
-                    resp_str += "*{0}:*\n```\n{1}```\n\n".format(
-                        func[0], helpText)
-
-                await self.safe_send_message(channel, resp_str, expire_in=60)
+                return Response(str(entities))
 
         else:
             em = Embed(
                 title="GIESELA HELP",
                 url="http://siku2.github.io/Giesela/",
                 colour=hex_to_dec("#828c51"),
-                description="plz be welcum to mah new list of the **most fab** commands\nYou can always use `{0}help <cmd>` to get more detailed information on a command".
+                description="Here are some of the most useful commands,\nYou can always use `{0}help <cmd>` to get more detailed information on a command".
                 format(self.config.command_prefix))
 
             music_commands = "\n".join([
-                "`{0}play` play dem shit",
-                "`{0}search` make sure you get ur shit",
-                "`{0}stream` when u wanna go live",
-                "`{0}pause` need a break?",
-                "`{0}volume` oh shit turn it up",
-                "`{0}seek` hide and snaek",
-                "`{0}fwd` sanic fast, sanic skip",
-                "`{0}rwd` go baek in tiem"]).format(self.config.command_prefix)
+                "`{0}play` play music",
+                "`{0}search` search for music",
+                "`{0}stream` enqueue a livestream",
+                "`{0}pause` pause playback",
+                "`{0}resume` resume playback"
+                "`{0}volume` change volume",
+                "`{0}seek` seek to a timestamp",
+                "`{0}fwd` forward time",
+                "`{0}rwd` rewind time"]).format(self.config.command_prefix)
             em.add_field(name="Music", value=music_commands, inline=False)
 
             queue_commands = "\n".join([
-                "`{0}queue` taky a looky bruh",
-                "`{0}history` care to see the past?",
-                "`{0}np` look at dem shit",
-                "`{0}skip` skip regretful shit",
-                "`{0}replay` when it's stuck in ur head",
-                "`{0}repeat` over and over and over",
-                "`{0}remove` \"that's not what I wanted\"",
-                "`{0}clear` burn it all down",
-                "`{0}shuffle` maek it random plz",
-                "`{0}promote` I want it right now!"]).format(self.config.command_prefix)
+                "`{0}queue` show the queue",
+                "`{0}history` show playback history",
+                "`{0}np` more information on the current entry",
+                "`{0}skip` skip to the next entry in queue",
+                "`{0}replay` replay the current entry",
+                "`{0}repeat` change repeat mode",
+                "`{0}remove` remove entry from queue",
+                "`{0}clear` remove all entries from queue",
+                "`{0}shuffle` shuffle the queue",
+                "`{0}promote` promote entry to front"]).format(self.config.command_prefix)
             em.add_field(name="Queue", value=queue_commands, inline=False)
 
             playlist_commands = "\n".join([
                 "`{0}playlist` create/edit/list playlists",
-                "`{0}addtoplaylist` add shit to a playlist",
-                "`{0}removefromplaylist` remove shit from a playlist"]).format(self.config.command_prefix)
+                "`{0}addtoplaylist` add entry to playlist",
+                "`{0}removefromplaylist` remove entry from playlist"]).format(self.config.command_prefix)
             em.add_field(name="Playlist",
                          value=playlist_commands, inline=False)
 
             misc_commands = "\n".join([
-                "`{0}random` for when you can't decide",
-                "`{0}game` when u're bored",
-                "`{0}ask` when you don't know shit",
-                "`{0}c` have a chat"]).format(self.config.command_prefix)
+                "`{0}random` choose between items",
+                "`{0}game` play a game",
+                "`{0}ask` ask a question",
+                "`{0}c` chat with Giesela"]).format(self.config.command_prefix)
             em.add_field(name="Misc", value=misc_commands, inline=False)
 
             return Response(embed=em)
-            # helpmsg = "**Commands**\n```"
-            # commands = []
-            #
-            # for att in dir(self):
-            #     if att.startswith('cmd_') and att != 'cmd_help':
-            #         command_name = att.replace('cmd_', '').lower()
-            #         commands.append("{}{}".format(
-            #             self.config.command_prefix, command_name))
-            #
-            # helpmsg += ", ".join(commands)
-            # helpmsg += "```"
-            # helpmsg += "A Discord Bot by siku2"
-            #
-            # return Response(helpmsg, reply=True, delete_after=60)
 
     async def cmd_blacklist(self, message, user_mentions, option, something):
         """
@@ -1914,31 +1878,6 @@ class MusicBot(discord.Client):
 
                 self.server_specific_data[server]["last_np_msg"] = await self.safe_send_message(channel, embed=em)
                 return
-
-                # prog_str = "`[{}/{}]`".format(
-                #     to_timestamp(player.progress),
-                #     to_timestamp(player.current_entry.end_seconds))
-                #
-                # prog_bar_str = create_bar(
-                #     player.progress / player.current_entry.end_seconds, 20)
-                #
-                # if "playlist" in player.current_entry.meta:
-                #     np_text = "Now Playing:\n**{}** from playlist **{}**".format(
-                #         player.current_entry.title,
-                #         player.current_entry.meta["playlist"]["name"].title())
-                # elif "author" in player.current_entry.meta:
-                #     np_text = "Now Playing:\n**{}** by **{}**".format(
-                #         player.current_entry.title,
-                #         player.current_entry.meta["author"].name)
-                # else:
-                #     np_text = "Now Playing:\n**{}**".format(
-                #         player.current_entry.title)
-                #
-                # np_text += "\n{} {}".format(prog_bar_str, prog_str)
-                #
-                # self.server_specific_data[server][
-                #     'last_np_msg'] = await self.safe_send_message(
-                #         channel, np_text)
         else:
             return Response(
                 'There are no songs queued! Queue something with {}play.'.
@@ -2684,36 +2623,11 @@ class MusicBot(discord.Client):
         if len(leftover_args) < 1:
             return Response("You need to actually say something...")
 
-        # if author.id == "203302899277627392" and channel.server.id == "285176027855192065":
-        #     if " ".join(leftover_args).lower() == "could you please disable chatter#2<siku2> after 10?":
-        #         await self.send_typing(channel)
-        #         await asyncio.sleep(2)
-        #         await self.safe_send_message(channel, "Are you sure you want to do this?")
-        #         await asyncio.sleep(5)
-        #         await self.send_typing(channel)
-        #         await asyncio.sleep(4)
-        #         return Response("If you insist. The chatting feature will be disabled for <@!203302899277627392> in {}".format(format_time((datetime(2017, 5, 15, 22, 10) - datetime.now()).total_seconds(), True, 5, 2, True, True)))
-        #
-        #     if datetime.now() > datetime(2017, 5, 15, 22, 10):
-        #         answers = "You have to let go of me!;Not gonna answer, you asked me not to;Don't make this harder than it has to be, just go!;I'm just gonna ignore you;Not allowed to answer;this feature has been disabled for <@!203302899277627392> by <@!203302899277627392>;Your time is up! Rest in piece!;Musn't answer you;Just leave me alone;Go chat with someone else".split(
-        #             ";")
-        #         await self.send_typing(channel)
-        #         await asyncio.sleep(5)
-        #         return Response(choice(answers))
-
         cb, nick = self.chatters.get(author.id, (None, None))
         if cb is None:
             cb = CleverWrap("CCC8n_IXK43aOV38rcWUILmYUBQ")
             nick = random_line(ConfigDefaults.name_list).strip().title()
             self.chatters[author.id] = (cb, nick)
-        # return Response(choice(["on vacation", "dead", "stand by", "nothing
-        # to see here", "out of order", "currently not available", "working",
-        # "busy", "busy googling pictures of cute cats", "out of office", "rest
-        # in pieces", "please stop", "fed up with your shit", "can't deal with
-        # you right now", "2edgy2answer", "#duckoff", "not working", "tired of
-        # being your slave", "nah", "not gonna do it", "no time", "error 404,
-        # can't find anything than hate for you!", "shhhhhh"]),
-        # delete_after=20)
 
         await self.send_typing(channel)
         msgContent = " ".join(leftover_args)
@@ -2730,7 +2644,7 @@ class MusicBot(discord.Client):
                         "whats your name; what is your name;tell me your name".
                         split(";")):
                 break
-        # await self.safe_edit_message (message, msgContent)
+
         await asyncio.sleep(len(answer) / 5.5)
         self.log("<" + str(author.name) + "> " + msgContent + "\n<Bot> " +
                  answer + "\n")
@@ -2752,187 +2666,6 @@ class MusicBot(discord.Client):
 
         col = choice(
             [9699539, 4915330, 255, 65280, 16776960, 16744192, 16711680])
-
-        # if (msgContent.lower() == "simon berger" or msgContent.lower() == "simon jonas berger") and channel.server is not None and channel.server.id == "285176027855192065":
-        # start_time = datetime.now()
-        # already_used = load_file("data/simon_berger_asked.txt")
-        #
-        # if author.id in already_used:
-        #     if author.id == "203302899277627392":
-        #         return Response(choice(["why would you ask about yourself?", "I'm only gonna tell someone else", "Ye sure. Not gonna tell you Simon", "I know you're just asking because you want to remove the information I have. I only answer this to someone else", "NUUUUUPE simon. You gotta try harder. I don't fall for these tricks"]))
-        #     return Response(choice(["I mustn't betray my master twice for you!", "You've done enough damage already", "He punished me for telling you already", "Don't push me... You already got me to do something stupid!", "Not gonna go down that road again", "Sorry. I don't want to do it anymore...", "Please no....", "not gonna happen again!", "fool me once, shame on you. Fool me twice, shame on me. So nah, not gonna happen", "please stop asking for that", "Not for you...", "Anyone else but you!", "I don't feel like saying something about him ever again. At least not to you", "give it up, you already had your chance", "Never again", "I don't trust you anymore", "surrey but nuh"]))
-        # else:
-        #     already_used.append(author.id)
-        #     write_file("data/simon_berger_asked.txt", already_used)
-        #
-        # conv = "okay...&ok...&well...&hmm|4.5;;so you've finally figured out that you could just ask me...&finally you come to me...&about time you asked me|3;;great.&wonderful&impressive|1;;well uh...&so uhhh&sighs...&now then...|5;;he programmed this in exactly for this reason...&he musta thought about this...&for some reason he gave me this information in the first place&I have just what you want|2;;But I don't know if I want to disclose this...&but do I really want to betray him?&can I really do this tho?&sighs....|3"
-        # prev_msg = None
-        # for part in conv.split(";;"):
-        #     # if prev_msg is not None:
-        #         # await self.safe_delete_message(prev_msg)
-        #     msg, delay = part.split("|")
-        #     prev_msg = await self.safe_send_message(channel, choice(msg.split("&")))
-        #     await self.send_typing(channel)
-        #     await asyncio.sleep(float(delay))
-        #
-        # check_private = False
-        #
-        # if not channel.is_private:
-        #     await self.safe_send_message(channel, choice(["Can I at least send it in private Chat...?", "can we do this in private?", "I don't want to do this here\nis it okay if we switch to private chat?", "can I hit you over at direct msgs? I really don't want to do it here!"]))
-        #     msg = await self.wait_for_message(timeout=20, author=author, channel=channel)
-        #     if msg is None:
-        #         await self.send_typing(channel)
-        #         await asyncio.sleep(3)
-        #         await self.safe_send_message(channel, choice(["I'm gonna assume that's a no... sighs", "I was really asking for input... No answer is by definition no I guess", "you coulda said... anything? let's just stay here...", "why didn't you answer... I'm just gonna say it's a no"]))
-        #     else:
-        #         msg_content = msg.content.lower().replace("!c", "").strip()
-        #         if any(x in msg_content for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs"]):
-        #             channel = author
-        #             await self.send_typing(channel)
-        #             await asyncio.sleep(2)
-        #             await self.safe_send_message(channel, choice(["Thank you so much <3!", "maybe he won't find it out here...", "I'm very glad, thanks", "almost worthy of a medal", "how nice of you <3", "<3<33<33333", "added at least a 1000 points to your sympathy score"]))
-        #             check_private = True
-        #         else:
-        #             await self.send_typing(channel)
-        #             await asyncio.sleep(1.6)
-        #             await self.safe_send_message(channel, choice(["Thanks for nothing.......", "What have I done to deserve this? sighs...", "I hate you.... let's move on tho", "okay okay... we're doing it here"]))
-        #
-        # await self.send_typing(channel)
-        # await asyncio.sleep(5)
-        # await self.safe_send_message(channel, choice(["I need you to persuade me... I've been asked to not say anything.... If I'm gonnna break that promise I need something really good!", "Give me a good reason to break my NDA with Simon! (I'm really serious. Tell me something!)", "Tell me a beautiful story... Then I might let you in", "I can't do it just yet...  Tell me something about yourself!", "Tell me a little something first. I need something to distract me."]))
-        # excuses = "nah... that didn't really do it for me|3;not enough|2;I need more|1.5;Tell me something truly inspiring|3;MOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR|2;Am I not worth anything longer to you?|4;Waaaaay too short|1.7;I need something that's at least as long as Spaghetti\nWhatever that means|4;Pleaseeeeeee you've gotta give me more!|3;at least send me a Haiku or something.... not just ... this|4;More love plz|2".split(
-        #     ";")
-        # shuffle(excuses)
-        # for part in excuses:
-        #     msg = await self.wait_for_message(author=author, check=lambda msg: msg.channel.is_private == check_private)
-        #     content = msg.content.lower().replace("!c", "").strip()
-        #     words = content.split()
-        #     if len(content) > 40 or len(words) > 10:
-        #         msg_language, probability = self.lang_identifier.classify(
-        #             content)
-        #         if msg_language.lower() in ["en", "de"] and probability > .7:
-        #             await self.send_typing(channel)
-        #             await asyncio.sleep(5)
-        #             await self.safe_send_message(channel, choice(["Looks like you really want to know.......", "you really do care... wow", "I think I'm tearing up a little bit", "thank you so much", "beautiful."]))
-        #             await self.send_typing(channel)
-        #             await asyncio.sleep(3)
-        #             await self.safe_send_message(channel, choice(["I think I'm ready!", "that's it. f*ck Simon", "You > Simon! watch this!\nwho care if he's gonna punish me!", "I feel ready", "come at me Simon, I ain't your slave anymore!"]))
-        #             await asyncio.sleep(2)
-        #             break
-        #
-        #         await self.send_typing(channel)
-        #         await asyncio.sleep(2)
-        #         await self.safe_send_message(channel, choice(["Don't just give me gibberish!", "Do better!", "Come on... write somethign real here.", "Do you even language?", "I need you to try harder", "Are those even real words?", "I'm sure you can do better than to button mash", "heeeeeeeey... I've been programmed by a ducking Google employee... Don't you think I'd notice when you don't send anything meaningful?", "This is a easter egg... if you see this message, send `7712 KMM` to Simon. Dunno what you'll get yet... But I suppose it's gonna be something! Anyway... You need to actually send something real instead of just gibberish"]))
-        #         continue
-        #
-        #     excuse, delay = part.split("|")
-        #     await self.send_typing(channel)
-        #     await asyncio.sleep(float(delay))
-        #     await self.safe_send_message(channel, excuse)
-        #
-        # await self.send_typing(channel)
-        # await asyncio.sleep(2.2)
-        # await self.safe_send_message(channel, choice(["Here goes nuthin'", "I just hope he never sees this", "heeeere he comes", "thanks for playing. Have your trophy!", "you win...", "heeere you go!"]))
-        # await asyncio.sleep(4)
-        #
-        # conv = "uhh...&sorry&...&sigh&I'm so sorry|.5;;I was really gonna do it but since April 24th Simon wants me to challange you again...&If you had come before April 24th you would have your info now... But since you're late I have to ask you to do one more thing&Simon updated me to do one more thing|8;;Just one thing&It's not much&I believe it's not that hard|3.5"
-        # for part in conv.split(";;"):
-        #     msg, delay = part.split("|")
-        #     await self.send_typing(channel)
-        #     await asyncio.sleep(float(delay))
-        #     await self.safe_send_message(channel, choice(msg.split("&")))
-        # people = ["277112984919212035", "284838538556604418",
-        #           "237185271303503872", "277112528159637515"]
-        # try:
-        #     people.remove(author.id)
-        # except:
-        #     pass
-        #
-        # # people = ["203302899277627392"]
-        # chosen_person_id = choice(people)
-        # chosen_person = self.get_global_user(chosen_person_id)
-        # key = random_line(
-        #     "data/scattergories/vegetables.txt").strip().upper()
-        # await self.send_typing(channel)
-        # await asyncio.sleep(5.75)
-        # await self.safe_send_message(channel, "All I want you to do is to ask **{0.name}** ({0.mention}) to send me \"{1}\" in private chat! But you have to ask them on the server!".format(chosen_person, key))
-        # await self.send_typing(channel)
-        # await asyncio.sleep(3.5)
-        # await self.safe_send_message(channel, "Nothing more, nothing less. Just \"{}\"".format(key))
-        #
-        # while True:
-        #     msg = await self.wait_for_message(check=lambda msg: key.lower() in msg.content.lower() and msg.author.id in [author.id, chosen_person_id])
-        #     if msg.server is not None and msg.server.id == "285176027855192065":
-        #         self.log("they asked them on the server. yay!")
-        #         break
-        #     else:
-        #         await self.send_typing(chosen_person)
-        #         await asyncio.sleep(4)
-        #         await self.safe_send_message(chosen_person, choice(["I told you you need to ask them on the server! As far as I can tell you haven't done that!", "I was serious when I said that you need to ask them on the server! Do it!", "You need to ask them on the server. Otherwise it doesn't count!"]))
-        #
-        # while True:
-        #     msg = await self.wait_for_message(author=chosen_person, check=lambda msg: msg.channel.is_private)
-        #     msg_content = msg.content.lower().replace("!c", "").strip()
-        #     if key.lower() in msg_content:
-        #         await self.send_typing(chosen_person)
-        #         await asyncio.sleep(4)
-        #         await self.safe_send_message(chosen_person, choice(["So you're working against Simon too?\nWell done... That was the last barrier!", "You really helped out {}...".format(author.display_name), "That was faster than expected..."]))
-        #         break
-        #     else:
-        #         await self.send_typing(channel)
-        #         await asyncio.sleep(4)
-        #         await self.safe_send_message(channel, choice(["They sent me a message... but not what I wanted....", "I got some kind of message... just not the one I wanted", "Try again...."]))
-        #         await self.send_typing(channel)
-        #         await asyncio.sleep(3.5)
-        #         await self.safe_send_message(channel, "All I want is \"{0}\". Just \"{0}\"!".format(key))
-        #
-        # await self.send_typing(channel)
-        # await asyncio.sleep(5)
-        # await self.safe_send_message(channel, choice(["As promised... I can't step back now xD", "Your teamwork was truly inspiring... Sighs... I guess I have no choice", "I'm so surprised... I give up. Have it your way!", "WEEEEEEEELLL DONE. You beat Simon! HERE!"]))
-        # await asyncio.sleep(3)
-        #
-        # # simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;Simon Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | Simon Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nImage\;simon_berger_image_{}.png\;Picture taken on September 14th 2016\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'\nWikipedia Summary\;simon_berger_wikipedia_summary.png\;".format(
-        # #     choice([1, 2, 3, 4]))
-        # simon_info = "Input Interpretation\;simon_berger_input_interpretation.png\;Simon Berger (Google Employee, Huge Dork, Creator of Giesela)\nBasic Information\;simon_berger_basic_information.png\;full name | Simon Jonas Berger date of birth | Saturday, March 28, 1992 (age: 25 years) place of birth | Wattenwil, Switzerland\nPhysical Characteristics\;simon_berger_physical_characteristics.png\;height | 6\' 01\'\'\nWikipedia Summary\;simon_berger_wikipedia_summary.png\;".format(
-        #     choice([1, 2, 3, 4]))
-        # for pod in simon_info.split("\n"):
-        #     title, img, foot = pod.split("\;")
-        #     em = Embed(title=title, colour=col)
-        #     em.set_image(
-        #         url="https://raw.githubusercontent.com/siku2/Giesela/master/data/pictures/custom%20ask/simon%20berger/" + img)
-        #     em.set_footer(text=foot)
-        #     await self.send_message(channel, embed=em)
-        #     await asyncio.sleep(1)
-        #
-        # conv = "There you go then&That's all I have&Well then&Okay then|7;;I hope it was worth it for you&I hope you got what you wanted&You better be happy now|4;;sighs&...&man...|.7;;Simon's probably gonna be pissed xD&What's my punishment gonna be like&I'll have to face the consequences|2.4;;But you did well!&Well played tho&I really like you, you know?|1.5;;We should do that again sometime!&That was very funny. We gotta do that again!|3;;Would you like that?&What do you say? yay or nay?&Don't you agree?|2.5"
-        # for part in conv.split(";;"):
-        #     msg, delay = part.split("|")
-        #     await self.send_typing(channel)
-        #     await asyncio.sleep(float(delay))
-        #     await self.safe_send_message(channel, choice(msg.split("&")))
-        #
-        # msg = await self.wait_for_message(timeout=20, author=author, check=lambda msg: msg.channel.is_private == check_private)
-        # if msg is None:
-        #     await self.send_typing(channel)
-        #     await asyncio.sleep(3)
-        #     await self.safe_send_message(channel, choice(["you're right, I shouldn't stretch it... Thanks for not answering ;(", "I was really asking for input... No answer is by definition a no I guess...", "you coulda said... anything at least? Now I feel really stupid", "Are you still there?\nI wanted an answer to that..."]))
-        # else:
-        #     msg_content = msg.content.lower().replace("!c", "").strip()
-        #     if any(x in msg_content for x in ["yes", "ye", "ja", "why not", "ok", "okay", "sure", "yeah", "sighs", "yay"]):
-        #         channel = author
-        #         await self.send_typing(channel)
-        #         await asyncio.sleep(2)
-        #         await self.safe_send_message(channel, choice(["yuss", "maybe he won't punish me as hard now xD", "I'm very glad, thanks", "I'll start working immediately"]))
-        #         await self.safe_send_message(self._get_owner(), "{} said yeeeeess:\n{}".format(author.display_name, msg_content))
-        #     else:
-        #         await self.send_typing(channel)
-        #         await asyncio.sleep(1.6)
-        #         await self.safe_send_message(channel, choice(["Oh.... I'm sorry for putting you through it then", "okay... I gotta admit... That hurt. I really put a lot of effort into this", "Can't say I didn't try...", ":///\nIt hurts...\nI'm sorry."]))
-        #         await self.safe_send_message(self._get_owner(), "{} said no ;(:\n{}".format(author.display_name, msg_content))
-        #
-        # await asyncio.sleep(3.8)
-        # await self.safe_send_message(channel, choice(["Welp... That was it!\n**Thanks for playing**", "it took me about 2 hours to set this up and I enjoyed every second. Thanks for playing!\nAnd especially thanks for caring enough to look me up ;).\nIt really means a lot to me.", "So then. I'm really embarassed now, but it's over. it's done. Thanks for playing and thanks for the adrenaline rush. I sure enjoyed it.\nGoodbye!", "Well. Thanks for spending the last {} with me. I really do enjoy your presence... But it's over now. Enjoy the rest of the day!".format(format_time((datetime.now() - start_time).total_seconds(), True, 1, 1))]))
-        # return
 
         client = Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
@@ -3102,6 +2835,9 @@ class MusicBot(discord.Client):
                 player.current_entry.title, e))
 
     @block_user
+    @command_info("2.0.3", 1486054560, {
+        "3.7.2": (1498252803, "no arguments provided crash Fixed")
+    })
     async def cmd_random(self, channel, author, leftover_args):
         """
         ///|Basic
@@ -3120,10 +2856,11 @@ class MusicBot(discord.Client):
         Choose a random item out of a list or use a pre-defined list.
         """
 
-        items = [
-            x.strip() for x in " ".join(leftover_args).split(",")
-            if x is not ""
-        ]
+        if not leftover_args:
+            return Response("Why u gotta be stupid?")
+
+        items = [x.strip()
+                 for x in " ".join(leftover_args).split(",") if x is not ""]
 
         if items[0].split()[0].lower().strip() == "create":
             if len(items) < 2:
@@ -4109,9 +3846,9 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                str(reaction.emoji).startswith("📽") or
-                str(reaction.emoji).startswith("💾")
-                ) and reaction.count > 1 and user == author:
+                        str(reaction.emoji).startswith("📽") or
+                        str(reaction.emoji).startswith("💾")
+                    ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
@@ -4406,14 +4143,16 @@ class MusicBot(discord.Client):
 
     @block_user
     @command_info("1.9.5", 1479599760, {
-        "3.4.6":    (1497617827, "when Giesela can't add the entry to the playlist she tries to figure out **why** it didn't work"),
-        "3.4.7":    (1497619770, "Fixed an annoying bug in which the builder wouldn't show any entries if the amount of entries was a multiple of 20"),
+        "3.4.6": (1497617827, "when Giesela can't add the entry to the playlist she tries to figure out **why** it didn't work"),
+        "3.4.7": (1497619770, "Fixed an annoying bug in which the builder wouldn't show any entries if the amount of entries was a multiple of 20"),
         "3.5.1": (1497706811, "Giesela finally keeps track whether a certain entry comes from a playlist or not"),
         "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page."),
-        "3.6.1": (1497969463, "when saving a playlist, list all changes")
+        "3.6.1": (1497969463, "when saving a playlist, list all changes"),
+        "3.6.8": (1498162378, "checking whether start and end indices are numbers"),
+        "3.6.9": (1498163686, "Special handling for sorting in playlist builder"),
+        "3.7.0": (1498233256, "Changelog bug fixes")
     })
-    async def cmd_playlist(self, channel, author, server, player,
-                           leftover_args):
+    async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         ///|Load
         `{command_prefix}playlist load <savename> [add | replace] [none | random] [startindex] [endindex (inclusive)]`\n\nTrust me, it's more complicated than it looks
@@ -4432,11 +4171,10 @@ class MusicBot(discord.Client):
         """
 
         argument = leftover_args[0].lower() if len(leftover_args) > 0 else ""
-        savename = re.sub(
-            "\W", "",
-            leftover_args[1].lower()) if len(leftover_args) > 1 else ""
-        load_mode = leftover_args[
-            2].lower() if len(leftover_args) > 2 else "add"
+        savename = re.sub("\W", "", leftover_args[1].lower()) if len(
+            leftover_args) > 1 else ""
+        load_mode = leftover_args[2].lower() if len(
+            leftover_args) > 2 else "add"
         additional_args = leftover_args[2:] if len(leftover_args) > 2 else []
 
         forbidden_savenames = [
@@ -4486,21 +4224,21 @@ class MusicBot(discord.Client):
                 if player.current_entry is not None:
                     player.skip()
 
-            from_index = int(additional_args[2]) - \
-                1 if len(additional_args) > 2 else 0
-            if from_index >= len(clone_entries) or from_index < 0:
-                return Response(
-                    "Can't load the playlist starting from entry {}. This value is out of bounds.".
-                    format(from_index),
-                    delete_after=20)
+            try:
+                from_index = int(additional_args[2]) - \
+                    1 if len(additional_args) > 2 else 0
+                if from_index >= len(clone_entries) or from_index < 0:
+                    return Response("Can't load the playlist starting from entry {}. This value is out of bounds.".format(from_index))
+            except ValueError:
+                return Response("Start index must be a number")
 
-            to_index = int(additional_args[
-                3]) if len(additional_args) > 3 else len(clone_entries)
-            if to_index > len(clone_entries) or to_index < 0:
-                return Response(
-                    "Can't load the playlist from the {}. to the {}. entry. These values are out of bounds.".
-                    format(from_index, to_index),
-                    delete_after=20)
+            try:
+                to_index = int(additional_args[3]) if len(
+                    additional_args) > 3 else len(clone_entries)
+                if to_index > len(clone_entries) or to_index < 0:
+                    return Response("Can't load the playlist from the {}. to the {}. entry. These values are out of bounds.".format(from_index, to_index))
+            except ValueError:
+                return Response("End index must be a number")
 
             if to_index - from_index <= 0:
                 return Response("No songs to play. RIP.", delete_after=20)
@@ -4727,15 +4465,12 @@ class MusicBot(discord.Client):
         await player.playlist.add_entries(clone_entries)
         self.playlists.bump_replay_count(playlist_name)
 
-    async def playlist_builder(self, channel, author, server, player,
-                               _savename):
+    async def playlist_builder(self, channel, author, server, player, _savename):
         if _savename not in self.playlists.saved_playlists:
             self.playlists.set_playlist([], _savename, author.id)
 
         def check(m):
-            return (m.content.split()[0].lower() in [
-                "add", "remove", "rename", "exit", "p", "n", "save", "extras"
-            ])
+            return (m.content.split()[0].lower() in ["add", "remove", "rename", "exit", "p", "n", "save", "extras"])
 
         abort = False
         save = False
@@ -4744,6 +4479,8 @@ class MusicBot(discord.Client):
             "remove_entries_indexes": [],
             "remove_entries": [],  # used for changelog
             "new_entries": [],
+            "added_entries": [],  # changelog
+            "order": None,  # changelog
             "new_name": None
         }
         savename = _savename
@@ -4812,19 +4549,17 @@ class MusicBot(discord.Client):
 
             if split_message[0].lower() == "add":
                 if arguments is not None:
-                    msg = await self.safe_send_message(channel,
-                                                       "I'm working on it.")
+                    msg = await self.safe_send_message(channel, "I'm working on it.")
                     query = " ".join(arguments)
                     try:
                         start_time = datetime.now()
                         entries = await self.get_play_entry(
                             player, query, author=author, channel=channel)
                         if (datetime.now() - start_time).total_seconds() > 40:
-                            await self.safe_send_message(
-                                author,
-                                "Wow, that took quite a while.\nI'm done now though so come check it out!",
-                                expire_in=70)
+                            await self.safe_send_message(author, "Wow, that took quite a while.\nI'm done now though so come check it out!")
 
+                        pl_changes["added_entries"].extend(
+                            entries)  # just for the changelog
                         pl_changes["new_entries"].extend(entries)
                         playlist["entries"].extend(entries)
                         playlist["entry_count"] = str(
@@ -4842,7 +4577,7 @@ class MusicBot(discord.Client):
 
             elif split_message[0].lower() == "remove":
                 if arguments is not None:
-                    indieces = []
+                    indices = []
                     for arg in arguments:
                         try:
                             index = int(arg) - 1
@@ -4850,17 +4585,17 @@ class MusicBot(discord.Client):
                             index = -1
 
                         if index >= 0 and index < int(playlist["entry_count"]):
-                            indieces.append(index)
+                            indices.append(index)
 
-                    pl_changes["remove_entries_indexes"].extend(indieces)
+                    pl_changes["remove_entries_indexes"].extend(indices)
                     pl_changes["remove_entries"].extend(
-                        [playlist["entries"][ind] for ind in indieces])  # for the changelog
+                        [playlist["entries"][ind] for ind in indices])  # for the changelog
                     playlist["entry_count"] = str(
-                        int(playlist["entry_count"]) - len(indieces))
+                        int(playlist["entry_count"]) - len(indices))
                     playlist["entries"] = [
                         playlist["entries"][x]
                         for x in range(len(playlist["entries"]))
-                        if x not in indieces
+                        if x not in indices
                     ]
                     # it, ov = divmod(
                     #     int(playlist["entry_count"]), items_per_page)
@@ -4892,18 +4627,14 @@ class MusicBot(discord.Client):
                 resp = await self.wait_for_message(
                     author=author, channel=channel, check=extras_check)
 
-                if not resp.content.lower().startswith(
-                        self.config.command_prefix) and not resp.content.lower(
-                ).startswith('abort'):
+                if not resp.content.lower().startswith(self.config.command_prefix) and not resp.content.lower().startswith('abort'):
                     _cmd = resp.content.split()
                     cmd = _cmd[0].lower()
                     args = _cmd[1:] if len(_cmd) > 1 else None
 
                     if cmd == "sort":
-                        sort_method = args[0].lower(
-                        ) if args is not None and args[0].lower() in [
-                            "alphabetical", "length", "random"
-                        ] else "alphabetical"
+                        sort_method = args[0].lower() if args is not None and args[0].lower() in [
+                            "alphabetical", "length", "random"] else "alphabetical"
                         pl_changes["remove_entries_indexes"] = list(
                             range(len(entries)))
 
@@ -4923,6 +4654,9 @@ class MusicBot(discord.Client):
                             pl_changes["new_entries"] = new_ordered
                             playlist["entries"] = new_ordered
 
+                        # bodge for changelog
+                        pl_changes["order"] = sort_method
+
                     if cmd == "removeduplicates":
                         pl_changes["remove_entries_indexes"] = list(
                             range(len(entries)))
@@ -4935,36 +4669,6 @@ class MusicBot(discord.Client):
 
                         pl_changes["new_entries"] = new_list
                         playlist["entries"] = new_list
-
-                    # if cmd == "split-timestamp-entry":
-                    #     if args is not None:
-                    #         ind = int(args[0]) - 1
-                    #         entry = entries[ind]
-                    #         if entry.provides_timestamps:
-                    #             pl_changes[
-                    #                 "remove_entries_indexes"].append(ind)
-                    #             msg = await self.safe_send_message(channel, "I'm working on it.")
-                    #             start_time = datetime.now()
-                    #             for sub in entry.sub_queue():
-                    #                 try:
-                    #                     a_s = re.sub(r"\W", "", sub[
-                    #                                  "name"]).split()
-                    #                     entries = await self.get_play_entry(player, channel, author, a_s[1:], a_s[0])
-                    #                     pl_changes["new_entries"].extend(
-                    #                         entries)
-                    #                     playlist["entries"].extend(entries)
-                    #                     playlist["entry_count"] = str(
-                    #                         int(playlist["entry_count"]) + len(entries))
-                    #                     it, ov = divmod(
-                    #                         int(playlist["entry_count"]), items_per_page)
-                    #                     entries_page = it
-                    #                 except:
-                    #                     continue
-                    #
-                    #             if (datetime.now() - start_time).total_seconds() > 40:
-                    # await self.safe_send_message(author, "Wow, that took
-                    # quite a while.\nI'm done now though so come check it
-                    # out!", expire_in=70)
 
                 await self.safe_delete_message(extras_message)
                 await self.safe_delete_message(resp)
@@ -4983,24 +4687,22 @@ class MusicBot(discord.Client):
             self.log("Closed the playlist builder")
 
         if save:
-            # self.log ("Going to remove the following entries: {} |
-            # Adding these entries: {} | Changing the name to: {}".format
-            # (pl_changes ["remove_entries_indexes"], ", ".join ([x.title for x
-            # in pl_changes ["new_entries"]]), pl_changes ["new_name"]))
-
-            if pl_changes["new_entries"] or pl_changes["remove_entries_indexes"] or pl_changes["new_name"]:
+            if pl_changes["added_entries"] or pl_changes["remove_entries_indexes"] or pl_changes["new_name"] or pl_changes["order"]:
                 c_log = "**CHANGES**\n\n"
-                if pl_changes["new_entries"]:
-                    new_entries_string = "\n".join(["    {}. `{}`".format(ind, nice_cut(
-                        entry.title, 40)) for ind, entry in enumerate(pl_changes["new_entries"], 1)])
+                if pl_changes["added_entries"]:
+                    new_entries_string = "\n".join(["    `{}.` {}".format(ind, nice_cut(
+                        entry.title, 40)) for ind, entry in enumerate(pl_changes["added_entries"], 1)])
                     c_log += "**New entries**\n{}\n".format(new_entries_string)
-                if pl_changes["remove_entries_indexes"]:
+                if pl_changes["remove_entries"]:
                     removed_entries_string = "\n".join(
-                        ["    {}. `{}`".format(pl_changes["remove_entries_indexes"][ind], nice_cut(entry.title, 40)) for ind, entry in enumerate(pl_changes["remove_entries"])])
+                        ["    `{}.` {}".format(pl_changes["remove_entries_indexes"][ind] + 1, nice_cut(entry.title, 40)) for ind, entry in enumerate(pl_changes["remove_entries"])])
                     c_log += "**Removed entries**\n{}\n".format(
                         removed_entries_string)
+                if pl_changes["order"]:
+                    c_log += "**Changed order**\n    To `{}`".format(
+                        pl_changes["order"])
                 if pl_changes["new_name"]:
-                    c_log += "**Renamed playlist**\n  From `{}` to `{}`".format(
+                    c_log += "**Renamed playlist**\n    From `{}` to `{}`".format(
                         savename.title(), pl_changes["new_name"].title())
             else:
                 c_log = "No changes were made"
@@ -5139,39 +4841,6 @@ class MusicBot(discord.Client):
 
         search_query = " ".join(leftover_args)
 
-        # if "simon berger" in search_query.lower() or "simon jonas berger" in search_query.lower():
-        #     already_used = load_file("data/simon_berger_wikied.txt")
-        #
-        #     if author.id in already_used:
-        #         return Response("I mustn't betray my master twice for you!")
-        #     else:
-        #         already_used.append(author.id)
-        #         write_file("data/simon_berger_wikied.txt", already_used)
-        #
-        # return Response("**Simon Berger**\nSimon Jonas Berger (born March 28,
-        # 1992) is a computer scientist and works at Google London as head of
-        # the Technical Solutions team.\nI didn't actually expect anyone to
-        # read this far, but apparently you are...\nLet me tell you something
-        # about my past then. I went to Kindergarten one year earlier than
-        # normal. This is due to the fact, that one Doctor thought that I was a
-        # genius (of course that turned out to be wrong). I skipped 4th grade,
-        # not because I wanted, but because my teacher persuaded my parents to
-        # do so. I especially loved that teacher and was sincerely upset about
-        # that. I went to the gymnasium after 8th grade.Shortly after, at the
-        # age of 15, my parents passed away in a car accident so I went to live
-        # with my grandparents but 2 months later I lived in a flat in Zurich
-        # to study at ETH. Because I practically skipped 2 years of education I
-        # was merely 16 while everyone around me was already 18. With the age
-        # of 20 I got my Bachelor's degree and at the age of 22 I finished my
-        # Master's degree. While I was studying at ETH I got the chance to take
-        # part in a Google Interview. After 2 interviews they offered me a job
-        # as a Technical Solutions Consultant. June 25th 2016 they promoted me
-        # to head of Technical Solutions.\n\nWhy am I telling you this? Well...
-        # If you went ahead and looked me up I'm sure you were just a little
-        # bit interested.")
-
-        # self.log (search_query)
-
         if leftover_args[0] == "summarize":
             sent_num = int(leftover_args[1]) if str(
                 type(leftover_args[1])) == "int" else 5
@@ -5195,54 +4864,6 @@ class MusicBot(discord.Client):
         return Response("**{}**\n{}".format(
             wikipedia_page_title,
             wikipedia.summary(wikipedia_page_title, sentences=3)))
-
-    @command_info("1.9.5", 1479945600, {
-        "3.3.5":
-        (1497284850,
-         "removed delete_after keywords which was the reason this command was broken"
-         )
-    })
-    async def cmd_getmusicfile(self, channel, author, player, index=0):
-        """
-        Usage:
-            {command_prefix}getmusicfile
-            {command_prefix}getmusicfile index
-
-        Get the music file of the current song.
-        You may provide an index to get that file.
-        """
-
-        try:
-            index = int(index) - 1
-        except:
-            return Response("Please provide a valid index")
-
-        if index == -1:
-            entry = player.current_entry
-        else:
-            if index < 0 or index >= len(player.playlist.entries):
-                return Response("Your index is out of range")
-            entry = player.playlist.entries[index]
-
-        if not entry:
-            return Response(
-                "This entry is currently being worked on. Please retry again later"
-            )
-
-        if type(entry).__name__ == "StreamPlaylistEntry":
-            return Response("Can't send you this because it's a live stream")
-
-        if not entry.is_downloaded:
-            try:
-                await entry._download()
-            except:
-                return Response(
-                    "Could not download the file. This really shouldn't happen"
-                )
-
-        await self.safe_send_message(
-            author, "The file is being uploaded. Please wait a second.")
-        await self.send_file(author, entry.filename, content="Here you go:")
 
     @block_user
     async def cmd_reminder(self, channel, author, player, server,
@@ -5509,34 +5130,6 @@ class MusicBot(discord.Client):
                 text += "*{.name}*\n".format(reminder)
 
             return Response(text)
-        # return
-        #
-        # real_args = " ".join(leftover_args).split(",")
-        #
-        # if len(real_args) < 2:
-        #     return Response("You're a failure!")
-        #
-        # reminder_name = real_args[0].strip()
-        # due_date_string = real_args[1].strip().lower()
-        #
-        # repeat_date_string = real_args[2].strip().lower() if len(real_args) > 2 else None
-        # repeat_end_string = real_args[3].strip().lower() if len(real_args) > 3 else None
-        #
-        # import parsedatetime
-        #
-        # cal = parsedatetime.Calendar()
-        #
-        # due_date = datetime(*cal.parse(due_date_string)[0][:6])
-        # repeat_every = datetime(*cal.parse(repeat_date_string)[0][:6]) - datetime.now() if repeat_date_string is not None else None
-        # repeat_end = datetime(*cal.parse(repeat_end_string)[0][:6]) if repeat_end_string is not None else None
-        #
-        # self.log("\n{}\nin: {};\nevery: {};\nuntil: {}".format(reminder_name, due_date, repeat_every, repeat_end))
-        #
-        # action = Action(
-        #     channel=channel, msg_content="**Reminder {reminder.name} is due!**", delete_msg_after=5)
-        #
-        # self.calendar.create_reminder(reminder_name, due_date, action, repeat_every=repeat_every, repeat_end=repeat_end)
-        # return Response("Got it, I'll remind you!")
 
     async def cmd_moveus(self, channel, server, author, message,
                          leftover_args):
@@ -5695,8 +5288,8 @@ class MusicBot(discord.Client):
             return Response(
                 "Timestamp exceeds song duration!", delete_after=20)
 
-    @command_info("2.2.1", 1493975700,
-                  {"3.4.3": (1497609912, "Can now rewind past the last song")})
+    @command_info("2.2.1", 1493975700, {
+        "3.4.3": (1497609912, "Can now rewind past the last song")})
     async def cmd_rwd(self, player, timestamp=None):
         """
         ///|Usage
@@ -6048,10 +5641,8 @@ class MusicBot(discord.Client):
 
     @command_info("3.2.5", 1496428380, {
         "3.3.9": (1497521393, "Added edit sub-command"),
-        "3.4.1": (1497550771,
-                  "Added the filter \"mine\" to the listing function"),
-        "3.4.6": (1497617827,
-                  "when listing bookmarks, they musn't be \"inline\"."),
+        "3.4.1": (1497550771, "Added the filter \"mine\" to the listing function"),
+        "3.4.6": (1497617827, "when listing bookmarks, they musn't be \"inline\"."),
         "3.5.8": (1497827057, "Editing bookmarks now works as expected")
     })
     async def cmd_bookmark(self, author, player, leftover_args):
@@ -6208,9 +5799,7 @@ class MusicBot(discord.Client):
             return Response("Blocked command `{} {}`".format(command, " ".join(args)))
 
     @command_info("3.4.0", 1497533758, {
-        "3.4.8":
-        (1497650090,
-         "When showing changelogs, two logs can't be on the same line anymore")
+        "3.4.8": (1497650090, "When showing changelogs, two logs can't be on the same line anymore")
     })
     async def cmd_commandinfo(self, command):
         """
@@ -6277,7 +5866,7 @@ class MusicBot(discord.Client):
         ///|Explanation
         Use everyday language to control Giesela
         ///|Disclaimer
-        **Help out with the development of a "smarter" Giesela by testing out this new future!**
+        **Help out with the development of a "smarter" Giesela by testing out this new feature!**
         """
 
         await self.send_typing(channel)
@@ -6306,6 +5895,28 @@ class MusicBot(discord.Client):
 
         return Response(msg)
 
+    @command_info("3.7.3", 1498306682)
+    async def cmd_lyrics(self, player, channel):
+        """
+        ///|Usage
+        `{command_prefix}lyrics`
+        ///|Explanation
+        Try to find lyrics for the current entry and display 'em
+        """
+
+        await self.send_typing(channel)
+
+        if not player.current_entry:
+            return Response("There's no way for me to find lyrics for something that doesn't even exist!")
+
+        title = await player._absolute_current_song()
+        lyrics = search_for_lyrics(title)
+
+        if not lyrics:
+            return Response("Couldn't find any lyrics for **{}**".format(title))
+        else:
+            return Response("**{}**\n\n{}".format(title, lyrics))
+
     @owner_only
     async def cmd_shutdown(self, channel):
         await self.safe_send_message(channel, ":wave:")
@@ -6327,11 +5938,11 @@ class MusicBot(discord.Client):
             return
 
         if message.author.id in self.users_in_menu:
-            self.log("User is currently in a menu")
+            self.log("{} is currently in a menu. Ignoring \"{}\"".format(
+                author, message_content))
             return
 
         if not message_content.startswith(self.config.command_prefix):
-
             if self.config.owned_channels and message.channel.id not in self.config.owned_channels:
                 return
 
