@@ -113,7 +113,8 @@ def clean_songname(query):
         "with lyrics", "lyrics", "hd", "soundtrack", "original", "official",
         "feat", "ft", "creditless", "music", "video", "edition", "special",
         "version", "ver", "dvd", "new", "raw", "textless", "mp3", "avi", "mp4",
-        "english", "eng", "with", "album", "theme", "full"
+        "english", "eng", "with", "album", "theme", "full", "1080", "1080p",
+        "720", "720p", "4k"
     ]
 
     for key in to_remove:
@@ -121,7 +122,7 @@ def clean_songname(query):
         query = re.sub(r"(^|\W)" + key + r"(\W|$)",
                        " ", query, flags=re.IGNORECASE)
 
-    query = re.sub(r"[^\w\s\-\&']|\d", " ", query)
+    query = re.sub(r"[^\w\s\-\&',]", " ", query)
     query = re.sub(r"\s+", " ", query)
 
     return query.strip()
