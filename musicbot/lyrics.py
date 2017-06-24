@@ -5,11 +5,10 @@ from bs4 import BeautifulSoup
 
 
 def search_for_lyrics(query):
-    return search_for_lyrics_genius(query) or search_for_lyrics_google(query)
+    return search_for_lyrics_google(query)
 
 
 def search_for_lyrics_google(query):
-    print("[LYRICS] Using Google because Genius didn't find anything")
     params = ***REMOVED***
         "key": "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo",
         "cx": "002017775112634544492:7y5bpl2sn78",
@@ -23,7 +22,7 @@ def search_for_lyrics_google(query):
         display_link = item["displayLink"]
         if display_link in lyric_parsers:
             print("[LYRICS] Found lyrics at " + display_link)
-            return lyric_parsers[display_link](item["link"])
+            return "***REMOVED******REMOVED***\n**Lyrics from \"***REMOVED******REMOVED***\"**".format(lyric_parsers[display_link](item["link"]), display_link)
 
     return None
 
@@ -68,8 +67,24 @@ def _extract_lyrics_lyrical_nonsense(url):
     content = resp.text
 
     bs = BeautifulSoup(content, "lxml")
+    # take the English version if there is one, otherwise use the default one
+    lyrics_window = bs.find_all("div", ***REMOVED***"id": "English"***REMOVED***)[
+        0] or bs.find_all("div", ***REMOVED***"id": "Lyrics"***REMOVED***)[0]
+    lyrics = lyrics_window.text
+    return lyrics.strip()
+
+
+def _extract_lyrics_musixmatch(url):
+    lyrics = None
+
+    headers = ***REMOVED***
+        "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1"***REMOVED***
+    resp = requests.get(url, headers=headers)
+    content = resp.text
+
+    bs = BeautifulSoup(content, "lxml")
     lyrics_window = bs.find_all(
-        "div", ***REMOVED***"id": "Lyrics"***REMOVED***)[1]
+        "div", ***REMOVED***"class": "mxm-lyrics"***REMOVED***)[0].find_all("div", ***REMOVED***"class": "mxm-lyrics"***REMOVED***)[0]
     lyrics = lyrics_window.text
     return lyrics.strip()
 
@@ -113,6 +128,7 @@ def _extract_lyrics_animelyrics(url):
 lyric_parsers = ***REMOVED***"genius.com": _extract_lyrics_genius,
                  "www.lyricsmode.com": _extract_lyrics_lyricsmode,
                  "www.lyrical-nonsense.com": _extract_lyrics_lyrical_nonsense,
-                 "www.animelyrics.com": _extract_lyrics_animelyrics***REMOVED***
+                 "www.animelyrics.com": _extract_lyrics_animelyrics,
+                 "www.musixmatch.com": _extract_lyrics_musixmatch***REMOVED***
 
-# print(search_for_lyrics_genius("Running in the 90's"))
+# print(search_for_lyrics("Samm Henshaw - Our Love"))

@@ -1,14 +1,15 @@
-import asyncio
-import audioop
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
-from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
+
+import asyncio
+import audioop
+from enum import Enum
 
 from .entry import StreamPlaylistEntry
 from .exceptions import FFmpegError, FFmpegWarning
@@ -373,7 +374,7 @@ class MusicPlayer(EventEmitter):
             except:
                 pass
 
-        return self.current_entry._title
+        return self.current_entry.title
 
     async def update_timestamp(self, delay=None):
         if not delay:

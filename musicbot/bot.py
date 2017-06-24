@@ -67,6 +67,7 @@ load_opus_lib()
 
 
 class Response:
+
     def __init__(self, content=None, reply=False, delete_after=0, embed=None):
         self.content = content
         self.reply = reply
@@ -457,7 +458,8 @@ class MusicBot(discord.Client):
                 'last_np_msg']
             if last_np_msg and last_np_msg.channel == channel:
 
-                # if the last np message isn't the last message in the channel; delete it
+                # if the last np message isn't the last message in the channel;
+                # delete it
                 async for lmsg in self.logs_from(channel, limit=1):
                     if lmsg != last_np_msg and last_np_msg:
                         await self.safe_delete_message(last_np_msg)
@@ -957,7 +959,8 @@ class MusicBot(discord.Client):
         "3.4.5": (1497616203, "Improved default help message using embeds"),
         "3.6.0": (1497904733, "Fixed weird indent of some help texts"),
         "3.7.0": (1498233256, "Some better help texts"),
-        "3.7.1": (1498237739, "Added interactive help")
+        "3.7.1": (1498237739, "Added interactive help"),
+        "3.7.4": (1498318916, "Added \"lyrics\" function help text")
     ***REMOVED***)
     async def cmd_help(self, channel, leftover_args):
         """
@@ -1063,6 +1066,7 @@ class MusicBot(discord.Client):
                          value=playlist_commands, inline=False)
 
             misc_commands = "\n".join([
+                "`***REMOVED***0***REMOVED***lyrics` retrieve lyrics for the current song",
                 "`***REMOVED***0***REMOVED***random` choose between items",
                 "`***REMOVED***0***REMOVED***game` play a game",
                 "`***REMOVED***0***REMOVED***ask` ask a question",
@@ -3846,9 +3850,9 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                        str(reaction.emoji).startswith("📽") or
-                        str(reaction.emoji).startswith("💾")
-                    ) and reaction.count > 1 and user == author:
+                str(reaction.emoji).startswith("📽") or
+                str(reaction.emoji).startswith("💾")
+                ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
@@ -5895,7 +5899,9 @@ class MusicBot(discord.Client):
 
         return Response(msg)
 
-    @command_info("3.7.3", 1498306682)
+    @command_info("3.7.3", 1498306682, ***REMOVED***
+        "3.7.4": (1498312423, "Fixed severe bug and added musixmatch as a source")
+    ***REMOVED***)
     async def cmd_lyrics(self, player, channel):
         """
         ///|Usage
@@ -5939,7 +5945,7 @@ class MusicBot(discord.Client):
 
         if message.author.id in self.users_in_menu:
             self.log("***REMOVED******REMOVED*** is currently in a menu. Ignoring \"***REMOVED******REMOVED***\"".format(
-                author, message_content))
+                message.author, message_content))
             return
 
         if not message_content.startswith(self.config.command_prefix):
