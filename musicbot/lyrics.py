@@ -5,6 +5,11 @@ from bs4 import BeautifulSoup
 
 
 def search_for_lyrics(query):
+    return search_for_lyrics_genius(query) or search_for_lyrics_google(query)
+
+
+def search_for_lyrics_google(query):
+    print("[LYRICS] Using Google because Genius didn't find anything")
     params = ***REMOVED***
         "key": "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo",
         "cx": "002017775112634544492:7y5bpl2sn78",
@@ -17,9 +22,22 @@ def search_for_lyrics(query):
     for item in items:
         display_link = item["displayLink"]
         if display_link in lyric_parsers:
+            print("[LYRICS] Found lyrics at " + display_link)
             return lyric_parsers[display_link](item["link"])
 
     return None
+
+
+def search_for_lyrics_genius(query):
+    params = ***REMOVED***"q": query***REMOVED***
+    resp = requests.get("https://genius.com/search", params=params)
+    bs4 = BeautifulSoup(resp.text, "lxml")
+
+    results = bs4.find_all(
+        "ul", ***REMOVED***"class": "search_results song_list primary_list"***REMOVED***)[0]
+    first_res = results.li
+
+    return _extract_lyrics_genius(first_res.a["href"])
 
 
 def _extract_lyrics_genius(url):
@@ -96,3 +114,5 @@ lyric_parsers = ***REMOVED***"genius.com": _extract_lyrics_genius,
                  "www.lyricsmode.com": _extract_lyrics_lyricsmode,
                  "www.lyrical-nonsense.com": _extract_lyrics_lyrical_nonsense,
                  "www.animelyrics.com": _extract_lyrics_animelyrics***REMOVED***
+
+# print(search_for_lyrics_genius("Running in the 90's"))

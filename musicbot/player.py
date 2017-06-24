@@ -373,7 +373,7 @@ class MusicPlayer(EventEmitter):
             except:
                 pass
 
-        return self.current_entry.title
+        return self.current_entry._title
 
     async def update_timestamp(self, delay=None):
         if not delay:
