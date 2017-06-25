@@ -176,7 +176,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
     def thumbnail(self):
         if not self.youtube_data:
             self.youtube_data_thread.join()
-        return self.youtube_data["snippet"]["thumbnails"]["default"]["url"]
+        return self.youtube_data["snippet"]["thumbnails"]["maxres"]["url"]
 
     @property
     def spotify_track(self):
