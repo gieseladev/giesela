@@ -1,5 +1,3 @@
-import asyncio
-import configparser
 import datetime
 import inspect
 import json
@@ -33,6 +31,9 @@ from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from openpyxl import Workbook
 
+import asyncio
+import configparser
+
 from . import downloader, exceptions
 from .bookmarks import bookmark
 from .cleverbot import CleverWrap
@@ -62,6 +63,7 @@ from .utils import (clean_songname, create_bar, escape_dis, format_time,
                     hex_to_dec, load_file, nice_cut, ordinal, paginate,
                     parse_timestamp, prettydate, random_line, to_timestamp,
                     write_file)
+from .web_socket_server import GieselaServer
 
 load_opus_lib()
 
@@ -99,7 +101,6 @@ class MusicBot(discord.Client):
         self.autoplaylist = load_file(self.config.auto_playlist_file)
         self.downloader = downloader.Downloader(download_folder='audio_cache')
         self.calendar = Calendar(self)
-        self.socket_server = SocketServer(self)
 
         self.exit_signal = None
         self.init_ok = False
@@ -730,7 +731,6 @@ class MusicBot(discord.Client):
 
     async def logout(self):
         await self.disconnect_all_voice_clients()
-        self.socket_server.shutdown()
         return await super().logout()
 
     async def on_error(self, event, *args, **kwargs):
@@ -916,6 +916,8 @@ class MusicBot(discord.Client):
         self.log()
         # t-t-th-th-that's all folks!
 
+        GieselaServer.run(self)
+
     async def socket_summon(self, server_id, summoner_id=None):
         server = self.get_server(server_id)
         if server == None:
@@ -952,7 +954,6 @@ class MusicBot(discord.Client):
             return False
 
         await self.get_player(target_channel, create=True)
-        self.socket_server.threaded_broadcast_information()
         return target_channel
 
     @command_info("1.9.5", 1477774380, ***REMOVED***
@@ -3850,9 +3851,9 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                str(reaction.emoji).startswith("📽") or
-                str(reaction.emoji).startswith("💾")
-                ) and reaction.count > 1 and user == author:
+                    str(reaction.emoji).startswith("📽") or
+                    str(reaction.emoji).startswith("💾")
+                    ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
@@ -5184,39 +5185,6 @@ class MusicBot(discord.Client):
             self.log("moving myself")
             await self.get_voice_client(target_channel)
 
-    async def cmd_mobile(self, message, channel, player, server, leftover_args):
-        """
-        ///|Users
-        `***REMOVED***command_prefix***REMOVED***mobile`
-        ///|Send a message to a user
-        `***REMOVED***command_prefix***REMOVED***mobile message <@mention> <message>`
-        """
-
-        if len(leftover_args) < 1:
-            count = len(self.socket_server.connections)
-            return Response("There ***REMOVED******REMOVED*** currently ***REMOVED******REMOVED*** mobile user***REMOVED******REMOVED***".format(
-                "is" if count == 1 else "are", count, "s"
-                if count != 1 else ""))
-        elif leftover_args[0].lower() == "message":
-            if len(leftover_args) < 2:
-                return Response("No message provided!")
-            else:
-                if len(message.mentions) < 1:
-                    return Response("No mentions")
-                else:
-                    target_user = message.mentions[0].id
-                msg = " ".join(leftover_args[2:])
-
-                res = self.socket_server.send_message(target_user, msg)
-                if res is None:
-                    return Response(
-                        "This user probably doesn't have the app open")
-                elif not res:
-                    return Response(
-                        "Something went wrong when trying to contact the user")
-                else:
-                    return Response("Successfully sent the message!")
-
     @block_user
     async def cmd_execute(self, channel, author, server, leftover_args, player=None):
         statement = " ".join(leftover_args)
@@ -5355,20 +5323,6 @@ class MusicBot(discord.Client):
         if not player.goto_seconds(secs):
             return Response(
                 "Timestamp exceeds song duration!", delete_after=20)
-
-    async def cmd_register(self, author, server, token):
-        """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***register <token>
-
-        Use this function to register your phone in order to control the musicbot
-        """
-
-        if await self.socket_server.register_handler(token, server.id,
-                                                     author.id):
-            return Response("Successful")
-        else:
-            return Response("Something went wrong there")
 
     async def cmd_disconnect(self, server):
         """
@@ -6133,12 +6087,10 @@ class MusicBot(discord.Client):
             if player.is_paused:
                 self.log("[AUTOPAUSE] Unpausing")
                 player.resume()
-                self.socket_server.threaded_broadcast_information()
         else:
             if player.is_playing:
                 self.log("[AUTOPAUSE] Pausing")
                 player.pause()
-                self.socket_server.threaded_broadcast_information()
 
     async def on_server_update(self,
                                before: discord.Server,

@@ -1,4 +1,3 @@
-import asyncio
 import json
 import os
 import re
@@ -7,6 +6,8 @@ from threading import Thread
 
 import requests
 
+import asyncio
+
 from .exceptions import ExtractionError
 from .spotify import SpotifyTrack
 from .utils import (clean_songname, get_header, get_video_timestamps, md5sum,
@@ -14,6 +15,7 @@ from .utils import (clean_songname, get_header, get_video_timestamps, md5sum,
 
 
 class BasePlaylistEntry:
+
     def __init__(self):
         self.filename = None
         self._is_downloading = False
@@ -138,6 +140,7 @@ class BasePlaylistEntry:
 
 
 class URLPlaylistEntry(BasePlaylistEntry):
+
     def __init__(self, queue, url, title, duration=0, expected_filename=None, start_seconds=0, end_seconds=None, spotify_track=None, provided_song_timestamps=None, youtube_data=None, update_additional_information=True, **meta):
         super().__init__()
 
@@ -462,14 +465,8 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
 
 class StreamPlaylistEntry(BasePlaylistEntry):
-    def __init__(self,
-                 playlist,
-                 url,
-                 title,
-                 station_data=None,
-                 *,
-                 destination=None,
-                 **meta):
+
+    def __init__(self, playlist, url, title, station_data=None, *, destination=None, **meta):
         super().__init__()
 
         self.playlist = playlist
@@ -486,6 +483,31 @@ class StreamPlaylistEntry(BasePlaylistEntry):
 
         if self.destination:
             self.filename = self.destination
+
+    def to_dict(self):
+        meta_dict = ***REMOVED******REMOVED***
+        for i in self.meta:
+            if i is None or self.meta[i] is None:
+                continue
+
+            meta_dict[i] = ***REMOVED***
+                'type': self.meta[i].__class__.__name__,
+                'id': self.meta[i].id,
+                'name': self.meta[i].name
+            ***REMOVED***
+
+        data = ***REMOVED***
+            'version': 2,
+            'type': self.__class__.__name__,
+            'url': self.url,
+            'title': self._title,
+            'downloaded': self.is_downloaded,
+            'filename': self.filename,
+            "expected_filename": self.expected_filename,
+            'meta': meta_dict,
+            "station_data": self.radio_station_data.to_dict() if self.radio_station_data else None
+        ***REMOVED***
+        return data
 
     async def _download(self, *, fallback=False):
         self._is_downloading = True
