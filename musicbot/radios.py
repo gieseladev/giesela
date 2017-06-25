@@ -1,9 +1,10 @@
-import configparser
 import json
 import os
 import shutil
 import traceback
 from random import choice
+
+import configparser
 
 from .exceptions import HelpfulError
 
@@ -44,3 +45,12 @@ class StationInfo:
         self.language = language
         self.cover = cover
         self.url = url
+
+    def to_dict(self):
+        data = {
+            "name": self.name,
+            "language": self.language,
+            "cover": self.cover,
+            "url": self.url
+        }
+        return data

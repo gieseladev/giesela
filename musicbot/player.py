@@ -125,7 +125,6 @@ class MusicPlayer(EventEmitter):
         self.skipRepeat = False
 
         self.loop.create_task(self.websocket_check())
-        self.bot.socket_server.threaded_broadcast_information()
         self.handle_manually = False
 
         self.volume_scale = 1  # volume is divided by this value
@@ -141,8 +140,6 @@ class MusicPlayer(EventEmitter):
         self._volume = value
         if self._current_player:
             self._current_player.buff.volume = value
-
-        self.bot.socket_server.threaded_broadcast_information()
 
     def on_entry_added(self, playlist, entry):
         if self.is_stopped:
@@ -174,7 +171,6 @@ class MusicPlayer(EventEmitter):
             self._current_player.resume()
             self.state = MusicPlayerState.PLAYING
             self.emit('resume', player=self, entry=self.current_entry)
-            self.bot.socket_server.threaded_broadcast_information()
             return
 
         if self.is_paused and not self._current_player:
@@ -202,7 +198,6 @@ class MusicPlayer(EventEmitter):
         if type(self.current_entry).__name__ == "StreamPlaylistEntry":
             log("Won't pause because I'm playing a stream")
             self.stop()
-            self.bot.socket_server.threaded_broadcast_information()
             return
 
         if self.is_playing:
@@ -212,7 +207,6 @@ class MusicPlayer(EventEmitter):
                 self._current_player.pause()
 
             self.emit('pause', player=self, entry=self.current_entry)
-            self.bot.socket_server.threaded_broadcast_information()
             return
 
         elif self.is_paused:
@@ -225,7 +219,6 @@ class MusicPlayer(EventEmitter):
         self.playlist.clear()
         self._events.clear()
         self._kill_current_player()
-        self.bot.socket_server.threaded_broadcast_information()
 
     def _playback_finished(self):
         if self.handle_manually:
@@ -357,7 +350,6 @@ class MusicPlayer(EventEmitter):
                 stderr_thread.start()
                 self._current_player.start()
                 self.emit('play', player=self, entry=entry)
-                self.bot.socket_server.threaded_broadcast_information()
                 asyncio.ensure_future(self.update_timestamp())
 
     async def _absolute_current_song(self):
@@ -472,7 +464,6 @@ class MusicPlayer(EventEmitter):
             stderr_thread.start()
             self._current_player.start()
             self.emit('play', player=self, entry=entry)
-            self.bot.socket_server.threaded_broadcast_information()
             asyncio.ensure_future(self.update_timestamp())
 
     def _monkeypatch_player(self, player):
