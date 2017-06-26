@@ -57,7 +57,6 @@ from .random_sets import RandomSets
 from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .settings import Settings
-from .socket_server import SocketServer
 from .tungsten import Tungsten
 from .utils import (clean_songname, create_bar, escape_dis, format_time,
                     hex_to_dec, load_file, nice_cut, ordinal, paginate,
@@ -417,9 +416,9 @@ class MusicBot(discord.Client):
             await self.ws.send(utils.to_json(payload))
             self.the_voice_clients[server.id].channel = channel
 
-    async def get_player(self, channel, create=False,
-                         auto_summon=True) -> MusicPlayer:
-        server = channel.server
+    async def get_player(self, channel=None, create=False,
+                         auto_summon=True, server_id=None) -> MusicPlayer:
+        server = channel.server if channel else self.get_server(server_id)
 
         if server.id not in self.players:
             if not create:

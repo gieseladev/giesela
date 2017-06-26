@@ -141,6 +141,19 @@ class MusicPlayer(EventEmitter):
         if self._current_player:
             self._current_player.buff.volume = value
 
+    def get_dict(self):
+        data = ***REMOVED***
+            "current_entry": self.current_entry.to_dict() if self.current_entry else None,
+            "volume": self.volume,
+            "progress": self.progress if self.current_entry else None,
+            "repeat_state_name": str(self.repeatState),
+            "repeat_state": self.repeatState.value,
+            "state_name": str(self.state),
+            "state": self.state.value,
+            "queue": self.playlist.to_dict()
+        ***REMOVED***
+        return data
+
     def on_entry_added(self, playlist, entry):
         if self.is_stopped:
             self.loop.call_later(2, self.play)
