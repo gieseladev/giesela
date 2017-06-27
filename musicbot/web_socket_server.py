@@ -4,10 +4,16 @@ import json
 import threading
 import traceback
 from json.decoder import JSONDecodeError
+from random import choice
+from string import ascii_lowercase
 
 import asyncio
 
 from .simple_web_socket_server import SimpleWebSocketServer, WebSocket
+
+
+class ErrorCode:
+    registration_required = 1000
 
 
 class GieselaWebSocket(WebSocket):
@@ -19,7 +25,7 @@ class GieselaWebSocket(WebSocket):
                 # browsers
                 data = json.loads(self.data)
 
-                token = data.get("auth_token", None)
+                token = data.get("token", None)
                 if token:
                     info = GieselaServer.get_token_information(token)
                     if info:
@@ -37,18 +43,27 @@ class GieselaWebSocket(WebSocket):
                     print("[WEBSOCKET] <***REMOVED******REMOVED***> no token provided".format(
                         self.address))
 
-                registration_token = data.get("registration_token", None)
-                if registration_token:
+                register = data.get("request", None) == "register"
+                if register:
+                    registration_token = GieselaServer.generate_registration_token()
                     GieselaServer.awaiting_registration[
                         registration_token] = self.register  # setting the callback
                     print("[WEBSOCKET] <***REMOVED******REMOVED***> Waiting for registration with token: ***REMOVED******REMOVED***".format(
                         self.address, registration_token))
+                    answer = ***REMOVED***
+                        "response": True,
+                        "registration_token": registration_token
+                    ***REMOVED***
+                    self.sendMessage(json.dumps(answer))
                     return
                 else:
-                    print("[WEBSOCKET] <***REMOVED******REMOVED***> Didn't provide a registration token".format(
+                    print("[WEBSOCKET] <***REMOVED******REMOVED***> Didn't ask to be registered".format(
                         self.address))
-                    self.sendMessage(
-                        "***REMOVED***\"error\":\"registration_token required\"***REMOVED***")
+                    answer = ***REMOVED***
+                        "response": True,
+                        "error": (ErrorCode.registration_required, "registration required")
+                    ***REMOVED***
+                    self.sendMessage(json.dumps(answer))
             except JSONDecodeError:
                 print(
                     "[WEBSOCKET] <***REMOVED******REMOVED***> sent non-json: ***REMOVED******REMOVED***".format(self.address, self.data))
@@ -56,18 +71,22 @@ class GieselaWebSocket(WebSocket):
             traceback.print_exc()
 
     def handleAuthenticatedMessage(self, data):
-        answer = ***REMOVED******REMOVED***
+        answer = ***REMOVED***
+            "response": True
+        ***REMOVED***
         request = data.get("request", None)
         command = data.get("command", None)
 
         if request:
             # send all the information one can acquire
             if request == "send_information":
+                info = ***REMOVED******REMOVED***
                 player_info = GieselaServer.get_player_information(self.token)
                 user_info = GieselaServer.get_token_information(self.token)[
                     1].to_dict()
-                answer["player"] = player_info
-                answer["user"] = user_info
+                info["player"] = player_info
+                info["user"] = user_info
+                answer["info"] = info
 
         self.sendMessage(json.dumps(answer))
 
@@ -103,21 +122,17 @@ class GieselaServer():
     bot = None
     _tokens = ***REMOVED******REMOVED***  # token: (server_id, author)
     awaiting_registration = ***REMOVED******REMOVED***
-    loaded_tokens = False
 
     def run(bot):
         GieselaServer.bot = bot
 
-        if not GieselaServer.loaded_tokens:  # load when it hasn't been loaded before
-            print("[WEBSOCKET] haven't loaded tokens, doing so now")
-            try:
-                GieselaServer._tokens = ***REMOVED***t: (s, WebAuthor.from_id(u)) for t, (s, u) in json.load(
-                    open("data/websocket_token.json", "r")).items()***REMOVED***
-                print("[WEBSOCKET] loaded tokens")
-            except FileNotFoundError:
-                print("[WEBSOCKET] failed to load tokens, there are none saved")
-                pass
-            GieselaServer.loaded_tokens = True
+        try:
+            GieselaServer._tokens = ***REMOVED***t: (s, WebAuthor.from_id(u)) for t, (s, u) in json.load(
+                open("data/websocket_token.json", "r")).items()***REMOVED***
+            print("[WEBSOCKET] loaded ***REMOVED******REMOVED*** tokens".format(
+                len(GieselaServer._tokens)))
+        except FileNotFoundError:
+            print("[WEBSOCKET] failed to load tokens, there are none saved")
 
         GieselaServer.server = SimpleWebSocketServer("",
                                                      8000,
@@ -144,7 +159,21 @@ class GieselaServer():
         json.dump(***REMOVED***t: (s, u.id) for t, (s, u) in GieselaServer._tokens.items()***REMOVED***,
                   open("data/websocket_token.json", "w+"))
 
-    def get_player_information(token):
+    def get_player_information(token=None, server_id=None):
+        if not token and not server_id:
+            raise ValueError("Specify at least one of the two")
+        server_id = GieselaServer.get_token_information(
+            token)[0] if token else server_id
+        try:
+            player = asyncio.run_coroutine_threadsafe(GieselaServer.bot.get_player(
+                server_id=server_id), GieselaServer.bot.loop).result()
+        except Exception as e:
+            print("[WEBSOCKET] encountered error while getting player:\n***REMOVED******REMOVED***".format(e))
+            return None
+
+        return player.get_web_dict()
+
+    def get_queue_information(token):
         server_id = GieselaServer.get_token_information(token)[0]
         try:
             player = asyncio.run_coroutine_threadsafe(GieselaServer.bot.get_player(
@@ -153,7 +182,33 @@ class GieselaServer():
             print("[WEBSOCKET] encountered error while getting player:\n***REMOVED******REMOVED***".format(e))
             return None
 
-        return player.get_dict()
+        return player.playlist.get_web_dict()
+
+    def send_player_information_update(server_id):
+        threading.Thread(
+            target=GieselaServer._send_player_information_update, args=(server_id,)).start()
+
+    def _send_player_information_update(server_id):
+        try:
+            message = ***REMOVED***
+                "info":
+                ***REMOVED***
+                    "player": GieselaServer.get_player_information(server_id=server_id)
+                ***REMOVED***
+            ***REMOVED***
+            print("[WEBSOCKET] Broadcasting player update to sockets")
+            for auth_client in GieselaServer.authenticated_clients:
+                # does this update concern this socket
+                if GieselaServer.get_token_information(auth_client.token)[0] == server_id:
+                    auth_client.sendMessage(json.dumps(message))
+        except Exception as e:
+            traceback.print_exc()
+
+    def generate_registration_token():
+        while True:
+            token = "".join(choice(ascii_lowercase) for _ in range(5))
+            if token not in GieselaServer.awaiting_registration:
+                return token
 
 
 class WebAuthor:

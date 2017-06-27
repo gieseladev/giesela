@@ -176,11 +176,16 @@ class URLPlaylistEntry(BasePlaylistEntry):
     def thumbnail(self):
         if not self.youtube_data:
             self.youtube_data_thread.join()
-        return self.youtube_data["snippet"]["thumbnails"]["maxres"]["url"]
+
+        thumbnails = self.youtube_data["snippet"]["thumbnails"]
+        ranks = ["maxres", "high", "medium", "standard", "default"]
+        for res in ranks:
+            if res in thumbnails:
+                return thumbnails[res]["url"]
 
     @property
     def spotify_track(self):
-        return self._spotify_track
+        return self._spotify_track if self._spotify_track and self._spotify_track.certainty > .6 else None
 
     def threaded_spotify_search(self):
         self._spotify_track = SpotifyTrack.from_query(self._title)
@@ -226,37 +231,6 @@ class URLPlaylistEntry(BasePlaylistEntry):
             update_additional_information=update_additional_information,
             **meta)
 
-    # @staticmethod
-    # def entry_from_json(playlist, jsonstring):
-    #     data = json.loads(jsonstring)
-    #     # print(data)
-    #     # TODO: version check
-    #     url = data['url']
-    #     title = data['title']
-    #     duration = data['duration']
-    #     downloaded = data['downloaded']
-    #     filename = data['filename'] if downloaded else (
-    #         data["expected_filename"] if data["expected_filename"] is not None else None)
-    #     start_seconds = data.get("start_seconds", 0)
-    #     start_seconds = 0 if start_seconds is None else start_seconds
-    #     end_seconds = data.get("end_seconds", duration)
-    #     meta = ***REMOVED******REMOVED***
-    #
-    #     # TODO: Better [name] fallbacks
-    #     if 'channel' in data['meta']:
-    #         ch = playlist.bot.get_channel(data['meta']['channel']['id'])
-    #         meta['channel'] = ch or data['meta']['channel']['name']
-    #
-    #     if 'author' in data['meta']:
-    #         try:
-    #             meta['author'] = meta['channel'].server.get_member(
-    #                 data['meta']['author']['id'])
-    #         except:
-    #             meta['author'] = "unknown"
-    #
-    # return URLPlaylistEntry(playlist, url, title, duration, filename,
-    # start_seconds, end_seconds, **meta)
-
     def search_additional_info(self):
         if self._spotify_track is None:
             Thread(target=self.threaded_spotify_search).start()
@@ -296,7 +270,6 @@ class URLPlaylistEntry(BasePlaylistEntry):
             ***REMOVED***
 
         data = ***REMOVED***
-            'version': 2,
             'type': self.__class__.__name__,
             'url': self.url,
             'title': self._title,
@@ -309,7 +282,8 @@ class URLPlaylistEntry(BasePlaylistEntry):
             "end_seconds": self.end_seconds,
             "spotify_track": self.spotify_track.get_dict() if self.spotify_track is not None else None,
             "provided_song_timestamps": self.provided_song_timestamps,
-            "youtube_data": self.youtube_data
+            "youtube_data": self.youtube_data,
+            "thumbnail": self.thumbnail
         ***REMOVED***
         return data
 
@@ -497,7 +471,6 @@ class StreamPlaylistEntry(BasePlaylistEntry):
             ***REMOVED***
 
         data = ***REMOVED***
-            'version': 2,
             'type': self.__class__.__name__,
             'url': self.url,
             'title': self._title,

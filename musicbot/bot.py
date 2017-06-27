@@ -448,6 +448,8 @@ class MusicBot(discord.Client):
         return self.players[server.id]
 
     async def on_player_play(self, player, entry):
+        GieselaServer.send_player_information_update(
+            player.voice_client.server.id)
         await self.update_now_playing(entry)
 
         channel = entry.meta.get('channel', None)
@@ -3852,7 +3854,7 @@ class MusicBot(discord.Client):
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
                     str(reaction.emoji).startswith("📽") or
                     str(reaction.emoji).startswith("💾")
-                    ) and reaction.count > 1 and user == author:
+                ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of

@@ -141,7 +141,7 @@ class MusicPlayer(EventEmitter):
         if self._current_player:
             self._current_player.buff.volume = value
 
-    def get_dict(self):
+    def get_web_dict(self):
         data = ***REMOVED***
             "current_entry": self.current_entry.to_dict() if self.current_entry else None,
             "volume": self.volume,
@@ -149,8 +149,7 @@ class MusicPlayer(EventEmitter):
             "repeat_state_name": str(self.repeatState),
             "repeat_state": self.repeatState.value,
             "state_name": str(self.state),
-            "state": self.state.value,
-            "queue": self.playlist.to_dict()
+            "state": self.state.value
         ***REMOVED***
         return data
 
