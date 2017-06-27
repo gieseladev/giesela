@@ -8,15 +8,15 @@ MAIN_VERSION = "3.7.4"
 SUB_VERSION = "Giese_La_La_Land"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
-past_sub_versions = ***REMOVED***
-    "3.7.0": "Giese_La_La_Land",
-    "3.6.0": "Weebiesela",
-    "3.5.0": "Veggiesela",
-    "3.4.0": "Gunzulalela",
-    "3.3.0": "Giselator",
-    "3.2.0": "GG_iesela",
-    "3.1.0": "age_of_Giesela",
-    "3.0.0": "Giesela-PLUS"***REMOVED***
+all_sub_versions = ***REMOVED***
+    "3.7.x": "Giese_La_La_Land",
+    "3.6.x": "Weebiesela",
+    "3.5.x": "Veggiesela",
+    "3.4.x": "Gunzulalela",
+    "3.3.x": "Giselator",
+    "3.2.x": "GG_iesela",
+    "3.1.x": "age_of_Giesela",
+    "3.0.x": "Giesela-PLUS"***REMOVED***
 
 AUDIO_CACHE_PATH = os.path.join(os.getcwd(), "audio_cache")
 DISCORD_MSG_CHAR_LIMIT = 2000
