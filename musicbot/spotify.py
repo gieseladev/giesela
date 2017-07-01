@@ -156,13 +156,15 @@ class SpotifyTrack:
 
     @property
     def artist(self):
-        return ", ".join(artist.name for artist in self.artists)
+        return " & ".join(artist.name for artist in self.artists[:2])
 
     def get_dict(self):
         data = ***REMOVED***
             "id": self.id,
             "name": self.name,
             "artists": [artist.get_dict() for artist in self.artists] if self.artists is not None else None,
+            "artist": self.artist,
+            "cover_url": self.cover_url,
             "duration": self.duration,
             "album": self.album.get_dict() if self.album is not None else None,
             "popularity": self.popularity,

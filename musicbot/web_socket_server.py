@@ -1,3 +1,4 @@
+import asyncio
 import atexit
 import hashlib
 import json
@@ -7,9 +8,8 @@ from json.decoder import JSONDecodeError
 from random import choice
 from string import ascii_lowercase
 
-import asyncio
-
 from .simple_web_socket_server import SimpleWebSocketServer, WebSocket
+from .utils import dec_to_hex, get_entry_dict
 
 
 class ErrorCode:
@@ -159,7 +159,7 @@ class GieselaServer():
         json.dump(***REMOVED***t: (s, u.id) for t, (s, u) in GieselaServer._tokens.items()***REMOVED***,
                   open("data/websocket_token.json", "w+"))
 
-    def get_player_information(token=None, server_id=None):
+    def get_player(token=None, server_id=None):
         if not token and not server_id:
             raise ValueError("Specify at least one of the two")
         server_id = GieselaServer.get_token_information(
@@ -167,20 +167,35 @@ class GieselaServer():
         try:
             player = asyncio.run_coroutine_threadsafe(GieselaServer.bot.get_player(
                 server_id=server_id), GieselaServer.bot.loop).result()
+            return player
         except Exception as e:
             print("[WEBSOCKET] encountered error while getting player:\n***REMOVED******REMOVED***".format(e))
+            traceback.print_exc()
             return None
+
+    def get_player_information(token=None, server_id=None):
+        player = GieselaServer.get_player(token=token, server_id=server_id)
+
+        if player.current_entry:
+            entry = get_entry_dict(player.current_entry,
+                                   player, GieselaServer.bot.loop)
+            entry["progress"] = player.progress
+        else:
+            entry = None
+
+        data = ***REMOVED***
+            "entry": entry,
+            "volume": player.volume,
+            "state_name": str(player.state),
+            "state": player.state.value
+        ***REMOVED***
+
+        return data
 
         return player.get_web_dict()
 
     def get_queue_information(token):
-        server_id = GieselaServer.get_token_information(token)[0]
-        try:
-            player = asyncio.run_coroutine_threadsafe(GieselaServer.bot.get_player(
-                server_id=server_id), GieselaServer.bot.loop).result()
-        except Exception as e:
-            print("[WEBSOCKET] encountered error while getting player:\n***REMOVED******REMOVED***".format(e))
-            return None
+        player = GieselaServer.get_player(token=token)
 
         return player.playlist.get_web_dict()
 
@@ -223,7 +238,7 @@ class WebAuthor:
     @classmethod
     def from_id(cls, author_id):
         user = GieselaServer.bot.get_global_user(author_id)
-        return cls(author_id, user.name, user.display_name, user.avatar_url, user.colour.value)
+        return cls(author_id, user.name, user.display_name, user.avatar_url, dec_to_hex(user.colour.value))
 
     @classmethod
     def from_dict(cls, data):

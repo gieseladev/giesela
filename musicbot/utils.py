@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 import decimal
 import random
@@ -12,6 +13,87 @@ import requests
 from bs4 import BeautifulSoup
 
 from .constants import DISCORD_MSG_CHAR_LIMIT
+
+
+def get_entry_dict(entry, player, loop):
+    from .entry import StreamPlaylistEntry
+    from .web_socket_server import WebAuthor
+    from .radio import Radio
+
+    entry_dict = None
+
+    if entry:
+        entry_dict = ***REMOVED***
+            "url": entry.url,
+            "thumbnail": entry.thumbnail,
+            "origin": None,
+            "type": None
+        ***REMOVED***
+
+        if entry.meta:
+            if "playlist" in entry.meta:
+                origin_data = ***REMOVED***"type": "playlist"***REMOVED***
+                origin_data.update(entry.meta["playlist"])
+                entry_dict["origin"] = origin_data
+            elif "author" in entry.meta:
+                origin_data = ***REMOVED***"type": "user"***REMOVED***
+                web_author = WebAuthor.from_id(entry.meta["author"].id)
+                origin_data.update(web_author.to_dict())
+                entry_dict["origin"] = origin_data
+
+        if isinstance(entry, StreamPlaylistEntry):
+            if entry.radio_station_data:  # if it's radio
+                radio_station = entry.radio_station_data
+                radio_data = ***REMOVED***
+                    "type": "radio",
+                    "origin": radio_station.to_dict()
+                ***REMOVED***
+                # if it's also a radio with more information
+                if Radio.has_station_data(radio_station.name):
+                    current_song = asyncio.run_coroutine_threadsafe(
+                        Radio.get_current_song(loop, radio_station.name), loop).result()
+                    radio_data.update(current_song)
+                    radio_data["type"] = "radio_entry"
+                entry_dict.update(radio_data)
+            else:  # normal stream
+                stream_data = ***REMOVED***
+                    "type": "stream",
+                    "title": entry.title
+                ***REMOVED***
+                entry.update(stream_data)
+        elif entry.spotify_track:
+            track = entry.spotify_track.get_dict()
+            # making sure that we get the actual duration
+            track["duration"] = entry.duration
+            entry_dict.update(track)
+            entry_dict["type"] = "spotify_entry"
+        elif entry.provides_timestamps:
+            timestamp_data = ***REMOVED***
+                "title": entry.title,
+                "queue": entry.sub_queue(),
+                "type": "timestamp_entry",
+                "duration": entry.duration
+            ***REMOVED***
+            if player.current_entry == entry:  # this song is already active
+                sub_progress, sub_duration = entry.get_local_progress(
+                    player.progress)
+                sub_title = entry.get_current_song_from_timestamp(
+                    player.progress)
+                timestamp_data.update(***REMOVED***
+                    "sub_title": sub_title,
+                    "sub_progress": sub_progress,
+                    "sub_duration": sub_duration
+                ***REMOVED***)
+            entry_dict.update(timestamp_data)
+        else:  # normal URLPlaylistEntry
+            data = ***REMOVED***
+                "title": entry.title,
+                "duration": entry.duration,
+                "type": "default_entry"
+            ***REMOVED***
+            entry_dict.update(data)
+
+    return entry_dict
 
 
 def similarity(a, b):
@@ -238,6 +320,10 @@ def parse_timestamp(timestamp):
 
 def hex_to_dec(hex_code):
     return int(hex_code.lstrip("#"), 16)
+
+
+def dec_to_hex(dec_colour):
+    return "#***REMOVED***:0>6***REMOVED***".format(hex(dec_colour)[2:]).upper()
 
 
 def to_timestamp(seconds):
