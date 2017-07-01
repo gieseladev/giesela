@@ -1,3 +1,5 @@
+import asyncio
+import configparser
 import datetime
 import inspect
 import json
@@ -30,9 +32,6 @@ from discord.utils import find
 from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from openpyxl import Workbook
-
-import asyncio
-import configparser
 
 from . import downloader, exceptions
 from .bookmarks import bookmark
@@ -5203,16 +5202,16 @@ class MusicBot(discord.Client):
             exec(statement, env)
         except SyntaxError as e:
             return Response(
-                "**While compiling the statement the following error occured**\n```python\n{}\n```".
-                format(str(e)))
+                "**While compiling the statement the following error occured**\n{}\n{}".
+                format(traceback.format_exc(), str(e)))
 
         func = env["func"]
         try:
             ret = await func()
         except Exception as e:
             return Response(
-                "**While executing the statement the following error occured**\n```python\n{}\n```".
-                format(str(e)))
+                "**While executing the statement the following error occured**\n{}\n{}".
+                format(traceback.format_exc(), str(e)))
 
         return Response("**CODE**\n{}\n**RESULT**\n```python\n{}\n```".format(
             beautiful_statement, str(ret)))
