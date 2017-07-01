@@ -1,5 +1,3 @@
-import asyncio
-import configparser
 import datetime
 import inspect
 import json
@@ -32,6 +30,9 @@ from discord.utils import find
 from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from openpyxl import Workbook
+
+import asyncio
+import configparser
 
 from . import downloader, exceptions
 from .bookmarks import bookmark
@@ -2695,11 +2696,14 @@ class MusicBot(discord.Client):
         self.log("Answered " + message.author.name + "'s question with: " +
                  msgContent)
 
+    @command_info("1.0.0", 1477180800, {
+        "2.0.2": (1481827560, "Can now use @mentions to \"goto\" a user")
+    })
     async def cmd_goto(self, server, channel, user_mentions, author,
                        leftover_args):
         """
         Usage:
-            {command_prefix}goto id/name
+            {command_prefix}goto <id | name>
 
         Call the bot to a channel.
         """
@@ -2732,22 +2736,15 @@ class MusicBot(discord.Client):
                     if targetChannel is None:
                         return Response(
                             "Cannot find **{}** in any voice channel".format(
-                                ", ".join([x.mention for x in user_mentions])),
-                            delete_after=25)
+                                ", ".join([x.mention for x in user_mentions])))
                 else:
                     self.log("Cannot find channel \"%s\"" % channelID)
                     return Response(
-                        "```Cannot find channel \"%s\"```" % channelID,
-                        delete_after=25)
+                        "```Cannot find channel \"%s\"```" % channelID)
 
         voice_client = await self.get_voice_client(targetChannel)
         self.log("Will join channel \"%s\"" % targetChannel.name)
-        await self.safe_send_message(
-            channel,
-            "Joined the channel *{}*".format(targetChannel.name),
-            expire_in=8)
         await self.move_voice_client(targetChannel)
-        # return
 
         # move to _verify_vc_perms?
         chperms = targetChannel.permissions_for(targetChannel.server.me)
@@ -2757,16 +2754,14 @@ class MusicBot(discord.Client):
                      targetChannel.name)
             return Response(
                 "```Cannot join channel \"%s\", no permission.```" %
-                targetChannel.name,
-                delete_after=25)
+                targetChannel.name)
 
         elif not chperms.speak:
             self.log("Will not join channel \"%s\", no permission to speak." %
                      targetChannel.name)
             return Response(
                 "```Will not join channel \"%s\", no permission to speak.```" %
-                targetChannel.name,
-                delete_after=25)
+                targetChannel.name)
 
         player = await self.get_player(targetChannel, create=True)
 
@@ -2775,6 +2770,8 @@ class MusicBot(discord.Client):
 
         if self.config.auto_playlist:
             await self.on_player_finished_playing(player)
+
+        return Response("Joined the channel **{}**".format(targetChannel.name))
 
     async def goto_home(self, server, join=True):
         channel = find(lambda c: c.type == ChannelType.voice and any(x in c.name.lower().split(
@@ -3851,8 +3848,8 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                    str(reaction.emoji).startswith("📽") or
-                    str(reaction.emoji).startswith("💾")
+                str(reaction.emoji).startswith("📽") or
+                str(reaction.emoji).startswith("💾")
                 ) and reaction.count > 1 and user == author:
                 return True
 
@@ -5136,6 +5133,9 @@ class MusicBot(discord.Client):
 
             return Response(text)
 
+    @command_info("2.0.3", 1485516420, {
+        "3.7.5": (, "The command finally works like it should")
+    })
     async def cmd_moveus(self, channel, server, author, message,
                          leftover_args):
         """
@@ -5156,7 +5156,13 @@ class MusicBot(discord.Client):
             return Response(
                 "You're incredibly incompetent to do such a thing!")
 
-        author_channel = author.voice.voice_channel.id
+        author_channel = author.voice.voice_channel
+        voice_members = author_channel.voice_members
+        move_myself = False
+        if server.me in voice_members:
+            voice_members.remove(server.me)
+            move_myself = True
+        # print([mem.name for mem in voice_members])
 
         target_channel = self.get_channel(search_channel)
         if target_channel is None:
@@ -5169,21 +5175,20 @@ class MusicBot(discord.Client):
             return Response(
                 "Can't resolve the target channel!", delete_after=20)
 
-        self.log("there are {} members in this voice chat".format(
-            len(self.get_channel(author_channel).voice_members)))
+        # self.log("there are {} members in this voice chat".format(
+        #     len(voice_members)))
 
         s = 0
-        for voice_member in self.get_channel(author_channel).voice_members:
+        for voice_member in voice_members:
             await self.move_member(voice_member, target_channel)
             s += 1
 
-        self.log("moved {} users from {} to {}".format(
-            s, author.voice.voice_channel, target_channel))
+        # self.log("moved {} users from {} to {}".format(
+        #     s, author_channel, target_channel))
 
-        if server.me.voice.voice_channel.id == self.get_channel(
-                author_channel).id:
+        if move_myself:
             self.log("moving myself")
-            await self.get_voice_client(target_channel)
+            await self.cmd_goto(server, channel, [author, ], author, [])
 
     @block_user
     async def cmd_execute(self, channel, author, server, leftover_args, player=None):
