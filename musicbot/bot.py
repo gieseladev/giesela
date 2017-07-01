@@ -5134,7 +5134,7 @@ class MusicBot(discord.Client):
             return Response(text)
 
     @command_info("2.0.3", 1485516420, {
-        "3.7.5": (, "The command finally works like it should")
+        "3.7.5": (1481827320, "The command finally works like it should")
     })
     async def cmd_moveus(self, channel, server, author, message,
                          leftover_args):
@@ -5798,7 +5798,8 @@ class MusicBot(discord.Client):
                     command))
 
     @command_info("3.5.6", 1497819288, {
-        "3.6.2": (1497978696, "references are now clickable")
+        "3.6.2": (1497978696, "references are now clickable"),
+        "3.7.6": (1498947694, "fixed a bug which would stop Giesela from executing the command because of underscores in the version name")
     })
     async def cmd_version(self, channel):
         """
@@ -5809,7 +5810,7 @@ class MusicBot(discord.Client):
         """
 
         await self.send_typing(channel)
-        v_code, v_name = BOTVERSION.split("_")
+        v_code, v_name = BOTVERSION.split("_", 1)
         dev_code, dev_name = get_dev_version()
         changelog = get_dev_changelog()
 
