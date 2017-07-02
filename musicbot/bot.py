@@ -3850,9 +3850,9 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                str(reaction.emoji).startswith("📽") or
-                str(reaction.emoji).startswith("💾")
-                ) and reaction.count > 1 and user == author:
+                    str(reaction.emoji).startswith("📽") or
+                    str(reaction.emoji).startswith("💾")
+                    ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
@@ -5530,6 +5530,9 @@ class MusicBot(discord.Client):
 
             return Response("Nevermore you shall be annoyed!")
 
+    @command_info("2.2.1", 1493757540, {
+        "3.7.8": (1499019245, "Fixed quoting by content.")
+    })
     async def cmd_quote(self, author, channel, message, leftover_args):
         """
         ///|Usage
@@ -5542,12 +5545,11 @@ class MusicBot(discord.Client):
         quote_to_channel = channel
         target_author = None
 
-        if message.channel_mentions is not None and len(
-                message.channel_mentions) > 0:
+        if message.channel_mentions:
             channel = message.channel_mentions[0]
             leftover_args = leftover_args[1:]
 
-        if message.mentions is not None and len(message.mentions) > 0:
+        if message.mentions:
             target_author = message.mentions[0]
             leftover_args = leftover_args[1:]
 
@@ -5555,32 +5557,18 @@ class MusicBot(discord.Client):
             return Response("Please specify the message you want to quote")
 
         message_content = " ".join(leftover_args)
-        if (message_content[0] == "\"" and
-                message_content[-1] == "\"") or re.search(
-                    r"\D", message_content) is not None:
+        if (message_content[0] == "\"" and message_content[-1] == "\"") or re.search(r"\D", message_content) is not None:
             message_content = message_content.replace("\"", "")
-            # if datetime.now() < datetime(2017, 5, 15):
-            # return Response("Well sorry, this way of quoting is not yet
-            # available. It will be released in
-            # {}".format(format_time((datetime(2017, 5, 15) -
-            # datetime.now()).total_seconds(), True, 5, 2, True, True)))
-            async for msg in self.logs_from(
-                    channel, limit=100000):
-                if msg.id != message.id and message_content.lower().strip(
-                ) in msg.content.lower().strip():
+            async for msg in self.logs_from(channel, limit=3000):
+                if msg.id != message.id and message_content.lower().strip() in msg.content.lower().strip():
                     if target_author is None or target_author.id == msg.author.id:
-                        leftover_args = [
-                            msg.id,
-                        ]
+                        leftover_args = [msg.id, ]
                         break
+            else:
+                if target_author is not None:
+                    return Response("Didn't find a message with that content from {}".format(target_author.mention))
                 else:
-                    if target_author is not None:
-                        return Response(
-                            "Didn't find a message with that content from {}".
-                            format(target_author.mention))
-
-                return Response(
-                    "Didn't find a message that matched this content")
+                    return Response("Didn't find a message with that content")
 
         await self.safe_delete_message(message)
         for message_id in leftover_args:
