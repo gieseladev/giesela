@@ -6078,15 +6078,16 @@ class MusicBot(discord.Client):
         if not self.config.auto_pause:
             return
 
-        if sum(1 for m in my_voice_channel.voice_members
-               if m != after.server.me):
-            if player.is_paused:
-                self.log("[AUTOPAUSE] Unpausing")
-                player.resume()
-        else:
+        vm_count = sum(
+            1 for m in my_voice_channel.voice_members if m != after.server.me)
+        if vm_count == 0:
             if player.is_playing:
                 self.log("[AUTOPAUSE] Pausing")
                 player.pause()
+        elif vm_count == 1 and joining:
+            if player.is_paused:
+                self.log("[AUTOPAUSE] Unpausing")
+                player.resume()
 
     async def on_server_update(self,
                                before: discord.Server,
