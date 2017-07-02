@@ -1,3 +1,5 @@
+import asyncio
+import configparser
 import datetime
 import inspect
 import json
@@ -30,9 +32,6 @@ from discord.utils import find
 from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from openpyxl import Workbook
-
-import asyncio
-import configparser
 
 from . import downloader, exceptions
 from .bookmarks import bookmark
@@ -2514,6 +2513,9 @@ class MusicBot(discord.Client):
         # await self.safe_send_message (channel, msgState)
 
     @block_user
+    @command_info("2.0.3", 1485523740, ***REMOVED***
+        "3.7.7": (1499018088, "radio selection looks good again")
+    ***REMOVED***)
     async def cmd_radio(self, player, channel, author, leftover_args):
         """
         ///|Usage
@@ -2565,7 +2567,7 @@ class MusicBot(discord.Client):
         possible_stations = self.radios.get_all_stations()
         shuffle(possible_stations)
 
-        interface_string = "*****REMOVED***0.name***REMOVED*****\nlanguage: `***REMOVED***0.language***REMOVED***`\n\n`Type `yes` or `no`"
+        interface_string = "*****REMOVED***0.name***REMOVED*****\nlanguage: `***REMOVED***0.language***REMOVED***`\n\nType `yes` or `no`"
 
         for station in possible_stations:
             msg = await self.safe_send_message(
@@ -5909,7 +5911,7 @@ class MusicBot(discord.Client):
             return
 
         if not message_content.startswith(self.config.command_prefix):
-            if self.config.owned_channels and message.channel.id not in self.config.owned_channels:
+            if not self.config.owned_channels or message.channel.id not in self.config.owned_channels:
                 return
 
         # don't react to own messages or messages from bots
