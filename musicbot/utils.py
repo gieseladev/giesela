@@ -182,22 +182,41 @@ def prettydate(d):
         return '{} hours ago'.format(round_to_interval(s / 3600))
 
 
-def ordinal(n):
+def ordinal(n, combine=False):
+    """
+    Return the ordinal of the number n.
+
+    If combine then return the number concatenated with the ordinal
+    """
+    number_string = str(n) if combine else ""
     special_cases = {1: "st", 2: "nd", 3: "rd"}
     if not 10 <= n % 100 <= 20 and n % 10 in special_cases:
-        return special_cases[n % 10]
-    return "th"
+        return number_string + special_cases[n % 10]
+    return number_string + "th"
 
 
 def clean_songname(query):
+    """Clean a Youtube video title so it's shorter and easier to read."""
     to_remove = [
         "ost", "original sound track", "original soundtrack", "from",
         "with lyrics", "lyrics", "hd", "soundtrack", "original", "official",
         "feat", "ft", "creditless", "music", "video", "edition", "special",
         "version", "ver", "dvd", "new", "raw", "textless", "mp3", "avi", "mp4",
         "english", "eng", "with", "album", "theme", "full", "1080", "1080p",
-        "720", "720p", "4k", "japanese"
+        "720", "720p", "4k", "japanese", "op", "audio"
     ]
+
+    replace_with_dash = [r"\|", "by"]
+
+    special_regex = [(r"\b([\w\s]{3,})\b(?=.*\1)", ""),
+                     (r"\(f(?:ea)?t\.?\s?([\w\s]{2,})\)", r" & \1")]
+
+    for target, replacement in special_regex:
+        query = re.sub(target, replacement, query, flags=re.IGNORECASE)
+
+    for key in replace_with_dash:
+        query = re.sub(r"(^|\W)" + key + r"(\W|$)",
+                       " - ", query, flags=re.IGNORECASE)
 
     for key in to_remove:
         # mainly using \W over \b because I want to match [HD] too
@@ -207,7 +226,7 @@ def clean_songname(query):
     query = re.sub(r"[^\w\s\-\&',]", " ", query)
     query = re.sub(r"\s+", " ", query)
 
-    return query.strip()
+    return query.strip(" -&").title()
 
 
 def _run_timestamp_matcher(text):
