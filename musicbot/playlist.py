@@ -28,6 +28,13 @@ class Playlist(EventEmitter):
     def __iter__(self):
         return iter(self.entries)
 
+    def get_web_dict(self):
+        data = {
+            "entries": [entry.to_dict() for entry in self.entries],
+            "history": [entry.to_dict() for entry in self.history]
+        }
+        return data
+
     def shuffle(self):
         shuffle(self.entries)
 

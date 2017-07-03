@@ -1,5 +1,6 @@
-import configparser
 import json
+
+import configparser
 
 
 def encode_setting(value):
