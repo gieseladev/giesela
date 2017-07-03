@@ -1,4 +1,3 @@
-import asyncio
 import atexit
 import hashlib
 import json
@@ -7,6 +6,8 @@ import traceback
 from json.decoder import JSONDecodeError
 from random import choice
 from string import ascii_lowercase
+
+import asyncio
 
 from .simple_web_socket_server import SimpleWebSocketServer, WebSocket
 from .utils import dec_to_hex, get_entry_dict
@@ -191,8 +192,6 @@ class GieselaServer():
         ***REMOVED***
 
         return data
-
-        return player.get_web_dict()
 
     def get_queue_information(token):
         player = GieselaServer.get_player(token=token)
