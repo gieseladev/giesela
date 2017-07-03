@@ -491,14 +491,20 @@ class MusicBot(discord.Client):
                 # await self.safe_send_message(channel, "Now Playing " +
                 # entry.title, tts=True, expire_in=1)
 
-    async def on_player_resume(self, entry, **_):
+    async def on_player_resume(self, player, entry, **_):
         await self.update_now_playing(entry)
+        GieselaServer.send_player_information_update(
+            player.voice_client.server.id)
 
-    async def on_player_pause(self, entry, **_):
+    async def on_player_pause(self, player, entry, **_):
         await self.update_now_playing(entry, True)
+        GieselaServer.send_player_information_update(
+            player.voice_client.server.id)
 
-    async def on_player_stop(self, **_):
+    async def on_player_stop(self, player, **_):
         await self.update_now_playing()
+        GieselaServer.send_player_information_update(
+            player.voice_client.server.id)
 
     async def on_player_finished_playing(self, player, **_):
         if not player.playlist.entries and not player.current_entry:

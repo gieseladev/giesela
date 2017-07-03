@@ -255,7 +255,11 @@ class URLPlaylistEntry(BasePlaylistEntry):
     def get_youtube_data(self):
         resp = requests.get(
             "https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo&part=snippet,statistics&id=" + self.video_id)
-        self.youtube_data = resp.json()["items"][0]
+        try:
+            self.youtube_data = resp.json()["items"][0]
+        except:
+            print(resp.json())
+            raise
 
     def to_dict(self):
         meta_dict = ***REMOVED******REMOVED***
