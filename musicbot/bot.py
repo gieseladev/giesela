@@ -5880,6 +5880,20 @@ class MusicBot(discord.Client):
         else:
             return Response("**{}**\n\n{}".format(title, lyrics))
 
+    @command_info("3.8.1", 1499116644)
+    async def cmd_register(self, server, author, token):
+        """
+        ///|Usage
+        `{command_prefix}register <token>`
+        ///|Explanation
+        Use this command in order to use the [Giesela-Website](http://giesela.org).
+        """
+
+        if GieselaServer.register_information(server.id, author.id, token.lower()):
+            return Response("You've successfully registered yourself. Go back to your browser and check it out")
+        else:
+            return Response("Something went wrong while registering. It could be that your code `{}` is wrong. Please make sure that you've entered it correctly.".format(token.upper()))
+
     @owner_only
     async def cmd_shutdown(self, channel):
         await self.safe_send_message(channel, ":wave:")
