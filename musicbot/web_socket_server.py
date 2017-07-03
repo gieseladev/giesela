@@ -135,7 +135,7 @@ class GieselaServer():
         except FileNotFoundError:
             print("[WEBSOCKET] failed to load tokens, there are none saved")
 
-        GieselaServer.server = SimpleWebSocketServer("",
+        GieselaServer.server = SimpleWebSocketServer("0.0.0.0",
                                                      8000,
                                                      GieselaWebSocket)
         atexit.register(GieselaServer.server.close)
