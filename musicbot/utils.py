@@ -1,4 +1,3 @@
-import asyncio
 import datetime
 import decimal
 import random
@@ -11,6 +10,8 @@ from hashlib import md5
 import aiohttp
 import requests
 from bs4 import BeautifulSoup
+
+import asyncio
 
 from .constants import DISCORD_MSG_CHAR_LIMIT
 
@@ -45,7 +46,7 @@ def get_entry_dict(entry, player, loop):
             if entry.radio_station_data:  # if it's radio
                 radio_station = entry.radio_station_data
                 radio_data = {
-                    "type": "radio",
+                    "type": "radio_station_entry",
                     "origin": radio_station.to_dict()
                 }
                 # if it's also a radio with more information
@@ -57,7 +58,7 @@ def get_entry_dict(entry, player, loop):
                 entry_dict.update(radio_data)
             else:  # normal stream
                 stream_data = {
-                    "type": "stream",
+                    "type": "stream_entry",
                     "title": entry.title
                 }
                 entry.update(stream_data)
