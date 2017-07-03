@@ -2130,13 +2130,10 @@ class MusicBot(discord.Client):
                     expire_in=20)
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
-        "3.5.1":
-        (1497706997,
-         "Queue doesn't show the current entry anymore, always shows the whole playlist and a bit of cleanup"
-         ),
-        "3.5.5":
-        (1497795534, "Total time takes current entry into account"),
-        "3.5.8": (1497825017, "Doesn't show the whole queue right away anymore, instead the queue command takes a quantity argument which defaults to 15")
+        "3.5.1": (1497706997, "Queue doesn't show the current entry anymore, always shows the whole playlist and a bit of cleanup"),
+        "3.5.5": (1497795534, "Total time takes current entry into account"),
+        "3.5.8": (1497825017, "Doesn't show the whole queue right away anymore, instead the queue command takes a quantity argument which defaults to 15"),
+        "3.8.0": (1499110875, "Displaying real index of sub-entries (timestamp-entry)")
     ***REMOVED***)
     async def cmd_queue(self, channel, player, num="15"):
         """
@@ -2163,10 +2160,9 @@ class MusicBot(discord.Client):
         lines.append("**QUEUE**\n")
 
         if player.current_entry and player.current_entry.provides_timestamps:
-            for i, item in enumerate(
-                    player.current_entry.sub_queue(player.progress), 1):
+            for item in player.current_entry.sub_queue(player.progress):
                 lines.append("            ►`***REMOVED******REMOVED***.` *****REMOVED******REMOVED*****".format(
-                    i, nice_cut(item["name"], 35)))
+                    item["index"] + 1, nice_cut(item["name"], 35)))
 
         entries = list(player.playlist.entries)[:quantity]
         for i, item in enumerate(entries, 1):
