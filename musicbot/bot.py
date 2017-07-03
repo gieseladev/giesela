@@ -1,5 +1,3 @@
-import asyncio
-import configparser
 import datetime
 import inspect
 import json
@@ -32,6 +30,9 @@ from discord.utils import find
 from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from openpyxl import Workbook
+
+import asyncio
+import configparser
 
 from . import downloader, exceptions
 from .bookmarks import bookmark
@@ -500,6 +501,10 @@ class MusicBot(discord.Client):
         await self.update_now_playing()
 
     async def on_player_finished_playing(self, player, **_):
+        if not player.playlist.entries and not player.current_entry:
+            GieselaServer.send_player_information_update(
+                player.voice_client.server.id)
+
         if not player.playlist.entries and not player.current_entry and self.config.auto_playlist:
             if self.config.auto_playlist:
                 while self.autoplaylist:
@@ -3852,7 +3857,7 @@ class MusicBot(discord.Client):
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
                     str(reaction.emoji).startswith("📽") or
                     str(reaction.emoji).startswith("💾")
-                    ) and reaction.count > 1 and user == author:
+                ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
