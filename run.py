@@ -169,7 +169,6 @@ def main():
             m = MusicBot()
             print("Connecting...", end='', flush=True)
             m.run()
-            m.socket_server.shutdown()
 
         except SyntaxError:
             traceback.print_exc()

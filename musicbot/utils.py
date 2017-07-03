@@ -11,7 +11,90 @@ import aiohttp
 import requests
 from bs4 import BeautifulSoup
 
+import asyncio
+
 from .constants import DISCORD_MSG_CHAR_LIMIT
+
+
+def get_entry_dict(entry, player, loop):
+    from .entry import StreamPlaylistEntry
+    from .web_socket_server import WebAuthor
+    from .radio import Radio
+
+    entry_dict = None
+
+    if entry:
+        entry_dict = ***REMOVED***
+            "url": entry.url,
+            "thumbnail": entry.thumbnail,
+            "origin": None,
+            "type": None
+        ***REMOVED***
+
+        if entry.meta:
+            if "playlist" in entry.meta:
+                origin_data = ***REMOVED***"type": "playlist"***REMOVED***
+                origin_data.update(entry.meta["playlist"])
+                entry_dict["origin"] = origin_data
+            elif "author" in entry.meta:
+                origin_data = ***REMOVED***"type": "user"***REMOVED***
+                web_author = WebAuthor.from_id(entry.meta["author"].id)
+                origin_data.update(web_author.to_dict())
+                entry_dict["origin"] = origin_data
+
+        if isinstance(entry, StreamPlaylistEntry):
+            if entry.radio_station_data:  # if it's radio
+                radio_station = entry.radio_station_data
+                radio_data = ***REMOVED***
+                    "type": "radio_station_entry",
+                    "origin": radio_station.to_dict()
+                ***REMOVED***
+                # if it's also a radio with more information
+                if Radio.has_station_data(radio_station.name):
+                    current_song = asyncio.run_coroutine_threadsafe(
+                        Radio.get_current_song(loop, radio_station.name), loop).result()
+                    radio_data.update(current_song)
+                    radio_data["type"] = "radio_entry"
+                entry_dict.update(radio_data)
+            else:  # normal stream
+                stream_data = ***REMOVED***
+                    "type": "stream_entry",
+                    "title": entry.title
+                ***REMOVED***
+                entry.update(stream_data)
+        elif entry.spotify_track:
+            track = entry.spotify_track.get_dict()
+            # making sure that we get the actual duration
+            track["duration"] = entry.duration
+            entry_dict.update(track)
+            entry_dict["type"] = "spotify_entry"
+        elif entry.provides_timestamps:
+            timestamp_data = ***REMOVED***
+                "title": entry.title,
+                "queue": entry.sub_queue(),
+                "type": "timestamp_entry",
+                "duration": entry.duration
+            ***REMOVED***
+            if player.current_entry == entry:  # this song is already active
+                sub_progress, sub_duration = entry.get_local_progress(
+                    player.progress)
+                sub_title = entry.get_current_song_from_timestamp(
+                    player.progress)
+                timestamp_data.update(***REMOVED***
+                    "sub_title": sub_title,
+                    "sub_progress": sub_progress,
+                    "sub_duration": sub_duration
+                ***REMOVED***)
+            entry_dict.update(timestamp_data)
+        else:  # normal URLPlaylistEntry
+            data = ***REMOVED***
+                "title": entry.title,
+                "duration": entry.duration,
+                "type": "default_entry"
+            ***REMOVED***
+            entry_dict.update(data)
+
+    return entry_dict
 
 
 def similarity(a, b):
@@ -100,22 +183,41 @@ def prettydate(d):
         return '***REMOVED******REMOVED*** hours ago'.format(round_to_interval(s / 3600))
 
 
-def ordinal(n):
+def ordinal(n, combine=False):
+    """
+    Return the ordinal of the number n.
+
+    If combine then return the number concatenated with the ordinal
+    """
+    number_string = str(n) if combine else ""
     special_cases = ***REMOVED***1: "st", 2: "nd", 3: "rd"***REMOVED***
     if not 10 <= n % 100 <= 20 and n % 10 in special_cases:
-        return special_cases[n % 10]
-    return "th"
+        return number_string + special_cases[n % 10]
+    return number_string + "th"
 
 
 def clean_songname(query):
+    """Clean a Youtube video title so it's shorter and easier to read."""
     to_remove = [
         "ost", "original sound track", "original soundtrack", "from",
         "with lyrics", "lyrics", "hd", "soundtrack", "original", "official",
         "feat", "ft", "creditless", "music", "video", "edition", "special",
         "version", "ver", "dvd", "new", "raw", "textless", "mp3", "avi", "mp4",
         "english", "eng", "with", "album", "theme", "full", "1080", "1080p",
-        "720", "720p", "4k"
+        "720", "720p", "4k", "japanese", "op", "audio"
     ]
+
+    replace_with_dash = [r"\|", "by"]
+
+    special_regex = [(r"\b([\w\s]***REMOVED***3,***REMOVED***)\b(?=.*\1)", ""),
+                     (r"\(f(?:ea)?t\.?\s?([\w\s]***REMOVED***2,***REMOVED***)\)", r" & \1")]
+
+    for target, replacement in special_regex:
+        query = re.sub(target, replacement, query, flags=re.IGNORECASE)
+
+    for key in replace_with_dash:
+        query = re.sub(r"(^|\W)" + key + r"(\W|$)",
+                       " - ", query, flags=re.IGNORECASE)
 
     for key in to_remove:
         # mainly using \W over \b because I want to match [HD] too
@@ -125,7 +227,7 @@ def clean_songname(query):
     query = re.sub(r"[^\w\s\-\&',]", " ", query)
     query = re.sub(r"\s+", " ", query)
 
-    return query.strip()
+    return query.strip(" -&").title()
 
 
 def _run_timestamp_matcher(text):
@@ -238,6 +340,10 @@ def parse_timestamp(timestamp):
 
 def hex_to_dec(hex_code):
     return int(hex_code.lstrip("#"), 16)
+
+
+def dec_to_hex(dec_colour):
+    return "#***REMOVED***:0>6***REMOVED***".format(hex(dec_colour)[2:]).upper()
 
 
 def to_timestamp(seconds):

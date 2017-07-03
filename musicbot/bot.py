@@ -1,5 +1,3 @@
-import asyncio
-import configparser
 import datetime
 import inspect
 import json
@@ -33,6 +31,9 @@ from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from openpyxl import Workbook
 
+import asyncio
+import configparser
+
 from . import downloader, exceptions
 from .bookmarks import bookmark
 from .cleverbot import CleverWrap
@@ -56,17 +57,18 @@ from .random_sets import RandomSets
 from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .settings import Settings
-from .socket_server import SocketServer
 from .tungsten import Tungsten
 from .utils import (clean_songname, create_bar, escape_dis, format_time,
                     hex_to_dec, load_file, nice_cut, ordinal, paginate,
                     parse_timestamp, prettydate, random_line, to_timestamp,
                     write_file)
+from .web_socket_server import GieselaServer
 
 load_opus_lib()
 
 
 class Response:
+
     def __init__(self, content=None, reply=False, delete_after=0, embed=None):
         self.content = content
         self.reply = reply
@@ -98,7 +100,6 @@ class MusicBot(discord.Client):
         self.autoplaylist = load_file(self.config.auto_playlist_file)
         self.downloader = downloader.Downloader(download_folder='audio_cache')
         self.calendar = Calendar(self)
-        self.socket_server = SocketServer(self)
 
         self.exit_signal = None
         self.init_ok = False
@@ -415,9 +416,9 @@ class MusicBot(discord.Client):
             await self.ws.send(utils.to_json(payload))
             self.the_voice_clients[server.id].channel = channel
 
-    async def get_player(self, channel, create=False,
-                         auto_summon=True) -> MusicPlayer:
-        server = channel.server
+    async def get_player(self, channel=None, create=False,
+                         auto_summon=True, server_id=None) -> MusicPlayer:
+        server = channel.server if channel else self.get_server(server_id)
 
         if server.id not in self.players:
             if not create:
@@ -447,6 +448,8 @@ class MusicBot(discord.Client):
         return self.players[server.id]
 
     async def on_player_play(self, player, entry):
+        GieselaServer.send_player_information_update(
+            player.voice_client.server.id)
         await self.update_now_playing(entry)
 
         channel = entry.meta.get('channel', None)
@@ -457,7 +460,8 @@ class MusicBot(discord.Client):
                 'last_np_msg']
             if last_np_msg and last_np_msg.channel == channel:
 
-                # if the last np message isn't the last message in the channel; delete it
+                # if the last np message isn't the last message in the channel;
+                # delete it
                 async for lmsg in self.logs_from(channel, limit=1):
                     if lmsg != last_np_msg and last_np_msg:
                         await self.safe_delete_message(last_np_msg)
@@ -487,16 +491,26 @@ class MusicBot(discord.Client):
                 # await self.safe_send_message(channel, "Now Playing " +
                 # entry.title, tts=True, expire_in=1)
 
-    async def on_player_resume(self, entry, **_):
+    async def on_player_resume(self, player, entry, **_):
         await self.update_now_playing(entry)
+        GieselaServer.send_player_information_update(
+            player.voice_client.server.id)
 
-    async def on_player_pause(self, entry, **_):
+    async def on_player_pause(self, player, entry, **_):
         await self.update_now_playing(entry, True)
+        GieselaServer.send_player_information_update(
+            player.voice_client.server.id)
 
-    async def on_player_stop(self, **_):
+    async def on_player_stop(self, player, **_):
         await self.update_now_playing()
+        GieselaServer.send_player_information_update(
+            player.voice_client.server.id)
 
     async def on_player_finished_playing(self, player, **_):
+        if not player.playlist.entries and not player.current_entry:
+            GieselaServer.send_player_information_update(
+                player.voice_client.server.id)
+
         if not player.playlist.entries and not player.current_entry and self.config.auto_playlist:
             if self.config.auto_playlist:
                 while self.autoplaylist:
@@ -728,7 +742,6 @@ class MusicBot(discord.Client):
 
     async def logout(self):
         await self.disconnect_all_voice_clients()
-        self.socket_server.shutdown()
         return await super().logout()
 
     async def on_error(self, event, *args, **kwargs):
@@ -914,6 +927,8 @@ class MusicBot(discord.Client):
         self.log()
         # t-t-th-th-that's all folks!
 
+        GieselaServer.run(self)
+
     async def socket_summon(self, server_id, summoner_id=None):
         server = self.get_server(server_id)
         if server == None:
@@ -950,14 +965,14 @@ class MusicBot(discord.Client):
             return False
 
         await self.get_player(target_channel, create=True)
-        self.socket_server.threaded_broadcast_information()
         return target_channel
 
     @command_info("1.9.5", 1477774380, ***REMOVED***
         "3.4.5": (1497616203, "Improved default help message using embeds"),
         "3.6.0": (1497904733, "Fixed weird indent of some help texts"),
         "3.7.0": (1498233256, "Some better help texts"),
-        "3.7.1": (1498237739, "Added interactive help")
+        "3.7.1": (1498237739, "Added interactive help"),
+        "3.7.4": (1498318916, "Added \"lyrics\" function help text")
     ***REMOVED***)
     async def cmd_help(self, channel, leftover_args):
         """
@@ -1063,6 +1078,7 @@ class MusicBot(discord.Client):
                          value=playlist_commands, inline=False)
 
             misc_commands = "\n".join([
+                "`***REMOVED***0***REMOVED***lyrics` retrieve lyrics for the current song",
                 "`***REMOVED***0***REMOVED***random` choose between items",
                 "`***REMOVED***0***REMOVED***game` play a game",
                 "`***REMOVED***0***REMOVED***ask` ask a question",
@@ -2120,13 +2136,10 @@ class MusicBot(discord.Client):
                     expire_in=20)
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
-        "3.5.1":
-        (1497706997,
-         "Queue doesn't show the current entry anymore, always shows the whole playlist and a bit of cleanup"
-         ),
-        "3.5.5":
-        (1497795534, "Total time takes current entry into account"),
-        "3.5.8": (1497825017, "Doesn't show the whole queue right away anymore, instead the queue command takes a quantity argument which defaults to 15")
+        "3.5.1": (1497706997, "Queue doesn't show the current entry anymore, always shows the whole playlist and a bit of cleanup"),
+        "3.5.5": (1497795534, "Total time takes current entry into account"),
+        "3.5.8": (1497825017, "Doesn't show the whole queue right away anymore, instead the queue command takes a quantity argument which defaults to 15"),
+        "3.8.0": (1499110875, "Displaying real index of sub-entries (timestamp-entry)")
     ***REMOVED***)
     async def cmd_queue(self, channel, player, num="15"):
         """
@@ -2153,10 +2166,9 @@ class MusicBot(discord.Client):
         lines.append("**QUEUE**\n")
 
         if player.current_entry and player.current_entry.provides_timestamps:
-            for i, item in enumerate(
-                    player.current_entry.sub_queue(player.progress), 1):
+            for item in player.current_entry.sub_queue(player.progress):
                 lines.append("            ►`***REMOVED******REMOVED***.` *****REMOVED******REMOVED*****".format(
-                    i, nice_cut(item["name"], 35)))
+                    item["index"] + 1, nice_cut(item["name"], 35)))
 
         entries = list(player.playlist.entries)[:quantity]
         for i, item in enumerate(entries, 1):
@@ -2508,6 +2520,9 @@ class MusicBot(discord.Client):
         # await self.safe_send_message (channel, msgState)
 
     @block_user
+    @command_info("2.0.3", 1485523740, ***REMOVED***
+        "3.7.7": (1499018088, "radio selection looks good again")
+    ***REMOVED***)
     async def cmd_radio(self, player, channel, author, leftover_args):
         """
         ///|Usage
@@ -2559,7 +2574,7 @@ class MusicBot(discord.Client):
         possible_stations = self.radios.get_all_stations()
         shuffle(possible_stations)
 
-        interface_string = "*****REMOVED***0.name***REMOVED*****\nlanguage: `***REMOVED***0.language***REMOVED***`\n\n`Type `yes` or `no`"
+        interface_string = "*****REMOVED***0.name***REMOVED*****\nlanguage: `***REMOVED***0.language***REMOVED***`\n\nType `yes` or `no`"
 
         for station in possible_stations:
             msg = await self.safe_send_message(
@@ -2690,11 +2705,14 @@ class MusicBot(discord.Client):
         self.log("Answered " + message.author.name + "'s question with: " +
                  msgContent)
 
+    @command_info("1.0.0", 1477180800, ***REMOVED***
+        "2.0.2": (1481827560, "Can now use @mentions to \"goto\" a user")
+    ***REMOVED***)
     async def cmd_goto(self, server, channel, user_mentions, author,
                        leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***goto id/name
+            ***REMOVED***command_prefix***REMOVED***goto <id | name>
 
         Call the bot to a channel.
         """
@@ -2727,22 +2745,15 @@ class MusicBot(discord.Client):
                     if targetChannel is None:
                         return Response(
                             "Cannot find *****REMOVED******REMOVED***** in any voice channel".format(
-                                ", ".join([x.mention for x in user_mentions])),
-                            delete_after=25)
+                                ", ".join([x.mention for x in user_mentions])))
                 else:
                     self.log("Cannot find channel \"%s\"" % channelID)
                     return Response(
-                        "```Cannot find channel \"%s\"```" % channelID,
-                        delete_after=25)
+                        "```Cannot find channel \"%s\"```" % channelID)
 
         voice_client = await self.get_voice_client(targetChannel)
         self.log("Will join channel \"%s\"" % targetChannel.name)
-        await self.safe_send_message(
-            channel,
-            "Joined the channel ****REMOVED******REMOVED****".format(targetChannel.name),
-            expire_in=8)
         await self.move_voice_client(targetChannel)
-        # return
 
         # move to _verify_vc_perms?
         chperms = targetChannel.permissions_for(targetChannel.server.me)
@@ -2752,16 +2763,14 @@ class MusicBot(discord.Client):
                      targetChannel.name)
             return Response(
                 "```Cannot join channel \"%s\", no permission.```" %
-                targetChannel.name,
-                delete_after=25)
+                targetChannel.name)
 
         elif not chperms.speak:
             self.log("Will not join channel \"%s\", no permission to speak." %
                      targetChannel.name)
             return Response(
                 "```Will not join channel \"%s\", no permission to speak.```" %
-                targetChannel.name,
-                delete_after=25)
+                targetChannel.name)
 
         player = await self.get_player(targetChannel, create=True)
 
@@ -2770,6 +2779,8 @@ class MusicBot(discord.Client):
 
         if self.config.auto_playlist:
             await self.on_player_finished_playing(player)
+
+        return Response("Joined the channel *****REMOVED******REMOVED*****".format(targetChannel.name))
 
     async def goto_home(self, server, join=True):
         channel = find(lambda c: c.type == ChannelType.voice and any(x in c.name.lower().split(
@@ -3846,9 +3857,9 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                        str(reaction.emoji).startswith("📽") or
-                        str(reaction.emoji).startswith("💾")
-                    ) and reaction.count > 1 and user == author:
+                    str(reaction.emoji).startswith("📽") or
+                    str(reaction.emoji).startswith("💾")
+                ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
@@ -5131,6 +5142,9 @@ class MusicBot(discord.Client):
 
             return Response(text)
 
+    @command_info("2.0.3", 1485516420, ***REMOVED***
+        "3.7.5": (1481827320, "The command finally works like it should")
+    ***REMOVED***)
     async def cmd_moveus(self, channel, server, author, message,
                          leftover_args):
         """
@@ -5151,7 +5165,13 @@ class MusicBot(discord.Client):
             return Response(
                 "You're incredibly incompetent to do such a thing!")
 
-        author_channel = author.voice.voice_channel.id
+        author_channel = author.voice.voice_channel
+        voice_members = author_channel.voice_members
+        move_myself = False
+        if server.me in voice_members:
+            voice_members.remove(server.me)
+            move_myself = True
+        # print([mem.name for mem in voice_members])
 
         target_channel = self.get_channel(search_channel)
         if target_channel is None:
@@ -5164,54 +5184,20 @@ class MusicBot(discord.Client):
             return Response(
                 "Can't resolve the target channel!", delete_after=20)
 
-        self.log("there are ***REMOVED******REMOVED*** members in this voice chat".format(
-            len(self.get_channel(author_channel).voice_members)))
+        # self.log("there are ***REMOVED******REMOVED*** members in this voice chat".format(
+        #     len(voice_members)))
 
         s = 0
-        for voice_member in self.get_channel(author_channel).voice_members:
+        for voice_member in voice_members:
             await self.move_member(voice_member, target_channel)
             s += 1
 
-        self.log("moved ***REMOVED******REMOVED*** users from ***REMOVED******REMOVED*** to ***REMOVED******REMOVED***".format(
-            s, author.voice.voice_channel, target_channel))
+        # self.log("moved ***REMOVED******REMOVED*** users from ***REMOVED******REMOVED*** to ***REMOVED******REMOVED***".format(
+        #     s, author_channel, target_channel))
 
-        if server.me.voice.voice_channel.id == self.get_channel(
-                author_channel).id:
+        if move_myself:
             self.log("moving myself")
-            await self.get_voice_client(target_channel)
-
-    async def cmd_mobile(self, message, channel, player, server, leftover_args):
-        """
-        ///|Users
-        `***REMOVED***command_prefix***REMOVED***mobile`
-        ///|Send a message to a user
-        `***REMOVED***command_prefix***REMOVED***mobile message <@mention> <message>`
-        """
-
-        if len(leftover_args) < 1:
-            count = len(self.socket_server.connections)
-            return Response("There ***REMOVED******REMOVED*** currently ***REMOVED******REMOVED*** mobile user***REMOVED******REMOVED***".format(
-                "is" if count == 1 else "are", count, "s"
-                if count != 1 else ""))
-        elif leftover_args[0].lower() == "message":
-            if len(leftover_args) < 2:
-                return Response("No message provided!")
-            else:
-                if len(message.mentions) < 1:
-                    return Response("No mentions")
-                else:
-                    target_user = message.mentions[0].id
-                msg = " ".join(leftover_args[2:])
-
-                res = self.socket_server.send_message(target_user, msg)
-                if res is None:
-                    return Response(
-                        "This user probably doesn't have the app open")
-                elif not res:
-                    return Response(
-                        "Something went wrong when trying to contact the user")
-                else:
-                    return Response("Successfully sent the message!")
+            await self.cmd_goto(server, channel, [author, ], author, [])
 
     @block_user
     async def cmd_execute(self, channel, author, server, leftover_args, player=None):
@@ -5230,16 +5216,16 @@ class MusicBot(discord.Client):
             exec(statement, env)
         except SyntaxError as e:
             return Response(
-                "**While compiling the statement the following error occured**\n```python\n***REMOVED******REMOVED***\n```".
-                format(str(e)))
+                "**While compiling the statement the following error occured**\n***REMOVED******REMOVED***\n***REMOVED******REMOVED***".
+                format(traceback.format_exc(), str(e)))
 
         func = env["func"]
         try:
             ret = await func()
         except Exception as e:
             return Response(
-                "**While executing the statement the following error occured**\n```python\n***REMOVED******REMOVED***\n```".
-                format(str(e)))
+                "**While executing the statement the following error occured**\n***REMOVED******REMOVED***\n***REMOVED******REMOVED***".
+                format(traceback.format_exc(), str(e)))
 
         return Response("**CODE**\n***REMOVED******REMOVED***\n**RESULT**\n```python\n***REMOVED******REMOVED***\n```".format(
             beautiful_statement, str(ret)))
@@ -5351,20 +5337,6 @@ class MusicBot(discord.Client):
         if not player.goto_seconds(secs):
             return Response(
                 "Timestamp exceeds song duration!", delete_after=20)
-
-    async def cmd_register(self, author, server, token):
-        """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***register <token>
-
-        Use this function to register your phone in order to control the musicbot
-        """
-
-        if await self.socket_server.register_handler(token, server.id,
-                                                     author.id):
-            return Response("Successful")
-        else:
-            return Response("Something went wrong there")
 
     async def cmd_disconnect(self, server):
         """
@@ -5565,6 +5537,9 @@ class MusicBot(discord.Client):
 
             return Response("Nevermore you shall be annoyed!")
 
+    @command_info("2.2.1", 1493757540, ***REMOVED***
+        "3.7.8": (1499019245, "Fixed quoting by content.")
+    ***REMOVED***)
     async def cmd_quote(self, author, channel, message, leftover_args):
         """
         ///|Usage
@@ -5577,12 +5552,11 @@ class MusicBot(discord.Client):
         quote_to_channel = channel
         target_author = None
 
-        if message.channel_mentions is not None and len(
-                message.channel_mentions) > 0:
+        if message.channel_mentions:
             channel = message.channel_mentions[0]
             leftover_args = leftover_args[1:]
 
-        if message.mentions is not None and len(message.mentions) > 0:
+        if message.mentions:
             target_author = message.mentions[0]
             leftover_args = leftover_args[1:]
 
@@ -5590,32 +5564,18 @@ class MusicBot(discord.Client):
             return Response("Please specify the message you want to quote")
 
         message_content = " ".join(leftover_args)
-        if (message_content[0] == "\"" and
-                message_content[-1] == "\"") or re.search(
-                    r"\D", message_content) is not None:
+        if (message_content[0] == "\"" and message_content[-1] == "\"") or re.search(r"\D", message_content) is not None:
             message_content = message_content.replace("\"", "")
-            # if datetime.now() < datetime(2017, 5, 15):
-            # return Response("Well sorry, this way of quoting is not yet
-            # available. It will be released in
-            # ***REMOVED******REMOVED***".format(format_time((datetime(2017, 5, 15) -
-            # datetime.now()).total_seconds(), True, 5, 2, True, True)))
-            async for msg in self.logs_from(
-                    channel, limit=100000):
-                if msg.id != message.id and message_content.lower().strip(
-                ) in msg.content.lower().strip():
+            async for msg in self.logs_from(channel, limit=3000):
+                if msg.id != message.id and message_content.lower().strip() in msg.content.lower().strip():
                     if target_author is None or target_author.id == msg.author.id:
-                        leftover_args = [
-                            msg.id,
-                        ]
+                        leftover_args = [msg.id, ]
                         break
+            else:
+                if target_author is not None:
+                    return Response("Didn't find a message with that content from ***REMOVED******REMOVED***".format(target_author.mention))
                 else:
-                    if target_author is not None:
-                        return Response(
-                            "Didn't find a message with that content from ***REMOVED******REMOVED***".
-                            format(target_author.mention))
-
-                return Response(
-                    "Didn't find a message that matched this content")
+                    return Response("Didn't find a message with that content")
 
         await self.safe_delete_message(message)
         for message_id in leftover_args:
@@ -5835,7 +5795,8 @@ class MusicBot(discord.Client):
                     command))
 
     @command_info("3.5.6", 1497819288, ***REMOVED***
-        "3.6.2": (1497978696, "references are now clickable")
+        "3.6.2": (1497978696, "references are now clickable"),
+        "3.7.6": (1498947694, "fixed a bug which would stop Giesela from executing the command because of underscores in the version name")
     ***REMOVED***)
     async def cmd_version(self, channel):
         """
@@ -5846,7 +5807,7 @@ class MusicBot(discord.Client):
         """
 
         await self.send_typing(channel)
-        v_code, v_name = BOTVERSION.split("_")
+        v_code, v_name = BOTVERSION.split("_", 1)
         dev_code, dev_name = get_dev_version()
         changelog = get_dev_changelog()
 
@@ -5895,7 +5856,9 @@ class MusicBot(discord.Client):
 
         return Response(msg)
 
-    @command_info("3.7.3", 1498306682)
+    @command_info("3.7.3", 1498306682, ***REMOVED***
+        "3.7.4": (1498312423, "Fixed severe bug and added musixmatch as a source")
+    ***REMOVED***)
     async def cmd_lyrics(self, player, channel):
         """
         ///|Usage
@@ -5916,6 +5879,20 @@ class MusicBot(discord.Client):
             return Response("Couldn't find any lyrics for *****REMOVED******REMOVED*****".format(title))
         else:
             return Response("*****REMOVED******REMOVED*****\n\n***REMOVED******REMOVED***".format(title, lyrics))
+
+    @command_info("3.8.1", 1499116644)
+    async def cmd_register(self, server, author, token):
+        """
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***register <token>`
+        ///|Explanation
+        Use this command in order to use the [Giesela-Website](http://giesela.org).
+        """
+
+        if GieselaServer.register_information(server.id, author.id, token.lower()):
+            return Response("You've successfully registered yourself. Go back to your browser and check it out")
+        else:
+            return Response("Something went wrong while registering. It could be that your code `***REMOVED******REMOVED***` is wrong. Please make sure that you've entered it correctly.".format(token.upper()))
 
     @owner_only
     async def cmd_shutdown(self, channel):
@@ -5939,11 +5916,11 @@ class MusicBot(discord.Client):
 
         if message.author.id in self.users_in_menu:
             self.log("***REMOVED******REMOVED*** is currently in a menu. Ignoring \"***REMOVED******REMOVED***\"".format(
-                author, message_content))
+                message.author, message_content))
             return
 
         if not message_content.startswith(self.config.command_prefix):
-            if self.config.owned_channels and message.channel.id not in self.config.owned_channels:
+            if not self.config.owned_channels or message.channel.id not in self.config.owned_channels:
                 return
 
         # don't react to own messages or messages from bots
@@ -6122,17 +6099,16 @@ class MusicBot(discord.Client):
         if not self.config.auto_pause:
             return
 
-        if sum(1 for m in my_voice_channel.voice_members
-               if m != after.server.me):
-            if player.is_paused:
-                self.log("[AUTOPAUSE] Unpausing")
-                player.resume()
-                self.socket_server.threaded_broadcast_information()
-        else:
+        vm_count = sum(
+            1 for m in my_voice_channel.voice_members if m != after.server.me)
+        if vm_count == 0:
             if player.is_playing:
                 self.log("[AUTOPAUSE] Pausing")
                 player.pause()
-                self.socket_server.threaded_broadcast_information()
+        elif vm_count == 1 and joining:
+            if player.is_paused:
+                self.log("[AUTOPAUSE] Unpausing")
+                player.resume()
 
     async def on_server_update(self,
                                before: discord.Server,
