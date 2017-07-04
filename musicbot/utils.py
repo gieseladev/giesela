@@ -1,5 +1,6 @@
 import datetime
 import decimal
+import json
 import random
 import re
 import unicodedata
@@ -343,6 +344,42 @@ def get_video_description(url):
     for br in bs.find_all("br"):
         br.replace_with("\n")
     return bs.text
+
+
+def _choose_best_thumbnail(thumbnails):
+    ranks = ["maxres", "high", "medium", "standard", "default"]
+    for res in ranks:
+        if res in thumbnails:
+            return thumbnails[res]["url"]
+
+
+def get_related_videos(videoId):
+    params = ***REMOVED***
+        "part": "snippet",
+        "relatedToVideoId": videoId,
+        "topicId": "/m/04rlf",
+        "type": "video",
+        "key": "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo"
+    ***REMOVED***
+    resp = requests.get(
+        "https://www.googleapis.com/youtube/v3/search", params=params)
+    data = resp.json()
+    videos = data["items"]
+    if not videos:
+        return None
+    video_list = []
+    for vid in videos:
+        video = ***REMOVED***
+            "id": vid["id"]["videoId"],
+            "title": vid["snippet"]["title"],
+            "channel": vid["snippet"]["channelTitle"],
+            "thumbnail": _choose_best_thumbnail(vid["snippet"]["thumbnails"]),
+            "url": "https://www.youtube.com/watch?v=" + vid["id"]["videoId"]
+        ***REMOVED***
+
+        video_list.append(video)
+
+    return video_list
 
 
 def parse_timestamp(timestamp):

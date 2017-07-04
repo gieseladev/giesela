@@ -59,9 +59,9 @@ from .saved_playlists import Playlists
 from .settings import Settings
 from .tungsten import Tungsten
 from .utils import (clean_songname, create_bar, escape_dis, format_time,
-                    hex_to_dec, load_file, nice_cut, ordinal, paginate,
-                    parse_timestamp, prettydate, random_line, to_timestamp,
-                    write_file)
+                    get_related_videos, hex_to_dec, load_file, nice_cut,
+                    ordinal, paginate, parse_timestamp, prettydate,
+                    random_line, to_timestamp, write_file)
 from .web_socket_server import GieselaServer
 
 load_opus_lib()
@@ -1766,6 +1766,72 @@ class MusicBot(discord.Client):
                 await self.safe_delete_message(interface_message)
                 await self.safe_delete_message(response_message)
                 return Response("Added `***REMOVED******REMOVED***` to playlist \"***REMOVED******REMOVED***\".".format(add_entry.title, playlistname.title()))
+
+            await self.safe_delete_message(result_message)
+            await self.safe_delete_message(interface_message)
+            await self.safe_delete_message(response_message)
+
+    @block_user
+    @command_info("3.8.4", 1499188226)
+    async def cmd_suggest(self, player, channel, author):
+        """
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***suggest`
+        ///|Explanation
+        Find similar videos to your current one
+        """
+
+        if not player.current_entry:
+            return Response("Can't give you any suggestions when there's nothing playing.")
+
+        vidId = player.current_entry.video_id
+
+        if not vidId:
+            return Response("Can't give you any suggestions for this entry.")
+
+        videos = get_related_videos(vidId)
+
+        if not videos:
+            return Response("Couldn't find anything.")
+
+        result_string = "**Result ***REMOVED***0***REMOVED***/***REMOVED***1***REMOVED*****\n***REMOVED***2***REMOVED***"
+        interface_string = "**Commands:**\n`play` play this result\n\n`n` next result\n`p` previous result\n`exit` abort and exit"
+
+        current_result_index = 0
+        total_results = len(videos)
+
+        while True:
+            current_result = videos[current_result_index]
+
+            result_message = await self.safe_send_message(channel, result_string.format(current_result_index + 1, total_results, current_result["url"]))
+            interface_message = await self.safe_send_message(channel, interface_string)
+            response_message = await self.wait_for_message(100, author=author, channel=channel, check=lambda msg: msg.content.strip().lower().split()[0] in ("play", "n", "p", "exit"))
+
+            if not response_message:
+                await self.safe_delete_message(result_message)
+                await self.safe_delete_message(interface_message)
+                await self.safe_delete_message(response_message)
+                return Response("Aborting. [Timeout]")
+
+            content = response_message.content.strip()
+            command, *args = content.lower().split()
+
+            if command == "exit":
+                await self.safe_delete_message(result_message)
+                await self.safe_delete_message(interface_message)
+                await self.safe_delete_message(response_message)
+                return Response("Okay then. Suggest(?) again soon")
+            elif command in "np":
+                # feels hacky but is actully genius
+                current_result_index += ***REMOVED***"n": 1, "p": -1***REMOVED***[command]
+                current_result_index %= total_results
+            elif command == "play":
+                await self.send_typing(channel)
+                await self.cmd_play(player, channel, author, [], current_result["url"])
+                await self.safe_delete_message(result_message)
+                await self.safe_delete_message(interface_message)
+                await self.safe_delete_message(response_message)
+                return Response("Alright, coming right up!")
 
             await self.safe_delete_message(result_message)
             await self.safe_delete_message(interface_message)
@@ -5200,7 +5266,7 @@ class MusicBot(discord.Client):
             await self.cmd_goto(server, channel, [author, ], author, [])
 
     @block_user
-    @command_prefix("2.0.2", 1484676180, ***REMOVED***
+    @command_info("2.0.2", 1484676180, ***REMOVED***
         "3.8.3": (1499184914, "Can now use multiline statements without having to use tricks like /n/")
     ***REMOVED***)
     async def cmd_execute(self, channel, author, server, raw_content, player=None):

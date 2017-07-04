@@ -27,6 +27,7 @@ class BasePlaylistEntry:
         self.provided_song_timestamps = None
         self.searched_additional_information = False
         self._sub_queue = None
+        self.video_id = None
 
     @property
     def is_downloaded(self):
@@ -179,7 +180,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
     @property
     def thumbnail(self):
         if not self.youtube_data:
-            self.youtube_data_thread.join()
+            self.get_youtube_data()
 
         thumbnails = self.youtube_data["snippet"]["thumbnails"]
         ranks = ["maxres", "high", "medium", "standard", "default"]
@@ -243,8 +244,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
             Thread(target=self.search_for_timestamps).start()
 
         if self.youtube_data is None:
-            self.youtube_data_thread = Thread(target=self.get_youtube_data)
-            self.youtube_data_thread.start()
+            Thread(target=self.get_youtube_data).start()
 
         self.searched_additional_information = True
 
@@ -262,6 +262,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         try:
             self.youtube_data = resp.json()["items"][0]
         except:
+            print(self.video_id)
             print(resp.json())
             raise
 
