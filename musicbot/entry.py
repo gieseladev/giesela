@@ -166,6 +166,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.provided_song_timestamps = provided_song_timestamps
         self._spotify_track = spotify_track
         self.youtube_data = youtube_data
+        self.running_threads = []
 
         if update_additional_information:
             self.search_additional_info()
@@ -241,13 +242,19 @@ class URLPlaylistEntry(BasePlaylistEntry):
 
     def search_additional_info(self):
         if self._spotify_track is None:
-            Thread(target=self.threaded_spotify_search).start()
+            t = Thread(target=self.threaded_spotify_search)
+            t.start()
+            self.running_threads.append(t)
 
         if self.provided_song_timestamps is None:
-            Thread(target=self.search_for_timestamps).start()
+            t = Thread(target=self.search_for_timestamps)
+            t.start()
+            self.running_threads.append(t)
 
         if self.youtube_data is None:
-            Thread(target=self.get_youtube_data).start()
+            t = Thread(target=self.get_youtube_data).start()
+            t.start()
+            self.running_threads.append(t)
 
         self.searched_additional_information = True
 
@@ -301,7 +308,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
             "spotify_track": self.spotify_track.get_dict() if self.spotify_track is not None else None,
             "provided_song_timestamps": self.provided_song_timestamps,
             "youtube_data": self.youtube_data,
-            "thumbnail": self.thumbnail
+            "thumbnail": self.thumbnail if self.youtube_data else None
         }
         return data
 
