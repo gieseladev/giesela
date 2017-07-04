@@ -198,33 +198,45 @@ def ordinal(n, combine=False):
 
 def clean_songname(query):
     """Clean a Youtube video title so it's shorter and easier to read."""
-    to_remove = [
-        "ost", "original sound track", "original soundtrack", "from",
-        "with lyrics", "lyrics", "hd", "soundtrack", "original", "official",
-        "feat", "ft", "creditless", "music", "video", "edition", "special",
-        "version", "ver", "dvd", "new", "raw", "textless", "mp3", "avi", "mp4",
-        "english", "eng", "with", "album", "theme", "full", "1080", "1080p",
-        "720", "720p", "4k", "japanese", "op", "audio"
-    ]
+    to_remove = (
+        "1080", "1080p", "4k", "720", "720p", "album", "amv", "audio", "avi",
+        "creditless", "dvd", "edition", "eng", "english", "feat", "from", "ft",
+        "full", "hd", "jap", "japanese", "lyrics", "mix", "mp3", "mp4", "music",
+        "new", "official", "op", "opening", "original", "original sound track",
+        "original soundtrack", "ost", "raw", "size", "soundtrack", "special",
+        "textless", "theme", "tv", "ver", "version", "video", "with",
+        "with lyrics"
+    )
 
-    replace_with_dash = [r"\|", "by"]
+    replacers = (
+        ((r"\|", r"(^|\W)by(\W|$)"), " - "),
+        ((r"\(.*\)",), " ")
+    )
 
-    special_regex = [(r"\b([\w\s]{3,})\b(?=.*\1)", ""),
-                     (r"\(f(?:ea)?t\.?\s?([\w\s]{2,})\)", r" & \1")]
+    special_regex = (
+        (r"\b([\w\s]{3,})\b(?=.*\1)", ""),
+        #(r"\(f(?:ea)?t\.?\s?([\w\s\&\-\']{2,})\)", r" & \1")
+    )
+    special_regex_after = (
+        (r"([^\w\s\'])", r" \1 "),
+    )
 
     for target, replacement in special_regex:
         query = re.sub(target, replacement, query, flags=re.IGNORECASE)
 
-    for key in replace_with_dash:
-        query = re.sub(r"(^|\W)" + key + r"(\W|$)",
-                       " - ", query, flags=re.IGNORECASE)
+    for targets, replacement in replacers:
+        for target in targets:
+            query = re.sub(target, replacement, query, flags=re.IGNORECASE)
 
     for key in to_remove:
         # mainly using \W over \b because I want to match [HD] too
         query = re.sub(r"(^|\W)" + key + r"(\W|$)",
                        " ", query, flags=re.IGNORECASE)
 
-    query = re.sub(r"[^\w\s\-\&',]", " ", query)
+    for target, replacement in special_regex_after:
+        query = re.sub(target, replacement, query, flags=re.IGNORECASE)
+
+    query = re.sub(r"[^\w\s\-\&\',]", " ", query)
     query = re.sub(r"\s+", " ", query)
 
     return query.strip(" -&").title()
