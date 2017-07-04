@@ -5200,10 +5200,11 @@ class MusicBot(discord.Client):
             await self.cmd_goto(server, channel, [author, ], author, [])
 
     @block_user
-    async def cmd_execute(self, channel, author, server, leftover_args, player=None):
-        statement = " ".join(leftover_args)
-        statement = statement.replace("/n/", "\n")
-        statement = statement.replace("/t/", "\t")
+    @command_prefix("2.0.2", 1484676180, {
+        "3.8.3": (1499184914, "Can now use multiline statements without having to use tricks like /n/")
+    })
+    async def cmd_execute(self, channel, author, server, raw_content, player=None):
+        statement = raw_content
         beautiful_statement = "```python\n{}\n```".format(statement)
 
         statement = "async def func():\n{}".format(indent(statement, "\t"))
@@ -5963,12 +5964,16 @@ class MusicBot(discord.Client):
 
         argspec = inspect.signature(handler)
         params = argspec.parameters.copy()
+        raw_content = message_content.partition(" ")[2]
 
         # noinspection PyBroadException
         try:
             handler_kwargs = {}
             if params.pop('message', None):
                 handler_kwargs['message'] = message
+
+            if params.pop("raw_content", None):
+                handler_kwargs["raw_content"] = raw_content
 
             if params.pop('channel', None):
                 handler_kwargs['channel'] = message.channel
