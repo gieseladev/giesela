@@ -147,7 +147,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.playlist = queue
         self.url = url
         self.video_id = re.search(
-            r"(?:(?:https?:\/\/)(?:www)?\.?(?:youtu\.?be)(?:\.com)?\/(?:.*[=/])*)([^= &?/\r\n]***REMOVED***8,11***REMOVED***)", url).group(1)
+            r"(?:https?:\/***REMOVED***2***REMOVED***)?(?:w***REMOVED***3***REMOVED***\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)", url).group(1)
         self._title = title
         self.duration = duration
         self.end_seconds = end_seconds if end_seconds else duration
