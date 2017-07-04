@@ -209,15 +209,19 @@ def clean_songname(query):
     )
 
     replacers = (
+        # replace common indicators for the artist with a simple dash
         ((r"\|", r"(^|\W)by(\W|$)"), " - "),
+        # remove all parentheses and their content
         ((r"\(.*\)",), " ")
     )
 
     special_regex = (
-        (r"\b([\w\s]{3,})\b(?=.*\1)", ""),
-        #(r"\(f(?:ea)?t\.?\s?([\w\s\&\-\']{2,})\)", r" & \1")
+        # (r"\b([\w\s]{3,})\b(?=.*\1)", ""),
+        # (r"\(f(?:ea)?t\.?\s?([\w\s\&\-\']{2,})\)", r" & \1"),
     )
     special_regex_after = (
+        # make sure that everything apart from ' has space ("test-test"
+        # converts to "test - test")
         (r"([^\w\s\'])", r" \1 "),
     )
 
@@ -236,10 +240,25 @@ def clean_songname(query):
     for target, replacement in special_regex_after:
         query = re.sub(target, replacement, query, flags=re.IGNORECASE)
 
+    # get rid of words that repeat twice or more
+    repeating_words = re.search(
+        r"((?:\w+(?:\s|\b)){2,}).+(\1)", query, flags=re.IGNORECASE)
+    if repeating_words:
+        repetition_start, repetition_end = repeating_words.start(
+            2), repeating_words.end(2)
+        query = query[:repetition_start] + query[repetition_end:]
+
+    # remove everything apart from the few allowed characters
     query = re.sub(r"[^\w\s\-\&\',]", " ", query)
+    # remove unnecessary whitespaces
     query = re.sub(r"\s+", " ", query)
 
-    return query.strip(" -&").title()
+    # title everything except if it's already UPPER because then it's probably
+    # by design
+    query = " ".join(w.title() if not w.isupper()
+                     else w for w in query.split())
+
+    return query.strip(" -&,")
 
 
 def _run_timestamp_matcher(text):
