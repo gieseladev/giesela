@@ -182,11 +182,14 @@ class URLPlaylistEntry(BasePlaylistEntry):
         if not self.youtube_data:
             self.get_youtube_data()
 
-        thumbnails = self.youtube_data["snippet"]["thumbnails"]
-        ranks = ["maxres", "high", "medium", "standard", "default"]
-        for res in ranks:
-            if res in thumbnails:
-                return thumbnails[res]["url"]
+        try:
+            thumbnails = self.youtube_data["snippet"]["thumbnails"]
+            ranks = ["maxres", "high", "medium", "standard", "default"]
+            for res in ranks:
+                if res in thumbnails:
+                    return thumbnails[res]["url"]
+        except (KeyError, TypeError):
+            return None
 
     @property
     def spotify_track(self):
@@ -259,8 +262,14 @@ class URLPlaylistEntry(BasePlaylistEntry):
     def get_youtube_data(self):
         resp = requests.get(
             "https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo&part=snippet,statistics&id=" + self.video_id)
+        items = resp.json()["items"]
+
+        if not items:
+            # video doesn't exist
+            return
+
         try:
-            self.youtube_data = resp.json()["items"][0]
+            self.youtube_data = items[0]
         except:
             print(self.video_id)
             print(resp.json())
