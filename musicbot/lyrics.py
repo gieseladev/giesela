@@ -68,7 +68,7 @@ def _extract_lyrics_lyrical_nonsense(url):
 
     bs = BeautifulSoup(content, "lxml")
     # take the English version if there is one, otherwise use the default one
-    lyrics_window = bs.find_all("div", {"id": "English"})[
+    lyrics_window = bs.find_all("div", {"id": "Romaji"})[
         0] or bs.find_all("div", {"id": "Lyrics"})[0]
     lyrics = lyrics_window.text
     return lyrics.strip()
@@ -131,4 +131,4 @@ lyric_parsers = {"genius.com": _extract_lyrics_genius,
                  "www.animelyrics.com": _extract_lyrics_animelyrics,
                  "www.musixmatch.com": _extract_lyrics_musixmatch}
 
-# print(search_for_lyrics("Samm Henshaw - Our Love"))
+# print(search_for_lyrics("前前前世"))

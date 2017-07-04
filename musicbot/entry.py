@@ -27,6 +27,7 @@ class BasePlaylistEntry:
         self.provided_song_timestamps = None
         self.searched_additional_information = False
         self._sub_queue = None
+        self.thumbnail = None
 
     @property
     def is_downloaded(self):
