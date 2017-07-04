@@ -27,7 +27,6 @@ class BasePlaylistEntry:
         self.provided_song_timestamps = None
         self.searched_additional_information = False
         self._sub_queue = None
-        self.thumbnail = None
 
     @property
     def is_downloaded(self):
@@ -39,6 +38,10 @@ class BasePlaylistEntry:
     @property
     def provides_timestamps(self):
         return self.provided_song_timestamps is not None
+
+    @property
+    def thumbnail(self):
+        return None
 
     def sub_queue(self, min_progress=-1):
         if not self.provides_timestamps:
