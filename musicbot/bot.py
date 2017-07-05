@@ -4226,7 +4226,8 @@ class MusicBot(discord.Client):
         "3.6.1": (1497969463, "when saving a playlist, list all changes"),
         "3.6.8": (1498162378, "checking whether start and end indices are numbers"),
         "3.6.9": (1498163686, "Special handling for sorting in playlist builder"),
-        "3.7.0": (1498233256, "Changelog bug fixes")
+        "3.7.0": (1498233256, "Changelog bug fixes"),
+        "3.8.5": (1499279145, "Added \"rebuild\" extra command to clean and fix a playlist")
     })
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -4759,7 +4760,7 @@ class MusicBot(discord.Client):
                                 avg_time = sum(times) / float(len(times))
                                 expected_time = avg_time * \
                                     (total_entries - ind - 1)
-                                await self.safe_edit_message(percentage_message, "{} [{}%] ({} remaining)".format(create_bar((ind + 1) / total_entries, length=20), round(100 * (ind + 1) / total_entries), format_time(expected_time)))
+                                await self.safe_edit_message(percentage_message, "{} [{}%] ({} remaining)".format(create_bar((ind + 1) / total_entries, length=20), round(100 * (ind + 1) / total_entries), format_time(expected_time, max_specifications=2, combine_with_and=True)))
 
                         await self.safe_delete_message(info_message)
                         await self.safe_delete_message(percentage_message)
@@ -5294,7 +5295,8 @@ class MusicBot(discord.Client):
 
     @block_user
     @command_info("2.0.2", 1484676180, {
-        "3.8.3": (1499184914, "Can now use multiline statements without having to use tricks like /n/")
+        "3.8.3": (1499184914, "Can now use multiline statements without having to use tricks like /n/"),
+        "3.8.5": (1499279145, "Better code display")
     })
     async def cmd_execute(self, channel, author, server, raw_content, player=None):
         statement = raw_content.strip()
