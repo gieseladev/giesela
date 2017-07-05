@@ -459,13 +459,7 @@ def round_to_interval(num, interval=5):
     return int(interval * round(float(num) / interval))
 
 
-def format_time(s,
-                round_seconds=True,
-                round_base=1,
-                max_specifications=3,
-                combine_with_and=False,
-                replace_one=False,
-                unit_length=2):
+def format_time(s, round_seconds=True, round_base=1, max_specifications=3, combine_with_and=False, replace_one=False, unit_length=2):
     if round_seconds:
         s = round_to_interval(s, round_base)
 
