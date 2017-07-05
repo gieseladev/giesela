@@ -79,12 +79,13 @@ def get_entry_dict(entry, player, loop):
             if player.current_entry == entry:  # this song is already active
                 sub_progress, sub_duration = entry.get_local_progress(
                     player.progress)
-                sub_title = entry.get_current_song_from_timestamp(
+                sub_entry = entry.get_current_song_from_timestamp(
                     player.progress)
                 timestamp_data.update({
-                    "sub_title": sub_title,
+                    "sub_title": sub_entry["name"],
                     "sub_progress": sub_progress,
-                    "sub_duration": sub_duration
+                    "sub_duration": sub_duration,
+                    "sub_index":  sub_entry["index"]
                 })
             entry_dict.update(timestamp_data)
         else:  # normal URLPlaylistEntry
