@@ -4227,7 +4227,8 @@ class MusicBot(discord.Client):
         "3.6.8": (1498162378, "checking whether start and end indices are numbers"),
         "3.6.9": (1498163686, "Special handling for sorting in playlist builder"),
         "3.7.0": (1498233256, "Changelog bug fixes"),
-        "3.8.5": (1499279145, "Added \"rebuild\" extra command to clean and fix a playlist")
+        "3.8.5": (1499279145, "Added \"rebuild\" extra command to clean and fix a playlist"),
+        "3.8.7": (1499290119, "Due to a mistake \"rebuild\" always led to the deletion of the first entry.")
     })
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -4748,7 +4749,7 @@ class MusicBot(discord.Client):
                         start_time = time.time()
 
                         async for ind, entry in entry_generator:
-                            if all((ind, entry)):
+                            if entry:
                                 rebuild_safe_entries.append(entry)
                             else:
                                 rebuild_removed_entries.append(ind)
