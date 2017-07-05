@@ -1,14 +1,15 @@
-import asyncio
-import audioop
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
-from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
+
+import asyncio
+import audioop
+from enum import Enum
 
 from .entry import StreamPlaylistEntry
 from .exceptions import FFmpegError, FFmpegWarning
@@ -410,7 +411,7 @@ class MusicPlayer(EventEmitter):
             print("[TIMESTAMP-ENTRY] nothing's changed since last time!")
         else:
             # print("Expected: ***REMOVED******REMOVED***, Got: ***REMOVED******REMOVED***".format(expected_progress, self.progress))
-            if not ((expected_progress + .75) > self.progress > (expected_progress - .75)):
+            if not ((expected_progress + 1.5) > self.progress > (expected_progress - 1.5)):
                 print("[TIMESTAMP-ENTRY] Expected progress ***REMOVED******REMOVED*** but got ***REMOVED******REMOVED***; assuming there's already another one running".format(
                     expected_progress, self.progress))
                 return
