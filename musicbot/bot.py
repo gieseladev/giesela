@@ -58,10 +58,10 @@ from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .settings import Settings
 from .tungsten import Tungsten
-from .utils import (clean_songname, create_bar, escape_dis, format_time,
-                    get_related_videos, hex_to_dec, load_file, nice_cut,
-                    ordinal, paginate, parse_timestamp, prettydate,
-                    random_line, to_timestamp, write_file)
+from .utils import (create_bar, escape_dis, format_time, get_related_videos,
+                    hex_to_dec, load_file, nice_cut, ordinal, paginate,
+                    parse_timestamp, prettydate, random_line, to_timestamp,
+                    write_file)
 from .web_socket_server import GieselaServer
 
 load_opus_lib()
@@ -2245,7 +2245,7 @@ class MusicBot(discord.Client):
                 origin_text = "by **{}**".format(item.meta["author"].name)
 
             lines.append("`{}.` **{}** {}".format(
-                i, nice_cut(clean_songname(item.title), 40), origin_text))
+                i, nice_cut(item.title, 40), origin_text))
 
             # if item.provides_timestamps:
             #     for ind, sub_item in enumerate(item.sub_queue(), 1):
@@ -2286,7 +2286,7 @@ class MusicBot(discord.Client):
         lines = []
         for ind, entry in enumerate(player.playlist.history, 1):
             lines.append(
-                "`{}.` **{}** {} ago".format(ind, nice_cut(clean_songname(entry.title), 40),
+                "`{}.` **{}** {} ago".format(ind, nice_cut(entry.title, 40),
                                              format_time(
                     seconds_passed,
                     round_seconds=True,
@@ -5303,7 +5303,7 @@ class MusicBot(discord.Client):
         beautiful_statement = "```python\n{}\n```".format(statement)
 
         statement = "async def func():\n{}".format(indent(statement, "\t"))
-        await self.safe_send_message(channel, "**RUNNING CODE**\n{}```".format(beautiful_statement))
+        await self.safe_send_message(channel, "**RUNNING CODE**\n{}".format(beautiful_statement))
 
         env = {}
         env.update(globals())
