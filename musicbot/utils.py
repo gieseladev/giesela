@@ -256,13 +256,18 @@ def clean_songname(query):
     query = re.sub(r"\s+", " ", query)
 
     no_capitalisation = ("a", "an", "and", "but", "for", "his",
-                         "my", "nor", "of", "or", "s", "t", "the", "to", "your")
+                         "my", "nor", "of", "or", "s", "t", "the", "to", "your", "re", "my")
 
     # title everything except if it's already UPPER because then it's probably
     # by design. Also don't title no-title words (I guess) if they're not in
     # first place
-    query = " ".join(w if (w.isupper() and len(w) > 2) or (w.lower() in no_capitalisation and ind != 0)
-                     else w.title() for ind, w in enumerate(query.split()))
+    word_elements = []
+    parts = re.split("(\W+)", query)
+    for sub_ind, part in enumerate(parts):
+        word_elements.append(part if (part.isupper() and len(part) > 2) or (
+            part.lower() in no_capitalisation and sub_ind != 0) else part.title())
+
+    query = "".join(word_elements)
 
     return query.strip(" -&,")
 
