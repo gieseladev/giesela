@@ -254,10 +254,14 @@ def clean_songname(query):
     # remove unnecessary whitespaces
     query = re.sub(r"\s+", " ", query)
 
+    no_capitalisation = ("s", "of", "to", "a", "an", "the",
+                         "and", "but", "for", "or", "nor")
+
     # title everything except if it's already UPPER because then it's probably
-    # by design
-    query = " ".join(w.title() if not w.isupper()
-                     else w for w in query.split())
+    # by design. Also don't title no-title words (I guess) if they're not in
+    # first place
+    query = " ".join(w if w.isupper() or (w in no_capitalisation and ind != 0)
+                     else w.title() for ind, w in enumerate(query.split()))
 
     return query.strip(" -&,")
 
