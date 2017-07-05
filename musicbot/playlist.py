@@ -209,6 +209,15 @@ class Playlist(EventEmitter):
         )
         return entry
 
+    async def get_entries_from_urls_gen(self, *urls, **meta):
+        for ind, url in enumerate(urls):
+            try:
+                entry = await self.get_entry(url, **meta)
+            except (ExtractionError, WrongEntryTypeError) as e:
+                print("Error while dealing with url \"{}\":\n{}".format(url, e))
+                yield ind, None
+            yield ind, entry
+
     async def add_entry_next(self, song_url, **meta):
         """
             Validates and adds a song_url to be played. This does not start the download of the song.
