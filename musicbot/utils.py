@@ -1,5 +1,6 @@
 import datetime
 import decimal
+import json
 import random
 import re
 import unicodedata
@@ -78,12 +79,13 @@ def get_entry_dict(entry, player, loop):
             if player.current_entry == entry:  # this song is already active
                 sub_progress, sub_duration = entry.get_local_progress(
                     player.progress)
-                sub_title = entry.get_current_song_from_timestamp(
+                sub_entry = entry.get_current_song_from_timestamp(
                     player.progress)
                 timestamp_data.update(***REMOVED***
-                    "sub_title": sub_title,
+                    "sub_title": sub_entry["name"],
                     "sub_progress": sub_progress,
-                    "sub_duration": sub_duration
+                    "sub_duration": sub_duration,
+                    "sub_index":  sub_entry["index"]
                 ***REMOVED***)
             entry_dict.update(timestamp_data)
         else:  # normal URLPlaylistEntry
@@ -145,7 +147,7 @@ def write_file(filename, contents):
 
 def create_bar(progress, length=10, full_char="■", half_char=None, empty_char="□"):
     use_halves = half_char is not None
-    fill_to = int(2 * length * progress)
+    fill_to = round(2 * length * progress)
     residue = fill_to % 2
     chrs = []
     for i in range(1, length + 1):
@@ -198,36 +200,71 @@ def ordinal(n, combine=False):
 
 def clean_songname(query):
     """Clean a Youtube video title so it's shorter and easier to read."""
-    to_remove = [
-        "ost", "original sound track", "original soundtrack", "from",
-        "with lyrics", "lyrics", "hd", "soundtrack", "original", "official",
-        "feat", "ft", "creditless", "music", "video", "edition", "special",
-        "version", "ver", "dvd", "new", "raw", "textless", "mp3", "avi", "mp4",
-        "english", "eng", "with", "album", "theme", "full", "1080", "1080p",
-        "720", "720p", "4k", "japanese", "op", "audio"
-    ]
+    to_remove = (
+        "1080", "1080p", "4k", "720", "720p", "album", "amv", "audio", "avi",
+        "creditless", "dvd", "edition", "eng", "english", "feat", "from", "ft",
+        "full", "hd", "jap", "japanese", "lyrics", "mix", "mp3", "mp4", "music",
+        "new", "official", "original", "original sound track",
+        "original soundtrack", "ost", "raw", "size", "soundtrack", "special",
+        "textless", "theme", "tv", "ver", "version", "video", "with",
+        "with lyrics"
+    )
 
-    replace_with_dash = [r"\|", "by"]
+    replacers = (
+        # replace common indicators for the artist with a simple dash
+        ((r"\|", r"(^|\W)by(\W|$)"), " - "),
+        # remove all parentheses and their content and remove "opening 5" stuff
+        ((r"\(.*\)", r"op(?:ening)?(?:\s+\d***REMOVED***1,2***REMOVED***)?"), " "),
+    )
 
-    special_regex = [(r"\b([\w\s]***REMOVED***3,***REMOVED***)\b(?=.*\1)", ""),
-                     (r"\(f(?:ea)?t\.?\s?([\w\s]***REMOVED***2,***REMOVED***)\)", r" & \1")]
+    special_regex = (
+        # (r"\b([\w\s]***REMOVED***3,***REMOVED***)\b(?=.*\1)", ""),
+        # (r"\(f(?:ea)?t\.?\s?([\w\s\&\-\']***REMOVED***2,***REMOVED***)\)", r" & \1"),
+    )
+    special_regex_after = (
+        # make sure that everything apart from ' has space ("test-test"
+        # converts to "test - test")
+        (r"([^\w\s\'])", r" \1 "),
+    )
 
     for target, replacement in special_regex:
         query = re.sub(target, replacement, query, flags=re.IGNORECASE)
 
-    for key in replace_with_dash:
-        query = re.sub(r"(^|\W)" + key + r"(\W|$)",
-                       " - ", query, flags=re.IGNORECASE)
+    for targets, replacement in replacers:
+        for target in targets:
+            query = re.sub(target, replacement, query, flags=re.IGNORECASE)
 
     for key in to_remove:
         # mainly using \W over \b because I want to match [HD] too
         query = re.sub(r"(^|\W)" + key + r"(\W|$)",
                        " ", query, flags=re.IGNORECASE)
 
-    query = re.sub(r"[^\w\s\-\&',]", " ", query)
+    for target, replacement in special_regex_after:
+        query = re.sub(target, replacement, query, flags=re.IGNORECASE)
+
+    # # get rid of words that repeat twice or more
+    # repeating_words = re.search(
+    #     r"((?:\w+(?:\s|\b))***REMOVED***2,***REMOVED***).+(\1)", query, flags=re.IGNORECASE)
+    # if repeating_words:
+    #     repetition_start, repetition_end = repeating_words.start(
+    #         2), repeating_words.end(2)
+    #     query = query[:repetition_start] + query[repetition_end:]
+
+    # remove everything apart from the few allowed characters
+    query = re.sub(r"[^\w\s\-\&\',]", " ", query)
+    # remove unnecessary whitespaces
     query = re.sub(r"\s+", " ", query)
 
-    return query.strip(" -&").title()
+    no_capitalisation = ("a", "an", "and", "but", "for", "his",
+                         "my", "nor", "of", "or", "s", "t", "the", "to", "your")
+
+    # title everything except if it's already UPPER because then it's probably
+    # by design. Also don't title no-title words (I guess) if they're not in
+    # first place
+    query = " ".join(w if (w.isupper() and len(w) > 2) or (w.lower() in no_capitalisation and ind != 0)
+                     else w.title() for ind, w in enumerate(query.split()))
+
+    return query.strip(" -&,")
 
 
 def _run_timestamp_matcher(text):
@@ -314,6 +351,42 @@ def get_video_description(url):
     return bs.text
 
 
+def _choose_best_thumbnail(thumbnails):
+    ranks = ["maxres", "high", "medium", "standard", "default"]
+    for res in ranks:
+        if res in thumbnails:
+            return thumbnails[res]["url"]
+
+
+def get_related_videos(videoId):
+    params = ***REMOVED***
+        "part": "snippet",
+        "relatedToVideoId": videoId,
+        "topicId": "/m/04rlf",
+        "type": "video",
+        "key": "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo"
+    ***REMOVED***
+    resp = requests.get(
+        "https://www.googleapis.com/youtube/v3/search", params=params)
+    data = resp.json()
+    videos = data["items"]
+    if not videos:
+        return None
+    video_list = []
+    for vid in videos:
+        video = ***REMOVED***
+            "id": vid["id"]["videoId"],
+            "title": vid["snippet"]["title"],
+            "channel": vid["snippet"]["channelTitle"],
+            "thumbnail": _choose_best_thumbnail(vid["snippet"]["thumbnails"]),
+            "url": "https://www.youtube.com/watch?v=" + vid["id"]["videoId"]
+        ***REMOVED***
+
+        video_list.append(video)
+
+    return video_list
+
+
 def parse_timestamp(timestamp):
     parts = timestamp.split(":")
     if len(parts) < 1:  # Shouldn't occur, but who knows?
@@ -387,13 +460,7 @@ def round_to_interval(num, interval=5):
     return int(interval * round(float(num) / interval))
 
 
-def format_time(s,
-                round_seconds=True,
-                round_base=1,
-                max_specifications=3,
-                combine_with_and=False,
-                replace_one=False,
-                unit_length=2):
+def format_time(s, round_seconds=True, round_base=1, max_specifications=3, combine_with_and=False, replace_one=False, unit_length=2):
     if round_seconds:
         s = round_to_interval(s, round_base)
 

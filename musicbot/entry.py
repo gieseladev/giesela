@@ -27,6 +27,7 @@ class BasePlaylistEntry:
         self.provided_song_timestamps = None
         self.searched_additional_information = False
         self._sub_queue = None
+        self.video_id = None
 
     @property
     def is_downloaded(self):
@@ -38,6 +39,10 @@ class BasePlaylistEntry:
     @property
     def provides_timestamps(self):
         return self.provided_song_timestamps is not None
+
+    @property
+    def thumbnail(self):
+        return None
 
     def sub_queue(self, min_progress=-1):
         if not self.provides_timestamps:
@@ -147,7 +152,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.playlist = queue
         self.url = url
         self.video_id = re.search(
-            r"(?:(?:https?:\/\/)(?:www)?\.?(?:youtu\.?be)(?:\.com)?\/(?:.*[=/])*)([^= &?/\r\n]***REMOVED***8,11***REMOVED***)", url).group(1)
+            r"(?:https?:\/***REMOVED***2***REMOVED***)?(?:w***REMOVED***3***REMOVED***\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)", url).group(1)
         self._title = title
         self.duration = duration
         self.end_seconds = end_seconds if end_seconds else duration
@@ -161,6 +166,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.provided_song_timestamps = provided_song_timestamps
         self._spotify_track = spotify_track
         self.youtube_data = youtube_data
+        self.running_threads = []
 
         if update_additional_information:
             self.search_additional_info()
@@ -175,20 +181,23 @@ class URLPlaylistEntry(BasePlaylistEntry):
     @property
     def thumbnail(self):
         if not self.youtube_data:
-            self.youtube_data_thread.join()
+            self.get_youtube_data()
 
-        thumbnails = self.youtube_data["snippet"]["thumbnails"]
-        ranks = ["maxres", "high", "medium", "standard", "default"]
-        for res in ranks:
-            if res in thumbnails:
-                return thumbnails[res]["url"]
+        try:
+            thumbnails = self.youtube_data["snippet"]["thumbnails"]
+            ranks = ["maxres", "high", "medium", "standard", "default"]
+            for res in ranks:
+                if res in thumbnails:
+                    return thumbnails[res]["url"]
+        except (KeyError, TypeError):
+            return None
 
     @property
     def spotify_track(self):
         return self._spotify_track if self._spotify_track and self._spotify_track.certainty > .6 else None
 
     def threaded_spotify_search(self):
-        self._spotify_track = SpotifyTrack.from_query(self._title)
+        self._spotify_track = SpotifyTrack.from_query(self.title)
 
     @classmethod
     def from_dict(cls, playlist, data, update_additional_information=True):
@@ -217,30 +226,24 @@ class URLPlaylistEntry(BasePlaylistEntry):
             if "playlist" in data["meta"]:
                 meta["playlist"] = data["meta"]["playlist"]
 
-        return cls(
-            playlist,
-            url,
-            title,
-            duration,
-            filename,
-            start_seconds,
-            end_seconds,
-            spotify_track=spotify_track,
-            provided_song_timestamps=provided_song_timestamps,
-            youtube_data=youtube_data,
-            update_additional_information=update_additional_information,
-            **meta)
+        return cls(playlist, url, title, duration, filename, start_seconds, end_seconds, provided_song_timestamps=provided_song_timestamps, update_additional_information=update_additional_information, **meta)
 
     def search_additional_info(self):
+        print("[ENTRY] Searching for additional information")
         if self._spotify_track is None:
-            Thread(target=self.threaded_spotify_search).start()
+            t = Thread(target=self.threaded_spotify_search)
+            t.start()
+            self.running_threads.append(t)
 
         if self.provided_song_timestamps is None:
-            Thread(target=self.search_for_timestamps).start()
+            t = Thread(target=self.search_for_timestamps)
+            t.start()
+            self.running_threads.append(t)
 
         if self.youtube_data is None:
-            self.youtube_data_thread = Thread(target=self.get_youtube_data)
-            self.youtube_data_thread.start()
+            t = Thread(target=self.get_youtube_data)
+            t.start()
+            self.running_threads.append(t)
 
         self.searched_additional_information = True
 
@@ -255,9 +258,16 @@ class URLPlaylistEntry(BasePlaylistEntry):
     def get_youtube_data(self):
         resp = requests.get(
             "https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo&part=snippet,statistics&id=" + self.video_id)
+        items = resp.json()["items"]
+
+        if not items:
+            # video doesn't exist
+            return
+
         try:
-            self.youtube_data = resp.json()["items"][0]
+            self.youtube_data = items[0]
         except:
+            print(self.video_id)
             print(resp.json())
             raise
 
@@ -287,7 +297,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
             "spotify_track": self.spotify_track.get_dict() if self.spotify_track is not None else None,
             "provided_song_timestamps": self.provided_song_timestamps,
             "youtube_data": self.youtube_data,
-            "thumbnail": self.thumbnail
+            "thumbnail": self.thumbnail if self.youtube_data else None
         ***REMOVED***
         return data
 

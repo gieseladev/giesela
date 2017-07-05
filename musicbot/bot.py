@@ -59,9 +59,9 @@ from .saved_playlists import Playlists
 from .settings import Settings
 from .tungsten import Tungsten
 from .utils import (clean_songname, create_bar, escape_dis, format_time,
-                    hex_to_dec, load_file, nice_cut, ordinal, paginate,
-                    parse_timestamp, prettydate, random_line, to_timestamp,
-                    write_file)
+                    get_related_videos, hex_to_dec, load_file, nice_cut,
+                    ordinal, paginate, parse_timestamp, prettydate,
+                    random_line, to_timestamp, write_file)
 from .web_socket_server import GieselaServer
 
 load_opus_lib()
@@ -1521,8 +1521,7 @@ class MusicBot(discord.Client):
 
                 raise e
 
-    async def _get_play_playlist_async_entries(self, player, channel, author,
-                                               playlist_url, extractor_type):
+    async def _get_play_playlist_async_entries(self, player, channel, author, playlist_url, extractor_type):
         info = await self.downloader.extract_info(
             player.playlist.loop, playlist_url, download=False, process=False)
 
@@ -1766,6 +1765,72 @@ class MusicBot(discord.Client):
                 await self.safe_delete_message(interface_message)
                 await self.safe_delete_message(response_message)
                 return Response("Added `***REMOVED******REMOVED***` to playlist \"***REMOVED******REMOVED***\".".format(add_entry.title, playlistname.title()))
+
+            await self.safe_delete_message(result_message)
+            await self.safe_delete_message(interface_message)
+            await self.safe_delete_message(response_message)
+
+    @block_user
+    @command_info("3.8.4", 1499188226)
+    async def cmd_suggest(self, player, channel, author):
+        """
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***suggest`
+        ///|Explanation
+        Find similar videos to your current one
+        """
+
+        if not player.current_entry:
+            return Response("Can't give you any suggestions when there's nothing playing.")
+
+        vidId = player.current_entry.video_id
+
+        if not vidId:
+            return Response("Can't give you any suggestions for this entry.")
+
+        videos = get_related_videos(vidId)
+
+        if not videos:
+            return Response("Couldn't find anything.")
+
+        result_string = "**Result ***REMOVED***0***REMOVED***/***REMOVED***1***REMOVED*****\n***REMOVED***2***REMOVED***"
+        interface_string = "**Commands:**\n`play` play this result\n\n`n` next result\n`p` previous result\n`exit` abort and exit"
+
+        current_result_index = 0
+        total_results = len(videos)
+
+        while True:
+            current_result = videos[current_result_index]
+
+            result_message = await self.safe_send_message(channel, result_string.format(current_result_index + 1, total_results, current_result["url"]))
+            interface_message = await self.safe_send_message(channel, interface_string)
+            response_message = await self.wait_for_message(100, author=author, channel=channel, check=lambda msg: msg.content.strip().lower().split()[0] in ("play", "n", "p", "exit"))
+
+            if not response_message:
+                await self.safe_delete_message(result_message)
+                await self.safe_delete_message(interface_message)
+                await self.safe_delete_message(response_message)
+                return Response("Aborting. [Timeout]")
+
+            content = response_message.content.strip()
+            command, *args = content.lower().split()
+
+            if command == "exit":
+                await self.safe_delete_message(result_message)
+                await self.safe_delete_message(interface_message)
+                await self.safe_delete_message(response_message)
+                return Response("Okay then. Suggest(?) again soon")
+            elif command in "np":
+                # feels hacky but is actully genius
+                current_result_index += ***REMOVED***"n": 1, "p": -1***REMOVED***[command]
+                current_result_index %= total_results
+            elif command == "play":
+                await self.send_typing(channel)
+                await self.cmd_play(player, channel, author, [], current_result["url"])
+                await self.safe_delete_message(result_message)
+                await self.safe_delete_message(interface_message)
+                await self.safe_delete_message(response_message)
+                return Response("Alright, coming right up!")
 
             await self.safe_delete_message(result_message)
             await self.safe_delete_message(interface_message)
@@ -3857,8 +3922,8 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                    str(reaction.emoji).startswith("📽") or
-                    str(reaction.emoji).startswith("💾")
+                str(reaction.emoji).startswith("📽") or
+                str(reaction.emoji).startswith("💾")
                 ) and reaction.count > 1 and user == author:
                 return True
 
@@ -4161,7 +4226,8 @@ class MusicBot(discord.Client):
         "3.6.1": (1497969463, "when saving a playlist, list all changes"),
         "3.6.8": (1498162378, "checking whether start and end indices are numbers"),
         "3.6.9": (1498163686, "Special handling for sorting in playlist builder"),
-        "3.7.0": (1498233256, "Changelog bug fixes")
+        "3.7.0": (1498233256, "Changelog bug fixes"),
+        "3.8.5": (1499279145, "Added \"rebuild\" extra command to clean and fix a playlist")
     ***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -4487,9 +4553,7 @@ class MusicBot(discord.Client):
         save = False
         entries_page = 0
         pl_changes = ***REMOVED***
-            "remove_entries_indexes": [],
             "remove_entries": [],  # used for changelog
-            "new_entries": [],
             "added_entries": [],  # changelog
             "order": None,  # changelog
             "new_name": None
@@ -4499,7 +4563,7 @@ class MusicBot(discord.Client):
 
         interface_string = "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add <query>`: Add a video to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index\n`rename <newname>`: rename the current playlist\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
 
-        extras_string = "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n**Extra functions:**\n`sort <alphabetical | length | random>`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n\n`abort`: return to main screen"
+        extras_string = "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n**Extra functions:**\n`sort <alphabetical | length | random>`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n`rebuild`: clean the playlist by removing broken videos\n\n`abort`: return to main screen"
 
         edit_string = "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n```\nentry_information\n```\n\n**Edit functions:**\n`rename <newname>`: rename the entry\n`setstart <timestamp>`: set the starting time of the song\n`setend <timestamp>`: set the ending time of the song\n\n`abort`: return to main screen"
 
@@ -4571,7 +4635,6 @@ class MusicBot(discord.Client):
 
                         pl_changes["added_entries"].extend(
                             entries)  # just for the changelog
-                        pl_changes["new_entries"].extend(entries)
                         playlist["entries"].extend(entries)
                         playlist["entry_count"] = str(
                             int(playlist["entry_count"]) + len(entries))
@@ -4598,9 +4661,8 @@ class MusicBot(discord.Client):
                         if index >= 0 and index < int(playlist["entry_count"]):
                             indices.append(index)
 
-                    pl_changes["remove_entries_indexes"].extend(indices)
                     pl_changes["remove_entries"].extend(
-                        [playlist["entries"][ind] for ind in indices])  # for the changelog
+                        [(ind, playlist["entries"][ind]) for ind in indices])  # for the changelog
                     playlist["entry_count"] = str(
                         int(playlist["entry_count"]) - len(indices))
                     playlist["entries"] = [
@@ -4624,7 +4686,7 @@ class MusicBot(discord.Client):
 
                 def extras_check(m):
                     return (m.content.split()[0].lower() in [
-                        "abort", "sort", "removeduplicates"
+                        "abort", "sort", "removeduplicates", "rebuild"
                     ])
 
                 extras_message = await self.safe_send_message(
@@ -4646,31 +4708,22 @@ class MusicBot(discord.Client):
                     if cmd == "sort":
                         sort_method = args[0].lower() if args is not None and args[0].lower() in [
                             "alphabetical", "length", "random"] else "alphabetical"
-                        pl_changes["remove_entries_indexes"] = list(
-                            range(len(entries)))
 
                         if sort_method == "alphabetical":
-                            pl_changes["new_entries"] = sorted(
-                                entries, key=lambda entry: entry.title)
                             playlist["entries"] = sorted(
                                 entries, key=lambda entry: entry.title)
                         elif sort_method == "length":
-                            pl_changes["new_entries"] = sorted(
-                                entries, key=lambda entry: entry.duration)
                             playlist["entries"] = sorted(
                                 entries, key=lambda entry: entry.duration)
                         elif sort_method == "random":
                             new_ordered = entries
                             shuffle(new_ordered)
-                            pl_changes["new_entries"] = new_ordered
                             playlist["entries"] = new_ordered
 
                         # bodge for changelog
                         pl_changes["order"] = sort_method
 
                     if cmd == "removeduplicates":
-                        pl_changes["remove_entries_indexes"] = list(
-                            range(len(entries)))
                         urls = []
                         new_list = []
                         for entry in entries:
@@ -4678,11 +4731,53 @@ class MusicBot(discord.Client):
                                 urls.append(entry.url)
                                 new_list.append(entry)
 
-                        pl_changes["new_entries"] = new_list
                         playlist["entries"] = new_list
 
+                    if cmd == "rebuild":
+                        rebuild_safe_entries = []
+                        rebuild_removed_entries = []
+
+                        entry_urls = [entry.url for entry in entries]
+                        entry_generator = player.playlist.get_entries_from_urls_gen(
+                            *entry_urls)
+
+                        total_entries = len(entry_urls)
+                        info_message = await self.safe_send_message(channel, "Rebuilding the playlist. This might take a while, please hold on.")
+                        percentage_message = await self.safe_send_message(channel, "***REMOVED******REMOVED*** [***REMOVED******REMOVED***%]".format(create_bar(0, length=20), 0))
+                        times = []
+                        start_time = time.time()
+
+                        async for ind, entry in entry_generator:
+                            if all((ind, entry)):
+                                rebuild_safe_entries.append(entry)
+                            else:
+                                rebuild_removed_entries.append(ind)
+
+                            times.append(time.time() - start_time)
+                            start_time = time.time()
+
+                            if round(100 * (ind + 1) / total_entries) % 1 == 0:
+                                avg_time = sum(times) / float(len(times))
+                                expected_time = avg_time * \
+                                    (total_entries - ind - 1)
+                                await self.safe_edit_message(percentage_message, "***REMOVED******REMOVED*** [***REMOVED******REMOVED***%] (***REMOVED******REMOVED*** remaining)".format(create_bar((ind + 1) / total_entries, length=20), round(100 * (ind + 1) / total_entries), format_time(expected_time, max_specifications=2, combine_with_and=True)))
+
+                        await self.safe_delete_message(info_message)
+                        await self.safe_delete_message(percentage_message)
+
+                        pl_changes["remove_entries"].extend(
+                            [(ind, playlist["entries"][ind]) for ind in rebuild_removed_entries])  # for the changelog
+                        playlist["entries"] = rebuild_safe_entries
+                        playlist["entry_count"] = str(
+                            len(rebuild_safe_entries))
+                        it, ov = divmod(
+                            int(playlist["entry_count"]), items_per_page)
+                        entries_page = it - 1 if ov == 0 else it
                 await self.safe_delete_message(extras_message)
                 await self.safe_delete_message(resp)
+                await self.safe_delete_message(response_message)
+                await self.safe_delete_message(interface_message)
+                continue
 
             elif split_message[0].lower() == "p":
                 entries_page = (entries_page - 1) % (iterations + 1)
@@ -4698,7 +4793,7 @@ class MusicBot(discord.Client):
             self.log("Closed the playlist builder")
 
         if save:
-            if pl_changes["added_entries"] or pl_changes["remove_entries_indexes"] or pl_changes["new_name"] or pl_changes["order"]:
+            if pl_changes["added_entries"] or pl_changes["remove_entries"] or pl_changes["new_name"] or pl_changes["order"]:
                 c_log = "**CHANGES**\n\n"
                 if pl_changes["added_entries"]:
                     new_entries_string = "\n".join(["    `***REMOVED******REMOVED***.` ***REMOVED******REMOVED***".format(ind, nice_cut(
@@ -4706,7 +4801,7 @@ class MusicBot(discord.Client):
                     c_log += "**New entries**\n***REMOVED******REMOVED***\n".format(new_entries_string)
                 if pl_changes["remove_entries"]:
                     removed_entries_string = "\n".join(
-                        ["    `***REMOVED******REMOVED***.` ***REMOVED******REMOVED***".format(pl_changes["remove_entries_indexes"][ind] + 1, nice_cut(entry.title, 40)) for ind, entry in enumerate(pl_changes["remove_entries"])])
+                        ["    `***REMOVED******REMOVED***.` ***REMOVED******REMOVED***".format(ind + 1, nice_cut(entry.title, 40)) for ind, entry in pl_changes["remove_entries"]])
                     c_log += "**Removed entries**\n***REMOVED******REMOVED***\n".format(
                         removed_entries_string)
                 if pl_changes["order"]:
@@ -4721,8 +4816,7 @@ class MusicBot(discord.Client):
             self.playlists.edit_playlist(
                 savename,
                 player.playlist,
-                new_entries=pl_changes["new_entries"],
-                remove_entries_indexes=pl_changes["remove_entries_indexes"],
+                all_entries=playlist["entries"],
                 new_name=pl_changes["new_name"])
             self.log("Closed the playlist builder and saved the playlist")
 
@@ -5200,13 +5294,16 @@ class MusicBot(discord.Client):
             await self.cmd_goto(server, channel, [author, ], author, [])
 
     @block_user
-    async def cmd_execute(self, channel, author, server, leftover_args, player=None):
-        statement = " ".join(leftover_args)
-        statement = statement.replace("/n/", "\n")
-        statement = statement.replace("/t/", "\t")
+    @command_info("2.0.2", 1484676180, ***REMOVED***
+        "3.8.3": (1499184914, "Can now use multiline statements without having to use tricks like /n/"),
+        "3.8.5": (1499279145, "Better code display")
+    ***REMOVED***)
+    async def cmd_execute(self, channel, author, server, raw_content, player=None):
+        statement = raw_content.strip()
         beautiful_statement = "```python\n***REMOVED******REMOVED***\n```".format(statement)
 
         statement = "async def func():\n***REMOVED******REMOVED***".format(indent(statement, "\t"))
+        await self.safe_send_message(channel, "**RUNNING CODE**\n***REMOVED******REMOVED***```".format(beautiful_statement))
 
         env = ***REMOVED******REMOVED***
         env.update(globals())
@@ -5220,6 +5317,7 @@ class MusicBot(discord.Client):
                 format(traceback.format_exc(), str(e)))
 
         func = env["func"]
+
         try:
             ret = await func()
         except Exception as e:
@@ -5227,8 +5325,7 @@ class MusicBot(discord.Client):
                 "**While executing the statement the following error occured**\n***REMOVED******REMOVED***\n***REMOVED******REMOVED***".
                 format(traceback.format_exc(), str(e)))
 
-        return Response("**CODE**\n***REMOVED******REMOVED***\n**RESULT**\n```python\n***REMOVED******REMOVED***\n```".format(
-            beautiful_statement, str(ret)))
+        return Response("**RESULT**\n```python\n***REMOVED******REMOVED***\n```".format(str(ret)))
 
     @command_info("2.0.3", 1487538840, ***REMOVED***
         "3.3.7": (1497471402, "changed command from \"skipto\" to \"seek\"")
@@ -5929,10 +6026,10 @@ class MusicBot(discord.Client):
             #          message.content)
             return
 
-        command, *args = message_content.split()
-        command = command[len(self.config.command_prefix):].lower().strip(
+        raw_command, *args = message_content.split()
+        command = raw_command[len(self.config.command_prefix):].lower().strip(
         ) if message_content.startswith(
-            self.config.command_prefix) else command.lower().strip()
+            self.config.command_prefix) else raw_command.lower().strip()
 
         handler = getattr(self, 'cmd_%s' % command, None)
         if not handler:
@@ -5963,12 +6060,16 @@ class MusicBot(discord.Client):
 
         argspec = inspect.signature(handler)
         params = argspec.parameters.copy()
+        raw_content = message_content[len(raw_command):]
 
         # noinspection PyBroadException
         try:
             handler_kwargs = ***REMOVED******REMOVED***
             if params.pop('message', None):
                 handler_kwargs['message'] = message
+
+            if params.pop("raw_content", None):
+                handler_kwargs["raw_content"] = raw_content
 
             if params.pop('channel', None):
                 handler_kwargs['channel'] = message.channel
