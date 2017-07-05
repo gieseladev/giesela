@@ -197,7 +197,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         return self._spotify_track if self._spotify_track and self._spotify_track.certainty > .6 else None
 
     def threaded_spotify_search(self):
-        self._spotify_track = SpotifyTrack.from_query(self._title)
+        self._spotify_track = SpotifyTrack.from_query(self.title)
 
     @classmethod
     def from_dict(cls, playlist, data, update_additional_information=True):
@@ -226,21 +226,10 @@ class URLPlaylistEntry(BasePlaylistEntry):
             if "playlist" in data["meta"]:
                 meta["playlist"] = data["meta"]["playlist"]
 
-        return cls(
-            playlist,
-            url,
-            title,
-            duration,
-            filename,
-            start_seconds,
-            end_seconds,
-            spotify_track=spotify_track,
-            provided_song_timestamps=provided_song_timestamps,
-            youtube_data=youtube_data,
-            update_additional_information=update_additional_information,
-            **meta)
+        return cls(playlist, url, title, duration, filename, start_seconds, end_seconds, provided_song_timestamps=provided_song_timestamps, update_additional_information=update_additional_information, **meta)
 
     def search_additional_info(self):
+        print("[ENTRY] Searching for additional information")
         if self._spotify_track is None:
             t = Thread(target=self.threaded_spotify_search)
             t.start()
@@ -252,7 +241,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
             self.running_threads.append(t)
 
         if self.youtube_data is None:
-            t = Thread(target=self.get_youtube_data).start()
+            t = Thread(target=self.get_youtube_data)
             t.start()
             self.running_threads.append(t)
 
