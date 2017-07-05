@@ -146,7 +146,7 @@ def write_file(filename, contents):
 
 def create_bar(progress, length=10, full_char="■", half_char=None, empty_char="□"):
     use_halves = half_char is not None
-    fill_to = int(2 * length * progress)
+    fill_to = round(2 * length * progress)
     residue = fill_to % 2
     chrs = []
     for i in range(1, length + 1):
@@ -203,7 +203,7 @@ def clean_songname(query):
         "1080", "1080p", "4k", "720", "720p", "album", "amv", "audio", "avi",
         "creditless", "dvd", "edition", "eng", "english", "feat", "from", "ft",
         "full", "hd", "jap", "japanese", "lyrics", "mix", "mp3", "mp4", "music",
-        "new", "official", "op", "opening", "original", "original sound track",
+        "new", "official", "original", "original sound track",
         "original soundtrack", "ost", "raw", "size", "soundtrack", "special",
         "textless", "theme", "tv", "ver", "version", "video", "with",
         "with lyrics"
@@ -212,8 +212,8 @@ def clean_songname(query):
     replacers = (
         # replace common indicators for the artist with a simple dash
         ((r"\|", r"(^|\W)by(\W|$)"), " - "),
-        # remove all parentheses and their content
-        ((r"\(.*\)",), " ")
+        # remove all parentheses and their content and remove "opening 5" stuff
+        ((r"\(.*\)", r"op(?:ening)?(?:\s+\d***REMOVED***1,2***REMOVED***)?"), " "),
     )
 
     special_regex = (
@@ -241,26 +241,26 @@ def clean_songname(query):
     for target, replacement in special_regex_after:
         query = re.sub(target, replacement, query, flags=re.IGNORECASE)
 
-    # get rid of words that repeat twice or more
-    repeating_words = re.search(
-        r"((?:\w+(?:\s|\b))***REMOVED***2,***REMOVED***).+(\1)", query, flags=re.IGNORECASE)
-    if repeating_words:
-        repetition_start, repetition_end = repeating_words.start(
-            2), repeating_words.end(2)
-        query = query[:repetition_start] + query[repetition_end:]
+    # # get rid of words that repeat twice or more
+    # repeating_words = re.search(
+    #     r"((?:\w+(?:\s|\b))***REMOVED***2,***REMOVED***).+(\1)", query, flags=re.IGNORECASE)
+    # if repeating_words:
+    #     repetition_start, repetition_end = repeating_words.start(
+    #         2), repeating_words.end(2)
+    #     query = query[:repetition_start] + query[repetition_end:]
 
     # remove everything apart from the few allowed characters
     query = re.sub(r"[^\w\s\-\&\',]", " ", query)
     # remove unnecessary whitespaces
     query = re.sub(r"\s+", " ", query)
 
-    no_capitalisation = ("s", "of", "to", "a", "an", "the",
-                         "and", "but", "for", "or", "nor")
+    no_capitalisation = ("a", "an", "and", "but", "for", "his",
+                         "my", "nor", "of", "or", "s", "t", "the", "to", "your")
 
     # title everything except if it's already UPPER because then it's probably
     # by design. Also don't title no-title words (I guess) if they're not in
     # first place
-    query = " ".join(w if w.isupper() or (w in no_capitalisation and ind != 0)
+    query = " ".join(w if (w.isupper() and len(w) > 2) or (w.lower() in no_capitalisation and ind != 0)
                      else w.title() for ind, w in enumerate(query.split()))
 
     return query.strip(" -&,")
