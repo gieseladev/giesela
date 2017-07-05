@@ -22,7 +22,11 @@ def search_for_lyrics_google(query):
         display_link = item["displayLink"]
         if display_link in lyric_parsers:
             print("[LYRICS] Found lyrics at " + display_link)
-            return "***REMOVED******REMOVED***\n**Lyrics from \"***REMOVED******REMOVED***\"**".format(lyric_parsers[display_link](item["link"]), display_link)
+            lyrics = lyric_parsers[display_link](item["link"])
+            if lyrics:
+                return "***REMOVED******REMOVED***\n**Lyrics from \"***REMOVED******REMOVED***\"**".format(lyrics, display_link)
+            else:
+                print("[LYRICS] Couldn't parse these lyrics")
 
     return None
 
@@ -61,17 +65,21 @@ def _extract_lyrics_lyricsmode(url):
 
 
 def _extract_lyrics_lyrical_nonsense(url):
-    lyrics = None
+    try:
+        lyrics = None
 
-    resp = requests.get(url)
-    content = resp.text
+        resp = requests.get(url)
+        content = resp.text
 
-    bs = BeautifulSoup(content, "lxml")
-    # take the English version if there is one, otherwise use the default one
-    lyrics_window = bs.find_all("div", ***REMOVED***"id": "Romaji"***REMOVED***)[
-        0] or bs.find_all("div", ***REMOVED***"id": "Lyrics"***REMOVED***)[0]
-    lyrics = lyrics_window.text
-    return lyrics.strip()
+        bs = BeautifulSoup(content, "lxml")
+        # take the Romaji version if there is one, otherwise use the default
+        # one
+        lyrics_window = bs.find_all("div", ***REMOVED***"id": "Romaji"***REMOVED***)[
+            0] or bs.find_all("div", ***REMOVED***"id": "Lyrics"***REMOVED***)[0]
+        lyrics = lyrics_window.text
+        return lyrics.strip()
+    except IndexError:
+        return None
 
 
 def _extract_lyrics_musixmatch(url):

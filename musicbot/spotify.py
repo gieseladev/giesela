@@ -114,8 +114,6 @@ class SpotifyTrack:
 
     @classmethod
     def from_query(cls, query):
-        query = parse_query(query)
-
         search_result = get_spotify_client().search(
             query, limit=1, type="track")
         if len(search_result) < 1 or len(search_result["tracks"]["items"]) < 1:
@@ -225,57 +223,3 @@ def get_certainty(query, song_name, artists):
         song_name_edited.lower(), artists[0].name.lower())))
 
     return max(poss)
-
-
-def parse_query(query):
-    for chr in ["()", "[]", "<>"]:
-        query = re.sub("\***REMOVED***0[0]***REMOVED***.+\***REMOVED***0[1]***REMOVED***".format(chr), "", query)
-
-    query = re.sub("'", "", query)
-
-    query = query.replace("|", " ", 1)
-
-    query = query.replace(":", "")
-    query = query.replace(" OST ", "")
-    query = query.replace(" ost ", "")
-    query = query.replace(" Ost ", "")
-    query = re.sub("\d+", "", query)
-
-    index = query.lower().find(" download ")
-    query = query[:index if index > 3 else len(query)]
-
-    index = query.lower().find(" and ")
-    query = query[:index if index > 3 else len(query)]
-
-    index = query.lower().find(" ft ") if query.lower().find(
-        " ft ") > 0 else query.lower().find(" ft.")
-    dash = query.find("-")
-    if dash == -1 and index > 0:
-        query = query[index + 1 if index > 0 else 0:]
-    elif index > 0:
-        query = query[:index + 1 if index > 0 else len(query)] + query[dash:]
-
-    index = query.lower().find(" feat ")
-    query = query[:index if index > 3 else len(query)]
-
-    index = query.lower().find(" lyric")
-    query = query[:index if index > 3 else len(query)]
-
-    index = query.lower().find(" official")
-    query = query[:index if index > 3 else len(query)]
-
-    index = query.lower().find("&") if query.lower().find(
-        "&") != -1 else query.lower().find(" x ")
-    dash = query.find("-")
-    if dash == -1 and index > 0:
-        query = query[index + 1 if index > 0 else 0:]
-    elif index > 0:
-        query = query[:index if index > 0 else len(query)] + query[dash:]
-
-    query = query.replace("-", "\n", 1)
-    index = query.find(" - ")
-    query = query[:index if index > 3 else len(query)]
-    query = query.strip()
-    query = re.sub(" ***REMOVED***2,***REMOVED***", " ", query)
-
-    return query
