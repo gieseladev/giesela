@@ -1,9 +1,10 @@
-import configparser
 import json
 import os
 import re
 import shutil
 import traceback
+
+import configparser
 
 from .entry import URLPlaylistEntry as urlEntry
 from .exceptions import HelpfulError
@@ -114,30 +115,35 @@ class Playlists:
 
         return pls
 
-    def edit_playlist(self, name, playlist, remove_entries=None, remove_entries_indexes=None, new_entries=None, new_name=None):
+    def edit_playlist(self, name, playlist, all_entries=None, remove_entries=None, remove_entries_indexes=None, new_entries=None, new_name=None):
         name = name.lower().strip().replace(" ", "_")
         old_playlist = self.get_playlist(name, playlist)
-        old_entries = old_playlist[
-            "entries"] if old_playlist is not None else []
 
-        if remove_entries_indexes is not None:
-            old_entries = [old_entries[x] for x in range(
-                len(old_entries)) if x not in remove_entries_indexes]
+        if all_entries:
+            next_entries = all_entries
+        else:
+            old_entries = old_playlist[
+                "entries"] if old_playlist is not None else []
 
-        if remove_entries is not None:
-            urls = [x.url for x in remove_entries]
-            for entry in old_entries:
-                if entry.url in urls:
-                    old_entries.remove(entry)
+            if remove_entries_indexes is not None:
+                old_entries = [old_entries[x] for x in range(
+                    len(old_entries)) if x not in remove_entries_indexes]
 
-        if new_entries is not None:
-            try:
-                old_entries.extend(new_entries)
-            except:
-                print("I guess something went wrong while extending the playlist...")
+            if remove_entries is not None:
+                urls = [x.url for x in remove_entries]
+                for entry in old_entries:
+                    if entry.url in urls:
+                        old_entries.remove(entry)
 
-        #print (str (old_entries))
-        next_entries = old_entries
+            if new_entries is not None:
+                try:
+                    old_entries.extend(new_entries)
+                except:
+                    # how should this even fail...?
+                    print(
+                        "I guess something went wrong while extending the playlist...")
+            next_entries = old_entries
+
         next_name = new_name if new_name is not None else name
         next_author_id = old_playlist["author"]
 
