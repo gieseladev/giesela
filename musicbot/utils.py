@@ -202,19 +202,20 @@ def clean_songname(query):
     """Clean a Youtube video title so it's shorter and easier to read."""
     to_remove = (
         "1080", "1080p", "4k", "720", "720p", "album", "amv", "audio", "avi",
-        "creditless", "dvd", "edition", "eng", "english", "feat", "from", "ft",
-        "full", "hd", "jap", "japanese", "lyrics", "mix", "mp3", "mp4", "music",
-        "new", "official", "original", "original sound track",
-        "original soundtrack", "ost", "raw", "size", "soundtrack", "special",
-        "textless", "theme", "tv", "ver", "version", "video", "with",
-        "with lyrics"
+        "creditless", "dvd", "edition", "eng", "english", "from", "full", "hd",
+        "jap", "japanese", "lyrics", "mix", "mp3", "mp4", "music", "new",
+        "official", "original", "original sound track", "original soundtrack",
+        "ost", "raw", "size", "soundtrack", "special", "textless", "theme",
+        "tv", "ver", "version", "video", "with lyrics"
     )
 
     replacers = (
         # replace common indicators for the artist with a simple dash
-        ((r"\|", r"(^|\W)by(\W|$)"), " - "),
+        ((r"[\|:]", r"(^|\W)by(\W|$)"), " - "),
         # remove all parentheses and their content and remove "opening 5" stuff
-        ((r"\(.*\)", r"op(?:ening)?(?:\s+\d{1,2})?"), " "),
+        ((r"\(.*\)", r"(?:^|\b)op(?:ening)?(?:\s+\d{1,2})?(?:\b|$)"), " "),
+        # replace several artist things with &
+        ((r"(?:^|\b)(?:feat|ft)(?:\b|$)", ), " & ")
     )
 
     special_regex = (
@@ -222,9 +223,10 @@ def clean_songname(query):
         # (r"\(f(?:ea)?t\.?\s?([\w\s\&\-\']{2,})\)", r" & \1"),
     )
     special_regex_after = (
-        # make sure that everything apart from [',] has space ("test-test"
+        # make sure that everything apart from [',] has space ("test -test"
         # converts to "test - test")
-        (r"([^\w\s\',])", r" \1 "),
+        (r"(\s)([^\w\s\',])(\w)", r"\1 \2 \3"),
+        (r"(\w)([^\w\s\',])(\s)", r"\1 \2 \3"),
     )
 
     for target, replacement in special_regex:
@@ -262,7 +264,7 @@ def clean_songname(query):
     # by design. Also don't title no-title words (I guess) if they're not in
     # first place
     word_elements = []
-    parts = re.split("(\W+)", query)
+    parts = re.split(r"(\W+)", query)
     for sub_ind, part in enumerate(parts):
         word_elements.append(part if (part.isupper() and len(part) > 2) or (
             part.lower() in no_capitalisation and sub_ind != 0) else part.title())
