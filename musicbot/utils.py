@@ -222,9 +222,9 @@ def clean_songname(query):
         # (r"\(f(?:ea)?t\.?\s?([\w\s\&\-\']***REMOVED***2,***REMOVED***)\)", r" & \1"),
     )
     special_regex_after = (
-        # make sure that everything apart from ' has space ("test-test"
+        # make sure that everything apart from [',] has space ("test-test"
         # converts to "test - test")
-        (r"([^\w\s\'])", r" \1 "),
+        (r"([^\w\s\',])", r" \1 "),
     )
 
     for target, replacement in special_regex:
@@ -303,7 +303,8 @@ def _run_timestamp_matcher(text):
     return None
 
 
-def get_video_timestamps(url, song_dur=None):
+def get_video_timestamps(video_id, song_dur=None):
+    url = "http://youtube.com/watch?v=" + video_id
     if song_dur:
         song_dur += 5  # I'm not that harsh, one second more or less ain't that bad
 
@@ -316,15 +317,14 @@ def get_video_timestamps(url, song_dur=None):
         songs = _run_timestamp_matcher(desc)
 
         if songs is not None:
+            # probably for the best to trust the description. Even if not all
+            # of them are as reliable as they should be.
             return songs
 
     try:
         if song_dur and song_dur < 200:  # I don't trust comments when the song is only about 3 mins loading
             return None
 
-        video_id = re.match(
-            r"(?:(?:https?:\/\/)(?:www)?\.?(?:youtu\.?be)(?:\.com)?\/(?:.*[=/])*)([^= &?/\r\n]***REMOVED***8,11***REMOVED***)",
-            url).group(1)
         resp = requests.get(
             "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo&part=snippet&order=relevance&textFormat=plainText&videoId="
             + video_id)

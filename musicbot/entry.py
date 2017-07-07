@@ -248,7 +248,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
         self.searched_additional_information = True
 
     def search_for_timestamps(self):
-        songs = get_video_timestamps(self.url, self.duration)
+        songs = get_video_timestamps(self.video_id, self.duration)
 
         if songs is None or len(songs) < 1:
             return
