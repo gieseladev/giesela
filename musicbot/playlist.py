@@ -6,10 +6,12 @@ from random import shuffle
 
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
-from .entry import StreamPlaylistEntry, URLPlaylistEntry
+from .entry import (RadioEntry, SpotifyEntry, StreamEntry, TimestampEntry,
+                    YoutubeEntry)
 from .exceptions import ExtractionError, WrongEntryTypeError
 from .lib.event_emitter import EventEmitter
-from .utils import get_header
+from .spotify import SpotifyTrack
+from .utils import clean_songname, get_header, get_video_sub_queue
 
 
 class Playlist(EventEmitter):
@@ -17,9 +19,10 @@ class Playlist(EventEmitter):
         A playlist is manages the list of songs that will be played.
     """
 
-    def __init__(self, bot):
+    def __init__(self, bot, player):
         super().__init__()
         self.bot = bot
+        self.player = player
         self.loop = bot.loop
         self.downloader = bot.downloader
         self.entries = deque()
@@ -30,8 +33,8 @@ class Playlist(EventEmitter):
 
     def get_web_dict(self):
         data = ***REMOVED***
-            "entries": [entry.to_dict() for entry in self.entries],
-            "history": [entry.to_dict() for entry in self.history]
+            "entries": [entry.to_web_dict() for entry in self.entries],
+            "history": [entry.to_web_dict() for entry in self.history]
         ***REMOVED***
         return data
 
@@ -44,59 +47,49 @@ class Playlist(EventEmitter):
     def push_history(self, entry):
         self.history = [entry, *self.history[:9]]
 
-    async def add_stream_entry(self, song_url, info=None, play_now=False, player=None, **meta):
-        if info is None:
-            info = ***REMOVED***'title': song_url, 'extractor': None***REMOVED***
+    async def add_stream_entry(self, stream_url, **meta):
+        try:
+            info = await self.downloader.extract_info(self.loop, stream_url, download=False)
 
-            try:
-                info = await self.downloader.extract_info(self.loop, song_url, download=False)
+        except DownloadError as e:
+            if e.exc_info[0] == UnsupportedError:
+                print("[STREAM] Assuming content is a direct stream")
 
-            except DownloadError as e:
-                # ytdl doesn't like it but its probably a stream
-                if e.exc_info[0] == UnsupportedError:
-                    print("Assuming content is a direct stream")
+            elif e.exc_info[0] == URLError:
+                if os.path.exists(os.path.abspath(song_url)):
+                    raise ExtractionError(
+                        "This is not a stream, this is a file path.")
 
-                elif e.exc_info[0] == URLError:
-                    if os.path.exists(os.path.abspath(song_url)):
-                        raise ExtractionError(
-                            "This is not a stream, this is a file path.")
+                else:  # it might be a file path that just doesn't exist
+                    raise ExtractionError(
+                        "Invalid input: ***REMOVED***0.exc_info[0]***REMOVED***: ***REMOVED***0.exc_info[1].reason***REMOVED***".format(e))
 
-                    else:  # it might be a file path that just doesn't exist
-                        raise ExtractionError(
-                            "Invalid input: ***REMOVED***0.exc_info[0]***REMOVED***: ***REMOVED***0.exc_info[1].reason***REMOVED***".format(e))
+            else:
+                raise ExtractionError("Unknown error: ***REMOVED******REMOVED***".format(e))
 
-                else:
-                    # traceback.print_exc()
-                    raise ExtractionError("Unknown error: ***REMOVED******REMOVED***".format(e))
+        except Exception as e:
+            print('Could not extract information from ***REMOVED******REMOVED*** (***REMOVED******REMOVED***), falling back to direct'.format(
+                stream_url, e))
 
-            except Exception as e:
-                print('Could not extract information from ***REMOVED******REMOVED*** (***REMOVED******REMOVED***), falling back to direct'.format(
-                    song_url, e))
+        dest_url = stream_url
+        if info.get("extractor"):
+            dest_url = info.get("url")
 
-        dest_url = song_url
-        if info.get('extractor'):
-            dest_url = info.get('url')
-
-        if info.get('extractor', None) == 'twitch:stream':  # may need to add other twitch types
-            title = info.get('description')
+        if info.get("extractor", None) == "twitch:stream":
+            title = info.get("description")
         else:
-            title = info.get('title', 'Untitled')
+            title = info.get("title", "Untitled")
 
-        # TODO: A bit more validation, "~stream some_url" should not just say
-        # :ok_hand:
-
-        entry = StreamPlaylistEntry(
+        entry = StreamEntry(
             self,
-            song_url,
+            stream_url,
             title,
             destination=dest_url,
-            station_data=meta.get("station", None),
             **meta
         )
-        if play_now and player is not None:
-            self._add_entry_now(entry, player)
-        else:
-            self._add_entry(entry)
+
+        self._add_entry(entry)
+
         return entry, len(self.entries)
 
     async def add_entry(self, song_url, **meta):
@@ -109,114 +102,9 @@ class Playlist(EventEmitter):
             :param meta: Any additional metadata to add to the playlist entry.
         """
 
-        try:
-            info = await self.downloader.extract_info(self.loop, song_url, download=False)
-        except Exception as e:
-            raise ExtractionError(
-                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(song_url, e))
-
-        if not info:
-            raise ExtractionError(
-                'Could not extract information from %s' % song_url)
-
-        # TODO: Sort out what happens next when this happens
-        if info.get('_type', None) == 'playlist':
-            raise WrongEntryTypeError("This is a playlist.", True, info.get(
-                'webpage_url', None) or info.get('url', None))
-
-        if info['extractor'] in ['generic', 'Dropbox']:
-            try:
-                # unfortunately this is literally broken
-                # https://github.com/KeepSafe/aiohttp/issues/758
-                # https://github.com/KeepSafe/aiohttp/issues/852
-                content_type = await get_header(self.bot.aiosession, info['url'], 'CONTENT-TYPE')
-                print("Got content type", content_type)
-
-            except Exception as e:
-                print("[Warning] Failed to get content type for url %s (%s)" % (
-                    song_url, e))
-                content_type = None
-
-            if content_type:
-                if content_type.startswith(('application/', 'image/')):
-                    if '/ogg' not in content_type:  # How does a server say `application/ogg` what the actual fuck
-                        raise ExtractionError(
-                            "Invalid content type \"%s\" for url %s" % (content_type, song_url))
-
-                elif not content_type.startswith(('audio/', 'video/')):
-                    print("[Warning] Questionable content type \"%s\" for url %s" % (
-                        content_type, song_url))
-
-        entry = URLPlaylistEntry(
-            self,
-            song_url,
-            info.get('title', 'Untitled'),
-            info.get('duration', 0) or 0,
-            self.downloader.ytdl.prepare_filename(info),
-            **meta
-        )
+        entry = await self.get_entry(song_url, **meta)
         self._add_entry(entry)
         return entry, len(self.entries)
-
-    async def get_entry(self, song_url, **meta):
-        try:
-            info = await self.downloader.extract_info(self.loop, song_url, download=False)
-        except Exception as e:
-            raise ExtractionError(
-                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(song_url, e))
-
-        if not info:
-            raise ExtractionError(
-                'Could not extract information from %s' % song_url)
-
-        # TODO: Sort out what happens next when this happens
-        if info.get('_type', None) == 'playlist':
-            raise WrongEntryTypeError("This is a playlist.", True, info.get(
-                'webpage_url', None) or info.get('url', None))
-
-        if info['extractor'] in ['generic', 'Dropbox']:
-            try:
-                # unfortunately this is literally broken
-                # https://github.com/KeepSafe/aiohttp/issues/758
-                # https://github.com/KeepSafe/aiohttp/issues/852
-                content_type = await get_header(self.bot.aiosession, info['url'], 'CONTENT-TYPE')
-                print("Got content type", content_type)
-
-            except Exception as e:
-                print("[Warning] Failed to get content type for url %s (%s)" % (
-                    song_url, e))
-                content_type = None
-
-            if content_type:
-                if content_type.startswith(('application/', 'image/')):
-                    if '/ogg' not in content_type:  # How does a server say `application/ogg` what the actual fuck
-                        raise ExtractionError(
-                            "Invalid content type \"%s\" for url %s" % (content_type, song_url))
-
-                elif not content_type.startswith(('audio/', 'video/')):
-                    print("[Warning] Questionable content type \"%s\" for url %s" % (
-                        content_type, song_url))
-
-        #print ("HEY I GOT THIS: " + self.downloader.ytdl.prepare_filename(info) + "\n\n\n***REMOVED******REMOVED***\n\n\n".format (str (info)))
-
-        entry = URLPlaylistEntry(
-            self,
-            song_url,
-            info.get('title', 'Untitled'),
-            info.get('duration', 0) or 0,
-            self.downloader.ytdl.prepare_filename(info),
-            **meta
-        )
-        return entry
-
-    async def get_entries_from_urls_gen(self, *urls, **meta):
-        for ind, url in enumerate(urls):
-            try:
-                entry = await self.get_entry(url, **meta)
-            except (ExtractionError, WrongEntryTypeError) as e:
-                print("Error while dealing with url \"***REMOVED******REMOVED***\":\n***REMOVED******REMOVED***".format(url, e))
-                yield ind, None
-            yield ind, entry
 
     async def add_entry_next(self, song_url, **meta):
         """
@@ -228,6 +116,106 @@ class Playlist(EventEmitter):
             :param meta: Any additional metadata to add to the playlist entry.
         """
 
+        entry = await self.get_entry(song_url, **meta)
+        self._add_entry_next(entry)
+        return entry, len(self.entries)
+
+    async def get_entries_from_playlist(self, playlist_url, **meta):
+
+        try:
+            info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False, process=False)
+        except Exception as e:
+            raise ExtractionError(
+                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
+
+        if not info:
+            raise ExtractionError(
+                'Could not extract information from %s' % playlist_url)
+
+        urls = [entry["webpage_url"] for entry in info["entries"]]
+        gooditems = []
+        baditems = 0
+        async for ind, entry in get_entries_from_urls_gen(*urls, **meta):
+            if entry:
+                gooditems.append(entry)
+            else:
+                baditems += 1
+
+        if baditems:
+            print("Skipped %s bad entries" % baditems)
+
+        return gooditems
+
+    async def add_youtube_playlist(self, playlist_url, **meta):
+
+        try:
+            info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False, process=False)
+        except Exception as e:
+            raise ExtractionError(
+                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
+
+        if not info:
+            raise ExtractionError(
+                'Could not extract information from %s' % playlist_url)
+
+        urls = [entry["webpage_url"] for entry in info["entries"]]
+        gooditems = []
+        baditems = 0
+        async for ind, entry in get_entries_from_urls_gen(*urls, **meta):
+            if entry:
+                self._add_entry(entry)
+                gooditems.append(entry)
+            else:
+                baditems += 1
+
+        if baditems:
+            print("Skipped %s bad entries" % baditems)
+
+        return gooditems
+
+    async def get_entry_from_query(self, query, **meta):
+
+        info = await self.downloader.extract_info(
+            self.loop, query, download=False, process=False)
+
+        if not info:
+            raise ExtractionError("Couldn't extract info")
+
+        if info.get("url", "").startswith("ytsearch"):
+            info = await self.downloader.extract_info(
+                self.loop,
+                query,
+                download=False,
+                process=True,
+                retry_on_error=True
+            )
+
+            if not info:
+                raise ExtractorError("Couldn't extract info")
+
+            if not all(info.get("entries", [])):
+                return None
+
+            query = info["entries"][0]["webpage_url"]
+            info = await self.downloader.extract_info(
+                self.loop, query, download=False, process=False)
+
+        if "entries" in info:
+            return ["http://youtube.com/watch?v=" + entry["id"] for entry in info["entries"]]
+        else:
+            return await self.get_entry(query, **meta)
+
+    async def get_entries_from_urls_gen(self, *urls, **meta):
+        for ind, url in enumerate(urls):
+            try:
+                entry = await self.get_entry(url, **meta)
+            except (ExtractionError, WrongEntryTypeError) as e:
+                print("Error while dealing with url \"***REMOVED******REMOVED***\":\n***REMOVED******REMOVED***".format(url, e))
+                yield ind, None
+            yield ind, entry
+
+    async def get_entry(self, song_url, **meta):
+
         try:
             info = await self.downloader.extract_info(self.loop, song_url, download=False)
         except Exception as e:
@@ -238,7 +226,6 @@ class Playlist(EventEmitter):
             raise ExtractionError(
                 'Could not extract information from %s' % song_url)
 
-        # TODO: Sort out what happens next when this happens
         if info.get('_type', None) == 'playlist':
             raise WrongEntryTypeError("This is a playlist.", True, info.get(
                 'webpage_url', None) or info.get('url', None))
@@ -266,302 +253,66 @@ class Playlist(EventEmitter):
                     print("[Warning] Questionable content type \"%s\" for url %s" % (
                         content_type, song_url))
 
-        entry = URLPlaylistEntry(
-            self,
-            song_url,
-            info.get('title', 'Untitled'),
-            info.get('duration', 0) or 0,
-            self.downloader.ytdl.prepare_filename(info),
-            **meta
-        )
-        self._add_entry_next(entry)
-        return entry, len(self.entries)
+        entry = None
 
-    async def add_entries(self, entries):
+        video_id = info.get("id")
+        video_title = info.get("title")
+        video_description = info.get("description")
+        video_thumbnail = info.get("thumbnail")
+        video_url = info.get("webpage_url")
+        video_duration = info.get("duration", 0)
+
+        clean_title = clean_songname(video_title)
+
+        spotify_track = SpotifyTrack.from_query(clean_title)
+        if spotify_track.certainty > .6:
+            entry = SpotifyEntry(
+                self,
+                video_id,
+                video_url,
+                video_title,
+                video_duration,
+                video_thumbnail,
+                video_description,
+                spotify_track,
+                self.downloader.ytdl.prepare_filename(info),
+                **meta
+            )
+        else:
+            sub_queue = get_video_sub_queue(
+                video_description, video_id, video_duration)
+
+            if sub_queue:
+                entry = TimestampEntry(
+                    self,
+                    video_id,
+                    video_url,
+                    video_title,
+                    video_duration,
+                    video_thumbnail,
+                    video_description,
+                    sub_queue,
+                    self.downloader.ytdl.prepare_filename(info),
+                    **meta
+                )
+            else:
+                entry = YoutubeEntry(
+                    self,
+                    video_id,
+                    video_url,
+                    video_title,
+                    video_duration,
+                    video_thumbnail,
+                    video_description,
+                    self.downloader.ytdl.prepare_filename(info),
+                    **meta
+                )
+
+        return entry
+
+    def add_entries(self, entries):
         for entry in entries:
-            try:
-                await self._add_entry(entry)
-            except:
-                pass
-
-    async def entries_import_from(self, playlist_url, **meta):
-        """
-            Imports the songs from `playlist_url` and queues them to be played.
-
-            Returns a list of `entries` that have been enqueued.
-
-            :param playlist_url: The playlist url to be cut into individual urls and added to the playlist
-            :param meta: Any additional metadata to add to the playlist entry
-        """
-        entry_list = []
-
-        try:
-            info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False)
-        except Exception as e:
-            raise ExtractionError(
-                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
-
-        if not info:
-            raise ExtractionError(
-                'Could not extract information from %s' % playlist_url)
-
-        # Once again, the generic extractor fucks things up.
-        if info.get('extractor', None) == 'generic':
-            url_field = 'url'
-        else:
-            url_field = 'webpage_url'
-
-        baditems = 0
-        for items in info['entries']:
-            if items:
-                try:
-                    entry = URLPlaylistEntry(
-                        self,
-                        items[url_field],
-                        items.get('title', 'Untitled'),
-                        items.get('duration', 0) or 0,
-                        self.downloader.ytdl.prepare_filename(items),
-                        **meta
-                    )
-                    entry_list.append(entry)
-                except:
-                    baditems += 1
-                    # Once I know more about what's happening here I can add a
-                    # proper message
-                    traceback.print_exc()
-                    print(items)
-                    print("Could not add item")
-            else:
-                baditems += 1
-
-        if baditems:
-            print("Skipped %s bad entries" % baditems)
-
-        return entry_list
-
-    async def entries_async_process_youtube_playlist(self, playlist_url, **meta):
-        """
-            Processes youtube playlists links from `playlist_url` in a questionable, async fashion.
-
-            :param playlist_url: The playlist url to be cut into individual urls and added to the playlist
-            :param meta: Any additional metadata to add to the playlist entry
-        """
-
-        try:
-            info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False, process=False)
-        except Exception as e:
-            raise ExtractionError(
-                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
-
-        if not info:
-            raise ExtractionError(
-                'Could not extract information from %s' % playlist_url)
-
-        gooditems = []
-        baditems = 0
-        for entry_data in info['entries']:
-            if entry_data:
-                baseurl = info['webpage_url'].split('playlist?list=')[0]
-                song_url = baseurl + 'watch?v=%s' % entry_data['id']
-
-                try:
-                    entry = await self.get_entry(song_url, **meta)
-                    gooditems.append(entry)
-                except ExtractionError:
-                    baditems += 1
-                except Exception as e:
-                    baditems += 1
-                    print("There was an error adding the song ***REMOVED******REMOVED***: ***REMOVED******REMOVED***: ***REMOVED******REMOVED***\n".format(
-                        entry_data['id'], e.__class__.__name__, e))
-            else:
-                baditems += 1
-
-        if baditems:
-            print("Skipped %s bad entries" % baditems)
-
-        return gooditems
-
-    async def entries_async_process_sc_bc_playlist(self, playlist_url, **meta):
-        """
-            Processes soundcloud set and bancdamp album links from `playlist_url` in a questionable, async fashion.
-
-            :param playlist_url: The playlist url to be cut into individual urls and added to the playlist
-            :param meta: Any additional metadata to add to the playlist entry
-        """
-
-        try:
-            info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False, process=False)
-        except Exception as e:
-            raise ExtractionError(
-                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
-
-        if not info:
-            raise ExtractionError(
-                'Could not extract information from %s' % playlist_url)
-
-        gooditems = []
-        baditems = 0
-        for entry_data in info['entries']:
-            if entry_data:
-                song_url = entry_data['url']
-
-                try:
-                    entry = await self.get_entry(song_url, **meta)
-                    gooditems.append(entry)
-                except ExtractionError:
-                    baditems += 1
-                except Exception as e:
-                    baditems += 1
-                    print("There was an error adding the song ***REMOVED******REMOVED***: ***REMOVED******REMOVED***: ***REMOVED******REMOVED***\n".format(
-                        entry_data['id'], e.__class__.__name__, e))
-            else:
-                baditems += 1
-
-        if baditems:
-            print("Skipped %s bad entries" % baditems)
-
-        return gooditems
-
-    async def import_from(self, playlist_url, **meta):
-        """
-            Imports the songs from `playlist_url` and queues them to be played.
-
-            Returns a list of `entries` that have been enqueued.
-
-            :param playlist_url: The playlist url to be cut into individual urls and added to the playlist
-            :param meta: Any additional metadata to add to the playlist entry
-        """
-        position = len(self.entries) + 1
-        entry_list = []
-
-        try:
-            info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False)
-        except Exception as e:
-            raise ExtractionError(
-                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
-
-        if not info:
-            raise ExtractionError(
-                'Could not extract information from %s' % playlist_url)
-
-        # Once again, the generic extractor fucks things up.
-        if info.get('extractor', None) == 'generic':
-            url_field = 'url'
-        else:
-            url_field = 'webpage_url'
-
-        baditems = 0
-        for items in info['entries']:
-            if items:
-                try:
-                    entry = URLPlaylistEntry(
-                        self,
-                        items[url_field],
-                        items.get('title', 'Untitled'),
-                        items.get('duration', 0) or 0,
-                        self.downloader.ytdl.prepare_filename(items),
-                        **meta
-                    )
-
-                    self._add_entry(entry)
-                    entry_list.append(entry)
-                except:
-                    baditems += 1
-                    # Once I know more about what's happening here I can add a
-                    # proper message
-                    traceback.print_exc()
-                    print(items)
-                    print("Could not add item")
-            else:
-                baditems += 1
-
-        if baditems:
-            print("Skipped %s bad entries" % baditems)
-
-        return entry_list, position
-
-    async def async_process_youtube_playlist(self, playlist_url, **meta):
-        """
-            Processes youtube playlists links from `playlist_url` in a questionable, async fashion.
-
-            :param playlist_url: The playlist url to be cut into individual urls and added to the playlist
-            :param meta: Any additional metadata to add to the playlist entry
-        """
-
-        try:
-            info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False, process=False)
-        except Exception as e:
-            raise ExtractionError(
-                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
-
-        if not info:
-            raise ExtractionError(
-                'Could not extract information from %s' % playlist_url)
-
-        gooditems = []
-        baditems = 0
-        for entry_data in info['entries']:
-            if entry_data:
-                baseurl = info['webpage_url'].split('playlist?list=')[0]
-                song_url = baseurl + 'watch?v=%s' % entry_data['id']
-
-                try:
-                    entry, elen = await self.add_entry(song_url, **meta)
-                    gooditems.append(entry)
-                except ExtractionError:
-                    baditems += 1
-                except Exception as e:
-                    baditems += 1
-                    print("There was an error adding the song ***REMOVED******REMOVED***: ***REMOVED******REMOVED***: ***REMOVED******REMOVED***\n".format(
-                        entry_data['id'], e.__class__.__name__, e))
-            else:
-                baditems += 1
-
-        if baditems:
-            print("Skipped %s bad entries" % baditems)
-
-        return gooditems
-
-    async def async_process_sc_bc_playlist(self, playlist_url, **meta):
-        """
-            Processes soundcloud set and bancdamp album links from `playlist_url` in a questionable, async fashion.
-
-            :param playlist_url: The playlist url to be cut into individual urls and added to the playlist
-            :param meta: Any additional metadata to add to the playlist entry
-        """
-
-        try:
-            info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False, process=False)
-        except Exception as e:
-            raise ExtractionError(
-                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
-
-        if not info:
-            raise ExtractionError(
-                'Could not extract information from %s' % playlist_url)
-
-        gooditems = []
-        baditems = 0
-        for entry_data in info['entries']:
-            if entry_data:
-                song_url = entry_data['url']
-
-                try:
-                    entry, elen = await self.add_entry(song_url, **meta)
-                    gooditems.append(entry)
-                except ExtractionError:
-                    baditems += 1
-                except Exception as e:
-                    baditems += 1
-                    print("There was an error adding the song ***REMOVED******REMOVED***: ***REMOVED******REMOVED***: ***REMOVED******REMOVED***\n".format(
-                        entry_data['id'], e.__class__.__name__, e))
-            else:
-                baditems += 1
-
-        if baditems:
-            print("Skipped %s bad entries" % baditems)
-
-        return gooditems
+            self._add_entry(entry)
 
     def _add_entry(self, entry):
         self.entries.append(entry)
@@ -573,16 +324,6 @@ class Playlist(EventEmitter):
     def _add_entry_next(self, entry):
         self.entries.insert(0, entry)
         self.emit('entry-added', playlist=self, entry=entry)
-
-        if self.peek() is entry:
-            entry.get_ready_future()
-
-    def _add_entry_now(self, entry, player):
-        self.entries.insert(0, entry)
-        self.emit('entry-added', playlist=self, entry=entry)
-
-        if player.current_entry:
-            player.skip()
 
         if self.peek() is entry:
             entry.get_ready_future()
@@ -612,17 +353,6 @@ class Playlist(EventEmitter):
         entry = self.entries.popleft()
         self.emit('entry-removed', playlist=self, entry=entry)
         self.entries.rotate(-1 * rotDist)
-
-        return entry
-
-    def remove_first(self):
-        entry = self.entries.popleft()
-        self.emit('entry-removed', playlist=self, entry=entry)
-        entryNext = None
-        entryNext = self.peek()
-
-        if entryNext:
-            entryNext.get_ready_future()
 
         return entry
 
@@ -660,14 +390,9 @@ class Playlist(EventEmitter):
             (very) Roughly estimates the time till the queue will 'position'
         """
         estimated_time = sum(
-            [e.duration for e in islice(self.entries, position - 1)])
+            [e.end_seconds for e in islice(self.entries, position - 1)])
 
-        # When the player plays a song, it eats the first playlist item, so we
-        # just have to add the time back
         if not player.is_stopped and player.current_entry:
             estimated_time += player.current_entry.duration - player.progress
 
         return datetime.timedelta(seconds=estimated_time)
-
-    def count_for_user(self, user):
-        return sum(1 for e in self.entries if e.meta.get('author', None) == user)
