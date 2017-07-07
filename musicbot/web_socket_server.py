@@ -10,7 +10,7 @@ from string import ascii_lowercase
 import asyncio
 
 from .simple_web_socket_server import SimpleWebSocketServer, WebSocket
-from .utils import dec_to_hex, get_entry_dict
+from .utils import dec_to_hex
 
 
 class ErrorCode:
@@ -178,8 +178,7 @@ class GieselaServer():
         player = GieselaServer.get_player(token=token, server_id=server_id)
 
         if player.current_entry:
-            entry = get_entry_dict(player.current_entry,
-                                   player, GieselaServer.bot.loop)
+            entry = player.current_entry.to_web_dict()
             entry["progress"] = player.progress
         else:
             entry = None

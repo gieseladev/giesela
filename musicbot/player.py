@@ -11,10 +11,10 @@ import asyncio
 import audioop
 from enum import Enum
 
-from .entry import StreamPlaylistEntry
+from .entry import RadioEntry, TimestampEntry
 from .exceptions import FFmpegError, FFmpegWarning
 from .lib.event_emitter import EventEmitter
-from .logger import log
+from .playlist import Playlist
 from .radio import Radio
 from .utils import format_time_ffmpeg
 
@@ -36,7 +36,7 @@ class PatchedBuff:
 
     def __del__(self):
         if self.draw:
-            log(' ' * (get_terminal_size().columns - 1), end='\r')
+            print(' ' * (get_terminal_size().columns - 1), end='\r')
 
     def read(self, frame_size):
         self.frame_count += 1
@@ -84,7 +84,7 @@ class PatchedBuff:
             outstr = text + \
                 "***REMOVED******REMOVED***".format(char * (int(tx * perc) - 1))[len(text):]
 
-        log(outstr.ljust(tx - 1), end='\r')
+        print(outstr.ljust(tx - 1), end='\r')
 
 
 class MusicPlayerState(Enum):
@@ -109,12 +109,12 @@ class MusicPlayerRepeatState(Enum):
 
 class MusicPlayer(EventEmitter):
 
-    def __init__(self, bot, voice_client, playlist):
+    def __init__(self, bot, voice_client):
         super().__init__()
         self.bot = bot
         self.loop = bot.loop
         self.voice_client = voice_client
-        self.playlist = playlist
+        self.playlist = playlist = Playlist(bot, self)
         self.playlist.on('entry-added', self.on_entry_added)
 
         self._play_lock = asyncio.Lock()
@@ -129,6 +129,7 @@ class MusicPlayer(EventEmitter):
 
         self.volume_scale = 1  # volume is divided by this value
         self.volume = bot.config.default_volume
+        self.chapter_updater = None
 
     @property
     def volume(self):
@@ -148,6 +149,7 @@ class MusicPlayer(EventEmitter):
     def skip(self):
         self.skipRepeat = True
         self._kill_current_player()
+        self.update_chapter_updater()
 
     def repeat(self):
         if self.is_repeatNone:
@@ -181,7 +183,7 @@ class MusicPlayer(EventEmitter):
         raise ValueError('Cannot resume playback from state %s' % self.state)
 
     def goto_seconds(self, secs):
-        if (not self.current_entry) or secs >= self.current_entry.duration or (self.current_entry.end_seconds is not None and secs >= self.current_entry.end_seconds):
+        if (not self.current_entry) or secs >= self.current_entry.end_seconds:
             self.skip()
             return True
 
@@ -195,8 +197,8 @@ class MusicPlayer(EventEmitter):
         return True
 
     def pause(self):
-        if type(self.current_entry).__name__ == "StreamPlaylistEntry":
-            log("Won't pause because I'm playing a stream")
+        if isinstance(self.current_entry, StreamEntry):
+            print("Won't pause because I'm playing a stream")
             self.stop()
             return
 
@@ -205,6 +207,7 @@ class MusicPlayer(EventEmitter):
 
             if self._current_player:
                 self._current_player.pause()
+                self.update_chapter_updater(pause=True)
 
             self.emit('pause', player=self, entry=self.current_entry)
             return
@@ -246,10 +249,9 @@ class MusicPlayer(EventEmitter):
 
         if not self.bot.config.save_videos and entry:
             if any([entry.filename == e.filename for e in self.playlist.entries]):
-                log("[Config:SaveVideos] Skipping deletion, found song in queue")
+                print("[Config:SaveVideos] Skipping deletion, found song in queue")
 
             else:
-                # log("[Config:SaveVideos] Deleting file: %s" % os.path.relpath(entry.filename))
                 asyncio.ensure_future(self._delete_file(entry.filename))
 
         self.emit('finished-playing', player=self, entry=entry)
@@ -280,10 +282,10 @@ class MusicPlayer(EventEmitter):
 
             except Exception as e:
                 traceback.print_exc()
-                log("Error trying to delete " + filename)
+                print("Error trying to delete " + filename)
                 break
         else:
-            log("[Config:SaveVideos] Could not delete file ***REMOVED******REMOVED***, giving up and moving on".format(
+            print("[Config:SaveVideos] Could not delete file ***REMOVED******REMOVED***, giving up and moving on".format(
                 os.path.relpath(filename)))
 
     def play(self, _continue=False):
@@ -299,134 +301,34 @@ class MusicPlayer(EventEmitter):
         if self.is_dead:
             return
 
-        with await self._play_lock:
-            if self.is_stopped or _continue:
-                try:
-                    entry = await self.playlist.get_next_entry()
-
-                except Exception as e:
-                    log("Failed to get entry.")
-                    traceback.print_exc()
-                    # Retry playing the next entry in a sec.
-                    self.loop.call_later(0.1, self.play)
-                    return
-
-                # If nothing left to play, transition to the stopped state.
-                if not entry:
-                    self.stop()
-                    return
-
-                # In-case there was a player, kill it. RIP.
-                self._kill_current_player()
-
-                self._current_player = self._monkeypatch_player(self.voice_client.create_ffmpeg_player(
-                    entry.filename,
-                    before_options="-nostdin -ss ***REMOVED******REMOVED***".format(
-                        format_time_ffmpeg(int(entry.start_seconds))),
-                    # before_options="-nostdin",
-                    options="-vn -to ***REMOVED******REMOVED*** -b:a 128k".format(format_time_ffmpeg(
-                        int(entry.end_seconds - entry.start_seconds))) if entry.end_seconds is not None else "-vn -b:a 128k",
-                    # options="-vn -b:a 128k",
-                    stderr=subprocess.PIPE,
-                    # Threadsafe call soon, b/c after will be called from the
-                    # voice playback thread.
-                    after=lambda: self.loop.call_soon_threadsafe(
-                        self._playback_finished)
-                ))
-                self._current_player.setDaemon(True)
-                self._current_player.buff.volume = self._volume
-
-                # I need to add ytdl hooks
-                self.state = MusicPlayerState.PLAYING
-                self._current_entry = entry
-                self._stderr_future = asyncio.Future()
-
-                stderr_thread = Thread(
-                    target=filter_stderr,
-                    args=(self._current_player.process, self._stderr_future),
-                    name="***REMOVED******REMOVED*** stderr reader".format(self._current_player.name)
-                )
-
-                stderr_thread.start()
-                self._current_player.start()
-                self.emit('play', player=self, entry=entry)
-                asyncio.ensure_future(self.update_timestamp())
-
-    async def _absolute_current_song(self):
-        if not self.current_entry:
-            return None
-        if type(self.current_entry) == StreamPlaylistEntry:
-            if self.current_entry.radio_station_data:
-                data = await Radio.get_current_song(self.loop, self.current_entry.radio_station_data.name)
-                if data:
-                    return data["title"]  # it's title, not name idiot
-        elif self.current_entry.provides_timestamps:
+        if self.is_stopped or _continue:
             try:
-                return self.current_entry.get_current_song_from_timestamp(self.progress)["name"]
-            except:
-                pass
+                entry = await self.playlist.get_next_entry()
 
-        return self.current_entry.title
-
-    async def update_timestamp(self, delay=None):
-        if not delay:
-            if self.current_entry:
-                if self.current_entry.provides_timestamps:
-                    prg, dur = self.current_entry.get_local_progress(
-                        self.progress)
-                    # just to be sure, add an extra 2 seconds
-                    next_delay = (dur - prg) + 2
-                    return await self.update_timestamp(next_delay)
-
-                elif type(self.current_entry) == StreamPlaylistEntry:
-                    if self.current_entry.radio_station_data:
-                        next_delay = 40  # I don't want this to be too fast...
-                        if Radio.has_station_data(self.current_entry.radio_station_data.name):
-                            data = await Radio.get_current_song(
-                                self.bot.loop, self.current_entry.radio_station_data.name)
-                            # proto sounds cool, doesn't it?
-                            proto_delay = (data["duration"] - data["progress"])
-                            # just making sure that it's not somehow ducked up
-                            # (like capitalfm)
-                            if proto_delay > 0:
-                                next_delay = proto_delay + 2  # adding those extra 2 seconds just to be safe
-                        return await self.update_timestamp(next_delay)
-
-                return  # this is not the kind of entry that requires an update
-            else:
-                print("[TIMESTAMP-ENTRY] Not going to emit another now playing event")
+            except Exception as e:
+                print("Failed to get entry.")
+                traceback.print_exc()
+                # Retry playing the next entry in a sec.
+                self.loop.call_later(0.1, self.play)
                 return
 
-        print("[TIMESTAMP-ENTRY] Waiting for " + str(delay) +
-              " seconds before emitting now playing event")
-        before_data = ***REMOVED***"url": self.current_entry.url, "song_name": await self._absolute_current_song()***REMOVED***
-        expected_progress = self.progress + delay
-
-        # print("I expect to have a progress of ***REMOVED******REMOVED*** once I wake up".format(expected_progress))
-        await asyncio.sleep(delay)
-        if not self.current_entry:
-            return
-        # gotta be sure to be on the same entry but not on the same sub entry
-        if not (self.current_entry.url == before_data["url"] and await self._absolute_current_song() != before_data["song_name"]):
-            print("[TIMESTAMP-ENTRY] nothing's changed since last time!")
-        else:
-            # print("Expected: ***REMOVED******REMOVED***, Got: ***REMOVED******REMOVED***".format(expected_progress, self.progress))
-            if not ((expected_progress + 1.5) > self.progress > (expected_progress - 1.5)):
-                print("[TIMESTAMP-ENTRY] Expected progress ***REMOVED******REMOVED*** but got ***REMOVED******REMOVED***; assuming there's already another one running".format(
-                    expected_progress, self.progress))
+            # If nothing left to play, transition to the stopped state.
+            if not entry:
+                self.stop()
                 return
-            print("[TIMESTAMP-ENTRY] Emitting next now playing event")
-            self.emit('play', player=self, entry=self.current_entry)
-        await self.update_timestamp()
+
+            await self._play_entry(entry)
+            self.emit('play', player=self, entry=entry)
 
     def play_entry(self, entry):
         self.loop.create_task(self._play_entry(entry))
 
     async def _play_entry(self, entry):
-        self.handle_manually = True
+        """
+            Play the entry
+        """
 
         if self.is_dead:
-            log("ded")
             return
 
         with await self._play_lock:
@@ -437,20 +339,15 @@ class MusicPlayer(EventEmitter):
                 entry.filename,
                 before_options="-nostdin -ss ***REMOVED******REMOVED***".format(
                     format_time_ffmpeg(int(entry.start_seconds))),
-                # before_options="-nostdin",
                 options="-vn -to ***REMOVED******REMOVED*** -b:a 128k".format(format_time_ffmpeg(
-                    int(entry.end_seconds - entry.start_seconds))) if entry.end_seconds is not None else "-vn -b:a 128k",
-                # options="-vn -b:a 128k",
+                    int(entry.end_seconds - entry.start_seconds))),
                 stderr=subprocess.PIPE,
-                # Threadsafe call soon, b/c after will be called from the
-                # voice playback thread.
                 after=lambda: self.loop.call_soon_threadsafe(
                     self._playback_finished)
             ))
             self._current_player.setDaemon(True)
             self._current_player.buff.volume = self._volume
 
-            # I need to add ytdl hooks
             self.state = MusicPlayerState.PLAYING
             self._current_entry = entry
             self._stderr_future = asyncio.Future()
@@ -463,8 +360,44 @@ class MusicPlayer(EventEmitter):
 
             stderr_thread.start()
             self._current_player.start()
-            self.emit('play', player=self, entry=entry)
-            asyncio.ensure_future(self.update_timestamp())
+            self.update_chapter_updater()
+
+    def update_chapter_updater(self, pause=False):
+        if self.chapter_updater:
+            print("[CHAPTER-UPDATER] Cancelling old updater")
+            self.chapter_updater.cancel()
+
+        if not pause:
+            print("[CHAPTER-UPDATER] Creating new updater")
+            self.chapter_updater = asyncio.ensure_future(self.update_chapter())
+
+    async def update_chapter(self):
+        while True:
+            if self.current_entry:
+                if isinstance(self.current_entry, TimestampEntry):
+                    sub_entry = self.current_entry.current_sub_entry
+                    # just to be sure, add an extra 2 seconds
+                    delay = (sub_entry["duration"] - sub_entry["progress"]) + 2
+
+                elif isinstance(self.current_entry, StreamEntry):
+                    raise NotImplementedError
+                else:
+                    return  # this is not the kind of entry that requires an update
+            else:
+                print("[CHAPTER-UPDATER] There's nothing playing")
+                return
+
+            print("[CHAPTER-UPDATER] Waiting for " + str(delay) +
+                  " seconds before emitting now playing event")
+
+            await asyncio.sleep(delay)
+            if not self.current_entry:
+                print(
+                    "[CHAPTER-UPDATER] Waited for nothing. There's nothing playing anymore")
+                return
+
+            print("[CHAPTER-UPDATER] Emitting next now playing event")
+            self.emit('play', player=self, entry=self.current_entry)
 
     def _monkeypatch_player(self, player):
         original_buff = player.buff
@@ -480,7 +413,7 @@ class MusicPlayer(EventEmitter):
 
     async def websocket_check(self):
         if self.bot.config.debug_mode:
-            log("[Debug] Creating websocket check loop")
+            print("[Debug] Creating websocket check loop")
 
         while not self.is_dead:
             try:
@@ -488,8 +421,8 @@ class MusicPlayer(EventEmitter):
                 assert self.voice_client.ws.open
             except:
                 if self.bot.config.debug_mode:
-                    log("[Debug] Voice websocket is %s, reconnecting" %
-                        self.voice_client.ws.state_name)
+                    print("[Debug] Voice websocket is %s, reconnecting" %
+                          self.voice_client.ws.state_name)
                 await self.bot.reconnect_voice_client(self.voice_client.channel.server)
                 await asyncio.sleep(4)
             finally:
@@ -529,11 +462,7 @@ class MusicPlayer(EventEmitter):
 
     @property
     def progress(self):
-        return round(self._current_player.buff.frame_count * 0.02) + (self.current_entry.start_seconds if self.current_entry is not None else 0)
-        # TODO: Properly implement this
-        #       Correct calculation should be bytes_read/192k
-        #       192k AKA sampleRate * (bitDepth / 8) * channelCount
-        #       Change frame_count to bytes_read in the PatchedBuff
+        return round(self._current_player.buff.frame_count * 0.02 + self.current_entry.start_seconds) if self.current_entry else 0
 
 
 def filter_stderr(popen: subprocess.Popen, future: asyncio.Future):
@@ -542,14 +471,14 @@ def filter_stderr(popen: subprocess.Popen, future: asyncio.Future):
     while True:
         data = popen.stderr.readline()
         if data:
-            log("Data from ffmpeg: ***REMOVED******REMOVED***".format(data))
+            print("Data from ffmpeg: ***REMOVED******REMOVED***".format(data))
             try:
                 if check_stderr(data):
                     sys.stderr.buffer.write(data)
                     sys.stderr.buffer.flush()
 
             except FFmpegError as e:
-                log("Error from ffmpeg: %s", str(e).strip())
+                print("Error from ffmpeg: %s", str(e).strip())
                 last_ex = e
 
             except FFmpegWarning:
@@ -567,7 +496,7 @@ def check_stderr(data: bytes):
     try:
         data = data.decode('utf8')
     except:
-        log("Unknown error decoding message from ffmpeg", exc_info=True)
+        print("Unknown error decoding message from ffmpeg", exc_info=True)
         return True  # fuck it
 
     # log.ffmpeg("Decoded data from ffmpeg: ***REMOVED******REMOVED***".format(data))
@@ -594,21 +523,3 @@ def check_stderr(data: bytes):
         raise FFmpegError(data)
 
     return True
-# if redistributing ffmpeg is an issue, it can be downloaded from here:
-#  - http://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-latest-win32-static.7z
-#  - http://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-latest-win64-static.7z
-#
-# Extracting bin/ffmpeg.exe, bin/ffplay.exe, and bin/ffprobe.exe should be fine
-# However, the files are in 7z format so meh
-# I don't know if we can even do this for the user, at most we open it in the browser
-# I can't imagine the user is so incompetent that they can't pull 3 files out of it...
-# ...
-# ...right?
-
-# Get duration with ffprobe
-#   ffprobe.exe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 -sexagesimal filename.mp3
-# This is also how I fix the format checking issue for now
-# ffprobe -v quiet -print_format json -show_format stream
-
-# Normalization filter
-# -af dynaudnorm

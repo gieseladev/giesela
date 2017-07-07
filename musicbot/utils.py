@@ -3,100 +3,42 @@ import decimal
 import json
 import random
 import re
+import time
 import unicodedata
 from datetime import timedelta
 from difflib import SequenceMatcher
 from hashlib import md5
+from io import BytesIO
+from threading import Thread
 
 import aiohttp
 import requests
 from bs4 import BeautifulSoup
+from PIL import Image, ImageStat
 
 import asyncio
 
 from .constants import DISCORD_MSG_CHAR_LIMIT
 
 
-def get_entry_dict(entry, player, loop):
-    from .entry import StreamPlaylistEntry
-    from .web_socket_server import WebAuthor
-    from .radio import Radio
+class run_function_every:
 
-    entry_dict = None
+    def __init__(self, function, timeout):
+        self.thread = Thread(target=self._sender, args=(function, timeout))
+        self.stop = False
 
-    if entry:
-        entry_dict = ***REMOVED***
-            "url": entry.url,
-            "thumbnail": entry.thumbnail,
-            "origin": None,
-            "type": None
-        ***REMOVED***
+    def _sender(self, function, timeout):
+        while True:
+            if self.stop:
+                return
+            function()
+            time.sleep(timeout)
 
-        if entry.meta:
-            if "playlist" in entry.meta:
-                origin_data = ***REMOVED***"type": "playlist"***REMOVED***
-                origin_data.update(entry.meta["playlist"])
-                entry_dict["origin"] = origin_data
-            elif "author" in entry.meta:
-                origin_data = ***REMOVED***"type": "user"***REMOVED***
-                web_author = WebAuthor.from_id(entry.meta["author"].id)
-                origin_data.update(web_author.to_dict())
-                entry_dict["origin"] = origin_data
+    def __enter__(self):
+        self.thread.start()
 
-        if isinstance(entry, StreamPlaylistEntry):
-            if entry.radio_station_data:  # if it's radio
-                radio_station = entry.radio_station_data
-                radio_data = ***REMOVED***
-                    "type": "radio_station_entry",
-                    "origin": radio_station.to_dict()
-                ***REMOVED***
-                # if it's also a radio with more information
-                if Radio.has_station_data(radio_station.name):
-                    current_song = asyncio.run_coroutine_threadsafe(
-                        Radio.get_current_song(loop, radio_station.name), loop).result()
-                    radio_data.update(current_song)
-                    radio_data["type"] = "radio_entry"
-                entry_dict.update(radio_data)
-            else:  # normal stream
-                stream_data = ***REMOVED***
-                    "type": "stream_entry",
-                    "title": entry.title
-                ***REMOVED***
-                entry.update(stream_data)
-        elif entry.spotify_track:
-            track = entry.spotify_track.get_dict()
-            # making sure that we get the actual duration
-            track["duration"] = entry.duration
-            entry_dict.update(track)
-            entry_dict["type"] = "spotify_entry"
-        elif entry.provides_timestamps:
-            timestamp_data = ***REMOVED***
-                "title": entry.title,
-                "queue": entry.sub_queue(),
-                "type": "timestamp_entry",
-                "duration": entry.duration
-            ***REMOVED***
-            if player.current_entry == entry:  # this song is already active
-                sub_progress, sub_duration = entry.get_local_progress(
-                    player.progress)
-                sub_entry = entry.get_current_song_from_timestamp(
-                    player.progress)
-                timestamp_data.update(***REMOVED***
-                    "sub_title": sub_entry["name"],
-                    "sub_progress": sub_progress,
-                    "sub_duration": sub_duration,
-                    "sub_index":  sub_entry["index"]
-                ***REMOVED***)
-            entry_dict.update(timestamp_data)
-        else:  # normal URLPlaylistEntry
-            data = ***REMOVED***
-                "title": entry.title,
-                "duration": entry.duration,
-                "type": "default_entry"
-            ***REMOVED***
-            entry_dict.update(data)
-
-    return entry_dict
+    def __exit__(self, type, value, traceback):
+        self.stop = True
 
 
 def similarity(a, b):
@@ -160,6 +102,29 @@ def create_bar(progress, length=10, full_char="■", half_char=None, empty_char=
         chrs.append(half_char)
 
     return ("***REMOVED***0:" + empty_char + "<" + str(length) + "***REMOVED***").format("".join(chrs))
+
+
+def get_image_brightness(**kwargs):
+    """
+    Keyword Arguments:
+    image -- A Pillow Image object
+    location -- a file path to the image
+    url -- the online location of the image
+    """
+    if "image" in kwargs:
+        im = kwargs["image"]
+    elif "location" in kwargs:
+        im = Image.open(kwargs["location"])
+    elif "url" in kwargs:
+        resp = requests.get(kwargs["url"])
+        content = BytesIO(resp.content)
+        im = Image.open(content)
+    else:
+        raise AttributeError("No image provided")
+
+    im = im.convert("L")
+    stat = ImageStat.Stat(im)
+    return stat.rms[0]
 
 
 def prettydate(d):
@@ -305,31 +270,59 @@ def _run_timestamp_matcher(text):
     return None
 
 
-def get_video_timestamps(video_id, song_dur=None):
-    url = "http://youtube.com/watch?v=" + video_id
+def get_video_sub_queue(description, video_id, song_dur):
+    timestamps = get_video_timestamps(description, video_id, song_dur)
+    if not timestamps:
+        return None
+
+    queue = []
+    entries = sorted(list(timestamps.keys()))
+    for index, key in enumerate(entries):
+        start = int(key)
+        next_start = int(entries[index + 1]) if index + \
+            1 < len(entries) else song_dur
+
+        dur = next_start - start
+        sub_entry = ***REMOVED***
+            "name": timestamps[key],
+            "duration": dur,
+            "start": start,
+            "index": index,
+            "end": next_start
+        ***REMOVED***
+        queue.append(sub_entry)
+
+    return queue
+
+
+def get_video_timestamps(description, video_id, song_dur=None):
     if song_dur:
         song_dur += 5  # I'm not that harsh, one second more or less ain't that bad
 
-    try:
-        desc = get_video_description(url)
-    except:
-        desc = None
-
-    if desc is not None:
-        songs = _run_timestamp_matcher(desc)
+    if description:
+        songs = _run_timestamp_matcher(description)
 
         if songs is not None:
             # probably for the best to trust the description. Even if not all
             # of them are as reliable as they should be.
             return songs
 
+    if not video_id:
+        return None
+
     try:
         if song_dur and song_dur < 200:  # I don't trust comments when the song is only about 3 mins loading
             return None
 
+        params = ***REMOVED***
+            "key": "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo",
+            "part": "snippet",
+            "order": "relevance",
+            "textFormat": "plainText",
+            "videoId": video_id
+        ***REMOVED***
         resp = requests.get(
-            "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo&part=snippet&order=relevance&textFormat=plainText&videoId="
-            + video_id)
+            "https://www.googleapis.com/youtube/v3/commentThreads", params=params)
         data = resp.json()
         for comment in data["items"]:
             songs = _run_timestamp_matcher(comment["snippet"][
@@ -347,15 +340,6 @@ def get_video_timestamps(video_id, song_dur=None):
         pass
 
     return None
-
-
-def get_video_description(url):
-    resp = requests.get(url)
-    bs = BeautifulSoup(resp.text, "lxml")
-    bs = bs.find("p", attrs=***REMOVED***"id": "eow-description"***REMOVED***)
-    for br in bs.find_all("br"):
-        br.replace_with("\n")
-    return bs.text
 
 
 def _choose_best_thumbnail(thumbnails):

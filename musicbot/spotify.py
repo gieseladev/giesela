@@ -1,4 +1,5 @@
 import re
+from random import choice
 
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -24,6 +25,10 @@ class SpotifyArtist:
         self.uri = uri
         self.href = href
         self._top_tracks = top_tracks
+
+    @property
+    def image(self):
+        return choice(self.images)["url"] if self.images else None
 
     @classmethod
     def from_data(cls, data):
@@ -72,6 +77,10 @@ class SpotifyAlbum:
         self.artists = artists
         self.images = images
         self.uri = uri
+
+    @property
+    def cover(self):
+        return self.images[0]["url"] if self.images else None
 
     @classmethod
     def from_data(cls, data):
@@ -147,24 +156,21 @@ class SpotifyTrack:
 
     @property
     def cover_url(self):
-        try:
-            return self.album.images[0]["url"]
-        except:
-            return None
+        return self.album.cover
 
     @property
-    def artist(self):
+    def artist_string(self):
         return " & ".join(artist.name for artist in self.artists[:2])
 
     def get_dict(self):
         data = ***REMOVED***
             "id": self.id,
             "name": self.name,
-            "artists": [artist.get_dict() for artist in self.artists] if self.artists is not None else None,
-            "artist": self.artist,
+            "artists": [artist.get_dict() for artist in self.artists] if self.artists else None,
+            "artist": self.artist_string,
             "cover_url": self.cover_url,
             "duration": self.duration,
-            "album": self.album.get_dict() if self.album is not None else None,
+            "album": self.album.get_dict() if self.album else None,
             "popularity": self.popularity,
             "uri": self.uri,
             "query": self.query,
