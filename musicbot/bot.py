@@ -1,3 +1,5 @@
+import asyncio
+import configparser
 import datetime
 import inspect
 import json
@@ -30,9 +32,6 @@ from discord.utils import find
 from discord.voice_client import VoiceClient
 from moviepy import editor, video
 from openpyxl import Workbook
-
-import asyncio
-import configparser
 
 from . import downloader, exceptions
 from .bookmarks import bookmark
@@ -748,7 +747,7 @@ class MusicBot(discord.Client):
         ex_type, ex, stack = sys.exc_info()
 
         if ex_type == exceptions.HelpfulError:
-            self.log("Exception in", event)
+            self.log("Exception in " + str(event))
             self.log(ex.message)
 
             await asyncio.sleep(2)  # don't ask
@@ -2125,7 +2124,8 @@ class MusicBot(discord.Client):
         player.skip()
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
-        "3.5.2": (1497712233, "Updated documentaion for this command")
+        "3.5.2": (1497712233, "Updated documentaion for this command"),
+        "3.8.8": (1499421755, "improved volume bar")
     ***REMOVED***)
     async def cmd_volume(self, message, player, leftover_args):
         """
@@ -2140,14 +2140,8 @@ class MusicBot(discord.Client):
 
         if not new_volume:
             bar_len = 20
-            return Response(
-                "Current volume: ***REMOVED******REMOVED***%\n***REMOVED******REMOVED***".format(
-                    int(player.volume * 100), "".join([
-                        "■" if (x / bar_len) < player.volume else "□"
-                        for x in range(bar_len)
-                    ])),
-                reply=True,
-                delete_after=20)
+            return Response("Current volume: ***REMOVED******REMOVED***%\n***REMOVED******REMOVED***".format(
+                int(player.volume * 100), create_bar(player.volume, 20)))
 
         relative = False
         special_operation = None
@@ -3922,9 +3916,9 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                str(reaction.emoji).startswith("📽") or
-                str(reaction.emoji).startswith("💾")
-                ) and reaction.count > 1 and user == author:
+                    str(reaction.emoji).startswith("📽") or
+                    str(reaction.emoji).startswith("💾")
+                    ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
