@@ -88,7 +88,7 @@ def write_file(filename, contents):
 
 def create_bar(progress, length=10, full_char="■", half_char=None, empty_char="□"):
     use_halves = half_char is not None
-    fill_to = round(2 * length * progress)
+    fill_to = 2 * round(length * progress)
     residue = fill_to % 2
     chrs = []
     for i in range(1, length + 1):

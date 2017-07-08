@@ -12,7 +12,6 @@ import subprocess
 import sys
 import time
 import traceback
-import urllib
 from collections import OrderedDict, defaultdict
 from datetime import datetime, timedelta
 from functools import wraps
@@ -1177,11 +1176,18 @@ class MusicBot(discord.Client):
                 *entry, author=author, channel=channel)
 
             total_entries = len(entry)
-            info_message = await self.safe_send_message(channel, "Parsing {} entries".format(total_entries))
-            percentage_message = await self.safe_send_message(channel, "{} [{}%]".format(create_bar(0, length=20), 0))
+            progress_message = await self.safe_send_message(
+                channel,
+                "Parsing {} entries\n{} [0%]".format(
+                    total_entries,
+                    create_bar(0, length=50)
+                )
+            )
             times = []
             abs_start = time.time()
             start_time = abs_start
+
+            progress_message_future = None
 
             async for ind, entry in entry_generator:
                 if entry:
@@ -1193,18 +1199,31 @@ class MusicBot(discord.Client):
                 times.append(time.time() - start_time)
                 start_time = time.time()
 
-                if round(100 * (ind + 1) / total_entries) % 1 == 0:
+                if not progress_message_future or progress_message_future.done():
                     avg_time = sum(times) / float(len(times))
+                    entries_left = total_entries - ind - 1
                     expected_time = format_time(
-                        avg_time * (total_entries - ind - 1), max_specifications=2, combine_with_and=True)
+                        avg_time * entries_left,
+                        max_specifications=2,
+                        unit_length=1
+                    )
                     completion_ratio = (ind + 1) / total_entries
-                    await self.safe_edit_message(percentage_message, "{} [{}%] ({} remaining)".format(create_bar(completion_ratio, length=20), round(100 * completion_ratio), expected_time))
+                    progress_message_future = asyncio.ensure_future(self.safe_edit_message(
+                        progress_message,
+                        "Parsing {} entr{} at {} entries/min\n{} [{}%]\n{} remaining".format(
+                            entries_left,
+                            "y" if entries_left == 1 else "ies",
+                            round(60 / avg_time, 1),
+                            create_bar(completion_ratio, length=50),
+                            round(100 * completion_ratio),
+                            expected_time
+                        )
+                    ))
 
             delta_time = time.time() - abs_start
 
-            await self.safe_delete_message(info_message)
-            await self.safe_delete_message(percentage_message)
-            return Response("Added {} entries to the queue\n**Stats**\nHad to skip {} entries\nIt took {} to add all entries".format(
+            await self.safe_delete_message(progress_message)
+            return Response("Added {} entries to the queue\nSkipped {} entries\nIt took {} to add all entries".format(
                 entries_added,
                 entries_not_added,
                 format_time(delta_time, unit_length=1)
@@ -1965,10 +1984,16 @@ class MusicBot(discord.Client):
         Show the last 10 songs
         """
 
+        if not player.playlist.history:
+            return Response("There IS no history")
+
         seconds_passed = player.progress if player.current_entry else 0
 
         lines = []
         for ind, entry in enumerate(player.playlist.history, 1):
+            finish_time = entry.meta.get("finish_time", None)
+            if finish_time:
+                seconds_passed = time.time() - finish_time
             lines.append(
                 "`{}.` **{}** {} ago".format(
                     ind,
@@ -1978,8 +2003,6 @@ class MusicBot(discord.Client):
                     ),
                     format_time(
                         seconds_passed,
-                        round_seconds=True,
-                        round_base=1,
                         max_specifications=2
                     )
                 )
@@ -3399,9 +3422,9 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                    str(reaction.emoji).startswith("📽") or
-                    str(reaction.emoji).startswith("💾")
-                    ) and reaction.count > 1 and user == author:
+                str(reaction.emoji).startswith("📽") or
+                str(reaction.emoji).startswith("💾")
+                ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
@@ -4031,8 +4054,8 @@ class MusicBot(discord.Client):
                 avg_time = sum(times) / float(len(times))
                 expected_time = avg_time * \
                     (total_entries - ind - 1)
-                await self.safe_edit_message(percentage_message, "{} [{}%] ({} remaining)".format(
-                    create_bar((ind + 1) / total_entries, length=20),
+                await self.safe_edit_message(percentage_message, "{} [{}%]\n{} remaining".format(
+                    create_bar((ind + 1) / total_entries, length=30),
                     round(100 * (ind + 1) / total_entries),
                     format_time(
                         expected_time,
