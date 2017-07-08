@@ -48,6 +48,7 @@ class Playlist(EventEmitter):
         self.history = [entry, *self.history[:9]]
 
     async def add_stream_entry(self, stream_url, **meta):
+        info = ***REMOVED***"title": song_url, "extractor": None***REMOVED***
         try:
             info = await self.downloader.extract_info(self.loop, stream_url, download=False)
 
@@ -91,6 +92,11 @@ class Playlist(EventEmitter):
         self._add_entry(entry)
 
         return entry, len(self.entries)
+
+    async def add_radio_entry(self, station_info, **meta):
+        entry = RadioEntry(self, station_info.url,
+                           station_info.name, station_info, **meta)
+        self._add_entry(entry)
 
     async def add_entry(self, song_url, **meta):
         """

@@ -1,9 +1,9 @@
+import configparser
 import json
 import os
 
-import configparser
-
-from .entry import Entry as urlEntry
+from .entry import Entry
+from .exceptions import OutdatedEntryError
 
 
 class Playlists:
@@ -30,28 +30,40 @@ class Playlists:
         with open(self.playlists_file, "w") as pl_file:
             self.playlists.write(pl_file)
 
-    def get_playlist(self, playlistname, playlist, load_entries=True):
+    def get_playlist(self, playlistname, playlist, load_entries=True, channel=None):
         playlistname = playlistname.lower().strip().replace(" ", "_")
         if not self.playlists.has_section(playlistname):
             return None
 
         plsection = self.playlists[playlistname]
 
-        playlist_information = ***REMOVED******REMOVED***
-        playlist_information["location"] = plsection["location"]
-        playlist_information["author"] = plsection["author"]
-        playlist_information["entry_count"] = plsection["entries"]
-        playlist_information["replay_count"] = self.playlists.getint(
-            playlistname, "replays", fallback=0)
+        playlist_information = ***REMOVED***
+            "location": plsection["location"],
+            "author": plsection["author"],
+            "entry_count": plsection["entries"],
+            "replay_count": int(plsection["replays"])
+        ***REMOVED***
 
         entries = []
+        # this is gonna be a list of urls populated with the broken or outdated entries
+        broken_entries = []
         if load_entries and not os.stat(playlist_information["location"]).st_size == 0:
             with open(playlist_information["location"], "r") as file:
                 serialized_json = json.loads(file.read())
-            for ind, entry in enumerate(serialized_json):
-                entries.append(urlEntry.from_dict(playlist, entry))
+            for ind, ser_entry in enumerate(serialized_json):
+                try:
+                    entry = Entry.from_dict(playlist, ser_entry)
+                    entry.meta["channel"] = channel
+                except (OutdatedEntryError, TypeError, KeyError):
+                    entry = None
+
+                if not entry:
+                    broken_entries.append(ser_entry)
+                else:
+                    entries.append(entry)
 
         playlist_information["entries"] = entries
+        playlist_information["broken_entries"] = broken_entries
 
         return playlist_information
 

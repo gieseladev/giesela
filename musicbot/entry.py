@@ -1,11 +1,12 @@
+import asyncio
 import os
+import time
 import traceback
 
 from discord import Channel, Member, Server, User
 
-import asyncio
-
-from .exceptions import ExtractionError
+from .exceptions import ExtractionError, OutdatedEntryError
+from .radio import RadioSongExtractor, StationInfo
 from .spotify import SpotifyTrack
 from .utils import (clean_songname, get_header, get_image_brightness, md5sum,
                     slugify)
@@ -13,11 +14,18 @@ from .web_socket_server import WebAuthor
 
 
 class Entry:
+    version_code = "1.0.0"
+    version = int(version_code.replace(".", ""))
     can_encode = (int, dict, list, str, int, float, bool)
     default_encode = (Channel, Member, Server, User)
 
     @classmethod
     def from_dict(cls, playlist, data):
+        entry_version = data.get("version", 0)
+
+        if entry_version < Entry.version:
+            raise OutdatedEntryError()
+
         entry_type = data.get("type", None)
         if not entry_type:
             raise KeyError("Data does not include a type parameter")
@@ -29,7 +37,7 @@ class Entry:
     @staticmethod
     def create_meta_dict(meta):
         meta_dict = ***REMOVED******REMOVED***
-        for key, value in self.meta.items():
+        for key, value in meta.items():
             if key is None or value is None:
                 continue
 
@@ -163,12 +171,16 @@ class StreamEntry(BaseEntry):
 
         self.playlist = queue
         self.url = url
-        self.title = title
+        self._title = title
         self.destination = destination
         self.meta = meta
 
         if self.destination:
             self.filename = self.destination
+
+    @property
+    def title(self):
+        return self._title
 
     def set_start(self, sec):
         raise NotImplementedError
@@ -196,6 +208,7 @@ class StreamEntry(BaseEntry):
         meta_dict = Entry.create_meta_dict(self.meta)
 
         data = ***REMOVED***
+            "version": Entry.version,
             "type": self.__class__.__name__,
             "url": self.url,
             "title": self._title,
@@ -226,7 +239,99 @@ class StreamEntry(BaseEntry):
 
 
 class RadioEntry(StreamEntry):
-    pass
+    def __init__(self, queue, url, title, station_data, destination=None, **meta):
+        super().__init__(queue, url, title, destination, **meta)
+        self.station_data = station_data
+        self.station_name = station_data.name
+        self._cover = self.station_data.cover
+        self._current_song_info = None
+        self._csi_poll_time = 0
+
+    @property
+    def has_current_song_info(self):
+        return self.station_data.has_current_song_info
+
+    def _get_new_song_info(self):
+        self._current_song_info = RadioSongExtractor.get_current_song(
+            self.station_data)
+        self._csi_poll_time = time.time()
+
+    @property
+    def current_song_info(self):
+        if not self.has_current_song_info:
+            return None
+        if self._current_song_info is None or (time.time() - self._csi_poll_time) > 20:
+            print("[RadioEntry] getting new current_song_info")
+            self._get_new_song_info()
+
+        return self._current_song_info
+
+    @property
+    def song_progress(self):
+        if self.has_current_song_info:
+            return self.current_song_info["progress"]
+        else:
+            raise TypeError("This Radio Station doesn't provide this info")
+
+    @property
+    def song_duration(self):
+        if self.has_current_song_info:
+            return self.current_song_info["duration"]
+        else:
+            raise TypeError("This Radio Station doesn't provide this info")
+
+    @property
+    def link(self):
+        if self.has_current_song_info:
+            return self.current_song_info["youtube"]
+        else:
+            return self.station_data.website
+
+    @property
+    def title(self):
+        if self.has_current_song_info:
+            return self.current_song_info["title"]
+        else:
+            return self._title
+
+    @property
+    def artist(self):
+        if self.has_current_song_info:
+            return self.current_song_info["artist"]
+        else:
+            raise TypeError("This Radio Station doesn't provide this info")
+
+    @property
+    def cover(self):
+        if self.has_current_song_info:
+            return self.current_song_info["cover"]
+        else:
+            raise TypeError("This Radio Station doesn't provide this info")
+
+    @classmethod
+    def from_dict(cls, playlist, data):
+        if data["type"] != cls.__name__:
+            raise AttributeError("This data isn't of this entry type")
+
+        meta_dict = data.get("meta", None)
+        if meta_dict:
+            meta = Entry.meta_from_dict(meta_dict, playlist.bot)
+        else:
+            meta = ***REMOVED******REMOVED***
+
+        url = data["url"]
+        title = data["title"]
+        station_data = StationInfo.from_dict(data["station_data"])
+
+        return cls(playlist, url, title, station_data, **meta)
+
+    def to_dict(self):
+        d = super().to_dict()
+        d.update(***REMOVED***
+            "station_data": self.station_data.to_dict()
+        ***REMOVED***)
+
+        return d
 
 
 class YoutubeEntry(BaseEntry):
@@ -266,7 +371,7 @@ class YoutubeEntry(BaseEntry):
             meta = ***REMOVED******REMOVED***
 
         video_id = data["video_id"]
-        url = data["video_id"]
+        url = data["url"]
         title = data["title"]
         duration = data["duration"]
         thumbnail = data["thumbnail"]
@@ -278,6 +383,7 @@ class YoutubeEntry(BaseEntry):
         meta_dict = Entry.create_meta_dict(self.meta)
 
         data = ***REMOVED***
+            "version": Entry.version,
             "type": self.__class__.__name__,
             "video_id": self.video_id,
             "url": self.url,
@@ -444,15 +550,15 @@ class TimestampEntry(YoutubeEntry):
 
     @property
     def _is_current_entry(self):
-        current_entry = self.queue.player.current_entry
+        current_entry = self.playlist.player.current_entry
         return self == current_entry
 
     @property
     def current_sub_entry(self):
-        if not _is_current_entry:
+        if not self._is_current_entry:
             return sub_queue[0]
 
-        progress = self.queue.player.progress
+        progress = self.playlist.player.progress
 
         sub_entry = None
         for entry in self.sub_queue:
@@ -493,7 +599,7 @@ class TimestampEntry(YoutubeEntry):
         description = data["description"]
         sub_queue = data["sub_queue"]
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, spotify_data, **meta)
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, sub_queue, **meta)
 
     def to_dict(self):
         d = super().to_dict()
