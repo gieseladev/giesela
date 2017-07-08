@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 import decimal
 import json
@@ -15,8 +16,6 @@ import aiohttp
 import requests
 from bs4 import BeautifulSoup
 from PIL import Image, ImageStat
-
-import asyncio
 
 from .constants import DISCORD_MSG_CHAR_LIMIT
 
@@ -208,14 +207,6 @@ def clean_songname(query):
 
     for target, replacement in special_regex_after:
         query = re.sub(target, replacement, query, flags=re.IGNORECASE)
-
-    # # get rid of words that repeat twice or more
-    # repeating_words = re.search(
-    #     r"((?:\w+(?:\s|\b)){2,}).+(\1)", query, flags=re.IGNORECASE)
-    # if repeating_words:
-    #     repetition_start, repetition_end = repeating_words.start(
-    #         2), repeating_words.end(2)
-    #     query = query[:repetition_start] + query[repetition_end:]
 
     # remove everything apart from the few allowed characters
     query = re.sub(r"[^\w\s\-\&\',]", " ", query)

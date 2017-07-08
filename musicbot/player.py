@@ -1,21 +1,19 @@
+import asyncio
+import audioop
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
+from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
 
-import asyncio
-import audioop
-from enum import Enum
-
-from .entry import RadioEntry, TimestampEntry
+from .entry import RadioEntry, StreamEntry, TimestampEntry
 from .exceptions import FFmpegError, FFmpegWarning
 from .lib.event_emitter import EventEmitter
 from .playlist import Playlist
-from .radio import Radio
 from .utils import format_time_ffmpeg
 
 
@@ -335,12 +333,19 @@ class MusicPlayer(EventEmitter):
             # In-case there was a player, kill it. RIP.
             self._kill_current_player()
 
+            if isinstance(entry, StreamEntry):
+                before_options = "-nostdin"
+                options = "-vn -b:a 128k"
+            else:
+                before_options = "-nostdin -ss {}".format(
+                    format_time_ffmpeg(int(entry.start_seconds)))
+                options = "-vn -to {} -b:a 128k".format(format_time_ffmpeg(
+                    int(entry.end_seconds - entry.start_seconds)))
+
             self._current_player = self._monkeypatch_player(self.voice_client.create_ffmpeg_player(
                 entry.filename,
-                before_options="-nostdin -ss {}".format(
-                    format_time_ffmpeg(int(entry.start_seconds))),
-                options="-vn -to {} -b:a 128k".format(format_time_ffmpeg(
-                    int(entry.end_seconds - entry.start_seconds))),
+                before_options=before_options,
+                options=options,
                 stderr=subprocess.PIPE,
                 after=lambda: self.loop.call_soon_threadsafe(
                     self._playback_finished)

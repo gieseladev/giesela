@@ -1,0 +1,47 @@
+[
+  {
+    "id": "capitalfm",
+    "name": "Capital FM",
+    "aliases": ["kappable", "kappablefm", "kappable fm", "cfm"],
+    "language": "en",
+    "cover": "http://capital.gcstatic.com/assets_v4r/capital/img/default_image_track.png",
+    "website": "http://capitalfm.com",
+    "url": "media-ice.musicradio.com/CapitalMP3"
+  },
+  {
+    "id": "energybern",
+    "name": "Energy Bern",
+    "aliases": ["energy"],
+    "language": "ch",
+    "cover": "http://upload.wikimedia.org/wikipedia/commons/6/64/Energy_Bern_Logo.png",
+    "website": "http://energy.ch",
+    "url": "http://energybern.ice.infomaniak.ch/energybern-high.mp3"
+  },
+  {
+    "id": "radio32",
+    "name": "Radio 32",
+    "aliases": ["32"],
+    "language": "ch",
+    "cover": "http://www.o-ton.ch/wp-content/uploads/2007/05/r32-logo_schwarz.jpg",
+    "website": "http://radio32.ch",
+    "url": "http://stream.radio32.ch/radio32"
+  },
+  {
+    "id": "bbc",
+    "name": "BBC",
+    "aliases": [],
+    "language": "en",
+    "cover": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/BBC_Radio_logo.svg/1200px-BBC_Radio_logo.svg.png",
+    "website": "http://bbc.com",
+    "url": "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_q"
+  },
+  {
+    "id": "heartlondon",
+    "name": "Heart London",
+    "aliases": ["love"],
+    "language": "en",
+    "cover": "http://static.radio.net/images/broadcasts/51/ec/9458/c175.png",
+    "website": "http://heartlondon.com",
+    "url": "media-ice.musicradio.com/HeartLondon"
+  }
+]
