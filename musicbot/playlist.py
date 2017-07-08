@@ -1,4 +1,5 @@
 import datetime
+import time
 import traceback
 from collections import deque
 from itertools import islice
@@ -45,6 +46,7 @@ class Playlist(EventEmitter):
         self.entries.clear()
 
     def push_history(self, entry):
+        entry.meta["finish_time"] = time.now()
         self.history = [entry, *self.history[:9]]
 
     async def add_stream_entry(self, stream_url, **meta):
@@ -125,59 +127,6 @@ class Playlist(EventEmitter):
         entry = await self.get_entry(song_url, **meta)
         self._add_entry_next(entry)
         return entry, len(self.entries)
-
-    async def get_entries_from_playlist(self, playlist_url, **meta):
-
-        try:
-            info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False, process=False)
-        except Exception as e:
-            raise ExtractionError(
-                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
-
-        if not info:
-            raise ExtractionError(
-                'Could not extract information from %s' % playlist_url)
-
-        urls = [entry["webpage_url"] for entry in info["entries"]]
-        gooditems = []
-        baditems = 0
-        async for ind, entry in get_entries_from_urls_gen(*urls, **meta):
-            if entry:
-                gooditems.append(entry)
-            else:
-                baditems += 1
-
-        if baditems:
-            print("Skipped %s bad entries" % baditems)
-
-        return gooditems
-
-    async def add_youtube_playlist(self, playlist_url, **meta):
-
-        try:
-            info = await self.downloader.safe_extract_info(self.loop, playlist_url, download=False, process=False)
-        except Exception as e:
-            raise ExtractionError(
-                'Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***'.format(playlist_url, e))
-
-        if not info:
-            raise ExtractionError(
-                'Could not extract information from %s' % playlist_url)
-
-        urls = [entry["webpage_url"] for entry in info["entries"]]
-        gooditems = []
-        baditems = 0
-        async for ind, entry in get_entries_from_urls_gen(*urls, **meta):
-            if entry:
-                self._add_entry(entry)
-                gooditems.append(entry)
-            else:
-                baditems += 1
-
-        if baditems:
-            print("Skipped %s bad entries" % baditems)
-
-        return gooditems
 
     async def get_entry_from_query(self, query, **meta):
 
@@ -268,7 +217,7 @@ class Playlist(EventEmitter):
         video_url = info.get("webpage_url")
         video_duration = info.get("duration", 0)
 
-        clean_title = clean_songname(video_title)
+        clean_title = clean_songname(video_title) or video_title
 
         spotify_track = SpotifyTrack.from_query(clean_title)
         if spotify_track.certainty > .6:
