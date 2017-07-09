@@ -474,7 +474,7 @@ class MusicBot(discord.Client):
                 sub_title = sub_entry["name"]
                 sub_index = sub_entry["index"] + 1
                 newmsg = "Now playing **{0}** ({1}{2} entry) from \"{3}\"".format(
-                    sub_title, sub_index, ordinal(sub_index), entry.title)
+                    sub_title, sub_index, ordinal(sub_index), entry.whole_title)
             elif isinstance(entry, RadioSongEntry):
                 newmsg = "Now playing **{}**".format(
                     " - ".join((entry.artist, entry.title)))
@@ -1619,7 +1619,7 @@ class MusicBot(discord.Client):
                     to_timestamp(sub_entry["progress"]),
                     to_timestamp(sub_entry["duration"])
                 )
-                foot = "{}{} sub-entry of \"{}\" `[{}/{}]`".format(
+                foot = "{}{} sub-entry of \"{}\" [{}/{}]".format(
                     index,
                     ordinal(index),
                     entry.whole_title,
@@ -3441,9 +3441,9 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                str(reaction.emoji).startswith("📽") or
-                str(reaction.emoji).startswith("💾")
-                ) and reaction.count > 1 and user == author:
+                    str(reaction.emoji).startswith("📽") or
+                    str(reaction.emoji).startswith("💾")
+                    ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
@@ -3807,8 +3807,22 @@ class MusicBot(discord.Client):
                 return Response(
                     "Can't load this playlist, there's no playlist with this name.")
 
-            clone_entries = self.playlists.get_playlist(
-                savename, player.playlist, channel=channel)["entries"]
+            playlist = self.playlists.get_playlist(
+                savename, player.playlist, channel=channel)
+            clone_entries = playlist["entries"]
+            broken_entries = playlist["broken_entries"]
+
+            if not clone_entries:
+                if broken_entries:
+                    return Response("Can't play `{0}`, there are **{1}** broken entr{2} in this playlist.\nOpen the playlist builder to fix {3} (`{4}playlist builder {0}`)".format(
+                        savename.title(),
+                        len(broken_entries),
+                        "y" if len(broken_entries) == 1 else "ies",
+                        "it" if len(broken_entries) == 1 else "them",
+                        self.config.command_prefix
+                    ))
+                else:
+                    return Response("There's nothing in `{}` to play".format(savename.title()))
 
             if load_mode == "replace":
                 player.playlist.clear()
@@ -3816,8 +3830,8 @@ class MusicBot(discord.Client):
                     player.skip()
 
             try:
-                from_index = int(additional_args[2]) - \
-                    1 if len(additional_args) > 2 else 0
+                from_index = int(
+                    additional_args[2]) - 1 if len(additional_args) > 2 else 0
                 if from_index >= len(clone_entries) or from_index < 0:
                     return Response("Can't load the playlist starting from entry {}. This value is out of bounds.".format(from_index))
             except ValueError:
@@ -3857,7 +3871,19 @@ class MusicBot(discord.Client):
             player.playlist.add_entries(clone_entries)
             self.playlists.bump_replay_count(savename)
 
-            return Response("Enjoy your music!")
+            if not broken_entries:
+                return Response("Loaded `{}`".format(savename.title()))
+            else:
+                text = "Loaded {0} entr{1} from `{2}`. **{3}** entr{4} couldn't be loaded.\nOpen the playlist builder to repair {5}. (`{6}playlist builder {2}`)"
+                return Response(text.format(
+                    len(clone_entries),
+                    "y" if len(clone_entries) == 1 else "ies",
+                    savename.title(),
+                    len(broken_entries),
+                    "y" if len(broken_entries) == 1 else "ies",
+                    "it" if len(broken_entries) == 1 else "them",
+                    self.config.command_prefix
+                ))
 
         elif argument == "delete":
             if savename not in self.playlists.saved_playlists:
@@ -4068,7 +4094,7 @@ class MusicBot(discord.Client):
             self.playlists.set_playlist([], _savename, author.id)
 
         def check(m):
-            return (m.content.split()[0].lower() in ["add", "remove", "rename", "exit", "p", "n", "save", "extras"])
+            return (m.content.split()[0].lower() in ["add", "remove", "rename", "exit", "p", "n", "save", "extras", "search"])
 
         async def _get_entries_from_urls(urls, message):
             entries = []
@@ -4078,10 +4104,11 @@ class MusicBot(discord.Client):
                 *urls)
 
             total_entries = len(urls)
-            info_message = await self.safe_send_message(channel, message)
-            percentage_message = await self.safe_send_message(channel, "{} [{}%]".format(create_bar(0, length=20), 0))
+            progress_message = await self.safe_send_message(channel, "{}\n{} [0%]".format(message.format(entries_left=total_entries), create_bar(0, length=40)))
             times = []
             start_time = time.time()
+
+            progress_message_future = None
 
             async for ind, entry in entry_generator:
                 if entry:
@@ -4092,22 +4119,24 @@ class MusicBot(discord.Client):
                 times.append(time.time() - start_time)
                 start_time = time.time()
 
-                avg_time = sum(times) / float(len(times))
-                expected_time = avg_time * \
-                    (total_entries - ind - 1)
-                await self.safe_edit_message(percentage_message, "{} [{}%]\n{} remaining".format(
-                    create_bar((ind + 1) / total_entries, length=30),
-                    round(100 * (ind + 1) / total_entries),
-                    format_time(
-                        expected_time,
-                        max_specifications=2,
-                        combine_with_and=True,
-                        unit_length=1
-                    )
-                ))
+                if not progress_message_future or progress_message_future.done():
+                    entries_left = total_entries - ind - 1
+                    avg_time = sum(times) / float(len(times))
+                    expected_time = avg_time * entries_left
 
-            await self.safe_delete_message(info_message)
-            await self.safe_delete_message(percentage_message)
+                    await self.safe_edit_message(progress_message, "{}\n{} [{}%]\n{} remaining".format(
+                        message.format(entries_left=entries_left),
+                        create_bar((ind + 1) / total_entries, length=40),
+                        round(100 * (ind + 1) / total_entries),
+                        format_time(
+                            expected_time,
+                            max_specifications=2,
+                            combine_with_and=True,
+                            unit_length=1
+                        )
+                    ))
+
+            await self.safe_delete_message(progress_message)
             return entries, removed_entries
 
         abort = False
@@ -4122,7 +4151,7 @@ class MusicBot(discord.Client):
         savename = _savename
         user_savename = savename
 
-        interface_string = "**{}** by **{}** ({} song{} with a total length of {})\n\n{}\n\n**You can use the following commands:**\n`add <query>`: Add a video to the playlist (this command works like the normal `{}play` command)\n`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index\n`rename <newname>`: rename the current playlist\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
+        interface_string = "**{}** by **{}** ({} song{} with a total length of {})\n\n{}\n\n**You can use the following commands:**\n`add <query>`: Add a video to the playlist (this command works like the normal `{}play` command)\n`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index\n`rename <newname>`: rename the current playlist\n`search <query>`: search for an entry\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
 
         extras_string = "**{}** by **{}** ({} song{} with a total length of {})\n\n**Extra functions:**\n`sort <alphabetical | length | random>`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n`rebuild`: clean the playlist by removing broken videos\n\n`abort`: return to main screen"
 
@@ -4131,9 +4160,8 @@ class MusicBot(discord.Client):
         if playlist["broken_entries"]:
             broken_entries = playlist["broken_entries"]
             if len(broken_entries) > 1:
-                m = "There are {} broken/outdated entries in this playlist. I'm going to fix them, please stand by."
-                new_entries, hopeless_entries = await _get_entries_from_urls(
-                    [entry["url"] for entry in broken_entries], m.format(len(broken_entries)))
+                m = "There are {entries_left} broken/outdated entries in this playlist. I'm going to fix them, please stand by."
+                new_entries, hopeless_entries = await _get_entries_from_urls([entry["url"] for entry in broken_entries], m)
                 playlist["entries"].extend(new_entries)
                 if hopeless_entries:
                     await self.safe_send_message(channel, "I couldn't save the following entries\n{}".format(
@@ -4192,8 +4220,7 @@ class MusicBot(discord.Client):
                 abort = True
                 break
 
-            elif response_message.content.lower().startswith(self.config.command_prefix) or \
-                    response_message.content.lower().startswith('exit'):
+            elif response_message.content.lower().startswith(self.config.command_prefix) or response_message.content.lower().startswith('exit'):
                 abort = True
 
             elif response_message.content.lower().startswith("save"):
@@ -4210,7 +4237,7 @@ class MusicBot(discord.Client):
                         start_time = datetime.now()
                         entry = await player.playlist.get_entry_from_query(query)
                         if isinstance(entry, list):
-                            entries, _ = await _get_entries_from_urls(entry, "Adding this playlist")
+                            entries, _ = await _get_entries_from_urls(entry, "Parsing {entries_left} entries")
                         else:
                             entries = [entry, ]
                         if (datetime.now() - start_time).total_seconds() > 40:
@@ -4261,6 +4288,41 @@ class MusicBot(discord.Client):
                     pl_changes["new_name"] = re.sub("\W", "",
                                                     arguments[0].lower())
                     user_savename = pl_changes["new_name"]
+
+            elif split_message[0].lower() == "search":
+                if not arguments:
+                    msg = await self.safe_send_message(channel, "Please provide a query to search for!")
+                    asyncio.sleep(3)
+                    await self.safe_delete_message(msg)
+                    continue
+
+                query = " ".join(arguments)
+                results = self.playlists.search_entries_in_playlist(
+                    player.playlist, playlist, query, certainty_threshold=.55)
+
+                if not results:
+                    msg = await self.safe_send_message(channel, "**Didn't find anything**")
+                    asyncio.sleep(4)
+                    await self.safe_delete_message(msg)
+                    continue
+
+                lines = []
+                for certainty, entry in results[:5]:
+                    entry_index = entries.index(entry)
+                    lines.append(
+                        "`{}.` **{}**".format(entry_index, entry.title))
+
+                msg = "**Found the following entries:**\n" + \
+                    "\n".join(lines) + \
+                    "\n*Send any message to close this message*"
+                msg = await self.safe_send_message(channel, msg)
+
+                resp = await self.wait_for_message(timeout=60, author=author, channel=channel)
+                if resp:
+                    await self.safe_delete_message(resp)
+                await self.safe_delete_message(msg)
+
+                return
 
             elif split_message[0].lower() == "extras":
 

@@ -1,7 +1,7 @@
 import asyncio
 import datetime
-import decimal
 import json
+import math
 import random
 import re
 import time
@@ -121,7 +121,6 @@ def get_image_brightness(**kwargs):
     else:
         raise AttributeError("No image provided")
 
-    im = im.convert("L")
     stat = ImageStat.Stat(im)
 
     r, g, b = stat.mean
@@ -277,7 +276,7 @@ def get_video_sub_queue(description, video_id, song_dur):
 
         dur = next_start - start
         sub_entry = {
-            "name": timestamps[key],
+            "name": clean_songname(timestamps[key]),
             "duration": dur,
             "start": start,
             "index": index,

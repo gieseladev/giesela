@@ -75,6 +75,7 @@ class Entry:
 
             if value:
                 meta[key] = value
+        return meta
 
 
 class BaseEntry:
@@ -597,7 +598,7 @@ class TimestampEntry(YoutubeEntry):
 
     def __init__(self, queue, video_id, url, title, duration, thumbnail, description, sub_queue, expected_filename=None, **meta):
         super().__init__(queue, video_id, url, title, duration,
-                         thumbnail, description, expected_filename=None, **meta)
+                         thumbnail, description, expected_filename, **meta)
         self.sub_queue = sub_queue
 
     @property
@@ -644,7 +645,7 @@ class TimestampEntry(YoutubeEntry):
             meta = {}
 
         video_id = data["video_id"]
-        url = data["video_id"]
+        url = data["url"]
         title = data["title"]
         duration = data["duration"]
         thumbnail = data["thumbnail"]
@@ -694,7 +695,7 @@ class SpotifyEntry(YoutubeEntry):
             meta = {}
 
         video_id = data["video_id"]
-        url = data["video_id"]
+        url = data["url"]
         title = data["title"]
         duration = data["duration"]
         thumbnail = data["thumbnail"]
