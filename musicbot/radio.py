@@ -13,7 +13,7 @@ from .utils import parse_timestamp
 
 class StationInfo:
 
-    def __init__(self, id, name, aliases, language, cover, url, website):
+    def __init__(self, id, name, aliases, language, cover, url, website, thumbnails):
         self.id = id
         self.name = name
         self._aliases = aliases
@@ -22,7 +22,12 @@ class StationInfo:
         self.cover = cover
         self.url = url
         self.website = website
+        self.thumbnails = thumbnails
         self.has_current_song_info = RadioSongExtractor.has_data(self)
+
+    @property
+    def thumbnail(self):
+        return choice(self.thumbnails)
 
     @classmethod
     def from_dict(cls, data):
@@ -30,13 +35,14 @@ class StationInfo:
 
     def to_dict(self):
         data = {
-            "id":       self.id,
-            "name":     self.name,
-            "aliases":  self._aliases,
-            "language": self.language,
-            "cover":    self.cover,
-            "website":  self.website,
-            "url":      self.url
+            "id":           self.id,
+            "name":         self.name,
+            "aliases":      self._aliases,
+            "language":     self.language,
+            "cover":        self.cover,
+            "website":      self.website,
+            "url":          self.url,
+            "thumbnails":   self.thumbnails
         }
         return data
 
