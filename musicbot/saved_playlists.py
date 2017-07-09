@@ -4,6 +4,7 @@ import os
 
 from .entry import Entry
 from .exceptions import OutdatedEntryError
+from .utils import clean_songname, similarity
 
 
 class Playlists:
@@ -102,6 +103,43 @@ class Playlists:
             return True
 
         return False
+
+    def in_playlist(self, queue, playlist, query, certainty_threshold=.6):
+        results = self.search_entries_in_playlist(
+            queue, playlist, query
+        )
+        result = results[0]
+        if result[0] > certainty_threshold:
+            return result[1]
+        else:
+            return False
+
+    def search_entries_in_playlist(self, queue, playlist, query):
+        if isinstance(playlist, str):
+            playlist = self.get_playlist(playlist, queue)
+
+        if isinstance(query, str):
+            query_title, query_url = query
+        else:
+            query_title = query.title
+            query_url = query.url
+
+        entries = playlist["entries"]
+
+        def get_similarity(entry):
+            s1 = similarity(query_title, entry.title)
+            s2 = similarity(query_url, entry.url)
+
+            return max(s1, s2)
+
+        matched_entries = [(get_similarity(entry), entry) for entry in entries]
+        ranked_entries = sorted(
+            matched_entries,
+            key=lambda el: el[0],
+            reverse=True
+        )
+
+        return ranked_entries
 
     def remove_playlist(self, name):
         name = name.lower().strip().replace(" ", "_")

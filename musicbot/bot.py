@@ -38,8 +38,8 @@ from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
 from .constants import (AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT,
                         get_dev_changelog, get_dev_version, get_master_version)
-from .entry import (RadioEntry, SpotifyEntry, StreamEntry, TimestampEntry,
-                    YoutubeEntry)
+from .entry import (RadioSongEntry, RadioStationEntry, SpotifyEntry,
+                    StreamEntry, TimestampEntry, YoutubeEntry)
 from .games.game_2048 import Game2048
 from .games.game_cah import GameCAH
 from .games.game_hangman import GameHangman
@@ -475,7 +475,7 @@ class MusicBot(discord.Client):
                 sub_index = sub_entry["index"] + 1
                 newmsg = "Now playing *****REMOVED***0***REMOVED***** (***REMOVED***1***REMOVED******REMOVED***2***REMOVED*** entry) from \"***REMOVED***3***REMOVED***\"".format(
                     sub_title, sub_index, ordinal(sub_index), entry.title)
-            elif isinstance(entry, RadioEntry):
+            elif isinstance(entry, RadioSongEntry):
                 newmsg = "Now playing *****REMOVED******REMOVED*****".format(
                     " - ".join((entry.artist, entry.title)))
             else:
@@ -981,7 +981,7 @@ class MusicBot(discord.Client):
             else:
                 await self.send_typing(channel)
                 params = ***REMOVED***
-                    "v": "23/06/2017",
+                    "v": datetime.date.today().strftime("%d/%m/%y"),
                     "q": command***REMOVED***
                 headers = ***REMOVED***
                     "Authorization": "Bearer CU4UAUCKWN37QLXHMBOYZ425NOGBMIYK"***REMOVED***
@@ -1013,7 +1013,8 @@ class MusicBot(discord.Client):
                 "`***REMOVED***0***REMOVED***volume` change volume",
                 "`***REMOVED***0***REMOVED***seek` seek to a timestamp",
                 "`***REMOVED***0***REMOVED***fwd` forward time",
-                "`***REMOVED***0***REMOVED***rwd` rewind time"]).format(self.config.command_prefix)
+                "`***REMOVED***0***REMOVED***rwd` rewind time"
+            ]).format(self.config.command_prefix)
             em.add_field(name="Music", value=music_commands, inline=False)
 
             queue_commands = "\n".join([
@@ -1026,13 +1027,15 @@ class MusicBot(discord.Client):
                 "`***REMOVED***0***REMOVED***remove` remove entry from queue",
                 "`***REMOVED***0***REMOVED***clear` remove all entries from queue",
                 "`***REMOVED***0***REMOVED***shuffle` shuffle the queue",
-                "`***REMOVED***0***REMOVED***promote` promote entry to front"]).format(self.config.command_prefix)
+                "`***REMOVED***0***REMOVED***promote` promote entry to front"
+            ]).format(self.config.command_prefix)
             em.add_field(name="Queue", value=queue_commands, inline=False)
 
             playlist_commands = "\n".join([
                 "`***REMOVED***0***REMOVED***playlist` create/edit/list playlists",
                 "`***REMOVED***0***REMOVED***addtoplaylist` add entry to playlist",
-                "`***REMOVED***0***REMOVED***removefromplaylist` remove entry from playlist"]).format(self.config.command_prefix)
+                "`***REMOVED***0***REMOVED***removefromplaylist` remove entry from playlist"
+            ]).format(self.config.command_prefix)
             em.add_field(name="Playlist",
                          value=playlist_commands, inline=False)
 
@@ -1041,7 +1044,8 @@ class MusicBot(discord.Client):
                 "`***REMOVED***0***REMOVED***random` choose between items",
                 "`***REMOVED***0***REMOVED***game` play a game",
                 "`***REMOVED***0***REMOVED***ask` ask a question",
-                "`***REMOVED***0***REMOVED***c` chat with Giesela"]).format(self.config.command_prefix)
+                "`***REMOVED***0***REMOVED***c` chat with Giesela"
+            ]).format(self.config.command_prefix)
             em.add_field(name="Misc", value=misc_commands, inline=False)
 
             return Response(embed=em)
@@ -1154,7 +1158,7 @@ class MusicBot(discord.Client):
         `***REMOVED***command_prefix***REMOVED***play <song link>
         `***REMOVED***command_prefix***REMOVED***play <query>
         ///|Explanation
-        Adds the song to the playlist.  If no link is provided, the first
+        Adds the song to the queue.  If no link is provided, the first
         result from a youtube search is added to the queue.
         """
 
@@ -1539,7 +1543,22 @@ class MusicBot(discord.Client):
             entry = player.current_entry
             em = None
 
-            if isinstance(entry, RadioEntry):
+            if isinstance(entry, RadioSongEntry):
+                desc = "`***REMOVED******REMOVED***`".format(
+                    to_timestamp(player.progress)
+                )
+                foot = "🔴 Live from ***REMOVED******REMOVED***".format(entry.station_name)
+
+                em = Embed(
+                    title=entry.title,
+                    description=desc,
+                    url=entry.link,
+                    colour=hex_to_dec("#be7621")
+                )
+
+                em.set_footer(text=foot)
+                em.set_thumbnail(url=entry.cover)
+            elif isinstance(entry, RadioStationEntry):
                 progress_ratio = entry.song_progress / \
                     (entry.song_duration or 1)
                 desc = "***REMOVED******REMOVED*** `[***REMOVED******REMOVED***/***REMOVED******REMOVED***]`".format(
@@ -1744,7 +1763,7 @@ class MusicBot(discord.Client):
         ///|Usage
         `***REMOVED***command_prefix***REMOVED***shuffle`
         ///|Explanation
-        Shuffles the playlist.
+        Shuffles the queue.
         """
 
         player.playlist.shuffle()
@@ -1768,7 +1787,7 @@ class MusicBot(discord.Client):
         ///|Usage
         `***REMOVED***command_prefix***REMOVED***clear`
         ///|Explanation
-        Clears the playlist.
+        Clears the queue.
         """
 
         player.playlist.clear()
@@ -1884,7 +1903,7 @@ class MusicBot(discord.Client):
                     expire_in=20)
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
-        "3.5.1": (1497706997, "Queue doesn't show the current entry anymore, always shows the whole playlist and a bit of cleanup"),
+        "3.5.1": (1497706997, "Queue doesn't show the current entry anymore, always shows the whole queue and a bit of cleanup"),
         "3.5.5": (1497795534, "Total time takes current entry into account"),
         "3.5.8": (1497825017, "Doesn't show the whole queue right away anymore, instead the queue command takes a quantity argument which defaults to 15"),
         "3.8.0": (1499110875, "Displaying real index of sub-entries (timestamp-entry)"),
@@ -2669,14 +2688,14 @@ class MusicBot(discord.Client):
         Usage:
             ***REMOVED***command_prefix***REMOVED***remove <index | start index | url> [end index]
 
-        Remove a index or a url from the playlist.
+        Remove a index or a url from the queue.
         """
 
         if not leftover_args:
             leftover_args = ["0"]
 
         if len(player.playlist.entries) < 0:
-            return Response("There are no entries in the playlist!")
+            return Response("There are no entries in the queue!")
 
         if len(leftover_args) >= 2:
             indices = (
@@ -2696,7 +2715,7 @@ class MusicBot(discord.Client):
                 del player.playlist.entries[i]
 
             return Response(
-                "Removed ***REMOVED******REMOVED*** entries from the playlist".format(
+                "Removed ***REMOVED******REMOVED*** entries from the queue".format(
                     end_index - start_index + 1)
             )
 
@@ -2704,11 +2723,11 @@ class MusicBot(discord.Client):
             index = int(leftover_args[0]) - 1
 
             if index > len(player.playlist.entries) - 1 or index < 0:
-                return Response("This index cannot be found in the playlist")
+                return Response("This index cannot be found in the queue")
 
             video = player.playlist.entries[index].title
             del player.playlist.entries[index]
-            return Response("Removed *****REMOVED***0***REMOVED***** from the playlist".format(video))
+            return Response("Removed *****REMOVED***0***REMOVED***** from the queue".format(video))
 
         except:
             strindex = leftover_args[0]
@@ -3764,21 +3783,21 @@ class MusicBot(discord.Client):
         if argument == "save":
             if savename in self.playlists.saved_playlists:
                 return Response(
-                    "Can't save this playlist, there's already a playlist with this name.")
+                    "Can't save the queue, there's already a playlist with this name.")
             if len(savename) < 3:
                 return Response(
-                    "Can't save this playlist, the name must be longer than 3 characters")
+                    "Can't save the queue, the name must be longer than 3 characters")
             if savename in forbidden_savenames:
                 return Response(
-                    "Can't save this playlist, this name is forbidden!")
+                    "Can't save the queue, this name is forbidden!")
             if len(player.playlist.entries) < 1:
                 return Response(
-                    "Can't save this playlist, there are no entries in the queue!")
+                    "Can't save the queue, there are no entries in the queue!")
 
             if self.playlists.set_playlist(
                 [player.current_entry] + list(player.playlist.entries),
                     savename, author.id):
-                return Response("Saved your playlist...")
+                return Response("Saved the current queue...")
 
             return Response(
                 "Uhm, something went wrong I guess :D")
@@ -3925,8 +3944,30 @@ class MusicBot(discord.Client):
             response_text = "**Found the following playlists:**\n\n"
             iteration = 1
 
-            sort_modes = ***REMOVED***"alphabetical": (lambda playlist: playlist, False), "entries": (lambda playlist: int(
-                self.playlists.get_playlist(playlist, player.playlist)["entry_count"]), True), "author": (lambda playlist: self.get_global_user(self.playlists.get_playlist(playlist, player.playlist)["author"]).name, False), "random": None, "playtime": (lambda playlist: sum([x.duration for x in self.playlists.get_playlist(playlist, player.playlist)["entries"]]), True), "replays": (lambda playlist: self.playlists.get_playlist(playlist, player.playlist)["replay_count"], True)***REMOVED***
+            sort_modes = ***REMOVED***
+                "alphabetical": (lambda playlist: playlist, False),
+                "entries": (
+                    lambda playlist: int(self.playlists.get_playlist(
+                        playlist, player.playlist)["entry_count"]),
+                    True
+                ),
+                "author": (
+                    lambda playlist: self.get_global_user(
+                        self.playlists.get_playlist(playlist, player.playlist)["author"]).name,
+                    False
+                ),
+                "random": None,
+                "playtime": (
+                    lambda playlist: sum([x.duration for x in self.playlists.get_playlist(
+                        playlist, player.playlist)["entries"]]),
+                    True
+                ),
+                "replays": (
+                    lambda playlist: self.playlists.get_playlist(
+                        playlist, player.playlist)["replay_count"],
+                    True
+                )
+            ***REMOVED***
 
             sort_mode = leftover_args[1].lower(
             ) if len(leftover_args) > 1 and leftover_args[1].lower(
@@ -4384,6 +4425,25 @@ class MusicBot(discord.Client):
             self.playlists.set_playlist([add_entry], playlistname, author.id)
             return Response("Created a new playlist `***REMOVED******REMOVED***` and added *****REMOVED******REMOVED*****.".format(playlistname.title(),
                                                                                    add_entry.title))
+
+        res = self.playlists.in_playlist(
+            player.playlist, playlistname, add_entry)
+        if res:
+            notification = await self.safe_send_message(
+                channel,
+                "There's already an entry similar to this one in `***REMOVED******REMOVED***`\n*****REMOVED******REMOVED*****\n\nDo you still want to add *****REMOVED******REMOVED*****? `yes`/`no`".format(
+                    playlistname.title(),
+                    res.title,
+                    add_entry.title
+                )
+            )
+            response = await self.wait_for_message(timeout=60, channel=channel, author=author, check=lambda msg: msg.content.lower().strip() in ["y", "yes", "no", "n"])
+            await self.safe_delete_message(notification)
+            if response:
+                await self.safe_delete_message(response)
+
+            if not (response and response.content.lower().strip().startswith("y")):
+                return Response("Didn't add *****REMOVED******REMOVED***** to `***REMOVED******REMOVED***`".format(add_entry.title, playlistname.title()))
 
         self.playlists.edit_playlist(
             playlistname, player.playlist, new_entries=[add_entry])
@@ -5399,7 +5459,10 @@ class MusicBot(discord.Client):
 
         print("[INTERACT] \"***REMOVED******REMOVED***\"".format(query))
 
-        params = ***REMOVED***"v": "22/06/2017", "q": query***REMOVED***
+        params = ***REMOVED***
+            "v": datetime.date.today().strftime("%d/%m/%y"),
+            "q": query
+        ***REMOVED***
         headers = ***REMOVED***"Authorization": "Bearer 47J7GSQPY2DJPLGUNFZVNHAMGU7ARCRD"***REMOVED***
         resp = requests.get("https://api.wit.ai/message",
                             params=params, headers=headers)

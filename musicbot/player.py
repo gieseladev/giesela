@@ -10,7 +10,7 @@ from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
 
-from .entry import RadioEntry, StreamEntry, TimestampEntry
+from .entry import RadioSongEntry, StreamEntry, TimestampEntry
 from .exceptions import FFmpegError, FFmpegWarning
 from .lib.event_emitter import EventEmitter
 from .playlist import Playlist
@@ -384,8 +384,8 @@ class MusicPlayer(EventEmitter):
                     # just to be sure, add an extra 2 seconds
                     delay = (sub_entry["duration"] - sub_entry["progress"]) + 2
 
-                elif isinstance(self.current_entry, StreamEntry):
-                    raise NotImplementedError
+                elif isinstance(self.current_entry, RadioSongEntry):
+                    delay = self.current_entry.song_duration - self.current_entry.song_progress + 2
                 else:
                     return  # this is not the kind of entry that requires an update
             else:

@@ -79,7 +79,11 @@ class Entry:
 
 class BaseEntry:
 
-    def __init__(self):
+    def __init__(self, queue, url, **meta):
+        self.queue = queue
+        self.url = url
+        self.meta = meta
+
         self.filename = None
         self.start_seconds = 0
         self.duration = 0
@@ -167,13 +171,10 @@ class BaseEntry:
 class StreamEntry(BaseEntry):
 
     def __init__(self, queue, url, title, destination=None, **meta):
-        super().__init__()
+        super().__init__(queue, url, **meta)
 
-        self.playlist = queue
-        self.url = url
         self._title = title
         self.destination = destination
-        self.meta = meta
 
         if self.destination:
             self.filename = self.destination
@@ -216,14 +217,34 @@ class StreamEntry(BaseEntry):
         ***REMOVED***
         return data
 
+    def to_web_dict(self):
+        origin = None
+        if self.meta:
+            if "playlist" in self.meta:
+                origin = ***REMOVED***"type": "playlist"***REMOVED***
+                origin.update(self.meta["playlist"])
+            elif "author" in self.meta:
+                origin = ***REMOVED***"type": "user"***REMOVED***
+                web_author = WebAuthor.from_id(self.meta["author"].id)
+                origin.update(web_author.to_dict())
+
+        data = ***REMOVED***
+            "type": self.__class__.__name__,
+            "url": self.url,
+            "origin": origin,
+            "title": self.title
+        ***REMOVED***
+
+        return data
+
     async def _download(self, *, fallback=False):
         self._is_downloading = True
 
         url = self.destination if fallback else self.url
 
         try:
-            result = await self.playlist.downloader.extract_info(
-                self.playlist.loop, url, download=False)
+            result = await self.queue.downloader.extract_info(
+                self.queue.loop, url, download=False)
         except Exception as e:
             if not fallback and self.destination:
                 return await self._download(fallback=True)
@@ -238,75 +259,28 @@ class StreamEntry(BaseEntry):
             self._is_downloading = False
 
 
-class RadioEntry(StreamEntry):
-    def __init__(self, queue, url, title, station_data, destination=None, **meta):
-        super().__init__(queue, url, title, destination, **meta)
+class RadioStationEntry(StreamEntry):
+    def __init__(self, queue, station_data, destination=None, **meta):
+        super().__init__(queue, station_data.url, station_data.title, destination, **meta)
         self.station_data = station_data
         self.station_name = station_data.name
         self._cover = self.station_data.cover
-        self._current_song_info = None
-        self._csi_poll_time = 0
-
-    @property
-    def has_current_song_info(self):
-        return self.station_data.has_current_song_info
-
-    def _get_new_song_info(self):
-        self._current_song_info = RadioSongExtractor.get_current_song(
-            self.station_data)
-        self._csi_poll_time = time.time()
-
-    @property
-    def current_song_info(self):
-        if not self.has_current_song_info:
-            return None
-        if self._current_song_info is None or (time.time() - self._csi_poll_time) > 20:
-            print("[RadioEntry] getting new current_song_info")
-            self._get_new_song_info()
-
-        return self._current_song_info
-
-    @property
-    def song_progress(self):
-        if self.has_current_song_info:
-            return self.current_song_info["progress"]
-        else:
-            raise TypeError("This Radio Station doesn't provide this info")
-
-    @property
-    def song_duration(self):
-        if self.has_current_song_info:
-            return self.current_song_info["duration"]
-        else:
-            raise TypeError("This Radio Station doesn't provide this info")
-
-    @property
-    def link(self):
-        if self.has_current_song_info:
-            return self.current_song_info["youtube"]
-        else:
-            return self.station_data.website
 
     @property
     def title(self):
-        if self.has_current_song_info:
-            return self.current_song_info["title"]
-        else:
-            return self._title
-
-    @property
-    def artist(self):
-        if self.has_current_song_info:
-            return self.current_song_info["artist"]
-        else:
-            raise TypeError("This Radio Station doesn't provide this info")
+        return self._title
 
     @property
     def cover(self):
-        if self.has_current_song_info:
-            return self.current_song_info["cover"]
-        else:
-            raise TypeError("This Radio Station doesn't provide this info")
+        return self._cover
+
+    @property
+    def thumbnail(self):
+        return self.station_data.thumbnail
+
+    @property
+    def link(self):
+        return self.station_data.website
 
     @classmethod
     def from_dict(cls, playlist, data):
@@ -333,14 +307,94 @@ class RadioEntry(StreamEntry):
 
         return d
 
+    def to_web_dict(self):
+        origin = None
+        if self.meta:
+            if "playlist" in self.meta:
+                origin = ***REMOVED***"type": "playlist"***REMOVED***
+                origin.update(self.meta["playlist"])
+            elif "author" in self.meta:
+                origin = ***REMOVED***"type": "user"***REMOVED***
+                web_author = WebAuthor.from_id(self.meta["author"].id)
+                origin.update(web_author.to_dict())
+
+        data = ***REMOVED***
+            "type": self.__class__.__name__,
+            "url": self.url,
+            "thumbnail": self.thumbnail,
+            "thumbnail_brightness": get_image_brightness(url=self.thumbnail),
+            "origin": origin,
+            "title": self.title,
+            "cover": self.cover,
+            "link": self.link
+        ***REMOVED***
+
+        return data
+
+
+class RadioSongEntry(RadioStationEntry):
+    def __init__(self, queue, station_data, destination=None, **meta):
+        super().__init__(queue, station_data.url,
+                         station_data.title, station_data, destination, **meta)
+        self._current_song_info = None
+        self._csi_poll_time = 0
+
+    def _get_new_song_info(self):
+        self._current_song_info = RadioSongExtractor.get_current_song(
+            self.station_data)
+        self._csi_poll_time = time.time()
+
+    @property
+    def current_song_info(self):
+        if self._current_song_info is None or (time.time() - self._csi_poll_time) > 10:
+            print("[RadioEntry] getting new current_song_info")
+            self._get_new_song_info()
+
+        return self._current_song_info
+
+    @property
+    def song_progress(self):
+        return self.current_song_info["progress"]
+
+    @property
+    def song_duration(self):
+        return self.current_song_info["duration"]
+
+    @property
+    def link(self):
+        return self.current_song_info["youtube"] or super().link
+
+    @property
+    def title(self):
+        return self.current_song_info["title"]
+
+    @property
+    def artist(self):
+        return self.current_song_info["artist"]
+
+    @property
+    def cover(self):
+        return self.current_song_info["cover"]
+
+    def to_web_dict(self):
+        data = super().to_web_dict()
+
+        data.update(***REMOVED***
+            "title": self.title,
+            "artist": self.artist,
+            "cover": self.cover,
+            "song_progress": self.song_progress,
+            "song_duration": self.song_duration
+        ***REMOVED***)
+
+        return data
+
 
 class YoutubeEntry(BaseEntry):
 
     def __init__(self, queue, video_id, url, title, duration, thumbnail, description, expected_filename=None, **meta):
-        super().__init__()
+        super().__init__(queue, url, **meta)
 
-        self.playlist = queue
-        self.url = url
         self.video_id = video_id
         self._title = title
         self.thumbnail = thumbnail
@@ -351,9 +405,8 @@ class YoutubeEntry(BaseEntry):
         self.start_seconds = meta.get("start_seconds", 0)
 
         self.expected_filename = expected_filename
-        self.meta = meta
 
-        self.download_folder = self.playlist.downloader.download_folder
+        self.download_folder = self.queue.downloader.download_folder
 
     @property
     def title(self):
@@ -449,7 +502,7 @@ class YoutubeEntry(BaseEntry):
                 if expected_fname_noex in flistdir:
                     try:
                         rsize = int(
-                            await get_header(self.playlist.bot.aiosession,
+                            await get_header(self.queue.bot.aiosession,
                                              self.url, 'CONTENT-LENGTH'))
                     except:
                         rsize = 0
@@ -512,8 +565,8 @@ class YoutubeEntry(BaseEntry):
         print("[Download] Started:", self.url)
 
         try:
-            result = await self.playlist.downloader.extract_info(
-                self.playlist.loop, self.url, download=True)
+            result = await self.queue.downloader.extract_info(
+                self.queue.loop, self.url, download=True)
         except Exception as e:
             raise ExtractionError(e)
 
@@ -523,7 +576,7 @@ class YoutubeEntry(BaseEntry):
             raise ExtractionError("ytdl broke and hell if I know why")
             # What the fuck do I do now?
 
-        self.filename = unhashed_fname = self.playlist.downloader.ytdl.prepare_filename(
+        self.filename = unhashed_fname = self.queue.downloader.ytdl.prepare_filename(
             result)
 
         if hash:
@@ -550,7 +603,7 @@ class TimestampEntry(YoutubeEntry):
 
     @property
     def _is_current_entry(self):
-        current_entry = self.playlist.player.current_entry
+        current_entry = self.queue.player.current_entry
         return self == current_entry
 
     @property
@@ -558,7 +611,7 @@ class TimestampEntry(YoutubeEntry):
         if not self._is_current_entry:
             return sub_queue[0]
 
-        progress = self.playlist.player.progress
+        progress = self.queue.player.progress
 
         sub_entry = None
         for entry in self.sub_queue:
