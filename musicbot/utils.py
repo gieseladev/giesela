@@ -123,7 +123,9 @@ def get_image_brightness(**kwargs):
 
     im = im.convert("L")
     stat = ImageStat.Stat(im)
-    return stat.rms[0]
+
+    r, g, b = stat.mean
+    return math.sqrt(0.241 * (r**2) + 0.691 * (g**2) + 0.068 * (b**2))
 
 
 def prettydate(d):
