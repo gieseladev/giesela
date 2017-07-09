@@ -609,7 +609,7 @@ class TimestampEntry(YoutubeEntry):
     @property
     def current_sub_entry(self):
         if not self._is_current_entry:
-            return sub_queue[0]
+            return self.sub_queue[0]
 
         progress = self.queue.player.progress
 

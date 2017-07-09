@@ -1208,7 +1208,7 @@ class MusicBot(discord.Client):
                     entries_left = total_entries - ind - 1
                     expected_time = format_time(
                         avg_time * entries_left,
-                        max_specifications=2,
+                        max_specifications=1,
                         unit_length=1
                     )
                     completion_ratio = (ind + 1) / total_entries
@@ -4130,7 +4130,7 @@ class MusicBot(discord.Client):
                         round(100 * (ind + 1) / total_entries),
                         format_time(
                             expected_time,
-                            max_specifications=2,
+                            max_specifications=1,
                             combine_with_and=True,
                             unit_length=1
                         )

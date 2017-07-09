@@ -169,6 +169,7 @@ class MusicPlayer(EventEmitter):
     def resume(self):
         if self.is_paused and self._current_player:
             self._current_player.resume()
+            self.update_chapter_updater()
             self.state = MusicPlayerState.PLAYING
             self.emit('resume', player=self, entry=self.current_entry)
             return
@@ -182,16 +183,20 @@ class MusicPlayer(EventEmitter):
 
     def goto_seconds(self, secs):
         if (not self.current_entry) or secs >= self.current_entry.end_seconds:
+            print("[PLAYER] Seek target out of bounds, skipping!")
             self.skip()
             return True
 
         secs = max(0, secs)
 
-        c_entry = self.current_entry
-        if not c_entry.set_start(secs):
+        entry = self.current_entry
+        if not entry.set_start(secs):
+            print("[PLAYER] Couldn't set start of entry")
             return False
 
-        self.play_entry(c_entry)
+        self.handle_manually = True
+        self.play_entry(entry)
+        self.emit("play", player=self, entry=entry)
         return True
 
     def pause(self):
@@ -316,7 +321,7 @@ class MusicPlayer(EventEmitter):
                 return
 
             await self._play_entry(entry)
-            self.emit('play', player=self, entry=entry)
+            self.emit("play", player=self, entry=entry)
 
     def play_entry(self, entry):
         self.loop.create_task(self._play_entry(entry))
