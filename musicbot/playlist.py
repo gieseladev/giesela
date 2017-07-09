@@ -46,7 +46,7 @@ class Playlist(EventEmitter):
         self.entries.clear()
 
     def push_history(self, entry):
-        entry.meta["finish_time"] = time.now()
+        entry.meta["finish_time"] = time.time()
         self.history = [entry, *self.history[:9]]
 
     async def add_stream_entry(self, stream_url, **meta):

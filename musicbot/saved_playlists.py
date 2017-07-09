@@ -54,7 +54,12 @@ class Playlists:
             for ind, ser_entry in enumerate(serialized_json):
                 try:
                     entry = Entry.from_dict(playlist, ser_entry)
+                    entry.meta.pop("channel", None)
                     entry.meta["channel"] = channel
+                    entry.meta["playlist"] = ***REMOVED***
+                        "name": playlistname,
+                        "index": ind
+                    ***REMOVED***
                 except (OutdatedEntryError, TypeError, KeyError):
                     entry = None
 
@@ -114,12 +119,12 @@ class Playlists:
         else:
             return False
 
-    def search_entries_in_playlist(self, queue, playlist, query):
+    def search_entries_in_playlist(self, queue, playlist, query, certainty_threshold=None):
         if isinstance(playlist, str):
             playlist = self.get_playlist(playlist, queue)
 
         if isinstance(query, str):
-            query_title, query_url = query
+            query_title = query_url = query
         else:
             query_title = query.title
             query_url = query.url
@@ -129,10 +134,16 @@ class Playlists:
         def get_similarity(entry):
             s1 = similarity(query_title, entry.title)
             s2 = similarity(query_url, entry.url)
+            words_in_query = query_title.lower().split()
+            s3 = sum(1 for w in words_in_query if w in entry.title.lower(
+            ).split()) / len(words_in_query)
 
-            return max(s1, s2)
+            return max(s1, s2, s3)
 
         matched_entries = [(get_similarity(entry), entry) for entry in entries]
+        if certainty_threshold:
+            matched_entries = [
+                el for el in matched_entries if el[0] > certainty_threshold]
         ranked_entries = sorted(
             matched_entries,
             key=lambda el: el[0],
