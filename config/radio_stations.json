@@ -1,5 +1,4 @@
-[
-  ***REMOVED***
+[***REMOVED***
     "id": "capitalfm",
     "name": "Capital FM",
     "aliases": ["kappable", "kappablefm", "kappable fm", "cfm"],
@@ -53,7 +52,7 @@
     "cover": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/BBC_Radio_logo.svg/1200px-BBC_Radio_logo.svg.png",
     "website": "http://bbc.com",
     "url": "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_q",
-    "thumbnails": ["https://static.bbc.co.uk/playlister/101/1.8.60.101/img/playercard/playercard.jpg"],
+    "thumbnails": ["https://static.bbc.co.uk/playlister/101/1.8.60.101/img/playercard/playercard.jpg"]
   ***REMOVED***,
   ***REMOVED***
     "id": "heartlondon",

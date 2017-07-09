@@ -385,15 +385,20 @@ class MusicPlayer(EventEmitter):
                     delay = (sub_entry["duration"] - sub_entry["progress"]) + 2
 
                 elif isinstance(self.current_entry, RadioSongEntry):
-                    delay = self.current_entry.song_duration - self.current_entry.song_progress + 2
+                    if self.current_entry.song_duration > 5:
+                        delay = self.current_entry.song_duration - self.current_entry.song_progress + 2
+                    else:
+                        delay = 40
                 else:
                     return  # this is not the kind of entry that requires an update
             else:
                 print("[CHAPTER-UPDATER] There's nothing playing")
                 return
 
-            print("[CHAPTER-UPDATER] Waiting for " + str(delay) +
+            print("[CHAPTER-UPDATER] Waiting " + str(delay) +
                   " seconds before emitting now playing event")
+
+            before_title = self.current_entry.title
 
             await asyncio.sleep(delay)
             if not self.current_entry:
@@ -401,8 +406,13 @@ class MusicPlayer(EventEmitter):
                     "[CHAPTER-UPDATER] Waited for nothing. There's nothing playing anymore")
                 return
 
+            if self.current_entry.title == before_title:
+                print(
+                    "[CHAPTER-UPDATER] The same thing is still playing. Back to sleep!")
+                continue
+
             print("[CHAPTER-UPDATER] Emitting next now playing event")
-            self.emit('play', player=self, entry=self.current_entry)
+            self.emit("play", player=self, entry=self.current_entry)
 
     def _monkeypatch_player(self, player):
         original_buff = player.buff
