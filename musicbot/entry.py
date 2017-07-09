@@ -261,7 +261,7 @@ class StreamEntry(BaseEntry):
 
 class RadioStationEntry(StreamEntry):
     def __init__(self, queue, station_data, destination=None, **meta):
-        super().__init__(queue, station_data.url, station_data.title, destination, **meta)
+        super().__init__(queue, station_data.url, station_data.name, destination, **meta)
         self.station_data = station_data
         self.station_name = station_data.name
         self._cover = self.station_data.cover
@@ -334,8 +334,7 @@ class RadioStationEntry(StreamEntry):
 
 class RadioSongEntry(RadioStationEntry):
     def __init__(self, queue, station_data, destination=None, **meta):
-        super().__init__(queue, station_data.url,
-                         station_data.title, station_data, destination, **meta)
+        super().__init__(queue, station_data, destination, **meta)
         self._current_song_info = None
         self._csi_poll_time = 0
 

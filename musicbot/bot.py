@@ -1544,21 +1544,6 @@ class MusicBot(discord.Client):
             em = None
 
             if isinstance(entry, RadioSongEntry):
-                desc = "`{}`".format(
-                    to_timestamp(player.progress)
-                )
-                foot = "🔴 Live from {}".format(entry.station_name)
-
-                em = Embed(
-                    title=entry.title,
-                    description=desc,
-                    url=entry.link,
-                    colour=hex_to_dec("#be7621")
-                )
-
-                em.set_footer(text=foot)
-                em.set_thumbnail(url=entry.cover)
-            elif isinstance(entry, RadioStationEntry):
                 progress_ratio = entry.song_progress / \
                     (entry.song_duration or 1)
                 desc = "{} `[{}/{}]`".format(
@@ -1573,6 +1558,21 @@ class MusicBot(discord.Client):
                     description=desc,
                     url=entry.link,
                     colour=hex_to_dec("#a23dd1")
+                )
+
+                em.set_footer(text=foot)
+                em.set_thumbnail(url=entry.cover)
+            elif isinstance(entry, RadioStationEntry):
+                desc = "`{}`".format(
+                    to_timestamp(player.progress)
+                )
+                foot = "🔴 Live from {}".format(entry.station_name)
+
+                em = Embed(
+                    title=entry.title,
+                    description=desc,
+                    url=entry.link,
+                    colour=hex_to_dec("#be7621")
                 )
 
                 em.set_footer(text=foot)
