@@ -177,7 +177,7 @@ def clean_songname(query):
 
     replacers = (
         # replace common indicators for the artist with a simple dash
-        ((r"[\|:]", r"(^|\W)by(\W|$)"), " - "),
+        ((r"[\|:\/]", r"(^|\W)by(\W|$)"), " - "),
         # remove all parentheses and their content and remove "opening 5" stuff
         ((r"\(.*\)", r"(?:^|\b)op(?:ening)?(?:\s+\d{1,2})?(?:\b|$)"), " "),
         # replace several artist things with &
