@@ -41,6 +41,10 @@ class WrongEntryTypeError(ExtractionError):
         self.use_url = use_url
 
 
+class OutdatedEntryError(Exception):
+    pass
+
+
 class FFmpegError(MusicbotException):
     pass
 

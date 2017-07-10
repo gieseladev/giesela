@@ -1,102 +1,44 @@
+import asyncio
 import datetime
-import decimal
 import json
+import math
 import random
 import re
+import time
 import unicodedata
 from datetime import timedelta
 from difflib import SequenceMatcher
 from hashlib import md5
+from io import BytesIO
+from string import punctuation, whitespace
+from threading import Thread
 
 import aiohttp
 import requests
 from bs4 import BeautifulSoup
-
-import asyncio
+from PIL import Image, ImageStat
 
 from .constants import DISCORD_MSG_CHAR_LIMIT
 
 
-def get_entry_dict(entry, player, loop):
-    from .entry import StreamPlaylistEntry
-    from .web_socket_server import WebAuthor
-    from .radio import Radio
+class run_function_every:
 
-    entry_dict = None
+    def __init__(self, function, timeout):
+        self.thread = Thread(target=self._sender, args=(function, timeout))
+        self.stop = False
 
-    if entry:
-        entry_dict = ***REMOVED***
-            "url": entry.url,
-            "thumbnail": entry.thumbnail,
-            "origin": None,
-            "type": None
-        ***REMOVED***
+    def _sender(self, function, timeout):
+        while True:
+            if self.stop:
+                return
+            function()
+            time.sleep(timeout)
 
-        if entry.meta:
-            if "playlist" in entry.meta:
-                origin_data = ***REMOVED***"type": "playlist"***REMOVED***
-                origin_data.update(entry.meta["playlist"])
-                entry_dict["origin"] = origin_data
-            elif "author" in entry.meta:
-                origin_data = ***REMOVED***"type": "user"***REMOVED***
-                web_author = WebAuthor.from_id(entry.meta["author"].id)
-                origin_data.update(web_author.to_dict())
-                entry_dict["origin"] = origin_data
+    def __enter__(self):
+        self.thread.start()
 
-        if isinstance(entry, StreamPlaylistEntry):
-            if entry.radio_station_data:  # if it's radio
-                radio_station = entry.radio_station_data
-                radio_data = ***REMOVED***
-                    "type": "radio_station_entry",
-                    "origin": radio_station.to_dict()
-                ***REMOVED***
-                # if it's also a radio with more information
-                if Radio.has_station_data(radio_station.name):
-                    current_song = asyncio.run_coroutine_threadsafe(
-                        Radio.get_current_song(loop, radio_station.name), loop).result()
-                    radio_data.update(current_song)
-                    radio_data["type"] = "radio_entry"
-                entry_dict.update(radio_data)
-            else:  # normal stream
-                stream_data = ***REMOVED***
-                    "type": "stream_entry",
-                    "title": entry.title
-                ***REMOVED***
-                entry.update(stream_data)
-        elif entry.spotify_track:
-            track = entry.spotify_track.get_dict()
-            # making sure that we get the actual duration
-            track["duration"] = entry.duration
-            entry_dict.update(track)
-            entry_dict["type"] = "spotify_entry"
-        elif entry.provides_timestamps:
-            timestamp_data = ***REMOVED***
-                "title": entry.title,
-                "queue": entry.sub_queue(),
-                "type": "timestamp_entry",
-                "duration": entry.duration
-            ***REMOVED***
-            if player.current_entry == entry:  # this song is already active
-                sub_progress, sub_duration = entry.get_local_progress(
-                    player.progress)
-                sub_entry = entry.get_current_song_from_timestamp(
-                    player.progress)
-                timestamp_data.update(***REMOVED***
-                    "sub_title": sub_entry["name"],
-                    "sub_progress": sub_progress,
-                    "sub_duration": sub_duration,
-                    "sub_index":  sub_entry["index"]
-                ***REMOVED***)
-            entry_dict.update(timestamp_data)
-        else:  # normal URLPlaylistEntry
-            data = ***REMOVED***
-                "title": entry.title,
-                "duration": entry.duration,
-                "type": "default_entry"
-            ***REMOVED***
-            entry_dict.update(data)
-
-    return entry_dict
+    def __exit__(self, type, value, traceback):
+        self.stop = True
 
 
 def similarity(a, b):
@@ -147,7 +89,7 @@ def write_file(filename, contents):
 
 def create_bar(progress, length=10, full_char="■", half_char=None, empty_char="□"):
     use_halves = half_char is not None
-    fill_to = round(2 * length * progress)
+    fill_to = 2 * round(length * progress)
     residue = fill_to % 2
     chrs = []
     for i in range(1, length + 1):
@@ -160,6 +102,30 @@ def create_bar(progress, length=10, full_char="■", half_char=None, empty_char=
         chrs.append(half_char)
 
     return ("***REMOVED***0:" + empty_char + "<" + str(length) + "***REMOVED***").format("".join(chrs))
+
+
+def get_image_brightness(**kwargs):
+    """
+    Keyword Arguments:
+    image -- A Pillow Image object
+    location -- a file path to the image
+    url -- the online location of the image
+    """
+    if "image" in kwargs:
+        im = kwargs["image"]
+    elif "location" in kwargs:
+        im = Image.open(kwargs["location"])
+    elif "url" in kwargs:
+        resp = requests.get(kwargs["url"])
+        content = BytesIO(resp.content)
+        im = Image.open(content)
+    else:
+        raise AttributeError("No image provided")
+
+    stat = ImageStat.Stat(im)
+
+    r, g, b = stat.mean
+    return math.sqrt(0.241 * (r**2) + 0.691 * (g**2) + 0.068 * (b**2))
 
 
 def prettydate(d):
@@ -202,19 +168,20 @@ def clean_songname(query):
     """Clean a Youtube video title so it's shorter and easier to read."""
     to_remove = (
         "1080", "1080p", "4k", "720", "720p", "album", "amv", "audio", "avi",
-        "creditless", "dvd", "edition", "eng", "english", "feat", "from", "ft",
-        "full", "hd", "jap", "japanese", "lyrics", "mix", "mp3", "mp4", "music",
-        "new", "official", "original", "original sound track",
-        "original soundtrack", "ost", "raw", "size", "soundtrack", "special",
-        "textless", "theme", "tv", "ver", "version", "video", "with",
-        "with lyrics"
+        "creditless", "dvd", "edition", "eng", "english", "from", "full", "hd",
+        "jap", "japanese", "lyrics", "mix", "mp3", "mp4", "music", "new",
+        "official", "original", "original sound track", "original soundtrack",
+        "ost", "raw", "size", "soundtrack", "special", "textless", "theme",
+        "tv", "ver", "version", "video", "with lyrics"
     )
 
     replacers = (
         # replace common indicators for the artist with a simple dash
-        ((r"\|", r"(^|\W)by(\W|$)"), " - "),
+        ((r"[\|:]", r"(^|\W)by(\W|$)"), " - "),
         # remove all parentheses and their content and remove "opening 5" stuff
-        ((r"\(.*\)", r"op(?:ening)?(?:\s+\d***REMOVED***1,2***REMOVED***)?"), " "),
+        ((r"\(.*\)", r"(?:^|\b)op(?:ening)?(?:\s+\d***REMOVED***1,2***REMOVED***)?(?:\b|$)"), " "),
+        # replace several artist things with &
+        ((r"(?:^|\b)(?:feat|ft)(?:\b|$)", ), " & ")
     )
 
     special_regex = (
@@ -222,9 +189,10 @@ def clean_songname(query):
         # (r"\(f(?:ea)?t\.?\s?([\w\s\&\-\']***REMOVED***2,***REMOVED***)\)", r" & \1"),
     )
     special_regex_after = (
-        # make sure that everything apart from ' has space ("test-test"
+        # make sure that everything apart from [',] has space ("test -test"
         # converts to "test - test")
-        (r"([^\w\s\'])", r" \1 "),
+        (r"(\s)([^\w\s\',])(\w)", r"\1 \2 \3"),
+        (r"(\w)([^\w\s\',])(\s)", r"\1 \2 \3"),
     )
 
     for target, replacement in special_regex:
@@ -242,27 +210,24 @@ def clean_songname(query):
     for target, replacement in special_regex_after:
         query = re.sub(target, replacement, query, flags=re.IGNORECASE)
 
-    # # get rid of words that repeat twice or more
-    # repeating_words = re.search(
-    #     r"((?:\w+(?:\s|\b))***REMOVED***2,***REMOVED***).+(\1)", query, flags=re.IGNORECASE)
-    # if repeating_words:
-    #     repetition_start, repetition_end = repeating_words.start(
-    #         2), repeating_words.end(2)
-    #     query = query[:repetition_start] + query[repetition_end:]
-
     # remove everything apart from the few allowed characters
     query = re.sub(r"[^\w\s\-\&\',]", " ", query)
     # remove unnecessary whitespaces
     query = re.sub(r"\s+", " ", query)
 
     no_capitalisation = ("a", "an", "and", "but", "for", "his",
-                         "my", "nor", "of", "or", "s", "t", "the", "to", "your")
+                         "my", "nor", "of", "or", "s", "t", "the", "to", "your", "re", "my")
 
     # title everything except if it's already UPPER because then it's probably
     # by design. Also don't title no-title words (I guess) if they're not in
     # first place
-    query = " ".join(w if (w.isupper() and len(w) > 2) or (w.lower() in no_capitalisation and ind != 0)
-                     else w.title() for ind, w in enumerate(query.split()))
+    word_elements = []
+    parts = re.split(r"(\W+)", query)
+    for sub_ind, part in enumerate(parts):
+        word_elements.append(part if (part.isupper() and len(part) > 2) or (
+            part.lower() in no_capitalisation and sub_ind != 0) else part.title())
+
+    query = "".join(word_elements)
 
     return query.strip(" -&,")
 
@@ -270,7 +235,7 @@ def clean_songname(query):
 def _run_timestamp_matcher(text):
     songs = ***REMOVED******REMOVED***
     for match in re.finditer(
-            r"^(?:(\d***REMOVED***1,2***REMOVED***):)?(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***2***REMOVED***)(?:\s?.?\s?(?:\d***REMOVED***1,2***REMOVED***:)?(?:\d***REMOVED***1,2***REMOVED***):(?:\d***REMOVED***2***REMOVED***))?\W+(.+?)$",
+            r"^[\s\->]+(?:(\d***REMOVED***1,2***REMOVED***):)?(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***2***REMOVED***)(?:\s?.?\s?(?:\d***REMOVED***1,2***REMOVED***:)?(?:\d***REMOVED***1,2***REMOVED***):(?:\d***REMOVED***2***REMOVED***))?\W+(.+?)$",
             text,
             flags=re.MULTILINE):
         timestamp = int(match.group(3))
@@ -298,31 +263,59 @@ def _run_timestamp_matcher(text):
     return None
 
 
-def get_video_timestamps(url, song_dur=None):
+def get_video_sub_queue(description, video_id, song_dur):
+    timestamps = get_video_timestamps(description, video_id, song_dur)
+    if not timestamps:
+        return None
+
+    queue = []
+    entries = sorted(list(timestamps.keys()))
+    for index, key in enumerate(entries):
+        start = int(key)
+        next_start = int(entries[index + 1]) if index + \
+            1 < len(entries) else song_dur
+
+        dur = next_start - start
+        sub_entry = ***REMOVED***
+            "name": timestamps[key].strip(punctuation + whitespace),
+            "duration": dur,
+            "start": start,
+            "index": index,
+            "end": next_start
+        ***REMOVED***
+        queue.append(sub_entry)
+
+    return queue
+
+
+def get_video_timestamps(description, video_id, song_dur=None):
     if song_dur:
         song_dur += 5  # I'm not that harsh, one second more or less ain't that bad
 
-    try:
-        desc = get_video_description(url)
-    except:
-        desc = None
-
-    if desc is not None:
-        songs = _run_timestamp_matcher(desc)
+    if description:
+        songs = _run_timestamp_matcher(description)
 
         if songs is not None:
+            # probably for the best to trust the description. Even if not all
+            # of them are as reliable as they should be.
             return songs
+
+    if not video_id:
+        return None
 
     try:
         if song_dur and song_dur < 200:  # I don't trust comments when the song is only about 3 mins loading
             return None
 
-        video_id = re.match(
-            r"(?:(?:https?:\/\/)(?:www)?\.?(?:youtu\.?be)(?:\.com)?\/(?:.*[=/])*)([^= &?/\r\n]***REMOVED***8,11***REMOVED***)",
-            url).group(1)
+        params = ***REMOVED***
+            "key": "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo",
+            "part": "snippet",
+            "order": "relevance",
+            "textFormat": "plainText",
+            "videoId": video_id
+        ***REMOVED***
         resp = requests.get(
-            "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo&part=snippet&order=relevance&textFormat=plainText&videoId="
-            + video_id)
+            "https://www.googleapis.com/youtube/v3/commentThreads", params=params)
         data = resp.json()
         for comment in data["items"]:
             songs = _run_timestamp_matcher(comment["snippet"][
@@ -340,15 +333,6 @@ def get_video_timestamps(url, song_dur=None):
         pass
 
     return None
-
-
-def get_video_description(url):
-    resp = requests.get(url)
-    bs = BeautifulSoup(resp.text, "lxml")
-    bs = bs.find("p", attrs=***REMOVED***"id": "eow-description"***REMOVED***)
-    for br in bs.find_all("br"):
-        br.replace_with("\n")
-    return bs.text
 
 
 def _choose_best_thumbnail(thumbnails):
@@ -556,3 +540,55 @@ def md5sum(filename, limit=0):
         for chunk in iter(lambda: f.read(8192), b""):
             fhash.update(chunk)
     return fhash.hexdigest()[-limit:]
+
+
+def get_dev_version():
+    page = requests.get(
+        "https://raw.githubusercontent.com/siku2/Giesela/dev/musicbot/constants.py"
+    )
+    matches = re.search(
+        r"MAIN_VERSION = \"(\d.\d.\d)\"\nSUB_VERSION = \"(.*?)\"",
+        page.content.decode("utf-8"))
+
+    if matches is None:
+        return matches
+
+    return matches.groups((1, 2))
+
+
+def get_master_version():
+    page = requests.get(
+        "https://raw.githubusercontent.com/siku2/Giesela/master/musicbot/constants.py"
+    )
+    matches = re.search(
+        r"MAIN_VERSION = \"(\d.\d.\d)\"\nSUB_VERSION = \"(.*?)\"",
+        page.content.decode("utf-8"))
+
+    if matches is None:
+        return matches
+
+    return matches.groups((1, 2))
+
+
+def get_dev_changelog():
+    base_url = "https://siku2.github.io/Giesela/changelogs/changelog-"
+    dev_version = re.sub(r"\D", "", get_dev_version()[0])
+
+    changelog_page = requests.get(
+        base_url + dev_version).content.decode("utf-8")
+    bs = BeautifulSoup(changelog_page, "lxml")
+    html_to_markdown = [(r"<\/?li>", "\t"), (r"<\/?ul>", ""), (r"<code.+?>(.+?)<\/code>", r"`\1`"),
+                        (r"<strong>(.+?)<\/strong>", r"**\1**"), (r"<a\shref=\"(.+?)\">(.+?)<\/a>", r"[`\2`](\1)"), (r"\n\W+\n", "\n")]
+
+    changes = []
+
+    for sib in (bs.body.li, *bs.body.li.next_siblings):
+        line = str(sib).strip()
+        for match, repl in html_to_markdown:
+            line = re.sub(match, repl, line)
+
+        line = line.strip()
+        if line:
+            changes.append(line)
+
+    return changes

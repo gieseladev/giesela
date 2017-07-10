@@ -1,13 +1,10 @@
+import configparser
 import json
 import os
-import re
-import shutil
-import traceback
 
-import configparser
-
-from .entry import URLPlaylistEntry as urlEntry
-from .exceptions import HelpfulError
+from .entry import Entry
+from .exceptions import OutdatedEntryError
+from .utils import clean_songname, similarity
 
 
 class Playlists:
@@ -34,33 +31,45 @@ class Playlists:
         with open(self.playlists_file, "w") as pl_file:
             self.playlists.write(pl_file)
 
-    def get_playlist(self, playlistname, playlist, channel=None, author=None, load_entries=True):
+    def get_playlist(self, playlistname, playlist, load_entries=True, channel=None):
         playlistname = playlistname.lower().strip().replace(" ", "_")
         if not self.playlists.has_section(playlistname):
             return None
 
         plsection = self.playlists[playlistname]
 
-        playlist_information = ***REMOVED******REMOVED***
-        playlist_information["location"] = plsection["location"]
-        playlist_information["author"] = plsection["author"]
-        playlist_information["entry_count"] = plsection["entries"]
-        playlist_information["replay_count"] = self.playlists.getint(
-            playlistname, "replays", fallback=0)
+        playlist_information = ***REMOVED***
+            "location": plsection["location"],
+            "author": plsection["author"],
+            "entry_count": plsection["entries"],
+            "replay_count": int(plsection["replays"])
+        ***REMOVED***
+
         entries = []
+        # this is gonna be a list of urls populated with the broken or outdated entries
+        broken_entries = []
         if load_entries and not os.stat(playlist_information["location"]).st_size == 0:
             with open(playlist_information["location"], "r") as file:
                 serialized_json = json.loads(file.read())
-            for ind, entry in enumerate(serialized_json):
-                #print (str (urlEntry.entry_from_json (playlist, entry).title))
-                if channel and author is not None:
-                    entry.update(***REMOVED***"meta":
-                                  ***REMOVED***"channel": ***REMOVED***"type": "channel", "name": channel.name, "id": channel.id***REMOVED***,
-                                   "author": ***REMOVED***"type": "author", "name": author.name, "id": author.id***REMOVED***,
-                                   "playlist": ***REMOVED***"name": playlistname, "author": playlist_information["author"], "index": ind***REMOVED******REMOVED******REMOVED***)
-                entries.append(urlEntry.from_dict(playlist, entry, False))
+            for ind, ser_entry in enumerate(serialized_json):
+                try:
+                    entry = Entry.from_dict(playlist, ser_entry)
+                    entry.meta.pop("channel", None)
+                    entry.meta["channel"] = channel
+                    entry.meta["playlist"] = ***REMOVED***
+                        "name": playlistname,
+                        "index": ind
+                    ***REMOVED***
+                except (OutdatedEntryError, TypeError, KeyError):
+                    entry = None
+
+                if not entry:
+                    broken_entries.append(ser_entry)
+                else:
+                    entries.append(entry)
 
         playlist_information["entries"] = entries
+        playlist_information["broken_entries"] = broken_entries
 
         return playlist_information
 
@@ -100,6 +109,49 @@ class Playlists:
 
         return False
 
+    def in_playlist(self, queue, playlist, query, certainty_threshold=.6):
+        results = self.search_entries_in_playlist(
+            queue, playlist, query
+        )
+        result = results[0]
+        if result[0] > certainty_threshold:
+            return result[1]
+        else:
+            return False
+
+    def search_entries_in_playlist(self, queue, playlist, query, certainty_threshold=None):
+        if isinstance(playlist, str):
+            playlist = self.get_playlist(playlist, queue)
+
+        if isinstance(query, str):
+            query_title = query_url = query
+        else:
+            query_title = query.title
+            query_url = query.url
+
+        entries = playlist["entries"]
+
+        def get_similarity(entry):
+            s1 = similarity(query_title, entry.title)
+            s2 = similarity(query_url, entry.url)
+            words_in_query = query_title.lower().split()
+            s3 = sum(1 for w in words_in_query if w in entry.title.lower(
+            ).split()) / len(words_in_query)
+
+            return max(s1, s2, s3)
+
+        matched_entries = [(get_similarity(entry), entry) for entry in entries]
+        if certainty_threshold:
+            matched_entries = [
+                el for el in matched_entries if el[0] > certainty_threshold]
+        ranked_entries = sorted(
+            matched_entries,
+            key=lambda el: el[0],
+            reverse=True
+        )
+
+        return ranked_entries
+
     def remove_playlist(self, name):
         name = name.lower().strip().replace(" ", "_")
 
@@ -136,12 +188,7 @@ class Playlists:
                         old_entries.remove(entry)
 
             if new_entries is not None:
-                try:
-                    old_entries.extend(new_entries)
-                except:
-                    # how should this even fail...?
-                    print(
-                        "I guess something went wrong while extending the playlist...")
+                old_entries.extend(new_entries)
             next_entries = old_entries
 
         next_name = new_name if new_name is not None else name
