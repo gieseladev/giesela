@@ -3638,8 +3638,6 @@ class MusicBot(discord.Client):
             clip = video.fx.all.resize(clip, newsize=.55)
             clip.write_gif("cache/pictures/9gag.gif", fps=10)
             saveloc = "cache/pictures/9gag.gif"
-            # subprocess.run(
-            #     ["gifsicle", "-b", "cache/pictures/9gag.gif", "--colors", "256"])
 
             em = Embed(title=post.title, url=post.hyperlink, colour=9316352)
             em.set_author(name=author.display_name, icon_url=author.avatar_url)
@@ -5770,10 +5768,6 @@ class MusicBot(discord.Client):
         if reaction.message.author == self.user:
             await self.safe_send_message(user, "I hate you too!")
             return
-
-        # await self.add_reaction (reaction.message, discord.Emoji (name = "Bubo", id = "234022157569490945", server = reaction.message.server))
-        # self.log ("***REMOVED******REMOVED*** (***REMOVED******REMOVED***)".format (reaction.emoji.name, reaction.emoji.id))
-        # self.log ("***REMOVED******REMOVED***".format (reaction.emoji))
 
     async def autopause(self, before, after):
         if not all([before, after]):
