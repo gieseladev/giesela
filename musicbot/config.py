@@ -1,6 +1,5 @@
-import json
-
 import configparser
+import json
 
 
 def encode_setting(value):
@@ -65,7 +64,7 @@ class ConfigDefaults:
     _token = None
 
     owner_id = None
-    command_prefix = '!'
+    command_prefix = "!"
     bound_channels = set()
     owned_channels = set()
     autojoin_channels = set()
@@ -79,15 +78,13 @@ class ConfigDefaults:
     delete_invoking = False
     debug_mode = False
 
-    options_file = 'config/options.ini'
-    papers_file = "config/papers.ini"
+    options_file = "config/options.ini"
     cards_file = "data/cah/cards.ini"
     question_cards = "data/cah/question_cards.ini"
-    radios_file = "config/radio_stations.ini"
+    radios_file = "config/radio_stations.json"
     playlists_file = "config/playlists.ini"
     random_sets = "config/random_sets.ini"
     blacklist_file = 'config/blacklist.txt'
-    log_file = "cache/logs/"
     auto_playlist_file = 'config/autoplaylist.txt'
     hangman_wordlist = "data/hangman_wordlist.txt"
     name_list = "data/names.txt"

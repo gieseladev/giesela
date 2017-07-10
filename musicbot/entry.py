@@ -1,33 +1,101 @@
-import json
-import os
-import re
-import traceback
-from threading import Thread
-
-import requests
-
 import asyncio
+import os
+import time
+import traceback
 
-from .exceptions import ExtractionError
+from discord import Channel, Member, Server, User
+
+from .exceptions import ExtractionError, OutdatedEntryError
+from .radio import RadioSongExtractor, StationInfo
 from .spotify import SpotifyTrack
-from .utils import (clean_songname, get_header, get_video_timestamps, md5sum,
+from .utils import (clean_songname, get_header, get_image_brightness, md5sum,
                     slugify)
+from .web_socket_server import WebAuthor
 
 
-class BasePlaylistEntry:
+class Entry:
+    version_code = "1.0.0"
+    version = int(version_code.replace(".", ""))
+    can_encode = (int, dict, list, str, int, float, bool)
+    default_encode = (Channel, Member, Server, User)
 
-    def __init__(self):
+    @classmethod
+    def from_dict(cls, playlist, data):
+        entry_version = data.get("version", 0)
+
+        if entry_version < Entry.version:
+            raise OutdatedEntryError()
+
+        entry_type = data.get("type", None)
+        if not entry_type:
+            raise KeyError("Data does not include a type parameter")
+        target = globals().get(entry_type, None)
+        if not target:
+            raise TypeError("Cannot create an entry with this type")
+        return target.from_dict(playlist, data)
+
+    @staticmethod
+    def create_meta_dict(meta):
+        meta_dict = {}
+        for key, value in meta.items():
+            if key is None or value is None:
+                continue
+
+            ser_value = {"type": value.__class__.__name__}
+            if isinstance(value, Entry.can_encode) or value is None:
+                ser_value.update({
+                    "type": "built-in/" + ser_value["type"],
+                    "value": value
+                })
+            else:
+                if isinstance(value, Entry.default_encode):
+                    ser_value.update({
+                        "id": value.id,
+                        "name": value.name,
+                    })
+
+            meta_dict[key] = ser_value
+
+        return meta_dict
+
+    @staticmethod
+    def meta_from_dict(data, bot):
+        meta = {}
+        for key, ser_value in data.items():
+            value = None
+            value_type = ser_value["type"]
+            if value_type.startswith("built-in"):
+                value = ser_value["value"]
+            elif value_type in ("Member", "User"):
+                value = bot.get_global_user(ser_value["id"])
+            elif value_type == "Server":
+                value = bot.get_server(ser_value["id"])
+            elif value == "Channel":
+                value = bot.get_channel(ser_value["id"])
+
+            if value:
+                meta[key] = value
+        return meta
+
+
+class BaseEntry:
+
+    def __init__(self, queue, url, **meta):
+        self.queue = queue
+        self.url = url
+        self.meta = meta
+
         self.filename = None
+        self.start_seconds = 0
+        self.duration = 0
+        self.end_seconds = 0
         self._is_downloading = False
         self._waiting_futures = []
-        self.start_seconds = 0
-        self.end_seconds = None
-        self.duration = 0
-        self._spotify_track = None
-        self.provided_song_timestamps = None
-        self.searched_additional_information = False
-        self._sub_queue = None
-        self.video_id = None
+
+    @property
+    def _is_current_entry(self):
+        current_entry = self.queue.player.current_entry
+        return self == current_entry
 
     @property
     def is_downloaded(self):
@@ -36,70 +104,32 @@ class BasePlaylistEntry:
 
         return bool(self.filename)
 
-    @property
-    def provides_timestamps(self):
-        return self.provided_song_timestamps is not None
-
-    @property
-    def thumbnail(self):
-        return None
-
-    def sub_queue(self, min_progress=-1):
-        if not self.provides_timestamps:
-            return None
-
-        if not self._sub_queue:
-            queue = []
-            entries = sorted(list(self.provided_song_timestamps.keys()))
-            for index, key in enumerate(entries):
-                entry = int(key)
-
-                dur = (int(entries[index + 1])
-                       if index + 1 < len(entries) else self.duration) - entry
-                e = {
-                    "name": self.provided_song_timestamps[key],
-                    "duration": dur,
-                    "start": entry,
-                    "index": index,
-                    "end": dur + entry
-                }
-                queue.append(e)
-
-            self._sub_queue = queue
-
-        if min_progress >= 0:
-            queue = []
-            for sub_entry in self._sub_queue:
-                if sub_entry["start"] < min_progress:
-                    continue
-                queue.append(sub_entry)
-        else:
-            queue = self._sub_queue
-
-        return queue
-
-    def get_current_song_from_timestamp(self, progress):
-        if not self.provides_timestamps:
+    def set_start(self, sec):
+        if sec < self.start_seconds or sec > self.end_seconds:
             return False
 
-        current_title = None
-        for entry in self.sub_queue():
-            if progress >= entry["start"] or current_title is None:
-                current_title = entry
+        self.start_seconds = sec
+        return True
 
-        return current_title
-
-    def get_timestamped_song(self, index):
-        return self.sub_queue()[index]
-
-    def get_local_progress(self, progress):
-        if not self.provides_timestamps:
+    def set_end(self, sec):
+        if sec < self.start_seconds or sec > self.duration:
             return False
-        entry = self.get_current_song_from_timestamp(progress)
-        return progress - entry["start"], entry["duration"]
+
+        self.end_seconds = sec
+        return True
 
     async def _download(self):
         raise NotImplementedError
+
+    @classmethod
+    def from_dict(cls, data, playlist):
+        raise NotImplementedError
+
+    def to_dict(self):
+        raise NotImplementedError
+
+    def to_web_dict(self):
+        return self.to_dict()
 
     def get_ready_future(self):
         """
@@ -144,190 +174,307 @@ class BasePlaylistEntry:
         return id(self)
 
 
-class URLPlaylistEntry(BasePlaylistEntry):
+class StreamEntry(BaseEntry):
 
-    def __init__(self, queue, url, title, duration=0, expected_filename=None, start_seconds=0, end_seconds=None, spotify_track=None, provided_song_timestamps=None, youtube_data=None, update_additional_information=True, **meta):
-        super().__init__()
+    def __init__(self, queue, url, title, destination=None, **meta):
+        super().__init__(queue, url, **meta)
 
-        self.playlist = queue
-        self.url = url
-        self.video_id = re.search(
-            r"(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)", url).group(1)
         self._title = title
-        self.duration = duration
-        self.end_seconds = end_seconds if end_seconds else duration
+        self.destination = destination
 
-        self.start_seconds = start_seconds
-        self.expected_filename = expected_filename
-        self.meta = meta
-
-        self.download_folder = self.playlist.downloader.download_folder
-
-        self.provided_song_timestamps = provided_song_timestamps
-        self._spotify_track = spotify_track
-        self.youtube_data = youtube_data
-        self.running_threads = []
-
-        if update_additional_information:
-            self.search_additional_info()
+        if self.destination:
+            self.filename = self.destination
 
     @property
     def title(self):
-        if self.spotify_track is not None and self.spotify_track.certainty > .6:
-            return self.spotify_track.name + " - " + self.spotify_track.artist
-        else:
-            return clean_songname(self._title)
+        return self._title
 
-    @property
-    def thumbnail(self):
-        if not self.youtube_data:
-            self.get_youtube_data()
+    def set_start(self, sec):
+        raise NotImplementedError
 
-        try:
-            thumbnails = self.youtube_data["snippet"]["thumbnails"]
-            ranks = ["maxres", "high", "medium", "standard", "default"]
-            for res in ranks:
-                if res in thumbnails:
-                    return thumbnails[res]["url"]
-        except (KeyError, TypeError):
-            return None
-
-    @property
-    def spotify_track(self):
-        return self._spotify_track if self._spotify_track and self._spotify_track.certainty > .6 else None
-
-    def threaded_spotify_search(self):
-        self._spotify_track = SpotifyTrack.from_query(self.title)
+    def set_end(self, sec):
+        raise NotImplementedError
 
     @classmethod
-    def from_dict(cls, playlist, data, update_additional_information=True):
-        url = data['url']
-        title = data['title']
-        duration = data['duration']
-        downloaded = data['downloaded']
-        filename = data['filename'] if downloaded else None
-        spotify_track = SpotifyTrack.from_dict(data.get("spotify_track", None))
-        provided_song_timestamps = data.get("provided_song_timestamps", None)
-        youtube_data = data.get("youtube_data", None)
-        start_seconds = data.get("start_seconds", 0)
-        start_seconds = 0 if start_seconds is None else start_seconds
-        end_seconds = data.get("end_seconds", duration)
-        meta = {}
+    def from_dict(cls, playlist, data):
+        if data["type"] != cls.__name__:
+            raise AttributeError("This data isn't of this entry type")
 
-        if "meta" in data:
-            if 'channel' in data['meta']:
-                ch = playlist.bot.get_channel(data['meta']['channel']['id'])
-                meta['channel'] = ch or data['meta']['channel']['name']
+        meta_dict = data.get("meta", None)
+        if meta_dict:
+            meta = Entry.meta_from_dict(meta_dict, playlist.bot)
+        else:
+            meta = {}
 
-            if 'author' in data['meta']:
-                meta['author'] = playlist.bot.get_global_user(
-                    data['meta']['author']['id'])
+        url = data["url"]
+        title = data["title"]
 
-            if "playlist" in data["meta"]:
-                meta["playlist"] = data["meta"]["playlist"]
-
-        return cls(playlist, url, title, duration, filename, start_seconds, end_seconds, provided_song_timestamps=provided_song_timestamps, update_additional_information=update_additional_information, **meta)
-
-    def search_additional_info(self):
-        print("[ENTRY] Searching for additional information")
-        if self._spotify_track is None:
-            t = Thread(target=self.threaded_spotify_search)
-            t.start()
-            self.running_threads.append(t)
-
-        if self.provided_song_timestamps is None:
-            t = Thread(target=self.search_for_timestamps)
-            t.start()
-            self.running_threads.append(t)
-
-        if self.youtube_data is None:
-            t = Thread(target=self.get_youtube_data)
-            t.start()
-            self.running_threads.append(t)
-
-        self.searched_additional_information = True
-
-    def search_for_timestamps(self):
-        songs = get_video_timestamps(self.url, self.duration)
-
-        if songs is None or len(songs) < 1:
-            return
-
-        self.provided_song_timestamps = songs
-
-    def get_youtube_data(self):
-        resp = requests.get(
-            "https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo&part=snippet,statistics&id=" + self.video_id)
-        items = resp.json()["items"]
-
-        if not items:
-            # video doesn't exist
-            return
-
-        try:
-            self.youtube_data = items[0]
-        except:
-            print(self.video_id)
-            print(resp.json())
-            raise
+        return cls(playlist, url, title, **meta)
 
     def to_dict(self):
-        meta_dict = {}
-        for i in self.meta:
-            if i is None or self.meta[i] is None:
-                continue
-
-            meta_dict[i] = {
-                'type': self.meta[i].__class__.__name__,
-                'id': self.meta[i].id,
-                'name': self.meta[i].name
-            }
+        meta_dict = Entry.create_meta_dict(self.meta)
 
         data = {
-            'type': self.__class__.__name__,
-            'url': self.url,
-            'title': self._title,
-            'duration': self.duration,
-            'downloaded': self.is_downloaded,
-            'filename': self.filename,
-            "expected_filename": self.expected_filename,
-            'meta': meta_dict,
-            "start_seconds": self.start_seconds,
-            "end_seconds": self.end_seconds,
-            "spotify_track": self.spotify_track.get_dict() if self.spotify_track is not None else None,
-            "provided_song_timestamps": self.provided_song_timestamps,
-            "youtube_data": self.youtube_data,
-            "thumbnail": self.thumbnail if self.youtube_data else None
+            "version": Entry.version,
+            "type": self.__class__.__name__,
+            "url": self.url,
+            "title": self._title,
+            "meta": meta_dict
         }
         return data
 
-    def set_start(self, sec):
-        if sec >= (self.end_seconds
-                   if self.end_seconds is not None else self.duration):
-            return False
+    def to_web_dict(self):
+        origin = None
+        if self.meta:
+            if "playlist" in self.meta:
+                origin = {"type": "playlist"}
+                origin.update(self.meta["playlist"])
+            elif "author" in self.meta:
+                origin = {"type": "user"}
+                web_author = WebAuthor.from_id(self.meta["author"].id)
+                origin.update(web_author.to_dict())
 
-        self.start_seconds = sec
-        return True
+        data = {
+            "type": self.__class__.__name__,
+            "url": self.url,
+            "origin": origin,
+            "title": self.title
+        }
 
-    def set_end(self, sec):
-        if sec <= self.start_seconds:
-            return False
+        return data
 
-        self.end_seconds = sec
-        return True
+    async def _download(self, *, fallback=False):
+        self._is_downloading = True
 
-    def set_title(self, new_title):
-        new_title = new_title.strip()
+        url = self.destination if fallback else self.url
 
-        if len(new_title) > 300 or len(new_title) < 3:
-            return False
+        try:
+            result = await self.queue.downloader.extract_info(
+                self.queue.loop, url, download=False)
+        except Exception as e:
+            if not fallback and self.destination:
+                return await self._download(fallback=True)
 
-        self.title = new_title
-        return True
+            raise ExtractionError(e)
+        else:
+            self.filename = result['url']
+            # I might need some sort of events or hooks or shit
+            # for when ffmpeg inevitebly fucks up and i have to restart
+            # although maybe that should be at a slightly lower level
+        finally:
+            self._is_downloading = False
 
-    def get_ready_future(self):
-        self.search_additional_info()
-        return BasePlaylistEntry.get_ready_future(self)
+
+class RadioStationEntry(StreamEntry):
+    def __init__(self, queue, station_data, destination=None, **meta):
+        super().__init__(queue, station_data.url, station_data.name, destination, **meta)
+        self.station_data = station_data
+        self.station_name = station_data.name
+        self._cover = self.station_data.cover
+
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def cover(self):
+        return self._cover
+
+    @property
+    def thumbnail(self):
+        return self.station_data.thumbnail
+
+    @property
+    def link(self):
+        return self.station_data.website
+
+    @classmethod
+    def from_dict(cls, playlist, data):
+        if data["type"] != cls.__name__:
+            raise AttributeError("This data isn't of this entry type")
+
+        meta_dict = data.get("meta", None)
+        if meta_dict:
+            meta = Entry.meta_from_dict(meta_dict, playlist.bot)
+        else:
+            meta = {}
+
+        url = data["url"]
+        title = data["title"]
+        station_data = StationInfo.from_dict(data["station_data"])
+
+        return cls(playlist, url, title, station_data, **meta)
+
+    def to_dict(self):
+        d = super().to_dict()
+        d.update({
+            "station_data": self.station_data.to_dict()
+        })
+
+        return d
+
+    def to_web_dict(self):
+        origin = None
+        if self.meta:
+            if "playlist" in self.meta:
+                origin = {"type": "playlist"}
+                origin.update(self.meta["playlist"])
+            elif "author" in self.meta:
+                origin = {"type": "user"}
+                web_author = WebAuthor.from_id(self.meta["author"].id)
+                origin.update(web_author.to_dict())
+
+        data = {
+            "type": self.__class__.__name__,
+            "url": self.url,
+            "thumbnail": self.thumbnail,
+            "thumbnail_brightness": get_image_brightness(url=self.thumbnail),
+            "origin": origin,
+            "title": self.title,
+            "cover": self.cover,
+            "link": self.link
+        }
+
+        return data
+
+
+class RadioSongEntry(RadioStationEntry):
+    def __init__(self, queue, station_data, destination=None, **meta):
+        super().__init__(queue, station_data, destination, **meta)
+        self._current_song_info = None
+        self._csi_poll_time = 0
+
+    def _get_new_song_info(self):
+        self._current_song_info = RadioSongExtractor.get_current_song(
+            self.station_data)
+        self._csi_poll_time = time.time()
+
+    @property
+    def current_song_info(self):
+        if self._current_song_info is None or (time.time() - self._csi_poll_time) > 10:
+            print("[RadioEntry] getting new current_song_info")
+            self._get_new_song_info()
+
+        return self._current_song_info
+
+    @property
+    def song_progress(self):
+        return self.current_song_info["progress"]
+
+    @property
+    def song_duration(self):
+        return self.current_song_info["duration"]
+
+    @property
+    def link(self):
+        return self.current_song_info["youtube"] or super().link
+
+    @property
+    def title(self):
+        return self.current_song_info["title"]
+
+    @property
+    def artist(self):
+        return self.current_song_info["artist"]
+
+    @property
+    def cover(self):
+        return self.current_song_info["cover"]
+
+    def to_web_dict(self):
+        data = super().to_web_dict()
+
+        data.update({
+            "title": self.title,
+            "artist": self.artist,
+            "cover": self.cover,
+            "song_progress": self.song_progress,
+            "song_duration": self.song_duration
+        })
+
+        return data
+
+
+class YoutubeEntry(BaseEntry):
+
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, expected_filename=None, **meta):
+        super().__init__(queue, url, **meta)
+
+        self.video_id = video_id
+        self._title = title
+        self.thumbnail = thumbnail
+        self.description = description
+        self.duration = duration
+
+        self.end_seconds = meta.get("end_seconds", duration)
+        self.start_seconds = meta.get("start_seconds", 0)
+
+        self.expected_filename = expected_filename
+
+        self.download_folder = self.queue.downloader.download_folder
+
+    @property
+    def title(self):
+        return clean_songname(self._title)
+
+    @classmethod
+    def from_dict(cls, playlist, data):
+        if data["type"] != cls.__name__:
+            raise AttributeError("This data isn't of this entry type")
+
+        meta_dict = data.get("meta", None)
+        if meta_dict:
+            meta = Entry.meta_from_dict(meta_dict, playlist.bot)
+        else:
+            meta = {}
+
+        video_id = data["video_id"]
+        url = data["url"]
+        title = data["title"]
+        duration = data["duration"]
+        thumbnail = data["thumbnail"]
+        description = data["description"]
+
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, **meta)
+
+    def to_dict(self):
+        meta_dict = Entry.create_meta_dict(self.meta)
+
+        data = {
+            "version": Entry.version,
+            "type": self.__class__.__name__,
+            "video_id": self.video_id,
+            "url": self.url,
+            "title": self._title,
+            "duration": self.duration,
+            "thumbnail": self.thumbnail,
+            "description": self.description,
+            "meta": meta_dict
+        }
+        return data
+
+    def to_web_dict(self):
+        origin = None
+        if self.meta:
+            if "playlist" in self.meta:
+                origin = {"type": "playlist"}
+                origin.update(self.meta["playlist"])
+            elif "author" in self.meta:
+                origin = {"type": "user"}
+                web_author = WebAuthor.from_id(self.meta["author"].id)
+                origin.update(web_author.to_dict())
+
+        data = {
+            "type": self.__class__.__name__,
+            "url": self.url,
+            "thumbnail": self.thumbnail,
+            "thumbnail_brightness": get_image_brightness(url=self.thumbnail),
+            "origin": origin,
+            "title": self.title,
+            "duration": self.duration,
+        }
+
+        return data
 
     async def _download(self):
         if self._is_downloading:
@@ -360,7 +507,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
                 if expected_fname_noex in flistdir:
                     try:
                         rsize = int(
-                            await get_header(self.playlist.bot.aiosession,
+                            await get_header(self.queue.bot.aiosession,
                                              self.url, 'CONTENT-LENGTH'))
                     except:
                         rsize = 0
@@ -423,8 +570,8 @@ class URLPlaylistEntry(BasePlaylistEntry):
         print("[Download] Started:", self.url)
 
         try:
-            result = await self.playlist.downloader.extract_info(
-                self.playlist.loop, self.url, download=True)
+            result = await self.queue.downloader.extract_info(
+                self.queue.loop, self.url, download=True)
         except Exception as e:
             raise ExtractionError(e)
 
@@ -434,7 +581,7 @@ class URLPlaylistEntry(BasePlaylistEntry):
             raise ExtractionError("ytdl broke and hell if I know why")
             # What the fuck do I do now?
 
-        self.filename = unhashed_fname = self.playlist.downloader.ytdl.prepare_filename(
+        self.filename = unhashed_fname = self.queue.downloader.ytdl.prepare_filename(
             result)
 
         if hash:
@@ -452,67 +599,115 @@ class URLPlaylistEntry(BasePlaylistEntry):
                 os.rename(unhashed_fname, self.filename)
 
 
-class StreamPlaylistEntry(BasePlaylistEntry):
+class TimestampEntry(YoutubeEntry):
 
-    def __init__(self, playlist, url, title, station_data=None, *, destination=None, **meta):
-        super().__init__()
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, sub_queue, expected_filename=None, **meta):
+        super().__init__(queue, video_id, url, title, duration,
+                         thumbnail, description, expected_filename, **meta)
+        self.sub_queue = sub_queue
 
-        self.playlist = playlist
-        self.url = url
-        if station_data is None:
-            self.title = title
+    @property
+    def current_sub_entry(self):
+        if not self._is_current_entry:
+            return self.sub_queue[0]
+
+        progress = self.queue.player.progress
+
+        sub_entry = None
+        for entry in self.sub_queue:
+            if progress >= entry["start"] or sub_entry is None:
+                sub_entry = entry
+
+        sub_entry["progress"] = progress - sub_entry["start"]
+
+        return sub_entry
+
+    @property
+    def title(self):
+        if self._is_current_entry:
+            return clean_songname(self.current_sub_entry["name"])
         else:
-            self.title = station_data.name
+            return clean_songname(self._title)
 
-        self.radio_station_data = station_data
-        self.destination = destination
-        self.duration = 0
-        self.meta = meta
+    @property
+    def whole_title(self):
+        return clean_songname(self._title)
 
-        if self.destination:
-            self.filename = self.destination
+    @classmethod
+    def from_dict(cls, playlist, data):
+        if data["type"] != cls.__name__:
+            raise AttributeError("This data isn't of this entry type")
+
+        meta_dict = data.get("meta", None)
+        if meta_dict:
+            meta = Entry.meta_from_dict(meta_dict, playlist.bot)
+        else:
+            meta = {}
+
+        video_id = data["video_id"]
+        url = data["url"]
+        title = data["title"]
+        duration = data["duration"]
+        thumbnail = data["thumbnail"]
+        description = data["description"]
+        sub_queue = data["sub_queue"]
+
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, sub_queue, **meta)
 
     def to_dict(self):
-        meta_dict = {}
-        for i in self.meta:
-            if i is None or self.meta[i] is None:
-                continue
+        d = super().to_dict()
+        d.update({
+            "sub_queue": self.sub_queue
+        })
 
-            meta_dict[i] = {
-                'type': self.meta[i].__class__.__name__,
-                'id': self.meta[i].id,
-                'name': self.meta[i].name
-            }
+        return d
 
-        data = {
-            'type': self.__class__.__name__,
-            'url': self.url,
-            'title': self._title,
-            'downloaded': self.is_downloaded,
-            'filename': self.filename,
-            "expected_filename": self.expected_filename,
-            'meta': meta_dict,
-            "station_data": self.radio_station_data.to_dict() if self.radio_station_data else None
-        }
-        return data
 
-    async def _download(self, *, fallback=False):
-        self._is_downloading = True
+class SpotifyEntry(YoutubeEntry):
 
-        url = self.destination if fallback else self.url
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, spotify_data, expected_filename=None, **meta):
+        super().__init__(queue, video_id, url, title, duration,
+                         thumbnail, description, expected_filename=None, **meta)
+        self.spotify_data = spotify_data
 
-        try:
-            result = await self.playlist.downloader.extract_info(
-                self.playlist.loop, url, download=False)
-        except Exception as e:
-            if not fallback and self.destination:
-                return await self._download(fallback=True)
+        self.song_name = spotify_data.name
+        self.artists = spotify_data.artists
+        self.album = spotify_data.album
+        self.popularity = spotify_data.popularity / 100
 
-            raise ExtractionError(e)
+        self._title = "{} - {}".format(spotify_data.artist_string,
+                                       self.song_name)
+
+    @property
+    def cover(self):
+        # using a property because I want to keep the randomness
+        return self.spotify_data.cover_url
+
+    @classmethod
+    def from_dict(cls, playlist, data):
+        if data["type"] != cls.__name__:
+            raise AttributeError("This data isn't of this entry type")
+
+        meta_dict = data.get("meta", None)
+        if meta_dict:
+            meta = Entry.meta_from_dict(meta_dict, playlist.bot)
         else:
-            self.filename = result['url']
-            # I might need some sort of events or hooks or shit
-            # for when ffmpeg inevitebly fucks up and i have to restart
-            # although maybe that should be at a slightly lower level
-        finally:
-            self._is_downloading = False
+            meta = {}
+
+        video_id = data["video_id"]
+        url = data["url"]
+        title = data["title"]
+        duration = data["duration"]
+        thumbnail = data["thumbnail"]
+        description = data["description"]
+        spotify_data = SpotifyTrack.from_dict(data["spotify_data"])
+
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, spotify_data, **meta)
+
+    def to_dict(self):
+        d = super().to_dict()
+        d.update({
+            "spotify_data": self.spotify_data.get_dict()
+        })
+
+        return d

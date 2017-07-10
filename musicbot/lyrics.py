@@ -1,4 +1,5 @@
 import re
+import traceback
 
 import requests
 from bs4 import BeautifulSoup
@@ -12,7 +13,8 @@ def search_for_lyrics_google(query):
     params = {
         "key": "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo",
         "cx": "002017775112634544492:7y5bpl2sn78",
-        "q": query}
+        "q": query
+    }
     resp = requests.get(
         "https://www.googleapis.com/customsearch/v1", params=params)
     data = resp.json()
@@ -22,7 +24,11 @@ def search_for_lyrics_google(query):
         display_link = item["displayLink"]
         if display_link in lyric_parsers:
             print("[LYRICS] Found lyrics at " + display_link)
-            lyrics = lyric_parsers[display_link](item["link"])
+            try:
+                lyrics = lyric_parsers[display_link](item["link"])
+            except BaseException:
+                print("Couldn't extract lyrics from {}:\n{}".format(
+                    display_link, traceback.format_exc()))
             if lyrics:
                 return "{}\n**Lyrics from \"{}\"**".format(lyrics, display_link)
             else:
@@ -92,7 +98,11 @@ def _extract_lyrics_musixmatch(url):
 
     bs = BeautifulSoup(content, "lxml")
     lyrics_window = bs.find_all(
-        "div", {"class": "mxm-lyrics"})[0].find_all("div", {"class": "mxm-lyrics"})[0]
+        "div", {"class": "mxm-lyrics"})[0].find_all("div", {"class": "mxm-lyrics"})[0].span
+
+    for garbage in bs.find_all("script"):
+        garbage.clear()
+
     lyrics = lyrics_window.text
     return lyrics.strip()
 
@@ -139,4 +149,4 @@ lyric_parsers = {"genius.com": _extract_lyrics_genius,
                  "www.animelyrics.com": _extract_lyrics_animelyrics,
                  "www.musixmatch.com": _extract_lyrics_musixmatch}
 
-# print(search_for_lyrics("前前前世"))
+# print(search_for_lyrics("Snow Fairy - Fairy Tail - English Version - Amy B"))
