@@ -4332,7 +4332,7 @@ class MusicBot(discord.Client):
                     await self.safe_delete_message(resp)
                 await self.safe_delete_message(msg)
 
-                return
+                continue
 
             elif split_message[0].lower() == "extras":
 
