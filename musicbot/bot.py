@@ -662,12 +662,16 @@ class MusicBot(discord.Client):
                     "Warning: Cannot delete message \"%s\", message not found"
                     % message.clean_content)
 
-    async def safe_edit_message(self,
-                                message,
-                                new,
-                                *,
-                                send_if_fail=False,
-                                quiet=False):
+    async def safe_edit_message(self, message, new, *, send_if_fail=False, quiet=False, keep_at_bottom=False):
+        if keep_at_bottom:
+            async for lmsg in self.logs_from(message.channel, limit=2):
+                if lmsg.id == message.id:
+                    break
+            else:
+                await self.safe_delete_message(message)
+                return await self.safe_send_message(message.channel, new)
+                return
+
         try:
             return await self.edit_message(message, new)
 
@@ -1212,6 +1216,10 @@ class MusicBot(discord.Client):
                         unit_length=1
                     )
                     completion_ratio = (ind + 1) / total_entries
+
+                    if progress_message_future:
+                        progress_message = progress_message_future.result()
+
                     progress_message_future = asyncio.ensure_future(self.safe_edit_message(
                         progress_message,
                         "Parsing {} entr{} at {} entries/min\n{} [{}%]\n{} remaining".format(
@@ -1221,11 +1229,13 @@ class MusicBot(discord.Client):
                             create_bar(completion_ratio, length=50),
                             round(100 * completion_ratio),
                             expected_time
-                        )
+                        ),
+                        keep_at_bottom=True
                     ))
 
             delta_time = time.time() - abs_start
 
+            progress_message_future.cancel()
             await self.safe_delete_message(progress_message)
             return Response("Added {} entries to the queue\nSkipped {} entries\nIt took {} to add all entries".format(
                 entries_added,

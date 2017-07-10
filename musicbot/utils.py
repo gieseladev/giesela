@@ -277,7 +277,7 @@ def get_video_sub_queue(description, video_id, song_dur):
 
         dur = next_start - start
         sub_entry = {
-            "name": timestamps[key].strip(punctuation, whitespaces),
+            "name": timestamps[key].strip(punctuation + whitespace),
             "duration": dur,
             "start": start,
             "index": index,
