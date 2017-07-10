@@ -170,9 +170,9 @@ def clean_songname(query):
         "1080", "1080p", "4k", "720", "720p", "album", "amv", "audio", "avi",
         "creditless", "dvd", "edition", "eng", "english", "from", "full", "hd",
         "jap", "japanese", "lyrics", "mix", "mp3", "mp4", "music", "new",
-        "official", "original", "original sound track", "original soundtrack",
-        "ost", "raw", "size", "soundtrack", "special", "textless", "theme",
-        "tv", "ver", "version", "video", "with lyrics"
+        "nightcore", "official", "original", "original sound track",
+        "original soundtrack", "ost", "raw", "size", "soundtrack", "special",
+        "textless", "theme", "tv", "ver", "version", "video", "with lyrics"
     )
 
     replacers = (
