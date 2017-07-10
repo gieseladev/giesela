@@ -662,6 +662,17 @@ class TimestampEntry(YoutubeEntry):
 
         return d
 
+    def to_web_dict(self):
+        data = super().to_web_dict()
+
+        data.update({
+            "whole_title": self.whole_title,
+            "title": self.title,
+            "sub_entry": self.current_sub_entry
+        })
+
+        return data
+
 
 class SpotifyEntry(YoutubeEntry):
 
@@ -671,6 +682,7 @@ class SpotifyEntry(YoutubeEntry):
         self.spotify_data = spotify_data
 
         self.song_name = spotify_data.name
+        self.artist = spotify_data.artist_string
         self.artists = spotify_data.artists
         self.album = spotify_data.album
         self.popularity = spotify_data.popularity / 100
@@ -711,3 +723,14 @@ class SpotifyEntry(YoutubeEntry):
         })
 
         return d
+
+    def to_web_dict(self):
+        data = super().to_web_dict()
+
+        data.update({
+            "title": self.song_name,
+            "artist": self.artist,
+            "cover": self.cover
+        })
+
+        return data
