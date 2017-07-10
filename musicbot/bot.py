@@ -5553,7 +5553,8 @@ class MusicBot(discord.Client):
         return Response(msg)
 
     @command_info("3.7.3", 1498306682, ***REMOVED***
-        "3.7.4": (1498312423, "Fixed severe bug and added musixmatch as a source")
+        "3.7.4": (1498312423, "Fixed severe bug and added musixmatch as a source"),
+        "3.9.2": (1499709472, "Fixed typo")
     ***REMOVED***)
     async def cmd_lyrics(self, player, channel):
         """
@@ -5568,7 +5569,7 @@ class MusicBot(discord.Client):
         if not player.current_entry:
             return Response("There's no way for me to find lyrics for something that doesn't even exist!")
 
-        title = plyer.current_entry.title
+        title = player.current_entry.title
         lyrics = search_for_lyrics(title)
 
         if not lyrics:
