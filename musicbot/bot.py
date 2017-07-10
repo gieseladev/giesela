@@ -3757,7 +3757,8 @@ class MusicBot(discord.Client):
         "3.7.0": (1498233256, "Changelog bug fixes"),
         "3.8.5": (1499279145, "Added \"rebuild\" extra command to clean and fix a playlist"),
         "3.8.7": (1499290119, "Due to a mistake \"rebuild\" always led to the deletion of the first entry."),
-        "3.8.9": (1499525669, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499525669, "Part of the `Giesenesis` rewrite"),
+        "3.9.3": (1499712451, "Fixed a bug in the playlist builder search command.")
     ***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
