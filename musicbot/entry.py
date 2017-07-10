@@ -93,6 +93,11 @@ class BaseEntry:
         self._waiting_futures = []
 
     @property
+    def _is_current_entry(self):
+        current_entry = self.queue.player.current_entry
+        return self == current_entry
+
+    @property
     def is_downloaded(self):
         if self._is_downloading:
             return False
@@ -600,11 +605,6 @@ class TimestampEntry(YoutubeEntry):
         super().__init__(queue, video_id, url, title, duration,
                          thumbnail, description, expected_filename, **meta)
         self.sub_queue = sub_queue
-
-    @property
-    def _is_current_entry(self):
-        current_entry = self.queue.player.current_entry
-        return self == current_entry
 
     @property
     def current_sub_entry(self):
