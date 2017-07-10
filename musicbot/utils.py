@@ -181,7 +181,9 @@ def clean_songname(query):
         # remove all parentheses and their content and remove "opening 5" stuff
         ((r"\(.*\)", r"(?:^|\b)op(?:ening)?(?:\s+\d***REMOVED***1,2***REMOVED***)?(?:\b|$)"), " "),
         # replace several artist things with &
-        ((r"(?:^|\b)(?:feat|ft)(?:\b|$)", ), " & ")
+        ((r"(?:^|\b)(?:feat|ft)(?:\b|$)", ), " & "),
+        # replace w/ with with
+        ((r"w\/",), "with")
     )
 
     special_regex = (
