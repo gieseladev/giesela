@@ -10,6 +10,7 @@ from datetime import timedelta
 from difflib import SequenceMatcher
 from hashlib import md5
 from io import BytesIO
+from string import punctuation, whitespace
 from threading import Thread
 
 import aiohttp
@@ -276,7 +277,7 @@ def get_video_sub_queue(description, video_id, song_dur):
 
         dur = next_start - start
         sub_entry = {
-            "name": clean_songname(timestamps[key]),
+            "name": timestamps[key].strip(punctuation, whitespaces),
             "duration": dur,
             "start": start,
             "index": index,
@@ -539,3 +540,55 @@ def md5sum(filename, limit=0):
         for chunk in iter(lambda: f.read(8192), b""):
             fhash.update(chunk)
     return fhash.hexdigest()[-limit:]
+
+
+def get_dev_version():
+    page = requests.get(
+        "https://raw.githubusercontent.com/siku2/Giesela/dev/musicbot/constants.py"
+    )
+    matches = re.search(
+        r"MAIN_VERSION = \"(\d.\d.\d)\"\nSUB_VERSION = \"(.*?)\"",
+        page.content.decode("utf-8"))
+
+    if matches is None:
+        return matches
+
+    return matches.groups((1, 2))
+
+
+def get_master_version():
+    page = requests.get(
+        "https://raw.githubusercontent.com/siku2/Giesela/master/musicbot/constants.py"
+    )
+    matches = re.search(
+        r"MAIN_VERSION = \"(\d.\d.\d)\"\nSUB_VERSION = \"(.*?)\"",
+        page.content.decode("utf-8"))
+
+    if matches is None:
+        return matches
+
+    return matches.groups((1, 2))
+
+
+def get_dev_changelog():
+    base_url = "https://siku2.github.io/Giesela/changelogs/changelog-"
+    dev_version = re.sub(r"\D", "", get_dev_version()[0])
+
+    changelog_page = requests.get(
+        base_url + dev_version).content.decode("utf-8")
+    bs = BeautifulSoup(changelog_page, "lxml")
+    html_to_markdown = [(r"<\/?li>", "\t"), (r"<\/?ul>", ""), (r"<code.+?>(.+?)<\/code>", r"`\1`"),
+                        (r"<strong>(.+?)<\/strong>", r"**\1**"), (r"<a\shref=\"(.+?)\">(.+?)<\/a>", r"[`\2`](\1)"), (r"\n\W+\n", "\n")]
+
+    changes = []
+
+    for sib in (bs.body.li, *bs.body.li.next_siblings):
+        line = str(sib).strip()
+        for match, repl in html_to_markdown:
+            line = re.sub(match, repl, line)
+
+        line = line.strip()
+        if line:
+            changes.append(line)
+
+    return changes

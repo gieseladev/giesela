@@ -36,8 +36,7 @@ from .bookmarks import bookmark
 from .cleverbot import CleverWrap
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
-from .constants import (AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT,
-                        get_dev_changelog, get_dev_version, get_master_version)
+from .constants import AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT
 from .entry import (RadioSongEntry, RadioStationEntry, SpotifyEntry,
                     StreamEntry, TimestampEntry, YoutubeEntry)
 from .games.game_2048 import Game2048
@@ -54,7 +53,8 @@ from .reminder import Action, Calendar
 from .saved_playlists import Playlists
 from .settings import Settings
 from .tungsten import Tungsten
-from .utils import (create_bar, escape_dis, format_time, get_related_videos,
+from .utils import (create_bar, escape_dis, format_time, get_dev_changelog,
+                    get_dev_version, get_master_version, get_related_videos,
                     hex_to_dec, load_file, nice_cut, ordinal, paginate,
                     parse_timestamp, prettydate, random_line,
                     run_function_every, to_timestamp, write_file)
