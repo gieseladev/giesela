@@ -5500,7 +5500,9 @@ class MusicBot(discord.Client):
 
         return Response(embed=em)
 
-    @command_info("3.5.7", 1497823283)
+    @command_info("3.5.7", 1497823283, ***REMOVED***
+        "3.8.9": (1499645741, "`Giesenesis` rewrite was here")
+    ***REMOVED***)
     async def cmd_interact(self, channel, message):
         """
         ///|Usage
@@ -5525,7 +5527,7 @@ class MusicBot(discord.Client):
             "v": datetime.date.today().strftime("%d/%m/%y"),
             "q": query
         ***REMOVED***
-        headers = ***REMOVED***"Authorization": "Bearer 47J7GSQPY2DJPLGUNFZVNHAMGU7ARCRD"***REMOVED***
+        headers = ***REMOVED***"Authorization": "Bearer HVSTOLU3UQLR7YOYXCONQCCIQNHXZYDM"***REMOVED***
         resp = requests.get("https://api.wit.ai/message",
                             params=params, headers=headers)
         data = resp.json()

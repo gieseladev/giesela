@@ -4,11 +4,12 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-MAIN_VERSION = "3.8.9"
-SUB_VERSION = "Giezela"
+MAIN_VERSION = "3.9.1"
+SUB_VERSION = "Giesenesis"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
 all_sub_versions = ***REMOVED***
+    "3.9.x": "Giesenesis",
     "3.8.x": "Giezela",
     "3.7.x": "Giese_La_La_Land",
     "3.6.x": "Weebiesela",
