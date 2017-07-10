@@ -3451,8 +3451,8 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                    str(reaction.emoji).startswith("📽") or
-                    str(reaction.emoji).startswith("💾")
+                        str(reaction.emoji).startswith("📽") or
+                        str(reaction.emoji).startswith("💾")
                     ) and reaction.count > 1 and user == author:
                 return True
 
@@ -4135,17 +4135,24 @@ class MusicBot(discord.Client):
                     avg_time = sum(times) / float(len(times))
                     expected_time = avg_time * entries_left
 
-                    await self.safe_edit_message(progress_message, "{}\n{} [{}%]\n{} remaining".format(
-                        message.format(entries_left=entries_left),
-                        create_bar((ind + 1) / total_entries, length=40),
-                        round(100 * (ind + 1) / total_entries),
-                        format_time(
-                            expected_time,
-                            max_specifications=1,
-                            combine_with_and=True,
-                            unit_length=1
-                        )
-                    ))
+                    if progress_message_future:
+                        progress_message = progress_message_future.result()
+
+                    await self.safe_edit_message(
+                        progress_message,
+                        "{}\n{} [{}%]\n{} remaining".format(
+                            message.format(entries_left=entries_left),
+                            create_bar((ind + 1) / total_entries, length=40),
+                            round(100 * (ind + 1) / total_entries),
+                            format_time(
+                                expected_time,
+                                max_specifications=1,
+                                combine_with_and=True,
+                                unit_length=1
+                            )
+                        ),
+                        keep_at_bottom=True
+                    )
 
             await self.safe_delete_message(progress_message)
             return entries, removed_entries
