@@ -1572,6 +1572,9 @@ class MusicBot(discord.Client):
 
                 em.set_footer(text=foot)
                 em.set_thumbnail(url=entry.cover)
+                em.set_author(
+                    name=entry.artist
+                )
             elif isinstance(entry, RadioStationEntry):
                 desc = "`***REMOVED******REMOVED***`".format(
                     to_timestamp(player.progress)
