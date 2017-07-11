@@ -1,6 +1,7 @@
 import json
 import re
 from datetime import datetime, timedelta
+from itertools import chain
 from random import choice
 
 import aiohttp
@@ -22,7 +23,8 @@ class StationInfo:
         self.cover = cover
         self.url = url
         self.website = website
-        self.thumbnails = thumbnails
+        self.thumbnails = list(chain(*[RadioStations.thumbnails[pointer] if pointer in RadioStations.thumbnails else [
+            pointer, ] for pointer in thumbnails]))
         self.has_current_song_info = RadioSongExtractor.has_data(self)
 
     @property
@@ -50,11 +52,14 @@ class StationInfo:
 class RadioStations:
     _initialised = False
     stations = []
+    thumbnails = {}
 
     def init():
         if not RadioStations._initialised:
+            data = json.load(open(ConfigDefaults.radios_file, "r"))
+            RadioStations.thumbnails = data["thumbnails"]
             RadioStations.stations = [StationInfo.from_dict(
-                station) for station in json.load(open(ConfigDefaults.radios_file, "r"))]
+                station) for station in data["stations"]]
             _initialised = True
 
     def get_random_station(self):

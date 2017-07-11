@@ -1572,6 +1572,9 @@ class MusicBot(discord.Client):
 
                 em.set_footer(text=foot)
                 em.set_thumbnail(url=entry.cover)
+                em.set_author(
+                    name=entry.artist
+                )
             elif isinstance(entry, RadioStationEntry):
                 desc = "`{}`".format(
                     to_timestamp(player.progress)
@@ -3451,8 +3454,8 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                    str(reaction.emoji).startswith("📽") or
-                    str(reaction.emoji).startswith("💾")
+                        str(reaction.emoji).startswith("📽") or
+                        str(reaction.emoji).startswith("💾")
                     ) and reaction.count > 1 and user == author:
                 return True
 
@@ -3638,8 +3641,6 @@ class MusicBot(discord.Client):
             clip = video.fx.all.resize(clip, newsize=.55)
             clip.write_gif("cache/pictures/9gag.gif", fps=10)
             saveloc = "cache/pictures/9gag.gif"
-            # subprocess.run(
-            #     ["gifsicle", "-b", "cache/pictures/9gag.gif", "--colors", "256"])
 
             em = Embed(title=post.title, url=post.hyperlink, colour=9316352)
             em.set_author(name=author.display_name, icon_url=author.avatar_url)
@@ -3757,7 +3758,8 @@ class MusicBot(discord.Client):
         "3.7.0": (1498233256, "Changelog bug fixes"),
         "3.8.5": (1499279145, "Added \"rebuild\" extra command to clean and fix a playlist"),
         "3.8.7": (1499290119, "Due to a mistake \"rebuild\" always led to the deletion of the first entry."),
-        "3.8.9": (1499525669, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499525669, "Part of the `Giesenesis` rewrite"),
+        "3.9.3": (1499712451, "Fixed a bug in the playlist builder search command.")
     })
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -4134,17 +4136,24 @@ class MusicBot(discord.Client):
                     avg_time = sum(times) / float(len(times))
                     expected_time = avg_time * entries_left
 
-                    await self.safe_edit_message(progress_message, "{}\n{} [{}%]\n{} remaining".format(
-                        message.format(entries_left=entries_left),
-                        create_bar((ind + 1) / total_entries, length=40),
-                        round(100 * (ind + 1) / total_entries),
-                        format_time(
-                            expected_time,
-                            max_specifications=1,
-                            combine_with_and=True,
-                            unit_length=1
-                        )
-                    ))
+                    if progress_message_future:
+                        progress_message = progress_message_future.result()
+
+                    await self.safe_edit_message(
+                        progress_message,
+                        "{}\n{} [{}%]\n{} remaining".format(
+                            message.format(entries_left=entries_left),
+                            create_bar((ind + 1) / total_entries, length=40),
+                            round(100 * (ind + 1) / total_entries),
+                            format_time(
+                                expected_time,
+                                max_specifications=1,
+                                combine_with_and=True,
+                                unit_length=1
+                            )
+                        ),
+                        keep_at_bottom=True
+                    )
 
             await self.safe_delete_message(progress_message)
             return entries, removed_entries
@@ -4332,7 +4341,7 @@ class MusicBot(discord.Client):
                     await self.safe_delete_message(resp)
                 await self.safe_delete_message(msg)
 
-                return
+                continue
 
             elif split_message[0].lower() == "extras":
 
@@ -5553,7 +5562,8 @@ class MusicBot(discord.Client):
         return Response(msg)
 
     @command_info("3.7.3", 1498306682, {
-        "3.7.4": (1498312423, "Fixed severe bug and added musixmatch as a source")
+        "3.7.4": (1498312423, "Fixed severe bug and added musixmatch as a source"),
+        "3.9.2": (1499709472, "Fixed typo")
     })
     async def cmd_lyrics(self, player, channel):
         """
@@ -5568,7 +5578,7 @@ class MusicBot(discord.Client):
         if not player.current_entry:
             return Response("There's no way for me to find lyrics for something that doesn't even exist!")
 
-        title = plyer.current_entry.title
+        title = player.current_entry.title
         lyrics = search_for_lyrics(title)
 
         if not lyrics:
@@ -5761,10 +5771,6 @@ class MusicBot(discord.Client):
         if reaction.message.author == self.user:
             await self.safe_send_message(user, "I hate you too!")
             return
-
-        # await self.add_reaction (reaction.message, discord.Emoji (name = "Bubo", id = "234022157569490945", server = reaction.message.server))
-        # self.log ("{} ({})".format (reaction.emoji.name, reaction.emoji.id))
-        # self.log ("{}".format (reaction.emoji))
 
     async def autopause(self, before, after):
         if not all([before, after]):
