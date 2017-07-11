@@ -237,7 +237,7 @@ def clean_songname(query):
 def _run_timestamp_matcher(text):
     songs = {}
     for match in re.finditer(
-            r"^[\s\->]+(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?\W+(.+?)$",
+            r"^[\s\->]*(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?\W+(.+?)$",
             text,
             flags=re.MULTILINE):
         timestamp = int(match.group(3))
