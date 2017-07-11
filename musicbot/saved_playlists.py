@@ -1,6 +1,7 @@
 import configparser
 import json
 import os
+import re
 
 from .entry import Entry
 from .exceptions import OutdatedEntryError
@@ -134,11 +135,22 @@ class Playlists:
         def get_similarity(entry):
             s1 = similarity(query_title, entry.title)
             s2 = similarity(query_url, entry.url)
-            words_in_query = query_title.lower().split()
-            s3 = sum(1 for w in words_in_query if w in entry.title.lower(
-            ).split()) / len(words_in_query)
 
-            return max(s1, s2, s3)
+            words_in_query = [re.sub(r"\W", "", w)
+                              for w in query_title.lower().split()]
+            words_in_query = [w for w in words_in_query if w]
+
+            words_in_title = [re.sub(r"\W", "", w)
+                              for w in entry.title.lower().split()]
+            words_in_title = [w for w in words_in_title if w]
+
+            s3 = sum(len(w) for w in words_in_query if w in entry.title.lower(
+            )) / len(re.sub(r"\W", "", query_title))
+            s4 = sum(len(w) for w in words_in_title if w in query_title.lower(
+            )) / len(re.sub(r"\W", "", entry.title))
+            s5 = (s3 + s4) / 2
+
+            return max(s1, s2, s5)
 
         matched_entries = [(get_similarity(entry), entry) for entry in entries]
         if certainty_threshold:

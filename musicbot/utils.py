@@ -170,18 +170,20 @@ def clean_songname(query):
         "1080", "1080p", "4k", "720", "720p", "album", "amv", "audio", "avi",
         "creditless", "dvd", "edition", "eng", "english", "from", "full", "hd",
         "jap", "japanese", "lyrics", "mix", "mp3", "mp4", "music", "new",
-        "official", "original", "original sound track", "original soundtrack",
-        "ost", "raw", "size", "soundtrack", "special", "textless", "theme",
-        "tv", "ver", "version", "video", "with lyrics"
+        "nightcore", "official", "original", "original sound track",
+        "original soundtrack", "ost", "raw", "size", "soundtrack", "special",
+        "textless", "theme", "tv", "ver", "version", "video", "with lyrics"
     )
 
     replacers = (
         # replace common indicators for the artist with a simple dash
-        ((r"[\|:]", r"(^|\W)by(\W|$)"), " - "),
+        ((r"[\|:\/]", r"(^|\W)by(\W|$)"), " - "),
         # remove all parentheses and their content and remove "opening 5" stuff
         ((r"\(.*\)", r"(?:^|\b)op(?:ening)?(?:\s+\d***REMOVED***1,2***REMOVED***)?(?:\b|$)"), " "),
         # replace several artist things with &
-        ((r"(?:^|\b)(?:feat|ft)(?:\b|$)", ), " & ")
+        ((r"(?:^|\b)(?:feat|ft)(?:\b|$)", ), " & "),
+        # replace w/ with with
+        ((r"w\/",), "with")
     )
 
     special_regex = (
@@ -235,7 +237,7 @@ def clean_songname(query):
 def _run_timestamp_matcher(text):
     songs = ***REMOVED******REMOVED***
     for match in re.finditer(
-            r"^[\s\->]+(?:(\d***REMOVED***1,2***REMOVED***):)?(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***2***REMOVED***)(?:\s?.?\s?(?:\d***REMOVED***1,2***REMOVED***:)?(?:\d***REMOVED***1,2***REMOVED***):(?:\d***REMOVED***2***REMOVED***))?\W+(.+?)$",
+            r"^[\s\->]*(?:(\d***REMOVED***1,2***REMOVED***):)?(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***2***REMOVED***)(?:\s?.?\s?(?:\d***REMOVED***1,2***REMOVED***:)?(?:\d***REMOVED***1,2***REMOVED***):(?:\d***REMOVED***2***REMOVED***))?\W+(.+?)$",
             text,
             flags=re.MULTILINE):
         timestamp = int(match.group(3))

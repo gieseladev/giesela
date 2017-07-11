@@ -24,6 +24,7 @@ def search_for_lyrics_google(query):
         display_link = item["displayLink"]
         if display_link in lyric_parsers:
             print("[LYRICS] Found lyrics at " + display_link)
+            lyrics = None
             try:
                 lyrics = lyric_parsers[display_link](item["link"])
             except BaseException:
