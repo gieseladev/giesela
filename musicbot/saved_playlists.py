@@ -134,7 +134,7 @@ class Playlists:
 
         def get_similarity(entry):
             s1 = similarity(query_title, entry.title)
-            s2 = similarity(query_url, entry.url)
+            s2 = 1 if query_url == entry.url else 0
 
             words_in_query = [re.sub(r"\W", "", w)
                               for w in query_title.lower().split()]

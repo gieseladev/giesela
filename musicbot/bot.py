@@ -13,7 +13,7 @@ import sys
 import time
 import traceback
 from collections import OrderedDict, defaultdict
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from functools import wraps
 from io import BytesIO
 from random import choice, random, shuffle
@@ -985,7 +985,7 @@ class MusicBot(discord.Client):
             else:
                 await self.send_typing(channel)
                 params = {
-                    "v": datetime.date.today().strftime("%d/%m/%y"),
+                    "v": date.today().strftime("%d/%m/%y"),
                     "q": command}
                 headers = {
                     "Authorization": "Bearer CU4UAUCKWN37QLXHMBOYZ425NOGBMIYK"}
@@ -5547,7 +5547,7 @@ class MusicBot(discord.Client):
         print("[INTERACT] \"{}\"".format(query))
 
         params = {
-            "v": datetime.date.today().strftime("%d/%m/%y"),
+            "v": date.today().strftime("%d/%m/%y"),
             "q": query
         }
         headers = {"Authorization": "Bearer HVSTOLU3UQLR7YOYXCONQCCIQNHXZYDM"}
