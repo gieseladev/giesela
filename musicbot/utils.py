@@ -195,6 +195,7 @@ def clean_songname(query):
         # converts to "test - test")
         (r"(\s)([^\w\s\',])(\w)", r"\1 \2 \3"),
         (r"(\w)([^\w\s\',])(\s)", r"\1 \2 \3"),
+        (r"[^\w\s]\s*[^\w\s]", " ")
     )
 
     for target, replacement in special_regex:
