@@ -1154,7 +1154,8 @@ class MusicBot(discord.Client):
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
         "3.5.2": (1497712233, "Updated documentaion for this command"),
-        "3.8.9": (1499461104, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499461104, "Part of the `Giesenesis` rewrite"),
+        "3.9.6": (1499879464, "Better error handling")
     ***REMOVED***)
     async def cmd_play(self, player, channel, author, leftover_args, song_url):
         """
@@ -1169,7 +1170,10 @@ class MusicBot(discord.Client):
         with send_typing(self, channel):
             query = " ".join([*leftover_args, song_url.strip("<>")])
 
-            entry = await player.playlist.get_entry_from_query(query, author=author, channel=channel)
+            try:
+                entry = await player.playlist.get_entry_from_query(query, author=author, channel=channel)
+            except BaseException as e:
+                return Response("There was a tiny problem with your request:\n```\n***REMOVED******REMOVED***\n```".format(e))
 
         if not entry:
             return Response("Couldn't find anything for me to add")
