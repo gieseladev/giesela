@@ -4903,7 +4903,8 @@ class MusicBot(discord.Client):
     @block_user
     @command_info("2.0.2", 1484676180, {
         "3.8.3": (1499184914, "Can now use multiline statements without having to use tricks like /n/"),
-        "3.8.5": (1499279145, "Better code display")
+        "3.8.5": (1499279145, "Better code display"),
+        "3.9.6": (1499889309, "Escaping the result and adding the shortcut entry for player.current_entry")
     })
     async def cmd_execute(self, channel, author, server, raw_content, player=None):
         statement = raw_content.strip()
@@ -4915,6 +4916,7 @@ class MusicBot(discord.Client):
         env = {}
         env.update(globals())
         env.update(locals())
+        env.update(entry=player.current_entry)
 
         try:
             exec(statement, env)
@@ -4932,7 +4934,7 @@ class MusicBot(discord.Client):
                 "**While executing the statement the following error occured**\n{}\n{}".
                 format(traceback.format_exc(), str(e)))
 
-        return Response("**RESULT**\n```python\n{}\n```".format(str(ret)))
+        return Response("**RESULT**\n```python\n{}\n```".format(escape_dis(str(ret))))
 
     @command_info("2.0.3", 1487538840, {
         "3.3.7": (1497471402, "changed command from \"skipto\" to \"seek\"")
