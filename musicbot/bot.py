@@ -1169,11 +1169,13 @@ class MusicBot(discord.Client):
 
         placement = None
 
-        if song_url.lower() in ["next", "now", "first"]:
+        last_arg = leftover_args[-1] if leftover_args else ""
+
+        if last_arg.lower() in ["next", "now", "first"]:
             placement = 0
             song_url = ""
-        elif song_url.isnumeric():
-            placement = int(song_url)
+        elif last_arg.isnumeric():
+            placement = int(last_arg) - 1
             song_url = ""
 
         with send_typing(self, channel):
