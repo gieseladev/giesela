@@ -3773,7 +3773,8 @@ class MusicBot(discord.Client):
         "3.8.5": (1499279145, "Added \"rebuild\" extra command to clean and fix a playlist"),
         "3.8.7": (1499290119, "Due to a mistake \"rebuild\" always led to the deletion of the first entry."),
         "3.8.9": (1499525669, "Part of the `Giesenesis` rewrite"),
-        "3.9.3": (1499712451, "Fixed a bug in the playlist builder search command.")
+        "3.9.3": (1499712451, "Fixed a bug in the playlist builder search command."),
+        "4.0.0": (1499978910, "Forgot to implement progress message properly and as a result it could bug out and spam itself.")
     ***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -4153,7 +4154,7 @@ class MusicBot(discord.Client):
                     if progress_message_future:
                         progress_message = progress_message_future.result()
 
-                    await self.safe_edit_message(
+                    progress_message_future = asyncio.ensure_future(self.safe_edit_message(
                         progress_message,
                         "***REMOVED******REMOVED***\n***REMOVED******REMOVED*** [***REMOVED******REMOVED***%]\n***REMOVED******REMOVED*** remaining".format(
                             message.format(entries_left=entries_left),
@@ -4167,8 +4168,9 @@ class MusicBot(discord.Client):
                             )
                         ),
                         keep_at_bottom=True
-                    )
+                    ))
 
+            await progress_message_future
             await self.safe_delete_message(progress_message)
             return entries, removed_entries
 
