@@ -420,8 +420,7 @@ class MusicBot(discord.Client):
             await self.ws.send(utils.to_json(payload))
             self.the_voice_clients[server.id].channel = channel
 
-    async def get_player(self, channel=None, create=False,
-                         auto_summon=True, server_id=None) -> MusicPlayer:
+    async def get_player(self, channel=None, create=False, auto_summon=True, server_id=None):
         server = channel.server if channel else self.get_server(server_id)
 
         if server.id not in self.players:
@@ -1162,7 +1161,7 @@ class MusicBot(discord.Client):
     async def cmd_play(self, player, channel, author, leftover_args, song_url):
         """
         ///|Usage
-        `{command_prefix}play <song link | query> [index, "last", "next"]
+        `{command_prefix}play <song link | query> [index | "last" | "next"]`
         ///|Explanation
         Adds the song to the queue.  If no link is provided, the first
         result from a youtube search is added to the queue.
@@ -2371,8 +2370,7 @@ class MusicBot(discord.Client):
     @command_info("1.0.0", 1477180800, {
         "2.0.2": (1481827560, "Can now use @mentions to \"goto\" a user")
     })
-    async def cmd_goto(self, server, channel, user_mentions, author,
-                       leftover_args):
+    async def cmd_goto(self, server, channel, user_mentions, author, leftover_args):
         """
         Usage:
             {command_prefix}goto <id | name | @mention>
@@ -4857,7 +4855,8 @@ class MusicBot(discord.Client):
             return Response(text)
 
     @command_info("2.0.3", 1485516420, {
-        "3.7.5": (1481827320, "The command finally works like it should")
+        "3.7.5": (1481827320, "The command finally works like it should"),
+        "3.9.9": (1499977057, "moving Giesela too")
     })
     async def cmd_moveus(self, channel, server, author, message, leftover_args):
         """
@@ -4884,7 +4883,6 @@ class MusicBot(discord.Client):
         if server.me in voice_members:
             voice_members.remove(server.me)
             move_myself = True
-        # print([mem.name for mem in voice_members])
 
         target_channel = self.get_channel(search_channel)
         if target_channel is None:
@@ -4897,20 +4895,14 @@ class MusicBot(discord.Client):
             return Response(
                 "Can't resolve the target channel!")
 
-        # print("there are {} members in this voice chat".format(
-        #     len(voice_members)))
-
         s = 0
         for voice_member in voice_members:
             await self.move_member(voice_member, target_channel)
             s += 1
 
-        # print("moved {} users from {} to {}".format(
-        #     s, author_channel, target_channel))
-
         if move_myself:
             print("moving myself")
-            return await self.cmd_goto(server, channel, [author, ], author, [])
+            await self.move_voice_client(target_channel)
 
     @block_user
     @command_info("2.0.2", 1484676180, {
