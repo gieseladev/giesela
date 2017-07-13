@@ -193,9 +193,6 @@ class Playlist(EventEmitter):
 
         if info['extractor'] in ['generic', 'Dropbox']:
             try:
-                # unfortunately this is literally broken
-                # https://github.com/KeepSafe/aiohttp/issues/758
-                # https://github.com/KeepSafe/aiohttp/issues/852
                 content_type = await get_header(self.bot.aiosession, info['url'], 'CONTENT-TYPE')
                 print("Got content type", content_type)
 
@@ -225,16 +222,20 @@ class Playlist(EventEmitter):
 
         clean_title = clean_songname(video_title) or video_title
 
+        base_arguments = (
+            self,
+            video_id,
+            video_url,
+            video_title,
+            video_duration,
+            video_thumbnail,
+            video_description
+        )
+
         spotify_track = SpotifyTrack.from_query(clean_title)
         if spotify_track.certainty > .6:
             entry = SpotifyEntry(
-                self,
-                video_id,
-                video_url,
-                video_title,
-                video_duration,
-                video_thumbnail,
-                video_description,
+                *base_arguments,
                 spotify_track,
                 self.downloader.ytdl.prepare_filename(info),
                 **meta
@@ -245,26 +246,14 @@ class Playlist(EventEmitter):
 
             if sub_queue:
                 entry = TimestampEntry(
-                    self,
-                    video_id,
-                    video_url,
-                    video_title,
-                    video_duration,
-                    video_thumbnail,
-                    video_description,
+                    *base_arguments,
                     sub_queue,
                     self.downloader.ytdl.prepare_filename(info),
                     **meta
                 )
             else:
                 entry = YoutubeEntry(
-                    self,
-                    video_id,
-                    video_url,
-                    video_title,
-                    video_duration,
-                    video_thumbnail,
-                    video_description,
+                    *base_arguments,
                     self.downloader.ytdl.prepare_filename(info),
                     **meta
                 )
