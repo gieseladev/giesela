@@ -108,7 +108,8 @@ class MusicBot(discord.Client):
         self.init_ok = False
         self.cached_client_id = None
         self.chatters = {}
-        self.blocked_commands = {}
+        self.blocked_commands = Settings.get_setting(
+            "blocked_commands", default={})
         self.users_in_menu = set()
 
         if not self.autoplaylist:
@@ -3469,9 +3470,9 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                        str(reaction.emoji).startswith("📽") or
-                        str(reaction.emoji).startswith("💾")
-                    ) and reaction.count > 1 and user == author:
+                str(reaction.emoji).startswith("📽") or
+                str(reaction.emoji).startswith("💾")
+                ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
@@ -5444,7 +5445,8 @@ class MusicBot(discord.Client):
 
     @owner_only
     @command_info("3.1.6", 1498672140, {
-        "3.6.4": (1498146841, "Can now specify the required arguments in order to block a command")
+        "3.6.4": (1498146841, "Can now specify the required arguments in order to block a command"),
+        "3.9.8": (1499976133, "Saving the blocked commands")
     })
     async def cmd_blockcommand(self, command, leftover_args):
         """
@@ -5453,26 +5455,28 @@ class MusicBot(discord.Client):
         ///|Explanation
         Block a command
         """
-        if len(leftover_args) < 1:
-            return Response("Reason plz")
-
-        args = []
-
-        for i, el in enumerate(leftover_args):
-            if not el.startswith("\""):
-                args.append(el)
-            else:
-                reason = " ".join(leftover_args[i:]).strip("\"")
-                break
-
-        if not reason:
-            return Response("Put your reason in quotes, idiot!")
-
         if command.lower() in self.blocked_commands:
             self.blocked_commands.pop(command.lower())
+            Settings["blocked_commands"] = self.blocked_commands
             return Response("Block lifted")
         else:
+            if len(leftover_args) < 1:
+                return Response("Reason plz")
+
+            args = []
+
+            for i, el in enumerate(leftover_args):
+                if not el.startswith("\""):
+                    args.append(el)
+                else:
+                    reason = " ".join(leftover_args[i:]).strip("\"")
+                    break
+
+            if not reason:
+                return Response("Put your reason in quotes, idiot!")
+
             self.blocked_commands[command.lower()] = (args, reason)
+            Settings["blocked_commands"] = self.blocked_commands
             return Response("Blocked command `{} {}`".format(command, " ".join(args)))
 
     @command_info("3.4.0", 1497533758, {
