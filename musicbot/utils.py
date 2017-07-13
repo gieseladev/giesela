@@ -172,7 +172,8 @@ def clean_songname(query):
         "jap", "japanese", "lyrics", "mix", "mp3", "mp4", "music", "new",
         "nightcore", "official", "original", "original sound track",
         "original soundtrack", "ost", "raw", "size", "soundtrack", "special",
-        "textless", "theme", "tv", "ver", "version", "video", "with lyrics"
+        "sub", "textless", "theme", "tv", "ver", "version", "video",
+        "with lyrics"
     )
 
     replacers = (

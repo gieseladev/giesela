@@ -1155,17 +1155,26 @@ class MusicBot(discord.Client):
     @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "3.8.9": (1499461104, "Part of the `Giesenesis` rewrite"),
-        "3.9.6": (1499879464, "Better error handling")
+        "3.9.6": (1499879464, "Better error handling"),
+        "3.9.7": (1499968174, "Added a placement parameter.")
     })
     async def cmd_play(self, player, channel, author, leftover_args, song_url):
         """
         ///|Usage
-        `{command_prefix}play <song link>
-        `{command_prefix}play <query>
+        `{command_prefix}play <song link | query> [index, "last", "next"]
         ///|Explanation
         Adds the song to the queue.  If no link is provided, the first
         result from a youtube search is added to the queue.
         """
+
+        placement = None
+
+        if song_url.lower() in ["next", "now", "first"]:
+            placement = 0
+            song_url = ""
+        elif song_url.isnumeric():
+            placement = int(song_url)
+            song_url = ""
 
         with send_typing(self, channel):
             query = " ".join([*leftover_args, song_url.strip("<>")])
@@ -1192,7 +1201,7 @@ class MusicBot(discord.Client):
                 channel,
                 "Parsing {} entries\n{} [0%]".format(
                     total_entries,
-                    create_bar(0, length=50)
+                    create_bar(0, length=20)
                 )
             )
             times = []
@@ -1230,7 +1239,7 @@ class MusicBot(discord.Client):
                             entries_left,
                             "y" if entries_left == 1 else "ies",
                             round(60 / avg_time, 1),
-                            create_bar(completion_ratio, length=50),
+                            create_bar(completion_ratio, length=20),
                             round(100 * completion_ratio),
                             expected_time
                         ),
@@ -1247,7 +1256,7 @@ class MusicBot(discord.Client):
                 format_time(delta_time, unit_length=1)
             ))
         else:
-            player.playlist._add_entry(entry)
+            player.playlist._add_entry(entry, placement)
             return Response("Enqueued `{}`".format(entry.title))
 
     @command_info("2.0.2", 1482252120, {
@@ -4120,7 +4129,7 @@ class MusicBot(discord.Client):
                 *urls)
 
             total_entries = len(urls)
-            progress_message = await self.safe_send_message(channel, "{}\n{} [0%]".format(message.format(entries_left=total_entries), create_bar(0, length=40)))
+            progress_message = await self.safe_send_message(channel, "{}\n{} [0%]".format(message.format(entries_left=total_entries), create_bar(0, length=20)))
             times = []
             start_time = time.time()
 
@@ -4147,7 +4156,7 @@ class MusicBot(discord.Client):
                         progress_message,
                         "{}\n{} [{}%]\n{} remaining".format(
                             message.format(entries_left=entries_left),
-                            create_bar((ind + 1) / total_entries, length=40),
+                            create_bar((ind + 1) / total_entries, length=20),
                             round(100 * (ind + 1) / total_entries),
                             format_time(
                                 expected_time,

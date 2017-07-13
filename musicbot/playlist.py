@@ -275,9 +275,13 @@ class Playlist(EventEmitter):
         for entry in entries:
             self._add_entry(entry)
 
-    def _add_entry(self, entry):
-        self.entries.append(entry)
-        self.emit('entry-added', playlist=self, entry=entry)
+    def _add_entry(self, entry, placement=None):
+        if placement is not None:
+            self.entries.insert(placement, entry)
+        else:
+            self.entries.append(entry)
+
+        self.emit("entry-added", playlist=self, entry=entry)
 
         if self.peek() is entry:
             entry.get_ready_future()
