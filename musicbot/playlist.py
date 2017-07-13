@@ -1,10 +1,10 @@
 import datetime
+import random
 import time
 import traceback
 from collections import deque
 from itertools import islice
 from random import shuffle
-from urllib.parse import quote
 
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
@@ -133,8 +133,6 @@ class Playlist(EventEmitter):
         return entry, len(self.entries)
 
     async def get_entry_from_query(self, query, **meta):
-
-        query = quote(query)
 
         info = await self.downloader.extract_info(
             self.loop, query, download=False, process=False)
@@ -266,6 +264,12 @@ class Playlist(EventEmitter):
 
     def _add_entry(self, entry, placement=None):
         if placement is not None:
+            if placement == "random":
+                if len(self.entries) > 0:
+                    placement = random.randrange(0, len(self.entries))
+                else:
+                    placement = 0
+
             self.entries.insert(placement, entry)
         else:
             self.entries.append(entry)

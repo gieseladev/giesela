@@ -1156,12 +1156,13 @@ class MusicBot(discord.Client):
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "3.8.9": (1499461104, "Part of the `Giesenesis` rewrite"),
         "3.9.6": (1499879464, "Better error handling"),
-        "3.9.7": (1499968174, "Added a placement parameter.")
+        "3.9.7": (1499968174, "Added a placement parameter."),
+        "4.0.0": (1499981166, "Added \"random\" as a possible placement parameter")
     ***REMOVED***)
     async def cmd_play(self, player, channel, author, leftover_args, song_url):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***play <song link | query> [index | "last" | "next"]`
+        `***REMOVED***command_prefix***REMOVED***play <song link | query> [index | "last" | "next" | "random"]`
         ///|Explanation
         Adds the song to the queue.  If no link is provided, the first
         result from a youtube search is added to the queue.
@@ -1169,14 +1170,18 @@ class MusicBot(discord.Client):
 
         placement = None
 
-        last_arg = leftover_args[-1] if leftover_args else ""
+        last_arg = leftover_args.pop() if leftover_args else ""
 
         if last_arg.lower() in ["next", "now", "first"]:
             placement = 0
             song_url = ""
+        elif last_arg.lower() in ["anywhere", "random"]:
+            placement = "random"
         elif last_arg.isnumeric():
             placement = int(last_arg) - 1
             song_url = ""
+        else:
+            leftover_args.append(last_arg)
 
         with send_typing(self, channel):
             query = " ".join([*leftover_args, song_url.strip("<>")])
@@ -1214,7 +1219,7 @@ class MusicBot(discord.Client):
 
             async for ind, entry in entry_generator:
                 if entry:
-                    player.playlist._add_entry(entry)
+                    player.playlist._add_entry(entry, placement)
                     entries_added += 1
                 else:
                     entries_not_added += 1
