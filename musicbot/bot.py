@@ -664,7 +664,7 @@ class MusicBot(discord.Client):
 
     async def safe_edit_message(self, message, new, *, send_if_fail=False, quiet=False, keep_at_bottom=False):
         if keep_at_bottom:
-            async for lmsg in self.logs_from(message.channel, limit=2):
+            async for lmsg in self.logs_from(message.channel, limit=5):
                 if lmsg.id == message.id:
                     break
             else:
@@ -4483,7 +4483,7 @@ class MusicBot(discord.Client):
     async def cmd_addtoplaylist(self, channel, author, player, playlistname, query=None):
         """
         ///|Usage
-        `{command_prefix}addtoplaylist <playlistname>` [link | name]
+        `{command_prefix}addtoplaylist <playlistname> [link | name]`
         ///|Explanation
         Add the current entry to a playlist.
         If you either provide a link or a name, that song is added to the queue.
