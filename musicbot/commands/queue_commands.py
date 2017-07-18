@@ -681,11 +681,13 @@ class ManipulateCommands:
 
         return Response(reply_text.format(btext, time_until))
 
-    @command_info("4.0.2", 1500360351)
+    @command_info("4.0.2", 1500360351, ***REMOVED***
+        "4.0.4": (1500399607, "Can now explode an entry in the queue by its index")
+    ***REMOVED***)
     async def cmd_explode(self, player, channel, author, leftover_args):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***explode [playlist link]`
+        `***REMOVED***command_prefix***REMOVED***explode [playlist link | index]`
         ///|Explanation
         Split a timestamp-entry into its sub-entries.
         """
@@ -693,8 +695,15 @@ class ManipulateCommands:
         await self.send_typing(channel)
 
         if leftover_args:
-            query = " ".join(leftover_args)
-            entry = await player.playlist.get_entry_from_query(query, channel=channel, author=author)
+            query = " ".join(leftover_args).strip()
+            if query.isnumeric():
+                index = int(query) - 1
+                if 0 <= index < len(player.playlist.entries):
+                    entry = player.playlist.entries[index]
+                else:
+                    return Response("Your index is out of bounds")
+            else:
+                entry = await player.playlist.get_entry_from_query(query, channel=channel, author=author)
         elif player.current_entry:
             entry = player.current_entry
         else:
