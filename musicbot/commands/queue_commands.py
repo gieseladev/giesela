@@ -10,10 +10,14 @@ from ..entry import (RadioSongEntry, RadioStationEntry, SpotifyEntry,
 from ..radio import RadioStations
 from ..utils import (Response, block_user, clean_songname, command_info,
                      create_bar, format_time, get_related_videos, hex_to_dec,
-                     ordinal, owner_only, to_timestamp)
+                     nice_cut, ordinal, owner_only, to_timestamp)
 
 
-class QueueCommands:
+class QueueCommands(EnqueueCommands, ManipulateCommands, DisplayCommands):
+    pass
+
+
+class EnqueueCommands:
     @command_info("2.0.2", 1482252120, {
         "3.5.2": (1497712808, "Updated help text")
     })
@@ -130,7 +134,7 @@ class QueueCommands:
             leftover_args.append(last_arg)
 
         await self.send_typing(channel)
-        query = " ".join([*leftover_args, song_url.strip("<>")])
+        query = " ".join([*leftover_args, song_url.strip("<>")]).strip()
 
         try:
             entry = await player.playlist.get_entry_from_query(query, author=author, channel=channel)
@@ -430,6 +434,8 @@ class QueueCommands:
 
         # await self.safe_send_message (channel, msgState)
 
+
+class ManipulateCommands:
     @command_info("1.0.0", 1477180800, {
         "3.8.9": (1499466672, "Part of the `Giesenesis` rewrite")
     })
@@ -547,6 +553,194 @@ class QueueCommands:
         player.playlist._add_entry_next(replay_entry)
         return Response("Replaying **{}**".format(replay_entry.title))
 
+    async def cmd_shuffle(self, channel, player):
+        """
+        ///|Usage
+        `{command_prefix}shuffle`
+        ///|Explanation
+        Shuffles the queue.
+        """
+
+        player.playlist.shuffle()
+
+        cards = [":spades:", ":clubs:", ":hearts:", ":diamonds:"]
+        hand = await self.send_message(channel, " ".join(cards))
+
+        for x in range(4):
+            await asyncio.sleep(0.6)
+            shuffle(cards)
+            await self.safe_edit_message(hand, " ".join(cards))
+
+        await self.safe_delete_message(hand, quiet=True)
+        return Response(":ok_hand:")
+
+    @command_info("1.0.0", 1477180800, {
+        "3.5.2": (1497712233, "Updated documentaion for this command")
+    })
+    async def cmd_clear(self, player, author):
+        """
+        ///|Usage
+        `{command_prefix}clear`
+        ///|Explanation
+        Clears the queue.
+        """
+
+        player.playlist.clear()
+        return Response(':put_litter_in_its_place:')
+
+    @command_info("1.0.0", 1477180800, {
+        "3.3.7": (1497471674, "adapted the new \"seek\" command instead of \"skipto\""),
+        "3.5.2": (1497714839, "Removed all the useless permission stuff and updated help text"),
+        "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite")
+    })
+    async def cmd_skip(self, player, skip_amount=None):
+        """
+        ///|Usage
+        `{command_prefix}skip [all]`
+        ///|Explanation
+        Skips the current song.
+        When given the keyword "all", skips all timestamped-entries in the current timestamp-entry.
+        """
+
+        if player.is_stopped:
+            return Response("Can't skip! The player is not playing!")
+
+        if not player.current_entry:
+            if player.playlist.peek():
+                if player.playlist.peek()._is_downloading:
+                    # print(player.playlist.peek()._waiting_futures[0].__dict__)
+                    return Response("The next song ({}) is downloading, please wait.".format(player.playlist.peek().title))
+
+                elif player.playlist.peek().is_downloaded:
+                    return Response("Something strange is happening.")
+                else:
+                    return Response("Something odd is happening.")
+            else:
+                return Response("Something strange is happening.")
+
+        if isinstance(player.current_entry, TimestampEntry) and (not skip_amount or skip_amount.lower() != "all"):
+            return await self.cmd_seek(
+                player,
+                str(player.current_entry.current_sub_entry["end"])
+            )
+
+        player.skip()
+
+    async def cmd_promote(self, player, position=None):
+        """
+        ///|Usage
+        `{command_prefix}promote [song position]`
+        ///|Explanation
+        Promotes the last song in the queue to the front.
+        If you specify a position, it promotes the song at that position to the front.
+        """
+
+        if player.is_stopped:
+            raise exceptions.CommandError(
+                "Can't modify the queue! The player is not playing!",
+                expire_in=20)
+
+        length = len(player.playlist.entries)
+
+        if length < 2:
+            raise exceptions.CommandError(
+                "Can't promote! Please add at least 2 songs to the queue!",
+                expire_in=20)
+
+        if not position:
+            entry = player.playlist.promote_last()
+        else:
+            try:
+                position = int(position)
+            except ValueError:
+                raise exceptions.CommandError(
+                    "This is not a valid song number! Please choose a song \
+                    number between 2 and %s!" % length,
+                    expire_in=20)
+
+            if position == 1:
+                raise exceptions.CommandError(
+                    "This song is already at the top of the queue!",
+                    expire_in=20)
+            if position < 1 or position > length:
+                raise exceptions.CommandError(
+                    "Can't promote a song not in the queue! Please choose a song \
+                    number between 2 and %s!" % length,
+                    expire_in=20)
+
+            entry = player.playlist.promote_position(position)
+
+        reply_text = "Promoted **{}** to the :top: of the queue. Estimated time until playing: {}"
+        btext = entry.title
+
+        try:
+            time_until = await player.playlist.estimate_time_until(1, player)
+        except:
+            traceback.print_exc()
+            time_until = ""
+
+        return Response(reply_text.format(btext, time_until))
+
+    @command_info("4.0.2", 1500360351)
+    async def cmd_explode(self, player, channel, author, leftover_args):
+        """
+        ///|Usage
+        `{command_prefix}explode [playlist link]`
+        ///|Explanation
+        Split a timestamp-entry into its sub-entries.
+        """
+
+        await self.send_typing(channel)
+
+        if leftover_args:
+            query = " ".join(leftover_args)
+            entry = await player.playlist.get_entry_from_query(query, channel=channel, author=author)
+        elif player.current_entry:
+            entry = player.current_entry
+        else:
+            return Response("Can't explode what's not there")
+
+            entry = player.current_entry
+
+        if not isinstance(entry, TimestampEntry):
+            return Response("Can only explode timestamp-entries")
+
+        sub_queue = entry.sub_queue
+
+        progress_message = await self.safe_send_message(channel, "Exploding {} entr{}".format(
+            len(sub_queue),
+            "y" if len(sub_queue) == 1 else "ies"
+        ))
+
+        for ind, sub_entry in enumerate(sub_queue, 1):
+            add_entry = await player.playlist.get_entry_from_query(
+                sub_entry["name"],
+                author=entry.meta.get("author", author),
+                channel=entry.meta.get("channel", channel)
+            )
+            player.playlist._add_entry(add_entry)
+
+            prg = ind / len(sub_queue)
+
+            progress_message = await self.safe_edit_message(
+                progress_message,
+                "Explosion in progress\n{} `{}%`".format(
+                    create_bar(prg, length=20),
+                    round(100 * prg)
+                ),
+                keep_at_bottom=True
+            )
+
+        await self.safe_delete_message(progress_message)
+
+        return Response("Exploded **{}** into {} entr{}".format(
+            entry.whole_title,
+            len(sub_queue),
+            "y" if len(sub_queue) == 1 else "ies"
+        ))
+
+
+class DisplayCommands:
     @command_info("1.0.0", 1477180800, {
         "3.5.4": (1497721686, "Updating the looks of the \"now playing\" message and a bit of cleanup"),
         "3.6.2": (1498143480, "Updated design of default entry and included a link to the video"),
@@ -817,7 +1011,7 @@ class QueueCommands:
                 return Response("Quantity must be a number")
 
         if not player.playlist.history:
-            return Response("There IS no history")
+            return Response("There **is** no history")
 
         seconds_passed = player.progress if player.current_entry else 0
 
@@ -836,189 +1030,3 @@ class QueueCommands:
             seconds_passed += entry.end_seconds
 
         return Response("\n".join(lines))
-
-    async def cmd_shuffle(self, channel, player):
-        """
-        ///|Usage
-        `{command_prefix}shuffle`
-        ///|Explanation
-        Shuffles the queue.
-        """
-
-        player.playlist.shuffle()
-
-        cards = [":spades:", ":clubs:", ":hearts:", ":diamonds:"]
-        hand = await self.send_message(channel, " ".join(cards))
-
-        for x in range(4):
-            await asyncio.sleep(0.6)
-            shuffle(cards)
-            await self.safe_edit_message(hand, " ".join(cards))
-
-        await self.safe_delete_message(hand, quiet=True)
-        return Response(":ok_hand:")
-
-    @command_info("1.0.0", 1477180800, {
-        "3.5.2": (1497712233, "Updated documentaion for this command")
-    })
-    async def cmd_clear(self, player, author):
-        """
-        ///|Usage
-        `{command_prefix}clear`
-        ///|Explanation
-        Clears the queue.
-        """
-
-        player.playlist.clear()
-        return Response(':put_litter_in_its_place:')
-
-    @command_info("1.0.0", 1477180800, {
-        "3.3.7": (1497471674, "adapted the new \"seek\" command instead of \"skipto\""),
-        "3.5.2": (1497714839, "Removed all the useless permission stuff and updated help text"),
-        "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite")
-    })
-    async def cmd_skip(self, player, skip_amount=None):
-        """
-        ///|Usage
-        `{command_prefix}skip [all]`
-        ///|Explanation
-        Skips the current song.
-        When given the keyword "all", skips all timestamped-entries in the current timestamp-entry.
-        """
-
-        if player.is_stopped:
-            return Response("Can't skip! The player is not playing!")
-
-        if not player.current_entry:
-            if player.playlist.peek():
-                if player.playlist.peek()._is_downloading:
-                    # print(player.playlist.peek()._waiting_futures[0].__dict__)
-                    return Response("The next song ({}) is downloading, please wait.".format(player.playlist.peek().title))
-
-                elif player.playlist.peek().is_downloaded:
-                    return Response("Something strange is happening.")
-                else:
-                    return Response("Something odd is happening.")
-            else:
-                return Response("Something strange is happening.")
-
-        if isinstance(player.current_entry, TimestampEntry) and (not skip_amount or skip_amount.lower() != "all"):
-            return await self.cmd_seek(
-                player,
-                str(player.current_entry.current_sub_entry["end"])
-            )
-
-        player.skip()
-
-    async def cmd_promote(self, player, position=None):
-        """
-        ///|Usage
-        `{command_prefix}promote [song position]`
-        ///|Explanation
-        Promotes the last song in the queue to the front.
-        If you specify a position, it promotes the song at that position to the front.
-        """
-
-        if player.is_stopped:
-            raise exceptions.CommandError(
-                "Can't modify the queue! The player is not playing!",
-                expire_in=20)
-
-        length = len(player.playlist.entries)
-
-        if length < 2:
-            raise exceptions.CommandError(
-                "Can't promote! Please add at least 2 songs to the queue!",
-                expire_in=20)
-
-        if not position:
-            entry = player.playlist.promote_last()
-        else:
-            try:
-                position = int(position)
-            except ValueError:
-                raise exceptions.CommandError(
-                    "This is not a valid song number! Please choose a song \
-                    number between 2 and %s!" % length,
-                    expire_in=20)
-
-            if position == 1:
-                raise exceptions.CommandError(
-                    "This song is already at the top of the queue!",
-                    expire_in=20)
-            if position < 1 or position > length:
-                raise exceptions.CommandError(
-                    "Can't promote a song not in the queue! Please choose a song \
-                    number between 2 and %s!" % length,
-                    expire_in=20)
-
-            entry = player.playlist.promote_position(position)
-
-        reply_text = "Promoted **{}** to the :top: of the queue. Estimated time until playing: {}"
-        btext = entry.title
-
-        try:
-            time_until = await player.playlist.estimate_time_until(1, player)
-        except:
-            traceback.print_exc()
-            time_until = ""
-
-        return Response(reply_text.format(btext, time_until))
-
-    @command_info("4.0.2", 1500360351)
-    async def cmd_explode(self, player, channel, author, leftover_args):
-        """
-        ///|Usage
-        `{command_prefix}explode [playlist link]`
-        ///|Explanation
-        Split a timestamp-entry into its sub-entries.
-        """
-
-        await self.send_typing(channel)
-
-        if leftover_args:
-            query = " ".join(leftover_args)
-            entry = await player.playlist.get_entry_from_query(query, channel=channel, author=author)
-        elif player.current_entry:
-            entry = player.current_entry
-        else:
-            return Response("Can't explode what's not there")
-
-            entry = player.current_entry
-
-        if not isinstance(entry, TimestampEntry):
-            return Response("Can only explode timestamp-entries")
-
-        sub_queue = entry.sub_queue
-
-        progress_message = await self.safe_send_message(channel, "Exploding {} entr{}".format(
-            len(sub_queue),
-            "y" if len(sub_queue) == 1 else "ies"
-        ))
-
-        for ind, sub_entry in enumerate(sub_queue, 1):
-            add_entry = await player.playlist.get_entry_from_query(
-                sub_entry["name"],
-                author=entry.meta.get("author", author),
-                channel=entry.meta.get("channel", channel)
-            )
-            player.playlist._add_entry(add_entry)
-
-            prg = ind / len(sub_queue)
-
-            progress_message = await self.safe_edit_message(
-                progress_message,
-                "Explosion in progress\n{} `{}%`".format(
-                    create_bar(prg, length=20),
-                    round(100 * prg)
-                ),
-                keep_at_bottom=True
-            )
-
-        await self.safe_delete_message(progress_message)
-
-        return Response("Exploded **{}** into {} entr{}".format(
-            entry.whole_title,
-            len(sub_queue),
-            "y" if len(sub_queue) == 1 else "ies"
-        ))

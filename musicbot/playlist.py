@@ -1,4 +1,5 @@
 import datetime
+import json
 import random
 import time
 import traceback
@@ -153,7 +154,7 @@ class Playlist(EventEmitter):
             if not info:
                 raise ExtractorError("Couldn't extract info")
 
-            if not all(info.get("entries", [])):
+            if not info.get("entries", []):
                 return None
 
             query = info["entries"][0]["webpage_url"]
@@ -175,8 +176,6 @@ class Playlist(EventEmitter):
             yield ind, entry
 
     async def get_entry(self, song_url, **meta):
-        song_url = song_url.strip()
-
         try:
             info = await self.downloader.extract_info(self.loop, song_url, download=False)
         except Exception as e:
