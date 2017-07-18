@@ -11,7 +11,7 @@ from random import choice
 
 import aiohttp
 import discord
-from discord import utils
+from discord import Client, utils
 from discord.enums import ChannelType
 from discord.object import Object
 from discord.utils import find
@@ -37,13 +37,13 @@ from .random_sets import RandomSets
 from .reminder import Calendar
 from .saved_playlists import Playlists
 from .settings import Settings
-from .utils import Response, load_file
+from .utils import Response, load_file, ordinal, paginate
 from .web_socket_server import GieselaServer
 
 load_opus_lib()
 
 
-class MusicBot(discord.Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, PlayerCommands, PlaylistCommands, QueueCommands, ToolCommands):
+class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, PlayerCommands, PlaylistCommands, QueueCommands, ToolCommands):
 
     def __init__(self):
         self.players = ***REMOVED******REMOVED***
@@ -468,18 +468,6 @@ class MusicBot(discord.Client, AdminCommands, FunCommands, InfoCommands,  MiscCo
     async def on_player_entry_added(self, playlist, entry, **_):
         pass
 
-    async def on_server_join(self, server):
-        for channel in server.channels:
-            if channel.type is not ChannelType.text:
-                continue
-
-            msg = await self.safe_send_message(
-                channel,
-                "Hello there,\nMy name is ***REMOVED******REMOVED***!\n\n*Type ***REMOVED******REMOVED***help to find out more.*".
-                format(self.user.mention, self.config.command_prefix))
-            if msg is not None:
-                return
-
     async def update_now_playing(self, entry=None, is_paused=False):
         game = None
 
@@ -592,11 +580,6 @@ class MusicBot(discord.Client, AdminCommands, FunCommands, InfoCommands,  MiscCo
                     print("Sending instead")
                 return await self.safe_send_message(message.channel, new)
 
-    def log(self, content="\n", *, end='\n', flush=True):
-        sys.stdout.buffer.write((content + end).encode('utf-8', 'replace'))
-        if flush:
-            sys.stdout.flush()
-
     async def send_typing(self, destination):
         try:
             return await super().send_typing(destination)
@@ -647,6 +630,16 @@ class MusicBot(discord.Client, AdminCommands, FunCommands, InfoCommands,  MiscCo
             self.loop.close()
             if self.exit_signal:
                 raise self.exit_signal
+
+    async def goto_home(self, server, join=True):
+        channel = find(lambda c: c.type == ChannelType.voice and any(x in c.name.lower().split(
+        ) for x in ["giesela", "musicbot", "bot", "music", "reign"]), server.channels)
+        if channel is None:
+            channel = choice(
+                filter(lambda c: c.type == ChannelType.voice, server.channels))
+        if join:
+            await self.get_player(channel, create=True)
+        return channel
 
     async def logout(self):
         await self.disconnect_all_voice_clients()
@@ -838,16 +831,6 @@ class MusicBot(discord.Client, AdminCommands, FunCommands, InfoCommands,  MiscCo
         if self.config.open_websocket:
             GieselaServer.run(self)
 
-    async def goto_home(self, server, join=True):
-        channel = find(lambda c: c.type == ChannelType.voice and any(x in c.name.lower().split(
-        ) for x in ["giesela", "musicbot", "bot", "music", "reign"]), server.channels)
-        if channel is None:
-            channel = choice(
-                filter(lambda c: c.type == ChannelType.voice, server.channels))
-        if join:
-            await self.get_player(channel, create=True)
-        return channel
-
     async def on_message(self, message):
         await self.wait_until_ready()
 
@@ -867,20 +850,15 @@ class MusicBot(discord.Client, AdminCommands, FunCommands, InfoCommands,  MiscCo
                 message.author, message_content))
             return
 
-        if not message_content.startswith(self.config.command_prefix):
-            if not self.config.owned_channels or message.channel.id not in self.config.owned_channels:
-                return
+        if not message_content.startswith(self.config.command_prefix) and message.channel.id not in self.config.owned_channels:
+            return
 
         # don't react to own messages or messages from bots
         if message.author == self.user or message.author.bot:
-            # print("Ignoring command from myself (%s)" %
-            #          message.content)
             return
 
         raw_command, *args = message_content.split()
-        command = raw_command[len(self.config.command_prefix):].lower().strip(
-        ) if message_content.startswith(
-            self.config.command_prefix) else raw_command.lower().strip()
+        command = raw_command.lstrip(self.config.command_prefix).lower().strip()
 
         handler = getattr(self, 'cmd_%s' % command, None)
         if not handler:
@@ -911,13 +889,14 @@ class MusicBot(discord.Client, AdminCommands, FunCommands, InfoCommands,  MiscCo
 
         argspec = inspect.signature(handler)
         params = argspec.parameters.copy()
+        # because I'm using len(), I already take care of the extra whitespace
         raw_content = message_content[len(raw_command):]
 
         # noinspection PyBroadException
         try:
             handler_kwargs = ***REMOVED******REMOVED***
-            if params.pop('message', None):
-                handler_kwargs['message'] = message
+            if params.pop("message", None):
+                handler_kwargs["message"] = message
 
             if params.pop("raw_content", None):
                 handler_kwargs["raw_content"] = raw_content
@@ -931,8 +910,8 @@ class MusicBot(discord.Client, AdminCommands, FunCommands, InfoCommands,  MiscCo
             if params.pop('server', None):
                 handler_kwargs['server'] = message.server
 
-            if params.pop('player', None):
-                handler_kwargs['player'] = await self.get_player(
+            if params.pop("player", None):
+                handler_kwargs["player"] = await self.get_player(
                     message.channel)
 
             if params.pop('user_mentions', None):
@@ -968,11 +947,13 @@ class MusicBot(discord.Client, AdminCommands, FunCommands, InfoCommands,  MiscCo
                     params.pop(key)
 
             if params:
-                return await self.cmd_help(message.channel, [
-                    command,
-                ])
+                return await self.cmd_help(message.channel, [command])
 
-            response = await handler(**handler_kwargs)
+            try:
+                response = await handler(**handler_kwargs)
+            except exceptions.ShowHelp:
+                return await self.cmd_help(message.channel, [command])
+
             if response and isinstance(response, Response):
                 content = response.content
                 if content and response.reply:
@@ -985,7 +966,8 @@ class MusicBot(discord.Client, AdminCommands, FunCommands, InfoCommands,  MiscCo
                     if self.config.delete_messages else 0,
                     also_delete=message
                     if self.config.delete_invoking else None,
-                    embed=response.embed)
+                    embed=response.embed
+                )
 
         except (exceptions.CommandError, exceptions.HelpfulError,
                 exceptions.ExtractionError) as e:
@@ -1061,6 +1043,18 @@ class MusicBot(discord.Client, AdminCommands, FunCommands, InfoCommands,  MiscCo
                   (after.name, before.region, after.region))
 
             await self.reconnect_voice_client(after)
+
+    async def on_server_join(self, server):
+        for channel in server.channels:
+            if channel.type is not ChannelType.text:
+                continue
+
+            msg = await self.safe_send_message(
+                channel,
+                "Hello there,\nMy name is ***REMOVED******REMOVED***!\n\n*Type ***REMOVED******REMOVED***help to find out more.*".
+                format(self.user.mention, self.config.command_prefix))
+            if msg is not None:
+                return
 
     async def on_member_update(self, before, after):
         await self.on_any_update(before, after)

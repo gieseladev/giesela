@@ -24,6 +24,10 @@ class MusicbotException(Exception):
 class CommandError(MusicbotException):
     pass
 
+
+class ShowHelp(MusicbotException):
+    pass
+
 # Something went wrong during the processing of a song/ytdl stuff
 
 
