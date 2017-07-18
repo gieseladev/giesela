@@ -69,6 +69,8 @@ class ConfigDefaults:
     owned_channels = set()
     autojoin_channels = set()
 
+    history_limit = 200
+
     default_volume = 0.3
     save_videos = True
     auto_summon = True
@@ -84,7 +86,7 @@ class ConfigDefaults:
     radios_file = "config/radio_stations.json"
     playlists_file = "config/playlists.ini"
     random_sets = "config/random_sets.ini"
-    blacklist_file = 'config/blacklist.txt'
-    auto_playlist_file = 'config/autoplaylist.txt'
+    blacklist_file = "config/blacklist.txt"
+    auto_playlist_file = "config/autoplaylist.txt"
     hangman_wordlist = "data/hangman_wordlist.txt"
     name_list = "data/names.txt"
