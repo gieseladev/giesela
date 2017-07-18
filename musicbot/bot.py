@@ -980,8 +980,6 @@ class MusicBot(discord.Client):
                         name="*****REMOVED******REMOVED*****".format(title), value=dedent(text), inline=inline)
                 await self.send_message(channel, embed=em)
                 return
-                # return
-                # Response("```\n***REMOVED******REMOVED***```".format(dedent(cmd.__doc__).format(command_prefix=self.config.command_prefix)),delete_after=60)
             else:
                 await self.send_typing(channel)
                 params = ***REMOVED***
@@ -994,11 +992,7 @@ class MusicBot(discord.Client):
                 data = resp.json()
                 entities = data["entities"]
 
-                if "command" in entities:
-                    cmd = entities["command"][0]["value"]
-                    return await self.cmd_help(channel, [cmd, ])
-
-                return Response(str(entities))
+                return Response(json.dumps(entities, indent=4))
 
         else:
             em = Embed(
@@ -1993,11 +1987,6 @@ class MusicBot(discord.Client):
             lines.append("`***REMOVED******REMOVED***.` *****REMOVED******REMOVED***** ***REMOVED******REMOVED***".format(
                 i, nice_cut(item.title, 40), origin_text))
 
-            # if item.provides_timestamps:
-            #     for ind, sub_item in enumerate(item.sub_queue(), 1):
-            #         lines.append(
-            #             "            ►***REMOVED******REMOVED***. *****REMOVED******REMOVED*****".format(ind, sub_item["name"]))
-
         if len(lines) < 2:
             return Response(
                 "There are no songs queued! Use `***REMOVED******REMOVED***help` to find out how to queue something.".
@@ -2026,15 +2015,27 @@ class MusicBot(discord.Client):
     @command_info("3.3.3", 1497197957, ***REMOVED***
         "3.3.8": (1497474312, "added failsafe for player not currently playing something"),
         "3.5.8": (1497825334, "Adjusted design to look more like `queue`'s style"),
-        "3.8.9": (1499465102, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499465102, "Part of the `Giesenesis` rewrite"),
+        "4.0.1": (1500346108, "Quantity parameter. Increased history limit")
     ***REMOVED***)
-    async def cmd_history(self, channel, player):
+    async def cmd_history(self, channel, player, num="15"):
         """
         ///|Usage
-        ***REMOVED***command_prefix***REMOVED***history
+        ***REMOVED***command_prefix***REMOVED***history [quantity]
         ///|Explanation
-        Show the last 10 songs
+        Show the last [quantity] songs. If [quantity] isn't provided, show back to 15 songs
         """
+
+        try:
+            quantity = int(num)
+
+            if quantity < 1:
+                return Response("Please provide a reasonable quantity")
+        except ValueError:
+            if num.lower() == "all":
+                quantity = len(player.playlist.entries)
+            else:
+                return Response("Quantity must be a number")
 
         if not player.playlist.history:
             return Response("There IS no history")
@@ -2042,21 +2043,15 @@ class MusicBot(discord.Client):
         seconds_passed = player.progress if player.current_entry else 0
 
         lines = []
-        for ind, entry in enumerate(player.playlist.history, 1):
+        for ind, entry in enumerate(player.playlist.history[:quantity], 1):
             finish_time = entry.meta.get("finish_time", None)
             if finish_time:
                 seconds_passed = time.time() - finish_time
             lines.append(
                 "`***REMOVED******REMOVED***.` *****REMOVED******REMOVED***** ***REMOVED******REMOVED*** ago".format(
                     ind,
-                    nice_cut(
-                        entry.title,
-                        40
-                    ),
-                    format_time(
-                        seconds_passed,
-                        max_specifications=2
-                    )
+                    nice_cut(entry.title, 40),
+                    format_time(seconds_passed, max_specifications=2)
                 )
             )
             seconds_passed += entry.end_seconds

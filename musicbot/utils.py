@@ -167,13 +167,12 @@ def ordinal(n, combine=False):
 def clean_songname(query):
     """Clean a Youtube video title so it's shorter and easier to read."""
     to_remove = (
-        "1080", "1080p", "4k", "720", "720p", "album", "amv", "audio", "avi",
-        "creditless", "dvd", "edition", "eng", "english", "from", "full", "hd",
-        "jap", "japanese", "lyrics", "mix", "mp3", "mp4", "music", "new",
-        "nightcore", "official", "original", "original sound track",
-        "original soundtrack", "ost", "raw", "size", "soundtrack", "special",
-        "sub", "textless", "theme", "tv", "ver", "version", "video",
-        "with lyrics"
+        "1080", "1080p", "4k", "720", "720p", "album", "amv", "audio", "avi", "creditless", "dvd",
+        "edition", "eng", "english", "from", "full", "hd", "jap", "japanese", "lyrics", "mix",
+        "mp3", "mp4", "musicvideo", "new", "nightcore", "official", "original",
+        "original sound track", "original soundtrack", "ost", "raw", "size", "soundtrack",
+        "special", "sub", "textless", "theme", "tv", "ver", "version", "video", "with lyrics",
+        "youtube"
     )
 
     replacers = (
@@ -192,10 +191,15 @@ def clean_songname(query):
         # (r"\(f(?:ea)?t\.?\s?([\w\s\&\-\']***REMOVED***2,***REMOVED***)\)", r" & \1"),
     )
     special_regex_after = (
+        # rip w/
+        (r"w\/", " "),
         # make sure that everything apart from [',] has space ("test -test"
         # converts to "test - test")
+        # " -test"
         (r"(\s)([^\w\s\',])(\w)", r"\1 \2 \3"),
+        # "- test"
         (r"(\w)([^\w\s\',])(\s)", r"\1 \2 \3"),
+        # remove multiple non-words in a row like "test - - test"
         (r"[^\w\s]\s*[^\w\s]", " ")
     )
 
