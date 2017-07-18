@@ -442,6 +442,12 @@ class ToolCommands:
 
     @owner_only
     async def cmd_countmsgs(self, server, author, channel_id, number):
+        """
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***countmsgs <channel> <number>`
+        ///|Explanation
+        Count up to <number> messages in <channel> and return stats by user.
+        """
         alphabet = list("abcdefghijklmnopqrstuvwxyz")
 
         def index_to_alphabet(ind):
@@ -771,7 +777,7 @@ class ToolCommands:
                                     format(bm["name"],
                                            self.get_global_user(
                                                bm["author_id"]).display_name))
-                else:
+                elif player.current_entry:
                     bm_timestamp = player.progress
                     bm_name = None
                     if len(leftover_args) > 1:
@@ -794,6 +800,8 @@ class ToolCommands:
                         "Created a new bookmark with the id `***REMOVED***0***REMOVED***` (\"***REMOVED***2***REMOVED***\", `***REMOVED***3***REMOVED***`)\nUse `***REMOVED***1***REMOVED***bookmark ***REMOVED***0***REMOVED***` to load it ".
                         format(id, self.config.command_prefix, bm_name,
                                to_timestamp(bm_timestamp)))
+                else:
+                    return Response("There's no such bookmark and there's nothing playing either")
 
         else:
             if player.current_entry:
