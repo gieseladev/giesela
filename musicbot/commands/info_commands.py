@@ -85,6 +85,7 @@ class InfoCommands:
             music_commands = "\n".join([
                 "`***REMOVED***0***REMOVED***play` play music",
                 "`***REMOVED***0***REMOVED***search` search for music",
+                "`***REMOVED***0***REMOVED***radio` listen to the best radio stations",
                 "`***REMOVED***0***REMOVED***stream` enqueue a livestream",
                 "`***REMOVED***0***REMOVED***pause` pause playback",
                 "`***REMOVED***0***REMOVED***resume` resume playback"
@@ -122,7 +123,8 @@ class InfoCommands:
                 "`***REMOVED***0***REMOVED***random` choose between items",
                 "`***REMOVED***0***REMOVED***game` play a game",
                 "`***REMOVED***0***REMOVED***ask` ask a question",
-                "`***REMOVED***0***REMOVED***c` chat with Giesela"
+                "`***REMOVED***0***REMOVED***c` chat with Giesela",
+                "`***REMOVED***0***REMOVED***explode` explode a timestamp-entry into its sub-entries"
             ]).format(self.config.command_prefix)
             em.add_field(name="Misc", value=misc_commands, inline=False)
 

@@ -13,10 +13,6 @@ from ..utils import (Response, block_user, clean_songname, command_info,
                      nice_cut, ordinal, owner_only, to_timestamp)
 
 
-class QueueCommands(EnqueueCommands, ManipulateCommands, DisplayCommands):
-    pass
-
-
 class EnqueueCommands:
     @command_info("2.0.2", 1482252120, ***REMOVED***
         "3.5.2": (1497712808, "Updated help text")
@@ -1039,3 +1035,7 @@ class DisplayCommands:
             seconds_passed += entry.end_seconds
 
         return Response("\n".join(lines))
+
+
+class QueueCommands(EnqueueCommands, ManipulateCommands, DisplayCommands):
+    pass
