@@ -3468,8 +3468,8 @@ class MusicBot(discord.Client):
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                str(reaction.emoji).startswith("📽") or
-                str(reaction.emoji).startswith("💾")
+                    str(reaction.emoji).startswith("📽") or
+                    str(reaction.emoji).startswith("💾")
                 ) and reaction.count > 1 and user == author:
                 return True
 
@@ -5614,6 +5614,60 @@ class MusicBot(discord.Client):
             return Response("You've successfully registered yourself. Go back to your browser and check it out")
         else:
             return Response("Something went wrong while registering. It could be that your code `{}` is wrong. Please make sure that you've entered it correctly.".format(token.upper()))
+
+    @command_info("4.0.2", 1500360351)
+    async def cmd_explode(self, player, channel, author, leftover_args):
+        """
+        ///|Usage
+        `{command_prefix}explode [playlist link]`
+        ///|Explanation
+        Split a timestamp-entry into its sub-entries.
+        """
+
+        await self.send_typing(channel)
+
+        if leftover_args:
+            query = " ".join(leftover_args)
+            entry = await player.playlist.get_entry_from_query(query, channel=channel, author=author)
+        elif player.current_entry:
+            entry = player.current_entry
+        else:
+            return Response("Can't explode what's not there")
+
+            entry = player.current_entry
+
+        if not isinstance(entry, TimestampEntry):
+            return Response("Can only explode timestamp-entries")
+
+        sub_queue = entry.sub_queue
+
+        progress_message = await self.safe_send_message(channel, "Exploding {} entr{}".format(
+            len(sub_queue),
+            "y" if len(sub_queue) == 1 else "ies"
+        ))
+
+        for ind, sub_entry in enumerate(sub_queue, 1):
+            add_entry = await player.playlist.get_entry_from_query(sub_entry["name"], author=author, channel=channel)
+            player.playlist._add_entry(add_entry)
+
+            prg = ind / len(sub_queue)
+
+            progress_message = await self.safe_edit_message(
+                progress_message,
+                "Explosion in progress\n{} `{}%`".format(
+                    create_bar(prg, length=20),
+                    round(100 * prg)
+                ),
+                keep_at_bottom=True
+            )
+
+        await self.safe_delete_message(progress_message)
+
+        return Response("Exploded **{}** into {} entr{}".format(
+            entry.whole_title,
+            len(sub_queue),
+            "y" if len(sub_queue) == 1 else "ies"
+        ))
 
     @owner_only
     async def cmd_shutdown(self, channel):

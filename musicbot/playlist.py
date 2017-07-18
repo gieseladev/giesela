@@ -175,6 +175,7 @@ class Playlist(EventEmitter):
             yield ind, entry
 
     async def get_entry(self, song_url, **meta):
+        song_url = song_url.strip()
 
         try:
             info = await self.downloader.extract_info(self.loop, song_url, download=False)
