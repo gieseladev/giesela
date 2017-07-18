@@ -8,6 +8,7 @@ import time
 import unicodedata
 from datetime import timedelta
 from difflib import SequenceMatcher
+from functools import wraps
 from hashlib import md5
 from io import BytesIO
 from string import punctuation, whitespace
@@ -16,9 +17,64 @@ from threading import Thread
 import aiohttp
 import requests
 from bs4 import BeautifulSoup
+from discord.ext.commands.bot import _get_variable
 from PIL import Image, ImageStat
 
 from .constants import DISCORD_MSG_CHAR_LIMIT
+
+
+def owner_only(func):
+    @wraps(func)
+    async def wrapper(self, *args, **kwargs):
+        # Only allow the owner to use these commands
+        orig_msg = _get_variable('message')
+
+        if not orig_msg or orig_msg.author.id == self.config.owner_id:
+            return await func(self, *args, **kwargs)
+        else:
+            return Response("only the owner can use this command")
+
+    return wrapper
+
+
+def command_info(version, timestamp, changelog={}):
+    def function_decorator(func):
+        func.version = version
+        func.timestamp = datetime.datetime.fromtimestamp(timestamp)
+        func.changelog = [(ver, datetime.datetime.fromtimestamp(time), log)
+                          for ver, (time, log) in changelog.items()]
+
+        return func
+
+    return function_decorator
+
+
+def block_user(func):
+    @wraps(func)
+    async def wrapper(self, *args, **kwargs):
+        orig_msg = _get_variable("message")
+
+        self.users_in_menu.add(orig_msg.author.id)
+        print("Now blocking " + str(orig_msg.author))
+        try:
+            res = await func(self, *args, **kwargs)
+            self.users_in_menu.remove(orig_msg.author.id)
+            print("Unblocking " + str(orig_msg.author))
+            return res
+        except Exception as e:  # just making sure that no one gets stuck in a menu and can't use any commands anymore
+            self.users_in_menu.remove(orig_msg.author.id)
+            raise e
+
+    return wrapper
+
+
+class Response:
+
+    def __init__(self, content=None, reply=False, delete_after=0, embed=None):
+        self.content = content
+        self.reply = reply
+        self.delete_after = delete_after
+        self.embed = embed
 
 
 class run_function_every:
@@ -607,4 +663,4 @@ def get_dev_changelog():
 
         return changes
     except Exception:
-        return "Couldn't find the changelog"
+        return ["Couldn't find the changelog"]

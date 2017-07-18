@@ -1,3 +1,4 @@
+import asyncio
 import atexit
 import hashlib
 import json
@@ -6,8 +7,6 @@ import traceback
 from json.decoder import JSONDecodeError
 from random import choice
 from string import ascii_lowercase
-
-import asyncio
 
 from .simple_web_socket_server import SimpleWebSocketServer, WebSocket
 from .utils import dec_to_hex
@@ -198,6 +197,9 @@ class GieselaServer():
         return player.playlist.get_web_dict()
 
     def send_player_information_update(server_id):
+        if not GieselaServer.bot:
+            return
+
         threading.Thread(
             target=GieselaServer._send_player_information_update, args=(server_id,)).start()
 

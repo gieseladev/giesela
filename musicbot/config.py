@@ -79,6 +79,7 @@ class ConfigDefaults:
     delete_messages = False
     delete_invoking = False
     debug_mode = False
+    open_websocket = True
 
     options_file = "config/options.ini"
     cards_file = "data/cah/cards.ini"
