@@ -1,3 +1,4 @@
+import re
 from random import choice
 from textwrap import dedent, indent
 
