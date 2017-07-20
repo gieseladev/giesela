@@ -1,4 +1,3 @@
-import asyncio
 import atexit
 import hashlib
 import json
@@ -7,6 +6,8 @@ import traceback
 from json.decoder import JSONDecodeError
 from random import choice
 from string import ascii_lowercase
+
+import asyncio
 
 from .simple_web_socket_server import SimpleWebSocketServer, WebSocket
 from .utils import dec_to_hex
@@ -21,8 +22,6 @@ class GieselaWebSocket(WebSocket):
     def handleMessage(self):
         try:
             try:
-                # always starts with GIESELA to avoid getting blocked by
-                # browsers
                 data = json.loads(self.data)
 
                 token = data.get("token", None)
@@ -69,6 +68,7 @@ class GieselaWebSocket(WebSocket):
                     "[WEBSOCKET] <{}> sent non-json: {}".format(self.address, self.data))
         except Exception as e:
             traceback.print_exc()
+            raise
 
     def handleAuthenticatedMessage(self, data):
         answer = {
@@ -88,6 +88,9 @@ class GieselaWebSocket(WebSocket):
                 info["user"] = user_info
                 answer["info"] = info
 
+        if command:
+            pass
+
         self.sendMessage(json.dumps(answer))
 
     def handleConnected(self):
@@ -104,8 +107,7 @@ class GieselaWebSocket(WebSocket):
             (server_id + author.id).encode("utf-8")).hexdigest()
         self.token = token
         GieselaServer.set_token_information(token, server_id, author)
-        data = {
-            "token": token}
+        data = {"token": token}
         self.sendMessage(json.dumps(data))
         print("[WEBSOCKET] <{}> successfully registered {}".format(
             self.address, author))
