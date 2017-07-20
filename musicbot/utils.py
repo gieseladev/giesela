@@ -23,6 +23,16 @@ from PIL import Image, ImageStat
 from .constants import DISCORD_MSG_CHAR_LIMIT
 
 
+def is_image(url):
+    try:
+        resp = requests.head(url, timeout=.5)
+        if resp.headers.get("content-type") in ["image/jpeg", "image/png"]:
+            return True
+        return False
+    except requests.exceptions.RequestException:
+        return False
+
+
 def owner_only(func):
     @wraps(func)
     async def wrapper(self, *args, **kwargs):

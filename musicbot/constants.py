@@ -4,7 +4,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-MAIN_VERSION = "4.0.4"
+MAIN_VERSION = "4.0.6"
 SUB_VERSION = "Giesenesis"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 

@@ -2,10 +2,12 @@ import asyncio
 import re
 from random import shuffle
 
+from discord import Embed
+
 from ..entry import TimestampEntry
 from ..saved_playlists import Playlists
 from ..utils import (Response, asyncio, block_user, command_info, create_bar,
-                     format_time, owner_only)
+                     format_time, is_image, nice_cut, owner_only, to_timestamp)
 
 
 class PlaylistCommands:
@@ -23,7 +25,8 @@ class PlaylistCommands:
         "3.8.7": (1499290119, "Due to a mistake \"rebuild\" always led to the deletion of the first entry."),
         "3.8.9": (1499525669, "Part of the `Giesenesis` rewrite"),
         "3.9.3": (1499712451, "Fixed a bug in the playlist builder search command."),
-        "4.0.0": (1499978910, "Forgot to implement progress message properly and as a result it could bug out and spam itself.")
+        "4.0.0": (1499978910, "Forgot to implement progress message properly and as a result it could bug out and spam itself."),
+        "4.0.6": (1500536082, "Added description and cover options for a playlist")
     })
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -174,8 +177,7 @@ class PlaylistCommands:
         elif argument == "clone":
             if savename not in self.playlists.saved_playlists:
                 return Response(
-                    "Can't clone this playlist, there's no playlist with this name.",
-                    delete_after=20)
+                    "Can't clone this playlist, there's no playlist with this name.")
             clone_playlist = self.playlists.get_playlist(
                 savename, player.playlist)
             clone_entries = clone_playlist["entries"]
@@ -183,40 +185,34 @@ class PlaylistCommands:
 
             if additional_args is None:
                 return Response(
-                    "Please provide a name to save the playlist to",
-                    delete_after=20)
+                    "Please provide a name to save the playlist to")
 
             if additional_args[0].lower() in self.playlists.saved_playlists:
                 extend_existing = True
             if len(additional_args[0]) < 3:
                 return Response(
-                    "This is not a valid playlist name, the name must be longer than 3 characters",
-                    delete_after=20)
+                    "This is not a valid playlist name, the name must be longer than 3 characters")
             if additional_args[0].lower() in forbidden_savenames:
                 return Response(
-                    "This is not a valid playlist name, this name is forbidden!",
-                    delete_after=20)
+                    "This is not a valid playlist name, this name is forbidden!")
 
             from_index = int(additional_args[1]) - \
                 1 if len(additional_args) > 1 else 0
             if from_index >= len(clone_entries) or from_index < 0:
                 return Response(
                     "Can't clone the playlist starting from entry {}. This entry is out of bounds.".
-                    format(from_index),
-                    delete_after=20)
+                    format(from_index))
 
             to_index = int(additional_args[
                 2]) if len(additional_args) > 2 else len(clone_entries)
             if to_index > len(clone_entries) or to_index < 0:
                 return Response(
                     "Can't clone the playlist from the {}. to the {}. entry. These values are out of bounds.".
-                    format(from_index, to_index),
-                    delete_after=20)
+                    format(from_index, to_index))
 
             if to_index - from_index <= 0:
                 return Response(
-                    "That's not enough entries to create a new playlist.",
-                    delete_after=20)
+                    "That's not enough entries to create a new playlist.")
 
             clone_entries = clone_entries[from_index:to_index]
             if extend_existing:
@@ -233,15 +229,13 @@ class PlaylistCommands:
                     savename, "(from the {}. to the {}. index) ".format(
                         str(from_index + 1), str(to_index + 1)) if
                     from_index is not 0 or to_index is not len(clone_entries)
-                    else "", additional_args[0].lower()),
-                delete_after=20)
+                    else "", additional_args[0].lower()))
 
         elif argument == "showall":
             if len(self.playlists.saved_playlists) < 1:
                 return Response(
                     "There are no saved playlists.\n**You** could add one though. Type `{}help playlist` to see how!".format(
-                        self.config.command_prefix),
-                    delete_after=40)
+                        self.config.command_prefix))
 
             response_text = "**Found the following playlists:**\n\n"
             iteration = 1
@@ -249,8 +243,8 @@ class PlaylistCommands:
             sort_modes = {
                 "alphabetical": (lambda playlist: playlist, False),
                 "entries": (
-                    lambda playlist: int(self.playlists.get_playlist(
-                        playlist, player.playlist)["entry_count"]),
+                    lambda playlist: len(self.playlists.get_playlist(
+                        playlist, player.playlist)["entries"]),
                     True
                 ),
                 "author": (
@@ -286,12 +280,13 @@ class PlaylistCommands:
 
             for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.playlist)
-                response_text += "**{}.** **\"{}\"** by {}\n```\n  {} entr{}\n  played {} time{}\n  {}```\n\n".format(
+                response_text += "**{}.** **\"{}\"** by {}\n```\n  {} entr{} ({} broken)\n  played {} time{}\n  {}```\n\n".format(
                     iteration,
                     pl.replace("_", " ").title(),
                     self.get_global_user(infos["author"]).mention,
-                    str(infos["entry_count"]), "ies"
-                    if int(infos["entry_count"]) is not 1 else "y",
+                    len(infos["entries"]),
+                    "ies" if len(infos["entries"]) is not 1 else "y",
+                    len(infos["broken_entries"]),
                     infos["replay_count"], "s"
                     if int(infos["replay_count"]) != 1 else "",
                     format_time(
@@ -323,36 +318,50 @@ class PlaylistCommands:
                                                 player.playlist)
             entries = infos["entries"]
 
-            desc_text = "{} entr{}\n{} long".format(
-                str(infos["entry_count"]), "ies"
-                if int(infos["entry_count"]) is not 1 else "y",
+            desc_text = "```\n{}\n```\n{} entr{} ({} broken)\n{} long".format(
+                infos["description"] or "This playlist doesn't have a description",
+                len(infos["entries"]),
+                "ies" if infos["entries"] is not 1 else "y",
+                len(infos["broken_entries"]),
                 format_time(
                     sum([x.duration for x in entries]),
-                    round_seconds=True,
                     combine_with_and=True,
                     replace_one=True,
-                    max_specifications=2))
+                    max_specifications=2
+                )
+            )
             em = Embed(
                 title=argument.replace("_", " ").title(),
-                description=desc_text)
+                description=desc_text
+            )
             pl_author = self.get_global_user(infos["author"])
             em.set_author(
                 name=pl_author.display_name, icon_url=pl_author.avatar_url)
 
-            for i in range(min(len(entries), 20)):
-                em.add_field(
-                    name="{0:>3}. {1:<50}".format(i + 1,
-                                                  entries[i].title[:50]),
-                    value="duration: " + format_time(
-                        entries[i].duration,
-                        round_seconds=True,
-                        round_base=1,
-                        max_specifications=2),
-                    inline=False)
+            if infos["cover_url"]:
+                em.set_thumbnail(url=infos["cover_url"])
 
-            if len(entries) > 20:
+            entries_to_display = entries.copy()
+            shuffle(entries_to_display)
+            entries_to_display = entries_to_display[:15]
+            vals = []
+            for entry in entries_to_display:
+                vals.append("{} `{}`".format(
+                    nice_cut(entry.title, 50),
+                    to_timestamp(entry.end_seconds)
+                ))
+
+            val = "\n".join(vals)
+
+            em.add_field(
+                name="Some of the entries",
+                value=val,
+                inline=False
+            )
+
+            if len(entries) > 15:
                 em.add_field(
-                    name="**And {} more**".format(len(entries) - 20),
+                    name="**... and {} more**".format(len(entries) - 15),
                     value="To view them, open the playlist builder")
 
             em.set_footer(
@@ -430,16 +439,19 @@ class PlaylistCommands:
             "remove_entries": [],  # used for changelog
             "added_entries": [],  # changelog
             "order": None,  # changelog
-            "new_name": None
+            "new_name": None,
+            "new_desc": None,
+            "new_cover": None
         }
         savename = _savename
         user_savename = savename
 
         interface_string = "**{}** by **{}** ({} song{} with a total length of {})\n\n{}\n\n**You can use the following commands:**\n`add <query>`: Add a video to the playlist (this command works like the normal `{}play` command)\n`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index\n`rename <newname>`: rename the current playlist\n`search <query>`: search for an entry\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
 
-        extras_string = "**{}** by **{}** ({} song{} with a total length of {})\n\n**Extra functions:**\n`sort <alphabetical | length | random>`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n`rebuild`: clean the playlist by removing broken videos\n\n`abort`: return to main screen"
+        extras_string = "**{}** by **{}** ({} song{} with a total length of {})\n\n**Extra functions:**\n`sort <alphabetical | length | random>`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n`description <text>`: describe this playlist\n`cover <url>`: set the cover for this playlist\n`rebuild`: clean the playlist by removing broken videos\n\n`abort`: return to main screen"
 
         playlist = self.playlists.get_playlist(_savename, player.playlist)
+        interface_message = None
 
         if playlist["broken_entries"]:
             broken_entries = playlist["broken_entries"]
@@ -484,18 +496,23 @@ class PlaylistCommands:
             entries_text += "\nPage {} of {}".format(entries_page + 1,
                                                      iterations + 1)
 
-            interface_message = await self.safe_send_message(
-                channel,
-                interface_string.format(
-                    user_savename.replace("_", " ").title(),
-                    self.get_global_user(playlist["author"]).mention,
-                    playlist["entry_count"],
-                    "s" if int(playlist["entry_count"]) is not 1 else "",
-                    format_time(sum([x.duration for x in entries])),
-                    entries_text,
-                    self.config.command_prefix
-                )
+            msg_content = interface_string.format(
+                user_savename.replace("_", " ").title(),
+                self.get_global_user(playlist["author"]).mention,
+                len(playlist["entries"]),
+                "s" if len(playlist["entries"]) is not 1 else "",
+                format_time(sum([x.duration for x in entries])),
+                entries_text,
+                self.config.command_prefix
             )
+
+            if interface_message:
+                interface_message = await self.safe_edit_message(interface_message, msg_content, keep_at_bottom=True)
+            else:
+                interface_message = await self.safe_send_message(
+                    channel,
+                    msg_content
+                )
             response_message = await self.wait_for_message(
                 author=author, channel=channel, check=check)
 
@@ -530,10 +547,8 @@ class PlaylistCommands:
                         pl_changes["added_entries"].extend(
                             entries)  # just for the changelog
                         playlist["entries"].extend(entries)
-                        playlist["entry_count"] = str(
-                            int(playlist["entry_count"]) + len(entries))
                         it, ov = divmod(
-                            int(playlist["entry_count"]), items_per_page)
+                            len(playlist["entries"]), items_per_page)
                         entries_page = it - 1 if ov == 0 else it
                     except Exception as e:
                         await self.safe_send_message(
@@ -552,13 +567,11 @@ class PlaylistCommands:
                         except:
                             index = -1
 
-                        if index >= 0 and index < int(playlist["entry_count"]):
+                        if index >= 0 and index < len(playlist["entries"]):
                             indices.append(index)
 
                     pl_changes["remove_entries"].extend(
                         [(ind, playlist["entries"][ind]) for ind in indices])  # for the changelog
-                    playlist["entry_count"] = str(
-                        int(playlist["entry_count"]) - len(indices))
                     playlist["entries"] = [
                         playlist["entries"][x]
                         for x in range(len(playlist["entries"]))
@@ -612,7 +625,7 @@ class PlaylistCommands:
 
                 def extras_check(m):
                     return (m.content.split()[0].lower() in [
-                        "abort", "sort", "removeduplicates", "rebuild"
+                        "abort", "sort", "removeduplicates", "rebuild", "cover", "description"
                     ])
 
                 extras_message = await self.safe_send_message(
@@ -620,13 +633,13 @@ class PlaylistCommands:
                     extras_string.format(
                         user_savename.replace("_", " ").title(),
                         self.get_global_user(playlist["author"]).mention,
-                        playlist["entry_count"], "s"
-                        if int(playlist["entry_count"]) is not 1 else "",
+                        len(playlist["entries"]), "s"
+                        if len(playlist["entries"]) is not 1 else "",
                         format_time(sum([x.duration for x in entries]))))
                 resp = await self.wait_for_message(
                     author=author, channel=channel, check=extras_check)
 
-                if not resp.content.lower().startswith(self.config.command_prefix) and not resp.content.lower().startswith('abort'):
+                if not resp.content.lower().startswith(self.config.command_prefix) and not resp.content.lower().startswith("abort"):
                     _cmd = resp.content.split()
                     cmd = _cmd[0].lower()
                     args = _cmd[1:] if len(_cmd) > 1 else None
@@ -649,7 +662,7 @@ class PlaylistCommands:
                         # bodge for changelog
                         pl_changes["order"] = sort_method
 
-                    if cmd == "removeduplicates":
+                    elif cmd == "removeduplicates":
                         urls = []
                         new_list = []
                         for entry in entries:
@@ -659,22 +672,44 @@ class PlaylistCommands:
 
                         playlist["entries"] = new_list
 
-                    if cmd == "rebuild":
+                    elif cmd == "rebuild":
                         entry_urls = [entry.url for entry in entries]
                         rebuild_safe_entries, rebuild_removed_entries = await _get_entries_from_urls(entry_urls, "Rebuilding the playlist. This might take a while, please hold on.")
 
                         pl_changes["remove_entries"].extend(
                             [(ind, playlist["entries"][ind]) for ind in rebuild_removed_entries])  # for the changelog
                         playlist["entries"] = rebuild_safe_entries
-                        playlist["entry_count"] = str(
-                            len(rebuild_safe_entries))
                         it, ov = divmod(
-                            int(playlist["entry_count"]), items_per_page)
+                            len(playlist["entries"]), items_per_page)
                         entries_page = it - 1 if ov == 0 else it
+
+                    elif cmd == "description":
+                        desc = resp.content[len(cmd):].strip()
+                        if desc:
+                            pl_changes["new_desc"] = desc
+                        else:
+                            msg = await self.safe_send_message(channel, "**Please provide a description**")
+                            asyncio.sleep(4)
+                            await self.safe_delete_message(msg)
+                            continue
+                    elif cmd == "cover":
+                        if not args:
+                            msg = await self.safe_send_message(channel, "**Please provide an url**")
+                            asyncio.sleep(4)
+                            await self.safe_delete_message(msg)
+                            continue
+                        url = args[0].strip()
+                        if is_image(url):
+                            pl_changes["new_cover"] = url
+                        else:
+                            msg = await self.safe_send_message(channel, "**This isn't an image**")
+                            asyncio.sleep(4)
+                            await self.safe_delete_message(msg)
+                            continue
+
                 await self.safe_delete_message(extras_message)
                 await self.safe_delete_message(resp)
                 await self.safe_delete_message(response_message)
-                await self.safe_delete_message(interface_message)
                 continue
 
             elif split_message[0].lower() == "p":
@@ -684,14 +719,15 @@ class PlaylistCommands:
                 entries_page = (entries_page + 1) % (iterations + 1)
 
             await self.safe_delete_message(response_message)
-            await self.safe_delete_message(interface_message)
+
+        await self.safe_delete_message(interface_message)
 
         if abort:
             return Response("Closed **{}** without saving".format(savename))
             print("Closed the playlist builder")
 
         if save:
-            if pl_changes["added_entries"] or pl_changes["remove_entries"] or pl_changes["new_name"] or pl_changes["order"]:
+            if pl_changes["added_entries"] or pl_changes["remove_entries"] or pl_changes["new_name"] or pl_changes["order"] or pl_changes["new_desc"] or pl_changes["new_cover"]:
                 c_log = "**CHANGES**\n\n"
                 if pl_changes["added_entries"]:
                     new_entries_string = "\n".join(["    `{}.` {}".format(ind, nice_cut(
@@ -708,6 +744,11 @@ class PlaylistCommands:
                 if pl_changes["new_name"]:
                     c_log += "**Renamed playlist**\n    From `{}` to `{}`".format(
                         savename.title(), pl_changes["new_name"].title())
+                if pl_changes["new_desc"]:
+                    c_log += "**Changed description**\n    To `{}`".format(
+                        pl_changes["new_description"])
+                if pl_changes["new_cover"]:
+                    c_log += "**Changed cover**\n    To `{}`".format(pl_changes["new_cover"])
             else:
                 c_log = "No changes were made"
 
@@ -715,7 +756,10 @@ class PlaylistCommands:
                 savename,
                 player.playlist,
                 all_entries=playlist["entries"],
-                new_name=pl_changes["new_name"])
+                new_name=pl_changes["new_name"],
+                new_description=pl_changes["new_desc"],
+                new_cover=pl_changes["new_cover"]
+            )
             print("Closed the playlist builder and saved the playlist")
 
             return Response("Successfully saved **{}**\n\n{}".format(

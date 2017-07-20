@@ -1025,7 +1025,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             return
 
         vm_count = sum(
-            1 for m in my_voice_channel.voice_members if m != after.server.me)
+            1 for m in my_voice_channel.voice_members if m != after.server.me and not m.bot)
         if vm_count == 0:
             if player.is_playing:
                 print("[AUTOPAUSE] Pausing")

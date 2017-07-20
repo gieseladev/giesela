@@ -40,10 +40,13 @@ class Playlists:
         plsection = self.playlists[playlistname]
 
         playlist_information = {
+            "id": playlistname,
+            "name": playlistname.replace("_", " ").title(),
             "location": plsection["location"],
             "author": plsection["author"],
-            "entry_count": plsection["entries"],
-            "replay_count": int(plsection["replays"])
+            "replay_count": int(plsection["replays"]),
+            "description": None if plsection.get("description") == "None" else plsection.get("description"),
+            "cover_url": None if plsection.get("cover_url") == "None" else plsection.get("cover_url")
         }
 
         entries = []
@@ -74,7 +77,7 @@ class Playlists:
 
         return playlist_information
 
-    def set_playlist(self, entries, name, author_id, replays=0):
+    def set_playlist(self, entries, name, author_id, description=None, cover_url=None, replays=0):
         name = name.lower().strip().replace(" ", "_")
 
         try:
@@ -89,8 +92,9 @@ class Playlists:
         self.playlists.set(
             name, "location", self.playlist_save_location + str(name) + ".gpl")
         self.playlists.set(name, "author", str(author_id))
-        self.playlists.set(name, "entries", str(len(entries)))
         self.playlists.set(name, "replays", str(replays))
+        self.playlists.set(name, "description", str(description))
+        self.playlists.set(name, "cover_url", str(cover_url))
 
         self.save_playlist()
         self.update_playlist()
@@ -179,7 +183,7 @@ class Playlists:
 
         return pls
 
-    def edit_playlist(self, name, playlist, all_entries=None, remove_entries=None, remove_entries_indexes=None, new_entries=None, new_name=None):
+    def edit_playlist(self, name, playlist, all_entries=None, remove_entries=None, remove_entries_indexes=None, new_entries=None, new_name=None, new_description=None, new_cover=None):
         name = name.lower().strip().replace(" ", "_")
         old_playlist = self.get_playlist(name, playlist)
 
@@ -205,6 +209,8 @@ class Playlists:
 
         next_name = new_name if new_name is not None else name
         next_author_id = old_playlist["author"]
+        next_description = new_description or old_playlist["description"]
+        next_cover = new_cover or old_playlist["cover_url"]
 
         if len(next_entries) < 1:
             self.remove_playlist(name)
@@ -213,5 +219,5 @@ class Playlists:
         if next_name != name:
             self.remove_playlist(name)
 
-        self.set_playlist(next_entries, next_name,
-                          next_author_id, old_playlist["replay_count"])
+        self.set_playlist(next_entries, next_name, next_author_id, next_description,
+                          next_cover, replays=old_playlist["replay_count"])

@@ -1018,13 +1018,10 @@ class DisplayCommands:
         if not player.playlist.history:
             return Response("There **is** no history")
 
-        seconds_passed = player.progress if player.current_entry else 0
-
-        lines = []
+        lines = ["**HISTORY**"]
         for ind, entry in enumerate(player.playlist.history[:quantity], 1):
-            finish_time = entry.meta.get("finish_time", None)
-            if finish_time:
-                seconds_passed = time.time() - finish_time
+            finish_time = entry.meta.get("finish_time")
+            seconds_passed = time.time() - finish_time
             lines.append(
                 "`{}.` **{}** {} ago".format(
                     ind,
@@ -1032,7 +1029,6 @@ class DisplayCommands:
                     format_time(seconds_passed, max_specifications=2)
                 )
             )
-            seconds_passed += entry.end_seconds
 
         return Response("\n".join(lines))
 
