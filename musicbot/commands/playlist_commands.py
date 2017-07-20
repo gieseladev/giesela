@@ -354,7 +354,7 @@ class PlaylistCommands:
             val = "\n".join(vals)
 
             em.add_field(
-                name="Some of the entries",
+                name="Some of the entries:",
                 value=val,
                 inline=False
             )
