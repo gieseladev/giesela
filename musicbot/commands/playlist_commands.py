@@ -1,16 +1,23 @@
-import asyncio
 import re
-from random import shuffle
+import time
+from random import choice, shuffle
+from textwrap import indent
 
 from discord import Embed
 
-from ..entry import TimestampEntry
+import asyncio
+
+from ..entry import SpotifyEntry, TimestampEntry, YoutubeEntry
 from ..saved_playlists import Playlists
+from ..spotify import SpotifyTrack
 from ..utils import (Response, asyncio, block_user, command_info, create_bar,
-                     format_time, is_image, nice_cut, owner_only, to_timestamp)
+                     format_time, is_image, nice_cut, owner_only,
+                     parse_timestamp, timestamp_to_queue, to_timestamp,
+                     wrap_string)
 
 
 class PlaylistCommands:
+
     @block_user
     @command_info("1.9.5", 1479599760, ***REMOVED***
         "3.4.6": (1497617827, "when Giesela can't add the entry to the playlist she tries to figure out **why** it didn't work"),
@@ -26,7 +33,8 @@ class PlaylistCommands:
         "3.8.9": (1499525669, "Part of the `Giesenesis` rewrite"),
         "3.9.3": (1499712451, "Fixed a bug in the playlist builder search command."),
         "4.0.0": (1499978910, "Forgot to implement progress message properly and as a result it could bug out and spam itself."),
-        "4.0.6": (1500536082, "Added description and cover options for a playlist")
+        "4.0.6": (1500536082, "Added description and cover options for a playlist"),
+        "4.0.8": (1500723220, "Can now manipulate playlist entries")
     ***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -379,7 +387,7 @@ class PlaylistCommands:
             self.playlists.set_playlist([], _savename, author.id)
 
         def check(m):
-            return (m.content.split()[0].lower() in ["add", "remove", "rename", "exit", "p", "n", "save", "extras", "search"])
+            return (m.content.split()[0].lower() in ["add", "remove", "rename", "exit", "p", "n", "save", "extras", "search", "edit"])
 
         async def _get_entries_from_urls(urls, message):
             entries = []
@@ -446,7 +454,7 @@ class PlaylistCommands:
         savename = _savename
         user_savename = savename
 
-        interface_string = "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add <query>`: Add a video to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index\n`rename <newname>`: rename the current playlist\n`search <query>`: search for an entry\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
+        interface_string = "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add <query>`: Add a video to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index\n`edit <index>`: edit an entry\n`rename <newname>`: rename the current playlist\n`search <query>`: search for an entry\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
 
         extras_string = "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n**Extra functions:**\n`sort <alphabetical | length | random>`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n`description <text>`: describe this playlist\n`cover <url>`: set the cover for this playlist\n`rebuild`: clean the playlist by removing broken videos\n\n`abort`: return to main screen"
 
@@ -577,6 +585,19 @@ class PlaylistCommands:
                         for x in range(len(playlist["entries"]))
                         if x not in indices
                     ]
+            elif split_message[0].lower() == "edit":
+                if arguments is not None and arguments[0].isnumeric():
+                    index = int(arguments[0]) - 1
+
+                    if 0 > index >= len(playlist["entries"]):
+                        continue
+
+                    entry = playlist["entries"].pop(index)
+
+                    print("starting entry editor")
+                    new_entry = await self.entry_manipulator(player, channel, author, entry) or entry
+
+                    playlist["entries"].insert(index, new_entry)
 
             elif split_message[0].lower() == "rename":
                 if arguments is not None and len(
@@ -748,7 +769,8 @@ class PlaylistCommands:
                     c_log += "**Changed description**\n    To `***REMOVED******REMOVED***`".format(
                         pl_changes["new_description"])
                 if pl_changes["new_cover"]:
-                    c_log += "**Changed cover**\n    To `***REMOVED******REMOVED***`".format(pl_changes["new_cover"])
+                    c_log += "**Changed cover**\n    To `***REMOVED******REMOVED***`".format(
+                        pl_changes["new_cover"])
             else:
                 c_log = "No changes were made"
 
@@ -764,6 +786,242 @@ class PlaylistCommands:
 
             return Response("Successfully saved *****REMOVED******REMOVED*****\n\n***REMOVED******REMOVED***".format(
                 user_savename.replace("_", " ").title(), c_log))
+
+    async def entry_manipulator(self, player, channel, author, entry):
+        def get_entry_type(fields):
+            keys = fields.keys()
+
+            if "sub_queue" in keys:
+                return set(), TimestampEntry
+
+            missing_for_spotify = ***REMOVED***
+                "album", "artist", "artist_image_url", "cover_url"***REMOVED*** - keys
+            if not missing_for_spotify:
+                return set(), SpotifyEntry
+
+            return missing_for_spotify, YoutubeEntry
+
+        def build_new_entry(fields):
+            _, entry_type = get_entry_type(fields)
+
+            args = ***REMOVED***
+                "title": fields["title"],
+                "queue": player.playlist,
+                "video_id": fields["_video_id"],
+                "url": fields["_url"],
+                "duration": fields["_duration"],
+                "thumbnail": fields["thumbnail"],
+                "description": fields["_description"]
+            ***REMOVED***
+
+            if entry_type is SpotifyEntry:
+                title = fields["title"]
+                duration = fields["duration"]
+                album = fields["album"]
+                artist = fields["artist"]
+                artist_image = fields["artist_image_url"]
+                cover = fields["cover_url"]
+
+                args["spotify_data"] = SpotifyTrack.custom_track(
+                    title, duration, album, artist, artist_image, cover)
+            elif entry_type is TimestampEntry:
+                args["sub_queue"] = timestamp_to_queue(fields["sub_queue"])
+
+            return entry_type(**args)
+
+        entry_fields = ***REMOVED***
+            "__title": entry._title,
+            "_video_id": entry.video_id,
+            "_url": entry.url,
+            "_description": entry.description,
+            "_duration": entry.duration,
+            "title": entry.title,
+            "thumbnail": entry.thumbnail,
+        ***REMOVED***
+        if isinstance(entry, SpotifyEntry):
+            entry_fields.update(***REMOVED***
+                "title": entry.song_name,
+                "artist": entry.artist,
+                "artist_image_url": choice(entry.artists).image,
+                "album": entry.album.name,
+                "cover_url": entry.cover
+            ***REMOVED***)
+        elif isinstance(entry, TimestampEntry):
+            entry_fields.update(***REMOVED***
+                "title": entry.whole_title,
+                "sub_queue": ***REMOVED***entry["start"]: entry["name"] for entry in entry.sub_queue***REMOVED***
+            ***REMOVED***)
+
+        commands = "\n".join([
+            "`set <property> <query>` set a <property> (i.e. the cover) to <query>",
+            "`remove <property>` remove a <property> from an entry",
+            "`timestamp <remove | set> <timestamp> <title>` manipulate a timestamp",
+            "`exit` abort",
+            "`save` apply changes"
+        ])
+        error_format = "**Error**\n***REMOVED***error_message***REMOVED***\n\n"
+        information_format = ""
+        interface_format = "**ENTRY EDITOR**\n\n***REMOVED***error***REMOVED***---\n***REMOVED***fields***REMOVED***\n---\n***REMOVED***timestamps***REMOVED***\n***REMOVED***information***REMOVED***\n\n**Commands**\n" + commands
+
+        error = None
+
+        _interface_message = None
+
+        async def send_interface_message():
+            nonlocal _interface_message
+            nonlocal error
+
+            error_text = ""
+            if error:
+                error_text = error_format.format(error_message=error)
+                error = None
+
+            sub_queue = entry_fields.get("sub_queue", None)
+            if sub_queue:
+                lines = ["", "**timestamps**:"]
+                sub_queue_items = sorted(
+                    list(sub_queue.items()), key=lambda el: el[0])
+                for ind, (start, title) in enumerate(sub_queue_items):
+                    next_start = sub_queue_items[
+                        ind + 1][0] if ind + 1 < len(sub_queue_items) else entry.duration
+                    duration = next_start - start
+
+                    lines.append(
+                        "   `***REMOVED******REMOVED***.` *****REMOVED******REMOVED***** (***REMOVED******REMOVED***)".format(to_timestamp(start),
+                                                      title, to_timestamp(duration))
+                    )
+
+                timestamps = "\n".join(lines) + 2 * "\n"
+            else:
+                timestamps = ""
+
+            fields_text = "\n".join([
+                "**title**: " +
+                wrap_string(entry_fields.get("title", "Unknown"), "`"),
+                "**album**: " +
+                wrap_string(entry_fields.get("album", "Unknown"), "`"),
+                "**artist**: " +
+                wrap_string(entry_fields.get("artist", "Unknown"), "`"),
+                "**artist image**: " +
+                wrap_string(entry_fields.get("artist_image_url", "None"), "`"),
+                "**cover**: " +
+                wrap_string(entry_fields.get("cover_url", "None"), "`"),
+                "**thumbnail**: " +
+                wrap_string(entry_fields.get("thumbnail", "None"), "`")
+            ])
+
+            missing, current_type = get_entry_type(entry_fields)
+            if current_type is TimestampEntry:
+                info_text = "This is a TimestampEntry. Remove the sub queue to get a normal entry."
+            elif current_type is SpotifyEntry:
+                info_text = "This is a SpotifyEntry. That's as good as it gets"
+            else:
+                missing = list(missing)
+                beautified_parameter = ***REMOVED***
+                    "artist": "the **artist**",
+                    "album": "an **album**",
+                    "artist_image_url": "a **picture of the artist**",
+                    "cover_url": "a **cover**"
+                ***REMOVED***
+
+                properties_needed = ""
+                if len(missing) > 1:
+                    properties_needed = ", ".join(beautified_parameter.get(m, m)
+                                                  for m in missing[:-1]) + " and "
+
+                properties_needed += beautified_parameter[missing[-1]]
+
+                info_text = "This is currently a normal entry. Provide ***REMOVED******REMOVED*** in order to get to a SpotifyEntry".format(
+                    properties_needed)
+
+            msg_text = interface_format.format(
+                fields=fields_text, information=info_text, error=error_text, timestamps=timestamps)
+
+            if not _interface_message:
+                _interface_message = await self.safe_send_message(channel, msg_text)
+            else:
+                _interface_message = await self.safe_edit_message(
+                    _interface_message,
+                    msg_text,
+                    keep_at_bottom=True,
+                    send_if_fail=True
+                )
+
+        while True:
+            await send_interface_message()
+            response = await self.wait_for_message(timeout=None, author=author, channel=channel, check=lambda msg: msg.content.lower().strip().startswith(("set", "remove", "timestamp", "exit", "abort", "save")))
+
+            command, _, _rest = response.content.strip().partition(" ")
+            command = command.lower()
+
+            targets = ***REMOVED***
+                "title": "title",
+                "artist image": "artist_image_url",
+                "artist": "artist",
+                "album": "album",
+                "cover": "cover_url",
+                "thumbnail": "thumbnail",
+                "timestamps": "sub_queue"
+            ***REMOVED***
+
+            responsible_text, property_target = (
+                [(k, t) for k, t in targets.items() if _rest.lower().startswith(k)] or (("", None),))[0]
+            rest = _rest[len(responsible_text):]
+
+            if command == "set":
+                if property_target:
+                    if rest:
+                        if property_target == "sub_queue":
+                            error = "You can't set timestamps like this"
+                        else:
+                            if property_target not in ("cover_url", "thumbnail", "artist_image_url") or is_image(rest):
+                                entry_fields[property_target] = rest
+                            else:
+                                error = "That's not an image!"
+                    else:
+                        error = "Please also provide some text"
+                else:
+                    error = "Please provide a property"
+            elif command == "remove":
+                if property_target:
+                    entry_fields.pop(property_target, None)
+                else:
+                    error = "Please provide a property"
+            elif command == "timestamp":
+                parts = _rest.split()
+                if len(parts) >= 2:
+                    control, selector, *title = parts
+                    control = control.lower().strip()
+                    selector = parse_timestamp(selector)
+
+                    if selector is not None:
+                        if control == "remove":
+                            item = entry_fields[
+                                "sub_queue"].pop(selector, None)
+                            if not item:
+                                error = "Couldn't find that sub-entry"
+                        elif control == "set":
+                            if title:
+                                title = " ".join(title)
+                                entry_fields["sub_queue"][selector] = title
+                            else:
+                                error = "Provide a title, please!"
+                    else:
+                        error = "Don't know what your <timestamp>'s supposed to mean'"
+                else:
+                    error = "Be sure to specify what you want to do and the <timestamp>"
+            elif command == "save":
+                await self.safe_delete_message(response)
+                await self.safe_delete_message(_interface_message)
+
+                return build_new_entry(entry_fields)
+            elif command in ("exit", "abort"):
+                await self.safe_delete_message(response)
+                await self.safe_delete_message(_interface_message)
+
+                return None
+
+            await self.safe_delete_message(response)
 
     @command_info("2.9.2", 1479945600, ***REMOVED***
         "3.3.6": (1497387101, "added the missing \"s\", should be working again"),
@@ -859,10 +1117,6 @@ class PlaylistCommands:
 
         if not playlistname:
             if "playlist" in player.current_entry.meta:
-                # because why make it easy when you can have it complicated
-                playlist_name, index = (
-                    player.current_entry.meta["playlist"][x] for x in ["name", "index"])
-
                 self.playlists.edit_playlist(
                     playlist_name, player.playlist, remove_entries=[player.current_entry, ])
                 return Response("Removed *****REMOVED******REMOVED***** from playlist `***REMOVED******REMOVED***`".format(player.current_entry.title, playlist_name.title()))

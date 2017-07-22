@@ -1,20 +1,21 @@
-import asyncio
-import audioop
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
-from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
+
+import asyncio
+import audioop
+from enum import Enum
 
 from .entry import RadioSongEntry, StreamEntry, TimestampEntry
 from .exceptions import FFmpegError, FFmpegWarning
 from .lib.event_emitter import EventEmitter
 from .playlist import Playlist
-from .utils import format_time_ffmpeg
+from .utils import create_cmd_params, format_time_ffmpeg
 
 
 class PatchedBuff:
@@ -199,6 +200,23 @@ class MusicPlayer(EventEmitter):
         self.emit("play", player=self, entry=entry)
         return True
 
+    def set_filters(self, filters):
+        if not self.current_entry:
+            return False
+
+        entry = self.current_entry
+        entry.set_start(self.progress)
+
+        if filters is None:
+            entry.pop("filters", None)
+        else:
+            entry.meta["filters"] = filters
+
+        self.handle_manually = True
+        self.play_entry(entry)
+        self.emit("play", player=self, entry=entry)
+        return True
+
     def pause(self):
         if isinstance(self.current_entry, StreamEntry):
             print("Won't pause because I'm playing a stream")
@@ -338,19 +356,29 @@ class MusicPlayer(EventEmitter):
             # In-case there was a player, kill it. RIP.
             self._kill_current_player()
 
-            if isinstance(entry, StreamEntry):
-                before_options = "-nostdin"
-                options = "-vn -b:a 128k"
-            else:
-                before_options = "-nostdin -ss ***REMOVED******REMOVED***".format(
-                    format_time_ffmpeg(int(entry.start_seconds)))
-                options = "-vn -to ***REMOVED******REMOVED*** -b:a 128k".format(format_time_ffmpeg(
-                    int(entry.end_seconds - entry.start_seconds)))
+            before_options = ***REMOVED***
+                "nostdin": None
+            ***REMOVED***
+            options = ***REMOVED***
+                "vn": None,
+                "b:a": "128k"
+            ***REMOVED***
+
+            if not isinstance(entry, StreamEntry):
+                before_options["ss"] = format_time_ffmpeg(
+                    int(entry.start_seconds))
+                options["to"] = format_time_ffmpeg(
+                    int(entry.end_seconds - entry.start_seconds))
+
+            if "filters" in entry.meta:
+                options.update(***REMOVED***
+                    "filter:a": "\"" + ",".join(entry.meta["filters"]) + "\""
+                ***REMOVED***)
 
             self._current_player = self._monkeypatch_player(self.voice_client.create_ffmpeg_player(
                 entry.filename,
-                before_options=before_options,
-                options=options,
+                before_options=create_cmd_params(before_options),
+                options=create_cmd_params(options),
                 stderr=subprocess.PIPE,
                 after=lambda: self.loop.call_soon_threadsafe(
                     self._playback_finished)

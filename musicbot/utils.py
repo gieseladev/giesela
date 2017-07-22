@@ -1,4 +1,3 @@
-import asyncio
 import datetime
 import json
 import math
@@ -20,7 +19,35 @@ from bs4 import BeautifulSoup
 from discord.ext.commands.bot import _get_variable
 from PIL import Image, ImageStat
 
+import asyncio
+
 from .constants import DISCORD_MSG_CHAR_LIMIT
+
+
+def wrap_string(target, wrapping, handle_special=True, reverse_closer=True):
+    special_wrap = ***REMOVED***
+        "(": ")",
+        "[": "]",
+        "***REMOVED***": "***REMOVED***",
+        "<": ">"
+    ***REMOVED*** if handle_special else ***REMOVED******REMOVED***
+    opener = wrapping
+    closer = special_wrap.get(wrapping, wrapping)
+    if reverse_closer:
+        closer = closer[::-1]
+
+    return "***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***".format(opener, target, closer)
+
+
+def create_cmd_params(params: dict):
+    param_list = []
+    for key, value in params.items():
+        if value is not None:
+            param_list.append("-***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(key, value))
+        else:
+            param_list.append("-***REMOVED******REMOVED***".format(key))
+
+    return " ".join(param_list)
 
 
 def is_image(url):
@@ -306,6 +333,27 @@ def clean_songname(query):
     return query.strip(" -&,")
 
 
+def timestamp_to_queue(timestamps):
+    queue = []
+    entries = sorted(list(timestamps.keys()))
+    for index, key in enumerate(entries):
+        start = int(key)
+        next_start = int(entries[index + 1]) if index + \
+            1 < len(entries) else song_dur
+
+        dur = next_start - start
+        sub_entry = ***REMOVED***
+            "name": timestamps[key].strip(punctuation + whitespace),
+            "duration": dur,
+            "start": start,
+            "index": index,
+            "end": next_start
+        ***REMOVED***
+        queue.append(sub_entry)
+
+    return queue
+
+
 def _run_timestamp_matcher(text):
     songs = ***REMOVED******REMOVED***
     for match in re.finditer(
@@ -342,24 +390,7 @@ def get_video_sub_queue(description, video_id, song_dur):
     if not timestamps:
         return None
 
-    queue = []
-    entries = sorted(list(timestamps.keys()))
-    for index, key in enumerate(entries):
-        start = int(key)
-        next_start = int(entries[index + 1]) if index + \
-            1 < len(entries) else song_dur
-
-        dur = next_start - start
-        sub_entry = ***REMOVED***
-            "name": timestamps[key].strip(punctuation + whitespace),
-            "duration": dur,
-            "start": start,
-            "index": index,
-            "end": next_start
-        ***REMOVED***
-        queue.append(sub_entry)
-
-    return queue
+    return timestamp_to_queue(timestamps)
 
 
 def get_video_timestamps(description, video_id, song_dur=None):
@@ -461,8 +492,7 @@ def parse_timestamp(timestamp):
             continue
 
         j = len(parts) - i - 1
-        if j >= len(
-                values):  # If I don't have a conversion from this to seconds
+        if j >= len(values):  # Can't convert
             continue
         secs += v * values[j]
 

@@ -9,7 +9,7 @@ SUB_VERSION = "New_Reign"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
 all_sub_versions = ***REMOVED***
-    "4.0.x": "New_Reign"
+    "4.0.x": "New_Reign",
     "3.9.x": "Giesenesis",
     "3.8.x": "Giezela",
     "3.7.x": "Giese_La_La_Land",
