@@ -34,12 +34,14 @@ class PlaylistCommands:
         "3.9.3": (1499712451, "Fixed a bug in the playlist builder search command."),
         "4.0.0": (1499978910, "Forgot to implement progress message properly and as a result it could bug out and spam itself."),
         "4.0.6": (1500536082, "Added description and cover options for a playlist"),
-        "4.0.8": (1500723220, "Can now manipulate playlist entries")
+        "4.0.7": (1500728466, "Can now manipulate playlist entries")
     })
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         ///|Load
-        `{command_prefix}playlist load <savename> [add | replace] [none | random] [startindex] [endindex (inclusive)]`\n\nTrust me, it's more complicated than it looks
+        `{command_prefix}playlist load <savename> [add | replace] [none | random] [startindex] [endindex (inclusive)]`
+
+        Trust me, it's more complicated than it looks
         ///(NL)|List all playlists
         `{command_prefix}playlist showall [alphabetical | author | entries | playtime | random | replays]`
         ///(NL)|Build a new playlist

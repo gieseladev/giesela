@@ -95,7 +95,7 @@ class Playlists:
                 serialized_entries.append(entry.to_dict())
 
             with open(self.playlist_save_location + str(name) + ".gpl", "w") as f:
-                f.write(json.dumps(serialized_entries))
+                f.write(json.dumps(serialized_entries, indent="\t"))
         except Exception as e:
             raise
             return False
