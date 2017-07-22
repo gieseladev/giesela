@@ -1,7 +1,8 @@
-import configparser
 import json
 import os
 import re
+
+import configparser
 
 from .entry import Entry
 from .exceptions import OutdatedEntryError
@@ -50,7 +51,8 @@ class Playlists:
         }
 
         entries = []
-        # this is gonna be a list of urls populated with the broken or outdated entries
+        # this is gonna be a list of urls populated with the broken or outdated
+        # entries
         broken_entries = []
         if load_entries and not os.stat(playlist_information["location"]).st_size == 0:
             with open(playlist_information["location"], "r") as file:
@@ -81,8 +83,19 @@ class Playlists:
         name = name.lower().strip().replace(" ", "_")
 
         try:
+            serialized_entries = []
+            for index, entry in enumerate(entries):
+                entry.start_seconds = 0
+
+                entry.meta["playlist"] = {
+                    "name": name,
+                    "index": index
+                }
+
+                serialized_entries.append(entry.to_dict())
+
             with open(self.playlist_save_location + str(name) + ".gpl", "w") as f:
-                f.write(json.dumps([entry.to_dict() for entry in entries]))
+                f.write(json.dumps(serialized_entries))
         except Exception as e:
             raise
             return False

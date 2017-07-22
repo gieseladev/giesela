@@ -1,4 +1,3 @@
-import asyncio
 import inspect
 import os
 import re
@@ -16,6 +15,8 @@ from discord.enums import ChannelType
 from discord.object import Object
 from discord.utils import find
 from discord.voice_client import VoiceClient
+
+import asyncio
 
 from . import downloader, exceptions
 from .commands.admin_commands import AdminCommands
@@ -565,7 +566,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             else:
                 await self.safe_delete_message(message)
                 return await self.safe_send_message(message.channel, new)
-                return
 
         try:
             return await self.edit_message(message, new)
@@ -858,7 +858,8 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             return
 
         raw_command, *args = message_content.split()
-        command = raw_command.lstrip(self.config.command_prefix).lower().strip()
+        command = raw_command.lstrip(
+            self.config.command_prefix).lower().strip()
 
         handler = getattr(self, 'cmd_%s' % command, None)
         if not handler:

@@ -44,6 +44,10 @@ class SpotifyArtist:
     def from_dict(cls, data):
         return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["href"])
 
+    @classmethod
+    def custom_artist(cls, name, image):
+        return cls("custom", name, [{"url": image}], .5, ["custom"], "custom", "custom")
+
     @property
     def top_tracks(self):
         if self._top_tracks is None:
@@ -153,6 +157,14 @@ class SpotifyTrack:
             return None
 
         return cls(data["id"], data["name"], [SpotifyArtist.from_dict(artist) for artist in data["artists"]] if data["artists"] is not None else None, data["duration"], SpotifyAlbum.from_dict(data["album"]) if data["album"] is not None else None, data["popularity"], data["uri"], data["query"], data["certainty"])
+
+    @classmethod
+    def custom_track(cls, title, duration, album_name, artist_name, artist_image, cover):
+        artists = [SpotifyArtist.custom_artist(artist_name, artist_image)]
+        album = SpotifyAlbum("custom", album_name, artists, [
+                             {"url": cover}], "custom")
+
+        return cls("custom", title, artists, duration, album, .5, "custom")
 
     @property
     def cover_url(self):

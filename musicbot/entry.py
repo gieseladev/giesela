@@ -1,9 +1,10 @@
-import asyncio
 import os
 import time
 import traceback
 
 from discord import Channel, Member, Server, User
+
+import asyncio
 
 from .exceptions import ExtractionError, OutdatedEntryError
 from .radio import RadioSongExtractor, StationInfo
@@ -18,6 +19,7 @@ class Entry:
     version = int(version_code.replace(".", ""))
     can_encode = (int, dict, list, str, int, float, bool)
     default_encode = (Channel, Member, Server, User)
+    meta_dict_keys = ("author", "playlist")
 
     @classmethod
     def from_dict(cls, playlist, data):
@@ -39,6 +41,10 @@ class Entry:
         meta_dict = {}
         for key, value in meta.items():
             if key is None or value is None:
+                continue
+
+            # remove unwanted meta stuff
+            if str(key).lower() not in Entry.meta_dict_keys:
                 continue
 
             ser_value = {"type": value.__class__.__name__}
@@ -266,6 +272,7 @@ class StreamEntry(BaseEntry):
 
 
 class RadioStationEntry(StreamEntry):
+
     def __init__(self, queue, station_data, destination=None, **meta):
         super().__init__(queue, station_data.url, station_data.name, destination, **meta)
         self.station_data = station_data
@@ -339,6 +346,7 @@ class RadioStationEntry(StreamEntry):
 
 
 class RadioSongEntry(RadioStationEntry):
+
     def __init__(self, queue, station_data, destination=None, **meta):
         super().__init__(queue, station_data, destination, **meta)
         self._current_song_info = None

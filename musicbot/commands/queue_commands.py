@@ -1,9 +1,10 @@
-import asyncio
 import time
 import traceback
 from random import choice, shuffle
 
 from discord import Embed
+
+import asyncio
 
 from ..entry import (RadioSongEntry, RadioStationEntry, SpotifyEntry,
                      StreamEntry, TimestampEntry, YoutubeEntry)
@@ -14,6 +15,7 @@ from ..utils import (Response, block_user, clean_songname, command_info,
 
 
 class EnqueueCommands:
+
     @command_info("2.0.2", 1482252120, {
         "3.5.2": (1497712808, "Updated help text")
     })
@@ -432,6 +434,7 @@ class EnqueueCommands:
 
 
 class ManipulateCommands:
+
     @command_info("1.0.0", 1477180800, {
         "3.8.9": (1499466672, "Part of the `Giesenesis` rewrite")
     })
@@ -530,7 +533,7 @@ class ManipulateCommands:
                     "Am I supposed to replay the future or what...?")
 
             replay_entry = player.playlist.history[index]
-            player.playlist._add_entry_next(replay_entry)
+            player.playlist._add_entry(replay_entry, placement=0)
             return Response("Replaying **{}**".format(replay_entry.title))
         except:
             pass
@@ -546,7 +549,7 @@ class ManipulateCommands:
         if not replay_entry:
             return Response("There's nothing for me to replay")
 
-        player.playlist._add_entry_next(replay_entry)
+        player.playlist._add_entry(replay_entry, placement=0)
         return Response("Replaying **{}**".format(replay_entry.title))
 
     async def cmd_shuffle(self, channel, player):
@@ -746,6 +749,7 @@ class ManipulateCommands:
 
 
 class DisplayCommands:
+
     @command_info("1.0.0", 1477180800, {
         "3.5.4": (1497721686, "Updating the looks of the \"now playing\" message and a bit of cleanup"),
         "3.6.2": (1498143480, "Updated design of default entry and included a link to the video"),
