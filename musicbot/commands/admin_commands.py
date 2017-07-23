@@ -21,7 +21,7 @@ class AdminCommands:
 
         if option not in ["+", "-", "add", "remove"]:
             raise exceptions.CommandError(
-                "Invalid option " % s" specified, use +, -, add, or remove" %
+                "Invalid option \" % s\" specified, use +, -, add, or remove" %
                 option)
 
         for user in user_mentions.copy():
