@@ -453,9 +453,10 @@ class PlaylistCommands:
         save = False
         entries_page = 0
         pl_changes = {
-            "remove_entries": [],  # used for changelog
-            "added_entries": [],  # changelog
-            "order": None,  # changelog
+            "remove_entries": [],       # used for changelog
+            "added_entries": [],        # changelog
+            "changed_entries": set(),   # changelog
+            "order": None,              # changelog
             "new_name": None,
             "new_desc": None,
             "new_cover": None
@@ -616,6 +617,10 @@ class PlaylistCommands:
 
                     print("starting entry editor")
                     new_entry = await self.entry_manipulator(player, channel, author, user_savename, entry) or entry
+                    print("closed entry editor")
+
+                    if entry is not new_entry:
+                        pl_changes["changed_entries"].add((index, new_entry))
 
                     playlist["entries"].insert(index, new_entry)
 
@@ -787,6 +792,12 @@ class PlaylistCommands:
                         ["    `{}.` {}".format(ind + 1, nice_cut(entry.title, 40)) for ind, entry in pl_changes["remove_entries"]])
                     c_log += "**Removed entries**\n{}\n".format(
                         removed_entries_string)
+                if pl_changes["changed_entries"]:
+                    changed_entries_string = "\n".join(
+                        ["    `{}.` {}".format(ind + 1, nice_cut(entry.title, 40)) for ind, entry in pl_changes["changed_entries"]])
+
+                    c_log += "**Edited entries**\n{}\n".format(
+                        changed_entries_string)
                 if pl_changes["order"]:
                     c_log += "**Changed order**\n    To `{}`\n".format(
                         pl_changes["order"])
