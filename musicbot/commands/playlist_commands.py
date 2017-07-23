@@ -769,7 +769,7 @@ class PlaylistCommands:
                         savename.title(), pl_changes["new_name"].title())
                 if pl_changes["new_desc"]:
                     c_log += "**Changed description**\n    To `{}`".format(
-                        pl_changes["new_description"])
+                        pl_changes["new_desc"])
                 if pl_changes["new_cover"]:
                     c_log += "**Changed cover**\n    To `{}`".format(
                         pl_changes["new_cover"])
