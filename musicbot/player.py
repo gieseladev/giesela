@@ -35,7 +35,7 @@ class PatchedBuff:
 
     def __del__(self):
         if self.draw:
-            print(' ' * (get_terminal_size().columns - 1), end='\r')
+            print(" " * (get_terminal_size().columns - 1), end="\r")
 
     def read(self, frame_size):
         self.frame_count += 1
@@ -51,7 +51,7 @@ class PatchedBuff:
             self.rmss.append(rms)
 
             max_rms = sorted(self.rmss)[-1]
-            meter_text = 'avg rms: {:.2f}, max rms: {:.2f} '.format(
+            meter_text = "avg rms: {:.2f}, max rms: {:.2f} ".format(
                 self._avg(self.rmss), max_rms)
             self._pprint_meter(rms / max(1, max_rms),
                                text=meter_text, shift=True)
@@ -63,7 +63,7 @@ class PatchedBuff:
             return audioop.mul(frame, 2, min(mult, maxv))
         else:
             # ffmpeg returns s16le pcm frames.
-            frame_array = array('h', frame)
+            frame_array = array("h", frame)
 
             for i in range(len(frame_array)):
                 frame_array[i] = int(frame_array[i] * min(mult, min(1, maxv)))
@@ -73,7 +73,7 @@ class PatchedBuff:
     def _avg(self, i):
         return sum(i) / len(i)
 
-    def _pprint_meter(self, perc, *, char='#', text='', shift=True):
+    def _pprint_meter(self, perc, *, char="#", text="", shift=True):
         tx, ty = get_terminal_size()
 
         if shift:
@@ -83,7 +83,7 @@ class PatchedBuff:
             outstr = text + \
                 "{}".format(char * (int(tx * perc) - 1))[len(text):]
 
-        print(outstr.ljust(tx - 1), end='\r')
+        print(outstr.ljust(tx - 1), end="\r")
 
 
 class MusicPlayerState(Enum):
@@ -114,7 +114,7 @@ class MusicPlayer(EventEmitter):
         self.loop = bot.loop
         self.voice_client = voice_client
         self.playlist = playlist = Playlist(bot, self)
-        self.playlist.on('entry-added', self.on_entry_added)
+        self.playlist.on("entry-added", self.on_entry_added)
 
         self._play_lock = asyncio.Lock()
         self._current_player = None
@@ -165,14 +165,14 @@ class MusicPlayer(EventEmitter):
         self.state = MusicPlayerState.STOPPED
         self._kill_current_player()
 
-        self.emit('stop', player=self)
+        self.emit("stop", player=self)
 
     def resume(self):
         if self.is_paused and self._current_player:
             self._current_player.resume()
             self.update_chapter_updater()
             self.state = MusicPlayerState.PLAYING
-            self.emit('resume', player=self, entry=self.current_entry)
+            self.emit("resume", player=self, entry=self.current_entry)
             return
 
         if self.is_paused and not self._current_player:
@@ -180,7 +180,7 @@ class MusicPlayer(EventEmitter):
             self._kill_current_player()
             return
 
-        raise ValueError('Cannot resume playback from state %s' % self.state)
+        raise ValueError("Cannot resume playback from state %s" % self.state)
 
     def goto_seconds(self, secs):
         if (not self.current_entry) or secs >= self.current_entry.end_seconds:
@@ -207,7 +207,7 @@ class MusicPlayer(EventEmitter):
         entry = self.current_entry
         entry.set_start(self.progress)
 
-        if filters is None:
+        if not filters:
             entry.pop("filters", None)
         else:
             entry.meta["filters"] = filters
@@ -230,13 +230,13 @@ class MusicPlayer(EventEmitter):
                 self._current_player.pause()
                 self.update_chapter_updater(pause=True)
 
-            self.emit('pause', player=self, entry=self.current_entry)
+            self.emit("pause", player=self, entry=self.current_entry)
             return
 
         elif self.is_paused:
             return
 
-        raise ValueError('Cannot pause a MusicPlayer in state %s' % self.state)
+        raise ValueError("Cannot pause a MusicPlayer in state %s" % self.state)
 
     def kill(self):
         self.state = MusicPlayerState.DEAD
@@ -275,7 +275,7 @@ class MusicPlayer(EventEmitter):
             else:
                 asyncio.ensure_future(self._delete_file(entry.filename))
 
-        self.emit('finished-playing', player=self, entry=entry)
+        self.emit("finished-playing", player=self, entry=entry)
 
     def _kill_current_player(self):
         if self._current_player:
@@ -542,14 +542,11 @@ def filter_stderr(popen: subprocess.Popen, future: asyncio.Future):
 
 def check_stderr(data: bytes):
     try:
-        data = data.decode('utf8')
+        data = data.decode("utf8")
     except:
         print("Unknown error decoding message from ffmpeg", exc_info=True)
-        return True  # fuck it
+        return True  # duck it
 
-    # log.ffmpeg("Decoded data from ffmpeg: {}".format(data))
-
-    # TODO: Regex
     warnings = [
         "Header missing",
         "Estimating duration from birate, this may be inaccurate",
