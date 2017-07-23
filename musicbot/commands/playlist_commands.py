@@ -8,6 +8,7 @@ from discord import Embed
 import asyncio
 
 from ..entry import SpotifyEntry, TimestampEntry, YoutubeEntry
+from ..imgur import upload_playlist_cover, upload_song_image
 from ..saved_playlists import Playlists
 from ..spotify import SpotifyTrack
 from ..utils import (Response, asyncio, block_user, command_info, create_bar,
@@ -34,7 +35,10 @@ class PlaylistCommands:
         "3.9.3": (1499712451, "Fixed a bug in the playlist builder search command."),
         "4.0.0": (1499978910, "Forgot to implement progress message properly and as a result it could bug out and spam itself."),
         "4.0.6": (1500536082, "Added description and cover options for a playlist"),
-        "4.0.7": (1500728466, "Can now manipulate playlist entries")
+        "4.0.7": (1500728466, "Can now manipulate playlist entries"),
+        "4.1.0": (1500777145, "description bug fixed"),
+        "4.1.1": (1500789035, "Using Imgur to save images"),
+        "4.1.2": (1500790172, "Closing the playlist builder without saving for a newly created playlist, deletes said playlist.")
     ***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -385,7 +389,10 @@ class PlaylistCommands:
         return await self.cmd_help(channel, ["playlist"])
 
     async def playlist_builder(self, channel, author, server, player, _savename):
+        new_playlist = False
+
         if _savename not in self.playlists.saved_playlists:
+            new_playlist = True
             self.playlists.set_playlist([], _savename, author.id)
 
         def check(m):
@@ -446,9 +453,10 @@ class PlaylistCommands:
         save = False
         entries_page = 0
         pl_changes = ***REMOVED***
-            "remove_entries": [],  # used for changelog
-            "added_entries": [],  # changelog
-            "order": None,  # changelog
+            "remove_entries": [],       # used for changelog
+            "added_entries": [],        # changelog
+            "changed_entries": set(),   # changelog
+            "order": None,              # changelog
             "new_name": None,
             "new_desc": None,
             "new_cover": None
@@ -458,7 +466,18 @@ class PlaylistCommands:
 
         interface_string = "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n***REMOVED******REMOVED***\n\n**You can use the following commands:**\n`add <query>`: Add a video to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)\n`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index\n`edit <index>`: edit an entry\n`rename <newname>`: rename the current playlist\n`search <query>`: search for an entry\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
 
-        extras_string = "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)\n\n**Extra functions:**\n`sort <alphabetical | length | random>`: sort the playlist (default is alphabetical)\n`removeduplicates`: remove all duplicates from the playlist\n`description <text>`: describe this playlist\n`cover <url>`: set the cover for this playlist\n`rebuild`: clean the playlist by removing broken videos\n\n`abort`: return to main screen"
+        extras_string = "\n".join([
+            "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)",
+            "",
+            "**Extra functions:**",
+            "`sort <alphabetical | length | random>`: sort the playlist (default is alphabetical)",
+            "`removeduplicates`: remove all duplicates from the playlist",
+            "`description <text>`: describe this playlist",
+            "`cover [url]`: set the cover for this playlist (you may upload an image via Discord)",
+            "`rebuild`: clean the playlist by removing broken videos",
+            "",
+            "`abort`: return to main screen"
+        ])
 
         playlist = self.playlists.get_playlist(_savename, player.playlist)
         interface_message = None
@@ -597,7 +616,11 @@ class PlaylistCommands:
                     entry = playlist["entries"].pop(index)
 
                     print("starting entry editor")
-                    new_entry = await self.entry_manipulator(player, channel, author, entry) or entry
+                    new_entry = await self.entry_manipulator(player, channel, author, user_savename, entry) or entry
+                    print("closed entry editor")
+
+                    if entry is not new_entry:
+                        pl_changes["changed_entries"].add((index, new_entry))
 
                     playlist["entries"].insert(index, new_entry)
 
@@ -712,23 +735,28 @@ class PlaylistCommands:
                             pl_changes["new_desc"] = desc
                         else:
                             msg = await self.safe_send_message(channel, "**Please provide a description**")
-                            asyncio.sleep(4)
+                            await asyncio.sleep(4)
                             await self.safe_delete_message(msg)
-                            continue
                     elif cmd == "cover":
-                        if not args:
-                            msg = await self.safe_send_message(channel, "**Please provide an url**")
-                            asyncio.sleep(4)
+                        if not (args or resp.attachments):
+                            msg = await self.safe_send_message(channel, "**Please provide an image**")
+                            await asyncio.sleep(4)
                             await self.safe_delete_message(msg)
-                            continue
-                        url = args[0].strip()
-                        if is_image(url):
-                            pl_changes["new_cover"] = url
                         else:
-                            msg = await self.safe_send_message(channel, "**This isn't an image**")
-                            asyncio.sleep(4)
-                            await self.safe_delete_message(msg)
-                            continue
+                            url = args[0].strip() if args else resp.attachments[
+                                0]
+                            if is_image(url):
+                                finite_url = await upload_playlist_cover(self.loop, user_savename, url)
+                                if finite_url:
+                                    pl_changes["new_cover"] = finite_url
+                                else:
+                                    msg = await self.safe_send_message(channel, "**Something went wrong**")
+                                    await asyncio.sleep(4)
+                                    await self.safe_delete_message(msg)
+                            else:
+                                msg = await self.safe_send_message(channel, "**This isn't an image**")
+                                await asyncio.sleep(4)
+                                await self.safe_delete_message(msg)
 
                 await self.safe_delete_message(extras_message)
                 await self.safe_delete_message(resp)
@@ -746,6 +774,9 @@ class PlaylistCommands:
         await self.safe_delete_message(interface_message)
 
         if abort:
+            if new_playlist:
+                self.playlists.remove_playlist(savename)
+
             return Response("Closed *****REMOVED******REMOVED***** without saving".format(savename))
             print("Closed the playlist builder")
 
@@ -761,17 +792,23 @@ class PlaylistCommands:
                         ["    `***REMOVED******REMOVED***.` ***REMOVED******REMOVED***".format(ind + 1, nice_cut(entry.title, 40)) for ind, entry in pl_changes["remove_entries"]])
                     c_log += "**Removed entries**\n***REMOVED******REMOVED***\n".format(
                         removed_entries_string)
+                if pl_changes["changed_entries"]:
+                    changed_entries_string = "\n".join(
+                        ["    `***REMOVED******REMOVED***.` ***REMOVED******REMOVED***".format(ind + 1, nice_cut(entry.title, 40)) for ind, entry in pl_changes["changed_entries"]])
+
+                    c_log += "**Edited entries**\n***REMOVED******REMOVED***\n".format(
+                        changed_entries_string)
                 if pl_changes["order"]:
-                    c_log += "**Changed order**\n    To `***REMOVED******REMOVED***`".format(
+                    c_log += "**Changed order**\n    To `***REMOVED******REMOVED***`\n".format(
                         pl_changes["order"])
                 if pl_changes["new_name"]:
-                    c_log += "**Renamed playlist**\n    From `***REMOVED******REMOVED***` to `***REMOVED******REMOVED***`".format(
+                    c_log += "**Renamed playlist**\n    From `***REMOVED******REMOVED***` to `***REMOVED******REMOVED***`\n".format(
                         savename.title(), pl_changes["new_name"].title())
                 if pl_changes["new_desc"]:
-                    c_log += "**Changed description**\n    To `***REMOVED******REMOVED***`".format(
+                    c_log += "**Changed description**\n    To `***REMOVED******REMOVED***`\n".format(
                         pl_changes["new_desc"])
                 if pl_changes["new_cover"]:
-                    c_log += "**Changed cover**\n    To `***REMOVED******REMOVED***`".format(
+                    c_log += "**Changed cover**\n    To `***REMOVED******REMOVED***`\n".format(
                         pl_changes["new_cover"])
             else:
                 c_log = "No changes were made"
@@ -789,7 +826,7 @@ class PlaylistCommands:
             return Response("Successfully saved *****REMOVED******REMOVED*****\n\n***REMOVED******REMOVED***".format(
                 user_savename.replace("_", " ").title(), c_log))
 
-    async def entry_manipulator(self, player, channel, author, entry):
+    async def entry_manipulator(self, player, channel, author, playlist_name, entry):
         def get_entry_type(fields):
             keys = fields.keys()
 
@@ -818,7 +855,7 @@ class PlaylistCommands:
 
             if entry_type is SpotifyEntry:
                 title = fields["title"]
-                duration = fields["duration"]
+                duration = fields["_duration"]
                 album = fields["album"]
                 artist = fields["artist"]
                 artist_image = fields["artist_image_url"]
@@ -969,7 +1006,7 @@ class PlaylistCommands:
 
             responsible_text, property_target = (
                 [(k, t) for k, t in targets.items() if _rest.lower().startswith(k)] or (("", None),))[0]
-            rest = _rest[len(responsible_text):]
+            rest = _rest[len(responsible_text):].strip()
 
             if command == "set":
                 if property_target:
@@ -977,10 +1014,17 @@ class PlaylistCommands:
                         if property_target == "sub_queue":
                             error = "You can't set timestamps like this"
                         else:
-                            if property_target not in ("cover_url", "thumbnail", "artist_image_url") or is_image(rest):
-                                entry_fields[property_target] = rest
+                            if property_target in ("cover_url", "thumbnail", "artist_image_url"):
+                                if is_image(rest):
+                                    url = await upload_song_image(self.loop, playlist_name, "***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(entry_fields["_video_id"], property_target), rest)
+                                    if url:
+                                        entry_fields[property_target] = url
+                                    else:
+                                        error = "Something went wrong with this image."
+                                else:
+                                    error = "That's not an image!"
                             else:
-                                error = "That's not an image!"
+                                entry_fields[property_target] = rest
                     else:
                         error = "Please also provide some text"
                 else:

@@ -102,6 +102,7 @@ class Playlists:
 
         if not self.playlists.has_section(name):
             self.playlists.add_section(name)
+
         self.playlists.set(
             name, "location", self.playlist_save_location + str(name) + ".gpl")
         self.playlists.set(name, "author", str(author_id))
