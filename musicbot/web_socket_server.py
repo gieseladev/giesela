@@ -254,6 +254,6 @@ class WebAuthor:
             "id": self.id,
             "name": self.name,
             "display_name": self.display_name,
-            "avatar_url": self.avatar_url,
+            "avatar_url": self.avatar_url.replace(".webp", ".png"),
             "colour": self.colour
         }

@@ -333,7 +333,7 @@ def clean_songname(query):
     return query.strip(" -&,")
 
 
-def timestamp_to_queue(timestamps):
+def timestamp_to_queue(timestamps, song_dur):
     queue = []
     entries = sorted(list(timestamps.keys()))
     for index, key in enumerate(entries):
@@ -390,7 +390,7 @@ def get_video_sub_queue(description, video_id, song_dur):
     if not timestamps:
         return None
 
-    return timestamp_to_queue(timestamps)
+    return timestamp_to_queue(timestamps, song_dur)
 
 
 def get_video_timestamps(description, video_id, song_dur=None):
