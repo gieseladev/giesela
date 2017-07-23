@@ -1,10 +1,10 @@
 [
 	***REMOVED***
 		"version": 100,
-		"type": "YoutubeEntry",
+		"type": "SpotifyEntry",
 		"video_id": "mCI2fnmK6wk",
 		"url": "https://www.youtube.com/watch?v=mCI2fnmK6wk",
-		"title": "'In My World' Ao No Exorcist   The Blue Exorcist Full Original",
+		"title": "ROOKiEZ is PUNK'D - In My World",
 		"duration": 203,
 		"thumbnail": "https://i.ytimg.com/vi/mCI2fnmK6wk/maxresdefault.jpg",
 		"description": "",
@@ -16,14 +16,69 @@
 					"index": 0
 				***REMOVED***
 			***REMOVED***
+		***REMOVED***,
+		"spotify_data": ***REMOVED***
+			"id": "custom",
+			"name": "In My World",
+			"artists": [
+				***REMOVED***
+					"id": "custom",
+					"name": "ROOKiEZ is PUNK'D",
+					"images": [
+						***REMOVED***
+							"url": "http://i.imgur.com/ceNNA5m.jpg"
+						***REMOVED***
+					],
+					"genres": [
+						"custom"
+					],
+					"popularity": 0.5,
+					"uri": "custom",
+					"href": "custom"
+				***REMOVED***
+			],
+			"artist": "ROOKiEZ is PUNK'D",
+			"cover_url": "http://i.imgur.com/yqt7jdc.jpg",
+			"duration": 203,
+			"album": ***REMOVED***
+				"id": "custom",
+				"name": "Ao no Exorcist",
+				"artists": [
+					***REMOVED***
+						"id": "custom",
+						"name": "ROOKiEZ is PUNK'D",
+						"images": [
+							***REMOVED***
+								"url": "http://i.imgur.com/ceNNA5m.jpg"
+							***REMOVED***
+						],
+						"genres": [
+							"custom"
+						],
+						"popularity": 0.5,
+						"uri": "custom",
+						"href": "custom"
+					***REMOVED***
+				],
+				"images": [
+					***REMOVED***
+						"url": "http://i.imgur.com/yqt7jdc.jpg"
+					***REMOVED***
+				],
+				"uri": "custom"
+			***REMOVED***,
+			"popularity": 0.5,
+			"uri": "custom",
+			"query": null,
+			"certainty": 1
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
 		"version": 100,
-		"type": "YoutubeEntry",
+		"type": "SpotifyEntry",
 		"video_id": "7Ww0IJgUTDw",
 		"url": "https://www.youtube.com/watch?v=7Ww0IJgUTDw",
-		"title": "10. Blood History - Accel World OST",
+		"title": "Hiroyuki Oshima - Blood History",
 		"duration": 109,
 		"thumbnail": "https://i.ytimg.com/vi/7Ww0IJgUTDw/maxresdefault.jpg",
 		"description": "Accel World OST/Original Soundtrack - 10. Blood History\nArtist: Hiroyuki Oshima",
@@ -35,6 +90,61 @@
 					"index": 1
 				***REMOVED***
 			***REMOVED***
+		***REMOVED***,
+		"spotify_data": ***REMOVED***
+			"id": "custom",
+			"name": "Blood History",
+			"artists": [
+				***REMOVED***
+					"id": "custom",
+					"name": "Hiroyuki Oshima",
+					"images": [
+						***REMOVED***
+							"url": "http://i.imgur.com/DQqDLse.jpg"
+						***REMOVED***
+					],
+					"genres": [
+						"custom"
+					],
+					"popularity": 0.5,
+					"uri": "custom",
+					"href": "custom"
+				***REMOVED***
+			],
+			"artist": "Hiroyuki Oshima",
+			"cover_url": "http://i.imgur.com/JFlbk99.jpg",
+			"duration": 109,
+			"album": ***REMOVED***
+				"id": "custom",
+				"name": "Accel World OST",
+				"artists": [
+					***REMOVED***
+						"id": "custom",
+						"name": "Hiroyuki Oshima",
+						"images": [
+							***REMOVED***
+								"url": "http://i.imgur.com/DQqDLse.jpg"
+							***REMOVED***
+						],
+						"genres": [
+							"custom"
+						],
+						"popularity": 0.5,
+						"uri": "custom",
+						"href": "custom"
+					***REMOVED***
+				],
+				"images": [
+					***REMOVED***
+						"url": "http://i.imgur.com/JFlbk99.jpg"
+					***REMOVED***
+				],
+				"uri": "custom"
+			***REMOVED***,
+			"popularity": 0.5,
+			"uri": "custom",
+			"query": null,
+			"certainty": 1
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
@@ -562,25 +672,6 @@
 	***REMOVED***
 		"version": 100,
 		"type": "YoutubeEntry",
-		"video_id": "1R80SH4VVLA",
-		"url": "https://www.youtube.com/watch?v=1R80SH4VVLA",
-		"title": "\"BYE BYE YESTERDAY\" Full Japanese + English Lyrics (Assassination Classroom/Ansatsu Kyoushitsu \u6697\u6bba\u6559\u5ba4)",
-		"duration": 249,
-		"thumbnail": "https://i.ytimg.com/vi/1R80SH4VVLA/maxresdefault.jpg",
-		"description": "The final opening song of Assassination Classroom! Enjoy!\nAssassination Classroom full opening lyrics\nBYE BYE YESTERDAY",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"name": "simonisanerd",
-					"index": 14
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 100,
-		"type": "YoutubeEntry",
 		"video_id": "2Z5P3pMmXYQ",
 		"url": "https://www.youtube.com/watch?v=2Z5P3pMmXYQ",
 		"title": "BoA \u300cMASAYUME CHASING\u300dfull song eng sub",
@@ -597,7 +688,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 15
+					"index": 14
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -616,7 +707,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 16
+					"index": 15
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -640,7 +731,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 17
+					"index": 16
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -659,7 +750,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 18
+					"index": 17
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -683,7 +774,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 19
+					"index": 18
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -702,7 +793,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 20
+					"index": 19
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -817,7 +908,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 21
+					"index": 20
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -841,7 +932,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 22
+					"index": 21
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -860,7 +951,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 23
+					"index": 22
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -950,7 +1041,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 24
+					"index": 23
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -974,7 +1065,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 25
+					"index": 24
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -993,7 +1084,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 26
+					"index": 25
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1012,7 +1103,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 27
+					"index": 26
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1036,7 +1127,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 28
+					"index": 27
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1060,7 +1151,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 29
+					"index": 28
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1084,7 +1175,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 30
+					"index": 29
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1103,7 +1194,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 31
+					"index": 30
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1122,7 +1213,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 32
+					"index": 31
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1141,7 +1232,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 33
+					"index": 32
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1160,7 +1251,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 34
+					"index": 33
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1179,7 +1270,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 35
+					"index": 34
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1198,7 +1289,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 36
+					"index": 35
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1217,7 +1308,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 37
+					"index": 36
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1236,7 +1327,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 38
+					"index": 37
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1255,7 +1346,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 39
+					"index": 38
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1274,7 +1365,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 40
+					"index": 39
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1293,7 +1384,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 41
+					"index": 40
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1317,7 +1408,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 42
+					"index": 41
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1336,7 +1427,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 43
+					"index": 42
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1355,7 +1446,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 44
+					"index": 43
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1374,7 +1465,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 45
+					"index": 44
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1393,7 +1484,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 46
+					"index": 45
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1412,7 +1503,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 47
+					"index": 46
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1431,7 +1522,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 48
+					"index": 47
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1521,7 +1612,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 49
+					"index": 48
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1662,7 +1753,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 50
+					"index": 49
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1785,7 +1876,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 51
+					"index": 50
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1809,7 +1900,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 52
+					"index": 51
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1923,7 +2014,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 53
+					"index": 52
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1942,7 +2033,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 54
+					"index": 53
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1961,7 +2052,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 55
+					"index": 54
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2071,7 +2162,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 56
+					"index": 55
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2090,7 +2181,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 57
+					"index": 56
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2202,7 +2293,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 58
+					"index": 57
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2314,7 +2405,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 59
+					"index": 58
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2338,7 +2429,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 60
+					"index": 59
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2357,7 +2448,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 61
+					"index": 60
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2381,7 +2472,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 62
+					"index": 61
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2473,7 +2564,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 63
+					"index": 62
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2492,7 +2583,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 64
+					"index": 63
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2516,7 +2607,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 65
+					"index": 64
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2535,7 +2626,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 66
+					"index": 65
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2554,7 +2645,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 67
+					"index": 66
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2573,7 +2664,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 68
+					"index": 67
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2691,7 +2782,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 69
+					"index": 68
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2808,7 +2899,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 70
+					"index": 69
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2827,7 +2918,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 71
+					"index": 70
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2851,7 +2942,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 72
+					"index": 71
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2875,7 +2966,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 73
+					"index": 72
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2899,7 +2990,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 74
+					"index": 73
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2923,7 +3014,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 75
+					"index": 74
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3046,7 +3137,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 76
+					"index": 75
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3070,7 +3161,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 77
+					"index": 76
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3089,7 +3180,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 78
+					"index": 77
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3113,7 +3204,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 79
+					"index": 78
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3137,7 +3228,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 80
+					"index": 79
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3249,7 +3340,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 81
+					"index": 80
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3361,7 +3452,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 82
+					"index": 81
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3478,7 +3569,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 83
+					"index": 82
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3497,7 +3588,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 84
+					"index": 83
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3521,7 +3612,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 85
+					"index": 84
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3545,7 +3636,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 86
+					"index": 85
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3569,7 +3660,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 87
+					"index": 86
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3588,7 +3679,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 88
+					"index": 87
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3728,7 +3819,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 89
+					"index": 88
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3747,7 +3838,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 90
+					"index": 89
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3766,7 +3857,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 91
+					"index": 90
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3785,7 +3876,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 92
+					"index": 91
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3804,7 +3895,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 93
+					"index": 92
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3828,7 +3919,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 94
+					"index": 93
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3847,7 +3938,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 95
+					"index": 94
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3871,7 +3962,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 96
+					"index": 95
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3890,7 +3981,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 97
+					"index": 96
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -4005,7 +4096,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 98
+					"index": 97
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4024,7 +4115,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 99
+					"index": 98
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -4136,7 +4227,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 100
+					"index": 99
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4155,7 +4246,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 101
+					"index": 100
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4174,7 +4265,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 102
+					"index": 101
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4193,7 +4284,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 103
+					"index": 102
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4212,7 +4303,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 104
+					"index": 103
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4231,7 +4322,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 105
+					"index": 104
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4250,7 +4341,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 106
+					"index": 105
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4274,7 +4365,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 107
+					"index": 106
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4293,17 +4384,17 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 108
+					"index": 107
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
 		"version": 100,
-		"type": "TimestampEntry",
+		"type": "SpotifyEntry",
 		"video_id": "C-o8pTi6vd8",
 		"url": "https://www.youtube.com/watch?v=C-o8pTi6vd8",
-		"title": "\uff1c\u30ce\u30e9\u30ac\u30dfARAGOTO\uff1eOP\u30c6\u30fc\u30de  THE ORAL CIGARETTES\u300c\u72c2\u4e71 Hey Kids!!\u300dMusicVideo",
+		"title": "The Oral Cigarettes - Hey Kids",
 		"duration": 266,
 		"thumbnail": "https://i.ytimg.com/vi/C-o8pTi6vd8/hqdefault.jpg",
 		"description": "\uff1c\u30ce\u30e9\u30ac\u30dfARAGOTO\uff1eOP\u30c6\u30fc\u30de THE ORAL CIGARETTES\u300c\u72c2\u4e71 Hey Kids!!\u300d\n2015.11.11Release!!\n\n\u25bc\u53ce\u9332\u66f2\nM1. \u72c2\u4e71 Hey Kids!!\nM2.\u30ad\u30a8\u30bf\u30df\u30bf\u30a4\nM3. LIPS\nM4. \u72c2\u4e71 Hey Kids!! (Instrumental)\n\u203bM4.\u306f\u901a\u5e38\u76e4\u306e\u307f\n\n\u25ce\u521d\u56de\u76e4\u7279\u5178DVD\u53ce\u9332\u5185\u5bb9\nTHE ORAL CIGARETTES \u5507\u30ef\u30f3\u30de\u30f3 2015 SPRING\n\uff5e\u4e0a\u4eac1\u5468\u5e74\u8a18\u5ff5\u3001\u5730\u5143\u95a2\u897f\u306a\u3093\u3070\u30cf\u30c3\u30c1\u30e3\u3051\u308b\u305c\u306e\u5dfb\uff5e\u3088\u308a5\u66f2\u3092\u53ce\u9332\n\uff11\uff0eSTARGET\n\uff12\uff0e\u30e2\u30f3\u30b9\u30bf\u30fc\u30a8\u30d5\u30a7\u30af\u30c8\n\uff13\uff0eSee the lights\n\uff14\uff0emist...\n\uff15\uff0e\u8d77\u6b7b\u56de\u751fSTORY\n\n\u25ce\u901a\u5e38\u76e4\uff08\u521d\u56de\u30d7\u30ec\u30b9\u5206\u306e\u307f\uff09\n\u300c\u30ce\u30e9\u30ac\u30dfARAGOTO\u300d\u63cf\u304d\u4e0b\u308d\u3057\u30a4\u30e9\u30b9\u30c8\u30ef\u30a4\u30c9\u30ad\u30e3\u30c3\u30d7\u30b9\u30c6\u30c3\u30ab\u30fc\n\n\u25c6\u30c6\u30ec\u30d3\u30a2\u30cb\u30e1 \u300c\u30ce\u30e9\u30ac\u30dfARAGOTO\u300d\n\uff0810\u67082\u65e5\uff5eTOKYO MX\u30fbMBS\u30fbBS\u30d5\u30b8\u4ed6\u306b\u3066\u653e\u9001\uff09\n\n\u25c6LIVE\n\u300cTHE ORAL CIGARETTES\u5507\u30ea\u30d9\u30f3\u30b8\u30ef\u30f3\u30de\u30f3 \uff5e\u5fa9\u6d3b\u30fb\u8fd4\u4e0a\u30fbBKW!!\u306e\u5dfb\uff5e\u300d\n2016\u5e741\u67084\u65e5\uff08\u6708\uff09 \u6771\u4eac\u3000Zepp DiverCity\nOPEN 17:00 / START 18:00\n\u4e00\u822c\u767a\u58f2\u65e5\uff1a2015\u5e7411\u67087\u65e5\uff08\u571f\uff09\n\n\u300cTHE ORAL CIGARETTES \u5507\u30c4\u30fc\u30de\u30f3 TOUR 2016 \uff5e\u5fa9\u6d3b\u30fb\u6fc0\u7a81\u30fbBKW!!\u306e\u5dfb\uff5e\u300d\n2016\u5e742\u67088\u65e5\uff08\u6708\uff09\u3000\u4eac\u90fd\u3000MUSE\n2016\u5e742\u670811\u65e5\uff08\u6728\u30fb\u795d\uff09\u3000\u9ad8\u677e\u3000MONSTER\n2016\u5e742\u670812\u65e5\uff08\u91d1\uff09\u3000\u5e83\u5cf6\u3000CLUB QUATTRO\n2016\u5e742\u670814\u65e5\uff08\u65e5\uff09\u3000\u798f\u5ca1\u3000DRUM LOGOS\n2016\u5e742\u670819\u65e5\uff08\u91d1\uff09\u3000\u4ed9\u53f0\u3000RENSA\n2016\u5e742\u670821\u65e5\uff08\u65e5\uff09\u3000\u672d\u5e4c\u3000PENNY LANE\n2016\u5e743\u67085\u65e5\uff08\u571f\uff09\u3000  \u65b0\u6f5f\u3000LOTS\n2016\u5e743\u670811\u65e5\uff08\u91d1\uff09\u3000\u5927\u962a\u3000ZEPP NAMBA\n2016\u5e743\u670813\u65e5\uff08\u65e5\uff09\u3000\u611b\u77e5\u3000ZEPP NAGOYA\n2016\u5e743\u670820\u65e5\uff08\u65e5\uff09\u3000\u6771\u4eac\u3000STUDIO COAST\n\u524d\u58f2\u30c1\u30b1\u30c3\u30c8\uff1a\uffe53,500\uff08\u7a0e\u8fbc\u30fb\u30c9\u30ea\u30f3\u30af\u4ee3\u5225\u9014\u5fc5\u8981\uff09\n\u4e00\u822c\u767a\u58f2\u65e5\uff1a12\u670812\u65e5 \uff08\u571f\uff09",
@@ -4312,19 +4403,65 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 109
+					"index": 108
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
-		"sub_queue": [
-			***REMOVED***
-				"name": "OPEN 17:00 / START",
-				"duration": -814,
-				"start": 1080,
-				"index": 0,
-				"end": 266
-			***REMOVED***
-		]
+		"spotify_data": ***REMOVED***
+			"id": "custom",
+			"name": "Hey Kids",
+			"artists": [
+				***REMOVED***
+					"id": "custom",
+					"name": "The Oral Cigarettes",
+					"images": [
+						***REMOVED***
+							"url": "http://i.imgur.com/HigkKjz.jpg"
+						***REMOVED***
+					],
+					"genres": [
+						"custom"
+					],
+					"popularity": 0.5,
+					"uri": "custom",
+					"href": "custom"
+				***REMOVED***
+			],
+			"artist": "The Oral Cigarettes",
+			"cover_url": "http://i.imgur.com/WfW0mpe.jpg",
+			"duration": 266,
+			"album": ***REMOVED***
+				"id": "custom",
+				"name": "FIXION",
+				"artists": [
+					***REMOVED***
+						"id": "custom",
+						"name": "The Oral Cigarettes",
+						"images": [
+							***REMOVED***
+								"url": "http://i.imgur.com/HigkKjz.jpg"
+							***REMOVED***
+						],
+						"genres": [
+							"custom"
+						],
+						"popularity": 0.5,
+						"uri": "custom",
+						"href": "custom"
+					***REMOVED***
+				],
+				"images": [
+					***REMOVED***
+						"url": "http://i.imgur.com/WfW0mpe.jpg"
+					***REMOVED***
+				],
+				"uri": "custom"
+			***REMOVED***,
+			"popularity": 0.5,
+			"uri": "custom",
+			"query": null,
+			"certainty": 1
+		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
 		"version": 100,
@@ -4345,7 +4482,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 110
+					"index": 109
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4364,7 +4501,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 111
+					"index": 110
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4388,7 +4525,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 112
+					"index": 111
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4412,7 +4549,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 113
+					"index": 112
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4436,7 +4573,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 114
+					"index": 113
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4460,7 +4597,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 115
+					"index": 114
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
