@@ -3,11 +3,9 @@ youtube_dl
 pip
 cffi==1.6.0; sys_platform == 'win32'
 
-parsedatetime
+imgurpython
 spotipy
-openpyxl
 newspaper3k
 pillow==4.0.0
 moviepy
-wikipedia
 aiohttp

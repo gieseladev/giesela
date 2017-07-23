@@ -7,7 +7,7 @@ from discord import Embed
 from ..constants import VERSION as BOTVERSION
 from ..tungsten import Tungsten
 from ..utils import (Response, block_user, command_info, get_dev_changelog,
-                     get_dev_version, hex_to_dec, owner_only)
+                     get_dev_version, hex_to_dec, owner_only, prettydate)
 
 
 class InfoCommands:
@@ -166,7 +166,8 @@ class InfoCommands:
             await self.send_message(channel, embed=em)
 
     @command_info("3.4.0", 1497533758, ***REMOVED***
-        "3.4.8": (1497650090, "When showing changelogs, two logs can't be on the same line anymore")
+        "3.4.8": (1497650090, "When showing changelogs, two logs can't be on the same line anymore"),
+        "4.1.4": (1500795125, "Displaying the timestamp in a better way.")
     ***REMOVED***)
     async def cmd_commandinfo(self, command):
         """
@@ -185,14 +186,15 @@ class InfoCommands:
             em = Embed(title=command.upper(), colour=hex_to_dec("#ffd700"))
             em.add_field(
                 name="Version `***REMOVED******REMOVED***`".format(c_info.version),
-                value="`***REMOVED******REMOVED***`\nCommand has been added".format(c_info.timestamp),
+                value="`***REMOVED******REMOVED***`\nCommand has been added".format(
+                    prettydate(c_info.timestamp)),
                 inline=False)
 
             for cl in c_info.changelog:
                 v, t, l = cl
                 em.add_field(
                     name="Version `***REMOVED******REMOVED***`".format(v),
-                    value="`***REMOVED******REMOVED***`\n***REMOVED******REMOVED***".format(t, l),
+                    value="`***REMOVED******REMOVED***`\n***REMOVED******REMOVED***".format(prettydate(t), l),
                     inline=False)
 
             return Response(embed=em)
