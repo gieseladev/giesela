@@ -13,6 +13,7 @@ from ..utils import (Response, block_user, clean_songname, command_info,
 
 
 class ToolCommands:
+
     @block_user
     async def cmd_reminder(self, channel, author, player, server, leftover_args):
         """
@@ -337,7 +338,7 @@ class ToolCommands:
         """
 
         if not author.voice_channel:
-            raise exceptions.CommandError('You are not in a voice channel!')
+            raise exceptions.CommandError("You are not in a voice channel!")
 
         voice_client = self.the_voice_clients.get(channel.server.id, None)
         if voice_client and voice_client.channel.server == author.voice_channel.server:
@@ -533,7 +534,7 @@ class ToolCommands:
         await self.send_file(
             author,
             open("cache/last_data.xlsx", "rb"),
-            filename='%s-msgs.xlsx' % (server.name.replace(' ', '_')))
+            filename="%s-msgs.xlsx" % (server.name.replace(" ", "_")))
 
     async def cmd_archivechat(self, server, author, message, placeholder=None, number=1000000):
         if message.channel_mentions is None or len(
@@ -555,7 +556,7 @@ class ToolCommands:
         await self.send_file(
             author,
             open("cache/last_message_archive.json", "rb"),
-            filename='%s-msg-archive.json' % (server.name.replace(' ', '_')))
+            filename="%s-msg-archive.json" % (server.name.replace(" ", "_")))
 
     @owner_only
     async def cmd_surveyserver(self, server):
@@ -584,7 +585,7 @@ class ToolCommands:
         await self.send_file(
             author,
             open("cache/last_survey_data.xlsx", "rb"),
-            filename='%s-survey.xlsx' % (server.name.replace(' ', '_')))
+            filename="%s-survey.xlsx" % (server.name.replace(" ", "_")))
         return Response("There you go, fam")
 
     @owner_only

@@ -263,7 +263,7 @@ class StreamEntry(BaseEntry):
 
             raise ExtractionError(e)
         else:
-            self.filename = result['url']
+            self.filename = result["url"]
             # I might need some sort of events or hooks or shit
             # for when ffmpeg inevitebly fucks up and i have to restart
             # although maybe that should be at a slightly lower level
@@ -500,23 +500,23 @@ class YoutubeEntry(BaseEntry):
             if self.expected_filename is None:
                 self.expected_filename = slugify("unknown" + self.title)
 
-            extractor = os.path.basename(self.expected_filename).split('-')[0]
+            extractor = os.path.basename(self.expected_filename).split("-")[0]
 
             # the generic extractor requires special handling
-            if extractor == 'generic':
+            if extractor == "generic":
                 # print("Handling generic")
                 flistdir = [
-                    f.rsplit('-', 1)[0]
+                    f.rsplit("-", 1)[0]
                     for f in os.listdir(self.download_folder)
                 ]
                 expected_fname_noex, fname_ex = os.path.basename(
-                    self.expected_filename).rsplit('.', 1)
+                    self.expected_filename).rsplit(".", 1)
 
                 if expected_fname_noex in flistdir:
                     try:
                         rsize = int(
                             await get_header(self.queue.bot.aiosession,
-                                             self.url, 'CONTENT-LENGTH'))
+                                             self.url, "CONTENT-LENGTH"))
                     except:
                         rsize = 0
 
@@ -540,9 +540,9 @@ class YoutubeEntry(BaseEntry):
 
             else:
                 ldir = os.listdir(self.download_folder)
-                flistdir = [f.rsplit('.', 1)[0] for f in ldir]
+                flistdir = [f.rsplit(".", 1)[0] for f in ldir]
                 expected_fname_base = os.path.basename(self.expected_filename)
-                expected_fname_noex = expected_fname_base.rsplit('.', 1)[0]
+                expected_fname_noex = expected_fname_base.rsplit(".", 1)[0]
 
                 # idk wtf this is but its probably legacy code
                 # or i have youtube to blame for changing shit again
@@ -558,8 +558,8 @@ class YoutubeEntry(BaseEntry):
                         self.download_folder,
                         ldir[flistdir.index(expected_fname_noex)])
                     print("Expected %s, got %s" %
-                          (self.expected_filename.rsplit('.', 1)[-1],
-                           self.filename.rsplit('.', 1)[-1]))
+                          (self.expected_filename.rsplit(".", 1)[-1],
+                           self.filename.rsplit(".", 1)[-1]))
 
                 else:
                     await self._really_download()
@@ -597,7 +597,7 @@ class YoutubeEntry(BaseEntry):
             # ensure uniqueness
             self.filename = md5sum(
                 unhashed_fname,
-                8).join('-.').join(unhashed_fname.rsplit('.', 1))
+                8).join("-.").join(unhashed_fname.rsplit(".", 1))
 
             if os.path.isfile(self.filename):
                 # Oh bother it was actually there.

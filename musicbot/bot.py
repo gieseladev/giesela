@@ -61,7 +61,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
         self.blacklist = set(load_file(self.config.blacklist_file))
         self.autoplaylist = load_file(self.config.auto_playlist_file)
-        self.downloader = downloader.Downloader(download_folder='audio_cache')
+        self.downloader = downloader.Downloader(download_folder="audio_cache")
         self.calendar = Calendar(self)
 
         self.exit_signal = None
@@ -76,12 +76,12 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             print("Warning: Autoplaylist is empty, disabling.")
             self.config.auto_playlist = False
 
-        ssd_defaults = {'last_np_msg': None, 'auto_paused': False}
+        ssd_defaults = {"last_np_msg": None, "auto_paused": False}
         self.server_specific_data = defaultdict(lambda: dict(ssd_defaults))
 
         super().__init__()
         self.aiosession = aiohttp.ClientSession(loop=self.loop)
-        self.http.user_agent += ' MusicBot/%s' % BOTVERSION
+        self.http.user_agent += " Giesela/%s" % BOTVERSION
         self.instant_translate = False
         self.instant_translate_mode = 1
         self.instant_translate_certainty = .7
@@ -90,7 +90,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
     @staticmethod
     def _fixg(x, dp=2):
-        return ('{:.%sf}' % dp).format(x).rstrip('0').rstrip('.')
+        return ("{:.%sf}" % dp).format(x).rstrip("0").rstrip(".")
 
     def _get_owner(self, voice=False):
         if voice:
@@ -109,13 +109,13 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             return True
         except:
             try:
-                os.rename(path, path + '__')
+                os.rename(path, path + "__")
             except:
                 return False
             try:
                 shutil.rmtree(path)
             except:
-                os.rename(path + '__', path)
+                os.rename(path + "__", path)
                 return False
 
         return True
@@ -196,17 +196,17 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         if isinstance(channel, Object):
             channel = self.get_channel(channel.id)
 
-        if getattr(channel, 'type', ChannelType.text) != ChannelType.voice:
-            raise AttributeError('Channel passed must be a voice channel')
+        if getattr(channel, "type", ChannelType.text) != ChannelType.voice:
+            raise AttributeError("Channel passed must be a voice channel")
 
         with await self.voice_client_connect_lock:
             server = channel.server
             if server.id in self.the_voice_clients:
                 return self.the_voice_clients[server.id]
 
-            s_id = self.ws.wait_for('VOICE_STATE_UPDATE',
-                                    lambda d: d.get('user_id') == self.user.id)
-            _voice_data = self.ws.wait_for('VOICE_SERVER_UPDATE',
+            s_id = self.ws.wait_for("VOICE_STATE_UPDATE",
+                                    lambda d: d.get("user_id") == self.user.id)
+            _voice_data = self.ws.wait_for("VOICE_SERVER_UPDATE",
                                            lambda d: True)
 
             await self.ws.voice_state(server.id, channel.id)
@@ -215,15 +215,15 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 s_id, timeout=10, loop=self.loop)
             voice_data = await asyncio.wait_for(
                 _voice_data, timeout=10, loop=self.loop)
-            session_id = s_id_data.get('session_id')
+            session_id = s_id_data.get("session_id")
 
             kwargs = {
-                'user': self.user,
-                'channel': channel,
-                'data': voice_data,
-                'loop': self.loop,
-                'session_id': session_id,
-                'main_ws': self.ws
+                "user": self.user,
+                "channel": channel,
+                "data": voice_data,
+                "loop": self.loop,
+                "session_id": session_id,
+                "main_ws": self.ws
             }
             voice_client = VoiceClient(**kwargs)
             self.the_voice_clients[server.id] = voice_client
@@ -318,20 +318,20 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         if isinstance(channel, Object):
             channel = self.get_channel(channel.id)
 
-        if getattr(channel, 'type', ChannelType.text) != ChannelType.voice:
-            raise AttributeError('Channel passed must be a voice channel')
+        if getattr(channel, "type", ChannelType.text) != ChannelType.voice:
+            raise AttributeError("Channel passed must be a voice channel")
 
         # I'm not sure if this lock is actually needed
         with await self.voice_client_move_lock:
             server = channel.server
 
             payload = {
-                'op': 4,
-                'd': {
-                    'guild_id': server.id,
-                    'channel_id': channel.id,
-                    'self_mute': mute,
-                    'self_deaf': deaf
+                "op": 4,
+                "d": {
+                    "guild_id": server.id,
+                    "channel_id": channel.id,
+                    "self_mute": mute,
+                    "self_deaf": deaf
                 }
             }
 
@@ -348,19 +348,19 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                         channel.server)
                 else:
                     raise exceptions.CommandError(
-                        'The bot is not in a voice channel.  '
-                        'Use %ssummon to summon it to your voice channel.' %
+                        "The bot is not in a voice channel.  "
+                        "Use %ssummon to summon it to your voice channel." %
                         self.config.command_prefix)
 
             voice_client = await self.get_voice_client(channel)
 
             player = MusicPlayer(self, voice_client) \
-                .on('play', self.on_player_play) \
-                .on('resume', self.on_player_resume) \
-                .on('pause', self.on_player_pause) \
-                .on('stop', self.on_player_stop) \
-                .on('finished-playing', self.on_player_finished_playing) \
-                .on('entry-added', self.on_player_entry_added)
+                .on("play", self.on_player_play) \
+                .on("resume", self.on_player_resume) \
+                .on("pause", self.on_player_pause) \
+                .on("stop", self.on_player_stop) \
+                .on("finished-playing", self.on_player_finished_playing) \
+                .on("entry-added", self.on_player_entry_added)
 
             self.players[server.id] = player
 
@@ -384,7 +384,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                     if lmsg != last_np_msg and last_np_msg:
                         await self.safe_delete_message(last_np_msg)
                         self.server_specific_data[channel.server][
-                            'last_np_msg'] = None
+                            "last_np_msg"] = None
                     break  # This is probably redundant
 
             if isinstance(entry, TimestampEntry):
@@ -447,7 +447,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                                    self.autoplaylist)
                         continue
 
-                    if info.get('entries', None):  # or .get('_type', '') == 'playlist'
+                    if info.get("entries", None):  # or .get("_type", "") == "playlist"
                         pass  # Wooo playlist
                         # Blarg how do I want to do this
 
@@ -667,7 +667,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             vc.main_ws = self.ws
 
     async def on_ready(self):
-        print('\rConnected!  Musicbot v%s\n' % BOTVERSION)
+        print("\rConnected!  Musicbot v%s\n" % BOTVERSION)
 
         if self.config.owner_id == self.user.id:
             raise exceptions.HelpfulError(
@@ -687,15 +687,15 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             print("Owner: %s/%s#%s\n" % (owner.id, owner.name,
                                          owner.discriminator))
 
-            print('Server List:')
-            [print(' - ' + s.name) for s in self.servers]
+            print("Server List:")
+            [print(" - " + s.name) for s in self.servers]
 
         elif self.servers:
             print("Owner could not be found on any server (id: %s)\n" %
                   self.config.owner_id)
 
-            print('Server List:')
-            [print(' - ' + s.name) for s in self.servers]
+            print("Server List:")
+            [print(" - " + s.name) for s in self.servers]
 
         else:
             print("Owner unknown, bot is not on any servers.")
@@ -724,14 +724,14 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
             print("Bound to text channels:")
             [
-                print(' - %s/%s' % (ch.server.name.strip(),
+                print(" - %s/%s" % (ch.server.name.strip(),
                                     ch.name.strip())) for ch in chlist if ch
             ]
 
             if invalids and self.config.debug_mode:
                 print("\nNot binding to voice channels:")
                 [
-                    print(' - %s/%s' % (ch.server.name.strip(),
+                    print(" - %s/%s" % (ch.server.name.strip(),
                                         ch.name.strip())) for ch in invalids
                     if ch
                 ]
@@ -755,14 +755,14 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
             print("Autojoining voice chanels:")
             [
-                print(' - %s/%s' % (ch.server.name.strip(),
+                print(" - %s/%s" % (ch.server.name.strip(),
                                     ch.name.strip())) for ch in chlist if ch
             ]
 
             if invalids and self.config.debug_mode:
                 print("\nCannot join text channels:")
                 [
-                    print(' - %s/%s' % (ch.server.name.strip(),
+                    print(" - %s/%s" % (ch.server.name.strip(),
                                         ch.name.strip())) for ch in invalids
                     if ch
                 ]
@@ -779,20 +779,20 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         print("  Command prefix: " + self.config.command_prefix)
         print(
             "  Default volume: %s%%" % int(self.config.default_volume * 100))
-        print("  Auto-Summon: " + ['Disabled', 'Enabled'
+        print("  Auto-Summon: " + ["Disabled", "Enabled"
                                    ][self.config.auto_summon])
-        print("  Auto-Playlist: " + ['Disabled', 'Enabled'
+        print("  Auto-Playlist: " + ["Disabled", "Enabled"
                                      ][self.config.auto_playlist])
-        print("  Auto-Pause: " + ['Disabled', 'Enabled'
+        print("  Auto-Pause: " + ["Disabled", "Enabled"
                                   ][self.config.auto_pause])
-        print("  Delete Messages: " + ['Disabled', 'Enabled'
+        print("  Delete Messages: " + ["Disabled", "Enabled"
                                        ][self.config.delete_messages])
         if self.config.delete_messages:
-            print("    Delete Invoking: " + ['Disabled', 'Enabled'
+            print("    Delete Invoking: " + ["Disabled", "Enabled"
                                              ][self.config.delete_invoking])
-        print("  Debug Mode: " + ['Disabled', 'Enabled'
+        print("  Debug Mode: " + ["Disabled", "Enabled"
                                   ][self.config.debug_mode])
-        print("  Downloaded songs will be %s" % ['deleted', 'saved'
+        print("  Downloaded songs will be %s" % ["deleted", "saved"
                                                  ][self.config.save_videos])
         print()
 
@@ -861,7 +861,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         command = raw_command.lstrip(
             self.config.command_prefix).lower().strip()
 
-        handler = getattr(self, 'cmd_%s' % command, None)
+        handler = getattr(self, "cmd_%s" % command, None)
         if not handler:
             return
 
@@ -873,10 +873,10 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
         if message.channel.is_private:
             if not (message.author.id == self.config.owner_id and command ==
-                    'joinserver') and not command in self.config.private_chat_commands:
+                    "joinserver") and not command in self.config.private_chat_commands:
                 await self.send_message(
                     message.channel,
-                    'You cannot use this command in private messages.')
+                    "You cannot use this command in private messages.")
                 return
 
         if message.author.id in self.blacklist and message.author.id != self.config.owner_id:
@@ -902,38 +902,38 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             if params.pop("raw_content", None):
                 handler_kwargs["raw_content"] = raw_content
 
-            if params.pop('channel', None):
-                handler_kwargs['channel'] = message.channel
+            if params.pop("channel", None):
+                handler_kwargs["channel"] = message.channel
 
-            if params.pop('author', None):
-                handler_kwargs['author'] = message.author
+            if params.pop("author", None):
+                handler_kwargs["author"] = message.author
 
-            if params.pop('server', None):
-                handler_kwargs['server'] = message.server
+            if params.pop("server", None):
+                handler_kwargs["server"] = message.server
 
             if params.pop("player", None):
                 handler_kwargs["player"] = await self.get_player(
                     message.channel)
 
-            if params.pop('user_mentions', None):
-                handler_kwargs['user_mentions'] = list(
+            if params.pop("user_mentions", None):
+                handler_kwargs["user_mentions"] = list(
                     map(message.server.get_member, message.raw_mentions))
 
-            if params.pop('channel_mentions', None):
-                handler_kwargs['channel_mentions'] = list(
+            if params.pop("channel_mentions", None):
+                handler_kwargs["channel_mentions"] = list(
                     map(message.server.get_channel,
                         message.raw_channel_mentions))
 
-            if params.pop('voice_channel', None):
+            if params.pop("voice_channel", None):
                 handler_kwargs[
-                    'voice_channel'] = message.server.me.voice_channel
+                    "voice_channel"] = message.server.me.voice_channel
 
-            if params.pop('leftover_args', None):
-                handler_kwargs['leftover_args'] = args
+            if params.pop("leftover_args", None):
+                handler_kwargs["leftover_args"] = args
 
             args_expected = []
             for key, param in list(params.items()):
-                doc_key = '[%s=%s]' % (
+                doc_key = "[%s=%s]" % (
                     key, param.default
                 ) if param.default is not inspect.Parameter.empty else key
                 args_expected.append(doc_key)
@@ -958,7 +958,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             if response and isinstance(response, Response):
                 content = response.content
                 if content and response.reply:
-                    content = '%s, %s' % (message.author.mention, content)
+                    content = "%s, %s" % (message.author.mention, content)
 
                 sentmsg = await self.safe_send_message(
                     message.channel,
@@ -979,7 +979,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
             await self.safe_send_message(
                 message.channel,
-                '```\n%s\n```' % e.message,
+                "```\n%s\n```" % e.message,
                 expire_in=expirein,
                 also_delete=alsodelete)
 
@@ -990,7 +990,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             traceback.print_exc()
             if self.config.debug_mode:
                 await self.safe_send_message(
-                    message.channel, '```\n%s\n```' % traceback.format_exc())
+                    message.channel, "```\n%s\n```" % traceback.format_exc())
 
     async def autopause(self, before, after):
         if not all([before, after]):
@@ -1120,6 +1120,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                     await self.safe_send_message(mem, notification)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     bot = MusicBot()
     bot.run()

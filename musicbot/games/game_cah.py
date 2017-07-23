@@ -1,5 +1,3 @@
-import asyncio
-import configparser
 import json
 import random
 import re
@@ -7,6 +5,8 @@ import threading
 from datetime import datetime
 from functools import partial
 
+import asyncio
+import configparser
 from musicbot.config import ConfigDefaults
 from musicbot.utils import prettydate
 
@@ -145,7 +145,7 @@ class Cards:
     def update_question_cards(self):
         self.question_cards = []
         config_parser = configparser.ConfigParser(interpolation=None)
-        config_parser.read(ConfigDefaults.question_cards, encoding='utf-8')
+        config_parser.read(ConfigDefaults.question_cards, encoding="utf-8")
 
         for section in config_parser.sections():
             card_id = int(section)
@@ -193,7 +193,7 @@ class Cards:
     def update_cards(self):
         self.cards = []
         config_parser = configparser.ConfigParser(interpolation=None)
-        config_parser.read(ConfigDefaults.cards_file, encoding='utf-8')
+        config_parser.read(ConfigDefaults.cards_file, encoding="utf-8")
 
         for section in config_parser.sections():
             card_id = int(section)
