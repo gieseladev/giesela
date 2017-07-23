@@ -146,8 +146,10 @@ class InfoCommands:
         await self.send_typing(channel)
         msgContent = " ".join(leftover_args)
 
-        col = choice(
-            [9699539, 4915330, 255, 65280, 16776960, 16744192, 16711680])
+        col = hex_to_dec(choice([
+            "#9400D3", "#4B0082", "#0000FF", "#00FF00", "#FFFF00", "#FF7F00",
+            "#FF0000"
+        ]))
 
         client = Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
@@ -201,7 +203,8 @@ class InfoCommands:
 
     @command_info("3.5.6", 1497819288, {
         "3.6.2": (1497978696, "references are now clickable"),
-        "3.7.6": (1498947694, "fixed a bug which would stop Giesela from executing the command because of underscores in the version name")
+        "3.7.6": (1498947694, "fixed a bug which would stop Giesela from executing the command because of underscores in the version name"),
+        "4.0.8": (1500774499, "Handling special case of already being up to date")
     })
     async def cmd_version(self, channel):
         """
@@ -214,11 +217,17 @@ class InfoCommands:
         await self.send_typing(channel)
         v_code, v_name = BOTVERSION.split("_", 1)
         dev_code, dev_name = get_dev_version()
-        changelog = get_dev_changelog()
+        if v_code == dev_code:
+            changelog = "**Up to date!**"
+        else:
+            changelog = "**What's to come:**\n\n"
+            changelog += "\n".join(
+                "● " + l for l in get_dev_changelog()
+            )
 
-        desc = "Current Version is `{}`\nDevelopment is at `{}`\n\n**What's to come:**\n\n".format(
-            BOTVERSION, dev_code + "_" + dev_name)
-        desc += "\n".join("● " + l for l in changelog)[:1950]
+        desc = "Current Version is `{}`\nDevelopment is at `{}`\n\n{}".format(
+            BOTVERSION, dev_code + "_" + dev_name, changelog)[:2000]
+
         em = Embed(title="Version " + v_name, description=desc,
                    url="https://siku2.github.io/Giesela", colour=hex_to_dec("#67BE2E"))
 
