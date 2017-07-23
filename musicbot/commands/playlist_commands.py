@@ -12,7 +12,7 @@ from ..imgur import upload_playlist_cover, upload_song_image
 from ..saved_playlists import Playlists
 from ..spotify import SpotifyTrack
 from ..utils import (Response, asyncio, block_user, command_info, create_bar,
-                     format_time, is_image, nice_cut, owner_only,
+                     format_time, hex_to_dec, is_image, nice_cut, owner_only,
                      parse_timestamp, timestamp_to_queue, to_timestamp,
                      wrap_string)
 
@@ -38,7 +38,8 @@ class PlaylistCommands:
         "4.0.7": (1500728466, "Can now manipulate playlist entries"),
         "4.1.0": (1500777145, "description bug fixed"),
         "4.1.1": (1500789035, "Using Imgur to save images"),
-        "4.1.2": (1500790172, "Closing the playlist builder without saving for a newly created playlist, deletes said playlist.")
+        "4.1.2": (1500790172, "Closing the playlist builder without saving for a newly created playlist, deletes said playlist."),
+        "4.1.5": (1500812970, "Some design adjustments")
     ***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -251,8 +252,7 @@ class PlaylistCommands:
                     "There are no saved playlists.\n**You** could add one though. Type `***REMOVED******REMOVED***help playlist` to see how!".format(
                         self.config.command_prefix))
 
-            response_text = "**Found the following playlists:**\n\n"
-            iteration = 1
+            response_text = "**Playlists**\n__                 __\n\n"
 
             sort_modes = ***REMOVED***
                 "alphabetical": (lambda playlist: playlist, False),
@@ -279,9 +279,8 @@ class PlaylistCommands:
                 )
             ***REMOVED***
 
-            sort_mode = leftover_args[1].lower(
-            ) if len(leftover_args) > 1 and leftover_args[1].lower(
-            ) in sort_modes.keys() else "random"
+            sort_mode = leftover_args[1].lower() if len(leftover_args) > 1 and leftover_args[
+                1].lower() in sort_modes.keys() else "replays"
 
             if sort_mode == "random":
                 sorted_saved_playlists = self.playlists.saved_playlists
@@ -294,33 +293,26 @@ class PlaylistCommands:
 
             for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.playlist)
-                response_text += "*****REMOVED******REMOVED***.** **\"***REMOVED******REMOVED***\"** by ***REMOVED******REMOVED***\n```\n  ***REMOVED******REMOVED*** entr***REMOVED******REMOVED*** (***REMOVED******REMOVED*** broken)\n  played ***REMOVED******REMOVED*** time***REMOVED******REMOVED***\n  ***REMOVED******REMOVED***```\n\n".format(
-                    iteration,
+                response_text += "◦ *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** entr***REMOVED******REMOVED***)\n".format(
                     pl.replace("_", " ").title(),
-                    self.get_global_user(infos["author"]).mention,
                     len(infos["entries"]),
-                    "ies" if len(infos["entries"]) is not 1 else "y",
-                    len(infos["broken_entries"]),
-                    infos["replay_count"], "s"
-                    if int(infos["replay_count"]) != 1 else "",
-                    format_time(
-                        sum([x.duration for x in infos["entries"]]),
-                        round_seconds=True,
-                        max_specifications=2))
-                iteration += 1
+                    "ies" if len(infos["entries"]) is not 1 else "y"
+                )
 
-            # self.log (response_text)
+            response_text += "\n**Reference**\n" + "\n".join([
+                "`***REMOVED***command_prefix***REMOVED***playlist <name>` to learn more about a playlist",
+                "`***REMOVED***command_prefix***REMOVED***playlist builder <name>` to edit a playlist"
+            ]).format(command_prefix=self.config.command_prefix)
+
             return Response(response_text)
 
         elif argument == "builder":
             if len(savename) < 3:
                 return Response(
-                    "Can't build on this playlist, the name must be longer than 3 characters",
-                    delete_after=20)
+                    "Can't build on this playlist, the name must be longer than 3 characters")
             if savename in forbidden_savenames:
                 return Response(
-                    "Can't build on this playlist, this name is forbidden!",
-                    delete_after=20)
+                    "Can't build on this playlist, this name is forbidden!")
 
             print("Starting the playlist builder")
             response = await self.playlist_builder(channel, author, server,
@@ -332,7 +324,7 @@ class PlaylistCommands:
                                                 player.playlist)
             entries = infos["entries"]
 
-            desc_text = "```\n***REMOVED******REMOVED***\n```\n***REMOVED******REMOVED*** entr***REMOVED******REMOVED*** (***REMOVED******REMOVED*** broken)\n***REMOVED******REMOVED*** long".format(
+            desc_text = "***REMOVED******REMOVED***\n\n***REMOVED******REMOVED*** entr***REMOVED******REMOVED*** (***REMOVED******REMOVED*** broken)\n***REMOVED******REMOVED*** long".format(
                 infos["description"] or "This playlist doesn't have a description",
                 len(infos["entries"]),
                 "ies" if infos["entries"] is not 1 else "y",
@@ -346,7 +338,9 @@ class PlaylistCommands:
             )
             em = Embed(
                 title=argument.replace("_", " ").title(),
-                description=desc_text
+                description=desc_text,
+                colour=hex_to_dec("#b93649"),
+                url="http://giesela.org"
             )
             pl_author = self.get_global_user(infos["author"])
             em.set_author(
@@ -901,7 +895,9 @@ class PlaylistCommands:
         ])
         error_format = "**Error**\n***REMOVED***error_message***REMOVED***\n\n"
         information_format = ""
-        interface_format = "**ENTRY EDITOR**\n\n***REMOVED***error***REMOVED***---\n***REMOVED***fields***REMOVED***\n---\n***REMOVED***timestamps***REMOVED***\n***REMOVED***information***REMOVED***\n\n**Commands**\n" + commands
+        line = wrap_string(80 * " ", "__")
+        interface_format = "**ENTRY EDITOR**\n\n***REMOVED******REMOVED***error***REMOVED******REMOVED******REMOVED***line***REMOVED***\n\n***REMOVED******REMOVED***fields***REMOVED******REMOVED***\n***REMOVED***line***REMOVED***\n***REMOVED******REMOVED***timestamps***REMOVED******REMOVED***\n***REMOVED******REMOVED***information***REMOVED******REMOVED***\n\n**Commands**\n***REMOVED***commands***REMOVED***".format(
+            line=line, commands=commands)
 
         error = None
 
