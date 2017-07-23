@@ -37,7 +37,8 @@ class PlaylistCommands:
         "4.0.6": (1500536082, "Added description and cover options for a playlist"),
         "4.0.7": (1500728466, "Can now manipulate playlist entries"),
         "4.1.0": (1500777145, "description bug fixed"),
-        "4.1.1": (1500789035, "Using Imgur to save images")
+        "4.1.1": (1500789035, "Using Imgur to save images"),
+        "4.1.2": (1500790172, "Closing the playlist builder without saving for a newly created playlist, deletes said playlist.")
     })
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -388,7 +389,10 @@ class PlaylistCommands:
         return await self.cmd_help(channel, ["playlist"])
 
     async def playlist_builder(self, channel, author, server, player, _savename):
+        new_playlist = False
+
         if _savename not in self.playlists.saved_playlists:
+            new_playlist = True
             self.playlists.set_playlist([], _savename, author.id)
 
         def check(m):
@@ -765,6 +769,9 @@ class PlaylistCommands:
         await self.safe_delete_message(interface_message)
 
         if abort:
+            if new_playlist:
+                self.playlists.remove_playlist(savename)
+
             return Response("Closed **{}** without saving".format(savename))
             print("Closed the playlist builder")
 
@@ -996,14 +1003,17 @@ class PlaylistCommands:
                         if property_target == "sub_queue":
                             error = "You can't set timestamps like this"
                         else:
-                            if property_target not in ("cover_url", "thumbnail", "artist_image_url") or is_image(rest):
-                                url = await upload_song_image(self.loop, playlist_name, "{} {}".format(entry_fields["_video_id"], property_target), rest)
-                                if url:
-                                    entry_fields[property_target] = url
+                            if property_target in ("cover_url", "thumbnail", "artist_image_url"):
+                                if is_image(rest):
+                                    url = await upload_song_image(self.loop, playlist_name, "{} {}".format(entry_fields["_video_id"], property_target), rest)
+                                    if url:
+                                        entry_fields[property_target] = url
+                                    else:
+                                        error = "Something went wrong with this image."
                                 else:
-                                    error = "Something went wrong with this image."
+                                    error = "That's not an image!"
                             else:
-                                error = "That's not an image!"
+                                entry_fields[property_target] = rest
                     else:
                         error = "Please also provide some text"
                 else:
