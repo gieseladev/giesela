@@ -200,9 +200,9 @@ def create_bar(progress, length=10, full_char="■", half_char=None, empty_char=
 def get_image_brightness(**kwargs):
     """
     Keyword Arguments:
-    image -- A Pillow Image object
-    location -- a file path to the image
-    url -- the online location of the image
+    image       -- A Pillow Image object
+    location    -- a file path to the image
+    url         -- the online location of the image
     """
     if "image" in kwargs:
         im = kwargs["image"]
@@ -343,11 +343,11 @@ def timestamp_to_queue(timestamps):
 
         dur = next_start - start
         sub_entry = {
-            "name": timestamps[key].strip(punctuation + whitespace),
+            "name":     timestamps[key].strip(punctuation + whitespace),
             "duration": dur,
-            "start": start,
-            "index": index,
-            "end": next_start
+            "start":    start,
+            "index":    index,
+            "end":      next_start
         }
         queue.append(sub_entry)
 
@@ -413,11 +413,11 @@ def get_video_timestamps(description, video_id, song_dur=None):
             return None
 
         params = {
-            "key": "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo",
-            "part": "snippet",
-            "order": "relevance",
-            "textFormat": "plainText",
-            "videoId": video_id
+            "key":          "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo",
+            "part":         "snippet",
+            "order":        "relevance",
+            "textFormat":   "plainText",
+            "videoId":      video_id
         }
         resp = requests.get(
             "https://www.googleapis.com/youtube/v3/commentThreads", params=params)
@@ -449,11 +449,11 @@ def _choose_best_thumbnail(thumbnails):
 
 def get_related_videos(videoId):
     params = {
-        "part": "snippet",
+        "part":             "snippet",
         "relatedToVideoId": videoId,
-        "topicId": "/m/04rlf",
-        "type": "video",
-        "key": "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo"
+        "topicId":          "/m/04rlf",
+        "type":             "video",
+        "key":              "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo"
     }
     resp = requests.get(
         "https://www.googleapis.com/youtube/v3/search", params=params)
@@ -464,11 +464,11 @@ def get_related_videos(videoId):
     video_list = []
     for vid in videos:
         video = {
-            "id": vid["id"]["videoId"],
-            "title": vid["snippet"]["title"],
-            "channel": vid["snippet"]["channelTitle"],
-            "thumbnail": _choose_best_thumbnail(vid["snippet"]["thumbnails"]),
-            "url": "https://www.youtube.com/watch?v=" + vid["id"]["videoId"]
+            "id":           vid["id"]["videoId"],
+            "title":        vid["snippet"]["title"],
+            "channel":      vid["snippet"]["channelTitle"],
+            "thumbnail":    _choose_best_thumbnail(vid["snippet"]["thumbnails"]),
+            "url":          "https://www.youtube.com/watch?v=" + vid["id"]["videoId"]
         }
 
         video_list.append(video)
@@ -481,8 +481,12 @@ def parse_timestamp(timestamp):
     if len(parts) < 1:  # Shouldn't occur, but who knows?
         return None
 
-    # seconds, minutes, hours, days
-    values = (1, 60, 60 * 60, 60 * 60 * 24)
+    values = (
+        1,              # seconds
+        60,             # minutes
+        60 * 60,        # hours
+        60 * 60 * 24    # days
+    )
 
     secs = 0
     for i in range(len(parts)):

@@ -11,6 +11,7 @@ from ..utils import (Response, block_user, command_info, get_dev_changelog,
 
 
 class InfoCommands:
+
     @command_info("1.9.5", 1477774380, {
         "3.4.5": (1497616203, "Improved default help message using embeds"),
         "3.6.0": (1497904733, "Fixed weird indent of some help texts"),
@@ -217,7 +218,7 @@ class InfoCommands:
 
         desc = "Current Version is `{}`\nDevelopment is at `{}`\n\n**What's to come:**\n\n".format(
             BOTVERSION, dev_code + "_" + dev_name)
-        desc += "\n".join("● " + l for l in changelog)
+        desc += "\n".join("● " + l for l in changelog)[:1950]
         em = Embed(title="Version " + v_name, description=desc,
                    url="https://siku2.github.io/Giesela", colour=hex_to_dec("#67BE2E"))
 
