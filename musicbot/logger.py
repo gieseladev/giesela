@@ -1,4 +1,5 @@
 from datetime import datetime
+from string import ascii_lowercase as alphabet
 
 from openpyxl import Workbook
 
@@ -26,7 +27,6 @@ class OnlineLogger:
         self.listeners.remove(id)
 
     def create_output(self):
-        alphabet = list("abcdefghijklmnopqrstuvwxyz")
 
         def index_to_alphabet(ind):
             if ind < len(alphabet):

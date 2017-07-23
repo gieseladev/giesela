@@ -11,9 +11,9 @@ def search_for_lyrics(query):
 
 def search_for_lyrics_google(query):
     params = {
-        "key": "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo",
-        "cx": "002017775112634544492:7y5bpl2sn78",
-        "q": query
+        "key":  "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo",
+        "cx":   "002017775112634544492:7y5bpl2sn78",
+        "q":    query
     }
     resp = requests.get(
         "https://www.googleapis.com/customsearch/v1", params=params)
@@ -36,18 +36,6 @@ def search_for_lyrics_google(query):
                 print("[LYRICS] Couldn't parse these lyrics")
 
     return None
-
-
-def search_for_lyrics_genius(query):
-    params = {"q": query}
-    resp = requests.get("https://genius.com/search", params=params)
-    bs4 = BeautifulSoup(resp.text, "lxml")
-
-    results = bs4.find_all(
-        "ul", {"class": "search_results song_list primary_list"})[0]
-    first_res = results.li
-
-    return _extract_lyrics_genius(first_res.a["href"])
 
 
 def _extract_lyrics_genius(url):
@@ -144,10 +132,12 @@ def _extract_lyrics_animelyrics(url):
     return lyrics
 
 
-lyric_parsers = {"genius.com": _extract_lyrics_genius,
-                 "www.lyricsmode.com": _extract_lyrics_lyricsmode,
-                 "www.lyrical-nonsense.com": _extract_lyrics_lyrical_nonsense,
-                 "www.animelyrics.com": _extract_lyrics_animelyrics,
-                 "www.musixmatch.com": _extract_lyrics_musixmatch}
+lyric_parsers = {
+    "genius.com":                  _extract_lyrics_genius,
+    "www.lyricsmode.com":          _extract_lyrics_lyricsmode,
+    "www.lyrical-nonsense.com":    _extract_lyrics_lyrical_nonsense,
+    "www.animelyrics.com":         _extract_lyrics_animelyrics,
+    "www.musixmatch.com":          _extract_lyrics_musixmatch
+}
 
 # print(search_for_lyrics("Snow Fairy - Fairy Tail - English Version - Amy B"))
