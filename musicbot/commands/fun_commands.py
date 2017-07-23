@@ -1,6 +1,7 @@
-import asyncio
 import re
 from random import shuffle
+
+import asyncio
 
 from ..cleverbot import CleverWrap
 from ..config import ConfigDefaults
@@ -673,7 +674,7 @@ class FunCommands:
             "handler":
             getattr(self, x, None),
             "description":
-            getattr(self, x, None).__doc__.strip(' \t\n\r')
+            getattr(self, x, None).__doc__.strip(" \t\n\r")
         ***REMOVED*** for x in all_games]
 
         if message.mentions is not None and len(message.mentions) > 0:
@@ -695,7 +696,7 @@ class FunCommands:
 
                 if not response or response.content.startswith(
                         self.config.command_prefix) or response.content.lower(
-                ).startswith('exit'):
+                ).startswith("exit"):
                     await self.safe_delete_message(msg)
                     await self.safe_delete_message(response)
                     await self.safe_send_message(channel, "Nevermind then.")
@@ -845,7 +846,7 @@ class FunCommands:
         tries = additional_args[0] if len(additional_args) > 0 else 10
 
         word = additional_args[1] if len(additional_args) > 1 else re.sub(
-            '[^a-zA-Z]', '', random_line(ConfigDefaults.hangman_wordlist))
+            "[^a-zA-Z]", "", random_line(ConfigDefaults.hangman_wordlist))
 
         alphabet = list("abcdefghijklmnopqrstuvwxyz")
         print("Started a Hangman game with \"" + word + "\"")
@@ -869,7 +870,7 @@ class FunCommands:
 
             if not response or response.content.lower().startswith(
                     self.config.command_prefix) or response.content.lower(
-            ).startswith('exit'):
+            ).startswith("exit"):
                 await self.safe_delete_message(msg)
                 await self.safe_send_message(
                     channel, "Aborting this Hangman game. Thanks for playing!")

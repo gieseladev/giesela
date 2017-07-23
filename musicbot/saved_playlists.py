@@ -19,14 +19,14 @@ class Playlists:
     def update_playlist(self):
         self.playlists = configparser.ConfigParser()
 
-        if not self.playlists.read(self.playlists_file, encoding='utf-8'):
-            print('[playlists] Playlists file not found')
+        if not self.playlists.read(self.playlists_file, encoding="utf-8"):
+            print("[playlists] Playlists file not found")
             raise HelpfulError(
                 "Your playlists file is missing"
             )
 
         self.playlists = configparser.ConfigParser(interpolation=None)
-        self.playlists.read(self.playlists_file, encoding='utf-8')
+        self.playlists.read(self.playlists_file, encoding="utf-8")
         self.saved_playlists = self.playlists.sections()
 
     def save_playlist(self):

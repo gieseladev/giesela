@@ -182,8 +182,7 @@ class PlaylistCommands:
         elif argument == "delete":
             if savename not in self.playlists.saved_playlists:
                 return Response(
-                    "Can't delete this playlist, there's no playlist with this name.",
-                    delete_after=20)
+                    "Can't delete this playlist, there's no playlist with this name.")
 
             self.playlists.remove_playlist(savename)
             return Response(
@@ -544,7 +543,7 @@ class PlaylistCommands:
                 abort = True
                 break
 
-            elif response_message.content.lower().startswith(self.config.command_prefix) or response_message.content.lower().startswith('exit'):
+            elif response_message.content.lower().startswith(self.config.command_prefix) or response_message.content.lower().startswith("exit"):
                 abort = True
 
             elif response_message.content.lower().startswith("save"):

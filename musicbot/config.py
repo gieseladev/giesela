@@ -1,5 +1,6 @@
-import configparser
 import json
+
+import configparser
 
 
 def encode_setting(value):
@@ -41,7 +42,7 @@ class Config:
         self.config_file = config_file
 
         self.config = configparser.ConfigParser(interpolation=None)
-        self.config.read(config_file, encoding='utf-8')
+        self.config.read(config_file, encoding="utf-8")
         self.auth = (self._token,)
 
     def __getattr__(self, name):

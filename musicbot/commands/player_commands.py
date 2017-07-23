@@ -5,6 +5,7 @@ from ..utils import (Response, block_user, command_info, create_bar,
 
 
 class PlayerCommands:
+
     @command_info("1.0.0", 1477180800, ***REMOVED***
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite")
@@ -63,9 +64,9 @@ class PlayerCommands:
 
         relative = False
         special_operation = None
-        if new_volume[0] in '+-':
+        if new_volume[0] in "+-":
             relative = True
-        if new_volume[0] in '*/%':
+        if new_volume[0] in "*/%":
             special_operation = new_volume[0]
             new_volume = new_volume[1:]
 
@@ -74,7 +75,7 @@ class PlayerCommands:
 
         except ValueError:
             raise exceptions.CommandError(
-                '***REMOVED******REMOVED*** is not a valid number'.format(new_volume), expire_in=20)
+                "***REMOVED******REMOVED*** is not a valid number".format(new_volume))
 
         if relative:
             vol_change = new_volume
@@ -95,18 +96,18 @@ class PlayerCommands:
             player.volume = new_volume / 100.0
 
             return Response(
-                'updated volume from %d to %d' % (old_volume, new_volume),
+                "updated volume from %d to %d" % (old_volume, new_volume),
                 reply=True)
 
         else:
             if relative:
                 raise exceptions.CommandError(
-                    'Unreasonable volume change provided: ***REMOVED******REMOVED******REMOVED***:+***REMOVED*** -> ***REMOVED******REMOVED***%.  Provide a change between ***REMOVED******REMOVED*** and ***REMOVED***:+***REMOVED***.'.
+                    "Unreasonable volume change provided: ***REMOVED******REMOVED******REMOVED***:+***REMOVED*** -> ***REMOVED******REMOVED***%.  Provide a change between ***REMOVED******REMOVED*** and ***REMOVED***:+***REMOVED***.".
                     format(old_volume, vol_change, old_volume + vol_change,
                            1 - old_volume, 100 - old_volume))
             else:
                 raise exceptions.CommandError(
-                    'Unreasonable volume provided: ***REMOVED******REMOVED***%. Provide a value between 1 and 100.'.
+                    "Unreasonable volume provided: ***REMOVED******REMOVED***%. Provide a value between 1 and 100.".
                     format(new_volume))
 
     @command_info("2.0.3", 1487538840, ***REMOVED***

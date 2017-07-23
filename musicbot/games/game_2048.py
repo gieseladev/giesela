@@ -1,8 +1,9 @@
-import colorsys
 import random
 from math import log2, pow, sqrt
 
 from PIL import Image, ImageDraw, ImageSequence
+
+import colorsys
 
 
 class Game2048:
@@ -19,7 +20,7 @@ class Game2048:
         self.new_game = True
 
     def __str__(self):
-        ret = ''
+        ret = ""
         iS = ***REMOVED******REMOVED***
         for j in self.grid:
             for i in range(len(j)):
@@ -27,14 +28,14 @@ class Game2048:
                     i) is not None else -1), len(str(j[i])))
         for j in self.grid:
             for i in range(len(j)):
-                ret = ret + str(j[i]) + ' ' + ' ' * (iS[i] - len(str(j[i])))
-            ret = ret + '\n'
-        return ret.replace(' 0', '  ').replace('0 ', '  ')
-        return '\n'.join([' '.join([str(i) for i in j]) for j in self.grid]).replace(' 0', '  ').replace('0 ', '  ')
+                ret = ret + str(j[i]) + " " + " " * (iS[i] - len(str(j[i])))
+            ret = ret + "\n"
+        return ret.replace(" 0", "  ").replace("0 ", "  ")
+        return "\n".join([" ".join([str(i) for i in j]) for j in self.grid]).replace(" 0", "  ").replace("0 ", "  ")
 
     def getImage(self, loc="cache/pictures/g2048_img"):
         fieldSize = 50
-        img = Image.new('RGBA', (self.size * fieldSize, self.size * fieldSize))
+        img = Image.new("RGBA", (self.size * fieldSize, self.size * fieldSize))
         draw = ImageDraw.Draw(img)
         for i in range(len(self.grid)):
             for j in range(len(self.grid[i])):
@@ -186,9 +187,9 @@ class Game2048:
         while not done:
             print(self)
             inp = raw_input()
-            if inp == 'q':
+            if inp == "q":
                 break
-            elif inp in ['0', '1', '2', '3']:
+            elif inp in ["0", "1", "2", "3"]:
                 self.move(int(inp))
             if self.lost():
                 print("You have lost")

@@ -29,7 +29,7 @@ class EnqueueCommands:
         media without predownloading it.
         """
 
-        song_url = song_url.strip('<>')
+        song_url = song_url.strip("<>")
 
         await self.send_typing(channel)
         await player.playlist.add_stream_entry(
@@ -585,7 +585,7 @@ class ManipulateCommands:
         """
 
         player.playlist.clear()
-        return Response(':put_litter_in_its_place:')
+        return Response(":put_litter_in_its_place:")
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
         "3.3.7": (1497471674, "adapted the new \"seek\" command instead of \"skipto\""),

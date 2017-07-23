@@ -34,7 +34,7 @@ class InfoCommands:
             command = " ".join(leftover_args)
 
         if command:
-            cmd = getattr(self, 'cmd_' + command, None)
+            cmd = getattr(self, "cmd_" + command, None)
             if cmd:
                 documentation = cmd.__doc__.format(
                     command_prefix=self.config.command_prefix)

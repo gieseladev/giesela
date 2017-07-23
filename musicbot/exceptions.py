@@ -1,6 +1,7 @@
 import shutil
 import textwrap
 
+
 # Base class for exceptions
 
 
@@ -100,10 +101,10 @@ class HelpfulError(MusicbotException):
 
         l1, *lx = textwrap.wrap(text, width=width - 1 - len(pretext))
 
-        lx = [((' ' * len(pretext)) + l).rstrip().ljust(width) for l in lx]
+        lx = [((" " * len(pretext)) + l).rstrip().ljust(width) for l in lx]
         l1 = (pretext + l1).ljust(width)
 
-        return ''.join([l1, *lx])
+        return "".join([l1, *lx])
 
 
 class HelpfulWarning(HelpfulError):

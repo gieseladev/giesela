@@ -64,7 +64,7 @@ def owner_only(func):
     @wraps(func)
     async def wrapper(self, *args, **kwargs):
         # Only allow the owner to use these commands
-        orig_msg = _get_variable('message')
+        orig_msg = _get_variable("message")
 
         if not orig_msg or orig_msg.author.id == self.config.owner_id:
             return await func(self, *args, **kwargs)
@@ -155,9 +155,9 @@ def nice_cut(s, max_length, ending="..."):
     return chunk  # this really shouldn't happen...
 
 
-def load_file(filename, skip_commented_lines=True, comment_char='#'):
+def load_file(filename, skip_commented_lines=True, comment_char="#"):
     try:
-        with open(filename, encoding='utf8') as f:
+        with open(filename, encoding="utf8") as f:
             results = []
             for line in f:
                 line = line.strip()
@@ -174,10 +174,10 @@ def load_file(filename, skip_commented_lines=True, comment_char='#'):
 
 
 def write_file(filename, contents):
-    with open(filename, 'w', encoding='utf8') as f:
+    with open(filename, "w", encoding="utf8") as f:
         for item in contents:
             f.write(str(item))
-            f.write('\n')
+            f.write("\n")
 
 
 def create_bar(progress, length=10, full_char="■", half_char=None, empty_char="□"):
@@ -225,7 +225,7 @@ def prettydate(d):
     diff = datetime.datetime.now() - d
     s = diff.seconds
     if diff.days < 0:
-        return d.strftime('%d %b %y')
+        return d.strftime("%d %b %y")
     elif diff.days == 1:
         return "1 day ago"
     elif diff.days > 1:
@@ -537,10 +537,10 @@ def to_timestamp(seconds):
 
 
 def slugify(value):
-    value = unicodedata.normalize('NFKD', value).encode(
-        'ascii', 'ignore').decode('ascii')
-    value = re.sub('[^\w\s-]', '', value).strip().lower()
-    return re.sub('[-\s]+', '-', value)
+    value = unicodedata.normalize("NFKD", value).encode(
+        "ascii", "ignore").decode("ascii")
+    value = re.sub("[^\w\s-]", "", value).strip().lower()
+    return re.sub("[-\s]+", "-", value)
 
 
 def format_time_ffmpeg(s):
@@ -619,18 +619,18 @@ def paginate(content, *, length=DISCORD_MSG_CHAR_LIMIT, reserve=0):
     Split up a large string or list of strings into chunks for sending to discord.
     """
     if type(content) == str:
-        contentlist = content.split('\n')
+        contentlist = content.split("\n")
     elif type(content) == list:
         contentlist = content
     else:
         raise ValueError("Content must be str or list, not %s" % type(content))
 
     chunks = []
-    currentchunk = ''
+    currentchunk = ""
 
     for line in contentlist:
         if len(currentchunk) + len(line) < length - reserve:
-            currentchunk += line + '\n'
+            currentchunk += line + "\n"
         else:
             chunks.append(currentchunk)
             currentchunk = line + "\n"

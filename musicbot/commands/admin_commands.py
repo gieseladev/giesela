@@ -19,11 +19,10 @@ class AdminCommands:
         if not user_mentions:
             raise exceptions.CommandError("No users listed.", expire_in=20)
 
-        if option not in ['+', '-', 'add', 'remove']:
+        if option not in ["+", "-", "add", "remove"]:
             raise exceptions.CommandError(
-                'Invalid option "%s" specified, use +, -, add, or remove' %
-                option,
-                expire_in=20)
+                "Invalid option " % s" specified, use +, -, add, or remove" %
+                option)
 
         for user in user_mentions.copy():
             if user.id == self.config.owner_id:
@@ -33,23 +32,21 @@ class AdminCommands:
 
         old_len = len(self.blacklist)
 
-        if option in ['+', 'add']:
+        if option in ["+", "add"]:
             self.blacklist.update(user.id for user in user_mentions)
 
             write_file(self.config.blacklist_file, self.blacklist)
 
             return Response(
-                '%s users have been added to the blacklist' %
+                "%s users have been added to the blacklist" %
                 (len(self.blacklist) - old_len),
-                reply=True,
-                delete_after=10)
+                reply=True)
 
         else:
             if self.blacklist.isdisjoint(user.id for user in user_mentions):
                 return Response(
-                    'none of those users are in the blacklist.',
-                    reply=True,
-                    delete_after=10)
+                    "none of those users are in the blacklist.",
+                    reply=True)
 
             else:
                 self.blacklist.difference_update(user.id
@@ -57,10 +54,9 @@ class AdminCommands:
                 write_file(self.config.blacklist_file, self.blacklist)
 
                 return Response(
-                    '%s users have been removed from the blacklist' %
+                    "%s users have been removed from the blacklist" %
                     (old_len - len(self.blacklist)),
-                    reply=True,
-                    delete_after=10)
+                    reply=True)
 
     async def cmd_id(self, author, user_mentions):
         """
@@ -71,13 +67,12 @@ class AdminCommands:
         """
         if not user_mentions:
             return Response(
-                'your id is `%s`' % author.id, reply=True)
+                "your id is `%s`" % author.id, reply=True)
         else:
             usr = user_mentions[0]
             return Response(
                 "%s's id is `%s`" % (usr.name, usr.id),
-                reply=True,
-                delete_after=35)
+                reply=True)
 
     @owner_only
     async def cmd_joinserver(self, message, server_link=None):
@@ -103,10 +98,9 @@ class AdminCommands:
 
         except:
             raise exceptions.CommandError(
-                'Invalid URL provided:\n***REMOVED******REMOVED***\n'.format(server_link),
-                expire_in=30)
+                "Invalid URL provided:\n***REMOVED******REMOVED***\n".format(server_link))
 
-    async def cmd_listids(self, server, author, leftover_args, cat='all'):
+    async def cmd_listids(self, server, author, leftover_args, cat="all"):
         """
         Usage:
             ***REMOVED***command_prefix***REMOVED***listids [categories]
@@ -115,61 +109,61 @@ class AdminCommands:
            all, users, roles, channels
         """
 
-        cats = ['channels', 'roles', 'users']
+        cats = ["channels", "roles", "users"]
 
-        if cat not in cats and cat != 'all':
+        if cat not in cats and cat != "all":
             return Response(
-                "Valid categories: " + ' '.join(['`%s`' % c for c in cats]),
+                "Valid categories: " + " ".join(["`%s`" % c for c in cats]),
                 reply=True,
                 delete_after=25)
 
-        if cat == 'all':
+        if cat == "all":
             requested_cats = cats
         else:
-            requested_cats = [cat] + [c.strip(',') for c in leftover_args]
+            requested_cats = [cat] + [c.strip(",") for c in leftover_args]
 
-        data = ['Your ID: %s' % author.id]
+        data = ["Your ID: %s" % author.id]
 
         for cur_cat in requested_cats:
             rawudata = None
 
-            if cur_cat == 'users':
+            if cur_cat == "users":
                 data.append("\nUser IDs:")
                 rawudata = [
-                    '%s #%s: %s' % (m.name, m.discriminator, m.id)
+                    "%s #%s: %s" % (m.name, m.discriminator, m.id)
                     for m in server.members
                 ]
 
-            elif cur_cat == 'roles':
+            elif cur_cat == "roles":
                 data.append("\nRole IDs:")
-                rawudata = ['%s: %s' % (r.name, r.id) for r in server.roles]
+                rawudata = ["%s: %s" % (r.name, r.id) for r in server.roles]
 
-            elif cur_cat == 'channels':
+            elif cur_cat == "channels":
                 data.append("\nText Channel IDs:")
                 tchans = [
                     c for c in server.channels
                     if c.type == discord.ChannelType.text
                 ]
-                rawudata = ['%s: %s' % (c.name, c.id) for c in tchans]
+                rawudata = ["%s: %s" % (c.name, c.id) for c in tchans]
 
                 rawudata.append("\nVoice Channel IDs:")
                 vchans = [
                     c for c in server.channels
                     if c.type == discord.ChannelType.voice
                 ]
-                rawudata.extend('%s: %s' % (c.name, c.id) for c in vchans)
+                rawudata.extend("%s: %s" % (c.name, c.id) for c in vchans)
 
             if rawudata:
                 data.extend(rawudata)
 
         with BytesIO() as sdata:
-            sdata.writelines(d.encode('utf8') + b'\n' for d in data)
+            sdata.writelines(d.encode("utf8") + b"\n" for d in data)
             sdata.seek(0)
 
             await self.send_file(
                 author,
                 sdata,
-                filename='%s-ids-%s.txt' % (server.name.replace(' ', '_'),
+                filename="%s-ids-%s.txt" % (server.name.replace(" ", "_"),
                                             cat))
 
         return Response(":mailbox_with_mail:")
@@ -184,7 +178,7 @@ class AdminCommands:
         Note: This operation is limited by discord to twice per hour.
         """
 
-        name = ' '.join([name, *leftover_args])
+        name = " ".join([name, *leftover_args])
 
         try:
             await self.edit_profile(username=name)
@@ -206,7 +200,7 @@ class AdminCommands:
             raise exceptions.CommandError(
                 "Unable to change nickname: no permission.")
 
-        nick = ' '.join([nick, *leftover_args])
+        nick = " ".join([nick, *leftover_args])
 
         try:
             await self.change_nickname(server.me, nick)
@@ -226,9 +220,9 @@ class AdminCommands:
         """
 
         if message.attachments:
-            thing = message.attachments[0]['url']
+            thing = message.attachments[0]["url"]
         else:
-            thing = url.strip('<>')
+            thing = url.strip("<>")
 
         try:
             with aiohttp.Timeout(10):
@@ -278,15 +272,14 @@ class AdminCommands:
                 deleted = await self.purge_from(
                     channel, check=check, limit=search_range, before=message)
                 return Response(
-                    'Cleaned up ***REMOVED******REMOVED*** message***REMOVED******REMOVED***.'.format(
-                        len(deleted), 's' * bool(deleted)),
-                    delete_after=15)
+                    "Cleaned up ***REMOVED******REMOVED*** message***REMOVED******REMOVED***.".format(
+                        len(deleted), "s" * bool(deleted)))
 
         deleted = 0
         async for entry in self.logs_from(
                 channel, search_range, before=message):
             if entry == self.server_specific_data[channel.server][
-                    'last_np_msg']:
+                    "last_np_msg"]:
                 continue
 
             if entry.author == self.user:
@@ -307,8 +300,7 @@ class AdminCommands:
                         pass
 
         return Response(
-            'Cleaned up ***REMOVED******REMOVED*** message***REMOVED******REMOVED***.'.format(deleted, 's' * bool(deleted)),
-            delete_after=15)
+            "Cleaned up ***REMOVED******REMOVED*** message***REMOVED******REMOVED***.".format(deleted, "s" * bool(deleted)))
 
     async def cmd_say(self, channel, message, leftover_args):
         """
