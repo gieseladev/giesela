@@ -1,5 +1,6 @@
 from imgurpython import ImgurClient
-from imgurpython.helpers.error import ImgurClientError
+from imgurpython.helpers.error import (ImgurClientError,
+                                       ImgurClientRateLimitError)
 
 import asyncio
 
@@ -35,7 +36,7 @@ def _upload_playlist_cover(playlist_name, url):
 
     try:
         resp = client.upload_from_url(url, config=config)
-    except ImgurClientError:
+    except (ImgurClientError, ImgurClientRateLimitError):
         return False
 
     return resp.get("link")
@@ -83,17 +84,14 @@ def _upload_song_image(playlist_name, identifier, url):
 
     try:
         resp = client.upload_from_url(url, config=config)
-    except ImgurClientError:
+    except (ImgurClientError, ImgurClientRateLimitError):
         return False
 
     return resp.get("link")
 
 async def upload_song_image(loop, playlist_name, identifier, url):
-    print(playlist_name)
-    print(identifier)
-    print(url)
     return await loop.run_in_executor(None, _upload_song_image, playlist_name, identifier, url)
 
-
+# print(client.credits)
 # _upload_song_image("simonisanerd", "HiJaKl2 thumbnail",
 #                    "https://lh3.googleusercontent.com/CbCjzp0eJoLIm0OmfJ5-xTB8namB7Pvw95hvhBZq-CbnkbF0tvig9XTOt8EFHiBgaBVb")

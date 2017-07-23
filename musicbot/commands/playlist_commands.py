@@ -844,7 +844,7 @@ class PlaylistCommands:
 
             if entry_type is SpotifyEntry:
                 title = fields["title"]
-                duration = fields["duration"]
+                duration = fields["_duration"]
                 album = fields["album"]
                 artist = fields["artist"]
                 artist_image = fields["artist_image_url"]
