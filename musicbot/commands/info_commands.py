@@ -228,7 +228,7 @@ class InfoCommands:
         desc = "Current Version is `***REMOVED******REMOVED***`\nDevelopment is at `***REMOVED******REMOVED***`\n\n***REMOVED******REMOVED***".format(
             BOTVERSION, dev_code + "_" + dev_name, changelog)[:2000]
 
-        em = Embed(title="Version " + v_name, description=desc,
+        em = Embed(title="Version \"***REMOVED******REMOVED***\"".format(v_name.replace("_", " ")), description=desc,
                    url="https://siku2.github.io/Giesela", colour=hex_to_dec("#67BE2E"))
 
         return Response(embed=em)

@@ -827,7 +827,8 @@ class PlaylistCommands:
                 args["spotify_data"] = SpotifyTrack.custom_track(
                     title, duration, album, artist, artist_image, cover)
             elif entry_type is TimestampEntry:
-                args["sub_queue"] = timestamp_to_queue(fields["sub_queue"])
+                args["sub_queue"] = timestamp_to_queue(
+                    fields["sub_queue"], fields["_duration"])
 
             return entry_type(**args)
 
