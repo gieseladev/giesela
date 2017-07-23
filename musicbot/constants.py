@@ -4,8 +4,8 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-MAIN_VERSION = "4.0.9"
-SUB_VERSION = "New_Reign"
+MAIN_VERSION = "4.1.3"
+SUB_VERSION = "Gooma"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
 all_sub_versions = {
