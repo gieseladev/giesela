@@ -1,6 +1,8 @@
 import re
+from random import choice
 
-from discord import Embed
+from discord import ChannelType, Embed
+from discord.utils import find
 from openpyxl import Workbook
 
 from ..bookmarks import bookmark
@@ -281,9 +283,10 @@ class ToolCommands:
 
     @command_info("2.0.3", 1485516420, {
         "3.7.5": (1481827320, "The command finally works like it should"),
-        "3.9.9": (1499977057, "moving Giesela too")
+        "3.9.9": (1499977057, "moving Giesela too"),
+        "4.1.8": (1500882643, "Updating to new player model")
     })
-    async def cmd_moveus(self, channel, server, author, message, leftover_args):
+    async def cmd_moveus(self, server, channel, author, user_mentions, leftover_args):
         """
         ///|Usage
         `{command_prefix}moveus <channel name>`
@@ -291,155 +294,66 @@ class ToolCommands:
         Move everyone in your current channel to another one!
         """
 
-        if len(leftover_args) < 1:
-            return Response("You need to provide a target channel")
+        target_channel = None
+        target = " ".join(leftover_args)
 
-        search_channel = " ".join(leftover_args)
-        if search_channel.lower().strip() == "home":
-            search_channel = "Giesela's reign"
+        if user_mentions:
+            target_channel = user_mentions[0].voice.voice_channel
 
-        if author.voice.voice_channel is None:
-            return Response(
-                "You're incredibly incompetent to do such a thing!")
+        if not target_channel and target:
+            target_channel = find(
+                lambda vc: vc.type == ChannelType.voice and target.lower().strip() in vc.name.lower().strip(),
+                server.channels
+            )
+
+        if target_channel is None:
+            return Response("Can't resolve the target channel!")
 
         author_channel = author.voice.voice_channel
         voice_members = author_channel.voice_members
+
         move_myself = False
         if server.me in voice_members:
             voice_members.remove(server.me)
             move_myself = True
 
-        target_channel = self.get_channel(search_channel)
-        if target_channel is None:
-            for chnl in server.channels:
-                if chnl.name == search_channel and chnl.type == ChannelType.voice:
-                    target_channel = chnl
-                    break
-
-        if target_channel is None:
-            return Response(
-                "Can't resolve the target channel!")
-
-        s = 0
         for voice_member in voice_members:
             await self.move_member(voice_member, target_channel)
-            s += 1
 
         if move_myself:
-            print("moving myself")
-            await self.move_voice_client(target_channel)
+            await self.get_player(server, target_channel)
 
-    async def cmd_summon(self, channel, author, voice_channel):
+    @command_info("1.0.0", 1477180800, {
+        "2.0.2": (1481827560, "Can now use @mentions to \"goto\" a user"),
+        "4.1.8": (1500881315, "Merging with old goto command")
+    })
+    async def cmd_summon(self, server, author, user_mentions, leftover_args):
         """
         Usage:
-            {command_prefix}summon
+            {command_prefix}summon [@mention | name]
 
         Call the bot to the summoner's voice channel.
         """
 
-        if not author.voice_channel:
-            raise exceptions.CommandError("You are not in a voice channel!")
+        target_channel = None
+        target = " ".join(leftover_args)
 
-        voice_client = self.the_voice_clients.get(channel.server.id, None)
-        if voice_client and voice_client.channel.server == author.voice_channel.server:
-            await self.move_voice_client(author.voice_channel)
-            return
+        if user_mentions:
+            target_channel = user_mentions[0].voice.voice_channel
 
-        # move to _verify_vc_perms?
-        chperms = author.voice_channel.permissions_for(
-            author.voice_channel.server.me)
+        if not target_channel and target:
+            target_channel = find(lambda vc: vc.type == ChannelType.voice and target.lower().strip() in vc.name.lower().strip(), server.channels)
 
-        if not chperms.connect:
-            print("Cannot join channel \"%s\", no permission." %
-                  author.voice_channel.name)
-            return Response(
-                "```Cannot join channel \"%s\", no permission.```" %
-                author.voice_channel.name,
-                delete_after=25)
+        if not target_channel:
+            target_channel = author.voice_channel
 
-        elif not chperms.speak:
-            print("Will not join channel \"%s\", no permission to speak." %
-                  author.voice_channel.name)
-            return Response(
-                "```Will not join channel \"%s\", no permission to speak.```" %
-                author.voice_channel.name,
-                delete_after=25)
+        if not target_channel:
+            return Response("Couldn't find voic channel")
 
-        player = await self.get_player(author.voice_channel, create=True)
+        player = await self.get_player(server, target_channel)
 
         if player.is_stopped:
             player.play()
-
-        if self.config.auto_playlist:
-            await self.on_player_finished_playing(player)
-
-    @command_info("1.0.0", 1477180800, {
-        "2.0.2": (1481827560, "Can now use @mentions to \"goto\" a user")
-    })
-    async def cmd_goto(self, server, channel, user_mentions, author, leftover_args):
-        """
-        Usage:
-            {command_prefix}goto <id | name | @mention>
-
-        Call the bot to a channel.
-        """
-
-        channelID = " ".join(leftover_args)
-        if channelID.lower() == "home":
-            await self.goto_home(server)
-            return Response("yep")
-
-        targetChannel = self.get_channel(channelID)
-        if targetChannel is None:
-            for chnl in server.channels:
-                if chnl.name == channelID and chnl.type == ChannelType.voice:
-                    targetChannel = chnl
-                    break
-            else:
-                if user_mentions:
-                    for ch in server.channels:
-                        for user in ch.voice_members:
-                            if user in user_mentions:
-                                targetChannel = ch
-                    if targetChannel is None:
-                        return Response(
-                            "Cannot find **{}** in any voice channel".format(
-                                ", ".join([x.mention for x in user_mentions])))
-                else:
-                    print("Cannot find channel \"%s\"" % channelID)
-                    return Response(
-                        "```Cannot find channel \"%s\"```" % channelID)
-
-        voice_client = await self.get_voice_client(targetChannel)
-        print("Will join channel \"%s\"" % targetChannel.name)
-        await self.move_voice_client(targetChannel)
-
-        # move to _verify_vc_perms?
-        chperms = targetChannel.permissions_for(targetChannel.server.me)
-
-        if not chperms.connect:
-            print("Cannot join channel \"%s\", no permission." %
-                  targetChannel.name)
-            return Response(
-                "```Cannot join channel \"%s\", no permission.```" %
-                targetChannel.name)
-
-        elif not chperms.speak:
-            print("Will not join channel \"%s\", no permission to speak." %
-                  targetChannel.name)
-            return Response(
-                "```Will not join channel \"%s\", no permission to speak.```" %
-                targetChannel.name)
-
-        player = await self.get_player(targetChannel, create=True)
-
-        if player.is_stopped:
-            player.play()
-
-        if self.config.auto_playlist:
-            await self.on_player_finished_playing(player)
-
-        return Response("Joined the channel **{}**".format(targetChannel.name))
 
     @owner_only
     async def cmd_countmsgs(self, server, author, channel_id, number):

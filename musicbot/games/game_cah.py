@@ -10,8 +10,6 @@ import configparser
 from musicbot.config import ConfigDefaults
 from musicbot.utils import prettydate
 
-from ..logger import log
-
 vowels = tuple("aeiou")
 a_list =\
     {
@@ -524,8 +522,8 @@ class GameCAH:
             return task.add_done_callback(callback)
 
     def wait_for_message(self, callback, timeout=None, check=None):
-        # log("::::::::::::::::::" + str(check))
-        # log(";;;;;;;;;;;;;;;;;;" + str(callback))
+        # print("::::::::::::::::::" + str(check))
+        # print(";;;;;;;;;;;;;;;;;;" + str(callback))
         task = self.musicbot.loop.create_task(
             self.musicbot.wait_for_message(timeout=timeout, check=check))
         task.add_done_callback(callback)
@@ -552,8 +550,8 @@ class Game:
         self.throwing_card_cost = 5
 
         self.cards = self.manager.cards.cards.copy()
-        log(str(self.number_of_blanks) + " blanks out of " +
-            str(len(self.cards)) + " total cards in this game!")
+        print(str(self.number_of_blanks) + " blanks out of " +
+              str(len(self.cards)) + " total cards in this game!")
         self.cards.extend([Card.blank_card()
                            for _ in range(self.number_of_blanks)])
         self.question_cards = self.manager.cards.question_cards.copy()
@@ -571,7 +569,7 @@ class Game:
         for player in self.players:
             self.send_player_stats(player)
 
-        log("[CAH] <{}> Stopped!".format(self.token))
+        print("[CAH] <{}> Stopped!".format(self.token))
 
     def start_game(self):
         if self.started or not self.enough_players():
@@ -590,7 +588,7 @@ class Game:
         return len(self.players) >= 2
 
     def round_finished(self):
-        log("round finished-playing")
+        print("round finished-playing")
         threading.Timer(1.5, self.next_round).start()
 
     def get_player(self, id):
@@ -679,7 +677,7 @@ class Game:
         i = random.randint(0, len(self.question_cards) - 1)
 
         if self.question_cards[i].number_of_blanks > self.number_of_cards:
-            log("[CAH] Card ({}) can't be used as it has too many number of blanks ({})".format(
+            print("[CAH] Card ({}) can't be used as it has too many number of blanks ({})".format(
                 self.question_cards[i], self.number_of_cards))
             return self.pick_question_card()
 
@@ -728,7 +726,7 @@ class Game:
 class Round:
 
     def __init__(self, game, round_index):
-        log("[CAH] <{}: {}> Starting!".format(
+        print("[CAH] <{}: {}> Starting!".format(
             game.token, round_index))
         self.game = game
         self.master = game.pick_master()
@@ -753,7 +751,7 @@ class Round:
             pl.bump_played()
 
             if pl.player_id == self.master.player_id:
-                log("[CAH] <{}: {}> ({}) is the master".format(
+                print("[CAH] <{}: {}> ({}) is the master".format(
                     self.game.token, self.round_index, pl))
                 card_texts = self.get_card_texts(pl)
                 self.game.manager.send_message_to_user(pl.player_id, round_text_master.format(
@@ -765,7 +763,7 @@ class Round:
             else:
                 self.send_player_information(pl)
 
-                log("[CAH] <{}: {}> Waiting for message from ({})!".format(
+                print("[CAH] <{}: {}> Waiting for message from ({})!".format(
                     self.game.token, self.round_index, pl))
 
                 check = lambda msg, pl=pl: msg.author.id == pl.player_id
@@ -777,7 +775,7 @@ class Round:
             return
 
         if player.player_id == self.master.player_id:
-            log("[CAH] <{}: {}> Received message from master!".format(
+            print("[CAH] <{}: {}> Received message from master!".format(
                 self.game.token, self.round_index))
             return
 
@@ -792,7 +790,7 @@ class Round:
         content = message.content.strip().lower()
         args = content.split()
 
-        log("[CAH] <{}: {}> ({}) sent: \"{}\"".format(
+        print("[CAH] <{}: {}> ({}) sent: \"{}\"".format(
             self.game.token, self.round_index, player, content))
 
         try:
@@ -818,7 +816,7 @@ class Round:
                 return
 
             card_chosen = player.get_card(num)
-            log("[CAH] <{}: {}> ({}) picked card ({})".format(
+            print("[CAH] <{}: {}> ({}) picked card ({})".format(
                 self.game.token, self.round_index, player, card_chosen))
 
             if card_chosen.id == 0:
@@ -829,7 +827,7 @@ class Round:
                     wait_again()
                     return
 
-                log("[CAH] <{}: {}> ({}) used a blank card with text: \"{}\"".format(
+                print("[CAH] <{}: {}> ({}) used a blank card with text: \"{}\"".format(
                     self.game.token, self.round_index, player, blank_text))
                 card_chosen.text = blank_text
 
@@ -840,7 +838,7 @@ class Round:
                 self.answers[player] = [card_chosen, ]
 
             if self.number_of_answers_from_player(player) >= self.question_card.number_of_blanks:
-                log("[CAH] <{}: {}> ({}) is done!".format(
+                print("[CAH] <{}: {}> ({}) is done!".format(
                     self.game.token, self.round_index, player))
                 self.player_answered(player)
                 if len(self.players_to_answer) < 1:
@@ -866,7 +864,7 @@ class Round:
 
             card_chosen = player.get_card(num, True)
 
-            log("[CAH] <{}: {}> ({}) requests information about card ({})".format(
+            print("[CAH] <{}: {}> ({}) requests information about card ({})".format(
                 self.game.token, self.round_index, player, card_chosen))
 
             self.game.manager.send_message_to_user(
@@ -891,7 +889,7 @@ class Round:
             card_chosen = player.get_card(num, True)
             self.game.manager.cards.bump_card_likes(card_chosen.id)
 
-            log("[CAH] <{}: {}> ({}) likes card ({})".format(
+            print("[CAH] <{}: {}> ({}) likes card ({})".format(
                 self.game.token, self.round_index, player, card_chosen))
 
             self.game.manager.send_message_to_user(
@@ -916,7 +914,7 @@ class Round:
             card_chosen = player.get_card(num, True)
             self.game.manager.cards.bump_card_dislikes(card_chosen.id)
 
-            log("[CAH] <{}: {}> ({}) dislikes card ({})".format(
+            print("[CAH] <{}: {}> ({}) dislikes card ({})".format(
                 self.game.token, self.round_index, player, card_chosen))
 
             self.game.manager.send_message_to_user(
@@ -986,7 +984,7 @@ class Round:
         for msg in self.messages_to_delete:
             self.game.manager.delete_message(msg)
 
-            log("[CAH] <{}: {}> Deleting message \"{}\"".format(
+            print("[CAH] <{}: {}> Deleting message \"{}\"".format(
                 self.game.token, self.round_index, msg.content[:20]))
 
         self.messages_to_delete = []
@@ -1010,7 +1008,7 @@ class Round:
         player_key, answers = self.answers_by_index[index]
         player_key.bump_won(
             self.question_card.number_of_blanks, len(self.answers.keys()))
-        log("[CAH] <{}: {}> Master ({}) has picked ({})\'s answer ({})".format(
+        print("[CAH] <{}: {}> Master ({}) has picked ({})\'s answer ({})".format(
             self.game.token, self.round_index, self.master, player_key, answers))
 
         self.game.broadcast("**{}** won the game with the card{} {}".format(self.game.manager.musicbot.get_global_user(player_key.player_id).name, "s" if len(
@@ -1019,7 +1017,7 @@ class Round:
 
     def start_judging(self):
         self.clean_up()
-        log("[CAH] <{}: {}> Starting the judgement".format(
+        print("[CAH] <{}: {}> Starting the judgement".format(
             self.game.token, self.round_index))
 
         player_judge_text = "**Time to be judged by *{3}*!**\n\n```\n{0}```*<{1}>*\n\n**The answers are**\n{2}"
@@ -1072,7 +1070,7 @@ class Round:
         content = message.content.strip().lower()
         args = content.split()
 
-        log("[CAH] <{}: {}> Master ({}) sent message: \"{}\"".format(
+        print("[CAH] <{}: {}> Master ({}) sent message: \"{}\"".format(
             self.game.token, self.round_index, self.master, message.content))
 
         try:
@@ -1127,7 +1125,7 @@ class Round:
             wait_again()
             return
         elif args[0] == "info":
-            log("[CAH] <{}: {}> ({}) requests information about question card".format(
+            print("[CAH] <{}: {}> ({}) requests information about question card".format(
                 self.game.token, self.round_index, player, card_chosen))
 
             self.game.manager.send_message_to_user(
