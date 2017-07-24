@@ -1,3 +1,5 @@
+from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
+
 from musicbot.entry import Entry
 
 
@@ -8,13 +10,16 @@ async def _rebuild_entry(queue, entry):
     return await get_entry(entry.url, **entry.meta)
 
 async def _fix_filename(queue, entry):
-    new_info = await queue.get_ytdl_data(entry["url"])
-    entry.update(***REMOVED***
-        "version": Entry.version,
-        "expected_filename": queue.downloader.ytdl.prepare_filename(new_info)
-    ***REMOVED***)
+    try:
+        new_info = await queue.get_ytdl_data(entry["url"])
+        entry.update(***REMOVED***
+            "version": Entry.version,
+            "expected_filename": queue.downloader.ytdl.prepare_filename(new_info)
+        ***REMOVED***)
 
-    return Entry.from_dict(queue, entry)
+        return Entry.from_dict(queue, entry)
+    except (DownloadError, ExtractorError, UnsupportedError):
+        return None
 
 async def fix_entry(queue, entry):
     version = entry.get("version", 0)
