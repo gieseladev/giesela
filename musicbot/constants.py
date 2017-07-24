@@ -1,6 +1,6 @@
 import os.path
 
-MAIN_VERSION = "4.2.0"
+MAIN_VERSION = "4.2.1"
 SUB_VERSION = "ice_cube"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
@@ -20,5 +20,6 @@ all_sub_versions = ***REMOVED***
     "3.0.x": "Giesela PLUS"
 ***REMOVED***
 
-AUDIO_CACHE_PATH = os.path.join(os.getcwd(), "audio_cache")
+AUDIO_CACHE_PATH = "cache/audio_cache"
+ABS_AUDIO_CACHE_PATH = os.path.join(os.getcwd(), AUDIO_CACHE_PATH)
 DISCORD_MSG_CHAR_LIMIT = 2000

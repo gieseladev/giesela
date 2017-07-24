@@ -30,7 +30,8 @@ from .commands.queue_commands import QueueCommands
 from .commands.tool_commands import ToolCommands
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
-from .constants import AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT
+from .constants import (ABS_AUDIO_CACHE_PATH, AUDIO_CACHE_PATH,
+                        DISCORD_MSG_CHAR_LIMIT)
 from .entry import RadioSongEntry, StreamEntry, TimestampEntry
 from .games.game_cah import GameCAH
 from .opus_loader import load_opus_lib
@@ -62,7 +63,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
         self.blacklist = set(load_file(self.config.blacklist_file))
         self.autoplaylist = load_file(self.config.auto_playlist_file)
-        self.downloader = downloader.Downloader(download_folder="audio_cache")
+        self.downloader = downloader.Downloader(download_folder=AUDIO_CACHE_PATH)
         self.calendar = Calendar(self)
 
         self.exit_signal = None
@@ -105,7 +106,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
         return channel
 
-    def _delete_old_audiocache(self, path=AUDIO_CACHE_PATH):
+    def _delete_old_audiocache(self, path=ABS_AUDIO_CACHE_PATH):
         try:
             shutil.rmtree(path)
             return True
@@ -641,7 +642,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
         print(config_string)
 
-        if not self.config.save_videos and os.path.isdir(AUDIO_CACHE_PATH):
+        if not self.config.save_videos and os.path.isdir(ABS_AUDIO_CACHE_PATH):
             if self._delete_old_audiocache():
                 print("Deleting old audio cache")
             else:

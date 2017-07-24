@@ -8,6 +8,7 @@ from discord import Embed
 import asyncio
 
 from ..entry import GieselaEntry, TimestampEntry, YoutubeEntry
+from ..entry_updater import fix_generator
 from ..imgur import upload_playlist_cover, upload_song_image
 from ..saved_playlists import Playlists
 from ..spotify import SpotifyTrack
@@ -392,12 +393,15 @@ class PlaylistCommands:
         def check(m):
             return (m.content.split()[0].lower() in ["add", "remove", "rename", "exit", "p", "n", "save", "extras", "search", "edit"])
 
-        async def _get_entries_from_urls(urls, message):
+        async def _get_entries_from_urls(urls, message, fix=False):
             entries = []
             removed_entries = []
 
-            entry_generator = player.playlist.get_entries_from_urls_gen(
-                *urls)
+            if fix:
+                entry_generator = fix_generator(player.playlist, *urls)
+            else:
+                entry_generator = player.playlist.get_entries_from_urls_gen(
+                    *urls)
 
             total_entries = len(urls)
             progress_message = await self.safe_send_message(channel, "***REMOVED******REMOVED***\n***REMOVED******REMOVED*** [0%]".format(message.format(entries_left=total_entries), create_bar(0, length=20)))
@@ -480,7 +484,7 @@ class PlaylistCommands:
             broken_entries = playlist["broken_entries"]
             if len(broken_entries) > 1:
                 m = "There are ***REMOVED***entries_left***REMOVED*** broken/outdated entries in this playlist. I'm going to fix them, please stand by."
-                new_entries, hopeless_entries = await _get_entries_from_urls([entry["url"] for entry in broken_entries], m)
+                new_entries, hopeless_entries = await _get_entries_from_urls(broken_entries, m, fix=True)
                 playlist["entries"].extend(new_entries)
                 if hopeless_entries:
                     await self.safe_send_message(channel, "I couldn't save the following entries\n***REMOVED******REMOVED***".format(
