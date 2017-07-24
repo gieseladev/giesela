@@ -7,12 +7,13 @@ from discord import Embed
 
 import asyncio
 
-from ..entry import SpotifyEntry, TimestampEntry, YoutubeEntry
+from ..entry import GieselaEntry, TimestampEntry, YoutubeEntry
+from ..entry_updater import fix_generator
 from ..imgur import upload_playlist_cover, upload_song_image
 from ..saved_playlists import Playlists
 from ..spotify import SpotifyTrack
 from ..utils import (Response, asyncio, block_user, command_info, create_bar,
-                     format_time, is_image, nice_cut, owner_only,
+                     format_time, hex_to_dec, is_image, nice_cut, owner_only,
                      parse_timestamp, timestamp_to_queue, to_timestamp,
                      wrap_string)
 
@@ -38,7 +39,9 @@ class PlaylistCommands:
         "4.0.7": (1500728466, "Can now manipulate playlist entries"),
         "4.1.0": (1500777145, "description bug fixed"),
         "4.1.1": (1500789035, "Using Imgur to save images"),
-        "4.1.2": (1500790172, "Closing the playlist builder without saving for a newly created playlist, deletes said playlist.")
+        "4.1.2": (1500790172, "Closing the playlist builder without saving for a newly created playlist, deletes said playlist."),
+        "4.1.5": (1500812970, "Some design adjustments"),
+        "4.2.0": (1500889194, "Entry Manipulator switched to GieselaEntry instead of fake SpotifyEntries")
     })
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -181,8 +184,7 @@ class PlaylistCommands:
         elif argument == "delete":
             if savename not in self.playlists.saved_playlists:
                 return Response(
-                    "Can't delete this playlist, there's no playlist with this name.",
-                    delete_after=20)
+                    "Can't delete this playlist, there's no playlist with this name.")
 
             self.playlists.remove_playlist(savename)
             return Response(
@@ -251,8 +253,7 @@ class PlaylistCommands:
                     "There are no saved playlists.\n**You** could add one though. Type `{}help playlist` to see how!".format(
                         self.config.command_prefix))
 
-            response_text = "**Found the following playlists:**\n\n"
-            iteration = 1
+            response_text = "**Playlists**\n__                 __\n\n"
 
             sort_modes = {
                 "alphabetical": (lambda playlist: playlist, False),
@@ -279,9 +280,8 @@ class PlaylistCommands:
                 )
             }
 
-            sort_mode = leftover_args[1].lower(
-            ) if len(leftover_args) > 1 and leftover_args[1].lower(
-            ) in sort_modes.keys() else "random"
+            sort_mode = leftover_args[1].lower() if len(leftover_args) > 1 and leftover_args[
+                1].lower() in sort_modes.keys() else "replays"
 
             if sort_mode == "random":
                 sorted_saved_playlists = self.playlists.saved_playlists
@@ -294,33 +294,26 @@ class PlaylistCommands:
 
             for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.playlist)
-                response_text += "**{}.** **\"{}\"** by {}\n```\n  {} entr{} ({} broken)\n  played {} time{}\n  {}```\n\n".format(
-                    iteration,
+                response_text += "◦ **{}** ({} entr{})\n".format(
                     pl.replace("_", " ").title(),
-                    self.get_global_user(infos["author"]).mention,
                     len(infos["entries"]),
-                    "ies" if len(infos["entries"]) is not 1 else "y",
-                    len(infos["broken_entries"]),
-                    infos["replay_count"], "s"
-                    if int(infos["replay_count"]) != 1 else "",
-                    format_time(
-                        sum([x.duration for x in infos["entries"]]),
-                        round_seconds=True,
-                        max_specifications=2))
-                iteration += 1
+                    "ies" if len(infos["entries"]) is not 1 else "y"
+                )
 
-            # self.log (response_text)
+            response_text += "\n**Reference**\n" + "\n".join([
+                "`{command_prefix}playlist <name>` to learn more about a playlist",
+                "`{command_prefix}playlist builder <name>` to edit a playlist"
+            ]).format(command_prefix=self.config.command_prefix)
+
             return Response(response_text)
 
         elif argument == "builder":
             if len(savename) < 3:
                 return Response(
-                    "Can't build on this playlist, the name must be longer than 3 characters",
-                    delete_after=20)
+                    "Can't build on this playlist, the name must be longer than 3 characters")
             if savename in forbidden_savenames:
                 return Response(
-                    "Can't build on this playlist, this name is forbidden!",
-                    delete_after=20)
+                    "Can't build on this playlist, this name is forbidden!")
 
             print("Starting the playlist builder")
             response = await self.playlist_builder(channel, author, server,
@@ -332,7 +325,7 @@ class PlaylistCommands:
                                                 player.playlist)
             entries = infos["entries"]
 
-            desc_text = "```\n{}\n```\n{} entr{} ({} broken)\n{} long".format(
+            desc_text = "{}\n\n{} entr{} ({} broken)\n{} long".format(
                 infos["description"] or "This playlist doesn't have a description",
                 len(infos["entries"]),
                 "ies" if infos["entries"] is not 1 else "y",
@@ -346,7 +339,9 @@ class PlaylistCommands:
             )
             em = Embed(
                 title=argument.replace("_", " ").title(),
-                description=desc_text
+                description=desc_text,
+                colour=hex_to_dec("#b93649"),
+                url="http://giesela.org"
             )
             pl_author = self.get_global_user(infos["author"])
             em.set_author(
@@ -398,12 +393,15 @@ class PlaylistCommands:
         def check(m):
             return (m.content.split()[0].lower() in ["add", "remove", "rename", "exit", "p", "n", "save", "extras", "search", "edit"])
 
-        async def _get_entries_from_urls(urls, message):
+        async def _get_entries_from_urls(urls, message, fix=False):
             entries = []
             removed_entries = []
 
-            entry_generator = player.playlist.get_entries_from_urls_gen(
-                *urls)
+            if fix:
+                entry_generator = fix_generator(player.playlist, *urls)
+            else:
+                entry_generator = player.playlist.get_entries_from_urls_gen(
+                    *urls)
 
             total_entries = len(urls)
             progress_message = await self.safe_send_message(channel, "{}\n{} [0%]".format(message.format(entries_left=total_entries), create_bar(0, length=20)))
@@ -486,7 +484,7 @@ class PlaylistCommands:
             broken_entries = playlist["broken_entries"]
             if len(broken_entries) > 1:
                 m = "There are {entries_left} broken/outdated entries in this playlist. I'm going to fix them, please stand by."
-                new_entries, hopeless_entries = await _get_entries_from_urls([entry["url"] for entry in broken_entries], m)
+                new_entries, hopeless_entries = await _get_entries_from_urls(broken_entries, m, fix=True)
                 playlist["entries"].extend(new_entries)
                 if hopeless_entries:
                     await self.safe_send_message(channel, "I couldn't save the following entries\n{}".format(
@@ -550,7 +548,7 @@ class PlaylistCommands:
                 abort = True
                 break
 
-            elif response_message.content.lower().startswith(self.config.command_prefix) or response_message.content.lower().startswith('exit'):
+            elif response_message.content.lower().startswith(self.config.command_prefix) or response_message.content.lower().startswith("exit"):
                 abort = True
 
             elif response_message.content.lower().startswith("save"):
@@ -833,36 +831,35 @@ class PlaylistCommands:
             if "sub_queue" in keys:
                 return set(), TimestampEntry
 
-            missing_for_spotify = {
+            missing_for_giesela = {
                 "album", "artist", "artist_image_url", "cover_url"} - keys
-            if not missing_for_spotify:
-                return set(), SpotifyEntry
+            if not missing_for_giesela:
+                return set(), GieselaEntry
 
-            return missing_for_spotify, YoutubeEntry
+            return missing_for_giesela, YoutubeEntry
 
         def build_new_entry(fields):
             _, entry_type = get_entry_type(fields)
 
             args = {
-                "title": fields["title"],
-                "queue": player.playlist,
-                "video_id": fields["_video_id"],
-                "url": fields["_url"],
-                "duration": fields["_duration"],
-                "thumbnail": fields["thumbnail"],
-                "description": fields["_description"]
+                "title":        fields["title"],
+                "queue":        player.playlist,
+                "video_id":     fields["_video_id"],
+                "url":          fields["_url"],
+                "duration":     fields["_duration"],
+                "thumbnail":    fields["thumbnail"],
+                "description":  fields["_description"]
             }
 
-            if entry_type is SpotifyEntry:
-                title = fields["title"]
-                duration = fields["_duration"]
-                album = fields["album"]
-                artist = fields["artist"]
-                artist_image = fields["artist_image_url"]
-                cover = fields["cover_url"]
+            if entry_type is GieselaEntry:
+                args.update({
+                    "song_title":   fields["title"],
+                    "artist":       fields["artist"],
+                    "artist_image": fields["artist_image_url"],
+                    "album":        fields["album"],
+                    "cover":        fields["cover_url"]
+                })
 
-                args["spotify_data"] = SpotifyTrack.custom_track(
-                    title, duration, album, artist, artist_image, cover)
             elif entry_type is TimestampEntry:
                 args["sub_queue"] = timestamp_to_queue(
                     fields["sub_queue"], fields["_duration"])
@@ -870,26 +867,26 @@ class PlaylistCommands:
             return entry_type(**args)
 
         entry_fields = {
-            "__title": entry._title,
-            "_video_id": entry.video_id,
-            "_url": entry.url,
+            "__title":      entry._title,
+            "_video_id":    entry.video_id,
+            "_url":         entry.url,
             "_description": entry.description,
-            "_duration": entry.duration,
-            "title": entry.title,
-            "thumbnail": entry.thumbnail,
+            "_duration":    entry.duration,
+            "title":        entry.title,
+            "thumbnail":    entry.thumbnail,
         }
-        if isinstance(entry, SpotifyEntry):
+        if isinstance(entry, GieselaEntry):
             entry_fields.update({
-                "title": entry.song_name,
-                "artist": entry.artist,
-                "artist_image_url": choice(entry.artists).image,
-                "album": entry.album.name,
-                "cover_url": entry.cover
+                "title":            entry.song_title,
+                "artist":           entry.artist,
+                "artist_image_url": entry.artist_image,
+                "album":            entry.album,
+                "cover_url":        entry.cover
             })
         elif isinstance(entry, TimestampEntry):
             entry_fields.update({
-                "title": entry.whole_title,
-                "sub_queue": {entry["start"]: entry["name"] for entry in entry.sub_queue}
+                "title":        entry.whole_title,
+                "sub_queue":    {entry["start"]: entry["name"] for entry in entry.sub_queue}
             })
 
         commands = "\n".join([
@@ -901,7 +898,9 @@ class PlaylistCommands:
         ])
         error_format = "**Error**\n{error_message}\n\n"
         information_format = ""
-        interface_format = "**ENTRY EDITOR**\n\n{error}---\n{fields}\n---\n{timestamps}\n{information}\n\n**Commands**\n" + commands
+        line = wrap_string(80 * " ", "__")
+        interface_format = "**ENTRY EDITOR**\n\n{{error}}{line}\n\n{{fields}}\n{line}\n{{timestamps}}\n{{information}}\n\n**Commands**\n{commands}".format(
+            line=line, commands=commands)
 
         error = None
 
@@ -953,8 +952,8 @@ class PlaylistCommands:
             missing, current_type = get_entry_type(entry_fields)
             if current_type is TimestampEntry:
                 info_text = "This is a TimestampEntry. Remove the sub queue to get a normal entry."
-            elif current_type is SpotifyEntry:
-                info_text = "This is a SpotifyEntry. That's as good as it gets"
+            elif current_type is GieselaEntry:
+                info_text = "This is a GieselaEntry. That's as good as it gets"
             else:
                 missing = list(missing)
                 beautified_parameter = {
@@ -971,7 +970,7 @@ class PlaylistCommands:
 
                 properties_needed += beautified_parameter[missing[-1]]
 
-                info_text = "This is currently a normal entry. Provide {} in order to get to a SpotifyEntry".format(
+                info_text = "This is currently a normal entry. Provide {} in order to get to a GieselaEntry".format(
                     properties_needed)
 
             msg_text = interface_format.format(
@@ -1183,3 +1182,38 @@ class PlaylistCommands:
         self.playlists.edit_playlist(
             playlistname, player.playlist, remove_entries=[remove_entry])
         return Response("Removed **{}** from playlist `{}`.".format(remove_entry.title, playlistname))
+
+    @command_info("4.1.9", 1500882702)
+    async def cmd_editentry(self, channel, author, player, leftover_args):
+        """
+        ///|Usage
+        `{command_prefix}editentry [playlistname]`
+        ///|Explanation
+        Start the entry manipulator on the current entry
+        """
+
+        await self.send_typing(channel)
+
+        if not player.current_entry:
+            return Response("There's nothing playing right now")
+
+        entry = player.current_entry
+
+        playlistname = (
+            "_".join(leftover_args) or entry.meta.get("playlist", {}).get("name", None)
+        ).lower().strip()
+
+        if not playlistname:
+            return Response("No idea which entry you would like to edit")
+
+        if playlistname not in self.playlists.saved_playlists:
+            return Response("This playlist doesn't exist")
+
+        new_entry = await self.entry_manipulator(player, channel, author, playlistname, entry)
+
+        if new_entry:
+            player._current_entry = new_entry
+            self.playlists.edit_playlist(playlistname, player.playlist, edit_entries=[(entry, new_entry)])
+            return Response("Successfully edited **{}** from `{}`".format(new_entry.title, playlistname.replace("_", " ").title()))
+        else:
+            return Response("Didn't save **{}** from `{}`".format(new_entry.title, playlistname.replace("_", " ").title()))

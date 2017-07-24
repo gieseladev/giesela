@@ -15,7 +15,7 @@ from .web_socket_server import WebAuthor
 
 
 class Entry:
-    version_code = "1.0.0"
+    version_code = "1.0.1"
     version = int(version_code.replace(".", ""))
     can_encode = (int, dict, list, str, int, float, bool)
     default_encode = (Channel, Member, Server, User)
@@ -26,7 +26,7 @@ class Entry:
         entry_version = data.get("version", 0)
 
         if entry_version < Entry.version:
-            raise OutdatedEntryError()
+            raise OutdatedEntryError("Version parameter signifies an outdated entry")
 
         entry_type = data.get("type", None)
         if not entry_type:
@@ -263,7 +263,7 @@ class StreamEntry(BaseEntry):
 
             raise ExtractionError(e)
         else:
-            self.filename = result['url']
+            self.filename = result["url"]
             # I might need some sort of events or hooks or shit
             # for when ffmpeg inevitebly fucks up and i have to restart
             # although maybe that should be at a slightly lower level
@@ -436,6 +436,7 @@ class YoutubeEntry(BaseEntry):
         else:
             meta = {}
 
+        filename = data.get("expected_filename", None)
         video_id = data["video_id"]
         url = data["url"]
         title = data["title"]
@@ -443,21 +444,22 @@ class YoutubeEntry(BaseEntry):
         thumbnail = data["thumbnail"]
         description = data["description"]
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, **meta)
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, expected_filename=filename, **meta)
 
     def to_dict(self):
         meta_dict = Entry.create_meta_dict(self.meta)
 
         data = {
-            "version": Entry.version,
-            "type": self.__class__.__name__,
-            "video_id": self.video_id,
-            "url": self.url,
-            "title": self._title,
-            "duration": self.duration,
-            "thumbnail": self.thumbnail,
-            "description": self.description,
-            "meta": meta_dict
+            "version":              Entry.version,
+            "type":                 self.__class__.__name__,
+            "expected_filename":    self.expected_filename,
+            "video_id":             self.video_id,
+            "url":                  self.url,
+            "title":                self._title,
+            "duration":             self.duration,
+            "thumbnail":            self.thumbnail,
+            "description":          self.description,
+            "meta":                 meta_dict
         }
         return data
 
@@ -500,23 +502,23 @@ class YoutubeEntry(BaseEntry):
             if self.expected_filename is None:
                 self.expected_filename = slugify("unknown" + self.title)
 
-            extractor = os.path.basename(self.expected_filename).split('-')[0]
+            extractor = os.path.basename(self.expected_filename).split("-")[0]
 
             # the generic extractor requires special handling
-            if extractor == 'generic':
+            if extractor == "generic":
                 # print("Handling generic")
                 flistdir = [
-                    f.rsplit('-', 1)[0]
+                    f.rsplit("-", 1)[0]
                     for f in os.listdir(self.download_folder)
                 ]
                 expected_fname_noex, fname_ex = os.path.basename(
-                    self.expected_filename).rsplit('.', 1)
+                    self.expected_filename).rsplit(".", 1)
 
                 if expected_fname_noex in flistdir:
                     try:
                         rsize = int(
                             await get_header(self.queue.bot.aiosession,
-                                             self.url, 'CONTENT-LENGTH'))
+                                             self.url, "CONTENT-LENGTH"))
                     except:
                         rsize = 0
 
@@ -540,9 +542,9 @@ class YoutubeEntry(BaseEntry):
 
             else:
                 ldir = os.listdir(self.download_folder)
-                flistdir = [f.rsplit('.', 1)[0] for f in ldir]
+                flistdir = [f.rsplit(".", 1)[0] for f in ldir]
                 expected_fname_base = os.path.basename(self.expected_filename)
-                expected_fname_noex = expected_fname_base.rsplit('.', 1)[0]
+                expected_fname_noex = expected_fname_base.rsplit(".", 1)[0]
 
                 # idk wtf this is but its probably legacy code
                 # or i have youtube to blame for changing shit again
@@ -558,8 +560,8 @@ class YoutubeEntry(BaseEntry):
                         self.download_folder,
                         ldir[flistdir.index(expected_fname_noex)])
                     print("Expected %s, got %s" %
-                          (self.expected_filename.rsplit('.', 1)[-1],
-                           self.filename.rsplit('.', 1)[-1]))
+                          (self.expected_filename.rsplit(".", 1)[-1],
+                           self.filename.rsplit(".", 1)[-1]))
 
                 else:
                     await self._really_download()
@@ -587,7 +589,7 @@ class YoutubeEntry(BaseEntry):
 
         if result is None:
             raise ExtractionError("ytdl broke and hell if I know why")
-            # What the fuck do I do now?
+            # What the duck do I do now?
 
         self.filename = unhashed_fname = self.queue.downloader.ytdl.prepare_filename(
             result)
@@ -597,7 +599,7 @@ class YoutubeEntry(BaseEntry):
             # ensure uniqueness
             self.filename = md5sum(
                 unhashed_fname,
-                8).join('-.').join(unhashed_fname.rsplit('.', 1))
+                8).join("-.").join(unhashed_fname.rsplit(".", 1))
 
             if os.path.isfile(self.filename):
                 # Oh bother it was actually there.
@@ -682,26 +684,20 @@ class TimestampEntry(YoutubeEntry):
         return data
 
 
-class SpotifyEntry(YoutubeEntry):
+class GieselaEntry(YoutubeEntry):
 
-    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, spotify_data, expected_filename=None, **meta):
-        super().__init__(queue, video_id, url, title, duration,
-                         thumbnail, description, expected_filename=None, **meta)
-        self.spotify_data = spotify_data
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, expected_filename=None, **meta):
+        super().__init__(queue, video_id, url, title, duration, thumbnail, description, expected_filename=expected_filename, **meta)
 
-        self.song_name = spotify_data.name
-        self.artist = spotify_data.artist_string
-        self.artists = spotify_data.artists
-        self.album = spotify_data.album
-        self.popularity = spotify_data.popularity / 100
-
-        self._title = "{} - {}".format(spotify_data.artist_string,
-                                       self.song_name)
+        self.song_title = song_title
+        self.artist = artist
+        self.artist_image = artist_image
+        self.cover = cover
+        self.album = album
 
     @property
-    def cover(self):
-        # using a property because I want to keep the randomness
-        return self.spotify_data.cover_url
+    def title(self):
+        return "{} - {}".format(self.artist, self.song_title)
 
     @classmethod
     def from_dict(cls, playlist, data):
@@ -714,20 +710,30 @@ class SpotifyEntry(YoutubeEntry):
         else:
             meta = {}
 
+        filename = data.get("expected_filename", None)
         video_id = data["video_id"]
         url = data["url"]
         title = data["title"]
         duration = data["duration"]
         thumbnail = data["thumbnail"]
         description = data["description"]
-        spotify_data = SpotifyTrack.from_dict(data["spotify_data"])
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, spotify_data, **meta)
+        song_title = data["song_title"]
+        artist = data["artist"]
+        artist_image = data["artist_image"]
+        cover = data["cover"]
+        album = data["album"]
+
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, expected_filename=filename, **meta)
 
     def to_dict(self):
         d = super().to_dict()
         d.update({
-            "spotify_data": self.spotify_data.get_dict()
+            "song_title": self.song_title,
+            "artist": self.artist,
+            "artist_image": self.artist_image,
+            "cover": self.cover,
+            "album": self.album
         })
 
         return d
@@ -736,9 +742,57 @@ class SpotifyEntry(YoutubeEntry):
         data = super().to_web_dict()
 
         data.update({
-            "title": self.song_name,
+            "title": self.song_title,
             "artist": self.artist,
             "cover": self.cover
         })
 
         return data
+
+
+class SpotifyEntry(GieselaEntry):
+
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, spotify_track, expected_filename=None, **meta):
+        super().__init__(
+            queue, video_id, url, title, duration, thumbnail, description,
+            spotify_track.name,
+            spotify_track.artist_string,
+            spotify_track.artists[0].image,
+            spotify_track.album.name,
+            spotify_track.cover_url,
+            expected_filename, **meta
+        )
+
+        self.spotify_data = spotify_track
+
+        self.popularity = spotify_track.popularity / 100
+
+    @classmethod
+    def from_dict(cls, playlist, data):
+        if data["type"] != cls.__name__:
+            raise AttributeError("This data isn't of this entry type")
+
+        meta_dict = data.get("meta", None)
+        if meta_dict:
+            meta = Entry.meta_from_dict(meta_dict, playlist.bot)
+        else:
+            meta = {}
+
+        filename = data.get("expected_filename", None)
+        video_id = data["video_id"]
+        url = data["url"]
+        title = data["title"]
+        duration = data["duration"]
+        thumbnail = data["thumbnail"]
+        description = data["description"]
+        spotify_data = SpotifyTrack.from_dict(data["spotify_data"])
+
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, spotify_data, expected_filename=filename, **meta)
+
+    def to_dict(self):
+        d = super().to_dict()
+        d.update({
+            "spotify_data": self.spotify_data.get_dict()
+        })
+
+        return d

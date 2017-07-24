@@ -1,5 +1,6 @@
-import configparser
 import json
+
+import configparser
 
 from .exceptions import HelpfulError
 
@@ -13,15 +14,15 @@ class RandomSets:
     def update_sets(self):
         random_sets = configparser.ConfigParser()
 
-        if not random_sets.read(self.random_file, encoding='utf-8'):
-            print('[Random Sets] Sets file not found')
+        if not random_sets.read(self.random_file, encoding="utf-8"):
+            print("[Random Sets] Sets file not found")
             with open(self.random_file, "w+", encoding="utf-8") as f:
                 pass
 
             self.update_sets()
 
         self.random_sets = configparser.ConfigParser(interpolation=None)
-        self.random_sets.read(self.random_file, encoding='utf-8')
+        self.random_sets.read(self.random_file, encoding="utf-8")
 
     def save_sets(self):
         with open(self.random_file, "w", encoding="utf-8") as set_file:

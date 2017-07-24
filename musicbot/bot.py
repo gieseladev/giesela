@@ -7,6 +7,7 @@ import traceback
 from collections import defaultdict
 from datetime import datetime
 from random import choice
+from textwrap import indent, wrap
 
 import aiohttp
 import discord
@@ -29,7 +30,8 @@ from .commands.queue_commands import QueueCommands
 from .commands.tool_commands import ToolCommands
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOTVERSION
-from .constants import AUDIO_CACHE_PATH, DISCORD_MSG_CHAR_LIMIT
+from .constants import (ABS_AUDIO_CACHE_PATH, AUDIO_CACHE_PATH,
+                        DISCORD_MSG_CHAR_LIMIT)
 from .entry import RadioSongEntry, StreamEntry, TimestampEntry
 from .games.game_cah import GameCAH
 from .opus_loader import load_opus_lib
@@ -61,7 +63,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
         self.blacklist = set(load_file(self.config.blacklist_file))
         self.autoplaylist = load_file(self.config.auto_playlist_file)
-        self.downloader = downloader.Downloader(download_folder='audio_cache')
+        self.downloader = downloader.Downloader(download_folder=AUDIO_CACHE_PATH)
         self.calendar = Calendar(self)
 
         self.exit_signal = None
@@ -76,12 +78,12 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             print("Warning: Autoplaylist is empty, disabling.")
             self.config.auto_playlist = False
 
-        ssd_defaults = {'last_np_msg': None, 'auto_paused': False}
+        ssd_defaults = {"last_np_msg": None, "auto_paused": False}
         self.server_specific_data = defaultdict(lambda: dict(ssd_defaults))
 
         super().__init__()
         self.aiosession = aiohttp.ClientSession(loop=self.loop)
-        self.http.user_agent += ' MusicBot/%s' % BOTVERSION
+        self.http.user_agent += " Giesela/%s" % BOTVERSION
         self.instant_translate = False
         self.instant_translate_mode = 1
         self.instant_translate_certainty = .7
@@ -90,91 +92,36 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
     @staticmethod
     def _fixg(x, dp=2):
-        return ('{:.%sf}' % dp).format(x).rstrip('0').rstrip('.')
+        return ("{:.%sf}" % dp).format(x).rstrip("0").rstrip(".")
 
-    def _get_owner(self, voice=False):
-        if voice:
-            for server in self.servers:
-                for channel in server.channels:
-                    for m in channel.voice_members:
-                        if m.id == self.config.owner_id:
-                            return m
-        else:
-            return discord.utils.find(lambda m: m.id == self.config.owner_id,
-                                      self.get_all_members())
+    def find_home_channel(self, server):
+        channel = find(
+            lambda c: c.type == ChannelType.voice and any(x in c.name.lower().split()
+                                                          for x in ["giesela", "musicbot", "bot", "music", "reign"]),
+            server.channels
+        )
+        if channel is None:
+            channel = choice(
+                filter(lambda c: c.type == ChannelType.voice, server.channels))
 
-    def _delete_old_audiocache(self, path=AUDIO_CACHE_PATH):
+        return channel
+
+    def _delete_old_audiocache(self, path=ABS_AUDIO_CACHE_PATH):
         try:
             shutil.rmtree(path)
             return True
         except:
             try:
-                os.rename(path, path + '__')
+                os.rename(path, path + "__")
             except:
                 return False
             try:
                 shutil.rmtree(path)
             except:
-                os.rename(path + '__', path)
+                os.rename(path + "__", path)
                 return False
 
         return True
-
-    async def _auto_summon(self):
-        owner = self._get_owner(voice=True)
-        if owner:
-            print("Found owner in \"%s\", attempting to join..." %
-                  owner.voice_channel.name)
-            await self.cmd_summon(owner.voice_channel, owner, None)
-            return owner.voice_channel
-
-    async def _autojoin_channels(self, channels):
-        joined_servers = []
-
-        for channel in channels:
-            if channel.server in joined_servers:
-                print("Already joined a channel in %s, skipping" %
-                      channel.server.name)
-                continue
-
-            if channel and channel.type == discord.ChannelType.voice:
-                print("Attempting to autojoin %s in %s" %
-                      (channel.name, channel.server.name))
-
-                chperms = channel.permissions_for(channel.server.me)
-
-                if not chperms.connect:
-                    print("Cannot join channel \"%s\", no permission." %
-                          channel.name)
-                    continue
-
-                elif not chperms.speak:
-                    print(
-                        "Will not join channel \"%s\", no permission to speak."
-                        % channel.name)
-                    continue
-
-                try:
-                    player = await self.get_player(channel, create=True)
-
-                    if player.is_stopped:
-                        player.play()
-
-                    if self.config.auto_playlist:
-                        await self.on_player_finished_playing(player)
-
-                    joined_servers.append(channel.server)
-                except Exception as e:
-                    if self.config.debug_mode:
-                        traceback.print_exc()
-                    print("Failed to join", channel.name)
-
-            elif channel:
-                print("Not joining %s on %s, that's a text channel." %
-                      (channel.name, channel.server.name))
-
-            else:
-                print("Invalid channel thing: " + channel)
 
     async def _wait_delete_msg(self, message, after):
         await asyncio.sleep(after)
@@ -196,17 +143,18 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         if isinstance(channel, Object):
             channel = self.get_channel(channel.id)
 
-        if getattr(channel, 'type', ChannelType.text) != ChannelType.voice:
-            raise AttributeError('Channel passed must be a voice channel')
+        if getattr(channel, "type", ChannelType.text) != ChannelType.voice:
+            raise AttributeError("Channel passed must be a voice channel")
 
         with await self.voice_client_connect_lock:
             server = channel.server
             if server.id in self.the_voice_clients:
+                await self.move_voice_client(channel)
                 return self.the_voice_clients[server.id]
 
-            s_id = self.ws.wait_for('VOICE_STATE_UPDATE',
-                                    lambda d: d.get('user_id') == self.user.id)
-            _voice_data = self.ws.wait_for('VOICE_SERVER_UPDATE',
+            s_id = self.ws.wait_for("VOICE_STATE_UPDATE",
+                                    lambda d: d.get("user_id") == self.user.id)
+            _voice_data = self.ws.wait_for("VOICE_SERVER_UPDATE",
                                            lambda d: True)
 
             await self.ws.voice_state(server.id, channel.id)
@@ -215,15 +163,15 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 s_id, timeout=10, loop=self.loop)
             voice_data = await asyncio.wait_for(
                 _voice_data, timeout=10, loop=self.loop)
-            session_id = s_id_data.get('session_id')
+            session_id = s_id_data.get("session_id")
 
             kwargs = {
-                'user': self.user,
-                'channel': channel,
-                'data': voice_data,
-                'loop': self.loop,
-                'session_id': session_id,
-                'main_ws': self.ws
+                "user": self.user,
+                "channel": channel,
+                "data": voice_data,
+                "loop": self.loop,
+                "session_id": session_id,
+                "main_ws": self.ws
             }
             voice_client = VoiceClient(**kwargs)
             self.the_voice_clients[server.id] = voice_client
@@ -318,49 +266,38 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         if isinstance(channel, Object):
             channel = self.get_channel(channel.id)
 
-        if getattr(channel, 'type', ChannelType.text) != ChannelType.voice:
-            raise AttributeError('Channel passed must be a voice channel')
+        if getattr(channel, "type", ChannelType.text) != ChannelType.voice:
+            raise AttributeError("Channel passed must be a voice channel")
 
         # I'm not sure if this lock is actually needed
         with await self.voice_client_move_lock:
             server = channel.server
 
             payload = {
-                'op': 4,
-                'd': {
-                    'guild_id': server.id,
-                    'channel_id': channel.id,
-                    'self_mute': mute,
-                    'self_deaf': deaf
+                "op": 4,
+                "d": {
+                    "guild_id": server.id,
+                    "channel_id": channel.id,
+                    "self_mute": mute,
+                    "self_deaf": deaf
                 }
             }
 
             await self.ws.send(utils.to_json(payload))
             self.the_voice_clients[server.id].channel = channel
 
-    async def get_player(self, channel=None, create=False, auto_summon=True, server_id=None):
-        server = channel.server if channel else self.get_server(server_id)
+    async def get_player(self, server, channel=None):
 
-        if server.id not in self.players:
-            if not create:
-                if auto_summon:
-                    channel = await self.goto_home(
-                        channel.server)
-                else:
-                    raise exceptions.CommandError(
-                        'The bot is not in a voice channel.  '
-                        'Use %ssummon to summon it to your voice channel.' %
-                        self.config.command_prefix)
-
-            voice_client = await self.get_voice_client(channel)
+        if server.id not in self.players or (channel and self.players[server.id].voice_client.channel != channel):
+            voice_client = await self.get_voice_client(channel or self.find_home_channel(server))
 
             player = MusicPlayer(self, voice_client) \
-                .on('play', self.on_player_play) \
-                .on('resume', self.on_player_resume) \
-                .on('pause', self.on_player_pause) \
-                .on('stop', self.on_player_stop) \
-                .on('finished-playing', self.on_player_finished_playing) \
-                .on('entry-added', self.on_player_entry_added)
+                .on("play", self.on_player_play) \
+                .on("resume", self.on_player_resume) \
+                .on("pause", self.on_player_pause) \
+                .on("stop", self.on_player_stop) \
+                .on("finished-playing", self.on_player_finished_playing) \
+                .on("entry-added", self.on_player_entry_added)
 
             self.players[server.id] = player
 
@@ -384,7 +321,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                     if lmsg != last_np_msg and last_np_msg:
                         await self.safe_delete_message(last_np_msg)
                         self.server_specific_data[channel.server][
-                            'last_np_msg'] = None
+                            "last_np_msg"] = None
                     break  # This is probably redundant
 
             if isinstance(entry, TimestampEntry):
@@ -447,7 +384,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                                    self.autoplaylist)
                         continue
 
-                    if info.get('entries', None):  # or .get('_type', '') == 'playlist'
+                    if info.get("entries", None):  # or .get("_type", "") == "playlist"
                         pass  # Wooo playlist
                         # Blarg how do I want to do this
 
@@ -631,16 +568,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             if self.exit_signal:
                 raise self.exit_signal
 
-    async def goto_home(self, server, join=True):
-        channel = find(lambda c: c.type == ChannelType.voice and any(x in c.name.lower().split(
-        ) for x in ["giesela", "musicbot", "bot", "music", "reign"]), server.channels)
-        if channel is None:
-            channel = choice(
-                filter(lambda c: c.type == ChannelType.voice, server.channels))
-        if join:
-            await self.get_player(channel, create=True)
-        return channel
-
     async def logout(self):
         await self.disconnect_all_voice_clients()
         return await super().logout()
@@ -667,7 +594,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             vc.main_ws = self.ws
 
     async def on_ready(self):
-        print('\rConnected!  Musicbot v%s\n' % BOTVERSION)
+        print("\rConnected!  Giesela v%s\n" % BOTVERSION)
 
         if self.config.owner_id == self.user.id:
             raise exceptions.HelpfulError(
@@ -682,26 +609,11 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         print("Bot:   %s/%s#%s" % (self.user.id, self.user.name,
                                    self.user.discriminator))
 
-        owner = self._get_owner(voice=True) or self._get_owner()
-        if owner and self.servers:
-            print("Owner: %s/%s#%s\n" % (owner.id, owner.name,
-                                         owner.discriminator))
-
-            print('Server List:')
-            [print(' - ' + s.name) for s in self.servers]
-
-        elif self.servers:
-            print("Owner could not be found on any server (id: %s)\n" %
-                  self.config.owner_id)
-
-            print('Server List:')
-            [print(' - ' + s.name) for s in self.servers]
-
-        else:
-            print("Owner unknown, bot is not on any servers.")
+        if not self.servers:
+            print("Giesela is not on any servers.")
             if self.user.bot:
                 print(
-                    "\nTo make the bot join a server, paste this link in your browser."
+                    "\nTo make Giesela join a server, paste this link in your browser."
                 )
                 print(
                     "Note: You should be logged into your main account and have \n"
@@ -709,124 +621,34 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 )
                 print("    " + await self.generate_invite_link())
 
-        print()
+        config_string = "\nConfig:\n"
 
-        if self.config.bound_channels:
-            chlist = set(
-                self.get_channel(i) for i in self.config.bound_channels if i)
-            chlist.discard(None)
-            invalids = set()
+        all_options = self.config.get_all_options()
+        for option in all_options:
+            opt, val = option
 
-            invalids.update(c for c in chlist
-                            if c.type == discord.ChannelType.voice)
-            chlist.difference_update(invalids)
-            self.config.bound_channels.difference_update(invalids)
+            opt_string = "  {}: ".format(opt)
 
-            print("Bound to text channels:")
-            [
-                print(' - %s/%s' % (ch.server.name.strip(),
-                                    ch.name.strip())) for ch in chlist if ch
-            ]
+            lines = wrap(val, 100 - len(opt_string))
+            if len(lines) > 1:
+                val_string = "{}\n{}\n".format(
+                    lines[0],
+                    indent("\n".join(lines[1:]), len(opt_string) * " ")
+                )
+            else:
+                val_string = lines[0]
 
-            if invalids and self.config.debug_mode:
-                print("\nNot binding to voice channels:")
-                [
-                    print(' - %s/%s' % (ch.server.name.strip(),
-                                        ch.name.strip())) for ch in invalids
-                    if ch
-                ]
+            config_string += opt_string + val_string + "\n"
 
-            print()
+        print(config_string)
 
-        else:
-            print("Not bound to any text channels")
-
-        if self.config.autojoin_channels:
-            chlist = set(
-                self.get_channel(i) for i in self.config.autojoin_channels
-                if i)
-            chlist.discard(None)
-            invalids = set()
-
-            invalids.update(c for c in chlist
-                            if c.type == discord.ChannelType.text)
-            chlist.difference_update(invalids)
-            self.config.autojoin_channels.difference_update(invalids)
-
-            print("Autojoining voice chanels:")
-            [
-                print(' - %s/%s' % (ch.server.name.strip(),
-                                    ch.name.strip())) for ch in chlist if ch
-            ]
-
-            if invalids and self.config.debug_mode:
-                print("\nCannot join text channels:")
-                [
-                    print(' - %s/%s' % (ch.server.name.strip(),
-                                        ch.name.strip())) for ch in invalids
-                    if ch
-                ]
-
-            autojoin_channels = chlist
-
-        else:
-            print("Not autojoining any voice channels")
-            autojoin_channels = set()
-
-        print()
-        print("Options:")
-
-        print("  Command prefix: " + self.config.command_prefix)
-        print(
-            "  Default volume: %s%%" % int(self.config.default_volume * 100))
-        print("  Auto-Summon: " + ['Disabled', 'Enabled'
-                                   ][self.config.auto_summon])
-        print("  Auto-Playlist: " + ['Disabled', 'Enabled'
-                                     ][self.config.auto_playlist])
-        print("  Auto-Pause: " + ['Disabled', 'Enabled'
-                                  ][self.config.auto_pause])
-        print("  Delete Messages: " + ['Disabled', 'Enabled'
-                                       ][self.config.delete_messages])
-        if self.config.delete_messages:
-            print("    Delete Invoking: " + ['Disabled', 'Enabled'
-                                             ][self.config.delete_invoking])
-        print("  Debug Mode: " + ['Disabled', 'Enabled'
-                                  ][self.config.debug_mode])
-        print("  Downloaded songs will be %s" % ['deleted', 'saved'
-                                                 ][self.config.save_videos])
-        print()
-
-        # maybe option to leave the ownerid blank and generate a random command for the owner to use
-        # wait_for_message is pretty neato
-
-        if not self.config.save_videos and os.path.isdir(AUDIO_CACHE_PATH):
+        if not self.config.save_videos and os.path.isdir(ABS_AUDIO_CACHE_PATH):
             if self._delete_old_audiocache():
                 print("Deleting old audio cache")
             else:
                 print("Could not delete old audio cache, moving on.")
 
-        if self.config.autojoin_channels:
-            await self._autojoin_channels(autojoin_channels)
-
-        elif self.config.auto_summon:
-            print("Attempting to autosummon...", flush=True)
-
-            # waitfor + get value
-            owner_vc = await self._auto_summon()
-
-            if owner_vc:
-                print("Done!", flush=True)
-                if self.config.auto_playlist:
-                    print("Starting auto-playlist")
-                    await self.on_player_finished_playing(
-                        await self.get_player(owner_vc))
-            else:
-                print(
-                    "Owner not found in a voice channel, could not autosummon."
-                )
-
-        print()
-        # t-t-th-th-that's all folks!
+        print("Ready to go!")
 
         if self.config.open_websocket:
             GieselaServer.run(self)
@@ -861,7 +683,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         command = raw_command.lstrip(
             self.config.command_prefix).lower().strip()
 
-        handler = getattr(self, 'cmd_%s' % command, None)
+        handler = getattr(self, "cmd_%s" % command, None)
         if not handler:
             return
 
@@ -873,10 +695,10 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
         if message.channel.is_private:
             if not (message.author.id == self.config.owner_id and command ==
-                    'joinserver') and not command in self.config.private_chat_commands:
+                    "joinserver") and not command in self.config.private_chat_commands:
                 await self.send_message(
                     message.channel,
-                    'You cannot use this command in private messages.')
+                    "You cannot use this command in private messages.")
                 return
 
         if message.author.id in self.blacklist and message.author.id != self.config.owner_id:
@@ -893,7 +715,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         # because I'm using len(), I already take care of the extra whitespace
         raw_content = message_content[len(raw_command):]
 
-        # noinspection PyBroadException
         try:
             handler_kwargs = {}
             if params.pop("message", None):
@@ -902,38 +723,37 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             if params.pop("raw_content", None):
                 handler_kwargs["raw_content"] = raw_content
 
-            if params.pop('channel', None):
-                handler_kwargs['channel'] = message.channel
+            if params.pop("channel", None):
+                handler_kwargs["channel"] = message.channel
 
-            if params.pop('author', None):
-                handler_kwargs['author'] = message.author
+            if params.pop("author", None):
+                handler_kwargs["author"] = message.author
 
-            if params.pop('server', None):
-                handler_kwargs['server'] = message.server
+            if params.pop("server", None):
+                handler_kwargs["server"] = message.server
 
             if params.pop("player", None):
-                handler_kwargs["player"] = await self.get_player(
-                    message.channel)
+                handler_kwargs["player"] = await self.get_player(message.server)
 
-            if params.pop('user_mentions', None):
-                handler_kwargs['user_mentions'] = list(
+            if params.pop("user_mentions", None):
+                handler_kwargs["user_mentions"] = list(
                     map(message.server.get_member, message.raw_mentions))
 
-            if params.pop('channel_mentions', None):
-                handler_kwargs['channel_mentions'] = list(
+            if params.pop("channel_mentions", None):
+                handler_kwargs["channel_mentions"] = list(
                     map(message.server.get_channel,
                         message.raw_channel_mentions))
 
-            if params.pop('voice_channel', None):
+            if params.pop("voice_channel", None):
                 handler_kwargs[
-                    'voice_channel'] = message.server.me.voice_channel
+                    "voice_channel"] = message.server.me.voice_channel
 
-            if params.pop('leftover_args', None):
-                handler_kwargs['leftover_args'] = args
+            if params.pop("leftover_args", None):
+                handler_kwargs["leftover_args"] = args
 
             args_expected = []
             for key, param in list(params.items()):
-                doc_key = '[%s=%s]' % (
+                doc_key = "[%s=%s]" % (
                     key, param.default
                 ) if param.default is not inspect.Parameter.empty else key
                 args_expected.append(doc_key)
@@ -958,7 +778,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             if response and isinstance(response, Response):
                 content = response.content
                 if content and response.reply:
-                    content = '%s, %s' % (message.author.mention, content)
+                    content = "%s, %s" % (message.author.mention, content)
 
                 sentmsg = await self.safe_send_message(
                     message.channel,
@@ -979,7 +799,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
             await self.safe_send_message(
                 message.channel,
-                '```\n%s\n```' % e.message,
+                "```\n%s\n```" % e.message,
                 expire_in=expirein,
                 also_delete=alsodelete)
 
@@ -990,51 +810,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             traceback.print_exc()
             if self.config.debug_mode:
                 await self.safe_send_message(
-                    message.channel, '```\n%s\n```' % traceback.format_exc())
-
-    async def autopause(self, before, after):
-        if not all([before, after]):
-            return
-
-        if before.voice_channel == after.voice_channel:
-            return
-
-        if before.server.id not in self.players:
-            return
-
-        # This should always work, right?
-        my_voice_channel = after.server.me.voice_channel
-
-        if not my_voice_channel:
-            return
-
-        if before.voice_channel == my_voice_channel:
-            joining = False
-        elif after.voice_channel == my_voice_channel:
-            joining = True
-        else:
-            return  # Not my channel
-
-        moving = before == before.server.me
-
-        player = await self.get_player(my_voice_channel)
-
-        if after == after.server.me and after.voice_channel:
-            player.voice_client.channel = after.voice_channel
-
-        if not self.config.auto_pause:
-            return
-
-        vm_count = sum(
-            1 for m in my_voice_channel.voice_members if m != after.server.me and not m.bot)
-        if vm_count == 0:
-            if player.is_playing:
-                print("[AUTOPAUSE] Pausing")
-                player.pause()
-        elif vm_count == 1 and joining:
-            if player.is_paused:
-                print("[AUTOPAUSE] Unpausing")
-                player.resume()
+                    message.channel, "```\n%s\n```" % traceback.format_exc())
 
     async def on_server_update(self,
                                before: discord.Server,
@@ -1065,7 +841,51 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
     async def on_voice_state_update(self, before, after):
         await self.on_any_update(before, after)
-        await self.autopause(before, after)
+
+        if not all([before, after]):
+            return
+
+        # nothing happened
+        if before.voice_channel == after.voice_channel:
+            return
+
+        # not my business
+        if before.server.id not in self.players:
+            return
+
+        my_voice_channel = after.server.me.voice_channel
+
+        # I'm not in a voice channel
+        if not my_voice_channel:
+            return
+
+        # I was here already
+        if before.voice_channel == my_voice_channel:
+            joining = False
+        # I joined
+        elif after.voice_channel == my_voice_channel:
+            joining = True
+        # Someone else
+        else:
+            return
+
+        player = await self.get_player(after.server)
+
+        player.voice_client.channel = after.voice_channel
+
+        if not self.config.auto_pause:
+            return
+
+        vm_count = sum(
+            1 for m in my_voice_channel.voice_members if m != after.server.me and not m.bot)
+        if vm_count == 0:
+            if player.is_playing:
+                print("[AUTOPAUSE] Pausing")
+                player.pause()
+        elif vm_count == 1 and joining:
+            if player.is_paused:
+                print("[AUTOPAUSE] Unpausing")
+                player.resume()
 
     async def on_any_update(self, before, after):
         if before.server.id in self.online_loggers:
@@ -1120,6 +940,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                     await self.safe_send_message(mem, notification)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     bot = MusicBot()
     bot.run()

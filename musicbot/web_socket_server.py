@@ -19,53 +19,62 @@ class ErrorCode:
 
 class GieselaWebSocket(WebSocket):
 
+    def init(self):
+        self.registration_token = None
+
     def handleMessage(self):
         try:
             try:
                 data = json.loads(self.data)
-
-                token = data.get("token", None)
-                if token:
-                    info = GieselaServer.get_token_information(token)
-                    if info:
-                        self.token = token
-                        if self not in GieselaServer.authenticated_clients:
-                            GieselaServer.authenticated_clients.append(
-                                self)  # register for updates
-                        # handle all the other shit over there
-                        self.handleAuthenticatedMessage(data)
-                        return
-                    else:
-                        print("[WEBSOCKET] <{}> invalid token provided".format(
-                            self.address))
-                else:
-                    print("[WEBSOCKET] <{}> no token provided".format(
-                        self.address))
-
-                register = data.get("request", None) == "register"
-                if register:
-                    registration_token = GieselaServer.generate_registration_token()
-                    GieselaServer.awaiting_registration[
-                        registration_token] = self.register  # setting the callback
-                    print("[WEBSOCKET] <{}> Waiting for registration with token: {}".format(
-                        self.address, registration_token))
-                    answer = {
-                        "response": True,
-                        "registration_token": registration_token
-                    }
-                    self.sendMessage(json.dumps(answer))
-                    return
-                else:
-                    print("[WEBSOCKET] <{}> Didn't ask to be registered".format(
-                        self.address))
-                    answer = {
-                        "response": True,
-                        "error": (ErrorCode.registration_required, "registration required")
-                    }
-                    self.sendMessage(json.dumps(answer))
             except JSONDecodeError:
                 print(
                     "[WEBSOCKET] <{}> sent non-json: {}".format(self.address, self.data))
+                return
+
+            token = data.get("token", None)
+            if token:
+                info = GieselaServer.get_token_information(token)
+                if info:
+                    self.token = token
+                    if self not in GieselaServer.authenticated_clients:
+                        GieselaServer.authenticated_clients.append(
+                            self)  # register for updates
+                    # handle all the other shit over there
+                    self.handleAuthenticatedMessage(data)
+                    return
+                else:
+                    print("[WEBSOCKET] <{}> invalid token provided".format(
+                        self.address))
+            else:
+                print("[WEBSOCKET] <{}> no token provided".format(self.address))
+
+            register = data.get("request", None) == "register"
+            if register:
+                registration_token = GieselaServer.generate_registration_token()
+                GieselaServer.awaiting_registration[
+                    registration_token] = self.register  # setting the callback
+
+                self.registration_token = registration_token
+
+                print("[WEBSOCKET] <{}> Waiting for registration with token: {}".format(
+                    self.address, registration_token))
+
+                answer = {
+                    "response": True,
+                    "registration_token": registration_token
+                }
+
+                self.sendMessage(json.dumps(answer))
+                return
+            else:
+                print("[WEBSOCKET] <{}> Didn't ask to be registered".format(
+                    self.address))
+                answer = {
+                    "response": True,
+                    "error": (ErrorCode.registration_required, "registration required")
+                }
+                self.sendMessage(json.dumps(answer))
+
         except Exception as e:
             traceback.print_exc()
             raise
@@ -100,6 +109,12 @@ class GieselaWebSocket(WebSocket):
     def handleClose(self):
         GieselaServer.clients.remove(self)
         GieselaServer.authenticated_clients.pop(self, None)
+
+        if self.registration_token:
+            if GieselaServer.awaiting_registration.pop(self.registration_token, None):
+                print("[WEBSOCKET] Removed <{}>'s registration_token from awaiting list".format(
+                    self.address))
+
         print("[WEBSOCKET] <{}> disconnected".format(self.address))
 
     def register(self, server_id, author):
@@ -112,12 +127,8 @@ class GieselaWebSocket(WebSocket):
         print("[WEBSOCKET] <{}> successfully registered {}".format(
             self.address, author))
 
-    def send_current_entry(self):
-        entry = None  # get current entry
-        self.sendMessage()
 
-
-class GieselaServer():
+class GieselaServer:
     clients = []
     authenticated_clients = []
     server = None
@@ -160,6 +171,12 @@ class GieselaServer():
         GieselaServer._tokens[token] = (server_id, author)
         json.dump({t: (s, u.id) for t, (s, u) in GieselaServer._tokens.items()},
                   open("data/websocket_token.json", "w+"))
+
+    def generate_registration_token():
+        while True:
+            token = "".join(choice(ascii_lowercase) for _ in range(5))
+            if token not in GieselaServer.awaiting_registration:
+                return token
 
     def get_player(token=None, server_id=None):
         if not token and not server_id:
@@ -220,12 +237,6 @@ class GieselaServer():
                     auth_client.sendMessage(json.dumps(message))
         except Exception as e:
             traceback.print_exc()
-
-    def generate_registration_token():
-        while True:
-            token = "".join(choice(ascii_lowercase) for _ in range(5))
-            if token not in GieselaServer.awaiting_registration:
-                return token
 
 
 class WebAuthor:

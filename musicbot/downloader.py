@@ -1,37 +1,39 @@
-import asyncio
 import functools
 import os
-from concurrent.futures import ThreadPoolExecutor
 
 import youtube_dl
 
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
+
 ytdl_format_options = {
-    'format': 'bestaudio/best',
-    'extractaudio': True,
-    'audioformat': 'mp3',
-    'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
-    'restrictfilenames': True,
-    'noplaylist': True,
-    'nocheckcertificate': True,
-    'ignoreerrors': False,
-    'logtostderr': False,
-    'quiet': True,
-    'no_warnings': True,
-    'default_search': 'auto',
-    'source_address': '0.0.0.0'
+    "format": "bestaudio/best",
+    "extractaudio": True,
+    "audioformat": "mp3",
+    "outtmpl": "%(extractor)s-%(id)s-%(title)s.%(ext)s",
+    "restrictfilenames": True,
+    "noplaylist": True,
+    "nocheckcertificate": True,
+    "ignoreerrors": False,
+    "logtostderr": False,
+    "quiet": True,
+    "no_warnings": True,
+    "default_search": "auto",
+    "source_address": "0.0.0.0",
+    "geo_bypass": True
 }
 
-# Fuck your useless bugreports message that gets two link embeds and
+# Duck your useless bugreports message that gets two link embeds and
 # confuses users
-youtube_dl.utils.bug_reports_message = lambda: ''
+youtube_dl.utils.bug_reports_message = lambda: ""
 
-'''
-    Alright, here's the problem.  To catch youtube-dl errors for their useful information, I have to
+"""
+    Alright, here"s the problem.  To catch youtube-dl errors for their useful information, I have to
     catch the exceptions with `ignoreerrors` off.  To not break when ytdl hits a dumb video
     (rental videos, etc), I have to have `ignoreerrors` on.  I can change these whenever, but with async
-    that's bad.  So I need multiple ytdl objects.
+    that"s bad.  So I need multiple ytdl objects.
 
-'''
+"""
 
 
 class Downloader:
@@ -40,17 +42,17 @@ class Downloader:
         self.thread_pool = ThreadPoolExecutor(max_workers=2)
         self.unsafe_ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
         self.safe_ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
-        self.safe_ytdl.params['ignoreerrors'] = True
+        self.safe_ytdl.params["ignoreerrors"] = True
         self.download_folder = download_folder
 
         if download_folder:
-            otmpl = self.unsafe_ytdl.params['outtmpl']
-            self.unsafe_ytdl.params['outtmpl'] = os.path.join(
+            otmpl = self.unsafe_ytdl.params["outtmpl"]
+            self.unsafe_ytdl.params["outtmpl"] = os.path.join(
                 download_folder, otmpl)
             # print("setting template to " + os.path.join(download_folder, otmpl))
 
-            otmpl = self.safe_ytdl.params['outtmpl']
-            self.safe_ytdl.params['outtmpl'] = os.path.join(
+            otmpl = self.safe_ytdl.params["outtmpl"]
+            self.safe_ytdl.params["outtmpl"] = os.path.join(
                 download_folder, otmpl)
 
     @property
@@ -59,7 +61,7 @@ class Downloader:
 
     async def extract_info(self, loop, *args, on_error=None, retry_on_error=False, **kwargs):
         """
-            Runs ytdl.extract_info within the threadpool. Returns a future that will fire when it's done.
+            Runs ytdl.extract_info within the threadpool. Returns a future that will fire when it"s done.
             If `on_error` is passed and an exception is raised, the exception will be caught and passed to
             on_error as an argument.
         """
@@ -70,7 +72,7 @@ class Downloader:
             except Exception as e:
 
                 # (youtube_dl.utils.ExtractorError, youtube_dl.utils.DownloadError)
-                # I hope I don't have to deal with ContentTooShortErrors
+                # I hope I don"t have to deal with ContentTooShortErrors
                 if asyncio.iscoroutinefunction(on_error):
                     asyncio.ensure_future(on_error(e), loop=loop)
 

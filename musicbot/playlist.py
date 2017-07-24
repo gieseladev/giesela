@@ -74,7 +74,7 @@ class Playlist(EventEmitter):
                 raise ExtractionError("Unknown error: {}".format(e))
 
         except Exception as e:
-            print('Could not extract information from {} ({}), falling back to direct'.format(
+            print("Could not extract information from {} ({}), falling back to direct".format(
                 stream_url, e))
 
         dest_url = stream_url
@@ -175,24 +175,24 @@ class Playlist(EventEmitter):
                 yield ind, None
             yield ind, entry
 
-    async def get_entry(self, song_url, **meta):
+    async def get_ytdl_data(self, song_url):
         try:
             info = await self.downloader.extract_info(self.loop, song_url, download=False)
         except Exception as e:
             raise ExtractionError(
-                'Could not extract information from {}\n\n{}'.format(song_url, e))
+                "Could not extract information from {}\n\n{}".format(song_url, e))
 
         if not info:
             raise ExtractionError(
-                'Could not extract information from %s' % song_url)
+                "Could not extract information from %s" % song_url)
 
-        if info.get('_type', None) == 'playlist':
+        if info.get("_type", None) == "playlist":
             raise WrongEntryTypeError("This is a playlist.", True, info.get(
-                'webpage_url', None) or info.get('url', None))
+                "webpage_url", None) or info.get("url", None))
 
-        if info['extractor'] in ['generic', 'Dropbox']:
+        if info["extractor"] in ["generic", "Dropbox"]:
             try:
-                content_type = await get_header(self.bot.aiosession, info['url'], 'CONTENT-TYPE')
+                content_type = await get_header(self.bot.aiosession, info["url"], "CONTENT-TYPE")
                 print("Got content type", content_type)
 
             except Exception as e:
@@ -201,14 +201,19 @@ class Playlist(EventEmitter):
                 content_type = None
 
             if content_type:
-                if content_type.startswith(('application/', 'image/')):
-                    if '/ogg' not in content_type:  # How does a server say `application/ogg` what the actual fuck
+                if content_type.startswith(("application/", "image/")):
+                    if "/ogg" not in content_type:  # How does a server say `application/ogg` what the actual fuck
                         raise ExtractionError(
                             "Invalid content type \"%s\" for url %s" % (content_type, song_url))
 
-                elif not content_type.startswith(('audio/', 'video/')):
+                elif not content_type.startswith(("audio/", "video/")):
                     print("[Warning] Questionable content type \"%s\" for url %s" % (
                         content_type, song_url))
+
+        return info
+
+    async def get_entry(self, song_url, **meta):
+        info = await get_ytdl_data(song_url)
 
         entry = None
 
@@ -220,6 +225,8 @@ class Playlist(EventEmitter):
         video_duration = info.get("duration", 0)
 
         clean_title = clean_songname(video_title) or video_title
+
+        meta["expected_filename"] = self.downloader.ytdl.prepare_filename(info)
 
         base_arguments = (
             self,
@@ -236,7 +243,6 @@ class Playlist(EventEmitter):
             entry = SpotifyEntry(
                 *base_arguments,
                 spotify_track,
-                self.downloader.ytdl.prepare_filename(info),
                 **meta
             )
         else:
@@ -247,13 +253,11 @@ class Playlist(EventEmitter):
                 entry = TimestampEntry(
                     *base_arguments,
                     sub_queue,
-                    self.downloader.ytdl.prepare_filename(info),
                     **meta
                 )
             else:
                 entry = YoutubeEntry(
                     *base_arguments,
-                    self.downloader.ytdl.prepare_filename(info),
                     **meta
                 )
 
@@ -286,7 +290,7 @@ class Playlist(EventEmitter):
         entry = self.entries.popleft()
         self.entries.rotate(-1 * rotDist)
         self.entries.appendleft(entry)
-        self.emit('entry-added', playlist=self, entry=entry)
+        self.emit("entry-added", playlist=self, entry=entry)
         entry.get_ready_future()
 
         return entry
@@ -294,7 +298,7 @@ class Playlist(EventEmitter):
     def promote_last(self):
         entry = self.entries.pop()
         self.entries.appendleft(entry)
-        self.emit('entry-added', playlist=self, entry=entry)
+        self.emit("entry-added", playlist=self, entry=entry)
         entry.get_ready_future()
 
         return entry
@@ -303,7 +307,7 @@ class Playlist(EventEmitter):
         rotDist = -1 * (position - 1)
         self.entries.rotate(rotDist)
         entry = self.entries.popleft()
-        self.emit('entry-removed', playlist=self, entry=entry)
+        self.emit("entry-removed", playlist=self, entry=entry)
         self.entries.rotate(-1 * rotDist)
 
         return entry
@@ -339,7 +343,7 @@ class Playlist(EventEmitter):
 
     async def estimate_time_until(self, position, player):
         """
-            (very) Roughly estimates the time till the queue will 'position'
+            (very) Roughly estimates the time till the queue will "position"
         """
         estimated_time = sum(
             [e.end_seconds for e in islice(self.entries, position - 1)])
