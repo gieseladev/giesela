@@ -983,7 +983,7 @@ class DisplayCommands:
             "\nShowing {} out of {} entr{}".format(
                 len(entries),
                 len(player.playlist.entries),
-                "y" if len(entries) == 1 else "ies"
+                "y" if len(player.playlist.entries) == 1 else "ies"
             )
         )
         lines.append(
@@ -998,7 +998,8 @@ class DisplayCommands:
         "3.3.8": (1497474312, "added failsafe for player not currently playing something"),
         "3.5.8": (1497825334, "Adjusted design to look more like `queue`'s style"),
         "3.8.9": (1499465102, "Part of the `Giesenesis` rewrite"),
-        "4.0.1": (1500346108, "Quantity parameter. Increased history limit")
+        "4.0.1": (1500346108, "Quantity parameter. Increased history limit"),
+        "4.1.7": (1500876373, "Displaying the amount of entries displayed in relation to the total entries")
     })
     async def cmd_history(self, channel, player, num="15"):
         """
@@ -1033,6 +1034,14 @@ class DisplayCommands:
                     format_time(seconds_passed, max_specifications=2)
                 )
             )
+
+        lines.append(
+            "\nShowing {} out of {} entr{}".format(
+                quantity,
+                len(player.playlist.history),
+                "y" if len(player.playlist.history) == 1 else "ies"
+            )
+        )
 
         return Response("\n".join(lines))
 
