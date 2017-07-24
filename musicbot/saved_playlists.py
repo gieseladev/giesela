@@ -19,14 +19,14 @@ class Playlists:
     def update_playlist(self):
         self.playlists = configparser.ConfigParser()
 
-        if not self.playlists.read(self.playlists_file, encoding='utf-8'):
-            print('[playlists] Playlists file not found')
+        if not self.playlists.read(self.playlists_file, encoding="utf-8"):
+            print("[playlists] Playlists file not found")
             raise HelpfulError(
                 "Your playlists file is missing"
             )
 
         self.playlists = configparser.ConfigParser(interpolation=None)
-        self.playlists.read(self.playlists_file, encoding='utf-8')
+        self.playlists.read(self.playlists_file, encoding="utf-8")
         self.saved_playlists = self.playlists.sections()
 
     def save_playlist(self):
@@ -41,13 +41,13 @@ class Playlists:
         plsection = self.playlists[playlistname]
 
         playlist_information = ***REMOVED***
-            "id": playlistname,
-            "name": playlistname.replace("_", " ").title(),
-            "location": plsection["location"],
-            "author": plsection["author"],
+            "id":           playlistname,
+            "name":         playlistname.replace("_", " ").title(),
+            "location":     plsection["location"],
+            "author":       plsection["author"],
             "replay_count": int(plsection["replays"]),
-            "description": None if plsection.get("description") == "None" else plsection.get("description"),
-            "cover_url": None if plsection.get("cover_url") == "None" else plsection.get("cover_url")
+            "description":  None if plsection.get("description") == "None" else plsection.get("description"),
+            "cover_url":    None if plsection.get("cover_url") == "None" else plsection.get("cover_url")
         ***REMOVED***
 
         entries = []
@@ -197,7 +197,7 @@ class Playlists:
 
         return pls
 
-    def edit_playlist(self, name, playlist, all_entries=None, remove_entries=None, remove_entries_indexes=None, new_entries=None, new_name=None, new_description=None, new_cover=None):
+    def edit_playlist(self, name, playlist, all_entries=None, remove_entries=None, remove_entries_indexes=None, new_entries=None, new_name=None, new_description=None, new_cover=None, edit_entries=None):
         name = name.lower().strip().replace(" ", "_")
         old_playlist = self.get_playlist(name, playlist)
 
@@ -220,6 +220,13 @@ class Playlists:
             if new_entries is not None:
                 old_entries.extend(new_entries)
             next_entries = old_entries
+
+            if edit_entries:
+                for old, new in edit_entries:
+                    if new and old != new:
+                        index = next(ind for ind, entry in enumerate(next_entries) if entry.url == old.url)
+                        next_entries.pop(index)
+                        next_entries.insert(index, new)
 
         next_name = new_name if new_name is not None else name
         next_author_id = old_playlist["author"]

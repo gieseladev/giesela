@@ -76,7 +76,7 @@ class CleverWrap:
         self.cs = reply.get("cs", None)
         self.count = int(reply.get("interaction_count", None))
         self.output = reply.get("output", None).encode(
-            'latin-1').decode('utf-8')
+            "latin-1").decode("utf-8")
         self.convo_id = reply.get("conversation_id", None)
         self.history = ***REMOVED***key: value for key,
                         value in reply.items() if key.startswith("interaction")***REMOVED***

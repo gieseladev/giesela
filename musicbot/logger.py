@@ -1,37 +1,10 @@
 from datetime import datetime
+from string import ascii_lowercase as alphabet
 
 from openpyxl import Workbook
 
 from .config import ConfigDefaults
 from .utils import format_time
-
-logger_version = "1.0"
-
-logs = []
-
-
-def save_logs():
-    global logs
-    if logs is None or len(logs) < 1:
-        return
-
-    file_loc = ConfigDefaults.log_file + datetime.now().date().isoformat() + ".txt"
-    log_str = ""
-
-    for l in logs:
-        log_str += "[***REMOVED******REMOVED***:***REMOVED******REMOVED***] ***REMOVED******REMOVED***\n".format(l[0].hour, l[0].minute, l[1])
-
-    with open(file_loc, "a+") as f:
-        f.write(log_str)
-
-    logs = []
-
-
-def log(msg="\n", *args, **kwargs):
-    s_msg = str(msg)
-    logs.append((datetime.now(), msg))
-    print(msg)
-    save_logs()
 
 
 class OnlineLogger:
@@ -54,7 +27,6 @@ class OnlineLogger:
         self.listeners.remove(id)
 
     def create_output(self):
-        alphabet = list("abcdefghijklmnopqrstuvwxyz")
 
         def index_to_alphabet(ind):
             if ind < len(alphabet):
@@ -65,12 +37,6 @@ class OnlineLogger:
 
         wb = Workbook()
         all_phases = ***REMOVED******REMOVED***
-        # for mem in self.action_phases:
-        #     phases = all_phases.get(mem, None)
-        #     if phases is None:
-        #         all_phases[mem] = self.action_phases[mem]
-        #     else:
-        #         all_phases[mem].extend(self.action_phases[mem])
         for mem in self.ongoing_online_phases:
             phases = all_phases.get(mem, None)
             if phases is None:
@@ -106,7 +72,6 @@ class OnlineLogger:
         self.member_data = ***REMOVED******REMOVED***
 
     def update_stats(self, user_id, is_online, game_playing):
-        # print("looking at " + self.musicbot.get_global_user(user_id).name)
         user_data = self.get_user_data(user_id)
         last_online_phase = self.get_last_online_phase(user_id)
         last_playing_phase = self.get_last_playing_phase(user_id)
@@ -115,27 +80,21 @@ class OnlineLogger:
             # came online
             self.push_ongoing_online_phase(
                 user_id, OnlinePhase(datetime.now()))
-            # print("  -came online")
 
         if not is_online and user_data.is_online:
             # went offline
             if last_online_phase is not None:
                 last_online_phase.set_end(datetime.now())
-                # self.push_action_phase(user_id, last_online_phase)
-            # print("  -went offline")
 
         if game_playing is not None and user_data.game_playing is None:
             # started playing
             self.push_ongoing_playing_phase(
                 user_id, PlayingPhase(game_playing, datetime.now()))
-            # print("  -started playing " + game_playing.name)
 
         if game_playing is None and user_data.game_playing is not None:
             # stopped playing
             if last_playing_phase is not None:
                 last_playing_phase.set_end(datetime.now())
-                # self.push_action_phase(user_id, last_playing_phase)
-            # print("  -stopped playing " + game_playing.name)
 
         self.member_data[user_id] = MemberStaus(is_online, game_playing)
 
@@ -146,24 +105,6 @@ class OnlineLogger:
             return MemberStaus()
 
         return user_data
-
-    # def push_action_phase(self, user_id, action_phase):
-        # phases = self.action_phases.get(user_id, None)
-        # if phases is None:
-        #     self.action_phases[user_id] = [action_phase, ]
-        # else:
-        #     self.action_phases[user_id].append(action_phase)
-        #
-        # try:
-        #     self.ongoing_online_phases[user_id].pop(action_phase)
-        # except:
-        #     print("Couldn't remove action phase from ongoing phases")
-        #     return
-        #
-        # try:
-        #     self.ongoing_playing_phases[user_id].pop(action_phase)
-        # except:
-        #     print("Couldn't remove action phase from ongoing playing phases")
 
     def push_ongoing_online_phase(self, user_id, phase):
         phases = self.ongoing_online_phases.get(user_id, None)

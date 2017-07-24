@@ -6,7 +6,7 @@ from discord import Embed
 
 import asyncio
 
-from ..entry import (RadioSongEntry, RadioStationEntry, SpotifyEntry,
+from ..entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                      StreamEntry, TimestampEntry, YoutubeEntry)
 from ..radio import RadioStations
 from ..utils import (Response, block_user, clean_songname, command_info,
@@ -29,7 +29,7 @@ class EnqueueCommands:
         media without predownloading it.
         """
 
-        song_url = song_url.strip('<>')
+        song_url = song_url.strip("<>")
 
         await self.send_typing(channel)
         await player.playlist.add_stream_entry(
@@ -585,7 +585,7 @@ class ManipulateCommands:
         """
 
         player.playlist.clear()
-        return Response(':put_litter_in_its_place:')
+        return Response(":put_litter_in_its_place:")
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
         "3.3.7": (1497471674, "adapted the new \"seek\" command instead of \"skipto\""),
@@ -754,7 +754,8 @@ class DisplayCommands:
         "3.5.4": (1497721686, "Updating the looks of the \"now playing\" message and a bit of cleanup"),
         "3.6.2": (1498143480, "Updated design of default entry and included a link to the video"),
         "3.6.5": (1498152579, "Timestamp-entries now also include a thumbnail"),
-        "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite"),
+        "4.2.0": (1500888926, "Adjustments for new Entry types")
     ***REMOVED***)
     async def cmd_np(self, player, channel, server, message):
         """
@@ -819,10 +820,9 @@ class DisplayCommands:
                     colour=hex_to_dec("#a23dd1")
                 )
 
-            if isinstance(entry, SpotifyEntry):
-                artist_name = " & ".join(
-                    artist.name for artist in entry.artists[:2])
-                artist_avatar = choice(entry.artists[:2]).image
+            if isinstance(entry, GieselaEntry):
+                artist_name = entry.artist
+                artist_avatar = entry.artist_image
                 progress_ratio = player.progress / entry.end_seconds
                 desc = "***REMOVED******REMOVED*** `[***REMOVED******REMOVED***/***REMOVED******REMOVED***]`".format(
                     create_bar(progress_ratio, length=20),
@@ -831,7 +831,7 @@ class DisplayCommands:
                 )
 
                 em = Embed(
-                    title=entry.song_name,
+                    title=entry.song_title,
                     description=desc,
                     url=entry.url,
                     colour=hex_to_dec("#F9FF6E")
@@ -842,7 +842,7 @@ class DisplayCommands:
                     name=artist_name,
                     icon_url=artist_avatar
                 )
-                em.add_field(name="Album", value=entry.album.name)
+                em.add_field(name="Album", value=entry.album)
             elif isinstance(entry, TimestampEntry):
                 sub_entry = entry.current_sub_entry
                 index = sub_entry["index"] + 1
@@ -983,7 +983,7 @@ class DisplayCommands:
             "\nShowing ***REMOVED******REMOVED*** out of ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***".format(
                 len(entries),
                 len(player.playlist.entries),
-                "y" if len(entries) == 1 else "ies"
+                "y" if len(player.playlist.entries) == 1 else "ies"
             )
         )
         lines.append(
@@ -998,7 +998,8 @@ class DisplayCommands:
         "3.3.8": (1497474312, "added failsafe for player not currently playing something"),
         "3.5.8": (1497825334, "Adjusted design to look more like `queue`'s style"),
         "3.8.9": (1499465102, "Part of the `Giesenesis` rewrite"),
-        "4.0.1": (1500346108, "Quantity parameter. Increased history limit")
+        "4.0.1": (1500346108, "Quantity parameter. Increased history limit"),
+        "4.1.7": (1500876373, "Displaying the amount of entries displayed in relation to the total entries")
     ***REMOVED***)
     async def cmd_history(self, channel, player, num="15"):
         """
@@ -1033,6 +1034,14 @@ class DisplayCommands:
                     format_time(seconds_passed, max_specifications=2)
                 )
             )
+
+        lines.append(
+            "\nShowing ***REMOVED******REMOVED*** out of ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***".format(
+                quantity,
+                len(player.playlist.history),
+                "y" if len(player.playlist.history) == 1 else "ies"
+            )
+        )
 
         return Response("\n".join(lines))
 
