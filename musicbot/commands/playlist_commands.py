@@ -1178,3 +1178,38 @@ class PlaylistCommands:
         self.playlists.edit_playlist(
             playlistname, player.playlist, remove_entries=[remove_entry])
         return Response("Removed **{}** from playlist `{}`.".format(remove_entry.title, playlistname))
+
+    @command_info("4.1.9", 1500882702)
+    async def cmd_editentry(self, channel, author, player, leftover_args):
+        """
+        ///|Usage
+        `{command_prefix}editentry [playlistname]`
+        ///|Explanation
+        Start the entry manipulator on the current entry
+        """
+
+        await self.send_typing(channel)
+
+        if not player.current_entry:
+            return Response("There's nothing playing right now")
+
+        entry = player.current_entry
+
+        playlistname = (
+            "_".join(leftover_args) or entry.meta.get("playlist", {}).get("name", None)
+        ).lower().strip()
+
+        if not playlistname:
+            return Response("No idea which entry you would like to edit")
+
+        if playlistname not in self.playlists.saved_playlists:
+            return Response("This playlist doesn't exist")
+
+        new_entry = await self.entry_manipulator(player, channel, author, playlistname, entry)
+
+        if new_entry:
+            player._current_entry = new_entry
+            self.playlists.edit_playlist(playlistname, player.playlist, edit_entries=[(entry, new_entry)])
+            return Response("Successfully edited **{}** from `{}`".format(new_entry.title, playlistname.replace("_", " ").title()))
+        else:
+            return Response("Didn't save **{}** from `{}`".format(new_entry.title, playlistname.replace("_", " ").title()))
