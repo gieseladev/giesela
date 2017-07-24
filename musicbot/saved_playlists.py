@@ -41,13 +41,13 @@ class Playlists:
         plsection = self.playlists[playlistname]
 
         playlist_information = {
-            "id": playlistname,
-            "name": playlistname.replace("_", " ").title(),
-            "location": plsection["location"],
-            "author": plsection["author"],
+            "id":           playlistname,
+            "name":         playlistname.replace("_", " ").title(),
+            "location":     plsection["location"],
+            "author":       plsection["author"],
             "replay_count": int(plsection["replays"]),
-            "description": None if plsection.get("description") == "None" else plsection.get("description"),
-            "cover_url": None if plsection.get("cover_url") == "None" else plsection.get("cover_url")
+            "description":  None if plsection.get("description") == "None" else plsection.get("description"),
+            "cover_url":    None if plsection.get("cover_url") == "None" else plsection.get("cover_url")
         }
 
         entries = []

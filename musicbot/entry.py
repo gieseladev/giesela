@@ -15,7 +15,7 @@ from .web_socket_server import WebAuthor
 
 
 class Entry:
-    version_code = "1.0.0"
+    version_code = "1.0.1"
     version = int(version_code.replace(".", ""))
     can_encode = (int, dict, list, str, int, float, bool)
     default_encode = (Channel, Member, Server, User)
@@ -26,7 +26,7 @@ class Entry:
         entry_version = data.get("version", 0)
 
         if entry_version < Entry.version:
-            raise OutdatedEntryError()
+            raise OutdatedEntryError("Version parameter signifies an outdated entry")
 
         entry_type = data.get("type", None)
         if not entry_type:
@@ -436,6 +436,7 @@ class YoutubeEntry(BaseEntry):
         else:
             meta = {}
 
+        filename = data.get("expected_filename", None)
         video_id = data["video_id"]
         url = data["url"]
         title = data["title"]
@@ -443,21 +444,22 @@ class YoutubeEntry(BaseEntry):
         thumbnail = data["thumbnail"]
         description = data["description"]
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, **meta)
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, expected_filename=filename, **meta)
 
     def to_dict(self):
         meta_dict = Entry.create_meta_dict(self.meta)
 
         data = {
-            "version": Entry.version,
-            "type": self.__class__.__name__,
-            "video_id": self.video_id,
-            "url": self.url,
-            "title": self._title,
-            "duration": self.duration,
-            "thumbnail": self.thumbnail,
-            "description": self.description,
-            "meta": meta_dict
+            "version":              Entry.version,
+            "type":                 self.__class__.__name__,
+            "expected_filename":    self.expected_filename,
+            "video_id":             self.video_id,
+            "url":                  self.url,
+            "title":                self._title,
+            "duration":             self.duration,
+            "thumbnail":            self.thumbnail,
+            "description":          self.description,
+            "meta":                 meta_dict
         }
         return data
 
@@ -587,7 +589,7 @@ class YoutubeEntry(BaseEntry):
 
         if result is None:
             raise ExtractionError("ytdl broke and hell if I know why")
-            # What the fuck do I do now?
+            # What the duck do I do now?
 
         self.filename = unhashed_fname = self.queue.downloader.ytdl.prepare_filename(
             result)
@@ -708,6 +710,7 @@ class GieselaEntry(YoutubeEntry):
         else:
             meta = {}
 
+        filename = data.get("expected_filename", None)
         video_id = data["video_id"]
         url = data["url"]
         title = data["title"]
@@ -721,7 +724,7 @@ class GieselaEntry(YoutubeEntry):
         cover = data["cover"]
         album = data["album"]
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, **meta)
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, expected_filename=filename, **meta)
 
     def to_dict(self):
         d = super().to_dict()
@@ -757,7 +760,7 @@ class SpotifyEntry(GieselaEntry):
             spotify_track.artists[0].image,
             spotify_track.album.name,
             spotify_track.cover_url,
-            expected_filename=None, **meta
+            expected_filename, **meta
         )
 
         self.spotify_data = spotify_track
@@ -775,6 +778,7 @@ class SpotifyEntry(GieselaEntry):
         else:
             meta = {}
 
+        filename = data.get("expected_filename", None)
         video_id = data["video_id"]
         url = data["url"]
         title = data["title"]
@@ -783,7 +787,7 @@ class SpotifyEntry(GieselaEntry):
         description = data["description"]
         spotify_data = SpotifyTrack.from_dict(data["spotify_data"])
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, spotify_data, **meta)
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, spotify_data, expected_filename=filename, **meta)
 
     def to_dict(self):
         d = super().to_dict()

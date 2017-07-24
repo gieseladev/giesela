@@ -539,8 +539,8 @@ def to_timestamp(seconds):
 def slugify(value):
     value = unicodedata.normalize("NFKD", value).encode(
         "ascii", "ignore").decode("ascii")
-    value = re.sub("[^\w\s-]", "", value).strip().lower()
-    return re.sub("[-\s]+", "-", value)
+    value = re.sub(r"[^\w\s-]", "", value).strip().lower()
+    return re.sub(r"[-\s]+", "-", value)
 
 
 def format_time_ffmpeg(s):

@@ -175,7 +175,7 @@ class Playlist(EventEmitter):
                 yield ind, None
             yield ind, entry
 
-    async def get_entry(self, song_url, **meta):
+    async def get_ytdl_data(self, song_url):
         try:
             info = await self.downloader.extract_info(self.loop, song_url, download=False)
         except Exception as e:
@@ -210,6 +210,11 @@ class Playlist(EventEmitter):
                     print("[Warning] Questionable content type \"%s\" for url %s" % (
                         content_type, song_url))
 
+        return info
+
+    async def get_entry(self, song_url, **meta):
+        info = await get_ytdl_data(song_url)
+
         entry = None
 
         video_id = info.get("id")
@@ -220,6 +225,8 @@ class Playlist(EventEmitter):
         video_duration = info.get("duration", 0)
 
         clean_title = clean_songname(video_title) or video_title
+
+        meta["expected_filename"] = self.downloader.ytdl.prepare_filename(info)
 
         base_arguments = (
             self,
@@ -236,7 +243,6 @@ class Playlist(EventEmitter):
             entry = SpotifyEntry(
                 *base_arguments,
                 spotify_track,
-                self.downloader.ytdl.prepare_filename(info),
                 **meta
             )
         else:
@@ -247,13 +253,11 @@ class Playlist(EventEmitter):
                 entry = TimestampEntry(
                     *base_arguments,
                     sub_queue,
-                    self.downloader.ytdl.prepare_filename(info),
                     **meta
                 )
             else:
                 entry = YoutubeEntry(
                     *base_arguments,
-                    self.downloader.ytdl.prepare_filename(info),
                     **meta
                 )
 
