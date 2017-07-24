@@ -2,12 +2,12 @@
 	***REMOVED***
 		"version": 100,
 		"type": "SpotifyEntry",
-		"video_id": "mCI2fnmK6wk",
-		"url": "https://www.youtube.com/watch?v=mCI2fnmK6wk",
-		"title": "ROOKiEZ is PUNK'D - In My World",
-		"duration": 203,
-		"thumbnail": "https://i.ytimg.com/vi/mCI2fnmK6wk/maxresdefault.jpg",
-		"description": "",
+		"video_id": "2g32y3Kph7g",
+		"url": "https://www.youtube.com/watch?v=2g32y3Kph7g",
+		"title": "3-nen E-gumi Utatan - Bye Bye YESTERDAY",
+		"duration": 250,
+		"thumbnail": "https://i.ytimg.com/vi/2g32y3Kph7g/maxresdefault.jpg",
+		"description": "Hope you like the video!",
 		"meta": ***REMOVED***
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
@@ -19,14 +19,14 @@
 		***REMOVED***,
 		"spotify_data": ***REMOVED***
 			"id": "custom",
-			"name": "In My World",
+			"name": "Bye Bye YESTERDAY",
 			"artists": [
 				***REMOVED***
 					"id": "custom",
-					"name": "ROOKiEZ is PUNK'D",
+					"name": "3-nen E-gumi Utatan",
 					"images": [
 						***REMOVED***
-							"url": "http://i.imgur.com/ceNNA5m.jpg"
+							"url": "http://i.imgur.com/HVWcQmF.jpg"
 						***REMOVED***
 					],
 					"genres": [
@@ -37,19 +37,19 @@
 					"href": "custom"
 				***REMOVED***
 			],
-			"artist": "ROOKiEZ is PUNK'D",
-			"cover_url": "http://i.imgur.com/yqt7jdc.jpg",
-			"duration": 203,
+			"artist": "3-nen E-gumi Utatan",
+			"cover_url": "http://i.imgur.com/wpy2VoA.jpg",
+			"duration": 250,
 			"album": ***REMOVED***
 				"id": "custom",
-				"name": "Ao no Exorcist",
+				"name": "Ansatsu Kyoushitsu",
 				"artists": [
 					***REMOVED***
 						"id": "custom",
-						"name": "ROOKiEZ is PUNK'D",
+						"name": "3-nen E-gumi Utatan",
 						"images": [
 							***REMOVED***
-								"url": "http://i.imgur.com/ceNNA5m.jpg"
+								"url": "http://i.imgur.com/HVWcQmF.jpg"
 							***REMOVED***
 						],
 						"genres": [
@@ -62,7 +62,7 @@
 				],
 				"images": [
 					***REMOVED***
-						"url": "http://i.imgur.com/yqt7jdc.jpg"
+						"url": "http://i.imgur.com/wpy2VoA.jpg"
 					***REMOVED***
 				],
 				"uri": "custom"
@@ -76,12 +76,12 @@
 	***REMOVED***
 		"version": 100,
 		"type": "SpotifyEntry",
-		"video_id": "7Ww0IJgUTDw",
-		"url": "https://www.youtube.com/watch?v=7Ww0IJgUTDw",
-		"title": "Hiroyuki Oshima - Blood History",
-		"duration": 109,
-		"thumbnail": "https://i.ytimg.com/vi/7Ww0IJgUTDw/maxresdefault.jpg",
-		"description": "Accel World OST/Original Soundtrack - 10. Blood History\nArtist: Hiroyuki Oshima",
+		"video_id": "9ZyZ4bMMKjU",
+		"url": "https://www.youtube.com/watch?v=9ZyZ4bMMKjU",
+		"title": "3-Nen E-Gumi Utatan - QUESTION",
+		"duration": 267,
+		"thumbnail": "https://i.ytimg.com/vi/9ZyZ4bMMKjU/maxresdefault.jpg",
+		"description": "Several people requested this song so I decided to make this video. Enjoy :D I'll also be doing Bye Bye Yesterday soon. :)\n\nNote: Karma, Isogai, and Maehara sound very similar so I may have mixed up their individual parts, so I'm sorry if I did. :(",
 		"meta": ***REMOVED***
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
@@ -93,14 +93,14 @@
 		***REMOVED***,
 		"spotify_data": ***REMOVED***
 			"id": "custom",
-			"name": "Blood History",
+			"name": "QUESTION",
 			"artists": [
 				***REMOVED***
 					"id": "custom",
-					"name": "Hiroyuki Oshima",
+					"name": "3-Nen E-Gumi Utatan",
 					"images": [
 						***REMOVED***
-							"url": "http://i.imgur.com/DQqDLse.jpg"
+							"url": "http://i.imgur.com/SMmDV0m.jpg"
 						***REMOVED***
 					],
 					"genres": [
@@ -111,19 +111,19 @@
 					"href": "custom"
 				***REMOVED***
 			],
-			"artist": "Hiroyuki Oshima",
-			"cover_url": "http://i.imgur.com/JFlbk99.jpg",
-			"duration": 109,
+			"artist": "3-Nen E-Gumi Utatan",
+			"cover_url": "http://i.imgur.com/rB1inZr.jpg",
+			"duration": 267,
 			"album": ***REMOVED***
 				"id": "custom",
-				"name": "Accel World OST",
+				"name": "Ansatsu Kyoushitsu",
 				"artists": [
 					***REMOVED***
 						"id": "custom",
-						"name": "Hiroyuki Oshima",
+						"name": "3-Nen E-Gumi Utatan",
 						"images": [
 							***REMOVED***
-								"url": "http://i.imgur.com/DQqDLse.jpg"
+								"url": "http://i.imgur.com/SMmDV0m.jpg"
 							***REMOVED***
 						],
 						"genres": [
@@ -136,7 +136,7 @@
 				],
 				"images": [
 					***REMOVED***
-						"url": "http://i.imgur.com/JFlbk99.jpg"
+						"url": "http://i.imgur.com/rB1inZr.jpg"
 					***REMOVED***
 				],
 				"uri": "custom"
@@ -145,44 +145,6 @@
 			"uri": "custom",
 			"query": null,
 			"certainty": 1
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 100,
-		"type": "YoutubeEntry",
-		"video_id": "2g32y3Kph7g",
-		"url": "https://www.youtube.com/watch?v=2g32y3Kph7g",
-		"title": "3-nen E-gumi Utatan- Bye Bye YESTERDAY + Lyrics",
-		"duration": 250,
-		"thumbnail": "https://i.ytimg.com/vi/2g32y3Kph7g/maxresdefault.jpg",
-		"description": "Hope you like the video!",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"name": "simonisanerd",
-					"index": 2
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 100,
-		"type": "YoutubeEntry",
-		"video_id": "9ZyZ4bMMKjU",
-		"url": "https://www.youtube.com/watch?v=9ZyZ4bMMKjU",
-		"title": "3-nen E-gumi Utatan- QUESTION + Lyrics",
-		"duration": 267,
-		"thumbnail": "https://i.ytimg.com/vi/9ZyZ4bMMKjU/maxresdefault.jpg",
-		"description": "Several people requested this song so I decided to make this video. Enjoy :D I'll also be doing Bye Bye Yesterday soon. :)\n\nNote: Karma, Isogai, and Maehara sound very similar so I may have mixed up their individual parts, so I'm sorry if I did. :(",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"name": "simonisanerd",
-					"index": 3
-				***REMOVED***
-			***REMOVED***
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
@@ -199,7 +161,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 4
+					"index": 2
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -306,7 +268,7 @@
 		"type": "SpotifyEntry",
 		"video_id": "y-q3br6WcGc",
 		"url": "https://www.youtube.com/watch?v=y-q3br6WcGc",
-		"title": "Amy B - Snow Fairy - Fairy Tail - English Version",
+		"title": "Funkist - Snow Fairy",
 		"duration": 217,
 		"thumbnail": "https://i.ytimg.com/vi/y-q3br6WcGc/maxresdefault.jpg",
 		"description": "Hey guys! This is Fairy Tail Opening 1, Snow Fairy!\nPersonally one of my most favorite opening!\nHope you enjoyed and make sure to subscribe!\n\nI DO NOT OWN THE MUSIC: FUNKIST OWNS THIS MUSIC\n\n\"Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is made for \"fair use\" for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statute that might otherwise be infringing. Non-profit, educational or personal use tips the balance in favor of fair use.\"",
@@ -315,108 +277,72 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 5
+					"index": 3
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
 		"spotify_data": ***REMOVED***
-			"id": "4xs4FEaQGPGuSlI6jOy6UC",
-			"name": "Snow Fairy - Fairy Tail - English Version",
+			"id": "custom",
+			"name": "Snow Fairy",
 			"artists": [
 				***REMOVED***
-					"id": "745pruRr6cCNQfLpQVRCDL",
-					"name": "Amy B",
+					"id": "custom",
+					"name": "Funkist",
 					"images": [
 						***REMOVED***
-							"height": 640,
-							"url": "https://i.scdn.co/image/76feb8071c146f6d9acfa8613709c340a484b101",
-							"width": 640
-						***REMOVED***,
-						***REMOVED***
-							"height": 300,
-							"url": "https://i.scdn.co/image/271f4f4069b68c220b2a9345eb4e48f818d12a6e",
-							"width": 300
-						***REMOVED***,
-						***REMOVED***
-							"height": 64,
-							"url": "https://i.scdn.co/image/51ab59a47ab0c0394648f7bf6d66f261b54795d0",
-							"width": 64
+							"url": "http://i.imgur.com/Xmz23Ca.jpg"
 						***REMOVED***
 					],
 					"genres": [
-						"otacore"
+						"custom"
 					],
-					"popularity": 43,
-					"uri": "spotify:artist:745pruRr6cCNQfLpQVRCDL",
-					"href": "https://open.spotify.com/artist/745pruRr6cCNQfLpQVRCDL"
+					"popularity": 0.5,
+					"uri": "custom",
+					"href": "custom"
 				***REMOVED***
 			],
-			"artist": "Amy B",
-			"cover_url": "https://i.scdn.co/image/76feb8071c146f6d9acfa8613709c340a484b101",
-			"duration": 93.802,
+			"artist": "Funkist",
+			"cover_url": "http://i.imgur.com/FV8tyVY.jpg",
+			"duration": 217,
 			"album": ***REMOVED***
-				"id": "6BCjDdLslBt9ftra0YTrbu",
-				"name": "Snow Fairy - Fairy Tail (English Version)",
+				"id": "custom",
+				"name": "Fairy Tail",
 				"artists": [
 					***REMOVED***
-						"id": "745pruRr6cCNQfLpQVRCDL",
-						"name": "Amy B",
+						"id": "custom",
+						"name": "Funkist",
 						"images": [
 							***REMOVED***
-								"height": 640,
-								"url": "https://i.scdn.co/image/76feb8071c146f6d9acfa8613709c340a484b101",
-								"width": 640
-							***REMOVED***,
-							***REMOVED***
-								"height": 300,
-								"url": "https://i.scdn.co/image/271f4f4069b68c220b2a9345eb4e48f818d12a6e",
-								"width": 300
-							***REMOVED***,
-							***REMOVED***
-								"height": 64,
-								"url": "https://i.scdn.co/image/51ab59a47ab0c0394648f7bf6d66f261b54795d0",
-								"width": 64
+								"url": "http://i.imgur.com/Xmz23Ca.jpg"
 							***REMOVED***
 						],
 						"genres": [
-							"otacore"
+							"custom"
 						],
-						"popularity": 43,
-						"uri": "spotify:artist:745pruRr6cCNQfLpQVRCDL",
-						"href": "https://open.spotify.com/artist/745pruRr6cCNQfLpQVRCDL"
+						"popularity": 0.5,
+						"uri": "custom",
+						"href": "custom"
 					***REMOVED***
 				],
 				"images": [
 					***REMOVED***
-						"height": 640,
-						"url": "https://i.scdn.co/image/76feb8071c146f6d9acfa8613709c340a484b101",
-						"width": 640
-					***REMOVED***,
-					***REMOVED***
-						"height": 300,
-						"url": "https://i.scdn.co/image/271f4f4069b68c220b2a9345eb4e48f818d12a6e",
-						"width": 300
-					***REMOVED***,
-					***REMOVED***
-						"height": 64,
-						"url": "https://i.scdn.co/image/51ab59a47ab0c0394648f7bf6d66f261b54795d0",
-						"width": 64
+						"url": "http://i.imgur.com/FV8tyVY.jpg"
 					***REMOVED***
 				],
-				"uri": "spotify:album:6BCjDdLslBt9ftra0YTrbu"
+				"uri": "custom"
 			***REMOVED***,
-			"popularity": 39,
-			"uri": "spotify:track:4xs4FEaQGPGuSlI6jOy6UC",
-			"query": "Snow Fairy",
-			"certainty": 0.7692307692307693
+			"popularity": 0.5,
+			"uri": "custom",
+			"query": null,
+			"certainty": 1
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
 		"version": 100,
-		"type": "YoutubeEntry",
+		"type": "SpotifyEntry",
 		"video_id": "tm7Xf9818FM",
 		"url": "https://www.youtube.com/watch?v=tm7Xf9818FM",
-		"title": "Angel Beats! - Ichiban no Takaramono (Yui final ver.)",
+		"title": "LiSA - Ichiban no Takaramono",
 		"duration": 360,
 		"thumbnail": "https://i.ytimg.com/vi/tm7Xf9818FM/maxresdefault.jpg",
 		"description": "",
@@ -425,9 +351,64 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 6
+					"index": 4
 				***REMOVED***
 			***REMOVED***
+		***REMOVED***,
+		"spotify_data": ***REMOVED***
+			"id": "custom",
+			"name": "Ichiban no Takaramono",
+			"artists": [
+				***REMOVED***
+					"id": "custom",
+					"name": "LiSA",
+					"images": [
+						***REMOVED***
+							"url": "http://i.imgur.com/adfWmHo.jpg"
+						***REMOVED***
+					],
+					"genres": [
+						"custom"
+					],
+					"popularity": 0.5,
+					"uri": "custom",
+					"href": "custom"
+				***REMOVED***
+			],
+			"artist": "LiSA",
+			"cover_url": "http://i.imgur.com/wenQwi5.jpg",
+			"duration": 360,
+			"album": ***REMOVED***
+				"id": "custom",
+				"name": "Ichiban no Takaramono",
+				"artists": [
+					***REMOVED***
+						"id": "custom",
+						"name": "LiSA",
+						"images": [
+							***REMOVED***
+								"url": "http://i.imgur.com/adfWmHo.jpg"
+							***REMOVED***
+						],
+						"genres": [
+							"custom"
+						],
+						"popularity": 0.5,
+						"uri": "custom",
+						"href": "custom"
+					***REMOVED***
+				],
+				"images": [
+					***REMOVED***
+						"url": "http://i.imgur.com/wenQwi5.jpg"
+					***REMOVED***
+				],
+				"uri": "custom"
+			***REMOVED***,
+			"popularity": 0.5,
+			"uri": "custom",
+			"query": null,
+			"certainty": 1
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
@@ -449,7 +430,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 7
+					"index": 5
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -564,7 +545,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 8
+					"index": 6
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -583,7 +564,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 9
+					"index": 7
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -602,26 +583,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 10
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 100,
-		"type": "YoutubeEntry",
-		"video_id": "yD0rG7prFgU",
-		"url": "https://www.youtube.com/watch?v=yD0rG7prFgU",
-		"title": "Attack on Titan - 'theDOGS' with Lyrics",
-		"duration": 276,
-		"thumbnail": "https://i.ytimg.com/vi/yD0rG7prFgU/maxresdefault.jpg",
-		"description": "Composition: Hiroyuki Sawano\nLyrics: mpi\nArtists: mpi, Mica Caldito\n\nShingeki no Kyojin Movie 2 Theme Song\n____________________________________________\n\nLyrics:\n\nSee it on the people's faces everywhere\nBlack'n'blue but they won't throw the towel in\nAnd let go of a dream\nMan, women, child prepare to bleed\n\nWere we born to lose and let goliath win?\nHeavy air and screaming as you pull the pin\nOur world is collapsing but we can rebuild it\nA 100 more years in the fire\n\nDo you believe that we can just kill them all?\nDo you believe that we can conquer this?\nCan't delete all the mess that I have seen\nFall in the fire but these burns will heal you\n\nGonna take your knives and skills they must be honed\nShow your mom your lives and give a dog a bone\nJust wait for centuries\nMan, woman, child long to be free\n\nWhen we die we ask our brothers one more time\nIf the meaning of our lives was worth a dime\nOur world oxidizes but will surprise us\nA 100 more years in the fire\n\nDo you believe that we can just kill them all?\nDo you believe that we can conquer this?\nCan't delete all the mess that I have seen\nFall in the fire but these burns will heal you\nComing down to show you what to do\nHow to die with honor, dignity\nWe should delete all the mess out from our sight\nWhat is truth is for me and you\n\nDo you believe that we can just kill them all?\nDo you believe that we can conquer this?\nCan't delete all the mess that I have seen\nFall in the fire but these burns will heal you\nComing down to show you what to do\nHow to die with honor, dignity\nWe should delete all the mess out from our sight\nWhat is truth is for me and you",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"name": "simonisanerd",
-					"index": 11
+					"index": 8
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -640,7 +602,26 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 12
+					"index": 9
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***
+	***REMOVED***,
+	***REMOVED***
+		"version": 100,
+		"type": "YoutubeEntry",
+		"video_id": "yD0rG7prFgU",
+		"url": "https://www.youtube.com/watch?v=yD0rG7prFgU",
+		"title": "Attack on Titan - 'theDOGS' with Lyrics",
+		"duration": 276,
+		"thumbnail": "https://i.ytimg.com/vi/yD0rG7prFgU/maxresdefault.jpg",
+		"description": "Composition: Hiroyuki Sawano\nLyrics: mpi\nArtists: mpi, Mica Caldito\n\nShingeki no Kyojin Movie 2 Theme Song\n____________________________________________\n\nLyrics:\n\nSee it on the people's faces everywhere\nBlack'n'blue but they won't throw the towel in\nAnd let go of a dream\nMan, women, child prepare to bleed\n\nWere we born to lose and let goliath win?\nHeavy air and screaming as you pull the pin\nOur world is collapsing but we can rebuild it\nA 100 more years in the fire\n\nDo you believe that we can just kill them all?\nDo you believe that we can conquer this?\nCan't delete all the mess that I have seen\nFall in the fire but these burns will heal you\n\nGonna take your knives and skills they must be honed\nShow your mom your lives and give a dog a bone\nJust wait for centuries\nMan, woman, child long to be free\n\nWhen we die we ask our brothers one more time\nIf the meaning of our lives was worth a dime\nOur world oxidizes but will surprise us\nA 100 more years in the fire\n\nDo you believe that we can just kill them all?\nDo you believe that we can conquer this?\nCan't delete all the mess that I have seen\nFall in the fire but these burns will heal you\nComing down to show you what to do\nHow to die with honor, dignity\nWe should delete all the mess out from our sight\nWhat is truth is for me and you\n\nDo you believe that we can just kill them all?\nDo you believe that we can conquer this?\nCan't delete all the mess that I have seen\nFall in the fire but these burns will heal you\nComing down to show you what to do\nHow to die with honor, dignity\nWe should delete all the mess out from our sight\nWhat is truth is for me and you",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"name": "simonisanerd",
+					"index": 10
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -664,7 +645,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 13
+					"index": 11
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -688,26 +669,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 14
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 100,
-		"type": "YoutubeEntry",
-		"video_id": "Y9G20wV0KHE",
-		"url": "https://www.youtube.com/watch?v=Y9G20wV0KHE",
-		"title": "Boku Dake ga Inai Machi OP / Opening :Re",
-		"duration": 90,
-		"thumbnail": "https://i.ytimg.com/vi/Y9G20wV0KHE/maxresdefault.jpg",
-		"description": "Boku Dake ga Inai Machi Opening :Re\n\"This video is for entertainment purposes and is non profit\"\n------------------------------------------------------------------------------------------------------------------------------------------\nIts use is only for purposes of illustrative and informative, without infringing intellectual property.\nBoku Dake ga Inai Machi Opening Official\nBoku Dake ga Inai Machi OP (HD)",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"name": "simonisanerd",
-					"index": 15
+					"index": 12
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -731,7 +693,26 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 16
+					"index": 13
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***
+	***REMOVED***,
+	***REMOVED***
+		"version": 100,
+		"type": "YoutubeEntry",
+		"video_id": "Y9G20wV0KHE",
+		"url": "https://www.youtube.com/watch?v=Y9G20wV0KHE",
+		"title": "Boku Dake ga Inai Machi OP / Opening :Re",
+		"duration": 90,
+		"thumbnail": "https://i.ytimg.com/vi/Y9G20wV0KHE/maxresdefault.jpg",
+		"description": "Boku Dake ga Inai Machi Opening :Re\n\"This video is for entertainment purposes and is non profit\"\n------------------------------------------------------------------------------------------------------------------------------------------\nIts use is only for purposes of illustrative and informative, without infringing intellectual property.\nBoku Dake ga Inai Machi Opening Official\nBoku Dake ga Inai Machi OP (HD)",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"name": "simonisanerd",
+					"index": 14
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -750,7 +731,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 17
+					"index": 15
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -774,7 +755,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 18
+					"index": 16
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -793,7 +774,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 19
+					"index": 17
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -908,7 +889,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 20
+					"index": 18
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -932,7 +913,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 21
+					"index": 19
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -951,7 +932,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 22
+					"index": 20
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1041,7 +1022,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 23
+					"index": 21
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1065,7 +1046,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 24
+					"index": 22
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1084,7 +1065,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 25
+					"index": 23
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1103,7 +1084,31 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 26
+					"index": 24
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***
+	***REMOVED***,
+	***REMOVED***
+		"version": 100,
+		"type": "YoutubeEntry",
+		"video_id": "PGoHzoZ2OI0",
+		"url": "https://www.youtube.com/watch?v=PGoHzoZ2OI0",
+		"title": "Durarara!! Opening 2",
+		"duration": 91,
+		"thumbnail": "https://i.ytimg.com/vi/PGoHzoZ2OI0/maxresdefault.jpg",
+		"description": "DRR!! Season 1 OP2\n\"Complication\" by ROOKiEZ is PUNK'D",
+		"meta": ***REMOVED***
+			"author": ***REMOVED***
+				"type": "Member",
+				"id": "203510202421477376",
+				"name": "ZyLect"
+			***REMOVED***,
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"name": "simonisanerd",
+					"index": 25
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1127,7 +1132,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 27
+					"index": 26
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1151,7 +1156,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 28
+					"index": 27
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1175,7 +1180,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 29
+					"index": 28
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1194,7 +1199,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 30
+					"index": 29
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1213,7 +1218,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 31
+					"index": 30
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1232,7 +1237,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 32
+					"index": 31
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1251,7 +1256,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 33
+					"index": 32
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1270,7 +1275,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 34
+					"index": 33
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1289,7 +1294,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 35
+					"index": 34
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1308,7 +1313,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 36
+					"index": 35
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1327,7 +1332,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 37
+					"index": 36
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1346,7 +1351,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 38
+					"index": 37
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1365,7 +1370,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 39
+					"index": 38
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1384,7 +1389,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 40
+					"index": 39
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1403,6 +1408,30 @@
 				"type": "Member",
 				"id": "203302899277627392",
 				"name": "siku2"
+			***REMOVED***,
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"name": "simonisanerd",
+					"index": 40
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***
+	***REMOVED***,
+	***REMOVED***
+		"version": 100,
+		"type": "YoutubeEntry",
+		"video_id": "AK9DlbzxCVk",
+		"url": "https://www.youtube.com/watch?v=AK9DlbzxCVk",
+		"title": "Ghost in the Shell - Stand Alone Complex 2 - Ending",
+		"duration": 85,
+		"thumbnail": "https://i.ytimg.com/vi/AK9DlbzxCVk/hqdefault.jpg",
+		"description": "Ghost in the Shell - Stand Alone Complex 2 - Ending\nmp3 Download http://kiwi6.com/file?id=2ful6t4960",
+		"meta": ***REMOVED***
+			"author": ***REMOVED***
+				"type": "Member",
+				"id": "203510202421477376",
+				"name": "ZyLect"
 			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
@@ -1601,6 +1630,80 @@
 	***REMOVED***
 		"version": 100,
 		"type": "SpotifyEntry",
+		"video_id": "7Ww0IJgUTDw",
+		"url": "https://www.youtube.com/watch?v=7Ww0IJgUTDw",
+		"title": "Hiroyuki Oshima - Blood History",
+		"duration": 109,
+		"thumbnail": "https://i.ytimg.com/vi/7Ww0IJgUTDw/maxresdefault.jpg",
+		"description": "Accel World OST/Original Soundtrack - 10. Blood History\nArtist: Hiroyuki Oshima",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"name": "simonisanerd",
+					"index": 48
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"spotify_data": ***REMOVED***
+			"id": "custom",
+			"name": "Blood History",
+			"artists": [
+				***REMOVED***
+					"id": "custom",
+					"name": "Hiroyuki Oshima",
+					"images": [
+						***REMOVED***
+							"url": "http://i.imgur.com/DQqDLse.jpg"
+						***REMOVED***
+					],
+					"genres": [
+						"custom"
+					],
+					"popularity": 0.5,
+					"uri": "custom",
+					"href": "custom"
+				***REMOVED***
+			],
+			"artist": "Hiroyuki Oshima",
+			"cover_url": "http://i.imgur.com/JFlbk99.jpg",
+			"duration": 109,
+			"album": ***REMOVED***
+				"id": "custom",
+				"name": "Accel World OST",
+				"artists": [
+					***REMOVED***
+						"id": "custom",
+						"name": "Hiroyuki Oshima",
+						"images": [
+							***REMOVED***
+								"url": "http://i.imgur.com/DQqDLse.jpg"
+							***REMOVED***
+						],
+						"genres": [
+							"custom"
+						],
+						"popularity": 0.5,
+						"uri": "custom",
+						"href": "custom"
+					***REMOVED***
+				],
+				"images": [
+					***REMOVED***
+						"url": "http://i.imgur.com/JFlbk99.jpg"
+					***REMOVED***
+				],
+				"uri": "custom"
+			***REMOVED***,
+			"popularity": 0.5,
+			"uri": "custom",
+			"query": null,
+			"certainty": 1
+		***REMOVED***
+	***REMOVED***,
+	***REMOVED***
+		"version": 100,
+		"type": "SpotifyEntry",
 		"video_id": "trUtAgEFDOE",
 		"url": "https://www.youtube.com/watch?v=trUtAgEFDOE",
 		"title": "Hiroyuki Sawano & Cyua - Vogel Im Kafig",
@@ -1612,7 +1715,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 48
+					"index": 49
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1753,7 +1856,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 49
+					"index": 50
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1876,7 +1979,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 50
+					"index": 51
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -1900,7 +2003,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 51
+					"index": 52
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2014,7 +2117,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 52
+					"index": 53
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2033,7 +2136,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 53
+					"index": 54
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2052,7 +2155,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 54
+					"index": 55
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2162,7 +2265,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 55
+					"index": 56
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2181,7 +2284,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 56
+					"index": 57
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2293,7 +2396,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 57
+					"index": 58
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2405,7 +2508,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 58
+					"index": 59
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2429,7 +2532,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 59
+					"index": 60
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2448,7 +2551,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 60
+					"index": 61
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2472,7 +2575,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 61
+					"index": 62
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2564,7 +2667,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 62
+					"index": 63
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2583,7 +2686,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 63
+					"index": 64
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2607,7 +2710,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 64
+					"index": 65
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2626,7 +2729,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 65
+					"index": 66
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2645,7 +2748,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 66
+					"index": 67
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2664,7 +2767,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 67
+					"index": 68
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2782,7 +2885,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 68
+					"index": 69
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2899,7 +3002,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 69
+					"index": 70
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2918,7 +3021,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 70
+					"index": 71
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2942,7 +3045,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 71
+					"index": 72
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2966,7 +3069,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 72
+					"index": 73
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -2990,7 +3093,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 73
+					"index": 74
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3014,7 +3117,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 74
+					"index": 75
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3137,7 +3240,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 75
+					"index": 76
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3161,7 +3264,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 76
+					"index": 77
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3180,7 +3283,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 77
+					"index": 78
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3204,126 +3307,33 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 78
+					"index": 79
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
 		"version": 100,
-		"type": "SpotifyEntry",
-		"video_id": "r-MEKwXFF-s",
-		"url": "https://www.youtube.com/watch?v=r-MEKwXFF-s",
-		"title": "PelleK - *~Asterisk~ (Bleach Opening 1)",
-		"duration": 255,
-		"thumbnail": "https://i.ytimg.com/vi/r-MEKwXFF-s/hqdefault.jpg",
-		"description": "Spanish-Espa\u00f1ol English-Ingles\n\nSpanish-Espa\u00f1ol\nHola a todos este es el soundtrack opening 1 de bleach completo\nsuscribanse\n\nEnglish-Ingles\n\nHello everyone this is the soundtrack bleach opening 1 full\nsuscribe",
+		"type": "YoutubeEntry",
+		"video_id": "nJXRDvwJN_Y",
+		"url": "https://www.youtube.com/watch?v=nJXRDvwJN_Y",
+		"title": "Ouran Highschool Host Club Begininng Theme Song English",
+		"duration": 77,
+		"thumbnail": "https://i.ytimg.com/vi/nJXRDvwJN_Y/hqdefault.jpg",
+		"description": "Please rate and comment ^.^\nI love this theme song!",
 		"meta": ***REMOVED***
 			"author": ***REMOVED***
 				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
+				"id": "203510202421477376",
+				"name": "ZyLect"
 			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 79
+					"index": 80
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***,
-		"spotify_data": ***REMOVED***
-			"id": "0Szs74d8jYfx0HeIzZTfIw",
-			"name": "*~Asterisk~ (Bleach Opening 1)",
-			"artists": [
-				***REMOVED***
-					"id": "1qLwXsUtyW2Ba2Iotg4gE3",
-					"name": "PelleK",
-					"images": [
-						***REMOVED***
-							"height": 640,
-							"url": "https://i.scdn.co/image/5f3d1348f484fc8182b1263241dfa876595b81fb",
-							"width": 640
-						***REMOVED***,
-						***REMOVED***
-							"height": 300,
-							"url": "https://i.scdn.co/image/5c812cc8451e65a1858442a1e05434143192ff2c",
-							"width": 300
-						***REMOVED***,
-						***REMOVED***
-							"height": 64,
-							"url": "https://i.scdn.co/image/8a49877f39c608a3eb4040175982f2a45d40387f",
-							"width": 64
-						***REMOVED***
-					],
-					"genres": [
-						"heavy christmas",
-						"otacore"
-					],
-					"popularity": 60,
-					"uri": "spotify:artist:1qLwXsUtyW2Ba2Iotg4gE3",
-					"href": "https://open.spotify.com/artist/1qLwXsUtyW2Ba2Iotg4gE3"
-				***REMOVED***
-			],
-			"artist": "PelleK",
-			"cover_url": "https://i.scdn.co/image/dd03d978e08831dff9b2ee1e5907717feb1617e9",
-			"duration": 93.291,
-			"album": ***REMOVED***
-				"id": "2aF7gE3ljIQoNRAq5jziLq",
-				"name": "PelleK's Bleach Medley",
-				"artists": [
-					***REMOVED***
-						"id": "1qLwXsUtyW2Ba2Iotg4gE3",
-						"name": "PelleK",
-						"images": [
-							***REMOVED***
-								"height": 640,
-								"url": "https://i.scdn.co/image/5f3d1348f484fc8182b1263241dfa876595b81fb",
-								"width": 640
-							***REMOVED***,
-							***REMOVED***
-								"height": 300,
-								"url": "https://i.scdn.co/image/5c812cc8451e65a1858442a1e05434143192ff2c",
-								"width": 300
-							***REMOVED***,
-							***REMOVED***
-								"height": 64,
-								"url": "https://i.scdn.co/image/8a49877f39c608a3eb4040175982f2a45d40387f",
-								"width": 64
-							***REMOVED***
-						],
-						"genres": [
-							"heavy christmas",
-							"otacore"
-						],
-						"popularity": 60,
-						"uri": "spotify:artist:1qLwXsUtyW2Ba2Iotg4gE3",
-						"href": "https://open.spotify.com/artist/1qLwXsUtyW2Ba2Iotg4gE3"
-					***REMOVED***
-				],
-				"images": [
-					***REMOVED***
-						"height": 640,
-						"url": "https://i.scdn.co/image/dd03d978e08831dff9b2ee1e5907717feb1617e9",
-						"width": 640
-					***REMOVED***,
-					***REMOVED***
-						"height": 300,
-						"url": "https://i.scdn.co/image/4446a19a44f9e15f00a522e50354571e414bcdf0",
-						"width": 300
-					***REMOVED***,
-					***REMOVED***
-						"height": 64,
-						"url": "https://i.scdn.co/image/72cf8b0f392c402ae42bfb445d2845255eb849a5",
-						"width": 64
-					***REMOVED***
-				],
-				"uri": "spotify:album:2aF7gE3ljIQoNRAq5jziLq"
-			***REMOVED***,
-			"popularity": 32,
-			"uri": "spotify:track:0Szs74d8jYfx0HeIzZTfIw",
-			"query": "Bleach Asterisk",
-			"certainty": 0.6666666666666666
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
@@ -3340,7 +3350,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 80
+					"index": 81
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3452,7 +3462,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 81
+					"index": 82
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3552,6 +3562,123 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 100,
+		"type": "SpotifyEntry",
+		"video_id": "r-MEKwXFF-s",
+		"url": "https://www.youtube.com/watch?v=r-MEKwXFF-s",
+		"title": "PelleK - *~Asterisk~ (Bleach Opening 1)",
+		"duration": 255,
+		"thumbnail": "https://i.ytimg.com/vi/r-MEKwXFF-s/hqdefault.jpg",
+		"description": "Spanish-Espa\u00f1ol English-Ingles\n\nSpanish-Espa\u00f1ol\nHola a todos este es el soundtrack opening 1 de bleach completo\nsuscribanse\n\nEnglish-Ingles\n\nHello everyone this is the soundtrack bleach opening 1 full\nsuscribe",
+		"meta": ***REMOVED***
+			"author": ***REMOVED***
+				"type": "Member",
+				"id": "203302899277627392",
+				"name": "siku2"
+			***REMOVED***,
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"name": "simonisanerd",
+					"index": 83
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"spotify_data": ***REMOVED***
+			"id": "0Szs74d8jYfx0HeIzZTfIw",
+			"name": "*~Asterisk~ (Bleach Opening 1)",
+			"artists": [
+				***REMOVED***
+					"id": "1qLwXsUtyW2Ba2Iotg4gE3",
+					"name": "PelleK",
+					"images": [
+						***REMOVED***
+							"height": 640,
+							"url": "https://i.scdn.co/image/5f3d1348f484fc8182b1263241dfa876595b81fb",
+							"width": 640
+						***REMOVED***,
+						***REMOVED***
+							"height": 300,
+							"url": "https://i.scdn.co/image/5c812cc8451e65a1858442a1e05434143192ff2c",
+							"width": 300
+						***REMOVED***,
+						***REMOVED***
+							"height": 64,
+							"url": "https://i.scdn.co/image/8a49877f39c608a3eb4040175982f2a45d40387f",
+							"width": 64
+						***REMOVED***
+					],
+					"genres": [
+						"heavy christmas",
+						"otacore"
+					],
+					"popularity": 60,
+					"uri": "spotify:artist:1qLwXsUtyW2Ba2Iotg4gE3",
+					"href": "https://open.spotify.com/artist/1qLwXsUtyW2Ba2Iotg4gE3"
+				***REMOVED***
+			],
+			"artist": "PelleK",
+			"cover_url": "https://i.scdn.co/image/dd03d978e08831dff9b2ee1e5907717feb1617e9",
+			"duration": 93.291,
+			"album": ***REMOVED***
+				"id": "2aF7gE3ljIQoNRAq5jziLq",
+				"name": "PelleK's Bleach Medley",
+				"artists": [
+					***REMOVED***
+						"id": "1qLwXsUtyW2Ba2Iotg4gE3",
+						"name": "PelleK",
+						"images": [
+							***REMOVED***
+								"height": 640,
+								"url": "https://i.scdn.co/image/5f3d1348f484fc8182b1263241dfa876595b81fb",
+								"width": 640
+							***REMOVED***,
+							***REMOVED***
+								"height": 300,
+								"url": "https://i.scdn.co/image/5c812cc8451e65a1858442a1e05434143192ff2c",
+								"width": 300
+							***REMOVED***,
+							***REMOVED***
+								"height": 64,
+								"url": "https://i.scdn.co/image/8a49877f39c608a3eb4040175982f2a45d40387f",
+								"width": 64
+							***REMOVED***
+						],
+						"genres": [
+							"heavy christmas",
+							"otacore"
+						],
+						"popularity": 60,
+						"uri": "spotify:artist:1qLwXsUtyW2Ba2Iotg4gE3",
+						"href": "https://open.spotify.com/artist/1qLwXsUtyW2Ba2Iotg4gE3"
+					***REMOVED***
+				],
+				"images": [
+					***REMOVED***
+						"height": 640,
+						"url": "https://i.scdn.co/image/dd03d978e08831dff9b2ee1e5907717feb1617e9",
+						"width": 640
+					***REMOVED***,
+					***REMOVED***
+						"height": 300,
+						"url": "https://i.scdn.co/image/4446a19a44f9e15f00a522e50354571e414bcdf0",
+						"width": 300
+					***REMOVED***,
+					***REMOVED***
+						"height": 64,
+						"url": "https://i.scdn.co/image/72cf8b0f392c402ae42bfb445d2845255eb849a5",
+						"width": 64
+					***REMOVED***
+				],
+				"uri": "spotify:album:2aF7gE3ljIQoNRAq5jziLq"
+			***REMOVED***,
+			"popularity": 32,
+			"uri": "spotify:track:0Szs74d8jYfx0HeIzZTfIw",
+			"query": "Bleach Asterisk",
+			"certainty": 0.6666666666666666
+		***REMOVED***
+	***REMOVED***,
+	***REMOVED***
+		"version": 100,
 		"type": "YoutubeEntry",
 		"video_id": "Zh9lynUFikc",
 		"url": "https://www.youtube.com/watch?v=Zh9lynUFikc",
@@ -3569,7 +3696,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 82
+					"index": 84
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3588,7 +3715,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 83
+					"index": 85
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3612,9 +3739,83 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 84
+					"index": 86
 				***REMOVED***
 			***REMOVED***
+		***REMOVED***
+	***REMOVED***,
+	***REMOVED***
+		"version": 100,
+		"type": "SpotifyEntry",
+		"video_id": "mCI2fnmK6wk",
+		"url": "https://www.youtube.com/watch?v=mCI2fnmK6wk",
+		"title": "ROOKiEZ is PUNK'D - In My World",
+		"duration": 203,
+		"thumbnail": "https://i.ytimg.com/vi/mCI2fnmK6wk/maxresdefault.jpg",
+		"description": "",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"name": "simonisanerd",
+					"index": 87
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"spotify_data": ***REMOVED***
+			"id": "custom",
+			"name": "In My World",
+			"artists": [
+				***REMOVED***
+					"id": "custom",
+					"name": "ROOKiEZ is PUNK'D",
+					"images": [
+						***REMOVED***
+							"url": "http://i.imgur.com/ceNNA5m.jpg"
+						***REMOVED***
+					],
+					"genres": [
+						"custom"
+					],
+					"popularity": 0.5,
+					"uri": "custom",
+					"href": "custom"
+				***REMOVED***
+			],
+			"artist": "ROOKiEZ is PUNK'D",
+			"cover_url": "http://i.imgur.com/yqt7jdc.jpg",
+			"duration": 203,
+			"album": ***REMOVED***
+				"id": "custom",
+				"name": "Ao no Exorcist",
+				"artists": [
+					***REMOVED***
+						"id": "custom",
+						"name": "ROOKiEZ is PUNK'D",
+						"images": [
+							***REMOVED***
+								"url": "http://i.imgur.com/ceNNA5m.jpg"
+							***REMOVED***
+						],
+						"genres": [
+							"custom"
+						],
+						"popularity": 0.5,
+						"uri": "custom",
+						"href": "custom"
+					***REMOVED***
+				],
+				"images": [
+					***REMOVED***
+						"url": "http://i.imgur.com/yqt7jdc.jpg"
+					***REMOVED***
+				],
+				"uri": "custom"
+			***REMOVED***,
+			"popularity": 0.5,
+			"uri": "custom",
+			"query": null,
+			"certainty": 1
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
@@ -3636,7 +3837,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 85
+					"index": 88
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3660,7 +3861,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 86
+					"index": 89
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3679,7 +3880,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 87
+					"index": 90
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3819,7 +4020,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 88
+					"index": 91
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3838,7 +4039,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 89
+					"index": 92
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3857,7 +4058,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 90
+					"index": 93
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3876,7 +4077,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 91
+					"index": 94
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3895,7 +4096,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 92
+					"index": 95
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3919,7 +4120,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 93
+					"index": 96
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3938,7 +4139,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 94
+					"index": 97
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -3962,9 +4163,83 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 95
+					"index": 98
 				***REMOVED***
 			***REMOVED***
+		***REMOVED***
+	***REMOVED***,
+	***REMOVED***
+		"version": 100,
+		"type": "SpotifyEntry",
+		"video_id": "C-o8pTi6vd8",
+		"url": "https://www.youtube.com/watch?v=C-o8pTi6vd8",
+		"title": "The Oral Cigarettes - Hey Kids",
+		"duration": 266,
+		"thumbnail": "https://i.ytimg.com/vi/C-o8pTi6vd8/hqdefault.jpg",
+		"description": "\uff1c\u30ce\u30e9\u30ac\u30dfARAGOTO\uff1eOP\u30c6\u30fc\u30de THE ORAL CIGARETTES\u300c\u72c2\u4e71 Hey Kids!!\u300d\n2015.11.11Release!!\n\n\u25bc\u53ce\u9332\u66f2\nM1. \u72c2\u4e71 Hey Kids!!\nM2.\u30ad\u30a8\u30bf\u30df\u30bf\u30a4\nM3. LIPS\nM4. \u72c2\u4e71 Hey Kids!! (Instrumental)\n\u203bM4.\u306f\u901a\u5e38\u76e4\u306e\u307f\n\n\u25ce\u521d\u56de\u76e4\u7279\u5178DVD\u53ce\u9332\u5185\u5bb9\nTHE ORAL CIGARETTES \u5507\u30ef\u30f3\u30de\u30f3 2015 SPRING\n\uff5e\u4e0a\u4eac1\u5468\u5e74\u8a18\u5ff5\u3001\u5730\u5143\u95a2\u897f\u306a\u3093\u3070\u30cf\u30c3\u30c1\u30e3\u3051\u308b\u305c\u306e\u5dfb\uff5e\u3088\u308a5\u66f2\u3092\u53ce\u9332\n\uff11\uff0eSTARGET\n\uff12\uff0e\u30e2\u30f3\u30b9\u30bf\u30fc\u30a8\u30d5\u30a7\u30af\u30c8\n\uff13\uff0eSee the lights\n\uff14\uff0emist...\n\uff15\uff0e\u8d77\u6b7b\u56de\u751fSTORY\n\n\u25ce\u901a\u5e38\u76e4\uff08\u521d\u56de\u30d7\u30ec\u30b9\u5206\u306e\u307f\uff09\n\u300c\u30ce\u30e9\u30ac\u30dfARAGOTO\u300d\u63cf\u304d\u4e0b\u308d\u3057\u30a4\u30e9\u30b9\u30c8\u30ef\u30a4\u30c9\u30ad\u30e3\u30c3\u30d7\u30b9\u30c6\u30c3\u30ab\u30fc\n\n\u25c6\u30c6\u30ec\u30d3\u30a2\u30cb\u30e1 \u300c\u30ce\u30e9\u30ac\u30dfARAGOTO\u300d\n\uff0810\u67082\u65e5\uff5eTOKYO MX\u30fbMBS\u30fbBS\u30d5\u30b8\u4ed6\u306b\u3066\u653e\u9001\uff09\n\n\u25c6LIVE\n\u300cTHE ORAL CIGARETTES\u5507\u30ea\u30d9\u30f3\u30b8\u30ef\u30f3\u30de\u30f3 \uff5e\u5fa9\u6d3b\u30fb\u8fd4\u4e0a\u30fbBKW!!\u306e\u5dfb\uff5e\u300d\n2016\u5e741\u67084\u65e5\uff08\u6708\uff09 \u6771\u4eac\u3000Zepp DiverCity\nOPEN 17:00 / START 18:00\n\u4e00\u822c\u767a\u58f2\u65e5\uff1a2015\u5e7411\u67087\u65e5\uff08\u571f\uff09\n\n\u300cTHE ORAL CIGARETTES \u5507\u30c4\u30fc\u30de\u30f3 TOUR 2016 \uff5e\u5fa9\u6d3b\u30fb\u6fc0\u7a81\u30fbBKW!!\u306e\u5dfb\uff5e\u300d\n2016\u5e742\u67088\u65e5\uff08\u6708\uff09\u3000\u4eac\u90fd\u3000MUSE\n2016\u5e742\u670811\u65e5\uff08\u6728\u30fb\u795d\uff09\u3000\u9ad8\u677e\u3000MONSTER\n2016\u5e742\u670812\u65e5\uff08\u91d1\uff09\u3000\u5e83\u5cf6\u3000CLUB QUATTRO\n2016\u5e742\u670814\u65e5\uff08\u65e5\uff09\u3000\u798f\u5ca1\u3000DRUM LOGOS\n2016\u5e742\u670819\u65e5\uff08\u91d1\uff09\u3000\u4ed9\u53f0\u3000RENSA\n2016\u5e742\u670821\u65e5\uff08\u65e5\uff09\u3000\u672d\u5e4c\u3000PENNY LANE\n2016\u5e743\u67085\u65e5\uff08\u571f\uff09\u3000  \u65b0\u6f5f\u3000LOTS\n2016\u5e743\u670811\u65e5\uff08\u91d1\uff09\u3000\u5927\u962a\u3000ZEPP NAMBA\n2016\u5e743\u670813\u65e5\uff08\u65e5\uff09\u3000\u611b\u77e5\u3000ZEPP NAGOYA\n2016\u5e743\u670820\u65e5\uff08\u65e5\uff09\u3000\u6771\u4eac\u3000STUDIO COAST\n\u524d\u58f2\u30c1\u30b1\u30c3\u30c8\uff1a\uffe53,500\uff08\u7a0e\u8fbc\u30fb\u30c9\u30ea\u30f3\u30af\u4ee3\u5225\u9014\u5fc5\u8981\uff09\n\u4e00\u822c\u767a\u58f2\u65e5\uff1a12\u670812\u65e5 \uff08\u571f\uff09",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"name": "simonisanerd",
+					"index": 99
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"spotify_data": ***REMOVED***
+			"id": "custom",
+			"name": "Hey Kids",
+			"artists": [
+				***REMOVED***
+					"id": "custom",
+					"name": "The Oral Cigarettes",
+					"images": [
+						***REMOVED***
+							"url": "http://i.imgur.com/HigkKjz.jpg"
+						***REMOVED***
+					],
+					"genres": [
+						"custom"
+					],
+					"popularity": 0.5,
+					"uri": "custom",
+					"href": "custom"
+				***REMOVED***
+			],
+			"artist": "The Oral Cigarettes",
+			"cover_url": "http://i.imgur.com/WfW0mpe.jpg",
+			"duration": 266,
+			"album": ***REMOVED***
+				"id": "custom",
+				"name": "FIXION",
+				"artists": [
+					***REMOVED***
+						"id": "custom",
+						"name": "The Oral Cigarettes",
+						"images": [
+							***REMOVED***
+								"url": "http://i.imgur.com/HigkKjz.jpg"
+							***REMOVED***
+						],
+						"genres": [
+							"custom"
+						],
+						"popularity": 0.5,
+						"uri": "custom",
+						"href": "custom"
+					***REMOVED***
+				],
+				"images": [
+					***REMOVED***
+						"url": "http://i.imgur.com/WfW0mpe.jpg"
+					***REMOVED***
+				],
+				"uri": "custom"
+			***REMOVED***,
+			"popularity": 0.5,
+			"uri": "custom",
+			"query": null,
+			"certainty": 1
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
@@ -3981,7 +4256,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 96
+					"index": 100
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -4096,7 +4371,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 97
+					"index": 101
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4115,7 +4390,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 98
+					"index": 102
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -4227,7 +4502,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 99
+					"index": 103
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4246,7 +4521,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 100
+					"index": 104
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4265,7 +4540,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 101
+					"index": 105
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4284,7 +4559,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 102
+					"index": 106
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4303,7 +4578,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 103
+					"index": 107
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4322,7 +4597,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 104
+					"index": 108
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4341,7 +4616,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 105
+					"index": 109
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4365,7 +4640,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 106
+					"index": 110
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4384,83 +4659,9 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 107
+					"index": 111
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 100,
-		"type": "SpotifyEntry",
-		"video_id": "C-o8pTi6vd8",
-		"url": "https://www.youtube.com/watch?v=C-o8pTi6vd8",
-		"title": "The Oral Cigarettes - Hey Kids",
-		"duration": 266,
-		"thumbnail": "https://i.ytimg.com/vi/C-o8pTi6vd8/hqdefault.jpg",
-		"description": "\uff1c\u30ce\u30e9\u30ac\u30dfARAGOTO\uff1eOP\u30c6\u30fc\u30de THE ORAL CIGARETTES\u300c\u72c2\u4e71 Hey Kids!!\u300d\n2015.11.11Release!!\n\n\u25bc\u53ce\u9332\u66f2\nM1. \u72c2\u4e71 Hey Kids!!\nM2.\u30ad\u30a8\u30bf\u30df\u30bf\u30a4\nM3. LIPS\nM4. \u72c2\u4e71 Hey Kids!! (Instrumental)\n\u203bM4.\u306f\u901a\u5e38\u76e4\u306e\u307f\n\n\u25ce\u521d\u56de\u76e4\u7279\u5178DVD\u53ce\u9332\u5185\u5bb9\nTHE ORAL CIGARETTES \u5507\u30ef\u30f3\u30de\u30f3 2015 SPRING\n\uff5e\u4e0a\u4eac1\u5468\u5e74\u8a18\u5ff5\u3001\u5730\u5143\u95a2\u897f\u306a\u3093\u3070\u30cf\u30c3\u30c1\u30e3\u3051\u308b\u305c\u306e\u5dfb\uff5e\u3088\u308a5\u66f2\u3092\u53ce\u9332\n\uff11\uff0eSTARGET\n\uff12\uff0e\u30e2\u30f3\u30b9\u30bf\u30fc\u30a8\u30d5\u30a7\u30af\u30c8\n\uff13\uff0eSee the lights\n\uff14\uff0emist...\n\uff15\uff0e\u8d77\u6b7b\u56de\u751fSTORY\n\n\u25ce\u901a\u5e38\u76e4\uff08\u521d\u56de\u30d7\u30ec\u30b9\u5206\u306e\u307f\uff09\n\u300c\u30ce\u30e9\u30ac\u30dfARAGOTO\u300d\u63cf\u304d\u4e0b\u308d\u3057\u30a4\u30e9\u30b9\u30c8\u30ef\u30a4\u30c9\u30ad\u30e3\u30c3\u30d7\u30b9\u30c6\u30c3\u30ab\u30fc\n\n\u25c6\u30c6\u30ec\u30d3\u30a2\u30cb\u30e1 \u300c\u30ce\u30e9\u30ac\u30dfARAGOTO\u300d\n\uff0810\u67082\u65e5\uff5eTOKYO MX\u30fbMBS\u30fbBS\u30d5\u30b8\u4ed6\u306b\u3066\u653e\u9001\uff09\n\n\u25c6LIVE\n\u300cTHE ORAL CIGARETTES\u5507\u30ea\u30d9\u30f3\u30b8\u30ef\u30f3\u30de\u30f3 \uff5e\u5fa9\u6d3b\u30fb\u8fd4\u4e0a\u30fbBKW!!\u306e\u5dfb\uff5e\u300d\n2016\u5e741\u67084\u65e5\uff08\u6708\uff09 \u6771\u4eac\u3000Zepp DiverCity\nOPEN 17:00 / START 18:00\n\u4e00\u822c\u767a\u58f2\u65e5\uff1a2015\u5e7411\u67087\u65e5\uff08\u571f\uff09\n\n\u300cTHE ORAL CIGARETTES \u5507\u30c4\u30fc\u30de\u30f3 TOUR 2016 \uff5e\u5fa9\u6d3b\u30fb\u6fc0\u7a81\u30fbBKW!!\u306e\u5dfb\uff5e\u300d\n2016\u5e742\u67088\u65e5\uff08\u6708\uff09\u3000\u4eac\u90fd\u3000MUSE\n2016\u5e742\u670811\u65e5\uff08\u6728\u30fb\u795d\uff09\u3000\u9ad8\u677e\u3000MONSTER\n2016\u5e742\u670812\u65e5\uff08\u91d1\uff09\u3000\u5e83\u5cf6\u3000CLUB QUATTRO\n2016\u5e742\u670814\u65e5\uff08\u65e5\uff09\u3000\u798f\u5ca1\u3000DRUM LOGOS\n2016\u5e742\u670819\u65e5\uff08\u91d1\uff09\u3000\u4ed9\u53f0\u3000RENSA\n2016\u5e742\u670821\u65e5\uff08\u65e5\uff09\u3000\u672d\u5e4c\u3000PENNY LANE\n2016\u5e743\u67085\u65e5\uff08\u571f\uff09\u3000  \u65b0\u6f5f\u3000LOTS\n2016\u5e743\u670811\u65e5\uff08\u91d1\uff09\u3000\u5927\u962a\u3000ZEPP NAMBA\n2016\u5e743\u670813\u65e5\uff08\u65e5\uff09\u3000\u611b\u77e5\u3000ZEPP NAGOYA\n2016\u5e743\u670820\u65e5\uff08\u65e5\uff09\u3000\u6771\u4eac\u3000STUDIO COAST\n\u524d\u58f2\u30c1\u30b1\u30c3\u30c8\uff1a\uffe53,500\uff08\u7a0e\u8fbc\u30fb\u30c9\u30ea\u30f3\u30af\u4ee3\u5225\u9014\u5fc5\u8981\uff09\n\u4e00\u822c\u767a\u58f2\u65e5\uff1a12\u670812\u65e5 \uff08\u571f\uff09",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"name": "simonisanerd",
-					"index": 108
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***,
-		"spotify_data": ***REMOVED***
-			"id": "custom",
-			"name": "Hey Kids",
-			"artists": [
-				***REMOVED***
-					"id": "custom",
-					"name": "The Oral Cigarettes",
-					"images": [
-						***REMOVED***
-							"url": "http://i.imgur.com/HigkKjz.jpg"
-						***REMOVED***
-					],
-					"genres": [
-						"custom"
-					],
-					"popularity": 0.5,
-					"uri": "custom",
-					"href": "custom"
-				***REMOVED***
-			],
-			"artist": "The Oral Cigarettes",
-			"cover_url": "http://i.imgur.com/WfW0mpe.jpg",
-			"duration": 266,
-			"album": ***REMOVED***
-				"id": "custom",
-				"name": "FIXION",
-				"artists": [
-					***REMOVED***
-						"id": "custom",
-						"name": "The Oral Cigarettes",
-						"images": [
-							***REMOVED***
-								"url": "http://i.imgur.com/HigkKjz.jpg"
-							***REMOVED***
-						],
-						"genres": [
-							"custom"
-						],
-						"popularity": 0.5,
-						"uri": "custom",
-						"href": "custom"
-					***REMOVED***
-				],
-				"images": [
-					***REMOVED***
-						"url": "http://i.imgur.com/WfW0mpe.jpg"
-					***REMOVED***
-				],
-				"uri": "custom"
-			***REMOVED***,
-			"popularity": 0.5,
-			"uri": "custom",
-			"query": null,
-			"certainty": 1
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
@@ -4482,7 +4683,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 109
+					"index": 112
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4501,7 +4702,7 @@
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"name": "simonisanerd",
-					"index": 110
+					"index": 113
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -4520,78 +4721,6 @@
 				"type": "Member",
 				"id": "203302899277627392",
 				"name": "siku2"
-			***REMOVED***,
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"name": "simonisanerd",
-					"index": 111
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 100,
-		"type": "YoutubeEntry",
-		"video_id": "AK9DlbzxCVk",
-		"url": "https://www.youtube.com/watch?v=AK9DlbzxCVk",
-		"title": "Ghost in the Shell - Stand Alone Complex 2 - Ending",
-		"duration": 85,
-		"thumbnail": "https://i.ytimg.com/vi/AK9DlbzxCVk/hqdefault.jpg",
-		"description": "Ghost in the Shell - Stand Alone Complex 2 - Ending\nmp3 Download http://kiwi6.com/file?id=2ful6t4960",
-		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203510202421477376",
-				"name": "ZyLect"
-			***REMOVED***,
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"name": "simonisanerd",
-					"index": 112
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 100,
-		"type": "YoutubeEntry",
-		"video_id": "PGoHzoZ2OI0",
-		"url": "https://www.youtube.com/watch?v=PGoHzoZ2OI0",
-		"title": "Durarara!! Opening 2",
-		"duration": 91,
-		"thumbnail": "https://i.ytimg.com/vi/PGoHzoZ2OI0/maxresdefault.jpg",
-		"description": "DRR!! Season 1 OP2\n\"Complication\" by ROOKiEZ is PUNK'D",
-		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203510202421477376",
-				"name": "ZyLect"
-			***REMOVED***,
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"name": "simonisanerd",
-					"index": 113
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 100,
-		"type": "YoutubeEntry",
-		"video_id": "nJXRDvwJN_Y",
-		"url": "https://www.youtube.com/watch?v=nJXRDvwJN_Y",
-		"title": "Ouran Highschool Host Club Begininng Theme Song English",
-		"duration": 77,
-		"thumbnail": "https://i.ytimg.com/vi/nJXRDvwJN_Y/hqdefault.jpg",
-		"description": "Please rate and comment ^.^\nI love this theme song!",
-		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203510202421477376",
-				"name": "ZyLect"
 			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
