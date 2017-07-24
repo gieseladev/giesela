@@ -1183,7 +1183,9 @@ class PlaylistCommands:
             playlistname, player.playlist, remove_entries=[remove_entry])
         return Response("Removed **{}** from playlist `{}`.".format(remove_entry.title, playlistname))
 
-    @command_info("4.1.9", 1500882702)
+    @command_info("4.1.9", 1500882702, {
+        "4.2.2": (1500911879, "Entry not in a playlist handling")
+    })
     async def cmd_editentry(self, channel, author, player, leftover_args):
         """
         ///|Usage
@@ -1200,11 +1202,11 @@ class PlaylistCommands:
         entry = player.current_entry
 
         playlistname = (
-            "_".join(leftover_args) or entry.meta.get("playlist", {}).get("name", None)
+            "_".join(leftover_args) or entry.meta.get("playlist", {}).get("name", None) or ""
         ).lower().strip()
 
         if not playlistname:
-            return Response("No idea which entry you would like to edit")
+            return Response("This entry isn't in a playlist")
 
         if playlistname not in self.playlists.saved_playlists:
             return Response("This playlist doesn't exist")

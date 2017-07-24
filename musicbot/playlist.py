@@ -213,7 +213,7 @@ class Playlist(EventEmitter):
         return info
 
     async def get_entry(self, song_url, **meta):
-        info = await get_ytdl_data(song_url)
+        info = await self.get_ytdl_data(song_url)
 
         entry = None
 
