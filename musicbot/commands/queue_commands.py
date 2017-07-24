@@ -6,7 +6,7 @@ from discord import Embed
 
 import asyncio
 
-from ..entry import (RadioSongEntry, RadioStationEntry, SpotifyEntry,
+from ..entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                      StreamEntry, TimestampEntry, YoutubeEntry)
 from ..radio import RadioStations
 from ..utils import (Response, block_user, clean_songname, command_info,
@@ -754,7 +754,8 @@ class DisplayCommands:
         "3.5.4": (1497721686, "Updating the looks of the \"now playing\" message and a bit of cleanup"),
         "3.6.2": (1498143480, "Updated design of default entry and included a link to the video"),
         "3.6.5": (1498152579, "Timestamp-entries now also include a thumbnail"),
-        "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite"),
+        "4.2.0": (1500888926, "Adjustments for new Entry types")
     ***REMOVED***)
     async def cmd_np(self, player, channel, server, message):
         """
@@ -819,10 +820,9 @@ class DisplayCommands:
                     colour=hex_to_dec("#a23dd1")
                 )
 
-            if isinstance(entry, SpotifyEntry):
-                artist_name = " & ".join(
-                    artist.name for artist in entry.artists[:2])
-                artist_avatar = choice(entry.artists[:2]).image
+            if isinstance(entry, GieselaEntry):
+                artist_name = entry.artist
+                artist_avatar = entry.artist_image
                 progress_ratio = player.progress / entry.end_seconds
                 desc = "***REMOVED******REMOVED*** `[***REMOVED******REMOVED***/***REMOVED******REMOVED***]`".format(
                     create_bar(progress_ratio, length=20),
@@ -831,7 +831,7 @@ class DisplayCommands:
                 )
 
                 em = Embed(
-                    title=entry.song_name,
+                    title=entry.song_title,
                     description=desc,
                     url=entry.url,
                     colour=hex_to_dec("#F9FF6E")
@@ -842,7 +842,7 @@ class DisplayCommands:
                     name=artist_name,
                     icon_url=artist_avatar
                 )
-                em.add_field(name="Album", value=entry.album.name)
+                em.add_field(name="Album", value=entry.album)
             elif isinstance(entry, TimestampEntry):
                 sub_entry = entry.current_sub_entry
                 index = sub_entry["index"] + 1

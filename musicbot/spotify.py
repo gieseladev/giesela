@@ -4,7 +4,7 @@ from random import choice
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-from .utils import similarity as similar
+from .utils import similarity
 
 cred = SpotifyClientCredentials(
     "df9e44098b934c028ea085227c3ec3f6", "f9d02852fb1a4dacaa50d14e915c5d0e")
@@ -43,10 +43,6 @@ class SpotifyArtist:
     @classmethod
     def from_dict(cls, data):
         return cls(data["id"], data["name"], data["images"], data["popularity"], data["genres"], data["uri"], data["href"])
-
-    @classmethod
-    def custom_artist(cls, name, image):
-        return cls("custom", name, [***REMOVED***"url": image***REMOVED***], .5, ["custom"], "custom", "custom")
 
     @property
     def top_tracks(self):
@@ -158,14 +154,6 @@ class SpotifyTrack:
 
         return cls(data["id"], data["name"], [SpotifyArtist.from_dict(artist) for artist in data["artists"]] if data["artists"] is not None else None, data["duration"], SpotifyAlbum.from_dict(data["album"]) if data["album"] is not None else None, data["popularity"], data["uri"], data["query"], data["certainty"])
 
-    @classmethod
-    def custom_track(cls, title, duration, album_name, artist_name, artist_image, cover):
-        artists = [SpotifyArtist.custom_artist(artist_name, artist_image)]
-        album = SpotifyAlbum("custom", album_name, artists, [
-                             ***REMOVED***"url": cover***REMOVED***], "custom")
-
-        return cls("custom", title, artists, duration, album, .5, "custom")
-
     @property
     def cover_url(self):
         return self.album.cover
@@ -191,53 +179,15 @@ class SpotifyTrack:
         return data
 
 
-# class SpotifyPlaylist:
-#
-#     def __init__(self, id, name, images, tracks):
-#         self.id = id
-#         self.name = name
-#         self.images = images
-#         self.tracks = tracks
-#
-#     @classmethod
-#     def from_data(cls, data):
-#         return cls(data["id"], data["name"], data["images"], [SpotifyTrack.from_data(entry) for entry in data["tracks"]])
-#
-#     @classmethod
-#     def from_dict(cls, data):
-#         return cls(data["id"], data["name"], data["images"], data["tracks"])
-#
-#     def get_dict(self):
-#         data = ***REMOVED***
-#             "id": self.id,
-#             "name": self.name,
-#             "images": self.images,
-#             "tracks": [track.get_dict() for track in self.tracks]
-#         ***REMOVED***
-#
-#
-# def get_featured_playlist():
-# return [SpotifyPlaylist.from_data(playlist) for playlist in
-# spotify.featured_playlists()]
-
-
 def get_certainty(query, song_name, artists):
-    song_name_edited = re.sub(
-        "\***REMOVED***0[0]***REMOVED***.+\***REMOVED***0[1]***REMOVED***".format("()"), "", song_name)
+    song_name_edited = re.sub(r"\(.+\)", "", song_name)
 
     index = song_name_edited.find("-")
-    song_name_edited = song_name_edited[
-        :index if index > 3 else len(song_name_edited)]
-    song_name_edited = song_name_edited.strip()
+    song_name_edited = song_name_edited[:index if index > 3 else len(song_name_edited)]
+    song_name_edited = song_name_edited.strip().lower()
 
     poss = []
-    poss.append(similar(query.lower(), "***REMOVED***0***REMOVED*** ***REMOVED***1***REMOVED***".format(
-        song_name_edited.lower(), artists[0].name.lower())))
-    poss.append(similar(query.lower(), "***REMOVED***1***REMOVED*** ***REMOVED***0***REMOVED***".format(
-        song_name_edited.lower(), artists[0].name.lower())))
-    poss.append(similar(query.lower(), "***REMOVED***0***REMOVED*** \n ***REMOVED***1***REMOVED***".format(
-        song_name_edited.lower(), artists[0].name.lower())))
-    poss.append(similar(query.lower(), "***REMOVED***1***REMOVED*** \n ***REMOVED***0***REMOVED***".format(
-        song_name_edited.lower(), artists[0].name.lower())))
+    poss.append(similarity(query.lower(), "***REMOVED***0***REMOVED*** ***REMOVED***1***REMOVED***".format(song_name_edited, artists[0].name.lower())))
+    poss.append(similarity(query.lower(), "***REMOVED***1***REMOVED*** ***REMOVED***0***REMOVED***".format(song_name_edited, artists[0].name.lower())))
 
     return max(poss)

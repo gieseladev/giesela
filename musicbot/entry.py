@@ -682,26 +682,87 @@ class TimestampEntry(YoutubeEntry):
         return data
 
 
-class SpotifyEntry(YoutubeEntry):
+class GieselaEntry(YoutubeEntry):
 
-    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, spotify_data, expected_filename=None, **meta):
-        super().__init__(queue, video_id, url, title, duration,
-                         thumbnail, description, expected_filename=None, **meta)
-        self.spotify_data = spotify_data
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, expected_filename=None, **meta):
+        super().__init__(queue, video_id, url, title, duration, thumbnail, description, expected_filename=expected_filename, **meta)
 
-        self.song_name = spotify_data.name
-        self.artist = spotify_data.artist_string
-        self.artists = spotify_data.artists
-        self.album = spotify_data.album
-        self.popularity = spotify_data.popularity / 100
-
-        self._title = "***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".format(spotify_data.artist_string,
-                                       self.song_name)
+        self.song_title = song_title
+        self.artist = artist
+        self.artist_image = artist_image
+        self.cover = cover
+        self.album = album
 
     @property
-    def cover(self):
-        # using a property because I want to keep the randomness
-        return self.spotify_data.cover_url
+    def title(self):
+        return "***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".format(self.artist, self.song_title)
+
+    @classmethod
+    def from_dict(cls, playlist, data):
+        if data["type"] != cls.__name__:
+            raise AttributeError("This data isn't of this entry type")
+
+        meta_dict = data.get("meta", None)
+        if meta_dict:
+            meta = Entry.meta_from_dict(meta_dict, playlist.bot)
+        else:
+            meta = ***REMOVED******REMOVED***
+
+        video_id = data["video_id"]
+        url = data["url"]
+        title = data["title"]
+        duration = data["duration"]
+        thumbnail = data["thumbnail"]
+        description = data["description"]
+
+        song_title = data["song_title"]
+        artist = data["artist"]
+        artist_image = data["artist_image"]
+        cover = data["cover"]
+        album = data["album"]
+
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, **meta)
+
+    def to_dict(self):
+        d = super().to_dict()
+        d.update(***REMOVED***
+            "song_title": self.song_title,
+            "artist": self.artist,
+            "artist_image": self.artist_image,
+            "cover": self.cover,
+            "album": self.album
+        ***REMOVED***)
+
+        return d
+
+    def to_web_dict(self):
+        data = super().to_web_dict()
+
+        data.update(***REMOVED***
+            "title": self.song_title,
+            "artist": self.artist,
+            "cover": self.cover
+        ***REMOVED***)
+
+        return data
+
+
+class SpotifyEntry(GieselaEntry):
+
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, spotify_track, expected_filename=None, **meta):
+        super().__init__(
+            queue, video_id, url, title, duration, thumbnail, description,
+            spotify_track.name,
+            spotify_track.artist_string,
+            spotify_track.artists[0].image,
+            spotify_track.album.name,
+            spotify_track.cover_url,
+            expected_filename=None, **meta
+        )
+
+        self.spotify_data = spotify_track
+
+        self.popularity = spotify_track.popularity / 100
 
     @classmethod
     def from_dict(cls, playlist, data):
@@ -731,14 +792,3 @@ class SpotifyEntry(YoutubeEntry):
         ***REMOVED***)
 
         return d
-
-    def to_web_dict(self):
-        data = super().to_web_dict()
-
-        data.update(***REMOVED***
-            "title": self.song_name,
-            "artist": self.artist,
-            "cover": self.cover
-        ***REMOVED***)
-
-        return data

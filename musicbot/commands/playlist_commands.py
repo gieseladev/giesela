@@ -7,7 +7,7 @@ from discord import Embed
 
 import asyncio
 
-from ..entry import SpotifyEntry, TimestampEntry, YoutubeEntry
+from ..entry import GieselaEntry, TimestampEntry, YoutubeEntry
 from ..imgur import upload_playlist_cover, upload_song_image
 from ..saved_playlists import Playlists
 from ..spotify import SpotifyTrack
@@ -39,7 +39,8 @@ class PlaylistCommands:
         "4.1.0": (1500777145, "description bug fixed"),
         "4.1.1": (1500789035, "Using Imgur to save images"),
         "4.1.2": (1500790172, "Closing the playlist builder without saving for a newly created playlist, deletes said playlist."),
-        "4.1.5": (1500812970, "Some design adjustments")
+        "4.1.5": (1500812970, "Some design adjustments"),
+        "4.2.0": (1500889194, "Entry Manipulator switched to GieselaEntry instead of fake SpotifyEntries")
     ***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -826,36 +827,35 @@ class PlaylistCommands:
             if "sub_queue" in keys:
                 return set(), TimestampEntry
 
-            missing_for_spotify = ***REMOVED***
+            missing_for_giesela = ***REMOVED***
                 "album", "artist", "artist_image_url", "cover_url"***REMOVED*** - keys
-            if not missing_for_spotify:
-                return set(), SpotifyEntry
+            if not missing_for_giesela:
+                return set(), GieselaEntry
 
-            return missing_for_spotify, YoutubeEntry
+            return missing_for_giesela, YoutubeEntry
 
         def build_new_entry(fields):
             _, entry_type = get_entry_type(fields)
 
             args = ***REMOVED***
-                "title": fields["title"],
-                "queue": player.playlist,
-                "video_id": fields["_video_id"],
-                "url": fields["_url"],
-                "duration": fields["_duration"],
-                "thumbnail": fields["thumbnail"],
-                "description": fields["_description"]
+                "title":        fields["title"],
+                "queue":        player.playlist,
+                "video_id":     fields["_video_id"],
+                "url":          fields["_url"],
+                "duration":     fields["_duration"],
+                "thumbnail":    fields["thumbnail"],
+                "description":  fields["_description"]
             ***REMOVED***
 
-            if entry_type is SpotifyEntry:
-                title = fields["title"]
-                duration = fields["_duration"]
-                album = fields["album"]
-                artist = fields["artist"]
-                artist_image = fields["artist_image_url"]
-                cover = fields["cover_url"]
+            if entry_type is GieselaEntry:
+                args.update(***REMOVED***
+                    "song_title":   fields["title"],
+                    "artist":       fields["artist"],
+                    "artist_image": fields["artist_image_url"],
+                    "album":        fields["album"],
+                    "cover":        fields["cover_url"]
+                ***REMOVED***)
 
-                args["spotify_data"] = SpotifyTrack.custom_track(
-                    title, duration, album, artist, artist_image, cover)
             elif entry_type is TimestampEntry:
                 args["sub_queue"] = timestamp_to_queue(
                     fields["sub_queue"], fields["_duration"])
@@ -863,26 +863,26 @@ class PlaylistCommands:
             return entry_type(**args)
 
         entry_fields = ***REMOVED***
-            "__title": entry._title,
-            "_video_id": entry.video_id,
-            "_url": entry.url,
+            "__title":      entry._title,
+            "_video_id":    entry.video_id,
+            "_url":         entry.url,
             "_description": entry.description,
-            "_duration": entry.duration,
-            "title": entry.title,
-            "thumbnail": entry.thumbnail,
+            "_duration":    entry.duration,
+            "title":        entry.title,
+            "thumbnail":    entry.thumbnail,
         ***REMOVED***
-        if isinstance(entry, SpotifyEntry):
+        if isinstance(entry, GieselaEntry):
             entry_fields.update(***REMOVED***
-                "title": entry.song_name,
-                "artist": entry.artist,
-                "artist_image_url": choice(entry.artists).image,
-                "album": entry.album.name,
-                "cover_url": entry.cover
+                "title":            entry.song_title,
+                "artist":           entry.artist,
+                "artist_image_url": entry.artist_image,
+                "album":            entry.album,
+                "cover_url":        entry.cover
             ***REMOVED***)
         elif isinstance(entry, TimestampEntry):
             entry_fields.update(***REMOVED***
-                "title": entry.whole_title,
-                "sub_queue": ***REMOVED***entry["start"]: entry["name"] for entry in entry.sub_queue***REMOVED***
+                "title":        entry.whole_title,
+                "sub_queue":    ***REMOVED***entry["start"]: entry["name"] for entry in entry.sub_queue***REMOVED***
             ***REMOVED***)
 
         commands = "\n".join([
@@ -948,8 +948,8 @@ class PlaylistCommands:
             missing, current_type = get_entry_type(entry_fields)
             if current_type is TimestampEntry:
                 info_text = "This is a TimestampEntry. Remove the sub queue to get a normal entry."
-            elif current_type is SpotifyEntry:
-                info_text = "This is a SpotifyEntry. That's as good as it gets"
+            elif current_type is GieselaEntry:
+                info_text = "This is a GieselaEntry. That's as good as it gets"
             else:
                 missing = list(missing)
                 beautified_parameter = ***REMOVED***
@@ -966,7 +966,7 @@ class PlaylistCommands:
 
                 properties_needed += beautified_parameter[missing[-1]]
 
-                info_text = "This is currently a normal entry. Provide ***REMOVED******REMOVED*** in order to get to a SpotifyEntry".format(
+                info_text = "This is currently a normal entry. Provide ***REMOVED******REMOVED*** in order to get to a GieselaEntry".format(
                     properties_needed)
 
             msg_text = interface_format.format(
