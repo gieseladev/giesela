@@ -115,6 +115,11 @@ class WebSocket(object):
         self.maxheader = MAXHEADER
         self.maxpayload = MAXPAYLOAD
 
+        self.init()
+
+    def init(self):
+        pass
+
     def handleMessage(self):
         """
             Called when websocket frame is received.

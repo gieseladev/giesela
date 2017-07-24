@@ -36,6 +36,17 @@ def decode_setting(value):
     return handlers.get(val_type, lambda v: v)(val)
 
 
+def beautify_value(value):
+    if isinstance(value, bool):
+        return ("no", "yes")[int(value)]
+    elif isinstance(value, float):
+        return round(value, 2)
+    elif isinstance(value, (list, set, tuple)):
+        return ", ".join(value)
+
+    return value
+
+
 class Config:
 
     def __init__(self, config_file):
@@ -44,6 +55,17 @@ class Config:
         self.config = configparser.ConfigParser(interpolation=None)
         self.config.read(config_file, encoding="utf-8")
         self.auth = (self._token,)
+
+    def get_all_options(self):
+        options = []
+        for option in self.config.options("Settings"):
+            custom_value = getattr(self, option)
+            default_value = getattr(ConfigDefaults, option)
+
+            if custom_value != default_value:
+                options.append((option, beautify_value(custom_value)))
+
+        return options
 
     def __getattr__(self, name):
         if name in dir(ConfigDefaults):
@@ -69,6 +91,7 @@ class ConfigDefaults:
     bound_channels = set()
     owned_channels = set()
     autojoin_channels = set()
+    private_chat_commands = set()
 
     history_limit = 200
 
