@@ -1,6 +1,6 @@
 import os.path
 
-MAIN_VERSION = "4.1.8"
+MAIN_VERSION = "4.1.9"
 SUB_VERSION = "Gooma"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
