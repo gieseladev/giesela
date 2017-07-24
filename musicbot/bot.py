@@ -630,8 +630,9 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
             lines = wrap(val, 100 - len(opt_string))
             if len(lines) > 1:
-                val_string = "\n{}\n".format(
-                    indent("\n".join(lines), int(len(opt_string) / 2) * " ")
+                val_string = "{}\n{}\n".format(
+                    lines[0],
+                    indent("\n".join(lines[1:]), len(opt_string) * " ")
                 )
             else:
                 val_string = lines[0]
