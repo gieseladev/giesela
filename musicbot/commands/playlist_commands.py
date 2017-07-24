@@ -957,10 +957,10 @@ class PlaylistCommands:
             else:
                 missing = list(missing)
                 beautified_parameter = ***REMOVED***
-                    "artist": "the **artist**",
-                    "album": "an **album**",
+                    "artist":           "the **artist**",
+                    "album":            "an **album**",
                     "artist_image_url": "a **picture of the artist**",
-                    "cover_url": "a **cover**"
+                    "cover_url":        "a **cover**"
                 ***REMOVED***
 
                 properties_needed = ""
