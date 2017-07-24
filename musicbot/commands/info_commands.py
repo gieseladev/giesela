@@ -17,7 +17,8 @@ class InfoCommands:
         "3.6.0": (1497904733, "Fixed weird indent of some help texts"),
         "3.7.0": (1498233256, "Some better help texts"),
         "3.7.1": (1498237739, "Added interactive help"),
-        "3.7.4": (1498318916, "Added \"lyrics\" function help text")
+        "3.7.4": (1498318916, "Added \"lyrics\" function help text"),
+        "4.2.2": (1500905513, "Updated help texts")
     })
     async def cmd_help(self, channel, leftover_args):
         """
@@ -82,7 +83,8 @@ class InfoCommands:
                 url="http://siku2.github.io/Giesela/",
                 colour=hex_to_dec("#828c51"),
                 description="Here are some of the most useful commands,\nYou can always use `{0}help <cmd>` to get more detailed information on a command".
-                format(self.config.command_prefix))
+                format(self.config.command_prefix)
+            )
 
             music_commands = "\n".join([
                 "`{0}play` play music",
@@ -115,12 +117,14 @@ class InfoCommands:
             playlist_commands = "\n".join([
                 "`{0}playlist` create/edit/list playlists",
                 "`{0}addtoplaylist` add entry to playlist",
-                "`{0}removefromplaylist` remove entry from playlist"
+                "`{0}removefromplaylist` remove entry from playlist",
+                "`{0}editentry` edit an entry from a playlist"
             ]).format(self.config.command_prefix)
             em.add_field(name="Playlist",
                          value=playlist_commands, inline=False)
 
             misc_commands = "\n".join([
+                "`{0}summon` summon her like the servant she is",
                 "`{0}lyrics` retrieve lyrics for the current song",
                 "`{0}random` choose between items",
                 "`{0}game` play a game",
