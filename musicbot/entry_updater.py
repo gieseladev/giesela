@@ -1,13 +1,16 @@
-from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
-
 from musicbot.entry import Entry
+
+from .exceptions import ExtractionError, WrongEntryTypeError
 
 
 def between(val, low, high):
     return high >= val >= low
 
 async def _rebuild_entry(queue, entry):
-    return await get_entry(entry.url, **entry.meta)
+    try:
+        return await get_entry(entry.url, **entry.meta)
+    except:
+        return None
 
 async def _fix_filename(queue, entry):
     try:
@@ -18,7 +21,7 @@ async def _fix_filename(queue, entry):
         })
 
         return Entry.from_dict(queue, entry)
-    except (DownloadError, ExtractorError, UnsupportedError):
+    except (ExtractionError, WrongEntryTypeError):
         return None
 
 async def fix_entry(queue, entry):
