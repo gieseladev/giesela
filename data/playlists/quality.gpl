@@ -1,7 +1,8 @@
 [
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-450p7goxZqg-John_Legend_-_All_of_Me.webm",
 		"video_id": "450p7goxZqg",
 		"url": "https://www.youtube.com/watch?v=450p7goxZqg",
 		"title": "John Legend - All of Me",
@@ -17,6 +18,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "All of Me",
+		"artist": "John Legend",
+		"artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+		"cover": "https://i.scdn.co/image/b3d079a2e81e76d5f4f7f570a91a54a1f09dd93d",
+		"album": "Love In The Future",
 		"spotify_data": ***REMOVED***
 			"id": "3U4isOIWM3VvDubwSI3y7a",
 			"name": "All of Me",
@@ -124,8 +130,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-bpOSxM0rNPM-Arctic_Monkeys_-_Do_I_Wanna_Know_Official_Video.webm",
 		"video_id": "bpOSxM0rNPM",
 		"url": "https://www.youtube.com/watch?v=bpOSxM0rNPM",
 		"title": "Arctic Monkeys - Do I Wanna Know?",
@@ -141,6 +148,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Do I Wanna Know?",
+		"artist": "Arctic Monkeys",
+		"artist_image": "https://i.scdn.co/image/e1f00ceabce8dd0480bad7e873993082d9ac3fe9",
+		"cover": "https://i.scdn.co/image/f513ae2d610d9255913795d4bc28ca33c827b232",
+		"album": "AM",
 		"spotify_data": ***REMOVED***
 			"id": "5FVd6KXrgO9B3JPmC8OPst",
 			"name": "Do I Wanna Know?",
@@ -250,8 +262,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-AHJUwyrGZjY-ayokay_-_Awake_Audio_ft._Mafalda.webm",
 		"video_id": "AHJUwyrGZjY",
 		"url": "https://www.youtube.com/watch?v=AHJUwyrGZjY",
 		"title": "ayokay - Awake (Audio) ft. Mafalda",
@@ -269,8 +282,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Iys9IHmDJ1w-Bastille_-_Blame.webm",
 		"video_id": "Iys9IHmDJ1w",
 		"url": "https://www.youtube.com/watch?v=Iys9IHmDJ1w",
 		"title": "Bastille - Blame",
@@ -286,6 +300,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Blame",
+		"artist": "Bastille",
+		"artist_image": "https://i.scdn.co/image/765e709fa628079404fe99ca0e540c43b894eeba",
+		"cover": "https://i.scdn.co/image/b5b2a90018278d3beee0dba01378ba186d1f86f6",
+		"album": "Wild World (Complete Edition)",
 		"spotify_data": ***REMOVED***
 			"id": "7yrx5A6zDOsd7Bn02WvbLH",
 			"name": "Blame",
@@ -383,8 +402,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-GIwyqsqHsic-Bastille_-_Fake_It.webm",
 		"video_id": "GIwyqsqHsic",
 		"url": "https://www.youtube.com/watch?v=GIwyqsqHsic",
 		"title": "Bastille - Fake It",
@@ -400,6 +420,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Fake It",
+		"artist": "Bastille",
+		"artist_image": "https://i.scdn.co/image/765e709fa628079404fe99ca0e540c43b894eeba",
+		"cover": "https://i.scdn.co/image/b5b2a90018278d3beee0dba01378ba186d1f86f6",
+		"album": "Wild World (Complete Edition)",
 		"spotify_data": ***REMOVED***
 			"id": "5OALp7wDh1vM2nza1qDArn",
 			"name": "Fake It",
@@ -497,8 +522,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-ZWCB3hpJDXM-Bastille_-_Good_Grief.webm",
 		"video_id": "ZWCB3hpJDXM",
 		"url": "https://www.youtube.com/watch?v=ZWCB3hpJDXM",
 		"title": "Bastille - Good Grief",
@@ -514,6 +540,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Good Grief",
+		"artist": "Bastille",
+		"artist_image": "https://i.scdn.co/image/5ef307a88e5fec0a11b6de9b0c77aa36b509bcbc",
+		"cover": "https://i.scdn.co/image/b5b2a90018278d3beee0dba01378ba186d1f86f6",
+		"album": "Wild World (Complete Edition)",
 		"spotify_data": ***REMOVED***
 			"id": "1oxOiOjsi7plNOZEhoPLPj",
 			"name": "Good Grief",
@@ -611,8 +642,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-vn-6fiVkAcA-Bastille_-_Send_Them_Off.webm",
 		"video_id": "vn-6fiVkAcA",
 		"url": "https://www.youtube.com/watch?v=vn-6fiVkAcA",
 		"title": "Bastille - Send Them Off!",
@@ -628,6 +660,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Send Them Off!",
+		"artist": "Bastille",
+		"artist_image": "https://i.scdn.co/image/765e709fa628079404fe99ca0e540c43b894eeba",
+		"cover": "https://i.scdn.co/image/b5b2a90018278d3beee0dba01378ba186d1f86f6",
+		"album": "Wild World (Complete Edition)",
 		"spotify_data": ***REMOVED***
 			"id": "4Wg7VfvO7NVG57R8cSPDQG",
 			"name": "Send Them Off!",
@@ -725,8 +762,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-MGR4U7W1dZU-Bastille_-_Things_We_Lost_In_The_Fire.webm",
 		"video_id": "MGR4U7W1dZU",
 		"url": "https://www.youtube.com/watch?v=MGR4U7W1dZU",
 		"title": "Bastille - Things We Lost In The Fire",
@@ -742,6 +780,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Things We Lost In The Fire",
+		"artist": "Bastille",
+		"artist_image": "https://i.scdn.co/image/4b161fe24de1c80bce42085f409b7a4700b94c47",
+		"cover": "https://i.scdn.co/image/4627f2fcd0f5299bb8577ddbe26a5e919095c781",
+		"album": "Bad Blood",
 		"spotify_data": ***REMOVED***
 			"id": "2oTdiDj4AawNeeYFz8bipG",
 			"name": "Things We Lost In The Fire",
@@ -839,8 +882,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-jtVPa5baudI-Bastille_-_bad_news.webm",
 		"video_id": "jtVPa5baudI",
 		"url": "https://www.youtube.com/watch?v=jtVPa5baudI",
 		"title": "Bastille - bad_news",
@@ -856,6 +900,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "bad_news",
+		"artist": "Bastille",
+		"artist_image": "https://i.scdn.co/image/5ef307a88e5fec0a11b6de9b0c77aa36b509bcbc",
+		"cover": "https://i.scdn.co/image/25b74a3c984bfe6ca80fa19637bed7e17d7229e0",
+		"album": "Oblivion",
 		"spotify_data": ***REMOVED***
 			"id": "76LphuAQqegQShqQH4Zy7W",
 			"name": "bad_news",
@@ -953,8 +1002,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-n10G_yWo8BY-Bearcubs_x_Tom_Misch_-_Colours_Of_Freedom.webm",
 		"video_id": "n10G_yWo8BY",
 		"url": "https://www.youtube.com/watch?v=n10G_yWo8BY",
 		"title": "Bearcubs x Tom Misch - Colours Of Freedom",
@@ -972,8 +1022,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-i59Klb0S1Uw-Jorja_Smith_-_Blue_Lights.webm",
 		"video_id": "i59Klb0S1Uw",
 		"url": "https://www.youtube.com/watch?v=i59Klb0S1Uw",
 		"title": "Jorja Smith - Blue Lights",
@@ -989,6 +1040,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Blue Lights",
+		"artist": "Jorja Smith",
+		"artist_image": "https://i.scdn.co/image/d5ef8edd4d398e630d302d196268ed101c894ed5",
+		"cover": "https://i.scdn.co/image/5bfd2118b84d8de950233bf6b7d80565cddf1a70",
+		"album": "Blue Lights",
 		"spotify_data": ***REMOVED***
 			"id": "4jpBAzEAWq9GVyELGtkKAx",
 			"name": "Blue Lights",
@@ -1090,8 +1146,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-eLd9yZ9mpaM-Quinn_XCII_-_Bones_Prod._ayokay.webm",
 		"video_id": "eLd9yZ9mpaM",
 		"url": "https://www.youtube.com/watch?v=eLd9yZ9mpaM",
 		"title": "Quinn XCII - Bones",
@@ -1107,6 +1164,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Bones",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+		"cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
+		"album": "Bloom",
 		"spotify_data": ***REMOVED***
 			"id": "2iV4TfP75xLh7eHlItXVBF",
 			"name": "Bones",
@@ -1200,8 +1262,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-DhFtCTSy_5o-Quinn_XCII_-_Bootleggin_Prod._ayokay.webm",
 		"video_id": "DhFtCTSy_5o",
 		"url": "https://www.youtube.com/watch?v=DhFtCTSy_5o",
 		"title": "Quinn XCII - Bootleggin'",
@@ -1217,6 +1280,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Bootleggin'",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+		"cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
+		"album": "Bloom",
 		"spotify_data": ***REMOVED***
 			"id": "28P6Cr4NvWmCrFj2hH66dU",
 			"name": "Bootleggin'",
@@ -1310,8 +1378,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-DhFtCTSy_5o-Quinn_XCII_-_Bootleggin_Prod._ayokay.webm",
 		"video_id": "DhFtCTSy_5o",
 		"url": "https://www.youtube.com/watch?v=DhFtCTSy_5o",
 		"title": "Quinn XCII - Bootleggin'",
@@ -1327,6 +1396,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Bootleggin'",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+		"cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
+		"album": "Bloom",
 		"spotify_data": ***REMOVED***
 			"id": "28P6Cr4NvWmCrFj2hH66dU",
 			"name": "Bootleggin'",
@@ -1420,8 +1494,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Z6Xvf8uZ4nI-Carmody_-_For_Desire.webm",
 		"video_id": "Z6Xvf8uZ4nI",
 		"url": "https://www.youtube.com/watch?v=Z6Xvf8uZ4nI",
 		"title": "Carmody - For Desire",
@@ -1437,6 +1512,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "For Desire",
+		"artist": "Carmody",
+		"artist_image": "https://i.scdn.co/image/4cb69e478a012ece2c6a42963dab430f95a9feda",
+		"cover": "https://i.scdn.co/image/37587904b9347f13e2c8a45a7a7e24997ec3aae3",
+		"album": "Skin",
 		"spotify_data": ***REMOVED***
 			"id": "1JjzjaeF2zY0nf2T2AbFXj",
 			"name": "For Desire",
@@ -1526,8 +1606,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-qxVzVdGw1tI-Carmody_-_Skin.m4a",
 		"video_id": "qxVzVdGw1tI",
 		"url": "https://www.youtube.com/watch?v=qxVzVdGw1tI",
 		"title": "Carmody - Skin",
@@ -1543,6 +1624,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Skin",
+		"artist": "Carmody",
+		"artist_image": "https://i.scdn.co/image/4cb69e478a012ece2c6a42963dab430f95a9feda",
+		"cover": "https://i.scdn.co/image/37587904b9347f13e2c8a45a7a7e24997ec3aae3",
+		"album": "Skin",
 		"spotify_data": ***REMOVED***
 			"id": "00gFqLpj2VzrBbl7BgAA8G",
 			"name": "Skin",
@@ -1632,8 +1718,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-vAs7H_OoCeM-Khalid_-_Coaster_Audio.webm",
 		"video_id": "vAs7H_OoCeM",
 		"url": "https://www.youtube.com/watch?v=vAs7H_OoCeM",
 		"title": "Khalid - Coaster",
@@ -1649,6 +1736,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Coaster",
+		"artist": "Khalid",
+		"artist_image": "https://i.scdn.co/image/7cfdef227dc3e938154c367a279ef995be2b5344",
+		"cover": "https://i.scdn.co/image/5026fddc6c0b69e931ae99130f15d4214f1e7d41",
+		"album": "American Teen",
 		"spotify_data": ***REMOVED***
 			"id": "39KG4kom3enSx4GTThuDGt",
 			"name": "Coaster",
@@ -1738,8 +1830,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-QtXby3twMmI-Coldplay_-_Adventure_Of_A_Lifetime_Official_Video.webm",
 		"video_id": "QtXby3twMmI",
 		"url": "https://www.youtube.com/watch?v=QtXby3twMmI",
 		"title": "Coldplay - Adventure Of A Lifetime",
@@ -1755,6 +1848,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Adventure Of A Lifetime",
+		"artist": "Coldplay",
+		"artist_image": "https://i.scdn.co/image/9815eb48540fa0d1c87ebd22289060729b1ab32a",
+		"cover": "https://i.scdn.co/image/9c2c4a9ac9726bfd996ff96383178bbb5efc59ab",
+		"album": "A Head Full Of Dreams",
 		"spotify_data": ***REMOVED***
 			"id": "69uxyAqqPIsUyTO8txoP2M",
 			"name": "Adventure Of A Lifetime",
@@ -1862,8 +1960,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-U7LUXFKgzgU-Quinn_XCII_-_Demon_Prod._ayokay.webm",
 		"video_id": "U7LUXFKgzgU",
 		"url": "https://www.youtube.com/watch?v=U7LUXFKgzgU",
 		"title": "Quinn XCII - Demon",
@@ -1879,6 +1978,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Demon",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+		"cover": "https://i.scdn.co/image/d600fd067c1ff68055982a9aa5fe77f702b19b68",
+		"album": "Change of Scenery",
 		"spotify_data": ***REMOVED***
 			"id": "5ukfhSa6DMPHkGyfdmTnV8",
 			"name": "Demon",
@@ -1972,8 +2076,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Nud5WD_nUY8-EDEN_-_Billie_Jean.webm",
 		"video_id": "Nud5WD_nUY8",
 		"url": "https://www.youtube.com/watch?v=Nud5WD_nUY8",
 		"title": "EDEN - Billie Jean",
@@ -1989,6 +2094,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Billie Jean",
+		"artist": "EDEN",
+		"artist_image": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+		"cover": "https://i.scdn.co/image/5e03bd60821c2a8ab7dc28731325bc525f068730",
+		"album": "Billie Jean",
 		"spotify_data": ***REMOVED***
 			"id": "2zbq8QdgWACnYdKTu2xIE4",
 			"name": "Billie Jean",
@@ -2082,8 +2192,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-0pVABElms84-EDEN_-_End_Credits_feat._Leah_Kelly.webm",
 		"video_id": "0pVABElms84",
 		"url": "https://www.youtube.com/watch?v=0pVABElms84",
 		"title": "EDEN - End Credits",
@@ -2099,6 +2210,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "End Credits",
+		"artist": "EDEN",
+		"artist_image": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+		"cover": "https://i.scdn.co/image/92ea26aae1129bd60dc1d4f0313087dc06ee1509",
+		"album": "End Credits",
 		"spotify_data": ***REMOVED***
 			"id": "7j5DNclXXrNL4LPw59qcUK",
 			"name": "End Credits",
@@ -2192,8 +2308,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-f1eMI0d-1Hs-EDEN_-_Gravity.webm",
 		"video_id": "f1eMI0d-1Hs",
 		"url": "https://www.youtube.com/watch?v=f1eMI0d-1Hs",
 		"title": "EDEN - Gravity",
@@ -2209,6 +2326,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Gravity",
+		"artist": "EDEN",
+		"artist_image": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+		"cover": "https://i.scdn.co/image/92ea26aae1129bd60dc1d4f0313087dc06ee1509",
+		"album": "End Credits",
 		"spotify_data": ***REMOVED***
 			"id": "0GxCUPDU0ePWJOeAQzNqao",
 			"name": "Gravity",
@@ -2302,8 +2424,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-YthChN1Wq8M-EDEN_-_Wake_Up.webm",
 		"video_id": "YthChN1Wq8M",
 		"url": "https://www.youtube.com/watch?v=YthChN1Wq8M",
 		"title": "EDEN - Wake Up",
@@ -2319,6 +2442,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Wake Up",
+		"artist": "EDEN",
+		"artist_image": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
+		"cover": "https://i.scdn.co/image/92ea26aae1129bd60dc1d4f0313087dc06ee1509",
+		"album": "End Credits",
 		"spotify_data": ***REMOVED***
 			"id": "3gcT0qbO6Lha9cLpJlZELy",
 			"name": "Wake Up",
@@ -2412,8 +2540,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-rFrgyKmOUmc-EDEN_-_fumes_feat._gnash_official_audio.webm",
 		"video_id": "rFrgyKmOUmc",
 		"url": "https://www.youtube.com/watch?v=rFrgyKmOUmc",
 		"title": "EDEN & gnash - Fumes",
@@ -2429,6 +2558,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Fumes",
+		"artist": "EDEN & gnash",
+		"artist_image": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+		"cover": "https://i.scdn.co/image/236b285e0b349526486dd03a3807f4904b195ecf",
+		"album": "i think you think too much of me",
 		"spotify_data": ***REMOVED***
 			"id": "7fJALFBexDXzu0QdatF5O4",
 			"name": "Fumes",
@@ -2552,8 +2686,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-c7NLq5Soq_E-John_Legend_-_Everybody_Knows.webm",
 		"video_id": "c7NLq5Soq_E",
 		"url": "https://www.youtube.com/watch?v=c7NLq5Soq_E",
 		"title": "John Legend - Everybody Knows",
@@ -2569,6 +2704,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Everybody Knows",
+		"artist": "John Legend",
+		"artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
+		"cover": "https://i.scdn.co/image/e800b4216a504d74aeb54940dff8c5dc52f4c3df",
+		"album": "Evolver",
 		"spotify_data": ***REMOVED***
 			"id": "7qzxYfznGcwVUemSxhwCZY",
 			"name": "Everybody Knows",
@@ -2676,8 +2816,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-mrHoqcL7sU8-Quinn_XCII_-_FFYL_Prod._ayokay.webm",
 		"video_id": "mrHoqcL7sU8",
 		"url": "https://www.youtube.com/watch?v=mrHoqcL7sU8",
 		"title": "Quinn XCII - FFYL",
@@ -2693,6 +2834,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "FFYL",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+		"cover": "https://i.scdn.co/image/d600fd067c1ff68055982a9aa5fe77f702b19b68",
+		"album": "Change of Scenery",
 		"spotify_data": ***REMOVED***
 			"id": "5WMr0rpgYeYXNSXar5IAvi",
 			"name": "FFYL",
@@ -2786,8 +2932,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Zi4mss1zk4s-Quinn_XCII_-_Fight_Song.webm",
 		"video_id": "Zi4mss1zk4s",
 		"url": "https://www.youtube.com/watch?v=Zi4mss1zk4s",
 		"title": "Quinn XCII - Fight Song",
@@ -2803,6 +2950,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Fight Song",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+		"cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
+		"album": "Bloom",
 		"spotify_data": ***REMOVED***
 			"id": "2awLlJw36MbKcgFnFWC7w5",
 			"name": "Fight Song",
@@ -2896,8 +3048,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-ZTX6L3H-0M8-Quinn_XCII_-_Full_Circle_Prod._ayokay.webm",
 		"video_id": "ZTX6L3H-0M8",
 		"url": "https://www.youtube.com/watch?v=ZTX6L3H-0M8",
 		"title": "Quinn XCII - Full Circle",
@@ -2913,6 +3066,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Full Circle",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+		"cover": "https://i.scdn.co/image/a52ff1931487d5892149c8d4779b27e007237aad",
+		"album": "Full Circle",
 		"spotify_data": ***REMOVED***
 			"id": "2uHSDyFByIUeTUAxZCTRp0",
 			"name": "Full Circle",
@@ -3006,8 +3164,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-sJ6lAQcalW8-Quinn_XCII_-_Good_Friend_Prod._ayokay.webm",
 		"video_id": "sJ6lAQcalW8",
 		"url": "https://www.youtube.com/watch?v=sJ6lAQcalW8",
 		"title": "Quinn XCII - Good Friend",
@@ -3023,6 +3182,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Good Friend",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+		"cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
+		"album": "Bloom",
 		"spotify_data": ***REMOVED***
 			"id": "5LbH8qnrkcd3A3VV6GNrzW",
 			"name": "Good Friend",
@@ -3116,8 +3280,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-UOJgn4wBfAg-John_Legend_-_How_Can_I_Blame_You_Audio.webm",
 		"video_id": "UOJgn4wBfAg",
 		"url": "https://www.youtube.com/watch?v=UOJgn4wBfAg",
 		"title": "John Legend - How Can I Blame You",
@@ -3133,6 +3298,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "How Can I Blame You",
+		"artist": "John Legend",
+		"artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+		"cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
+		"album": "DARKNESS AND LIGHT",
 		"spotify_data": ***REMOVED***
 			"id": "4d0THQsQyfyVX0CSCaFfH1",
 			"name": "How Can I Blame You",
@@ -3240,8 +3410,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-5_JUReD3QoE-Hozier_-_Sedated.webm",
 		"video_id": "5_JUReD3QoE",
 		"url": "https://www.youtube.com/watch?v=5_JUReD3QoE",
 		"title": "Hozier - Sedated",
@@ -3257,6 +3428,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Sedated",
+		"artist": "Hozier",
+		"artist_image": "https://i.scdn.co/image/9dcc9279864a7210606d9d7f76ac68dd57b5b4c2",
+		"cover": "https://i.scdn.co/image/54ae81bff27a1979815d40846c763431d872b680",
+		"album": "Hozier",
 		"spotify_data": ***REMOVED***
 			"id": "2YRJxFhJQQvUsf14rXpvBD",
 			"name": "Sedated",
@@ -3368,8 +3544,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-MYSVMgRr6pw-Hozier_-_Take_Me_To_Church.webm",
 		"video_id": "MYSVMgRr6pw",
 		"url": "https://www.youtube.com/watch?v=MYSVMgRr6pw",
 		"title": "Hozier - Take Me to Church",
@@ -3385,6 +3562,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Take Me to Church",
+		"artist": "Hozier",
+		"artist_image": "https://i.scdn.co/image/9dcc9279864a7210606d9d7f76ac68dd57b5b4c2",
+		"cover": "https://i.scdn.co/image/54ae81bff27a1979815d40846c763431d872b680",
+		"album": "Hozier",
 		"spotify_data": ***REMOVED***
 			"id": "0aOluBqXYd0rFSCsgDyAWX",
 			"name": "Take Me to Church",
@@ -3496,8 +3678,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-CUAbbNmKYtU-John_Legend_-_I_Know_Better_Audio.webm",
 		"video_id": "CUAbbNmKYtU",
 		"url": "https://www.youtube.com/watch?v=CUAbbNmKYtU",
 		"title": "John Legend - I Know Better",
@@ -3513,6 +3696,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "I Know Better",
+		"artist": "John Legend",
+		"artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
+		"cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
+		"album": "DARKNESS AND LIGHT",
 		"spotify_data": ***REMOVED***
 			"id": "79JXD0Avn3iqfbKBjbHdbR",
 			"name": "I Know Better",
@@ -3620,8 +3808,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Rl3ELiPXFRo-Imagine_Dragons_-_Gold.webm",
 		"video_id": "Rl3ELiPXFRo",
 		"url": "https://www.youtube.com/watch?v=Rl3ELiPXFRo",
 		"title": "Imagine Dragons - Gold",
@@ -3637,6 +3826,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Gold",
+		"artist": "Imagine Dragons",
+		"artist_image": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
+		"cover": "https://i.scdn.co/image/d5772acb478bfa8539240d9c2f28073d9bb59133",
+		"album": "Smoke + Mirrors",
 		"spotify_data": ***REMOVED***
 			"id": "1WQFOwtI6EfsvRz7wcDbQm",
 			"name": "Gold",
@@ -3732,8 +3926,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-M2EIjONNjIU-Imagine_Dragons_-_Gold_Audio.webm",
 		"video_id": "M2EIjONNjIU",
 		"url": "https://www.youtube.com/watch?v=M2EIjONNjIU",
 		"title": "Imagine Dragons - Gold",
@@ -3749,6 +3944,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Gold",
+		"artist": "Imagine Dragons",
+		"artist_image": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
+		"cover": "https://i.scdn.co/image/d5772acb478bfa8539240d9c2f28073d9bb59133",
+		"album": "Smoke + Mirrors",
 		"spotify_data": ***REMOVED***
 			"id": "1WQFOwtI6EfsvRz7wcDbQm",
 			"name": "Gold",
@@ -3844,8 +4044,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-z0a9k1gSMsw-Imagine_Dragons_-_Levitate_Audio.webm",
 		"video_id": "z0a9k1gSMsw",
 		"url": "https://www.youtube.com/watch?v=z0a9k1gSMsw",
 		"title": "Imagine Dragons - Levitate - From The Original Motion Picture \u201cPassengers\u201d",
@@ -3861,6 +4062,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Levitate - From The Original Motion Picture \u201cPassengers\u201d",
+		"artist": "Imagine Dragons",
+		"artist_image": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
+		"cover": "https://i.scdn.co/image/315283d166c860b58e5f2e8fefc08b5994345fca",
+		"album": "Levitate (From The Original Motion Picture \u201cPassengers\u201d)",
 		"spotify_data": ***REMOVED***
 			"id": "60EFFQmSfrNMPUMGnfxBbO",
 			"name": "Levitate - From The Original Motion Picture \u201cPassengers\u201d",
@@ -3956,8 +4162,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-e4RMh7NLHPY-Imagine_Dragons_-_Roots_Audio.webm",
 		"video_id": "e4RMh7NLHPY",
 		"url": "https://www.youtube.com/watch?v=e4RMh7NLHPY",
 		"title": "Imagine Dragons - Roots",
@@ -3973,6 +4180,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Roots",
+		"artist": "Imagine Dragons",
+		"artist_image": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
+		"cover": "https://i.scdn.co/image/4cdfdf0127ea3ccbaf7c51068e0511281aa68b6d",
+		"album": "Roots",
 		"spotify_data": ***REMOVED***
 			"id": "4GITtbZtRCQXhWLMXrWXHt",
 			"name": "Roots",
@@ -4068,8 +4280,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-qQrgto184Tk-Imagine_Dragons_-_Shots.webm",
 		"video_id": "qQrgto184Tk",
 		"url": "https://www.youtube.com/watch?v=qQrgto184Tk",
 		"title": "Imagine Dragons & Broiler - Shots - Broiler Remix",
@@ -4085,6 +4298,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Shots - Broiler Remix",
+		"artist": "Imagine Dragons & Broiler",
+		"artist_image": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
+		"cover": "https://i.scdn.co/image/3ed018e22d42495daf4076ed8ba0387e8f070a46",
+		"album": "Shots EP",
 		"spotify_data": ***REMOVED***
 			"id": "4XLm8FNvaTlmTAZmSrrV82",
 			"name": "Shots - Broiler Remix",
@@ -4210,8 +4428,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-ndtQ6ReXO-s-Imagine_Dragons_-_Shots_Audio.webm",
 		"video_id": "ndtQ6ReXO-s",
 		"url": "https://www.youtube.com/watch?v=ndtQ6ReXO-s",
 		"title": "Imagine Dragons & Broiler - Shots - Broiler Remix",
@@ -4227,6 +4446,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Shots - Broiler Remix",
+		"artist": "Imagine Dragons & Broiler",
+		"artist_image": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
+		"cover": "https://i.scdn.co/image/3ed018e22d42495daf4076ed8ba0387e8f070a46",
+		"album": "Shots EP",
 		"spotify_data": ***REMOVED***
 			"id": "4XLm8FNvaTlmTAZmSrrV82",
 			"name": "Shots - Broiler Remix",
@@ -4352,8 +4576,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-qmSiJxEOVGs-Jon_Bellion_-_80_s_Films_Audio.webm",
 		"video_id": "qmSiJxEOVGs",
 		"url": "https://www.youtube.com/watch?v=qmSiJxEOVGs",
 		"title": "Jon Bellion - 80's Films",
@@ -4369,6 +4594,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "80's Films",
+		"artist": "Jon Bellion",
+		"artist_image": "https://i.scdn.co/image/b70305d3545319fefcd4f64df45f830df91537b4",
+		"cover": "https://i.scdn.co/image/1b9620a8657dd6853437d914896cd314cde1e19c",
+		"album": "The Human Condition",
 		"spotify_data": ***REMOVED***
 			"id": "5KSNxyuyp5K1kDT6LvX8oZ",
 			"name": "80's Films",
@@ -4462,8 +4692,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-AXnqkVTFUqY-Jon_Bellion_-_All_Time_Low_Video.webm",
 		"video_id": "AXnqkVTFUqY",
 		"url": "https://www.youtube.com/watch?v=AXnqkVTFUqY",
 		"title": "Jon Bellion - All Time Low",
@@ -4479,6 +4710,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "All Time Low",
+		"artist": "Jon Bellion",
+		"artist_image": "https://i.scdn.co/image/02ae7880e4851a7edd017e67bfd6b305ecc8e0c8",
+		"cover": "https://i.scdn.co/image/1b9620a8657dd6853437d914896cd314cde1e19c",
+		"album": "The Human Condition",
 		"spotify_data": ***REMOVED***
 			"id": "0SuLAslEMFZAXf0SwY7syi",
 			"name": "All Time Low",
@@ -4572,8 +4808,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-xI_bxix-6Xo-Jon_Bellion_-_Carry_Your_Throne.webm",
 		"video_id": "xI_bxix-6Xo",
 		"url": "https://www.youtube.com/watch?v=xI_bxix-6Xo",
 		"title": "Jon Bellion - Carry Your Throne",
@@ -4589,6 +4826,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Carry Your Throne",
+		"artist": "Jon Bellion",
+		"artist_image": "https://i.scdn.co/image/b70305d3545319fefcd4f64df45f830df91537b4",
+		"cover": "https://i.scdn.co/image/463762ab6027e0d5dd16a8bcc75baabd8d6c11f9",
+		"album": "The Definition",
 		"spotify_data": ***REMOVED***
 			"id": "6luhvKibJJNM4P64RLNwgg",
 			"name": "Carry Your Throne",
@@ -4682,8 +4924,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-h2ymJcCwS_s-Jon_Bellion_-_Guillotine_ft._Travis_Mendes.webm",
 		"video_id": "h2ymJcCwS_s",
 		"url": "https://www.youtube.com/watch?v=h2ymJcCwS_s",
 		"title": "Jon Bellion - Guillotine ft. Travis Mendes",
@@ -4701,8 +4944,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-HXUaoDl3Rgs-Jon_Bellion_-_Simple_and_Sweet.webm",
 		"video_id": "HXUaoDl3Rgs",
 		"url": "https://www.youtube.com/watch?v=HXUaoDl3Rgs",
 		"title": "Jon Bellion - Simple & Sweet",
@@ -4718,6 +4962,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Simple & Sweet",
+		"artist": "Jon Bellion",
+		"artist_image": "https://i.scdn.co/image/b70305d3545319fefcd4f64df45f830df91537b4",
+		"cover": "https://i.scdn.co/image/463762ab6027e0d5dd16a8bcc75baabd8d6c11f9",
+		"album": "The Definition",
 		"spotify_data": ***REMOVED***
 			"id": "0wUlGPa8He68F9TmLKdcL4",
 			"name": "Simple & Sweet",
@@ -4811,8 +5060,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-HvCQWS84jkM-Jon_Bellion_-_Ungrateful_Eyes_Official_Music_Video.webm",
 		"video_id": "HvCQWS84jkM",
 		"url": "https://www.youtube.com/watch?v=HvCQWS84jkM",
 		"title": "Jon Bellion - Ungrateful Eyes (Official Music Video)",
@@ -4830,8 +5080,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-TymjpPmvmRM-Kwabs_-_Cheating_On_Me_Tom_Misch_Refix_feat._Zak_Abel.webm",
 		"video_id": "TymjpPmvmRM",
 		"url": "https://www.youtube.com/watch?v=TymjpPmvmRM",
 		"title": "Kwabs - Cheating On Me",
@@ -4847,6 +5098,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Cheating On Me",
+		"artist": "Kwabs",
+		"artist_image": "https://i.scdn.co/image/95f6d6b223544d6b2f6f0100105839723f7b566c",
+		"cover": "https://i.scdn.co/image/f5bcaead1832fe193405fec340bd280c97fa5250",
+		"album": "Love + War",
 		"spotify_data": ***REMOVED***
 			"id": "2FK0mCTIM07zR3vCAqulpk",
 			"name": "Cheating On Me",
@@ -4958,8 +5214,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-nHdGIiV894s-Kwabs_-_Last_Stand_produced_by_SOHN_Official_Audio.webm",
 		"video_id": "nHdGIiV894s",
 		"url": "https://www.youtube.com/watch?v=nHdGIiV894s",
 		"title": "Kwabs - Last Stand produced by SOHN (Official Audio)",
@@ -4977,8 +5234,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-irqD7pdZv5Q-Kwabs_-_Layback_Official_Audio.webm",
 		"video_id": "irqD7pdZv5Q",
 		"url": "https://www.youtube.com/watch?v=irqD7pdZv5Q",
 		"title": "Kwabs - Layback",
@@ -4994,6 +5252,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Layback",
+		"artist": "Kwabs",
+		"artist_image": "https://i.scdn.co/image/4e2ba402aea9c19f9ced4abb6afe6d1df6296599",
+		"cover": "https://i.scdn.co/image/f5bcaead1832fe193405fec340bd280c97fa5250",
+		"album": "Love + War",
 		"spotify_data": ***REMOVED***
 			"id": "4bwP8yq26RkcvOVC5zHBVb",
 			"name": "Layback",
@@ -5105,8 +5368,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-pgS_xob1x4A-Leon_Bridges_-_Better_Man.webm",
 		"video_id": "pgS_xob1x4A",
 		"url": "https://www.youtube.com/watch?v=pgS_xob1x4A",
 		"title": "Leon Bridges - Better Man",
@@ -5122,6 +5386,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Better Man",
+		"artist": "Leon Bridges",
+		"artist_image": "https://i.scdn.co/image/340896b04da8ab86c7b4101002b62dc4b95765ae",
+		"cover": "https://i.scdn.co/image/de3ea93c5c121a331ca3921162aff554a774ef3c",
+		"album": "Coming Home",
 		"spotify_data": ***REMOVED***
 			"id": "3kguMbJma0qhOLniGsFlKq",
 			"name": "Better Man",
@@ -5231,8 +5500,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-MTrKkqE9p1o-Leon_Bridges_-_Coming_Home.webm",
 		"video_id": "MTrKkqE9p1o",
 		"url": "https://www.youtube.com/watch?v=MTrKkqE9p1o",
 		"title": "Leon Bridges - River",
@@ -5248,6 +5518,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "River",
+		"artist": "Leon Bridges",
+		"artist_image": "https://i.scdn.co/image/340896b04da8ab86c7b4101002b62dc4b95765ae",
+		"cover": "https://i.scdn.co/image/de3ea93c5c121a331ca3921162aff554a774ef3c",
+		"album": "Coming Home",
 		"spotify_data": ***REMOVED***
 			"id": "0NeJjNlprGfZpeX2LQuN6c",
 			"name": "River",
@@ -5357,8 +5632,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-jPdzSFEVQss-Leon_Bridges_-_Lisa_Sawyer_Audio.webm",
 		"video_id": "jPdzSFEVQss",
 		"url": "https://www.youtube.com/watch?v=jPdzSFEVQss",
 		"title": "Leon Bridges - Lisa Sawyer",
@@ -5374,6 +5650,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Lisa Sawyer",
+		"artist": "Leon Bridges",
+		"artist_image": "https://i.scdn.co/image/e4d1574fb0bf9398c54bc9adc6c5c19f97224eb1",
+		"cover": "https://i.scdn.co/image/de3ea93c5c121a331ca3921162aff554a774ef3c",
+		"album": "Coming Home",
 		"spotify_data": ***REMOVED***
 			"id": "6vInMsXdlH7SN6NL4dQkrO",
 			"name": "Lisa Sawyer",
@@ -5483,8 +5764,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-HYplnRjMVhM-Leon_Bridges_-_Smooth_Sailin.webm",
 		"video_id": "HYplnRjMVhM",
 		"url": "https://www.youtube.com/watch?v=HYplnRjMVhM",
 		"title": "Leon Bridges - Smooth Sailin'",
@@ -5500,6 +5782,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Smooth Sailin'",
+		"artist": "Leon Bridges",
+		"artist_image": "https://i.scdn.co/image/ff60e5eb1495be2e50cd7c6245a1cea17bee1809",
+		"cover": "https://i.scdn.co/image/de3ea93c5c121a331ca3921162aff554a774ef3c",
+		"album": "Coming Home",
 		"spotify_data": ***REMOVED***
 			"id": "3JbqwFY5q0ORO3siv5zL3A",
 			"name": "Smooth Sailin'",
@@ -5609,8 +5896,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-9-CJrEaftKI-Khalid_-_Let_s_Go_Audio.webm",
 		"video_id": "9-CJrEaftKI",
 		"url": "https://www.youtube.com/watch?v=9-CJrEaftKI",
 		"title": "Khalid - Let's Go",
@@ -5626,6 +5914,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Let's Go",
+		"artist": "Khalid",
+		"artist_image": "https://i.scdn.co/image/7752ce73f4d0720acc6a4c46cb2d2f40f344f834",
+		"cover": "https://i.scdn.co/image/5026fddc6c0b69e931ae99130f15d4214f1e7d41",
+		"album": "American Teen",
 		"spotify_data": ***REMOVED***
 			"id": "6AIccJIWHGK26xi34FAkwl",
 			"name": "Let's Go",
@@ -5715,8 +6008,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-bhlFT7eqe9A-Quinn_XCII_-_Light_On_Prod._ayokay.webm",
 		"video_id": "bhlFT7eqe9A",
 		"url": "https://www.youtube.com/watch?v=bhlFT7eqe9A",
 		"title": "Quinn XCII - Light On",
@@ -5732,6 +6026,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Light On",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+		"cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
+		"album": "Bloom",
 		"spotify_data": ***REMOVED***
 			"id": "5fD0rnsQbidMHrYuM7xxyK",
 			"name": "Light On",
@@ -5825,8 +6124,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-by3yRdlQvzs-Khalid_-_Location.webm",
 		"video_id": "by3yRdlQvzs",
 		"url": "https://www.youtube.com/watch?v=by3yRdlQvzs",
 		"title": "Khalid - Location",
@@ -5842,6 +6142,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Location",
+		"artist": "Khalid",
+		"artist_image": "https://i.scdn.co/image/7cfdef227dc3e938154c367a279ef995be2b5344",
+		"cover": "https://i.scdn.co/image/5026fddc6c0b69e931ae99130f15d4214f1e7d41",
+		"album": "American Teen",
 		"spotify_data": ***REMOVED***
 			"id": "152lZdxL1OR0ZMW6KquMif",
 			"name": "Location",
@@ -5931,8 +6236,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-0NChtZCDCsY-Khalid_-_American_Teen.webm",
 		"video_id": "0NChtZCDCsY",
 		"url": "https://www.youtube.com/watch?v=0NChtZCDCsY",
 		"title": "Khalid - American Teen",
@@ -5950,8 +6256,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-9DEGFE1dM50-John_Legend_-_Darkness_and_Light_Audio_ft._Brittany_Howard.webm",
 		"video_id": "9DEGFE1dM50",
 		"url": "https://www.youtube.com/watch?v=9DEGFE1dM50",
 		"title": "John Legend & Brittany Howard - Darkness and Light",
@@ -5967,6 +6274,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Darkness and Light",
+		"artist": "John Legend & Brittany Howard",
+		"artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
+		"cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
+		"album": "DARKNESS AND LIGHT",
 		"spotify_data": ***REMOVED***
 			"id": "4jBPWUAtvIbj7trXEg9QPJ",
 			"name": "Darkness and Light",
@@ -6099,8 +6411,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-rL_NP1mD0UQ-John_Legend_-_Love_Me_Now_Lyric_Video.webm",
 		"video_id": "rL_NP1mD0UQ",
 		"url": "https://www.youtube.com/watch?v=rL_NP1mD0UQ",
 		"title": "John Legend - Love Me Now",
@@ -6116,6 +6429,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Love Me Now",
+		"artist": "John Legend",
+		"artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
+		"cover": "https://i.scdn.co/image/4d7d56841f9e3d6774031ff2597b66aeff102dfb",
+		"album": "Love Me Now",
 		"spotify_data": ***REMOVED***
 			"id": "6hdkw1wzhIRYPlYDUtCY5m",
 			"name": "Love Me Now",
@@ -6223,8 +6541,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-IADPNIdXE6s-Quinn_XCII_-_Make_Time.webm",
 		"video_id": "IADPNIdXE6s",
 		"url": "https://www.youtube.com/watch?v=IADPNIdXE6s",
 		"title": "Quinn XCII - Make Time",
@@ -6240,6 +6559,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Make Time",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+		"cover": "https://i.scdn.co/image/4fed1e0fe68ce7ea32eaaea1e919870c88104995",
+		"album": "Make Time",
 		"spotify_data": ***REMOVED***
 			"id": "7kv8WogLfELHaKukL9IjZM",
 			"name": "Make Time",
@@ -6333,8 +6657,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-41mdlnKa-HI-John_Legend_-_Marching_Into_the_Dark_Audio.webm",
 		"video_id": "41mdlnKa-HI",
 		"url": "https://www.youtube.com/watch?v=41mdlnKa-HI",
 		"title": "John Legend - Marching Into the Dark",
@@ -6350,6 +6675,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Marching Into the Dark",
+		"artist": "John Legend",
+		"artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+		"cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
+		"album": "DARKNESS AND LIGHT",
 		"spotify_data": ***REMOVED***
 			"id": "6kXG42vFvkjBEPeV98YbGK",
 			"name": "Marching Into the Dark",
@@ -6457,8 +6787,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-4eWOxxkHHyM-Melvv_-_Not_Me_feat._Two_Feet.webm",
 		"video_id": "4eWOxxkHHyM",
 		"url": "https://www.youtube.com/watch?v=4eWOxxkHHyM",
 		"title": "Melvv & Two Feet - Not Me (feat. Two Feet)",
@@ -6474,6 +6805,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Not Me (feat. Two Feet)",
+		"artist": "Melvv & Two Feet",
+		"artist_image": "https://i.scdn.co/image/29cf24b09492cde881d2887ae8c5c27f8778f6f3",
+		"cover": "https://i.scdn.co/image/050a0d9c8c859ba71adddf84a5fa0219cb387104",
+		"album": "Not Me (feat. Two Feet)",
 		"spotify_data": ***REMOVED***
 			"id": "5Fm0370X5xpSsDy2AL0Zra",
 			"name": "Not Me (feat. Two Feet)",
@@ -6596,8 +6932,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-9j8sxw7Li9k-Kwabs_-_My_Own_Official_Video.webm",
 		"video_id": "9j8sxw7Li9k",
 		"url": "https://www.youtube.com/watch?v=9j8sxw7Li9k",
 		"title": "Kwabs - My Own",
@@ -6613,6 +6950,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "My Own",
+		"artist": "Kwabs",
+		"artist_image": "https://i.scdn.co/image/42a9677ab3e9d850e748d01deeb6117c4cd22d73",
+		"cover": "https://i.scdn.co/image/f5bcaead1832fe193405fec340bd280c97fa5250",
+		"album": "Love + War",
 		"spotify_data": ***REMOVED***
 			"id": "3i3RwTT3CIEMDcHZsxlJnh",
 			"name": "My Own",
@@ -6724,8 +7066,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-bSeiz5Pu2_g-Quinn_XCII_-_Native_Tongue_Prod._ayokay.webm",
 		"video_id": "bSeiz5Pu2_g",
 		"url": "https://www.youtube.com/watch?v=bSeiz5Pu2_g",
 		"title": "Quinn XCII - Native Tongue",
@@ -6741,6 +7084,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Native Tongue",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+		"cover": "https://i.scdn.co/image/d600fd067c1ff68055982a9aa5fe77f702b19b68",
+		"album": "Change of Scenery",
 		"spotify_data": ***REMOVED***
 			"id": "77dEtUAHufvPJLZkwaj2Vu",
 			"name": "Native Tongue",
@@ -6834,8 +7182,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-O8tIRYECJbk-Quinn_XCII_-_New_Wave.webm",
 		"video_id": "O8tIRYECJbk",
 		"url": "https://www.youtube.com/watch?v=O8tIRYECJbk",
 		"title": "Quinn XCII - New Wave",
@@ -6851,6 +7200,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "New Wave",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+		"cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
+		"album": "Bloom",
 		"spotify_data": ***REMOVED***
 			"id": "7ikHJI8Kd19vI10imjaNzW",
 			"name": "New Wave",
@@ -6944,8 +7298,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-V4FvUlGQNJA-ayokay_-_One_In_The_Same_ft._Quinn_XCII.webm",
 		"video_id": "V4FvUlGQNJA",
 		"url": "https://www.youtube.com/watch?v=V4FvUlGQNJA",
 		"title": "ayokay & Quinn XCII - One in the Same",
@@ -6961,6 +7316,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "One in the Same",
+		"artist": "ayokay & Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/19d2dddd9aa33f5bd0823fbaca668d2f9bbfc1be",
+		"cover": "https://i.scdn.co/image/d561b0988e00415e12021d0b7754e921e2913d4a",
+		"album": "4ft to Infinity - EP",
 		"spotify_data": ***REMOVED***
 			"id": "2Td0vAAW3FNq0wjwNDeqn3",
 			"name": "One in the Same",
@@ -7085,8 +7445,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-x7A6e9pUtq0-John_Legend_-_Overload_Audio_ft._Miguel.webm",
 		"video_id": "x7A6e9pUtq0",
 		"url": "https://www.youtube.com/watch?v=x7A6e9pUtq0",
 		"title": "John Legend & Miguel - Overload",
@@ -7102,6 +7463,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Overload",
+		"artist": "John Legend & Miguel",
+		"artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
+		"cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
+		"album": "DARKNESS AND LIGHT",
 		"spotify_data": ***REMOVED***
 			"id": "37exBefsiwr3rmQ7xcQnEJ",
 			"name": "Overload",
@@ -7250,8 +7616,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-GHdBsQFcYrw-John_Legend_-_Penthouse_Floor_Audio_ft._Chance_the_Rapper.webm",
 		"video_id": "GHdBsQFcYrw",
 		"url": "https://www.youtube.com/watch?v=GHdBsQFcYrw",
 		"title": "John Legend & Chance The Rapper - Penthouse Floor",
@@ -7267,6 +7634,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Penthouse Floor",
+		"artist": "John Legend & Chance The Rapper",
+		"artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
+		"cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
+		"album": "DARKNESS AND LIGHT",
 		"spotify_data": ***REMOVED***
 			"id": "67Nf4Nsr2Nm5CFfJgqwDb0",
 			"name": "Penthouse Floor",
@@ -7402,8 +7774,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Yvo620cGMyw-Kwabs_-_Perfect_Ruin_Official_Video.webm",
 		"video_id": "Yvo620cGMyw",
 		"url": "https://www.youtube.com/watch?v=Yvo620cGMyw",
 		"title": "Kwabs - Perfect Ruin",
@@ -7419,6 +7792,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Perfect Ruin",
+		"artist": "Kwabs",
+		"artist_image": "https://i.scdn.co/image/4e2ba402aea9c19f9ced4abb6afe6d1df6296599",
+		"cover": "https://i.scdn.co/image/f5bcaead1832fe193405fec340bd280c97fa5250",
+		"album": "Love + War",
 		"spotify_data": ***REMOVED***
 			"id": "1FToUI3zGzhTjpoVD21l58",
 			"name": "Perfect Ruin",
@@ -7530,8 +7908,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-kI1-E6Bm-70-Rag_N_Bone_Man_-_Lay_My_Body_Down.webm",
 		"video_id": "kI1-E6Bm-70",
 		"url": "https://www.youtube.com/watch?v=kI1-E6Bm-70",
 		"title": "Rag'n'Bone Man - Lay My Body Down",
@@ -7547,6 +7926,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Lay My Body Down",
+		"artist": "Rag'n'Bone Man",
+		"artist_image": "https://i.scdn.co/image/a10fa412ee0acfdec135c16c76ed6c2c789cdbce",
+		"cover": "https://i.scdn.co/image/32cd1e793e60dc3d05c4eae10338884618240a45",
+		"album": "Human (Deluxe)",
 		"spotify_data": ***REMOVED***
 			"id": "6xWrFmTaczQo9DsdA9IG7c",
 			"name": "Lay My Body Down",
@@ -7636,8 +8020,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube--F44NxiGAqg-Rag_n_Bone_Man_-_Hard_Came_The_Rain.webm",
 		"video_id": "-F44NxiGAqg",
 		"url": "https://www.youtube.com/watch?v=-F44NxiGAqg",
 		"title": "Rag'n'Bone Man - Hard Came the Rain",
@@ -7653,6 +8038,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Hard Came the Rain",
+		"artist": "Rag'n'Bone Man",
+		"artist_image": "https://i.scdn.co/image/906eeb2779ed7934080a0abd09288b2ed1e42e11",
+		"cover": "https://i.scdn.co/image/f77316df4ef84600aaadbe1ecc49f7ce5cacead8",
+		"album": "Disfigured - EP",
 		"spotify_data": ***REMOVED***
 			"id": "5YDUDi2SsfYIUBZjjYIL6f",
 			"name": "Hard Came the Rain",
@@ -7742,8 +8132,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-5lsSDHljV9s-Rag_n_Bone_Man_-_Hell_Yeah_ft._Vince_Staples.webm",
 		"video_id": "5lsSDHljV9s",
 		"url": "https://www.youtube.com/watch?v=5lsSDHljV9s",
 		"title": "Rag'n'Bone Man & Vince Staples - Hell Yeah",
@@ -7759,6 +8150,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Hell Yeah",
+		"artist": "Rag'n'Bone Man & Vince Staples",
+		"artist_image": "https://i.scdn.co/image/aa0f526c0d9b86361af0a3328910413c357a1b5d",
+		"cover": "https://i.scdn.co/image/35271e7b45e5f9d1b040f966fbfadb51667d91e7",
+		"album": "Wolves",
 		"spotify_data": ***REMOVED***
 			"id": "2SWWWu4jTeuL8oHIOhSc5W",
 			"name": "Hell Yeah",
@@ -7886,8 +8282,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-L3wKzyIN1yk-Rag_n_Bone_Man_-_Human_Official_Video.webm",
 		"video_id": "L3wKzyIN1yk",
 		"url": "https://www.youtube.com/watch?v=L3wKzyIN1yk",
 		"title": "Rag'n'Bone Man - Human",
@@ -7903,6 +8300,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Human",
+		"artist": "Rag'n'Bone Man",
+		"artist_image": "https://i.scdn.co/image/906eeb2779ed7934080a0abd09288b2ed1e42e11",
+		"cover": "https://i.scdn.co/image/32cd1e793e60dc3d05c4eae10338884618240a45",
+		"album": "Human (Deluxe)",
 		"spotify_data": ***REMOVED***
 			"id": "58zsLZPvfflaiIbNWoA22O",
 			"name": "Human",
@@ -7992,8 +8394,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-TgKSUQDwEqc-Rag_n_Bone_Man_-_Guilty.webm",
 		"video_id": "TgKSUQDwEqc",
 		"url": "https://www.youtube.com/watch?v=TgKSUQDwEqc",
 		"title": "Rag'n'Bone Man - Guilty",
@@ -8009,6 +8412,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Guilty",
+		"artist": "Rag'n'Bone Man",
+		"artist_image": "https://i.scdn.co/image/aa0f526c0d9b86361af0a3328910413c357a1b5d",
+		"cover": "https://i.scdn.co/image/35271e7b45e5f9d1b040f966fbfadb51667d91e7",
+		"album": "Wolves",
 		"spotify_data": ***REMOVED***
 			"id": "4KSljblpjITY4IsjkKSqK4",
 			"name": "Guilty",
@@ -8098,8 +8506,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-nM35X5hdzEs-Rag_n_Bone_Man_-_Wolves.webm",
 		"video_id": "nM35X5hdzEs",
 		"url": "https://www.youtube.com/watch?v=nM35X5hdzEs",
 		"title": "Rag'n'Bone Man & Stig Of The Dump - Wolves",
@@ -8115,6 +8524,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Wolves",
+		"artist": "Rag'n'Bone Man & Stig Of The Dump",
+		"artist_image": "https://i.scdn.co/image/a10fa412ee0acfdec135c16c76ed6c2c789cdbce",
+		"cover": "https://i.scdn.co/image/35271e7b45e5f9d1b040f966fbfadb51667d91e7",
+		"album": "Wolves",
 		"spotify_data": ***REMOVED***
 			"id": "1bvgrTHjGJgeIsQy2tSqFU",
 			"name": "Wolves",
@@ -8231,8 +8645,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-GitZmW2kBEQ-Rag_n_Bone_Man_-_Wolves_featuring_Stig_Of_The_Dump.webm",
 		"video_id": "GitZmW2kBEQ",
 		"url": "https://www.youtube.com/watch?v=GitZmW2kBEQ",
 		"title": "Rag\u2019n\u2019Bone Man - Wolves featuring Stig Of The Dump",
@@ -8250,8 +8665,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-EcmcT9oai1c-Khalid_-_Reasons_Audio.webm",
 		"video_id": "EcmcT9oai1c",
 		"url": "https://www.youtube.com/watch?v=EcmcT9oai1c",
 		"title": "Khalid - Reasons",
@@ -8267,6 +8683,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Reasons",
+		"artist": "Khalid",
+		"artist_image": "https://i.scdn.co/image/7752ce73f4d0720acc6a4c46cb2d2f40f344f834",
+		"cover": "https://i.scdn.co/image/ffc9ac3175a23aadd5d90a07f32b5da48dc2e92c",
+		"album": "Reasons",
 		"spotify_data": ***REMOVED***
 			"id": "5hrT5sukNbTb6xKPyYdo0I",
 			"name": "Reasons",
@@ -8356,8 +8777,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Z5-8dffKBoY-Samm_Henshaw_-_Our_Love_Official_Video.webm",
 		"video_id": "Z5-8dffKBoY",
 		"url": "https://www.youtube.com/watch?v=Z5-8dffKBoY",
 		"title": "Samm Henshaw - Our Love",
@@ -8373,6 +8795,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Our Love",
+		"artist": "Samm Henshaw",
+		"artist_image": "https://i.scdn.co/image/d76d0137ec64fd88f8cee28a4dacb657a9654481",
+		"cover": "https://i.scdn.co/image/494c9c4f436d3dbd749237d82e26277643a36af2",
+		"album": "Our Love",
 		"spotify_data": ***REMOVED***
 			"id": "0SpVbtssPegVSizgGVpJ3o",
 			"name": "Our Love",
@@ -8468,8 +8895,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-x9Eoxcv35Ww-Samm_Henshaw_-_These_Hands_Audio.webm",
 		"video_id": "x9Eoxcv35Ww",
 		"url": "https://www.youtube.com/watch?v=x9Eoxcv35Ww",
 		"title": "Samm Henshaw & Oliver Nelson - These Hands - Oliver Nelson Remix",
@@ -8485,6 +8913,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "These Hands - Oliver Nelson Remix",
+		"artist": "Samm Henshaw & Oliver Nelson",
+		"artist_image": "https://i.scdn.co/image/4b1272d68eaf56ede56bb5ef77791c3a424268d1",
+		"cover": "https://i.scdn.co/image/cd9ee909fd2e1a3101e227a1cde8a6eaab806756",
+		"album": "These Hands (Oliver Nelson Remix)",
 		"spotify_data": ***REMOVED***
 			"id": "5zWUX8T1F2CvJmn2RCvyF8",
 			"name": "These Hands - Oliver Nelson Remix",
@@ -8605,8 +9038,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Dyg32hMf7Fk-Khalid_-_Saved_Audio.webm",
 		"video_id": "Dyg32hMf7Fk",
 		"url": "https://www.youtube.com/watch?v=Dyg32hMf7Fk",
 		"title": "Khalid - Saved",
@@ -8622,6 +9056,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Saved",
+		"artist": "Khalid",
+		"artist_image": "https://i.scdn.co/image/7752ce73f4d0720acc6a4c46cb2d2f40f344f834",
+		"cover": "https://i.scdn.co/image/5026fddc6c0b69e931ae99130f15d4214f1e7d41",
+		"album": "American Teen",
 		"spotify_data": ***REMOVED***
 			"id": "248OFOZef6ShXv6DGgbnxU",
 			"name": "Saved",
@@ -8711,8 +9150,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-0fVe809KbUM-Khalid_-_Shot_Down.webm",
 		"video_id": "0fVe809KbUM",
 		"url": "https://www.youtube.com/watch?v=0fVe809KbUM",
 		"title": "Khalid - Shot Down",
@@ -8728,6 +9168,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Shot Down",
+		"artist": "Khalid",
+		"artist_image": "https://i.scdn.co/image/7cfdef227dc3e938154c367a279ef995be2b5344",
+		"cover": "https://i.scdn.co/image/5026fddc6c0b69e931ae99130f15d4214f1e7d41",
+		"album": "American Teen",
 		"spotify_data": ***REMOVED***
 			"id": "1Ob94QesoxHSBrypyBbdfd",
 			"name": "Shot Down",
@@ -8817,8 +9262,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-zqGJ-1GmFRk-GRMM_-_Something_From_Nothing_ft._Quinn_XCII.webm",
 		"video_id": "zqGJ-1GmFRk",
 		"url": "https://www.youtube.com/watch?v=zqGJ-1GmFRk",
 		"title": "GRMM & Quinn XCII - Something From Nothing",
@@ -8834,6 +9280,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Something From Nothing",
+		"artist": "GRMM & Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/1c4b7e93fb593617d7ba9b527ac2916a5e1bce7a",
+		"cover": "https://i.scdn.co/image/d713a3767921dc828d21ba2f85660571f2eddc87",
+		"album": "Scenes",
 		"spotify_data": ***REMOVED***
 			"id": "36yKTz8jGi0DZu3DWstxq5",
 			"name": "Something From Nothing",
@@ -8950,8 +9401,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-__CPXSX7MRM-Kwabs_-_Spirit_Fade.webm",
 		"video_id": "__CPXSX7MRM",
 		"url": "https://www.youtube.com/watch?v=__CPXSX7MRM",
 		"title": "Kwabs - Spirit Fade",
@@ -8967,6 +9419,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Spirit Fade",
+		"artist": "Kwabs",
+		"artist_image": "https://i.scdn.co/image/95f6d6b223544d6b2f6f0100105839723f7b566c",
+		"cover": "https://i.scdn.co/image/488632a546b008aa2c75489c01c64ca62ae26a20",
+		"album": "Wrong Or Right EP",
 		"spotify_data": ***REMOVED***
 			"id": "3tuyEUxS1iogzA5ZRsitPx",
 			"name": "Spirit Fade",
@@ -9078,8 +9535,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-ZGC2Zk2fIOc-John_Legend_-_Stereo.webm",
 		"video_id": "ZGC2Zk2fIOc",
 		"url": "https://www.youtube.com/watch?v=ZGC2Zk2fIOc",
 		"title": "John Legend - Stereo",
@@ -9095,6 +9553,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Stereo",
+		"artist": "John Legend",
+		"artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
+		"cover": "https://i.scdn.co/image/be132798de011d7d043b481162e090f98452385e",
+		"album": "Once Again",
 		"spotify_data": ***REMOVED***
 			"id": "5XPpizt2S1gtSuPbFgUVBR",
 			"name": "Stereo",
@@ -9202,8 +9665,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-wNQwRarYRFY-Quinn_XCII_-_Straightjacket.webm",
 		"video_id": "wNQwRarYRFY",
 		"url": "https://www.youtube.com/watch?v=wNQwRarYRFY",
 		"title": "Quinn XCII - Straightjacket",
@@ -9219,6 +9683,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Straightjacket",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+		"cover": "https://i.scdn.co/image/9bc35f625d9eebaa3571f971207aac13d40a83a1",
+		"album": "Straightjacket",
 		"spotify_data": ***REMOVED***
 			"id": "1I9wDuajCQ7tJbDtfEwMf2",
 			"name": "Straightjacket",
@@ -9312,8 +9781,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-psEfqheLqfM-Quinn_XCII_-_Stung_Prod._ayokay.webm",
 		"video_id": "psEfqheLqfM",
 		"url": "https://www.youtube.com/watch?v=psEfqheLqfM",
 		"title": "Quinn XCII - Stung",
@@ -9329,6 +9799,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Stung",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+		"cover": "https://i.scdn.co/image/0797ef6b0cdba660a6fa837b1da97867cfb874d3",
+		"album": "Stung",
 		"spotify_data": ***REMOVED***
 			"id": "2VaMCNvcshu99Nkt2opMtF",
 			"name": "Stung",
@@ -9422,8 +9897,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-7kZ46Lz8rug-John_Legend_-_Surefire.webm",
 		"video_id": "7kZ46Lz8rug",
 		"url": "https://www.youtube.com/watch?v=7kZ46Lz8rug",
 		"title": "John Legend - Surefire",
@@ -9439,6 +9915,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Surefire",
+		"artist": "John Legend",
+		"artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
+		"cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
+		"album": "DARKNESS AND LIGHT",
 		"spotify_data": ***REMOVED***
 			"id": "34JBZjGLUZonoqFjtbC31v",
 			"name": "Surefire",
@@ -9546,8 +10027,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-9-e7WJx8Kd8-John_Legend_-_Temporarily_Painless_Audio.webm",
 		"video_id": "9-e7WJx8Kd8",
 		"url": "https://www.youtube.com/watch?v=9-e7WJx8Kd8",
 		"title": "John Legend - Temporarily Painless",
@@ -9563,6 +10045,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Temporarily Painless",
+		"artist": "John Legend",
+		"artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
+		"cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
+		"album": "DARKNESS AND LIGHT",
 		"spotify_data": ***REMOVED***
 			"id": "0ThGqY75GjelH3G1QETuHH",
 			"name": "Temporarily Painless",
@@ -9670,8 +10157,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-sN8WUtc1W7E-The_Eden_Project_-_Blank_Space.webm",
 		"video_id": "sN8WUtc1W7E",
 		"url": "https://www.youtube.com/watch?v=sN8WUtc1W7E",
 		"title": "The Eden Project - Blank Space",
@@ -9689,8 +10177,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-9_EvN5n5xwE-The_Eden_Project_-_Crazy_in_Love_ft._Leah_Kelly.webm",
 		"video_id": "9_EvN5n5xwE",
 		"url": "https://www.youtube.com/watch?v=9_EvN5n5xwE",
 		"title": "The Eden Project - Crazy in Love ft. Leah Kelly",
@@ -9708,8 +10197,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-IKaNodcBiLA-The_Eden_Project_-_Drowning.webm",
 		"video_id": "IKaNodcBiLA",
 		"url": "https://www.youtube.com/watch?v=IKaNodcBiLA",
 		"title": "The Eden Project - Drowning",
@@ -9727,8 +10217,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Z71h3IzoO8s-The_Eden_Project_-_Jupiter.webm",
 		"video_id": "Z71h3IzoO8s",
 		"url": "https://www.youtube.com/watch?v=Z71h3IzoO8s",
 		"title": "The Eden Project - Jupiter",
@@ -9746,8 +10237,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-t0i4QRGDTbc-The_Eden_Project_-_Statues_ft._Leah_Kelly.webm",
 		"video_id": "t0i4QRGDTbc",
 		"url": "https://www.youtube.com/watch?v=t0i4QRGDTbc",
 		"title": "The Eden Project - Statues ft. Leah Kelly",
@@ -9765,8 +10257,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-syXq0ICfFDg-The_Eden_Project_-_XO.webm",
 		"video_id": "syXq0ICfFDg",
 		"url": "https://www.youtube.com/watch?v=syXq0ICfFDg",
 		"title": "The Eden Project - XO",
@@ -9784,8 +10277,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-GSkqM5Cd8zw-Loyle_Carner_-_The_Isle_of_Arran.webm",
 		"video_id": "GSkqM5Cd8zw",
 		"url": "https://www.youtube.com/watch?v=GSkqM5Cd8zw",
 		"title": "Loyle Carner - The Isle Of Arran",
@@ -9801,6 +10295,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "The Isle Of Arran",
+		"artist": "Loyle Carner",
+		"artist_image": "https://i.scdn.co/image/24ded64df2326c7cc44f57b5d17a891c6c3edcaf",
+		"cover": "https://i.scdn.co/image/049ec6719d0ea1ac8640c2de1e4168d7bca203be",
+		"album": "Yesterday's Gone",
 		"spotify_data": ***REMOVED***
 			"id": "2YQ1cc9xWnp5qI08rKt6wv",
 			"name": "The Isle Of Arran",
@@ -9906,8 +10405,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-gShTNVT19I0-ayokay_-_The_Shine_ft._Chelsea_Cutler.webm",
 		"video_id": "gShTNVT19I0",
 		"url": "https://www.youtube.com/watch?v=gShTNVT19I0",
 		"title": "ayokay & Chelsea Cutler - The Shine",
@@ -9923,6 +10423,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "The Shine",
+		"artist": "ayokay & Chelsea Cutler",
+		"artist_image": "https://i.scdn.co/image/19d2dddd9aa33f5bd0823fbaca668d2f9bbfc1be",
+		"cover": "https://i.scdn.co/image/8c18236a02ec65b71d5515af4bfb6d80fdbca9b3",
+		"album": "The Shine",
 		"spotify_data": ***REMOVED***
 			"id": "5p6eKTYwFYitUS617IMtyd",
 			"name": "The Shine",
@@ -10047,8 +10552,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-yNVuUrOKESw-The_Vernons_-_I_Want_Her_Back_At_Home_Official_Music_Video.webm",
 		"video_id": "yNVuUrOKESw",
 		"url": "https://www.youtube.com/watch?v=yNVuUrOKESw",
 		"title": "The Vernons - I Want Her Back At Home",
@@ -10064,6 +10570,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "I Want Her Back At Home",
+		"artist": "The Vernons",
+		"artist_image": "https://i.scdn.co/image/d56ba80a8d245ef16117e71c8bc6a82323cc8ccd",
+		"cover": "https://i.scdn.co/image/7106f314d9ed58bab3010ef83f197d37ea994315",
+		"album": "Volume II",
 		"spotify_data": ***REMOVED***
 			"id": "2bPjb4fCykqnpMo8xCkGPK",
 			"name": "I Want Her Back At Home",
@@ -10153,8 +10664,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-oDKrp4lhepw-The_Vernons_-_Standing_in_Line_Official_Music_Video.m4a",
 		"video_id": "oDKrp4lhepw",
 		"url": "https://www.youtube.com/watch?v=oDKrp4lhepw",
 		"title": "The Vernons - Standing in Line",
@@ -10170,6 +10682,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Standing in Line",
+		"artist": "The Vernons",
+		"artist_image": "https://i.scdn.co/image/cfa4cf2e846e63578a6416fd98c297ee5520d373",
+		"cover": "https://i.scdn.co/image/3b96b8073b46271c16fa0ac9f6d565ea4bb184ff",
+		"album": "Standing In Line",
 		"spotify_data": ***REMOVED***
 			"id": "6syDo3LUQge0guib6xvRU3",
 			"name": "Standing in Line",
@@ -10259,8 +10776,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Gvo7thT2yfo-The_Vernons_-_White_Wine_Official_Music_Video.webm",
 		"video_id": "Gvo7thT2yfo",
 		"url": "https://www.youtube.com/watch?v=Gvo7thT2yfo",
 		"title": "The Vernons - White Wine",
@@ -10276,6 +10794,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "White Wine",
+		"artist": "The Vernons",
+		"artist_image": "https://i.scdn.co/image/d56ba80a8d245ef16117e71c8bc6a82323cc8ccd",
+		"cover": "https://i.scdn.co/image/cfa4cf2e846e63578a6416fd98c297ee5520d373",
+		"album": "Volume 1",
 		"spotify_data": ***REMOVED***
 			"id": "0XDenTZhpfbz9enkjW0HlH",
 			"name": "White Wine",
@@ -10365,8 +10888,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-fcaBvL8zYts-Quinn_XCII_-_These_Days_Prod._by_ayokay.webm",
 		"video_id": "fcaBvL8zYts",
 		"url": "https://www.youtube.com/watch?v=fcaBvL8zYts",
 		"title": "Quinn XCII - These Days",
@@ -10382,6 +10906,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "These Days",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+		"cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
+		"album": "Bloom",
 		"spotify_data": ***REMOVED***
 			"id": "0PLbCyMLCnNd6E34FynqJM",
 			"name": "These Days",
@@ -10475,8 +11004,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-SsAJHPmBirw-Tom_Misch_Carmody_-_Easy_Love.webm",
 		"video_id": "SsAJHPmBirw",
 		"url": "https://www.youtube.com/watch?v=SsAJHPmBirw",
 		"title": "Tom Misch & Carmody - Easy Love",
@@ -10494,8 +11024,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-x1MXDSXoQes-Tom_Misch_Carmody_-_Outro.webm",
 		"video_id": "x1MXDSXoQes",
 		"url": "https://www.youtube.com/watch?v=x1MXDSXoQes",
 		"title": "Tom Misch & Carmody - Outro",
@@ -10513,8 +11044,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-QrMOluY6yZc-Tom_Misch_Carmody_-_Release_You.webm",
 		"video_id": "QrMOluY6yZc",
 		"url": "https://www.youtube.com/watch?v=QrMOluY6yZc",
 		"title": "Tom Misch & Carmody - Release You",
@@ -10532,8 +11064,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-FuB00XfRNjo-Tom_Misch_Carmody_-_The_Last_Song.webm",
 		"video_id": "FuB00XfRNjo",
 		"url": "https://www.youtube.com/watch?v=FuB00XfRNjo",
 		"title": "Tom Misch & Carmody - The Last Song",
@@ -10549,6 +11082,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "The Last Song",
+		"artist": "Tom Misch & Carmody",
+		"artist_image": "https://i.scdn.co/image/db27db9d3e6bc78d226939c0b2fa9a4211ee515f",
+		"cover": "https://i.scdn.co/image/aeb2faa758d099e3d13a1eba5669d5cd5e328af3",
+		"album": "The Last Song",
 		"spotify_data": ***REMOVED***
 			"id": "3LVmchiPyWpXNFFxbed5yq",
 			"name": "The Last Song",
@@ -10638,8 +11176,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-vrbaZ7dpJyg-Tom_Misch_-_Beautiful_Escape_feat._Zak_Abel.webm",
 		"video_id": "vrbaZ7dpJyg",
 		"url": "https://www.youtube.com/watch?v=vrbaZ7dpJyg",
 		"title": "Tom Misch & Zak Abel - Beautiful Escape",
@@ -10655,6 +11194,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Beautiful Escape",
+		"artist": "Tom Misch & Zak Abel",
+		"artist_image": "https://i.scdn.co/image/76f7b8e88feb6f7c27022a5145711438268d639c",
+		"cover": "https://i.scdn.co/image/18135ba644f8b8a624e8d33247db906c457e62ef",
+		"album": "Beat Tape 2",
 		"spotify_data": ***REMOVED***
 			"id": "5MChi9fdCbTIWDJPPUuuW6",
 			"name": "Beautiful Escape",
@@ -10783,8 +11327,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-PItbZklYYNQ-Tom_Misch_-_In_The_Midst_Of_It_All_feat._Sam_Wills.webm",
 		"video_id": "PItbZklYYNQ",
 		"url": "https://www.youtube.com/watch?v=PItbZklYYNQ",
 		"title": "Tom Misch & Sam Wills - In the Midst of It All",
@@ -10800,6 +11345,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "In the Midst of It All",
+		"artist": "Tom Misch & Sam Wills",
+		"artist_image": "https://i.scdn.co/image/e84854c24ffd0a032bf84b6b04e28dc8942155a4",
+		"cover": "https://i.scdn.co/image/18135ba644f8b8a624e8d33247db906c457e62ef",
+		"album": "Beat Tape 2",
 		"spotify_data": ***REMOVED***
 			"id": "6vPDjg4zuLlJrzgm9vqZCj",
 			"name": "In the Midst of It All",
@@ -10926,8 +11476,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-ka8efFrjfh4-Tom_Misch_-_Memory.webm",
 		"video_id": "ka8efFrjfh4",
 		"url": "https://www.youtube.com/watch?v=ka8efFrjfh4",
 		"title": "Tom Misch - Memory",
@@ -10943,6 +11494,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Memory",
+		"artist": "Tom Misch",
+		"artist_image": "https://i.scdn.co/image/76f7b8e88feb6f7c27022a5145711438268d639c",
+		"cover": "https://i.scdn.co/image/d763e2ab08efc9330d04f5339318213a4571d770",
+		"album": "Memory",
 		"spotify_data": ***REMOVED***
 			"id": "6PVuMhSlLOt7QHhIkNyvii",
 			"name": "Memory",
@@ -11042,8 +11598,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-dXFuETBPFfY-Tom_Misch_-_Sunshine.webm",
 		"video_id": "dXFuETBPFfY",
 		"url": "https://www.youtube.com/watch?v=dXFuETBPFfY",
 		"title": "Tom Misch - Sunshine",
@@ -11059,6 +11616,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Sunshine",
+		"artist": "Tom Misch",
+		"artist_image": "https://i.scdn.co/image/e84854c24ffd0a032bf84b6b04e28dc8942155a4",
+		"cover": "https://i.scdn.co/image/d0f3f15e73e6410e8bb60c0ab15357e5ecec89a9",
+		"album": "Sunshine",
 		"spotify_data": ***REMOVED***
 			"id": "6t5syYlCH51Gje6CV4IZZp",
 			"name": "Sunshine",
@@ -11158,8 +11720,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-VJvPkqULlvM-Tom_Misch_-_Wake_Up_This_Day_feat._Jordan_Rakei.webm",
 		"video_id": "VJvPkqULlvM",
 		"url": "https://www.youtube.com/watch?v=VJvPkqULlvM",
 		"title": "Tom Misch & Jordan Rakei - Wake Up This Day",
@@ -11175,6 +11738,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Wake Up This Day",
+		"artist": "Tom Misch & Jordan Rakei",
+		"artist_image": "https://i.scdn.co/image/7f4e62de4cd6b9220d2f39dbe4893c62e3aeda42",
+		"cover": "https://i.scdn.co/image/18135ba644f8b8a624e8d33247db906c457e62ef",
+		"album": "Beat Tape 2",
 		"spotify_data": ***REMOVED***
 			"id": "2eGFixlUmSK3Yei80riTVe",
 			"name": "Wake Up This Day",
@@ -11307,8 +11875,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-BVvljrWpNiI-Tom_Misch_-_Wander_With_Me_feat._Carmody.webm",
 		"video_id": "BVvljrWpNiI",
 		"url": "https://www.youtube.com/watch?v=BVvljrWpNiI",
 		"title": "Tom Misch & Carmody - Wander With Me",
@@ -11324,6 +11893,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Wander With Me",
+		"artist": "Tom Misch & Carmody",
+		"artist_image": "https://i.scdn.co/image/76f7b8e88feb6f7c27022a5145711438268d639c",
+		"cover": "https://i.scdn.co/image/18135ba644f8b8a624e8d33247db906c457e62ef",
+		"album": "Beat Tape 2",
 		"spotify_data": ***REMOVED***
 			"id": "7GLL5dU80NstXjcKlDMJmr",
 			"name": "Wander With Me",
@@ -11448,8 +12022,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-5uxq2yjoSRo-Tom_Misch_-_Watch_Me_Dance.webm",
 		"video_id": "5uxq2yjoSRo",
 		"url": "https://www.youtube.com/watch?v=5uxq2yjoSRo",
 		"title": "Tom Misch - Watch Me Dance",
@@ -11465,6 +12040,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Watch Me Dance",
+		"artist": "Tom Misch",
+		"artist_image": "https://i.scdn.co/image/7f4e62de4cd6b9220d2f39dbe4893c62e3aeda42",
+		"cover": "https://i.scdn.co/image/0a08cd0d07d581404e588862ff6d7e1e23f3f102",
+		"album": "Watch Me Dance",
 		"spotify_data": ***REMOVED***
 			"id": "4vELW2hK9eb9R7Q0BNJ3Vh",
 			"name": "Watch Me Dance",
@@ -11564,8 +12144,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-bgBktBE4pp8-Tom_Misch_-_Your_Love_feat._Alexa_Harley.webm",
 		"video_id": "bgBktBE4pp8",
 		"url": "https://www.youtube.com/watch?v=bgBktBE4pp8",
 		"title": "Tom Misch & Alexa Harley - Your Love",
@@ -11581,6 +12162,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Your Love",
+		"artist": "Tom Misch & Alexa Harley",
+		"artist_image": "https://i.scdn.co/image/e84854c24ffd0a032bf84b6b04e28dc8942155a4",
+		"cover": "https://i.scdn.co/image/18135ba644f8b8a624e8d33247db906c457e62ef",
+		"album": "Beat Tape 2",
 		"spotify_data": ***REMOVED***
 			"id": "7iXVkTHMB42Mz9EtI90rzu",
 			"name": "Your Love",
@@ -11691,8 +12277,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-MwpMEbgC7DA-Tom_Odell_-_Another_Love.webm",
 		"video_id": "MwpMEbgC7DA",
 		"url": "https://www.youtube.com/watch?v=MwpMEbgC7DA",
 		"title": "Tom Odell - Another Love",
@@ -11708,6 +12295,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Another Love",
+		"artist": "Tom Odell",
+		"artist_image": "https://i.scdn.co/image/3a6b3b1cccbd9b15be2833bc6fd5ea9a15a1d721",
+		"cover": "https://i.scdn.co/image/bb9376e2af1e64aa16cdfd0f6659f5100babe10a",
+		"album": "Long Way Down",
 		"spotify_data": ***REMOVED***
 			"id": "7otCGmgp9h4CsR2LhwB6gt",
 			"name": "Another Love",
@@ -11819,8 +12411,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-bnZxWpwvFEk-Tom_Odell_-_Concrete_Official_Video.webm",
 		"video_id": "bnZxWpwvFEk",
 		"url": "https://www.youtube.com/watch?v=bnZxWpwvFEk",
 		"title": "Tom Odell - Concrete",
@@ -11836,6 +12429,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Concrete",
+		"artist": "Tom Odell",
+		"artist_image": "https://i.scdn.co/image/6bb962ff261600995762e2c11c27230ec7e2c626",
+		"cover": "https://i.scdn.co/image/a14764dbb2612600b1d634c400dce0a21ec711da",
+		"album": "Wrong Crowd (Deluxe)",
 		"spotify_data": ***REMOVED***
 			"id": "7K8qvlD4tcyx2HUy6QfcSp",
 			"name": "Concrete",
@@ -11947,8 +12545,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-un4fHfBgyvo-Tom_Odell_-_Here_I_Am_Official_Video.webm",
 		"video_id": "un4fHfBgyvo",
 		"url": "https://www.youtube.com/watch?v=un4fHfBgyvo",
 		"title": "Tom Odell - Here I Am",
@@ -11964,6 +12563,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Here I Am",
+		"artist": "Tom Odell",
+		"artist_image": "https://i.scdn.co/image/8523e56ead8d095bf2d6ba9b739e1291aa293f7c",
+		"cover": "https://i.scdn.co/image/a14764dbb2612600b1d634c400dce0a21ec711da",
+		"album": "Wrong Crowd (Deluxe)",
 		"spotify_data": ***REMOVED***
 			"id": "1DxjoJ2w0K9zQ8KgU9rXhr",
 			"name": "Here I Am",
@@ -12075,8 +12679,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-uvosjKUKCLo-Tom_Odell_-_Wrong_Crowd_Official_Video.webm",
 		"video_id": "uvosjKUKCLo",
 		"url": "https://www.youtube.com/watch?v=uvosjKUKCLo",
 		"title": "Tom Odell - Wrong Crowd",
@@ -12092,6 +12697,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Wrong Crowd",
+		"artist": "Tom Odell",
+		"artist_image": "https://i.scdn.co/image/3a6b3b1cccbd9b15be2833bc6fd5ea9a15a1d721",
+		"cover": "https://i.scdn.co/image/a14764dbb2612600b1d634c400dce0a21ec711da",
+		"album": "Wrong Crowd (Deluxe)",
 		"spotify_data": ***REMOVED***
 			"id": "4mbVBOnlDb9pNl997oyyXR",
 			"name": "Wrong Crowd",
@@ -12203,8 +12813,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-iXvy8ZeCs5M-John_Legend_-_Tonight_Best_You_Ever_Had_ft._Ludacris.webm",
 		"video_id": "iXvy8ZeCs5M",
 		"url": "https://www.youtube.com/watch?v=iXvy8ZeCs5M",
 		"title": "John Legend & Ludacris - Tonight (Best You Ever Had)",
@@ -12220,6 +12831,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Tonight (Best You Ever Had)",
+		"artist": "John Legend & Ludacris",
+		"artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+		"cover": "https://i.scdn.co/image/14cfa484aa378675e794deb27160740b26fbf1fb",
+		"album": "Think Like A Man - Music From & Inspired By The Film",
 		"spotify_data": ***REMOVED***
 			"id": "17zF2ISrDrQdaULA8cxReK",
 			"name": "Tonight (Best You Ever Had)",
@@ -12342,8 +12958,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-28hYBf1A2yk-John_Legend_-_Used_to_Love_U.webm",
 		"video_id": "28hYBf1A2yk",
 		"url": "https://www.youtube.com/watch?v=28hYBf1A2yk",
 		"title": "John Legend - Used to Love U",
@@ -12359,6 +12976,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Used to Love U",
+		"artist": "John Legend",
+		"artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+		"cover": "https://i.scdn.co/image/3f891b7b0a3a46beaff1fd66dd31de7b0bd8ae95",
+		"album": "Get Lifted",
 		"spotify_data": ***REMOVED***
 			"id": "3uBbvynFWlF041WzNVHd1d",
 			"name": "Used to Love U",
@@ -12466,8 +13088,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-TW9uj83Vq-0-Kwabs_-_Walk_Official_Video.webm",
 		"video_id": "TW9uj83Vq-0",
 		"url": "https://www.youtube.com/watch?v=TW9uj83Vq-0",
 		"title": "Kwabs - Walk",
@@ -12483,6 +13106,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Walk",
+		"artist": "Kwabs",
+		"artist_image": "https://i.scdn.co/image/42a9677ab3e9d850e748d01deeb6117c4cd22d73",
+		"cover": "https://i.scdn.co/image/f5bcaead1832fe193405fec340bd280c97fa5250",
+		"album": "Love + War",
 		"spotify_data": ***REMOVED***
 			"id": "6D3g26uM2CmNVUhPWWNsBS",
 			"name": "Walk",
@@ -12594,8 +13222,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-EmVYabYDiAg-John_Legend_-_What_You_Do_to_Me_Audio.webm",
 		"video_id": "EmVYabYDiAg",
 		"url": "https://www.youtube.com/watch?v=EmVYabYDiAg",
 		"title": "John Legend - What You Do to Me",
@@ -12611,6 +13240,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "What You Do to Me",
+		"artist": "John Legend",
+		"artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
+		"cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
+		"album": "DARKNESS AND LIGHT",
 		"spotify_data": ***REMOVED***
 			"id": "2cY8x0jQ1wWEipUCouclsD",
 			"name": "What You Do to Me",
@@ -12718,8 +13352,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-qsYrpNHQ6hg-John_Legend_-_Who_Do_We_Think_We_Are_Official_Video_ft._Rick_Ross.webm",
 		"video_id": "qsYrpNHQ6hg",
 		"url": "https://www.youtube.com/watch?v=qsYrpNHQ6hg",
 		"title": "John Legend - Who Do We Think We Are (Official Video) ft. Rick Ross",
@@ -12737,8 +13372,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-bymCootn7mk-Wookie_ft._Zak_Abel_-_Higher.webm",
 		"video_id": "bymCootn7mk",
 		"url": "https://www.youtube.com/watch?v=bymCootn7mk",
 		"title": "Wookie ft. Zak Abel - Higher",
@@ -12756,8 +13392,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-waIBbsVoTkA-Unlike_Pluto_-_Worst_In_Me_Official_Lyric_Video.webm",
 		"video_id": "waIBbsVoTkA",
 		"url": "https://www.youtube.com/watch?v=waIBbsVoTkA",
 		"title": "Unlike Pluto - Worst In Me",
@@ -12773,6 +13410,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Worst In Me",
+		"artist": "Unlike Pluto",
+		"artist_image": "https://i.scdn.co/image/07a21b33ce754d0706ccbc3f7a5be4034fd1a4a5",
+		"cover": "https://i.scdn.co/image/3d7c50c02d6a7e53fdcf389e8262238c82eec337",
+		"album": "Worst In Me",
 		"spotify_data": ***REMOVED***
 			"id": "6lYktNy0nhWLQjo6zvKizF",
 			"name": "Worst In Me",
@@ -12876,8 +13518,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-06N6rWE4JWc-Quinn_XCII_-_Wounds_Prod._by_ayokay.webm",
 		"video_id": "06N6rWE4JWc",
 		"url": "https://www.youtube.com/watch?v=06N6rWE4JWc",
 		"title": "Quinn XCII - Wounds",
@@ -12893,6 +13536,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Wounds",
+		"artist": "Quinn XCII",
+		"artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+		"cover": "https://i.scdn.co/image/d600fd067c1ff68055982a9aa5fe77f702b19b68",
+		"album": "Change of Scenery",
 		"spotify_data": ***REMOVED***
 			"id": "5Wr4ujVuTDx08xdQeNzbhL",
 			"name": "Wounds",
@@ -12986,8 +13634,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-jYDrC25kAS0-Kwabs_-_Wrong_or_Right_Official_Video.webm",
 		"video_id": "jYDrC25kAS0",
 		"url": "https://www.youtube.com/watch?v=jYDrC25kAS0",
 		"title": "Kwabs - Wrong Or Right",
@@ -13003,6 +13652,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Wrong Or Right",
+		"artist": "Kwabs",
+		"artist_image": "https://i.scdn.co/image/168afa8e706651dfe96ed269b0ddb87e2712b53f",
+		"cover": "https://i.scdn.co/image/488632a546b008aa2c75489c01c64ca62ae26a20",
+		"album": "Wrong Or Right EP",
 		"spotify_data": ***REMOVED***
 			"id": "2dMFVLkc6fAtB0YcnZkddv",
 			"name": "Wrong Or Right",
@@ -13114,8 +13768,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Tq56g5lTg_w-Zak_Abel_Joker_-_Wise_Enough_Official_Video.webm",
 		"video_id": "Tq56g5lTg_w",
 		"url": "https://www.youtube.com/watch?v=Tq56g5lTg_w",
 		"title": "Zak Abel & Joker - Wise Enough [Official Video]",
@@ -13133,8 +13788,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-xG5J_C4ltRc-Zak_Abel_-_Alchemy.webm",
 		"video_id": "xG5J_C4ltRc",
 		"url": "https://www.youtube.com/watch?v=xG5J_C4ltRc",
 		"title": "Zak Abel - Alchemy",
@@ -13152,8 +13808,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-v7u3bFV1Wk4-Zak_Abel_-_Everybody_Needs_Love_Official_Video.webm",
 		"video_id": "v7u3bFV1Wk4",
 		"url": "https://www.youtube.com/watch?v=v7u3bFV1Wk4",
 		"title": "Zak Abel - Everybody Needs Love",
@@ -13169,6 +13826,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Everybody Needs Love",
+		"artist": "Zak Abel",
+		"artist_image": "https://i.scdn.co/image/7ac9871e8881e563ec05ea02844216da0c5fa48b",
+		"cover": "https://i.scdn.co/image/23a4e86711eb360387dec52304a8828297aa810e",
+		"album": "Everybody Needs Love",
 		"spotify_data": ***REMOVED***
 			"id": "3Gl6kNX6LGBPBhwHKnAoJ8",
 			"name": "Everybody Needs Love",
@@ -13266,8 +13928,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-hppndGC_yHc-Zak_Abel_-_Flow.webm",
 		"video_id": "hppndGC_yHc",
 		"url": "https://www.youtube.com/watch?v=hppndGC_yHc",
 		"title": "Zak Abel - Flow",
@@ -13283,6 +13946,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Flow",
+		"artist": "Zak Abel",
+		"artist_image": "https://i.scdn.co/image/97acd6cb191a4631be383c2f521a58bad86a2ce3",
+		"cover": "https://i.scdn.co/image/c1f138a14b3fa05c86b8a00bd1479384f5935bde",
+		"album": "One Hand On The Future",
 		"spotify_data": ***REMOVED***
 			"id": "0h0zn2u6bCaUQKxD8Ubgy9",
 			"name": "Flow",
@@ -13380,8 +14048,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-XN8SAh0PGNU-Zak_Abel_-_Say_Sumthin_Official_Audio.webm",
 		"video_id": "XN8SAh0PGNU",
 		"url": "https://www.youtube.com/watch?v=XN8SAh0PGNU",
 		"title": "Zak Abel - Say Sumthin",
@@ -13397,6 +14066,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Say Sumthin",
+		"artist": "Zak Abel",
+		"artist_image": "https://i.scdn.co/image/bf9596ee2cfecaf820a24456bca1cc3901aa727b",
+		"cover": "https://i.scdn.co/image/c1f138a14b3fa05c86b8a00bd1479384f5935bde",
+		"album": "One Hand On The Future",
 		"spotify_data": ***REMOVED***
 			"id": "7jQGnrnyjQbGsAY5xEaQOo",
 			"name": "Say Sumthin",
@@ -13494,8 +14168,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-ZgzuBGAwr5w-Zak_Abel_-_Soul_Child.webm",
 		"video_id": "ZgzuBGAwr5w",
 		"url": "https://www.youtube.com/watch?v=ZgzuBGAwr5w",
 		"title": "Zak Abel - Soul Child",
@@ -13511,6 +14186,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Soul Child",
+		"artist": "Zak Abel",
+		"artist_image": "https://i.scdn.co/image/7ac9871e8881e563ec05ea02844216da0c5fa48b",
+		"cover": "https://i.scdn.co/image/c1f138a14b3fa05c86b8a00bd1479384f5935bde",
+		"album": "One Hand On The Future",
 		"spotify_data": ***REMOVED***
 			"id": "1U5eiu4uGhT3JEhiSwBmRe",
 			"name": "Soul Child",
@@ -13608,8 +14288,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-o1lqqkosbQY-Zak_Abel_-_These_Are_The_Days.webm",
 		"video_id": "o1lqqkosbQY",
 		"url": "https://www.youtube.com/watch?v=o1lqqkosbQY",
 		"title": "Zak Abel - These Are The Days",
@@ -13627,8 +14308,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-cC7rEd5dfwk-Zak_Abel_-_Unstable_Official_Audio.m4a",
 		"video_id": "cC7rEd5dfwk",
 		"url": "https://www.youtube.com/watch?v=cC7rEd5dfwk",
 		"title": "Zak Abel - Unstable",
@@ -13644,6 +14326,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Unstable",
+		"artist": "Zak Abel",
+		"artist_image": "https://i.scdn.co/image/bf9596ee2cfecaf820a24456bca1cc3901aa727b",
+		"cover": "https://i.scdn.co/image/48fa8b0c3d1ee9852378968d5feb5262ed59ffd4",
+		"album": "Unstable",
 		"spotify_data": ***REMOVED***
 			"id": "4xxwqiTaVwlf5TUDpc01yv",
 			"name": "Unstable",
@@ -13741,8 +14428,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-cQ8BHZITkm8-Zak_Abel_-_Rock_Bottom_ft._Wretch_32.webm",
 		"video_id": "cQ8BHZITkm8",
 		"url": "https://www.youtube.com/watch?v=cQ8BHZITkm8",
 		"title": "Zak Abel - Rock Bottom ft. Wretch 32",
@@ -13760,8 +14448,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-bs-11Hf5JOU-Zak_Abel_-_All_I_Ever_Do_Is_Say_Goodbye_Official_Audio.webm",
 		"video_id": "bs-11Hf5JOU",
 		"url": "https://www.youtube.com/watch?v=bs-11Hf5JOU",
 		"title": "Zak Abel - All I Ever Do (Is Say Goodbye)",
@@ -13777,6 +14466,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "All I Ever Do (Is Say Goodbye)",
+		"artist": "Zak Abel",
+		"artist_image": "https://i.scdn.co/image/bf9596ee2cfecaf820a24456bca1cc3901aa727b",
+		"cover": "https://i.scdn.co/image/6d1a91791993440d5f400ff7ee9628a374c04e84",
+		"album": "All I Ever Do (Is Say Goodbye)",
 		"spotify_data": ***REMOVED***
 			"id": "4QfqyabOT0F2QMbkD1ay91",
 			"name": "All I Ever Do (Is Say Goodbye)",
@@ -13874,8 +14568,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Chl3PqVjngU-MNEK_-_More_Than_A_Miracle.m4a",
 		"video_id": "Chl3PqVjngU",
 		"url": "https://www.youtube.com/watch?v=Chl3PqVjngU",
 		"title": "MNEK - More Than A Miracle",
@@ -13891,6 +14586,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "More Than A Miracle",
+		"artist": "MNEK",
+		"artist_image": "https://i.scdn.co/image/d01a1af0f685fd60a3ee3bfa3029886961cfbb79",
+		"cover": "https://i.scdn.co/image/d3d3f0e243b800e75516bf78c495a5bd5333fce9",
+		"album": "Small Talk - EP",
 		"spotify_data": ***REMOVED***
 			"id": "21AbakVGnrNSdineegyZnB",
 			"name": "More Than A Miracle",
@@ -14000,8 +14700,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-kX7VcL6byEE-Allan_Rayman_-_Lucy_The_Tease.webm",
 		"video_id": "kX7VcL6byEE",
 		"url": "https://www.youtube.com/watch?v=kX7VcL6byEE",
 		"title": "Allan Rayman - Lucy The Tease",
@@ -14017,6 +14718,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Lucy The Tease",
+		"artist": "Allan Rayman",
+		"artist_image": "https://i.scdn.co/image/b1e3bb62a231b4dfec45ea241a424ecee789d244",
+		"cover": "https://i.scdn.co/image/9cb427f1c6646483072f1b5432284fba1da9e557",
+		"album": "Hotel Allan",
 		"spotify_data": ***REMOVED***
 			"id": "2j4RC1LkwV47B0BMZNyvE3",
 			"name": "Lucy The Tease",
@@ -14114,8 +14820,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-zGt-VULv9FQ-Jacob_Banks_-_Chainsmoking_Audio.webm",
 		"video_id": "zGt-VULv9FQ",
 		"url": "https://www.youtube.com/watch?v=zGt-VULv9FQ",
 		"title": "Jacob Banks - Chainsmoking",
@@ -14131,6 +14838,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Chainsmoking",
+		"artist": "Jacob Banks",
+		"artist_image": "https://i.scdn.co/image/f1277b4e1e66eb846d535a8b14b6f5d2b9fa1d58",
+		"cover": "https://i.scdn.co/image/231c8278280c13b8c5f8d3963d8d304859fb5634",
+		"album": "The Boy Who Cried Freedom",
 		"spotify_data": ***REMOVED***
 			"id": "1pfzqOGRJd6DbEIFNE5G1X",
 			"name": "Chainsmoking",
@@ -14228,8 +14940,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Vn5ZYYc2Sm0-Blackbear_-_Weak_When_Ur_Around_Acoustic_Version.webm",
 		"video_id": "Vn5ZYYc2Sm0",
 		"url": "https://www.youtube.com/watch?v=Vn5ZYYc2Sm0",
 		"title": "Blackbear - Weak When Ur Around",
@@ -14245,6 +14958,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Weak When Ur Around",
+		"artist": "Blackbear",
+		"artist_image": "https://i.scdn.co/image/92c55f8da5e3bafafef2192ebfcb027d1711a5c9",
+		"cover": "https://i.scdn.co/image/e59ba38400aa93e7319324ddedcc05cc83981567",
+		"album": "Dead",
 		"spotify_data": ***REMOVED***
 			"id": "3UWkbO4emEOu9YUeOGq3vU",
 			"name": "Weak When Ur Around",
@@ -14338,8 +15056,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube--Oj-2H6KrUE-LostBoyCrow_-_Thursday.webm",
 		"video_id": "-Oj-2H6KrUE",
 		"url": "https://www.youtube.com/watch?v=-Oj-2H6KrUE",
 		"title": "Lostboycrow - Thursday",
@@ -14355,6 +15074,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Thursday",
+		"artist": "Lostboycrow",
+		"artist_image": "https://i.scdn.co/image/56b195fbce7eb1063f1d60ee680e61d374f4459a",
+		"cover": "https://i.scdn.co/image/3c55ea3ec083d2d25de37441c2239abdf5f721d9",
+		"album": "Thursday",
 		"spotify_data": ***REMOVED***
 			"id": "7oeidbRS7GmtiTHY99I7uA",
 			"name": "Thursday",
@@ -14454,8 +15178,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-hhXvWX--_3k-Jackson_Breit_-_679_No_Diggity_Cover.webm",
 		"video_id": "hhXvWX--_3k",
 		"url": "https://www.youtube.com/watch?v=hhXvWX--_3k",
 		"title": "Jackson Breit - 679 & No Diggity",
@@ -14471,6 +15196,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "679 & No Diggity",
+		"artist": "Jackson Breit",
+		"artist_image": "https://i.scdn.co/image/b0072a5323d3760e1d2e4cf26087dc9575cb746b",
+		"cover": "https://i.scdn.co/image/e681ba22f85feab7d5457829d35adf0ae17283fa",
+		"album": "Covers",
 		"spotify_data": ***REMOVED***
 			"id": "5bIV0X5jTmFPrTNMF4HLmF",
 			"name": "679 & No Diggity",
@@ -14564,8 +15294,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-DNirCrpglqY-Jamie_MacDowell_and_Tom_Thum_-_The_Sum_Of_It_OFFICIAL_VIDEO.webm",
 		"video_id": "DNirCrpglqY",
 		"url": "https://www.youtube.com/watch?v=DNirCrpglqY",
 		"title": "Jamie MacDowell & Tom Thum - The Sum of It",
@@ -14586,6 +15317,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "The Sum of It",
+		"artist": "Jamie MacDowell & Tom Thum",
+		"artist_image": "https://i.scdn.co/image/a8fb3f0133df9dd1f2e57e4f8567f04b78fc85b9",
+		"cover": "https://i.scdn.co/image/d94fa6df51fa49c10775332dee70a1476f126a4b",
+		"album": "The Sum of It",
 		"spotify_data": ***REMOVED***
 			"id": "5LWZUA1BM3tdFi9O1GGk3Q",
 			"name": "The Sum of It",
@@ -14675,8 +15411,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-XVq6hPBDinA-Alleyways_and_Backlanes_Bonus_Track.webm",
 		"video_id": "XVq6hPBDinA",
 		"url": "https://www.youtube.com/watch?v=XVq6hPBDinA",
 		"title": "Jamie MacDowell & Tom Thum - Alleyways and Backlanes (Bonus Track)",
@@ -14697,6 +15434,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Alleyways and Backlanes (Bonus Track)",
+		"artist": "Jamie MacDowell & Tom Thum",
+		"artist_image": "https://i.scdn.co/image/3733e7ac2c74ad7064ea3360dee98f49129e1e0f",
+		"cover": "https://i.scdn.co/image/3733e7ac2c74ad7064ea3360dee98f49129e1e0f",
+		"album": "The Some of It",
 		"spotify_data": ***REMOVED***
 			"id": "43RFmOutln073vlA68OtFl",
 			"name": "Alleyways and Backlanes (Bonus Track)",
