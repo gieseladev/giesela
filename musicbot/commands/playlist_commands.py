@@ -8,7 +8,7 @@ from discord import Embed
 
 from ..entry import GieselaEntry, TimestampEntry, YoutubeEntry
 from ..entry_updater import fix_generator
-from ..exception import ExtractionError
+from ..exceptions import ExtractionError
 from ..imgur import upload_playlist_cover, upload_song_image
 from ..saved_playlists import Playlists
 from ..spotify import SpotifyTrack
