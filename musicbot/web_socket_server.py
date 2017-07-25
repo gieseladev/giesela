@@ -184,8 +184,7 @@ class GieselaServer:
         server_id = GieselaServer.get_token_information(
             token)[0] if token else server_id
         try:
-            player = asyncio.run_coroutine_threadsafe(GieselaServer.bot.get_player(
-                server_id=server_id), GieselaServer.bot.loop).result()
+            player = asyncio.run_coroutine_threadsafe(GieselaServer.bot.get_player(server_id), GieselaServer.bot.loop).result()
             return player
         except Exception as e:
             print("[WEBSOCKET] encountered error while getting player:\n***REMOVED******REMOVED***".format(e))

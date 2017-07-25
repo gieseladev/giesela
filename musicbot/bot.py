@@ -287,6 +287,8 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             self.the_voice_clients[server.id].channel = channel
 
     async def get_player(self, server, channel=None):
+        if isinstance(server, int):
+            server = self.get_server(server)
 
         if server.id not in self.players or (channel and self.players[server.id].voice_client.channel != channel):
             voice_client = await self.get_voice_client(channel or self.find_home_channel(server))

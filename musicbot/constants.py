@@ -1,6 +1,6 @@
 import os.path
 
-MAIN_VERSION = "4.2.7"
+MAIN_VERSION = "4.2.8"
 SUB_VERSION = "ice_cube"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
@@ -10,7 +10,7 @@ all_sub_versions = ***REMOVED***
     "4.0.x": "New Reign",
     "3.9.x": "Giesenesis",
     "3.8.x": "Giezela",
-    "3.7.x": "Giese La La Land",
+    "3.7.x": "GieseLa La Land",
     "3.6.x": "Weebiesela",
     "3.5.x": "Veggiesela",
     "3.4.x": "Gunzulalela",
