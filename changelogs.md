@@ -6,5 +6,5 @@ layout: default
 
 # Changelogs
 {% for post in site.posts %}
-  - [{{ post.version | default: post.title }} {% if post.development %}[DEV]{% endif %}{% if post.subtitle %}: **{{ post.subtitle }}**{% endif %}]({{ site.url }}{{ post.url }})
+  - [{{ post.version | default: post.title }}{% if post.development %} [DEV]{% endif %}{% if post.subtitle %}: **{{ post.subtitle }}**{% endif %}]({{ site.url }}{{ post.url }})
 {% endfor %}
