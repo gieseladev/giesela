@@ -1,3 +1,4 @@
+import asyncio
 import re
 import time
 from random import choice, shuffle
@@ -5,10 +6,9 @@ from textwrap import indent
 
 from discord import Embed
 
-import asyncio
-
 from ..entry import GieselaEntry, TimestampEntry, YoutubeEntry
 from ..entry_updater import fix_generator
+from ..exception import ExtractionError
 from ..imgur import upload_playlist_cover, upload_song_image
 from ..saved_playlists import Playlists
 from ..spotify import SpotifyTrack
@@ -562,13 +562,13 @@ class PlaylistCommands:
                     msg = await self.safe_send_message(channel, "I'm working on it.")
                     query = " ".join(arguments)
                     try:
-                        start_time = datetime.now()
+                        start_time = time.time()
                         entry = await player.playlist.get_entry_from_query(query)
                         if isinstance(entry, list):
                             entries, _ = await _get_entries_from_urls(entry, "Parsing ***REMOVED***entries_left***REMOVED*** entries")
                         else:
                             entries = [entry, ]
-                        if (datetime.now() - start_time).total_seconds() > 40:
+                        if time.time() - start_time > 40:
                             await self.safe_send_message(author, "Wow, that took quite a while.\nI'm done now though so come check it out!")
 
                         pl_changes["added_entries"].extend(
@@ -1075,12 +1075,13 @@ class PlaylistCommands:
         "3.5.5": (1497792167, "Now displaying what entry has been added to the playlist"),
         "3.5.8": (1497826743, "Even more information displaying"),
         "3.6.1": (1497972538, "now accepts a query parameter which adds a song to the playlist like the `play` command does so for the queue"),
-        "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite"),
+        "4.2.3": (1500959036, "Error handling for DMCA takedowns and other Youtube problems")
     ***REMOVED***)
     async def cmd_addtoplaylist(self, channel, author, player, playlistname, query=None):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***addtoplaylist <playlistname> [link | name]`
+        `***REMOVED***command_prefix***REMOVED***addtoplaylist <playlistname> [query]`
         ///|Explanation
         Add the current entry to a playlist.
         If you either provide a link or a name, that song is added to the queue.
@@ -1095,7 +1096,11 @@ class PlaylistCommands:
         await self.send_typing(channel)
 
         if query:
-            add_entry = await player.playlist.get_entry_from_query(query, channel=channel, author=author)
+            try:
+                add_entry = await player.playlist.get_entry_from_query(query, channel=channel, author=author)
+            except ExtractionError as e:
+                return Response("```\n***REMOVED******REMOVED***```".format(e))
+
         else:
             if not player.current_entry:
                 return Response(

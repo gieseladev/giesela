@@ -136,8 +136,12 @@ class Playlist(EventEmitter):
 
     async def get_entry_from_query(self, query, **meta):
 
-        info = await self.downloader.extract_info(
-            self.loop, query, download=False, process=False)
+        try:
+            info = await self.downloader.extract_info(
+                self.loop, query, download=False, process=False)
+        except Exception as e:
+            raise ExtractionError(
+                "Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***".format(query, e))
 
         if not info:
             raise ExtractionError("Couldn't extract info")
