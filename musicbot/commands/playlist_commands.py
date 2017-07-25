@@ -1,10 +1,11 @@
-import asyncio
 import re
 import time
 from random import choice, shuffle
 from textwrap import indent
 
 from discord import Embed
+
+import asyncio
 
 from ..entry import GieselaEntry, TimestampEntry, YoutubeEntry
 from ..entry_updater import fix_generator
@@ -1125,6 +1126,9 @@ class PlaylistCommands:
                     "Your name is too short. Please choose one with at least three letters."
                 )
             self.playlists.set_playlist([add_entry], playlistname, author.id)
+            player._current_entry.meta["playlist"] = {
+                "name": playlistname
+            }
             return Response("Created a new playlist `{}` and added **{}**.".format(playlistname.title(),
                                                                                    add_entry.title))
 
@@ -1149,6 +1153,9 @@ class PlaylistCommands:
 
         self.playlists.edit_playlist(
             playlistname, player.playlist, new_entries=[add_entry])
+        player._current_entry.meta["playlist"] = {
+            "name": playlistname
+        }
         return Response("Added **{}** to playlist `{}`.".format(add_entry.title, playlistname.title()))
 
     @command_info("2.9.2", 1479945600, {
@@ -1189,10 +1196,12 @@ class PlaylistCommands:
 
         self.playlists.edit_playlist(
             playlistname, player.playlist, remove_entries=[remove_entry])
+        player._current_entry.meta.pop("playlist", None)
         return Response("Removed **{}** from playlist `{}`.".format(remove_entry.title, playlistname))
 
     @command_info("4.1.9", 1500882702, {
-        "4.2.2": (1500911879, "Entry not in a playlist handling")
+        "4.2.2": (1500911879, "Entry not in a playlist handling"),
+        "4.2.6": (1500963901, "Can now use the entry manipulator on non-playlist entries")
     })
     async def cmd_editentry(self, channel, author, player, leftover_args):
         """
@@ -1213,17 +1222,21 @@ class PlaylistCommands:
             "_".join(leftover_args) or entry.meta.get("playlist", {}).get("name", None) or ""
         ).lower().strip()
 
-        if not playlistname:
-            return Response("This entry isn't in a playlist")
-
         if playlistname not in self.playlists.saved_playlists:
-            return Response("This playlist doesn't exist")
+            playlistname = None
 
         new_entry = await self.entry_manipulator(player, channel, author, playlistname, entry)
 
         if new_entry:
-            player._current_entry = new_entry
-            self.playlists.edit_playlist(playlistname, player.playlist, edit_entries=[(entry, new_entry)])
-            return Response("Successfully edited **{}** from `{}`".format(new_entry.title, playlistname.replace("_", " ").title()))
+            if player.current_entry and player.current_entry.url == new_entry.url:
+                player._current_entry = new_entry
+            elif not playlistname:
+                return Response("This entry's already passed")
+
+            if playlistname:
+                self.playlists.edit_playlist(playlistname, player.playlist, edit_entries=[(entry, new_entry)])
+                return Response("Successfully edited **{}** from `{}`".format(new_entry.title, playlistname.replace("_", " ").title()))
+            else:
+                return Response("Saved changes to current entry.")
         else:
-            return Response("Didn't save **{}** from `{}`".format(new_entry.title, playlistname.replace("_", " ").title()))
+            return Response("Didn't save changes to **{}**".format(new_entry.title))

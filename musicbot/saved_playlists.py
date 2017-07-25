@@ -60,9 +60,9 @@ class Playlists:
             for ind, ser_entry in enumerate(serialized_json):
                 try:
                     entry = Entry.from_dict(playlist, ser_entry)
-                    entry.meta.pop("channel", None)
                     entry.meta["channel"] = channel
                     entry.meta["playlist"] = {
+                        "cover": playlist_information["cover_url"],
                         "name": playlistname,
                         "index": ind
                     }
@@ -88,6 +88,7 @@ class Playlists:
                 entry.start_seconds = 0
 
                 entry.meta["playlist"] = {
+                    "cover": cover_url,
                     "name": name,
                     "index": index
                 }
