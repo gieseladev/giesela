@@ -1,10 +1,9 @@
+import asyncio
 import time
 import traceback
 from random import choice, shuffle
 
 from discord import Embed
-
-import asyncio
 
 from ..entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                      StreamEntry, TimestampEntry, YoutubeEntry)
@@ -218,7 +217,8 @@ class EnqueueCommands:
     @command_info("1.0.0", 1477180800, ***REMOVED***
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "3.5.9": (1497890999, "Revamped design and functions making this command more useful"),
-        "3.6.1": (1497967505, "deleting messages when leaving search")
+        "3.6.1": (1497967505, "deleting messages when leaving search"),
+        "4.2.5": (1500961103, "Adjusting to new player/playlist model and fixed addtoplaylist")
     ***REMOVED***)
     async def cmd_search(self, player, channel, author, leftover_args):
         """
@@ -315,7 +315,7 @@ class EnqueueCommands:
                     continue
 
                 playlistname = args[0]
-                add_entry = (await self.get_play_entry(player, current_result["webpage_url"], channel=channel, author=author))[0]
+                add_entry = await player.playlist.get_entry(current_result["webpage_url"], channel=channel, author=author)
 
                 if playlistname not in self.playlists.saved_playlists:
                     if len(playlistname) < 3:
