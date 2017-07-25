@@ -170,7 +170,7 @@ class GieselaServer:
     def set_token_information(token, server_id, author):
         GieselaServer._tokens[token] = (server_id, author)
         json.dump({t: (s, u.id) for t, (s, u) in GieselaServer._tokens.items()},
-                  open("data/websocket_token.json", "w+"))
+                  open("data/websocket_token.json", "w+"), indent=4)
 
     def generate_registration_token():
         while True:
