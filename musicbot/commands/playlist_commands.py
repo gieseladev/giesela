@@ -41,7 +41,8 @@ class PlaylistCommands:
         "4.1.1": (1500789035, "Using Imgur to save images"),
         "4.1.2": (1500790172, "Closing the playlist builder without saving for a newly created playlist, deletes said playlist."),
         "4.1.5": (1500812970, "Some design adjustments"),
-        "4.2.0": (1500889194, "Entry Manipulator switched to GieselaEntry instead of fake SpotifyEntries")
+        "4.2.0": (1500889194, "Entry Manipulator switched to GieselaEntry instead of fake SpotifyEntries"),
+        "4.2.4": (1500960131, "Fixed display of broken playlists")
     ***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -351,27 +352,29 @@ class PlaylistCommands:
                 em.set_thumbnail(url=infos["cover_url"])
 
             entries_to_display = entries.copy()
-            shuffle(entries_to_display)
-            entries_to_display = entries_to_display[:15]
-            vals = []
-            for entry in entries_to_display:
-                vals.append("***REMOVED******REMOVED*** `***REMOVED******REMOVED***`".format(
-                    nice_cut(entry.title, 50),
-                    to_timestamp(entry.end_seconds)
-                ))
 
-            val = "\n".join(vals)
+            if entries_to_display:
+                shuffle(entries_to_display)
+                entries_to_display = entries_to_display[:15]
+                vals = []
+                for entry in entries_to_display:
+                    vals.append("***REMOVED******REMOVED*** `***REMOVED******REMOVED***`".format(
+                        nice_cut(entry.title, 50),
+                        to_timestamp(entry.end_seconds)
+                    ))
 
-            em.add_field(
-                name="Some of the entries:",
-                value=val,
-                inline=False
-            )
+                val = "\n".join(vals)
 
-            if len(entries) > 15:
                 em.add_field(
-                    name="**... and ***REMOVED******REMOVED*** more**".format(len(entries) - 15),
-                    value="To view them, open the playlist builder")
+                    name="Some of the entries:",
+                    value=val,
+                    inline=False
+                )
+
+                if len(entries) > 15:
+                    em.add_field(
+                        name="**... and ***REMOVED******REMOVED*** more**".format(len(entries) - 15),
+                        value="To view them, open the playlist builder")
 
             em.set_footer(
                 text="To edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"".
