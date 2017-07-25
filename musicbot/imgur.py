@@ -90,6 +90,7 @@ def _upload_song_image(playlist_name, identifier, url):
     return resp.get("link")
 
 async def upload_song_image(loop, playlist_name, identifier, url):
+    identifier = identifier.replace("_", " ").replace("url", "").strip().title()
     return await loop.run_in_executor(None, _upload_song_image, playlist_name, identifier, url)
 
 # print(client.credits)

@@ -15,7 +15,7 @@ from .web_socket_server import WebAuthor
 
 
 class Entry:
-    version_code = "1.0.1"
+    version_code = "1.0.2"
     version = int(version_code.replace(".", ""))
     can_encode = (int, dict, list, str, int, float, bool)
     default_encode = (Channel, Member, Server, User)
