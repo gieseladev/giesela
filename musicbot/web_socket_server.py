@@ -194,6 +194,8 @@ class GieselaServer:
 
     def get_player_information(token=None, server_id=None):
         player = GieselaServer.get_player(token=token, server_id=server_id)
+        if not player:
+            return None
 
         if player.current_entry:
             entry = player.current_entry.to_web_dict()
@@ -230,11 +232,12 @@ class GieselaServer:
                     "player": GieselaServer.get_player_information(server_id=server_id)
                 ***REMOVED***
             ***REMOVED***
+            json_message = json.dumps(message)
             print("[WEBSOCKET] Broadcasting player update to sockets")
             for auth_client in GieselaServer.authenticated_clients:
                 # does this update concern this socket
                 if GieselaServer.get_token_information(auth_client.token)[0] == server_id:
-                    auth_client.sendMessage(json.dumps(message))
+                    auth_client.sendMessage(json_message)
         except Exception as e:
             traceback.print_exc()
 

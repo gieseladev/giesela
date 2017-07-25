@@ -1,9 +1,10 @@
-import asyncio
 import time
 import traceback
 from random import choice, shuffle
 
 from discord import Embed
+
+import asyncio
 
 from ..entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                      StreamEntry, TimestampEntry, YoutubeEntry)
@@ -755,7 +756,8 @@ class DisplayCommands:
         "3.6.2": (1498143480, "Updated design of default entry and included a link to the video"),
         "3.6.5": (1498152579, "Timestamp-entries now also include a thumbnail"),
         "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite"),
-        "4.2.0": (1500888926, "Adjustments for new Entry types")
+        "4.2.0": (1500888926, "Adjustments for new Entry types"),
+        "4.2.6": (1500964548, "Using playlist covers when possible")
     ***REMOVED***)
     async def cmd_np(self, player, channel, server, message):
         """
@@ -871,7 +873,7 @@ class DisplayCommands:
                 em.set_thumbnail(url=entry.thumbnail)
                 if "playlist" in entry.meta:
                     pl = entry.meta["playlist"]
-                    em.set_author(name=pl["name"])
+                    em.set_author(name=pl["name"].title(), icon_url=pl.get("cover", None) or Embed.Empty)
                 elif "author" in entry.meta:
                     author = entry.meta["author"]
                     em.set_author(
@@ -896,7 +898,7 @@ class DisplayCommands:
                 em.set_thumbnail(url=entry.thumbnail)
                 if "playlist" in entry.meta:
                     pl = entry.meta["playlist"]
-                    em.set_author(name=pl["name"].title())
+                    em.set_author(name=pl["name"].title(), icon_url=pl.get("cover", None) or Embed.Empty)
                 elif "author" in entry.meta:
                     author = entry.meta["author"]
                     em.set_author(
