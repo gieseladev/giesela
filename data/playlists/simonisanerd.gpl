@@ -1,7 +1,8 @@
 [
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-2g32y3Kph7g-3-nen_E-gumi_Utatan-_Bye_Bye_YESTERDAY_+_Lyrics.m4a",
 		"video_id": "2g32y3Kph7g",
 		"url": "https://www.youtube.com/watch?v=2g32y3Kph7g",
 		"title": "3-nen E-gumi Utatan - Bye Bye YESTERDAY",
@@ -17,6 +18,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Bye Bye YESTERDAY",
+		"artist": "3-nen E-gumi Utatan",
+		"artist_image": "http://i.imgur.com/HVWcQmF.jpg",
+		"cover": "http://i.imgur.com/wpy2VoA.jpg",
+		"album": "Ansatsu Kyoushitsu",
 		"spotify_data": ***REMOVED***
 			"id": "custom",
 			"name": "Bye Bye YESTERDAY",
@@ -74,8 +80,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-9ZyZ4bMMKjU-3-nen_E-gumi_Utatan-_QUESTION_+_Lyrics.webm",
 		"video_id": "9ZyZ4bMMKjU",
 		"url": "https://www.youtube.com/watch?v=9ZyZ4bMMKjU",
 		"title": "3-Nen E-Gumi Utatan - QUESTION",
@@ -91,6 +98,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "QUESTION",
+		"artist": "3-Nen E-Gumi Utatan",
+		"artist_image": "http://i.imgur.com/SMmDV0m.jpg",
+		"cover": "http://i.imgur.com/rB1inZr.jpg",
+		"album": "Ansatsu Kyoushitsu",
 		"spotify_data": ***REMOVED***
 			"id": "custom",
 			"name": "QUESTION",
@@ -148,8 +160,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-wykx9MzjL-8-AAA_Wake_up_Music_Video.webm",
 		"video_id": "wykx9MzjL-8",
 		"url": "https://www.youtube.com/watch?v=wykx9MzjL-8",
 		"title": "AAA - Wake up!",
@@ -165,6 +178,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Wake up!",
+		"artist": "AAA",
+		"artist_image": "https://i.scdn.co/image/d4e504c44999588a692edba9b9f95512a42d08ad",
+		"cover": "https://i.scdn.co/image/1464b7e94d9948d27c27f5f7ac604cb1eb00d1fc",
+		"album": "GOLD SYMPHONY",
 		"spotify_data": ***REMOVED***
 			"id": "2ZCkl705ROXLgLtXXKhBp2",
 			"name": "Wake up!",
@@ -264,8 +282,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-y-q3br6WcGc-Snow_Fairy_Full.webm",
 		"video_id": "y-q3br6WcGc",
 		"url": "https://www.youtube.com/watch?v=y-q3br6WcGc",
 		"title": "Funkist - Snow Fairy",
@@ -281,6 +300,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Snow Fairy",
+		"artist": "Funkist",
+		"artist_image": "http://i.imgur.com/Xmz23Ca.jpg",
+		"cover": "http://i.imgur.com/FV8tyVY.jpg",
+		"album": "Fairy Tail",
 		"spotify_data": ***REMOVED***
 			"id": "custom",
 			"name": "Snow Fairy",
@@ -338,8 +362,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-tm7Xf9818FM-Angel_Beats_-_Ichiban_no_Takaramono_Yui_final_ver..webm",
 		"video_id": "tm7Xf9818FM",
 		"url": "https://www.youtube.com/watch?v=tm7Xf9818FM",
 		"title": "LiSA - Ichiban no Takaramono",
@@ -355,6 +380,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Ichiban no Takaramono",
+		"artist": "LiSA",
+		"artist_image": "http://i.imgur.com/adfWmHo.jpg",
+		"cover": "http://i.imgur.com/wenQwi5.jpg",
+		"album": "Ichiban no Takaramono",
 		"spotify_data": ***REMOVED***
 			"id": "custom",
 			"name": "Ichiban no Takaramono",
@@ -412,8 +442,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-t-QSmNReDyI-Evangelion_Opening.webm",
 		"video_id": "t-QSmNReDyI",
 		"url": "https://www.youtube.com/watch?v=t-QSmNReDyI",
 		"title": "Anonymuz - Evangelion X",
@@ -434,6 +465,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Evangelion X",
+		"artist": "Anonymuz",
+		"artist_image": "https://i.scdn.co/image/f8c14b06e00cd00472816ec9843694564ba4b6f2",
+		"cover": "https://i.scdn.co/image/aeaa17f240d4a39d01b52f3fc711469690a5bcd4",
+		"album": "Evangelion X",
 		"spotify_data": ***REMOVED***
 			"id": "1xZi76zT3TxdMAorK63uTa",
 			"name": "Evangelion X",
@@ -527,20 +563,16 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
-		"type": "YoutubeEntry",
+		"version": 101,
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "ZQOBH9LhzBY",
 		"url": "https://www.youtube.com/watch?v=ZQOBH9LhzBY",
-		"title": "Ansatsu Kyoushitsu TV!  Opening 2 FULL",
+		"title": "Jiriki Hongan Revolution",
 		"duration": 278,
 		"thumbnail": "https://i.ytimg.com/vi/ZQOBH9LhzBY/maxresdefault.jpg",
 		"description": "",
 		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
@@ -548,14 +580,20 @@
 					"index": 6
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Jiriki Hongan Revolution",
+		"artist": "3-nen E-gumi Utatan",
+		"artist_image": "http://i.imgur.com/dJhLDZD.jpg",
+		"cover": "http://i.imgur.com/gAapJvb.jpg",
+		"album": "Ansatsu Kyoushitsu"
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
-		"type": "YoutubeEntry",
+		"version": 101,
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "f5d0VCHll4w",
 		"url": "https://www.youtube.com/watch?v=f5d0VCHll4w",
-		"title": "Ao no Exorcist Original Sound track 03 U & Cloud",
+		"title": "U & Cloud",
 		"duration": 243,
 		"thumbnail": "https://i.ytimg.com/vi/f5d0VCHll4w/maxresdefault.jpg",
 		"description": "",
@@ -567,14 +605,20 @@
 					"index": 7
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "U & Cloud",
+		"artist": "Hiroyuki Sawano",
+		"artist_image": "http://i.imgur.com/Cy9VGOK.jpg",
+		"cover": "http://i.imgur.com/IU8Xm1I.jpg",
+		"album": "Blue Exorcist"
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
-		"type": "YoutubeEntry",
+		"version": 101,
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "o1ZPfw52-6E",
 		"url": "https://www.youtube.com/watch?v=o1ZPfw52-6E",
-		"title": "Assassination Classroom TV Size ED. Hello, Shooting-Star - Moumoon",
+		"title": "Hello, shooting-star",
 		"duration": 91,
 		"thumbnail": "https://i.ytimg.com/vi/o1ZPfw52-6E/maxresdefault.jpg",
 		"description": "Ending Credits to Assassination Classroom.\nSong: Hello, Shooting-Star\nPerformed by: Moumoon\n\n\nCopyright Disclaimer Under Section 107 of the Copyright Act 1976,\nallowance is made for \"fair use\" for purposes such as criticism,\ncomment, news reporting, teaching, scholarship, and research.\nFair use is a use permitted by copyright statute that might\notherwise be infringing. Non-profit, educational or personal\nuse tips the balance in favor of fair use.",
@@ -586,11 +630,17 @@
 					"index": 8
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Hello, shooting-star",
+		"artist": "moumoon",
+		"artist_image": "http://i.imgur.com/boIhh3G.jpg",
+		"cover": "http://i.imgur.com/1NpmOry.jpg",
+		"album": "Assassination Classroom"
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-w3UR7nsTLlQ-Attack_on_Titan_OST_-_Vogel_im_Kafig.webm",
 		"video_id": "w3UR7nsTLlQ",
 		"url": "https://www.youtube.com/watch?v=w3UR7nsTLlQ",
 		"title": "Attack on Titan OST - Vogel im K\u00e4fig",
@@ -608,8 +658,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-yD0rG7prFgU-Attack_on_Titan_-_theDOGS_with_Lyrics.webm",
 		"video_id": "yD0rG7prFgU",
 		"url": "https://www.youtube.com/watch?v=yD0rG7prFgU",
 		"title": "Attack on Titan - 'theDOGS' with Lyrics",
@@ -627,8 +678,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-MI_wWlz2Rck-Aya_Hirano_-_Lost_My_Music_Full_Version.webm",
 		"video_id": "MI_wWlz2Rck",
 		"url": "https://www.youtube.com/watch?v=MI_wWlz2Rck",
 		"title": "Aya Hirano - Lost My Music (Full Version)",
@@ -651,8 +703,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-2Z5P3pMmXYQ-BoA_MASAYUME_CHASING_full_song_eng_sub.webm",
 		"video_id": "2Z5P3pMmXYQ",
 		"url": "https://www.youtube.com/watch?v=2Z5P3pMmXYQ",
 		"title": "BoA \u300cMASAYUME CHASING\u300dfull song eng sub",
@@ -675,8 +728,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Od9NQbyNpwE-Boku_Dake_Ga_Inai_Machi_Ending.webm",
 		"video_id": "Od9NQbyNpwE",
 		"url": "https://www.youtube.com/watch?v=Od9NQbyNpwE",
 		"title": "Boku Dake Ga Inai Machi Ending",
@@ -699,8 +753,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Y9G20wV0KHE-Boku_Dake_ga_Inai_Machi_OP_Opening_-Re.webm",
 		"video_id": "Y9G20wV0KHE",
 		"url": "https://www.youtube.com/watch?v=Y9G20wV0KHE",
 		"title": "Boku Dake ga Inai Machi OP / Opening :Re",
@@ -718,8 +773,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-wFGHIaqPbNM-Boku_no_Hero_Academia_OP_FULL.webm",
 		"video_id": "wFGHIaqPbNM",
 		"url": "https://www.youtube.com/watch?v=wFGHIaqPbNM",
 		"title": "Boku no Hero Academia \u50d5\u306e\u30d2\u30fc\u30ed\u30fc\u30a2\u30ab\u30c7\u30df\u30a2 OP FULL",
@@ -737,8 +793,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-OQUYzycg8dM-CLANNAD.webm",
 		"video_id": "OQUYzycg8dM",
 		"url": "https://www.youtube.com/watch?v=OQUYzycg8dM",
 		"title": "CLANNAD\u3000\u3060\u3093\u3054\u5927\u5bb6\u65cf",
@@ -761,8 +818,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-E5ayd_cBMl8-Sword_Art_Online_Ost-_Luminous_Sword.webm",
 		"video_id": "E5ayd_cBMl8",
 		"url": "https://www.youtube.com/watch?v=E5ayd_cBMl8",
 		"title": "Cat Trumpet - Luminous Sword",
@@ -778,6 +836,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Luminous Sword",
+		"artist": "Cat Trumpet",
+		"artist_image": "https://i.scdn.co/image/35ecbada861a9f476e4803bf478ffc844c0818c1",
+		"cover": "https://i.scdn.co/image/ae97e987167e6f3363bbfcbe628129610fae5066",
+		"album": "Sword Art Online Piano Collection",
 		"spotify_data": ***REMOVED***
 			"id": "4y9Or5TBI8wuZqWL0DQpA2",
 			"name": "Luminous Sword",
@@ -871,20 +934,16 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
-		"type": "YoutubeEntry",
+		"version": 101,
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "-1AT7kHMHwo",
 		"url": "https://www.youtube.com/watch?v=-1AT7kHMHwo",
-		"title": "Charlotte OP Bravely You full \u6b4c\u8a5e\u4ed8\u304d",
+		"title": "Bravely You",
 		"duration": 329,
 		"thumbnail": "https://i.ytimg.com/vi/-1AT7kHMHwo/maxresdefault.jpg",
 		"description": "\u30a2\u30cb\u30e1\u300cCharlotte\uff08\u30b7\u30e3\u30fc\u30ed\u30c3\u30c8\uff09\u300d\u306eOP\u3067\u3059\u3002\nCharlotte\u304c\u50d5\u306b\u3068\u3063\u3066\u306f\u4eca\u671f\u3067\u4e00\u756a\u9762\u767d\u3044\u3067\u3059\u3002\n\n\u6b4c\u8a5e\u306e\u9593\u9055\u3044\u304c\u3042\u308a\u307e\u3057\u305f\u3002\n4:12\u306e\u201d\u3044\u3084\u306b\u306a\u3063\u3066\u304f\u308b\u201d\u306f\u3044\u3084\u306b\u306a\u3063\u3066\u3044\u308b\u3067\u3057\u305f\u3002\n\u7533\u3057\u8a33\u3042\u308a\u307e\u305b\u3093\u3002\n\u66f2:Bravely You\n\u6b4c:Lia\n\n\u53ea\u4eca\u3001\u3044\u3089\u306a\u3044PC\u30fb\u3044\u3089\u306a\u3044PC\u95a2\u9023\u306e\u7269\u3092\u63a2\u3057\u3066\u3044\u307e\u3059\u3002\n\u3082\u3057\u9802\u3051\u308b\u306a\u3089\u4e0b\u8a18\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9\u307e\u3067\u304a\u9858\u3044\u3057\u307e\u3059\u3002\n\namidanyoraiasyura@gmail.com",
 		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
@@ -892,23 +951,24 @@
 					"index": 18
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Bravely You",
+		"artist": "Lia",
+		"artist_image": "http://i.imgur.com/qZBZ0Aj.jpg",
+		"cover": "http://i.imgur.com/S2AiCTq.png",
+		"album": "Charlotte"
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
-		"type": "YoutubeEntry",
+		"version": 101,
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "1MsuXjTlCGE",
 		"url": "https://www.youtube.com/watch?v=1MsuXjTlCGE",
-		"title": "Charlotte Ending - \u707c\u3051\u843d\u3061\u306a\u3044\u7ffc",
+		"title": "Yake Ochinai Tsubasa",
 		"duration": 316,
 		"thumbnail": "https://i.ytimg.com/vi/1MsuXjTlCGE/maxresdefault.jpg",
 		"description": "",
 		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
@@ -916,11 +976,17 @@
 					"index": 19
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Yake Ochinai Tsubasa",
+		"artist": "Aoi Tada",
+		"artist_image": "http://i.imgur.com/I3up3Up.jpg",
+		"cover": "http://i.imgur.com/fw8F3Pi.jpg",
+		"album": "Charlotte"
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-XQfuTqry6jc-Fairy_tail_opening_14_FULL_~Yakusoku_no_Hi_e~.webm",
 		"video_id": "XQfuTqry6jc",
 		"url": "https://www.youtube.com/watch?v=XQfuTqry6jc",
 		"title": "Chihiro Yonekura - Fairy Tail ~Yakusoku No Hi~",
@@ -936,6 +1002,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Fairy Tail ~Yakusoku No Hi~",
+		"artist": "Chihiro Yonekura",
+		"artist_image": "https://i.scdn.co/image/b6574782c2dab72ecb6d36063084466932b994cc",
+		"cover": "https://i.scdn.co/image/f31169ee90b3fbf1137107137e65ebcb84736013",
+		"album": "Tv Anime \"Fairy Tail\" Op & Ed Theme Songs Vol. 3",
 		"spotify_data": ***REMOVED***
 			"id": "6hUQcGznld9GAqA59o5guX",
 			"name": "Fairy Tail ~Yakusoku No Hi~",
@@ -1009,8 +1080,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-3dYjJ3kOGoY-Code_Geass_Opening_1_HD.webm",
 		"video_id": "3dYjJ3kOGoY",
 		"url": "https://www.youtube.com/watch?v=3dYjJ3kOGoY",
 		"title": "Code Geass Opening 1 HD",
@@ -1028,8 +1100,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-HJ7aVGjym9A-Code_Geass_-_Innocent_Days.webm",
 		"video_id": "HJ7aVGjym9A",
 		"url": "https://www.youtube.com/watch?v=HJ7aVGjym9A",
 		"title": "Code Geass - Innocent Days",
@@ -1052,8 +1125,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-scqSanbCV-Q-Code_Geass_-_Madder_Sky.webm",
 		"video_id": "scqSanbCV-Q",
 		"url": "https://www.youtube.com/watch?v=scqSanbCV-Q",
 		"title": "Code Geass - Madder Sky",
@@ -1071,8 +1145,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-osKkMKolWQ8-Code_Geass_R2_textless_Opening_2_Worlds_End_RAW_HD.webm",
 		"video_id": "osKkMKolWQ8",
 		"url": "https://www.youtube.com/watch?v=osKkMKolWQ8",
 		"title": "Code Geass R2 textless Opening 2 Worlds End (RAW) HD",
@@ -1090,8 +1165,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-PGoHzoZ2OI0-Durarara_Opening_2.webm",
 		"video_id": "PGoHzoZ2OI0",
 		"url": "https://www.youtube.com/watch?v=PGoHzoZ2OI0",
 		"title": "Durarara!! Opening 2",
@@ -1114,8 +1190,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-mTCESSzPZSw-Eir_Aoi_-_Ignite.webm",
 		"video_id": "mTCESSzPZSw",
 		"url": "https://www.youtube.com/watch?v=mTCESSzPZSw",
 		"title": "Eir Aoi - Ignite",
@@ -1138,8 +1215,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-UVc48sVzE2E-Elfen_Lied_-_Be_Your_Girl.webm",
 		"video_id": "UVc48sVzE2E",
 		"url": "https://www.youtube.com/watch?v=UVc48sVzE2E",
 		"title": "Elfen Lied - Be Your Girl",
@@ -1162,8 +1240,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-e7AUrshQ-TM-Emotional_OST_of_the_Day_No._63.5_-_Code_Geass_-_Stories.webm",
 		"video_id": "e7AUrshQ-TM",
 		"url": "https://www.youtube.com/watch?v=e7AUrshQ-TM",
 		"title": "Emotional OST of the Day No. 63.5: Code Geass - ''Stories''",
@@ -1186,8 +1265,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-K3u5h9cPTBw-Ergo_Proxy_opening_Full.webm",
 		"video_id": "K3u5h9cPTBw",
 		"url": "https://www.youtube.com/watch?v=K3u5h9cPTBw",
 		"title": "Ergo Proxy opening [Full]",
@@ -1205,8 +1285,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-RZufKBrx0hY-Fairy_Tail_-_Absolute_Zero_SILVER_New_2016_Ost.m4a",
 		"video_id": "RZufKBrx0hY",
 		"url": "https://www.youtube.com/watch?v=RZufKBrx0hY",
 		"title": "Fairy Tail - Absolute Zero SILVER [New 2016 Ost]",
@@ -1224,8 +1305,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-_SPLrkQTGPk-Fairy_Tail_-_Fairy_Tail_s_is_Born_New_2016_Ost.m4a",
 		"video_id": "_SPLrkQTGPk",
 		"url": "https://www.youtube.com/watch?v=_SPLrkQTGPk",
 		"title": "Fairy Tail - Fairy Tail's is Born [New 2016 Ost]",
@@ -1243,8 +1325,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-_5fiqzCyCxo-Fairy_Tail_-_Fairy_s_Challenge_New_2016_Ost.m4a",
 		"video_id": "_5fiqzCyCxo",
 		"url": "https://www.youtube.com/watch?v=_5fiqzCyCxo",
 		"title": "Fairy Tail - Fairy's Challenge [New 2016 Ost]",
@@ -1262,8 +1345,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-RqxmFkmEoZQ-Fairy_Tail_-_Kizuna.webm",
 		"video_id": "RqxmFkmEoZQ",
 		"url": "https://www.youtube.com/watch?v=RqxmFkmEoZQ",
 		"title": "Fairy Tail - Kizuna",
@@ -1281,8 +1365,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Whgnftw2T-I-Fairy_Tail_-_Mavis.webm",
 		"video_id": "Whgnftw2T-I",
 		"url": "https://www.youtube.com/watch?v=Whgnftw2T-I",
 		"title": "Fairy Tail - Mavis",
@@ -1300,8 +1385,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-0yURnPCLYFk-Fairy_Tail_-_Seigi_No_Chikara.webm",
 		"video_id": "0yURnPCLYFk",
 		"url": "https://www.youtube.com/watch?v=0yURnPCLYFk",
 		"title": "Fairy Tail - Seigi No Chikara",
@@ -1319,8 +1405,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-watQgRTHDhs-Fairy_Tail_2014_Opening_16_Strike_Back_Lyrics_+english_lyrics.webm",
 		"video_id": "watQgRTHDhs",
 		"url": "https://www.youtube.com/watch?v=watQgRTHDhs",
 		"title": "Fairy Tail 2014 Opening 16 Strike Back Lyrics (+english lyrics)",
@@ -1338,8 +1425,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-ZKCCs9DNEJs-Fate_stay_night_-_Kishi_Ou_no_Hokori_-_OST.webm",
 		"video_id": "ZKCCs9DNEJs",
 		"url": "https://www.youtube.com/watch?v=ZKCCs9DNEJs",
 		"title": "Fate/stay night - Kishi Ou no Hokori [\u30d5\u30a7\u30a4\u30c8/\u30b9\u30c6\u30a4\u30ca\u30a4\u30c8 - OST]",
@@ -1357,8 +1445,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-9vx69Pe7Ncs-Fullmetal_Alchemist_Brotherhood_Opening_4_Chemistry_-_Period.webm",
 		"video_id": "9vx69Pe7Ncs",
 		"url": "https://www.youtube.com/watch?v=9vx69Pe7Ncs",
 		"title": "Fullmetal Alchemist Brotherhood Opening 4 (Chemistry - Period)",
@@ -1376,8 +1465,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-2uq34TeWEdQ-Fullmetal_Alchemist_Brotherhood_Opening_1-Again_creditless.webm",
 		"video_id": "2uq34TeWEdQ",
 		"url": "https://www.youtube.com/watch?v=2uq34TeWEdQ",
 		"title": "Fullmetal Alchemist Brotherhood Opening 1-Again creditless",
@@ -1395,8 +1485,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-xUOZjeDbRbM-Fuwa_Fuwa_Time_Mio_version_YouTube.webm",
 		"video_id": "xUOZjeDbRbM",
 		"url": "https://www.youtube.com/watch?v=xUOZjeDbRbM",
 		"title": "Fuwa Fuwa Time Mio version)  YouTube",
@@ -1419,8 +1510,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-AK9DlbzxCVk-Ghost_in_the_Shell_-_Stand_Alone_Complex_2_-_Ending.m4a",
 		"video_id": "AK9DlbzxCVk",
 		"url": "https://www.youtube.com/watch?v=AK9DlbzxCVk",
 		"title": "Ghost in the Shell - Stand Alone Complex 2 - Ending",
@@ -1443,8 +1535,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-WWB01IuMvzA-God_knows..._The_Melancholy_of_Haruhi_Suzumiya_Kadokawa_MAD.webm",
 		"video_id": "WWB01IuMvzA",
 		"url": "https://www.youtube.com/watch?v=WWB01IuMvzA",
 		"title": "God knows... ''The Melancholy of Haruhi Suzumiya'' \u3010\u6dbc\u5bae\u30cf\u30eb\u30d2\u306e\u6182\u9b31\u3011\u3000\u3010Kadokawa\u516c\u8a8dMAD\u3011",
@@ -1462,8 +1555,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-PxZov8-DBHo-Greatest_Battle_Music_OF_All_Times_-_Rule_The_Battlefield.webm",
 		"video_id": "PxZov8-DBHo",
 		"url": "https://www.youtube.com/watch?v=PxZov8-DBHo",
 		"title": "Greatest Battle Music OF All Times: Rule The Battlefield",
@@ -1481,8 +1575,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Yx4uGOADIwk-Guilty_Crown_-_Ending_1_full_-_Departures_Blessing.webm",
 		"video_id": "Yx4uGOADIwk",
 		"url": "https://www.youtube.com/watch?v=Yx4uGOADIwk",
 		"title": "Guilty Crown - Ending 1 (full) - Departures Blessing",
@@ -1500,8 +1595,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-0hbz7_ls4d0-Guilty_Crown_rOn_krone.webm",
 		"video_id": "0hbz7_ls4d0",
 		"url": "https://www.youtube.com/watch?v=0hbz7_ls4d0",
 		"title": "[Guilty Crown] \u03barOn\u0451 (krone)",
@@ -1519,8 +1615,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-BFDTwfmLiaw-HERO_-_Tenohira_Fairy_Tail_OP_12_HD.webm",
 		"video_id": "BFDTwfmLiaw",
 		"url": "https://www.youtube.com/watch?v=BFDTwfmLiaw",
 		"title": "HERO - Tenohira [Fairy Tail OP 12] HD",
@@ -1538,8 +1635,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Y5HYCHWcUFI-Kono_te_nobashite.webm",
 		"video_id": "Y5HYCHWcUFI",
 		"url": "https://www.youtube.com/watch?v=Y5HYCHWcUFI",
 		"title": "HI-FI CAMP - Kono Te Nobashite",
@@ -1555,6 +1653,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Kono Te Nobashite",
+		"artist": "HI-FI CAMP",
+		"artist_image": "https://i.scdn.co/image/d663d76d569bc13de990ad6dbc679ef686996a82",
+		"cover": "https://i.scdn.co/image/ec6f07c5c3204a6f151d318b0e167448249b5213",
+		"album": "Tv Anime \"Fairy Tail\" Op & Ed Theme Songs Vol. 2 (Standard Edition)",
 		"spotify_data": ***REMOVED***
 			"id": "5o7hgfy3KFoJhma6LUwyov",
 			"name": "Kono Te Nobashite",
@@ -1628,8 +1731,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-7Ww0IJgUTDw-10._Blood_History_-_Accel_World_OST.webm",
 		"video_id": "7Ww0IJgUTDw",
 		"url": "https://www.youtube.com/watch?v=7Ww0IJgUTDw",
 		"title": "Hiroyuki Oshima - Blood History",
@@ -1645,6 +1749,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Blood History",
+		"artist": "Hiroyuki Oshima",
+		"artist_image": "http://i.imgur.com/DQqDLse.jpg",
+		"cover": "http://i.imgur.com/JFlbk99.jpg",
+		"album": "Accel World OST",
 		"spotify_data": ***REMOVED***
 			"id": "custom",
 			"name": "Blood History",
@@ -1702,8 +1811,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-trUtAgEFDOE-Hiroyuki_Sawano_-_Vogel_im_Kafig.webm",
 		"video_id": "trUtAgEFDOE",
 		"url": "https://www.youtube.com/watch?v=trUtAgEFDOE",
 		"title": "Hiroyuki Sawano & Cyua - Vogel Im Kafig",
@@ -1719,6 +1829,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Vogel Im Kafig",
+		"artist": "Hiroyuki Sawano & Cyua",
+		"artist_image": "https://i.scdn.co/image/e4a4cf38f9c3aeda3c2fa65cde0a81222e492c41",
+		"cover": "https://i.scdn.co/image/3f3abb6325d6b7acefe4beca1ff8110625398813",
+		"album": "Attack on Titan (Original Soundtrack)",
 		"spotify_data": ***REMOVED***
 			"id": "7AEcphXUR52QGYxdZ8TDVI",
 			"name": "Vogel Im Kafig",
@@ -1843,8 +1958,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-eFah8TCWOro-Attack_on_Titan_-_The_Reluctant_Heroes.webm",
 		"video_id": "eFah8TCWOro",
 		"url": "https://www.youtube.com/watch?v=eFah8TCWOro",
 		"title": "Hiroyuki Sawano & MPI - The Reluctant Heroes",
@@ -1860,6 +1976,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "The Reluctant Heroes",
+		"artist": "Hiroyuki Sawano & MPI",
+		"artist_image": "https://i.scdn.co/image/e4a4cf38f9c3aeda3c2fa65cde0a81222e492c41",
+		"cover": "https://i.scdn.co/image/3f3abb6325d6b7acefe4beca1ff8110625398813",
+		"album": "Attack on Titan (Original Soundtrack)",
 		"spotify_data": ***REMOVED***
 			"id": "6zSXcvXQ8T74fXm72OpSOb",
 			"name": "The Reluctant Heroes",
@@ -1966,8 +2087,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-WszLpgQmxVc-K-on_2_Temp._segundo_ending_Ho-Kago_Tea_Time_NO_Thank_You_Full_+_MP3_Full_HD..webm",
 		"video_id": "WszLpgQmxVc",
 		"url": "https://www.youtube.com/watch?v=WszLpgQmxVc",
 		"title": "[K-on!! 2\u00ba Temp.  segundo ending ] Ho-Kago Tea Time\u300cNO, Thank You!\u300d Full + MP3 Full HD.",
@@ -1985,8 +2107,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-XHViAiVuDsA-Code_Geass_-_Continued_Story.webm",
 		"video_id": "XHViAiVuDsA",
 		"url": "https://www.youtube.com/watch?v=XHViAiVuDsA",
 		"title": "Kenzie Smith Piano - Continued Story (From \"Code Geass\")",
@@ -2007,6 +2130,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Continued Story (From \"Code Geass\")",
+		"artist": "Kenzie Smith Piano",
+		"artist_image": "https://i.scdn.co/image/ea6b486d2f9a3c9fcf89f69684b0f4c4ca343bdf",
+		"cover": "https://i.scdn.co/image/47de7bbc6afe5f510dcd3a45b3ba187a2832b81b",
+		"album": "Anime Music Collection Piano Solo, Vol. 5",
 		"spotify_data": ***REMOVED***
 			"id": "4W4Fm237gWnw6MrRnwp4Oq",
 			"name": "Continued Story (From \"Code Geass\")",
@@ -2104,8 +2232,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-FRivqBxbHRs-Kill_la_Kill_-_Ragyo_Kiryuin_Theme_Blumenkranz.webm",
 		"video_id": "FRivqBxbHRs",
 		"url": "https://www.youtube.com/watch?v=FRivqBxbHRs",
 		"title": "Kill la Kill - Ragyo Kiryuin Theme [Blumenkranz]",
@@ -2123,8 +2252,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-51LMOJu9lwc-Knights_of_sidonia_intro_opening.webm",
 		"video_id": "51LMOJu9lwc",
 		"url": "https://www.youtube.com/watch?v=51LMOJu9lwc",
 		"title": "Knights of sidonia intro/opening",
@@ -2142,8 +2272,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-E8XaV1yjabk-One_Punch_Man_OST_-_Main_Theme.webm",
 		"video_id": "E8XaV1yjabk",
 		"url": "https://www.youtube.com/watch?v=E8XaV1yjabk",
 		"title": "Lars Sorensen - One Punch Man Main Theme",
@@ -2159,6 +2290,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "One Punch Man Main Theme",
+		"artist": "Lars Sorensen",
+		"artist_image": "https://i.scdn.co/image/10712ed845d53c22c3f8c7d8df26bcfeea3ec54f",
+		"cover": "https://i.scdn.co/image/25f030e56d6218f5c2afc7af517453afde73581d",
+		"album": "Album the Sixth",
 		"spotify_data": ***REMOVED***
 			"id": "1AwvYhEBQNH6sY7L1PqU8U",
 			"name": "One Punch Man Main Theme",
@@ -2252,8 +2388,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-IZ_ls4oi6m8-Liar_Mask-_Rika_Mayama_Akame_ga_kill_opening_2.webm",
 		"video_id": "IZ_ls4oi6m8",
 		"url": "https://www.youtube.com/watch?v=IZ_ls4oi6m8",
 		"title": "\"Liar Mask\"- Rika Mayama (Akame ga kill! opening 2)",
@@ -2271,8 +2408,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Pn7dCgtwX2c-Linked_Horizon_-_Guren_No_Yumiya_Attack_On_Titan_FULL_Opening_Theme.webm",
 		"video_id": "Pn7dCgtwX2c",
 		"url": "https://www.youtube.com/watch?v=Pn7dCgtwX2c",
 		"title": "Linked Horizon - Guren No Yumiya",
@@ -2288,6 +2426,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Guren No Yumiya",
+		"artist": "Linked Horizon",
+		"artist_image": "https://i.scdn.co/image/f17a9a1c7eeb6e0e41adf13b62ecc3e9cebbc6dc",
+		"cover": "https://i.scdn.co/image/63d65c2991b4f30a9b7febae2c1fb2eb8db64c94",
+		"album": "Jiyuu E No Shingeki",
 		"spotify_data": ***REMOVED***
 			"id": "0b7b3OR4cKHo08rdpLHofM",
 			"name": "Guren No Yumiya",
@@ -2383,8 +2526,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-EO8EadQNIXU-Jiyuu_No_Tsubasa_-_Linked_Horizon.webm",
 		"video_id": "EO8EadQNIXU",
 		"url": "https://www.youtube.com/watch?v=EO8EadQNIXU",
 		"title": "Linked Horizon - Jiyuu No Tsubasa",
@@ -2400,6 +2544,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Jiyuu No Tsubasa",
+		"artist": "Linked Horizon",
+		"artist_image": "https://i.scdn.co/image/f17a9a1c7eeb6e0e41adf13b62ecc3e9cebbc6dc",
+		"cover": "https://i.scdn.co/image/63d65c2991b4f30a9b7febae2c1fb2eb8db64c94",
+		"album": "Jiyuu E No Shingeki",
 		"spotify_data": ***REMOVED***
 			"id": "7nV7Ly23BxipT6msqg1Dqg",
 			"name": "Jiyuu No Tsubasa",
@@ -2495,8 +2644,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-CpDyF4pkbAs-Luna_Haruna_-_Overfly.webm",
 		"video_id": "CpDyF4pkbAs",
 		"url": "https://www.youtube.com/watch?v=CpDyF4pkbAs",
 		"title": "Luna Haruna - Overfly",
@@ -2514,8 +2664,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-ny6vbAEYGCQ-MIDI_II_Startear_Full_Sword_Art_Online_II_Startear.webm",
 		"video_id": "ny6vbAEYGCQ",
 		"url": "https://www.youtube.com/watch?v=ny6vbAEYGCQ",
 		"title": "\u3010MIDI\u3011\u30bd\u30fc\u30c9\u30a2\u30fc\u30c8\u30fb\u30aa\u30f3\u30e9\u30a4\u30f3II \u30a8\u30f3\u30c7\u30a3\u30f3\u30b0\uff5eStartear (Full) Sword Art Online II\uff5eStartear",
@@ -2538,8 +2689,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-eW6sEkTGbUc-Man_with_a_Mission_ft._Takuma_-_Database_Log_Horizon_OP.webm",
 		"video_id": "eW6sEkTGbUc",
 		"url": "https://www.youtube.com/watch?v=eW6sEkTGbUc",
 		"title": "Man with a Mission ft. Takuma - Database (Log Horizon OP)",
@@ -2557,8 +2709,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-KtYGJtSiTio-Bouken_Desho_Desho_Lyrics.webm",
 		"video_id": "KtYGJtSiTio",
 		"url": "https://www.youtube.com/watch?v=KtYGJtSiTio",
 		"title": "Minamotoya - Bouken Desho Desho? - From \u201cThe Melancholy Of Haruhi Suzumiya\u201d",
@@ -2579,6 +2732,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Bouken Desho Desho? - From \u201cThe Melancholy Of Haruhi Suzumiya\u201d",
+		"artist": "Minamotoya",
+		"artist_image": "https://i.scdn.co/image/46605201bd3a57d3667b970fbbe45eb5db736bb3",
+		"cover": "https://i.scdn.co/image/ec41d407e97df40447d69c3930a18c9aa19d4805",
+		"album": "Exit Trance Presents Speed Anime Trance Best 5",
 		"spotify_data": ***REMOVED***
 			"id": "76vNwmar9JQZ7dVTdkxqHw",
 			"name": "Bouken Desho Desho? - From \u201cThe Melancholy Of Haruhi Suzumiya\u201d",
@@ -2654,8 +2812,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-t66VKF-cyhk-Mirai_Nikki_Opening_2_Full_Dead_END.webm",
 		"video_id": "t66VKF-cyhk",
 		"url": "https://www.youtube.com/watch?v=t66VKF-cyhk",
 		"title": "Mirai Nikki Opening 2 Full \u300cDead END\u300d",
@@ -2673,8 +2832,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-7Cq4l2KTWIw-Mondaiji-tachi_ga_Isekai_Kara_Kuru_Sou_Desu_yo_OP_Full_Black_+_White.webm",
 		"video_id": "7Cq4l2KTWIw",
 		"url": "https://www.youtube.com/watch?v=7Cq4l2KTWIw",
 		"title": "Mondaiji-tachi ga Isekai Kara Kuru Sou Desu yo OP Full Black + White",
@@ -2692,8 +2852,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-82NzmREdkpg-Mosaic_Kakera_-_SunSet_Swish.webm",
 		"video_id": "82NzmREdkpg",
 		"url": "https://www.youtube.com/watch?v=82NzmREdkpg",
 		"title": "Mosaic Kakera - SunSet Swish",
@@ -2716,8 +2877,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-zTm666EKYRs-moumoon_Hello_shooting-star_Music_Video.webm",
 		"video_id": "zTm666EKYRs",
 		"url": "https://www.youtube.com/watch?v=zTm666EKYRs",
 		"title": "moumoon / Hello,shooting-star Music Video (\u6b4c\u8a5e\u3042\u308a)/\u6697\u6bba\u6559\u5ba4\u30a8\u30f3\u30c7\u30a3\u30f3\u30b0\u30c6\u30fc\u30de",
@@ -2735,8 +2897,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-HyyXq3GDJq0-My_Soul_Your_Beats_Yui_Ver_Full.webm",
 		"video_id": "HyyXq3GDJq0",
 		"url": "https://www.youtube.com/watch?v=HyyXq3GDJq0",
 		"title": "My Soul Your Beats (Yui Ver)  Full \u300c\u9ad8\u97f3\u8cea\u300d",
@@ -2754,8 +2917,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-vhFXxvebiMY-Attack_On_Titan_Opening_3_FULL_-_Shinzou_Wo_Sasageyo.webm",
 		"video_id": "vhFXxvebiMY",
 		"url": "https://www.youtube.com/watch?v=vhFXxvebiMY",
 		"title": "NateWantsToBattle - Shinzou Wo Sasageyo (Attack on Titan)",
@@ -2771,6 +2935,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Shinzou Wo Sasageyo (Attack on Titan)",
+		"artist": "NateWantsToBattle",
+		"artist_image": "https://i.scdn.co/image/12486aaa213b7f7779bd9b701e513a4fb8d88649",
+		"cover": "https://i.scdn.co/image/62ce5fe957313f8eac09478c6088f35e562f3ef4",
+		"album": "Shinzou Wo Sasageyo (Attack on Titan)",
 		"spotify_data": ***REMOVED***
 			"id": "642Zd1NC6fLzbLhjQ8ykcZ",
 			"name": "Shinzou Wo Sasageyo (Attack on Titan)",
@@ -2872,8 +3041,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-09r-78dfrvc-Mirai_Nikki_op_1_full.webm",
 		"video_id": "09r-78dfrvc",
 		"url": "https://www.youtube.com/watch?v=09r-78dfrvc",
 		"title": "Neotokio3 - Mirai Nikki - Yuno Gasai (Yandere Self-Help Program)",
@@ -2889,6 +3059,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Mirai Nikki - Yuno Gasai (Yandere Self-Help Program)",
+		"artist": "Neotokio3",
+		"artist_image": "https://i.scdn.co/image/85db3b501cf74f9fb4a24ba967dff93d2fd55581",
+		"cover": "https://i.scdn.co/image/f5951216442d1d183ec682b755194b64e6d7173b",
+		"album": "Mirai Nikki - Yuno Gasai (Yandere Self-Help Program) - Single",
 		"spotify_data": ***REMOVED***
 			"id": "5wJVxp9CmKwIPGyb6s3ktC",
 			"name": "Mirai Nikki - Yuno Gasai (Yandere Self-Help Program)",
@@ -2984,8 +3159,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-2eGazzxcp3I-Nevereverland_Nano.webm",
 		"video_id": "2eGazzxcp3I",
 		"url": "https://www.youtube.com/watch?v=2eGazzxcp3I",
 		"title": "Nevereverland / Nano",
@@ -3008,8 +3184,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Ig9U4I9X2g0-No_pain_No_game_Nano_Btooom_OP.webm",
 		"video_id": "Ig9U4I9X2g0",
 		"url": "https://www.youtube.com/watch?v=Ig9U4I9X2g0",
 		"title": "No pain, No game / Nano (Btooom! OP)",
@@ -3027,8 +3204,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-ZyyuV-gkavg-Noragami_Opening_-_Hello_Sleepwalkers_HD_+_Lyrics.webm",
 		"video_id": "ZyyuV-gkavg",
 		"url": "https://www.youtube.com/watch?v=ZyyuV-gkavg",
 		"title": "Noragami Opening - Hello Sleepwalkers (HD + Lyrics)",
@@ -3051,8 +3229,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Tw-mnRIkkrM-Noragami_Opening_Full_Goya_no_Machiawase.webm",
 		"video_id": "Tw-mnRIkkrM",
 		"url": "https://www.youtube.com/watch?v=Tw-mnRIkkrM",
 		"title": "Noragami Opening Full [Goya no Machiawase]",
@@ -3075,8 +3254,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-3mu-2ENtV2s-Nurarihyon_no_Mago_Opening_2_FULL.webm",
 		"video_id": "3mu-2ENtV2s",
 		"url": "https://www.youtube.com/watch?v=3mu-2ENtV2s",
 		"title": "Nurarihyon no Mago Opening 2 FULL",
@@ -3099,8 +3279,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-6YZlFdTIdzM-ONE_OK_ROCK_-_Clock_Strikes_Official_Music_Video.webm",
 		"video_id": "6YZlFdTIdzM",
 		"url": "https://www.youtube.com/watch?v=6YZlFdTIdzM",
 		"title": "ONE OK ROCK - Clock Strikes",
@@ -3121,6 +3302,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Clock Strikes",
+		"artist": "ONE OK ROCK",
+		"artist_image": "https://i.scdn.co/image/fd60c665014141911a0a789d89ba13a81de007c5",
+		"cover": "https://i.scdn.co/image/b10a614ced95aff8bf68767ced8bf6180eb663df",
+		"album": "JINSEI KAKETE BOKU WA",
 		"spotify_data": ***REMOVED***
 			"id": "30CenAPBR2VmH91r4Um32b",
 			"name": "Clock Strikes",
@@ -3222,8 +3408,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-4J7K3yacig4-One_Piece_OST_-_The_Very_Very_Very_Strongest_extended.m4a",
 		"video_id": "4J7K3yacig4",
 		"url": "https://www.youtube.com/watch?v=4J7K3yacig4",
 		"title": "One Piece OST - The Very Very Very Strongest [extended]",
@@ -3246,8 +3433,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-1Hl_lDEP9Tg-One_Piece_OP_5_Kokoro_no_Chizu_w_Lyrics.webm",
 		"video_id": "1Hl_lDEP9Tg",
 		"url": "https://www.youtube.com/watch?v=1Hl_lDEP9Tg",
 		"title": "One Piece OP 5 Kokoro no Chizu w/ Lyrics",
@@ -3270,8 +3458,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-655j9WXi4DA-One_of_the_top_Ost_-_Fate_Zero_-_Tragedy_And_Fate.webm",
 		"video_id": "655j9WXi4DA",
 		"url": "https://www.youtube.com/watch?v=655j9WXi4DA",
 		"title": "One of the top Ost: Fate Zero - Tragedy And Fate",
@@ -3289,8 +3478,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-KZBgRDMyXzw-Oratorio_The_World_God_Only_Knows_-_God_only_knows_Full_Version_w_Lyrics.webm",
 		"video_id": "KZBgRDMyXzw",
 		"url": "https://www.youtube.com/watch?v=KZBgRDMyXzw",
 		"title": "Oratorio The World God Only Knows - God only knows (Full Version) w/ Lyrics",
@@ -3313,8 +3503,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-nJXRDvwJN_Y-Ouran_Highschool_Host_Club_Begininng_Theme_Song_English.m4a",
 		"video_id": "nJXRDvwJN_Y",
 		"url": "https://www.youtube.com/watch?v=nJXRDvwJN_Y",
 		"title": "Ouran Highschool Host Club Begininng Theme Song English",
@@ -3337,8 +3528,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-NJHpoHD7og0-Overlord_Opening_Full_Clattanoia.webm",
 		"video_id": "NJHpoHD7og0",
 		"url": "https://www.youtube.com/watch?v=NJHpoHD7og0",
 		"title": "PelleK - Clattanoia (Overlord Opening)",
@@ -3354,6 +3546,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Clattanoia (Overlord Opening)",
+		"artist": "PelleK",
+		"artist_image": "https://i.scdn.co/image/5f3d1348f484fc8182b1263241dfa876595b81fb",
+		"cover": "https://i.scdn.co/image/1813040da4a906700c76c35de6f530d2e9a7e509",
+		"album": "Covers Vol. 18",
 		"spotify_data": ***REMOVED***
 			"id": "3DJmT0vYRBli6nQtscTLSE",
 			"name": "Clattanoia (Overlord Opening)",
@@ -3449,8 +3646,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-witeODgX5OM-One_Piece_Opening_16_-_Hands_Up_~_Full_HD_~_1080p.webm",
 		"video_id": "witeODgX5OM",
 		"url": "https://www.youtube.com/watch?v=witeODgX5OM",
 		"title": "PelleK - Hands Up! (One Piece Opening 16)",
@@ -3466,6 +3664,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Hands Up! (One Piece Opening 16)",
+		"artist": "PelleK",
+		"artist_image": "https://i.scdn.co/image/8a49877f39c608a3eb4040175982f2a45d40387f",
+		"cover": "https://i.scdn.co/image/fddd36cd4d3cfd9016bb56ab05a6403d93b3fb37",
+		"album": "PelleK's One Piece Medley",
 		"spotify_data": ***REMOVED***
 			"id": "2FrW2uVZTCZ9pjCISukgB3",
 			"name": "Hands Up! (One Piece Opening 16)",
@@ -3561,8 +3764,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-r-MEKwXFF-s-Bleach_Opening_Asterisk_full.webm",
 		"video_id": "r-MEKwXFF-s",
 		"url": "https://www.youtube.com/watch?v=r-MEKwXFF-s",
 		"title": "PelleK - *~Asterisk~ (Bleach Opening 1)",
@@ -3583,6 +3787,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "*~Asterisk~ (Bleach Opening 1)",
+		"artist": "PelleK",
+		"artist_image": "https://i.scdn.co/image/5c812cc8451e65a1858442a1e05434143192ff2c",
+		"cover": "https://i.scdn.co/image/dd03d978e08831dff9b2ee1e5907717feb1617e9",
+		"album": "PelleK's Bleach Medley",
 		"spotify_data": ***REMOVED***
 			"id": "0Szs74d8jYfx0HeIzZTfIw",
 			"name": "*~Asterisk~ (Bleach Opening 1)",
@@ -3678,8 +3887,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Zh9lynUFikc-Platinum_Disco_FULL_SUB_HQ_Nisemonogatari_Opening_3_by_Yuka_Iguchi.webm",
 		"video_id": "Zh9lynUFikc",
 		"url": "https://www.youtube.com/watch?v=Zh9lynUFikc",
 		"title": "Platinum Disco FULL SUB HQ (Nisemonogatari Opening 3) by Yuka Iguchi",
@@ -3702,8 +3912,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-nPwCtsLhYto-RADWIMPS_Nandemonaiya_AMV_Kimi_no_Na_wa._Your_Name..webm",
 		"video_id": "nPwCtsLhYto",
 		"url": "https://www.youtube.com/watch?v=nPwCtsLhYto",
 		"title": "RADWIMPS \u2013 Nandemonaiya  (\u306a\u3093\u3067\u3082\u306a\u3044\u3084)\u300cAMV\u300dKimi no Na wa. (Your Name.)\u541b\u306e\u540d\u306f\u3002",
@@ -3721,8 +3932,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-5xgxE3FOnDE-ReLIFE_OP_Button_PENGUIN_RESEARCH_Konero.webm",
 		"video_id": "5xgxE3FOnDE",
 		"url": "https://www.youtube.com/watch?v=5xgxE3FOnDE",
 		"title": "ReLIFE OP \u300c\u30dc\u30bf\u30f3 Button\u300dPENGUIN RESEARCH \u3010Konero\u3011",
@@ -3745,8 +3957,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-mCI2fnmK6wk-In_My_World_Ao_No_Exorcist_The_Blue_Exorcist_Full_Original.webm",
 		"video_id": "mCI2fnmK6wk",
 		"url": "https://www.youtube.com/watch?v=mCI2fnmK6wk",
 		"title": "ROOKiEZ is PUNK'D - In My World",
@@ -3762,6 +3975,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "In My World",
+		"artist": "ROOKiEZ is PUNK'D",
+		"artist_image": "http://i.imgur.com/ceNNA5m.jpg",
+		"cover": "http://i.imgur.com/yqt7jdc.jpg",
+		"album": "Ao no Exorcist",
 		"spotify_data": ***REMOVED***
 			"id": "custom",
 			"name": "In My World",
@@ -3819,8 +4037,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-ROxkJoIhr6o-Sakurasou_no_Pet_na_Kanojo_ED_DAYS_of_DASH_Full.webm",
 		"video_id": "ROxkJoIhr6o",
 		"url": "https://www.youtube.com/watch?v=ROxkJoIhr6o",
 		"title": "Sakurasou no Pet na Kanojo ED\u300cDAYS of DASH\u300dFull",
@@ -3843,8 +4062,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-s6jk_DBcLkQ-Sankarea_OP_Full_Lyrics_-_Nano.RIPE_-_Esoragoto.webm",
 		"video_id": "s6jk_DBcLkQ",
 		"url": "https://www.youtube.com/watch?v=s6jk_DBcLkQ",
 		"title": "Sankarea OP Full Lyrics - Nano.RIPE - Esoragoto",
@@ -3867,8 +4087,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-vyGFM5CGnoo-Kill_la_Kill_Don_t_Lose_Your_Way.webm",
 		"video_id": "vyGFM5CGnoo",
 		"url": "https://www.youtube.com/watch?v=vyGFM5CGnoo",
 		"title": "Sapphire & None Like Joshua - Don't Lose Your Way (Feat. NoneLikeJoshua)",
@@ -3884,6 +4105,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Don't Lose Your Way (Feat. NoneLikeJoshua)",
+		"artist": "Sapphire & None Like Joshua",
+		"artist_image": "https://i.scdn.co/image/f0396585a88b82628af0eaa189129804d44f0212",
+		"cover": "https://i.scdn.co/image/f0396585a88b82628af0eaa189129804d44f0212",
+		"album": "Don't Lose Your Way (Kill la Kill)",
 		"spotify_data": ***REMOVED***
 			"id": "6RdYQlaMCcs27y4f5uQYfZ",
 			"name": "Don't Lose Your Way (Feat. NoneLikeJoshua)",
@@ -4002,8 +4228,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-QOOgMyIGtrQ-Sayuri_-_Rura.webm",
 		"video_id": "QOOgMyIGtrQ",
 		"url": "https://www.youtube.com/watch?v=QOOgMyIGtrQ",
 		"title": "Sayuri - Rura",
@@ -4026,8 +4253,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-HvFMSVB1YI4-Sekaiichi_Hatsukoi_ed_FULL.webm",
 		"video_id": "HvFMSVB1YI4",
 		"url": "https://www.youtube.com/watch?v=HvFMSVB1YI4",
 		"title": "Sekaiichi Hatsukoi ed FULL",
@@ -4045,8 +4273,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-HVKBTUqBJ3Y-Shingeki_no_Kyojin_ED2.webm",
 		"video_id": "HVKBTUqBJ3Y",
 		"url": "https://www.youtube.com/watch?v=HVKBTUqBJ3Y",
 		"title": "Shingeki no Kyojin ED2 \u9032\u6483\u306e\u5de8\u4eba",
@@ -4064,8 +4293,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-jOGfTrbrwh0-Shiver_-_the_GazettE_Kuroshitsuji_II_Opening_Song.webm",
 		"video_id": "jOGfTrbrwh0",
 		"url": "https://www.youtube.com/watch?v=jOGfTrbrwh0",
 		"title": "Shiver - the GazettE (Kuroshitsuji II Opening Song)",
@@ -4083,8 +4313,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-CdSE1loNwmo-Sidonia_no_Kishi_-_Daikyuu_Wakusei_Seneki_OP_Opening.webm",
 		"video_id": "CdSE1loNwmo",
 		"url": "https://www.youtube.com/watch?v=CdSE1loNwmo",
 		"title": "Sidonia no Kishi: Daikyuu Wakusei Seneki OP/Opening",
@@ -4102,8 +4333,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-OYVlx3vnu8I-Super_Driver_AMV_-_Suzumiya_Haruhi_Season_2_Full_OP_Song_+_Video.webm",
 		"video_id": "OYVlx3vnu8I",
 		"url": "https://www.youtube.com/watch?v=OYVlx3vnu8I",
 		"title": "Super Driver AMV -  Suzumiya Haruhi Season 2 Full OP Song + Video",
@@ -4126,8 +4358,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-tTIwbusbN1g-Sword_Of_The_Stranger_-_Ihojin_No_Yaiba_Battle_Theme.webm",
 		"video_id": "tTIwbusbN1g",
 		"url": "https://www.youtube.com/watch?v=tTIwbusbN1g",
 		"title": "Sword Of The Stranger - Ihojin No Yaiba  [Battle Theme]",
@@ -4145,8 +4378,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-FXoq3a02yjc-Tekken_7_OST_-_Aloneness_Story_Mode_~_Staff_Roll.webm",
 		"video_id": "FXoq3a02yjc",
 		"url": "https://www.youtube.com/watch?v=FXoq3a02yjc",
 		"title": "Tekken 7 OST: Aloneness (Story Mode ~ Staff Roll)",
@@ -4169,8 +4403,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-C-o8pTi6vd8-ARAGOTO_OP_THE_ORAL_CIGARETTES_Hey_Kids_MusicVideo.webm",
 		"video_id": "C-o8pTi6vd8",
 		"url": "https://www.youtube.com/watch?v=C-o8pTi6vd8",
 		"title": "The Oral Cigarettes - Hey Kids",
@@ -4186,6 +4421,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Hey Kids",
+		"artist": "The Oral Cigarettes",
+		"artist_image": "http://i.imgur.com/HigkKjz.jpg",
+		"cover": "http://i.imgur.com/WfW0mpe.jpg",
+		"album": "FIXION",
 		"spotify_data": ***REMOVED***
 			"id": "custom",
 			"name": "Hey Kids",
@@ -4243,8 +4483,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-JM0BXII3Y3c-Koe_no_Katachi_OST_-_lit.webm",
 		"video_id": "JM0BXII3Y3c",
 		"url": "https://www.youtube.com/watch?v=JM0BXII3Y3c",
 		"title": "Theishter - Koe No Katachi - Lit",
@@ -4260,6 +4501,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Koe No Katachi - Lit",
+		"artist": "Theishter",
+		"artist_image": "https://i.scdn.co/image/5ce16758a5103717a5c9ad8b999b87205668f2c3",
+		"cover": "https://i.scdn.co/image/a38587e47726bc71c2eb1e7134aba2a49ca6ab94",
+		"album": "Koe No Katachi - Lit",
 		"spotify_data": ***REMOVED***
 			"id": "5PyDwiyN0xzjSbdZ8bcUbd",
 			"name": "Koe No Katachi - Lit",
@@ -4353,8 +4599,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-t3wcNYENP5E-This_game-Konomi_Suzuki_No_game_no_life_full_opening.webm",
 		"video_id": "t3wcNYENP5E",
 		"url": "https://www.youtube.com/watch?v=t3wcNYENP5E",
 		"title": "This game-Konomi Suzuki (No game no life full opening)",
@@ -4377,8 +4624,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-KjlTmJQsceY-Fairy_Tail_-_Shukumei.webm",
 		"video_id": "KjlTmJQsceY",
 		"url": "https://www.youtube.com/watch?v=KjlTmJQsceY",
 		"title": "Tifita - Shukumei",
@@ -4394,6 +4642,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
+		"song_title": "Shukumei",
+		"artist": "Tifita",
+		"artist_image": "https://i.scdn.co/image/3641e8b64abb088f4504789cfb6475afe2759fe2",
+		"cover": "https://i.scdn.co/image/7bcee79d507d6bc3dab39cd35860c0c416fde59e",
+		"album": "Fairy Tail: Piano Solo",
 		"spotify_data": ***REMOVED***
 			"id": "5ovNsoS8i3ywxISJUyzv8E",
 			"name": "Shukumei",
@@ -4489,8 +4742,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-xcXSllSEs4I-Tokyo_Ghoul_Root_A_On_My_Own_OST.webm",
 		"video_id": "xcXSllSEs4I",
 		"url": "https://www.youtube.com/watch?v=xcXSllSEs4I",
 		"title": "Tokyo Ghoul Root A On My Own  OST",
@@ -4508,8 +4762,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-lk0gm_Z81bE-Toradora_-_Lost_My_Pieces_OST.webm",
 		"video_id": "lk0gm_Z81bE",
 		"url": "https://www.youtube.com/watch?v=lk0gm_Z81bE",
 		"title": "Toradora! - Lost My Pieces (OST)",
@@ -4527,8 +4782,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-SXqdT5kOIAw-We_re_the_Stars_-_Fairy_Tail_ENDING_14_FULL_+_LYRICS.webm",
 		"video_id": "SXqdT5kOIAw",
 		"url": "https://www.youtube.com/watch?v=SXqdT5kOIAw",
 		"title": "We're the Stars - Fairy Tail [ENDING 14 FULL + LYRICS]",
@@ -4546,8 +4802,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-kO1jc3DJ6Q4-White_Silence_-_Tokyo_ghoul_Nightcore_Thaisub.webm",
 		"video_id": "kO1jc3DJ6Q4",
 		"url": "https://www.youtube.com/watch?v=kO1jc3DJ6Q4",
 		"title": "White Silence - Tokyo ghoul [ Nightcore ] Thaisub",
@@ -4565,8 +4822,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-W7rrk7Hmngc-Yasuharu_Takanashi_-_Multiflora_no_Theme.webm",
 		"video_id": "W7rrk7Hmngc",
 		"url": "https://www.youtube.com/watch?v=W7rrk7Hmngc",
 		"title": "Yasuharu Takanashi: Multiflora no Theme",
@@ -4584,8 +4842,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-lMQK5MbIb1E-Yojou-han_Shinwa_Taikai_The_Tatami_Galaxy_ED_Full.webm",
 		"video_id": "lMQK5MbIb1E",
 		"url": "https://www.youtube.com/watch?v=lMQK5MbIb1E",
 		"title": "Yojou-han Shinwa Taikai (The Tatami Galaxy) ED Full",
@@ -4603,8 +4862,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-AV7QjFdNkUk-Zankyou_no_Terror_Dare_ka_Umi_wo..webm",
 		"video_id": "AV7QjFdNkUk",
 		"url": "https://www.youtube.com/watch?v=AV7QjFdNkUk",
 		"title": "Zankyou no Terror/\u6b8b\u97ff\u306e\u30c6\u30ed\u30eb\u300cDare ka, Umi wo.\u300d",
@@ -4622,8 +4882,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-eGLw9C2N40A-_.webm",
 		"video_id": "eGLw9C2N40A",
 		"url": "https://www.youtube.com/watch?v=eGLw9C2N40A",
 		"title": "\u3086\u305a - \u6d41\u308c\u661f\u30ad\u30e9\u30ea / \u67da\u5b50 - \u6d41\u661f\u9583\u720d\u3010\u4e2d\u6587\u5b57\u5e55\u3011",
@@ -4646,8 +4907,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-a2GujJZfXpg-original_ver._-Your_name._Music_Video_edition-_from_new_album_DVD.webm",
 		"video_id": "a2GujJZfXpg",
 		"url": "https://www.youtube.com/watch?v=a2GujJZfXpg",
 		"title": "\u30b9\u30d1\u30fc\u30af\u30eb [original ver.] -Your name. Music Video edition- \u4e88\u544a\u7de8 from new album\u300c\u4eba\u9593\u958b\u82b1\u300d\u521d\u56de\u76e4DVD",
@@ -4665,8 +4927,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-cwhrIAD3KVQ-op.webm",
 		"video_id": "cwhrIAD3KVQ",
 		"url": "https://www.youtube.com/watch?v=cwhrIAD3KVQ",
 		"title": "\u4e2d\u4e8c\u75c5\u3067\u3082\u604b\u304c\u3057\u305f\u3044\uff01op\u30d5\u30eb",
@@ -4689,8 +4952,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-PDSkFeMVNFs-movie_ver._RADWIMPS_MV.webm",
 		"video_id": "PDSkFeMVNFs",
 		"url": "https://www.youtube.com/watch?v=PDSkFeMVNFs",
 		"title": "\u524d\u524d\u524d\u4e16 (movie ver.) RADWIMPS MV",
@@ -4708,8 +4972,9 @@
 		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
-		"version": 100,
+		"version": 101,
 		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-8tIB3IEWirk-Re_-_ED_STYX_HELIX.webm",
 		"video_id": "8tIB3IEWirk",
 		"url": "https://www.youtube.com/watch?v=8tIB3IEWirk",
 		"title": "[\u7e41] Re:\u5f9e\u96f6\u958b\u59cb\u7684\u7570\u4e16\u754c\u751f\u6d3b ED\u300cSTYX HELIX\u300d\u5b57\u5e55\u88fd\u4f5c",
@@ -4727,6 +4992,183 @@
 				"value": ***REMOVED***
 					"name": "simonisanerd",
 					"index": 114
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***
+	***REMOVED***,
+	***REMOVED***
+		"version": 101,
+		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-galehoexbCU-Boku_no_hero_academia_ED_Full_HEROES.webm",
+		"video_id": "galehoexbCU",
+		"url": "https://www.youtube.com/watch?v=galehoexbCU",
+		"title": "\u50d5\u306e\u30d2\u30fc\u30ed\u30fc\u30a2\u30ab\u30c7\u30df\u30a2\u3010Boku no hero academia\u3011 ED Full \u300cHEROES\u300d",
+		"duration": 182,
+		"thumbnail": "https://i.ytimg.com/vi/galehoexbCU/maxresdefault.jpg",
+		"description": "YOU CAN BE A HERO",
+		"meta": ***REMOVED***
+			"author": ***REMOVED***
+				"type": "Member",
+				"id": "203302899277627392",
+				"name": "siku2"
+			***REMOVED***,
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"name": "simonisanerd",
+					"index": 115
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***
+	***REMOVED***,
+	***REMOVED***
+		"version": 101,
+		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-FY9qBx7W9o0-LiSA_-_Shirushi.webm",
+		"video_id": "FY9qBx7W9o0",
+		"url": "https://www.youtube.com/watch?v=FY9qBx7W9o0",
+		"title": "LiSA - Shirushi",
+		"duration": 116,
+		"thumbnail": "https://i.ytimg.com/vi/FY9qBx7W9o0/maxresdefault.jpg",
+		"description": "Music video by LiSA performing Shirushi. (C) 2014 Aniplex Inc.",
+		"meta": ***REMOVED***
+			"author": ***REMOVED***
+				"type": "Member",
+				"id": "203302899277627392",
+				"name": "siku2"
+			***REMOVED***,
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"name": "simonisanerd",
+					"index": 116
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Shirushi",
+		"artist": "LiSA",
+		"artist_image": "https://i.scdn.co/image/82e3892e5c6a18138891d722fb9656da8b0d6112",
+		"cover": "https://i.scdn.co/image/b0d475c2cb05195d2cf7778c507b8757e1f3376e",
+		"album": "Launcher",
+		"spotify_data": ***REMOVED***
+			"id": "7gRLdM0fUa3v69BeWYAMzO",
+			"name": "Shirushi",
+			"artists": [
+				***REMOVED***
+					"id": "0blbVefuxOGltDBa00dspv",
+					"name": "LiSA",
+					"images": [
+						***REMOVED***
+							"height": 640,
+							"url": "https://i.scdn.co/image/ae1b09a9dd746482b53d73fb0643c80c1b46a3d4",
+							"width": 640
+						***REMOVED***,
+						***REMOVED***
+							"height": 320,
+							"url": "https://i.scdn.co/image/82e3892e5c6a18138891d722fb9656da8b0d6112",
+							"width": 320
+						***REMOVED***,
+						***REMOVED***
+							"height": 160,
+							"url": "https://i.scdn.co/image/4d47b7d9469dc49abebff94f197aaf663974da9d",
+							"width": 160
+						***REMOVED***
+					],
+					"genres": [
+						"anime",
+						"j-pop",
+						"japanese r&b",
+						"otacore"
+					],
+					"popularity": 51,
+					"uri": "spotify:artist:0blbVefuxOGltDBa00dspv",
+					"href": "https://open.spotify.com/artist/0blbVefuxOGltDBa00dspv"
+				***REMOVED***
+			],
+			"artist": "LiSA",
+			"cover_url": "https://i.scdn.co/image/b0d475c2cb05195d2cf7778c507b8757e1f3376e",
+			"duration": 288.24,
+			"album": ***REMOVED***
+				"id": "3nMoTXUkEcRao1A5lWdsgR",
+				"name": "Launcher",
+				"artists": [
+					***REMOVED***
+						"id": "0blbVefuxOGltDBa00dspv",
+						"name": "LiSA",
+						"images": [
+							***REMOVED***
+								"height": 640,
+								"url": "https://i.scdn.co/image/ae1b09a9dd746482b53d73fb0643c80c1b46a3d4",
+								"width": 640
+							***REMOVED***,
+							***REMOVED***
+								"height": 320,
+								"url": "https://i.scdn.co/image/82e3892e5c6a18138891d722fb9656da8b0d6112",
+								"width": 320
+							***REMOVED***,
+							***REMOVED***
+								"height": 160,
+								"url": "https://i.scdn.co/image/4d47b7d9469dc49abebff94f197aaf663974da9d",
+								"width": 160
+							***REMOVED***
+						],
+						"genres": [
+							"anime",
+							"j-pop",
+							"japanese r&b",
+							"otacore"
+						],
+						"popularity": 51,
+						"uri": "spotify:artist:0blbVefuxOGltDBa00dspv",
+						"href": "https://open.spotify.com/artist/0blbVefuxOGltDBa00dspv"
+					***REMOVED***
+				],
+				"images": [
+					***REMOVED***
+						"height": 640,
+						"url": "https://i.scdn.co/image/b0d475c2cb05195d2cf7778c507b8757e1f3376e",
+						"width": 640
+					***REMOVED***,
+					***REMOVED***
+						"height": 300,
+						"url": "https://i.scdn.co/image/14d219b54b70908918abdc23e6e7ff46d2aa5a9c",
+						"width": 300
+					***REMOVED***,
+					***REMOVED***
+						"height": 64,
+						"url": "https://i.scdn.co/image/60fed5bb7867e5bfd6f27e32af4804fd3d648816",
+						"width": 64
+					***REMOVED***
+				],
+				"uri": "spotify:album:3nMoTXUkEcRao1A5lWdsgR"
+			***REMOVED***,
+			"popularity": 41,
+			"uri": "spotify:track:7gRLdM0fUa3v69BeWYAMzO",
+			"query": "Lisa - Shirushi",
+			"certainty": 0.9285714285714286
+		***REMOVED***
+	***REMOVED***,
+	***REMOVED***
+		"version": 101,
+		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-cXeb9cb6k0I-Naruto_Shippuden_Opening_16.m4a",
+		"video_id": "cXeb9cb6k0I",
+		"url": "https://www.youtube.com/watch?v=cXeb9cb6k0I",
+		"title": "Naruto Shippuden Opening 16",
+		"duration": 90,
+		"thumbnail": "https://i.ytimg.com/vi/cXeb9cb6k0I/maxresdefault.jpg",
+		"description": "Naruto Shippuden OP16\n\"Silhouette (\u30b7\u30eb\u30a8\u30c3\u30c8)\" by KANA-BOON",
+		"meta": ***REMOVED***
+			"author": ***REMOVED***
+				"type": "Member",
+				"id": "203302899277627392",
+				"name": "siku2"
+			***REMOVED***,
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"name": "simonisanerd",
+					"index": 117
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
