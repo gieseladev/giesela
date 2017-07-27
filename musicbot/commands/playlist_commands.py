@@ -1199,6 +1199,7 @@ class PlaylistCommands:
         player._current_entry.meta.pop("playlist", None)
         return Response("Removed **{}** from playlist `{}`.".format(remove_entry.title, playlistname))
 
+    @block_user
     @command_info("4.1.9", 1500882702, {
         "4.2.2": (1500911879, "Entry not in a playlist handling"),
         "4.2.6": (1500963901, "Can now use the entry manipulator on non-playlist entries")
