@@ -4,6 +4,7 @@ import math
 import random
 import re
 import time
+import traceback
 import unicodedata
 from datetime import timedelta
 from difflib import SequenceMatcher
@@ -715,4 +716,5 @@ def get_dev_changelog():
 
         return changes
     except Exception:
+        traceback.print_exc()
         return ["Couldn't find the changelog"]
