@@ -127,10 +127,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         await asyncio.sleep(after)
         await self.safe_delete_message(message)
 
-    async def _manual_delete_check(self, message, *, quiet=False):
-        if self.config.delete_invoking:
-            await self.safe_delete_message(message, quiet=quiet)
-
     async def generate_invite_link(self, *, permissions=None, server=None):
         if not self.cached_client_id:
             appinfo = await self.application_info()
@@ -307,6 +303,8 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 .on("stop", self.on_player_stop) \
                 .on("finished-playing", self.on_player_finished_playing) \
                 .on("entry-added", self.on_player_entry_added)
+
+            print("[PLAYER] Created a new player")
 
             self.players[server.id] = player
 
@@ -624,10 +622,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 print(
                     "\nTo make Giesela join a server, paste this link in your browser."
                 )
-                print(
-                    "Note: You should be logged into your main account and have \n"
-                    "manage server permissions on the server you want the bot to join.\n"
-                )
                 print("    " + await self.generate_invite_link())
 
         config_string = "\nConfig:\n"
@@ -821,9 +815,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 await self.safe_send_message(
                     message.channel, "```\n%s\n```" % traceback.format_exc())
 
-    async def on_server_update(self,
-                               before: discord.Server,
-                               after: discord.Server):
+    async def on_server_update(self, before: discord.Server, after: discord.Server):
         if before.region != after.region:
             print("[Servers] \"%s\" changed regions: %s -> %s" %
                   (after.name, before.region, after.region))
