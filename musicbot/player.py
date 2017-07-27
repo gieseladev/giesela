@@ -208,7 +208,7 @@ class MusicPlayer(EventEmitter):
         entry.set_start(self.progress)
 
         if not filters:
-            entry.pop("filters", None)
+            entry.meta.pop("filters", None)
         else:
             entry.meta["filters"] = filters
 
