@@ -1,6 +1,6 @@
 import os.path
 
-MAIN_VERSION = "4.2.8"
+MAIN_VERSION = "4.2.9"
 SUB_VERSION = "ice_cube"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
