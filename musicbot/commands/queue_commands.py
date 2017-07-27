@@ -105,7 +105,8 @@ class EnqueueCommands:
         "3.8.9": (1499461104, "Part of the `Giesenesis` rewrite"),
         "3.9.6": (1499879464, "Better error handling"),
         "3.9.7": (1499968174, "Added a placement parameter."),
-        "4.0.0": (1499981166, "Added \"random\" as a possible placement parameter")
+        "4.0.0": (1499981166, "Added \"random\" as a possible placement parameter"),
+        "4.3.0": (1501177726, "Updated design of \"enqueued\" message and fixed placement parameter")
     ***REMOVED***)
     async def cmd_play(self, player, channel, author, leftover_args, song_url):
         """
@@ -122,12 +123,10 @@ class EnqueueCommands:
 
         if last_arg.lower() in ["next", "now", "first"]:
             placement = 0
-            song_url = ""
-        elif last_arg.lower() in ["anywhere", "random"]:
+        elif last_arg.lower() in ["anytime", "anywhere", "random"]:
             placement = "random"
         elif last_arg.isnumeric():
             placement = int(last_arg) - 1
-            song_url = ""
         else:
             leftover_args.append(last_arg)
 
@@ -212,7 +211,7 @@ class EnqueueCommands:
             ))
         else:
             player.playlist._add_entry(entry, placement)
-            return Response("Enqueued `***REMOVED******REMOVED***`".format(entry.title))
+            return Response("Enqueued *****REMOVED******REMOVED*****".format(entry.title))
 
     @block_user
     @command_info("1.0.0", 1477180800, ***REMOVED***
