@@ -1002,7 +1002,7 @@ class DisplayCommands:
         "3.8.9": (1499465102, "Part of the `Giesenesis` rewrite"),
         "4.0.1": (1500346108, "Quantity parameter. Increased history limit"),
         "4.1.7": (1500876373, "Displaying the amount of entries displayed in relation to the total entries"),
-        "4.2.9", (1501176845, "Showing the correct amount of entries displayed")
+        "4.2.9": (1501176845, "Showing the correct amount of entries displayed")
     })
     async def cmd_history(self, channel, player, num="15"):
         """
