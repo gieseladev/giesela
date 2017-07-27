@@ -1,6 +1,8 @@
 import traceback
 from textwrap import indent
 
+import aiohttp
+
 from .. import exceptions
 from ..settings import Settings
 from ..utils import Response, block_user, command_info, escape_dis, owner_only
