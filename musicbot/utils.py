@@ -691,20 +691,26 @@ def get_dev_changelog():
     base_url = "https://siku2.github.io/Giesela/changelogs/changelog-"
     dev_version = re.sub(r"\D", "", get_dev_version()[0])
 
+    resp = requests.get(
+        base_url + dev_version)
+
+    if not resp.ok:
+        return ["Changelog not yet available"]
+
+    changelog_page = resp.text
+
+    bs = BeautifulSoup(changelog_page, "lxml")
+    html_to_markdown = [
+        (r"<\/?li>", "\t"), (r"<\/?ul>", ""),
+        (r"<code.+?>(.+?)<\/code>", r"`\1`"),
+        (r"<strong>(.+?)<\/strong>", r"**\1**"),
+        (r"<a\shref=\"(.+?)\">(.+?)<\/a>", r"[`\2`](\1)"),
+        (r"\n\W+\n", "\n")
+    ]
+
+    changes = []
+
     try:
-        changelog_page = requests.get(
-            base_url + dev_version).text
-        bs = BeautifulSoup(changelog_page, "lxml")
-        html_to_markdown = [
-            (r"<\/?li>", "\t"), (r"<\/?ul>", ""),
-            (r"<code.+?>(.+?)<\/code>", r"`\1`"),
-            (r"<strong>(.+?)<\/strong>", r"**\1**"),
-            (r"<a\shref=\"(.+?)\">(.+?)<\/a>", r"[`\2`](\1)"),
-            (r"\n\W+\n", "\n")
-        ]
-
-        changes = []
-
         for sib in (bs.body.li, *bs.body.li.next_siblings):
             line = str(sib).strip()
             for match, repl in html_to_markdown:
