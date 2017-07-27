@@ -1,10 +1,11 @@
 import os.path
 
-MAIN_VERSION = "4.2.9"
-SUB_VERSION = "ice_cube"
+MAIN_VERSION = "4.3.0"
+SUB_VERSION = "breadstick"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
 all_sub_versions = {
+    "4.3.x": "Breadstick",
     "4.2.x": "Ice Cube",
     "4.1.x": "Gooma",
     "4.0.x": "New Reign",
