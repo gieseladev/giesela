@@ -290,7 +290,14 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         if isinstance(server, str):
             server = self.get_server(server)
 
-        if server.id not in self.players or (channel and self.players[server.id].voice_client.channel != channel):
+        # if there's already a player for this server
+        if server.id in self.players:
+            # but it's not in the right channel
+            if channel and self.players[server.id].voice_client.channel != channel:
+                # move that stuff
+                await self.move_voice_client(channel)
+        else:
+            # create a new voice client in the selected channel (if given) or go to the home channel
             voice_client = await self.get_voice_client(channel or self.find_home_channel(server))
 
             player = MusicPlayer(self, voice_client) \
