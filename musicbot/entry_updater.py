@@ -51,7 +51,7 @@ async def fix_entry(queue, entry):
     if version < 100:
         return await _rebuild_entry(queue, entry)
 
-    if "expected_filename" not in entry:
+    if not entry.get("expected_filename", False):
         return await _fix_filename(queue, entry)
 
     try:

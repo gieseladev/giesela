@@ -15,7 +15,7 @@ from .web_socket_server import WebAuthor
 
 
 class Entry:
-    version_code = "1.0.2"
+    version_code = "1.0.3"
     version = int(version_code.replace(".", ""))
     can_encode = (int, dict, list, str, int, float, bool)
     default_encode = (Channel, Member, Server, User)
@@ -221,11 +221,11 @@ class StreamEntry(BaseEntry):
         meta_dict = Entry.create_meta_dict(self.meta)
 
         data = {
-            "version": Entry.version,
-            "type": self.__class__.__name__,
-            "url": self.url,
-            "title": self._title,
-            "meta": meta_dict
+            "version":  Entry.version,
+            "type":     self.__class__.__name__,
+            "url":      self.url,
+            "title":    self._title,
+            "meta":     meta_dict
         }
         return data
 
@@ -241,10 +241,10 @@ class StreamEntry(BaseEntry):
                 origin.update(web_author.to_dict())
 
         data = {
-            "type": self.__class__.__name__,
-            "url": self.url,
-            "origin": origin,
-            "title": self.title
+            "type":     self.__class__.__name__,
+            "url":      self.url,
+            "origin":   origin,
+            "title":    self.title
         }
 
         return data
@@ -332,14 +332,14 @@ class RadioStationEntry(StreamEntry):
                 origin.update(web_author.to_dict())
 
         data = {
-            "type": self.__class__.__name__,
-            "url": self.url,
-            "thumbnail": self.thumbnail,
+            "type":                 self.__class__.__name__,
+            "url":                  self.url,
+            "thumbnail":            self.thumbnail,
             "thumbnail_brightness": get_image_brightness(url=self.thumbnail),
-            "origin": origin,
-            "title": self.title,
-            "cover": self.cover,
-            "link": self.link
+            "origin":               origin,
+            "title":                self.title,
+            "cover":                self.cover,
+            "link":                 self.link
         }
 
         return data
@@ -393,11 +393,11 @@ class RadioSongEntry(RadioStationEntry):
         data = super().to_web_dict()
 
         data.update({
-            "title": self.title,
-            "artist": self.artist,
-            "cover": self.cover,
-            "song_progress": self.song_progress,
-            "song_duration": self.song_duration
+            "title":            self.title,
+            "artist":           self.artist,
+            "cover":            self.cover,
+            "song_progress":    self.song_progress,
+            "song_duration":    self.song_duration
         })
 
         return data
@@ -436,7 +436,7 @@ class YoutubeEntry(BaseEntry):
         else:
             meta = {}
 
-        filename = data.get("expected_filename", None)
+        filename = data["expected_filename"]
         video_id = data["video_id"]
         url = data["url"]
         title = data["title"]
@@ -475,13 +475,13 @@ class YoutubeEntry(BaseEntry):
                 origin.update(web_author.to_dict())
 
         data = {
-            "type": self.__class__.__name__,
-            "url": self.url,
-            "thumbnail": self.thumbnail,
+            "type":                 self.__class__.__name__,
+            "url":                  self.url,
+            "thumbnail":            self.thumbnail,
             "thumbnail_brightness": get_image_brightness(url=self.thumbnail),
-            "origin": origin,
-            "title": self.title,
-            "duration": self.duration,
+            "origin":               origin,
+            "title":                self.title,
+            "duration":             self.duration,
         }
 
         return data
@@ -613,7 +613,7 @@ class TimestampEntry(YoutubeEntry):
 
     def __init__(self, queue, video_id, url, title, duration, thumbnail, description, sub_queue, expected_filename=None, **meta):
         super().__init__(queue, video_id, url, title, duration,
-                         thumbnail, description, expected_filename, **meta)
+                         thumbnail, description, expected_filename=expected_filename, **meta)
         self.sub_queue = sub_queue
 
     @property
@@ -654,6 +654,7 @@ class TimestampEntry(YoutubeEntry):
         else:
             meta = {}
 
+        filename = data["expected_filename"]
         video_id = data["video_id"]
         url = data["url"]
         title = data["title"]
@@ -662,7 +663,7 @@ class TimestampEntry(YoutubeEntry):
         description = data["description"]
         sub_queue = data["sub_queue"]
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, sub_queue, **meta)
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, sub_queue, expected_filename=filename, **meta)
 
     def to_dict(self):
         d = super().to_dict()
@@ -676,9 +677,9 @@ class TimestampEntry(YoutubeEntry):
         data = super().to_web_dict()
 
         data.update({
-            "whole_title": self.whole_title,
-            "title": self.title,
-            "sub_entry": self.current_sub_entry
+            "whole_title":  self.whole_title,
+            "title":        self.title,
+            "sub_entry":    self.current_sub_entry
         })
 
         return data
@@ -710,7 +711,7 @@ class GieselaEntry(YoutubeEntry):
         else:
             meta = {}
 
-        filename = data.get("expected_filename", None)
+        filename = data["expected_filename"]
         video_id = data["video_id"]
         url = data["url"]
         title = data["title"]
@@ -729,11 +730,11 @@ class GieselaEntry(YoutubeEntry):
     def to_dict(self):
         d = super().to_dict()
         d.update({
-            "song_title": self.song_title,
-            "artist": self.artist,
+            "song_title":   self.song_title,
+            "artist":       self.artist,
             "artist_image": self.artist_image,
-            "cover": self.cover,
-            "album": self.album
+            "cover":        self.cover,
+            "album":        self.album
         })
 
         return d
@@ -742,9 +743,9 @@ class GieselaEntry(YoutubeEntry):
         data = super().to_web_dict()
 
         data.update({
-            "title": self.song_title,
-            "artist": self.artist,
-            "cover": self.cover
+            "title":    self.song_title,
+            "artist":   self.artist,
+            "cover":    self.cover
         })
 
         return data
@@ -760,7 +761,7 @@ class SpotifyEntry(GieselaEntry):
             spotify_track.artists[0].image,
             spotify_track.album.name,
             spotify_track.cover_url,
-            expected_filename, **meta
+            expected_filename=expected_filename, **meta
         )
 
         self.spotify_data = spotify_track
@@ -778,7 +779,7 @@ class SpotifyEntry(GieselaEntry):
         else:
             meta = {}
 
-        filename = data.get("expected_filename", None)
+        filename = data["expected_filename"]
         video_id = data["video_id"]
         url = data["url"]
         title = data["title"]
