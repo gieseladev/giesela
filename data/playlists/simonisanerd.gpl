@@ -1,8 +1,8 @@
 [
 	{
-		"version": 101,
-		"type": "SpotifyEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-2g32y3Kph7g-3-nen_E-gumi_Utatan-_Bye_Bye_YESTERDAY_+_Lyrics.m4a",
+		"version": 102,
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "2g32y3Kph7g",
 		"url": "https://www.youtube.com/watch?v=2g32y3Kph7g",
 		"title": "3-nen E-gumi Utatan - Bye Bye YESTERDAY",
@@ -13,6 +13,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 0
 				}
@@ -22,67 +23,12 @@
 		"artist": "3-nen E-gumi Utatan",
 		"artist_image": "http://i.imgur.com/HVWcQmF.jpg",
 		"cover": "http://i.imgur.com/wpy2VoA.jpg",
-		"album": "Ansatsu Kyoushitsu",
-		"spotify_data": {
-			"id": "custom",
-			"name": "Bye Bye YESTERDAY",
-			"artists": [
-				{
-					"id": "custom",
-					"name": "3-nen E-gumi Utatan",
-					"images": [
-						{
-							"url": "http://i.imgur.com/HVWcQmF.jpg"
-						}
-					],
-					"genres": [
-						"custom"
-					],
-					"popularity": 0.5,
-					"uri": "custom",
-					"href": "custom"
-				}
-			],
-			"artist": "3-nen E-gumi Utatan",
-			"cover_url": "http://i.imgur.com/wpy2VoA.jpg",
-			"duration": 250,
-			"album": {
-				"id": "custom",
-				"name": "Ansatsu Kyoushitsu",
-				"artists": [
-					{
-						"id": "custom",
-						"name": "3-nen E-gumi Utatan",
-						"images": [
-							{
-								"url": "http://i.imgur.com/HVWcQmF.jpg"
-							}
-						],
-						"genres": [
-							"custom"
-						],
-						"popularity": 0.5,
-						"uri": "custom",
-						"href": "custom"
-					}
-				],
-				"images": [
-					{
-						"url": "http://i.imgur.com/wpy2VoA.jpg"
-					}
-				],
-				"uri": "custom"
-			},
-			"popularity": 0.5,
-			"uri": "custom",
-			"query": null,
-			"certainty": 1
-		}
+		"album": "Ansatsu Kyoushitsu"
 	},
 	{
-		"version": 101,
-		"type": "SpotifyEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-9ZyZ4bMMKjU-3-nen_E-gumi_Utatan-_QUESTION_+_Lyrics.webm",
+		"version": 102,
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "9ZyZ4bMMKjU",
 		"url": "https://www.youtube.com/watch?v=9ZyZ4bMMKjU",
 		"title": "3-Nen E-Gumi Utatan - QUESTION",
@@ -93,6 +39,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 1
 				}
@@ -102,65 +49,10 @@
 		"artist": "3-Nen E-Gumi Utatan",
 		"artist_image": "http://i.imgur.com/SMmDV0m.jpg",
 		"cover": "http://i.imgur.com/rB1inZr.jpg",
-		"album": "Ansatsu Kyoushitsu",
-		"spotify_data": {
-			"id": "custom",
-			"name": "QUESTION",
-			"artists": [
-				{
-					"id": "custom",
-					"name": "3-Nen E-Gumi Utatan",
-					"images": [
-						{
-							"url": "http://i.imgur.com/SMmDV0m.jpg"
-						}
-					],
-					"genres": [
-						"custom"
-					],
-					"popularity": 0.5,
-					"uri": "custom",
-					"href": "custom"
-				}
-			],
-			"artist": "3-Nen E-Gumi Utatan",
-			"cover_url": "http://i.imgur.com/rB1inZr.jpg",
-			"duration": 267,
-			"album": {
-				"id": "custom",
-				"name": "Ansatsu Kyoushitsu",
-				"artists": [
-					{
-						"id": "custom",
-						"name": "3-Nen E-Gumi Utatan",
-						"images": [
-							{
-								"url": "http://i.imgur.com/SMmDV0m.jpg"
-							}
-						],
-						"genres": [
-							"custom"
-						],
-						"popularity": 0.5,
-						"uri": "custom",
-						"href": "custom"
-					}
-				],
-				"images": [
-					{
-						"url": "http://i.imgur.com/rB1inZr.jpg"
-					}
-				],
-				"uri": "custom"
-			},
-			"popularity": 0.5,
-			"uri": "custom",
-			"query": null,
-			"certainty": 1
-		}
+		"album": "Ansatsu Kyoushitsu"
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-wykx9MzjL-8-AAA_Wake_up_Music_Video.webm",
 		"video_id": "wykx9MzjL-8",
@@ -173,6 +65,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 2
 				}
@@ -282,9 +175,9 @@
 		}
 	},
 	{
-		"version": 101,
-		"type": "SpotifyEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-y-q3br6WcGc-Snow_Fairy_Full.webm",
+		"version": 102,
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "y-q3br6WcGc",
 		"url": "https://www.youtube.com/watch?v=y-q3br6WcGc",
 		"title": "Funkist - Snow Fairy",
@@ -295,6 +188,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 3
 				}
@@ -304,67 +198,12 @@
 		"artist": "Funkist",
 		"artist_image": "http://i.imgur.com/Xmz23Ca.jpg",
 		"cover": "http://i.imgur.com/FV8tyVY.jpg",
-		"album": "Fairy Tail",
-		"spotify_data": {
-			"id": "custom",
-			"name": "Snow Fairy",
-			"artists": [
-				{
-					"id": "custom",
-					"name": "Funkist",
-					"images": [
-						{
-							"url": "http://i.imgur.com/Xmz23Ca.jpg"
-						}
-					],
-					"genres": [
-						"custom"
-					],
-					"popularity": 0.5,
-					"uri": "custom",
-					"href": "custom"
-				}
-			],
-			"artist": "Funkist",
-			"cover_url": "http://i.imgur.com/FV8tyVY.jpg",
-			"duration": 217,
-			"album": {
-				"id": "custom",
-				"name": "Fairy Tail",
-				"artists": [
-					{
-						"id": "custom",
-						"name": "Funkist",
-						"images": [
-							{
-								"url": "http://i.imgur.com/Xmz23Ca.jpg"
-							}
-						],
-						"genres": [
-							"custom"
-						],
-						"popularity": 0.5,
-						"uri": "custom",
-						"href": "custom"
-					}
-				],
-				"images": [
-					{
-						"url": "http://i.imgur.com/FV8tyVY.jpg"
-					}
-				],
-				"uri": "custom"
-			},
-			"popularity": 0.5,
-			"uri": "custom",
-			"query": null,
-			"certainty": 1
-		}
+		"album": "Fairy Tail"
 	},
 	{
-		"version": 101,
-		"type": "SpotifyEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-tm7Xf9818FM-Angel_Beats_-_Ichiban_no_Takaramono_Yui_final_ver..webm",
+		"version": 102,
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "tm7Xf9818FM",
 		"url": "https://www.youtube.com/watch?v=tm7Xf9818FM",
 		"title": "LiSA - Ichiban no Takaramono",
@@ -375,6 +214,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 4
 				}
@@ -384,65 +224,10 @@
 		"artist": "LiSA",
 		"artist_image": "http://i.imgur.com/adfWmHo.jpg",
 		"cover": "http://i.imgur.com/wenQwi5.jpg",
-		"album": "Ichiban no Takaramono",
-		"spotify_data": {
-			"id": "custom",
-			"name": "Ichiban no Takaramono",
-			"artists": [
-				{
-					"id": "custom",
-					"name": "LiSA",
-					"images": [
-						{
-							"url": "http://i.imgur.com/adfWmHo.jpg"
-						}
-					],
-					"genres": [
-						"custom"
-					],
-					"popularity": 0.5,
-					"uri": "custom",
-					"href": "custom"
-				}
-			],
-			"artist": "LiSA",
-			"cover_url": "http://i.imgur.com/wenQwi5.jpg",
-			"duration": 360,
-			"album": {
-				"id": "custom",
-				"name": "Ichiban no Takaramono",
-				"artists": [
-					{
-						"id": "custom",
-						"name": "LiSA",
-						"images": [
-							{
-								"url": "http://i.imgur.com/adfWmHo.jpg"
-							}
-						],
-						"genres": [
-							"custom"
-						],
-						"popularity": 0.5,
-						"uri": "custom",
-						"href": "custom"
-					}
-				],
-				"images": [
-					{
-						"url": "http://i.imgur.com/wenQwi5.jpg"
-					}
-				],
-				"uri": "custom"
-			},
-			"popularity": 0.5,
-			"uri": "custom",
-			"query": null,
-			"certainty": 1
-		}
+		"album": "Ichiban no Takaramono"
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-t-QSmNReDyI-Evangelion_Opening.webm",
 		"video_id": "t-QSmNReDyI",
@@ -460,6 +245,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 5
 				}
@@ -467,7 +253,7 @@
 		},
 		"song_title": "Evangelion X",
 		"artist": "Anonymuz",
-		"artist_image": "https://i.scdn.co/image/1b3691a2516c98bf7337a2c3ff5635cc1367f1b8",
+		"artist_image": "https://i.scdn.co/image/877451a1921eadcfc7feec8bca8baf3454cfc629",
 		"cover": "https://i.scdn.co/image/aeaa17f240d4a39d01b52f3fc711469690a5bcd4",
 		"album": "Evangelion X",
 		"spotify_data": {
@@ -563,7 +349,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "GieselaEntry",
 		"expected_filename": null,
 		"video_id": "ZQOBH9LhzBY",
@@ -576,6 +362,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 6
 				}
@@ -588,7 +375,7 @@
 		"album": "Ansatsu Kyoushitsu"
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "GieselaEntry",
 		"expected_filename": null,
 		"video_id": "f5d0VCHll4w",
@@ -601,6 +388,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 7
 				}
@@ -613,7 +401,7 @@
 		"album": "Blue Exorcist"
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "GieselaEntry",
 		"expected_filename": null,
 		"video_id": "o1ZPfw52-6E",
@@ -626,6 +414,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 8
 				}
@@ -638,7 +427,7 @@
 		"album": "Assassination Classroom"
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-w3UR7nsTLlQ-Attack_on_Titan_OST_-_Vogel_im_Kafig.webm",
 		"video_id": "w3UR7nsTLlQ",
@@ -651,6 +440,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 9
 				}
@@ -658,7 +448,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-yD0rG7prFgU-Attack_on_Titan_-_theDOGS_with_Lyrics.webm",
 		"video_id": "yD0rG7prFgU",
@@ -671,6 +461,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 10
 				}
@@ -678,7 +469,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-MI_wWlz2Rck-Aya_Hirano_-_Lost_My_Music_Full_Version.webm",
 		"video_id": "MI_wWlz2Rck",
@@ -696,6 +487,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 11
 				}
@@ -703,7 +495,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-2Z5P3pMmXYQ-BoA_MASAYUME_CHASING_full_song_eng_sub.webm",
 		"video_id": "2Z5P3pMmXYQ",
@@ -721,6 +513,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 12
 				}
@@ -728,7 +521,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-Od9NQbyNpwE-Boku_Dake_Ga_Inai_Machi_Ending.webm",
 		"video_id": "Od9NQbyNpwE",
@@ -746,6 +539,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 13
 				}
@@ -753,7 +547,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-Y9G20wV0KHE-Boku_Dake_ga_Inai_Machi_OP_Opening_-Re.webm",
 		"video_id": "Y9G20wV0KHE",
@@ -766,6 +560,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 14
 				}
@@ -773,7 +568,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-wFGHIaqPbNM-Boku_no_Hero_Academia_OP_FULL.webm",
 		"video_id": "wFGHIaqPbNM",
@@ -786,6 +581,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 15
 				}
@@ -793,7 +589,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-E5ayd_cBMl8-Sword_Art_Online_Ost-_Luminous_Sword.webm",
 		"video_id": "E5ayd_cBMl8",
@@ -806,6 +602,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 16
 				}
@@ -813,7 +610,7 @@
 		},
 		"song_title": "Luminous Sword",
 		"artist": "Cat Trumpet",
-		"artist_image": "https://i.scdn.co/image/7c69f0769e4076fb7d92364481c9ea5df6fda225",
+		"artist_image": "https://i.scdn.co/image/bd7f2342b0a1307f2f97940db56dbfc48475a8a5",
 		"cover": "https://i.scdn.co/image/ae97e987167e6f3363bbfcbe628129610fae5066",
 		"album": "Sword Art Online Piano Collection",
 		"spotify_data": {
@@ -909,7 +706,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "GieselaEntry",
 		"expected_filename": null,
 		"video_id": "-1AT7kHMHwo",
@@ -922,6 +719,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 17
 				}
@@ -934,7 +732,7 @@
 		"album": "Charlotte"
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "GieselaEntry",
 		"expected_filename": null,
 		"video_id": "1MsuXjTlCGE",
@@ -947,6 +745,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 18
 				}
@@ -959,7 +758,7 @@
 		"album": "Charlotte"
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-XQfuTqry6jc-Fairy_tail_opening_14_FULL_~Yakusoku_no_Hi_e~.webm",
 		"video_id": "XQfuTqry6jc",
@@ -972,6 +771,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 19
 				}
@@ -1055,7 +855,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-3dYjJ3kOGoY-Code_Geass_Opening_1_HD.webm",
 		"video_id": "3dYjJ3kOGoY",
@@ -1068,6 +868,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 20
 				}
@@ -1075,7 +876,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-HJ7aVGjym9A-Code_Geass_-_Innocent_Days.webm",
 		"video_id": "HJ7aVGjym9A",
@@ -1093,6 +894,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 21
 				}
@@ -1100,7 +902,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-scqSanbCV-Q-Code_Geass_-_Madder_Sky.webm",
 		"video_id": "scqSanbCV-Q",
@@ -1113,6 +915,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 22
 				}
@@ -1120,7 +923,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-osKkMKolWQ8-Code_Geass_R2_textless_Opening_2_Worlds_End_RAW_HD.webm",
 		"video_id": "osKkMKolWQ8",
@@ -1133,6 +936,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 23
 				}
@@ -1140,7 +944,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-PGoHzoZ2OI0-Durarara_Opening_2.webm",
 		"video_id": "PGoHzoZ2OI0",
@@ -1158,6 +962,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 24
 				}
@@ -1165,7 +970,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-mTCESSzPZSw-Eir_Aoi_-_Ignite.webm",
 		"video_id": "mTCESSzPZSw",
@@ -1183,6 +988,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 25
 				}
@@ -1190,7 +996,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-UVc48sVzE2E-Elfen_Lied_-_Be_Your_Girl.webm",
 		"video_id": "UVc48sVzE2E",
@@ -1208,6 +1014,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 26
 				}
@@ -1215,7 +1022,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-e7AUrshQ-TM-Emotional_OST_of_the_Day_No._63.5_-_Code_Geass_-_Stories.webm",
 		"video_id": "e7AUrshQ-TM",
@@ -1233,6 +1040,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 27
 				}
@@ -1240,7 +1048,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-K3u5h9cPTBw-Ergo_Proxy_opening_Full.webm",
 		"video_id": "K3u5h9cPTBw",
@@ -1253,6 +1061,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 28
 				}
@@ -1260,7 +1069,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-RZufKBrx0hY-Fairy_Tail_-_Absolute_Zero_SILVER_New_2016_Ost.m4a",
 		"video_id": "RZufKBrx0hY",
@@ -1273,6 +1082,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 29
 				}
@@ -1280,7 +1090,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-_SPLrkQTGPk-Fairy_Tail_-_Fairy_Tail_s_is_Born_New_2016_Ost.m4a",
 		"video_id": "_SPLrkQTGPk",
@@ -1293,6 +1103,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 30
 				}
@@ -1300,7 +1111,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-_5fiqzCyCxo-Fairy_Tail_-_Fairy_s_Challenge_New_2016_Ost.m4a",
 		"video_id": "_5fiqzCyCxo",
@@ -1313,6 +1124,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 31
 				}
@@ -1320,7 +1132,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-RqxmFkmEoZQ-Fairy_Tail_-_Kizuna.webm",
 		"video_id": "RqxmFkmEoZQ",
@@ -1333,6 +1145,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 32
 				}
@@ -1340,7 +1153,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-Whgnftw2T-I-Fairy_Tail_-_Mavis.webm",
 		"video_id": "Whgnftw2T-I",
@@ -1353,6 +1166,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 33
 				}
@@ -1360,7 +1174,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-0yURnPCLYFk-Fairy_Tail_-_Seigi_No_Chikara.webm",
 		"video_id": "0yURnPCLYFk",
@@ -1373,6 +1187,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 34
 				}
@@ -1380,7 +1195,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-watQgRTHDhs-Fairy_Tail_2014_Opening_16_Strike_Back_Lyrics_+english_lyrics.webm",
 		"video_id": "watQgRTHDhs",
@@ -1393,6 +1208,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 35
 				}
@@ -1400,7 +1216,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-ZKCCs9DNEJs-Fate_stay_night_-_Kishi_Ou_no_Hokori_-_OST.webm",
 		"video_id": "ZKCCs9DNEJs",
@@ -1413,6 +1229,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 36
 				}
@@ -1420,7 +1237,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-9vx69Pe7Ncs-Fullmetal_Alchemist_Brotherhood_Opening_4_Chemistry_-_Period.webm",
 		"video_id": "9vx69Pe7Ncs",
@@ -1433,6 +1250,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 37
 				}
@@ -1440,7 +1258,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-2uq34TeWEdQ-Fullmetal_Alchemist_Brotherhood_Opening_1-Again_creditless.webm",
 		"video_id": "2uq34TeWEdQ",
@@ -1453,6 +1271,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 38
 				}
@@ -1460,7 +1279,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-xUOZjeDbRbM-Fuwa_Fuwa_Time_Mio_version_YouTube.webm",
 		"video_id": "xUOZjeDbRbM",
@@ -1478,6 +1297,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 39
 				}
@@ -1485,7 +1305,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-AK9DlbzxCVk-Ghost_in_the_Shell_-_Stand_Alone_Complex_2_-_Ending.m4a",
 		"video_id": "AK9DlbzxCVk",
@@ -1503,6 +1323,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 40
 				}
@@ -1510,7 +1331,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-WWB01IuMvzA-God_knows..._The_Melancholy_of_Haruhi_Suzumiya_Kadokawa_MAD.webm",
 		"video_id": "WWB01IuMvzA",
@@ -1523,6 +1344,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 41
 				}
@@ -1530,7 +1352,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-PxZov8-DBHo-Greatest_Battle_Music_OF_All_Times_-_Rule_The_Battlefield.webm",
 		"video_id": "PxZov8-DBHo",
@@ -1543,6 +1365,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 42
 				}
@@ -1550,7 +1373,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-Yx4uGOADIwk-Guilty_Crown_-_Ending_1_full_-_Departures_Blessing.webm",
 		"video_id": "Yx4uGOADIwk",
@@ -1563,6 +1386,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 43
 				}
@@ -1570,7 +1394,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-0hbz7_ls4d0-Guilty_Crown_rOn_krone.webm",
 		"video_id": "0hbz7_ls4d0",
@@ -1583,6 +1407,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 44
 				}
@@ -1590,7 +1415,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-BFDTwfmLiaw-HERO_-_Tenohira_Fairy_Tail_OP_12_HD.webm",
 		"video_id": "BFDTwfmLiaw",
@@ -1603,6 +1428,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 45
 				}
@@ -1610,7 +1436,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-Y5HYCHWcUFI-Kono_te_nobashite.webm",
 		"video_id": "Y5HYCHWcUFI",
@@ -1623,6 +1449,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 46
 				}
@@ -1706,9 +1533,9 @@
 		}
 	},
 	{
-		"version": 101,
-		"type": "SpotifyEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-7Ww0IJgUTDw-10._Blood_History_-_Accel_World_OST.webm",
+		"version": 102,
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "7Ww0IJgUTDw",
 		"url": "https://www.youtube.com/watch?v=7Ww0IJgUTDw",
 		"title": "Hiroyuki Oshima - Blood History",
@@ -1719,6 +1546,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 47
 				}
@@ -1728,65 +1556,10 @@
 		"artist": "Hiroyuki Oshima",
 		"artist_image": "http://i.imgur.com/DQqDLse.jpg",
 		"cover": "http://i.imgur.com/JFlbk99.jpg",
-		"album": "Accel World OST",
-		"spotify_data": {
-			"id": "custom",
-			"name": "Blood History",
-			"artists": [
-				{
-					"id": "custom",
-					"name": "Hiroyuki Oshima",
-					"images": [
-						{
-							"url": "http://i.imgur.com/DQqDLse.jpg"
-						}
-					],
-					"genres": [
-						"custom"
-					],
-					"popularity": 0.5,
-					"uri": "custom",
-					"href": "custom"
-				}
-			],
-			"artist": "Hiroyuki Oshima",
-			"cover_url": "http://i.imgur.com/JFlbk99.jpg",
-			"duration": 109,
-			"album": {
-				"id": "custom",
-				"name": "Accel World OST",
-				"artists": [
-					{
-						"id": "custom",
-						"name": "Hiroyuki Oshima",
-						"images": [
-							{
-								"url": "http://i.imgur.com/DQqDLse.jpg"
-							}
-						],
-						"genres": [
-							"custom"
-						],
-						"popularity": 0.5,
-						"uri": "custom",
-						"href": "custom"
-					}
-				],
-				"images": [
-					{
-						"url": "http://i.imgur.com/JFlbk99.jpg"
-					}
-				],
-				"uri": "custom"
-			},
-			"popularity": 0.5,
-			"uri": "custom",
-			"query": null,
-			"certainty": 1
-		}
+		"album": "Accel World OST"
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-trUtAgEFDOE-Hiroyuki_Sawano_-_Vogel_im_Kafig.webm",
 		"video_id": "trUtAgEFDOE",
@@ -1799,6 +1572,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 48
 				}
@@ -1933,7 +1707,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-eFah8TCWOro-Attack_on_Titan_-_The_Reluctant_Heroes.webm",
 		"video_id": "eFah8TCWOro",
@@ -1946,6 +1720,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 49
 				}
@@ -1953,7 +1728,7 @@
 		},
 		"song_title": "The Reluctant Heroes",
 		"artist": "Hiroyuki Sawano & MPI",
-		"artist_image": "https://i.scdn.co/image/3c1c1781de0c5974226bfae4e5cf649cf93b9d37",
+		"artist_image": "https://i.scdn.co/image/1d4eaf6713b68d024af77f75341844fa614ac640",
 		"cover": "https://i.scdn.co/image/3f3abb6325d6b7acefe4beca1ff8110625398813",
 		"album": "Attack on Titan (Original Soundtrack)",
 		"spotify_data": {
@@ -2062,7 +1837,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-WszLpgQmxVc-K-on_2_Temp._segundo_ending_Ho-Kago_Tea_Time_NO_Thank_You_Full_+_MP3_Full_HD..webm",
 		"video_id": "WszLpgQmxVc",
@@ -2075,6 +1850,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 50
 				}
@@ -2082,7 +1858,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-XHViAiVuDsA-Code_Geass_-_Continued_Story.webm",
 		"video_id": "XHViAiVuDsA",
@@ -2100,6 +1876,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 51
 				}
@@ -2107,7 +1884,7 @@
 		},
 		"song_title": "Continued Story (From \"Code Geass\")",
 		"artist": "Kenzie Smith Piano",
-		"artist_image": "https://i.scdn.co/image/01858fad79f29979bc4728312eb5153e7874e6f1",
+		"artist_image": "https://i.scdn.co/image/ea6b486d2f9a3c9fcf89f69684b0f4c4ca343bdf",
 		"cover": "https://i.scdn.co/image/47de7bbc6afe5f510dcd3a45b3ba187a2832b81b",
 		"album": "Anime Music Collection Piano Solo, Vol. 5",
 		"spotify_data": {
@@ -2207,7 +1984,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-FRivqBxbHRs-Kill_la_Kill_-_Ragyo_Kiryuin_Theme_Blumenkranz.webm",
 		"video_id": "FRivqBxbHRs",
@@ -2220,6 +1997,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 52
 				}
@@ -2227,7 +2005,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-51LMOJu9lwc-Knights_of_sidonia_intro_opening.webm",
 		"video_id": "51LMOJu9lwc",
@@ -2240,6 +2018,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 53
 				}
@@ -2247,7 +2026,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-E8XaV1yjabk-One_Punch_Man_OST_-_Main_Theme.webm",
 		"video_id": "E8XaV1yjabk",
@@ -2260,6 +2039,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 54
 				}
@@ -2363,7 +2143,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-IZ_ls4oi6m8-Liar_Mask-_Rika_Mayama_Akame_ga_kill_opening_2.webm",
 		"video_id": "IZ_ls4oi6m8",
@@ -2376,6 +2156,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 55
 				}
@@ -2383,7 +2164,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-Pn7dCgtwX2c-Linked_Horizon_-_Guren_No_Yumiya_Attack_On_Titan_FULL_Opening_Theme.webm",
 		"video_id": "Pn7dCgtwX2c",
@@ -2396,6 +2177,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 56
 				}
@@ -2501,7 +2283,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-EO8EadQNIXU-Jiyuu_No_Tsubasa_-_Linked_Horizon.webm",
 		"video_id": "EO8EadQNIXU",
@@ -2514,6 +2296,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 57
 				}
@@ -2521,7 +2304,7 @@
 		},
 		"song_title": "Jiyuu No Tsubasa",
 		"artist": "Linked Horizon",
-		"artist_image": "https://i.scdn.co/image/970b684cdddc1437ac41f8c8338fd1e716f58483",
+		"artist_image": "https://i.scdn.co/image/81fbe237c1e8e446b364d317a23992d92ee2a83b",
 		"cover": "https://i.scdn.co/image/63d65c2991b4f30a9b7febae2c1fb2eb8db64c94",
 		"album": "Jiyuu E No Shingeki",
 		"spotify_data": {
@@ -2619,7 +2402,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-CpDyF4pkbAs-Luna_Haruna_-_Overfly.webm",
 		"video_id": "CpDyF4pkbAs",
@@ -2632,6 +2415,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 58
 				}
@@ -2639,7 +2423,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-ny6vbAEYGCQ-MIDI_II_Startear_Full_Sword_Art_Online_II_Startear.webm",
 		"video_id": "ny6vbAEYGCQ",
@@ -2657,6 +2441,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 59
 				}
@@ -2664,7 +2449,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-eW6sEkTGbUc-Man_with_a_Mission_ft._Takuma_-_Database_Log_Horizon_OP.webm",
 		"video_id": "eW6sEkTGbUc",
@@ -2677,6 +2462,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 60
 				}
@@ -2684,7 +2470,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-KtYGJtSiTio-Bouken_Desho_Desho_Lyrics.webm",
 		"video_id": "KtYGJtSiTio",
@@ -2702,6 +2488,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 61
 				}
@@ -2709,7 +2496,7 @@
 		},
 		"song_title": "Bouken Desho Desho? - From \u201cThe Melancholy Of Haruhi Suzumiya\u201d",
 		"artist": "Minamotoya",
-		"artist_image": "https://i.scdn.co/image/46605201bd3a57d3667b970fbbe45eb5db736bb3",
+		"artist_image": "https://i.scdn.co/image/bb063ac82978b08a83e2e07ccfed2ad07a7a11ef",
 		"cover": "https://i.scdn.co/image/ec41d407e97df40447d69c3930a18c9aa19d4805",
 		"album": "Exit Trance Presents Speed Anime Trance Best 5",
 		"spotify_data": {
@@ -2787,7 +2574,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-t66VKF-cyhk-Mirai_Nikki_Opening_2_Full_Dead_END.webm",
 		"video_id": "t66VKF-cyhk",
@@ -2800,6 +2587,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 62
 				}
@@ -2807,7 +2595,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-7Cq4l2KTWIw-Mondaiji-tachi_ga_Isekai_Kara_Kuru_Sou_Desu_yo_OP_Full_Black_+_White.webm",
 		"video_id": "7Cq4l2KTWIw",
@@ -2820,6 +2608,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 63
 				}
@@ -2827,7 +2616,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-82NzmREdkpg-Mosaic_Kakera_-_SunSet_Swish.webm",
 		"video_id": "82NzmREdkpg",
@@ -2845,6 +2634,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 64
 				}
@@ -2852,7 +2642,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-zTm666EKYRs-moumoon_Hello_shooting-star_Music_Video.webm",
 		"video_id": "zTm666EKYRs",
@@ -2865,6 +2655,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 65
 				}
@@ -2872,7 +2663,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-HyyXq3GDJq0-My_Soul_Your_Beats_Yui_Ver_Full.webm",
 		"video_id": "HyyXq3GDJq0",
@@ -2885,6 +2676,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 66
 				}
@@ -2892,7 +2684,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-vhFXxvebiMY-Attack_On_Titan_Opening_3_FULL_-_Shinzou_Wo_Sasageyo.webm",
 		"video_id": "vhFXxvebiMY",
@@ -2905,6 +2697,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 67
 				}
@@ -3016,7 +2809,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-09r-78dfrvc-Mirai_Nikki_op_1_full.webm",
 		"video_id": "09r-78dfrvc",
@@ -3029,6 +2822,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 68
 				}
@@ -3036,7 +2830,7 @@
 		},
 		"song_title": "Mirai Nikki - Yuno Gasai (Yandere Self-Help Program)",
 		"artist": "Neotokio3",
-		"artist_image": "https://i.scdn.co/image/6980573a66054945a0484bf33c6ced1aa3c70c44",
+		"artist_image": "https://i.scdn.co/image/85db3b501cf74f9fb4a24ba967dff93d2fd55581",
 		"cover": "https://i.scdn.co/image/f5951216442d1d183ec682b755194b64e6d7173b",
 		"album": "Mirai Nikki - Yuno Gasai (Yandere Self-Help Program) - Single",
 		"spotify_data": {
@@ -3134,7 +2928,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-2eGazzxcp3I-Nevereverland_Nano.webm",
 		"video_id": "2eGazzxcp3I",
@@ -3152,6 +2946,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 69
 				}
@@ -3159,7 +2954,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-Ig9U4I9X2g0-No_pain_No_game_Nano_Btooom_OP.webm",
 		"video_id": "Ig9U4I9X2g0",
@@ -3172,6 +2967,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 70
 				}
@@ -3179,7 +2975,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-ZyyuV-gkavg-Noragami_Opening_-_Hello_Sleepwalkers_HD_+_Lyrics.webm",
 		"video_id": "ZyyuV-gkavg",
@@ -3197,6 +2993,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 71
 				}
@@ -3204,7 +3001,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-Tw-mnRIkkrM-Noragami_Opening_Full_Goya_no_Machiawase.webm",
 		"video_id": "Tw-mnRIkkrM",
@@ -3222,6 +3019,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 72
 				}
@@ -3229,7 +3027,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-3mu-2ENtV2s-Nurarihyon_no_Mago_Opening_2_FULL.webm",
 		"video_id": "3mu-2ENtV2s",
@@ -3247,6 +3045,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 73
 				}
@@ -3254,7 +3053,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-6YZlFdTIdzM-ONE_OK_ROCK_-_Clock_Strikes_Official_Music_Video.webm",
 		"video_id": "6YZlFdTIdzM",
@@ -3272,6 +3071,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 74
 				}
@@ -3279,7 +3079,7 @@
 		},
 		"song_title": "Clock Strikes",
 		"artist": "ONE OK ROCK",
-		"artist_image": "https://i.scdn.co/image/fd60c665014141911a0a789d89ba13a81de007c5",
+		"artist_image": "https://i.scdn.co/image/3b3b816312699a68731db11601b463a3cb4eeb26",
 		"cover": "https://i.scdn.co/image/b10a614ced95aff8bf68767ced8bf6180eb663df",
 		"album": "JINSEI KAKETE BOKU WA",
 		"spotify_data": {
@@ -3383,7 +3183,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-4J7K3yacig4-One_Piece_OST_-_The_Very_Very_Very_Strongest_extended.m4a",
 		"video_id": "4J7K3yacig4",
@@ -3401,6 +3201,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 75
 				}
@@ -3408,7 +3209,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-1Hl_lDEP9Tg-One_Piece_OP_5_Kokoro_no_Chizu_w_Lyrics.webm",
 		"video_id": "1Hl_lDEP9Tg",
@@ -3426,6 +3227,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 76
 				}
@@ -3433,7 +3235,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-655j9WXi4DA-One_of_the_top_Ost_-_Fate_Zero_-_Tragedy_And_Fate.webm",
 		"video_id": "655j9WXi4DA",
@@ -3446,6 +3248,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 77
 				}
@@ -3453,7 +3256,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-KZBgRDMyXzw-Oratorio_The_World_God_Only_Knows_-_God_only_knows_Full_Version_w_Lyrics.webm",
 		"video_id": "KZBgRDMyXzw",
@@ -3471,6 +3274,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 78
 				}
@@ -3478,7 +3282,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-nJXRDvwJN_Y-Ouran_Highschool_Host_Club_Begininng_Theme_Song_English.m4a",
 		"video_id": "nJXRDvwJN_Y",
@@ -3496,6 +3300,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 79
 				}
@@ -3503,7 +3308,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-NJHpoHD7og0-Overlord_Opening_Full_Clattanoia.webm",
 		"video_id": "NJHpoHD7og0",
@@ -3516,6 +3321,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 80
 				}
@@ -3621,7 +3427,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-witeODgX5OM-One_Piece_Opening_16_-_Hands_Up_~_Full_HD_~_1080p.webm",
 		"video_id": "witeODgX5OM",
@@ -3634,6 +3440,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 81
 				}
@@ -3641,7 +3448,7 @@
 		},
 		"song_title": "Hands Up! (One Piece Opening 16)",
 		"artist": "PelleK",
-		"artist_image": "https://i.scdn.co/image/5f3d1348f484fc8182b1263241dfa876595b81fb",
+		"artist_image": "https://i.scdn.co/image/5c812cc8451e65a1858442a1e05434143192ff2c",
 		"cover": "https://i.scdn.co/image/fddd36cd4d3cfd9016bb56ab05a6403d93b3fb37",
 		"album": "PelleK's One Piece Medley",
 		"spotify_data": {
@@ -3739,7 +3546,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-r-MEKwXFF-s-Bleach_Opening_Asterisk_full.webm",
 		"video_id": "r-MEKwXFF-s",
@@ -3757,6 +3564,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 82
 				}
@@ -3764,7 +3572,7 @@
 		},
 		"song_title": "*~Asterisk~ (Bleach Opening 1)",
 		"artist": "PelleK",
-		"artist_image": "https://i.scdn.co/image/5f3d1348f484fc8182b1263241dfa876595b81fb",
+		"artist_image": "https://i.scdn.co/image/8a49877f39c608a3eb4040175982f2a45d40387f",
 		"cover": "https://i.scdn.co/image/dd03d978e08831dff9b2ee1e5907717feb1617e9",
 		"album": "PelleK's Bleach Medley",
 		"spotify_data": {
@@ -3862,7 +3670,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-Zh9lynUFikc-Platinum_Disco_FULL_SUB_HQ_Nisemonogatari_Opening_3_by_Yuka_Iguchi.webm",
 		"video_id": "Zh9lynUFikc",
@@ -3880,6 +3688,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 83
 				}
@@ -3887,7 +3696,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-nPwCtsLhYto-RADWIMPS_Nandemonaiya_AMV_Kimi_no_Na_wa._Your_Name..webm",
 		"video_id": "nPwCtsLhYto",
@@ -3900,6 +3709,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 84
 				}
@@ -3907,7 +3717,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-5xgxE3FOnDE-ReLIFE_OP_Button_PENGUIN_RESEARCH_Konero.webm",
 		"video_id": "5xgxE3FOnDE",
@@ -3925,6 +3735,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 85
 				}
@@ -3932,9 +3743,9 @@
 		}
 	},
 	{
-		"version": 101,
-		"type": "SpotifyEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-mCI2fnmK6wk-In_My_World_Ao_No_Exorcist_The_Blue_Exorcist_Full_Original.webm",
+		"version": 102,
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "mCI2fnmK6wk",
 		"url": "https://www.youtube.com/watch?v=mCI2fnmK6wk",
 		"title": "ROOKiEZ is PUNK'D - In My World",
@@ -3945,6 +3756,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 86
 				}
@@ -3954,65 +3766,10 @@
 		"artist": "ROOKiEZ is PUNK'D",
 		"artist_image": "http://i.imgur.com/ceNNA5m.jpg",
 		"cover": "http://i.imgur.com/yqt7jdc.jpg",
-		"album": "Ao no Exorcist",
-		"spotify_data": {
-			"id": "custom",
-			"name": "In My World",
-			"artists": [
-				{
-					"id": "custom",
-					"name": "ROOKiEZ is PUNK'D",
-					"images": [
-						{
-							"url": "http://i.imgur.com/ceNNA5m.jpg"
-						}
-					],
-					"genres": [
-						"custom"
-					],
-					"popularity": 0.5,
-					"uri": "custom",
-					"href": "custom"
-				}
-			],
-			"artist": "ROOKiEZ is PUNK'D",
-			"cover_url": "http://i.imgur.com/yqt7jdc.jpg",
-			"duration": 203,
-			"album": {
-				"id": "custom",
-				"name": "Ao no Exorcist",
-				"artists": [
-					{
-						"id": "custom",
-						"name": "ROOKiEZ is PUNK'D",
-						"images": [
-							{
-								"url": "http://i.imgur.com/ceNNA5m.jpg"
-							}
-						],
-						"genres": [
-							"custom"
-						],
-						"popularity": 0.5,
-						"uri": "custom",
-						"href": "custom"
-					}
-				],
-				"images": [
-					{
-						"url": "http://i.imgur.com/yqt7jdc.jpg"
-					}
-				],
-				"uri": "custom"
-			},
-			"popularity": 0.5,
-			"uri": "custom",
-			"query": null,
-			"certainty": 1
-		}
+		"album": "Ao no Exorcist"
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-ROxkJoIhr6o-Sakurasou_no_Pet_na_Kanojo_ED_DAYS_of_DASH_Full.webm",
 		"video_id": "ROxkJoIhr6o",
@@ -4030,6 +3787,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 87
 				}
@@ -4037,7 +3795,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-s6jk_DBcLkQ-Sankarea_OP_Full_Lyrics_-_Nano.RIPE_-_Esoragoto.webm",
 		"video_id": "s6jk_DBcLkQ",
@@ -4055,6 +3813,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 88
 				}
@@ -4062,7 +3821,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-vyGFM5CGnoo-Kill_la_Kill_Don_t_Lose_Your_Way.webm",
 		"video_id": "vyGFM5CGnoo",
@@ -4075,6 +3834,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 89
 				}
@@ -4082,7 +3842,7 @@
 		},
 		"song_title": "Don't Lose Your Way (Feat. NoneLikeJoshua)",
 		"artist": "Sapphire & None Like Joshua",
-		"artist_image": "https://i.scdn.co/image/f7e2c2e20e854005b72b0b5460c9934351cb1e4a",
+		"artist_image": "https://i.scdn.co/image/f0396585a88b82628af0eaa189129804d44f0212",
 		"cover": "https://i.scdn.co/image/f0396585a88b82628af0eaa189129804d44f0212",
 		"album": "Don't Lose Your Way (Kill la Kill)",
 		"spotify_data": {
@@ -4203,7 +3963,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-QOOgMyIGtrQ-Sayuri_-_Rura.webm",
 		"video_id": "QOOgMyIGtrQ",
@@ -4221,6 +3981,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 90
 				}
@@ -4228,7 +3989,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-HvFMSVB1YI4-Sekaiichi_Hatsukoi_ed_FULL.webm",
 		"video_id": "HvFMSVB1YI4",
@@ -4241,6 +4002,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 91
 				}
@@ -4248,7 +4010,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-HVKBTUqBJ3Y-Shingeki_no_Kyojin_ED2.webm",
 		"video_id": "HVKBTUqBJ3Y",
@@ -4261,6 +4023,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 92
 				}
@@ -4268,7 +4031,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-jOGfTrbrwh0-Shiver_-_the_GazettE_Kuroshitsuji_II_Opening_Song.webm",
 		"video_id": "jOGfTrbrwh0",
@@ -4281,6 +4044,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 93
 				}
@@ -4288,7 +4052,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-CdSE1loNwmo-Sidonia_no_Kishi_-_Daikyuu_Wakusei_Seneki_OP_Opening.webm",
 		"video_id": "CdSE1loNwmo",
@@ -4301,6 +4065,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 94
 				}
@@ -4308,7 +4073,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-OYVlx3vnu8I-Super_Driver_AMV_-_Suzumiya_Haruhi_Season_2_Full_OP_Song_+_Video.webm",
 		"video_id": "OYVlx3vnu8I",
@@ -4326,6 +4091,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 95
 				}
@@ -4333,7 +4099,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-tTIwbusbN1g-Sword_Of_The_Stranger_-_Ihojin_No_Yaiba_Battle_Theme.webm",
 		"video_id": "tTIwbusbN1g",
@@ -4346,6 +4112,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 96
 				}
@@ -4353,7 +4120,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-FXoq3a02yjc-Tekken_7_OST_-_Aloneness_Story_Mode_~_Staff_Roll.webm",
 		"video_id": "FXoq3a02yjc",
@@ -4371,6 +4138,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 97
 				}
@@ -4378,9 +4146,9 @@
 		}
 	},
 	{
-		"version": 101,
-		"type": "SpotifyEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-C-o8pTi6vd8-ARAGOTO_OP_THE_ORAL_CIGARETTES_Hey_Kids_MusicVideo.webm",
+		"version": 102,
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "C-o8pTi6vd8",
 		"url": "https://www.youtube.com/watch?v=C-o8pTi6vd8",
 		"title": "The Oral Cigarettes - Hey Kids",
@@ -4391,6 +4159,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 98
 				}
@@ -4400,65 +4169,10 @@
 		"artist": "The Oral Cigarettes",
 		"artist_image": "http://i.imgur.com/HigkKjz.jpg",
 		"cover": "http://i.imgur.com/WfW0mpe.jpg",
-		"album": "FIXION",
-		"spotify_data": {
-			"id": "custom",
-			"name": "Hey Kids",
-			"artists": [
-				{
-					"id": "custom",
-					"name": "The Oral Cigarettes",
-					"images": [
-						{
-							"url": "http://i.imgur.com/HigkKjz.jpg"
-						}
-					],
-					"genres": [
-						"custom"
-					],
-					"popularity": 0.5,
-					"uri": "custom",
-					"href": "custom"
-				}
-			],
-			"artist": "The Oral Cigarettes",
-			"cover_url": "http://i.imgur.com/WfW0mpe.jpg",
-			"duration": 266,
-			"album": {
-				"id": "custom",
-				"name": "FIXION",
-				"artists": [
-					{
-						"id": "custom",
-						"name": "The Oral Cigarettes",
-						"images": [
-							{
-								"url": "http://i.imgur.com/HigkKjz.jpg"
-							}
-						],
-						"genres": [
-							"custom"
-						],
-						"popularity": 0.5,
-						"uri": "custom",
-						"href": "custom"
-					}
-				],
-				"images": [
-					{
-						"url": "http://i.imgur.com/WfW0mpe.jpg"
-					}
-				],
-				"uri": "custom"
-			},
-			"popularity": 0.5,
-			"uri": "custom",
-			"query": null,
-			"certainty": 1
-		}
+		"album": "FIXION"
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-JM0BXII3Y3c-Koe_no_Katachi_OST_-_lit.webm",
 		"video_id": "JM0BXII3Y3c",
@@ -4471,6 +4185,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 99
 				}
@@ -4574,7 +4289,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-t3wcNYENP5E-This_game-Konomi_Suzuki_No_game_no_life_full_opening.webm",
 		"video_id": "t3wcNYENP5E",
@@ -4592,6 +4307,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 100
 				}
@@ -4599,7 +4315,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-KjlTmJQsceY-Fairy_Tail_-_Shukumei.webm",
 		"video_id": "KjlTmJQsceY",
@@ -4612,6 +4328,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 101
 				}
@@ -4619,7 +4336,7 @@
 		},
 		"song_title": "Shukumei",
 		"artist": "Tifita",
-		"artist_image": "https://i.scdn.co/image/ce543e283b150b4ffa33ea47eaa6aa9a79e62560",
+		"artist_image": "https://i.scdn.co/image/3641e8b64abb088f4504789cfb6475afe2759fe2",
 		"cover": "https://i.scdn.co/image/7bcee79d507d6bc3dab39cd35860c0c416fde59e",
 		"album": "Fairy Tail: Piano Solo",
 		"spotify_data": {
@@ -4717,7 +4434,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-xcXSllSEs4I-Tokyo_Ghoul_Root_A_On_My_Own_OST.webm",
 		"video_id": "xcXSllSEs4I",
@@ -4730,6 +4447,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 102
 				}
@@ -4737,7 +4455,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-lk0gm_Z81bE-Toradora_-_Lost_My_Pieces_OST.webm",
 		"video_id": "lk0gm_Z81bE",
@@ -4750,6 +4468,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 103
 				}
@@ -4757,7 +4476,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-SXqdT5kOIAw-We_re_the_Stars_-_Fairy_Tail_ENDING_14_FULL_+_LYRICS.webm",
 		"video_id": "SXqdT5kOIAw",
@@ -4770,6 +4489,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 104
 				}
@@ -4777,7 +4497,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-kO1jc3DJ6Q4-White_Silence_-_Tokyo_ghoul_Nightcore_Thaisub.webm",
 		"video_id": "kO1jc3DJ6Q4",
@@ -4790,6 +4510,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 105
 				}
@@ -4797,7 +4518,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-W7rrk7Hmngc-Yasuharu_Takanashi_-_Multiflora_no_Theme.webm",
 		"video_id": "W7rrk7Hmngc",
@@ -4810,6 +4531,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 106
 				}
@@ -4817,7 +4539,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-lMQK5MbIb1E-Yojou-han_Shinwa_Taikai_The_Tatami_Galaxy_ED_Full.webm",
 		"video_id": "lMQK5MbIb1E",
@@ -4830,6 +4552,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 107
 				}
@@ -4837,7 +4560,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-AV7QjFdNkUk-Zankyou_no_Terror_Dare_ka_Umi_wo..webm",
 		"video_id": "AV7QjFdNkUk",
@@ -4850,6 +4573,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 108
 				}
@@ -4857,7 +4581,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-eGLw9C2N40A-_.webm",
 		"video_id": "eGLw9C2N40A",
@@ -4875,6 +4599,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 109
 				}
@@ -4882,7 +4607,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-a2GujJZfXpg-original_ver._-Your_name._Music_Video_edition-_from_new_album_DVD.webm",
 		"video_id": "a2GujJZfXpg",
@@ -4895,6 +4620,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 110
 				}
@@ -4902,7 +4628,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-cwhrIAD3KVQ-op.webm",
 		"video_id": "cwhrIAD3KVQ",
@@ -4920,6 +4646,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 111
 				}
@@ -4927,7 +4654,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-PDSkFeMVNFs-movie_ver._RADWIMPS_MV.webm",
 		"video_id": "PDSkFeMVNFs",
@@ -4940,6 +4667,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 112
 				}
@@ -4947,7 +4675,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-8tIB3IEWirk-Re_-_ED_STYX_HELIX.webm",
 		"video_id": "8tIB3IEWirk",
@@ -4965,6 +4693,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 113
 				}
@@ -4972,7 +4701,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-galehoexbCU-Boku_no_hero_academia_ED_Full_HEROES.webm",
 		"video_id": "galehoexbCU",
@@ -4990,6 +4719,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 114
 				}
@@ -4997,7 +4727,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "SpotifyEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-FY9qBx7W9o0-LiSA_-_Shirushi.webm",
 		"video_id": "FY9qBx7W9o0",
@@ -5015,6 +4745,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 115
 				}
@@ -5124,7 +4855,7 @@
 		}
 	},
 	{
-		"version": 101,
+		"version": 102,
 		"type": "YoutubeEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-cXeb9cb6k0I-Naruto_Shippuden_Opening_16.m4a",
 		"video_id": "cXeb9cb6k0I",
@@ -5142,6 +4873,7 @@
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
 					"index": 116
 				}
