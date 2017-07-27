@@ -1001,14 +1001,15 @@ class DisplayCommands:
         "3.5.8": (1497825334, "Adjusted design to look more like `queue`'s style"),
         "3.8.9": (1499465102, "Part of the `Giesenesis` rewrite"),
         "4.0.1": (1500346108, "Quantity parameter. Increased history limit"),
-        "4.1.7": (1500876373, "Displaying the amount of entries displayed in relation to the total entries")
+        "4.1.7": (1500876373, "Displaying the amount of entries displayed in relation to the total entries"),
+        "4.2.9", (1501176845, "Showing the correct amount of entries displayed")
     })
     async def cmd_history(self, channel, player, num="15"):
         """
         ///|Usage
         {command_prefix}history [quantity]
         ///|Explanation
-        Show the last [quantity] songs. If [quantity] isn't provided, show back to 15 songs
+        Show the last [quantity] songs. If [quantity] isn't provided, show up to 15 songs
         """
 
         try:
@@ -1026,7 +1027,10 @@ class DisplayCommands:
             return Response("There **is** no history")
 
         lines = ["**HISTORY**"]
-        for ind, entry in enumerate(player.playlist.history[:quantity], 1):
+
+        entries = player.playlist.history[:quantity]
+
+        for ind, entry in enumerate(entries, 1):
             finish_time = entry.meta.get("finish_time")
             seconds_passed = time.time() - finish_time
             lines.append(
@@ -1039,7 +1043,7 @@ class DisplayCommands:
 
         lines.append(
             "\nShowing {} out of {} entr{}".format(
-                quantity,
+                len(entries),
                 len(player.playlist.history),
                 "y" if len(player.playlist.history) == 1 else "ies"
             )
