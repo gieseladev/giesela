@@ -43,7 +43,8 @@ class PlaylistCommands:
         "4.1.2": (1500790172, "Closing the playlist builder without saving for a newly created playlist, deletes said playlist."),
         "4.1.5": (1500812970, "Some design adjustments"),
         "4.2.0": (1500889194, "Entry Manipulator switched to GieselaEntry instead of fake SpotifyEntries"),
-        "4.2.4": (1500960131, "Fixed display of broken playlists")
+        "4.2.4": (1500960131, "Fixed display of broken playlists"),
+        "4.3.5": (1501249495, "Displaying the type of entry using colour-coding and fixed search indices")
     })
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -523,7 +524,7 @@ class PlaylistCommands:
                             items_per_page)) if len(entries) > 0 else 0
 
             for i in range(start, end):
-                entries_text += str(i + 1) + ". " + entries[i].title + "\n"
+                entries_text += "`{}.` {} {}\n".format(i + 1, entries[i].title, self.config.entry_type_emojis[entries[i].__class__.__name__])
             entries_text += "\nPage {} of {}".format(entries_page + 1,
                                                      iterations + 1)
 
@@ -653,7 +654,7 @@ class PlaylistCommands:
 
                 lines = []
                 for certainty, entry in results[:5]:
-                    entry_index = entries.index(entry)
+                    entry_index = entries.index(entry) + 1
                     lines.append(
                         "`{}.` **{}**".format(entry_index, entry.title))
 
