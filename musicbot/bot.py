@@ -89,12 +89,17 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
         self.load_online_loggers()
 
-    def find_home_channel(self, server):
-        channel = find(
-            lambda c: c.type == ChannelType.voice and any(x in c.name.lower().split()
-                                                          for x in ["giesela", "musicbot", "bot", "music", "reign"]),
-            server.channels
-        )
+    def find_home_channel(self, server, most_members=True):
+        channels_by_member = sorted([channel for channel in server.channels if len(channel.voice_members) > 0], key=lambda channel: len(channel.voice_members), reverse=True)
+
+        if most_members and channels_by_member:
+            channel = channels_by_member[0]
+        else:
+            channel = find(
+                lambda c: c.type == ChannelType.voice and any(x in c.name.lower().split()
+                                                              for x in ["giesela", "musicbot", "bot", "music", "reign"]),
+                server.channels
+            )
         if channel is None:
             channel = choice(
                 filter(lambda c: c.type == ChannelType.voice, server.channels))
@@ -379,14 +384,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 if not quiet:
                     print("Sending instead")
                 return await self.safe_send_message(message.channel, new)
-
-    async def send_typing(self, destination):
-        try:
-            return await super().send_typing(destination)
-        except discord.Forbidden:
-            if self.config.debug_mode:
-                print(
-                    "Could not send typing to %s, no permssion" % destination)
 
     async def edit_profile(self, **fields):
         if self.user.bot:
