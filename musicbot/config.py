@@ -86,6 +86,13 @@ class ConfigDefaults:
     _password = None
     _token = None
 
+    entry_type_emojis = ***REMOVED***
+        "YoutubeEntry":   ":black_circle:",
+        "TimestampEntry": ":large_blue_circle:",
+        "GieselaEntry":   ":white_circle:",
+        "SpotifyEntry":   ":red_circle:"
+    ***REMOVED***
+
     owner_id = None
     command_prefix = "!"
     bound_channels = set()
