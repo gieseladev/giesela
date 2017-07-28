@@ -1230,6 +1230,7 @@ class PlaylistCommands:
         if new_entry:
             if player.current_entry and player.current_entry.url == new_entry.url:
                 player._current_entry = new_entry
+                await self.on_player_play(self, player, new_entry):
             elif not playlistname:
                 return Response("This entry's already passed")
 
