@@ -442,6 +442,9 @@ class AdminCommands:
         await self.disconnect_all_voice_clients()
         raise exceptions.TerminateSignal
 
+    @command_info("1.0.0", 1477180800, ***REMOVED***
+        "4.3.7": (1501264004, "Fixed command")
+    ***REMOVED***)
     async def cmd_disconnect(self, server):
         """
         Usage:
@@ -449,7 +452,9 @@ class AdminCommands:
 
         Make the bot leave his current voice channel.
         """
-        await self.disconnect_voice_client(server)
+        if server.id in self.players:
+            self.players.pop(server.id).kill()
+        await server.voice_client.disconnect()
         return Response(":hear_no_evil:")
 
     async def cmd_restart(self, channel):

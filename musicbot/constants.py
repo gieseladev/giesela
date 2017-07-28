@@ -1,6 +1,6 @@
 import os.path
 
-MAIN_VERSION = "4.3.6"
+MAIN_VERSION = "4.3.7"
 SUB_VERSION = "breadstick"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
