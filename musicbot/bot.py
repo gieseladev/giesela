@@ -696,50 +696,33 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
     async def on_voice_state_update(self, before, after):
         await self.on_any_update(before, after)
 
-        if not all([before, after]):
-            return
-
-        # nothing happened
-        if before.voice_channel == after.voice_channel:
-            return
-
-        # not my business
-        if before.server.id not in self.players:
-            return
-
-        my_voice_channel = after.server.me.voice_channel
-
-        # I'm not in a voice channel
-        if not my_voice_channel:
-            return
-
-        # I was here already
-        if before.voice_channel == my_voice_channel:
-            joining = False
-        # I joined
-        elif after.voice_channel == my_voice_channel:
-            joining = True
-        # Someone else
-        else:
-            return
-
-        player = await self.get_player(after.server)
-
-        player.voice_client.channel = after.voice_channel
-
         if not self.config.auto_pause:
             return
 
-        vm_count = sum(
-            1 for m in my_voice_channel.voice_members if m != after.server.me and not m.bot)
-        if vm_count == 0:
-            if player.is_playing:
-                print("[AUTOPAUSE] Pausing")
-                player.pause()
-        elif vm_count == 1 and joining:
-            if player.is_paused:
-                print("[AUTOPAUSE] Unpausing")
-                player.resume()
+        if not (before and after):
+            return
+
+        if after.server.me != after and after.bot:
+            return
+
+        if before.voice.voice_channel != after.voice.voice_channel:
+            my_channel = after.server.me.voice.voice_channel
+            if not my_channel:
+                return
+
+            # I was alone but a non-bot joined
+            if sum(1 for vm in my_channel.voice_members if not vm.bot) == 1:
+                player = await self.get_player(after.server)
+                if player.is_paused:
+                    print("[AUTOPAUSE] Resuming")
+                    player.resume()
+
+            # I am now alone
+            if sum(1 for vm in my_channel.voice_members if not vm.bot) == 0:
+                player = await self.get_player(after.server)
+                if player.is_playing:
+                    print("[AUTOPAUSE] Pausing")
+                    player.pause()
 
     async def on_any_update(self, before, after):
         if before.server.id in self.online_loggers:
