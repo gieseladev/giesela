@@ -1163,7 +1163,8 @@ class PlaylistCommands:
         "3.4.4": (1497611753, "Changed command name from \"removeplayingfromplaylist\" to \"removefromplaylist\", thanks Paulo"),
         "3.5.8": (1497826917, "Now displaying the names of the song and the playlist"),
         "3.6.5": (1498152365, "Don't require a playlistname argument anymore but take it from the entry itself"),
-        "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite"),
+        "4.3.6": (1501249709, "Fixed variable name error")
     })
     async def cmd_removefromplaylist(self, channel, author, player, playlistname=None):
         """
@@ -1179,8 +1180,8 @@ class PlaylistCommands:
         if not playlistname:
             if "playlist" in player.current_entry.meta:
                 self.playlists.edit_playlist(
-                    playlist_name, player.playlist, remove_entries=[player.current_entry, ])
-                return Response("Removed **{}** from playlist `{}`".format(player.current_entry.title, playlist_name.title()))
+                    playlistname, player.playlist, remove_entries=[player.current_entry, ])
+                return Response("Removed **{}** from playlist `{}`".format(player.current_entry.title, playlistname.title()))
             else:
                 return Response("Please specify the playlist's name!")
 
