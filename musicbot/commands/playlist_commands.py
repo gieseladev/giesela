@@ -914,7 +914,7 @@ class PlaylistCommands:
             nonlocal _interface_message
             nonlocal error
 
-            error_text = ""
+            error_text = "There's no error but because of a Discord bug I have to write something here\n\n"
             if error:
                 error_text = error_format.format(error_message=error)
                 error = None
@@ -1201,7 +1201,8 @@ class PlaylistCommands:
     @block_user
     @command_info("4.1.9", 1500882702, {
         "4.2.2": (1500911879, "Entry not in a playlist handling"),
-        "4.2.6": (1500963901, "Can now use the entry manipulator on non-playlist entries")
+        "4.2.6": (1500963901, "Can now use the entry manipulator on non-playlist entries"),
+        "4.3.3": (1501235095, "Fixed strange message formatting bug.")
     })
     async def cmd_editentry(self, channel, author, player, leftover_args):
         """
@@ -1230,7 +1231,7 @@ class PlaylistCommands:
         if new_entry:
             if player.current_entry and player.current_entry.url == new_entry.url:
                 player._current_entry = new_entry
-                await self.on_player_play(self, player, new_entry):
+                await self.on_player_play(player, new_entry)
             elif not playlistname:
                 return Response("This entry's already passed")
 
