@@ -400,11 +400,11 @@ class AdminCommands:
             Settings["blocked_commands"] = self.blocked_commands
             return Response("Blocked command `{} {}`".format(command, " ".join(args)))
 
-    @block_user
     @command_info("2.0.2", 1484676180, {
         "3.8.3": (1499184914, "Can now use multiline statements without having to use tricks like /n/"),
         "3.8.5": (1499279145, "Better code display"),
-        "3.9.6": (1499889309, "Escaping the result and adding the shortcut entry for player.current_entry")
+        "3.9.6": (1499889309, "Escaping the result and adding the shortcut entry for player.current_entry"),
+        "4.3.4": (1501246003, "Don't block user anymore. That's stupid")
     })
     async def cmd_execute(self, channel, author, server, raw_content, player=None):
         statement = raw_content.strip()
