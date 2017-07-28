@@ -50,7 +50,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
     def __init__(self):
         self.players = {}
-        self.the_voice_clients = {}
         self.locks = defaultdict(asyncio.Lock)
         self.voice_client_connect_lock = asyncio.Lock()
         self.voice_client_move_lock = asyncio.Lock()
@@ -89,10 +88,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         self.instant_translate_certainty = .7
 
         self.load_online_loggers()
-
-    @staticmethod
-    def _fixg(x, dp=2):
-        return ("{:.%sf}" % dp).format(x).rstrip("0").rstrip(".")
 
     def find_home_channel(self, server):
         channel = find(
@@ -135,152 +130,13 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         return discord.utils.oauth_url(
             self.cached_client_id, permissions=permissions, server=server)
 
-    async def get_voice_client(self, channel):
-        if isinstance(channel, Object):
-            channel = self.get_channel(channel.id)
-
-        if getattr(channel, "type", ChannelType.text) != ChannelType.voice:
-            raise AttributeError("Channel passed must be a voice channel")
-
-        with await self.voice_client_connect_lock:
-            server = channel.server
-            if server.id in self.the_voice_clients:
-                await self.move_voice_client(channel)
-                return self.the_voice_clients[server.id]
-
-            s_id = self.ws.wait_for("VOICE_STATE_UPDATE",
-                                    lambda d: d.get("user_id") == self.user.id)
-            _voice_data = self.ws.wait_for("VOICE_SERVER_UPDATE",
-                                           lambda d: True)
-
-            await self.ws.voice_state(server.id, channel.id)
-
-            s_id_data = await asyncio.wait_for(
-                s_id, timeout=10, loop=self.loop)
-            voice_data = await asyncio.wait_for(
-                _voice_data, timeout=10, loop=self.loop)
-            session_id = s_id_data.get("session_id")
-
-            kwargs = {
-                "user": self.user,
-                "channel": channel,
-                "data": voice_data,
-                "loop": self.loop,
-                "session_id": session_id,
-                "main_ws": self.ws
-            }
-            voice_client = VoiceClient(**kwargs)
-            self.the_voice_clients[server.id] = voice_client
-
-            retries = 3
-            for x in range(retries):
-                try:
-                    print("Attempting connection...")
-                    await asyncio.wait_for(
-                        voice_client.connect(), timeout=10, loop=self.loop)
-                    print("Connection established.")
-                    break
-                except:
-                    traceback.print_exc()
-                    print("Failed to connect, retrying (%s/%s)..." %
-                          (x + 1, retries))
-                    await asyncio.sleep(1)
-                    await self.ws.voice_state(server.id, None, self_mute=True)
-                    await asyncio.sleep(1)
-
-                    if x == retries - 1:
-                        raise exceptions.HelpfulError(
-                            "Cannot establish connection to voice chat.  "
-                            "Something may be blocking outgoing UDP connections.",
-                            "This may be an issue with a firewall blocking UDP.  "
-                            "Figure out what is blocking UDP and disable it.  "
-                            "It's most likely a system firewall or overbearing anti-virus firewall.  "
-                        )
-
-            return voice_client
-
     def get_global_user(self, user_id):
         for server in self.servers:
             mem = server.get_member(user_id)
-            if mem is not None:
+            if mem:
                 return mem
 
         return None
-
-    async def mute_voice_client(self, channel, mute):
-        await self._update_voice_state(channel, mute=mute)
-
-    async def deafen_voice_client(self, channel, deaf):
-        await self._update_voice_state(channel, deaf=deaf)
-
-    async def move_voice_client(self, channel):
-        await self._update_voice_state(channel)
-
-    async def reconnect_voice_client(self, server):
-        if server.id not in self.the_voice_clients:
-            return
-
-        vc = self.the_voice_clients.pop(server.id)
-        _paused = False
-
-        player = None
-        if server.id in self.players:
-            player = self.players[server.id]
-            if player.is_playing:
-                player.pause()
-                _paused = True
-
-        try:
-            await vc.disconnect()
-        except:
-            print("Error disconnecting during reconnect")
-            traceback.print_exc()
-
-        await asyncio.sleep(0.1)
-
-        if player:
-            new_vc = await self.get_voice_client(vc.channel)
-            player.reload_voice(new_vc)
-
-            if player.is_paused and _paused:
-                player.resume()
-
-    async def disconnect_voice_client(self, server):
-        if server.id not in self.the_voice_clients:
-            return
-
-        if server.id in self.players:
-            self.players.pop(server.id).kill()
-
-        await self.the_voice_clients.pop(server.id).disconnect()
-
-    async def disconnect_all_voice_clients(self):
-        for vc in self.the_voice_clients.copy().values():
-            await self.disconnect_voice_client(vc.channel.server)
-
-    async def _update_voice_state(self, channel, *, mute=False, deaf=False):
-        if isinstance(channel, Object):
-            channel = self.get_channel(channel.id)
-
-        if getattr(channel, "type", ChannelType.text) != ChannelType.voice:
-            raise AttributeError("Channel passed must be a voice channel")
-
-        # I'm not sure if this lock is actually needed
-        with await self.voice_client_move_lock:
-            server = channel.server
-
-            payload = {
-                "op": 4,
-                "d": {
-                    "guild_id": server.id,
-                    "channel_id": channel.id,
-                    "self_mute": mute,
-                    "self_deaf": deaf
-                }
-            }
-
-            await self.ws.send(utils.to_json(payload))
-            self.the_voice_clients[server.id].channel = channel
 
     async def get_player(self, server, channel=None):
         if isinstance(server, str):
@@ -291,11 +147,10 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             # but it's not in the right channel
             if channel and self.players[server.id].voice_client.channel != channel:
                 # move that stuff
-                await self.move_voice_client(channel)
-                self.players[server.id].voice_client.channel = channel
+                await self.players[server.id].voice_client.move_to(channel)
         else:
             # create a new voice client in the selected channel (if given) or go to the home channel
-            voice_client = await self.get_voice_client(channel or self.find_home_channel(server))
+            voice_client = await self.join_voice_channel(channel or self.find_home_channel(server))
 
             player = MusicPlayer(self, voice_client) \
                 .on("play", self.on_player_play) \
