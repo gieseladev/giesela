@@ -253,7 +253,7 @@
 		***REMOVED***,
 		"song_title": "Evangelion X",
 		"artist": "Anonymuz",
-		"artist_image": "https://i.scdn.co/image/877451a1921eadcfc7feec8bca8baf3454cfc629",
+		"artist_image": "https://i.scdn.co/image/f8c14b06e00cd00472816ec9843694564ba4b6f2",
 		"cover": "https://i.scdn.co/image/aeaa17f240d4a39d01b52f3fc711469690a5bcd4",
 		"album": "Evangelion X",
 		"spotify_data": ***REMOVED***
@@ -610,7 +610,7 @@
 		***REMOVED***,
 		"song_title": "Luminous Sword",
 		"artist": "Cat Trumpet",
-		"artist_image": "https://i.scdn.co/image/bd7f2342b0a1307f2f97940db56dbfc48475a8a5",
+		"artist_image": "https://i.scdn.co/image/35ecbada861a9f476e4803bf478ffc844c0818c1",
 		"cover": "https://i.scdn.co/image/ae97e987167e6f3363bbfcbe628129610fae5066",
 		"album": "Sword Art Online Piano Collection",
 		"spotify_data": ***REMOVED***
@@ -945,20 +945,15 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-PGoHzoZ2OI0-Durarara_Opening_2.webm",
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "PGoHzoZ2OI0",
 		"url": "https://www.youtube.com/watch?v=PGoHzoZ2OI0",
-		"title": "Durarara!! Opening 2",
+		"title": "Complication",
 		"duration": 91,
 		"thumbnail": "https://i.ytimg.com/vi/PGoHzoZ2OI0/maxresdefault.jpg",
 		"description": "DRR!! Season 1 OP2\n\"Complication\" by ROOKiEZ is PUNK'D",
 		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203510202421477376",
-				"name": "ZyLect"
-			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
@@ -967,7 +962,12 @@
 					"index": 24
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Complication",
+		"artist": "ROOKiEZ is PUNK'D",
+		"artist_image": "http://i.imgur.com/7DrxNdc.jpg",
+		"cover": "http://i.imgur.com/i8pvxCH.jpg",
+		"album": "Durarara"
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
@@ -1070,11 +1070,11 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-RZufKBrx0hY-Fairy_Tail_-_Absolute_Zero_SILVER_New_2016_Ost.m4a",
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "RZufKBrx0hY",
 		"url": "https://www.youtube.com/watch?v=RZufKBrx0hY",
-		"title": "Fairy Tail - Absolute Zero SILVER [New 2016 Ost]",
+		"title": "Absolute Zero Silver",
 		"duration": 272,
 		"thumbnail": "https://i.ytimg.com/vi/RZufKBrx0hY/maxresdefault.jpg",
 		"description": "Fairy tail Sound Collection Volume 2\nBy Yasuharu Takanashi ~ I dont own anything, all rights belong to their respective owners. ~",
@@ -1087,7 +1087,12 @@
 					"index": 29
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Absolute Zero Silver",
+		"artist": "Yasuharu Takanashi",
+		"artist_image": "http://i.imgur.com/Z81vet0.jpg",
+		"cover": "http://i.imgur.com/08CoJCz.png",
+		"album": "Fairy Tail"
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
@@ -1332,13 +1337,13 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-WWB01IuMvzA-God_knows..._The_Melancholy_of_Haruhi_Suzumiya_Kadokawa_MAD.webm",
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "WWB01IuMvzA",
 		"url": "https://www.youtube.com/watch?v=WWB01IuMvzA",
-		"title": "God knows... ''The Melancholy of Haruhi Suzumiya'' \u3010\u6dbc\u5bae\u30cf\u30eb\u30d2\u306e\u6182\u9b31\u3011\u3000\u3010Kadokawa\u516c\u8a8dMAD\u3011",
+		"title": "God Knows...",
 		"duration": 281,
-		"thumbnail": "https://i.ytimg.com/vi/WWB01IuMvzA/hqdefault.jpg",
+		"thumbnail": "http://i.imgur.com/Cx0m4u4.jpg",
 		"description": "The Melancholy of Haruhi Suzumiya\u3000\u3010Kadokawa\u516c\u8a8dAMV\u3011\nGod knows... \u3000\uff08by Aya Hirano\uff09\n\n\n\nGod knows...\u3000Lyrics\u3000(English Translation)\n\n\nI run past you with a thirsty heart.\nSorry, I couldn't do anything-\nyou won't even let us\nshare our pain with each other.\n\nIn order to live purely\nI face your back and leave without turning back.\non the lonely rail\n\nI'll follow you.\nNo matter where you are in the darkness of this bitter world\nyou will shine,\nand exceed the limits of the future.\nTo prevent your spirit from being broken because of your weakness\nyou converge with my way.\nNow, God bless us...\n\n\nI send my now passionate feelings-\nthey melt reality, then just hover there suspended.\nThere's no reason for me wanting to see you.\nI pour my feelings into you, lovin' you\n\nLet's at least imagine only beautiful dreams,\nas we chase after them\nfor your lonely heart\n\nStop it, lying isn't like you.\nLook into my eyes and let's speak of what will be.\nI'm prepared-\neven for a bleak future.\nBecome strong and you might even be able to change fate, you know.\nThough I want my wish to be granted,\nGod knows everything...\n\nYou're here, and I'm here-\nall the others have disappeared.\nBy sketching the beauty of our fleeting dream,\nwe're just tracing our scars\n\nSo, I'll follow you.\nNo matter where you are in the darkness of this bitter world\nyou will shine,\nand exceed the limits of the future.\nTo prevent your spirit from being broken because of your weakness\nyou converge with my way.\nNow, God bless us...\n\n\n\nGod knows...\u3000Lyrics\u3000(Japanese)\n\n\nKawaita kokoro de kakenukeru\nGomen ne nani mo dekinakute\nItami wo wakachiau koto sae\nAnata wa yurushite kurenai\n\nMuku ni ikiru tame ni furimukazu\nSenaka mukete satteshimau\nOn the lonely rail\n\nWatashi tsuiteiku yo\nDonna tsurai sekai no yami no naka de sae\nKitto anata wa kagayaite\nKoeru mirai no hate\nYowasa yue ni tamashii kowasarenu you ni\nMy way kasanaru yo\nIma futari ni God bless...\n\n\nTodokete atsuku naru omoi wa\nGenjitsu tokashite samayou\nAitai kimochi ni riyuu wa nai\nAnata e afuredasu Lovin' you\n\nSemete utsukushii yume dake wo\nEgakinagara oikakeyou\nFor your lonely heart\n\nYamete uso wa anata rashikunai yo\nMe wo mite kore kara no koto wo hanasou\nWatashi kakugo shiteru\nKurai mirai datte\nTsuyoku natte unmei kaerareru kamo ne\nMy wish kanaetai noni\nSubete wa God knows...\n\nAnata ga ite watashi ga ite\nHoka no hito wa kieteshimatta\nAwai yume no utsukushisa wo egakinagara\nKizuato nazoru\n\nDakara watashi tsuiteiku yo\nDonna tsurai sekai no yami no naka de sae\nKitto anata wa kagayaite\nKoeru mirai no hate\nYowasa yue ni tamashii kowasarenu you ni\nMy way kasanaru yo\nIma futari ni God bless...\n\n\n\n--------------------------------------------------------------------------------\n\nThe Melancholy of Haruhi Suzumiya\nGod knows... \u3000Full\nhttp://www.nicovideo.jp/watch/sm8308752\nfrom nicovideo\n\n(V)o\uffe5o(V) 's comment\u2193\n\n\uff08\u30d8\u30c3\u30c9\u30d5\u30a9\u30f3\u63a8\u5968\uff09\n\n(V)o\uffe5o(V) 's mylist\nhttp://www.nicovideo.jp/user/13915562\n\n\n\u203b\u97f3\u58f0\u306f\u52a0\u5de5\u3055\u308c\u3066\u3044\u307e\u3059\n\n\n----------------------------------------------------------------\n\u203b \u3053\u306e\u52d5\u753b\u306e\u5e83\u544a\u306b\u7531\u6765\u3059\u308b\u6a29\u5229\u8005\u306e\u4e00\u89a7:\nKadokawa\n\u8457\u4f5c\u6a29\u8005\u306b\u3088\u3063\u3066\u53ce\u76ca\u5316\u3055\u308c\u3066\u3044\u307e\u3059\n.",
 		"meta": ***REMOVED***
 			"playlist": ***REMOVED***
@@ -1349,7 +1354,12 @@
 					"index": 41
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "God Knows...",
+		"artist": "Aya Hirano",
+		"artist_image": "http://i.imgur.com/TAebX2m.jpg",
+		"cover": "http://i.imgur.com/FSAFWwn.jpg",
+		"album": "The Melancholy of Haruhi Suzumiya"
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
@@ -1884,7 +1894,7 @@
 		***REMOVED***,
 		"song_title": "Continued Story (From \"Code Geass\")",
 		"artist": "Kenzie Smith Piano",
-		"artist_image": "https://i.scdn.co/image/ea6b486d2f9a3c9fcf89f69684b0f4c4ca343bdf",
+		"artist_image": "https://i.scdn.co/image/01858fad79f29979bc4728312eb5153e7874e6f1",
 		"cover": "https://i.scdn.co/image/47de7bbc6afe5f510dcd3a45b3ba187a2832b81b",
 		"album": "Anime Music Collection Piano Solo, Vol. 5",
 		"spotify_data": ***REMOVED***
@@ -2304,7 +2314,7 @@
 		***REMOVED***,
 		"song_title": "Jiyuu No Tsubasa",
 		"artist": "Linked Horizon",
-		"artist_image": "https://i.scdn.co/image/81fbe237c1e8e446b364d317a23992d92ee2a83b",
+		"artist_image": "https://i.scdn.co/image/970b684cdddc1437ac41f8c8338fd1e716f58483",
 		"cover": "https://i.scdn.co/image/63d65c2991b4f30a9b7febae2c1fb2eb8db64c94",
 		"album": "Jiyuu E No Shingeki",
 		"spotify_data": ***REMOVED***
@@ -2403,11 +2413,11 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-CpDyF4pkbAs-Luna_Haruna_-_Overfly.webm",
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "CpDyF4pkbAs",
 		"url": "https://www.youtube.com/watch?v=CpDyF4pkbAs",
-		"title": "Luna Haruna - Overfly",
+		"title": "Overfly",
 		"duration": 266,
 		"thumbnail": "https://i.ytimg.com/vi/CpDyF4pkbAs/maxresdefault.jpg",
 		"description": "Music video by Luna Haruna performing Overfly. (C) 2012 SME Records Inc.",
@@ -2420,7 +2430,12 @@
 					"index": 58
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Overfly",
+		"artist": "Luna Haruna",
+		"artist_image": "http://i.imgur.com/Ueiw3vi.jpg",
+		"cover": "http://i.imgur.com/4zunFJ0.jpg",
+		"album": "Sword Art Online"
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
@@ -2450,11 +2465,11 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-eW6sEkTGbUc-Man_with_a_Mission_ft._Takuma_-_Database_Log_Horizon_OP.webm",
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "eW6sEkTGbUc",
 		"url": "https://www.youtube.com/watch?v=eW6sEkTGbUc",
-		"title": "Man with a Mission ft. Takuma - Database (Log Horizon OP)",
+		"title": "Database",
 		"duration": 237,
 		"thumbnail": "https://i.ytimg.com/vi/eW6sEkTGbUc/maxresdefault.jpg",
 		"description": "Man with a Mission ft. Takuma - Database\nAlso known as opening for anime Log Horizon.\nEnjoy (:",
@@ -2467,7 +2482,12 @@
 					"index": 60
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Database",
+		"artist": "Man With a Mission",
+		"artist_image": "http://i.imgur.com/omFJYVJ.jpg",
+		"cover": "http://i.imgur.com/rqFEWec.jpg",
+		"album": "Log Horizon"
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
@@ -2830,7 +2850,7 @@
 		***REMOVED***,
 		"song_title": "Mirai Nikki - Yuno Gasai (Yandere Self-Help Program)",
 		"artist": "Neotokio3",
-		"artist_image": "https://i.scdn.co/image/85db3b501cf74f9fb4a24ba967dff93d2fd55581",
+		"artist_image": "https://i.scdn.co/image/6980573a66054945a0484bf33c6ced1aa3c70c44",
 		"cover": "https://i.scdn.co/image/f5951216442d1d183ec682b755194b64e6d7173b",
 		"album": "Mirai Nikki - Yuno Gasai (Yandere Self-Help Program) - Single",
 		"spotify_data": ***REMOVED***
@@ -3079,7 +3099,7 @@
 		***REMOVED***,
 		"song_title": "Clock Strikes",
 		"artist": "ONE OK ROCK",
-		"artist_image": "https://i.scdn.co/image/3b3b816312699a68731db11601b463a3cb4eeb26",
+		"artist_image": "https://i.scdn.co/image/cf11b90956789974a97738477eb6ed4ee59eda3f",
 		"cover": "https://i.scdn.co/image/b10a614ced95aff8bf68767ced8bf6180eb663df",
 		"album": "JINSEI KAKETE BOKU WA",
 		"spotify_data": ***REMOVED***
@@ -3329,7 +3349,7 @@
 		***REMOVED***,
 		"song_title": "Clattanoia (Overlord Opening)",
 		"artist": "PelleK",
-		"artist_image": "https://i.scdn.co/image/5f3d1348f484fc8182b1263241dfa876595b81fb",
+		"artist_image": "https://i.scdn.co/image/5c812cc8451e65a1858442a1e05434143192ff2c",
 		"cover": "https://i.scdn.co/image/1813040da4a906700c76c35de6f530d2e9a7e509",
 		"album": "Covers Vol. 18",
 		"spotify_data": ***REMOVED***
@@ -3547,20 +3567,15 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
-		"type": "SpotifyEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-r-MEKwXFF-s-Bleach_Opening_Asterisk_full.webm",
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "r-MEKwXFF-s",
 		"url": "https://www.youtube.com/watch?v=r-MEKwXFF-s",
-		"title": "PelleK - *~Asterisk~ (Bleach Opening 1)",
+		"title": "Asterisk",
 		"duration": 255,
 		"thumbnail": "https://i.ytimg.com/vi/r-MEKwXFF-s/hqdefault.jpg",
 		"description": "Spanish-Espa\u00f1ol English-Ingles\n\nSpanish-Espa\u00f1ol\nHola a todos este es el soundtrack opening 1 de bleach completo\nsuscribanse\n\nEnglish-Ingles\n\nHello everyone this is the soundtrack bleach opening 1 full\nsuscribe",
 		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
@@ -3570,104 +3585,11 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
-		"song_title": "*~Asterisk~ (Bleach Opening 1)",
-		"artist": "PelleK",
-		"artist_image": "https://i.scdn.co/image/8a49877f39c608a3eb4040175982f2a45d40387f",
-		"cover": "https://i.scdn.co/image/dd03d978e08831dff9b2ee1e5907717feb1617e9",
-		"album": "PelleK's Bleach Medley",
-		"spotify_data": ***REMOVED***
-			"id": "0Szs74d8jYfx0HeIzZTfIw",
-			"name": "*~Asterisk~ (Bleach Opening 1)",
-			"artists": [
-				***REMOVED***
-					"id": "1qLwXsUtyW2Ba2Iotg4gE3",
-					"name": "PelleK",
-					"images": [
-						***REMOVED***
-							"height": 640,
-							"url": "https://i.scdn.co/image/5f3d1348f484fc8182b1263241dfa876595b81fb",
-							"width": 640
-						***REMOVED***,
-						***REMOVED***
-							"height": 300,
-							"url": "https://i.scdn.co/image/5c812cc8451e65a1858442a1e05434143192ff2c",
-							"width": 300
-						***REMOVED***,
-						***REMOVED***
-							"height": 64,
-							"url": "https://i.scdn.co/image/8a49877f39c608a3eb4040175982f2a45d40387f",
-							"width": 64
-						***REMOVED***
-					],
-					"genres": [
-						"heavy christmas",
-						"otacore"
-					],
-					"popularity": 60,
-					"uri": "spotify:artist:1qLwXsUtyW2Ba2Iotg4gE3",
-					"href": "https://open.spotify.com/artist/1qLwXsUtyW2Ba2Iotg4gE3"
-				***REMOVED***
-			],
-			"artist": "PelleK",
-			"cover_url": "https://i.scdn.co/image/dd03d978e08831dff9b2ee1e5907717feb1617e9",
-			"duration": 93.291,
-			"album": ***REMOVED***
-				"id": "2aF7gE3ljIQoNRAq5jziLq",
-				"name": "PelleK's Bleach Medley",
-				"artists": [
-					***REMOVED***
-						"id": "1qLwXsUtyW2Ba2Iotg4gE3",
-						"name": "PelleK",
-						"images": [
-							***REMOVED***
-								"height": 640,
-								"url": "https://i.scdn.co/image/5f3d1348f484fc8182b1263241dfa876595b81fb",
-								"width": 640
-							***REMOVED***,
-							***REMOVED***
-								"height": 300,
-								"url": "https://i.scdn.co/image/5c812cc8451e65a1858442a1e05434143192ff2c",
-								"width": 300
-							***REMOVED***,
-							***REMOVED***
-								"height": 64,
-								"url": "https://i.scdn.co/image/8a49877f39c608a3eb4040175982f2a45d40387f",
-								"width": 64
-							***REMOVED***
-						],
-						"genres": [
-							"heavy christmas",
-							"otacore"
-						],
-						"popularity": 60,
-						"uri": "spotify:artist:1qLwXsUtyW2Ba2Iotg4gE3",
-						"href": "https://open.spotify.com/artist/1qLwXsUtyW2Ba2Iotg4gE3"
-					***REMOVED***
-				],
-				"images": [
-					***REMOVED***
-						"height": 640,
-						"url": "https://i.scdn.co/image/dd03d978e08831dff9b2ee1e5907717feb1617e9",
-						"width": 640
-					***REMOVED***,
-					***REMOVED***
-						"height": 300,
-						"url": "https://i.scdn.co/image/4446a19a44f9e15f00a522e50354571e414bcdf0",
-						"width": 300
-					***REMOVED***,
-					***REMOVED***
-						"height": 64,
-						"url": "https://i.scdn.co/image/72cf8b0f392c402ae42bfb445d2845255eb849a5",
-						"width": 64
-					***REMOVED***
-				],
-				"uri": "spotify:album:2aF7gE3ljIQoNRAq5jziLq"
-			***REMOVED***,
-			"popularity": 32,
-			"uri": "spotify:track:0Szs74d8jYfx0HeIzZTfIw",
-			"query": "Bleach Asterisk",
-			"certainty": 0.6666666666666666
-		***REMOVED***
+		"song_title": "Asterisk",
+		"artist": "Orange Range",
+		"artist_image": "http://i.imgur.com/GPiVmp1.jpg",
+		"cover": "http://i.imgur.com/ECWagzg.png",
+		"album": "Bleach"
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
@@ -3990,11 +3912,11 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-HvFMSVB1YI4-Sekaiichi_Hatsukoi_ed_FULL.webm",
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "HvFMSVB1YI4",
 		"url": "https://www.youtube.com/watch?v=HvFMSVB1YI4",
-		"title": "Sekaiichi Hatsukoi ed FULL",
+		"title": "Ashita, Boku wa Kimi ni Ai ni Iku",
 		"duration": 246,
 		"thumbnail": "https://i.ytimg.com/vi/HvFMSVB1YI4/hqdefault.jpg",
 		"description": "Asu Boku Wa Kimi Ni Ainiiku",
@@ -4007,7 +3929,12 @@
 					"index": 91
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Ashita, Boku wa Kimi ni Ai ni Iku",
+		"artist": "Wakaba",
+		"artist_image": "http://i.imgur.com/lyjNrLa.jpg",
+		"cover": "http://i.imgur.com/8ef5deq.png",
+		"album": "Sekai-ichi Hatsukoi"
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
@@ -4336,7 +4263,7 @@
 		***REMOVED***,
 		"song_title": "Shukumei",
 		"artist": "Tifita",
-		"artist_image": "https://i.scdn.co/image/3641e8b64abb088f4504789cfb6475afe2759fe2",
+		"artist_image": "https://i.scdn.co/image/ba5f6ac85b039e4e848384e7c259bff0ede7f666",
 		"cover": "https://i.scdn.co/image/7bcee79d507d6bc3dab39cd35860c0c416fde59e",
 		"album": "Fairy Tail: Piano Solo",
 		"spotify_data": ***REMOVED***
@@ -4456,11 +4383,11 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-lk0gm_Z81bE-Toradora_-_Lost_My_Pieces_OST.webm",
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "lk0gm_Z81bE",
 		"url": "https://www.youtube.com/watch?v=lk0gm_Z81bE",
-		"title": "Toradora! - Lost My Pieces (OST)",
+		"title": "Lost My Pieces",
 		"duration": 122,
 		"thumbnail": "https://i.ytimg.com/vi/lk0gm_Z81bE/maxresdefault.jpg",
 		"description": "Toradora! - Lost My Pieces !\n\nEnjoy !\n\nI DONT OWN ANYTHING.\nCopyright \u00a9 All Rights Reserved\nAlso i am not interested in making money from Youtube",
@@ -4473,7 +4400,12 @@
 					"index": 103
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Lost My Pieces",
+		"artist": "Yukari Hashimoto",
+		"artist_image": "http://i.imgur.com/N1scqov.jpg",
+		"cover": "http://i.imgur.com/ZMwqOlE.jpg",
+		"album": "Toradora"
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
@@ -4582,20 +4514,15 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-eGLw9C2N40A-_.webm",
+		"type": "GieselaEntry",
+		"expected_filename": null,
 		"video_id": "eGLw9C2N40A",
 		"url": "https://www.youtube.com/watch?v=eGLw9C2N40A",
-		"title": "\u3086\u305a - \u6d41\u308c\u661f\u30ad\u30e9\u30ea / \u67da\u5b50 - \u6d41\u661f\u9583\u720d\u3010\u4e2d\u6587\u5b57\u5e55\u3011",
+		"title": "Nagareboshi Kirari",
 		"duration": 300,
 		"thumbnail": "https://i.ytimg.com/vi/eGLw9C2N40A/maxresdefault.jpg",
 		"description": "This is TRANSLATED version and ONLY for sharing to learning English / Japanese.\n==========\n\u2192My Twitter\nhttp://www.twitter.com/37celsiusdegree\n\nThanks for all your supports. You're the best :)",
 		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
@@ -4604,7 +4531,12 @@
 					"index": 109
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Nagareboshi Kirari",
+		"artist": "Yuzu",
+		"artist_image": "http://i.imgur.com/BmJaS5z.png",
+		"cover": "http://i.imgur.com/PUta1lS.png",
+		"album": "Hunter x Hunter"
 	***REMOVED***,
 	***REMOVED***
 		"version": 102,
@@ -4753,7 +4685,7 @@
 		***REMOVED***,
 		"song_title": "Shirushi",
 		"artist": "LiSA",
-		"artist_image": "https://i.scdn.co/image/82e3892e5c6a18138891d722fb9656da8b0d6112",
+		"artist_image": "https://i.scdn.co/image/4d47b7d9469dc49abebff94f197aaf663974da9d",
 		"cover": "https://i.scdn.co/image/b0d475c2cb05195d2cf7778c507b8757e1f3376e",
 		"album": "Launcher",
 		"spotify_data": ***REMOVED***
