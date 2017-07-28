@@ -36,7 +36,10 @@ def _upload_playlist_cover(playlist_name, url):
 
     try:
         resp = client.upload_from_url(url, config=config)
-    except (ImgurClientError, ImgurClientRateLimitError):
+    except ImgurClientError:
+        return False
+    except ImgurClientRateLimitError:
+        print("[IMGUR] RATE LIMIT!")
         return False
 
     return resp.get("link")
@@ -84,7 +87,10 @@ def _upload_song_image(playlist_name, identifier, url):
 
     try:
         resp = client.upload_from_url(url, config=config)
-    except (ImgurClientError, ImgurClientRateLimitError):
+    except ImgurClientError:
+        return False
+    except ImgurClientRateLimitError:
+        print("[IMGUR] RATE LIMIT!")
         return False
 
     return resp.get("link")
