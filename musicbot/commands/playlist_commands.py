@@ -977,8 +977,7 @@ class PlaylistCommands:
                 info_text = "This is currently a normal entry. Provide {} in order to get to a GieselaEntry".format(
                     properties_needed)
 
-            msg_text = interface_format.format(
-                fields=fields_text, information=info_text, error=error_text, timestamps=timestamps)
+            msg_text = interface_format.format(error=error_text, fields=fields_text, timestamps=timestamps, information=info_text)
 
             if not _interface_message:
                 _interface_message = await self.safe_send_message(channel, msg_text)
@@ -1240,4 +1239,4 @@ class PlaylistCommands:
             else:
                 return Response("Saved changes to current entry.")
         else:
-            return Response("Didn't save changes to **{}**".format(new_entry.title))
+            return Response("Didn't save changes to **{}**".format(entry.title))
