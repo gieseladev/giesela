@@ -847,13 +847,14 @@ class PlaylistCommands:
             _, entry_type = get_entry_type(fields)
 
             args = ***REMOVED***
-                "title":        fields["title"],
-                "queue":        player.playlist,
-                "video_id":     fields["_video_id"],
-                "url":          fields["_url"],
-                "duration":     fields["_duration"],
-                "thumbnail":    fields["thumbnail"],
-                "description":  fields["_description"]
+                "title":                fields["title"],
+                "queue":                player.playlist,
+                "video_id":             fields["_video_id"],
+                "url":                  fields["_url"],
+                "duration":             fields["_duration"],
+                "thumbnail":            fields["thumbnail"],
+                "description":          fields["_description"],
+                "expected_filename":    fields["_expected_filename"]
             ***REMOVED***
 
             if entry_type is GieselaEntry:
@@ -872,13 +873,14 @@ class PlaylistCommands:
             return entry_type(**args)
 
         entry_fields = ***REMOVED***
-            "__title":      entry._title,
-            "_video_id":    entry.video_id,
-            "_url":         entry.url,
-            "_description": entry.description,
-            "_duration":    entry.duration,
-            "title":        entry.title,
-            "thumbnail":    entry.thumbnail,
+            "__title":              entry._title,
+            "_video_id":            entry.video_id,
+            "_url":                 entry.url,
+            "_description":         entry.description,
+            "_duration":            entry.duration,
+            "_expected_filename":   entry.expected_filename,
+            "title":                entry.title,
+            "thumbnail":            entry.thumbnail,
         ***REMOVED***
         if isinstance(entry, GieselaEntry):
             entry_fields.update(***REMOVED***
@@ -1204,7 +1206,8 @@ class PlaylistCommands:
     @command_info("4.1.9", 1500882702, ***REMOVED***
         "4.2.2": (1500911879, "Entry not in a playlist handling"),
         "4.2.6": (1500963901, "Can now use the entry manipulator on non-playlist entries"),
-        "4.3.3": (1501235095, "Fixed strange message formatting bug.")
+        "4.3.3": (1501235095, "Fixed strange message formatting bug."),
+        "4.3.8": (1501264222, "Caching adjustments")
     ***REMOVED***)
     async def cmd_editentry(self, channel, author, player, leftover_args):
         """
