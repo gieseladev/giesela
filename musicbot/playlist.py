@@ -37,8 +37,8 @@ class Playlist(EventEmitter):
     def get_web_dict(self):
         print("getting dict")
         data = {
-            "entries": [entry.to_web_dict(True) for entry in self.entries[:]],
-            "history": [entry.to_web_dict(True) for entry in self.history[:]]
+            "entries": [entry.to_web_dict(True) for entry in self.entries.copy()],
+            "history": [entry.to_web_dict(True) for entry in self.history.copy()]
         }
         print("got dict")
         return data
