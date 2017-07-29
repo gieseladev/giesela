@@ -35,10 +35,12 @@ class Playlist(EventEmitter):
         return iter(self.entries)
 
     def get_web_dict(self):
+        print("getting dict")
         data = {
-            "entries": [entry.to_web_dict(True) for entry in self.entries],
-            "history": [entry.to_web_dict(True) for entry in self.history]
+            "entries": [entry.to_web_dict(True) for entry in self.entries[:]],
+            "history": [entry.to_web_dict(True) for entry in self.history[:]]
         }
+        print("got dict")
         return data
 
     def shuffle(self):
