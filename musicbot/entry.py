@@ -134,7 +134,7 @@ class BaseEntry:
     def to_dict(self):
         raise NotImplementedError
 
-    def to_web_dict(self):
+    def to_web_dict(self, skip_calc=False):
         return self.to_dict()
 
     def get_ready_future(self):
@@ -229,7 +229,7 @@ class StreamEntry(BaseEntry):
         }
         return data
 
-    def to_web_dict(self):
+    def to_web_dict(self, skip_calc=False):
         origin = None
         if self.meta:
             if "playlist" in self.meta:
@@ -320,7 +320,7 @@ class RadioStationEntry(StreamEntry):
 
         return d
 
-    def to_web_dict(self):
+    def to_web_dict(self, skip_calc=False):
         origin = None
         if self.meta:
             if "playlist" in self.meta:
@@ -389,7 +389,7 @@ class RadioSongEntry(RadioStationEntry):
     def cover(self):
         return self.current_song_info["cover"]
 
-    def to_web_dict(self):
+    def to_web_dict(self, skip_calc=False):
         data = super().to_web_dict()
 
         data.update({
@@ -675,7 +675,7 @@ class TimestampEntry(YoutubeEntry):
 
         return d
 
-    def to_web_dict(self):
+    def to_web_dict(self, skip_calc=False):
         data = super().to_web_dict()
 
         data.update({
@@ -741,7 +741,7 @@ class GieselaEntry(YoutubeEntry):
 
         return d
 
-    def to_web_dict(self):
+    def to_web_dict(self, skip_calc=False):
         data = super().to_web_dict()
 
         data.update({
