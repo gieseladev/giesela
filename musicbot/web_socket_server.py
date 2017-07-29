@@ -99,7 +99,13 @@ class GieselaWebSocket(WebSocket):
                 answer["info"] = info
 
         if command:
-            pass
+            player = GieselaServer.get_player(token=self.registration_token)
+
+            if command == "play_pause":
+                if player.is_playing:
+                    player.pause()
+                elif player.is_paused:
+                    player.resume()
 
         self.sendMessage(json.dumps(answer))
 
