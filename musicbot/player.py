@@ -407,7 +407,7 @@ class MusicPlayer(EventEmitter):
 
         if not pause:
             print("[CHAPTER-UPDATER] Creating new updater")
-            self.chapter_updater = asyncio.ensure_future(self.update_chapter())
+            self.chapter_updater = asyncio.ensure_future(self.update_chapter(), loop=self.loop)
 
     async def update_chapter(self):
         while True:
