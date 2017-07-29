@@ -93,7 +93,9 @@ class GieselaWebSocket(WebSocket):
                 player_info = GieselaServer.get_player_information(self.token)
                 user_info = GieselaServer.get_token_information(self.token)[
                     1].to_dict()
+
                 info["player"] = player_info
+                info["queue"] = GieselaServer.get_queue_information(self.token)
                 info["user"] = user_info
                 answer["info"] = info
 
@@ -203,10 +205,10 @@ class GieselaServer:
             entry = None
 
         data = {
-            "entry": entry,
-            "volume": player.volume,
-            "state_name": str(player.state),
-            "state": player.state.value
+            "entry":        entry,
+            "volume":       player.volume,
+            "state_name":   str(player.state),
+            "state":        player.state.value
         }
 
         return data
