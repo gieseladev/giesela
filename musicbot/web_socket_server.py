@@ -95,7 +95,6 @@ class GieselaWebSocket(WebSocket):
                     1].to_dict()
 
                 info["player"] = player_info
-                info["queue"] = GieselaServer.get_queue_information(self.token)
                 info["user"] = user_info
                 answer["info"] = info
 
@@ -206,17 +205,13 @@ class GieselaServer:
 
         data = ***REMOVED***
             "entry":        entry,
+            "queue":        player.playlist.get_web_dict(),
             "volume":       player.volume,
             "state_name":   str(player.state),
             "state":        player.state.value
         ***REMOVED***
 
         return data
-
-    def get_queue_information(token):
-        player = GieselaServer.get_player(token=token)
-
-        return player.playlist.get_web_dict()
 
     def send_player_information_update(server_id):
         if not GieselaServer.bot:

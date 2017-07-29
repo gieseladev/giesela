@@ -463,7 +463,7 @@ class YoutubeEntry(BaseEntry):
         ***REMOVED***
         return data
 
-    def to_web_dict(self):
+    def to_web_dict(self, skip_calc=False):
         origin = None
         if self.meta:
             if "playlist" in self.meta:
@@ -478,11 +478,13 @@ class YoutubeEntry(BaseEntry):
             "type":                 self.__class__.__name__,
             "url":                  self.url,
             "thumbnail":            self.thumbnail,
-            "thumbnail_brightness": get_image_brightness(url=self.thumbnail),
             "origin":               origin,
             "title":                self.title,
             "duration":             self.duration,
         ***REMOVED***
+
+        if not skip_calc:
+            data["thumbnail_brightness"] = get_image_brightness(url=self.thumbnail)
 
         return data
 
