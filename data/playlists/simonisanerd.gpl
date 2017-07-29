@@ -2,6 +2,32 @@
 	{
 		"version": 103,
 		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-9ZyZ4bMMKjU-3-nen_E-gumi_Utatan-_QUESTION_+_Lyrics.webm",
+		"video_id": "9ZyZ4bMMKjU",
+		"url": "https://www.youtube.com/watch?v=9ZyZ4bMMKjU",
+		"title": "QUESTION",
+		"duration": 267,
+		"thumbnail": "http://i.imgur.com/zbhBlT9.jpg",
+		"description": "Several people requested this song so I decided to make this video. Enjoy :D I'll also be doing Bye Bye Yesterday soon. :)\n\nNote: Karma, Isogai, and Maehara sound very similar so I may have mixed up their individual parts, so I'm sorry if I did. :(",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 0
+				}
+			}
+		},
+		"song_title": "QUESTION",
+		"artist": "3-Nen E-Gumi Utatan",
+		"artist_image": "http://i.imgur.com/SMmDV0m.jpg",
+		"cover": "http://i.imgur.com/rB1inZr.jpg",
+		"album": "Ansatsu Kyoushitsu"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-2g32y3Kph7g-3-nen_E-gumi_Utatan-_Bye_Bye_YESTERDAY_+_Lyrics.m4a",
 		"video_id": "2g32y3Kph7g",
 		"url": "https://www.youtube.com/watch?v=2g32y3Kph7g",
@@ -15,7 +41,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 0
+					"index": 1
 				}
 			}
 		},
@@ -28,27 +54,27 @@
 	{
 		"version": 103,
 		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-9ZyZ4bMMKjU-3-nen_E-gumi_Utatan-_QUESTION_+_Lyrics.webm",
-		"video_id": "9ZyZ4bMMKjU",
-		"url": "https://www.youtube.com/watch?v=9ZyZ4bMMKjU",
-		"title": "3-Nen E-Gumi Utatan - QUESTION",
-		"duration": 267,
-		"thumbnail": "https://i.ytimg.com/vi/9ZyZ4bMMKjU/maxresdefault.jpg",
-		"description": "Several people requested this song so I decided to make this video. Enjoy :D I'll also be doing Bye Bye Yesterday soon. :)\n\nNote: Karma, Isogai, and Maehara sound very similar so I may have mixed up their individual parts, so I'm sorry if I did. :(",
+		"expected_filename": null,
+		"video_id": "ZQOBH9LhzBY",
+		"url": "https://www.youtube.com/watch?v=ZQOBH9LhzBY",
+		"title": "Jiriki Hongan Revolution",
+		"duration": 278,
+		"thumbnail": "http://i.imgur.com/CtCL0Nk.jpg",
+		"description": "",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 1
+					"index": 2
 				}
 			}
 		},
-		"song_title": "QUESTION",
-		"artist": "3-Nen E-Gumi Utatan",
-		"artist_image": "http://i.imgur.com/SMmDV0m.jpg",
-		"cover": "http://i.imgur.com/rB1inZr.jpg",
+		"song_title": "Jiriki Hongan Revolution",
+		"artist": "3-nen E-gumi Utatan",
+		"artist_image": "http://i.imgur.com/dJhLDZD.jpg",
+		"cover": "http://i.imgur.com/gAapJvb.jpg",
 		"album": "Ansatsu Kyoushitsu"
 	},
 	{
@@ -67,7 +93,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 2
+					"index": 3
 				}
 			}
 		},
@@ -177,39 +203,13 @@
 	{
 		"version": 103,
 		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-y-q3br6WcGc-Snow_Fairy_Full.webm",
-		"video_id": "y-q3br6WcGc",
-		"url": "https://www.youtube.com/watch?v=y-q3br6WcGc",
-		"title": "Funkist - Snow Fairy",
-		"duration": 217,
-		"thumbnail": "https://i.ytimg.com/vi/y-q3br6WcGc/maxresdefault.jpg",
-		"description": "Hey guys! This is Fairy Tail Opening 1, Snow Fairy!\nPersonally one of my most favorite opening!\nHope you enjoyed and make sure to subscribe!\n\nI DO NOT OWN THE MUSIC: FUNKIST OWNS THIS MUSIC\n\n\"Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is made for \"fair use\" for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statute that might otherwise be infringing. Non-profit, educational or personal use tips the balance in favor of fair use.\"",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 3
-				}
-			}
-		},
-		"song_title": "Snow Fairy",
-		"artist": "Funkist",
-		"artist_image": "http://i.imgur.com/Xmz23Ca.jpg",
-		"cover": "http://i.imgur.com/FV8tyVY.jpg",
-		"album": "Fairy Tail"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-tm7Xf9818FM-Angel_Beats_-_Ichiban_no_Takaramono_Yui_final_ver..webm",
-		"video_id": "tm7Xf9818FM",
-		"url": "https://www.youtube.com/watch?v=tm7Xf9818FM",
-		"title": "LiSA - Ichiban no Takaramono",
-		"duration": 360,
-		"thumbnail": "https://i.ytimg.com/vi/tm7Xf9818FM/maxresdefault.jpg",
-		"description": "",
+		"expected_filename": null,
+		"video_id": "AV7QjFdNkUk",
+		"url": "https://www.youtube.com/watch?v=AV7QjFdNkUk",
+		"title": "Dareka Umi Wo",
+		"duration": 288,
+		"thumbnail": "https://i.ytimg.com/vi/AV7QjFdNkUk/maxresdefault.jpg",
+		"description": "I do not own nor am I affiliated in any way with Zankyou no Terror or Aimer. This video is for entertainment purposes only.\n\nIn an alternate iteration of the present, Tokyo has been hit by a terrorist attack that has devastated the city, with the only evidence of the culprits being a confusing video uploaded to the internet, which only spreads paranoia throughout Japan. Unbeknownst to the authorities is that the terrorist masterminds who call themselves \"Sphinx\" (\u30b9\u30d4\u30f3\u30af\u30b9 Supinkusu) are two teenaged boys, who go by the names Nine and Twelve, who apparently should not exist and have decided to wake up the world with their heinous plans of destruction with their fingers on the trigger.\n\nPicture | http://210793.deviantart.com/art/I-wish-someone-would-wrap-the-sea-around-me-477724741\n\nLyrics by Aoba Ichiko\nComposed and Arranged by Kanno Youko\nPerformed by Aimer\n\nEnglish lyrics ;\n\nWon't someone spread the ocean\nover my head\nI want to be bathed in\nsinking fish and sunlight\n\nThe vivid unknown\nThe magic that disappears when I stumble\nThe cracked sky visible beyond\nthe preparations\n\nOn the rooftops of the ruins\nEnclosing the whisperings of\nstruggling downy feathers\nWe are a song\n\nOn the gray earth\nClad in the roar\nof the scattered light\nWe are a bouquet\n\nPlucked wings\n\nWords\nBlown backwards without a breath\nScattering beautifully\n\nSea bird\nIn the midst of the ebb and flow\nA lying star\ntwinkling in the sky\nLeading us away\nWe row our boat\n\nA midnight sea\nA resonating salty wind and\na brightly burning world\ncover my cheeks\n\nIn the middle of a whirlpool\nmade of crowded voices\nI hold your hand and go under the rain of needles\n\nIn the darkening scenery\nI play with a falling\nupside-down heat haze\nand dance with time\n\nOn the rooftops of the ruins\nEnclosing the whisperings of\nstruggling downy feathers\nWe are a song\n\nOn the gray earth\nClad in the roar\nof the scattered light\nWe are a bouquet\n\nWon't someone spread the ocean\non our ceiling",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
@@ -220,11 +220,37 @@
 				}
 			}
 		},
-		"song_title": "Ichiban no Takaramono",
-		"artist": "LiSA",
-		"artist_image": "http://i.imgur.com/adfWmHo.jpg",
-		"cover": "http://i.imgur.com/wenQwi5.jpg",
-		"album": "Ichiban no Takaramono"
+		"song_title": "Dareka Umi Wo",
+		"artist": "Aimer",
+		"artist_image": "http://i.imgur.com/ZE1Y4Oy.jpg",
+		"cover": "http://i.imgur.com/IZL3vV2.jpg",
+		"album": "Dawn (Zankyou no Terror)"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-51LMOJu9lwc-Knights_of_sidonia_intro_opening.webm",
+		"video_id": "51LMOJu9lwc",
+		"url": "https://www.youtube.com/watch?v=51LMOJu9lwc",
+		"title": "Sidonia",
+		"duration": 262,
+		"thumbnail": "http://i.imgur.com/dute543.jpg",
+		"description": "La intro de Knights of Sidonia establece el modo de un anime fresco y coherente que se explora con gusto. Al tiempo una marcha que un lamento endulza el oido con la solemnidad de luchar el todo por el todo.",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 5
+				}
+			}
+		},
+		"song_title": "Sidonia",
+		"artist": "Angela",
+		"artist_image": "http://i.imgur.com/SshPrzB.jpg",
+		"cover": "http://i.imgur.com/Dy5TZzZ.jpg",
+		"album": "Sidonia no Kishi"
 	},
 	{
 		"version": 103,
@@ -247,13 +273,13 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 5
+					"index": 6
 				}
 			}
 		},
 		"song_title": "Evangelion X",
 		"artist": "Anonymuz",
-		"artist_image": "https://i.scdn.co/image/f8c14b06e00cd00472816ec9843694564ba4b6f2",
+		"artist_image": "https://i.scdn.co/image/1b3691a2516c98bf7337a2c3ff5635cc1367f1b8",
 		"cover": "https://i.scdn.co/image/aeaa17f240d4a39d01b52f3fc711469690a5bcd4",
 		"album": "Evangelion X",
 		"spotify_data": {
@@ -351,38 +377,12 @@
 	{
 		"version": 103,
 		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "ZQOBH9LhzBY",
-		"url": "https://www.youtube.com/watch?v=ZQOBH9LhzBY",
-		"title": "Jiriki Hongan Revolution",
-		"duration": 278,
-		"thumbnail": "http://i.imgur.com/CtCL0Nk.jpg",
-		"description": "",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 6
-				}
-			}
-		},
-		"song_title": "Jiriki Hongan Revolution",
-		"artist": "3-nen E-gumi Utatan",
-		"artist_image": "http://i.imgur.com/dJhLDZD.jpg",
-		"cover": "http://i.imgur.com/gAapJvb.jpg",
-		"album": "Ansatsu Kyoushitsu"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-f5d0VCHll4w-Ao_no_Exorcist_Original_Sound_track_03_U_Cloud.webm",
-		"video_id": "f5d0VCHll4w",
-		"url": "https://www.youtube.com/watch?v=f5d0VCHll4w",
-		"title": "U & Cloud",
-		"duration": 243,
-		"thumbnail": "https://i.ytimg.com/vi/f5d0VCHll4w/maxresdefault.jpg",
+		"expected_filename": "cache\\audio_cache\\youtube-1MsuXjTlCGE-Charlotte_Ending_-.webm",
+		"video_id": "1MsuXjTlCGE",
+		"url": "https://www.youtube.com/watch?v=1MsuXjTlCGE",
+		"title": "Yake Ochinai Tsubasa",
+		"duration": 316,
+		"thumbnail": "https://i.ytimg.com/vi/1MsuXjTlCGE/maxresdefault.jpg",
 		"description": "",
 		"meta": {
 			"playlist": {
@@ -394,22 +394,22 @@
 				}
 			}
 		},
-		"song_title": "U & Cloud",
-		"artist": "Hiroyuki Sawano",
-		"artist_image": "http://i.imgur.com/Cy9VGOK.jpg",
-		"cover": "http://i.imgur.com/IU8Xm1I.jpg",
-		"album": "Blue Exorcist"
+		"song_title": "Yake Ochinai Tsubasa",
+		"artist": "Aoi Tada",
+		"artist_image": "http://i.imgur.com/I3up3Up.jpg",
+		"cover": "http://i.imgur.com/fw8F3Pi.jpg",
+		"album": "Charlotte"
 	},
 	{
 		"version": 103,
 		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-o1ZPfw52-6E-Assassination_Classroom_TV_Size_ED._Hello_Shooting-Star_-_Moumoon.webm",
-		"video_id": "o1ZPfw52-6E",
-		"url": "https://www.youtube.com/watch?v=o1ZPfw52-6E",
-		"title": "Hello, shooting-star",
-		"duration": 91,
-		"thumbnail": "https://i.ytimg.com/vi/o1ZPfw52-6E/maxresdefault.jpg",
-		"description": "Ending Credits to Assassination Classroom.\nSong: Hello, Shooting-Star\nPerformed by: Moumoon\n\n\nCopyright Disclaimer Under Section 107 of the Copyright Act 1976,\nallowance is made for \"fair use\" for purposes such as criticism,\ncomment, news reporting, teaching, scholarship, and research.\nFair use is a use permitted by copyright statute that might\notherwise be infringing. Non-profit, educational or personal\nuse tips the balance in favor of fair use.",
+		"expected_filename": null,
+		"video_id": "KtYGJtSiTio",
+		"url": "https://www.youtube.com/watch?v=KtYGJtSiTio",
+		"title": "Bouken Desho Desho?",
+		"duration": 259,
+		"thumbnail": "http://i.imgur.com/gWLD6qz.jpg",
+		"description": "Some of the lyrics are off time. Sorry!\nAnyways,\nFor those who prefer it this way:\nJapanese Lyrics:\nKotae wa itsumo watashi no mune ni...\nNande daro anata wo eranda watashi desu\nMou tomaranai unmei sama kara kimerareta kedo\nI believe mane dake ja tsumaranai no\nYou'll be right!\nKanjiru mama kanjiru koto dake wo suru yo\n\nBouken desho desho!? HONTO ga uso ni kawaru sekai de\nYume ga aru kara tsuyoku naru no yo dare no tame janai\n\nIssho ni kite kudasai\nDoko made mo juyuu na watashi wo mite yo ne\nAshita kako ni natta kyou no ima ga kiseki\nI believe you...\n\nModorenai toko made ikanakya tsumannai\nSaa oshiete himeteru negai wo kagami ni nageta\nMy delight karada goto uketometara\nYour mind fly!\nOdorokasete odoroite egao ni narou\n\nHajimari desho desho!? KIREI ga yami wo terasu mitai ni\nWatashi no chikara anata no namida docchi mo tadashii no\n\nGenjitsu ni yureru sensai na kokoro ga\nKizutsuku no wa IYA\nOmoimashita itsumo itsumo mune no oku ni\nKotae ga...\n\nFutsuu janai no ga touzen nara\nKotaeru watashi wa nani ga dekiru?\nFutsuu demo futsuu janakute\nKanjiru mama kanjiru koto dake wo suru yo\n\nBouken desho desho!? HONTO ga uso ni kawaru sekai de\nYume ga aru kara tsuyoku naru no yo dare no tame janai\nHajimari desho hajimari nandesho!?\nKirei ga yami wo terasu mitai ni\nWatashi to anata bouken no tochuu\n\nIssho ni susundeku doko made mo jiyuu ni\nGenjitsu wo koete\nAshita kako ni natta kyou no ima ga kiseki\nTashikana mirai wo\nTsukamou mirai wo\nI believe you...\n\nEnglish:\nThe answer is always in my heart...\nWhy is it that I chose you?\nYou've been picked by the unstoppable Lady Fate, but\nI believe that just imitating is boring\nYou'll be all right!\nI'll only feel the things that I'm feeling\n\nIt's an adventure, right, right!? In a world where truth changes into lies\nI'm going to get stronger because I have a dream, not for anyone else\n\nPlease come with me!\nLook at me--I'm free everywhere I go!\nThe present today that became the past tomorrow is a miracle\nI believe you...\n\nIt's no fun if I don't go until I reach the point of no return\nNow, tell me! I cast off my hidden wishes into a mirror\nIf I react to my delight with my whole body,\nYour mind will fly!\nLet's surprise and be surprised, and smile\n\nIt's the beginning, right, right!? Like how beauty illuminates the dark\nMy power, your tears, both of them are right\n\nA delicate heart that trembles in reality\nI don't want it to be hurt\nI thought that the answer is always, always\nIn my heart...\n\nIf it's natural to not be normal,\nWhat can I do to answer?\nIt's normal and yet it's not\nI'll only feel the things that I'm feeling\n\nIt's an adventure, right, right!? In a world where truth changes into lies\nI'm going to get stronger because I have a dream, not for anyone else\n\nIt's the beginning, right? It's the beginning, right!?\nLike how beauty illuminates the dark,\nYou and I are on the middle of an adventure\n\nLet's advance together freely, through thick and thin\nAnd go beyond reality\nThe present today that became the past tomorrow is a miracle\n\nA definite future\nLet's take hold of the future\nI believe you...",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
@@ -420,22 +420,22 @@
 				}
 			}
 		},
-		"song_title": "Hello, shooting-star",
-		"artist": "moumoon",
-		"artist_image": "http://i.imgur.com/boIhh3G.jpg",
-		"cover": "http://i.imgur.com/1NpmOry.jpg",
-		"album": "Assassination Classroom"
+		"song_title": "Bouken Desho Desho?",
+		"artist": "Aya Hirano",
+		"artist_image": "http://i.imgur.com/TSUyYCH.png",
+		"cover": "http://i.imgur.com/Eg9mowE.png",
+		"album": "The Melancholy of Haruhi Suzumiya"
 	},
 	{
 		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-w3UR7nsTLlQ-Attack_on_Titan_OST_-_Vogel_im_Kafig.webm",
-		"video_id": "w3UR7nsTLlQ",
-		"url": "https://www.youtube.com/watch?v=w3UR7nsTLlQ",
-		"title": "Attack on Titan OST - Vogel im K\u00e4fig",
-		"duration": 380,
-		"thumbnail": "https://i.ytimg.com/vi/w3UR7nsTLlQ/maxresdefault.jpg",
-		"description": "By: Hiroyuki Sawano / \u6fa4\u91ce \u5f18\u4e4b\nFrom: Attack on Titan / Shingeki no Kyojin / \u9032\u6483\u306e\u5de8\u4eba\n3:30 and forward is where it really starts to pick up.\nI do not own anything.\nImage Link: http://i.imgur.com/Kbowyyc.jpg",
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-WWB01IuMvzA-God_knows..._The_Melancholy_of_Haruhi_Suzumiya_Kadokawa_MAD.webm",
+		"video_id": "WWB01IuMvzA",
+		"url": "https://www.youtube.com/watch?v=WWB01IuMvzA",
+		"title": "God Knows...",
+		"duration": 281,
+		"thumbnail": "http://i.imgur.com/Cx0m4u4.jpg",
+		"description": "The Melancholy of Haruhi Suzumiya\u3000\u3010Kadokawa\u516c\u8a8dAMV\u3011\nGod knows... \u3000\uff08by Aya Hirano\uff09\n\n\n\nGod knows...\u3000Lyrics\u3000(English Translation)\n\n\nI run past you with a thirsty heart.\nSorry, I couldn't do anything-\nyou won't even let us\nshare our pain with each other.\n\nIn order to live purely\nI face your back and leave without turning back.\non the lonely rail\n\nI'll follow you.\nNo matter where you are in the darkness of this bitter world\nyou will shine,\nand exceed the limits of the future.\nTo prevent your spirit from being broken because of your weakness\nyou converge with my way.\nNow, God bless us...\n\n\nI send my now passionate feelings-\nthey melt reality, then just hover there suspended.\nThere's no reason for me wanting to see you.\nI pour my feelings into you, lovin' you\n\nLet's at least imagine only beautiful dreams,\nas we chase after them\nfor your lonely heart\n\nStop it, lying isn't like you.\nLook into my eyes and let's speak of what will be.\nI'm prepared-\neven for a bleak future.\nBecome strong and you might even be able to change fate, you know.\nThough I want my wish to be granted,\nGod knows everything...\n\nYou're here, and I'm here-\nall the others have disappeared.\nBy sketching the beauty of our fleeting dream,\nwe're just tracing our scars\n\nSo, I'll follow you.\nNo matter where you are in the darkness of this bitter world\nyou will shine,\nand exceed the limits of the future.\nTo prevent your spirit from being broken because of your weakness\nyou converge with my way.\nNow, God bless us...\n\n\n\nGod knows...\u3000Lyrics\u3000(Japanese)\n\n\nKawaita kokoro de kakenukeru\nGomen ne nani mo dekinakute\nItami wo wakachiau koto sae\nAnata wa yurushite kurenai\n\nMuku ni ikiru tame ni furimukazu\nSenaka mukete satteshimau\nOn the lonely rail\n\nWatashi tsuiteiku yo\nDonna tsurai sekai no yami no naka de sae\nKitto anata wa kagayaite\nKoeru mirai no hate\nYowasa yue ni tamashii kowasarenu you ni\nMy way kasanaru yo\nIma futari ni God bless...\n\n\nTodokete atsuku naru omoi wa\nGenjitsu tokashite samayou\nAitai kimochi ni riyuu wa nai\nAnata e afuredasu Lovin' you\n\nSemete utsukushii yume dake wo\nEgakinagara oikakeyou\nFor your lonely heart\n\nYamete uso wa anata rashikunai yo\nMe wo mite kore kara no koto wo hanasou\nWatashi kakugo shiteru\nKurai mirai datte\nTsuyoku natte unmei kaerareru kamo ne\nMy wish kanaetai noni\nSubete wa God knows...\n\nAnata ga ite watashi ga ite\nHoka no hito wa kieteshimatta\nAwai yume no utsukushisa wo egakinagara\nKizuato nazoru\n\nDakara watashi tsuiteiku yo\nDonna tsurai sekai no yami no naka de sae\nKitto anata wa kagayaite\nKoeru mirai no hate\nYowasa yue ni tamashii kowasarenu you ni\nMy way kasanaru yo\nIma futari ni God bless...\n\n\n\n--------------------------------------------------------------------------------\n\nThe Melancholy of Haruhi Suzumiya\nGod knows... \u3000Full\nhttp://www.nicovideo.jp/watch/sm8308752\nfrom nicovideo\n\n(V)o\uffe5o(V) 's comment\u2193\n\n\uff08\u30d8\u30c3\u30c9\u30d5\u30a9\u30f3\u63a8\u5968\uff09\n\n(V)o\uffe5o(V) 's mylist\nhttp://www.nicovideo.jp/user/13915562\n\n\n\u203b\u97f3\u58f0\u306f\u52a0\u5de5\u3055\u308c\u3066\u3044\u307e\u3059\n\n\n----------------------------------------------------------------\n\u203b \u3053\u306e\u52d5\u753b\u306e\u5e83\u544a\u306b\u7531\u6765\u3059\u308b\u6a29\u5229\u8005\u306e\u4e00\u89a7:\nKadokawa\n\u8457\u4f5c\u6a29\u8005\u306b\u3088\u3063\u3066\u53ce\u76ca\u5316\u3055\u308c\u3066\u3044\u307e\u3059\n.",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
@@ -445,33 +445,12 @@
 					"index": 9
 				}
 			}
-		}
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "yD0rG7prFgU",
-		"url": "https://www.youtube.com/watch?v=yD0rG7prFgU",
-		"title": "theDOGS",
-		"duration": 276,
-		"thumbnail": "https://i.ytimg.com/vi/yD0rG7prFgU/maxresdefault.jpg",
-		"description": "Composition: Hiroyuki Sawano\nLyrics: mpi\nArtists: mpi, Mica Caldito\n\nShingeki no Kyojin Movie 2 Theme Song\n____________________________________________\n\nLyrics:\n\nSee it on the people's faces everywhere\nBlack'n'blue but they won't throw the towel in\nAnd let go of a dream\nMan, women, child prepare to bleed\n\nWere we born to lose and let goliath win?\nHeavy air and screaming as you pull the pin\nOur world is collapsing but we can rebuild it\nA 100 more years in the fire\n\nDo you believe that we can just kill them all?\nDo you believe that we can conquer this?\nCan't delete all the mess that I have seen\nFall in the fire but these burns will heal you\n\nGonna take your knives and skills they must be honed\nShow your mom your lives and give a dog a bone\nJust wait for centuries\nMan, woman, child long to be free\n\nWhen we die we ask our brothers one more time\nIf the meaning of our lives was worth a dime\nOur world oxidizes but will surprise us\nA 100 more years in the fire\n\nDo you believe that we can just kill them all?\nDo you believe that we can conquer this?\nCan't delete all the mess that I have seen\nFall in the fire but these burns will heal you\nComing down to show you what to do\nHow to die with honor, dignity\nWe should delete all the mess out from our sight\nWhat is truth is for me and you\n\nDo you believe that we can just kill them all?\nDo you believe that we can conquer this?\nCan't delete all the mess that I have seen\nFall in the fire but these burns will heal you\nComing down to show you what to do\nHow to die with honor, dignity\nWe should delete all the mess out from our sight\nWhat is truth is for me and you",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 10
-				}
-			}
 		},
-		"song_title": "theDOGS",
-		"artist": "Hiroyuki Sawano",
-		"artist_image": "http://i.imgur.com/XOgqYNY.jpg",
-		"cover": "http://i.imgur.com/5zvlNe1.png",
-		"album": "Attack on Titan"
+		"song_title": "God Knows...",
+		"artist": "Aya Hirano",
+		"artist_image": "http://i.imgur.com/TAebX2m.jpg",
+		"cover": "http://i.imgur.com/FSAFWwn.jpg",
+		"album": "The Melancholy of Haruhi Suzumiya"
 	},
 	{
 		"version": 103,
@@ -489,7 +468,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 11
+					"index": 10
 				}
 			}
 		},
@@ -498,6 +477,58 @@
 		"artist_image": "http://i.imgur.com/AcxoT6g.png",
 		"cover": "http://i.imgur.com/3c5NhvJ.jpg",
 		"album": "The Melancholy of Suzumiya Haruhi"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "OYVlx3vnu8I",
+		"url": "https://www.youtube.com/watch?v=OYVlx3vnu8I",
+		"title": "Super Driver",
+		"duration": 256,
+		"thumbnail": "https://i.ytimg.com/vi/OYVlx3vnu8I/maxresdefault.jpg",
+		"description": "UPDATE2:\nEnglish Subs now available. To Switch Between Languages press the button at the lower right corner of the stream and then the arrow key, you will then be able to switch between English and Japanese. Enjoy!\n\nUPDATE:\nJapanese Subs now available. To Disable Press the CC button at the buttom right corner of the movie screen (available after scrolling over the arrow button)\n\nAfter listening to the full song i felt like adding the OP to the song. Of course the OP was too short but with some more OP clips and some other clips i got this result. I hope you enjoy.\n\nPlease Rate and Comment, would love to read it!\n\nCredit goes tot he creators of the song and those who worked with it. It sure is catchy ^^",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 11
+				}
+			}
+		},
+		"song_title": "Super Driver",
+		"artist": "Aya Hirano",
+		"artist_image": "http://i.imgur.com/YP4orpy.jpg",
+		"cover": "http://i.imgur.com/yKi98Oj.jpg",
+		"album": "Speed Star (The Melancholy of Suzumiya Haruhi)"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "1Hl_lDEP9Tg",
+		"url": "https://www.youtube.com/watch?v=1Hl_lDEP9Tg",
+		"title": "Kokoro no Chizu",
+		"duration": 260,
+		"thumbnail": "http://i.imgur.com/WyciocE.jpg",
+		"description": "Lyrics:\nDaijoubu!\nSaa, mae ni\nsusumou taiyou wo itsuno mune\nni\nTsunaida te\ntsutawaru Power\nnegai wo\ntsukamaeyouyo\ndekkai nami ni norou\nCHIKARA awasete\ntokimeku hou he isogou\nhajimari no aizu\nima koso funade no\ntoki ikari wo\nagetara\nnanairo no kaze wo kiri\nbouken no umi he\nkizu darake no tabi dakedo\ndaiji na mono ga soko ni\naru\nPINCHI nara itsudate boku ga\nmamoru kara\ndaijoubu!\nSaa mae ni susumou\ntaiyou\nwo itsumo mune ni\narashi ga kitara kata\nkunde sono saki no\nhikari wo miyou\nyume no kakera atsymareba\nasui mukou chizu ni naru\ndakara onnaji hata no moto\nnegai wo tsukamaeyouyo\nbokura wa hitotsu One Piece\n\"Minna de yareba dekiru!\nKokoro wo awasete Wataridori\ntachi no u ta yuuki ni kaetara\ntsubasa no nai bokura demo jiyuu jizai\nni habatakeru\nkimagure na sora datte\nmikata no shichaou\nDaijoubu! Sou, mae ni susumou\nsono namida ame no you ni\naoi umi ni kaeshita toki\njounetsu\nga kira kira hikaru\natsui omoi kasanetara mygen\ntai\nno kaze wo yubo\nzutto onaji hoshi\nno moto kataiki\nzuna ga arukara\nKiseki wo\nwakachi\naou\ndaijoubu!\nSaa mae ni susumou\ntaiyou wo itsumo\nmune ni\narashi ga kitara kata\nkunde sono saki no\nhikari wo muyou\nyume no kakera\natsumaraba asu ni\nmukou chizu ni naru\ndakara onaji hata\nno moto negai\nwo tsukamaeyouyo\nbokura wa hitutsu\nOne Piece",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 12
+				}
+			}
+		},
+		"song_title": "Kokoro no Chizu",
+		"artist": "BOYSTYLE",
+		"artist_image": "http://i.imgur.com/zi80YvR.jpg",
+		"cover": "http://i.imgur.com/CXUiyol.jpg",
+		"album": "One Piece"
 	},
 	{
 		"version": 103,
@@ -515,7 +546,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 12
+					"index": 13
 				}
 			}
 		},
@@ -546,7 +577,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 13
+					"index": 14
 				}
 			}
 		}
@@ -567,7 +598,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 14
+					"index": 15
 				}
 			}
 		}
@@ -588,138 +619,21 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 15
-				}
-			}
-		}
-	},
-	{
-		"version": 103,
-		"type": "SpotifyEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-E5ayd_cBMl8-Sword_Art_Online_Ost-_Luminous_Sword.webm",
-		"video_id": "E5ayd_cBMl8",
-		"url": "https://www.youtube.com/watch?v=E5ayd_cBMl8",
-		"title": "Cat Trumpet - Luminous Sword",
-		"duration": 149,
-		"thumbnail": "https://i.ytimg.com/vi/E5ayd_cBMl8/maxresdefault.jpg",
-		"description": "Sony Japan Copyright \u00a9 2012",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
 					"index": 16
 				}
 			}
-		},
-		"song_title": "Luminous Sword",
-		"artist": "Cat Trumpet",
-		"artist_image": "https://i.scdn.co/image/7c69f0769e4076fb7d92364481c9ea5df6fda225",
-		"cover": "https://i.scdn.co/image/ae97e987167e6f3363bbfcbe628129610fae5066",
-		"album": "Sword Art Online Piano Collection",
-		"spotify_data": {
-			"id": "4y9Or5TBI8wuZqWL0DQpA2",
-			"name": "Luminous Sword",
-			"artists": [
-				{
-					"id": "56PyKVahtx19m672QyZTG0",
-					"name": "Cat Trumpet",
-					"images": [
-						{
-							"height": 640,
-							"url": "https://i.scdn.co/image/bd7f2342b0a1307f2f97940db56dbfc48475a8a5",
-							"width": 640
-						},
-						{
-							"height": 320,
-							"url": "https://i.scdn.co/image/7c69f0769e4076fb7d92364481c9ea5df6fda225",
-							"width": 320
-						},
-						{
-							"height": 160,
-							"url": "https://i.scdn.co/image/35ecbada861a9f476e4803bf478ffc844c0818c1",
-							"width": 160
-						}
-					],
-					"genres": [
-						"otacore"
-					],
-					"popularity": 46,
-					"uri": "spotify:artist:56PyKVahtx19m672QyZTG0",
-					"href": "https://open.spotify.com/artist/56PyKVahtx19m672QyZTG0"
-				}
-			],
-			"artist": "Cat Trumpet",
-			"cover_url": "https://i.scdn.co/image/ae97e987167e6f3363bbfcbe628129610fae5066",
-			"duration": 255.5,
-			"album": {
-				"id": "5WjOUMPZ448OsStwyHAVgM",
-				"name": "Sword Art Online Piano Collection",
-				"artists": [
-					{
-						"id": "56PyKVahtx19m672QyZTG0",
-						"name": "Cat Trumpet",
-						"images": [
-							{
-								"height": 640,
-								"url": "https://i.scdn.co/image/bd7f2342b0a1307f2f97940db56dbfc48475a8a5",
-								"width": 640
-							},
-							{
-								"height": 320,
-								"url": "https://i.scdn.co/image/7c69f0769e4076fb7d92364481c9ea5df6fda225",
-								"width": 320
-							},
-							{
-								"height": 160,
-								"url": "https://i.scdn.co/image/35ecbada861a9f476e4803bf478ffc844c0818c1",
-								"width": 160
-							}
-						],
-						"genres": [
-							"otacore"
-						],
-						"popularity": 46,
-						"uri": "spotify:artist:56PyKVahtx19m672QyZTG0",
-						"href": "https://open.spotify.com/artist/56PyKVahtx19m672QyZTG0"
-					}
-				],
-				"images": [
-					{
-						"height": 640,
-						"url": "https://i.scdn.co/image/ae97e987167e6f3363bbfcbe628129610fae5066",
-						"width": 640
-					},
-					{
-						"height": 300,
-						"url": "https://i.scdn.co/image/3c1214af683efc572439bda91923d96cb0162f44",
-						"width": 300
-					},
-					{
-						"height": 64,
-						"url": "https://i.scdn.co/image/5144b049cac60f00ff4d36794fec250ab30b2c08",
-						"width": 64
-					}
-				],
-				"uri": "spotify:album:5WjOUMPZ448OsStwyHAVgM"
-			},
-			"popularity": 25,
-			"uri": "spotify:track:4y9Or5TBI8wuZqWL0DQpA2",
-			"query": "Sword Art Online Luminous Sword",
-			"certainty": 0.6666666666666666
 		}
 	},
 	{
 		"version": 103,
 		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube--1AT7kHMHwo-Charlotte_OP_Bravely_You_full.webm",
-		"video_id": "-1AT7kHMHwo",
-		"url": "https://www.youtube.com/watch?v=-1AT7kHMHwo",
-		"title": "Bravely You",
-		"duration": 329,
-		"thumbnail": "https://i.ytimg.com/vi/-1AT7kHMHwo/maxresdefault.jpg",
-		"description": "\u30a2\u30cb\u30e1\u300cCharlotte\uff08\u30b7\u30e3\u30fc\u30ed\u30c3\u30c8\uff09\u300d\u306eOP\u3067\u3059\u3002\nCharlotte\u304c\u50d5\u306b\u3068\u3063\u3066\u306f\u4eca\u671f\u3067\u4e00\u756a\u9762\u767d\u3044\u3067\u3059\u3002\n\n\u6b4c\u8a5e\u306e\u9593\u9055\u3044\u304c\u3042\u308a\u307e\u3057\u305f\u3002\n4:12\u306e\u201d\u3044\u3084\u306b\u306a\u3063\u3066\u304f\u308b\u201d\u306f\u3044\u3084\u306b\u306a\u3063\u3066\u3044\u308b\u3067\u3057\u305f\u3002\n\u7533\u3057\u8a33\u3042\u308a\u307e\u305b\u3093\u3002\n\u66f2:Bravely You\n\u6b4c:Lia\n\n\u53ea\u4eca\u3001\u3044\u3089\u306a\u3044PC\u30fb\u3044\u3089\u306a\u3044PC\u95a2\u9023\u306e\u7269\u3092\u63a2\u3057\u3066\u3044\u307e\u3059\u3002\n\u3082\u3057\u9802\u3051\u308b\u306a\u3089\u4e0b\u8a18\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9\u307e\u3067\u304a\u9858\u3044\u3057\u307e\u3059\u3002\n\namidanyoraiasyura@gmail.com",
+		"expected_filename": null,
+		"video_id": "UVc48sVzE2E",
+		"url": "https://www.youtube.com/watch?v=UVc48sVzE2E",
+		"title": "Be Your Girl",
+		"duration": 271,
+		"thumbnail": "http://i.imgur.com/iZWCuDi.jpg",
+		"description": "My first AMV\nI hope you'll like it :)\nIf you like my video, you can subscrire, i'll make more AMV soon.\nYou can also request for one. ^^\nThanks!",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
@@ -730,37 +644,11 @@
 				}
 			}
 		},
-		"song_title": "Bravely You",
-		"artist": "Lia",
-		"artist_image": "http://i.imgur.com/qZBZ0Aj.jpg",
-		"cover": "http://i.imgur.com/S2AiCTq.png",
-		"album": "Charlotte"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-1MsuXjTlCGE-Charlotte_Ending_-.webm",
-		"video_id": "1MsuXjTlCGE",
-		"url": "https://www.youtube.com/watch?v=1MsuXjTlCGE",
-		"title": "Yake Ochinai Tsubasa",
-		"duration": 316,
-		"thumbnail": "https://i.ytimg.com/vi/1MsuXjTlCGE/maxresdefault.jpg",
-		"description": "",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 18
-				}
-			}
-		},
-		"song_title": "Yake Ochinai Tsubasa",
-		"artist": "Aoi Tada",
-		"artist_image": "http://i.imgur.com/I3up3Up.jpg",
-		"cover": "http://i.imgur.com/fw8F3Pi.jpg",
-		"album": "Charlotte"
+		"song_title": "Be Your Girl",
+		"artist": "Chieko Kawabe",
+		"artist_image": "http://i.imgur.com/E4oFAln.jpg",
+		"cover": "http://i.imgur.com/dzGvIG2.jpg",
+		"album": "Elfen Lied"
 	},
 	{
 		"version": 103,
@@ -778,7 +666,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 19
+					"index": 18
 				}
 			}
 		},
@@ -863,79 +751,27 @@
 		"version": 103,
 		"type": "GieselaEntry",
 		"expected_filename": null,
-		"video_id": "3dYjJ3kOGoY",
-		"url": "https://www.youtube.com/watch?v=3dYjJ3kOGoY",
-		"title": "Colors",
-		"duration": 91,
-		"thumbnail": "http://i.imgur.com/Zp9cC3k.jpg",
-		"description": "Code geass Opening 1 HD ...\nEsta serie la recomiendo =D es buenisimaaaaaa!!!\ncalifiquen con 5 estrellas o los mato! =D",
+		"video_id": "HVKBTUqBJ3Y",
+		"url": "https://www.youtube.com/watch?v=HVKBTUqBJ3Y",
+		"title": "Great Escape",
+		"duration": 202,
+		"thumbnail": "http://i.imgur.com/DDvjyLz.jpg",
+		"description": "great escape\" by cinema staff\n\nSecond ending to Shingeki no Kyojin. Full song. \"great escape\" by cinema staff\n\n\nAll rights belong to their respective owners",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 20
+					"index": 19
 				}
 			}
 		},
-		"song_title": "Colors",
-		"artist": "FLOW",
-		"artist_image": "http://i.imgur.com/pmF9oEn.jpg",
-		"cover": "http://i.imgur.com/j7kK6qq.jpg",
-		"album": "Code Geass"
-	},
-	{
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-HJ7aVGjym9A-Code_Geass_-_Innocent_Days.webm",
-		"video_id": "HJ7aVGjym9A",
-		"url": "https://www.youtube.com/watch?v=HJ7aVGjym9A",
-		"title": "Code Geass - Innocent Days",
-		"duration": 262,
-		"thumbnail": "https://i.ytimg.com/vi/HJ7aVGjym9A/hqdefault.jpg",
-		"description": "Just a soundtrack from Code Geass",
-		"meta": {
-			"author": {
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			},
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 21
-				}
-			}
-		}
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "scqSanbCV-Q",
-		"url": "https://www.youtube.com/watch?v=scqSanbCV-Q",
-		"title": "Madder Sky",
-		"duration": 177,
-		"thumbnail": "http://i.imgur.com/6TlOtPZ.jpg",
-		"description": "Code Geass - Madder Sky",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 22
-				}
-			}
-		},
-		"song_title": "Madder Sky",
-		"artist": "K\u014dtar\u014d Nakagawa",
-		"artist_image": "http://i.imgur.com/xcDXKOY.jpg",
-		"cover": "http://i.imgur.com/kCr0h1v.jpg",
-		"album": "Code Geass"
+		"song_title": "Great Escape",
+		"artist": "Cinema Staff",
+		"artist_image": "http://i.imgur.com/TdlnlLj.jpg",
+		"cover": "http://i.imgur.com/AifwLv1.jpg",
+		"album": "Attack on Titan"
 	},
 	{
 		"version": 103,
@@ -953,7 +789,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 23
+					"index": 20
 				}
 			}
 		}
@@ -961,28 +797,28 @@
 	{
 		"version": 103,
 		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-PGoHzoZ2OI0-Durarara_Opening_2.webm",
-		"video_id": "PGoHzoZ2OI0",
-		"url": "https://www.youtube.com/watch?v=PGoHzoZ2OI0",
-		"title": "Complication",
-		"duration": 91,
-		"thumbnail": "https://i.ytimg.com/vi/PGoHzoZ2OI0/maxresdefault.jpg",
-		"description": "DRR!! Season 1 OP2\n\"Complication\" by ROOKiEZ is PUNK'D",
+		"expected_filename": "cache\\audio_cache\\youtube-Yx4uGOADIwk-Guilty_Crown_-_Ending_1_full_-_Departures_Blessing.webm",
+		"video_id": "Yx4uGOADIwk",
+		"url": "https://www.youtube.com/watch?v=Yx4uGOADIwk",
+		"title": "Departures",
+		"duration": 272,
+		"thumbnail": "http://i.imgur.com/wJJHRuN.jpg",
+		"description": "Hello !\nEt voil\u00e0 l'ending 1 de Guilty crown, Departures Blessing.\nBisous !\n\nNe pouvant pas mettre l'ending 2 en raison des droits d'auteurs, je vous donne le lien ! :\nhttps://www.youtube.com/watch?v=HQ-P0r2U8UU",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 24
+					"index": 21
 				}
 			}
 		},
-		"song_title": "Complication",
-		"artist": "ROOKiEZ is PUNK'D",
-		"artist_image": "http://i.imgur.com/7DrxNdc.jpg",
-		"cover": "http://i.imgur.com/i8pvxCH.jpg",
-		"album": "Durarara"
+		"song_title": "Departures",
+		"artist": "EGOIST",
+		"artist_image": "http://i.imgur.com/UTr0D44.jpg",
+		"cover": "http://i.imgur.com/p2rJHsu.jpg",
+		"album": "Guilty Crown"
 	},
 	{
 		"version": 103,
@@ -1005,7 +841,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 25
+					"index": 22
 				}
 			}
 		}
@@ -1014,105 +850,27 @@
 		"version": 103,
 		"type": "GieselaEntry",
 		"expected_filename": null,
-		"video_id": "UVc48sVzE2E",
-		"url": "https://www.youtube.com/watch?v=UVc48sVzE2E",
-		"title": "Be Your Girl",
-		"duration": 271,
-		"thumbnail": "http://i.imgur.com/iZWCuDi.jpg",
-		"description": "My first AMV\nI hope you'll like it :)\nIf you like my video, you can subscrire, i'll make more AMV soon.\nYou can also request for one. ^^\nThanks!",
+		"video_id": "3dYjJ3kOGoY",
+		"url": "https://www.youtube.com/watch?v=3dYjJ3kOGoY",
+		"title": "Colors",
+		"duration": 91,
+		"thumbnail": "http://i.imgur.com/Zp9cC3k.jpg",
+		"description": "Code geass Opening 1 HD ...\nEsta serie la recomiendo =D es buenisimaaaaaa!!!\ncalifiquen con 5 estrellas o los mato! =D",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 26
+					"index": 23
 				}
 			}
 		},
-		"song_title": "Be Your Girl",
-		"artist": "Chieko Kawabe",
-		"artist_image": "http://i.imgur.com/E4oFAln.jpg",
-		"cover": "http://i.imgur.com/dzGvIG2.jpg",
-		"album": "Elfen Lied"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "e7AUrshQ-TM",
-		"url": "https://www.youtube.com/watch?v=e7AUrshQ-TM",
-		"title": "Stories",
-		"duration": 319,
-		"thumbnail": "https://i.ytimg.com/vi/e7AUrshQ-TM/maxresdefault.jpg",
-		"description": "Anime: Code Geass\nAlbum Title: Code Geass Hangyaku no Lelouch Original Soundtrack\nTrack: 02 - Stories\nComposer & Singer: Kuroishi Hitomi/\u9ed2\u77f3\u3072\u3068\u307f\n\nOriginal Picture: http://konachan.net/post/show/42137/cc-code_geass-lelouch_lamperouge\n\n\nEnglish Translation:\n\nYou are my stories\nUnread stories\nYou are my stories\nUnread stories\n\nWhen I gazed at your eyes\nI could see an unknown country\n\nStories with their doors opened\nStories that won't ever close again\nStories with their doors opened\nStories that won't ever close again\n\nDestiny is unchangeable\nLet's go to an unknown country\n\nI want to protect you\nJust with that wish alone\nIn this pitch-black world\nUntil the moment when light overflows\n\nI want to protect you\nJust with that wish alone\nIn this pitch-black world\nUntil the moment when light overflows\n\n\nDISCLAIMER: I DO NOT OWN THIS PIECE OF MUSIC, THE ANIME, NOR DO I OWN THE PICTURE!! ALL CREDITS GOES TO THE ORIGINAL OWNERS!!",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 27
-				}
-			}
-		},
-		"song_title": "Stories",
-		"artist": "Kuroishi Hitomi",
-		"artist_image": "http://i.imgur.com/oscutvy.jpg",
-		"cover": "http://i.imgur.com/Y85LD4j.jpg",
+		"song_title": "Colors",
+		"artist": "FLOW",
+		"artist_image": "http://i.imgur.com/pmF9oEn.jpg",
+		"cover": "http://i.imgur.com/j7kK6qq.jpg",
 		"album": "Code Geass"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "K3u5h9cPTBw",
-		"url": "https://www.youtube.com/watch?v=K3u5h9cPTBw",
-		"title": "Kiri",
-		"duration": 258,
-		"thumbnail": "http://i.imgur.com/j5znfch.jpg",
-		"description": "Lyrics & Music: MONORAL\nSung by: MONORAL\nSong: Kiri\n\nYou complete my fate\nThe world unwinds inside of me\nYou complete my fate\nThe halo crawls away\nYou repeat my fate\nRewinding all we can\nYou refill my place\nYou refill my place\nCome and save me\nCome and save me\n\nYou complete my fate\nThe heavens stroll inside of me\nYou repeat my fate\nRevealing who we are\nYou refill my place\nYou refill my place\nCome and save me\n\nBelieve in me\nDrink the wine\nTake my hand\nFill me up\nBelieve in me\nDrink the wine\nTake my hand\nLet me follow",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 28
-				}
-			}
-		},
-		"song_title": "Kiri",
-		"artist": "MONORAL",
-		"artist_image": "http://i.imgur.com/Fku2zk4.jpg",
-		"cover": "http://i.imgur.com/LFYCG1Q.jpg",
-		"album": "Opus 01 (Ergo Proxy)"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-RZufKBrx0hY-Fairy_Tail_-_Absolute_Zero_SILVER_New_2016_Ost.m4a",
-		"video_id": "RZufKBrx0hY",
-		"url": "https://www.youtube.com/watch?v=RZufKBrx0hY",
-		"title": "Absolute Zero Silver",
-		"duration": 272,
-		"thumbnail": "https://i.ytimg.com/vi/RZufKBrx0hY/maxresdefault.jpg",
-		"description": "Fairy tail Sound Collection Volume 2\nBy Yasuharu Takanashi ~ I dont own anything, all rights belong to their respective owners. ~",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 29
-				}
-			}
-		},
-		"song_title": "Absolute Zero Silver",
-		"artist": "Yasuharu Takanashi",
-		"artist_image": "http://i.imgur.com/Z81vet0.jpg",
-		"cover": "http://i.imgur.com/08CoJCz.png",
-		"album": "Fairy Tail"
 	},
 	{
 		"version": 103,
@@ -1130,28 +888,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 30
-				}
-			}
-		}
-	},
-	{
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-_5fiqzCyCxo-Fairy_Tail_-_Fairy_s_Challenge_New_2016_Ost.m4a",
-		"video_id": "_5fiqzCyCxo",
-		"url": "https://www.youtube.com/watch?v=_5fiqzCyCxo",
-		"title": "Fairy Tail - Fairy's Challenge [New 2016 Ost]",
-		"duration": 169,
-		"thumbnail": "https://i.ytimg.com/vi/_5fiqzCyCxo/maxresdefault.jpg",
-		"description": "Fairy tail Sound Collection Volume 2\nBy Yasuharu Takanashi ~ I dont own anything, all rights belong to their respective owners. ~",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 31
+					"index": 24
 				}
 			}
 		}
@@ -1172,62 +909,10 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 32
+					"index": 25
 				}
 			}
 		}
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "Whgnftw2T-I",
-		"url": "https://www.youtube.com/watch?v=Whgnftw2T-I",
-		"title": "Mavis",
-		"duration": 140,
-		"thumbnail": "https://i.ytimg.com/vi/Whgnftw2T-I/maxresdefault.jpg",
-		"description": "Fairy Tail - Mavis\nFairy Tail - Mavis\nFairy Tail - Mavis\n\nAnime: Fairy Tail\nSong: Mavis\nArtist: Yasuharu Takanashi\nYear: 2013\nCd`s 4\nI'm not the creator of this Music or the Image,",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 33
-				}
-			}
-		},
-		"song_title": "Mavis",
-		"artist": "Yasuharu Takanashi",
-		"artist_image": "http://i.imgur.com/YAErBTA.jpg",
-		"cover": "http://i.imgur.com/R3qCsQX.jpg",
-		"album": "Fairy Tail"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "0yURnPCLYFk",
-		"url": "https://www.youtube.com/watch?v=0yURnPCLYFk",
-		"title": "Seigi No Chikara",
-		"duration": 126,
-		"thumbnail": "https://i.ytimg.com/vi/0yURnPCLYFk/maxresdefault.jpg",
-		"description": "Fairy Tail - Seigi No Chikara\nFairy Tail - Seigi No Chikara\nFairy Tail - Seigi No Chikara\n\nAnime: Fairy Tail\nSong: Seigi No Chikara\nArtist: Yasuharu Takanashi\nYear: 2013\nCd`s 3\nI'm not the creator of this Music or the Image,",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 34
-				}
-			}
-		},
-		"song_title": "Seigi No Chikara",
-		"artist": "Yasuharu Takanashi",
-		"artist_image": "http://i.imgur.com/D1vLS7M.jpg",
-		"cover": "http://i.imgur.com/19n3u8Q.jpg",
-		"album": "Fairy Tail"
 	},
 	{
 		"version": 103,
@@ -1245,7 +930,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 35
+					"index": 26
 				}
 			}
 		}
@@ -1266,7 +951,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 36
+					"index": 27
 				}
 			}
 		}
@@ -1275,27 +960,27 @@
 		"version": 103,
 		"type": "GieselaEntry",
 		"expected_filename": null,
-		"video_id": "9vx69Pe7Ncs",
-		"url": "https://www.youtube.com/watch?v=9vx69Pe7Ncs",
-		"title": "Chemistry",
-		"duration": 218,
-		"thumbnail": "http://i.imgur.com/et9ZPV1.jpg",
-		"description": "Chemistry - Period [Fullmetal Alchemist Brotherhood OST, OP 4]\n\nNot for commercial use.",
+		"video_id": "t66VKF-cyhk",
+		"url": "https://www.youtube.com/watch?v=t66VKF-cyhk",
+		"title": "Dead END",
+		"duration": 235,
+		"thumbnail": "http://i.imgur.com/mIxfsBn.jpg",
+		"description": "Lyrics:\n\nThe girl with the sharp thorn in her flesh\nI meet you at your story\nBehind the hatred there lies a murderous love\n\nDo you kill your friends, if you fulfill your wish?\nCan you die for someone?\nThey are synonymous words\n\nLife is a game. It's a survival. That's right! How do you start?\nTime and Space, It's a crossroad through a gate! Where do you go?\n\nYou seek eternal breath\nWhy do you need to live?\nWe don't know when this world came into being\nWe are the time leaper\n\nNothing's gonna change with you in the world\nEverything will be decided by the rules\nOh, We are traveling the past and the future through love\n\nBreak out!\nLet's dial back all the pains and we will born again\nI wanna see the stars with you\nOver the miracle\nIt's not a Dead END...\n\nThe boy with the loneliness in his side\nI wanna control your soul\nBehind the hatred there lies a plundering love\n\nThe Future has been over\nBut we are fixating on that\nThe past is still to come\nYes! They are in the same time\n\nDeath is a frame, It's a spiral. That's all. How do you think?\nGod and Evil. It's a scapegoat through the heart. What do you know?\n\"What's at the back of your mind? I can't hold your hand\"\nYou say \"Where are you going to take me? I can't believe\"\nWe walk the parallel line\n\nNothing's gonna change my deep love for you\nEverything will be going right for me\nOh, we are wandering in light and darkness through eyes\n\nBreak down! Let's revamp all the truth an we will create a fact\nI wanna feel the reality with the agony of doubt\n\nI love U. Cuz U are always by my side.\n\nDead or Alive\nDead or Alive\n\nBack to you\nCan't you read? Can't you see?\nMy words in your virtual vision\nSave my life! Save your life!\nWhy do you come here? I'm such a liar\nBad choice! Bad sign!\nIt's a prologue of collapse\nI don't stop your desire, cuz I can't forget you\n\nNothing's gonna change with you in the world\nEverything will be decided by the rules\nOh, we are traveling the past and the future through love\n\nBreak out!\nLet's dial back all the pains and we will be born again\nI wanna see the stars with you\nOver the miracle\nIt's not a Dead END...",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 37
+					"index": 28
 				}
 			}
 		},
-		"song_title": "Chemistry",
-		"artist": "Period",
-		"artist_image": "http://i.imgur.com/Yj7r46N.jpg",
-		"cover": "http://i.imgur.com/zVq1hpX.jpg",
-		"album": "Fullmetal Alchemist Brotherhood"
+		"song_title": "Dead END",
+		"artist": "Faylan",
+		"artist_image": "http://i.imgur.com/GAX9QHv.jpg",
+		"cover": "http://i.imgur.com/aLQqjzB.jpg",
+		"album": "Mirai Nikki"
 	},
 	{
 		"version": 103,
@@ -1313,10 +998,36 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 38
+					"index": 29
 				}
 			}
 		}
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-y-q3br6WcGc-Snow_Fairy_Full.webm",
+		"video_id": "y-q3br6WcGc",
+		"url": "https://www.youtube.com/watch?v=y-q3br6WcGc",
+		"title": "Funkist - Snow Fairy",
+		"duration": 217,
+		"thumbnail": "https://i.ytimg.com/vi/y-q3br6WcGc/maxresdefault.jpg",
+		"description": "Hey guys! This is Fairy Tail Opening 1, Snow Fairy!\nPersonally one of my most favorite opening!\nHope you enjoyed and make sure to subscribe!\n\nI DO NOT OWN THE MUSIC: FUNKIST OWNS THIS MUSIC\n\n\"Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is made for \"fair use\" for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statute that might otherwise be infringing. Non-profit, educational or personal use tips the balance in favor of fair use.\"",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 30
+				}
+			}
+		},
+		"song_title": "Snow Fairy",
+		"artist": "Funkist",
+		"artist_image": "http://i.imgur.com/Xmz23Ca.jpg",
+		"cover": "http://i.imgur.com/FV8tyVY.jpg",
+		"album": "Fairy Tail"
 	},
 	{
 		"version": 103,
@@ -1339,62 +1050,10 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 39
+					"index": 31
 				}
 			}
 		}
-	},
-	{
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-AK9DlbzxCVk-Ghost_in_the_Shell_-_Stand_Alone_Complex_2_-_Ending.m4a",
-		"video_id": "AK9DlbzxCVk",
-		"url": "https://www.youtube.com/watch?v=AK9DlbzxCVk",
-		"title": "Ghost in the Shell - Stand Alone Complex 2 - Ending",
-		"duration": 85,
-		"thumbnail": "https://i.ytimg.com/vi/AK9DlbzxCVk/hqdefault.jpg",
-		"description": "Ghost in the Shell - Stand Alone Complex 2 - Ending\nmp3 Download http://kiwi6.com/file?id=2ful6t4960",
-		"meta": {
-			"author": {
-				"type": "Member",
-				"id": "203510202421477376",
-				"name": "ZyLect"
-			},
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 40
-				}
-			}
-		}
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-WWB01IuMvzA-God_knows..._The_Melancholy_of_Haruhi_Suzumiya_Kadokawa_MAD.webm",
-		"video_id": "WWB01IuMvzA",
-		"url": "https://www.youtube.com/watch?v=WWB01IuMvzA",
-		"title": "God Knows...",
-		"duration": 281,
-		"thumbnail": "http://i.imgur.com/Cx0m4u4.jpg",
-		"description": "The Melancholy of Haruhi Suzumiya\u3000\u3010Kadokawa\u516c\u8a8dAMV\u3011\nGod knows... \u3000\uff08by Aya Hirano\uff09\n\n\n\nGod knows...\u3000Lyrics\u3000(English Translation)\n\n\nI run past you with a thirsty heart.\nSorry, I couldn't do anything-\nyou won't even let us\nshare our pain with each other.\n\nIn order to live purely\nI face your back and leave without turning back.\non the lonely rail\n\nI'll follow you.\nNo matter where you are in the darkness of this bitter world\nyou will shine,\nand exceed the limits of the future.\nTo prevent your spirit from being broken because of your weakness\nyou converge with my way.\nNow, God bless us...\n\n\nI send my now passionate feelings-\nthey melt reality, then just hover there suspended.\nThere's no reason for me wanting to see you.\nI pour my feelings into you, lovin' you\n\nLet's at least imagine only beautiful dreams,\nas we chase after them\nfor your lonely heart\n\nStop it, lying isn't like you.\nLook into my eyes and let's speak of what will be.\nI'm prepared-\neven for a bleak future.\nBecome strong and you might even be able to change fate, you know.\nThough I want my wish to be granted,\nGod knows everything...\n\nYou're here, and I'm here-\nall the others have disappeared.\nBy sketching the beauty of our fleeting dream,\nwe're just tracing our scars\n\nSo, I'll follow you.\nNo matter where you are in the darkness of this bitter world\nyou will shine,\nand exceed the limits of the future.\nTo prevent your spirit from being broken because of your weakness\nyou converge with my way.\nNow, God bless us...\n\n\n\nGod knows...\u3000Lyrics\u3000(Japanese)\n\n\nKawaita kokoro de kakenukeru\nGomen ne nani mo dekinakute\nItami wo wakachiau koto sae\nAnata wa yurushite kurenai\n\nMuku ni ikiru tame ni furimukazu\nSenaka mukete satteshimau\nOn the lonely rail\n\nWatashi tsuiteiku yo\nDonna tsurai sekai no yami no naka de sae\nKitto anata wa kagayaite\nKoeru mirai no hate\nYowasa yue ni tamashii kowasarenu you ni\nMy way kasanaru yo\nIma futari ni God bless...\n\n\nTodokete atsuku naru omoi wa\nGenjitsu tokashite samayou\nAitai kimochi ni riyuu wa nai\nAnata e afuredasu Lovin' you\n\nSemete utsukushii yume dake wo\nEgakinagara oikakeyou\nFor your lonely heart\n\nYamete uso wa anata rashikunai yo\nMe wo mite kore kara no koto wo hanasou\nWatashi kakugo shiteru\nKurai mirai datte\nTsuyoku natte unmei kaerareru kamo ne\nMy wish kanaetai noni\nSubete wa God knows...\n\nAnata ga ite watashi ga ite\nHoka no hito wa kieteshimatta\nAwai yume no utsukushisa wo egakinagara\nKizuato nazoru\n\nDakara watashi tsuiteiku yo\nDonna tsurai sekai no yami no naka de sae\nKitto anata wa kagayaite\nKoeru mirai no hate\nYowasa yue ni tamashii kowasarenu you ni\nMy way kasanaru yo\nIma futari ni God bless...\n\n\n\n--------------------------------------------------------------------------------\n\nThe Melancholy of Haruhi Suzumiya\nGod knows... \u3000Full\nhttp://www.nicovideo.jp/watch/sm8308752\nfrom nicovideo\n\n(V)o\uffe5o(V) 's comment\u2193\n\n\uff08\u30d8\u30c3\u30c9\u30d5\u30a9\u30f3\u63a8\u5968\uff09\n\n(V)o\uffe5o(V) 's mylist\nhttp://www.nicovideo.jp/user/13915562\n\n\n\u203b\u97f3\u58f0\u306f\u52a0\u5de5\u3055\u308c\u3066\u3044\u307e\u3059\n\n\n----------------------------------------------------------------\n\u203b \u3053\u306e\u52d5\u753b\u306e\u5e83\u544a\u306b\u7531\u6765\u3059\u308b\u6a29\u5229\u8005\u306e\u4e00\u89a7:\nKadokawa\n\u8457\u4f5c\u6a29\u8005\u306b\u3088\u3063\u3066\u53ce\u76ca\u5316\u3055\u308c\u3066\u3044\u307e\u3059\n.",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 41
-				}
-			}
-		},
-		"song_title": "God Knows...",
-		"artist": "Aya Hirano",
-		"artist_image": "http://i.imgur.com/TAebX2m.jpg",
-		"cover": "http://i.imgur.com/FSAFWwn.jpg",
-		"album": "The Melancholy of Haruhi Suzumiya"
 	},
 	{
 		"version": 103,
@@ -1412,60 +1071,18 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 42
+					"index": 32
 				}
 			}
 		}
 	},
 	{
 		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-Yx4uGOADIwk-Guilty_Crown_-_Ending_1_full_-_Departures_Blessing.webm",
-		"video_id": "Yx4uGOADIwk",
-		"url": "https://www.youtube.com/watch?v=Yx4uGOADIwk",
-		"title": "Guilty Crown - Ending 1 (full) - Departures Blessing",
-		"duration": 272,
-		"thumbnail": "https://i.ytimg.com/vi/Yx4uGOADIwk/hqdefault.jpg",
-		"description": "Hello !\nEt voil\u00e0 l'ending 1 de Guilty crown, Departures Blessing.\nBisous !\n\nNe pouvant pas mettre l'ending 2 en raison des droits d'auteurs, je vous donne le lien ! :\nhttps://www.youtube.com/watch?v=HQ-P0r2U8UU",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 43
-				}
-			}
-		}
-	},
-	{
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-0hbz7_ls4d0-Guilty_Crown_rOn_krone.webm",
-		"video_id": "0hbz7_ls4d0",
-		"url": "https://www.youtube.com/watch?v=0hbz7_ls4d0",
-		"title": "[Guilty Crown] \u03barOn\u0451 (krone)",
-		"duration": 342,
-		"thumbnail": "https://i.ytimg.com/vi/0hbz7_ls4d0/maxresdefault.jpg",
-		"description": "I don\u00b4t own any of this video.\n\nAlbum: Guilty Crown Original Sound Track by Hiroyuki Sawano.\n\nSong: 13   \u03barOn\u0451\n\nMore info: http://vgmdb.net/album/29651\n\n\"Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is made for \"fair use\" for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statute that might otherwise be infringing. Non-profit, educational or personal use tips the balance in favor of fair use\"",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 44
-				}
-			}
-		}
-	},
-	{
-		"version": 103,
-		"type": "YoutubeEntry",
+		"type": "GieselaEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-BFDTwfmLiaw-HERO_-_Tenohira_Fairy_Tail_OP_12_HD.webm",
 		"video_id": "BFDTwfmLiaw",
 		"url": "https://www.youtube.com/watch?v=BFDTwfmLiaw",
-		"title": "HERO - Tenohira [Fairy Tail OP 12] HD",
+		"title": "Tenohira",
 		"duration": 191,
 		"thumbnail": "https://i.ytimg.com/vi/BFDTwfmLiaw/maxresdefault.jpg",
 		"description": "",
@@ -1475,10 +1092,15 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 45
+					"index": 33
 				}
 			}
-		}
+		},
+		"song_title": "Tenohira",
+		"artist": "HERO",
+		"artist_image": "http://i.imgur.com/q9p0V5V.jpg",
+		"cover": "http://i.imgur.com/FH34MZJ.png",
+		"album": "Fairy Tail"
 	},
 	{
 		"version": 103,
@@ -1496,13 +1118,13 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 46
+					"index": 34
 				}
 			}
 		},
 		"song_title": "Kono Te Nobashite",
 		"artist": "HI-FI CAMP",
-		"artist_image": "https://i.scdn.co/image/d663d76d569bc13de990ad6dbc679ef686996a82",
+		"artist_image": "https://i.scdn.co/image/db1b76b74165ac3ba3de1518691e841c764c7516",
 		"cover": "https://i.scdn.co/image/ec6f07c5c3204a6f151d318b0e167448249b5213",
 		"album": "Tv Anime \"Fairy Tail\" Op & Ed Theme Songs Vol. 2 (Standard Edition)",
 		"spotify_data": {
@@ -1580,6 +1202,32 @@
 	{
 		"version": 103,
 		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "ny6vbAEYGCQ",
+		"url": "https://www.youtube.com/watch?v=ny6vbAEYGCQ",
+		"title": "Startear",
+		"duration": 300,
+		"thumbnail": "http://i.imgur.com/UA1pCZs.jpg",
+		"description": "Presented by \u771f\u30aa\u30fc\u30bc\n\nThis video is copyrighted by Sony Music Group Company in Japan, but now we do copyright fraud by unscrupulous actors and make a profit without permission to Sony Music Group Company without permission.\n\n\u3053\u306e\u52d5\u753b\u306f\u3001\u8457\u4f5c\u6a29\u304c\u65e5\u672c\u306eSony Music Group Company\u306b\u3042\u308a\u307e\u3059\u304c\u3001\u73fe\u5728\u3001\u60aa\u5fb3\u696d\u8005\u306b\u3088\u308a\u3001\u8457\u4f5c\u6a29\u306e\u8a50\u6b3a\u3092\u884c\u3044\u3001Sony Music Group Company\u306b\u7121\u65ad\u3067\u52dd\u624b\u306b\u5229\u76ca\u3092\u4e0a\u3052\u3066\u304a\u308a\u307e\u3059\u3002",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 35
+				}
+			}
+		},
+		"song_title": "Startear",
+		"artist": "Haruna Luna",
+		"artist_image": "http://i.imgur.com/jN6pZrg.jpg",
+		"cover": "http://i.imgur.com/lmBGLmr.jpg",
+		"album": "Sword Art Online"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-7Ww0IJgUTDw-10._Blood_History_-_Accel_World_OST.webm",
 		"video_id": "7Ww0IJgUTDw",
 		"url": "https://www.youtube.com/watch?v=7Ww0IJgUTDw",
@@ -1593,7 +1241,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 47
+					"index": 36
 				}
 			}
 		},
@@ -1619,13 +1267,13 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 48
+					"index": 37
 				}
 			}
 		},
 		"song_title": "Vogel Im Kafig",
 		"artist": "Hiroyuki Sawano & Cyua",
-		"artist_image": "https://i.scdn.co/image/1d4eaf6713b68d024af77f75341844fa614ac640",
+		"artist_image": "https://i.scdn.co/image/3c1c1781de0c5974226bfae4e5cf649cf93b9d37",
 		"cover": "https://i.scdn.co/image/3f3abb6325d6b7acefe4beca1ff8110625398813",
 		"album": "Attack on Titan (Original Soundtrack)",
 		"spotify_data": {
@@ -1767,13 +1415,13 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 49
+					"index": 38
 				}
 			}
 		},
 		"song_title": "The Reluctant Heroes",
 		"artist": "Hiroyuki Sawano & MPI",
-		"artist_image": "https://i.scdn.co/image/1d4eaf6713b68d024af77f75341844fa614ac640",
+		"artist_image": "https://i.scdn.co/image/e4a4cf38f9c3aeda3c2fa65cde0a81222e492c41",
 		"cover": "https://i.scdn.co/image/3f3abb6325d6b7acefe4beca1ff8110625398813",
 		"album": "Attack on Titan (Original Soundtrack)",
 		"spotify_data": {
@@ -1884,6 +1532,136 @@
 	{
 		"version": 103,
 		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-f5d0VCHll4w-Ao_no_Exorcist_Original_Sound_track_03_U_Cloud.webm",
+		"video_id": "f5d0VCHll4w",
+		"url": "https://www.youtube.com/watch?v=f5d0VCHll4w",
+		"title": "U & Cloud",
+		"duration": 243,
+		"thumbnail": "https://i.ytimg.com/vi/f5d0VCHll4w/maxresdefault.jpg",
+		"description": "",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 39
+				}
+			}
+		},
+		"song_title": "U & Cloud",
+		"artist": "Hiroyuki Sawano",
+		"artist_image": "http://i.imgur.com/Cy9VGOK.jpg",
+		"cover": "http://i.imgur.com/IU8Xm1I.jpg",
+		"album": "Blue Exorcist"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-w3UR7nsTLlQ-Attack_on_Titan_OST_-_Vogel_im_Kafig.webm",
+		"video_id": "w3UR7nsTLlQ",
+		"url": "https://www.youtube.com/watch?v=w3UR7nsTLlQ",
+		"title": "Vogel im K\u00e4fig",
+		"duration": 380,
+		"thumbnail": "https://i.ytimg.com/vi/w3UR7nsTLlQ/maxresdefault.jpg",
+		"description": "By: Hiroyuki Sawano / \u6fa4\u91ce \u5f18\u4e4b\nFrom: Attack on Titan / Shingeki no Kyojin / \u9032\u6483\u306e\u5de8\u4eba\n3:30 and forward is where it really starts to pick up.\nI do not own anything.\nImage Link: http://i.imgur.com/Kbowyyc.jpg",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 40
+				}
+			}
+		},
+		"song_title": "Vogel im K\u00e4fig",
+		"artist": "Hiroyuki Sawano",
+		"artist_image": "http://i.imgur.com/vGIXVKw.jpg",
+		"cover": "http://i.imgur.com/Fe6KK8k.jpg",
+		"album": "Attack on Titan"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "yD0rG7prFgU",
+		"url": "https://www.youtube.com/watch?v=yD0rG7prFgU",
+		"title": "theDOGS",
+		"duration": 276,
+		"thumbnail": "https://i.ytimg.com/vi/yD0rG7prFgU/maxresdefault.jpg",
+		"description": "Composition: Hiroyuki Sawano\nLyrics: mpi\nArtists: mpi, Mica Caldito\n\nShingeki no Kyojin Movie 2 Theme Song\n____________________________________________\n\nLyrics:\n\nSee it on the people's faces everywhere\nBlack'n'blue but they won't throw the towel in\nAnd let go of a dream\nMan, women, child prepare to bleed\n\nWere we born to lose and let goliath win?\nHeavy air and screaming as you pull the pin\nOur world is collapsing but we can rebuild it\nA 100 more years in the fire\n\nDo you believe that we can just kill them all?\nDo you believe that we can conquer this?\nCan't delete all the mess that I have seen\nFall in the fire but these burns will heal you\n\nGonna take your knives and skills they must be honed\nShow your mom your lives and give a dog a bone\nJust wait for centuries\nMan, woman, child long to be free\n\nWhen we die we ask our brothers one more time\nIf the meaning of our lives was worth a dime\nOur world oxidizes but will surprise us\nA 100 more years in the fire\n\nDo you believe that we can just kill them all?\nDo you believe that we can conquer this?\nCan't delete all the mess that I have seen\nFall in the fire but these burns will heal you\nComing down to show you what to do\nHow to die with honor, dignity\nWe should delete all the mess out from our sight\nWhat is truth is for me and you\n\nDo you believe that we can just kill them all?\nDo you believe that we can conquer this?\nCan't delete all the mess that I have seen\nFall in the fire but these burns will heal you\nComing down to show you what to do\nHow to die with honor, dignity\nWe should delete all the mess out from our sight\nWhat is truth is for me and you",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 41
+				}
+			}
+		},
+		"song_title": "theDOGS",
+		"artist": "Hiroyuki Sawano",
+		"artist_image": "http://i.imgur.com/XOgqYNY.jpg",
+		"cover": "http://i.imgur.com/5zvlNe1.png",
+		"album": "Attack on Titan"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-0hbz7_ls4d0-Guilty_Crown_rOn_krone.webm",
+		"video_id": "0hbz7_ls4d0",
+		"url": "https://www.youtube.com/watch?v=0hbz7_ls4d0",
+		"title": "\u039aron\u0451",
+		"duration": 342,
+		"thumbnail": "http://i.imgur.com/7afshrk.jpg",
+		"description": "I don\u00b4t own any of this video.\n\nAlbum: Guilty Crown Original Sound Track by Hiroyuki Sawano.\n\nSong: 13   \u03barOn\u0451\n\nMore info: http://vgmdb.net/album/29651\n\n\"Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is made for \"fair use\" for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statute that might otherwise be infringing. Non-profit, educational or personal use tips the balance in favor of fair use\"",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 42
+				}
+			}
+		},
+		"song_title": "\u039aron\u0451",
+		"artist": "Hiroyuki Sawano",
+		"artist_image": "http://i.imgur.com/e5imRTl.jpg",
+		"cover": "http://i.imgur.com/X1NLCor.jpg",
+		"album": "Guilty Crown"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-HJ7aVGjym9A-Code_Geass_-_Innocent_Days.webm",
+		"video_id": "HJ7aVGjym9A",
+		"url": "https://www.youtube.com/watch?v=HJ7aVGjym9A",
+		"title": "Innocent Days",
+		"duration": 262,
+		"thumbnail": "http://i.imgur.com/hgZTefT.png",
+		"description": "Just a soundtrack from Code Geass",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 43
+				}
+			}
+		},
+		"song_title": "Innocent Days",
+		"artist": "Hitomi Kuroishi",
+		"artist_image": "http://i.imgur.com/5TLsbAx.jpg",
+		"cover": "http://i.imgur.com/ZCsl3iS.jpg",
+		"album": "Code Geass"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
 		"expected_filename": null,
 		"video_id": "WszLpgQmxVc",
 		"url": "https://www.youtube.com/watch?v=WszLpgQmxVc",
@@ -1897,7 +1675,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 50
+					"index": 44
 				}
 			}
 		},
@@ -1906,6 +1684,32 @@
 		"artist_image": "http://i.imgur.com/yfQhntK.jpg",
 		"cover": "http://i.imgur.com/gWpU9Fn.jpg",
 		"album": "K-On"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "xcXSllSEs4I",
+		"url": "https://www.youtube.com/watch?v=xcXSllSEs4I",
+		"title": "On My Own",
+		"duration": 231,
+		"thumbnail": "http://i.imgur.com/4Ewd31Q.jpg",
+		"description": "This is the beloved song of our hero Kaneki...enjoy :D i dont own any thing\nSite link : http://hikarinoakariost.info/",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 45
+				}
+			}
+		},
+		"song_title": "On My Own",
+		"artist": "Katherine Liner",
+		"artist_image": "http://i.imgur.com/G9nQrEq.jpg",
+		"cover": "http://i.imgur.com/GbaHMtN.jpg",
+		"album": "Tokyo Ghoul"
 	},
 	{
 		"version": 103,
@@ -1928,13 +1732,13 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 51
+					"index": 46
 				}
 			}
 		},
 		"song_title": "Continued Story (From \"Code Geass\")",
 		"artist": "Kenzie Smith Piano",
-		"artist_image": "https://i.scdn.co/image/dd45efe7a8888efec49a39c9251af1884326e53f",
+		"artist_image": "https://i.scdn.co/image/01858fad79f29979bc4728312eb5153e7874e6f1",
 		"cover": "https://i.scdn.co/image/47de7bbc6afe5f510dcd3a45b3ba187a2832b81b",
 		"album": "Anime Music Collection Piano Solo, Vol. 5",
 		"spotify_data": {
@@ -2035,15 +1839,150 @@
 	},
 	{
 		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-51LMOJu9lwc-Knights_of_sidonia_intro_opening.webm",
-		"video_id": "51LMOJu9lwc",
-		"url": "https://www.youtube.com/watch?v=51LMOJu9lwc",
-		"title": "Knights of sidonia intro/opening",
-		"duration": 262,
-		"thumbnail": "https://i.ytimg.com/vi/51LMOJu9lwc/hqdefault.jpg",
-		"description": "La intro de Knights of Sidonia establece el modo de un anime fresco y coherente que se explora con gusto. Al tiempo una marcha que un lamento endulza el oido con la solemnidad de luchar el todo por el todo.",
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-rSn1M0hVf6E-Koe_no_Katachi_A_Silent_Voice_OST_Soundtrack_-_LIT_-_Longer_Version.m4a",
+		"video_id": "rSn1M0hVf6E",
+		"url": "https://www.youtube.com/watch?v=rSn1M0hVf6E",
+		"title": "Lit",
+		"duration": 136,
+		"thumbnail": "https://i.ytimg.com/vi/rSn1M0hVf6E/maxresdefault.jpg",
+		"description": "Anime: Koe no Katachi\nTitle: LIT (Track 39 - Disc 1)\nComposer: Kensuke Ushio\n\nDISCLAIMER\n- - - - - - - - - - -\nI do not own any of the anime, music, and characters. All rights to the original creators. This video is only for promotion purposes.\n- - - - - - - - - - -\nThis version of LIT is a different variation compared to the piano version. Enjoy!",
 		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 47
+				}
+			}
+		},
+		"song_title": "Lit",
+		"artist": "Kensuke Ushio",
+		"artist_image": "http://i.imgur.com/u7hLLDv.jpg",
+		"cover": "http://i.imgur.com/faU1JOv.jpg",
+		"album": "Koe no Katachi"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-t3wcNYENP5E-This_game-Konomi_Suzuki_No_game_no_life_full_opening.webm",
+		"video_id": "t3wcNYENP5E",
+		"url": "https://www.youtube.com/watch?v=t3wcNYENP5E",
+		"title": "This Game",
+		"duration": 281,
+		"thumbnail": "http://i.imgur.com/Ded7RhN.png",
+		"description": "I don't own anything in the video, including the audio and pictures.The credits go to the respective owners.\nLyrics:\nhttp://www.animelyrics.com/anime/ngnl/thisgame.htm",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 48
+				}
+			}
+		},
+		"song_title": "This Game",
+		"artist": "Konomi Suzuki",
+		"artist_image": "http://i.imgur.com/jyLHWjN.jpg",
+		"cover": "http://i.imgur.com/T9eUqA9.jpg",
+		"album": "No Game No Life"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "e7AUrshQ-TM",
+		"url": "https://www.youtube.com/watch?v=e7AUrshQ-TM",
+		"title": "Stories",
+		"duration": 319,
+		"thumbnail": "https://i.ytimg.com/vi/e7AUrshQ-TM/maxresdefault.jpg",
+		"description": "Anime: Code Geass\nAlbum Title: Code Geass Hangyaku no Lelouch Original Soundtrack\nTrack: 02 - Stories\nComposer & Singer: Kuroishi Hitomi/\u9ed2\u77f3\u3072\u3068\u307f\n\nOriginal Picture: http://konachan.net/post/show/42137/cc-code_geass-lelouch_lamperouge\n\n\nEnglish Translation:\n\nYou are my stories\nUnread stories\nYou are my stories\nUnread stories\n\nWhen I gazed at your eyes\nI could see an unknown country\n\nStories with their doors opened\nStories that won't ever close again\nStories with their doors opened\nStories that won't ever close again\n\nDestiny is unchangeable\nLet's go to an unknown country\n\nI want to protect you\nJust with that wish alone\nIn this pitch-black world\nUntil the moment when light overflows\n\nI want to protect you\nJust with that wish alone\nIn this pitch-black world\nUntil the moment when light overflows\n\n\nDISCLAIMER: I DO NOT OWN THIS PIECE OF MUSIC, THE ANIME, NOR DO I OWN THE PICTURE!! ALL CREDITS GOES TO THE ORIGINAL OWNERS!!",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 49
+				}
+			}
+		},
+		"song_title": "Stories",
+		"artist": "Kuroishi Hitomi",
+		"artist_image": "http://i.imgur.com/oscutvy.jpg",
+		"cover": "http://i.imgur.com/Y85LD4j.jpg",
+		"album": "Code Geass"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "scqSanbCV-Q",
+		"url": "https://www.youtube.com/watch?v=scqSanbCV-Q",
+		"title": "Madder Sky",
+		"duration": 177,
+		"thumbnail": "http://i.imgur.com/6TlOtPZ.jpg",
+		"description": "Code Geass - Madder Sky",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 50
+				}
+			}
+		},
+		"song_title": "Madder Sky",
+		"artist": "K\u014dtar\u014d Nakagawa",
+		"artist_image": "http://i.imgur.com/xcDXKOY.jpg",
+		"cover": "http://i.imgur.com/kCr0h1v.jpg",
+		"album": "Code Geass"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-tm7Xf9818FM-Angel_Beats_-_Ichiban_no_Takaramono_Yui_final_ver..webm",
+		"video_id": "tm7Xf9818FM",
+		"url": "https://www.youtube.com/watch?v=tm7Xf9818FM",
+		"title": "LiSA - Ichiban no Takaramono",
+		"duration": 360,
+		"thumbnail": "https://i.ytimg.com/vi/tm7Xf9818FM/maxresdefault.jpg",
+		"description": "",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 51
+				}
+			}
+		},
+		"song_title": "Ichiban no Takaramono",
+		"artist": "LiSA",
+		"artist_image": "http://i.imgur.com/adfWmHo.jpg",
+		"cover": "http://i.imgur.com/wenQwi5.jpg",
+		"album": "Ichiban no Takaramono"
+	},
+	{
+		"version": 103,
+		"type": "SpotifyEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-FY9qBx7W9o0-LiSA_-_Shirushi.webm",
+		"video_id": "FY9qBx7W9o0",
+		"url": "https://www.youtube.com/watch?v=FY9qBx7W9o0",
+		"title": "LiSA - Shirushi",
+		"duration": 116,
+		"thumbnail": "https://i.ytimg.com/vi/FY9qBx7W9o0/maxresdefault.jpg",
+		"description": "Music video by LiSA performing Shirushi. (C) 2014 Aniplex Inc.",
+		"meta": {
+			"author": {
+				"type": "Member",
+				"id": "203302899277627392",
+				"name": "siku2"
+			},
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
@@ -2052,18 +1991,120 @@
 					"index": 52
 				}
 			}
+		},
+		"song_title": "Shirushi",
+		"artist": "LiSA",
+		"artist_image": "https://i.scdn.co/image/ae1b09a9dd746482b53d73fb0643c80c1b46a3d4",
+		"cover": "https://i.scdn.co/image/b0d475c2cb05195d2cf7778c507b8757e1f3376e",
+		"album": "Launcher",
+		"spotify_data": {
+			"id": "7gRLdM0fUa3v69BeWYAMzO",
+			"name": "Shirushi",
+			"artists": [
+				{
+					"id": "0blbVefuxOGltDBa00dspv",
+					"name": "LiSA",
+					"images": [
+						{
+							"height": 640,
+							"url": "https://i.scdn.co/image/ae1b09a9dd746482b53d73fb0643c80c1b46a3d4",
+							"width": 640
+						},
+						{
+							"height": 320,
+							"url": "https://i.scdn.co/image/82e3892e5c6a18138891d722fb9656da8b0d6112",
+							"width": 320
+						},
+						{
+							"height": 160,
+							"url": "https://i.scdn.co/image/4d47b7d9469dc49abebff94f197aaf663974da9d",
+							"width": 160
+						}
+					],
+					"genres": [
+						"anime",
+						"j-pop",
+						"japanese r&b",
+						"otacore"
+					],
+					"popularity": 51,
+					"uri": "spotify:artist:0blbVefuxOGltDBa00dspv",
+					"href": "https://open.spotify.com/artist/0blbVefuxOGltDBa00dspv"
+				}
+			],
+			"artist": "LiSA",
+			"cover_url": "https://i.scdn.co/image/b0d475c2cb05195d2cf7778c507b8757e1f3376e",
+			"duration": 288.24,
+			"album": {
+				"id": "3nMoTXUkEcRao1A5lWdsgR",
+				"name": "Launcher",
+				"artists": [
+					{
+						"id": "0blbVefuxOGltDBa00dspv",
+						"name": "LiSA",
+						"images": [
+							{
+								"height": 640,
+								"url": "https://i.scdn.co/image/ae1b09a9dd746482b53d73fb0643c80c1b46a3d4",
+								"width": 640
+							},
+							{
+								"height": 320,
+								"url": "https://i.scdn.co/image/82e3892e5c6a18138891d722fb9656da8b0d6112",
+								"width": 320
+							},
+							{
+								"height": 160,
+								"url": "https://i.scdn.co/image/4d47b7d9469dc49abebff94f197aaf663974da9d",
+								"width": 160
+							}
+						],
+						"genres": [
+							"anime",
+							"j-pop",
+							"japanese r&b",
+							"otacore"
+						],
+						"popularity": 51,
+						"uri": "spotify:artist:0blbVefuxOGltDBa00dspv",
+						"href": "https://open.spotify.com/artist/0blbVefuxOGltDBa00dspv"
+					}
+				],
+				"images": [
+					{
+						"height": 640,
+						"url": "https://i.scdn.co/image/b0d475c2cb05195d2cf7778c507b8757e1f3376e",
+						"width": 640
+					},
+					{
+						"height": 300,
+						"url": "https://i.scdn.co/image/14d219b54b70908918abdc23e6e7ff46d2aa5a9c",
+						"width": 300
+					},
+					{
+						"height": 64,
+						"url": "https://i.scdn.co/image/60fed5bb7867e5bfd6f27e32af4804fd3d648816",
+						"width": 64
+					}
+				],
+				"uri": "spotify:album:3nMoTXUkEcRao1A5lWdsgR"
+			},
+			"popularity": 41,
+			"uri": "spotify:track:7gRLdM0fUa3v69BeWYAMzO",
+			"query": "Lisa - Shirushi",
+			"certainty": 0.9285714285714286
 		}
 	},
 	{
 		"version": 103,
 		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "IZ_ls4oi6m8",
-		"url": "https://www.youtube.com/watch?v=IZ_ls4oi6m8",
-		"title": "Liar Mask",
-		"duration": 292,
-		"thumbnail": "http://i.imgur.com/krJyBhg.jpg",
-		"description": "I do not own the rights to the audiovisual content featured in this presentation.\n\nAkame ga Kill anime opening song 'Liar Mask' performed by Rika Mayama. All rights to this song go to its respective owners. I am not profiting from the upload of this video.\n\n\n\ntotally didn't steal this copyright notice from oreomonogatari :^)",
+		"expected_filename": "cache\\audio_cache\\youtube--1AT7kHMHwo-Charlotte_OP_Bravely_You_full.webm",
+		"video_id": "-1AT7kHMHwo",
+		"url": "https://www.youtube.com/watch?v=-1AT7kHMHwo",
+		"title": "Bravely You",
+		"duration": 329,
+		"thumbnail": "https://i.ytimg.com/vi/-1AT7kHMHwo/maxresdefault.jpg",
+		"description": "\u30a2\u30cb\u30e1\u300cCharlotte\uff08\u30b7\u30e3\u30fc\u30ed\u30c3\u30c8\uff09\u300d\u306eOP\u3067\u3059\u3002\nCharlotte\u304c\u50d5\u306b\u3068\u3063\u3066\u306f\u4eca\u671f\u3067\u4e00\u756a\u9762\u767d\u3044\u3067\u3059\u3002\n\n\u6b4c\u8a5e\u306e\u9593\u9055\u3044\u304c\u3042\u308a\u307e\u3057\u305f\u3002\n4:12\u306e\u201d\u3044\u3084\u306b\u306a\u3063\u3066\u304f\u308b\u201d\u306f\u3044\u3084\u306b\u306a\u3063\u3066\u3044\u308b\u3067\u3057\u305f\u3002\n\u7533\u3057\u8a33\u3042\u308a\u307e\u305b\u3093\u3002\n\u66f2:Bravely You\n\u6b4c:Lia\n\n\u53ea\u4eca\u3001\u3044\u3089\u306a\u3044PC\u30fb\u3044\u3089\u306a\u3044PC\u95a2\u9023\u306e\u7269\u3092\u63a2\u3057\u3066\u3044\u307e\u3059\u3002\n\u3082\u3057\u9802\u3051\u308b\u306a\u3089\u4e0b\u8a18\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9\u307e\u3067\u304a\u9858\u3044\u3057\u307e\u3059\u3002\n\namidanyoraiasyura@gmail.com",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
@@ -2074,11 +2115,11 @@
 				}
 			}
 		},
-		"song_title": "Liar Mask",
-		"artist": "Rika Mayama",
-		"artist_image": "http://i.imgur.com/ovZQYk6.jpg",
-		"cover": "http://i.imgur.com/OHrymN8.jpg",
-		"album": "Akame ga Kill"
+		"song_title": "Bravely You",
+		"artist": "Lia",
+		"artist_image": "http://i.imgur.com/qZBZ0Aj.jpg",
+		"cover": "http://i.imgur.com/S2AiCTq.png",
+		"album": "Charlotte"
 	},
 	{
 		"version": 103,
@@ -2228,6 +2269,32 @@
 	{
 		"version": 103,
 		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "vhFXxvebiMY",
+		"url": "https://www.youtube.com/watch?v=vhFXxvebiMY",
+		"title": "Opfert eure Herzen!",
+		"duration": 339,
+		"thumbnail": "https://i.ytimg.com/vi/vhFXxvebiMY/hqdefault.jpg",
+		"description": "I do not own the song and pictures.\nEnjoy the song \ud83d\ude03",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 56
+				}
+			}
+		},
+		"song_title": "Opfert eure Herzen!",
+		"artist": "Linked Horizon",
+		"artist_image": "http://i.imgur.com/zUaDSdh.jpg",
+		"cover": "http://i.imgur.com/UssAqxG.jpg",
+		"album": "Attack on Titan"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-CpDyF4pkbAs-Luna_Haruna_-_Overfly.webm",
 		"video_id": "CpDyF4pkbAs",
 		"url": "https://www.youtube.com/watch?v=CpDyF4pkbAs",
@@ -2241,7 +2308,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 56
+					"index": 57
 				}
 			}
 		},
@@ -2255,27 +2322,27 @@
 		"version": 103,
 		"type": "GieselaEntry",
 		"expected_filename": null,
-		"video_id": "ny6vbAEYGCQ",
-		"url": "https://www.youtube.com/watch?v=ny6vbAEYGCQ",
-		"title": "Startear",
-		"duration": 300,
-		"thumbnail": "http://i.imgur.com/UA1pCZs.jpg",
-		"description": "Presented by \u771f\u30aa\u30fc\u30bc\n\nThis video is copyrighted by Sony Music Group Company in Japan, but now we do copyright fraud by unscrupulous actors and make a profit without permission to Sony Music Group Company without permission.\n\n\u3053\u306e\u52d5\u753b\u306f\u3001\u8457\u4f5c\u6a29\u304c\u65e5\u672c\u306eSony Music Group Company\u306b\u3042\u308a\u307e\u3059\u304c\u3001\u73fe\u5728\u3001\u60aa\u5fb3\u696d\u8005\u306b\u3088\u308a\u3001\u8457\u4f5c\u6a29\u306e\u8a50\u6b3a\u3092\u884c\u3044\u3001Sony Music Group Company\u306b\u7121\u65ad\u3067\u52dd\u624b\u306b\u5229\u76ca\u3092\u4e0a\u3052\u3066\u304a\u308a\u307e\u3059\u3002",
+		"video_id": "K3u5h9cPTBw",
+		"url": "https://www.youtube.com/watch?v=K3u5h9cPTBw",
+		"title": "Kiri",
+		"duration": 258,
+		"thumbnail": "http://i.imgur.com/j5znfch.jpg",
+		"description": "Lyrics & Music: MONORAL\nSung by: MONORAL\nSong: Kiri\n\nYou complete my fate\nThe world unwinds inside of me\nYou complete my fate\nThe halo crawls away\nYou repeat my fate\nRewinding all we can\nYou refill my place\nYou refill my place\nCome and save me\nCome and save me\n\nYou complete my fate\nThe heavens stroll inside of me\nYou repeat my fate\nRevealing who we are\nYou refill my place\nYou refill my place\nCome and save me\n\nBelieve in me\nDrink the wine\nTake my hand\nFill me up\nBelieve in me\nDrink the wine\nTake my hand\nLet me follow",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 57
+					"index": 58
 				}
 			}
 		},
-		"song_title": "Startear",
-		"artist": "Haruna Luna",
-		"artist_image": "http://i.imgur.com/jN6pZrg.jpg",
-		"cover": "http://i.imgur.com/lmBGLmr.jpg",
-		"album": "Sword Art Online"
+		"song_title": "Kiri",
+		"artist": "MONORAL",
+		"artist_image": "http://i.imgur.com/Fku2zk4.jpg",
+		"cover": "http://i.imgur.com/LFYCG1Q.jpg",
+		"album": "Opus 01 (Ergo Proxy)"
 	},
 	{
 		"version": 103,
@@ -2293,7 +2360,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 58
+					"index": 59
 				}
 			}
 		},
@@ -2307,38 +2374,12 @@
 		"version": 103,
 		"type": "GieselaEntry",
 		"expected_filename": null,
-		"video_id": "KtYGJtSiTio",
-		"url": "https://www.youtube.com/watch?v=KtYGJtSiTio",
-		"title": "Bouken Desho Desho?",
-		"duration": 259,
-		"thumbnail": "http://i.imgur.com/gWLD6qz.jpg",
-		"description": "Some of the lyrics are off time. Sorry!\nAnyways,\nFor those who prefer it this way:\nJapanese Lyrics:\nKotae wa itsumo watashi no mune ni...\nNande daro anata wo eranda watashi desu\nMou tomaranai unmei sama kara kimerareta kedo\nI believe mane dake ja tsumaranai no\nYou'll be right!\nKanjiru mama kanjiru koto dake wo suru yo\n\nBouken desho desho!? HONTO ga uso ni kawaru sekai de\nYume ga aru kara tsuyoku naru no yo dare no tame janai\n\nIssho ni kite kudasai\nDoko made mo juyuu na watashi wo mite yo ne\nAshita kako ni natta kyou no ima ga kiseki\nI believe you...\n\nModorenai toko made ikanakya tsumannai\nSaa oshiete himeteru negai wo kagami ni nageta\nMy delight karada goto uketometara\nYour mind fly!\nOdorokasete odoroite egao ni narou\n\nHajimari desho desho!? KIREI ga yami wo terasu mitai ni\nWatashi no chikara anata no namida docchi mo tadashii no\n\nGenjitsu ni yureru sensai na kokoro ga\nKizutsuku no wa IYA\nOmoimashita itsumo itsumo mune no oku ni\nKotae ga...\n\nFutsuu janai no ga touzen nara\nKotaeru watashi wa nani ga dekiru?\nFutsuu demo futsuu janakute\nKanjiru mama kanjiru koto dake wo suru yo\n\nBouken desho desho!? HONTO ga uso ni kawaru sekai de\nYume ga aru kara tsuyoku naru no yo dare no tame janai\nHajimari desho hajimari nandesho!?\nKirei ga yami wo terasu mitai ni\nWatashi to anata bouken no tochuu\n\nIssho ni susundeku doko made mo jiyuu ni\nGenjitsu wo koete\nAshita kako ni natta kyou no ima ga kiseki\nTashikana mirai wo\nTsukamou mirai wo\nI believe you...\n\nEnglish:\nThe answer is always in my heart...\nWhy is it that I chose you?\nYou've been picked by the unstoppable Lady Fate, but\nI believe that just imitating is boring\nYou'll be all right!\nI'll only feel the things that I'm feeling\n\nIt's an adventure, right, right!? In a world where truth changes into lies\nI'm going to get stronger because I have a dream, not for anyone else\n\nPlease come with me!\nLook at me--I'm free everywhere I go!\nThe present today that became the past tomorrow is a miracle\nI believe you...\n\nIt's no fun if I don't go until I reach the point of no return\nNow, tell me! I cast off my hidden wishes into a mirror\nIf I react to my delight with my whole body,\nYour mind will fly!\nLet's surprise and be surprised, and smile\n\nIt's the beginning, right, right!? Like how beauty illuminates the dark\nMy power, your tears, both of them are right\n\nA delicate heart that trembles in reality\nI don't want it to be hurt\nI thought that the answer is always, always\nIn my heart...\n\nIf it's natural to not be normal,\nWhat can I do to answer?\nIt's normal and yet it's not\nI'll only feel the things that I'm feeling\n\nIt's an adventure, right, right!? In a world where truth changes into lies\nI'm going to get stronger because I have a dream, not for anyone else\n\nIt's the beginning, right? It's the beginning, right!?\nLike how beauty illuminates the dark,\nYou and I are on the middle of an adventure\n\nLet's advance together freely, through thick and thin\nAnd go beyond reality\nThe present today that became the past tomorrow is a miracle\n\nA definite future\nLet's take hold of the future\nI believe you...",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 59
-				}
-			}
-		},
-		"song_title": "Bouken Desho Desho?",
-		"artist": "Aya Hirano",
-		"artist_image": "http://i.imgur.com/TSUyYCH.png",
-		"cover": "http://i.imgur.com/Eg9mowE.png",
-		"album": "The Melancholy of Haruhi Suzumiya"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "t66VKF-cyhk",
-		"url": "https://www.youtube.com/watch?v=t66VKF-cyhk",
-		"title": "Dead END",
-		"duration": 235,
-		"thumbnail": "http://i.imgur.com/mIxfsBn.jpg",
-		"description": "Lyrics:\n\nThe girl with the sharp thorn in her flesh\nI meet you at your story\nBehind the hatred there lies a murderous love\n\nDo you kill your friends, if you fulfill your wish?\nCan you die for someone?\nThey are synonymous words\n\nLife is a game. It's a survival. That's right! How do you start?\nTime and Space, It's a crossroad through a gate! Where do you go?\n\nYou seek eternal breath\nWhy do you need to live?\nWe don't know when this world came into being\nWe are the time leaper\n\nNothing's gonna change with you in the world\nEverything will be decided by the rules\nOh, We are traveling the past and the future through love\n\nBreak out!\nLet's dial back all the pains and we will born again\nI wanna see the stars with you\nOver the miracle\nIt's not a Dead END...\n\nThe boy with the loneliness in his side\nI wanna control your soul\nBehind the hatred there lies a plundering love\n\nThe Future has been over\nBut we are fixating on that\nThe past is still to come\nYes! They are in the same time\n\nDeath is a frame, It's a spiral. That's all. How do you think?\nGod and Evil. It's a scapegoat through the heart. What do you know?\n\"What's at the back of your mind? I can't hold your hand\"\nYou say \"Where are you going to take me? I can't believe\"\nWe walk the parallel line\n\nNothing's gonna change my deep love for you\nEverything will be going right for me\nOh, we are wandering in light and darkness through eyes\n\nBreak down! Let's revamp all the truth an we will create a fact\nI wanna feel the reality with the agony of doubt\n\nI love U. Cuz U are always by my side.\n\nDead or Alive\nDead or Alive\n\nBack to you\nCan't you read? Can't you see?\nMy words in your virtual vision\nSave my life! Save your life!\nWhy do you come here? I'm such a liar\nBad choice! Bad sign!\nIt's a prologue of collapse\nI don't stop your desire, cuz I can't forget you\n\nNothing's gonna change with you in the world\nEverything will be decided by the rules\nOh, we are traveling the past and the future through love\n\nBreak out!\nLet's dial back all the pains and we will be born again\nI wanna see the stars with you\nOver the miracle\nIt's not a Dead END...",
+		"video_id": "3mu-2ENtV2s",
+		"url": "https://www.youtube.com/watch?v=3mu-2ENtV2s",
+		"title": "Sunshine",
+		"duration": 242,
+		"thumbnail": "https://i.ytimg.com/vi/3mu-2ENtV2s/maxresdefault.jpg",
+		"description": "DISCLAIMER: I DO NOT OWN ANYTHING!! THIS IS JUST A FANMADE It is not associated with the musical artist or anime company in any way and I do not claim the music or footage as my own.\n\nLyrics:\nashita o terasu yo SUNSHINE\nmado kara sashikomu tobira hiraite\n\nSTOP\nCAUSE YOU GOT ME THINKING THAT I'M A LITTLE QUICKER\nGO\nMAYBE THE RHYTHM'S OFF BUT I WILL NEVER LET YOU\n\nKNOW\nI WISH THAT YOU COULD SEE IT FOR YOURSELF\nIT'S NOT IT'S NOT JUST STOP HEY Y'ALL yada\n\nI NEVER THOUGHT THAT I WOULD TAKE OVER IT ALL\nAND NOW I KNOW THAT THERE'S NO WAY I COULD FALL\nYOU KNOW IT'S ON AND ON AND OFF AND ON\nAND NO ONE GETS AWAY\n\nboku no yume wa doko ni aru no ka\nkage mo katachi mo mienakute\noikaketeta mamoru beki mono\nTHERE'S A SUNSHINE IN MY MIND\n\nashita o terasu yo SUNSHINE\ndoko made mo tsuzuku me no mae ni hirogaru hikari no saki e\n\nmirai no SUNSHINE kagayaku SUNSHINE\nYOU KNOW IT'S HARD JUST TAKE A CHANCE\nshinjite\nashita mo hareru kana\n\nhon no sasai na koto ni nando mo tamerattari\ndareka no sono kotoba itsumo ki ni shite\nsonna yowai boku demo itsu ka kanarazu kitto\ntsuyogari sore mo makeoshimi\n\nboku no yume wa nan datta no ka\ndaiji na koto mo wasurete\nme no mae ni aru mamoru beki mono\nTHERE'S A SUNSHINE IN MY MIND\n\nashita o terasu yo SUNSHINE\ndoko made mo tsuzuku me no mae ni hirogaru hikari no saki e\n\nmirai no SUNSHINE kagayaku SUNSHINE\nYOU KNOW IT'S HARD JUST TAKE A CHANCE\nshinjite\nashita mo hareru kana\n\nRAIN'S GOT ME NOW\nI GUESS I'M WAITING FOR THAT SUNSHINE\nWHY'S IT ONLY SHINE IN MY MIND\n\nashita o terasu yo SUNSHINE\ndoko made mo tsuzuku me no mae ni hirogaru hikari no saki e\n\nmirai no SUNSHINE kagayaku SUNSHINE\nYOU KNOW IT'S HARD JUST TAKE A CHANCE\nshinjite\nashita mo hareru kana\n\nEnglish lyrics:\nTomorrow is illuminated,\nthe door which is inserted from the sunshine window opening,...\n\nStop!\n'cause you got me thinking that I'm a little quicker.\nGo!\nMaybe the rhythm's off, but I will never let you.\n\nKnow!\nI wish that you could see it for yourself.\nIt's not, It's not, Just stop, hey y'all and is!\n\nI never thought that I would take over it all.\nAnd now I know that there's no way I could fall.\nYou know it's on and on and off and on,\nAnd no one gets away.\n\nAs for my dream being somewhere\nThe shadow or shape are not visible, the\nYou chase those which it should protect\nThere's a sunshine in my mind.\n\nTomorrow is illuminated, sunshine\nTo ahead the light which spreads before the eye which continues to everywhere\nFuture sunshine, sunshine which shines\nYou know it's hard, just take a chance.\nBelieving\nClear weather tomorrow?\n\nJust, many degrees you hesitate to trivial thing,\nSomeone's the word always to an air\nOnce upon a time by all means certainly, even with such weak me\nBluff? That sour grapes?\n\nAs for my dream being what?\nForgetting also important thing\nIt is before the eye, those which it should protect\nThere's a sunshine in my mind.\n\nTomorrow is illuminated, sunshine\nTo ahead the light which spreads before the eye which continues to everywhere\n\nFuture sunshine, sunshine which shines\nYou know it's hard, just take a chance.\nBelieving\nClear weather tomorrow?\n\nRain's got me now\nI guess I'm waiting for that sunshine\nWhy's it only shine in my mind\n\nFuture sunshine, sunshine which shines\nYou know it's hard, just take a chance.\nBelieving\nClear weather tomorrow?",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
@@ -2349,37 +2390,11 @@
 				}
 			}
 		},
-		"song_title": "Dead END",
-		"artist": "Faylan",
-		"artist_image": "http://i.imgur.com/GAX9QHv.jpg",
-		"cover": "http://i.imgur.com/aLQqjzB.jpg",
-		"album": "Mirai Nikki"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "7Cq4l2KTWIw",
-		"url": "https://www.youtube.com/watch?v=7Cq4l2KTWIw",
-		"title": "Black \u2020 White",
-		"duration": 274,
-		"thumbnail": "http://i.imgur.com/vcsG84h.jpg",
-		"description": "Mondaiji-tachi ga Isekai Kara Kuru Sou Desu yo OP Full Black + White\nTag(s)\nMondaiji-tachi\nMondaiji tachi ga Isekai Kara Kuru Sou Desu yo OP Opening Full",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 61
-				}
-			}
-		},
-		"song_title": "Black \u2020 White",
-		"artist": "Nomizu Iori",
-		"artist_image": "http://i.imgur.com/ga2JbeR.jpg",
-		"cover": "http://i.imgur.com/DCXaCYM.jpg",
-		"album": "Mondaiji"
+		"song_title": "Sunshine",
+		"artist": "Monkey Majik",
+		"artist_image": "http://i.imgur.com/2lQOhWR.jpg",
+		"cover": "http://i.imgur.com/W9vE10y.jpg",
+		"album": "Nurarihyon no Mago"
 	},
 	{
 		"version": 103,
@@ -2402,28 +2417,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 62
-				}
-			}
-		}
-	},
-	{
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-zTm666EKYRs-moumoon_Hello_shooting-star_Music_Video.webm",
-		"video_id": "zTm666EKYRs",
-		"url": "https://www.youtube.com/watch?v=zTm666EKYRs",
-		"title": "moumoon / Hello,shooting-star Music Video (\u6b4c\u8a5e\u3042\u308a)/\u6697\u6bba\u6559\u5ba4\u30a8\u30f3\u30c7\u30a3\u30f3\u30b0\u30c6\u30fc\u30de",
-		"duration": 302,
-		"thumbnail": "https://i.ytimg.com/vi/zTm666EKYRs/hqdefault.jpg",
-		"description": "http://www.moumoon.com/\n\n2\u670825\u65e5\u767a\u58f2\u300cHello,shooting-star\u300d\n2015\u5e74\u5927\u4eba\u6c17\u30a2\u30cb\u30e1\u300c\u6697\u6bba\u6559\u5ba4\u300d\u306e\u30a8\u30f3\u30c7\u30a3\u30f3\u30b0\u30c6\u30fc\u30de\u306b\u306a\u3063\u3066\u304a\u308a\u3001YUKA\u306e\u3069\u3053\u304b\u61d0\u304b\u3057\u304f\u306a\u308b\u60c5\u7dd2\u7684\u306a\u6b4c\u8a5e\u3068\u6b4c\u58f0\u3068MASAKI\u306e\u512a\u3057\u304f\u3082\u30ad\u30e3\u30c3\u30c1\u30fc\u306a\u66f2\u8abf\u3002\n\u76ee\u3092\u3064\u3080\u308b\u3068\u898b\u3048\u308b\u61d0\u304b\u3057\u3044\u666f\u8272\u3001\u6e29\u304b\u306a\u60c5\u666f\u3001\u76ee\u3092\u958b\u3051\u308b\u3068\u305d\u308c\u306f\u4eca\u306f\u3082\u3046\u5b58\u5728\u3057\u306a\u3044\u98a8\u666f\u304b\u3082\u3057\u308c\u306a\u3044\u3002\u305f\u3060\u3057\u3063\u304b\u308a\u3068\u81ea\u5206\u306e\u4e2d\u3067\u306f\u751f\u304d\u3066\u3044\u308b\u3002\u305d\u3093\u306a\u8ab0\u3057\u3082\u304c\u6301\u3063\u3066\u3044\u308b\u5fc3\u306e\u6545\u90f7\u3092\u8868\u73fe\u3057\u305f\u3001\u8c4a\u304b\u306a\u4f5c\u54c1\u3002\n\n\u203b\u30ab\u30c3\u30d7\u30ea\u30f3\u30b0\u306f\u30c9\u30e9\u30de\u300c\u30c7\u30a3\u30a2\u30fb\u30b7\u30b9\u30bf\u30fc\u300d\u306e\u633f\u5165\u6b4c\u300eBF\u300f\u3002\n\n\u25a0FULLMOON LIVE 2015.February\u30002/4 21:00START\n\u3010Ustream \u8996\u8074URL\u3011http://www.ustream.tv/channel/moumoon\n\u3010\u30cb\u30b3\u30cb\u30b3\u751f\u653e\u9001 \u8996\u8074URL\u3011http://live.nicovideo.jp/watch/lv206849323\n\u3010YouTube \u8996\u8074URL\u3011http://www.youtube.com/user/moumoonchannel\n\n\u25a0Amazon\nhttp://www.amazon.co.jp/moumoon/e/B001LGYWS8/\n\n\u25a0TOWER RECORD\nhttp://tower.jp/artist/423328/moumoon",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 63
+					"index": 61
 				}
 			}
 		}
@@ -2444,7 +2438,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 64
+					"index": 62
 				}
 			}
 		}
@@ -2453,13 +2447,70 @@
 		"version": 103,
 		"type": "GieselaEntry",
 		"expected_filename": null,
-		"video_id": "vhFXxvebiMY",
-		"url": "https://www.youtube.com/watch?v=vhFXxvebiMY",
-		"title": "Opfert eure Herzen!",
-		"duration": 339,
-		"thumbnail": "https://i.ytimg.com/vi/vhFXxvebiMY/hqdefault.jpg",
-		"description": "I do not own the song and pictures.\nEnjoy the song \ud83d\ude03",
+		"video_id": "8tIB3IEWirk",
+		"url": "https://www.youtube.com/watch?v=8tIB3IEWirk",
+		"title": "STYX HELIX",
+		"duration": 292,
+		"thumbnail": "http://i.imgur.com/2nDV57b.jpg",
+		"description": "\u984c\u5916\u8a71:\u66ab\u6642\u5b89\u5168~~\n-------------------------------------------\n\u95dc\u65bc\u6211\uff1e\uff1c\nFacebook\uff1ahttps://www.facebook.com/%E5%A4%A9%E4%BA%AE%E4%BA%86%E8%AA%AA%E5%86%8D%E8%A6%8B-590749597673243/?ref=hl\nYouTube\uff1ahttps://www.youtube.com/channel/UCo7AN0hFcWZlMdsp5km_CwQ\nYouTube\uff1ahttps://www.youtube.com/channel/UCTpBj33DHQDHV2XpDnpe4Uw\n-------------------------------------------\n\u6211\u4e0d\u64c1\u6709\u4efb\u4f55\u6771\u897f\u7684\u8996\u983b\uff0c\u5305\u62ec\u97f3\u983b\u548c\u5716\u7247\u3002\n\u6f14\u8077\u54e1\u9032\u5165\u5404\u81ea\u7684\u6240\u6709\u8005\u3002\n\u9019\u90e8\u5f71\u7247\u662f\u7d14\u7cb9\u7684\u7206\u809d\u88fd\u9020\u7684\uff0c\u4e26\u4e0d\u6703\u88ab\u7528\u65bc\u76c8\u5229\u6216\u975e\u6cd5\u5171\u4eab\u3002\n-------------------------------------------\n\u7121\u9810\u8b66\u6536\u5230\u8b66\u544a\u4e09\u6b21\u4e86\uff0c\u9020\u6210\u983b\u9053\u95dc\u9589\u3002\n\u9020\u6210\u4f60\u5011\u7684\u4e0d\u4fbf\uff0c\u6211\u6df1\u611f\u5230\u62b1\u6b49\uff0c\u4f46\u6211\u9084\u662f\u6703\u6301\u7e8c\u4e0b\u53bb\u7684\u3002\n\u65b0\u7684\u983b\u9053\uff0c\u65b0\u7684\u958b\u59cb\uff0c\u8b1d\u8b1d\u5404\u4f4d\u7684\u652f\u6301\u56c9^_^\n-------------------------------------------\n\u5e0c\u671b\u5404\u4f4d\u559c\u6b61\u9019\u5f71\u7247XD\n\u559c\u6b61\u7684\u8a71\u5c31\u8a02\u95b1\u6211\u548c\u9ede\u500b\u559c\u6b61\u7559\u4e0b\u4f60\u7684\u5efa\u8b70\u5427OuO",
 		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 63
+				}
+			}
+		},
+		"song_title": "STYX HELIX",
+		"artist": "Myth & Roid",
+		"artist_image": "http://i.imgur.com/kfLKoiq.jpg",
+		"cover": "http://i.imgur.com/XPw5bKC.jpg",
+		"album": "eYe's (Re:Zero)"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Ig9U4I9X2g0-No_pain_No_game_Nano_Btooom_OP.webm",
+		"video_id": "Ig9U4I9X2g0",
+		"url": "https://www.youtube.com/watch?v=Ig9U4I9X2g0",
+		"title": "No Pain, No Game",
+		"duration": 203,
+		"thumbnail": "https://i.ytimg.com/vi/Ig9U4I9X2g0/maxresdefault.jpg",
+		"description": "It's past time and the singer still hasn't shown up yet; the hall is noisy. After 10 long minutes, laser... (Read More)\nhttps://otakumode.com/news/515ab288892491874f00c79b/\n\n\u00a9 FlyingDog, Inc.\n\nTokyo Otaku Mode: http://otakumode.com\nTokyo Otaku Mode shares Japanese otaku culture with the rest of the world! We report on anime, manga, figures, events and more - straight from Akiba, Tokyo!",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 64
+				}
+			}
+		},
+		"song_title": "No Pain, No Game",
+		"artist": "Nano",
+		"artist_image": "http://i.imgur.com/ujgnnsZ.jpg",
+		"cover": "http://i.imgur.com/lXshEKo.jpg",
+		"album": "N (Btooom!)"
+	},
+	{
+		"version": 103,
+		"type": "YoutubeEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-cXeb9cb6k0I-Naruto_Shippuden_Opening_16.m4a",
+		"video_id": "cXeb9cb6k0I",
+		"url": "https://www.youtube.com/watch?v=cXeb9cb6k0I",
+		"title": "Naruto Shippuden Opening 16",
+		"duration": 90,
+		"thumbnail": "https://i.ytimg.com/vi/cXeb9cb6k0I/maxresdefault.jpg",
+		"description": "Naruto Shippuden OP16\n\"Silhouette (\u30b7\u30eb\u30a8\u30c3\u30c8)\" by KANA-BOON",
+		"meta": {
+			"author": {
+				"type": "Member",
+				"id": "203302899277627392",
+				"name": "siku2"
+			},
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
@@ -2468,38 +2519,7 @@
 					"index": 65
 				}
 			}
-		},
-		"song_title": "Opfert eure Herzen!",
-		"artist": "Linked Horizon",
-		"artist_image": "http://i.imgur.com/zUaDSdh.jpg",
-		"cover": "http://i.imgur.com/UssAqxG.jpg",
-		"album": "Attack on Titan"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "09r-78dfrvc",
-		"url": "https://www.youtube.com/watch?v=09r-78dfrvc",
-		"title": "Kuusou Mesorogiwi",
-		"duration": 240,
-		"thumbnail": "https://i.ytimg.com/vi/09r-78dfrvc/maxresdefault.jpg",
-		"description": "le 1er generique de Mirai Nikki",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 66
-				}
-			}
-		},
-		"song_title": "Kuusou Mesorogiwi",
-		"artist": "Yousei Teikoku",
-		"artist_image": "http://i.imgur.com/8G9ifKY.jpg",
-		"cover": "http://i.imgur.com/tbs1jMH.png",
-		"album": "Mirai Nikki"
+		}
 	},
 	{
 		"version": 103,
@@ -2522,31 +2542,36 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 67
+					"index": 66
 				}
 			}
 		}
 	},
 	{
 		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-Ig9U4I9X2g0-No_pain_No_game_Nano_Btooom_OP.webm",
-		"video_id": "Ig9U4I9X2g0",
-		"url": "https://www.youtube.com/watch?v=Ig9U4I9X2g0",
-		"title": "No pain, No game / Nano (Btooom! OP)",
-		"duration": 203,
-		"thumbnail": "https://i.ytimg.com/vi/Ig9U4I9X2g0/maxresdefault.jpg",
-		"description": "It's past time and the singer still hasn't shown up yet; the hall is noisy. After 10 long minutes, laser... (Read More)\nhttps://otakumode.com/news/515ab288892491874f00c79b/\n\n\u00a9 FlyingDog, Inc.\n\nTokyo Otaku Mode: http://otakumode.com\nTokyo Otaku Mode shares Japanese otaku culture with the rest of the world! We report on anime, manga, figures, events and more - straight from Akiba, Tokyo!",
+		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "7Cq4l2KTWIw",
+		"url": "https://www.youtube.com/watch?v=7Cq4l2KTWIw",
+		"title": "Black \u2020 White",
+		"duration": 274,
+		"thumbnail": "http://i.imgur.com/vcsG84h.jpg",
+		"description": "Mondaiji-tachi ga Isekai Kara Kuru Sou Desu yo OP Full Black + White\nTag(s)\nMondaiji-tachi\nMondaiji tachi ga Isekai Kara Kuru Sou Desu yo OP Opening Full",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 68
+					"index": 67
 				}
 			}
-		}
+		},
+		"song_title": "Black \u2020 White",
+		"artist": "Nomizu Iori",
+		"artist_image": "http://i.imgur.com/ga2JbeR.jpg",
+		"cover": "http://i.imgur.com/DCXaCYM.jpg",
+		"album": "Mondaiji"
 	},
 	{
 		"version": 103,
@@ -2569,7 +2594,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 69
+					"index": 68
 				}
 			}
 		}
@@ -2595,36 +2620,10 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 70
+					"index": 69
 				}
 			}
 		}
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "3mu-2ENtV2s",
-		"url": "https://www.youtube.com/watch?v=3mu-2ENtV2s",
-		"title": "Sunshine",
-		"duration": 242,
-		"thumbnail": "https://i.ytimg.com/vi/3mu-2ENtV2s/maxresdefault.jpg",
-		"description": "DISCLAIMER: I DO NOT OWN ANYTHING!! THIS IS JUST A FANMADE It is not associated with the musical artist or anime company in any way and I do not claim the music or footage as my own.\n\nLyrics:\nashita o terasu yo SUNSHINE\nmado kara sashikomu tobira hiraite\n\nSTOP\nCAUSE YOU GOT ME THINKING THAT I'M A LITTLE QUICKER\nGO\nMAYBE THE RHYTHM'S OFF BUT I WILL NEVER LET YOU\n\nKNOW\nI WISH THAT YOU COULD SEE IT FOR YOURSELF\nIT'S NOT IT'S NOT JUST STOP HEY Y'ALL yada\n\nI NEVER THOUGHT THAT I WOULD TAKE OVER IT ALL\nAND NOW I KNOW THAT THERE'S NO WAY I COULD FALL\nYOU KNOW IT'S ON AND ON AND OFF AND ON\nAND NO ONE GETS AWAY\n\nboku no yume wa doko ni aru no ka\nkage mo katachi mo mienakute\noikaketeta mamoru beki mono\nTHERE'S A SUNSHINE IN MY MIND\n\nashita o terasu yo SUNSHINE\ndoko made mo tsuzuku me no mae ni hirogaru hikari no saki e\n\nmirai no SUNSHINE kagayaku SUNSHINE\nYOU KNOW IT'S HARD JUST TAKE A CHANCE\nshinjite\nashita mo hareru kana\n\nhon no sasai na koto ni nando mo tamerattari\ndareka no sono kotoba itsumo ki ni shite\nsonna yowai boku demo itsu ka kanarazu kitto\ntsuyogari sore mo makeoshimi\n\nboku no yume wa nan datta no ka\ndaiji na koto mo wasurete\nme no mae ni aru mamoru beki mono\nTHERE'S A SUNSHINE IN MY MIND\n\nashita o terasu yo SUNSHINE\ndoko made mo tsuzuku me no mae ni hirogaru hikari no saki e\n\nmirai no SUNSHINE kagayaku SUNSHINE\nYOU KNOW IT'S HARD JUST TAKE A CHANCE\nshinjite\nashita mo hareru kana\n\nRAIN'S GOT ME NOW\nI GUESS I'M WAITING FOR THAT SUNSHINE\nWHY'S IT ONLY SHINE IN MY MIND\n\nashita o terasu yo SUNSHINE\ndoko made mo tsuzuku me no mae ni hirogaru hikari no saki e\n\nmirai no SUNSHINE kagayaku SUNSHINE\nYOU KNOW IT'S HARD JUST TAKE A CHANCE\nshinjite\nashita mo hareru kana\n\nEnglish lyrics:\nTomorrow is illuminated,\nthe door which is inserted from the sunshine window opening,...\n\nStop!\n'cause you got me thinking that I'm a little quicker.\nGo!\nMaybe the rhythm's off, but I will never let you.\n\nKnow!\nI wish that you could see it for yourself.\nIt's not, It's not, Just stop, hey y'all and is!\n\nI never thought that I would take over it all.\nAnd now I know that there's no way I could fall.\nYou know it's on and on and off and on,\nAnd no one gets away.\n\nAs for my dream being somewhere\nThe shadow or shape are not visible, the\nYou chase those which it should protect\nThere's a sunshine in my mind.\n\nTomorrow is illuminated, sunshine\nTo ahead the light which spreads before the eye which continues to everywhere\nFuture sunshine, sunshine which shines\nYou know it's hard, just take a chance.\nBelieving\nClear weather tomorrow?\n\nJust, many degrees you hesitate to trivial thing,\nSomeone's the word always to an air\nOnce upon a time by all means certainly, even with such weak me\nBluff? That sour grapes?\n\nAs for my dream being what?\nForgetting also important thing\nIt is before the eye, those which it should protect\nThere's a sunshine in my mind.\n\nTomorrow is illuminated, sunshine\nTo ahead the light which spreads before the eye which continues to everywhere\n\nFuture sunshine, sunshine which shines\nYou know it's hard, just take a chance.\nBelieving\nClear weather tomorrow?\n\nRain's got me now\nI guess I'm waiting for that sunshine\nWhy's it only shine in my mind\n\nFuture sunshine, sunshine which shines\nYou know it's hard, just take a chance.\nBelieving\nClear weather tomorrow?",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 71
-				}
-			}
-		},
-		"song_title": "Sunshine",
-		"artist": "Monkey Majik",
-		"artist_image": "http://i.imgur.com/2lQOhWR.jpg",
-		"cover": "http://i.imgur.com/W9vE10y.jpg",
-		"album": "Nurarihyon no Mago"
 	},
 	{
 		"version": 103,
@@ -2647,13 +2646,13 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 72
+					"index": 70
 				}
 			}
 		},
 		"song_title": "Clock Strikes",
 		"artist": "ONE OK ROCK",
-		"artist_image": "https://i.scdn.co/image/fd60c665014141911a0a789d89ba13a81de007c5",
+		"artist_image": "https://i.scdn.co/image/3b3b816312699a68731db11601b463a3cb4eeb26",
 		"cover": "https://i.scdn.co/image/b10a614ced95aff8bf68767ced8bf6180eb663df",
 		"album": "JINSEI KAKETE BOKU WA",
 		"spotify_data": {
@@ -2759,54 +2758,28 @@
 	{
 		"version": 103,
 		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "1Hl_lDEP9Tg",
-		"url": "https://www.youtube.com/watch?v=1Hl_lDEP9Tg",
-		"title": "Kokoro no Chizu",
-		"duration": 260,
-		"thumbnail": "http://i.imgur.com/WyciocE.jpg",
-		"description": "Lyrics:\nDaijoubu!\nSaa, mae ni\nsusumou taiyou wo itsuno mune\nni\nTsunaida te\ntsutawaru Power\nnegai wo\ntsukamaeyouyo\ndekkai nami ni norou\nCHIKARA awasete\ntokimeku hou he isogou\nhajimari no aizu\nima koso funade no\ntoki ikari wo\nagetara\nnanairo no kaze wo kiri\nbouken no umi he\nkizu darake no tabi dakedo\ndaiji na mono ga soko ni\naru\nPINCHI nara itsudate boku ga\nmamoru kara\ndaijoubu!\nSaa mae ni susumou\ntaiyou\nwo itsumo mune ni\narashi ga kitara kata\nkunde sono saki no\nhikari wo miyou\nyume no kakera atsymareba\nasui mukou chizu ni naru\ndakara onnaji hata no moto\nnegai wo tsukamaeyouyo\nbokura wa hitotsu One Piece\n\"Minna de yareba dekiru!\nKokoro wo awasete Wataridori\ntachi no u ta yuuki ni kaetara\ntsubasa no nai bokura demo jiyuu jizai\nni habatakeru\nkimagure na sora datte\nmikata no shichaou\nDaijoubu! Sou, mae ni susumou\nsono namida ame no you ni\naoi umi ni kaeshita toki\njounetsu\nga kira kira hikaru\natsui omoi kasanetara mygen\ntai\nno kaze wo yubo\nzutto onaji hoshi\nno moto kataiki\nzuna ga arukara\nKiseki wo\nwakachi\naou\ndaijoubu!\nSaa mae ni susumou\ntaiyou wo itsumo\nmune ni\narashi ga kitara kata\nkunde sono saki no\nhikari wo muyou\nyume no kakera\natsumaraba asu ni\nmukou chizu ni naru\ndakara onaji hata\nno moto negai\nwo tsukamaeyouyo\nbokura wa hitutsu\nOne Piece",
+		"expected_filename": "cache\\audio_cache\\youtube-r-MEKwXFF-s-Bleach_Opening_Asterisk_full.webm",
+		"video_id": "r-MEKwXFF-s",
+		"url": "https://www.youtube.com/watch?v=r-MEKwXFF-s",
+		"title": "Asterisk",
+		"duration": 255,
+		"thumbnail": "https://i.ytimg.com/vi/r-MEKwXFF-s/hqdefault.jpg",
+		"description": "Spanish-Espa\u00f1ol English-Ingles\n\nSpanish-Espa\u00f1ol\nHola a todos este es el soundtrack opening 1 de bleach completo\nsuscribanse\n\nEnglish-Ingles\n\nHello everyone this is the soundtrack bleach opening 1 full\nsuscribe",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 73
+					"index": 71
 				}
 			}
 		},
-		"song_title": "Kokoro no Chizu",
-		"artist": "BOYSTYLE",
-		"artist_image": "http://i.imgur.com/zi80YvR.jpg",
-		"cover": "http://i.imgur.com/CXUiyol.jpg",
-		"album": "One Piece"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "655j9WXi4DA",
-		"url": "https://www.youtube.com/watch?v=655j9WXi4DA",
-		"title": "Tragedy and Fate",
-		"duration": 110,
-		"thumbnail": "http://i.imgur.com/GMGygnb.jpg",
-		"description": "In the battlefield, there is no place for hope. What lies there is only cold despair and a sin called victory, built on the pain of the defeated. All those people who met there have wholeheartedly admitted the evil and foolishness of this act called war. As ling as people don't repent and don't regard it as the most evil taboo, then the endlessly reappear in the world\"\n-Emiya Kiritsugu\n\nFrom: Fate/zero\nBy: Yuki Kajiura\n\nI DO NOT OWN THIS  MUSIC, THE ANIME, NOR DO I OWN THE PICTURE! ALL CREDITS GOES TO THE ORIGINAL OWNERS.\n\n*Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is made for \"fair use\" for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statute that might otherwise be .infringing. Non-profit, educational or personal use tips the balance in favor of fair use",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 74
-				}
-			}
-		},
-		"song_title": "Tragedy and Fate",
-		"artist": "Yuki Kajiura",
-		"artist_image": "http://i.imgur.com/EyYnpl7.jpg",
-		"cover": "http://i.imgur.com/XNnKl73.jpg",
-		"album": "Fate Zero"
+		"song_title": "Asterisk",
+		"artist": "Orange Range",
+		"artist_image": "http://i.imgur.com/GPiVmp1.jpg",
+		"cover": "http://i.imgur.com/ECWagzg.png",
+		"album": "Bleach"
 	},
 	{
 		"version": 103,
@@ -2829,33 +2802,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 75
-				}
-			}
-		}
-	},
-	{
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-nJXRDvwJN_Y-Ouran_Highschool_Host_Club_Begininng_Theme_Song_English.m4a",
-		"video_id": "nJXRDvwJN_Y",
-		"url": "https://www.youtube.com/watch?v=nJXRDvwJN_Y",
-		"title": "Ouran Highschool Host Club Begininng Theme Song English",
-		"duration": 77,
-		"thumbnail": "https://i.ytimg.com/vi/nJXRDvwJN_Y/hqdefault.jpg",
-		"description": "Please rate and comment ^.^\nI love this theme song!",
-		"meta": {
-			"author": {
-				"type": "Member",
-				"id": "203510202421477376",
-				"name": "ZyLect"
-			},
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 76
+					"index": 72
 				}
 			}
 		}
@@ -2876,7 +2823,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 77
+					"index": 73
 				}
 			}
 		},
@@ -2902,7 +2849,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 78
+					"index": 74
 				}
 			}
 		},
@@ -3008,54 +2955,54 @@
 	{
 		"version": 103,
 		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-r-MEKwXFF-s-Bleach_Opening_Asterisk_full.webm",
-		"video_id": "r-MEKwXFF-s",
-		"url": "https://www.youtube.com/watch?v=r-MEKwXFF-s",
-		"title": "Asterisk",
-		"duration": 255,
-		"thumbnail": "https://i.ytimg.com/vi/r-MEKwXFF-s/hqdefault.jpg",
-		"description": "Spanish-Espa\u00f1ol English-Ingles\n\nSpanish-Espa\u00f1ol\nHola a todos este es el soundtrack opening 1 de bleach completo\nsuscribanse\n\nEnglish-Ingles\n\nHello everyone this is the soundtrack bleach opening 1 full\nsuscribe",
+		"expected_filename": null,
+		"video_id": "5xgxE3FOnDE",
+		"url": "https://www.youtube.com/watch?v=5xgxE3FOnDE",
+		"title": "Button",
+		"duration": 96,
+		"thumbnail": "http://i.imgur.com/7laDLYb.jpg",
+		"description": "Click Here To Subscribe \u25ba http://bit.ly/1CxWjoE\nTwitter \u25ba https://twitter.com/k0n3ro\n\nNiconico \u25ba http://bit.ly/2dIZ6FB (Not Pitched)\nDownload \u25ba http://bit.ly/2dITmeS\n\nSong \u25aa PENGUIN RESEARCH - Button\nAnime \u25aa ReLIFE\nCover \u25aa Konero\n\nGuitar \u2022 Fender JA-90\nAmplifier \u2022 Kemper - Naylor SD60",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 79
+					"index": 75
 				}
 			}
 		},
-		"song_title": "Asterisk",
-		"artist": "Orange Range",
-		"artist_image": "http://i.imgur.com/GPiVmp1.jpg",
-		"cover": "http://i.imgur.com/ECWagzg.png",
-		"album": "Bleach"
+		"song_title": "Button",
+		"artist": "Penguin Research",
+		"artist_image": "http://i.imgur.com/tgR0mkI.jpg",
+		"cover": "http://i.imgur.com/H43TlZC.jpg",
+		"album": "RELife"
 	},
 	{
 		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-Zh9lynUFikc-Platinum_Disco_FULL_SUB_HQ_Nisemonogatari_Opening_3_by_Yuka_Iguchi.webm",
-		"video_id": "Zh9lynUFikc",
-		"url": "https://www.youtube.com/watch?v=Zh9lynUFikc",
-		"title": "Platinum Disco FULL SUB HQ (Nisemonogatari Opening 3) by Yuka Iguchi",
-		"duration": 256,
-		"thumbnail": "https://i.ytimg.com/vi/Zh9lynUFikc/maxresdefault.jpg",
-		"description": "I do not own the rights to the audiovisual content featured in this presentation.\n\nNisemonogatari anime opening song 'Platinum Disco' performed by Yuka Iguchi. All rights to this song go to its respective owners. I am not profiting from the upload of this video.\n\nThe speed and pitch of this song have not been changed. Enjoy!\n\nLYRICS: English, JPN Romaji, JPN Kanji\n\nVocals: Iguchi Yuka as Araragi Tsukihi\nLyrics: meg rock\nComposition: Kosaki Satoru\nArrangement: Kosaki Satoru\n\nPlatinum Disco -English Lyrics-\n\nJust take a step forward\nin the world\nwhose surface is platinum in my eyes\n\nLet\u2019s dance together\nto the beat in my chest\nthat will never cease\n\nThe moon that I found behind you on that day\nis still flashing and shimmering\nlike a disco ball in the night sky today\n\nFed up with the things that change\nand the things that never change\nFor the first time\nI learned\nof this eternity\nwhich I\u2019ll pledge to you\n\nEven though I\u2019m platinum happy\nI get platinum sad\nand cry platinum tears\nHow? Why?\nDiscoth\u00e8que\n\nWhen I look back\nOur footprints are always side-by-side\nHey, I\u2019m playing around with you\n\nI want to sleep, but I won\u2019t\nLet\u2019s keep dancing for just a bit longer\nuntil morning\n\nI don\u2019t mind if tomorrow never comes\nSo I hope that a day like today will last on and on\nGently drifting off to my dreams\n\nIn the trivial\nyet irreplaceable\nhistory that I have\nEven a little white lie\nwill turn into the real thing\nby your side\n\nFed up with the things that change\nand the things that never change\nFor the first time\nI learned\nof this eternity\nwhich I\u2019ll pledge to you\n\nIn the trivial\nyet irreplaceable\nhistory that I have\nEven fakes\nwill turn into the real thing\nby your side\n\nEven though I\u2019m platinum happy\nI get platinum sad\nand cry platinum tears\nHow? Why?\nDiscoth\u00e8que\n\nHow? Why?\nDiscoth\u00e8que\n\n\nPurachina Disuko -JPN Romaji Lyrics-\n\nMiwataseba   ichimen\nHakkin no sekai ni\nIppo dake   fumidashite\n\nItsu made mo   tomaranai\nKono mune no tokimeki de\nIssho ni   odorou\n\nKimi no senaka de   ano hi   mitsuketa tsuki ga\nKyou mo   miraa booru mitai ni   yozora de\nKirari   chirari   kagayaiteru\n\nKawatteku mono\nKawaranai mono\nAkippoi   watashi ga\nHajimete   shitta\nKono eien o\nKimi ni chikau yo\n\nPurachina   ureshii no ni\nPurachina   setsunaku natte\nPurachina   namida ga dechau no wa\nNande? Doshite?\nDisukotikku\n\nFurimukeba   itsu de mo\nNaranderu   ashiato\nKimi to   nee   jareatte\n\nNemutakute   nemukunai\nMada   chotto   ato   sukoshi\nAsa made   odorou\n\nAshita nanka   konakute mo ii kara\nZutto   konna   kyou ga tsuzukimasu you ni   nante\nHirari   furari   yume no naka e\n\nSasayaka da kedo\nKakegae no nai\nRekishi o kasanete\nChiisa na uso mo\nHontou ni naru\nKimi no tonari de\n\nKawatteku mono\nKawaranai mono\nAkippoi   watashi ga\nHajimete   shitta\nKono eien o\nKimi ni chikau yo\n\nSasayaka da kedo\nKakegae no nai\nRekishi o kasanete\nItsuwari sae mo\nHontou ni naru\nKimi no tonari de\n\nPurachina   ureshii no ni\nPurachina   setsunaku natte\nPurachina   namida ga dechau no wa\nNande? Doshite?\nDisukotikku\n\nNande? Doshite?\nDisukotikku\n\n\n\u767d\u91d1\u30c7\u30a3\u30b9\u30b3 -JPN Kanji Lyrics-\n\n\u898b\u6e21\u305b\u3070\u4e00\u9762\n\u767d\u91d1\u306e\u4e16\u754c\u306b\n\u4e00\u6b69\u3060\u3051\u8e0f\u307f\u51fa\u3057\u3066\n\n\u3044\u3064\u307e\u3067\u3082\u6b62\u307e\u3089\u306a\u3044\n\u3053\u306e\u80f8\u306e\u3068\u304d\u3081\u304d\u3067\n\u4e00\u7dd2\u306b\u8e0a\u308d\u3046\n\n\u541b\u306e\u80cc\u4e2d\u3067\u3042\u306e\u65e5\u307f\u3064\u3051\u305f\u6708\u304c\n\u4eca\u65e5\u3082\u30df\u30e9\u30fc\u30dc\u30fc\u30eb\u307f\u305f\u3044\u306b\u591c\u7a7a\u3067\n\u30ad\u30e9\u30ea \u30c1\u30e9\u308a \u8f1d\u3044\u3066\u308b\n\n\u304b\u308f\u3063\u3066\u304f\u3082\u306e\n\u304b\u308f\u3089\u306a\u3044\u3082\u306e\n\u98fd\u304d\u3063\u307d\u3044 \u79c1\u304c\n\u306f\u3058\u3081\u3066\u77e5\u3063\u305f\n\u3053\u306e\u6c38\u9060\u3092\n\u541b\u306b\u8a93\u3046\u3088\n\n\u30d7\u30e9\u30c1\u30ca \u3046\u308c\u3057\u3044\u306e\u306b\n\u30d7\u30e9\u30c1\u30ca \u305b\u3064\u306a\u304f\u306a\u3063\u3066\n\u30d7\u30e9\u30c1\u30ca \u306a\u307f\u3060\u304c\u3067\u3061\u3083\u3046\u306e\u306f\n\u306a\u3093\u3067? \u3069\u3057\u3066?\n\u30c7\u30a3\u30b9\u30b3\u30c6\u30a3\u30c3\u30af\n\n\u632f\u308a\u5411\u3051\u3070\u3044\u3064\u3067\u3082\n\u4e26\u3093\u3067\u308b \u8db3\u8de1\n\u541b\u3068\u306d\u3047 \u3058\u3083\u308c\u3042\u3063\u3066\n\n\u306d\u3080\u305f\u304f\u3066\u306d\u3080\u304f\u306a\u3044\n\u307e\u3060\u3061\u3087\u3063\u3068\u3042\u3068\u3059\u3053\u3057\n\u671d\u307e\u3067\u8e0a\u308d\u3046\n\n\u660e\u65e5\u306a\u3093\u304b\u6765\u306a\u304f\u3066\u3082\u3044\u3044\u304b\u3089\n\u305a\u3063\u3068 \u3053\u3093\u306a \u4eca\u65e5\u304c\u7d9a\u304d\u307e\u3059\u3088\u3045\u306b\u306a\u3093\u3066\n\u30d2\u30e9\u30ea \u30d5\u30e9\u30ea \u5922\u306e\u4e2d\u3078\n\n\u3055\u3055\u3084\u304b\u3060\u3051\u3069\n\u304b\u3051\u304c\u3048\u306e\u306a\u3044\n\u6b74\u53f2\u3092\u91cd\u306d\u3066\n\u3061\u3044\u3055\u306a\u3046\u305d\u3082\n\u307b\u3093\u3068\u3046\u306b\u306a\u308b\n\u541b\u306e\u3068\u306a\u308a\u3067\n\n\u304b\u308f\u3063\u3066\u304f\u3082\u306e\n\u304b\u308f\u3089\u306a\u3044\u3082\u306e\n\u98fd\u304d\u3063\u307d\u3044\u79c1\u304c\n\u306f\u3058\u3081\u3066\u77e5\u3063\u305f\n\u3053\u306e\u6c38\u9060\u3092\n\u541b\u306b\u8a93\u3046\u3088\n\n\u3055\u3055\u3084\u304b\u3060\u3051\u3069\n\u304b\u3051\u304c\u3048\u306e\u306a\u3044\n\u6b74\u53f2\u3092\u91cd\u306d\u3066\n\u507d\u308a\u3055\u3048\u3082\n\u307b\u3093\u3068\u3046\u306b\u306a\u308b\n\u541b\u306e\u3068\u306a\u308a\u3067\n\n\u30d7\u30e9\u30c1\u30ca \u3046\u308c\u3057\u3044\u306e\u306b\n\u30d7\u30e9\u30c1\u30ca \u305b\u3064\u306a\u304f\u306a\u3063\u3066\n\u30d7\u30e9\u30c1\u30ca \u306a\u307f\u3060\u304c\u3067\u3061\u3083\u3046\u306e\u306f\n\u306a\u3093\u3067? \u3069\u3057\u3066?\n\u30c7\u30a3\u30b9\u30b3\u30c6\u30a3\u30c3\u30af\n\n\u306a\u3093\u3067? \u3069\u3057\u3066?\n\n\u30c7\u30a3\u30b9\u30b3\u30c6\u30a3\u30c3\u30af",
+		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "9vx69Pe7Ncs",
+		"url": "https://www.youtube.com/watch?v=9vx69Pe7Ncs",
+		"title": "Chemistry",
+		"duration": 218,
+		"thumbnail": "http://i.imgur.com/et9ZPV1.jpg",
+		"description": "Chemistry - Period [Fullmetal Alchemist Brotherhood OST, OP 4]\n\nNot for commercial use.",
 		"meta": {
-			"author": {
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			},
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 80
+					"index": 76
 				}
 			}
-		}
+		},
+		"song_title": "Chemistry",
+		"artist": "Period",
+		"artist_image": "http://i.imgur.com/Yj7r46N.jpg",
+		"cover": "http://i.imgur.com/zVq1hpX.jpg",
+		"album": "Fullmetal Alchemist Brotherhood"
 	},
 	{
 		"version": 103,
@@ -3073,7 +3020,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 81
+					"index": 77
 				}
 			}
 		},
@@ -3086,28 +3033,28 @@
 	{
 		"version": 103,
 		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "5xgxE3FOnDE",
-		"url": "https://www.youtube.com/watch?v=5xgxE3FOnDE",
-		"title": "Button",
-		"duration": 96,
-		"thumbnail": "http://i.imgur.com/7laDLYb.jpg",
-		"description": "Click Here To Subscribe \u25ba http://bit.ly/1CxWjoE\nTwitter \u25ba https://twitter.com/k0n3ro\n\nNiconico \u25ba http://bit.ly/2dIZ6FB (Not Pitched)\nDownload \u25ba http://bit.ly/2dITmeS\n\nSong \u25aa PENGUIN RESEARCH - Button\nAnime \u25aa ReLIFE\nCover \u25aa Konero\n\nGuitar \u2022 Fender JA-90\nAmplifier \u2022 Kemper - Naylor SD60",
+		"expected_filename": "cache\\audio_cache\\youtube-PGoHzoZ2OI0-Durarara_Opening_2.webm",
+		"video_id": "PGoHzoZ2OI0",
+		"url": "https://www.youtube.com/watch?v=PGoHzoZ2OI0",
+		"title": "Complication",
+		"duration": 91,
+		"thumbnail": "https://i.ytimg.com/vi/PGoHzoZ2OI0/maxresdefault.jpg",
+		"description": "DRR!! Season 1 OP2\n\"Complication\" by ROOKiEZ is PUNK'D",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 82
+					"index": 78
 				}
 			}
 		},
-		"song_title": "Button",
-		"artist": "Penguin Research",
-		"artist_image": "http://i.imgur.com/tgR0mkI.jpg",
-		"cover": "http://i.imgur.com/H43TlZC.jpg",
-		"album": "RELife"
+		"song_title": "Complication",
+		"artist": "ROOKiEZ is PUNK'D",
+		"artist_image": "http://i.imgur.com/7DrxNdc.jpg",
+		"cover": "http://i.imgur.com/i8pvxCH.jpg",
+		"album": "Durarara"
 	},
 	{
 		"version": 103,
@@ -3125,7 +3072,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 83
+					"index": 79
 				}
 			}
 		},
@@ -3134,6 +3081,32 @@
 		"artist_image": "http://i.imgur.com/ceNNA5m.jpg",
 		"cover": "http://i.imgur.com/yqt7jdc.jpg",
 		"album": "Ao no Exorcist"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "IZ_ls4oi6m8",
+		"url": "https://www.youtube.com/watch?v=IZ_ls4oi6m8",
+		"title": "Liar Mask",
+		"duration": 292,
+		"thumbnail": "http://i.imgur.com/krJyBhg.jpg",
+		"description": "I do not own the rights to the audiovisual content featured in this presentation.\n\nAkame ga Kill anime opening song 'Liar Mask' performed by Rika Mayama. All rights to this song go to its respective owners. I am not profiting from the upload of this video.\n\n\n\ntotally didn't steal this copyright notice from oreomonogatari :^)",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 80
+				}
+			}
+		},
+		"song_title": "Liar Mask",
+		"artist": "Rika Mayama",
+		"artist_image": "http://i.imgur.com/ovZQYk6.jpg",
+		"cover": "http://i.imgur.com/OHrymN8.jpg",
+		"album": "Akame ga Kill"
 	},
 	{
 		"version": 103,
@@ -3156,7 +3129,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 84
+					"index": 81
 				}
 			}
 		}
@@ -3182,7 +3155,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 85
+					"index": 82
 				}
 			}
 		}
@@ -3203,13 +3176,13 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 86
+					"index": 83
 				}
 			}
 		},
 		"song_title": "Don't Lose Your Way (Feat. NoneLikeJoshua)",
 		"artist": "Sapphire & None Like Joshua",
-		"artist_image": "https://i.scdn.co/image/0a4e166338e965239cdcdb434781e43e0463f309",
+		"artist_image": "https://i.scdn.co/image/f7e2c2e20e854005b72b0b5460c9934351cb1e4a",
 		"cover": "https://i.scdn.co/image/f0396585a88b82628af0eaa189129804d44f0212",
 		"album": "Don't Lose Your Way (Kill la Kill)",
 		"spotify_data": {
@@ -3345,7 +3318,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 87
+					"index": 84
 				}
 			}
 		},
@@ -3354,58 +3327,6 @@
 		"artist_image": "http://i.imgur.com/dSl9920.jpg",
 		"cover": "http://i.imgur.com/S1sYkLe.jpg",
 		"album": "Furaregai Girl"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-HvFMSVB1YI4-Sekaiichi_Hatsukoi_ed_FULL.webm",
-		"video_id": "HvFMSVB1YI4",
-		"url": "https://www.youtube.com/watch?v=HvFMSVB1YI4",
-		"title": "Ashita, Boku wa Kimi ni Ai ni Iku",
-		"duration": 246,
-		"thumbnail": "https://i.ytimg.com/vi/HvFMSVB1YI4/hqdefault.jpg",
-		"description": "Asu Boku Wa Kimi Ni Ainiiku",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 88
-				}
-			}
-		},
-		"song_title": "Ashita, Boku wa Kimi ni Ai ni Iku",
-		"artist": "Wakaba",
-		"artist_image": "http://i.imgur.com/lyjNrLa.jpg",
-		"cover": "http://i.imgur.com/8ef5deq.png",
-		"album": "Sekai-ichi Hatsukoi"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "HVKBTUqBJ3Y",
-		"url": "https://www.youtube.com/watch?v=HVKBTUqBJ3Y",
-		"title": "Great Escape",
-		"duration": 202,
-		"thumbnail": "http://i.imgur.com/DDvjyLz.jpg",
-		"description": "great escape\" by cinema staff\n\nSecond ending to Shingeki no Kyojin. Full song. \"great escape\" by cinema staff\n\n\nAll rights belong to their respective owners",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 89
-				}
-			}
-		},
-		"song_title": "Great Escape",
-		"artist": "Cinema Staff",
-		"artist_image": "http://i.imgur.com/TdlnlLj.jpg",
-		"cover": "http://i.imgur.com/AifwLv1.jpg",
-		"album": "Attack on Titan"
 	},
 	{
 		"version": 103,
@@ -3423,18 +3344,18 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 90
+					"index": 85
 				}
 			}
 		}
 	},
 	{
 		"version": 103,
-		"type": "YoutubeEntry",
+		"type": "GieselaEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-CdSE1loNwmo-Sidonia_no_Kishi_-_Daikyuu_Wakusei_Seneki_OP_Opening.webm",
 		"video_id": "CdSE1loNwmo",
 		"url": "https://www.youtube.com/watch?v=CdSE1loNwmo",
-		"title": "Sidonia no Kishi: Daikyuu Wakusei Seneki OP/Opening",
+		"title": "Kishi Shinkoukyoku",
 		"duration": 93,
 		"thumbnail": "https://i.ytimg.com/vi/CdSE1loNwmo/maxresdefault.jpg",
 		"description": "Sidonia no Kishi: Daikyuu Wakusei Seneki Opening\nKnights of Sidonia 2nd Season Opening",
@@ -3444,36 +3365,15 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 91
-				}
-			}
-		}
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "OYVlx3vnu8I",
-		"url": "https://www.youtube.com/watch?v=OYVlx3vnu8I",
-		"title": "Super Driver",
-		"duration": 256,
-		"thumbnail": "https://i.ytimg.com/vi/OYVlx3vnu8I/maxresdefault.jpg",
-		"description": "UPDATE2:\nEnglish Subs now available. To Switch Between Languages press the button at the lower right corner of the stream and then the arrow key, you will then be able to switch between English and Japanese. Enjoy!\n\nUPDATE:\nJapanese Subs now available. To Disable Press the CC button at the buttom right corner of the movie screen (available after scrolling over the arrow button)\n\nAfter listening to the full song i felt like adding the OP to the song. Of course the OP was too short but with some more OP clips and some other clips i got this result. I hope you enjoy.\n\nPlease Rate and Comment, would love to read it!\n\nCredit goes tot he creators of the song and those who worked with it. It sure is catchy ^^",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 92
+					"index": 86
 				}
 			}
 		},
-		"song_title": "Super Driver",
-		"artist": "Aya Hirano",
-		"artist_image": "http://i.imgur.com/YP4orpy.jpg",
-		"cover": "http://i.imgur.com/yKi98Oj.jpg",
-		"album": "Speed Star (The Melancholy of Suzumiya Haruhi)"
+		"song_title": "Kishi Shinkoukyoku",
+		"artist": "Angela",
+		"artist_image": "http://i.imgur.com/sFG6w3f.png",
+		"cover": "http://i.imgur.com/SgoYlRj.jpg",
+		"album": "Sidonia No Kishi"
 	},
 	{
 		"version": 103,
@@ -3491,7 +3391,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 93
+					"index": 87
 				}
 			}
 		}
@@ -3517,7 +3417,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 94
+					"index": 88
 				}
 			}
 		}
@@ -3538,7 +3438,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 95
+					"index": 89
 				}
 			}
 		},
@@ -3550,107 +3450,29 @@
 	},
 	{
 		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-t3wcNYENP5E-This_game-Konomi_Suzuki_No_game_no_life_full_opening.webm",
-		"video_id": "t3wcNYENP5E",
-		"url": "https://www.youtube.com/watch?v=t3wcNYENP5E",
-		"title": "This game-Konomi Suzuki (No game no life full opening)",
-		"duration": 281,
-		"thumbnail": "https://i.ytimg.com/vi/t3wcNYENP5E/hqdefault.jpg",
-		"description": "I don't own anything in the video, including the audio and pictures.The credits go to the respective owners.\nLyrics:\nhttp://www.animelyrics.com/anime/ngnl/thisgame.htm",
-		"meta": {
-			"author": {
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			},
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 96
-				}
-			}
-		}
-	},
-	{
-		"version": 103,
 		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "KjlTmJQsceY",
-		"url": "https://www.youtube.com/watch?v=KjlTmJQsceY",
-		"title": "Shukumei",
-		"duration": 175,
-		"thumbnail": "https://i.ytimg.com/vi/KjlTmJQsceY/hqdefault.jpg",
-		"description": "Fairy Tail - Shukumei\nFairy Tail - Shukumei\nFairy Tail - Shukumei\n\nTitle: Shukumei\nArtist: Yasuharu Takanashi\nAnime: Fairy tail\nYear: 2012",
+		"expected_filename": "cache\\audio_cache\\youtube-HvFMSVB1YI4-Sekaiichi_Hatsukoi_ed_FULL.webm",
+		"video_id": "HvFMSVB1YI4",
+		"url": "https://www.youtube.com/watch?v=HvFMSVB1YI4",
+		"title": "Ashita, Boku wa Kimi ni Ai ni Iku",
+		"duration": 246,
+		"thumbnail": "https://i.ytimg.com/vi/HvFMSVB1YI4/hqdefault.jpg",
+		"description": "Asu Boku Wa Kimi Ni Ainiiku",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 97
+					"index": 90
 				}
 			}
 		},
-		"song_title": "Shukumei",
-		"artist": "Yasuharu Takanashi",
-		"artist_image": "http://i.imgur.com/rv8M5sN.jpg",
-		"cover": "http://i.imgur.com/PjzcVtA.jpg",
-		"album": "Fairy Tail"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "xcXSllSEs4I",
-		"url": "https://www.youtube.com/watch?v=xcXSllSEs4I",
-		"title": "On My Own",
-		"duration": 231,
-		"thumbnail": "http://i.imgur.com/4Ewd31Q.jpg",
-		"description": "This is the beloved song of our hero Kaneki...enjoy :D i dont own any thing\nSite link : http://hikarinoakariost.info/",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 98
-				}
-			}
-		},
-		"song_title": "On My Own",
-		"artist": "Katherine Liner",
-		"artist_image": "http://i.imgur.com/G9nQrEq.jpg",
-		"cover": "http://i.imgur.com/GbaHMtN.jpg",
-		"album": "Tokyo Ghoul"
-	},
-	{
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-lk0gm_Z81bE-Toradora_-_Lost_My_Pieces_OST.webm",
-		"video_id": "lk0gm_Z81bE",
-		"url": "https://www.youtube.com/watch?v=lk0gm_Z81bE",
-		"title": "Lost My Pieces",
-		"duration": 122,
-		"thumbnail": "https://i.ytimg.com/vi/lk0gm_Z81bE/maxresdefault.jpg",
-		"description": "Toradora! - Lost My Pieces !\n\nEnjoy !\n\nI DONT OWN ANYTHING.\nCopyright \u00a9 All Rights Reserved\nAlso i am not interested in making money from Youtube",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 99
-				}
-			}
-		},
-		"song_title": "Lost My Pieces",
-		"artist": "Yukari Hashimoto",
-		"artist_image": "http://i.imgur.com/N1scqov.jpg",
-		"cover": "http://i.imgur.com/ZMwqOlE.jpg",
-		"album": "Toradora"
+		"song_title": "Ashita, Boku wa Kimi ni Ai ni Iku",
+		"artist": "Wakaba",
+		"artist_image": "http://i.imgur.com/lyjNrLa.jpg",
+		"cover": "http://i.imgur.com/8ef5deq.png",
+		"album": "Sekai-ichi Hatsukoi"
 	},
 	{
 		"version": 103,
@@ -3668,7 +3490,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 100
+					"index": 91
 				}
 			}
 		}
@@ -3689,10 +3511,88 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 101
+					"index": 92
 				}
 			}
 		}
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-RZufKBrx0hY-Fairy_Tail_-_Absolute_Zero_SILVER_New_2016_Ost.m4a",
+		"video_id": "RZufKBrx0hY",
+		"url": "https://www.youtube.com/watch?v=RZufKBrx0hY",
+		"title": "Absolute Zero Silver",
+		"duration": 272,
+		"thumbnail": "https://i.ytimg.com/vi/RZufKBrx0hY/maxresdefault.jpg",
+		"description": "Fairy tail Sound Collection Volume 2\nBy Yasuharu Takanashi ~ I dont own anything, all rights belong to their respective owners. ~",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 93
+				}
+			}
+		},
+		"song_title": "Absolute Zero Silver",
+		"artist": "Yasuharu Takanashi",
+		"artist_image": "http://i.imgur.com/Z81vet0.jpg",
+		"cover": "http://i.imgur.com/08CoJCz.png",
+		"album": "Fairy Tail"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-_5fiqzCyCxo-Fairy_Tail_-_Fairy_s_Challenge_New_2016_Ost.m4a",
+		"video_id": "_5fiqzCyCxo",
+		"url": "https://www.youtube.com/watch?v=_5fiqzCyCxo",
+		"title": "Fairy's Challenge",
+		"duration": 169,
+		"thumbnail": "https://i.ytimg.com/vi/_5fiqzCyCxo/maxresdefault.jpg",
+		"description": "Fairy tail Sound Collection Volume 2\nBy Yasuharu Takanashi ~ I dont own anything, all rights belong to their respective owners. ~",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 94
+				}
+			}
+		},
+		"song_title": "Fairy's Challenge",
+		"artist": "Yasuharu Takanashi",
+		"artist_image": "http://i.imgur.com/z4VYR7c.jpg",
+		"cover": "http://i.imgur.com/2Ll6J7f.jpg",
+		"album": "Fairy Tail"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "Whgnftw2T-I",
+		"url": "https://www.youtube.com/watch?v=Whgnftw2T-I",
+		"title": "Mavis",
+		"duration": 140,
+		"thumbnail": "https://i.ytimg.com/vi/Whgnftw2T-I/maxresdefault.jpg",
+		"description": "Fairy Tail - Mavis\nFairy Tail - Mavis\nFairy Tail - Mavis\n\nAnime: Fairy Tail\nSong: Mavis\nArtist: Yasuharu Takanashi\nYear: 2013\nCd`s 4\nI'm not the creator of this Music or the Image,",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 95
+				}
+			}
+		},
+		"song_title": "Mavis",
+		"artist": "Yasuharu Takanashi",
+		"artist_image": "http://i.imgur.com/YAErBTA.jpg",
+		"cover": "http://i.imgur.com/R3qCsQX.jpg",
+		"album": "Fairy Tail"
 	},
 	{
 		"version": 103,
@@ -3710,10 +3610,62 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 102
+					"index": 96
 				}
 			}
 		}
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "0yURnPCLYFk",
+		"url": "https://www.youtube.com/watch?v=0yURnPCLYFk",
+		"title": "Seigi No Chikara",
+		"duration": 126,
+		"thumbnail": "https://i.ytimg.com/vi/0yURnPCLYFk/maxresdefault.jpg",
+		"description": "Fairy Tail - Seigi No Chikara\nFairy Tail - Seigi No Chikara\nFairy Tail - Seigi No Chikara\n\nAnime: Fairy Tail\nSong: Seigi No Chikara\nArtist: Yasuharu Takanashi\nYear: 2013\nCd`s 3\nI'm not the creator of this Music or the Image,",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 97
+				}
+			}
+		},
+		"song_title": "Seigi No Chikara",
+		"artist": "Yasuharu Takanashi",
+		"artist_image": "http://i.imgur.com/D1vLS7M.jpg",
+		"cover": "http://i.imgur.com/19n3u8Q.jpg",
+		"album": "Fairy Tail"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "KjlTmJQsceY",
+		"url": "https://www.youtube.com/watch?v=KjlTmJQsceY",
+		"title": "Shukumei",
+		"duration": 175,
+		"thumbnail": "https://i.ytimg.com/vi/KjlTmJQsceY/hqdefault.jpg",
+		"description": "Fairy Tail - Shukumei\nFairy Tail - Shukumei\nFairy Tail - Shukumei\n\nTitle: Shukumei\nArtist: Yasuharu Takanashi\nAnime: Fairy tail\nYear: 2012",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 98
+				}
+			}
+		},
+		"song_title": "Shukumei",
+		"artist": "Yasuharu Takanashi",
+		"artist_image": "http://i.imgur.com/rv8M5sN.jpg",
+		"cover": "http://i.imgur.com/PjzcVtA.jpg",
+		"album": "Fairy Tail"
 	},
 	{
 		"version": 103,
@@ -3731,7 +3683,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 103
+					"index": 99
 				}
 			}
 		}
@@ -3739,13 +3691,117 @@
 	{
 		"version": 103,
 		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-AK9DlbzxCVk-Ghost_in_the_Shell_-_Stand_Alone_Complex_2_-_Ending.m4a",
+		"video_id": "AK9DlbzxCVk",
+		"url": "https://www.youtube.com/watch?v=AK9DlbzxCVk",
+		"title": "Living Inside the Shell",
+		"duration": 85,
+		"thumbnail": "http://i.imgur.com/wcoh54Q.jpg",
+		"description": "Ghost in the Shell - Stand Alone Complex 2 - Ending\nmp3 Download http://kiwi6.com/file?id=2ful6t4960",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 100
+				}
+			}
+		},
+		"song_title": "Living Inside the Shell",
+		"artist": "Yoko Kanno",
+		"artist_image": "http://i.imgur.com/jZFtaKI.jpg",
+		"cover": "http://i.imgur.com/eEady9w.jpg",
+		"album": "Ghost in the Shell"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
 		"expected_filename": null,
-		"video_id": "AV7QjFdNkUk",
-		"url": "https://www.youtube.com/watch?v=AV7QjFdNkUk",
-		"title": "Dareka Umi Wo",
-		"duration": 288,
-		"thumbnail": "https://i.ytimg.com/vi/AV7QjFdNkUk/maxresdefault.jpg",
-		"description": "I do not own nor am I affiliated in any way with Zankyou no Terror or Aimer. This video is for entertainment purposes only.\n\nIn an alternate iteration of the present, Tokyo has been hit by a terrorist attack that has devastated the city, with the only evidence of the culprits being a confusing video uploaded to the internet, which only spreads paranoia throughout Japan. Unbeknownst to the authorities is that the terrorist masterminds who call themselves \"Sphinx\" (\u30b9\u30d4\u30f3\u30af\u30b9 Supinkusu) are two teenaged boys, who go by the names Nine and Twelve, who apparently should not exist and have decided to wake up the world with their heinous plans of destruction with their fingers on the trigger.\n\nPicture | http://210793.deviantart.com/art/I-wish-someone-would-wrap-the-sea-around-me-477724741\n\nLyrics by Aoba Ichiko\nComposed and Arranged by Kanno Youko\nPerformed by Aimer\n\nEnglish lyrics ;\n\nWon't someone spread the ocean\nover my head\nI want to be bathed in\nsinking fish and sunlight\n\nThe vivid unknown\nThe magic that disappears when I stumble\nThe cracked sky visible beyond\nthe preparations\n\nOn the rooftops of the ruins\nEnclosing the whisperings of\nstruggling downy feathers\nWe are a song\n\nOn the gray earth\nClad in the roar\nof the scattered light\nWe are a bouquet\n\nPlucked wings\n\nWords\nBlown backwards without a breath\nScattering beautifully\n\nSea bird\nIn the midst of the ebb and flow\nA lying star\ntwinkling in the sky\nLeading us away\nWe row our boat\n\nA midnight sea\nA resonating salty wind and\na brightly burning world\ncover my cheeks\n\nIn the middle of a whirlpool\nmade of crowded voices\nI hold your hand and go under the rain of needles\n\nIn the darkening scenery\nI play with a falling\nupside-down heat haze\nand dance with time\n\nOn the rooftops of the ruins\nEnclosing the whisperings of\nstruggling downy feathers\nWe are a song\n\nOn the gray earth\nClad in the roar\nof the scattered light\nWe are a bouquet\n\nWon't someone spread the ocean\non our ceiling",
+		"video_id": "09r-78dfrvc",
+		"url": "https://www.youtube.com/watch?v=09r-78dfrvc",
+		"title": "Kuusou Mesorogiwi",
+		"duration": 240,
+		"thumbnail": "https://i.ytimg.com/vi/09r-78dfrvc/maxresdefault.jpg",
+		"description": "le 1er generique de Mirai Nikki",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 101
+				}
+			}
+		},
+		"song_title": "Kuusou Mesorogiwi",
+		"artist": "Yousei Teikoku",
+		"artist_image": "http://i.imgur.com/8G9ifKY.jpg",
+		"cover": "http://i.imgur.com/tbs1jMH.png",
+		"album": "Mirai Nikki"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Zh9lynUFikc-Platinum_Disco_FULL_SUB_HQ_Nisemonogatari_Opening_3_by_Yuka_Iguchi.webm",
+		"video_id": "Zh9lynUFikc",
+		"url": "https://www.youtube.com/watch?v=Zh9lynUFikc",
+		"title": "Platinum Disco",
+		"duration": 256,
+		"thumbnail": "https://i.ytimg.com/vi/Zh9lynUFikc/maxresdefault.jpg",
+		"description": "I do not own the rights to the audiovisual content featured in this presentation.\n\nNisemonogatari anime opening song 'Platinum Disco' performed by Yuka Iguchi. All rights to this song go to its respective owners. I am not profiting from the upload of this video.\n\nThe speed and pitch of this song have not been changed. Enjoy!\n\nLYRICS: English, JPN Romaji, JPN Kanji\n\nVocals: Iguchi Yuka as Araragi Tsukihi\nLyrics: meg rock\nComposition: Kosaki Satoru\nArrangement: Kosaki Satoru\n\nPlatinum Disco -English Lyrics-\n\nJust take a step forward\nin the world\nwhose surface is platinum in my eyes\n\nLet\u2019s dance together\nto the beat in my chest\nthat will never cease\n\nThe moon that I found behind you on that day\nis still flashing and shimmering\nlike a disco ball in the night sky today\n\nFed up with the things that change\nand the things that never change\nFor the first time\nI learned\nof this eternity\nwhich I\u2019ll pledge to you\n\nEven though I\u2019m platinum happy\nI get platinum sad\nand cry platinum tears\nHow? Why?\nDiscoth\u00e8que\n\nWhen I look back\nOur footprints are always side-by-side\nHey, I\u2019m playing around with you\n\nI want to sleep, but I won\u2019t\nLet\u2019s keep dancing for just a bit longer\nuntil morning\n\nI don\u2019t mind if tomorrow never comes\nSo I hope that a day like today will last on and on\nGently drifting off to my dreams\n\nIn the trivial\nyet irreplaceable\nhistory that I have\nEven a little white lie\nwill turn into the real thing\nby your side\n\nFed up with the things that change\nand the things that never change\nFor the first time\nI learned\nof this eternity\nwhich I\u2019ll pledge to you\n\nIn the trivial\nyet irreplaceable\nhistory that I have\nEven fakes\nwill turn into the real thing\nby your side\n\nEven though I\u2019m platinum happy\nI get platinum sad\nand cry platinum tears\nHow? Why?\nDiscoth\u00e8que\n\nHow? Why?\nDiscoth\u00e8que\n\n\nPurachina Disuko -JPN Romaji Lyrics-\n\nMiwataseba   ichimen\nHakkin no sekai ni\nIppo dake   fumidashite\n\nItsu made mo   tomaranai\nKono mune no tokimeki de\nIssho ni   odorou\n\nKimi no senaka de   ano hi   mitsuketa tsuki ga\nKyou mo   miraa booru mitai ni   yozora de\nKirari   chirari   kagayaiteru\n\nKawatteku mono\nKawaranai mono\nAkippoi   watashi ga\nHajimete   shitta\nKono eien o\nKimi ni chikau yo\n\nPurachina   ureshii no ni\nPurachina   setsunaku natte\nPurachina   namida ga dechau no wa\nNande? Doshite?\nDisukotikku\n\nFurimukeba   itsu de mo\nNaranderu   ashiato\nKimi to   nee   jareatte\n\nNemutakute   nemukunai\nMada   chotto   ato   sukoshi\nAsa made   odorou\n\nAshita nanka   konakute mo ii kara\nZutto   konna   kyou ga tsuzukimasu you ni   nante\nHirari   furari   yume no naka e\n\nSasayaka da kedo\nKakegae no nai\nRekishi o kasanete\nChiisa na uso mo\nHontou ni naru\nKimi no tonari de\n\nKawatteku mono\nKawaranai mono\nAkippoi   watashi ga\nHajimete   shitta\nKono eien o\nKimi ni chikau yo\n\nSasayaka da kedo\nKakegae no nai\nRekishi o kasanete\nItsuwari sae mo\nHontou ni naru\nKimi no tonari de\n\nPurachina   ureshii no ni\nPurachina   setsunaku natte\nPurachina   namida ga dechau no wa\nNande? Doshite?\nDisukotikku\n\nNande? Doshite?\nDisukotikku\n\n\n\u767d\u91d1\u30c7\u30a3\u30b9\u30b3 -JPN Kanji Lyrics-\n\n\u898b\u6e21\u305b\u3070\u4e00\u9762\n\u767d\u91d1\u306e\u4e16\u754c\u306b\n\u4e00\u6b69\u3060\u3051\u8e0f\u307f\u51fa\u3057\u3066\n\n\u3044\u3064\u307e\u3067\u3082\u6b62\u307e\u3089\u306a\u3044\n\u3053\u306e\u80f8\u306e\u3068\u304d\u3081\u304d\u3067\n\u4e00\u7dd2\u306b\u8e0a\u308d\u3046\n\n\u541b\u306e\u80cc\u4e2d\u3067\u3042\u306e\u65e5\u307f\u3064\u3051\u305f\u6708\u304c\n\u4eca\u65e5\u3082\u30df\u30e9\u30fc\u30dc\u30fc\u30eb\u307f\u305f\u3044\u306b\u591c\u7a7a\u3067\n\u30ad\u30e9\u30ea \u30c1\u30e9\u308a \u8f1d\u3044\u3066\u308b\n\n\u304b\u308f\u3063\u3066\u304f\u3082\u306e\n\u304b\u308f\u3089\u306a\u3044\u3082\u306e\n\u98fd\u304d\u3063\u307d\u3044 \u79c1\u304c\n\u306f\u3058\u3081\u3066\u77e5\u3063\u305f\n\u3053\u306e\u6c38\u9060\u3092\n\u541b\u306b\u8a93\u3046\u3088\n\n\u30d7\u30e9\u30c1\u30ca \u3046\u308c\u3057\u3044\u306e\u306b\n\u30d7\u30e9\u30c1\u30ca \u305b\u3064\u306a\u304f\u306a\u3063\u3066\n\u30d7\u30e9\u30c1\u30ca \u306a\u307f\u3060\u304c\u3067\u3061\u3083\u3046\u306e\u306f\n\u306a\u3093\u3067? \u3069\u3057\u3066?\n\u30c7\u30a3\u30b9\u30b3\u30c6\u30a3\u30c3\u30af\n\n\u632f\u308a\u5411\u3051\u3070\u3044\u3064\u3067\u3082\n\u4e26\u3093\u3067\u308b \u8db3\u8de1\n\u541b\u3068\u306d\u3047 \u3058\u3083\u308c\u3042\u3063\u3066\n\n\u306d\u3080\u305f\u304f\u3066\u306d\u3080\u304f\u306a\u3044\n\u307e\u3060\u3061\u3087\u3063\u3068\u3042\u3068\u3059\u3053\u3057\n\u671d\u307e\u3067\u8e0a\u308d\u3046\n\n\u660e\u65e5\u306a\u3093\u304b\u6765\u306a\u304f\u3066\u3082\u3044\u3044\u304b\u3089\n\u305a\u3063\u3068 \u3053\u3093\u306a \u4eca\u65e5\u304c\u7d9a\u304d\u307e\u3059\u3088\u3045\u306b\u306a\u3093\u3066\n\u30d2\u30e9\u30ea \u30d5\u30e9\u30ea \u5922\u306e\u4e2d\u3078\n\n\u3055\u3055\u3084\u304b\u3060\u3051\u3069\n\u304b\u3051\u304c\u3048\u306e\u306a\u3044\n\u6b74\u53f2\u3092\u91cd\u306d\u3066\n\u3061\u3044\u3055\u306a\u3046\u305d\u3082\n\u307b\u3093\u3068\u3046\u306b\u306a\u308b\n\u541b\u306e\u3068\u306a\u308a\u3067\n\n\u304b\u308f\u3063\u3066\u304f\u3082\u306e\n\u304b\u308f\u3089\u306a\u3044\u3082\u306e\n\u98fd\u304d\u3063\u307d\u3044\u79c1\u304c\n\u306f\u3058\u3081\u3066\u77e5\u3063\u305f\n\u3053\u306e\u6c38\u9060\u3092\n\u541b\u306b\u8a93\u3046\u3088\n\n\u3055\u3055\u3084\u304b\u3060\u3051\u3069\n\u304b\u3051\u304c\u3048\u306e\u306a\u3044\n\u6b74\u53f2\u3092\u91cd\u306d\u3066\n\u507d\u308a\u3055\u3048\u3082\n\u307b\u3093\u3068\u3046\u306b\u306a\u308b\n\u541b\u306e\u3068\u306a\u308a\u3067\n\n\u30d7\u30e9\u30c1\u30ca \u3046\u308c\u3057\u3044\u306e\u306b\n\u30d7\u30e9\u30c1\u30ca \u305b\u3064\u306a\u304f\u306a\u3063\u3066\n\u30d7\u30e9\u30c1\u30ca \u306a\u307f\u3060\u304c\u3067\u3061\u3083\u3046\u306e\u306f\n\u306a\u3093\u3067? \u3069\u3057\u3066?\n\u30c7\u30a3\u30b9\u30b3\u30c6\u30a3\u30c3\u30af\n\n\u306a\u3093\u3067? \u3069\u3057\u3066?\n\n\u30c7\u30a3\u30b9\u30b3\u30c6\u30a3\u30c3\u30af",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 102
+				}
+			}
+		},
+		"song_title": "Platinum Disco",
+		"artist": "Yuka Iguchi",
+		"artist_image": "http://i.imgur.com/hThsMTD.jpg",
+		"cover": "http://i.imgur.com/0FN4Gqx.jpg",
+		"album": "Nisemonogatari"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-lk0gm_Z81bE-Toradora_-_Lost_My_Pieces_OST.webm",
+		"video_id": "lk0gm_Z81bE",
+		"url": "https://www.youtube.com/watch?v=lk0gm_Z81bE",
+		"title": "Lost My Pieces",
+		"duration": 122,
+		"thumbnail": "https://i.ytimg.com/vi/lk0gm_Z81bE/maxresdefault.jpg",
+		"description": "Toradora! - Lost My Pieces !\n\nEnjoy !\n\nI DONT OWN ANYTHING.\nCopyright \u00a9 All Rights Reserved\nAlso i am not interested in making money from Youtube",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 103
+				}
+			}
+		},
+		"song_title": "Lost My Pieces",
+		"artist": "Yukari Hashimoto",
+		"artist_image": "http://i.imgur.com/N1scqov.jpg",
+		"cover": "http://i.imgur.com/ZMwqOlE.jpg",
+		"album": "Toradora"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-E5ayd_cBMl8-Sword_Art_Online_Ost-_Luminous_Sword.webm",
+		"video_id": "E5ayd_cBMl8",
+		"url": "https://www.youtube.com/watch?v=E5ayd_cBMl8",
+		"title": "Luminous Sword",
+		"duration": 149,
+		"thumbnail": "http://i.imgur.com/qdsRU7P.jpg",
+		"description": "Sony Japan Copyright \u00a9 2012",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
@@ -3756,11 +3812,37 @@
 				}
 			}
 		},
-		"song_title": "Dareka Umi Wo",
-		"artist": "Aimer",
-		"artist_image": "http://i.imgur.com/ZE1Y4Oy.jpg",
-		"cover": "http://i.imgur.com/IZL3vV2.jpg",
-		"album": "Dawn (Zankyou no Terror)"
+		"song_title": "Luminous Sword",
+		"artist": "Yuki Kajiura",
+		"artist_image": "http://i.imgur.com/4Mh3nIS.jpg",
+		"cover": "http://i.imgur.com/F63wSso.jpg",
+		"album": "Sword Art Online"
+	},
+	{
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": null,
+		"video_id": "655j9WXi4DA",
+		"url": "https://www.youtube.com/watch?v=655j9WXi4DA",
+		"title": "Tragedy and Fate",
+		"duration": 110,
+		"thumbnail": "http://i.imgur.com/GMGygnb.jpg",
+		"description": "In the battlefield, there is no place for hope. What lies there is only cold despair and a sin called victory, built on the pain of the defeated. All those people who met there have wholeheartedly admitted the evil and foolishness of this act called war. As ling as people don't repent and don't regard it as the most evil taboo, then the endlessly reappear in the world\"\n-Emiya Kiritsugu\n\nFrom: Fate/zero\nBy: Yuki Kajiura\n\nI DO NOT OWN THIS  MUSIC, THE ANIME, NOR DO I OWN THE PICTURE! ALL CREDITS GOES TO THE ORIGINAL OWNERS.\n\n*Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is made for \"fair use\" for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statute that might otherwise be .infringing. Non-profit, educational or personal use tips the balance in favor of fair use",
+		"meta": {
+			"playlist": {
+				"type": "built-in/dict",
+				"value": {
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 105
+				}
+			}
+		},
+		"song_title": "Tragedy and Fate",
+		"artist": "Yuki Kajiura",
+		"artist_image": "http://i.imgur.com/EyYnpl7.jpg",
+		"cover": "http://i.imgur.com/XNnKl73.jpg",
+		"album": "Fate Zero"
 	},
 	{
 		"version": 103,
@@ -3778,7 +3860,7 @@
 				"value": {
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 105
+					"index": 106
 				}
 			}
 		},
@@ -3787,27 +3869,6 @@
 		"artist_image": "http://i.imgur.com/BmJaS5z.png",
 		"cover": "http://i.imgur.com/PUta1lS.png",
 		"album": "Hunter x Hunter"
-	},
-	{
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-a2GujJZfXpg-original_ver._-Your_name._Music_Video_edition-_from_new_album_DVD.webm",
-		"video_id": "a2GujJZfXpg",
-		"url": "https://www.youtube.com/watch?v=a2GujJZfXpg",
-		"title": "\u30b9\u30d1\u30fc\u30af\u30eb [original ver.] -Your name. Music Video edition- \u4e88\u544a\u7de8 from new album\u300c\u4eba\u9593\u958b\u82b1\u300d\u521d\u56de\u76e4DVD",
-		"duration": 182,
-		"thumbnail": "https://i.ytimg.com/vi/a2GujJZfXpg/maxresdefault.jpg",
-		"description": "\u30b9\u30d1\u30fc\u30af\u30eb [original ver.] -Your name. Music Video edition- \u4e88\u544a\u7de8 from new album\u300c\u4eba\u9593\u958b\u82b1\u300d\u521d\u56de\u76e4DVD",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 106
-				}
-			}
-		}
 	},
 	{
 		"version": 103,
@@ -3837,14 +3898,14 @@
 	},
 	{
 		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-PDSkFeMVNFs-movie_ver._RADWIMPS_MV.webm",
-		"video_id": "PDSkFeMVNFs",
-		"url": "https://www.youtube.com/watch?v=PDSkFeMVNFs",
-		"title": "\u524d\u524d\u524d\u4e16 (movie ver.) RADWIMPS MV",
-		"duration": 292,
-		"thumbnail": "https://i.ytimg.com/vi/PDSkFeMVNFs/maxresdefault.jpg",
-		"description": "\u524d\u524d\u524d\u4e16 (movie ver.) RADWIMPS MV",
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-o1ZPfw52-6E-Assassination_Classroom_TV_Size_ED._Hello_Shooting-Star_-_Moumoon.webm",
+		"video_id": "o1ZPfw52-6E",
+		"url": "https://www.youtube.com/watch?v=o1ZPfw52-6E",
+		"title": "Hello, shooting-star",
+		"duration": 91,
+		"thumbnail": "https://i.ytimg.com/vi/o1ZPfw52-6E/maxresdefault.jpg",
+		"description": "Ending Credits to Assassination Classroom.\nSong: Hello, Shooting-Star\nPerformed by: Moumoon\n\n\nCopyright Disclaimer Under Section 107 of the Copyright Act 1976,\nallowance is made for \"fair use\" for purposes such as criticism,\ncomment, news reporting, teaching, scholarship, and research.\nFair use is a use permitted by copyright statute that might\notherwise be infringing. Non-profit, educational or personal\nuse tips the balance in favor of fair use.",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
@@ -3854,18 +3915,23 @@
 					"index": 108
 				}
 			}
-		}
+		},
+		"song_title": "Hello, shooting-star",
+		"artist": "moumoon",
+		"artist_image": "http://i.imgur.com/boIhh3G.jpg",
+		"cover": "http://i.imgur.com/1NpmOry.jpg",
+		"album": "Assassination Classroom"
 	},
 	{
 		"version": 103,
 		"type": "GieselaEntry",
-		"expected_filename": null,
-		"video_id": "8tIB3IEWirk",
-		"url": "https://www.youtube.com/watch?v=8tIB3IEWirk",
-		"title": "STYX HELIX",
-		"duration": 292,
-		"thumbnail": "http://i.imgur.com/2nDV57b.jpg",
-		"description": "\u984c\u5916\u8a71:\u66ab\u6642\u5b89\u5168~~\n-------------------------------------------\n\u95dc\u65bc\u6211\uff1e\uff1c\nFacebook\uff1ahttps://www.facebook.com/%E5%A4%A9%E4%BA%AE%E4%BA%86%E8%AA%AA%E5%86%8D%E8%A6%8B-590749597673243/?ref=hl\nYouTube\uff1ahttps://www.youtube.com/channel/UCo7AN0hFcWZlMdsp5km_CwQ\nYouTube\uff1ahttps://www.youtube.com/channel/UCTpBj33DHQDHV2XpDnpe4Uw\n-------------------------------------------\n\u6211\u4e0d\u64c1\u6709\u4efb\u4f55\u6771\u897f\u7684\u8996\u983b\uff0c\u5305\u62ec\u97f3\u983b\u548c\u5716\u7247\u3002\n\u6f14\u8077\u54e1\u9032\u5165\u5404\u81ea\u7684\u6240\u6709\u8005\u3002\n\u9019\u90e8\u5f71\u7247\u662f\u7d14\u7cb9\u7684\u7206\u809d\u88fd\u9020\u7684\uff0c\u4e26\u4e0d\u6703\u88ab\u7528\u65bc\u76c8\u5229\u6216\u975e\u6cd5\u5171\u4eab\u3002\n-------------------------------------------\n\u7121\u9810\u8b66\u6536\u5230\u8b66\u544a\u4e09\u6b21\u4e86\uff0c\u9020\u6210\u983b\u9053\u95dc\u9589\u3002\n\u9020\u6210\u4f60\u5011\u7684\u4e0d\u4fbf\uff0c\u6211\u6df1\u611f\u5230\u62b1\u6b49\uff0c\u4f46\u6211\u9084\u662f\u6703\u6301\u7e8c\u4e0b\u53bb\u7684\u3002\n\u65b0\u7684\u983b\u9053\uff0c\u65b0\u7684\u958b\u59cb\uff0c\u8b1d\u8b1d\u5404\u4f4d\u7684\u652f\u6301\u56c9^_^\n-------------------------------------------\n\u5e0c\u671b\u5404\u4f4d\u559c\u6b61\u9019\u5f71\u7247XD\n\u559c\u6b61\u7684\u8a71\u5c31\u8a02\u95b1\u6211\u548c\u9ede\u500b\u559c\u6b61\u7559\u4e0b\u4f60\u7684\u5efa\u8b70\u5427OuO",
+		"expected_filename": "cache\\audio_cache\\youtube-a2GujJZfXpg-original_ver._-Your_name._Music_Video_edition-_from_new_album_DVD.webm",
+		"video_id": "a2GujJZfXpg",
+		"url": "https://www.youtube.com/watch?v=a2GujJZfXpg",
+		"title": "Sparkle",
+		"duration": 182,
+		"thumbnail": "http://i.imgur.com/Ur0zhjv.jpg",
+		"description": "\u30b9\u30d1\u30fc\u30af\u30eb [original ver.] -Your name. Music Video edition- \u4e88\u544a\u7de8 from new album\u300c\u4eba\u9593\u958b\u82b1\u300d\u521d\u56de\u76e4DVD",
 		"meta": {
 			"playlist": {
 				"type": "built-in/dict",
@@ -3876,11 +3942,11 @@
 				}
 			}
 		},
-		"song_title": "STYX HELIX",
-		"artist": "Myth & Roid",
-		"artist_image": "http://i.imgur.com/kfLKoiq.jpg",
-		"cover": "http://i.imgur.com/XPw5bKC.jpg",
-		"album": "eYe's (Re:Zero)"
+		"song_title": "Sparkle",
+		"artist": "Radwimps",
+		"artist_image": "http://i.imgur.com/XeqFVje.jpg",
+		"cover": "http://i.imgur.com/4wSP0KA.jpg",
+		"album": "Your Name"
 	},
 	{
 		"version": 103,
@@ -3910,20 +3976,15 @@
 	},
 	{
 		"version": 103,
-		"type": "SpotifyEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-FY9qBx7W9o0-LiSA_-_Shirushi.webm",
-		"video_id": "FY9qBx7W9o0",
-		"url": "https://www.youtube.com/watch?v=FY9qBx7W9o0",
-		"title": "LiSA - Shirushi",
-		"duration": 116,
-		"thumbnail": "https://i.ytimg.com/vi/FY9qBx7W9o0/maxresdefault.jpg",
-		"description": "Music video by LiSA performing Shirushi. (C) 2014 Aniplex Inc.",
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-PDSkFeMVNFs-movie_ver._RADWIMPS_MV.webm",
+		"video_id": "PDSkFeMVNFs",
+		"url": "https://www.youtube.com/watch?v=PDSkFeMVNFs",
+		"title": "Zen Zen Zense",
+		"duration": 292,
+		"thumbnail": "http://i.imgur.com/OTI99Qr.jpg",
+		"description": "\u524d\u524d\u524d\u4e16 (movie ver.) RADWIMPS MV",
 		"meta": {
-			"author": {
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			},
 			"playlist": {
 				"type": "built-in/dict",
 				"value": {
@@ -3933,154 +3994,10 @@
 				}
 			}
 		},
-		"song_title": "Shirushi",
-		"artist": "LiSA",
-		"artist_image": "https://i.scdn.co/image/82e3892e5c6a18138891d722fb9656da8b0d6112",
-		"cover": "https://i.scdn.co/image/b0d475c2cb05195d2cf7778c507b8757e1f3376e",
-		"album": "Launcher",
-		"spotify_data": {
-			"id": "7gRLdM0fUa3v69BeWYAMzO",
-			"name": "Shirushi",
-			"artists": [
-				{
-					"id": "0blbVefuxOGltDBa00dspv",
-					"name": "LiSA",
-					"images": [
-						{
-							"height": 640,
-							"url": "https://i.scdn.co/image/ae1b09a9dd746482b53d73fb0643c80c1b46a3d4",
-							"width": 640
-						},
-						{
-							"height": 320,
-							"url": "https://i.scdn.co/image/82e3892e5c6a18138891d722fb9656da8b0d6112",
-							"width": 320
-						},
-						{
-							"height": 160,
-							"url": "https://i.scdn.co/image/4d47b7d9469dc49abebff94f197aaf663974da9d",
-							"width": 160
-						}
-					],
-					"genres": [
-						"anime",
-						"j-pop",
-						"japanese r&b",
-						"otacore"
-					],
-					"popularity": 51,
-					"uri": "spotify:artist:0blbVefuxOGltDBa00dspv",
-					"href": "https://open.spotify.com/artist/0blbVefuxOGltDBa00dspv"
-				}
-			],
-			"artist": "LiSA",
-			"cover_url": "https://i.scdn.co/image/b0d475c2cb05195d2cf7778c507b8757e1f3376e",
-			"duration": 288.24,
-			"album": {
-				"id": "3nMoTXUkEcRao1A5lWdsgR",
-				"name": "Launcher",
-				"artists": [
-					{
-						"id": "0blbVefuxOGltDBa00dspv",
-						"name": "LiSA",
-						"images": [
-							{
-								"height": 640,
-								"url": "https://i.scdn.co/image/ae1b09a9dd746482b53d73fb0643c80c1b46a3d4",
-								"width": 640
-							},
-							{
-								"height": 320,
-								"url": "https://i.scdn.co/image/82e3892e5c6a18138891d722fb9656da8b0d6112",
-								"width": 320
-							},
-							{
-								"height": 160,
-								"url": "https://i.scdn.co/image/4d47b7d9469dc49abebff94f197aaf663974da9d",
-								"width": 160
-							}
-						],
-						"genres": [
-							"anime",
-							"j-pop",
-							"japanese r&b",
-							"otacore"
-						],
-						"popularity": 51,
-						"uri": "spotify:artist:0blbVefuxOGltDBa00dspv",
-						"href": "https://open.spotify.com/artist/0blbVefuxOGltDBa00dspv"
-					}
-				],
-				"images": [
-					{
-						"height": 640,
-						"url": "https://i.scdn.co/image/b0d475c2cb05195d2cf7778c507b8757e1f3376e",
-						"width": 640
-					},
-					{
-						"height": 300,
-						"url": "https://i.scdn.co/image/14d219b54b70908918abdc23e6e7ff46d2aa5a9c",
-						"width": 300
-					},
-					{
-						"height": 64,
-						"url": "https://i.scdn.co/image/60fed5bb7867e5bfd6f27e32af4804fd3d648816",
-						"width": 64
-					}
-				],
-				"uri": "spotify:album:3nMoTXUkEcRao1A5lWdsgR"
-			},
-			"popularity": 41,
-			"uri": "spotify:track:7gRLdM0fUa3v69BeWYAMzO",
-			"query": "Lisa - Shirushi",
-			"certainty": 0.9285714285714286
-		}
-	},
-	{
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-cXeb9cb6k0I-Naruto_Shippuden_Opening_16.m4a",
-		"video_id": "cXeb9cb6k0I",
-		"url": "https://www.youtube.com/watch?v=cXeb9cb6k0I",
-		"title": "Naruto Shippuden Opening 16",
-		"duration": 90,
-		"thumbnail": "https://i.ytimg.com/vi/cXeb9cb6k0I/maxresdefault.jpg",
-		"description": "Naruto Shippuden OP16\n\"Silhouette (\u30b7\u30eb\u30a8\u30c3\u30c8)\" by KANA-BOON",
-		"meta": {
-			"author": {
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			},
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 112
-				}
-			}
-		}
-	},
-	{
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-rSn1M0hVf6E-Koe_no_Katachi_A_Silent_Voice_OST_Soundtrack_-_LIT_-_Longer_Version.m4a",
-		"video_id": "rSn1M0hVf6E",
-		"url": "https://www.youtube.com/watch?v=rSn1M0hVf6E",
-		"title": "Koe no Katachi \"A Silent Voice\" OST (Soundtrack: LIT) - Longer Version",
-		"duration": 136,
-		"thumbnail": "https://i.ytimg.com/vi/rSn1M0hVf6E/maxresdefault.jpg",
-		"description": "Anime: Koe no Katachi\nTitle: LIT (Track 39 - Disc 1)\nComposer: Kensuke Ushio\n\nDISCLAIMER\n- - - - - - - - - - -\nI do not own any of the anime, music, and characters. All rights to the original creators. This video is only for promotion purposes.\n- - - - - - - - - - -\nThis version of LIT is a different variation compared to the piano version. Enjoy!",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 113
-				}
-			}
-		}
+		"song_title": "Zen Zen Zense",
+		"artist": "Radwimps",
+		"artist_image": "http://i.imgur.com/Ui3gfom.jpg",
+		"cover": "http://i.imgur.com/pvm1vaw.jpg",
+		"album": "Your Name"
 	}
 ]
