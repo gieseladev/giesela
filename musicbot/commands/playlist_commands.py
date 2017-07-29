@@ -1015,6 +1015,9 @@ class PlaylistCommands:
 
             if command == "set":
                 if property_target:
+                    if response.attachments:
+                        rest = response.attachments[0]
+
                     if rest:
                         if property_target == "sub_queue":
                             error = "You can't set timestamps like this"
@@ -1207,7 +1210,8 @@ class PlaylistCommands:
         "4.2.2": (1500911879, "Entry not in a playlist handling"),
         "4.2.6": (1500963901, "Can now use the entry manipulator on non-playlist entries"),
         "4.3.3": (1501235095, "Fixed strange message formatting bug."),
-        "4.3.8": (1501264222, "Caching adjustments")
+        "4.3.8": (1501264222, "Caching adjustments"),
+        "4.3.9": (1501340523, "Can now set image-properties with attachments")
     ***REMOVED***)
     async def cmd_editentry(self, channel, author, player, leftover_args):
         """
