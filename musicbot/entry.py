@@ -390,7 +390,7 @@ class RadioSongEntry(RadioStationEntry):
         return self.current_song_info["cover"]
 
     def to_web_dict(self, skip_calc=False):
-        data = super().to_web_dict()
+        data = super().to_web_dict(skip_calc=skip_calc)
 
         data.update({
             "title":            self.title,
@@ -676,7 +676,7 @@ class TimestampEntry(YoutubeEntry):
         return d
 
     def to_web_dict(self, skip_calc=False):
-        data = super().to_web_dict()
+        data = super().to_web_dict(skip_calc=skip_calc)
 
         data.update({
             "whole_title":  self.whole_title,
@@ -742,7 +742,7 @@ class GieselaEntry(YoutubeEntry):
         return d
 
     def to_web_dict(self, skip_calc=False):
-        data = super().to_web_dict()
+        data = super().to_web_dict(skip_calc=skip_calc)
 
         data.update({
             "title":    self.song_title,
