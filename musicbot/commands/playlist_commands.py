@@ -44,7 +44,8 @@ class PlaylistCommands:
         "4.1.5": (1500812970, "Some design adjustments"),
         "4.2.0": (1500889194, "Entry Manipulator switched to GieselaEntry instead of fake SpotifyEntries"),
         "4.2.4": (1500960131, "Fixed display of broken playlists"),
-        "4.3.5": (1501249495, "Displaying the type of entry using colour-coding and fixed search indices")
+        "4.3.5": (1501249495, "Displaying the type of entry using colour-coding and fixed search indices"),
+        "4.4.0": (1501361106, "Finally showing changed entries in changelog isn't bugged anymore.")
     ***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -784,7 +785,7 @@ class PlaylistCommands:
             print("Closed the playlist builder")
 
         if save:
-            if pl_changes["added_entries"] or pl_changes["remove_entries"] or pl_changes["new_name"] or pl_changes["order"] or pl_changes["new_desc"] or pl_changes["new_cover"]:
+            if any(pl_changes["added_entries"], pl_changes["remove_entries"], pl_changes["new_name"], pl_changes["order"], pl_changes["new_desc"], pl_changes["new_cover"], pl_changes["changed_entries"]):
                 c_log = "**CHANGES**\n\n"
                 if pl_changes["added_entries"]:
                     new_entries_string = "\n".join(["    `***REMOVED******REMOVED***.` ***REMOVED******REMOVED***".format(ind, nice_cut(

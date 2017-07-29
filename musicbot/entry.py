@@ -745,6 +745,7 @@ class GieselaEntry(YoutubeEntry):
         data.update(***REMOVED***
             "title":    self.song_title,
             "artist":   self.artist,
+            "album":    self.album,
             "cover":    self.cover
         ***REMOVED***)
 
