@@ -9,12 +9,15 @@ from random import shuffle
 
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
+import asyncio
+
 from .entry import (RadioSongEntry, RadioStationEntry, SpotifyEntry,
-                    StreamEntry, TimestampEntry, YoutubeEntry)
+                    StreamEntry, TimestampEntry, VGMEntry, YoutubeEntry)
 from .exceptions import ExtractionError, WrongEntryTypeError
 from .lib.event_emitter import EventEmitter
-from .spotify import SpotifyTrack
+from .spotify import get_spotify_track
 from .utils import clean_songname, get_header, get_video_sub_queue
+from .VGMdb import get_entry as get_vgm_track
 from .web_socket_server import GieselaServer
 
 
@@ -256,8 +259,21 @@ class Playlist(EventEmitter):
             video_description
         )
 
-        spotify_track = SpotifyTrack.from_query(clean_title)
-        if spotify_track.certainty > .6:
+        spotify_searcher = asyncio.Task(get_spotify_track(self.loop, clean_title))
+        vmg_searcher = asyncio.Task(get_vgm_track(self.loop, clean_title))
+
+        done, pending = await asyncio.wait([spotify_searcher, vmg_searcher])
+
+        spoitfy_track = spotify_searcher.result()
+        vgm_track = vmg_searcher.result()
+
+        if vgm_track:
+            entry = VGMEntry(
+                *base_arguments,
+                **vgm_track,
+                **meta
+            )
+        elif spotify_track.certainty > .6:
             entry = SpotifyEntry(
                 *base_arguments,
                 spotify_track,
