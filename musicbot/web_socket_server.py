@@ -144,7 +144,11 @@ class GieselaWebSocket(WebSocket):
 
     def handleClose(self):
         GieselaServer.clients.remove(self)
-        GieselaServer.authenticated_clients.pop(self, None)
+
+        try:
+            GieselaServer.authenticated_clients.remove(self)
+        except ValueError:
+            pass
 
         if self.registration_token:
             if GieselaServer.awaiting_registration.pop(self.registration_token, None):
