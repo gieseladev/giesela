@@ -179,6 +179,10 @@ class SpotifyTrack:
         return data
 
 
+async def get_spotify_track(loop, query):
+    return await loop.run_in_executor(None, SpotifyTrack.from_query, query)
+
+
 def get_certainty(query, song_name, artists):
     song_name_edited = re.sub(r"\(.+\)", "", song_name)
 
