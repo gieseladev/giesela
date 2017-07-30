@@ -44,11 +44,11 @@ class Playlist(EventEmitter):
 
     def shuffle(self):
         shuffle(self.entries)
-        GieselaServer.send_player_information_update()
+        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
     def clear(self):
         self.entries.clear()
-        GieselaServer.send_player_information_update()
+        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
     def replay(self):
         if self.history:
@@ -285,7 +285,7 @@ class Playlist(EventEmitter):
         for entry in entries:
             self._add_entry(entry, more_to_come=True)
 
-        GieselaServer.send_player_information_update()
+        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
     def _add_entry(self, entry, placement=None, more_to_come=False):
         if placement is not None:
@@ -305,7 +305,7 @@ class Playlist(EventEmitter):
             if self.peek() is entry:
                 entry.get_ready_future()
 
-            GieselaServer.send_player_information_update()
+            GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
     def promote_position(self, position):
         rotDist = -1 * (position - 1)
@@ -316,7 +316,7 @@ class Playlist(EventEmitter):
         self.emit("entry-added", playlist=self, entry=entry)
         entry.get_ready_future()
 
-        GieselaServer.send_player_information_update()
+        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
         return entry
 
@@ -326,7 +326,7 @@ class Playlist(EventEmitter):
         self.emit("entry-added", playlist=self, entry=entry)
         entry.get_ready_future()
 
-        GieselaServer.send_player_information_update()
+        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
         return entry
 
@@ -337,7 +337,7 @@ class Playlist(EventEmitter):
         self.emit("entry-removed", playlist=self, entry=entry)
         self.entries.rotate(-1 * rotDist)
 
-        GieselaServer.send_player_information_update()
+        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
         return entry
 
