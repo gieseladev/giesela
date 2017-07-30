@@ -16,6 +16,7 @@ from .exceptions import FFmpegError, FFmpegWarning
 from .lib.event_emitter import EventEmitter
 from .playlist import Playlist
 from .utils import create_cmd_params, format_time_ffmpeg
+from .web_socket_server import GieselaServer
 
 
 class PatchedBuff:
@@ -138,6 +139,8 @@ class MusicPlayer(EventEmitter):
         self._volume = value
         if self._current_player:
             self._current_player.buff.volume = value
+
+        GieselaServer.send_player_information_update(self.voice_client.server.id)
 
     def on_entry_added(self, playlist, entry):
         if self.is_stopped:
