@@ -766,6 +766,10 @@ class VGMEntry(GieselaEntry):
     pass
 
 
+class DiscogsEntry(GieselaEntry):
+    pass
+
+
 class SpotifyEntry(GieselaEntry):
 
     def __init__(self, queue, video_id, url, title, duration, thumbnail, description, spotify_track, expected_filename=None, **meta):

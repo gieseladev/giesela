@@ -87,10 +87,12 @@ class ConfigDefaults:
     _token = None
 
     entry_type_emojis = ***REMOVED***
-        "YoutubeEntry":   ":black_circle:",
-        "TimestampEntry": ":large_blue_circle:",
-        "GieselaEntry":   ":white_circle:",
-        "SpotifyEntry":   ":red_circle:"
+        "YoutubeEntry":     ":black_circle:",
+        "TimestampEntry":   ":large_blue_circle:",
+        "GieselaEntry":     ":white_circle:",
+        "SpotifyEntry":     ":red_circle:",
+        "DiscogsEntry":     ":large_orange_diamond:",
+        "VGMEntry":         ":large_blue_diamond:"
     ***REMOVED***
 
     owner_id = None

@@ -11,8 +11,10 @@ from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
 import asyncio
 
-from .entry import (RadioSongEntry, RadioStationEntry, SpotifyEntry,
-                    StreamEntry, TimestampEntry, VGMEntry, YoutubeEntry)
+from .discogs import get_entry as get_discogs_track
+from .entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry,
+                    SpotifyEntry, StreamEntry, TimestampEntry, VGMEntry,
+                    YoutubeEntry)
 from .exceptions import ExtractionError, WrongEntryTypeError
 from .lib.event_emitter import EventEmitter
 from .spotify import get_spotify_track
@@ -261,11 +263,13 @@ class Playlist(EventEmitter):
 
         spotify_searcher = asyncio.Task(get_spotify_track(self.loop, clean_title))
         vmg_searcher = asyncio.Task(get_vgm_track(self.loop, clean_title))
+        discogs_searcher = asyncio.Task(get_discogs_track(self.loop, clean_title))
 
-        done, pending = await asyncio.wait([spotify_searcher, vmg_searcher])
+        await asyncio.wait([spotify_searcher, vmg_searcher, discogs_searcher])
 
-        spoitfy_track = spotify_searcher.result()
+        spotify_track = spotify_searcher.result()
         vgm_track = vmg_searcher.result()
+        discogs_track = discogs_searcher.result()
 
         if vgm_track:
             entry = VGMEntry(
@@ -277,6 +281,12 @@ class Playlist(EventEmitter):
             entry = SpotifyEntry(
                 *base_arguments,
                 spotify_track,
+                **meta
+            )
+        elif discogs_track:
+            entry = DiscogsEntry(
+                *base_arguments,
+                **discogs_track,
                 **meta
             )
         else:
