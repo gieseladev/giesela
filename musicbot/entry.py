@@ -411,6 +411,7 @@ class YoutubeEntry(BaseEntry):
         self.video_id = video_id
         self._title = title
         self.thumbnail = thumbnail
+        self._thumbnail_brightness = None
         self.description = description
         self.duration = duration
 
@@ -424,6 +425,13 @@ class YoutubeEntry(BaseEntry):
     @property
     def title(self):
         return clean_songname(self._title)
+
+    @property
+    def thumbnail_brightness(self):
+        if not self._thumbnail_brightness:
+            self._thumbnail_brightness = get_image_brightness(url=self.thumbnail)
+
+        return self._thumbnail_brightness
 
     @classmethod
     def from_dict(cls, playlist, data):
@@ -484,7 +492,7 @@ class YoutubeEntry(BaseEntry):
         }
 
         if not skip_calc:
-            data["thumbnail_brightness"] = get_image_brightness(url=self.thumbnail)
+            data["thumbnail_brightness"] = self.thumbnail_brightness
 
         return data
 
