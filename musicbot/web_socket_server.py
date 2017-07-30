@@ -83,8 +83,9 @@ class GieselaWebSocket(WebSocket):
         answer = ***REMOVED***
             "response": True
         ***REMOVED***
-        request = data.get("request", None)
-        command = data.get("command", None)
+        request = data.get("request")
+        command = data.get("command")
+        command_data = data.get("command_data", ***REMOVED******REMOVED***)
 
         if request:
             # send all the information one can acquire
@@ -100,12 +101,40 @@ class GieselaWebSocket(WebSocket):
 
         if command:
             player = GieselaServer.get_player(token=self.token)
+            success = False
 
             if command == "play_pause":
                 if player.is_playing:
                     player.pause()
+                    success = True
                 elif player.is_paused:
                     player.resume()
+                    success = True
+
+            elif command == "skip":
+                if player.current_entry:
+                    if isinstance(player.current_entry, TimestampEntry):
+                        player.goto_seconds(player.current_entry.current_sub_entry["end"])
+                    else:
+                        player.skip()
+
+                    success = True
+
+            elif command == "revert":
+                success = player.playlist.replay()
+
+            elif command == "volume":
+                target_volume = command_data.get("value")
+                if target_volume:
+                    if 0 <= target_volume <= 1:
+                        player.volume = target_volume
+                        success = True
+                    else:
+                        success = False
+                else:
+                    success = False
+
+            answer["success"] = success
 
         self.sendMessage(json.dumps(answer))
 
@@ -234,8 +263,10 @@ class GieselaServer:
                     "player": GieselaServer.get_player_information(server_id=server_id)
                 ***REMOVED***
             ***REMOVED***
+
             json_message = json.dumps(message)
             print("[WEBSOCKET] Broadcasting player update to sockets")
+
             for auth_client in GieselaServer.authenticated_clients:
                 # does this update concern this socket
                 if GieselaServer.get_token_information(auth_client.token)[0] == server_id:

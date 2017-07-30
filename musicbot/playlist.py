@@ -15,6 +15,7 @@ from .exceptions import ExtractionError, WrongEntryTypeError
 from .lib.event_emitter import EventEmitter
 from .spotify import SpotifyTrack
 from .utils import clean_songname, get_header, get_video_sub_queue
+from .web_socket_server import GieselaServer
 
 
 class Playlist(EventEmitter):
@@ -43,9 +44,22 @@ class Playlist(EventEmitter):
 
     def shuffle(self):
         shuffle(self.entries)
+        GieselaServer.send_player_information_update()
 
     def clear(self):
         self.entries.clear()
+        GieselaServer.send_player_information_update()
+
+    def replay(self):
+        if self.history:
+            self._add_entry(self.history[0], placement=0)
+
+            if self.player.current_entry:
+                self.player.skip()
+
+            return True
+
+        return False
 
     def push_history(self, entry):
         entry.meta["finish_time"] = time.time()
@@ -269,9 +283,11 @@ class Playlist(EventEmitter):
 
     def add_entries(self, entries):
         for entry in entries:
-            self._add_entry(entry)
+            self._add_entry(entry, more_to_come=True)
 
-    def _add_entry(self, entry, placement=None):
+        GieselaServer.send_player_information_update()
+
+    def _add_entry(self, entry, placement=None, more_to_come=False):
         if placement is not None:
             if placement == "random":
                 if len(self.entries) > 0:
@@ -285,8 +301,11 @@ class Playlist(EventEmitter):
 
         self.emit("entry-added", playlist=self, entry=entry)
 
-        if self.peek() is entry:
-            entry.get_ready_future()
+        if not more_to_come:
+            if self.peek() is entry:
+                entry.get_ready_future()
+
+            GieselaServer.send_player_information_update()
 
     def promote_position(self, position):
         rotDist = -1 * (position - 1)
@@ -297,6 +316,8 @@ class Playlist(EventEmitter):
         self.emit("entry-added", playlist=self, entry=entry)
         entry.get_ready_future()
 
+        GieselaServer.send_player_information_update()
+
         return entry
 
     def promote_last(self):
@@ -304,6 +325,8 @@ class Playlist(EventEmitter):
         self.entries.appendleft(entry)
         self.emit("entry-added", playlist=self, entry=entry)
         entry.get_ready_future()
+
+        GieselaServer.send_player_information_update()
 
         return entry
 
@@ -313,6 +336,8 @@ class Playlist(EventEmitter):
         entry = self.entries.popleft()
         self.emit("entry-removed", playlist=self, entry=entry)
         self.entries.rotate(-1 * rotDist)
+
+        GieselaServer.send_player_information_update()
 
         return entry
 

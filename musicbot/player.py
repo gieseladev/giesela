@@ -126,17 +126,15 @@ class MusicPlayer(EventEmitter):
         self.loop.create_task(self.websocket_check())
         self.handle_manually = False
 
-        self.volume_scale = 1  # volume is divided by this value
         self.volume = bot.config.default_volume
         self.chapter_updater = None
 
     @property
     def volume(self):
-        return self._volume * self.volume_scale
+        return self._volume
 
     @volume.setter
     def volume(self, value):
-        value /= self.volume_scale
         self._volume = value
         if self._current_player:
             self._current_player.buff.volume = value

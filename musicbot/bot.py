@@ -292,14 +292,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         if entry:
             prefix = "\u275A\u275A" if is_paused else ""
 
-            if isinstance(entry, StreamEntry):
-                prefix += "\u25CE"
-                name = entry.title
-            elif isinstance(entry, TimestampEntry):
-                prefix += "\u1F4DC"
-                name = entry.title
-            else:
-                name = entry.title
+            name = entry.title
 
             name = u"***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(prefix, name)[:128]
             game = discord.Game(name=name)
