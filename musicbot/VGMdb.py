@@ -1,5 +1,6 @@
 import json
 import re
+import traceback
 
 import requests
 
@@ -16,7 +17,7 @@ class VGMException:
     class TrackNotFound(Exception):
         pass
 
-    class ArtstNotComplete(Exception):
+    class ArtistNotComplete(Exception):
         pass
 
 
@@ -39,7 +40,7 @@ def _extract_artist(data):
     artist_name = artist["names"]["en"]
 
     if "link" not in artist:
-        raise VGMException.ArtstNotComplete
+        raise VGMException.ArtistNotComplete
 
     resp = requests.get(base_url + artist["link"])
     data = resp.json()
@@ -104,7 +105,10 @@ def _get_entry(query):
 async def get_entry(loop, query):
     try:
         return await loop.run_in_executor(None, _get_entry, query)
-    except (VGMException.ArtstNotComplete, VGMException.NoResults, VGMException.NoResults):
+    except (VGMException.ArtistNotComplete, VGMException.TrackNotFound, VGMException.NoResults):
+        return None
+    except:
+        traceback.print_exc()
         return None
 
 
@@ -232,7 +236,7 @@ if __name__ == "__main__":
                 entry = _get_entry(test)
                 print("{}: {}".format(test, entry["song_title"]))
                 found += 1
-            except (VGMException.NoResults, VGMException.TrackNotFound, VGMException.ArtstNotComplete):
+            except (VGMException.NoResults, VGMException.TrackNotFound, VGMException.ArtistNotComplete):
                 pass
             except:
                 print("There was an error with {}".format(test))

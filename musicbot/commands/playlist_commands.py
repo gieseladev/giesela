@@ -785,7 +785,7 @@ class PlaylistCommands:
             print("Closed the playlist builder")
 
         if save:
-            if any(pl_changes["added_entries"], pl_changes["remove_entries"], pl_changes["new_name"], pl_changes["order"], pl_changes["new_desc"], pl_changes["new_cover"], pl_changes["changed_entries"]):
+            if any((pl_changes["added_entries"], pl_changes["remove_entries"], pl_changes["new_name"], pl_changes["order"], pl_changes["new_desc"], pl_changes["new_cover"], pl_changes["changed_entries"])):
                 c_log = "**CHANGES**\n\n"
                 if pl_changes["added_entries"]:
                     new_entries_string = "\n".join(["    `{}.` {}".format(ind, nice_cut(
