@@ -81,8 +81,7 @@ class GieselaWebSocket(WebSocket):
 
     def handleAuthenticatedMessage(self, data):
         answer = {
-            "response": True,
-            "success": False
+            "response": True
         }
 
         request = data.get("request")
