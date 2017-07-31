@@ -421,6 +421,8 @@ class MusicPlayer(EventEmitter):
                 elif isinstance(self.current_entry, RadioSongEntry):
                     if self.current_entry.song_duration > 5:
                         delay = self.current_entry.song_duration - self.current_entry.song_progress + 2
+                        if delay < 0:
+                            delay = 40
                     else:
                         delay = 40
                 else:
