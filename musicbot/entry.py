@@ -264,9 +264,6 @@ class StreamEntry(BaseEntry):
             raise ExtractionError(e)
         else:
             self.filename = result["url"]
-            # I might need some sort of events or hooks or shit
-            # for when ffmpeg inevitebly fucks up and i have to restart
-            # although maybe that should be at a slightly lower level
         finally:
             self._is_downloading = False
 

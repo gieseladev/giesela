@@ -202,8 +202,8 @@ def main():
                     print(e.message)
                     # break
 
-                # elif e.__class__.__name__ == "TerminateSignal":
-                    # break
+                elif e.__class__.__name__ == "TerminateSignal":
+                    break
 
                 elif e.__class__.__name__ == "RestartSignal":
                     loops = -1
