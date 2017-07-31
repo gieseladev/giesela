@@ -11,7 +11,7 @@ from .radio import RadioSongExtractor, StationInfo
 from .spotify import SpotifyTrack
 from .utils import (clean_songname, get_header, get_image_brightness, md5sum,
                     slugify)
-from .web_socket_server import WebAuthor
+from .web_author import WebAuthor
 
 
 class Entry:
