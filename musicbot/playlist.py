@@ -72,7 +72,7 @@ class Playlist(EventEmitter):
         self.history = [entry, *self.history[:q]]
 
     async def add_stream_entry(self, stream_url, **meta):
-        info = {"title": song_url, "extractor": None}
+        info = {"title": stream_url, "extractor": None}
         try:
             info = await self.downloader.extract_info(self.loop, stream_url, download=False)
 
