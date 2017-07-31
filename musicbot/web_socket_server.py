@@ -1,3 +1,4 @@
+import asyncio
 import atexit
 import hashlib
 import json
@@ -6,8 +7,6 @@ import traceback
 from json.decoder import JSONDecodeError
 from random import choice
 from string import ascii_lowercase
-
-import asyncio
 
 from .entry import TimestampEntry
 from .simple_web_socket_server import SimpleWebSocketServer, WebSocket
@@ -228,6 +227,12 @@ class GieselaServer:
             if token not in GieselaServer.awaiting_registration:
                 return token
 
+    def _broadcast_message(server_id, json_message):
+        for auth_client in GieselaServer.authenticated_clients:
+            # does this update concern this socket
+            if GieselaServer.get_token_information(auth_client.token)[0] == server_id:
+                auth_client.sendMessage(json_message)
+
     def get_player(token=None, server_id=None):
         if not token and not server_id:
             raise ValueError("Specify at least one of the two")
@@ -281,9 +286,6 @@ class GieselaServer:
             json_message = json.dumps(message)
             print("[WEBSOCKET] Broadcasting player update to sockets")
 
-            for auth_client in GieselaServer.authenticated_clients:
-                # does this update concern this socket
-                if GieselaServer.get_token_information(auth_client.token)[0] == server_id:
-                    auth_client.sendMessage(json_message)
+            GieselaServer._broadcast_message(server_id, json_message)
         except Exception as e:
             traceback.print_exc()

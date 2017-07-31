@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 import json
 import random
@@ -8,8 +9,6 @@ from itertools import islice
 from random import shuffle
 
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
-
-import asyncio
 
 from .discogs import get_entry as get_discogs_track
 from .entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry,
@@ -70,6 +69,8 @@ class Playlist(EventEmitter):
         entry.meta["finish_time"] = time.time()
         q = self.bot.config.history_limit - 1
         self.history = [entry, *self.history[:q]]
+
+        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
     async def add_stream_entry(self, stream_url, **meta):
         info = ***REMOVED***"title": stream_url, "extractor": None***REMOVED***
