@@ -1,3 +1,6 @@
+from .utils import dec_to_hex
+
+
 class WebAuthor:
 
     def __init__(self, id, name, display_name, avatar_url, colour):
