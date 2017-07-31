@@ -326,11 +326,10 @@ class Playlist(EventEmitter):
             self.entries.append(entry)
 
         self.emit("entry-added", playlist=self, entry=entry)
+        if self.peek() is entry:
+            entry.get_ready_future()
 
         if not more_to_come:
-            if self.peek() is entry:
-                entry.get_ready_future()
-
             GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
     def promote_position(self, position):
