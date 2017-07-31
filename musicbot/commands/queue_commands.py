@@ -17,7 +17,8 @@ from ..utils import (Response, block_user, clean_songname, command_info,
 class EnqueueCommands:
 
     @command_info("2.0.2", 1482252120, ***REMOVED***
-        "3.5.2": (1497712808, "Updated help text")
+        "3.5.2": (1497712808, "Updated help text"),
+        "4.4.4": (1501504294, "Fixed internal bug")
     ***REMOVED***)
     async def cmd_stream(self, player, channel, author, song_url):
         """
