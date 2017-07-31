@@ -111,7 +111,7 @@ class BaseEntry:
         return bool(self.filename)
 
     def set_start(self, sec):
-        if sec < self.start_seconds or sec > self.end_seconds:
+        if sec < 0 or sec > self.end_seconds:
             return False
 
         self.start_seconds = sec
