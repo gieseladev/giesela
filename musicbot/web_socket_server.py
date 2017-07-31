@@ -134,20 +134,18 @@ class GieselaWebSocket(WebSocket):
                 else:
                     success = False
 
-            answer["success"] = success
-
-        elif command == "volume":
-            target_volume = command_data.get("value")
-            if target_volume:
-                if 0 <= target_volume <= 1:
-                    player.volume = target_volume
-                    success = True
+            elif command == "volume":
+                target_volume = command_data.get("value")
+                if target_volume:
+                    if 0 <= target_volume <= 1:
+                        player.volume = target_volume
+                        success = True
+                    else:
+                        success = False
                 else:
                     success = False
-            else:
-                success = False
 
-        answer["success"] = success
+            answer["success"] = success
 
         self.sendMessage(json.dumps(answer))
 
