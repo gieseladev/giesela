@@ -439,7 +439,6 @@ class AdminCommands:
     @owner_only
     async def cmd_shutdown(self, channel):
         await self.safe_send_message(channel, ":wave:")
-        await self.disconnect_all_voice_clients()
         raise exceptions.TerminateSignal
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
@@ -459,5 +458,4 @@ class AdminCommands:
 
     async def cmd_restart(self, channel):
         await self.safe_send_message(channel, ":wave:")
-        await self.disconnect_all_voice_clients()
         raise exceptions.RestartSignal

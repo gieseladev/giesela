@@ -422,7 +422,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 raise self.exit_signal
 
     async def logout(self):
-        await self.disconnect_all_voice_clients()
         return await super().logout()
 
     async def on_error(self, event, *args, **kwargs):
@@ -665,8 +664,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         if before.region != after.region:
             print("[Servers] \"%s\" changed regions: %s -> %s" %
                   (after.name, before.region, after.region))
-
-            await self.reconnect_voice_client(after)
 
     async def on_server_join(self, server):
         for channel in server.channels:
