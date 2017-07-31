@@ -11,7 +11,7 @@ from .radio import RadioSongExtractor, StationInfo
 from .spotify import SpotifyTrack
 from .utils import (clean_songname, get_header, get_image_brightness, md5sum,
                     slugify)
-from .web_socket_server import WebAuthor
+from .web_author import WebAuthor
 
 
 class Entry:
@@ -111,7 +111,7 @@ class BaseEntry:
         return bool(self.filename)
 
     def set_start(self, sec):
-        if sec < self.start_seconds or sec > self.end_seconds:
+        if sec < 0 or sec > self.end_seconds:
             return False
 
         self.start_seconds = sec
