@@ -81,8 +81,10 @@ class GieselaWebSocket(WebSocket):
 
     def handleAuthenticatedMessage(self, data):
         answer = ***REMOVED***
-            "response": True
+            "response": True,
+            "success": False
         ***REMOVED***
+
         request = data.get("request")
         command = data.get("command")
         command_data = data.get("command_data", ***REMOVED******REMOVED***)
@@ -123,18 +125,30 @@ class GieselaWebSocket(WebSocket):
             elif command == "revert":
                 success = player.playlist.replay()
 
-            elif command == "volume":
-                target_volume = command_data.get("value")
-                if target_volume:
-                    if 0 <= target_volume <= 1:
-                        player.volume = target_volume
-                        success = True
+            elif command == "seek":
+                target_seconds = command_data.get("value")
+                if target_seconds and player.current_entry:
+                    if 0 <= target_seconds <= player.current_entry.duration:
+                        success = player.goto_seconds(target_seconds)
                     else:
                         success = False
                 else:
                     success = False
 
             answer["success"] = success
+
+        elif command == "volume":
+            target_volume = command_data.get("value")
+            if target_volume:
+                if 0 <= target_volume <= 1:
+                    player.volume = target_volume
+                    success = True
+                else:
+                    success = False
+            else:
+                success = False
+
+        answer["success"] = success
 
         self.sendMessage(json.dumps(answer))
 
