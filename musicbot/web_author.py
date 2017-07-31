@@ -1,3 +1,6 @@
+from .web_socket_server import GieselaServer
+
+
 class WebAuthor:
 
     def __init__(self, id, name, display_name, avatar_url, colour):
