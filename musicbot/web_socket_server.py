@@ -9,6 +9,7 @@ from string import ascii_lowercase
 
 import asyncio
 
+from .entry import TimestampEntry
 from .simple_web_socket_server import SimpleWebSocketServer, WebSocket
 from .utils import dec_to_hex
 
