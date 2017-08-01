@@ -13,29 +13,20 @@ class Playlists:
 
     def __init__(self, playlists_file):
         self.playlists_file = playlists_file
-        self.update_playlist()
+        self.update_playlists()
         self.playlist_save_location = "data/playlists/"
 
-    def update_playlist(self):
-        self.playlists = configparser.ConfigParser()
+    def update_playlists(self):
+        with open(self.playlists_file, "r+") as f:
+            self.playlists = json.load(f)
 
-        if not self.playlists.read(self.playlists_file, encoding="utf-8"):
-            print("[playlists] Playlists file not found")
-            raise HelpfulError(
-                "Your playlists file is missing"
-            )
-
-        self.playlists = configparser.ConfigParser(interpolation=None)
-        self.playlists.read(self.playlists_file, encoding="utf-8")
-        self.saved_playlists = self.playlists.sections()
-
-    def save_playlist(self):
-        with open(self.playlists_file, "w") as pl_file:
-            self.playlists.write(pl_file)
+    def save_playlists(self):
+        with open(self.playlists_file, "w+") as f:
+            json.dump(self.playlists, f, indent=4)
 
     def get_playlist(self, playlistname, playlist, load_entries=True, channel=None):
         playlistname = playlistname.lower().strip().replace(" ", "_")
-        if not self.playlists.has_section(playlistname):
+        if playlistname not in self.playlists:
             return None
 
         plsection = self.playlists[playlistname]
@@ -51,12 +42,13 @@ class Playlists:
         ***REMOVED***
 
         entries = []
-        # this is gonna be a list of urls populated with the broken or outdated
+        # this is gonna be a list of serialised entries populated with the broken or outdated
         # entries
         broken_entries = []
         if load_entries and not os.stat(playlist_information["location"]).st_size == 0:
-            with open(playlist_information["location"], "r") as file:
-                serialized_json = json.loads(file.read())
+            with open(playlist_information["location"], "r") as f:
+                serialized_json = json.loads(f.read())
+
             for ind, ser_entry in enumerate(serialized_json):
                 try:
                     entry = Entry.from_dict(playlist, ser_entry)
@@ -74,7 +66,7 @@ class Playlists:
                 else:
                     entries.append(entry)
 
-        playlist_information["entries"] = entries
+        playlist_information["entries"] = sorted(entries, key=lambda entry: entry.title)
         playlist_information["broken_entries"] = broken_entries
 
         return playlist_information
@@ -82,49 +74,43 @@ class Playlists:
     def set_playlist(self, entries, name, author_id, description=None, cover_url=None, replays=0):
         name = name.lower().strip().replace(" ", "_")
 
-        try:
-            serialized_entries = []
-            for index, entry in enumerate(entries):
-                entry.start_seconds = 0
+        serialized_entries = []
+        for index, entry in enumerate(entries):
+            entry.start_seconds = 0
 
-                entry.meta["playlist"] = ***REMOVED***
-                    "cover": cover_url,
-                    "name": name,
-                    "index": index
-                ***REMOVED***
+            entry.meta["playlist"] = ***REMOVED***
+                "cover": cover_url,
+                "name": name,
+                "index": index
+            ***REMOVED***
 
-                serialized_entries.append(entry.to_dict())
+            serialized_entries.append(entry.to_dict())
 
-            with open(self.playlist_save_location + str(name) + ".gpl", "w") as f:
-                f.write(json.dumps(serialized_entries, indent="\t"))
-        except Exception as e:
-            raise
-            return False
+        json.dump(serialized_entries, open(self.playlist_save_location + str(name) + ".gpl", "w+"), indent=4)
 
-        if not self.playlists.has_section(name):
-            self.playlists.add_section(name)
+        playlist_data = self.playlists.get(name, ***REMOVED******REMOVED***)
 
-        self.playlists.set(
-            name, "location", self.playlist_save_location + str(name) + ".gpl")
-        self.playlists.set(name, "author", str(author_id))
-        self.playlists.set(name, "replays", str(replays))
-        self.playlists.set(name, "description", str(description))
-        self.playlists.set(name, "cover_url", str(cover_url))
+        playlist_data.update(***REMOVED***
+            "location": "***REMOVED******REMOVED******REMOVED******REMOVED***.gpl".format(self.playlist_save_location, name),
+            "author": author_id,
+            "replays": replays,
+            "description": description,
+            "cover_url": cover_url
+        ***REMOVED***)
 
-        self.save_playlist()
-        self.update_playlist()
+        self.playlists[name] = playlist_data
+
+        self.save_playlists()
         return True
 
     def bump_replay_count(self, playlist_name):
         playlist_name = playlist_name.lower().strip().replace(" ", "_")
 
-        if self.playlists.has_section(playlist_name):
-            prevCount = 0
-            if(self.playlists.has_option(playlist_name, "replays")):
-                prevCount = int(self.playlists.get(playlist_name, "replays"))
+        if playlist_name in self.playlists:
+            prev_count = self.playlists[playlist_name].get("replays", 0)
 
-            self.playlists.set(playlist_name, "replays", str(prevCount + 1))
-            self.save_playlist()
+            self.playlists[playlist_name].update(replays=prev_count + 1)
+            self.save_playlists()
             return True
 
         return False
@@ -186,17 +172,10 @@ class Playlists:
     def remove_playlist(self, name):
         name = name.lower().strip().replace(" ", "_")
 
-        os.remove(self.playlists[name]["location"])
-        self.playlists.remove_section(name)
-        self.save_playlist()
-        self.update_playlist()
-
-    def get_all_playlists(self, playlist):
-        pls = []
-        for pl in self.saved_playlists:
-            pls.append((pl, self.get_playlist(pl, playlist, False)))
-
-        return pls
+        if name in self.playlists:
+            os.remove(self.playlists[name]["location"])
+            self.playlists.pop(name)
+            self.save_playlists()
 
     def edit_playlist(self, name, playlist, all_entries=None, remove_entries=None, remove_entries_indexes=None, new_entries=None, new_name=None, new_description=None, new_cover=None, edit_entries=None):
         name = name.lower().strip().replace(" ", "_")

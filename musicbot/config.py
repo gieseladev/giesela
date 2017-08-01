@@ -118,7 +118,7 @@ class ConfigDefaults:
     cards_file = "data/cah/cards.ini"
     question_cards = "data/cah/question_cards.ini"
     radios_file = "config/radio_stations.json"
-    playlists_file = "config/playlists.ini"
+    playlists_file = "data/playlists.json"
     random_sets = "config/random_sets.ini"
     blacklist_file = "config/blacklist.txt"
     auto_playlist_file = "config/autoplaylist.txt"

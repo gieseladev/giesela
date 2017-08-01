@@ -81,7 +81,7 @@ class PlaylistCommands:
         ]
 
         if argument == "save":
-            if savename in self.playlists.saved_playlists:
+            if savename in self.playlists.playlists.keys():
                 return Response(
                     "Can't save the queue, there's already a playlist with this name.")
             if len(savename) < 3:
@@ -103,7 +103,7 @@ class PlaylistCommands:
                 "Uhm, something went wrong I guess :D")
 
         elif argument == "load":
-            if savename not in self.playlists.saved_playlists:
+            if savename not in self.playlists.playlists.keys():
                 return Response(
                     "Can't load this playlist, there's no playlist with this name.")
 
@@ -186,7 +186,7 @@ class PlaylistCommands:
                 ))
 
         elif argument == "delete":
-            if savename not in self.playlists.saved_playlists:
+            if savename not in self.playlists.playlists.keys():
                 return Response(
                     "Can't delete this playlist, there's no playlist with this name.")
 
@@ -195,7 +195,7 @@ class PlaylistCommands:
                 "****REMOVED******REMOVED**** has been deleted".format(savename))
 
         elif argument == "clone":
-            if savename not in self.playlists.saved_playlists:
+            if savename not in self.playlists.playlists.keys():
                 return Response(
                     "Can't clone this playlist, there's no playlist with this name.")
             clone_playlist = self.playlists.get_playlist(
@@ -207,7 +207,7 @@ class PlaylistCommands:
                 return Response(
                     "Please provide a name to save the playlist to")
 
-            if additional_args[0].lower() in self.playlists.saved_playlists:
+            if additional_args[0].lower() in self.playlists.playlists.keys():
                 extend_existing = True
             if len(additional_args[0]) < 3:
                 return Response(
@@ -252,7 +252,7 @@ class PlaylistCommands:
                     else "", additional_args[0].lower()))
 
         elif argument == "showall":
-            if len(self.playlists.saved_playlists) < 1:
+            if len(self.playlists.playlists.keys()) < 1:
                 return Response(
                     "There are no saved playlists.\n**You** could add one though. Type `***REMOVED******REMOVED***help playlist` to see how!".format(
                         self.config.command_prefix))
@@ -262,24 +262,20 @@ class PlaylistCommands:
             sort_modes = ***REMOVED***
                 "alphabetical": (lambda playlist: playlist, False),
                 "entries": (
-                    lambda playlist: len(self.playlists.get_playlist(
-                        playlist, player.playlist)["entries"]),
+                    lambda playlist: len(self.playlists.get_playlist(playlist, player.playlist)["entries"]),
                     True
                 ),
                 "author": (
-                    lambda playlist: self.get_global_user(
-                        self.playlists.get_playlist(playlist, player.playlist)["author"]).name,
+                    lambda playlist: self.get_global_user(self.playlists.get_playlist(playlist, player.playlist)["author"]).name,
                     False
                 ),
                 "random": None,
                 "playtime": (
-                    lambda playlist: sum([x.duration for x in self.playlists.get_playlist(
-                        playlist, player.playlist)["entries"]]),
+                    lambda playlist: sum([x.duration for x in self.playlists.get_playlist(playlist, player.playlist)["entries"]]),
                     True
                 ),
                 "replays": (
-                    lambda playlist: self.playlists.get_playlist(
-                        playlist, player.playlist)["replay_count"],
+                    lambda playlist: self.playlists.get_playlist(playlist, player.playlist)["replay_count"],
                     True
                 )
             ***REMOVED***
@@ -288,11 +284,11 @@ class PlaylistCommands:
                 1].lower() in sort_modes.keys() else "replays"
 
             if sort_mode == "random":
-                sorted_saved_playlists = self.playlists.saved_playlists
+                sorted_saved_playlists = list(self.playlists.playlists.keys())
                 shuffle(sorted_saved_playlists)
             else:
                 sorted_saved_playlists = sorted(
-                    self.playlists.saved_playlists,
+                    self.playlists.playlists,
                     key=sort_modes[sort_mode][0],
                     reverse=sort_modes[sort_mode][1])
 
@@ -324,7 +320,7 @@ class PlaylistCommands:
                                                    player, savename)
             return response
 
-        elif argument in self.playlists.saved_playlists:
+        elif argument in self.playlists.playlists.keys():
             infos = self.playlists.get_playlist(argument.lower(),
                                                 player.playlist)
             entries = infos["entries"]
@@ -392,7 +388,7 @@ class PlaylistCommands:
     async def playlist_builder(self, channel, author, server, player, _savename):
         new_playlist = False
 
-        if _savename not in self.playlists.saved_playlists:
+        if _savename not in self.playlists.playlists.keys():
             new_playlist = True
             self.playlists.set_playlist([], _savename, author.id)
 
@@ -631,7 +627,7 @@ class PlaylistCommands:
             elif split_message[0].lower() == "rename":
                 if arguments is not None and len(
                         arguments[0]
-                ) >= 3 and arguments[0] not in self.playlists.saved_playlists:
+                ) >= 3 and arguments[0] not in self.playlists.playlists.keys():
                     pl_changes["new_name"] = re.sub("\W", "",
                                                     arguments[0].lower())
                     user_savename = pl_changes["new_name"]
@@ -1126,7 +1122,7 @@ class PlaylistCommands:
                 except:
                     pass  # just go ahead and add the whole thing, what do I care :3
 
-        if playlistname not in self.playlists.saved_playlists:
+        if playlistname not in self.playlists.playlists.keys():
             if len(playlistname) < 3:
                 return Response(
                     "Your name is too short. Please choose one with at least three letters."
@@ -1198,7 +1194,7 @@ class PlaylistCommands:
             current_timestamp = remove_entry.current_sub_entry["name"]
             remove_entry = await player.playlist.get_entry_from_query(current_timestamp, channel=channel, author=author)
 
-        if playlistname not in self.playlists.saved_playlists:
+        if playlistname not in self.playlists.playlists.keys():
             return Response("There's no playlist `***REMOVED******REMOVED***`.".format(playlistname.title()))
 
         self.playlists.edit_playlist(
@@ -1233,7 +1229,7 @@ class PlaylistCommands:
             "_".join(leftover_args) or entry.meta.get("playlist", ***REMOVED******REMOVED***).get("name", None) or ""
         ).lower().strip()
 
-        if playlistname not in self.playlists.saved_playlists:
+        if playlistname not in self.playlists.playlists.keys():
             playlistname = None
 
         new_entry = await self.entry_manipulator(player, channel, author, playlistname, entry)
