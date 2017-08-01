@@ -45,7 +45,8 @@ class PlaylistCommands:
         "4.2.0": (1500889194, "Entry Manipulator switched to GieselaEntry instead of fake SpotifyEntries"),
         "4.2.4": (1500960131, "Fixed display of broken playlists"),
         "4.3.5": (1501249495, "Displaying the type of entry using colour-coding and fixed search indices"),
-        "4.4.0": (1501361106, "Finally showing changed entries in changelog isn't bugged anymore.")
+        "4.4.0": (1501361106, "Finally showing changed entries in changelog isn't bugged anymore."),
+        "4.4.5": (1501627577, "Updated GPL file-storing System")
     ***REMOVED***)
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
@@ -456,7 +457,6 @@ class PlaylistCommands:
             "remove_entries": [],       # used for changelog
             "added_entries": [],        # changelog
             "changed_entries": set(),   # changelog
-            "order": None,              # changelog
             "new_name": None,
             "new_desc": None,
             "new_cover": None
@@ -470,7 +470,6 @@ class PlaylistCommands:
             "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)",
             "",
             "**Extra functions:**",
-            "`sort <alphabetical | length | random>`: sort the playlist (default is alphabetical)",
             "`removeduplicates`: remove all duplicates from the playlist",
             "`description <text>`: describe this playlist",
             "`cover [url]`: set the cover for this playlist (you may upload an image via Discord)",
@@ -506,6 +505,7 @@ class PlaylistCommands:
                     await self.safe_delete_message(info)
 
         while (not abort) and (not save):
+            playlist["entries"] = sorted(playlist["entries"], key=lambda entry: entry.title)
             entries = playlist["entries"]
             entries_text = ""
 
@@ -623,7 +623,6 @@ class PlaylistCommands:
                         pl_changes["changed_entries"].add((index, new_entry))
 
                     playlist["entries"].insert(index, new_entry)
-
             elif split_message[0].lower() == "rename":
                 if arguments is not None and len(
                         arguments[0]
@@ -631,7 +630,6 @@ class PlaylistCommands:
                     pl_changes["new_name"] = re.sub("\W", "",
                                                     arguments[0].lower())
                     user_savename = pl_changes["new_name"]
-
             elif split_message[0].lower() == "search":
                 if not arguments:
                     msg = await self.safe_send_message(channel, "Please provide a query to search for!")
@@ -645,7 +643,7 @@ class PlaylistCommands:
 
                 if not results:
                     msg = await self.safe_send_message(channel, "**Didn't find anything**")
-                    asyncio.sleep(4)
+                    await asyncio.sleep(4)
                     await self.safe_delete_message(msg)
                     continue
 
@@ -666,12 +664,10 @@ class PlaylistCommands:
                 await self.safe_delete_message(msg)
 
                 continue
-
             elif split_message[0].lower() == "extras":
-
                 def extras_check(m):
                     return (m.content.split()[0].lower() in [
-                        "abort", "sort", "removeduplicates", "rebuild", "cover", "description"
+                        "abort", "removeduplicates", "rebuild", "cover", "description"
                     ])
 
                 extras_message = await self.safe_send_message(
@@ -690,25 +686,7 @@ class PlaylistCommands:
                     cmd = _cmd[0].lower()
                     args = _cmd[1:] if len(_cmd) > 1 else None
 
-                    if cmd == "sort":
-                        sort_method = args[0].lower() if args is not None and args[0].lower() in [
-                            "alphabetical", "length", "random"] else "alphabetical"
-
-                        if sort_method == "alphabetical":
-                            playlist["entries"] = sorted(
-                                entries, key=lambda entry: entry.title)
-                        elif sort_method == "length":
-                            playlist["entries"] = sorted(
-                                entries, key=lambda entry: entry.duration)
-                        elif sort_method == "random":
-                            new_ordered = entries
-                            shuffle(new_ordered)
-                            playlist["entries"] = new_ordered
-
-                        # bodge for changelog
-                        pl_changes["order"] = sort_method
-
-                    elif cmd == "removeduplicates":
+                    if cmd == "removeduplicates":
                         urls = []
                         new_list = []
                         for entry in entries:
@@ -762,10 +740,8 @@ class PlaylistCommands:
                 await self.safe_delete_message(resp)
                 await self.safe_delete_message(response_message)
                 continue
-
             elif split_message[0].lower() == "p":
                 entries_page = (entries_page - 1) % (iterations + 1)
-
             elif split_message[0].lower() == "n":
                 entries_page = (entries_page + 1) % (iterations + 1)
 
@@ -781,7 +757,7 @@ class PlaylistCommands:
             print("Closed the playlist builder")
 
         if save:
-            if any((pl_changes["added_entries"], pl_changes["remove_entries"], pl_changes["new_name"], pl_changes["order"], pl_changes["new_desc"], pl_changes["new_cover"], pl_changes["changed_entries"])):
+            if any((pl_changes["added_entries"], pl_changes["remove_entries"], pl_changes["new_name"], pl_changes["new_desc"], pl_changes["new_cover"], pl_changes["changed_entries"])):
                 c_log = "**CHANGES**\n\n"
                 if pl_changes["added_entries"]:
                     new_entries_string = "\n".join(["    `***REMOVED******REMOVED***.` ***REMOVED******REMOVED***".format(ind, nice_cut(
@@ -798,9 +774,6 @@ class PlaylistCommands:
 
                     c_log += "**Edited entries**\n***REMOVED******REMOVED***\n".format(
                         changed_entries_string)
-                if pl_changes["order"]:
-                    c_log += "**Changed order**\n    To `***REMOVED******REMOVED***`\n".format(
-                        pl_changes["order"])
                 if pl_changes["new_name"]:
                     c_log += "**Renamed playlist**\n    From `***REMOVED******REMOVED***` to `***REMOVED******REMOVED***`\n".format(
                         savename.title(), pl_changes["new_name"].title())
