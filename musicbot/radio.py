@@ -62,7 +62,7 @@ class RadioStations:
                 station) for station in data["stations"]]
             _initialised = True
 
-    def get_random_station(self):
+    def get_random_station():
         RadioStations.init()
         station = choice(RadioStations.stations)
         return station
