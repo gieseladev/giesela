@@ -99,7 +99,7 @@
 		***REMOVED***,
 		"song_title": "Wake up!",
 		"artist": "AAA",
-		"artist_image": "https://i.scdn.co/image/413325308ca57070cce8a075701dc520e8fc0792",
+		"artist_image": "https://i.scdn.co/image/06d1d22256913bb40a731d6b51366ced2bfa0572",
 		"cover": "https://i.scdn.co/image/1464b7e94d9948d27c27f5f7ac604cb1eb00d1fc",
 		"album": "GOLD SYMPHONY",
 		"spotify_data": ***REMOVED***
@@ -229,6 +229,58 @@
 	***REMOVED***
 		"version": 103,
 		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-SXqdT5kOIAw-We_re_the_Stars_-_Fairy_Tail_ENDING_14_FULL_+_LYRICS.webm",
+		"video_id": "SXqdT5kOIAw",
+		"url": "https://www.youtube.com/watch?v=SXqdT5kOIAw",
+		"title": "We're the Stars",
+		"duration": 257,
+		"thumbnail": "https://i.ytimg.com/vi/SXqdT5kOIAw/maxresdefault.jpg",
+		"description": "I DO NOT OWN ANYTHING!!! EVERYTHING BELONGS TO ITS RIGHTFUL OWNERS!!! PLEASE DO NOT COPYRIGHT!!! This content also belongs to PONYCANYON! Nothing belongs to me!\n\nAnime(s): Fairy Tail\n\nSong(s): We're the Stars - Ending 14 FULL\n\nArtist(s): Aimi Terakawa\n\nAs I said: I do not own anything!!! Everything belongs to its rightful owners!!! Please do not copyright!!! Okay YouTube!? I've uploaded this video before and I had it on YouTube for over a year and I had the same description and I had gotten over 180,000 veiws! It was my most popular video until one day out of the blue, YouTube deleted it. I was so mad. I was pissed off. Anyways, you'd better read this YouTube! I hope I get as many views as before. I finally found the file and decided to add more obvious information on how I do not own this! I really don't own this!!!",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 5
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "We're the Stars",
+		"artist": "Aimi Terakawa",
+		"artist_image": "http://i.imgur.com/Vxn7YLf.jpg",
+		"cover": "http://i.imgur.com/54bkrJo.jpg",
+		"album": "Fairy Tail"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-CdSE1loNwmo-Sidonia_no_Kishi_-_Daikyuu_Wakusei_Seneki_OP_Opening.webm",
+		"video_id": "CdSE1loNwmo",
+		"url": "https://www.youtube.com/watch?v=CdSE1loNwmo",
+		"title": "Kishi Shinkoukyoku",
+		"duration": 93,
+		"thumbnail": "https://i.ytimg.com/vi/CdSE1loNwmo/maxresdefault.jpg",
+		"description": "Sidonia no Kishi: Daikyuu Wakusei Seneki Opening\nKnights of Sidonia 2nd Season Opening",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 6
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Kishi Shinkoukyoku",
+		"artist": "Angela",
+		"artist_image": "http://i.imgur.com/sFG6w3f.png",
+		"cover": "http://i.imgur.com/SgoYlRj.jpg",
+		"album": "Sidonia No Kishi"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-51LMOJu9lwc-Knights_of_sidonia_intro_opening.webm",
 		"video_id": "51LMOJu9lwc",
 		"url": "https://www.youtube.com/watch?v=51LMOJu9lwc",
@@ -242,7 +294,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 5
+					"index": 7
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -273,13 +325,13 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 6
+					"index": 8
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
 		"song_title": "Evangelion X",
 		"artist": "Anonymuz",
-		"artist_image": "https://i.scdn.co/image/1b3691a2516c98bf7337a2c3ff5635cc1367f1b8",
+		"artist_image": "https://i.scdn.co/image/877451a1921eadcfc7feec8bca8baf3454cfc629",
 		"cover": "https://i.scdn.co/image/aeaa17f240d4a39d01b52f3fc711469690a5bcd4",
 		"album": "Evangelion X",
 		"spotify_data": ***REMOVED***
@@ -390,7 +442,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 7
+					"index": 9
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -399,6 +451,32 @@
 		"artist_image": "http://i.imgur.com/I3up3Up.jpg",
 		"cover": "http://i.imgur.com/fw8F3Pi.jpg",
 		"album": "Charlotte"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Y9G20wV0KHE-Boku_Dake_ga_Inai_Machi_OP_Opening_-Re.webm",
+		"video_id": "Y9G20wV0KHE",
+		"url": "https://www.youtube.com/watch?v=Y9G20wV0KHE",
+		"title": "Re:Re:",
+		"duration": 90,
+		"thumbnail": "http://i.imgur.com/bITRCFD.png",
+		"description": "Boku Dake ga Inai Machi Opening :Re\n\"This video is for entertainment purposes and is non profit\"\n------------------------------------------------------------------------------------------------------------------------------------------\nIts use is only for purposes of illustrative and informative, without infringing intellectual property.\nBoku Dake ga Inai Machi Opening Official\nBoku Dake ga Inai Machi OP (HD)",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 10
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Re:Re:",
+		"artist": "Asian Kung-Fu Generation",
+		"artist_image": "http://i.imgur.com/4i4Wh6I.png",
+		"cover": "http://i.imgur.com/vcuKpcg.jpg",
+		"album": "Erased"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -416,7 +494,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 8
+					"index": 11
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -442,7 +520,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 9
+					"index": 12
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -468,7 +546,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 10
+					"index": 13
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -494,7 +572,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 11
+					"index": 14
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -520,7 +598,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 12
+					"index": 15
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -529,6 +607,32 @@
 		"artist_image": "http://i.imgur.com/zi80YvR.jpg",
 		"cover": "http://i.imgur.com/CXUiyol.jpg",
 		"album": "One Piece"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-watQgRTHDhs-Fairy_Tail_2014_Opening_16_Strike_Back_Lyrics_+english_lyrics.webm",
+		"video_id": "watQgRTHDhs",
+		"url": "https://www.youtube.com/watch?v=watQgRTHDhs",
+		"title": "Strike Back",
+		"duration": 229,
+		"thumbnail": "http://i.imgur.com/rj4jUkQ.png",
+		"description": "ENGLISH TRANSLATION:\n(STRIKE BACK)\nThere might not be a chance to change the course (of events)\nbut if there is even just a 1% chance, off course we're gonna take it, right?\nAfter all, getting hit by \"fate\", no I won't!\nWe'll overturn it, because I mean, getting to see the future with you wouldn't it be the best?\n\nBring it on! cuz I\u2019m just gonna grow up in the battle HEY!!\nI'll overtake this cloudy sky!\nStill burning my fire. Thunder cuts through the sky\nI gotta erase this nightmare, I just wanna see the future!\nIn the past, the future, and in the present in which we are living,\nI ain't scared of my past and now for the tomorrow I've been entrusted\nScreaming out for my pride!!\n\nI don't want to see tears, so I'll keep screaming! Always...\n(I've never falling down! Destiny blows a wind that pushes me!)\nThe one relying on me, I want to protect this smile! Always...\n(I gotta blast off your pain for you and me! Don't grieve, rest in peace!)\nAs many times it takes....\n\nEven while striking the wall, at the edge of my mind I'm thinking \"It's too painful\"\nbut not matter what % it is, I won't turn back\nAll I know is that a rain of reasons began to pour!\nI won't hesitate because the dreams we want to reach are in the future!\n\nClad in daybreak, it's time for the counterattack. Soldiers follow me now.\nDon't you ever stop! We pay it back in spades right!\nPlay back that perverse feeling! To live without griefs, this is the moment\nStruggle, sorrow, They'll disappear like bubbles but\nthe candles inside everyone will never extinguish!\nScreaming out for your pride!!\n\nLet our hearts burn, shining on forever...\n(Nobody can blow out my fire, it's inextinguishable! We'll overcome this gray world!)\nNever hesitating, never loosing our way...\n(Don't blind your eyes, if you're lost on the way!\nIt doesn't matter, I'm gonna be your light!)\nSo take my hands!!\n\n(Hey, whatever we're living for?\nI live for this shit)\n\nWe gotta stand up and go with the pride\nIt's like the sun rising way over the clouds\nWe gotta stand up and go with the pride\nIt's like the sun rising way over the clouds\n\nI don't want to see tears, so I'll keep screaming! Always...\n(I've never falling down! Destiny blows a wind that pushes me!)\nThe one relying on me, I want to protect this smile! Always...\n(I gotta blast off your pain for you and me! Don't grieve, rest in peace!)\n\nLet our hearts burn, shining on forever...\n(Nobody can blow out my fire, it's inextinguishable! We'll overcome this gray world!)\nNever hesitating, never loosing our way...\n(Don't blind your eyes, if you're lost on the way!\nIt doesn't matter, I'm gonna be your light!)\nSo take my hands!!",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 16
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Strike Back",
+		"artist": "Back-On",
+		"artist_image": "http://i.imgur.com/Pj4yK3K.jpg",
+		"cover": "http://i.imgur.com/vfZtfoM.jpg",
+		"album": "Fairy Tail"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -546,7 +650,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 13
+					"index": 17
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -558,71 +662,29 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-Od9NQbyNpwE-Boku_Dake_Ga_Inai_Machi_Ending.webm",
-		"video_id": "Od9NQbyNpwE",
-		"url": "https://www.youtube.com/watch?v=Od9NQbyNpwE",
-		"title": "Boku Dake Ga Inai Machi Ending",
-		"duration": 90,
-		"thumbnail": "https://i.ytimg.com/vi/Od9NQbyNpwE/maxresdefault.jpg",
-		"description": "ERASED ED1\n\"Sore wa Chiisana Hikari no Youna (\u305d\u308c\u306f\u5c0f\u3055\u306a\u5149\u306e\u3088\u3046\u306a)\" by Sayuri",
-		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 14
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-Y9G20wV0KHE-Boku_Dake_ga_Inai_Machi_OP_Opening_-Re.webm",
-		"video_id": "Y9G20wV0KHE",
-		"url": "https://www.youtube.com/watch?v=Y9G20wV0KHE",
-		"title": "Boku Dake ga Inai Machi OP / Opening :Re",
-		"duration": 90,
-		"thumbnail": "https://i.ytimg.com/vi/Y9G20wV0KHE/maxresdefault.jpg",
-		"description": "Boku Dake ga Inai Machi Opening :Re\n\"This video is for entertainment purposes and is non profit\"\n------------------------------------------------------------------------------------------------------------------------------------------\nIts use is only for purposes of illustrative and informative, without infringing intellectual property.\nBoku Dake ga Inai Machi Opening Official\nBoku Dake ga Inai Machi OP (HD)",
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-galehoexbCU-Boku_no_hero_academia_ED_Full_HEROES.webm",
+		"video_id": "galehoexbCU",
+		"url": "https://www.youtube.com/watch?v=galehoexbCU",
+		"title": "Heroes",
+		"duration": 182,
+		"thumbnail": "https://i.ytimg.com/vi/galehoexbCU/maxresdefault.jpg",
+		"description": "YOU CAN BE A HERO",
 		"meta": ***REMOVED***
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 15
+					"index": 18
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-wFGHIaqPbNM-Boku_no_Hero_Academia_OP_FULL.webm",
-		"video_id": "wFGHIaqPbNM",
-		"url": "https://www.youtube.com/watch?v=wFGHIaqPbNM",
-		"title": "Boku no Hero Academia \u50d5\u306e\u30d2\u30fc\u30ed\u30fc\u30a2\u30ab\u30c7\u30df\u30a2 OP FULL",
-		"duration": 239,
-		"thumbnail": "https://i.ytimg.com/vi/wFGHIaqPbNM/maxresdefault.jpg",
-		"description": "",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 16
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Heroes",
+		"artist": "Brian the Sun",
+		"artist_image": "http://i.imgur.com/CpYspUV.jpg",
+		"cover": "http://i.imgur.com/lYNquoU.jpg",
+		"album": "Boku No Hero Academia"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -640,7 +702,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 17
+					"index": 19
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -666,13 +728,13 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 18
+					"index": 20
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
 		"song_title": "Fairy Tail ~Yakusoku No Hi~",
 		"artist": "Chihiro Yonekura",
-		"artist_image": "https://i.scdn.co/image/b6574782c2dab72ecb6d36063084466932b994cc",
+		"artist_image": "https://i.scdn.co/image/78f4b3437508746408616c77f7e47937d70aeb50",
 		"cover": "https://i.scdn.co/image/f31169ee90b3fbf1137107137e65ebcb84736013",
 		"album": "Tv Anime \"Fairy Tail\" Op & Ed Theme Songs Vol. 3",
 		"spotify_data": ***REMOVED***
@@ -763,7 +825,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 19
+					"index": 21
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -772,27 +834,6 @@
 		"artist_image": "http://i.imgur.com/TdlnlLj.jpg",
 		"cover": "http://i.imgur.com/AifwLv1.jpg",
 		"album": "Attack on Titan"
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-osKkMKolWQ8-Code_Geass_R2_textless_Opening_2_Worlds_End_RAW_HD.webm",
-		"video_id": "osKkMKolWQ8",
-		"url": "https://www.youtube.com/watch?v=osKkMKolWQ8",
-		"title": "Code Geass R2 textless Opening 2 Worlds End (RAW) HD",
-		"duration": 91,
-		"thumbnail": "https://i.ytimg.com/vi/osKkMKolWQ8/maxresdefault.jpg",
-		"description": "I got the video from  http://www.animextremist.com/downloads.htm#b",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 20
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -810,7 +851,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 21
+					"index": 22
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -822,29 +863,29 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
-		"type": "YoutubeEntry",
+		"type": "GieselaEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-mTCESSzPZSw-Eir_Aoi_-_Ignite.webm",
 		"video_id": "mTCESSzPZSw",
 		"url": "https://www.youtube.com/watch?v=mTCESSzPZSw",
-		"title": "Eir Aoi - Ignite",
+		"title": "Ignite",
 		"duration": 247,
-		"thumbnail": "https://i.ytimg.com/vi/mTCESSzPZSw/maxresdefault.jpg",
+		"thumbnail": "http://i.imgur.com/yQQqkzh.jpg",
 		"description": "Music video by Eir Aoi performing Ignite. (C) 2014 SME Records",
 		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 22
+					"index": 23
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Ignite",
+		"artist": "Eir Aoi",
+		"artist_image": "http://i.imgur.com/Orj1iGC.jpg",
+		"cover": "http://i.imgur.com/Q2JTfwa.jpg",
+		"album": "Sword Art Online"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -862,7 +903,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 23
+					"index": 24
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -871,90 +912,6 @@
 		"artist_image": "http://i.imgur.com/pmF9oEn.jpg",
 		"cover": "http://i.imgur.com/j7kK6qq.jpg",
 		"album": "Code Geass"
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-_SPLrkQTGPk-Fairy_Tail_-_Fairy_Tail_s_is_Born_New_2016_Ost.m4a",
-		"video_id": "_SPLrkQTGPk",
-		"url": "https://www.youtube.com/watch?v=_SPLrkQTGPk",
-		"title": "Fairy Tail - Fairy Tail's is Born [New 2016 Ost]",
-		"duration": 138,
-		"thumbnail": "https://i.ytimg.com/vi/_SPLrkQTGPk/maxresdefault.jpg",
-		"description": "Fairy tail Sound Collection Volume 2\nBy Yasuharu Takanashi ~ I dont own anything, all rights belong to their respective owners. ~",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 24
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-RqxmFkmEoZQ-Fairy_Tail_-_Kizuna.webm",
-		"video_id": "RqxmFkmEoZQ",
-		"url": "https://www.youtube.com/watch?v=RqxmFkmEoZQ",
-		"title": "Fairy Tail - Kizuna",
-		"duration": 154,
-		"thumbnail": "https://i.ytimg.com/vi/RqxmFkmEoZQ/maxresdefault.jpg",
-		"description": "All right to their respective owners, I myself own nothing.    Enjoy",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 25
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-watQgRTHDhs-Fairy_Tail_2014_Opening_16_Strike_Back_Lyrics_+english_lyrics.webm",
-		"video_id": "watQgRTHDhs",
-		"url": "https://www.youtube.com/watch?v=watQgRTHDhs",
-		"title": "Fairy Tail 2014 Opening 16 Strike Back Lyrics (+english lyrics)",
-		"duration": 229,
-		"thumbnail": "https://i.ytimg.com/vi/watQgRTHDhs/hqdefault.jpg",
-		"description": "ENGLISH TRANSLATION:\n(STRIKE BACK)\nThere might not be a chance to change the course (of events)\nbut if there is even just a 1% chance, off course we're gonna take it, right?\nAfter all, getting hit by \"fate\", no I won't!\nWe'll overturn it, because I mean, getting to see the future with you wouldn't it be the best?\n\nBring it on! cuz I\u2019m just gonna grow up in the battle HEY!!\nI'll overtake this cloudy sky!\nStill burning my fire. Thunder cuts through the sky\nI gotta erase this nightmare, I just wanna see the future!\nIn the past, the future, and in the present in which we are living,\nI ain't scared of my past and now for the tomorrow I've been entrusted\nScreaming out for my pride!!\n\nI don't want to see tears, so I'll keep screaming! Always...\n(I've never falling down! Destiny blows a wind that pushes me!)\nThe one relying on me, I want to protect this smile! Always...\n(I gotta blast off your pain for you and me! Don't grieve, rest in peace!)\nAs many times it takes....\n\nEven while striking the wall, at the edge of my mind I'm thinking \"It's too painful\"\nbut not matter what % it is, I won't turn back\nAll I know is that a rain of reasons began to pour!\nI won't hesitate because the dreams we want to reach are in the future!\n\nClad in daybreak, it's time for the counterattack. Soldiers follow me now.\nDon't you ever stop! We pay it back in spades right!\nPlay back that perverse feeling! To live without griefs, this is the moment\nStruggle, sorrow, They'll disappear like bubbles but\nthe candles inside everyone will never extinguish!\nScreaming out for your pride!!\n\nLet our hearts burn, shining on forever...\n(Nobody can blow out my fire, it's inextinguishable! We'll overcome this gray world!)\nNever hesitating, never loosing our way...\n(Don't blind your eyes, if you're lost on the way!\nIt doesn't matter, I'm gonna be your light!)\nSo take my hands!!\n\n(Hey, whatever we're living for?\nI live for this shit)\n\nWe gotta stand up and go with the pride\nIt's like the sun rising way over the clouds\nWe gotta stand up and go with the pride\nIt's like the sun rising way over the clouds\n\nI don't want to see tears, so I'll keep screaming! Always...\n(I've never falling down! Destiny blows a wind that pushes me!)\nThe one relying on me, I want to protect this smile! Always...\n(I gotta blast off your pain for you and me! Don't grieve, rest in peace!)\n\nLet our hearts burn, shining on forever...\n(Nobody can blow out my fire, it's inextinguishable! We'll overcome this gray world!)\nNever hesitating, never loosing our way...\n(Don't blind your eyes, if you're lost on the way!\nIt doesn't matter, I'm gonna be your light!)\nSo take my hands!!",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 26
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-ZKCCs9DNEJs-Fate_stay_night_-_Kishi_Ou_no_Hokori_-_OST.webm",
-		"video_id": "ZKCCs9DNEJs",
-		"url": "https://www.youtube.com/watch?v=ZKCCs9DNEJs",
-		"title": "Fate/stay night - Kishi Ou no Hokori [\u30d5\u30a7\u30a4\u30c8/\u30b9\u30c6\u30a4\u30ca\u30a4\u30c8 - OST]",
-		"duration": 143,
-		"thumbnail": "https://i.ytimg.com/vi/ZKCCs9DNEJs/maxresdefault.jpg",
-		"description": "Music by Fate/stay night\ncomposed by Kawai Kenji\n\n\nAnime: Fate/stay night (2006)\n\n_\n\nPicture by tlb12121\nhttp://tlb12121.deviantart.com/art/saber-313331274\n_\n\nMy Facebook & Google+ :\n\nFacebook: http://goo.gl/CCWh8W\nGoogle+: http://goo.gl/XGvgpJ\n\nPandora Journey II : http://goo.gl/vWXrNr\nPandora Heaven (Anime Soundtracks): http://goo.gl/kVuqoR\n_\n\nCopyright Info:\n\nBe aware this channel is only for promotion purpose.\nAll music belongs to the original creators.\n\nFeel free to contact me if anything is wrong:\n\n- Request to remove a video\n- adding any kind of information which belongs to the video (audio OR visual - Illustrator, Composer, Publisher, purchase-links ..)\n_",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 27
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -972,7 +929,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 28
+					"index": 25
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -984,24 +941,29 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-2uq34TeWEdQ-Fullmetal_Alchemist_Brotherhood_Opening_1-Again_creditless.webm",
-		"video_id": "2uq34TeWEdQ",
-		"url": "https://www.youtube.com/watch?v=2uq34TeWEdQ",
-		"title": "Fullmetal Alchemist Brotherhood Opening 1-Again creditless",
-		"duration": 90,
-		"thumbnail": "https://i.ytimg.com/vi/2uq34TeWEdQ/maxresdefault.jpg",
-		"description": "I do not own anything.  Hopefully Youtube won't take it down.\nFullMetal Alchemist. Enjoy",
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-osKkMKolWQ8-Code_Geass_R2_textless_Opening_2_Worlds_End_RAW_HD.webm",
+		"video_id": "osKkMKolWQ8",
+		"url": "https://www.youtube.com/watch?v=osKkMKolWQ8",
+		"title": "Worlds End",
+		"duration": 91,
+		"thumbnail": "http://i.imgur.com/heOkLia.jpg",
+		"description": "I got the video from  http://www.animextremist.com/downloads.htm#b",
 		"meta": ***REMOVED***
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 29
+					"index": 26
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Worlds End",
+		"artist": "Flow",
+		"artist_image": "http://i.imgur.com/kPgnmCn.jpg",
+		"cover": "http://i.imgur.com/MPQrWha.jpg",
+		"album": "Code Geass"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -1019,7 +981,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 30
+					"index": 27
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1028,53 +990,6 @@
 		"artist_image": "http://i.imgur.com/Xmz23Ca.jpg",
 		"cover": "http://i.imgur.com/FV8tyVY.jpg",
 		"album": "Fairy Tail"
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-xUOZjeDbRbM-Fuwa_Fuwa_Time_Mio_version_YouTube.webm",
-		"video_id": "xUOZjeDbRbM",
-		"url": "https://www.youtube.com/watch?v=xUOZjeDbRbM",
-		"title": "Fuwa Fuwa Time Mio version)  YouTube",
-		"duration": 235,
-		"thumbnail": "https://i.ytimg.com/vi/xUOZjeDbRbM/hqdefault.jpg",
-		"description": "\u0e40\u0e2d\u0e32\u0e02\u0e2d\u0e07\u0e40\u0e02\u0e32\u0e21\u0e32\u0e19\u0e30\u0e04\u0e23\u0e31\u0e1a........\u0e1f\u0e31\u0e07\u0e40\u0e25\u0e22\u0e2d\u0e22\u0e48\u0e32\u0e0b\u0e19\u0e40\u0e25\u0e22\u0e19\u0e30 ^_^\nHe took her on it ........ I do not really naughty ^ _ ^.",
-		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 31
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-PxZov8-DBHo-Greatest_Battle_Music_OF_All_Times_-_Rule_The_Battlefield.webm",
-		"video_id": "PxZov8-DBHo",
-		"url": "https://www.youtube.com/watch?v=PxZov8-DBHo",
-		"title": "Greatest Battle Music OF All Times: Rule The Battlefield",
-		"duration": 196,
-		"thumbnail": "https://i.ytimg.com/vi/PxZov8-DBHo/maxresdefault.jpg",
-		"description": "From: Fate/Zero Original Soundtrack I\nArtist: Yuki Kajiura\nYear: 2011\n\nAll music and images belong to their rightful owners. I do not own any of the music, images, or clips used in any of my videos. Absolutely no copyright infringement intended.",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 32
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -1092,7 +1007,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 33
+					"index": 28
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1118,13 +1033,13 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 34
+					"index": 29
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
 		"song_title": "Kono Te Nobashite",
 		"artist": "HI-FI CAMP",
-		"artist_image": "https://i.scdn.co/image/db1b76b74165ac3ba3de1518691e841c764c7516",
+		"artist_image": "https://i.scdn.co/image/d663d76d569bc13de990ad6dbc679ef686996a82",
 		"cover": "https://i.scdn.co/image/ec6f07c5c3204a6f151d318b0e167448249b5213",
 		"album": "Tv Anime \"Fairy Tail\" Op & Ed Theme Songs Vol. 2 (Standard Edition)",
 		"spotify_data": ***REMOVED***
@@ -1215,7 +1130,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 35
+					"index": 30
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1224,6 +1139,32 @@
 		"artist_image": "http://i.imgur.com/jN6pZrg.jpg",
 		"cover": "http://i.imgur.com/lmBGLmr.jpg",
 		"album": "Sword Art Online"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-ZyyuV-gkavg-Noragami_Opening_-_Hello_Sleepwalkers_HD_+_Lyrics.webm",
+		"video_id": "ZyyuV-gkavg",
+		"url": "https://www.youtube.com/watch?v=ZyyuV-gkavg",
+		"title": "Overnight Appointment",
+		"duration": 173,
+		"thumbnail": "https://i.ytimg.com/vi/ZyyuV-gkavg/maxresdefault.jpg",
+		"description": "Noragami Opening\nAnim\u00e9 : Noragami\nMusic : Hello Sleepwalkers - Goya no Machiawase\n\nEnjoy :)\n\n10k 06/04/14 Thank you !!!\n20k 20/04/14 :)\n400k :D 03/01/15\n+10M",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 31
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Overnight Appointment",
+		"artist": "Hello Sleepwalkers",
+		"artist_image": "http://i.imgur.com/SEAzrjR.jpg",
+		"cover": "http://i.imgur.com/R3Wf3mE.jpg",
+		"album": "Noragami"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -1241,7 +1182,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 36
+					"index": 32
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1267,13 +1208,13 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 37
+					"index": 33
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
 		"song_title": "Vogel Im Kafig",
 		"artist": "Hiroyuki Sawano & Cyua",
-		"artist_image": "https://i.scdn.co/image/3c1c1781de0c5974226bfae4e5cf649cf93b9d37",
+		"artist_image": "https://i.scdn.co/image/e4a4cf38f9c3aeda3c2fa65cde0a81222e492c41",
 		"cover": "https://i.scdn.co/image/3f3abb6325d6b7acefe4beca1ff8110625398813",
 		"album": "Attack on Titan (Original Soundtrack)",
 		"spotify_data": ***REMOVED***
@@ -1415,13 +1356,13 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 38
+					"index": 34
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
 		"song_title": "The Reluctant Heroes",
 		"artist": "Hiroyuki Sawano & MPI",
-		"artist_image": "https://i.scdn.co/image/e4a4cf38f9c3aeda3c2fa65cde0a81222e492c41",
+		"artist_image": "https://i.scdn.co/image/1d4eaf6713b68d024af77f75341844fa614ac640",
 		"cover": "https://i.scdn.co/image/3f3abb6325d6b7acefe4beca1ff8110625398813",
 		"album": "Attack on Titan (Original Soundtrack)",
 		"spotify_data": ***REMOVED***
@@ -1545,7 +1486,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 39
+					"index": 35
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1571,7 +1512,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 40
+					"index": 36
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1597,7 +1538,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 41
+					"index": 37
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1623,7 +1564,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 42
+					"index": 38
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1632,6 +1573,32 @@
 		"artist_image": "http://i.imgur.com/e5imRTl.jpg",
 		"cover": "http://i.imgur.com/X1NLCor.jpg",
 		"album": "Guilty Crown"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-XHViAiVuDsA-Code_Geass_-_Continued_Story.webm",
+		"video_id": "XHViAiVuDsA",
+		"url": "https://www.youtube.com/watch?v=XHViAiVuDsA",
+		"title": "Continued Story",
+		"duration": 313,
+		"thumbnail": "http://i.imgur.com/RgOGRyh.jpg",
+		"description": "Title : Continued Story\nSinger : Hitomi Kuroishi\nAnime : Code Geass R2\nType : Anime Insert Song\nWhere : Ending of Code Geass R2 Episode 25\n\nRelated Songs\nMasquerade\nhttp://www.youtube.com/watch?v=hYGH3_lHZO4\n\nStories\nhttp://www.youtube.com/watch?v=HCbmwcqA66g\n\nSensibility\nhttp://www.youtube.com/watch?v=kMxqzii-_P8\n\nBoku wa, Tori ni Naru\nhttp://www.youtube.com/watch?v=j5FsacVvKRY\n\nLyric\nSono hitotsubu no shizuku de sae mo\nHana o mamoru kamo shirenai\nSono waraigao tada sore dake de\nSashinoberu te ni mo nareru\n\nSono furueteru koe atsumereba\nKaze o okosu kamo shirenai\nSono inochi to iu hakanaki akari\nTomoshite ashi o susumeyou\n\nItsuka mata aou\nIkiteru kagiri\n\nToki o koe toraerareteru\nAfureru kono omoi wa nani?\nYasashisa ga mejiri ni niau\nAno hito-tachi wa ima doko ni iru no?\n\nTonari ni wa atarashii seki\nMirai no tame ni mata deau\nKazaranai mama dekiru dake\nIkite miyou kyou to iu hi\n\nKanashikute hito wa setsunai\nSore de mo doko made mo michi wa tsuzuku\n\nItsuka mata aou\nIkiteru kagiri\nKaze ga hakobu mono\nAsu o hiraku merodi\n\nItsuka mata aou\nIkiteru kagiri\nKaze ga hakobu mono\nAsu o hiraku merodi",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 39
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Continued Story",
+		"artist": "Hitomi Kuroishi",
+		"artist_image": "http://i.imgur.com/PvOX2Z8.jpg",
+		"cover": "http://i.imgur.com/fb37dXt.jpg",
+		"album": "Code Geass"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -1649,7 +1616,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 43
+					"index": 40
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1658,6 +1625,32 @@
 		"artist_image": "http://i.imgur.com/5TLsbAx.jpg",
 		"cover": "http://i.imgur.com/ZCsl3iS.jpg",
 		"album": "Code Geass"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-xUOZjeDbRbM-Fuwa_Fuwa_Time_Mio_version_YouTube.webm",
+		"video_id": "xUOZjeDbRbM",
+		"url": "https://www.youtube.com/watch?v=xUOZjeDbRbM",
+		"title": "Fuwa Fuwa Time",
+		"duration": 235,
+		"thumbnail": "http://i.imgur.com/opfnmjs.jpg",
+		"description": "\u0e40\u0e2d\u0e32\u0e02\u0e2d\u0e07\u0e40\u0e02\u0e32\u0e21\u0e32\u0e19\u0e30\u0e04\u0e23\u0e31\u0e1a........\u0e1f\u0e31\u0e07\u0e40\u0e25\u0e22\u0e2d\u0e22\u0e48\u0e32\u0e0b\u0e19\u0e40\u0e25\u0e22\u0e19\u0e30 ^_^\nHe took her on it ........ I do not really naughty ^ _ ^.",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 41
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Fuwa Fuwa Time",
+		"artist": "Ho-kago Tea Time",
+		"artist_image": "http://i.imgur.com/mExZC7C.jpg",
+		"cover": "http://i.imgur.com/mc1tmji.jpg",
+		"album": "K-ON!"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -1675,7 +1668,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 44
+					"index": 42
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1684,6 +1677,32 @@
 		"artist_image": "http://i.imgur.com/yfQhntK.jpg",
 		"cover": "http://i.imgur.com/gWpU9Fn.jpg",
 		"album": "K-On"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-cXeb9cb6k0I-Naruto_Shippuden_Opening_16.m4a",
+		"video_id": "cXeb9cb6k0I",
+		"url": "https://www.youtube.com/watch?v=cXeb9cb6k0I",
+		"title": "Silhouette",
+		"duration": 90,
+		"thumbnail": "http://i.imgur.com/q7ra1Mk.jpg",
+		"description": "Naruto Shippuden OP16\n\"Silhouette (\u30b7\u30eb\u30a8\u30c3\u30c8)\" by KANA-BOON",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 43
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Silhouette",
+		"artist": "Kana-Boon",
+		"artist_image": "http://i.imgur.com/N3CBaM2.jpg",
+		"cover": "http://i.imgur.com/tub8BOl.jpg",
+		"album": "Naruto Shippuden"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -1701,7 +1720,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 45
+					"index": 44
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1713,129 +1732,29 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
-		"type": "SpotifyEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-XHViAiVuDsA-Code_Geass_-_Continued_Story.webm",
-		"video_id": "XHViAiVuDsA",
-		"url": "https://www.youtube.com/watch?v=XHViAiVuDsA",
-		"title": "Kenzie Smith Piano - Continued Story (From \"Code Geass\")",
-		"duration": 313,
-		"thumbnail": "https://i.ytimg.com/vi/XHViAiVuDsA/hqdefault.jpg",
-		"description": "Title : Continued Story\nSinger : Hitomi Kuroishi\nAnime : Code Geass R2\nType : Anime Insert Song\nWhere : Ending of Code Geass R2 Episode 25\n\nRelated Songs\nMasquerade\nhttp://www.youtube.com/watch?v=hYGH3_lHZO4\n\nStories\nhttp://www.youtube.com/watch?v=HCbmwcqA66g\n\nSensibility\nhttp://www.youtube.com/watch?v=kMxqzii-_P8\n\nBoku wa, Tori ni Naru\nhttp://www.youtube.com/watch?v=j5FsacVvKRY\n\nLyric\nSono hitotsubu no shizuku de sae mo\nHana o mamoru kamo shirenai\nSono waraigao tada sore dake de\nSashinoberu te ni mo nareru\n\nSono furueteru koe atsumereba\nKaze o okosu kamo shirenai\nSono inochi to iu hakanaki akari\nTomoshite ashi o susumeyou\n\nItsuka mata aou\nIkiteru kagiri\n\nToki o koe toraerareteru\nAfureru kono omoi wa nani?\nYasashisa ga mejiri ni niau\nAno hito-tachi wa ima doko ni iru no?\n\nTonari ni wa atarashii seki\nMirai no tame ni mata deau\nKazaranai mama dekiru dake\nIkite miyou kyou to iu hi\n\nKanashikute hito wa setsunai\nSore de mo doko made mo michi wa tsuzuku\n\nItsuka mata aou\nIkiteru kagiri\nKaze ga hakobu mono\nAsu o hiraku merodi\n\nItsuka mata aou\nIkiteru kagiri\nKaze ga hakobu mono\nAsu o hiraku merodi",
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-ZKCCs9DNEJs-Fate_stay_night_-_Kishi_Ou_no_Hokori_-_OST.webm",
+		"video_id": "ZKCCs9DNEJs",
+		"url": "https://www.youtube.com/watch?v=ZKCCs9DNEJs",
+		"title": "Kishi Ou no Hokori",
+		"duration": 143,
+		"thumbnail": "https://i.ytimg.com/vi/ZKCCs9DNEJs/maxresdefault.jpg",
+		"description": "Music by Fate/stay night\ncomposed by Kawai Kenji\n\n\nAnime: Fate/stay night (2006)\n\n_\n\nPicture by tlb12121\nhttp://tlb12121.deviantart.com/art/saber-313331274\n_\n\nMy Facebook & Google+ :\n\nFacebook: http://goo.gl/CCWh8W\nGoogle+: http://goo.gl/XGvgpJ\n\nPandora Journey II : http://goo.gl/vWXrNr\nPandora Heaven (Anime Soundtracks): http://goo.gl/kVuqoR\n_\n\nCopyright Info:\n\nBe aware this channel is only for promotion purpose.\nAll music belongs to the original creators.\n\nFeel free to contact me if anything is wrong:\n\n- Request to remove a video\n- adding any kind of information which belongs to the video (audio OR visual - Illustrator, Composer, Publisher, purchase-links ..)\n_",
 		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 46
+					"index": 45
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
-		"song_title": "Continued Story (From \"Code Geass\")",
-		"artist": "Kenzie Smith Piano",
-		"artist_image": "https://i.scdn.co/image/01858fad79f29979bc4728312eb5153e7874e6f1",
-		"cover": "https://i.scdn.co/image/47de7bbc6afe5f510dcd3a45b3ba187a2832b81b",
-		"album": "Anime Music Collection Piano Solo, Vol. 5",
-		"spotify_data": ***REMOVED***
-			"id": "4W4Fm237gWnw6MrRnwp4Oq",
-			"name": "Continued Story (From \"Code Geass\")",
-			"artists": [
-				***REMOVED***
-					"id": "3UX79kbvgAEhCSbA8HVv7W",
-					"name": "Kenzie Smith Piano",
-					"images": [
-						***REMOVED***
-							"height": 640,
-							"url": "https://i.scdn.co/image/ea6b486d2f9a3c9fcf89f69684b0f4c4ca343bdf",
-							"width": 640
-						***REMOVED***,
-						***REMOVED***
-							"height": 320,
-							"url": "https://i.scdn.co/image/01858fad79f29979bc4728312eb5153e7874e6f1",
-							"width": 320
-						***REMOVED***,
-						***REMOVED***
-							"height": 160,
-							"url": "https://i.scdn.co/image/dd45efe7a8888efec49a39c9251af1884326e53f",
-							"width": 160
-						***REMOVED***
-					],
-					"genres": [
-						"classify",
-						"otacore",
-						"scorecore"
-					],
-					"popularity": 53,
-					"uri": "spotify:artist:3UX79kbvgAEhCSbA8HVv7W",
-					"href": "https://open.spotify.com/artist/3UX79kbvgAEhCSbA8HVv7W"
-				***REMOVED***
-			],
-			"artist": "Kenzie Smith Piano",
-			"cover_url": "https://i.scdn.co/image/47de7bbc6afe5f510dcd3a45b3ba187a2832b81b",
-			"duration": 225.591,
-			"album": ***REMOVED***
-				"id": "3GI5dO3EcIJyGN0ddBKpCS",
-				"name": "Anime Music Collection Piano Solo, Vol. 5",
-				"artists": [
-					***REMOVED***
-						"id": "3UX79kbvgAEhCSbA8HVv7W",
-						"name": "Kenzie Smith Piano",
-						"images": [
-							***REMOVED***
-								"height": 640,
-								"url": "https://i.scdn.co/image/ea6b486d2f9a3c9fcf89f69684b0f4c4ca343bdf",
-								"width": 640
-							***REMOVED***,
-							***REMOVED***
-								"height": 320,
-								"url": "https://i.scdn.co/image/01858fad79f29979bc4728312eb5153e7874e6f1",
-								"width": 320
-							***REMOVED***,
-							***REMOVED***
-								"height": 160,
-								"url": "https://i.scdn.co/image/dd45efe7a8888efec49a39c9251af1884326e53f",
-								"width": 160
-							***REMOVED***
-						],
-						"genres": [
-							"classify",
-							"otacore",
-							"scorecore"
-						],
-						"popularity": 53,
-						"uri": "spotify:artist:3UX79kbvgAEhCSbA8HVv7W",
-						"href": "https://open.spotify.com/artist/3UX79kbvgAEhCSbA8HVv7W"
-					***REMOVED***
-				],
-				"images": [
-					***REMOVED***
-						"height": 640,
-						"url": "https://i.scdn.co/image/47de7bbc6afe5f510dcd3a45b3ba187a2832b81b",
-						"width": 640
-					***REMOVED***,
-					***REMOVED***
-						"height": 300,
-						"url": "https://i.scdn.co/image/0ecf645fd9c5f34df2ce291da5314b5905a2839e",
-						"width": 300
-					***REMOVED***,
-					***REMOVED***
-						"height": 64,
-						"url": "https://i.scdn.co/image/61e9472475af728b6ca233f741fd40a0d167e204",
-						"width": 64
-					***REMOVED***
-				],
-				"uri": "spotify:album:3GI5dO3EcIJyGN0ddBKpCS"
-			***REMOVED***,
-			"popularity": 30,
-			"uri": "spotify:track:4W4Fm237gWnw6MrRnwp4Oq",
-			"query": "Code Geass - Continued Story",
-			"certainty": 0.625
-		***REMOVED***
+		"song_title": "Kishi Ou no Hokori",
+		"artist": "Kawai Kenji",
+		"artist_image": "http://i.imgur.com/mLwZSqZ.jpg",
+		"cover": "http://i.imgur.com/Y1nrNrF.jpg",
+		"album": "Fate/stay night"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -1853,7 +1772,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 47
+					"index": 46
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1862,6 +1781,32 @@
 		"artist_image": "http://i.imgur.com/u7hLLDv.jpg",
 		"cover": "http://i.imgur.com/faU1JOv.jpg",
 		"album": "Koe no Katachi"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-ROxkJoIhr6o-Sakurasou_no_Pet_na_Kanojo_ED_DAYS_of_DASH_Full.webm",
+		"video_id": "ROxkJoIhr6o",
+		"url": "https://www.youtube.com/watch?v=ROxkJoIhr6o",
+		"title": "Days of Dash",
+		"duration": 249,
+		"thumbnail": "http://i.imgur.com/usuFfSE.png",
+		"description": "Sakurasou no Pet na Kanojo( \u3055\u304f\u3089\u8358\u306e\u30da\u30c3\u30c8\u306a\u5f7c\u5973 ) ED/Ending\nDAYS OF DASH by Konomi Suzuki",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 47
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Days of Dash",
+		"artist": "Konomi Suzuki",
+		"artist_image": "http://i.imgur.com/uNLCgtU.jpg",
+		"cover": "http://i.imgur.com/Vjs7qZT.jpg",
+		"album": "Sakurasou no Pet na Kanojo"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -1892,6 +1837,32 @@
 	***REMOVED***
 		"version": 103,
 		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-witeODgX5OM-One_Piece_Opening_16_-_Hands_Up_~_Full_HD_~_1080p.webm",
+		"video_id": "witeODgX5OM",
+		"url": "https://www.youtube.com/watch?v=witeODgX5OM",
+		"title": "Hands Up!",
+		"duration": 150,
+		"thumbnail": "http://i.imgur.com/Kwd7PDb.jpg",
+		"description": "One Piece Opening 16 Hands Up only HERE Full HD!!\nOne Piece Opening 16 Hands Up only Full HD\nOne Piece Opening 16 Hands Up only in Full HD\nOne Piece Opening 16 Hands Up for you Full HD\n\nyea awsome description i know :D",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 49
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Hands Up!",
+		"artist": "Kota Shinzato",
+		"artist_image": "http://i.imgur.com/PdmmKXG.jpg",
+		"cover": "http://i.imgur.com/wupOpBe.png",
+		"album": "One Piece"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
 		"expected_filename": null,
 		"video_id": "e7AUrshQ-TM",
 		"url": "https://www.youtube.com/watch?v=e7AUrshQ-TM",
@@ -1905,7 +1876,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 49
+					"index": 50
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1931,7 +1902,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 50
+					"index": 51
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1957,7 +1928,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 51
+					"index": 52
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1988,13 +1959,13 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 52
+					"index": 53
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
 		"song_title": "Shirushi",
 		"artist": "LiSA",
-		"artist_image": "https://i.scdn.co/image/ae1b09a9dd746482b53d73fb0643c80c1b46a3d4",
+		"artist_image": "https://i.scdn.co/image/82e3892e5c6a18138891d722fb9656da8b0d6112",
 		"cover": "https://i.scdn.co/image/b0d475c2cb05195d2cf7778c507b8757e1f3376e",
 		"album": "Launcher",
 		"spotify_data": ***REMOVED***
@@ -2111,7 +2082,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 53
+					"index": 54
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2120,6 +2091,58 @@
 		"artist_image": "http://i.imgur.com/qZBZ0Aj.jpg",
 		"cover": "http://i.imgur.com/S2AiCTq.png",
 		"album": "Charlotte"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-HyyXq3GDJq0-My_Soul_Your_Beats_Yui_Ver_Full.webm",
+		"video_id": "HyyXq3GDJq0",
+		"url": "https://www.youtube.com/watch?v=HyyXq3GDJq0",
+		"title": "My Soul, Your Beats!",
+		"duration": 285,
+		"thumbnail": "https://i.ytimg.com/vi/HyyXq3GDJq0/hqdefault.jpg",
+		"description": "Angel Beats! op My Soul Your Beats \u306eYui Ver \u306e\u30d5\u30eb\u3067\u3059\u3002",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 55
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "My Soul, Your Beats!",
+		"artist": "Lia",
+		"artist_image": "http://i.imgur.com/6LJtm4V.jpg",
+		"cover": "http://i.imgur.com/WEYngvD.jpg",
+		"album": "Angel Beats"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-kO1jc3DJ6Q4-White_Silence_-_Tokyo_ghoul_Nightcore_Thaisub.webm",
+		"video_id": "kO1jc3DJ6Q4",
+		"url": "https://www.youtube.com/watch?v=kO1jc3DJ6Q4",
+		"title": "White Silence",
+		"duration": 449,
+		"thumbnail": "https://i.ytimg.com/vi/kO1jc3DJ6Q4/maxresdefault.jpg",
+		"description": "video by : GuppiXD [https://www.youtube.com/watch?v=YIkV2_Lw4_w]\n\u0e2d\u0e31\u0e19\u0e40\u0e01\u0e48\u0e32\u0e42\u0e14\u0e19\u0e25\u0e1a\u0e40\u0e19\u0e37\u0e48\u0e2d\u0e07\u0e08\u0e32\u0e01\u0e1e\u0e1a\u0e1b\u0e31\u0e0d\u0e2b\u0e32\u0e01\u0e32\u0e23\u0e25\u0e30\u0e40\u0e21\u0e34\u0e14\u0e25\u0e34\u0e02\u0e2a\u0e34\u0e17\u0e18\u0e34\u0e4c\u0e04\u0e48\u0e30 \u0e16\u0e37\u0e2d\u0e27\u0e48\u0e32\u0e15\u0e31\u0e27\u0e19\u0e35\u0e49\u0e40\u0e1b\u0e47\u0e19\u0e09\u0e1a\u0e31\u0e1a\u0e41\u0e01\u0e49\u0e44\u0e02\u0e25\u0e30\u0e01\u0e31\u0e19\u0e19\u0e40\u0e19\u0e49\u0e2d\u0e30\u0e41\u0e1b\u0e25\u0e44\u0e1b\u0e19\u0e49\u0e33\u0e15\u0e32\u0e1e\u0e32\u0e25\u0e08\u0e30\u0e44\u0e2b\u0e25\u0e44\u0e1b \u0e2e\u0e32\u0e32\u0e32\n#\u0e04\u0e34\u0e14\u0e16\u0e36\u0e07\u0e19\u0e32\u0e22\u0e08\u0e31\u0e07\u0e2e\u0e34\u0e40\u0e14\u0e30\n#\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e19\u0e2a\u0e19\u0e34\u0e17\u0e04\u0e19\u0e41\u0e23\u0e01\u0e41\u0e25\u0e30\u0e04\u0e19\u0e2a\u0e38\u0e14\u0e17\u0e49\u0e32\u0e22\u0e02\u0e2d\u0e07\u0e40\u0e04\u0e19\u0e08\u0e31\u0e07",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 56
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "White Silence",
+		"artist": "Ling Tosite Sigure",
+		"artist_image": "http://i.imgur.com/3rXZK4M.jpg",
+		"cover": "http://i.imgur.com/ikbbEjg.jpg",
+		"album": "Tokyo Ghoul"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -2137,13 +2160,13 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 54
+					"index": 57
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
 		"song_title": "Guren No Yumiya",
 		"artist": "Linked Horizon",
-		"artist_image": "https://i.scdn.co/image/970b684cdddc1437ac41f8c8338fd1e716f58483",
+		"artist_image": "https://i.scdn.co/image/81fbe237c1e8e446b364d317a23992d92ee2a83b",
 		"cover": "https://i.scdn.co/image/63d65c2991b4f30a9b7febae2c1fb2eb8db64c94",
 		"album": "Jiyuu E No Shingeki",
 		"spotify_data": ***REMOVED***
@@ -2256,7 +2279,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 55
+					"index": 58
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2282,7 +2305,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 56
+					"index": 59
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2308,7 +2331,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 57
+					"index": 60
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2334,7 +2357,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 58
+					"index": 61
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2360,7 +2383,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 59
+					"index": 62
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2386,7 +2409,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 60
+					"index": 63
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2395,53 +2418,6 @@
 		"artist_image": "http://i.imgur.com/2lQOhWR.jpg",
 		"cover": "http://i.imgur.com/W9vE10y.jpg",
 		"album": "Nurarihyon no Mago"
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-82NzmREdkpg-Mosaic_Kakera_-_SunSet_Swish.webm",
-		"video_id": "82NzmREdkpg",
-		"url": "https://www.youtube.com/watch?v=82NzmREdkpg",
-		"title": "Mosaic Kakera - SunSet Swish",
-		"duration": 279,
-		"thumbnail": "https://i.ytimg.com/vi/82NzmREdkpg/maxresdefault.jpg",
-		"description": "Ending II Code Geass\n\nMosaic Kakera - Piezas del Mosaico\n\nEstoy conectando aquellas elaboradas piezas de mosaico, una por una\nAdem\u00e1s del encuentro y despedida que me diste...\n\nCreo que, \"No deber\u00eda ser as\u00ed\", y voy a dormir\nY cuando me despierto, es el mismo viejo inmutable..., esfuerzo infructuoso...\nLo repito sin sentido...\n\nMe levant\u00e9 y recog\u00ed las piezas del mosaico de \"una manera de vivir una buena vida\"\nEsa cosa parec\u00eda deformada y hermosa para m\u00ed\nSobre el camino que eleg\u00ed para el final mientras brillo, mientras fallaba\nLas piezas se dispersan y caen, y yo no no pude enterrarlas\n\nUn mundo se extendi\u00f3 por toda toda voluntad\nA pesar de que tengo que tener algo, se que no puedo dar nada a nadie\nEstoy preocupado por los m\u00faltiples colores\n\nMientras hechizado por los diferentes colores y piezas del mosaico\nDeseaba demasiado por ser \"un j\u00f3ven indiscreto\"\nCreer en el cemento del amor en las lagunas de mi coraz\u00f3n, regados\nPiezas que nunca, nunca se funden\n\nComo contraste es hermoso..., rugosidad inversa funciona bien\nPor alguna raz\u00f3n, no voy a esperar a mi vuelta y encontrar mi propio estilo de respuesta\n\nLas piezas de mosaico brillantes proyectan las mentiras y errores de mi pasado\nCuanto m\u00e1s pienso en que quiero borrarlos todos\nCuanto m\u00e1s yo todav\u00eda no puedo avanzar m\u00e1s all\u00e1 de la l\u00ednea de salida all\u00ed cuando me doy la vuelta\nVoy a tratar de recoger y reunir mis sue\u00f1os una vez m\u00e1s\n\nEstoy conectando aquellas elaboradas piezas de mosaico, una por una\nAdem\u00e1s del encuentro y despedida que me diste...",
-		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 61
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-HyyXq3GDJq0-My_Soul_Your_Beats_Yui_Ver_Full.webm",
-		"video_id": "HyyXq3GDJq0",
-		"url": "https://www.youtube.com/watch?v=HyyXq3GDJq0",
-		"title": "My Soul Your Beats (Yui Ver)  Full \u300c\u9ad8\u97f3\u8cea\u300d",
-		"duration": 285,
-		"thumbnail": "https://i.ytimg.com/vi/HyyXq3GDJq0/hqdefault.jpg",
-		"description": "Angel Beats! op My Soul Your Beats \u306eYui Ver \u306e\u30d5\u30eb\u3067\u3059\u3002",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 62
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -2459,7 +2435,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 63
+					"index": 64
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2468,6 +2444,32 @@
 		"artist_image": "http://i.imgur.com/kfLKoiq.jpg",
 		"cover": "http://i.imgur.com/XPw5bKC.jpg",
 		"album": "eYe's (Re:Zero)"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-2eGazzxcp3I-Nevereverland_Nano.webm",
+		"video_id": "2eGazzxcp3I",
+		"url": "https://www.youtube.com/watch?v=2eGazzxcp3I",
+		"title": "Nevereverland",
+		"duration": 288,
+		"thumbnail": "https://i.ytimg.com/vi/2eGazzxcp3I/maxresdefault.jpg",
+		"description": "It's past time and the singer still hasn't shown up yet; the hall is noisy. After 10 long minutes, laser... (Read More)\nhttps://otakumode.com/news/515ab288892491874f00c79b/\n\n\u00a9 FlyingDog, Inc.\n\nTokyo Otaku Mode: http://otakumode.com\nTokyo Otaku Mode shares Japanese otaku culture with the rest of the world! We report on anime, manga, figures, events and more - straight from Akiba, Tokyo!",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 65
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Nevereverland",
+		"artist": "Nano",
+		"artist_image": "http://i.imgur.com/4I4lI2q.jpg",
+		"cover": "http://i.imgur.com/k8pxtMw.jpg",
+		"album": "N"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -2485,7 +2487,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 64
+					"index": 66
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2497,55 +2499,29 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-cXeb9cb6k0I-Naruto_Shippuden_Opening_16.m4a",
-		"video_id": "cXeb9cb6k0I",
-		"url": "https://www.youtube.com/watch?v=cXeb9cb6k0I",
-		"title": "Naruto Shippuden Opening 16",
-		"duration": 90,
-		"thumbnail": "https://i.ytimg.com/vi/cXeb9cb6k0I/maxresdefault.jpg",
-		"description": "Naruto Shippuden OP16\n\"Silhouette (\u30b7\u30eb\u30a8\u30c3\u30c8)\" by KANA-BOON",
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-tTIwbusbN1g-Sword_Of_The_Stranger_-_Ihojin_No_Yaiba_Battle_Theme.webm",
+		"video_id": "tTIwbusbN1g",
+		"url": "https://www.youtube.com/watch?v=tTIwbusbN1g",
+		"title": "Ihojin No Yaiba",
+		"duration": 266,
+		"thumbnail": "https://i.ytimg.com/vi/tTIwbusbN1g/maxresdefault.jpg",
+		"description": "Do yourself a favor, next time you go out to buy milk remember this anime, remember the last battle.......and remember THIS soundtrack!!",
 		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 65
+					"index": 67
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-2eGazzxcp3I-Nevereverland_Nano.webm",
-		"video_id": "2eGazzxcp3I",
-		"url": "https://www.youtube.com/watch?v=2eGazzxcp3I",
-		"title": "Nevereverland / Nano",
-		"duration": 288,
-		"thumbnail": "https://i.ytimg.com/vi/2eGazzxcp3I/maxresdefault.jpg",
-		"description": "It's past time and the singer still hasn't shown up yet; the hall is noisy. After 10 long minutes, laser... (Read More)\nhttps://otakumode.com/news/515ab288892491874f00c79b/\n\n\u00a9 FlyingDog, Inc.\n\nTokyo Otaku Mode: http://otakumode.com\nTokyo Otaku Mode shares Japanese otaku culture with the rest of the world! We report on anime, manga, figures, events and more - straight from Akiba, Tokyo!",
-		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 66
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Ihojin No Yaiba",
+		"artist": "Naoki Sato",
+		"artist_image": "http://i.imgur.com/3akEq26.jpg",
+		"cover": "http://i.imgur.com/fBBCLHr.jpg",
+		"album": "Sword of the Stranger"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -2563,7 +2539,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 67
+					"index": 68
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2572,58 +2548,6 @@
 		"artist_image": "http://i.imgur.com/ga2JbeR.jpg",
 		"cover": "http://i.imgur.com/DCXaCYM.jpg",
 		"album": "Mondaiji"
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-ZyyuV-gkavg-Noragami_Opening_-_Hello_Sleepwalkers_HD_+_Lyrics.webm",
-		"video_id": "ZyyuV-gkavg",
-		"url": "https://www.youtube.com/watch?v=ZyyuV-gkavg",
-		"title": "Noragami Opening - Hello Sleepwalkers (HD + Lyrics)",
-		"duration": 173,
-		"thumbnail": "https://i.ytimg.com/vi/ZyyuV-gkavg/maxresdefault.jpg",
-		"description": "Noragami Opening\nAnim\u00e9 : Noragami\nMusic : Hello Sleepwalkers - Goya no Machiawase\n\nEnjoy :)\n\n10k 06/04/14 Thank you !!!\n20k 20/04/14 :)\n400k :D 03/01/15\n+10M",
-		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 68
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-Tw-mnRIkkrM-Noragami_Opening_Full_Goya_no_Machiawase.webm",
-		"video_id": "Tw-mnRIkkrM",
-		"url": "https://www.youtube.com/watch?v=Tw-mnRIkkrM",
-		"title": "Noragami Opening Full [Goya no Machiawase]",
-		"duration": 170,
-		"thumbnail": "https://i.ytimg.com/vi/Tw-mnRIkkrM/hqdefault.jpg",
-		"description": "~Anime: Noragami\n~Song: Goya no Machiawase\n~Artist: Hello Sleepwalkers\n\n\"Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is made for \"fair use\" for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statute that might otherwise be infringing. Non-profit, educational or personal use tips the balance in favor of fair use\"",
-		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 69
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -2646,13 +2570,13 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 70
+					"index": 69
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
 		"song_title": "Clock Strikes",
 		"artist": "ONE OK ROCK",
-		"artist_image": "https://i.scdn.co/image/3b3b816312699a68731db11601b463a3cb4eeb26",
+		"artist_image": "https://i.scdn.co/image/fd60c665014141911a0a789d89ba13a81de007c5",
 		"cover": "https://i.scdn.co/image/b10a614ced95aff8bf68767ced8bf6180eb663df",
 		"album": "JINSEI KAKETE BOKU WA",
 		"spotify_data": ***REMOVED***
@@ -2771,7 +2695,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 71
+					"index": 70
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2783,29 +2707,29 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
-		"type": "YoutubeEntry",
+		"type": "GieselaEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-KZBgRDMyXzw-Oratorio_The_World_God_Only_Knows_-_God_only_knows_Full_Version_w_Lyrics.webm",
 		"video_id": "KZBgRDMyXzw",
 		"url": "https://www.youtube.com/watch?v=KZBgRDMyXzw",
-		"title": "Oratorio The World God Only Knows - God only knows (Full Version) w/ Lyrics",
+		"title": "God Only Knows",
 		"duration": 488,
 		"thumbnail": "https://i.ytimg.com/vi/KZBgRDMyXzw/hqdefault.jpg",
 		"description": "All lyrics finally up. If you don't see them, please turn annotations on.\n\nNo download links, sorry.\n\nYes, it feels cut off because it immediately transitions into the second track on the album, which is the insert song from... around chapter 22 in the manga.",
 		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 72
+					"index": 71
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "God Only Knows",
+		"artist": "Oratorio The World God Only Knows",
+		"artist_image": "http://i.imgur.com/k7jHR8k.jpg",
+		"cover": "http://i.imgur.com/0sJEXjU.jpg",
+		"album": "The World God Only Knows"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -2823,7 +2747,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 73
+					"index": 72
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2832,125 +2756,6 @@
 		"artist_image": "http://i.imgur.com/APifQKq.jpg",
 		"cover": "http://i.imgur.com/hhbrdAy.jpg",
 		"album": "Overlord"
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "SpotifyEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-witeODgX5OM-One_Piece_Opening_16_-_Hands_Up_~_Full_HD_~_1080p.webm",
-		"video_id": "witeODgX5OM",
-		"url": "https://www.youtube.com/watch?v=witeODgX5OM",
-		"title": "PelleK - Hands Up! (One Piece Opening 16)",
-		"duration": 150,
-		"thumbnail": "https://i.ytimg.com/vi/witeODgX5OM/hqdefault.jpg",
-		"description": "One Piece Opening 16 Hands Up only HERE Full HD!!\nOne Piece Opening 16 Hands Up only Full HD\nOne Piece Opening 16 Hands Up only in Full HD\nOne Piece Opening 16 Hands Up for you Full HD\n\nyea awsome description i know :D",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 74
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***,
-		"song_title": "Hands Up! (One Piece Opening 16)",
-		"artist": "PelleK",
-		"artist_image": "https://i.scdn.co/image/8a49877f39c608a3eb4040175982f2a45d40387f",
-		"cover": "https://i.scdn.co/image/fddd36cd4d3cfd9016bb56ab05a6403d93b3fb37",
-		"album": "PelleK's One Piece Medley",
-		"spotify_data": ***REMOVED***
-			"id": "2FrW2uVZTCZ9pjCISukgB3",
-			"name": "Hands Up! (One Piece Opening 16)",
-			"artists": [
-				***REMOVED***
-					"id": "1qLwXsUtyW2Ba2Iotg4gE3",
-					"name": "PelleK",
-					"images": [
-						***REMOVED***
-							"height": 640,
-							"url": "https://i.scdn.co/image/5f3d1348f484fc8182b1263241dfa876595b81fb",
-							"width": 640
-						***REMOVED***,
-						***REMOVED***
-							"height": 300,
-							"url": "https://i.scdn.co/image/5c812cc8451e65a1858442a1e05434143192ff2c",
-							"width": 300
-						***REMOVED***,
-						***REMOVED***
-							"height": 64,
-							"url": "https://i.scdn.co/image/8a49877f39c608a3eb4040175982f2a45d40387f",
-							"width": 64
-						***REMOVED***
-					],
-					"genres": [
-						"heavy christmas",
-						"otacore"
-					],
-					"popularity": 60,
-					"uri": "spotify:artist:1qLwXsUtyW2Ba2Iotg4gE3",
-					"href": "https://open.spotify.com/artist/1qLwXsUtyW2Ba2Iotg4gE3"
-				***REMOVED***
-			],
-			"artist": "PelleK",
-			"cover_url": "https://i.scdn.co/image/fddd36cd4d3cfd9016bb56ab05a6403d93b3fb37",
-			"duration": 152.059,
-			"album": ***REMOVED***
-				"id": "0wlIbWhXfI1fbhH7GRnOLg",
-				"name": "PelleK's One Piece Medley",
-				"artists": [
-					***REMOVED***
-						"id": "1qLwXsUtyW2Ba2Iotg4gE3",
-						"name": "PelleK",
-						"images": [
-							***REMOVED***
-								"height": 640,
-								"url": "https://i.scdn.co/image/5f3d1348f484fc8182b1263241dfa876595b81fb",
-								"width": 640
-							***REMOVED***,
-							***REMOVED***
-								"height": 300,
-								"url": "https://i.scdn.co/image/5c812cc8451e65a1858442a1e05434143192ff2c",
-								"width": 300
-							***REMOVED***,
-							***REMOVED***
-								"height": 64,
-								"url": "https://i.scdn.co/image/8a49877f39c608a3eb4040175982f2a45d40387f",
-								"width": 64
-							***REMOVED***
-						],
-						"genres": [
-							"heavy christmas",
-							"otacore"
-						],
-						"popularity": 60,
-						"uri": "spotify:artist:1qLwXsUtyW2Ba2Iotg4gE3",
-						"href": "https://open.spotify.com/artist/1qLwXsUtyW2Ba2Iotg4gE3"
-					***REMOVED***
-				],
-				"images": [
-					***REMOVED***
-						"height": 640,
-						"url": "https://i.scdn.co/image/fddd36cd4d3cfd9016bb56ab05a6403d93b3fb37",
-						"width": 640
-					***REMOVED***,
-					***REMOVED***
-						"height": 300,
-						"url": "https://i.scdn.co/image/ba2971fb84dca743b1aa2407ac5daa07c4f861ae",
-						"width": 300
-					***REMOVED***,
-					***REMOVED***
-						"height": 64,
-						"url": "https://i.scdn.co/image/60445984cfc9305c7b82158b9029a167ec85884c",
-						"width": 64
-					***REMOVED***
-				],
-				"uri": "spotify:album:0wlIbWhXfI1fbhH7GRnOLg"
-			***REMOVED***,
-			"popularity": 30,
-			"uri": "spotify:track:2FrW2uVZTCZ9pjCISukgB3",
-			"query": "One Piece - Hands Up",
-			"certainty": 0.6111111111111112
-		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -2968,7 +2773,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 75
+					"index": 73
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2994,7 +2799,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 76
+					"index": 74
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3003,6 +2808,32 @@
 		"artist_image": "http://i.imgur.com/Yj7r46N.jpg",
 		"cover": "http://i.imgur.com/zVq1hpX.jpg",
 		"album": "Fullmetal Alchemist Brotherhood"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-wFGHIaqPbNM-Boku_no_Hero_Academia_OP_FULL.webm",
+		"video_id": "wFGHIaqPbNM",
+		"url": "https://www.youtube.com/watch?v=wFGHIaqPbNM",
+		"title": "THE DAY",
+		"duration": 239,
+		"thumbnail": "http://i.imgur.com/mA1gpa1.jpg",
+		"description": "",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 75
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "THE DAY",
+		"artist": "Porno Graffitti",
+		"artist_image": "http://i.imgur.com/RGuthWK.jpg",
+		"cover": "http://i.imgur.com/yaDRego.jpg",
+		"album": "My Hero Academia"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -3020,7 +2851,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 77
+					"index": 76
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3046,7 +2877,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 78
+					"index": 77
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3072,7 +2903,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 79
+					"index": 78
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3081,6 +2912,58 @@
 		"artist_image": "http://i.imgur.com/ceNNA5m.jpg",
 		"cover": "http://i.imgur.com/yqt7jdc.jpg",
 		"album": "Ao no Exorcist"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-a2GujJZfXpg-original_ver._-Your_name._Music_Video_edition-_from_new_album_DVD.webm",
+		"video_id": "a2GujJZfXpg",
+		"url": "https://www.youtube.com/watch?v=a2GujJZfXpg",
+		"title": "Sparkle",
+		"duration": 182,
+		"thumbnail": "http://i.imgur.com/Ur0zhjv.jpg",
+		"description": "\u30b9\u30d1\u30fc\u30af\u30eb [original ver.] -Your name. Music Video edition- \u4e88\u544a\u7de8 from new album\u300c\u4eba\u9593\u958b\u82b1\u300d\u521d\u56de\u76e4DVD",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 79
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Sparkle",
+		"artist": "Radwimps",
+		"artist_image": "http://i.imgur.com/XeqFVje.jpg",
+		"cover": "http://i.imgur.com/4wSP0KA.jpg",
+		"album": "Your Name"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-PDSkFeMVNFs-movie_ver._RADWIMPS_MV.webm",
+		"video_id": "PDSkFeMVNFs",
+		"url": "https://www.youtube.com/watch?v=PDSkFeMVNFs",
+		"title": "Zen Zen Zense",
+		"duration": 292,
+		"thumbnail": "http://i.imgur.com/OTI99Qr.jpg",
+		"description": "\u524d\u524d\u524d\u4e16 (movie ver.) RADWIMPS MV",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 80
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Zen Zen Zense",
+		"artist": "Radwimps",
+		"artist_image": "http://i.imgur.com/Ui3gfom.jpg",
+		"cover": "http://i.imgur.com/pvm1vaw.jpg",
+		"album": "Your Name"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -3098,7 +2981,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 80
+					"index": 81
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3107,58 +2990,6 @@
 		"artist_image": "http://i.imgur.com/ovZQYk6.jpg",
 		"cover": "http://i.imgur.com/OHrymN8.jpg",
 		"album": "Akame ga Kill"
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-ROxkJoIhr6o-Sakurasou_no_Pet_na_Kanojo_ED_DAYS_of_DASH_Full.webm",
-		"video_id": "ROxkJoIhr6o",
-		"url": "https://www.youtube.com/watch?v=ROxkJoIhr6o",
-		"title": "Sakurasou no Pet na Kanojo ED\u300cDAYS of DASH\u300dFull",
-		"duration": 249,
-		"thumbnail": "https://i.ytimg.com/vi/ROxkJoIhr6o/hqdefault.jpg",
-		"description": "Sakurasou no Pet na Kanojo( \u3055\u304f\u3089\u8358\u306e\u30da\u30c3\u30c8\u306a\u5f7c\u5973 ) ED/Ending\nDAYS OF DASH by Konomi Suzuki",
-		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 81
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-s6jk_DBcLkQ-Sankarea_OP_Full_Lyrics_-_Nano.RIPE_-_Esoragoto.webm",
-		"video_id": "s6jk_DBcLkQ",
-		"url": "https://www.youtube.com/watch?v=s6jk_DBcLkQ",
-		"title": "Sankarea OP Full Lyrics - Nano.RIPE - Esoragoto",
-		"duration": 210,
-		"thumbnail": "https://i.ytimg.com/vi/s6jk_DBcLkQ/maxresdefault.jpg",
-		"description": "\u300cSankarea Opening Full HD\u300d\n\nArtist: Nano.Ripe\nAlbum: Plus to Minus no Shikumi\nSong: Esoragoto\n\n\u2605 DISCLAIMER \u2605\nI do not own the anime, music, artwork or the lyrics.\nAll rights reserved to their respective owners!!!\nThis video is not meant to infringe any of the copyrights.\nThis is for people's enjoyment only.",
-		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 82
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -3176,7 +3007,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 83
+					"index": 82
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3305,6 +3136,32 @@
 	***REMOVED***
 		"version": 103,
 		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-aNgT6MxOURQ-Seraph_of_the_End_-_Vampire_Reign_-_Official_Opening.webm",
+		"video_id": "aNgT6MxOURQ",
+		"url": "https://www.youtube.com/watch?v=aNgT6MxOURQ",
+		"title": "X.U.",
+		"duration": 104,
+		"thumbnail": "https://i.ytimg.com/vi/aNgT6MxOURQ/maxresdefault.jpg",
+		"description": "Don't wait to watch new episodes of Seraph of the End: Vampire Reign\nSaturdays at 10am ET / 9am CT\nfunimation.com/spring\n\nSong: X.U.\nPerformed by: SawanoHiroyuki[nZk]: Gemie\nLyrics by: Benjamin & mpi\nComposition and arrangement: Hiroyuki Sawano (DefSTAR Records)\nTheme Song in Cooperation with: Keiichi Sotomura (Sony Music Entertainment)\n\nFrom the studio of Attack on Titan, Wit Studio.\n\nAfter a mysterious virus wipes out ninety percent of humanity, vampires emerge from the recesses of the earth to enslave mankind, treating them like livestock. After growing tired of donating blood in exchange for protection, 12-year-old Yuichiro Hyakuya and his best friend Mikaela Hyakuya plot an escape along with the other orphans. After being the only successful runaway, Yuichiro joins the Moon Demon Company, an extermination unit of the Japanese Imperial Demon Army dedicated to killing off vampires.",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 83
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "X.U.",
+		"artist": "Sawano Hiroyuki",
+		"artist_image": "http://i.imgur.com/LQic7jm.jpg",
+		"cover": "http://i.imgur.com/WWF0gag.jpg",
+		"album": "Seraph of the End"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
 		"expected_filename": null,
 		"video_id": "QOOgMyIGtrQ",
 		"url": "https://www.youtube.com/watch?v=QOOgMyIGtrQ",
@@ -3330,14 +3187,14 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-jOGfTrbrwh0-Shiver_-_the_GazettE_Kuroshitsuji_II_Opening_Song.webm",
-		"video_id": "jOGfTrbrwh0",
-		"url": "https://www.youtube.com/watch?v=jOGfTrbrwh0",
-		"title": "Shiver - the GazettE (Kuroshitsuji II Opening Song)",
-		"duration": 252,
-		"thumbnail": "https://i.ytimg.com/vi/jOGfTrbrwh0/maxresdefault.jpg",
-		"description": "^^",
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-Od9NQbyNpwE-Boku_Dake_Ga_Inai_Machi_Ending.webm",
+		"video_id": "Od9NQbyNpwE",
+		"url": "https://www.youtube.com/watch?v=Od9NQbyNpwE",
+		"title": "Sore wa Chiisana Hikari no Youna",
+		"duration": 90,
+		"thumbnail": "http://i.imgur.com/kBOBEg7.jpg",
+		"description": "ERASED ED1\n\"Sore wa Chiisana Hikari no Youna (\u305d\u308c\u306f\u5c0f\u3055\u306a\u5149\u306e\u3088\u3046\u306a)\" by Sayuri",
 		"meta": ***REMOVED***
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
@@ -3347,18 +3204,23 @@
 					"index": 85
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Sore wa Chiisana Hikari no Youna",
+		"artist": "Sayuri",
+		"artist_image": "http://i.imgur.com/12L0BQg.jpg",
+		"cover": "http://i.imgur.com/4lY1B2l.jpg",
+		"album": "Erased"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
 		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-CdSE1loNwmo-Sidonia_no_Kishi_-_Daikyuu_Wakusei_Seneki_OP_Opening.webm",
-		"video_id": "CdSE1loNwmo",
-		"url": "https://www.youtube.com/watch?v=CdSE1loNwmo",
-		"title": "Kishi Shinkoukyoku",
-		"duration": 93,
-		"thumbnail": "https://i.ytimg.com/vi/CdSE1loNwmo/maxresdefault.jpg",
-		"description": "Sidonia no Kishi: Daikyuu Wakusei Seneki Opening\nKnights of Sidonia 2nd Season Opening",
+		"expected_filename": "cache\\audio_cache\\youtube-82NzmREdkpg-Mosaic_Kakera_-_SunSet_Swish.webm",
+		"video_id": "82NzmREdkpg",
+		"url": "https://www.youtube.com/watch?v=82NzmREdkpg",
+		"title": "Mosaic Kakera",
+		"duration": 279,
+		"thumbnail": "http://i.imgur.com/EbA7A09.jpg",
+		"description": "Ending II Code Geass\n\nMosaic Kakera - Piezas del Mosaico\n\nEstoy conectando aquellas elaboradas piezas de mosaico, una por una\nAdem\u00e1s del encuentro y despedida que me diste...\n\nCreo que, \"No deber\u00eda ser as\u00ed\", y voy a dormir\nY cuando me despierto, es el mismo viejo inmutable..., esfuerzo infructuoso...\nLo repito sin sentido...\n\nMe levant\u00e9 y recog\u00ed las piezas del mosaico de \"una manera de vivir una buena vida\"\nEsa cosa parec\u00eda deformada y hermosa para m\u00ed\nSobre el camino que eleg\u00ed para el final mientras brillo, mientras fallaba\nLas piezas se dispersan y caen, y yo no no pude enterrarlas\n\nUn mundo se extendi\u00f3 por toda toda voluntad\nA pesar de que tengo que tener algo, se que no puedo dar nada a nadie\nEstoy preocupado por los m\u00faltiples colores\n\nMientras hechizado por los diferentes colores y piezas del mosaico\nDeseaba demasiado por ser \"un j\u00f3ven indiscreto\"\nCreer en el cemento del amor en las lagunas de mi coraz\u00f3n, regados\nPiezas que nunca, nunca se funden\n\nComo contraste es hermoso..., rugosidad inversa funciona bien\nPor alguna raz\u00f3n, no voy a esperar a mi vuelta y encontrar mi propio estilo de respuesta\n\nLas piezas de mosaico brillantes proyectan las mentiras y errores de mi pasado\nCuanto m\u00e1s pienso en que quiero borrarlos todos\nCuanto m\u00e1s yo todav\u00eda no puedo avanzar m\u00e1s all\u00e1 de la l\u00ednea de salida all\u00ed cuando me doy la vuelta\nVoy a tratar de recoger y reunir mis sue\u00f1os una vez m\u00e1s\n\nEstoy conectando aquellas elaboradas piezas de mosaico, una por una\nAdem\u00e1s del encuentro y despedida que me diste...",
 		"meta": ***REMOVED***
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
@@ -3369,22 +3231,22 @@
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
-		"song_title": "Kishi Shinkoukyoku",
-		"artist": "Angela",
-		"artist_image": "http://i.imgur.com/sFG6w3f.png",
-		"cover": "http://i.imgur.com/SgoYlRj.jpg",
-		"album": "Sidonia No Kishi"
+		"song_title": "Mosaic Kakera",
+		"artist": "SunSet Swish",
+		"artist_image": "http://i.imgur.com/SptmxP4.jpg",
+		"cover": "http://i.imgur.com/fzlRyBg.jpg",
+		"album": "Code Geass"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-tTIwbusbN1g-Sword_Of_The_Stranger_-_Ihojin_No_Yaiba_Battle_Theme.webm",
-		"video_id": "tTIwbusbN1g",
-		"url": "https://www.youtube.com/watch?v=tTIwbusbN1g",
-		"title": "Sword Of The Stranger - Ihojin No Yaiba  [Battle Theme]",
-		"duration": 266,
-		"thumbnail": "https://i.ytimg.com/vi/tTIwbusbN1g/maxresdefault.jpg",
-		"description": "Do yourself a favor, next time you go out to buy milk remember this anime, remember the last battle.......and remember THIS soundtrack!!",
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-FXoq3a02yjc-Tekken_7_OST_-_Aloneness_Story_Mode_~_Staff_Roll.webm",
+		"video_id": "FXoq3a02yjc",
+		"url": "https://www.youtube.com/watch?v=FXoq3a02yjc",
+		"title": "Aloneness",
+		"duration": 210,
+		"thumbnail": "http://i.imgur.com/PKRvV2P.jpg",
+		"description": "Track 58 out of 63 of the Tekken 7 Original Soundtrack.\nTrivia:\n\n\u2022 This track is a remix of Solitude.",
 		"meta": ***REMOVED***
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
@@ -3394,24 +3256,24 @@
 					"index": 87
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Aloneness",
+		"artist": "TEKKEN 7 O.S.T.",
+		"artist_image": "http://i.imgur.com/9ncke2O.png",
+		"cover": "http://i.imgur.com/9s71E16.jpg",
+		"album": "Tekken 7"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-FXoq3a02yjc-Tekken_7_OST_-_Aloneness_Story_Mode_~_Staff_Roll.webm",
-		"video_id": "FXoq3a02yjc",
-		"url": "https://www.youtube.com/watch?v=FXoq3a02yjc",
-		"title": "Tekken 7 OST: Aloneness (Story Mode ~ Staff Roll)",
-		"duration": 210,
-		"thumbnail": "https://i.ytimg.com/vi/FXoq3a02yjc/maxresdefault.jpg",
-		"description": "Track 58 out of 63 of the Tekken 7 Original Soundtrack.\nTrivia:\n\n\u2022 This track is a remix of Solitude.",
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-RqxmFkmEoZQ-Fairy_Tail_-_Kizuna.webm",
+		"video_id": "RqxmFkmEoZQ",
+		"url": "https://www.youtube.com/watch?v=RqxmFkmEoZQ",
+		"title": "Kizuna",
+		"duration": 154,
+		"thumbnail": "https://i.ytimg.com/vi/RqxmFkmEoZQ/maxresdefault.jpg",
+		"description": "All right to their respective owners, I myself own nothing.    Enjoy",
 		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203510202421477376",
-				"name": "ZyLect"
-			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
@@ -3420,7 +3282,38 @@
 					"index": 88
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Kizuna",
+		"artist": "Tetsuya Kakihara",
+		"artist_image": "http://i.imgur.com/hw8MmQ2.jpg",
+		"cover": "http://i.imgur.com/wLb51fc.jpg",
+		"album": "Fairy Tail"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-jOGfTrbrwh0-Shiver_-_the_GazettE_Kuroshitsuji_II_Opening_Song.webm",
+		"video_id": "jOGfTrbrwh0",
+		"url": "https://www.youtube.com/watch?v=jOGfTrbrwh0",
+		"title": "Shiver",
+		"duration": 252,
+		"thumbnail": "https://i.ytimg.com/vi/jOGfTrbrwh0/maxresdefault.jpg",
+		"description": "^^",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 89
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Shiver",
+		"artist": "The Gazette",
+		"artist_image": "http://i.imgur.com/mlTM6q7.jpg",
+		"cover": "http://i.imgur.com/HlPAduc.jpg",
+		"album": "Kuroshitsuji"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -3438,7 +3331,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 89
+					"index": 90
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3464,7 +3357,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 90
+					"index": 91
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3473,48 +3366,6 @@
 		"artist_image": "http://i.imgur.com/lyjNrLa.jpg",
 		"cover": "http://i.imgur.com/8ef5deq.png",
 		"album": "Sekai-ichi Hatsukoi"
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-SXqdT5kOIAw-We_re_the_Stars_-_Fairy_Tail_ENDING_14_FULL_+_LYRICS.webm",
-		"video_id": "SXqdT5kOIAw",
-		"url": "https://www.youtube.com/watch?v=SXqdT5kOIAw",
-		"title": "We're the Stars - Fairy Tail [ENDING 14 FULL + LYRICS]",
-		"duration": 257,
-		"thumbnail": "https://i.ytimg.com/vi/SXqdT5kOIAw/maxresdefault.jpg",
-		"description": "I DO NOT OWN ANYTHING!!! EVERYTHING BELONGS TO ITS RIGHTFUL OWNERS!!! PLEASE DO NOT COPYRIGHT!!! This content also belongs to PONYCANYON! Nothing belongs to me!\n\nAnime(s): Fairy Tail\n\nSong(s): We're the Stars - Ending 14 FULL\n\nArtist(s): Aimi Terakawa\n\nAs I said: I do not own anything!!! Everything belongs to its rightful owners!!! Please do not copyright!!! Okay YouTube!? I've uploaded this video before and I had it on YouTube for over a year and I had the same description and I had gotten over 180,000 veiws! It was my most popular video until one day out of the blue, YouTube deleted it. I was so mad. I was pissed off. Anyways, you'd better read this YouTube! I hope I get as many views as before. I finally found the file and decided to add more obvious information on how I do not own this! I really don't own this!!!",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 91
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-kO1jc3DJ6Q4-White_Silence_-_Tokyo_ghoul_Nightcore_Thaisub.webm",
-		"video_id": "kO1jc3DJ6Q4",
-		"url": "https://www.youtube.com/watch?v=kO1jc3DJ6Q4",
-		"title": "White Silence - Tokyo ghoul [ Nightcore ] Thaisub",
-		"duration": 449,
-		"thumbnail": "https://i.ytimg.com/vi/kO1jc3DJ6Q4/maxresdefault.jpg",
-		"description": "video by : GuppiXD [https://www.youtube.com/watch?v=YIkV2_Lw4_w]\n\u0e2d\u0e31\u0e19\u0e40\u0e01\u0e48\u0e32\u0e42\u0e14\u0e19\u0e25\u0e1a\u0e40\u0e19\u0e37\u0e48\u0e2d\u0e07\u0e08\u0e32\u0e01\u0e1e\u0e1a\u0e1b\u0e31\u0e0d\u0e2b\u0e32\u0e01\u0e32\u0e23\u0e25\u0e30\u0e40\u0e21\u0e34\u0e14\u0e25\u0e34\u0e02\u0e2a\u0e34\u0e17\u0e18\u0e34\u0e4c\u0e04\u0e48\u0e30 \u0e16\u0e37\u0e2d\u0e27\u0e48\u0e32\u0e15\u0e31\u0e27\u0e19\u0e35\u0e49\u0e40\u0e1b\u0e47\u0e19\u0e09\u0e1a\u0e31\u0e1a\u0e41\u0e01\u0e49\u0e44\u0e02\u0e25\u0e30\u0e01\u0e31\u0e19\u0e19\u0e40\u0e19\u0e49\u0e2d\u0e30\u0e41\u0e1b\u0e25\u0e44\u0e1b\u0e19\u0e49\u0e33\u0e15\u0e32\u0e1e\u0e32\u0e25\u0e08\u0e30\u0e44\u0e2b\u0e25\u0e44\u0e1b \u0e2e\u0e32\u0e32\u0e32\n#\u0e04\u0e34\u0e14\u0e16\u0e36\u0e07\u0e19\u0e32\u0e22\u0e08\u0e31\u0e07\u0e2e\u0e34\u0e40\u0e14\u0e30\n#\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e19\u0e2a\u0e19\u0e34\u0e17\u0e04\u0e19\u0e41\u0e23\u0e01\u0e41\u0e25\u0e30\u0e04\u0e19\u0e2a\u0e38\u0e14\u0e17\u0e49\u0e32\u0e22\u0e02\u0e2d\u0e07\u0e40\u0e04\u0e19\u0e08\u0e31\u0e07",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 92
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -3532,7 +3383,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 93
+					"index": 92
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3540,6 +3391,32 @@
 		"artist": "Yasuharu Takanashi",
 		"artist_image": "http://i.imgur.com/Z81vet0.jpg",
 		"cover": "http://i.imgur.com/08CoJCz.png",
+		"album": "Fairy Tail"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-_SPLrkQTGPk-Fairy_Tail_-_Fairy_Tail_s_is_Born_New_2016_Ost.m4a",
+		"video_id": "_SPLrkQTGPk",
+		"url": "https://www.youtube.com/watch?v=_SPLrkQTGPk",
+		"title": "Fairy Tail's is Born",
+		"duration": 138,
+		"thumbnail": "https://i.ytimg.com/vi/_SPLrkQTGPk/maxresdefault.jpg",
+		"description": "Fairy tail Sound Collection Volume 2\nBy Yasuharu Takanashi ~ I dont own anything, all rights belong to their respective owners. ~",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 93
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Fairy Tail's is Born",
+		"artist": "Yasuharu Takanashi",
+		"artist_image": "http://i.imgur.com/b7FjWXj.png",
+		"cover": "http://i.imgur.com/14iGHZY.jpg",
 		"album": "Fairy Tail"
 	***REMOVED***,
 	***REMOVED***
@@ -3596,11 +3473,11 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
-		"type": "YoutubeEntry",
+		"type": "GieselaEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-W7rrk7Hmngc-Yasuharu_Takanashi_-_Multiflora_no_Theme.webm",
 		"video_id": "W7rrk7Hmngc",
 		"url": "https://www.youtube.com/watch?v=W7rrk7Hmngc",
-		"title": "Yasuharu Takanashi: Multiflora no Theme",
+		"title": "Multiflora No",
 		"duration": 116,
 		"thumbnail": "https://i.ytimg.com/vi/W7rrk7Hmngc/maxresdefault.jpg",
 		"description": "From: Fairy Tail\nSong: Theme no Multiflora\nArtist: Yasuharu Takanashi",
@@ -3613,7 +3490,12 @@
 					"index": 96
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
+		***REMOVED***,
+		"song_title": "Multiflora No",
+		"artist": "Yasuharu Takanashi",
+		"artist_image": "http://i.imgur.com/7ZMyjFx.jpg",
+		"cover": "http://i.imgur.com/8PFSDDp.jpg",
+		"album": "Fairy Tail"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -3669,27 +3551,6 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-lMQK5MbIb1E-Yojou-han_Shinwa_Taikai_The_Tatami_Galaxy_ED_Full.webm",
-		"video_id": "lMQK5MbIb1E",
-		"url": "https://www.youtube.com/watch?v=lMQK5MbIb1E",
-		"title": "Yojou-han Shinwa Taikai (The Tatami Galaxy) ED Full",
-		"duration": 215,
-		"thumbnail": "https://i.ytimg.com/vi/lMQK5MbIb1E/hqdefault.jpg",
-		"description": "Kami-sama no Iu T\u014dri\" by Junji Ishiwatari & Yoshinori Sunahara + Etsuko Yakushimaru\n\u300c\u795e\u69d8\u306e\u3044\u3046\u3068\u304a\u308a\u300d \u3044\u3057\u308f\u305f\u308a\u6df3\u6cbb\uff06\u7802\u539f\u826f\u5fb3\uff0b\u3084\u304f\u3057\u307e\u308b\u3048\u3064\u3053\n\nIf anyone wants a download link, just message me.  I'd be more than happy to give you one :",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 99
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
 		"type": "GieselaEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-AK9DlbzxCVk-Ghost_in_the_Shell_-_Stand_Alone_Complex_2_-_Ending.m4a",
 		"video_id": "AK9DlbzxCVk",
@@ -3704,7 +3565,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 100
+					"index": 99
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3730,7 +3591,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 101
+					"index": 100
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3739,6 +3600,32 @@
 		"artist_image": "http://i.imgur.com/8G9ifKY.jpg",
 		"cover": "http://i.imgur.com/tbs1jMH.png",
 		"album": "Mirai Nikki"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-2uq34TeWEdQ-Fullmetal_Alchemist_Brotherhood_Opening_1-Again_creditless.webm",
+		"video_id": "2uq34TeWEdQ",
+		"url": "https://www.youtube.com/watch?v=2uq34TeWEdQ",
+		"title": "Again",
+		"duration": 90,
+		"thumbnail": "http://i.imgur.com/2pWMLEM.jpg",
+		"description": "I do not own anything.  Hopefully Youtube won't take it down.\nFullMetal Alchemist. Enjoy",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 101
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Again",
+		"artist": "Yui",
+		"artist_image": "http://i.imgur.com/LPP9Icg.jpg",
+		"cover": "http://i.imgur.com/jImF9AU.jpg",
+		"album": "Fullmetal Alchemist Brotherhood"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
@@ -3821,6 +3708,32 @@
 	***REMOVED***
 		"version": 103,
 		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-PxZov8-DBHo-Greatest_Battle_Music_OF_All_Times_-_Rule_The_Battlefield.webm",
+		"video_id": "PxZov8-DBHo",
+		"url": "https://www.youtube.com/watch?v=PxZov8-DBHo",
+		"title": "Rule The Battlefield",
+		"duration": 196,
+		"thumbnail": "https://i.ytimg.com/vi/PxZov8-DBHo/maxresdefault.jpg",
+		"description": "From: Fate/Zero Original Soundtrack I\nArtist: Yuki Kajiura\nYear: 2011\n\nAll music and images belong to their rightful owners. I do not own any of the music, images, or clips used in any of my videos. Absolutely no copyright infringement intended.",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 105
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "Rule The Battlefield",
+		"artist": "Yuki Kajiura",
+		"artist_image": "http://i.imgur.com/FGiMpf3.jpg",
+		"cover": "http://i.imgur.com/52vTJAv.jpg",
+		"album": "Fate/Zero"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
 		"expected_filename": null,
 		"video_id": "655j9WXi4DA",
 		"url": "https://www.youtube.com/watch?v=655j9WXi4DA",
@@ -3834,7 +3747,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 105
+					"index": 106
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3860,7 +3773,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 106
+					"index": 107
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3886,7 +3799,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 107
+					"index": 108
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3912,7 +3825,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 108
+					"index": 109
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3925,45 +3838,14 @@
 	***REMOVED***
 		"version": 103,
 		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-a2GujJZfXpg-original_ver._-Your_name._Music_Video_edition-_from_new_album_DVD.webm",
-		"video_id": "a2GujJZfXpg",
-		"url": "https://www.youtube.com/watch?v=a2GujJZfXpg",
-		"title": "Sparkle",
-		"duration": 182,
-		"thumbnail": "http://i.imgur.com/Ur0zhjv.jpg",
-		"description": "\u30b9\u30d1\u30fc\u30af\u30eb [original ver.] -Your name. Music Video edition- \u4e88\u544a\u7de8 from new album\u300c\u4eba\u9593\u958b\u82b1\u300d\u521d\u56de\u76e4DVD",
+		"expected_filename": "cache\\audio_cache\\youtube-s6jk_DBcLkQ-Sankarea_OP_Full_Lyrics_-_Nano.RIPE_-_Esoragoto.webm",
+		"video_id": "s6jk_DBcLkQ",
+		"url": "https://www.youtube.com/watch?v=s6jk_DBcLkQ",
+		"title": "Esoragoto",
+		"duration": 210,
+		"thumbnail": "http://i.imgur.com/Pe0qc1Z.jpg",
+		"description": "\u300cSankarea Opening Full HD\u300d\n\nArtist: Nano.Ripe\nAlbum: Plus to Minus no Shikumi\nSong: Esoragoto\n\n\u2605 DISCLAIMER \u2605\nI do not own the anime, music, artwork or the lyrics.\nAll rights reserved to their respective owners!!!\nThis video is not meant to infringe any of the copyrights.\nThis is for people's enjoyment only.",
 		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 109
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***,
-		"song_title": "Sparkle",
-		"artist": "Radwimps",
-		"artist_image": "http://i.imgur.com/XeqFVje.jpg",
-		"cover": "http://i.imgur.com/4wSP0KA.jpg",
-		"album": "Your Name"
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "YoutubeEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-galehoexbCU-Boku_no_hero_academia_ED_Full_HEROES.webm",
-		"video_id": "galehoexbCU",
-		"url": "https://www.youtube.com/watch?v=galehoexbCU",
-		"title": "\u50d5\u306e\u30d2\u30fc\u30ed\u30fc\u30a2\u30ab\u30c7\u30df\u30a2\u3010Boku no hero academia\u3011 ED Full \u300cHEROES\u300d",
-		"duration": 182,
-		"thumbnail": "https://i.ytimg.com/vi/galehoexbCU/maxresdefault.jpg",
-		"description": "YOU CAN BE A HERO",
-		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
 			"playlist": ***REMOVED***
 				"type": "built-in/dict",
 				"value": ***REMOVED***
@@ -3972,32 +3854,11 @@
 					"index": 110
 				***REMOVED***
 			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
-		"type": "GieselaEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-PDSkFeMVNFs-movie_ver._RADWIMPS_MV.webm",
-		"video_id": "PDSkFeMVNFs",
-		"url": "https://www.youtube.com/watch?v=PDSkFeMVNFs",
-		"title": "Zen Zen Zense",
-		"duration": 292,
-		"thumbnail": "http://i.imgur.com/OTI99Qr.jpg",
-		"description": "\u524d\u524d\u524d\u4e16 (movie ver.) RADWIMPS MV",
-		"meta": ***REMOVED***
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 111
-				***REMOVED***
-			***REMOVED***
 		***REMOVED***,
-		"song_title": "Zen Zen Zense",
-		"artist": "Radwimps",
-		"artist_image": "http://i.imgur.com/Ui3gfom.jpg",
-		"cover": "http://i.imgur.com/pvm1vaw.jpg",
-		"album": "Your Name"
+		"song_title": "Esoragoto",
+		"artist": "nano.RIPE",
+		"artist_image": "http://i.imgur.com/l8vurja.jpg",
+		"cover": "http://i.imgur.com/tYgJ9oo.jpg",
+		"album": "Sankarea"
 	***REMOVED***
 ]
