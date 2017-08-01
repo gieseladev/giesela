@@ -464,7 +464,24 @@ class PlaylistCommands:
         savename = _savename
         user_savename = savename
 
-        interface_string = "**{}** by **{}** ({} song{} with a total length of {})\n\n{}\n\n**You can use the following commands:**\n`add <query>`: Add a video to the playlist (this command works like the normal `{}play` command)\n`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index\n`edit <index>`: edit an entry\n`rename <newname>`: rename the current playlist\n`search <query>`: search for an entry\n`extras`: see the special functions\n\n`p`: previous page\n`n`: next page\n`save`: save and close the builder\n`exit`: leave the builder without saving"
+        interface_string = "\n".join([
+            "**{}** by **{}** ({} song{} with a total length of {})",
+            "",
+            "{}",  # this is where all the entries go
+            "",
+            "**You can use the following commands:**",
+            "`add <query>`: Add a video to the playlist (this command works like the normal `{}play` command)",
+            "`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index",
+            "`edit <index>`: edit an entry",
+            "`rename <new name>`: rename the current playlist",
+            "`search <query>`: search for an entry",
+            "`extras`: see the special functions",
+            "",
+            "`p`: previous page",
+            "`n`: next page",
+            "`save`: save and close the builder",
+            "`exit`: leave the builder without saving"
+        ])
 
         extras_string = "\n".join([
             "**{}** by **{}** ({} song{} with a total length of {})",
@@ -521,7 +538,8 @@ class PlaylistCommands:
                             items_per_page)) if len(entries) > 0 else 0
 
             for i in range(start, end):
-                entries_text += "`{}.` {} {}\n".format(i + 1, entries[i].title, self.config.entry_type_emojis[entries[i].__class__.__name__])
+                entries_text += "`{:0>2}.` {} {}\n".format(i + 1, entries[i].title, self.config.entry_type_emojis[entries[i].__class__.__name__])
+
             entries_text += "\nPage {} of {}".format(entries_page + 1,
                                                      iterations + 1)
 
