@@ -60,7 +60,7 @@ class EnqueueCommands:
                 station_info = RadioStations.get_random_station()
                 await player.playlist.add_radio_entry(station_info, channel=channel, author=author)
                 return Response(
-                    "I choose\n**{.name}**".format(station_info.name))
+                    "I choose\n**{.name}**".format(station_info))
             else:
                 # try to find the radio station
                 search_name = " ".join(leftover_args)
