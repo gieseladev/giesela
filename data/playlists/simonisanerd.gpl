@@ -99,7 +99,7 @@
 		***REMOVED***,
 		"song_title": "Wake up!",
 		"artist": "AAA",
-		"artist_image": "https://i.scdn.co/image/06d1d22256913bb40a731d6b51366ced2bfa0572",
+		"artist_image": "https://i.scdn.co/image/413325308ca57070cce8a075701dc520e8fc0792",
 		"cover": "https://i.scdn.co/image/1464b7e94d9948d27c27f5f7ac604cb1eb00d1fc",
 		"album": "GOLD SYMPHONY",
 		"spotify_data": ***REMOVED***
@@ -306,128 +306,6 @@
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
-		"type": "SpotifyEntry",
-		"expected_filename": "cache\\audio_cache\\youtube-t-QSmNReDyI-Evangelion_Opening.webm",
-		"video_id": "t-QSmNReDyI",
-		"url": "https://www.youtube.com/watch?v=t-QSmNReDyI",
-		"title": "Anonymuz - Evangelion X",
-		"duration": 91,
-		"thumbnail": "https://i.ytimg.com/vi/t-QSmNReDyI/hqdefault.jpg",
-		"description": "Opening",
-		"meta": ***REMOVED***
-			"author": ***REMOVED***
-				"type": "Member",
-				"id": "203302899277627392",
-				"name": "siku2"
-			***REMOVED***,
-			"playlist": ***REMOVED***
-				"type": "built-in/dict",
-				"value": ***REMOVED***
-					"cover": "http://i.imgur.com/MFXq8og.jpg",
-					"name": "simonisanerd",
-					"index": 8
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***,
-		"song_title": "Evangelion X",
-		"artist": "Anonymuz",
-		"artist_image": "https://i.scdn.co/image/877451a1921eadcfc7feec8bca8baf3454cfc629",
-		"cover": "https://i.scdn.co/image/aeaa17f240d4a39d01b52f3fc711469690a5bcd4",
-		"album": "Evangelion X",
-		"spotify_data": ***REMOVED***
-			"id": "1xZi76zT3TxdMAorK63uTa",
-			"name": "Evangelion X",
-			"artists": [
-				***REMOVED***
-					"id": "625BWS4LmjJe3a82OCSFsm",
-					"name": "Anonymuz",
-					"images": [
-						***REMOVED***
-							"height": 640,
-							"url": "https://i.scdn.co/image/877451a1921eadcfc7feec8bca8baf3454cfc629",
-							"width": 640
-						***REMOVED***,
-						***REMOVED***
-							"height": 300,
-							"url": "https://i.scdn.co/image/1b3691a2516c98bf7337a2c3ff5635cc1367f1b8",
-							"width": 300
-						***REMOVED***,
-						***REMOVED***
-							"height": 64,
-							"url": "https://i.scdn.co/image/f8c14b06e00cd00472816ec9843694564ba4b6f2",
-							"width": 64
-						***REMOVED***
-					],
-					"genres": [
-						"deep underground hip hop"
-					],
-					"popularity": 40,
-					"uri": "spotify:artist:625BWS4LmjJe3a82OCSFsm",
-					"href": "https://open.spotify.com/artist/625BWS4LmjJe3a82OCSFsm"
-				***REMOVED***
-			],
-			"artist": "Anonymuz",
-			"cover_url": "https://i.scdn.co/image/aeaa17f240d4a39d01b52f3fc711469690a5bcd4",
-			"duration": 161.671,
-			"album": ***REMOVED***
-				"id": "2CMjY37pvkyGMVAdj1ugla",
-				"name": "Evangelion X",
-				"artists": [
-					***REMOVED***
-						"id": "625BWS4LmjJe3a82OCSFsm",
-						"name": "Anonymuz",
-						"images": [
-							***REMOVED***
-								"height": 640,
-								"url": "https://i.scdn.co/image/877451a1921eadcfc7feec8bca8baf3454cfc629",
-								"width": 640
-							***REMOVED***,
-							***REMOVED***
-								"height": 300,
-								"url": "https://i.scdn.co/image/1b3691a2516c98bf7337a2c3ff5635cc1367f1b8",
-								"width": 300
-							***REMOVED***,
-							***REMOVED***
-								"height": 64,
-								"url": "https://i.scdn.co/image/f8c14b06e00cd00472816ec9843694564ba4b6f2",
-								"width": 64
-							***REMOVED***
-						],
-						"genres": [
-							"deep underground hip hop"
-						],
-						"popularity": 40,
-						"uri": "spotify:artist:625BWS4LmjJe3a82OCSFsm",
-						"href": "https://open.spotify.com/artist/625BWS4LmjJe3a82OCSFsm"
-					***REMOVED***
-				],
-				"images": [
-					***REMOVED***
-						"height": 640,
-						"url": "https://i.scdn.co/image/aeaa17f240d4a39d01b52f3fc711469690a5bcd4",
-						"width": 640
-					***REMOVED***,
-					***REMOVED***
-						"height": 300,
-						"url": "https://i.scdn.co/image/3e24c9251bc0360e7b55c3c307372d20a4f9289b",
-						"width": 300
-					***REMOVED***,
-					***REMOVED***
-						"height": 64,
-						"url": "https://i.scdn.co/image/b229bc0f4c51887cb109963172b4a8d30bb141a3",
-						"width": 64
-					***REMOVED***
-				],
-				"uri": "spotify:album:2CMjY37pvkyGMVAdj1ugla"
-			***REMOVED***,
-			"popularity": 36,
-			"uri": "spotify:track:1xZi76zT3TxdMAorK63uTa",
-			"query": "Evangelion",
-			"certainty": 0.6451612903225806
-		***REMOVED***
-	***REMOVED***,
-	***REMOVED***
-		"version": 103,
 		"type": "GieselaEntry",
 		"expected_filename": "cache\\audio_cache\\youtube-1MsuXjTlCGE-Charlotte_Ending_-.webm",
 		"video_id": "1MsuXjTlCGE",
@@ -442,7 +320,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 9
+					"index": 8
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -468,7 +346,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 10
+					"index": 9
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -494,7 +372,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 11
+					"index": 10
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -520,7 +398,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 12
+					"index": 11
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -546,7 +424,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 13
+					"index": 12
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -572,7 +450,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 14
+					"index": 13
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -598,7 +476,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 15
+					"index": 14
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -624,7 +502,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 16
+					"index": 15
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -650,7 +528,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 17
+					"index": 16
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -676,7 +554,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 18
+					"index": 17
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -702,7 +580,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 19
+					"index": 18
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -728,13 +606,13 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 20
+					"index": 19
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
 		"song_title": "Fairy Tail ~Yakusoku No Hi~",
 		"artist": "Chihiro Yonekura",
-		"artist_image": "https://i.scdn.co/image/78f4b3437508746408616c77f7e47937d70aeb50",
+		"artist_image": "https://i.scdn.co/image/0762027bdbc4624ee1b74951e60db827d3862f2a",
 		"cover": "https://i.scdn.co/image/f31169ee90b3fbf1137107137e65ebcb84736013",
 		"album": "Tv Anime \"Fairy Tail\" Op & Ed Theme Songs Vol. 3",
 		"spotify_data": ***REMOVED***
@@ -825,7 +703,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 21
+					"index": 20
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -851,7 +729,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 22
+					"index": 21
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -877,7 +755,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 23
+					"index": 22
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -903,7 +781,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 24
+					"index": 23
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -929,7 +807,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 25
+					"index": 24
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -955,7 +833,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 26
+					"index": 25
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -981,7 +859,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 27
+					"index": 26
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1007,7 +885,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 28
+					"index": 27
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1033,13 +911,13 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 29
+					"index": 28
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
 		"song_title": "Kono Te Nobashite",
 		"artist": "HI-FI CAMP",
-		"artist_image": "https://i.scdn.co/image/d663d76d569bc13de990ad6dbc679ef686996a82",
+		"artist_image": "https://i.scdn.co/image/db1b76b74165ac3ba3de1518691e841c764c7516",
 		"cover": "https://i.scdn.co/image/ec6f07c5c3204a6f151d318b0e167448249b5213",
 		"album": "Tv Anime \"Fairy Tail\" Op & Ed Theme Songs Vol. 2 (Standard Edition)",
 		"spotify_data": ***REMOVED***
@@ -1130,7 +1008,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 30
+					"index": 29
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1156,7 +1034,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 31
+					"index": 30
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1182,7 +1060,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 32
+					"index": 31
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1208,7 +1086,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 33
+					"index": 32
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1356,13 +1234,13 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 34
+					"index": 33
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
 		"song_title": "The Reluctant Heroes",
 		"artist": "Hiroyuki Sawano & MPI",
-		"artist_image": "https://i.scdn.co/image/1d4eaf6713b68d024af77f75341844fa614ac640",
+		"artist_image": "https://i.scdn.co/image/3c1c1781de0c5974226bfae4e5cf649cf93b9d37",
 		"cover": "https://i.scdn.co/image/3f3abb6325d6b7acefe4beca1ff8110625398813",
 		"album": "Attack on Titan (Original Soundtrack)",
 		"spotify_data": ***REMOVED***
@@ -1486,7 +1364,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 35
+					"index": 34
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1512,7 +1390,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 36
+					"index": 35
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1538,7 +1416,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 37
+					"index": 36
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1564,7 +1442,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 38
+					"index": 37
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1590,7 +1468,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 39
+					"index": 38
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1616,7 +1494,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 40
+					"index": 39
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1642,7 +1520,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 41
+					"index": 40
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1668,7 +1546,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 42
+					"index": 41
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1694,7 +1572,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 43
+					"index": 42
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1720,7 +1598,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 44
+					"index": 43
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1746,7 +1624,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 45
+					"index": 44
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1772,7 +1650,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 46
+					"index": 45
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1798,7 +1676,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 47
+					"index": 46
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1824,7 +1702,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 48
+					"index": 47
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1850,7 +1728,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 49
+					"index": 48
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1876,7 +1754,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 50
+					"index": 49
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1902,7 +1780,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 51
+					"index": 50
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1928,7 +1806,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 52
+					"index": 51
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -1959,7 +1837,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 53
+					"index": 52
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2082,7 +1960,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 54
+					"index": 53
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2108,7 +1986,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 55
+					"index": 54
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2134,7 +2012,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 56
+					"index": 55
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2160,13 +2038,13 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 57
+					"index": 56
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
 		"song_title": "Guren No Yumiya",
 		"artist": "Linked Horizon",
-		"artist_image": "https://i.scdn.co/image/81fbe237c1e8e446b364d317a23992d92ee2a83b",
+		"artist_image": "https://i.scdn.co/image/f17a9a1c7eeb6e0e41adf13b62ecc3e9cebbc6dc",
 		"cover": "https://i.scdn.co/image/63d65c2991b4f30a9b7febae2c1fb2eb8db64c94",
 		"album": "Jiyuu E No Shingeki",
 		"spotify_data": ***REMOVED***
@@ -2279,7 +2157,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 58
+					"index": 57
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2305,7 +2183,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 59
+					"index": 58
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2331,7 +2209,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 60
+					"index": 59
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2357,7 +2235,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 61
+					"index": 60
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2383,7 +2261,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 62
+					"index": 61
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2409,7 +2287,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 63
+					"index": 62
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2435,7 +2313,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 64
+					"index": 63
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2461,7 +2339,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 65
+					"index": 64
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2487,7 +2365,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 66
+					"index": 65
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2513,7 +2391,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 67
+					"index": 66
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2539,7 +2417,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 68
+					"index": 67
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2570,7 +2448,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 69
+					"index": 68
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2695,7 +2573,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 70
+					"index": 69
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2721,7 +2599,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 71
+					"index": 70
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2747,7 +2625,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 72
+					"index": 71
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2773,7 +2651,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 73
+					"index": 72
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2799,7 +2677,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 74
+					"index": 73
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2825,7 +2703,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 75
+					"index": 74
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2851,7 +2729,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 76
+					"index": 75
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2877,7 +2755,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 77
+					"index": 76
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2903,7 +2781,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 78
+					"index": 77
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2929,7 +2807,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 79
+					"index": 78
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2955,7 +2833,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 80
+					"index": 79
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -2981,7 +2859,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 81
+					"index": 80
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3007,7 +2885,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 82
+					"index": 81
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3149,7 +3027,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 83
+					"index": 82
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3175,7 +3053,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 84
+					"index": 83
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3201,7 +3079,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 85
+					"index": 84
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3227,7 +3105,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 86
+					"index": 85
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3253,7 +3131,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 87
+					"index": 86
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3279,7 +3157,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 88
+					"index": 87
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3305,7 +3183,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 89
+					"index": 88
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3331,7 +3209,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 90
+					"index": 89
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3357,7 +3235,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 91
+					"index": 90
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3383,7 +3261,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 92
+					"index": 91
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3409,7 +3287,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 93
+					"index": 92
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3435,7 +3313,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 94
+					"index": 93
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3461,7 +3339,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 95
+					"index": 94
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3487,7 +3365,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 96
+					"index": 95
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3513,7 +3391,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 97
+					"index": 96
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3539,7 +3417,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 98
+					"index": 97
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3565,7 +3443,7 @@
 				"value": ***REMOVED***
 					"cover": "http://i.imgur.com/MFXq8og.jpg",
 					"name": "simonisanerd",
-					"index": 99
+					"index": 98
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***,
@@ -3574,6 +3452,32 @@
 		"artist_image": "http://i.imgur.com/jZFtaKI.jpg",
 		"cover": "http://i.imgur.com/eEady9w.jpg",
 		"album": "Ghost in the Shell"
+	***REMOVED***,
+	***REMOVED***
+		"version": 103,
+		"type": "GieselaEntry",
+		"expected_filename": "cache\\audio_cache\\youtube-t-QSmNReDyI-Evangelion_Opening.webm",
+		"video_id": "t-QSmNReDyI",
+		"url": "https://www.youtube.com/watch?v=t-QSmNReDyI",
+		"title": "A Cruel Angel's Thesis",
+		"duration": 91,
+		"thumbnail": "http://i.imgur.com/zteImMV.jpg",
+		"description": "Opening",
+		"meta": ***REMOVED***
+			"playlist": ***REMOVED***
+				"type": "built-in/dict",
+				"value": ***REMOVED***
+					"cover": "http://i.imgur.com/MFXq8og.jpg",
+					"name": "simonisanerd",
+					"index": 99
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***,
+		"song_title": "A Cruel Angel's Thesis",
+		"artist": "Yoko Takahashi",
+		"artist_image": "http://i.imgur.com/ZFIsLvx.png",
+		"cover": "http://i.imgur.com/uPFe8ro.jpg",
+		"album": "Neon Genesis Evangelion"
 	***REMOVED***,
 	***REMOVED***
 		"version": 103,
