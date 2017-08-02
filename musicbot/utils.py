@@ -21,8 +21,8 @@ from discord.ext.commands.bot import _get_variable
 from PIL import Image, ImageStat
 
 import asyncio
-
-from .constants import DISCORD_MSG_CHAR_LIMIT
+from musicbot.config import ConfigDefaults
+from musicbot.constants import DISCORD_MSG_CHAR_LIMIT
 
 
 def wrap_string(target, wrapping, handle_special=True, reverse_closer=True):
