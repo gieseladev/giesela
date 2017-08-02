@@ -4,6 +4,8 @@ import traceback
 import requests
 from bs4 import BeautifulSoup
 
+from musicbot.config import ConfigDefaults
+
 
 def search_for_lyrics(query):
     return search_for_lyrics_google(query)
@@ -42,7 +44,7 @@ def _extract_lyrics_genius(url):
     resp = requests.get(url)
     content = resp.text
 
-    bs = BeautifulSoup(content, "lxml")
+    bs = BeautifulSoup(content, ConfigDefaults.html_parser)
     lyrics_window = bs.find_all("div", ***REMOVED***"class": "lyrics"***REMOVED***)[0]
     lyrics = lyrics_window.text
     return lyrics.strip()
@@ -52,7 +54,7 @@ def _extract_lyrics_lyricsmode(url):
     resp = requests.get(url)
     content = resp.text
 
-    bs = BeautifulSoup(content, "lxml")
+    bs = BeautifulSoup(content, ConfigDefaults.html_parser)
     lyrics_window = bs.find_all(
         "p", ***REMOVED***"id": "lyrics_text", "class": "ui-annotatable"***REMOVED***)[0]
     lyrics = lyrics_window.text
@@ -66,7 +68,7 @@ def _extract_lyrics_lyrical_nonsense(url):
         resp = requests.get(url)
         content = resp.text
 
-        bs = BeautifulSoup(content, "lxml")
+        bs = BeautifulSoup(content, ConfigDefaults.html_parser)
         # take the Romaji version if there is one, otherwise use the default
         # one
         lyrics_window = bs.find_all("div", ***REMOVED***"id": "Romaji"***REMOVED***)[
@@ -85,7 +87,7 @@ def _extract_lyrics_musixmatch(url):
     resp = requests.get(url, headers=headers)
     content = resp.text
 
-    bs = BeautifulSoup(content, "lxml")
+    bs = BeautifulSoup(content, ConfigDefaults.html_parser)
     lyrics_window = bs.find_all(
         "div", ***REMOVED***"class": "mxm-lyrics"***REMOVED***)[0].find_all("div", ***REMOVED***"class": "mxm-lyrics"***REMOVED***)[0].span
 
@@ -102,7 +104,7 @@ def _extract_lyrics_animelyrics(url):
 
     lyrics = None
 
-    bs = BeautifulSoup(content, "lxml")
+    bs = BeautifulSoup(content, ConfigDefaults.html_parser)
     main_body = bs.find_all("table")[0]
     lyrics_window = main_body.find_all("table")
 

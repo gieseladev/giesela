@@ -86,6 +86,8 @@ class ConfigDefaults:
     _password = None
     _token = None
 
+    html_parser = "html.parser"
+
     entry_type_emojis = ***REMOVED***
         "YoutubeEntry":     ":black_circle:",
         "TimestampEntry":   ":large_blue_circle:",

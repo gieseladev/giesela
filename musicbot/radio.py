@@ -136,7 +136,7 @@ class RadioSongExtractor:
         try:
             resp = requests.get(
                 "http://www.capitalfm.com/dynamic/now-playing-card/digital/")
-            soup = BeautifulSoup(resp.text)
+            soup = BeautifulSoup(resp.text, ConfigDefaults.html_parser)
             title = " ".join(soup.find_all(
                 "div",
                 attrs=***REMOVED***"itemprop": "name", "class": "track"***REMOVED***
@@ -189,7 +189,7 @@ class RadioSongExtractor:
     def _get_current_song_heart_london():
         try:
             resp = requests.get("http://www.heart.co.uk/london/on-air/last-played-songs/")
-            soup = BeautifulSoup(resp.text)
+            soup = BeautifulSoup(resp.text, ConfigDefaults.html_parser)
 
             title = soup.findAll("h3", ***REMOVED***"class": "track"***REMOVED***)[0].text.strip()
             artist = soup.findAll("p", ***REMOVED***"class": "artist"***REMOVED***)[0].text.strip()
