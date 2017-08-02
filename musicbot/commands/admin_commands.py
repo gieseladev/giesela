@@ -437,7 +437,7 @@ class AdminCommands:
 
         res = escape_dis(str(ret))
         if ret is not None and res:
-            return Response("**RESULT**\n```python\n***REMOVED******REMOVED***\n```".format(res)
+            return Response("**RESULT**\n```python\n***REMOVED******REMOVED***\n```".format(res))
 
     @owner_only
     async def cmd_shutdown(self, channel):
