@@ -404,7 +404,8 @@ class AdminCommands:
         "3.8.3": (1499184914, "Can now use multiline statements without having to use tricks like /n/"),
         "3.8.5": (1499279145, "Better code display"),
         "3.9.6": (1499889309, "Escaping the result and adding the shortcut entry for player.current_entry"),
-        "4.3.4": (1501246003, "Don't block user anymore. That's stupid")
+        "4.3.4": (1501246003, "Don't block user anymore. That's stupid"),
+        "4.4.7": (1501683507, "Not showing empty result message")
     })
     async def cmd_execute(self, channel, author, server, raw_content, player=None):
         statement = raw_content.strip()
@@ -434,7 +435,9 @@ class AdminCommands:
                 "**While executing the statement the following error occured**\n{}\n{}".
                 format(traceback.format_exc(), str(e)))
 
-        return Response("**RESULT**\n```python\n{}\n```".format(escape_dis(str(ret))))
+        res = escape_dis(str(ret))
+        if ret is not None and res:
+            return Response("**RESULT**\n```python\n{}\n```".format(res)
 
     @owner_only
     async def cmd_shutdown(self, channel):
