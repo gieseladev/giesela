@@ -1,4 +1,3 @@
-import asyncio
 import atexit
 import hashlib
 import json
@@ -7,6 +6,8 @@ import traceback
 from json.decoder import JSONDecodeError
 from random import choice
 from string import ascii_lowercase
+
+import asyncio
 
 from .entry import TimestampEntry
 from .simple_web_socket_server import SimpleWebSocketServer, WebSocket
@@ -22,13 +23,23 @@ class GieselaWebSocket(WebSocket):
     def init(self):
         self.registration_token = None
 
+    def log(self, *messages):
+        message = " ".join(str(msg) for msg in messages)
+
+        try:
+            server_id, author = GieselaServer.get_token_information(self.token)
+            identification = "***REMOVED******REMOVED***@***REMOVED******REMOVED***/***REMOVED******REMOVED***".format(author, server_id, self.address[0])
+        except AttributeError:
+            identification = self.address
+
+        print("[WEBSOCKET] <***REMOVED******REMOVED***>".format(identification, message))
+
     def handleMessage(self):
         try:
             try:
                 data = json.loads(self.data)
             except JSONDecodeError:
-                print(
-                    "[WEBSOCKET] <***REMOVED******REMOVED***> sent non-json: ***REMOVED******REMOVED***".format(self.address, self.data))
+                print("[WEBSOCKET] <***REMOVED******REMOVED***> sent non-json: ***REMOVED******REMOVED***".format(self.address, self.data))
                 return
 
             token = data.get("token", None)
@@ -37,8 +48,7 @@ class GieselaWebSocket(WebSocket):
                 if info:
                     self.token = token
                     if self not in GieselaServer.authenticated_clients:
-                        GieselaServer.authenticated_clients.append(
-                            self)  # register for updates
+                        GieselaServer.authenticated_clients.append(self)  # register for updates
                     # handle all the other shit over there
                     self.handleAuthenticatedMessage(data)
                     return
@@ -91,6 +101,7 @@ class GieselaWebSocket(WebSocket):
         if request:
             # send all the information one can acquire
             if request == "send_information":
+                self.log("asked for information")
                 info = ***REMOVED******REMOVED***
                 player_info = GieselaServer.get_player_information(self.token)
                 user_info = GieselaServer.get_token_information(self.token)[
@@ -106,9 +117,11 @@ class GieselaWebSocket(WebSocket):
 
             if command == "play_pause":
                 if player.is_playing:
+                    self.log("paused")
                     player.pause()
                     success = True
                 elif player.is_paused:
+                    self.log("resumed")
                     player.resume()
                     success = True
 
@@ -119,6 +132,7 @@ class GieselaWebSocket(WebSocket):
                     else:
                         player.skip()
 
+                    self.log("skipped")
                     success = True
 
             elif command == "revert":
@@ -129,6 +143,7 @@ class GieselaWebSocket(WebSocket):
                 if target_seconds and player.current_entry:
                     if 0 <= target_seconds <= player.current_entry.duration:
                         success = player.goto_seconds(target_seconds)
+                        self.log("sought to", target_seconds)
                     else:
                         success = False
                 else:
@@ -139,6 +154,7 @@ class GieselaWebSocket(WebSocket):
                 if target_volume:
                     if 0 <= target_volume <= 1:
                         player.volume = target_volume
+                        self.log("set volume to", round(target_volume * 100, 1), "%")
                         success = True
                     else:
                         success = False
