@@ -5,6 +5,7 @@ import shutil
 import sys
 import traceback
 from collections import defaultdict
+from contextlib import suppress
 from datetime import datetime
 from random import choice
 from textwrap import indent, wrap
@@ -154,8 +155,13 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 # move that stuff
                 await self.players[server.id].voice_client.move_to(channel)
         else:
-            # create a new voice client in the selected channel (if given) or go to the home channel
-            voice_client = await self.join_voice_channel(channel or self.find_home_channel(server))
+            voice_client = None
+
+            # gotta be sure to get one
+            while not voice_client:
+                # create a new voice client in the selected channel (if given) or go to the home channel
+                with suppress(discord.errors.ConnectionClosed):
+                    voice_client = await self.join_voice_channel(channel or self.find_home_channel(server))
 
             player = MusicPlayer(self, voice_client) \
                 .on("play", self.on_player_play) \

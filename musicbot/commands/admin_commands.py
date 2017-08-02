@@ -1,4 +1,6 @@
 import traceback
+from contextlib import redirect_stdout
+from io import StringIO
 from textwrap import indent
 
 import aiohttp
@@ -405,7 +407,8 @@ class AdminCommands:
         "3.8.5": (1499279145, "Better code display"),
         "3.9.6": (1499889309, "Escaping the result and adding the shortcut entry for player.current_entry"),
         "4.3.4": (1501246003, "Don't block user anymore. That's stupid"),
-        "4.4.7": (1501683507, "Not showing empty result message")
+        "4.4.7": (1501683507, "Not showing empty result message"),
+        "4.4.8": (1501684956, "including the console log")
     })
     async def cmd_execute(self, channel, author, server, raw_content, player=None):
         statement = raw_content.strip()
@@ -419,6 +422,8 @@ class AdminCommands:
         env.update(locals())
         env.update(entry=player.current_entry)
 
+        console = StringIO()
+
         try:
             exec(statement, env)
         except SyntaxError as e:
@@ -429,7 +434,8 @@ class AdminCommands:
         func = env["func"]
 
         try:
-            ret = await func()
+            with redirect_stdout(console):
+                ret = await func()
         except Exception as e:
             return Response(
                 "**While executing the statement the following error occured**\n{}\n{}".
@@ -437,7 +443,12 @@ class AdminCommands:
 
         res = escape_dis(str(ret))
         if ret is not None and res:
-            return Response("**RESULT**\n```python\n{}\n```".format(res))
+            result = "**RESULT**\n{}".format(res)
+        else:
+            result = ""
+
+        result += "**Console**\n```\n{}\n```".format(console.getvalue())
+        return Response(result)
 
     @owner_only
     async def cmd_shutdown(self, channel):
