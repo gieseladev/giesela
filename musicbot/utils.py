@@ -699,7 +699,7 @@ def get_dev_changelog():
 
     changelog_page = resp.text
 
-    bs = BeautifulSoup(changelog_page, "lxml")
+    bs = BeautifulSoup(changelog_page, ConfigDefaults.html_parser)
     html_to_markdown = [
         (r"<\/?li>", "\t"), (r"<\/?ul>", ""),
         (r"<code.+?>(.+?)<\/code>", r"`\1`"),
