@@ -1,5 +1,7 @@
 import pickle
 
+from musicbot.config import static_config
+
 
 class MetaSettings(type):
 
@@ -14,10 +16,10 @@ class Settings(metaclass=MetaSettings):
     settings = ***REMOVED******REMOVED***
 
     def load_settings():
-        Settings.settings = pickle.load(open("config/settings.bin", "r+b"))
+        Settings.settings = pickle.load(open(static_config.settings_file, "r+b"))
 
     def save_settings():
-        pickle.dump(Settings.settings, open("config/settings.bin", "w+b"))
+        pickle.dump(Settings.settings, open(static_config.settings_file, "w+b"))
 
     def get_setting(key, **kwargs):
         try:
