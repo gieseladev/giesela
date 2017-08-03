@@ -53,7 +53,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         self.players = {}
         self.locks = defaultdict(asyncio.Lock)
         self.voice_client_connect_lock = asyncio.Lock()
-        self.voice_client_move_lock = asyncio.Lock()
 
         self.config = Config(ConfigDefaults.options_file)
         self.playlists = Playlists(ConfigDefaults.playlists_file)
@@ -70,8 +69,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         self.init_ok = False
         self.cached_client_id = None
         self.chatters = {}
-        self.blocked_commands = Settings.get_setting(
-            "blocked_commands", default={})
+        self.blocked_commands = Settings.get_setting("blocked_commands", default={})
         self.users_in_menu = set()
 
         if not self.autoplaylist:
@@ -148,32 +146,33 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         if isinstance(server, str):
             server = self.get_server(server)
 
-        # if there's already a player for this server
-        if server.id in self.players:
-            # but it's not in the right channel
-            if channel and self.players[server.id].voice_client.channel != channel:
-                # move that stuff
-                await self.players[server.id].voice_client.move_to(channel)
-        else:
-            voice_client = None
+        with (await self.voice_client_connect_lock):
+            # if there's already a player for this server
+            if server.id in self.players:
+                # but it's not in the right channel
+                if channel and self.players[server.id].voice_client.channel != channel:
+                    # move that stuff
+                    await self.players[server.id].voice_client.move_to(channel)
+            else:
+                voice_client = None
 
-            # gotta be sure to get one
-            while not voice_client:
-                # create a new voice client in the selected channel (if given) or go to the home channel
-                with suppress(discord.errors.ConnectionClosed):
-                    voice_client = await self.join_voice_channel(channel or self.find_home_channel(server))
+                # gotta be sure to get one
+                while not voice_client:
+                    # create a new voice client in the selected channel (if given) or go to the home channel
+                    with suppress(discord.errors.ConnectionClosed):
+                        voice_client = await self.join_voice_channel(channel or self.find_home_channel(server))
 
-            player = MusicPlayer(self, voice_client) \
-                .on("play", self.on_player_play) \
-                .on("resume", self.on_player_resume) \
-                .on("pause", self.on_player_pause) \
-                .on("stop", self.on_player_stop) \
-                .on("finished-playing", self.on_player_finished_playing) \
-                .on("entry-added", self.on_player_entry_added)
+                player = MusicPlayer(self, voice_client) \
+                    .on("play", self.on_player_play) \
+                    .on("resume", self.on_player_resume) \
+                    .on("pause", self.on_player_pause) \
+                    .on("stop", self.on_player_stop) \
+                    .on("finished-playing", self.on_player_finished_playing) \
+                    .on("entry-added", self.on_player_entry_added)
 
-            print("[PLAYER] Created a new player")
+                print("[PLAYER] Created a new player")
 
-            self.players[server.id] = player
+                self.players[server.id] = player
 
         return self.players[server.id]
 
@@ -427,9 +426,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             if self.exit_signal:
                 raise self.exit_signal
 
-    async def logout(self):
-        return await super().logout()
-
     async def on_error(self, event, *args, **kwargs):
         ex_type, ex, stack = sys.exc_info()
 
@@ -446,10 +442,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
         else:
             traceback.print_exc()
-
-    async def on_resumed(self):
-        for vc in self.the_voice_clients.values():
-            vc.main_ws = self.ws
 
     async def on_ready(self):
         print("\rConnected!  Giesela v%s\n" % BOTVERSION)

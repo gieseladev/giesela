@@ -5,6 +5,7 @@ from random import choice, shuffle
 from discord import Embed
 
 import asyncio
+from musicbot import exceptions
 
 from ..entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                      StreamEntry, TimestampEntry, YoutubeEntry)

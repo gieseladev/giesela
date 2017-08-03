@@ -10,13 +10,12 @@ from threading import Thread
 import asyncio
 import audioop
 from enum import Enum
-
-from .entry import RadioSongEntry, StreamEntry, TimestampEntry
-from .exceptions import FFmpegError, FFmpegWarning
-from .lib.event_emitter import EventEmitter
-from .playlist import Playlist
-from .utils import create_cmd_params, format_time_ffmpeg
-from .web_socket_server import GieselaServer
+from musicbot.entry import RadioSongEntry, StreamEntry, TimestampEntry
+from musicbot.exceptions import FFmpegError, FFmpegWarning
+from musicbot.lib.event_emitter import EventEmitter
+from musicbot.playlist import Playlist
+from musicbot.utils import create_cmd_params, format_time_ffmpeg
+from musicbot.web_socket_server import GieselaServer
 
 
 class PatchedBuff:
@@ -474,7 +473,21 @@ class MusicPlayer(EventEmitter):
                 if self.bot.config.debug_mode:
                     print("[Debug] Voice websocket is %s, reconnecting" %
                           self.voice_client.ws.state_name)
-                await self.bot.reconnect_voice_client(self.voice_client.channel.server)
+
+                try:
+                    await self.voice_client.disconnect()
+                except:
+                    print("Error disconnecting during reconnect")
+                    traceback.print_exc()
+
+                await asyncio.sleep(0.1)
+
+                new_vc = await self.bot.join_voice_channel(self.voice_client.channel)
+                self.reload_voice(new_vc)
+
+                if self.is_paused:
+                    self.resume()
+
                 await asyncio.sleep(4)
             finally:
                 await asyncio.sleep(1)
