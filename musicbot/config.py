@@ -107,7 +107,7 @@ class ConfigDefaults:
     history_limit = 200
 
     default_volume = 0.3
-    volume_power = 3.3
+    volume_power = 3
     save_videos = True
     auto_summon = True
     auto_playlist = False
@@ -120,9 +120,10 @@ class ConfigDefaults:
     options_file = "config/options.ini"
     cards_file = "data/cah/cards.ini"
     question_cards = "data/cah/question_cards.ini"
-    radios_file = "config/radio_stations.json"
+    radios_file = "data/radio_stations.json"
     playlists_file = "data/playlists.json"
-    random_sets = "config/random_sets.ini"
+    random_sets = "data/random_sets.ini"
+    settings_file = "data/settings.bin"
     blacklist_file = "config/blacklist.txt"
     auto_playlist_file = "config/autoplaylist.txt"
     hangman_wordlist = "data/hangman_wordlist.txt"
