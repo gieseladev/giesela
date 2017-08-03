@@ -591,14 +591,11 @@ class PlaylistCommands:
                         if time.time() - start_time > 40:
                             await self.safe_send_message(author, "Wow, that took quite a while.\nI'm done now though so come check it out!")
 
-                        pl_changes["added_entries"].extend(
-                            entries)  # just for the changelog
+                        pl_changes["added_entries"].extend(entries)  # just for the changelog
                         playlist["entries"].extend(entries)
-                        it, ov = divmod(
-                            len(playlist["entries"]), items_per_page)
+                        it, ov = divmod(sorted(playlist["entries"], key=lambda entry: entry.title).index(entries[0]), items_per_page)
                         entries_page = it - 1 if ov == 0 else it
                     except Exception as e:
-                        traceback.print_exc()
                         await self.safe_send_message(
                             channel,
                             "**Something went terribly wrong there:**\n```\n{}\n```".format(

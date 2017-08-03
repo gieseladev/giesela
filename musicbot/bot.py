@@ -475,7 +475,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
             opt_string = "  {}: ".format(opt)
 
-            lines = wrap(val, 100 - len(opt_string))
+            lines = wrap(str(val), 100 - len(opt_string))
             if len(lines) > 1:
                 val_string = "{}\n{}\n".format(
                     lines[0],

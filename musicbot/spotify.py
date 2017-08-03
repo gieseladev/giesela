@@ -132,7 +132,7 @@ class SpotifyTrack:
 
         spotify_track = cls.from_data(track)
 
-        spotify_track.certainty = get_certainty(query, track["name"], artists[0].name.lower())
+        spotify_track.certainty = get_certainty(query, track["name"], spotify_track.artists[0].name.lower())
         spotify_track.query = query
 
         return spotify_track
