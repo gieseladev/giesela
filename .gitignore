@@ -1,14 +1,5 @@
-.idea/
 *.pyc
-~*/
 
-audio_cache/
-audio_cache.7z
-audio_cache.zip
-dectalk/
-
-discord.log
 config/options.ini
+data/settings.bin
 cache
-count_lines.py
-config/settings.bin
