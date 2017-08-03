@@ -598,6 +598,7 @@ class PlaylistCommands:
                             len(playlist["entries"]), items_per_page)
                         entries_page = it - 1 if ov == 0 else it
                     except Exception as e:
+                        traceback.print_exc()
                         await self.safe_send_message(
                             channel,
                             "**Something went terribly wrong there:**\n```\n***REMOVED******REMOVED***\n```".format(
