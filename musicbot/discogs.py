@@ -63,6 +63,9 @@ def _extract_artist_image(release):
     except HTTPError:
         raise DiscogsException.ArtistNotFound
 
+    if not images:
+        raise DiscogsException.ArtistNotFound
+
     choices = []
 
     for img in images:
@@ -86,6 +89,9 @@ def _get_entry(query):
         raise DiscogsException.NoResults
 
     release = results[0]
+
+    if not release.artists:
+        raise DiscogsException.ArtistNotFound
 
     fields["song_title"] = _extract_song_title(release, query)
     fields["artist"] = release.artists[0].name
