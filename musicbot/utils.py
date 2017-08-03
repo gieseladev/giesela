@@ -378,7 +378,7 @@ def _run_timestamp_matcher(text):
 
     if len(songs) < 1:
         for match in re.finditer(
-                r"^(.+)\s[\(]?(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?[\)]?$",
+                r"^(.+?)\s[\(]?(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?[\)]?$",
                 text,
                 flags=re.MULTILINE):
             timestamp = int(match.group(4))
@@ -386,7 +386,7 @@ def _run_timestamp_matcher(text):
                 int(match.group(3)) * 60) if match.group(3) is not None else 0
             timestamp += (int(match.group(2)) *
                           3600) if match.group(2) is not None else 0
-            songs[timestamp] = match.group(1)
+            songs[timestamp] = match.group(1).strip(punctuation)
 
     if len(songs) > 0:
         return songs
