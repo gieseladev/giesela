@@ -374,7 +374,7 @@ def _run_timestamp_matcher(text):
             int(match.group(2)) * 60) if match.group(2) is not None else 0
         timestamp += (
             int(match.group(1)) * 3600) if match.group(1) is not None else 0
-        songs[timestamp] = match.group(4)
+        songs[timestamp] = match.group(4).strip(punctuation + " ")
 
     if len(songs) < 1:
         for match in re.finditer(
@@ -386,7 +386,7 @@ def _run_timestamp_matcher(text):
                 int(match.group(3)) * 60) if match.group(3) is not None else 0
             timestamp += (int(match.group(2)) *
                           3600) if match.group(2) is not None else 0
-            songs[timestamp] = match.group(1).strip(punctuation)
+            songs[timestamp] = match.group(1).strip(punctuation + " ")
 
     if len(songs) > 0:
         return songs
