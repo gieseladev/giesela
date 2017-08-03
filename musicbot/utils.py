@@ -21,8 +21,8 @@ from discord.ext.commands.bot import _get_variable
 from PIL import Image, ImageStat
 
 import asyncio
-
-from .constants import DISCORD_MSG_CHAR_LIMIT
+from musicbot.config import ConfigDefaults
+from musicbot.constants import DISCORD_MSG_CHAR_LIMIT
 
 
 def wrap_string(target, wrapping, handle_special=True, reverse_closer=True):
@@ -374,11 +374,11 @@ def _run_timestamp_matcher(text):
             int(match.group(2)) * 60) if match.group(2) is not None else 0
         timestamp += (
             int(match.group(1)) * 3600) if match.group(1) is not None else 0
-        songs[timestamp] = match.group(4)
+        songs[timestamp] = match.group(4).strip(punctuation + " ")
 
     if len(songs) < 1:
         for match in re.finditer(
-                r"^(.+)\s[\(]?(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?[\)]?$",
+                r"^(.+?)\s[\(]?(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?[\)]?$",
                 text,
                 flags=re.MULTILINE):
             timestamp = int(match.group(4))
@@ -386,7 +386,7 @@ def _run_timestamp_matcher(text):
                 int(match.group(3)) * 60) if match.group(3) is not None else 0
             timestamp += (int(match.group(2)) *
                           3600) if match.group(2) is not None else 0
-            songs[timestamp] = match.group(1)
+            songs[timestamp] = match.group(1).strip(punctuation + " ")
 
     if len(songs) > 0:
         return songs
@@ -699,7 +699,7 @@ def get_dev_changelog():
 
     changelog_page = resp.text
 
-    bs = BeautifulSoup(changelog_page, "lxml")
+    bs = BeautifulSoup(changelog_page, ConfigDefaults.html_parser)
     html_to_markdown = [
         (r"<\/?li>", "\t"), (r"<\/?ul>", ""),
         (r"<code.+?>(.+?)<\/code>", r"`\1`"),

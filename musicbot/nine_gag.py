@@ -1,12 +1,14 @@
 import json
 import re
 from datetime import datetime
-from enum import Enum
-from html import unescape
 from urllib import request
 from urllib.parse import urlencode
 
 from bs4 import BeautifulSoup
+
+from enum import Enum
+from html import unescape
+from musicbot.config import ConfigDefaults
 
 
 class ContentType(Enum):
@@ -75,7 +77,7 @@ class Post:
         with request.urlopen("https://9gag.com/gag/" + post_id) as f:
             data = f.read().decode("utf-8")
 
-        soup = BeautifulSoup(data, "lxml")
+        soup = BeautifulSoup(data, ConfigDefaults.html_parser)
         post_title = soup.h2.text
         post_upvotes = int(re.sub(r"\W", "", soup.findAll(
             "span", {"class": "badge-item-love-count"})[0].text))

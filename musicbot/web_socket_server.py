@@ -23,13 +23,23 @@ class GieselaWebSocket(WebSocket):
     def init(self):
         self.registration_token = None
 
+    def log(self, *messages):
+        message = " ".join(str(msg) for msg in messages)
+
+        try:
+            server_id, author = GieselaServer.get_token_information(self.token)
+            identification = "{}@{}/{}".format(author, server_id, self.address[0])
+        except AttributeError:
+            identification = self.address
+
+        print("[WEBSOCKET] <{}>".format(identification, message))
+
     def handleMessage(self):
         try:
             try:
                 data = json.loads(self.data)
             except JSONDecodeError:
-                print(
-                    "[WEBSOCKET] <{}> sent non-json: {}".format(self.address, self.data))
+                print("[WEBSOCKET] <{}> sent non-json: {}".format(self.address, self.data))
                 return
 
             token = data.get("token", None)
@@ -38,8 +48,7 @@ class GieselaWebSocket(WebSocket):
                 if info:
                     self.token = token
                     if self not in GieselaServer.authenticated_clients:
-                        GieselaServer.authenticated_clients.append(
-                            self)  # register for updates
+                        GieselaServer.authenticated_clients.append(self)  # register for updates
                     # handle all the other shit over there
                     self.handleAuthenticatedMessage(data)
                     return
@@ -92,6 +101,7 @@ class GieselaWebSocket(WebSocket):
         if request:
             # send all the information one can acquire
             if request == "send_information":
+                self.log("asked for information")
                 info = {}
                 player_info = GieselaServer.get_player_information(self.token)
                 user_info = GieselaServer.get_token_information(self.token)[
@@ -107,9 +117,11 @@ class GieselaWebSocket(WebSocket):
 
             if command == "play_pause":
                 if player.is_playing:
+                    self.log("paused")
                     player.pause()
                     success = True
                 elif player.is_paused:
+                    self.log("resumed")
                     player.resume()
                     success = True
 
@@ -120,6 +132,7 @@ class GieselaWebSocket(WebSocket):
                     else:
                         player.skip()
 
+                    self.log("skipped")
                     success = True
 
             elif command == "revert":
@@ -130,6 +143,7 @@ class GieselaWebSocket(WebSocket):
                 if target_seconds and player.current_entry:
                     if 0 <= target_seconds <= player.current_entry.duration:
                         success = player.goto_seconds(target_seconds)
+                        self.log("sought to", target_seconds)
                     else:
                         success = False
                 else:
@@ -140,6 +154,7 @@ class GieselaWebSocket(WebSocket):
                 if target_volume:
                     if 0 <= target_volume <= 1:
                         player.volume = target_volume
+                        self.log("set volume to", round(target_volume * 100, 1), "%")
                         success = True
                     else:
                         success = False
@@ -228,6 +243,12 @@ class GieselaServer:
             if token not in GieselaServer.awaiting_registration:
                 return token
 
+    def _broadcast_message(server_id, json_message):
+        for auth_client in GieselaServer.authenticated_clients:
+            # does this update concern this socket
+            if GieselaServer.get_token_information(auth_client.token)[0] == server_id:
+                auth_client.sendMessage(json_message)
+
     def get_player(token=None, server_id=None):
         if not token and not server_id:
             raise ValueError("Specify at least one of the two")
@@ -281,9 +302,6 @@ class GieselaServer:
             json_message = json.dumps(message)
             print("[WEBSOCKET] Broadcasting player update to sockets")
 
-            for auth_client in GieselaServer.authenticated_clients:
-                # does this update concern this socket
-                if GieselaServer.get_token_information(auth_client.token)[0] == server_id:
-                    auth_client.sendMessage(json_message)
+            GieselaServer._broadcast_message(server_id, json_message)
         except Exception as e:
             traceback.print_exc()

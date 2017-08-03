@@ -62,7 +62,7 @@ class RadioStations:
                 station) for station in data["stations"]]
             _initialised = True
 
-    def get_random_station(self):
+    def get_random_station():
         RadioStations.init()
         station = choice(RadioStations.stations)
         return station
@@ -136,7 +136,7 @@ class RadioSongExtractor:
         try:
             resp = requests.get(
                 "http://www.capitalfm.com/dynamic/now-playing-card/digital/")
-            soup = BeautifulSoup(resp.text)
+            soup = BeautifulSoup(resp.text, ConfigDefaults.html_parser)
             title = " ".join(soup.find_all(
                 "div",
                 attrs={"itemprop": "name", "class": "track"}
@@ -188,20 +188,18 @@ class RadioSongExtractor:
 
     def _get_current_song_heart_london():
         try:
-            resp = requests.get(
-                "http://www.heart.co.uk/london/on-air/last-played-songs/")
-            soup = BeautifulSoup(resp.text)
-            title = soup.findAll("h3", {"class": "track"})[
-                0].text.strip()
-            artist = soup.findAll("p", {"class": "artist"})[
-                0].text.strip()
-            cover = soup.findAll("li", {"class": "clearfix odd first"})[
-                0].findAll("img")[0]["src"]
-            start_hour, start_minute = soup.findAll("p", {"class": "dtstart"})[
-                0].text.strip().split(":")
+            resp = requests.get("http://www.heart.co.uk/london/on-air/last-played-songs/")
+            soup = BeautifulSoup(resp.text, ConfigDefaults.html_parser)
+
+            title = soup.findAll("h3", {"class": "track"})[0].text.strip()
+            artist = soup.findAll("p", {"class": "artist"})[0].text.strip()
+            cover = soup.findAll("li", {"class": "clearfix odd first"})[0].findAll("img")[0]["src"]
+            start_hour, start_minute = soup.findAll("p", {"class": "dtstart"})[0].text.strip().split(":")
+            start_hour = (int(start_hour) + 1) % 24
+
             time_now = datetime.now()
-            start_time = datetime(time_now.year, time_now.month, time_now.day, int(
-                start_hour) + 1, int(start_minute))
+
+            start_time = datetime(time_now.year, time_now.month, time_now.day, start_hour, int(start_minute))
             progress = round((time_now - start_time).total_seconds())
 
             return {

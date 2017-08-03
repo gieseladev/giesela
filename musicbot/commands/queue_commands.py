@@ -5,6 +5,7 @@ from random import choice, shuffle
 from discord import Embed
 
 import asyncio
+from musicbot import exceptions
 
 from ..entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                      StreamEntry, TimestampEntry, YoutubeEntry)
@@ -41,7 +42,8 @@ class EnqueueCommands:
     @block_user
     @command_info("2.0.3", 1485523740, {
         "3.7.7": (1499018088, "radio selection looks good again"),
-        "3.8.9": (1499535312, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499535312, "Part of the `Giesenesis` rewrite"),
+        "4.4.4": (1501627084, "Fixed this command")
     })
     async def cmd_radio(self, player, channel, author, leftover_args):
         """
@@ -59,7 +61,7 @@ class EnqueueCommands:
                 station_info = RadioStations.get_random_station()
                 await player.playlist.add_radio_entry(station_info, channel=channel, author=author)
                 return Response(
-                    "I choose\n**{.name}**".format(station_info.name))
+                    "I choose\n**{.name}**".format(station_info))
             else:
                 # try to find the radio station
                 search_name = " ".join(leftover_args)
@@ -95,7 +97,7 @@ class EnqueueCommands:
             await self.safe_delete_message(response)
 
             if play_station:
-                await player.playlist.add_radio_entry(station_info, channel=channel, author=author)
+                await player.playlist.add_radio_entry(station, channel=channel, author=author)
                 return Response(
                     "There you go fam!\n**{.name}**".format(station))
             else:
