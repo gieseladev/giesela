@@ -351,7 +351,8 @@ class EnqueueCommands:
 
     @block_user
     @command_info("3.8.4", 1499188226, {
-        "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite"),
+        "3.5.1": (1501793988, "Not closing the suggestion window right away")
     })
     async def cmd_suggest(self, player, channel, author):
         """
@@ -411,7 +412,6 @@ class EnqueueCommands:
                 await self.safe_delete_message(result_message)
                 await self.safe_delete_message(interface_message)
                 await self.safe_delete_message(response_message)
-                return Response("Alright, coming right up!")
 
             await self.safe_delete_message(result_message)
             await self.safe_delete_message(interface_message)
