@@ -132,8 +132,7 @@ class SpotifyTrack:
 
         spotify_track = cls.from_data(track)
 
-        spotify_track.certainty = get_certainty(
-            query, track["name"], spotify_track.artists)
+        spotify_track.certainty = get_certainty(query, track["name"], artists[0].name.lower())
         spotify_track.query = query
 
         return spotify_track
@@ -183,7 +182,7 @@ async def get_spotify_track(loop, query):
     return await loop.run_in_executor(None, SpotifyTrack.from_query, query)
 
 
-def get_certainty(query, song_name, artists):
+def get_certainty(query, song_name, artist_name):
     song_name_edited = re.sub(r"\(.+\)", "", song_name)
 
     index = song_name_edited.find("-")
@@ -191,7 +190,7 @@ def get_certainty(query, song_name, artists):
     song_name_edited = song_name_edited.strip().lower()
 
     poss = []
-    poss.append(similarity(query.lower(), "***REMOVED***0***REMOVED*** ***REMOVED***1***REMOVED***".format(song_name_edited, artists[0].name.lower())))
-    poss.append(similarity(query.lower(), "***REMOVED***1***REMOVED*** ***REMOVED***0***REMOVED***".format(song_name_edited, artists[0].name.lower())))
+    poss.append(similarity(query.lower(), "***REMOVED***0***REMOVED*** ***REMOVED***1***REMOVED***".format(song_name_edited, artist_name)))
+    poss.append(similarity(query.lower(), "***REMOVED***1***REMOVED*** ***REMOVED***0***REMOVED***".format(song_name_edited, artist_name)))
 
     return max(poss)

@@ -6,6 +6,7 @@ import discogs_client
 from discogs_client.exceptions import HTTPError
 
 from musicbot.constants import VERSION
+from musicbot.spotify import get_certainty
 from musicbot.utils import similarity
 
 client = discogs_client.Client("Giesela/***REMOVED******REMOVED***".format(VERSION), user_token="vrzQalQXQdNAZYnwYlWunuJSyMjFlcGKXwglcITo")
@@ -20,6 +21,9 @@ class DiscogsException:
         pass
 
     class ArtistNotFound(Exception):
+        pass
+
+    class WrongTrack(Exception):
         pass
 
 
@@ -90,13 +94,16 @@ def _get_entry(query):
     fields["cover"] = release.images[0]["uri"]
     fields["artist_image"] = _extract_artist_image(release)
 
+    if get_certainty(query, fields["song_title"], fields["artist"]) < .6:
+        raise DiscogsException.WrongTrack
+
     return fields
 
 
 async def get_entry(loop, query):
     try:
         return await loop.run_in_executor(None, _get_entry, query)
-    except (DiscogsException.TrackNotFound, DiscogsException.NoResults, DiscogsException.ArtistNotFound):
+    except (DiscogsException.TrackNotFound, DiscogsException.NoResults, DiscogsException.ArtistNotFound, DiscogsException.WrongTrack):
         return None
     except:
         traceback.print_exc()
