@@ -10,13 +10,13 @@ from threading import Thread
 import asyncio
 import audioop
 from enum import Enum
-
-from .entry import RadioSongEntry, StreamEntry, TimestampEntry
-from .exceptions import FFmpegError, FFmpegWarning
-from .lib.event_emitter import EventEmitter
-from .playlist import Playlist
-from .utils import create_cmd_params, format_time_ffmpeg
-from .web_socket_server import GieselaServer
+from musicbot.config import static_config
+from musicbot.entry import RadioSongEntry, StreamEntry, TimestampEntry
+from musicbot.exceptions import FFmpegError, FFmpegWarning
+from musicbot.lib.event_emitter import EventEmitter
+from musicbot.playlist import Playlist
+from musicbot.utils import create_cmd_params, format_time_ffmpeg
+from musicbot.web_socket_server import GieselaServer
 
 
 class PatchedBuff:
@@ -27,7 +27,7 @@ class PatchedBuff:
     def __init__(self, buff, *, draw=False):
         self.buff = buff
         self.frame_count = 0
-        self.volume = 1.0
+        self._volume = 1.0
 
         self.draw = draw
         self.use_audioop = True
@@ -37,6 +37,15 @@ class PatchedBuff:
     def __del__(self):
         if self.draw:
             print(" " * (get_terminal_size().columns - 1), end="\r")
+
+    @property
+    def volume(self):
+        return self._volume
+
+    @volume.setter
+    def volume(self, v):
+        value = v**static_config.volume_power
+        self._volume = v
 
     def read(self, frame_size):
         self.frame_count += 1
@@ -421,6 +430,8 @@ class MusicPlayer(EventEmitter):
                 elif isinstance(self.current_entry, RadioSongEntry):
                     if self.current_entry.song_duration > 5:
                         delay = self.current_entry.song_duration - self.current_entry.song_progress + 2
+                        if delay < 0:
+                            delay = 40
                     else:
                         delay = 40
                 else:
@@ -472,7 +483,21 @@ class MusicPlayer(EventEmitter):
                 if self.bot.config.debug_mode:
                     print("[Debug] Voice websocket is %s, reconnecting" %
                           self.voice_client.ws.state_name)
-                await self.bot.reconnect_voice_client(self.voice_client.channel.server)
+
+                try:
+                    await self.voice_client.disconnect()
+                except:
+                    print("Error disconnecting during reconnect")
+                    traceback.print_exc()
+
+                await asyncio.sleep(0.1)
+
+                new_vc = await self.bot.join_voice_channel(self.voice_client.channel)
+                self.reload_voice(new_vc)
+
+                if self.is_paused:
+                    self.resume()
+
                 await asyncio.sleep(4)
             finally:
                 await asyncio.sleep(1)

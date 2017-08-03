@@ -86,6 +86,8 @@ class ConfigDefaults:
     _password = None
     _token = None
 
+    html_parser = "html.parser"
+
     entry_type_emojis = ***REMOVED***
         "YoutubeEntry":     ":black_circle:",
         "TimestampEntry":   ":large_blue_circle:",
@@ -105,6 +107,7 @@ class ConfigDefaults:
     history_limit = 200
 
     default_volume = 0.3
+    volume_power = 3
     save_videos = True
     auto_summon = True
     auto_playlist = False
@@ -117,10 +120,14 @@ class ConfigDefaults:
     options_file = "config/options.ini"
     cards_file = "data/cah/cards.ini"
     question_cards = "data/cah/question_cards.ini"
-    radios_file = "config/radio_stations.json"
-    playlists_file = "config/playlists.ini"
-    random_sets = "config/random_sets.ini"
+    radios_file = "data/radio_stations.json"
+    playlists_file = "data/playlists.json"
+    random_sets = "data/random_sets.ini"
+    settings_file = "data/settings.bin"
     blacklist_file = "config/blacklist.txt"
     auto_playlist_file = "config/autoplaylist.txt"
     hangman_wordlist = "data/hangman_wordlist.txt"
     name_list = "data/names.txt"
+
+
+static_config = Config(ConfigDefaults.options_file)

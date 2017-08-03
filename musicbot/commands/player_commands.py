@@ -45,7 +45,8 @@ class PlayerCommands:
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
         "3.5.2": (1497712233, "Updated documentaion for this command"),
-        "3.8.8": (1499421755, "improved volume bar")
+        "3.8.8": (1499421755, "improved volume bar"),
+        "4.5.0": (1501792292, "Switched to a non-linear volume scale system")
     ***REMOVED***)
     async def cmd_volume(self, message, player, leftover_args):
         """
