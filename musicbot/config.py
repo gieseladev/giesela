@@ -107,6 +107,7 @@ class ConfigDefaults:
     history_limit = 200
 
     default_volume = 0.3
+    volume_power = 3.3
     save_videos = True
     auto_summon = True
     auto_playlist = False
@@ -126,3 +127,6 @@ class ConfigDefaults:
     auto_playlist_file = "config/autoplaylist.txt"
     hangman_wordlist = "data/hangman_wordlist.txt"
     name_list = "data/names.txt"
+
+
+static_config = Config(ConfigDefaults.options_file)

@@ -1,10 +1,11 @@
 import os.path
 
-MAIN_VERSION = "4.4.9"
-SUB_VERSION = "webiesela"
+MAIN_VERSION = "4.5.0"
+SUB_VERSION = "just_bread"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
 all_sub_versions = ***REMOVED***
+    "4.5.x": "Just Bread",
     "4.4.x": "Webiesela",
     "4.3.x": "Breadstick",
     "4.2.x": "Ice Cube",

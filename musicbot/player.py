@@ -10,6 +10,7 @@ from threading import Thread
 import asyncio
 import audioop
 from enum import Enum
+from musicbot.config import static_config
 from musicbot.entry import RadioSongEntry, StreamEntry, TimestampEntry
 from musicbot.exceptions import FFmpegError, FFmpegWarning
 from musicbot.lib.event_emitter import EventEmitter
@@ -26,7 +27,7 @@ class PatchedBuff:
     def __init__(self, buff, *, draw=False):
         self.buff = buff
         self.frame_count = 0
-        self.volume = 1.0
+        self._volume = 1.0
 
         self.draw = draw
         self.use_audioop = True
@@ -36,6 +37,15 @@ class PatchedBuff:
     def __del__(self):
         if self.draw:
             print(" " * (get_terminal_size().columns - 1), end="\r")
+
+    @property
+    def volume(self):
+        return self._volume
+
+    @volume.setter
+    def volume(self, v):
+        value = v**static_config.volume_power
+        self._volume = v
 
     def read(self, frame_size):
         self.frame_count += 1
