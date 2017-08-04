@@ -593,7 +593,7 @@ class PlaylistCommands:
 
                         pl_changes["added_entries"].extend(entries)  # just for the changelog
                         playlist["entries"].extend(entries)
-                        it, ov = divmod(sorted(playlist["entries"], key=lambda entry: entry.title).index(entries[0]), items_per_page)
+                        it, ov = divmod(sorted(playlist["entries"], key=lambda entry: entry.title).index(entries[0]) + 1, items_per_page)
                         entries_page = it - 1 if ov == 0 else it
                     except Exception as e:
                         await self.safe_send_message(
