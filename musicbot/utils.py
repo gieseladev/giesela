@@ -21,7 +21,7 @@ from discord.ext.commands.bot import _get_variable
 from PIL import Image, ImageStat
 
 import asyncio
-from musicbot.config import ConfigDefaults
+from musicbot.config import ConfigDefaults, static_config
 from musicbot.constants import DISCORD_MSG_CHAR_LIMIT
 
 
@@ -422,7 +422,7 @@ def get_video_timestamps(description, video_id, song_dur=None):
             return None
 
         params = ***REMOVED***
-            "key":          "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo",
+            "key":          static_config.google_api_key,
             "part":         "snippet",
             "order":        "relevance",
             "textFormat":   "plainText",
@@ -462,7 +462,7 @@ def get_related_videos(videoId):
         "relatedToVideoId": videoId,
         "topicId":          "/m/04rlf",
         "type":             "video",
-        "key":              "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo"
+        "key":              static_config.google_api_key
     ***REMOVED***
     resp = requests.get(
         "https://www.googleapis.com/youtube/v3/search", params=params)

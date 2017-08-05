@@ -4,7 +4,7 @@ import traceback
 import requests
 from bs4 import BeautifulSoup
 
-from musicbot.config import ConfigDefaults
+from musicbot.config import ConfigDefaults, static_config
 
 
 def search_for_lyrics(query):
@@ -13,7 +13,7 @@ def search_for_lyrics(query):
 
 def search_for_lyrics_google(query):
     params = ***REMOVED***
-        "key":  "AIzaSyCvvKzdz-bVJUUyIzKMAYmHZ0FKVLGSJlo",
+        "key":  static_config.google_api_key,
         "cx":   "002017775112634544492:7y5bpl2sn78",
         "q":    query
     ***REMOVED***
