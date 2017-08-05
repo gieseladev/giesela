@@ -9,7 +9,7 @@ import asyncio
 
 from ..entry import GieselaEntry, TimestampEntry, YoutubeEntry
 from ..entry_updater import fix_generator
-from ..exceptions import ExtractionError
+from ..exceptions import ExtractionError, WrongEntryTypeError
 from ..imgur import upload_playlist_cover, upload_song_image
 from ..saved_playlists import Playlists
 from ..spotify import SpotifyTrack
@@ -836,7 +836,7 @@ class PlaylistCommands:
                 "title":                fields["title"],
                 "queue":                player.playlist,
                 "video_id":             fields["_video_id"],
-                "url":                  fields["_url"],
+                "url":                  fields["url"],
                 "duration":             fields["_duration"],
                 "thumbnail":            fields["thumbnail"],
                 "description":          fields["_description"],
@@ -861,7 +861,7 @@ class PlaylistCommands:
         entry_fields = {
             "__title":              entry._title,
             "_video_id":            entry.video_id,
-            "_url":                 entry.url,
+            "url":                  entry.url,
             "_description":         entry.description,
             "_duration":            entry.duration,
             "_expected_filename":   entry.expected_filename,
@@ -939,7 +939,10 @@ class PlaylistCommands:
                 "**cover**: " +
                 wrap_string(entry_fields.get("cover_url", "None"), "`"),
                 "**thumbnail**: " +
-                wrap_string(entry_fields.get("thumbnail", "None"), "`")
+                wrap_string(entry_fields.get("thumbnail", "None"), "`"),
+                "",
+                "**url**: " +
+                wrap_string(entry_fields.get("url", "None"), "`")
             ])
 
             missing, current_type = get_entry_type(entry_fields)
@@ -992,7 +995,8 @@ class PlaylistCommands:
                 "album": "album",
                 "cover": "cover_url",
                 "thumbnail": "thumbnail",
-                "timestamps": "sub_queue"
+                "timestamps": "sub_queue",
+                "url": "url"
             }
 
             responsible_text, property_target = (
@@ -1007,6 +1011,25 @@ class PlaylistCommands:
                     if rest:
                         if property_target == "sub_queue":
                             error = "You can't set timestamps like this"
+                        elif property_target == "url":
+                            try:
+                                info = await player.playlist.get_ytdl_data(rest)
+                            except (ExtractionError, WrongEntryTypeError) as e:
+                                error = "Something went wrong:\n" + str(e)
+                                continue
+
+                            if info:
+                                video_id = info.get("id")
+                                video_url = info.get("webpage_url")
+                                video_duration = info.get("duration", 0)
+
+                                entry_fields.update({
+                                    "_video_id":    video_id,
+                                    "url":          video_url,
+                                    "_duration":    video_duration,
+                                })
+                            else:
+                                error = "Something went wrong but I have no idea what"
                         else:
                             if property_target in ("cover_url", "thumbnail", "artist_image_url"):
                                 if is_image(rest):
@@ -1025,7 +1048,10 @@ class PlaylistCommands:
                     error = "Please provide a property"
             elif command == "remove":
                 if property_target:
-                    entry_fields.pop(property_target, None)
+                    if property_target == "url":
+                        error = "You really shouldn't delete that"
+                    else:
+                        entry_fields.pop(property_target, None)
                 else:
                     error = "Please provide a property"
             elif command == "timestamp":
@@ -1197,7 +1223,8 @@ class PlaylistCommands:
         "4.2.6": (1500963901, "Can now use the entry manipulator on non-playlist entries"),
         "4.3.3": (1501235095, "Fixed strange message formatting bug."),
         "4.3.8": (1501264222, "Caching adjustments"),
-        "4.3.9": (1501340523, "Can now set image-properties with attachments")
+        "4.3.9": (1501340523, "Can now set image-properties with attachments"),
+        "4.5.4": (1501967725, "One may now edit an entry's url")
     })
     async def cmd_editentry(self, channel, author, player, leftover_args):
         """
