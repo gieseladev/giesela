@@ -440,7 +440,7 @@ class MusicPlayer(EventEmitter):
                 print("[CHAPTER-UPDATER] There's nothing playing")
                 return
 
-            print("[CHAPTER-UPDATER] Waiting " + str(delay) +
+            print("[CHAPTER-UPDATER] Waiting " + str(round(delay, 1)) +
                   " seconds before emitting now playing event")
 
             before_title = self.current_entry.title
