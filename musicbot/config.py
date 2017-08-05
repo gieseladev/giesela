@@ -86,6 +86,8 @@ class ConfigDefaults:
     _password = None
     _token = None
 
+    google_api_key = "AIzaSyDb9eZgqs86NlNtekfFHKWN5jaaR-eZFQY"
+
     html_parser = "html.parser"
 
     entry_type_emojis = {

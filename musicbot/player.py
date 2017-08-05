@@ -1,15 +1,15 @@
+import asyncio
+import audioop
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
+from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
 
-import asyncio
-import audioop
-from enum import Enum
 from musicbot.config import static_config
 from musicbot.entry import RadioSongEntry, StreamEntry, TimestampEntry
 from musicbot.exceptions import FFmpegError, FFmpegWarning
