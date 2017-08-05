@@ -428,12 +428,10 @@ def get_video_timestamps(description, video_id, song_dur=None):
             "textFormat":   "plainText",
             "videoId":      video_id
         ***REMOVED***
-        resp = requests.get(
-            "https://www.googleapis.com/youtube/v3/commentThreads", params=params)
+        resp = requests.get("https://www.googleapis.com/youtube/v3/commentThreads", params=params)
         data = resp.json()
         for comment in data["items"]:
-            songs = _run_timestamp_matcher(comment["snippet"][
-                "topLevelComment"]["snippet"]["textDisplay"])
+            songs = _run_timestamp_matcher(comment["snippet"]["topLevelComment"]["snippet"]["textDisplay"])
             if songs is not None and len(songs) > 2:
                 if song_dur:  # If we know the song duration I don't want ANY of those duckers to be out of bounds. That's the amount of distrust I have
                     for ts in songs.keys():

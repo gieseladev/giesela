@@ -408,7 +408,8 @@ class AdminCommands:
         "3.9.6": (1499889309, "Escaping the result and adding the shortcut entry for player.current_entry"),
         "4.3.4": (1501246003, "Don't block user anymore. That's stupid"),
         "4.4.7": (1501683507, "Not showing empty result message"),
-        "4.4.8": (1501684956, "including the console log")
+        "4.4.8": (1501684956, "including the console log"),
+        "4.5.2": (1501965475, "only showing console log when it contains something")
     ***REMOVED***)
     async def cmd_execute(self, channel, author, server, raw_content, player=None):
         statement = raw_content.strip()
@@ -447,8 +448,14 @@ class AdminCommands:
         else:
             result = ""
 
-        result += "**Console**\n```\n***REMOVED******REMOVED***\n```".format(console.getvalue())
-        return Response(result)
+        log = console.getvalue().strip()
+
+        if log:
+            result += "\n**Console**\n```\n***REMOVED******REMOVED***\n```".format()
+
+        result = result.strip()
+        if result:
+            return Response(result)
 
     @owner_only
     async def cmd_shutdown(self, channel):
