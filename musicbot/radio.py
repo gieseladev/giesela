@@ -1,12 +1,14 @@
 import json
 import re
-from datetime import datetime, timedelta
+import time
+from datetime import datetime, timedelta, timezone
 from itertools import chain
 from random import choice
 
 import aiohttp
 import requests
 from bs4 import BeautifulSoup
+from dateutil.parser import parse
 
 from .config import ConfigDefaults
 from .utils import parse_timestamp
@@ -216,18 +218,29 @@ class RadioSongExtractor:
 
     def _get_current_song_radio32():
         try:
-            resp = requests.get(
-                "http://www.radio32.ch/pages/rpc/rpc_panorama_programm_2015.cfm")
-            cover_url, artist, song_name = re.search(
-                r"<td class=\"cover\".+?background-image: url\((.+?)\).+\n.+\n<p class=\"next\">Zurzeit läuft<\/p>\n<p class=.+?>(.+?)<\/p>\n<p><p>(.+?)<\/p><\/p>", resp.text).groups((1, 2, 3))
+            resp = requests.get("http://player.radio32.ch/data/generated_content/radio32/production/playlist/playlist_onair.json")
+            data = resp.json()
+            now_playing = data["live"][0]
+
+            start_time = parse(now_playing["playtime"]).timestamp()
+            duration = parse_timestamp(now_playing["duration"])
+
+            end_time = start_time + duration
+
+            if time.time() >= end_time:
+                print("[RADIO] <radio 32> \"live\" is outdated, switching to coming[0]")
+                start_time += duration
+
+                now_playing = data["coming"][0]
+                duration = parse_timestamp(now_playing["duration"])
 
             return {
-                "title": song_name,
-                "artist": artist,
-                "cover": "http://www.radio32.ch" + cover_url,
+                "title": now_playing["title"],
+                "artist": now_playing["interpret"].replace(",", " & "),
+                "cover": now_playing["imageFullURL"],
                 "youtube": "http://www.radio32.ch/",
-                "duration": 0,
-                "progress": 0
+                "duration": duration,
+                "progress": time.time() - start_time
             }
         except:
             raise
