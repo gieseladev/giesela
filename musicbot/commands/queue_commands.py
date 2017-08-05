@@ -221,7 +221,8 @@ class EnqueueCommands:
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "3.5.9": (1497890999, "Revamped design and functions making this command more useful"),
         "3.6.1": (1497967505, "deleting messages when leaving search"),
-        "4.2.5": (1500961103, "Adjusting to new player/playlist model and fixed addtoplaylist")
+        "4.2.5": (1500961103, "Adjusting to new player/playlist model and fixed addtoplaylist"),
+        "4.5.3": (1501965830, "Fixed addtoplaylist sub-command")
     ***REMOVED***)
     async def cmd_search(self, player, channel, author, leftover_args):
         """
@@ -320,7 +321,7 @@ class EnqueueCommands:
                 playlistname = args[0]
                 add_entry = await player.playlist.get_entry(current_result["webpage_url"], channel=channel, author=author)
 
-                if playlistname not in self.playlists.saved_playlists:
+                if playlistname not in self.playlists.playlists.keys():
                     if len(playlistname) < 3:
                         err_msg = await self.safe_send_message(channel, "Your name is too short. Please choose one with at least three letters.")
                         await asyncio.sleep(3)
