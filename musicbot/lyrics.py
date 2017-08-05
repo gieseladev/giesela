@@ -82,8 +82,7 @@ def _extract_lyrics_lyrical_nonsense(url):
 def _extract_lyrics_musixmatch(url):
     lyrics = None
 
-    headers = {
-        "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1"}
+    headers = {"user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1"}
     resp = requests.get(url, headers=headers)
     content = resp.text
 
@@ -134,12 +133,29 @@ def _extract_lyrics_animelyrics(url):
     return lyrics
 
 
+def _extract_lyrics_azlyrics(url):
+    headers = {"user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1"}
+    resp = requests.get(url, headers=headers)
+    bs = BeautifulSoup(resp.text, ConfigDefaults.html_parser)
+
+    center = bs.body.find("div", {"class": "col-xs-12 col-lg-8 text-center"})
+    lyrics = center.find("div", {"class": None}).text
+
+    lyrics = re.sub(r"<br>", " ", lyrics)
+    lyrics = re.sub(r"<i>\W*(\w+).+(\d+).*<\/i>", "\1 \2", lyrics)
+    lyrics = re.sub(r"(?=)(\&quot\;)", "\"", lyrics)
+    lyrics = re.sub(r"<\/div>", "", lyrics)
+
+    return lyrics.strip()
+
 lyric_parsers = {
     "genius.com":                  _extract_lyrics_genius,
     "www.lyricsmode.com":          _extract_lyrics_lyricsmode,
     "www.lyrical-nonsense.com":    _extract_lyrics_lyrical_nonsense,
     "www.animelyrics.com":         _extract_lyrics_animelyrics,
-    "www.musixmatch.com":          _extract_lyrics_musixmatch
+    "www.musixmatch.com":          _extract_lyrics_musixmatch,
+    "www.azlyrics.com":            _extract_lyrics_azlyrics
 }
 
 # print(search_for_lyrics("Snow Fairy - Fairy Tail - English Version - Amy B"))
+# print(_extract_lyrics_azlyrics("http://www.azlyrics.com/lyrics/edsheeran/shapeofyou.html"))
