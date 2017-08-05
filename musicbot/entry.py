@@ -1,10 +1,9 @@
+import asyncio
 import os
 import time
 import traceback
 
 from discord import Channel, Member, Server, User
-
-import asyncio
 
 from .exceptions import ExtractionError, OutdatedEntryError
 from .radio import RadioSongExtractor, StationInfo
@@ -356,7 +355,7 @@ class RadioSongEntry(RadioStationEntry):
 
     @property
     def current_song_info(self):
-        if self._current_song_info is None or (time.time() - self._csi_poll_time) > 10:
+        if self._current_song_info is None or (time.time() - self._csi_poll_time) > 5:
             print("[RadioEntry] getting new current_song_info")
             self._get_new_song_info()
 
