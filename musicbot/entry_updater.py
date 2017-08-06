@@ -45,20 +45,24 @@ def _convert_spotify_to_giesela(queue, entry):
 async def fix_entry(queue, entry):
     version = entry.get("version", 0)
 
-    if entry.get("spotify_data", ***REMOVED******REMOVED***).get("id", None) == "custom":
-        entry = _convert_spotify_to_giesela(queue, entry)
-
     if version < 100:
         return await _rebuild_entry(queue, entry)
+
+    if entry.get("spotify_data", ***REMOVED******REMOVED***).get("id", None) == "custom":
+        entry = _convert_spotify_to_giesela(queue, entry)
 
     if not entry.get("expected_filename", False):
         return await _fix_filename(queue, entry)
 
     try:
         entry["version"] = Entry.version
+        entry.pop("broken", None)
         return Entry.from_dict(queue, entry)
     except:
-        return await _rebuild_entry(queue, entry)
+        try:
+            return await _rebuild_entry(queue, entry)
+        except:
+            return None
 
 async def fix_generator(queue, *entries):
     for ind, entry in enumerate(entries):

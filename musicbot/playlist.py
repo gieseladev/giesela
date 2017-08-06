@@ -1,4 +1,3 @@
-import asyncio
 import datetime
 import json
 import random
@@ -9,6 +8,8 @@ from itertools import islice
 from random import shuffle
 
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
+
+import asyncio
 
 from .discogs import get_entry as get_discogs_track
 from .entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry,
@@ -387,6 +388,11 @@ class Playlist(EventEmitter):
         try:
             return await entry.get_ready_future()
         except:
+            if "playlist" in entry.meta:
+                playlist_name = entry.meta["playlist"]["name"]
+                asyncio.ensure_future(self.bot.playlists.mark_entry_broken(self, playlist_name, entry))
+                print("[PLAYER] ***REMOVED******REMOVED***'s ***REMOVED******REMOVED*** is broken!".format(playlist_name, entry.title))
+
             return await self.get_next_entry(predownload_next)
 
     def peek(self):

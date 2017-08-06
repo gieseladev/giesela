@@ -5,7 +5,7 @@ import re
 import configparser
 
 from .entry import Entry
-from .exceptions import OutdatedEntryError
+from .exceptions import BrokenEntryError, OutdatedEntryError
 from .utils import clean_songname, similarity
 
 
@@ -58,7 +58,7 @@ class Playlists:
                         "name": playlistname,
                         "index": ind
                     ***REMOVED***
-                except (OutdatedEntryError, TypeError, KeyError):
+                except (BrokenEntryError, OutdatedEntryError, TypeError, KeyError):
                     entry = None
 
                 if not entry:
@@ -222,3 +222,27 @@ class Playlists:
 
         self.set_playlist(next_entries, next_name, next_author_id, next_description,
                           next_cover, replays=old_playlist["replay_count"])
+
+    async def mark_entry_broken(self, queue, playlist_name, entry):
+        playlist = self.get_playlist(playlist_name, queue)
+
+        entries = playlist["entries"]
+
+        index = next(ind for ind, e in enumerate(entries) if e.url == entry.url)
+
+        serialized_entries = []
+        for index, entry in enumerate(entries):
+            entry.start_seconds = 0
+
+            entry.meta["playlist"] = ***REMOVED***
+                "cover": playlist["cover_url"],
+                "name": playlist_name,
+                "index": index
+            ***REMOVED***
+
+            serialized_entries.append(entry.to_dict())
+
+        serialized_entries[index]["broken"] = True
+
+        json.dump(serialized_entries, open(self.playlist_save_location + str(playlist_name) + ".gpl", "w"), indent=4)
+        print("marked ***REMOVED******REMOVED*** from ***REMOVED******REMOVED*** as broken".format(entry.title, playlist_name))
