@@ -1,11 +1,12 @@
-import asyncio
 import os
 import time
 import traceback
 
 from discord import Channel, Member, Server, User
 
-from .exceptions import ExtractionError, OutdatedEntryError
+import asyncio
+
+from .exceptions import BrokenEntryError, ExtractionError, OutdatedEntryError
 from .radio import RadioSongExtractor, StationInfo
 from .spotify import SpotifyTrack
 from .utils import (clean_songname, get_header, get_image_brightness, md5sum,
@@ -26,6 +27,9 @@ class Entry:
 
         if entry_version < Entry.version:
             raise OutdatedEntryError("Version parameter signifies an outdated entry")
+
+        if data.get("broken", False):
+            raise BrokenEntryError("This entry has been marked as broken")
 
         entry_type = data.get("type", None)
         if not entry_type:

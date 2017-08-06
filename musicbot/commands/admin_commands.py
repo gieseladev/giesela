@@ -451,7 +451,7 @@ class AdminCommands:
         log = console.getvalue().strip()
 
         if log:
-            result += "\n**Console**\n```\n{}\n```".format()
+            result += "\n**Console**\n```\n{}\n```".format(log)
 
         result = result.strip()
         if result:

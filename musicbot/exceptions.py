@@ -50,6 +50,10 @@ class OutdatedEntryError(Exception):
     pass
 
 
+class BrokenEntryError(Exception):
+    pass
+
+
 class FFmpegError(MusicbotException):
     pass
 

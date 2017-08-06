@@ -217,9 +217,15 @@ def get_image_brightness(**kwargs):
         raise AttributeError("No image provided")
 
     stat = ImageStat.Stat(im)
+    mean = stat.mean
 
-    r, g, b, *_ = stat.mean
-    return math.sqrt(0.241 * (r**2) + 0.691 * (g**2) + 0.068 * (b**2))
+    if len(mean) >= 3:
+        r, g, b, *_ = mean
+        return math.sqrt(0.241 * (r**2) + 0.691 * (g**2) + 0.068 * (b**2))
+    elif len(mean) == 1:
+        return mean[0]
+    else:
+        return 0
 
 
 def prettydate(d):
