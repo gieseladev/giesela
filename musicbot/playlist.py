@@ -62,6 +62,8 @@ class Playlist(EventEmitter):
         self.entries.appendleft(move_entry)
         self.entries.rotate(to_index)
 
+        return move_entry
+
     def replay(self):
         if self.history:
             self._add_entry(self.history[0], placement=0)

@@ -1,10 +1,10 @@
+import asyncio
 import time
 import traceback
 from random import choice, shuffle
 
 from discord import Embed
 
-import asyncio
 from musicbot import exceptions
 
 from ..entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
@@ -683,6 +683,36 @@ class ManipulateCommands:
             time_until = ""
 
         return Response(reply_text.format(btext, time_until))
+
+    @command_info("4.5.5", 1502073539)
+    async def cmd_move(self, player, from_index, to_index):
+        """
+        ///|Usage
+        `{command_prefix}move <from index> <to index>`
+        ///|Explanation
+        Split a timestamp-entry into its sub-entries.
+        """
+
+        if from_index.isnumeric():
+            from_index = int(from_index) - 1
+        else:
+            return Response("`<from index>` must be a number")
+
+        if to_index.isnumeric():
+            to_index = int(to_index) - 1
+        else:
+            return Response("`<to index>` must be a number")
+
+        queue_length = len(player.playlist.entries)
+
+        if not 0 <= from_index < queue_length:
+            return Response("`<from index>` must be between 1 and {}".format(queue_length))
+
+        if not 0 <= to_index < queue_length:
+            return Response("`<to index>` must be between 1 and {}".format(queue_length))
+
+        moved_entry = player.playlist.move(from_index, to_index)
+        return Response("Moved **{}** from position `{}` to `{}`.".format(moved_entry.title, from_index + 1, to_index + 1))
 
     @command_info("4.0.2", 1500360351, {
         "4.0.4": (1500399607, "Can now explode an entry in the queue by its index")
