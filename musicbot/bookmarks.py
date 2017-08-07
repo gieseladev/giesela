@@ -2,7 +2,7 @@ import json
 import re
 from random import randint
 
-from .utils import clean_songname, similarity
+from musicbot.utils import clean_songname, similarity
 
 
 def ensure_saving(func):

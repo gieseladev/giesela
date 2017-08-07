@@ -10,8 +10,8 @@ import requests
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
 
-from .config import ConfigDefaults
-from .utils import parse_timestamp
+from musicbot.config import ConfigDefaults
+from musicbot.utils import parse_timestamp
 
 
 class StationInfo:

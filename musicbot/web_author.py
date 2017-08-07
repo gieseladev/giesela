@@ -1,4 +1,4 @@
-from .utils import dec_to_hex
+from musicbot.utils import dec_to_hex
 
 
 class WebAuthor:

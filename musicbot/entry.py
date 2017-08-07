@@ -1,17 +1,17 @@
+import asyncio
 import os
 import time
 import traceback
 
 from discord import Channel, Member, Server, User
 
-import asyncio
-
-from .exceptions import BrokenEntryError, ExtractionError, OutdatedEntryError
-from .radio import RadioSongExtractor, StationInfo
-from .spotify import SpotifyTrack
-from .utils import (clean_songname, get_header, get_image_brightness, md5sum,
-                    slugify)
-from .web_author import WebAuthor
+from musicbot.exceptions import (BrokenEntryError, ExtractionError,
+                                 OutdatedEntryError)
+from musicbot.radio import RadioSongExtractor, StationInfo
+from musicbot.spotify import SpotifyTrack
+from musicbot.utils import (clean_songname, get_header, get_image_brightness,
+                            md5sum, slugify)
+from musicbot.web_author import WebAuthor
 
 
 class Entry:

@@ -6,13 +6,13 @@ from discord import ChannelType, Embed
 from discord.utils import find
 from openpyxl import Workbook
 
-from ..bookmarks import bookmark
-from ..logger import OnlineLogger
-from ..random_sets import RandomSets
-from ..reminder import Action, Calendar
-from ..settings import Settings
-from ..utils import (Response, block_user, clean_songname, command_info,
-                     owner_only, parse_timestamp, to_timestamp)
+from musicbot.bookmarks import bookmark
+from musicbot.logger import OnlineLogger
+from musicbot.random_sets import RandomSets
+from musicbot.reminder import Action, Calendar
+from musicbot.settings import Settings
+from musicbot.utils import (Response, block_user, clean_songname, command_info,
+                            owner_only, parse_timestamp, to_timestamp)
 
 
 class ToolCommands:

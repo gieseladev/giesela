@@ -4,10 +4,11 @@ from textwrap import dedent, indent
 
 from discord import Embed
 
-from ..constants import VERSION as BOTVERSION
-from ..tungsten import Tungsten
-from ..utils import (Response, block_user, command_info, get_dev_changelog,
-                     get_dev_version, hex_to_dec, owner_only, prettydate)
+from musicbot.constants import VERSION as BOTVERSION
+from musicbot.tungsten import Tungsten
+from musicbot.utils import (Response, block_user, command_info,
+                            get_dev_changelog, get_dev_version, hex_to_dec,
+                            owner_only, prettydate)
 
 
 class InfoCommands:

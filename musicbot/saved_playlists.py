@@ -1,12 +1,11 @@
+import configparser
 import json
 import os
 import re
 
-import configparser
-
-from .entry import Entry
-from .exceptions import BrokenEntryError, OutdatedEntryError
-from .utils import clean_songname, similarity
+from musicbot.entry import Entry
+from musicbot.exceptions import BrokenEntryError, OutdatedEntryError
+from musicbot.utils import clean_songname, similarity
 
 
 class Playlists:

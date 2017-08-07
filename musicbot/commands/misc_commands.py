@@ -6,10 +6,10 @@ import requests
 from discord import Embed
 from moviepy import editor, video
 
-from ..lyrics import search_for_lyrics
-from ..nine_gag import ContentType, get_post
-from ..utils import Response, block_user, command_info, owner_only
-from ..web_socket_server import GieselaServer
+from musicbot.lyrics import search_for_lyrics
+from musicbot.nine_gag import ContentType, get_post
+from musicbot.utils import Response, block_user, command_info, owner_only
+from musicbot.web_socket_server import GieselaServer
 
 
 class MiscCommands:

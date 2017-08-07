@@ -1,14 +1,14 @@
+import asyncio
 import re
 from random import shuffle
 
-import asyncio
-
-from ..cleverbot import CleverWrap
-from ..config import ConfigDefaults
-from ..games.game_2048 import Game2048
-from ..games.game_cah import GameCAH
-from ..games.game_hangman import GameHangman
-from ..utils import Response, block_user, command_info, owner_only, random_line
+from musicbot.cleverbot import CleverWrap
+from musicbot.config import ConfigDefaults
+from musicbot.games.game_2048 import Game2048
+from musicbot.games.game_cah import GameCAH
+from musicbot.games.game_hangman import GameHangman
+from musicbot.utils import (Response, block_user, command_info, owner_only,
+                            random_line)
 
 
 class FunCommands:

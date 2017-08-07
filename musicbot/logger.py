@@ -3,8 +3,8 @@ from string import ascii_lowercase as alphabet
 
 from openpyxl import Workbook
 
-from .config import ConfigDefaults
-from .utils import format_time
+from musicbot.config import ConfigDefaults
+from musicbot.utils import format_time
 
 
 class OnlineLogger:

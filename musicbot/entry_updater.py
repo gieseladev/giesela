@@ -1,16 +1,17 @@
 from musicbot.entry import Entry, GieselaEntry
-
-from .exceptions import ExtractionError, WrongEntryTypeError
+from musicbot.exceptions import ExtractionError, WrongEntryTypeError
 
 
 def between(val, low, high):
     return high >= val >= low
+
 
 async def _rebuild_entry(queue, entry):
     try:
         return await get_entry(entry.url, **entry.meta)
     except:
         return None
+
 
 async def _fix_filename(queue, entry):
     try:
@@ -42,6 +43,7 @@ def _convert_spotify_to_giesela(queue, entry):
 
     return GieselaEntry(queue, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, expected_filename=None, **meta).to_dict()
 
+
 async def fix_entry(queue, entry):
     version = entry.get("version", 0)
 
@@ -63,6 +65,7 @@ async def fix_entry(queue, entry):
             return await _rebuild_entry(queue, entry)
         except:
             return None
+
 
 async def fix_generator(queue, *entries):
     for ind, entry in enumerate(entries):
