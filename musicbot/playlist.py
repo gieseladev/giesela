@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 import json
 import random
@@ -8,8 +9,6 @@ from itertools import islice
 from random import shuffle
 
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
-
-import asyncio
 
 from .discogs import get_entry as get_discogs_track
 from .entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry,
@@ -54,6 +53,14 @@ class Playlist(EventEmitter):
     def clear(self):
         self.entries.clear()
         GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+
+    def move(self, from_index, to_index):
+        self.entries.rotate(-from_index)
+        move_entry = self.entries.popleft()
+        self.entries.rotate(from_index - to_index)
+
+        self.entries.appendleft(move_entry)
+        self.entries.rotate(to_index)
 
     def replay(self):
         if self.history:
