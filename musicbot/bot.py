@@ -41,6 +41,7 @@ from musicbot.reminder import Calendar
 from musicbot.saved_playlists import Playlists
 from musicbot.settings import Settings
 from musicbot.utils import Response, load_file, ordinal, paginate
+from musicbot.web_author import WebAuthor
 from musicbot.web_socket_server import GieselaServer
 
 load_opus_lib()
@@ -49,6 +50,8 @@ load_opus_lib()
 class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, PlayerCommands, PlaylistCommands, QueueCommands, ToolCommands):
 
     def __init__(self):
+        WebAuthor.bot = self
+
         self.players = {}
         self.locks = defaultdict(asyncio.Lock)
         self.voice_client_connect_lock = asyncio.Lock()
