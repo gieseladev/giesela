@@ -1,7 +1,11 @@
+import datetime
+import json
 import re
+from datetime import date, timedelta
 from random import choice
 from textwrap import dedent, indent
 
+import requests
 from discord import Embed
 
 from musicbot.constants import VERSION as BOTVERSION
