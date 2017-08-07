@@ -415,7 +415,7 @@ class MusicPlayer(EventEmitter):
             print("[CHAPTER-UPDATER] Cancelling old updater")
             self.chapter_updater.cancel()
 
-        if not pause:
+        if not pause and isinstance(self.current_entry, (RadioSongEntry, TimestampEntry)):
             print("[CHAPTER-UPDATER] Creating new updater")
             self.chapter_updater = asyncio.ensure_future(self.update_chapter(), loop=self.loop)
 
