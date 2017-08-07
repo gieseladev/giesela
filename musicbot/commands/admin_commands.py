@@ -1,9 +1,10 @@
 import traceback
 from contextlib import redirect_stdout
-from io import StringIO
+from io import BytesIO, StringIO
 from textwrap import indent
 
 import aiohttp
+import discord
 
 from musicbot import exceptions
 from musicbot.settings import Settings
