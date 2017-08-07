@@ -6,13 +6,13 @@ from random import choice, shuffle
 from discord import Embed
 
 from musicbot import exceptions
-
-from ..entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
-                     StreamEntry, TimestampEntry, YoutubeEntry)
-from ..radio import RadioStations
-from ..utils import (Response, block_user, clean_songname, command_info,
-                     create_bar, format_time, get_related_videos, hex_to_dec,
-                     nice_cut, ordinal, owner_only, to_timestamp)
+from musicbot.entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
+                            StreamEntry, TimestampEntry, YoutubeEntry)
+from musicbot.radio import RadioStations
+from musicbot.utils import (Response, block_user, clean_songname, command_info,
+                            create_bar, format_time, get_related_videos,
+                            hex_to_dec, nice_cut, ordinal, owner_only,
+                            to_timestamp)
 
 
 class EnqueueCommands:

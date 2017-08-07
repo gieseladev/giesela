@@ -10,16 +10,16 @@ from random import shuffle
 
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
-from .discogs import get_entry as get_discogs_track
-from .entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry,
-                    SpotifyEntry, StreamEntry, TimestampEntry, VGMEntry,
-                    YoutubeEntry)
-from .exceptions import ExtractionError, WrongEntryTypeError
-from .lib.event_emitter import EventEmitter
-from .spotify import get_spotify_track
-from .utils import clean_songname, get_header, get_video_sub_queue
-from .VGMdb import get_entry as get_vgm_track
-from .web_socket_server import GieselaServer
+from musicbot.discogs import get_entry as get_discogs_track
+from musicbot.entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry,
+                            SpotifyEntry, StreamEntry, TimestampEntry,
+                            VGMEntry, YoutubeEntry)
+from musicbot.exceptions import ExtractionError, WrongEntryTypeError
+from musicbot.lib.event_emitter import EventEmitter
+from musicbot.spotify import get_spotify_track
+from musicbot.utils import clean_songname, get_header, get_video_sub_queue
+from musicbot.VGMdb import get_entry as get_vgm_track
+from musicbot.web_socket_server import GieselaServer
 
 
 class Playlist(EventEmitter):

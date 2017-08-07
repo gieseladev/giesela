@@ -4,7 +4,7 @@ from random import choice
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-from .utils import similarity
+from musicbot.utils import similarity
 
 cred = SpotifyClientCredentials(
     "df9e44098b934c028ea085227c3ec3f6", "f9d02852fb1a4dacaa50d14e915c5d0e")

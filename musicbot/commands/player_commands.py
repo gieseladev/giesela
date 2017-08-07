@@ -1,7 +1,7 @@
-from .. import exceptions
-from ..entry import TimestampEntry
-from ..utils import (Response, block_user, command_info, create_bar,
-                     owner_only, parse_timestamp)
+from musicbot import exceptions
+from musicbot.entry import TimestampEntry
+from musicbot.utils import (Response, block_user, command_info, create_bar,
+                            owner_only, parse_timestamp)
 
 
 class PlayerCommands:

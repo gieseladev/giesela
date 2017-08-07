@@ -1,3 +1,4 @@
+import asyncio
 import atexit
 import hashlib
 import json
@@ -7,11 +8,9 @@ from json.decoder import JSONDecodeError
 from random import choice
 from string import ascii_lowercase
 
-import asyncio
-
-from .entry import TimestampEntry
-from .simple_web_socket_server import SimpleWebSocketServer, WebSocket
-from .web_author import WebAuthor
+from musicbot.entry import TimestampEntry
+from musicbot.simple_web_socket_server import SimpleWebSocketServer, WebSocket
+from musicbot.web_author import WebAuthor
 
 
 class ErrorCode:
