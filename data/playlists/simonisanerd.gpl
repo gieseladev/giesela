@@ -131,6 +131,32 @@
     },
     {
         "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-I26GTiXv9t4-40mP_clear_Ren_ai_Saiban_Love_Trial_+mp3.webm",
+        "video_id": "I26GTiXv9t4",
+        "url": "https://www.youtube.com/watch?v=I26GTiXv9t4",
+        "title": "Love Trial",
+        "duration": 222,
+        "thumbnail": "https://i.ytimg.com/vi/I26GTiXv9t4/hqdefault.jpg",
+        "description": "*DISCLAIMER: I DO NOT OWN ANYTHING BESIDES THE MASH-UP*\n\nDang, I didn't think it'll turn out like this.... DANG!! This might have been one of my best mash-up at 100% effort yet \u2661 that's just my opinion though..\n\nMP3: http://www.mediafire.com/listen/d4rh16rl91huzvt/Love_Trial.mp3\n\nCheck out my other mash-ups here:\nhttp://www.youtube.com/playlist?list=PLX9nHX1k8JEeqE3qIRaGfKYxnnLZe-UNP\n\nUPDATE:\nSomeone already guessed who the singer is... and yup it is Iname Toru(40mP) himself, the one who created the song ^w^\n\nA Live Action music video has also been released on both NND and YT. Here are the links:\nNND: http://sp.nicovideo.jp/watch/sm26558481\nYoutube: https://youtu.be/MS_3rYV7j8A\n_________________________________________________________________\n\nSong: Ren'ai Saiban (Love Trial)\nMusic: 40mP\nVocal: Hatsune Miku\nCover: clear\n\n~Happy Listening~",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "simonisanerd",
+                    "index": 5
+                }
+            }
+        },
+        "song_title": "Love Trial",
+        "artist": "40mP",
+        "artist_image": "http://i.imgur.com/Wsk3sos.jpg",
+        "cover": "http://i.imgur.com/uooGKYU.jpg",
+        "album": "Hatsune Miku Complete Collection"
+    },
+    {
+        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-wykx9MzjL-8-AAA_Wake_up_Music_Video.webm",
         "video_id": "wykx9MzjL-8",
@@ -145,13 +171,13 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 5
+                    "index": 6
                 }
             }
         },
         "song_title": "Wake up!",
         "artist": "AAA",
-        "artist_image": "https://i.scdn.co/image/413325308ca57070cce8a075701dc520e8fc0792",
+        "artist_image": "https://i.scdn.co/image/06d1d22256913bb40a731d6b51366ced2bfa0572",
         "cover": "https://i.scdn.co/image/1464b7e94d9948d27c27f5f7ac604cb1eb00d1fc",
         "album": "GOLD SYMPHONY",
         "spotify_data": {
@@ -268,7 +294,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 6
+                    "index": 7
                 }
             }
         },
@@ -294,7 +320,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 7
+                    "index": 8
                 }
             }
         },
@@ -320,7 +346,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 8
+                    "index": 9
                 }
             }
         },
@@ -346,7 +372,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 9
+                    "index": 10
                 }
             }
         },
@@ -372,7 +398,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 10
+                    "index": 11
                 }
             }
         },
@@ -398,7 +424,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 11
+                    "index": 12
                 }
             }
         },
@@ -424,7 +450,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 12
+                    "index": 13
                 }
             }
         },
@@ -450,7 +476,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 13
+                    "index": 14
                 }
             }
         },
@@ -459,6 +485,32 @@
         "artist_image": "https://api-img.discogs.com/A40UCv7yOuNUlD4zNzwCuTFwnMk=/600x290/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-289562-1169666511.jpeg.jpg",
         "cover": "https://api-img.discogs.com/PbIg95gYUpsNIkVCYXacGY_m6sE=/fit-in/500x500/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-3563294-1335421748.jpeg.jpg",
         "album": "Sol-Fa"
+    },
+    {
+        "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube--SZ9-P7_srE-ending_midori_no_hibi.m4a",
+        "video_id": "-SZ9-P7_srE",
+        "url": "https://www.youtube.com/watch?v=-SZ9-P7_srE",
+        "title": "Mou Sukoshi... Mou Sukoshi...",
+        "duration": 283,
+        "thumbnail": "https://i.ytimg.com/vi/-SZ9-P7_srE/hqdefault.jpg",
+        "description": "este es el ending completo de Midori no hibi",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "simonisanerd",
+                    "index": 15
+                }
+            }
+        },
+        "song_title": "Mou Sukoshi... Mou Sukoshi...",
+        "artist": "Atsumi Saori",
+        "artist_image": "http://i.imgur.com/NLng7XR.jpg",
+        "cover": "http://i.imgur.com/Zjb5EPr.jpg",
+        "album": "Midori No Hibi"
     },
     {
         "version": 103,
@@ -476,7 +528,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 14
+                    "index": 16
                 }
             }
         },
@@ -502,7 +554,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 15
+                    "index": 17
                 }
             }
         },
@@ -528,7 +580,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 16
+                    "index": 18
                 }
             }
         },
@@ -554,7 +606,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 17
+                    "index": 19
                 }
             }
         },
@@ -580,7 +632,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 18
+                    "index": 20
                 }
             }
         },
@@ -606,7 +658,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 19
+                    "index": 21
                 }
             }
         },
@@ -632,7 +684,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 20
+                    "index": 22
                 }
             }
         },
@@ -658,7 +710,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 21
+                    "index": 23
                 }
             }
         },
@@ -684,7 +736,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 22
+                    "index": 24
                 }
             }
         },
@@ -710,7 +762,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 23
+                    "index": 25
                 }
             }
         },
@@ -736,7 +788,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 24
+                    "index": 26
                 }
             }
         },
@@ -762,7 +814,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 25
+                    "index": 27
                 }
             }
         },
@@ -788,7 +840,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 26
+                    "index": 28
                 }
             }
         },
@@ -885,7 +937,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 27
+                    "index": 29
                 }
             }
         },
@@ -911,13 +963,13 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 28
+                    "index": 30
                 }
             }
         },
         "song_title": "History Maker",
         "artist": "DEAN FUJIOKA",
-        "artist_image": "https://i.scdn.co/image/17094d1091957c8e723259cd8bcc9b1966234819",
+        "artist_image": "https://i.scdn.co/image/89fb189e303ca2146f4c76420f82b862376d81ab",
         "cover": "https://i.scdn.co/image/ec9fb94553688032c54c76933faab740c39f0b2a",
         "album": "History Maker",
         "spotify_data": {
@@ -1028,7 +1080,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 29
+                    "index": 31
                 }
             }
         },
@@ -1054,7 +1106,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 30
+                    "index": 32
                 }
             }
         },
@@ -1080,7 +1132,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 31
+                    "index": 33
                 }
             }
         },
@@ -1106,7 +1158,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 32
+                    "index": 34
                 }
             }
         },
@@ -1132,7 +1184,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 33
+                    "index": 35
                 }
             }
         },
@@ -1158,7 +1210,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 34
+                    "index": 36
                 }
             }
         },
@@ -1184,7 +1236,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 35
+                    "index": 37
                 }
             }
         },
@@ -1210,7 +1262,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 36
+                    "index": 38
                 }
             }
         },
@@ -1236,7 +1288,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 37
+                    "index": 39
                 }
             }
         },
@@ -1262,7 +1314,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 38
+                    "index": 40
                 }
             }
         },
@@ -1288,13 +1340,13 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 39
+                    "index": 41
                 }
             }
         },
         "song_title": "Kono Te Nobashite",
         "artist": "HI-FI CAMP",
-        "artist_image": "https://i.scdn.co/image/5badf9be923ef7dd0c2d15f8ae368758904ba643",
+        "artist_image": "https://i.scdn.co/image/d663d76d569bc13de990ad6dbc679ef686996a82",
         "cover": "https://i.scdn.co/image/ec6f07c5c3204a6f151d318b0e167448249b5213",
         "album": "Tv Anime \"Fairy Tail\" Op & Ed Theme Songs Vol. 2 (Standard Edition)",
         "spotify_data": {
@@ -1385,7 +1437,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 40
+                    "index": 42
                 }
             }
         },
@@ -1394,6 +1446,32 @@
         "artist_image": "http://i.imgur.com/jN6pZrg.jpg",
         "cover": "http://i.imgur.com/lmBGLmr.jpg",
         "album": "Sword Art Online"
+    },
+    {
+        "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-kACinK6edys-~Hello_How_Are_You~.webm",
+        "video_id": "kACinK6edys",
+        "url": "https://www.youtube.com/watch?v=SPKVPG6ofPY",
+        "title": "Hello/How Are You",
+        "duration": 290,
+        "thumbnail": "https://i.ytimg.com/vi/kACinK6edys/maxresdefault.jpg",
+        "description": "Hope you like it . If you like -- Click Like and Subscribe. Thank  :)\n\n\n--------------------\n\u00bb\u00bb Information:\n\u2729 Editor: Lingtianxia\n\u2729 BGM: Hello\uff0cHow are you\n\u2729 Anime: Tamako Love Story\n\n--------------------\n\u00bb\u00bb Playlist:\n- AS Nightcore: https://www.youtube.com/playlist?list=PLrD6_U3KYVn6QaBwF2a_BJRG_1zZOJut4\n- AS AMV: https://www.youtube.com/playlist?list=PLrD6_U3KYVn55iHh9L7qBh7TJ28fj9otx\n\n\n--------------------\n\u00bb\u00bb Follow Me:\n- Nightcore FB Page: https://www.facebook.com/NightcoreMusics\n- My Facebook Page: https://www.facebook.com/astyles4r\n- Website: http://astyles.org/@4rum/\n\n\n----------------\n\u00bb\u00bb Copyrights:\nI do not owner video and  the original song .The credits go to their respectful owners.",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "simonisanerd",
+                    "index": 43
+                }
+            }
+        },
+        "song_title": "Hello/How Are You",
+        "artist": "Hatsune Miku",
+        "artist_image": "http://i.imgur.com/70BADpV.png",
+        "cover": "http://i.imgur.com/nQTQA5J.jpg",
+        "album": "Fantasm-O-Matic"
     },
     {
         "version": 103,
@@ -1411,7 +1489,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 41
+                    "index": 44
                 }
             }
         },
@@ -1437,7 +1515,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 42
+                    "index": 45
                 }
             }
         },
@@ -1463,13 +1541,13 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 43
+                    "index": 46
                 }
             }
         },
         "song_title": "Vogel Im Kafig",
         "artist": "Hiroyuki Sawano & Cyua",
-        "artist_image": "https://i.scdn.co/image/e4a4cf38f9c3aeda3c2fa65cde0a81222e492c41",
+        "artist_image": "https://i.scdn.co/image/3c1c1781de0c5974226bfae4e5cf649cf93b9d37",
         "cover": "https://i.scdn.co/image/3f3abb6325d6b7acefe4beca1ff8110625398813",
         "album": "Attack on Titan (Original Soundtrack)",
         "spotify_data": {
@@ -1611,13 +1689,13 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 44
+                    "index": 47
                 }
             }
         },
         "song_title": "The Reluctant Heroes",
         "artist": "Hiroyuki Sawano & MPI",
-        "artist_image": "https://i.scdn.co/image/e4a4cf38f9c3aeda3c2fa65cde0a81222e492c41",
+        "artist_image": "https://i.scdn.co/image/3c1c1781de0c5974226bfae4e5cf649cf93b9d37",
         "cover": "https://i.scdn.co/image/3f3abb6325d6b7acefe4beca1ff8110625398813",
         "album": "Attack on Titan (Original Soundtrack)",
         "spotify_data": {
@@ -1728,6 +1806,32 @@
     {
         "version": 103,
         "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-D4SUMC-PAu4-The_Ferris_Crew_Keep_On_Keeping_On_trailer.webm",
+        "video_id": "D4SUMC-PAu4",
+        "url": "https://www.youtube.com/watch?v=D4SUMC-PAu4",
+        "title": "Keep On Keeping On",
+        "duration": 206,
+        "thumbnail": "https://i.ytimg.com/vi/D4SUMC-PAu4/maxresdefault.jpg",
+        "description": "The Ferris Crew \u30c1\u30fc\u30e0\u3000trailer",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "simonisanerd",
+                    "index": 48
+                }
+            }
+        },
+        "song_title": "Keep On Keeping On",
+        "artist": "Hiroyuki Sawano",
+        "artist_image": "http://i.imgur.com/0WAHlO4.jpg",
+        "cover": "http://i.imgur.com/JGl7xn2.jpg",
+        "album": "ALDNOAH.ZERO"
+    },
+    {
+        "version": 103,
+        "type": "GieselaEntry",
         "expected_filename": "cache\\audio_cache\\youtube-f5d0VCHll4w-Ao_no_Exorcist_Original_Sound_track_03_U_Cloud.webm",
         "video_id": "f5d0VCHll4w",
         "url": "https://www.youtube.com/watch?v=f5d0VCHll4w",
@@ -1741,7 +1845,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 45
+                    "index": 49
                 }
             }
         },
@@ -1767,7 +1871,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 46
+                    "index": 50
                 }
             }
         },
@@ -1793,7 +1897,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 47
+                    "index": 51
                 }
             }
         },
@@ -1819,7 +1923,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 48
+                    "index": 52
                 }
             }
         },
@@ -1845,7 +1949,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 49
+                    "index": 53
                 }
             }
         },
@@ -1871,7 +1975,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 50
+                    "index": 54
                 }
             }
         },
@@ -1897,7 +2001,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 51
+                    "index": 55
                 }
             }
         },
@@ -1923,7 +2027,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 52
+                    "index": 56
                 }
             }
         },
@@ -1949,7 +2053,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 53
+                    "index": 57
                 }
             }
         },
@@ -1975,7 +2079,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 54
+                    "index": 58
                 }
             }
         },
@@ -1984,6 +2088,157 @@
         "artist_image": "http://i.imgur.com/pfz0TUq.png",
         "cover": "http://i.imgur.com/APw5wIr.jpg",
         "album": "K-On!"
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-UgS7vgquBvo-KANA-BOON.webm",
+        "video_id": "UgS7vgquBvo",
+        "url": "https://www.youtube.com/watch?v=UgS7vgquBvo",
+        "title": "KANA-BOON / \u306a\u3044\u3082\u306e\u306d\u3060\u308a",
+        "duration": 305,
+        "thumbnail": "https://i.ytimg.com/vi/UgS7vgquBvo/maxresdefault.jpg",
+        "description": "2013.04.24 release\nKANA-BOON 1st mini Album\u300e\u50d5\u304cCD\u3092\u51fa\u3057\u305f\u3089\u300f\nRDCA-1030 / \uffe51,575 / HIP LAND MUSIC\n1. \u306a\u3044\u3082\u306e\u306d\u3060\u308a\n2. \u30af\u30ed\u30fc\u30f3\n3. \u30b9\u30c8\u30e9\u30c6\u30b8\u30fc\n4. \u898b\u305f\u304f\u306a\u3044\u3082\u306e\n5. \u7720\u308c\u306c\u68ee\u306e\u541b\u306e\u305f\u3081\n6. \u3055\u304f\u3089\u306e\u3046\u305f\n\nDir \u5c71\u5cb8\u8056\u592a",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "simonisanerd",
+                    "index": 59
+                }
+            }
+        },
+        "song_title": "\u306a\u3044\u3082\u306e\u306d\u3060\u308a",
+        "artist": "KANA-BOON",
+        "artist_image": "https://i.scdn.co/image/53fb27c3d71b2257feb7fff32d9e10ffecb57ea2",
+        "cover": "https://i.scdn.co/image/53fb27c3d71b2257feb7fff32d9e10ffecb57ea2",
+        "album": "\u50d5\u304b\u3099CD\u3092\u51fa\u3057\u305f\u3089",
+        "spotify_data": {
+            "id": "1dsh4buvcBs2u7YtHy29c7",
+            "name": "\u306a\u3044\u3082\u306e\u306d\u3060\u308a",
+            "artists": [
+                {
+                    "id": "3PWp9R5HvbQgxI5KBx5kVd",
+                    "name": "KANA-BOON",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/53fb27c3d71b2257feb7fff32d9e10ffecb57ea2",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/c25daece7a90fc05a9f4d181fcfa7797af890fe2",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/b4b7b830cf6345c41b9d8c09d2acdffbafb436a5",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "anime",
+                        "j-dance",
+                        "j-pop",
+                        "j-rock",
+                        "otacore"
+                    ],
+                    "popularity": 53,
+                    "uri": "spotify:artist:3PWp9R5HvbQgxI5KBx5kVd",
+                    "href": "https://open.spotify.com/artist/3PWp9R5HvbQgxI5KBx5kVd"
+                }
+            ],
+            "artist": "KANA-BOON",
+            "cover_url": "https://i.scdn.co/image/53fb27c3d71b2257feb7fff32d9e10ffecb57ea2",
+            "duration": 262.693,
+            "album": {
+                "id": "3SKxJng83DxoCi3CuHfaLU",
+                "name": "\u50d5\u304b\u3099CD\u3092\u51fa\u3057\u305f\u3089",
+                "artists": [
+                    {
+                        "id": "3PWp9R5HvbQgxI5KBx5kVd",
+                        "name": "KANA-BOON",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/53fb27c3d71b2257feb7fff32d9e10ffecb57ea2",
+                                "width": 640
+                            },
+                            {
+                                "height": 300,
+                                "url": "https://i.scdn.co/image/c25daece7a90fc05a9f4d181fcfa7797af890fe2",
+                                "width": 300
+                            },
+                            {
+                                "height": 64,
+                                "url": "https://i.scdn.co/image/b4b7b830cf6345c41b9d8c09d2acdffbafb436a5",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "anime",
+                            "j-dance",
+                            "j-pop",
+                            "j-rock",
+                            "otacore"
+                        ],
+                        "popularity": 53,
+                        "uri": "spotify:artist:3PWp9R5HvbQgxI5KBx5kVd",
+                        "href": "https://open.spotify.com/artist/3PWp9R5HvbQgxI5KBx5kVd"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/53fb27c3d71b2257feb7fff32d9e10ffecb57ea2",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/c25daece7a90fc05a9f4d181fcfa7797af890fe2",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/b4b7b830cf6345c41b9d8c09d2acdffbafb436a5",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:3SKxJng83DxoCi3CuHfaLU"
+            },
+            "popularity": 52,
+            "uri": "spotify:track:1dsh4buvcBs2u7YtHy29c7",
+            "query": "KANA-BOON - \u306a\u3044\u3082\u306e\u306d\u3060\u308a",
+            "certainty": 0.9444444444444444
+        }
+    },
+    {
+        "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-5z3Sv8u2oEY-03._ED2_-_STARS.webm",
+        "video_id": "5z3Sv8u2oEY",
+        "url": "https://www.youtube.com/watch?v=5z3Sv8u2oEY",
+        "title": "STARS -you don't have to worry about tomorrow-",
+        "duration": 299,
+        "thumbnail": "https://i.ytimg.com/vi/5z3Sv8u2oEY/maxresdefault.jpg",
+        "description": "",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "simonisanerd",
+                    "index": 60
+                }
+            }
+        },
+        "song_title": "STARS -you don't have to worry about tomorrow-",
+        "artist": "KING",
+        "artist_image": "http://i.imgur.com/Sf2u1E0.jpg",
+        "cover": "http://i.imgur.com/P2fvkNa.jpg",
+        "album": "Zatch Bell!"
     },
     {
         "version": 103,
@@ -2001,7 +2256,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 55
+                    "index": 61
                 }
             }
         },
@@ -2027,7 +2282,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 56
+                    "index": 62
                 }
             }
         },
@@ -2053,7 +2308,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 57
+                    "index": 63
                 }
             }
         },
@@ -2079,7 +2334,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 58
+                    "index": 64
                 }
             }
         },
@@ -2105,7 +2360,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 59
+                    "index": 65
                 }
             }
         },
@@ -2131,7 +2386,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 60
+                    "index": 66
                 }
             }
         },
@@ -2157,7 +2412,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 61
+                    "index": 67
                 }
             }
         },
@@ -2183,7 +2438,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 62
+                    "index": 68
                 }
             }
         },
@@ -2209,7 +2464,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 63
+                    "index": 69
                 }
             }
         },
@@ -2235,7 +2490,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 64
+                    "index": 70
                 }
             }
         },
@@ -2261,7 +2516,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 65
+                    "index": 71
                 }
             }
         },
@@ -2287,7 +2542,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 66
+                    "index": 72
                 }
             }
         },
@@ -2313,7 +2568,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 67
+                    "index": 73
                 }
             }
         },
@@ -2344,13 +2599,13 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 68
+                    "index": 74
                 }
             }
         },
         "song_title": "Shirushi",
         "artist": "LiSA",
-        "artist_image": "https://i.scdn.co/image/ae1b09a9dd746482b53d73fb0643c80c1b46a3d4",
+        "artist_image": "https://i.scdn.co/image/82e3892e5c6a18138891d722fb9656da8b0d6112",
         "cover": "https://i.scdn.co/image/b0d475c2cb05195d2cf7778c507b8757e1f3376e",
         "album": "Launcher",
         "spotify_data": {
@@ -2467,7 +2722,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 69
+                    "index": 75
                 }
             }
         },
@@ -2493,7 +2748,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 70
+                    "index": 76
                 }
             }
         },
@@ -2519,7 +2774,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 71
+                    "index": 77
                 }
             }
         },
@@ -2545,13 +2800,13 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 72
+                    "index": 78
                 }
             }
         },
         "song_title": "Guren No Yumiya",
         "artist": "Linked Horizon",
-        "artist_image": "https://i.scdn.co/image/970b684cdddc1437ac41f8c8338fd1e716f58483",
+        "artist_image": "https://i.scdn.co/image/f17a9a1c7eeb6e0e41adf13b62ecc3e9cebbc6dc",
         "cover": "https://i.scdn.co/image/63d65c2991b4f30a9b7febae2c1fb2eb8db64c94",
         "album": "Jiyuu E No Shingeki",
         "spotify_data": {
@@ -2664,7 +2919,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 73
+                    "index": 79
                 }
             }
         },
@@ -2690,7 +2945,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 74
+                    "index": 80
                 }
             }
         },
@@ -2716,7 +2971,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 75
+                    "index": 81
                 }
             }
         },
@@ -2742,7 +2997,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 76
+                    "index": 82
                 }
             }
         },
@@ -2751,6 +3006,32 @@
         "artist_image": "http://i.imgur.com/Ueiw3vi.jpg",
         "cover": "http://i.imgur.com/4zunFJ0.jpg",
         "album": "Sword Art Online"
+    },
+    {
+        "version": 103,
+        "type": "VGMEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-lP1ji8L6nIE-Seven_Deadly_Sins_OPENING_2_FULL.m4a",
+        "video_id": "lP1ji8L6nIE",
+        "url": "https://www.youtube.com/watch?v=lP1ji8L6nIE",
+        "title": "Seven Deadly Sins\u300cOPENING 2\u300d  [FULL]",
+        "duration": 201,
+        "thumbnail": "https://i.ytimg.com/vi/lP1ji8L6nIE/maxresdefault.jpg",
+        "description": "Song - Seven Deadly Sins\nArtist - MAN WITH A MISSION\nCharacter - Meliodas\n\n\n\n\nYour Favorite group of murders framed by \"Killing\" The Grandmast of lionies watch this show it's fire \ud83d\udd25",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "simonisanerd",
+                    "index": 83
+                }
+            }
+        },
+        "song_title": "Seven Deadly Sins",
+        "artist": "MAN WITH A MISSION",
+        "artist_image": "http://vgmdb.net/db/assets/portraits/17558-1460729769.jpg",
+        "cover": "http://media.vgm.io/albums/79/49897/49897-1438280170.jpg",
+        "album": "Seven Deadly Sins / MAN WITH A MISSION"
     },
     {
         "version": 103,
@@ -2768,7 +3049,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 77
+                    "index": 84
                 }
             }
         },
@@ -2794,7 +3075,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 78
+                    "index": 85
                 }
             }
         },
@@ -2820,7 +3101,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 79
+                    "index": 86
                 }
             }
         },
@@ -2846,7 +3127,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 80
+                    "index": 87
                 }
             }
         },
@@ -2872,7 +3153,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 81
+                    "index": 88
                 }
             }
         },
@@ -2898,7 +3179,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 82
+                    "index": 89
                 }
             }
         },
@@ -2924,7 +3205,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 83
+                    "index": 90
                 }
             }
         },
@@ -2950,7 +3231,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 84
+                    "index": 91
                 }
             }
         },
@@ -2976,7 +3257,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 85
+                    "index": 92
                 }
             }
         },
@@ -3002,7 +3283,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 86
+                    "index": 93
                 }
             }
         },
@@ -3028,7 +3309,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 87
+                    "index": 94
                 }
             }
         },
@@ -3059,13 +3340,13 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 88
+                    "index": 95
                 }
             }
         },
         "song_title": "Clock Strikes",
         "artist": "ONE OK ROCK",
-        "artist_image": "https://i.scdn.co/image/cf11b90956789974a97738477eb6ed4ee59eda3f",
+        "artist_image": "https://i.scdn.co/image/3b3b816312699a68731db11601b463a3cb4eeb26",
         "cover": "https://i.scdn.co/image/b10a614ced95aff8bf68767ced8bf6180eb663df",
         "album": "JINSEI KAKETE BOKU WA",
         "spotify_data": {
@@ -3184,7 +3465,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 89
+                    "index": 96
                 }
             }
         },
@@ -3210,7 +3491,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 90
+                    "index": 97
                 }
             }
         },
@@ -3236,7 +3517,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 91
+                    "index": 98
                 }
             }
         },
@@ -3262,7 +3543,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 92
+                    "index": 99
                 }
             }
         },
@@ -3288,7 +3569,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 93
+                    "index": 100
                 }
             }
         },
@@ -3314,7 +3595,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 94
+                    "index": 101
                 }
             }
         },
@@ -3340,7 +3621,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 95
+                    "index": 102
                 }
             }
         },
@@ -3366,7 +3647,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 96
+                    "index": 103
                 }
             }
         },
@@ -3392,7 +3673,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 97
+                    "index": 104
                 }
             }
         },
@@ -3418,7 +3699,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 98
+                    "index": 105
                 }
             }
         },
@@ -3444,7 +3725,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 99
+                    "index": 106
                 }
             }
         },
@@ -3470,7 +3751,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 100
+                    "index": 107
                 }
             }
         },
@@ -3496,7 +3777,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 101
+                    "index": 108
                 }
             }
         },
@@ -3522,7 +3803,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 102
+                    "index": 109
                 }
             }
         },
@@ -3531,6 +3812,32 @@
         "artist_image": "http://i.imgur.com/ovZQYk6.jpg",
         "cover": "http://i.imgur.com/OHrymN8.jpg",
         "album": "Akame ga Kill"
+    },
+    {
+        "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-mc95DgtTbhA-Opus_RURUTIA.webm",
+        "video_id": "mc95DgtTbhA",
+        "url": "https://www.youtube.com/watch?v=mc95DgtTbhA",
+        "title": "Opus",
+        "duration": 337,
+        "thumbnail": "http://i.imgur.com/20vr19w.jpg",
+        "description": "",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "simonisanerd",
+                    "index": 110
+                }
+            }
+        },
+        "song_title": "Opus",
+        "artist": "Rurutia",
+        "artist_image": "http://i.imgur.com/PRRNX3C.jpg",
+        "cover": "http://i.imgur.com/zxYoMeH.jpg",
+        "album": "Opus"
     },
     {
         "version": 103,
@@ -3548,7 +3855,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 103
+                    "index": 111
                 }
             }
         },
@@ -3574,7 +3881,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 104
+                    "index": 112
                 }
             }
         },
@@ -3600,7 +3907,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 105
+                    "index": 113
                 }
             }
         },
@@ -3626,7 +3933,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 106
+                    "index": 114
                 }
             }
         },
@@ -3652,13 +3959,13 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 107
+                    "index": 115
                 }
             }
         },
         "song_title": "Don't Lose Your Way (Feat. NoneLikeJoshua)",
         "artist": "Sapphire & None Like Joshua",
-        "artist_image": "https://i.scdn.co/image/f7e2c2e20e854005b72b0b5460c9934351cb1e4a",
+        "artist_image": "https://i.scdn.co/image/0a4e166338e965239cdcdb434781e43e0463f309",
         "cover": "https://i.scdn.co/image/f0396585a88b82628af0eaa189129804d44f0212",
         "album": "Don't Lose Your Way (Kill la Kill)",
         "spotify_data": {
@@ -3794,7 +4101,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 108
+                    "index": 116
                 }
             }
         },
@@ -3820,7 +4127,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 109
+                    "index": 117
                 }
             }
         },
@@ -3846,7 +4153,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 110
+                    "index": 118
                 }
             }
         },
@@ -3872,7 +4179,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 111
+                    "index": 119
                 }
             }
         },
@@ -3898,13 +4205,13 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 112
+                    "index": 120
                 }
             }
         },
         "song_title": "Hitohira No Hanabira",
         "artist": "Stereopony",
-        "artist_image": "https://i.scdn.co/image/f5b5d8570f68dbc4558f53fccc77b15654e963fb",
+        "artist_image": "https://i.scdn.co/image/d7bfb34087ad7caeddb15f64206e39fa82118883",
         "cover": "https://i.scdn.co/image/f5b5d8570f68dbc4558f53fccc77b15654e963fb",
         "album": "A Hydrangea Blooms",
         "spotify_data": {
@@ -4023,7 +4330,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 113
+                    "index": 121
                 }
             }
         },
@@ -4049,7 +4356,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 114
+                    "index": 122
                 }
             }
         },
@@ -4075,7 +4382,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 115
+                    "index": 123
                 }
             }
         },
@@ -4101,7 +4408,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 116
+                    "index": 124
                 }
             }
         },
@@ -4127,7 +4434,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 117
+                    "index": 125
                 }
             }
         },
@@ -4153,7 +4460,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 118
+                    "index": 126
                 }
             }
         },
@@ -4179,7 +4486,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 119
+                    "index": 127
                 }
             }
         },
@@ -4205,7 +4512,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 120
+                    "index": 128
                 }
             }
         },
@@ -4214,6 +4521,32 @@
         "artist_image": "http://i.imgur.com/C7SX08e.jpg",
         "cover": "http://i.imgur.com/03D0mnz.jpg",
         "album": "The Melancholy of Haruhi Suzumiya"
+    },
+    {
+        "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-uuMNmHdr0Lg-Utada_Hikaru_Beautiful_World_Directed_by_Tsurumaki_Kazuya.webm",
+        "video_id": "uuMNmHdr0Lg",
+        "url": "https://www.youtube.com/watch?v=uuMNmHdr0Lg",
+        "title": "Beautiful World",
+        "duration": 165,
+        "thumbnail": "https://i.ytimg.com/vi/uuMNmHdr0Lg/maxresdefault.jpg",
+        "description": "\u4eca\u56de\u306e\u30a2\u30eb\u30d0\u30e0\u306e\u30d7\u30ed\u30e2\u30fc\u30b7\u30e7\u30f3\u4f01\u753b\u306b\u3066\u3001\u69d8\u3005\u306a\u5206\u91ce\u306e\u30af\u30ea\u30a8\u30a4\u30bf\u30fc\u304c\u5b87\u591a\u7530\u30d2\u30ab\u30eb\u3001\u3082\u3057\u304f\u306f\u5f7c\u5973\u306e\u697d\u66f2\u3092\u30c6\u30fc\u30de\u306b\u72ec\u81ea\u306b\u8868\u73fe\u3057\u305f\u4f5c\u54c1\u3092\u5bc4\u305b\u3066\u304f\u308c\u3066\u304a\u308a\u3001\u305d\u306e\u4f5c\u54c1\u7fa4\u304c\u73fe\u5728\u7279\u8a2d\u30da\u30fc\u30b8\u306b\u3066\u516c\u958b\u3055\u308c\u3066\u304a\u308a\u307e\u3059\u3002\n\n\uff1c\u300c\u5b87\u591a\u7530\u30d2\u30ab\u30eb\u306e\u3046\u305f\u300d\u7279\u8a2d\u30b5\u30a4\u30c8\uff1e\nhttp://po.st/utada15th\n\n---\n\u5b87\u591a\u7530\u30d2\u30ab\u30eb\u306e\u3046\u305f \uff0d13\u7d44\u306e\u97f3\u697d\u5bb6\u306b\u3088\u308b13\u306e\u89e3\u91c8\u306b\u3064\u3044\u3066\uff0d\n\n2014\u5e7412\u67089\u65e5\uff08\u706b\uff09\u3000\u767a\u58f2\u4e88\u5b9a\n\u54c1\u756a\uff1aTYCT-60055/\u4fa1\u683c\uff1a3,000\u5186\uff08\u7a0e\u629c\uff09\niTunes Store\uff1ahttp://po.st/itutada15th\n\n\uff1c\u53c2\u52a0\u30a2\u30fc\u30c6\u30a3\u30b9\u30c8\u300050\u97f3\u9806/\u656c\u79f0\u7565\uff1e\nAI/\u4e95\u4e0a\u967d\u6c34/\u5927\u6a4b\u30c8\u30ea\u30aa/\u5ca1\u6751\u9756\u5e78/\u52a0\u85e4\u30df\u30ea\u30e4/KIRINJI/\u690e\u540d\u6797\u6a8e/Jimmy Jam & Terry Lewis feat. Peabo Bryson/Tofubeats feat. BONNIE PINK/\u30cf\u30ca\u30ec\u30b0\u30df/\u6d5c\u5d0e\u3042\u3086\u307f/\u5409\u4e95\u548c\u54c9/LOVE PSYCHEDELICO",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "simonisanerd",
+                    "index": 129
+                }
+            }
+        },
+        "song_title": "Beautiful World",
+        "artist": "Utada Hikaru",
+        "artist_image": "http://i.imgur.com/kauWlyH.jpg",
+        "cover": "http://i.imgur.com/trANzTF.jpg",
+        "album": "Heart Station (Evangelion)"
     },
     {
         "version": 103,
@@ -4231,7 +4564,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 121
+                    "index": 130
                 }
             }
         },
@@ -4257,7 +4590,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 122
+                    "index": 131
                 }
             }
         },
@@ -4283,7 +4616,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 123
+                    "index": 132
                 }
             }
         },
@@ -4309,7 +4642,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 124
+                    "index": 133
                 }
             }
         },
@@ -4335,7 +4668,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 125
+                    "index": 134
                 }
             }
         },
@@ -4361,7 +4694,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 126
+                    "index": 135
                 }
             }
         },
@@ -4387,7 +4720,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 127
+                    "index": 136
                 }
             }
         },
@@ -4413,7 +4746,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 128
+                    "index": 137
                 }
             }
         },
@@ -4439,7 +4772,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 129
+                    "index": 138
                 }
             }
         },
@@ -4465,7 +4798,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 130
+                    "index": 139
                 }
             }
         },
@@ -4491,7 +4824,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 131
+                    "index": 140
                 }
             }
         },
@@ -4517,7 +4850,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 132
+                    "index": 141
                 }
             }
         },
@@ -4543,7 +4876,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 133
+                    "index": 142
                 }
             }
         },
@@ -4569,7 +4902,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 134
+                    "index": 143
                 }
             }
         },
@@ -4595,7 +4928,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 135
+                    "index": 144
                 }
             }
         },
@@ -4621,7 +4954,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 136
+                    "index": 145
                 }
             }
         },
@@ -4647,7 +4980,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 137
+                    "index": 146
                 }
             }
         },
@@ -4673,7 +5006,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 138
+                    "index": 147
                 }
             }
         },
@@ -4699,7 +5032,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 139
+                    "index": 148
                 }
             }
         },
@@ -4725,7 +5058,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 140
+                    "index": 149
                 }
             }
         },
@@ -4751,7 +5084,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 141
+                    "index": 150
                 }
             }
         },
@@ -4777,7 +5110,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 142
+                    "index": 151
                 }
             }
         },
@@ -4803,7 +5136,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 143
+                    "index": 152
                 }
             }
         },
@@ -4829,7 +5162,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 144
+                    "index": 153
                 }
             }
         },
@@ -4855,7 +5188,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 145
+                    "index": 154
                 }
             }
         },
@@ -4864,6 +5197,32 @@
         "artist_image": "http://i.imgur.com/l8vurja.jpg",
         "cover": "http://i.imgur.com/tYgJ9oo.jpg",
         "album": "Sankarea"
+    },
+    {
+        "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-pgZ_y6WcL9Q-Great_Distance_supercell_feat.chelly_egoist.webm",
+        "video_id": "pgZ_y6WcL9Q",
+        "url": "https://www.youtube.com/watch?v=pgZ_y6WcL9Q",
+        "title": "Great Distance",
+        "duration": 273,
+        "thumbnail": "https://i.ytimg.com/vi/pgZ_y6WcL9Q/maxresdefault.jpg",
+        "description": "",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "simonisanerd",
+                    "index": 155
+                }
+            }
+        },
+        "song_title": "Great Distance",
+        "artist": "supercell",
+        "artist_image": "http://i.imgur.com/jd5ISbm.jpg",
+        "cover": "http://i.imgur.com/cYkh89U.jpg",
+        "album": "Great Distance"
     },
     {
         "version": 103,
@@ -4881,7 +5240,7 @@
                 "value": {
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "simonisanerd",
-                    "index": 146
+                    "index": 156
                 }
             }
         },
