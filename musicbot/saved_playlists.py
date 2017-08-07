@@ -6,6 +6,7 @@ import re
 from musicbot.entry import Entry
 from musicbot.exceptions import BrokenEntryError, OutdatedEntryError
 from musicbot.utils import clean_songname, similarity
+from musicbot.web_author import WebAuthor
 
 
 class Playlists:
@@ -30,11 +31,18 @@ class Playlists:
 
         plsection = self.playlists[playlistname]
 
+        playlist_author = plsection["author"]
+
+        if isinstance(playlist_author, dict):
+            playlist_author = WebAuthor.from_dict(playlist_author)
+        else:
+            playlist_author = WebAuthor.from_id(playlist_author)
+
         playlist_information = {
             "id":           playlistname,
             "name":         playlistname.replace("_", " ").title(),
             "location":     plsection["location"],
-            "author":       plsection["author"],
+            "author":       playlist_author,
             "replay_count": int(plsection["replays"]),
             "description":  None if plsection.get("description") == "None" else plsection.get("description"),
             "cover_url":    None if plsection.get("cover_url") == "None" else plsection.get("cover_url")
@@ -70,7 +78,7 @@ class Playlists:
 
         return playlist_information
 
-    def set_playlist(self, entries, name, author_id, description=None, cover_url=None, replays=0):
+    def set_playlist(self, entries, name, author, description=None, cover_url=None, replays=0):
         name = name.lower().strip().replace(" ", "_")
 
         serialized_entries = []
@@ -89,9 +97,12 @@ class Playlists:
 
         playlist_data = self.playlists.get(name, {})
 
+        if not isinstance(author, WebAuthor):
+            author = WebAuthor.from_id(author)
+
         playlist_data.update({
             "location": "{}{}.gpl".format(self.playlist_save_location, name),
-            "author": author_id,
+            "author": author.to_dict(),
             "replays": replays,
             "description": description,
             "cover_url": cover_url
@@ -208,7 +219,7 @@ class Playlists:
                         next_entries.insert(index, new)
 
         next_name = new_name if new_name is not None else name
-        next_author_id = old_playlist["author"]
+        next_author = old_playlist["author"]
         next_description = new_description or old_playlist["description"]
         next_cover = new_cover or old_playlist["cover_url"]
 
@@ -219,7 +230,7 @@ class Playlists:
         if next_name != name:
             self.remove_playlist(name)
 
-        self.set_playlist(next_entries, next_name, next_author_id, next_description,
+        self.set_playlist(next_entries, next_name, next_author, next_description,
                           next_cover, replays=old_playlist["replay_count"])
 
     async def mark_entry_broken(self, queue, playlist_name, entry):

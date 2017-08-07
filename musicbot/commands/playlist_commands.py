@@ -266,7 +266,7 @@ class PlaylistCommands:
                     True
                 ),
                 "author": (
-                    lambda playlist: self.get_global_user(self.playlists.get_playlist(playlist, player.playlist)["author"]).name,
+                    lambda playlist: self.playlists.get_playlist(playlist, player.playlist)["author"].name,
                     False
                 ),
                 "random": None,
@@ -343,7 +343,7 @@ class PlaylistCommands:
                 colour=hex_to_dec("#b93649"),
                 url="http://giesela.org"
             )
-            pl_author = self.get_global_user(infos["author"])
+            pl_author = infos["author"]
             em.set_author(
                 name=pl_author.display_name, icon_url=pl_author.avatar_url)
 
@@ -544,7 +544,7 @@ class PlaylistCommands:
 
             msg_content = interface_string.format(
                 user_savename.replace("_", " ").title(),
-                self.get_global_user(playlist["author"]).mention,
+                playlist["author"].display_name,
                 len(playlist["entries"]),
                 "s" if len(playlist["entries"]) is not 1 else "",
                 format_time(sum([x.duration for x in entries])),
@@ -689,7 +689,7 @@ class PlaylistCommands:
                     channel,
                     extras_string.format(
                         user_savename.replace("_", " ").title(),
-                        self.get_global_user(playlist["author"]).mention,
+                        playlist["author"].display_name,
                         len(playlist["entries"]), "s"
                         if len(playlist["entries"]) is not 1 else "",
                         format_time(sum([x.duration for x in entries]))))
