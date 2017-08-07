@@ -21,7 +21,7 @@
         ***REMOVED***,
         "song_title": "Lucy The Tease",
         "artist": "Allan Rayman",
-        "artist_image": "https://i.scdn.co/image/b838b4c659fa43a2f17dbdceb6dd10881753a50e",
+        "artist_image": "https://i.scdn.co/image/b1e3bb62a231b4dfec45ea241a424ecee789d244",
         "cover": "https://i.scdn.co/image/9cb427f1c6646483072f1b5432284fba1da9e557",
         "album": "Hotel Allan",
         "spotify_data": ***REMOVED***
@@ -142,7 +142,7 @@
         ***REMOVED***,
         "song_title": "Do I Wanna Know?",
         "artist": "Arctic Monkeys",
-        "artist_image": "https://i.scdn.co/image/c488bf987b2f716a539a768a102855450345113d",
+        "artist_image": "https://i.scdn.co/image/e1f00ceabce8dd0480bad7e873993082d9ac3fe9",
         "cover": "https://i.scdn.co/image/f513ae2d610d9255913795d4bc28ca33c827b232",
         "album": "AM",
         "spotify_data": ***REMOVED***
@@ -255,11 +255,11 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
+        "type": "GieselaEntry",
         "expected_filename": "cache\\audio_cache\\youtube-AHJUwyrGZjY-ayokay_-_Awake_Audio_ft._Mafalda.webm",
         "video_id": "AHJUwyrGZjY",
         "url": "https://www.youtube.com/watch?v=AHJUwyrGZjY",
-        "title": "ayokay - Awake (Audio) ft. Mafalda",
+        "title": "Ayokay - Awake",
         "duration": 228,
         "thumbnail": "https://i.ytimg.com/vi/AHJUwyrGZjY/maxresdefault.jpg",
         "description": "Music video by ayokay performing Awake. (C) 2016 Columbia Records, a Division of Sony Music Entertainment\n\nhttp://vevo.ly/vffGnk",
@@ -272,7 +272,12 @@
                     "index": 2
                 ***REMOVED***
             ***REMOVED***
-        ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Ayokay - Awake",
+        "artist": "Ayokay",
+        "artist_image": "http://i.imgur.com/I2umuzq.jpg",
+        "cover": "http://i.imgur.com/zmDt8gZ.jpg",
+        "album": "4th to Infinity - EP"
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
@@ -414,7 +419,7 @@
         ***REMOVED***,
         "song_title": "Blame",
         "artist": "Bastille",
-        "artist_image": "https://i.scdn.co/image/4b161fe24de1c80bce42085f409b7a4700b94c47",
+        "artist_image": "https://i.scdn.co/image/5ef307a88e5fec0a11b6de9b0c77aa36b509bcbc",
         "cover": "https://i.scdn.co/image/b5b2a90018278d3beee0dba01378ba186d1f86f6",
         "album": "Wild World (Complete Edition)",
         "spotify_data": ***REMOVED***
@@ -535,7 +540,7 @@
         ***REMOVED***,
         "song_title": "Fake It",
         "artist": "Bastille",
-        "artist_image": "https://i.scdn.co/image/5ef307a88e5fec0a11b6de9b0c77aa36b509bcbc",
+        "artist_image": "https://i.scdn.co/image/4b161fe24de1c80bce42085f409b7a4700b94c47",
         "cover": "https://i.scdn.co/image/b5b2a90018278d3beee0dba01378ba186d1f86f6",
         "album": "Wild World (Complete Edition)",
         "spotify_data": ***REMOVED***
@@ -656,7 +661,7 @@
         ***REMOVED***,
         "song_title": "Good Grief",
         "artist": "Bastille",
-        "artist_image": "https://i.scdn.co/image/765e709fa628079404fe99ca0e540c43b894eeba",
+        "artist_image": "https://i.scdn.co/image/5ef307a88e5fec0a11b6de9b0c77aa36b509bcbc",
         "cover": "https://i.scdn.co/image/b5b2a90018278d3beee0dba01378ba186d1f86f6",
         "album": "Wild World (Complete Edition)",
         "spotify_data": ***REMOVED***
@@ -777,7 +782,7 @@
         ***REMOVED***,
         "song_title": "Send Them Off!",
         "artist": "Bastille",
-        "artist_image": "https://i.scdn.co/image/5ef307a88e5fec0a11b6de9b0c77aa36b509bcbc",
+        "artist_image": "https://i.scdn.co/image/4b161fe24de1c80bce42085f409b7a4700b94c47",
         "cover": "https://i.scdn.co/image/b5b2a90018278d3beee0dba01378ba186d1f86f6",
         "album": "Wild World (Complete Edition)",
         "spotify_data": ***REMOVED***
@@ -898,7 +903,7 @@
         ***REMOVED***,
         "song_title": "Things We Lost In The Fire",
         "artist": "Bastille",
-        "artist_image": "https://i.scdn.co/image/765e709fa628079404fe99ca0e540c43b894eeba",
+        "artist_image": "https://i.scdn.co/image/5ef307a88e5fec0a11b6de9b0c77aa36b509bcbc",
         "cover": "https://i.scdn.co/image/4627f2fcd0f5299bb8577ddbe26a5e919095c781",
         "album": "Bad Blood",
         "spotify_data": ***REMOVED***
@@ -1019,7 +1024,7 @@
         ***REMOVED***,
         "song_title": "bad_news",
         "artist": "Bastille",
-        "artist_image": "https://i.scdn.co/image/765e709fa628079404fe99ca0e540c43b894eeba",
+        "artist_image": "https://i.scdn.co/image/5ef307a88e5fec0a11b6de9b0c77aa36b509bcbc",
         "cover": "https://i.scdn.co/image/25b74a3c984bfe6ca80fa19637bed7e17d7229e0",
         "album": "Oblivion",
         "spotify_data": ***REMOVED***
@@ -1120,27 +1125,6 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
-        "expected_filename": "cache\\audio_cache\\youtube-n10G_yWo8BY-Bearcubs_x_Tom_Misch_-_Colours_Of_Freedom.webm",
-        "video_id": "n10G_yWo8BY",
-        "url": "https://www.youtube.com/watch?v=n10G_yWo8BY",
-        "title": "Bearcubs x Tom Misch - Colours Of Freedom",
-        "duration": 227,
-        "thumbnail": "https://i.ytimg.com/vi/n10G_yWo8BY/maxresdefault.jpg",
-        "description": "Bearcubs x Tom Misch - Colours Of Freedom\n\n~~~~~~~\u00bb Quote of the day \u00ab~~~~~~~\n\n\"There is only one way to avoid criticism: do nothing, say nothing, and be nothing.\"\n--Aristotle\n\nShare your quotes with me in the comment section below and I might use it for the next quote of the day!\n\n~~~~~~~\u00bb Free Download \u00ab~~~~~~~\n\nhttps://soundcloud.com/bearcubs/bearcubs-x-tom-misch-colours-of-freedom\n\n~~~~~~~\u00bb Bearcubs \u00ab~~~~~~~\n\nSoundcloud: https://soundcloud.com/bearcubs\nFacebook: https://www.facebook.com/bearcubsmusic\nTwitter: https://twitter.com/bearcubsmusic\n\n~~~~~~~\u00bb Tom Misch \u00ab~~~~~~~\n\nSoundcloud: https://soundcloud.com/tom-misch\nFacebook: https://www.facebook.com/tommisch123\nTwitter: https://twitter.com/Tom_Misch\nYoutube: https://www.youtube.com/user/verynice4321\n\n~~~~~~~\u00bb Contact Cloudkid \u00ab~~~~~~~\n\nSoundcloud: https://soundcloud.com/cloudkid-1\nFacebook: https://www.facebook.com/cloudkidpromotion\n\nWant your track on CloudKid? It's easy! Contact me on my YouTube or message me at: CloudKidOfficial@gmail.com\n\n~~~~~~~\u00bb Image \u00ab~~~~~~~\n\nhttp://wearetherhoads.com/wp-content/uploads/055-NewZealand_2011_Wearetherhoads-1.jpg\n\n~~~~~~~\u00bb Legal stuff \u00ab~~~~~~~\n\nI do not own any of the content of the video and it has been uploaded for promotion purposes only. If any producer or label has an Issue with any upload, contact me directly through youtube oder under CloudKidOfficial@gmail.com and the video will be taken down immediately! This includes owners of the images used.",
-        "meta": ***REMOVED***
-            "playlist": ***REMOVED***
-                "type": "built-in/dict",
-                "value": ***REMOVED***
-                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
-                    "name": "quality",
-                    "index": 10
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***,
-    ***REMOVED***
-        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-Vn5ZYYc2Sm0-Blackbear_-_Weak_When_Ur_Around_Acoustic_Version.webm",
         "video_id": "Vn5ZYYc2Sm0",
@@ -1155,13 +1139,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 11
+                    "index": 10
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Weak When Ur Around",
         "artist": "Blackbear",
-        "artist_image": "https://i.scdn.co/image/240871dcd7857a6d6f834866799056f01d2f5a67",
+        "artist_image": "https://i.scdn.co/image/92c55f8da5e3bafafef2192ebfcb027d1711a5c9",
         "cover": "https://i.scdn.co/image/e59ba38400aa93e7319324ddedcc05cc83981567",
         "album": "Dead",
         "spotify_data": ***REMOVED***
@@ -1258,6 +1242,32 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-9x0ShHsdm8k-GAMPER_DADONI_ft._DNKR_Noah_Guthrie_-_La_La_La.webm",
+        "video_id": "9x0ShHsdm8k",
+        "url": "https://www.youtube.com/watch?v=9x0ShHsdm8k",
+        "title": "GAMPER & DADONI DNKR & Noah Guthrie - La La La",
+        "duration": 294,
+        "thumbnail": "http://i.imgur.com/OzoUp7U.jpg",
+        "description": "Free Download: http://www.gamperdadoni.com/downloads\n\u25cf SUBSCRIBE TO OUR CHANNEL: http://bit.ly/subscribesensualmusique\n\u25cf MORE MUSIC ON SPOTIFY: http://bit.ly/spotifysensualmusique1\n\n\u25ba Facebook : http://on.fb.me/1cN993h\n\u25ba SoundCloud : http://bit.ly/NCKn03\n\u25ba Twitter: http://bit.ly/1eQnq4A\n\u25ba Instagram: http://bit.ly/1fZ8m0S\n\nGAMPER & DADONI feat. DNKR & Noah Guthrie - The La La La Remix Lyrics:\n\nLa la, la la la la la na na na na na,\nLa la na na, la la la la la na na na na na\n\nHush, don't speak\nWhen you spit your venom, keep it shut I hate it\nWhen you hiss and preach\nAbout your new messiah 'cause your theories catch fire\n\nI can't find your silver lining\nI don't mean to judge\nBut when you read your speech, it's tiring\nEnough is enough\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, I go\nLa la na na, la la la la la na na na na na [2x]\n\nIf our love is running out of time\nI won't count the hours, rather be a coward\nWhen our worlds collide\nI'm gonna drown you out before I lose my mind\n\nI can't find your silver lining\nI don't mean to judge\nBut when you read your speech, it's tiring\nEnough is enough\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, oh\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, I go\nLa la na na, la la la la la na na na na na,\nLa la na na, la la la la la na na na na na,\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na\nLa la na na, la la la la la na na na na na\nLa la na na, la la la la la na na na na na\n\n\u25ba Follow GAMPER & DADONI here :\nFacebook: http://www.facebook.com/gamperanddadoni\nSoundCloud: http://soundcloud.com/www.soundcloud.com/gamperdadoni\n\n\u2716 Picture\nhttp://www.facebook.com/picturesofran...\n\nNo copyright infringement intended. Video will be removed if requested by the copyright owner.",
+        "meta": ***REMOVED***
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 11
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        "song_title": "GAMPER & DADONI DNKR & Noah Guthrie - La La La",
+        "artist": "CAMPER & DADONI",
+        "artist_image": "http://i.imgur.com/y4y5hz9.jpg",
+        "cover": "http://i.imgur.com/DNRdyg9.jpg",
+        "album": "The La La La Remix"
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-Z6Xvf8uZ4nI-Carmody_-_For_Desire.webm",
         "video_id": "Z6Xvf8uZ4nI",
@@ -1278,7 +1288,7 @@
         ***REMOVED***,
         "song_title": "For Desire",
         "artist": "Carmody",
-        "artist_image": "https://i.scdn.co/image/4cb69e478a012ece2c6a42963dab430f95a9feda",
+        "artist_image": "https://i.scdn.co/image/1c578c5cf38d7b5d8ebaa04f5208b661f89e34af",
         "cover": "https://i.scdn.co/image/37587904b9347f13e2c8a45a7a7e24997ec3aae3",
         "album": "Skin",
         "spotify_data": ***REMOVED***
@@ -1641,7 +1651,7 @@
         ***REMOVED***,
         "song_title": "It's OK",
         "artist": "CeeLo Green",
-        "artist_image": "https://i.scdn.co/image/c01d5dc75aa64fe8f02f328cd7aba52be513ec25",
+        "artist_image": "https://i.scdn.co/image/3e4b0038623685a5df89050353dcf667e6e4059f",
         "cover": "https://i.scdn.co/image/7cfe49bce1b7c1ca58a7c02c2aa00b8f9aeea121",
         "album": "The Lady Killer",
         "spotify_data": ***REMOVED***
@@ -1896,6 +1906,146 @@
     ***REMOVED***
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-zE23hMLbHg4-Cold_War_Kids_-_First_Official_Audio.webm",
+        "video_id": "zE23hMLbHg4",
+        "url": "https://www.youtube.com/watch?v=zE23hMLbHg4",
+        "title": "Cold War Kids - First (Official Audio)",
+        "duration": 200,
+        "thumbnail": "https://i.ytimg.com/vi/zE23hMLbHg4/maxresdefault.jpg",
+        "description": "First' is from Hold My Home: http://smarturl.it/CWKHoldMyHome\nWatch the official music video: http://youtu.be/SZzJ78FWjl8\nDowntown Records | 201",
+        "meta": ***REMOVED***
+            "author": ***REMOVED***
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            ***REMOVED***,
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 17
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        "song_title": "First",
+        "artist": "Cold War Kids",
+        "artist_image": "https://i.scdn.co/image/84c1bdd4f601303b7babad834f743f16b483dcd2",
+        "cover": "https://i.scdn.co/image/3b6f2a9b052404308ca1c56576a7340601ba7540",
+        "album": "Hold My Home",
+        "spotify_data": ***REMOVED***
+            "id": "3omXshBamrREltcf24gYDC",
+            "name": "First",
+            "artists": [
+                ***REMOVED***
+                    "id": "6VDdCwrBM4qQaGxoAyxyJC",
+                    "name": "Cold War Kids",
+                    "images": [
+                        ***REMOVED***
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/84c1bdd4f601303b7babad834f743f16b483dcd2",
+                            "width": 640
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/e9b2265ec64da68a9475eb5805acdde30eb0b97b",
+                            "width": 320
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/a890df35444fa9542e6b640c345b6dd719017b96",
+                            "width": 160
+                        ***REMOVED***
+                    ],
+                    "genres": [
+                        "garage rock",
+                        "indie folk",
+                        "indie pop",
+                        "indie rock",
+                        "indietronica",
+                        "la indie",
+                        "modern rock",
+                        "piano rock",
+                        "shimmer pop",
+                        "stomp and holler"
+                    ],
+                    "popularity": 71,
+                    "uri": "spotify:artist:6VDdCwrBM4qQaGxoAyxyJC",
+                    "href": "https://open.spotify.com/artist/6VDdCwrBM4qQaGxoAyxyJC"
+                ***REMOVED***
+            ],
+            "artist": "Cold War Kids",
+            "cover_url": "https://i.scdn.co/image/3b6f2a9b052404308ca1c56576a7340601ba7540",
+            "duration": 200.36,
+            "album": ***REMOVED***
+                "id": "2H09itV5a5yUcGyk9u9HwY",
+                "name": "Hold My Home",
+                "artists": [
+                    ***REMOVED***
+                        "id": "6VDdCwrBM4qQaGxoAyxyJC",
+                        "name": "Cold War Kids",
+                        "images": [
+                            ***REMOVED***
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/84c1bdd4f601303b7babad834f743f16b483dcd2",
+                                "width": 640
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/e9b2265ec64da68a9475eb5805acdde30eb0b97b",
+                                "width": 320
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/a890df35444fa9542e6b640c345b6dd719017b96",
+                                "width": 160
+                            ***REMOVED***
+                        ],
+                        "genres": [
+                            "garage rock",
+                            "indie folk",
+                            "indie pop",
+                            "indie rock",
+                            "indietronica",
+                            "la indie",
+                            "modern rock",
+                            "piano rock",
+                            "shimmer pop",
+                            "stomp and holler"
+                        ],
+                        "popularity": 71,
+                        "uri": "spotify:artist:6VDdCwrBM4qQaGxoAyxyJC",
+                        "href": "https://open.spotify.com/artist/6VDdCwrBM4qQaGxoAyxyJC"
+                    ***REMOVED***
+                ],
+                "images": [
+                    ***REMOVED***
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/3b6f2a9b052404308ca1c56576a7340601ba7540",
+                        "width": 640
+                    ***REMOVED***,
+                    ***REMOVED***
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/9a6fd9d16b3e24925ce59a4222a2b79455a440bd",
+                        "width": 300
+                    ***REMOVED***,
+                    ***REMOVED***
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/90332da2c651fe851c5b2159e33bcf36b0668199",
+                        "width": 64
+                    ***REMOVED***
+                ],
+                "uri": "spotify:album:2H09itV5a5yUcGyk9u9HwY"
+            ***REMOVED***,
+            "popularity": 69,
+            "uri": "spotify:track:3omXshBamrREltcf24gYDC",
+            "query": "Cold War Kids - First",
+            "certainty": 0.95
+        ***REMOVED***
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-QtXby3twMmI-Coldplay_-_Adventure_Of_A_Lifetime_Official_Video.webm",
         "video_id": "QtXby3twMmI",
         "url": "https://www.youtube.com/watch?v=QtXby3twMmI",
@@ -1909,7 +2059,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 17
+                    "index": 18
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -2026,6 +2176,58 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-i0E4KmSgUM4-Dangerous_Official_Audio_Royal_Deluxe_Sniper_Ghost_Warrior_3_Official_Dangerous_Trailer_Music.webm",
+        "video_id": "i0E4KmSgUM4",
+        "url": "https://www.youtube.com/watch?v=i0E4KmSgUM4",
+        "title": "Dangerous (Official Audio) | Royal Deluxe (Sniper Ghost Warrior 3 Official Dangerous Trailer Music)",
+        "duration": 220,
+        "thumbnail": "https://i.ytimg.com/vi/i0E4KmSgUM4/maxresdefault.jpg",
+        "description": "Published by Position Music\nFollow Position Music on Facebook: https://www.facebook.com/PositionMusic\nOfficial Website: http://positionmusic.com/\n\nArtist: Royal Deluxe\nAlbum: Born For This\n\nBuying Options:\nAmazon: https://goo.gl/O5eRDu\niTunes: https://goo.gl/DiCQjf\n\nFollow Royal Deluxe:\nFacebook: https://www.facebook.com/royaldeluxemusic/\n\nStream on Spotify: https://goo.gl/eYSjLD",
+        "meta": ***REMOVED***
+            "author": ***REMOVED***
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            ***REMOVED***,
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 19
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-yCJXRCs7IQc-Dave_not_Dave_-_Cold_Blood_Suits_5x09_with_Lyrics.webm",
+        "video_id": "yCJXRCs7IQc",
+        "url": "https://www.youtube.com/watch?v=yCJXRCs7IQc",
+        "title": "Dave not Dave - Cold Blood [Suits 5x09] [with Lyrics]",
+        "duration": 244,
+        "thumbnail": "https://i.ytimg.com/vi/yCJXRCs7IQc/hqdefault.jpg",
+        "description": "--- SPOILER ---\n\n\nSong played while, simultaneously, Mike & Harvey walk into the offices of two of their clients and offer them competing deal against each other.\n- All rights belong to the owner of the song, not me. -\n\nLyrics:\n\nThey call me useless, careless, nobody at a miss,\nwith the thing that don\u2019t understand\nThey call me hopeless, heartless, there\u2019s no way out of this\nWhen it\u2019s so far outta your hand\nI confess there\u2019s a hole in my chest\nfrom the things that I did\nand they gone in my head\nI won\u2019t rest till it\u2019s all done and set\nand I get what I give\n\n[Chorus]\nI\u2019m a pain dealer, I\u2019m a faith healer,\nI\u2019m a soul stealer, and I\u2019m coming for you\nI\u2019m a dream breaker, I\u2019m a truth maker,\nI\u2019m a cold-blooded killer and I\u2019m coming for you\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nAnd there\u2019s nothing you can do\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nI\u2019m coming for you\n\n[epic tune]\n\nThey call me freedom falling\ndon't you hear me calling\nI\u2019m the voice in the back of my head\nI\u2019m a whisper, out there, over your shoulder\nDon't you wish you never let me in\nI confess that the devil\u2019s my kin\nI\u2019m a brother to sin, since I don\u2019t know when\nI won't rest till it\u2019s all done and set\nand I get what I give\n\n[Chorus]\nI\u2019m a pain dealer, I\u2019m a faith healer\nI\u2019m a soul stealer, and I\u2019m coming for you\nI\u2019m a dream breaker, I\u2019m a truth maker\nI\u2019m a cold-blooded killer and I\u2019m coming for you\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nAnd there\u2019s nothing you can do\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nI\u2019m coming for you\n\nYeah\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nYeah!\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nYeah\nOoh, I say\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nYeah\n\n[Chorus] x2\nI\u2019m a pain dealer, I\u2019m a faith healer\nI\u2019m a soul stealer, and I\u2019m coming for you\nI\u2019m a dream breaker, I\u2019m a truth maker\nI\u2019m a coldblooded killer and I\u2019m coming for you",
+        "meta": ***REMOVED***
+            "author": ***REMOVED***
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            ***REMOVED***,
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 20
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-rFrgyKmOUmc-EDEN_-_fumes_feat._gnash_official_audio.webm",
         "video_id": "rFrgyKmOUmc",
@@ -2040,7 +2242,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 18
+                    "index": 21
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -2187,13 +2389,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 19
+                    "index": 22
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Billie Jean",
         "artist": "EDEN",
-        "artist_image": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
+        "artist_image": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
         "cover": "https://i.scdn.co/image/5e03bd60821c2a8ab7dc28731325bc525f068730",
         "album": "Billie Jean",
         "spotify_data": ***REMOVED***
@@ -2304,13 +2506,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 20
+                    "index": 23
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "End Credits",
         "artist": "EDEN",
-        "artist_image": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+        "artist_image": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
         "cover": "https://i.scdn.co/image/92ea26aae1129bd60dc1d4f0313087dc06ee1509",
         "album": "End Credits",
         "spotify_data": ***REMOVED***
@@ -2421,7 +2623,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 21
+                    "index": 24
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -2538,13 +2740,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 22
+                    "index": 25
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Wake Up",
         "artist": "EDEN",
-        "artist_image": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+        "artist_image": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
         "cover": "https://i.scdn.co/image/92ea26aae1129bd60dc1d4f0313087dc06ee1509",
         "album": "End Credits",
         "spotify_data": ***REMOVED***
@@ -2641,32 +2843,6 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
-        "expected_filename": "cache\\audio_cache\\youtube-9x0ShHsdm8k-GAMPER_DADONI_ft._DNKR_Noah_Guthrie_-_La_La_La.webm",
-        "video_id": "9x0ShHsdm8k",
-        "url": "https://www.youtube.com/watch?v=9x0ShHsdm8k",
-        "title": "GAMPER & DADONI ft. DNKR & Noah Guthrie - La La La",
-        "duration": 294,
-        "thumbnail": "https://i.ytimg.com/vi/9x0ShHsdm8k/maxresdefault.jpg",
-        "description": "Free Download: http://www.gamperdadoni.com/downloads\n\u25cf SUBSCRIBE TO OUR CHANNEL: http://bit.ly/subscribesensualmusique\n\u25cf MORE MUSIC ON SPOTIFY: http://bit.ly/spotifysensualmusique1\n\n\u25ba Facebook : http://on.fb.me/1cN993h\n\u25ba SoundCloud : http://bit.ly/NCKn03\n\u25ba Twitter: http://bit.ly/1eQnq4A\n\u25ba Instagram: http://bit.ly/1fZ8m0S\n\nGAMPER & DADONI feat. DNKR & Noah Guthrie - The La La La Remix Lyrics:\n\nLa la, la la la la la na na na na na,\nLa la na na, la la la la la na na na na na\n\nHush, don't speak\nWhen you spit your venom, keep it shut I hate it\nWhen you hiss and preach\nAbout your new messiah 'cause your theories catch fire\n\nI can't find your silver lining\nI don't mean to judge\nBut when you read your speech, it's tiring\nEnough is enough\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, I go\nLa la na na, la la la la la na na na na na [2x]\n\nIf our love is running out of time\nI won't count the hours, rather be a coward\nWhen our worlds collide\nI'm gonna drown you out before I lose my mind\n\nI can't find your silver lining\nI don't mean to judge\nBut when you read your speech, it's tiring\nEnough is enough\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, oh\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, I go\nLa la na na, la la la la la na na na na na,\nLa la na na, la la la la la na na na na na,\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na\nLa la na na, la la la la la na na na na na\nLa la na na, la la la la la na na na na na\n\n\u25ba Follow GAMPER & DADONI here :\nFacebook: http://www.facebook.com/gamperanddadoni\nSoundCloud: http://soundcloud.com/www.soundcloud.com/gamperdadoni\n\n\u2716 Picture\nhttp://www.facebook.com/picturesofran...\n\nNo copyright infringement intended. Video will be removed if requested by the copyright owner.",
-        "meta": ***REMOVED***
-            "author": ***REMOVED***
-                "type": "Member",
-                "id": "203510202421477376",
-                "name": "ZyLect"
-            ***REMOVED***,
-            "playlist": ***REMOVED***
-                "type": "built-in/dict",
-                "value": ***REMOVED***
-                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
-                    "name": "quality",
-                    "index": 23
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***,
-    ***REMOVED***
-        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-zqGJ-1GmFRk-GRMM_-_Something_From_Nothing_ft._Quinn_XCII.webm",
         "video_id": "zqGJ-1GmFRk",
@@ -2681,13 +2857,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 24
+                    "index": 26
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Something From Nothing",
         "artist": "GRMM & Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/2363498ca7e5a778abc4e5e65bf40c5fc5b0e3c9",
+        "artist_image": "https://i.scdn.co/image/1c4b7e93fb593617d7ba9b527ac2916a5e1bce7a",
         "cover": "https://i.scdn.co/image/d713a3767921dc828d21ba2f85660571f2eddc87",
         "album": "Scenes",
         "spotify_data": ***REMOVED***
@@ -2821,13 +2997,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 25
+                    "index": 27
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Sedated",
         "artist": "Hozier",
-        "artist_image": "https://i.scdn.co/image/ba8f0310cf3b9b291e0ad63d3edc822f00dc5f31",
+        "artist_image": "https://i.scdn.co/image/07c35e32c87810913eca6d95dcde841944e5f8b6",
         "cover": "https://i.scdn.co/image/54ae81bff27a1979815d40846c763431d872b680",
         "album": "Hozier",
         "spotify_data": ***REMOVED***
@@ -2956,13 +3132,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 26
+                    "index": 28
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Take Me to Church",
         "artist": "Hozier",
-        "artist_image": "https://i.scdn.co/image/07c35e32c87810913eca6d95dcde841944e5f8b6",
+        "artist_image": "https://i.scdn.co/image/ba8f0310cf3b9b291e0ad63d3edc822f00dc5f31",
         "cover": "https://i.scdn.co/image/54ae81bff27a1979815d40846c763431d872b680",
         "album": "Hozier",
         "spotify_data": ***REMOVED***
@@ -3091,13 +3267,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 27
+                    "index": 29
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Shots - Broiler Remix",
         "artist": "Imagine Dragons & Broiler",
-        "artist_image": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
+        "artist_image": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
         "cover": "https://i.scdn.co/image/3ed018e22d42495daf4076ed8ba0387e8f070a46",
         "album": "Shots EP",
         "spotify_data": ***REMOVED***
@@ -3240,13 +3416,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 28
+                    "index": 30
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Shots - Broiler Remix",
         "artist": "Imagine Dragons & Broiler",
-        "artist_image": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
+        "artist_image": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
         "cover": "https://i.scdn.co/image/3ed018e22d42495daf4076ed8ba0387e8f070a46",
         "album": "Shots EP",
         "spotify_data": ***REMOVED***
@@ -3389,7 +3565,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 29
+                    "index": 31
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -3508,13 +3684,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 30
+                    "index": 32
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Gold",
         "artist": "Imagine Dragons",
-        "artist_image": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
+        "artist_image": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
         "cover": "https://i.scdn.co/image/d5772acb478bfa8539240d9c2f28073d9bb59133",
         "album": "Smoke + Mirrors",
         "spotify_data": ***REMOVED***
@@ -3627,7 +3803,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 31
+                    "index": 33
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -3746,13 +3922,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 32
+                    "index": 34
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Roots",
         "artist": "Imagine Dragons",
-        "artist_image": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
+        "artist_image": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
         "cover": "https://i.scdn.co/image/4cdfdf0127ea3ccbaf7c51068e0511281aa68b6d",
         "album": "Roots",
         "spotify_data": ***REMOVED***
@@ -3865,13 +4041,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 33
+                    "index": 35
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "679 & No Diggity",
         "artist": "Jackson Breit",
-        "artist_image": "https://i.scdn.co/image/6343ea7d583492033c78d8bd1dcc9e9d4656666c",
+        "artist_image": "https://i.scdn.co/image/b0072a5323d3760e1d2e4cf26087dc9575cb746b",
         "cover": "https://i.scdn.co/image/e681ba22f85feab7d5457829d35adf0ae17283fa",
         "album": "Covers",
         "spotify_data": ***REMOVED***
@@ -3982,7 +4158,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 34
+                    "index": 36
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -4089,28 +4265,128 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
-        "expected_filename": "cache\\audio_cache\\youtube-ZWLjapNXA88-Jakubi_-_Can_t_Afford_It_All.m4a",
-        "video_id": "ZWLjapNXA88",
-        "url": "https://www.youtube.com/watch?v=ZWLjapNXA88",
-        "title": "Jakubi - Can't Afford It All",
-        "duration": 223,
-        "thumbnail": "https://i.ytimg.com/vi/ZWLjapNXA88/hqdefault.jpg",
-        "description": "Hey guys, for those who want to ask questions or anything else, you can follow me on FB, I'll start posting stuff about the progress of ENM and all the other stuff that I might not want to post on the official fanpage http://facebook.com/itsvalentinas\n\nLike Jakubi on FB and show them some support!\nhttps://facebook.com/JAKUBIMUSIC\nJakubi's SoundCloud: https://soundcloud.com/jakubimusic\n\nArtwork by Machorella\nArtwork link: http://rhymebox.deviantart.com/art/summer-days-310932651\n------------------------------------------------------------\nStay connected with us\nFB: http://on.fb.me/tWNN6B\n@epicnetwork\nGoogle+ http://goo.gl/txaqJA\nSoundcloud: http://snd.sc/1hQlDce\n------------------------------------------------------------\nTrack's title: Jakubi - Can't Afford It All",
+        "type": "SpotifyEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-IoIaOKg4Otw-Jacob_Banks_-_Worthy_Official_Video.webm",
+        "video_id": "IoIaOKg4Otw",
+        "url": "https://www.youtube.com/watch?v=IoIaOKg4Otw",
+        "title": "Jacob Banks - Worthy (Official Video)",
+        "duration": 198,
+        "thumbnail": "https://i.ytimg.com/vi/IoIaOKg4Otw/maxresdefault.jpg",
+        "description": "The Monologue EP' on iTunes: http://tinyurl.com/TheMonologueEP\nNew music coming soon. Subscribe now: http://goo.gl/K6TYSP\n\nFollow on Twitter: http://twitter.com/mrjacobbanks\nLike on Facebook: http://fb.me/JacobBanksOfficial\nFollow on Instagram: http://instagram.com/mrjacobbanks\n\n'Worthy' produced by Knox Brown\n\nShot and edited by cs visuals\nDirected by cs visuals and jacob banks\n\n\nSuddenly\nThe clouds have opened up\nAnd im being seen I'm all of my glory\nThe time as come for faith to decide\nIf a part of me is even worthy\n\nThe air is warm\nmy heart is cold\nand il never know\nHow it feels\n\nThe air is warm\nmy heart is cold\nand il never know\nHow it feels to have a heart of gold\n\nI feel worthy somehow\nPlease I don't want to go down, down\nThe new world is calling me now\nplease don't let me go down\n\nI feel worthy somehow\nPlease don't let me go down , down\nThe new world is calling me now\nplease don't let me go down\n\nJust one step\nOnto the lonely road\nHe scared me for life\nNo time to reflect as I was getting by\nGetting by enjoying life\n\nThe time as come for judgement day\nAnd I'm standing here begging you\nplease take pity on me\nTake pity on me\n\nI feel worthy somehow\nPlease I don't want to go down, down\nThe new world is calling me now\nplease don't let me go down\n\nI feel worthy somehow\nPlease don't let me go down , down\nThe new world is calling me now\nplease don't let me go dow",
         "meta": ***REMOVED***
             "author": ***REMOVED***
                 "type": "Member",
-                "id": "203510202421477376",
-                "name": "ZyLect"
+                "id": "203302899277627392",
+                "name": "siku2"
             ***REMOVED***,
             "playlist": ***REMOVED***
                 "type": "built-in/dict",
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 35
+                    "index": 37
                 ***REMOVED***
             ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Worthy",
+        "artist": "Jacob Banks",
+        "artist_image": "https://i.scdn.co/image/5559c70da3ca6f1dca0574e92c06481de0d1bf6e",
+        "cover": "https://i.scdn.co/image/efac482a13a2da38111ca140d447981601200547",
+        "album": "The Monologue",
+        "spotify_data": ***REMOVED***
+            "id": "0lUt61v9PK6Qrl0GjkTXAw",
+            "name": "Worthy",
+            "artists": [
+                ***REMOVED***
+                    "id": "0AepkoQhYvkjEzzwIcGxdV",
+                    "name": "Jacob Banks",
+                    "images": [
+                        ***REMOVED***
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/5559c70da3ca6f1dca0574e92c06481de0d1bf6e",
+                            "width": 640
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/f1277b4e1e66eb846d535a8b14b6f5d2b9fa1d58",
+                            "width": 320
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/1946200cc6b901a557a7062545528fc0aa1b4ad8",
+                            "width": 160
+                        ***REMOVED***
+                    ],
+                    "genres": [
+                        "deep indie r&b",
+                        "indie anthem-folk",
+                        "indie r&b"
+                    ],
+                    "popularity": 65,
+                    "uri": "spotify:artist:0AepkoQhYvkjEzzwIcGxdV",
+                    "href": "https://open.spotify.com/artist/0AepkoQhYvkjEzzwIcGxdV"
+                ***REMOVED***
+            ],
+            "artist": "Jacob Banks",
+            "cover_url": "https://i.scdn.co/image/efac482a13a2da38111ca140d447981601200547",
+            "duration": 197.701,
+            "album": ***REMOVED***
+                "id": "6qhVCev8FFYvmq2JebsSxL",
+                "name": "The Monologue",
+                "artists": [
+                    ***REMOVED***
+                        "id": "0AepkoQhYvkjEzzwIcGxdV",
+                        "name": "Jacob Banks",
+                        "images": [
+                            ***REMOVED***
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/5559c70da3ca6f1dca0574e92c06481de0d1bf6e",
+                                "width": 640
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/f1277b4e1e66eb846d535a8b14b6f5d2b9fa1d58",
+                                "width": 320
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/1946200cc6b901a557a7062545528fc0aa1b4ad8",
+                                "width": 160
+                            ***REMOVED***
+                        ],
+                        "genres": [
+                            "deep indie r&b",
+                            "indie anthem-folk",
+                            "indie r&b"
+                        ],
+                        "popularity": 65,
+                        "uri": "spotify:artist:0AepkoQhYvkjEzzwIcGxdV",
+                        "href": "https://open.spotify.com/artist/0AepkoQhYvkjEzzwIcGxdV"
+                    ***REMOVED***
+                ],
+                "images": [
+                    ***REMOVED***
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/efac482a13a2da38111ca140d447981601200547",
+                        "width": 640
+                    ***REMOVED***,
+                    ***REMOVED***
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/d7ddc3a04dee7ddb5b68db4cbada37c8d7a0d1ac",
+                        "width": 300
+                    ***REMOVED***,
+                    ***REMOVED***
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/5f17319da03ee7815c3168746777379e60f34b5f",
+                        "width": 64
+                    ***REMOVED***
+                ],
+                "uri": "spotify:album:6qhVCev8FFYvmq2JebsSxL"
+            ***REMOVED***,
+            "popularity": 51,
+            "uri": "spotify:track:0lUt61v9PK6Qrl0GjkTXAw",
+            "query": "Jacob Banks - Worthy",
+            "certainty": 0.9473684210526315
         ***REMOVED***
     ***REMOVED***,
     ***REMOVED***
@@ -4134,13 +4410,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 36
+                    "index": 38
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Couch Potato",
         "artist": "Jakubi",
-        "artist_image": "https://i.scdn.co/image/a60b239a0f48070fbe62af87554e357a866efd77",
+        "artist_image": "https://i.scdn.co/image/1a10da102897e7c75c73b6b2b8a8cca425d92bdb",
         "cover": "https://i.scdn.co/image/e5360719fc9282bc7e8e32f88b77d524cbf97e54",
         "album": "Couch Potato",
         "spotify_data": ***REMOVED***
@@ -4243,55 +4519,81 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-ZWLjapNXA88-Jakubi_-_Can_t_Afford_It_All.m4a",
+        "video_id": "ZWLjapNXA88",
+        "url": "https://www.youtube.com/watch?v=ZWLjapNXA88",
+        "title": "Jakubi - Can't Afford It All",
+        "duration": 223,
+        "thumbnail": "https://i.ytimg.com/vi/ZWLjapNXA88/hqdefault.jpg",
+        "description": "Hey guys, for those who want to ask questions or anything else, you can follow me on FB, I'll start posting stuff about the progress of ENM and all the other stuff that I might not want to post on the official fanpage http://facebook.com/itsvalentinas\n\nLike Jakubi on FB and show them some support!\nhttps://facebook.com/JAKUBIMUSIC\nJakubi's SoundCloud: https://soundcloud.com/jakubimusic\n\nArtwork by Machorella\nArtwork link: http://rhymebox.deviantart.com/art/summer-days-310932651\n------------------------------------------------------------\nStay connected with us\nFB: http://on.fb.me/tWNN6B\n@epicnetwork\nGoogle+ http://goo.gl/txaqJA\nSoundcloud: http://snd.sc/1hQlDce\n------------------------------------------------------------\nTrack's title: Jakubi - Can't Afford It All",
+        "meta": ***REMOVED***
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 39
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Jakubi - Can't Afford It All",
+        "artist": "Jakubi",
+        "artist_image": "http://i.imgur.com/40Mi4mM.jpg",
+        "cover": "http://i.imgur.com/wZWrWWx.jpg",
+        "album": "Holiday"
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
+        "type": "GieselaEntry",
         "expected_filename": "cache\\audio_cache\\youtube-IKkAVu_fZqw-Jakubi_-_Feels_Like_Yesterday.m4a",
         "video_id": "IKkAVu_fZqw",
         "url": "https://www.youtube.com/watch?v=IKkAVu_fZqw",
         "title": "Jakubi - Feels Like Yesterday",
         "duration": 211,
-        "thumbnail": "https://i.ytimg.com/vi/IKkAVu_fZqw/maxresdefault.jpg",
+        "thumbnail": "http://i.imgur.com/dDBiSyD.jpg",
         "description": "Jakubi funks up day 5 with this feel good tune.\nhttps://soundcloud.com/jakubimusic\nhttps://www.facebook.com/JAKUBIMUSIC\n\nPicture by Joel Sossa\nhttps://www.facebook.com/JoelSossa\nhttp://joelsossa.tumblr.com/\nhttp://joelsossa.blogspot.mx/\n\nSheepy on Spotify\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nWebsite\nhttp://mrsuicidesheep.com\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw\n\n*If any producer or label has an issue with any of the uploads please get in contact (suicide_sheep@hotmail.com) with me and I will delete it immediately (this includes artists of the images used).",
         "meta": ***REMOVED***
-            "author": ***REMOVED***
-                "type": "Member",
-                "id": "203510202421477376",
-                "name": "ZyLect"
-            ***REMOVED***,
             "playlist": ***REMOVED***
                 "type": "built-in/dict",
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 37
+                    "index": 40
                 ***REMOVED***
             ***REMOVED***
-        ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Jakubi - Feels Like Yesterday",
+        "artist": "Jakubi",
+        "artist_image": "http://i.imgur.com/P0zwNvM.jpg",
+        "cover": "http://i.imgur.com/htr9ca2.jpg",
+        "album": "Holiday"
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
+        "type": "GieselaEntry",
         "expected_filename": "cache\\audio_cache\\youtube-xaHsXQjDepg-Jakubi_-_Holiday.webm",
         "video_id": "xaHsXQjDepg",
         "url": "https://www.youtube.com/watch?v=xaHsXQjDepg",
         "title": "Jakubi - Holiday",
         "duration": 223,
-        "thumbnail": "https://i.ytimg.com/vi/xaHsXQjDepg/hqdefault.jpg",
+        "thumbnail": "http://i.imgur.com/nDMxLQN.jpg",
         "description": "Like Jakubi on FB and show them some support!\nhttps://facebook.com/JAKUBIMUSIC\nJakubi's SoundCloud: https://soundcloud.com/jakubimusic\n\nArtwork by MonQ\nArtwork link: http://monqmonk.deviantart.com/art/37612607-400469649\n------------------------------------------------------------\nStay connected with us\nFB: http://on.fb.me/tWNN6B\n@epicnetwork\nGoogle+ http://goo.gl/txaqJA\nSoundcloud: http://snd.sc/1hQlDce\n------------------------------------------------------------\nTrack's title: Jakubi - Holiday",
         "meta": ***REMOVED***
-            "author": ***REMOVED***
-                "type": "Member",
-                "id": "203510202421477376",
-                "name": "ZyLect"
-            ***REMOVED***,
             "playlist": ***REMOVED***
                 "type": "built-in/dict",
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 38
+                    "index": 41
                 ***REMOVED***
             ***REMOVED***
-        ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Jakubi - Holiday",
+        "artist": "Jakubi",
+        "artist_image": "http://i.imgur.com/E0cRR6H.jpg",
+        "cover": "http://i.imgur.com/MWUmwDE.jpg",
+        "album": "Holiday"
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
@@ -4309,13 +4611,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 39
+                    "index": 42
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Nobody Better",
         "artist": "Jakubi",
-        "artist_image": "https://i.scdn.co/image/a60b239a0f48070fbe62af87554e357a866efd77",
+        "artist_image": "https://i.scdn.co/image/62d4f8761a48a3d5b0a2a218bbc839657dd09029",
         "cover": "https://i.scdn.co/image/026585fdb4cc5a5ae1f9a148d9e6dcb64b1abe62",
         "album": "61 Barkly",
         "spotify_data": ***REMOVED***
@@ -4432,13 +4734,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 40
+                    "index": 43
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Uptown Lady",
         "artist": "Jakubi",
-        "artist_image": "https://i.scdn.co/image/62d4f8761a48a3d5b0a2a218bbc839657dd09029",
+        "artist_image": "https://i.scdn.co/image/8550de282e152467bd02c887baed5e34c2c7fea7",
         "cover": "https://i.scdn.co/image/026585fdb4cc5a5ae1f9a148d9e6dcb64b1abe62",
         "album": "61 Barkly",
         "spotify_data": ***REMOVED***
@@ -4560,13 +4862,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 41
+                    "index": 44
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Alleyways and Backlanes (Bonus Track)",
         "artist": "Jamie MacDowell & Tom Thum",
-        "artist_image": "https://i.scdn.co/image/599f5845321f6a646f53ddd169a3f0393c08631a",
+        "artist_image": "https://i.scdn.co/image/a0a28345fdb236c3ccda6c8f67150388ab646795",
         "cover": "https://i.scdn.co/image/3733e7ac2c74ad7064ea3360dee98f49129e1e0f",
         "album": "The Some of It",
         "spotify_data": ***REMOVED***
@@ -4728,13 +5030,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 42
+                    "index": 45
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "The Sum of It",
         "artist": "Jamie MacDowell & Tom Thum",
-        "artist_image": "https://i.scdn.co/image/a8fb3f0133df9dd1f2e57e4f8567f04b78fc85b9",
+        "artist_image": "https://i.scdn.co/image/b2a72a50ea6a86104d6765454afde80f24462d02",
         "cover": "https://i.scdn.co/image/d94fa6df51fa49c10775332dee70a1476f126a4b",
         "album": "The Sum of It",
         "spotify_data": ***REMOVED***
@@ -4841,13 +5143,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 43
+                    "index": 46
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Darkness and Light",
         "artist": "John Legend & Brittany Howard",
-        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": ***REMOVED***
@@ -4997,13 +5299,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 44
+                    "index": 47
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Penthouse Floor",
         "artist": "John Legend & Chance The Rapper",
-        "artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": ***REMOVED***
@@ -5156,7 +5458,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 45
+                    "index": 48
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -5302,13 +5604,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 46
+                    "index": 49
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Overload",
         "artist": "John Legend & Miguel",
-        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": ***REMOVED***
@@ -5474,7 +5776,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 47
+                    "index": 50
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -5605,7 +5907,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 48
+                    "index": 51
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -5736,13 +6038,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 49
+                    "index": 52
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "How Can I Blame You",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": ***REMOVED***
@@ -5867,13 +6169,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 50
+                    "index": 53
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "I Know Better",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": ***REMOVED***
@@ -5998,13 +6300,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 51
+                    "index": 54
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Love Me Now",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
+        "artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
         "cover": "https://i.scdn.co/image/4d7d56841f9e3d6774031ff2597b66aeff102dfb",
         "album": "Love Me Now",
         "spotify_data": ***REMOVED***
@@ -6129,13 +6431,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 52
+                    "index": 55
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Marching Into the Dark",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
+        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": ***REMOVED***
@@ -6260,13 +6562,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 53
+                    "index": 56
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Stereo",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/be132798de011d7d043b481162e090f98452385e",
         "album": "Once Again",
         "spotify_data": ***REMOVED***
@@ -6391,13 +6693,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 54
+                    "index": 57
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Surefire",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
+        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": ***REMOVED***
@@ -6522,13 +6824,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 55
+                    "index": 58
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Temporarily Painless",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": ***REMOVED***
@@ -6653,13 +6955,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 56
+                    "index": 59
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Used to Love U",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/3f891b7b0a3a46beaff1fd66dd31de7b0bd8ae95",
         "album": "Get Lifted",
         "spotify_data": ***REMOVED***
@@ -6784,13 +7086,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 57
+                    "index": 60
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "What You Do to Me",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": ***REMOVED***
@@ -6901,13 +7203,13 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
+        "type": "GieselaEntry",
         "expected_filename": "cache\\audio_cache\\youtube-qsYrpNHQ6hg-John_Legend_-_Who_Do_We_Think_We_Are_Official_Video_ft._Rick_Ross.webm",
         "video_id": "qsYrpNHQ6hg",
         "url": "https://www.youtube.com/watch?v=qsYrpNHQ6hg",
-        "title": "John Legend - Who Do We Think We Are (Official Video) ft. Rick Ross",
+        "title": "John Legend - Who Do We Think We Are Rick Ross",
         "duration": 292,
-        "thumbnail": "https://i.ytimg.com/vi/qsYrpNHQ6hg/maxresdefault.jpg",
+        "thumbnail": "http://i.imgur.com/STsahjJ.jpg",
         "description": "Get \"Who Do We Think We Are\" featuring Rick Ross on iTunes: http://smarturl.it/wdwtwa\n\nProduction Company ICONOCLAST\nDirector Paul Gore\nCreative Director Yoann Lemoine\nProducer Kathleen Heffernan\nExecutive Producers: Nicolas Lhermitte, Charles-Marie Anthonioz, Mourad Belkeddar\nDirector of Photography: Benoit Debie\nProduction Designer: Jade Healy\nStylist: Heidi Bivens\nEditor: Thomas Grove Carter\nTelecine & Online: ***REMOVED*** Bourne at Framestore\n\nMusic video by John Legend feat. Rick Ross performing Who Do We Think We Are. (C) 2013 Getting Out Our Dreams and Columbia Records, a Division of Sony Music Entertainment",
         "meta": ***REMOVED***
             "playlist": ***REMOVED***
@@ -6915,10 +7217,15 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 58
+                    "index": 61
                 ***REMOVED***
             ***REMOVED***
-        ***REMOVED***
+        ***REMOVED***,
+        "song_title": "John Legend - Who Do We Think We Are Rick Ross",
+        "artist": "John Legend ft. Rick Ross",
+        "artist_image": "http://i.imgur.com/Z1JpsU0.png",
+        "cover": "http://i.imgur.com/crtNzYz.jpg",
+        "album": "Love in the Future"
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
@@ -6936,13 +7243,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 59
+                    "index": 62
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "80's Films",
         "artist": "Jon Bellion",
-        "artist_image": "https://i.scdn.co/image/b70305d3545319fefcd4f64df45f830df91537b4",
+        "artist_image": "https://i.scdn.co/image/a4cbc2c3ee8a43c76a5961ae2dd4815d645da00c",
         "cover": "https://i.scdn.co/image/1b9620a8657dd6853437d914896cd314cde1e19c",
         "album": "The Human Condition",
         "spotify_data": ***REMOVED***
@@ -7053,13 +7360,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 60
+                    "index": 63
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "All Time Low",
         "artist": "Jon Bellion",
-        "artist_image": "https://i.scdn.co/image/b70305d3545319fefcd4f64df45f830df91537b4",
+        "artist_image": "https://i.scdn.co/image/02ae7880e4851a7edd017e67bfd6b305ecc8e0c8",
         "cover": "https://i.scdn.co/image/1b9620a8657dd6853437d914896cd314cde1e19c",
         "album": "The Human Condition",
         "spotify_data": ***REMOVED***
@@ -7170,13 +7477,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 61
+                    "index": 64
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Carry Your Throne",
         "artist": "Jon Bellion",
-        "artist_image": "https://i.scdn.co/image/b70305d3545319fefcd4f64df45f830df91537b4",
+        "artist_image": "https://i.scdn.co/image/02ae7880e4851a7edd017e67bfd6b305ecc8e0c8",
         "cover": "https://i.scdn.co/image/463762ab6027e0d5dd16a8bcc75baabd8d6c11f9",
         "album": "The Definition",
         "spotify_data": ***REMOVED***
@@ -7273,13 +7580,13 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
+        "type": "GieselaEntry",
         "expected_filename": "cache\\audio_cache\\youtube-h2ymJcCwS_s-Jon_Bellion_-_Guillotine_ft._Travis_Mendes.webm",
         "video_id": "h2ymJcCwS_s",
         "url": "https://www.youtube.com/watch?v=h2ymJcCwS_s",
-        "title": "Jon Bellion - Guillotine ft. Travis Mendes",
+        "title": "Jon Bellion - Guillotine",
         "duration": 222,
-        "thumbnail": "https://i.ytimg.com/vi/h2ymJcCwS_s/maxresdefault.jpg",
+        "thumbnail": "http://i.imgur.com/KUpJPGm.jpg",
         "description": "Jon Bellion\u2019s debut album \u2018The Human Condition\u2019 is available now: http://smarturl.it/TheHumanCondition\n\nFor exclusive signed merch and pre-order bundles visit: http://smarturl.it/JBOfficialStore\n\nFollow Jon Bellion:\nhttp://facebook.com/jonbellion\nhttp://twitter.com/jonbellion\nhttp://instagram.com/jonbellion\nhttp://jonbellion.com\n\nMusic video by Jon Bellion performing Guillotine. (C) 2016 Capitol Records\n\nhttp://vevo.ly/EWwEj3",
         "meta": ***REMOVED***
             "playlist": ***REMOVED***
@@ -7287,10 +7594,41 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 62
+                    "index": 65
                 ***REMOVED***
             ***REMOVED***
-        ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Jon Bellion - Guillotine",
+        "artist": "Jon Bellion",
+        "artist_image": "http://i.imgur.com/w0tZIKb.jpg",
+        "cover": "http://i.imgur.com/vCJAReR.jpg",
+        "album": "The Human Condition"
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-HvCQWS84jkM-Jon_Bellion_-_Ungrateful_Eyes_Official_Music_Video.webm",
+        "video_id": "HvCQWS84jkM",
+        "url": "https://www.youtube.com/watch?v=HvCQWS84jkM",
+        "title": "Jon Bellion - Ungrateful Eyes",
+        "duration": 206,
+        "thumbnail": "http://i.imgur.com/iPCioZp.jpg",
+        "description": "The official version of Jon Bellion's \u201cUngrateful Eyes\" music video which is out now on Visionary Music Group / Def Jam.\n\nDownload \u2018The Separation\u2019 for free at http://jonbellion.com/\n\nSUBSCRIBE to the official Visionary Music Group for more original material from Logic & Jon Bellion including music video premieres, behind the scenes & more: http://bit.ly/Subscribe-to-VMG\n\nFollow Jon Bellion\nhttps://twitter.com/#!/jonbellion\nhttp://facebook.com/jonbellion\nhttp://instagram.com/jonbellion\n\nMore Visionary Music Group:\nhttps://twitter.com/TeamVisionary\nhttps://fb.com/VisionaryMusicGroup\nhttp://instagram.com/TeamVisionary\nhttp://www.teamvisionary.com/store/\n\nDirected by: GRVTY",
+        "meta": ***REMOVED***
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 66
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Jon Bellion - Ungrateful Eyes",
+        "artist": "Jon Bellion",
+        "artist_image": "http://i.imgur.com/X053Xi3.jpg",
+        "cover": "http://i.imgur.com/RCPDOYj.jpg",
+        "album": "The Seperation"
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
@@ -7308,13 +7646,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 63
+                    "index": 67
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Simple & Sweet",
         "artist": "Jon Bellion",
-        "artist_image": "https://i.scdn.co/image/b70305d3545319fefcd4f64df45f830df91537b4",
+        "artist_image": "https://i.scdn.co/image/a4cbc2c3ee8a43c76a5961ae2dd4815d645da00c",
         "cover": "https://i.scdn.co/image/463762ab6027e0d5dd16a8bcc75baabd8d6c11f9",
         "album": "The Definition",
         "spotify_data": ***REMOVED***
@@ -7411,27 +7749,6 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
-        "expected_filename": "cache\\audio_cache\\youtube-HvCQWS84jkM-Jon_Bellion_-_Ungrateful_Eyes_Official_Music_Video.webm",
-        "video_id": "HvCQWS84jkM",
-        "url": "https://www.youtube.com/watch?v=HvCQWS84jkM",
-        "title": "Jon Bellion - Ungrateful Eyes (Official Music Video)",
-        "duration": 206,
-        "thumbnail": "https://i.ytimg.com/vi/HvCQWS84jkM/maxresdefault.jpg",
-        "description": "The official version of Jon Bellion's \u201cUngrateful Eyes\" music video which is out now on Visionary Music Group / Def Jam.\n\nDownload \u2018The Separation\u2019 for free at http://jonbellion.com/\n\nSUBSCRIBE to the official Visionary Music Group for more original material from Logic & Jon Bellion including music video premieres, behind the scenes & more: http://bit.ly/Subscribe-to-VMG\n\nFollow Jon Bellion\nhttps://twitter.com/#!/jonbellion\nhttp://facebook.com/jonbellion\nhttp://instagram.com/jonbellion\n\nMore Visionary Music Group:\nhttps://twitter.com/TeamVisionary\nhttps://fb.com/VisionaryMusicGroup\nhttp://instagram.com/TeamVisionary\nhttp://www.teamvisionary.com/store/\n\nDirected by: GRVTY",
-        "meta": ***REMOVED***
-            "playlist": ***REMOVED***
-                "type": "built-in/dict",
-                "value": ***REMOVED***
-                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
-                    "name": "quality",
-                    "index": 64
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***,
-    ***REMOVED***
-        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-i59Klb0S1Uw-Jorja_Smith_-_Blue_Lights.webm",
         "video_id": "i59Klb0S1Uw",
@@ -7446,13 +7763,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 65
+                    "index": 68
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Blue Lights",
         "artist": "Jorja Smith",
-        "artist_image": "https://i.scdn.co/image/0e1b5f1ce8185fe481f76d52eea4f3b851adc9a2",
+        "artist_image": "https://i.scdn.co/image/d5ef8edd4d398e630d302d196268ed101c894ed5",
         "cover": "https://i.scdn.co/image/5bfd2118b84d8de950233bf6b7d80565cddf1a70",
         "album": "Blue Lights",
         "spotify_data": ***REMOVED***
@@ -7558,6 +7875,124 @@
     ***REMOVED***
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-0-7IHOXkiV8-Kaleo_-_Way_Down_We_Go_Official_Video.webm",
+        "video_id": "0-7IHOXkiV8",
+        "url": "https://www.youtube.com/watch?v=0-7IHOXkiV8",
+        "title": "Kaleo - Way Down We Go (Official Video)",
+        "duration": 214,
+        "thumbnail": "https://i.ytimg.com/vi/0-7IHOXkiV8/maxresdefault.jpg",
+        "description": "Music and Lyrics by JJ Julius Son\n\nKaleo\u2019s debut album, A/B, featuring \u201cWay Down We Go\u201d, \"All The Pretty Girls\" & \"No Good\" is available now. Stream and Download: https://atlanti.cr/kaleo_ab\n\n***\n\nFollow Kaleo:\n\u25ba Subscribe to the channel: http://bit.ly/1wJHfES\n\u25ba Like us on Facebook: https://www.facebook.com/officialkaleo\n\u25ba Follow us on Twitter: https://twitter.com/officialkaleo\n\u25ba Follow us on Instagram: https://instagram.com/officialkaleo\n\u25ba Website http://officialkaleo.com",
+        "meta": ***REMOVED***
+            "author": ***REMOVED***
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            ***REMOVED***,
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 69
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Way Down We Go",
+        "artist": "Kaleo",
+        "artist_image": "https://i.scdn.co/image/0d7bd4fd618e133e328f47f3f32ca2bd08aedc85",
+        "cover": "https://i.scdn.co/image/45bec52b528374350b3d5f1cd1fe719a6bd7b683",
+        "album": "A/B",
+        "spotify_data": ***REMOVED***
+            "id": "0y1QJc3SJVPKJ1OvFmFqe6",
+            "name": "Way Down We Go",
+            "artists": [
+                ***REMOVED***
+                    "id": "7jdFEYD2LTYjfwxOdlVjmc",
+                    "name": "Kaleo",
+                    "images": [
+                        ***REMOVED***
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/f0b1df5f5c775bff70b7f67325fafd07d212ee53",
+                            "width": 640
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/58dba98f04b4c2975ed271ff1df5e64a3333e0eb",
+                            "width": 320
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/0d7bd4fd618e133e328f47f3f32ca2bd08aedc85",
+                            "width": 160
+                        ***REMOVED***
+                    ],
+                    "genres": [],
+                    "popularity": 74,
+                    "uri": "spotify:artist:7jdFEYD2LTYjfwxOdlVjmc",
+                    "href": "https://open.spotify.com/artist/7jdFEYD2LTYjfwxOdlVjmc"
+                ***REMOVED***
+            ],
+            "artist": "Kaleo",
+            "cover_url": "https://i.scdn.co/image/45bec52b528374350b3d5f1cd1fe719a6bd7b683",
+            "duration": 219.56,
+            "album": ***REMOVED***
+                "id": "4he4SQup02hEIQdwhZlZlk",
+                "name": "A/B",
+                "artists": [
+                    ***REMOVED***
+                        "id": "7jdFEYD2LTYjfwxOdlVjmc",
+                        "name": "Kaleo",
+                        "images": [
+                            ***REMOVED***
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/f0b1df5f5c775bff70b7f67325fafd07d212ee53",
+                                "width": 640
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/58dba98f04b4c2975ed271ff1df5e64a3333e0eb",
+                                "width": 320
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/0d7bd4fd618e133e328f47f3f32ca2bd08aedc85",
+                                "width": 160
+                            ***REMOVED***
+                        ],
+                        "genres": [],
+                        "popularity": 74,
+                        "uri": "spotify:artist:7jdFEYD2LTYjfwxOdlVjmc",
+                        "href": "https://open.spotify.com/artist/7jdFEYD2LTYjfwxOdlVjmc"
+                    ***REMOVED***
+                ],
+                "images": [
+                    ***REMOVED***
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/45bec52b528374350b3d5f1cd1fe719a6bd7b683",
+                        "width": 640
+                    ***REMOVED***,
+                    ***REMOVED***
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/f0a158088e3826ba739ca7ebeb8e0e511f1ed320",
+                        "width": 300
+                    ***REMOVED***,
+                    ***REMOVED***
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/299ae88bf7b9372030bc83ec39fb3c5645d41fd6",
+                        "width": 64
+                    ***REMOVED***
+                ],
+                "uri": "spotify:album:4he4SQup02hEIQdwhZlZlk"
+            ***REMOVED***,
+            "popularity": 78,
+            "uri": "spotify:track:0y1QJc3SJVPKJ1OvFmFqe6",
+            "query": "Kaleo - Way Down We Go",
+            "certainty": 0.9523809523809523
+        ***REMOVED***
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-F5xGP4kMmlA-Keith_James_-_Not_My_Day_Official_Music_Video.webm",
         "video_id": "F5xGP4kMmlA",
         "url": "https://www.youtube.com/watch?v=F5xGP4kMmlA",
@@ -7576,13 +8011,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 66
+                    "index": 70
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Not My Day",
         "artist": "Keith James",
-        "artist_image": "https://i.scdn.co/image/a9d2e208dd1b60eb4f099e094759e39050e1f36d",
+        "artist_image": "https://i.scdn.co/image/5f2daceabd1a9987edb965cec26fbf249b957e51",
         "cover": "https://i.scdn.co/image/5aeee68b856292dcd9666db3d44c39b67f38f8f2",
         "album": "Not My Day",
         "spotify_data": ***REMOVED***
@@ -7699,7 +8134,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 67
+                    "index": 71
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -7808,27 +8243,6 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
-        "expected_filename": "cache\\audio_cache\\youtube-0NChtZCDCsY-Khalid_-_American_Teen.webm",
-        "video_id": "0NChtZCDCsY",
-        "url": "https://www.youtube.com/watch?v=0NChtZCDCsY",
-        "title": "Khalid - American Teen",
-        "duration": 228,
-        "thumbnail": "https://i.ytimg.com/vi/0NChtZCDCsY/maxresdefault.jpg",
-        "description": "Get Khalid's debut album 'American Teen' featuring \"Let's Go\", \"Saved\", and the hit single \"Location\"\nApple Music: http://smarturl.it/iAmericanTeen?IQid=yt\nAmazon Music:http://smarturl.it/azAmericanTeen?IQid=yt\nGoogle Play: http://smarturl.it/gpAmericanTeen?IQid=yt\nListen on Spotify: http://smarturl.it/spAmericanTeen?IQid=yt\n\nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/",
-        "meta": ***REMOVED***
-            "playlist": ***REMOVED***
-                "type": "built-in/dict",
-                "value": ***REMOVED***
-                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
-                    "name": "quality",
-                    "index": 68
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***,
-    ***REMOVED***
-        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-vAs7H_OoCeM-Khalid_-_Coaster_Audio.webm",
         "video_id": "vAs7H_OoCeM",
@@ -7843,13 +8257,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 69
+                    "index": 72
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Coaster",
         "artist": "Khalid",
-        "artist_image": "https://i.scdn.co/image/7752ce73f4d0720acc6a4c46cb2d2f40f344f834",
+        "artist_image": "https://i.scdn.co/image/0e82c72c84d3b37dbc33d863b600af7ff362568b",
         "cover": "https://i.scdn.co/image/5026fddc6c0b69e931ae99130f15d4214f1e7d41",
         "album": "American Teen",
         "spotify_data": ***REMOVED***
@@ -7942,6 +8356,32 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-0NChtZCDCsY-Khalid_-_American_Teen.webm",
+        "video_id": "0NChtZCDCsY",
+        "url": "https://www.youtube.com/watch?v=0NChtZCDCsY",
+        "title": "Khalid - American Teen",
+        "duration": 228,
+        "thumbnail": "http://i.imgur.com/SqWEfWz.jpg",
+        "description": "Get Khalid's debut album 'American Teen' featuring \"Let's Go\", \"Saved\", and the hit single \"Location\"\nApple Music: http://smarturl.it/iAmericanTeen?IQid=yt\nAmazon Music:http://smarturl.it/azAmericanTeen?IQid=yt\nGoogle Play: http://smarturl.it/gpAmericanTeen?IQid=yt\nListen on Spotify: http://smarturl.it/spAmericanTeen?IQid=yt\n\nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/",
+        "meta": ***REMOVED***
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 73
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Khalid - American Teen",
+        "artist": "Khalid",
+        "artist_image": "http://i.imgur.com/QwfOalE.jpg",
+        "cover": "http://i.imgur.com/crJrZ8Y.jpg",
+        "album": "American Teen"
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-9-CJrEaftKI-Khalid_-_Let_s_Go_Audio.webm",
         "video_id": "9-CJrEaftKI",
@@ -7956,13 +8396,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 70
+                    "index": 74
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Let's Go",
         "artist": "Khalid",
-        "artist_image": "https://i.scdn.co/image/7752ce73f4d0720acc6a4c46cb2d2f40f344f834",
+        "artist_image": "https://i.scdn.co/image/0e82c72c84d3b37dbc33d863b600af7ff362568b",
         "cover": "https://i.scdn.co/image/5026fddc6c0b69e931ae99130f15d4214f1e7d41",
         "album": "American Teen",
         "spotify_data": ***REMOVED***
@@ -8069,13 +8509,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 71
+                    "index": 75
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Location",
         "artist": "Khalid",
-        "artist_image": "https://i.scdn.co/image/7cfdef227dc3e938154c367a279ef995be2b5344",
+        "artist_image": "https://i.scdn.co/image/7752ce73f4d0720acc6a4c46cb2d2f40f344f834",
         "cover": "https://i.scdn.co/image/5026fddc6c0b69e931ae99130f15d4214f1e7d41",
         "album": "American Teen",
         "spotify_data": ***REMOVED***
@@ -8182,7 +8622,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 72
+                    "index": 76
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -8295,13 +8735,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 73
+                    "index": 77
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Saved",
         "artist": "Khalid",
-        "artist_image": "https://i.scdn.co/image/7cfdef227dc3e938154c367a279ef995be2b5344",
+        "artist_image": "https://i.scdn.co/image/0e82c72c84d3b37dbc33d863b600af7ff362568b",
         "cover": "https://i.scdn.co/image/5026fddc6c0b69e931ae99130f15d4214f1e7d41",
         "album": "American Teen",
         "spotify_data": ***REMOVED***
@@ -8408,7 +8848,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 74
+                    "index": 78
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -8521,13 +8961,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 75
+                    "index": 79
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Cheating On Me",
         "artist": "Kwabs",
-        "artist_image": "https://i.scdn.co/image/42a9677ab3e9d850e748d01deeb6117c4cd22d73",
+        "artist_image": "https://i.scdn.co/image/4e2ba402aea9c19f9ced4abb6afe6d1df6296599",
         "cover": "https://i.scdn.co/image/f5bcaead1832fe193405fec340bd280c97fa5250",
         "album": "Love + War",
         "spotify_data": ***REMOVED***
@@ -8642,13 +9082,13 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
+        "type": "GieselaEntry",
         "expected_filename": "cache\\audio_cache\\youtube-nHdGIiV894s-Kwabs_-_Last_Stand_produced_by_SOHN_Official_Audio.webm",
         "video_id": "nHdGIiV894s",
         "url": "https://www.youtube.com/watch?v=nHdGIiV894s",
-        "title": "Kwabs - Last Stand produced by SOHN (Official Audio)",
+        "title": "Kwabs - Last Stand",
         "duration": 209,
-        "thumbnail": "https://i.ytimg.com/vi/nHdGIiV894s/maxresdefault.jpg",
+        "thumbnail": "http://i.imgur.com/mde7PMd.jpg",
         "description": "Kwabs - Last Stand produced by SOHN: http://smarturl.it/WrongorRightEP\n\nKwabs' debut album 'Love + War' is out now.\niTunes: http://smarturl.it/loveandwar.itunes\nSpotify: http://smarturl.it/loveandwar.spotify\nAmazon: http://smarturl.it/loveandwar.amzn\n\nBuy tickets to Kwabs' UK tour this October here: http://www.gigsandtours.com/tour/kwabs\n\nGet more information on Kwabs:\nFacebook: http://www.facebook.com/KwabsOfficial\nTwitter: http://www.twitter.com/kwabs\nSoundcloud: https://soundcloud.com/kwabs/\nInstagram: http://instagram.com/kwabs\nWebsite: http://www.kwabsmusic.com/\n\nSubscribe to Kwabs profile on Spotify for new music and playlists:  http://spoti.fi/1y06mSv",
         "meta": ***REMOVED***
             "playlist": ***REMOVED***
@@ -8656,10 +9096,15 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 76
+                    "index": 80
                 ***REMOVED***
             ***REMOVED***
-        ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Kwabs - Last Stand",
+        "artist": "Kwabs",
+        "artist_image": "http://i.imgur.com/TZFsfkM.jpg",
+        "cover": "http://i.imgur.com/dYtMPUe.jpg",
+        "album": "Wrong Or Right"
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
@@ -8677,13 +9122,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 77
+                    "index": 81
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Layback",
         "artist": "Kwabs",
-        "artist_image": "https://i.scdn.co/image/168afa8e706651dfe96ed269b0ddb87e2712b53f",
+        "artist_image": "https://i.scdn.co/image/4e2ba402aea9c19f9ced4abb6afe6d1df6296599",
         "cover": "https://i.scdn.co/image/f5bcaead1832fe193405fec340bd280c97fa5250",
         "album": "Love + War",
         "spotify_data": ***REMOVED***
@@ -8812,13 +9257,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 78
+                    "index": 82
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "My Own",
         "artist": "Kwabs",
-        "artist_image": "https://i.scdn.co/image/42a9677ab3e9d850e748d01deeb6117c4cd22d73",
+        "artist_image": "https://i.scdn.co/image/168afa8e706651dfe96ed269b0ddb87e2712b53f",
         "cover": "https://i.scdn.co/image/f5bcaead1832fe193405fec340bd280c97fa5250",
         "album": "Love + War",
         "spotify_data": ***REMOVED***
@@ -8947,7 +9392,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 79
+                    "index": 83
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -9082,13 +9527,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 80
+                    "index": 84
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Spirit Fade",
         "artist": "Kwabs",
-        "artist_image": "https://i.scdn.co/image/168afa8e706651dfe96ed269b0ddb87e2712b53f",
+        "artist_image": "https://i.scdn.co/image/95f6d6b223544d6b2f6f0100105839723f7b566c",
         "cover": "https://i.scdn.co/image/488632a546b008aa2c75489c01c64ca62ae26a20",
         "album": "Wrong Or Right EP",
         "spotify_data": ***REMOVED***
@@ -9217,13 +9662,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 81
+                    "index": 85
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Walk",
         "artist": "Kwabs",
-        "artist_image": "https://i.scdn.co/image/4e2ba402aea9c19f9ced4abb6afe6d1df6296599",
+        "artist_image": "https://i.scdn.co/image/168afa8e706651dfe96ed269b0ddb87e2712b53f",
         "cover": "https://i.scdn.co/image/f5bcaead1832fe193405fec340bd280c97fa5250",
         "album": "Love + War",
         "spotify_data": ***REMOVED***
@@ -9352,13 +9797,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 82
+                    "index": 86
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Wrong Or Right",
         "artist": "Kwabs",
-        "artist_image": "https://i.scdn.co/image/4e2ba402aea9c19f9ced4abb6afe6d1df6296599",
+        "artist_image": "https://i.scdn.co/image/168afa8e706651dfe96ed269b0ddb87e2712b53f",
         "cover": "https://i.scdn.co/image/488632a546b008aa2c75489c01c64ca62ae26a20",
         "album": "Wrong Or Right EP",
         "spotify_data": ***REMOVED***
@@ -9487,13 +9932,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 83
+                    "index": 87
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Better Man",
         "artist": "Leon Bridges",
-        "artist_image": "https://i.scdn.co/image/e4d1574fb0bf9398c54bc9adc6c5c19f97224eb1",
+        "artist_image": "https://i.scdn.co/image/894c521f70c125f57574dd38568554ac1bedc175",
         "cover": "https://i.scdn.co/image/de3ea93c5c121a331ca3921162aff554a774ef3c",
         "album": "Coming Home",
         "spotify_data": ***REMOVED***
@@ -9620,7 +10065,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 84
+                    "index": 88
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -9753,13 +10198,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 85
+                    "index": 89
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "River",
         "artist": "Leon Bridges",
-        "artist_image": "https://i.scdn.co/image/340896b04da8ab86c7b4101002b62dc4b95765ae",
+        "artist_image": "https://i.scdn.co/image/894c521f70c125f57574dd38568554ac1bedc175",
         "cover": "https://i.scdn.co/image/de3ea93c5c121a331ca3921162aff554a774ef3c",
         "album": "Coming Home",
         "spotify_data": ***REMOVED***
@@ -9886,7 +10331,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 86
+                    "index": 90
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -10019,7 +10464,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 87
+                    "index": 91
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -10142,13 +10587,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 88
+                    "index": 92
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "The Isle Of Arran",
         "artist": "Loyle Carner",
-        "artist_image": "https://i.scdn.co/image/9304721ecda863f80d1194be98c070f618a7f3ce",
+        "artist_image": "https://i.scdn.co/image/5799514d588a0c4c846ad5a1ba6b06460299cbe7",
         "cover": "https://i.scdn.co/image/049ec6719d0ea1ac8640c2de1e4168d7bca203be",
         "album": "Yesterday's Gone",
         "spotify_data": ***REMOVED***
@@ -10271,13 +10716,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 89
+                    "index": 93
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "More Than A Miracle",
         "artist": "MNEK",
-        "artist_image": "https://i.scdn.co/image/d01a1af0f685fd60a3ee3bfa3029886961cfbb79",
+        "artist_image": "https://i.scdn.co/image/87c53ade17a701c81de66981bfda6ba5a106cbda",
         "cover": "https://i.scdn.co/image/d3d3f0e243b800e75516bf78c495a5bd5333fce9",
         "album": "Small Talk - EP",
         "spotify_data": ***REMOVED***
@@ -10404,7 +10849,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 90
+                    "index": 94
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -10517,13 +10962,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 91
+                    "index": 95
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Not Me (feat. Two Feet)",
         "artist": "Melvv & Two Feet",
-        "artist_image": "https://i.scdn.co/image/29cf24b09492cde881d2887ae8c5c27f8778f6f3",
+        "artist_image": "https://i.scdn.co/image/247d2b457e3d54fafb022754c1aceb1c64eb13a4",
         "cover": "https://i.scdn.co/image/050a0d9c8c859ba71adddf84a5fa0219cb387104",
         "album": "Not Me (feat. Two Feet)",
         "spotify_data": ***REMOVED***
@@ -10663,13 +11108,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 92
+                    "index": 96
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Crazy=Genius",
         "artist": "Panic! At The Disco",
-        "artist_image": "https://i.scdn.co/image/13d0de938cc4d4d890ace6c3f3955803e9dd8ccd",
+        "artist_image": "https://i.scdn.co/image/1d349f478ca67418cd09ca49a8c2aab883ef4306",
         "cover": "https://i.scdn.co/image/a1e4ed2942e4a9b4fce5d654cb28fc30ceb968ef",
         "album": "Death Of A Bachelor",
         "spotify_data": ***REMOVED***
@@ -10801,13 +11246,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 93
+                    "index": 97
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Emperor's New Clothes",
         "artist": "Panic! At The Disco",
-        "artist_image": "https://i.scdn.co/image/1d349f478ca67418cd09ca49a8c2aab883ef4306",
+        "artist_image": "https://i.scdn.co/image/6d314b0fb784ab9899f2113b6d5e19bc6cbb31ec",
         "cover": "https://i.scdn.co/image/a1e4ed2942e4a9b4fce5d654cb28fc30ceb968ef",
         "album": "Death Of A Bachelor",
         "spotify_data": ***REMOVED***
@@ -10934,13 +11379,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 94
+                    "index": 98
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Golden Days",
         "artist": "Panic! At The Disco",
-        "artist_image": "https://i.scdn.co/image/1d349f478ca67418cd09ca49a8c2aab883ef4306",
+        "artist_image": "https://i.scdn.co/image/13d0de938cc4d4d890ace6c3f3955803e9dd8ccd",
         "cover": "https://i.scdn.co/image/a1e4ed2942e4a9b4fce5d654cb28fc30ceb968ef",
         "album": "Death Of A Bachelor",
         "spotify_data": ***REMOVED***
@@ -11067,13 +11512,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 95
+                    "index": 99
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "House Of Memories",
         "artist": "Panic! At The Disco",
-        "artist_image": "https://i.scdn.co/image/6d314b0fb784ab9899f2113b6d5e19bc6cbb31ec",
+        "artist_image": "https://i.scdn.co/image/13d0de938cc4d4d890ace6c3f3955803e9dd8ccd",
         "cover": "https://i.scdn.co/image/a1e4ed2942e4a9b4fce5d654cb28fc30ceb968ef",
         "album": "Death Of A Bachelor",
         "spotify_data": ***REMOVED***
@@ -11200,13 +11645,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 96
+                    "index": 100
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Impossible Year",
         "artist": "Panic! At The Disco",
-        "artist_image": "https://i.scdn.co/image/13d0de938cc4d4d890ace6c3f3955803e9dd8ccd",
+        "artist_image": "https://i.scdn.co/image/6d314b0fb784ab9899f2113b6d5e19bc6cbb31ec",
         "cover": "https://i.scdn.co/image/a1e4ed2942e4a9b4fce5d654cb28fc30ceb968ef",
         "album": "Death Of A Bachelor",
         "spotify_data": ***REMOVED***
@@ -11333,7 +11778,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 97
+                    "index": 101
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -11466,7 +11911,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 98
+                    "index": 102
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -11583,7 +12028,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 99
+                    "index": 103
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -11700,13 +12145,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 100
+                    "index": 104
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Bootleggin'",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+        "artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
         "cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
         "album": "Bloom",
         "spotify_data": ***REMOVED***
@@ -11817,13 +12262,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 101
+                    "index": 105
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Demon",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
         "cover": "https://i.scdn.co/image/d600fd067c1ff68055982a9aa5fe77f702b19b68",
         "album": "Change of Scenery",
         "spotify_data": ***REMOVED***
@@ -11934,13 +12379,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 102
+                    "index": 106
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "FFYL",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
         "cover": "https://i.scdn.co/image/d600fd067c1ff68055982a9aa5fe77f702b19b68",
         "album": "Change of Scenery",
         "spotify_data": ***REMOVED***
@@ -12051,7 +12496,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 103
+                    "index": 107
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -12168,7 +12613,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 104
+                    "index": 108
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -12285,13 +12730,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 105
+                    "index": 109
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Good Friend",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
         "cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
         "album": "Bloom",
         "spotify_data": ***REMOVED***
@@ -12402,7 +12847,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 106
+                    "index": 110
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -12519,13 +12964,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 107
+                    "index": 111
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Make Time",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+        "artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
         "cover": "https://i.scdn.co/image/4fed1e0fe68ce7ea32eaaea1e919870c88104995",
         "album": "Make Time",
         "spotify_data": ***REMOVED***
@@ -12636,7 +13081,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 108
+                    "index": 112
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -12753,7 +13198,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 109
+                    "index": 113
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -12870,7 +13315,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 110
+                    "index": 114
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -12987,7 +13432,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 111
+                    "index": 115
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -13104,13 +13549,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 112
+                    "index": 116
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "These Days",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
         "cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
         "album": "Bloom",
         "spotify_data": ***REMOVED***
@@ -13221,13 +13666,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 113
+                    "index": 117
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Wounds",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
         "cover": "https://i.scdn.co/image/d600fd067c1ff68055982a9aa5fe77f702b19b68",
         "album": "Change of Scenery",
         "spotify_data": ***REMOVED***
@@ -13324,13 +13769,13 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
+        "type": "GieselaEntry",
         "expected_filename": "cache\\audio_cache\\youtube-GitZmW2kBEQ-Rag_n_Bone_Man_-_Wolves_featuring_Stig_Of_The_Dump.webm",
         "video_id": "GitZmW2kBEQ",
         "url": "https://www.youtube.com/watch?v=GitZmW2kBEQ",
-        "title": "Rag\u2019n\u2019Bone Man - Wolves featuring Stig Of The Dump",
+        "title": "Rag N Bone Man - Wolves",
         "duration": 191,
-        "thumbnail": "https://i.ytimg.com/vi/GitZmW2kBEQ/maxresdefault.jpg",
+        "thumbnail": "http://i.imgur.com/MQlELh8.jpg",
         "description": "Rag\u2019n\u2019Bone Man - Wolves featuring Stig Of The Dump\nBuy the EP, Wolves: http://smarturl.it/WolvesDL?IQid=yt\nCheck out the new single, Human: http://smarturl.it/HumanDL?IQid=yt\nSubscribe to Rag'n'Bone Man: http://smarturl.it/RNBMyt\n\n------------------\n\nFollow Rag'n'Bone Man:\n\nhttp://ragnbonemanmusic.com\nhttp://facebook.com/ragnbonemanuk\nhttp://twitter.com/ragnbonemanuk\nhttp://instagram.com/ragnbonemanuk\n\n------------------",
         "meta": ***REMOVED***
             "playlist": ***REMOVED***
@@ -13338,10 +13783,15 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 114
+                    "index": 118
                 ***REMOVED***
             ***REMOVED***
-        ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Rag N Bone Man - Wolves",
+        "artist": "Rag N Bone Man",
+        "artist_image": "http://i.imgur.com/WWJEOnp.png",
+        "cover": "http://i.imgur.com/Ecol7DK.jpg",
+        "album": "Human"
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
@@ -13359,13 +13809,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 115
+                    "index": 119
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Wolves",
         "artist": "Rag'n'Bone Man & Stig Of The Dump",
-        "artist_image": "https://i.scdn.co/image/a10fa412ee0acfdec135c16c76ed6c2c789cdbce",
+        "artist_image": "https://i.scdn.co/image/906eeb2779ed7934080a0abd09288b2ed1e42e11",
         "cover": "https://i.scdn.co/image/35271e7b45e5f9d1b040f966fbfadb51667d91e7",
         "album": "Wolves",
         "spotify_data": ***REMOVED***
@@ -13499,13 +13949,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 116
+                    "index": 120
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Hell Yeah",
         "artist": "Rag'n'Bone Man & Vince Staples",
-        "artist_image": "https://i.scdn.co/image/906eeb2779ed7934080a0abd09288b2ed1e42e11",
+        "artist_image": "https://i.scdn.co/image/a10fa412ee0acfdec135c16c76ed6c2c789cdbce",
         "cover": "https://i.scdn.co/image/35271e7b45e5f9d1b040f966fbfadb51667d91e7",
         "album": "Wolves",
         "spotify_data": ***REMOVED***
@@ -13650,7 +14100,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 117
+                    "index": 121
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -13763,7 +14213,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 118
+                    "index": 122
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -13876,7 +14326,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 119
+                    "index": 123
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -13989,7 +14439,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 120
+                    "index": 124
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -14088,6 +14538,32 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-uL-qG9x1uXA-Royal_Deluxe_-_Born_For_This_Position_Music.webm",
+        "video_id": "uL-qG9x1uXA",
+        "url": "https://www.youtube.com/watch?v=uL-qG9x1uXA",
+        "title": "Royal Deluxe - Born For This (Position Music)",
+        "duration": 214,
+        "thumbnail": "https://i.ytimg.com/vi/uL-qG9x1uXA/maxresdefault.jpg",
+        "description": "Published by Position Music\nFollow Position Music on Facebook: https://www.facebook.com/PositionMusic\nOfficial Website: http://positionmusic.com/\n\nArtist: Royal Deluxe\nAlbum: Born For This\n\nBuying Options:\nAmazon: https://goo.gl/O5eRDu\niTunes: https://goo.gl/DiCQjf\n\nFollow Royal Deluxe:\nFacebook: https://www.facebook.com/royaldeluxemusic/\n\nStream on Spotify: https://goo.gl/eYSjLD",
+        "meta": ***REMOVED***
+            "author": ***REMOVED***
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            ***REMOVED***,
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 125
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-x9Eoxcv35Ww-Samm_Henshaw_-_These_Hands_Audio.webm",
         "video_id": "x9Eoxcv35Ww",
@@ -14102,13 +14578,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 121
+                    "index": 126
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "These Hands - Oliver Nelson Remix",
         "artist": "Samm Henshaw & Oliver Nelson",
-        "artist_image": "https://i.scdn.co/image/d76d0137ec64fd88f8cee28a4dacb657a9654481",
+        "artist_image": "https://i.scdn.co/image/4b1272d68eaf56ede56bb5ef77791c3a424268d1",
         "cover": "https://i.scdn.co/image/cd9ee909fd2e1a3101e227a1cde8a6eaab806756",
         "album": "These Hands (Oliver Nelson Remix)",
         "spotify_data": ***REMOVED***
@@ -14246,7 +14722,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 122
+                    "index": 127
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -14351,13 +14827,131 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
+        "type": "SpotifyEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-f_9NLcyAblY-Stealth_-_Judgement_Day.webm",
+        "video_id": "f_9NLcyAblY",
+        "url": "https://www.youtube.com/watch?v=f_9NLcyAblY",
+        "title": "Stealth - Judgement Day",
+        "duration": 233,
+        "thumbnail": "https://i.ytimg.com/vi/f_9NLcyAblY/maxresdefault.jpg",
+        "description": "For more quality music subscribe here \u27a1 http://po.st/thvbgd\nWe're on Spotify \u27a1 http://spoti.fi/2emyb3v\n\u2716 Click \"SHOW MORE\" for artists' and photographer's info and download links \u2716\nThe song from the closing scene of the S05E15 episode of TV Show \"Suits\".\n\u2716 Pre-order Stealth EP: http://apple.co/1LQ1se8\n\u2716 For more good music subscribe here: http://po.st/thvbgd\n\nTHE VIBE GUIDE \u2022 Your guide to the latest music trends.\n\u27a1 http://thevibeguide.net\n\u27a1 http://facebook.com/thevibeguide\n\u27a1 https://www.instagram.com/thevibeguide/\n\u27a1 http://soundcloud.com/thevibeguide\n\n\u2716 Support Stealth:\nWebsite: http://stealthmusicuk.com\nFacebook: https://facebook.com/stealthmusicUK\nTwitter: https://twitter.com/stealthmusicUK\nSoundcloud: http://bit.do/stealthofficialmusic\nInstagram: http://instagram.com/stealthmusicuk\nSpotify: http://sptfy.com/1K0v\n\nLyrics\nI can feel the floor shaking\nand the glass begin to break\nthe air is getting thinner\nwith every breath that i take\nthe calm before the storm\nyou could here the drop of a pin\nnever been claustrophobic\nbut now the walls are closing in\n\nI\u2019ve crossed every line\nbroken every boundary\nnow its retribution time\ncus the church that i went to it ain\u2019t that holy!\n\nstrike me down take me away\ndebts are due its time to pay\nface what i deserve\nhere comes judgement day\ni won\u2019t run the guilt is mine\ntoo long denying all my crimes\nface what i deserve\nhere comes judgement day\n\nall the love i have taken\nall the hearts I\u2019ve turned to hate\nhearts are easily broken\nwhen you\u2019ve been made in the shade\n\nI\u2019ve crossed every line\nbroken every boundary\nnow its retribution time\ncus the church that i went to it ain\u2019t that holy!\n\nstrike me down take me away\ndebts are due its time to pay\nface what i deserve\nhere comes judgement day\ni won\u2019t run the guilt is mine\ntoo long denying all my crimes\nface what i deserve\nhere comes judgement day\n\nstanding at the gate\nready to meet my fate\ncleanse my soul its not too late\nso bring on judgement day\n\nstrike me down take me away\ndebts are due its time to pay\nface what i deserve\nhere comes judgement day\ni won\u2019t run the guilt is mine\ntoo long denying all my crimes\nface what i deserve\nhere comes judgement day\n\nStealth - Judgement Day - Suits\nStealth - Judgement Day\nVirat Kohli",
+        "meta": ***REMOVED***
+            "author": ***REMOVED***
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            ***REMOVED***,
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 128
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Judgement Day",
+        "artist": "Stealth",
+        "artist_image": "https://i.scdn.co/image/48ada3fbec2a646e0cf6f9fc361c0c01c7e88622",
+        "cover": "https://i.scdn.co/image/0e5243f027f8f59a9275cddebc4816d91e2133f6",
+        "album": "Judgement Day",
+        "spotify_data": ***REMOVED***
+            "id": "5XnIZ40dD1522jT9MJGAGv",
+            "name": "Judgement Day",
+            "artists": [
+                ***REMOVED***
+                    "id": "6f3R3mqKR3kHp1KBNMUn80",
+                    "name": "Stealth",
+                    "images": [
+                        ***REMOVED***
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/48ada3fbec2a646e0cf6f9fc361c0c01c7e88622",
+                            "width": 640
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/2fe7de85136d6dbc9f3396ad4485b5b0ad52ca38",
+                            "width": 320
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/d3df9d95c88308868cfee9c03cb70d680e651b24",
+                            "width": 160
+                        ***REMOVED***
+                    ],
+                    "genres": [],
+                    "popularity": 44,
+                    "uri": "spotify:artist:6f3R3mqKR3kHp1KBNMUn80",
+                    "href": "https://open.spotify.com/artist/6f3R3mqKR3kHp1KBNMUn80"
+                ***REMOVED***
+            ],
+            "artist": "Stealth",
+            "cover_url": "https://i.scdn.co/image/0e5243f027f8f59a9275cddebc4816d91e2133f6",
+            "duration": 230.942,
+            "album": ***REMOVED***
+                "id": "2dYXaxQQC6lYIvX3HSvPb0",
+                "name": "Judgement Day",
+                "artists": [
+                    ***REMOVED***
+                        "id": "6f3R3mqKR3kHp1KBNMUn80",
+                        "name": "Stealth",
+                        "images": [
+                            ***REMOVED***
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/48ada3fbec2a646e0cf6f9fc361c0c01c7e88622",
+                                "width": 640
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/2fe7de85136d6dbc9f3396ad4485b5b0ad52ca38",
+                                "width": 320
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/d3df9d95c88308868cfee9c03cb70d680e651b24",
+                                "width": 160
+                            ***REMOVED***
+                        ],
+                        "genres": [],
+                        "popularity": 44,
+                        "uri": "spotify:artist:6f3R3mqKR3kHp1KBNMUn80",
+                        "href": "https://open.spotify.com/artist/6f3R3mqKR3kHp1KBNMUn80"
+                    ***REMOVED***
+                ],
+                "images": [
+                    ***REMOVED***
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/0e5243f027f8f59a9275cddebc4816d91e2133f6",
+                        "width": 640
+                    ***REMOVED***,
+                    ***REMOVED***
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/af47379179c1d91373b269703ed0042b2e3fec8e",
+                        "width": 300
+                    ***REMOVED***,
+                    ***REMOVED***
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/242d3d1934e6ad14bad25ab205f9ef0616e945fd",
+                        "width": 64
+                    ***REMOVED***
+                ],
+                "uri": "spotify:album:2dYXaxQQC6lYIvX3HSvPb0"
+            ***REMOVED***,
+            "popularity": 53,
+            "uri": "spotify:track:5XnIZ40dD1522jT9MJGAGv",
+            "query": "Stealth - Judgement Day",
+            "certainty": 0.9545454545454546
+        ***REMOVED***
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
+        "type": "GieselaEntry",
         "expected_filename": "cache\\audio_cache\\youtube-sN8WUtc1W7E-The_Eden_Project_-_Blank_Space.webm",
         "video_id": "sN8WUtc1W7E",
         "url": "https://www.youtube.com/watch?v=sN8WUtc1W7E",
         "title": "The Eden Project - Blank Space",
         "duration": 217,
-        "thumbnail": "https://i.ytimg.com/vi/sN8WUtc1W7E/maxresdefault.jpg",
+        "thumbnail": "http://i.imgur.com/TV1RrCh.jpg",
         "description": "Eden always seems to fill those blank spaces\nTour: http://ftrbnd.co/tour\n\n\"Always be a poet, even in prose.\" - Charles Baudelaire\n\nEDEN:\nhttps://soundcloud.com/iameden\nhttps://www.facebook.com/iameden\nhttps://twitter.com/iameden\nhttp://instagram.com/iameden\n\nArtwork: https://www.flickr.com/photos/130237880@N02/16476954075/in/dateposted/\n\nKoala Kontrol:\nhttps://soundcloud.com/koala-kontrol\nhttps://twitter.com/KoalaKontrol\nhttps://www.facebook.com/KoalaKontrol\nhttps://plus.google.com/u/0/100350348732011984954\n\nKoala Merch: http://koalakontrol.spreadshirt.com/\n\nSubmit tracks, mixes, artwork, and questions to koalakontrol@gmail.com.\n\nI upload music to my channel strictly for promotion.  I do not try to infringe upon artists' copyrighted music.  If you are the artist of either a track or piece of artwork that has a problem against one of my uploads, please feel free to contact me at koalakontrol@gmail.com to resolve the issue.  Have a good day.\n\nPlease subscribe and like for more.",
         "meta": ***REMOVED***
             "playlist": ***REMOVED***
@@ -14365,41 +14959,25 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 123
+                    "index": 129
                 ***REMOVED***
             ***REMOVED***
-        ***REMOVED***
+        ***REMOVED***,
+        "song_title": "The Eden Project - Blank Space",
+        "artist": "The Eden Project",
+        "artist_image": "http://i.imgur.com/gaPDBGd.png",
+        "cover": "http://i.imgur.com/mARRrJV.jpg",
+        "album": "Eden Project"
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
-        "expected_filename": "cache\\audio_cache\\youtube-9_EvN5n5xwE-The_Eden_Project_-_Crazy_in_Love_ft._Leah_Kelly.webm",
-        "video_id": "9_EvN5n5xwE",
-        "url": "https://www.youtube.com/watch?v=9_EvN5n5xwE",
-        "title": "The Eden Project - Crazy in Love ft. Leah Kelly",
-        "duration": 267,
-        "thumbnail": "https://i.ytimg.com/vi/9_EvN5n5xwE/maxresdefault.jpg",
-        "description": "The Eden Project's cover of Crazy In Love\nTour: http://ftrbnd.co/tour\n\n\"If your heart is a volcano, how shall you expect flowers to bloom?\" - Khalil Gibran\n\nDL: https://soundcloud.com/the-eden-project/crazy-in-love\n\nEDEN:\nhttps://soundcloud.com/iameden\nhttps://www.facebook.com/iameden\nhttps://twitter.com/iameden\nhttp://instagram.com/iameden\n\nPhoto by:\nhttp://www.wolfwendy.com\nhttp://www.facebook.com/AAAAwolfwendy\n\nKoala Kontrol:\nhttps://soundcloud.com/koala-kontrol\nhttps://twitter.com/KoalaKontrol\nhttps://www.facebook.com/KoalaKontrol\nhttps://plus.google.com/u/0/100350348732011984954\n\nKoala Merch: http://koalakontrol.spreadshirt.com/\n\nSubmit tracks, mixes, artwork, and questions to koalakontrol@gmail.com.\n\nI upload music to my channel strictly for promotion.  I do not try to infringe upon artists' copyrighted music.  If you are the artist of either a track or piece of artwork that has a problem against one of my uploads, please feel free to contact me at koalakontrol@gmail.com to resolve the issue.  Have a good day.\n\nPlease subscribe and like for more.",
-        "meta": ***REMOVED***
-            "playlist": ***REMOVED***
-                "type": "built-in/dict",
-                "value": ***REMOVED***
-                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
-                    "name": "quality",
-                    "index": 124
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***,
-    ***REMOVED***
-        "version": 103,
-        "type": "YoutubeEntry",
+        "type": "GieselaEntry",
         "expected_filename": "cache\\audio_cache\\youtube-IKaNodcBiLA-The_Eden_Project_-_Drowning.webm",
         "video_id": "IKaNodcBiLA",
         "url": "https://www.youtube.com/watch?v=IKaNodcBiLA",
         "title": "The Eden Project - Drowning",
         "duration": 260,
-        "thumbnail": "https://i.ytimg.com/vi/IKaNodcBiLA/maxresdefault.jpg",
+        "thumbnail": "http://i.imgur.com/U9hA0fV.jpg",
         "description": "Can you feel the emotion?\nDL: http://ftrbnd.co/ityttmomk\nTour: http://ftrbnd.co/tour\n\n\"We are drowning in information but starved for knowledge.\" - John Naisbitt\n\nEDEN:\nhttps://soundcloud.com/iameden\nhttps://www.facebook.com/iameden\nhttps://twitter.com/iameden\nhttp://instagram.com/iameden\n\nKoala Kontrol:\nhttps://soundcloud.com/koala-kontrol\nhttps://twitter.com/KoalaKontrol\nhttps://www.facebook.com/KoalaKontrol\nhttps://plus.google.com/u/0/100350348...\n\nKoala Merch: http://koalakontrol.spreadshirt.com/\n\nSubmit tracks, mixes, artwork, and questions to koalakontrol@gmail.com.\n\nI upload music to my channel strictly for promotion.  I do not try to infringe upon artists' copyrighted music.  If you are the artist of either a track or piece of artwork that has a problem against one of my uploads, please feel free to contact me at koalakontrol@gmail.com to resolve the issue.  Have a good day.\n\nPlease subscribe and like for more.",
         "meta": ***REMOVED***
             "playlist": ***REMOVED***
@@ -14407,20 +14985,25 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 125
+                    "index": 130
                 ***REMOVED***
             ***REMOVED***
-        ***REMOVED***
+        ***REMOVED***,
+        "song_title": "The Eden Project - Drowning",
+        "artist": "The Eden Project",
+        "artist_image": "http://i.imgur.com/ai6wCtr.png",
+        "cover": "http://i.imgur.com/72hXe56.jpg",
+        "album": "Eden Project"
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
-        "type": "YoutubeEntry",
+        "type": "GieselaEntry",
         "expected_filename": "cache\\audio_cache\\youtube-Z71h3IzoO8s-The_Eden_Project_-_Jupiter.webm",
         "video_id": "Z71h3IzoO8s",
         "url": "https://www.youtube.com/watch?v=Z71h3IzoO8s",
         "title": "The Eden Project - Jupiter",
         "duration": 247,
-        "thumbnail": "https://i.ytimg.com/vi/Z71h3IzoO8s/maxresdefault.jpg",
+        "thumbnail": "http://i.imgur.com/deSVq9t.jpg",
         "description": "I'm speechless\nTour: http://ftrbnd.co/tour\n\n\"A heart is not judged by how much you love, but by how much you are loved by others.\" - Frank Morgan\n\nDL: http://tinyurl.com/eden-jupiter\n\nEDEN:\nhttps://soundcloud.com/iameden\nhttps://www.facebook.com/iameden\nhttps://twitter.com/iameden\nhttp://instagram.com/iameden\n\nArtwork: https://www.flickr.com/photos/seanmundy/3334049742/in/faves-125554182@N03/\n\nKoala Kontrol:\nhttps://soundcloud.com/koala-kontrol\nhttps://twitter.com/KoalaKontrol\nhttps://www.facebook.com/KoalaKontrol\nhttps://plus.google.com/u/0/100350348732011984954\n\nKoala Merch: http://koalakontrol.spreadshirt.com/\n\nSubmit tracks, mixes, artwork, and questions to koalakontrol@gmail.com.\n\nI upload music to my channel strictly for promotion.  I do not try to infringe upon artists' copyrighted music.  If you are the artist of either a track or piece of artwork that has a problem against one of my uploads, please feel free to contact me at koalakontrol@gmail.com to resolve the issue.  Have a good day.\n\nPlease subscribe and like for more.",
         "meta": ***REMOVED***
             "playlist": ***REMOVED***
@@ -14428,31 +15011,15 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 126
+                    "index": 131
                 ***REMOVED***
             ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***,
-    ***REMOVED***
-        "version": 103,
-        "type": "YoutubeEntry",
-        "expected_filename": "cache\\audio_cache\\youtube-t0i4QRGDTbc-The_Eden_Project_-_Statues_ft._Leah_Kelly.webm",
-        "video_id": "t0i4QRGDTbc",
-        "url": "https://www.youtube.com/watch?v=t0i4QRGDTbc",
-        "title": "The Eden Project - Statues ft. Leah Kelly",
-        "duration": 310,
-        "thumbnail": "https://i.ytimg.com/vi/t0i4QRGDTbc/maxresdefault.jpg",
-        "description": "Am I a statue?\nTour: http://ftrbnd.co/tour\n\n\"Modesty is a vastly overrated virtue.\" - John Kenneth Galbraith\n\nDL: https://www.dropbox.com/sh/rxcbn0s2x3shfsq/YZEDXPa5M4\n\nEDEN:\nhttps://soundcloud.com/iameden\nhttps://www.facebook.com/iameden\nhttps://twitter.com/iameden\nhttp://instagram.com/iameden\n\nArtwork: http://grivetart.deviantart.com/art/The-Last-Angel-444672190\n\nQuality Koala Tees (T-Shirts): http://koalakontrol.spreadshirt.com/\n\nFollow Koala Kontrol\nSoundcloud: https://soundcloud.com/koala-kontrol\nTwitter: https://twitter.com/KoalaKontrol\nBookFace: https://www.facebook.com/KoalaKontrol\nGoogle+: https://plus.google.com/u/0/100350348732011984954\n\nSubmit tracks, mixes, artwork, and questions to koalakontrol@gmail.com.\n\nI upload music to my channel strictly for promotion.  I do not try to infringe upon other peoples copyrighted music.  If you are the artist of either a track or artwork please feel free to contact me at koalakontrol@gmail.com to resolve the issue.\n\nPlease subscribe and like for more.",
-        "meta": ***REMOVED***
-            "playlist": ***REMOVED***
-                "type": "built-in/dict",
-                "value": ***REMOVED***
-                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
-                    "name": "quality",
-                    "index": 127
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
+        ***REMOVED***,
+        "song_title": "The Eden Project - Jupiter",
+        "artist": "The Eden Project",
+        "artist_image": "http://i.imgur.com/Y6Bfc1z.png",
+        "cover": "http://i.imgur.com/qggVuij.jpg",
+        "album": "Eden Project"
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
@@ -14470,10 +15037,62 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 128
+                    "index": 132
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-9_EvN5n5xwE-The_Eden_Project_-_Crazy_in_Love_ft._Leah_Kelly.webm",
+        "video_id": "9_EvN5n5xwE",
+        "url": "https://www.youtube.com/watch?v=9_EvN5n5xwE",
+        "title": "The Eden Project - Crazy In Love",
+        "duration": 267,
+        "thumbnail": "http://i.imgur.com/pFN5bhY.jpg",
+        "description": "The Eden Project's cover of Crazy In Love\nTour: http://ftrbnd.co/tour\n\n\"If your heart is a volcano, how shall you expect flowers to bloom?\" - Khalil Gibran\n\nDL: https://soundcloud.com/the-eden-project/crazy-in-love\n\nEDEN:\nhttps://soundcloud.com/iameden\nhttps://www.facebook.com/iameden\nhttps://twitter.com/iameden\nhttp://instagram.com/iameden\n\nPhoto by:\nhttp://www.wolfwendy.com\nhttp://www.facebook.com/AAAAwolfwendy\n\nKoala Kontrol:\nhttps://soundcloud.com/koala-kontrol\nhttps://twitter.com/KoalaKontrol\nhttps://www.facebook.com/KoalaKontrol\nhttps://plus.google.com/u/0/100350348732011984954\n\nKoala Merch: http://koalakontrol.spreadshirt.com/\n\nSubmit tracks, mixes, artwork, and questions to koalakontrol@gmail.com.\n\nI upload music to my channel strictly for promotion.  I do not try to infringe upon artists' copyrighted music.  If you are the artist of either a track or piece of artwork that has a problem against one of my uploads, please feel free to contact me at koalakontrol@gmail.com to resolve the issue.  Have a good day.\n\nPlease subscribe and like for more.",
+        "meta": ***REMOVED***
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 133
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        "song_title": "The Eden Project - Crazy In Love",
+        "artist": "The Eden Project ft. Leah Kelly",
+        "artist_image": "http://i.imgur.com/v1QbIxx.png",
+        "cover": "http://i.imgur.com/mttIcTQ.jpg",
+        "album": "Eden Project"
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-t0i4QRGDTbc-The_Eden_Project_-_Statues_ft._Leah_Kelly.webm",
+        "video_id": "t0i4QRGDTbc",
+        "url": "https://www.youtube.com/watch?v=t0i4QRGDTbc",
+        "title": "The Eden Project - Statues",
+        "duration": 310,
+        "thumbnail": "http://i.imgur.com/9wjGS4c.jpg",
+        "description": "Am I a statue?\nTour: http://ftrbnd.co/tour\n\n\"Modesty is a vastly overrated virtue.\" - John Kenneth Galbraith\n\nDL: https://www.dropbox.com/sh/rxcbn0s2x3shfsq/YZEDXPa5M4\n\nEDEN:\nhttps://soundcloud.com/iameden\nhttps://www.facebook.com/iameden\nhttps://twitter.com/iameden\nhttp://instagram.com/iameden\n\nArtwork: http://grivetart.deviantart.com/art/The-Last-Angel-444672190\n\nQuality Koala Tees (T-Shirts): http://koalakontrol.spreadshirt.com/\n\nFollow Koala Kontrol\nSoundcloud: https://soundcloud.com/koala-kontrol\nTwitter: https://twitter.com/KoalaKontrol\nBookFace: https://www.facebook.com/KoalaKontrol\nGoogle+: https://plus.google.com/u/0/100350348732011984954\n\nSubmit tracks, mixes, artwork, and questions to koalakontrol@gmail.com.\n\nI upload music to my channel strictly for promotion.  I do not try to infringe upon other peoples copyrighted music.  If you are the artist of either a track or artwork please feel free to contact me at koalakontrol@gmail.com to resolve the issue.\n\nPlease subscribe and like for more.",
+        "meta": ***REMOVED***
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 134
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        "song_title": "The Eden Project - Statues",
+        "artist": "The Eden Project ft. Leah Kelly",
+        "artist_image": "http://i.imgur.com/t3XI03s.png",
+        "cover": "http://i.imgur.com/kot8BEE.jpg",
+        "album": "Eden Project"
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
@@ -14491,7 +15110,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 129
+                    "index": 135
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -14604,13 +15223,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 130
+                    "index": 136
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Standing in Line",
         "artist": "The Vernons",
-        "artist_image": "https://i.scdn.co/image/04148518da191e4680ab4ed253f1d74903d858bc",
+        "artist_image": "https://i.scdn.co/image/cfa4cf2e846e63578a6416fd98c297ee5520d373",
         "cover": "https://i.scdn.co/image/3b96b8073b46271c16fa0ac9f6d565ea4bb184ff",
         "album": "Standing In Line",
         "spotify_data": ***REMOVED***
@@ -14717,13 +15336,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 131
+                    "index": 137
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "White Wine",
         "artist": "The Vernons",
-        "artist_image": "https://i.scdn.co/image/d56ba80a8d245ef16117e71c8bc6a82323cc8ccd",
+        "artist_image": "https://i.scdn.co/image/04148518da191e4680ab4ed253f1d74903d858bc",
         "cover": "https://i.scdn.co/image/cfa4cf2e846e63578a6416fd98c297ee5520d373",
         "album": "Volume 1",
         "spotify_data": ***REMOVED***
@@ -14835,13 +15454,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 132
+                    "index": 138
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Sally",
         "artist": "Thundamentals & Mataya",
-        "artist_image": "https://i.scdn.co/image/3e9bea6db43cb7c443abfb0cdc5263fd367ee9d8",
+        "artist_image": "https://i.scdn.co/image/070959d33cd885e01e6cb305481d1914bcb1c2b7",
         "cover": "https://i.scdn.co/image/ab4b4e16f08847702d1f3c36bc555766194d700b",
         "album": "Everyone We Know",
         "spotify_data": ***REMOVED***
@@ -14963,13 +15582,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 133
+                    "index": 139
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Your Love",
         "artist": "Tom Misch & Alexa Harley",
-        "artist_image": "https://i.scdn.co/image/e84854c24ffd0a032bf84b6b04e28dc8942155a4",
+        "artist_image": "https://i.scdn.co/image/7f4e62de4cd6b9220d2f39dbe4893c62e3aeda42",
         "cover": "https://i.scdn.co/image/18135ba644f8b8a624e8d33247db906c457e62ef",
         "album": "Beat Tape 2",
         "spotify_data": ***REMOVED***
@@ -15097,7 +15716,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 134
+                    "index": 140
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***
@@ -15118,7 +15737,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 135
+                    "index": 141
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***
@@ -15139,7 +15758,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 136
+                    "index": 142
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***
@@ -15160,13 +15779,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 137
+                    "index": 143
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "The Last Song",
         "artist": "Tom Misch & Carmody",
-        "artist_image": "https://i.scdn.co/image/25e588280f3d63d131374d88cf99515da77dee7c",
+        "artist_image": "https://i.scdn.co/image/aeb2faa758d099e3d13a1eba5669d5cd5e328af3",
         "cover": "https://i.scdn.co/image/aeb2faa758d099e3d13a1eba5669d5cd5e328af3",
         "album": "The Last Song",
         "spotify_data": ***REMOVED***
@@ -15273,13 +15892,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 138
+                    "index": 144
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Wander With Me",
         "artist": "Tom Misch & Carmody",
-        "artist_image": "https://i.scdn.co/image/7f4e62de4cd6b9220d2f39dbe4893c62e3aeda42",
+        "artist_image": "https://i.scdn.co/image/e84854c24ffd0a032bf84b6b04e28dc8942155a4",
         "cover": "https://i.scdn.co/image/18135ba644f8b8a624e8d33247db906c457e62ef",
         "album": "Beat Tape 2",
         "spotify_data": ***REMOVED***
@@ -15421,13 +16040,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 139
+                    "index": 145
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Wake Up This Day",
         "artist": "Tom Misch & Jordan Rakei",
-        "artist_image": "https://i.scdn.co/image/e84854c24ffd0a032bf84b6b04e28dc8942155a4",
+        "artist_image": "https://i.scdn.co/image/7f4e62de4cd6b9220d2f39dbe4893c62e3aeda42",
         "cover": "https://i.scdn.co/image/18135ba644f8b8a624e8d33247db906c457e62ef",
         "album": "Beat Tape 2",
         "spotify_data": ***REMOVED***
@@ -15577,13 +16196,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 140
+                    "index": 146
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "In the Midst of It All",
         "artist": "Tom Misch & Sam Wills",
-        "artist_image": "https://i.scdn.co/image/7f4e62de4cd6b9220d2f39dbe4893c62e3aeda42",
+        "artist_image": "https://i.scdn.co/image/76f7b8e88feb6f7c27022a5145711438268d639c",
         "cover": "https://i.scdn.co/image/18135ba644f8b8a624e8d33247db906c457e62ef",
         "album": "Beat Tape 2",
         "spotify_data": ***REMOVED***
@@ -15727,13 +16346,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 141
+                    "index": 147
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Beautiful Escape",
         "artist": "Tom Misch & Zak Abel",
-        "artist_image": "https://i.scdn.co/image/76f7b8e88feb6f7c27022a5145711438268d639c",
+        "artist_image": "https://i.scdn.co/image/7f4e62de4cd6b9220d2f39dbe4893c62e3aeda42",
         "cover": "https://i.scdn.co/image/18135ba644f8b8a624e8d33247db906c457e62ef",
         "album": "Beat Tape 2",
         "spotify_data": ***REMOVED***
@@ -15879,13 +16498,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 142
+                    "index": 148
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Memory",
         "artist": "Tom Misch",
-        "artist_image": "https://i.scdn.co/image/76f7b8e88feb6f7c27022a5145711438268d639c",
+        "artist_image": "https://i.scdn.co/image/e84854c24ffd0a032bf84b6b04e28dc8942155a4",
         "cover": "https://i.scdn.co/image/d763e2ab08efc9330d04f5339318213a4571d770",
         "album": "Memory",
         "spotify_data": ***REMOVED***
@@ -16002,13 +16621,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 143
+                    "index": 149
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Sunshine",
         "artist": "Tom Misch",
-        "artist_image": "https://i.scdn.co/image/7f4e62de4cd6b9220d2f39dbe4893c62e3aeda42",
+        "artist_image": "https://i.scdn.co/image/76f7b8e88feb6f7c27022a5145711438268d639c",
         "cover": "https://i.scdn.co/image/d0f3f15e73e6410e8bb60c0ab15357e5ecec89a9",
         "album": "Sunshine",
         "spotify_data": ***REMOVED***
@@ -16125,13 +16744,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 144
+                    "index": 150
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Watch Me Dance",
         "artist": "Tom Misch",
-        "artist_image": "https://i.scdn.co/image/e84854c24ffd0a032bf84b6b04e28dc8942155a4",
+        "artist_image": "https://i.scdn.co/image/7f4e62de4cd6b9220d2f39dbe4893c62e3aeda42",
         "cover": "https://i.scdn.co/image/0a08cd0d07d581404e588862ff6d7e1e23f3f102",
         "album": "Watch Me Dance",
         "spotify_data": ***REMOVED***
@@ -16234,6 +16853,32 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-n10G_yWo8BY-Bearcubs_x_Tom_Misch_-_Colours_Of_Freedom.webm",
+        "video_id": "n10G_yWo8BY",
+        "url": "https://www.youtube.com/watch?v=n10G_yWo8BY",
+        "title": "Bearcubs X Tom Misch - Colours Of Freedom",
+        "duration": 227,
+        "thumbnail": "https://i.ytimg.com/vi/n10G_yWo8BY/maxresdefault.jpg",
+        "description": "Bearcubs x Tom Misch - Colours Of Freedom\n\n~~~~~~~\u00bb Quote of the day \u00ab~~~~~~~\n\n\"There is only one way to avoid criticism: do nothing, say nothing, and be nothing.\"\n--Aristotle\n\nShare your quotes with me in the comment section below and I might use it for the next quote of the day!\n\n~~~~~~~\u00bb Free Download \u00ab~~~~~~~\n\nhttps://soundcloud.com/bearcubs/bearcubs-x-tom-misch-colours-of-freedom\n\n~~~~~~~\u00bb Bearcubs \u00ab~~~~~~~\n\nSoundcloud: https://soundcloud.com/bearcubs\nFacebook: https://www.facebook.com/bearcubsmusic\nTwitter: https://twitter.com/bearcubsmusic\n\n~~~~~~~\u00bb Tom Misch \u00ab~~~~~~~\n\nSoundcloud: https://soundcloud.com/tom-misch\nFacebook: https://www.facebook.com/tommisch123\nTwitter: https://twitter.com/Tom_Misch\nYoutube: https://www.youtube.com/user/verynice4321\n\n~~~~~~~\u00bb Contact Cloudkid \u00ab~~~~~~~\n\nSoundcloud: https://soundcloud.com/cloudkid-1\nFacebook: https://www.facebook.com/cloudkidpromotion\n\nWant your track on CloudKid? It's easy! Contact me on my YouTube or message me at: CloudKidOfficial@gmail.com\n\n~~~~~~~\u00bb Image \u00ab~~~~~~~\n\nhttp://wearetherhoads.com/wp-content/uploads/055-NewZealand_2011_Wearetherhoads-1.jpg\n\n~~~~~~~\u00bb Legal stuff \u00ab~~~~~~~\n\nI do not own any of the content of the video and it has been uploaded for promotion purposes only. If any producer or label has an Issue with any upload, contact me directly through youtube oder under CloudKidOfficial@gmail.com and the video will be taken down immediately! This includes owners of the images used.",
+        "meta": ***REMOVED***
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 151
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Bearcubs X Tom Misch - Colours Of Freedom",
+        "artist": "Tom Misch, Bearcubs",
+        "artist_image": "http://i.imgur.com/BqVXIr9.jpg",
+        "cover": "http://i.imgur.com/5WZvDEV.jpg",
+        "album": "Beat Tape 2"
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-MwpMEbgC7DA-Tom_Odell_-_Another_Love.webm",
         "video_id": "MwpMEbgC7DA",
@@ -16248,13 +16893,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 145
+                    "index": 152
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Another Love",
         "artist": "Tom Odell",
-        "artist_image": "https://i.scdn.co/image/3a6b3b1cccbd9b15be2833bc6fd5ea9a15a1d721",
+        "artist_image": "https://i.scdn.co/image/c615e3845f4ddfa1249fc03a6ad071cb0dff95a7",
         "cover": "https://i.scdn.co/image/bb9376e2af1e64aa16cdfd0f6659f5100babe10a",
         "album": "Long Way Down",
         "spotify_data": ***REMOVED***
@@ -16383,7 +17028,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 146
+                    "index": 153
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -16518,13 +17163,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 147
+                    "index": 154
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Here I Am",
         "artist": "Tom Odell",
-        "artist_image": "https://i.scdn.co/image/3a6b3b1cccbd9b15be2833bc6fd5ea9a15a1d721",
+        "artist_image": "https://i.scdn.co/image/8523e56ead8d095bf2d6ba9b739e1291aa293f7c",
         "cover": "https://i.scdn.co/image/a14764dbb2612600b1d634c400dce0a21ec711da",
         "album": "Wrong Crowd (Deluxe)",
         "spotify_data": ***REMOVED***
@@ -16653,7 +17298,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 148
+                    "index": 155
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -16775,6 +17420,128 @@
     ***REMOVED***
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-5RbGZZnUR3g-Tribe_Society_-_Kings_Animated_Version.webm",
+        "video_id": "5RbGZZnUR3g",
+        "url": "https://www.youtube.com/watch?v=5RbGZZnUR3g",
+        "title": "Tribe Society - Kings (Animated Version)",
+        "duration": 226,
+        "thumbnail": "https://i.ytimg.com/vi/5RbGZZnUR3g/maxresdefault.jpg",
+        "description": "Tribe Society - Kings (Animated Version)\n\nhttp://vevo.ly/cbFN08",
+        "meta": ***REMOVED***
+            "author": ***REMOVED***
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            ***REMOVED***,
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 156
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Kings",
+        "artist": "Tribe Society",
+        "artist_image": "https://i.scdn.co/image/d32ee9f6f6021c3865fcd7f030a6cd6b912824e7",
+        "cover": "https://i.scdn.co/image/ee1e70af97d2873161eadae4bbe3ded2cb5eaa3d",
+        "album": "Delirium Sonata",
+        "spotify_data": ***REMOVED***
+            "id": "1031dCHtkJhbtcxXCwKipv",
+            "name": "Kings",
+            "artists": [
+                ***REMOVED***
+                    "id": "2Uy7HZ1G1NKVkRqAvGe5a0",
+                    "name": "Tribe Society",
+                    "images": [
+                        ***REMOVED***
+                            "height": 639,
+                            "url": "https://i.scdn.co/image/d32ee9f6f6021c3865fcd7f030a6cd6b912824e7",
+                            "width": 640
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/eef8e3d92b37b865f50a137eeec1dfd432fb1991",
+                            "width": 320
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/40e2c6e93efcbe7cd3f063139eda57bb64fbfae5",
+                            "width": 160
+                        ***REMOVED***
+                    ],
+                    "genres": [
+                        "indie poptimism"
+                    ],
+                    "popularity": 47,
+                    "uri": "spotify:artist:2Uy7HZ1G1NKVkRqAvGe5a0",
+                    "href": "https://open.spotify.com/artist/2Uy7HZ1G1NKVkRqAvGe5a0"
+                ***REMOVED***
+            ],
+            "artist": "Tribe Society",
+            "cover_url": "https://i.scdn.co/image/ee1e70af97d2873161eadae4bbe3ded2cb5eaa3d",
+            "duration": 217.746,
+            "album": ***REMOVED***
+                "id": "5vAI6rwH2N9RqhYLBZaCVe",
+                "name": "Delirium Sonata",
+                "artists": [
+                    ***REMOVED***
+                        "id": "2Uy7HZ1G1NKVkRqAvGe5a0",
+                        "name": "Tribe Society",
+                        "images": [
+                            ***REMOVED***
+                                "height": 639,
+                                "url": "https://i.scdn.co/image/d32ee9f6f6021c3865fcd7f030a6cd6b912824e7",
+                                "width": 640
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/eef8e3d92b37b865f50a137eeec1dfd432fb1991",
+                                "width": 320
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/40e2c6e93efcbe7cd3f063139eda57bb64fbfae5",
+                                "width": 160
+                            ***REMOVED***
+                        ],
+                        "genres": [
+                            "indie poptimism"
+                        ],
+                        "popularity": 47,
+                        "uri": "spotify:artist:2Uy7HZ1G1NKVkRqAvGe5a0",
+                        "href": "https://open.spotify.com/artist/2Uy7HZ1G1NKVkRqAvGe5a0"
+                    ***REMOVED***
+                ],
+                "images": [
+                    ***REMOVED***
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ee1e70af97d2873161eadae4bbe3ded2cb5eaa3d",
+                        "width": 640
+                    ***REMOVED***,
+                    ***REMOVED***
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/07a127b2cb9aa6fb7dfc2ad14826f79213790a0f",
+                        "width": 300
+                    ***REMOVED***,
+                    ***REMOVED***
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/073d9925f5bd53f327fdc7eee0bc3bfdbb2930a4",
+                        "width": 64
+                    ***REMOVED***
+                ],
+                "uri": "spotify:album:5vAI6rwH2N9RqhYLBZaCVe"
+            ***REMOVED***,
+            "popularity": 46,
+            "uri": "spotify:track:1031dCHtkJhbtcxXCwKipv",
+            "query": "Tribe Society - Kings",
+            "certainty": 0.95
+        ***REMOVED***
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-G4VAdWJXyFk-Tuxedo_-_Do_It.webm",
         "video_id": "G4VAdWJXyFk",
         "url": "https://www.youtube.com/watch?v=G4VAdWJXyFk",
@@ -16793,13 +17560,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 149
+                    "index": 157
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Do It",
         "artist": "Tuxedo",
-        "artist_image": "https://i.scdn.co/image/c0050f6966233273c45754bef7e4bc4423060cef",
+        "artist_image": "https://i.scdn.co/image/b55ff9e21a88a4e617f80d71ff5c58ef412fe321",
         "cover": "https://i.scdn.co/image/be3c5d561331197eaa1f4a7bffef348c125328b2",
         "album": "Tuxedo",
         "spotify_data": ***REMOVED***
@@ -16906,13 +17673,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 150
+                    "index": 158
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Worst In Me",
         "artist": "Unlike Pluto",
-        "artist_image": "https://i.scdn.co/image/555079c2871490970246a57e90b13005c23b6a2e",
+        "artist_image": "https://i.scdn.co/image/4bf2b263ec9e526035bf085748c4d02f3cbcca85",
         "cover": "https://i.scdn.co/image/3d7c50c02d6a7e53fdcf389e8262238c82eec337",
         "album": "Worst In Me",
         "spotify_data": ***REMOVED***
@@ -17020,6 +17787,128 @@
     ***REMOVED***
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-XefiWRskYk4-Bad_Blood_Official_Audio_-_Welshly_Arms.webm",
+        "video_id": "XefiWRskYk4",
+        "url": "https://www.youtube.com/watch?v=XefiWRskYk4",
+        "title": "\"Bad Blood\" (Official Audio) - Welshly Arms",
+        "duration": 213,
+        "thumbnail": "https://i.ytimg.com/vi/XefiWRskYk4/maxresdefault.jpg",
+        "description": "Available EVERYWHERE July 15th!\nFollow Welshly Arms!\nhttps://www.facebook.com/welshlyarmsband/\nhttps://twitter.com/welshlyarms\nhttps://www.instagram.com/welshlyarms/\n\n____________________________\n____________________________\n\n\nWELSHLY ARMS combines their love of blues with rhythm and soul & good ol\u2019 rock and roll, to create a fresh throwback sound that represents their Midwestern roots. Comprised of Sam Getz (guitar/vocals), Brett Lindemann (keys), Jimmy Weaver (bass), Mikey Gould (drums) and Bri and Jon Bryant (bgv\u2019s), Cleveland-based WELSHLY ARMS pays homage to many of their collective musical influences such as Jimi Hendrix, The Temptations, Otis Redding, and Howlin Wolf.\n\nThe power of their live show has quickly built them a dedicated following in Ohio and has set the stage for things to tip into a national following in 2016 with performances confirmed on/at The Rock Boat, SXSW, Summerfest, Austin City Limits, Laurel Live, the San Diego County Fair and more. Within the last year alone, their music has been featured in the movie trailer for the Jack Black Film \u201cThe D Train,\u201d a national TV/radio campaign for the Cleveland Indians, the promo for the new Netflix show Sense8 and the movie trailer for the new Quentin Tarantino movie, Hateful Eight.\n\nIn August of 2016, WELSHLY ARMS will embark on The Tour De Compadres, supporting NEEDTOBREATHE and Mat Kearney on a 53 date tour across the US, hitting iconic venues such as Red Rocks and The Greek Theatre.\n\n____________________________\n____________________________\n\n\"Bad Blood\" Lyrics:\n\nThings ain\u2019t been quite the same\nSince you hit me with your hand grenade\nI might be just a bit insane\nI ain\u2019t scared of a little pain\n\nTell me tell me baby honestly\nDo you think there\u2019s something wrong with me\nDo you wanna stick around to see\nHow bad a boy can be\n\nIt\u2019s the feeling I get\nIt\u2019s the feeling I get\nAnd I\u2019m startin\u2019 to sweat\nIt\u2019s the feeling I get\nIt\u2019s the feeling I get\nYou ain\u2019t lived if you\u2019ve got no regrets\nYeah, that\u2019s the feeling I get.\n\nI\u2019m made of bad, bad, bad, bad blood\nAt least I know where I come from\nAnd you could never hurt me none\n'Cause it\u2019s in my veins, that\u2019s where it runs\n\nDid you ever think I\u2019d pull it off\nWere you convinced that it was all just talk\nI can\u2019t stop and I wont get caught\nI wont, I wont, I wont\n\nYou do things in the honest way\nThey put your picture on the wall of shame\nThe more you care the more they make you pay\nBut I won\u2019t, I won\u2019t, I won\u2019t, I won\u2019t!\n\nIf you're gonna light my fire\nBaby don\u2019t stand so close\nKarma gonna come and find you\nI know, I know, I know\nIf you wanna take it higher\nBetter be down to fall\nDon\u2019t think it won\u2019t hurt ya\nAt all, at all, at all, at all!",
+        "meta": ***REMOVED***
+            "author": ***REMOVED***
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            ***REMOVED***,
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 159
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        "song_title": "Bad Blood",
+        "artist": "Welshly Arms",
+        "artist_image": "https://i.scdn.co/image/4ee6c6d462ce29aa512c37d026d5a09ef48b0420",
+        "cover": "https://i.scdn.co/image/b1396a62fb35f20855d45591d47223e2bd244868",
+        "album": "Bad Blood",
+        "spotify_data": ***REMOVED***
+            "id": "1ARaDhugzpyiEeuIXswY4W",
+            "name": "Bad Blood",
+            "artists": [
+                ***REMOVED***
+                    "id": "1xKrH6GSh9CJh8nYwbqW7B",
+                    "name": "Welshly Arms",
+                    "images": [
+                        ***REMOVED***
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/25bc7f6569d0f10914786f7d64791acdd44a2015",
+                            "width": 640
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/8d13d75bffcfc739950e474110a23fd33ee3aa04",
+                            "width": 320
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/4ee6c6d462ce29aa512c37d026d5a09ef48b0420",
+                            "width": 160
+                        ***REMOVED***
+                    ],
+                    "genres": [
+                        "modern blues"
+                    ],
+                    "popularity": 64,
+                    "uri": "spotify:artist:1xKrH6GSh9CJh8nYwbqW7B",
+                    "href": "https://open.spotify.com/artist/1xKrH6GSh9CJh8nYwbqW7B"
+                ***REMOVED***
+            ],
+            "artist": "Welshly Arms",
+            "cover_url": "https://i.scdn.co/image/b1396a62fb35f20855d45591d47223e2bd244868",
+            "duration": 213.216,
+            "album": ***REMOVED***
+                "id": "6odSJWft0VUzW9lj9V3Z41",
+                "name": "Bad Blood",
+                "artists": [
+                    ***REMOVED***
+                        "id": "1xKrH6GSh9CJh8nYwbqW7B",
+                        "name": "Welshly Arms",
+                        "images": [
+                            ***REMOVED***
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/25bc7f6569d0f10914786f7d64791acdd44a2015",
+                                "width": 640
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/8d13d75bffcfc739950e474110a23fd33ee3aa04",
+                                "width": 320
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/4ee6c6d462ce29aa512c37d026d5a09ef48b0420",
+                                "width": 160
+                            ***REMOVED***
+                        ],
+                        "genres": [
+                            "modern blues"
+                        ],
+                        "popularity": 64,
+                        "uri": "spotify:artist:1xKrH6GSh9CJh8nYwbqW7B",
+                        "href": "https://open.spotify.com/artist/1xKrH6GSh9CJh8nYwbqW7B"
+                    ***REMOVED***
+                ],
+                "images": [
+                    ***REMOVED***
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/b1396a62fb35f20855d45591d47223e2bd244868",
+                        "width": 640
+                    ***REMOVED***,
+                    ***REMOVED***
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/5406bdd272e18c78b1f802821b74d41ca9c5a29a",
+                        "width": 300
+                    ***REMOVED***,
+                    ***REMOVED***
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/e90f39e288188a393ea68441967812f4c192c9dd",
+                        "width": 64
+                    ***REMOVED***
+                ],
+                "uri": "spotify:album:6odSJWft0VUzW9lj9V3Z41"
+            ***REMOVED***,
+            "popularity": 44,
+            "uri": "spotify:track:1ARaDhugzpyiEeuIXswY4W",
+            "query": "Bad Blood Welshly Arms",
+            "certainty": 1.0
+        ***REMOVED***
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-Z2CZn966cUg-Welshly_Arms_-_Legendary.webm",
         "video_id": "Z2CZn966cUg",
         "url": "https://www.youtube.com/watch?v=Z2CZn966cUg",
@@ -17038,7 +17927,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 151
+                    "index": 160
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -17155,7 +18044,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 152
+                    "index": 161
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***
@@ -17176,7 +18065,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 153
+                    "index": 162
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***
@@ -17197,7 +18086,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 154
+                    "index": 163
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***
@@ -17218,13 +18107,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 155
+                    "index": 164
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "All I Ever Do (Is Say Goodbye)",
         "artist": "Zak Abel",
-        "artist_image": "https://i.scdn.co/image/7ac9871e8881e563ec05ea02844216da0c5fa48b",
+        "artist_image": "https://i.scdn.co/image/bf9596ee2cfecaf820a24456bca1cc3901aa727b",
         "cover": "https://i.scdn.co/image/6d1a91791993440d5f400ff7ee9628a374c04e84",
         "album": "All I Ever Do (Is Say Goodbye)",
         "spotify_data": ***REMOVED***
@@ -17339,13 +18228,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 156
+                    "index": 165
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Everybody Needs Love",
         "artist": "Zak Abel",
-        "artist_image": "https://i.scdn.co/image/97acd6cb191a4631be383c2f521a58bad86a2ce3",
+        "artist_image": "https://i.scdn.co/image/7ac9871e8881e563ec05ea02844216da0c5fa48b",
         "cover": "https://i.scdn.co/image/23a4e86711eb360387dec52304a8828297aa810e",
         "album": "Everybody Needs Love",
         "spotify_data": ***REMOVED***
@@ -17460,13 +18349,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 157
+                    "index": 166
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Flow",
         "artist": "Zak Abel",
-        "artist_image": "https://i.scdn.co/image/97acd6cb191a4631be383c2f521a58bad86a2ce3",
+        "artist_image": "https://i.scdn.co/image/7ac9871e8881e563ec05ea02844216da0c5fa48b",
         "cover": "https://i.scdn.co/image/c1f138a14b3fa05c86b8a00bd1479384f5935bde",
         "album": "One Hand On The Future",
         "spotify_data": ***REMOVED***
@@ -17581,7 +18470,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 158
+                    "index": 167
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***
@@ -17602,7 +18491,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 159
+                    "index": 168
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -17723,13 +18612,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 160
+                    "index": 169
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Soul Child",
         "artist": "Zak Abel",
-        "artist_image": "https://i.scdn.co/image/7ac9871e8881e563ec05ea02844216da0c5fa48b",
+        "artist_image": "https://i.scdn.co/image/bf9596ee2cfecaf820a24456bca1cc3901aa727b",
         "cover": "https://i.scdn.co/image/c1f138a14b3fa05c86b8a00bd1479384f5935bde",
         "album": "One Hand On The Future",
         "spotify_data": ***REMOVED***
@@ -17844,7 +18733,7 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 161
+                    "index": 170
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***
@@ -17865,13 +18754,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 162
+                    "index": 171
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Unstable",
         "artist": "Zak Abel",
-        "artist_image": "https://i.scdn.co/image/7ac9871e8881e563ec05ea02844216da0c5fa48b",
+        "artist_image": "https://i.scdn.co/image/97acd6cb191a4631be383c2f521a58bad86a2ce3",
         "cover": "https://i.scdn.co/image/48fa8b0c3d1ee9852378968d5feb5262ed59ffd4",
         "album": "Unstable",
         "spotify_data": ***REMOVED***
@@ -17986,13 +18875,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 163
+                    "index": 172
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "The Shine",
         "artist": "ayokay & Chelsea Cutler",
-        "artist_image": "https://i.scdn.co/image/7c68bb13261ac02d967210c69dddd5fc72ad7948",
+        "artist_image": "https://i.scdn.co/image/19d2dddd9aa33f5bd0823fbaca668d2f9bbfc1be",
         "cover": "https://i.scdn.co/image/8c18236a02ec65b71d5515af4bfb6d80fdbca9b3",
         "album": "The Shine",
         "spotify_data": ***REMOVED***
@@ -18134,13 +19023,13 @@
                 "value": ***REMOVED***
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "quality",
-                    "index": 164
+                    "index": 173
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "One in the Same",
         "artist": "ayokay & Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/7c68bb13261ac02d967210c69dddd5fc72ad7948",
+        "artist_image": "https://i.scdn.co/image/19d2dddd9aa33f5bd0823fbaca668d2f9bbfc1be",
         "cover": "https://i.scdn.co/image/d561b0988e00415e12021d0b7754e921e2913d4a",
         "album": "4ft to Infinity - EP",
         "spotify_data": ***REMOVED***
@@ -18264,6 +19153,144 @@
             "uri": "spotify:track:2Td0vAAW3FNq0wjwNDeqn3",
             "query": "Ayokay - One In The Same",
             "certainty": 0.9583333333333334
+        ***REMOVED***
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-g2qRb7je9k0-Keaton_***REMOVED***s_When_I_Go_as_heard_on_SUITS.webm",
+        "video_id": "g2qRb7je9k0",
+        "url": "https://www.youtube.com/watch?v=g2qRb7je9k0",
+        "title": "Keaton ***REMOVED***s \u2013 When I Go (as heard on SUITS)",
+        "duration": 205,
+        "thumbnail": "https://i.ytimg.com/vi/g2qRb7je9k0/hqdefault.jpg",
+        "description": "As heard on USA Network's \"Suits.\"\n\niTunes: http://apple.co/1nm6CZd\nAmazon: http://amzn.to/1NyuYEv\nSpotify: http://bit.ly/1ONvToH\nSoundCloud: http://bit.ly/1S9kX8Q\n\nhttp://www.facebook.com/keatonsimonsmusic\ntwitter + instagram: @keatonsimons\nhttp://www.keatonsimons.com\n\nWritten by Keaton ***REMOVED***s, Smith Carlson and Laura Goldfarb. Artwork by Nate Currin.\n\nLYRICS:\nOn the day that I almost lost my mind\nI was feeding this dirty habit of mine\nI'd been drunk on your lies\nI was buried alive\nI've been so blind\nI was tempted by fate\nAnd I'll bend till I break\nBut I'll be fine\n\nCause ya know\n\nWhen I go\n(Time to go, time to go)\nI'm never coming back\nWhen I go\n(Time to go, time to go)\nI'm never coming back\nWhen I go\n(Time to go, time to go)\nI'm never coming back\nWhen I go\n(Time to go, time to go)\nI'm never coming back\nNo\n\nOn the day that I almost lost my soul\nI was standing at the crossroads\nBut I didn't fold\nWe've been up\nWe've been down\nBut you pushed me around for the last time\nIt's a fight to the death\nIt'll take your last breath\nBut I'll be fine\n\nCause ya know\n\nWhen I go\n(Time to go, time to go)\nI'm never coming back\nWhen I go\n(Time to go, time to go)\nI'm never coming back\nWhen I go\n(Time to go, time to go)\nI'm never coming back\nWhen I go\n(Time to go, time to go)\nI'm never coming back\nNo\n\n-------------------------------------------------------------------------------\n\nChords\n\nVERSE\nC#m / A /\n\nPRE\nB / G#m /\n\nCHORUS\nA / B / G#m / A /",
+        "meta": ***REMOVED***
+            "author": ***REMOVED***
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            ***REMOVED***,
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "quality",
+                    "index": 174
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        "song_title": "When I Go",
+        "artist": "Keaton ***REMOVED***s",
+        "artist_image": "https://i.scdn.co/image/d9c0f90b79a8e6644de0ed9581595fcf560c578d",
+        "cover": "https://i.scdn.co/image/1098395bca5c4d18d03beb561ffbea3f25cf37cf",
+        "album": "When I Go",
+        "spotify_data": ***REMOVED***
+            "id": "47MRrxHHrXq4qThZPOBABa",
+            "name": "When I Go",
+            "artists": [
+                ***REMOVED***
+                    "id": "3JtduJLfvJEAjll8oupFy5",
+                    "name": "Keaton ***REMOVED***s",
+                    "images": [
+                        ***REMOVED***
+                            "height": 1253,
+                            "url": "https://i.scdn.co/image/4e084740665dcd5d5f01a6dd88b2f55e840aa7e7",
+                            "width": 1000
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 802,
+                            "url": "https://i.scdn.co/image/565b35e8c7a8e0a54a42d351e1fb36fc6d567b5c",
+                            "width": 640
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 251,
+                            "url": "https://i.scdn.co/image/d9c0f90b79a8e6644de0ed9581595fcf560c578d",
+                            "width": 200
+                        ***REMOVED***,
+                        ***REMOVED***
+                            "height": 80,
+                            "url": "https://i.scdn.co/image/eb7f0ced02ec26c1cd4d1b37cabf652315e7af35",
+                            "width": 64
+                        ***REMOVED***
+                    ],
+                    "genres": [
+                        "acoustic pop",
+                        "folk christmas",
+                        "neo mellow",
+                        "pop christmas"
+                    ],
+                    "popularity": 35,
+                    "uri": "spotify:artist:3JtduJLfvJEAjll8oupFy5",
+                    "href": "https://open.spotify.com/artist/3JtduJLfvJEAjll8oupFy5"
+                ***REMOVED***
+            ],
+            "artist": "Keaton ***REMOVED***s",
+            "cover_url": "https://i.scdn.co/image/1098395bca5c4d18d03beb561ffbea3f25cf37cf",
+            "duration": 204.617,
+            "album": ***REMOVED***
+                "id": "4aBmarR5hYd1DB87Nm5KuY",
+                "name": "When I Go",
+                "artists": [
+                    ***REMOVED***
+                        "id": "3JtduJLfvJEAjll8oupFy5",
+                        "name": "Keaton ***REMOVED***s",
+                        "images": [
+                            ***REMOVED***
+                                "height": 1253,
+                                "url": "https://i.scdn.co/image/4e084740665dcd5d5f01a6dd88b2f55e840aa7e7",
+                                "width": 1000
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 802,
+                                "url": "https://i.scdn.co/image/565b35e8c7a8e0a54a42d351e1fb36fc6d567b5c",
+                                "width": 640
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 251,
+                                "url": "https://i.scdn.co/image/d9c0f90b79a8e6644de0ed9581595fcf560c578d",
+                                "width": 200
+                            ***REMOVED***,
+                            ***REMOVED***
+                                "height": 80,
+                                "url": "https://i.scdn.co/image/eb7f0ced02ec26c1cd4d1b37cabf652315e7af35",
+                                "width": 64
+                            ***REMOVED***
+                        ],
+                        "genres": [
+                            "acoustic pop",
+                            "folk christmas",
+                            "neo mellow",
+                            "pop christmas"
+                        ],
+                        "popularity": 35,
+                        "uri": "spotify:artist:3JtduJLfvJEAjll8oupFy5",
+                        "href": "https://open.spotify.com/artist/3JtduJLfvJEAjll8oupFy5"
+                    ***REMOVED***
+                ],
+                "images": [
+                    ***REMOVED***
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/1098395bca5c4d18d03beb561ffbea3f25cf37cf",
+                        "width": 640
+                    ***REMOVED***,
+                    ***REMOVED***
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/e51fa5b0ab40fbeba35edd1a2d7ec0e6cfd825b1",
+                        "width": 300
+                    ***REMOVED***,
+                    ***REMOVED***
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/e07dfbe366926d5b9ae9f5598ecc0eb2b5191f2e",
+                        "width": 64
+                    ***REMOVED***
+                ],
+                "uri": "spotify:album:4aBmarR5hYd1DB87Nm5KuY"
+            ***REMOVED***,
+            "popularity": 46,
+            "uri": "spotify:track:47MRrxHHrXq4qThZPOBABa",
+            "query": "Keaton ***REMOVED***s When I Go",
+            "certainty": 1.0
         ***REMOVED***
     ***REMOVED***
 ]
