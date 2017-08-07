@@ -1,3 +1,4 @@
+import asyncio
 import inspect
 import os
 import re
@@ -18,31 +19,29 @@ from discord.object import Object
 from discord.utils import find
 from discord.voice_client import VoiceClient
 
-import asyncio
-
-from . import downloader, exceptions
-from .commands.admin_commands import AdminCommands
-from .commands.fun_commands import FunCommands
-from .commands.info_commands import InfoCommands
-from .commands.misc_commands import MiscCommands
-from .commands.player_commands import PlayerCommands
-from .commands.playlist_commands import PlaylistCommands
-from .commands.queue_commands import QueueCommands
-from .commands.tool_commands import ToolCommands
-from .config import Config, ConfigDefaults
-from .constants import VERSION as BOTVERSION
-from .constants import (ABS_AUDIO_CACHE_PATH, AUDIO_CACHE_PATH,
-                        DISCORD_MSG_CHAR_LIMIT)
-from .entry import RadioSongEntry, StreamEntry, TimestampEntry
-from .games.game_cah import GameCAH
-from .opus_loader import load_opus_lib
-from .player import MusicPlayer
-from .random_sets import RandomSets
-from .reminder import Calendar
-from .saved_playlists import Playlists
-from .settings import Settings
-from .utils import Response, load_file, ordinal, paginate
-from .web_socket_server import GieselaServer
+from musicbot import downloader, exceptions
+from musicbot.commands.admin_commands import AdminCommands
+from musicbot.commands.fun_commands import FunCommands
+from musicbot.commands.info_commands import InfoCommands
+from musicbot.commands.misc_commands import MiscCommands
+from musicbot.commands.player_commands import PlayerCommands
+from musicbot.commands.playlist_commands import PlaylistCommands
+from musicbot.commands.queue_commands import QueueCommands
+from musicbot.commands.tool_commands import ToolCommands
+from musicbot.config import Config, ConfigDefaults
+from musicbot.constants import VERSION as BOTVERSION
+from musicbot.constants import (ABS_AUDIO_CACHE_PATH, AUDIO_CACHE_PATH,
+                                DISCORD_MSG_CHAR_LIMIT)
+from musicbot.entry import RadioSongEntry, StreamEntry, TimestampEntry
+from musicbot.games.game_cah import GameCAH
+from musicbot.opus_loader import load_opus_lib
+from musicbot.player import MusicPlayer
+from musicbot.random_sets import RandomSets
+from musicbot.reminder import Calendar
+from musicbot.saved_playlists import Playlists
+from musicbot.settings import Settings
+from musicbot.utils import Response, load_file, ordinal, paginate
+from musicbot.web_socket_server import GieselaServer
 
 load_opus_lib()
 
