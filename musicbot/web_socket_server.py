@@ -181,7 +181,7 @@ class GieselaWebSocket(WebSocket):
                 from_index = command_data.get("from")
                 to_index = command_data.get("to")
 
-                success = player.playlist.move(from_index, to_index)
+                success = player.playlist.move(from_index, to_index) != False
 
             answer["success"] = success
 
