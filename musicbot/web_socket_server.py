@@ -1,4 +1,3 @@
-import asyncio
 import atexit
 import hashlib
 import json
@@ -8,6 +7,7 @@ from json.decoder import JSONDecodeError
 from random import choice
 from string import ascii_lowercase
 
+import asyncio
 from musicbot.entry import TimestampEntry
 from musicbot.simple_web_socket_server import SimpleWebSocketServer, WebSocket
 from musicbot.web_author import WebAuthor
@@ -101,20 +101,21 @@ class GieselaWebSocket(WebSocket):
         if request:
             # send all the information one can acquire
             if request == "send_information":
-                if "playlists" in request_data:
-                    self.log("asked for playlists")
+                self.log("asked for general information")
+                info = {}
+                player_info = GieselaServer.get_player_information(self.token)
+                user_info = GieselaServer.get_token_information(self.token)[1].to_dict()
 
-                    player = GieselaServer.get_player(token=self.token)
-                    answer["playlists"] = player.bot.playlists.get_all_web_playlists(player.playlist)
-                else:
-                    self.log("asked for general information")
-                    info = {}
-                    player_info = GieselaServer.get_player_information(self.token)
-                    user_info = GieselaServer.get_token_information(self.token)[1].to_dict()
+                info["player"] = player_info
+                info["user"] = user_info
+                answer["info"] = info
 
-                    info["player"] = player_info
-                    info["user"] = user_info
-                    answer["info"] = info
+            elif request == "send_playlists":
+                self.log("asked for playlists")
+
+                player = GieselaServer.get_player(token=self.token)
+                answer["playlists"] = player.bot.playlists.get_all_web_playlists(player.playlist)
+
             elif request == "send_lyrics":
                 self.log("asked for lyrics")
                 player = GieselaServer.get_player(token=self.token)
