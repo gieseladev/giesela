@@ -13,3 +13,4 @@ aiohttp
 openpyxl
 beautifulsoup4
 discogs_client
+python-dateutil
