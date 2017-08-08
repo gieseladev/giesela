@@ -31,7 +31,7 @@ class GieselaWebSocket(WebSocket):
         except AttributeError:
             identification = self.address
 
-        print("[WEBSOCKET] <***REMOVED******REMOVED***>".format(identification, message))
+        print("[WEBSOCKET] <***REMOVED******REMOVED***> ***REMOVED******REMOVED***".format(identification, message))
 
     def handleMessage(self):
         try:
