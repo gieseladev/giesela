@@ -1,9 +1,9 @@
-import configparser
 import json
 import os
 import re
 import time
 
+import configparser
 from musicbot.entry import Entry
 from musicbot.exceptions import BrokenEntryError, OutdatedEntryError
 from musicbot.utils import clean_songname, similarity
@@ -26,7 +26,7 @@ class Playlists:
             json.dump(self.playlists, f, indent=4)
 
     def get_all_web_playlists(self, queue):
-        return [self.get_web_playlist(playlist, queue) for playlist in self.playlists]
+        return [self.get_web_playlist(playlist, queue) for playlist in self.playlists if playlist.get("entries") and playlist.get("cover") and playlist.get("description")]
 
     def get_web_playlist(self, playlist_name, queue):
         data = self.get_playlist(playlist_name, queue)
