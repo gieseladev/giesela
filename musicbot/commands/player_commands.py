@@ -46,7 +46,8 @@ class PlayerCommands:
     @command_info("1.0.0", 1477180800, ***REMOVED***
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "3.8.8": (1499421755, "improved volume bar"),
-        "4.5.0": (1501792292, "Switched to a non-linear volume scale system")
+        "4.5.0": (1501792292, "Switched to a non-linear volume scale system"),
+        "4.5.8": (1502197622, "Muting is a thing now.")
     ***REMOVED***)
     async def cmd_volume(self, message, player, leftover_args):
         """
@@ -67,9 +68,11 @@ class PlayerCommands:
         special_operation = None
         if new_volume[0] in "+-":
             relative = True
-        if new_volume[0] in "*/%":
+        elif new_volume[0] in "*/%":
             special_operation = new_volume[0]
             new_volume = new_volume[1:]
+        elif new_volume in ("mute", "muted", "none", "silent"):
+            new_volume = 0
 
         try:
             new_volume = int(new_volume)
@@ -93,7 +96,7 @@ class PlayerCommands:
 
         old_volume = int(player.volume * 100)
 
-        if 0 < new_volume <= 100:
+        if 0 <= new_volume <= 100:
             player.volume = new_volume / 100.0
 
             return Response(
