@@ -33,7 +33,10 @@ def search_for_lyrics_google(query):
                 print("Couldn't extract lyrics from ***REMOVED******REMOVED***:\n***REMOVED******REMOVED***".format(
                     display_link, traceback.format_exc()))
             if lyrics:
-                return "***REMOVED******REMOVED***\n**Lyrics from \"***REMOVED******REMOVED***\"**".format(lyrics, display_link)
+                return ***REMOVED***
+                    "lyrics": lyrics,
+                    "source": display_link
+                ***REMOVED***
             else:
                 print("[LYRICS] Couldn't parse these lyrics")
 
@@ -147,6 +150,7 @@ def _extract_lyrics_azlyrics(url):
     lyrics = re.sub(r"<\/div>", "", lyrics)
 
     return lyrics.strip()
+
 
 lyric_parsers = ***REMOVED***
     "genius.com":                  _extract_lyrics_genius,
