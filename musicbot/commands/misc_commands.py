@@ -170,7 +170,8 @@ class MiscCommands:
 
     @command_info("3.7.3", 1498306682, {
         "3.7.4": (1498312423, "Fixed severe bug and added musixmatch as a source"),
-        "3.9.2": (1499709472, "Fixed typo")
+        "3.9.2": (1499709472, "Fixed typo"),
+        "4.5.6": (1502185982, "In order to properly make lyrics work with Webiesela, the source is seperated from the lyrics")
     })
     async def cmd_lyrics(self, player, channel):
         """
@@ -191,4 +192,4 @@ class MiscCommands:
         if not lyrics:
             return Response("Couldn't find any lyrics for **{}**".format(title))
         else:
-            return Response("**{}**\n\n{}".format(title, lyrics))
+            return Response("**{}**\n\n{lyrics}\n**Lyrics from \"{source}\"**".format(title, **lyrics))
