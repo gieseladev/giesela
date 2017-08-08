@@ -166,7 +166,7 @@ class GieselaWebSocket(WebSocket):
 
             elif command == "volume":
                 target_volume = command_data.get("value")
-                if target_volume:
+                if target_volume is not None:
                     if 0 <= target_volume <= 1:
                         player.volume = target_volume
                         self.log("set volume to", round(target_volume * 100, 1), "%")
