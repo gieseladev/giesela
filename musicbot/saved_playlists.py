@@ -2,6 +2,7 @@ import configparser
 import json
 import os
 import re
+import time
 
 from musicbot.entry import Entry
 from musicbot.exceptions import BrokenEntryError, OutdatedEntryError
@@ -60,11 +61,13 @@ class Playlists:
                 try:
                     entry = Entry.from_dict(playlist, ser_entry)
                     entry.meta["channel"] = channel
-                    entry.meta["playlist"] = ***REMOVED***
-                        "cover": playlist_information["cover_url"],
-                        "name": playlistname,
-                        "index": ind
-                    ***REMOVED***
+                    if "playlist" not in entry.meta:
+                        entry.meta["playlist"] = ***REMOVED***
+                            "cover": playlist_information["cover_url"],
+                            "name": playlistname,
+                            "index": ind,
+                            "timestamp": round(time.time())
+                        ***REMOVED***
                 except (BrokenEntryError, OutdatedEntryError, TypeError, KeyError):
                     entry = None
 
@@ -85,10 +88,13 @@ class Playlists:
         for index, entry in enumerate(entries):
             entry.start_seconds = 0
 
+            added_timestamp = entry.meta.get("playlist", ***REMOVED******REMOVED***).get("timestamp", round(time.time()))
+
             entry.meta["playlist"] = ***REMOVED***
                 "cover": cover_url,
                 "name": name,
-                "index": index
+                "index": index,
+                "timestamp": added_timestamp
             ***REMOVED***
 
             serialized_entries.append(entry.to_dict())
@@ -213,7 +219,7 @@ class Playlists:
 
             if edit_entries:
                 for old, new in edit_entries:
-                    if new and old != new:
+                    if all((new, old)) and old != new:
                         index = next(ind for ind, entry in enumerate(next_entries) if entry.url == old.url)
                         next_entries.pop(index)
                         next_entries.insert(index, new)
