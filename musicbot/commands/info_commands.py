@@ -23,7 +23,8 @@ class InfoCommands:
         "3.7.0": (1498233256, "Some better help texts"),
         "3.7.1": (1498237739, "Added interactive help"),
         "3.7.4": (1498318916, "Added \"lyrics\" function help text"),
-        "4.2.2": (1500905513, "Updated help texts")
+        "4.2.2": (1500905513, "Updated help texts"),
+        "4.6.0": (1502208273, "Added a missing comma so resume and volume don't show on the same line")
     })
     async def cmd_help(self, channel, leftover_args):
         """
@@ -97,7 +98,7 @@ class InfoCommands:
                 "`{0}radio` listen to the best radio stations",
                 "`{0}stream` enqueue a livestream",
                 "`{0}pause` pause playback",
-                "`{0}resume` resume playback"
+                "`{0}resume` resume playback",
                 "`{0}volume` change volume",
                 "`{0}seek` seek to a timestamp",
                 "`{0}fwd` forward time",

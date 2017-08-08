@@ -1,10 +1,10 @@
-import asyncio
 import time
 import traceback
 from random import choice, shuffle
 
 from discord import Embed
 
+import asyncio
 from musicbot import exceptions
 from musicbot.entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                             StreamEntry, TimestampEntry, YoutubeEntry)
@@ -13,6 +13,7 @@ from musicbot.utils import (Response, block_user, clean_songname, command_info,
                             create_bar, format_time, get_related_videos,
                             hex_to_dec, nice_cut, ordinal, owner_only,
                             to_timestamp)
+from musicbot.web_socket_server import GieselaServer
 
 
 class EnqueueCommands:
@@ -440,9 +441,10 @@ class EnqueueCommands:
 class ManipulateCommands:
 
     @command_info("1.0.0", 1477180800, {
-        "3.8.9": (1499466672, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499466672, "Part of the `Giesenesis` rewrite"),
+        "4.5.9": (1502203034, "Sending an update to Webiesela when an entry is removed")
     })
-    async def cmd_remove(self, player, message, channel, author, leftover_args):
+    async def cmd_remove(self, server, player, message, channel, author, leftover_args):
         """
         Usage:
             {command_prefix}remove <index | start index | url> [end index]
@@ -473,6 +475,7 @@ class ManipulateCommands:
             for i in range(end_index, start_index - 1, -1):
                 del player.playlist.entries[i]
 
+            GieselaServer.send_player_information_update(server.id)
             return Response(
                 "Removed {} entries from the queue".format(
                     end_index - start_index + 1)
@@ -486,6 +489,7 @@ class ManipulateCommands:
 
             video = player.playlist.entries[index].title
             del player.playlist.entries[index]
+            GieselaServer.send_player_information_update(server.id)
             return Response("Removed **{0}** from the queue".format(video))
 
         except:
@@ -499,8 +503,8 @@ class ManipulateCommands:
                 if entry.title == strindex or entry.url == strindex:
                     print("Found {0} and will remove it".format(
                         leftover_args[0]))
-                    await self.cmd_remove(player, message, channel, author,
-                                          [iteration])
+                    await self.cmd_remove(player, message, channel, author, [iteration])
+                    GieselaServer.send_player_information_update(server.id)
                     return
                 iteration += 1
 
