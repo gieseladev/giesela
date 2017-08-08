@@ -6,7 +6,6 @@ import requests
 from discord import Embed
 from moviepy import editor, video
 
-from musicbot.lyrics import search_for_lyrics
 from musicbot.nine_gag import ContentType, get_post
 from musicbot.utils import Response, block_user, command_info, owner_only
 from musicbot.web_socket_server import GieselaServer
@@ -171,7 +170,8 @@ class MiscCommands:
     @command_info("3.7.3", 1498306682, {
         "3.7.4": (1498312423, "Fixed severe bug and added musixmatch as a source"),
         "3.9.2": (1499709472, "Fixed typo"),
-        "4.5.6": (1502185982, "In order to properly make lyrics work with Webiesela, the source is seperated from the lyrics")
+        "4.5.6": (1502185982, "In order to properly make lyrics work with Webiesela, the source is seperated from the lyrics"),
+        "4.5.7": (1502186654, "Lyrics are now temporarily cached within the entry")
     })
     async def cmd_lyrics(self, player, channel):
         """
@@ -187,7 +187,7 @@ class MiscCommands:
             return Response("There's no way for me to find lyrics for something that doesn't even exist!")
 
         title = player.current_entry.title
-        lyrics = search_for_lyrics(title)
+        lyrics = player.current_entry.lyrics
 
         if not lyrics:
             return Response("Couldn't find any lyrics for **{}**".format(title))

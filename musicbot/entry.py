@@ -7,6 +7,7 @@ from discord import Channel, Member, Server, User
 
 from musicbot.exceptions import (BrokenEntryError, ExtractionError,
                                  OutdatedEntryError)
+from musicbot.lyrics import search_for_lyrics
 from musicbot.radio import RadioSongExtractor, StationInfo
 from musicbot.spotify import SpotifyTrack
 from musicbot.utils import (clean_songname, get_header, get_image_brightness,
@@ -100,6 +101,19 @@ class BaseEntry:
         self.end_seconds = 0
         self._is_downloading = False
         self._waiting_futures = []
+
+        self._lyrics = None
+
+    @property
+    def title(self):
+        raise NotImplementedError
+
+    @property
+    def lyrics(self):
+        if not self._lyrics:
+            self._lyrics = search_for_lyrics(self.title)
+
+        return self._lyrics
 
     @property
     def _is_current_entry(self):
