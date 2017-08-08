@@ -90,7 +90,8 @@ class GieselaWebSocket(WebSocket):
 
     def handleAuthenticatedMessage(self, data):
         answer = ***REMOVED***
-            "response": True
+            "response":     True,
+            "request_id":   data.get("id")
         ***REMOVED***
 
         request = data.get("request")
@@ -100,15 +101,30 @@ class GieselaWebSocket(WebSocket):
         if request:
             # send all the information one can acquire
             if request == "send_information":
-                self.log("asked for information")
-                info = ***REMOVED******REMOVED***
-                player_info = GieselaServer.get_player_information(self.token)
-                user_info = GieselaServer.get_token_information(self.token)[
-                    1].to_dict()
+                if "playlists" in request_data:
+                    self.log("asked for playlists")
 
-                info["player"] = player_info
-                info["user"] = user_info
-                answer["info"] = info
+                    player = GieselaServer.get_player(token=self.token)
+                    answer["playlists"] = player.bot.playlists.get_all_web_playlists(player.playlist)
+                else:
+                    self.log("asked for general information")
+                    info = ***REMOVED******REMOVED***
+                    player_info = GieselaServer.get_player_information(self.token)
+                    user_info = GieselaServer.get_token_information(self.token)[1].to_dict()
+
+                    info["player"] = player_info
+                    info["user"] = user_info
+                    answer["info"] = info
+            elif request == "send_lyrics":
+                self.log("asked for lyrics")
+                player = GieselaServer.get_player(token=self.token)
+
+                if player.current_entry:
+                    lyrics = player.current_entry.lyrics
+                else:
+                    lyrics = None
+
+                answer["lyrics"] = lyrics
 
         if command:
             player = GieselaServer.get_player(token=self.token)
