@@ -25,6 +25,24 @@ class Playlists:
         with open(self.playlists_file, "w+") as f:
             json.dump(self.playlists, f, indent=4)
 
+    def get_all_web_playlists(self, queue):
+        return [self.get_web_playlist(playlist, queue) for playlist in self.playlists]
+
+    def get_web_playlist(self, playlist_name, queue):
+        data = self.get_playlist(playlist_name, queue)
+
+        playlist_info = {
+            "name":         data["name"],
+            "id":           data["id"],
+            "cover":        data["cover_url"],
+            "description":  data["description"],
+            "author":       data["author"].to_dict(),
+            "replay_count": data["replay_count"],
+            "entries":      [entry.to_web_dict(skip_calc=True) for entry in data["entries"]]
+        }
+
+        return playlist_info
+
     def get_playlist(self, playlistname, playlist, load_entries=True, channel=None):
         playlistname = playlistname.lower().strip().replace(" ", "_")
         if playlistname not in self.playlists:
