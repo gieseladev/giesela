@@ -31,7 +31,7 @@ class GieselaWebSocket(WebSocket):
         except AttributeError:
             identification = self.address
 
-        print("[WEBSOCKET] <{}>".format(identification, message))
+        print("[WEBSOCKET] <{}> {}".format(identification, message))
 
     def handleMessage(self):
         try:
