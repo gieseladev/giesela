@@ -55,6 +55,9 @@ class Playlist(EventEmitter):
         GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
     def move(self, from_index, to_index):
+        if not (0 <= from_index < len(self.entries) and 0 <= to_index < len(self.entries)):
+            return False
+
         self.entries.rotate(-from_index)
         move_entry = self.entries.popleft()
         self.entries.rotate(from_index - to_index)

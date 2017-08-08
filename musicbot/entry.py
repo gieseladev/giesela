@@ -407,6 +407,7 @@ class RadioSongEntry(RadioStationEntry):
         data = super().to_web_dict(skip_calc=skip_calc)
 
         data.update({
+            "station":          self.station_data.to_dict(),
             "title":            self.title,
             "artist":           self.artist,
             "cover":            self.cover,
