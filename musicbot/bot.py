@@ -533,6 +533,10 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
         handler = getattr(self, "cmd_%s" % command, None)
         if not handler:
+            if self.config.delete_unrelated_in_owned and message.channel.id in self.config.owned_channels:
+                await self.safe_delete_message(message)
+                print("Removed message because it's unrelated")
+
             return
 
         if command in self.blocked_commands:

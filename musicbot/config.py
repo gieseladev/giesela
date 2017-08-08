@@ -1,6 +1,6 @@
-import json
-
 import configparser
+import json
+import pickle
 
 
 def encode_setting(value):
@@ -27,7 +27,8 @@ def decode_setting(value):
     handlers = ***REMOVED***
         "i": lambda v: int(v),
         "f": lambda v: float(v),
-        "json": lambda v: json.loads(v)
+        "json": lambda v: json.loads(v),
+        "pickle": lambda v: pickle.loads(bytes.fromhex(v))
     ***REMOVED***
     val, sep, val_type = value.rpartition("\\")
     if not val:
@@ -82,8 +83,6 @@ class Config:
 
 
 class ConfigDefaults:
-    _email = None
-    _password = None
     _token = None
 
     google_api_key = "AIzaSyDb9eZgqs86NlNtekfFHKWN5jaaR-eZFQY"
@@ -103,7 +102,6 @@ class ConfigDefaults:
     command_prefix = "!"
     bound_channels = set()
     owned_channels = set()
-    autojoin_channels = set()
     private_chat_commands = set()
 
     history_limit = 200
@@ -111,13 +109,13 @@ class ConfigDefaults:
     default_volume = 0.3
     volume_power = 3
     save_videos = True
-    auto_summon = True
     auto_playlist = False
     auto_pause = True
     delete_messages = False
     delete_invoking = False
     debug_mode = False
     open_websocket = True
+    delete_unrelated_in_owned = False
 
     options_file = "config/options.ini"
     cards_file = "data/cah/cards.ini"
