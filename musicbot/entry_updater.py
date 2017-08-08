@@ -8,7 +8,7 @@ def between(val, low, high):
 
 async def _rebuild_entry(queue, entry):
     try:
-        return await get_entry(entry.url, **entry.meta)
+        return await queue.get_entry(entry["url"], **entry.get("meta"))
     except:
         return None
 
