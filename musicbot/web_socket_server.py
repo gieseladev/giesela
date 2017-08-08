@@ -176,6 +176,12 @@ class GieselaWebSocket(WebSocket):
                 else:
                     success = False
 
+            elif command == "move":
+                from_index = command_data.get("from")
+                to_index = command_data.get("to")
+
+                success = player.playlist.move(from_index, to_index)
+
             answer["success"] = success
 
         self.sendMessage(json.dumps(answer))
