@@ -80,7 +80,7 @@ class InfoCommands:
                 data = resp.json()
                 entities = data["entities"]
 
-                return Response(json.dumps(entities, indent=4))
+                return Response("**This is still a work-in-progress**\n***REMOVED******REMOVED***".format(json.dumps(entities, indent=4)))
 
         else:
             em = Embed(

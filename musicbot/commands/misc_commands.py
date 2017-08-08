@@ -124,7 +124,7 @@ class MiscCommands:
             msg += "*****REMOVED******REMOVED***** [***REMOVED******REMOVED***] (***REMOVED******REMOVED***% sure)\n".format(entity,
                                                      d["value"], round(d["confidence"] * 100, 1))
 
-        return Response(msg)
+        return Response("This what I think you coulda meant (wip)\n***REMOVED******REMOVED***".format(msg))
 
     async def cmd_getvideolink(self, player, message, channel, author, leftover_args):
         """
