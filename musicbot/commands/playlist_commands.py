@@ -395,15 +395,14 @@ class PlaylistCommands:
         def check(m):
             return (m.content.split()[0].lower() in ["add", "remove", "rename", "exit", "p", "n", "save", "extras", "search", "edit"])
 
-        async def _get_entries_from_urls(urls, message, fix=False):
+        async def _get_entries_from_urls(urls, message, fix=False, **meta):
             entries = []
             removed_entries = []
 
             if fix:
                 entry_generator = fix_generator(player.playlist, *urls)
             else:
-                entry_generator = player.playlist.get_entries_from_urls_gen(
-                    *urls)
+                entry_generator = player.playlist.get_entries_from_urls_gen(*urls, **meta)
 
             total_entries = len(urls)
             progress_message = await self.safe_send_message(channel, "{}\n{} [0%]".format(message.format(entries_left=total_entries), create_bar(0, length=20)))
@@ -582,9 +581,9 @@ class PlaylistCommands:
                     query = " ".join(arguments)
                     try:
                         start_time = time.time()
-                        entry = await player.playlist.get_entry_from_query(query)
+                        entry = await player.playlist.get_entry_from_query(query, author=author)
                         if isinstance(entry, list):
-                            entries, _ = await _get_entries_from_urls(entry, "Parsing {entries_left} entries")
+                            entries, _ = await _get_entries_from_urls(entry, "Parsing {entries_left} entries", author=author)
                         else:
                             entries = [entry, ]
                         if time.time() - start_time > 40:
@@ -855,6 +854,7 @@ class PlaylistCommands:
                 args["sub_queue"] = timestamp_to_queue(
                     fields["sub_queue"], fields["_duration"])
 
+            args.update(fields["_meta"])
             return entry_type(**args)
 
         entry_fields = {
@@ -864,6 +864,7 @@ class PlaylistCommands:
             "_description":         entry.description,
             "_duration":            entry.duration,
             "_expected_filename":   entry.expected_filename,
+            "_meta":                entry.meta,
             "title":                entry.title,
             "thumbnail":            entry.thumbnail,
         }
