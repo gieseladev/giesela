@@ -1,4 +1,3 @@
-import asyncio
 import inspect
 import os
 import re
@@ -19,6 +18,7 @@ from discord.object import Object
 from discord.utils import find
 from discord.voice_client import VoiceClient
 
+import asyncio
 from musicbot import downloader, exceptions
 from musicbot.commands.admin_commands import AdminCommands
 from musicbot.commands.fun_commands import FunCommands
@@ -317,24 +317,18 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                     nmsg = await self.send_message(dest, msg, tts=tts)
 
                     if nmsg and expire_in:
-                        asyncio.ensure_future(
-                            self._wait_delete_msg(nmsg, expire_in))
+                        asyncio.ensure_future(self._wait_delete_msg(nmsg, expire_in))
 
-                    if also_delete and isinstance(also_delete,
-                                                  discord.Message):
-                        asyncio.ensure_future(
-                            self._wait_delete_msg(also_delete, expire_in))
+                    if also_delete and isinstance(also_delete, discord.Message):
+                        asyncio.ensure_future(self._wait_delete_msg(also_delete, expire_in))
             else:
-                msg = await self.send_message(
-                    dest, content, tts=tts, embed=embed)
+                msg = await self.send_message(dest, content, tts=tts, embed=embed)
 
                 if msg and expire_in:
-                    asyncio.ensure_future(
-                        self._wait_delete_msg(msg, expire_in))
+                    asyncio.ensure_future(self._wait_delete_msg(msg, expire_in))
 
                 if also_delete and isinstance(also_delete, discord.Message):
-                    asyncio.ensure_future(
-                        self._wait_delete_msg(also_delete, expire_in))
+                    asyncio.ensure_future(self._wait_delete_msg(also_delete, expire_in))
 
         except discord.Forbidden:
             if not quiet:
@@ -362,6 +356,9 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 print(
                     "Warning: Cannot delete message \"%s\", message not found"
                     % message.clean_content)
+        except:
+            if not quiet:
+                raise
 
     async def safe_edit_message(self, message, new, *, send_if_fail=False, quiet=False, keep_at_bottom=False):
         if keep_at_bottom:

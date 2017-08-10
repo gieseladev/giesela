@@ -1,4 +1,3 @@
-import asyncio
 import re
 import time
 from random import choice, shuffle
@@ -6,6 +5,7 @@ from textwrap import indent
 
 from discord import Embed
 
+import asyncio
 from musicbot.entry import GieselaEntry, TimestampEntry, YoutubeEntry
 from musicbot.entry_updater import fix_generator
 from musicbot.exceptions import ExtractionError, WrongEntryTypeError
@@ -463,34 +463,34 @@ class PlaylistCommands:
         user_savename = savename
 
         interface_string = "\n".join([
-            "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)",
+            "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** | ***REMOVED******REMOVED***)",
             "",
             "***REMOVED******REMOVED***",  # this is where all the entries go
             "",
-            "**You can use the following commands:**",
-            "`add <query>`: Add a video to the playlist (this command works like the normal `***REMOVED******REMOVED***play` command)",
-            "`remove <index> [index 2] [index 3] [index 4]`: Remove a song from the playlist by it's index",
+            "**Commands:**",
+            "`add <query>`: Add an entry (works like the normal `***REMOVED******REMOVED***play` command)",
+            "`remove <index> [index 2] [index 3]`: Remove an entry by its index",
             "`edit <index>`: edit an entry",
-            "`rename <new name>`: rename the current playlist",
+            "`rename <new name>`: rename the playlist",
             "`search <query>`: search for an entry",
-            "`extras`: see the special functions",
+            "`extras`: use extra commands",
             "",
             "`p`: previous page",
             "`n`: next page",
-            "`save`: save and close the builder",
-            "`exit`: leave the builder without saving"
+            "`save`: save and close",
+            "`exit`: close without saving"
         ])
 
         extras_string = "\n".join([
-            "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** with a total length of ***REMOVED******REMOVED***)",
+            "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** | ***REMOVED******REMOVED***)",
             "",
             "**Extra functions:**",
             "`removeduplicates`: remove all duplicates from the playlist",
             "`description <text>`: describe this playlist",
-            "`cover [url]`: set the cover for this playlist (you may upload an image via Discord)",
-            "`rebuild`: clean the playlist by removing broken videos",
+            "`cover [url]`: set a cover",
+            "`rebuild`: rebuild each entry",
             "",
-            "`abort`: return to main screen"
+            "`abort`"
         ])
 
         playlist = self.playlists.get_playlist(_savename, player.playlist)
@@ -536,7 +536,7 @@ class PlaylistCommands:
                             items_per_page)) if len(entries) > 0 else 0
 
             for i in range(start, end):
-                entries_text += "`***REMOVED***:0>2***REMOVED***.` ***REMOVED******REMOVED*** ***REMOVED******REMOVED***\n".format(i + 1, entries[i].title, self.config.entry_type_emojis[entries[i].__class__.__name__])
+                entries_text += "`***REMOVED***:0>2***REMOVED***.` ***REMOVED******REMOVED*** ***REMOVED******REMOVED***\n".format(i + 1, nice_cut(entries[i].title, 45), self.config.entry_type_emojis.get(entries[i].__class__.__name__, ""))
 
             entries_text += "\nPage ***REMOVED******REMOVED*** of ***REMOVED******REMOVED***".format(entries_page + 1,
                                                      iterations + 1)
@@ -556,7 +556,8 @@ class PlaylistCommands:
             else:
                 interface_message = await self.safe_send_message(
                     channel,
-                    msg_content
+                    msg_content,
+                    split_message=False
                 )
             response_message = await self.wait_for_message(
                 author=author, channel=channel, check=check)
