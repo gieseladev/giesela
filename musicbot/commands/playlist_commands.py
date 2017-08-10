@@ -536,7 +536,7 @@ class PlaylistCommands:
                             items_per_page)) if len(entries) > 0 else 0
 
             for i in range(start, end):
-                entries_text += "`{:0>2}.` {} {}\n".format(i + 1, nice_cut(entries[i].title, 45), self.config.entry_type_emojis.get(entries[i].__class__.__name__, ""))
+                entries_text += "`{:0>2}.` {} {}\n".format(i + 1, nice_cut(entries[i].title, 50), self.config.entry_type_emojis.get(entries[i].__class__.__name__, ""))
 
             entries_text += "\nPage {} of {}".format(entries_page + 1,
                                                      iterations + 1)
