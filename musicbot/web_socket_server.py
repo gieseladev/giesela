@@ -183,6 +183,14 @@ class GieselaWebSocket(WebSocket):
 
                 success = player.playlist.move(from_index, to_index) != False
 
+            elif command == "shuffle":
+                player.playlist.shuffle()
+                success = True
+
+            elif command == "remove":
+                remove_index = command_data.get("index")
+                success = player.playlist.remove(remove_index)
+
             answer["success"] = success
 
         self.sendMessage(json.dumps(answer))
