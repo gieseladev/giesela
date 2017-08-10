@@ -1,4 +1,3 @@
-import asyncio
 import datetime
 import json
 import random
@@ -10,6 +9,7 @@ from random import shuffle
 
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
+import asyncio
 from musicbot.discogs import get_entry as get_discogs_track
 from musicbot.entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry,
                             SpotifyEntry, StreamEntry, TimestampEntry,
@@ -66,6 +66,17 @@ class Playlist(EventEmitter):
         self.entries.rotate(to_index)
 
         return move_entry
+
+    def remove(self, position):
+
+        if not 0 <= position < len(self.entries):
+            return False
+
+        self.entries.rotate(-position)
+        entry = self.entries.popleft()
+        self.entries.rotate(position)
+
+        return True
 
     def replay(self):
         if self.history:
