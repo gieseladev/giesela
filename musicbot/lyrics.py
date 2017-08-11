@@ -145,7 +145,8 @@ def _extract_lyrics_azlyrics(url):
     lyrics = center.find("div", ***REMOVED***"class": None***REMOVED***).text
 
     lyrics = re.sub(r"<br>", " ", lyrics)
-    lyrics = re.sub(r"<i>\W*(\w+).+(\d+).*<\/i>", "\1 \2", lyrics)
+    lyrics = re.sub(r"<i?>\W*", "[", lyrics)
+    lyrics = re.sub(r"\W*<\/i>", "]", lyrics)
     lyrics = re.sub(r"(?=)(\&quot\;)", "\"", lyrics)
     lyrics = re.sub(r"<\/div>", "", lyrics)
 
