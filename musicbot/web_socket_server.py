@@ -191,6 +191,20 @@ class GieselaWebSocket(WebSocket):
                 remove_index = command_data.get("index")
                 success = player.playlist.remove(remove_index)
 
+            elif command == "load_playlist":
+                playlist_id = command_data.get("id")
+
+                if playlist_id:
+                    playlist = GieselaServer.bot.playlists.get_playlist(playlist_id, player.playlist)
+
+                    if playlist:
+                        player.playlist.add_entries(playlist["entries"])
+                        success = True
+                    else:
+                        success = False
+                else:
+                    success = False
+
             answer["success"] = success
 
         self.sendMessage(json.dumps(answer))
