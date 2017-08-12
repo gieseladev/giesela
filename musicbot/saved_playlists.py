@@ -26,7 +26,7 @@ class Playlists:
             json.dump(self.playlists, f, indent=4)
 
     def get_all_web_playlists(self, queue):
-        return [self.get_web_playlist(name, queue) for name, data in self.playlists.items() if data.get("entries") and data.get("cover")]
+        return [self.get_web_playlist(name, queue) for name, data in self.playlists.items() if data.get("cover_url")]
 
     def get_web_playlist(self, playlist_name, queue):
         data = self.get_playlist(playlist_name, queue)
