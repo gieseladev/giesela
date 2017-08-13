@@ -65,6 +65,8 @@ class Playlist(EventEmitter):
         self.entries.appendleft(move_entry)
         self.entries.rotate(to_index)
 
+        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+
         return move_entry
 
     def remove(self, position):
@@ -75,6 +77,8 @@ class Playlist(EventEmitter):
         self.entries.rotate(-position)
         entry = self.entries.popleft()
         self.entries.rotate(position)
+
+        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
         return True
 
@@ -367,6 +371,7 @@ class Playlist(EventEmitter):
         self.entries.rotate(-1 * rotDist)
         self.entries.appendleft(entry)
         self.emit("entry-added", playlist=self, entry=entry)
+
         entry.get_ready_future()
 
         GieselaServer.send_player_information_update(self.player.voice_client.server.id)
