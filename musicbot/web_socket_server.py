@@ -207,8 +207,8 @@ class GieselaWebSocket(WebSocket):
 
                 playlist = GieselaServer.bot.playlists.get_playlist(playlist_id, player.playlist)
 
-                if 0 < playlist_index < len(playlist["entries"]):
-                    if playlist:
+                if playlist:
+                    if 0 < playlist_index < len(playlist["entries"]):
                         player.playlist._add_entry(playlist["entries"][playlist_index])
                     else:
                         success = False
@@ -223,7 +223,7 @@ class GieselaWebSocket(WebSocket):
                     playlist = GieselaServer.bot.playlists.get_playlist(playlist_id, player.playlist)
 
                     if playlist:
-                        if load_mode == replace:
+                        if load_mode == "replace":
                             player.playlist.clear()
 
                         player.playlist.add_entries(playlist["entries"])
