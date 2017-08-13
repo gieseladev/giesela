@@ -193,7 +193,7 @@ class GieselaWebSocket(WebSocket):
 
             elif command == "promote":
                 promote_index = command_data.get("index")
-                player.playlist.promote_position(promote_index + 1)
+                asyncio.run_coroutine_threadsafe(asyncio.coroutine(player.playlist.promote_position)(promote_index + 1), GieselaServer.bot.loop)
                 success = True
 
             elif command == "replay":
