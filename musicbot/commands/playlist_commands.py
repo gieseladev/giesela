@@ -1194,18 +1194,15 @@ class PlaylistCommands:
 
         if not playlistname:
             if "playlist" in player.current_entry.meta:
-                self.playlists.edit_playlist(
-                    playlistname, player.playlist, remove_entries=[player.current_entry, ])
-                return Response("Removed *****REMOVED******REMOVED***** from playlist `***REMOVED******REMOVED***`".format(player.current_entry.title, playlistname.title()))
+                playlist_id = player.current_entry.meta["playlist"]["id"]
+                self.playlists.edit_playlist(playlist_id, player.playlist, remove_entries=[player.current_entry, ])
+                return Response("Removed *****REMOVED******REMOVED***** from playlist `***REMOVED******REMOVED***`".format(player.current_entry.title, player.current_entry.meta["playlist"]["name"]))
             else:
                 return Response("Please specify the playlist's name!")
 
         playlistname = playlistname.lower()
 
         remove_entry = player.current_entry
-        if isinstance(remove_entry, TimestampEntry):
-            current_timestamp = remove_entry.current_sub_entry["name"]
-            remove_entry = await player.playlist.get_entry_from_query(current_timestamp, channel=channel, author=author)
 
         if playlistname not in self.playlists.playlists.keys():
             return Response("There's no playlist `***REMOVED******REMOVED***`.".format(playlistname.title()))
@@ -1239,9 +1236,7 @@ class PlaylistCommands:
 
         entry = player.current_entry
 
-        playlistname = (
-            "_".join(leftover_args) or entry.meta.get("playlist", ***REMOVED******REMOVED***).get("name", None) or ""
-        ).lower().strip()
+        playlistname = "_".join(leftover_args) or entry.meta.get("playlist", ***REMOVED******REMOVED***).get("id", None) or ""
 
         if playlistname not in self.playlists.playlists.keys():
             playlistname = None

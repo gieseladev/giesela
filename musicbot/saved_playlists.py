@@ -106,6 +106,7 @@ class Playlists:
             entry.meta["playlist"] = ***REMOVED***
                 "cover": cover_url,
                 "name": name,
+                "id": playlist_id,
                 "index": index,
                 "timestamp": added_timestamp
             ***REMOVED***
