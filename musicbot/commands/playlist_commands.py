@@ -94,9 +94,7 @@ class PlaylistCommands:
                 return Response(
                     "Can't save the queue, there are no entries in the queue!")
 
-            if self.playlists.set_playlist(
-                [player.current_entry] + list(player.playlist.entries),
-                    savename, author.id):
+            if self.playlists.set_playlist(savename, [player.current_entry] + list(player.playlist.entries), savename.title(), author.id):
                 return Response("Saved the current queue...")
 
             return Response(
@@ -241,8 +239,7 @@ class PlaylistCommands:
                     player.playlist,
                     new_entries=clone_entries)
             else:
-                self.playlists.set_playlist(
-                    clone_entries, additional_args[0].lower(), author.id)
+                self.playlists.set_playlist(additional_args[0].lower(), clone_entries, additional_args[0].title(), author.id)
 
             return Response(
                 "**{}** {}has been cloned to **{}**".format(
@@ -390,7 +387,7 @@ class PlaylistCommands:
 
         if _savename not in self.playlists.playlists.keys():
             new_playlist = True
-            self.playlists.set_playlist([], _savename, author.id)
+            self.playlists.set_playlist(_savename, [], _savename.title(), author.id)
 
         def check(m):
             return (m.content.split()[0].lower() in ["add", "remove", "rename", "exit", "p", "n", "save", "extras", "search", "edit"])
@@ -496,7 +493,7 @@ class PlaylistCommands:
         playlist = self.playlists.get_playlist(_savename, player.playlist)
         interface_message = None
 
-        if playlist["broken_entries"]:
+        if playlist.get("broken_entries"):
             broken_entries = playlist["broken_entries"]
             if len(broken_entries) > 1:
                 m = "There are {entries_left} broken/outdated entries in this playlist. I'm going to fix them, please stand by."
@@ -1143,7 +1140,7 @@ class PlaylistCommands:
                 return Response(
                     "Your name is too short. Please choose one with at least three letters."
                 )
-            self.playlists.set_playlist([add_entry], playlistname, author.id)
+            self.playlists.set_playlist(playlistname, [add_entry], playlistname, author.id)
             player._current_entry.meta["playlist"] = {
                 "name": playlistname
             }

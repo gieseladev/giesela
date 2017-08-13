@@ -424,13 +424,15 @@ class Playlist(EventEmitter):
 
         try:
             return await entry.get_ready_future()
-        except:
+        except ExtractionError:
             if "playlist" in entry.meta:
                 playlist_name = entry.meta["playlist"]["name"]
                 asyncio.ensure_future(self.bot.playlists.mark_entry_broken(self, playlist_name, entry))
                 print("[PLAYER] {}'s {} is broken!".format(playlist_name, entry.title))
+        except:
+            pass
 
-            return await self.get_next_entry(predownload_next)
+        return await self.get_next_entry(predownload_next)
 
     def peek(self):
         """
