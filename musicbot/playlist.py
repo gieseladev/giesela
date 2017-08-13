@@ -81,8 +81,8 @@ class Playlist(EventEmitter):
         entry = self.entries.popleft()
         self.entries.rotate(position)
 
-        if self.peek() is move_entry:
-            move_entry.get_ready_future()
+        if self.peek() is entry:
+            entry.get_ready_future()
 
         GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
