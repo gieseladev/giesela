@@ -89,7 +89,7 @@ class GieselaWebSocket(WebSocket):
             raise
 
     def _call_function_main_thread(func, *args, **kwargs):
-        return asyncio.run_coroutine_threadsafe(asyncio.coroutine(func)(*args, **kwargs), GieselaServer.bot.loop)
+        return asyncio.run_coroutine_threadsafe(asyncio.coroutine(func)(*args, **kwargs), GieselaServer.bot.loop).result()
 
     def handleAuthenticatedMessage(self, data):
         answer = {
@@ -155,7 +155,8 @@ class GieselaWebSocket(WebSocket):
                     success = True
 
             elif command == "revert":
-                success = self._call_function_main_thread(player.playlist.replay)
+                self._call_function_main_thread(player.playlist.replay)
+                success = True
 
             elif command == "seek":
                 target_seconds = command_data.get("value")
