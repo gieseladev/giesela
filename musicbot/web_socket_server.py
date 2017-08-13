@@ -209,7 +209,7 @@ class GieselaWebSocket(WebSocket):
 
                 if 0 < playlist_index < len(playlist["entries"]):
                     if playlist:
-                        player.playlist.add_entry(playlist["entries"][playlist_index])
+                        player.playlist._add_entry(playlist["entries"][playlist_index])
                     else:
                         success = False
                 else:
