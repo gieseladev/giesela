@@ -89,7 +89,7 @@ class GieselaWebSocket(WebSocket):
             raise
 
     def _call_function_main_thread(self, func, *args, **kwargs):
-        return asyncio.run_coroutine_threadsafe(asyncio.coroutine(func)(*args, **kwargs), GieselaServer.bot.loop).result()
+        return asyncio.run_coroutine_threadsafe(asyncio.coroutine(func)(*args, **kwargs), GieselaServer.bot.loop)
 
     def handleAuthenticatedMessage(self, data):
         answer = {
