@@ -106,6 +106,7 @@ class Playlists:
             entry.meta["playlist"] = {
                 "cover": cover_url,
                 "name": name,
+                "id": playlist_id,
                 "index": index,
                 "timestamp": added_timestamp
             }
