@@ -220,7 +220,7 @@ class GieselaWebSocket(WebSocket):
                 if playlist:
                     if 0 < playlist_index < len(playlist["entries"]):
                         self._call_function_main_thread(player.playlist._add_entry, playlist["entries"][playlist_index])
-                        self.log("loaded index", playlist_index, "from playlist" playlist_id)
+                        self.log("loaded index", playlist_index, "from playlist", playlist_id)
                         success = True
                     else:
                         success = False
