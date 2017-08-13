@@ -191,13 +191,41 @@ class GieselaWebSocket(WebSocket):
                 remove_index = command_data.get("index")
                 success = player.playlist.remove(remove_index)
 
+            elif command == "promote":
+                promote_index = command_data.get("index")
+                player.playlist.promote_position(promote_index + 1)
+                success = True
+
+            elif command == "replay":
+                replay_index = command_data.get("index")
+                player.playlist.replay(replay_index)
+                success = True
+
+            elif command == "playlist_play":
+                playlist_id = command_data.get("playlist_id")
+                playlist_index = command_data.get("index")
+
+                playlist = GieselaServer.bot.playlists.get_playlist(playlist_id, player.playlist)
+
+                if 0 < playlist_index < len(playlist["entries"]):
+                    if playlist:
+                        player.playlist.add_entry(playlist["entries"][playlist_index])
+                    else:
+                        success = False
+                else:
+                    success = False
+
             elif command == "load_playlist":
                 playlist_id = command_data.get("id")
+                load_mode = command_data.get("mode")
 
                 if playlist_id:
                     playlist = GieselaServer.bot.playlists.get_playlist(playlist_id, player.playlist)
 
                     if playlist:
+                        if load_mode == replace:
+                            player.playlist.clear()
+
                         player.playlist.add_entries(playlist["entries"])
                         success = True
                     else:
