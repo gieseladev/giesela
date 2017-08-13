@@ -1,1073 +1,1091 @@
 [
-	{
-		"version": 100,
-		"type": "TimestampEntry",
-		"video_id": "AoHSLwOmNS8",
-		"url": "https://www.youtube.com/watch?v=AoHSLwOmNS8",
-		"title": "Game of Thrones - Original Soundtrack - Season 1 - Full Album",
-		"duration": 3973,
-		"thumbnail": "https://i.ytimg.com/vi/AoHSLwOmNS8/hqdefault.jpg",
-		"description": "Game Of Thrones - Original Soundtrack - Season 1 - Full Album\n\n0:00:00 - 01. Main Title\n0:01:45 - 02. North of the Wall\n0:05:34 - 03. Goodbye Brother\n0:08:42 - 04. The Kingsroad\n0:10:47 - 05. The King's Arrival\n0:14:22 - 06. Love In the Eyes\n0:18:22 - 07. A Raven from King's Landing\n0:19:39 - 08. The Wall\n0:21:39 - 09. Things I Do for Love\n0:23:31 - 10. A Golden Crown\n0:25:10 - 11. Winter is Coming\n0:27:51 - 12. A Bird Without Feathers\n0:29:53 - 13. Await the King's Justice\n0:31:54 - 14. You'll Be Queen One Day\n0:33:30 - 15. The Assassin's Dagger\n0:34:49 - 16. To Vaes Dothrak\n0:36:18 - 17. Jon's Honor\n0:38:54 - 18. Black of Hair\n0:40:35 - 19. You Win or You Die\n0:42:31 - 20. Small Pack of Wolves\n0:44:29 - 21. Game of Thrones\n0:45:48 - 22. Kill Them All\n0:48:23 - 23. The Pointy End\n0:51:41 - 24. Victory Does Not Make Us Conquerors\n0:53:17 - 25. When the Sun Rises In the West\n0:55:57 - 26. King of the North\n0:57:26 - 27. The Night's Watch\n0:59:10 - 28. Fire and Blood\n1:03:41 - 29. Finale",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"name": "got",
-					"index": 0
-				}
-			}
-		},
-		"sub_queue": [
-			{
-				"name": "01. Main Title",
-				"duration": 105,
-				"start": 0,
-				"index": 0,
-				"end": 105
-			},
-			{
-				"name": "02. North of the Wall",
-				"duration": 229,
-				"start": 105,
-				"index": 1,
-				"end": 334
-			},
-			{
-				"name": "03. Goodbye Brother",
-				"duration": 188,
-				"start": 334,
-				"index": 2,
-				"end": 522
-			},
-			{
-				"name": "04. The Kingsroad",
-				"duration": 125,
-				"start": 522,
-				"index": 3,
-				"end": 647
-			},
-			{
-				"name": "05. The King's Arrival",
-				"duration": 215,
-				"start": 647,
-				"index": 4,
-				"end": 862
-			},
-			{
-				"name": "06. Love In the Eyes",
-				"duration": 240,
-				"start": 862,
-				"index": 5,
-				"end": 1102
-			},
-			{
-				"name": "07. A Raven from King's Landing",
-				"duration": 77,
-				"start": 1102,
-				"index": 6,
-				"end": 1179
-			},
-			{
-				"name": "08. The Wall",
-				"duration": 120,
-				"start": 1179,
-				"index": 7,
-				"end": 1299
-			},
-			{
-				"name": "09. Things I Do for Love",
-				"duration": 112,
-				"start": 1299,
-				"index": 8,
-				"end": 1411
-			},
-			{
-				"name": "10. A Golden Crown",
-				"duration": 99,
-				"start": 1411,
-				"index": 9,
-				"end": 1510
-			},
-			{
-				"name": "11. Winter is Coming",
-				"duration": 161,
-				"start": 1510,
-				"index": 10,
-				"end": 1671
-			},
-			{
-				"name": "12. A Bird Without Feathers",
-				"duration": 122,
-				"start": 1671,
-				"index": 11,
-				"end": 1793
-			},
-			{
-				"name": "13. Await the King's Justice",
-				"duration": 121,
-				"start": 1793,
-				"index": 12,
-				"end": 1914
-			},
-			{
-				"name": "14. You'll Be Queen One Day",
-				"duration": 96,
-				"start": 1914,
-				"index": 13,
-				"end": 2010
-			},
-			{
-				"name": "15. The Assassin's Dagger",
-				"duration": 79,
-				"start": 2010,
-				"index": 14,
-				"end": 2089
-			},
-			{
-				"name": "16. To Vaes Dothrak",
-				"duration": 89,
-				"start": 2089,
-				"index": 15,
-				"end": 2178
-			},
-			{
-				"name": "17. Jon's Honor",
-				"duration": 156,
-				"start": 2178,
-				"index": 16,
-				"end": 2334
-			},
-			{
-				"name": "18. Black of Hair",
-				"duration": 101,
-				"start": 2334,
-				"index": 17,
-				"end": 2435
-			},
-			{
-				"name": "19. You Win or You Die",
-				"duration": 116,
-				"start": 2435,
-				"index": 18,
-				"end": 2551
-			},
-			{
-				"name": "20. Small Pack of Wolves",
-				"duration": 118,
-				"start": 2551,
-				"index": 19,
-				"end": 2669
-			},
-			{
-				"name": "21. Game of Thrones",
-				"duration": 79,
-				"start": 2669,
-				"index": 20,
-				"end": 2748
-			},
-			{
-				"name": "22. Kill Them All",
-				"duration": 155,
-				"start": 2748,
-				"index": 21,
-				"end": 2903
-			},
-			{
-				"name": "23. The Pointy End",
-				"duration": 198,
-				"start": 2903,
-				"index": 22,
-				"end": 3101
-			},
-			{
-				"name": "24. Victory Does Not Make Us Conquerors",
-				"duration": 96,
-				"start": 3101,
-				"index": 23,
-				"end": 3197
-			},
-			{
-				"name": "25. When the Sun Rises In the West",
-				"duration": 160,
-				"start": 3197,
-				"index": 24,
-				"end": 3357
-			},
-			{
-				"name": "26. King of the North",
-				"duration": 89,
-				"start": 3357,
-				"index": 25,
-				"end": 3446
-			},
-			{
-				"name": "27. The Night's Watch",
-				"duration": 104,
-				"start": 3446,
-				"index": 26,
-				"end": 3550
-			},
-			{
-				"name": "28. Fire and Blood",
-				"duration": 271,
-				"start": 3550,
-				"index": 27,
-				"end": 3821
-			},
-			{
-				"name": "29. Finale",
-				"duration": 152,
-				"start": 3821,
-				"index": 28,
-				"end": 3973
-			}
-		]
-	},
-	{
-		"version": 100,
-		"type": "TimestampEntry",
-		"video_id": "1jwV1BWMchk",
-		"url": "https://www.youtube.com/watch?v=1jwV1BWMchk",
-		"title": "Game Of Throne Soundtrack , Season 2 : Full Soundtrack",
-		"duration": 3423,
-		"thumbnail": "https://i.ytimg.com/vi/1jwV1BWMchk/hqdefault.jpg",
-		"description": "Musique : Ramin Djawadi\n\n------------------\n00:00 : Main Title\n01:47 : The Throne Is Mine\n05:04 : What Is Dead May Never Die\n07:11 : Warrior Of Light\n10:16 : Valar Morghulis\n13:16 : Winterfell\n16:00 : Qarth\n18:13 : Wildfire\n21:53 : I Am Hers , She Is Mine\n24:11 : Pyat Pree\n26:25 : Don't Die With A Clean Sword\n29:48 : We Are The Watchers On The Wall\n32:27 : Pay The Iron Price\n35:01 : One More Drink Before The War\n37:07 : House Of The Undying\n42:11 : Stand And Fight\n44:17 : The Old Gods And The New\n46:57 : Mother Of Dragons\n49:39 : I Will Keep You Safe\n51:51 : The Rain Of Castomere\n54:15 : Three Blasts",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"name": "got",
-					"index": 1
-				}
-			}
-		},
-		"sub_queue": [
-			{
-				"name": "Main Title",
-				"duration": 107,
-				"start": 0,
-				"index": 0,
-				"end": 107
-			},
-			{
-				"name": "The Throne Is Mine",
-				"duration": 197,
-				"start": 107,
-				"index": 1,
-				"end": 304
-			},
-			{
-				"name": "What Is Dead May Never Die",
-				"duration": 127,
-				"start": 304,
-				"index": 2,
-				"end": 431
-			},
-			{
-				"name": "Warrior Of Light",
-				"duration": 185,
-				"start": 431,
-				"index": 3,
-				"end": 616
-			},
-			{
-				"name": "Valar Morghulis",
-				"duration": 180,
-				"start": 616,
-				"index": 4,
-				"end": 796
-			},
-			{
-				"name": "Winterfell",
-				"duration": 164,
-				"start": 796,
-				"index": 5,
-				"end": 960
-			},
-			{
-				"name": "Qarth",
-				"duration": 133,
-				"start": 960,
-				"index": 6,
-				"end": 1093
-			},
-			{
-				"name": "Wildfire",
-				"duration": 220,
-				"start": 1093,
-				"index": 7,
-				"end": 1313
-			},
-			{
-				"name": "I Am Hers , She Is Mine",
-				"duration": 138,
-				"start": 1313,
-				"index": 8,
-				"end": 1451
-			},
-			{
-				"name": "Pyat Pree",
-				"duration": 134,
-				"start": 1451,
-				"index": 9,
-				"end": 1585
-			},
-			{
-				"name": "Don't Die With A Clean Sword",
-				"duration": 203,
-				"start": 1585,
-				"index": 10,
-				"end": 1788
-			},
-			{
-				"name": "We Are The Watchers On The Wall",
-				"duration": 159,
-				"start": 1788,
-				"index": 11,
-				"end": 1947
-			},
-			{
-				"name": "Pay The Iron Price",
-				"duration": 154,
-				"start": 1947,
-				"index": 12,
-				"end": 2101
-			},
-			{
-				"name": "One More Drink Before The War",
-				"duration": 126,
-				"start": 2101,
-				"index": 13,
-				"end": 2227
-			},
-			{
-				"name": "House Of The Undying",
-				"duration": 304,
-				"start": 2227,
-				"index": 14,
-				"end": 2531
-			},
-			{
-				"name": "Stand And Fight",
-				"duration": 126,
-				"start": 2531,
-				"index": 15,
-				"end": 2657
-			},
-			{
-				"name": "The Old Gods And The New",
-				"duration": 160,
-				"start": 2657,
-				"index": 16,
-				"end": 2817
-			},
-			{
-				"name": "Mother Of Dragons",
-				"duration": 162,
-				"start": 2817,
-				"index": 17,
-				"end": 2979
-			},
-			{
-				"name": "I Will Keep You Safe",
-				"duration": 132,
-				"start": 2979,
-				"index": 18,
-				"end": 3111
-			},
-			{
-				"name": "The Rain Of Castomere",
-				"duration": 144,
-				"start": 3111,
-				"index": 19,
-				"end": 3255
-			},
-			{
-				"name": "Three Blasts",
-				"duration": 168,
-				"start": 3255,
-				"index": 20,
-				"end": 3423
-			}
-		]
-	},
-	{
-		"version": 100,
-		"type": "TimestampEntry",
-		"video_id": "orNCUHc5lGo",
-		"url": "https://www.youtube.com/watch?v=orNCUHc5lGo",
-		"title": "Game Of Thrones - Season 3 Full Complete Soundtrack HD",
-		"duration": 3164,
-		"thumbnail": "https://i.ytimg.com/vi/orNCUHc5lGo/maxresdefault.jpg",
-		"description": "Game Of Thrones Season 3 Full Original Complete Soundtrack HD  1080p\nJuego De Tronos \u0418\u0433\u0440\u0430 \u041f\u0440\u0435\u0441\u0442\u043e\u043b\u043e\u0432 Le Tr\u00f4ne De Fer Il Trono Di Spade \u6743\u529b\u7684\u6e38\u620f\nSoundtrack list:\n0:00 - Main Title\n1:43 - A Lannister Always Pays His Debts\n4:31 - Dracarys\n7:24 - I Paid The Iron Price\n10:38 - Chaos Is A Ladder\n13:34 - Dark Wings, Dark Words\n16:21 - You Know Nothing\n19:39 - Wall Of Ice\n22:56 - Kingslayer\n24:57 - I Have To Go North\n26:19 - White Walkers\n29:37 - It's Always Summer Under The Sea (with Lyrics!)\n30:54 - Reek\n33:33 - The Bear And The Maiden Fair (with Lyrics!)\n36:29 - The Night Is Dark\n39:23 - The Lannisters Send Their Regards\n45:06 - Heir To Winterfell\n47:19 - Mhysa\n51:12 - For The Realm",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"name": "got",
-					"index": 2
-				}
-			}
-		},
-		"sub_queue": [
-			{
-				"name": "Main Title",
-				"duration": 103,
-				"start": 0,
-				"index": 0,
-				"end": 103
-			},
-			{
-				"name": "A Lannister Always Pays His Debts",
-				"duration": 168,
-				"start": 103,
-				"index": 1,
-				"end": 271
-			},
-			{
-				"name": "Dracarys",
-				"duration": 173,
-				"start": 271,
-				"index": 2,
-				"end": 444
-			},
-			{
-				"name": "I Paid The Iron Price",
-				"duration": 194,
-				"start": 444,
-				"index": 3,
-				"end": 638
-			},
-			{
-				"name": "Chaos Is A Ladder",
-				"duration": 176,
-				"start": 638,
-				"index": 4,
-				"end": 814
-			},
-			{
-				"name": "Dark Wings, Dark Words",
-				"duration": 167,
-				"start": 814,
-				"index": 5,
-				"end": 981
-			},
-			{
-				"name": "You Know Nothing",
-				"duration": 198,
-				"start": 981,
-				"index": 6,
-				"end": 1179
-			},
-			{
-				"name": "Wall Of Ice",
-				"duration": 197,
-				"start": 1179,
-				"index": 7,
-				"end": 1376
-			},
-			{
-				"name": "Kingslayer",
-				"duration": 121,
-				"start": 1376,
-				"index": 8,
-				"end": 1497
-			},
-			{
-				"name": "I Have To Go North",
-				"duration": 82,
-				"start": 1497,
-				"index": 9,
-				"end": 1579
-			},
-			{
-				"name": "White Walkers",
-				"duration": 198,
-				"start": 1579,
-				"index": 10,
-				"end": 1777
-			},
-			{
-				"name": "It's Always Summer Under The Sea (with Lyrics",
-				"duration": 77,
-				"start": 1777,
-				"index": 11,
-				"end": 1854
-			},
-			{
-				"name": "Reek",
-				"duration": 159,
-				"start": 1854,
-				"index": 12,
-				"end": 2013
-			},
-			{
-				"name": "The Bear And The Maiden Fair (with Lyrics",
-				"duration": 176,
-				"start": 2013,
-				"index": 13,
-				"end": 2189
-			},
-			{
-				"name": "The Night Is Dark",
-				"duration": 174,
-				"start": 2189,
-				"index": 14,
-				"end": 2363
-			},
-			{
-				"name": "The Lannisters Send Their Regards",
-				"duration": 343,
-				"start": 2363,
-				"index": 15,
-				"end": 2706
-			},
-			{
-				"name": "Heir To Winterfell",
-				"duration": 133,
-				"start": 2706,
-				"index": 16,
-				"end": 2839
-			},
-			{
-				"name": "Mhysa",
-				"duration": 233,
-				"start": 2839,
-				"index": 17,
-				"end": 3072
-			},
-			{
-				"name": "For The Realm",
-				"duration": 92,
-				"start": 3072,
-				"index": 18,
-				"end": 3164
-			}
-		]
-	},
-	{
-		"version": 100,
-		"type": "TimestampEntry",
-		"video_id": "VaCRpFmJUc0",
-		"url": "https://www.youtube.com/watch?v=VaCRpFmJUc0",
-		"title": "Game Of Thrones - Season 4 Full Complete Soundtrack HD",
-		"duration": 3619,
-		"thumbnail": "https://i.ytimg.com/vi/VaCRpFmJUc0/maxresdefault.jpg",
-		"description": "Game Of Thrones Season 4 Full Original Complete Soundtrack HD  1080p\nJuego De Tronos \u0418\u0433\u0440\u0430 \u041f\u0440\u0435\u0441\u0442\u043e\u043b\u043e\u0432 Le Tr\u00f4ne De Fer Il Trono Di Spade \u6743\u529b\u7684\u6e38\u620f\nSoundtrack list:\n0:00 - Main Title\n1:42 - The Rains Of Castamere\n4:23 - Breaker Of Chains\n8:26 - Watchers On The Wall\n10:37 - I'm Sorry For Today\n12:45 - Thenns\n14:26 - Mereen\n17:19 - First Of His Name\n21:10 - The Biggest Fire The North Has Ever Seen\n23:05 - Three Eyed Raven\n27:02 - Two Swords\n29:02 - Oathkeeper\n33:21 - You Are No Son Of Mine\n37:49 - The North Remembers\n40:21 - Let's Kill Some Crows\n43:58 - Craster's Keep\n46:02 - The Real North\n48:03 - Forgive Me\n50:33 - He Is Lost\n54:10 - I Only See What Matters\n55:33 - Take Charge Of Your Life\n57:37 - The Children",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"name": "got",
-					"index": 3
-				}
-			}
-		},
-		"sub_queue": [
-			{
-				"name": "Main Title",
-				"duration": 102,
-				"start": 0,
-				"index": 0,
-				"end": 102
-			},
-			{
-				"name": "The Rains Of Castamere",
-				"duration": 161,
-				"start": 102,
-				"index": 1,
-				"end": 263
-			},
-			{
-				"name": "Breaker Of Chains",
-				"duration": 243,
-				"start": 263,
-				"index": 2,
-				"end": 506
-			},
-			{
-				"name": "Watchers On The Wall",
-				"duration": 131,
-				"start": 506,
-				"index": 3,
-				"end": 637
-			},
-			{
-				"name": "I'm Sorry For Today",
-				"duration": 128,
-				"start": 637,
-				"index": 4,
-				"end": 765
-			},
-			{
-				"name": "Thenns",
-				"duration": 101,
-				"start": 765,
-				"index": 5,
-				"end": 866
-			},
-			{
-				"name": "Mereen",
-				"duration": 173,
-				"start": 866,
-				"index": 6,
-				"end": 1039
-			},
-			{
-				"name": "First Of His Name",
-				"duration": 231,
-				"start": 1039,
-				"index": 7,
-				"end": 1270
-			},
-			{
-				"name": "The Biggest Fire The North Has Ever Seen",
-				"duration": 115,
-				"start": 1270,
-				"index": 8,
-				"end": 1385
-			},
-			{
-				"name": "Three Eyed Raven",
-				"duration": 237,
-				"start": 1385,
-				"index": 9,
-				"end": 1622
-			},
-			{
-				"name": "Two Swords",
-				"duration": 120,
-				"start": 1622,
-				"index": 10,
-				"end": 1742
-			},
-			{
-				"name": "Oathkeeper",
-				"duration": 259,
-				"start": 1742,
-				"index": 11,
-				"end": 2001
-			},
-			{
-				"name": "You Are No Son Of Mine",
-				"duration": 268,
-				"start": 2001,
-				"index": 12,
-				"end": 2269
-			},
-			{
-				"name": "The North Remembers",
-				"duration": 152,
-				"start": 2269,
-				"index": 13,
-				"end": 2421
-			},
-			{
-				"name": "Let's Kill Some Crows",
-				"duration": 217,
-				"start": 2421,
-				"index": 14,
-				"end": 2638
-			},
-			{
-				"name": "Craster's Keep",
-				"duration": 124,
-				"start": 2638,
-				"index": 15,
-				"end": 2762
-			},
-			{
-				"name": "The Real North",
-				"duration": 121,
-				"start": 2762,
-				"index": 16,
-				"end": 2883
-			},
-			{
-				"name": "Forgive Me",
-				"duration": 150,
-				"start": 2883,
-				"index": 17,
-				"end": 3033
-			},
-			{
-				"name": "He Is Lost",
-				"duration": 217,
-				"start": 3033,
-				"index": 18,
-				"end": 3250
-			},
-			{
-				"name": "I Only See What Matters",
-				"duration": 83,
-				"start": 3250,
-				"index": 19,
-				"end": 3333
-			},
-			{
-				"name": "Take Charge Of Your Life",
-				"duration": 124,
-				"start": 3333,
-				"index": 20,
-				"end": 3457
-			},
-			{
-				"name": "The Children",
-				"duration": 162,
-				"start": 3457,
-				"index": 21,
-				"end": 3619
-			}
-		]
-	},
-	{
-		"version": 100,
-		"type": "TimestampEntry",
-		"video_id": "03DU_E_meEQ",
-		"url": "https://www.youtube.com/watch?v=03DU_E_meEQ",
-		"title": "Game of Thrones Season 5: Full Official Soundtrack",
-		"duration": 3528,
-		"thumbnail": "https://i.ytimg.com/vi/03DU_E_meEQ/maxresdefault.jpg",
-		"description": "The complete Soundtrack of the fifth season of HBO's Game of Thrones. See below for the track listing:\n\n00:00 - 01:45 - Main Titles\n01:45 - 03:18 - Blood of the Dragon\n03:18 - 08:26 - House of Black and White\n08:26 - 10:57 - Jaws of the Viper\n10:57 - 16:03 - Hardhome, Pt. 1\n16:03 - 20:34 - Hardhome, Pt. 2\n20:34 - 22:48 - Mother's Mercy\n22:48 - 24:55 - Kill the Boy\n24:55 - 28:03 - Dance of Dragons\n28:03 - 32:48 - Kneel for No Man\n32:48 - 36:11 - High Sparrow\n36:11 - 38:48 - Before the Old Gods\n38:48 - 41:42 - Atonement\n41:42 - 43:58 - I Dreamt I Was Old\n43:58 - 48:46 - The Wars to Come\n48:46 - 52:03 - Forgive Me\n52:03 - 57:20 - Son of the Harpy\n57:20 - 58:40 - Throne for the Game\n\nThis soundtrack is property of HBO and is composed by Ramin Djawadi. If you liked this music, buy it on iTunes or Amazon, like I did.",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"name": "got",
-					"index": 4
-				}
-			}
-		},
-		"sub_queue": [
-			{
-				"name": "Main Titles",
-				"duration": 105,
-				"start": 0,
-				"index": 0,
-				"end": 105
-			},
-			{
-				"name": "Blood of the Dragon",
-				"duration": 93,
-				"start": 105,
-				"index": 1,
-				"end": 198
-			},
-			{
-				"name": "House of Black and White",
-				"duration": 308,
-				"start": 198,
-				"index": 2,
-				"end": 506
-			},
-			{
-				"name": "Jaws of the Viper",
-				"duration": 151,
-				"start": 506,
-				"index": 3,
-				"end": 657
-			},
-			{
-				"name": "Hardhome, Pt. 1",
-				"duration": 306,
-				"start": 657,
-				"index": 4,
-				"end": 963
-			},
-			{
-				"name": "Hardhome, Pt. 2",
-				"duration": 271,
-				"start": 963,
-				"index": 5,
-				"end": 1234
-			},
-			{
-				"name": "Mother's Mercy",
-				"duration": 134,
-				"start": 1234,
-				"index": 6,
-				"end": 1368
-			},
-			{
-				"name": "Kill the Boy",
-				"duration": 127,
-				"start": 1368,
-				"index": 7,
-				"end": 1495
-			},
-			{
-				"name": "Dance of Dragons",
-				"duration": 188,
-				"start": 1495,
-				"index": 8,
-				"end": 1683
-			},
-			{
-				"name": "Kneel for No Man",
-				"duration": 285,
-				"start": 1683,
-				"index": 9,
-				"end": 1968
-			},
-			{
-				"name": "High Sparrow",
-				"duration": 203,
-				"start": 1968,
-				"index": 10,
-				"end": 2171
-			},
-			{
-				"name": "Before the Old Gods",
-				"duration": 157,
-				"start": 2171,
-				"index": 11,
-				"end": 2328
-			},
-			{
-				"name": "Atonement",
-				"duration": 174,
-				"start": 2328,
-				"index": 12,
-				"end": 2502
-			},
-			{
-				"name": "I Dreamt I Was Old",
-				"duration": 136,
-				"start": 2502,
-				"index": 13,
-				"end": 2638
-			},
-			{
-				"name": "The Wars to Come",
-				"duration": 288,
-				"start": 2638,
-				"index": 14,
-				"end": 2926
-			},
-			{
-				"name": "Forgive Me",
-				"duration": 197,
-				"start": 2926,
-				"index": 15,
-				"end": 3123
-			},
-			{
-				"name": "Son of the Harpy",
-				"duration": 317,
-				"start": 3123,
-				"index": 16,
-				"end": 3440
-			},
-			{
-				"name": "Throne for the Game",
-				"duration": 88,
-				"start": 3440,
-				"index": 17,
-				"end": 3528
-			}
-		]
-	},
-	{
-		"version": 100,
-		"type": "TimestampEntry",
-		"video_id": "2106qUYzqJg",
-		"url": "https://www.youtube.com/watch?v=2106qUYzqJg",
-		"title": "Clasical Music - Game Of Thrones Season 6 Full Soundtrack",
-		"duration": 5443,
-		"thumbnail": "https://i.ytimg.com/vi/2106qUYzqJg/maxresdefault.jpg",
-		"description": "",
-		"meta": {
-			"playlist": {
-				"type": "built-in/dict",
-				"value": {
-					"name": "got",
-					"index": 5
-				}
-			}
-		},
-		"sub_queue": [
-			{
-				"name": "1-   Main Titles",
-				"duration": 112,
-				"start": 0,
-				"index": 0,
-				"end": 112
-			},
-			{
-				"name": "2-   Blood of My Blood",
-				"duration": 214,
-				"start": 112,
-				"index": 1,
-				"end": 326
-			},
-			{
-				"name": "3-   Light of the Seven",
-				"duration": 590,
-				"start": 326,
-				"index": 2,
-				"end": 916
-			},
-			{
-				"name": "4-   Needle",
-				"duration": 177,
-				"start": 916,
-				"index": 3,
-				"end": 1093
-			},
-			{
-				"name": "5-   Coronation",
-				"duration": 109,
-				"start": 1093,
-				"index": 4,
-				"end": 1202
-			},
-			{
-				"name": "6-   Feed the Hounds",
-				"duration": 187,
-				"start": 1202,
-				"index": 5,
-				"end": 1389
-			},
-			{
-				"name": "7-   My Watch Has Ended",
-				"duration": 173,
-				"start": 1389,
-				"index": 6,
-				"end": 1562
-			},
-			{
-				"name": "8-   The Red Women",
-				"duration": 197,
-				"start": 1562,
-				"index": 7,
-				"end": 1759
-			},
-			{
-				"name": "9-   Hold the Door",
-				"duration": 444,
-				"start": 1759,
-				"index": 8,
-				"end": 2203
-			},
-			{
-				"name": "10- khaleesi",
-				"duration": 186,
-				"start": 2203,
-				"index": 9,
-				"end": 2389
-			},
-			{
-				"name": "11- Measter",
-				"duration": 176,
-				"start": 2389,
-				"index": 10,
-				"end": 2565
-			},
-			{
-				"name": "12- A Painless Death",
-				"duration": 198,
-				"start": 2565,
-				"index": 11,
-				"end": 2763
-			},
-			{
-				"name": "13- Reign",
-				"duration": 205,
-				"start": 2763,
-				"index": 12,
-				"end": 2968
-			},
-			{
-				"name": "14- Let's Play a Game",
-				"duration": 342,
-				"start": 2968,
-				"index": 13,
-				"end": 3310
-			},
-			{
-				"name": "15- Bastard",
-				"duration": 306,
-				"start": 3310,
-				"index": 14,
-				"end": 3616
-			},
-			{
-				"name": "16- Trust Each Other",
-				"duration": 192,
-				"start": 3616,
-				"index": 15,
-				"end": 3808
-			},
-			{
-				"name": "17- Winter Has Come",
-				"duration": 194,
-				"start": 3808,
-				"index": 16,
-				"end": 4002
-			},
-			{
-				"name": "18- Hear Me Roar",
-				"duration": 136,
-				"start": 4002,
-				"index": 17,
-				"end": 4138
-			},
-			{
-				"name": "19- The Winds of Winter",
-				"duration": 210,
-				"start": 4138,
-				"index": 18,
-				"end": 4348
-			},
-			{
-				"name": "20- Lord of the Light",
-				"duration": 252,
-				"start": 4348,
-				"index": 19,
-				"end": 4600
-			},
-			{
-				"name": "21- Service of Gods",
-				"duration": 173,
-				"start": 4600,
-				"index": 20,
-				"end": 4773
-			},
-			{
-				"name": "22- I Need You by My Side",
-				"duration": 157,
-				"start": 4773,
-				"index": 21,
-				"end": 4930
-			},
-			{
-				"name": "23- The Tower",
-				"duration": 154,
-				"start": 4930,
-				"index": 22,
-				"end": 5084
-			},
-			{
-				"name": "24- Unbowed, Unbent, Unbroken",
-				"duration": 104,
-				"start": 5084,
-				"index": 23,
-				"end": 5188
-			},
-			{
-				"name": "25- I Choose Violence",
-				"duration": 109,
-				"start": 5188,
-				"index": 24,
-				"end": 5297
-			},
-			{
-				"name": "26- Hodor",
-				"duration": 146,
-				"start": 5297,
-				"index": 25,
-				"end": 5443
-			}
-		]
-	}
+    {
+        "version": 103,
+        "type": "TimestampEntry",
+        "expected_filename": "cache/audio_cache/youtube-2106qUYzqJg-Clasical_Music_-_Game_Of_Thrones_Season_6_Full_Soundtrack.webm",
+        "video_id": "2106qUYzqJg",
+        "url": "https://www.youtube.com/watch?v=2106qUYzqJg",
+        "title": "Clasical Music - Game Of Thrones Season 6 Full Soundtrack",
+        "duration": 5443,
+        "thumbnail": "https://i.ytimg.com/vi/2106qUYzqJg/maxresdefault.jpg",
+        "description": "",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": null,
+                    "name": "got",
+                    "index": 0,
+                    "timestamp": 1502397610
+                }
+            }
+        },
+        "sub_queue": [
+            {
+                "name": "1-   Main Titles",
+                "duration": 112,
+                "start": 0,
+                "index": 0,
+                "end": 112
+            },
+            {
+                "name": "2-   Blood of My Blood",
+                "duration": 214,
+                "start": 112,
+                "index": 1,
+                "end": 326
+            },
+            {
+                "name": "3-   Light of the Seven",
+                "duration": 590,
+                "start": 326,
+                "index": 2,
+                "end": 916
+            },
+            {
+                "name": "4-   Needle",
+                "duration": 177,
+                "start": 916,
+                "index": 3,
+                "end": 1093
+            },
+            {
+                "name": "5-   Coronation",
+                "duration": 109,
+                "start": 1093,
+                "index": 4,
+                "end": 1202
+            },
+            {
+                "name": "6-   Feed the Hounds",
+                "duration": 187,
+                "start": 1202,
+                "index": 5,
+                "end": 1389
+            },
+            {
+                "name": "7-   My Watch Has Ended",
+                "duration": 173,
+                "start": 1389,
+                "index": 6,
+                "end": 1562
+            },
+            {
+                "name": "8-   The Red Women",
+                "duration": 197,
+                "start": 1562,
+                "index": 7,
+                "end": 1759
+            },
+            {
+                "name": "9-   Hold the Door",
+                "duration": 444,
+                "start": 1759,
+                "index": 8,
+                "end": 2203
+            },
+            {
+                "name": "10- khaleesi",
+                "duration": 186,
+                "start": 2203,
+                "index": 9,
+                "end": 2389
+            },
+            {
+                "name": "11- Measter",
+                "duration": 176,
+                "start": 2389,
+                "index": 10,
+                "end": 2565
+            },
+            {
+                "name": "12- A Painless Death",
+                "duration": 198,
+                "start": 2565,
+                "index": 11,
+                "end": 2763
+            },
+            {
+                "name": "13- Reign",
+                "duration": 205,
+                "start": 2763,
+                "index": 12,
+                "end": 2968
+            },
+            {
+                "name": "14- Let's Play a Game",
+                "duration": 342,
+                "start": 2968,
+                "index": 13,
+                "end": 3310
+            },
+            {
+                "name": "15- Bastard",
+                "duration": 306,
+                "start": 3310,
+                "index": 14,
+                "end": 3616
+            },
+            {
+                "name": "16- Trust Each Other",
+                "duration": 192,
+                "start": 3616,
+                "index": 15,
+                "end": 3808
+            },
+            {
+                "name": "17- Winter Has Come",
+                "duration": 194,
+                "start": 3808,
+                "index": 16,
+                "end": 4002
+            },
+            {
+                "name": "18- Hear Me Roar",
+                "duration": 136,
+                "start": 4002,
+                "index": 17,
+                "end": 4138
+            },
+            {
+                "name": "19- The Winds of Winter",
+                "duration": 210,
+                "start": 4138,
+                "index": 18,
+                "end": 4348
+            },
+            {
+                "name": "20- Lord of the Light",
+                "duration": 252,
+                "start": 4348,
+                "index": 19,
+                "end": 4600
+            },
+            {
+                "name": "21- Service of Gods",
+                "duration": 173,
+                "start": 4600,
+                "index": 20,
+                "end": 4773
+            },
+            {
+                "name": "22- I Need You by My Side",
+                "duration": 157,
+                "start": 4773,
+                "index": 21,
+                "end": 4930
+            },
+            {
+                "name": "23- The Tower",
+                "duration": 154,
+                "start": 4930,
+                "index": 22,
+                "end": 5084
+            },
+            {
+                "name": "24- Unbowed, Unbent, Unbroken",
+                "duration": 104,
+                "start": 5084,
+                "index": 23,
+                "end": 5188
+            },
+            {
+                "name": "25- I Choose Violence",
+                "duration": 109,
+                "start": 5188,
+                "index": 24,
+                "end": 5297
+            },
+            {
+                "name": "26- Hodor",
+                "duration": 146,
+                "start": 5297,
+                "index": 25,
+                "end": 5443
+            }
+        ]
+    },
+    {
+        "version": 103,
+        "type": "TimestampEntry",
+        "expected_filename": "cache/audio_cache/youtube-1jwV1BWMchk-Game_Of_Throne_Soundtrack_Season_2_-_Full_Soundtrack.webm",
+        "video_id": "1jwV1BWMchk",
+        "url": "https://www.youtube.com/watch?v=1jwV1BWMchk",
+        "title": "Game Of Throne Soundtrack , Season 2 : Full Soundtrack",
+        "duration": 3423,
+        "thumbnail": "https://i.ytimg.com/vi/1jwV1BWMchk/hqdefault.jpg",
+        "description": "Musique : Ramin Djawadi\n\n------------------\n00:00 : Main Title\n01:47 : The Throne Is Mine\n05:04 : What Is Dead May Never Die\n07:11 : Warrior Of Light\n10:16 : Valar Morghulis\n13:16 : Winterfell\n16:00 : Qarth\n18:13 : Wildfire\n21:53 : I Am Hers , She Is Mine\n24:11 : Pyat Pree\n26:25 : Don't Die With A Clean Sword\n29:48 : We Are The Watchers On The Wall\n32:27 : Pay The Iron Price\n35:01 : One More Drink Before The War\n37:07 : House Of The Undying\n42:11 : Stand And Fight\n44:17 : The Old Gods And The New\n46:57 : Mother Of Dragons\n49:39 : I Will Keep You Safe\n51:51 : The Rain Of Castomere\n54:15 : Three Blasts",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": null,
+                    "name": "got",
+                    "index": 1,
+                    "timestamp": 1502397610
+                }
+            }
+        },
+        "sub_queue": [
+            {
+                "name": "Main Title",
+                "duration": 107,
+                "start": 0,
+                "index": 0,
+                "end": 107
+            },
+            {
+                "name": "The Throne Is Mine",
+                "duration": 197,
+                "start": 107,
+                "index": 1,
+                "end": 304
+            },
+            {
+                "name": "What Is Dead May Never Die",
+                "duration": 127,
+                "start": 304,
+                "index": 2,
+                "end": 431
+            },
+            {
+                "name": "Warrior Of Light",
+                "duration": 185,
+                "start": 431,
+                "index": 3,
+                "end": 616
+            },
+            {
+                "name": "Valar Morghulis",
+                "duration": 180,
+                "start": 616,
+                "index": 4,
+                "end": 796
+            },
+            {
+                "name": "Winterfell",
+                "duration": 164,
+                "start": 796,
+                "index": 5,
+                "end": 960
+            },
+            {
+                "name": "Qarth",
+                "duration": 133,
+                "start": 960,
+                "index": 6,
+                "end": 1093
+            },
+            {
+                "name": "Wildfire",
+                "duration": 220,
+                "start": 1093,
+                "index": 7,
+                "end": 1313
+            },
+            {
+                "name": "I Am Hers , She Is Mine",
+                "duration": 138,
+                "start": 1313,
+                "index": 8,
+                "end": 1451
+            },
+            {
+                "name": "Pyat Pree",
+                "duration": 134,
+                "start": 1451,
+                "index": 9,
+                "end": 1585
+            },
+            {
+                "name": "Don't Die With A Clean Sword",
+                "duration": 203,
+                "start": 1585,
+                "index": 10,
+                "end": 1788
+            },
+            {
+                "name": "We Are The Watchers On The Wall",
+                "duration": 159,
+                "start": 1788,
+                "index": 11,
+                "end": 1947
+            },
+            {
+                "name": "Pay The Iron Price",
+                "duration": 154,
+                "start": 1947,
+                "index": 12,
+                "end": 2101
+            },
+            {
+                "name": "One More Drink Before The War",
+                "duration": 126,
+                "start": 2101,
+                "index": 13,
+                "end": 2227
+            },
+            {
+                "name": "House Of The Undying",
+                "duration": 304,
+                "start": 2227,
+                "index": 14,
+                "end": 2531
+            },
+            {
+                "name": "Stand And Fight",
+                "duration": 126,
+                "start": 2531,
+                "index": 15,
+                "end": 2657
+            },
+            {
+                "name": "The Old Gods And The New",
+                "duration": 160,
+                "start": 2657,
+                "index": 16,
+                "end": 2817
+            },
+            {
+                "name": "Mother Of Dragons",
+                "duration": 162,
+                "start": 2817,
+                "index": 17,
+                "end": 2979
+            },
+            {
+                "name": "I Will Keep You Safe",
+                "duration": 132,
+                "start": 2979,
+                "index": 18,
+                "end": 3111
+            },
+            {
+                "name": "The Rain Of Castomere",
+                "duration": 144,
+                "start": 3111,
+                "index": 19,
+                "end": 3255
+            },
+            {
+                "name": "Three Blasts",
+                "duration": 168,
+                "start": 3255,
+                "index": 20,
+                "end": 3423
+            }
+        ]
+    },
+    {
+        "version": 103,
+        "type": "TimestampEntry",
+        "expected_filename": "cache/audio_cache/youtube-orNCUHc5lGo-Game_Of_Thrones_-_Season_3_Full_Complete_Soundtrack_HD.webm",
+        "video_id": "orNCUHc5lGo",
+        "url": "https://www.youtube.com/watch?v=orNCUHc5lGo",
+        "title": "Game Of Thrones - Season 3 Full Complete Soundtrack HD",
+        "duration": 3164,
+        "thumbnail": "https://i.ytimg.com/vi/orNCUHc5lGo/maxresdefault.jpg",
+        "description": "Game Of Thrones Season 3 Full Original Complete Soundtrack HD  1080p\nJuego De Tronos \u0418\u0433\u0440\u0430 \u041f\u0440\u0435\u0441\u0442\u043e\u043b\u043e\u0432 Le Tr\u00f4ne De Fer Il Trono Di Spade \u6743\u529b\u7684\u6e38\u620f\nSoundtrack list:\n0:00 - Main Title\n1:43 - A Lannister Always Pays His Debts\n4:31 - Dracarys\n7:24 - I Paid The Iron Price\n10:38 - Chaos Is A Ladder\n13:34 - Dark Wings, Dark Words\n16:21 - You Know Nothing\n19:39 - Wall Of Ice\n22:56 - Kingslayer\n24:57 - I Have To Go North\n26:19 - White Walkers\n29:37 - It's Always Summer Under The Sea (with Lyrics!)\n30:54 - Reek\n33:33 - The Bear And The Maiden Fair (with Lyrics!)\n36:29 - The Night Is Dark\n39:23 - The Lannisters Send Their Regards\n45:06 - Heir To Winterfell\n47:19 - Mhysa\n51:12 - For The Realm",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": null,
+                    "name": "got",
+                    "index": 2,
+                    "timestamp": 1502397610
+                }
+            }
+        },
+        "sub_queue": [
+            {
+                "name": "Main Title",
+                "duration": 103,
+                "start": 0,
+                "index": 0,
+                "end": 103
+            },
+            {
+                "name": "A Lannister Always Pays His Debts",
+                "duration": 168,
+                "start": 103,
+                "index": 1,
+                "end": 271
+            },
+            {
+                "name": "Dracarys",
+                "duration": 173,
+                "start": 271,
+                "index": 2,
+                "end": 444
+            },
+            {
+                "name": "I Paid The Iron Price",
+                "duration": 194,
+                "start": 444,
+                "index": 3,
+                "end": 638
+            },
+            {
+                "name": "Chaos Is A Ladder",
+                "duration": 176,
+                "start": 638,
+                "index": 4,
+                "end": 814
+            },
+            {
+                "name": "Dark Wings, Dark Words",
+                "duration": 167,
+                "start": 814,
+                "index": 5,
+                "end": 981
+            },
+            {
+                "name": "You Know Nothing",
+                "duration": 198,
+                "start": 981,
+                "index": 6,
+                "end": 1179
+            },
+            {
+                "name": "Wall Of Ice",
+                "duration": 197,
+                "start": 1179,
+                "index": 7,
+                "end": 1376
+            },
+            {
+                "name": "Kingslayer",
+                "duration": 121,
+                "start": 1376,
+                "index": 8,
+                "end": 1497
+            },
+            {
+                "name": "I Have To Go North",
+                "duration": 82,
+                "start": 1497,
+                "index": 9,
+                "end": 1579
+            },
+            {
+                "name": "White Walkers",
+                "duration": 198,
+                "start": 1579,
+                "index": 10,
+                "end": 1777
+            },
+            {
+                "name": "It's Always Summer Under The Sea (with Lyrics",
+                "duration": 77,
+                "start": 1777,
+                "index": 11,
+                "end": 1854
+            },
+            {
+                "name": "Reek",
+                "duration": 159,
+                "start": 1854,
+                "index": 12,
+                "end": 2013
+            },
+            {
+                "name": "The Bear And The Maiden Fair (with Lyrics",
+                "duration": 176,
+                "start": 2013,
+                "index": 13,
+                "end": 2189
+            },
+            {
+                "name": "The Night Is Dark",
+                "duration": 174,
+                "start": 2189,
+                "index": 14,
+                "end": 2363
+            },
+            {
+                "name": "The Lannisters Send Their Regards",
+                "duration": 343,
+                "start": 2363,
+                "index": 15,
+                "end": 2706
+            },
+            {
+                "name": "Heir To Winterfell",
+                "duration": 133,
+                "start": 2706,
+                "index": 16,
+                "end": 2839
+            },
+            {
+                "name": "Mhysa",
+                "duration": 233,
+                "start": 2839,
+                "index": 17,
+                "end": 3072
+            },
+            {
+                "name": "For The Realm",
+                "duration": 92,
+                "start": 3072,
+                "index": 18,
+                "end": 3164
+            }
+        ]
+    },
+    {
+        "version": 103,
+        "type": "TimestampEntry",
+        "expected_filename": "cache/audio_cache/youtube-VaCRpFmJUc0-Game_Of_Thrones_-_Season_4_Full_Complete_Soundtrack_HD.webm",
+        "video_id": "VaCRpFmJUc0",
+        "url": "https://www.youtube.com/watch?v=VaCRpFmJUc0",
+        "title": "Game Of Thrones - Season 4 Full Complete Soundtrack HD",
+        "duration": 3619,
+        "thumbnail": "https://i.ytimg.com/vi/VaCRpFmJUc0/maxresdefault.jpg",
+        "description": "Game Of Thrones Season 4 Full Original Complete Soundtrack HD  1080p\nJuego De Tronos \u0418\u0433\u0440\u0430 \u041f\u0440\u0435\u0441\u0442\u043e\u043b\u043e\u0432 Le Tr\u00f4ne De Fer Il Trono Di Spade \u6743\u529b\u7684\u6e38\u620f\nSoundtrack list:\n0:00 - Main Title\n1:42 - The Rains Of Castamere\n4:23 - Breaker Of Chains\n8:26 - Watchers On The Wall\n10:37 - I'm Sorry For Today\n12:45 - Thenns\n14:26 - Mereen\n17:19 - First Of His Name\n21:10 - The Biggest Fire The North Has Ever Seen\n23:05 - Three Eyed Raven\n27:02 - Two Swords\n29:02 - Oathkeeper\n33:21 - You Are No Son Of Mine\n37:49 - The North Remembers\n40:21 - Let's Kill Some Crows\n43:58 - Craster's Keep\n46:02 - The Real North\n48:03 - Forgive Me\n50:33 - He Is Lost\n54:10 - I Only See What Matters\n55:33 - Take Charge Of Your Life\n57:37 - The Children",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": null,
+                    "name": "got",
+                    "index": 3,
+                    "timestamp": 1502397610
+                }
+            }
+        },
+        "sub_queue": [
+            {
+                "name": "Main Title",
+                "duration": 102,
+                "start": 0,
+                "index": 0,
+                "end": 102
+            },
+            {
+                "name": "The Rains Of Castamere",
+                "duration": 161,
+                "start": 102,
+                "index": 1,
+                "end": 263
+            },
+            {
+                "name": "Breaker Of Chains",
+                "duration": 243,
+                "start": 263,
+                "index": 2,
+                "end": 506
+            },
+            {
+                "name": "Watchers On The Wall",
+                "duration": 131,
+                "start": 506,
+                "index": 3,
+                "end": 637
+            },
+            {
+                "name": "I'm Sorry For Today",
+                "duration": 128,
+                "start": 637,
+                "index": 4,
+                "end": 765
+            },
+            {
+                "name": "Thenns",
+                "duration": 101,
+                "start": 765,
+                "index": 5,
+                "end": 866
+            },
+            {
+                "name": "Mereen",
+                "duration": 173,
+                "start": 866,
+                "index": 6,
+                "end": 1039
+            },
+            {
+                "name": "First Of His Name",
+                "duration": 231,
+                "start": 1039,
+                "index": 7,
+                "end": 1270
+            },
+            {
+                "name": "The Biggest Fire The North Has Ever Seen",
+                "duration": 115,
+                "start": 1270,
+                "index": 8,
+                "end": 1385
+            },
+            {
+                "name": "Three Eyed Raven",
+                "duration": 237,
+                "start": 1385,
+                "index": 9,
+                "end": 1622
+            },
+            {
+                "name": "Two Swords",
+                "duration": 120,
+                "start": 1622,
+                "index": 10,
+                "end": 1742
+            },
+            {
+                "name": "Oathkeeper",
+                "duration": 259,
+                "start": 1742,
+                "index": 11,
+                "end": 2001
+            },
+            {
+                "name": "You Are No Son Of Mine",
+                "duration": 268,
+                "start": 2001,
+                "index": 12,
+                "end": 2269
+            },
+            {
+                "name": "The North Remembers",
+                "duration": 152,
+                "start": 2269,
+                "index": 13,
+                "end": 2421
+            },
+            {
+                "name": "Let's Kill Some Crows",
+                "duration": 217,
+                "start": 2421,
+                "index": 14,
+                "end": 2638
+            },
+            {
+                "name": "Craster's Keep",
+                "duration": 124,
+                "start": 2638,
+                "index": 15,
+                "end": 2762
+            },
+            {
+                "name": "The Real North",
+                "duration": 121,
+                "start": 2762,
+                "index": 16,
+                "end": 2883
+            },
+            {
+                "name": "Forgive Me",
+                "duration": 150,
+                "start": 2883,
+                "index": 17,
+                "end": 3033
+            },
+            {
+                "name": "He Is Lost",
+                "duration": 217,
+                "start": 3033,
+                "index": 18,
+                "end": 3250
+            },
+            {
+                "name": "I Only See What Matters",
+                "duration": 83,
+                "start": 3250,
+                "index": 19,
+                "end": 3333
+            },
+            {
+                "name": "Take Charge Of Your Life",
+                "duration": 124,
+                "start": 3333,
+                "index": 20,
+                "end": 3457
+            },
+            {
+                "name": "The Children",
+                "duration": 162,
+                "start": 3457,
+                "index": 21,
+                "end": 3619
+            }
+        ]
+    },
+    {
+        "version": 103,
+        "type": "TimestampEntry",
+        "expected_filename": "cache/audio_cache/youtube-AoHSLwOmNS8-Game_of_Thrones_-_Original_Soundtrack_-_Season_1_-_Full_Album.webm",
+        "video_id": "AoHSLwOmNS8",
+        "url": "https://www.youtube.com/watch?v=AoHSLwOmNS8",
+        "title": "Game of Thrones - Original Soundtrack - Season 1 - Full Album",
+        "duration": 3973,
+        "thumbnail": "https://i.ytimg.com/vi/AoHSLwOmNS8/hqdefault.jpg",
+        "description": "Game Of Thrones - Original Soundtrack - Season 1 - Full Album\n\n0:00:00 - 01. Main Title\n0:01:45 - 02. North of the Wall\n0:05:34 - 03. Goodbye Brother\n0:08:42 - 04. The Kingsroad\n0:10:47 - 05. The King's Arrival\n0:14:22 - 06. Love In the Eyes\n0:18:22 - 07. A Raven from King's Landing\n0:19:39 - 08. The Wall\n0:21:39 - 09. Things I Do for Love\n0:23:31 - 10. A Golden Crown\n0:25:10 - 11. Winter is Coming\n0:27:51 - 12. A Bird Without Feathers\n0:29:53 - 13. Await the King's Justice\n0:31:54 - 14. You'll Be Queen One Day\n0:33:30 - 15. The Assassin's Dagger\n0:34:49 - 16. To Vaes Dothrak\n0:36:18 - 17. Jon's Honor\n0:38:54 - 18. Black of Hair\n0:40:35 - 19. You Win or You Die\n0:42:31 - 20. Small Pack of Wolves\n0:44:29 - 21. Game of Thrones\n0:45:48 - 22. Kill Them All\n0:48:23 - 23. The Pointy End\n0:51:41 - 24. Victory Does Not Make Us Conquerors\n0:53:17 - 25. When the Sun Rises In the West\n0:55:57 - 26. King of the North\n0:57:26 - 27. The Night's Watch\n0:59:10 - 28. Fire and Blood\n1:03:41 - 29. Finale",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": null,
+                    "name": "got",
+                    "index": 4,
+                    "timestamp": 1502397610
+                }
+            }
+        },
+        "sub_queue": [
+            {
+                "name": "01. Main Title",
+                "duration": 105,
+                "start": 0,
+                "index": 0,
+                "end": 105
+            },
+            {
+                "name": "02. North of the Wall",
+                "duration": 229,
+                "start": 105,
+                "index": 1,
+                "end": 334
+            },
+            {
+                "name": "03. Goodbye Brother",
+                "duration": 188,
+                "start": 334,
+                "index": 2,
+                "end": 522
+            },
+            {
+                "name": "04. The Kingsroad",
+                "duration": 125,
+                "start": 522,
+                "index": 3,
+                "end": 647
+            },
+            {
+                "name": "05. The King's Arrival",
+                "duration": 215,
+                "start": 647,
+                "index": 4,
+                "end": 862
+            },
+            {
+                "name": "06. Love In the Eyes",
+                "duration": 240,
+                "start": 862,
+                "index": 5,
+                "end": 1102
+            },
+            {
+                "name": "07. A Raven from King's Landing",
+                "duration": 77,
+                "start": 1102,
+                "index": 6,
+                "end": 1179
+            },
+            {
+                "name": "08. The Wall",
+                "duration": 120,
+                "start": 1179,
+                "index": 7,
+                "end": 1299
+            },
+            {
+                "name": "09. Things I Do for Love",
+                "duration": 112,
+                "start": 1299,
+                "index": 8,
+                "end": 1411
+            },
+            {
+                "name": "10. A Golden Crown",
+                "duration": 99,
+                "start": 1411,
+                "index": 9,
+                "end": 1510
+            },
+            {
+                "name": "11. Winter is Coming",
+                "duration": 161,
+                "start": 1510,
+                "index": 10,
+                "end": 1671
+            },
+            {
+                "name": "12. A Bird Without Feathers",
+                "duration": 122,
+                "start": 1671,
+                "index": 11,
+                "end": 1793
+            },
+            {
+                "name": "13. Await the King's Justice",
+                "duration": 121,
+                "start": 1793,
+                "index": 12,
+                "end": 1914
+            },
+            {
+                "name": "14. You'll Be Queen One Day",
+                "duration": 96,
+                "start": 1914,
+                "index": 13,
+                "end": 2010
+            },
+            {
+                "name": "15. The Assassin's Dagger",
+                "duration": 79,
+                "start": 2010,
+                "index": 14,
+                "end": 2089
+            },
+            {
+                "name": "16. To Vaes Dothrak",
+                "duration": 89,
+                "start": 2089,
+                "index": 15,
+                "end": 2178
+            },
+            {
+                "name": "17. Jon's Honor",
+                "duration": 156,
+                "start": 2178,
+                "index": 16,
+                "end": 2334
+            },
+            {
+                "name": "18. Black of Hair",
+                "duration": 101,
+                "start": 2334,
+                "index": 17,
+                "end": 2435
+            },
+            {
+                "name": "19. You Win or You Die",
+                "duration": 116,
+                "start": 2435,
+                "index": 18,
+                "end": 2551
+            },
+            {
+                "name": "20. Small Pack of Wolves",
+                "duration": 118,
+                "start": 2551,
+                "index": 19,
+                "end": 2669
+            },
+            {
+                "name": "21. Game of Thrones",
+                "duration": 79,
+                "start": 2669,
+                "index": 20,
+                "end": 2748
+            },
+            {
+                "name": "22. Kill Them All",
+                "duration": 155,
+                "start": 2748,
+                "index": 21,
+                "end": 2903
+            },
+            {
+                "name": "23. The Pointy End",
+                "duration": 198,
+                "start": 2903,
+                "index": 22,
+                "end": 3101
+            },
+            {
+                "name": "24. Victory Does Not Make Us Conquerors",
+                "duration": 96,
+                "start": 3101,
+                "index": 23,
+                "end": 3197
+            },
+            {
+                "name": "25. When the Sun Rises In the West",
+                "duration": 160,
+                "start": 3197,
+                "index": 24,
+                "end": 3357
+            },
+            {
+                "name": "26. King of the North",
+                "duration": 89,
+                "start": 3357,
+                "index": 25,
+                "end": 3446
+            },
+            {
+                "name": "27. The Night's Watch",
+                "duration": 104,
+                "start": 3446,
+                "index": 26,
+                "end": 3550
+            },
+            {
+                "name": "28. Fire and Blood",
+                "duration": 271,
+                "start": 3550,
+                "index": 27,
+                "end": 3821
+            },
+            {
+                "name": "29. Finale",
+                "duration": 152,
+                "start": 3821,
+                "index": 28,
+                "end": 3973
+            }
+        ]
+    },
+    {
+        "version": 103,
+        "type": "TimestampEntry",
+        "expected_filename": "cache/audio_cache/youtube-03DU_E_meEQ-Game_of_Thrones_Season_5_-_Full_Official_Soundtrack.webm",
+        "video_id": "03DU_E_meEQ",
+        "url": "https://www.youtube.com/watch?v=03DU_E_meEQ",
+        "title": "Game of Thrones Season 5: Full Official Soundtrack",
+        "duration": 3528,
+        "thumbnail": "https://i.ytimg.com/vi/03DU_E_meEQ/maxresdefault.jpg",
+        "description": "The complete Soundtrack of the fifth season of HBO's Game of Thrones. See below for the track listing:\n\n00:00 - 01:45 - Main Titles\n01:45 - 03:18 - Blood of the Dragon\n03:18 - 08:26 - House of Black and White\n08:26 - 10:57 - Jaws of the Viper\n10:57 - 16:03 - Hardhome, Pt. 1\n16:03 - 20:34 - Hardhome, Pt. 2\n20:34 - 22:48 - Mother's Mercy\n22:48 - 24:55 - Kill the Boy\n24:55 - 28:03 - Dance of Dragons\n28:03 - 32:48 - Kneel for No Man\n32:48 - 36:11 - High Sparrow\n36:11 - 38:48 - Before the Old Gods\n38:48 - 41:42 - Atonement\n41:42 - 43:58 - I Dreamt I Was Old\n43:58 - 48:46 - The Wars to Come\n48:46 - 52:03 - Forgive Me\n52:03 - 57:20 - Son of the Harpy\n57:20 - 58:40 - Throne for the Game\n\nThis soundtrack is property of HBO and is composed by Ramin Djawadi. If you liked this music, buy it on iTunes or Amazon, like I did.",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": null,
+                    "name": "got",
+                    "index": 5,
+                    "timestamp": 1502397610
+                }
+            }
+        },
+        "sub_queue": [
+            {
+                "name": "Main Titles",
+                "duration": 105,
+                "start": 0,
+                "index": 0,
+                "end": 105
+            },
+            {
+                "name": "Blood of the Dragon",
+                "duration": 93,
+                "start": 105,
+                "index": 1,
+                "end": 198
+            },
+            {
+                "name": "House of Black and White",
+                "duration": 308,
+                "start": 198,
+                "index": 2,
+                "end": 506
+            },
+            {
+                "name": "Jaws of the Viper",
+                "duration": 151,
+                "start": 506,
+                "index": 3,
+                "end": 657
+            },
+            {
+                "name": "Hardhome, Pt. 1",
+                "duration": 306,
+                "start": 657,
+                "index": 4,
+                "end": 963
+            },
+            {
+                "name": "Hardhome, Pt. 2",
+                "duration": 271,
+                "start": 963,
+                "index": 5,
+                "end": 1234
+            },
+            {
+                "name": "Mother's Mercy",
+                "duration": 134,
+                "start": 1234,
+                "index": 6,
+                "end": 1368
+            },
+            {
+                "name": "Kill the Boy",
+                "duration": 127,
+                "start": 1368,
+                "index": 7,
+                "end": 1495
+            },
+            {
+                "name": "Dance of Dragons",
+                "duration": 188,
+                "start": 1495,
+                "index": 8,
+                "end": 1683
+            },
+            {
+                "name": "Kneel for No Man",
+                "duration": 285,
+                "start": 1683,
+                "index": 9,
+                "end": 1968
+            },
+            {
+                "name": "High Sparrow",
+                "duration": 203,
+                "start": 1968,
+                "index": 10,
+                "end": 2171
+            },
+            {
+                "name": "Before the Old Gods",
+                "duration": 157,
+                "start": 2171,
+                "index": 11,
+                "end": 2328
+            },
+            {
+                "name": "Atonement",
+                "duration": 174,
+                "start": 2328,
+                "index": 12,
+                "end": 2502
+            },
+            {
+                "name": "I Dreamt I Was Old",
+                "duration": 136,
+                "start": 2502,
+                "index": 13,
+                "end": 2638
+            },
+            {
+                "name": "The Wars to Come",
+                "duration": 288,
+                "start": 2638,
+                "index": 14,
+                "end": 2926
+            },
+            {
+                "name": "Forgive Me",
+                "duration": 197,
+                "start": 2926,
+                "index": 15,
+                "end": 3123
+            },
+            {
+                "name": "Son of the Harpy",
+                "duration": 317,
+                "start": 3123,
+                "index": 16,
+                "end": 3440
+            },
+            {
+                "name": "Throne for the Game",
+                "duration": 88,
+                "start": 3440,
+                "index": 17,
+                "end": 3528
+            }
+        ]
+    }
 ]
