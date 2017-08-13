@@ -78,9 +78,12 @@ class Playlist(EventEmitter):
 
         return True
 
-    def replay(self):
+    def replay(self, index=0):
+        if not 0 < index < len(self.history):
+            return False
+
         if self.history:
-            self._add_entry(self.history[0], placement=0)
+            self._add_entry(self.history[index], placement=0)
 
             if self.player.current_entry:
                 self.player.skip()

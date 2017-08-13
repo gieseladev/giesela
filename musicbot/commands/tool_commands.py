@@ -7,6 +7,7 @@ from discord.utils import find
 from openpyxl import Workbook
 
 from musicbot.bookmarks import bookmark
+from musicbot.entry import Entry
 from musicbot.logger import OnlineLogger
 from musicbot.random_sets import RandomSets
 from musicbot.reminder import Action, Calendar
@@ -607,7 +608,8 @@ class ToolCommands:
         "3.3.9": (1497521393, "Added edit sub-command"),
         "3.4.1": (1497550771, "Added the filter \"mine\" to the listing function"),
         "3.4.6": (1497617827, "when listing bookmarks, they musn't be \"inline\"."),
-        "3.5.8": (1497827057, "Editing bookmarks now works as expected")
+        "3.5.8": (1497827057, "Editing bookmarks now works as expected"),
+        "4.6.1": (1502582759, "Updated to new entry model")
     ***REMOVED***)
     async def cmd_bookmark(self, author, player, leftover_args):
         """
@@ -687,7 +689,7 @@ class ToolCommands:
                 bm = bookmark.get_bookmark(" ".join(leftover_args))
                 if bm:
                     player.playlist._add_entry(
-                        URLPlaylistEntry.from_dict(player.playlist, bm[
+                        Entry.from_dict(player.playlist, bm[
                             "entry"]))
                     return Response("Loaded bookmark `***REMOVED***0***REMOVED***` by *****REMOVED***1***REMOVED*****".
                                     format(bm["name"],
