@@ -6,7 +6,7 @@ import time
 import configparser
 from musicbot.entry import Entry
 from musicbot.exceptions import BrokenEntryError, OutdatedEntryError
-from musicbot.utils import clean_songname, similarity
+from musicbot.utils import clean_songname, format_time, similarity
 from musicbot.web_author import WebAuthor
 
 
@@ -31,6 +31,8 @@ class Playlists:
     def get_web_playlist(self, playlist_id, queue):
         data = self.get_playlist(playlist_id, queue)
 
+        duration = sum(entry.duration for entry in data["entries"])
+
         playlist_info = {
             "name":         data["name"],
             "id":           data["id"],
@@ -38,7 +40,9 @@ class Playlists:
             "description":  data["description"],
             "author":       data["author"].to_dict(),
             "replay_count": data["replay_count"],
-            "entries":      [entry.to_web_dict(skip_calc=True) for entry in data["entries"]]
+            "entries":      [entry.to_web_dict(skip_calc=True) for entry in data["entries"]],
+            "duration":     duration,
+            "human_dur":    format_time(duration, max_specifications=1)
         }
 
         return playlist_info
