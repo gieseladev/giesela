@@ -97,6 +97,8 @@ class Playlist(EventEmitter):
 
             if revert and player.current_entry:
                 player.skip()
+            else:
+                GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
             return True
 
