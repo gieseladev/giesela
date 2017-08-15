@@ -155,7 +155,7 @@ class GieselaWebSocket(WebSocket):
                     success = True
 
             elif command == "revert":
-                self._call_function_main_thread(player.playlist.replay)
+                self._call_function_main_thread(player.playlist.replay, revert=True)
                 success = True
 
             elif command == "seek":
