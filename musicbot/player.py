@@ -1,15 +1,15 @@
-import asyncio
-import audioop
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
-from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
 
+import asyncio
+import audioop
+from enum import Enum
 from musicbot.config import static_config
 from musicbot.entry import RadioSongEntry, StreamEntry, TimestampEntry
 from musicbot.exceptions import FFmpegError, FFmpegWarning
@@ -108,9 +108,9 @@ class MusicPlayerState(Enum):
 
 
 class MusicPlayerRepeatState(Enum):
-    NONE = 0    # Playlist plays as normal
-    ALL = 1     # Entire playlist repeats
-    SINGLE = 2  # Currently playing song repeats
+    NONE = 0    # queue plays as normal
+    ALL = 1     # Entire queue repeats
+    SINGLE = 2  # Currently playing song repeats forever
 
     def __str__(self):
         return self.name

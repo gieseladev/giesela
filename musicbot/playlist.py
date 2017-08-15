@@ -95,9 +95,6 @@ class Playlist(EventEmitter):
         if self.history:
             self._add_entry(self.history[index], placement=0)
 
-            if self.player.current_entry:
-                self.player.skip()
-
             return True
 
         return False
