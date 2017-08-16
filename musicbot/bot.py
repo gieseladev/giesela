@@ -690,7 +690,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         if not self.config.auto_pause:
             return
 
-        if not (before and after):
+        if not (before.voice.voice_channel and after.voice.voice_channel):
             return
 
         if after.server.me != after and after.bot:
