@@ -63,7 +63,7 @@ class Playlists:
 
         playlist_information = {
             "id":           playlist_id,
-            "name":         plsection.get("name"),
+            "name":         plsection.get("name", False) or playlist_id,
             "location":     plsection["location"],
             "author":       playlist_author,
             "replay_count": int(plsection["replays"]),
