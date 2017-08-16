@@ -89,7 +89,7 @@ class Playlist(EventEmitter):
         return True
 
     def replay(self, index=0, revert=False):
-        if not 0 < index < len(self.history):
+        if not 0 <= index < len(self.history):
             return False
 
         if self.history:
