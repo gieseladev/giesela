@@ -373,7 +373,10 @@ class Playlist(EventEmitter):
             GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
     def promote_position(self, position):
-        rotDist = -1 * (position - 1)
+        if not 0 <= position < len(self.entries):
+            return False
+
+        rotDist = -position
         self.entries.rotate(rotDist)
         entry = self.entries.popleft()
         self.entries.rotate(-1 * rotDist)
