@@ -196,6 +196,11 @@ class GieselaWebSocket(WebSocket):
                 self.log("moved an entry from", from_index, "to", to_index)
 
             elif command == "shuffle":
+                player.playlist.clear()
+                self.log("cleared the queue")
+                success = True
+
+            elif command == "clear":
                 player.playlist.shuffle()
                 self.log("shuffled")
                 success = True
