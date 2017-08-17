@@ -1,3 +1,4 @@
+import asyncio
 import atexit
 import hashlib
 import json
@@ -7,7 +8,6 @@ from json.decoder import JSONDecodeError
 from random import choice
 from string import ascii_lowercase
 
-import asyncio
 from musicbot.entry import TimestampEntry
 from musicbot.simple_web_socket_server import SimpleWebSocketServer, WebSocket
 from musicbot.web_author import WebAuthor
@@ -195,12 +195,12 @@ class GieselaWebSocket(WebSocket):
                 success = bool(self._call_function_main_thread(player.playlist.move, from_index, to_index, wait_for_result=True))
                 self.log("moved an entry from", from_index, "to", to_index)
 
-            elif command == "shuffle":
+            elif command == "clear":
                 player.playlist.clear()
                 self.log("cleared the queue")
                 success = True
 
-            elif command == "clear":
+            elif command == "shuffle":
                 player.playlist.shuffle()
                 self.log("shuffled")
                 success = True
