@@ -374,7 +374,9 @@ class GieselaServer:
             "queue":        player.playlist.get_web_dict(),
             "volume":       player.volume,
             "state_name":   str(player.state),
-            "state":        player.state.value
+            "state":        player.state.value,
+            "repeat_state_name": str(player.repeatState),
+            "repeat_state": player.repeatState.value,
         }
 
         return data
