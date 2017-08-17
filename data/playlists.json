@@ -1,85 +1,85 @@
 ***REMOVED***
-  "gaming": ***REMOVED***
-    "location": "data/playlists/gaming.gpl",
-    "author": ***REMOVED***
-      "id": "210488226777923585",
-      "name": "grelor",
-      "display_name": "grelor",
-      "avatar_url": "",
-      "colour": "#57D31D"
+    "gaming": ***REMOVED***
+        "location": "data/playlists/gaming.gpl",
+        "author": ***REMOVED***
+            "id": "210488226777923585",
+            "name": "grelor",
+            "display_name": "grelor",
+            "avatar_url": "",
+            "colour": "#57D31D"
+        ***REMOVED***,
+        "entries": 43,
+        "replays": 15,
+        "description": null,
+        "cover_url": null
     ***REMOVED***,
-    "entries": 43,
-    "replays": 15,
-    "description": null,
-    "cover_url": null
-  ***REMOVED***,
-  "overwatch": ***REMOVED***
-    "location": "data/playlists/overwatch.gpl",
-    "author": ***REMOVED***
-      "id": "203302899277627392",
-      "name": "siku2",
-      "display_name": "***REMOVED***",
-      "avatar_url": "https://cdn.discordapp.com/avatars/203302899277627392/520da4f3e1a7ac618955079cb8082013.png?size=1024",
-      "colour": "#1197F0"
+    "overwatch": ***REMOVED***
+        "location": "data/playlists/overwatch.gpl",
+        "author": ***REMOVED***
+            "id": "203302899277627392",
+            "name": "siku2",
+            "display_name": "***REMOVED***",
+            "avatar_url": "https://cdn.discordapp.com/avatars/203302899277627392/520da4f3e1a7ac618955079cb8082013.png?size=1024",
+            "colour": "#1197F0"
+        ***REMOVED***,
+        "entries": 4,
+        "replays": 7,
+        "description": null,
+        "cover_url": null
     ***REMOVED***,
-    "entries": 4,
-    "replays": 7,
-    "description": null,
-    "cover_url": null
-  ***REMOVED***,
-  "simonisanerd": ***REMOVED***
-    "location": "data/playlists/simonisanerd.gpl",
-    "author": ***REMOVED***
-      "id": "203302899277627392",
-      "name": "siku2",
-      "display_name": "***REMOVED***",
-      "avatar_url": "https://cdn.discordapp.com/avatars/203302899277627392/520da4f3e1a7ac618955079cb8082013.png?size=1024",
-      "colour": "#1197F0"
+    "simonisanerd": ***REMOVED***
+        "location": "data/playlists/simonisanerd.gpl",
+        "author": ***REMOVED***
+            "id": "203302899277627392",
+            "name": "siku2",
+            "display_name": "***REMOVED***",
+            "avatar_url": "https://cdn.discordapp.com/avatars/203302899277627392/520da4f3e1a7ac618955079cb8082013.png?size=1024",
+            "colour": "#1197F0"
+        ***REMOVED***,
+        "entries": 116,
+        "replays": 81,
+        "description": "Your go-to playlist for everything related to Anime and Japanese music. This is the first (and as of yet) only playlist where **every** entry is a GieselaEntry.",
+        "cover_url": "http://i.imgur.com/MFXq8og.jpg"
     ***REMOVED***,
-    "entries": 116,
-    "replays": 81,
-    "description": "Your go-to playlist for everything related to Anime and Japanese music. This is the first (and as of yet) only playlist where **every** entry is a GieselaEntry.",
-    "cover_url": "http://i.imgur.com/MFXq8og.jpg"
-  ***REMOVED***,
-  "got": ***REMOVED***
-    "location": "data/playlists/got.gpl",
-    "author": ***REMOVED***
-      "id": "206459363739566080",
-      "name": "Lophorius",
-      "display_name": "Lophorius",
-      "avatar_url": "https://cdn.discordapp.com/avatars/206459363739566080/290bbea2374aba7ce2c28ced4842c643.png?size=1024",
-      "colour": "#1197F0"
+    "got": ***REMOVED***
+        "location": "data/playlists/got.gpl",
+        "author": ***REMOVED***
+            "id": "206459363739566080",
+            "name": "Lophorius",
+            "display_name": "Lophorius",
+            "avatar_url": "https://cdn.discordapp.com/avatars/206459363739566080/290bbea2374aba7ce2c28ced4842c643.png?size=1024",
+            "colour": "#1197F0"
+        ***REMOVED***,
+        "entries": 6,
+        "replays": 9,
+        "description": null,
+        "cover_url": null
     ***REMOVED***,
-    "entries": 6,
-    "replays": 9,
-    "description": null,
-    "cover_url": null
-  ***REMOVED***,
-  "quality": ***REMOVED***
-    "location": "data/playlists/quality.gpl",
-    "author": ***REMOVED***
-      "id": "203510202421477376",
-      "name": "ZyLect",
-      "display_name": "ZyLect",
-      "avatar_url": "https://cdn.discordapp.com/avatars/203510202421477376/8e135d666d1f7f6769530dbfab8298dd.png?size=1024",
-      "colour": "#6200F6"
+    "quality": ***REMOVED***
+        "location": "data/playlists/quality.gpl",
+        "author": ***REMOVED***
+            "id": "203510202421477376",
+            "name": "ZyLect",
+            "display_name": "ZyLect",
+            "avatar_url": "https://cdn.discordapp.com/avatars/203510202421477376/8e135d666d1f7f6769530dbfab8298dd.png?size=1024",
+            "colour": "#6200F6"
+        ***REMOVED***,
+        "entries": 142,
+        "replays": 39,
+        "description": null,
+        "cover_url": "http://i.imgur.com/Vifn0MV.jpg"
     ***REMOVED***,
-    "entries": 142,
-    "replays": 35,
-    "description": null,
-    "cover_url": "http://i.imgur.com/Vifn0MV.jpg"
-  ***REMOVED***,
-  "uptoyou": ***REMOVED***
-    "location": "data/playlists/uptoyou.gpl",
-    "author": ***REMOVED***
-      "id": "unknown",
-      "name": "unknown",
-      "display_name": "Unknown",
-      "avatar_url": "https://amploprod.s3.amazonaws.com/assets/no-user-image-square-9f6a473a32ad639f619216331d10d61ce1b35c9271d5683920960e1a5ee45bb8.jpg",
-      "colour": "#1197F0"
-    ***REMOVED***,
-    "replays": 0,
-    "description": null,
-    "cover_url": "http://i.imgur.com/BP3XWrf.jpg"
-  ***REMOVED***
+    "uptoyou": ***REMOVED***
+        "location": "data/playlists/uptoyou.gpl",
+        "author": ***REMOVED***
+            "id": "unknown",
+            "name": "unknown",
+            "display_name": "Unknown",
+            "avatar_url": "https://amploprod.s3.amazonaws.com/assets/no-user-image-square-9f6a473a32ad639f619216331d10d61ce1b35c9271d5683920960e1a5ee45bb8.jpg",
+            "colour": "#1197F0"
+        ***REMOVED***,
+        "replays": 2,
+        "description": null,
+        "cover_url": "http://i.imgur.com/BP3XWrf.jpg"
+    ***REMOVED***
 ***REMOVED***
