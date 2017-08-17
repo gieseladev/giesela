@@ -88,15 +88,17 @@ class Playlist(EventEmitter):
 
         return True
 
-    def replay(self, index=0):
-        if not 0 < index < len(self.history):
+    def replay(self, index=0, revert=False):
+        if not 0 <= index < len(self.history):
             return False
 
         if self.history:
             self._add_entry(self.history[index], placement=0)
 
-            if self.player.current_entry:
-                self.player.skip()
+            if revert and player.current_entry:
+                player.skip()
+            else:
+                GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
             return True
 
@@ -371,7 +373,10 @@ class Playlist(EventEmitter):
             GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
     def promote_position(self, position):
-        rotDist = -1 * (position - 1)
+        if not 0 <= position < len(self.entries):
+            return False
+
+        rotDist = -position
         self.entries.rotate(rotDist)
         entry = self.entries.popleft()
         self.entries.rotate(-1 * rotDist)
@@ -424,13 +429,15 @@ class Playlist(EventEmitter):
 
         try:
             return await entry.get_ready_future()
-        except:
+        except ExtractionError:
             if "playlist" in entry.meta:
                 playlist_name = entry.meta["playlist"]["name"]
                 asyncio.ensure_future(self.bot.playlists.mark_entry_broken(self, playlist_name, entry))
                 print("[PLAYER] {}'s {} is broken!".format(playlist_name, entry.title))
+        except:
+            pass
 
-            return await self.get_next_entry(predownload_next)
+        return await self.get_next_entry(predownload_next)
 
     def peek(self):
         """

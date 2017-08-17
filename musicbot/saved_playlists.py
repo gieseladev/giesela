@@ -1,12 +1,12 @@
+import configparser
 import json
 import os
 import re
 import time
 
-import configparser
 from musicbot.entry import Entry
 from musicbot.exceptions import BrokenEntryError, OutdatedEntryError
-from musicbot.utils import clean_songname, similarity
+from musicbot.utils import clean_songname, format_time, similarity
 from musicbot.web_author import WebAuthor
 
 
@@ -26,10 +26,12 @@ class Playlists:
             json.dump(self.playlists, f, indent=4)
 
     def get_all_web_playlists(self, queue):
-        return [self.get_web_playlist(name, queue) for name, data in self.playlists.items() if data.get("cover_url")]
+        return sorted([self.get_web_playlist(name, queue) for name, data in self.playlists.items() if data.get("cover_url")], key=lambda playlist: playlist["name"])
 
-    def get_web_playlist(self, playlist_name, queue):
-        data = self.get_playlist(playlist_name, queue)
+    def get_web_playlist(self, playlist_id, queue):
+        data = self.get_playlist(playlist_id, queue)
+
+        duration = sum(entry.duration for entry in data["entries"])
 
         playlist_info = {
             "name":         data["name"],
@@ -38,17 +40,19 @@ class Playlists:
             "description":  data["description"],
             "author":       data["author"].to_dict(),
             "replay_count": data["replay_count"],
-            "entries":      [entry.to_web_dict(skip_calc=True) for entry in data["entries"]]
+            "entries":      [entry.to_web_dict(skip_calc=True) for entry in data["entries"]],
+            "duration":     duration,
+            "human_dur":    format_time(duration, max_specifications=1)
         }
 
         return playlist_info
 
-    def get_playlist(self, playlistname, playlist, load_entries=True, channel=None):
-        playlistname = playlistname.lower().strip().replace(" ", "_")
-        if playlistname not in self.playlists:
+    def get_playlist(self, playlist_id, queue, load_entries=True, channel=None):
+        if playlist_id not in self.playlists:
+            print("le none", playlist_id)
             return None
 
-        plsection = self.playlists[playlistname]
+        plsection = self.playlists[playlist_id]
 
         playlist_author = plsection["author"]
 
@@ -58,13 +62,13 @@ class Playlists:
             playlist_author = WebAuthor.from_id(playlist_author)
 
         playlist_information = {
-            "id":           playlistname,
-            "name":         playlistname.replace("_", " ").title(),
+            "id":           playlist_id,
+            "name":         plsection.get("name", False) or playlist_id,
             "location":     plsection["location"],
             "author":       playlist_author,
             "replay_count": int(plsection["replays"]),
-            "description":  None if plsection.get("description") == "None" else plsection.get("description"),
-            "cover_url":    None if plsection.get("cover_url") == "None" else plsection.get("cover_url")
+            "description":  plsection.get("description"),
+            "cover_url":    plsection.get("cover_url")
         }
 
         entries = []
@@ -77,15 +81,8 @@ class Playlists:
 
             for ind, ser_entry in enumerate(serialized_json):
                 try:
-                    entry = Entry.from_dict(playlist, ser_entry)
+                    entry = Entry.from_dict(queue, ser_entry)
                     entry.meta["channel"] = channel
-                    if "playlist" not in entry.meta:
-                        entry.meta["playlist"] = {
-                            "cover": playlist_information["cover_url"],
-                            "name": playlistname,
-                            "index": ind,
-                            "timestamp": round(time.time())
-                        }
                 except (BrokenEntryError, OutdatedEntryError, TypeError, KeyError):
                     entry = None
 
@@ -94,16 +91,14 @@ class Playlists:
                 else:
                     entries.append(entry)
 
-        playlist_information["entries"] = sorted(entries, key=lambda entry: entry.title)
+        playlist_information["entries"] = entries
         playlist_information["broken_entries"] = broken_entries
 
         return playlist_information
 
-    def set_playlist(self, entries, name, author, description=None, cover_url=None, replays=0):
-        name = name.lower().strip().replace(" ", "_")
-
+    def set_playlist(self, playlist_id, entries, name, author, description=None, cover_url=None, replays=0):
         serialized_entries = []
-        for index, entry in enumerate(entries):
+        for index, entry in enumerate(sorted(entries, key=lambda entry: entry.sortby)):
             entry.start_seconds = 0
 
             added_timestamp = entry.meta.get("playlist", {}).get("timestamp", round(time.time()))
@@ -111,47 +106,47 @@ class Playlists:
             entry.meta["playlist"] = {
                 "cover": cover_url,
                 "name": name,
+                "id": playlist_id,
                 "index": index,
                 "timestamp": added_timestamp
             }
 
             serialized_entries.append(entry.to_dict())
 
-        json.dump(serialized_entries, open(self.playlist_save_location + str(name) + ".gpl", "w+"), indent=4)
+        json.dump(serialized_entries, open("{}{}.gpl".format(self.playlist_save_location, playlist_id), "w+"), indent=4)
 
-        playlist_data = self.playlists.get(name, {})
+        playlist_data = self.playlists.get(playlist_id, {})
 
         if not isinstance(author, WebAuthor):
             author = WebAuthor.from_id(author)
 
         playlist_data.update({
-            "location": "{}{}.gpl".format(self.playlist_save_location, name),
+            "location": "{}{}.gpl".format(self.playlist_save_location, playlist_id),
             "author": author.to_dict(),
             "replays": replays,
             "description": description,
-            "cover_url": cover_url
+            "cover_url": cover_url,
+            "name": name
         })
 
-        self.playlists[name] = playlist_data
+        self.playlists[playlist_id] = playlist_data
 
         self.save_playlists()
         return True
 
-    def bump_replay_count(self, playlist_name):
-        playlist_name = playlist_name.lower().strip().replace(" ", "_")
+    def bump_replay_count(self, playlist_id):
+        if playlist_id in self.playlists:
+            prev_count = self.playlists[playlist_id].get("replays", 0)
 
-        if playlist_name in self.playlists:
-            prev_count = self.playlists[playlist_name].get("replays", 0)
-
-            self.playlists[playlist_name].update(replays=prev_count + 1)
+            self.playlists[playlist_id].update(replays=prev_count + 1)
             self.save_playlists()
             return True
 
         return False
 
-    def in_playlist(self, queue, playlist, query, certainty_threshold=.6):
+    def in_playlist(self, queue, playlist_id, query, certainty_threshold=.6):
         results = self.search_entries_in_playlist(
-            queue, playlist, query
+            queue, playlist_id, query
         )
         result = results[0]
         if result[0] > certainty_threshold:
@@ -203,17 +198,14 @@ class Playlists:
 
         return ranked_entries
 
-    def remove_playlist(self, name):
-        name = name.lower().strip().replace(" ", "_")
-
-        if name in self.playlists:
-            os.remove(self.playlists[name]["location"])
-            self.playlists.pop(name)
+    def remove_playlist(self, playlist_id):
+        if playlist_id in self.playlists:
+            os.remove(self.playlists[playlist_id]["location"])
+            self.playlists.pop(playlist_id)
             self.save_playlists()
 
-    def edit_playlist(self, name, playlist, all_entries=None, remove_entries=None, remove_entries_indexes=None, new_entries=None, new_name=None, new_description=None, new_cover=None, edit_entries=None):
-        name = name.lower().strip().replace(" ", "_")
-        old_playlist = self.get_playlist(name, playlist)
+    def edit_playlist(self, playlist_id, queue, all_entries=None, remove_entries=None, remove_entries_indexes=None, new_entries=None, new_name=None, new_description=None, new_cover=None, edit_entries=None):
+        old_playlist = self.get_playlist(playlist_id, queue)
 
         if all_entries:
             next_entries = all_entries
@@ -242,41 +234,31 @@ class Playlists:
                         next_entries.pop(index)
                         next_entries.insert(index, new)
 
-        next_name = new_name if new_name is not None else name
+        next_name = new_name or old_playlist.get("name", playlist_id.title())
         next_author = old_playlist["author"]
         next_description = new_description or old_playlist["description"]
         next_cover = new_cover or old_playlist["cover_url"]
 
         if len(next_entries) < 1:
-            self.remove_playlist(name)
+            self.remove_playlist(playlist_id)
             return
 
-        if next_name != name:
-            self.remove_playlist(name)
-
-        self.set_playlist(next_entries, next_name, next_author, next_description,
+        self.set_playlist(playlist_id, next_entries, next_name, next_author, next_description,
                           next_cover, replays=old_playlist["replay_count"])
 
-    async def mark_entry_broken(self, queue, playlist_name, entry):
-        playlist = self.get_playlist(playlist_name, queue)
+    async def mark_entry_broken(self, queue, playlist_id, entry):
+        playlist = self.get_playlist(playlist_id, queue)
 
         entries = playlist["entries"]
 
         index = next(ind for ind, e in enumerate(entries) if e.url == entry.url)
 
-        serialized_entries = []
-        for index, entry in enumerate(entries):
-            entry.start_seconds = 0
-
-            entry.meta["playlist"] = {
-                "cover": playlist["cover_url"],
-                "name": playlist_name,
-                "index": index
-            }
-
-            serialized_entries.append(entry.to_dict())
+        with open(playlist["location"], "r") as f:
+            serialized_entries = json.load(f)
 
         serialized_entries[index]["broken"] = True
 
-        json.dump(serialized_entries, open(self.playlist_save_location + str(playlist_name) + ".gpl", "w"), indent=4)
+        with open(playlist["location"], "w") as f:
+            json.dump(serialized_entries, f, indent=4)
+
         print("marked {} from {} as broken".format(entry.title, playlist_name))

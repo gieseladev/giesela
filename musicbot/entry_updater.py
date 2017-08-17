@@ -53,6 +53,19 @@ async def fix_entry(queue, entry):
     if entry.get("spotify_data", {}).get("id", None) == "custom":
         entry = _convert_spotify_to_giesela(queue, entry)
 
+    if entry.get("broken"):
+        try:
+            data = await queue.downloader.extract_info(queue.loop, entry.get("url"), download=False)
+
+            if (not data) or data.get("_type", None) == "playlist":
+                return None
+
+            entry["version"] = Entry.version
+            entry.pop("broken", None)
+            return Entry.from_dict(queue, entry)
+        except Exception:
+            return None
+
     if not entry.get("expected_filename", False):
         return await _fix_filename(queue, entry)
 

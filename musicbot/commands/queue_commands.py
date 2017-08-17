@@ -633,6 +633,9 @@ class ManipulateCommands:
 
         player.skip()
 
+    @command_info("1.0.0", 1477180800, {
+        "4.6.2": (1502895107, "Zero-based index")
+    })
     async def cmd_promote(self, player, position=None):
         """
         ///|Usage
@@ -658,18 +661,18 @@ class ManipulateCommands:
             entry = player.playlist.promote_last()
         else:
             try:
-                position = int(position)
+                position = int(position) - 1
             except ValueError:
                 raise exceptions.CommandError(
                     "This is not a valid song number! Please choose a song \
                     number between 2 and %s!" % length,
                     expire_in=20)
 
-            if position == 1:
+            if position == 0:
                 raise exceptions.CommandError(
                     "This song is already at the top of the queue!",
                     expire_in=20)
-            if position < 1 or position > length:
+            if position < 0 or position >= length:
                 raise exceptions.CommandError(
                     "Can't promote a song not in the queue! Please choose a song \
                     number between 2 and %s!" % length,
