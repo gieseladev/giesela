@@ -1,3 +1,4 @@
+import asyncio
 import inspect
 import os
 import re
@@ -18,7 +19,6 @@ from discord.object import Object
 from discord.utils import find
 from discord.voice_client import VoiceClient
 
-import asyncio
 from musicbot import downloader, exceptions
 from musicbot.commands.admin_commands import AdminCommands
 from musicbot.commands.fun_commands import FunCommands
@@ -288,12 +288,11 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             activeplayers = sum(1 for p in self.players.values()
                                 if p.is_playing)
             if activeplayers > 1:
-                game = discord.Game(name="Music")
+                game = discord.Game(type=0, name="Music")
                 entry = None
 
             elif activeplayers == 1:
-                player = discord.utils.get(
-                    self.players.values(), is_playing=True)
+                player = discord.utils.get(self.players.values(), is_playing=True)
                 entry = player.current_entry
 
         if entry:
@@ -302,7 +301,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             name = entry.title
 
             name = u"{} {}".format(prefix, name)[:128]
-            game = discord.Game(name=name)
+            game = discord.Game(type=0, name=name)
 
         await self.change_presence(game=game)
 
