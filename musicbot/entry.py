@@ -669,7 +669,7 @@ class TimestampEntry(YoutubeEntry):
             if progress >= entry["start"] or sub_entry is None:
                 sub_entry = entry
 
-        sub_entry["progress"] = progress - sub_entry["start"]
+        sub_entry["progress"] = max(progress - sub_entry["start"], 0)
 
         return sub_entry
 
