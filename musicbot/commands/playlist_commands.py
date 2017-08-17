@@ -94,9 +94,7 @@ class PlaylistCommands:
                 return Response(
                     "Can't save the queue, there are no entries in the queue!")
 
-            if self.playlists.set_playlist(
-                [player.current_entry] + list(player.playlist.entries),
-                    savename, author.id):
+            if self.playlists.set_playlist(savename, [player.current_entry] + list(player.playlist.entries), savename.title(), author.id):
                 return Response("Saved the current queue...")
 
             return Response(
@@ -241,8 +239,7 @@ class PlaylistCommands:
                     player.playlist,
                     new_entries=clone_entries)
             else:
-                self.playlists.set_playlist(
-                    clone_entries, additional_args[0].lower(), author.id)
+                self.playlists.set_playlist(additional_args[0].lower(), clone_entries, additional_args[0].title(), author.id)
 
             return Response(
                 "*****REMOVED******REMOVED***** ***REMOVED******REMOVED***has been cloned to *****REMOVED******REMOVED*****".format(
@@ -390,7 +387,7 @@ class PlaylistCommands:
 
         if _savename not in self.playlists.playlists.keys():
             new_playlist = True
-            self.playlists.set_playlist([], _savename, author.id)
+            self.playlists.set_playlist(_savename, [], _savename.title(), author.id)
 
         def check(m):
             return (m.content.split()[0].lower() in ["add", "remove", "rename", "exit", "p", "n", "save", "extras", "search", "edit"])
@@ -496,7 +493,7 @@ class PlaylistCommands:
         playlist = self.playlists.get_playlist(_savename, player.playlist)
         interface_message = None
 
-        if playlist["broken_entries"]:
+        if playlist.get("broken_entries"):
             broken_entries = playlist["broken_entries"]
             if len(broken_entries) > 1:
                 m = "There are ***REMOVED***entries_left***REMOVED*** broken/outdated entries in this playlist. I'm going to fix them, please stand by."
@@ -1143,7 +1140,7 @@ class PlaylistCommands:
                 return Response(
                     "Your name is too short. Please choose one with at least three letters."
                 )
-            self.playlists.set_playlist([add_entry], playlistname, author.id)
+            self.playlists.set_playlist(playlistname, [add_entry], playlistname, author.id)
             player._current_entry.meta["playlist"] = ***REMOVED***
                 "name": playlistname
             ***REMOVED***
@@ -1197,18 +1194,15 @@ class PlaylistCommands:
 
         if not playlistname:
             if "playlist" in player.current_entry.meta:
-                self.playlists.edit_playlist(
-                    playlistname, player.playlist, remove_entries=[player.current_entry, ])
-                return Response("Removed *****REMOVED******REMOVED***** from playlist `***REMOVED******REMOVED***`".format(player.current_entry.title, playlistname.title()))
+                playlist_id = player.current_entry.meta["playlist"]["id"]
+                self.playlists.edit_playlist(playlist_id, player.playlist, remove_entries=[player.current_entry, ])
+                return Response("Removed *****REMOVED******REMOVED***** from playlist `***REMOVED******REMOVED***`".format(player.current_entry.title, player.current_entry.meta["playlist"]["name"]))
             else:
                 return Response("Please specify the playlist's name!")
 
         playlistname = playlistname.lower()
 
         remove_entry = player.current_entry
-        if isinstance(remove_entry, TimestampEntry):
-            current_timestamp = remove_entry.current_sub_entry["name"]
-            remove_entry = await player.playlist.get_entry_from_query(current_timestamp, channel=channel, author=author)
 
         if playlistname not in self.playlists.playlists.keys():
             return Response("There's no playlist `***REMOVED******REMOVED***`.".format(playlistname.title()))
@@ -1242,9 +1236,7 @@ class PlaylistCommands:
 
         entry = player.current_entry
 
-        playlistname = (
-            "_".join(leftover_args) or entry.meta.get("playlist", ***REMOVED******REMOVED***).get("name", None) or ""
-        ).lower().strip()
+        playlistname = "_".join(leftover_args) or entry.meta.get("playlist", ***REMOVED******REMOVED***).get("id", None) or ""
 
         if playlistname not in self.playlists.playlists.keys():
             playlistname = None

@@ -127,6 +127,10 @@ class BaseEntry:
 
         return bool(self.filename)
 
+    @property
+    def sortby(self):
+        return self.url
+
     def set_start(self, sec):
         if sec < 0 or sec > self.end_seconds:
             return False
@@ -210,6 +214,10 @@ class StreamEntry(BaseEntry):
 
     @property
     def title(self):
+        return self._title
+
+    @property
+    def sortby(self):
         return self._title
 
     def set_start(self, sec):
@@ -366,6 +374,10 @@ class RadioSongEntry(RadioStationEntry):
         self._current_song_info = None
         self._csi_poll_time = 0
 
+    @property
+    def sortby(self):
+        return self.title
+
     def _get_new_song_info(self):
         self._current_song_info = RadioSongExtractor.get_current_song(
             self.station_data)
@@ -447,6 +459,10 @@ class YoutubeEntry(BaseEntry):
             self._thumbnail_brightness = get_image_brightness(url=self.thumbnail)
 
         return self._thumbnail_brightness
+
+    @property
+    def sortby(self):
+        return clean_songname(self._title)
 
     @classmethod
     def from_dict(cls, playlist, data):
@@ -653,7 +669,7 @@ class TimestampEntry(YoutubeEntry):
             if progress >= entry["start"] or sub_entry is None:
                 sub_entry = entry
 
-        sub_entry["progress"] = progress - sub_entry["start"]
+        sub_entry["progress"] = max(progress - sub_entry["start"], 0)
 
         return sub_entry
 
@@ -724,6 +740,10 @@ class GieselaEntry(YoutubeEntry):
     @property
     def title(self):
         return "***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".format(self.artist, self.song_title)
+
+    @property
+    def sortby(self):
+        return self.song_title
 
     @classmethod
     def from_dict(cls, playlist, data):

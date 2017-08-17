@@ -1,3 +1,4 @@
+import asyncio
 import atexit
 import hashlib
 import json
@@ -7,7 +8,7 @@ from json.decoder import JSONDecodeError
 from random import choice
 from string import ascii_lowercase
 
-import asyncio
+from musicbot.config import static_config
 from musicbot.entry import TimestampEntry
 from musicbot.simple_web_socket_server import SimpleWebSocketServer, WebSocket
 from musicbot.web_author import WebAuthor
@@ -70,7 +71,8 @@ class GieselaWebSocket(WebSocket):
 
                 answer = ***REMOVED***
                     "response": True,
-                    "registration_token": registration_token
+                    "registration_token": registration_token,
+                    "command_prefix": static_config.command_prefix
                 ***REMOVED***
 
                 self.sendMessage(json.dumps(answer))
@@ -88,8 +90,13 @@ class GieselaWebSocket(WebSocket):
             traceback.print_exc()
             raise
 
-    def _call_function_main_thread(self, func, *args, **kwargs):
-        return asyncio.run_coroutine_threadsafe(asyncio.coroutine(func)(*args, **kwargs), GieselaServer.bot.loop)
+    def _call_function_main_thread(self, func, *args, wait_for_result=False, **kwargs):
+        fut = asyncio.run_coroutine_threadsafe(asyncio.coroutine(func)(*args, **kwargs), GieselaServer.bot.loop)
+
+        if wait_for_result:
+            return fut.result()
+        else:
+            return fut
 
     def handleAuthenticatedMessage(self, data):
         answer = ***REMOVED***
@@ -146,17 +153,19 @@ class GieselaWebSocket(WebSocket):
 
             elif command == "skip":
                 if player.current_entry:
+                    success = False
+
                     if isinstance(player.current_entry, TimestampEntry):
-                        player.goto_seconds(player.current_entry.current_sub_entry["end"])
-                    else:
+                        success = player.goto_seconds(player.current_entry.current_sub_entry["end"])
+
+                    if not success:
                         player.skip()
+                        success = True
 
                     self.log("skipped")
-                    success = True
 
             elif command == "revert":
-                self._call_function_main_thread(player.playlist.replay)
-                success = True
+                success = self._call_function_main_thread(player.playlist.replay, wait_for_result=True, revert=True)
 
             elif command == "seek":
                 target_seconds = command_data.get("value")
@@ -185,8 +194,12 @@ class GieselaWebSocket(WebSocket):
                 from_index = command_data.get("from")
                 to_index = command_data.get("to")
 
-                self._call_function_main_thread(player.playlist.move, from_index, to_index)
+                success = bool(self._call_function_main_thread(player.playlist.move, from_index, to_index, wait_for_result=True))
                 self.log("moved an entry from", from_index, "to", to_index)
+
+            elif command == "clear":
+                player.playlist.clear()
+                self.log("cleared the queue")
                 success = True
 
             elif command == "shuffle":
@@ -196,21 +209,18 @@ class GieselaWebSocket(WebSocket):
 
             elif command == "remove":
                 remove_index = command_data.get("index")
-                self._call_function_main_thread(player.playlist.remove, remove_index)
+                success = self._call_function_main_thread(player.playlist.remove, remove_index, wait_for_result=True)
                 self.log("removed", remove_index)
-                success = True
 
             elif command == "promote":
                 promote_index = command_data.get("index")
-                self._call_function_main_thread(player.playlist.promote_position, promote_index + 1)
+                success = bool(self._call_function_main_thread(player.playlist.promote_position, promote_index, wait_for_result=True))
                 self.log("promoted", promote_index)
-                success = True
 
             elif command == "replay":
                 replay_index = command_data.get("index")
-                self._call_function_main_thread(player.playlist.replay, replay_index)
+                success = self._call_function_main_thread(player.playlist.replay, replay_index, wait_for_result=True)
                 self.log("replayed", replay_index)
-                success = True
 
             elif command == "playlist_play":
                 playlist_id = command_data.get("playlist_id")
@@ -219,7 +229,7 @@ class GieselaWebSocket(WebSocket):
                 playlist = GieselaServer.bot.playlists.get_playlist(playlist_id, player.playlist)
 
                 if playlist:
-                    if 0 < playlist_index < len(playlist["entries"]):
+                    if 0 <= playlist_index < len(playlist["entries"]):
                         self._call_function_main_thread(player.playlist._add_entry, playlist["entries"][playlist_index])
                         self.log("loaded index", playlist_index, "from playlist", playlist_id)
                         success = True
@@ -360,11 +370,13 @@ class GieselaServer:
             entry = None
 
         data = ***REMOVED***
-            "entry":        entry,
-            "queue":        player.playlist.get_web_dict(),
-            "volume":       player.volume,
-            "state_name":   str(player.state),
-            "state":        player.state.value
+            "entry":                entry,
+            "queue":                player.playlist.get_web_dict(),
+            "volume":               player.volume,
+            "state_name":           str(player.state),
+            "state":                player.state.value,
+            "repeat_state_name":    str(player.repeatState),
+            "repeat_state":         player.repeatState.value,
         ***REMOVED***
 
         return data
