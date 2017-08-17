@@ -1,9 +1,9 @@
+import configparser
 import json
 import os
 import re
 import time
 
-import configparser
 from musicbot.entry import Entry
 from musicbot.exceptions import BrokenEntryError, OutdatedEntryError
 from musicbot.utils import clean_songname, format_time, similarity
@@ -91,14 +91,14 @@ class Playlists:
                 else:
                     entries.append(entry)
 
-        playlist_information["entries"] = sorted(entries, key=lambda entry: entry.title)
+        playlist_information["entries"] = entries
         playlist_information["broken_entries"] = broken_entries
 
         return playlist_information
 
     def set_playlist(self, playlist_id, entries, name, author, description=None, cover_url=None, replays=0):
         serialized_entries = []
-        for index, entry in enumerate(entries):
+        for index, entry in enumerate(sorted(entries, key=lambda entry: entry.sortby)):
             entry.start_seconds = 0
 
             added_timestamp = entry.meta.get("playlist", ***REMOVED******REMOVED***).get("timestamp", round(time.time()))
