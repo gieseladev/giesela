@@ -8,6 +8,7 @@ from json.decoder import JSONDecodeError
 from random import choice
 from string import ascii_lowercase
 
+from musicbot.config import static_config
 from musicbot.entry import TimestampEntry
 from musicbot.simple_web_socket_server import SimpleWebSocketServer, WebSocket
 from musicbot.web_author import WebAuthor
@@ -70,7 +71,8 @@ class GieselaWebSocket(WebSocket):
 
                 answer = ***REMOVED***
                     "response": True,
-                    "registration_token": registration_token
+                    "registration_token": registration_token,
+                    "command_prefix": static_config.command_prefix
                 ***REMOVED***
 
                 self.sendMessage(json.dumps(answer))
