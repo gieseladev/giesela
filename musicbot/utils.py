@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 import json
 import math
@@ -20,7 +21,6 @@ from bs4 import BeautifulSoup
 from discord.ext.commands.bot import _get_variable
 from PIL import Image, ImageStat
 
-import asyncio
 from musicbot.config import ConfigDefaults, static_config
 from musicbot.constants import DISCORD_MSG_CHAR_LIMIT
 
@@ -376,10 +376,8 @@ def _run_timestamp_matcher(text):
             text,
             flags=re.MULTILINE):
         timestamp = int(match.group(3))
-        timestamp += (
-            int(match.group(2)) * 60) if match.group(2) is not None else 0
-        timestamp += (
-            int(match.group(1)) * 3600) if match.group(1) is not None else 0
+        timestamp += (int(match.group(2)) * 60) if match.group(2) else 0
+        timestamp += (int(match.group(1)) * 3600) if match.group(1) else 0
         songs[timestamp] = match.group(4).strip(punctuation + " ")
 
     if len(songs) < 1:
@@ -388,10 +386,8 @@ def _run_timestamp_matcher(text):
                 text,
                 flags=re.MULTILINE):
             timestamp = int(match.group(4))
-            timestamp += (
-                int(match.group(3)) * 60) if match.group(3) is not None else 0
-            timestamp += (int(match.group(2)) *
-                          3600) if match.group(2) is not None else 0
+            timestamp += (int(match.group(3)) * 60) if match.group(3) else 0
+            timestamp += (int(match.group(2)) * 3600) if match.group(2) else 0
             songs[timestamp] = match.group(1).strip(punctuation + " ")
 
     if len(songs) > 0:
