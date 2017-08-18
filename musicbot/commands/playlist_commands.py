@@ -1,4 +1,3 @@
-import asyncio
 import re
 import time
 from random import choice, shuffle
@@ -6,8 +5,9 @@ from textwrap import indent
 
 from discord import Embed
 
+import asyncio
 from musicbot.entry import GieselaEntry, TimestampEntry, YoutubeEntry
-from musicbot.entry_updater import fix_generator
+from musicbot.entry_updater import fix_entry, fix_generator
 from musicbot.exceptions import ExtractionError, WrongEntryTypeError
 from musicbot.imgur import upload_playlist_cover, upload_song_image
 from musicbot.saved_playlists import Playlists
@@ -509,7 +509,7 @@ class PlaylistCommands:
             else:
                 broken_entry = broken_entries[0]
                 info = await self.safe_send_message(channel, "*****REMOVED******REMOVED***** is broken, please wait while I fix it for ya.".format(broken_entry["title"]))
-                new_entry = await player.playlist.get_entry(broken_entry["url"])
+                new_entry = await fix_entry(player.playlist, broken_entry)
                 if not new_entry:
                     await self.safe_send_message(channel, "Couldn't safe *****REMOVED******REMOVED*****".format(broken_entry["title"]))
                 else:
