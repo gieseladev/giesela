@@ -1,13 +1,14 @@
-import asyncio
 import atexit
 import hashlib
 import json
 import threading
 import traceback
+import uuid
 from json.decoder import JSONDecodeError
 from random import choice
 from string import ascii_lowercase
 
+import asyncio
 from musicbot.config import static_config
 from musicbot.entry import TimestampEntry
 from musicbot.simple_web_socket_server import SimpleWebSocketServer, WebSocket
@@ -283,8 +284,8 @@ class GieselaWebSocket(WebSocket):
         print("[WEBSOCKET] <{}> disconnected".format(self.address))
 
     def register(self, server_id, author):
-        token = hashlib.sha256(
-            (server_id + author.id).encode("utf-8")).hexdigest()
+        salt = uuid.uuid4().hex
+        token = hashlib.sha256((server_id + author.id + salt).encode("utf-8")).hexdigest()
         self.token = token
         GieselaServer.set_token_information(token, server_id, author)
         data = {"token": token}
