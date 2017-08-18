@@ -163,15 +163,16 @@ class MusicPlayer(EventEmitter):
     def repeat(self):
         if self.is_repeatNone:
             self.repeatState = MusicPlayerRepeatState.ALL
-            return True
-        if self.is_repeatAll:
+        elif self.is_repeatAll:
             self.repeatState = MusicPlayerRepeatState.SINGLE
-            return True
-        if self.is_repeatSingle:
+        elif self.is_repeatSingle:
             self.repeatState = MusicPlayerRepeatState.NONE
-            return True
+        else:
+            # no idea how that should happen but eh...
+            return False
 
-        return False
+        GieselaServer.send_player_information_update(self.voice_client.server.id)
+        return True
 
     def stop(self):
         self.state = MusicPlayerState.STOPPED
