@@ -8,7 +8,13 @@ def between(val, low, high):
 
 async def _rebuild_entry(queue, entry):
     try:
-        return await queue.get_entry(entry["url"], **entry.get("meta"))
+        new_entry = await queue.get_entry(entry["url"], **entry.get("meta"))
+
+        if entry["type"] == "GieselaEntry":
+            print("[Entry-Fixer] \"***REMOVED******REMOVED***\"(***REMOVED******REMOVED***) had GieselaEntry information in it, applying this information".format(entry.get("title", "Unknown title")[:25], entry.get("url", "Unknown URL")))
+            new_entry = GieselaEntry.upgrade(new_entry, entry["song_title"], entry["artist"], entry["artist_image"], entry["album"], entry["cover"])
+
+        return new_entry
     except:
         return None
 
@@ -48,35 +54,45 @@ async def fix_entry(queue, entry):
     version = entry.get("version", 0)
 
     if version < 100:
+        print("[Entry-Fixer] \"***REMOVED******REMOVED***\"(***REMOVED******REMOVED***) is way too old, gotta rebuild completely!".format(entry.get("title", "Unknown title")[:25], entry.get("url", "Unknown URL")))
         return await _rebuild_entry(queue, entry)
 
     if entry.get("spotify_data", ***REMOVED******REMOVED***).get("id", None) == "custom":
+        print("[Entry-Fixer] \"***REMOVED******REMOVED***\"(***REMOVED******REMOVED***) is an old spotify entry, converting to the new GieselaEntry!".format(entry.get("title", "Unknown title")[:25], entry.get("url", "Unknown URL")))
         entry = _convert_spotify_to_giesela(queue, entry)
 
     if entry.get("broken"):
+        print("[Entry-Fixer] \"***REMOVED******REMOVED***\"(***REMOVED******REMOVED***) has been marked as broken, trying to recover".format(entry.get("title", "Unknown title")[:25], entry.get("url", "Unknown URL")))
         try:
             data = await queue.downloader.extract_info(queue.loop, entry.get("url"), download=False)
 
             if (not data) or data.get("_type", None) == "playlist":
+                print("[Entry-Fixer] \"***REMOVED******REMOVED***\"(***REMOVED******REMOVED***) no data returned by youtube_dl... or it's a playlist".format(entry.get("title", "Unknown title")[:25], entry.get("url", "Unknown URL")))
                 return None
 
             entry["version"] = Entry.version
             entry.pop("broken", None)
+            print("[Entry-Fixer] \"***REMOVED******REMOVED***\"(***REMOVED******REMOVED***) got some data, creating the new entry!".format(entry.get("title", "Unknown title")[:25], entry.get("url", "Unknown URL")))
             return Entry.from_dict(queue, entry)
         except Exception:
+            print("[Entry-Fixer] \"***REMOVED******REMOVED***\"(***REMOVED******REMOVED***) something is wrong with this entry, youtube_dl raised an exception!".format(entry.get("title", "Unknown title")[:25], entry.get("url", "Unknown URL")))
             return None
 
     if not entry.get("expected_filename", False):
+        print("[Entry-Fixer] \"***REMOVED******REMOVED***\"(***REMOVED******REMOVED***) doesn't have \"expected_filename\" (needed for caching), fixing!".format(entry.get("title", "Unknown title")[:25], entry.get("url", "Unknown URL")))
         return await _fix_filename(queue, entry)
 
     try:
+        print("[Entry-Fixer] \"***REMOVED******REMOVED***\"(***REMOVED******REMOVED***) no idea what's wrong, setting to newest version, removing broken flag".format(entry.get("title", "Unknown title")[:25], entry.get("url", "Unknown URL")))
         entry["version"] = Entry.version
         entry.pop("broken", None)
         return Entry.from_dict(queue, entry)
     except:
         try:
+            print("[Entry-Fixer] \"***REMOVED******REMOVED***\"(***REMOVED******REMOVED***) something went wrong with that, rebuilding!".format(entry.get("title", "Unknown title")[:25], entry.get("url", "Unknown URL")))
             return await _rebuild_entry(queue, entry)
         except:
+            print("[Entry-Fixer] \"***REMOVED******REMOVED***\"(***REMOVED******REMOVED***) rebuilding didn't work either... This entry is rip!".format(entry.get("title", "Unknown title")[:25], entry.get("url", "Unknown URL")))
             return None
 
 

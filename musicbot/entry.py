@@ -1,10 +1,10 @@
-import asyncio
 import os
 import time
 import traceback
 
 from discord import Channel, Member, Server, User
 
+import asyncio
 from musicbot.exceptions import (BrokenEntryError, ExtractionError,
                                  OutdatedEntryError)
 from musicbot.lyrics import search_for_lyrics
@@ -771,6 +771,28 @@ class GieselaEntry(YoutubeEntry):
         album = data["album"]
 
         return cls(playlist, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, expected_filename=filename, **meta)
+
+    @classmethod
+    def upgrade(cls, previous_entry, song_title, artist, artist_image, album, cover):
+        kwargs = ***REMOVED***
+            "queue":                previous_entry.queue,
+            "video_id":             previous_entry.video_id,
+            "url":                  previous_entry.url,
+            "title":                previous_entry._title,
+            "duration":             previous_entry.duration,
+            "thumbnail":            previous_entry.thumbnail,
+            "description":          previous_entry.description,
+            "expected_filename":    previous_entry.expected_filename,
+            "song_title":           song_title,
+            "artist":               artist,
+            "artist_image":         artist_image,
+            "album":                album,
+            "cover":                cover
+        ***REMOVED***
+
+        kwargs.update(previous_entry.meta)
+
+        return cls(**kwargs)
 
     def to_dict(self):
         d = super().to_dict()
