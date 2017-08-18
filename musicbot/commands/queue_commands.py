@@ -1,10 +1,10 @@
+import asyncio
 import time
 import traceback
 from random import choice, shuffle
 
 from discord import Embed
 
-import asyncio
 from musicbot import exceptions
 from musicbot.entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                             StreamEntry, TimestampEntry, YoutubeEntry)
@@ -913,7 +913,7 @@ class DisplayCommands:
                 em.set_thumbnail(url=entry.thumbnail)
                 if "playlist" in entry.meta:
                     pl = entry.meta["playlist"]
-                    em.set_author(name=pl["name"].title(), icon_url=pl.get("cover", None) or Embed.Empty)
+                    em.set_author(name=pl["name"], icon_url=pl.get("cover", None) or Embed.Empty)
                 elif "author" in entry.meta:
                     author = entry.meta["author"]
                     em.set_author(
@@ -938,7 +938,7 @@ class DisplayCommands:
                 em.set_thumbnail(url=entry.thumbnail)
                 if "playlist" in entry.meta:
                     pl = entry.meta["playlist"]
-                    em.set_author(name=pl["name"].title(), icon_url=pl.get("cover", None) or Embed.Empty)
+                    em.set_author(name=pl["name"], icon_url=pl.get("cover", None) or Embed.Empty)
                 elif "author" in entry.meta:
                     author = entry.meta["author"]
                     em.set_author(
@@ -1001,7 +1001,7 @@ class DisplayCommands:
             origin_text = ""
             if "playlist" in item.meta:
                 origin_text = "from playlist **{}**".format(
-                    item.meta["playlist"]["name"].title()
+                    item.meta["playlist"]["name"]
                 )
             elif "author" in item.meta:
                 origin_text = "by **{}**".format(

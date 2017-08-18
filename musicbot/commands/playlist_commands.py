@@ -1,3 +1,4 @@
+import asyncio
 import re
 import time
 from random import choice, shuffle
@@ -5,7 +6,6 @@ from textwrap import indent
 
 from discord import Embed
 
-import asyncio
 from musicbot.entry import GieselaEntry, TimestampEntry, YoutubeEntry
 from musicbot.entry_updater import fix_generator
 from musicbot.exceptions import ExtractionError, WrongEntryTypeError
@@ -113,14 +113,14 @@ class PlaylistCommands:
             if not clone_entries:
                 if broken_entries:
                     return Response("Can't play `{0}`, there are **{1}** broken entr{2} in this playlist.\nOpen the playlist builder to fix {3} (`{4}playlist builder {0}`)".format(
-                        savename.title(),
+                        playlist["name"],
                         len(broken_entries),
                         "y" if len(broken_entries) == 1 else "ies",
                         "it" if len(broken_entries) == 1 else "them",
                         self.config.command_prefix
                     ))
                 else:
-                    return Response("There's nothing in `{}` to play".format(savename.title()))
+                    return Response("There's nothing in `{}` to play".format(playlist["name"]))
 
             if load_mode == "replace":
                 player.playlist.clear()
@@ -176,7 +176,7 @@ class PlaylistCommands:
                 return Response(text.format(
                     len(clone_entries),
                     "y" if len(clone_entries) == 1 else "ies",
-                    savename.title(),
+                    playlist["name"],
                     len(broken_entries),
                     "y" if len(broken_entries) == 1 else "ies",
                     "it" if len(broken_entries) == 1 else "them",
@@ -190,7 +190,7 @@ class PlaylistCommands:
 
             self.playlists.remove_playlist(savename)
             return Response(
-                "*{}* has been deleted".format(savename))
+                "*{}* has been deleted".format(playlist["name"]))
 
         elif argument == "clone":
             if savename not in self.playlists.playlists.keys():
@@ -243,10 +243,10 @@ class PlaylistCommands:
 
             return Response(
                 "**{}** {}has been cloned to **{}**".format(
-                    savename, "(from the {}. to the {}. index) ".format(
+                    playlist["name"], "(from the {}. to the {}. index) ".format(
                         str(from_index + 1), str(to_index + 1)) if
                     from_index is not 0 or to_index is not len(clone_entries)
-                    else "", additional_args[0].lower()))
+                    else "", additional_args[0].title()))
 
         elif argument == "showall":
             if len(self.playlists.playlists.keys()) < 1:
@@ -292,7 +292,7 @@ class PlaylistCommands:
             for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.playlist)
                 response_text += "◦ **{}** ({} entr{})\n".format(
-                    pl.replace("_", " ").title(),
+                    infos["name"],
                     len(infos["entries"]),
                     "ies" if len(infos["entries"]) is not 1 else "y"
                 )
@@ -335,7 +335,7 @@ class PlaylistCommands:
                 )
             )
             em = Embed(
-                title=argument.replace("_", " ").title(),
+                title=infos["name"],
                 description=desc_text,
                 colour=hex_to_dec("#b93649"),
                 url="http://giesela.org"
@@ -539,7 +539,7 @@ class PlaylistCommands:
                                                      iterations + 1)
 
             msg_content = interface_string.format(
-                user_savename.replace("_", " ").title(),
+                playlist["name"],
                 playlist["author"].display_name,
                 len(playlist["entries"]),
                 "s" if len(playlist["entries"]) is not 1 else "",
@@ -685,7 +685,7 @@ class PlaylistCommands:
                 extras_message = await self.safe_send_message(
                     channel,
                     extras_string.format(
-                        user_savename.replace("_", " ").title(),
+                        playlist["name"],
                         playlist["author"].display_name,
                         len(playlist["entries"]), "s"
                         if len(playlist["entries"]) is not 1 else "",
@@ -765,7 +765,7 @@ class PlaylistCommands:
             if new_playlist:
                 self.playlists.remove_playlist(savename)
 
-            return Response("Closed **{}** without saving".format(savename))
+            return Response("Closed **{}** without saving".format(playlist["name"]))
             print("Closed the playlist builder")
 
         if save:
@@ -809,7 +809,7 @@ class PlaylistCommands:
             print("Closed the playlist builder and saved the playlist")
 
             return Response("Successfully saved **{}**\n\n{}".format(
-                user_savename.replace("_", " ").title(), c_log))
+                playlist["name"], c_log))
 
     async def entry_manipulator(self, player, channel, author, playlist_name, entry):
         def get_entry_type(fields):
@@ -1200,17 +1200,18 @@ class PlaylistCommands:
             else:
                 return Response("Please specify the playlist's name!")
 
-        playlistname = playlistname.lower()
+        playlist_id = playlistname.lower()
 
         remove_entry = player.current_entry
 
-        if playlistname not in self.playlists.playlists.keys():
-            return Response("There's no playlist `{}`.".format(playlistname.title()))
+        if playlist_id not in self.playlists.playlists.keys():
+            return Response("There's no playlist `{}`.".format(playlist_id))
 
-        self.playlists.edit_playlist(
-            playlistname, player.playlist, remove_entries=[remove_entry])
+        playlist_data = self.playlists.get_playlist(playlist_id, queue, False)
+
+        self.playlists.edit_playlist(playlist_id, player.playlist, remove_entries=[remove_entry])
         player._current_entry.meta.pop("playlist", None)
-        return Response("Removed **{}** from playlist `{}`.".format(remove_entry.title, playlistname))
+        return Response("Removed **{}** from playlist `{}`.".format(remove_entry.title, playlist_data["name"]))
 
     @block_user
     @command_info("4.1.9", 1500882702, {
