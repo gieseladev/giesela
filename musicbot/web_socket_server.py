@@ -222,6 +222,10 @@ class GieselaWebSocket(WebSocket):
                 success = self._call_function_main_thread(player.playlist.replay, replay_index, wait_for_result=True)
                 self.log("replayed", replay_index)
 
+            elif command == "cycle_repeat":
+                success = self._call_function_main_thread(player.repeat, wait_for_result=True)
+                self.log("set repeat state to", player.repeatState)
+
             elif command == "playlist_play":
                 playlist_id = command_data.get("playlist_id")
                 playlist_index = command_data.get("index")
