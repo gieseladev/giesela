@@ -132,6 +132,7 @@ class MusicPlayer(EventEmitter):
         self.state = MusicPlayerState.STOPPED
         self.repeatState = MusicPlayerRepeatState.NONE
         self.skipRepeat = False
+        self.no_history = False
 
         self.loop.create_task(self.websocket_check())
         self.handle_manually = False
@@ -155,7 +156,9 @@ class MusicPlayer(EventEmitter):
         if self.is_stopped:
             self.loop.call_later(2, self.play)
 
-    def skip(self):
+    def skip(self, no_history=False):
+        self.no_history = no_history
+
         self.skipRepeat = True
         self._kill_current_player()
         self.update_chapter_updater()
@@ -264,7 +267,10 @@ class MusicPlayer(EventEmitter):
 
         entry = self._current_entry
 
-        self.playlist.push_history(entry)
+        if not self.no_history:
+            self.playlist.push_history(entry)
+
+        self.no_history = False
 
         if self.is_repeatAll or (self.is_repeatSingle and not self.skipRepeat):
             self.playlist._add_entry(entry)

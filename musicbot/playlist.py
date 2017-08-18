@@ -96,9 +96,8 @@ class Playlist(EventEmitter):
             self._add_entry(self.history[index], placement=0)
 
             if revert and self.player.current_entry:
-                self.player.skip()
+                self.player.skip(no_history=True)
                 # since skip triggers the _playback_finished event, the entry is pushed to the history and I don't want that
-                entry = self.history.pop(0)
                 # instead I want it to be back in the queue so it can be played again
                 self._add_entry(entry, placement=0)
             else:
