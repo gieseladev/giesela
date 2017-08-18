@@ -63,7 +63,7 @@ class Playlists:
 
         playlist_information = ***REMOVED***
             "id":           playlist_id,
-            "name":         plsection.get("name", False) or playlist_id,
+            "name":         plsection.get("name", False) or playlist_id.title().replace("_", " "),
             "location":     plsection["location"],
             "author":       playlist_author,
             "replay_count": int(plsection["replays"]),
