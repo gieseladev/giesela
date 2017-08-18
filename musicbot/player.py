@@ -1,15 +1,15 @@
-import asyncio
-import audioop
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
-from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
 
+import asyncio
+import audioop
+from enum import Enum
 from musicbot.config import static_config
 from musicbot.entry import RadioSongEntry, StreamEntry, TimestampEntry
 from musicbot.exceptions import FFmpegError, FFmpegWarning
@@ -539,7 +539,7 @@ class MusicPlayer(EventEmitter):
 
     @property
     def progress(self):
-        return round(self._current_player.buff.frame_count * 0.02 + self.current_entry.start_seconds) if self.current_entry else 0
+        return round(self._current_player.buff.frame_count * 0.02 + self.current_entry.start_seconds) if self._current_player else 0
 
 
 def filter_stderr(popen: subprocess.Popen, future: asyncio.Future):
