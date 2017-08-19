@@ -1,11 +1,12 @@
-import asyncio
 import re
 from random import shuffle
 
+import asyncio
 from musicbot.cleverbot import CleverWrap
 from musicbot.config import ConfigDefaults
 from musicbot.games.game_2048 import Game2048
 from musicbot.games.game_cah import GameCAH
+from musicbot.games.game_connect_four import GameConnectFour
 from musicbot.games.game_hangman import GameHangman
 from musicbot.utils import (Response, block_user, command_info, owner_only,
                             random_line)
@@ -645,16 +646,11 @@ class FunCommands:
 
     @block_user
     @command_info("1.9.5", 1478998740, ***REMOVED***
-        "2.0.2": (1481387640,
-                  "Added Hangman game and generalised game hub command"),
-        "3.5.2": (1497712233, "Updated documentaion for this command")
+        "2.0.2": (1481387640, "Added Hangman game and generalised game hub command"),
+        "3.5.2": (1497712233, "Updated documentaion for this command"),
+        "4.6.3": (1503158773, "Added Connect Four")
     ***REMOVED***)
-    async def cmd_game(self,
-                       message,
-                       channel,
-                       author,
-                       leftover_args,
-                       game=None):
+    async def cmd_game(self, message, channel, author, leftover_args, game=None):
         """
         ///|Usage
         `***REMOVED***command_prefix***REMOVED***game [name]`
@@ -669,12 +665,9 @@ class FunCommands:
         all_games = list(filter(lambda x: re.search("^g_\w+", x), all_funcs))
         all_game_names = [x[2:] for x in all_games]
         game_list = [***REMOVED***
-            "name":
-            x[2:],
-            "handler":
-            getattr(self, x, None),
-            "description":
-            getattr(self, x, None).__doc__.strip(" \t\n\r")
+            "name": x[2:],
+            "handler": getattr(self, x, None),
+            "description": getattr(self, x, None).__doc__.strip(" \t\n\r")
         ***REMOVED*** for x in all_games]
 
         if message.mentions is not None and len(message.mentions) > 0:
@@ -716,8 +709,8 @@ class FunCommands:
                     channel, "That was all of them.", expire_in=20)
                 return
 
-        game = game.lower()
-        handler = getattr(self, "g_" + game.title(), None)
+        # game = game.lower().replace(" ", "_")
+        handler = getattr(self, "g_" + game, None)
         if handler is None:
             return Response("There's no game like that...")
 
@@ -899,3 +892,16 @@ class FunCommands:
 
             await self.safe_delete_message(msg)
             await self.safe_delete_message(response)
+
+    async def g_ConnectFour(self, author, channel, additional_args):
+        """
+        I hope you already know how this one works...
+        """
+
+        # determine players
+
+        game_done = asyncio.Future()
+
+        game = GameConnectFour.start(self, channel, game_done, author)
+
+        winner = await game_done
