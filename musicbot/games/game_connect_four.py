@@ -473,7 +473,10 @@ class GameConnectFour:
         self.log("playing turn {}".format(self.current_turn))
 
         drawn_grid = "\n".join("".join(val) for val in self.draw_grid())
-        round_message = "**{}'s Turn**\n\n{}\n\nWhat column would you like to play next?".format(self.current_player.name, drawn_grid)
+        round_message = "**{}'s Turn**\n\n{}\n\n".format(self.current_player.name, drawn_grid)
+
+        if not isinstance(self.current_player, AIPlayer):
+            round_message += "What column would you like to play next?"
 
         if self.round_interface_message:
             self.round_interface_message = await self.bot.safe_edit_message(self.round_interface_message, round_message, keep_at_bottom=True)

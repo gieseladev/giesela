@@ -736,8 +736,8 @@ class FunCommands:
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                    str(reaction.emoji).startswith("📽") or
-                    str(reaction.emoji).startswith("💾")
+                        str(reaction.emoji).startswith("📽") or
+                        str(reaction.emoji).startswith("💾")
                     ) and reaction.count > 1 and user == author:
                 return True
 
@@ -898,10 +898,47 @@ class FunCommands:
         I hope you already know how this one works...
         """
 
-        # determine players
+        to_delete = []
+
+        to_delete.append(await self.safe_send_message(channel, "Whom would you like to play against? You can **@mention** someone to challange them or you can play against Giesela by sending \"ai\" or **@mention**ing her"))
+
+        players = None
+
+        while True:
+            msg = await self.wait_for_message(timeout=None, author=author, channel=channel)
+            to_delete.append(msg)
+
+            if msg.mentions:
+                challanged_user = msg.mentions[0]
+
+                if challanged_user == self.user:
+                    players = author
+                    break
+
+                if challanged_user.bot:
+                    to_delete.append(await self.safe_send_message(channel, "You can't challange a bot"))
+
+                await self.safe_send_message(challanged_user, "**{}** challanded you to a game of **Connect 4**. Do you accept?".format(author.display_name))
+                resp = await self.wait_for_message(timeout=60, author=challanged_user)
+
+                if resp:
+                    to_delete.append(resp)
+
+                if resp and resp.content.lower().strip() in ("yes", "sure", "of course", "bring it", "y", "ye", "yeah", "yea", "yup", "k", "okay", "let's go"):
+                    players = [author, challanged_user]
+                    break
+                else:
+                    to_delete.append(await self.safe_send_message(channel, "**{}** declined!".format(author.display_name)))
+
+            elif msg.content.lower().strip() in ("ai", "computer", "giesela", "you"):
+                players = author
+                break
+
+        for msg in to_delete:
+            asyncio.ensure_future(self.safe_delete_message(msg))
 
         game_done = asyncio.Future()
 
-        game = GameConnectFour.start(self, channel, game_done, author)
+        game = GameConnectFour.start(self, channel, game_done, players)
 
-        winner = await game_done
+        await game_done
