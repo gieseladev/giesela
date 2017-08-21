@@ -374,6 +374,8 @@ class RadioSongEntry(RadioStationEntry):
         self._current_song_info = None
         self._csi_poll_time = 0
 
+        self.poll_time = station_data.poll_time
+
     @property
     def sortby(self):
         return self.title
