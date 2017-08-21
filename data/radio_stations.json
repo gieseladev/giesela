@@ -32,6 +32,7 @@
       "cover": "http://capital.gcstatic.com/assets_v4r/capital/img/default_image_track.png",
       "website": "http://capitalfm.com",
       "url": "media-ice.musicradio.com/CapitalMP3",
+      "poll_time": 40,
       "thumbnails": ["generic", "england"]
     ***REMOVED***,
     ***REMOVED***

@@ -431,7 +431,11 @@ class MusicPlayer(EventEmitter):
                     delay = (sub_entry["duration"] - sub_entry["progress"]) + 2
 
                 elif isinstance(self.current_entry, RadioSongEntry):
-                    if self.current_entry.song_duration > 5:
+                    if self.current_entry.poll_time:
+                        print("[CHAPTER-UPDATER] this radio stations enforces a custom wait time")
+
+                        delay = self.current_entry.poll_time
+                    elif self.current_entry.song_duration > 5:
                         delay = self.current_entry.song_duration - self.current_entry.song_progress + 2
                         if delay < 0:
                             delay = 40

@@ -16,7 +16,7 @@ from musicbot.utils import parse_timestamp
 
 class StationInfo:
 
-    def __init__(self, id, name, aliases, language, cover, url, website, thumbnails):
+    def __init__(self, id, name, aliases, language, cover, url, website, thumbnails, poll_time=None):
         self.id = id
         self.name = name
         self._aliases = aliases
@@ -28,6 +28,7 @@ class StationInfo:
         self.thumbnails = list(chain(*[RadioStations.thumbnails[pointer] if pointer in RadioStations.thumbnails else [
             pointer, ] for pointer in thumbnails]))
         self.has_current_song_info = RadioSongExtractor.has_data(self)
+        self.poll_time = poll_time
 
     @property
     def thumbnail(self):
@@ -46,6 +47,7 @@ class StationInfo:
             "cover":        self.cover,
             "website":      self.website,
             "url":          self.url,
+            "poll_time":    self.poll_time,
             "thumbnails":   self.thumbnails
         ***REMOVED***
         return data
