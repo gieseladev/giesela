@@ -1,14 +1,79 @@
+import json
+import os
 import re
 import traceback
+from os import path
 
 import requests
 from bs4 import BeautifulSoup
 
 from musicbot.config import ConfigDefaults, static_config
 
+lyrics_folder = os.getcwd() + "\\" + static_config.lyrics_cache
+lyrics_version = 1
+required_version = 1
+
+
+def ensure_cache_folder():
+    if path.isdir(lyrics_folder):
+        return True
+    else:
+        os.makedirs(lyrics_folder)
+        return True
+
+
+def escape_query(query):
+    filename = re.sub(r"\s+", "_", query)
+    filename = re.sub(r"\W+", "-", filename)
+
+    return filename.lower().strip() + ".json"
+
+
+def check_cache(query, load=True):
+    ensure_cache_folder()
+
+    file_path = lyrics_folder + "\\" + escape_query(query)
+
+    if path.isfile(file_path):
+        print("[LYRICS] cached \"{}\"".format(query))
+
+        lyrics = json.load(open(file_path, "r+"))
+
+        if lyrics.get("version", 0) >= required_version:
+            return lyrics
+        else:
+            print("[LYRICS] \"{}\" are outdated".format(query))
+            return None
+    else:
+        return None
+
+
+def cache_lyrics(query, lyrics):
+    ensure_cache_folder()
+
+    if check_cache(query, load=False):
+        return False
+    else:
+        file_path = lyrics_folder + "\\" + escape_query(query)
+
+        lyrics["version"] = lyrics_version
+
+        json.dump(lyrics, open(file_path, "w+"), indent=4)
+
+        print("[LYRICS] saved \"{}\"".format(query))
+        return True
+
 
 def search_for_lyrics(query):
-    return search_for_lyrics_google(query)
+    cached_lyrics = check_cache(query)
+
+    if cached_lyrics:
+        return cached_lyrics
+    else:
+        lyrics = search_for_lyrics_google(query)
+        cache_lyrics(query, lyrics)
+
+    return lyrics
 
 
 def search_for_lyrics_google(query):

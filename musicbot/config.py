@@ -129,6 +129,7 @@ class ConfigDefaults:
     auto_playlist_file = "config/autoplaylist.txt"
     hangman_wordlist = "data/hangman_wordlist.txt"
     name_list = "data/names.txt"
+    lyrics_cache = "cache/lyrics"
 
 
 static_config = Config(ConfigDefaults.options_file)
