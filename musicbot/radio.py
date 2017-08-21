@@ -1,7 +1,7 @@
 import json
 import re
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, time, timedelta, timezone
 from itertools import chain
 from random import choice
 
@@ -136,26 +136,32 @@ class RadioSongExtractor:
 
     def _get_current_song_capital_fm():
         try:
-            resp = requests.get(
-                "http://www.capitalfm.com/dynamic/now-playing-card/digital/")
+            resp = requests.get("http://www.capitalfm.com/digital/radio/last-played-songs/")
             soup = BeautifulSoup(resp.text, ConfigDefaults.html_parser)
-            title = " ".join(soup.find_all(
-                "div",
-                attrs={"itemprop": "name", "class": "track"}
-            )[0].text.strip().split())
-            artist = " ".join(soup.find_all("div",
-                                            attrs={"itemprop": "byArtist", "class": "artist"})[
-                0].text.strip().split())
-            cover = soup.find_all("img", itemprop="image")[
-                0]["data-src"]
+
+            tz_info = timezone(timedelta(hours=1))
+
+            time_on = soup.select(".last_played_songs .show.on_now .details .time")[0].contents[-1].strip()
+            start, end = time_on.split("-", maxsplit=1)
+
+            start_time = datetime.combine(date.today(), datetime.strptime(start.strip(), "%I%p").time(), tz_info)
+            end_time = datetime.combine(date.today(), datetime.strptime(end.strip(), "%I%p").time(), tz_info)
+
+            duration = (end_time - start_time).total_seconds()
+            progress = (datetime.now(tz=tz_info) - start_time).total_seconds()
+
+            title = soup.find("span", attrs={"class": "track", "itemprop": "name"}).text.strip()
+            artist = soup.find("span", attrs={"class": "artist", "itemprop": "byArtist"}).text
+            artist = re.sub(r"[\n\s]+", " ", artist).strip()
+            cover = soup.select(".song_wrapper .img_wrapper img")[0]["data-src"]
 
             return {
                 "title": title,
                 "artist": artist,
                 "cover": cover,
                 "youtube": "http://www.capitalfm.com",
-                "duration": 0,
-                "progress": 0
+                "duration": duration,
+                "progress": progress
             }
         except:
             raise
