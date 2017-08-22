@@ -1,14 +1,14 @@
-import asyncio
 import time
 import traceback
 from random import choice, shuffle
 
 from discord import Embed
 
+import asyncio
 from musicbot import exceptions
 from musicbot.entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                             StreamEntry, TimestampEntry, YoutubeEntry)
-from musicbot.radio import RadioStations
+from musicbot.radio import RadioSongExtractor, RadioStations
 from musicbot.utils import (Response, block_user, clean_songname, command_info,
                             create_bar, format_time, get_related_videos,
                             hex_to_dec, nice_cut, ordinal, owner_only,
@@ -44,7 +44,8 @@ class EnqueueCommands:
     @command_info("2.0.3", 1485523740, ***REMOVED***
         "3.7.7": (1499018088, "radio selection looks good again"),
         "3.8.9": (1499535312, "Part of the `Giesenesis` rewrite"),
-        "4.4.4": (1501627084, "Fixed this command")
+        "4.4.4": (1501627084, "Fixed this command"),
+        "4.6.4": (1503433750, "The station finder now displays the current song of the station")
     ***REMOVED***)
     async def cmd_radio(self, player, channel, author, leftover_args):
         """
@@ -84,25 +85,41 @@ class EnqueueCommands:
         possible_stations = RadioStations.get_all_stations()
         shuffle(possible_stations)
 
-        interface_string = "*****REMOVED***0.name***REMOVED*****\n\nType `yes` or `no`"
+        interface_string = "*****REMOVED***0.name***REMOVED*****\n***REMOVED***1***REMOVED***\nType `yes` or `no`"
+        now_playing_string = "Currently playing *****REMOVED***artist***REMOVED*** - ***REMOVED***title***REMOVED*****\n"
 
-        for station in possible_stations:
-            msg = await self.safe_send_message(
-                channel, interface_string.format(station))
-            response = await self.wait_for_message(
-                author=author, channel=channel, check=check)
+        station_data_waiter = None
+
+        if RadioSongExtractor.has_data(possible_stations[0]):
+            station_data_waiter = asyncio.ensure_future(RadioSongExtractor.async_get_current_song(self.loop, possible_stations[0]))
+        else:
+            station_data_waiter = None
+
+        for next_index, station in enumerate(possible_stations, 1):
+            np = ""
+
+            if station_data_waiter:
+                data = await station_data_waiter
+                np = now_playing_string.format(**data)
+
+            if next_index < len(possible_stations) and RadioSongExtractor.has_data(possible_stations[next_index]):
+                station_data_waiter = asyncio.ensure_future(RadioSongExtractor.async_get_current_song(self.loop, possible_stations[next_index]))
+            else:
+                station_data_waiter = None
+
+            msg = await self.safe_send_message(channel, interface_string.format(station, np))
+            response = await self.wait_for_message(author=author, channel=channel, check=check)
             await self.safe_delete_message(msg)
-            play_station = response.content.lower().strip() in [
-                "y", "yes", "yeah", "yep", "sure"
-            ]
+            play_station = response.content.lower().strip() in ["y", "yes", "yeah", "yep", "sure"]
             await self.safe_delete_message(response)
 
             if play_station:
                 await player.playlist.add_radio_entry(station, channel=channel, author=author)
-                return Response(
-                    "There you go fam!\n*****REMOVED***.name***REMOVED*****".format(station))
+                return Response("There you go fam!\n*****REMOVED***.name***REMOVED*****".format(station))
             else:
                 continue
+
+        return Response("That was all of them, sorry")
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
         "3.5.2": (1497712233, "Updated documentaion for this command"),

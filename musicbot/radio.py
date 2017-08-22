@@ -10,6 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
 
+import asyncio
 from musicbot.config import ConfigDefaults
 from musicbot.utils import parse_timestamp
 
@@ -118,6 +119,9 @@ class RadioSongExtractor:
             return None
         else:
             return extractor()
+
+    async def async_get_current_song(loop, station_info):
+        return await loop.run_in_executor(None, RadioSongExtractor.get_current_song, station_info)
 
     def _get_current_song_energy_bern():
         try:

@@ -1,6 +1,6 @@
 import os.path
 
-MAIN_VERSION = "4.6.3"
+MAIN_VERSION = "4.6.4"
 SUB_VERSION = "raindrop"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
