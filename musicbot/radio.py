@@ -1,7 +1,7 @@
 import json
 import re
 import time
-from datetime import date, datetime, time, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from itertools import chain
 from random import choice
 
@@ -30,9 +30,16 @@ class StationInfo:
         self.has_current_song_info = RadioSongExtractor.has_data(self)
         self.poll_time = poll_time
 
+        self._current_thumbnail = None
+        self._ct_timestamp = 0
+
     @property
     def thumbnail(self):
-        return choice(self.thumbnails)
+        if not self._current_thumbnail or time.time() > self._ct_timestamp:
+            self._current_thumbnail = choice(self.thumbnails)
+            self._ct_timestamp = time.time() + (self.poll_time or 20)
+
+        return self._current_thumbnail
 
     @classmethod
     def from_dict(cls, data):
