@@ -11,6 +11,7 @@ from string import ascii_lowercase
 import asyncio
 from musicbot.config import static_config
 from musicbot.entry import TimestampEntry
+from musicbot.radio import RadioStations
 from musicbot.simple_web_socket_server import SimpleWebSocketServer, WebSocket
 from musicbot.web_author import WebAuthor
 
@@ -126,6 +127,11 @@ class GieselaWebSocket(WebSocket):
 
                 player = GieselaServer.get_player(token=self.token)
                 answer["playlists"] = player.bot.playlists.get_all_web_playlists(player.playlist)
+
+            elif request == "send_radio_stations":
+                self.log("asked for the radio stations")
+
+                answer["radio_stations"] = [station.to_dict() for station in RadioStations.get_all_stations()]
 
             elif request == "send_lyrics":
                 self.log("asked for lyrics")
@@ -259,6 +265,19 @@ class GieselaWebSocket(WebSocket):
                         success = True
                     else:
                         success = False
+                else:
+                    success = False
+
+            elif command == "play_radio":
+                station_id = command_data.get("id")
+                play_mode = command_data.get("mode", "now")
+                station = RadioStations.get_station(station_id)
+
+                self.log("enqueued radio station", station.name, "(mode " + play_mode + ")")
+
+                if station:
+                    self._call_function_main_thread(player.playlist.add_radio_entry, station, now=(play_mode == "now"), wait_for_result=True, revert=True)
+                    success = True
                 else:
                     success = False
 

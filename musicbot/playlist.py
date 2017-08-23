@@ -157,13 +157,13 @@ class Playlist(EventEmitter):
 
         return entry, len(self.entries)
 
-    async def add_radio_entry(self, station_info, **meta):
+    async def add_radio_entry(self, station_info, now=False, **meta):
         if station_info.has_current_song_info:
             entry = RadioSongEntry(self, station_info, **meta)
         else:
             entry = RadioStationEntry(self, station_info, **meta)
 
-        self._add_entry(entry)
+        self._add_entry(entry, placement=(0 if now else None))
 
     async def add_entry(self, song_url, **meta):
         """
