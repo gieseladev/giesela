@@ -45,7 +45,7 @@
       "name": "Energy Bern",
       "aliases": ["energy"],
       "language": "ch",
-      "cover": "https://i.imgur.com/loKtibu.png",
+      "cover": "http://i.imgur.com/K4u00UT.png",
       "website": "http://energy.ch",
       "url": "http://energybern.ice.infomaniak.ch/energybern-high.mp3",
       "thumbnails": ["generic", "switzerland"]
@@ -55,7 +55,7 @@
       "name": "Radio 32",
       "aliases": ["32"],
       "language": "ch",
-      "cover": "https://i.imgur.com/UNwjfLH.jpg",
+      "cover": "http://i.imgur.com/wklJano.png",
       "website": "http://radio32.ch",
       "url": "http://stream.radio32.ch/radio32",
       "thumbnails": ["generic", "switzerland"]
@@ -65,7 +65,7 @@
       "name": "BBC",
       "aliases": ["bbq"],
       "language": "en",
-      "cover": "https://i.imgur.com/dwIVsFw.png",
+      "cover": "http://i.imgur.com/eE8Vp1H.png",
       "website": "http://bbc.com",
       "url": "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_q",
       "thumbnails": ["generic", "england", "https://i.imgur.com/3fy23iE.jpg"]
