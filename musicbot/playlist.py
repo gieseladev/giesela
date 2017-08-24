@@ -163,7 +163,16 @@ class Playlist(EventEmitter):
         else:
             entry = RadioStationEntry(self, station_info, **meta)
 
-        self._add_entry(entry, placement=(0 if now else None))
+        if now:
+            await entry._download()
+
+            if self.player.current_entry:
+                self.player.handle_manually = True
+
+            self.player.play_entry(entry)
+            GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+        else:
+            self._add_entry(entry)
 
     async def add_entry(self, song_url, **meta):
         """

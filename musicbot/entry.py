@@ -395,26 +395,44 @@ class RadioSongEntry(RadioStationEntry):
 
     @property
     def song_progress(self):
+        if not self._is_current_entry:
+            return None
+
         return self.current_song_info["progress"]
 
     @property
     def song_duration(self):
+        if not self._is_current_entry:
+            return None
+
         return self.current_song_info["duration"]
 
     @property
     def link(self):
+        if not self._is_current_entry:
+            return super().link
+
         return self.current_song_info["youtube"] or super().link
 
     @property
     def title(self):
+        if not self._is_current_entry:
+            return super().title
+
         return self.current_song_info["title"]
 
     @property
     def artist(self):
+        if not self._is_current_entry:
+            return None
+
         return self.current_song_info["artist"]
 
     @property
     def cover(self):
+        if not self._is_current_entry:
+            return super().cover
+
         return self.current_song_info["cover"]
 
     def to_web_dict(self, skip_calc=False):
