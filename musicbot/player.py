@@ -454,8 +454,7 @@ class MusicPlayer(EventEmitter):
 
             await asyncio.sleep(delay)
             if not self.current_entry:
-                print(
-                    "[CHAPTER-UPDATER] Waited for nothing. There's nothing playing anymore")
+                # print("[CHAPTER-UPDATER] Waited for nothing. There's nothing playing anymore")
                 return
 
             if self.current_entry.title == before_title:
