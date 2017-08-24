@@ -103,6 +103,7 @@ class BaseEntry:
         self._waiting_futures = []
 
         self._lyrics = None
+        self._lyrics_dirty = False
 
     @property
     def title(self):
@@ -110,8 +111,9 @@ class BaseEntry:
 
     @property
     def lyrics(self):
-        if not self._lyrics:
+        if self._lyrics_dirty or not self._lyrics:
             self._lyrics = search_for_lyrics(self.title)
+            self._lyrics_dirty = False
 
         return self._lyrics
 
@@ -389,6 +391,7 @@ class RadioSongEntry(RadioStationEntry):
     def current_song_info(self):
         if self._current_song_info is None or (time.time() - self._csi_poll_time) > 5:
             print("[RadioEntry] getting new current_song_info")
+            self._lyrics_dirty = True
             self._get_new_song_info()
 
         return self._current_song_info
@@ -675,6 +678,7 @@ class TimestampEntry(YoutubeEntry):
     def __init__(self, queue, video_id, url, title, duration, thumbnail, description, sub_queue, expected_filename=None, **meta):
         super().__init__(queue, video_id, url, title, duration,
                          thumbnail, description, expected_filename=expected_filename, **meta)
+
         self.sub_queue = sub_queue
 
     @property
@@ -691,6 +695,7 @@ class TimestampEntry(YoutubeEntry):
 
         sub_entry["progress"] = max(progress - sub_entry["start"], 0)
 
+        self._lyrics_dirty = True
         return sub_entry
 
     @property

@@ -31,9 +31,12 @@ class Playlists:
             json.dump(self.playlists, f, indent=4)
 
     def get_all_web_playlists(self, queue):
-        if self._web_playlists_dirty or self._cached_web_playlists is None:
+        if self._web_playlists_dirty or not self._cached_web_playlists:
             self._cached_web_playlists = sorted([self.get_web_playlist(name, queue) for name, data in self.playlists.items() if data.get("cover_url")], key=lambda playlist: playlist["name"])
             self._web_playlists_dirty = False
+            print("[playlists] updated cached web playlists")
+        else:
+            print("[playlists] using cached web playlists")
 
         return self._cached_web_playlists
 
