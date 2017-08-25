@@ -71,7 +71,9 @@ def search_for_lyrics(query):
         return cached_lyrics
     else:
         lyrics = search_for_lyrics_google(query)
-        cache_lyrics(query, lyrics)
+
+        if lyrics:
+            cache_lyrics(query, lyrics)
 
     return lyrics
 
