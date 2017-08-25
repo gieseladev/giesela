@@ -110,9 +110,13 @@ class BaseEntry:
         raise NotImplementedError
 
     @property
+    def lyrics_title(self):
+        return self.title
+
+    @property
     def lyrics(self):
         if self._lyrics_dirty or not self._lyrics:
-            self._lyrics = search_for_lyrics(self.title)
+            self._lyrics = search_for_lyrics(self.lyrics_title)
             self._lyrics_dirty = False
 
         return self._lyrics
@@ -381,6 +385,10 @@ class RadioSongEntry(RadioStationEntry):
     @property
     def sortby(self):
         return self.title
+
+    @property
+    def lyrics_title(self):
+        return ((self.artist + " - ") or "") + self.title
 
     def _get_new_song_info(self):
         self._current_song_info = RadioSongExtractor.get_current_song(
