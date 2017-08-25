@@ -1,3 +1,4 @@
+import copy
 import datetime
 import json
 import random
@@ -93,7 +94,8 @@ class Playlist(EventEmitter):
             return False
 
         if self.history:
-            self._add_entry(self.history[index], placement=0)
+            history_entry = copy.deepcopy(self.history[index])
+            self._add_entry(history_entry, placement=0)
 
             if revert and self.player.current_entry:
                 self.player.skip()
