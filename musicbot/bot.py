@@ -689,8 +689,10 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         if not self.config.auto_pause:
             return
 
-        if not (before.voice.voice_channel and after.voice.voice_channel):
-            return
+        user_left_voice_channel = False
+
+        if before.voice.voice_channel and not after.voice.voice_channel:
+            user_left_voice_channel = True
 
         if after.server.me != after and after.bot:
             return
@@ -701,7 +703,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 return
 
             # I was alone but a non-bot joined
-            if sum(1 for vm in my_channel.voice_members if not vm.bot) == 1:
+            if sum(1 for vm in my_channel.voice_members if not vm.bot) == 1 and not user_left_voice_channel:
                 player = await self.get_player(after.server)
                 if player.is_paused:
                     print("[AUTOPAUSE] Resuming")

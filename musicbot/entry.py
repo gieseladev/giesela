@@ -1,10 +1,10 @@
-import asyncio
 import os
 import time
 import traceback
 
 from discord import Channel, Member, Server, User
 
+import asyncio
 from musicbot.exceptions import (BrokenEntryError, ExtractionError,
                                  OutdatedEntryError)
 from musicbot.lyrics import search_for_lyrics
@@ -103,15 +103,21 @@ class BaseEntry:
         self._waiting_futures = []
 
         self._lyrics = None
+        self._lyrics_dirty = False
 
     @property
     def title(self):
         raise NotImplementedError
 
     @property
+    def lyrics_title(self):
+        return self.title
+
+    @property
     def lyrics(self):
-        if not self._lyrics:
-            self._lyrics = search_for_lyrics(self.title)
+        if self._lyrics_dirty or not self._lyrics:
+            self._lyrics = search_for_lyrics(self.lyrics_title)
+            self._lyrics_dirty = False
 
         return self._lyrics
 
@@ -374,9 +380,15 @@ class RadioSongEntry(RadioStationEntry):
         self._current_song_info = None
         self._csi_poll_time = 0
 
+        self.poll_time = station_data.poll_time
+
     @property
     def sortby(self):
         return self.title
+
+    @property
+    def lyrics_title(self):
+        return ((self.artist + " - ") or "") + self.title
 
     def _get_new_song_info(self):
         self._current_song_info = RadioSongExtractor.get_current_song(
@@ -387,32 +399,51 @@ class RadioSongEntry(RadioStationEntry):
     def current_song_info(self):
         if self._current_song_info is None or (time.time() - self._csi_poll_time) > 5:
             print("[RadioEntry] getting new current_song_info")
+            self._lyrics_dirty = True
             self._get_new_song_info()
 
         return self._current_song_info
 
     @property
     def song_progress(self):
+        if not self._is_current_entry:
+            return None
+
         return self.current_song_info["progress"]
 
     @property
     def song_duration(self):
+        if not self._is_current_entry:
+            return None
+
         return self.current_song_info["duration"]
 
     @property
     def link(self):
+        if not self._is_current_entry:
+            return super().link
+
         return self.current_song_info["youtube"] or super().link
 
     @property
     def title(self):
+        if not self._is_current_entry:
+            return super().title
+
         return self.current_song_info["title"]
 
     @property
     def artist(self):
+        if not self._is_current_entry:
+            return None
+
         return self.current_song_info["artist"]
 
     @property
     def cover(self):
+        if not self._is_current_entry:
+            return super().cover
+
         return self.current_song_info["cover"]
 
     def to_web_dict(self, skip_calc=False):
@@ -655,6 +686,7 @@ class TimestampEntry(YoutubeEntry):
     def __init__(self, queue, video_id, url, title, duration, thumbnail, description, sub_queue, expected_filename=None, **meta):
         super().__init__(queue, video_id, url, title, duration,
                          thumbnail, description, expected_filename=expected_filename, **meta)
+
         self.sub_queue = sub_queue
 
     @property
@@ -671,6 +703,7 @@ class TimestampEntry(YoutubeEntry):
 
         sub_entry["progress"] = max(progress - sub_entry["start"], 0)
 
+        self._lyrics_dirty = True
         return sub_entry
 
     @property
@@ -771,6 +804,28 @@ class GieselaEntry(YoutubeEntry):
         album = data["album"]
 
         return cls(playlist, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, expected_filename=filename, **meta)
+
+    @classmethod
+    def upgrade(cls, previous_entry, song_title, artist, artist_image, album, cover):
+        kwargs = {
+            "queue":                previous_entry.queue,
+            "video_id":             previous_entry.video_id,
+            "url":                  previous_entry.url,
+            "title":                previous_entry._title,
+            "duration":             previous_entry.duration,
+            "thumbnail":            previous_entry.thumbnail,
+            "description":          previous_entry.description,
+            "expected_filename":    previous_entry.expected_filename,
+            "song_title":           song_title,
+            "artist":               artist,
+            "artist_image":         artist_image,
+            "album":                album,
+            "cover":                cover
+        }
+
+        kwargs.update(previous_entry.meta)
+
+        return cls(**kwargs)
 
     def to_dict(self):
         d = super().to_dict()

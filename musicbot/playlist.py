@@ -1,3 +1,4 @@
+import copy
 import datetime
 import json
 import random
@@ -93,10 +94,11 @@ class Playlist(EventEmitter):
             return False
 
         if self.history:
-            self._add_entry(self.history[index], placement=0)
+            history_entry = copy.copy(self.history[index])
+            self._add_entry(history_entry, placement=0)
 
-            if revert and player.current_entry:
-                player.skip()
+            if revert and self.player.current_entry:
+                self.player.skip()
             else:
                 GieselaServer.send_player_information_update(self.player.voice_client.server.id)
 
@@ -157,13 +159,22 @@ class Playlist(EventEmitter):
 
         return entry, len(self.entries)
 
-    async def add_radio_entry(self, station_info, **meta):
+    async def add_radio_entry(self, station_info, now=False, **meta):
         if station_info.has_current_song_info:
             entry = RadioSongEntry(self, station_info, **meta)
         else:
             entry = RadioStationEntry(self, station_info, **meta)
 
-        self._add_entry(entry)
+        if now:
+            await entry._download()
+
+            if self.player.current_entry:
+                self.player.handle_manually = True
+
+            self.player.play_entry(entry)
+            GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+        else:
+            self._add_entry(entry)
 
     async def add_entry(self, song_url, **meta):
         """

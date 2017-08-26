@@ -1,9 +1,9 @@
-import configparser
 import json
 import os
 import re
 import time
 
+import configparser
 from musicbot.entry import Entry
 from musicbot.exceptions import BrokenEntryError, OutdatedEntryError
 from musicbot.utils import clean_songname, format_time, similarity
@@ -17,16 +17,28 @@ class Playlists:
         self.update_playlists()
         self.playlist_save_location = "data/playlists/"
 
+        self._web_playlists_dirty = False
+        self._cached_web_playlists = None
+
     def update_playlists(self):
         with open(self.playlists_file, "r+") as f:
             self.playlists = json.load(f)
 
     def save_playlists(self):
+        self._web_playlists_dirty = True
+
         with open(self.playlists_file, "w+") as f:
             json.dump(self.playlists, f, indent=4)
 
     def get_all_web_playlists(self, queue):
-        return sorted([self.get_web_playlist(name, queue) for name, data in self.playlists.items() if data.get("cover_url")], key=lambda playlist: playlist["name"])
+        if self._web_playlists_dirty or not self._cached_web_playlists:
+            self._cached_web_playlists = sorted([self.get_web_playlist(name, queue) for name, data in self.playlists.items() if data.get("cover_url")], key=lambda playlist: playlist["name"])
+            self._web_playlists_dirty = False
+            print("[playlists] updated cached web playlists")
+        else:
+            print("[playlists] using cached web playlists")
+
+        return self._cached_web_playlists
 
     def get_web_playlist(self, playlist_id, queue):
         data = self.get_playlist(playlist_id, queue)
@@ -63,7 +75,7 @@ class Playlists:
 
         playlist_information = {
             "id":           playlist_id,
-            "name":         plsection.get("name", False) or playlist_id,
+            "name":         plsection.get("name", False) or playlist_id.title().replace("_", " "),
             "location":     plsection["location"],
             "author":       playlist_author,
             "replay_count": int(plsection["replays"]),
