@@ -1,188 +1,153 @@
 ***REMOVED***
-  "version": "4",
+  "version": "5",
   "bookmarks": ***REMOVED***
-    "17b2": ***REMOVED***
-      "id": "17b2",
-      "name": "Pirates of the Caribbean Soundtrack Compilation",
+    "1649e": ***REMOVED***
+      "id": "1649e",
+      "name": "25 The Chaplain At",
       "entry": ***REMOVED***
-        "version": 2,
-        "type": "URLPlaylistEntry",
-        "url": "https://www.youtube.com/watch?v=NMQh-rhWaz8#t=0m12s",
-        "title": "Pirates of the Caribbean Soundtrack Compilation",
-        "duration": 6900,
-        "downloaded": true,
-        "filename": "audio_cache\\youtube-NMQh-rhWaz8-Pirates_of_the_Caribbean_Soundtrack_Compilation.webm",
-        "expected_filename": "audio_cache\\youtube-NMQh-rhWaz8-Pirates_of_the_Caribbean_Soundtrack_Compilation.webm",
+        "version": 103,
+        "type": "TimestampEntry",
+        "expected_filename": "cache/audio_cache/youtube-chus9ZlF-fI-Catch_22_Joseph_Heller_Audiobook_part_2_2.webm",
+        "video_id": "chus9ZlF-fI",
+        "url": "https://www.youtube.com/watch?v=chus9ZlF-fI",
+        "title": "Catch 22    Joseph Heller Audiobook part 2 2",
+        "duration": 32753,
+        "thumbnail": "https://i.ytimg.com/vi/chus9ZlF-fI/hqdefault.jpg",
+        "description": "",
         "meta": ***REMOVED***
-          "channel": ***REMOVED***
-            "type": "Channel",
-            "id": "226402503422509058",
-            "name": "giesela"
-          ***REMOVED***,
           "author": ***REMOVED***
             "type": "Member",
             "id": "203302899277627392",
             "name": "siku2"
           ***REMOVED***
         ***REMOVED***,
-        "start_seconds": 2395,
-        "end_seconds": null,
-        "spotify_track": ***REMOVED***
-          "id": "7bqtma7nIJMRyfkNE3g0mO",
-          "name": "He's a Pirate - From \"Pirates Of The Caribbean\"",
-          "artists": [
-            ***REMOVED***
-              "id": "4LvvJ0nW91Ucm1MOvIirdl",
-              "name": "Dutch Trance Force",
-              "images": [
-                ***REMOVED***
-                  "height": 640,
-                  "url": "https://i.scdn.co/image/f2ada54a468275dfaef6e5fd3cb75ec019e84db2",
-                  "width": 640
-                ***REMOVED***,
-                ***REMOVED***
-                  "height": 300,
-                  "url": "https://i.scdn.co/image/a90c56d415a92ae07cfd6c12687e0ae2ca14d2f5",
-                  "width": 300
-                ***REMOVED***,
-                ***REMOVED***
-                  "height": 64,
-                  "url": "https://i.scdn.co/image/bcf0da532ad183dbb72ed25c1efb33dda288d1c1",
-                  "width": 64
-                ***REMOVED***
-              ],
-              "genres": [],
-              "popularity": 10,
-              "uri": "spotify:artist:4LvvJ0nW91Ucm1MOvIirdl",
-              "href": "https://open.spotify.com/artist/4LvvJ0nW91Ucm1MOvIirdl"
-            ***REMOVED***
-          ],
-          "duration": 210.136,
-          "album": ***REMOVED***
-            "id": "24YXjtqeDUOoUwx8m7xRuw",
-            "name": "Best of Movie Soundtrack & TV Playlist - The Dance Track Hit Compilation",
-            "artists": [
-              ***REMOVED***
-                "id": "0LyfQWJT6nXafLPZqxe9Of",
-                "name": "Various Artists",
-                "images": [],
-                "genres": [],
-                "popularity": 0,
-                "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of",
-                "href": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
-              ***REMOVED***
-            ],
-            "images": [
-              ***REMOVED***
-                "height": 640,
-                "url": "https://i.scdn.co/image/7dffee01e0162db0838f30720b9ff11a343c64e2",
-                "width": 640
-              ***REMOVED***,
-              ***REMOVED***
-                "height": 300,
-                "url": "https://i.scdn.co/image/59a3df303656f5e18b6f828447535948e46de172",
-                "width": 300
-              ***REMOVED***,
-              ***REMOVED***
-                "height": 64,
-                "url": "https://i.scdn.co/image/58e38ed0b71db6c9a782038c2a9a4cb9a9fa302d",
-                "width": 64
-              ***REMOVED***
-            ],
-            "uri": "spotify:album:24YXjtqeDUOoUwx8m7xRuw"
-          ***REMOVED***,
-          "popularity": 4,
-          "uri": "spotify:track:7bqtma7nIJMRyfkNE3g0mO",
-          "query": "Pirates of the Caribbean Soundtrack Compilation",
-          "certainty": 0.41975308641975306
-        ***REMOVED***,
-        "provided_song_timestamps": null
-      ***REMOVED***,
-      "timestamp": 2395,
-      "author_id": "203302899277627392"
-    ***REMOVED***,
-    "f84a": ***REMOVED***
-      "id": "f84a",
-      "name": "Sanic The Tank Engine",
-      "entry": ***REMOVED***
-        "version": 2,
-        "type": "URLPlaylistEntry",
-        "url": "https://www.youtube.com/watch?v=EB9ZiPAlHEQ",
-        "title": "Sanic The Tank Engine",
-        "duration": 116,
-        "downloaded": true,
-        "filename": "audio_cache\\youtube-EB9ZiPAlHEQ-Sanic_The_Tank_Engine.webm",
-        "expected_filename": "audio_cache\\youtube-EB9ZiPAlHEQ-Sanic_The_Tank_Engine.webm",
-        "meta": ***REMOVED***
-          "channel": ***REMOVED***
-            "type": "Channel",
-            "id": "226402503422509058",
-            "name": "giesela"
-          ***REMOVED***,
-          "author": ***REMOVED***
-            "type": "Member",
-            "id": "203302899277627392",
-            "name": "siku2"
+        "sub_queue": [
           ***REMOVED***
-        ***REMOVED***,
-        "start_seconds": 3,
-        "end_seconds": 116,
-        "spotify_track": ***REMOVED***
-          "id": null,
-          "name": "Sanic The Tank Engine",
-          "artists": null,
-          "duration": null,
-          "album": null,
-          "popularity": null,
-          "uri": null,
-          "query": null,
-          "certainty": 0
-        ***REMOVED***,
-        "provided_song_timestamps": null
-      ***REMOVED***,
-      "timestamp": 3,
-      "author_id": "203302899277627392"
-    ***REMOVED***,
-    "17639": ***REMOVED***
-      "id": "17639",
-      "name": "condolences",
-      "entry": ***REMOVED***
-        "version": 2,
-        "type": "URLPlaylistEntry",
-        "url": "https://www.youtube.com/watch?v=a68KJWe_Tfk",
-        "title": "Benjamin Clementine - Condolence | A Take Away Show",
-        "duration": 758,
-        "downloaded": true,
-        "filename": "audio_cache\\youtube-a68KJWe_Tfk-Benjamin_Clementine_-_Condolence_A_Take_Away_Show.webm",
-        "expected_filename": "unknownbenjamin-clementine-condolence-a-take-away-show",
-        "meta": ***REMOVED***
-          "channel": ***REMOVED***
-            "type": "Channel",
-            "id": "226402503422509058",
-            "name": "giesela"
+            "name": "24 \u2013 Milo at",
+            "duration": 2719,
+            "start": 885,
+            "index": 0,
+            "end": 3604,
+            "progress": 2425
           ***REMOVED***,
-          "author": ***REMOVED***
-            "type": "Member",
-            "id": "203302899277627392",
-            "name": "siku2"
           ***REMOVED***
-        ***REMOVED***,
-        "start_seconds": 231,
-        "end_seconds": 758,
-        "spotify_track": ***REMOVED***
-          "id": null,
-          "name": "Benjamin Clementine \n Condolence A Take Away Show",
-          "artists": null,
-          "duration": null,
-          "album": null,
-          "popularity": null,
-          "uri": null,
-          "query": null,
-          "certainty": 0
-        ***REMOVED***,
-        "provided_song_timestamps": null
+            "name": "25 \u2013 The Chaplain at",
+            "duration": 3336,
+            "start": 3604,
+            "index": 1,
+            "end": 6940,
+            "progress": 3331
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "26 \u2013 Aarfy at",
+            "duration": 1086,
+            "start": 6940,
+            "index": 2,
+            "end": 8026,
+            "progress": 71
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "27 \u2013 Nurse Duckett at",
+            "duration": 2168,
+            "start": 8026,
+            "index": 3,
+            "end": 10194
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "28 \u2013 Dobbs at",
+            "duration": 1898,
+            "start": 10194,
+            "index": 4,
+            "end": 12092
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "29 \u2013 Peckem at",
+            "duration": 1906,
+            "start": 12092,
+            "index": 5,
+            "end": 13998
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "30 \u2013 Dunbar at",
+            "duration": 1804,
+            "start": 13998,
+            "index": 6,
+            "end": 15802
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "31 \u2013 Mrs. Daneeka at",
+            "duration": 738,
+            "start": 15802,
+            "index": 7,
+            "end": 16540
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "32 \u2013 Yo-Yo\u2019s Roomies at",
+            "duration": 912,
+            "start": 16540,
+            "index": 8,
+            "end": 17452
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "33 \u2013 Nately\u2019s Whore at",
+            "duration": 1271,
+            "start": 17452,
+            "index": 9,
+            "end": 18723
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "34 \u2013 Thanksgiving at",
+            "duration": 1188,
+            "start": 18723,
+            "index": 10,
+            "end": 19911
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "35 \u2013 Milo the Militant at",
+            "duration": 3228,
+            "start": 19911,
+            "index": 11,
+            "end": 23139
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "37 \u2013 General Scheisskopf at",
+            "duration": 2036,
+            "start": 23139,
+            "index": 12,
+            "end": 25175
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "39 \u2013 The Eternal City at",
+            "duration": 2671,
+            "start": 25175,
+            "index": 13,
+            "end": 27846
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "40 \u2013 Catch-22 at",
+            "duration": 1318,
+            "start": 27846,
+            "index": 14,
+            "end": 29164
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "41 \u2013 Snowden at",
+            "duration": 1647,
+            "start": 29164,
+            "index": 15,
+            "end": 30811
+          ***REMOVED***,
+          ***REMOVED***
+            "name": "42 \u2013 Yossarian at",
+            "duration": 1942,
+            "start": 30811,
+            "index": 16,
+            "end": 32753
+          ***REMOVED***
+        ],
+        "start_seconds": 0
       ***REMOVED***,
-      "timestamp": 231,
+      "timestamp": 0,
       "author_id": "203302899277627392"
     ***REMOVED***
   ***REMOVED***
