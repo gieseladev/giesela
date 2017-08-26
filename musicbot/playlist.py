@@ -232,13 +232,12 @@ class Playlist(EventEmitter):
                 return None
 
             query = info["entries"][0]["webpage_url"]
-            info = await self.downloader.extract_info(
-                self.loop, query, download=False, process=False)
+            info = await self.downloader.extract_info(self.loop, query, download=False, process=False)
 
         if "entries" in info:
             return ["http://youtube.com/watch?v=" + entry["id"] for entry in info["entries"]]
         else:
-            return await self.get_entry(query, **meta)
+            return await self.get_entry(info, **meta)
 
     async def get_entries_from_urls_gen(self, *urls, **meta):
         for ind, url in enumerate(urls):
@@ -287,7 +286,10 @@ class Playlist(EventEmitter):
         return info
 
     async def get_entry(self, song_url, **meta):
-        info = await self.get_ytdl_data(song_url)
+        if isinstance(song_url, dict):
+            info = song_url
+        else:
+            info = await self.get_ytdl_data(song_url)
 
         entry = None
 
