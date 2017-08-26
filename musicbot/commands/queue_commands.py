@@ -1,3 +1,4 @@
+import functools
 import time
 import traceback
 from random import choice, shuffle
@@ -5,7 +6,7 @@ from random import choice, shuffle
 from discord import Embed
 
 import asyncio
-from musicbot import exceptions
+from musicbot import exceptions, spotify
 from musicbot.entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                             StreamEntry, TimestampEntry, YoutubeEntry)
 from musicbot.radio import RadioSongExtractor, RadioStations
@@ -461,6 +462,45 @@ class EnqueueCommands:
                 "Won't play from the autoplaylist anymore")
 
         # await self.safe_send_message (channel, msgState)
+
+    @command_info("4.7.0", 1503764185)
+    async def cmd_spotify(self, channel, author, player, url):
+        """
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***spotify [link]`
+        ///|Explanation
+        Load a playlist from Spotify
+        ///|Sidenote
+        This command will be expanded to support more Spoity functions
+        """
+
+        try:
+            playlist = spotify.SpotifyPlaylist.from_url(url)
+        except spotify.UrlError:
+            return Response("This isn't a valid link")
+        except spotify.NotFoundError:
+            return Response("Couldn't find the playlist")
+
+        def on_entry_finished(entry, spotify_track):
+            nonlocal not_found
+
+            if not entry:
+                not_found.append(spotify_track)
+
+        em = Embed(title=playlist.name, description=playlist.description, colour=0x1DB954, url=playlist.href)
+        em.set_thumbnail(url=playlist.cover)
+        em.set_author(name=playlist.author)
+        em.set_footer(text="***REMOVED******REMOVED*** tracks".format(len(playlist.tracks)))
+
+        interface_msg = await self.safe_send_message(channel, "**Loading playlist**", embed=em)
+
+        not_found = []
+
+        entries = await playlist.get_spotify_entries(player.playlist, callback=on_entry_finished, channel=channel, author=author)
+
+        player.playlist.add_entries(entries)
+        em.set_footer(text="***REMOVED******REMOVED*** tracks loaded | ***REMOVED******REMOVED*** failed".format(len(entries), len(not_found)))
+        interface_msg = await self.edit_message(interface_msg, "**Loaded playlist**", embed=em)
 
 
 class ManipulateCommands:
