@@ -94,7 +94,7 @@ class Playlist(EventEmitter):
             return False
 
         if self.history:
-            history_entry = copy.deepcopy(self.history[index])
+            history_entry = copy.copy(self.history[index])
             self._add_entry(history_entry, placement=0)
 
             if revert and self.player.current_entry:
