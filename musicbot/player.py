@@ -163,13 +163,16 @@ class MusicPlayer(EventEmitter):
     def repeat(self):
         if self.is_repeatNone:
             self.repeatState = MusicPlayerRepeatState.ALL
-            return
-        if self.is_repeatAll:
+        elif self.is_repeatAll:
             self.repeatState = MusicPlayerRepeatState.SINGLE
-            return
-        if self.is_repeatSingle:
+        elif self.is_repeatSingle:
             self.repeatState = MusicPlayerRepeatState.NONE
-            return
+        else:
+            # no idea how that should happen but eh...
+            return False
+
+        GieselaServer.send_player_information_update(self.voice_client.server.id)
+        return True
 
     def stop(self):
         self.state = MusicPlayerState.STOPPED
@@ -428,9 +431,13 @@ class MusicPlayer(EventEmitter):
                     delay = (sub_entry["duration"] - sub_entry["progress"]) + 2
 
                 elif isinstance(self.current_entry, RadioSongEntry):
-                    if self.current_entry.song_duration > 5:
+                    if self.current_entry.poll_time:
+                        print("[CHAPTER-UPDATER] this radio stations enforces a custom wait time")
+
+                        delay = self.current_entry.poll_time
+                    elif self.current_entry.song_duration > 5:
                         delay = self.current_entry.song_duration - self.current_entry.song_progress + 2
-                        if delay < 0:
+                        if delay <= 0:
                             delay = 40
                     else:
                         delay = 40
@@ -447,8 +454,7 @@ class MusicPlayer(EventEmitter):
 
             await asyncio.sleep(delay)
             if not self.current_entry:
-                print(
-                    "[CHAPTER-UPDATER] Waited for nothing. There's nothing playing anymore")
+                # print("[CHAPTER-UPDATER] Waited for nothing. There's nothing playing anymore")
                 return
 
             if self.current_entry.title == before_title:
@@ -536,7 +542,7 @@ class MusicPlayer(EventEmitter):
 
     @property
     def progress(self):
-        return round(self._current_player.buff.frame_count * 0.02 + self.current_entry.start_seconds) if self.current_entry else 0
+        return round(self._current_player.buff.frame_count * 0.02 + self.current_entry.start_seconds) if self._current_player else 0
 
 
 def filter_stderr(popen: subprocess.Popen, future: asyncio.Future):

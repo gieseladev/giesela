@@ -1,27 +1,32 @@
 ***REMOVED***
   "thumbnails": ***REMOVED***
     "generic": [
-      "http://media5.trover.com/T/54c0623200ab0133c000076b/fixedw_large_4x.jpg",
-      "https://secondphaseofmylife.files.wordpress.com/2013/05/img_9012.jpg",
-      "http://thedesignhome.com/wp-content/uploads/2017/02/Comfortable-caf%C3%A9-in-industrial-style-in-Stuttgart2.jpg",
-      "https://www.walldevil.com/wallpapers/a90/wallpapers-desktop-winter-garden-backgrounds-london-wallpaper-street-background-south-nature-within-landscapes-audley.jpg",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwcASfOsIZF8g-w1ENw6LhQe8RsiFcaUMuoUZ59wNxlZo6zAqg",
-      "http://www.uniwallpaper.com/static/images/eiffel-tower-wallpaper-18_fRZLW4V.jpg",
-      "http://cdn.wonderfulengineering.com/wp-content/uploads/2015/05/England-wallpaper-11.jpg"
+      "https://i.imgur.com/6UDo0V3.jpg",
+      "https://i.imgur.com/Bo1NDGB.jpg",
+      "https://i.imgur.com/GC31Lxh.jpg",
+      "https://i.imgur.com/70YQVWl.jpg",
+      "https://i.imgur.com/luuiQjs.jpg",
+      "https://i.imgur.com/3Am02fd.jpg",
+      "https://i.imgur.com/9mjnP2U.jpg",
+      "https://i.imgur.com/8acDvAM.jpg",
+      "https://i.imgur.com/BuXomPs.jpg",
+      "https://i.imgur.com/u2lWBO5.jpg",
+      "https://i.imgur.com/XXMf0Va.jpg",
+      "https://i.imgur.com/hqONLC9.jpg",
+      "https://i.imgur.com/jEJXo8W.jpg"
     ],
     "england": [
-      "http://wallpapercave.com/wp/B3ewgup.jpg",
-      "http://www.technocrazed.com/wp-content/uploads/2015/12/London-wallpaper-8.jpg",
-      "https://wallpaperscraft.com/image/london_bridge_river_sky_summer_9660_1920x1080.jpg",
-      "http://www.bhmpics.com/thumbs/black_and_white_lighting_big_ben_london-t3.jpg"
+      "https://i.imgur.com/1nQguVU.jpg",
+      "https://i.imgur.com/rg7VF2k.jpg",
+      "https://i.imgur.com/DIVsiGZ.jpg",
+      "https://i.imgur.com/zoh8ttF.jpg"
     ],
     "switzerland": [
-      "https://img.myswitzerland.com/mys/n49914/images/buehne/bern-ticket.jpg",
-      "https://img.myswitzerland.com/662347/325",
-      "https://img.myswitzerland.com/mys/n64497/images/buehne/st0037633_bern.jpg",
-      "https://s-media-cache-ak0.pinimg.com/originals/ad/3d/22/ad3d2213d48702576a75a7b1e7d2d36c.jpg",
-      "http://static.panoramio.com/photos/large/94854870.jpg",
-      "http://wallpapercave.com/wp/HetqV33.jpg"
+      "https://i.imgur.com/XjW8cIo.jpg",
+      "https://i.imgur.com/WsEMht2.jpg",
+      "https://i.imgur.com/ILWmuaU.jpg",
+      "https://i.imgur.com/T1ylhXw.jpg",
+      "https://i.imgur.com/1McQCVO.jpg"
     ]
   ***REMOVED***,
   "stations": [***REMOVED***
@@ -29,9 +34,10 @@
       "name": "Capital FM",
       "aliases": ["kappable", "kappablefm", "kappable fm", "cfm"],
       "language": "en",
-      "cover": "http://capital.gcstatic.com/assets_v4r/capital/img/default_image_track.png",
+      "cover": "https://i.imgur.com/7HKaC0z.png",
       "website": "http://capitalfm.com",
       "url": "media-ice.musicradio.com/CapitalMP3",
+      "poll_time": 40,
       "thumbnails": ["generic", "england"]
     ***REMOVED***,
     ***REMOVED***
@@ -39,7 +45,7 @@
       "name": "Energy Bern",
       "aliases": ["energy"],
       "language": "ch",
-      "cover": "http://upload.wikimedia.org/wikipedia/commons/6/64/Energy_Bern_Logo.png",
+      "cover": "http://i.imgur.com/K4u00UT.png",
       "website": "http://energy.ch",
       "url": "http://energybern.ice.infomaniak.ch/energybern-high.mp3",
       "thumbnails": ["generic", "switzerland"]
@@ -49,7 +55,7 @@
       "name": "Radio 32",
       "aliases": ["32"],
       "language": "ch",
-      "cover": "http://www.o-ton.ch/wp-content/uploads/2007/05/r32-logo_schwarz.jpg",
+      "cover": "http://i.imgur.com/wklJano.png",
       "website": "http://radio32.ch",
       "url": "http://stream.radio32.ch/radio32",
       "thumbnails": ["generic", "switzerland"]
@@ -59,17 +65,17 @@
       "name": "BBC",
       "aliases": ["bbq"],
       "language": "en",
-      "cover": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/BBC_Radio_logo.svg/1200px-BBC_Radio_logo.svg.png",
+      "cover": "http://i.imgur.com/eE8Vp1H.png",
       "website": "http://bbc.com",
       "url": "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_q",
-      "thumbnails": ["generic", "england", "https://static.bbc.co.uk/playlister/101/1.8.60.101/img/playercard/playercard.jpg"]
+      "thumbnails": ["generic", "england", "https://i.imgur.com/3fy23iE.jpg"]
     ***REMOVED***,
     ***REMOVED***
       "id": "heartlondon",
       "name": "Heart London",
       "aliases": ["love", "heart"],
       "language": "en",
-      "cover": "http://static.radio.net/images/broadcasts/51/ec/9458/c175.png",
+      "cover": "https://i.imgur.com/OcAWJCh.png",
       "website": "http://heartlondon.com",
       "url": "media-ice.musicradio.com/HeartLondon",
       "thumbnails": ["generic", "england"]

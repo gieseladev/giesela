@@ -1,4 +1,3 @@
-import asyncio
 import re
 from datetime import date
 
@@ -6,6 +5,7 @@ import requests
 from discord import Embed
 from moviepy import editor, video
 
+import asyncio
 from musicbot.nine_gag import ContentType, get_post
 from musicbot.utils import Response, block_user, command_info, owner_only
 from musicbot.web_socket_server import GieselaServer
@@ -192,4 +192,4 @@ class MiscCommands:
         if not lyrics:
             return Response("Couldn't find any lyrics for *****REMOVED******REMOVED*****".format(title))
         else:
-            return Response("*****REMOVED******REMOVED*****\n\n***REMOVED***lyrics***REMOVED***\n**Lyrics from \"***REMOVED***source***REMOVED***\"**".format(title, **lyrics))
+            return Response("*****REMOVED***title***REMOVED*****\n\n***REMOVED***lyrics***REMOVED***\n**Lyrics from \"***REMOVED***source***REMOVED***\"**".format(**lyrics))

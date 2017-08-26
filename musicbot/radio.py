@@ -1,7 +1,7 @@
 import json
 import re
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from itertools import chain
 from random import choice
 
@@ -10,13 +10,14 @@ import requests
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
 
+import asyncio
 from musicbot.config import ConfigDefaults
 from musicbot.utils import parse_timestamp
 
 
 class StationInfo:
 
-    def __init__(self, id, name, aliases, language, cover, url, website, thumbnails):
+    def __init__(self, id, name, aliases, language, cover, url, website, thumbnails, poll_time=None):
         self.id = id
         self.name = name
         self._aliases = aliases
@@ -28,10 +29,18 @@ class StationInfo:
         self.thumbnails = list(chain(*[RadioStations.thumbnails[pointer] if pointer in RadioStations.thumbnails else [
             pointer, ] for pointer in thumbnails]))
         self.has_current_song_info = RadioSongExtractor.has_data(self)
+        self.poll_time = poll_time
+
+        self._current_thumbnail = None
+        self._ct_timestamp = 0
 
     @property
     def thumbnail(self):
-        return choice(self.thumbnails)
+        if not self._current_thumbnail or time.time() > self._ct_timestamp:
+            self._current_thumbnail = choice(self.thumbnails)
+            self._ct_timestamp = time.time() + (self.poll_time or 20)
+
+        return self._current_thumbnail
 
     @classmethod
     def from_dict(cls, data):
@@ -46,6 +55,7 @@ class StationInfo:
             "cover":        self.cover,
             "website":      self.website,
             "url":          self.url,
+            "poll_time":    self.poll_time,
             "thumbnails":   self.thumbnails
         ***REMOVED***
         return data
@@ -110,6 +120,9 @@ class RadioSongExtractor:
         else:
             return extractor()
 
+    async def async_get_current_song(loop, station_info):
+        return await loop.run_in_executor(None, RadioSongExtractor.get_current_song, station_info)
+
     def _get_current_song_energy_bern():
         try:
             resp = requests.get(
@@ -136,26 +149,32 @@ class RadioSongExtractor:
 
     def _get_current_song_capital_fm():
         try:
-            resp = requests.get(
-                "http://www.capitalfm.com/dynamic/now-playing-card/digital/")
+            resp = requests.get("http://www.capitalfm.com/digital/radio/last-played-songs/")
             soup = BeautifulSoup(resp.text, ConfigDefaults.html_parser)
-            title = " ".join(soup.find_all(
-                "div",
-                attrs=***REMOVED***"itemprop": "name", "class": "track"***REMOVED***
-            )[0].text.strip().split())
-            artist = " ".join(soup.find_all("div",
-                                            attrs=***REMOVED***"itemprop": "byArtist", "class": "artist"***REMOVED***)[
-                0].text.strip().split())
-            cover = soup.find_all("img", itemprop="image")[
-                0]["data-src"]
+
+            tz_info = timezone(timedelta(hours=1))
+
+            time_on = soup.select(".last_played_songs .show.on_now .details .time")[0].contents[-1].strip()
+            start, end = time_on.split("-", maxsplit=1)
+
+            start_time = datetime.combine(date.today(), datetime.strptime(start.strip(), "%I%p").time(), tz_info)
+            end_time = datetime.combine(date.today(), datetime.strptime(end.strip(), "%I%p").time(), tz_info)
+
+            duration = (end_time - start_time).total_seconds()
+            progress = (datetime.now(tz=tz_info) - start_time).total_seconds()
+
+            title = soup.find("span", attrs=***REMOVED***"class": "track", "itemprop": "name"***REMOVED***).text.strip()
+            artist = soup.find("span", attrs=***REMOVED***"class": "artist", "itemprop": "byArtist"***REMOVED***).text
+            artist = re.sub(r"[\n\s]+", " ", artist).strip()
+            cover = soup.select(".song_wrapper .img_wrapper img")[0]["data-src"]
 
             return ***REMOVED***
                 "title": title,
                 "artist": artist,
                 "cover": cover,
                 "youtube": "http://www.capitalfm.com",
-                "duration": 0,
-                "progress": 0
+                "duration": duration,
+                "progress": progress
             ***REMOVED***
         except:
             raise

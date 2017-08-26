@@ -1,6 +1,7 @@
-import configparser
 import json
 import pickle
+
+import configparser
 
 
 def encode_setting(value):
@@ -13,7 +14,7 @@ def encode_setting(value):
         "tuple": json_handler,
         "dict": json_handler
     ***REMOVED***
-    return handlers.get(type(value).__name__, lambda v: v)(value)
+    return handlers.get(type(value).__name__, lambda v: str(v))(value)
 
 
 def decode_setting(value):
@@ -128,6 +129,7 @@ class ConfigDefaults:
     auto_playlist_file = "config/autoplaylist.txt"
     hangman_wordlist = "data/hangman_wordlist.txt"
     name_list = "data/names.txt"
+    lyrics_cache = "cache/lyrics"
 
 
 static_config = Config(ConfigDefaults.options_file)
