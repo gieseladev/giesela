@@ -1,10 +1,11 @@
 import os.path
 
-MAIN_VERSION = "4.6.9"
-SUB_VERSION = "raindrop"
+MAIN_VERSION = "4.7.0"
+SUB_VERSION = "ibiezela"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
 all_sub_versions = {
+    "4.7.x": "Ibiezela",
     "4.6.x": "Raindrop",
     "4.5.x": "Just Bread",
     "4.4.x": "Webiesela",
