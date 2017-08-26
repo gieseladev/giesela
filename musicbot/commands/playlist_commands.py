@@ -1095,7 +1095,8 @@ class PlaylistCommands:
         "3.5.8": (1497826743, "Even more information displaying"),
         "3.6.1": (1497972538, "now accepts a query parameter which adds a song to the playlist like the `play` command does so for the queue"),
         "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite"),
-        "4.2.3": (1500959036, "Error handling for DMCA takedowns and other Youtube problems")
+        "4.2.3": (1500959036, "Error handling for DMCA takedowns and other Youtube problems"),
+        "4.6.9": (1503754385, "Fixed typo")
     })
     async def cmd_addtoplaylist(self, channel, author, player, playlistname, query=None):
         """
@@ -1103,7 +1104,7 @@ class PlaylistCommands:
         `{command_prefix}addtoplaylist <playlistname> [query]`
         ///|Explanation
         Add the current entry to a playlist.
-        If you either provide a link or a name, that song is added to the queue.
+        If you either provide a link or a name, that song is added to the playlist.
         """
 
         if playlistname is None:
