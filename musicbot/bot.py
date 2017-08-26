@@ -1,4 +1,5 @@
 import inspect
+import logging
 import os
 import re
 import shutil
@@ -753,5 +754,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
 
 if __name__ == "__main__":
+    logging.getLogger("asyncio").setLevel(logging.WARNING)
     bot = MusicBot()
     bot.run()
