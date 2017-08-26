@@ -45,7 +45,8 @@ class EnqueueCommands:
         "3.7.7": (1499018088, "radio selection looks good again"),
         "3.8.9": (1499535312, "Part of the `Giesenesis` rewrite"),
         "4.4.4": (1501627084, "Fixed this command"),
-        "4.6.4": (1503433750, "The station finder now displays the current song of the station")
+        "4.6.4": (1503433750, "The station finder now displays the current song of the station"),
+        "4.6.7": (1503747794, "Play the radio stations instantly")
     ***REMOVED***)
     async def cmd_radio(self, player, channel, author, leftover_args):
         """
@@ -61,7 +62,7 @@ class EnqueueCommands:
         if leftover_args:
             if leftover_args[0].lower().strip() == "random":
                 station_info = RadioStations.get_random_station()
-                await player.playlist.add_radio_entry(station_info, channel=channel, author=author)
+                await player.playlist.add_radio_entry(station_info, channel=channel, author=author, now=True)
                 return Response(
                     "I choose\n*****REMOVED***.name***REMOVED*****".format(station_info))
             else:
@@ -70,7 +71,7 @@ class EnqueueCommands:
                 station_info = RadioStations.get_station(
                     search_name.lower().strip())
                 if station_info:
-                    await player.playlist.add_radio_entry(station_info, channel=channel, author=author)
+                    await player.playlist.add_radio_entry(station_info, channel=channel, author=author, now=True)
                     return Response("Your favourite:\n*****REMOVED***.name***REMOVED*****".format(station_info))
 
         # help the user find the right station
