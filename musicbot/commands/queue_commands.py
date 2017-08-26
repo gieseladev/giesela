@@ -437,19 +437,26 @@ class EnqueueCommands:
             await self.safe_delete_message(interface_message)
             await self.safe_delete_message(response_message)
 
+    @command_info("1.0.0", 1477180800, {
+        "4.6.8": (1503751773, "updated documentation"),
+        "4.6.9": (1503751791, "autoplay now follows video recommendations")
+    })
     async def cmd_autoplay(self, player):
         """
-        Usage:
-            {command_prefix}autoplay
-        Play from the autoplaylist.
+        ///|Usage
+        `{command_prefix}autoplay`
+        ///|Explanation
+        Automatically queue another video if the queue is empty
+        either by following the list of recommended videos to the
+        last video or an entry in the autoplaylist file.
         """
 
-        if not self.config.auto_playlist:
-            self.config.auto_playlist = True
+        if not self.use_autoplaylist:
+            self.use_autoplaylist = True
             await self.on_player_finished_playing(player)
             return Response("Playing from the autoplaylist")
         else:
-            self.config.auto_playlist = False
+            self.use_autoplaylist = False
             return Response(
                 "Won't play from the autoplaylist anymore")
 
