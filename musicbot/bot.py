@@ -245,7 +245,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             while True:
                 if player.playlist.history and isinstance(player.playlist.history[0], YoutubeEntry):
                     print("[Autoplay] following suggested for last history entry")
-                    song_url = get_related_videos(player.playlist.history[0].video_id)[0]["url"]
+                    song_url = choice(get_related_videos(player.playlist.history[0].video_id))["url"]
                 elif self.autoplaylist:
                     print("[Autoplay] choosing an url from the autoplaylist")
                     song_url = choice(self.autoplaylist)
