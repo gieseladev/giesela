@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 from musicbot.config import ConfigDefaults, static_config
 
-lyrics_folder = os.getcwd() + "\\" + static_config.lyrics_cache
+lyrics_folder = path.join(os.getcwd(), static_config.lyrics_cache)
 lyrics_version = 3
 required_version = 2
 
@@ -32,7 +32,7 @@ def escape_query(query):
 def check_cache(query, load=True):
     ensure_cache_folder()
 
-    file_path = lyrics_folder + "\\" + escape_query(query)
+    file_path = path.join(lyrics_folder, escape_query(query))
 
     if path.isfile(file_path):
         print("[LYRICS] cached \"***REMOVED******REMOVED***\"".format(query))
