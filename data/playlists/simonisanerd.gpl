@@ -770,7 +770,8 @@
         "artist": "Brian the Sun",
         "artist_image": "http://i.imgur.com/CpYspUV.jpg",
         "cover": "http://i.imgur.com/lYNquoU.jpg",
-        "album": "Boku No Hero Academia"
+        "album": "Boku No Hero Academia",
+        "broken": true
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
@@ -3655,7 +3656,8 @@
         "artist": "RADWIMPS",
         "artist_image": "http://i.imgur.com/nYf3nd7.jpg",
         "cover": "http://i.imgur.com/ejKM7LK.jpg",
-        "album": "Kimi no Na wa"
+        "album": "Kimi no Na wa",
+        "broken": true
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
@@ -4083,7 +4085,8 @@
             "uri": "spotify:track:6RdYQlaMCcs27y4f5uQYfZ",
             "query": "Kill La Kill Don't Lose Your Way",
             "certainty": 0.7096774193548387
-        ***REMOVED***
+        ***REMOVED***,
+        "broken": true
     ***REMOVED***,
     ***REMOVED***
         "version": 103,

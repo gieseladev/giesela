@@ -65,7 +65,7 @@
             "colour": "#6200F6"
         ***REMOVED***,
         "entries": 142,
-        "replays": 39,
+        "replays": 40,
         "description": null,
         "cover_url": "http://i.imgur.com/Vifn0MV.jpg"
     ***REMOVED***,
@@ -81,5 +81,19 @@
         "replays": 2,
         "description": null,
         "cover_url": "http://i.imgur.com/BP3XWrf.jpg"
+    ***REMOVED***,
+    "gems": ***REMOVED***
+        "location": "data/playlists/gems.gpl",
+        "author": ***REMOVED***
+            "id": "206459363739566080",
+            "name": "Lophorius",
+            "display_name": "Lophorius",
+            "avatar_url": "https://cdn.discordapp.com/avatars/206459363739566080/290bbea2374aba7ce2c28ced4842c643.png?size=1024",
+            "colour": "#1197F0"
+        ***REMOVED***,
+        "replays": 3,
+        "description": null,
+        "cover_url": null,
+        "name": "Gems"
     ***REMOVED***
 ***REMOVED***
