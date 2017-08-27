@@ -152,7 +152,7 @@ class RadioSongExtractor:
                 duration = None
 
             if duration:
-                progress = max(progress, duration)
+                progress = min(progress, duration)
 
             return ***REMOVED***
                 "title": title,
