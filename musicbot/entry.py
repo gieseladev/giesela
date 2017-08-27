@@ -381,6 +381,7 @@ class RadioSongEntry(RadioStationEntry):
         self._csi_poll_time = 0
 
         self.poll_time = station_data.poll_time
+        self.uncertainty = station_data.uncertainty
 
     @property
     def sortby(self):

@@ -48,6 +48,7 @@
       "cover": "http://i.imgur.com/K4u00UT.png",
       "website": "http://energy.ch",
       "url": "http://energybern.ice.infomaniak.ch/energybern-high.mp3",
+      "uncertainty": 6,
       "thumbnails": ["generic", "switzerland"]
     },
     {

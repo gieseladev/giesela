@@ -12,12 +12,13 @@ from dateutil.parser import parse
 
 import asyncio
 from musicbot.config import ConfigDefaults
+from musicbot.lib import energy
 from musicbot.utils import parse_timestamp
 
 
 class StationInfo:
 
-    def __init__(self, id, name, aliases, language, cover, url, website, thumbnails, poll_time=None):
+    def __init__(self, id, name, aliases, language, cover, url, website, thumbnails, poll_time=None, uncertainty=2):
         self.id = id
         self.name = name
         self._aliases = aliases
@@ -26,10 +27,11 @@ class StationInfo:
         self.cover = cover
         self.url = url
         self.website = website
-        self.thumbnails = list(chain(*[RadioStations.thumbnails[pointer] if pointer in RadioStations.thumbnails else [
-            pointer, ] for pointer in thumbnails]))
+        self.thumbnails = list(chain(*[RadioStations.thumbnails[pointer] if pointer in RadioStations.thumbnails else [pointer] for pointer in thumbnails]))
+
         self.has_current_song_info = RadioSongExtractor.has_data(self)
         self.poll_time = poll_time
+        self.uncertainty = uncertainty
 
         self._current_thumbnail = None
         self._ct_timestamp = 0
@@ -56,6 +58,7 @@ class StationInfo:
             "website":      self.website,
             "url":          self.url,
             "poll_time":    self.poll_time,
+            "uncertainty":  self.uncertainty,
             "thumbnails":   self.thumbnails
         }
         return data
@@ -125,21 +128,34 @@ class RadioSongExtractor:
 
     def _get_current_song_energy_bern():
         try:
-            resp = requests.get(
-                "http://www.energyzueri.com/legacy-feed-converter/files/json/timeline/timeline_energybern_0.json")
-            queue = resp.json()
-            entry = queue[0]
-            start_time = datetime.fromtimestamp(
-                int(entry["timestamp"]))
-            progress = round(
-                (datetime.now() - start_time).total_seconds())
-            duration = parse_timestamp(entry["duration"])
+            playouts = energy.get_playouts()
+
+            now_playing = playouts[0]
+            progress = (datetime.now(tz=timezone(timedelta(hours=0))) - parse(now_playing["created_at"])).total_seconds()
+
+            if now_playing.get("type") == "music":
+                song = now_playing["song"]
+
+                title = song["title"]
+                artist = song["artists_full"]
+                cover = song["cover_url"]
+                link = song["youtube_url"] or song["spotify_url"] or "https://energy.ch/play/bern"
+                duration = song["duration"]
+
+            elif now_playing.get("type") == "news":
+                program = now_playing["program"]
+
+                title = program["title"]
+                artist = "Energy Bern"
+                cover = program["cover_url"]
+                link = "https://energy.ch/play/bern"
+                duration = None
 
             return {
-                "title": entry["title"].strip(),
-                "artist": entry["artist"].strip(),
-                "cover": entry["cover"],
-                "youtube": entry["youtube"],
+                "title": title,
+                "artist": artist,
+                "cover": cover,
+                "youtube": link,
                 "duration": duration,
                 "progress": progress
             }
