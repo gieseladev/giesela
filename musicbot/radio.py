@@ -151,6 +151,9 @@ class RadioSongExtractor:
                 link = "https://energy.ch/play/bern"
                 duration = None
 
+            if duration:
+                progress = max(progress, duration)
+
             return {
                 "title": title,
                 "artist": artist,
