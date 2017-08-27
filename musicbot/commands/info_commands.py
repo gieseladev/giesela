@@ -24,7 +24,8 @@ class InfoCommands:
         "3.7.1": (1498237739, "Added interactive help"),
         "3.7.4": (1498318916, "Added \"lyrics\" function help text"),
         "4.2.2": (1500905513, "Updated help texts"),
-        "4.6.0": (1502208273, "Added a missing comma so resume and volume don't show on the same line")
+        "4.6.0": (1502208273, "Added a missing comma so resume and volume don't show on the same line"),
+        "4.7.2": (1503855125, "Updated command list")
     })
     async def cmd_help(self, channel, leftover_args):
         """
@@ -97,6 +98,7 @@ class InfoCommands:
                 "`{0}search` search for music",
                 "`{0}radio` listen to the best radio stations",
                 "`{0}stream` enqueue a livestream",
+                "`{0}spotfy` spotify integration",
                 "`{0}pause` pause playback",
                 "`{0}resume` resume playback",
                 "`{0}volume` change volume",
@@ -116,7 +118,8 @@ class InfoCommands:
                 "`{0}remove` remove entry from queue",
                 "`{0}clear` remove all entries from queue",
                 "`{0}shuffle` shuffle the queue",
-                "`{0}promote` promote entry to front"
+                "`{0}promote` promote entry to front",
+                "`{0}autoplay` when you're out of ideas just let Giesela choose"
             ]).format(self.config.command_prefix)
             em.add_field(name="Queue", value=queue_commands, inline=False)
 
@@ -126,10 +129,10 @@ class InfoCommands:
                 "`{0}removefromplaylist` remove entry from playlist",
                 "`{0}editentry` edit an entry from a playlist"
             ]).format(self.config.command_prefix)
-            em.add_field(name="Playlist",
-                         value=playlist_commands, inline=False)
+            em.add_field(name="Playlist", value=playlist_commands, inline=False)
 
             misc_commands = "\n".join([
+                "`{0}register` register your token in order to use [Webiesela](http://giesela.org)",
                 "`{0}summon` summon her like the servant she is",
                 "`{0}lyrics` retrieve lyrics for the current song",
                 "`{0}random` choose between items",
