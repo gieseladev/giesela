@@ -24,7 +24,8 @@ class InfoCommands:
         "3.7.1": (1498237739, "Added interactive help"),
         "3.7.4": (1498318916, "Added \"lyrics\" function help text"),
         "4.2.2": (1500905513, "Updated help texts"),
-        "4.6.0": (1502208273, "Added a missing comma so resume and volume don't show on the same line")
+        "4.6.0": (1502208273, "Added a missing comma so resume and volume don't show on the same line"),
+        "4.7.2": (1503855125, "Updated command list")
     ***REMOVED***)
     async def cmd_help(self, channel, leftover_args):
         """
@@ -97,6 +98,7 @@ class InfoCommands:
                 "`***REMOVED***0***REMOVED***search` search for music",
                 "`***REMOVED***0***REMOVED***radio` listen to the best radio stations",
                 "`***REMOVED***0***REMOVED***stream` enqueue a livestream",
+                "`***REMOVED***0***REMOVED***spotfy` spotify integration",
                 "`***REMOVED***0***REMOVED***pause` pause playback",
                 "`***REMOVED***0***REMOVED***resume` resume playback",
                 "`***REMOVED***0***REMOVED***volume` change volume",
@@ -116,7 +118,8 @@ class InfoCommands:
                 "`***REMOVED***0***REMOVED***remove` remove entry from queue",
                 "`***REMOVED***0***REMOVED***clear` remove all entries from queue",
                 "`***REMOVED***0***REMOVED***shuffle` shuffle the queue",
-                "`***REMOVED***0***REMOVED***promote` promote entry to front"
+                "`***REMOVED***0***REMOVED***promote` promote entry to front",
+                "`***REMOVED***0***REMOVED***autoplay` when you're out of ideas just let Giesela choose"
             ]).format(self.config.command_prefix)
             em.add_field(name="Queue", value=queue_commands, inline=False)
 
@@ -126,10 +129,10 @@ class InfoCommands:
                 "`***REMOVED***0***REMOVED***removefromplaylist` remove entry from playlist",
                 "`***REMOVED***0***REMOVED***editentry` edit an entry from a playlist"
             ]).format(self.config.command_prefix)
-            em.add_field(name="Playlist",
-                         value=playlist_commands, inline=False)
+            em.add_field(name="Playlist", value=playlist_commands, inline=False)
 
             misc_commands = "\n".join([
+                "`***REMOVED***0***REMOVED***register` register your token in order to use [Webiesela](http://giesela.org)",
                 "`***REMOVED***0***REMOVED***summon` summon her like the servant she is",
                 "`***REMOVED***0***REMOVED***lyrics` retrieve lyrics for the current song",
                 "`***REMOVED***0***REMOVED***random` choose between items",
