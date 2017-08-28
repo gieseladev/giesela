@@ -3,7 +3,7 @@ title: Command skip
 layout: reference
 ---
 
-# "Now Playing" `skip`
+# "Skip" `skip`
 ---
 ### Command Structure
 > `!skip [all]`
