@@ -11,8 +11,8 @@ from bs4 import BeautifulSoup
 from dateutil.parser import parse
 
 import asyncio
+from musicbot import energy
 from musicbot.config import ConfigDefaults
-from musicbot.lib import energy
 from musicbot.utils import parse_timestamp
 
 
