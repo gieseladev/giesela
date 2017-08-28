@@ -389,7 +389,7 @@ class RadioSongEntry(RadioStationEntry):
 
     @property
     def lyrics_title(self):
-        return ((self.artist + " - ") or "") + self.title
+        return "{} - {}".join(self.title, self.artist)
 
     def _get_new_song_info(self):
         self._current_song_info = RadioSongExtractor.get_current_song(
@@ -774,6 +774,10 @@ class GieselaEntry(YoutubeEntry):
     @property
     def title(self):
         return "{} - {}".format(self.artist, self.song_title)
+
+    @property
+    def lyrics_title(self):
+        return "{} - {}".join(self.title, self.artist)
 
     @property
     def sortby(self):
