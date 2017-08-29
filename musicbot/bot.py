@@ -343,17 +343,17 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             if not quiet:
                 raise
 
-    async def safe_edit_message(self, message, new, *, send_if_fail=False, quiet=False, keep_at_bottom=False):
+    async def safe_edit_message(self, message, new=None, *, send_if_fail=False, quiet=False, keep_at_bottom=False, embed=None):
         if keep_at_bottom:
             async for lmsg in self.logs_from(message.channel, limit=5):
                 if lmsg.id == message.id:
                     break
             else:
                 await self.safe_delete_message(message)
-                return await self.safe_send_message(message.channel, new)
+                return await self.safe_send_message(message.channel, new, embed=embed)
 
         try:
-            return await self.edit_message(message, new)
+            return await self.edit_message(message, new, embed=embed)
 
         except discord.NotFound:
             if not quiet:
@@ -363,7 +363,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             if send_if_fail:
                 if not quiet:
                     print("Sending instead")
-                return await self.safe_send_message(message.channel, new)
+                return await self.safe_send_message(message.channel, new, embed=embed)
 
     async def edit_profile(self, **fields):
         if self.user.bot:

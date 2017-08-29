@@ -9,6 +9,7 @@ import asyncio
 from musicbot import exceptions, spotify
 from musicbot.entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                             StreamEntry, TimestampEntry, YoutubeEntry)
+from musicbot.lib.ui.basic import ItemPicker
 from musicbot.radio import RadioSongExtractor, RadioStations
 from musicbot.utils import (Response, block_user, clean_songname, command_info,
                             create_bar, format_time, get_related_videos,
@@ -77,51 +78,31 @@ class EnqueueCommands:
 
         # help the user find the right station
 
-        def check(m):
-            t = ["y", "yes", "yeah", "yep", "sure"]
-            f = ["n", "no", "nope", "never"]
-
-            m = m.content.lower().strip()
-            return m in t or m in f
-
         possible_stations = RadioStations.get_all_stations()
         shuffle(possible_stations)
 
-        interface_string = "**{0.name}**\n{1}\nType `yes` or `no`"
-        now_playing_string = "Currently playing **{artist} - {title}**\n"
+        embeds = []
 
-        station_data_waiter = None
+        for station in possible_stations:
+            em = Embed(colour=hex_to_dec("#b3f75d"))
+            em.set_author(name=station.name, url=station.website)
+            em.set_thumbnail(url=station.cover)
 
-        if RadioSongExtractor.has_data(possible_stations[0]):
-            station_data_waiter = asyncio.ensure_future(RadioSongExtractor.async_get_current_song(self.loop, possible_stations[0]))
+            if station.has_current_song_info:
+                data = await RadioSongExtractor.async_get_current_song(self.loop, station)
+                em.add_field(name="Currently playing", value="{artist} - {title}".format(**data))
+
+            embeds.append(em)
+
+        item_picker = ItemPicker(self, channel, user=author, items=embeds)
+        result = await item_picker.result()
+
+        if result is None:
+            return Response("Okay then")
         else:
-            station_data_waiter = None
-
-        for next_index, station in enumerate(possible_stations, 1):
-            np = ""
-
-            if station_data_waiter:
-                data = await station_data_waiter
-                np = now_playing_string.format(**data)
-
-            if next_index < len(possible_stations) and RadioSongExtractor.has_data(possible_stations[next_index]):
-                station_data_waiter = asyncio.ensure_future(RadioSongExtractor.async_get_current_song(self.loop, possible_stations[next_index]))
-            else:
-                station_data_waiter = None
-
-            msg = await self.safe_send_message(channel, interface_string.format(station, np))
-            response = await self.wait_for_message(author=author, channel=channel, check=check)
-            await self.safe_delete_message(msg)
-            play_station = response.content.lower().strip() in ["y", "yes", "yeah", "yep", "sure"]
-            await self.safe_delete_message(response)
-
-            if play_station:
-                await player.playlist.add_radio_entry(station, channel=channel, author=author)
-                return Response("There you go fam!\n**{.name}**".format(station))
-            else:
-                continue
-
-        return Response("That was all of them, sorry")
+            station = possible_stations[result]
+            await player.playlist.add_radio_entry(station, channel=channel, author=author)
+            return Response("There you go fam!\n**{.name}**".format(station))
 
     @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command"),
