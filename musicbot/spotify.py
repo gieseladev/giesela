@@ -41,11 +41,20 @@ class SpotifyPlaylist:
 
     @classmethod
     def from_spotify_playlist(cls, playlist):
+        tracks = []
+        page = playlist["tracks"]
+
+        tracks.extend([SpotifyTrack.from_data(playlist_track["track"], simple=True) for playlist_track in page["items"]])
+
+        while page["next"]:
+            page = get_spotify_client().next(page)
+            tracks.extend([SpotifyTrack.from_data(playlist_track["track"], simple=True) for playlist_track in page["items"]])
+
         kwargs = ***REMOVED***
             "_id":          playlist["id"],
             "name":         playlist["name"],
             "description":  playlist["description"],
-            "tracks":       [SpotifyTrack.from_data(playlist_track["track"], simple=True) for playlist_track in playlist["tracks"]["items"]],
+            "tracks":       tracks,
             "author":       playlist["owner"]["display_name"],
             "images":       playlist["images"],
             "uri":          playlist["uri"],
