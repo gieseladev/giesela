@@ -125,7 +125,6 @@ class Bookmarks:
             new_data["name"] = new_name
         if new_timestamp is not None:  # again, 0=False thus I need to check it this way
             new_data["timestamp"] = new_timestamp
-            data["entry"]["start_seconds"] = new_timestamp
 
         data.update(new_data)  # override the values with the new ones
 
