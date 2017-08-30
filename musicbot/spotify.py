@@ -86,6 +86,13 @@ class SpotifyPlaylist:
     def cover(self):
         return choice(self.images)["url"]
 
+    async def get_spotify_entries_generator(self, queue, **meta):
+        gatherers = [track.get_spotify_entry(queue, callback=None, **meta) for track in self.tracks]
+
+        for ind, track_getter in enumerate(gatherers):
+            entry = await track_getter
+            yield ind, entry
+
     async def get_spotify_entries(self, queue, callback=None, **meta):
         start = time.time()
 
