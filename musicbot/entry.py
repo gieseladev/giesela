@@ -96,9 +96,7 @@ class BaseEntry:
         self.meta = meta
 
         self.filename = None
-        self.start_seconds = 0
         self.duration = 0
-        self.end_seconds = 0
         self._is_downloading = False
         self._waiting_futures = []
 
@@ -137,19 +135,9 @@ class BaseEntry:
     def sortby(self):
         return self.url
 
-    def set_start(self, sec):
-        if sec < 0 or sec > self.end_seconds:
-            return False
-
-        self.start_seconds = sec
-        return True
-
-    def set_end(self, sec):
-        if sec < self.start_seconds or sec > self.duration:
-            return False
-
-        self.end_seconds = sec
-        return True
+    @property
+    def start_seconds(self):
+        return None
 
     async def _download(self):
         raise NotImplementedError
@@ -475,7 +463,8 @@ class YoutubeEntry(BaseEntry):
         self.duration = duration
 
         self.end_seconds = meta.get("end_seconds", duration)
-        self.start_seconds = meta.get("start_seconds", 0)
+        self._start_seconds = meta.get("start_seconds", 0)
+        self._seek_seconds = meta.get("seek_seconds", None)
 
         self.expected_filename = expected_filename
 
@@ -495,6 +484,19 @@ class YoutubeEntry(BaseEntry):
     @property
     def sortby(self):
         return clean_songname(self._title)
+
+    @property
+    def start_seconds(self):
+        secs = 0
+
+        if self._seek_seconds is not None:
+            secs = self._seek_seconds
+        else:
+            secs = self._start_seconds
+
+        print("[Entry] starting at", secs, "seconds")
+
+        return secs
 
     @classmethod
     def from_dict(cls, playlist, data):
@@ -516,6 +518,27 @@ class YoutubeEntry(BaseEntry):
         description = data["description"]
 
         return cls(playlist, video_id, url, title, duration, thumbnail, description, expected_filename=filename, **meta)
+
+    def seek(self, secs):
+        if not 0 <= secs < self.end_seconds:
+            return False
+
+        self._seek_seconds = secs
+        return True
+
+    def set_start(self, secs):
+        if not 0 <= secs < self.end_seconds:
+            return False
+
+        self._start_seconds = secs
+        return True
+
+    def set_end(self, secs):
+        if not 0 < secs <= self.duration:
+            return False
+
+        self.end_seconds = sec
+        return True
 
     def to_dict(self):
         meta_dict = Entry.create_meta_dict(self.meta)

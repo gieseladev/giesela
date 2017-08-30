@@ -1,6 +1,6 @@
 import os.path
 
-MAIN_VERSION = "4.7.6"
+MAIN_VERSION = "4.7.7"
 SUB_VERSION = "ibiezela"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 

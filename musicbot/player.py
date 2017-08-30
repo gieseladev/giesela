@@ -153,7 +153,7 @@ class MusicPlayer(EventEmitter):
 
     def on_entry_added(self, playlist, entry):
         if self.is_stopped:
-            self.loop.call_later(2, self.play)
+            self.loop.call_soon(self.play)
 
     def skip(self):
         self.skipRepeat = True
@@ -195,7 +195,7 @@ class MusicPlayer(EventEmitter):
 
         raise ValueError("Cannot resume playback from state %s" % self.state)
 
-    def goto_seconds(self, secs):
+    def seek(self, secs):
         if (not self.current_entry) or secs >= self.current_entry.end_seconds:
             print("[PLAYER] Seek target out of bounds, skipping!")
             self.skip()
@@ -204,7 +204,7 @@ class MusicPlayer(EventEmitter):
         secs = max(0, secs)
 
         entry = self.current_entry
-        if not entry.set_start(secs):
+        if not entry.seek(secs):
             print("[PLAYER] Couldn't set start of entry")
             return False
 
@@ -378,10 +378,10 @@ class MusicPlayer(EventEmitter):
             }
 
             if not isinstance(entry, StreamEntry):
-                before_options["ss"] = format_time_ffmpeg(
-                    int(entry.start_seconds))
-                options["to"] = format_time_ffmpeg(
-                    int(entry.end_seconds - entry.start_seconds))
+                start_seconds = int(entry.start_seconds)
+
+                before_options["ss"] = format_time_ffmpeg(start_seconds)
+                options["to"] = format_time_ffmpeg(int(entry.end_seconds) - start_seconds)
 
             if "filters" in entry.meta:
                 options.update({
@@ -542,7 +542,15 @@ class MusicPlayer(EventEmitter):
 
     @property
     def progress(self):
-        return round(self._current_player.buff.frame_count * 0.02 + self.current_entry.start_seconds) if self._current_player else 0
+        secs = 0
+
+        if self._current_player:
+            secs = round(self._current_player.buff.frame_count * 0.02)
+
+        if self.current_entry.start_seconds:
+            secs += self.current_entry.start_seconds
+
+        return secs
 
 
 def filter_stderr(popen: subprocess.Popen, future: asyncio.Future):

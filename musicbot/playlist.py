@@ -74,7 +74,6 @@ class Playlist(EventEmitter):
         return move_entry
 
     def remove(self, position):
-
         if not 0 <= position < len(self.entries):
             return False
 
@@ -95,6 +94,10 @@ class Playlist(EventEmitter):
 
         if self.history:
             history_entry = copy.copy(self.history[index])
+
+            if isinstance(history_entry, YoutubeEntry):
+                history_entry._seek_seconds = None
+
             self._add_entry(history_entry, placement=0)
 
             if revert and self.player.current_entry:
@@ -460,11 +463,7 @@ class Playlist(EventEmitter):
             return self.entries[0]
 
     async def estimate_time_until(self, position, player):
-        """
-            (very) Roughly estimates the time till the queue will "position"
-        """
-        estimated_time = sum(
-            [e.end_seconds for e in islice(self.entries, position - 1)])
+        estimated_time = sum([e.end_seconds for e in islice(self.entries, position - 1)])
 
         if not player.is_stopped and player.current_entry:
             estimated_time += player.current_entry.duration - player.progress
