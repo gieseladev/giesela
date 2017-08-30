@@ -228,31 +228,6 @@ def get_image_brightness(**kwargs):
         return 0
 
 
-def generate_mosaic(img_urls, size=1024):
-    if len(img_urls) != 4:
-        raise ValueError("Can only create mosaics with 4 urls")
-
-    images = []
-    img_size = size // 2
-
-    for img_url in img_urls:
-        resp = requests.get(img_url)
-        content = BytesIO(resp.content)
-        im = Image.open(content)
-        im = im.resize((img_size, img_size))
-
-        images.append(im)
-
-    final = Image.new("RGB", (size, size))
-
-    final.paste(images[0])
-    final.paste(images[1], box=(images[0].width, 0))
-    final.paste(images[2], box=(0, images[0].height))
-    final.paste(images[3], box=(images[0].width, images[0].height))
-
-    return final
-
-
 def prettydate(d):
     diff = datetime.datetime.now() - d
     s = diff.seconds
@@ -749,20 +724,3 @@ def get_dev_changelog():
     except Exception:
         traceback.print_exc()
         return ["Couldn't find the changelog"]
-
-
-# if __name__ == "__main__":
-#     from musicbot.imgur import _upload_playlist_cover
-#
-#     start = time.time()
-#     img = generate_mosaic(("http://www.designformusic.com/wp-content/uploads/2015/10/insurgency-digital-album-cover-design.jpg", "http://www.billboard.com/files/styles/900_wide/public/media/Joy-Division-Unknown-Pleasures-album-covers-billboard-1000x1000.jpg",
-#                            "http://www.billboard.com/files/styles/900_wide/public/media/Funkadelic-Maggot-Brain-album-covers-billboard-1000x1000.jpg", "https://spark.adobe.com/images/landing/examples/design-music-album-cover.jpg"))
-#
-#     image_file = BytesIO()
-#     img.save(image_file, format="JPEG")
-#     image_file.seek(0)
-#
-#     cover_url = _upload_playlist_cover("testing_mosaic", image_file)
-#     print(cover_url)
-#
-#     print("it took", time.time() - start)
