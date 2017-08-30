@@ -498,8 +498,6 @@ class YoutubeEntry(BaseEntry):
         else:
             secs = self._start_seconds
 
-        print("[Entry] starting at", secs, "seconds")
-
         return secs
 
     @classmethod
