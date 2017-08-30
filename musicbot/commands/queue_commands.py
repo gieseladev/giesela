@@ -9,7 +9,7 @@ import asyncio
 from musicbot import exceptions, spotify
 from musicbot.entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                             StreamEntry, TimestampEntry, YoutubeEntry)
-from musicbot.lib.ui.basic import ItemPicker
+from musicbot.lib.ui.basic import ItemPicker, LoadingBar
 from musicbot.radio import RadioSongExtractor, RadioStations
 from musicbot.utils import (Response, block_user, clean_songname, command_info,
                             create_bar, format_time, get_related_videos,
@@ -462,12 +462,6 @@ class EnqueueCommands:
         except spotify.NotFoundError:
             return Response("Couldn't find the playlist")
 
-        def on_entry_finished(entry, spotify_track):
-            nonlocal not_found
-
-            if not entry:
-                not_found.append(spotify_track)
-
         em = Embed(title=playlist.name, description=playlist.description, colour=0x1DB954, url=playlist.href)
         em.set_thumbnail(url=playlist.cover)
         em.set_author(name=playlist.author)
@@ -475,12 +469,24 @@ class EnqueueCommands:
 
         interface_msg = await self.safe_send_message(channel, "**Loading playlist**", embed=em)
 
-        not_found = []
+        total_tracks = len(playlist.tracks)
+        entries_added = 0
+        entries_not_added = 0
 
-        entries = await playlist.get_spotify_entries(player.playlist, callback=on_entry_finished, channel=channel, author=author)
+        loading_bar = LoadingBar(self, channel, header="Loading Playlist", total_items=total_tracks)
 
-        player.playlist.add_entries(entries)
-        em.set_footer(text="***REMOVED******REMOVED*** tracks loaded | ***REMOVED******REMOVED*** failed".format(len(entries), len(not_found)))
+        async for ind, entry in playlist.get_spotify_entries_generator(player.playlist, channel=channel, author=author):
+            if entry:
+                player.playlist._add_entry(entry)
+                entries_added += 1
+            else:
+                entries_not_added += 1
+
+            await loading_bar.set_progress((ind + 1) / total_tracks)
+
+        await loading_bar.done()
+
+        em.set_footer(text="***REMOVED******REMOVED*** tracks loaded | ***REMOVED******REMOVED*** failed".format(entries_added, entries_not_added))
         interface_msg = await self.edit_message(interface_msg, "**Loaded playlist**", embed=em)
 
 
