@@ -14,6 +14,7 @@ from musicbot.reminder import Action, Calendar
 from musicbot.settings import Settings
 from musicbot.utils import (Response, block_user, clean_songname, command_info,
                             owner_only, parse_timestamp, to_timestamp)
+from musicbot.web_author import WebAuthor
 
 
 class ToolCommands:
@@ -635,11 +636,11 @@ class ToolCommands:
                 bookmarks = bookmark.all_bookmarks
 
                 if "mine" in leftover_args:
-                    bookmarks = filter(lambda x: bookmark.get_bookmark(x)["author_id"] == author.id, bookmarks)
+                    bookmarks = filter(lambda x: bookmark.get_bookmark(x)["author"]["id"] == author.id, bookmarks)
 
                 for bm in bookmarks:
                     bm_name = bm["name"]
-                    bm_author = self.get_global_user(bm["author_id"]).display_name
+                    bm_author = WebAuthor.from_dict(bm["author"]).display_name
                     bm_timestamp = to_timestamp(bm["timestamp"])
                     bm_id = bm["id"]
 
@@ -690,7 +691,9 @@ class ToolCommands:
                     entry.seek(bm["timestamp"])
 
                     player.playlist._add_entry(entry)
-                    return Response("Loaded bookmark `***REMOVED***0***REMOVED***` by *****REMOVED***1***REMOVED*****".format(bm["name"], self.get_global_user(bm["author_id"]).display_name))
+
+                    author = WebAuthor.from_dict(bm["author"])
+                    return Response("Loaded bookmark `***REMOVED***0***REMOVED***` by *****REMOVED***1***REMOVED*****".format(bm["name"], author.display_name))
 
                 elif player.current_entry:
                     bm_timestamp = player.progress
