@@ -557,15 +557,13 @@ class ManipulateCommands:
         return Response("Didn't find anything that goes by ***REMOVED***0***REMOVED***".format(leftover_args[0]))
 
     @command_info("1.9.5", 1477774380, ***REMOVED***
-        "3.4.2":
-        (1497552134,
-         "Added a way to not only replay the current song, but also the last one"
-         ),
+        "3.4.2": (1497552134, "Added a way to not only replay the current song, but also the last one"),
         "3.4.8": (1497649772, "Fixed the issue which blocked Giesela from replaying the last song"),
         "3.5.2": (1497714171, "Can now replay an index from the history"),
         "3.5.9": (1497899132, "Now showing the tile of the entry that is going to be replayed"),
         "3.6.0": (1497903889, "Replay <index> didn't work correctly"),
-        "3.8.9": (1499466672, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499466672, "Part of the `Giesenesis` rewrite"),
+        "4.7.7": (1504104609, "Cloning the entry now")
     ***REMOVED***)
     async def cmd_replay(self, player, choose_last=""):
         """
@@ -587,7 +585,8 @@ class ManipulateCommands:
                     "Am I supposed to replay the future or what...?")
 
             replay_entry = player.playlist.history[index]
-            player.playlist._add_entry(replay_entry, placement=0)
+            player.playlist.replay(index)
+
             return Response("Replaying *****REMOVED******REMOVED*****".format(replay_entry.title))
         except:
             pass
@@ -603,7 +602,7 @@ class ManipulateCommands:
         if not replay_entry:
             return Response("There's nothing for me to replay")
 
-        player.playlist._add_entry(replay_entry, placement=0)
+        player.playlist.replay()
         return Response("Replaying *****REMOVED******REMOVED*****".format(replay_entry.title))
 
     async def cmd_shuffle(self, channel, player):
@@ -693,15 +692,13 @@ class ManipulateCommands:
 
         if player.is_stopped:
             raise exceptions.CommandError(
-                "Can't modify the queue! The player is not playing!",
-                expire_in=20)
+                "Can't modify the queue! The player is not playing!")
 
         length = len(player.playlist.entries)
 
         if length < 2:
             raise exceptions.CommandError(
-                "Can't promote! Please add at least 2 songs to the queue!",
-                expire_in=20)
+                "Can't promote! Please add at least 2 songs to the queue!")
 
         if not position:
             entry = player.playlist.promote_last()
@@ -711,18 +708,15 @@ class ManipulateCommands:
             except ValueError:
                 raise exceptions.CommandError(
                     "This is not a valid song number! Please choose a song \
-                    number between 2 and %s!" % length,
-                    expire_in=20)
+                    number between 2 and %s!" % length)
 
             if position == 0:
                 raise exceptions.CommandError(
-                    "This song is already at the top of the queue!",
-                    expire_in=20)
+                    "This song is already at the top of the queue!")
             if position < 0 or position >= length:
                 raise exceptions.CommandError(
                     "Can't promote a song not in the queue! Please choose a song \
-                    number between 2 and %s!" % length,
-                    expire_in=20)
+                    number between 2 and %s!" % length)
 
             entry = player.playlist.promote_position(position)
 

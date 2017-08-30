@@ -115,7 +115,8 @@ class PlayerCommands:
                     format(new_volume))
 
     @command_info("2.0.3", 1487538840, ***REMOVED***
-        "3.3.7": (1497471402, "changed command from \"skipto\" to \"seek\"")
+        "3.3.7": (1497471402, "changed command from \"skipto\" to \"seek\""),
+        "4.7.7": (1504104996, "New seeking system")
     ***REMOVED***)
     async def cmd_seek(self, player, timestamp):
         """
@@ -133,12 +134,13 @@ class PlayerCommands:
         if player.current_entry is None:
             return Response("Nothing playing!")
 
-        if not player.goto_seconds(secs):
+        if not player.seek(secs):
             return Response(
                 "Timestamp exceeds song duration!")
 
     @command_info("2.2.1", 1493975700, ***REMOVED***
-        "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite"),
+        "4.7.7": (1504104996, "New seeking system")
     ***REMOVED***)
     async def cmd_fwd(self, player, timestamp):
         """
@@ -156,13 +158,14 @@ class PlayerCommands:
         if player.current_entry is None:
             return Response("Nothing playing!")
 
-        if not player.goto_seconds(player.progress + secs):
+        if not player.seek(player.progress + secs):
             return Response(
                 "Timestamp exceeds song duration!")
 
     @command_info("2.2.1", 1493975700, ***REMOVED***
         "3.4.3": (1497609912, "Can now rewind past the current song"),
-        "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite"),
+        "4.7.7": (1504104996, "New seeking system")
     ***REMOVED***)
     async def cmd_rwd(self, player, timestamp=None):
         """
@@ -218,7 +221,7 @@ class PlayerCommands:
                 player.play_entry(last_entry)
                 return
 
-        if not player.goto_seconds(secs):
+        if not player.seek(secs):
             return Response(
                 "Timestamp exceeds song duration!")
 
