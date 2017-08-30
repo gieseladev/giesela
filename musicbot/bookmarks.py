@@ -3,6 +3,7 @@ import re
 from random import randint
 
 from musicbot.utils import clean_songname, similarity
+from musicbot.web_author import WebAuthor
 
 
 def ensure_saving(func):
@@ -24,6 +25,7 @@ def ensure_loaded(func):
 
 
 class Bookmarks:
+    gp_version = 2
 
     def __init__(self):
         self.loaded = False
@@ -42,7 +44,8 @@ class Bookmarks:
     @ensure_loaded
     def save(self):
         save_data = {
-            "version": str(hex(self.version + 1)[2:]),
+            "version": hex(self.version + 1)[2:],
+            "gp_version": hex(Bookmarks.gp_version)[2:],
             "bookmarks": self.bookmarks
         }
         json.dump(save_data, open("data/bookmarks.gb", "w+"), indent=2)
@@ -50,18 +53,25 @@ class Bookmarks:
     def load(self):
         try:
             saved_data = json.load(open("data/bookmarks.gb", "r+"))
-            self.version = int(saved_data["version"], 16)
-            self.bookmarks = saved_data["bookmarks"]
-            self.loaded = True
+
+            if int(saved_data.get("gp_version", "0"), 16) < Bookmarks.gp_version:
+                print("[Bookmarks] Can't load the bookmarks, they're outdated")
+                self.version = 0
+                self.bookmarks = {}
+                self.loaded = True
+            else:
+                self.version = int(saved_data["version"], 16)
+                self.bookmarks = saved_data["bookmarks"]
+                self.loaded = True
         except:
             pass
 
     @ensure_loaded
     def get_id(self):
         while True:
-            id = str(hex(randint(0, 100000)))[2:]
-            if id not in self.bookmarks:
-                return id
+            _id = hex(randint(0x100, 0xFFFF))[2:]
+            if _id not in self.bookmarks:
+                return _id
 
     @ensure_loaded
     def search_bookmarks(self, query, min_certainty=0):
@@ -91,10 +101,9 @@ class Bookmarks:
 
     @ensure_loaded
     @ensure_saving
-    def add_bookmark(self, entry, timestamp, author_id, bookmark_name=None):
-        # if type(entry).__name__ != "URLPlaylistEntry":
-        #     # raise TypeError("Can only bookmark URLPlaylistEntries")
-        #     return False
+    def add_bookmark(self, entry, timestamp, author, bookmark_name=None):
+        if isinstance(author, str):
+            author = WebAuthor.from_id(author)
 
         bookmark_id = self.get_id()
         bookmark_name = bookmark_name if bookmark_name else clean_songname(entry.title)
@@ -105,7 +114,7 @@ class Bookmarks:
             "name": bookmark_name,
             "entry": entry_data,
             "timestamp": timestamp,
-            "author_id": author_id
+            "author": author.to_dict()
         }
 
         self.bookmarks[bookmark_id] = data
