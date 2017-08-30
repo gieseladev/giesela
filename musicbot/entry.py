@@ -517,7 +517,7 @@ class YoutubeEntry(BaseEntry):
         title = data["title"]
         duration = data["duration"]
         thumbnail = data["thumbnail"]
-        thumbnail_brightness = data["thumbnail_brightness"]
+        thumbnail_brightness = data.get("thumbnail_brightness")
         description = data["description"]
 
         return cls(playlist, video_id, url, title, duration, thumbnail, description, expected_filename=filename, thumbnail_brightness=thumbnail_brightness, **meta)
@@ -767,7 +767,7 @@ class TimestampEntry(YoutubeEntry):
         title = data["title"]
         duration = data["duration"]
         thumbnail = data["thumbnail"]
-        thumbnail_brightness = data["thumbnail_brightness"]
+        thumbnail_brightness = data.get("thumbnail_brightness")
         description = data["description"]
         sub_queue = data["sub_queue"]
 
@@ -833,7 +833,7 @@ class GieselaEntry(YoutubeEntry):
         title = data["title"]
         duration = data["duration"]
         thumbnail = data["thumbnail"]
-        thumbnail_brightness = data["thumbnail_brightness"]
+        thumbnail_brightness = data.get("thumbnail_brightness")
         description = data["description"]
 
         song_title = data["song_title"]
@@ -935,7 +935,7 @@ class SpotifyEntry(GieselaEntry):
         title = data["title"]
         duration = data["duration"]
         thumbnail = data["thumbnail"]
-        thumbnail_brightness = data["thumbnail_brightness"]
+        thumbnail_brightness = data.get("thumbnail_brightness")
         description = data["description"]
         spotify_data = SpotifyTrack.from_dict(data["spotify_data"])
 
