@@ -131,7 +131,7 @@ class Playlists:
                 print("[Playlists] generated mosaic, uploading to Imgur")
 
                 image_file = BytesIO()
-                cover_image.save(image_file, format="JPEG")
+                cover_image.save(image_file, format="PNG")
                 image_file.seek(0)
 
                 cover_url = _upload_playlist_cover(playlist_id, image_file)
