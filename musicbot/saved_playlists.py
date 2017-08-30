@@ -6,11 +6,11 @@ import time
 from io import BytesIO
 
 import configparser
+from musicbot import mosaic
 from musicbot.entry import Entry, GieselaEntry
 from musicbot.exceptions import BrokenEntryError, OutdatedEntryError
 from musicbot.imgur import _upload_playlist_cover
-from musicbot.utils import (clean_songname, format_time, generate_mosaic,
-                            similarity)
+from musicbot.utils import clean_songname, format_time, similarity
 from musicbot.web_author import WebAuthor
 
 
@@ -116,12 +116,19 @@ class Playlists:
         if not cover_url:
             covers = [entry.cover for entry in entries if isinstance(entry, GieselaEntry)]
 
-            if len(covers) >= 4:
+            if len(covers) >= 3:
                 print("[Playlists] no cover provided, generating one for", playlist_id)
-                covers_to_use = random.sample(covers, 4)
-                cover_image = generate_mosaic(covers_to_use)
 
-                print("[Playlists] Generated mosaic, uploading to Imgur")
+                image_amount = min(random.choice((3, 4, 5, 6, 7, 8, 9)), len(covers))
+
+                covers_to_use = random.sample(covers, image_amount)
+
+                images = mosaic.grab_images(*covers_to_use)
+                print("[Playlist] downloaded", image_amount, "images")
+
+                cover_image = mosaic.create_random_cover(*images)
+
+                print("[Playlists] generated mosaic, uploading to Imgur")
 
                 image_file = BytesIO()
                 cover_image.save(image_file, format="JPEG")
@@ -134,8 +141,6 @@ class Playlists:
 
         serialized_entries = []
         for index, entry in enumerate(sorted(entries, key=lambda entry: entry.sortby)):
-            entry.start_seconds = 0
-
             added_timestamp = entry.meta.get("playlist", ***REMOVED******REMOVED***).get("timestamp", round(time.time()))
 
             entry.meta["playlist"] = ***REMOVED***
