@@ -1096,7 +1096,8 @@ class PlaylistCommands:
         "3.6.1": (1497972538, "now accepts a query parameter which adds a song to the playlist like the `play` command does so for the queue"),
         "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite"),
         "4.2.3": (1500959036, "Error handling for DMCA takedowns and other Youtube problems"),
-        "4.6.9": (1503754385, "Fixed typo")
+        "4.6.9": (1503754385, "Fixed typo"),
+        "4.7.8": (1504105737, "Using the new copy method for entries to make sure that they're \"clean\"")
     ***REMOVED***)
     async def cmd_addtoplaylist(self, channel, author, player, playlistname, query=None):
         """
@@ -1127,7 +1128,7 @@ class PlaylistCommands:
                     "There's nothing playing right now so I can't add it to your playlist..."
                 )
 
-            add_entry = player.current_entry
+            add_entry = player.current_entry.copy()
             if isinstance(add_entry, TimestampEntry):
                 current_timestamp = add_entry.current_sub_entry["name"]
                 # this looks ugly but eh, it works
@@ -1180,7 +1181,8 @@ class PlaylistCommands:
         "3.5.8": (1497826917, "Now displaying the names of the song and the playlist"),
         "3.6.5": (1498152365, "Don't require a playlistname argument anymore but take it from the entry itself"),
         "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite"),
-        "4.3.6": (1501249709, "Fixed variable name error")
+        "4.3.6": (1501249709, "Fixed variable name error"),
+        "4.7.8": (1504105737, "Using the new copy method for entries to make sure that they're \"clean\"")
     ***REMOVED***)
     async def cmd_removefromplaylist(self, channel, author, player, playlistname=None):
         """
@@ -1203,7 +1205,7 @@ class PlaylistCommands:
 
         playlist_id = playlistname.lower()
 
-        remove_entry = player.current_entry
+        remove_entry = player.current_entry.copy()
 
         if playlist_id not in self.playlists.playlists.keys():
             return Response("There's no playlist `***REMOVED******REMOVED***`.".format(playlist_id))
@@ -1221,7 +1223,8 @@ class PlaylistCommands:
         "4.3.3": (1501235095, "Fixed strange message formatting bug."),
         "4.3.8": (1501264222, "Caching adjustments"),
         "4.3.9": (1501340523, "Can now set image-properties with attachments"),
-        "4.5.4": (1501967725, "One may now edit an entry's url")
+        "4.5.4": (1501967725, "One may now edit an entry's url"),
+        "4.7.8": (1504105737, "Using the new copy method for entries to make sure that they're \"clean\"")
     ***REMOVED***)
     async def cmd_editentry(self, channel, author, player, leftover_args):
         """
@@ -1236,7 +1239,7 @@ class PlaylistCommands:
         if not player.current_entry:
             return Response("There's nothing playing right now")
 
-        entry = player.current_entry
+        entry = player.current_entry.copy()
 
         playlistname = "_".join(leftover_args) or entry.meta.get("playlist", ***REMOVED******REMOVED***).get("id", None) or ""
 

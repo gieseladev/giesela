@@ -609,7 +609,8 @@ class ToolCommands:
         "3.4.1": (1497550771, "Added the filter \"mine\" to the listing function"),
         "3.4.6": (1497617827, "when listing bookmarks, they musn't be \"inline\"."),
         "3.5.8": (1497827057, "Editing bookmarks now works as expected"),
-        "4.6.1": (1502582759, "Updated to new entry model")
+        "4.6.1": (1502582759, "Updated to new entry model"),
+        "4.7.8": (1504105817, "Using the new copy method for entries to make sure that they're \"clean\"")
     ***REMOVED***)
     async def cmd_bookmark(self, author, player, leftover_args):
         """
@@ -628,27 +629,27 @@ class ToolCommands:
         """
         if len(leftover_args) > 0:
             arg = leftover_args[0].lower()
+
             if arg in ["list", "showall"]:
                 em = Embed(title="Bookmarks")
                 bookmarks = bookmark.all_bookmarks
 
                 if "mine" in leftover_args:
-                    bookmarks = filter(
-                        lambda x: bookmark.get_bookmark(
-                            x)["author_id"] == author.id,
-                        bookmarks)
+                    bookmarks = filter(lambda x: bookmark.get_bookmark(x)["author_id"] == author.id, bookmarks)
 
                 for bm in bookmarks:
                     bm_name = bm["name"]
-                    bm_author = self.get_global_user(
-                        bm["author_id"]).display_name
+                    bm_author = self.get_global_user(bm["author_id"]).display_name
                     bm_timestamp = to_timestamp(bm["timestamp"])
                     bm_id = bm["id"]
+
                     t = "*****REMOVED******REMOVED*****".format(bm_name)
-                    v = "`***REMOVED******REMOVED***` starting at `***REMOVED******REMOVED***` *by* *****REMOVED******REMOVED*****".format(
-                        bm_id, bm_timestamp, bm_author)
+                    v = "`***REMOVED******REMOVED***` starting at `***REMOVED******REMOVED***` *by* *****REMOVED******REMOVED*****".format(bm_id, bm_timestamp, bm_author)
+
                     em.add_field(name=t, value=v, inline=False)
+
                 return Response(embed=em)
+
             elif arg in ["remove", "delete"]:
                 if len(leftover_args) < 2:
                     return Response("Please provide an id or a name")
@@ -659,52 +660,49 @@ class ToolCommands:
                     return Response("Removed bookmark `***REMOVED******REMOVED***`".format(bm["name"]))
                 else:
                     return Response("Something went wrong")
+
             elif arg in ["edit", "change"]:
                 if len(leftover_args) < 2:
                     return Response("Please provide an id")
 
                 bm_id = leftover_args[1]
                 if bm_id not in bookmark:
-                    return Response(
-                        "No bookmark with id `***REMOVED******REMOVED***` found".format(bm_id))
+                    return Response("No bookmark with id `***REMOVED******REMOVED***` found".format(bm_id))
 
                 if len(leftover_args) < 3:
-                    return Response(
-                        "Please also specify what you want to change")
+                    return Response("Please also specify what you want to change")
 
                 new_timestamp = parse_timestamp(leftover_args[-1])
                 if new_timestamp is not None:  # 0 evaluates to false so I need to check this oldschool-like
-                    new_name = " ".join(
-                        leftover_args[2:-1]) if len(leftover_args) > 3 else None
+                    new_name = " ".join(leftover_args[2:-1]) if len(leftover_args) > 3 else None
                 else:
                     new_name = " ".join(leftover_args[2:])
 
                 if bookmark.edit_bookmark(bm_id, new_name, new_timestamp):
-                    return Response(
-                        "Successfully edited bookmark `***REMOVED******REMOVED***`".format(bm_id))
+                    return Response("Successfully edited bookmark `***REMOVED******REMOVED***`".format(bm_id))
                 else:
-                    return Response("Something went wrong while editing `***REMOVED******REMOVED***`".
-                                    format(bm_id))
+                    return Response("Something went wrong while editing `***REMOVED******REMOVED***`".format(bm_id))
+
             else:
                 bm = bookmark.get_bookmark(" ".join(leftover_args))
                 if bm:
-                    player.playlist._add_entry(
-                        Entry.from_dict(player.playlist, bm[
-                            "entry"]))
-                    return Response("Loaded bookmark `***REMOVED***0***REMOVED***` by *****REMOVED***1***REMOVED*****".
-                                    format(bm["name"],
-                                           self.get_global_user(
-                                               bm["author_id"]).display_name))
+                    entry = Entry.from_dict(player.playlist, bm["entry"])
+                    entry.seek(bm["timestamp"])
+
+                    player.playlist._add_entry(entry)
+                    return Response("Loaded bookmark `***REMOVED***0***REMOVED***` by *****REMOVED***1***REMOVED*****".format(bm["name"], self.get_global_user(bm["author_id"]).display_name))
+
                 elif player.current_entry:
                     bm_timestamp = player.progress
                     bm_name = None
+
                     if len(leftover_args) > 1:
                         timestamp = parse_timestamp(leftover_args[-1])
                         if timestamp:
                             bm_timestamp = timestamp
+
                         bm_name = " ".join(
-                            leftover_args[:-1]) if timestamp else " ".join(
-                                leftover_args)
+                            leftover_args[:-1]) if timestamp else " ".join(leftover_args)
                     else:
                         timestamp = parse_timestamp(leftover_args[-1])
                         if timestamp:
@@ -712,18 +710,14 @@ class ToolCommands:
                         else:
                             bm_name = " ".join(leftover_args)
 
-                    id = bookmark.add_bookmark(
-                        player.current_entry, bm_timestamp, author.id, bm_name)
-                    return Response(
-                        "Created a new bookmark with the id `***REMOVED***0***REMOVED***` (\"***REMOVED***2***REMOVED***\", `***REMOVED***3***REMOVED***`)\nUse `***REMOVED***1***REMOVED***bookmark ***REMOVED***0***REMOVED***` to load it ".
-                        format(id, self.config.command_prefix, bm_name,
-                               to_timestamp(bm_timestamp)))
+                    id = bookmark.add_bookmark(player.current_entry, bm_timestamp, author.id, bm_name)
+                    return Response("Created a new bookmark with the id `***REMOVED***0***REMOVED***` (\"***REMOVED***2***REMOVED***\", `***REMOVED***3***REMOVED***`)\nUse `***REMOVED***1***REMOVED***bookmark ***REMOVED***0***REMOVED***` to load it ".format(id, self.config.command_prefix, bm_name, to_timestamp(bm_timestamp)))
                 else:
                     return Response("There's no such bookmark and there's nothing playing either")
 
         else:
             if player.current_entry:
-                id = bookmark.add_bookmark(player.current_entry,
+                id = bookmark.add_bookmark(player.current_entry.copy(),
                                            player.progress, author.id)
                 return Response(
                     "Created a new bookmark with the id `***REMOVED***0***REMOVED***`\nUse `***REMOVED***1***REMOVED***bookmark ***REMOVED***0***REMOVED***` to load it ".
