@@ -97,10 +97,8 @@ class Bookmarks:
         #     return False
 
         bookmark_id = self.get_id()
-        bookmark_name = bookmark_name if bookmark_name else clean_songname(
-            entry.title)
+        bookmark_name = bookmark_name if bookmark_name else clean_songname(entry.title)
         entry_data = entry.to_dict()
-        entry_data["start_seconds"] = timestamp
 
         data = {
             "id": bookmark_id,
@@ -109,6 +107,7 @@ class Bookmarks:
             "timestamp": timestamp,
             "author_id": author_id
         }
+
         self.bookmarks[bookmark_id] = data
 
         return bookmark_id

@@ -93,10 +93,7 @@ class Playlist(EventEmitter):
             return False
 
         if self.history:
-            history_entry = copy.copy(self.history[index])
-
-            if isinstance(history_entry, YoutubeEntry):
-                history_entry._seek_seconds = None
+            history_entry = self.history[index].copy()
 
             self._add_entry(history_entry, placement=0)
 
@@ -110,6 +107,8 @@ class Playlist(EventEmitter):
         return False
 
     def push_history(self, entry):
+        entry = entry.copy()
+
         entry.meta["finish_time"] = time.time()
         q = self.bot.config.history_limit - 1
         self.history = [entry, *self.history[:q]]
