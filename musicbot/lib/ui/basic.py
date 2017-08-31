@@ -4,6 +4,7 @@ from discord import Embed
 
 import asyncio
 from musicbot import utils
+from musicbot.lib.ui import ui_utils
 
 
 class EditableEmbed:
@@ -158,7 +159,7 @@ class ItemPicker(EditableEmbed):
             next_embed = await self.next_item
             await self.update_message(next_embed, on_new=self.add_reactions)
 
-            reaction, user = await self.bot.wait_for_reaction(emoji=ItemPicker.emojis, user=self.user, message=self._interface_message)
+            reaction, user = await ui_utils.wait_for_reaction_change(emoji=ItemPicker.emojis, user=self.user, message=self._interface_message)
 
             emoji = reaction.emoji
 

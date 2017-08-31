@@ -36,6 +36,7 @@ from musicbot.constants import (ABS_AUDIO_CACHE_PATH, AUDIO_CACHE_PATH,
 from musicbot.entry import (RadioSongEntry, StreamEntry, TimestampEntry,
                             YoutubeEntry)
 from musicbot.games.game_cah import GameCAH
+from musicbot.lib.ui import ui_utils
 from musicbot.opus_loader import load_opus_lib
 from musicbot.player import MusicPlayer
 from musicbot.random_sets import RandomSets
@@ -643,6 +644,12 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             if self.config.debug_mode:
                 await self.safe_send_message(
                     message.channel, "```\n%s\n```" % traceback.format_exc())
+
+    async def on_reaction_add(self, reaction, user):
+        await ui_utils.handle_reaction(reaction, user)
+
+    async def on_reaction_remove(self, reaction, user):
+        await ui_utils.handle_reaction(reaction, user)
 
     async def on_server_update(self, before: discord.Server, after: discord.Server):
         if before.region != after.region:
