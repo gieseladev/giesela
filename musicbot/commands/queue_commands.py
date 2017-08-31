@@ -473,7 +473,7 @@ class EnqueueCommands:
         entries_added = 0
         entries_not_added = 0
 
-        loading_bar = LoadingBar(self, channel, header="Loading Playlist", total_items=total_tracks)
+        loading_bar = LoadingBar(self, channel, header="Loading Playlist", total_items=total_tracks, item_name_plural="tracks")
 
         async for ind, entry in playlist.get_spotify_entries_generator(player.playlist, channel=channel, author=author):
             if entry:
