@@ -164,7 +164,7 @@ class GieselaWebSocket(WebSocket):
                     success = False
 
                     if isinstance(player.current_entry, TimestampEntry):
-                        success = player.goto_seconds(player.current_entry.current_sub_entry["end"])
+                        success = player.seek(player.current_entry.current_sub_entry["end"])
 
                     if not success:
                         player.skip()
@@ -179,7 +179,7 @@ class GieselaWebSocket(WebSocket):
                 target_seconds = command_data.get("value")
                 if target_seconds and player.current_entry:
                     if 0 <= target_seconds <= player.current_entry.duration:
-                        success = player.goto_seconds(target_seconds)
+                        success = player.seek(target_seconds)
                         self.log("sought to", target_seconds)
                     else:
                         success = False
@@ -217,7 +217,7 @@ class GieselaWebSocket(WebSocket):
 
             elif command == "remove":
                 remove_index = command_data.get("index")
-                success = self._call_function_main_thread(player.playlist.remove, remove_index, wait_for_result=True)
+                success = self._call_function_main_thread(player.playlist.remove_position, remove_index, wait_for_result=True)
                 self.log("removed", remove_index)
 
             elif command == "promote":
@@ -370,6 +370,12 @@ class GieselaServer:
             if GieselaServer.get_token_information(auth_client.token)[0] == server_id:
                 auth_client.sendMessage(json_message)
 
+    def broadcast_message(server_id, message):
+        try:
+            threading.Thread(target=GieselaServer._broadcast_message, args=(server_id, message)).start()
+        except Exception as e:
+            traceback.print_exc()
+
     def get_player(token=None, server_id=None):
         if not token and not server_id:
             raise ValueError("Specify at least one of the two")
@@ -406,7 +412,17 @@ class GieselaServer:
 
         return data
 
-    def send_player_information_update(server_id):
+    def _send_player_information(server_id):
+        message = ***REMOVED***
+            "info":
+            ***REMOVED***
+                "player": GieselaServer.get_player_information(server_id=server_id)
+            ***REMOVED***
+        ***REMOVED***
+
+        GieselaServer._broadcast_message(server_id, json.dumps(message))
+
+    def send_player_information(server_id):
         if not GieselaServer.bot:
             return
 
@@ -418,20 +434,22 @@ class GieselaServer:
         caller = outer_frames[1]
         print("[WEBSOCKET] Broadcasting player update to ***REMOVED******REMOVED*** socket(s). Caused by \"***REMOVED******REMOVED***\"".format(len(GieselaServer.authenticated_clients), caller.function))
 
-        threading.Thread(
-            target=GieselaServer._send_player_information_update, args=(server_id,)).start()
+        threading.Thread(target=GieselaServer._send_player_information, args=(server_id, )).start()
 
-    def _send_player_information_update(server_id):
-        try:
-            message = ***REMOVED***
-                "info":
-                ***REMOVED***
-                    "player": GieselaServer.get_player_information(server_id=server_id)
-                ***REMOVED***
-            ***REMOVED***
+    def send_small_update(server_id, **kwargs):
+        if not GieselaServer.bot:
+            return
 
-            json_message = json.dumps(message)
+        if not GieselaServer.authenticated_clients:
+            return
 
-            GieselaServer._broadcast_message(server_id, json_message)
-        except Exception as e:
-            traceback.print_exc()
+        frame = inspect.currentframe()
+        outer_frames = inspect.getouterframes(frame)
+        caller = outer_frames[1]
+        print("[WEBSOCKET] Broadcasting ***REMOVED******REMOVED*** to ***REMOVED******REMOVED*** socket(s). Caused by \"***REMOVED******REMOVED***\"".format(kwargs, len(GieselaServer.authenticated_clients), caller.function))
+
+        message = ***REMOVED***
+            "update": kwargs
+        ***REMOVED***
+
+        GieselaServer.broadcast_message(server_id, json.dumps(message))
