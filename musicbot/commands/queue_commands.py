@@ -498,10 +498,10 @@ class ManipulateCommands:
     })
     async def cmd_remove(self, server, player, message, channel, author, leftover_args):
         """
-        Usage:
-            {command_prefix}remove <index | start index | url> [end index]
-
-        Remove a index or a url from the queue.
+        ///|Usage
+        `{command_prefix}remove <index | start index | url> [end index]`
+        ///|Explanation
+        Remove an index or a url from the queue.
         """
 
         if not leftover_args:
