@@ -182,7 +182,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         return self.players[server.id]
 
     async def on_player_play(self, player, entry):
-        GieselaServer.send_player_information_update(
+        GieselaServer.send_player_information(
             player.voice_client.server.id)
         await self.update_now_playing(entry)
 
@@ -225,22 +225,22 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
     async def on_player_resume(self, player, entry, **_):
         await self.update_now_playing(entry)
-        GieselaServer.send_player_information_update(
-            player.voice_client.server.id)
+        GieselaServer.send_small_update(
+            player.voice_client.server.id, state=player.state.value, state_name=str(player.state), progress=player.progress)
 
     async def on_player_pause(self, player, entry, **_):
         await self.update_now_playing(entry, True)
-        GieselaServer.send_player_information_update(
-            player.voice_client.server.id)
+        GieselaServer.send_small_update(
+            player.voice_client.server.id, state=player.state.value, state_name=str(player.state), progress=player.progress)
 
     async def on_player_stop(self, player, **_):
         await self.update_now_playing()
-        # GieselaServer.send_player_information_update(
+        # GieselaServer.send_player_information(
         #     player.voice_client.server.id)
 
     async def on_player_finished_playing(self, player, **_):
         if not player.playlist.entries and not player.current_entry:
-            GieselaServer.send_player_information_update(
+            GieselaServer.send_player_information(
                 player.voice_client.server.id)
 
         if not player.playlist.entries and not player.current_entry and self.use_autoplaylist:

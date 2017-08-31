@@ -49,11 +49,11 @@ class Playlist(EventEmitter):
 
     def shuffle(self):
         shuffle(self.entries)
-        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+        GieselaServer.send_player_information(self.player.voice_client.server.id)
 
     def clear(self):
         self.entries.clear()
-        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+        GieselaServer.send_player_information(self.player.voice_client.server.id)
 
     def move(self, from_index, to_index):
         if not (0 <= from_index < len(self.entries) and 0 <= to_index < len(self.entries)):
@@ -69,24 +69,9 @@ class Playlist(EventEmitter):
         if self.peek() is move_entry:
             move_entry.get_ready_future()
 
-        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+        GieselaServer.send_player_information(self.player.voice_client.server.id)
 
         return move_entry
-
-    def remove(self, position):
-        if not 0 <= position < len(self.entries):
-            return False
-
-        self.entries.rotate(-position)
-        entry = self.entries.popleft()
-        self.entries.rotate(position)
-
-        if self.peek() is entry:
-            entry.get_ready_future()
-
-        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
-
-        return True
 
     def replay(self, index=0, revert=False):
         if not 0 <= index < len(self.history):
@@ -95,12 +80,12 @@ class Playlist(EventEmitter):
         if self.history:
             history_entry = self.history[index].copy()
 
-            self._add_entry(history_entry, placement=0)
+            self._add_entry(history_entry, placement=0, more_to_come=True)
 
             if revert and self.player.current_entry:
                 self.player.skip()
             else:
-                GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+                GieselaServer.send_player_information(self.player.voice_client.server.id)
 
             return True
 
@@ -113,7 +98,7 @@ class Playlist(EventEmitter):
         q = self.bot.config.history_limit - 1
         self.history = [entry, *self.history[:q]]
 
-        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+        GieselaServer.send_player_information(self.player.voice_client.server.id)
 
     async def add_stream_entry(self, stream_url, **meta):
         info = {"title": stream_url, "extractor": None}
@@ -174,7 +159,7 @@ class Playlist(EventEmitter):
                 self.player.handle_manually = True
 
             self.player.play_entry(entry)
-            GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+            GieselaServer.send_player_information(self.player.voice_client.server.id)
         else:
             self._add_entry(entry)
 
@@ -366,7 +351,7 @@ class Playlist(EventEmitter):
         for entry in entries:
             self._add_entry(entry, more_to_come=True)
 
-        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+        GieselaServer.send_player_information(self.player.voice_client.server.id)
 
     def _add_entry(self, entry, placement=None, more_to_come=False):
         if placement is not None:
@@ -385,22 +370,22 @@ class Playlist(EventEmitter):
             entry.get_ready_future()
 
         if not more_to_come:
-            GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+            GieselaServer.send_player_information(self.player.voice_client.server.id)
 
     def promote_position(self, position):
         if not 0 <= position < len(self.entries):
             return False
 
-        rotDist = -position
-        self.entries.rotate(rotDist)
+        self.entries.rotate(-position)
         entry = self.entries.popleft()
-        self.entries.rotate(-1 * rotDist)
+
+        self.entries.rotate(position)
         self.entries.appendleft(entry)
         self.emit("entry-added", playlist=self, entry=entry)
 
         entry.get_ready_future()
 
-        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+        GieselaServer.send_player_information(self.player.voice_client.server.id)
 
         return entry
 
@@ -410,18 +395,18 @@ class Playlist(EventEmitter):
         self.emit("entry-added", playlist=self, entry=entry)
         entry.get_ready_future()
 
-        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+        GieselaServer.send_player_information(self.player.voice_client.server.id)
 
         return entry
 
     def remove_position(self, position):
-        rotDist = -1 * (position - 1)
-        self.entries.rotate(rotDist)
+        self.entries.rotate(-position)
         entry = self.entries.popleft()
-        self.emit("entry-removed", playlist=self, entry=entry)
-        self.entries.rotate(-1 * rotDist)
 
-        GieselaServer.send_player_information_update(self.player.voice_client.server.id)
+        self.emit("entry-removed", playlist=self, entry=entry)
+        self.entries.rotate(position)
+
+        GieselaServer.send_player_information(self.player.voice_client.server.id)
 
         return entry
 

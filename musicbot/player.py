@@ -149,7 +149,7 @@ class MusicPlayer(EventEmitter):
         if self._current_player:
             self._current_player.buff.volume = value
 
-        GieselaServer.send_player_information_update(self.voice_client.server.id)
+        GieselaServer.send_small_update(self.voice_client.server.id, volume=value)
 
     def on_entry_added(self, playlist, entry):
         if self.is_stopped:
@@ -171,7 +171,7 @@ class MusicPlayer(EventEmitter):
             # no idea how that should happen but eh...
             return False
 
-        GieselaServer.send_player_information_update(self.voice_client.server.id)
+        GieselaServer.send_small_update(self.voice_client.server.id, repeat_state=self.repeatState.value, repeat_state_name=str(self.repeatState))
         return True
 
     def stop(self):
