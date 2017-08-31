@@ -371,8 +371,11 @@ def timestamp_to_queue(timestamps, song_dur):
 
 def _run_timestamp_matcher(text):
     songs = {}
+
+    timestamp_match = r"(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?"
+
     for match in re.finditer(
-            r"^[\s\->]*(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?\W+(.+?)$",
+            r"^[\s\->]*" + timestamp_match + r"\W+(.+?)$",
             text,
             flags=re.MULTILINE):
         timestamp = int(match.group(3))
@@ -382,7 +385,7 @@ def _run_timestamp_matcher(text):
 
     if len(songs) < 1:
         for match in re.finditer(
-                r"^(.+?)\s[\(]?(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?[\)]?$",
+                r"^(.+?)(?:at)?\s[\(]?" + timestamp_match + r"[\)]?$",
                 text,
                 flags=re.MULTILINE):
             timestamp = int(match.group(4))
