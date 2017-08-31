@@ -371,8 +371,11 @@ def timestamp_to_queue(timestamps, song_dur):
 
 def _run_timestamp_matcher(text):
     songs = ***REMOVED******REMOVED***
+
+    timestamp_match = r"(?:(\d***REMOVED***1,2***REMOVED***):)?(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***2***REMOVED***)(?:\s?.?\s?(?:\d***REMOVED***1,2***REMOVED***:)?(?:\d***REMOVED***1,2***REMOVED***):(?:\d***REMOVED***2***REMOVED***))?"
+
     for match in re.finditer(
-            r"^[\s\->]*(?:(\d***REMOVED***1,2***REMOVED***):)?(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***2***REMOVED***)(?:\s?.?\s?(?:\d***REMOVED***1,2***REMOVED***:)?(?:\d***REMOVED***1,2***REMOVED***):(?:\d***REMOVED***2***REMOVED***))?\W+(.+?)$",
+            r"^[\s\->]*" + timestamp_match + r"\W+(.+?)$",
             text,
             flags=re.MULTILINE):
         timestamp = int(match.group(3))
@@ -382,7 +385,7 @@ def _run_timestamp_matcher(text):
 
     if len(songs) < 1:
         for match in re.finditer(
-                r"^(.+?)\s[\(]?(?:(\d***REMOVED***1,2***REMOVED***):)?(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***2***REMOVED***)(?:\s?.?\s?(?:\d***REMOVED***1,2***REMOVED***:)?(?:\d***REMOVED***1,2***REMOVED***):(?:\d***REMOVED***2***REMOVED***))?[\)]?$",
+                r"^(.+?)(?:at)?\s[\(]?" + timestamp_match + r"[\)]?$",
                 text,
                 flags=re.MULTILINE):
             timestamp = int(match.group(4))
