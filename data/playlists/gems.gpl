@@ -28,7 +28,7 @@
         ***REMOVED***,
         "song_title": "7 Years",
         "artist": "Lukas Graham",
-        "artist_image": "https://i.scdn.co/image/e16dcc1f96b92d2755e44efbb839968e8fcfe437",
+        "artist_image": "https://i.scdn.co/image/34ff3851a206e3a899474b4b5ebdc8ea7b6221bf",
         "cover": "https://i.scdn.co/image/594b95bbc05a7c19c1e8f7aaf0d55509039bfad5",
         "album": "NOW That's What I Call Music, Vol. 59",
         "spotify_data": ***REMOVED***
@@ -134,7 +134,7 @@
         ***REMOVED***,
         "song_title": "Behind Blue Eyes",
         "artist": "Limp Bizkit",
-        "artist_image": "https://i.scdn.co/image/67ab66b1154c3115005086d60853fc954717a2ea",
+        "artist_image": "https://i.scdn.co/image/4654955890cb62a6abe9daadfd2b3ecdee8036e4",
         "cover": "https://i.scdn.co/image/e1548fb82c8acf4264d5097ea8447a67da738460",
         "album": "Results May Vary",
         "spotify_data": ***REMOVED***
@@ -286,7 +286,7 @@
         ***REMOVED***,
         "song_title": "Bridges",
         "artist": "Rise Against",
-        "artist_image": "https://i.scdn.co/image/3f45845c4ddc04859e6cf661cadbcb66794ad447",
+        "artist_image": "https://i.scdn.co/image/5d387d8990d08cff197a3b9d20693561320947a2",
         "cover": "https://i.scdn.co/image/3fea18f13d34a1572f0dac18cb7e4f4cab027aa0",
         "album": "The Black Market",
         "spotify_data": ***REMOVED***
@@ -395,6 +395,61 @@
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
+        "type": "RadioSongEntry",
+        "url": "http://energybern.ice.infomaniak.ch/energybern-high.mp3",
+        "title": "Energy Bern",
+        "meta": ***REMOVED***
+            "author": ***REMOVED***
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            ***REMOVED***,
+            "playlist": ***REMOVED***
+                "type": "built-in/dict",
+                "value": ***REMOVED***
+                    "cover": null,
+                    "name": "Gems",
+                    "id": "gems",
+                    "index": 3,
+                    "timestamp": 1503858958
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        "station_data": ***REMOVED***
+            "id": "energybern",
+            "name": "Energy Bern",
+            "aliases": [
+                "energy"
+            ],
+            "language": "ch",
+            "cover": "http://i.imgur.com/K4u00UT.png",
+            "website": "http://energy.ch",
+            "url": "http://energybern.ice.infomaniak.ch/energybern-high.mp3",
+            "poll_time": null,
+            "thumbnails": [
+                "https://i.imgur.com/6UDo0V3.jpg",
+                "https://i.imgur.com/Bo1NDGB.jpg",
+                "https://i.imgur.com/GC31Lxh.jpg",
+                "https://i.imgur.com/70YQVWl.jpg",
+                "https://i.imgur.com/luuiQjs.jpg",
+                "https://i.imgur.com/3Am02fd.jpg",
+                "https://i.imgur.com/9mjnP2U.jpg",
+                "https://i.imgur.com/8acDvAM.jpg",
+                "https://i.imgur.com/BuXomPs.jpg",
+                "https://i.imgur.com/u2lWBO5.jpg",
+                "https://i.imgur.com/XXMf0Va.jpg",
+                "https://i.imgur.com/hqONLC9.jpg",
+                "https://i.imgur.com/jEJXo8W.jpg",
+                "https://i.imgur.com/XjW8cIo.jpg",
+                "https://i.imgur.com/WsEMht2.jpg",
+                "https://i.imgur.com/ILWmuaU.jpg",
+                "https://i.imgur.com/T1ylhXw.jpg",
+                "https://i.imgur.com/1McQCVO.jpg"
+            ]
+        ***REMOVED***
+    ***REMOVED***,
+    ***REMOVED***
+        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache/audio_cache/youtube-welOV5gCuE4-Bridge_To_Grace_-_City_Of_Angels_HD.webm",
         "video_id": "welOV5gCuE4",
@@ -415,7 +470,7 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 3,
+                    "index": 4,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
@@ -551,14 +606,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 4,
+                    "index": 5,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Comatose",
         "artist": "Skillet",
-        "artist_image": "https://i.scdn.co/image/337d6850a19b9be4172503ed8edf5c5101494b24",
+        "artist_image": "https://i.scdn.co/image/28e0d2d74a55576b59ed62760522705b007b99e1",
         "cover": "https://i.scdn.co/image/6fe969ee4807076085c7e1a3d4ecdb9d5559f67d",
         "album": "Comatose",
         "spotify_data": ***REMOVED***
@@ -689,7 +744,7 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 5,
+                    "index": 6,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
@@ -722,7 +777,7 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 6,
+                    "index": 7,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
@@ -750,7 +805,7 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 7,
+                    "index": 8,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
@@ -778,7 +833,7 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 8,
+                    "index": 9,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
@@ -920,14 +975,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 9,
+                    "index": 10,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Everywhere I Go",
         "artist": "Onlap",
-        "artist_image": "https://i.scdn.co/image/93e68fd7cf56da3b0c474f73ddc3c1221582d603",
+        "artist_image": "https://i.scdn.co/image/76383a9134c48559e4cfadfca9660d234861cb73",
         "cover": "https://i.scdn.co/image/5529b71c26734c72b21e27b2b6f159aff9a2bdcc",
         "album": "Running",
         "spotify_data": ***REMOVED***
@@ -1044,14 +1099,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 10,
+                    "index": 11,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Failure",
         "artist": "Breaking Benjamin",
-        "artist_image": "https://i.scdn.co/image/4ab55e0fd6318b82c0955d31a3ee945d7f3988d8",
+        "artist_image": "https://i.scdn.co/image/af3411bbd2b4d91f994196b2a91b7c372f52c90b",
         "cover": "https://i.scdn.co/image/2886e34fd3ceaf11c6f5873809f5869d72706947",
         "album": "Dark Before Dawn",
         "spotify_data": ***REMOVED***
@@ -1188,7 +1243,7 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 11,
+                    "index": 12,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
@@ -1221,14 +1276,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 12,
+                    "index": 13,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Forever",
         "artist": "Onlap",
-        "artist_image": "https://i.scdn.co/image/ed4971fcf1a6c129260ec3ef4f16a06e45d38b7e",
+        "artist_image": "https://i.scdn.co/image/76383a9134c48559e4cfadfca9660d234861cb73",
         "cover": "https://i.scdn.co/image/5529b71c26734c72b21e27b2b6f159aff9a2bdcc",
         "album": "Running",
         "spotify_data": ***REMOVED***
@@ -1345,7 +1400,7 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 13,
+                    "index": 14,
                     "timestamp": 1503686764
                 ***REMOVED***
             ***REMOVED***
@@ -1473,14 +1528,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 14,
+                    "index": 15,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Had Enough",
         "artist": "Breaking Benjamin",
-        "artist_image": "https://i.scdn.co/image/af3411bbd2b4d91f994196b2a91b7c372f52c90b",
+        "artist_image": "https://i.scdn.co/image/fc679f65311133e7f95cd45ef83feef9825331c3",
         "cover": "https://i.scdn.co/image/f5833bfb97bd059b2377e2072e231a4f7870f281",
         "album": "Phobia",
         "spotify_data": ***REMOVED***
@@ -1617,14 +1672,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 15,
+                    "index": 16,
                     "timestamp": 1503228024
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Here Without You",
         "artist": "3 Doors Down",
-        "artist_image": "https://i.scdn.co/image/942ff2555a081b628f0a66fcd6998a5e73b5a3fb",
+        "artist_image": "https://i.scdn.co/image/cbebca19077e1d260af99733c7313d83f5c30a73",
         "cover": "https://i.scdn.co/image/1c09b3f029fe28b9c9f67b18473db70f71ecf858",
         "album": "Away From The Sun",
         "spotify_data": ***REMOVED***
@@ -1759,14 +1814,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 16,
+                    "index": 17,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Holiday/Boulevard Of Broken Dreams",
         "artist": "Green Day",
-        "artist_image": "https://i.scdn.co/image/17d5df7a8bc0d5689545e99475cbbeaab485bdf7",
+        "artist_image": "https://i.scdn.co/image/e5efead78896bfffe37a34b9ba9345129ab9a199",
         "cover": "https://i.scdn.co/image/2027dbfec96249cdc12ff804738898afce24a7a5",
         "album": "American Idiot",
         "spotify_data": ***REMOVED***
@@ -1895,7 +1950,7 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 17,
+                    "index": 18,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
@@ -2025,7 +2080,7 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 18,
+                    "index": 19,
                     "timestamp": 1503686906
                 ***REMOVED***
             ***REMOVED***
@@ -2167,14 +2222,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 19,
+                    "index": 20,
                     "timestamp": 1503689761
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Leave Out All The Rest",
         "artist": "Linkin Park",
-        "artist_image": "https://i.scdn.co/image/f759994946aa42851e5293083f472c96c1753105",
+        "artist_image": "https://i.scdn.co/image/0b0925b544b46d90a549f25a7f754ce6e59e6be2",
         "cover": "https://i.scdn.co/image/deb48b2781de449175ff7865da3bb249652fc28f",
         "album": "Minutes To Midnight (Explicit Version)",
         "spotify_data": ***REMOVED***
@@ -2297,14 +2352,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 20,
+                    "index": 21,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Livin' On A Prayer",
         "artist": "Bon Jovi",
-        "artist_image": "https://i.scdn.co/image/255476a832d9647d73ed03ae51727cb911c565df",
+        "artist_image": "https://i.scdn.co/image/24b7d7bd55aeb2f53f10b33941a7724c1cdd88fc",
         "cover": "https://i.scdn.co/image/03e6e600fb3b9c4c6ef0df6b0d287d0e7d18d799",
         "album": "Slippery When Wet",
         "spotify_data": ***REMOVED***
@@ -2429,14 +2484,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 21,
+                    "index": 22,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Lost Within",
         "artist": "Fivefold",
-        "artist_image": "https://i.scdn.co/image/1e96a0855140aff79fddd122ec7ba3e91761ab18",
+        "artist_image": "https://i.scdn.co/image/9a5d6ce642befbcb9f2cd19c3466e70f00b25657",
         "cover": "https://i.scdn.co/image/5d5892eea3978891c7c2a66c373d280e4b4abd7a",
         "album": "The Story",
         "spotify_data": ***REMOVED***
@@ -2557,7 +2612,7 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 22,
+                    "index": 23,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
@@ -2590,14 +2645,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 23,
+                    "index": 24,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Numb",
         "artist": "Linkin Park",
-        "artist_image": "https://i.scdn.co/image/1685533969d5b68cbc630f991e873bd6467f1814",
+        "artist_image": "https://i.scdn.co/image/0b0925b544b46d90a549f25a7f754ce6e59e6be2",
         "cover": "https://i.scdn.co/image/c03090e1f4b09d79fd41855023460c02e13993a8",
         "album": "Meteora",
         "spotify_data": ***REMOVED***
@@ -2720,14 +2775,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 24,
+                    "index": 25,
                     "timestamp": 1503228024
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "One Year, Six Months",
         "artist": "Yellowcard",
-        "artist_image": "https://i.scdn.co/image/60d530d14457d21c62f6c1d3cf79d5e0a983573f",
+        "artist_image": "https://i.scdn.co/image/014d29b70a865b02144687255cfeb7dbe65d08f8",
         "cover": "https://i.scdn.co/image/961342c3732dd32d5a93b343345f9bdd1b16bf62",
         "album": "Ocean Avenue",
         "spotify_data": ***REMOVED***
@@ -2874,14 +2929,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 25,
+                    "index": 26,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Riptide",
         "artist": "Vance Joy",
-        "artist_image": "https://i.scdn.co/image/7d186c3a80955b82a8cc46fe86bdf305478629e8",
+        "artist_image": "https://i.scdn.co/image/23d0081dc5f325e131056197acad3ea0ca508eee",
         "cover": "https://i.scdn.co/image/cefc7b35a2000f0dcfc676cee8bd9af26b6c751b",
         "album": "Dream Your Life Away (Special Editon)",
         "spotify_data": ***REMOVED***
@@ -3006,14 +3061,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 26,
+                    "index": 27,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Sail",
         "artist": "AWOLNATION",
-        "artist_image": "https://i.scdn.co/image/2d163700bac6cd96a45017d46f7580f412161475",
+        "artist_image": "https://i.scdn.co/image/1d66807bc53e92cc0f3400fc74562101d0e1e699",
         "cover": "https://i.scdn.co/image/5f768d4c8d8fb256cf95a9d8f06679636634e0d3",
         "album": "Megalithic Symphony Deluxe",
         "spotify_data": ***REMOVED***
@@ -3136,7 +3191,7 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 27,
+                    "index": 28,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
@@ -3272,14 +3327,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 28,
+                    "index": 29,
                     "timestamp": 1503228024
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Savior",
         "artist": "Rise Against",
-        "artist_image": "https://i.scdn.co/image/bb54f19ac8a70161e63b460b8d28105c09e8b4e3",
+        "artist_image": "https://i.scdn.co/image/5d387d8990d08cff197a3b9d20693561320947a2",
         "cover": "https://i.scdn.co/image/9821a760f8bc0dc59f186ee184c624e5fe51abb2",
         "album": "Appeal To Reason",
         "spotify_data": ***REMOVED***
@@ -3408,14 +3463,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 29,
+                    "index": 30,
                     "timestamp": 1503690561
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "So What",
         "artist": "P!nk",
-        "artist_image": "https://i.scdn.co/image/0bbf030d5fbc44787fa641733e810cd1b928c230",
+        "artist_image": "https://i.scdn.co/image/55019ce117b4ddb39caf51e589df6675905fd1b5",
         "cover": "https://i.scdn.co/image/7d8a69912dc14f7f838bc564dae1d41db882f648",
         "album": "Funhouse",
         "spotify_data": ***REMOVED***
@@ -3540,14 +3595,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 30,
+                    "index": 31,
                     "timestamp": 1503686409
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Song On Fire",
         "artist": "Nickelback",
-        "artist_image": "https://i.scdn.co/image/3cab7a705d1fefebd1f7c8bf03f27587ae697ead",
+        "artist_image": "https://i.scdn.co/image/60732fcec7fae58bd7684c2793900dec68528aa7",
         "cover": "https://i.scdn.co/image/e38795b12093c02567fe9ef0686b7edac7d4b567",
         "album": "Feed the Machine",
         "spotify_data": ***REMOVED***
@@ -3670,14 +3725,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 31,
+                    "index": 32,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "The Diary of Jane",
         "artist": "Breaking Benjamin",
-        "artist_image": "https://i.scdn.co/image/4ab55e0fd6318b82c0955d31a3ee945d7f3988d8",
+        "artist_image": "https://i.scdn.co/image/0eed1e428ac3af29a50ac137eebe1fca90bf715c",
         "cover": "https://i.scdn.co/image/60f9b69aa68780b33f9a6f873e628da0e05b735b",
         "album": "Phobia (Clean Version)",
         "spotify_data": ***REMOVED***
@@ -3814,7 +3869,7 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 32,
+                    "index": 33,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
@@ -3847,7 +3902,7 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 33,
+                    "index": 34,
                     "timestamp": 1503228024
                 ***REMOVED***
             ***REMOVED***
@@ -3983,14 +4038,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 34,
+                    "index": 35,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "Wait For Me",
         "artist": "Rise Against",
-        "artist_image": "https://i.scdn.co/image/5d387d8990d08cff197a3b9d20693561320947a2",
+        "artist_image": "https://i.scdn.co/image/3f45845c4ddc04859e6cf661cadbcb66794ad447",
         "cover": "https://i.scdn.co/image/b506968a958ad390518c3d9e4f45e79cf3b64be1",
         "album": "Endgame",
         "spotify_data": ***REMOVED***
@@ -4119,7 +4174,7 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 35,
+                    "index": 36,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
@@ -4257,14 +4312,14 @@
                     "cover": null,
                     "name": "Gems",
                     "id": "gems",
-                    "index": 36,
+                    "index": 37,
                     "timestamp": 1503227394
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
         "song_title": "What You Deserve",
         "artist": "No Resolve",
-        "artist_image": "https://i.scdn.co/image/7cfdbaf79bcb3928ff9d3a350f31b7b8d4c2632f",
+        "artist_image": "https://i.scdn.co/image/89b94a72775d82334578ff9000674dc1680e890a",
         "cover": "https://i.scdn.co/image/eb11ce36d8935451b54ee299abb626d9829a33eb",
         "album": "Unity",
         "spotify_data": ***REMOVED***
