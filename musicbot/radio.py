@@ -105,7 +105,6 @@ class RadioSongExtractor:
                 "energybern":   RadioSongExtractor._get_current_song_energy_bern,
                 "capitalfm":    RadioSongExtractor._get_current_song_capital_fm,
                 "bbc":          RadioSongExtractor._get_current_song_bbc,
-                "heartlondon":  RadioSongExtractor._get_current_song_heart_london,
                 "radio32":      RadioSongExtractor._get_current_song_radio32
             }
             RadioSongExtractor._initialised = True
@@ -220,34 +219,6 @@ class RadioSongExtractor:
                 "cover": song_data["imageUrl"],
                 "youtube": "http://www.bbc.co.uk/radio",
                 "duration": duration,
-                "progress": progress
-            }
-        except:
-            raise
-            return None
-
-    def _get_current_song_heart_london():
-        try:
-            resp = requests.get("http://www.heart.co.uk/london/on-air/last-played-songs/")
-            soup = BeautifulSoup(resp.text, ConfigDefaults.html_parser)
-
-            title = soup.findAll("h3", {"class": "track"})[0].text.strip()
-            artist = soup.findAll("p", {"class": "artist"})[0].text.strip()
-            cover = soup.findAll("li", {"class": "clearfix odd first"})[0].findAll("img")[0]["src"]
-            start_hour, start_minute = soup.findAll("p", {"class": "dtstart"})[0].text.strip().split(":")
-            start_hour = (int(start_hour) + 1) % 24
-
-            time_now = datetime.now()
-
-            start_time = datetime(time_now.year, time_now.month, time_now.day, start_hour, int(start_minute))
-            progress = round((time_now - start_time).total_seconds())
-
-            return {
-                "title": title,
-                "artist": artist,
-                "cover": cover,
-                "youtube": "http://www.heart.co.uk/london/on-air/last-played-songs/",
-                "duration": 0,
                 "progress": progress
             }
         except:
