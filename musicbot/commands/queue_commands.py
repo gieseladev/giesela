@@ -1,3 +1,4 @@
+import functools
 import time
 import traceback
 from random import choice, shuffle
@@ -5,9 +6,10 @@ from random import choice, shuffle
 from discord import Embed
 
 import asyncio
-from musicbot import exceptions
+from musicbot import exceptions, spotify
 from musicbot.entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                             StreamEntry, TimestampEntry, YoutubeEntry)
+from musicbot.lib.ui.basic import ItemPicker, LoadingBar
 from musicbot.radio import RadioSongExtractor, RadioStations
 from musicbot.utils import (Response, block_user, clean_songname, command_info,
                             create_bar, format_time, get_related_videos,
@@ -45,7 +47,8 @@ class EnqueueCommands:
         "3.7.7": (1499018088, "radio selection looks good again"),
         "3.8.9": (1499535312, "Part of the `Giesenesis` rewrite"),
         "4.4.4": (1501627084, "Fixed this command"),
-        "4.6.4": (1503433750, "The station finder now displays the current song of the station")
+        "4.6.4": (1503433750, "The station finder now displays the current song of the station"),
+        "4.6.7": (1503747794, "Play the radio stations instantly")
     })
     async def cmd_radio(self, player, channel, author, leftover_args):
         """
@@ -61,7 +64,7 @@ class EnqueueCommands:
         if leftover_args:
             if leftover_args[0].lower().strip() == "random":
                 station_info = RadioStations.get_random_station()
-                await player.playlist.add_radio_entry(station_info, channel=channel, author=author)
+                await player.playlist.add_radio_entry(station_info, channel=channel, author=author, now=True)
                 return Response(
                     "I choose\n**{.name}**".format(station_info))
             else:
@@ -70,56 +73,36 @@ class EnqueueCommands:
                 station_info = RadioStations.get_station(
                     search_name.lower().strip())
                 if station_info:
-                    await player.playlist.add_radio_entry(station_info, channel=channel, author=author)
+                    await player.playlist.add_radio_entry(station_info, channel=channel, author=author, now=True)
                     return Response("Your favourite:\n**{.name}**".format(station_info))
 
         # help the user find the right station
 
-        def check(m):
-            t = ["y", "yes", "yeah", "yep", "sure"]
-            f = ["n", "no", "nope", "never"]
-
-            m = m.content.lower().strip()
-            return m in t or m in f
-
         possible_stations = RadioStations.get_all_stations()
         shuffle(possible_stations)
 
-        interface_string = "**{0.name}**\n{1}\nType `yes` or `no`"
-        now_playing_string = "Currently playing **{artist} - {title}**\n"
+        embeds = []
 
-        station_data_waiter = None
+        for station in possible_stations:
+            em = Embed(colour=hex_to_dec("#b3f75d"))
+            em.set_author(name=station.name, url=station.website)
+            em.set_thumbnail(url=station.cover)
 
-        if RadioSongExtractor.has_data(possible_stations[0]):
-            station_data_waiter = asyncio.ensure_future(RadioSongExtractor.async_get_current_song(self.loop, possible_stations[0]))
+            if station.has_current_song_info:
+                data = await RadioSongExtractor.async_get_current_song(self.loop, station)
+                em.add_field(name="Currently playing", value="{artist} - {title}".format(**data))
+
+            embeds.append(em)
+
+        item_picker = ItemPicker(self, channel, user=author, items=embeds)
+        result = await item_picker.result()
+
+        if result is None:
+            return Response("Okay then")
         else:
-            station_data_waiter = None
-
-        for next_index, station in enumerate(possible_stations, 1):
-            np = ""
-
-            if station_data_waiter:
-                data = await station_data_waiter
-                np = now_playing_string.format(**data)
-
-            if next_index < len(possible_stations) and RadioSongExtractor.has_data(possible_stations[next_index]):
-                station_data_waiter = asyncio.ensure_future(RadioSongExtractor.async_get_current_song(self.loop, possible_stations[next_index]))
-            else:
-                station_data_waiter = None
-
-            msg = await self.safe_send_message(channel, interface_string.format(station, np))
-            response = await self.wait_for_message(author=author, channel=channel, check=check)
-            await self.safe_delete_message(msg)
-            play_station = response.content.lower().strip() in ["y", "yes", "yeah", "yep", "sure"]
-            await self.safe_delete_message(response)
-
-            if play_station:
-                await player.playlist.add_radio_entry(station, channel=channel, author=author)
-                return Response("There you go fam!\n**{.name}**".format(station))
-            else:
-                continue
-
-        return Response("That was all of them, sorry")
+            station = possible_stations[result]
+            await player.playlist.add_radio_entry(station, channel=channel, author=author)
+            return Response("There you go fam!\n**{.name}**".format(station))
 
     @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command"),
@@ -436,23 +419,75 @@ class EnqueueCommands:
             await self.safe_delete_message(interface_message)
             await self.safe_delete_message(response_message)
 
+    @command_info("1.0.0", 1477180800, {
+        "4.6.8": (1503751773, "updated documentation"),
+        "4.6.9": (1503751791, "autoplay now follows video recommendations")
+    })
     async def cmd_autoplay(self, player):
         """
-        Usage:
-            {command_prefix}autoplay
-        Play from the autoplaylist.
+        ///|Usage
+        `{command_prefix}autoplay`
+        ///|Explanation
+        Automatically queue another video if the queue is empty
+        either by following the list of recommended videos to the
+        last video or an entry in the autoplaylist file.
         """
 
-        if not self.config.auto_playlist:
-            self.config.auto_playlist = True
+        if not self.use_autoplaylist:
+            self.use_autoplaylist = True
             await self.on_player_finished_playing(player)
             return Response("Playing from the autoplaylist")
         else:
-            self.config.auto_playlist = False
+            self.use_autoplaylist = False
             return Response(
                 "Won't play from the autoplaylist anymore")
 
         # await self.safe_send_message (channel, msgState)
+
+    @command_info("4.7.0", 1503764185)
+    async def cmd_spotify(self, channel, author, player, url):
+        """
+        ///|Usage
+        `{command_prefix}spotify [link]`
+        ///|Explanation
+        Load a playlist from Spotify
+        ///|Sidenote
+        This command will be expanded to support more Spoity functions
+        """
+
+        try:
+            playlist = spotify.SpotifyPlaylist.from_url(url)
+        except spotify.UrlError:
+            return Response("This isn't a valid link")
+        except spotify.NotFoundError:
+            return Response("Couldn't find the playlist")
+
+        em = Embed(title=playlist.name, description=playlist.description, colour=0x1DB954, url=playlist.href)
+        em.set_thumbnail(url=playlist.cover)
+        em.set_author(name=playlist.author)
+        em.set_footer(text="{} tracks".format(len(playlist.tracks)))
+
+        interface_msg = await self.safe_send_message(channel, "**Loading playlist**", embed=em)
+
+        total_tracks = len(playlist.tracks)
+        entries_added = 0
+        entries_not_added = 0
+
+        loading_bar = LoadingBar(self, channel, header="Loading Playlist", total_items=total_tracks, item_name_plural="tracks")
+
+        async for ind, entry in playlist.get_spotify_entries_generator(player.playlist, channel=channel, author=author):
+            if entry:
+                player.playlist._add_entry(entry)
+                entries_added += 1
+            else:
+                entries_not_added += 1
+
+            await loading_bar.set_progress((ind + 1) / total_tracks)
+
+        await loading_bar.done()
+
+        em.set_footer(text="{} tracks loaded | {} failed".format(entries_added, entries_not_added))
+        interface_msg = await self.edit_message(interface_msg, "**Loaded playlist**", embed=em)
 
 
 class ManipulateCommands:
@@ -528,15 +563,13 @@ class ManipulateCommands:
         return Response("Didn't find anything that goes by {0}".format(leftover_args[0]))
 
     @command_info("1.9.5", 1477774380, {
-        "3.4.2":
-        (1497552134,
-         "Added a way to not only replay the current song, but also the last one"
-         ),
+        "3.4.2": (1497552134, "Added a way to not only replay the current song, but also the last one"),
         "3.4.8": (1497649772, "Fixed the issue which blocked Giesela from replaying the last song"),
         "3.5.2": (1497714171, "Can now replay an index from the history"),
         "3.5.9": (1497899132, "Now showing the tile of the entry that is going to be replayed"),
         "3.6.0": (1497903889, "Replay <index> didn't work correctly"),
-        "3.8.9": (1499466672, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499466672, "Part of the `Giesenesis` rewrite"),
+        "4.7.7": (1504104609, "Cloning the entry now")
     })
     async def cmd_replay(self, player, choose_last=""):
         """
@@ -558,7 +591,8 @@ class ManipulateCommands:
                     "Am I supposed to replay the future or what...?")
 
             replay_entry = player.playlist.history[index]
-            player.playlist._add_entry(replay_entry, placement=0)
+            player.playlist.replay(index)
+
             return Response("Replaying **{}**".format(replay_entry.title))
         except:
             pass
@@ -574,7 +608,7 @@ class ManipulateCommands:
         if not replay_entry:
             return Response("There's nothing for me to replay")
 
-        player.playlist._add_entry(replay_entry, placement=0)
+        player.playlist.replay()
         return Response("Replaying **{}**".format(replay_entry.title))
 
     async def cmd_shuffle(self, channel, player):
@@ -664,15 +698,13 @@ class ManipulateCommands:
 
         if player.is_stopped:
             raise exceptions.CommandError(
-                "Can't modify the queue! The player is not playing!",
-                expire_in=20)
+                "Can't modify the queue! The player is not playing!")
 
         length = len(player.playlist.entries)
 
         if length < 2:
             raise exceptions.CommandError(
-                "Can't promote! Please add at least 2 songs to the queue!",
-                expire_in=20)
+                "Can't promote! Please add at least 2 songs to the queue!")
 
         if not position:
             entry = player.playlist.promote_last()
@@ -682,18 +714,15 @@ class ManipulateCommands:
             except ValueError:
                 raise exceptions.CommandError(
                     "This is not a valid song number! Please choose a song \
-                    number between 2 and %s!" % length,
-                    expire_in=20)
+                    number between 2 and %s!" % length)
 
             if position == 0:
                 raise exceptions.CommandError(
-                    "This song is already at the top of the queue!",
-                    expire_in=20)
+                    "This song is already at the top of the queue!")
             if position < 0 or position >= length:
                 raise exceptions.CommandError(
                     "Can't promote a song not in the queue! Please choose a song \
-                    number between 2 and %s!" % length,
-                    expire_in=20)
+                    number between 2 and %s!" % length)
 
             entry = player.playlist.promote_position(position)
 

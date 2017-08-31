@@ -1,5 +1,6 @@
 import atexit
 import hashlib
+import inspect
 import json
 import threading
 import traceback
@@ -409,6 +410,14 @@ class GieselaServer:
         if not GieselaServer.bot:
             return
 
+        if not GieselaServer.authenticated_clients:
+            return
+
+        frame = inspect.currentframe()
+        outer_frames = inspect.getouterframes(frame)
+        caller = outer_frames[1]
+        print("[WEBSOCKET] Broadcasting player update to {} socket(s). Caused by \"{}\"".format(len(GieselaServer.authenticated_clients), caller.function))
+
         threading.Thread(
             target=GieselaServer._send_player_information_update, args=(server_id,)).start()
 
@@ -422,7 +431,6 @@ class GieselaServer:
             }
 
             json_message = json.dumps(message)
-            print("[WEBSOCKET] Broadcasting player update to sockets")
 
             GieselaServer._broadcast_message(server_id, json_message)
         except Exception as e:

@@ -54,7 +54,7 @@ def cache_lyrics(query, lyrics):
     if check_cache(query, load=False):
         return False
     else:
-        file_path = lyrics_folder + "\\" + escape_query(query)
+        file_path = path.join(lyrics_folder, escape_query(query))
 
         lyrics["version"] = lyrics_version
 
