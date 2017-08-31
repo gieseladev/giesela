@@ -74,7 +74,6 @@ class Playlist(EventEmitter):
         return move_entry
 
     def remove(self, position):
-
         if not 0 <= position < len(self.entries):
             return False
 
@@ -94,7 +93,8 @@ class Playlist(EventEmitter):
             return False
 
         if self.history:
-            history_entry = copy.copy(self.history[index])
+            history_entry = self.history[index].copy()
+
             self._add_entry(history_entry, placement=0)
 
             if revert and self.player.current_entry:
@@ -107,6 +107,8 @@ class Playlist(EventEmitter):
         return False
 
     def push_history(self, entry):
+        entry = entry.copy()
+
         entry.meta["finish_time"] = time.time()
         q = self.bot.config.history_limit - 1
         self.history = [entry, *self.history[:q]]
@@ -232,13 +234,12 @@ class Playlist(EventEmitter):
                 return None
 
             query = info["entries"][0]["webpage_url"]
-            info = await self.downloader.extract_info(
-                self.loop, query, download=False, process=False)
+            info = await self.downloader.extract_info(self.loop, query, download=False, process=False)
 
         if "entries" in info:
             return ["http://youtube.com/watch?v=" + entry["id"] for entry in info["entries"]]
         else:
-            return await self.get_entry(query, **meta)
+            return await self.get_entry(info, **meta)
 
     async def get_entries_from_urls_gen(self, *urls, **meta):
         for ind, url in enumerate(urls):
@@ -287,7 +288,10 @@ class Playlist(EventEmitter):
         return info
 
     async def get_entry(self, song_url, **meta):
-        info = await self.get_ytdl_data(song_url)
+        if isinstance(song_url, dict):
+            info = song_url
+        else:
+            info = await self.get_ytdl_data(song_url)
 
         entry = None
 
@@ -458,11 +462,7 @@ class Playlist(EventEmitter):
             return self.entries[0]
 
     async def estimate_time_until(self, position, player):
-        """
-            (very) Roughly estimates the time till the queue will "position"
-        """
-        estimated_time = sum(
-            [e.end_seconds for e in islice(self.entries, position - 1)])
+        estimated_time = sum([e.end_seconds for e in islice(self.entries, position - 1)])
 
         if not player.is_stopped and player.current_entry:
             estimated_time += player.current_entry.duration - player.progress

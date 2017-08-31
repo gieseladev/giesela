@@ -1,3 +1,5 @@
+from io import BytesIO
+
 from imgurpython import ImgurClient
 from imgurpython.helpers.error import (ImgurClientError,
                                        ImgurClientRateLimitError)
@@ -35,7 +37,10 @@ def _upload_playlist_cover(playlist_name, url):
     ***REMOVED***
 
     try:
-        resp = client.upload_from_url(url, config=config)
+        if isinstance(url, BytesIO):
+            resp = client.upload(url, config=config)
+        else:
+            resp = client.upload_from_url(url, config=config)
     except ImgurClientError:
         return False
     except ImgurClientRateLimitError:

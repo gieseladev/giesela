@@ -13,20 +13,29 @@
       "https://i.imgur.com/u2lWBO5.jpg",
       "https://i.imgur.com/XXMf0Va.jpg",
       "https://i.imgur.com/hqONLC9.jpg",
-      "https://i.imgur.com/jEJXo8W.jpg"
+      "https://i.imgur.com/jEJXo8W.jpg",
+      "https://i.imgur.com/BQ1JO4f.jpg",
+      "https://i.imgur.com/GaDpo92.jpg",
+      "https://i.imgur.com/80NjU3q.png"
     ],
     "england": [
       "https://i.imgur.com/1nQguVU.jpg",
       "https://i.imgur.com/rg7VF2k.jpg",
       "https://i.imgur.com/DIVsiGZ.jpg",
-      "https://i.imgur.com/zoh8ttF.jpg"
+      "https://i.imgur.com/zoh8ttF.jpg",
+      "https://i.imgur.com/kGR2fwf.jpg",
+      "https://i.imgur.com/JO0eFbi.jpg"
     ],
     "switzerland": [
       "https://i.imgur.com/XjW8cIo.jpg",
       "https://i.imgur.com/WsEMht2.jpg",
       "https://i.imgur.com/ILWmuaU.jpg",
       "https://i.imgur.com/T1ylhXw.jpg",
-      "https://i.imgur.com/1McQCVO.jpg"
+      "https://i.imgur.com/1McQCVO.jpg",
+      "https://i.imgur.com/YibztJ0.jpg",
+      "https://i.imgur.com/MbBiZ9p.jpg",
+      "https://i.imgur.com/d8Fae4S.jpg",
+      "https://i.imgur.com/gl9HK0w.jpg"
     ]
   ***REMOVED***,
   "stations": [***REMOVED***
@@ -48,6 +57,7 @@
       "cover": "http://i.imgur.com/K4u00UT.png",
       "website": "http://energy.ch",
       "url": "http://energybern.ice.infomaniak.ch/energybern-high.mp3",
+      "uncertainty": 6,
       "thumbnails": ["generic", "switzerland"]
     ***REMOVED***,
     ***REMOVED***
@@ -69,16 +79,6 @@
       "website": "http://bbc.com",
       "url": "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_q",
       "thumbnails": ["generic", "england", "https://i.imgur.com/3fy23iE.jpg"]
-    ***REMOVED***,
-    ***REMOVED***
-      "id": "heartlondon",
-      "name": "Heart London",
-      "aliases": ["love", "heart"],
-      "language": "en",
-      "cover": "https://i.imgur.com/OcAWJCh.png",
-      "website": "http://heartlondon.com",
-      "url": "media-ice.musicradio.com/HeartLondon",
-      "thumbnails": ["generic", "england"]
     ***REMOVED***
   ]
 ***REMOVED***

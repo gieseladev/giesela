@@ -1,3 +1,4 @@
+import copy
 import os
 import time
 import traceback
@@ -96,9 +97,7 @@ class BaseEntry:
         self.meta = meta
 
         self.filename = None
-        self.start_seconds = 0
         self.duration = 0
-        self.end_seconds = 0
         self._is_downloading = False
         self._waiting_futures = []
 
@@ -137,19 +136,9 @@ class BaseEntry:
     def sortby(self):
         return self.url
 
-    def set_start(self, sec):
-        if sec < 0 or sec > self.end_seconds:
-            return False
-
-        self.start_seconds = sec
-        return True
-
-    def set_end(self, sec):
-        if sec < self.start_seconds or sec > self.duration:
-            return False
-
-        self.end_seconds = sec
-        return True
+    @property
+    def start_seconds(self):
+        return None
 
     async def _download(self):
         raise NotImplementedError
@@ -157,6 +146,9 @@ class BaseEntry:
     @classmethod
     def from_dict(cls, data, playlist):
         raise NotImplementedError
+
+    def copy(self):
+        return copy.copy(self)
 
     def to_dict(self):
         raise NotImplementedError
@@ -381,6 +373,7 @@ class RadioSongEntry(RadioStationEntry):
         self._csi_poll_time = 0
 
         self.poll_time = station_data.poll_time
+        self.uncertainty = station_data.uncertainty
 
     @property
     def sortby(self):
@@ -388,7 +381,7 @@ class RadioSongEntry(RadioStationEntry):
 
     @property
     def lyrics_title(self):
-        return ((self.artist + " - ") or "") + self.title
+        return "***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".join(self.title, self.artist)
 
     def _get_new_song_info(self):
         self._current_song_info = RadioSongExtractor.get_current_song(
@@ -463,18 +456,19 @@ class RadioSongEntry(RadioStationEntry):
 
 class YoutubeEntry(BaseEntry):
 
-    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, expected_filename=None, **meta):
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, expected_filename=None, thumbnail_brightness=None, **meta):
         super().__init__(queue, url, **meta)
 
         self.video_id = video_id
         self._title = title
         self.thumbnail = thumbnail
-        self._thumbnail_brightness = None
+        self._thumbnail_brightness = thumbnail_brightness
         self.description = description
         self.duration = duration
 
         self.end_seconds = meta.get("end_seconds", duration)
-        self.start_seconds = meta.get("start_seconds", 0)
+        self._start_seconds = meta.get("start_seconds", 0)
+        self._seek_seconds = meta.get("seek_seconds", None)
 
         self.expected_filename = expected_filename
 
@@ -495,6 +489,17 @@ class YoutubeEntry(BaseEntry):
     def sortby(self):
         return clean_songname(self._title)
 
+    @property
+    def start_seconds(self):
+        secs = 0
+
+        if self._seek_seconds is not None:
+            secs = self._seek_seconds
+        else:
+            secs = self._start_seconds
+
+        return secs
+
     @classmethod
     def from_dict(cls, playlist, data):
         if data["type"] != cls.__name__:
@@ -512,9 +517,37 @@ class YoutubeEntry(BaseEntry):
         title = data["title"]
         duration = data["duration"]
         thumbnail = data["thumbnail"]
+        thumbnail_brightness = data.get("thumbnail_brightness")
         description = data["description"]
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, expected_filename=filename, **meta)
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, expected_filename=filename, thumbnail_brightness=thumbnail_brightness, **meta)
+
+    def seek(self, secs):
+        if not 0 <= secs < self.end_seconds:
+            return False
+
+        self._seek_seconds = secs
+        return True
+
+    def set_start(self, secs):
+        if not 0 <= secs < self.end_seconds:
+            return False
+
+        self._start_seconds = secs
+        return True
+
+    def set_end(self, secs):
+        if not 0 < secs <= self.duration:
+            return False
+
+        self.end_seconds = sec
+        return True
+
+    def copy(self):
+        new = copy.copy(self)
+        new._seek_seconds = None
+
+        return new
 
     def to_dict(self):
         meta_dict = Entry.create_meta_dict(self.meta)
@@ -528,6 +561,7 @@ class YoutubeEntry(BaseEntry):
             "title":                self._title,
             "duration":             self.duration,
             "thumbnail":            self.thumbnail,
+            "thumbnail_brightness": self._thumbnail_brightness,
             "description":          self.description,
             "meta":                 meta_dict
         ***REMOVED***
@@ -683,9 +717,8 @@ class YoutubeEntry(BaseEntry):
 
 class TimestampEntry(YoutubeEntry):
 
-    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, sub_queue, expected_filename=None, **meta):
-        super().__init__(queue, video_id, url, title, duration,
-                         thumbnail, description, expected_filename=expected_filename, **meta)
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, sub_queue, expected_filename=None, thumbnail_brightness=None, **meta):
+        super().__init__(queue, video_id, url, title, duration, thumbnail, description, expected_filename=expected_filename, thumbnail_brightness=thumbnail_brightness, **meta)
 
         self.sub_queue = sub_queue
 
@@ -734,10 +767,11 @@ class TimestampEntry(YoutubeEntry):
         title = data["title"]
         duration = data["duration"]
         thumbnail = data["thumbnail"]
+        thumbnail_brightness = data.get("thumbnail_brightness")
         description = data["description"]
         sub_queue = data["sub_queue"]
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, sub_queue, expected_filename=filename, **meta)
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, sub_queue, expected_filename=filename, thumbnail_brightness=thumbnail_brightness, **meta)
 
     def to_dict(self):
         d = super().to_dict()
@@ -761,8 +795,8 @@ class TimestampEntry(YoutubeEntry):
 
 class GieselaEntry(YoutubeEntry):
 
-    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, expected_filename=None, **meta):
-        super().__init__(queue, video_id, url, title, duration, thumbnail, description, expected_filename=expected_filename, **meta)
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, expected_filename=None, thumbnail_brightness=None, **meta):
+        super().__init__(queue, video_id, url, title, duration, thumbnail, description, expected_filename=expected_filename, thumbnail_brightness=thumbnail_brightness, **meta)
 
         self.song_title = song_title
         self.artist = artist
@@ -773,6 +807,10 @@ class GieselaEntry(YoutubeEntry):
     @property
     def title(self):
         return "***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".format(self.artist, self.song_title)
+
+    @property
+    def lyrics_title(self):
+        return "***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".join(self.title, self.artist)
 
     @property
     def sortby(self):
@@ -795,6 +833,7 @@ class GieselaEntry(YoutubeEntry):
         title = data["title"]
         duration = data["duration"]
         thumbnail = data["thumbnail"]
+        thumbnail_brightness = data.get("thumbnail_brightness")
         description = data["description"]
 
         song_title = data["song_title"]
@@ -803,7 +842,7 @@ class GieselaEntry(YoutubeEntry):
         cover = data["cover"]
         album = data["album"]
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, expected_filename=filename, **meta)
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, expected_filename=filename, thumbnail_brightness=thumbnail_brightness, **meta)
 
     @classmethod
     def upgrade(cls, previous_entry, song_title, artist, artist_image, album, cover):
@@ -862,7 +901,7 @@ class DiscogsEntry(GieselaEntry):
 
 class SpotifyEntry(GieselaEntry):
 
-    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, spotify_track, expected_filename=None, **meta):
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, spotify_track, expected_filename=None, thumbnail_brightness=None, **meta):
         super().__init__(
             queue, video_id, url, title, duration, thumbnail, description,
             spotify_track.name,
@@ -870,7 +909,9 @@ class SpotifyEntry(GieselaEntry):
             spotify_track.artists[0].image,
             spotify_track.album.name,
             spotify_track.cover_url,
-            expected_filename=expected_filename, **meta
+            expected_filename=expected_filename,
+            thumbnail_brightness=thumbnail_brightness,
+            **meta
         )
 
         self.spotify_data = spotify_track
@@ -894,10 +935,11 @@ class SpotifyEntry(GieselaEntry):
         title = data["title"]
         duration = data["duration"]
         thumbnail = data["thumbnail"]
+        thumbnail_brightness = data.get("thumbnail_brightness")
         description = data["description"]
         spotify_data = SpotifyTrack.from_dict(data["spotify_data"])
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, spotify_data, expected_filename=filename, **meta)
+        return cls(playlist, video_id, url, title, duration, thumbnail, description, spotify_data, expected_filename=filename, thumbnail_brightness=thumbnail_brightness, **meta)
 
     def to_dict(self):
         d = super().to_dict()

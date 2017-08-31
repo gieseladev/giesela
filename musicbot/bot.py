@@ -1,5 +1,5 @@
-import asyncio
 import inspect
+import logging
 import os
 import re
 import shutil
@@ -19,6 +19,7 @@ from discord.object import Object
 from discord.utils import find
 from discord.voice_client import VoiceClient
 
+import asyncio
 from musicbot import downloader, exceptions
 from musicbot.commands.admin_commands import AdminCommands
 from musicbot.commands.fun_commands import FunCommands
@@ -32,15 +33,18 @@ from musicbot.config import Config, ConfigDefaults
 from musicbot.constants import VERSION as BOTVERSION
 from musicbot.constants import (ABS_AUDIO_CACHE_PATH, AUDIO_CACHE_PATH,
                                 DISCORD_MSG_CHAR_LIMIT)
-from musicbot.entry import RadioSongEntry, StreamEntry, TimestampEntry
+from musicbot.entry import (RadioSongEntry, StreamEntry, TimestampEntry,
+                            YoutubeEntry)
 from musicbot.games.game_cah import GameCAH
+from musicbot.lib.ui import ui_utils
 from musicbot.opus_loader import load_opus_lib
 from musicbot.player import MusicPlayer
 from musicbot.random_sets import RandomSets
 from musicbot.reminder import Calendar
 from musicbot.saved_playlists import Playlists
 from musicbot.settings import Settings
-from musicbot.utils import Response, load_file, ordinal, paginate
+from musicbot.utils import (Response, get_related_videos, load_file, ordinal,
+                            paginate)
 from musicbot.web_author import WebAuthor
 from musicbot.web_socket_server import GieselaServer
 
@@ -78,15 +82,14 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             print("Warning: Autoplaylist is empty, disabling.")
             self.config.auto_playlist = False
 
+        self.use_autoplaylist = self.config.auto_playlist
+
         ssd_defaults = ***REMOVED***"last_np_msg": None, "auto_paused": False***REMOVED***
         self.server_specific_data = defaultdict(lambda: dict(ssd_defaults))
 
         super().__init__()
         self.aiosession = aiohttp.ClientSession(loop=self.loop)
         self.http.user_agent += " Giesela/%s" % BOTVERSION
-        self.instant_translate = False
-        self.instant_translate_mode = 1
-        self.instant_translate_certainty = .7
 
         self.load_online_loggers()
 
@@ -232,51 +235,33 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
     async def on_player_stop(self, player, **_):
         await self.update_now_playing()
-        GieselaServer.send_player_information_update(
-            player.voice_client.server.id)
+        # GieselaServer.send_player_information_update(
+        #     player.voice_client.server.id)
 
     async def on_player_finished_playing(self, player, **_):
         if not player.playlist.entries and not player.current_entry:
             GieselaServer.send_player_information_update(
                 player.voice_client.server.id)
 
-        if not player.playlist.entries and not player.current_entry and self.config.auto_playlist:
-            if self.config.auto_playlist:
-                while self.autoplaylist:
+        if not player.playlist.entries and not player.current_entry and self.use_autoplaylist:
+            while True:
+                if player.playlist.history and isinstance(player.playlist.history[0], YoutubeEntry):
+                    print("[Autoplay] following suggested for last history entry")
+                    song_url = choice(get_related_videos(player.playlist.history[0].video_id))["url"]
+                elif self.autoplaylist:
+                    print("[Autoplay] choosing an url from the autoplaylist")
                     song_url = choice(self.autoplaylist)
-                    info = await self.downloader.safe_extract_info(
-                        player.playlist.loop,
-                        song_url,
-                        download=False,
-                        process=False)
-
-                    if not info:
-                        self.autoplaylist.remove(song_url)
-                        print(
-                            "[Info] Removing unplayable song from autoplaylist: %s"
-                            % song_url)
-                        write_file(self.config.auto_playlist_file,
-                                   self.autoplaylist)
-                        continue
-
-                    if info.get("entries", None):  # or .get("_type", "") == "playlist"
-                        pass  # Wooo playlist
-                        # Blarg how do I want to do this
-
-                    try:
-                        await player.playlist.add_entry(
-                            song_url, channel=None, author=None)
-                    except exceptions.ExtractionError as e:
-                        print("Error adding song from autoplaylist:", e)
-                        continue
-
+                else:
+                    print("[Autoplay] Can't continue")
                     break
 
-                if not self.autoplaylist:
-                    print(
-                        "[Warning] No playable songs in the autoplaylist, disabling."
-                    )
-                    self.config.auto_playlist = False
+                try:
+                    await player.playlist.add_entry(song_url)
+                except exceptions.ExtractionError as e:
+                    print("Error adding song from autoplaylist:", e)
+                    continue
+
+                break
 
     async def on_player_entry_added(self, playlist, entry, **_):
         pass
@@ -359,17 +344,17 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             if not quiet:
                 raise
 
-    async def safe_edit_message(self, message, new, *, send_if_fail=False, quiet=False, keep_at_bottom=False):
+    async def safe_edit_message(self, message, new=None, *, send_if_fail=False, quiet=False, keep_at_bottom=False, embed=None):
         if keep_at_bottom:
             async for lmsg in self.logs_from(message.channel, limit=5):
                 if lmsg.id == message.id:
                     break
             else:
                 await self.safe_delete_message(message)
-                return await self.safe_send_message(message.channel, new)
+                return await self.safe_send_message(message.channel, new, embed=embed)
 
         try:
-            return await self.edit_message(message, new)
+            return await self.edit_message(message, new, embed=embed)
 
         except discord.NotFound:
             if not quiet:
@@ -379,7 +364,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             if send_if_fail:
                 if not quiet:
                     print("Sending instead")
-                return await self.safe_send_message(message.channel, new)
+                return await self.safe_send_message(message.channel, new, embed=embed)
 
     async def edit_profile(self, **fields):
         if self.user.bot:
@@ -660,6 +645,12 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 await self.safe_send_message(
                     message.channel, "```\n%s\n```" % traceback.format_exc())
 
+    async def on_reaction_add(self, reaction, user):
+        await ui_utils.handle_reaction(reaction, user)
+
+    async def on_reaction_remove(self, reaction, user):
+        await ui_utils.handle_reaction(reaction, user)
+
     async def on_server_update(self, before: discord.Server, after: discord.Server):
         if before.region != after.region:
             print("[Servers] \"%s\" changed regions: %s -> %s" %
@@ -770,5 +761,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
 
 if __name__ == "__main__":
+    logging.getLogger("asyncio").setLevel(logging.WARNING)
     bot = MusicBot()
     bot.run()
