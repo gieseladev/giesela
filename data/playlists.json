@@ -95,5 +95,19 @@
         "description": null,
         "cover_url": null,
         "name": "Gems"
+    },
+    "classical": {
+        "location": "data/playlists/classical.gpl",
+        "author": {
+            "id": "206459363739566080",
+            "name": "Lophorius",
+            "display_name": "Lophorius",
+            "avatar_url": "https://cdn.discordapp.com/avatars/206459363739566080/290bbea2374aba7ce2c28ced4842c643.png?size=1024",
+            "colour": "#1197F0"
+        },
+        "replays": 2,
+        "description": "Containing music that justifies why aliens should visit us and benefit from us.",
+        "cover_url": "http://i.imgur.com/wljtuBA.png",
+        "name": "Classical"
     }
 }
