@@ -153,7 +153,7 @@ class MusicPlayer(EventEmitter):
 
     def on_entry_added(self, playlist, entry):
         if self.is_stopped:
-            self.loop.call_soon(self.play)
+            self.loop.call_later(2, self.play)
 
     def skip(self):
         self.skipRepeat = True

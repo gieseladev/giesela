@@ -352,6 +352,7 @@ class Playlist(EventEmitter):
             self._add_entry(entry, more_to_come=True)
 
         GieselaServer.send_player_information(self.player.voice_client.server.id)
+        self.emit("entry-added", playlist=self, entry=entry)
 
     def _add_entry(self, entry, placement=None, more_to_come=False):
         if placement is not None:
@@ -365,12 +366,12 @@ class Playlist(EventEmitter):
         else:
             self.entries.append(entry)
 
-        self.emit("entry-added", playlist=self, entry=entry)
         if self.peek() is entry:
             entry.get_ready_future()
 
         if not more_to_come:
             GieselaServer.send_player_information(self.player.voice_client.server.id)
+            self.emit("entry-added", playlist=self, entry=entry)
 
     def promote_position(self, position):
         if not 0 <= position < len(self.entries):
