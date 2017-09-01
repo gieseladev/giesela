@@ -810,7 +810,7 @@ class GieselaEntry(YoutubeEntry):
 
     @property
     def lyrics_title(self):
-        return "***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".format(self.title, self.artist)
+        return "***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".format(self.song_title, self.artist)
 
     @property
     def sortby(self):
