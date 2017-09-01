@@ -37,7 +37,7 @@
             "colour": "#1197F0"
         },
         "entries": 116,
-        "replays": 81,
+        "replays": 82,
         "description": "Your go-to playlist for everything related to Anime and Japanese music. This is the first (and as of yet) only playlist where **every** entry is a GieselaEntry.",
         "cover_url": "http://i.imgur.com/MFXq8og.jpg"
     },
@@ -65,9 +65,10 @@
             "colour": "#6200F6"
         },
         "entries": 142,
-        "replays": 40,
+        "replays": 42,
         "description": null,
-        "cover_url": "http://i.imgur.com/Vifn0MV.jpg"
+        "cover_url": "http://i.imgur.com/Vifn0MV.jpg",
+        "name": "Quality"
     },
     "uptoyou": {
         "location": "data/playlists/uptoyou.gpl",
@@ -91,7 +92,7 @@
             "avatar_url": "https://cdn.discordapp.com/avatars/206459363739566080/290bbea2374aba7ce2c28ced4842c643.png?size=1024",
             "colour": "#1197F0"
         },
-        "replays": 3,
+        "replays": 5,
         "description": null,
         "cover_url": null,
         "name": "Gems"
