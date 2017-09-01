@@ -1,6 +1,6 @@
 import os.path
 
-MAIN_VERSION = "4.8.4"
+MAIN_VERSION = "4.8.5"
 SUB_VERSION = "guisela"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
