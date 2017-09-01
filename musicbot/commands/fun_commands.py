@@ -1,4 +1,5 @@
 import re
+import time
 from random import shuffle
 
 import asyncio
@@ -13,12 +14,16 @@ from musicbot.utils import (Response, block_user, command_info, owner_only,
 
 
 class FunCommands:
+
+    @command_info("1.9.5", 1477781586, ***REMOVED***
+        "4.8.7": (1504288917, "Improved command")
+    ***REMOVED***)
     async def cmd_c(self, author, channel, leftover_args):
         """
-        Usage:
-            ***REMOVED***command_prefix***REMOVED***c <message>
-
-        have a chat
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***c <message>`
+        ///|Explanation
+        Chat with Giesela
         """
         if len(leftover_args) < 1:
             return Response("You need to actually say something...")
@@ -32,22 +37,17 @@ class FunCommands:
         await self.send_typing(channel)
         msgContent = " ".join(leftover_args)
 
-        while True:
-            answer = cb.say(msgContent)
-            answer = re.sub(r"\b[C|c]leverbot\b", "you", answer)
-            answer = re.sub(r"\b[C|c][B|b]\b", "you", answer)
-            base_answer = re.sub("[^a-z| ]+|\s***REMOVED***2,***REMOVED***", "", answer.lower())
-            if base_answer not in "whats your name;what is your name;tell me your name".split(
-                    ";") and not any(
-                        q in base_answer
-                        for q in
-                        "whats your name; what is your name;tell me your name".
-                        split(";")):
-                break
+        start_time = time.time()
 
-        await asyncio.sleep(len(answer) / 5.5)
-        print("<" + str(author.name) + "> " + msgContent + "\n<Bot> " +
-              answer + "\n")
+        answer = await self.loop.run_in_executor(None, cb.say, msgContent)
+
+        typing_time = len(answer) / 5.5
+
+        left_to_wait = typing_time - (time.time() - start_time)
+
+        if left_to_wait > 0:
+            await asyncio.sleep(left_to_wait)
+
         return Response(answer)
 
     @block_user
@@ -736,9 +736,9 @@ class FunCommands:
                 return False
 
             if (str(reaction.emoji) in ("⬇", "➡", "⬆", "⬅") or
-                        str(reaction.emoji).startswith("📽") or
-                        str(reaction.emoji).startswith("💾")
-                    ) and reaction.count > 1 and user == author:
+                str(reaction.emoji).startswith("📽") or
+                str(reaction.emoji).startswith("💾")
+                ) and reaction.count > 1 and user == author:
                 return True
 
             # self.log (str (reaction.emoji) + " was the wrong type of
