@@ -455,7 +455,7 @@ class GieselaServer:
         frame = inspect.currentframe()
         outer_frames = inspect.getouterframes(frame)
         caller = outer_frames[1]
-        print("[WEBSOCKET] Broadcasting {} to {} socket(s). Caused by \"{}\"".format(kwargs, len(GieselaServer.authenticated_clients), caller.function))
+        print("[WEBSOCKET] Broadcasting update to {} socket(s). Caused by \"{}\"".format(len(GieselaServer.authenticated_clients), caller.function))
 
         message = {
             "update": kwargs
