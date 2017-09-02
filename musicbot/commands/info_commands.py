@@ -11,7 +11,7 @@ from discord import Embed
 from musicbot.constants import VERSION as BOTVERSION
 from musicbot.tungsten import Tungsten
 from musicbot.utils import (Response, block_user, command_info,
-                            get_dev_changelog, get_dev_version, hex_to_dec,
+                            get_dev_version, get_version_changelog, hex_to_dec,
                             owner_only, prettydate)
 
 
@@ -219,14 +219,15 @@ class InfoCommands:
     @command_info("3.5.6", 1497819288, {
         "3.6.2": (1497978696, "references are now clickable"),
         "3.7.6": (1498947694, "fixed a bug which would stop Giesela from executing the command because of underscores in the version name"),
-        "4.0.8": (1500774499, "Handling special case of already being up to date")
+        "4.0.8": (1500774499, "Handling special case of already being up to date"),
+        "4.8.9": (1504368571, "Fixed documentation")
     })
     async def cmd_version(self, channel):
         """
         ///|Usage
         `{command_prefix}version`
         ///|Explanation
-        Some more informat about the current version and what's to come.
+        Some more information about the current version and what's to come.
         """
 
         await self.send_typing(channel)
@@ -237,7 +238,7 @@ class InfoCommands:
         else:
             changelog = "**What's to come:**\n\n"
             changelog += "\n".join(
-                "● " + l for l in get_dev_changelog()
+                "● " + l for l in get_version_changelog()
             )
 
         desc = "Current Version is `{}`\nDevelopment is at `{}`\n\n{}".format(
