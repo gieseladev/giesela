@@ -401,6 +401,9 @@ class Playlist(EventEmitter):
         return entry
 
     def remove_position(self, position):
+        if not 0 <= position < len(self.entries):
+            return None
+
         self.entries.rotate(-position)
         entry = self.entries.popleft()
 
