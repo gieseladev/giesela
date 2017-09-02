@@ -226,7 +226,7 @@ class GieselaWebSocket(WebSocket):
 
             elif command == "remove":
                 remove_index = command_data.get("index")
-                success = self._call_function_main_thread(player.playlist.remove_position, remove_index, wait_for_result=True)
+                success = bool(self._call_function_main_thread(player.playlist.remove_position, remove_index, wait_for_result=True) is not None)
                 self.log("removed", remove_index)
 
             elif command == "promote":
@@ -291,7 +291,7 @@ class GieselaWebSocket(WebSocket):
                 else:
                     success = False
 
-            answer["success"] = success
+            answer["success"] = bool(success)
 
         self.sendMessage(json.dumps(answer))
 
