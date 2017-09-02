@@ -25,13 +25,22 @@ class GieselaWebSocket(WebSocket):
 
     def init(self):
         self.registration_token = None
+        self._discord_server = None
+
+    @property
+    def discord_server(self):
+        if not self._discord_server:
+            server_id, *_ = GieselaServer.get_token_information(self.token)
+            self._discord_server = GieselaServer.bot.get_server(server_id)
+
+        return self._discord_server
 
     def log(self, *messages):
         message = " ".join(str(msg) for msg in messages)
 
         try:
             server_id, author = GieselaServer.get_token_information(self.token)
-            identification = "{}@{}/{}".format(author, server_id, self.address[0])
+            identification = "[{}@{}] | {}".format(author.name, self.discord_server.name, self.address[0])
         except AttributeError:
             identification = self.address
 
