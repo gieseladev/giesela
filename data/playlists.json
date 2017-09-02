@@ -65,7 +65,7 @@
             "colour": "#6200F6"
         },
         "entries": 142,
-        "replays": 42,
+        "replays": 43,
         "description": null,
         "cover_url": "http://i.imgur.com/Vifn0MV.jpg",
         "name": "Quality"
@@ -92,9 +92,9 @@
             "avatar_url": "https://cdn.discordapp.com/avatars/206459363739566080/290bbea2374aba7ce2c28ced4842c643.png?size=1024",
             "colour": "#1197F0"
         },
-        "replays": 5,
+        "replays": 6,
         "description": null,
-        "cover_url": null,
+        "cover_url": "http://i.imgur.com/0Fms7tC.jpg",
         "name": "Gems"
     },
     "classical": {
@@ -106,7 +106,7 @@
             "avatar_url": "https://cdn.discordapp.com/avatars/206459363739566080/290bbea2374aba7ce2c28ced4842c643.png?size=1024",
             "colour": "#1197F0"
         },
-        "replays": 2,
+        "replays": 3,
         "description": "Containing music that justifies why aliens should visit us and benefit from us.",
         "cover_url": "http://i.imgur.com/wljtuBA.png",
         "name": "Classical"
