@@ -7,7 +7,7 @@ from io import BytesIO
 
 import configparser
 from musicbot import mosaic
-from musicbot.entry import Entry, GieselaEntry
+from musicbot.entry import Entry, GieselaEntry, SpotifyEntry
 from musicbot.exceptions import BrokenEntryError, OutdatedEntryError
 from musicbot.imgur import _upload_playlist_cover
 from musicbot.utils import clean_songname, format_time, similarity
@@ -113,7 +113,7 @@ class Playlists:
 
     def set_playlist(self, playlist_id, entries, name, author, description=None, cover_url=None, replays=0):
         if not cover_url:
-            covers = [entry.cover for entry in entries if isinstance(entry, GieselaEntry)]
+            covers = [entry.cover for entry in entries if isinstance(entry, SpotifyEntry)]
 
             if len(covers) >= 3:
                 print("[Playlists] no cover provided, generating one for", playlist_id)
