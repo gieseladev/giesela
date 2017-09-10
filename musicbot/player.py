@@ -14,7 +14,7 @@ from musicbot.config import static_config
 from musicbot.entry import RadioSongEntry, StreamEntry, TimestampEntry
 from musicbot.exceptions import FFmpegError, FFmpegWarning
 from musicbot.lib.event_emitter import EventEmitter
-from musicbot.playlist import Playlist
+from musicbot.queue import Queue
 from musicbot.utils import create_cmd_params, format_time_ffmpeg
 from musicbot.web_socket_server import GieselaServer
 
@@ -123,8 +123,8 @@ class MusicPlayer(EventEmitter):
         self.bot = bot
         self.loop = bot.loop
         self.voice_client = voice_client
-        self.playlist = playlist = Playlist(bot, self)
-        self.playlist.on("entry-added", self.on_entry_added)
+        self.queue = Queue(bot, self)
+        self.queue.on("entry-added", self.on_entry_added)
 
         self._play_lock = asyncio.Lock()
         self._current_player = None
@@ -151,7 +151,7 @@ class MusicPlayer(EventEmitter):
 
         GieselaServer.send_small_update(self.voice_client.server.id, volume=value)
 
-    def on_entry_added(self, playlist, entry):
+    def on_entry_added(self, queue, entry):
         if self.is_stopped:
             self.loop.call_later(2, self.play)
 
@@ -253,7 +253,7 @@ class MusicPlayer(EventEmitter):
 
     def kill(self):
         self.state = MusicPlayerState.DEAD
-        self.playlist.clear()
+        self.queue.clear()
         self._events.clear()
         self._kill_current_player()
 
@@ -264,12 +264,10 @@ class MusicPlayer(EventEmitter):
 
         entry = self._current_entry
 
-        self.playlist.push_history(entry)
+        self.queue.push_history(entry)
 
         if self.is_repeatAll or (self.is_repeatSingle and not self.skipRepeat):
-            self.playlist._add_entry(entry)
-            if self.is_repeatSingle:
-                self.playlist.promote_last()
+            self.queue.add_entry(entry, position=0)
         self.skipRepeat = False
 
         if self._current_player:
@@ -282,7 +280,7 @@ class MusicPlayer(EventEmitter):
             self.play(_continue=True)
 
         if not self.bot.config.save_videos and entry:
-            if any([entry.filename == e.filename for e in self.playlist.entries]):
+            if any([entry.filename == e.filename for e in self.queue.entries]):
                 print("[Config:SaveVideos] Skipping deletion, found song in queue")
 
             else:
@@ -327,7 +325,7 @@ class MusicPlayer(EventEmitter):
 
     async def _play(self, _continue=False):
         """
-            Plays the next entry from the playlist, or resumes playback of the current entry if paused.
+            Plays the next entry from the Queue, or resumes playback of the current entry if paused.
         """
         if self.is_paused:
             return self.resume()
@@ -337,7 +335,7 @@ class MusicPlayer(EventEmitter):
 
         if self.is_stopped or _continue:
             try:
-                entry = await self.playlist.get_next_entry()
+                entry = await self.queue.get_next_entry()
 
             except Exception as e:
                 print("Failed to get entry.")

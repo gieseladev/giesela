@@ -150,8 +150,3 @@ class Bookmarks:
 
 
 bookmark = Bookmarks()
-# bookmark_singleton = Bookmarks()
-#
-# print(bookmark_singleton.add_bookmark(
-# type("URLPlaylistEntry", (object,), {"title": "test_title",
-# "start_seconds": 0, "to_dict": lambda: []}), None, None, "test"))
