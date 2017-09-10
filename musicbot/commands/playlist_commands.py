@@ -189,8 +189,7 @@ class PlaylistCommands:
                     "Can't delete this playlist, there's no playlist with this name.")
 
             self.playlists.remove_playlist(savename)
-            return Response(
-                "****REMOVED******REMOVED**** has been deleted".format(playlist["name"]))
+            return Response("****REMOVED******REMOVED**** has been deleted".format(playlist["name"]))
 
         elif argument == "clone":
             if savename not in self.playlists.playlists.keys():

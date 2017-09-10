@@ -37,7 +37,7 @@ class EnqueueCommands:
         song_url = song_url.strip("<>")
 
         await self.send_typing(channel)
-        await player.playlist.add_stream_entry(
+        await player.queue.add_stream_entry(
             song_url, channel=channel, author=author)
 
         return Response(":+1:")
@@ -64,7 +64,7 @@ class EnqueueCommands:
         if leftover_args:
             if leftover_args[0].lower().strip() == "random":
                 station_info = RadioStations.get_random_station()
-                await player.playlist.add_radio_entry(station_info, channel=channel, author=author, now=True)
+                await player.queue.add_radio_entry(station_info, channel=channel, author=author, now=True)
                 return Response(
                     "I choose\n*****REMOVED***.name***REMOVED*****".format(station_info))
             else:
@@ -73,7 +73,7 @@ class EnqueueCommands:
                 station_info = RadioStations.get_station(
                     search_name.lower().strip())
                 if station_info:
-                    await player.playlist.add_radio_entry(station_info, channel=channel, author=author, now=True)
+                    await player.queue.add_radio_entry(station_info, channel=channel, author=author, now=True)
                     return Response("Your favourite:\n*****REMOVED***.name***REMOVED*****".format(station_info))
 
         # help the user find the right station
@@ -101,7 +101,7 @@ class EnqueueCommands:
             return Response("Okay then")
         else:
             station = possible_stations[result]
-            await player.playlist.add_radio_entry(station, channel=channel, author=author)
+            await player.queue.add_radio_entry(station, channel=channel, author=author)
             return Response("There you go fam!\n*****REMOVED***.name***REMOVED*****".format(station))
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
@@ -138,7 +138,7 @@ class EnqueueCommands:
         query = " ".join([*leftover_args, song_url.strip("<>")]).strip()
 
         try:
-            entry = await player.playlist.get_entry_from_query(query, author=author, channel=channel)
+            entry = await player.queue.get_entry_from_query(query, author=author, channel=channel)
         except BaseException as e:
             return Response("There was a tiny problem with your request:\n```\n***REMOVED******REMOVED***\n```".format(e))
 
@@ -151,7 +151,7 @@ class EnqueueCommands:
             entries_added = 0
             entries_not_added = 0
 
-            entry_generator = player.playlist.get_entries_from_urls_gen(
+            entry_generator = player.queue.get_entries_from_urls_gen(
                 *entry, author=author, channel=channel)
 
             total_entries = len(entry)
@@ -170,7 +170,7 @@ class EnqueueCommands:
 
             async for ind, entry in entry_generator:
                 if entry:
-                    player.playlist._add_entry(entry, placement)
+                    player.queue._add_entry(entry, placement)
                     entries_added += 1
                 else:
                     entries_not_added += 1
@@ -214,7 +214,7 @@ class EnqueueCommands:
                 format_time(delta_time, unit_length=1)
             ))
         else:
-            player.playlist._add_entry(entry, placement)
+            player.queue._add_entry(entry, placement)
             return Response("Enqueued *****REMOVED******REMOVED*****".format(entry.title))
 
     @block_user
@@ -222,7 +222,7 @@ class EnqueueCommands:
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "3.5.9": (1497890999, "Revamped design and functions making this command more useful"),
         "3.6.1": (1497967505, "deleting messages when leaving search"),
-        "4.2.5": (1500961103, "Adjusting to new player/playlist model and fixed addtoplaylist"),
+        "4.2.5": (1500961103, "Adjusting to new player/queue model and fixed addtoplaylist"),
         "4.5.3": (1501965830, "Fixed addtoplaylist sub-command")
     ***REMOVED***)
     async def cmd_search(self, player, channel, author, leftover_args):
@@ -256,7 +256,7 @@ class EnqueueCommands:
 
         try:
             info = await self.downloader.extract_info(
-                player.playlist.loop,
+                player.queue.loop,
                 search_query,
                 download=False,
                 process=True)
@@ -507,7 +507,7 @@ class ManipulateCommands:
         if not leftover_args:
             leftover_args = ["0"]
 
-        if len(player.playlist.entries) < 0:
+        if len(player.queue.entries) < 0:
             return Response("There are no entries in the queue!")
 
         if len(leftover_args) >= 2:
@@ -519,13 +519,13 @@ class ManipulateCommands:
             start_index = min(indices)
             end_index = max(indices)
 
-            if start_index >= len(player.playlist.entries) or start_index < 0:
+            if start_index >= len(player.queue.entries) or start_index < 0:
                 return Response("The start index is out of bounds")
-            if end_index >= len(player.playlist.entries) or end_index < 0:
+            if end_index >= len(player.queue.entries) or end_index < 0:
                 return Response("The end index is out of bounds")
 
             for i in range(end_index, start_index - 1, -1):
-                del player.playlist.entries[i]
+                del player.queue.entries[i]
 
             GieselaServer.send_player_information_update(server.id)
             return Response(
@@ -536,11 +536,11 @@ class ManipulateCommands:
         try:
             index = int(leftover_args[0]) - 1
 
-            if index > len(player.playlist.entries) - 1 or index < 0:
+            if index > len(player.queue.entries) - 1 or index < 0:
                 return Response("This index cannot be found in the queue")
 
-            video = player.playlist.entries[index].title
-            del player.playlist.entries[index]
+            video = player.queue.entries[index].title
+            del player.queue.entries[index]
             GieselaServer.send_player_information_update(server.id)
             return Response("Removed *****REMOVED***0***REMOVED***** from the queue".format(video))
 
@@ -548,7 +548,7 @@ class ManipulateCommands:
             strindex = leftover_args[0]
             iteration = 1
 
-            for entry in player.playlist.entries:
+            for entry in player.queue.entries:
                 print(
                     "Looking at ***REMOVED***0***REMOVED***. [***REMOVED***1***REMOVED***]".format(entry.title, entry.url))
 
@@ -584,14 +584,14 @@ class ManipulateCommands:
 
         try:
             index = int(choose_last) - 1
-            if index >= len(player.playlist.history):
+            if index >= len(player.queue.history):
                 return Response("History doesn't go back that far.")
             if index < 0:
                 return Response(
                     "Am I supposed to replay the future or what...?")
 
-            replay_entry = player.playlist.history[index]
-            player.playlist.replay(index)
+            replay_entry = player.queue.history[index]
+            player.queue.replay(index)
 
             return Response("Replaying *****REMOVED******REMOVED*****".format(replay_entry.title))
         except:
@@ -599,16 +599,16 @@ class ManipulateCommands:
 
         replay_entry = player.current_entry
         if (not player.current_entry) or choose_last.lower() == "last":
-            if not player.playlist.history:
+            if not player.queue.history:
                 return Response(
                     "Cannot replay the last song as there is no last song")
 
-            replay_entry = player.playlist.history[0]
+            replay_entry = player.queue.history[0]
 
         if not replay_entry:
             return Response("There's nothing for me to replay")
 
-        player.playlist.replay()
+        player.queue.replay()
         return Response("Replaying *****REMOVED******REMOVED*****".format(replay_entry.title))
 
     async def cmd_shuffle(self, channel, player):
@@ -619,7 +619,7 @@ class ManipulateCommands:
         Shuffles the queue.
         """
 
-        player.playlist.shuffle()
+        player.queue.shuffle()
 
         cards = [":spades:", ":clubs:", ":hearts:", ":diamonds:"]
         hand = await self.send_message(channel, " ".join(cards))
@@ -643,7 +643,7 @@ class ManipulateCommands:
         Clears the queue.
         """
 
-        player.playlist.clear()
+        player.queue.clear()
         return Response(":put_litter_in_its_place:")
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
@@ -664,12 +664,11 @@ class ManipulateCommands:
             return Response("Can't skip! The player is not playing!")
 
         if not player.current_entry:
-            if player.playlist.peek():
-                if player.playlist.peek()._is_downloading:
-                    # print(player.playlist.peek()._waiting_futures[0].__dict__)
-                    return Response("The next song (***REMOVED******REMOVED***) is downloading, please wait.".format(player.playlist.peek().title))
+            if player.queue.peek():
+                if player.queue.peek()._is_downloading:
+                    return Response("The next song (***REMOVED******REMOVED***) is downloading, please wait.".format(player.queue.peek().title))
 
-                elif player.playlist.peek().is_downloaded:
+                elif player.queue.peek().is_downloaded:
                     return Response("Something strange is happening.")
                 else:
                     return Response("Something odd is happening.")
@@ -700,14 +699,14 @@ class ManipulateCommands:
             raise exceptions.CommandError(
                 "Can't modify the queue! The player is not playing!")
 
-        length = len(player.playlist.entries)
+        length = len(player.queue.entries)
 
         if length < 2:
             raise exceptions.CommandError(
                 "Can't promote! Please add at least 2 songs to the queue!")
 
         if not position:
-            entry = player.playlist.promote_last()
+            entry = player.queue.promote_last()
         else:
             try:
                 position = int(position) - 1
@@ -724,13 +723,13 @@ class ManipulateCommands:
                     "Can't promote a song not in the queue! Please choose a song \
                     number between 2 and %s!" % length)
 
-            entry = player.playlist.promote_position(position)
+            entry = player.queue.promote_position(position)
 
         reply_text = "Promoted *****REMOVED******REMOVED***** to the :top: of the queue. Estimated time until playing: ***REMOVED******REMOVED***"
         btext = entry.title
 
         try:
-            time_until = await player.playlist.estimate_time_until(1, player)
+            time_until = await player.queue.estimate_time_until(1, player)
         except:
             traceback.print_exc()
             time_until = ""
@@ -756,7 +755,7 @@ class ManipulateCommands:
         else:
             return Response("`<to index>` must be a number")
 
-        queue_length = len(player.playlist.entries)
+        queue_length = len(player.queue.entries)
 
         if not 0 <= from_index < queue_length:
             return Response("`<from index>` must be between 1 and ***REMOVED******REMOVED***".format(queue_length))
@@ -764,7 +763,7 @@ class ManipulateCommands:
         if not 0 <= to_index < queue_length:
             return Response("`<to index>` must be between 1 and ***REMOVED******REMOVED***".format(queue_length))
 
-        moved_entry = player.playlist.move(from_index, to_index)
+        moved_entry = player.queue.move(from_index, to_index)
         return Response("Moved *****REMOVED******REMOVED***** from position `***REMOVED******REMOVED***` to `***REMOVED******REMOVED***`.".format(moved_entry.title, from_index + 1, to_index + 1))
 
     @command_info("4.0.2", 1500360351, ***REMOVED***
@@ -784,12 +783,12 @@ class ManipulateCommands:
             query = " ".join(leftover_args).strip()
             if query.isnumeric():
                 index = int(query) - 1
-                if 0 <= index < len(player.playlist.entries):
-                    entry = player.playlist.entries[index]
+                if 0 <= index < len(player.queue.entries):
+                    entry = player.queue.entries[index]
                 else:
                     return Response("Your index is out of bounds")
             else:
-                entry = await player.playlist.get_entry_from_query(query, channel=channel, author=author)
+                entry = await player.queue.get_entry_from_query(query, channel=channel, author=author)
         elif player.current_entry:
             entry = player.current_entry
         else:
@@ -808,12 +807,12 @@ class ManipulateCommands:
         ))
 
         for ind, sub_entry in enumerate(sub_queue, 1):
-            add_entry = await player.playlist.get_entry_from_query(
+            add_entry = await player.queue.get_entry_from_query(
                 sub_entry["name"],
                 author=entry.meta.get("author", author),
                 channel=entry.meta.get("channel", channel)
             )
-            player.playlist._add_entry(add_entry)
+            player.queue._add_entry(add_entry)
 
             prg = ind / len(sub_queue)
 
@@ -1022,7 +1021,7 @@ class DisplayCommands:
                 return Response("Please provide a reasonable quantity")
         except ValueError:
             if num.lower() == "all":
-                quantity = len(player.playlist.entries)
+                quantity = len(player.queue.entries)
             else:
                 return Response("Quantity must be a number")
 
@@ -1042,7 +1041,7 @@ class DisplayCommands:
                     )
                 )
 
-        entries = list(player.playlist.entries)[:quantity]
+        entries = list(player.queue.entries)[:quantity]
         for i, item in enumerate(entries, 1):
             origin_text = ""
             if "playlist" in item.meta:
@@ -1063,15 +1062,15 @@ class DisplayCommands:
                 format(self.config.command_prefix))
 
         total_time = sum(
-            [entry.end_seconds for entry in player.playlist.entries])
+            [entry.end_seconds for entry in player.queue.entries])
         if player.current_entry:
             total_time += player.current_entry.end_seconds - player.progress
 
         lines.append(
             "\nShowing ***REMOVED******REMOVED*** out of ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***".format(
                 len(entries),
-                len(player.playlist.entries),
-                "y" if len(player.playlist.entries) == 1 else "ies"
+                len(player.queue.entries),
+                "y" if len(player.queue.entries) == 1 else "ies"
             )
         )
         lines.append(
@@ -1105,16 +1104,16 @@ class DisplayCommands:
                 return Response("Please provide a reasonable quantity")
         except ValueError:
             if num.lower() == "all":
-                quantity = len(player.playlist.entries)
+                quantity = len(player.queue.entries)
             else:
                 return Response("Quantity must be a number")
 
-        if not player.playlist.history:
+        if not player.queue.history:
             return Response("There **is** no history")
 
         lines = ["**HISTORY**"]
 
-        entries = player.playlist.history[:quantity]
+        entries = player.queue.history[:quantity]
 
         for ind, entry in enumerate(entries, 1):
             finish_time = entry.meta.get("finish_time")
@@ -1130,8 +1129,8 @@ class DisplayCommands:
         lines.append(
             "\nShowing ***REMOVED******REMOVED*** out of ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***".format(
                 len(entries),
-                len(player.playlist.history),
-                "y" if len(player.playlist.history) == 1 else "ies"
+                len(player.queue.history),
+                "y" if len(player.queue.history) == 1 else "ies"
             )
         )
 

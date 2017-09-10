@@ -239,15 +239,15 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         #     player.voice_client.server.id)
 
     async def on_player_finished_playing(self, player, **_):
-        if not player.playlist.entries and not player.current_entry:
+        if not player.queue.entries and not player.current_entry:
             GieselaServer.send_player_information(
                 player.voice_client.server.id)
 
-        if not player.playlist.entries and not player.current_entry and self.use_autoplaylist:
+        if not player.queue.entries and not player.current_entry and self.use_autoplaylist:
             while True:
-                if player.playlist.history and isinstance(player.playlist.history[0], YoutubeEntry):
+                if player.queue.history and isinstance(player.queue.history[0], YoutubeEntry):
                     print("[Autoplay] following suggested for last history entry")
-                    song_url = choice(get_related_videos(player.playlist.history[0].video_id))["url"]
+                    song_url = choice(get_related_videos(player.queue.history[0].video_id))["url"]
                 elif self.autoplaylist:
                     print("[Autoplay] choosing an url from the autoplaylist")
                     song_url = choice(self.autoplaylist)
@@ -256,14 +256,14 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                     break
 
                 try:
-                    await player.playlist.add_entry(song_url)
+                    await player.queue.add_entry(song_url)
                 except exceptions.ExtractionError as e:
                     print("Error adding song from autoplaylist:", e)
                     continue
 
                 break
 
-    async def on_player_entry_added(self, playlist, entry, **_):
+    async def on_player_entry_added(self, queue, entry, **_):
         pass
 
     async def update_now_playing(self, entry=None, is_paused=False):

@@ -1,12 +1,10 @@
 import copy
 import datetime
-import json
 import random
 import time
 import traceback
 from collections import deque
 from itertools import islice
-from random import shuffle
 
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
@@ -23,10 +21,7 @@ from musicbot.VGMdb import get_entry as get_vgm_track
 from musicbot.web_socket_server import GieselaServer
 
 
-class Playlist(EventEmitter):
-    """
-        A playlist is manages the list of songs that will be played.
-    """
+class Queue(EventEmitter):
 
     def __init__(self, bot, player):
         super().__init__()
@@ -48,7 +43,7 @@ class Playlist(EventEmitter):
         return data
 
     def shuffle(self):
-        shuffle(self.entries)
+        random.shuffle(self.entries)
         GieselaServer.send_player_information(self.player.voice_client.server.id)
 
     def clear(self):
@@ -169,8 +164,8 @@ class Playlist(EventEmitter):
 
             Returns the entry & the position it is in the queue.
 
-            :param song_url: The song url to add to the playlist.
-            :param meta: Any additional metadata to add to the playlist entry.
+            :param song_url: The song url to add to the queue.
+            :param meta: Any additional metadata to add to the queue entry.
         """
 
         entry = await self.get_entry(song_url, **meta)
@@ -183,8 +178,8 @@ class Playlist(EventEmitter):
 
             Returns the entry & the position it is in the queue.
 
-            :param song_url: The song url to add to the playlist.
-            :param meta: Any additional metadata to add to the playlist entry.
+            :param song_url: The song url to add to the queue.
+            :param meta: Any additional metadata to add to the queue entry.
         """
 
         entry = await self.get_entry(song_url, **meta)
@@ -352,7 +347,7 @@ class Playlist(EventEmitter):
             self._add_entry(entry, more_to_come=True)
 
         GieselaServer.send_player_information(self.player.voice_client.server.id)
-        self.emit("entry-added", playlist=self, entry=entry)
+        self.emit("entry-added", queue=self, entry=entry)
 
     def _add_entry(self, entry, placement=None, more_to_come=False):
         if placement is not None:
@@ -371,7 +366,7 @@ class Playlist(EventEmitter):
 
         if not more_to_come:
             GieselaServer.send_player_information(self.player.voice_client.server.id)
-            self.emit("entry-added", playlist=self, entry=entry)
+            self.emit("entry-added", queue=self, entry=entry)
 
     def promote_position(self, position):
         if not 0 <= position < len(self.entries):
@@ -382,7 +377,7 @@ class Playlist(EventEmitter):
 
         self.entries.rotate(position)
         self.entries.appendleft(entry)
-        self.emit("entry-added", playlist=self, entry=entry)
+        self.emit("entry-added", queue=self, entry=entry)
 
         entry.get_ready_future()
 
@@ -393,7 +388,7 @@ class Playlist(EventEmitter):
     def promote_last(self):
         entry = self.entries.pop()
         self.entries.appendleft(entry)
-        self.emit("entry-added", playlist=self, entry=entry)
+        self.emit("entry-added", queue=self, entry=entry)
         entry.get_ready_future()
 
         GieselaServer.send_player_information(self.player.voice_client.server.id)
@@ -407,7 +402,7 @@ class Playlist(EventEmitter):
         self.entries.rotate(-position)
         entry = self.entries.popleft()
 
-        self.emit("entry-removed", playlist=self, entry=entry)
+        self.emit("entry-removed", queue=self, entry=entry)
         self.entries.rotate(position)
 
         GieselaServer.send_player_information(self.player.voice_client.server.id)

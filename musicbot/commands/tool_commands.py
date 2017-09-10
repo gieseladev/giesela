@@ -687,10 +687,10 @@ class ToolCommands:
             else:
                 bm = bookmark.get_bookmark(" ".join(leftover_args))
                 if bm:
-                    entry = Entry.from_dict(player.playlist, bm["entry"])
+                    entry = Entry.from_dict(player.queue, bm["entry"])
                     entry.seek(bm["timestamp"])
 
-                    player.playlist._add_entry(entry)
+                    player.queue._add_entry(entry)
 
                     author = WebAuthor.from_dict(bm["author"])
                     return Response("Loaded bookmark `***REMOVED***0***REMOVED***` by *****REMOVED***1***REMOVED*****".format(bm["name"], author.display_name))
