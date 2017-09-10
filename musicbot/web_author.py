@@ -1,7 +1,8 @@
+from musicbot.lib.serialisable import Serialisable
 from musicbot.utils import dec_to_hex
 
 
-class WebAuthor:
+class WebAuthor(Serialisable):
     bot = None
 
     def __init__(self, id, name, display_name, avatar_url, colour):
