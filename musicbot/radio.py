@@ -13,10 +13,11 @@ from dateutil.parser import parse
 import asyncio
 from musicbot import energy
 from musicbot.config import ConfigDefaults
+from musicbot.lib.serialisable import Serialisable, WebSerialisable
 from musicbot.utils import parse_timestamp
 
 
-class StationInfo:
+class StationInfo(Serialisable, WebSerialisable):
 
     def __init__(self, id, name, aliases, language, cover, url, website, thumbnails, poll_time=None, uncertainty=2):
         self.id = id
@@ -62,6 +63,9 @@ class StationInfo:
             "thumbnails":   self.thumbnails
         ***REMOVED***
         return data
+
+    def to_web_dict(self):
+        return self.to_dict()
 
 
 class RadioStations:

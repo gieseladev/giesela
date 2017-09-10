@@ -8,6 +8,7 @@ from discord import Channel, Member, Server, User
 import asyncio
 from musicbot.exceptions import (BrokenEntryError, ExtractionError,
                                  OutdatedEntryError)
+from musicbot.lib.serialisable import Serialisable, WebSerialisable
 from musicbot.lyrics import search_for_lyrics
 from musicbot.radio import RadioSongExtractor, StationInfo
 from musicbot.spotify import SpotifyTrack
@@ -92,7 +93,7 @@ class Entry:
         return meta
 
 
-class BaseEntry:
+class BaseEntry(Serialisable, WebSerialisable):
 
     def __init__(self, queue, url, **meta):
         self.queue = queue
