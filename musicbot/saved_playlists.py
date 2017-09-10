@@ -65,7 +65,6 @@ class Playlists:
 
     def get_playlist(self, playlist_id, queue, load_entries=True, channel=None):
         if playlist_id not in self.playlists:
-            print("le none", playlist_id)
             return None
 
         plsection = self.playlists[playlist_id]

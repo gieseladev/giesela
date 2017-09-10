@@ -36,9 +36,12 @@ class Entry:
         entry_type = data.get("type", None)
         if not entry_type:
             raise KeyError("Data does not include a type parameter")
+
         target = globals().get(entry_type, None)
+
         if not target:
             raise TypeError("Cannot create an entry with this type")
+
         return target.from_dict(queue, data)
 
     @staticmethod

@@ -13,13 +13,21 @@ class WebAuthor:
 
     @classmethod
     def from_id(cls, author_id):
-        from .web_socket_server import GieselaServer
         user = WebAuthor.bot.get_global_user(author_id)
-        return cls(author_id, user.name, user.display_name, user.avatar_url, dec_to_hex(user.colour.value))
+
+        return cls.from_user(user)
+
+    @classmethod
+    def from_user(cls, user):
+        return cls(user.id, user.name, user.display_name, user.avatar_url, dec_to_hex(user.colour.value))
 
     @classmethod
     def from_dict(cls, data):
         return cls(**data)
+
+    @property
+    def discord_user(self):
+        return WebAuthor.bot.get_global_user(self.id)
 
     def __str__(self):
         return "[***REMOVED******REMOVED***/***REMOVED******REMOVED***]".format(self.id, self.name)
