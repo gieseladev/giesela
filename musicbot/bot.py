@@ -40,7 +40,6 @@ from musicbot.lib.ui import ui_utils
 from musicbot.opus_loader import load_opus_lib
 from musicbot.player import MusicPlayer
 from musicbot.random_sets import RandomSets
-from musicbot.reminder import Calendar
 from musicbot.saved_playlists import Playlists
 from musicbot.settings import Settings
 from musicbot.utils import (Response, get_related_videos, load_file, ordinal,
@@ -69,7 +68,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         self.blacklist = set(load_file(self.config.blacklist_file))
         self.autoplaylist = load_file(self.config.auto_playlist_file)
         self.downloader = downloader.Downloader(download_folder=AUDIO_CACHE_PATH)
-        self.calendar = Calendar(self)
 
         self.exit_signal = None
         self.init_ok = False
