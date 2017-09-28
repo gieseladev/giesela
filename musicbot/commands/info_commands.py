@@ -3,7 +3,6 @@ import json
 import re
 import random
 from datetime import date, timedelta
-from random import choice
 from textwrap import dedent, indent
 
 import requests
@@ -89,7 +88,7 @@ class InfoCommands:
             em = Embed(
                 title="GIESELA HELP",
                 url="http://siku2.github.io/Giesela/",
-                colour=hex_to_dec("#%06x" % random.randint(0, 0xFFFFFF)),
+                colour=random.randint(0, 0xFFFFFF),
                 description="Here are some of the most useful commands,\nYou can always use `{0}help <cmd>` to get more detailed information on a command".
                 format(self.config.command_prefix)
             )
@@ -159,11 +158,8 @@ class InfoCommands:
 
         await self.send_typing(channel)
         msgContent = " ".join(leftover_args)
-
-        col = hex_to_dec(choice([
-            "#9400D3", "#4B0082", "#0000FF", "#00FF00", "#FFFF00", "#FF7F00",
-            "#FF0000"
-        ]))
+        
+        col = random.randint(0, 0xFFFFFF)
 
         client = Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
