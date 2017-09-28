@@ -1,8 +1,8 @@
 import datetime
 import json
 import re
+import random
 from datetime import date, timedelta
-from random import choice
 from textwrap import dedent, indent
 
 import requests
@@ -88,7 +88,7 @@ class InfoCommands:
             em = Embed(
                 title="GIESELA HELP",
                 url="http://siku2.github.io/Giesela/",
-                colour=hex_to_dec("#828c51"),
+                colour=random.randint(0, 0xFFFFFF),
                 description="Here are some of the most useful commands,\nYou can always use `***REMOVED***0***REMOVED***help <cmd>` to get more detailed information on a command".
                 format(self.config.command_prefix)
             )
@@ -98,7 +98,7 @@ class InfoCommands:
                 "`***REMOVED***0***REMOVED***search` search for music",
                 "`***REMOVED***0***REMOVED***radio` listen to the best radio stations",
                 "`***REMOVED***0***REMOVED***stream` enqueue a livestream",
-                "`***REMOVED***0***REMOVED***spotfy` spotify integration",
+                "`***REMOVED***0***REMOVED***spotify` spotify integration",
                 "`***REMOVED***0***REMOVED***pause` pause playback",
                 "`***REMOVED***0***REMOVED***resume` resume playback",
                 "`***REMOVED***0***REMOVED***volume` change volume",
@@ -158,11 +158,8 @@ class InfoCommands:
 
         await self.send_typing(channel)
         msgContent = " ".join(leftover_args)
-
-        col = hex_to_dec(choice([
-            "#9400D3", "#4B0082", "#0000FF", "#00FF00", "#FFFF00", "#FF7F00",
-            "#FF0000"
-        ]))
+        
+        col = random.randint(0, 0xFFFFFF)
 
         client = Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)

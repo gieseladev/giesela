@@ -136,7 +136,7 @@ class GieselaWebSocket(WebSocket):
                 self.log("asked for playlists")
 
                 player = GieselaServer.get_player(token=self.token)
-                answer["playlists"] = player.bot.playlists.get_all_web_playlists(player.playlist)
+                answer["playlists"] = player.bot.playlists.get_all_web_playlists(player.queue)
 
             elif request == "send_radio_stations":
                 self.log("asked for the radio stations")
@@ -182,7 +182,7 @@ class GieselaWebSocket(WebSocket):
                     self.log("skipped")
 
             elif command == "revert":
-                success = self._call_function_main_thread(player.playlist.replay, wait_for_result=True, revert=True)
+                success = self._call_function_main_thread(player.queue.replay, wait_for_result=True, revert=True)
 
             elif command == "seek":
                 target_seconds = command_data.get("value")
@@ -211,32 +211,32 @@ class GieselaWebSocket(WebSocket):
                 from_index = command_data.get("from")
                 to_index = command_data.get("to")
 
-                success = bool(self._call_function_main_thread(player.playlist.move, from_index, to_index, wait_for_result=True))
+                success = bool(self._call_function_main_thread(player.queue.move, from_index, to_index, wait_for_result=True))
                 self.log("moved an entry from", from_index, "to", to_index)
 
             elif command == "clear":
-                player.playlist.clear()
+                player.queue.clear()
                 self.log("cleared the queue")
                 success = True
 
             elif command == "shuffle":
-                player.playlist.shuffle()
+                player.queue.shuffle()
                 self.log("shuffled")
                 success = True
 
             elif command == "remove":
                 remove_index = command_data.get("index")
-                success = bool(self._call_function_main_thread(player.playlist.remove_position, remove_index, wait_for_result=True) is not None)
+                success = bool(self._call_function_main_thread(player.queue.remove_position, remove_index, wait_for_result=True) is not None)
                 self.log("removed", remove_index)
 
             elif command == "promote":
                 promote_index = command_data.get("index")
-                success = bool(self._call_function_main_thread(player.playlist.promote_position, promote_index, wait_for_result=True))
+                success = bool(self._call_function_main_thread(player.queue.promote_position, promote_index, wait_for_result=True))
                 self.log("promoted", promote_index)
 
             elif command == "replay":
                 replay_index = command_data.get("index")
-                success = self._call_function_main_thread(player.playlist.replay, replay_index, wait_for_result=True)
+                success = self._call_function_main_thread(player.queue.replay, replay_index, wait_for_result=True)
                 self.log("replayed", replay_index)
 
             elif command == "cycle_repeat":
@@ -247,11 +247,11 @@ class GieselaWebSocket(WebSocket):
                 playlist_id = command_data.get("playlist_id")
                 playlist_index = command_data.get("index")
 
-                playlist = GieselaServer.bot.playlists.get_playlist(playlist_id, player.playlist)
+                playlist = GieselaServer.bot.playlists.get_playlist(playlist_id, player.queue)
 
                 if playlist:
                     if 0 <= playlist_index < len(playlist["entries"]):
-                        self._call_function_main_thread(player.playlist._add_entry, playlist["entries"][playlist_index])
+                        self._call_function_main_thread(player.queue._add_entry, playlist["entries"][playlist_index])
                         self.log("loaded index", playlist_index, "from playlist", playlist_id)
                         success = True
                     else:
@@ -264,13 +264,13 @@ class GieselaWebSocket(WebSocket):
                 load_mode = command_data.get("mode")
 
                 if playlist_id:
-                    playlist = GieselaServer.bot.playlists.get_playlist(playlist_id, player.playlist)
+                    playlist = GieselaServer.bot.playlists.get_playlist(playlist_id, player.queue)
 
                     if playlist:
                         if load_mode == "replace":
-                            player.playlist.clear()
+                            player.queue.clear()
 
-                        self._call_function_main_thread(player.playlist.add_entries, playlist["entries"])
+                        self._call_function_main_thread(player.queue.add_entries, playlist["entries"])
                         self.log("loaded playlist", playlist_id, "with mode", load_mode)
                         success = True
                     else:
@@ -286,7 +286,7 @@ class GieselaWebSocket(WebSocket):
                 self.log("enqueued radio station", station.name, "(mode " + play_mode + ")")
 
                 if station:
-                    self._call_function_main_thread(player.playlist.add_radio_entry, station, now=(play_mode == "now"), wait_for_result=True, revert=True)
+                    self._call_function_main_thread(player.queue.add_radio_entry, station, now=(play_mode == "now"), wait_for_result=True, revert=True)
                     success = True
                 else:
                     success = False
@@ -411,7 +411,7 @@ class GieselaServer:
 
         data = ***REMOVED***
             "entry":                entry,
-            "queue":                player.playlist.get_web_dict(),
+            "queue":                player.queue.get_web_dict(),
             "volume":               player.volume,
             "state_name":           str(player.state),
             "state":                player.state.value,
