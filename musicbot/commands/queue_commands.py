@@ -320,7 +320,7 @@ class EnqueueCommands:
                     continue
 
                 playlistname = args[0]
-                add_entry = await player.playlist.get_entry(current_result["webpage_url"], channel=channel, author=author)
+                add_entry = await player.queue.get_entry(current_result["webpage_url"], channel=channel, author=author)
 
                 if playlistname not in self.playlists.playlists.keys():
                     if len(playlistname) < 3:
@@ -341,7 +341,7 @@ class EnqueueCommands:
                                                                                            add_entry.title))
 
                 self.playlists.edit_playlist(
-                    playlistname, player.playlist, new_entries=[add_entry])
+                    playlistname, player.queue, new_entries=[add_entry])
                 await self.safe_delete_message(result_message)
                 await self.safe_delete_message(interface_message)
                 await self.safe_delete_message(response_message)
@@ -475,9 +475,9 @@ class EnqueueCommands:
 
         loading_bar = LoadingBar(self, channel, header="Loading Playlist", total_items=total_tracks, item_name_plural="tracks")
 
-        async for ind, entry in playlist.get_spotify_entries_generator(player.playlist, channel=channel, author=author):
+        async for ind, entry in playlist.get_spotify_entries_generator(player.queue, channel=channel, author=author):
             if entry:
-                player.playlist._add_entry(entry)
+                player.queue._add_entry(entry)
                 entries_added += 1
             else:
                 entries_not_added += 1
