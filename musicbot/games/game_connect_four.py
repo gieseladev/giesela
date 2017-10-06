@@ -1,9 +1,8 @@
+import asyncio
 import copy
 import random
 
 from discord import User
-
-import asyncio
 
 
 class ConnectFourException(Exception):
@@ -70,6 +69,132 @@ class HumanPlayer(ConnectFourPlayer):
                 await game.bot.safe_send_message(game.channel, "Please send a number", expire_in=5)
 
 
+class VirtualGameState:
+    def __init__(self, grid, current_player, iteration):
+        self.grid = grid
+        self.current_player = current_player
+        self.iteration = iteration
+
+    @classmethod
+    def from_game_grid(cls, grid, player):
+        simplified_grid = []
+
+        for column in grid:
+            simplified_column = []
+
+            for stone in column:
+                simplified_column.append(0 if stone.is_empty else 1 if stone.belongs_to(player) else 2)
+
+            simplified_grid.append(simplified_column)
+
+        return cls(simplified_grid, 1, 0)
+
+    def get_available_moves(self):
+        available = []
+
+        for index, column in enumerate(self.grid):
+            if not column[0]:
+                available.append(index)
+
+        return available
+
+    def next_state(self, move):
+        grid_copy = copy.deepcopy(self.grid)
+
+        # place stone @ correct place
+        for i, stone in enumerate(grid_copy[move]):
+            if stone:
+                i -= 1  # the last one was still empty so choose that one
+                break
+
+        grid_copy[move][i] = self.current_player
+
+        return VirtualGameState(grid_copy, (1 if self.current_player == 2 else 2), self.iteration + 1)
+
+    def _count_n_horizontal(self, n, player=None):
+        counted = {}
+
+        for i in range(len(self.grid[0])):
+            streak = 1
+            streak_holder = self.grid[0][i]
+
+            for column in self.grid[1:]:
+                stone = column[i]
+
+                if streak_holder == stone:
+                    streak += 1
+                else:
+                    if streak == n:
+                        counted[streak_holder] = counted.get(streak_holder, 0) + 1
+
+                    streak_holder = stone
+                    streak = 1
+
+            if streak == n:
+                counted[streak_holder] = counted.get(streak_holder, 0) + 1
+
+        # print("horizontal", counted)
+
+        if player is None:
+            counted.pop(0, 0)
+            return sum(counted.values())
+        else:
+            return counted.get(player, 0)
+
+    def _count_n_vertical(self, n, player=None):
+        counted = {}
+
+        for column in self.grid:
+            streak = 1
+            streak_holder = column[0]
+
+            for stone in column[1:]:
+                if stone == streak_holder:
+                    streak += 1
+                else:
+                    if streak == n:
+                        counted[streak_holder] = counted.get(streak_holder, 0) + 1
+
+                    streak_holder = stone
+                    streak = 1
+
+            if streak == n:
+                counted[streak_holder] = counted.get(streak_holder, 0) + 1
+
+        # print("vertical", counted)
+
+        if player is None:
+            counted.pop(0, 0)
+            return sum(counted.values())
+        else:
+            return counted.get(player, 0)
+
+    def count_n(self, n, player=None):
+        return self._count_n_horizontal(n, player=player) + self._count_n_vertical(n, player=player)
+
+    def is_gameover(self):
+        if not self.get_available_moves():
+            return True
+
+        # check if won
+        if self.count_n(4) > 0:
+            return True
+
+        return False
+
+    def evaluate(self):
+        weights = {
+            4: 100000,
+            3: 10,
+            2: 1
+        }
+
+        me = sum([self.count_n(streak, player=1) * weight for streak, weight in weights.items()])
+        opponent = sum([self.count_n(streak, player=2) * weight for streak, weight in weights.items()])
+
+        return me - opponent
+
+
 class AIPlayer(ConnectFourPlayer):
 
     def __init__(self, colour, level):
@@ -81,108 +206,6 @@ class AIPlayer(ConnectFourPlayer):
     @property
     def name(self):
         return "Giesela (lvl {})".format(self.level)
-
-    def count_stones(self, grid):
-        stone_amount = 0
-
-        for column in grid:
-            for stone in column:
-                if not stone.is_empty:
-                    stone_amount += 1
-
-        return stone_amount
-
-    def search_for_n(self, grid, amount=4, opponent=False):
-        def check_horizontal(grid, amount, me, opponent):
-            for i in range(len(grid[0])):
-                current_player = None
-                current_amount = 0
-
-                for column in grid:
-                    stone = column[i]
-
-                    if not stone.is_empty:
-                        if not current_player:
-                            current_player = stone.player
-                            current_amount = 1
-                        elif stone.player == current_player:
-                            current_amount += 1
-
-                            if (not (isinstance(current_player, AIPlayer) and opponent)) and current_amount >= amount:
-                                print("horizontal", amount, opponent, "TRUE")
-                                self._debug_log_grid(grid)
-                                return current_player
-                        else:
-                            current_amount = 0
-                            current_player = None
-
-            # print("horizontal", amount, opponent, "FALSE")
-            return None
-
-        def check_vertical(grid, amount, me, opponent):
-            for column in grid:
-                current_player = None
-                current_amount = 0
-
-                for stone in column:
-                    if not stone.is_empty:
-                        if not current_player:
-                            current_player = stone.player
-                            current_amount = 1
-                        elif stone.player == current_player:
-                            current_amount += 1
-
-                            if (not (isinstance(current_player, AIPlayer) and opponent)) and current_amount >= amount:
-                                print("vertical", amount, opponent, "TRUE")
-                                self._debug_log_grid(grid)
-                                return current_player
-                        else:
-                            current_amount = 0
-                            current_player = None
-
-            # print("vertical", amount, opponent, "FALSE")
-            return None
-
-        def check_diagonal(grid, amount, me, opponent):
-            for i in range(len(grid) - amount):
-                for j in range(len(grid[0]) - amount):
-                    first_stone = grid[i][j]
-                    if first_stone.is_empty:
-                        continue
-
-                    current_player = first_stone.player
-                    if isinstance(current_player, AIPlayer) and opponent:
-                        continue
-
-                    for k in range(1, amount - 1):
-                        if grid[i + k][j + k].player != current_player:
-                            break
-                    else:
-                        print("diagonal", amount, opponent, "TRUE")
-                        self._debug_log_grid(grid)
-                        return current_player
-
-            # print("diagonal", amount, opponent, "FALSE")
-
-        return check_horizontal(grid, amount, self, opponent) or check_vertical(grid, amount, self, opponent) or check_diagonal(grid, amount, self, opponent)
-
-    def what_if_move(self, grid, move, opponent=False):
-        grid_copy = copy.deepcopy(grid)
-
-        if opponent:
-            # print("playing for opponent", str(self.opponent))
-            player = self.opponent
-        else:
-            player = self
-
-        for i, stone in enumerate(grid_copy[move]):
-            if not stone.is_empty:
-                i -= 1
-                break
-
-        grid_copy[move][i].possess(player)
-
-        return grid_copy
 
     def _debug_log_grid(self, grid):
         lines = []
@@ -198,50 +221,44 @@ class AIPlayer(ConnectFourPlayer):
 
         print("-----------------\n" + "\n".join("".join(val) for val in lines) + "\n--------------------------")
 
-    def evaluate(self, grid):
-        # self._debug_log_grid(grid)
-        if self.search_for_n(grid, 4, True):
-            # print("this caused a game over:")
-            # self._debug_log_grid(grid)
-            return -99999999999
-        else:
-            return int(bool(self.search_for_n(grid, 4))) * 100000 + int(bool(self.search_for_n(grid, 3))) * 100 + int(bool(self.search_for_n(grid, 2)))
+    def minimax(self, game_state):
+        return max(
+            map(
+                lambda move: (
+                    move,
+                    self.min_play(game_state.next_state(move))
+                ),
+                game_state.get_available_moves()
+            ),
+            key=lambda x: x[1]
+        )
 
-    def check_gameover(self, grid):
-        if self.search_for_n(grid, 4) or self.search_for_n(grid, 4, True):
-            return True
+    def min_play(self, game_state):
+        if game_state.is_gameover() or game_state.iteration > self.level:
+            return game_state.evaluate()
 
-        for column in grid:
-            if column[0].is_empty:
-                return False
+        return min(
+            map(
+                lambda move: self.max_play(game_state.next_state(move)),
+                game_state.get_available_moves()
+            )
+        )
 
-        return True
+    def max_play(self, game_state):
+        if game_state.is_gameover() or game_state.iteration > self.level:
+            return game_state.evaluate()
 
-    def possible_moves(self, grid):
-        return [index for index, column in enumerate(grid) if column[0].is_empty]
-
-    def minimax(self, grid):
-        return max(map(lambda move: (move, self.min_play(self.what_if_move(grid, move))), self.possible_moves(grid)), key=lambda x: x[1])
-
-    def min_play(self, grid, iteration=0):
-        # print(iteration)
-        if self.check_gameover(grid) or iteration >= self.level:
-            return self.evaluate(grid)
-
-        return min(map(lambda move: self.max_play(self.what_if_move(grid, move), iteration + 1), self.possible_moves(grid)))
-
-    def max_play(self, grid, iteration):
-        if self.check_gameover(grid) or iteration >= self.level:
-            return self.evaluate(grid)
-
-        return max(map(lambda move: self.min_play(self.what_if_move(grid, move, True), iteration + 1), self.possible_moves(grid)))
+        return max(
+            map(
+                lambda move: self.min_play(game_state.next_state(move)),
+                game_state.get_available_moves()
+            )
+        )
 
     async def play(self, game):
-        # self.opponent = game.other_player
-        # column, state = self.minimax(game.grid)
-        # print(state)
+        game_state = VirtualGameState.from_game_grid(game.grid, self)
 
-        column = random.randrange(len(game.grid))
+        column = self.minimax(game_state)
 
         game.log("bot placing at {}".format(column))
         game.place_stone(self, column)
@@ -326,7 +343,7 @@ class GameConnectFour:
             else:
                 raise WrongPlayerCount("Can only play Connect Four with 1 or 2 players, not " + str(len(users)))
         else:
-            raise WrongUserType("No ide what to do with \"{}\"...".format(type(users)))
+            raise WrongUserType("No idea what to do with \"{}\"...".format(type(users)))
 
         return cls(bot, channel, future, players, size=size)
 
@@ -510,3 +527,23 @@ class GameConnectFour:
 
         self.next_turn()
         return True
+
+
+if __name__ == "__main__":
+    grid = [
+        [0, 0, 0, 0, 0, 0, 1, 2],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0]
+    ]
+
+    print("startig")
+
+    board = VirtualGameState(grid, 1, 0)
+
+    print(AIPlayer(None, 5).minimax(board))
+
+    # print(board.count_n(3))
