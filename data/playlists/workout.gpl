@@ -1,0 +1,347 @@
+[
+    {
+        "version": 103,
+        "type": "DiscogsEntry",
+        "expected_filename": "cache/audio_cache/youtube-Qzw6A2WC5Qo-Skillet_-_Feel_Invincible_Official_Music_Video.NA",
+        "video_id": "Qzw6A2WC5Qo",
+        "url": "https://www.youtube.com/watch?v=Qzw6A2WC5Qo",
+        "title": "Skillet - \"Feel Invincible\" [Official Music Video]",
+        "duration": 227,
+        "thumbnail": "https://i.ytimg.com/vi/Qzw6A2WC5Qo/default.jpg",
+        "thumbnail_brightness": null,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/hHutGfl.jpg",
+                    "name": "Workout",
+                    "id": "workout",
+                    "index": 0,
+                    "timestamp": 1507221898
+                }
+            }
+        },
+        "song_title": "Feel Invincible",
+        "artist": "Skillet",
+        "artist_image": "https://img.discogs.com/2V-ik5aMcFO2DTzttAnez2dT2u8=/600x600/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-309893-1435766761-2157.jpeg.jpg",
+        "cover": "https://img.discogs.com/AUfTz5nnoBbzVQX4IK3CpopHquM=/fit-in/300x300/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-8859315-1470252695-4359.jpeg.jpg",
+        "album": "Unleashed"
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-mk48xRzuNvA-The_Script_-_Hall_of_Fame_Official_Video_ft._will.i.am.NA",
+        "video_id": "mk48xRzuNvA",
+        "url": "https://www.youtube.com/watch?v=mk48xRzuNvA",
+        "title": "The Script - Hall of Fame (Official Video) ft. will.i.am",
+        "duration": 233,
+        "thumbnail": "https://i.ytimg.com/vi/mk48xRzuNvA/default.jpg",
+        "thumbnail_brightness": null,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/hHutGfl.jpg",
+                    "name": "Workout",
+                    "id": "workout",
+                    "index": 1,
+                    "timestamp": 1507221829
+                }
+            }
+        },
+        "song_title": "Hall of Fame",
+        "artist": "The Script & will.i.am",
+        "artist_image": "https://i.scdn.co/image/604351c643ae82f423f792f094b287165014d898",
+        "cover": "https://i.scdn.co/image/a234693075f4c2b598e39b8fbc074408b22ffd5a",
+        "album": "#3",
+        "spotify_data": {
+            "id": "1X1DWw2pcNZ8zSub3uhlNz",
+            "name": "Hall of Fame",
+            "artists": [
+                {
+                    "id": "3AQRLZ9PuTAozP28Skbq8V",
+                    "name": "The Script",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/604351c643ae82f423f792f094b287165014d898",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/d9326a32a2e1ba86251a0d57fb1adec9110cfd2f",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/6e09b71c9ddf8a4d5669f1cd6eaf1d4322d7631b",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "boy band",
+                        "celtic rock",
+                        "neo mellow",
+                        "pop",
+                        "pop rock",
+                        "post-teen pop",
+                        "viral pop"
+                    ],
+                    "popularity": 85,
+                    "uri": "spotify:artist:3AQRLZ9PuTAozP28Skbq8V",
+                    "href": "https://open.spotify.com/artist/3AQRLZ9PuTAozP28Skbq8V"
+                },
+                {
+                    "id": "085pc2PYOi8bGKj0PNjekA",
+                    "name": "will.i.am",
+                    "images": [
+                        {
+                            "height": 563,
+                            "url": "https://i.scdn.co/image/209da442883f43abea9ac0428f9ae704867859ef",
+                            "width": 1000
+                        },
+                        {
+                            "height": 360,
+                            "url": "https://i.scdn.co/image/1129687431a6f10c40d9bad8fa288f018fed4215",
+                            "width": 640
+                        },
+                        {
+                            "height": 113,
+                            "url": "https://i.scdn.co/image/c0be328a0231bc8a8b388908e5deb8edf39d74d3",
+                            "width": 200
+                        },
+                        {
+                            "height": 36,
+                            "url": "https://i.scdn.co/image/a4cc50668e961ade3a6050d25461ab3f50a0b28a",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "dance pop",
+                        "pop",
+                        "pop rap",
+                        "post-teen pop",
+                        "r&b",
+                        "tropical house"
+                    ],
+                    "popularity": 78,
+                    "uri": "spotify:artist:085pc2PYOi8bGKj0PNjekA",
+                    "href": "https://open.spotify.com/artist/085pc2PYOi8bGKj0PNjekA"
+                }
+            ],
+            "artist": "The Script & will.i.am",
+            "cover_url": "https://i.scdn.co/image/a234693075f4c2b598e39b8fbc074408b22ffd5a",
+            "duration": 202.533,
+            "album": {
+                "id": "63eaHsLLsW1e5ISNf7ISZy",
+                "name": "#3",
+                "artists": [
+                    {
+                        "id": "3AQRLZ9PuTAozP28Skbq8V",
+                        "name": "The Script",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/604351c643ae82f423f792f094b287165014d898",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/d9326a32a2e1ba86251a0d57fb1adec9110cfd2f",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/6e09b71c9ddf8a4d5669f1cd6eaf1d4322d7631b",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "boy band",
+                            "celtic rock",
+                            "neo mellow",
+                            "pop",
+                            "pop rock",
+                            "post-teen pop",
+                            "viral pop"
+                        ],
+                        "popularity": 85,
+                        "uri": "spotify:artist:3AQRLZ9PuTAozP28Skbq8V",
+                        "href": "https://open.spotify.com/artist/3AQRLZ9PuTAozP28Skbq8V"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/a234693075f4c2b598e39b8fbc074408b22ffd5a",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/5a66b9a378c1214daa5981423afa15e79df4ad4d",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/2e7bbdad76d2ddfbcf42dcb8e151f56cc2fe467d",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:63eaHsLLsW1e5ISNf7ISZy"
+            },
+            "popularity": 74,
+            "uri": "spotify:track:1X1DWw2pcNZ8zSub3uhlNz",
+            "query": "The Script - Hall of Fame Will I Am",
+            "certainty": 0.7931034482758621
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-WIm1GgfRz6M-The_Script_-_Superheroes_Official_Video.NA",
+        "video_id": "WIm1GgfRz6M",
+        "url": "https://www.youtube.com/watch?v=WIm1GgfRz6M",
+        "title": "The Script - Superheroes (Official Video)",
+        "duration": 273,
+        "thumbnail": "https://i.ytimg.com/vi/WIm1GgfRz6M/default.jpg",
+        "thumbnail_brightness": null,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/hHutGfl.jpg",
+                    "name": "Workout",
+                    "id": "workout",
+                    "index": 2,
+                    "timestamp": 1507221829
+                }
+            }
+        },
+        "song_title": "Superheroes",
+        "artist": "The Script",
+        "artist_image": "https://i.scdn.co/image/d9326a32a2e1ba86251a0d57fb1adec9110cfd2f",
+        "cover": "https://i.scdn.co/image/3499f757a839bb12338b4748e195e27a98085f66",
+        "album": "No Sound Without Silence",
+        "spotify_data": {
+            "id": "37sINbJZcFdHFAsVNsPq1i",
+            "name": "Superheroes",
+            "artists": [
+                {
+                    "id": "3AQRLZ9PuTAozP28Skbq8V",
+                    "name": "The Script",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/604351c643ae82f423f792f094b287165014d898",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/d9326a32a2e1ba86251a0d57fb1adec9110cfd2f",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/6e09b71c9ddf8a4d5669f1cd6eaf1d4322d7631b",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "boy band",
+                        "celtic rock",
+                        "neo mellow",
+                        "pop",
+                        "pop rock",
+                        "post-teen pop",
+                        "viral pop"
+                    ],
+                    "popularity": 85,
+                    "uri": "spotify:artist:3AQRLZ9PuTAozP28Skbq8V",
+                    "href": "https://open.spotify.com/artist/3AQRLZ9PuTAozP28Skbq8V"
+                }
+            ],
+            "artist": "The Script",
+            "cover_url": "https://i.scdn.co/image/3499f757a839bb12338b4748e195e27a98085f66",
+            "duration": 245.466,
+            "album": {
+                "id": "6yd9yk8nFcHalXzy7mgaDx",
+                "name": "No Sound Without Silence",
+                "artists": [
+                    {
+                        "id": "3AQRLZ9PuTAozP28Skbq8V",
+                        "name": "The Script",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/604351c643ae82f423f792f094b287165014d898",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/d9326a32a2e1ba86251a0d57fb1adec9110cfd2f",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/6e09b71c9ddf8a4d5669f1cd6eaf1d4322d7631b",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "boy band",
+                            "celtic rock",
+                            "neo mellow",
+                            "pop",
+                            "pop rock",
+                            "post-teen pop",
+                            "viral pop"
+                        ],
+                        "popularity": 85,
+                        "uri": "spotify:artist:3AQRLZ9PuTAozP28Skbq8V",
+                        "href": "https://open.spotify.com/artist/3AQRLZ9PuTAozP28Skbq8V"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/3499f757a839bb12338b4748e195e27a98085f66",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/bc72ac88711860a9a6fe682e690a76d98b3ea8f6",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/c0ba28582ae0a393ba4ea7e1edfed562720f03e4",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:6yd9yk8nFcHalXzy7mgaDx"
+            },
+            "popularity": 75,
+            "uri": "spotify:track:37sINbJZcFdHFAsVNsPq1i",
+            "query": "The Script - Superheroes",
+            "certainty": 0.9565217391304348
+        }
+    }
+]
