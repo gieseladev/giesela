@@ -24,7 +24,7 @@
         },
         "song_title": "679 & No Diggity",
         "artist": "Jackson Breit",
-        "artist_image": "https://i.scdn.co/image/6343ea7d583492033c78d8bd1dcc9e9d4656666c",
+        "artist_image": "https://i.scdn.co/image/29b7f0c3d0eefcc249b1f5d4e4801095b805bf52",
         "cover": "https://i.scdn.co/image/e681ba22f85feab7d5457829d35adf0ae17283fa",
         "album": "Covers",
         "spotify_data": {
@@ -264,7 +264,7 @@
         },
         "song_title": "Adventure Of A Lifetime",
         "artist": "Coldplay",
-        "artist_image": "https://i.scdn.co/image/d82a669c531c06b703c7468a8981424581f14e91",
+        "artist_image": "https://i.scdn.co/image/02c781539fca2176059bdeafd9fa903db5b9a4d0",
         "cover": "https://i.scdn.co/image/9c2c4a9ac9726bfd996ff96383178bbb5efc59ab",
         "album": "A Head Full Of Dreams",
         "spotify_data": {
@@ -398,7 +398,7 @@
         },
         "song_title": "All I Ever Do (Is Say Goodbye)",
         "artist": "Zak Abel",
-        "artist_image": "https://i.scdn.co/image/7ac9871e8881e563ec05ea02844216da0c5fa48b",
+        "artist_image": "https://i.scdn.co/image/97acd6cb191a4631be383c2f521a58bad86a2ce3",
         "cover": "https://i.scdn.co/image/6d1a91791993440d5f400ff7ee9628a374c04e84",
         "album": "All I Ever Do (Is Say Goodbye)",
         "spotify_data": {
@@ -642,7 +642,7 @@
         },
         "song_title": "All of Me",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/b3d079a2e81e76d5f4f7f570a91a54a1f09dd93d",
         "album": "Love In The Future",
         "spotify_data": {
@@ -754,6 +754,131 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-dKdjp7voNk4-Quinn_XCII_-_Always_Been_You_Audio.NA",
+        "video_id": "dKdjp7voNk4",
+        "url": "https://www.youtube.com/watch?v=dKdjp7voNk4",
+        "title": "Quinn XCII - Always Been You (Audio)",
+        "duration": 237,
+        "thumbnail": "https://i.ytimg.com/vi/dKdjp7voNk4/default.jpg",
+        "thumbnail_brightness": null,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "Quality",
+                    "id": "quality",
+                    "index": 6,
+                    "timestamp": 1506177505
+                }
+            }
+        },
+        "song_title": "Always Been You",
+        "artist": "Quinn XCII",
+        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+        "cover": "https://i.scdn.co/image/40dc39b9fb7a44c7031f71f77528781ddb72759e",
+        "album": "Always Been You",
+        "spotify_data": {
+            "id": "76WepEyeRZgdtY6ixD5SyQ",
+            "name": "Always Been You",
+            "artists": [
+                {
+                    "id": "3ApUX1o6oSz321MMECyIYd",
+                    "name": "Quinn XCII",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "indie poptimism"
+                    ],
+                    "popularity": 78,
+                    "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                    "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                }
+            ],
+            "artist": "Quinn XCII",
+            "cover_url": "https://i.scdn.co/image/40dc39b9fb7a44c7031f71f77528781ddb72759e",
+            "duration": 235.72,
+            "album": {
+                "id": "0WJ0r26HcSx6N3P7iu1738",
+                "name": "Always Been You",
+                "artists": [
+                    {
+                        "id": "3ApUX1o6oSz321MMECyIYd",
+                        "name": "Quinn XCII",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "indie poptimism"
+                        ],
+                        "popularity": 78,
+                        "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                        "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/40dc39b9fb7a44c7031f71f77528781ddb72759e",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/fef621e0c2830b410506dd8f90b615d9253a44c9",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/749b72adcfa43e9f93c5f8ba7efbc6911c208f42",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:0WJ0r26HcSx6N3P7iu1738"
+            },
+            "popularity": 67,
+            "uri": "spotify:track:76WepEyeRZgdtY6ixD5SyQ",
+            "query": "Quinn XCII - Always Been You",
+            "certainty": 0.9629629629629629
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-MwpMEbgC7DA-Tom_Odell_-_Another_Love.webm",
         "video_id": "MwpMEbgC7DA",
         "url": "https://www.youtube.com/watch?v=MwpMEbgC7DA",
@@ -769,7 +894,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 6,
+                    "index": 7,
                     "timestamp": 1502649769
                 }
             }
@@ -895,7 +1020,7 @@
         "expected_filename": "cache\\audio_cache\\youtube-AHJUwyrGZjY-ayokay_-_Awake_Audio_ft._Mafalda.webm",
         "video_id": "AHJUwyrGZjY",
         "url": "https://www.youtube.com/watch?v=AHJUwyrGZjY",
-        "title": "Ayokay - Awake",
+        "title": "Awake",
         "duration": 228,
         "thumbnail": "https://i.ytimg.com/vi/AHJUwyrGZjY/maxresdefault.jpg",
         "thumbnail_brightness": null,
@@ -907,12 +1032,12 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 7,
+                    "index": 8,
                     "timestamp": 1502649769
                 }
             }
         },
-        "song_title": "Ayokay - Awake",
+        "song_title": "Awake",
         "artist": "Ayokay",
         "artist_image": "http://i.imgur.com/I2umuzq.jpg",
         "cover": "http://i.imgur.com/zmDt8gZ.jpg",
@@ -941,7 +1066,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 8,
+                    "index": 9,
                     "timestamp": 1502649769
                 }
             }
@@ -1061,7 +1186,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 9,
+                    "index": 10,
                     "timestamp": 1502649769
                 }
             }
@@ -1090,14 +1215,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 10,
+                    "index": 11,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Beautiful Escape",
         "artist": "Tom Misch & Zak Abel",
-        "artist_image": "https://i.scdn.co/image/76f7b8e88feb6f7c27022a5145711438268d639c",
+        "artist_image": "https://i.scdn.co/image/e84854c24ffd0a032bf84b6b04e28dc8942155a4",
         "cover": "https://i.scdn.co/image/18135ba644f8b8a624e8d33247db906c457e62ef",
         "album": "Beat Tape 2",
         "spotify_data": {
@@ -1245,14 +1370,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 11,
+                    "index": 12,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Better Man",
         "artist": "Leon Bridges",
-        "artist_image": "https://i.scdn.co/image/894c521f70c125f57574dd38568554ac1bedc175",
+        "artist_image": "https://i.scdn.co/image/e4d1574fb0bf9398c54bc9adc6c5c19f97224eb1",
         "cover": "https://i.scdn.co/image/de3ea93c5c121a331ca3921162aff554a774ef3c",
         "album": "Coming Home",
         "spotify_data": {
@@ -1381,14 +1506,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 12,
+                    "index": 13,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Billie Jean",
         "artist": "EDEN",
-        "artist_image": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+        "artist_image": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
         "cover": "https://i.scdn.co/image/5e03bd60821c2a8ab7dc28731325bc525f068730",
         "album": "Billie Jean",
         "spotify_data": {
@@ -1501,7 +1626,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 13,
+                    "index": 14,
                     "timestamp": 1502649769
                 }
             }
@@ -1625,14 +1750,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 14,
+                    "index": 15,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Blue Lights",
         "artist": "Jorja Smith",
-        "artist_image": "https://i.scdn.co/image/0e1b5f1ce8185fe481f76d52eea4f3b851adc9a2",
+        "artist_image": "https://i.scdn.co/image/573e43edfe938e559c21367197a1e597728836bf",
         "cover": "https://i.scdn.co/image/5bfd2118b84d8de950233bf6b7d80565cddf1a70",
         "album": "Blue Lights",
         "spotify_data": {
@@ -1753,7 +1878,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 15,
+                    "index": 16,
                     "timestamp": 1502649769
                 }
             }
@@ -1853,126 +1978,6 @@
             "uri": "spotify:track:2iV4TfP75xLh7eHlItXVBF",
             "query": "Quinn XCII - Bones",
             "certainty": 0.9444444444444444
-        }
-    },
-    {
-        "version": 103,
-        "type": "SpotifyEntry",
-        "expected_filename": "cache\\audio_cache\\youtube-DhFtCTSy_5o-Quinn_XCII_-_Bootleggin_Prod._ayokay.webm",
-        "video_id": "DhFtCTSy_5o",
-        "url": "https://www.youtube.com/watch?v=DhFtCTSy_5o",
-        "title": "Quinn XCII - Bootleggin'",
-        "duration": 204,
-        "thumbnail": "https://i.ytimg.com/vi/DhFtCTSy_5o/maxresdefault.jpg",
-        "thumbnail_brightness": null,
-        "description": "Download Quinn XCII's new EP \"Bloom\" here: http://eargasmic.me/1P4w0sF\n\n\u2022 Quinn XCII -\nhttps://soundcloud.com/quinnxcii\nhttps://www.youtube.com/user/WatchQuinn\nhttps://www.facebook.com/quinnxcii/\nhttps://twitter.com/quinnxcii\n\n\u2022 ayokay -\nhttps://soundcloud.com/everythingisayokay\nhttps://twitter.com/ayokaymusic\n\nPicture credit \u2022\nhttps://unsplash.com/pedrekoncept\n\n.........\n\nFollow SwagyTracks on\nFacebook \u2022 http://www.facebook.com/SwagyTracks\nTwitter \u2022 https://twitter.com/SwagyTracks\nSoundCloud \u2022 https://soundcloud.com/SwagyTracks",
-        "meta": {
-            "playlist": {
-                "type": "built-in/dict",
-                "value": {
-                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
-                    "name": "Quality",
-                    "id": "quality",
-                    "index": 16,
-                    "timestamp": 1502649769
-                }
-            }
-        },
-        "song_title": "Bootleggin'",
-        "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
-        "cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
-        "album": "Bloom",
-        "spotify_data": {
-            "id": "28P6Cr4NvWmCrFj2hH66dU",
-            "name": "Bootleggin'",
-            "artists": [
-                {
-                    "id": "3ApUX1o6oSz321MMECyIYd",
-                    "name": "Quinn XCII",
-                    "images": [
-                        {
-                            "height": 640,
-                            "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
-                            "width": 640
-                        },
-                        {
-                            "height": 320,
-                            "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
-                            "width": 320
-                        },
-                        {
-                            "height": 160,
-                            "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
-                            "width": 160
-                        }
-                    ],
-                    "genres": [
-                        "indie poptimism"
-                    ],
-                    "popularity": 72,
-                    "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
-                    "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
-                }
-            ],
-            "artist": "Quinn XCII",
-            "cover_url": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
-            "duration": 203.5,
-            "album": {
-                "id": "7aM6v0GcQ3UXbjg1I6NgyA",
-                "name": "Bloom",
-                "artists": [
-                    {
-                        "id": "3ApUX1o6oSz321MMECyIYd",
-                        "name": "Quinn XCII",
-                        "images": [
-                            {
-                                "height": 640,
-                                "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
-                                "width": 640
-                            },
-                            {
-                                "height": 320,
-                                "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
-                                "width": 320
-                            },
-                            {
-                                "height": 160,
-                                "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
-                                "width": 160
-                            }
-                        ],
-                        "genres": [
-                            "indie poptimism"
-                        ],
-                        "popularity": 72,
-                        "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
-                        "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
-                    }
-                ],
-                "images": [
-                    {
-                        "height": 640,
-                        "url": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
-                        "width": 640
-                    },
-                    {
-                        "height": 300,
-                        "url": "https://i.scdn.co/image/7145768745d374120acd058a45a6fcd38ed5a870",
-                        "width": 300
-                    },
-                    {
-                        "height": 64,
-                        "url": "https://i.scdn.co/image/74ca27e61e39291f7e0e145c3f2a1192156d98c8",
-                        "width": 64
-                    }
-                ],
-                "uri": "spotify:album:7aM6v0GcQ3UXbjg1I6NgyA"
-            },
-            "popularity": 59,
-            "uri": "spotify:track:28P6Cr4NvWmCrFj2hH66dU",
-            "query": "Quinn XCII - Bootleggin'",
-            "certainty": 0.9583333333333334
         }
     },
     {
@@ -2097,6 +2102,40 @@
     },
     {
         "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-uL-qG9x1uXA-Royal_Deluxe_-_Born_For_This_Position_Music.webm",
+        "video_id": "uL-qG9x1uXA",
+        "url": "https://www.youtube.com/watch?v=uL-qG9x1uXA",
+        "title": "Born For This",
+        "duration": 214,
+        "thumbnail": "https://i.ytimg.com/vi/uL-qG9x1uXA/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Published by Position Music\nFollow Position Music on Facebook: https://www.facebook.com/PositionMusic\nOfficial Website: http://positionmusic.com/\n\nArtist: Royal Deluxe\nAlbum: Born For This\n\nBuying Options:\nAmazon: https://goo.gl/O5eRDu\niTunes: https://goo.gl/DiCQjf\n\nFollow Royal Deluxe:\nFacebook: https://www.facebook.com/royaldeluxemusic/\n\nStream on Spotify: https://goo.gl/eYSjLD",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "Quality",
+                    "id": "quality",
+                    "index": 18,
+                    "timestamp": 1502649769
+                }
+            }
+        },
+        "song_title": "Born For This",
+        "artist": "Royal Deluxe",
+        "artist_image": "https://i.imgur.com/NLkgdpl.png",
+        "cover": "https://i.imgur.com/d8MoAz0.jpg",
+        "album": "Born For This"
+    },
+    {
+        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-xI_bxix-6Xo-Jon_Bellion_-_Carry_Your_Throne.webm",
         "video_id": "xI_bxix-6Xo",
@@ -2113,14 +2152,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 18,
+                    "index": 19,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Carry Your Throne",
         "artist": "Jon Bellion",
-        "artist_image": "https://i.scdn.co/image/b70305d3545319fefcd4f64df45f830df91537b4",
+        "artist_image": "https://i.scdn.co/image/02ae7880e4851a7edd017e67bfd6b305ecc8e0c8",
         "cover": "https://i.scdn.co/image/463762ab6027e0d5dd16a8bcc75baabd8d6c11f9",
         "album": "The Definition",
         "spotify_data": {
@@ -2233,14 +2272,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 19,
+                    "index": 20,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Chainsmoking",
         "artist": "Jacob Banks",
-        "artist_image": "https://i.scdn.co/image/f1277b4e1e66eb846d535a8b14b6f5d2b9fa1d58",
+        "artist_image": "https://i.scdn.co/image/5559c70da3ca6f1dca0574e92c06481de0d1bf6e",
         "cover": "https://i.scdn.co/image/231c8278280c13b8c5f8d3963d8d304859fb5634",
         "album": "The Boy Who Cried Freedom",
         "spotify_data": {
@@ -2357,14 +2396,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 20,
+                    "index": 21,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Cheating On Me",
         "artist": "Kwabs",
-        "artist_image": "https://i.scdn.co/image/168afa8e706651dfe96ed269b0ddb87e2712b53f",
+        "artist_image": "https://i.scdn.co/image/4e2ba402aea9c19f9ced4abb6afe6d1df6296599",
         "cover": "https://i.scdn.co/image/f5bcaead1832fe193405fec340bd280c97fa5250",
         "album": "Love + War",
         "spotify_data": {
@@ -2495,14 +2534,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 21,
+                    "index": 22,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Coaster",
         "artist": "Khalid",
-        "artist_image": "https://i.scdn.co/image/7752ce73f4d0720acc6a4c46cb2d2f40f344f834",
+        "artist_image": "https://i.scdn.co/image/0e82c72c84d3b37dbc33d863b600af7ff362568b",
         "cover": "https://i.scdn.co/image/5026fddc6c0b69e931ae99130f15d4214f1e7d41",
         "album": "American Teen",
         "spotify_data": {
@@ -2530,7 +2569,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 95,
+                    "popularity": 98,
                     "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                     "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                 }
@@ -2563,7 +2602,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 95,
+                        "popularity": 98,
                         "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                         "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                     }
@@ -2595,6 +2634,40 @@
     },
     {
         "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-yCJXRCs7IQc-Dave_not_Dave_-_Cold_Blood_Suits_5x09_with_Lyrics.webm",
+        "video_id": "yCJXRCs7IQc",
+        "url": "https://www.youtube.com/watch?v=yCJXRCs7IQc",
+        "title": "Cold Blood",
+        "duration": 244,
+        "thumbnail": "https://i.imgur.com/AFEUsns.jpg",
+        "thumbnail_brightness": null,
+        "description": "--- SPOILER ---\n\n\nSong played while, simultaneously, Mike & Harvey walk into the offices of two of their clients and offer them competing deal against each other.\n- All rights belong to the owner of the song, not me. -\n\nLyrics:\n\nThey call me useless, careless, nobody at a miss,\nwith the thing that don\u2019t understand\nThey call me hopeless, heartless, there\u2019s no way out of this\nWhen it\u2019s so far outta your hand\nI confess there\u2019s a hole in my chest\nfrom the things that I did\nand they gone in my head\nI won\u2019t rest till it\u2019s all done and set\nand I get what I give\n\n[Chorus]\nI\u2019m a pain dealer, I\u2019m a faith healer,\nI\u2019m a soul stealer, and I\u2019m coming for you\nI\u2019m a dream breaker, I\u2019m a truth maker,\nI\u2019m a cold-blooded killer and I\u2019m coming for you\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nAnd there\u2019s nothing you can do\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nI\u2019m coming for you\n\n[epic tune]\n\nThey call me freedom falling\ndon't you hear me calling\nI\u2019m the voice in the back of my head\nI\u2019m a whisper, out there, over your shoulder\nDon't you wish you never let me in\nI confess that the devil\u2019s my kin\nI\u2019m a brother to sin, since I don\u2019t know when\nI won't rest till it\u2019s all done and set\nand I get what I give\n\n[Chorus]\nI\u2019m a pain dealer, I\u2019m a faith healer\nI\u2019m a soul stealer, and I\u2019m coming for you\nI\u2019m a dream breaker, I\u2019m a truth maker\nI\u2019m a cold-blooded killer and I\u2019m coming for you\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nAnd there\u2019s nothing you can do\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nI\u2019m coming for you\n\nYeah\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nYeah!\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nYeah\nOoh, I say\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nYeah\n\n[Chorus] x2\nI\u2019m a pain dealer, I\u2019m a faith healer\nI\u2019m a soul stealer, and I\u2019m coming for you\nI\u2019m a dream breaker, I\u2019m a truth maker\nI\u2019m a coldblooded killer and I\u2019m coming for you",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "Quality",
+                    "id": "quality",
+                    "index": 23,
+                    "timestamp": 1502649769
+                }
+            }
+        },
+        "song_title": "Cold Blood",
+        "artist": "Dave not Dave",
+        "artist_image": "https://i.imgur.com/qDrU8Ih.jpg",
+        "cover": "https://i.imgur.com/0dFK0JL.jpg",
+        "album": "Suits Soundtrack"
+    },
+    {
+        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-v-UDIcj3gVk-Bare_Jams_-_Cold_Treats_-_Official_Video_NL_tour_Dec_15.webm",
         "video_id": "v-UDIcj3gVk",
@@ -2616,14 +2689,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 22,
+                    "index": 24,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Cold Treats",
         "artist": "Bare Jams",
-        "artist_image": "https://i.scdn.co/image/74d04ce41244f32edab1cf17c6fea8e7c0d44262",
+        "artist_image": "https://i.scdn.co/image/363ec35dfba47d74eb1f97b196c66b882ef18a26",
         "cover": "https://i.scdn.co/image/b5f5d44114fe580de1d26851bca4d1a3914ec509",
         "album": "Cold Treats",
         "spotify_data": {
@@ -2651,7 +2724,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 31,
+                    "popularity": 32,
                     "uri": "spotify:artist:3oI2CfnF8Oy1rT22ZB176e",
                     "href": "https://open.spotify.com/artist/3oI2CfnF8Oy1rT22ZB176e"
                 }
@@ -2684,7 +2757,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 31,
+                        "popularity": 32,
                         "uri": "spotify:artist:3oI2CfnF8Oy1rT22ZB176e",
                         "href": "https://open.spotify.com/artist/3oI2CfnF8Oy1rT22ZB176e"
                     }
@@ -2732,14 +2805,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 23,
+                    "index": 25,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Concrete",
         "artist": "Tom Odell",
-        "artist_image": "https://i.scdn.co/image/c615e3845f4ddfa1249fc03a6ad071cb0dff95a7",
+        "artist_image": "https://i.scdn.co/image/8523e56ead8d095bf2d6ba9b739e1291aa293f7c",
         "cover": "https://i.scdn.co/image/a14764dbb2612600b1d634c400dce0a21ec711da",
         "album": "Wrong Crowd (Deluxe)",
         "spotify_data": {
@@ -2875,14 +2948,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 24,
+                    "index": 26,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Couch Potato",
         "artist": "Jakubi",
-        "artist_image": "https://i.scdn.co/image/a60b239a0f48070fbe62af87554e357a866efd77",
+        "artist_image": "https://i.scdn.co/image/62d4f8761a48a3d5b0a2a218bbc839657dd09029",
         "cover": "https://i.scdn.co/image/e5360719fc9282bc7e8e32f88b77d524cbf97e54",
         "album": "Couch Potato",
         "spotify_data": {
@@ -3001,14 +3074,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 25,
+                    "index": 27,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Crazy=Genius",
         "artist": "Panic! At The Disco",
-        "artist_image": "https://i.scdn.co/image/13d0de938cc4d4d890ace6c3f3955803e9dd8ccd",
+        "artist_image": "https://i.scdn.co/image/0f23a5fdfd9126f38540d6a07a60db445399baa6",
         "cover": "https://i.scdn.co/image/a1e4ed2942e4a9b4fce5d654cb28fc30ceb968ef",
         "album": "Death Of A Bachelor",
         "spotify_data": {
@@ -3121,11 +3194,11 @@
     },
     {
         "version": 103,
-        "type": "YoutubeEntry",
+        "type": "GieselaEntry",
         "expected_filename": "cache\\audio_cache\\youtube-i0E4KmSgUM4-Dangerous_Official_Audio_Royal_Deluxe_Sniper_Ghost_Warrior_3_Official_Dangerous_Trailer_Music.webm",
         "video_id": "i0E4KmSgUM4",
         "url": "https://www.youtube.com/watch?v=i0E4KmSgUM4",
-        "title": "Dangerous (Official Audio) | Royal Deluxe (Sniper Ghost Warrior 3 Official Dangerous Trailer Music)",
+        "title": "Dangerous",
         "duration": 220,
         "thumbnail": "https://i.ytimg.com/vi/i0E4KmSgUM4/maxresdefault.jpg",
         "thumbnail_brightness": null,
@@ -3142,11 +3215,16 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 26,
+                    "index": 28,
                     "timestamp": 1502649769
                 }
             }
-        }
+        },
+        "song_title": "Dangerous",
+        "artist": "Royal Deluxe",
+        "artist_image": "https://i.imgur.com/sXeRwzs.png",
+        "cover": "https://i.imgur.com/rEzBJQA.jpg",
+        "album": "Born for This"
     },
     {
         "version": 103,
@@ -3166,14 +3244,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 27,
+                    "index": 29,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Darkness and Light",
         "artist": "John Legend & Brittany Howard",
-        "artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
+        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": {
@@ -3309,35 +3387,6 @@
     },
     {
         "version": 103,
-        "type": "YoutubeEntry",
-        "expected_filename": "cache\\audio_cache\\youtube-yCJXRCs7IQc-Dave_not_Dave_-_Cold_Blood_Suits_5x09_with_Lyrics.webm",
-        "video_id": "yCJXRCs7IQc",
-        "url": "https://www.youtube.com/watch?v=yCJXRCs7IQc",
-        "title": "Dave not Dave - Cold Blood [Suits 5x09] [with Lyrics]",
-        "duration": 244,
-        "thumbnail": "https://i.ytimg.com/vi/yCJXRCs7IQc/hqdefault.jpg",
-        "thumbnail_brightness": null,
-        "description": "--- SPOILER ---\n\n\nSong played while, simultaneously, Mike & Harvey walk into the offices of two of their clients and offer them competing deal against each other.\n- All rights belong to the owner of the song, not me. -\n\nLyrics:\n\nThey call me useless, careless, nobody at a miss,\nwith the thing that don\u2019t understand\nThey call me hopeless, heartless, there\u2019s no way out of this\nWhen it\u2019s so far outta your hand\nI confess there\u2019s a hole in my chest\nfrom the things that I did\nand they gone in my head\nI won\u2019t rest till it\u2019s all done and set\nand I get what I give\n\n[Chorus]\nI\u2019m a pain dealer, I\u2019m a faith healer,\nI\u2019m a soul stealer, and I\u2019m coming for you\nI\u2019m a dream breaker, I\u2019m a truth maker,\nI\u2019m a cold-blooded killer and I\u2019m coming for you\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nAnd there\u2019s nothing you can do\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nI\u2019m coming for you\n\n[epic tune]\n\nThey call me freedom falling\ndon't you hear me calling\nI\u2019m the voice in the back of my head\nI\u2019m a whisper, out there, over your shoulder\nDon't you wish you never let me in\nI confess that the devil\u2019s my kin\nI\u2019m a brother to sin, since I don\u2019t know when\nI won't rest till it\u2019s all done and set\nand I get what I give\n\n[Chorus]\nI\u2019m a pain dealer, I\u2019m a faith healer\nI\u2019m a soul stealer, and I\u2019m coming for you\nI\u2019m a dream breaker, I\u2019m a truth maker\nI\u2019m a cold-blooded killer and I\u2019m coming for you\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nAnd there\u2019s nothing you can do\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nI\u2019m coming for you\n\nYeah\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nYeah!\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nYeah\nOoh, I say\nOooh-ooh-ooh-ooh oooh-ooh-ooh-ooh\nYeah\n\n[Chorus] x2\nI\u2019m a pain dealer, I\u2019m a faith healer\nI\u2019m a soul stealer, and I\u2019m coming for you\nI\u2019m a dream breaker, I\u2019m a truth maker\nI\u2019m a coldblooded killer and I\u2019m coming for you",
-        "meta": {
-            "author": {
-                "type": "Member",
-                "id": "203302899277627392",
-                "name": "siku2"
-            },
-            "playlist": {
-                "type": "built-in/dict",
-                "value": {
-                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
-                    "name": "Quality",
-                    "id": "quality",
-                    "index": 28,
-                    "timestamp": 1502649769
-                }
-            }
-        }
-    },
-    {
-        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-U7LUXFKgzgU-Quinn_XCII_-_Demon_Prod._ayokay.webm",
         "video_id": "U7LUXFKgzgU",
@@ -3354,14 +3403,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 29,
+                    "index": 30,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Demon",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
         "cover": "https://i.scdn.co/image/d600fd067c1ff68055982a9aa5fe77f702b19b68",
         "album": "Change of Scenery",
         "spotify_data": {
@@ -3474,7 +3523,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 30,
+                    "index": 31,
                     "timestamp": 1502649769
                 }
             }
@@ -3615,7 +3664,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 31,
+                    "index": 32,
                     "timestamp": 1502649769
                 }
             }
@@ -3731,7 +3780,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 32,
+                    "index": 33,
                     "timestamp": 1502649769
                 }
             }
@@ -3766,7 +3815,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 40,
+                    "popularity": 41,
                     "uri": "spotify:artist:3UBLk5vv3UXfXHeHvM7LpL",
                     "href": "https://open.spotify.com/artist/3UBLk5vv3UXfXHeHvM7LpL"
                 }
@@ -3799,7 +3848,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 40,
+                        "popularity": 41,
                         "uri": "spotify:artist:3UBLk5vv3UXfXHeHvM7LpL",
                         "href": "https://open.spotify.com/artist/3UBLk5vv3UXfXHeHvM7LpL"
                     }
@@ -3852,14 +3901,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 33,
+                    "index": 34,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Emperor's New Clothes",
         "artist": "Panic! At The Disco",
-        "artist_image": "https://i.scdn.co/image/13d0de938cc4d4d890ace6c3f3955803e9dd8ccd",
+        "artist_image": "https://i.scdn.co/image/0f23a5fdfd9126f38540d6a07a60db445399baa6",
         "cover": "https://i.scdn.co/image/a1e4ed2942e4a9b4fce5d654cb28fc30ceb968ef",
         "album": "Death Of A Bachelor",
         "spotify_data": {
@@ -3988,14 +4037,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 34,
+                    "index": 35,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "End Credits",
         "artist": "EDEN",
-        "artist_image": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
+        "artist_image": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
         "cover": "https://i.scdn.co/image/92ea26aae1129bd60dc1d4f0313087dc06ee1509",
         "album": "End Credits",
         "spotify_data": {
@@ -4108,14 +4157,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 35,
+                    "index": 36,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Everybody Knows",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/e800b4216a504d74aeb54940dff8c5dc52f4c3df",
         "album": "Evolver",
         "spotify_data": {
@@ -4242,14 +4291,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 36,
+                    "index": 37,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Everybody Needs Love",
         "artist": "Zak Abel",
-        "artist_image": "https://i.scdn.co/image/97acd6cb191a4631be383c2f521a58bad86a2ce3",
+        "artist_image": "https://i.scdn.co/image/7ac9871e8881e563ec05ea02844216da0c5fa48b",
         "cover": "https://i.scdn.co/image/23a4e86711eb360387dec52304a8828297aa810e",
         "album": "Everybody Needs Love",
         "spotify_data": {
@@ -4366,14 +4415,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 37,
+                    "index": 38,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "FFYL",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
         "cover": "https://i.scdn.co/image/d600fd067c1ff68055982a9aa5fe77f702b19b68",
         "album": "Change of Scenery",
         "spotify_data": {
@@ -4471,6 +4520,131 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-tQfHX-q6hkU-Quinn_XCII_-_Fake_Denim.NA",
+        "video_id": "tQfHX-q6hkU",
+        "url": "https://www.youtube.com/watch?v=tQfHX-q6hkU",
+        "title": "Quinn XCII - Fake Denim",
+        "duration": 200,
+        "thumbnail": "https://i.ytimg.com/vi/tQfHX-q6hkU/default.jpg",
+        "thumbnail_brightness": null,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "Quality",
+                    "id": "quality",
+                    "index": 39,
+                    "timestamp": 1506177505
+                }
+            }
+        },
+        "song_title": "Fake Denim",
+        "artist": "Quinn XCII",
+        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+        "cover": "https://i.scdn.co/image/c2fe51515e24f5e1c1298df55c7c5843c9a8951b",
+        "album": "The Story of Us",
+        "spotify_data": {
+            "id": "0lNFKo6PVwAGnEdZfp9UfT",
+            "name": "Fake Denim",
+            "artists": [
+                {
+                    "id": "3ApUX1o6oSz321MMECyIYd",
+                    "name": "Quinn XCII",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "indie poptimism"
+                    ],
+                    "popularity": 78,
+                    "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                    "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                }
+            ],
+            "artist": "Quinn XCII",
+            "cover_url": "https://i.scdn.co/image/c2fe51515e24f5e1c1298df55c7c5843c9a8951b",
+            "duration": 187.333,
+            "album": {
+                "id": "7j7cqgeWmYH9PbKe3S5oJj",
+                "name": "The Story of Us",
+                "artists": [
+                    {
+                        "id": "3ApUX1o6oSz321MMECyIYd",
+                        "name": "Quinn XCII",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "indie poptimism"
+                        ],
+                        "popularity": 78,
+                        "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                        "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/c2fe51515e24f5e1c1298df55c7c5843c9a8951b",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/aeb10433f682b7c894287c43f1da6a29c6341fc7",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/f95cb116fc605352d0002ae38d9a796231c0e7c3",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:7j7cqgeWmYH9PbKe3S5oJj"
+            },
+            "popularity": 55,
+            "uri": "spotify:track:0lNFKo6PVwAGnEdZfp9UfT",
+            "query": "Quinn XCII - Fake Denim",
+            "certainty": 0.9545454545454546
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-GIwyqsqHsic-Bastille_-_Fake_It.webm",
         "video_id": "GIwyqsqHsic",
         "url": "https://www.youtube.com/watch?v=GIwyqsqHsic",
@@ -4486,14 +4660,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 38,
+                    "index": 40,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Fake It",
         "artist": "Bastille",
-        "artist_image": "https://i.scdn.co/image/5ef307a88e5fec0a11b6de9b0c77aa36b509bcbc",
+        "artist_image": "https://i.scdn.co/image/765e709fa628079404fe99ca0e540c43b894eeba",
         "cover": "https://i.scdn.co/image/b5b2a90018278d3beee0dba01378ba186d1f86f6",
         "album": "Wild World (Complete Edition)",
         "spotify_data": {
@@ -4615,14 +4789,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 39,
+                    "index": 41,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Famous",
         "artist": "Skillet",
-        "artist_image": "https://i.scdn.co/image/337d6850a19b9be4172503ed8edf5c5101494b24",
+        "artist_image": "https://i.scdn.co/image/d11542051c3135e7a43b9c3ad50af4c9b623461c",
         "cover": "https://i.scdn.co/image/d3fc2112af726467c24e04de437e444fe7741962",
         "album": "Unleashed",
         "spotify_data": {
@@ -4749,14 +4923,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 40,
+                    "index": 42,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Fight Song",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
         "cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
         "album": "Bloom",
         "spotify_data": {
@@ -4874,7 +5048,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 41,
+                    "index": 43,
                     "timestamp": 1502649769
                 }
             }
@@ -5012,14 +5186,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 42,
+                    "index": 44,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Flow",
         "artist": "Zak Abel",
-        "artist_image": "https://i.scdn.co/image/bf9596ee2cfecaf820a24456bca1cc3901aa727b",
+        "artist_image": "https://i.scdn.co/image/97acd6cb191a4631be383c2f521a58bad86a2ce3",
         "cover": "https://i.scdn.co/image/c1f138a14b3fa05c86b8a00bd1479384f5935bde",
         "album": "One Hand On The Future",
         "spotify_data": {
@@ -5136,14 +5310,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 43,
+                    "index": 45,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "For Desire",
         "artist": "Carmody",
-        "artist_image": "https://i.scdn.co/image/1c578c5cf38d7b5d8ebaa04f5208b661f89e34af",
+        "artist_image": "https://i.scdn.co/image/4cb69e478a012ece2c6a42963dab430f95a9feda",
         "cover": "https://i.scdn.co/image/37587904b9347f13e2c8a45a7a7e24997ec3aae3",
         "album": "Skin",
         "spotify_data": {
@@ -5252,14 +5426,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 44,
+                    "index": 46,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Full Circle",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
         "cover": "https://i.scdn.co/image/a52ff1931487d5892149c8d4779b27e007237aad",
         "album": "Full Circle",
         "spotify_data": {
@@ -5372,14 +5546,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 45,
+                    "index": 47,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Fumes",
         "artist": "EDEN & gnash",
-        "artist_image": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+        "artist_image": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
         "cover": "https://i.scdn.co/image/236b285e0b349526486dd03a3807f4904b195ecf",
         "album": "i think you think too much of me",
         "spotify_data": {
@@ -5506,35 +5680,6 @@
     },
     {
         "version": 103,
-        "type": "GieselaEntry",
-        "expected_filename": "cache\\audio_cache\\youtube-9x0ShHsdm8k-GAMPER_DADONI_ft._DNKR_Noah_Guthrie_-_La_La_La.webm",
-        "video_id": "9x0ShHsdm8k",
-        "url": "https://www.youtube.com/watch?v=9x0ShHsdm8k",
-        "title": "GAMPER & DADONI DNKR & Noah Guthrie - La La La",
-        "duration": 294,
-        "thumbnail": "http://i.imgur.com/OzoUp7U.jpg",
-        "thumbnail_brightness": null,
-        "description": "Free Download: http://www.gamperdadoni.com/downloads\n\u25cf SUBSCRIBE TO OUR CHANNEL: http://bit.ly/subscribesensualmusique\n\u25cf MORE MUSIC ON SPOTIFY: http://bit.ly/spotifysensualmusique1\n\n\u25ba Facebook : http://on.fb.me/1cN993h\n\u25ba SoundCloud : http://bit.ly/NCKn03\n\u25ba Twitter: http://bit.ly/1eQnq4A\n\u25ba Instagram: http://bit.ly/1fZ8m0S\n\nGAMPER & DADONI feat. DNKR & Noah Guthrie - The La La La Remix Lyrics:\n\nLa la, la la la la la na na na na na,\nLa la na na, la la la la la na na na na na\n\nHush, don't speak\nWhen you spit your venom, keep it shut I hate it\nWhen you hiss and preach\nAbout your new messiah 'cause your theories catch fire\n\nI can't find your silver lining\nI don't mean to judge\nBut when you read your speech, it's tiring\nEnough is enough\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, I go\nLa la na na, la la la la la na na na na na [2x]\n\nIf our love is running out of time\nI won't count the hours, rather be a coward\nWhen our worlds collide\nI'm gonna drown you out before I lose my mind\n\nI can't find your silver lining\nI don't mean to judge\nBut when you read your speech, it's tiring\nEnough is enough\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, oh\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, I go\nLa la na na, la la la la la na na na na na,\nLa la na na, la la la la la na na na na na,\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na\nLa la na na, la la la la la na na na na na\nLa la na na, la la la la la na na na na na\n\n\u25ba Follow GAMPER & DADONI here :\nFacebook: http://www.facebook.com/gamperanddadoni\nSoundCloud: http://soundcloud.com/www.soundcloud.com/gamperdadoni\n\n\u2716 Picture\nhttp://www.facebook.com/picturesofran...\n\nNo copyright infringement intended. Video will be removed if requested by the copyright owner.",
-        "meta": {
-            "playlist": {
-                "type": "built-in/dict",
-                "value": {
-                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
-                    "name": "Quality",
-                    "id": "quality",
-                    "index": 46,
-                    "timestamp": 1502649769
-                }
-            }
-        },
-        "song_title": "GAMPER & DADONI DNKR & Noah Guthrie - La La La",
-        "artist": "CAMPER & DADONI",
-        "artist_image": "http://i.imgur.com/y4y5hz9.jpg",
-        "cover": "http://i.imgur.com/DNRdyg9.jpg",
-        "album": "The La La La Remix"
-    },
-    {
-        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-Rl3ELiPXFRo-Imagine_Dragons_-_Gold.webm",
         "video_id": "Rl3ELiPXFRo",
@@ -5544,128 +5689,6 @@
         "thumbnail": "https://i.ytimg.com/vi/Rl3ELiPXFRo/maxresdefault.jpg",
         "thumbnail_brightness": null,
         "description": "Get Smoke + Mirrors on iTunes now: http://smarturl.it/IDSmokeMirrors\nGet Smoke + Mirrors Deluxe version with 4 exclusive songs only at Target: http://smarturl.it/SmokeMirrorsTgt\n\nhttp://smarturl.it/ImagineDragons.News\n\nVideo Director: Isaac Halasima",
-        "meta": {
-            "playlist": {
-                "type": "built-in/dict",
-                "value": {
-                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
-                    "name": "Quality",
-                    "id": "quality",
-                    "index": 47,
-                    "timestamp": 1502649769
-                }
-            }
-        },
-        "song_title": "Gold",
-        "artist": "Imagine Dragons",
-        "artist_image": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
-        "cover": "https://i.scdn.co/image/d5772acb478bfa8539240d9c2f28073d9bb59133",
-        "album": "Smoke + Mirrors",
-        "spotify_data": {
-            "id": "1WQFOwtI6EfsvRz7wcDbQm",
-            "name": "Gold",
-            "artists": [
-                {
-                    "id": "53XhwfbYqKCa1cC15pYq2q",
-                    "name": "Imagine Dragons",
-                    "images": [
-                        {
-                            "height": 640,
-                            "url": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
-                            "width": 640
-                        },
-                        {
-                            "height": 320,
-                            "url": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
-                            "width": 320
-                        },
-                        {
-                            "height": 160,
-                            "url": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
-                            "width": 160
-                        }
-                    ],
-                    "genres": [
-                        "pop",
-                        "vegas indie"
-                    ],
-                    "popularity": 94,
-                    "uri": "spotify:artist:53XhwfbYqKCa1cC15pYq2q",
-                    "href": "https://open.spotify.com/artist/53XhwfbYqKCa1cC15pYq2q"
-                }
-            ],
-            "artist": "Imagine Dragons",
-            "cover_url": "https://i.scdn.co/image/d5772acb478bfa8539240d9c2f28073d9bb59133",
-            "duration": 216.813,
-            "album": {
-                "id": "0gmsXcmrcnxdZBrD5EyJEL",
-                "name": "Smoke + Mirrors",
-                "artists": [
-                    {
-                        "id": "53XhwfbYqKCa1cC15pYq2q",
-                        "name": "Imagine Dragons",
-                        "images": [
-                            {
-                                "height": 640,
-                                "url": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
-                                "width": 640
-                            },
-                            {
-                                "height": 320,
-                                "url": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
-                                "width": 320
-                            },
-                            {
-                                "height": 160,
-                                "url": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
-                                "width": 160
-                            }
-                        ],
-                        "genres": [
-                            "pop",
-                            "vegas indie"
-                        ],
-                        "popularity": 94,
-                        "uri": "spotify:artist:53XhwfbYqKCa1cC15pYq2q",
-                        "href": "https://open.spotify.com/artist/53XhwfbYqKCa1cC15pYq2q"
-                    }
-                ],
-                "images": [
-                    {
-                        "height": 640,
-                        "url": "https://i.scdn.co/image/d5772acb478bfa8539240d9c2f28073d9bb59133",
-                        "width": 640
-                    },
-                    {
-                        "height": 300,
-                        "url": "https://i.scdn.co/image/7450a39c1c093fa244e66525c52167ca1b299c15",
-                        "width": 300
-                    },
-                    {
-                        "height": 64,
-                        "url": "https://i.scdn.co/image/8a5e753b90b80572de62a713dab0529daf5a9847",
-                        "width": 64
-                    }
-                ],
-                "uri": "spotify:album:0gmsXcmrcnxdZBrD5EyJEL"
-            },
-            "popularity": 59,
-            "uri": "spotify:track:1WQFOwtI6EfsvRz7wcDbQm",
-            "query": "Imagine Dragons - Gold",
-            "certainty": 0.9545454545454546
-        }
-    },
-    {
-        "version": 103,
-        "type": "SpotifyEntry",
-        "expected_filename": "cache\\audio_cache\\youtube-M2EIjONNjIU-Imagine_Dragons_-_Gold_Audio.webm",
-        "video_id": "M2EIjONNjIU",
-        "url": "https://www.youtube.com/watch?v=M2EIjONNjIU",
-        "title": "Imagine Dragons - Gold",
-        "duration": 217,
-        "thumbnail": "https://i.ytimg.com/vi/M2EIjONNjIU/maxresdefault.jpg",
-        "thumbnail_brightness": null,
-        "description": "New Album Smoke + Mirrors Available for Pre-order, including the new songs \u201cI Bet My Life\u201d and \u201cGold\"\niTunes digital album + instant grat downloads:  http://smarturl.it/IDSmokeMirrors\nDeluxe Box Set album, with early access to concert tickets: http://smarturl.it/SmokeMirrorsBox\n\nhttp://smarturl.it/ImagineDragons.News",
         "meta": {
             "playlist": {
                 "type": "built-in/dict",
@@ -5802,7 +5825,7 @@
         },
         "song_title": "Golden Days",
         "artist": "Panic! At The Disco",
-        "artist_image": "https://i.scdn.co/image/6d314b0fb784ab9899f2113b6d5e19bc6cbb31ec",
+        "artist_image": "https://i.scdn.co/image/1d349f478ca67418cd09ca49a8c2aab883ef4306",
         "cover": "https://i.scdn.co/image/a1e4ed2942e4a9b4fce5d654cb28fc30ceb968ef",
         "album": "Death Of A Bachelor",
         "spotify_data": {
@@ -5938,7 +5961,7 @@
         },
         "song_title": "Good Friend",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+        "artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
         "cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
         "album": "Bloom",
         "spotify_data": {
@@ -6058,7 +6081,7 @@
         },
         "song_title": "Good Grief",
         "artist": "Bastille",
-        "artist_image": "https://i.scdn.co/image/5ef307a88e5fec0a11b6de9b0c77aa36b509bcbc",
+        "artist_image": "https://i.scdn.co/image/4b161fe24de1c80bce42085f409b7a4700b94c47",
         "cover": "https://i.scdn.co/image/b5b2a90018278d3beee0dba01378ba186d1f86f6",
         "album": "Wild World (Complete Edition)",
         "spotify_data": {
@@ -6182,7 +6205,7 @@
         },
         "song_title": "Gravity",
         "artist": "EDEN",
-        "artist_image": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+        "artist_image": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
         "cover": "https://i.scdn.co/image/92ea26aae1129bd60dc1d4f0313087dc06ee1509",
         "album": "End Credits",
         "spotify_data": {
@@ -6302,7 +6325,7 @@
         },
         "song_title": "Guilty",
         "artist": "Rag'n'Bone Man",
-        "artist_image": "https://i.scdn.co/image/906eeb2779ed7934080a0abd09288b2ed1e42e11",
+        "artist_image": "https://i.scdn.co/image/aa0f526c0d9b86361af0a3328910413c357a1b5d",
         "cover": "https://i.scdn.co/image/35271e7b45e5f9d1b040f966fbfadb51667d91e7",
         "album": "Wolves",
         "spotify_data": {
@@ -6418,7 +6441,7 @@
         },
         "song_title": "Hard Came the Rain",
         "artist": "Rag'n'Bone Man",
-        "artist_image": "https://i.scdn.co/image/aa0f526c0d9b86361af0a3328910413c357a1b5d",
+        "artist_image": "https://i.scdn.co/image/a10fa412ee0acfdec135c16c76ed6c2c789cdbce",
         "cover": "https://i.scdn.co/image/f77316df4ef84600aaadbe1ecc49f7ce5cacead8",
         "album": "Disfigured - EP",
         "spotify_data": {
@@ -6511,11 +6534,11 @@
     },
     {
         "version": 103,
-        "type": "YoutubeEntry",
+        "type": "GieselaEntry",
         "expected_filename": "cache/audio_cache/youtube-5dmQ3QWpy1Q-Heavy_Official_Video_-_Linkin_Park_feat._Kiiara.webm",
         "video_id": "5dmQ3QWpy1Q",
         "url": "https://www.youtube.com/watch?v=5dmQ3QWpy1Q",
-        "title": "Heavy (Official Video) - Linkin Park (feat. Kiiara)",
+        "title": "Heavy",
         "duration": 168,
         "thumbnail": "https://i.ytimg.com/vi/5dmQ3QWpy1Q/hqdefault.jpg",
         "thumbnail_brightness": null,
@@ -6536,7 +6559,12 @@
                     "timestamp": 1502649769
                 }
             }
-        }
+        },
+        "song_title": "Heavy",
+        "artist": "Linkin Park",
+        "artist_image": "https://i.imgur.com/Dtpo5SV.jpg",
+        "cover": "https://i.imgur.com/WIfK8uB.jpg",
+        "album": "One More Light"
     },
     {
         "version": 103,
@@ -6563,7 +6591,7 @@
         },
         "song_title": "Hell Yeah",
         "artist": "Rag'n'Bone Man & Vince Staples",
-        "artist_image": "https://i.scdn.co/image/906eeb2779ed7934080a0abd09288b2ed1e42e11",
+        "artist_image": "https://i.scdn.co/image/aa0f526c0d9b86361af0a3328910413c357a1b5d",
         "cover": "https://i.scdn.co/image/35271e7b45e5f9d1b040f966fbfadb51667d91e7",
         "album": "Wolves",
         "spotify_data": {
@@ -6855,7 +6883,7 @@
         },
         "song_title": "House Of Memories",
         "artist": "Panic! At The Disco",
-        "artist_image": "https://i.scdn.co/image/13d0de938cc4d4d890ace6c3f3955803e9dd8ccd",
+        "artist_image": "https://i.scdn.co/image/1d349f478ca67418cd09ca49a8c2aab883ef4306",
         "cover": "https://i.scdn.co/image/a1e4ed2942e4a9b4fce5d654cb28fc30ceb968ef",
         "album": "Death Of A Bachelor",
         "spotify_data": {
@@ -7241,7 +7269,7 @@
         },
         "song_title": "I Know Better",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": {
@@ -7767,7 +7795,7 @@
         },
         "song_title": "In the Midst of It All",
         "artist": "Tom Misch & Sam Wills",
-        "artist_image": "https://i.scdn.co/image/76f7b8e88feb6f7c27022a5145711438268d639c",
+        "artist_image": "https://i.scdn.co/image/e84854c24ffd0a032bf84b6b04e28dc8942155a4",
         "cover": "https://i.scdn.co/image/18135ba644f8b8a624e8d33247db906c457e62ef",
         "album": "Beat Tape 2",
         "spotify_data": {
@@ -7898,6 +7926,131 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-pyvfPzSkr3k-Quinn_Xcii_-_Intro_Slow.NA",
+        "video_id": "pyvfPzSkr3k",
+        "url": "https://www.youtube.com/watch?v=pyvfPzSkr3k",
+        "title": "Quinn Xcii - Intro (Slow)",
+        "duration": 155,
+        "thumbnail": "https://i.ytimg.com/vi/pyvfPzSkr3k/default.jpg",
+        "thumbnail_brightness": null,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "Quality",
+                    "id": "quality",
+                    "index": 66,
+                    "timestamp": 1506177505
+                }
+            }
+        },
+        "song_title": "Intro (Slow)",
+        "artist": "Quinn XCII",
+        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+        "cover": "https://i.scdn.co/image/c2fe51515e24f5e1c1298df55c7c5843c9a8951b",
+        "album": "The Story of Us",
+        "spotify_data": {
+            "id": "2jLHm0rzlxKonOQPSApDJN",
+            "name": "Intro (Slow)",
+            "artists": [
+                {
+                    "id": "3ApUX1o6oSz321MMECyIYd",
+                    "name": "Quinn XCII",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "indie poptimism"
+                    ],
+                    "popularity": 78,
+                    "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                    "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                }
+            ],
+            "artist": "Quinn XCII",
+            "cover_url": "https://i.scdn.co/image/c2fe51515e24f5e1c1298df55c7c5843c9a8951b",
+            "duration": 158.04,
+            "album": {
+                "id": "7j7cqgeWmYH9PbKe3S5oJj",
+                "name": "The Story of Us",
+                "artists": [
+                    {
+                        "id": "3ApUX1o6oSz321MMECyIYd",
+                        "name": "Quinn XCII",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "indie poptimism"
+                        ],
+                        "popularity": 78,
+                        "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                        "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/c2fe51515e24f5e1c1298df55c7c5843c9a8951b",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/aeb10433f682b7c894287c43f1da6a29c6341fc7",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/f95cb116fc605352d0002ae38d9a796231c0e7c3",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:7j7cqgeWmYH9PbKe3S5oJj"
+            },
+            "popularity": 56,
+            "uri": "spotify:track:2jLHm0rzlxKonOQPSApDJN",
+            "query": "Quinn Xcii - Intro",
+            "certainty": 0.9411764705882353
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-IGe3GFWEO2I-Cee_Lo_Green_-_It_s_Ok_Official_Video.webm",
         "video_id": "IGe3GFWEO2I",
         "url": "https://www.youtube.com/watch?v=IGe3GFWEO2I",
@@ -7913,14 +8066,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 66,
+                    "index": 67,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "It's OK",
         "artist": "CeeLo Green",
-        "artist_image": "https://i.scdn.co/image/07f87b48bef1f7966d04a679cac785eefbe3f024",
+        "artist_image": "https://i.scdn.co/image/3e4b0038623685a5df89050353dcf667e6e4059f",
         "cover": "https://i.scdn.co/image/7cfe49bce1b7c1ca58a7c02c2aa00b8f9aeea121",
         "album": "The Lady Killer",
         "spotify_data": {
@@ -8053,7 +8206,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 67,
+                    "index": 68,
                     "timestamp": 1502649769
                 }
             }
@@ -8082,7 +8235,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 68,
+                    "index": 69,
                     "timestamp": 1502649769
                 }
             }
@@ -8111,7 +8264,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 69,
+                    "index": 70,
                     "timestamp": 1502649769
                 }
             }
@@ -8140,7 +8293,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 70,
+                    "index": 71,
                     "timestamp": 1502649769
                 }
             }
@@ -8169,7 +8322,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 71,
+                    "index": 72,
                     "timestamp": 1502649769
                 }
             }
@@ -8198,7 +8351,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 72,
+                    "index": 73,
                     "timestamp": 1502649769
                 }
             }
@@ -8232,7 +8385,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 73,
+                    "index": 74,
                     "timestamp": 1502649769
                 }
             }
@@ -8348,7 +8501,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 74,
+                    "index": 75,
                     "timestamp": 1502649769
                 }
             }
@@ -8382,14 +8535,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 75,
+                    "index": 76,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Kings",
         "artist": "Tribe Society",
-        "artist_image": "https://i.scdn.co/image/40e2c6e93efcbe7cd3f063139eda57bb64fbfae5",
+        "artist_image": "https://i.scdn.co/image/d32ee9f6f6021c3865fcd7f030a6cd6b912824e7",
         "cover": "https://i.scdn.co/image/ee1e70af97d2873161eadae4bbe3ded2cb5eaa3d",
         "album": "Delirium Sonata",
         "spotify_data": {
@@ -8502,7 +8655,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 76,
+                    "index": 77,
                     "timestamp": 1502649769
                 }
             }
@@ -8512,6 +8665,35 @@
         "artist_image": "http://i.imgur.com/TZFsfkM.jpg",
         "cover": "http://i.imgur.com/dYtMPUe.jpg",
         "album": "Wrong Or Right"
+    },
+    {
+        "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-9x0ShHsdm8k-GAMPER_DADONI_ft._DNKR_Noah_Guthrie_-_La_La_La.webm",
+        "video_id": "9x0ShHsdm8k",
+        "url": "https://www.youtube.com/watch?v=9x0ShHsdm8k",
+        "title": "La La La",
+        "duration": 294,
+        "thumbnail": "http://i.imgur.com/OzoUp7U.jpg",
+        "thumbnail_brightness": null,
+        "description": "Free Download: http://www.gamperdadoni.com/downloads\n\u25cf SUBSCRIBE TO OUR CHANNEL: http://bit.ly/subscribesensualmusique\n\u25cf MORE MUSIC ON SPOTIFY: http://bit.ly/spotifysensualmusique1\n\n\u25ba Facebook : http://on.fb.me/1cN993h\n\u25ba SoundCloud : http://bit.ly/NCKn03\n\u25ba Twitter: http://bit.ly/1eQnq4A\n\u25ba Instagram: http://bit.ly/1fZ8m0S\n\nGAMPER & DADONI feat. DNKR & Noah Guthrie - The La La La Remix Lyrics:\n\nLa la, la la la la la na na na na na,\nLa la na na, la la la la la na na na na na\n\nHush, don't speak\nWhen you spit your venom, keep it shut I hate it\nWhen you hiss and preach\nAbout your new messiah 'cause your theories catch fire\n\nI can't find your silver lining\nI don't mean to judge\nBut when you read your speech, it's tiring\nEnough is enough\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, I go\nLa la na na, la la la la la na na na na na [2x]\n\nIf our love is running out of time\nI won't count the hours, rather be a coward\nWhen our worlds collide\nI'm gonna drown you out before I lose my mind\n\nI can't find your silver lining\nI don't mean to judge\nBut when you read your speech, it's tiring\nEnough is enough\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, oh\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na,\nI find a way to block it, I go\nLa la na na, la la la la la na na na na na,\nLa la na na, la la la la la na na na na na,\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\n\nI'm covering my ears like a kid\nWhen your words mean nothing, I go la la la\nI'm turning up the volume when you speak\n'Cause if my heart can't stop it,\nI find a way to block it, I go\nLa la, la la la la la na na na na na\nLa la na na, la la la la la na na na na na\nLa la na na, la la la la la na na na na na\nLa la na na, la la la la la na na na na na\n\n\u25ba Follow GAMPER & DADONI here :\nFacebook: http://www.facebook.com/gamperanddadoni\nSoundCloud: http://soundcloud.com/www.soundcloud.com/gamperdadoni\n\n\u2716 Picture\nhttp://www.facebook.com/picturesofran...\n\nNo copyright infringement intended. Video will be removed if requested by the copyright owner.",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "Quality",
+                    "id": "quality",
+                    "index": 78,
+                    "timestamp": 1502649769
+                }
+            }
+        },
+        "song_title": "La La La",
+        "artist": "GAMPER & DADONI DNKR & Noah Guthrie",
+        "artist_image": "http://i.imgur.com/y4y5hz9.jpg",
+        "cover": "http://i.imgur.com/DNRdyg9.jpg",
+        "album": "The La La La Remix"
     },
     {
         "version": 103,
@@ -8531,14 +8713,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 77,
+                    "index": 79,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Lay My Body Down",
         "artist": "Rag'n'Bone Man",
-        "artist_image": "https://i.scdn.co/image/906eeb2779ed7934080a0abd09288b2ed1e42e11",
+        "artist_image": "https://i.scdn.co/image/aa0f526c0d9b86361af0a3328910413c357a1b5d",
         "cover": "https://i.scdn.co/image/32cd1e793e60dc3d05c4eae10338884618240a45",
         "album": "Human (Deluxe)",
         "spotify_data": {
@@ -8647,7 +8829,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 78,
+                    "index": 80,
                     "timestamp": 1502649769
                 }
             }
@@ -8790,7 +8972,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 79,
+                    "index": 81,
                     "timestamp": 1502649769
                 }
             }
@@ -8910,7 +9092,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 80,
+                    "index": 82,
                     "timestamp": 1502649769
                 }
             }
@@ -8945,7 +9127,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 95,
+                    "popularity": 98,
                     "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                     "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                 }
@@ -8978,7 +9160,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 95,
+                        "popularity": 98,
                         "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                         "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                     }
@@ -9026,14 +9208,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 81,
+                    "index": 83,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Levitate - From The Original Motion Picture \u201cPassengers\u201d",
         "artist": "Imagine Dragons",
-        "artist_image": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
+        "artist_image": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
         "cover": "https://i.scdn.co/image/315283d166c860b58e5f2e8fefc08b5994345fca",
         "album": "Levitate (From The Original Motion Picture \u201cPassengers\u201d)",
         "spotify_data": {
@@ -9148,14 +9330,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 82,
+                    "index": 84,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Light On",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
         "cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
         "album": "Bloom",
         "spotify_data": {
@@ -9268,7 +9450,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 83,
+                    "index": 85,
                     "timestamp": 1502649769
                 }
             }
@@ -9404,14 +9586,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 84,
+                    "index": 86,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Location",
         "artist": "Khalid",
-        "artist_image": "https://i.scdn.co/image/7752ce73f4d0720acc6a4c46cb2d2f40f344f834",
+        "artist_image": "https://i.scdn.co/image/0e82c72c84d3b37dbc33d863b600af7ff362568b",
         "cover": "https://i.scdn.co/image/5026fddc6c0b69e931ae99130f15d4214f1e7d41",
         "album": "American Teen",
         "spotify_data": {
@@ -9439,7 +9621,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 95,
+                    "popularity": 98,
                     "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                     "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                 }
@@ -9472,7 +9654,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 95,
+                        "popularity": 98,
                         "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                         "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                     }
@@ -9520,14 +9702,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 85,
+                    "index": 87,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Love Me Now",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+        "artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
         "cover": "https://i.scdn.co/image/4d7d56841f9e3d6774031ff2597b66aeff102dfb",
         "album": "Love Me Now",
         "spotify_data": {
@@ -9654,14 +9836,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 86,
+                    "index": 88,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Lucy The Tease",
         "artist": "Allan Rayman",
-        "artist_image": "https://i.scdn.co/image/b838b4c659fa43a2f17dbdceb6dd10881753a50e",
+        "artist_image": "https://i.scdn.co/image/b1e3bb62a231b4dfec45ea241a424ecee789d244",
         "cover": "https://i.scdn.co/image/9cb427f1c6646483072f1b5432284fba1da9e557",
         "album": "Hotel Allan",
         "spotify_data": {
@@ -9778,7 +9960,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 87,
+                    "index": 89,
                     "timestamp": 1502649769
                 }
             }
@@ -9903,14 +10085,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 88,
+                    "index": 90,
                     "timestamp": 1502830380
                 }
             }
         },
         "song_title": "Make You Love Me",
         "artist": "Jarreau Vandal & Zak Abel",
-        "artist_image": "https://i.scdn.co/image/e0497064c9c0c464ab73c29fb1931037c5270eff",
+        "artist_image": "https://i.scdn.co/image/ef92b1e0a8061b4361ba8280f9c97febd7447fad",
         "cover": "https://i.scdn.co/image/ee4580ca6c830e6cba15d897676ac3749cef1ed2",
         "album": "Make You Love Me",
         "spotify_data": {
@@ -10051,7 +10233,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 89,
+                    "index": 91,
                     "timestamp": 1502649769
                 }
             }
@@ -10185,14 +10367,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 90,
+                    "index": 92,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Memory",
         "artist": "Tom Misch",
-        "artist_image": "https://i.scdn.co/image/e84854c24ffd0a032bf84b6b04e28dc8942155a4",
+        "artist_image": "https://i.scdn.co/image/7f4e62de4cd6b9220d2f39dbe4893c62e3aeda42",
         "cover": "https://i.scdn.co/image/d763e2ab08efc9330d04f5339318213a4571d770",
         "album": "Memory",
         "spotify_data": {
@@ -10311,7 +10493,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 91,
+                    "index": 93,
                     "timestamp": 1502649769
                 }
             }
@@ -10447,7 +10629,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 92,
+                    "index": 94,
                     "timestamp": 1502649769
                 }
             }
@@ -10587,14 +10769,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 93,
+                    "index": 95,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "My Own",
         "artist": "Kwabs",
-        "artist_image": "https://i.scdn.co/image/95f6d6b223544d6b2f6f0100105839723f7b566c",
+        "artist_image": "https://i.scdn.co/image/4e2ba402aea9c19f9ced4abb6afe6d1df6296599",
         "cover": "https://i.scdn.co/image/f5bcaead1832fe193405fec340bd280c97fa5250",
         "album": "Love + War",
         "spotify_data": {
@@ -10725,14 +10907,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 94,
+                    "index": 96,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Native Tongue",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
         "cover": "https://i.scdn.co/image/d600fd067c1ff68055982a9aa5fe77f702b19b68",
         "album": "Change of Scenery",
         "spotify_data": {
@@ -10845,14 +11027,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 95,
+                    "index": 97,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "New Wave",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+        "artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
         "cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
         "album": "Bloom",
         "spotify_data": {
@@ -10965,14 +11147,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 96,
+                    "index": 98,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Nobody Better",
         "artist": "Jakubi",
-        "artist_image": "https://i.scdn.co/image/1a10da102897e7c75c73b6b2b8a8cca425d92bdb",
+        "artist_image": "https://i.scdn.co/image/a60b239a0f48070fbe62af87554e357a866efd77",
         "cover": "https://i.scdn.co/image/026585fdb4cc5a5ae1f9a148d9e6dcb64b1abe62",
         "album": "61 Barkly",
         "spotify_data": {
@@ -11091,7 +11273,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 97,
+                    "index": 99,
                     "timestamp": 1502649769
                 }
             }
@@ -11245,14 +11427,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 98,
+                    "index": 100,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Not My Day",
         "artist": "Keith James",
-        "artist_image": "https://i.scdn.co/image/d323aa9a87f736a5737368b1edece8a571530f3f",
+        "artist_image": "https://i.scdn.co/image/a9d2e208dd1b60eb4f099e094759e39050e1f36d",
         "cover": "https://i.scdn.co/image/5aeee68b856292dcd9666db3d44c39b67f38f8f2",
         "album": "Not My Day",
         "spotify_data": {
@@ -11371,14 +11553,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 99,
+                    "index": 101,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Not My Day",
         "artist": "Keith James",
-        "artist_image": "https://i.scdn.co/image/811ddc1d1ac62da15575f7009d79a8f5fc27f8a6",
+        "artist_image": "https://i.scdn.co/image/5f2daceabd1a9987edb965cec26fbf249b957e51",
         "cover": "https://i.scdn.co/image/5aeee68b856292dcd9666db3d44c39b67f38f8f2",
         "album": "Not My Day",
         "spotify_data": {
@@ -11497,7 +11679,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 100,
+                    "index": 102,
                     "timestamp": 1502649769
                 }
             }
@@ -11619,14 +11801,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 101,
+                    "index": 103,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Overload",
         "artist": "John Legend & Miguel",
-        "artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": {
@@ -11794,7 +11976,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 102,
+                    "index": 104,
                     "timestamp": 1502649769
                 }
             }
@@ -11956,7 +12138,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 103,
+                    "index": 105,
                     "timestamp": 1502649769
                 }
             }
@@ -12094,7 +12276,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 104,
+                    "index": 106,
                     "timestamp": 1502649769
                 }
             }
@@ -12123,7 +12305,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 105,
+                    "index": 107,
                     "timestamp": 1502649769
                 }
             }
@@ -12158,7 +12340,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 95,
+                    "popularity": 98,
                     "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                     "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                 }
@@ -12191,7 +12373,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 95,
+                        "popularity": 98,
                         "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                         "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                     }
@@ -12239,14 +12421,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 106,
+                    "index": 108,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "River",
         "artist": "Leon Bridges",
-        "artist_image": "https://i.scdn.co/image/894c521f70c125f57574dd38568554ac1bedc175",
+        "artist_image": "https://i.scdn.co/image/e4d1574fb0bf9398c54bc9adc6c5c19f97224eb1",
         "cover": "https://i.scdn.co/image/de3ea93c5c121a331ca3921162aff554a774ef3c",
         "album": "Coming Home",
         "spotify_data": {
@@ -12375,14 +12557,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 107,
+                    "index": 109,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Roots",
         "artist": "Imagine Dragons",
-        "artist_image": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
+        "artist_image": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
         "cover": "https://i.scdn.co/image/4cdfdf0127ea3ccbaf7c51068e0511281aa68b6d",
         "album": "Roots",
         "spotify_data": {
@@ -12481,35 +12663,6 @@
     },
     {
         "version": 103,
-        "type": "YoutubeEntry",
-        "expected_filename": "cache\\audio_cache\\youtube-uL-qG9x1uXA-Royal_Deluxe_-_Born_For_This_Position_Music.webm",
-        "video_id": "uL-qG9x1uXA",
-        "url": "https://www.youtube.com/watch?v=uL-qG9x1uXA",
-        "title": "Royal Deluxe - Born For This (Position Music)",
-        "duration": 214,
-        "thumbnail": "https://i.ytimg.com/vi/uL-qG9x1uXA/maxresdefault.jpg",
-        "thumbnail_brightness": null,
-        "description": "Published by Position Music\nFollow Position Music on Facebook: https://www.facebook.com/PositionMusic\nOfficial Website: http://positionmusic.com/\n\nArtist: Royal Deluxe\nAlbum: Born For This\n\nBuying Options:\nAmazon: https://goo.gl/O5eRDu\niTunes: https://goo.gl/DiCQjf\n\nFollow Royal Deluxe:\nFacebook: https://www.facebook.com/royaldeluxemusic/\n\nStream on Spotify: https://goo.gl/eYSjLD",
-        "meta": {
-            "author": {
-                "type": "Member",
-                "id": "203510202421477376",
-                "name": "ZyLect"
-            },
-            "playlist": {
-                "type": "built-in/dict",
-                "value": {
-                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
-                    "name": "Quality",
-                    "id": "quality",
-                    "index": 108,
-                    "timestamp": 1502649769
-                }
-            }
-        }
-    },
-    {
-        "version": 103,
         "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-29e4ryVQLtg-Thundamentals_-_Sally_ft._Mataya.m4a",
         "video_id": "29e4ryVQLtg",
@@ -12531,7 +12684,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 109,
+                    "index": 110,
                     "timestamp": 1502649769
                 }
             }
@@ -12662,7 +12815,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 110,
+                    "index": 111,
                     "timestamp": 1502649769
                 }
             }
@@ -12697,7 +12850,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 95,
+                    "popularity": 98,
                     "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                     "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                 }
@@ -12730,7 +12883,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 95,
+                        "popularity": 98,
                         "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                         "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                     }
@@ -12778,7 +12931,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 111,
+                    "index": 112,
                     "timestamp": 1502649769
                 }
             }
@@ -12886,11 +13039,11 @@
     },
     {
         "version": 103,
-        "type": "SpotifyEntry",
+        "type": "GieselaEntry",
         "expected_filename": "cache\\audio_cache\\youtube-5_JUReD3QoE-Hozier_-_Sedated.webm",
         "video_id": "5_JUReD3QoE",
         "url": "https://www.youtube.com/watch?v=5_JUReD3QoE",
-        "title": "Hozier - Sedated",
+        "title": "Sedated",
         "duration": 210,
         "thumbnail": "https://i.ytimg.com/vi/5_JUReD3QoE/hqdefault.jpg",
         "thumbnail_brightness": null,
@@ -12902,7 +13055,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 112,
+                    "index": 113,
                     "timestamp": 1502649769
                 }
             }
@@ -12911,116 +13064,7 @@
         "artist": "Hozier",
         "artist_image": "https://i.scdn.co/image/ba8f0310cf3b9b291e0ad63d3edc822f00dc5f31",
         "cover": "https://i.scdn.co/image/54ae81bff27a1979815d40846c763431d872b680",
-        "album": "Hozier",
-        "spotify_data": {
-            "id": "2YRJxFhJQQvUsf14rXpvBD",
-            "name": "Sedated",
-            "artists": [
-                {
-                    "id": "2FXC3k01G6Gw61bmprjgqS",
-                    "name": "Hozier",
-                    "images": [
-                        {
-                            "height": 667,
-                            "url": "https://i.scdn.co/image/07c35e32c87810913eca6d95dcde841944e5f8b6",
-                            "width": 1000
-                        },
-                        {
-                            "height": 427,
-                            "url": "https://i.scdn.co/image/ba8f0310cf3b9b291e0ad63d3edc822f00dc5f31",
-                            "width": 640
-                        },
-                        {
-                            "height": 133,
-                            "url": "https://i.scdn.co/image/9dcc9279864a7210606d9d7f76ac68dd57b5b4c2",
-                            "width": 199
-                        },
-                        {
-                            "height": 43,
-                            "url": "https://i.scdn.co/image/8f5fbdc12d4d02450454de13d31d429acf78261a",
-                            "width": 64
-                        }
-                    ],
-                    "genres": [
-                        "folk-pop",
-                        "indie folk",
-                        "modern blues",
-                        "neo mellow",
-                        "pop"
-                    ],
-                    "popularity": 78,
-                    "uri": "spotify:artist:2FXC3k01G6Gw61bmprjgqS",
-                    "href": "https://open.spotify.com/artist/2FXC3k01G6Gw61bmprjgqS"
-                }
-            ],
-            "artist": "Hozier",
-            "cover_url": "https://i.scdn.co/image/54ae81bff27a1979815d40846c763431d872b680",
-            "duration": 207.666,
-            "album": {
-                "id": "04E0aLUdCHnhnnYrDDvcHq",
-                "name": "Hozier",
-                "artists": [
-                    {
-                        "id": "2FXC3k01G6Gw61bmprjgqS",
-                        "name": "Hozier",
-                        "images": [
-                            {
-                                "height": 667,
-                                "url": "https://i.scdn.co/image/07c35e32c87810913eca6d95dcde841944e5f8b6",
-                                "width": 1000
-                            },
-                            {
-                                "height": 427,
-                                "url": "https://i.scdn.co/image/ba8f0310cf3b9b291e0ad63d3edc822f00dc5f31",
-                                "width": 640
-                            },
-                            {
-                                "height": 133,
-                                "url": "https://i.scdn.co/image/9dcc9279864a7210606d9d7f76ac68dd57b5b4c2",
-                                "width": 199
-                            },
-                            {
-                                "height": 43,
-                                "url": "https://i.scdn.co/image/8f5fbdc12d4d02450454de13d31d429acf78261a",
-                                "width": 64
-                            }
-                        ],
-                        "genres": [
-                            "folk-pop",
-                            "indie folk",
-                            "modern blues",
-                            "neo mellow",
-                            "pop"
-                        ],
-                        "popularity": 78,
-                        "uri": "spotify:artist:2FXC3k01G6Gw61bmprjgqS",
-                        "href": "https://open.spotify.com/artist/2FXC3k01G6Gw61bmprjgqS"
-                    }
-                ],
-                "images": [
-                    {
-                        "height": 636,
-                        "url": "https://i.scdn.co/image/54ae81bff27a1979815d40846c763431d872b680",
-                        "width": 640
-                    },
-                    {
-                        "height": 298,
-                        "url": "https://i.scdn.co/image/012a058071e324d6751e5969dd4a651ee01f4501",
-                        "width": 300
-                    },
-                    {
-                        "height": 64,
-                        "url": "https://i.scdn.co/image/0844ff49b157ba0cdf77fff3f4c37a30c371fa4a",
-                        "width": 64
-                    }
-                ],
-                "uri": "spotify:album:04E0aLUdCHnhnnYrDDvcHq"
-            },
-            "popularity": 56,
-            "uri": "spotify:track:2YRJxFhJQQvUsf14rXpvBD",
-            "query": "Hozier - Sedated",
-            "certainty": 0.9375
-        }
+        "album": "Hozier"
     },
     {
         "version": 103,
@@ -13040,14 +13084,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 113,
+                    "index": 114,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Send Them Off!",
         "artist": "Bastille",
-        "artist_image": "https://i.scdn.co/image/4b161fe24de1c80bce42085f409b7a4700b94c47",
+        "artist_image": "https://i.scdn.co/image/765e709fa628079404fe99ca0e540c43b894eeba",
         "cover": "https://i.scdn.co/image/b5b2a90018278d3beee0dba01378ba186d1f86f6",
         "album": "Wild World (Complete Edition)",
         "spotify_data": {
@@ -13164,14 +13208,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 114,
+                    "index": 115,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Shot Down",
         "artist": "Khalid",
-        "artist_image": "https://i.scdn.co/image/0e82c72c84d3b37dbc33d863b600af7ff362568b",
+        "artist_image": "https://i.scdn.co/image/7752ce73f4d0720acc6a4c46cb2d2f40f344f834",
         "cover": "https://i.scdn.co/image/5026fddc6c0b69e931ae99130f15d4214f1e7d41",
         "album": "American Teen",
         "spotify_data": {
@@ -13199,7 +13243,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 95,
+                    "popularity": 98,
                     "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                     "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                 }
@@ -13232,7 +13276,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 95,
+                        "popularity": 98,
                         "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                         "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                     }
@@ -13280,158 +13324,6 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 115,
-                    "timestamp": 1502649769
-                }
-            }
-        },
-        "song_title": "Shots - Broiler Remix",
-        "artist": "Imagine Dragons & Broiler",
-        "artist_image": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
-        "cover": "https://i.scdn.co/image/3ed018e22d42495daf4076ed8ba0387e8f070a46",
-        "album": "Shots EP",
-        "spotify_data": {
-            "id": "4XLm8FNvaTlmTAZmSrrV82",
-            "name": "Shots - Broiler Remix",
-            "artists": [
-                {
-                    "id": "53XhwfbYqKCa1cC15pYq2q",
-                    "name": "Imagine Dragons",
-                    "images": [
-                        {
-                            "height": 640,
-                            "url": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
-                            "width": 640
-                        },
-                        {
-                            "height": 320,
-                            "url": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
-                            "width": 320
-                        },
-                        {
-                            "height": 160,
-                            "url": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
-                            "width": 160
-                        }
-                    ],
-                    "genres": [
-                        "pop",
-                        "vegas indie"
-                    ],
-                    "popularity": 94,
-                    "uri": "spotify:artist:53XhwfbYqKCa1cC15pYq2q",
-                    "href": "https://open.spotify.com/artist/53XhwfbYqKCa1cC15pYq2q"
-                },
-                {
-                    "id": "3836OTICMPjhTMMcpPw4EC",
-                    "name": "Broiler",
-                    "images": [
-                        {
-                            "height": 640,
-                            "url": "https://i.scdn.co/image/33b01410dcada5ecc9ff9d794d08eff2a91093dc",
-                            "width": 640
-                        },
-                        {
-                            "height": 320,
-                            "url": "https://i.scdn.co/image/9e4bf8a74342d0b222c7cca341026f76b8e03f74",
-                            "width": 320
-                        },
-                        {
-                            "height": 160,
-                            "url": "https://i.scdn.co/image/6454676951cb1b30740dea0db9b2d42c8614055c",
-                            "width": 160
-                        }
-                    ],
-                    "genres": [
-                        "deep pop edm",
-                        "edm",
-                        "nordic house",
-                        "tropical house"
-                    ],
-                    "popularity": 73,
-                    "uri": "spotify:artist:3836OTICMPjhTMMcpPw4EC",
-                    "href": "https://open.spotify.com/artist/3836OTICMPjhTMMcpPw4EC"
-                }
-            ],
-            "artist": "Imagine Dragons & Broiler",
-            "cover_url": "https://i.scdn.co/image/3ed018e22d42495daf4076ed8ba0387e8f070a46",
-            "duration": 191.266,
-            "album": {
-                "id": "5R4Ak5SlTSaVnXNZQQ5CX2",
-                "name": "Shots EP",
-                "artists": [
-                    {
-                        "id": "53XhwfbYqKCa1cC15pYq2q",
-                        "name": "Imagine Dragons",
-                        "images": [
-                            {
-                                "height": 640,
-                                "url": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
-                                "width": 640
-                            },
-                            {
-                                "height": 320,
-                                "url": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
-                                "width": 320
-                            },
-                            {
-                                "height": 160,
-                                "url": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
-                                "width": 160
-                            }
-                        ],
-                        "genres": [
-                            "pop",
-                            "vegas indie"
-                        ],
-                        "popularity": 94,
-                        "uri": "spotify:artist:53XhwfbYqKCa1cC15pYq2q",
-                        "href": "https://open.spotify.com/artist/53XhwfbYqKCa1cC15pYq2q"
-                    }
-                ],
-                "images": [
-                    {
-                        "height": 640,
-                        "url": "https://i.scdn.co/image/3ed018e22d42495daf4076ed8ba0387e8f070a46",
-                        "width": 640
-                    },
-                    {
-                        "height": 300,
-                        "url": "https://i.scdn.co/image/e2f6c542c81fde32fce858de15a0193b15b5e19a",
-                        "width": 300
-                    },
-                    {
-                        "height": 64,
-                        "url": "https://i.scdn.co/image/5f24865c52f3e03ac821273029386fce6a9e1338",
-                        "width": 64
-                    }
-                ],
-                "uri": "spotify:album:5R4Ak5SlTSaVnXNZQQ5CX2"
-            },
-            "popularity": 66,
-            "uri": "spotify:track:4XLm8FNvaTlmTAZmSrrV82",
-            "query": "Imagine Dragons - Shots",
-            "certainty": 0.9565217391304348
-        }
-    },
-    {
-        "version": 103,
-        "type": "SpotifyEntry",
-        "expected_filename": "cache\\audio_cache\\youtube-ndtQ6ReXO-s-Imagine_Dragons_-_Shots_Audio.webm",
-        "video_id": "ndtQ6ReXO-s",
-        "url": "https://www.youtube.com/watch?v=ndtQ6ReXO-s",
-        "title": "Imagine Dragons & Broiler - Shots - Broiler Remix",
-        "duration": 232,
-        "thumbnail": "https://i.ytimg.com/vi/ndtQ6ReXO-s/maxresdefault.jpg",
-        "thumbnail_brightness": null,
-        "description": "Get Smoke + Mirrors on iTunes now: http://smarturl.it/IDSmokeMirrors\nGet Smoke + Mirrors Deluxe version with 4 exclusive songs only at Target: http://smarturl.it/SmokeMirrorsTgt\n\nhttp://smarturl.it/ImagineDragons.News\n\nMusic video by Imagine Dragons performing Shots. (C) 2015 KIDinaKORNER/Interscope Records",
-        "meta": {
-            "playlist": {
-                "type": "built-in/dict",
-                "value": {
-                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
-                    "name": "Quality",
-                    "id": "quality",
                     "index": 116,
                     "timestamp": 1502649769
                 }
@@ -13439,7 +13331,7 @@
         },
         "song_title": "Shots - Broiler Remix",
         "artist": "Imagine Dragons & Broiler",
-        "artist_image": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
+        "artist_image": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
         "cover": "https://i.scdn.co/image/3ed018e22d42495daf4076ed8ba0387e8f070a46",
         "album": "Shots EP",
         "spotify_data": {
@@ -13591,7 +13483,7 @@
         },
         "song_title": "Simple & Sweet",
         "artist": "Jon Bellion",
-        "artist_image": "https://i.scdn.co/image/b70305d3545319fefcd4f64df45f830df91537b4",
+        "artist_image": "https://i.scdn.co/image/a4cbc2c3ee8a43c76a5961ae2dd4815d645da00c",
         "cover": "https://i.scdn.co/image/463762ab6027e0d5dd16a8bcc75baabd8d6c11f9",
         "album": "The Definition",
         "spotify_data": {
@@ -13711,7 +13603,7 @@
         },
         "song_title": "Skin",
         "artist": "Carmody",
-        "artist_image": "https://i.scdn.co/image/c7b48037186f89b572701bb37d06991627156ba2",
+        "artist_image": "https://i.scdn.co/image/4cb69e478a012ece2c6a42963dab430f95a9feda",
         "cover": "https://i.scdn.co/image/37587904b9347f13e2c8a45a7a7e24997ec3aae3",
         "album": "Skin",
         "spotify_data": {
@@ -13827,7 +13719,7 @@
         },
         "song_title": "Smooth Sailin'",
         "artist": "Leon Bridges",
-        "artist_image": "https://i.scdn.co/image/340896b04da8ab86c7b4101002b62dc4b95765ae",
+        "artist_image": "https://i.scdn.co/image/ff60e5eb1495be2e50cd7c6245a1cea17bee1809",
         "cover": "https://i.scdn.co/image/de3ea93c5c121a331ca3921162aff554a774ef3c",
         "album": "Coming Home",
         "spotify_data": {
@@ -13963,7 +13855,7 @@
         },
         "song_title": "Something From Nothing",
         "artist": "GRMM & Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/1c4b7e93fb593617d7ba9b527ac2916a5e1bce7a",
+        "artist_image": "https://i.scdn.co/image/2363498ca7e5a778abc4e5e65bf40c5fc5b0e3c9",
         "cover": "https://i.scdn.co/image/d713a3767921dc828d21ba2f85660571f2eddc87",
         "album": "Scenes",
         "spotify_data": {
@@ -14206,6 +14098,185 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-byKjewmOH-A-Prince_Fox_-_Space_Feat._Quinn_XCII.NA",
+        "video_id": "byKjewmOH-A",
+        "url": "https://www.youtube.com/watch?v=byKjewmOH-A",
+        "title": "Prince Fox - Space (Feat. Quinn XCII)",
+        "duration": 177,
+        "thumbnail": "https://i.ytimg.com/vi/byKjewmOH-A/default.jpg",
+        "thumbnail_brightness": null,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "Quality",
+                    "id": "quality",
+                    "index": 122,
+                    "timestamp": 1506177506
+                }
+            }
+        },
+        "song_title": "Space (feat. Quinn XCII)",
+        "artist": "Prince Fox & Quinn XCII",
+        "artist_image": "https://i.scdn.co/image/7e93dcf75108a8829fce27225ed5c7e8e650b450",
+        "cover": "https://i.scdn.co/image/f7f37f38362effb0684f66dd18450dc317438546",
+        "album": "Space (feat. Quinn XCII)",
+        "spotify_data": {
+            "id": "6ibtXCE3GjkRCG45bhjUte",
+            "name": "Space (feat. Quinn XCII)",
+            "artists": [
+                {
+                    "id": "1nf5yEVCfMbqm1OCYpntBT",
+                    "name": "Prince Fox",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/7e93dcf75108a8829fce27225ed5c7e8e650b450",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/152d0e5ab9742eeff19616adb08da9aea7e551bd",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/a2f20f6e5d9cef3b99a3ad165c25b954cdf3775c",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "indie poptimism"
+                    ],
+                    "popularity": 59,
+                    "uri": "spotify:artist:1nf5yEVCfMbqm1OCYpntBT",
+                    "href": "https://open.spotify.com/artist/1nf5yEVCfMbqm1OCYpntBT"
+                },
+                {
+                    "id": "3ApUX1o6oSz321MMECyIYd",
+                    "name": "Quinn XCII",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "indie poptimism"
+                    ],
+                    "popularity": 78,
+                    "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                    "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                }
+            ],
+            "artist": "Prince Fox & Quinn XCII",
+            "cover_url": "https://i.scdn.co/image/f7f37f38362effb0684f66dd18450dc317438546",
+            "duration": 177.0,
+            "album": {
+                "id": "0DQbK6PI3MJNmnQz7hVQm7",
+                "name": "Space (feat. Quinn XCII)",
+                "artists": [
+                    {
+                        "id": "1nf5yEVCfMbqm1OCYpntBT",
+                        "name": "Prince Fox",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/7e93dcf75108a8829fce27225ed5c7e8e650b450",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/152d0e5ab9742eeff19616adb08da9aea7e551bd",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/a2f20f6e5d9cef3b99a3ad165c25b954cdf3775c",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "indie poptimism"
+                        ],
+                        "popularity": 59,
+                        "uri": "spotify:artist:1nf5yEVCfMbqm1OCYpntBT",
+                        "href": "https://open.spotify.com/artist/1nf5yEVCfMbqm1OCYpntBT"
+                    },
+                    {
+                        "id": "3ApUX1o6oSz321MMECyIYd",
+                        "name": "Quinn XCII",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "indie poptimism"
+                        ],
+                        "popularity": 78,
+                        "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                        "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/f7f37f38362effb0684f66dd18450dc317438546",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/cf85f0e95d2f6bf5d2e8387515d39daeedd1c317",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/be505219285f76bb1924ae558466e3820e465492",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:0DQbK6PI3MJNmnQz7hVQm7"
+            },
+            "popularity": 62,
+            "uri": "spotify:track:6ibtXCE3GjkRCG45bhjUte",
+            "query": "Prince Fox - Space",
+            "certainty": 0.9411764705882353
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-__CPXSX7MRM-Kwabs_-_Spirit_Fade.webm",
         "video_id": "__CPXSX7MRM",
         "url": "https://www.youtube.com/watch?v=__CPXSX7MRM",
@@ -14221,14 +14292,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 122,
+                    "index": 123,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Spirit Fade",
         "artist": "Kwabs",
-        "artist_image": "https://i.scdn.co/image/42a9677ab3e9d850e748d01deeb6117c4cd22d73",
+        "artist_image": "https://i.scdn.co/image/95f6d6b223544d6b2f6f0100105839723f7b566c",
         "cover": "https://i.scdn.co/image/488632a546b008aa2c75489c01c64ca62ae26a20",
         "album": "Wrong Or Right EP",
         "spotify_data": {
@@ -14359,14 +14430,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 123,
+                    "index": 124,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Standing in Line",
         "artist": "The Vernons",
-        "artist_image": "https://i.scdn.co/image/d56ba80a8d245ef16117e71c8bc6a82323cc8ccd",
+        "artist_image": "https://i.scdn.co/image/cfa4cf2e846e63578a6416fd98c297ee5520d373",
         "cover": "https://i.scdn.co/image/3b96b8073b46271c16fa0ac9f6d565ea4bb184ff",
         "album": "Standing In Line",
         "spotify_data": {
@@ -14475,7 +14546,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 124,
+                    "index": 125,
                     "timestamp": 1502649769
                 }
             }
@@ -14609,14 +14680,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 125,
+                    "index": 126,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Straightjacket",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
         "cover": "https://i.scdn.co/image/9bc35f625d9eebaa3571f971207aac13d40a83a1",
         "album": "Straightjacket",
         "spotify_data": {
@@ -14729,7 +14800,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 126,
+                    "index": 127,
                     "timestamp": 1502649769
                 }
             }
@@ -14849,14 +14920,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 127,
+                    "index": 128,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Sunshine",
         "artist": "Tom Misch",
-        "artist_image": "https://i.scdn.co/image/e84854c24ffd0a032bf84b6b04e28dc8942155a4",
+        "artist_image": "https://i.scdn.co/image/7f4e62de4cd6b9220d2f39dbe4893c62e3aeda42",
         "cover": "https://i.scdn.co/image/d0f3f15e73e6410e8bb60c0ab15357e5ecec89a9",
         "album": "Sunshine",
         "spotify_data": {
@@ -14975,14 +15046,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 128,
+                    "index": 129,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Surefire",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
+        "artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": {
@@ -15094,6 +15165,313 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-7TIekYgjPo8-KWAYE_-_Sweetest_Life.NA",
+        "video_id": "7TIekYgjPo8",
+        "url": "https://www.youtube.com/watch?v=7TIekYgjPo8",
+        "title": "KWAYE - Sweetest Life",
+        "duration": 233,
+        "thumbnail": "https://i.ytimg.com/vi/7TIekYgjPo8/default.jpg",
+        "thumbnail_brightness": null,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "Quality",
+                    "id": "quality",
+                    "index": 130,
+                    "timestamp": 1506177507
+                }
+            }
+        },
+        "song_title": "Sweetest Life",
+        "artist": "KWAYE",
+        "artist_image": "https://i.scdn.co/image/054fa817a29303e1368550f5d0d702b2e84fe20c",
+        "cover": "https://i.scdn.co/image/79a65f4ddd7326faddb4d7da36a25ee8bd3a71e9",
+        "album": "Solar",
+        "spotify_data": {
+            "id": "7I3rWTS7ShoyRqDDw1SvI4",
+            "name": "Sweetest Life",
+            "artists": [
+                {
+                    "id": "5dIssYf7lu8wufkQywN9WJ",
+                    "name": "KWAYE",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/054fa817a29303e1368550f5d0d702b2e84fe20c",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/8ac81b6d58ca4979d1884255edd07c5d746aa22b",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/3e4bddf8ba3ffc6df809be3068402350c4e33cbf",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [],
+                    "popularity": 49,
+                    "uri": "spotify:artist:5dIssYf7lu8wufkQywN9WJ",
+                    "href": "https://open.spotify.com/artist/5dIssYf7lu8wufkQywN9WJ"
+                }
+            ],
+            "artist": "KWAYE",
+            "cover_url": "https://i.scdn.co/image/79a65f4ddd7326faddb4d7da36a25ee8bd3a71e9",
+            "duration": 232.521,
+            "album": {
+                "id": "5EKep1yUR2Q7WcRI5jp7z9",
+                "name": "Solar",
+                "artists": [
+                    {
+                        "id": "5dIssYf7lu8wufkQywN9WJ",
+                        "name": "KWAYE",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/054fa817a29303e1368550f5d0d702b2e84fe20c",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/8ac81b6d58ca4979d1884255edd07c5d746aa22b",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/3e4bddf8ba3ffc6df809be3068402350c4e33cbf",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [],
+                        "popularity": 49,
+                        "uri": "spotify:artist:5dIssYf7lu8wufkQywN9WJ",
+                        "href": "https://open.spotify.com/artist/5dIssYf7lu8wufkQywN9WJ"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/79a65f4ddd7326faddb4d7da36a25ee8bd3a71e9",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/6491b1971e90dc8839c5987fe972beee23ca6535",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/98374f1cb4054d5b908b10fc92ea159368e7fe69",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:5EKep1yUR2Q7WcRI5jp7z9"
+            },
+            "popularity": 60,
+            "uri": "spotify:track:7I3rWTS7ShoyRqDDw1SvI4",
+            "query": "KWAYE - Sweetest Life",
+            "certainty": 0.95
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-HPTpjP229Gs-Joe_Hertz_-_Swimming_JNTHN_STEIN_Remix_ft._James_Vickery.NA",
+        "video_id": "HPTpjP229Gs",
+        "url": "https://www.youtube.com/watch?v=HPTpjP229Gs",
+        "title": "Joe Hertz - Swimming (JNTHN STEIN Remix) [ft. James Vickery]",
+        "duration": 267,
+        "thumbnail": "https://i.ytimg.com/vi/HPTpjP229Gs/default.jpg",
+        "thumbnail_brightness": null,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "Quality",
+                    "id": "quality",
+                    "index": 131,
+                    "timestamp": 1506177507
+                }
+            }
+        },
+        "song_title": "Swimming - JNTHN STEIN Remix",
+        "artist": "Joe Hertz & James Vickery",
+        "artist_image": "https://i.scdn.co/image/cfe08188b8b8e5a9b9625fee3d54def832c1bc18",
+        "cover": "https://i.scdn.co/image/70ec6a728aea8e9c8ca4d7fecbecbd23f80a3ad0",
+        "album": "Swimming (JNTHN STEIN Remix)",
+        "spotify_data": {
+            "id": "4KjMVOw0XKJvsYc3rYjaZ3",
+            "name": "Swimming - JNTHN STEIN Remix",
+            "artists": [
+                {
+                    "id": "76QHVIjgqlkWB9LNGliman",
+                    "name": "Joe Hertz",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/cfe08188b8b8e5a9b9625fee3d54def832c1bc18",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/6c1b5abafb8e3ff8feaaf2ad84581f03554d997a",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/16a0f30789129addc44820520d5f1f74b3584269",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "deep indie r&b",
+                        "indie r&b",
+                        "tropical house",
+                        "vapor soul",
+                        "vapor twitch"
+                    ],
+                    "popularity": 59,
+                    "uri": "spotify:artist:76QHVIjgqlkWB9LNGliman",
+                    "href": "https://open.spotify.com/artist/76QHVIjgqlkWB9LNGliman"
+                },
+                {
+                    "id": "68tR0TsEKX89ID4fyBMgch",
+                    "name": "James Vickery",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/7f2bc508e49eaf8df44b1970e4854bc6f5f7cdbf",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/2d2e123e000447d8f379850ba90b151f12844e39",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/858500cdd23d82cb40b3eadd699251c01114218b",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [],
+                    "popularity": 47,
+                    "uri": "spotify:artist:68tR0TsEKX89ID4fyBMgch",
+                    "href": "https://open.spotify.com/artist/68tR0TsEKX89ID4fyBMgch"
+                },
+                {
+                    "id": "2tW7TitNzNibILuWCEhBLS",
+                    "name": "JNTHN STEIN",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/8e2de47ceb7bc5a33afa9ae90e27aa92a399eefc",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/7da2fac487766157f140716b2c46a259e21e0f08",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/e49194389c239ea2d7c84a8267c76c8973ca5886",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "electronic trap",
+                        "vapor twitch"
+                    ],
+                    "popularity": 45,
+                    "uri": "spotify:artist:2tW7TitNzNibILuWCEhBLS",
+                    "href": "https://open.spotify.com/artist/2tW7TitNzNibILuWCEhBLS"
+                }
+            ],
+            "artist": "Joe Hertz & James Vickery",
+            "cover_url": "https://i.scdn.co/image/70ec6a728aea8e9c8ca4d7fecbecbd23f80a3ad0",
+            "duration": 266.373,
+            "album": {
+                "id": "4I9u5gDpRMmUzKHnEQnoaP",
+                "name": "Swimming (JNTHN STEIN Remix)",
+                "artists": [
+                    {
+                        "id": "76QHVIjgqlkWB9LNGliman",
+                        "name": "Joe Hertz",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/cfe08188b8b8e5a9b9625fee3d54def832c1bc18",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/6c1b5abafb8e3ff8feaaf2ad84581f03554d997a",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/16a0f30789129addc44820520d5f1f74b3584269",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "deep indie r&b",
+                            "indie r&b",
+                            "tropical house",
+                            "vapor soul",
+                            "vapor twitch"
+                        ],
+                        "popularity": 59,
+                        "uri": "spotify:artist:76QHVIjgqlkWB9LNGliman",
+                        "href": "https://open.spotify.com/artist/76QHVIjgqlkWB9LNGliman"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/70ec6a728aea8e9c8ca4d7fecbecbd23f80a3ad0",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/1308aa528e5ef5c347f528f293a23e54a8696dd6",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/66d0270019404da05307cba354aef89ad2fb6276",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:4I9u5gDpRMmUzKHnEQnoaP"
+            },
+            "popularity": 47,
+            "uri": "spotify:track:4KjMVOw0XKJvsYc3rYjaZ3",
+            "query": "Joe Hertz - Swimming James Vickery",
+            "certainty": 0.6923076923076923
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-MYSVMgRr6pw-Hozier_-_Take_Me_To_Church.webm",
         "video_id": "MYSVMgRr6pw",
         "url": "https://www.youtube.com/watch?v=MYSVMgRr6pw",
@@ -15109,7 +15487,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 129,
+                    "index": 132,
                     "timestamp": 1502649769
                 }
             }
@@ -15247,14 +15625,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 130,
+                    "index": 133,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Temporarily Painless",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": {
@@ -15381,7 +15759,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 131,
+                    "index": 134,
                     "timestamp": 1502649769
                 }
             }
@@ -15410,7 +15788,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 132,
+                    "index": 135,
                     "timestamp": 1502649769
                 }
             }
@@ -15439,7 +15817,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 133,
+                    "index": 136,
                     "timestamp": 1502649769
                 }
             }
@@ -15468,7 +15846,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 134,
+                    "index": 137,
                     "timestamp": 1502649769
                 }
             }
@@ -15497,7 +15875,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 135,
+                    "index": 138,
                     "timestamp": 1502649769
                 }
             }
@@ -15526,7 +15904,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 136,
+                    "index": 139,
                     "timestamp": 1502649769
                 }
             }
@@ -15550,14 +15928,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 137,
+                    "index": 140,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "The Good, The Bad And The Dirty",
         "artist": "Panic! At The Disco",
-        "artist_image": "https://i.scdn.co/image/6d314b0fb784ab9899f2113b6d5e19bc6cbb31ec",
+        "artist_image": "https://i.scdn.co/image/1d349f478ca67418cd09ca49a8c2aab883ef4306",
         "cover": "https://i.scdn.co/image/a1e4ed2942e4a9b4fce5d654cb28fc30ceb968ef",
         "album": "Death Of A Bachelor",
         "spotify_data": {
@@ -15686,14 +16064,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 138,
+                    "index": 141,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "The Isle Of Arran",
         "artist": "Loyle Carner",
-        "artist_image": "https://i.scdn.co/image/24ded64df2326c7cc44f57b5d17a891c6c3edcaf",
+        "artist_image": "https://i.scdn.co/image/f943dce6b8a09d327effcf210c143366a152cbb3",
         "cover": "https://i.scdn.co/image/049ec6719d0ea1ac8640c2de1e4168d7bca203be",
         "album": "Yesterday's Gone",
         "spotify_data": {
@@ -15818,7 +16196,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 139,
+                    "index": 142,
                     "timestamp": 1502649769
                 }
             }
@@ -15939,7 +16317,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 140,
+                    "index": 143,
                     "timestamp": 1502649769
                 }
             }
@@ -15974,7 +16352,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 31,
+                    "popularity": 32,
                     "uri": "spotify:artist:7I8BxUfCpatAEGPAGGpyEF",
                     "href": "https://open.spotify.com/artist/7I8BxUfCpatAEGPAGGpyEF"
                 }
@@ -16007,7 +16385,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 31,
+                        "popularity": 32,
                         "uri": "spotify:artist:7I8BxUfCpatAEGPAGGpyEF",
                         "href": "https://open.spotify.com/artist/7I8BxUfCpatAEGPAGGpyEF"
                     }
@@ -16055,14 +16433,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 141,
+                    "index": 144,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "These Days",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
         "cover": "https://i.scdn.co/image/777cede99661f6b5dfb399754bd2d9c7e4d99ba5",
         "album": "Bloom",
         "spotify_data": {
@@ -16175,14 +16553,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 142,
+                    "index": 145,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "These Hands - Oliver Nelson Remix",
         "artist": "Samm Henshaw & Oliver Nelson",
-        "artist_image": "https://i.scdn.co/image/140906f22f47b7693c99220da0a4f729f0a8ac2e",
+        "artist_image": "https://i.scdn.co/image/d76d0137ec64fd88f8cee28a4dacb657a9654481",
         "cover": "https://i.scdn.co/image/cd9ee909fd2e1a3101e227a1cde8a6eaab806756",
         "album": "These Hands (Oliver Nelson Remix)",
         "spotify_data": {
@@ -16322,7 +16700,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 143,
+                    "index": 146,
                     "timestamp": 1502649769
                 }
             }
@@ -16446,14 +16824,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 144,
+                    "index": 147,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Thursday",
         "artist": "Lostboycrow",
-        "artist_image": "https://i.scdn.co/image/29224dc3259e9a4846b55eaf21fb173f23318f43",
+        "artist_image": "https://i.scdn.co/image/3a131ee8ac64a73ddd0fa981813f179233426d3e",
         "cover": "https://i.scdn.co/image/3c55ea3ec083d2d25de37441c2239abdf5f721d9",
         "album": "Thursday",
         "spotify_data": {
@@ -16572,7 +16950,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 145,
+                    "index": 148,
                     "timestamp": 1502649769
                 }
             }
@@ -16596,7 +16974,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 146,
+                    "index": 149,
                     "timestamp": 1502649769
                 }
             }
@@ -16620,7 +16998,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 147,
+                    "index": 150,
                     "timestamp": 1502649769
                 }
             }
@@ -16644,14 +17022,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 148,
+                    "index": 151,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Tonight (Best You Ever Had)",
         "artist": "John Legend & Ludacris",
-        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
+        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
         "cover": "https://i.scdn.co/image/14cfa484aa378675e794deb27160740b26fbf1fb",
         "album": "Think Like A Man - Music From & Inspired By The Film",
         "spotify_data": {
@@ -16778,6 +17156,131 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-McDKmbncoJc-Quinn_XCII_-_Tourist.NA",
+        "video_id": "McDKmbncoJc",
+        "url": "https://www.youtube.com/watch?v=McDKmbncoJc",
+        "title": "Quinn XCII - Tourist",
+        "duration": 189,
+        "thumbnail": "https://i.ytimg.com/vi/McDKmbncoJc/default.jpg",
+        "thumbnail_brightness": null,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "Quality",
+                    "id": "quality",
+                    "index": 152,
+                    "timestamp": 1506177507
+                }
+            }
+        },
+        "song_title": "Tourist",
+        "artist": "Quinn XCII",
+        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+        "cover": "https://i.scdn.co/image/c2fe51515e24f5e1c1298df55c7c5843c9a8951b",
+        "album": "The Story of Us",
+        "spotify_data": {
+            "id": "1gnYyhbQVmPskm6idTMrx3",
+            "name": "Tourist",
+            "artists": [
+                {
+                    "id": "3ApUX1o6oSz321MMECyIYd",
+                    "name": "Quinn XCII",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "indie poptimism"
+                    ],
+                    "popularity": 78,
+                    "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                    "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                }
+            ],
+            "artist": "Quinn XCII",
+            "cover_url": "https://i.scdn.co/image/c2fe51515e24f5e1c1298df55c7c5843c9a8951b",
+            "duration": 188.786,
+            "album": {
+                "id": "7j7cqgeWmYH9PbKe3S5oJj",
+                "name": "The Story of Us",
+                "artists": [
+                    {
+                        "id": "3ApUX1o6oSz321MMECyIYd",
+                        "name": "Quinn XCII",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "indie poptimism"
+                        ],
+                        "popularity": 78,
+                        "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                        "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/c2fe51515e24f5e1c1298df55c7c5843c9a8951b",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/aeb10433f682b7c894287c43f1da6a29c6341fc7",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/f95cb116fc605352d0002ae38d9a796231c0e7c3",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:7j7cqgeWmYH9PbKe3S5oJj"
+            },
+            "popularity": 58,
+            "uri": "spotify:track:1gnYyhbQVmPskm6idTMrx3",
+            "query": "Quinn XCII - Tourist",
+            "certainty": 0.9473684210526315
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-MTtInVAztIw-Jakubi_-_Uptown_Lady.webm",
         "video_id": "MTtInVAztIw",
         "url": "https://www.youtube.com/watch?v=MTtInVAztIw",
@@ -16793,7 +17296,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 149,
+                    "index": 153,
                     "timestamp": 1502649769
                 }
             }
@@ -16919,14 +17422,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 150,
+                    "index": 154,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Used to Love U",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
+        "artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
         "cover": "https://i.scdn.co/image/3f891b7b0a3a46beaff1fd66dd31de7b0bd8ae95",
         "album": "Get Lifted",
         "spotify_data": {
@@ -17053,14 +17556,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 151,
+                    "index": 155,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Wake Up",
         "artist": "EDEN",
-        "artist_image": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+        "artist_image": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
         "cover": "https://i.scdn.co/image/92ea26aae1129bd60dc1d4f0313087dc06ee1509",
         "album": "End Credits",
         "spotify_data": {
@@ -17173,14 +17676,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 152,
+                    "index": 156,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Wake Up This Day",
         "artist": "Tom Misch & Jordan Rakei",
-        "artist_image": "https://i.scdn.co/image/7f4e62de4cd6b9220d2f39dbe4893c62e3aeda42",
+        "artist_image": "https://i.scdn.co/image/e84854c24ffd0a032bf84b6b04e28dc8942155a4",
         "cover": "https://i.scdn.co/image/18135ba644f8b8a624e8d33247db906c457e62ef",
         "album": "Beat Tape 2",
         "spotify_data": {
@@ -17332,7 +17835,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 153,
+                    "index": 157,
                     "timestamp": 1502649769
                 }
             }
@@ -17455,6 +17958,131 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-c6Zi3693hJU-Quinn_XCII_-_Walls_Lyrics.NA",
+        "video_id": "c6Zi3693hJU",
+        "url": "https://www.youtube.com/watch?v=c6Zi3693hJU",
+        "title": "Quinn XCII - Walls Lyrics",
+        "duration": 180,
+        "thumbnail": "https://i.ytimg.com/vi/c6Zi3693hJU/default.jpg",
+        "thumbnail_brightness": null,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "Quality",
+                    "id": "quality",
+                    "index": 158,
+                    "timestamp": 1506177507
+                }
+            }
+        },
+        "song_title": "Walls",
+        "artist": "Quinn XCII",
+        "artist_image": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+        "cover": "https://i.scdn.co/image/c2fe51515e24f5e1c1298df55c7c5843c9a8951b",
+        "album": "The Story of Us",
+        "spotify_data": {
+            "id": "4d5aAIEtXySFDFxNuYbbZv",
+            "name": "Walls",
+            "artists": [
+                {
+                    "id": "3ApUX1o6oSz321MMECyIYd",
+                    "name": "Quinn XCII",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "indie poptimism"
+                    ],
+                    "popularity": 78,
+                    "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                    "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                }
+            ],
+            "artist": "Quinn XCII",
+            "cover_url": "https://i.scdn.co/image/c2fe51515e24f5e1c1298df55c7c5843c9a8951b",
+            "duration": 179.306,
+            "album": {
+                "id": "7j7cqgeWmYH9PbKe3S5oJj",
+                "name": "The Story of Us",
+                "artists": [
+                    {
+                        "id": "3ApUX1o6oSz321MMECyIYd",
+                        "name": "Quinn XCII",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "indie poptimism"
+                        ],
+                        "popularity": 78,
+                        "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                        "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/c2fe51515e24f5e1c1298df55c7c5843c9a8951b",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/aeb10433f682b7c894287c43f1da6a29c6341fc7",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/f95cb116fc605352d0002ae38d9a796231c0e7c3",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:7j7cqgeWmYH9PbKe3S5oJj"
+            },
+            "popularity": 56,
+            "uri": "spotify:track:4d5aAIEtXySFDFxNuYbbZv",
+            "query": "Quinn XCII - Walls",
+            "certainty": 0.9411764705882353
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache\\audio_cache\\youtube-BVvljrWpNiI-Tom_Misch_-_Wander_With_Me_feat._Carmody.webm",
         "video_id": "BVvljrWpNiI",
         "url": "https://www.youtube.com/watch?v=BVvljrWpNiI",
@@ -17470,7 +18098,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 154,
+                    "index": 159,
                     "timestamp": 1502649769
                 }
             }
@@ -17621,7 +18249,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 155,
+                    "index": 160,
                     "timestamp": 1502649769
                 }
             }
@@ -17752,7 +18380,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 156,
+                    "index": 161,
                     "timestamp": 1502649769
                 }
             }
@@ -17868,7 +18496,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 157,
+                    "index": 162,
                     "timestamp": 1502649769
                 }
             }
@@ -17988,14 +18616,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 158,
+                    "index": 163,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "What You Do to Me",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
+        "artist_image": "https://i.scdn.co/image/f481aabff6322123326ba9b8984df95d3b51c55c",
         "cover": "https://i.scdn.co/image/22248fae33b313b763220f98b7b693c328db95e7",
         "album": "DARKNESS AND LIGHT",
         "spotify_data": {
@@ -18127,14 +18755,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 159,
+                    "index": 164,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "When I Go",
         "artist": "Keaton Simons",
-        "artist_image": "https://i.scdn.co/image/4e084740665dcd5d5f01a6dd88b2f55e840aa7e7",
+        "artist_image": "https://i.scdn.co/image/565b35e8c7a8e0a54a42d351e1fb36fc6d567b5c",
         "cover": "https://i.scdn.co/image/1098395bca5c4d18d03beb561ffbea3f25cf37cf",
         "album": "When I Go",
         "spotify_data": {
@@ -18263,7 +18891,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 160,
+                    "index": 165,
                     "timestamp": 1502649769
                 }
             }
@@ -18379,14 +19007,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 161,
+                    "index": 166,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Wolves",
         "artist": "Rag'n'Bone Man & Stig Of The Dump",
-        "artist_image": "https://i.scdn.co/image/906eeb2779ed7934080a0abd09288b2ed1e42e11",
+        "artist_image": "https://i.scdn.co/image/a10fa412ee0acfdec135c16c76ed6c2c789cdbce",
         "cover": "https://i.scdn.co/image/35271e7b45e5f9d1b040f966fbfadb51667d91e7",
         "album": "Wolves",
         "spotify_data": {
@@ -18522,11 +19150,45 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 162,
+                    "index": 167,
                     "timestamp": 1502649769
                 }
             }
         }
+    },
+    {
+        "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache/audio_cache/youtube-IMvzlAl1AYA-Quinn_XCII_-_Worst_Audio.NA",
+        "video_id": "IMvzlAl1AYA",
+        "url": "https://www.youtube.com/watch?v=IMvzlAl1AYA",
+        "title": "Worst",
+        "duration": 197,
+        "thumbnail": "https://i.ytimg.com/vi/IMvzlAl1AYA/default.jpg",
+        "thumbnail_brightness": null,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/Vifn0MV.jpg",
+                    "name": "Quality",
+                    "id": "quality",
+                    "index": 168,
+                    "timestamp": 1506177507
+                }
+            }
+        },
+        "song_title": "Worst",
+        "artist": "Quinn XCII",
+        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+        "cover": "https://i.scdn.co/image/5f6a7baa574c811c9e7641da3b9c15515fdebca3",
+        "album": "The Story of Us"
     },
     {
         "version": 103,
@@ -18546,14 +19208,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 163,
+                    "index": 169,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Worst In Me",
         "artist": "Unlike Pluto",
-        "artist_image": "https://i.scdn.co/image/4bf2b263ec9e526035bf085748c4d02f3cbcca85",
+        "artist_image": "https://i.scdn.co/image/555079c2871490970246a57e90b13005c23b6a2e",
         "cover": "https://i.scdn.co/image/3d7c50c02d6a7e53fdcf389e8262238c82eec337",
         "album": "Worst In Me",
         "spotify_data": {
@@ -18681,14 +19343,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 164,
+                    "index": 170,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Worthy",
         "artist": "Jacob Banks",
-        "artist_image": "https://i.scdn.co/image/f1277b4e1e66eb846d535a8b14b6f5d2b9fa1d58",
+        "artist_image": "https://i.scdn.co/image/1946200cc6b901a557a7062545528fc0aa1b4ad8",
         "cover": "https://i.scdn.co/image/efac482a13a2da38111ca140d447981601200547",
         "album": "The Monologue",
         "spotify_data": {
@@ -18805,14 +19467,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 165,
+                    "index": 171,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Wounds",
         "artist": "Quinn XCII",
-        "artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+        "artist_image": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
         "cover": "https://i.scdn.co/image/d600fd067c1ff68055982a9aa5fe77f702b19b68",
         "album": "Change of Scenery",
         "spotify_data": {
@@ -18925,14 +19587,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 166,
+                    "index": 172,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Wrong Crowd",
         "artist": "Tom Odell",
-        "artist_image": "https://i.scdn.co/image/3a6b3b1cccbd9b15be2833bc6fd5ea9a15a1d721",
+        "artist_image": "https://i.scdn.co/image/6bb962ff261600995762e2c11c27230ec7e2c626",
         "cover": "https://i.scdn.co/image/a14764dbb2612600b1d634c400dce0a21ec711da",
         "album": "Wrong Crowd (Deluxe)",
         "spotify_data": {
@@ -19063,14 +19725,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 167,
+                    "index": 173,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Wrong Or Right",
         "artist": "Kwabs",
-        "artist_image": "https://i.scdn.co/image/4e2ba402aea9c19f9ced4abb6afe6d1df6296599",
+        "artist_image": "https://i.scdn.co/image/168afa8e706651dfe96ed269b0ddb87e2712b53f",
         "cover": "https://i.scdn.co/image/488632a546b008aa2c75489c01c64ca62ae26a20",
         "album": "Wrong Or Right EP",
         "spotify_data": {
@@ -19201,14 +19863,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 168,
+                    "index": 174,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "Your Love",
         "artist": "Tom Misch & Alexa Harley",
-        "artist_image": "https://i.scdn.co/image/7f4e62de4cd6b9220d2f39dbe4893c62e3aeda42",
+        "artist_image": "https://i.scdn.co/image/e84854c24ffd0a032bf84b6b04e28dc8942155a4",
         "cover": "https://i.scdn.co/image/18135ba644f8b8a624e8d33247db906c457e62ef",
         "album": "Beat Tape 2",
         "spotify_data": {
@@ -19250,7 +19912,7 @@
                     "name": "Alexa Harley",
                     "images": [],
                     "genres": [],
-                    "popularity": 44,
+                    "popularity": 45,
                     "uri": "spotify:artist:7vgZqCNS2Nah7tlpo7ZjC4",
                     "href": "https://open.spotify.com/artist/7vgZqCNS2Nah7tlpo7ZjC4"
                 }
@@ -19336,7 +19998,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 169,
+                    "index": 175,
                     "timestamp": 1502649769
                 }
             }
@@ -19360,7 +20022,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 170,
+                    "index": 176,
                     "timestamp": 1502649769
                 }
             }
@@ -19384,7 +20046,7 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 171,
+                    "index": 177,
                     "timestamp": 1502649769
                 }
             }
@@ -19408,14 +20070,14 @@
                     "cover": "http://i.imgur.com/Vifn0MV.jpg",
                     "name": "Quality",
                     "id": "quality",
-                    "index": 172,
+                    "index": 178,
                     "timestamp": 1502649769
                 }
             }
         },
         "song_title": "bad_news",
         "artist": "Bastille",
-        "artist_image": "https://i.scdn.co/image/4b161fe24de1c80bce42085f409b7a4700b94c47",
+        "artist_image": "https://i.scdn.co/image/5ef307a88e5fec0a11b6de9b0c77aa36b509bcbc",
         "cover": "https://i.scdn.co/image/25b74a3c984bfe6ca80fa19637bed7e17d7229e0",
         "album": "Oblivion",
         "spotify_data": {
