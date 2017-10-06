@@ -62,6 +62,7 @@ class HumanPlayer(ConnectFourPlayer):
                     if not success:
                         await game.bot.safe_send_message(game.channel, "Can't place your stone there", expire_in=5)
                     else:
+                        await game.bot.safe_delete_message(msg)
                         break
                 else:
                     await game.bot.safe_send_message(game.channel, "Your number should be between 1 and {}".format(len(game.grid)), expire_in=5)
@@ -169,8 +170,154 @@ class VirtualGameState:
         else:
             return counted.get(player, 0)
 
+    def _count_n_diagonal_lown(self, n, player=None):
+        counted = {}
+
+        for i in range(0, len(self.grid[0])):
+            row = 0
+            column = i
+
+            streak = 0
+            streak_holder = self.grid[row][column]
+
+            # print("---")
+
+            while column >= 0 and row < len(self.grid):
+                stone = self.grid[row][column]
+
+                # print(row, column, stone)
+
+                if stone == streak_holder:
+                    streak += 1
+                else:
+                    if streak == n:
+                        counted[streak_holder] = counted.get(streak_holder, 0) + 1
+
+                    streak_holder = stone
+                    streak = 1
+
+                row += 1
+                column -= 1
+
+            if streak == n:
+                counted[streak_holder] = counted.get(streak_holder, 0) + 1
+
+        # print("top column", counted)
+
+        for i in range(1, len(self.grid)):
+            row = i
+            column = len(self.grid[0]) - 1
+
+            streak = 0
+            streak_holder = self.grid[row][column]
+
+            # print("---")
+
+            while column >= 0 and row < len(self.grid):
+                stone = self.grid[row][column]
+
+                # print(row, column, stone)
+
+                if stone == streak_holder:
+                    streak += 1
+                else:
+                    # print(">", streak_holder, streak)
+                    if streak == n:
+                        counted[streak_holder] = counted.get(streak_holder, 0) + 1
+
+                    streak_holder = stone
+                    streak = 1
+
+                row += 1
+                column -= 1
+
+            # print(streak_holder, streak)
+            if streak == n:
+                counted[streak_holder] = counted.get(streak_holder, 0) + 1
+
+        # print("right row", counted)
+
+        if player is None:
+            counted.pop(0, 0)
+            return sum(counted.values())
+        else:
+            return counted.get(player, 0)
+
+    def _count_n_diagonal_rown(self, n, player=None):
+        counted = {}
+
+        for i in range(0, len(self.grid[0])):
+            row = i
+            column = 0
+
+            streak = 0
+            streak_holder = self.grid[column][row]
+
+            # print("---")
+
+            while column < len(self.grid) and row < len(self.grid[0]):
+                stone = self.grid[column][row]
+
+                # print(row, column, stone)
+
+                if stone == streak_holder:
+                    streak += 1
+                else:
+                    if streak == n:
+                        counted[streak_holder] = counted.get(streak_holder, 0) + 1
+
+                    streak_holder = stone
+                    streak = 1
+
+                row += 1
+                column += 1
+
+            if streak == n:
+                counted[streak_holder] = counted.get(streak_holder, 0) + 1
+
+        # print("top column", counted)
+
+        for i in range(1, len(self.grid)):
+            row = 0
+            column = i
+
+            streak = 0
+            streak_holder = self.grid[column][row]
+
+            # print("---")
+
+            while column < len(self.grid) and row < len(self.grid[0]):
+                stone = self.grid[column][row]
+
+                # print(row, column, stone)
+
+                if stone == streak_holder:
+                    streak += 1
+                else:
+                    # print(">", streak_holder, streak)
+                    if streak == n:
+                        counted[streak_holder] = counted.get(streak_holder, 0) + 1
+
+                    streak_holder = stone
+                    streak = 1
+
+                row += 1
+                column += 1
+
+            # print(streak_holder, streak)
+            if streak == n:
+                counted[streak_holder] = counted.get(streak_holder, 0) + 1
+
+        # print("left row", counted)
+
+        if player is None:
+            counted.pop(0, 0)
+            return sum(counted.values())
+        else:
+            return counted.get(player, 0)
+
     def count_n(self, n, player=None):
-        return self._count_n_horizontal(n, player=player) + self._count_n_vertical(n, player=player)
+        return self._count_n_horizontal(n, player=player) + self._count_n_vertical(n, player=player) + self._count_n_diagonal_lown(n, player=player) + self._count_n_diagonal_rown(n, player=player)
 
     def is_gameover(self):
         if not self.get_available_moves():
@@ -258,7 +405,7 @@ class AIPlayer(ConnectFourPlayer):
     async def play(self, game):
         game_state = VirtualGameState.from_game_grid(game.grid, self)
 
-        column = self.minimax(game_state)
+        column = self.minimax(game_state)[0]
 
         game.log("bot placing at {}".format(column))
         game.place_stone(self, column)
@@ -383,69 +530,17 @@ class GameConnectFour:
         return lines
 
     def check_win(self):
-        def check_horizontal(game):
-            for i in range(game.size[1]):
-                current_player = None
-                current_amount = 0
+        player1 = self.players[0]
+        player2 = self.players[1]
 
-                for column in game.grid:
-                    stone = column[i]
+        virtual_game = VirtualGameState.from_game_grid(self.grid, player1)
 
-                    if not stone.is_empty:
-                        if not current_player:
-                            current_player = stone.player
-                            current_amount = 1
-                        elif stone.player == current_player:
-                            current_amount += 1
+        if virtual_game.count_n(4, player=1):
+            return player1
+        elif virtual_game.count_n(4, player=2):
+            return player2
 
-                            if current_amount >= game.win_amount:
-                                game.log("{} wins horizontally".format(current_player.name))
-                                return current_player
-                        else:
-                            current_amount = 0
-                            current_player = None
-
-            return None
-
-        def check_vertical(game):
-            for column in game.grid:
-                current_player = None
-                current_amount = 0
-
-                for stone in column:
-                    if not stone.is_empty:
-                        if not current_player:
-                            current_player = stone.player
-                            current_amount = 1
-                        elif stone.player == current_player:
-                            current_amount += 1
-
-                            if current_amount >= game.win_amount:
-                                game.log("{} wins vertically".format(current_player.name))
-                                return current_player
-                        else:
-                            current_amount = 0
-                            current_player = None
-
-            return None
-
-        def check_diagonal(game):
-            for i in range(len(game.grid) - game.win_amount):
-                for j in range(game.size[1] - game.win_amount):
-                    first_stone = game.grid[i][j]
-                    if first_stone.is_empty:
-                        continue
-
-                    current_player = first_stone.player
-
-                    for k in range(1, game.win_amount - 1):
-                        if game.grid[i + k][j + k].player != current_player:
-                            break
-                    else:
-                        game.log("{} wins diagonally".format(current_player.name))
-                        return current_player
-
-        return check_horizontal(self) or check_vertical(self) or check_diagonal(self)
+        return None
 
     def check_end(self):
         for column in self.grid:
@@ -529,21 +624,21 @@ class GameConnectFour:
         return True
 
 
-if __name__ == "__main__":
-    grid = [
-        [0, 0, 0, 0, 0, 0, 1, 2],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0]
-    ]
-
-    print("startig")
-
-    board = VirtualGameState(grid, 1, 0)
-
-    print(AIPlayer(None, 5).minimax(board))
-
-    # print(board.count_n(3))
+# if __name__ == "__main__":
+#     grid = [
+#         [0, 1, 0, 0, 0, 0, 1, 2],
+#         [0, 0, 0, 0, 0, 0, 1, 0],
+#         [0, 0, 0, 0, 0, 1, 0, 0],
+#         [0, 0, 0, 0, 1, 0, 0, 2],
+#         [0, 0, 0, 0, 0, 1, 2, 0],
+#         [0, 0, 0, 0, 0, 2, 1, 0],
+#         [0, 0, 0, 0, 0, 0, 0, 0]
+#     ]
+#
+#     print("startig")
+#
+#     board = VirtualGameState(grid, 1, 0)
+#
+#     # print(AIPlayer(None, 5).minimax(board))
+#
+#     # print(board.count_n(3))
