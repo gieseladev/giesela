@@ -40,6 +40,7 @@ from musicbot.lib.ui import ui_utils
 from musicbot.opus_loader import load_opus_lib
 from musicbot.player import MusicPlayer
 from musicbot.random_sets import RandomSets
+from musicbot.reporting import raven_client
 from musicbot.saved_playlists import Playlists
 from musicbot.settings import Settings
 from musicbot.utils import (Response, get_related_videos, load_file, ordinal,
@@ -636,8 +637,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                     embed=response.embed
                 )
 
-        except (exceptions.CommandError, exceptions.HelpfulError,
-                exceptions.ExtractionError) as e:
+        except (exceptions.CommandError, exceptions.HelpfulError, exceptions.ExtractionError) as e:
             print("{0.__class__}: {0.message}".format(e))
 
             expirein = e.expire_in if self.config.delete_messages else None
@@ -653,6 +653,8 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             raise
 
         except Exception:
+            raven_client.captureException()
+
             traceback.print_exc()
             if self.config.debug_mode:
                 await self.safe_send_message(
