@@ -1,3 +1,4 @@
+import asyncio
 import json
 import re
 import time
@@ -10,7 +11,6 @@ import requests
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
 
-import asyncio
 from musicbot import energy
 from musicbot.config import ConfigDefaults
 from musicbot.lib.serialisable import Serialisable, WebSerialisable
@@ -109,7 +109,8 @@ class RadioSongExtractor:
                 "energybern":   RadioSongExtractor._get_current_song_energy_bern,
                 "capitalfm":    RadioSongExtractor._get_current_song_capital_fm,
                 "bbc":          RadioSongExtractor._get_current_song_bbc,
-                "radio32":      RadioSongExtractor._get_current_song_radio32
+                # "radio32":      RadioSongExtractor._get_current_song_radio32,
+                "radiobern1":   RadioSongExtractor._get_current_song_radiobern1
             }
             RadioSongExtractor._initialised = True
 
@@ -230,31 +231,49 @@ class RadioSongExtractor:
             return None
 
     def _get_current_song_radio32():
-        try:
-            resp = requests.get("http://player.radio32.ch/data/generated_content/radio32/production/playlist/playlist_onair.json")
-            data = resp.json()
-            now_playing = data["live"][0]
+        resp = requests.get("http://lggxoaexvb.cyon.link/song/current")
+        data = resp.json()
+        now_playing = data["live"][0]
 
-            start_time = parse(now_playing["playtime"]).timestamp()
+        start_time = parse(now_playing["playtime"]).timestamp()
+        duration = parse_timestamp(now_playing["duration"])
+
+        end_time = start_time + duration
+
+        if time.time() >= end_time:
+            print("[RADIO] <radio 32> \"live\" is outdated, switching to coming[0]")
+            start_time += duration
+
+            now_playing = data["coming"][0]
             duration = parse_timestamp(now_playing["duration"])
 
-            end_time = start_time + duration
+        return {
+            "title": now_playing["title"],
+            "artist": now_playing["interpret"].replace(",", " & "),
+            "cover": now_playing["imageFullURL"],
+            "youtube": "http://www.radio32.ch/",
+            "duration": duration,
+            "progress": time.time() - start_time
+        }
 
-            if time.time() >= end_time:
-                print("[RADIO] <radio 32> \"live\" is outdated, switching to coming[0]")
-                start_time += duration
+    def _get_current_song_radiobern1():
+        resp = requests.get("http://player.radiobern1.ch/data/generated_content/bern1/production/playlist/playlist_live.json")
 
-                now_playing = data["coming"][0]
-                duration = parse_timestamp(now_playing["duration"])
+        data = resp.json()
+        np = data["live"]
 
-            return {
-                "title": now_playing["title"],
-                "artist": now_playing["interpret"].replace(",", " & "),
-                "cover": now_playing["imageFullURL"],
-                "youtube": "http://www.radio32.ch/",
-                "duration": duration,
-                "progress": time.time() - start_time
-            }
-        except:
-            raise
-            return None
+        title = np["title"]
+        artist = np["interpret"]
+        cover = np["imageURL"]
+
+        duration = parse_timestamp(np["duration"])
+        progress = time.time() - parse(np["playtime"]).timestamp()
+
+        return {
+            "title": title,
+            "artist": artist,
+            "cover": cover,
+            "youtube": "http://www.radiobern1.ch/",
+            "duration": duration,
+            "progress": progress
+        }
