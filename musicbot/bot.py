@@ -220,8 +220,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 sub_entry = entry.current_sub_entry
                 sub_title = sub_entry["name"]
                 sub_index = sub_entry["index"] + 1
-                newmsg = "Now playing **{0}** ({1}{2} entry) from \"{3}\"".format(
-                    sub_title, sub_index, ordinal(sub_index), entry.whole_title)
+                newmsg = "Now playing **{0}** ({1}{2} entry) from \"{3}\"".format(sub_title, sub_index, ordinal(sub_index), entry.whole_title)
             elif isinstance(entry, RadioSongEntry):
                 newmsg = "Now playing **{}**".format(
                     " - ".join((entry.artist, entry.title)))
