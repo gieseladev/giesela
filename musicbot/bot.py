@@ -1,3 +1,4 @@
+import asyncio
 import inspect
 import logging
 import os
@@ -19,7 +20,6 @@ from discord.object import Object
 from discord.utils import find
 from discord.voice_client import VoiceClient
 
-import asyncio
 from musicbot import downloader, exceptions
 from musicbot.commands.admin_commands import AdminCommands
 from musicbot.commands.fun_commands import FunCommands
@@ -48,6 +48,21 @@ from musicbot.web_author import WebAuthor
 from musicbot.web_socket_server import GieselaServer
 
 load_opus_lib()
+
+log = logging.getLogger("Giesela")
+
+stream_handler = logging.StreamHandler()
+stream_handler.setLevel(logging.WARNING)
+stream_handler.setFormatter(logging.Formatter("{time} - <name> [{levelname}] {message}", style="{"))
+
+file_handler = logging.FileHandler("logs.txt")
+file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(logging.Formatter("{asctime} - <{name}> [{levelname}] {message}", style="{"))
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    handlers=[stream_handler, file_handler]
+)
 
 
 class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, PlayerCommands, PlaylistCommands, QueueCommands, ToolCommands):
@@ -759,6 +774,5 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
 
 if __name__ == "__main__":
-    logging.getLogger("asyncio").setLevel(logging.WARNING)
     bot = MusicBot()
     bot.run()
