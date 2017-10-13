@@ -1,7 +1,6 @@
+import configparser
 import json
 import pickle
-
-import configparser
 
 
 def encode_setting(value):
@@ -56,6 +55,7 @@ class Config:
 
         self.config = configparser.ConfigParser(interpolation=None)
         self.config.read(config_file, encoding="utf-8")
+
         self.auth = (self._token,)
 
     def get_all_options(self):
