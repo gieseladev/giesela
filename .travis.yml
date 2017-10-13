@@ -3,10 +3,9 @@ python:
   - "3.6-dev"
   - "3.7-dev" 
 install:
-  - sudo add-apt-repository ppa:mc3man/xerus-media -y
-  - sudo apt-get install git ffmpeg libopus-dev libffi-dev libsodium-dev python3-pip -y
   - sudo apt-get install build-essential unzip -y
   - sudo apt-get install software-properties-common -y
+  - sudo apt-get install git ffmpeg libopus-dev libffi-dev libsodium-dev python3-pip -y
   - pip install -r requirements.txt
 script:
   - python ./run.py
