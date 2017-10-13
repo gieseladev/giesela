@@ -20,7 +20,7 @@ from discord.object import Object
 from discord.utils import find
 from discord.voice_client import VoiceClient
 
-from musicbot import downloader, exceptions
+from musicbot import downloader, exceptions, localization
 from musicbot.commands.admin_commands import AdminCommands
 from musicbot.commands.fun_commands import FunCommands
 from musicbot.commands.info_commands import InfoCommands
@@ -220,12 +220,16 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 sub_entry = entry.current_sub_entry
                 sub_title = sub_entry["name"]
                 sub_index = sub_entry["index"] + 1
-                newmsg = "Now playing *****REMOVED***0***REMOVED***** (***REMOVED***1***REMOVED******REMOVED***2***REMOVED*** entry) from \"***REMOVED***3***REMOVED***\"".format(sub_title, sub_index, ordinal(sub_index), entry.whole_title)
+                newmsg = localization.format(player.voice_client.server, "player.now_playing.timestamp_entry",
+                                             sub_entry=sub_title,
+                                             index=sub_index,
+                                             ordinal=ordinal(sub_index),
+                                             title=entry.whole_title
+                                             )
             elif isinstance(entry, RadioSongEntry):
-                newmsg = "Now playing *****REMOVED******REMOVED*****".format(
-                    " - ".join((entry.artist, entry.title)))
+                newmsg = localization.format(player.voice_client.server, "player.now_playing.generic", title="***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".format(entry.artist, entry.title))
             else:
-                newmsg = "Now playing *****REMOVED******REMOVED*****".format(entry.title)
+                newmsg = localization.format(player.voice_client.server, "player.now_playing.generic", title=entry.title)
 
             if self.server_specific_data[channel.server]["last_np_msg"]:
                 self.server_specific_data[channel.server][
@@ -544,7 +548,8 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                     "joinserver") and not command in self.config.private_chat_commands:
                 await self.send_message(
                     message.channel,
-                    "You cannot use this command in private messages.")
+                    localization.get(message.author, "errors.private_chat")
+                )
                 return
 
         if message.author.id in self.blacklist and message.author.id != self.config.owner_id:
