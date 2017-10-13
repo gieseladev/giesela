@@ -4,9 +4,7 @@ python:
   - "3.7-dev" 
 install:
   - sudo add-apt-repository ppa:mc3man/xerus-media -y
-  - sudo apt-get update -y
   - sudo apt-get install git ffmpeg libopus-dev libffi-dev libsodium-dev python3-pip -y
-  - sudo apt-get upgrade -y
   - sudo apt-get install build-essential unzip -y
   - sudo apt-get install software-properties-common -y
   - pip install -r requirements.txt
