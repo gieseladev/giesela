@@ -69,6 +69,12 @@ class Config:
 
         return options
 
+    def get(self, key, default=None):
+        return getattr(self, key, default)
+
+    def __contains__(self, item):
+        return item in self.config.options("Settings")
+
     def __getattr__(self, name):
         if name in dir(ConfigDefaults):
             return decode_setting(self.config.get("Settings", name, fallback=getattr(ConfigDefaults, name)))
@@ -104,6 +110,10 @@ class ConfigDefaults:
     bound_channels = set()
     owned_channels = set()
     private_chat_commands = set()
+
+    client_language = "en-gb"
+    server_languages = {}
+    user_languages = {}
 
     history_limit = 200
 
