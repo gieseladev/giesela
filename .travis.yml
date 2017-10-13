@@ -10,7 +10,6 @@ install:
   - sudo add-apt-repository ppa:chris-lea/libsodium -y
   - sudo apt-get update -y --allow-unauthenticated
   - sudo apt-get install git ffmpeg libopus-dev libffi-dev libsodium-dev -y
-  - sudo apt-get upgrade -y --allow-unauthenticated
   - pip install -r requirements.txt
 script:
   - python ./run.py
