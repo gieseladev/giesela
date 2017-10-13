@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 import json
 import math
@@ -20,7 +21,6 @@ from bs4 import BeautifulSoup
 from discord.ext.commands.bot import _get_variable
 from PIL import Image, ImageStat
 
-import asyncio
 from musicbot.config import ConfigDefaults, static_config
 from musicbot.constants import DISCORD_MSG_CHAR_LIMIT
 
