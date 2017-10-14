@@ -1,7 +1,6 @@
+import configparser
 import json
 import pickle
-
-import configparser
 
 
 def encode_setting(value):
@@ -56,6 +55,7 @@ class Config:
 
         self.config = configparser.ConfigParser(interpolation=None)
         self.config.read(config_file, encoding="utf-8")
+
         self.auth = (self._token,)
 
     def get_all_options(self):
@@ -68,6 +68,12 @@ class Config:
                 options.append((option, beautify_value(custom_value)))
 
         return options
+
+    def get(self, key, default=None):
+        return getattr(self, key, default)
+
+    def __contains__(self, item):
+        return item in self.config.options("Settings")
 
     def __getattr__(self, name):
         if name in dir(ConfigDefaults):
@@ -104,6 +110,10 @@ class ConfigDefaults:
     bound_channels = set()
     owned_channels = set()
     private_chat_commands = set()
+
+    client_language = "en-gb"
+    server_languages = {}
+    user_languages = {}
 
     history_limit = 200
 

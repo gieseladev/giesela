@@ -61,6 +61,16 @@
       "thumbnails": ["generic", "switzerland"]
     },
     {
+      "id": "radiobern1",
+      "name": "Radio Bern1",
+      "aliases": ["bern1", "bern"],
+      "language": "ch",
+      "cover": "https://i.imgur.com/0PepcdB.png",
+      "website": "http://www.radiobern1.ch/",
+      "url": "http://radio.nello.tv/radiobern164k",
+      "thumbnails": ["generic", "switzerland"]
+    },
+    {
       "id": "radio32",
       "name": "Radio 32",
       "aliases": ["32"],
