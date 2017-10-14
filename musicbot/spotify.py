@@ -262,7 +262,7 @@ class SpotifyTrack:
 
     @classmethod
     def from_url(cls, url):
-        match = re.search(r"open.spotify.com\/track\/(\w{22})", url)
+        match = re.search(r"open\.spotify\.com\/track\/(\w{22})", url)
 
         if not match:
             raise UrlError("<url> can't be parsed")
