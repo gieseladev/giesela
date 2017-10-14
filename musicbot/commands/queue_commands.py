@@ -493,13 +493,13 @@ class EnqueueCommands:
 
             await loading_bar.set_progress((ind + 1) / total_tracks)
 
-        await loading_bar.done()
+            await loading_bar.done()
 
-        em.set_footer(text="{} tracks loaded | {} failed".format(entries_added, entries_not_added))
-        interface_msg = await self.edit_message(interface_msg, "**Loaded playlist**", embed=em)
+            em.set_footer(text="{} tracks loaded | {} failed".format(entries_added, entries_not_added))
+            interface_msg = await self.edit_message(interface_msg, "**Loaded playlist**", embed=em)
 
-     else:
-         return Response("Couldn't find anything")
+        else:
+            return Response("Couldn't find anything")
 
 class ManipulateCommands:
 
