@@ -261,6 +261,22 @@ class SpotifyTrack:
         return spotify_track
 
     @classmethod
+    def from_url(cls, url):
+        match = re.search(r"open.spotify.com\/track\/(\w***REMOVED***22***REMOVED***)", url)
+
+        if not match:
+            raise UrlError("<url> can't be parsed")
+
+        track_id = match.group(1)
+        
+        try:
+            track = get_spotify_client().track(track_id)
+        except spotipy.client.SpotifyException:
+            raise NotFoundError("Couldn't find the track")
+
+        return cls.from_data(track)
+
+    @classmethod
     def from_data(cls, data, simple=False):
         album = SpotifyAlbum.from_data(data["album"])
 
