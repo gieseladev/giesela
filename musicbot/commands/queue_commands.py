@@ -458,11 +458,13 @@ class EnqueueCommands:
         model = spotify.model_from_url(url)
   
         if isinstance(model, spotify.SpotifyTrack):
+            track = model
         
-            em = Embed(title=model.name, description=model.album, colour=0x1DB954, url=model.uri)
-            em.set_thumbnail(url=model.cover_url)
+            em = Embed(title=track.name, description=track.album.name, colour=random.randint(0, 0xFFFFFF))
+            em.set_thumbnail(url=track.cover_url)
             em.set_author(name=track.artist_string, icon_url=track.artists[0].image)
-        
+            em.set_footer(text=track.duration)
+            
             await self.safe_send_message(channel, embed=em)
         
             entry = await model.get_spotify_entry(player.queue, author=author, channel=channel)
@@ -471,7 +473,7 @@ class EnqueueCommands:
         elif isinstance(model, spotify.SpotifyPlaylist):
             playlist = model
   	    
-            em = Embed(title=playlist.name, description=playlist.description, colour=0x1DB954, url=playlist.href)
+            em = Embed(title=playlist.name, description=playlist.description, colour=random.randint(0, 0xFFFFFF), url=playlist.href)
             em.set_thumbnail(url=playlist.cover)
             em.set_author(name=playlist.author)
             em.set_footer(text="{} tracks".format(len(playlist.tracks)))
