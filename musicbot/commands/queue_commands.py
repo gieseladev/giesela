@@ -1,6 +1,8 @@
 import functools
 import time
 import traceback
+import random
+
 from random import choice, shuffle
 
 from discord import Embed
@@ -454,41 +456,54 @@ class EnqueueCommands:
         ///|Sidenote
         This command will be expanded to support more Spoity functions
         """
+     
+        model = spotify.model_from_url(url)
+  
+        if isinstance(model, spotify.SpotifyTrack):
+            track = model
+        
+            em = Embed(title=track.name, description=track.album.name, colour=random.randint(0, 0xFFFFFF))
+            em.set_thumbnail(url=track.cover_url)
+            em.set_author(name=track.artist_string, icon_url=track.artists[0].image)
+            em.set_footer(text=format_time(track.duration))
+            
+            await self.safe_send_message(channel, embed=em)
+        
+            entry = await model.get_spotify_entry(player.queue, author=author, channel=channel)
+            player.queue._add_entry(entry)
+        
+        elif isinstance(model, spotify.SpotifyPlaylist):
+            playlist = model
+  	    
+            em = Embed(title=playlist.name, description=playlist.description, colour=random.randint(0, 0xFFFFFF), url=playlist.href)
+            em.set_thumbnail(url=playlist.cover)
+            em.set_author(name=playlist.author)
+            em.set_footer(text="{} tracks".format(len(playlist.tracks)))
 
-        try:
-            playlist = spotify.SpotifyPlaylist.from_url(url)
-        except spotify.UrlError:
-            return Response("This isn't a valid link")
-        except spotify.NotFoundError:
-            return Response("Couldn't find the playlist")
+            interface_msg = await self.safe_send_message(channel, "**Loading playlist**", embed=em)
 
-        em = Embed(title=playlist.name, description=playlist.description, colour=0x1DB954, url=playlist.href)
-        em.set_thumbnail(url=playlist.cover)
-        em.set_author(name=playlist.author)
-        em.set_footer(text="{} tracks".format(len(playlist.tracks)))
+            total_tracks = len(playlist.tracks)
+            entries_added = 0
+            entries_not_added = 0
 
-        interface_msg = await self.safe_send_message(channel, "**Loading playlist**", embed=em)
+            loading_bar = LoadingBar(self, channel, header="Loading Playlist", total_items=total_tracks, item_name_plural="tracks")
 
-        total_tracks = len(playlist.tracks)
-        entries_added = 0
-        entries_not_added = 0
-
-        loading_bar = LoadingBar(self, channel, header="Loading Playlist", total_items=total_tracks, item_name_plural="tracks")
-
-        async for ind, entry in playlist.get_spotify_entries_generator(player.queue, channel=channel, author=author):
-            if entry:
-                player.queue._add_entry(entry)
-                entries_added += 1
-            else:
-                entries_not_added += 1
+            async for ind, entry in playlist.get_spotify_entries_generator(player.queue, channel=channel, author=author):
+                if entry:
+                    player.queue._add_entry(entry)
+                    entries_added += 1
+                else:
+                    entries_not_added += 1
 
             await loading_bar.set_progress((ind + 1) / total_tracks)
 
-        await loading_bar.done()
+            await loading_bar.done()
 
-        em.set_footer(text="{} tracks loaded | {} failed".format(entries_added, entries_not_added))
-        interface_msg = await self.edit_message(interface_msg, "**Loaded playlist**", embed=em)
+            em.set_footer(text="{} tracks loaded | {} failed".format(entries_added, entries_not_added))
+            interface_msg = await self.edit_message(interface_msg, "**Loaded playlist**", embed=em)
 
+        else:
+            return Response("Couldn't find anything")
 
 class ManipulateCommands:
 
