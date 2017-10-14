@@ -1,6 +1,8 @@
 import functools
 import time
 import traceback
+import random
+
 from random import choice, shuffle
 
 from discord import Embed
@@ -463,7 +465,7 @@ class EnqueueCommands:
             em = Embed(title=track.name, description=track.album.name, colour=random.randint(0, 0xFFFFFF))
             em.set_thumbnail(url=track.cover_url)
             em.set_author(name=track.artist_string, icon_url=track.artists[0].image)
-            em.set_footer(text=track.duration)
+            em.set_footer(text=format_time(track.duration))
             
             await self.safe_send_message(channel, embed=em)
         
