@@ -1,3 +1,4 @@
+import asyncio
 import inspect
 import logging
 import os
@@ -19,8 +20,7 @@ from discord.object import Object
 from discord.utils import find
 from discord.voice_client import VoiceClient
 
-import asyncio
-from musicbot import downloader, exceptions
+from musicbot import downloader, exceptions, localization
 from musicbot.commands.admin_commands import AdminCommands
 from musicbot.commands.fun_commands import FunCommands
 from musicbot.commands.info_commands import InfoCommands
@@ -40,6 +40,7 @@ from musicbot.lib.ui import ui_utils
 from musicbot.opus_loader import load_opus_lib
 from musicbot.player import MusicPlayer
 from musicbot.random_sets import RandomSets
+from musicbot.reporting import raven_client
 from musicbot.saved_playlists import Playlists
 from musicbot.settings import Settings
 from musicbot.utils import (Response, get_related_videos, load_file, ordinal,
@@ -48,6 +49,21 @@ from musicbot.web_author import WebAuthor
 from musicbot.web_socket_server import GieselaServer
 
 load_opus_lib()
+
+log = logging.getLogger("Giesela")
+
+stream_handler = logging.StreamHandler()
+stream_handler.setLevel(logging.WARNING)
+stream_handler.setFormatter(logging.Formatter("***REMOVED***time***REMOVED*** - <name> [***REMOVED***levelname***REMOVED***] ***REMOVED***message***REMOVED***", style="***REMOVED***"))
+
+file_handler = logging.FileHandler("logs.txt")
+file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(logging.Formatter("***REMOVED***asctime***REMOVED*** - <***REMOVED***name***REMOVED***> [***REMOVED***levelname***REMOVED***] ***REMOVED***message***REMOVED***", style="***REMOVED***"))
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    handlers=[stream_handler, file_handler]
+)
 
 
 class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, PlayerCommands, PlaylistCommands, QueueCommands, ToolCommands):
@@ -204,13 +220,16 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 sub_entry = entry.current_sub_entry
                 sub_title = sub_entry["name"]
                 sub_index = sub_entry["index"] + 1
-                newmsg = "Now playing *****REMOVED***0***REMOVED***** (***REMOVED***1***REMOVED******REMOVED***2***REMOVED*** entry) from \"***REMOVED***3***REMOVED***\"".format(
-                    sub_title, sub_index, ordinal(sub_index), entry.whole_title)
+                newmsg = localization.format(player.voice_client.server, "player.now_playing.timestamp_entry",
+                                             sub_entry=sub_title,
+                                             index=sub_index,
+                                             ordinal=ordinal(sub_index),
+                                             title=entry.whole_title
+                                             )
             elif isinstance(entry, RadioSongEntry):
-                newmsg = "Now playing *****REMOVED******REMOVED*****".format(
-                    " - ".join((entry.artist, entry.title)))
+                newmsg = localization.format(player.voice_client.server, "player.now_playing.generic", title="***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".format(entry.artist, entry.title))
             else:
-                newmsg = "Now playing *****REMOVED******REMOVED*****".format(entry.title)
+                newmsg = localization.format(player.voice_client.server, "player.now_playing.generic", title=entry.title)
 
             if self.server_specific_data[channel.server]["last_np_msg"]:
                 self.server_specific_data[channel.server][
@@ -529,7 +548,8 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                     "joinserver") and not command in self.config.private_chat_commands:
                 await self.send_message(
                     message.channel,
-                    "You cannot use this command in private messages.")
+                    localization.get(message.author, "errors.private_chat")
+                )
                 return
 
         if message.author.id in self.blacklist and message.author.id != self.config.owner_id:
@@ -621,8 +641,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                     embed=response.embed
                 )
 
-        except (exceptions.CommandError, exceptions.HelpfulError,
-                exceptions.ExtractionError) as e:
+        except (exceptions.CommandError, exceptions.HelpfulError, exceptions.ExtractionError) as e:
             print("***REMOVED***0.__class__***REMOVED***: ***REMOVED***0.message***REMOVED***".format(e))
 
             expirein = e.expire_in if self.config.delete_messages else None
@@ -638,6 +657,8 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             raise
 
         except Exception:
+            raven_client.captureException()
+
             traceback.print_exc()
             if self.config.debug_mode:
                 await self.safe_send_message(
@@ -759,6 +780,5 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
 
 if __name__ == "__main__":
-    logging.getLogger("asyncio").setLevel(logging.WARNING)
     bot = MusicBot()
     bot.run()
