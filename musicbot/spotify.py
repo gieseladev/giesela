@@ -378,18 +378,17 @@ def get_certainty(query, song_name, artist_name):
 
 
 def model_from_url(url):
-  
   try:
     return SpotifyTrack.from_url(url)
-	except UrlError, NotFoundError:
+  except (UrlError, NotFoundError):
     pass
-  
+
   try:
     return SpotifyPlaylist.from_url(url)
-	except UrlError, NotFoundError:
+  except (UrlError, NotFoundError):
     pass
   
-    return None
+  return None
 
 if __name__ == "__main__":
     start = time.time()
