@@ -198,20 +198,20 @@ class PlayerCommands:
             secs = player.progress - parse_timestamp(timestamp)
 
         if not secs:
-            if not player.playlist.history:
+            if not player.queue.history:
                 return Response(
                     "Please provide a valid timestamp (no history to rewind into)")
             else:
                 # just replay the last entry
-                last_entry = player.playlist.history[0]
+                last_entry = player.queue.history[0]
                 player.play_entry(last_entry)
                 return
 
         if secs < 0:
-            if not player.playlist.history:
+            if not player.queue.history:
                 secs = 0
             else:
-                last_entry = player.playlist.history[0]
+                last_entry = player.queue.history[0]
                 # since secs is negative I can just add it
                 if not last_entry.set_start(last_entry.end_seconds + secs):
                     # mostly because I'm lazy

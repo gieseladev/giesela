@@ -1,8 +1,8 @@
+import asyncio
 import re
 import time
 from random import shuffle
 
-import asyncio
 from musicbot.cleverbot import CleverWrap
 from musicbot.config import ConfigDefaults
 from musicbot.games.game_2048 import Game2048
@@ -900,7 +900,7 @@ class FunCommands:
 
         to_delete = []
 
-        to_delete.append(await self.safe_send_message(channel, "Whom would you like to play against? You can **@mention** someone to challange them or you can play against Giesela by sending \"ai\" or **@mention**ing her"))
+        to_delete.append(await self.safe_send_message(channel, "Whom would you like to play against? You can **@mention** someone to challenge them or you can play against Giesela by sending \"ai\" or **@mention**ing her"))
 
         players = None
 
@@ -939,6 +939,6 @@ class FunCommands:
 
         game_done = asyncio.Future()
 
-        game = GameConnectFour.start(self, channel, game_done, players)
+        game = GameConnectFour.start(self, channel, game_done, players, ai_level=3)
 
         await game_done

@@ -84,26 +84,37 @@ def search_for_lyrics_google(query):
         "cx":   "002017775112634544492:7y5bpl2sn78",
         "q":    query
     }
-    resp = requests.get(
-        "https://www.googleapis.com/customsearch/v1", params=params)
+    resp = requests.get("https://www.googleapis.com/customsearch/v1", params=params)
     data = resp.json()
     items = data.get("items", [])
 
     for item in items:
-        display_link = item["displayLink"]
+        match = re.match(r"^(?:https?:\/\/)?(?:www\.)?([\w\-]+)\.(\w{2,})\/?$", item["displayLink"])
+
+        if match:
+            display_link = "{}.{}".format(*match.groups())
+        else:
+            print("[Lyrics] Couldn't figure out url", item["displayLink"])
+            continue
+
         if display_link in lyric_parsers:
             print("[LYRICS] Found lyrics at " + display_link)
             lyrics = None
+
             try:
                 lyrics = lyric_parsers[display_link](item["link"])
             except BaseException:
-                print("Couldn't extract lyrics from {}:\n{}".format(
-                    display_link, traceback.format_exc()))
+                print("Couldn't extract lyrics from {}:\n{}".format(item["link"], traceback.format_exc()))
+
             if lyrics:
                 lyrics["source"] = display_link
                 return lyrics
+            elif lyrics is False:
+                pass
             else:
-                print("[LYRICS] Couldn't parse these lyrics")
+                print("[Lyrics] no lyrics extracted")
+        else:
+            print("[Lyrics] No parser for url", display_link)
 
     return None
 
@@ -176,8 +187,24 @@ def _extract_lyrics_musixmatch(url):
     content = resp.text
 
     bs = BeautifulSoup(content, ConfigDefaults.html_parser)
-    lyrics_window = bs.find_all(
-        "div", {"class": "mxm-lyrics"})[0].find_all("div", {"class": "mxm-lyrics"})[0].span
+
+    if bs.find_all("div", attrs={"class": "mxm-empty-state", "data-reactid": "87"}):
+        print("[Lyrics] >Musixmatch this page doesn't have any lyrics")
+        return False
+
+    lyrics_frame = bs.find_all("div", {"class": "mxm-lyrics"})
+
+    if not lyrics_frame:
+        print("[Lyrics] >Musixmatch this isn't a lyrics page")
+        return False
+    else:
+        lyrics_window = lyrics_frame[0].find_all("div", {"class": "mxm-lyrics"})
+
+    if not lyrics_window:
+        print("[Lyrics] >Musixmatch this isn't a lyrics page")
+        return False
+    else:
+        lyrics_window = lyrics_window[0].span
 
     for garbage in bs.find_all("script"):
         garbage.clear()
@@ -259,13 +286,13 @@ def _extract_lyrics_animelyrics(url):
 
 
 lyric_parsers = {
-    "genius.com":                  _extract_lyrics_genius,
-    "www.lyricsmode.com":          _extract_lyrics_lyricsmode,
-    "www.lyrical-nonsense.com":    _extract_lyrics_lyrical_nonsense,
-    "www.musixmatch.com":          _extract_lyrics_musixmatch,
-    "www.azlyrics.com":            _extract_lyrics_azlyrics,
-    "www.animelyrics.com":         _extract_lyrics_animelyrics
+    "genius.com":           _extract_lyrics_genius,
+    "lyricsmode.com":       _extract_lyrics_lyricsmode,
+    "lyrical-nonsense.com": _extract_lyrics_lyrical_nonsense,
+    "musixmatch.com":       _extract_lyrics_musixmatch,
+    "azlyrics.com":         _extract_lyrics_azlyrics,
+    "animelyrics.com":      _extract_lyrics_animelyrics
 }
 
-# print(search_for_lyrics("Snow Fairy - Fairy Tail - English Version - Amy B"))
-# print(_extract_lyrics_animelyrics("https://www.animelyrics.com/anime/bakuon/feelalive.htm"))
+# print(search_for_lyrics_google("I Want Her Back At Home - The Vernons"))
+# print(_extract_lyrics_musixmatch("https://www.musixmatch.com/lyrics/The-Vernons-3/I-Want-Her-Back-At-Home"))
