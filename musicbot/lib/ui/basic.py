@@ -4,10 +4,14 @@ from discord import Embed
 
 import asyncio
 from musicbot import utils
-from musicbot.lib.ui import ui_utils
+
+from . import ui_utils
 
 
 class EditableEmbed:
+    """
+        Provides the base for an interface
+    """
 
     def __init__(self):
         self._interface_message = None
@@ -30,20 +34,20 @@ class EditableEmbed:
 
 
 class LoadingBar(EditableEmbed):
+    """
+        Keyword arguments:
+        header -- Embed's title
+        colour -- custom colour for the Embed
+        total_items -- display the amount of items to parse
+        show_time_left -- whether to display "time_left" (requires total_items to be set)
+        show_ipm -- whether to the amount of items per minute
+        item_name_plural -- item name put into plural form
+        show_percentage -- whether to show the current percentage
+
+        custom_embed_data -- data to pass over to the Embed
+    """
 
     def __init__(self, bot, channel, **options):
-        """
-            Keyword arguments:
-            header -- Embed's title
-            colour -- custom colour for the Embed
-            total_items -- display the amount of items to parse
-            show_time_left -- whether to display "time_left" (requires total_items to be set)
-            show_ipm -- whether to the amount of items per minute
-            item_name_plural -- item name put into plural form
-            show_percentage -- whether to show the current percentage
-
-            custom_embed_data -- data to pass over to the Embed
-        """
         self.bot = bot
         self.channel = channel
 
@@ -119,6 +123,13 @@ class LoadingBar(EditableEmbed):
 
 
 class ItemPicker(EditableEmbed):
+    """
+        Keyword arguments:
+        user -- user to respond to
+        items -- list of Embeds to use
+        item_callback -- function to call which returns an Embed
+    """
+
     emojis = ("◀", "▶", "✅", "❎")
     abort = "❎"
     select = "✅"
@@ -175,3 +186,72 @@ class ItemPicker(EditableEmbed):
                 self._current_index -= 1
             elif emoji == ItemPicker._next:
                 self._current_index += 1
+
+
+class EmbedViewer(EditableEmbed):
+    """
+        Keyword arguments:
+        user -- user to respond to
+        embeds -- list of Embeds to use
+        embed_callback -- function to call which returns an Embed based on the current index
+    """
+
+    emojis = ("◀", "▶", "❎")
+    abort = "❎"
+
+    _prev = "◀"
+    _next = "▶"
+
+    def __init__(self, bot, channel, user=None, **options):
+        super().__init__()
+
+        self.bot = bot
+        self.channel = channel
+        self.user = user
+
+        self.embeds = kwargs.get("embeds")
+        self.embed_callback = kwargs.get("embed_callback")
+
+        self._current_index = 0
+
+    @property
+    async def next_embed(self):
+        if self.embeds:
+            return self.embeds[self._current_index % len(self.embeds)]
+        elif self.embed_callback:
+            res = self.embed_callback(self._current_index)
+
+            if asyncio.iscoroutine(res):
+                res = await res
+
+            return res
+
+    async def add_reactions(self, msg):
+        for emoji in EmbedViewer.emojis:
+            await self.bot.add_reaction(msg, emoji)
+
+    async def display(self):
+        while True:
+            next_embed = await self.next_embed
+            await self.update_message(next_embed, on_new=self.add_reactions)
+
+            reaction, user = await ui_utils.wait_for_reaction_change(emoji=EmbedViewer.emojis, user=self.user, message=self._interface_message)
+
+            emoji = reaction.emoji
+
+            if emoji == EmbedViewer.abort:
+                await self.exit()
+                return None
+
+            elif emoji == EmbedViewer._prev:
+                self._current_index -= 1
+            elif emoji == EmbedViewer._next:
+                self._current_index += 1
+
+
+class VerticalEmbedViewer(EmbedViewer):
+    emojis = ("🔼", "🔽", "❎")
+    abort = "❎"
+
+    _prev = "🔼"
+    _next = "🔽"

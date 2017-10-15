@@ -8,6 +8,7 @@ from discord import Channel, Member, Server, User
 import asyncio
 from musicbot.exceptions import (BrokenEntryError, ExtractionError,
                                  OutdatedEntryError)
+from musicbot.lib.serialisable import Serialisable, WebSerialisable
 from musicbot.lyrics import search_for_lyrics
 from musicbot.radio import RadioSongExtractor, StationInfo
 from musicbot.spotify import SpotifyTrack
@@ -24,7 +25,7 @@ class Entry:
     meta_dict_keys = ("author", "playlist")
 
     @classmethod
-    def from_dict(cls, playlist, data):
+    def from_dict(cls, queue, data):
         entry_version = data.get("version", 0)
 
         if entry_version < Entry.version:
@@ -36,10 +37,13 @@ class Entry:
         entry_type = data.get("type", None)
         if not entry_type:
             raise KeyError("Data does not include a type parameter")
+
         target = globals().get(entry_type, None)
+
         if not target:
             raise TypeError("Cannot create an entry with this type")
-        return target.from_dict(playlist, data)
+
+        return target.from_dict(queue, data)
 
     @staticmethod
     def create_meta_dict(meta):
@@ -89,7 +93,7 @@ class Entry:
         return meta
 
 
-class BaseEntry:
+class BaseEntry(Serialisable, WebSerialisable):
 
     def __init__(self, queue, url, **meta):
         self.queue = queue
@@ -144,7 +148,7 @@ class BaseEntry:
         raise NotImplementedError
 
     @classmethod
-    def from_dict(cls, data, playlist):
+    def from_dict(cls, data, queue):
         raise NotImplementedError
 
     def copy(self):
@@ -225,20 +229,20 @@ class StreamEntry(BaseEntry):
         raise NotImplementedError
 
     @classmethod
-    def from_dict(cls, playlist, data):
+    def from_dict(cls, queue, data):
         if data["type"] != cls.__name__:
             raise AttributeError("This data isn't of this entry type")
 
         meta_dict = data.get("meta", None)
         if meta_dict:
-            meta = Entry.meta_from_dict(meta_dict, playlist.bot)
+            meta = Entry.meta_from_dict(meta_dict, queue.bot)
         else:
             meta = {}
 
         url = data["url"]
         title = data["title"]
 
-        return cls(playlist, url, title, **meta)
+        return cls(queue, url, title, **meta)
 
     def to_dict(self):
         meta_dict = Entry.create_meta_dict(self.meta)
@@ -316,13 +320,13 @@ class RadioStationEntry(StreamEntry):
         return self.station_data.website
 
     @classmethod
-    def from_dict(cls, playlist, data):
+    def from_dict(cls, queue, data):
         if data["type"] != cls.__name__:
             raise AttributeError("This data isn't of this entry type")
 
         meta_dict = data.get("meta", None)
         if meta_dict:
-            meta = Entry.meta_from_dict(meta_dict, playlist.bot)
+            meta = Entry.meta_from_dict(meta_dict, queue.bot)
         else:
             meta = {}
 
@@ -330,7 +334,7 @@ class RadioStationEntry(StreamEntry):
         title = data["title"]
         station_data = StationInfo.from_dict(data["station_data"])
 
-        return cls(playlist, url, title, station_data, **meta)
+        return cls(queue, url, title, station_data, **meta)
 
     def to_dict(self):
         d = super().to_dict()
@@ -501,13 +505,13 @@ class YoutubeEntry(BaseEntry):
         return secs
 
     @classmethod
-    def from_dict(cls, playlist, data):
+    def from_dict(cls, queue, data):
         if data["type"] != cls.__name__:
             raise AttributeError("This data isn't of this entry type")
 
         meta_dict = data.get("meta", None)
         if meta_dict:
-            meta = Entry.meta_from_dict(meta_dict, playlist.bot)
+            meta = Entry.meta_from_dict(meta_dict, queue.bot)
         else:
             meta = {}
 
@@ -520,7 +524,7 @@ class YoutubeEntry(BaseEntry):
         thumbnail_brightness = data.get("thumbnail_brightness")
         description = data["description"]
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, expected_filename=filename, thumbnail_brightness=thumbnail_brightness, **meta)
+        return cls(queue, video_id, url, title, duration, thumbnail, description, expected_filename=filename, thumbnail_brightness=thumbnail_brightness, **meta)
 
     def seek(self, secs):
         if not 0 <= secs < self.end_seconds:
@@ -751,13 +755,13 @@ class TimestampEntry(YoutubeEntry):
         return clean_songname(self._title)
 
     @classmethod
-    def from_dict(cls, playlist, data):
+    def from_dict(cls, queue, data):
         if data["type"] != cls.__name__:
             raise AttributeError("This data isn't of this entry type")
 
         meta_dict = data.get("meta", None)
         if meta_dict:
-            meta = Entry.meta_from_dict(meta_dict, playlist.bot)
+            meta = Entry.meta_from_dict(meta_dict, queue.bot)
         else:
             meta = {}
 
@@ -771,7 +775,7 @@ class TimestampEntry(YoutubeEntry):
         description = data["description"]
         sub_queue = data["sub_queue"]
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, sub_queue, expected_filename=filename, thumbnail_brightness=thumbnail_brightness, **meta)
+        return cls(queue, video_id, url, title, duration, thumbnail, description, sub_queue, expected_filename=filename, thumbnail_brightness=thumbnail_brightness, **meta)
 
     def to_dict(self):
         d = super().to_dict()
@@ -817,13 +821,13 @@ class GieselaEntry(YoutubeEntry):
         return self.song_title
 
     @classmethod
-    def from_dict(cls, playlist, data):
+    def from_dict(cls, queue, data):
         if data["type"] != cls.__name__:
             raise AttributeError("This data isn't of this entry type")
 
         meta_dict = data.get("meta", None)
         if meta_dict:
-            meta = Entry.meta_from_dict(meta_dict, playlist.bot)
+            meta = Entry.meta_from_dict(meta_dict, queue.bot)
         else:
             meta = {}
 
@@ -842,7 +846,7 @@ class GieselaEntry(YoutubeEntry):
         cover = data["cover"]
         album = data["album"]
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, expected_filename=filename, thumbnail_brightness=thumbnail_brightness, **meta)
+        return cls(queue, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover, expected_filename=filename, thumbnail_brightness=thumbnail_brightness, **meta)
 
     @classmethod
     def upgrade(cls, previous_entry, song_title, artist, artist_image, album, cover):
@@ -919,13 +923,13 @@ class SpotifyEntry(GieselaEntry):
         self.popularity = spotify_track.popularity / 100
 
     @classmethod
-    def from_dict(cls, playlist, data):
+    def from_dict(cls, queue, data):
         if data["type"] != cls.__name__:
             raise AttributeError("This data isn't of this entry type")
 
         meta_dict = data.get("meta", None)
         if meta_dict:
-            meta = Entry.meta_from_dict(meta_dict, playlist.bot)
+            meta = Entry.meta_from_dict(meta_dict, queue.bot)
         else:
             meta = {}
 
@@ -939,7 +943,7 @@ class SpotifyEntry(GieselaEntry):
         description = data["description"]
         spotify_data = SpotifyTrack.from_dict(data["spotify_data"])
 
-        return cls(playlist, video_id, url, title, duration, thumbnail, description, spotify_data, expected_filename=filename, thumbnail_brightness=thumbnail_brightness, **meta)
+        return cls(queue, video_id, url, title, duration, thumbnail, description, spotify_data, expected_filename=filename, thumbnail_brightness=thumbnail_brightness, **meta)
 
     def to_dict(self):
         d = super().to_dict()

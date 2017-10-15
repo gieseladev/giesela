@@ -261,6 +261,22 @@ class SpotifyTrack:
         return spotify_track
 
     @classmethod
+    def from_url(cls, url):
+        match = re.search(r"open\.spotify\.com\/track\/(\w{22})", url)
+
+        if not match:
+            raise UrlError("<url> can't be parsed")
+
+        track_id = match.group(1)
+        
+        try:
+            track = get_spotify_client().track(track_id)
+        except spotipy.client.SpotifyException:
+            raise NotFoundError("Couldn't find the track")
+
+        return cls.from_data(track)
+
+    @classmethod
     def from_data(cls, data, simple=False):
         album = SpotifyAlbum.from_data(data["album"])
 
@@ -360,6 +376,19 @@ def get_certainty(query, song_name, artist_name):
 
     return max(poss)
 
+
+def model_from_url(url):
+  try:
+    return SpotifyTrack.from_url(url)
+  except (UrlError, NotFoundError):
+    pass
+
+  try:
+    return SpotifyPlaylist.from_url(url)
+  except (UrlError, NotFoundError):
+    pass
+  
+  return None
 
 if __name__ == "__main__":
     start = time.time()
