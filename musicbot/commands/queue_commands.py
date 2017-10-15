@@ -446,15 +446,15 @@ class EnqueueCommands:
 
         # await self.safe_send_message (channel, msgState)
 
-    @command_info("4.7.0", 1503764185, ***REMOVED***
-        "5.0.0": (1508030667, "Support for direct Spotify tracks/URL")
-    ***REMOVED***)
+    @command_info("4.7.0", 1503764185)
     async def cmd_spotify(self, channel, author, player, url):
         """
         ///|Usage
         `***REMOVED***command_prefix***REMOVED***spotify [link]`
         ///|Explanation
-        Load a playlist or direct URL track from Spotify!
+        Load a playlist from Spotify
+        ///|Sidenote
+        This command will be expanded to support more Spoity functions
         """
      
         model = spotify.model_from_url(url)
