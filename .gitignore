@@ -1,5 +1,6 @@
 *.pyc
 
+data/playlists.json
 logs.txt
 config/options.ini
 data/settings.bin
