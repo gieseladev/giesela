@@ -162,30 +162,30 @@ possible_sizes = (
 )
 
 
-if __name__ == "__main__":
-    covers = [
-        "http://www.designformusic.com/wp-content/uploads/2015/10/insurgency-digital-album-cover-design.jpg",
-        "http://www.billboard.com/files/styles/900_wide/public/media/Joy-Division-Unknown-Pleasures-album-covers-billboard-1000x1000.jpg",
-        "http://www.billboard.com/files/styles/900_wide/public/media/Funkadelic-Maggot-Brain-album-covers-billboard-1000x1000.jpg",
-        "https://spark.adobe.com/images/landing/examples/design-music-album-cover.jpg",
-        "https://cdn.pastemagazine.com/www/system/images/photo_albums/album-covers/large/album4chanceacidrap.jpg?1384968217",
-        # "http://www.billboard.com/files/styles/900_wide/public/media/Green-Day-American-Idiot-album-covers-billboard-1000x1000.jpg",
-        # "http://www.billboard.com/files/styles/900_wide/public/media/The-Rolling-Stones-Sticky-Fingers-album-covers-billboard-1000x1000.jpg",
-        # "http://www.fuse.tv/image/56fe73a1e05e186b2000009b/768/512/the-boxer-rebellion-ocean-by-ocean-album-cover-full-size.jpg",
-        # "https://cdn.pastemagazine.com/www/system/images/photo_albums/albums-gallery/large/twenty-one-pilots---blurryface.png?1384968217"
-    ]
-
-    start = time.time()
-    images = grab_images(*covers)
-
-    start = time.time()
-    img = _create_stacked_collage(*images)
-    # print(time.time() - start)
-    # img.show()
-
-    image_file = BytesIO()
-    img.save(image_file, format="PNG")
-    image_file.seek(0)
-
-    cover_url = _upload_playlist_cover("stacked_collage", image_file)
-    print(cover_url)
+# if __name__ == "__main__":
+#     covers = [
+#         "http://www.designformusic.com/wp-content/uploads/2015/10/insurgency-digital-album-cover-design.jpg",
+#         "http://www.billboard.com/files/styles/900_wide/public/media/Joy-Division-Unknown-Pleasures-album-covers-billboard-1000x1000.jpg",
+#         "http://www.billboard.com/files/styles/900_wide/public/media/Funkadelic-Maggot-Brain-album-covers-billboard-1000x1000.jpg",
+#         "https://spark.adobe.com/images/landing/examples/design-music-album-cover.jpg",
+#         "https://cdn.pastemagazine.com/www/system/images/photo_albums/album-covers/large/album4chanceacidrap.jpg?1384968217",
+#         # "http://www.billboard.com/files/styles/900_wide/public/media/Green-Day-American-Idiot-album-covers-billboard-1000x1000.jpg",
+#         # "http://www.billboard.com/files/styles/900_wide/public/media/The-Rolling-Stones-Sticky-Fingers-album-covers-billboard-1000x1000.jpg",
+#         # "http://www.fuse.tv/image/56fe73a1e05e186b2000009b/768/512/the-boxer-rebellion-ocean-by-ocean-album-cover-full-size.jpg",
+#         # "https://cdn.pastemagazine.com/www/system/images/photo_albums/albums-gallery/large/twenty-one-pilots---blurryface.png?1384968217"
+#     ]
+#
+#     start = time.time()
+#     images = grab_images(*covers)
+#
+#     start = time.time()
+#     img = _create_stacked_collage(*images)
+#     # print(time.time() - start)
+#     # img.show()
+#
+#     image_file = BytesIO()
+#     img.save(image_file, format="PNG")
+#     image_file.seek(0)
+#
+#     cover_url = _upload_playlist_cover("stacked_collage", image_file)
+#     print(cover_url)

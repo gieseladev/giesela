@@ -152,6 +152,7 @@ def main():
         return
 
     import asyncio
+    from musicbot.reporting import raven_client
 
     tried_requirementstxt = False
     tryagain = True
@@ -166,16 +167,20 @@ def main():
 
         m = None
         try:
-            from musicbot import MusicBot
+            from musicbot.bot import MusicBot
+
             m = MusicBot()
             print("Connecting...", end="", flush=True)
             m.run()
 
         except SyntaxError:
+            raven_client.captureException()
             traceback.print_exc()
             break
 
         except ImportError as e:
+            raven_client.captureException()
+
             if not tried_requirementstxt:
                 tried_requirementstxt = True
 
@@ -197,6 +202,8 @@ def main():
                 break
 
         except Exception as e:
+            raven_client.captureException()
+
             if hasattr(e, "__module__") and e.__module__ == "musicbot.exceptions":
                 if e.__class__.__name__ == "HelpfulError":
                     print(e.message)
