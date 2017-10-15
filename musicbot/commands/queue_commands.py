@@ -1154,3 +1154,4 @@ class DisplayCommands:
 
 class QueueCommands(EnqueueCommands, ManipulateCommands, DisplayCommands):
     pass
+  
