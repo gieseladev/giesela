@@ -1,7 +1,6 @@
+import configparser
 import json
 import pickle
-
-import configparser
 
 
 def encode_setting(value):
@@ -56,6 +55,7 @@ class Config:
 
         self.config = configparser.ConfigParser(interpolation=None)
         self.config.read(config_file, encoding="utf-8")
+
         self.auth = (self._token,)
 
     def get_all_options(self):
@@ -68,6 +68,12 @@ class Config:
                 options.append((option, beautify_value(custom_value)))
 
         return options
+
+    def get(self, key, default=None):
+        return getattr(self, key, default)
+
+    def __contains__(self, item):
+        return item in self.config.options("Settings")
 
     def __getattr__(self, name):
         if name in dir(ConfigDefaults):
@@ -105,6 +111,10 @@ class ConfigDefaults:
     owned_channels = set()
     private_chat_commands = set()
 
+    client_language = "en-gb"
+    server_languages = ***REMOVED******REMOVED***
+    user_languages = ***REMOVED******REMOVED***
+
     history_limit = 200
 
     default_volume = 0.3
@@ -122,7 +132,8 @@ class ConfigDefaults:
     cards_file = "data/cah/cards.ini"
     question_cards = "data/cah/question_cards.ini"
     radios_file = "data/radio_stations.json"
-    playlists_file = "data/playlists.json"
+    playlists_file = "data/playlists.json"  # deprecated
+    playlists_location = "data/playlists"
     random_sets = "data/random_sets.ini"
     settings_file = "data/settings.bin"
     blacklist_file = "config/blacklist.txt"

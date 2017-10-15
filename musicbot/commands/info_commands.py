@@ -1,8 +1,8 @@
 import datetime
 import json
 import re
+import random
 from datetime import date, timedelta
-from random import choice
 from textwrap import dedent, indent
 
 import requests
@@ -11,7 +11,7 @@ from discord import Embed
 from musicbot.constants import VERSION as BOTVERSION
 from musicbot.tungsten import Tungsten
 from musicbot.utils import (Response, block_user, command_info,
-                            get_dev_changelog, get_dev_version, hex_to_dec,
+                            get_dev_version, get_version_changelog, hex_to_dec,
                             owner_only, prettydate)
 
 
@@ -88,7 +88,7 @@ class InfoCommands:
             em = Embed(
                 title="GIESELA HELP",
                 url="http://siku2.github.io/Giesela/",
-                colour=hex_to_dec("#828c51"),
+                colour=random.randint(0, 0xFFFFFF),
                 description="Here are some of the most useful commands,\nYou can always use `***REMOVED***0***REMOVED***help <cmd>` to get more detailed information on a command".
                 format(self.config.command_prefix)
             )
@@ -98,7 +98,7 @@ class InfoCommands:
                 "`***REMOVED***0***REMOVED***search` search for music",
                 "`***REMOVED***0***REMOVED***radio` listen to the best radio stations",
                 "`***REMOVED***0***REMOVED***stream` enqueue a livestream",
-                "`***REMOVED***0***REMOVED***spotfy` spotify integration",
+                "`***REMOVED***0***REMOVED***spotify` spotify integration",
                 "`***REMOVED***0***REMOVED***pause` pause playback",
                 "`***REMOVED***0***REMOVED***resume` resume playback",
                 "`***REMOVED***0***REMOVED***volume` change volume",
@@ -158,11 +158,8 @@ class InfoCommands:
 
         await self.send_typing(channel)
         msgContent = " ".join(leftover_args)
-
-        col = hex_to_dec(choice([
-            "#9400D3", "#4B0082", "#0000FF", "#00FF00", "#FFFF00", "#FF7F00",
-            "#FF0000"
-        ]))
+        
+        col = random.randint(0, 0xFFFFFF)
 
         client = Tungsten("EH8PUT-67PJ967LG8")
         res = client.query(msgContent)
@@ -219,14 +216,15 @@ class InfoCommands:
     @command_info("3.5.6", 1497819288, ***REMOVED***
         "3.6.2": (1497978696, "references are now clickable"),
         "3.7.6": (1498947694, "fixed a bug which would stop Giesela from executing the command because of underscores in the version name"),
-        "4.0.8": (1500774499, "Handling special case of already being up to date")
+        "4.0.8": (1500774499, "Handling special case of already being up to date"),
+        "4.8.9": (1504368571, "Fixed documentation")
     ***REMOVED***)
     async def cmd_version(self, channel):
         """
         ///|Usage
         `***REMOVED***command_prefix***REMOVED***version`
         ///|Explanation
-        Some more informat about the current version and what's to come.
+        Some more information about the current version and what's to come.
         """
 
         await self.send_typing(channel)
@@ -237,7 +235,7 @@ class InfoCommands:
         else:
             changelog = "**What's to come:**\n\n"
             changelog += "\n".join(
-                "● " + l for l in get_dev_changelog()
+                "● " + l for l in get_version_changelog()
             )
 
         desc = "Current Version is `***REMOVED******REMOVED***`\nDevelopment is at `***REMOVED******REMOVED***`\n\n***REMOVED******REMOVED***".format(

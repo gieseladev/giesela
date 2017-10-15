@@ -1,5 +1,6 @@
 *.pyc
 
+logs.txt
 config/options.ini
 data/settings.bin
 cache

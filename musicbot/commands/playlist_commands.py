@@ -1,3 +1,4 @@
+import functools
 import re
 import time
 from random import choice, shuffle
@@ -90,11 +91,11 @@ class PlaylistCommands:
             if savename in forbidden_savenames:
                 return Response(
                     "Can't save the queue, this name is forbidden!")
-            if len(player.playlist.entries) < 1:
+            if len(player.queue.entries) < 1:
                 return Response(
                     "Can't save the queue, there are no entries in the queue!")
 
-            if self.playlists.set_playlist(savename, [player.current_entry] + list(player.playlist.entries), savename.title(), author.id):
+            if self.playlists.set_playlist(savename, [player.current_entry] + list(player.queue.entries), savename.title(), author.id):
                 return Response("Saved the current queue...")
 
             return Response(
@@ -106,7 +107,7 @@ class PlaylistCommands:
                     "Can't load this playlist, there's no playlist with this name.")
 
             playlist = self.playlists.get_playlist(
-                savename, player.playlist, channel=channel)
+                savename, player.queue, channel=channel)
             clone_entries = playlist["entries"]
             broken_entries = playlist["broken_entries"]
 
@@ -123,7 +124,7 @@ class PlaylistCommands:
                     return Response("There's nothing in `***REMOVED******REMOVED***` to play".format(playlist["name"]))
 
             if load_mode == "replace":
-                player.playlist.clear()
+                player.queue.clear()
                 if player.current_entry is not None:
                     player.skip()
 
@@ -166,7 +167,7 @@ class PlaylistCommands:
                     key=sort_modes[sort_mode][0],
                     reverse=sort_modes[sort_mode][1])
 
-            player.playlist.add_entries(clone_entries)
+            player.queue.add_entries(clone_entries)
             self.playlists.bump_replay_count(savename)
 
             if not broken_entries:
@@ -189,15 +190,14 @@ class PlaylistCommands:
                     "Can't delete this playlist, there's no playlist with this name.")
 
             self.playlists.remove_playlist(savename)
-            return Response(
-                "****REMOVED******REMOVED**** has been deleted".format(playlist["name"]))
+            return Response("****REMOVED******REMOVED**** has been deleted".format(playlist["name"]))
 
         elif argument == "clone":
             if savename not in self.playlists.playlists.keys():
                 return Response(
                     "Can't clone this playlist, there's no playlist with this name.")
             clone_playlist = self.playlists.get_playlist(
-                savename, player.playlist)
+                savename, player.queue)
             clone_entries = clone_playlist["entries"]
             extend_existing = False
 
@@ -236,7 +236,7 @@ class PlaylistCommands:
             if extend_existing:
                 self.playlists.edit_playlist(
                     additional_args[0].lower(),
-                    player.playlist,
+                    player.queue,
                     new_entries=clone_entries)
             else:
                 self.playlists.set_playlist(additional_args[0].lower(), clone_entries, additional_args[0].title(), author.id)
@@ -259,20 +259,20 @@ class PlaylistCommands:
             sort_modes = ***REMOVED***
                 "alphabetical": (lambda playlist: playlist, False),
                 "entries": (
-                    lambda playlist: len(self.playlists.get_playlist(playlist, player.playlist)["entries"]),
+                    lambda playlist: len(self.playlists.get_playlist(playlist, player.queue)["entries"]),
                     True
                 ),
                 "author": (
-                    lambda playlist: self.playlists.get_playlist(playlist, player.playlist)["author"].name,
+                    lambda playlist: self.playlists.get_playlist(playlist, player.queue)["author"].name,
                     False
                 ),
                 "random": None,
                 "playtime": (
-                    lambda playlist: sum([x.duration for x in self.playlists.get_playlist(playlist, player.playlist)["entries"]]),
+                    lambda playlist: sum([x.duration for x in self.playlists.get_playlist(playlist, player.queue)["entries"]]),
                     True
                 ),
                 "replays": (
-                    lambda playlist: self.playlists.get_playlist(playlist, player.playlist)["replay_count"],
+                    lambda playlist: self.playlists.get_playlist(playlist, player.queue)["replay_count"],
                     True
                 )
             ***REMOVED***
@@ -290,7 +290,7 @@ class PlaylistCommands:
                     reverse=sort_modes[sort_mode][1])
 
             for pl in sorted_saved_playlists:
-                infos = self.playlists.get_playlist(pl, player.playlist)
+                infos = self.playlists.get_playlist(pl, player.queue)
                 response_text += "◦ *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** entr***REMOVED******REMOVED***)\n".format(
                     infos["name"],
                     len(infos["entries"]),
@@ -319,7 +319,7 @@ class PlaylistCommands:
 
         elif argument in self.playlists.playlists.keys():
             infos = self.playlists.get_playlist(argument.lower(),
-                                                player.playlist)
+                                                player.queue)
             entries = infos["entries"]
 
             desc_text = "***REMOVED******REMOVED***\n\n***REMOVED******REMOVED*** entr***REMOVED******REMOVED*** (***REMOVED******REMOVED*** broken)\n***REMOVED******REMOVED*** long".format(
@@ -397,9 +397,9 @@ class PlaylistCommands:
             removed_entries = []
 
             if fix:
-                entry_generator = fix_generator(player.playlist, *urls)
+                entry_generator = fix_generator(player.queue, *urls)
             else:
-                entry_generator = player.playlist.get_entries_from_urls_gen(*urls, **meta)
+                entry_generator = player.queue.get_entries_from_urls_gen(*urls, **meta)
 
             total_entries = len(urls)
             progress_message = await self.safe_send_message(channel, "***REMOVED******REMOVED***\n***REMOVED******REMOVED*** [0%]".format(message.format(entries_left=total_entries), create_bar(0, length=20)))
@@ -490,7 +490,7 @@ class PlaylistCommands:
             "`abort`"
         ])
 
-        playlist = self.playlists.get_playlist(_savename, player.playlist)
+        playlist = self.playlists.get_playlist(_savename, player.queue)
         interface_message = None
 
         if playlist.get("broken_entries"):
@@ -509,7 +509,7 @@ class PlaylistCommands:
             else:
                 broken_entry = broken_entries[0]
                 info = await self.safe_send_message(channel, "*****REMOVED******REMOVED***** is broken, please wait while I fix it for ya.".format(broken_entry["title"]))
-                new_entry = await fix_entry(player.playlist, broken_entry)
+                new_entry = await fix_entry(player.queue, broken_entry)
                 if not new_entry:
                     await self.safe_send_message(channel, "Couldn't safe *****REMOVED******REMOVED*****".format(broken_entry["title"]))
                 else:
@@ -579,7 +579,7 @@ class PlaylistCommands:
                     query = " ".join(arguments)
                     try:
                         start_time = time.time()
-                        entry = await player.playlist.get_entry_from_query(query, author=author)
+                        entry = await player.queue.get_entry_from_query(query, author=author)
                         if isinstance(entry, list):
                             entries, _ = await _get_entries_from_urls(entry, "Parsing ***REMOVED***entries_left***REMOVED*** entries", author=author)
                         else:
@@ -651,7 +651,7 @@ class PlaylistCommands:
 
                 query = " ".join(arguments)
                 results = self.playlists.search_entries_in_playlist(
-                    player.playlist, playlist, query, certainty_threshold=.55)
+                    player.queue, playlist, query, certainty_threshold=.55)
 
                 if not results:
                     msg = await self.safe_send_message(channel, "**Didn't find anything**")
@@ -798,14 +798,17 @@ class PlaylistCommands:
             else:
                 c_log = "No changes were made"
 
-            self.playlists.edit_playlist(
+            partial = functools.partial(
+                self.playlists.edit_playlist,
                 savename,
-                player.playlist,
+                player.queue,
                 all_entries=playlist["entries"],
                 new_name=pl_changes["new_name"],
                 new_description=pl_changes["new_desc"],
                 new_cover=pl_changes["new_cover"]
             )
+
+            await self.loop.run_in_executor(None, partial)
             print("Closed the playlist builder and saved the playlist")
 
             return Response("Successfully saved *****REMOVED******REMOVED*****\n\n***REMOVED******REMOVED***".format(
@@ -830,7 +833,7 @@ class PlaylistCommands:
 
             args = ***REMOVED***
                 "title":                fields["title"],
-                "queue":                player.playlist,
+                "queue":                player.queue,
                 "video_id":             fields["_video_id"],
                 "url":                  fields["url"],
                 "duration":             fields["_duration"],
@@ -1011,7 +1014,7 @@ class PlaylistCommands:
                             error = "You can't set timestamps like this"
                         elif property_target == "url":
                             try:
-                                info = await player.playlist.get_ytdl_data(rest)
+                                info = await player.queue.get_ytdl_data(rest)
                             except (ExtractionError, WrongEntryTypeError) as e:
                                 error = "Something went wrong:\n" + str(e)
                                 continue
@@ -1118,7 +1121,7 @@ class PlaylistCommands:
 
         if query:
             try:
-                add_entry = await player.playlist.get_entry_from_query(query, channel=channel, author=author)
+                add_entry = await player.queue.get_entry_from_query(query, channel=channel, author=author)
             except ExtractionError as e:
                 return Response("```\n***REMOVED******REMOVED***```".format(e))
 
@@ -1133,7 +1136,7 @@ class PlaylistCommands:
                 current_timestamp = add_entry.current_sub_entry["name"]
                 # this looks ugly but eh, it works
                 try:
-                    add_entry = await player.playlist.get_entry_from_query(current_timestamp, channel=channel, author=author)
+                    add_entry = await player.queue.get_entry_from_query(current_timestamp, channel=channel, author=author)
                 except:
                     pass  # just go ahead and add the whole thing, what do I care :3
 
@@ -1150,7 +1153,7 @@ class PlaylistCommands:
                                                                                    add_entry.title))
 
         res = self.playlists.in_playlist(
-            player.playlist, playlistname, add_entry)
+            player.queue, playlistname, add_entry)
         if res:
             notification = await self.safe_send_message(
                 channel,
@@ -1169,7 +1172,7 @@ class PlaylistCommands:
                 return Response("Didn't add *****REMOVED******REMOVED***** to `***REMOVED******REMOVED***`".format(add_entry.title, playlistname.title()))
 
         self.playlists.edit_playlist(
-            playlistname, player.playlist, new_entries=[add_entry])
+            playlistname, player.queue, new_entries=[add_entry])
         player._current_entry.meta["playlist"] = ***REMOVED***
             "name": playlistname
         ***REMOVED***
@@ -1198,7 +1201,7 @@ class PlaylistCommands:
         if not playlistname:
             if "playlist" in player.current_entry.meta:
                 playlist_id = player.current_entry.meta["playlist"]["id"]
-                self.playlists.edit_playlist(playlist_id, player.playlist, remove_entries=[player.current_entry, ])
+                self.playlists.edit_playlist(playlist_id, player.queue, remove_entries=[player.current_entry, ])
                 return Response("Removed *****REMOVED******REMOVED***** from playlist `***REMOVED******REMOVED***`".format(player.current_entry.title, player.current_entry.meta["playlist"]["name"]))
             else:
                 return Response("Please specify the playlist's name!")
@@ -1212,7 +1215,7 @@ class PlaylistCommands:
 
         playlist_data = self.playlists.get_playlist(playlist_id, queue, False)
 
-        self.playlists.edit_playlist(playlist_id, player.playlist, remove_entries=[remove_entry])
+        self.playlists.edit_playlist(playlist_id, player.queue, remove_entries=[remove_entry])
         player._current_entry.meta.pop("playlist", None)
         return Response("Removed *****REMOVED******REMOVED***** from playlist `***REMOVED******REMOVED***`.".format(remove_entry.title, playlist_data["name"]))
 
@@ -1256,7 +1259,7 @@ class PlaylistCommands:
                 return Response("This entry's already passed")
 
             if playlistname:
-                self.playlists.edit_playlist(playlistname, player.playlist, edit_entries=[(entry, new_entry)])
+                self.playlists.edit_playlist(playlistname, player.queue, edit_entries=[(entry, new_entry)])
                 return Response("Successfully edited *****REMOVED******REMOVED***** from `***REMOVED******REMOVED***`".format(new_entry.title, playlistname.replace("_", " ").title()))
             else:
                 return Response("Saved changes to current entry.")

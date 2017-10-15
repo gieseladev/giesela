@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 import json
 import math
@@ -20,7 +21,6 @@ from bs4 import BeautifulSoup
 from discord.ext.commands.bot import _get_variable
 from PIL import Image, ImageStat
 
-import asyncio
 from musicbot.config import ConfigDefaults, static_config
 from musicbot.constants import DISCORD_MSG_CHAR_LIMIT
 
@@ -671,9 +671,9 @@ def get_dev_version():
         page.content.decode("utf-8"))
 
     if matches is None:
-        return matches
+        return None
 
-    return matches.groups((1, 2))
+    return matches.groups()
 
 
 def get_master_version():
@@ -685,17 +685,16 @@ def get_master_version():
         page.content.decode("utf-8"))
 
     if matches is None:
-        return matches
+        return None
 
-    return matches.groups((1, 2))
+    return matches.groups()
 
 
-def get_dev_changelog():
+def get_version_changelog(version_code=None):
     base_url = "https://siku2.github.io/Giesela/changelogs/changelog-"
-    dev_version = re.sub(r"\D", "", get_dev_version()[0])
+    v_code = re.sub(r"\D", "", version_code or get_dev_version()[0])
 
-    resp = requests.get(
-        base_url + dev_version)
+    resp = requests.get(base_url + v_code)
 
     if not resp.ok:
         return ["Changelog not yet available"]
@@ -704,11 +703,16 @@ def get_dev_changelog():
 
     bs = BeautifulSoup(changelog_page, ConfigDefaults.html_parser)
     html_to_markdown = [
-        (r"<\/?li>", "\t"), (r"<\/?ul>", ""),
-        (r"<code.+?>(.+?)<\/code>", r"`\1`"),
-        (r"<strong>(.+?)<\/strong>", r"**\1**"),
-        (r"<a\shref=\"(.+?)\">(.+?)<\/a>", r"[`\2`](\1)"),
-        (r"\n\W+\n", "\n")
+        (r"<\/?li>", "\t"),  # indent list elements
+        (r"<\/?ul>", ""),  # remove their wrapper
+
+        # HTML tag to Markdown
+        (r"<code.+?>(.+?)<\/code>", r"`\1`"),  # code
+        (r"<strong>(.+?)<\/strong>", r"**\1**"),  # bold
+        (r"<a\shref=\"(.+?)\">(.+?)<\/a>", r"[`\2`](\1)"),  # links
+        # that's all
+
+        (r"\n\W+\n", "\n")  # remove useless stuff between new lines
     ]
 
     changes = []
