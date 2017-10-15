@@ -447,7 +447,7 @@ class EnqueueCommands:
         # await self.safe_send_message (channel, msgState)
 
     @command_info("4.7.0", 1503764185, {
-        "5.0.0": (1508030667, "Support for direct Spotify tracks/URL")
+        "4.9.7": (1508067836, "Support for direct Spotify tracks/URL")
     })
     async def cmd_spotify(self, channel, author, player, url):
         """
