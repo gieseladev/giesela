@@ -182,7 +182,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 while not voice_client:
                     # create a new voice client in the selected channel (if given) or go to the home channel
                     with suppress(discord.errors.ConnectionClosed):
-                        voice_client = await self.join_voice_channel(voice_default or self.find_home_channel(server))
+                        voice_client = await self.join_voice_channel(channel=voice_default or self.find_home_channel(server))
 
                 player = MusicPlayer(self, voice_client) \
                     .on("play", self.on_player_play) \
