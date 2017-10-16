@@ -267,7 +267,7 @@ class MusicPlayer(EventEmitter):
         self.queue.push_history(entry)
 
         if self.is_repeatAll or (self.is_repeatSingle and not self.skipRepeat):
-            self.queue.add_entry(entry, position=0)
+            self.queue._add_entry(entry, placement=0)
         self.skipRepeat = False
 
         if self._current_player:
