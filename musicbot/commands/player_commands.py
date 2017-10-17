@@ -45,7 +45,9 @@ class PlayerCommands:
         else:
             return Response("Hard to unpause something that's not paused, amirite?")
     
-    @command_info("4.9.9", 1508219263)    
+    @command_info("4.9.9", 1508219263, {
+        "4.9.9": (1508224340, "Fixed stop logic to avoid total kill on player")
+    })    
     async def cmd_stop(self, player):
         """
         ///|Usage
@@ -54,7 +56,8 @@ class PlayerCommands:
         Stops the player completely and removes all entries from the queue.
         """
 
-        player.kill()
+        player.queue.clear()
+        player.stop()
 
     @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command"),
