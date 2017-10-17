@@ -1,5 +1,7 @@
 *.pyc
 
+data/playlists.json
+data/websocket_token.json	
 logs.txt
 config/options.ini
 data/settings.bin
