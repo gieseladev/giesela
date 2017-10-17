@@ -751,7 +751,9 @@ class ManipulateCommands:
 
         return Response(reply_text.format(btext, time_until))
 
-    @command_info("4.5.5", 1502073539)
+    @command_info("4.5.5", 1502073539, {
+        "4.9.9": (1508224474, "Fixed the move command description")
+    })
     async def cmd_move(self, player, from_index, to_index):
         """
         ///|Usage
