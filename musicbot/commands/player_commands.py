@@ -56,7 +56,8 @@ class PlayerCommands:
         Stops the player completely and removes all entries from the queue.
         """
 
-        player.kill()
+        player.queue.clear()
+        player.stop()
 
     @command_info("1.0.0", 1477180800, ***REMOVED***
         "3.5.2": (1497712233, "Updated documentaion for this command"),
