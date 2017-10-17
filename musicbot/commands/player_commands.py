@@ -8,19 +8,21 @@ class PlayerCommands:
 
     @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command"),
-        "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite")
+        "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite"),
+        "4.9.9": (1508219627, "Pause can unpause as well just because")
     })
     async def cmd_pause(self, player):
         """
         ///|Usage
         `{command_prefix}pause`
         ///|Explanation
-        Pause playback of the current song.
+        Pause playback of the current song. If the player is paused, it will unpause.
         """
 
         if player.is_playing:
             player.pause()
-
+        elif player.is_paused:
+            player.resume()
         else:
             return Response("Cannot pause what is not playing")
 
@@ -42,6 +44,17 @@ class PlayerCommands:
 
         else:
             return Response("Hard to unpause something that's not paused, amirite?")
+    
+    @command_info("4.9.9", 1508219263)    
+    async def cmd_stop(self, player):
+        """
+        ///|Usage
+        `{command_prefix}stop`
+        ///|Explanation
+        Stops the player completely and removes all entries from the queue.
+        """
+
+        player.kill()
 
     @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command"),
