@@ -757,7 +757,8 @@ class ManipulateCommands:
         ///|Usage
         `***REMOVED***command_prefix***REMOVED***move <from index> <to index>`
         ///|Explanation
-        Split a timestamp-entry into its sub-entries.
+        Moves an entry from a given position. 
+        For example, `***REMOVED***command_prefix***REMOVED***move 22 2` will move entry 22 in the queue to position 2 in the queue.
         """
 
         if from_index.isnumeric():
