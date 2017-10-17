@@ -109,7 +109,7 @@ class ConfigDefaults:
     command_prefix = "!"
     bound_channels = set()
     owned_channels = set()
-    default_voice = None
+    default_voice = set()
     private_chat_commands = set()
 
     client_language = "en-gb"
