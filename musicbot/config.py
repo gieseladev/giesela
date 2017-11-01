@@ -110,6 +110,7 @@ class ConfigDefaults:
     bound_channels = set()
     owned_channels = set()
     private_chat_commands = set()
+    idle_game = ""
 
     client_language = "en-gb"
     server_languages = {}
