@@ -297,7 +297,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 player = discord.utils.get(self.players.values(), is_playing=True)
                 entry = player.current_entry
                 
-            else: 
+            elif activeplayers == 0: 
                 game = discord.Game(type=0, name=self.config.idle_game)
                 entry = None
 
