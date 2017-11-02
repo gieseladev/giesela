@@ -296,6 +296,10 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             elif activeplayers == 1:
                 player = discord.utils.get(self.players.values(), is_playing=True)
                 entry = player.current_entry
+                
+            elif activeplayers == 0: 
+                game = discord.Game(type=0, name=self.config.idle_game)
+                entry = None
 
         if entry:
             prefix = "\u275A\u275A" if is_paused else ""
