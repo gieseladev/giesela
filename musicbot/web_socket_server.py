@@ -1,3 +1,4 @@
+import asyncio
 import atexit
 import hashlib
 import inspect
@@ -9,7 +10,6 @@ from json.decoder import JSONDecodeError
 from random import choice
 from string import ascii_lowercase
 
-import asyncio
 from musicbot.config import static_config
 from musicbot.entry import TimestampEntry
 from musicbot.radio import RadioStations
@@ -290,6 +290,13 @@ class GieselaWebSocket(WebSocket):
                     success = True
                 else:
                     success = False
+
+            elif command == "play_entry":
+                kind = command_data.get("kind")  # entry, playlist
+                url = command_data.get("url")
+                play_mode = command_data.get("mode", "queue")  # now, next, queue, random
+
+                self.log("playing {} with url \"{}\" with mode {}".format(kind, url, play_mode))
 
             answer["success"] = bool(success)
 

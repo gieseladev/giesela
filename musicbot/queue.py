@@ -1,3 +1,4 @@
+import asyncio
 import copy
 import datetime
 import random
@@ -6,9 +7,6 @@ import traceback
 from collections import deque
 from itertools import islice
 
-from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
-
-import asyncio
 from musicbot.discogs import get_entry as get_discogs_track
 from musicbot.entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry,
                             SpotifyEntry, StreamEntry, TimestampEntry,
@@ -19,6 +17,7 @@ from musicbot.spotify import get_spotify_track
 from musicbot.utils import clean_songname, get_header, get_video_sub_queue
 from musicbot.VGMdb import get_entry as get_vgm_track
 from musicbot.web_socket_server import GieselaServer
+from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
 
 class Queue(EventEmitter):
@@ -228,6 +227,8 @@ class Queue(EventEmitter):
             except (ExtractionError, WrongEntryTypeError) as e:
                 print("Error while dealing with url \"{}\":\n{}".format(url, e))
                 yield ind, None
+                continue
+
             yield ind, entry
 
     async def get_ytdl_data(self, song_url):
