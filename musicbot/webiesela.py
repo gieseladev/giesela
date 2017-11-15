@@ -12,8 +12,9 @@ from string import ascii_lowercase
 
 from musicbot.config import static_config
 from musicbot.entry import TimestampEntry
+from musicbot.lib.simple_websocket_server import (SimpleWebSocketServer,
+                                                  WebSocket)
 from musicbot.radio import RadioStations
-from musicbot.simple_web_socket_server import SimpleWebSocketServer, WebSocket
 from musicbot.web_author import WebAuthor
 
 
@@ -330,11 +331,10 @@ class GieselaWebSocket(WebSocket):
             self.address, author))
 
 
-class GieselaServer:
-    clients = []
-    authenticated_clients = []
-    server = None
+class Server:
     bot = None
+    clients = []
+    server = None
     _tokens = {}  # token: (server_id, author)
     awaiting_registration = {}
 
