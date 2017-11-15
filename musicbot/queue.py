@@ -16,7 +16,6 @@ from musicbot.lib.event_emitter import EventEmitter
 from musicbot.spotify import get_spotify_track
 from musicbot.utils import clean_songname, get_header, get_video_sub_queue
 from musicbot.VGMdb import get_entry as get_vgm_track
-from musicbot.web_socket_server import GieselaServer
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
 
@@ -43,11 +42,9 @@ class Queue(EventEmitter):
 
     def shuffle(self):
         random.shuffle(self.entries)
-        GieselaServer.send_player_information(self.player.voice_client.server.id)
 
     def clear(self):
         self.entries.clear()
-        GieselaServer.send_player_information(self.player.voice_client.server.id)
 
     def move(self, from_index, to_index):
         if not (0 <= from_index < len(self.entries) and 0 <= to_index < len(self.entries)):
@@ -63,8 +60,6 @@ class Queue(EventEmitter):
         if self.peek() is move_entry:
             move_entry.get_ready_future()
 
-        GieselaServer.send_player_information(self.player.voice_client.server.id)
-
         return move_entry
 
     def replay(self, index=0, revert=False):
@@ -78,8 +73,6 @@ class Queue(EventEmitter):
 
             if revert and self.player.current_entry:
                 self.player.skip()
-            else:
-                GieselaServer.send_player_information(self.player.voice_client.server.id)
 
             return True
 
@@ -91,8 +84,6 @@ class Queue(EventEmitter):
         entry.meta["finish_time"] = time.time()
         q = self.bot.config.history_limit - 1
         self.history = [entry, *self.history[:q]]
-
-        GieselaServer.send_player_information(self.player.voice_client.server.id)
 
     async def add_stream_entry(self, stream_url, **meta):
         info = {"title": stream_url, "extractor": None}
@@ -153,7 +144,6 @@ class Queue(EventEmitter):
                 self.player.handle_manually = True
 
             self.player.play_entry(entry)
-            GieselaServer.send_player_information(self.player.voice_client.server.id)
         else:
             self._add_entry(entry)
 
@@ -347,7 +337,6 @@ class Queue(EventEmitter):
         for entry in entries:
             self._add_entry(entry, more_to_come=True)
 
-        GieselaServer.send_player_information(self.player.voice_client.server.id)
         self.emit("entry-added", queue=self, entry=entry)
 
     def _add_entry(self, entry, placement=None, more_to_come=False):
@@ -366,7 +355,6 @@ class Queue(EventEmitter):
             entry.get_ready_future()
 
         if not more_to_come:
-            GieselaServer.send_player_information(self.player.voice_client.server.id)
             self.emit("entry-added", queue=self, entry=entry)
 
     def promote_position(self, position):
@@ -382,8 +370,6 @@ class Queue(EventEmitter):
 
         entry.get_ready_future()
 
-        GieselaServer.send_player_information(self.player.voice_client.server.id)
-
         return entry
 
     def promote_last(self):
@@ -391,8 +377,6 @@ class Queue(EventEmitter):
         self.entries.appendleft(entry)
         self.emit("entry-added", queue=self, entry=entry)
         entry.get_ready_future()
-
-        GieselaServer.send_player_information(self.player.voice_client.server.id)
 
         return entry
 
@@ -405,8 +389,6 @@ class Queue(EventEmitter):
 
         self.emit("entry-removed", queue=self, entry=entry)
         self.entries.rotate(position)
-
-        GieselaServer.send_player_information(self.player.voice_client.server.id)
 
         return entry
 

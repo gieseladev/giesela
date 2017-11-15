@@ -1,22 +1,21 @@
+import asyncio
+import audioop
 import os
 import subprocess
 import sys
 import traceback
 from array import array
 from collections import deque
+from enum import Enum
 from shutil import get_terminal_size
 from threading import Thread
 
-import asyncio
-import audioop
-from enum import Enum
 from musicbot.config import static_config
 from musicbot.entry import RadioSongEntry, StreamEntry, TimestampEntry
 from musicbot.exceptions import FFmpegError, FFmpegWarning
 from musicbot.lib.event_emitter import EventEmitter
 from musicbot.queue import Queue
 from musicbot.utils import create_cmd_params, format_time_ffmpeg
-from musicbot.web_socket_server import GieselaServer
 
 
 class PatchedBuff:
@@ -149,8 +148,6 @@ class MusicPlayer(EventEmitter):
         if self._current_player:
             self._current_player.buff.volume = value
 
-        GieselaServer.send_small_update(self.voice_client.server.id, volume=value)
-
     def on_entry_added(self, queue, entry):
         if self.is_stopped:
             self.loop.call_later(2, self.play)
@@ -171,7 +168,6 @@ class MusicPlayer(EventEmitter):
             # no idea how that should happen but eh...
             return False
 
-        GieselaServer.send_small_update(self.voice_client.server.id, repeat_state=self.repeatState.value, repeat_state_name=str(self.repeatState))
         return True
 
     def stop(self):

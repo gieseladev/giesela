@@ -1,14 +1,13 @@
+import asyncio
 import re
 from datetime import date
 
 import requests
 from discord import Embed
-from moviepy import editor, video
 
-import asyncio
+from moviepy import editor, video
 from musicbot.nine_gag import ContentType, get_post
 from musicbot.utils import Response, block_user, command_info, owner_only
-from musicbot.web_socket_server import GieselaServer
 
 
 class MiscCommands:
@@ -78,10 +77,10 @@ class MiscCommands:
         Use this command in order to use the [Giesela-Website](http://giesela.org).
         """
 
-        if GieselaServer.register_information(server.id, author.id, token.lower()):
-            return Response("You've successfully registered yourself. Go back to your browser and check it out")
-        else:
-            return Response("Something went wrong while registering. It could be that your code `{}` is wrong. Please make sure that you've entered it correctly.".format(token.upper()))
+        # if GieselaServer.register_information(server.id, author.id, token.lower()):
+        #     return Response("You've successfully registered yourself. Go back to your browser and check it out")
+        # else:
+        #     return Response("Something went wrong while registering. It could be that your code `{}` is wrong. Please make sure that you've entered it correctly.".format(token.upper()))
 
     @command_info("3.5.7", 1497823283, {
         "3.8.9": (1499645741, "`Giesenesis` rewrite was here")

@@ -22,6 +22,8 @@ class Server:
         cls.manager = Manager(self)
         cls.socket_server = websockets.serve(cls.handle_connection)
 
+        log.info("starting server!")
+
         await cls.socket_server
 
     @classmethod
@@ -33,7 +35,8 @@ class Server:
 
         await cls.manager.on_connect(connection)
 
-        await ws.recv()
+        while True:
+            msg = await ws.recv()
 
     @classmethod
     async def shutdown(cls):

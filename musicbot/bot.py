@@ -46,11 +46,10 @@ from musicbot.settings import Settings
 from musicbot.utils import (Response, get_related_videos, load_file, ordinal,
                             paginate)
 from musicbot.web_author import WebAuthor
-from musicbot.web_socket_server import GieselaServer
 
 load_opus_lib()
 
-log = logging.getLogger("Giesela")
+log = logging.getLogger(__name__)
 
 stream_handler = logging.StreamHandler()
 stream_handler.setLevel(logging.WARNING)
@@ -196,8 +195,6 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         return self.players[server.id]
 
     async def on_player_play(self, player, entry):
-        GieselaServer.send_player_information(
-            player.voice_client.server.id)
         await self.update_now_playing(entry)
 
         channel = entry.meta.get("channel", None)
@@ -242,24 +239,14 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
     async def on_player_resume(self, player, entry, **_):
         await self.update_now_playing(entry)
-        GieselaServer.send_small_update(
-            player.voice_client.server.id, state=player.state.value, state_name=str(player.state), progress=player.progress)
 
     async def on_player_pause(self, player, entry, **_):
         await self.update_now_playing(entry, True)
-        GieselaServer.send_small_update(
-            player.voice_client.server.id, state=player.state.value, state_name=str(player.state), progress=player.progress)
 
     async def on_player_stop(self, player, **_):
         await self.update_now_playing()
-        # GieselaServer.send_player_information(
-        #     player.voice_client.server.id)
 
     async def on_player_finished_playing(self, player, **_):
-        if not player.queue.entries and not player.current_entry:
-            GieselaServer.send_player_information(
-                player.voice_client.server.id)
-
         if not player.queue.entries and not player.current_entry and self.use_autoplaylist:
             while True:
                 if player.queue.history and isinstance(player.queue.history[0], YoutubeEntry):
@@ -296,8 +283,8 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             elif activeplayers == 1:
                 player = discord.utils.get(self.players.values(), is_playing=True)
                 entry = player.current_entry
-                
-            elif activeplayers == 0: 
+
+            elif activeplayers == 0:
                 game = discord.Game(type=0, name=self.config.idle_game)
                 entry = None
 
@@ -501,7 +488,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         print("Ready to go!")
 
         if self.config.open_websocket:
-            GieselaServer.run(self)
+            print("should run server now but I won't, k?")
 
     async def on_message(self, message):
         await self.wait_until_ready()

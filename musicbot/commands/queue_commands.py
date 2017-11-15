@@ -1,13 +1,12 @@
+import asyncio
 import functools
+import random
 import time
 import traceback
-import random
-
 from random import choice, shuffle
 
 from discord import Embed
 
-import asyncio
 from musicbot import exceptions, spotify
 from musicbot.entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                             StreamEntry, TimestampEntry, YoutubeEntry)
@@ -17,7 +16,6 @@ from musicbot.utils import (Response, block_user, clean_songname, command_info,
                             create_bar, format_time, get_related_videos,
                             hex_to_dec, nice_cut, ordinal, owner_only,
                             to_timestamp)
-from musicbot.web_socket_server import GieselaServer
 
 
 class EnqueueCommands:
@@ -456,25 +454,25 @@ class EnqueueCommands:
         ///|Explanation
         Load a playlist or direct URL track from Spotify!
         """
-     
+
         model = spotify.model_from_url(url)
-  
+
         if isinstance(model, spotify.SpotifyTrack):
             track = model
-        
+
             em = Embed(title=track.name, description=track.album.name, colour=random.randint(0, 0xFFFFFF))
             em.set_thumbnail(url=track.cover_url)
             em.set_author(name=track.artist_string, icon_url=track.artists[0].image)
             em.set_footer(text=format_time(track.duration))
-            
+
             await self.safe_send_message(channel, embed=em)
-        
+
             entry = await model.get_spotify_entry(player.queue, author=author, channel=channel)
             player.queue._add_entry(entry)
-        
+
         elif isinstance(model, spotify.SpotifyPlaylist):
             playlist = model
-  	    
+
             em = Embed(title=playlist.name, description=playlist.description, colour=random.randint(0, 0xFFFFFF), url=playlist.href)
             em.set_thumbnail(url=playlist.cover)
             em.set_author(name=playlist.author)
@@ -504,6 +502,7 @@ class EnqueueCommands:
 
         else:
             return Response("Couldn't find anything")
+
 
 class ManipulateCommands:
 
@@ -542,7 +541,6 @@ class ManipulateCommands:
             for i in range(end_index, start_index - 1, -1):
                 del player.queue.entries[i]
 
-            GieselaServer.send_player_information_update(server.id)
             return Response(
                 "Removed {} entries from the queue".format(
                     end_index - start_index + 1)
@@ -556,7 +554,6 @@ class ManipulateCommands:
 
             video = player.queue.entries[index].title
             del player.queue.entries[index]
-            GieselaServer.send_player_information_update(server.id)
             return Response("Removed **{0}** from the queue".format(video))
 
         except:
@@ -571,7 +568,6 @@ class ManipulateCommands:
                     print("Found {0} and will remove it".format(
                         leftover_args[0]))
                     await self.cmd_remove(player, message, channel, author, [iteration])
-                    GieselaServer.send_player_information_update(server.id)
                     return
                 iteration += 1
 
@@ -759,7 +755,7 @@ class ManipulateCommands:
         ///|Usage
         `{command_prefix}move <from index> <to index>`
         ///|Explanation
-        Moves an entry from a given position. 
+        Moves an entry from a given position.
         For example, `{command_prefix}move 22 2` will move entry 22 in the queue to position 2 in the queue.
         """
 
@@ -1157,4 +1153,3 @@ class DisplayCommands:
 
 class QueueCommands(EnqueueCommands, ManipulateCommands, DisplayCommands):
     pass
-  
