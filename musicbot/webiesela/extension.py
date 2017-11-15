@@ -4,12 +4,16 @@ from functools import wraps
 log = logging.getLogger(__name__)
 
 
-def command(match, ):
+def command(match):
     def decorator(func):
 
         @wraps(func)
         async def wrapper(self, *args, **kwargs):
             pass
+
+        return wrapper
+
+    return decorator
 
 
 class ExtensionMount(type):
@@ -21,15 +25,15 @@ class ExtensionMount(type):
         else:
             # otherwise add it
             cls.extensions.append(cls)
-            log.debug("loaded extension {}".format(cls))
+            log.debug("registered extension \"{}\"".format(name))
 
 
 class Extension(metaclass=ExtensionMount):
-    def __init__(self):
+    def __init__(self, server):
         # TODO do stuff?
-        await self.init()
+        pass
 
-    async def init():
+    async def on_load(self):
         pass
 
     async def on_connect(self, connection):

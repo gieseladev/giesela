@@ -1,6 +1,20 @@
+import logging
+
+import websockets
+
+log = logging.getLogger(__name__)
+
+
 class Connection:
     def __init__(self, websocket):
-        self.ws = ws
+        self.websocket = websocket
 
-    async def send():
-        pass
+    def __str__(self):
+        return "<{}>".format(self.websocket.remote_address)
+
+    async def send(self, msg):
+        try:
+            await self.websocket.send(msg)
+            log.debug("sent {} to {}".format(msg, self))
+        except websockets.exceptions.ConnectionClosed:
+            return False

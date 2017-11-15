@@ -1,4 +1,8 @@
+import logging
+
 from ..extension import Extension, command
+
+log = logging.getLogger(__name__)
 
 
 class Player(Extension):

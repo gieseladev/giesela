@@ -46,23 +46,11 @@ from musicbot.settings import Settings
 from musicbot.utils import (Response, get_related_videos, load_file, ordinal,
                             paginate)
 from musicbot.web_author import WebAuthor
+from musicbot.webiesela import server as webiesela
 
 load_opus_lib()
 
 log = logging.getLogger(__name__)
-
-stream_handler = logging.StreamHandler()
-stream_handler.setLevel(logging.WARNING)
-stream_handler.setFormatter(logging.Formatter("{time} - <name> [{levelname}] {message}", style="{"))
-
-file_handler = logging.FileHandler("logs.txt")
-file_handler.setLevel(logging.DEBUG)
-file_handler.setFormatter(logging.Formatter("{asctime} - <{name}> [{levelname}] {message}", style="{"))
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    handlers=[stream_handler, file_handler]
-)
 
 
 class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, PlayerCommands, PlaylistCommands, QueueCommands, ToolCommands):
@@ -488,7 +476,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         print("Ready to go!")
 
         if self.config.open_websocket:
-            print("should run server now but I won't, k?")
+            await webiesela.Server.serve(self)
 
     async def on_message(self, message):
         await self.wait_until_ready()

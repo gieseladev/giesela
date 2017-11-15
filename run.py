@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import gc
+import logging
 import os
 import subprocess
 import sys
@@ -167,6 +168,16 @@ def main():
 
         m = None
         try:
+            log = logging.getLogger("musicbot")
+            log.setLevel(logging.DEBUG)
+
+            stream_handler = logging.StreamHandler()
+            stream_handler.setLevel(logging.DEBUG)
+            stream_handler.setFormatter(logging.Formatter("{asctime} <{name}> [{levelname}] {message}", style="{"))
+
+            log.addHandler(stream_handler)
+            logging.getLogger("websockets.server").addHandler(stream_handler)
+
             from musicbot.bot import MusicBot
 
             m = MusicBot()

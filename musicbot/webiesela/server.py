@@ -3,8 +3,8 @@ import logging
 
 import websockets
 
-from musicbot.webiesela.connection import Connection
-from musicbot.webiesela.manager import Manager
+from .connection import Connection
+from .manager import Manager
 
 log = logging.getLogger(__name__)
 
@@ -19,8 +19,10 @@ class Server:
     @classmethod
     async def serve(cls, bot):
         cls.bot = bot
-        cls.manager = Manager(self)
-        cls.socket_server = websockets.serve(cls.handle_connection)
+        cls.manager = Manager(cls)
+        await cls.manager.load_extentions()
+
+        cls.socket_server = websockets.serve(cls.handle_connection, host="", port=8000)
 
         log.info("starting server!")
 
@@ -29,14 +31,19 @@ class Server:
     @classmethod
     async def handle_connection(cls, ws, path):
         connection = Connection(ws)
-        log.info("{} connected".format(connection))
 
         cls.connections.append(connection)
 
         await cls.manager.on_connect(connection)
 
         while True:
-            msg = await ws.recv()
+            try:
+                msg = await ws.recv()
+            except websockets.exceptions.ConnectionClosed:
+                await cls.manager.on_disconnect(connection)
+                return
+
+            await cls.manager.on_raw_message(connection, msg)
 
     @classmethod
     async def shutdown(cls):
