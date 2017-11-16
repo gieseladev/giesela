@@ -143,5 +143,11 @@ class ConfigDefaults:
     name_list = "data/names.txt"
     lyrics_cache = "cache/lyrics"
 
+    # WEBIESELA
+    token_lifespan = 2 * 30 * 24 * 60 * 60  # 2 months
+    max_expired_tokens = 300
+    tokens_file = "data/webiesela_tokens.json"
+    expired_tokens_file = "cache/expired_tokens.txt"
+
 
 static_config = Config(ConfigDefaults.options_file)

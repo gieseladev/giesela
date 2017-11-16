@@ -6,7 +6,7 @@ log = logging.getLogger(__name__)
 
 
 class Player(Extension):
-    async def init(self):
+    async def on_load(self):
         pass
 
     @command("volume")

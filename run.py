@@ -2,11 +2,14 @@ from __future__ import print_function
 
 import gc
 import logging
+import logging.config
 import os
 import subprocess
 import sys
 import time
 import traceback
+
+import colorlog
 
 
 class GIT(object):
@@ -105,6 +108,10 @@ class PIP(object):
             pass
 
 
+def setup_logging():
+    logging.config.fileConfig("config/logging.ini")
+
+
 def main():
     if not sys.version_info >= (3, 5):
         print("Python 3.5+ is required. This version is %s" %
@@ -168,15 +175,7 @@ def main():
 
         m = None
         try:
-            log = logging.getLogger("musicbot")
-            log.setLevel(logging.DEBUG)
-
-            stream_handler = logging.StreamHandler()
-            stream_handler.setLevel(logging.DEBUG)
-            stream_handler.setFormatter(logging.Formatter("{asctime} <{name}> [{levelname}] {message}", style="{"))
-
-            log.addHandler(stream_handler)
-            logging.getLogger("websockets.server").addHandler(stream_handler)
+            setup_logging()
 
             from musicbot.bot import MusicBot
 

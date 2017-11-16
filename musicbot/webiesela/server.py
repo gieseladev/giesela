@@ -1,10 +1,11 @@
 import asyncio
+import json
 import logging
 
 import websockets
 
-from .connection import Connection
 from .manager import Manager
+from .models.connection import Connection
 
 log = logging.getLogger(__name__)
 
@@ -13,8 +14,6 @@ class Server:
     bot = None
     manager = None
     socket_server = None
-
-    connections = []
 
     @classmethod
     async def serve(cls, bot):
@@ -32,16 +31,20 @@ class Server:
     async def handle_connection(cls, ws, path):
         connection = Connection(ws)
 
-        cls.connections.append(connection)
-
         await cls.manager.on_connect(connection)
 
         while True:
             try:
-                msg = await ws.recv()
+                data = await ws.recv()
             except websockets.exceptions.ConnectionClosed:
                 await cls.manager.on_disconnect(connection)
                 return
+
+            try:
+                msg = json.loads(data)
+            except json.JSONDecodeError as e:
+                await cls.manager.on_error(connection, data, e)
+                continue
 
             await cls.manager.on_raw_message(connection, msg)
 
