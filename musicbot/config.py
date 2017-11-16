@@ -145,7 +145,10 @@ class ConfigDefaults:
 
     # WEBIESELA
     token_lifespan = 2 * 30 * 24 * 60 * 60  # 2 months
+    registration_token_lifespan = 10 * 60  # 10 minutes
     max_expired_tokens = 300
+    token_length = 32
+    registration_token_length = 5
     tokens_file = "data/webiesela_tokens.json"
     expired_tokens_file = "cache/expired_tokens.txt"
 

@@ -12,11 +12,18 @@ class Connection:
         self.webiesela_user = None
 
     def __str__(self):
+        if self.registered:
+            return "<{} : {}>".format(self.webiesela_user, self.websocket.remote_address)
+
         return "<{}>".format(self.websocket.remote_address)
 
     @property
     def registered(self):
         return bool(self.webiesela_user)
+
+    @property
+    def open(self):
+        return self.websocket.open
 
     def register(self, token):
         self.token = token

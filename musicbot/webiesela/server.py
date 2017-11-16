@@ -6,6 +6,7 @@ import websockets
 
 from .manager import Manager
 from .models.connection import Connection
+from .models.webiesela_user import WebieselaUser
 
 log = logging.getLogger(__name__)
 
@@ -18,6 +19,7 @@ class Server:
     @classmethod
     async def serve(cls, bot):
         cls.bot = bot
+        WebieselaUser.bot = bot
         cls.manager = Manager(cls)
         await cls.manager.load_extentions()
 

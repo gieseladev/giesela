@@ -23,7 +23,8 @@ class Message:
         return self.connection.webiesela_user
 
     async def answer(self, data):
-        data.update({"response": True, "id": self.message_id})
+        # TODO
+        # data.update({"response": True, "id": self.message_id})
         return await self.connection.send(data)
 
 
