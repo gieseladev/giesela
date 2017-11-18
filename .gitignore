@@ -1,6 +1,7 @@
 *.pyc
 venv
 venv_run.bat
+logs
 
 data/playlists.json
 data/websocket_token.json
