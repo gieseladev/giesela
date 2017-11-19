@@ -1,3 +1,4 @@
+import asyncio
 import inspect
 import logging
 import traceback
@@ -41,25 +42,33 @@ class Manager:
 
         log.info("loaded {}/{} extensions".format(len(self.extensions), len(ext_classes)))
 
+    def emitted(self, future):
+        exc = future.exception()
+
+        if exc:
+            log.error("Exception in {}:\n{}".format(future, traceback.format_exception(None, exc, None)))
+
+    async def emit(self, event, *args, **kwargs):
+        for extension in self.extensions:
+            task = self.loop.create_task(getattr(extension, event)(*args, **kwargs))
+            task.add_done_callback(self.emitted)
+
     async def on_connect(self, connection):
         log.info("{} connected".format(connection))
         self.connections.append(connection)
 
-        for extension in self.extensions:
-            self.loop.create_task(extension.on_connect(connection))
+        await self.emit("on_connect", connection)
 
     async def on_disconnect(self, connection):
         log.info("{} disconnected".format(connection))
         self.connections.remove(connection)
 
-        for extension in self.extensions:
-            self.loop.create_task(extension.on_disconnect(connection))
+        await self.emit("on_disconnect", connection)
 
     async def on_error(self, connection, error, data):
         log.warn("{} sent {} which produced error {}".format(connection, data, type(error).__name__))
 
-        for extension in self.extensions:
-            self.loop.create_task(extension.on_error(connection, error, data))
+        await self.emit("on_error", connection, error, data)
 
     async def parse_raw_message(self, connection, msg):
         raw = msg
@@ -84,8 +93,7 @@ class Manager:
     async def on_raw_message(self, connection, msg):
         log.debug("{} sent {}".format(connection, msg))
 
-        for extension in self.extensions:
-            self.loop.create_task(extension.on_raw_message(connection, msg))
+        await self.emit("on_raw_message", connection, msg)
 
         msg = await self.parse_raw_message(connection, msg)
         await self.on_message(msg)
@@ -93,5 +101,4 @@ class Manager:
     async def on_message(self, msg):
         log.debug("handling parsed message {}".format(msg))
 
-        for extension in self.extensions:
-            self.loop.create_task(extension._on_message(msg))
+        await self.emit("_on_message", msg)

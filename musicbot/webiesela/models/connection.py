@@ -1,6 +1,9 @@
+import json
 import logging
 
 import websockets
+
+from .message import Response
 
 log = logging.getLogger(__name__)
 
@@ -29,11 +32,26 @@ class Connection:
         self.token = token
         self.webiesela_user = token.webiesela_user
 
-    async def send(self, msg):
+    async def send(self, msg, *, quiet=True):
+        if msg:
+            if not isinstance(msg, dict):
+                if isinstance(msg, Response):
+                    msg = msg.to_dict()
+                else:
+                    raise TypeError("Cannot send message of type {}".format(type(msg)))
+        else:
+            raise TypeError("Cannot send empty message...")
+
+        encoded_message = json.dumps(msg, separators=(",", ":"))
+
         try:
-            await self.websocket.send(msg)
+            await self.websocket.send(encoded_message)
             log.debug("sent {} to {}".format(msg, self))
             return True
         except websockets.exceptions.ConnectionClosed:
             log.warning("couldn't send {} to {}, already closed!".format(msg, self))
-            return False
+
+            if quiet:
+                return False
+            else:
+                raise

@@ -3,6 +3,7 @@ import logging
 import re
 from functools import wraps
 
+from .models.exceptions import Exceptions
 from .models.message import Command, Request
 
 log = logging.getLogger(__name__)
@@ -32,6 +33,9 @@ def request(match=None, *, require_registration=True):
         @wraps(func)
         async def wrapper(self, message):
             if prog.match(message.request):
+                if require_registration and not message.registered:
+                    return
+
                 kwargs = {}
 
                 params = parameters.copy()
@@ -58,11 +62,11 @@ def request(match=None, *, require_registration=True):
 
                 if params:
                     log.warning("not all parameters satisfied!")
+                    await message.reject(Exceptions.MISSING_PARAMS)
                     return
 
                 return await func(**kwargs)
             else:
-                # TODO maybe?
                 return
 
         wrapper._is_request = True
@@ -85,7 +89,11 @@ class ExtensionMount(type):
 
 
 class Extension(metaclass=ExtensionMount):
+    singleton = None
+
     def __init__(self, server):
+        type(self).singleton = self
+
         self.server = server
         self.bot = server.bot
 
@@ -107,11 +115,11 @@ class Extension(metaclass=ExtensionMount):
     async def _on_message(self, message):
         targets = []
 
-        if not isinstance(message, Command):
-            targets.extend(self.requests.items())
-
-        if not isinstance(message, Request):
+        if isinstance(message, Command):
             targets.extend(self.commands.items())
+
+        if isinstance(message, Request):
+            targets.extend(self.requests.items())
 
         for name, func in targets:
             try:

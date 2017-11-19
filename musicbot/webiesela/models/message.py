@@ -1,3 +1,9 @@
+import time
+
+from .. import converter
+from .exceptions import Exceptions
+
+
 class Message:
     def __init__(self, connection, raw_message, message_id, content):
         self.connection = connection
@@ -22,10 +28,13 @@ class Message:
     def webiesela_user(self):
         return self.connection.webiesela_user
 
+    async def reject(self, error):
+        response = Response.error(self, error)
+        return await self.connection.send(response)
+
     async def answer(self, data):
-        # TODO
-        # data.update({"response": True, "id": self.message_id})
-        return await self.connection.send(data)
+        response = Response.respond(self, data)
+        return await self.connection.send(response)
 
 
 class Command(Message):
@@ -40,3 +49,50 @@ class Request(Message):
         super().__init__(connection, raw_message, message_id, content)
 
         self.request = request
+
+
+class Response:
+    def __init__(self, content):
+        self.content = content
+
+    def __str__(self):
+        return "<Response>"
+
+    @classmethod
+    def respond(cls, message, data):
+        data.update({
+            "response": True,
+            "id": message.message_id,
+            "timestamp": time.time()
+        })
+
+        return cls(data)
+
+    @classmethod
+    def error(cls, message, error):
+        if not isinstance(error, (str, dict)):
+            if isinstance(error, (Exception, Exceptions)):
+                error = converter.exception2dict(error)
+            else:
+                raise TypeError("Can't send error of type {}".format(type(error)))
+
+        data = {
+            "response": True,
+            "id": message.message_id,
+            "timestamp": time.time(),
+            "error": error
+        }
+
+        return cls(data)
+
+    @classmethod
+    def create(cls, data):
+        data.update({
+            "response": False,
+            "timestamp": time.time()
+        })
+
+        return cls(data)
+
+    def to_dict(self):
+        return self.content

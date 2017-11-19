@@ -1,0 +1,17 @@
+[
+  {
+    "webiesela_user": {
+      "id": "203302899277627392",
+      "name": "siku2",
+      "tag": "siku2#7390",
+      "avatar_url": "https://cdn.discordapp.com/avatars/203302899277627392/a_e60cca01a5d0e8cb841aa0bc6888bf8e.gif?size=1024",
+      "server": {
+        "id": "203304535949574154",
+        "name": "DSG (Winter)"
+      }
+    },
+    "token": "a6c1135081b9f78b5237a0c61a046aae2c7b8ab87af76ad288857e16d2beabbd",
+    "created_at": 1511110838.9841492,
+    "expires_at": 1516299305.7239466
+  }
+]

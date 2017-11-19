@@ -1,4 +1,5 @@
 import asyncio
+import json
 import logging
 import random
 import secrets  # new python 3.6 module
@@ -6,6 +7,7 @@ import string
 import time
 
 from ..extension import Extension, request
+from ..models.exceptions import Exceptions
 from ..models.webiesela_user import WebieselaUser
 
 log = logging.getLogger(__name__)
@@ -44,9 +46,17 @@ class Token:
         return "<Token for {}>".format(self.connection)
 
     @classmethod
-    async def from_dict(cls, data):
-        webiesela_user = WebieselaUser.from_dict(data.get("webiesela_user"))
+    def from_dict(cls, data):
+        data["webiesela_user"] = WebieselaUser.from_dict(data.get("webiesela_user"))
         return cls(**data)
+
+    @classmethod
+    def create(cls, member, token_length, lifespan):
+        webiesela_user = WebieselaUser.from_member(member)
+        token = secrets.token_hex(token_length)
+        now = time.time()
+
+        return cls(webiesela_user, token, now, now + lifespan)
 
     def to_dict(self):
         return {
@@ -79,7 +89,7 @@ class Auth(Extension):
                 data = json.load(f)
 
             for token in data:
-                t = await Token.from_dict(token)
+                t = Token.from_dict(token)
 
                 # token not yet expired
                 if t.expires_at > time.time():
@@ -87,8 +97,12 @@ class Auth(Extension):
                 else:
                     log.info("{} expired!".format(t))
                     cls.expired_tokens.insert(0, t.token)
+        except json.JSONDecodeError:
+            log.warning("Couldn't parse tokens file")
         except FileNotFoundError:
             log.warning("Didn't find a tokens file")
+        except:
+            log.error("Couldn't load tokens file", exc_info=True)
 
         try:
             with open(cls.expired_tokens_file, "r") as f:
@@ -102,7 +116,7 @@ class Auth(Extension):
     def save_tokens(cls):
         try:
             with open(cls.tokens_file, "w+") as f:
-                json.dump(f, [t.to_dict() for t in cls.tokens.items()])
+                json.dump([t.to_dict() for t in cls.tokens.values()], f, indent=2)
         except:
             log.error("Couldn't save tokens")
 
@@ -129,62 +143,90 @@ class Auth(Extension):
             registration_token = cls.registration_tokens[code]
 
             if registration_token.expires_at > time.time():
-                pass  # still valid
+                t = Token.create(member, cls.token_length, cls.token_lifespan)
+                registration_token.register(t)
+                return True
             else:
-                pass
+                log.debug("{} is already expired".format(registration_token))
+                return False
         else:
+            log.debug("{} isn't a token".format(code))
             return None
 
     async def on_load(self):
-        self.setup(self.bot.config)
-        await self.load_tokens()
+        cls = type(self)
+
+        cls.setup(self.bot.config)
+        await cls.load_tokens()
 
     @request("authorise", require_registration=False)
-    async def authorise(self, connection, token):
+    async def authorise(self, connection, message, token):
+        cls = type(self)
+
         log.debug("{} authorising with token {}".format(connection, token))
         # not already authorised
         if not connection.registered:
-            if token in self.tokens:
-                t = self.tokens[token]
+            if token in cls.tokens:
+                t = cls.tokens[token]
+
+                if time.time() > t.expires_at:
+                    log.info("{} expired!".format(t))
+                    cls.tokens.pop(token)
+                    cls.expired_tokens.insert(0, t.token)
+
+                    log.info("{} tried to authorise with an expired token")
+                    await message.reject(Exceptions.TOKEN_EXPIRED)
+                    return
+
                 connection.register(t)
 
                 log.info("{} authorised".format(connection))
 
-                # TODO response
+                await message.answer({"success": True, "token": t.to_dict()})
             else:
-                if token in self.expired_tokens:
-                    # TODO response
+                if token in cls.expired_tokens:
                     log.info("{} tried to authorise with an expired token")
+                    await message.reject(Exceptions.TOKEN_EXPIRED)
                 else:
-                    # TODO return error!
                     log.info("{} tried to authorise with unknown token {}".format(connection, token))
+                    await message.reject(Exceptions.TOKEN_UNKNOWN)
 
     @request("register", require_registration=False)
-    async def register(self, message, connection):
+    async def register(self, connection, message):
+        cls = type(self)
+
         log.info("{} requests registration!".format(connection))
 
         registered = asyncio.Future()
 
-        token = self.generate_registration_token()
+        token = cls.generate_registration_token()
         now = time.time()
 
-        registration_token = RegistrationToken(connection, token, registered, now, now + self.registration_token_lifespan)
-        self.registration_tokens[token] = registration_token
+        registration_token = RegistrationToken(connection, token, registered, now, now + cls.registration_token_lifespan)
+        cls.registration_tokens[token] = registration_token
         log.debug("generated registration token {}".format(registration_token))
 
-        # TODO send token!
+        await message.answer({"registration_token": registration_token.to_dict()})
 
         try:
-            result = await asyncio.wait_for(registered, self.registration_token_lifespan)
+            token = await asyncio.wait_for(registered, cls.registration_token_lifespan)
+
+            cls.tokens[connection] = token
+            cls.save_tokens()
+
+            await message.answer({"token": token.to_dict()})
         except asyncio.TimeoutError:
             log.info("{}'s registration token expired".format(connection))
 
-            # TODO maybe tell them?
-            return
+            await message.reject(Exceptions.REGISTRATION_TOKEN_EXPIRED)
+        finally:
+            cls.registration_tokens.pop(token)
 
     async def on_disconnect(self, connection):
+        cls = type(self)
+
         if connection.registered:
-            tokens[connection].expires_at = time.time() + self.token_lifespan
+            connection.token.expires_at = time.time() + cls.token_lifespan
             log.debug("extended {}'s token".format(connection))
 
-            self.save_tokens()
+            cls.save_tokens()
