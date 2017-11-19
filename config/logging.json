@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "disable_existing_loggers": true,
+
+  "formatters": {
+    "detailed": {
+      "format":"{asctime} - <{name:^40}> {message}",
+      "style": "{"
+    },
+    "color": {
+      "()": "colorlog.ColoredFormatter",
+      "format": "{log_color}{levelname:8}{reset} {bg_blue}{name}{reset} {message}",
+      "style": "{",
+      "log_colors": {
+        "DEBUG": "cyan",
+        "INFO": "green",
+        "WARNING": "yellow",
+        "ERROR": "red",
+        "CRITICAL": "red,bg_white"
+      }
+    }
+  },
+
+  "handlers": {
+    "console": {
+      "class": "logging.StreamHandler",
+      "level": "NOTSET",
+      "formatter": "color"
+    },
+    "file": {
+      "class": "logging.FileHandler",
+      "level": "DEBUG",
+      "filename": "logs/giesela.log",
+      "formatter": "detailed"
+    },
+    "sentry": {
+      "()": "raven.handlers.logging.SentryHandler",
+      "level": "ERROR",
+      "dsn": "https://24b803ec11c74aabb0d77fc8cd29b756:4237b717a00c4a0ca4220ea333273fcd@sentry.io/229530"
+    }
+  },
+
+  "loggers": {
+    "musicbot": {
+      "level": "DEBUG",
+      "propagate": false,
+      "handlers": ["console", "file", "sentry"]
+    }
+  },
+
+  "root": {
+    "level": "WARN",
+    "handlers": ["console", "file"]
+  }
+}

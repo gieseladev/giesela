@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import gc
+import json
 import logging
 import logging.config
 import os
@@ -8,8 +9,6 @@ import subprocess
 import sys
 import time
 import traceback
-
-import colorlog
 
 
 class GIT(object):
@@ -109,7 +108,10 @@ class PIP(object):
 
 
 def setup_logging():
-    logging.config.fileConfig("config/logging.ini")
+    with open("config/logging.json") as f:
+        config = json.load(f)
+
+    logging.config.dictConfig(config)
 
 
 def main():
@@ -161,6 +163,7 @@ def main():
 
     import asyncio
     from musicbot.reporting import raven_client
+    setup_logging()
 
     tried_requirementstxt = False
     tryagain = True
@@ -175,8 +178,6 @@ def main():
 
         m = None
         try:
-            setup_logging()
-
             from musicbot.bot import MusicBot
 
             m = MusicBot()
