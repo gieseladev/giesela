@@ -1,3 +1,5 @@
+"""Module which provides the modular functions to make extending the system possible."""
+
 import inspect
 import logging
 import re
@@ -10,6 +12,7 @@ log = logging.getLogger(__name__)
 
 
 def command(match=None, *, require_registration=True):
+    """Command endpoint."""
     def decorator(func):
         name = func.__name__
 
@@ -23,6 +26,7 @@ def command(match=None, *, require_registration=True):
 
 
 def request(match=None, *, require_registration=True):
+    """Request endpoint."""
     def decorator(func):
         name = func.__name__
         prog = re.compile(match or name)
@@ -77,7 +81,10 @@ def request(match=None, *, require_registration=True):
 
 
 class ExtensionMount(type):
+    """The metaclass for an extension which, when deriving from the inherited class, adds said class to a list."""
+
     def __init__(cls, name, bases, attrs):
+        """Add class to list."""
         if not hasattr(cls, "extensions"):
             # only add it to the first deriver (the Extension class)
             cls.extensions = []
@@ -89,9 +96,15 @@ class ExtensionMount(type):
 
 
 class Extension(metaclass=ExtensionMount):
+    """The basis which all other extensions derive from."""
+
     singleton = None
 
     def __init__(self, server):
+        """Set-up references and parse commands and requests.
+
+        Called internally!
+        """
         type(self).singleton = self
 
         self.server = server
@@ -110,6 +123,7 @@ class Extension(metaclass=ExtensionMount):
         log.debug("{} registered {}/{} cmds/reqs".format(self, len(self.commands), len(self.requests)))
 
     def __str__(self):
+        """Return string rep. of an Extension."""
         return "<Webiesela Extension {}>".format(type(self).__name__)
 
     async def _on_message(self, message):
@@ -131,19 +145,25 @@ class Extension(metaclass=ExtensionMount):
         await self.on_message(message)
 
     async def on_load(self):
+        """Call when Extension has been loaded."""
         pass
 
     async def on_error(self, connection, error, data):
+        """Call when an error occurs while parsing an incoming message."""
         pass
 
     async def on_connect(self, connection):
+        """Call when new Connection was made."""
         pass
 
     async def on_disconnect(self, connection):
+        """Call when a Connection disconnected."""
         pass
 
     async def on_raw_message(self, connection, message):
+        """Call after receiving a message with the raw content."""
         pass
 
     async def on_message(self, message):
+        """Call when raw message has been parsed into a Message."""
         pass

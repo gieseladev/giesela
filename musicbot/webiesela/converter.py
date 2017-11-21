@@ -1,7 +1,10 @@
+"""A utility module to help convert certain things."""
+
 from .models.exceptions import Exceptions
 
 
 def exception2dict(error):
+    """Convert an exception in the form of a python Exception or a Webiesela exception to a dictionary."""
     if isinstance(error, Exception):
         return {
             "name": type(error).__name__,

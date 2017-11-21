@@ -1,3 +1,5 @@
+"""Imports all the extensions."""
+
 import importlib
 import os
 

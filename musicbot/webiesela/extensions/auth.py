@@ -1,3 +1,5 @@
+"""The module which handles the registration/authorisation of a Webiesela user."""
+
 import asyncio
 import json
 import logging
@@ -14,7 +16,10 @@ log = logging.getLogger(__name__)
 
 
 class RegistrationToken:
+    """Class representing a token which the user must use to register."""
+
     def __init__(self, connection, token, future, created_at, expires_at):
+        """Create a new such token."""
         self.connection = connection
         self.token = token
         self.future = future
@@ -22,9 +27,11 @@ class RegistrationToken:
         self.expires_at = expires_at
 
     def __str__(self):
+        """Printable version."""
         return "<RegToken {} by {}>".format(self.token, self.connection)
 
     def to_dict(self):
+        """Serialise data to a dict."""
         return {
             "token": self.token,
             "created_at": self.created_at,
@@ -32,26 +39,33 @@ class RegistrationToken:
         }
 
     def register(self, token):
+        """Call when user has registered."""
         self.future.set_result(token)
 
 
 class Token:
+    """Represent the authorisation bound to a token and a user which allows said user to interact with Giesela."""
+
     def __init__(self, webiesela_user, token, created_at, expires_at):
+        """Instantiate such a token."""
         self.webiesela_user = webiesela_user
         self.token = token
         self.created_at = created_at
         self.expires_at = expires_at
 
     def __str__(self):
+        """Representation of a token."""
         return "<Token for {}>".format(self.connection)
 
     @classmethod
     def from_dict(cls, data):
+        """Create instance from serialised dict."""
         data["webiesela_user"] = WebieselaUser.from_dict(data.get("webiesela_user"))
         return cls(**data)
 
     @classmethod
     def create(cls, member, token_length, lifespan):
+        """Create a new token for a member."""
         webiesela_user = WebieselaUser.from_member(member)
         token = secrets.token_hex(token_length)
         now = time.time()
@@ -59,6 +73,7 @@ class Token:
         return cls(webiesela_user, token, now, now + lifespan)
 
     def to_dict(self):
+        """Serialise token to a dict."""
         return {
             "webiesela_user": self.webiesela_user.to_dict(),
             "token": self.token,
@@ -68,12 +83,15 @@ class Token:
 
 
 class Auth(Extension):
+    """Extension for authorisation."""
+
     tokens = {}
     registration_tokens = {}
     expired_tokens = []
 
     @classmethod
     def setup(cls, config):
+        """Get needed values from the config."""
         cls.token_lifespan = config.token_lifespan
         cls.registration_token_lifespan = config.registration_token_lifespan
         cls.max_expired_tokens = config.max_expired_tokens
@@ -84,6 +102,7 @@ class Auth(Extension):
 
     @classmethod
     async def load_tokens(cls):
+        """Load all the tokens from file."""
         try:
             with open(cls.tokens_file, "r") as f:
                 data = json.load(f)
@@ -101,7 +120,7 @@ class Auth(Extension):
             log.warning("Couldn't parse tokens file")
         except FileNotFoundError:
             log.warning("Didn't find a tokens file")
-        except:
+        except Exception:
             log.error("Couldn't load tokens file", exc_info=True)
 
         try:
@@ -114,22 +133,24 @@ class Auth(Extension):
 
     @classmethod
     def save_tokens(cls):
+        """Save tokens to file."""
         try:
             with open(cls.tokens_file, "w+") as f:
                 json.dump([t.to_dict() for t in cls.tokens.values()], f, indent=2)
-        except:
+        except Exception:
             log.error("Couldn't save tokens")
 
         try:
             with open(cls.expired_tokens_file, "w+") as f:
                 f.writelines(cls.expired_tokens)
-        except:
+        except Exception:
             log.error("Couldn't save expired tokens")
 
         log.info("saved tokens and expired tokens")
 
     @classmethod
     def generate_registration_token(cls):
+        """Generate new registration token which is unique."""
         existing_tokens = cls.registration_tokens.keys()
 
         while True:
@@ -139,6 +160,7 @@ class Auth(Extension):
 
     @classmethod
     async def member_register(cls, member, code):
+        """Bind member to a registration token."""
         if code in cls.registration_tokens:
             registration_token = cls.registration_tokens[code]
 
@@ -154,6 +176,7 @@ class Auth(Extension):
             return None
 
     async def on_load(self):
+        """When ready, load all the tokens."""
         cls = type(self)
 
         cls.setup(self.bot.config)
@@ -161,6 +184,7 @@ class Auth(Extension):
 
     @request("authorise", require_registration=False)
     async def authorise(self, connection, message, token):
+        """Endpoint to authorise with a token."""
         cls = type(self)
 
         log.debug("{} authorising with token {}".format(connection, token))
@@ -193,6 +217,10 @@ class Auth(Extension):
 
     @request("register", require_registration=False)
     async def register(self, connection, message):
+        """Endpoint to request registration.
+
+        Generates a new registration token and sends it over to Webiesela.
+        """
         cls = type(self)
 
         log.info("{} requests registration!".format(connection))
@@ -223,6 +251,7 @@ class Auth(Extension):
             cls.registration_tokens.pop(token)
 
     async def on_disconnect(self, connection):
+        """Extend token's lifespan when disconnecting."""
         cls = type(self)
 
         if connection.registered:

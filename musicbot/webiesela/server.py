@@ -1,4 +1,5 @@
-import asyncio
+"""Module for the Websocket server which receives incoming connections, manages them and passes events to the manager."""
+
 import json
 import logging
 
@@ -12,16 +13,19 @@ log = logging.getLogger(__name__)
 
 
 class Server:
+    """A websocket server."""
+
     bot = None
     manager = None
     socket_server = None
 
     @classmethod
     async def serve(cls, bot):
+        """Start listening to incoming connections."""
         cls.bot = bot
         WebieselaUser.bot = bot
         cls.manager = Manager(cls)
-        await cls.manager.load_extentions()
+        await cls.manager.load_extensions()
 
         cls.socket_server = websockets.serve(cls.handle_connection, host="", port=8000)
 
@@ -31,6 +35,7 @@ class Server:
 
     @classmethod
     async def handle_connection(cls, ws, path):
+        """Manage an incoming connection asynchronously and pass its events to the manager."""
         connection = Connection(ws)
 
         await cls.manager.on_connect(connection)
@@ -52,4 +57,5 @@ class Server:
 
     @classmethod
     async def shutdown(cls):
+        """Kill the server."""
         await cls.socket_server.wait_closed()
