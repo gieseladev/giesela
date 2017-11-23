@@ -9,28 +9,10 @@ import string
 import time
 
 from ..extension import Extension, request
-from ..models.exceptions import WebieselaException
+from ..models.exceptions import TokenExpired, TokenUnknown
 from ..models.webiesela_user import WebieselaUser
 
 log = logging.getLogger(__name__)
-
-
-class AuthError(WebieselaException):
-    """Some error with reg or auth."""
-
-    __code__ = 2000
-
-
-class TokenUnknown(AuthError):
-    """When a token doesn't exist."""
-
-    __code__ = 2001
-
-
-class TokenExpired(AuthError):
-    """When a token has expired."""
-
-    __code__ = 2002
 
 
 class RegistrationToken:

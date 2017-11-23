@@ -5,8 +5,8 @@ import logging
 import re
 from functools import wraps
 
-from .models.exceptions import (MissingParamsError, ParamError,
-                                WebieselaException)
+from .models.exceptions import (AuthorisationRequired, MissingParamsError,
+                                ParamError, WebieselaException)
 from .models.message import Command, Message, Request
 
 log = logging.getLogger(__name__)
@@ -30,7 +30,7 @@ def message_endpoint(match_key=None, match=None, *, require_auth=True):
 
             if prog.match(getattr(message, name_key)):
                 if require_auth and not message.registered:
-                    return
+                    raise AuthorisationRequired("/{} needs authorisation. please authorise or register".format(name))
 
                 kwargs = {}
 

@@ -56,3 +56,25 @@ class ParamError(WebieselaException):
     def data(self):
         """Wrong parameter."""
         return {"erroneous": self.erroneous}
+
+
+class AuthError(WebieselaException):
+    """Some error with reg or auth."""
+
+    __code__ = 2000
+
+
+class AuthorisationRequired(AuthError):
+    """Trying to use an endpoint which requires auth."""
+
+
+class TokenUnknown(AuthError):
+    """When a token doesn't exist."""
+
+    __code__ = 2001
+
+
+class TokenExpired(AuthError):
+    """When a token has expired."""
+
+    __code__ = 2002
