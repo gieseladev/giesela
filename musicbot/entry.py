@@ -1,3 +1,4 @@
+import asyncio
 import copy
 import os
 import time
@@ -5,7 +6,6 @@ import traceback
 
 from discord import Channel, Member, Server, User
 
-import asyncio
 from musicbot.exceptions import (BrokenEntryError, ExtractionError,
                                  OutdatedEntryError)
 from musicbot.lib.serialisable import Serialisable, WebSerialisable
@@ -157,7 +157,7 @@ class BaseEntry(Serialisable, WebSerialisable):
     def to_dict(self):
         raise NotImplementedError
 
-    def to_web_dict(self, skip_calc=False):
+    def to_web_dict(self):
         return self.to_dict()
 
     def get_ready_future(self):
@@ -256,7 +256,7 @@ class StreamEntry(BaseEntry):
         }
         return data
 
-    def to_web_dict(self, skip_calc=False):
+    def to_web_dict(self):
         origin = None
         if self.meta:
             if "playlist" in self.meta:
@@ -344,7 +344,7 @@ class RadioStationEntry(StreamEntry):
 
         return d
 
-    def to_web_dict(self, skip_calc=False):
+    def to_web_dict(self):
         origin = None
         if self.meta:
             if "playlist" in self.meta:
@@ -443,8 +443,8 @@ class RadioSongEntry(RadioStationEntry):
 
         return self.current_song_info["cover"]
 
-    def to_web_dict(self, skip_calc=False):
-        data = super().to_web_dict(skip_calc=skip_calc)
+    def to_web_dict(self):
+        data = super().to_web_dict()
 
         data.update({
             "station":          self.station_data.to_dict(),
@@ -571,7 +571,7 @@ class YoutubeEntry(BaseEntry):
         }
         return data
 
-    def to_web_dict(self, skip_calc=False):
+    def to_web_dict(self):
         origin = None
         if self.meta:
             if "playlist" in self.meta:
@@ -590,9 +590,6 @@ class YoutubeEntry(BaseEntry):
             "title":                self.title,
             "duration":             self.duration,
         }
-
-        if not skip_calc:
-            data["thumbnail_brightness"] = self.thumbnail_brightness
 
         return data
 
@@ -785,8 +782,8 @@ class TimestampEntry(YoutubeEntry):
 
         return d
 
-    def to_web_dict(self, skip_calc=False):
-        data = super().to_web_dict(skip_calc=skip_calc)
+    def to_web_dict(self):
+        data = super().to_web_dict()
 
         data.update({
             "whole_title":  self.whole_title,
@@ -882,8 +879,8 @@ class GieselaEntry(YoutubeEntry):
 
         return d
 
-    def to_web_dict(self, skip_calc=False):
-        data = super().to_web_dict(skip_calc=skip_calc)
+    def to_web_dict(self):
+        data = super().to_web_dict()
 
         data.update({
             "title":    self.song_title,
