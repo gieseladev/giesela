@@ -9,10 +9,28 @@ import string
 import time
 
 from ..extension import Extension, request
-from ..models.exceptions import Exceptions
+from ..models.exceptions import WebieselaException
 from ..models.webiesela_user import WebieselaUser
 
 log = logging.getLogger(__name__)
+
+
+class AuthError(WebieselaException):
+    """Some error with reg or auth."""
+
+    __code__ = 2000
+
+
+class TokenUnknown(AuthError):
+    """When a token doesn't exist."""
+
+    __code__ = 2001
+
+
+class TokenExpired(AuthError):
+    """When a token has expired."""
+
+    __code__ = 2002
 
 
 class RegistrationToken:
@@ -199,8 +217,7 @@ class Auth(Extension):
                     cls.expired_tokens.insert(0, t.token)
 
                     log.info("{} tried to authorise with an expired token")
-                    await message.reject(Exceptions.TOKEN_EXPIRED)
-                    return
+                    raise TokenExpired("This token has expired")
 
                 connection.register(t)
 
@@ -210,10 +227,10 @@ class Auth(Extension):
             else:
                 if token in cls.expired_tokens:
                     log.info("{} tried to authorise with an expired token")
-                    await message.reject(Exceptions.TOKEN_EXPIRED)
+                    raise TokenExpired("This token has expired")
                 else:
                     log.info("{} tried to authorise with unknown token {}".format(connection, token))
-                    await message.reject(Exceptions.TOKEN_UNKNOWN)
+                    raise TokenUnknown("This token is unknown")
 
     @request("register", require_registration=False)
     async def register(self, connection, message):
@@ -246,7 +263,7 @@ class Auth(Extension):
         except asyncio.TimeoutError:
             log.info("{}'s registration token expired".format(connection))
 
-            await message.reject(Exceptions.REGISTRATION_TOKEN_EXPIRED)
+            raise TokenExpired("The registration token has expired")
         finally:
             cls.registration_tokens.pop(token)
 

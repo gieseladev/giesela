@@ -5,30 +5,18 @@ import logging
 import re
 from functools import wraps
 
-from .models.exceptions import Exceptions
+from .models.exceptions import (MissingParamsError, ParamError,
+                                WebieselaException)
 from .models.message import Command, Request
 
 log = logging.getLogger(__name__)
 
 
-def command(match=None, *, require_registration=True):
-    """Command endpoint."""
+def message_endpoint(match_key=None, match=None, *, require_auth=True):
+    """Message endpoint."""
     def decorator(func):
         name = func.__name__
-
-        @wraps(func)
-        async def wrapper(self, *args, **kwargs):
-            await func(self, *args, **kwargs)
-
-        return wrapper
-
-    return decorator
-
-
-def request(match=None, *, require_registration=True):
-    """Request endpoint."""
-    def decorator(func):
-        name = func.__name__
+        name_key = match_key or name
         prog = re.compile(match or name)
 
         sig = inspect.signature(func)
@@ -36,8 +24,8 @@ def request(match=None, *, require_registration=True):
 
         @wraps(func)
         async def wrapper(self, message):
-            if prog.match(message.request):
-                if require_registration and not message.registered:
+            if prog.match(getattr(message, name_key)):
+                if require_auth and not message.registered:
                     return
 
                 kwargs = {}
@@ -53,6 +41,12 @@ def request(match=None, *, require_registration=True):
                 if params.pop("connection", False):
                     kwargs["connection"] = message.connection
 
+                if params.pop("webiesela_user", False):
+                    kwargs["webiesela_user"] = message.webiesela_user
+
+                if params.pop("server", False):
+                    kwargs["server"] = message.server
+
                 if params.pop("leftover", False):
                     kwargs["leftover"] = message.content
 
@@ -66,18 +60,33 @@ def request(match=None, *, require_registration=True):
 
                 if params:
                     log.warning("not all parameters satisfied!")
-                    await message.reject(Exceptions.MISSING_PARAMS)
-                    return
+                    raise MissingParamsError(params.keys())
 
-                return await func(**kwargs)
+                try:
+                    return await func(**kwargs)
+                except AssertionError as e:
+                    if e.args and isinstance(e.args[0], ParamError):
+                        raise e.args[0]
+
+                    raise e
             else:
                 return
 
-        wrapper._is_request = True
+        setattr(wrapper, "_is_{}".format(name_key), True)
 
         return wrapper
 
     return decorator
+
+
+def command(match=None, *, require_auth=True):
+    """Command endpoint."""
+    return message_endpoint("command", match, require_auth=require_auth)
+
+
+def request(match=None, *, require_auth=True):
+    """Request endpoint."""
+    return message_endpoint("request", match, require_auth=require_auth)
 
 
 class ExtensionMount(type):
@@ -137,7 +146,9 @@ class Extension(metaclass=ExtensionMount):
 
         for name, func in targets:
             try:
-                result = await func(message)
+                await func(message)
+            except WebieselaException as e:
+                await message.reject(e)
             except Exception as e:
                 log.error("Error while running \"{}\"".format(name), exc_info=True)
                 # TODO send internal server error

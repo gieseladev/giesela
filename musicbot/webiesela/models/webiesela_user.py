@@ -6,13 +6,14 @@ class WebieselaUser:
 
     bot = None
 
-    def __init__(self, discord_id, discriminator, name, avatar_url, server_id, server_name, member):
+    def __init__(self, discord_id, discriminator, name, avatar_url, server, server_id, server_name, member):
         """Create a new webiesela user."""
         self.discord_id = discord_id
         self.name = name
         self.discriminator = discriminator
         self.avatar_url = avatar_url
 
+        self.server = server
         self.server_id = server_id
         self.server_name = server_name
 
@@ -25,7 +26,7 @@ class WebieselaUser:
     @classmethod
     def from_member(cls, member):
         """Create a new instance based on its Discord counterpart."""
-        return cls(member.id, member.discriminator, member.name, member.avatar_url, member.server.id, member.server.name, member)
+        return cls(member.id, member.discriminator, member.name, member.avatar_url, member.server, member.server.id, member.server.name, member)
 
     @classmethod
     def from_dict(cls, data):

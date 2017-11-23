@@ -25,7 +25,7 @@ class Manager:
     async def load_extensions(self):
         """Load all extensions."""
         # needed to import all extensions
-        from . import extensions
+        from . import extensions  # noqa: F401
 
         ext_classes = Extension.extensions
 

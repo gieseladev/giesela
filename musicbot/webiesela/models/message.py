@@ -3,7 +3,6 @@
 import time
 
 from .. import converter
-from .exceptions import Exceptions
 
 
 class Message:
@@ -37,6 +36,11 @@ class Message:
     def webiesela_user(self):
         """Return the corresponding user."""
         return self.connection.webiesela_user
+
+    @property
+    def server(self):
+        """Return the corresponding server."""
+        return self.webiesela_user and self.webiesela_user.server
 
     async def reject(self, error):
         """Answer with an error to the message."""
@@ -95,7 +99,7 @@ class Response:
     def error(cls, message, error):
         """Create new error Response."""
         if not isinstance(error, (str, dict)):
-            if isinstance(error, (Exception, Exceptions)):
+            if isinstance(error, Exception):
                 error = converter.exception2dict(error)
             else:
                 raise TypeError("Can't send error of type {}".format(type(error)))

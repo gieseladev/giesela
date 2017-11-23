@@ -1,14 +1,58 @@
 """Webiesela Exceptions."""
 
-import enum
+
+class WebieselaException(Exception):
+    """Base class for exceptions."""
+
+    __code__ = 0
+
+    def __init__(self, msg, *args):
+        """Create a new instance."""
+        super.__init__(*args)
+        self.msg = msg
+
+    @property
+    def data(self):
+        """Provide additional data."""
+        return {}
+
+    def to_dict(self):
+        """Return serialised version of the error."""
+        return {
+            "name": type(self).__name__,
+            "code": self.__code__,
+            "message": self.msg,
+            "data": self.data
+        }
 
 
-class Exceptions(enum.IntEnum):
-    """An enumeration with all the exceptions."""
+class MissingParamsError(WebieselaException):
+    """When not all required parameters are satisfied."""
 
-    TOKEN_UNKNOWN = 1000
-    TOKEN_EXPIRED = 1001
-    REGISTRATION_TOKEN_EXPIRED = 1002
-    ALREADY_AUTHORISED = 1003
+    __code__ = 1000
 
-    MISSING_PARAMS = 2000
+    def __init__(self, missing, *args):
+        """Create new."""
+        super.__init__("missing parameters", *args)
+        self.missing = missing
+
+    @property
+    def data(self):
+        """Missing parameters."""
+        return {"missing": self.missing}
+
+
+class ParamError(WebieselaException):
+    """When a parameter is wrong."""
+
+    __code__ = 1001
+
+    def __init__(self, msg, erroneous, *args):
+        """Create new."""
+        super.__init__(msg, *args)
+        self.erroneous = erroneous
+
+    @property
+    def data(self):
+        """Wrong parameter."""
+        return {"erroneous": self.erroneous}
