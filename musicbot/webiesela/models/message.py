@@ -47,8 +47,13 @@ class Message:
         response = Response.error(self, error)
         return await self.connection.send(response)
 
-    async def answer(self, data):
+    async def answer(self, data=None, *, success=None):
         """Answer with a reponse to the message."""
+        data = data or {}
+
+        if success is not None:
+            data["success"] = success
+
         response = Response.respond(self, data)
         return await self.connection.send(response)
 

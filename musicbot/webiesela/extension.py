@@ -7,7 +7,7 @@ from functools import wraps
 
 from .models.exceptions import (MissingParamsError, ParamError,
                                 WebieselaException)
-from .models.message import Command, Request
+from .models.message import Command, Message, Request
 
 log = logging.getLogger(__name__)
 
@@ -24,6 +24,10 @@ def message_endpoint(match_key=None, match=None, *, require_auth=True):
 
         @wraps(func)
         async def wrapper(self, message):
+            if not hasattr(message, name_key):
+                log.debug("{} didn't have key {}".format(message, name_key))
+                return
+
             if prog.match(getattr(message, name_key)):
                 if require_auth and not message.registered:
                     return
@@ -73,6 +77,7 @@ def message_endpoint(match_key=None, match=None, *, require_auth=True):
                 return
 
         setattr(wrapper, "_is_{}".format(name_key), True)
+        wrapper._endpoint = True
 
         return wrapper
 
@@ -119,17 +124,20 @@ class Extension(metaclass=ExtensionMount):
         self.server = server
         self.bot = server.bot
 
+        self.custom_endpoints = {}
         self.commands = {}
         self.requests = {}
 
         for name, value in inspect.getmembers(self):
-            if hasattr(value, "_is_command"):
-                self.commands[name] = value
+            if hasattr(value, "_endpoint"):
+                if hasattr(value, "_is_command"):
+                    self.commands[name] = value
+                elif hasattr(value, "_is_request"):
+                    self.requests[name] = value
+                else:
+                    self.custom_endpoints[name] = value
 
-            if hasattr(value, "_is_request"):
-                self.requests[name] = value
-
-        log.debug("{} registered {}/{} cmds/reqs".format(self, len(self.commands), len(self.requests)))
+        log.debug("{} registered {}/{}/{} customs/cmds/reqs".format(self, len(self.custom_endpoints), len(self.commands), len(self.requests)))
 
     def __str__(self):
         """Return string rep. of an Extension."""
@@ -140,9 +148,10 @@ class Extension(metaclass=ExtensionMount):
 
         if isinstance(message, Command):
             targets.extend(self.commands.items())
-
-        if isinstance(message, Request):
+        elif isinstance(message, Request):
             targets.extend(self.requests.items())
+        elif isinstance(message, Message):
+            targets.extend(self.custom_endpoints.items())
 
         for name, func in targets:
             try:

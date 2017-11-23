@@ -8,7 +8,7 @@ class WebieselaException(Exception):
 
     def __init__(self, msg, *args):
         """Create a new instance."""
-        super.__init__(*args)
+        super().__init__(*args)
         self.msg = msg
 
     @property
@@ -33,8 +33,8 @@ class MissingParamsError(WebieselaException):
 
     def __init__(self, missing, *args):
         """Create new."""
-        super.__init__("missing parameters", *args)
-        self.missing = missing
+        super().__init__("missing parameters", *args)
+        self.missing = list(missing)
 
     @property
     def data(self):
@@ -49,7 +49,7 @@ class ParamError(WebieselaException):
 
     def __init__(self, msg, erroneous, *args):
         """Create new."""
-        super.__init__(msg, *args)
+        super().__init__(msg, *args)
         self.erroneous = erroneous
 
     @property

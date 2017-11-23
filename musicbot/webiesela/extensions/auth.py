@@ -200,7 +200,7 @@ class Auth(Extension):
         cls.setup(self.bot.config)
         await cls.load_tokens()
 
-    @request("authorise", require_registration=False)
+    @request("authorise", require_auth=False)
     async def authorise(self, connection, message, token):
         """Endpoint to authorise with a token."""
         cls = type(self)
@@ -223,7 +223,7 @@ class Auth(Extension):
 
                 log.info("{} authorised".format(connection))
 
-                await message.answer({"success": True, "token": t.to_dict()})
+                await message.answer({"token": t.to_dict()}, success=True)
             else:
                 if token in cls.expired_tokens:
                     log.info("{} tried to authorise with an expired token")
@@ -232,7 +232,7 @@ class Auth(Extension):
                     log.info("{} tried to authorise with unknown token {}".format(connection, token))
                     raise TokenUnknown("This token is unknown")
 
-    @request("register", require_registration=False)
+    @request("register", require_auth=False)
     async def register(self, connection, message):
         """Endpoint to request registration.
 
@@ -259,13 +259,15 @@ class Auth(Extension):
             cls.tokens[connection] = token
             cls.save_tokens()
 
+            # TODO also authorise
+
             await message.answer({"token": token.to_dict()})
         except asyncio.TimeoutError:
             log.info("{}'s registration token expired".format(connection))
 
             raise TokenExpired("The registration token has expired")
         finally:
-            cls.registration_tokens.pop(token)
+            cls.registration_tokens.pop(registration_token.token)
 
     async def on_disconnect(self, connection):
         """Extend token's lifespan when disconnecting."""

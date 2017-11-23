@@ -7,6 +7,6 @@ logs
 cache
 
 data/playlists.json
-data/webiesela_token.json
+data/webiesela_tokens.json
 config/options.ini
 data/settings.bin
