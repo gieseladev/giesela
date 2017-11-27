@@ -1,7 +1,29 @@
 """Webiesela Exceptions."""
 
+import logging
 
-class WebieselaException(Exception):
+log = logging.getLogger(__name__)
+
+
+class WebieselaExceptionMount(type):
+    """Mount for exceptions to make sure that error codes are unique."""
+
+    def __init__(cls, name, bases, attrs):
+        """Add exception to list."""
+        if not hasattr(cls, "exceptions"):
+            # only add it to the first deriver (the WebieselaException class)
+            cls.exceptions = {}
+            log.debug("setup base exception")
+        else:
+            # warn when exception codes already in use
+            if cls.__code__ in cls.exceptions:
+                raise SyntaxError("Exception code {} already exists! (Couldn't register Exception \"{}\")".format(cls.__code__, name))
+            else:
+                cls.exceptions[cls.__code__] = cls
+                log.debug("registered exception \"{}\" ({})".format(name, cls.__code__))
+
+
+class WebieselaException(Exception, metaclass=WebieselaExceptionMount):
     """Base class for exceptions."""
 
     __code__ = 0
@@ -67,14 +89,16 @@ class AuthError(WebieselaException):
 class AuthorisationRequired(AuthError):
     """Trying to use an endpoint which requires auth."""
 
+    __code__ = 2001
+
 
 class TokenUnknown(AuthError):
     """When a token doesn't exist."""
 
-    __code__ = 2001
+    __code__ = 2002
 
 
 class TokenExpired(AuthError):
     """When a token has expired."""
 
-    __code__ = 2002
+    __code__ = 2001
