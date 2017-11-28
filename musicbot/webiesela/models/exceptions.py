@@ -101,4 +101,4 @@ class TokenUnknown(AuthError):
 class TokenExpired(AuthError):
     """When a token has expired."""
 
-    __code__ = 2001
+    __code__ = 2003
