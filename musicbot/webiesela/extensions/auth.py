@@ -238,7 +238,7 @@ class Auth(Extension):
         try:
             token = await asyncio.wait_for(registered, cls.registration_token_lifespan)
 
-            cls.tokens[connection] = token
+            cls.tokens[token.token] = token
             cls.save_tokens()
 
             # TODO also authorise
