@@ -14,7 +14,7 @@ class Queue(Extension):
     @command()
     async def shuffle(self, message, server):
         """Shuffle the queue."""
-        queue = await self.get_player(server).queue
+        queue = (await self.get_player(server)).queue
 
         queue.shuffle()
         await message.answer(success=True)
@@ -22,7 +22,7 @@ class Queue(Extension):
     @command()
     async def clear(self, message, server):
         """Clear the queue."""
-        queue = await self.get_player(server).queue
+        queue = (await self.get_player(server)).queue
 
         queue.clear()
         await message.answer(success=True)
@@ -33,7 +33,7 @@ class Queue(Extension):
         assert (isinstance(from_index, int)), ParamError("must be valid number (int)", "from_index")
         assert (isinstance(to_index, int)), ParamError("must be valid number (int)", "to_index")
 
-        queue = await self.get_player(server).queue
+        queue = (await self.get_player(server)).queue
 
         success = queue.move(from_index, to_index)
         await message.answer(success=success)
@@ -43,7 +43,7 @@ class Queue(Extension):
         """Move an entry in the queue."""
         assert (isinstance(index, int)), ParamError("must be valid number (int)", "index")
 
-        queue = await self.get_player(server).queue
+        queue = (await self.get_player(server)).queue
 
         success = queue.replay(index)
         await message.answer(success=success)
@@ -51,7 +51,7 @@ class Queue(Extension):
     @command()
     async def play_entry(self, message, server):
         """Play an entry."""
-        queue = await self.get_player(server).queue
+        queue = (await self.get_player(server)).queue
 
     @request()
     async def get_queue(self, message, server):
