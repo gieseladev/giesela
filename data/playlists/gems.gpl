@@ -172,7 +172,7 @@
         },
         "song_title": "7 Years",
         "artist": "Lukas Graham",
-        "artist_image": "https://i.scdn.co/image/e16dcc1f96b92d2755e44efbb839968e8fcfe437",
+        "artist_image": "https://i.scdn.co/image/34ff3851a206e3a899474b4b5ebdc8ea7b6221bf",
         "cover": "https://i.scdn.co/image/594b95bbc05a7c19c1e8f7aaf0d55509039bfad5",
         "album": "NOW That's What I Call Music, Vol. 59",
         "spotify_data": {
@@ -279,7 +279,7 @@
         },
         "song_title": "All Around Me",
         "artist": "Flyleaf",
-        "artist_image": "https://i.scdn.co/image/e9de1c2a993488a885096594902ad16b4d2f81ba",
+        "artist_image": "https://i.scdn.co/image/78c3d3a8d68ae6f7d4dccd94ce9ce8887dbbca00",
         "cover": "https://i.scdn.co/image/9a0bd0964a62e683d5d3adc8370564d9fd354881",
         "album": "Flyleaf (Re-Release)",
         "spotify_data": {
@@ -405,6 +405,139 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-Pn-6eOxnEMI-A_Day_To_Remember_-_All_I_Want.NA",
+        "video_id": "Pn-6eOxnEMI",
+        "url": "https://www.youtube.com/watch?v=Pn-6eOxnEMI",
+        "title": "A Day To Remember - All I Want",
+        "duration": 215,
+        "thumbnail": "https://i.ytimg.com/vi/Pn-6eOxnEMI/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "A Day To Remember \"All I Want\" is from their album, What Separates Me From You, available now.\n\niTunes: http://bit.ly/13tfukv\nAmazon: http://amzn.to/145v2e3\nDirect (CD / Vinyl): http://bit.ly/1avir7s\nSpotify: http://spoti.fi/7guuh9\n\nDirected by Drew Russ\n\u00a9 Another Victory 2010",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/CKhYHbF.jpg",
+                    "name": "Gems",
+                    "id": "gems",
+                    "index": 3,
+                    "timestamp": 1511702832
+                }
+            }
+        },
+        "song_title": "All I Want",
+        "artist": "A Day To Remember",
+        "artist_image": "https://i.scdn.co/image/f7cbfeb5d4ee79452669281dfbea2ea783a3cc84",
+        "cover": "https://i.scdn.co/image/9e6ec09914b7533d0ba773ea3b640cc19b4fc355",
+        "album": "What Separates Me From You",
+        "spotify_data": {
+            "id": "3imITUqEhkebNbOoS1yrWm",
+            "name": "All I Want",
+            "artists": [
+                {
+                    "id": "4NiJW4q9ichVqL1aUsgGAN",
+                    "name": "A Day To Remember",
+                    "images": [
+                        {
+                            "height": 627,
+                            "url": "https://i.scdn.co/image/9a3b98dc87627c63a08a56176048dce612ded8e7",
+                            "width": 640
+                        },
+                        {
+                            "height": 314,
+                            "url": "https://i.scdn.co/image/003def94d10fbb8d2f598f794dfde23b2eb4c4e2",
+                            "width": 320
+                        },
+                        {
+                            "height": 157,
+                            "url": "https://i.scdn.co/image/f7cbfeb5d4ee79452669281dfbea2ea783a3cc84",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "alternative metal",
+                        "metalcore",
+                        "pop punk",
+                        "rap metal",
+                        "screamo"
+                    ],
+                    "popularity": 77,
+                    "uri": "spotify:artist:4NiJW4q9ichVqL1aUsgGAN",
+                    "href": "https://open.spotify.com/artist/4NiJW4q9ichVqL1aUsgGAN"
+                }
+            ],
+            "artist": "A Day To Remember",
+            "cover_url": "https://i.scdn.co/image/9e6ec09914b7533d0ba773ea3b640cc19b4fc355",
+            "duration": 202.64,
+            "album": {
+                "id": "2kllnMabPw1hYID0MhQRK0",
+                "name": "What Separates Me From You",
+                "artists": [
+                    {
+                        "id": "4NiJW4q9ichVqL1aUsgGAN",
+                        "name": "A Day To Remember",
+                        "images": [
+                            {
+                                "height": 627,
+                                "url": "https://i.scdn.co/image/9a3b98dc87627c63a08a56176048dce612ded8e7",
+                                "width": 640
+                            },
+                            {
+                                "height": 314,
+                                "url": "https://i.scdn.co/image/003def94d10fbb8d2f598f794dfde23b2eb4c4e2",
+                                "width": 320
+                            },
+                            {
+                                "height": 157,
+                                "url": "https://i.scdn.co/image/f7cbfeb5d4ee79452669281dfbea2ea783a3cc84",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "alternative metal",
+                            "metalcore",
+                            "pop punk",
+                            "rap metal",
+                            "screamo"
+                        ],
+                        "popularity": 77,
+                        "uri": "spotify:artist:4NiJW4q9ichVqL1aUsgGAN",
+                        "href": "https://open.spotify.com/artist/4NiJW4q9ichVqL1aUsgGAN"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/9e6ec09914b7533d0ba773ea3b640cc19b4fc355",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/4eae1f7f41b4d59164528bf6972063cdd7ba1a8f",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/a0fdb529fc9ec0881310f643b785e4bf7cfeb2a2",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:2kllnMabPw1hYID0MhQRK0"
+            },
+            "popularity": 65,
+            "uri": "spotify:track:3imITUqEhkebNbOoS1yrWm",
+            "query": "A Day To Remember - All I Want",
+            "certainty": 0.9655172413793104
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache/audio_cache/youtube-450p7goxZqg-John_Legend_-_All_of_Me.NA",
         "video_id": "450p7goxZqg",
         "url": "https://www.youtube.com/watch?v=450p7goxZqg",
@@ -425,14 +558,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 3,
+                    "index": 4,
                     "timestamp": 1505324836
                 }
             }
         },
         "song_title": "All of Me",
         "artist": "John Legend",
-        "artist_image": "https://i.scdn.co/image/3e431e58af3903f54c265185f8db57c01aeb25b2",
+        "artist_image": "https://i.scdn.co/image/cb3e33f869a528b3c2847332d0dac89d6c5d49c8",
         "cover": "https://i.scdn.co/image/b3d079a2e81e76d5f4f7f570a91a54a1f09dd93d",
         "album": "Love In The Future",
         "spotify_data": {
@@ -566,7 +699,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 4,
+                    "index": 5,
                     "timestamp": 1506932547
                 }
             }
@@ -699,7 +832,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 5,
+                    "index": 6,
                     "timestamp": 1504387208
                 }
             }
@@ -844,14 +977,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 6,
+                    "index": 7,
                     "timestamp": 1504394707
                 }
             }
         },
         "song_title": "Anthem of the Lonely",
         "artist": "Nine Lashes",
-        "artist_image": "https://i.scdn.co/image/901d841944dfd381ac11b84f03ef2943590ca4c9",
+        "artist_image": "https://i.scdn.co/image/05d474d1d99cd0328b7bf4492d91bf8ab33f1937",
         "cover": "https://i.scdn.co/image/4c3e3c3669d09a5c93cce930098c81fab7187b92",
         "album": "World We View",
         "spotify_data": {
@@ -989,14 +1122,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 7,
+                    "index": 8,
                     "timestamp": 1504640699
                 }
             }
         },
         "song_title": "Antigravity",
         "artist": "Starset",
-        "artist_image": "https://i.scdn.co/image/284ed9c7a1eb52da99d08542c169c8fee0d5835a",
+        "artist_image": "https://i.scdn.co/image/ce779a94e1b6b29abf385b966bfda96ad35c1afd",
         "cover": "https://i.scdn.co/image/bf19d05fa536b2c8bc9227e13e146a19dbc291e3",
         "album": "Transmissions",
         "spotify_data": {
@@ -1130,7 +1263,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 8,
+                    "index": 9,
                     "timestamp": 1504394707
                 }
             }
@@ -1159,14 +1292,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 9,
+                    "index": 10,
                     "timestamp": 1504387208
                 }
             }
         },
         "song_title": "Ashes of Eden",
         "artist": "Breaking Benjamin",
-        "artist_image": "https://i.scdn.co/image/4ab55e0fd6318b82c0955d31a3ee945d7f3988d8",
+        "artist_image": "https://i.scdn.co/image/af3411bbd2b4d91f994196b2a91b7c372f52c90b",
         "cover": "https://i.scdn.co/image/2886e34fd3ceaf11c6f5873809f5869d72706947",
         "album": "Dark Before Dawn",
         "spotify_data": {
@@ -1304,14 +1437,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 10,
+                    "index": 11,
                     "timestamp": 1504391787
                 }
             }
         },
         "song_title": "BURN IT DOWN",
         "artist": "Linkin Park",
-        "artist_image": "https://i.scdn.co/image/f759994946aa42851e5293083f472c96c1753105",
+        "artist_image": "https://i.scdn.co/image/0b0925b544b46d90a549f25a7f754ce6e59e6be2",
         "cover": "https://i.scdn.co/image/967661595be2ffdd741e8e7c72cbd975dfc263b5",
         "album": "LIVING THINGS",
         "spotify_data": {
@@ -1435,7 +1568,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 11,
+                    "index": 12,
                     "timestamp": 1505324836
                 }
             }
@@ -1596,7 +1729,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 12,
+                    "index": 13,
                     "timestamp": 1504389479
                 }
             }
@@ -1727,7 +1860,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 13,
+                    "index": 14,
                     "timestamp": 1503687003
                 }
             }
@@ -1880,14 +2013,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 14,
+                    "index": 15,
                     "timestamp": 1504392990
                 }
             }
         },
         "song_title": "Believer",
         "artist": "Imagine Dragons",
-        "artist_image": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
+        "artist_image": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
         "cover": "https://i.scdn.co/image/84989ed4cca6518fa540bb3c8a7a73127695e937",
         "album": "Evolve",
         "spotify_data": {
@@ -2009,14 +2142,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 15,
+                    "index": 16,
                     "timestamp": 1507115699
                 }
             }
         },
         "song_title": "Best Day Of My Life",
         "artist": "American Authors",
-        "artist_image": "https://i.scdn.co/image/4542bd8de919515fb62f3eccecc96705a1590ec5",
+        "artist_image": "https://i.scdn.co/image/3ffea202ebda18c9faf3b569cfbe06aaa71bce3a",
         "cover": "https://i.scdn.co/image/92f219a25a075facb0510a9afaf3994baa0896d7",
         "album": "Oh, What A Life",
         "spotify_data": {
@@ -2142,14 +2275,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 16,
+                    "index": 17,
                     "timestamp": 1505161685
                 }
             }
         },
         "song_title": "Billie Jean",
         "artist": "EDEN",
-        "artist_image": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+        "artist_image": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
         "cover": "https://i.scdn.co/image/5e03bd60821c2a8ab7dc28731325bc525f068730",
         "album": "Billie Jean",
         "spotify_data": {
@@ -2177,7 +2310,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 72,
+                    "popularity": 74,
                     "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
                     "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
                 }
@@ -2210,7 +2343,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 72,
+                        "popularity": 74,
                         "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
                         "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
                     }
@@ -2263,14 +2396,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 17,
+                    "index": 18,
                     "timestamp": 1506869975
                 }
             }
         },
         "song_title": "Black Magic",
         "artist": "Little Mix",
-        "artist_image": "https://i.scdn.co/image/8d0fe01c4ff5f9e191ef73fc198f7eeac7626a8a",
+        "artist_image": "https://i.scdn.co/image/e9877f5b2188b7d24323517d08ff8826b68cd5fc",
         "cover": "https://i.scdn.co/image/995552b34c1779ec3126dbeddf37d7b2e26f9c9d",
         "album": "Get Weird (Deluxe)",
         "spotify_data": {
@@ -2394,14 +2527,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 18,
+                    "index": 19,
                     "timestamp": 1505324836
                 }
             }
         },
         "song_title": "Blank Space",
         "artist": "Taylor Swift",
-        "artist_image": "https://i.scdn.co/image/f05d47767098d4161107efebe51b14972caea40b",
+        "artist_image": "https://i.scdn.co/image/73b24abde1dd92855d03557e1de9b68212e1f43c",
         "cover": "https://i.scdn.co/image/22d30ca92618d5c5b09ab6cf526c1b77f2518b07",
         "album": "1989",
         "spotify_data": {
@@ -2525,7 +2658,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 19,
+                    "index": 20,
                     "timestamp": 1504391142
                 }
             }
@@ -2652,14 +2785,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 20,
+                    "index": 21,
                     "timestamp": 1506876006
                 }
             }
         },
         "song_title": "Brave",
         "artist": "Sara Bareilles",
-        "artist_image": "https://i.scdn.co/image/4404964cc454964acacd5c39af37d6b56a3ada77",
+        "artist_image": "https://i.scdn.co/image/a90716a64a96e2e3cf10cac651163e33bf228a10",
         "cover": "https://i.scdn.co/image/044340dd5b2147f9a877025888ddcb05aa049c3a",
         "album": "The Blessed Unrest",
         "spotify_data": {
@@ -2809,14 +2942,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 21,
+                    "index": 22,
                     "timestamp": 1504385363
                 }
             }
         },
         "song_title": "Breath",
         "artist": "Breaking Benjamin",
-        "artist_image": "https://i.scdn.co/image/af3411bbd2b4d91f994196b2a91b7c372f52c90b",
+        "artist_image": "https://i.scdn.co/image/0eed1e428ac3af29a50ac137eebe1fca90bf715c",
         "cover": "https://i.scdn.co/image/60f9b69aa68780b33f9a6f873e628da0e05b735b",
         "album": "Phobia (Clean Version)",
         "spotify_data": {
@@ -2954,7 +3087,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 22,
+                    "index": 23,
                     "timestamp": 1503227394
                 }
             }
@@ -3091,7 +3224,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 23,
+                    "index": 24,
                     "timestamp": 1506869000
                 }
             }
@@ -3125,7 +3258,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 24,
+                    "index": 25,
                     "timestamp": 1505163087
                 }
             }
@@ -3248,14 +3381,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 25,
+                    "index": 26,
                     "timestamp": 1505324836
                 }
             }
         },
         "song_title": "Broken",
         "artist": "Seether & Amy Lee",
-        "artist_image": "https://i.scdn.co/image/959335d1e7b96187ab744040a95b57de9049da75",
+        "artist_image": "https://i.scdn.co/image/cddfeee58dcec485f723a53d63f518aff41c5822",
         "cover": "https://i.scdn.co/image/9a28070901aadbac79dfe8f3af1455dbee5b3ebf",
         "album": "Seether: 2002-2013",
         "spotify_data": {
@@ -3408,14 +3541,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 26,
+                    "index": 27,
                     "timestamp": 1505324966
                 }
             }
         },
         "song_title": "Call Me",
         "artist": "Shinedown",
-        "artist_image": "https://i.scdn.co/image/64e00c05a17ef8cf3b5c3d46ed1d5ca098abe863",
+        "artist_image": "https://i.scdn.co/image/70e3b978e965c32438857195a2d4099353043bd7",
         "cover": "https://i.scdn.co/image/fec570c176a12d329482f22a70677f2f3f9c1255",
         "album": "The Sound of Madness",
         "spotify_data": {
@@ -3553,7 +3686,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 27,
+                    "index": 28,
                     "timestamp": 1505163087
                 }
             }
@@ -3676,14 +3809,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 28,
+                    "index": 29,
                     "timestamp": 1504639838
                 }
             }
         },
         "song_title": "Carnivore",
         "artist": "Starset",
-        "artist_image": "https://i.scdn.co/image/4d17c891ba74d4397ff31024aa91f7fc724c31cd",
+        "artist_image": "https://i.scdn.co/image/559bc31005898e3b22e52df9e7d23cc3a11294e6",
         "cover": "https://i.scdn.co/image/bf19d05fa536b2c8bc9227e13e146a19dbc291e3",
         "album": "Transmissions",
         "spotify_data": {
@@ -3817,14 +3950,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 29,
+                    "index": 30,
                     "timestamp": 1505060716
                 }
             }
         },
         "song_title": "Castle on the Hill",
         "artist": "Ed Sheeran",
-        "artist_image": "https://i.scdn.co/image/e21f791b600f04f9dd8ad2b6d9b3304a82e048ca",
+        "artist_image": "https://i.scdn.co/image/f0370da3f52161b07a461b4be9a64d0adbfb498d",
         "cover": "https://i.scdn.co/image/e6a84983ed9b0a04ce633b021329f7df034e7c7c",
         "album": "\u00f7 (Deluxe)",
         "spotify_data": {
@@ -3942,14 +4075,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 30,
+                    "index": 31,
                     "timestamp": 1504394707
                 }
             }
         },
         "song_title": "Change My Life",
         "artist": "Ashes Remain",
-        "artist_image": "https://i.scdn.co/image/e4a1c71488b3f40f6a78ad53337ecf4e0ecb9a6c",
+        "artist_image": "https://i.scdn.co/image/828d1ec770ed57b76014f3f404434f531be69b9a",
         "cover": "https://i.scdn.co/image/5990898af7d891872bbf326057a268bd520e509e",
         "album": "What I've Become",
         "spotify_data": {
@@ -4073,7 +4206,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 31,
+                    "index": 32,
                     "timestamp": 1504973923
                 }
             }
@@ -4107,14 +4240,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 32,
+                    "index": 33,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "City of Angels",
         "artist": "Bridge to Grace",
-        "artist_image": "https://i.scdn.co/image/63289d1bc60f0fbf5dc6f866f289cd54590772a3",
+        "artist_image": "https://i.scdn.co/image/5fc625f8ac5f18f2124f81eea105eeaff4803831",
         "cover": "https://i.scdn.co/image/03a8a919026f85085e88a0e7cd16e317bbf778d5",
         "album": "Origins",
         "spotify_data": {
@@ -4244,14 +4377,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 33,
+                    "index": 34,
                     "timestamp": 1504395382
                 }
             }
         },
         "song_title": "Closer",
         "artist": "The Chainsmokers & Halsey",
-        "artist_image": "https://i.scdn.co/image/24c37ccd6e7ffcb6b58d42e2b152eed61050fb08",
+        "artist_image": "https://i.scdn.co/image/098f5d6b1560d8c4d6f7a00ff7029ed3ea33ab64",
         "cover": "https://i.scdn.co/image/512bd22e2bc73f9883b8612daf4f23acaac3c776",
         "album": "Closer",
         "spotify_data": {
@@ -4403,14 +4536,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 34,
+                    "index": 35,
                     "timestamp": 1504389479
                 }
             }
         },
         "song_title": "Cold",
         "artist": "Crossfade",
-        "artist_image": "https://i.scdn.co/image/1b2195463aa3568f39866c892cbb08d9fce21ff4",
+        "artist_image": "https://i.scdn.co/image/c950db40c89089683ebc4f3edb45737ff03e28d2",
         "cover": "https://i.scdn.co/image/ec06f70ec06a21010c4ad7e40efbedbb4715a5ea",
         "album": "Crossfade",
         "spotify_data": {
@@ -4546,14 +4679,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 35,
+                    "index": 36,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "Comatose",
         "artist": "Skillet",
-        "artist_image": "https://i.scdn.co/image/28e0d2d74a55576b59ed62760522705b007b99e1",
+        "artist_image": "https://i.scdn.co/image/d11542051c3135e7a43b9c3ad50af4c9b623461c",
         "cover": "https://i.scdn.co/image/6fe969ee4807076085c7e1a3d4ecdb9d5559f67d",
         "album": "Comatose",
         "spotify_data": {
@@ -4685,14 +4818,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 36,
+                    "index": 37,
                     "timestamp": 1504389479
                 }
             }
         },
         "song_title": "Coming Down",
         "artist": "Five Finger Death Punch",
-        "artist_image": "https://i.scdn.co/image/e6a0a32f32579925c3e5433be4fd5398c62a0166",
+        "artist_image": "https://i.scdn.co/image/a8aaa3ffd9c271c4993a03ff6a8ccd2de518f69b",
         "cover": "https://i.scdn.co/image/1c1cb58a55a9bda241db591981180a734c5c488e",
         "album": "American Capitalist",
         "spotify_data": {
@@ -4816,7 +4949,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 37,
+                    "index": 38,
                     "timestamp": 1504392990
                 }
             }
@@ -4947,7 +5080,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 38,
+                    "index": 39,
                     "timestamp": 1504387209
                 }
             }
@@ -5092,14 +5225,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 39,
+                    "index": 40,
                     "timestamp": 1505324836
                 }
             }
         },
         "song_title": "Dancing On My Own",
         "artist": "Calum Scott",
-        "artist_image": "https://i.scdn.co/image/225280c690ba48510682ecbf771c3b75a379d8cb",
+        "artist_image": "https://i.scdn.co/image/a44669588c09099e8be2b5d0cd318c37ac0af7e3",
         "cover": "https://i.scdn.co/image/ca67e401902a838e54b76166586a9c2850a6b4ab",
         "album": "Dancing On My Own",
         "spotify_data": {
@@ -5221,7 +5354,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 40,
+                    "index": 41,
                     "timestamp": 1503227394
                 }
             }
@@ -5255,14 +5388,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 41,
+                    "index": 42,
                     "timestamp": 1506929228
                 }
             }
         },
         "song_title": "Demons",
         "artist": "Imagine Dragons",
-        "artist_image": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
+        "artist_image": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
         "cover": "https://i.scdn.co/image/443609cd35e43c7bdb272b3d1d9e80290e128bc5",
         "album": "Night Visions",
         "spotify_data": {
@@ -5384,7 +5517,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 42,
+                    "index": 43,
                     "timestamp": 1503227394
                 }
             }
@@ -5413,7 +5546,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 43,
+                    "index": 44,
                     "timestamp": 1503227394
                 }
             }
@@ -5442,14 +5575,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 44,
+                    "index": 45,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "Do I Wanna Know?",
         "artist": "Arctic Monkeys",
-        "artist_image": "https://i.scdn.co/image/b30c0e39cfa70b2124b9d0d24e83761ef48e5540",
+        "artist_image": "https://i.scdn.co/image/c488bf987b2f716a539a768a102855450345113d",
         "cover": "https://i.scdn.co/image/f513ae2d610d9255913795d4bc28ca33c827b232",
         "album": "AM",
         "spotify_data": {
@@ -5585,14 +5718,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 45,
+                    "index": 46,
                     "timestamp": 1504391079
                 }
             }
         },
         "song_title": "Don't",
         "artist": "Ed Sheeran",
-        "artist_image": "https://i.scdn.co/image/f39b705ba6b1070c77bce4e9c21dff5bac96f21c",
+        "artist_image": "https://i.scdn.co/image/e21f791b600f04f9dd8ad2b6d9b3304a82e048ca",
         "cover": "https://i.scdn.co/image/b68b39fdc2409d0f526ad48775ddcd93ff496cda",
         "album": "x (Deluxe Edition)",
         "spotify_data": {
@@ -5690,6 +5823,234 @@
     {
         "version": 103,
         "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-qGyPuey-1Jw-Drunken_Sailer_-_Irish_Rovers.NA",
+        "video_id": "qGyPuey-1Jw",
+        "url": "https://www.youtube.com/watch?v=qGyPuey-1Jw",
+        "title": "Drunken Sailer - Irish Rovers",
+        "duration": 159,
+        "thumbnail": "https://i.ytimg.com/vi/qGyPuey-1Jw/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "With Lyrics.\nThe blue bunnys at the end of the video have to indicate to present arms nothing else as my name. For it I have taken an animation from the film \"The dragon's hunters\".\n\nKlick here 4 new Album:\nhttps://www.youtube.com/redirect?q=http%3A%2F%2Ftheirishroversmusic.com%2Fecom%2F%3Fcategory%3D5%26product%3D39&redir_token=UAbowaUQHaYzaAUQvkMks5nOz6J8MTUxMjA3ODE5MUAxNTExOTkxNzkx&event=video_description&v=qGyPuey-1Jw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/CKhYHbF.jpg",
+                    "name": "Gems",
+                    "id": "gems",
+                    "index": 47,
+                    "timestamp": 1511991803
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-tt2k8PGm-TI-ZAYN_-_Dusk_Till_Dawn_ft._Sia.NA",
+        "video_id": "tt2k8PGm-TI",
+        "url": "https://www.youtube.com/watch?v=tt2k8PGm-TI",
+        "title": "ZAYN - Dusk Till Dawn ft. Sia",
+        "duration": 337,
+        "thumbnail": "https://i.ytimg.com/vi/tt2k8PGm-TI/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "ZAYN's \"Dusk Till Dawn\" ft. Sia on iTunes: http://smarturl.it/ZDTD/itunes?IQid=yt\nStream/Add on Spotify: http://smarturl.it/ZDTD/spotify?IQid=yt\nGet it on Amazon Music: http://smarturl.it/ZDTD/amazon?IQid=yt\nStream on Apple Music: https://www.youtube.com/redirect?event=video_description&v=tt2k8PGm-TI&q=http%3A%2F%2Fsmarturl.it%2FZDTD%2Fapplemusic%3FIQid%3Dyt&redir_token=7S-6DiFpqHoSFWjc8fGTN6TbiGd8MTUxMDg0OTE2N0AxNTEwNzYyNzY3\nGet it on Google Play: https://www.youtube.com/redirect?event=video_description&v=tt2k8PGm-TI&q=http%3A%2F%2Fsmarturl.it%2FZDTD%2Fgoogleplay%3FIQid%3Dyt&redir_token=7S-6DiFpqHoSFWjc8fGTN6TbiGd8MTUxMDg0OTE2N0AxNTEwNzYyNzY3\nStream on Deezer: http://smarturl.it/ZDTD/deezer?IQid=yt\n\nFollow ZAYN -\nFacebook: http://www.facebook.com/ZAYN\nTwitter: https://twitter.com/zaynmalik\nInstagram: http://www.instagram.com/ZAYN\nSnapchat: https://www.snapchat.com/add/ZAYN\nYouTube Subscribe: http://smarturl.it/ZAYNxVEVO\nSpotify: http://smarturl.it/ZAYNSpotify\nSite: http://www.inZAYN.com\nBest of ZAYN https://goo.gl/cPSAvh\nSubscribe for more https://goo.gl/PzvemB\nBest of ZAYN: https://goo.gl/7BipKK\nSubscribe here: https://goo.gl/7TjEyk",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/CKhYHbF.jpg",
+                    "name": "Gems",
+                    "id": "gems",
+                    "index": 48,
+                    "timestamp": 1510762787
+                }
+            }
+        },
+        "song_title": "Dusk Till Dawn - Radio Edit",
+        "artist": "ZAYN & Sia",
+        "artist_image": "https://i.scdn.co/image/6edec161696d18ca309b9b0fecc9d4acdec71c3f",
+        "cover": "https://i.scdn.co/image/53779ee060cd1618e62e7a47bf3c7645ced2ba70",
+        "album": "Dusk Till Dawn (Radio Edit)",
+        "spotify_data": {
+            "id": "1j4kHkkpqZRBwE0A4CN4Yv",
+            "name": "Dusk Till Dawn - Radio Edit",
+            "artists": [
+                {
+                    "id": "5ZsFI1h6hIdQRw2ti0hz81",
+                    "name": "ZAYN",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/6edec161696d18ca309b9b0fecc9d4acdec71c3f",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/b860726959405f0b56bfa176a827d352bb36c075",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/49e46f4751031a344c96a43dbfadbcac84948196",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "dance pop",
+                        "pop",
+                        "post-teen pop",
+                        "tropical house"
+                    ],
+                    "popularity": 91,
+                    "uri": "spotify:artist:5ZsFI1h6hIdQRw2ti0hz81",
+                    "href": "https://open.spotify.com/artist/5ZsFI1h6hIdQRw2ti0hz81"
+                },
+                {
+                    "id": "5WUlDfRSoLAfcVSX1WnrxN",
+                    "name": "Sia",
+                    "images": [
+                        {
+                            "height": 1000,
+                            "url": "https://i.scdn.co/image/0520ee75579d30a6019f6eb7f486cec78115999b",
+                            "width": 1000
+                        },
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/73ad5f249219606f6162f343ea74e998bfe1eef3",
+                            "width": 640
+                        },
+                        {
+                            "height": 200,
+                            "url": "https://i.scdn.co/image/e69e2c19834b560261092ae6cae67f2b86bb6e17",
+                            "width": 200
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/2ac0ad8984da617afc5753178b2aebcaac3bd421",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "australian dance",
+                        "dance pop",
+                        "pop"
+                    ],
+                    "popularity": 94,
+                    "uri": "spotify:artist:5WUlDfRSoLAfcVSX1WnrxN",
+                    "href": "https://open.spotify.com/artist/5WUlDfRSoLAfcVSX1WnrxN"
+                }
+            ],
+            "artist": "ZAYN & Sia",
+            "cover_url": "https://i.scdn.co/image/53779ee060cd1618e62e7a47bf3c7645ced2ba70",
+            "duration": 239.0,
+            "album": {
+                "id": "5l5gR4rh26QI3fijGFTDrp",
+                "name": "Dusk Till Dawn (Radio Edit)",
+                "artists": [
+                    {
+                        "id": "5ZsFI1h6hIdQRw2ti0hz81",
+                        "name": "ZAYN",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/6edec161696d18ca309b9b0fecc9d4acdec71c3f",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/b860726959405f0b56bfa176a827d352bb36c075",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/49e46f4751031a344c96a43dbfadbcac84948196",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "dance pop",
+                            "pop",
+                            "post-teen pop",
+                            "tropical house"
+                        ],
+                        "popularity": 91,
+                        "uri": "spotify:artist:5ZsFI1h6hIdQRw2ti0hz81",
+                        "href": "https://open.spotify.com/artist/5ZsFI1h6hIdQRw2ti0hz81"
+                    },
+                    {
+                        "id": "5WUlDfRSoLAfcVSX1WnrxN",
+                        "name": "Sia",
+                        "images": [
+                            {
+                                "height": 1000,
+                                "url": "https://i.scdn.co/image/0520ee75579d30a6019f6eb7f486cec78115999b",
+                                "width": 1000
+                            },
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/73ad5f249219606f6162f343ea74e998bfe1eef3",
+                                "width": 640
+                            },
+                            {
+                                "height": 200,
+                                "url": "https://i.scdn.co/image/e69e2c19834b560261092ae6cae67f2b86bb6e17",
+                                "width": 200
+                            },
+                            {
+                                "height": 64,
+                                "url": "https://i.scdn.co/image/2ac0ad8984da617afc5753178b2aebcaac3bd421",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "australian dance",
+                            "dance pop",
+                            "pop"
+                        ],
+                        "popularity": 94,
+                        "uri": "spotify:artist:5WUlDfRSoLAfcVSX1WnrxN",
+                        "href": "https://open.spotify.com/artist/5WUlDfRSoLAfcVSX1WnrxN"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/53779ee060cd1618e62e7a47bf3c7645ced2ba70",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/492de7f87c8a94d7af46a332eb3688a41f1e0b0d",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/eb0909052dc1bf9eb2da86a79996fd1766d921d6",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:5l5gR4rh26QI3fijGFTDrp"
+            },
+            "popularity": 97,
+            "uri": "spotify:track:1j4kHkkpqZRBwE0A4CN4Yv",
+            "query": "ZAYN - Dusk Till Dawn Sia",
+            "certainty": 0.8636363636363636
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
         "expected_filename": "cache/audio_cache/youtube-iKzRIweSBLA-Ed_Sheeran_-_Perfect_Official_Lyric_Video.NA",
         "video_id": "iKzRIweSBLA",
         "url": "https://www.youtube.com/watch?v=iKzRIweSBLA",
@@ -5710,7 +6071,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 46,
+                    "index": 49,
                     "timestamp": 1506927792
                 }
             }
@@ -5739,14 +6100,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 47,
+                    "index": 50,
                     "timestamp": 1505161685
                 }
             }
         },
         "song_title": "End Credits",
         "artist": "EDEN",
-        "artist_image": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+        "artist_image": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
         "cover": "https://i.scdn.co/image/92ea26aae1129bd60dc1d4f0313087dc06ee1509",
         "album": "End Credits",
         "spotify_data": {
@@ -5774,7 +6135,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 72,
+                    "popularity": 74,
                     "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
                     "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
                 }
@@ -5807,7 +6168,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 72,
+                        "popularity": 74,
                         "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
                         "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
                     }
@@ -5860,14 +6221,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 48,
+                    "index": 51,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "Everywhere I Go",
         "artist": "Onlap",
-        "artist_image": "https://i.scdn.co/image/76383a9134c48559e4cfadfca9660d234861cb73",
+        "artist_image": "https://i.scdn.co/image/ed4971fcf1a6c129260ec3ef4f16a06e45d38b7e",
         "cover": "https://i.scdn.co/image/5529b71c26734c72b21e27b2b6f159aff9a2bdcc",
         "album": "Running",
         "spotify_data": {
@@ -5985,14 +6346,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 49,
+                    "index": 52,
                     "timestamp": 1504391079
                 }
             }
         },
         "song_title": "Faded",
         "artist": "Alan Walker",
-        "artist_image": "https://i.scdn.co/image/0cf0206c2a2859cda610210bb78477a63cf0848e",
+        "artist_image": "https://i.scdn.co/image/68fd7abf9381115b3ac4e56cd8871b2ffe59f025",
         "cover": "https://i.scdn.co/image/88b7bb773811fa4fabf36e4c49d306f01d27527c",
         "album": "Faded",
         "spotify_data": {
@@ -6112,14 +6473,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 50,
+                    "index": 53,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "Failure",
         "artist": "Breaking Benjamin",
-        "artist_image": "https://i.scdn.co/image/fc679f65311133e7f95cd45ef83feef9825331c3",
+        "artist_image": "https://i.scdn.co/image/0eed1e428ac3af29a50ac137eebe1fca90bf715c",
         "cover": "https://i.scdn.co/image/2886e34fd3ceaf11c6f5873809f5869d72706947",
         "album": "Dark Before Dawn",
         "spotify_data": {
@@ -6257,7 +6618,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 51,
+                    "index": 54,
                     "timestamp": 1504392990
                 }
             }
@@ -6388,14 +6749,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 52,
+                    "index": 55,
                     "timestamp": 1504391202
                 }
             }
         },
         "song_title": "Famous",
         "artist": "Skillet",
-        "artist_image": "https://i.scdn.co/image/28e0d2d74a55576b59ed62760522705b007b99e1",
+        "artist_image": "https://i.scdn.co/image/d11542051c3135e7a43b9c3ad50af4c9b623461c",
         "cover": "https://i.scdn.co/image/d3fc2112af726467c24e04de437e444fe7741962",
         "album": "Unleashed",
         "spotify_data": {
@@ -6527,7 +6888,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 53,
+                    "index": 56,
                     "timestamp": 1503227394
                 }
             }
@@ -6561,14 +6922,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 54,
+                    "index": 57,
                     "timestamp": 1504389479
                 }
             }
         },
         "song_title": "Fight Song",
         "artist": "Rachel Platten",
-        "artist_image": "https://i.scdn.co/image/d04d6a41252757c3f05fca5b28e8db3346168dd1",
+        "artist_image": "https://i.scdn.co/image/20efcd777262623ca10af6fc78efef3c6a2deb06",
         "cover": "https://i.scdn.co/image/5c37d9b7e279611d48b5d3d484d017cbed290c42",
         "album": "Wildfire",
         "spotify_data": {
@@ -6694,14 +7055,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 55,
+                    "index": 58,
                     "timestamp": 1504392990
                 }
             }
         },
         "song_title": "Final Masquerade",
         "artist": "Linkin Park",
-        "artist_image": "https://i.scdn.co/image/1685533969d5b68cbc630f991e873bd6467f1814",
+        "artist_image": "https://i.scdn.co/image/f759994946aa42851e5293083f472c96c1753105",
         "cover": "https://i.scdn.co/image/0fd0e5c52b212771f6f882f75880757cfa2e57a1",
         "album": "The Hunting Party",
         "spotify_data": {
@@ -6805,6 +7166,145 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-k4V3Mo61fJM-Coldplay_-_Fix_You.NA",
+        "video_id": "k4V3Mo61fJM",
+        "url": "https://www.youtube.com/watch?v=k4V3Mo61fJM",
+        "title": "Coldplay - Fix You",
+        "duration": 296,
+        "thumbnail": "https://i.ytimg.com/vi/k4V3Mo61fJM/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Get A Head Full Of Dreams now:\n\u2013 iTunes http://cldp.ly/cpitunes\n\u2013 Amazon http://smarturl.it/AHFODamazon\n\u2013 Google Play http://smarturl.it/AHFODgplay\n\u2013 CD (with exclusive holographic stickers) http://smarturl.it/AHFODcd\n\u2013 Vinyl (with exclusive holographic stickers) http://smarturl.it/AHFODvinyl\n\n~ Follow Coldplay ~\nWebsite: http://www.coldplay.com\nTwitter: https://twitter.com/coldplay\nFacebook: https://www.facebook.com/coldplay\nInstagram: http://instagram.com/coldplay\nGoogle+: http://instagram.com/coldplay\nTumblr: http://coldplay.tumblr.com/\nVK: https://vk.com/coldplay",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/CKhYHbF.jpg",
+                    "name": "Gems",
+                    "id": "gems",
+                    "index": 59,
+                    "timestamp": 1511701303
+                }
+            }
+        },
+        "song_title": "Fix You",
+        "artist": "Coldplay",
+        "artist_image": "https://i.scdn.co/image/143b0f286f76ece3a711f673d9ba00b8f499b2c0",
+        "cover": "https://i.scdn.co/image/ce2cb283df41c592e72df1900558d8af97445aa6",
+        "album": "X & Y",
+        "spotify_data": {
+            "id": "7LVHVU3tWfcxj5aiPFEW4Q",
+            "name": "Fix You",
+            "artists": [
+                {
+                    "id": "4gzpq5DPGxSnKTe4SA8HAU",
+                    "name": "Coldplay",
+                    "images": [
+                        {
+                            "height": 1000,
+                            "url": "https://i.scdn.co/image/143b0f286f76ece3a711f673d9ba00b8f499b2c0",
+                            "width": 1000
+                        },
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/9815eb48540fa0d1c87ebd22289060729b1ab32a",
+                            "width": 640
+                        },
+                        {
+                            "height": 200,
+                            "url": "https://i.scdn.co/image/02c781539fca2176059bdeafd9fa903db5b9a4d0",
+                            "width": 200
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/d82a669c531c06b703c7468a8981424581f14e91",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "permanent wave",
+                        "pop",
+                        "pop christmas"
+                    ],
+                    "popularity": 93,
+                    "uri": "spotify:artist:4gzpq5DPGxSnKTe4SA8HAU",
+                    "href": "https://open.spotify.com/artist/4gzpq5DPGxSnKTe4SA8HAU"
+                }
+            ],
+            "artist": "Coldplay",
+            "cover_url": "https://i.scdn.co/image/ce2cb283df41c592e72df1900558d8af97445aa6",
+            "duration": 295.533,
+            "album": {
+                "id": "4E7bV0pzG0LciBSWTszra6",
+                "name": "X & Y",
+                "artists": [
+                    {
+                        "id": "4gzpq5DPGxSnKTe4SA8HAU",
+                        "name": "Coldplay",
+                        "images": [
+                            {
+                                "height": 1000,
+                                "url": "https://i.scdn.co/image/143b0f286f76ece3a711f673d9ba00b8f499b2c0",
+                                "width": 1000
+                            },
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/9815eb48540fa0d1c87ebd22289060729b1ab32a",
+                                "width": 640
+                            },
+                            {
+                                "height": 200,
+                                "url": "https://i.scdn.co/image/02c781539fca2176059bdeafd9fa903db5b9a4d0",
+                                "width": 200
+                            },
+                            {
+                                "height": 64,
+                                "url": "https://i.scdn.co/image/d82a669c531c06b703c7468a8981424581f14e91",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "permanent wave",
+                            "pop",
+                            "pop christmas"
+                        ],
+                        "popularity": 93,
+                        "uri": "spotify:artist:4gzpq5DPGxSnKTe4SA8HAU",
+                        "href": "https://open.spotify.com/artist/4gzpq5DPGxSnKTe4SA8HAU"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ce2cb283df41c592e72df1900558d8af97445aa6",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/3866d7443de4c47b47367d45973afb20e78df161",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/b251660ff4f59508e50301ce04749679ccdea5ac",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:4E7bV0pzG0LciBSWTszra6"
+            },
+            "popularity": 81,
+            "uri": "spotify:track:7LVHVU3tWfcxj5aiPFEW4Q",
+            "query": "Coldplay - Fix You",
+            "certainty": 0.9411764705882353
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache/audio_cache/youtube-r7jaXI6oXpQ-The_Script_-_Flares_Audio.NA",
         "video_id": "r7jaXI6oXpQ",
         "url": "https://www.youtube.com/watch?v=r7jaXI6oXpQ",
@@ -6825,14 +7325,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 56,
+                    "index": 60,
                     "timestamp": 1506939042
                 }
             }
         },
         "song_title": "Flares",
         "artist": "The Script",
-        "artist_image": "https://i.scdn.co/image/d9326a32a2e1ba86251a0d57fb1adec9110cfd2f",
+        "artist_image": "https://i.scdn.co/image/604351c643ae82f423f792f094b287165014d898",
         "cover": "https://i.scdn.co/image/3499f757a839bb12338b4748e195e27a98085f66",
         "album": "No Sound Without Silence",
         "spotify_data": {
@@ -6962,7 +7462,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 57,
+                    "index": 61,
                     "timestamp": 1506932547
                 }
             }
@@ -7099,7 +7599,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 58,
+                    "index": 62,
                     "timestamp": 1503227394
                 }
             }
@@ -7224,14 +7724,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 59,
+                    "index": 63,
                     "timestamp": 1504390715
                 }
             }
         },
         "song_title": "Galway Girl",
         "artist": "Ed Sheeran",
-        "artist_image": "https://i.scdn.co/image/e21f791b600f04f9dd8ad2b6d9b3304a82e048ca",
+        "artist_image": "https://i.scdn.co/image/f0370da3f52161b07a461b4be9a64d0adbfb498d",
         "cover": "https://i.scdn.co/image/e6a84983ed9b0a04ce633b021329f7df034e7c7c",
         "album": "\u00f7 (Deluxe)",
         "spotify_data": {
@@ -7349,14 +7849,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 60,
+                    "index": 64,
                     "timestamp": 1503686764
                 }
             }
         },
         "song_title": "Geronimo",
         "artist": "Sheppard",
-        "artist_image": "https://i.scdn.co/image/d95c1d8cf5ff138cda6920601a31fab781bda880",
+        "artist_image": "https://i.scdn.co/image/dd90704af0834571417233d91fc6932ab87a8065",
         "cover": "https://i.scdn.co/image/4b91db14047f04a91af50a62d088f40e84a20a75",
         "album": "Bombs Away",
         "spotify_data": {
@@ -7478,14 +7978,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 61,
+                    "index": 65,
                     "timestamp": 1504387209
                 }
             }
         },
         "song_title": "Give Me A Sign",
         "artist": "Breaking Benjamin",
-        "artist_image": "https://i.scdn.co/image/af3411bbd2b4d91f994196b2a91b7c372f52c90b",
+        "artist_image": "https://i.scdn.co/image/fc679f65311133e7f95cd45ef83feef9825331c3",
         "cover": "https://i.scdn.co/image/ad4b7a621db877f249bf1f24dc19cb00d9147b5c",
         "album": "Dear Agony",
         "spotify_data": {
@@ -7623,14 +8123,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 62,
+                    "index": 66,
                     "timestamp": 1505163087
                 }
             }
         },
         "song_title": "Going Under",
         "artist": "Evanescence",
-        "artist_image": "https://i.scdn.co/image/7e69aa68fed9e4328def69e79f7409a5c6c791b7",
+        "artist_image": "https://i.scdn.co/image/701b25a8151c14bba6c2d8ee61df0e0e90acebb9",
         "cover": "https://i.scdn.co/image/e573e26d16bf8ac6d76a072d7c32bf56746d227b",
         "album": "Fallen",
         "spotify_data": {
@@ -7746,7 +8246,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 63,
+                    "index": 67,
                     "timestamp": 1504389479
                 }
             }
@@ -7879,7 +8379,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 64,
+                    "index": 68,
                     "timestamp": 1505161685
                 }
             }
@@ -7914,7 +8414,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 72,
+                    "popularity": 74,
                     "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
                     "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
                 }
@@ -7947,7 +8447,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 72,
+                        "popularity": 74,
                         "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
                         "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
                     }
@@ -8000,14 +8500,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 65,
+                    "index": 69,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "Had Enough",
         "artist": "Breaking Benjamin",
-        "artist_image": "https://i.scdn.co/image/0eed1e428ac3af29a50ac137eebe1fca90bf715c",
+        "artist_image": "https://i.scdn.co/image/4ab55e0fd6318b82c0955d31a3ee945d7f3988d8",
         "cover": "https://i.scdn.co/image/f5833bfb97bd059b2377e2072e231a4f7870f281",
         "album": "Phobia",
         "spotify_data": {
@@ -8145,14 +8645,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 66,
+                    "index": 70,
                     "timestamp": 1506932547
                 }
             }
         },
         "song_title": "Hall of Fame",
         "artist": "The Script & will.i.am",
-        "artist_image": "https://i.scdn.co/image/604351c643ae82f423f792f094b287165014d898",
+        "artist_image": "https://i.scdn.co/image/d9326a32a2e1ba86251a0d57fb1adec9110cfd2f",
         "cover": "https://i.scdn.co/image/a234693075f4c2b598e39b8fbc074408b22ffd5a",
         "album": "#3",
         "spotify_data": {
@@ -8319,14 +8819,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 67,
+                    "index": 71,
                     "timestamp": 1504639838
                 }
             }
         },
         "song_title": "Halo",
         "artist": "Starset",
-        "artist_image": "https://i.scdn.co/image/ce779a94e1b6b29abf385b966bfda96ad35c1afd",
+        "artist_image": "https://i.scdn.co/image/4d17c891ba74d4397ff31024aa91f7fc724c31cd",
         "cover": "https://i.scdn.co/image/496acbc71fbd4181b9abb9778b887faed83ea4ee",
         "album": "Transmissions (Deluxe Version)",
         "spotify_data": {
@@ -8440,6 +8940,139 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-4WMmCtkhWi0-A_Day_To_Remember_-_Have_Faith_In_Me.NA",
+        "video_id": "4WMmCtkhWi0",
+        "url": "https://www.youtube.com/watch?v=4WMmCtkhWi0",
+        "title": "A Day To Remember - Have Faith In Me",
+        "duration": 190,
+        "thumbnail": "https://i.ytimg.com/vi/4WMmCtkhWi0/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "A Day To Remember \"Have Faith In Me\" is from their album, Homesick, available now.\n\niTunes: http://bit.ly/UiufQN\nAmazon: http://amzn.to/15g8ofR\nDirect (CD / Vinyl): http://bit.ly/1avir7s\nSpotify: http://spoti.fi/7guuh9\n\nDirected by Mark Staubach\n\u00a9 Another Victory 2010",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/CKhYHbF.jpg",
+                    "name": "Gems",
+                    "id": "gems",
+                    "index": 72,
+                    "timestamp": 1511702841
+                }
+            }
+        },
+        "song_title": "Have Faith In Me",
+        "artist": "A Day To Remember",
+        "artist_image": "https://i.scdn.co/image/003def94d10fbb8d2f598f794dfde23b2eb4c4e2",
+        "cover": "https://i.scdn.co/image/0c15cbab6487c63f7fcb9fc4b485a8a4377687e1",
+        "album": "Homesick",
+        "spotify_data": {
+            "id": "5D25Vmd458UZ6n27g76d3l",
+            "name": "Have Faith In Me",
+            "artists": [
+                {
+                    "id": "4NiJW4q9ichVqL1aUsgGAN",
+                    "name": "A Day To Remember",
+                    "images": [
+                        {
+                            "height": 627,
+                            "url": "https://i.scdn.co/image/9a3b98dc87627c63a08a56176048dce612ded8e7",
+                            "width": 640
+                        },
+                        {
+                            "height": 314,
+                            "url": "https://i.scdn.co/image/003def94d10fbb8d2f598f794dfde23b2eb4c4e2",
+                            "width": 320
+                        },
+                        {
+                            "height": 157,
+                            "url": "https://i.scdn.co/image/f7cbfeb5d4ee79452669281dfbea2ea783a3cc84",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "alternative metal",
+                        "metalcore",
+                        "pop punk",
+                        "rap metal",
+                        "screamo"
+                    ],
+                    "popularity": 77,
+                    "uri": "spotify:artist:4NiJW4q9ichVqL1aUsgGAN",
+                    "href": "https://open.spotify.com/artist/4NiJW4q9ichVqL1aUsgGAN"
+                }
+            ],
+            "artist": "A Day To Remember",
+            "cover_url": "https://i.scdn.co/image/0c15cbab6487c63f7fcb9fc4b485a8a4377687e1",
+            "duration": 188.813,
+            "album": {
+                "id": "34eR6ev1GGZHmxNTEfRobW",
+                "name": "Homesick",
+                "artists": [
+                    {
+                        "id": "4NiJW4q9ichVqL1aUsgGAN",
+                        "name": "A Day To Remember",
+                        "images": [
+                            {
+                                "height": 627,
+                                "url": "https://i.scdn.co/image/9a3b98dc87627c63a08a56176048dce612ded8e7",
+                                "width": 640
+                            },
+                            {
+                                "height": 314,
+                                "url": "https://i.scdn.co/image/003def94d10fbb8d2f598f794dfde23b2eb4c4e2",
+                                "width": 320
+                            },
+                            {
+                                "height": 157,
+                                "url": "https://i.scdn.co/image/f7cbfeb5d4ee79452669281dfbea2ea783a3cc84",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "alternative metal",
+                            "metalcore",
+                            "pop punk",
+                            "rap metal",
+                            "screamo"
+                        ],
+                        "popularity": 77,
+                        "uri": "spotify:artist:4NiJW4q9ichVqL1aUsgGAN",
+                        "href": "https://open.spotify.com/artist/4NiJW4q9ichVqL1aUsgGAN"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/0c15cbab6487c63f7fcb9fc4b485a8a4377687e1",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/8f565b89d44d691cb6e80da06af6515ab55a69a9",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/7930e4627bcb01097a9583aa7c6938ab7b97fa76",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:34eR6ev1GGZHmxNTEfRobW"
+            },
+            "popularity": 61,
+            "uri": "spotify:track:5D25Vmd458UZ6n27g76d3l",
+            "query": "A Day To Remember - Have Faith In Me",
+            "certainty": 0.9714285714285714
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache/audio_cache/youtube-UprcpdwuwCg-twenty_one_pilots_-_Heathens_from_Suicide_Squad_-_The_Album_OFFICIAL_VIDEO.NA",
         "video_id": "UprcpdwuwCg",
         "url": "https://www.youtube.com/watch?v=UprcpdwuwCg",
@@ -8460,7 +9093,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 68,
+                    "index": 73,
                     "timestamp": 1504395382
                 }
             }
@@ -8597,14 +9230,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 69,
+                    "index": 74,
                     "timestamp": 1506939042
                 }
             }
         },
         "song_title": "Heaven",
         "artist": "Gotthard",
-        "artist_image": "https://i.scdn.co/image/218c35d9ff5802c2bca8f9e6046198bd3bd49e2f",
+        "artist_image": "https://i.scdn.co/image/8acdaf28ac4efeec9c2d05f84c8b7f73ae800523",
         "cover": "https://i.scdn.co/image/710ae49d02062b4688b45a1f5e6431d94348b0a0",
         "album": "Homerun",
         "spotify_data": {
@@ -8742,14 +9375,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 70,
+                    "index": 75,
                     "timestamp": 1507112656
                 }
             }
         },
         "song_title": "Hello",
         "artist": "Adele",
-        "artist_image": "https://i.scdn.co/image/f8737f6fda048b45efe91f81c2bda2b601ae689c",
+        "artist_image": "https://i.scdn.co/image/cbbdfb209cc38b2999b1882f42ee642555316313",
         "cover": "https://i.scdn.co/image/797009754c30847254b48de483f256258d90df7f",
         "album": "Hello",
         "spotify_data": {
@@ -8881,7 +9514,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 71,
+                    "index": 76,
                     "timestamp": 1503228024
                 }
             }
@@ -9024,14 +9657,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 72,
+                    "index": 77,
                     "timestamp": 1505163087
                 }
             }
         },
         "song_title": "Hero Of War",
         "artist": "Rise Against",
-        "artist_image": "https://i.scdn.co/image/bb54f19ac8a70161e63b460b8d28105c09e8b4e3",
+        "artist_image": "https://i.scdn.co/image/5d387d8990d08cff197a3b9d20693561320947a2",
         "cover": "https://i.scdn.co/image/9821a760f8bc0dc59f186ee184c624e5fe51abb2",
         "album": "Appeal To Reason",
         "spotify_data": {
@@ -9161,7 +9794,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 73,
+                    "index": 78,
                     "timestamp": 1504391079
                 }
             }
@@ -9294,14 +9927,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 74,
+                    "index": 79,
                     "timestamp": 1505324837
                 }
             }
         },
         "song_title": "Hold Back The River",
         "artist": "James Bay",
-        "artist_image": "https://i.scdn.co/image/478149928573b95c1232a6a2e27d51a5de037386",
+        "artist_image": "https://i.scdn.co/image/cc3af32533726ef108e882358094fd3aec122209",
         "cover": "https://i.scdn.co/image/80cce6b1bb492fd45ddb26a81c79959527d98a63",
         "album": "Chaos And The Calm",
         "spotify_data": {
@@ -9425,14 +10058,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 75,
+                    "index": 80,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "Holiday/Boulevard Of Broken Dreams",
         "artist": "Green Day",
-        "artist_image": "https://i.scdn.co/image/e5efead78896bfffe37a34b9ba9345129ab9a199",
+        "artist_image": "https://i.scdn.co/image/750d2623778e3522734d5e1942a18401fe100fc9",
         "cover": "https://i.scdn.co/image/2027dbfec96249cdc12ff804738898afce24a7a5",
         "album": "American Idiot",
         "spotify_data": {
@@ -9542,137 +10175,6 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
-        "expected_filename": "cache/audio_cache/youtube-kTHNpusq654-Katy_Perry_-_Hot_N_Cold_Official.NA",
-        "video_id": "kTHNpusq654",
-        "url": "https://www.youtube.com/watch?v=kTHNpusq654",
-        "title": "Katy Perry - Hot N Cold (Official)",
-        "duration": 284,
-        "thumbnail": "https://i.ytimg.com/vi/kTHNpusq654/default.jpg",
-        "thumbnail_brightness": null,
-        "description": "",
-        "meta": {
-            "author": {
-                "type": "Member",
-                "id": "206459363739566080",
-                "name": "Lophorius"
-            },
-            "playlist": {
-                "type": "built-in/dict",
-                "value": {
-                    "cover": "https://i.imgur.com/CKhYHbF.jpg",
-                    "name": "Gems",
-                    "id": "gems",
-                    "index": 76,
-                    "timestamp": 1507110537
-                }
-            }
-        },
-        "song_title": "Hot N Cold",
-        "artist": "Katy Perry",
-        "artist_image": "https://i.scdn.co/image/473d2b4e0386e518e1a8326fa7092dd702c399da",
-        "cover": "https://i.scdn.co/image/e5d8f865ecd59843c61596faa632b2c63650330e",
-        "album": "One Of The Boys",
-        "spotify_data": {
-            "id": "1y4eb6hmAvsqlDOl3fx9kk",
-            "name": "Hot N Cold",
-            "artists": [
-                {
-                    "id": "6jJ0s89eD6GaHleKKya26X",
-                    "name": "Katy Perry",
-                    "images": [
-                        {
-                            "height": 640,
-                            "url": "https://i.scdn.co/image/fcdc433e8ccf8d46d58ac70db322feb9b3328731",
-                            "width": 640
-                        },
-                        {
-                            "height": 320,
-                            "url": "https://i.scdn.co/image/9a2d7b0ce015dea90decae0141b219afe004af25",
-                            "width": 320
-                        },
-                        {
-                            "height": 160,
-                            "url": "https://i.scdn.co/image/473d2b4e0386e518e1a8326fa7092dd702c399da",
-                            "width": 160
-                        }
-                    ],
-                    "genres": [
-                        "dance pop",
-                        "pop",
-                        "pop christmas",
-                        "post-teen pop"
-                    ],
-                    "popularity": 92,
-                    "uri": "spotify:artist:6jJ0s89eD6GaHleKKya26X",
-                    "href": "https://open.spotify.com/artist/6jJ0s89eD6GaHleKKya26X"
-                }
-            ],
-            "artist": "Katy Perry",
-            "cover_url": "https://i.scdn.co/image/e5d8f865ecd59843c61596faa632b2c63650330e",
-            "duration": 220.226,
-            "album": {
-                "id": "0r2BUyPTmpbfuz4rR39mLl",
-                "name": "One Of The Boys",
-                "artists": [
-                    {
-                        "id": "6jJ0s89eD6GaHleKKya26X",
-                        "name": "Katy Perry",
-                        "images": [
-                            {
-                                "height": 640,
-                                "url": "https://i.scdn.co/image/fcdc433e8ccf8d46d58ac70db322feb9b3328731",
-                                "width": 640
-                            },
-                            {
-                                "height": 320,
-                                "url": "https://i.scdn.co/image/9a2d7b0ce015dea90decae0141b219afe004af25",
-                                "width": 320
-                            },
-                            {
-                                "height": 160,
-                                "url": "https://i.scdn.co/image/473d2b4e0386e518e1a8326fa7092dd702c399da",
-                                "width": 160
-                            }
-                        ],
-                        "genres": [
-                            "dance pop",
-                            "pop",
-                            "pop christmas",
-                            "post-teen pop"
-                        ],
-                        "popularity": 92,
-                        "uri": "spotify:artist:6jJ0s89eD6GaHleKKya26X",
-                        "href": "https://open.spotify.com/artist/6jJ0s89eD6GaHleKKya26X"
-                    }
-                ],
-                "images": [
-                    {
-                        "height": 640,
-                        "url": "https://i.scdn.co/image/e5d8f865ecd59843c61596faa632b2c63650330e",
-                        "width": 640
-                    },
-                    {
-                        "height": 300,
-                        "url": "https://i.scdn.co/image/148b0d695854b8434bf0e3de926586347b8ff328",
-                        "width": 300
-                    },
-                    {
-                        "height": 64,
-                        "url": "https://i.scdn.co/image/b3821d48666aa9c0e51200d1347648370973aaf0",
-                        "width": 64
-                    }
-                ],
-                "uri": "spotify:album:0r2BUyPTmpbfuz4rR39mLl"
-            },
-            "popularity": 65,
-            "uri": "spotify:track:1y4eb6hmAvsqlDOl3fx9kk",
-            "query": "Katy Perry - Hot N Cold",
-            "certainty": 0.9545454545454546
-        }
-    },
-    {
-        "version": 103,
-        "type": "SpotifyEntry",
         "expected_filename": "cache/audio_cache/youtube-1cQh1ccqu8M-Nickelback_-_How_You_Remind_Me.webm",
         "video_id": "1cQh1ccqu8M",
         "url": "https://www.youtube.com/watch?v=1cQh1ccqu8M",
@@ -9693,14 +10195,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 77,
+                    "index": 81,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "How You Remind Me - LP Mix",
         "artist": "Nickelback",
-        "artist_image": "https://i.scdn.co/image/ebcd33c2a80269b32a62af0240322ff115ef9077",
+        "artist_image": "https://i.scdn.co/image/3cab7a705d1fefebd1f7c8bf03f27587ae697ead",
         "cover": "https://i.scdn.co/image/1cfaaf525ca27c51a5feeb03ccf12e78fd32b067",
         "album": "Silver Side Up",
         "spotify_data": {
@@ -9824,14 +10326,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 78,
+                    "index": 82,
                     "timestamp": 1505324837
                 }
             }
         },
         "song_title": "How to Save a Life",
         "artist": "The Fray",
-        "artist_image": "https://i.scdn.co/image/7ef82e06e47b33e302ca2503f3decfbf9c7f2fff",
+        "artist_image": "https://i.scdn.co/image/d19249b41f63eadf3e44321bf373e13ec57d3c63",
         "cover": "https://i.scdn.co/image/42b5ca946ea6f72de75263476f66ec6721c5849d",
         "album": "How To Save A Life",
         "spotify_data": {
@@ -9963,14 +10465,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 79,
+                    "index": 83,
                     "timestamp": 1504373786
                 }
             }
         },
         "song_title": "Human",
         "artist": "Rag'n'Bone Man",
-        "artist_image": "https://i.scdn.co/image/906eeb2779ed7934080a0abd09288b2ed1e42e11",
+        "artist_image": "https://i.scdn.co/image/a10fa412ee0acfdec135c16c76ed6c2c789cdbce",
         "cover": "https://i.scdn.co/image/32cd1e793e60dc3d05c4eae10338884618240a45",
         "album": "Human (Deluxe)",
         "spotify_data": {
@@ -10084,14 +10586,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 80,
+                    "index": 84,
                     "timestamp": 1504389479
                 }
             }
         },
         "song_title": "I Apologize",
         "artist": "Five Finger Death Punch",
-        "artist_image": "https://i.scdn.co/image/e6a0a32f32579925c3e5433be4fd5398c62a0166",
+        "artist_image": "https://i.scdn.co/image/a8aaa3ffd9c271c4993a03ff6a8ccd2de518f69b",
         "cover": "https://i.scdn.co/image/ef674140becd36869f59ec3b2a822f3a70d6c16f",
         "album": "Got Your Six (Deluxe)",
         "spotify_data": {
@@ -10215,14 +10717,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 81,
+                    "index": 85,
                     "timestamp": 1507112656
                 }
             }
         },
         "song_title": "I Kissed a Girl",
         "artist": "Katy Perry",
-        "artist_image": "https://i.scdn.co/image/9a2d7b0ce015dea90decae0141b219afe004af25",
+        "artist_image": "https://i.scdn.co/image/473d2b4e0386e518e1a8326fa7092dd702c399da",
         "cover": "https://i.scdn.co/image/e5d8f865ecd59843c61596faa632b2c63650330e",
         "album": "One Of The Boys",
         "spotify_data": {
@@ -10346,14 +10848,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 82,
+                    "index": 86,
                     "timestamp": 1504390715
                 }
             }
         },
         "song_title": "I See Fire",
         "artist": "Ed Sheeran",
-        "artist_image": "https://i.scdn.co/image/f39b705ba6b1070c77bce4e9c21dff5bac96f21c",
+        "artist_image": "https://i.scdn.co/image/f0370da3f52161b07a461b4be9a64d0adbfb498d",
         "cover": "https://i.scdn.co/image/d5724666eeb3a880054eee1a2ac7446da824da90",
         "album": "The Hobbit: The Desolation of Smaug (Original Motion Picture Soundtrack) [Special Edition]",
         "spotify_data": {
@@ -10478,14 +10980,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 83,
+                    "index": 87,
                     "timestamp": 1504390715
                 }
             }
         },
         "song_title": "I'LL BE GONE",
         "artist": "Linkin Park",
-        "artist_image": "https://i.scdn.co/image/0b0925b544b46d90a549f25a7f754ce6e59e6be2",
+        "artist_image": "https://i.scdn.co/image/f759994946aa42851e5293083f472c96c1753105",
         "cover": "https://i.scdn.co/image/967661595be2ffdd741e8e7c72cbd975dfc263b5",
         "album": "LIVING THINGS",
         "spotify_data": {
@@ -10609,14 +11111,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 84,
+                    "index": 88,
                     "timestamp": 1505325099
                 }
             }
         },
         "song_title": "I'll Follow You",
         "artist": "Shinedown",
-        "artist_image": "https://i.scdn.co/image/70e3b978e965c32438857195a2d4099353043bd7",
+        "artist_image": "https://i.scdn.co/image/66f272ae1fab876819160c678a6f84ad2c2168ee",
         "cover": "https://i.scdn.co/image/995b1010a86b0876a6ea94d6e759345a87cdfbb5",
         "album": "Amaryllis",
         "spotify_data": {
@@ -10754,151 +11256,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 85,
+                    "index": 89,
                     "timestamp": 1506932548
                 }
             }
         },
         "song_title": "If You Could See Me Now",
         "artist": "The Script",
-        "artist_image": "https://i.scdn.co/image/6e09b71c9ddf8a4d5669f1cd6eaf1d4322d7631b",
-        "cover": "https://i.scdn.co/image/a234693075f4c2b598e39b8fbc074408b22ffd5a",
-        "album": "#3",
-        "spotify_data": {
-            "id": "4VTL9bM6qaSTsYGVianqzr",
-            "name": "If You Could See Me Now",
-            "artists": [
-                {
-                    "id": "3AQRLZ9PuTAozP28Skbq8V",
-                    "name": "The Script",
-                    "images": [
-                        {
-                            "height": 640,
-                            "url": "https://i.scdn.co/image/604351c643ae82f423f792f094b287165014d898",
-                            "width": 640
-                        },
-                        {
-                            "height": 320,
-                            "url": "https://i.scdn.co/image/d9326a32a2e1ba86251a0d57fb1adec9110cfd2f",
-                            "width": 320
-                        },
-                        {
-                            "height": 160,
-                            "url": "https://i.scdn.co/image/6e09b71c9ddf8a4d5669f1cd6eaf1d4322d7631b",
-                            "width": 160
-                        }
-                    ],
-                    "genres": [
-                        "boy band",
-                        "celtic rock",
-                        "neo mellow",
-                        "pop",
-                        "pop rock",
-                        "post-teen pop",
-                        "viral pop"
-                    ],
-                    "popularity": 85,
-                    "uri": "spotify:artist:3AQRLZ9PuTAozP28Skbq8V",
-                    "href": "https://open.spotify.com/artist/3AQRLZ9PuTAozP28Skbq8V"
-                }
-            ],
-            "artist": "The Script",
-            "cover_url": "https://i.scdn.co/image/a234693075f4c2b598e39b8fbc074408b22ffd5a",
-            "duration": 219.546,
-            "album": {
-                "id": "63eaHsLLsW1e5ISNf7ISZy",
-                "name": "#3",
-                "artists": [
-                    {
-                        "id": "3AQRLZ9PuTAozP28Skbq8V",
-                        "name": "The Script",
-                        "images": [
-                            {
-                                "height": 640,
-                                "url": "https://i.scdn.co/image/604351c643ae82f423f792f094b287165014d898",
-                                "width": 640
-                            },
-                            {
-                                "height": 320,
-                                "url": "https://i.scdn.co/image/d9326a32a2e1ba86251a0d57fb1adec9110cfd2f",
-                                "width": 320
-                            },
-                            {
-                                "height": 160,
-                                "url": "https://i.scdn.co/image/6e09b71c9ddf8a4d5669f1cd6eaf1d4322d7631b",
-                                "width": 160
-                            }
-                        ],
-                        "genres": [
-                            "boy band",
-                            "celtic rock",
-                            "neo mellow",
-                            "pop",
-                            "pop rock",
-                            "post-teen pop",
-                            "viral pop"
-                        ],
-                        "popularity": 85,
-                        "uri": "spotify:artist:3AQRLZ9PuTAozP28Skbq8V",
-                        "href": "https://open.spotify.com/artist/3AQRLZ9PuTAozP28Skbq8V"
-                    }
-                ],
-                "images": [
-                    {
-                        "height": 640,
-                        "url": "https://i.scdn.co/image/a234693075f4c2b598e39b8fbc074408b22ffd5a",
-                        "width": 640
-                    },
-                    {
-                        "height": 300,
-                        "url": "https://i.scdn.co/image/5a66b9a378c1214daa5981423afa15e79df4ad4d",
-                        "width": 300
-                    },
-                    {
-                        "height": 64,
-                        "url": "https://i.scdn.co/image/2e7bbdad76d2ddfbcf42dcb8e151f56cc2fe467d",
-                        "width": 64
-                    }
-                ],
-                "uri": "spotify:album:63eaHsLLsW1e5ISNf7ISZy"
-            },
-            "popularity": 57,
-            "uri": "spotify:track:4VTL9bM6qaSTsYGVianqzr",
-            "query": "The Script - If You Could See Me Now",
-            "certainty": 0.9714285714285714
-        }
-    },
-    {
-        "version": 103,
-        "type": "SpotifyEntry",
-        "expected_filename": "cache/audio_cache/youtube-SGlkwKA-t_4-The_Script_-_If_You_Could_See_Me_Now_Official_Video.NA",
-        "video_id": "SGlkwKA-t_4",
-        "url": "https://www.youtube.com/watch?v=SGlkwKA-t_4",
-        "title": "The Script - If You Could See Me Now (Official Video)",
-        "duration": 230,
-        "thumbnail": "https://i.ytimg.com/vi/SGlkwKA-t_4/default.jpg",
-        "thumbnail_brightness": null,
-        "description": "",
-        "meta": {
-            "author": {
-                "type": "Member",
-                "id": "206459363739566080",
-                "name": "Lophorius"
-            },
-            "playlist": {
-                "type": "built-in/dict",
-                "value": {
-                    "cover": "https://i.imgur.com/CKhYHbF.jpg",
-                    "name": "Gems",
-                    "id": "gems",
-                    "index": 86,
-                    "timestamp": 1507112656
-                }
-            }
-        },
-        "song_title": "If You Could See Me Now",
-        "artist": "The Script",
-        "artist_image": "https://i.scdn.co/image/d9326a32a2e1ba86251a0d57fb1adec9110cfd2f",
+        "artist_image": "https://i.scdn.co/image/604351c643ae82f423f792f094b287165014d898",
         "cover": "https://i.scdn.co/image/a234693075f4c2b598e39b8fbc074408b22ffd5a",
         "album": "#3",
         "spotify_data": {
@@ -11028,7 +11393,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 87,
+                    "index": 90,
                     "timestamp": 1505324837
                 }
             }
@@ -11062,14 +11427,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 88,
+                    "index": 91,
                     "timestamp": 1504389479
                 }
             }
         },
         "song_title": "In The End",
         "artist": "Linkin Park",
-        "artist_image": "https://i.scdn.co/image/1685533969d5b68cbc630f991e873bd6467f1814",
+        "artist_image": "https://i.scdn.co/image/0b0925b544b46d90a549f25a7f754ce6e59e6be2",
         "cover": "https://i.scdn.co/image/66ff51342a9b250bf5b998fd0ec8e977671468bc",
         "album": "Hybrid Theory (Bonus Track Version)",
         "spotify_data": {
@@ -11193,14 +11558,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 89,
+                    "index": 92,
                     "timestamp": 1504638594
                 }
             }
         },
         "song_title": "In the Shadows",
         "artist": "The Rasmus",
-        "artist_image": "https://i.scdn.co/image/1b80ca3b58baa895547c198e6c46c8a22853f87d",
+        "artist_image": "https://i.scdn.co/image/ecd4bf2d8348d411158702b1ddcbe4b3af21ad84",
         "cover": "https://i.scdn.co/image/b798cb7ddde7e7597f99da17f847c9ae7c7afc9c",
         "album": "Dead Letters",
         "spotify_data": {
@@ -11318,7 +11683,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 90,
+                    "index": 93,
                     "timestamp": 1504394846
                 }
             }
@@ -11352,7 +11717,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 91,
+                    "index": 94,
                     "timestamp": 1505163087
                 }
             }
@@ -11481,7 +11846,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 92,
+                    "index": 95,
                     "timestamp": 1506929228
                 }
             }
@@ -11610,14 +11975,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 93,
+                    "index": 96,
                     "timestamp": 1503686906
                 }
             }
         },
         "song_title": "Johnny B.",
         "artist": "The Hooters",
-        "artist_image": "https://i.scdn.co/image/8e3e3be4f9d2c0be8aba14f3223204b4768e723a",
+        "artist_image": "https://i.scdn.co/image/b17151e250a62d03858edc1075f7ea306def8595",
         "cover": "https://i.scdn.co/image/e607d7badce99dd5916c864eee9fba6d6e496f49",
         "album": "One Way Home",
         "spotify_data": {
@@ -11753,14 +12118,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 94,
+                    "index": 97,
                     "timestamp": 1504392990
                 }
             }
         },
         "song_title": "LOST IN THE ECHO",
         "artist": "Linkin Park",
-        "artist_image": "https://i.scdn.co/image/1685533969d5b68cbc630f991e873bd6467f1814",
+        "artist_image": "https://i.scdn.co/image/f759994946aa42851e5293083f472c96c1753105",
         "cover": "https://i.scdn.co/image/967661595be2ffdd741e8e7c72cbd975dfc263b5",
         "album": "LIVING THINGS",
         "spotify_data": {
@@ -11884,7 +12249,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 95,
+                    "index": 98,
                     "timestamp": 1504389479
                 }
             }
@@ -12005,14 +12370,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 96,
+                    "index": 99,
                     "timestamp": 1503689761
                 }
             }
         },
         "song_title": "Leave Out All The Rest",
         "artist": "Linkin Park",
-        "artist_image": "https://i.scdn.co/image/f759994946aa42851e5293083f472c96c1753105",
+        "artist_image": "https://i.scdn.co/image/0b0925b544b46d90a549f25a7f754ce6e59e6be2",
         "cover": "https://i.scdn.co/image/deb48b2781de449175ff7865da3bb249652fc28f",
         "album": "Minutes To Midnight (Explicit Version)",
         "spotify_data": {
@@ -12136,7 +12501,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 97,
+                    "index": 100,
                     "timestamp": 1504391079
                 }
             }
@@ -12170,14 +12535,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 98,
+                    "index": 101,
                     "timestamp": 1505324837
                 }
             }
         },
         "song_title": "Let It Go",
         "artist": "James Bay",
-        "artist_image": "https://i.scdn.co/image/d8bc6593d0449a578ceb545fd1ae9172ac67bf83",
+        "artist_image": "https://i.scdn.co/image/478149928573b95c1232a6a2e27d51a5de037386",
         "cover": "https://i.scdn.co/image/80cce6b1bb492fd45ddb26a81c79959527d98a63",
         "album": "Chaos And The Calm",
         "spotify_data": {
@@ -12301,7 +12666,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 99,
+                    "index": 102,
                     "timestamp": 1503227394
                 }
             }
@@ -12434,14 +12799,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 100,
+                    "index": 103,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "Lost Within",
         "artist": "Fivefold",
-        "artist_image": "https://i.scdn.co/image/9a5d6ce642befbcb9f2cd19c3466e70f00b25657",
+        "artist_image": "https://i.scdn.co/image/1e96a0855140aff79fddd122ec7ba3e91761ab18",
         "cover": "https://i.scdn.co/image/5d5892eea3978891c7c2a66c373d280e4b4abd7a",
         "album": "The Story",
         "spotify_data": {
@@ -12563,7 +12928,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 101,
+                    "index": 104,
                     "timestamp": 1504391079
                 }
             }
@@ -12743,14 +13108,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 102,
+                    "index": 105,
                     "timestamp": 1506932548
                 }
             }
         },
         "song_title": "Man on a Wire",
         "artist": "The Script",
-        "artist_image": "https://i.scdn.co/image/604351c643ae82f423f792f094b287165014d898",
+        "artist_image": "https://i.scdn.co/image/6e09b71c9ddf8a4d5669f1cd6eaf1d4322d7631b",
         "cover": "https://i.scdn.co/image/3499f757a839bb12338b4748e195e27a98085f66",
         "album": "No Sound Without Silence",
         "spotify_data": {
@@ -12880,7 +13245,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 103,
+                    "index": 106,
                     "timestamp": 1506932548
                 }
             }
@@ -13017,14 +13382,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 104,
+                    "index": 107,
                     "timestamp": 1504395382
                 }
             }
         },
         "song_title": "Mercy",
         "artist": "Shawn Mendes",
-        "artist_image": "https://i.scdn.co/image/e11faff72ec3bfcdd5b98c50535c565297c0fea4",
+        "artist_image": "https://i.scdn.co/image/383e1c64c5f5c00faab34bf3d93b91e88179a14f",
         "cover": "https://i.scdn.co/image/0c1fe77b4d329bebc8c8e17cc448101a966e1307",
         "album": "Illuminate (Deluxe)",
         "spotify_data": {
@@ -13160,14 +13525,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 105,
+                    "index": 108,
                     "timestamp": 1504389479
                 }
             }
         },
         "song_title": "Monster",
         "artist": "Skillet",
-        "artist_image": "https://i.scdn.co/image/337d6850a19b9be4172503ed8edf5c5101494b24",
+        "artist_image": "https://i.scdn.co/image/28e0d2d74a55576b59ed62760522705b007b99e1",
         "cover": "https://i.scdn.co/image/d6763403258c8db8a3ee4c41faf6bbd9505869d2",
         "album": "Awake",
         "spotify_data": {
@@ -13299,7 +13664,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 106,
+                    "index": 109,
                     "timestamp": 1504639838
                 }
             }
@@ -13440,7 +13805,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 107,
+                    "index": 110,
                     "timestamp": 1505163087
                 }
             }
@@ -13563,14 +13928,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 108,
+                    "index": 111,
                     "timestamp": 1504392990
                 }
             }
         },
         "song_title": "Never Forget You",
         "artist": "Zara Larsson & MNEK",
-        "artist_image": "https://i.scdn.co/image/1acee60eeebd5752903136aeda6f344f6fc7f58e",
+        "artist_image": "https://i.scdn.co/image/41ff5aff39977e0bfb5ab442e4522b93e1e7dd1f",
         "cover": "https://i.scdn.co/image/bf682c1cdbd803cccb2cecbc1f64342ec25efd7f",
         "album": "So Good",
         "spotify_data": {
@@ -13731,14 +14096,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 109,
+                    "index": 112,
                     "timestamp": 1506868797
                 }
             }
         },
         "song_title": "New Americana",
         "artist": "Halsey",
-        "artist_image": "https://i.scdn.co/image/a80bb42438f762d0d1c1c8441a422aebef55a74f",
+        "artist_image": "https://i.scdn.co/image/40eaaa946262f0e825c361ee2a5b9cd047eebc0b",
         "cover": "https://i.scdn.co/image/830206bcc552a157deb7490dccb69cedd8212dae",
         "album": "BADLANDS",
         "spotify_data": {
@@ -13866,7 +14231,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 110,
+                    "index": 113,
                     "timestamp": 1504392990
                 }
             }
@@ -13976,7 +14341,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 111,
+                    "index": 114,
                     "timestamp": 1503227394
                 }
             }
@@ -14010,14 +14375,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 112,
+                    "index": 115,
                     "timestamp": 1504390715
                 }
             }
         },
         "song_title": "Now or Never",
         "artist": "Three Days Grace",
-        "artist_image": "https://i.scdn.co/image/7e0a769b5fac82132a4400e31bcd134a9a01a4f5",
+        "artist_image": "https://i.scdn.co/image/f3b990bb5fc28a773475d0c524ceaa29a1c00159",
         "cover": "https://i.scdn.co/image/3e8d606984416611844a7c95cfcc78d1a51ea4cc",
         "album": "Three Days Grace (Deluxe Version)",
         "spotify_data": {
@@ -14143,14 +14508,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 113,
+                    "index": 116,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "Numb",
         "artist": "Linkin Park",
-        "artist_image": "https://i.scdn.co/image/0b0925b544b46d90a549f25a7f754ce6e59e6be2",
+        "artist_image": "https://i.scdn.co/image/f759994946aa42851e5293083f472c96c1753105",
         "cover": "https://i.scdn.co/image/c03090e1f4b09d79fd41855023460c02e13993a8",
         "album": "Meteora",
         "spotify_data": {
@@ -14274,14 +14639,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 114,
+                    "index": 117,
                     "timestamp": 1505163087
                 }
             }
         },
         "song_title": "Ocean Avenue",
         "artist": "Yellowcard",
-        "artist_image": "https://i.scdn.co/image/014d29b70a865b02144687255cfeb7dbe65d08f8",
+        "artist_image": "https://i.scdn.co/image/99a2663583f36ae5de2a9aba2153435fdc4100f9",
         "cover": "https://i.scdn.co/image/961342c3732dd32d5a93b343345f9bdd1b16bf62",
         "album": "Ocean Avenue",
         "spotify_data": {
@@ -14429,14 +14794,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 115,
+                    "index": 118,
                     "timestamp": 1504385363
                 }
             }
         },
         "song_title": "On My Own",
         "artist": "Three Days Grace",
-        "artist_image": "https://i.scdn.co/image/f3b990bb5fc28a773475d0c524ceaa29a1c00159",
+        "artist_image": "https://i.scdn.co/image/7e0a769b5fac82132a4400e31bcd134a9a01a4f5",
         "cover": "https://i.scdn.co/image/fdbdf54c69e505c617b128d19e670d753573add6",
         "album": "One-X",
         "spotify_data": {
@@ -14562,14 +14927,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 116,
+                    "index": 119,
                     "timestamp": 1503228024
                 }
             }
         },
         "song_title": "One Year, Six Months",
         "artist": "Yellowcard",
-        "artist_image": "https://i.scdn.co/image/014d29b70a865b02144687255cfeb7dbe65d08f8",
+        "artist_image": "https://i.scdn.co/image/60d530d14457d21c62f6c1d3cf79d5e0a983573f",
         "cover": "https://i.scdn.co/image/961342c3732dd32d5a93b343345f9bdd1b16bf62",
         "album": "Ocean Avenue",
         "spotify_data": {
@@ -14717,7 +15082,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 117,
+                    "index": 120,
                     "timestamp": 1504387209
                 }
             }
@@ -14850,14 +15215,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 118,
+                    "index": 121,
                     "timestamp": 1505325320
                 }
             }
         },
         "song_title": "Photograph",
         "artist": "Ed Sheeran",
-        "artist_image": "https://i.scdn.co/image/f0370da3f52161b07a461b4be9a64d0adbfb498d",
+        "artist_image": "https://i.scdn.co/image/f39b705ba6b1070c77bce4e9c21dff5bac96f21c",
         "cover": "https://i.scdn.co/image/b68b39fdc2409d0f526ad48775ddcd93ff496cda",
         "album": "x (Deluxe Edition)",
         "spotify_data": {
@@ -14975,7 +15340,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 119,
+                    "index": 122,
                     "timestamp": 1507114024
                 }
             }
@@ -15106,7 +15471,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 120,
+                    "index": 123,
                     "timestamp": 1504390715
                 }
             }
@@ -15237,14 +15602,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 121,
+                    "index": 124,
                     "timestamp": 1504390715
                 }
             }
         },
         "song_title": "Radioactive",
         "artist": "Imagine Dragons",
-        "artist_image": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
+        "artist_image": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
         "cover": "https://i.scdn.co/image/443609cd35e43c7bdb272b3d1d9e80290e128bc5",
         "album": "Night Visions",
         "spotify_data": {
@@ -15366,7 +15731,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 122,
+                    "index": 125,
                     "timestamp": 1504389480
                 }
             }
@@ -15497,14 +15862,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 123,
+                    "index": 126,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "Riptide",
         "artist": "Vance Joy",
-        "artist_image": "https://i.scdn.co/image/7d186c3a80955b82a8cc46fe86bdf305478629e8",
+        "artist_image": "https://i.scdn.co/image/6c125db9f5fb806775a1babff78a2fde23bdc367",
         "cover": "https://i.scdn.co/image/cefc7b35a2000f0dcfc676cee8bd9af26b6c751b",
         "album": "Dream Your Life Away (Special Editon)",
         "spotify_data": {
@@ -15630,7 +15995,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 124,
+                    "index": 127,
                     "timestamp": 1504391079
                 }
             }
@@ -15793,14 +16158,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 125,
+                    "index": 128,
                     "timestamp": 1507112656
                 }
             }
         },
         "song_title": "Rolling in the Deep",
         "artist": "Adele",
-        "artist_image": "https://i.scdn.co/image/ccbe7b4fef679f821988c78dbd4734471834e3d9",
+        "artist_image": "https://i.scdn.co/image/cbbdfb209cc38b2999b1882f42ee642555316313",
         "cover": "https://i.scdn.co/image/4dd5a511e378838ef564cc343304019b8f430bcd",
         "album": "21",
         "spotify_data": {
@@ -15932,14 +16297,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 126,
+                    "index": 129,
                     "timestamp": 1506932548
                 }
             }
         },
         "song_title": "Rude",
         "artist": "MAGIC!",
-        "artist_image": "https://i.scdn.co/image/6ae69a3786974a3b384348c635105c7c5508ee7a",
+        "artist_image": "https://i.scdn.co/image/f6773dffe8b3eb5c931e97486b04dc621de60d61",
         "cover": "https://i.scdn.co/image/a43383128ea7e44509eb13bfaa7168171fbacf97",
         "album": "Rude",
         "spotify_data": {
@@ -16057,14 +16422,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 127,
+                    "index": 130,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "Sail",
         "artist": "AWOLNATION",
-        "artist_image": "https://i.scdn.co/image/1d66807bc53e92cc0f3400fc74562101d0e1e699",
+        "artist_image": "https://i.scdn.co/image/2d163700bac6cd96a45017d46f7580f412161475",
         "cover": "https://i.scdn.co/image/5f768d4c8d8fb256cf95a9d8f06679636634e0d3",
         "album": "Megalithic Symphony Deluxe",
         "spotify_data": {
@@ -16188,14 +16553,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 128,
+                    "index": 131,
                     "timestamp": 1504391079
                 }
             }
         },
         "song_title": "Satellite",
         "artist": "Nickelback",
-        "artist_image": "https://i.scdn.co/image/ebcd33c2a80269b32a62af0240322ff115ef9077",
+        "artist_image": "https://i.scdn.co/image/3cab7a705d1fefebd1f7c8bf03f27587ae697ead",
         "cover": "https://i.scdn.co/image/6e733168b56d374c5878814a91e099c9f484c705",
         "album": "No Fixed Address",
         "spotify_data": {
@@ -16319,14 +16684,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 129,
+                    "index": 132,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "Satellite",
         "artist": "Rise Against",
-        "artist_image": "https://i.scdn.co/image/5d387d8990d08cff197a3b9d20693561320947a2",
+        "artist_image": "https://i.scdn.co/image/bb54f19ac8a70161e63b460b8d28105c09e8b4e3",
         "cover": "https://i.scdn.co/image/b506968a958ad390518c3d9e4f45e79cf3b64be1",
         "album": "Endgame",
         "spotify_data": {
@@ -16456,7 +16821,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 130,
+                    "index": 133,
                     "timestamp": 1503228024
                 }
             }
@@ -16593,14 +16958,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 131,
+                    "index": 134,
                     "timestamp": 1505324837
                 }
             }
         },
         "song_title": "Say You Won't Let Go",
         "artist": "James Arthur",
-        "artist_image": "https://i.scdn.co/image/df3be7894ad8720fb48d54e0241c71abf3dd458c",
+        "artist_image": "https://i.scdn.co/image/c068c0106219344f2e2c189e5a15233e0a291496",
         "cover": "https://i.scdn.co/image/2efcd08e635499fc5cb5b17716090bcea82e418b",
         "album": "Back from the Edge",
         "spotify_data": {
@@ -16726,14 +17091,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 132,
+                    "index": 135,
                     "timestamp": 1504395382
                 }
             }
         },
         "song_title": "See You Again (feat. Charlie Puth)",
         "artist": "Wiz Khalifa & Charlie Puth",
-        "artist_image": "https://i.scdn.co/image/a6df7cd68abb3f49f8c11fd6a064e3599412ccc0",
+        "artist_image": "https://i.scdn.co/image/51ddaad588549bc5bb413f8881ad7d62fd1f9836",
         "cover": "https://i.scdn.co/image/cded9ba648b8fcbecb3331f7c485da278cbb7223",
         "album": "Furious 7: Original Motion Picture Soundtrack",
         "spotify_data": {
@@ -16866,14 +17231,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 133,
+                    "index": 136,
                     "timestamp": 1504390716
                 }
             }
         },
         "song_title": "Shape of You",
         "artist": "Ed Sheeran",
-        "artist_image": "https://i.scdn.co/image/f0370da3f52161b07a461b4be9a64d0adbfb498d",
+        "artist_image": "https://i.scdn.co/image/e21f791b600f04f9dd8ad2b6d9b3304a82e048ca",
         "cover": "https://i.scdn.co/image/621d2909bcc2c26cd0b274aab0414c9d422a1576",
         "album": "Shape of You",
         "spotify_data": {
@@ -16991,14 +17356,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 134,
+                    "index": 137,
                     "timestamp": 1506932548
                 }
             }
         },
         "song_title": "She Looks So Perfect",
         "artist": "5 Seconds of Summer",
-        "artist_image": "https://i.scdn.co/image/eec4a8473305dd68a93488a7c88b132726cff8b7",
+        "artist_image": "https://i.scdn.co/image/f3c77980a8041e167ef43a0936618ceac64ebd44",
         "cover": "https://i.scdn.co/image/352169f04bd874c4d8f631f5e59a290a8c21cf7a",
         "album": "5 Seconds Of Summer",
         "spotify_data": {
@@ -17124,7 +17489,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 135,
+                    "index": 138,
                     "timestamp": 1504390716
                 }
             }
@@ -17245,6 +17610,133 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-2i2khp_npdE-Alan_Walker_-_Sing_Me_To_Sleep.NA",
+        "video_id": "2i2khp_npdE",
+        "url": "https://www.youtube.com/watch?v=2i2khp_npdE",
+        "title": "Alan Walker - Sing Me To Sleep",
+        "duration": 192,
+        "thumbnail": "https://i.ytimg.com/vi/2i2khp_npdE/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Listen to \"Sing Me To Sleep\": https://AlanWalker.lnk.to/SMTS\n\nMerch available at http://bit.ly/AlanWalkerMerch\n\nFacebook http://bit.ly/AlanWalker_Facebook\nInstagram http://bit.ly/AlanWalker_Instagram\nTwitter http://bit.ly/AlanWalker_Twitter\nSnapchat http://bit.ly/AlanWalker_Snapchat\n\nVocalist: Iselin Solheim\n\nVideo Location: Hong Kong\nProduced by: Bror Bror\nDirectors: Rikkard & Tobias H\u00e4ggbom\nD.O.P: Rikkard H\u00e4ggbom\nProduction manager: Julie Misaki\nProduction assistant: Hanson Fok\nStylist: Mia Adam\n\nEditing: John Lindgren\nGrading: Bror Bror\nVFX: Mofeel Pictures\n\nActors: Shahab Salehi, Zenobia Hamrin, Henry Tang & Yam Wai Sang\n\n\u00a9 2016 Alan Walker & MER Musikk\n\u2117 2016 Sony Music Entertainment Sweden AB",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/CKhYHbF.jpg",
+                    "name": "Gems",
+                    "id": "gems",
+                    "index": 139,
+                    "timestamp": 1511992758
+                }
+            }
+        },
+        "song_title": "Sing Me to Sleep",
+        "artist": "Alan Walker",
+        "artist_image": "https://i.scdn.co/image/7684b65a45a16e2767ac8b111c74ac7e3df02a25",
+        "cover": "https://i.scdn.co/image/0af2ace9f8bf254a1b79b7c331dd3e8cfdf61101",
+        "album": "Sing Me to Sleep",
+        "spotify_data": {
+            "id": "2Fjz5ZC5BvFdCqcnTZ3ilH",
+            "name": "Sing Me to Sleep",
+            "artists": [
+                {
+                    "id": "7vk5e3vY1uw9plTHJAMwjN",
+                    "name": "Alan Walker",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/39d9e61f7aed9ae01334b391702c7c8b1871743e",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/2aa77594b07170d2bf364534e9c22f3664efb211",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/7684b65a45a16e2767ac8b111c74ac7e3df02a25",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "edm",
+                        "tropical house"
+                    ],
+                    "popularity": 88,
+                    "uri": "spotify:artist:7vk5e3vY1uw9plTHJAMwjN",
+                    "href": "https://open.spotify.com/artist/7vk5e3vY1uw9plTHJAMwjN"
+                }
+            ],
+            "artist": "Alan Walker",
+            "cover_url": "https://i.scdn.co/image/0af2ace9f8bf254a1b79b7c331dd3e8cfdf61101",
+            "duration": 189.333,
+            "album": {
+                "id": "4wQNBX0Mp50Q2JFSEDW5G1",
+                "name": "Sing Me to Sleep",
+                "artists": [
+                    {
+                        "id": "7vk5e3vY1uw9plTHJAMwjN",
+                        "name": "Alan Walker",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/39d9e61f7aed9ae01334b391702c7c8b1871743e",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/2aa77594b07170d2bf364534e9c22f3664efb211",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/7684b65a45a16e2767ac8b111c74ac7e3df02a25",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "edm",
+                            "tropical house"
+                        ],
+                        "popularity": 88,
+                        "uri": "spotify:artist:7vk5e3vY1uw9plTHJAMwjN",
+                        "href": "https://open.spotify.com/artist/7vk5e3vY1uw9plTHJAMwjN"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/0af2ace9f8bf254a1b79b7c331dd3e8cfdf61101",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/2704a3bcd9f7ffaee7af10e4e93e67820366d88a",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/8e317e8271de4642f0b69257af36db2c5b6f01e4",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:4wQNBX0Mp50Q2JFSEDW5G1"
+            },
+            "popularity": 74,
+            "uri": "spotify:track:2Fjz5ZC5BvFdCqcnTZ3ilH",
+            "query": "Alan Walker - Sing Me To Sleep",
+            "certainty": 0.9655172413793104
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache/audio_cache/youtube-yTUJTh4yPZ8-Daya-_sit_still_look_pretty_lyrics.NA",
         "video_id": "yTUJTh4yPZ8",
         "url": "https://www.youtube.com/watch?v=yTUJTh4yPZ8",
@@ -17265,14 +17757,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 136,
+                    "index": 140,
                     "timestamp": 1504391079
                 }
             }
         },
         "song_title": "Sit Still, Look Pretty",
         "artist": "Daya",
-        "artist_image": "https://i.scdn.co/image/578fa89c56ab5ba8e28880a896418c2ef5c1d5a6",
+        "artist_image": "https://i.scdn.co/image/362f8841b333d90aa16dd307cb1744eafe5fb149",
         "cover": "https://i.scdn.co/image/6a3e7f7ff540a80be0f06e28cbf9702d07ca066f",
         "album": "Sit Still, Look Pretty",
         "spotify_data": {
@@ -17398,14 +17890,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 137,
+                    "index": 141,
                     "timestamp": 1506932548
                 }
             }
         },
         "song_title": "Six Degrees of Separation",
         "artist": "The Script",
-        "artist_image": "https://i.scdn.co/image/d9326a32a2e1ba86251a0d57fb1adec9110cfd2f",
+        "artist_image": "https://i.scdn.co/image/604351c643ae82f423f792f094b287165014d898",
         "cover": "https://i.scdn.co/image/a234693075f4c2b598e39b8fbc074408b22ffd5a",
         "album": "#3",
         "spotify_data": {
@@ -17535,14 +18027,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 138,
+                    "index": 142,
                     "timestamp": 1504373786
                 }
             }
         },
         "song_title": "Skin",
         "artist": "Rag'n'Bone Man",
-        "artist_image": "https://i.scdn.co/image/906eeb2779ed7934080a0abd09288b2ed1e42e11",
+        "artist_image": "https://i.scdn.co/image/a10fa412ee0acfdec135c16c76ed6c2c789cdbce",
         "cover": "https://i.scdn.co/image/32cd1e793e60dc3d05c4eae10338884618240a45",
         "album": "Human (Deluxe)",
         "spotify_data": {
@@ -17656,14 +18148,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 139,
+                    "index": 143,
                     "timestamp": 1505321732
                 }
             }
         },
         "song_title": "Snuff",
         "artist": "Slipknot",
-        "artist_image": "https://i.scdn.co/image/0d4156d2128ea5589296f10da242b2f0a917153d",
+        "artist_image": "https://i.scdn.co/image/7b3df593f9c812f20096e0228c4e8bc48774d654",
         "cover": "https://i.scdn.co/image/acc17fd5f2cf49ca36c64a80cc7ff99bcc2e348e",
         "album": "All Hope Is Gone",
         "spotify_data": {
@@ -17799,7 +18291,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 140,
+                    "index": 144,
                     "timestamp": 1504387209
                 }
             }
@@ -17944,7 +18436,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 141,
+                    "index": 145,
                     "timestamp": 1503690561
                 }
             }
@@ -18077,7 +18569,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 142,
+                    "index": 146,
                     "timestamp": 1505324838
                 }
             }
@@ -18216,14 +18708,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 143,
+                    "index": 147,
                     "timestamp": 1504385364
                 }
             }
         },
         "song_title": "Someone Who Cares",
         "artist": "Three Days Grace",
-        "artist_image": "https://i.scdn.co/image/7e0a769b5fac82132a4400e31bcd134a9a01a4f5",
+        "artist_image": "https://i.scdn.co/image/59879c4c497a33b2d339576aec210c820144195c",
         "cover": "https://i.scdn.co/image/0c1b65e11f846eece7f25442df9b104ff2dd8221",
         "album": "Life Starts Now",
         "spotify_data": {
@@ -18349,14 +18841,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 144,
+                    "index": 148,
                     "timestamp": 1506929229
                 }
             }
         },
         "song_title": "Something Just Like This",
         "artist": "The Chainsmokers & Coldplay",
-        "artist_image": "https://i.scdn.co/image/6735a98c7cf7c5b9622e10a1ea9390dd67cbd509",
+        "artist_image": "https://i.scdn.co/image/24c37ccd6e7ffcb6b58d42e2b152eed61050fb08",
         "cover": "https://i.scdn.co/image/a57625bbecee7b4e7fe932a31cd92319d2a32855",
         "album": "Something Just Like This",
         "spotify_data": {
@@ -18546,7 +19038,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 145,
+                    "index": 149,
                     "timestamp": 1503686409
                 }
             }
@@ -18677,7 +19169,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 146,
+                    "index": 150,
                     "timestamp": 1504387209
                 }
             }
@@ -18822,7 +19314,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 147,
+                    "index": 151,
                     "timestamp": 1507112656
                 }
             }
@@ -18955,7 +19447,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 148,
+                    "index": 152,
                     "timestamp": 1504389480
                 }
             }
@@ -19096,14 +19588,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 149,
+                    "index": 153,
                     "timestamp": 1504395383
                 }
             }
         },
         "song_title": "Stitches",
         "artist": "Shawn Mendes",
-        "artist_image": "https://i.scdn.co/image/889d1206458b26f94aab88e23257706847b41091",
+        "artist_image": "https://i.scdn.co/image/383e1c64c5f5c00faab34bf3d93b91e88179a14f",
         "cover": "https://i.scdn.co/image/98fbd5d40b40bc46a4515396d38e9ee51380b891",
         "album": "Handwritten",
         "spotify_data": {
@@ -19239,14 +19731,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 150,
+                    "index": 154,
                     "timestamp": 1504987589
                 }
             }
         },
         "song_title": "Stole the Show",
         "artist": "Kygo & Parson James",
-        "artist_image": "https://i.scdn.co/image/0842ac1141a7ec3e391570f8f2cbb465d6b5e19c",
+        "artist_image": "https://i.scdn.co/image/84e6ff902034017c1bcf5f058541c60a9d9ee737",
         "cover": "https://i.scdn.co/image/1b761558ed527d1caf6630f2abf5eb6a5a8a6e24",
         "album": "Cloud Nine",
         "spotify_data": {
@@ -19402,14 +19894,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 151,
+                    "index": 155,
                     "timestamp": 1504395383
                 }
             }
         },
         "song_title": "Stressed Out",
         "artist": "Twenty One Pilots",
-        "artist_image": "https://i.scdn.co/image/01f608a46e8ca7984e1121e334a089fef46777c7",
+        "artist_image": "https://i.scdn.co/image/57d72c0c06f5d93fbba622a0f47c9ed6ce5a61d9",
         "cover": "https://i.scdn.co/image/52fc1b3b08807194b87cd7e4fd68f5118d991e44",
         "album": "Blurryface",
         "spotify_data": {
@@ -19519,6 +20011,126 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache\\audio_cache\\youtube-psEfqheLqfM-Quinn_XCII_-_Stung_Prod._ayokay.webm",
+        "video_id": "psEfqheLqfM",
+        "url": "https://www.youtube.com/watch?v=psEfqheLqfM",
+        "title": "Quinn XCII - Stung",
+        "duration": 233,
+        "thumbnail": "https://i.ytimg.com/vi/psEfqheLqfM/maxresdefault.jpg",
+        "thumbnail_brightness": 175.5522978802743,
+        "description": "Subscribe to SwagyTracks for more music daily !\nhttp://bit.ly/SubscribeSwagy\n\n.........\n\nDownload this track \u2022\nhttp://eargasmic.me/1R36gzv\n\n\u2022 Quinn XCII -\nhttps://soundcloud.com/quinnxcii\nhttps://www.youtube.com/user/WatchQuinn\nhttps://www.facebook.com/quinnxcii/\nhttps://twitter.com/quinnxcii\n\n\u2022 ayokay -\nhttps://www.facebook.com/everythingisayokay\nhttps://soundcloud.com/everythingisayokay\n\nPicture credit \u2022\nhttps://unsplash.com/saschaoberholzer\n\n.........\n\nFollow SwagyTracks on\nFacebook \u2022 http://www.facebook.com/SwagyTracks\nTwitter \u2022 https://twitter.com/SwagyTracks\nSoundCloud \u2022 https://soundcloud.com/SwagyTracks\n\n.........\n\nThere is no copyright infringement intended for the song or picture. If you have an issue with me posting this song or picture please contact me through one of my social networks or YouTube private messaging system. Once I have received your message and determined you are the proper owner of this content I will have it removed, no drama at all. This channel is strictly for promotion towards the artists of the music. I try to help promote their music and their social networks.",
+        "meta": {
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/CKhYHbF.jpg",
+                    "name": "Gems",
+                    "id": "gems",
+                    "index": 156,
+                    "timestamp": 1502649769
+                }
+            }
+        },
+        "song_title": "Stung",
+        "artist": "Quinn XCII",
+        "artist_image": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+        "cover": "https://i.scdn.co/image/0797ef6b0cdba660a6fa837b1da97867cfb874d3",
+        "album": "Stung",
+        "spotify_data": {
+            "id": "2VaMCNvcshu99Nkt2opMtF",
+            "name": "Stung",
+            "artists": [
+                {
+                    "id": "3ApUX1o6oSz321MMECyIYd",
+                    "name": "Quinn XCII",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "indie poptimism"
+                    ],
+                    "popularity": 72,
+                    "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                    "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                }
+            ],
+            "artist": "Quinn XCII",
+            "cover_url": "https://i.scdn.co/image/0797ef6b0cdba660a6fa837b1da97867cfb874d3",
+            "duration": 234.661,
+            "album": {
+                "id": "6aJg0RUDOp9kJ8Eavf2c5Y",
+                "name": "Stung",
+                "artists": [
+                    {
+                        "id": "3ApUX1o6oSz321MMECyIYd",
+                        "name": "Quinn XCII",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "indie poptimism"
+                        ],
+                        "popularity": 72,
+                        "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                        "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/0797ef6b0cdba660a6fa837b1da97867cfb874d3",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/6f345b646d9e9427cdf240f82c294b268b4eb0be",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/532b21c60b797d7d5486fa6799e4b07787295574",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:6aJg0RUDOp9kJ8Eavf2c5Y"
+            },
+            "popularity": 66,
+            "uri": "spotify:track:2VaMCNvcshu99Nkt2opMtF",
+            "query": "Quinn XCII - Stung",
+            "certainty": 0.9444444444444444
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache/audio_cache/youtube-WIm1GgfRz6M-The_Script_-_Superheroes_Official_Video.NA",
         "video_id": "WIm1GgfRz6M",
         "url": "https://www.youtube.com/watch?v=WIm1GgfRz6M",
@@ -19539,14 +20151,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 152,
+                    "index": 157,
                     "timestamp": 1506932548
                 }
             }
         },
         "song_title": "Superheroes",
         "artist": "The Script",
-        "artist_image": "https://i.scdn.co/image/6e09b71c9ddf8a4d5669f1cd6eaf1d4322d7631b",
+        "artist_image": "https://i.scdn.co/image/604351c643ae82f423f792f094b287165014d898",
         "cover": "https://i.scdn.co/image/3499f757a839bb12338b4748e195e27a98085f66",
         "album": "No Sound Without Silence",
         "spotify_data": {
@@ -19676,14 +20288,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 153,
+                    "index": 158,
                     "timestamp": 1505070975
                 }
             }
         },
         "song_title": "Symphony (feat. Zara Larsson)",
         "artist": "Clean Bandit & Zara Larsson",
-        "artist_image": "https://i.scdn.co/image/4e052e78ad16b5099593194e8a111fb22032186f",
+        "artist_image": "https://i.scdn.co/image/1ae6a35726cbff6fb2c5e6cd788b9ee17125fa39",
         "cover": "https://i.scdn.co/image/d8b6614b2e142508ff5c7b1d376f4b9dfecfb72c",
         "album": "Symphony (feat. Zara Larsson)",
         "spotify_data": {
@@ -19840,7 +20452,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 154,
+                    "index": 159,
                     "timestamp": 1505324838
                 }
             }
@@ -19874,14 +20486,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 155,
+                    "index": 160,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "The Diary of Jane",
         "artist": "Breaking Benjamin",
-        "artist_image": "https://i.scdn.co/image/0eed1e428ac3af29a50ac137eebe1fca90bf715c",
+        "artist_image": "https://i.scdn.co/image/fc679f65311133e7f95cd45ef83feef9825331c3",
         "cover": "https://i.scdn.co/image/60f9b69aa68780b33f9a6f873e628da0e05b735b",
         "album": "Phobia (Clean Version)",
         "spotify_data": {
@@ -20019,7 +20631,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 156,
+                    "index": 161,
                     "timestamp": 1505161686
                 }
             }
@@ -20048,14 +20660,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 157,
+                    "index": 162,
                     "timestamp": 1504390716
                 }
             }
         },
         "song_title": "The Road I'm On",
         "artist": "3 Doors Down",
-        "artist_image": "https://i.scdn.co/image/942ff2555a081b628f0a66fcd6998a5e73b5a3fb",
+        "artist_image": "https://i.scdn.co/image/cbebca19077e1d260af99733c7313d83f5c30a73",
         "cover": "https://i.scdn.co/image/1c09b3f029fe28b9c9f67b18473db70f71ecf858",
         "album": "Away From The Sun",
         "spotify_data": {
@@ -20189,7 +20801,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 158,
+                    "index": 163,
                     "timestamp": 1503227394
                 }
             }
@@ -20223,7 +20835,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 159,
+                    "index": 164,
                     "timestamp": 1505321732
                 }
             }
@@ -20257,14 +20869,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 160,
+                    "index": 165,
                     "timestamp": 1504395383
                 }
             }
         },
         "song_title": "There's Nothing Holdin' Me Back",
         "artist": "Shawn Mendes",
-        "artist_image": "https://i.scdn.co/image/383e1c64c5f5c00faab34bf3d93b91e88179a14f",
+        "artist_image": "https://i.scdn.co/image/889d1206458b26f94aab88e23257706847b41091",
         "cover": "https://i.scdn.co/image/0c1fe77b4d329bebc8c8e17cc448101a966e1307",
         "album": "Illuminate (Deluxe)",
         "spotify_data": {
@@ -20400,7 +21012,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 161,
+                    "index": 166,
                     "timestamp": 1503228024
                 }
             }
@@ -20537,7 +21149,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 162,
+                    "index": 167,
                     "timestamp": 1504385364
                 }
             }
@@ -20566,7 +21178,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 163,
+                    "index": 168,
                     "timestamp": 1506928140
                 }
             }
@@ -20695,14 +21307,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 164,
+                    "index": 169,
                     "timestamp": 1504395383
                 }
             }
         },
         "song_title": "Treat You Better",
         "artist": "Shawn Mendes",
-        "artist_image": "https://i.scdn.co/image/9a3488787c85c2b250b41f9cc11bd680e1bc10ff",
+        "artist_image": "https://i.scdn.co/image/889d1206458b26f94aab88e23257706847b41091",
         "cover": "https://i.scdn.co/image/a56df914c05a68f069ab1256d841f28c2c9a82b5",
         "album": "Illuminate",
         "spotify_data": {
@@ -20817,6 +21429,141 @@
     },
     {
         "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-VzBQL5b36ww-77_Bombay_Street_-_Up_In_The_Sky_Official_Video_HD.NA",
+        "video_id": "VzBQL5b36ww",
+        "url": "https://www.youtube.com/watch?v=VzBQL5b36ww",
+        "title": "77 Bombay Street - Up In The Sky [Official Video] HD",
+        "duration": 230,
+        "thumbnail": "https://i.ytimg.com/vi/VzBQL5b36ww/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "77 Bombay Street - Up In The Sky [Official Video] HD\niTunes: https://www.youtube.com/redirect?v=VzBQL5b36ww&event=video_description&redir_token=rVhFonMb61v7dovLzr5YLZuP-y98MTUxMjA4MDAxMkAxNTExOTkzNjEy&q=https%3A%2F%2Fitunes.apple.com%2Fit%2Falbum%2Fup-in-the-sky%2Fid482143458%3Fi%3D482143465\n\n\"Up In The Sky\" \u00e8 il nuovo singolo della family band svizzera 77 Bombay Street!\nDopo il grande successo in Svizzera e gli ottimi risultati raggiunti in Italia da una ballad malinconica come \"Long Way\" durante la scorsa estate, tornano i 77 Bombay Street con un pezzo molto diverso.\nPiena d'energia e ritmo, \"Up In The Sky\" \u00e8 tratta dall'ominimo album (disponibile su iTunes del 6 dicembre) una pop song facile facile, piena di chitarre, perfetta per muoversi a tempo senza pensare troppo.... Il testo, per\u00f2, accenna a un mondo nel cielo in cui non ci sono problemi, nessuno \u00e8 controllato, non ci sono auto n\u00e9 telefoni. Insomma, ascoltando la musica dei 77 Bombay Street il cervello resta accesso, eccome...\nI 77 Bombay Street sono una family band difficile da collocare. 4 fratelli di 7, tutti figli di 2 hippie svizzeri emigrati in autralia negli anni 80 che hanno deciso di chiamare la propria  band con il nome della via in cui vivevano in Australia; appunto Bombay Street al numero civico 77.\nLa loro musica mescola folk, rock e pop in parti pi\u00f9 o meno uguali mescolando le tradizioni svizzere a quelle australiane, rendendola immediata, melodica ed energica... ed il risultato piace molto!\nIl loro tour 2011 ha coinvolto circa 300.000 spettatori, un numero semplicemente enorme per la Svizzera, un paese che conta circa 7 milioni di abitanti. Ma  Matt (28 anni, voce e chitarra acustica), Joe (26, voce e chitarra elettrica), Esra (24, voce e batteria) e Simri-Ramon (20 voce e basso) pi\u00f9 che rockstar / popstar, sembrano ancora dei semplici musicisti di strada.\nDal 22 novembre al 27 novembre \"Number 2\" \u00e8 stata free single of the week su iTunes ricevendo ottimi feedback. L'album \"Up In The Sky\" \u00e8 gi\u00e0 in preview sullo stesso store e dal 6 dicembre \u00e8 disponibile per il download anche sugli altri shop digitali.\n\nLa video date di \"Up in the Sky\" \u00e8 fissata per luned\u00ec 5 Dicembre\n\nIn some cases, numbers say something: 300.000 tickets sold for their tour in Switzerland, a country with only about 7 millions of people, say  that folk pop of the 77 Bombay Street is really powerful. Matt (28), Joe (26), Esra (24), and Simri-Ramon (20) grew up in a family of nine in Basle. \"Our mother encouraged us to sing from a very early age,\" explains Joe. Ever since they were tiny, they have been making music together. \"Up In The Sky\" is their new single and their album too, avaiable on iTunes Italy from Thursday December 2011.\n\nLike us on Facebook: http://facebook.com/timerec\nSubscribe to TimeRecTv!!! http://bit.ly/2fVwESX\nTime HEAVY ROTATION on Youtube: http://goo.gl/N2b511\nTime HEAVY ROTATION on Spotify: https://goo.gl/bkK2G0\n\nGet TIME RADIO on the app stores!!!\niOS: http://goo.gl/MmiV7J / Android: http://goo.gl/1diB9Q\nBlackBerry: http://goo.gl/9A478L\n\nFOLLOW US! Stay Connected:\nhttp://facebook.com/timerec\nhttp://www.timerec.it\nhttp://twitter.com/TimeRecordsIta\nhttp://google.com/+TimeRecords\nhttp://spoti.fi/13h6Dju\nhttps://www.youtube.com/redirect?v=VzBQL5b36ww&event=video_description&redir_token=rVhFonMb61v7dovLzr5YLZuP-y98MTUxMjA4MDAxMkAxNTExOTkzNjEy&q=http%3A%2F%2Finstagram.com%2Ftimerecordsofficial%23\nhttp://www.tsu.co/TIMERECORDS\nhttp://www.soundcloud.com/timerec",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/CKhYHbF.jpg",
+                    "name": "Gems",
+                    "id": "gems",
+                    "index": 170,
+                    "timestamp": 1511993626
+                }
+            }
+        },
+        "song_title": "Up in the Sky",
+        "artist": "77 Bombay Street",
+        "artist_image": "https://i.scdn.co/image/db30bb567b524148281ce7da8d36fe05cb7b5ace",
+        "cover": "https://i.scdn.co/image/e48d292a3042c23719dfa2117b495e997c6ec0c6",
+        "album": "Up in the Sky",
+        "spotify_data": {
+            "id": "1MmajR1mnAvswYv0YH27Xn",
+            "name": "Up in the Sky",
+            "artists": [
+                {
+                    "id": "0mrnxWCuoCp6q8iSoWEijn",
+                    "name": "77 Bombay Street",
+                    "images": [
+                        {
+                            "height": 1000,
+                            "url": "https://i.scdn.co/image/101420c5842b2fdd93f76f393fdb14dcc50d29b9",
+                            "width": 1000
+                        },
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/a6af622dc9e05d205177458ff5cd25e95cf49cd6",
+                            "width": 640
+                        },
+                        {
+                            "height": 200,
+                            "url": "https://i.scdn.co/image/54509135850848b6a4f732090d40829282bb340b",
+                            "width": 200
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/db30bb567b524148281ce7da8d36fe05cb7b5ace",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "swiss rock"
+                    ],
+                    "popularity": 45,
+                    "uri": "spotify:artist:0mrnxWCuoCp6q8iSoWEijn",
+                    "href": "https://open.spotify.com/artist/0mrnxWCuoCp6q8iSoWEijn"
+                }
+            ],
+            "artist": "77 Bombay Street",
+            "cover_url": "https://i.scdn.co/image/e48d292a3042c23719dfa2117b495e997c6ec0c6",
+            "duration": 228.173,
+            "album": {
+                "id": "4SpAu01sD7Jwr18O6rPaDg",
+                "name": "Up in the Sky",
+                "artists": [
+                    {
+                        "id": "0mrnxWCuoCp6q8iSoWEijn",
+                        "name": "77 Bombay Street",
+                        "images": [
+                            {
+                                "height": 1000,
+                                "url": "https://i.scdn.co/image/101420c5842b2fdd93f76f393fdb14dcc50d29b9",
+                                "width": 1000
+                            },
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/a6af622dc9e05d205177458ff5cd25e95cf49cd6",
+                                "width": 640
+                            },
+                            {
+                                "height": 200,
+                                "url": "https://i.scdn.co/image/54509135850848b6a4f732090d40829282bb340b",
+                                "width": 200
+                            },
+                            {
+                                "height": 64,
+                                "url": "https://i.scdn.co/image/db30bb567b524148281ce7da8d36fe05cb7b5ace",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "swiss rock"
+                        ],
+                        "popularity": 45,
+                        "uri": "spotify:artist:0mrnxWCuoCp6q8iSoWEijn",
+                        "href": "https://open.spotify.com/artist/0mrnxWCuoCp6q8iSoWEijn"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/e48d292a3042c23719dfa2117b495e997c6ec0c6",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/96097dc190d8a9d88f36ac8b6270b14b533f76e4",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/4e680f67b9770fa3f9a97a0cbc8e34e5c0797c15",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:4SpAu01sD7Jwr18O6rPaDg"
+            },
+            "popularity": 40,
+            "uri": "spotify:track:1MmajR1mnAvswYv0YH27Xn",
+            "query": "77 Bombay Street - Up In The Sky",
+            "certainty": 0.967741935483871
+        }
+    },
+    {
+        "version": 103,
         "type": "DiscogsEntry",
         "expected_filename": "cache/audio_cache/youtube-LvetJ9U_tVY-Slipknot_-_Vermillion_Pt._2_OFFICIAL_VIDEO.NA",
         "video_id": "LvetJ9U_tVY",
@@ -20838,7 +21585,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 165,
+                    "index": 171,
                     "timestamp": 1505321732
                 }
             }
@@ -20872,14 +21619,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 166,
+                    "index": 172,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "Wait For Me",
         "artist": "Rise Against",
-        "artist_image": "https://i.scdn.co/image/5d387d8990d08cff197a3b9d20693561320947a2",
+        "artist_image": "https://i.scdn.co/image/bb54f19ac8a70161e63b460b8d28105c09e8b4e3",
         "cover": "https://i.scdn.co/image/b506968a958ad390518c3d9e4f45e79cf3b64be1",
         "album": "Endgame",
         "spotify_data": {
@@ -21009,14 +21756,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 167,
+                    "index": 173,
                     "timestamp": 1505161686
                 }
             }
         },
         "song_title": "Wake Up",
         "artist": "EDEN",
-        "artist_image": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+        "artist_image": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
         "cover": "https://i.scdn.co/image/92ea26aae1129bd60dc1d4f0313087dc06ee1509",
         "album": "End Credits",
         "spotify_data": {
@@ -21044,7 +21791,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 72,
+                    "popularity": 74,
                     "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
                     "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
                 }
@@ -21077,7 +21824,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 72,
+                        "popularity": 74,
                         "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
                         "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
                     }
@@ -21130,14 +21877,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 168,
+                    "index": 174,
                     "timestamp": 1505324838
                 }
             }
         },
         "song_title": "We Found Love",
         "artist": "Rihanna & Calvin Harris",
-        "artist_image": "https://i.scdn.co/image/2bfed337f30cb4aedc26c39fc10fcce66a925b5b",
+        "artist_image": "https://i.scdn.co/image/5376e8a81d2849ed25cecc9b55789f91c7cb4269",
         "cover": "https://i.scdn.co/image/a0169dd09e414fb7a2e4d265e5098dc8f8f9a2d4",
         "album": "Talk That Talk",
         "spotify_data": {
@@ -21306,14 +22053,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 169,
+                    "index": 175,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "What I Believe",
         "artist": "Skillet",
-        "artist_image": "https://i.scdn.co/image/28e0d2d74a55576b59ed62760522705b007b99e1",
+        "artist_image": "https://i.scdn.co/image/337d6850a19b9be4172503ed8edf5c5101494b24",
         "cover": "https://i.scdn.co/image/aa8fcb4fb6ce1c95149d5ab4aef1fd27f0e62573",
         "album": "Rise (Deluxe)",
         "spotify_data": {
@@ -21445,14 +22192,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 170,
+                    "index": 176,
                     "timestamp": 1504387209
                 }
             }
         },
         "song_title": "What If I Was Nothing",
         "artist": "All That Remains",
-        "artist_image": "https://i.scdn.co/image/3eb506249b975ebadb48f4b38fb48a601425c134",
+        "artist_image": "https://i.scdn.co/image/b30a71e4dfbed948b15e79823cd7f0b32a4d9b77",
         "cover": "https://i.scdn.co/image/da8b5667df1fad8635d49c66469ab831864fc58b",
         "album": "A War You Cannot Win",
         "spotify_data": {
@@ -21586,14 +22333,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 171,
+                    "index": 177,
                     "timestamp": 1504387209
                 }
             }
         },
         "song_title": "What Lies Beneath",
         "artist": "Breaking Benjamin",
-        "artist_image": "https://i.scdn.co/image/0eed1e428ac3af29a50ac137eebe1fca90bf715c",
+        "artist_image": "https://i.scdn.co/image/af3411bbd2b4d91f994196b2a91b7c372f52c90b",
         "cover": "https://i.scdn.co/image/ad4b7a621db877f249bf1f24dc19cb00d9147b5c",
         "album": "Dear Agony",
         "spotify_data": {
@@ -21731,14 +22478,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 172,
+                    "index": 178,
                     "timestamp": 1503227394
                 }
             }
         },
         "song_title": "What You Deserve",
         "artist": "No Resolve",
-        "artist_image": "https://i.scdn.co/image/89b94a72775d82334578ff9000674dc1680e890a",
+        "artist_image": "https://i.scdn.co/image/57777e6c2895a51ce24db31b4672bef3a58e0ef3",
         "cover": "https://i.scdn.co/image/eb11ce36d8935451b54ee299abb626d9829a33eb",
         "album": "Unity",
         "spotify_data": {
@@ -21840,6 +22587,153 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-gOsM-DYAEhY-Imagine_Dragons_-_Whatever_It_Takes.NA",
+        "video_id": "gOsM-DYAEhY",
+        "url": "https://www.youtube.com/watch?v=gOsM-DYAEhY",
+        "title": "Imagine Dragons - Whatever It Takes",
+        "duration": 220,
+        "thumbnail": "https://i.ytimg.com/vi/gOsM-DYAEhY/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Get Imagine Dragons\u2019 new album Evolve, out now: http://smarturl.it/EvolveID\nShop Imagine Dragons: http://smarturl.it/ImagineDragonsShop\nCatch Imagine Dragons on tour: http://imaginedragonsmusic.com/tour\nFollow Imagine Dragons:\nFacebook: https://www.facebook.com/ImagineDragons/\nTwitter: https://twitter.com/Imaginedragons\nInstagram: https://www.instagram.com/imaginedragons\n\nDirected by Matt Eastin and Aaron Hymes. Special thanks to the Bellagio Las Vegas and Cirque Du Soleil.\n\nMusic video by Imagine Dragons performing Whatever It Takes. (C) 2017 KIDinaKORNER/Interscope Records\n\nhttp://vevo.ly/o0b1jA",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/CKhYHbF.jpg",
+                    "name": "Gems",
+                    "id": "gems",
+                    "index": 179,
+                    "timestamp": 1511640073
+                }
+            }
+        },
+        "song_title": "Whatever It Takes - Miss Congeniality Remix",
+        "artist": "Imagine Dragons & Miss Congeniality",
+        "artist_image": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
+        "cover": "https://i.scdn.co/image/f651d62d096ffa795fd8332710777d060542414e",
+        "album": "Whatever It Takes (Miss Congeniality Remix)",
+        "spotify_data": {
+            "id": "5jS8NWRE77LVJm9mCbpamU",
+            "name": "Whatever It Takes - Miss Congeniality Remix",
+            "artists": [
+                {
+                    "id": "53XhwfbYqKCa1cC15pYq2q",
+                    "name": "Imagine Dragons",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "modern rock",
+                        "pop",
+                        "vegas indie"
+                    ],
+                    "popularity": 94,
+                    "uri": "spotify:artist:53XhwfbYqKCa1cC15pYq2q",
+                    "href": "https://open.spotify.com/artist/53XhwfbYqKCa1cC15pYq2q"
+                },
+                {
+                    "id": "2iihIjipKKOFSJfxrn3gcE",
+                    "name": "Miss Congeniality",
+                    "images": [],
+                    "genres": [],
+                    "popularity": 59,
+                    "uri": "spotify:artist:2iihIjipKKOFSJfxrn3gcE",
+                    "href": "https://open.spotify.com/artist/2iihIjipKKOFSJfxrn3gcE"
+                }
+            ],
+            "artist": "Imagine Dragons & Miss Congeniality",
+            "cover_url": "https://i.scdn.co/image/f651d62d096ffa795fd8332710777d060542414e",
+            "duration": 346.586,
+            "album": {
+                "id": "3w4h2g9y4AyfNyle4h6BbQ",
+                "name": "Whatever It Takes (Miss Congeniality Remix)",
+                "artists": [
+                    {
+                        "id": "53XhwfbYqKCa1cC15pYq2q",
+                        "name": "Imagine Dragons",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "modern rock",
+                            "pop",
+                            "vegas indie"
+                        ],
+                        "popularity": 94,
+                        "uri": "spotify:artist:53XhwfbYqKCa1cC15pYq2q",
+                        "href": "https://open.spotify.com/artist/53XhwfbYqKCa1cC15pYq2q"
+                    },
+                    {
+                        "id": "2iihIjipKKOFSJfxrn3gcE",
+                        "name": "Miss Congeniality",
+                        "images": [],
+                        "genres": [],
+                        "popularity": 59,
+                        "uri": "spotify:artist:2iihIjipKKOFSJfxrn3gcE",
+                        "href": "https://open.spotify.com/artist/2iihIjipKKOFSJfxrn3gcE"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/f651d62d096ffa795fd8332710777d060542414e",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/3e43d5ac05949d39fe9628cf8ad9f1ce00c8ff8e",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/7a02ae57d054bef250143bcc9bacfac7db59b66d",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:3w4h2g9y4AyfNyle4h6BbQ"
+            },
+            "popularity": 54,
+            "uri": "spotify:track:5jS8NWRE77LVJm9mCbpamU",
+            "query": "Imagine Dragons - Whatever It Takes",
+            "certainty": 0.9705882352941176
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache/audio_cache/youtube-iIqimoNyEBQ-Miley_Cyrus_-_When_I_Look_At_You_lyrics.NA",
         "video_id": "iIqimoNyEBQ",
         "url": "https://www.youtube.com/watch?v=iIqimoNyEBQ",
@@ -21860,14 +22754,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 173,
+                    "index": 180,
                     "timestamp": 1505324838
                 }
             }
         },
         "song_title": "When I Look At You",
         "artist": "Miley Cyrus",
-        "artist_image": "https://i.scdn.co/image/6d741e9188b6f43bfb4f82010c375fa1a6df1916",
+        "artist_image": "https://i.scdn.co/image/d594a099ac6729b8ab379b6bd8cf071c189718dd",
         "cover": "https://i.scdn.co/image/a1cd164987000b3e9e565250ce7ea62f1dcf514f",
         "album": "The Time Of Our Lives",
         "spotify_data": {
@@ -21991,7 +22885,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 174,
+                    "index": 181,
                     "timestamp": 1504390716
                 }
             }
@@ -22132,14 +23026,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 175,
+                    "index": 182,
                     "timestamp": 1507112657
                 }
             }
         },
         "song_title": "Wildest Dreams",
         "artist": "Taylor Swift",
-        "artist_image": "https://i.scdn.co/image/f05d47767098d4161107efebe51b14972caea40b",
+        "artist_image": "https://i.scdn.co/image/73b24abde1dd92855d03557e1de9b68212e1f43c",
         "cover": "https://i.scdn.co/image/22d30ca92618d5c5b09ab6cf526c1b77f2518b07",
         "album": "1989",
         "spotify_data": {
@@ -22263,14 +23157,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 176,
+                    "index": 183,
                     "timestamp": 1504391079
                 }
             }
         },
         "song_title": "Wings",
         "artist": "Birdy",
-        "artist_image": "https://i.scdn.co/image/38bad69baea399ebb87f1882097dc441b24e9862",
+        "artist_image": "https://i.scdn.co/image/b6feba3d55a45401b5ef463ba4c8b20d764e48af",
         "cover": "https://i.scdn.co/image/f20065d8eac54d258d50e96d0e44b8d4fa2d0350",
         "album": "Fire Within",
         "spotify_data": {
@@ -22406,14 +23300,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 177,
+                    "index": 184,
                     "timestamp": 1504394708
                 }
             }
         },
         "song_title": "Without You",
         "artist": "Ashes Remain",
-        "artist_image": "https://i.scdn.co/image/e4a1c71488b3f40f6a78ad53337ecf4e0ecb9a6c",
+        "artist_image": "https://i.scdn.co/image/0f665d458b87e26667f526640bae39993c8348ad",
         "cover": "https://i.scdn.co/image/5990898af7d891872bbf326057a268bd520e509e",
         "album": "What I've Become",
         "spotify_data": {
@@ -22537,14 +23431,14 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 178,
+                    "index": 185,
                     "timestamp": 1504385364
                 }
             }
         },
         "song_title": "Without You",
         "artist": "Breaking Benjamin",
-        "artist_image": "https://i.scdn.co/image/fc679f65311133e7f95cd45ef83feef9825331c3",
+        "artist_image": "https://i.scdn.co/image/0eed1e428ac3af29a50ac137eebe1fca90bf715c",
         "cover": "https://i.scdn.co/image/ad4b7a621db877f249bf1f24dc19cb00d9147b5c",
         "album": "Dear Agony",
         "spotify_data": {
@@ -22682,7 +23576,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 179,
+                    "index": 186,
                     "timestamp": 1504389480
                 }
             }
@@ -22813,7 +23707,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 180,
+                    "index": 187,
                     "timestamp": 1506867755
                 }
             }
@@ -22946,7 +23840,7 @@
                     "cover": "https://i.imgur.com/CKhYHbF.jpg",
                     "name": "Gems",
                     "id": "gems",
-                    "index": 181,
+                    "index": 188,
                     "timestamp": 1505070712
                 }
             }
