@@ -1,9 +1,9 @@
+import asyncio
 import time
 
 from discord import Embed
 
-import asyncio
-from musicbot import utils
+from giesela import utils
 
 from . import ui_utils
 
