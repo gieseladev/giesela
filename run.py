@@ -122,7 +122,7 @@ def main():
 
         pycom = None
 
-        # Maybe I should check for if the current dir is the musicbot folder,
+        # Maybe I should check for if the current dir is the giesela folder,
         # just in case
 
         if sys.platform.startswith("win"):
@@ -162,7 +162,7 @@ def main():
         return
 
     import asyncio
-    from musicbot.reporting import raven_client
+    from giesela.reporting import raven_client
     setup_logging()
 
     tried_requirementstxt = False
@@ -178,9 +178,9 @@ def main():
 
         m = None
         try:
-            from musicbot.bot import MusicBot
+            from giesela.bot import Giesela
 
-            m = MusicBot()
+            m = Giesela()
             print("Connecting...", end="", flush=True)
             m.run()
 
@@ -215,7 +215,7 @@ def main():
         except Exception as e:
             raven_client.captureException()
 
-            if hasattr(e, "__module__") and e.__module__ == "musicbot.exceptions":
+            if hasattr(e, "__module__") and e.__module__ == "giesela.exceptions":
                 if e.__class__.__name__ == "HelpfulError":
                     print(e.message)
                     # break
