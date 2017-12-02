@@ -1,4 +1,4 @@
-"""Test."""
+"""Playlist."""
 
 
 class Playlist:
@@ -21,30 +21,13 @@ class Playlist:
 
     @classmethod
     def from_dict(cls, data):
-        pass
+        """Load from dict."""
+        return cls(**data)
 
     def to_dict(self):
+        """Serialise to dict."""
         pass
 
     def save(self):
-        pass
-
-
-class PLaylistEntry:
-    """A entry in a playlist."""
-
-    def __init__(self, playlist, adder, entry, changelog, timestamp, statistics):
-        self.playlist = playlist
-        self.adder = adder
-        self.entry = entry
-
-        self.changelogs = changelog
-        self.timestamp = timestamp
-        self.statistics = statistics
-
-    @classmethod
-    def from_dict(cls, data):
-        pass
-
-    def to_dict(self):
+        """Save the playlist to disk."""
         pass

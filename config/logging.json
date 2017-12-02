@@ -41,7 +41,7 @@
   },
 
   "loggers": {
-    "musicbot": {
+    "giesela": {
       "level": "DEBUG",
       "propagate": false,
       "handlers": ["console", "file", "sentry"]
