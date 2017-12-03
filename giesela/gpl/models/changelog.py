@@ -1,5 +1,8 @@
 """Changelog model for a playlist."""
 import enum
+from datetime import datetime
+
+from giesela.models import GieselaUser
 
 
 class ChangelogChange(enum.IntEnum):
@@ -35,6 +38,10 @@ class ChangelogEntry:
         self.data = data
         self.timestamp = timestamp
 
+    def __str__(self):
+        """Return string rep."""
+        return "<{} by {} at {}>".format(self.change.name, self.user, datetime.fromtimestamp(self.timestamp))
+
     @classmethod
     def rename(cls, user, from_name, to_name, timestamp):
         """When a playlist is renamed."""
@@ -47,12 +54,12 @@ class ChangelogEntry:
     @classmethod
     def from_dict(cls, data):
         """Load from dict."""
-        # TODO user!
+        user = GieselaUser.from_dict(data["user"])
         change = ChangelogChange.from_dict(data["change"])
-        data = data["data"]
+        d = data["data"]
         timestamp = data["timestamp"]
 
-        return cls(change, data, timestamp)
+        return cls(user, change, d, timestamp)
 
     def to_dict(self):
         """Convert to dict."""
@@ -70,6 +77,10 @@ class Changelog:
     def __init__(self, changelogs):
         """Initialise."""
         self.changelogs = changelogs
+
+    def __str__(self):
+        """Get string rep."""
+        return "<Changelog | {} entries>".format(self.changelogs)
 
     @classmethod
     def from_dict(cls, data):

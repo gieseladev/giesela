@@ -2,11 +2,14 @@
 
 
 class PlaylistEntry:
-    """A entry in a playlist."""
+    """An entry in a playlist."""
 
-    def __init__(self, playlist, adder, entry, changelog, timestamp, statistics):
+    manager = None
+
+    def __init__(self, adder, entry, changelog, timestamp, statistics):
         """Initialise playlist entry."""
-        self.playlist = playlist
+        self.playlist = None
+
         self.adder = adder
         self.entry = entry
 
@@ -17,7 +20,7 @@ class PlaylistEntry:
     @classmethod
     def from_dict(cls, data):
         """Load from dict."""
-        pass
+        return cls(**data)
 
     def to_dict(self):
         """Serialise to dict."""

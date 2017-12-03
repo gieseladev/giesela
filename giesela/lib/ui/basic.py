@@ -1,3 +1,5 @@
+"""Basic ui elements."""
+
 import asyncio
 import time
 
@@ -9,18 +11,19 @@ from . import ui_utils
 
 
 class EditableEmbed:
-    """
-        Provides the base for an interface
-    """
+    """Provides the base for an interface."""
 
     def __init__(self):
+        """Create new."""
         self._interface_message = None
 
     async def exit(self):
+        """Close ui."""
         if self._interface_message:
             await self.bot.safe_delete_message(self._interface_message)
 
     async def update_message(self, embed, on_new=None):
+        """Update."""
         if not self._interface_message:
             self._interface_message = await self.bot.safe_send_message(self.channel, embed=embed)
 
@@ -34,20 +37,22 @@ class EditableEmbed:
 
 
 class LoadingBar(EditableEmbed):
-    """
-        Keyword arguments:
-        header -- Embed's title
-        colour -- custom colour for the Embed
-        total_items -- display the amount of items to parse
-        show_time_left -- whether to display "time_left" (requires total_items to be set)
-        show_ipm -- whether to the amount of items per minute
-        item_name_plural -- item name put into plural form
-        show_percentage -- whether to show the current percentage
+    """A loading bar.
 
-        custom_embed_data -- data to pass over to the Embed
+    Keyword arguments:
+    header -- Embed's title
+    colour -- custom colour for the Embed
+    total_items -- display the amount of items to parse
+    show_time_left -- whether to display "time_left" (requires total_items to be set)
+    show_ipm -- whether to the amount of items per minute
+    item_name_plural -- item name put into plural form
+    show_percentage -- whether to show the current percentage
+
+    custom_embed_data -- data to pass over to the Embed
     """
 
     def __init__(self, bot, channel, **options):
+        """Create new."""
         self.bot = bot
         self.channel = channel
 
@@ -72,15 +77,18 @@ class LoadingBar(EditableEmbed):
 
     @property
     def avg_time(self):
+        """Return average time."""
         return (sum(self.times) / len(self.times)) if self.times else None
 
     def time_it(self):
+        """Create new time."""
         this_time = time.time() - self._current_time
         self.times.append(this_time)
 
         self._current_time = time.time()
 
     def build_next_embed(self):
+        """Build the new embed."""
         if not self._current_embed:
             self._current_embed = Embed(title=self.header, colour=self.colour, **self.custom_embed_data)
 
@@ -107,6 +115,7 @@ class LoadingBar(EditableEmbed):
         return self._current_embed
 
     async def set_progress(self, percentage):
+        """Set the progress."""
         self.time_it()
 
         self.progress = percentage
@@ -119,15 +128,17 @@ class LoadingBar(EditableEmbed):
         self._message_future = asyncio.ensure_future(self.update_message(next_embed))
 
     async def done(self):
+        """When loading is done."""
         await self.exit()
 
 
 class ItemPicker(EditableEmbed):
-    """
-        Keyword arguments:
-        user -- user to respond to
-        items -- list of Embeds to use
-        item_callback -- function to call which returns an Embed
+    """Ui Element for picking between elements.
+
+    Keyword arguments:
+    user -- user to respond to
+    items -- list of Embeds to use
+    item_callback -- function to call which returns an Embed
     """
 
     emojis = ("◀", "▶", "✅", "❎")

@@ -14,11 +14,9 @@ from textwrap import indent, wrap
 
 import aiohttp
 import discord
-from discord import Client, utils
+from discord import Client
 from discord.enums import ChannelType
-from discord.object import Object
 from discord.utils import find
-from discord.voice_client import VoiceClient
 
 from giesela import downloader, exceptions, localization
 from giesela.commands.admin_commands import AdminCommands
@@ -33,37 +31,41 @@ from giesela.config import Config, ConfigDefaults
 from giesela.constants import VERSION as BOTVERSION
 from giesela.constants import (ABS_AUDIO_CACHE_PATH, AUDIO_CACHE_PATH,
                                DISCORD_MSG_CHAR_LIMIT)
-from giesela.entry import (RadioSongEntry, StreamEntry, TimestampEntry,
-                           YoutubeEntry)
+from giesela.entry import RadioSongEntry, TimestampEntry, YoutubeEntry
 from giesela.games.game_cah import GameCAH
+from giesela.gpl.playlists import PlaylistManager
 from giesela.lib.ui import ui_utils
 from giesela.opus_loader import load_opus_lib
 from giesela.player import MusicPlayer
 from giesela.random_sets import RandomSets
 from giesela.reporting import raven_client
-from giesela.saved_playlists import Playlists
 from giesela.settings import Settings
 from giesela.utils import (Response, get_related_videos, load_file, ordinal,
                            paginate)
 from giesela.web_author import WebAuthor
 from giesela.webiesela import server as webiesela
 
+from .models import GieselaUser
+
 load_opus_lib()
 
 log = logging.getLogger(__name__)
 
 
-class Giesela(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, PlayerCommands, PlaylistCommands, QueueCommands, ToolCommands):
+class Giesela(Client, AdminCommands, FunCommands, InfoCommands, MiscCommands, PlayerCommands, PlaylistCommands, QueueCommands, ToolCommands):
 
     def __init__(self):
         WebAuthor.bot = self
+        GieselaUser.bot = self
+
+        super().__init__()
 
         self.players = {}
         self.locks = defaultdict(asyncio.Lock)
         self.voice_client_connect_lock = asyncio.Lock()
 
         self.config = Config(ConfigDefaults.options_file)
-        self.playlists = Playlists(ConfigDefaults.playlists_file)
+        self.playlists = PlaylistManager(self)
         self.random_sets = RandomSets(ConfigDefaults.random_sets)
         self.online_loggers = {}
         self.cah = GameCAH(self)
@@ -88,7 +90,6 @@ class Giesela(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, P
         ssd_defaults = {"last_np_msg": None, "auto_paused": False}
         self.server_specific_data = defaultdict(lambda: dict(ssd_defaults))
 
-        super().__init__()
         self.aiosession = aiohttp.ClientSession(loop=self.loop)
         self.http.user_agent += " Giesela/%s" % BOTVERSION
 
@@ -473,7 +474,7 @@ class Giesela(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, P
             else:
                 print("Could not delete old audio cache, moving on.")
 
-        print("Ready to go!")
+        await self.playlists.setup()
 
         if self.config.open_websocket:
             await webiesela.Server.serve(self)

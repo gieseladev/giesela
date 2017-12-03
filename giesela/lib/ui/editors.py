@@ -1,3 +1,5 @@
+"""Various editors."""
+
 from . import ui_utils
 from .basic import EditableEmbed
 
