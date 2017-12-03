@@ -4,6 +4,8 @@
 class PlaylistEntry:
     """An entry in a playlist."""
 
+    __slots__ = ["playlist", "adder", "entry", "changelogs", "timestamp", "statistics"]
+
     manager = None
 
     def __init__(self, adder, entry, changelog, timestamp, statistics):
@@ -24,4 +26,10 @@ class PlaylistEntry:
 
     def to_dict(self):
         """Serialise to dict."""
-        pass
+        return {
+            "adder": self.adder.to_dict(),
+            "entry": self.entry.to_dict(),
+            "changelog": self.changelog.to_dict(),
+            "timestamp": self.timestamp,
+            "statistics": self.statistics.to_dict()
+        }

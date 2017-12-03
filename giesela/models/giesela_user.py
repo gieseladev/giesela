@@ -4,6 +4,8 @@
 class GieselaUser:
     """A Giesela user."""
 
+    __slots__ = ["discord_id", "name", "discriminator", "avatar_url", "server", "server_id", "server_name", "member"]
+
     bot = None
     users = {}
 

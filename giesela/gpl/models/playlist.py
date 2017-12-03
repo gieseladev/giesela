@@ -9,6 +9,8 @@ from .playlist_entry import PlaylistEntry
 class Playlist:
     """A playlist."""
 
+    __slots__ = ["gpl_id", "entries", "title", "description", "cover", "creator", "changelog"]
+
     manager = None
 
     def __init__(self, gpl_id, entries, title, description, cover, creator, changelog, *args, **kwargs):
