@@ -13,11 +13,10 @@ from bs4 import BeautifulSoup
 from dateutil.parser import parse
 from giesela import energy
 from giesela.config import ConfigDefaults
-from giesela.lib.serialisable import Serialisable, WebSerialisable
 from giesela.utils import parse_timestamp
 
 
-class StationInfo(Serialisable, WebSerialisable):
+class StationInfo:
 
     def __init__(self, id, name, aliases, language, cover, url, website, thumbnails, poll_time=None, uncertainty=2):
         self.id = id

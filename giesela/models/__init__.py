@@ -1,1 +1,2 @@
-from .giesela_user import GieselaUser
+"""Giesela models."""
+from .giesela_user import GieselaUser  # noqa: F401

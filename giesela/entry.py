@@ -8,7 +8,6 @@ from discord import Channel, Member, Server, User
 
 from giesela.exceptions import (BrokenEntryError, ExtractionError,
                                 OutdatedEntryError)
-from giesela.lib.serialisable import Serialisable, WebSerialisable
 from giesela.lyrics import search_for_lyrics
 from giesela.radio import RadioSongExtractor, StationInfo
 from giesela.spotify import SpotifyTrack
@@ -93,7 +92,7 @@ class Entry:
         return meta
 
 
-class BaseEntry(Serialisable, WebSerialisable):
+class BaseEntry:
 
     def __init__(self, queue, url, **meta):
         self.queue = queue
