@@ -295,7 +295,9 @@ class GieselaWebSocket(WebSocket):
                 entry = command_data.get("item")
                 kind = command_data.get("kind")  # entry, playlist
                 mode = command_data.get("mode", "queue")  # now, next, queue, random
-                searcher = command_data.get("searcher")
+                searcher = command_data.get("searcher")  # YoutubeSearcher, SpotifySearcher, SoundcloudSearcher
+
+                # enter async env with run_coroutine_threadsafe. Handle Spotify and then just feed the queue add_entry with the url.
 
                 self.log("playing {} from {} with mode {}".format(kind, searcher, mode))
 
