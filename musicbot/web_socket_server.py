@@ -292,11 +292,12 @@ class GieselaWebSocket(WebSocket):
                     success = False
 
             elif command == "play_entry":
+                entry = command_data.get("item")
                 kind = command_data.get("kind")  # entry, playlist
-                url = command_data.get("url")
-                play_mode = command_data.get("mode", "queue")  # now, next, queue, random
+                mode = command_data.get("mode", "queue")  # now, next, queue, random
+                searcher = command_data.get("searcher")
 
-                self.log("playing ***REMOVED******REMOVED*** with url \"***REMOVED******REMOVED***\" with mode ***REMOVED******REMOVED***".format(kind, url, play_mode))
+                self.log("playing ***REMOVED******REMOVED*** from ***REMOVED******REMOVED*** with mode ***REMOVED******REMOVED***".format(kind, searcher, mode))
 
             answer["success"] = bool(success)
 
