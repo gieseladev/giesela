@@ -1,6 +1,4 @@
-import asyncio
 import datetime
-import json
 import math
 import random
 import re
@@ -8,7 +6,6 @@ import time
 import traceback
 import unicodedata
 import urllib.parse
-from datetime import timedelta
 from difflib import SequenceMatcher
 from functools import wraps
 from hashlib import md5

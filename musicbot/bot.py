@@ -14,11 +14,9 @@ from textwrap import indent, wrap
 
 import aiohttp
 import discord
-from discord import Client, utils
+from discord import Client
 from discord.enums import ChannelType
-from discord.object import Object
 from discord.utils import find
-from discord.voice_client import VoiceClient
 
 from musicbot import downloader, exceptions, localization
 from musicbot.commands.admin_commands import AdminCommands
@@ -33,8 +31,7 @@ from musicbot.config import Config, ConfigDefaults
 from musicbot.constants import VERSION as BOTVERSION
 from musicbot.constants import (ABS_AUDIO_CACHE_PATH, AUDIO_CACHE_PATH,
                                 DISCORD_MSG_CHAR_LIMIT)
-from musicbot.entry import (RadioSongEntry, StreamEntry, TimestampEntry,
-                            YoutubeEntry)
+from musicbot.entry import RadioSongEntry, TimestampEntry, YoutubeEntry
 from musicbot.games.game_cah import GameCAH
 from musicbot.lib.ui import ui_utils
 from musicbot.opus_loader import load_opus_lib

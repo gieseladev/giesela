@@ -1,8 +1,6 @@
 import configparser
 import json
 
-from musicbot.exceptions import HelpfulError
-
 
 class RandomSets:
 

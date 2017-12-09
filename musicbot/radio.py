@@ -1,4 +1,3 @@
-import asyncio
 import json
 import re
 import time
@@ -6,11 +5,10 @@ from datetime import date, datetime, timedelta, timezone
 from itertools import chain
 from random import choice
 
-import aiohttp
 import requests
+
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
-
 from musicbot import energy
 from musicbot.config import ConfigDefaults
 from musicbot.lib.serialisable import Serialisable, WebSerialisable
