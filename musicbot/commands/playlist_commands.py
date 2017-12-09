@@ -1,3 +1,4 @@
+import asyncio
 import functools
 import re
 import time
@@ -6,7 +7,6 @@ from textwrap import indent
 
 from discord import Embed
 
-import asyncio
 from musicbot.entry import GieselaEntry, TimestampEntry, YoutubeEntry
 from musicbot.entry_updater import fix_entry, fix_generator
 from musicbot.exceptions import ExtractionError, WrongEntryTypeError
@@ -1100,9 +1100,10 @@ class PlaylistCommands:
         "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite"),
         "4.2.3": (1500959036, "Error handling for DMCA takedowns and other Youtube problems"),
         "4.6.9": (1503754385, "Fixed typo"),
-        "4.7.8": (1504105737, "Using the new copy method for entries to make sure that they're \"clean\"")
+        "4.7.8": (1504105737, "Using the new copy method for entries to make sure that they're \"clean\""),
+        "4.9.12": (1512834598, "Can now actually use command with query overload.")
     })
-    async def cmd_addtoplaylist(self, channel, author, player, playlistname, query=None):
+    async def cmd_addtoplaylist(self, channel, author, player, playlistname, leftover_args):
         """
         ///|Usage
         `{command_prefix}addtoplaylist <playlistname> [query]`
@@ -1110,6 +1111,8 @@ class PlaylistCommands:
         Add the current entry to a playlist.
         If you either provide a link or a name, that song is added to the playlist.
         """
+
+        query = " ".join(leftover_args)
 
         if playlistname is None:
             return Response(
