@@ -1,13 +1,12 @@
 import asyncio
-import copy
 import datetime
 import random
 import time
-import traceback
 from collections import deque
 from itertools import islice
 
-from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
+from youtube_dl.utils import (DownloadError, ExtractorError, UnsupportedError,
+                              URLError)
 
 from musicbot.discogs import get_entry as get_discogs_track
 from musicbot.entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry,
