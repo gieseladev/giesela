@@ -1,13 +1,12 @@
+import asyncio
 import functools
+import random
 import time
 import traceback
-import random
-
 from random import choice, shuffle
 
 from discord import Embed
 
-import asyncio
 from musicbot import exceptions, spotify
 from musicbot.entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                             StreamEntry, TimestampEntry, YoutubeEntry)
@@ -447,34 +446,36 @@ class EnqueueCommands:
         # await self.safe_send_message (channel, msgState)
 
     @command_info("4.7.0", 1503764185, ***REMOVED***
-        "4.9.7": (1508067836, "Support for direct Spotify tracks/URL")
+        "4.9.7": (1508067836, "Support for direct Spotify tracks/URL"),
+        "4.9.10": (1512831683, "delete command message and progress bar fix")
     ***REMOVED***)
-    async def cmd_spotify(self, channel, author, player, url):
+    async def cmd_spotify(self, message, channel, author, player, url):
         """
         ///|Usage
         `***REMOVED***command_prefix***REMOVED***spotify [link]`
         ///|Explanation
         Load a playlist or direct URL track from Spotify!
         """
-     
+
+        await self.safe_delete_message(message)
         model = spotify.model_from_url(url)
-  
+
         if isinstance(model, spotify.SpotifyTrack):
             track = model
-        
+
             em = Embed(title=track.name, description=track.album.name, colour=random.randint(0, 0xFFFFFF))
             em.set_thumbnail(url=track.cover_url)
             em.set_author(name=track.artist_string, icon_url=track.artists[0].image)
             em.set_footer(text=format_time(track.duration))
-            
+
             await self.safe_send_message(channel, embed=em)
-        
+
             entry = await model.get_spotify_entry(player.queue, author=author, channel=channel)
             player.queue._add_entry(entry)
-        
+
         elif isinstance(model, spotify.SpotifyPlaylist):
             playlist = model
-  	    
+
             em = Embed(title=playlist.name, description=playlist.description, colour=random.randint(0, 0xFFFFFF), url=playlist.href)
             em.set_thumbnail(url=playlist.cover)
             em.set_author(name=playlist.author)
@@ -495,7 +496,7 @@ class EnqueueCommands:
                 else:
                     entries_not_added += 1
 
-            await loading_bar.set_progress((ind + 1) / total_tracks)
+                await loading_bar.set_progress((ind + 1) / total_tracks)
 
             await loading_bar.done()
 
@@ -504,6 +505,7 @@ class EnqueueCommands:
 
         else:
             return Response("Couldn't find anything")
+
 
 class ManipulateCommands:
 
@@ -759,7 +761,7 @@ class ManipulateCommands:
         ///|Usage
         `***REMOVED***command_prefix***REMOVED***move <from index> <to index>`
         ///|Explanation
-        Moves an entry from a given position. 
+        Moves an entry from a given position.
         For example, `***REMOVED***command_prefix***REMOVED***move 22 2` will move entry 22 in the queue to position 2 in the queue.
         """
 
@@ -1157,4 +1159,3 @@ class DisplayCommands:
 
 class QueueCommands(EnqueueCommands, ManipulateCommands, DisplayCommands):
     pass
-  
