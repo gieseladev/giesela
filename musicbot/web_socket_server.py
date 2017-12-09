@@ -134,6 +134,10 @@ class GieselaWebSocket(WebSocket):
 
         elif searcher in ("YoutubeSearcher", "SoundcloudSearcher"):
             entry_gen = await player.queue.get_entry_gen(url)
+            success = True
+
+        answer["success"] = bool(success)
+        self.sendMessage(json.dumps(answer))
 
         if mode in "random":
             placement = mode
@@ -153,9 +157,6 @@ class GieselaWebSocket(WebSocket):
                     player.queue._add_entry(entry, placement=placement)
         except Exception:
             traceback.print_exc()
-
-        answer["success"] = bool(success)
-        self.sendMessage(json.dumps(answer))
 
     def handleAuthenticatedMessage(self, data):
         answer = {
