@@ -14,7 +14,7 @@ from musicbot.lib.ui.basic import ItemPicker, LoadingBar
 from musicbot.radio import RadioSongExtractor, RadioStations
 from musicbot.utils import (Response, block_user, clean_songname, command_info,
                             create_bar, format_time, get_related_videos,
-                            hex_to_dec, nice_cut, ordinal, owner_only,
+                            hex_to_dec, html2md, nice_cut, ordinal, owner_only,
                             to_timestamp)
 from musicbot.web_socket_server import GieselaServer
 
@@ -476,7 +476,7 @@ class EnqueueCommands:
         elif isinstance(model, spotify.SpotifyPlaylist):
             playlist = model
 
-            em = Embed(title=playlist.name, description=playlist.description, colour=random.randint(0, 0xFFFFFF), url=playlist.href)
+            em = Embed(title=playlist.name, description=html2md(playlist.description), colour=random.randint(0, 0xFFFFFF), url=playlist.href)
             em.set_thumbnail(url=playlist.cover)
             em.set_author(name=playlist.author)
             em.set_footer(text="***REMOVED******REMOVED*** tracks".format(len(playlist.tracks)))
