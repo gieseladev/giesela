@@ -20,7 +20,7 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
                     "index": 0,
                     "timestamp": 1502603476
@@ -151,7 +151,7 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
                     "index": 1,
                     "timestamp": 1510089499
@@ -390,7 +390,7 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
                     "index": 2,
                     "timestamp": 1511983682
@@ -399,7 +399,7 @@
         },
         "song_title": "Anywhere",
         "artist": "Rita Ora",
-        "artist_image": "https://i.scdn.co/image/0006459c76f943b1abec5b3f2b45372481c8af6d",
+        "artist_image": "https://i.scdn.co/image/188d9ce02b26f86e2735c372f9d823f0e1c256c8",
         "cover": "https://i.scdn.co/image/a431109bfb8cffb84c37b006fa3620ef9777615d",
         "album": "Anywhere",
         "spotify_data": {
@@ -523,7 +523,7 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
                     "index": 3,
                     "timestamp": 1510002357
@@ -532,7 +532,7 @@
         },
         "song_title": "Back for Good - Radio Mix",
         "artist": "Take That",
-        "artist_image": "https://i.scdn.co/image/bb83268ce1e61c9ef4944581b0cd871d74099e00",
+        "artist_image": "https://i.scdn.co/image/389524aff4bf2606b48ea979ab53e39c637ebc72",
         "cover": "https://i.scdn.co/image/158db04c5690cc77e3b9f9f00c20a333af9434b2",
         "album": "Nobody Else",
         "spotify_data": {
@@ -638,6 +638,131 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-WPlx5BmZVkQ-Liam_Payne_-_Bedroom_Floor_Lyric_Video.NA",
+        "video_id": "WPlx5BmZVkQ",
+        "url": "https://www.youtube.com/watch?v=WPlx5BmZVkQ",
+        "title": "Liam Payne - Bedroom Floor (Lyric Video)",
+        "duration": 190,
+        "thumbnail": "https://i.ytimg.com/vi/WPlx5BmZVkQ/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "The brand new single from Liam Payne. Listen to Bedroom Floor now http://liamp.co/BedroomFloorID\n\nFollow Liam on\nFacebook http://liamp.co/Facebook\nTwitter http://liamp.co/Twitter\nInstagram http://liamp.co/Instagram\nSnapchat @liampayne\nWebsite http://liamp.co/Official\n\nBaby\nHeard you\u2019ve been talking about me lately\nTelling all your friends how much you hate me\nBut who you calling up when you get lonely?\nWhen you get lonely\nYeah\n\nYou be saying real real nice real nice things\nWhen I\u2019m touching you\nYou be getting real real real real real jealous\nWhen it wasn\u2019t you oh\nAnd every now when my iPhone iPhone rings\nI be telling you\nI told you, I told you, I told you\n\nYou said it was over\nYou said it was over\nBut your clothes say different on my bedroom floor\nYou said it was over\nYou said it was over\nBut your clothes say different on my bedroom floor\nBut your clothes say different on my bedroom floor\nBut your clothes say different on my bedroom floor, yeah\n\nBaby\nWhy you always act like you don\u2019t want me?\nDon\u2019t make me bring up your dirty laundry\nWe always on and off until you\u2019re on me\nUntil you\u2019re on me\nYeah\n\nYou be saying real real nice real nice things\nWhen I\u2019m touching you\nYou be getting real real real real real jealous\nWhen it wasn\u2019t you oh\nAnd every now when my iPhone iPhone rings\nI be telling you\nI told you, I told you, I told you\n\nYou said it was over\nYou said it was over\nBut your clothes say different on my bedroom floor\nYou said it was over\nYou said it was over\nBut your clothes say different on my bedroom floor\nBut your clothes say different on my bedroom floor\nBut your clothes say different on my bedroom floor, yeah\nYou said it was over, you said it was over\nBut your clothes say different on my bedroom floor\nBut your clothes say different on my bedroom floor, yeah\n\nOh\nMy bedroom floor\nYour clothes are saying something different now\nYou wanna break up just to fix it now\nOh baby\n\nYou said it was over\nYou said it was over\nBut your clothes say different on my bedroom floor\nYou said it was over\nYou said it was over\nBut your clothes say different on my bedroom floor\nBut your clothes say different on my bedroom floor\nBut your clothes say different on my bedroom floor, yeah\nYou said it was over, you said it was over\nBut your clothes say different on my bedroom floor\nBut your clothes say different on my bedroom floor, yeah\n\nVideo Credit - http://adultartclub.co.uk Direction - Charlotte Audrey / Jonny Costello / Lead CGI - Liam Bevin / Editor - Callum Barnes\n\nMusic video by Liam Payne performing Bedroom Floor. (C) 2017 Hampton Records Limited, under exclusive licence to Capitol Records, a division of Universal Music Operations Limited\nBest of Liam Payne: https://goo.gl/tEPWbM\nSubscribe here: https://goo.gl/JUx1Xo",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/gwwzsof.png",
+                    "name": "Jams",
+                    "id": "jams",
+                    "index": 4,
+                    "timestamp": 1512147383
+                }
+            }
+        },
+        "song_title": "Bedroom Floor",
+        "artist": "Liam Payne",
+        "artist_image": "https://i.scdn.co/image/01a0e33789aa02e95e0c26e57fcf1fbf5a2554e6",
+        "cover": "https://i.scdn.co/image/edb4857406db12dcf471246a83c2a9a34ca03996",
+        "album": "Bedroom Floor",
+        "spotify_data": {
+            "id": "1OG4nxGMy72EklX2DwcN3Z",
+            "name": "Bedroom Floor",
+            "artists": [
+                {
+                    "id": "5pUo3fmmHT8bhCyHE52hA6",
+                    "name": "Liam Payne",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/01a0e33789aa02e95e0c26e57fcf1fbf5a2554e6",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/cf2401d9137d6b2d134f7274a0434fe3a5fc2ad1",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/1c0ffcf3d83ae783f2931aa28b0ceb358ae8c2f3",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "post-teen pop"
+                    ],
+                    "popularity": 85,
+                    "uri": "spotify:artist:5pUo3fmmHT8bhCyHE52hA6",
+                    "href": "https://open.spotify.com/artist/5pUo3fmmHT8bhCyHE52hA6"
+                }
+            ],
+            "artist": "Liam Payne",
+            "cover_url": "https://i.scdn.co/image/edb4857406db12dcf471246a83c2a9a34ca03996",
+            "duration": 188.346,
+            "album": {
+                "id": "4NuwxxHG89yX87wmK5Fv65",
+                "name": "Bedroom Floor",
+                "artists": [
+                    {
+                        "id": "5pUo3fmmHT8bhCyHE52hA6",
+                        "name": "Liam Payne",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/01a0e33789aa02e95e0c26e57fcf1fbf5a2554e6",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/cf2401d9137d6b2d134f7274a0434fe3a5fc2ad1",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/1c0ffcf3d83ae783f2931aa28b0ceb358ae8c2f3",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "post-teen pop"
+                        ],
+                        "popularity": 85,
+                        "uri": "spotify:artist:5pUo3fmmHT8bhCyHE52hA6",
+                        "href": "https://open.spotify.com/artist/5pUo3fmmHT8bhCyHE52hA6"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/edb4857406db12dcf471246a83c2a9a34ca03996",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/d6296e78b8079dc3c29d892b9972ced32eeef30b",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/f1d2285dc704adf75d0f17810f8dddbc1ccd34e4",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:4NuwxxHG89yX87wmK5Fv65"
+            },
+            "popularity": 78,
+            "uri": "spotify:track:1OG4nxGMy72EklX2DwcN3Z",
+            "query": "Liam Payne - Bedroom Floor",
+            "certainty": 0.96
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache/audio_cache/youtube-MjkBPSzK3nc-Limp_Bizkit_-_Behind_Blue_Eyes.webm",
         "video_id": "MjkBPSzK3nc",
         "url": "https://www.youtube.com/watch?v=MjkBPSzK3nc",
@@ -656,9 +781,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 4,
+                    "index": 5,
                     "timestamp": 1503687003
                 }
             }
@@ -809,16 +934,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 5,
+                    "index": 6,
                     "timestamp": 1509918563
                 }
             }
         },
         "song_title": "Big Girls Don't Cry (Personal)",
         "artist": "Fergie",
-        "artist_image": "https://i.scdn.co/image/8f3351450c30b08da0fcfc9a7c317570b6bb291d",
+        "artist_image": "https://i.scdn.co/image/63b54537b124e1f4f99f6b8b12202615eabef01f",
         "cover": "https://i.scdn.co/image/2ec9fe10ea954e55821a7b94bdf30f1ee2472101",
         "album": "The Dutchess",
         "spotify_data": {
@@ -946,16 +1071,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 6,
+                    "index": 7,
                     "timestamp": 1506869975
                 }
             }
         },
         "song_title": "Black Magic",
         "artist": "Little Mix",
-        "artist_image": "https://i.scdn.co/image/e9877f5b2188b7d24323517d08ff8826b68cd5fc",
+        "artist_image": "https://i.scdn.co/image/8d0fe01c4ff5f9e191ef73fc198f7eeac7626a8a",
         "cover": "https://i.scdn.co/image/995552b34c1779ec3126dbeddf37d7b2e26f9c9d",
         "album": "Get Weird (Deluxe)",
         "spotify_data": {
@@ -1077,9 +1202,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 7,
+                    "index": 8,
                     "timestamp": 1510002004
                 }
             }
@@ -1212,9 +1337,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 8,
+                    "index": 9,
                     "timestamp": 1509927762
                 }
             }
@@ -1347,9 +1472,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 9,
+                    "index": 10,
                     "timestamp": 1511992658
                 }
             }
@@ -1460,9 +1585,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 10,
+                    "index": 11,
                     "timestamp": 1511092840
                 }
             }
@@ -1575,6 +1700,135 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-asaCQOZpqUQ-P_nk_-_Don_t_Let_Me_Get_Me_Video.NA",
+        "video_id": "asaCQOZpqUQ",
+        "url": "https://www.youtube.com/watch?v=asaCQOZpqUQ",
+        "title": "P!nk - Don't Let Me Get Me (Video)",
+        "duration": 210,
+        "thumbnail": "https://i.ytimg.com/vi/asaCQOZpqUQ/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "P!nk's official music video for 'Don't Let Me Get Me'. Click to listen to P!nk on Spotify: http://smarturl.it/PSpot?IQid=PLMGM\n\nAs featured on Greatest Hits...So Far!!!. Click to buy the track or album via iTunes: http://smarturl.it/PGHiTunes?IQid=PLMGM\nGoogle Play: http://smarturl.it/PLMGMPlay?IQid=PLMGM\nAmazon: http://smarturl.it/PGHAm?IQid=PLMGM\n\nMore from P!nk\nJust Give Me A Reason: https://youtu.be/OpQFFLBMEPI\nTry: https://youtu.be/yTCDVfMz15M\nSo What: https://youtu.be/FJfFZqTlWrQ\n\nFollow P!nk\nWebsite: http://www.pinkspage.com\nFacebook: https://www.facebook.com/pink?fref=nf\nTwitter: https://twitter.com/Pink\n\nSubscribe to P!nk on YouTube: http://smarturl.it/PSub?IQid=PLMGM\n\nMore great Ultimate Hits of the Noughties videos here: http://smarturl.it/UNPlaylist?IQid=PLMGM\n\n---------\n\nLyrics:\n\nNever win first place, I don't support the team\nI can't take direction, and my socks are never\nclean\nTeachers dated me, my parents hated me\nI was always in a fight cuz I can't do nothin'\nright\n\nEveryday I fight a war against the mirror\nI can't take the person starin' back at me\nI'm a hazard to myself\n\nDon't let me get me\nI'm my own worst enemy\nIts bad when you annoy yourself\nSo irritating\nDon't wanna be my friend no more\nI wanna be somebody else",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/gwwzsof.png",
+                    "name": "Jams",
+                    "id": "jams",
+                    "index": 12,
+                    "timestamp": 1512166059
+                }
+            }
+        },
+        "song_title": "Don't Let Me Get Me - LP Version/Radio Edit",
+        "artist": "P!nk",
+        "artist_image": "https://i.scdn.co/image/55019ce117b4ddb39caf51e589df6675905fd1b5",
+        "cover": "https://i.scdn.co/image/9a7a38145587b0f3953c4157f599a55d93a5e3b6",
+        "album": "M!ssundaztood",
+        "spotify_data": {
+            "id": "2ZQ4Q9xL7W8FEgO1d4o7YH",
+            "name": "Don't Let Me Get Me - LP Version/Radio Edit",
+            "artists": [
+                {
+                    "id": "1KCSPY1glIKqW2TotWuXOR",
+                    "name": "P!nk",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/afc2d276d9c1b398d4f1048c20584f926296b9c0",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/0bbf030d5fbc44787fa641733e810cd1b928c230",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/55019ce117b4ddb39caf51e589df6675905fd1b5",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "dance pop",
+                        "pop",
+                        "post-teen pop"
+                    ],
+                    "popularity": 90,
+                    "uri": "spotify:artist:1KCSPY1glIKqW2TotWuXOR",
+                    "href": "https://open.spotify.com/artist/1KCSPY1glIKqW2TotWuXOR"
+                }
+            ],
+            "artist": "P!nk",
+            "cover_url": "https://i.scdn.co/image/9a7a38145587b0f3953c4157f599a55d93a5e3b6",
+            "duration": 210.626,
+            "album": {
+                "id": "03pT16iWbhVKpDodI37D8b",
+                "name": "M!ssundaztood",
+                "artists": [
+                    {
+                        "id": "1KCSPY1glIKqW2TotWuXOR",
+                        "name": "P!nk",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/afc2d276d9c1b398d4f1048c20584f926296b9c0",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/0bbf030d5fbc44787fa641733e810cd1b928c230",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/55019ce117b4ddb39caf51e589df6675905fd1b5",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "dance pop",
+                            "pop",
+                            "post-teen pop"
+                        ],
+                        "popularity": 90,
+                        "uri": "spotify:artist:1KCSPY1glIKqW2TotWuXOR",
+                        "href": "https://open.spotify.com/artist/1KCSPY1glIKqW2TotWuXOR"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/9a7a38145587b0f3953c4157f599a55d93a5e3b6",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/23d6a27ea287c2cfc45f0a94fb6db693c70b1656",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/e41a982647e6da809564da2683a2e35e878e89a9",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:03pT16iWbhVKpDodI37D8b"
+            },
+            "popularity": 61,
+            "uri": "spotify:track:2ZQ4Q9xL7W8FEgO1d4o7YH",
+            "query": "P Nk - Don't Let Me Get Me",
+            "certainty": 0.92
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache/audio_cache/youtube-TR3Vdo5etCQ-No_Doubt_-_Don_t_Speak.NA",
         "video_id": "TR3Vdo5etCQ",
         "url": "https://www.youtube.com/watch?v=TR3Vdo5etCQ",
@@ -1593,16 +1847,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 11,
+                    "index": 13,
                     "timestamp": 1511700728
                 }
             }
         },
         "song_title": "Don't Speak",
         "artist": "No Doubt",
-        "artist_image": "https://i.scdn.co/image/3877d00cef020004a2b8fcb9d69d85981f0b1f38",
+        "artist_image": "https://i.scdn.co/image/6d74978edc9ec01cec160888e62d986b80aaea51",
         "cover": "https://i.scdn.co/image/e69f65245e7bf639fcff8443769c8f8fa3c80e1a",
         "album": "Tragic Kingdom",
         "spotify_data": {
@@ -1742,9 +1996,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 12,
+                    "index": 14,
                     "timestamp": 1509918142
                 }
             }
@@ -1941,9 +2195,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 13,
+                    "index": 15,
                     "timestamp": 1511992744
                 }
             }
@@ -2068,16 +2322,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 14,
+                    "index": 16,
                     "timestamp": 1509931224
                 }
             }
         },
         "song_title": "Fast Car",
         "artist": "Jonas Blue & Dakota",
-        "artist_image": "https://i.scdn.co/image/2990ed26fab0409c74e230689c59202240632591",
+        "artist_image": "https://i.scdn.co/image/175dd146bd9b2bdf2ac9f04ceb2d40ba5b1225b4",
         "cover": "https://i.scdn.co/image/095687c86549ebe3b95c1f3b46258926140c6e3d",
         "album": "Fast Car",
         "spotify_data": {
@@ -2229,16 +2483,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 15,
+                    "index": 17,
                     "timestamp": 1504389479
                 }
             }
         },
         "song_title": "Fight Song",
         "artist": "Rachel Platten",
-        "artist_image": "https://i.scdn.co/image/a3d166c1aa9fd07f415493548f165bfdb6967565",
+        "artist_image": "https://i.scdn.co/image/20efcd777262623ca10af6fc78efef3c6a2deb06",
         "cover": "https://i.scdn.co/image/5c37d9b7e279611d48b5d3d484d017cbed290c42",
         "album": "Wildfire",
         "spotify_data": {
@@ -2362,9 +2616,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 16,
+                    "index": 18,
                     "timestamp": 1510155291
                 }
             }
@@ -2499,16 +2753,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 17,
+                    "index": 19,
                     "timestamp": 1510856880
                 }
             }
         },
         "song_title": "Gives You Hell",
         "artist": "The All-American Rejects",
-        "artist_image": "https://i.scdn.co/image/4a3587bf1771874ee2f1d7ff654694ee1b188726",
+        "artist_image": "https://i.scdn.co/image/9b8a6bf8db8d1fea96007410257c67654911e641",
         "cover": "https://i.scdn.co/image/0a746fc2f9bad2fdce8f6183bbe1c9ebe8941c02",
         "album": "When The World Comes Down",
         "spotify_data": {
@@ -2620,6 +2874,137 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-EUoe7cf0HYw-Taylor_Swift_-_Gorgeous_Lyric_Video.NA",
+        "video_id": "EUoe7cf0HYw",
+        "url": "https://www.youtube.com/watch?v=EUoe7cf0HYw",
+        "title": "Taylor Swift - Gorgeous (Lyric Video)",
+        "duration": 212,
+        "thumbnail": "https://i.ytimg.com/vi/EUoe7cf0HYw/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Get Taylor Swift\u2019s new album, reputation, including \u201cGorgeous,\u201d here:http://smarturl.it/reputationTS\n\nhttp://vevo.ly/4bIduA",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/gwwzsof.png",
+                    "name": "Jams",
+                    "id": "jams",
+                    "index": 20,
+                    "timestamp": 1512148356
+                }
+            }
+        },
+        "song_title": "Gorgeous",
+        "artist": "Taylor Swift",
+        "artist_image": "https://i.scdn.co/image/33bc9128ad82f7d39847b6db6a49d5416502e7e7",
+        "cover": "https://i.scdn.co/image/abd96549fa53000a633d64cbab5a69a623b6bdfa",
+        "album": "Gorgeous",
+        "spotify_data": {
+            "id": "0CLnkxpa3M4eA3HeGaERat",
+            "name": "Gorgeous",
+            "artists": [
+                {
+                    "id": "06HL4z0CvFAxyc27GXpf02",
+                    "name": "Taylor Swift",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/bdaeccb035a8af87b7a70b62217ff5c633ba6c7c",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/cec43c2fb746ea2a0c7546aa3408fe2f94887fe4",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/33bc9128ad82f7d39847b6db6a49d5416502e7e7",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "dance pop",
+                        "pop",
+                        "pop christmas",
+                        "post-teen pop"
+                    ],
+                    "popularity": 95,
+                    "uri": "spotify:artist:06HL4z0CvFAxyc27GXpf02",
+                    "href": "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"
+                }
+            ],
+            "artist": "Taylor Swift",
+            "cover_url": "https://i.scdn.co/image/abd96549fa53000a633d64cbab5a69a623b6bdfa",
+            "duration": 209.68,
+            "album": {
+                "id": "00Eul2XcAuZ6Qs4Tne1MDo",
+                "name": "Gorgeous",
+                "artists": [
+                    {
+                        "id": "06HL4z0CvFAxyc27GXpf02",
+                        "name": "Taylor Swift",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/bdaeccb035a8af87b7a70b62217ff5c633ba6c7c",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/cec43c2fb746ea2a0c7546aa3408fe2f94887fe4",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/33bc9128ad82f7d39847b6db6a49d5416502e7e7",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "dance pop",
+                            "pop",
+                            "pop christmas",
+                            "post-teen pop"
+                        ],
+                        "popularity": 95,
+                        "uri": "spotify:artist:06HL4z0CvFAxyc27GXpf02",
+                        "href": "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/abd96549fa53000a633d64cbab5a69a623b6bdfa",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/22692a034870c105fc45278228cd79898332b170",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/cfeb3b01855b8266d15fe578181c3905b4485d58",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:00Eul2XcAuZ6Qs4Tne1MDo"
+            },
+            "popularity": 80,
+            "uri": "spotify:track:0CLnkxpa3M4eA3HeGaERat",
+            "query": "Taylor Swift - Gorgeous",
+            "certainty": 0.9545454545454546
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache/audio_cache/youtube-ZOdltebCOX8-Anne-Marie_-_Heavy_Official_Video.NA",
         "video_id": "ZOdltebCOX8",
         "url": "https://www.youtube.com/watch?v=ZOdltebCOX8",
@@ -2638,16 +3023,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 18,
+                    "index": 21,
                     "timestamp": 1510157418
                 }
             }
         },
         "song_title": "Heavy",
         "artist": "Anne-Marie",
-        "artist_image": "https://i.scdn.co/image/4d3d5440863a61be6f8f12039699ef998d13b867",
+        "artist_image": "https://i.scdn.co/image/7823a5d536a9c57d6ef98d3553d4528f7316d1c9",
         "cover": "https://i.scdn.co/image/22a2545e99b0ac989493e134fdcc7801e3c2fd1b",
         "album": "Heavy",
         "spotify_data": {
@@ -2765,9 +3150,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 19,
+                    "index": 22,
                     "timestamp": 1509931224
                 }
             }
@@ -2799,16 +3184,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 20,
+                    "index": 23,
                     "timestamp": 1511092924
                 }
             }
         },
         "song_title": "Here I Am",
         "artist": "Bryan Adams",
-        "artist_image": "https://i.scdn.co/image/c1516afc5b10756be2217238eb696da76648d507",
+        "artist_image": "https://i.scdn.co/image/9637717ee0d824c5df15665b484870273af60267",
         "cover": "https://i.scdn.co/image/0b23f234b826ad2a84d7c9331328d2a95ba57c2e",
         "album": "Spirit: Stallion Of The Cimarron (Soundtrack)",
         "spotify_data": {
@@ -2964,16 +3349,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 21,
+                    "index": 24,
                     "timestamp": 1509931224
                 }
             }
         },
         "song_title": "Hold On",
         "artist": "Chord Overstreet",
-        "artist_image": "https://i.scdn.co/image/408b82d8dc3ee53de9e142983b4d3b09b1374ba5",
+        "artist_image": "https://i.scdn.co/image/e4b4dcdee510abad68a1193371be7e8d25812961",
         "cover": "https://i.scdn.co/image/fac5b848793f6b62281c3ca783b8d222d50a04ac",
         "album": "Hold On",
         "spotify_data": {
@@ -3001,7 +3386,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 64,
+                    "popularity": 63,
                     "uri": "spotify:artist:1IrKUHz5tIrGTFXcjmj46x",
                     "href": "https://open.spotify.com/artist/1IrKUHz5tIrGTFXcjmj46x"
                 }
@@ -3034,7 +3419,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 64,
+                        "popularity": 63,
                         "uri": "spotify:artist:1IrKUHz5tIrGTFXcjmj46x",
                         "href": "https://open.spotify.com/artist/1IrKUHz5tIrGTFXcjmj46x"
                     }
@@ -3085,16 +3470,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 22,
+                    "index": 25,
                     "timestamp": 1505324837
                 }
             }
         },
         "song_title": "How to Save a Life",
         "artist": "The Fray",
-        "artist_image": "https://i.scdn.co/image/fcc84ce9cdd396ffca78dd90a309f2806e86c710",
+        "artist_image": "https://i.scdn.co/image/7ef82e06e47b33e302ca2503f3decfbf9c7f2fff",
         "cover": "https://i.scdn.co/image/42b5ca946ea6f72de75263476f66ec6721c5849d",
         "album": "How To Save A Life",
         "spotify_data": {
@@ -3224,9 +3609,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 23,
+                    "index": 26,
                     "timestamp": 1510855057
                 }
             }
@@ -3353,16 +3738,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 24,
+                    "index": 27,
                     "timestamp": 1509916961
                 }
             }
         },
         "song_title": "Locked Away",
         "artist": "R. City & Adam Levine",
-        "artist_image": "https://i.scdn.co/image/29d373758c7e65c04e3a15a3465d43e613e79b63",
+        "artist_image": "https://i.scdn.co/image/42d26574da8fe764cec5e6c20eb7ea5ae9380f99",
         "cover": "https://i.scdn.co/image/c9de0170a5ba0e18074fbcb8338381dc11e9ab2d",
         "album": "Locked Away",
         "spotify_data": {
@@ -3524,16 +3909,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 25,
+                    "index": 28,
                     "timestamp": 1509932242
                 }
             }
         },
         "song_title": "Love Yourself",
         "artist": "Justin Bieber",
-        "artist_image": "https://i.scdn.co/image/5c3cf2ee3494e2da71dcf26303202ec491b26213",
+        "artist_image": "https://i.scdn.co/image/2e451efa87b706098553583cffac821b7ebac450",
         "cover": "https://i.scdn.co/image/8b47495ce0c4a341f7196f70bcf4361e6257c1a0",
         "album": "Purpose (Deluxe)",
         "spotify_data": {
@@ -3667,9 +4052,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 26,
+                    "index": 29,
                     "timestamp": 1511092840
                 }
             }
@@ -3807,16 +4192,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 27,
+                    "index": 30,
                     "timestamp": 1506932548
                 }
             }
         },
         "song_title": "Me And My Broken Heart",
         "artist": "Rixton",
-        "artist_image": "https://i.scdn.co/image/11874694cb84c7558fad2841ef0333d1759775be",
+        "artist_image": "https://i.scdn.co/image/30c7f6fae2223792d925df04e2124c50d03b37af",
         "cover": "https://i.scdn.co/image/b6cdf7bf5d5e20e4189bf57cbd72adf2de5a89f2",
         "album": "Let The Road",
         "spotify_data": {
@@ -3944,9 +4329,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 28,
+                    "index": 31,
                     "timestamp": 1509915209
                 }
             }
@@ -3978,16 +4363,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 29,
+                    "index": 32,
                     "timestamp": 1509931224
                 }
             }
         },
         "song_title": "Mercy",
         "artist": "Shawn Mendes",
-        "artist_image": "https://i.scdn.co/image/e11faff72ec3bfcdd5b98c50535c565297c0fea4",
+        "artist_image": "https://i.scdn.co/image/9a3488787c85c2b250b41f9cc11bd680e1bc10ff",
         "cover": "https://i.scdn.co/image/0c1fe77b4d329bebc8c8e17cc448101a966e1307",
         "album": "Illuminate (Deluxe)",
         "spotify_data": {
@@ -4121,16 +4506,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 30,
+                    "index": 33,
                     "timestamp": 1509925910
                 }
             }
         },
         "song_title": "My Love Is Your Love",
         "artist": "Whitney Houston",
-        "artist_image": "https://i.scdn.co/image/28cb7410840f14cb761edce55696b6089f6d9732",
+        "artist_image": "https://i.scdn.co/image/ca419115270ba8bbc01178b82311bf7c9aae81dc",
         "cover": "https://i.scdn.co/image/f1f2366acaeef33c31bb7260d706ac47632cf6d4",
         "album": "My Love Is Your Love",
         "spotify_data": {
@@ -4266,16 +4651,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 31,
+                    "index": 34,
                     "timestamp": 1509925910
                 }
             }
         },
         "song_title": "Never Be The Same Again",
         "artist": "Melanie C",
-        "artist_image": "https://i.scdn.co/image/989ab13fd72e864fd36bdec14419f5aa47095836",
+        "artist_image": "https://i.scdn.co/image/655637b1b1951a9f4c3799232b2e7100f90e589f",
         "cover": "https://i.scdn.co/image/dea7b0f66eb3b4fd02fa18a8f0e17356e266d5e4",
         "album": "Northern Star",
         "spotify_data": {
@@ -4401,9 +4786,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 32,
+                    "index": 35,
                     "timestamp": 1504392990
                 }
             }
@@ -4551,6 +4936,296 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-Otfn42u6dAE-Cheat_Codes_No_Promises_Lyrics_ft._Demi_Lovato.NA",
+        "video_id": "Otfn42u6dAE",
+        "url": "https://www.youtube.com/watch?v=Otfn42u6dAE",
+        "title": "Cheat Codes \u2013 No Promises (Lyrics) ft. Demi Lovato",
+        "duration": 224,
+        "thumbnail": "https://i.ytimg.com/vi/Otfn42u6dAE/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Demi Lovato \u2013 No Promises (Lyrics)\" or \"Cheat Codes \u2013 No Promises (Lyrics)\"\n\nHit the \ud83d\udd14 to join the notification squad!\n\nAdd us on Snapchat: pixlnetworks\n\nSpotify Playlist: http://goo.gl/ecHUYZ\nYouTube Playlist: http://goo.gl/XxvpBk\n\nGet \"No Promises \u2013 Cheat Codes (Lyrics)\": https://lnk.to/NoPromisesAY\n\nSupport Pixl Networks\nhttp://youtube.com/pixlnetworks\nhttp://soundcloud.com/pixlnetworks\nhttp://facebook.com/pixlnetworks\nhttp://twitter.com/pixlnetworks\nhttp://instagram.com/pixlnetworks\nhttp://google.com/+pixlnetworks\n\nSupport Demi Lovato\nhttp://soundcloud.com/ddlovato\nhttp://facebook.com/demilovato\nhttp://twitter.com/ddlovato\n\nSupport Cheat Codes\nhttp://soundcloud.com/cheatcodesmusic\nhttp://facebook.com/cheatcodesmusic\nhttp://twitter.com/cheatcodesmusic\n\nNo Promises \u2013 Demi Lovato Lyrics:\n\n[Verse 1: Demi Lovato]\nCut me up like a knife\nAnd I feel it, deep in my bones\nKicking it high\nBut I love even harder\nYou wanna know?\n\n[Pre-Chorus: Demi Lovato]\nI just wanna dive in the water, with you\nBaby, we can't see the bottom\nIt's so easy to fall for each other\nI'm just hoping we catch one another\n\n[Chorus: Trevor Dahl]\nOh na na, just be careful, na na\nLove ain't simple, na na\nPromise me no promises\nOh na na, just be careful, na na\nLove ain't simple, na na\nPromise me no promises\n\n[Verse 2: Demi Lovato]\nBaby I think about you\nAnd I feel it, deep in my heart\nMaybe we just ain't meant to be something\nMaybe we are?\n\n[Pre-Chorus: Demi Lovato]\nI just wanna dive in the water, with you\nBaby we can't see the bottom\nIt's so easy to fall for each other\nI'm just hoping we catch one another\n\n[Chorus: Trevor Dahl & Demi Lovato]\nOh na na, just be careful, na na\nLove ain't simple, na na\nPromise me no promises\nOh na na, just be careful, na na\nLove ain't simple, na na\nPromise me no promises, oh\n\n[Bridge: Trevor Dahl & Demi Lovato]\nI just wanna dive in the water\nOh baby, we can't see the bottom\nI just want to dive in with you\nI just want to lie here with you, oh\n\n[Chorus: Trevor Dahl & Demi Lovato]\nOh na na, just be careful, na na\nLove ain't simple, na na\nPromise me no promises (promise me)\nOh na na, just be careful, na na\nLove ain't simple, na na\nPromise me no promises, no\n\n[Outro: Trevor Dahl & Demi Lovato]\nPromise me no promises\nDon't you promise me nothing\nPromise me, me, me, me\nJust be careful\nPromise me no promises\n\nArtwork by AuroraLion\nhttps://www.youtube.com/redirect?redir_token=f6ow8X2-iAqCbpVgt0u_SKXXD598MTUxMjIyODkyMEAxNTEyMTQyNTIw&v=Otfn42u6dAE&q=http%3A%2F%2Fauroralion.deviantart.com%2Fart%2FLift-Your-Spirit-661271596&event=video_description\n\nPixl Networks is an independent electronic music network featuring high-quality music from major record labels as well as rising artists. Subscribe to this channel to be updated with the latest and most diversified EDM or electronic dance music releases.\n\nSubmit your music: http://pixlnetworks.com/submit\n\nIn case of copyright issues, please contact copyright@pixlnetworks.com",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/gwwzsof.png",
+                    "name": "Jams",
+                    "id": "jams",
+                    "index": 36,
+                    "timestamp": 1512142534
+                }
+            }
+        },
+        "song_title": "No Promises (feat. Demi Lovato)",
+        "artist": "Cheat Codes & Demi Lovato",
+        "artist_image": "https://i.scdn.co/image/1e2f627d4d474f36c8590699935191af5816b48b",
+        "cover": "https://i.scdn.co/image/d6cb0471f3a623a4601c67aed5c34033693a4116",
+        "album": "No Promises (feat. Demi Lovato)",
+        "spotify_data": {
+            "id": "5lNuqFVMca4vPupY10cH0J",
+            "name": "No Promises (feat. Demi Lovato)",
+            "artists": [
+                {
+                    "id": "7DMveApC7UnC2NPfPvlHSU",
+                    "name": "Cheat Codes",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/1e2f627d4d474f36c8590699935191af5816b48b",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/780aa0742bbac8ef8bf3a3208c97522b7ab4c2f7",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/d1089375b5a70944b1f546be314fd02f6dad9238",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "dance pop",
+                        "edm",
+                        "indie poptimism",
+                        "pop",
+                        "tropical house"
+                    ],
+                    "popularity": 88,
+                    "uri": "spotify:artist:7DMveApC7UnC2NPfPvlHSU",
+                    "href": "https://open.spotify.com/artist/7DMveApC7UnC2NPfPvlHSU"
+                },
+                {
+                    "id": "6S2OmqARrzebs0tKUEyXyp",
+                    "name": "Demi Lovato",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/2aa6c96a7d255e76fe654160272a1d2bb3e2054d",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/0fd4ad1d2869ef698a359027ad6c70741845e8a9",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/70b7935261389af1b8ec9b2526b37c4caf6b1fd0",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "dance pop",
+                        "pop",
+                        "pop christmas",
+                        "post-teen pop"
+                    ],
+                    "popularity": 94,
+                    "uri": "spotify:artist:6S2OmqARrzebs0tKUEyXyp",
+                    "href": "https://open.spotify.com/artist/6S2OmqARrzebs0tKUEyXyp"
+                }
+            ],
+            "artist": "Cheat Codes & Demi Lovato",
+            "cover_url": "https://i.scdn.co/image/d6cb0471f3a623a4601c67aed5c34033693a4116",
+            "duration": 222.786,
+            "album": {
+                "id": "6h3fnzKZqjV0R5gP9iTUBh",
+                "name": "No Promises (feat. Demi Lovato)",
+                "artists": [
+                    {
+                        "id": "7DMveApC7UnC2NPfPvlHSU",
+                        "name": "Cheat Codes",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/1e2f627d4d474f36c8590699935191af5816b48b",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/780aa0742bbac8ef8bf3a3208c97522b7ab4c2f7",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/d1089375b5a70944b1f546be314fd02f6dad9238",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "dance pop",
+                            "edm",
+                            "indie poptimism",
+                            "pop",
+                            "tropical house"
+                        ],
+                        "popularity": 88,
+                        "uri": "spotify:artist:7DMveApC7UnC2NPfPvlHSU",
+                        "href": "https://open.spotify.com/artist/7DMveApC7UnC2NPfPvlHSU"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/d6cb0471f3a623a4601c67aed5c34033693a4116",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/924f0510710fb0d70cf345ac10756d4895ba7389",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/fb1231069471b6d8858a7e07b662938c43336bdd",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:6h3fnzKZqjV0R5gP9iTUBh"
+            },
+            "popularity": 77,
+            "uri": "spotify:track:5lNuqFVMca4vPupY10cH0J",
+            "query": "Cheat Codes No Promises Demi Lovato",
+            "certainty": 0.7931034482758621
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-7AXo-bYGXI4-Sam_Smith_-_One_Last_Song_Official_Video.NA",
+        "video_id": "7AXo-bYGXI4",
+        "url": "https://www.youtube.com/watch?v=7AXo-bYGXI4",
+        "title": "Sam Smith - One Last Song (Official Video)",
+        "duration": 216,
+        "thumbnail": "https://i.ytimg.com/vi/7AXo-bYGXI4/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "One Last Song' taken from Sam Smith\u2019s new album, \u201cThe Thrill of It All\u201d. Buy the album now: http://samsmith.world/TTOIAPR\n\nPlaylist Best of Sam Smith https://goo.gl/qd5ZFH\nSubscribe for more https://goo.gl/ZwB8oJ\n\nFollow Sam Smith:\nhttp://samsmithworld.com\nhttp://facebook.com/samsmithworld\nhttp://instagram.com/samsmithworld\nhttp://twitter.com/samsmithworld\n\nMusic video by Sam Smith performing One Last Song. (C) 2017 Universal Music Operations Limited\n\nhttp://vevo.ly/MKrX0Q",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/gwwzsof.png",
+                    "name": "Jams",
+                    "id": "jams",
+                    "index": 37,
+                    "timestamp": 1512142556
+                }
+            }
+        },
+        "song_title": "One Last Song",
+        "artist": "Sam Smith",
+        "artist_image": "https://i.scdn.co/image/6318ebb61a9105a86c0add8a0a99b633a0301931",
+        "cover": "https://i.scdn.co/image/9f26166952f15b7a590d516ae10e88915f3badf4",
+        "album": "The Thrill Of It All (Special Edition)",
+        "spotify_data": {
+            "id": "39Q20GZHKK0IK8oKkhfxiJ",
+            "name": "One Last Song",
+            "artists": [
+                {
+                    "id": "2wY79sveU1sp5g7SokKOiI",
+                    "name": "Sam Smith",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/6318ebb61a9105a86c0add8a0a99b633a0301931",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/997be88b275a7ed113d48c5ff9f50aa16445c2b1",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/a75e3585bc7b453e6f768c02b977bd1f5a03ebad",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "dance pop",
+                        "pop"
+                    ],
+                    "popularity": 97,
+                    "uri": "spotify:artist:2wY79sveU1sp5g7SokKOiI",
+                    "href": "https://open.spotify.com/artist/2wY79sveU1sp5g7SokKOiI"
+                }
+            ],
+            "artist": "Sam Smith",
+            "cover_url": "https://i.scdn.co/image/9f26166952f15b7a590d516ae10e88915f3badf4",
+            "duration": 192.922,
+            "album": {
+                "id": "3XftSbguntyRTBQaGItmfK",
+                "name": "The Thrill Of It All (Special Edition)",
+                "artists": [
+                    {
+                        "id": "2wY79sveU1sp5g7SokKOiI",
+                        "name": "Sam Smith",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/6318ebb61a9105a86c0add8a0a99b633a0301931",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/997be88b275a7ed113d48c5ff9f50aa16445c2b1",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/a75e3585bc7b453e6f768c02b977bd1f5a03ebad",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "dance pop",
+                            "pop"
+                        ],
+                        "popularity": 97,
+                        "uri": "spotify:artist:2wY79sveU1sp5g7SokKOiI",
+                        "href": "https://open.spotify.com/artist/2wY79sveU1sp5g7SokKOiI"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/9f26166952f15b7a590d516ae10e88915f3badf4",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/2eb89218ab812053daba817f653686806abf609d",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/727a0ae87b6ba12af19549d79c501a243ae92264",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:3XftSbguntyRTBQaGItmfK"
+            },
+            "popularity": 76,
+            "uri": "spotify:track:39Q20GZHKK0IK8oKkhfxiJ",
+            "query": "Sam Smith - One Last Song",
+            "certainty": 0.9583333333333334
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache/audio_cache/youtube-kZ8KK8u9dN8-Enya_-_Orinoco_Flow.NA",
         "video_id": "kZ8KK8u9dN8",
         "url": "https://www.youtube.com/watch?v=kZ8KK8u9dN8",
@@ -4569,9 +5244,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 33,
+                    "index": 38,
                     "timestamp": 1510167969
                 }
             }
@@ -4708,9 +5383,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 34,
+                    "index": 39,
                     "timestamp": 1509918807
                 }
             }
@@ -4829,9 +5504,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 35,
+                    "index": 40,
                     "timestamp": 1509925910
                 }
             }
@@ -4863,16 +5538,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 36,
+                    "index": 41,
                     "timestamp": 1511701478
                 }
             }
         },
         "song_title": "Put Your Records On",
         "artist": "Corinne Bailey Rae",
-        "artist_image": "https://i.scdn.co/image/cf6e81b6494f3fe427739bf93eaae488156ea692",
+        "artist_image": "https://i.scdn.co/image/914ae1ce7fb065cfb0c89794e5e41c6eca758df3",
         "cover": "https://i.scdn.co/image/75ef69c6af0e729a53baa53b340172b8bb6d3672",
         "album": "Corinne Bailey Rae",
         "spotify_data": {
@@ -5010,9 +5685,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 37,
+                    "index": 42,
                     "timestamp": 1509931224
                 }
             }
@@ -5044,16 +5719,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 38,
+                    "index": 43,
                     "timestamp": 1510137677
                 }
             }
         },
         "song_title": "Rescue Me",
         "artist": "Fontella Bass",
-        "artist_image": "https://i.scdn.co/image/7e04799fea282a02d0d2b6660412607ffccd9bf2",
+        "artist_image": "https://i.scdn.co/image/9f228b46d600ad56d9511dc5365278250923bf43",
         "cover": "https://i.scdn.co/image/9f228b46d600ad56d9511dc5365278250923bf43",
         "album": "The New Look",
         "spotify_data": {
@@ -5187,9 +5862,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 39,
+                    "index": 44,
                     "timestamp": 1510137677
                 }
             }
@@ -5221,16 +5896,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 40,
+                    "index": 45,
                     "timestamp": 1510857129
                 }
             }
         },
         "song_title": "SUBEME LA RADIO",
         "artist": "Enrique Iglesias & Descemer Bueno",
-        "artist_image": "https://i.scdn.co/image/b9ba677eff8e8e1d1534464064f055af14e94ecd",
+        "artist_image": "https://i.scdn.co/image/3d697ab6c4f91f75e0535c8bd9c468b633d3ec9e",
         "cover": "https://i.scdn.co/image/9c368e9d73a062998b800ae4cced242affbd0561",
         "album": "SUBEME LA RADIO",
         "spotify_data": {
@@ -5414,16 +6089,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 41,
+                    "index": 46,
                     "timestamp": 1510238999
                 }
             }
         },
         "song_title": "Say It Right",
         "artist": "Nelly Furtado",
-        "artist_image": "https://i.scdn.co/image/44fc9498b7b6cfb6b3ca3467170c42bc31ae7172",
+        "artist_image": "https://i.scdn.co/image/84893281888b8f84b1580f477dbcc7bbaa5a1712",
         "cover": "https://i.scdn.co/image/de7634fbd008797f579a0139f625a394ef1a0c7d",
         "album": "The Best of Nelly Furtado (Deluxe)",
         "spotify_data": {
@@ -5553,16 +6228,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 42,
+                    "index": 47,
                     "timestamp": 1511992528
                 }
             }
         },
         "song_title": "She Doesn't Mind - A Tribute to Sean Paul",
         "artist": "Alamode Music",
-        "artist_image": "https://i.scdn.co/image/28501559f01483d4858a99b879e7ac6d0fbaf599",
+        "artist_image": "https://i.scdn.co/image/129c073140b9611d9530064be0023f3da28fc96d",
         "cover": "https://i.scdn.co/image/675e2212543a1a287bc0507be9a36dbf93c8f286",
         "album": "She Doesn't Mind (A Tribute to Sean Paul)",
         "spotify_data": {
@@ -5674,16 +6349,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 43,
+                    "index": 48,
                     "timestamp": 1510088243
                 }
             }
         },
         "song_title": "Show Me Love - Max Manie & KT Remix",
         "artist": "Robin Schulz & Richard Judge",
-        "artist_image": "https://i.scdn.co/image/d8fbc8947a68af06b78a82e8167bb1864374c96a",
+        "artist_image": "https://i.scdn.co/image/926f745c348915cab279e78784ba404d6c1de97c",
         "cover": "https://i.scdn.co/image/34a2e2e656533438eb2d58ef4d77b091f1405a7a",
         "album": "Show Me Love (The Remixes)",
         "spotify_data": {
@@ -5857,16 +6532,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 44,
+                    "index": 49,
                     "timestamp": 1511992745
                 }
             }
         },
         "song_title": "Sing Me to Sleep",
         "artist": "Alan Walker",
-        "artist_image": "https://i.scdn.co/image/2aa77594b07170d2bf364534e9c22f3664efb211",
+        "artist_image": "https://i.scdn.co/image/39d9e61f7aed9ae01334b391702c7c8b1871743e",
         "cover": "https://i.scdn.co/image/0af2ace9f8bf254a1b79b7c331dd3e8cfdf61101",
         "album": "Sing Me to Sleep",
         "spotify_data": {
@@ -5965,6 +6640,169 @@
     },
     {
         "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-0go2nfVXFgA-The_Vamps_-_Somebody_To_You_ft._Demi_Lovato.NA",
+        "video_id": "0go2nfVXFgA",
+        "url": "https://www.youtube.com/watch?v=0go2nfVXFgA",
+        "title": "The Vamps - Somebody To You ft. Demi Lovato",
+        "duration": 199,
+        "thumbnail": "https://i.ytimg.com/vi/0go2nfVXFgA/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "The Vamps' new single I Found A Girl feat. OMI is out now!\nListen on Spotify: http://po.st/VFSf\nListen on Apple Music http://po.st/VFAMf\nDownload on iTunes: http://po.st/VFiTf\n\nSomebody To You Feat. Demi Lovato OUT NOW on iTunes: http://po.st/styfb\n\nTaken from Meet The Vamps OUT NOW! http://po.st/VampsiT\nThe physical versions & Album DVD available at our store here http://po.st/MTv\n-------------------------------------------------------------------\nVisit our website to find out news, media and our new store! http://thevamps.net\n-------------------------------------------------------------------\nLike us on Facebook...\nhttps://www.youtube.com/redirect?q=https%3A%2F%2Fwww.facebook.com%2Fthevampsofficial&v=0go2nfVXFgA&event=video_description&redir_token=miBRoOknzvhqXSVu7mXNip2LyhJ8MTUxMjQ5MzIxN0AxNTEyNDA2ODE3\n-------------------------------------------------------------------\nFollow our band account and personal accounts on Twitter...\nhttps://twitter.com/TheVampsband\nBrad Simpson - https://twitter.com/TheVampsBrad\nJames McVey - https://twitter.com/TheVampsJames\nConnor Ball - https://twitter.com/TheVampsCon\nTristan Evans - https://twitter.com/TheVampsTristan\n-------------------------------------------------------------------\nSubscribe to our YouTube channel for more videos...\nhttp://www.youtube.com/user/thevampsofficial\n-------------------------------------------------------------------\n\nThe Vamps feat. Demi Lovato - Somebody To You.  \u00a9:  Virgin EMI Records, a division of Universal Music Operations Limited\nBest of The Vamps: https://goo.gl/v7kd7J\nSubscribe here: https://goo.gl/egt2FV",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/gwwzsof.png",
+                    "name": "Jams",
+                    "id": "jams",
+                    "index": 50,
+                    "timestamp": 1512406830
+                }
+            }
+        },
+        "song_title": "Somebody To You",
+        "artist": "The Vamps & Demi Lovato",
+        "artist_image": "https://i.scdn.co/image/371185d9b225546a62270a0a17e2a413ed2c8134",
+        "cover": "https://i.scdn.co/image/df44c54d63ead84a913d72cd389c055468ccce19",
+        "album": "Meet The Vamps",
+        "spotify_data": {
+            "id": "2BWWsCwuHAZFE1scLyP6Qe",
+            "name": "Somebody To You",
+            "artists": [
+                {
+                    "id": "7gAppWoH7pcYmphCVTXkzs",
+                    "name": "The Vamps",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/9e9c5c4f33c7f57c18e829f8302fa0f9b188051d",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/371185d9b225546a62270a0a17e2a413ed2c8134",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/fee98152d9cb7b00be7b7abd3a0727261fe4fea6",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "dance pop",
+                        "pop",
+                        "post-teen pop",
+                        "tropical house",
+                        "viral pop"
+                    ],
+                    "popularity": 82,
+                    "uri": "spotify:artist:7gAppWoH7pcYmphCVTXkzs",
+                    "href": "https://open.spotify.com/artist/7gAppWoH7pcYmphCVTXkzs"
+                },
+                {
+                    "id": "6S2OmqARrzebs0tKUEyXyp",
+                    "name": "Demi Lovato",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/2aa6c96a7d255e76fe654160272a1d2bb3e2054d",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/0fd4ad1d2869ef698a359027ad6c70741845e8a9",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/70b7935261389af1b8ec9b2526b37c4caf6b1fd0",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "dance pop",
+                        "pop",
+                        "pop christmas",
+                        "post-teen pop"
+                    ],
+                    "popularity": 94,
+                    "uri": "spotify:artist:6S2OmqARrzebs0tKUEyXyp",
+                    "href": "https://open.spotify.com/artist/6S2OmqARrzebs0tKUEyXyp"
+                }
+            ],
+            "artist": "The Vamps & Demi Lovato",
+            "cover_url": "https://i.scdn.co/image/df44c54d63ead84a913d72cd389c055468ccce19",
+            "duration": 182.826,
+            "album": {
+                "id": "3XDvXyhPzaPRpGoEjoQI8P",
+                "name": "Meet The Vamps",
+                "artists": [
+                    {
+                        "id": "7gAppWoH7pcYmphCVTXkzs",
+                        "name": "The Vamps",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/9e9c5c4f33c7f57c18e829f8302fa0f9b188051d",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/371185d9b225546a62270a0a17e2a413ed2c8134",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/fee98152d9cb7b00be7b7abd3a0727261fe4fea6",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "dance pop",
+                            "pop",
+                            "post-teen pop",
+                            "tropical house",
+                            "viral pop"
+                        ],
+                        "popularity": 82,
+                        "uri": "spotify:artist:7gAppWoH7pcYmphCVTXkzs",
+                        "href": "https://open.spotify.com/artist/7gAppWoH7pcYmphCVTXkzs"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/df44c54d63ead84a913d72cd389c055468ccce19",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/351ff78153fe344b2e892fbd8674bc9a5ec6eea1",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/55821b0d940aec57be1690b5685f8ae3064f474e",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:3XDvXyhPzaPRpGoEjoQI8P"
+            },
+            "popularity": 58,
+            "uri": "spotify:track:2BWWsCwuHAZFE1scLyP6Qe",
+            "query": "The Vamps - Somebody To You Demi Lovato",
+            "certainty": 0.78125
+        }
+    },
+    {
+        "version": 103,
         "type": "GieselaEntry",
         "expected_filename": "cache/audio_cache/youtube-BgfcToAjfdc-Kygo_-_Stole_The_Show_feat._Parson_James_Official_Music_Video_-_YTMAs.NA",
         "video_id": "BgfcToAjfdc",
@@ -5984,9 +6822,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 45,
+                    "index": 51,
                     "timestamp": 1509933799
                 }
             }
@@ -6018,16 +6856,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 46,
+                    "index": 52,
                     "timestamp": 1510002775
                 }
             }
         },
         "song_title": "The Flood",
         "artist": "Take That",
-        "artist_image": "https://i.scdn.co/image/389524aff4bf2606b48ea979ab53e39c637ebc72",
+        "artist_image": "https://i.scdn.co/image/bb83268ce1e61c9ef4944581b0cd871d74099e00",
         "cover": "https://i.scdn.co/image/94e4a532b1afbd7a05be016d840a1df8dd4bb470",
         "album": "Progress",
         "spotify_data": {
@@ -6151,16 +6989,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 47,
+                    "index": 53,
                     "timestamp": 1509925910
                 }
             }
         },
         "song_title": "The Greatest",
         "artist": "Sia & Kendrick Lamar",
-        "artist_image": "https://i.scdn.co/image/0520ee75579d30a6019f6eb7f486cec78115999b",
+        "artist_image": "https://i.scdn.co/image/e69e2c19834b560261092ae6cae67f2b86bb6e17",
         "cover": "https://i.scdn.co/image/ef96f4e6be04b4b8bde0861bd3d6b54f6c39408b",
         "album": "This Is Acting (Deluxe Version)",
         "spotify_data": {
@@ -6320,16 +7158,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 48,
+                    "index": 54,
                     "timestamp": 1509931224
                 }
             }
         },
         "song_title": "To Be With You - 2010 Remastered Version",
         "artist": "Mr. Big",
-        "artist_image": "https://i.scdn.co/image/03ce7b116dd77b4b82748365ee3e335d509c2fd5",
+        "artist_image": "https://i.scdn.co/image/abd309c03028915853d9be39c5c49122dfd1a13c",
         "cover": "https://i.scdn.co/image/77aeaa79a61def02013f987a8190c71c6fd7cdf6",
         "album": "Lean Into It [Expanded]",
         "spotify_data": {
@@ -6461,16 +7299,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 49,
+                    "index": 55,
                     "timestamp": 1509931224
                 }
             }
         },
         "song_title": "Too Good At Goodbyes",
         "artist": "Sam Smith",
-        "artist_image": "https://i.scdn.co/image/53988c874e08973d0b12381116541c7153ccf274",
+        "artist_image": "https://i.scdn.co/image/130b3e61e8c55c0df01292da34ac61b28d7918e5",
         "cover": "https://i.scdn.co/image/87be0afd9c395b09c18cb3f672fa772420560cf4",
         "album": "Too Good At Goodbyes",
         "spotify_data": {
@@ -6588,16 +7426,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 50,
+                    "index": 56,
                     "timestamp": 1509933799
                 }
             }
         },
         "song_title": "Undisclosed Desires",
         "artist": "Muse",
-        "artist_image": "https://i.scdn.co/image/f026a6204c28907e43e833eaa1820f9b674295ca",
+        "artist_image": "https://i.scdn.co/image/7ad2128db73a2814a1a96498404a5d9aabb4c15c",
         "cover": "https://i.scdn.co/image/6e1be3ceda70250c701caee5a16bef205e94bc98",
         "album": "The Resistance",
         "spotify_data": {
@@ -6729,16 +7567,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 51,
+                    "index": 57,
                     "timestamp": 1509916783
                 }
             }
         },
         "song_title": "We Could Go Back",
         "artist": "Jonas Blue & Moelogo",
-        "artist_image": "https://i.scdn.co/image/2990ed26fab0409c74e230689c59202240632591",
+        "artist_image": "https://i.scdn.co/image/574e063c4de74966320bc4db605316bf5f218c57",
         "cover": "https://i.scdn.co/image/236ce53ffef24f851ba1c9d9dcdddc4945dbf2ed",
         "album": "We Could Go Back",
         "spotify_data": {
@@ -6887,16 +7725,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 52,
+                    "index": 58,
                     "timestamp": 1509932242
                 }
             }
         },
         "song_title": "Whatever It Takes",
         "artist": "Imagine Dragons",
-        "artist_image": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
+        "artist_image": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
         "cover": "https://i.scdn.co/image/84989ed4cca6518fa540bb3c8a7a73127695e937",
         "album": "Evolve",
         "spotify_data": {
@@ -7016,16 +7854,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 53,
+                    "index": 59,
                     "timestamp": 1510089032
                 }
             }
         },
         "song_title": "Wherever You Will Go",
         "artist": "The Calling",
-        "artist_image": "https://i.scdn.co/image/773d579e11c2e0673a0ff05a9aec73afe271db9d",
+        "artist_image": "https://i.scdn.co/image/b9a3bac3720323ae7f1b4f1232e3ed14671aa1e4",
         "cover": "https://i.scdn.co/image/a8fca9c696bc986dc34db607c315ade6687e47cf",
         "album": "Camino Palmero",
         "spotify_data": {
@@ -7155,16 +7993,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 54,
+                    "index": 60,
                     "timestamp": 1511895222
                 }
             }
         },
         "song_title": "Wolves",
         "artist": "Selena Gomez & Marshmello",
-        "artist_image": "https://i.scdn.co/image/966128545281143f09fec2244d5d5d7dcf1e7ebb",
+        "artist_image": "https://i.scdn.co/image/32bc5efed8d168a47fddce62c8563e969c914f2b",
         "cover": "https://i.scdn.co/image/e60e143c955ab6c8aeda4edf934c94e5b7662e4f",
         "album": "Wolves",
         "spotify_data": {
@@ -7342,9 +8180,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 55,
+                    "index": 61,
                     "timestamp": 1509934278
                 }
             }
@@ -7481,9 +8319,9 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 56,
+                    "index": 62,
                     "timestamp": 1510251354
                 }
             }
@@ -7606,16 +8444,16 @@
                 "type": "built-in/dict",
                 "value": {
                     "cover": "https://i.imgur.com/gwwzsof.png",
-                    "name": "jams",
+                    "name": "Jams",
                     "id": "jams",
-                    "index": 57,
+                    "index": 63,
                     "timestamp": 1510087372
                 }
             }
         },
         "song_title": "You Win Again",
         "artist": "Bee Gees",
-        "artist_image": "https://i.scdn.co/image/1d5a05673975ba0c378cd280344e000b0b865620",
+        "artist_image": "https://i.scdn.co/image/1ea4795e17ffa658d7ad23095d58997a278179a9",
         "cover": "https://i.scdn.co/image/2f0beb222431b2408ba4b6e58b48f4edfe52bcbe",
         "album": "E.S.P.",
         "spotify_data": {
