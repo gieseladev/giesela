@@ -1,13 +1,11 @@
 import json
 import re
 from datetime import datetime
-from urllib import request
-from urllib.parse import urlencode
-
-from bs4 import BeautifulSoup
-
 from enum import Enum
 from html import unescape
+from urllib import request
+
+from bs4 import BeautifulSoup
 from musicbot.config import ConfigDefaults
 
 

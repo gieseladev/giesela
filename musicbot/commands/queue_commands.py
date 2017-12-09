@@ -3,7 +3,7 @@ import functools
 import random
 import time
 import traceback
-from random import choice, shuffle
+from random import shuffle
 
 from discord import Embed
 
@@ -12,10 +12,9 @@ from musicbot.entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
                             StreamEntry, TimestampEntry, YoutubeEntry)
 from musicbot.lib.ui.basic import ItemPicker, LoadingBar
 from musicbot.radio import RadioSongExtractor, RadioStations
-from musicbot.utils import (Response, block_user, clean_songname, command_info,
-                            create_bar, format_time, get_related_videos,
-                            hex_to_dec, html2md, nice_cut, ordinal, owner_only,
-                            to_timestamp)
+from musicbot.utils import (Response, block_user, command_info, create_bar,
+                            format_time, get_related_videos, hex_to_dec,
+                            html2md, nice_cut, ordinal, to_timestamp)
 from musicbot.web_socket_server import GieselaServer
 
 

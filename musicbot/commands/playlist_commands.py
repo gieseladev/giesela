@@ -2,8 +2,7 @@ import asyncio
 import functools
 import re
 import time
-from random import choice, shuffle
-from textwrap import indent
+from random import shuffle
 
 from discord import Embed
 
@@ -11,12 +10,10 @@ from musicbot.entry import GieselaEntry, TimestampEntry, YoutubeEntry
 from musicbot.entry_updater import fix_entry, fix_generator
 from musicbot.exceptions import ExtractionError, WrongEntryTypeError
 from musicbot.imgur import upload_playlist_cover, upload_song_image
-from musicbot.saved_playlists import Playlists
-from musicbot.spotify import SpotifyTrack
-from musicbot.utils import (Response, asyncio, block_user, command_info,
-                            create_bar, format_time, hex_to_dec, is_image,
-                            nice_cut, owner_only, parse_timestamp,
-                            timestamp_to_queue, to_timestamp, wrap_string)
+from musicbot.utils import (Response, block_user, command_info, create_bar,
+                            format_time, hex_to_dec, is_image, nice_cut,
+                            parse_timestamp, timestamp_to_queue, to_timestamp,
+                            wrap_string)
 
 
 class PlaylistCommands:

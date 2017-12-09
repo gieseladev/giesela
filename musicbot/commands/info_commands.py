@@ -1,18 +1,16 @@
-import datetime
 import json
-import re
 import random
-from datetime import date, timedelta
-from textwrap import dedent, indent
+import re
+from datetime import date
+from textwrap import dedent
 
 import requests
 from discord import Embed
 
 from musicbot.constants import VERSION as BOTVERSION
 from musicbot.tungsten import Tungsten
-from musicbot.utils import (Response, block_user, command_info,
-                            get_dev_version, get_version_changelog, hex_to_dec,
-                            owner_only, prettydate)
+from musicbot.utils import (Response, command_info, get_dev_version,
+                            get_version_changelog, hex_to_dec, prettydate)
 
 
 class InfoCommands:
@@ -158,7 +156,7 @@ class InfoCommands:
 
         await self.send_typing(channel)
         msgContent = " ".join(leftover_args)
-        
+
         col = random.randint(0, 0xFFFFFF)
 
         client = Tungsten("EH8PUT-67PJ967LG8")

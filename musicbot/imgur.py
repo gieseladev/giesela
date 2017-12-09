@@ -4,8 +4,6 @@ from imgurpython import ImgurClient
 from imgurpython.helpers.error import (ImgurClientError,
                                        ImgurClientRateLimitError)
 
-import asyncio
-
 client_id = "a2ef870c9cfc5c0"
 client_secret = "9006ebbaed1dd639ef79de176ae10419664ac4c6"
 access_token = "2028c849e4a68badd5fe83b4a7a54115f5a5e86c"
@@ -48,6 +46,7 @@ def _upload_playlist_cover(playlist_name, url):
         return False
 
     return resp.get("link")
+
 
 async def upload_playlist_cover(loop, name, url):
     return await loop.run_in_executor(None, _upload_playlist_cover, name, url)
@@ -99,6 +98,7 @@ def _upload_song_image(playlist_name, identifier, url):
         return False
 
     return resp.get("link")
+
 
 async def upload_song_image(loop, playlist_name, identifier, url):
     identifier = identifier.replace("_", " ").replace("url", "").strip().title()
