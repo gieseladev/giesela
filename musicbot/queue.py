@@ -2,11 +2,11 @@ import asyncio
 import datetime
 import random
 import time
+import urllib
 from collections import deque
 from itertools import islice
 
-from youtube_dl.utils import (DownloadError, ExtractorError, UnsupportedError,
-                              URLError)
+from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
 from musicbot.discogs import get_entry as get_discogs_track
 from musicbot.entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry,
@@ -103,7 +103,7 @@ class Queue(EventEmitter):
             if e.exc_info[0] == UnsupportedError:
                 print("[STREAM] Assuming content is a direct stream")
 
-            elif e.exc_info[0] == URLError:
+            elif e.exc_info[0] == urllib.URLError:
                 if os.path.exists(os.path.abspath(song_url)):
                     raise ExtractionError(
                         "This is not a stream, this is a file path.")
