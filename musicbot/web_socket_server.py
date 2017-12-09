@@ -10,6 +10,7 @@ from json.decoder import JSONDecodeError
 from random import choice
 from string import ascii_lowercase
 
+from musicbot import spotify
 from musicbot.config import static_config
 from musicbot.entry import TimestampEntry
 from musicbot.radio import RadioStations
@@ -110,10 +111,56 @@ class GieselaWebSocket(WebSocket):
         else:
             return fut
 
+    async def _tuple_generator(self, collection):
+        for i, el in enumerate(collection):
+            yield i, el
+
+    async def play_entry(self, player, answer, kind, item, searcher, mode):
+        success = False
+        entry_gen = []
+
+        url = item["url"]
+
+        if searcher == "SpotifySearcher":
+            if kind == "playlist":
+                playlist = spotify.SpotifyPlaylist.from_url(url)
+                self.log("adding Spotify playlist {}".format(playlist))
+                entry_gen = playlist.get_spotify_entries_generator(player.queue)
+                success = True
+            elif kind == "entry":
+                entry = spotify.SpotifyTrack.from_url(url)
+                entry_gen = self._tuple_generator([await entry.get_spotify_entry(player.queue)])
+                success = True
+
+        elif searcher in ("YoutubeSearcher", "SoundcloudSearcher"):
+            entry_gen = await player.queue.get_entry_gen(url)
+
+        if mode in "random":
+            placement = mode
+        elif mode in "now":
+            if player.current_entry:
+                player.skip()
+
+            placement = 0
+        elif mode == "next":
+            placement = 0
+        else:
+            placement = None
+
+        try:
+            async for ind, entry in entry_gen:
+                if entry:
+                    player.queue._add_entry(entry, placement=placement)
+        except Exception:
+            traceback.print_exc()
+
+        answer["success"] = bool(success)
+        self.sendMessage(json.dumps(answer))
+
     def handleAuthenticatedMessage(self, data):
         answer = {
-            "response":     True,
-            "request_id":   data.get("id")
+            "response": True,
+            "request_id": data.get("id")
         }
 
         request = data.get("request")
@@ -291,8 +338,8 @@ class GieselaWebSocket(WebSocket):
                 else:
                     success = False
 
-            elif command == "play_entry":
-                entry = command_data.get("item")
+            elif command == "play":
+                item = command_data.get("item")
                 kind = command_data.get("kind")  # entry, playlist
                 mode = command_data.get("mode", "queue")  # now, next, queue, random
                 searcher = command_data.get("searcher")  # YoutubeSearcher, SpotifySearcher, SoundcloudSearcher
@@ -300,6 +347,9 @@ class GieselaWebSocket(WebSocket):
                 # enter async env with run_coroutine_threadsafe. Handle Spotify and then just feed the queue add_entry with the url.
 
                 self.log("playing {} from {} with mode {}".format(kind, searcher, mode))
+                self._call_function_main_thread(self.play_entry, player, answer, kind, item, searcher, mode)
+                # let the play_entry function handle the response
+                return
 
             answer["success"] = bool(success)
 
