@@ -8,6 +8,7 @@ from collections import defaultdict
 import aiohttp
 import discord
 
+from giesela.lib import module
 from giesela.utils.opus_loader import load_opus_lib
 
 load_opus_lib()
@@ -27,6 +28,33 @@ class Giesela(discord.Client):
 
         self.aiosession = aiohttp.ClientSession(loop=self.loop)
 
+        self.load_modules()
+
+    def load_modules(self):
+        """Load all modules."""
+        # needed to import all extensions
+        from . import modules  # noqa: F401
+
+        ext_classes = module.GieselaModule.modules
+
+        self.modules = []
+
+        log.debug("loading {} modules".format(len(ext_classes)))
+
+        for ext_cls in ext_classes:
+            try:
+                m = ext_cls(self)
+                log.debug("created module {}".format(m))
+
+                m.on_load()
+                log.debug("initialised extension {}".format(m))
+
+                self.modules.append(m)
+            except Exception:
+                log.error("{}\nCouldn't load extension {}!".format(traceback.format_exc(), ext_cls))
+
+        log.info("loaded {}/{} modules".format(len(self.modules), len(ext_classes)))
+
     def _emitted(self, future):
         exc = future.exception()
 
@@ -35,8 +63,8 @@ class Giesela(discord.Client):
 
     async def emit(self, event, *args, **kwargs):
         """Call a function in all extensions."""
-        for module in self.modules:
-            task = self.loop.create_task(getattr(module, event)(*args, **kwargs))
+        for m in self.modules:
+            task = self.loop.create_task(getattr(m, event)(*args, **kwargs))
             task.add_done_callback(self._emitted)
 
     async def on_ready(self):

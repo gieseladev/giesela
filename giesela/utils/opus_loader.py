@@ -1,3 +1,4 @@
+"""Load opus library."""
 from discord import opus
 
 OPUS_LIBS = [
@@ -10,6 +11,7 @@ OPUS_LIBS = [
 
 
 def load_opus_lib(opus_libs=OPUS_LIBS):
+    """Load the first best library."""
     if opus.is_loaded():
         return True
 
@@ -20,5 +22,4 @@ def load_opus_lib(opus_libs=OPUS_LIBS):
         except OSError:
             pass
 
-    raise RuntimeError("Could not load an opus lib. Tried %s" %
-                       (", ".join(opus_libs)))
+    raise RuntimeError("Could not load an opus lib. Tried {}".format(", ".join(opus_libs)))

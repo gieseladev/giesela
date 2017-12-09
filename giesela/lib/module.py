@@ -98,6 +98,16 @@ class GieselaModule(metaclass=GieselaModuleMount):
         self.bot = bot
         self.commands = {}
 
+        for name, value in inspect.getmembers(self):
+            if hasattr(value, "_is_command"):
+                self.commands[name] = value
+
+        log.debug("{} registered {} commands".format(self, len(self.commands)))
+
+    def __str__(self):
+        """Return string rep. of a Module."""
+        return "<Module {}>".format(type(self).__name__)
+
     async def _on_message(self, message):
         for name, func in self.commands.items():
             try:
@@ -110,7 +120,7 @@ class GieselaModule(metaclass=GieselaModuleMount):
 
         await self.on_message(message)
 
-    async def on_load(self):
+    def on_load(self):
         """Call when module loaded."""
         pass
 
