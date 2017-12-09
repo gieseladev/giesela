@@ -29,7 +29,7 @@ class PlayerCommands:
     @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite"),
-        "3.0.5": (1500533467, "fixed typo")
+        "4.0.5": (1500533467, "fixed typo")
     })
     async def cmd_resume(self, player):
         """
