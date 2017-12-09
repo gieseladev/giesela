@@ -3348,7 +3348,8 @@
                     "timestamp": 1502603476
                 ***REMOVED***
             ***REMOVED***
-        ***REMOVED***
+        ***REMOVED***,
+        "broken": true
     ***REMOVED***,
     ***REMOVED***
         "version": 103,
