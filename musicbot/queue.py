@@ -7,6 +7,8 @@ import traceback
 from collections import deque
 from itertools import islice
 
+from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
+
 from musicbot.discogs import get_entry as get_discogs_track
 from musicbot.entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry,
                             SpotifyEntry, StreamEntry, TimestampEntry,
@@ -17,7 +19,6 @@ from musicbot.spotify import get_spotify_track
 from musicbot.utils import clean_songname, get_header, get_video_sub_queue
 from musicbot.VGMdb import get_entry as get_vgm_track
 from musicbot.web_socket_server import GieselaServer
-from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
 
 class Queue(EventEmitter):
@@ -216,9 +217,21 @@ class Queue(EventEmitter):
             info = await self.downloader.extract_info(self.loop, query, download=False, process=False)
 
         if "entries" in info:
-            return ["http://youtube.com/watch?v=" + entry["id"] for entry in info["entries"]]
+            return [entry["url"] for entry in info["entries"]]
         else:
             return await self.get_entry(info, **meta)
+
+    async def get_entry_gen(self, url, **meta):
+        info = await self.downloader.extract_info(self.loop, url, download=False, process=False)
+
+        if "entries" in info:
+            return self.get_entries_from_urls_gen(*[entry["url"] for entry in info["entries"]])
+        else:
+            async def _tuple_gen_creator(collection):
+                for i, el in enumerate(collection):
+                    yield i, el
+
+            return _tuple_gen_creator([await self.get_entry(info, **meta)])
 
     async def get_entries_from_urls_gen(self, *urls, **meta):
         for ind, url in enumerate(urls):
@@ -343,9 +356,9 @@ class Queue(EventEmitter):
 
         return entry
 
-    def add_entries(self, entries):
+    def add_entries(self, entries, placement=None):
         for entry in entries:
-            self._add_entry(entry, more_to_come=True)
+            self._add_entry(entry, placement=placement, more_to_come=True)
 
         GieselaServer.send_player_information(self.player.voice_client.server.id)
         self.emit("entry-added", queue=self, entry=entry)
