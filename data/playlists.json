@@ -9,7 +9,7 @@
             "colour": "#1197F0"
         },
         "entries": 116,
-        "replays": 84,
+        "replays": 87,
         "description": "Your go-to playlist for everything related to Anime and Japanese music. This is the first (and as of yet) only playlist where **every** entry is a GieselaEntry.",
         "cover_url": "http://i.imgur.com/MFXq8og.jpg",
         "name": "Simonisanerd"
@@ -24,7 +24,7 @@
             "colour": "#6200F6"
         },
         "entries": 142,
-        "replays": 47,
+        "replays": 52,
         "description": "Hand-picked songs to please your ears. This playlist suits you well if you want to relax while drinking some coffee.",
         "cover_url": "http://i.imgur.com/Vifn0MV.jpg",
         "name": "Quality"
@@ -51,7 +51,7 @@
             "avatar_url": "https://cdn.discordapp.com/avatars/206459363739566080/290bbea2374aba7ce2c28ced4842c643.png?size=1024",
             "colour": "#1197F0"
         },
-        "replays": 11,
+        "replays": 17,
         "description": null,
         "cover_url": "https://i.imgur.com/CKhYHbF.jpg",
         "name": "Gems"
@@ -79,7 +79,7 @@
             "avatar_url": "",
             "colour": "#57D31D"
         },
-        "replays": 7,
+        "replays": 9,
         "description": null,
         "cover_url": "https://i.imgur.com/XnyMP91.jpg",
         "name": "420"
@@ -97,5 +97,33 @@
         "description": "Unleash your inner beast",
         "cover_url": "https://i.imgur.com/hHutGfl.jpg",
         "name": "Workout"
+    },
+    "electronica": {
+        "location": "data/playlists/electronica.gpl",
+        "author": {
+            "id": "203302899277627392",
+            "name": "siku2",
+            "display_name": "Spookumon",
+            "avatar_url": "https://cdn.discordapp.com/avatars/203302899277627392/a_92ebd93e871089ddc512fca3baed6b6b.gif?size=1024",
+            "colour": "#4F00C0"
+        },
+        "replays": 0,
+        "description": "Music?",
+        "cover_url": "https://i.imgur.com/bjEnvnN.png",
+        "name": "electronica"
+    },
+    "jams": {
+        "location": "data/playlists/jams.gpl",
+        "author": {
+            "id": "203302899277627392",
+            "name": "siku2",
+            "display_name": "Simon",
+            "avatar_url": "https://cdn.discordapp.com/avatars/203302899277627392/a_e60cca01a5d0e8cb841aa0bc6888bf8e.gif?size=1024",
+            "colour": "#4F00C0"
+        },
+        "replays": 0,
+        "description": "Ever get the feeling that some modern pop songs aren't all that bad?\nWell, fear not! This playlist is gonna help you answer this question.",
+        "cover_url": "https://i.imgur.com/gwwzsof.png",
+        "name": "jams"
     }
 }

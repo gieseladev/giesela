@@ -1,0 +1,3275 @@
+[
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube--HFQs_2Uy1w-ALMA_-_Watcher.webm",
+        "video_id": "-HFQs_2Uy1w",
+        "url": "https://www.youtube.com/watch?v=-HFQs_2Uy1w",
+        "title": "ALMA - Watcher",
+        "duration": 273,
+        "thumbnail": "https://i.ytimg.com/vi/-HFQs_2Uy1w/maxresdefault.jpg",
+        "thumbnail_brightness": 107.59240379901026,
+        "description": "WOW, this is powerful!\nDownload... http://bit.ly/1DEzGPm\n\nALMA\nhttps://soundcloud.com/thealmamusic\nhttps://www.facebook.com/thealmamusic\nhttps://twitter.com/theALMAmusic\n\nArtwork by Yuumei\nhttp://fav.me/d8oxkp1\nhttps://www.facebook.com/YuumeiArt\nhttps://twitter.com/yuumei_dA\n\nSheepy on Spotify\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 0,
+                    "timestamp": 1509656432
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-Pryb1VugJq4-XYLO_-_America.webm",
+        "video_id": "Pryb1VugJq4",
+        "url": "https://www.youtube.com/watch?v=Pryb1VugJq4",
+        "title": "XYL\u00d8 - America",
+        "duration": 247,
+        "thumbnail": "https://i.ytimg.com/vi/Pryb1VugJq4/hqdefault.jpg",
+        "thumbnail_brightness": 56.335987198683945,
+        "description": "This is so deliciously dark and hypnotic. Please welcome newcomers XYL\u00d8 with their debut track America!\nDownload on iTunes...http://smarturl.it/XYLO_AmericaEP_AM\nStream on Spotify...http://smarturl.it/XYLO_AmericaEP_Sptfy\n\nXYL\u00d8\nhttps://soundcloud.com/xylo100\nhttp://www.xylo-music.com\nhttps://twitter.com/wearexylo\n\nPicture by Marta Syrko\nhttp://fav.me/d6onpbg\nhttps://500px.com/syrko\n\nSheepy on Spotify\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 1,
+                    "timestamp": 1509656897
+                }
+            }
+        },
+        "song_title": "America",
+        "artist": "XYL\u00d8",
+        "artist_image": "https://i.scdn.co/image/789ea407da1b22d1b1943517020ec2105b8b183e",
+        "cover": "https://i.scdn.co/image/cdd6171c06ff9a1aa383b71dec934be190161f71",
+        "album": "America EP",
+        "spotify_data": {
+            "id": "557KWxa3o2DHiCTeJCg2Ss",
+            "name": "America",
+            "artists": [
+                {
+                    "id": "6ioOEWNNGK40H8xrGj6XPW",
+                    "name": "XYL\u00d8",
+                    "images": [
+                        {
+                            "height": 639,
+                            "url": "https://i.scdn.co/image/501efaca614d5edbf3d067518931ac04c2448ee8",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/789ea407da1b22d1b1943517020ec2105b8b183e",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/4f8af8beaa4185963caca6f88dc4320399be3701",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "indie poptimism",
+                        "indietronica",
+                        "pop",
+                        "vapor soul"
+                    ],
+                    "popularity": 67,
+                    "uri": "spotify:artist:6ioOEWNNGK40H8xrGj6XPW",
+                    "href": "https://open.spotify.com/artist/6ioOEWNNGK40H8xrGj6XPW"
+                }
+            ],
+            "artist": "XYL\u00d8",
+            "cover_url": "https://i.scdn.co/image/cdd6171c06ff9a1aa383b71dec934be190161f71",
+            "duration": 256.712,
+            "album": {
+                "id": "5xsN8j8S47kkhUP6CWPzoz",
+                "name": "America EP",
+                "artists": [
+                    {
+                        "id": "6ioOEWNNGK40H8xrGj6XPW",
+                        "name": "XYL\u00d8",
+                        "images": [
+                            {
+                                "height": 639,
+                                "url": "https://i.scdn.co/image/501efaca614d5edbf3d067518931ac04c2448ee8",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/789ea407da1b22d1b1943517020ec2105b8b183e",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/4f8af8beaa4185963caca6f88dc4320399be3701",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "indie poptimism",
+                            "indietronica",
+                            "pop",
+                            "vapor soul"
+                        ],
+                        "popularity": 67,
+                        "uri": "spotify:artist:6ioOEWNNGK40H8xrGj6XPW",
+                        "href": "https://open.spotify.com/artist/6ioOEWNNGK40H8xrGj6XPW"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/cdd6171c06ff9a1aa383b71dec934be190161f71",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/0fa46630f0e63c0eb8554e45503d6d803f45d36a",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/c314d01259a4b91e21ce1a238e52176ea7431dda",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:5xsN8j8S47kkhUP6CWPzoz"
+            },
+            "popularity": 55,
+            "uri": "spotify:track:557KWxa3o2DHiCTeJCg2Ss",
+            "query": "XYL\u00d8 - America",
+            "certainty": 0.9230769230769231
+        }
+    },
+    {
+        "version": 103,
+        "type": "DiscogsEntry",
+        "expected_filename": "cache/audio_cache/youtube-L6r36e7GTC8-Krewella_-_Ammunition.webm",
+        "video_id": "L6r36e7GTC8",
+        "url": "https://www.youtube.com/watch?v=L6r36e7GTC8",
+        "title": "Krewella - Ammunition",
+        "duration": 205,
+        "thumbnail": "https://i.ytimg.com/vi/L6r36e7GTC8/maxresdefault.jpg",
+        "thumbnail_brightness": 62.36286138562852,
+        "description": "Feeling Sheepish'...http://bit.ly/SuicideSheepSpotify\n\nCuz you're still my ammunition!!\nDownload... http://apple.co/27Iqyc0\nListen on Spotify... http://spoti.fi/1svw4hm\n\nKrewella\nhttps://soundcloud.com/krewella\nhttps://www.facebook.com/krewella\nhttps://twitter.com/krewella\nhttps://www.youtube.com/user/KrewellaMusicVEVO\n\nPicture by Wladimir Jara Salazar\nhttps://flic.kr/p/Guzubg\nhttps://500px.com/wladimirjarasalazar\n\nFull channel playlist on Spotify!!!! Click and listen for hours!\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw</a",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 2,
+                    "timestamp": 1509622868
+                }
+            }
+        },
+        "song_title": "Ammunition",
+        "artist": "Krewella",
+        "artist_image": "https://img.discogs.com/uBNZg4VvwjfTDe9Yvoob6gbVzwg=/500x500/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-2811424-1431846268-8598.jpeg.jpg",
+        "cover": "https://img.discogs.com/65krULNRfO9Itk8olV2Nkft8204=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-8540884-1463673351-3518.jpeg.jpg",
+        "album": "Ammunition"
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-Tkc_9OPC20E-Lauv_-_Breathe_Official_Audio.webm",
+        "video_id": "Tkc_9OPC20E",
+        "url": "https://www.youtube.com/watch?v=Tkc_9OPC20E",
+        "title": "Lauv - Breathe [Official Audio]",
+        "duration": 238,
+        "thumbnail": "https://i.ytimg.com/vi/Tkc_9OPC20E/maxresdefault.jpg",
+        "thumbnail_brightness": 20.06411349826389,
+        "description": "I Like Me Better\" available now: http://smarturl.it/lauv_ilmb\nPre-Save on Spotify: http://smarturl.it/lauv_subscribe\n\nhttp://lauvsongs.com\nhttp://facebook.com/lauvsongs\nhttp://twitter.com/lauvsongs\nhttp://instagram.com/lauvsongs\n\nLYRICS\n\nI've watched those eyes light up with a smile\nRiver in the not good times\nOh, you taught me all that I know\n\nI've seen your soul grow just like a rose\nMade it through all of those thorns\nGirl into the woman I know\n\nAnd it's killing me, me to say \"I'm fine,\" \"I'm fine\"\nWhen I really mean, mean to say..\n\nYou're my all and more\nAll I know you taught me, yeah\nYou're my all and more\nBut I need room to breathe, yeah\n\nI found New York laying in your arms\nWe'll melt into the bedroom floor\nNever knew I'd stay for so long\n\nAnd this truth cuts not through one, but both\nNot through one, but both of us\nBut it's deeper if I hold on\n\nAnd it's killing me, me to say \"I'm fine,\" \"I'm fine\"\nWhen I really mean, mean to say..\n\nYou're my all and more\nAll I know you taught me, yeah\nYou're my all and more\nBut I need room to breathe, yeah\n\nGotta breathe for me, it's now or never\nGotta breathe for me, it's now or never\n\nI should leave, 'cause you deserve better, better\n\nGave my all and more\nBut I need room to be me\n\nYou're my all and more\nAll I know you taught me, yeah\nYou're my all and more\nBut I need room to breathe, yeah\n\nBreathe\nBreath",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 3,
+                    "timestamp": 1509898445
+                }
+            }
+        },
+        "song_title": "Breathe",
+        "artist": "Lauv",
+        "artist_image": "https://i.scdn.co/image/c851287790a53440335b7c7a1a2d0f4ddb4be0cd",
+        "cover": "https://i.scdn.co/image/35dcc2590052f8e802372400bd4344ee3864775a",
+        "album": "Breathe",
+        "spotify_data": {
+            "id": "1qwWYnZmgC6TtGMvO35hWg",
+            "name": "Breathe",
+            "artists": [
+                {
+                    "id": "5JZ7CnR6gTvEMKX4g70Amv",
+                    "name": "Lauv",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/37d1c41970952292290a05617ac21f75ceceffae",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/c851287790a53440335b7c7a1a2d0f4ddb4be0cd",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/3d22d4fd4aa1f69bba4c985ec5c93f53e9b7eb86",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "pop",
+                        "post-teen pop",
+                        "tropical house"
+                    ],
+                    "popularity": 89,
+                    "uri": "spotify:artist:5JZ7CnR6gTvEMKX4g70Amv",
+                    "href": "https://open.spotify.com/artist/5JZ7CnR6gTvEMKX4g70Amv"
+                }
+            ],
+            "artist": "Lauv",
+            "cover_url": "https://i.scdn.co/image/35dcc2590052f8e802372400bd4344ee3864775a",
+            "duration": 237.81,
+            "album": {
+                "id": "1ycA4C1V0JcgDP3PirgzT3",
+                "name": "Breathe",
+                "artists": [
+                    {
+                        "id": "5JZ7CnR6gTvEMKX4g70Amv",
+                        "name": "Lauv",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/37d1c41970952292290a05617ac21f75ceceffae",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/c851287790a53440335b7c7a1a2d0f4ddb4be0cd",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/3d22d4fd4aa1f69bba4c985ec5c93f53e9b7eb86",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "pop",
+                            "post-teen pop",
+                            "tropical house"
+                        ],
+                        "popularity": 89,
+                        "uri": "spotify:artist:5JZ7CnR6gTvEMKX4g70Amv",
+                        "href": "https://open.spotify.com/artist/5JZ7CnR6gTvEMKX4g70Amv"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/35dcc2590052f8e802372400bd4344ee3864775a",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/f4b7473ac9dc9d159e9b413d4251258f400da386",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/feb5694167700ebd434306e89e60eb60fb1835ab",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:1ycA4C1V0JcgDP3PirgzT3"
+            },
+            "popularity": 66,
+            "uri": "spotify:track:1qwWYnZmgC6TtGMvO35hWg",
+            "query": "Lauv - Breathe",
+            "certainty": 0.9230769230769231
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-KKzULgoggR4-Lauv_-_Come_Back_Home_Official_Audio.webm",
+        "video_id": "KKzULgoggR4",
+        "url": "https://www.youtube.com/watch?v=KKzULgoggR4",
+        "title": "Lauv - Come Back Home [Official Audio]",
+        "duration": 232,
+        "thumbnail": "https://i.ytimg.com/vi/KKzULgoggR4/maxresdefault.jpg",
+        "thumbnail_brightness": 230.9966069878472,
+        "description": "I Like Me Better\" available now: http://smarturl.it/lauv_ilmb\nPre-Save on Spotify: http://smarturl.it/lauv_subscribe\n\nhttp://lauvsongs.com\nhttp://facebook.com/lauvsongs\nhttp://twitter.com/lauvsongs\nhttp://instagram.com/lauvsongs\n\nLYRICS\n\nDoubt, doubt, doubt\nIt kills everything that you love\nNow, now, now\nI\u2019m losing myself on the run\n\nAnd I flew to California\nThought I could leave\nEvery piece of you right here\nYeah I flew to California\nStill wide awake\nOh the sun burned it on clear\n\nHow I still love you\nI still love you\nBut sometimes you have to go\nTrade your heart for bones\nTo know you need to come back home\n\nPaint-chipped skies\nNothing is ever as it seems\nBehind these codeine eyes\nBlind to the world in between\n\nAnd I flew to California\nThought I could leave\nEvery piece of you right here\nYeah I flew to California\nStill wide awake\nOh the sun burned it on clear\n\nHow I still love you\nI still love you\nBut sometimes you have to go\nTrade your heart for bones\nTo know you need to come back home\n\nGetaway\nI always thought I needed a getaway\nGetaway\nI always thought I needed a getaway\nGetaway\nI always thought I needed a getaway\nGetaway\nI always thought I needed a getaway\n\nBut I still love you\nI still love you\nBut sometimes you have to go\nTrade your heart for bones\nTo know you need to come back home\nCome back home\n\nGetaway\nI always thought I needed a getaway\nGetaway\nI always thought I needed a getaway\nGetaway\nI always thought I needed a getaway\nGetaway\nI always thought I needed a getawa",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 4,
+                    "timestamp": 1509895083
+                }
+            }
+        },
+        "song_title": "Come Back Home",
+        "artist": "Lauv",
+        "artist_image": "https://i.scdn.co/image/3d22d4fd4aa1f69bba4c985ec5c93f53e9b7eb86",
+        "cover": "https://i.scdn.co/image/fd4aae2b99bd72be35c11dc0260cd10f49b245b3",
+        "album": "Lost in the Light",
+        "spotify_data": {
+            "id": "4oeqoesEYzNJprjh1rkTl3",
+            "name": "Come Back Home",
+            "artists": [
+                {
+                    "id": "5JZ7CnR6gTvEMKX4g70Amv",
+                    "name": "Lauv",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/37d1c41970952292290a05617ac21f75ceceffae",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/c851287790a53440335b7c7a1a2d0f4ddb4be0cd",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/3d22d4fd4aa1f69bba4c985ec5c93f53e9b7eb86",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "pop",
+                        "post-teen pop",
+                        "tropical house"
+                    ],
+                    "popularity": 89,
+                    "uri": "spotify:artist:5JZ7CnR6gTvEMKX4g70Amv",
+                    "href": "https://open.spotify.com/artist/5JZ7CnR6gTvEMKX4g70Amv"
+                }
+            ],
+            "artist": "Lauv",
+            "cover_url": "https://i.scdn.co/image/fd4aae2b99bd72be35c11dc0260cd10f49b245b3",
+            "duration": 231.774,
+            "album": {
+                "id": "4vcdgIX01vDfPCRzIlAxYf",
+                "name": "Lost in the Light",
+                "artists": [
+                    {
+                        "id": "5JZ7CnR6gTvEMKX4g70Amv",
+                        "name": "Lauv",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/37d1c41970952292290a05617ac21f75ceceffae",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/c851287790a53440335b7c7a1a2d0f4ddb4be0cd",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/3d22d4fd4aa1f69bba4c985ec5c93f53e9b7eb86",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "pop",
+                            "post-teen pop",
+                            "tropical house"
+                        ],
+                        "popularity": 89,
+                        "uri": "spotify:artist:5JZ7CnR6gTvEMKX4g70Amv",
+                        "href": "https://open.spotify.com/artist/5JZ7CnR6gTvEMKX4g70Amv"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/fd4aae2b99bd72be35c11dc0260cd10f49b245b3",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/b90f24ff213341778a98a99fd6dca21fe17a4bc4",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/670413bc6de171534d89a46baddd5e756cf2a61e",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:4vcdgIX01vDfPCRzIlAxYf"
+            },
+            "popularity": 63,
+            "uri": "spotify:track:4oeqoesEYzNJprjh1rkTl3",
+            "query": "Lauv - Come Back Home",
+            "certainty": 0.95
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-KWbPFmRGRlI-Brandyn_Burnette_-_Down.webm",
+        "video_id": "KWbPFmRGRlI",
+        "url": "https://www.youtube.com/watch?v=KWbPFmRGRlI",
+        "title": "Brandyn Burnette - Down",
+        "duration": 171,
+        "thumbnail": "https://i.ytimg.com/vi/KWbPFmRGRlI/maxresdefault.jpg",
+        "thumbnail_brightness": 66.15097613429369,
+        "description": "Are you gonna hold me down?\nDownload... http://apple.co/1JpPVWQ\nListen on Spotify... http://bit.ly/1RmrNpc\n\nBrandyn Burnette\nhttps://soundcloud.com/brandynburnette\nhttps://www.facebook.com/BrandynBurnette\nhttps://twitter.com/brandynburnette\n\nArtwork by Dennis Chan\nhttp://www.dennischanart.com/\nhttps://www.facebook.com/dennis.chan....\n\nSheepy on Spotify\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 5,
+                    "timestamp": 1509738043
+                }
+            }
+        },
+        "song_title": "Down",
+        "artist": "Brandyn Burnette",
+        "artist_image": "https://i.scdn.co/image/ae5b8774b37b29a0e9212100850e29dee039d20f",
+        "cover": "https://i.scdn.co/image/5bc2927be46a7c58849d756894151bcf1c0a0e7b",
+        "album": "Made of Dreams - EP",
+        "spotify_data": {
+            "id": "1ksSib2GsrP1wqkpOPdHnY",
+            "name": "Down",
+            "artists": [
+                {
+                    "id": "14mErTJ0ubFVjx2zBAwjkE",
+                    "name": "Brandyn Burnette",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/a23652cd0b8c7e759062c7925bfe40fdcf1b9e14",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/ae5b8774b37b29a0e9212100850e29dee039d20f",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/7ee19dec9415bec6889b9d2fa9a9ff98638337c8",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "indie poptimism",
+                        "vapor soul"
+                    ],
+                    "popularity": 62,
+                    "uri": "spotify:artist:14mErTJ0ubFVjx2zBAwjkE",
+                    "href": "https://open.spotify.com/artist/14mErTJ0ubFVjx2zBAwjkE"
+                }
+            ],
+            "artist": "Brandyn Burnette",
+            "cover_url": "https://i.scdn.co/image/5bc2927be46a7c58849d756894151bcf1c0a0e7b",
+            "duration": 172.852,
+            "album": {
+                "id": "0z8izbo6B9JEQxqGrlexWA",
+                "name": "Made of Dreams - EP",
+                "artists": [
+                    {
+                        "id": "14mErTJ0ubFVjx2zBAwjkE",
+                        "name": "Brandyn Burnette",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/a23652cd0b8c7e759062c7925bfe40fdcf1b9e14",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/ae5b8774b37b29a0e9212100850e29dee039d20f",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/7ee19dec9415bec6889b9d2fa9a9ff98638337c8",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "indie poptimism",
+                            "vapor soul"
+                        ],
+                        "popularity": 62,
+                        "uri": "spotify:artist:14mErTJ0ubFVjx2zBAwjkE",
+                        "href": "https://open.spotify.com/artist/14mErTJ0ubFVjx2zBAwjkE"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/5bc2927be46a7c58849d756894151bcf1c0a0e7b",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/72e5efb0b9e878778f12dfebca66d9cd6dcca908",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/54598555664c395a6cfe6de30a60f86dc71a7474",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:0z8izbo6B9JEQxqGrlexWA"
+            },
+            "popularity": 46,
+            "uri": "spotify:track:1ksSib2GsrP1wqkpOPdHnY",
+            "query": "Brandyn Burnette - Down",
+            "certainty": 0.9545454545454546
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-0pVABElms84-EDEN_-_End_Credits_feat._Leah_Kelly.webm",
+        "video_id": "0pVABElms84",
+        "url": "https://www.youtube.com/watch?v=0pVABElms84",
+        "title": "EDEN - End Credits (feat. Leah Kelly)",
+        "duration": 241,
+        "thumbnail": "https://i.ytimg.com/vi/0pVABElms84/maxresdefault.jpg",
+        "thumbnail_brightness": 40.59763693866829,
+        "description": "I'm so happy to be working collaboratively with EDEN on his End Credits EP. I hope you enjoy the first official video for EDEN, and my label!\nEDEN is on tour!...http://mcmxcv.eu/\nStream on Spotify...http://spoti.fi/1L53yuG\nDownload... http://end-credits.mcmxcv.eu/\n\nEDEN\nhttps://soundcloud.com/iameden\nhttp://www.facebook.com/iameden\nhttps://twitter.com/iameden\n\nLeah Kelly\nhttps://twitter.com/leah__kelly\nhttps://www.facebook.com/Leah-Kelly-1...\n\nReleased by Seeking Blue & MCMXCV\nhttps://www.youtube.com/redirect?q=https%3A%2F%2Fwww.facebook.com%2FSeekingBlueRecords&redir_token=asTkPAvyDJpCxZ9svSnhaYB-LMx8MTUwOTg5Mzg5OUAxNTA5ODA3NDk5&v=0pVABElms84&event=video_description\n\nVideo By Robert Anthony\nwww.whatihavemade.com\nhttp://vimeo.com/whatihavemade\n\nSheepy on Spotify\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 6,
+                    "timestamp": 1509891648
+                }
+            }
+        },
+        "song_title": "End Credits",
+        "artist": "EDEN",
+        "artist_image": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+        "cover": "https://i.scdn.co/image/92ea26aae1129bd60dc1d4f0313087dc06ee1509",
+        "album": "End Credits",
+        "spotify_data": {
+            "id": "7j5DNclXXrNL4LPw59qcUK",
+            "name": "End Credits",
+            "artists": [
+                {
+                    "id": "1t20wYnTiAT0Bs7H1hv9Wt",
+                    "name": "EDEN",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [],
+                    "popularity": 74,
+                    "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
+                    "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
+                }
+            ],
+            "artist": "EDEN",
+            "cover_url": "https://i.scdn.co/image/92ea26aae1129bd60dc1d4f0313087dc06ee1509",
+            "duration": 240.389,
+            "album": {
+                "id": "5bbk7Mo2OiD6q5Bb52DIkC",
+                "name": "End Credits",
+                "artists": [
+                    {
+                        "id": "1t20wYnTiAT0Bs7H1hv9Wt",
+                        "name": "EDEN",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [],
+                        "popularity": 74,
+                        "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
+                        "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/92ea26aae1129bd60dc1d4f0313087dc06ee1509",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/28cf63ecfa775fef8977d57d7fdbd0b26b734d22",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/b68eae714cc20fecf054a78d7ace213f33b09660",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:5bbk7Mo2OiD6q5Bb52DIkC"
+            },
+            "popularity": 63,
+            "uri": "spotify:track:7j5DNclXXrNL4LPw59qcUK",
+            "query": "EDEN - End Credits",
+            "certainty": 0.9411764705882353
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-UyS61HXwLbY-Echos_-_Fiction.webm",
+        "video_id": "UyS61HXwLbY",
+        "url": "https://www.youtube.com/watch?v=UyS61HXwLbY",
+        "title": "Echos - Fiction",
+        "duration": 189,
+        "thumbnail": "https://i.ytimg.com/vi/UyS61HXwLbY/maxresdefault.jpg",
+        "thumbnail_brightness": 37.86691567451712,
+        "description": "Fiction! Echos EP is finally here!!!\nDownload...http://bit.ly/Echositunes\nStream on Spotify...http://spoti.fi/2dhsos4\nDownload on Bandcamp...http://bit.ly/2d40yBb\n\nEchos\nhttps://soundcloud.com/echosofficial\nhttps://www.facebook.com/pages/Echos/\nhttps://twitter.com/EchosOfficial\n\nReleased by Seeking Blue\nhttps://www.youtube.com/redirect?v=UyS61HXwLbY&event=video_description&redir_token=UlxwYw3rmJ3aM0dsvEjgllGa1Lh8MTUwOTcwODYyMEAxNTA5NjIyMjIw&q=https%3A%2F%2Fwww.facebook.com%2FSeekingBlueRecords%2F\n\nArtwork by Victor Habchy\nhttps://flic.kr/p/fpVLnX\nhttps://www.youtube.com/redirect?v=UyS61HXwLbY&event=video_description&redir_token=UlxwYw3rmJ3aM0dsvEjgllGa1Lh8MTUwOTcwODYyMEAxNTA5NjIyMjIw&q=https%3A%2F%2Fwww.flickr.com%2Fphotos%2Falbum-de-photo%2F\n\nFull channel playlist on Spotify!!!!\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs!!\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com/\n\nSheepy shop\nhttp://bit.ly/2eX4dkf\n\nSubmit tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 7,
+                    "timestamp": 1509652590
+                }
+            }
+        },
+        "song_title": "Fiction",
+        "artist": "Echos",
+        "artist_image": "https://i.scdn.co/image/720904367565b69522ccaedfc69f6c072845e204",
+        "cover": "https://i.scdn.co/image/022faad40038c1ec3fa83ed683349b1d20facd2e",
+        "album": "Echos",
+        "spotify_data": {
+            "id": "3L29W1p46ovLi7mPJ7aFc4",
+            "name": "Fiction",
+            "artists": [
+                {
+                    "id": "6SnMMbLQ4iS8WIyt3ksmCR",
+                    "name": "Echos",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/720904367565b69522ccaedfc69f6c072845e204",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/cf6b92199b413d107059acabd8b217212561c80e",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/6a88cebc0345ee49799ff9f04d9413ec00136561",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "chillstep",
+                        "indie poptimism"
+                    ],
+                    "popularity": 60,
+                    "uri": "spotify:artist:6SnMMbLQ4iS8WIyt3ksmCR",
+                    "href": "https://open.spotify.com/artist/6SnMMbLQ4iS8WIyt3ksmCR"
+                }
+            ],
+            "artist": "Echos",
+            "cover_url": "https://i.scdn.co/image/022faad40038c1ec3fa83ed683349b1d20facd2e",
+            "duration": 189.428,
+            "album": {
+                "id": "0IMs2SyGSyl3fVRtFNeQdx",
+                "name": "Echos",
+                "artists": [
+                    {
+                        "id": "6SnMMbLQ4iS8WIyt3ksmCR",
+                        "name": "Echos",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/720904367565b69522ccaedfc69f6c072845e204",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/cf6b92199b413d107059acabd8b217212561c80e",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/6a88cebc0345ee49799ff9f04d9413ec00136561",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "chillstep",
+                            "indie poptimism"
+                        ],
+                        "popularity": 60,
+                        "uri": "spotify:artist:6SnMMbLQ4iS8WIyt3ksmCR",
+                        "href": "https://open.spotify.com/artist/6SnMMbLQ4iS8WIyt3ksmCR"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/022faad40038c1ec3fa83ed683349b1d20facd2e",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/99ddb84f72e4395ec543ac18acf8b7aec1a7812d",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/5cfb2d080edd17838f0216469779eb744b02afc7",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:0IMs2SyGSyl3fVRtFNeQdx"
+            },
+            "popularity": 43,
+            "uri": "spotify:track:3L29W1p46ovLi7mPJ7aFc4",
+            "query": "Echos - Fiction",
+            "certainty": 0.9285714285714286
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-rFrgyKmOUmc-EDEN_-_fumes_feat._gnash_official_audio.webm",
+        "video_id": "rFrgyKmOUmc",
+        "url": "https://www.youtube.com/watch?v=rFrgyKmOUmc",
+        "title": "EDEN - fumes (feat. gnash) (official audio)",
+        "duration": 215,
+        "thumbnail": "https://i.ytimg.com/vi/rFrgyKmOUmc/maxresdefault.jpg",
+        "thumbnail_brightness": 46.18872871420387,
+        "description": "start//end available now: http://ftrbnd.co/startends\n\n-\n\ni think you think too much of me\n\nitunes: http://ftrbnd.co/ityttmom\nspotify: http://ftrbnd.co/ityttmoms\n\nsoundcloud: http://soundcloud.com/iameden\ntwitter: http://twitter.com/iameden\ninstagram: http://instagram.com/iameden\nfacebook: http://facebook.com/iameden",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 8,
+                    "timestamp": 1509895595
+                }
+            }
+        },
+        "song_title": "Fumes",
+        "artist": "EDEN & gnash",
+        "artist_image": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
+        "cover": "https://i.scdn.co/image/236b285e0b349526486dd03a3807f4904b195ecf",
+        "album": "i think you think too much of me",
+        "spotify_data": {
+            "id": "7fJALFBexDXzu0QdatF5O4",
+            "name": "Fumes",
+            "artists": [
+                {
+                    "id": "1t20wYnTiAT0Bs7H1hv9Wt",
+                    "name": "EDEN",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [],
+                    "popularity": 74,
+                    "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
+                    "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
+                },
+                {
+                    "id": "3iri9nBFs9e4wN7PLIetAw",
+                    "name": "gnash",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/08ecaadd299eaf596e342c7fca9e6c73e5c606ae",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/d8e377dbdf358e9035ec9bb9da5c8896540d957c",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/e9ac2b6eef6d7f4177909d686c4a6bd166d7f688",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "pop",
+                        "post-teen pop",
+                        "teen pop",
+                        "viral pop"
+                    ],
+                    "popularity": 78,
+                    "uri": "spotify:artist:3iri9nBFs9e4wN7PLIetAw",
+                    "href": "https://open.spotify.com/artist/3iri9nBFs9e4wN7PLIetAw"
+                }
+            ],
+            "artist": "EDEN & gnash",
+            "cover_url": "https://i.scdn.co/image/236b285e0b349526486dd03a3807f4904b195ecf",
+            "duration": 214.631,
+            "album": {
+                "id": "7AVvQhnDEUidKyJsXmQ7ju",
+                "name": "i think you think too much of me",
+                "artists": [
+                    {
+                        "id": "1t20wYnTiAT0Bs7H1hv9Wt",
+                        "name": "EDEN",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [],
+                        "popularity": 74,
+                        "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
+                        "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/236b285e0b349526486dd03a3807f4904b195ecf",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/28538bd832caa5a8db8a742d6c6292414698387c",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/98d73ed80df7ba067e8cab539456900d060e894a",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:7AVvQhnDEUidKyJsXmQ7ju"
+            },
+            "popularity": 59,
+            "uri": "spotify:track:7fJALFBexDXzu0QdatF5O4",
+            "query": "EDEN - Fumes",
+            "certainty": 0.9090909090909091
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-Iody_E2xujo-Echos_-_Gold.webm",
+        "video_id": "Iody_E2xujo",
+        "url": "https://www.youtube.com/watch?v=Iody_E2xujo",
+        "title": "Echos - Gold",
+        "duration": 249,
+        "thumbnail": "https://i.ytimg.com/vi/Iody_E2xujo/maxresdefault.jpg",
+        "thumbnail_brightness": 80.72410272954383,
+        "description": "I've got intentions of Gold'\nPre-order Echos first EP...http://bit.ly/Echositunes\nSee Echos on Tour!!!... http://bit.ly/2d3WRv7\nStream on Spotify... http://spoti.fi/2cuzWbd\nPreorder the EP on Bandcamp...http://bit.ly/2d40yBb\n\nEchos\nhttps://soundcloud.com/echosofficial\nhttps://www.facebook.com/echosofficial/\nhttps://twitter.com/EchosOfficial\nhttps://www.instagram.com/echosofficial/\n\nReleased by Seeking Blue\nhttps://www.youtube.com/redirect?event=video_description&v=Iody_E2xujo&redir_token=kUAOE21c_s4Dy1nVsQJ0cQTO_hx8MTUwOTcwODI0NkAxNTA5NjIxODQ2&q=https%3A%2F%2Fwww.facebook.com%2FSeekingBlueRecords\n\nArtwork by Greg Ponthus\nhttps://flic.kr/p/cgYQZY\nhttps://instagram.com/gregpths/\nhttp://www.gregponthus.com/\n\nFull channel playlist on Spotify!!!!\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs!!\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com/\n\nSheepy shop\nhttp://bit.ly/2eX4dkf\n\nSubmit tracks\nhttp://bit.ly/2aPHMvw</a",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 9,
+                    "timestamp": 1509656981
+                }
+            }
+        },
+        "song_title": "Gold",
+        "artist": "Echos",
+        "artist_image": "https://i.scdn.co/image/6a88cebc0345ee49799ff9f04d9413ec00136561",
+        "cover": "https://i.scdn.co/image/022faad40038c1ec3fa83ed683349b1d20facd2e",
+        "album": "Echos",
+        "spotify_data": {
+            "id": "4ji5w33XXRxt1hwCwrMVbN",
+            "name": "Gold",
+            "artists": [
+                {
+                    "id": "6SnMMbLQ4iS8WIyt3ksmCR",
+                    "name": "Echos",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/720904367565b69522ccaedfc69f6c072845e204",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/cf6b92199b413d107059acabd8b217212561c80e",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/6a88cebc0345ee49799ff9f04d9413ec00136561",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "chillstep",
+                        "indie poptimism"
+                    ],
+                    "popularity": 60,
+                    "uri": "spotify:artist:6SnMMbLQ4iS8WIyt3ksmCR",
+                    "href": "https://open.spotify.com/artist/6SnMMbLQ4iS8WIyt3ksmCR"
+                }
+            ],
+            "artist": "Echos",
+            "cover_url": "https://i.scdn.co/image/022faad40038c1ec3fa83ed683349b1d20facd2e",
+            "duration": 249.692,
+            "album": {
+                "id": "0IMs2SyGSyl3fVRtFNeQdx",
+                "name": "Echos",
+                "artists": [
+                    {
+                        "id": "6SnMMbLQ4iS8WIyt3ksmCR",
+                        "name": "Echos",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/720904367565b69522ccaedfc69f6c072845e204",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/cf6b92199b413d107059acabd8b217212561c80e",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/6a88cebc0345ee49799ff9f04d9413ec00136561",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "chillstep",
+                            "indie poptimism"
+                        ],
+                        "popularity": 60,
+                        "uri": "spotify:artist:6SnMMbLQ4iS8WIyt3ksmCR",
+                        "href": "https://open.spotify.com/artist/6SnMMbLQ4iS8WIyt3ksmCR"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/022faad40038c1ec3fa83ed683349b1d20facd2e",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/99ddb84f72e4395ec543ac18acf8b7aec1a7812d",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/5cfb2d080edd17838f0216469779eb744b02afc7",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:0IMs2SyGSyl3fVRtFNeQdx"
+            },
+            "popularity": 38,
+            "uri": "spotify:track:4ji5w33XXRxt1hwCwrMVbN",
+            "query": "Echos - Gold",
+            "certainty": 0.9090909090909091
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-_ti45faewW4-HYDDE_HAWKES_-_Ghost.webm",
+        "video_id": "_ti45faewW4",
+        "url": "https://www.youtube.com/watch?v=_ti45faewW4",
+        "title": "HYDDE & HAWKES - Ghost",
+        "duration": 226,
+        "thumbnail": "https://i.ytimg.com/vi/_ti45faewW4/maxresdefault.jpg",
+        "thumbnail_brightness": 96.34734386053161,
+        "description": "Ghost!\nStream on Spotify...http://spoti.fi/2dVCh3W\nHelp them on HypeM...http://bit.ly/2dW2M9w\nDownload...http://apple.co/2dVC1ly\n\nHYDDE\nhttps://soundcloud.com/hyddemusic\nhttps://www.facebook.com/HYDDEmusic/\nhttps://twitter.com/HYDDEmusic\n\nReleased by Seeking Blue\nhttps://www.youtube.com/redirect?event=video_description&v=_ti45faewW4&redir_token=svz5auHMLOPnN3V1_TmeMrVXmgl8MTUwOTg5NDA0M0AxNTA5ODA3NjQz&q=https%3A%2F%2Fwww.facebook.com%2FSeekingBlueRecords%2F%3Ffref%3Dts\n\nPicture by Wladimir Jara S\nhttps://flic.kr/p/ywSN6f\nhttps://www.youtube.com/redirect?event=video_description&v=_ti45faewW4&redir_token=svz5auHMLOPnN3V1_TmeMrVXmgl8MTUwOTg5NDA0M0AxNTA5ODA3NjQz&q=https%3A%2F%2Fwww.flickr.com%2Fphotos%2Fwellprojects%2F\n\nFull channel playlist on Spotify!!!!\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs!!\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com/\n\nSheepy shop\nhttp://bit.ly/2eX4dkf\n\nSubmit tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 10,
+                    "timestamp": 1509893906
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-BcqxLCWn-CE-Lauv_-_I_Like_Me_Better_Official_Video.webm",
+        "video_id": "BcqxLCWn-CE",
+        "url": "https://www.youtube.com/watch?v=BcqxLCWn-CE",
+        "title": "Lauv - I Like Me Better [Official Video]",
+        "duration": 205,
+        "thumbnail": "https://i.ytimg.com/vi/BcqxLCWn-CE/maxresdefault.jpg",
+        "thumbnail_brightness": 123.41316092018391,
+        "description": "I Like Me Better\" available now: http://smarturl.it/lauv_ilmb\nPre-Save on Spotify: http://smarturl.it/lauv_subscribe\n\nGet a Behind the Scenes Look at the Music Video: https://lauv.lnk.to/ilmb_bts\n\nhttp://lauvsongs.com\nhttp://facebook.com/lauvsongs\nhttp://twitter.com/lauvsongs\nhttp://instagram.com/lauvsongs\n\nTo be young and in love in New York City\nTo not know who I am but still know that I'm good long as you're here with me\nTo be drunk and in love in New York City\nMidnight into morning coffee\nBurning through the hours talking\n\nDamn...\n\nI like me better when I'm with you\nI like me better when I'm with you\nI knew from the first time, I'd stay for a long time cause\nI like me better when I'm with you\n\nI don't know what it is but I got that feeling\nWaking up in this bed next to you swear the room\nYeah it got no ceiling\nIf we lay, let the day just pass us by\nI might get to too much talking\nI might have to tell you something...\n\nDamn\u2026\n\nI like me better when I'm with you\nI like me better when I'm with you\nI knew from the first time, I'd stay for a long time cause\nI like me better when I'm with you\n\nStay awhile stay awhile\nStay here with me\nStay awhile stay awhile, oh\nStay awhile stay awhile\nStay here with me\nLay here with me\n\nI like me better when I'm with you\n(yes I do, yes I do, babe)\nI like me better when I'm with you\n(oooh noooooo)\nI knew from the first time, I'd stay for a long time cause\nI like me better when I'm with you\n\n(I like me, I like me)\n(Look who you made me, made me, oh nooooo)\nBetter when\nI like me better when i\u2019m with yo",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 11,
+                    "timestamp": 1509895259
+                }
+            }
+        },
+        "song_title": "I Like Me Better",
+        "artist": "Lauv",
+        "artist_image": "https://i.scdn.co/image/c851287790a53440335b7c7a1a2d0f4ddb4be0cd",
+        "cover": "https://i.scdn.co/image/e8a30b33e506d1ba3c8c7f373084059eba1386fa",
+        "album": "I Like Me Better",
+        "spotify_data": {
+            "id": "1wjzFQodRWrPcQ0AnYnvQ9",
+            "name": "I Like Me Better",
+            "artists": [
+                {
+                    "id": "5JZ7CnR6gTvEMKX4g70Amv",
+                    "name": "Lauv",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/37d1c41970952292290a05617ac21f75ceceffae",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/c851287790a53440335b7c7a1a2d0f4ddb4be0cd",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/3d22d4fd4aa1f69bba4c985ec5c93f53e9b7eb86",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "pop",
+                        "post-teen pop",
+                        "tropical house"
+                    ],
+                    "popularity": 89,
+                    "uri": "spotify:artist:5JZ7CnR6gTvEMKX4g70Amv",
+                    "href": "https://open.spotify.com/artist/5JZ7CnR6gTvEMKX4g70Amv"
+                }
+            ],
+            "artist": "Lauv",
+            "cover_url": "https://i.scdn.co/image/e8a30b33e506d1ba3c8c7f373084059eba1386fa",
+            "duration": 197.436,
+            "album": {
+                "id": "7l6fTSFvlumnPFpOSrbnDV",
+                "name": "I Like Me Better",
+                "artists": [
+                    {
+                        "id": "5JZ7CnR6gTvEMKX4g70Amv",
+                        "name": "Lauv",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/37d1c41970952292290a05617ac21f75ceceffae",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/c851287790a53440335b7c7a1a2d0f4ddb4be0cd",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/3d22d4fd4aa1f69bba4c985ec5c93f53e9b7eb86",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "pop",
+                            "post-teen pop",
+                            "tropical house"
+                        ],
+                        "popularity": 89,
+                        "uri": "spotify:artist:5JZ7CnR6gTvEMKX4g70Amv",
+                        "href": "https://open.spotify.com/artist/5JZ7CnR6gTvEMKX4g70Amv"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/e8a30b33e506d1ba3c8c7f373084059eba1386fa",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/a027cb3b321afbe699ebed8fbc6cf8bbb4d0f1bb",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/1ae1ed7ead0ea13f4c48cd69ebf89dcd473310a9",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:7l6fTSFvlumnPFpOSrbnDV"
+            },
+            "popularity": 93,
+            "uri": "spotify:track:1wjzFQodRWrPcQ0AnYnvQ9",
+            "query": "Lauv - I Like Me Better",
+            "certainty": 0.9545454545454546
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-mkMVyw-7avI-Jaymes_Young_-_I_ll_Be_Good.webm",
+        "video_id": "mkMVyw-7avI",
+        "url": "https://www.youtube.com/watch?v=mkMVyw-7avI",
+        "title": "Jaymes Young - I'll Be Good",
+        "duration": 246,
+        "thumbnail": "https://i.ytimg.com/vi/mkMVyw-7avI/maxresdefault.jpg",
+        "thumbnail_brightness": 113.66332937384512,
+        "description": "Jaymes' voice is so clear and intense in this track! Definitely one of my favourite's of his. I really love those synth plucks in the chorus!\nDownload... http://bit.ly/YeTWaN\nPre-order 'Feel Something' http://atlantic.lnk.to/FeelSomething\n\nSubscribe to his YouTube channel!\nhttps://www.youtube.com/user/jaymesyoung\n\nJaymes Young\nhttps://soundcloud.com/jaymes-young\nhttps://www.facebook.com/jaymesyoungm...\nhttps://twitter.com/jaymesyng\nhttp://yungjaymes.tumblr.com\nhttp://Instagram.com/jaymesyng\n\nReleased by Atlantic Records\nhttp://www.atlanticrecords.com\nhttps://www.facebook.com/atlanticrecords\nhttps://twitter.com/atlanticrecords\n\nPicture by Dustin Adams\nhttps://flic.kr/p/fUgz3a\n\nSheepy on Spotify\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 12,
+                    "timestamp": 1509626125
+                }
+            }
+        },
+        "song_title": "I'll Be Good",
+        "artist": "Jaymes Young",
+        "artist_image": "https://i.scdn.co/image/f5dad575c625c51dcaac1bd18df21c34c09d8fdf",
+        "cover": "https://i.scdn.co/image/a9452d1db4aa5bb234456628b60efc22effce236",
+        "album": "Habits Of My Heart EP",
+        "spotify_data": {
+            "id": "5WLSak7DN3LY1K71oWYuoN",
+            "name": "I'll Be Good",
+            "artists": [
+                {
+                    "id": "6QrQ7OrISRYIfS5mtacaw2",
+                    "name": "Jaymes Young",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/46b3da41cc3e423dd4428430c5ddfb4f04614413",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/bbdcaa6444bc61fff27fc5ca513bd70db25183da",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/f5dad575c625c51dcaac1bd18df21c34c09d8fdf",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "indie anthem-folk",
+                        "indie poptimism",
+                        "indietronica",
+                        "pop"
+                    ],
+                    "popularity": 72,
+                    "uri": "spotify:artist:6QrQ7OrISRYIfS5mtacaw2",
+                    "href": "https://open.spotify.com/artist/6QrQ7OrISRYIfS5mtacaw2"
+                }
+            ],
+            "artist": "Jaymes Young",
+            "cover_url": "https://i.scdn.co/image/a9452d1db4aa5bb234456628b60efc22effce236",
+            "duration": 248.554,
+            "album": {
+                "id": "7c4oC2FhDzwu7XU7XRB4lZ",
+                "name": "Habits Of My Heart EP",
+                "artists": [
+                    {
+                        "id": "6QrQ7OrISRYIfS5mtacaw2",
+                        "name": "Jaymes Young",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/46b3da41cc3e423dd4428430c5ddfb4f04614413",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/bbdcaa6444bc61fff27fc5ca513bd70db25183da",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/f5dad575c625c51dcaac1bd18df21c34c09d8fdf",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "indie anthem-folk",
+                            "indie poptimism",
+                            "indietronica",
+                            "pop"
+                        ],
+                        "popularity": 72,
+                        "uri": "spotify:artist:6QrQ7OrISRYIfS5mtacaw2",
+                        "href": "https://open.spotify.com/artist/6QrQ7OrISRYIfS5mtacaw2"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/a9452d1db4aa5bb234456628b60efc22effce236",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/558c0cc588bd76d349ef10f2142e26a44354c4bf",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/c1c2e5aef77032c0ffb97024cf2f364a672bac77",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:7c4oC2FhDzwu7XU7XRB4lZ"
+            },
+            "popularity": 68,
+            "uri": "spotify:track:5WLSak7DN3LY1K71oWYuoN",
+            "query": "Jaymes Young - I'Ll Be Good",
+            "certainty": 0.9615384615384616
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-fOBQtp5IKaY-Hydrogen_Sea_-_In_Dreams.webm",
+        "video_id": "fOBQtp5IKaY",
+        "url": "https://www.youtube.com/watch?v=fOBQtp5IKaY",
+        "title": "Hydrogen Sea - In Dreams",
+        "duration": 271,
+        "thumbnail": "https://i.ytimg.com/vi/fOBQtp5IKaY/maxresdefault.jpg",
+        "thumbnail_brightness": 41.625267197692665,
+        "description": "In Dreams!\nDownload... https://news.lnk.to/Indreams\n\nHydrogen Sea\nhttp://hydrogensea.com\nhttp://facebook.com/hydrogensea\nhttp://twitter.com/hydrogensea\n\nUNDAY RECORDS\nhttp://undayrecords.be\nhttp://facebook.com/UndayRecords\nhttp://twitter.com/UndayRecords\n\nPicture by Caamila\nhttps://flic.kr/p/mUVZeB\n\nFull channel playlist on Spotify!!!!\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs!!\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com/\n\nSheepy shop\nhttp://bit.ly/2eX4dkf\n\nSheepy news\nhttp://bit.ly/2fhUNQB\n\nSubmit tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 13,
+                    "timestamp": 1509730587
+                }
+            }
+        },
+        "song_title": "In Dreams",
+        "artist": "Hydrogen Sea",
+        "artist_image": "https://i.scdn.co/image/e636b414e5a4f31545917206c7d96c1d1f3c131f",
+        "cover": "https://i.scdn.co/image/de015e7b2e604b824a4a8bc313cf74361f5dc43c",
+        "album": "In Dreams",
+        "spotify_data": {
+            "id": "4Ba241BgczPHEDea9TCgNV",
+            "name": "In Dreams",
+            "artists": [
+                {
+                    "id": "5MdGszDt9p0CjdUYOidTBH",
+                    "name": "Hydrogen Sea",
+                    "images": [
+                        {
+                            "height": 1000,
+                            "url": "https://i.scdn.co/image/21d5068c26df3314b34a10d1a1ffefa7f227998e",
+                            "width": 1000
+                        },
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/5505610eb6ce51163093380a2518e5a388970a4b",
+                            "width": 640
+                        },
+                        {
+                            "height": 200,
+                            "url": "https://i.scdn.co/image/8ca383be7fe51d8523e69a12d29aa5339dd9169c",
+                            "width": 200
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/e636b414e5a4f31545917206c7d96c1d1f3c131f",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "etherpop"
+                    ],
+                    "popularity": 34,
+                    "uri": "spotify:artist:5MdGszDt9p0CjdUYOidTBH",
+                    "href": "https://open.spotify.com/artist/5MdGszDt9p0CjdUYOidTBH"
+                }
+            ],
+            "artist": "Hydrogen Sea",
+            "cover_url": "https://i.scdn.co/image/de015e7b2e604b824a4a8bc313cf74361f5dc43c",
+            "duration": 271.373,
+            "album": {
+                "id": "6Ta2rNuQC1L2JxOWsnP11N",
+                "name": "In Dreams",
+                "artists": [
+                    {
+                        "id": "5MdGszDt9p0CjdUYOidTBH",
+                        "name": "Hydrogen Sea",
+                        "images": [
+                            {
+                                "height": 1000,
+                                "url": "https://i.scdn.co/image/21d5068c26df3314b34a10d1a1ffefa7f227998e",
+                                "width": 1000
+                            },
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/5505610eb6ce51163093380a2518e5a388970a4b",
+                                "width": 640
+                            },
+                            {
+                                "height": 200,
+                                "url": "https://i.scdn.co/image/8ca383be7fe51d8523e69a12d29aa5339dd9169c",
+                                "width": 200
+                            },
+                            {
+                                "height": 64,
+                                "url": "https://i.scdn.co/image/e636b414e5a4f31545917206c7d96c1d1f3c131f",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "etherpop"
+                        ],
+                        "popularity": 34,
+                        "uri": "spotify:artist:5MdGszDt9p0CjdUYOidTBH",
+                        "href": "https://open.spotify.com/artist/5MdGszDt9p0CjdUYOidTBH"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/de015e7b2e604b824a4a8bc313cf74361f5dc43c",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/4031e6d9d800ed36663e47b8f964ee40a7089b93",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/c5af323cf78ab318eb0aed8bff6e44f296b704a7",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:6Ta2rNuQC1L2JxOWsnP11N"
+            },
+            "popularity": 28,
+            "uri": "spotify:track:4Ba241BgczPHEDea9TCgNV",
+            "query": "Hydrogen Sea - In Dreams",
+            "certainty": 0.9565217391304348
+        }
+    },
+    {
+        "version": 103,
+        "type": "DiscogsEntry",
+        "expected_filename": "cache/audio_cache/youtube-Mk49bXW5Asg-Say_Lou_Lou_-_Instant_Crush_Daft_Punk_Cover.webm",
+        "video_id": "Mk49bXW5Asg",
+        "url": "https://www.youtube.com/watch?v=Mk49bXW5Asg",
+        "title": "Say Lou Lou - Instant Crush (Daft Punk Cover)",
+        "duration": 284,
+        "thumbnail": "https://i.ytimg.com/vi/Mk49bXW5Asg/maxresdefault.jpg",
+        "thumbnail_brightness": 114.011207528044,
+        "description": "Breath-taking cover!\nDownload... http://bit.ly/1vGSSqL\n\nSay Lou Lou\nhttps://soundcloud.com/sayloulou\nhttp://SayLouLou.com\nhttp://facebook.com/SayLouLoumusic\nhttp://twitter.com/SayLouLou\nhttp://youtube.com/SayLouLoumusic\n\nDaft Punk\nhttps://www.facebook.com/daftpunk\n\nPicture by Aliza Razell\nhttps://flic.kr/p/ntkCrV\n\nSheepy on Spotify\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw\n\n*If any producer or label has an issue with any of the uploads please get in contact (suicidesheepy@gmail.com) with me and I will delete it immediately (this includes artists of the images used).",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 14,
+                    "timestamp": 1509739773
+                }
+            }
+        },
+        "song_title": "Instant Crush",
+        "artist": "Say Lou Lou",
+        "artist_image": "https://img.discogs.com/U8E0OLwlLb3sIusGBGTtdyGb_Rs=/600x558/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-3290112-1368525691-6525.jpeg.jpg",
+        "cover": "https://img.discogs.com/oMDtWR5QF7dPB0wcCYjwVVXW4nk=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-7128995-1434369274-4256.jpeg.jpg",
+        "album": "Lucid Dreaming"
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-J_w0mIdrI2E-Ellie_Goulding_-_Love_Me_Like_You_Do_Duck_House_Remix.webm",
+        "video_id": "J_w0mIdrI2E",
+        "url": "https://www.youtube.com/watch?v=J_w0mIdrI2E",
+        "title": "Ellie Goulding - Love Me Like You Do (Duck House Remix)",
+        "duration": 236,
+        "thumbnail": "https://i.ytimg.com/vi/J_w0mIdrI2E/maxresdefault.jpg",
+        "thumbnail_brightness": 60.284948776550955,
+        "description": "This is like candy for your ears :)\nDownload this remix...\nDownload the original... http://apple.co/1ETsP4b\n\nDuck House\nhttps://soundcloud.com/duckhousemusic\nhttps://www.facebook.com/duckhousemusic\n\nEllie Goulding\nhttps://www.facebook.com/elliegoulding\nhttps://twitter.com/elliegoulding\nhttp://elliegoulding.com\n\nReleased by Polydor Records\nhttp://www.polydor.co.uk/\nhttps://www.facebook.com/polydorrecords\nhttps://twitter.com/polydorrecords\n\nPicture by Francis Flower\nhttps://flic.kr/p/pSTJyV\n\nSheepy on Spotify\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 15,
+                    "timestamp": 1509626972
+                }
+            }
+        },
+        "song_title": "Love Me Like You Do - From \"Fifty Shades Of Grey\"",
+        "artist": "Ellie Goulding",
+        "artist_image": "https://i.scdn.co/image/c2fe5d1e00a76b69ecd53164304ce2004f6064e9",
+        "cover": "https://i.scdn.co/image/605a983a9a3460c53364c53e87448613649161f8",
+        "album": "Delirium (Deluxe)",
+        "spotify_data": {
+            "id": "2l8w0zZVn4AZNuzrht7MRT",
+            "name": "Love Me Like You Do - From \"Fifty Shades Of Grey\"",
+            "artists": [
+                {
+                    "id": "0X2BH1fck6amBIoJhDVmmJ",
+                    "name": "Ellie Goulding",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/c2fe5d1e00a76b69ecd53164304ce2004f6064e9",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/dd1852b2a3e4aebc2bb779d642acfa782afad0e7",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/848a19e113ef29d7e5a485a4c3cf2116745ddbff",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "dance pop",
+                        "metropopolis",
+                        "neo mellow",
+                        "pop",
+                        "post-teen pop",
+                        "tropical house"
+                    ],
+                    "popularity": 85,
+                    "uri": "spotify:artist:0X2BH1fck6amBIoJhDVmmJ",
+                    "href": "https://open.spotify.com/artist/0X2BH1fck6amBIoJhDVmmJ"
+                }
+            ],
+            "artist": "Ellie Goulding",
+            "cover_url": "https://i.scdn.co/image/605a983a9a3460c53364c53e87448613649161f8",
+            "duration": 252.534,
+            "album": {
+                "id": "5nhoVKDcCXvi3AruUFJWnv",
+                "name": "Delirium (Deluxe)",
+                "artists": [
+                    {
+                        "id": "0X2BH1fck6amBIoJhDVmmJ",
+                        "name": "Ellie Goulding",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/c2fe5d1e00a76b69ecd53164304ce2004f6064e9",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/dd1852b2a3e4aebc2bb779d642acfa782afad0e7",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/848a19e113ef29d7e5a485a4c3cf2116745ddbff",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "dance pop",
+                            "metropopolis",
+                            "neo mellow",
+                            "pop",
+                            "post-teen pop",
+                            "tropical house"
+                        ],
+                        "popularity": 85,
+                        "uri": "spotify:artist:0X2BH1fck6amBIoJhDVmmJ",
+                        "href": "https://open.spotify.com/artist/0X2BH1fck6amBIoJhDVmmJ"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/605a983a9a3460c53364c53e87448613649161f8",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/d60875408c8cb2c52ddfdcbe3f3e2f1bd9a06619",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/4dbded71dae5809cedc2cf216b45f7d289184235",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:5nhoVKDcCXvi3AruUFJWnv"
+            },
+            "popularity": 70,
+            "uri": "spotify:track:2l8w0zZVn4AZNuzrht7MRT",
+            "query": "Ellie Goulding - Love Me Like You Do",
+            "certainty": 0.9714285714285714
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-6Z9J5cbtZzs-Prismo_-_Neverland.webm",
+        "video_id": "6Z9J5cbtZzs",
+        "url": "https://www.youtube.com/watch?v=6Z9J5cbtZzs",
+        "title": "Prismo - Neverland",
+        "duration": 209,
+        "thumbnail": "https://i.ytimg.com/vi/6Z9J5cbtZzs/maxresdefault.jpg",
+        "thumbnail_brightness": 50.33231923146215,
+        "description": "Feeling Sheepish'...http://bit.ly/SuicideSheepSpotify\n\nNeverland!!!!\nDownload & Stream...http://bit.ly/2ocENTD\n\nPrismo\nhttps://soundcloud.com/prismomusic\nhttps://www.facebook.com/PrismoMusic\nhttps://twitter.com/PrismoMusic\n\nPhoto by Ibai Acevedo\nhttps://flic.kr/p/SKpySK\nhttp://www.ibaiacevedo.com/\n\nFull channel playlist on Spotify!!!!\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs!!\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com/\n\nSheepy shop\nhttp://bit.ly/2eX4dkf\n\nSheepy news\nhttp://bit.ly/2fhUNQB\n\nSubmit tracks\nhttp://bit.ly/2aPHMvw</a",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 16,
+                    "timestamp": 1509624136
+                }
+            }
+        },
+        "song_title": "Neverland",
+        "artist": "Prismo",
+        "artist_image": "https://i.scdn.co/image/2de5a7496ee2fb3dc7a6b381b4cd2447a31a6636",
+        "cover": "https://i.scdn.co/image/9f02aafbed2c1989947aef496f038816e10f7c3b",
+        "album": "Neverland",
+        "spotify_data": {
+            "id": "6MTUG57ceIIPO58mY8az2b",
+            "name": "Neverland",
+            "artists": [
+                {
+                    "id": "23ostNBoB9z6GMXLtHdg7y",
+                    "name": "Prismo",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/932bf2eb6a394b5e3b67952e1d706d66c650aa0a",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/66edbf18486199191fe2b0fe102ffbfb6f946b39",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/2de5a7496ee2fb3dc7a6b381b4cd2447a31a6636",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "bass trap",
+                        "brostep",
+                        "electronic trap",
+                        "tracestep",
+                        "vapor twitch"
+                    ],
+                    "popularity": 61,
+                    "uri": "spotify:artist:23ostNBoB9z6GMXLtHdg7y",
+                    "href": "https://open.spotify.com/artist/23ostNBoB9z6GMXLtHdg7y"
+                }
+            ],
+            "artist": "Prismo",
+            "cover_url": "https://i.scdn.co/image/9f02aafbed2c1989947aef496f038816e10f7c3b",
+            "duration": 209.221,
+            "album": {
+                "id": "0LWpFary2zqi6JKjL2T6ST",
+                "name": "Neverland",
+                "artists": [
+                    {
+                        "id": "23ostNBoB9z6GMXLtHdg7y",
+                        "name": "Prismo",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/932bf2eb6a394b5e3b67952e1d706d66c650aa0a",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/66edbf18486199191fe2b0fe102ffbfb6f946b39",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/2de5a7496ee2fb3dc7a6b381b4cd2447a31a6636",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "bass trap",
+                            "brostep",
+                            "electronic trap",
+                            "tracestep",
+                            "vapor twitch"
+                        ],
+                        "popularity": 61,
+                        "uri": "spotify:artist:23ostNBoB9z6GMXLtHdg7y",
+                        "href": "https://open.spotify.com/artist/23ostNBoB9z6GMXLtHdg7y"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/9f02aafbed2c1989947aef496f038816e10f7c3b",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/cf43ddb054d119fa3dae0b70b167fd1b3c95844a",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/d3362a9e5a57ad0b5b591dc679b8f1dd3b2a7f91",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:0LWpFary2zqi6JKjL2T6ST"
+            },
+            "popularity": 54,
+            "uri": "spotify:track:6MTUG57ceIIPO58mY8az2b",
+            "query": "Prismo - Neverland",
+            "certainty": 0.9411764705882353
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-me1coIRCjzU-Little_Daylight_-_Overdose_Twice_As_Nice_Remix.m4a",
+        "video_id": "me1coIRCjzU",
+        "url": "https://www.youtube.com/watch?v=me1coIRCjzU",
+        "title": "Little Daylight - Overdose (Twice As Nice Remix)",
+        "duration": 233,
+        "thumbnail": "https://i.ytimg.com/vi/me1coIRCjzU/maxresdefault.jpg",
+        "thumbnail_brightness": 120.23282689705741,
+        "description": "Fuck yes, this is so amazing!\nPurchase the original\nhttps://itunes.apple.com/us/album/ove...\n\nTwice As Nice\nhttps://soundcloud.com/twiceasnice-1\nhttps://www.facebook.com/pages/Twice-...\nhttps://twitter.com/TwiceAsNiceAus\n\nLittle Daylight\nhttps://soundcloud.com/littledaylight\nhttps://www.facebook.com/littledaylig...\nhttp://littledaylightsounds.tumblr.com/\n\nArtwork by Emily Szabo\nhttp://www.flickr.com/photos/emilysza...\n\nSheepy on Spotify\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nWebsite\nhttp://mrsuicidesheep.com/\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw\n\n\n*If any producer or label has an issue with any of the uploads please get in contact (suicide_sheep@hotmail.com) with me and I will delete it immediately (this includes artists of the images used).",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 17,
+                    "timestamp": 1509735621
+                }
+            }
+        },
+        "song_title": "Overdose",
+        "artist": "Little Daylight",
+        "artist_image": "https://i.scdn.co/image/986a7794829aaa98665eb2ff19e612270d7415d4",
+        "cover": "https://i.scdn.co/image/7f6664c39dedc01ea0117fb7638c65042628881b",
+        "album": "Hello Memory",
+        "spotify_data": {
+            "id": "0RDobfQ4AtlQ4EBKkiQkln",
+            "name": "Overdose",
+            "artists": [
+                {
+                    "id": "63aFY9yQyFDJtGkInMUris",
+                    "name": "Little Daylight",
+                    "images": [
+                        {
+                            "height": 501,
+                            "url": "https://i.scdn.co/image/984173e021cb1feab2e879a0b64bb8f7a78de5fc",
+                            "width": 999
+                        },
+                        {
+                            "height": 321,
+                            "url": "https://i.scdn.co/image/ea3e56c0ef90917ba71ee6afe5255c21a1967889",
+                            "width": 640
+                        },
+                        {
+                            "height": 100,
+                            "url": "https://i.scdn.co/image/986a7794829aaa98665eb2ff19e612270d7415d4",
+                            "width": 199
+                        },
+                        {
+                            "height": 32,
+                            "url": "https://i.scdn.co/image/9ed7ae40d54929edeebd9ed578214abc7847175d",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "brooklyn indie",
+                        "indie poptimism",
+                        "indietronica",
+                        "metropopolis",
+                        "shimmer pop"
+                    ],
+                    "popularity": 58,
+                    "uri": "spotify:artist:63aFY9yQyFDJtGkInMUris",
+                    "href": "https://open.spotify.com/artist/63aFY9yQyFDJtGkInMUris"
+                }
+            ],
+            "artist": "Little Daylight",
+            "cover_url": "https://i.scdn.co/image/7f6664c39dedc01ea0117fb7638c65042628881b",
+            "duration": 238.834,
+            "album": {
+                "id": "2BtzaGfLl5bXlJt6LnznSe",
+                "name": "Hello Memory",
+                "artists": [
+                    {
+                        "id": "63aFY9yQyFDJtGkInMUris",
+                        "name": "Little Daylight",
+                        "images": [
+                            {
+                                "height": 501,
+                                "url": "https://i.scdn.co/image/984173e021cb1feab2e879a0b64bb8f7a78de5fc",
+                                "width": 999
+                            },
+                            {
+                                "height": 321,
+                                "url": "https://i.scdn.co/image/ea3e56c0ef90917ba71ee6afe5255c21a1967889",
+                                "width": 640
+                            },
+                            {
+                                "height": 100,
+                                "url": "https://i.scdn.co/image/986a7794829aaa98665eb2ff19e612270d7415d4",
+                                "width": 199
+                            },
+                            {
+                                "height": 32,
+                                "url": "https://i.scdn.co/image/9ed7ae40d54929edeebd9ed578214abc7847175d",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "brooklyn indie",
+                            "indie poptimism",
+                            "indietronica",
+                            "metropopolis",
+                            "shimmer pop"
+                        ],
+                        "popularity": 58,
+                        "uri": "spotify:artist:63aFY9yQyFDJtGkInMUris",
+                        "href": "https://open.spotify.com/artist/63aFY9yQyFDJtGkInMUris"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/7f6664c39dedc01ea0117fb7638c65042628881b",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/d15d4cc9dccaf20e9674cc79692072f1ae2879bb",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/b4210266eaa47189df39014df1e80c8ad5028eb9",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:2BtzaGfLl5bXlJt6LnznSe"
+            },
+            "popularity": 37,
+            "uri": "spotify:track:0RDobfQ4AtlQ4EBKkiQkln",
+            "query": "Little Daylight - Overdose",
+            "certainty": 0.96
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-DfTUs-s_XkI-Skott_-_Porcelain.webm",
+        "video_id": "DfTUs-s_XkI",
+        "url": "https://www.youtube.com/watch?v=DfTUs-s_XkI",
+        "title": "Skott - Porcelain",
+        "duration": 241,
+        "thumbnail": "https://i.ytimg.com/vi/DfTUs-s_XkI/maxresdefault.jpg",
+        "thumbnail_brightness": 120.46690226248049,
+        "description": "Feeling Sheepish'...http://bit.ly/SuicideSheepSpotify\n\nPorcelain!\nGet the vinyl... https://www.youtube.com/redirect?q=http%3A%2F%2Fwww.b3scirecords.com%2Fproduct%2Fb3sr-045-skott-porcelain-wolf&redir_token=oy5yqGc7__g7W1jI-l0E94CZ9el8MTUwOTcwODI3MUAxNTA5NjIxODcx&v=DfTUs-s_XkI&event=video_description\nhttps://www.youtube.com/redirect?q=http%3A%2F%2Fchessclub-records.co.uk%2F2016%2F06%2Fpremiere-skott-porcelain%2F&redir_token=oy5yqGc7__g7W1jI-l0E94CZ9el8MTUwOTcwODI3MUAxNTA5NjIxODcx&v=DfTUs-s_XkI&event=video_description\n\nSkott\nhttps://soundcloud.com/skottpeace\nhttps://www.facebook.com/skottmusic\nhttps://twitter.com/skottpeace\n\nPicture by Felicia Simion\nhttp://feliciasimionphotography.com\nhttp://instagram.com/feliciasimion\n\nFull channel playlist on Spotify!!!! Click and listen for hours!\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com/\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw</a",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 18,
+                    "timestamp": 1509623595
+                }
+            }
+        },
+        "song_title": "Porcelain",
+        "artist": "Skott",
+        "artist_image": "https://i.scdn.co/image/ecfaec9b4a2b2bc98cc457bcfaff88b3634b92b7",
+        "cover": "https://i.scdn.co/image/40318d3b16310262302c4a459a03e0fd8a45f886",
+        "album": "Porcelain / Wolf",
+        "spotify_data": {
+            "id": "0zDzOFSvggZ6IGHJllWg3F",
+            "name": "Porcelain",
+            "artists": [
+                {
+                    "id": "6J3RPKUwZlKMzh3vWa9wPc",
+                    "name": "Skott",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/d2341e8d0230f4e287cc6d784cbdfa8588e277ba",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/d7b1ff55afbe06f1bd0e100ebe1b81849af0ac3f",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/ecfaec9b4a2b2bc98cc457bcfaff88b3634b92b7",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "indie poptimism",
+                        "vapor soul"
+                    ],
+                    "popularity": 60,
+                    "uri": "spotify:artist:6J3RPKUwZlKMzh3vWa9wPc",
+                    "href": "https://open.spotify.com/artist/6J3RPKUwZlKMzh3vWa9wPc"
+                }
+            ],
+            "artist": "Skott",
+            "cover_url": "https://i.scdn.co/image/40318d3b16310262302c4a459a03e0fd8a45f886",
+            "duration": 241.173,
+            "album": {
+                "id": "1bzDS48dDj7JGzkNAaGEwL",
+                "name": "Porcelain / Wolf",
+                "artists": [
+                    {
+                        "id": "6J3RPKUwZlKMzh3vWa9wPc",
+                        "name": "Skott",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/d2341e8d0230f4e287cc6d784cbdfa8588e277ba",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/d7b1ff55afbe06f1bd0e100ebe1b81849af0ac3f",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/ecfaec9b4a2b2bc98cc457bcfaff88b3634b92b7",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "indie poptimism",
+                            "vapor soul"
+                        ],
+                        "popularity": 60,
+                        "uri": "spotify:artist:6J3RPKUwZlKMzh3vWa9wPc",
+                        "href": "https://open.spotify.com/artist/6J3RPKUwZlKMzh3vWa9wPc"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/40318d3b16310262302c4a459a03e0fd8a45f886",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/3a51fb5026c6512413fc8171d337e07ee6b077ca",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/d82139379cca4a963f67ace0b1f2ab68a5e3757f",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:1bzDS48dDj7JGzkNAaGEwL"
+            },
+            "popularity": 47,
+            "uri": "spotify:track:0zDzOFSvggZ6IGHJllWg3F",
+            "query": "Skott - Porcelain",
+            "certainty": 0.9375
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-AsqDPqII6-Q-Lauv_-_Reforget.webm",
+        "video_id": "AsqDPqII6-Q",
+        "url": "https://www.youtube.com/watch?v=AsqDPqII6-Q",
+        "title": "Lauv - Reforget",
+        "duration": 231,
+        "thumbnail": "https://i.ytimg.com/vi/AsqDPqII6-Q/maxresdefault.jpg",
+        "thumbnail_brightness": 70.76631303289089,
+        "description": "So happy to feature Lauv on the channel again!\nDownload... http://apple.co/1FOSZrI\n\nLauv\nhttp://lauvsongs.com\nhttp://soundcloud.com/lauvsongs\nhttp://facebook.com/lauvsongs\nhttp://twitter.com/lauvsongs\nhttps://instagram.com/_lauvsongs/\n\nPicture by Craig Gibson\nhttps://flic.kr/p/9hzgwt\nhttp://www.gibbers.co.uk/\n\nSheepy on Spotify\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 19,
+                    "timestamp": 1509739493
+                }
+            }
+        },
+        "song_title": "Reforget",
+        "artist": "Lauv",
+        "artist_image": "https://i.scdn.co/image/37d1c41970952292290a05617ac21f75ceceffae",
+        "cover": "https://i.scdn.co/image/35dcc2590052f8e802372400bd4344ee3864775a",
+        "album": "Reforget",
+        "spotify_data": {
+            "id": "7F8HihW3isdKTe2ttVRghq",
+            "name": "Reforget",
+            "artists": [
+                {
+                    "id": "5JZ7CnR6gTvEMKX4g70Amv",
+                    "name": "Lauv",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/37d1c41970952292290a05617ac21f75ceceffae",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/c851287790a53440335b7c7a1a2d0f4ddb4be0cd",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/3d22d4fd4aa1f69bba4c985ec5c93f53e9b7eb86",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "pop",
+                        "post-teen pop",
+                        "tropical house"
+                    ],
+                    "popularity": 89,
+                    "uri": "spotify:artist:5JZ7CnR6gTvEMKX4g70Amv",
+                    "href": "https://open.spotify.com/artist/5JZ7CnR6gTvEMKX4g70Amv"
+                }
+            ],
+            "artist": "Lauv",
+            "cover_url": "https://i.scdn.co/image/35dcc2590052f8e802372400bd4344ee3864775a",
+            "duration": 231.676,
+            "album": {
+                "id": "4HHQ3huWUmo8ohfg1YVOap",
+                "name": "Reforget",
+                "artists": [
+                    {
+                        "id": "5JZ7CnR6gTvEMKX4g70Amv",
+                        "name": "Lauv",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/37d1c41970952292290a05617ac21f75ceceffae",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/c851287790a53440335b7c7a1a2d0f4ddb4be0cd",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/3d22d4fd4aa1f69bba4c985ec5c93f53e9b7eb86",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "pop",
+                            "post-teen pop",
+                            "tropical house"
+                        ],
+                        "popularity": 89,
+                        "uri": "spotify:artist:5JZ7CnR6gTvEMKX4g70Amv",
+                        "href": "https://open.spotify.com/artist/5JZ7CnR6gTvEMKX4g70Amv"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/35dcc2590052f8e802372400bd4344ee3864775a",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/f4b7473ac9dc9d159e9b413d4251258f400da386",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/feb5694167700ebd434306e89e60eb60fb1835ab",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:4HHQ3huWUmo8ohfg1YVOap"
+            },
+            "popularity": 68,
+            "uri": "spotify:track:7F8HihW3isdKTe2ttVRghq",
+            "query": "Lauv - Reforget",
+            "certainty": 0.9285714285714286
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-p2M8GzCBZkM-Ryder_-_Ruins.webm",
+        "video_id": "p2M8GzCBZkM",
+        "url": "https://www.youtube.com/watch?v=p2M8GzCBZkM",
+        "title": "Ryder - Ruins",
+        "duration": 273,
+        "thumbnail": "https://i.ytimg.com/vi/p2M8GzCBZkM/maxresdefault.jpg",
+        "thumbnail_brightness": 92.4549601870432,
+        "description": "Feeling Sheepish'...http://bit.ly/SuicideSheepSpotify\n\nI'm in ruins from this track!\nDownload for free... http://bit.ly/1OxhoFS\n\nRyder\nhttps://soundcloud.com/thisisryder\nhttps://www.facebook.com/ThisisRyder\nhttp://thisisryder.com/\nhttps://twitter.com/rydertweets\n\nPicture by Sandra Scherer\nhttps://flic.kr/p/pjX8EP\nhttp://www.analora-photoart.de/\n\nSheepy on Spotify\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw</a",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 20,
+                    "timestamp": 1509739249
+                }
+            }
+        },
+        "song_title": "Ruins",
+        "artist": "Ryder",
+        "artist_image": "https://i.scdn.co/image/af2731bfb8c295d211fd46559200e1b9faeff5f6",
+        "cover": "https://i.scdn.co/image/aeaa91a8d6bc43b3bd229dc50d4b76fef29bd833",
+        "album": "Ruins",
+        "spotify_data": {
+            "id": "6OXU517AeB6iYEMy10rRmr",
+            "name": "Ruins",
+            "artists": [
+                {
+                    "id": "69DKP6GuG0YiUc5K7tJ4an",
+                    "name": "Ryder",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/4e7fd6bb9f8a15a3ab0dd9af914e12e693e16092",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/19235288dfc3a3b7360aa609b980a6db866c60f1",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/af2731bfb8c295d211fd46559200e1b9faeff5f6",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [],
+                    "popularity": 48,
+                    "uri": "spotify:artist:69DKP6GuG0YiUc5K7tJ4an",
+                    "href": "https://open.spotify.com/artist/69DKP6GuG0YiUc5K7tJ4an"
+                }
+            ],
+            "artist": "Ryder",
+            "cover_url": "https://i.scdn.co/image/aeaa91a8d6bc43b3bd229dc50d4b76fef29bd833",
+            "duration": 274.18,
+            "album": {
+                "id": "2fVlFbOiFbDyW5LoUEs6x0",
+                "name": "Ruins",
+                "artists": [
+                    {
+                        "id": "69DKP6GuG0YiUc5K7tJ4an",
+                        "name": "Ryder",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/4e7fd6bb9f8a15a3ab0dd9af914e12e693e16092",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/19235288dfc3a3b7360aa609b980a6db866c60f1",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/af2731bfb8c295d211fd46559200e1b9faeff5f6",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [],
+                        "popularity": 48,
+                        "uri": "spotify:artist:69DKP6GuG0YiUc5K7tJ4an",
+                        "href": "https://open.spotify.com/artist/69DKP6GuG0YiUc5K7tJ4an"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/aeaa91a8d6bc43b3bd229dc50d4b76fef29bd833",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/70632a30281952832c10596989563990ff65511c",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/5a2bf5c949bf24cb26229921a9694f6de2c6497a",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:2fVlFbOiFbDyW5LoUEs6x0"
+            },
+            "popularity": 40,
+            "uri": "spotify:track:6OXU517AeB6iYEMy10rRmr",
+            "query": "Ryder - Ruins",
+            "certainty": 0.9166666666666666
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-HPTpjP229Gs-Joe_Hertz_-_Swimming_JNTHN_STEIN_Remix_ft._James_Vickery.NA",
+        "video_id": "HPTpjP229Gs",
+        "url": "https://www.youtube.com/watch?v=HPTpjP229Gs",
+        "title": "Joe Hertz - Swimming (JNTHN STEIN Remix) [ft. James Vickery]",
+        "duration": 267,
+        "thumbnail": "https://i.ytimg.com/vi/HPTpjP229Gs/default.jpg",
+        "thumbnail_brightness": 59.59944349776209,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 21,
+                    "timestamp": 1506177507
+                }
+            }
+        },
+        "song_title": "Swimming - JNTHN STEIN Remix",
+        "artist": "Joe Hertz & James Vickery",
+        "artist_image": "https://i.scdn.co/image/6c1b5abafb8e3ff8feaaf2ad84581f03554d997a",
+        "cover": "https://i.scdn.co/image/70ec6a728aea8e9c8ca4d7fecbecbd23f80a3ad0",
+        "album": "Swimming (JNTHN STEIN Remix)",
+        "spotify_data": {
+            "id": "4KjMVOw0XKJvsYc3rYjaZ3",
+            "name": "Swimming - JNTHN STEIN Remix",
+            "artists": [
+                {
+                    "id": "76QHVIjgqlkWB9LNGliman",
+                    "name": "Joe Hertz",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/cfe08188b8b8e5a9b9625fee3d54def832c1bc18",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/6c1b5abafb8e3ff8feaaf2ad84581f03554d997a",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/16a0f30789129addc44820520d5f1f74b3584269",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "deep indie r&b",
+                        "indie r&b",
+                        "tropical house",
+                        "vapor soul",
+                        "vapor twitch"
+                    ],
+                    "popularity": 59,
+                    "uri": "spotify:artist:76QHVIjgqlkWB9LNGliman",
+                    "href": "https://open.spotify.com/artist/76QHVIjgqlkWB9LNGliman"
+                },
+                {
+                    "id": "68tR0TsEKX89ID4fyBMgch",
+                    "name": "James Vickery",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/7f2bc508e49eaf8df44b1970e4854bc6f5f7cdbf",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/2d2e123e000447d8f379850ba90b151f12844e39",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/858500cdd23d82cb40b3eadd699251c01114218b",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [],
+                    "popularity": 47,
+                    "uri": "spotify:artist:68tR0TsEKX89ID4fyBMgch",
+                    "href": "https://open.spotify.com/artist/68tR0TsEKX89ID4fyBMgch"
+                },
+                {
+                    "id": "2tW7TitNzNibILuWCEhBLS",
+                    "name": "JNTHN STEIN",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/8e2de47ceb7bc5a33afa9ae90e27aa92a399eefc",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/7da2fac487766157f140716b2c46a259e21e0f08",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/e49194389c239ea2d7c84a8267c76c8973ca5886",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "electronic trap",
+                        "vapor twitch"
+                    ],
+                    "popularity": 45,
+                    "uri": "spotify:artist:2tW7TitNzNibILuWCEhBLS",
+                    "href": "https://open.spotify.com/artist/2tW7TitNzNibILuWCEhBLS"
+                }
+            ],
+            "artist": "Joe Hertz & James Vickery",
+            "cover_url": "https://i.scdn.co/image/70ec6a728aea8e9c8ca4d7fecbecbd23f80a3ad0",
+            "duration": 266.373,
+            "album": {
+                "id": "4I9u5gDpRMmUzKHnEQnoaP",
+                "name": "Swimming (JNTHN STEIN Remix)",
+                "artists": [
+                    {
+                        "id": "76QHVIjgqlkWB9LNGliman",
+                        "name": "Joe Hertz",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/cfe08188b8b8e5a9b9625fee3d54def832c1bc18",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/6c1b5abafb8e3ff8feaaf2ad84581f03554d997a",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/16a0f30789129addc44820520d5f1f74b3584269",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "deep indie r&b",
+                            "indie r&b",
+                            "tropical house",
+                            "vapor soul",
+                            "vapor twitch"
+                        ],
+                        "popularity": 59,
+                        "uri": "spotify:artist:76QHVIjgqlkWB9LNGliman",
+                        "href": "https://open.spotify.com/artist/76QHVIjgqlkWB9LNGliman"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/70ec6a728aea8e9c8ca4d7fecbecbd23f80a3ad0",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/1308aa528e5ef5c347f528f293a23e54a8696dd6",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/66d0270019404da05307cba354aef89ad2fb6276",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:4I9u5gDpRMmUzKHnEQnoaP"
+            },
+            "popularity": 47,
+            "uri": "spotify:track:4KjMVOw0XKJvsYc3rYjaZ3",
+            "query": "Joe Hertz - Swimming James Vickery",
+            "certainty": 0.6923076923076923
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-ypWwCRGQ19w-Gallant_-_Talking_To_Myself.webm",
+        "video_id": "ypWwCRGQ19w",
+        "url": "https://www.youtube.com/watch?v=ypWwCRGQ19w",
+        "title": "Gallant - Talking To Myself",
+        "duration": 238,
+        "thumbnail": "https://i.ytimg.com/vi/ypWwCRGQ19w/maxresdefault.jpg",
+        "thumbnail_brightness": 141.479355436443,
+        "description": "Talking To Myself!\nSee Gallant Live...http://www.gallant.space/\nDownload... http://apple.co/23adoET\n\nGallant\nhttps://soundcloud.com/gallant\nhttps://twitter.com/sogallant\nhttps://www.facebook.com/sogallant\nhttps://www.instagram.com/sogallant/\n\nReleased by Mind of A Genius\n\nArtwork by Ibai Acevedo\nhttps://flic.kr/p/79HSTZ\nhttp://ibaiacevedo.com/\nhttps://www.youtube.com/redirect?redir_token=BNozpu7SdgJHm2Kia4QSTs_HvMF8MTUwOTcwODI2NEAxNTA5NjIxODY0&v=ypWwCRGQ19w&q=https%3A%2F%2Fwww.facebook.com%2Fibaiacevedophotography%2F&event=video_description\n\nFull channel playlist on Spotify!!!! Click and listen for hours!\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com/\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 22,
+                    "timestamp": 1509625257
+                }
+            }
+        },
+        "song_title": "Talking to Myself",
+        "artist": "Gallant",
+        "artist_image": "https://i.scdn.co/image/218a4ad93b0858f78d0bd7587f5e857878095c3d",
+        "cover": "https://i.scdn.co/image/33e98f8ecb1810092d4dd7ddd66d6b14e514eb08",
+        "album": "Ology",
+        "spotify_data": {
+            "id": "5ivOiIOSkypt3P1jqjlmcf",
+            "name": "Talking to Myself",
+            "artists": [
+                {
+                    "id": "7wFDo161xYdeaiLz3KIHoM",
+                    "name": "Gallant",
+                    "images": [
+                        {
+                            "height": 1000,
+                            "url": "https://i.scdn.co/image/218a4ad93b0858f78d0bd7587f5e857878095c3d",
+                            "width": 1000
+                        },
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/e9ebfc1ce4b5b03a1940c09d6421627b0c75eefb",
+                            "width": 640
+                        },
+                        {
+                            "height": 200,
+                            "url": "https://i.scdn.co/image/adae4f31c662de413f053e9b8833039c44b21cf8",
+                            "width": 200
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/03e10773c8ca553c179a416422242783c683e3bd",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "deep indie r&b",
+                        "indie poptimism",
+                        "indie r&b"
+                    ],
+                    "popularity": 66,
+                    "uri": "spotify:artist:7wFDo161xYdeaiLz3KIHoM",
+                    "href": "https://open.spotify.com/artist/7wFDo161xYdeaiLz3KIHoM"
+                }
+            ],
+            "artist": "Gallant",
+            "cover_url": "https://i.scdn.co/image/33e98f8ecb1810092d4dd7ddd66d6b14e514eb08",
+            "duration": 237.56,
+            "album": {
+                "id": "4VZh7EI0gjL2FkLWNBVIWf",
+                "name": "Ology",
+                "artists": [
+                    {
+                        "id": "7wFDo161xYdeaiLz3KIHoM",
+                        "name": "Gallant",
+                        "images": [
+                            {
+                                "height": 1000,
+                                "url": "https://i.scdn.co/image/218a4ad93b0858f78d0bd7587f5e857878095c3d",
+                                "width": 1000
+                            },
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/e9ebfc1ce4b5b03a1940c09d6421627b0c75eefb",
+                                "width": 640
+                            },
+                            {
+                                "height": 200,
+                                "url": "https://i.scdn.co/image/adae4f31c662de413f053e9b8833039c44b21cf8",
+                                "width": 200
+                            },
+                            {
+                                "height": 64,
+                                "url": "https://i.scdn.co/image/03e10773c8ca553c179a416422242783c683e3bd",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "deep indie r&b",
+                            "indie poptimism",
+                            "indie r&b"
+                        ],
+                        "popularity": 66,
+                        "uri": "spotify:artist:7wFDo161xYdeaiLz3KIHoM",
+                        "href": "https://open.spotify.com/artist/7wFDo161xYdeaiLz3KIHoM"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/33e98f8ecb1810092d4dd7ddd66d6b14e514eb08",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/db2787a83c73500bc6d268b42b7957cc7aa39916",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/f8b530660d852940b8e4209962107d8f2c191717",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:4VZh7EI0gjL2FkLWNBVIWf"
+            },
+            "popularity": 57,
+            "uri": "spotify:track:5ivOiIOSkypt3P1jqjlmcf",
+            "query": "Gallant - Talking To Myself",
+            "certainty": 0.9615384615384616
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-OLRovuOleP0-Wafia_-_Let_Me_Love_You_prod._Thrupence.webm",
+        "video_id": "OLRovuOleP0",
+        "url": "https://www.youtube.com/watch?v=OLRovuOleP0",
+        "title": "Wafia - Let Me Love You (prod. Thrupence)",
+        "duration": 194,
+        "thumbnail": "https://i.ytimg.com/vi/OLRovuOleP0/maxresdefault.jpg",
+        "thumbnail_brightness": 136.00229093272281,
+        "description": "A smooth track for the end of the week. Enjoy!\n\nWafia\nhttps://soundcloud.com/wafia\nhttps://www.facebook.com/WafiaMusic\nhttps://twitter.com/Waffiaa\n\nProduced by Thrupence\nhttps://soundcloud.com/Thrupence\nhttps://www.facebook.com/pages/Thrupe...\n\nPicture by Alejandra Maria\nhttps://flic.kr/p/d9EDMi\n\nSheepy on Spotify\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw\n\n*If any producer or label has an issue with any of the uploads please get in contact (suicidesheepy@gmail.com) with me and I will delete it immediately (this includes artists of the images used).",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 23,
+                    "timestamp": 1509625817
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-PnfkZrbqqVs-Illenium_-_With_You_feat._Quinn_XCII.webm",
+        "video_id": "PnfkZrbqqVs",
+        "url": "https://www.youtube.com/watch?v=PnfkZrbqqVs",
+        "title": "Illenium - With You (feat. Quinn XCII)",
+        "duration": 186,
+        "thumbnail": "https://i.ytimg.com/vi/PnfkZrbqqVs/maxresdefault.jpg",
+        "thumbnail_brightness": 174.58567456717995,
+        "description": "Illenium has instantly become one of my favourite artists with this! Quinn's vocals really stand out and make this one special.\nSee Illenium in Denver :) https://bitly.com/illeniumNov10\nDownload...http://apple.co/1OmQT39\nGet it onBandcamp...http://bit.ly/1OmR3aG\nStream on Spotify...http://spoti.fi/20jX3vM\n\nIllenium\nhttps://soundcloud.com/illeniumofficial\nhttps://www.facebook.com/Illenium/\nhttps://twitter.com/ILLENIUMMUSIC\n\nQuinn XCII\nhttps://www.facebook.com/quinnxcii\nhttps://soundcloud.com/quinn-official\nhttps://twitter.com/quinnxcii\nhttps://www.youtube.com/user/WatchQuinn\n\nReleased by Kasaya / Seeking Blue\n\nPicture by Andr\u00e9 Josselin\nhttps://flic.kr/p/ynjQKG\nhttps://www.facebook.com/jerseyyy/\nhttps://www.instagram.com/andrejosselin/\n\nFull channel playlist - click and listen for hours!\nhttps://www.youtube.com/playlist?list...\n\nSheepy on Spotify\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 24,
+                    "timestamp": 1509893361
+                }
+            }
+        },
+        "song_title": "With You (feat. Quinn XCII)",
+        "artist": "Illenium & Quinn XCII",
+        "artist_image": "https://i.scdn.co/image/4ff48c6e0abf049a268b211c4e20ad4acd87ff76",
+        "cover": "https://i.scdn.co/image/b8e654b7154a051c6634343cbfa2c6897b95b52b",
+        "album": "Ashes",
+        "spotify_data": {
+            "id": "5qxLvazzinSf4Cb1N6zIhb",
+            "name": "With You (feat. Quinn XCII)",
+            "artists": [
+                {
+                    "id": "45eNHdiiabvmbp4erw26rg",
+                    "name": "Illenium",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/4ff48c6e0abf049a268b211c4e20ad4acd87ff76",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/24916fb9a3ac03fa6247eb1503213d3210874121",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/4a63e36024411b5e76bb09255ee2da821c58613d",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "bass trap",
+                        "brostep",
+                        "edm",
+                        "electro house",
+                        "electronic trap",
+                        "indie poptimism",
+                        "tropical house"
+                    ],
+                    "popularity": 81,
+                    "uri": "spotify:artist:45eNHdiiabvmbp4erw26rg",
+                    "href": "https://open.spotify.com/artist/45eNHdiiabvmbp4erw26rg"
+                },
+                {
+                    "id": "3ApUX1o6oSz321MMECyIYd",
+                    "name": "Quinn XCII",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/938bcfbfc6fbb86f83eda389b4d7f6d0d6a9af02",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/28048cb1d538c4c781fa531ff4a62573eab81ae6",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/804776456d339f9328760102c12544d8ea814d15",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "indie poptimism"
+                    ],
+                    "popularity": 79,
+                    "uri": "spotify:artist:3ApUX1o6oSz321MMECyIYd",
+                    "href": "https://open.spotify.com/artist/3ApUX1o6oSz321MMECyIYd"
+                }
+            ],
+            "artist": "Illenium & Quinn XCII",
+            "cover_url": "https://i.scdn.co/image/b8e654b7154a051c6634343cbfa2c6897b95b52b",
+            "duration": 186.125,
+            "album": {
+                "id": "1aNWsfl6osnt0NO7Kubknx",
+                "name": "Ashes",
+                "artists": [
+                    {
+                        "id": "45eNHdiiabvmbp4erw26rg",
+                        "name": "Illenium",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/4ff48c6e0abf049a268b211c4e20ad4acd87ff76",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/24916fb9a3ac03fa6247eb1503213d3210874121",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/4a63e36024411b5e76bb09255ee2da821c58613d",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "bass trap",
+                            "brostep",
+                            "edm",
+                            "electro house",
+                            "electronic trap",
+                            "indie poptimism",
+                            "tropical house"
+                        ],
+                        "popularity": 81,
+                        "uri": "spotify:artist:45eNHdiiabvmbp4erw26rg",
+                        "href": "https://open.spotify.com/artist/45eNHdiiabvmbp4erw26rg"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/b8e654b7154a051c6634343cbfa2c6897b95b52b",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/5addb9ef63968d4f859ddbb0892bb55561a8f987",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/d5cc0fa5c22198d870647823868e9d26f1737594",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:1aNWsfl6osnt0NO7Kubknx"
+            },
+            "popularity": 66,
+            "uri": "spotify:track:5qxLvazzinSf4Cb1N6zIhb",
+            "query": "Illenium - With You",
+            "certainty": 0.9444444444444444
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-0rflghuHtg8-EDEN_-_drugs.webm",
+        "video_id": "0rflghuHtg8",
+        "url": "https://www.youtube.com/watch?v=0rflghuHtg8",
+        "title": "EDEN - drugs",
+        "duration": 338,
+        "thumbnail": "https://i.ytimg.com/vi/0rflghuHtg8/maxresdefault.jpg",
+        "thumbnail_brightness": 88.06673732271571,
+        "description": "drugs!\nPre-order EDEN's new EP... http://ftrbnd.co/shop\nEDEN's Tour...http://ftrbnd.co/tour\nListen on Spotify... http://ftrbnd.co/drugsspotify\n\nEDEN\nhttps://soundcloud.com/iameden\nhttps://www.facebook.com/iameden\nhttps://twitter.com/iameden\nhttp://mcmxcv.eu/\nhttps://www.instagram.com/iameden/\n\nArtwork by Kent MacDonald\nhttps://flic.kr/p/qwifto\n\nFull channel playlist on Spotify!!!! Click and listen for hours!\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com/\n\nSheepy Shop\nhttp://bit.ly/2eX4dkf\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 25,
+                    "timestamp": 1509622418
+                }
+            }
+        },
+        "song_title": "drugs",
+        "artist": "EDEN",
+        "artist_image": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
+        "cover": "https://i.scdn.co/image/236b285e0b349526486dd03a3807f4904b195ecf",
+        "album": "i think you think too much of me",
+        "spotify_data": {
+            "id": "3OXpdrHLT4IqM76RajgM6Q",
+            "name": "drugs",
+            "artists": [
+                {
+                    "id": "1t20wYnTiAT0Bs7H1hv9Wt",
+                    "name": "EDEN",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [],
+                    "popularity": 74,
+                    "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
+                    "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
+                }
+            ],
+            "artist": "EDEN",
+            "cover_url": "https://i.scdn.co/image/236b285e0b349526486dd03a3807f4904b195ecf",
+            "duration": 338.333,
+            "album": {
+                "id": "7AVvQhnDEUidKyJsXmQ7ju",
+                "name": "i think you think too much of me",
+                "artists": [
+                    {
+                        "id": "1t20wYnTiAT0Bs7H1hv9Wt",
+                        "name": "EDEN",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [],
+                        "popularity": 74,
+                        "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
+                        "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/236b285e0b349526486dd03a3807f4904b195ecf",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/28538bd832caa5a8db8a742d6c6292414698387c",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/98d73ed80df7ba067e8cab539456900d060e894a",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:7AVvQhnDEUidKyJsXmQ7ju"
+            },
+            "popularity": 65,
+            "uri": "spotify:track:3OXpdrHLT4IqM76RajgM6Q",
+            "query": "EDEN - Drugs",
+            "certainty": 0.9090909090909091
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-52FBvP7z2LU-gnash_-_i_hate_u_i_love_u_feat._olivia_o_brien_lyrics.webm",
+        "video_id": "52FBvP7z2LU",
+        "url": "https://www.youtube.com/watch?v=52FBvP7z2LU",
+        "title": "gnash - i hate u i love u (feat. olivia o'brien) (lyrics)",
+        "duration": 227,
+        "thumbnail": "https://i.ytimg.com/vi/52FBvP7z2LU/maxresdefault.jpg",
+        "thumbnail_brightness": 90.24112782495173,
+        "description": "I hate you I love you... gnash's track 'i hate u i love u' with olivia o'brien is one of the best things I've heard this year!\nWatch the official music video...http://bit.ly/1Ry9dxd\nDownload... http://bit.ly/1R3ga4Y\nStream on Spotify...http://spoti.fi/1VBTQDJ\n\nLyrics\n\nFeeling used\nBut I'm\nStill missing you\nAnd I can't\nSee the end of this\nJust wanna feel your kiss\nAgainst my lips\nAnd now all this time\nIs passing by\nBut I still can't seem to tell you why\nIt hurts me every time I see you\nRealize how much I need you\n\nI hate you I love you\nI hate that I love you\nDon't want to, but I can't put\nNobody else above you\nI hate you I love you\nI hate that I want you\nYou want her, you need her\nAnd I'll never be her\n\nI miss you when I can't sleep\nOr right after coffee\nOr right when I can't eat\nI miss you in my front seat\nStill got sand in my sweaters\nFrom nights we don't remember\nDo you miss me like I miss you?\nFucked around and got attached to you\nFriends can break your heart too, and\nI'm always tired but never of you\nIf I pulled a you on you, you wouldn't like that shit\nI put this reel out, but you wouldn't bite that shit\nI type a text but then I nevermind that shit\nI got these feelings but you never mind that shit\nOh oh, keep it on the low\nYou're still in love with me but your friends don't know\nIf u wanted me you would just say so\nAnd if I were you, I would never let me go\nI don't mean no harm\nI just miss you on my arm\nWedding bells were just alarms\nCaution tape around my heart\nYou ever wonder what we could have been?\nYou said you wouldn't and you fucking did\nLie to me, lie with me, get your fucking fix\nNow all my drinks and all my feelings are all fucking mixed\nAlways missing people that I shouldn't be missing\nSometimes you gotta burn some bridges just to create some distance\nI know that I control my thoughts and I should stop reminiscing\nBut I learned from my dad that it's good to have feelings\nWhen love and trust are gone\nI guess this is moving on\nEveryone I do right does me wrong\nSo every lonely night, I sing this song\n\nI hate you I love you\nI hate that I love you\nDon't want to, but I can't put\nNobody else above you\nI hate you I love you\nI hate that I want you\nYou want her, you need her\nAnd I'll never be her\n\nAll alone I watch you watch her\nLike she's the only girl you've ever seen\nYou don't care you never did\nYou don't give a damn about me\nYeah all alone I watch you watch her\nShe's the only thing you've ever seen\nHow is it you never notice\nThat you are slowly killing me\n\nI hate you I love you\nI hate that I love you\nDon't want to, but I can't put\nNobody else above you\nI hate you I love you\nI hate that I want you\nYou want her, you need her\nAnd I'll never be her\n\ngnash\nhttps://soundcloud.com/gnash\nhttps://twitter.com/djgnash\n\nOlivia O'brien\nhttps://soundcloud.com/oliviagobrien\nhttps://twitter.com/oliviagobrien\n\nArtwork by Jonas De Ro\nhttp://www.jonasdero.com/\nhttp://jonasdero.deviantart.com/\n\nSheepy on Spotify\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 26,
+                    "timestamp": 1509627959
+                }
+            }
+        },
+        "song_title": "i hate u, i love u (feat. olivia o'brien)",
+        "artist": "gnash & Olivia O'Brien",
+        "artist_image": "https://i.scdn.co/image/e9ac2b6eef6d7f4177909d686c4a6bd166d7f688",
+        "cover": "https://i.scdn.co/image/2ea8b06d4eb92c2c9f0a1ac6f31398c2d5bacb3e",
+        "album": "us",
+        "spotify_data": {
+            "id": "7vRriwrloYVaoAe3a9wJHe",
+            "name": "i hate u, i love u (feat. olivia o'brien)",
+            "artists": [
+                {
+                    "id": "3iri9nBFs9e4wN7PLIetAw",
+                    "name": "gnash",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/08ecaadd299eaf596e342c7fca9e6c73e5c606ae",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/d8e377dbdf358e9035ec9bb9da5c8896540d957c",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/e9ac2b6eef6d7f4177909d686c4a6bd166d7f688",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "pop",
+                        "post-teen pop",
+                        "teen pop",
+                        "viral pop"
+                    ],
+                    "popularity": 78,
+                    "uri": "spotify:artist:3iri9nBFs9e4wN7PLIetAw",
+                    "href": "https://open.spotify.com/artist/3iri9nBFs9e4wN7PLIetAw"
+                },
+                {
+                    "id": "1QRj3hoop9Mv5VvHQkwPEp",
+                    "name": "Olivia O'Brien",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/4bc58ee39cce2d47094221f58c68ecc6eb1eb9bb",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/795c419e19f1941d2b9e2c6e855ec9b0ed9287bc",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/a67469d81581d03e6ba71d0d0075a3711d863e19",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "indie poptimism",
+                        "pop",
+                        "post-teen pop",
+                        "teen pop",
+                        "viral pop"
+                    ],
+                    "popularity": 77,
+                    "uri": "spotify:artist:1QRj3hoop9Mv5VvHQkwPEp",
+                    "href": "https://open.spotify.com/artist/1QRj3hoop9Mv5VvHQkwPEp"
+                }
+            ],
+            "artist": "gnash & Olivia O'Brien",
+            "cover_url": "https://i.scdn.co/image/2ea8b06d4eb92c2c9f0a1ac6f31398c2d5bacb3e",
+            "duration": 251.033,
+            "album": {
+                "id": "3L0H4RjVXpEkwfDgi3XOdf",
+                "name": "us",
+                "artists": [
+                    {
+                        "id": "3iri9nBFs9e4wN7PLIetAw",
+                        "name": "gnash",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/08ecaadd299eaf596e342c7fca9e6c73e5c606ae",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/d8e377dbdf358e9035ec9bb9da5c8896540d957c",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/e9ac2b6eef6d7f4177909d686c4a6bd166d7f688",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "pop",
+                            "post-teen pop",
+                            "teen pop",
+                            "viral pop"
+                        ],
+                        "popularity": 78,
+                        "uri": "spotify:artist:3iri9nBFs9e4wN7PLIetAw",
+                        "href": "https://open.spotify.com/artist/3iri9nBFs9e4wN7PLIetAw"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/2ea8b06d4eb92c2c9f0a1ac6f31398c2d5bacb3e",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/cf2c83d30a116cc09e795dcab484f4d663846ba0",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/6a2ce95fda9b36694ead3014bcfb3e167e82e04e",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:3L0H4RjVXpEkwfDgi3XOdf"
+            },
+            "popularity": 83,
+            "uri": "spotify:track:7vRriwrloYVaoAe3a9wJHe",
+            "query": "Gnash - I Hate U I Love U",
+            "certainty": 0.9387755102040817
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-n3NHem937Xs-EDEN_-_sex.webm",
+        "video_id": "n3NHem937Xs",
+        "url": "https://www.youtube.com/watch?v=n3NHem937Xs",
+        "title": "EDEN - sex",
+        "duration": 219,
+        "thumbnail": "https://i.ytimg.com/vi/n3NHem937Xs/maxresdefault.jpg",
+        "thumbnail_brightness": 91.42508072569025,
+        "description": "Sex!\nPre-order EDEN's new EP... http://ftrbnd.co/shop\nEDEN's Tour...http://ftrbnd.co/tour\nHelp EDEN on Hypemachine...http://hypem.com/item/2h4zm\nWatch the music video... http://ftrbnd.co/sexvideo\nListen on Spotify... http://ftrbnd.co/sexspotify\n\n\nEDEN\nhttps://soundcloud.com/iameden\nhttps://www.facebook.com/iameden\nhttps://twitter.com/iameden\nhttp://mcmxcv.eu/\nhttps://www.instagram.com/iameden/\n\nArtwork by Kent MacDonald\nhttps://flic.kr/p/qHppqF\n\nFull channel playlist on Spotify!!!! Click and listen for hours!\nhttp://bit.ly/MrSuicideSheepSpotify\n\nFacebooobs\nhttps://www.facebook.com/MrSuicideSheep\n\nFollow on Soundcloud\nhttps://soundcloud.com/mrsuicidesheep\n\nFollow on Twitter\nhttps://twitter.com/mrsuicidesheep\n\nWebsite\nhttp://mrsuicidesheep.com/\n\nSheepy Shop\nhttp://bit.ly/2b8GvBm\n\nSubmit Tracks\nhttp://bit.ly/2aPHMvw",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/bjEnvnN.png",
+                    "name": "electronica",
+                    "id": "electronica",
+                    "index": 27,
+                    "timestamp": 1509623056
+                }
+            }
+        },
+        "song_title": "sex",
+        "artist": "EDEN",
+        "artist_image": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+        "cover": "https://i.scdn.co/image/236b285e0b349526486dd03a3807f4904b195ecf",
+        "album": "i think you think too much of me",
+        "spotify_data": {
+            "id": "26ZX2JrAb8AFbr8FFfAsO7",
+            "name": "sex",
+            "artists": [
+                {
+                    "id": "1t20wYnTiAT0Bs7H1hv9Wt",
+                    "name": "EDEN",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [],
+                    "popularity": 74,
+                    "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
+                    "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
+                }
+            ],
+            "artist": "EDEN",
+            "cover_url": "https://i.scdn.co/image/236b285e0b349526486dd03a3807f4904b195ecf",
+            "duration": 218.808,
+            "album": {
+                "id": "7AVvQhnDEUidKyJsXmQ7ju",
+                "name": "i think you think too much of me",
+                "artists": [
+                    {
+                        "id": "1t20wYnTiAT0Bs7H1hv9Wt",
+                        "name": "EDEN",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/b3dc4acc2ac82c356dbe8be70d4f5a732f3372fa",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/f6e804aade484a78ea5b499b407c39246746bebd",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/7f82ce5ffb707cfd7ab8c1e1f935a6f32a862d0c",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [],
+                        "popularity": 74,
+                        "uri": "spotify:artist:1t20wYnTiAT0Bs7H1hv9Wt",
+                        "href": "https://open.spotify.com/artist/1t20wYnTiAT0Bs7H1hv9Wt"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/236b285e0b349526486dd03a3807f4904b195ecf",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/28538bd832caa5a8db8a742d6c6292414698387c",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/98d73ed80df7ba067e8cab539456900d060e894a",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:7AVvQhnDEUidKyJsXmQ7ju"
+            },
+            "popularity": 62,
+            "uri": "spotify:track:26ZX2JrAb8AFbr8FFfAsO7",
+            "query": "EDEN - Sex",
+            "certainty": 0.8888888888888888
+        }
+    }
+]

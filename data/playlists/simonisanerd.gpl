@@ -175,6 +175,35 @@
     },
     {
         "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube--j4LVcY7_zc-amazarashi_-_Sora_Ni_Utaeba.webm",
+        "video_id": "-j4LVcY7_zc",
+        "url": "https://www.youtube.com/watch?v=-j4LVcY7_zc",
+        "title": "amazarashi - Sora Ni Utaeba",
+        "duration": 235,
+        "thumbnail": "https://i.ytimg.com/vi/-j4LVcY7_zc/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Music video by amazarashi performing Sora Ni Utaeba. (C) 2017 Sony Music Records, a division of Sony Music Labels Inc.\n\nhttp://vevo.ly/Lo53IK",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "Simonisanerd",
+                    "id": "simonisanerd",
+                    "index": 6,
+                    "timestamp": 1511098611
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
         "type": "GieselaEntry",
         "expected_filename": "cache\\audio_cache\\youtube-qaLeO-2Fytg-Kill_la_Kill_Opening_2.webm",
         "video_id": "qaLeO-2Fytg",
@@ -191,7 +220,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 6,
+                    "index": 7,
                     "timestamp": 1506180895
                 }
             }
@@ -220,7 +249,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 7,
+                    "index": 8,
                     "timestamp": 1506180895
                 }
             }
@@ -249,7 +278,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 8,
+                    "index": 9,
                     "timestamp": 1506180895
                 }
             }
@@ -283,7 +312,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 9,
+                    "index": 10,
                     "timestamp": 1506702839
                 }
             }
@@ -312,7 +341,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 10,
+                    "index": 11,
                     "timestamp": 1506180895
                 }
             }
@@ -341,7 +370,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 11,
+                    "index": 12,
                     "timestamp": 1506180895
                 }
             }
@@ -370,7 +399,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 12,
+                    "index": 13,
                     "timestamp": 1506180895
                 }
             }
@@ -399,7 +428,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 13,
+                    "index": 14,
                     "timestamp": 1506180895
                 }
             }
@@ -409,6 +438,64 @@
         "artist_image": "http://i.imgur.com/DQqDLse.jpg",
         "cover": "http://i.imgur.com/JFlbk99.jpg",
         "album": "Accel World OST"
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-WAZiWvwW6u0-Boku_No_Hero_Academia_ED_FULL_HEROES_Brian_the_Sun.NA",
+        "video_id": "WAZiWvwW6u0",
+        "url": "https://www.youtube.com/watch?v=WAZiWvwW6u0",
+        "title": "Boku No Hero Academia(\u6211\u7684\u82f1\u96c4\u5b78\u9662) ED FULL \u300cHEROES\u300d\uff0fBrian the Sun",
+        "duration": 180,
+        "thumbnail": "https://i.ytimg.com/vi/WAZiWvwW6u0/maxresdefault.jpg",
+        "thumbnail_brightness": 145.06569901992242,
+        "description": "my hero academia ED",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "Simonisanerd",
+                    "id": "simonisanerd",
+                    "index": 15,
+                    "timestamp": 1511099007
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-ni2uij7PynU-Boku_no_Hero_Academia_Season_2_Ending_2_Full_LiSA_-_Datte_Atashi_no_Hero..NA",
+        "video_id": "ni2uij7PynU",
+        "url": "https://www.youtube.com/watch?v=ni2uij7PynU",
+        "title": "Boku no Hero Academia Season 2 Ending 2 Full\u300eLiSA - Datte Atashi no Hero.\u300f",
+        "duration": 234,
+        "thumbnail": "https://i.ytimg.com/vi/ni2uij7PynU/maxresdefault.jpg",
+        "thumbnail_brightness": 93.35606236751845,
+        "description": "Boku no Hero Academia Season 2 Ending 2 / Ending 3 Full Song\u300eLiSA - Datte Atashi no Hero.\u300f\u3060\u3063\u3066\u30a2\u30bf\u30b7\u306e\u30d2\u30fc\u30ed\u30fc\u3002\nTV Anime \"My Hero Academia 2nd Season\" 2nd ED Theme [English & Japanese Romaji Subtitles]\nPerformed by LiSA\n\n\u50d5\u306e\u30d2\u30fc\u30ed\u30fc\u30a2\u30ab\u30c7\u30df\u30a2 2nd\u30b7\u30fc\u30ba\u30f3\nM-01 - TV Anime \"My Hero Academia 2nd Season\" 2nd Ending Theme\nComposer: Sho Watanabe\nArranger: Ryo Eguchi\nLyricist: LiSA, Shin Furuya\n\n\u279dArtist: LiSA / Datte Atashi no Hero. (After All, You're My Hero)\nhttps://www.youtube.com/redirect?q=https%3A%2F%2Fitunes.apple.com%2Fjp%2Falbum%2Fid1261697750%3Fl%3Den&redir_token=J0VYVMD5-l-6QWwWfAb24FNFkJF8MTUxMTE4NTQ4OEAxNTExMDk5MDg4&v=ni2uij7PynU&event=video_description\nhttps://www.youtube.com/redirect?q=http%3A%2F%2Fwww.cdjapan.co.jp%2Fproduct%2FVVCL-1069&redir_token=J0VYVMD5-l-6QWwWfAb24FNFkJF8MTUxMTE4NTQ4OEAxNTExMDk5MDg4&v=ni2uij7PynU&event=video_description\n\n\u279dPicture used on the video:\nhttp://i.imgur.com/GFn4Vup.jpg\n\n\u279d My other channels:\nhttps://www.youtube.com/c/HDMelodyMusic\nhttps://www.youtube.com/user/ChuckVsTheMusic\nhttps://www.youtube.com/c/HDSenpai\n\n\u279d Follow ME on:\nhttps://www.facebook.com/MelodicStar/\nhttps://twitter.com/melodiccstar\n------------------------------------------------------------------------------------\nhttps://www.youtube.com/redirect?q=https%3A%2F%2Fmyanimelist.net%2Fanime%2F33486%2FBoku_no_Hero_Academia_2nd_Season&redir_token=J0VYVMD5-l-6QWwWfAb24FNFkJF8MTUxMTE4NTQ4OEAxNTExMDk5MDg4&v=ni2uij7PynU&event=video_description\nAnime: Boku no Hero Academia 2nd Season\nArtist: LiSA\nSong: Datte Atashi no Hero.\n------------------------------------------------------------------------------------\nMUSIC PROMOTION & REQUESTS:\nIf you want to submit a request to promote your music on my channel or request upload -\nContact me on the facebook (Send me a PM on my facebook page) or send me a mail.\nview my email adress on my youtube 'about page'.\n------------------------------------------------------------------------------------\nCopyright Info:\n\nBe aware this channel is only for promotion purpose.\nAll music belongs to the original creators.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "Simonisanerd",
+                    "id": "simonisanerd",
+                    "index": 16,
+                    "timestamp": 1511099170
+                }
+            }
+        }
     },
     {
         "version": 103,
@@ -428,7 +515,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 14,
+                    "index": 17,
                     "timestamp": 1506180895
                 }
             }
@@ -457,7 +544,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 15,
+                    "index": 18,
                     "timestamp": 1506180895
                 }
             }
@@ -486,7 +573,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 16,
+                    "index": 19,
                     "timestamp": 1506180895
                 }
             }
@@ -515,7 +602,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 17,
+                    "index": 20,
                     "timestamp": 1506180895
                 }
             }
@@ -549,7 +636,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 18,
+                    "index": 21,
                     "timestamp": 1506180895
                 }
             }
@@ -578,7 +665,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 19,
+                    "index": 22,
                     "timestamp": 1506180895
                 }
             }
@@ -607,7 +694,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 20,
+                    "index": 23,
                     "timestamp": 1506180895
                 }
             }
@@ -641,14 +728,14 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 21,
+                    "index": 24,
                     "timestamp": 1506180895
                 }
             }
         },
         "song_title": "Clock Strikes",
         "artist": "ONE OK ROCK",
-        "artist_image": "https://i.scdn.co/image/cf11b90956789974a97738477eb6ed4ee59eda3f",
+        "artist_image": "https://i.scdn.co/image/3b3b816312699a68731db11601b463a3cb4eeb26",
         "cover": "https://i.scdn.co/image/b10a614ced95aff8bf68767ced8bf6180eb663df",
         "album": "JINSEI KAKETE BOKU WA",
         "spotify_data": {
@@ -769,7 +856,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 22,
+                    "index": 25,
                     "timestamp": 1506180895
                 }
             }
@@ -798,7 +885,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 23,
+                    "index": 26,
                     "timestamp": 1506180895
                 }
             }
@@ -827,7 +914,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 24,
+                    "index": 27,
                     "timestamp": 1506180895
                 }
             }
@@ -856,7 +943,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 25,
+                    "index": 28,
                     "timestamp": 1506180895
                 }
             }
@@ -885,7 +972,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 26,
+                    "index": 29,
                     "timestamp": 1506180895
                 }
             }
@@ -914,7 +1001,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 27,
+                    "index": 30,
                     "timestamp": 1506180895
                 }
             }
@@ -943,7 +1030,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 28,
+                    "index": 31,
                     "timestamp": 1506180895
                 }
             }
@@ -972,7 +1059,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 29,
+                    "index": 32,
                     "timestamp": 1506180895
                 }
             }
@@ -1001,7 +1088,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 30,
+                    "index": 33,
                     "timestamp": 1506180895
                 }
             }
@@ -1030,7 +1117,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 31,
+                    "index": 34,
                     "timestamp": 1506180895
                 }
             }
@@ -1059,14 +1146,14 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 32,
+                    "index": 35,
                     "timestamp": 1506180895
                 }
             }
         },
         "song_title": "Don't Lose Your Way (Feat. NoneLikeJoshua)",
         "artist": "Sapphire & None Like Joshua",
-        "artist_image": "https://i.scdn.co/image/f7e2c2e20e854005b72b0b5460c9934351cb1e4a",
+        "artist_image": "https://i.scdn.co/image/0a4e166338e965239cdcdb434781e43e0463f309",
         "cover": "https://i.scdn.co/image/f0396585a88b82628af0eaa189129804d44f0212",
         "album": "Don't Lose Your Way (Kill la Kill)",
         "spotify_data": {
@@ -1121,7 +1208,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 43,
+                    "popularity": 45,
                     "uri": "spotify:artist:13rNJ8sWbjGYIUjqtHZvL2",
                     "href": "https://open.spotify.com/artist/13rNJ8sWbjGYIUjqtHZvL2"
                 }
@@ -1204,7 +1291,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 33,
+                    "index": 36,
                     "timestamp": 1506180895
                 }
             }
@@ -1233,7 +1320,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 34,
+                    "index": 37,
                     "timestamp": 1506180895
                 }
             }
@@ -1262,7 +1349,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 35,
+                    "index": 38,
                     "timestamp": 1506180895
                 }
             }
@@ -1291,14 +1378,14 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 36,
+                    "index": 39,
                     "timestamp": 1506180895
                 }
             }
         },
         "song_title": "Fairy Tail ~Yakusoku No Hi~",
         "artist": "Chihiro Yonekura",
-        "artist_image": "https://i.scdn.co/image/78f4b3437508746408616c77f7e47937d70aeb50",
+        "artist_image": "https://i.scdn.co/image/0762027bdbc4624ee1b74951e60db827d3862f2a",
         "cover": "https://i.scdn.co/image/f31169ee90b3fbf1137107137e65ebcb84736013",
         "album": "Tv Anime \"Fairy Tail\" Op & Ed Theme Songs Vol. 3",
         "spotify_data": {
@@ -1326,7 +1413,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 25,
+                    "popularity": 28,
                     "uri": "spotify:artist:4vhezQRmmI48a5uigqV180",
                     "href": "https://open.spotify.com/artist/4vhezQRmmI48a5uigqV180"
                 }
@@ -1391,7 +1478,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 37,
+                    "index": 40,
                     "timestamp": 1506180895
                 }
             }
@@ -1420,7 +1507,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 38,
+                    "index": 41,
                     "timestamp": 1506180895
                 }
             }
@@ -1449,7 +1536,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 39,
+                    "index": 42,
                     "timestamp": 1506180895
                 }
             }
@@ -1478,7 +1565,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 40,
+                    "index": 43,
                     "timestamp": 1506180895
                 }
             }
@@ -1507,7 +1594,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 41,
+                    "index": 44,
                     "timestamp": 1506180895
                 }
             }
@@ -1536,7 +1623,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 42,
+                    "index": 45,
                     "timestamp": 1506180895
                 }
             }
@@ -1565,7 +1652,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 43,
+                    "index": 46,
                     "timestamp": 1506180895
                 }
             }
@@ -1594,7 +1681,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 44,
+                    "index": 47,
                     "timestamp": 1506180895
                 }
             }
@@ -1623,14 +1710,14 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 45,
+                    "index": 48,
                     "timestamp": 1506180895
                 }
             }
         },
         "song_title": "Guren No Yumiya",
         "artist": "Linked Horizon",
-        "artist_image": "https://i.scdn.co/image/f17a9a1c7eeb6e0e41adf13b62ecc3e9cebbc6dc",
+        "artist_image": "https://i.scdn.co/image/970b684cdddc1437ac41f8c8338fd1e716f58483",
         "cover": "https://i.scdn.co/image/63d65c2991b4f30a9b7febae2c1fb2eb8db64c94",
         "album": "Jiyuu E No Shingeki",
         "spotify_data": {
@@ -1745,7 +1832,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 46,
+                    "index": 49,
                     "timestamp": 1506180895
                 }
             }
@@ -1774,7 +1861,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 47,
+                    "index": 50,
                     "timestamp": 1506180895
                 }
             }
@@ -1803,7 +1890,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 48,
+                    "index": 51,
                     "timestamp": 1506180895
                 }
             }
@@ -1832,7 +1919,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 49,
+                    "index": 52,
                     "timestamp": 1506180895
                 }
             }
@@ -1861,7 +1948,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 50,
+                    "index": 53,
                     "timestamp": 1506180895
                 }
             }
@@ -1890,7 +1977,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 51,
+                    "index": 54,
                     "timestamp": 1506180895
                 }
             }
@@ -1919,7 +2006,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 52,
+                    "index": 55,
                     "timestamp": 1506180895
                 }
             }
@@ -1929,6 +2016,133 @@
         "artist_image": "http://i.imgur.com/HigkKjz.jpg",
         "cover": "http://i.imgur.com/WfW0mpe.jpg",
         "album": "FIXION"
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-9OQu-DV4VJo-Kenshi_Yonezu_-_Hien_BOOTLEG.NA",
+        "video_id": "9OQu-DV4VJo",
+        "url": "https://www.youtube.com/watch?v=9OQu-DV4VJo",
+        "title": "Kenshi Yonezu - Hien\u300eBOOTLEG\u300f",
+        "duration": 243,
+        "thumbnail": "https://i.ytimg.com/vi/9OQu-DV4VJo/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Kenshi Yonezu - Hien\n4th album ''BOOTLEG''\nArtist: Kenshi Yonezu\n\n\u279dArtist: Kenshi Yonezu\u300eBootleg\u300f\nhttps://www.youtube.com/redirect?q=https%3A%2F%2Fitunes.apple.com%2Fjp%2Falbum%2Fbootleg%2Fid1292541373%3Fl%3Den&v=9OQu-DV4VJo&redir_token=qqm7oAUyCzi2zG5_p4XIXzNsO9F8MTUxMTkzNjAxNkAxNTExODQ5NjE2&event=video_description\nhttps://www.youtube.com/redirect?q=http%3A%2F%2Fwww.cdjapan.co.jp%2Fproduct%2FSRCL-9571&v=9OQu-DV4VJo&redir_token=qqm7oAUyCzi2zG5_p4XIXzNsO9F8MTUxMTkzNjAxNkAxNTExODQ5NjE2&event=video_description\n\n\u2605Official Website: http://reissuerecords.net/\n\u2605Official Twitter: https://twitter.com/hachi_08\n\nArtwork Info:\nPicture link - https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.pixiv.net%2Fmember_illust.php%3Fmode%3Dmedium%26illust_id%3D39163751&v=9OQu-DV4VJo&redir_token=qqm7oAUyCzi2zG5_p4XIXzNsO9F8MTUxMTkzNjAxNkAxNTExODQ5NjE2&event=video_description\n\n\u279dSupport the channel:\nhttps://www.paypal.me/MelodicStar\n\n\u279d My other channels:\nhttps://www.youtube.com/c/HDMelodyMusic\nhttps://www.youtube.com/user/ChuckVsTheMusic\nhttps://www.youtube.com/c/HDSenpai\n\n\u279d Follow ME on:\nhttps://www.facebook.com/MelodicStar/\nhttps://twitter.com/melodiccstar\n------------------------------------------------------------------------------------\nMUSIC PROMOTION & REQUESTS:\nIf you want to submit a request to promote your music on my channel or request upload -\nContact me on the facebook (Send me a PM on my facebook page) or send me a mail.\nview my email adress on my youtube 'about page'.\n------------------------------------------------------------------------------------\nCopyright Info:\n\nBe aware this channel is only for promotion purpose.\nAll music belongs to the original creators.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "Simonisanerd",
+                    "id": "simonisanerd",
+                    "index": 56,
+                    "timestamp": 1511849633
+                }
+            }
+        },
+        "song_title": "Hien",
+        "artist": "Kenshi Yonezu",
+        "artist_image": "https://i.scdn.co/image/5358327a5a4b5699bcc9ca32770865bf3041f683",
+        "cover": "https://i.scdn.co/image/39d2123f753578c65efa7bd3f7026ac6fb5257a4",
+        "album": "Bootleg",
+        "spotify_data": {
+            "id": "4NivAR6QzwLv27o9ufg5Oe",
+            "name": "Hien",
+            "artists": [
+                {
+                    "id": "1snhtMLeb2DYoMOcVbb8iB",
+                    "name": "Kenshi Yonezu",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/39d2123f753578c65efa7bd3f7026ac6fb5257a4",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/2621ca1b92e85ee3e52a3e9a49fa98bd5edc3858",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/5358327a5a4b5699bcc9ca32770865bf3041f683",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "anime",
+                        "j-pop"
+                    ],
+                    "popularity": 51,
+                    "uri": "spotify:artist:1snhtMLeb2DYoMOcVbb8iB",
+                    "href": "https://open.spotify.com/artist/1snhtMLeb2DYoMOcVbb8iB"
+                }
+            ],
+            "artist": "Kenshi Yonezu",
+            "cover_url": "https://i.scdn.co/image/39d2123f753578c65efa7bd3f7026ac6fb5257a4",
+            "duration": 243.333,
+            "album": {
+                "id": "5ztm773WXmGJDkzGWH0YXT",
+                "name": "Bootleg",
+                "artists": [
+                    {
+                        "id": "1snhtMLeb2DYoMOcVbb8iB",
+                        "name": "Kenshi Yonezu",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/39d2123f753578c65efa7bd3f7026ac6fb5257a4",
+                                "width": 640
+                            },
+                            {
+                                "height": 300,
+                                "url": "https://i.scdn.co/image/2621ca1b92e85ee3e52a3e9a49fa98bd5edc3858",
+                                "width": 300
+                            },
+                            {
+                                "height": 64,
+                                "url": "https://i.scdn.co/image/5358327a5a4b5699bcc9ca32770865bf3041f683",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "anime",
+                            "j-pop"
+                        ],
+                        "popularity": 51,
+                        "uri": "spotify:artist:1snhtMLeb2DYoMOcVbb8iB",
+                        "href": "https://open.spotify.com/artist/1snhtMLeb2DYoMOcVbb8iB"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/39d2123f753578c65efa7bd3f7026ac6fb5257a4",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/2621ca1b92e85ee3e52a3e9a49fa98bd5edc3858",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/5358327a5a4b5699bcc9ca32770865bf3041f683",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:5ztm773WXmGJDkzGWH0YXT"
+            },
+            "popularity": 34,
+            "uri": "spotify:track:4NivAR6QzwLv27o9ufg5Oe",
+            "query": "Kenshi Yonezu - Hien BOOTLEG",
+            "certainty": 0.782608695652174
+        }
     },
     {
         "version": 103,
@@ -1948,7 +2162,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 53,
+                    "index": 57,
                     "timestamp": 1506180895
                 }
             }
@@ -2068,7 +2282,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 54,
+                    "index": 58,
                     "timestamp": 1506180895
                 }
             }
@@ -2097,7 +2311,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 55,
+                    "index": 59,
                     "timestamp": 1506180895
                 }
             }
@@ -2225,7 +2439,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 56,
+                    "index": 60,
                     "timestamp": 1506180895
                 }
             }
@@ -2254,7 +2468,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 57,
+                    "index": 61,
                     "timestamp": 1506180895
                 }
             }
@@ -2283,7 +2497,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 58,
+                    "index": 62,
                     "timestamp": 1506180895
                 }
             }
@@ -2312,7 +2526,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 59,
+                    "index": 63,
                     "timestamp": 1506180895
                 }
             }
@@ -2341,7 +2555,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 60,
+                    "index": 64,
                     "timestamp": 1506180895
                 }
             }
@@ -2370,7 +2584,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 61,
+                    "index": 65,
                     "timestamp": 1506180895
                 }
             }
@@ -2399,7 +2613,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 62,
+                    "index": 66,
                     "timestamp": 1506180895
                 }
             }
@@ -2428,7 +2642,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 63,
+                    "index": 67,
                     "timestamp": 1506180895
                 }
             }
@@ -2457,7 +2671,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 64,
+                    "index": 68,
                     "timestamp": 1506180895
                 }
             }
@@ -2486,7 +2700,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 65,
+                    "index": 69,
                     "timestamp": 1506180895
                 }
             }
@@ -2515,7 +2729,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 66,
+                    "index": 70,
                     "timestamp": 1506180895
                 }
             }
@@ -2544,7 +2758,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 67,
+                    "index": 71,
                     "timestamp": 1506180895
                 }
             }
@@ -2573,7 +2787,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 68,
+                    "index": 72,
                     "timestamp": 1506180895
                 }
             }
@@ -2602,7 +2816,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 69,
+                    "index": 73,
                     "timestamp": 1506180895
                 }
             }
@@ -2631,7 +2845,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 70,
+                    "index": 74,
                     "timestamp": 1506180895
                 }
             }
@@ -2660,7 +2874,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 71,
+                    "index": 75,
                     "timestamp": 1506180895
                 }
             }
@@ -2695,7 +2909,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 53,
+                    "popularity": 58,
                     "uri": "spotify:artist:5cu4bEi3Pe9SihrGOgCBLW",
                     "href": "https://open.spotify.com/artist/5cu4bEi3Pe9SihrGOgCBLW"
                 }
@@ -2760,7 +2974,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 72,
+                    "index": 76,
                     "timestamp": 1506180896
                 }
             }
@@ -2789,7 +3003,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 73,
+                    "index": 77,
                     "timestamp": 1506180896
                 }
             }
@@ -2818,7 +3032,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 74,
+                    "index": 78,
                     "timestamp": 1506180896
                 }
             }
@@ -2847,7 +3061,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 75,
+                    "index": 79,
                     "timestamp": 1506180896
                 }
             }
@@ -2876,7 +3090,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 76,
+                    "index": 80,
                     "timestamp": 1506180896
                 }
             }
@@ -2905,7 +3119,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 77,
+                    "index": 81,
                     "timestamp": 1506180896
                 }
             }
@@ -2934,7 +3148,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 78,
+                    "index": 82,
                     "timestamp": 1506180896
                 }
             }
@@ -2963,7 +3177,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 79,
+                    "index": 83,
                     "timestamp": 1506180896
                 }
             }
@@ -2992,7 +3206,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 80,
+                    "index": 84,
                     "timestamp": 1506180896
                 }
             }
@@ -3021,7 +3235,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 81,
+                    "index": 85,
                     "timestamp": 1506180896
                 }
             }
@@ -3050,7 +3264,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 82,
+                    "index": 86,
                     "timestamp": 1506180896
                 }
             }
@@ -3079,7 +3293,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 83,
+                    "index": 87,
                     "timestamp": 1506180896
                 }
             }
@@ -3108,7 +3322,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 84,
+                    "index": 88,
                     "timestamp": 1506180896
                 }
             }
@@ -3137,7 +3351,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 85,
+                    "index": 89,
                     "timestamp": 1506180896
                 }
             }
@@ -3166,7 +3380,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 86,
+                    "index": 90,
                     "timestamp": 1506180896
                 }
             }
@@ -3195,7 +3409,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 87,
+                    "index": 91,
                     "timestamp": 1506180896
                 }
             }
@@ -3224,7 +3438,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 88,
+                    "index": 92,
                     "timestamp": 1506180896
                 }
             }
@@ -3253,7 +3467,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 89,
+                    "index": 93,
                     "timestamp": 1506180896
                 }
             }
@@ -3282,7 +3496,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 90,
+                    "index": 94,
                     "timestamp": 1506180896
                 }
             }
@@ -3311,7 +3525,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 91,
+                    "index": 95,
                     "timestamp": 1506180896
                 }
             }
@@ -3340,7 +3554,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 92,
+                    "index": 96,
                     "timestamp": 1506180896
                 }
             }
@@ -3369,7 +3583,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 93,
+                    "index": 97,
                     "timestamp": 1506180896
                 }
             }
@@ -3398,7 +3612,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 94,
+                    "index": 98,
                     "timestamp": 1506180896
                 }
             }
@@ -3427,7 +3641,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 95,
+                    "index": 99,
                     "timestamp": 1506180896
                 }
             }
@@ -3456,7 +3670,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 96,
+                    "index": 100,
                     "timestamp": 1506180896
                 }
             }
@@ -3485,7 +3699,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 97,
+                    "index": 101,
                     "timestamp": 1506180896
                 }
             }
@@ -3514,7 +3728,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 98,
+                    "index": 102,
                     "timestamp": 1506180896
                 }
             }
@@ -3543,7 +3757,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 99,
+                    "index": 103,
                     "timestamp": 1506180896
                 }
             }
@@ -3572,7 +3786,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 100,
+                    "index": 104,
                     "timestamp": 1506180896
                 }
             }
@@ -3601,7 +3815,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 101,
+                    "index": 105,
                     "timestamp": 1506180896
                 }
             }
@@ -3630,7 +3844,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 102,
+                    "index": 106,
                     "timestamp": 1506180896
                 }
             }
@@ -3659,7 +3873,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 103,
+                    "index": 107,
                     "timestamp": 1506180896
                 }
             }
@@ -3688,7 +3902,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 104,
+                    "index": 108,
                     "timestamp": 1506180896
                 }
             }
@@ -3717,7 +3931,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 105,
+                    "index": 109,
                     "timestamp": 1506180896
                 }
             }
@@ -3746,7 +3960,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 106,
+                    "index": 110,
                     "timestamp": 1506180896
                 }
             }
@@ -3775,7 +3989,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 107,
+                    "index": 111,
                     "timestamp": 1506180896
                 }
             }
@@ -3804,7 +4018,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 108,
+                    "index": 112,
                     "timestamp": 1506180896
                 }
             }
@@ -3838,7 +4052,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 109,
+                    "index": 113,
                     "timestamp": 1506702795
                 }
             }
@@ -3867,7 +4081,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 110,
+                    "index": 114,
                     "timestamp": 1506180896
                 }
             }
@@ -3896,7 +4110,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 111,
+                    "index": 115,
                     "timestamp": 1506180896
                 }
             }
@@ -3925,7 +4139,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 112,
+                    "index": 116,
                     "timestamp": 1506180896
                 }
             }
@@ -3954,7 +4168,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 113,
+                    "index": 117,
                     "timestamp": 1506180896
                 }
             }
@@ -3983,7 +4197,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 114,
+                    "index": 118,
                     "timestamp": 1506180896
                 }
             }
@@ -4012,7 +4226,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 115,
+                    "index": 119,
                     "timestamp": 1506180896
                 }
             }
@@ -4046,14 +4260,14 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 116,
+                    "index": 120,
                     "timestamp": 1506180896
                 }
             }
         },
         "song_title": "Shirushi",
         "artist": "LiSA",
-        "artist_image": "https://i.scdn.co/image/ae1b09a9dd746482b53d73fb0643c80c1b46a3d4",
+        "artist_image": "https://i.scdn.co/image/82e3892e5c6a18138891d722fb9656da8b0d6112",
         "cover": "https://i.scdn.co/image/b0d475c2cb05195d2cf7778c507b8757e1f3376e",
         "album": "Launcher",
         "spotify_data": {
@@ -4172,7 +4386,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 117,
+                    "index": 121,
                     "timestamp": 1506180896
                 }
             }
@@ -4201,7 +4415,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 118,
+                    "index": 122,
                     "timestamp": 1506180896
                 }
             }
@@ -4230,7 +4444,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 119,
+                    "index": 123,
                     "timestamp": 1506180896
                 }
             }
@@ -4259,7 +4473,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 120,
+                    "index": 124,
                     "timestamp": 1506180896
                 }
             }
@@ -4288,7 +4502,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 121,
+                    "index": 125,
                     "timestamp": 1506180896
                 }
             }
@@ -4317,7 +4531,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 122,
+                    "index": 126,
                     "timestamp": 1506180896
                 }
             }
@@ -4351,7 +4565,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 123,
+                    "index": 127,
                     "timestamp": 1506702178
                 }
             }
@@ -4380,7 +4594,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 124,
+                    "index": 128,
                     "timestamp": 1506180896
                 }
             }
@@ -4409,7 +4623,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 125,
+                    "index": 129,
                     "timestamp": 1506180896
                 }
             }
@@ -4438,7 +4652,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 126,
+                    "index": 130,
                     "timestamp": 1506180896
                 }
             }
@@ -4467,7 +4681,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 127,
+                    "index": 131,
                     "timestamp": 1506180896
                 }
             }
@@ -4496,7 +4710,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 128,
+                    "index": 132,
                     "timestamp": 1506180896
                 }
             }
@@ -4525,7 +4739,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 129,
+                    "index": 133,
                     "timestamp": 1506180896
                 }
             }
@@ -4554,7 +4768,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 130,
+                    "index": 134,
                     "timestamp": 1506180896
                 }
             }
@@ -4583,7 +4797,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 131,
+                    "index": 135,
                     "timestamp": 1506180896
                 }
             }
@@ -4612,7 +4826,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 132,
+                    "index": 136,
                     "timestamp": 1506180896
                 }
             }
@@ -4641,7 +4855,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 133,
+                    "index": 137,
                     "timestamp": 1506180896
                 }
             }
@@ -4670,7 +4884,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 134,
+                    "index": 138,
                     "timestamp": 1506180896
                 }
             }
@@ -4699,7 +4913,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 135,
+                    "index": 139,
                     "timestamp": 1506180896
                 }
             }
@@ -4728,7 +4942,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 136,
+                    "index": 140,
                     "timestamp": 1506180896
                 }
             }
@@ -4757,14 +4971,14 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 137,
+                    "index": 141,
                     "timestamp": 1506180896
                 }
             }
         },
         "song_title": "The Reluctant Heroes",
         "artist": "Hiroyuki Sawano & MPI",
-        "artist_image": "https://i.scdn.co/image/e4a4cf38f9c3aeda3c2fa65cde0a81222e492c41",
+        "artist_image": "https://i.scdn.co/image/1d4eaf6713b68d024af77f75341844fa614ac640",
         "cover": "https://i.scdn.co/image/3f3abb6325d6b7acefe4beca1ff8110625398813",
         "album": "Attack on Titan (Original Soundtrack)",
         "spotify_data": {
@@ -4890,7 +5104,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 138,
+                    "index": 142,
                     "timestamp": 1506180896
                 }
             }
@@ -4919,7 +5133,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 139,
+                    "index": 143,
                     "timestamp": 1506180896
                 }
             }
@@ -4948,7 +5162,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 140,
+                    "index": 144,
                     "timestamp": 1506180896
                 }
             }
@@ -4977,7 +5191,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 141,
+                    "index": 145,
                     "timestamp": 1506180896
                 }
             }
@@ -5006,7 +5220,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 142,
+                    "index": 146,
                     "timestamp": 1506180896
                 }
             }
@@ -5035,7 +5249,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 143,
+                    "index": 147,
                     "timestamp": 1506180896
                 }
             }
@@ -5069,7 +5283,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 144,
+                    "index": 148,
                     "timestamp": 1506701130
                 }
             }
@@ -5098,7 +5312,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 145,
+                    "index": 149,
                     "timestamp": 1506180896
                 }
             }
@@ -5127,14 +5341,14 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 146,
+                    "index": 150,
                     "timestamp": 1506180896
                 }
             }
         },
         "song_title": "Vogel Im Kafig",
         "artist": "Hiroyuki Sawano & Cyua",
-        "artist_image": "https://i.scdn.co/image/1d4eaf6713b68d024af77f75341844fa614ac640",
+        "artist_image": "https://i.scdn.co/image/e4a4cf38f9c3aeda3c2fa65cde0a81222e492c41",
         "cover": "https://i.scdn.co/image/3f3abb6325d6b7acefe4beca1ff8110625398813",
         "album": "Attack on Titan (Original Soundtrack)",
         "spotify_data": {
@@ -5278,7 +5492,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 147,
+                    "index": 151,
                     "timestamp": 1506180896
                 }
             }
@@ -5307,7 +5521,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 148,
+                    "index": 152,
                     "timestamp": 1506180896
                 }
             }
@@ -5433,7 +5647,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 149,
+                    "index": 153,
                     "timestamp": 1506180896
                 }
             }
@@ -5462,7 +5676,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 150,
+                    "index": 154,
                     "timestamp": 1506180896
                 }
             }
@@ -5491,7 +5705,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 151,
+                    "index": 155,
                     "timestamp": 1506180896
                 }
             }
@@ -5520,7 +5734,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 152,
+                    "index": 156,
                     "timestamp": 1506180896
                 }
             }
@@ -5549,7 +5763,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 153,
+                    "index": 157,
                     "timestamp": 1506180896
                 }
             }
@@ -5578,7 +5792,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 154,
+                    "index": 158,
                     "timestamp": 1506180896
                 }
             }
@@ -5607,7 +5821,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 155,
+                    "index": 159,
                     "timestamp": 1506180896
                 }
             }
@@ -5636,7 +5850,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 156,
+                    "index": 160,
                     "timestamp": 1506180896
                 }
             }
@@ -5665,7 +5879,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 157,
+                    "index": 161,
                     "timestamp": 1506180896
                 }
             }
@@ -5694,7 +5908,7 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 158,
+                    "index": 162,
                     "timestamp": 1506180896
                 }
             }
@@ -5723,14 +5937,14 @@
                     "cover": "http://i.imgur.com/MFXq8og.jpg",
                     "name": "Simonisanerd",
                     "id": "simonisanerd",
-                    "index": 159,
+                    "index": 163,
                     "timestamp": 1506180896
                 }
             }
         },
         "song_title": "\u306a\u3044\u3082\u306e\u306d\u3060\u308a",
         "artist": "KANA-BOON",
-        "artist_image": "https://i.scdn.co/image/c25daece7a90fc05a9f4d181fcfa7797af890fe2",
+        "artist_image": "https://i.scdn.co/image/53fb27c3d71b2257feb7fff32d9e10ffecb57ea2",
         "cover": "https://i.scdn.co/image/53fb27c3d71b2257feb7fff32d9e10ffecb57ea2",
         "album": "\u50d5\u304b\u3099CD\u3092\u51fa\u3057\u305f\u3089",
         "spotify_data": {
@@ -5831,6 +6045,35 @@
             "uri": "spotify:track:1dsh4buvcBs2u7YtHy29c7",
             "query": "KANA-BOON - \u306a\u3044\u3082\u306e\u306d\u3060\u308a",
             "certainty": 0.9444444444444444
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-Dx_fKPBPYUI-MV_LOSER.NA",
+        "video_id": "Dx_fKPBPYUI",
+        "url": "https://www.youtube.com/watch?v=Dx_fKPBPYUI",
+        "title": "\u7c73\u6d25\u7384\u5e2b MV\u300cLOSER\u300d",
+        "duration": 242,
+        "thumbnail": "https://i.ytimg.com/vi/Dx_fKPBPYUI/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "5th Single\u300cLOSER / \u30ca\u30f3\u30d0\u30fc\u30ca\u30a4\u30f3\u300d2016.9.28 RELEASE\nhttp://reissuerecords.net/special/loser/\n\nM-1   LOSER\nM-2   \u30ca\u30f3\u30d0\u30fc\u30ca\u30a4\u30f3\u3010\u300c\u30eb\u30fc\u30f4\u30ebNo.9\u301c\u6f2b\u753b\u3001\uff19\u756a\u76ee\u306e\u82b8\u8853\u301c\u300d\u516c\u5f0f\u30a4\u30e1\u30fc\u30b8\u30bd\u30f3\u30b0\u3011\nM-3   amen\n\n\n\u25bc\u5546\u54c1\u5f62\u614b\nLOSER\u76e4 /\u521d\u56de\u9650\u5b9a\uff08CD+\uff84\uff9e\uff6f\uff78\uff9e\uff80\uff78\uff9e+\uff99\uff70\uff7d\uff9e\uff8a\uff9f\uff6f\uff79\uff70\uff7c\uff9e\uff09 \u00a5 1,950\uff08tax out\uff09\n\u30ca\u30f3\u30d0\u30fc\u30ca\u30a4\u30f3\u76e4 /\u521d\u56de\u9650\u5b9a\uff08CD+DVD+7inch\uff7b\uff72\uff7d\uff9e\uff77\uff9e\uff6c\uff97\uff98\uff70\uff8a\uff9f\uff6f\uff79\uff70\uff7c\uff9e\uff09 \u00a51,800\uff08tax out\uff09\n\u901a\u5e38\u76e4\uff08CD\uff09    \u00a51,200\uff08tax out\uff09\n\n\u25bc\u521d\u56de\u7279\u5178\n\u201d\u7c73\u6d25\u7384\u5e2b 2016 TOUR / \u306f\u3046\u308b\u201d\u5148\u884c\u62bd\u9078\u5fdc\u52df\u30b7\u30ea\u30a2\u30eb\u30ca\u30f3\u30d0\u30fc\u5c01\u5165\n\u5fdc\u52df\u671f\u9593\uff1a2016.9.27-10.2\n\n\u25bc\u30ea\u30ea\u30fc\u30b9\u7279\u8a2d\u30b5\u30a4\u30c8\nhttp://reissuerecords.net/special/loser/\n\n\nHP     http://reissuerecords.net\nTwitter  \u3000https://twitter.com/hachi_08\nOFFICIAL CHANNEL     http://www.youtube.com/user/08yakari",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203510202421477376",
+                "name": "ZyLect"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "http://i.imgur.com/MFXq8og.jpg",
+                    "name": "Simonisanerd",
+                    "id": "simonisanerd",
+                    "index": 164,
+                    "timestamp": 1511330165
+                }
+            }
         }
     }
 ]
