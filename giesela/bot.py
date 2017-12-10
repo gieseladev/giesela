@@ -11,6 +11,7 @@ import discord
 from giesela.config import Config
 from giesela.lib import module
 from giesela.models import exceptions, signals
+from giesela.utils import localisation
 from giesela.utils.opus_loader import load_opus_lib
 
 load_opus_lib()
@@ -172,14 +173,18 @@ class Giesela(discord.Client):
         """Start 'er up."""
         try:
             self.config.check()
-        except exceptions.ConfigException as e:
-            log.error("The config file seems to be broken! It's missing the following keys:\n> {}".format(" ,".join(e.missing)))
+        except exceptions.ConfigKeysMissing as e:
+            log.error(localisation.format(None, "exceptions.config.missing_keys", " ,".join(e.missing)))
+            raise signals.StopSignal
+
+        if not self.config.token:
+            log.error(localisation.get(None, "exceptions.token.none"))
             raise signals.StopSignal
 
         try:
             self.loop.run_until_complete(self.start(self.config.token))
         except discord.errors.LoginFailure:
-            log.error("Couldn't log-in. Your token is wrong!")
+            log.error(localisation.get(None, "exceptions.token.invalid"))
 
         finally:
             try:

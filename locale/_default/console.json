@@ -1,0 +1,6 @@
+{
+  "setup": {
+    "language ": "What is your preferred language? ",
+    "token": "Please provide the token for your bot: "
+  }
+}

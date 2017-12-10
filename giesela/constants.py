@@ -17,3 +17,6 @@ class FileLocations:
     LOGGING = "config/logging.json"
     CONFIG = "config/config.json"
     PERMISSIONS = "config/permissions.json"
+
+    LOCALISATION = "config/locale.json"
+    LOCALE_FOLDER = "locale"

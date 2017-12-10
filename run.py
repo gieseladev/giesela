@@ -50,7 +50,7 @@ def main():
             break
         except Exception as e:
             raven_client.captureException()
-            log.exceptions("Something is broken!")
+            log.exception("Something is broken!")
 
         finally:
             asyncio.set_event_loop(asyncio.new_event_loop())

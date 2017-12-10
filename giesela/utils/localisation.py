@@ -1,39 +1,84 @@
-"""
-use some kind of dot notation
-> "player.now_playing.generic"
-should map to the generic string in the now_playing dict within the player.json file
-
-Client - Server - User
-"""
+"""Giesela speaks languages."""
 
 import json
+import logging
 import os
 from os import path
 
 import discord
 
-from giesela.config import static_config
+from giesela import constants
 
-LOCALE_FOLDER = "locale"
+log = logging.getLogger(__name__)
+
+LOCALE_FOLDER = constants.FileLocations.LOCALE_FOLDER
 FALLBACK_LANGUAGE = "_default"
 
 locales = {}
 
 
 class Settings:
+    """Makes it possible to change the language per server."""
 
-    def search_id(_id):
-        return static_config.user_languages.get(_id) or static_config.server_languages.get(_id)
+    client_language = FALLBACK_LANGUAGE
+    languages = {}
 
-    def set_language(obj, lang):
+    @classmethod
+    def load(cls):
+        """Load settings."""
+        log.debug("Loading language settings!")
+
+        try:
+            with open(constants.FileLocations.LOCALISATION, "r") as f:
+                data = json.load(f)
+        except json.JSONDecodeError:
+            log.warn("Couldn't parse language config.")
+            return
+
+        cls.client_language = data.get("client", FALLBACK_LANGUAGE)
+        cls.languages = data.get("languages", {})
+        log.debug("Loaded language settings")
+
+    @classmethod
+    def save(cls):
+        """Save current settings to disk."""
+        data = {
+            "client": cls.client_language,
+            "languages": cls.languages
+        }
+        with open(constants.FileLocations.LOCALISATION, "r") as f:
+            json.dump(data, f)
+
+        log.debug("saved language settings")
+
+    @classmethod
+    def set_client_language(cls, lang):
+        """Set the language used by Giesela."""
         assert has_language(lang), "Can't set the language to {}, this language doesn't exist".format(lang)
 
-        if isinstance(obj, discord.Server):
-            static_config.server_languages[obj.id] = lang
-        elif isinstance(obj, discord.User):
-            static_config.user_languages[obj.id] = lang
+        cls.client_language = lang
+        cls.save()
 
-    def get_language(lans):
+    @classmethod
+    def set_language(cls, obj, lang):
+        """Set the language used for obj."""
+        assert has_language(lang), "Can't set the language to {}, this language doesn't exist".format(lang)
+
+        _id = obj
+
+        if isinstance(obj, (discord.Server, discord.User)):
+            _id = obj.id
+
+        assert isinstance(_id, (str, int)), "Can't set the language for an object of type {}.".format(type(_id))
+
+        cls.languages[_id] = lang
+        cls.save()
+
+    @classmethod
+    def get_language(cls, lans):
+        """Return the best language for lans."""
+        if not lans:
+            return cls.client_language
 
         if not isinstance(lans, (tuple, list)):
             lans = [lans]
@@ -47,19 +92,24 @@ class Settings:
             if isinstance(lan, (discord.User, discord.Server)):
                 _id = lan.id
 
-            res = Settings.search_id(_id)
+            res = cls.search_id(_id)
 
             if res:
                 return res
 
-        return static_config.client_language
+        return cls.client_language
+
+
+Settings.load()
 
 
 def unravel_id(string_id):
+    """Unpack the id to a list."""
     return [s.lower() for s in string_id.split(".")]
 
 
 def traverse(dictionary, directions):
+    """Make your way through a dictionary by following the directions."""
     current_frame = dictionary
     for ind, loc in enumerate(directions):
         try:
@@ -72,12 +122,14 @@ def traverse(dictionary, directions):
 
 
 def has_language(lang):
+    """Find out whether Giesela speaks this language."""
     loc = path.join(LOCALE_FOLDER, lang)
 
     return path.isdir(loc)
 
 
 def load_language(lang):
+    """Load this language."""
     loc = path.join(LOCALE_FOLDER, lang)
 
     lan_data = {}
@@ -100,26 +152,34 @@ def load_language(lang):
     else:
         raise ValueError("Language {} doesn't exist".format(lang))
 
+    log.info("Loaded language {}".format(lang))
     return lan_data
 
 
 class Locale:
+    """A nice wrapper for a language."""
+
     def __init__(self, lang):
+        """Initialise."""
         self.language = lang
         self.data = load_language(lang)
 
     def __getitem__(self, key):
+        """Return string from key."""
         return self.get(key)
 
     def __str__(self):
-        return "Locale {}".format(self.language)
+        """Maek buutiful."""
+        return "<Locale {}>".format(self.language)
 
     def get(self, string_id):
+        """Get string from key."""
         location = unravel_id(string_id)
 
         return traverse(self.data, location)
 
     def format(self, string_id, *args, **kwargs):
+        """Shorthand for get + str.format."""
         string = self.get(string_id)
 
         assert isinstance(string, str), "\"{}\" isn't explicit!".format(string_id)
@@ -131,6 +191,7 @@ _fallback = Locale(FALLBACK_LANGUAGE)
 
 
 def get_locale(lang, use_fallback=True):
+    """Get a locale object either by the language's name or a server."""
     global locales
 
     lang = Settings.get_language(lang)
@@ -148,12 +209,10 @@ def get_locale(lang, use_fallback=True):
 
 
 def get(lang, string_id):
+    """Shorthand for get_locale + get."""
     return get_locale(lang).get(string_id)
 
 
 def format(lang, string_id, *args, **kwargs):
+    """Shorthand for get_locale + get + str.format."""
     return get_locale(lang).format(string_id, *args, **kwargs)
-
-
-# if __name__ == "__main__":
-#     print(format("de-de", "player.now_playing.generic", title="test"))

@@ -1,0 +1,9 @@
+{
+  "token": {
+    "none": "You haven't set a token yet. Please set the token in the config.json file or run the setup!",
+    "invalid": "The token you provided is invalid!"
+  },
+  "config": {
+    "missing_keys": "The config file seems to be broken! It's missing the following keys:\n> {}"
+  }
+}
