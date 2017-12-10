@@ -20,3 +20,7 @@ class FileLocations:
 
     LOCALISATION = "config/locale.json"
     LOCALE_FOLDER = "locale"
+
+    CACHE_FOLDER = "data/cache"
+
+    EXPIRED_TOKENS = CACHE_FOLDER + "/expired_tokens.txt"

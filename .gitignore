@@ -1,12 +1,6 @@
 *.pyc
 
+logs
+
 venv
 venv_run.bat
-
-logs
-cache
-
-data/playlists.json
-data/webiesela_tokens.json
-config/options.ini
-data/settings.bin
