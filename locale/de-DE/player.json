@@ -1,6 +1,6 @@
 {
-  "now_playing":{
-    "generic":"Es wird **{title}** gespielt",
-    "timestamp_entry":"Es wird **{sub_entry}** ({index}{ordinal} Song) von \"{title}\" gespielt"
+  "now_playing": {
+    "generic": "Es wird **{title}** gespielt",
+    "timestamp_entry": "Es wird **{sub_entry}** ({index}{ordinal} Song) von \"{title}\" gespielt"
   }
 }
