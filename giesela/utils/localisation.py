@@ -92,7 +92,7 @@ class Settings:
             if isinstance(lan, (discord.User, discord.Server)):
                 _id = lan.id
 
-            res = cls.search_id(_id)
+            res = cls.languages.get(_id)
 
             if res:
                 return res

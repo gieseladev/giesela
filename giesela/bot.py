@@ -35,7 +35,6 @@ class Giesela(discord.Client):
 
     def load_modules(self):
         """Load all modules."""
-        # needed to import all extensions
         from . import modules  # noqa: F401
 
         ext_classes = module.GieselaModule.modules
