@@ -8,7 +8,9 @@ from collections import defaultdict
 import aiohttp
 import discord
 
+from giesela.config import Config
 from giesela.lib import module
+from giesela.models import exceptions, signals
 from giesela.utils.opus_loader import load_opus_lib
 
 load_opus_lib()
@@ -22,10 +24,10 @@ class Giesela(discord.Client):
         """Initialise."""
         super().__init__()
 
+        self.config = Config.load()
         self.modules = []
 
         self.locks = defaultdict(asyncio.Lock)
-
         self.aiosession = aiohttp.ClientSession(loop=self.loop)
 
         self.load_modules()
@@ -47,7 +49,7 @@ class Giesela(discord.Client):
                 log.debug("created module {}".format(m))
 
                 m.on_load()
-                log.debug("initialised extension {}".format(m))
+                log.debug("initialised module {}".format(m))
 
                 self.modules.append(m)
             except Exception:
@@ -150,24 +152,40 @@ class Giesela(discord.Client):
         """Call when user starts typing."""
         await self.emit("on_typing", channel, user, when)
 
+    def _cleanup(self):
+        try:
+            self.loop.run_until_complete(self.logout())
+        except Exception:  # Can be ignored
+            pass
+
+        pending = asyncio.Task.all_tasks()
+        gathered = asyncio.gather(*pending)
+
+        try:
+            gathered.cancel()
+            self.loop.run_until_complete(gathered)
+            gathered.exception()
+        except Exception:  # Can be ignored
+            pass
+
     def run(self):
         """Start 'er up."""
         try:
-            self.loop.run_until_complete(self.start(*self.config.auth))
+            self.config.check()
+        except exceptions.ConfigException as e:
+            log.error("The config file seems to be broken! It's missing the following keys:\n> {}".format(" ,".join(e.missing)))
+            raise signals.StopSignal
 
+        try:
+            self.loop.run_until_complete(self.start(self.config.token))
         except discord.errors.LoginFailure:
-            # TODO
-            raise Exception(
-                "Bot cannot login, bad credentials.",
-                "Fix your Email or Password or Token in the options file.  "
-                "Remember that each field should be on their own line.")
+            log.error("Couldn't log-in. Your token is wrong!")
 
         finally:
             try:
                 self._cleanup()
             except Exception as e:
-                print("Error in cleanup:", e)
+                log.exception("Error in cleanup:")
 
             self.loop.close()
-            if self.exit_signal:
-                raise self.exit_signal
+            raise signals.StopSignal

@@ -1,2 +1,2 @@
-"""Giesela models."""
-from .giesela_user import GieselaUser  # noqa: F401
+# flake8: noqa
+from .giesela_user import GieselaUser

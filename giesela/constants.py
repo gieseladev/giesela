@@ -1,32 +1,19 @@
-import os.path
+"""Constants for Giesela."""
 
-MAIN_VERSION = "4.9.9"
-SUB_VERSION = "playlist-webiesela-rewrite"
-VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
-all_sub_versions = {
-    "4.9.x": "Jiesusala",
-    "4.8.x": "GUIsela",
-    "4.7.x": "Ibiezela",
-    "4.6.x": "Raindrop",
-    "4.5.x": "Just Bread",
-    "4.4.x": "Webiesela",
-    "4.3.x": "Breadstick",
-    "4.2.x": "Ice Cube",
-    "4.1.x": "Gooma",
-    "4.0.x": "New Reign",
-    "3.9.x": "Giesenesis",
-    "3.8.x": "Giezela",
-    "3.7.x": "GieseLa La Land",
-    "3.6.x": "Weebiesela",
-    "3.5.x": "Veggiesela",
-    "3.4.x": "Gunzulalela",
-    "3.3.x": "Giselator",
-    "3.2.x": "GG iesela",
-    "3.1.x": "Age of Giesela",
-    "3.0.x": "Giesela PLUS"
-}
+class Stats:
+    """Various stats."""
 
-AUDIO_CACHE_PATH = "cache/audio_cache"
-ABS_AUDIO_CACHE_PATH = os.path.join(os.getcwd(), AUDIO_CACHE_PATH)
-DISCORD_MSG_CHAR_LIMIT = 2000
+    MAJOR = 3  # when you make incompatible API changes
+    MINOR = 0  # when you add functionality in a backwards-compatible manner
+    PATCH = 0  # when you make backwards-compatible bug fixes
+
+    VERSION = "{}.{}.{}".format(MAJOR, MINOR, PATCH)
+
+
+class FileLocations:
+    """Various files."""
+
+    LOGGING = "config/logging.json"
+    CONFIG = "config/config.json"
+    PERMISSIONS = "config/permissions.json"

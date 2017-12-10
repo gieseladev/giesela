@@ -26,3 +26,18 @@ class ParamError(GieselaException):
         """Create new."""
         super().__init__(msg, *args)
         self.erroneous = erroneous
+
+
+class ConfigException(GieselaException):
+    """When there's something wrong with the config."""
+
+    pass
+
+
+class ConfigKeysMissing(ConfigException):
+    """When the config file isn't complete."""
+
+    def __init__(self, missing, *args):
+        """Create new."""
+        super().__init__("Not all keys provided!", *args)
+        self.missing = missing
