@@ -1,6 +1,6 @@
 {
   "now_playing": {
-    "generic": "Now playing **{title}**",
-    "timestamp_entry": "Now playing **{sub_entry}** ({index}{ordinal} entry) from \"{title}\""
+    "generic": "**{title} ** wodt nu afgespeeld",
+    "timestamp_entry": "Er wordt nu **{sub_entry}** ({index}{ordinal} nummer) van \"{title}\" gespeeld"
   }
 }
