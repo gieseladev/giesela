@@ -1,0 +1,13 @@
+site_name: Giesela
+repo_url: https://github.com/siku2/Giesela  
+pages:
+- Home: index.md
+- About: about.md
+# - Guides:
+# - Commands:
+#    - Readme: Readme.md
+#    - Commands List: Commands List.md
+# - Features Explained:
+# - Frequently Asked Questions: Frequently Asked Questions.md
+
+theme: readthedocs
