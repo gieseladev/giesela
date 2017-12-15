@@ -1,2 +1,3 @@
-# Giesela
-A *cough* tiny Discord bot.
+# Giesela Documentation 
+A not so tiny Discord bot.
+
