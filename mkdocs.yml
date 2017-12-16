@@ -3,11 +3,21 @@ repo_url: https://github.com/siku2/Giesela
 pages:
 - Home: index.md
 - About: about.md
-# - Guides:
-# - Commands:
-#    - Readme: Readme.md
-#    - Commands List: Commands List.md
-# - Features Explained:
-# - Frequently Asked Questions: Frequently Asked Questions.md
+- Core Overview: 
+    - Models: core/models.md
+    - Modules: core/modules.md
+    - Utils: core/utils.md
+    - Locale: core/locale.md
+- Models:
+    - Entries: models/entries.md
+    - Permissions: models/permissions.md
+    - Playlist: models/playlist.md
+# - Modules: 
+# - Webiesela:
+#   - Server: server.md
+#   - Models:
+#   - Manager: 
+#   - Player: 
+- Config: config.md
 
 theme: readthedocs
