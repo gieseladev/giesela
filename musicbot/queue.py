@@ -1,9 +1,8 @@
 import asyncio
-import copy
 import datetime
 import random
 import time
-import traceback
+import urllib
 from collections import deque
 from itertools import islice
 
@@ -104,7 +103,7 @@ class Queue(EventEmitter):
             if e.exc_info[0] == UnsupportedError:
                 print("[STREAM] Assuming content is a direct stream")
 
-            elif e.exc_info[0] == URLError:
+            elif e.exc_info[0] == urllib.URLError:
                 if os.path.exists(os.path.abspath(song_url)):
                     raise ExtractionError(
                         "This is not a stream, this is a file path.")

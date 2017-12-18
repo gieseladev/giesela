@@ -1,13 +1,11 @@
-import asyncio
 import datetime
-import json
 import math
 import random
 import re
 import time
 import traceback
 import unicodedata
-from datetime import timedelta
+import urllib.parse
 from difflib import SequenceMatcher
 from functools import wraps
 from hashlib import md5
@@ -17,12 +15,12 @@ from threading import Thread
 
 import aiohttp
 import requests
-from bs4 import BeautifulSoup
 from discord.ext.commands.bot import _get_variable
-from PIL import Image, ImageStat
 
+from bs4 import BeautifulSoup
 from musicbot.config import ConfigDefaults, static_config
 from musicbot.constants import DISCORD_MSG_CHAR_LIMIT
+from PIL import Image, ImageStat
 
 
 def wrap_string(target, wrapping, handle_special=True, reverse_closer=True):
@@ -664,10 +662,10 @@ def md5sum(filename, limit=0):
 
 def get_dev_version():
     page = requests.get(
-        "https://raw.githubusercontent.com/siku2/Giesela/dev/musicbot/constants.py"
+        "https://raw.githubusercontent.com/GieselaDev/Giesela/dev/musicbot/constants.py"
     )
     matches = re.search(
-        r"MAIN_VERSION = \"(\d.\d.\d)\"\nSUB_VERSION = \"(.*?)\"",
+        r"MAIN_VERSION = \"(\d+\.\d+\.\d+)\"\nSUB_VERSION = \"(.*?)\"",
         page.content.decode("utf-8"))
 
     if matches is None:
@@ -678,7 +676,7 @@ def get_dev_version():
 
 def get_master_version():
     page = requests.get(
-        "https://raw.githubusercontent.com/siku2/Giesela/master/musicbot/constants.py"
+        "https://raw.githubusercontent.com/GieselaDev/Giesela/master/musicbot/constants.py"
     )
     matches = re.search(
         r"MAIN_VERSION = \"(\d.\d.\d)\"\nSUB_VERSION = \"(.*?)\"",
@@ -690,8 +688,29 @@ def get_master_version():
     return matches.groups()
 
 
+def html2md(html):
+    """Convert html to markdown.
+
+    :param html: html text to convert.
+    """
+    html_to_markdown = [
+        # HTML tag to Markdown
+        (r"<code.+?>(.+?)<\/code>", r"`\1`"),  # code
+        (r"<strong>(.+?)<\/strong>", r"**\1**"),  # bold
+        (r"<a\shref=\"(.+?)\">(.+?)<\/a>", r"[`\2`](\1)"),  # links
+        # that's all
+    ]
+
+    html = urllib.parse.unquote(html)
+
+    for target, replacement in html_to_markdown:
+        html = re.sub(target, replacement, html)
+
+    return html
+
+
 def get_version_changelog(version_code=None):
-    base_url = "https://siku2.github.io/Giesela/changelogs/changelog-"
+    base_url = "https://gieseladev.github.io/Giesela/changelogs/changelog-"
     v_code = re.sub(r"\D", "", version_code or get_dev_version()[0])
 
     resp = requests.get(base_url + v_code)

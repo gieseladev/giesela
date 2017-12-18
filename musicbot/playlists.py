@@ -1,11 +1,9 @@
 import json
 import os
 
-import asyncio
 from musicbot.config import static_config
 from musicbot.entry import Entry
-from musicbot.lib.serialisable import (AsyncSerialisable, Serialisable,
-                                       WebSerialisable)
+from musicbot.lib.serialisable import Serialisable, WebSerialisable
 from musicbot.web_author import WebAuthor
 
 

@@ -5,12 +5,11 @@ import re
 import time
 from io import BytesIO
 
-import configparser
 from musicbot import mosaic
-from musicbot.entry import Entry, GieselaEntry, SpotifyEntry
+from musicbot.entry import Entry, SpotifyEntry
 from musicbot.exceptions import BrokenEntryError, OutdatedEntryError
 from musicbot.imgur import _upload_playlist_cover
-from musicbot.utils import clean_songname, format_time, similarity
+from musicbot.utils import format_time, similarity
 from musicbot.web_author import WebAuthor
 
 
