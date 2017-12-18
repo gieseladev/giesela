@@ -1,0 +1,23 @@
+site_name: Giesela
+repo_url: https://github.com/siku2/Giesela  
+pages:
+- Home: index.md
+- About: about.md
+- Core Overview: 
+    - Models: core/models.md
+    - Modules: core/modules.md
+    - Utils: core/utils.md
+    - Locale: core/locale.md
+- Models:
+    - Entries: models/entries.md
+    - Permissions: models/permissions.md
+    - Playlist: models/playlist.md
+# - Modules: 
+# - Webiesela:
+#   - Server: server.md
+#   - Models:
+#   - Manager: 
+#   - Player: 
+- Config: config.md
+
+theme: readthedocs
