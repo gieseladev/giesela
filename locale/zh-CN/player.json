@@ -1,6 +1,6 @@
 {
-  "now_playing":{
-    "generic":"Now playing **{title}**",
-    "timestamp_entry":"Now playing **{sub_entry}** ({index}{ordinal} entry) from \"{title}\""
+  "now_playing": {
+    "generic": "正在播放 **{title}**",
+    "timestamp_entry": "正在播放 **{sub_entry}** ({index}{ordinal} entry) 来自\"{title}\""
   }
 }

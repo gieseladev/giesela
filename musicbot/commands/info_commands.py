@@ -1,18 +1,16 @@
-import datetime
 import json
-import re
 import random
-from datetime import date, timedelta
-from textwrap import dedent, indent
+import re
+from datetime import date
+from textwrap import dedent
 
 import requests
 from discord import Embed
 
 from musicbot.constants import VERSION as BOTVERSION
 from musicbot.tungsten import Tungsten
-from musicbot.utils import (Response, block_user, command_info,
-                            get_dev_version, get_version_changelog, hex_to_dec,
-                            owner_only, prettydate)
+from musicbot.utils import (Response, command_info, get_dev_version,
+                            get_version_changelog, hex_to_dec, prettydate)
 
 
 class InfoCommands:
@@ -87,7 +85,7 @@ class InfoCommands:
         else:
             em = Embed(
                 title="GIESELA HELP",
-                url="http://siku2.github.io/Giesela/",
+                url="http://gieseladev.github.io/Giesela/",
                 colour=random.randint(0, 0xFFFFFF),
                 description="Here are some of the most useful commands,\nYou can always use `{0}help <cmd>` to get more detailed information on a command".
                 format(self.config.command_prefix)
@@ -158,7 +156,7 @@ class InfoCommands:
 
         await self.send_typing(channel)
         msgContent = " ".join(leftover_args)
-        
+
         col = random.randint(0, 0xFFFFFF)
 
         client = Tungsten("EH8PUT-67PJ967LG8")
@@ -242,6 +240,6 @@ class InfoCommands:
             BOTVERSION, dev_code + "_" + dev_name, changelog)[:2000]
 
         em = Embed(title="Version \"{}\"".format(v_name.replace("_", " ").title()), description=desc,
-                   url="https://siku2.github.io/Giesela", colour=hex_to_dec("#67BE2E"))
+                   url="https://gieseladev.github.io/Giesela", colour=hex_to_dec("#67BE2E"))
 
         return Response(embed=em)

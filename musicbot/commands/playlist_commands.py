@@ -1,22 +1,19 @@
+import asyncio
 import functools
 import re
 import time
-from random import choice, shuffle
-from textwrap import indent
+from random import shuffle
 
 from discord import Embed
 
-import asyncio
 from musicbot.entry import GieselaEntry, TimestampEntry, YoutubeEntry
 from musicbot.entry_updater import fix_entry, fix_generator
 from musicbot.exceptions import ExtractionError, WrongEntryTypeError
 from musicbot.imgur import upload_playlist_cover, upload_song_image
-from musicbot.saved_playlists import Playlists
-from musicbot.spotify import SpotifyTrack
-from musicbot.utils import (Response, asyncio, block_user, command_info,
-                            create_bar, format_time, hex_to_dec, is_image,
-                            nice_cut, owner_only, parse_timestamp,
-                            timestamp_to_queue, to_timestamp, wrap_string)
+from musicbot.utils import (Response, block_user, command_info, create_bar,
+                            format_time, hex_to_dec, is_image, nice_cut,
+                            parse_timestamp, timestamp_to_queue, to_timestamp,
+                            wrap_string)
 
 
 class PlaylistCommands:
@@ -1100,9 +1097,10 @@ class PlaylistCommands:
         "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite"),
         "4.2.3": (1500959036, "Error handling for DMCA takedowns and other Youtube problems"),
         "4.6.9": (1503754385, "Fixed typo"),
-        "4.7.8": (1504105737, "Using the new copy method for entries to make sure that they're \"clean\"")
+        "4.7.8": (1504105737, "Using the new copy method for entries to make sure that they're \"clean\""),
+        "4.9.12": (1512834598, "Can now actually use command with query overload.")
     })
-    async def cmd_addtoplaylist(self, channel, author, player, playlistname, query=None):
+    async def cmd_addtoplaylist(self, channel, author, player, playlistname, leftover_args):
         """
         ///|Usage
         `{command_prefix}addtoplaylist <playlistname> [query]`
@@ -1110,6 +1108,8 @@ class PlaylistCommands:
         Add the current entry to a playlist.
         If you either provide a link or a name, that song is added to the playlist.
         """
+
+        query = " ".join(leftover_args)
 
         if playlistname is None:
             return Response(
