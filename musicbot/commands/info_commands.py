@@ -85,7 +85,7 @@ class InfoCommands:
         else:
             em = Embed(
                 title="GIESELA HELP",
-                url="http://siku2.github.io/Giesela/",
+                url="http://gieseladev.github.io/Giesela/",
                 colour=random.randint(0, 0xFFFFFF),
                 description="Here are some of the most useful commands,\nYou can always use `{0}help <cmd>` to get more detailed information on a command".
                 format(self.config.command_prefix)
@@ -240,6 +240,6 @@ class InfoCommands:
             BOTVERSION, dev_code + "_" + dev_name, changelog)[:2000]
 
         em = Embed(title="Version \"{}\"".format(v_name.replace("_", " ").title()), description=desc,
-                   url="https://siku2.github.io/Giesela", colour=hex_to_dec("#67BE2E"))
+                   url="https://gieseladev.github.io/Giesela", colour=hex_to_dec("#67BE2E"))
 
         return Response(embed=em)

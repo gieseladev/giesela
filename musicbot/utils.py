@@ -662,7 +662,7 @@ def md5sum(filename, limit=0):
 
 def get_dev_version():
     page = requests.get(
-        "https://raw.githubusercontent.com/siku2/Giesela/dev/musicbot/constants.py"
+        "https://raw.githubusercontent.com/GieselaDev/Giesela/dev/musicbot/constants.py"
     )
     matches = re.search(
         r"MAIN_VERSION = \"(\d+\.\d+\.\d+)\"\nSUB_VERSION = \"(.*?)\"",
@@ -676,7 +676,7 @@ def get_dev_version():
 
 def get_master_version():
     page = requests.get(
-        "https://raw.githubusercontent.com/siku2/Giesela/master/musicbot/constants.py"
+        "https://raw.githubusercontent.com/GieselaDev/Giesela/master/musicbot/constants.py"
     )
     matches = re.search(
         r"MAIN_VERSION = \"(\d.\d.\d)\"\nSUB_VERSION = \"(.*?)\"",
@@ -710,7 +710,7 @@ def html2md(html):
 
 
 def get_version_changelog(version_code=None):
-    base_url = "https://siku2.github.io/Giesela/changelogs/changelog-"
+    base_url = "https://gieseladev.github.io/Giesela/changelogs/changelog-"
     v_code = re.sub(r"\D", "", version_code or get_dev_version()[0])
 
     resp = requests.get(base_url + v_code)
