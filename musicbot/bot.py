@@ -17,7 +17,6 @@ import discord
 from discord import Client
 from discord.enums import ChannelType
 from discord.utils import find
-from discord.voice_client import VoiceClient
 
 from musicbot import downloader, exceptions, localization
 from musicbot.commands.admin_commands import AdminCommands
