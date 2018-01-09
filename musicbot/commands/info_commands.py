@@ -1,6 +1,8 @@
 import json
 import random
 import re
+import time
+
 from datetime import date
 from textwrap import dedent
 
@@ -243,3 +245,21 @@ class InfoCommands:
                    url="https://gieseladev.github.io/Giesela", colour=hex_to_dec("#67BE2E"))
 
         return Response(embed=em)
+   
+    async def cmd_ping(self, channel):
+        """
+        ///|Usage
+        `***REMOVED***command_prefix***REMOVED***ping`
+        ///|Explanation
+        A boring ping command because I'm bored. But really, does this need explanation?
+        """
+
+        await self.send_typing(channel)
+        pt = time.time()
+        em = Embed(title="Pinging...", colour=0xff0000)
+        msg = await self.safe_send_message(channel, embed=em)
+        ping = time.time() - pt 
+        result = "Pong: %f seconds!" % ping 
+        em = Embed(title=result, colour=0x1ef21e)
+        
+        await self.safe_edit_message(msg, embed=em)
