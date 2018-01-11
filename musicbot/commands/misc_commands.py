@@ -75,7 +75,7 @@ class MiscCommands:
         ///|Usage
         `{command_prefix}register <token>`
         ///|Explanation
-        Use this command in order to use the [Giesela-Website](http://giesela.org).
+        Use this command in order to use the [Giesela-Website]({web_url}).
         """
 
         if GieselaServer.register_information(server.id, author.id, token.lower()):
