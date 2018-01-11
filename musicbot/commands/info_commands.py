@@ -45,7 +45,7 @@ class InfoCommands:
             cmd = getattr(self, "cmd_" + command, None)
             if cmd:
                 documentation = cmd.__doc__.format(
-                    command_prefix=self.config.command_prefix)
+                    command_prefix=self.config.command_prefix, web_url=self.config.web_url)
                 em = Embed(title="*****REMOVED******REMOVED*****".format(command.upper()))
                 fields = documentation.split("///")
                 if len(fields) < 2:  # backward compatibility
@@ -132,7 +132,7 @@ class InfoCommands:
             em.add_field(name="Playlist", value=playlist_commands, inline=False)
 
             misc_commands = "\n".join([
-                "`***REMOVED***0***REMOVED***register` register your token in order to use [Webiesela](http://giesela.org)",
+                "`***REMOVED***0***REMOVED***register` register your token in order to use [Webiesela](***REMOVED***1***REMOVED***)",
                 "`***REMOVED***0***REMOVED***summon` summon her like the servant she is",
                 "`***REMOVED***0***REMOVED***lyrics` retrieve lyrics for the current song",
                 "`***REMOVED***0***REMOVED***random` choose between items",
@@ -140,7 +140,7 @@ class InfoCommands:
                 "`***REMOVED***0***REMOVED***ask` ask a question",
                 "`***REMOVED***0***REMOVED***c` chat with Giesela",
                 "`***REMOVED***0***REMOVED***explode` explode a timestamp-entry into its sub-entries"
-            ]).format(self.config.command_prefix)
+            ]).format(self.config.command_prefix, self.config.web_url)
             em.add_field(name="Misc", value=misc_commands, inline=False)
 
             return Response(embed=em)

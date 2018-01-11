@@ -111,6 +111,7 @@ class ConfigDefaults:
     owned_channels = set()
     private_chat_commands = set()
     idle_game = ""
+    web_url = "http://giesela.org"
 
     client_language = "en-gb"
     server_languages = ***REMOVED******REMOVED***
