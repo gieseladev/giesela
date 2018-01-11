@@ -25,7 +25,8 @@ class InfoCommands:
         "3.7.4": (1498318916, "Added \"lyrics\" function help text"),
         "4.2.2": (1500905513, "Updated help texts"),
         "4.6.0": (1502208273, "Added a missing comma so resume and volume don't show on the same line"),
-        "4.7.2": (1503855125, "Updated command list")
+        "4.7.2": (1503855125, "Updated command list"),
+        "4.9.12": (1515647091, "Make the Webiesela URL configurable in the help menu")
     })
     async def cmd_help(self, channel, leftover_args):
         """
