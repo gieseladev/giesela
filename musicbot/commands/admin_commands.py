@@ -8,8 +8,7 @@ import discord
 
 from musicbot import exceptions
 from musicbot.settings import Settings
-from musicbot.utils import (Response, block_user, command_info, escape_dis,
-                            owner_only)
+from musicbot.utils import Response, command_info, escape_dis, owner_only
 
 
 class AdminCommands:

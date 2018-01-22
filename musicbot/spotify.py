@@ -1,12 +1,11 @@
+import asyncio
 import re
 import time
 from random import choice
 
 import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
-
-import asyncio
 from musicbot.utils import similarity
+from spotipy.oauth2 import SpotifyClientCredentials
 
 
 class UrlError(Exception):
@@ -15,6 +14,7 @@ class UrlError(Exception):
 
 class NotFoundError(Exception):
     pass
+
 
 cred = SpotifyClientCredentials(
     "df9e44098b934c028ea085227c3ec3f6", "f9d02852fb1a4dacaa50d14e915c5d0e")
@@ -55,7 +55,7 @@ class SpotifyPlaylist:
             "name":         playlist["name"],
             "description":  playlist["description"],
             "tracks":       tracks,
-            "author":       playlist["owner"]["display_name"],
+            "author":       playlist["owner"]["display_name"] if "display_name" in playlist["owner"] else playlist["owner"]["id"],
             "images":       playlist["images"],
             "uri":          playlist["uri"],
             "href":         playlist["href"]
@@ -268,7 +268,7 @@ class SpotifyTrack:
             raise UrlError("<url> can't be parsed")
 
         track_id = match.group(1)
-        
+
         try:
             track = get_spotify_client().track(track_id)
         except spotipy.client.SpotifyException:
@@ -378,17 +378,18 @@ def get_certainty(query, song_name, artist_name):
 
 
 def model_from_url(url):
-  try:
-    return SpotifyTrack.from_url(url)
-  except (UrlError, NotFoundError):
-    pass
+    try:
+        return SpotifyTrack.from_url(url)
+    except (UrlError, NotFoundError):
+        pass
 
-  try:
-    return SpotifyPlaylist.from_url(url)
-  except (UrlError, NotFoundError):
-    pass
-  
-  return None
+    try:
+        return SpotifyPlaylist.from_url(url)
+    except (UrlError, NotFoundError):
+        pass
+
+    return None
+
 
 if __name__ == "__main__":
     start = time.time()

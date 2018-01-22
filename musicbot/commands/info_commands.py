@@ -1,18 +1,18 @@
-import datetime
 import json
-import re
 import random
-from datetime import date, timedelta
-from textwrap import dedent, indent
+import re
+import time
+
+from datetime import date
+from textwrap import dedent
 
 import requests
 from discord import Embed
 
 from musicbot.constants import VERSION as BOTVERSION
 from musicbot.tungsten import Tungsten
-from musicbot.utils import (Response, block_user, command_info,
-                            get_dev_version, get_version_changelog, hex_to_dec,
-                            owner_only, prettydate)
+from musicbot.utils import (Response, command_info, get_dev_version,
+                            get_version_changelog, hex_to_dec, prettydate)
 
 
 class InfoCommands:
@@ -25,7 +25,8 @@ class InfoCommands:
         "3.7.4": (1498318916, "Added \"lyrics\" function help text"),
         "4.2.2": (1500905513, "Updated help texts"),
         "4.6.0": (1502208273, "Added a missing comma so resume and volume don't show on the same line"),
-        "4.7.2": (1503855125, "Updated command list")
+        "4.7.2": (1503855125, "Updated command list"),
+        "4.9.12": (1515647091, "Make the Webiesela URL configurable in the help menu")
     })
     async def cmd_help(self, channel, leftover_args):
         """
@@ -45,7 +46,7 @@ class InfoCommands:
             cmd = getattr(self, "cmd_" + command, None)
             if cmd:
                 documentation = cmd.__doc__.format(
-                    command_prefix=self.config.command_prefix)
+                    command_prefix=self.config.command_prefix, web_url=self.config.web_url)
                 em = Embed(title="**{}**".format(command.upper()))
                 fields = documentation.split("///")
                 if len(fields) < 2:  # backward compatibility
@@ -87,7 +88,7 @@ class InfoCommands:
         else:
             em = Embed(
                 title="GIESELA HELP",
-                url="http://siku2.github.io/Giesela/",
+                url="http://gieseladev.github.io/Giesela/",
                 colour=random.randint(0, 0xFFFFFF),
                 description="Here are some of the most useful commands,\nYou can always use `{0}help <cmd>` to get more detailed information on a command".
                 format(self.config.command_prefix)
@@ -132,7 +133,7 @@ class InfoCommands:
             em.add_field(name="Playlist", value=playlist_commands, inline=False)
 
             misc_commands = "\n".join([
-                "`{0}register` register your token in order to use [Webiesela](http://giesela.org)",
+                "`{0}register` register your token in order to use [Webiesela]({1})",
                 "`{0}summon` summon her like the servant she is",
                 "`{0}lyrics` retrieve lyrics for the current song",
                 "`{0}random` choose between items",
@@ -140,7 +141,7 @@ class InfoCommands:
                 "`{0}ask` ask a question",
                 "`{0}c` chat with Giesela",
                 "`{0}explode` explode a timestamp-entry into its sub-entries"
-            ]).format(self.config.command_prefix)
+            ]).format(self.config.command_prefix, self.config.web_url)
             em.add_field(name="Misc", value=misc_commands, inline=False)
 
             return Response(embed=em)
@@ -158,7 +159,7 @@ class InfoCommands:
 
         await self.send_typing(channel)
         msgContent = " ".join(leftover_args)
-        
+
         col = random.randint(0, 0xFFFFFF)
 
         client = Tungsten("EH8PUT-67PJ967LG8")
@@ -242,6 +243,24 @@ class InfoCommands:
             BOTVERSION, dev_code + "_" + dev_name, changelog)[:2000]
 
         em = Embed(title="Version \"{}\"".format(v_name.replace("_", " ").title()), description=desc,
-                   url="https://siku2.github.io/Giesela", colour=hex_to_dec("#67BE2E"))
+                   url="https://gieseladev.github.io/Giesela", colour=hex_to_dec("#67BE2E"))
 
         return Response(embed=em)
+   
+    async def cmd_ping(self, channel):
+        """
+        ///|Usage
+        `{command_prefix}ping`
+        ///|Explanation
+        A boring ping command because I'm bored. But really, does this need explanation?
+        """
+
+        await self.send_typing(channel)
+        pt = time.time()
+        em = Embed(title="Pinging...", colour=0xff0000)
+        msg = await self.safe_send_message(channel, embed=em)
+        ping = time.time() - pt 
+        result = "Pong: %f seconds!" % ping 
+        em = Embed(title=result, colour=0x1ef21e)
+        
+        await self.safe_edit_message(msg, embed=em)

@@ -1,10 +1,8 @@
 from datetime import datetime
 from string import ascii_lowercase as alphabet
 
-from openpyxl import Workbook
-
-from musicbot.config import ConfigDefaults
 from musicbot.utils import format_time
+from openpyxl import Workbook
 
 
 class OnlineLogger:
