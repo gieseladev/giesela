@@ -272,7 +272,7 @@
         },
         "song_title": "Auf Die Guten Alten Zeiten",
         "artist": "Dame",
-        "artist_image": "https://i.scdn.co/image/888de87aed1ac354774afffe068c9a118f42d879",
+        "artist_image": "https://i.scdn.co/image/f93820af748e4b36f1de578f0d240d43cd73a542",
         "cover": "https://i.scdn.co/image/84696f2664131f797ead86bd592c3ccfba624ddd",
         "album": "Notiz An Mich",
         "spotify_data": {
@@ -401,7 +401,7 @@
         },
         "song_title": "Back In the Game",
         "artist": "Wu-Tang Clan & Ronald Isley",
-        "artist_image": "https://i.scdn.co/image/989535851d8be49b889c4426707ab203b2234ea7",
+        "artist_image": "https://i.scdn.co/image/46851a0a6e82e337109e7a632d75c19a86c10511",
         "cover": "https://i.scdn.co/image/fa94fe9cf9aa704a1a370cd0ccbd02c0c7af5971",
         "album": "The Essential Wu-Tang Clan",
         "spotify_data": {
@@ -583,7 +583,7 @@
         },
         "song_title": "Believer",
         "artist": "Imagine Dragons",
-        "artist_image": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
+        "artist_image": "https://i.scdn.co/image/affb5c546adf0b6f718282528e56f24854026be1",
         "cover": "https://i.scdn.co/image/84989ed4cca6518fa540bb3c8a7a73127695e937",
         "album": "Evolve",
         "spotify_data": {
@@ -712,7 +712,7 @@
         },
         "song_title": "Beyond the Sun (feat. J Live)",
         "artist": "Cunninlynguists & J-Live",
-        "artist_image": "https://i.scdn.co/image/fc2ac4f396bc33bc3e5461348de0ff309dd0932f",
+        "artist_image": "https://i.scdn.co/image/2c1ce9cb9ea258634259e6ae53d5fa6ff58291de",
         "cover": "https://i.scdn.co/image/6f6d48dcd7908e2e72cfbc45bed40fad03b1dcd3",
         "album": "Strange Journey Volume Three",
         "spotify_data": {
@@ -891,7 +891,7 @@
         },
         "song_title": "Can't Stop",
         "artist": "Red Hot Chili Peppers",
-        "artist_image": "https://i.scdn.co/image/9527e700b5c80aa67350d5de0da10a0aa754fcb1",
+        "artist_image": "https://i.scdn.co/image/5b2072e522bf3324019a8c2dc3db20116dff0b87",
         "cover": "https://i.scdn.co/image/b14027718a46fb43d8c6d8c88092fba9f75d9d21",
         "album": "By The Way (Deluxe Version)",
         "spotify_data": {
@@ -1026,7 +1026,7 @@
         },
         "song_title": "Catch & Release - Deepend Remix",
         "artist": "Matt Simons & Falco Van Den Aker",
-        "artist_image": "https://i.scdn.co/image/77ca1d33afddff402d5813f27ad082096082589d",
+        "artist_image": "https://i.scdn.co/image/1d204f8656ef337fa1c15bb9960a82b8a2e81181",
         "cover": "https://i.scdn.co/image/dcb45613a993a5179b94ed12d0b003301120a6ff",
         "album": "Catch & Release (Deepend Remix)",
         "spotify_data": {
@@ -1065,7 +1065,7 @@
                     "name": "Falco Van Den Aker",
                     "images": [],
                     "genres": [],
-                    "popularity": 61,
+                    "popularity": 59,
                     "uri": "spotify:artist:0H4lEdOgBhMO4iLjh5eWRp",
                     "href": "https://open.spotify.com/artist/0H4lEdOgBhMO4iLjh5eWRp"
                 },
@@ -1074,7 +1074,7 @@
                     "name": "Bob Van Ratingen",
                     "images": [],
                     "genres": [],
-                    "popularity": 61,
+                    "popularity": 59,
                     "uri": "spotify:artist:0IaGKdJMLQv0vLHc1Bzz6u",
                     "href": "https://open.spotify.com/artist/0IaGKdJMLQv0vLHc1Bzz6u"
                 }
@@ -1300,7 +1300,7 @@
         },
         "song_title": "Closer",
         "artist": "The Chainsmokers & Halsey",
-        "artist_image": "https://i.scdn.co/image/098f5d6b1560d8c4d6f7a00ff7029ed3ea33ab64",
+        "artist_image": "https://i.scdn.co/image/6735a98c7cf7c5b9622e10a1ea9390dd67cbd509",
         "cover": "https://i.scdn.co/image/512bd22e2bc73f9883b8612daf4f23acaac3c776",
         "album": "Closer",
         "spotify_data": {
@@ -1459,7 +1459,7 @@
         },
         "song_title": "Congratulations",
         "artist": "Post Malone & Quavo",
-        "artist_image": "https://i.scdn.co/image/7a274b811863dcb3e13ab98bd6bddef53ac61409",
+        "artist_image": "https://i.scdn.co/image/75ccde5a0bb2a8e569cafcdb050356470c929f18",
         "cover": "https://i.scdn.co/image/17e68a2e03de74a114bf6609d69f9bdbf6029f70",
         "album": "Stoney (Deluxe)",
         "spotify_data": {
@@ -1522,7 +1522,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 96,
+                    "popularity": 93,
                     "uri": "spotify:artist:0VRj0yCOv2FXJNP47XQnx5",
                     "href": "https://open.spotify.com/artist/0VRj0yCOv2FXJNP47XQnx5"
                 }
@@ -1620,7 +1620,7 @@
         },
         "song_title": "Counting Stars",
         "artist": "OneRepublic",
-        "artist_image": "https://i.scdn.co/image/0249fd0808ae0176c6a4108821a4f1bc79aae6bb",
+        "artist_image": "https://i.scdn.co/image/b0c2183744f0b70feedde1bc350a22ddd66561ca",
         "cover": "https://i.scdn.co/image/8b6238186da6c5c9b0ff756065883aa1a8fbd339",
         "album": "Native",
         "spotify_data": {
@@ -1725,6 +1725,64 @@
     },
     {
         "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-UKnkc-4ZzEU-Dame_-_12_Millionen_WoW_Song.NA",
+        "video_id": "UKnkc-4ZzEU",
+        "url": "https://www.youtube.com/watch?v=UKnkc-4ZzEU",
+        "title": "Dame - 12 Millionen [WoW Song]",
+        "duration": 231,
+        "thumbnail": "https://i.ytimg.com/vi/UKnkc-4ZzEU/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Download this Song on iTunes (High Quality)\nhttps://www.youtube.com/redirect?v=UKnkc-4ZzEU&event=video_description&q=https%3A%2F%2Fitunes.apple.com%2Fde%2Falbum%2F12-millionen%2Fid453118877&redir_token=t71pOfjuW-6POvrVAxd3jyEyF2h8MTUxMzYyMzMzN0AxNTEzNTM2OTM3\n\nDownload this Song on AmazonMP3 (High Quality):\nhttps://www.youtube.com/redirect?v=UKnkc-4ZzEU&event=video_description&q=https%3A%2F%2Fwww.amazon.de%2F12-Millionen-Single%2Fdp%2FB005EVX4I0%3Ftag%3Dstream06-21&redir_token=t71pOfjuW-6POvrVAxd3jyEyF2h8MTUxMzYyMzMzN0AxNTEzNTM2OTM3\n\nDownload this Song on Google Play:\nhttps://www.youtube.com/redirect?v=UKnkc-4ZzEU&event=video_description&q=https%3A%2F%2Fplay.google.com%2Fstore%2Fmusic%2Falbum%2FDame_12_Millionen%3Fid%3DBi7od5dzwhnnu4euwwuq4beai7a&redir_token=t71pOfjuW-6POvrVAxd3jyEyF2h8MTUxMzYyMzMzN0AxNTEzNTM2OTM3\n\n\"Jetzt wird gezockt\" auf iTunes:\nhttps://www.youtube.com/redirect?v=UKnkc-4ZzEU&event=video_description&q=https%3A%2F%2Fitunes.apple.com%2Fde%2Falbum%2Fjetzt-wird-gezockt%2Fid671944439&redir_token=t71pOfjuW-6POvrVAxd3jyEyF2h8MTUxMzYyMzMzN0AxNTEzNTM2OTM3\n\n\"Jetzt wird gezockt\" Vorbestellung auf Amazon:\nhttps://www.youtube.com/redirect?v=UKnkc-4ZzEU&event=video_description&q=https%3A%2F%2Fwww.amazon.de%2Fgp%2Fproduct%2FB00DSZC9T4%3Ftag%3Dstream06-21&redir_token=t71pOfjuW-6POvrVAxd3jyEyF2h8MTUxMzYyMzMzN0AxNTEzNTM2OTM3\n\nHerz gegen Fame - iTunes:\nhttps://www.youtube.com/redirect?v=UKnkc-4ZzEU&event=video_description&q=https%3A%2F%2Fitunes.apple.com%2Fat%2Falbum%2Fherz-gegen-fame%2Fid637607716&redir_token=t71pOfjuW-6POvrVAxd3jyEyF2h8MTUxMzYyMzMzN0AxNTEzNTM2OTM3\n\nHerz gegen Fame - AmazonMP3:\nhttps://www.youtube.com/redirect?v=UKnkc-4ZzEU&event=video_description&q=https%3A%2F%2Fwww.amazon.de%2FHerz-gegen-Fame-Dame%2Fdp%2FB00CEMXA7W%3FTag%3Dstream06-21&redir_token=t71pOfjuW-6POvrVAxd3jyEyF2h8MTUxMzYyMzMzN0AxNTEzNTM2OTM3\n\nNotiz an mich - iTunes:\nhttps://www.youtube.com/redirect?v=UKnkc-4ZzEU&event=video_description&q=https%3A%2F%2Fitunes.apple.com%2Fde%2Falbum%2Fnotiz-an-mich%2Fid582271938&redir_token=t71pOfjuW-6POvrVAxd3jyEyF2h8MTUxMzYyMzMzN0AxNTEzNTM2OTM3\n\nNotiz an mich - Amazon:\nhttps://www.youtube.com/redirect?v=UKnkc-4ZzEU&event=video_description&q=https%3A%2F%2Fwww.amazon.de%2FNotiz-mich-Dame%2Fdp%2FB00CEN2GT4%3Ftag%3Dstream06-21&redir_token=t71pOfjuW-6POvrVAxd3jyEyF2h8MTUxMzYyMzMzN0AxNTEzNTM2OTM3\n\nFacebook:\nhttp://www.facebook.com/damestream\n\nTwitter:\nhttp://www.twitter.com/damestream\n\nDame Instagram:\nhttps://www.instagram.com/damestream\n\nShop:\nhttp://www.damestream-merchandise.com\n\nKontakt:\noffice@damestream.at\n\nHomepage:\nwww.damestream.at\n\nDame - 12 Millionen (Songtext)\n\nDu hast mehr Intelligenz als die meisten und ja ich wei\u00df wie du tickst, du brauchst dich nicht mehr zu beweisen denn jeder wei\u00df wer du bist, du bist ein ehrenhafter Mann hast deine Ziele erreicht es war oft harte Arbeit und nicht alles fiel dir immer leicht. Du siehst dein Spiegelbild mit Stolz und du verfolgst deine Pl\u00e4ne, du hast oft Stress und mit so manchen deiner Bossen Probleme, doch gibst nicht auf, auch wenn keiner deiner Freunde mehr dran glaubt, du ballst die Faust, du deckst den Tisch du sorgst f\u00fcr alles was man braucht, du hast es drauf! Du bist immer auf dem neuesten Stand und auch mit fiesen Tricks kann man dich nicht t\u00e4uschn du bleibst \u00e4usserst ellegant, du geht h\u00e4ufig auf Distanz aber Leute dass macht nichts und meine Freunde schreien GZ denn du wirst heute 85.\n\nUnd ich sitz wieder vorm PC, spiele WoW, alles f\u00fcr die Horde meine Freundin sagt sie geht,\ndoch ich sitz wieder vorm PC spiele WoW, alles ist in Ordnung ich log ein mach PvP.\nUnd ich sitz wieder vorm PC spiele WoW alles f\u00fcr die Horde meine Freundin sagt sie geht, doch ich sitz wieder vorm PC spiele WoW alles ist in Ordnung ich log ein und schau was geht.\n\nIch steh mitten in OG und wart auf den Arena Invite die Allianz kann kommen denn ich und auch mein Mate sind bereit. Egal was kommt nein mein Mage macht es den Gegnern nicht leicht, alle CC's sind ready und wenn ich will dann regnet es Eis. Wir hatten schon ewig keinen Wipe mehr es lief immer perfekt und falls es dann wirklich mal zu eng wird ja dann blinzle ich weg. Meine Gilde zollt mir Respekt, ja sie ist allzeit bereit und erst seit ich hier bin wei\u00df ich wirklich was Zusammenarbeit hei\u00dft das wird knapp (Stirb du Sau!) ich sag ach was jetz gibt's Pr\u00fcgel, jetz gibt's nen Counterspell danach klaue ich dem Pala die Fl\u00fcgel. Du hast so viele Talente und hast sie niemals verschwendet noch ein paar Klicks dann der Crit und das Spiel ist zu Ende.\n\nUnd ich sitz wieder vorm PC, spiele WoW, alles f\u00fcr die Horde meine Freundin sagt sie geht,\ndoch ich sitz wieder vorm PC spiele WoW, alles ist in Ordnung ich log ein mach PvP.\nUnd ich sitz wieder vorm PC spiele WoW alles f\u00fcr die Horde meine Freundin sagt sie geht, doch ich sitz wieder vorm PC spiele WoW alles ist in Ordnung ich log ein und schau was geht.\n\nWir leben nicht in der Realit\u00e4t doch wir sind 12 Millionen. 12 Millionen aus verschiedenen V\u00f6lkern und Regionen und wir teilen das gleiche Hobby, nein wir k\u00f6nnen nich ohne, wir sind zwar s\u00fcchtig, doch gibt's ne sch\u00f6nere Droge. Und meine Freundin will heiraten ich sag gleich nach dem BG, anscheinend geh ich zu weit entweder Sie oder WoW. Doch ich will beides und wenn beides nicht geht, gibt es nur einen einzigen Weg, denn ich will ZOCKEN also pack doch deine Sachen und geh!\n\nUnd ich sitz wieder vorm, PC spiele WoW, alles f\u00fcr die Horde meine Freundin ja sie geht,\ndoch ich sitz wieder vorm PC spiele WoW, ich log mich aus doch viel zu sp\u00e4t.\n\nUnd ich sitz wieder vorm PC, spiele WoW, alles f\u00fcr die Horde meine Freundin sagt sie geht,\ndoch ich sitz wieder vorm PC spiele WoW, alles ist in Ordnung ich log ein mach PvP.\nUnd ich sitz wieder vorm PC spiele WoW alles f\u00fcr die Horde meine Freundin sagt sie geht,\ndoch ich sitz wieder vorm PC spiele WoW alles ist in Ordnung ich log ein und schau was geht.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "210488226777923585",
+                "name": "grelor"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/XnyMP91.jpg",
+                    "name": "420",
+                    "id": "420",
+                    "index": 15,
+                    "timestamp": 1513536959
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-nGc0BAZIcLE-Dame_-_Pave_Low_CoD_Song.NA",
+        "video_id": "nGc0BAZIcLE",
+        "url": "https://www.youtube.com/watch?v=nGc0BAZIcLE",
+        "title": "Dame - Pave Low [CoD Song]",
+        "duration": 246,
+        "thumbnail": "https://i.ytimg.com/vi/nGc0BAZIcLE/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Download this Song on iTunes (High Quality)\nhttps://www.youtube.com/redirect?redir_token=iMJ4qTEFGeKH-WfVLUKKE8KElmt8MTUxMzYyMzMyMEAxNTEzNTM2OTIw&v=nGc0BAZIcLE&q=https%3A%2F%2Fitunes.apple.com%2Fde%2Falbum%2Fpave-low%2Fid501703700&event=video_description\n\nDownload this Song on AmazonMP3 (High Quality):\nhttps://www.youtube.com/redirect?redir_token=iMJ4qTEFGeKH-WfVLUKKE8KElmt8MTUxMzYyMzMyMEAxNTEzNTM2OTIw&v=nGc0BAZIcLE&q=http%3A%2F%2Fwww.amazon.de%2FPave-Low-Single-Dame%2Fdp%2FB00897II7S%3Ftag%3Dstream06-21&event=video_description\n\n\"Jetzt wird gezockt\" auf iTunes:\nhttps://www.youtube.com/redirect?redir_token=iMJ4qTEFGeKH-WfVLUKKE8KElmt8MTUxMzYyMzMyMEAxNTEzNTM2OTIw&v=nGc0BAZIcLE&q=https%3A%2F%2Fitunes.apple.com%2Fde%2Falbum%2Fjetzt-wird-gezockt%2Fid671944439&event=video_description\n\n\"Jetzt wird gezockt\" auf Amazon:\nhttps://www.youtube.com/redirect?redir_token=iMJ4qTEFGeKH-WfVLUKKE8KElmt8MTUxMzYyMzMyMEAxNTEzNTM2OTIw&v=nGc0BAZIcLE&q=http%3A%2F%2Fwww.amazon.de%2Fgp%2Fproduct%2FB00DSZC9T4%3Ftag%3Dstream06-21&event=video_description\n\nHerz gegen Fame - iTunes:\nhttps://www.youtube.com/redirect?redir_token=iMJ4qTEFGeKH-WfVLUKKE8KElmt8MTUxMzYyMzMyMEAxNTEzNTM2OTIw&v=nGc0BAZIcLE&q=https%3A%2F%2Fitunes.apple.com%2Fat%2Falbum%2Fherz-gegen-fame%2Fid637607716&event=video_description\n\nHerz gegen Fame - AmazonMP3:\nhttps://www.youtube.com/redirect?redir_token=iMJ4qTEFGeKH-WfVLUKKE8KElmt8MTUxMzYyMzMyMEAxNTEzNTM2OTIw&v=nGc0BAZIcLE&q=https%3A%2F%2Fwww.amazon.de%2FHerz-gegen-Fame-Dame%2Fdp%2FB00CEMXA7W%3FTag%3Dstream06-21&event=video_description\n\nDame Facebook:\nhttp://www.facebook.com/damestream\n\nDame Twitter:\nhttp://www.twitter.com/damestream\n\nDame Instagram:\nhttps://www.instagram.com/damestream\n\nShop:\nhttp://www.damestream-merchandise.com\n\nKontakt:\noffice@damestream.at\n\nHomepage:\nwww.damestream.at\n\nDame - Pave Low (Songtext)\n\nUnd ich sitz wieder vorm Pc spiele WoW, alles f\u00fcr die Horde meine Freundin sagt Sie geht. Doch ich sitz wieder vorm Pc spiele WoW, oder ich logg aus zock auf der Xbox CoD.\n\nTeam Deathmatch!\n\nSomewhere over the Rainbow fliegt mein Pave Low und erledigt dich problemlos! Es ist ein weiter Weg bis Prestige Level 10 und Kill f\u00fcr Kill sammelst du deine EP doch...\nSomewhere over the Rainbow fliegt mein Pave Low und erledigt dich problemlos! Es ist ein weiter Weg bis Prestige Level 10 und du spielst und spielst und sagst dir eine Runde geht noch.\n\nDie Gegner sind hilflos verloren. Wir dringen vor, also mach was du willst, es gibt keinen sicheren Ort. Egal wo du hin willst man du findest mich dort wenn wir uns sehen ja dann sehen wir uns durch Kimme und Korn. Ich lass die Semtex fliegen, kill die Camper mit der MP7 und wer mit mir spielt lernt auch die Predator lieben. Wenn du nicht triffst, rate ich dir besser zu schie\u00dfen, denn sind die Magazine leer machst du Bekanntschaft mit der Desert Eagle. Ob Mission oder Outpost, ich beweg mich lautlos und wenn es sein muss jag ich f\u00fcr dich das ganze Haus hoch. Denn meine Bouncing Betty macht aus solchen Clowns wie euch Confetti und wenn nicht bist du sp\u00e4testens nach meinem Juggernaut tot. Kaum bin ich zu Haus schon kann die Party beginnen. Ich setz das Headset auf und wart auf was die Nachrichten bringen und ja die Einladung ist da, lass f\u00fcr Bakaara abstimmen und jetzt START! Ist doch klar das wir heute alles gewinnen. Das ist mein Team!\n\nSomewhere over the Rainbow fliegt mein Pave Low und erledigt dich problemlos! Es ist ein weiter Weg bis Prestige Level 10 und Kill f\u00fcr Kill sammelst du deine EP doch...\nSomewhere over the Rainbow fliegt mein Pave Low und erledigt dich problemlos! Es ist ein weiter Weg bis Prestige Level 10 und du spielst und spielst und sagst dir eine Runde geht noch.\n\nDu brauchst den Kopf nicht zu sch\u00fctteln da hilft kein hinlegen dir wird dein d\u00e4mliches Bunnyhoppen nichts n\u00fctzen. Ich sitz im Cockpit eines Ospreysch\u00fctzen also kommt ruhig zu zweit und werdet Zeuge von ein paar Doppelabsch\u00fcssen. Wenn dieser Tiefflieger kommt macht er Kills im Affekt jetzt noch ein Treffer und ich plazier mein vielgesch\u00e4tztes I.M.S. Reaper, AH-6 \u00dcberwachung, AC130. Ich lass die Drohne liegen und farm davor jetzt flei\u00dfig und dein Kampfhubschrauber bleibt nicht lang am Himmel dank der Smaw wir haben Skills und Engagement und das sieht man an dem Score. Es ist wundervoll denn jeder Schuss f\u00fchrt zum Erfolg die Quote steigt dank meiner Kumpels und der UMP aus Gold. Du willst dich r\u00e4chen suchst verzweifelt auf der Map, doch ich lieg grad mit Attent\u00e4ter Pro plus Schalld\u00e4mpfer in nem Haus versteckt. Wechsel auf Akimbo visiere die T\u00fcr an und bin still, also komm doch mit deinen Freunden w\u00fcrd mich freun denn dann macht es MULTIKILL!\n\nSomewhere over the Rainbow fliegt mein Pave Low und erledigt dich problemlos! Es ist ein weiter Weg bis Prestige Level 10 und Kill f\u00fcr Kill sammelst du deine EP doch...\nSomewhere over the Rainbow fliegt mein Pave Low und erledigt dich problemlos! Es ist ein weiter Weg bis Prestige Level 10 und du spielst und spielst und sagst dir eine Runde geht noch.\n\nViele denken ich sei verr\u00fcckt doch ich muss das machen, nur an diesem Ort schallt ich ab und kann meinen Frust ablassen, denn war der Tag mal wieder schwer ja dann schnapp ich mein Gewehr die ACR um euch wieder mal die Tour zu vermasseln und ja es stimmt ich bin verr\u00fcckt doch ich muss das machen nur an diesem Ort schallt ich ab und kann meinen Frust ablassen lehn mich zur\u00fcck schie\u00df mit FMG9 bis es mir besser geht heut solltest du besser mal den Luftraum \u00fcberwachen denn...\n\nSomewhere over the Rainbow fliegt mein Pave Low und erledigt dich problemlos! Es ist ein weiter Weg bis Prestige Level 10 und Kill f\u00fcr Kill sammelst du deine EP doch...\nSomewhere over the Rainbow fliegt mein Pave Low und erledigt dich problemlos! Es ist ein weiter Weg bis Prestige Level 10 und du spielst und spielst und sagst dir eine Runde geht noch.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "210488226777923585",
+                "name": "grelor"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/XnyMP91.jpg",
+                    "name": "420",
+                    "id": "420",
+                    "index": 16,
+                    "timestamp": 1513536959
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
         "type": "DiscogsEntry",
         "expected_filename": "cache/audio_cache/youtube-WSWrepLjTKc-Kid_Cudi_vs._Crookers_-_Day_n_Night.NA",
         "video_id": "WSWrepLjTKc",
@@ -1746,7 +1804,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 15,
+                    "index": 17,
                     "timestamp": 1504984488
                 }
             }
@@ -1780,7 +1838,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 16,
+                    "index": 18,
                     "timestamp": 1504984488
                 }
             }
@@ -1814,7 +1872,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 17,
+                    "index": 19,
                     "timestamp": 1504984488
                 }
             }
@@ -1941,14 +1999,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 18,
+                    "index": 20,
                     "timestamp": 1504984488
                 }
             }
         },
         "song_title": "Go Flex",
         "artist": "Post Malone",
-        "artist_image": "https://i.scdn.co/image/75ccde5a0bb2a8e569cafcdb050356470c929f18",
+        "artist_image": "https://i.scdn.co/image/7a274b811863dcb3e13ab98bd6bddef53ac61409",
         "cover": "https://i.scdn.co/image/17e68a2e03de74a114bf6609d69f9bdbf6029f70",
         "album": "Stoney (Deluxe)",
         "spotify_data": {
@@ -2052,6 +2110,166 @@
     {
         "version": 103,
         "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-BQ0mxQXmLsk-Camila_Cabello_-_Havana_ft._Young_Thug.NA",
+        "video_id": "BQ0mxQXmLsk",
+        "url": "https://www.youtube.com/watch?v=BQ0mxQXmLsk",
+        "title": "Camila Cabello - Havana ft. Young Thug",
+        "duration": 403,
+        "thumbnail": "https://i.ytimg.com/vi/BQ0mxQXmLsk/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Havana\" Available at\nSpotify: http://smarturl.it/Havana_Sptfy\nApple Music: http://smarturl.it/Havana_AM\niTunes: http://smarturl.it/Havana_iT\nGoogle Play http://smarturl.it/Havana_GP\n\nGuest starring:\nLeLe Pons\nLuJuan James\n\nFind Camila Here:\nTwitter: @camila_cabello\nIG: @camila_cabello\nFacebook: @97camilacabello\nWebsite: www.camilacabello.com\n\n(C) 2017 Simco Ltd. under exclusive license to Epic Records, a division of Sony Music Entertainment\n\nCategory: Music\nLicense: Standard YouTube License\nMusic: \"Havana\" by Camila Cabello Listen ad-free with YouTube Re",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "210488226777923585",
+                "name": "grelor"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/XnyMP91.jpg",
+                    "name": "420",
+                    "id": "420",
+                    "index": 21,
+                    "timestamp": 1513536959
+                }
+            }
+        },
+        "song_title": "Havana",
+        "artist": "Camila Cabello & Young Thug",
+        "artist_image": "https://i.scdn.co/image/aa9f03ea0bd3bda2683a6598361942561f7fd3aa",
+        "cover": "https://i.scdn.co/image/400c2aacb056cd051afedee8a4896a97c079e68d",
+        "album": "Havana",
+        "spotify_data": {
+            "id": "0ofbQMrRDsUaVKq2mGLEAb",
+            "name": "Havana",
+            "artists": [
+                {
+                    "id": "4nDoRrQiYLoBzwC5BhVJzF",
+                    "name": "Camila Cabello",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/f391d0fa675f28ad50d3041a9b1803e5e4c0a5c3",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/7dce1aa42eed23fe5bba6085babc98ac760b3947",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/aa9f03ea0bd3bda2683a6598361942561f7fd3aa",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "dance pop",
+                        "pop",
+                        "post-teen pop"
+                    ],
+                    "popularity": 94,
+                    "uri": "spotify:artist:4nDoRrQiYLoBzwC5BhVJzF",
+                    "href": "https://open.spotify.com/artist/4nDoRrQiYLoBzwC5BhVJzF"
+                },
+                {
+                    "id": "50co4Is1HCEo8bhOyUWKpn",
+                    "name": "Young Thug",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/1eb847e76b0c8391cd9ec6dff07e93b86ec33d77",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/64713d8ad9d6f05dc5f55268f8fd1e7e2e89888f",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/25cdb6baf095e1e1f094a256bb6b3b1eceacc143",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "dwn trap",
+                        "gangster rap",
+                        "pop rap",
+                        "rap",
+                        "trap music"
+                    ],
+                    "popularity": 94,
+                    "uri": "spotify:artist:50co4Is1HCEo8bhOyUWKpn",
+                    "href": "https://open.spotify.com/artist/50co4Is1HCEo8bhOyUWKpn"
+                }
+            ],
+            "artist": "Camila Cabello & Young Thug",
+            "cover_url": "https://i.scdn.co/image/400c2aacb056cd051afedee8a4896a97c079e68d",
+            "duration": 216.896,
+            "album": {
+                "id": "5chBPOVY2I0bG5V3igb5QL",
+                "name": "Havana",
+                "artists": [
+                    {
+                        "id": "4nDoRrQiYLoBzwC5BhVJzF",
+                        "name": "Camila Cabello",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/f391d0fa675f28ad50d3041a9b1803e5e4c0a5c3",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/7dce1aa42eed23fe5bba6085babc98ac760b3947",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/aa9f03ea0bd3bda2683a6598361942561f7fd3aa",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "dance pop",
+                            "pop",
+                            "post-teen pop"
+                        ],
+                        "popularity": 94,
+                        "uri": "spotify:artist:4nDoRrQiYLoBzwC5BhVJzF",
+                        "href": "https://open.spotify.com/artist/4nDoRrQiYLoBzwC5BhVJzF"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/400c2aacb056cd051afedee8a4896a97c079e68d",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/c788ff80b2e655f6528d9a1683630c75b566c066",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/a3a0d4f89c07e1886452cb301bfc67f6a28366bb",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:5chBPOVY2I0bG5V3igb5QL"
+            },
+            "popularity": 100,
+            "uri": "spotify:track:0ofbQMrRDsUaVKq2mGLEAb",
+            "query": "Camila Cabello - Havana Young Thug",
+            "certainty": 0.7636363636363637
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
         "expected_filename": "cache/audio_cache/youtube-UprcpdwuwCg-twenty_one_pilots_-_Heathens_from_Suicide_Squad_-_The_Album_OFFICIAL_VIDEO.NA",
         "video_id": "UprcpdwuwCg",
         "url": "https://www.youtube.com/watch?v=UprcpdwuwCg",
@@ -2072,14 +2290,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 19,
+                    "index": 22,
                     "timestamp": 1504984488
                 }
             }
         },
         "song_title": "Heathens",
         "artist": "Twenty One Pilots",
-        "artist_image": "https://i.scdn.co/image/01f608a46e8ca7984e1121e334a089fef46777c7",
+        "artist_image": "https://i.scdn.co/image/57d72c0c06f5d93fbba622a0f47c9ed6ce5a61d9",
         "cover": "https://i.scdn.co/image/413ebef976e2b4b4facf5013b6d323d3f5bd1ea5",
         "album": "Heathens",
         "spotify_data": {
@@ -2209,7 +2427,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 20,
+                    "index": 23,
                     "timestamp": 1504984488
                 }
             }
@@ -2238,7 +2456,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 21,
+                    "index": 24,
                     "timestamp": 1504984488
                 }
             }
@@ -2267,14 +2485,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 22,
+                    "index": 25,
                     "timestamp": 1504984488
                 }
             }
         },
         "song_title": "Heroes (we could be)",
         "artist": "Alesso & Tove Lo",
-        "artist_image": "https://i.scdn.co/image/0ae4d02b67d953c898f7c95b69c2ec06e6797468",
+        "artist_image": "https://i.scdn.co/image/51c50fe8d5dd653460dcbaa8d6c72e2ef6a0afba",
         "cover": "https://i.scdn.co/image/4c1fb99e7bbf34da4459fcad9ab99dab128be6c5",
         "album": "Forever",
         "spotify_data": {
@@ -2439,7 +2657,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 23,
+                    "index": 26,
                     "timestamp": 1504984488
                 }
             }
@@ -2595,14 +2813,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 24,
+                    "index": 27,
                     "timestamp": 1504984488
                 }
             }
         },
         "song_title": "Human",
         "artist": "Rag'n'Bone Man",
-        "artist_image": "https://i.scdn.co/image/906eeb2779ed7934080a0abd09288b2ed1e42e11",
+        "artist_image": "https://i.scdn.co/image/a10fa412ee0acfdec135c16c76ed6c2c789cdbce",
         "cover": "https://i.scdn.co/image/32cd1e793e60dc3d05c4eae10338884618240a45",
         "album": "Human (Deluxe)",
         "spotify_data": {
@@ -2716,7 +2934,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 25,
+                    "index": 28,
                     "timestamp": 1504984488
                 }
             }
@@ -2848,7 +3066,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 26,
+                    "index": 29,
                     "timestamp": 1504984488
                 }
             }
@@ -2877,7 +3095,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 27,
+                    "index": 30,
                     "timestamp": 1504984488
                 }
             }
@@ -2906,7 +3124,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 28,
+                    "index": 31,
                     "timestamp": 1504984488
                 }
             }
@@ -3016,6 +3234,210 @@
     },
     {
         "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-7_sH_K8vZl8-Snoop_Lion_-_Lighters_Up_ft._Mavado_Popcaan.NA",
+        "video_id": "7_sH_K8vZl8",
+        "url": "https://www.youtube.com/watch?v=7_sH_K8vZl8",
+        "title": "Snoop Lion - Lighters Up ft. Mavado, Popcaan",
+        "duration": 239,
+        "thumbnail": "https://i.ytimg.com/vi/7_sH_K8vZl8/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Snoop Lion's official music video for 'Lighters Up' ft. Mavado & Popcaan. Click to listen to Snoop Lion on Spotify: http://smarturl.it/SLSpot?IQid=SLLU\n\nAs featured On Reincarnated. Click to buy the track or album via iTunes: http://smarturl.it/SLRiTunes?IQid=SLLU\nGoogle Play: http://smarturl.it/SLLUPlay?IQid=SLLU\nAmazon: http://smarturl.it/SLRAm?IQid=SLLU\n\nMore From Snoop Lion\nTorn Apart: https://youtu.be/-6jsWWo2_1M\nAshtrays & Heartbreaks: https://youtu.be/8evbtRNtz8s\nNo Guns Allowed: https://youtu.be/KI6zi2Oj1jo\n\nFollow Snoop Lion\nWebsite: http://snoopreincarnated.com\nFacebook: https://www.facebook.com/SnoopLion\nTwitter: https://twitter.com/snooplion\nInstagram: https://instagram.com/snooplion\n\nSubscribe to Snoop Lion on YouTube: http://smarturl.it/SLSub?IQid=SLLU\n\nMore great Hip Hop and Urban videos here: http://smarturl.it/HHUPlaylist?IQid=SLLU\n\n---------\n\nLyrics:\n\nPut your lighters up!!!\nGet high with me, fly with me, ain't no dividin us\nEastside, westside, northside, southside\nUnified, come on and ride with us!\nPut your lighters up!!!\nGet high with me, fly with me, ain't no dividin us\nEastside, westside, northside, southside\nUnified! High!!!!!!!!",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "210488226777923585",
+                "name": "grelor"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/XnyMP91.jpg",
+                    "name": "420",
+                    "id": "420",
+                    "index": 32,
+                    "timestamp": 1513536959
+                }
+            }
+        },
+        "song_title": "Lighters Up",
+        "artist": "Snoop Lion & Mavado",
+        "artist_image": "https://i.scdn.co/image/2b6e02cad1325f5a1205fbef5caae154551661d6",
+        "cover": "https://i.scdn.co/image/42889c1eadf4a9e21932ddb1098cd56a15926457",
+        "album": "Reincarnated (Deluxe Version)",
+        "spotify_data": {
+            "id": "0Gv6sr4tFPkYDIuUVxOx7H",
+            "name": "Lighters Up",
+            "artists": [
+                {
+                    "id": "4RxUeUyMaEe2T5tvULq5j0",
+                    "name": "Snoop Lion",
+                    "images": [
+                        {
+                            "height": 667,
+                            "url": "https://i.scdn.co/image/2b6e02cad1325f5a1205fbef5caae154551661d6",
+                            "width": 1000
+                        },
+                        {
+                            "height": 427,
+                            "url": "https://i.scdn.co/image/d3a346827d8083942b24b41316fe196c7e988b04",
+                            "width": 640
+                        },
+                        {
+                            "height": 133,
+                            "url": "https://i.scdn.co/image/d72ee30a1652f7b668a818a37a27597810621d6c",
+                            "width": 199
+                        },
+                        {
+                            "height": 43,
+                            "url": "https://i.scdn.co/image/2e49a2afc44377a129125bd1e2624cc4bb28bb2c",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "gangster rap",
+                        "hip hop",
+                        "pop rap",
+                        "rap",
+                        "reggae fusion"
+                    ],
+                    "popularity": 59,
+                    "uri": "spotify:artist:4RxUeUyMaEe2T5tvULq5j0",
+                    "href": "https://open.spotify.com/artist/4RxUeUyMaEe2T5tvULq5j0"
+                },
+                {
+                    "id": "0eezS9KmhdjGN436RdTIXu",
+                    "name": "Mavado",
+                    "images": [
+                        {
+                            "height": 360,
+                            "url": "https://i.scdn.co/image/5bd92d12b03aa55fb8b5ecb51e3b3d85f22e1bbc",
+                            "width": 321
+                        },
+                        {
+                            "height": 224,
+                            "url": "https://i.scdn.co/image/d55c599539636c177750e31ad6fc397e62e0c946",
+                            "width": 200
+                        },
+                        {
+                            "height": 72,
+                            "url": "https://i.scdn.co/image/2a3ee7cba39fcfcb25aa0b30efadb124a301456a",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "dancehall"
+                    ],
+                    "popularity": 62,
+                    "uri": "spotify:artist:0eezS9KmhdjGN436RdTIXu",
+                    "href": "https://open.spotify.com/artist/0eezS9KmhdjGN436RdTIXu"
+                },
+                {
+                    "id": "62DmErcU7dqZbJaDqwsqzR",
+                    "name": "Popcaan",
+                    "images": [
+                        {
+                            "height": 631,
+                            "url": "https://i.scdn.co/image/0b559fd526a7d31b94130b2b059a7cc6cd91dc00",
+                            "width": 800
+                        },
+                        {
+                            "height": 505,
+                            "url": "https://i.scdn.co/image/437fadadcef212c135dad2aac95f42ecfdd47ad7",
+                            "width": 640
+                        },
+                        {
+                            "height": 158,
+                            "url": "https://i.scdn.co/image/ea22a995eb127df9dcf3ecba63661957905f14f1",
+                            "width": 200
+                        },
+                        {
+                            "height": 50,
+                            "url": "https://i.scdn.co/image/554198256f3faf752a144d21d713a5838e9b5019",
+                            "width": 63
+                        }
+                    ],
+                    "genres": [
+                        "dancehall",
+                        "reggae fusion",
+                        "riddim"
+                    ],
+                    "popularity": 71,
+                    "uri": "spotify:artist:62DmErcU7dqZbJaDqwsqzR",
+                    "href": "https://open.spotify.com/artist/62DmErcU7dqZbJaDqwsqzR"
+                }
+            ],
+            "artist": "Snoop Lion & Mavado",
+            "cover_url": "https://i.scdn.co/image/42889c1eadf4a9e21932ddb1098cd56a15926457",
+            "duration": 226.72,
+            "album": {
+                "id": "5q4CMxHUBPn11UG6uYX26m",
+                "name": "Reincarnated (Deluxe Version)",
+                "artists": [
+                    {
+                        "id": "4RxUeUyMaEe2T5tvULq5j0",
+                        "name": "Snoop Lion",
+                        "images": [
+                            {
+                                "height": 667,
+                                "url": "https://i.scdn.co/image/2b6e02cad1325f5a1205fbef5caae154551661d6",
+                                "width": 1000
+                            },
+                            {
+                                "height": 427,
+                                "url": "https://i.scdn.co/image/d3a346827d8083942b24b41316fe196c7e988b04",
+                                "width": 640
+                            },
+                            {
+                                "height": 133,
+                                "url": "https://i.scdn.co/image/d72ee30a1652f7b668a818a37a27597810621d6c",
+                                "width": 199
+                            },
+                            {
+                                "height": 43,
+                                "url": "https://i.scdn.co/image/2e49a2afc44377a129125bd1e2624cc4bb28bb2c",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "gangster rap",
+                            "hip hop",
+                            "pop rap",
+                            "rap",
+                            "reggae fusion"
+                        ],
+                        "popularity": 59,
+                        "uri": "spotify:artist:4RxUeUyMaEe2T5tvULq5j0",
+                        "href": "https://open.spotify.com/artist/4RxUeUyMaEe2T5tvULq5j0"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/42889c1eadf4a9e21932ddb1098cd56a15926457",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/2f81a652233d7c839485e3bd8d8c56baa92b2bf8",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/b5c2a88f9a3911724763a1ab8c14078bf44b0eae",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:5q4CMxHUBPn11UG6uYX26m"
+            },
+            "popularity": 56,
+            "uri": "spotify:track:0Gv6sr4tFPkYDIuUVxOx7H",
+            "query": "Snoop Lion - Lighters Up Mavado, Popcaan",
+            "certainty": 0.7096774193548387
+        }
+    },
+    {
+        "version": 103,
         "type": "YoutubeEntry",
         "expected_filename": "cache/audio_cache/youtube-oMghhxRjB78-Lil_Uzi_Vert-_All_My_Friends_Are_Dead_Lyrics_XO_Tour_Life_LYRICS.NA",
         "video_id": "oMghhxRjB78",
@@ -3037,10 +3459,234 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 29,
+                    "index": 33,
                     "timestamp": 1504984488
                 }
             }
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-idVLI3s_CJo-ALLE_FARBEN_JANIECK_LITTLE_HOLLYWOOD_OFFICIAL_VIDEO.NA",
+        "video_id": "idVLI3s_CJo",
+        "url": "https://www.youtube.com/watch?v=idVLI3s_CJo",
+        "title": "ALLE FARBEN & JANIECK \u2013 LITTLE HOLLYWOOD [OFFICIAL VIDEO]",
+        "duration": 201,
+        "thumbnail": "https://i.ytimg.com/vi/idVLI3s_CJo/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "The official video for the single Little Hollywood by Alle Farben  & Janieck! Stream or buy the song on Spotify, iTunes, Apple Music, Deezer, and Amazon:\n\u25ba \u201cLittle Hollywood\u201d Single https://www.youtube.com/redirect?redir_token=AK9S0E_HIU7Us40kL1ZJncUl4uh8MTUxMzYyMzE5MEAxNTEzNTM2Nzkw&q=https%3A%2F%2FSynesthesia.lnk.to%2FlittlehollywoodID&event=video_description&v=idVLI3s_CJo\n\u25ba\u201cLive Circus\u201d Compilation https://Synesthesia.lnk.to/LiveCircusID\n\nEcho winner & 1Live Krone-nominated artist, Alle Farben, who has sold over 1.5 million records in the last three years and maintained a spot in the German Airplay Charts for 103 weeks, delivers his new hit single \u201cLittle Hollywood\u201d right in time for this spring and summer season. With lyrics that read, \u201cwe\u2019re living in our own little Hollywood, we\u2019re washed up stars, everything\u2019s gon\u2019 be good\u201d,\u201d who would\u2019ve expected any differently?\n\nAfter last year\u2019s platinum & gold singles \u201cPlease Tell Rosie\u201d & \u201cBad Ideas\u201d (Airplay No. 1 in Germany) Frans Zimmer is back with another meaningful track. The composition details a lifestyle \u00e0 la Hollywood with a man finding himself in his own cosmos while getting notably cast in stone. The philosophy of the song connects straight to the mindset of the Berlin based DJ and producer, who also, as usual, about to play over 100 shows around the world in 2017. With the cooperation of Janieck, a singer-songwriter from the Netherlands, who recently collaborated with Lost Frequencies, is also bearing its fruits.\n\nYou like what you see? Leave a comment, like the video and subscribe to the channel: \u25ba https://www.youtube.com/tvsynesthesia?sub_confirmation=1\n\nCheck out Alle Farben on social media!\nFacebook: \u25ba https://www.youtube.com/redirect?redir_token=AK9S0E_HIU7Us40kL1ZJncUl4uh8MTUxMzYyMzE5MEAxNTEzNTM2Nzkw&q=https%3A%2F%2Fwww.facebook.com%2FAlleFarbenofficial&event=video_description&v=idVLI3s_CJo\nInstagram: \u25ba https://www.youtube.com/redirect?redir_token=AK9S0E_HIU7Us40kL1ZJncUl4uh8MTUxMzYyMzE5MEAxNTEzNTM2Nzkw&q=http%3A%2F%2Fwww.instagram.com%2Fallefarben_official%2F&event=video_description&v=idVLI3s_CJo\nSoundcloud: \u25ba http://www.soundcloud.com/allefarben\nSpotify: \u25ba https://www.youtube.com/redirect?redir_token=AK9S0E_HIU7Us40kL1ZJncUl4uh8MTUxMzYyMzE5MEAxNTEzNTM2Nzkw&q=https%3A%2F%2Fopen.spotify.com%2Fartist%2F61ipISvUVa5LkJlKZnm3Oo&event=video_description&v=idVLI3s_CJo\nWebsite: \u25ba http://www.alle-farben.com\n\nDirected by Jannes D\u00f6ring\n\u25bahttp://www.jannisdoering.de/\n\nSynesthesia is part of GUESSTIMATE.\nCheck out the website for more information:\n\u25ba http://www.guesstimate.de\n\nAll rights reserved - \u00a9 Guesstimate GmbH, 2017",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "210488226777923585",
+                "name": "grelor"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/XnyMP91.jpg",
+                    "name": "420",
+                    "id": "420",
+                    "index": 34,
+                    "timestamp": 1513536959
+                }
+            }
+        },
+        "song_title": "Little Hollywood - Aligee & Lovra Remix",
+        "artist": "Alle Farben & Janieck",
+        "artist_image": "https://i.scdn.co/image/d77e48a81d5b9e4fefddebe0ab6e46cb7b15d636",
+        "cover": "https://i.scdn.co/image/d7ed236c0ad566226338e9fbb946412028b9ff8a",
+        "album": "Little Hollywood (Remixes)",
+        "spotify_data": {
+            "id": "5k4agwAHRWqXyJ5rYDnWeh",
+            "name": "Little Hollywood - Aligee & Lovra Remix",
+            "artists": [
+                {
+                    "id": "61ipISvUVa5LkJlKZnm3Oo",
+                    "name": "Alle Farben",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/5f9aaccc220c70ceeedcf2a26abd7a5d4796cdbf",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/bfaf4a776b4a4ddc4747b52f5d98d9a769bdf4ff",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/d77e48a81d5b9e4fefddebe0ab6e46cb7b15d636",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "deep euro house",
+                        "deep german pop rock",
+                        "deep tropical house",
+                        "tropical house"
+                    ],
+                    "popularity": 69,
+                    "uri": "spotify:artist:61ipISvUVa5LkJlKZnm3Oo",
+                    "href": "https://open.spotify.com/artist/61ipISvUVa5LkJlKZnm3Oo"
+                },
+                {
+                    "id": "1bZDq4po4dMIpN74Zendm0",
+                    "name": "Janieck",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/d665e7472f681919a20c812aa31d9221ac6fcc90",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/8d790a6191bc9898eb217e8f8c9ce0522c23a36a",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/0837302c6c756ae63827a8940abb68fd19091c56",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "deep tropical house"
+                    ],
+                    "popularity": 60,
+                    "uri": "spotify:artist:1bZDq4po4dMIpN74Zendm0",
+                    "href": "https://open.spotify.com/artist/1bZDq4po4dMIpN74Zendm0"
+                },
+                {
+                    "id": "3jzfavqdgkeFahTcb9IO2Y",
+                    "name": "Aligee",
+                    "images": [],
+                    "genres": [],
+                    "popularity": 26,
+                    "uri": "spotify:artist:3jzfavqdgkeFahTcb9IO2Y",
+                    "href": "https://open.spotify.com/artist/3jzfavqdgkeFahTcb9IO2Y"
+                },
+                {
+                    "id": "4fIPBdK4awAR1W14u3v1J5",
+                    "name": "LOVRA",
+                    "images": [
+                        {
+                            "height": 1000,
+                            "url": "https://i.scdn.co/image/23a755183043111f85b317a6ffb576b2ea3cc6f5",
+                            "width": 1000
+                        },
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/c2ea2f097f5b31f1f771878e5f7a5395700ac6f3",
+                            "width": 640
+                        },
+                        {
+                            "height": 200,
+                            "url": "https://i.scdn.co/image/788bab143b27f439af054d4be4f466643d4812cf",
+                            "width": 200
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/6bfb8714efe8d504cd9cee20f1d854fee1eb1948",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [],
+                    "popularity": 33,
+                    "uri": "spotify:artist:4fIPBdK4awAR1W14u3v1J5",
+                    "href": "https://open.spotify.com/artist/4fIPBdK4awAR1W14u3v1J5"
+                }
+            ],
+            "artist": "Alle Farben & Janieck",
+            "cover_url": "https://i.scdn.co/image/d7ed236c0ad566226338e9fbb946412028b9ff8a",
+            "duration": 219.306,
+            "album": {
+                "id": "1QTQMTNUCTbjzsvHZPetBW",
+                "name": "Little Hollywood (Remixes)",
+                "artists": [
+                    {
+                        "id": "61ipISvUVa5LkJlKZnm3Oo",
+                        "name": "Alle Farben",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/5f9aaccc220c70ceeedcf2a26abd7a5d4796cdbf",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/bfaf4a776b4a4ddc4747b52f5d98d9a769bdf4ff",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/d77e48a81d5b9e4fefddebe0ab6e46cb7b15d636",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "deep euro house",
+                            "deep german pop rock",
+                            "deep tropical house",
+                            "tropical house"
+                        ],
+                        "popularity": 69,
+                        "uri": "spotify:artist:61ipISvUVa5LkJlKZnm3Oo",
+                        "href": "https://open.spotify.com/artist/61ipISvUVa5LkJlKZnm3Oo"
+                    },
+                    {
+                        "id": "1bZDq4po4dMIpN74Zendm0",
+                        "name": "Janieck",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/d665e7472f681919a20c812aa31d9221ac6fcc90",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/8d790a6191bc9898eb217e8f8c9ce0522c23a36a",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/0837302c6c756ae63827a8940abb68fd19091c56",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "deep tropical house"
+                        ],
+                        "popularity": 60,
+                        "uri": "spotify:artist:1bZDq4po4dMIpN74Zendm0",
+                        "href": "https://open.spotify.com/artist/1bZDq4po4dMIpN74Zendm0"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/d7ed236c0ad566226338e9fbb946412028b9ff8a",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/18805c2b741a3329d45f7ad54e24ab44fe2622c4",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/059d943e0870b8c15309a41cf3a56f6ff85cb80e",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:1QTQMTNUCTbjzsvHZPetBW"
+            },
+            "popularity": 36,
+            "uri": "spotify:track:5k4agwAHRWqXyJ5rYDnWeh",
+            "query": "ALLE FARBEN & JANIECK LITTLE HOLLYWOOD",
+            "certainty": 0.8484848484848485
         }
     },
     {
@@ -3066,7 +3712,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 30,
+                    "index": 35,
                     "timestamp": 1504984488
                 }
             }
@@ -3101,7 +3747,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 98,
+                    "popularity": 97,
                     "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                     "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                 }
@@ -3134,7 +3780,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 98,
+                        "popularity": 97,
                         "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                         "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                     }
@@ -3187,14 +3833,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 31,
+                    "index": 36,
                     "timestamp": 1504984489
                 }
             }
         },
         "song_title": "Lot to Learn",
         "artist": "Luke Christopher",
-        "artist_image": "https://i.scdn.co/image/d6f0ea6a07434749a83d27f13b935bd88c1bd009",
+        "artist_image": "https://i.scdn.co/image/93d3c2611edd589eb87ed4daaff24b69bd3ce695",
         "cover": "https://i.scdn.co/image/95cad7d0df3786041d7b46b2142e3cda4c5532d2",
         "album": "TMRW",
         "spotify_data": {
@@ -3316,7 +3962,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 32,
+                    "index": 37,
                     "timestamp": 1504984489
                 }
             }
@@ -3326,6 +3972,64 @@
         "artist_image": "https://img.discogs.com/QZaPimoMuySRPcKMwO9soDCiBUg=/197x215/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-177497-1325440866.jpeg.jpg",
         "cover": "https://img.discogs.com/LjH2kW2j9iQkNY4vsGxT_mNtdvw=/fit-in/405x405/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-7474441-1442265540-8400.jpeg.jpg",
         "album": "VI"
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-7OrLroFa0AI-MACKLEMORE_FEAT_SKYLAR_GREY_-_GLORIOUS_OFFICIAL_MUSIC_VIDEO.NA",
+        "video_id": "7OrLroFa0AI",
+        "url": "https://www.youtube.com/watch?v=7OrLroFa0AI",
+        "title": "MACKLEMORE FEAT SKYLAR GREY - GLORIOUS (OFFICIAL MUSIC VIDEO)",
+        "duration": 255,
+        "thumbnail": "https://i.ytimg.com/vi/7OrLroFa0AI/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "GEMINI - AVAILABLE NOW\nhttp://smarturl.it/MacklemoreGemini\n\nDIRECTED BY Jason Koenig\n\nSTARRING\nHelen Schott & Ben Haggerty\n\nCONCEPT BY\nBen Haggerty\n\nPRODUCED BY\nHonna Kimmerer\n\nDIRECTOR OF PHOTOGRAPHY\nJohnny Valencia\n\nEDITED BY\nJason Koenig, Johnny Valencia, Ben Haggerty,\n\nADDITIONAL EDITING\nPhillip Harvey\n\nPRODUCTION COORDINATOR\nHannah Benson\n\nSHOT BY\nJohnny Valencia & Jason Koenig\n\nSPECIAL THANKS\nThe City of Modesto, Josh \"Budo\" Karp, Julie Schott, Gladys Ahart, Frankee Tanner, Barbara Mackler, Jane Wann, Cody Raburn aka Mr. Showtyme, Bill & Nikole Wann, Cheryl Chamness, Doug & Lisa Cook, Scotty B & Foundation Tattoo, RunAround Sue's, Boomers Staff, WinCo Plaza Parkway, Second Chance Consignment, Wally & Turlock Lake State Recreational Area, Ryan McKinnon,\n\nSONG CREDITS\n\nMacklemore\nGlorious feat. Skylar Grey\n\nPerformed by Macklemore and Skylar Grey\nProduced by Joshua \"Budo\" Karp\nAdditional Production by Tyler Dopps\n\nWritten by: B. Haggerty; H. Hafermann; J. Karp; T. Andrews; T. Dopps\n\nLyrics by Ben Haggerty and Holly Hafermann\nAdditional Vocals by Donna Missal\nTrombone by Raymond Mason\nTrumpet, Fl\u00fcgelhorn & Euphonium; Horn Arrangements by Todd M. Simon\nPiano by Joshua \u201cBudo\u201d Karp\nBass by Joshua \u201cBudo\u201d Karp\nDrum Programming by Joshua \u201cBudo\u201d Karp\nSynth by Tyler Dopps\nAdditional Background Vocals by Adam Aejaye Jackson, Niomisha Renee Wilson, Oren Waters, Valerie Pinkston, Brenda McClure, Harrison White, Will Wheaton, and Bridgett Bryant\nAdditional Piano by Josh Rawlings\nAdditional Drum Programming by Tyler Dopps\n\nMixed by Jon Castelli at The Gift Shop, DTLA\nMastered by Dale Becker\nEngineered by Tyler Dopps\nAdditional Engineering by Nick Mac and Sean Kellett\nEngineer for Mix Ingmar Carlson\n\nMacklemore Publishing (BMI)\nZ Songs (BMI)\nGutterfunk (ASCAP)\nTyler Andrews (ASCAP)\nDopps Tyler Matthews (BMI)\n\nSkylar Grey appears courtesy of Kid In A Korner / Interscope Records\n\nMacklemore managed by Zach Quillen & Josh Dick\n\n\u00a9 2017 Bendo, LLC. All rights reserved.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "210488226777923585",
+                "name": "grelor"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/XnyMP91.jpg",
+                    "name": "420",
+                    "id": "420",
+                    "index": 38,
+                    "timestamp": 1513536959
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-fYN14UfO-Uc-MACKLEMORE_-_DRUG_DEALER_FEAT._ARIANA_DEBOO_OFFICIAL_MUSIC_VIDEO.NA",
+        "video_id": "fYN14UfO-Uc",
+        "url": "https://www.youtube.com/watch?v=fYN14UfO-Uc",
+        "title": "MACKLEMORE - DRUG DEALER (FEAT. ARIANA DEBOO) OFFICIAL MUSIC VIDEO",
+        "duration": 224,
+        "thumbnail": "https://i.ytimg.com/vi/fYN14UfO-Uc/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "iTunes: http://smarturl.it/hl2xui\nSpotify: http://smarturl.it/a17qd7\n\nDIRECTOR / WRITER / DP\nJason Koenig\n\nFEATURING\nMacklemore\nAriana DeBoo\n\nPRODUCED BY\nHonna Kimmerer\n\nEDITED BY\nJason Koenig & Ben Haggerty\n\nMAKEUP\nShawn Shelton\n\nSET DESIGN\nHonna Kimmerer\nLogan Neitzel\n\nLOCATIONS\nSelina Shearer\n\nPRODUCTION TEAM\nKayla Imrisek\nTyler Dopps\n\n1st AC\nCoburn Erskine\n\nGAFFER\nNeil Bestwick\n\nKEY GRIP\nJon LaFollette\n\nSPECIAL THANKS TO:\nTricia Davis, Johnny Valencia, Josh Dick, Zach Quillen, Auto Glass Plus, St. Paul's Church, Seth Welch, TAP Plastics, Koerner Camera, Victory Studios, Max Unger, Leo Unger, Glazers Camera, Capsule Supplies LLC, Sharayah Lane, James Murphy, Jerome Welch, Blair Newman, Brad Caldwell, Ben Davis, Milo Adams, Ishmeal Simpson, Ed, Carter Costello, Jaden Joannes, Belicia Barquet, Lindsay Thayer, Djuan Akers\n\nMacklemore\nDrug Dealer feat. Ariana DeBoo\n\nPerformed by Macklemore\nProduced by Macklemore\nCo-Produced by Joshua \"Budo\" Karp\nFeaturing Ariana DeBoo\n\nWritten by: B. Haggerty; J. Karp; J. Rawlings, J. Sinclair; D. Takahashi; D. Dalton; T. Andrews\n\nLyrics by Ben Haggerty\nFeatured Vocals by Ariana DeBoo\nDrum Programming by Ben Haggerty\nBass by Joshua \"Budo\" Karp\nPiano by Joshua Rawlings\nViolin by John William Sinclair\nCello by Dave Takahashi\nAdditional Background Vocals by Tyler \"XP\" Andrews and Joshua \"Budo\" Karp\n\nMixed by Jon Castelli\nMastered by Dale Becker\nEngineered by Stephen Hogan\nAdditional Engineering by Adam Burd (Avast Studios Seattle) and Milo Eubank (Robert Lang Studios Seattle)\nAssistant Engineered by Eric Droppo (Robert Lang Studios Seattle)\n\nMacklemore Publishing (BMI)\nGutterfunk (ASCAP)\nJoshua Rawlings (ASCAP)\nJohn William Sinclair (BMI)\nDave Takahashi\nDavid Luke Dalton (ASCAP)\nTyler Andrews (ASCAP)\n\n\u00a9 2016 Macklemore, LLC. All rights reserved.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "210488226777923585",
+                "name": "grelor"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/XnyMP91.jpg",
+                    "name": "420",
+                    "id": "420",
+                    "index": 39,
+                    "timestamp": 1513536959
+                }
+            }
+        }
     },
     {
         "version": 103,
@@ -3350,7 +4054,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 33,
+                    "index": 40,
                     "timestamp": 1504984489
                 }
             }
@@ -3516,14 +4220,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 34,
+                    "index": 41,
                     "timestamp": 1504984489
                 }
             }
         },
         "song_title": "Man of the Year (feat. Curley the 5th)",
         "artist": "Logic? & Curley The 5th",
-        "artist_image": "https://i.scdn.co/image/7c115e21c8bf19ae44b3b8e6a81384f3b9a2f4ac",
+        "artist_image": "https://i.scdn.co/image/0f02657ffd50facddd93116e3a440257bc10e9b8",
         "cover": "https://i.scdn.co/image/1938b37a545f24f75b08857dbdcdafd12342503c",
         "album": "Black Rothschild",
         "spotify_data": {
@@ -3666,7 +4370,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 35,
+                    "index": 42,
                     "timestamp": 1504984489
                 }
             }
@@ -3700,7 +4404,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 36,
+                    "index": 43,
                     "timestamp": 1504984489
                 }
             }
@@ -3831,7 +4535,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 37,
+                    "index": 44,
                     "timestamp": 1504984489
                 }
             }
@@ -3865,14 +4569,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 38,
+                    "index": 45,
                     "timestamp": 1504984489
                 }
             }
         },
         "song_title": "Medication",
         "artist": "Damian Marley & Stephen Marley",
-        "artist_image": "https://i.scdn.co/image/7b2416c9e67896deedfb08b1503e9ae4d600f48c",
+        "artist_image": "https://i.scdn.co/image/242871e807e732e86bbc1ee298e9619b333e9bdb",
         "cover": "https://i.scdn.co/image/193389a23bdb25159d8954dcb1e39c07cb473228",
         "album": "Stony Hill",
         "spotify_data": {
@@ -4036,7 +4740,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 39,
+                    "index": 46,
                     "timestamp": 1504984489
                 }
             }
@@ -4070,14 +4774,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 40,
+                    "index": 47,
                     "timestamp": 1504984489
                 }
             }
         },
         "song_title": "Miracle",
         "artist": "Julian Perretta",
-        "artist_image": "https://i.scdn.co/image/bb52adebb714d3b33aaa7d2696be134a77088fa4",
+        "artist_image": "https://i.scdn.co/image/d95f7439e4f2bbb06cd785216da28b33cf1f289e",
         "cover": "https://i.scdn.co/image/8c89db867668826e68cc2cc4acacc38ac790d079",
         "album": "Miracle",
         "spotify_data": {
@@ -4207,7 +4911,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 41,
+                    "index": 48,
                     "timestamp": 1504984489
                 }
             }
@@ -4241,14 +4945,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 42,
+                    "index": 49,
                     "timestamp": 1504984489
                 }
             }
         },
         "song_title": "My House",
         "artist": "Flo Rida",
-        "artist_image": "https://i.scdn.co/image/3b549640662fd65cdd9876929de0923a1c0993ff",
+        "artist_image": "https://i.scdn.co/image/044453a3cc34265ed8eaffbce3f38ad98c702c95",
         "cover": "https://i.scdn.co/image/c475548f4c1ffbe3566bd48b326261a1592a1c90",
         "album": "MY HOUSE",
         "spotify_data": {
@@ -4386,14 +5090,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 43,
+                    "index": 50,
                     "timestamp": 1504984489
                 }
             }
         },
         "song_title": "My Way",
         "artist": "Calvin Harris",
-        "artist_image": "https://i.scdn.co/image/a08640045b806dfc5f64e9f64e45f3da50d9cd54",
+        "artist_image": "https://i.scdn.co/image/c4d1926567c8c5bf7319024b3d4cf67e4024d848",
         "cover": "https://i.scdn.co/image/05b9dd3a7188548a502a3066cacfb1e4419c6823",
         "album": "My Way",
         "spotify_data": {
@@ -4519,7 +5223,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 44,
+                    "index": 51,
                     "timestamp": 1504984489
                 }
             }
@@ -4648,7 +5352,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 45,
+                    "index": 52,
                     "timestamp": 1504984489
                 }
             }
@@ -4677,14 +5381,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 46,
+                    "index": 53,
                     "timestamp": 1504984489
                 }
             }
         },
         "song_title": "No sleep",
         "artist": "Wiz Khalifa's Karaoke Band & Made famous by Wiz Khalifa",
-        "artist_image": "https://i.scdn.co/image/fa36b8ff393f22a0f9ef6123730b33d0555c0f65",
+        "artist_image": "https://i.scdn.co/image/c07944ba7f5cd5717ccc78184cbc90b1c4acf4ab",
         "cover": "https://i.scdn.co/image/ada6d9403e2599fe2d3605296c5b39fe2d7e090e",
         "album": "Music's Men Karaoke",
         "spotify_data": {
@@ -4721,7 +5425,7 @@
                     "name": "Made famous by Wiz Khalifa",
                     "images": [],
                     "genres": [],
-                    "popularity": 9,
+                    "popularity": 7,
                     "uri": "spotify:artist:77nkXZazZ5cjjwuHYFAIg2",
                     "href": "https://open.spotify.com/artist/77nkXZazZ5cjjwuHYFAIg2"
                 }
@@ -4791,14 +5495,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 47,
+                    "index": 54,
                     "timestamp": 1504984489
                 }
             }
         },
         "song_title": "OK",
         "artist": "Robin Schulz & James Blunt",
-        "artist_image": "https://i.scdn.co/image/d8fbc8947a68af06b78a82e8167bb1864374c96a",
+        "artist_image": "https://i.scdn.co/image/f3277e4d0eb58ff5d32fef18b9f0d6faf19e7e71",
         "cover": "https://i.scdn.co/image/db62cf48d6dcf227d71cb1e29d8e7b77c54233da",
         "album": "OK",
         "spotify_data": {
@@ -4962,6 +5666,35 @@
     {
         "version": 103,
         "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-Ycg5oOSdpPQ-Ofenbach_vs._Nick_Waterhouse_-_Katchi_Official_Video.NA",
+        "video_id": "Ycg5oOSdpPQ",
+        "url": "https://www.youtube.com/watch?v=Ycg5oOSdpPQ",
+        "title": "Ofenbach vs. Nick Waterhouse - Katchi (Official Video)",
+        "duration": 167,
+        "thumbnail": "https://i.ytimg.com/vi/Ycg5oOSdpPQ/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Stream / Buy \"Ofenbach vs. Nick Waterhouse - Katchi\" : https://OfenbachFR.lnk.to/KatchiAY\n\nFollow us on : https://www.facebook.com/weareofenbach\nhttps://www.instagram.com/ofenbachmusic\nhttps://twitter.com/ofenbachmusic\nhttps://soundcloud.com/weareofenbach\nSubscribe to our youtube channel : http://bit.ly/2gj0Bd4\n\nVideo produced by : LEFT PRODUCTIONS\n\nDirector : Alejo Restrepo\n\nProducer : Boris Labourguigne\n\nSTARRING :\n\nGranny : Josefa Barbero Esteban\nWatermelon woman: Johanna Bros\nGrandpa : Carlos Calvete\nSapeur : Silvio Matos Carvalho\nSapeur : Ludovic Martia Ndokobanda\nSapeur : Vasco Matias Antonio Dos Santos\nCowboy : Rafael Matute\n\nScreenwriter : Robin Pesle\n1st AD : Emiliano Granada\nLine Prodcucer : Ella Ackroyd\nProduction Assitant : Joe Musa Odeh\nDOP : Thiago Quadrado\nOperator : Diego Comendador\n1st AC : Pablo Pascual\n2nd AC : Andres Pulido\nCamera assist : Alejandro Rapariz\nCamera assist : Javi Reinon\nCamera assist : David Corini\nProduction designer : Ysrael Sanchez Fernandez\nArt assistant : Rub\u00e9n Cervig\u00f3n Gonz\u00e1lez\nStylist : Luis Felipe Camargo\nStylist assistant : Ana Roman\nMake-up artist: Javier Cieza\nMake-up assistant : Miranda Kohl\nUnit manager : Paxi Marin\nEditor : Lucie Marcati\nColorist : Sylvain Canaux\nVFX : Andrew Khosravani\nAuthor /Composer : Nick Waterhouse & Leon Bridges\nVocals : Nick Waterhouse\nAdditional Vocals : Eric Jackowitz\n\nDetox with FITVIA! Save -20% now with the code OFENBACH on http://www.fitvia.fr or (EN) http://www.fitvia.eu\nFeatured in this clip: Bamboo Thermo Bottle and Superfruit Detox Tea\n\n(P) & (C) 2017. Ofenbach Music, licence exclusive Big Beat Paris / Warner Music France, a Warner Music Group Company",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "210488226777923585",
+                "name": "grelor"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/XnyMP91.jpg",
+                    "name": "420",
+                    "id": "420",
+                    "index": 55,
+                    "timestamp": 1513536960
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
         "expected_filename": "cache/audio_cache/youtube-eI3UF_HcTNo-Oleska_X_Otter_Berry_-_Far_Behind_Original_Mix.NA",
         "video_id": "eI3UF_HcTNo",
         "url": "https://www.youtube.com/watch?v=eI3UF_HcTNo",
@@ -4982,7 +5715,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 48,
+                    "index": 56,
                     "timestamp": 1504984490
                 }
             }
@@ -5011,14 +5744,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 49,
+                    "index": 57,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Oyoyo",
         "artist": "Megaloh & Musa",
-        "artist_image": "https://i.scdn.co/image/a3b6b65e063ba72fa6cd60a8a94dae0a676545c6",
+        "artist_image": "https://i.scdn.co/image/66f5e925db268d6198dcdb2ef3b43f696530f0c4",
         "cover": "https://i.scdn.co/image/64cb6cc96178f10869d84402b275409f03591d8e",
         "album": "Regenmacher",
         "spotify_data": {
@@ -5080,7 +5813,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 52,
+                    "popularity": 51,
                     "uri": "spotify:artist:0O2Cp1N0zBGTFbxFUkOs96",
                     "href": "https://open.spotify.com/artist/0O2Cp1N0zBGTFbxFUkOs96"
                 },
@@ -5209,7 +5942,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 50,
+                    "index": 58,
                     "timestamp": 1504984490
                 }
             }
@@ -5350,7 +6083,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 51,
+                    "index": 59,
                     "timestamp": 1504984490
                 }
             }
@@ -5360,6 +6093,141 @@
         "artist_image": "https://img.discogs.com/VIpN8xz3xv8kFdpjfRwwlv0ZYO4=/429x600/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-4533241-1487345324-7063.jpeg.jpg",
         "cover": "https://img.discogs.com/zsjo25PsfAdVlBSCPlFCNJN8lT0=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-9294427-1481752581-1256.jpeg.jpg",
         "album": "Professional Rapper"
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-bR-s4ReIxJo-Foster_the_People_-_Pumped_up_Kicks_Bridge_and_Law_Remix.NA",
+        "video_id": "bR-s4ReIxJo",
+        "url": "https://www.youtube.com/watch?v=bR-s4ReIxJo",
+        "title": "Foster the People - Pumped up Kicks (Bridge and Law Remix)",
+        "duration": 251,
+        "thumbnail": "https://i.ytimg.com/vi/bR-s4ReIxJo/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Thanks for watching!\nMessage me tracks at jhh417@gmail.com",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "210488226777923585",
+                "name": "grelor"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/XnyMP91.jpg",
+                    "name": "420",
+                    "id": "420",
+                    "index": 60,
+                    "timestamp": 1513536960
+                }
+            }
+        },
+        "song_title": "Pumped Up Kicks",
+        "artist": "Foster The People",
+        "artist_image": "https://i.scdn.co/image/23c70fd2867d9e335b224cc52e55d81d69ecf879",
+        "cover": "https://i.scdn.co/image/fb4998c955d8eba049ffbfc7ab8523a4a4a1f7e9",
+        "album": "Torches",
+        "spotify_data": {
+            "id": "7w87IxuO7BDcJ3YUqCyMTT",
+            "name": "Pumped Up Kicks",
+            "artists": [
+                {
+                    "id": "7gP3bB2nilZXLfPHJhMdvc",
+                    "name": "Foster The People",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/82babf927d68d75373df483836b21aa4bf9446d0",
+                            "width": 640
+                        },
+                        {
+                            "height": 320,
+                            "url": "https://i.scdn.co/image/23c70fd2867d9e335b224cc52e55d81d69ecf879",
+                            "width": 320
+                        },
+                        {
+                            "height": 160,
+                            "url": "https://i.scdn.co/image/bbd6f13209660cd11f5de06859639ce97bbb0096",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "alternative dance",
+                        "indie pop",
+                        "indie rock",
+                        "indietronica",
+                        "la indie",
+                        "modern rock"
+                    ],
+                    "popularity": 79,
+                    "uri": "spotify:artist:7gP3bB2nilZXLfPHJhMdvc",
+                    "href": "https://open.spotify.com/artist/7gP3bB2nilZXLfPHJhMdvc"
+                }
+            ],
+            "artist": "Foster The People",
+            "cover_url": "https://i.scdn.co/image/fb4998c955d8eba049ffbfc7ab8523a4a4a1f7e9",
+            "duration": 239.6,
+            "album": {
+                "id": "7Kmmw7Z5D2UD5MVwdm10sT",
+                "name": "Torches",
+                "artists": [
+                    {
+                        "id": "7gP3bB2nilZXLfPHJhMdvc",
+                        "name": "Foster The People",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/82babf927d68d75373df483836b21aa4bf9446d0",
+                                "width": 640
+                            },
+                            {
+                                "height": 320,
+                                "url": "https://i.scdn.co/image/23c70fd2867d9e335b224cc52e55d81d69ecf879",
+                                "width": 320
+                            },
+                            {
+                                "height": 160,
+                                "url": "https://i.scdn.co/image/bbd6f13209660cd11f5de06859639ce97bbb0096",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "alternative dance",
+                            "indie pop",
+                            "indie rock",
+                            "indietronica",
+                            "la indie",
+                            "modern rock"
+                        ],
+                        "popularity": 79,
+                        "uri": "spotify:artist:7gP3bB2nilZXLfPHJhMdvc",
+                        "href": "https://open.spotify.com/artist/7gP3bB2nilZXLfPHJhMdvc"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 635,
+                        "url": "https://i.scdn.co/image/fb4998c955d8eba049ffbfc7ab8523a4a4a1f7e9",
+                        "width": 640
+                    },
+                    {
+                        "height": 297,
+                        "url": "https://i.scdn.co/image/c3f13b4f7a674abda9aa36fd72fa341e918c0f26",
+                        "width": 300
+                    },
+                    {
+                        "height": 63,
+                        "url": "https://i.scdn.co/image/37c84d9b11d74b5625635a2c6c05aa80f4dc240c",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:7Kmmw7Z5D2UD5MVwdm10sT"
+            },
+            "popularity": 82,
+            "uri": "spotify:track:7w87IxuO7BDcJ3YUqCyMTT",
+            "query": "Foster the People - Pumped Up Kicks",
+            "certainty": 0.9705882352941176
+        }
     },
     {
         "version": 103,
@@ -5384,14 +6252,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 52,
+                    "index": 61,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Pursuit Of Happiness (nightmare)",
         "artist": "Kid Cudi & MGMT",
-        "artist_image": "https://i.scdn.co/image/e2fbf4240e20a33efa7cbce542df7b7108e872e0",
+        "artist_image": "https://i.scdn.co/image/36189c388c0953f0e63c15840870e0ac15cf39c5",
         "cover": "https://i.scdn.co/image/909a9df9e1b6398cd489abeb77a42ad887570d7e",
         "album": "Man On The Moon: The End Of Day",
         "spotify_data": {
@@ -5595,14 +6463,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 53,
+                    "index": 62,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Reality - Radio Edit",
         "artist": "Lost Frequencies & Janieck Devy",
-        "artist_image": "https://i.scdn.co/image/be266983c0c5567da5a0e73b9d1fb09a9cd438dc",
+        "artist_image": "https://i.scdn.co/image/19dfd8d643655e5455ed5299a1fd1d4fb97b0b89",
         "cover": "https://i.scdn.co/image/b64b05f11ba970b3a90f8f63543da275d1a2e5dc",
         "album": "Reality",
         "spotify_data": {
@@ -5661,7 +6529,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 64,
+                    "popularity": 63,
                     "uri": "spotify:artist:5gtYjyZlmPOc1lLHvYzCON",
                     "href": "https://open.spotify.com/artist/5gtYjyZlmPOc1lLHvYzCON"
                 }
@@ -5753,7 +6621,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 54,
+                    "index": 63,
                     "timestamp": 1504984490
                 }
             }
@@ -5782,14 +6650,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 55,
+                    "index": 64,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Renegades",
         "artist": "X Ambassadors",
-        "artist_image": "https://i.scdn.co/image/7429dec1c1e6e781b11b81856e3ccefe41e6fe63",
+        "artist_image": "https://i.scdn.co/image/d3923033861b8e8e76a80b9f18b32cd88ef423f0",
         "cover": "https://i.scdn.co/image/886c0fe47aac8e31bcab118a182638e254372389",
         "album": "VHS",
         "spotify_data": {
@@ -5913,14 +6781,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 56,
+                    "index": 65,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Riptide",
         "artist": "Vance Joy",
-        "artist_image": "https://i.scdn.co/image/23d0081dc5f325e131056197acad3ea0ca508eee",
+        "artist_image": "https://i.scdn.co/image/7d186c3a80955b82a8cc46fe86bdf305478629e8",
         "cover": "https://i.scdn.co/image/cefc7b35a2000f0dcfc676cee8bd9af26b6c751b",
         "album": "Dream Your Life Away (Special Editon)",
         "spotify_data": {
@@ -6048,7 +6916,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 57,
+                    "index": 66,
                     "timestamp": 1504984490
                 }
             }
@@ -6077,14 +6945,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 58,
+                    "index": 67,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Scars (feat. RoZe & Drumma Battalion)",
         "artist": "Abstract & Roze",
-        "artist_image": "https://i.scdn.co/image/94a06e1e87883393eb5b21ffba19982b17694147",
+        "artist_image": "https://i.scdn.co/image/be8783ec71ad4c1bc2c7609432ed846558864def",
         "cover": "https://i.scdn.co/image/1d43b555dc32d2704e33a335886de28198bb81b8",
         "album": "Scars (feat. RoZe & Drumma Battalion)",
         "spotify_data": {
@@ -6164,7 +7032,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 54,
+                    "popularity": 55,
                     "uri": "spotify:artist:4FNqTucCSrtI4jVi0Vf6I8",
                     "href": "https://open.spotify.com/artist/4FNqTucCSrtI4jVi0Vf6I8"
                 }
@@ -6252,14 +7120,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 59,
+                    "index": 68,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Shape of You",
         "artist": "Ed Sheeran",
-        "artist_image": "https://i.scdn.co/image/e21f791b600f04f9dd8ad2b6d9b3304a82e048ca",
+        "artist_image": "https://i.scdn.co/image/f39b705ba6b1070c77bce4e9c21dff5bac96f21c",
         "cover": "https://i.scdn.co/image/621d2909bcc2c26cd0b274aab0414c9d422a1576",
         "album": "Shape of You",
         "spotify_data": {
@@ -6377,7 +7245,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 60,
+                    "index": 69,
                     "timestamp": 1504984490
                 }
             }
@@ -6406,7 +7274,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 61,
+                    "index": 70,
                     "timestamp": 1504984490
                 }
             }
@@ -6567,14 +7435,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 62,
+                    "index": 71,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Space Bound",
         "artist": "Eminem",
-        "artist_image": "https://i.scdn.co/image/683e358f53d8a3d5ae8ae76053811e836931c94a",
+        "artist_image": "https://i.scdn.co/image/15c446495ae50039ba2bef43172c66240fe0605a",
         "cover": "https://i.scdn.co/image/855d368f5b71cf3d7429486df776cc415f5b13e1",
         "album": "Recovery",
         "spotify_data": {
@@ -6710,14 +7578,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 63,
+                    "index": 72,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Speeding Cars",
         "artist": "Walking On Cars",
-        "artist_image": "https://i.scdn.co/image/4b6fbacfb451792cc0de7b8688a77b3f26ca74f3",
+        "artist_image": "https://i.scdn.co/image/43506087c3622f2c38492af926a5eea228bab407",
         "cover": "https://i.scdn.co/image/f33866ad890f583412c20e4b9e75b14d764aa889",
         "album": "Everything This Way",
         "spotify_data": {
@@ -6839,14 +7707,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 64,
+                    "index": 73,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Spirits",
         "artist": "The Strumbellas",
-        "artist_image": "https://i.scdn.co/image/c792ef697319a909d6b8f384f9565aa5b0f5527f",
+        "artist_image": "https://i.scdn.co/image/fdca133d6584f434571ff6be0fc17905e9b1a571",
         "cover": "https://i.scdn.co/image/3552ffc635b98336be7ee26b91d5e7ba4764d79e",
         "album": "Hope",
         "spotify_data": {
@@ -6966,14 +7834,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 65,
+                    "index": 74,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Stitches",
         "artist": "Shawn Mendes",
-        "artist_image": "https://i.scdn.co/image/889d1206458b26f94aab88e23257706847b41091",
+        "artist_image": "https://i.scdn.co/image/e11faff72ec3bfcdd5b98c50535c565297c0fea4",
         "cover": "https://i.scdn.co/image/98fbd5d40b40bc46a4515396d38e9ee51380b891",
         "album": "Handwritten",
         "spotify_data": {
@@ -7109,14 +7977,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 66,
+                    "index": 75,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Stole the Show",
         "artist": "Kygo & Parson James",
-        "artist_image": "https://i.scdn.co/image/0842ac1141a7ec3e391570f8f2cbb465d6b5e19c",
+        "artist_image": "https://i.scdn.co/image/d2a08f6f4512eb3577209ff72f8895b5315efe9f",
         "cover": "https://i.scdn.co/image/1b761558ed527d1caf6630f2abf5eb6a5a8a6e24",
         "album": "Cloud Nine",
         "spotify_data": {
@@ -7272,7 +8140,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 67,
+                    "index": 76,
                     "timestamp": 1504984490
                 }
             }
@@ -7409,14 +8277,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 68,
+                    "index": 77,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Sun Is Shining",
         "artist": "Axwell /\\ Ingrosso & Axwell",
-        "artist_image": "https://i.scdn.co/image/9c344997e8b46e191da8b96d7345e3f94c24dd0a",
+        "artist_image": "https://i.scdn.co/image/468b455bbe96d361d6aa04cafc674368f062709b",
         "cover": "https://i.scdn.co/image/55c416854258af77369938c029f9383598baf84b",
         "album": "Sun Is Shining",
         "spotify_data": {
@@ -7682,14 +8550,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 69,
+                    "index": 78,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Superhuman",
         "artist": "Chris Brown & Keri Hilson",
-        "artist_image": "https://i.scdn.co/image/f0d8c5a4719aba2cbf8b2847d825dd13fea4c7cf",
+        "artist_image": "https://i.scdn.co/image/4fb96103c5dc22c70e842d35d9f1e0a64b516053",
         "cover": "https://i.scdn.co/image/16509ed13331368263c0a54e09c8f875642f594e",
         "album": "Exclusive - The Forever Edition",
         "spotify_data": {
@@ -7870,14 +8738,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 70,
+                    "index": 79,
                     "timestamp": 1504984490
                 }
             }
         },
         "song_title": "Sur ma route",
         "artist": "Black M",
-        "artist_image": "https://i.scdn.co/image/a39fce3ec02a92d2958c5079a26f7bbe2876261e",
+        "artist_image": "https://i.scdn.co/image/0badb725214d07468a21334616edda5381a97c87",
         "cover": "https://i.scdn.co/image/32212863bfb4e9218583c4c3e5ee941e2b93a16f",
         "album": "Les yeux plus gros que le monde",
         "spotify_data": {
@@ -8009,7 +8877,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 71,
+                    "index": 80,
                     "timestamp": 1504984491
                 }
             }
@@ -8142,14 +9010,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 72,
+                    "index": 81,
                     "timestamp": 1504984491
                 }
             }
         },
         "song_title": "The Plan - feat. Juicy J",
         "artist": "Wiz Khalifa & Juciy J",
-        "artist_image": "https://i.scdn.co/image/0e7f748d3237b8b9f2d36d263dceb71d559e869b",
+        "artist_image": "https://i.scdn.co/image/a6df7cd68abb3f49f8c11fd6a064e3599412ccc0",
         "cover": "https://i.scdn.co/image/5cdcbdebd9642578d1f34890f8581443cc31c740",
         "album": "O.N.I.F.C. (Deluxe)",
         "spotify_data": {
@@ -8282,7 +9150,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 73,
+                    "index": 82,
                     "timestamp": 1504984491
                 }
             }
@@ -8411,7 +9279,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 74,
+                    "index": 83,
                     "timestamp": 1504984491
                 }
             }
@@ -8540,7 +9408,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 75,
+                    "index": 84,
                     "timestamp": 1504984491
                 }
             }
@@ -8569,14 +9437,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 76,
+                    "index": 85,
                     "timestamp": 1504984491
                 }
             }
         },
         "song_title": "Unforgettable",
         "artist": "French Montana & Swae Lee",
-        "artist_image": "https://i.scdn.co/image/29fa1dc766fba1ea3058eb6cebc25bf1d31b7161",
+        "artist_image": "https://i.scdn.co/image/2bc48efdf95f8dea1074e3ebac486de1130ddef4",
         "cover": "https://i.scdn.co/image/6fe3712b430fc0ff32e06b355014324a481f7a9c",
         "album": "Jungle Rules",
         "spotify_data": {
@@ -8618,7 +9486,7 @@
                     "name": "Swae Lee",
                     "images": [],
                     "genres": [],
-                    "popularity": 88,
+                    "popularity": 85,
                     "uri": "spotify:artist:1zNqQNIdeOUZHb8zbZRFMX",
                     "href": "https://open.spotify.com/artist/1zNqQNIdeOUZHb8zbZRFMX"
                 }
@@ -8709,7 +9577,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 77,
+                    "index": 86,
                     "timestamp": 1504984491
                 }
             }
@@ -8743,7 +9611,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 78,
+                    "index": 87,
                     "timestamp": 1504984491
                 }
             }
@@ -8876,14 +9744,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 79,
+                    "index": 88,
                     "timestamp": 1504984491
                 }
             }
         },
         "song_title": "Warriors",
         "artist": "Imagine Dragons",
-        "artist_image": "https://i.scdn.co/image/de3c2c4f4e822edab6fd8c2103102413502635ea",
+        "artist_image": "https://i.scdn.co/image/0242e9f3cdaeb9abd0c9724248213c8e364fc921",
         "cover": "https://i.scdn.co/image/c0f0862961e03db633d1a9de472cf60f856e9d40",
         "album": "Smoke + Mirrors (Deluxe)",
         "spotify_data": {
@@ -9005,7 +9873,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 80,
+                    "index": 89,
                     "timestamp": 1504984491
                 }
             }
@@ -9136,7 +10004,7 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 81,
+                    "index": 90,
                     "timestamp": 1504984491
                 }
             }
@@ -9265,14 +10133,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 82,
+                    "index": 91,
                     "timestamp": 1504984491
                 }
             }
         },
         "song_title": "Young Dumb & Broke",
         "artist": "Khalid",
-        "artist_image": "https://i.scdn.co/image/7752ce73f4d0720acc6a4c46cb2d2f40f344f834",
+        "artist_image": "https://i.scdn.co/image/7cfdef227dc3e938154c367a279ef995be2b5344",
         "cover": "https://i.scdn.co/image/5026fddc6c0b69e931ae99130f15d4214f1e7d41",
         "album": "American Teen",
         "spotify_data": {
@@ -9300,7 +10168,7 @@
                         }
                     ],
                     "genres": [],
-                    "popularity": 98,
+                    "popularity": 97,
                     "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                     "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                 }
@@ -9333,7 +10201,7 @@
                             }
                         ],
                         "genres": [],
-                        "popularity": 98,
+                        "popularity": 97,
                         "uri": "spotify:artist:6LuN9FCkKOj5PcnpouEgny",
                         "href": "https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny"
                     }
@@ -9386,14 +10254,14 @@
                     "cover": "https://i.imgur.com/XnyMP91.jpg",
                     "name": "420",
                     "id": "420",
-                    "index": 83,
+                    "index": 92,
                     "timestamp": 1504984491
                 }
             }
         },
         "song_title": "Young, Wild & Free (feat. Bruno Mars)",
         "artist": "Snoop Dogg & Wiz Khalifa",
-        "artist_image": "https://i.scdn.co/image/ed65357f3461e6d3a9283436c5e6992085c6ee94",
+        "artist_image": "https://i.scdn.co/image/b6110a0ff25000578e4bd1bbd72ad6efaa5d6b4e",
         "cover": "https://i.scdn.co/image/0068185d3922ef1b88567dad102329cf23474deb",
         "album": "Young, Wild & Free (feat. Bruno Mars)",
         "spotify_data": {
