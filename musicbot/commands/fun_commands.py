@@ -9,7 +9,7 @@ from musicbot.games.game_2048 import Game2048
 from musicbot.games.game_cah import GameCAH
 from musicbot.games.game_connect_four import GameConnectFour
 from musicbot.games.game_hangman import GameHangman
-from musicbot.utils import (Response, block_user, command_info, owner_only,
+from musicbot.utils import (Response, block_user, escape_dis, command_info, owner_only,
                             random_line)
 
 
