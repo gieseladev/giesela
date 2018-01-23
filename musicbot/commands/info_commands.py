@@ -263,10 +263,10 @@ class InfoCommands:
         ping = time.time() - pt 
         if ping < 0.250: 
             complete = f'Pong: {ping*1000} ms!'
-            em = discord.Embed(title=complete, colour=0x1ef21e)
+            em = Embed(title=complete, colour=0x1ef21e)
             await self.safe_edit_message(msg, embed=em)
         else: # slow! xD 
             complete = f'Pong: {ping} seconds!'
-            em = discord.Embed(title=complete, colour=0xffcc00)
+            em = Embed(title=complete, colour=0xffcc00)
             await self.safe_edit_message(msg, embed=em)
         
