@@ -247,6 +247,7 @@ class InfoCommands:
 
         return Response(embed=em)
    
+    @command_info("4.9.12", 1516690741)
     async def cmd_ping(self, channel):
         """
         ///|Usage
@@ -260,7 +261,12 @@ class InfoCommands:
         em = Embed(title="Pinging...", colour=0xff0000)
         msg = await self.safe_send_message(channel, embed=em)
         ping = time.time() - pt 
-        result = "Pong: %f seconds!" % ping 
-        em = Embed(title=result, colour=0x1ef21e)
+        if ping < 0.250: 
+            complete = f'Pong: {ping*1000} ms!'
+            em = Embed(title=complete, colour=0x1ef21e)
+            await self.safe_edit_message(msg, embed=em)
+        else: # slow! xD 
+            complete = f'Pong: {ping} seconds!'
+            em = Embed(title=complete, colour=0xffcc00)
+            await self.safe_edit_message(msg, embed=em)
         
-        await self.safe_edit_message(msg, embed=em)
