@@ -1,7 +1,7 @@
 language: python
 python:
-  - "3.7-dev"
-  - "3.6-dev" 
+  # - "3.7-dev"
+  - "3.6-dev"
 install:
   - sudo apt-get install build-essential unzip -y
   - sudo apt-get install software-properties-common -y
@@ -9,15 +9,17 @@ install:
   - sudo add-apt-repository ppa:mc3man/trusty-media -y
   - sudo add-apt-repository ppa:chris-lea/libsodium -y
   - sudo apt-get update -y --allow-unauthenticated
-  - sudo apt-get install git ffmpeg libopus-dev libffi-dev libsodium-dev -y
+  - sudo apt-get install ffmpeg libopus-dev libffi-dev libsodium-dev -y
+  - pip install pytest
+  - pip install pytest-asyncio
   - pip install -r requirements.txt
 script:
-  - python ./run.py
-cache: pip
+  - python -m pytest
 notifications:
   email:
-    on_success: always
-    on_failure: always   
+  on_failure: always
+  on_success: always
+sudo: required
 dist: trusty
 os: linux
-sudo: required 
+cache: pip
