@@ -15,4 +15,4 @@ async def test_start():
 
     await bot.login(token)
     await bot.http.close()
-    await bot.aiosession.close()
+    await bot.close()
