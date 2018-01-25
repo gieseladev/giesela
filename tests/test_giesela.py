@@ -1,6 +1,7 @@
 """Test Giesela."""
 
 import os
+import discord
 
 import pytest
 
@@ -8,8 +9,8 @@ import pytest
 @pytest.mark.asyncio
 async def test_start():
     """Test whether Giesela starts properly."""
-    from giesela.bot import Giesela
-    bot = Giesela()
+    from musicbot import bot
+    bot = discord.Client()
     token = os.getenv("discord_token")
 
     await bot.login(token)
