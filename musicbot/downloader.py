@@ -7,7 +7,7 @@ import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
 ytdl_format_options = {
-    "format": "bestaudio/best",
+    "format": "best", # meehhh the audio is still decent, AAC is not bad, so we're fine. Good thing ffmpeg doesn't care.
     "extractaudio": True,
     "audioformat": "mp3",
     "outtmpl": "%(extractor)s-%(id)s-%(title)s.%(ext)s",
@@ -21,6 +21,8 @@ ytdl_format_options = {
     "default_search": "auto",
     "source_address": "0.0.0.0",
     "geo_bypass": True
+    # "external-downloader": "axel" # meh I don't really like this, not worth it unless it's a big file but can try it
+    # "external-downloader-args": "-n 25 -a" # see format  # meh I don't really like this, not worth it unless it's a big file but can try it
 }
 
 # Duck your useless bugreports message that gets two link embeds and
