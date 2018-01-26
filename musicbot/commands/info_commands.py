@@ -245,9 +245,11 @@ class InfoCommands:
         em = Embed(title="Version \"{}\"".format(v_name.replace("_", " ").title()), description=desc,
                    url="https://gieseladev.github.io/Giesela", colour=hex_to_dec("#67BE2E"))
 
-        return Response(embed=em)
-   
-    @command_info("4.9.12", 1516690741)
+        return Response(embed=em) 
+    
+    @command_info("4.9.12", 1516690741, {
+        "4.9.12": (1516973276, "Double quotes or die, kthxbai!")
+    })
     async def cmd_ping(self, channel):
         """
         ///|Usage
@@ -262,11 +264,11 @@ class InfoCommands:
         msg = await self.safe_send_message(channel, embed=em)
         ping = time.time() - pt 
         if ping < 0.250: 
-            complete = f'Pong: {ping*1000} ms!'
+            complete = f"Pong: {ping*1000} ms!"
             em = Embed(title=complete, colour=0x1ef21e)
             await self.safe_edit_message(msg, embed=em)
         else: # slow! xD 
-            complete = f'Pong: {ping} seconds!'
+            complete = f"Pong: {ping} seconds!"
             em = Embed(title=complete, colour=0xffcc00)
             await self.safe_edit_message(msg, embed=em)
         
