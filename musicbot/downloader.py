@@ -6,14 +6,15 @@ import youtube_dl
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
-# This is a reasonable hybrid, that works best at tracks length 5-6 min+ 
-# Works very well at tracks 15-20 min +
-# Works okay (500-600kbps) at tracks of 2-4  minute length
-# But downloads .webm and that's much, much less disk (for example a 4K vid with best will download a 1GB file versus 60MB WEBM)
-# Aria can be installed with a package manager, i.e. apt-get install aria -- better than axel for overall in prelim testing
+# see commit 13c23d80fbb57bea80d74e83edbeb89626af2574 for prior explanation
+# but it's not advised *at all* to use bestaudio/best, even with axel
+# but let's use axel anyway, why not! it speeds up downloads even more, even if they're fast
+# fast is always better 
+# the end, professional documentation
+# PS: make sure axel is installed (with a package manager, like apt-get install axel)
 
 ytdl_format_options = {
-    "format": "bestaudio/best", 
+    "format": "best", 
     "extractaudio": True,
     "audioformat": "mp3",
     "outtmpl": "%(extractor)s-%(id)s-%(title)s.%(ext)s",
@@ -27,8 +28,8 @@ ytdl_format_options = {
     "default_search": "auto",
     "source_address": "0.0.0.0",
     "geo_bypass": True,
-    "external-downloader": "aria2c", 
-    "external-downloader-args": "-j 12 -s 12 -x 12 -k 1024K" 
+    "external-downloader": "axel", 
+    "external-downloader-args": "-n 10 -a" 
 }
 
 # Duck your useless bugreports message that gets two link embeds and
