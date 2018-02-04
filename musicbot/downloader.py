@@ -6,17 +6,10 @@ import youtube_dl
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
-# see commit 13c23d80fbb57bea80d74e83edbeb89626af2574 for prior explanation
-# but it's not advised *at all* to use bestaudio/best, even with axel
-# but let's use axel anyway, why not! it speeds up downloads even more, even if they're fast
-# fast is always better 
-# the end, professional documentation
-# PS: make sure axel is installed (with a package manager, like apt-get install axel)
 
 ytdl_format_options = {
-    "format": "best", 
+    "format": "bestaudio/best", 
     "extractaudio": True,
-    "audioformat": "mp3",
     "outtmpl": "%(extractor)s-%(id)s-%(title)s.%(ext)s",
     "restrictfilenames": True,
     "noplaylist": True,
@@ -27,9 +20,7 @@ ytdl_format_options = {
     "no_warnings": True,
     "default_search": "auto",
     "source_address": "0.0.0.0",
-    "geo_bypass": True,
-    "external-downloader": "axel", 
-    "external-downloader-args": "-n 10 -a" 
+    "geo_bypass": True
 }
 
 # Duck your useless bugreports message that gets two link embeds and
