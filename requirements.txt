@@ -5,7 +5,7 @@ cffi==1.11.5; sys_platform == 'win32'
 numpy==1.14.5
 
 https://github.com/Imgur/imgurpython/archive/master.zip#egg=imgurpython
-spotipy
+spotipy==2.4.4
 pillow==4.0.0
 moviepy
 aiohttp
