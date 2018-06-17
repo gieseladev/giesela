@@ -13,4 +13,4 @@ openpyxl==2.5.4
 beautifulsoup4==4.6.0
 discogs_client==2.2.1
 python-dateutil==2.7.3
-raven
+raven==6.9.0
