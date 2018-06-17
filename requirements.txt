@@ -6,7 +6,7 @@ numpy==1.14.5
 
 https://github.com/Imgur/imgurpython/archive/master.zip#egg=imgurpython
 spotipy==2.4.4
-pillow==4.0.0
+pillow==5.1.0
 moviepy
 aiohttp
 openpyxl
