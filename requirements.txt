@@ -8,7 +8,7 @@ https://github.com/Imgur/imgurpython/archive/master.zip#egg=imgurpython
 spotipy==2.4.4
 pillow==5.1.0
 moviepy==0.2.3.5
-aiohttp
+aiohttp==3.3.2
 openpyxl
 beautifulsoup4
 discogs_client
