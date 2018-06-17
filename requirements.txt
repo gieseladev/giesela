@@ -1,4 +1,4 @@
-discord.py[voice]
+discord.py[voice]==0.16.12
 youtube_dl
 pip
 cffi==1.6.0; sys_platform == 'win32'
