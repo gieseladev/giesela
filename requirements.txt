@@ -1,5 +1,5 @@
 discord.py[voice]==0.16.12
-youtube_dl==2018.6.14
+youtube_dl==2018.6.18
 pip==10.0.1
 cffi==1.11.5; sys_platform == 'win32'
 numpy==1.14.5
