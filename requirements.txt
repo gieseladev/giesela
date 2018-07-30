@@ -2,7 +2,7 @@ discord.py[voice]==0.16.12
 youtube_dl==2018.7.29
 pip==18.0
 cffi==1.11.5; sys_platform == 'win32'
-numpy==1.14.5
+numpy==1.15.0
 
 https://github.com/Imgur/imgurpython/archive/master.zip#egg=imgurpython
 spotipy==2.4.4
