@@ -10,7 +10,7 @@ pillow==5.2.0
 moviepy==0.2.3.5
 aiohttp==3.3.2
 openpyxl==2.5.4
-beautifulsoup4==4.6.0
+beautifulsoup4==4.6.1
 discogs_client==2.2.1
 python-dateutil==2.7.3
 raven==6.9.0
