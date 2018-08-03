@@ -27,12 +27,12 @@ def _upload_playlist_cover(playlist_name, url):
 
     delete_previous_playlist_cover(file_name)
 
-    config = ***REMOVED***
+    config = {
         "album": "liSNPNU2S6NR4AS",
         "name": file_name,
         "title": name,
         "description": "The cover for the playlist " + name
-    ***REMOVED***
+    }
 
     try:
         if isinstance(url, BytesIO):
@@ -67,10 +67,10 @@ def ensure_album(album_name):
         if album.title == album_name:
             return album.id, album.deletehash
 
-    fields = ***REMOVED***
+    fields = {
         "title": album_name,
         "description": "All the images related to the playlist " + album_name
-    ***REMOVED***
+    }
 
     resp = client.create_album(fields)
     return resp["id"], resp["deletehash"]
@@ -82,12 +82,12 @@ def _upload_song_image(playlist_name, identifier, url):
     album_id, edit_id = ensure_album(album_name)
     delete_previous_song_image(album_id, identifier)
 
-    config = ***REMOVED***
+    config = {
         "album": edit_id,
         "name": identifier,
         "title": identifier,
-        "description": "The ***REMOVED***2***REMOVED*** for the entry ***REMOVED***0***REMOVED***".format(*identifier.partition(" "))
-    ***REMOVED***
+        "description": "The {2} for the entry {0}".format(*identifier.partition(" "))
+    }
 
     try:
         resp = client.upload_from_url(url, config=config)

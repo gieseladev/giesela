@@ -1,129 +1,143 @@
-***REMOVED***
-    "simonisanerd": ***REMOVED***
+{
+    "simonisanerd": {
         "location": "data/playlists/simonisanerd.gpl",
-        "author": ***REMOVED***
+        "author": {
             "id": "203302899277627392",
             "name": "siku2",
-            "display_name": "***REMOVED***",
+            "display_name": "Simon",
             "avatar_url": "https://cdn.discordapp.com/avatars/203302899277627392/520da4f3e1a7ac618955079cb8082013.png?size=1024",
             "colour": "#1197F0"
-        ***REMOVED***,
+        },
         "entries": 116,
-        "replays": 88,
+        "replays": 91,
         "description": "Your go-to playlist for everything related to Anime and Japanese music. This is the first (and as of yet) only playlist where **every** entry is a GieselaEntry.",
         "cover_url": "http://i.imgur.com/MFXq8og.jpg",
-        "name": "***REMOVED***isanerd"
-    ***REMOVED***,
-    "quality": ***REMOVED***
+        "name": "Simonisanerd"
+    },
+    "quality": {
         "location": "data/playlists/quality.gpl",
-        "author": ***REMOVED***
+        "author": {
             "id": "203510202421477376",
             "name": "ZyLect",
             "display_name": "ZyLect",
             "avatar_url": "https://cdn.discordapp.com/avatars/203510202421477376/8e135d666d1f7f6769530dbfab8298dd.png?size=1024",
             "colour": "#6200F6"
-        ***REMOVED***,
+        },
         "entries": 142,
         "replays": 54,
         "description": "Hand-picked songs to please your ears. This playlist suits you well if you want to relax while drinking some coffee.",
         "cover_url": "http://i.imgur.com/Vifn0MV.jpg",
         "name": "Quality"
-    ***REMOVED***,
-    "uptoyou": ***REMOVED***
+    },
+    "uptoyou": {
         "location": "data/playlists/uptoyou.gpl",
-        "author": ***REMOVED***
+        "author": {
             "id": "unknown",
             "name": "unknown",
             "display_name": "Unknown",
             "avatar_url": "https://amploprod.s3.amazonaws.com/assets/no-user-image-square-9f6a473a32ad639f619216331d10d61ce1b35c9271d5683920960e1a5ee45bb8.jpg",
             "colour": "#1197F0"
-        ***REMOVED***,
+        },
         "replays": 2,
         "description": null,
         "cover_url": "http://i.imgur.com/BP3XWrf.jpg"
-    ***REMOVED***,
-    "gems": ***REMOVED***
+    },
+    "gems": {
         "location": "data/playlists/gems.gpl",
-        "author": ***REMOVED***
+        "author": {
             "id": "206459363739566080",
             "name": "Lophorius",
             "display_name": "Lophorius",
             "avatar_url": "https://cdn.discordapp.com/avatars/206459363739566080/290bbea2374aba7ce2c28ced4842c643.png?size=1024",
             "colour": "#1197F0"
-        ***REMOVED***,
-        "replays": 19,
+        },
+        "replays": 25,
         "description": null,
         "cover_url": "https://i.imgur.com/CKhYHbF.jpg",
         "name": "Gems"
-    ***REMOVED***,
-    "classical": ***REMOVED***
+    },
+    "classical": {
         "location": "data/playlists/classical.gpl",
-        "author": ***REMOVED***
+        "author": {
             "id": "206459363739566080",
             "name": "Lophorius",
             "display_name": "Lophorius",
             "avatar_url": "https://cdn.discordapp.com/avatars/206459363739566080/290bbea2374aba7ce2c28ced4842c643.png?size=1024",
             "colour": "#1197F0"
-        ***REMOVED***,
+        },
         "replays": 4,
         "description": "Containing music that justifies why aliens should visit us and benefit from us.",
         "cover_url": "http://i.imgur.com/wljtuBA.png",
         "name": "Classical"
-    ***REMOVED***,
-    "420": ***REMOVED***
+    },
+    "420": {
         "location": "data/playlists/420.gpl",
-        "author": ***REMOVED***
+        "author": {
             "id": "210488226777923585",
             "name": "grelor",
             "display_name": "grelor",
             "avatar_url": "",
             "colour": "#57D31D"
-        ***REMOVED***,
+        },
         "replays": 9,
         "description": null,
         "cover_url": "https://i.imgur.com/XnyMP91.jpg",
         "name": "420"
-    ***REMOVED***,
-    "workout": ***REMOVED***
+    },
+    "workout": {
         "location": "data/playlists/workout.gpl",
-        "author": ***REMOVED***
+        "author": {
             "id": "206459363739566080",
             "name": "Lophorius",
             "display_name": "Lophorius",
             "avatar_url": "https://cdn.discordapp.com/avatars/206459363739566080/052ae2a51be094c5976d491577320512.png?size=1024",
             "colour": "#FFB400"
-        ***REMOVED***,
-        "replays": 0,
+        },
+        "replays": 4,
         "description": "Unleash your inner beast",
         "cover_url": "https://i.imgur.com/hHutGfl.jpg",
         "name": "Workout"
-    ***REMOVED***,
-    "electronica": ***REMOVED***
+    },
+    "electronica": {
         "location": "data/playlists/electronica.gpl",
-        "author": ***REMOVED***
+        "author": {
             "id": "203302899277627392",
             "name": "siku2",
             "display_name": "Spookumon",
             "avatar_url": "https://cdn.discordapp.com/avatars/203302899277627392/a_92ebd93e871089ddc512fca3baed6b6b.gif?size=1024",
             "colour": "#4F00C0"
-        ***REMOVED***,
-        "replays": 0,
+        },
+        "replays": 2,
         "description": "Music?",
         "cover_url": "https://i.imgur.com/bjEnvnN.png",
         "name": "Electronica"
-    ***REMOVED***,
-    "jams": ***REMOVED***
+    },
+    "jams": {
         "location": "data/playlists/jams.gpl",
-        "author": ***REMOVED***
+        "author": {
             "id": "203302899277627392",
             "name": "siku2",
-            "display_name": "***REMOVED***",
+            "display_name": "Simon",
             "avatar_url": "https://cdn.discordapp.com/avatars/203302899277627392/a_e60cca01a5d0e8cb841aa0bc6888bf8e.gif?size=1024",
             "colour": "#4F00C0"
-        ***REMOVED***,
-        "replays": 2,
+        },
+        "replays": 4,
         "description": "Ever get the feeling that some modern pop songs aren't all that bad?\nWell, fear not! This playlist is gonna help you answer this question.",
         "cover_url": "https://i.imgur.com/gwwzsof.png",
         "name": "Jams"
-    ***REMOVED***
-***REMOVED***
+    },
+    "orchestra": {
+        "location": "data/playlists/orchestra.gpl",
+        "author": {
+            "id": "206459363739566080",
+            "name": "Lophorius",
+            "display_name": "Lophorius",
+            "avatar_url": "https://cdn.discordapp.com/avatars/206459363739566080/efd907db36a097ea692712833805a9ed.png?size=1024",
+            "colour": "#468263"
+        },
+        "replays": 3,
+        "description": null,
+        "cover_url": "https://i.imgur.com/IoYuDqI.jpg",
+        "name": "Orchestra"
+    }
+}

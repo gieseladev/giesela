@@ -21,9 +21,9 @@ class VGMException:
 
 
 def _search_album(query):
-    params = ***REMOVED***
+    params = {
         "q": query
-    ***REMOVED***
+    }
     resp = requests.get(base_url + "search/albums", params=params)
 
     albums = resp.json()["results"]["albums"]
@@ -78,7 +78,7 @@ def _extract_song_title(data, query):
 
 def _get_entry(query):
     albums = _search_album(query)
-    fields = ***REMOVED******REMOVED***
+    fields = {}
 
     album = albums[0]
     album_name = list(album["titles"].values())[0]
@@ -233,15 +233,15 @@ if __name__ == "__main__":
         for test in tests:
             try:
                 entry = _get_entry(test)
-                print("***REMOVED******REMOVED***: ***REMOVED******REMOVED***".format(test, entry["song_title"]))
+                print("{}: {}".format(test, entry["song_title"]))
                 found += 1
             except (VGMException.NoResults, VGMException.TrackNotFound, VGMException.ArtistNotComplete):
                 pass
             except:
-                print("There was an error with ***REMOVED******REMOVED***".format(test))
+                print("There was an error with {}".format(test))
                 raise
 
-        print("Found ***REMOVED******REMOVED***%".format(round(100 * found / len(tests))))
+        print("Found {}%".format(round(100 * found / len(tests))))
 
     test()
     # _get_entry("Cinema Staff - Great Escape")

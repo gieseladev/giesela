@@ -20,14 +20,14 @@ from musicbot.web_socket_server import GieselaServer
 
 class EnqueueCommands:
 
-    @command_info("2.0.2", 1482252120, ***REMOVED***
+    @command_info("2.0.2", 1482252120, {
         "3.5.2": (1497712808, "Updated help text"),
         "4.4.4": (1501504294, "Fixed internal bug")
-    ***REMOVED***)
+    })
     async def cmd_stream(self, player, channel, author, song_url):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***stream <media link>`
+        `{command_prefix}stream <media link>`
         ///|Explanation
         Enqueue a media stream.
         This could mean an actual stream like Twitch, Youtube Gaming or even a radio stream, or simply streaming
@@ -43,19 +43,19 @@ class EnqueueCommands:
         return Response(":+1:")
 
     @block_user
-    @command_info("2.0.3", 1485523740, ***REMOVED***
+    @command_info("2.0.3", 1485523740, {
         "3.7.7": (1499018088, "radio selection looks good again"),
         "3.8.9": (1499535312, "Part of the `Giesenesis` rewrite"),
         "4.4.4": (1501627084, "Fixed this command"),
         "4.6.4": (1503433750, "The station finder now displays the current song of the station"),
         "4.6.7": (1503747794, "Play the radio stations instantly")
-    ***REMOVED***)
+    })
     async def cmd_radio(self, player, channel, author, leftover_args):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***radio [station name]`
+        `{command_prefix}radio [station name]`
         ///|Random station
-        `***REMOVED***command_prefix***REMOVED***radio random`
+        `{command_prefix}radio random`
         ///|Explanation
         Play live radio.
         You can leave the parameters blank in order to get a tour around all the channels,
@@ -66,7 +66,7 @@ class EnqueueCommands:
                 station_info = RadioStations.get_random_station()
                 await player.queue.add_radio_entry(station_info, channel=channel, author=author, now=True)
                 return Response(
-                    "I choose\n*****REMOVED***.name***REMOVED*****".format(station_info))
+                    "I choose\n**{.name}**".format(station_info))
             else:
                 # try to find the radio station
                 search_name = " ".join(leftover_args)
@@ -74,7 +74,7 @@ class EnqueueCommands:
                     search_name.lower().strip())
                 if station_info:
                     await player.queue.add_radio_entry(station_info, channel=channel, author=author, now=True)
-                    return Response("Your favourite:\n*****REMOVED***.name***REMOVED*****".format(station_info))
+                    return Response("Your favourite:\n**{.name}**".format(station_info))
 
         # help the user find the right station
 
@@ -90,7 +90,7 @@ class EnqueueCommands:
 
             if station.has_current_song_info:
                 data = await RadioSongExtractor.async_get_current_song(self.loop, station)
-                em.add_field(name="Currently playing", value="***REMOVED***artist***REMOVED*** - ***REMOVED***title***REMOVED***".format(**data))
+                em.add_field(name="Currently playing", value="{artist} - {title}".format(**data))
 
             embeds.append(em)
 
@@ -102,20 +102,20 @@ class EnqueueCommands:
         else:
             station = possible_stations[result]
             await player.queue.add_radio_entry(station, channel=channel, author=author)
-            return Response("There you go fam!\n*****REMOVED***.name***REMOVED*****".format(station))
+            return Response("There you go fam!\n**{.name}**".format(station))
 
-    @command_info("1.0.0", 1477180800, ***REMOVED***
+    @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "3.8.9": (1499461104, "Part of the `Giesenesis` rewrite"),
         "3.9.6": (1499879464, "Better error handling"),
         "3.9.7": (1499968174, "Added a placement parameter."),
         "4.0.0": (1499981166, "Added \"random\" as a possible placement parameter"),
         "4.3.0": (1501177726, "Updated design of \"enqueued\" message and fixed placement parameter")
-    ***REMOVED***)
+    })
     async def cmd_play(self, player, channel, author, leftover_args, song_url):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***play <song link | query> [index | "last" | "next" | "random"]`
+        `{command_prefix}play <song link | query> [index | "last" | "next" | "random"]`
         ///|Explanation
         Adds the song to the queue.  If no link is provided, the first
         result from a youtube search is added to the queue.
@@ -140,7 +140,7 @@ class EnqueueCommands:
         try:
             entry = await player.queue.get_entry_from_query(query, author=author, channel=channel)
         except BaseException as e:
-            return Response("There was a tiny problem with your request:\n```\n***REMOVED******REMOVED***\n```".format(e))
+            return Response("There was a tiny problem with your request:\n```\n{}\n```".format(e))
 
         if not entry:
             return Response("Couldn't find anything for me to add")
@@ -157,7 +157,7 @@ class EnqueueCommands:
             total_entries = len(entry)
             progress_message = await self.safe_send_message(
                 channel,
-                "Parsing ***REMOVED******REMOVED*** entries\n***REMOVED******REMOVED*** [0%]".format(
+                "Parsing {} entries\n{} [0%]".format(
                     total_entries,
                     create_bar(0, length=20)
                 )
@@ -193,7 +193,7 @@ class EnqueueCommands:
 
                     progress_message_future = asyncio.ensure_future(self.safe_edit_message(
                         progress_message,
-                        "Parsing ***REMOVED******REMOVED*** entr***REMOVED******REMOVED*** at ***REMOVED******REMOVED*** entries/min\n***REMOVED******REMOVED*** [***REMOVED******REMOVED***%]\n***REMOVED******REMOVED*** remaining".format(
+                        "Parsing {} entr{} at {} entries/min\n{} [{}%]\n{} remaining".format(
                             entries_left,
                             "y" if entries_left == 1 else "ies",
                             round(60 / avg_time, 1),
@@ -208,27 +208,27 @@ class EnqueueCommands:
 
             progress_message_future.cancel()
             await self.safe_delete_message(progress_message)
-            return Response("Added ***REMOVED******REMOVED*** entries to the queue\nSkipped ***REMOVED******REMOVED*** entries\nIt took ***REMOVED******REMOVED*** to add all entries".format(
+            return Response("Added {} entries to the queue\nSkipped {} entries\nIt took {} to add all entries".format(
                 entries_added,
                 entries_not_added,
                 format_time(delta_time, unit_length=1)
             ))
         else:
             player.queue._add_entry(entry, placement)
-            return Response("Enqueued *****REMOVED******REMOVED*****".format(entry.title))
+            return Response("Enqueued **{}**".format(entry.title))
 
     @block_user
-    @command_info("1.0.0", 1477180800, ***REMOVED***
+    @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "3.5.9": (1497890999, "Revamped design and functions making this command more useful"),
         "3.6.1": (1497967505, "deleting messages when leaving search"),
         "4.2.5": (1500961103, "Adjusting to new player/queue model and fixed addtoplaylist"),
         "4.5.3": (1501965830, "Fixed addtoplaylist sub-command")
-    ***REMOVED***)
+    })
     async def cmd_search(self, player, channel, author, leftover_args):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***search [number] <query>`
+        `{command_prefix}search [number] <query>`
         ///|Explanation
         Searches for a video and adds the one you choose.
         """
@@ -249,7 +249,7 @@ class EnqueueCommands:
             number = 5
             query = " ".join(leftover_args)
 
-        search_query = "ytsearch***REMOVED******REMOVED***:***REMOVED******REMOVED***".format(number, query)
+        search_query = "ytsearch{}:{}".format(number, query)
 
         search_msg = await self.safe_send_message(channel, "Searching for videos...")
         await self.send_typing(channel)
@@ -270,7 +270,7 @@ class EnqueueCommands:
         if not info:
             return Response("No videos found.")
 
-        result_string = "**Result ***REMOVED***0***REMOVED***/***REMOVED***1***REMOVED*****\n***REMOVED***2***REMOVED***"
+        result_string = "**Result {0}/{1}**\n{2}"
         interface_string = "**Commands:**\n`play` play this result\n`addtoplaylist <playlist name>` add this result to a playlist\n\n`n` next result\n`p` previous result\n`exit` abort and exit"
 
         current_result_index = 0
@@ -299,7 +299,7 @@ class EnqueueCommands:
                 return Response("Okay then. Search again soon")
             elif command in "np":
                 # feels hacky but is actully genius
-                current_result_index += ***REMOVED***"n": 1, "p": -1***REMOVED***[command]
+                current_result_index += {"n": 1, "p": -1}[command]
                 current_result_index %= total_results
             elif command == "play":
                 await self.send_typing(channel)
@@ -337,7 +337,7 @@ class EnqueueCommands:
                     await self.safe_delete_message(result_message)
                     await self.safe_delete_message(interface_message)
                     await self.safe_delete_message(response_message)
-                    return Response("Created a new playlist \"***REMOVED******REMOVED***\" and added `***REMOVED******REMOVED***`.".format(playlistname.title(),
+                    return Response("Created a new playlist \"{}\" and added `{}`.".format(playlistname.title(),
                                                                                            add_entry.title))
 
                 self.playlists.edit_playlist(
@@ -345,21 +345,21 @@ class EnqueueCommands:
                 await self.safe_delete_message(result_message)
                 await self.safe_delete_message(interface_message)
                 await self.safe_delete_message(response_message)
-                return Response("Added `***REMOVED******REMOVED***` to playlist \"***REMOVED******REMOVED***\".".format(add_entry.title, playlistname.title()))
+                return Response("Added `{}` to playlist \"{}\".".format(add_entry.title, playlistname.title()))
 
             await self.safe_delete_message(result_message)
             await self.safe_delete_message(interface_message)
             await self.safe_delete_message(response_message)
 
     @block_user
-    @command_info("3.8.4", 1499188226, ***REMOVED***
+    @command_info("3.8.4", 1499188226, {
         "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite"),
         "3.5.1": (1501793988, "Not closing the suggestion window right away")
-    ***REMOVED***)
+    })
     async def cmd_suggest(self, player, channel, author):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***suggest`
+        `{command_prefix}suggest`
         ///|Explanation
         Find similar videos to the current one
         """
@@ -377,7 +377,7 @@ class EnqueueCommands:
         if not videos:
             return Response("Couldn't find anything.")
 
-        result_string = "**Result ***REMOVED***0***REMOVED***/***REMOVED***1***REMOVED*****\n***REMOVED***2***REMOVED***"
+        result_string = "**Result {0}/{1}**\n{2}"
         interface_string = "**Commands:**\n`play` play this result\n\n`n` next result\n`p` previous result\n`exit` abort and exit"
 
         current_result_index = 0
@@ -406,7 +406,7 @@ class EnqueueCommands:
                 return Response("Okay then. Suggest again soon *(Sorry, I couldn't resist)*")
             elif command in "np":
                 # feels hacky but is actully genius
-                current_result_index += ***REMOVED***"n": 1, "p": -1***REMOVED***[command]
+                current_result_index += {"n": 1, "p": -1}[command]
                 current_result_index %= total_results
             elif command == "play":
                 await self.send_typing(channel)
@@ -419,14 +419,14 @@ class EnqueueCommands:
             await self.safe_delete_message(interface_message)
             await self.safe_delete_message(response_message)
 
-    @command_info("1.0.0", 1477180800, ***REMOVED***
+    @command_info("1.0.0", 1477180800, {
         "4.6.8": (1503751773, "updated documentation"),
         "4.6.9": (1503751791, "autoplay now follows video recommendations")
-    ***REMOVED***)
+    })
     async def cmd_autoplay(self, player):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***autoplay`
+        `{command_prefix}autoplay`
         ///|Explanation
         Automatically queue another video if the queue is empty
         either by following the list of recommended videos to the
@@ -444,14 +444,14 @@ class EnqueueCommands:
 
         # await self.safe_send_message (channel, msgState)
 
-    @command_info("4.7.0", 1503764185, ***REMOVED***
+    @command_info("4.7.0", 1503764185, {
         "4.9.7": (1508067836, "Support for direct Spotify tracks/URL"),
         "4.9.10": (1512831683, "delete command message and progress bar fix")
-    ***REMOVED***)
+    })
     async def cmd_spotify(self, message, channel, author, player, url):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***spotify [link]`
+        `{command_prefix}spotify [link]`
         ///|Explanation
         Load a playlist or direct URL track from Spotify!
         """
@@ -478,7 +478,7 @@ class EnqueueCommands:
             em = Embed(title=playlist.name, description=html2md(playlist.description), colour=random.randint(0, 0xFFFFFF), url=playlist.href)
             em.set_thumbnail(url=playlist.cover)
             em.set_author(name=playlist.author)
-            em.set_footer(text="***REMOVED******REMOVED*** tracks".format(len(playlist.tracks)))
+            em.set_footer(text="{} tracks".format(len(playlist.tracks)))
 
             interface_msg = await self.safe_send_message(channel, "**Loading playlist**", embed=em)
 
@@ -499,7 +499,7 @@ class EnqueueCommands:
 
             await loading_bar.done()
 
-            em.set_footer(text="***REMOVED******REMOVED*** tracks loaded | ***REMOVED******REMOVED*** failed".format(entries_added, entries_not_added))
+            em.set_footer(text="{} tracks loaded | {} failed".format(entries_added, entries_not_added))
             interface_msg = await self.edit_message(interface_msg, "**Loaded playlist**", embed=em)
 
         else:
@@ -508,14 +508,14 @@ class EnqueueCommands:
 
 class ManipulateCommands:
 
-    @command_info("1.0.0", 1477180800, ***REMOVED***
+    @command_info("1.0.0", 1477180800, {
         "3.8.9": (1499466672, "Part of the `Giesenesis` rewrite"),
         "4.5.9": (1502203034, "Sending an update to Webiesela when an entry is removed")
-    ***REMOVED***)
+    })
     async def cmd_remove(self, server, player, message, channel, author, leftover_args):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***remove <index | start index | url> [end index]`
+        `{command_prefix}remove <index | start index | url> [end index]`
         ///|Explanation
         Remove an index or a url from the queue.
         """
@@ -545,7 +545,7 @@ class ManipulateCommands:
 
             GieselaServer.send_player_information_update(server.id)
             return Response(
-                "Removed ***REMOVED******REMOVED*** entries from the queue".format(
+                "Removed {} entries from the queue".format(
                     end_index - start_index + 1)
             )
 
@@ -558,7 +558,7 @@ class ManipulateCommands:
             video = player.queue.entries[index].title
             del player.queue.entries[index]
             GieselaServer.send_player_information_update(server.id)
-            return Response("Removed *****REMOVED***0***REMOVED***** from the queue".format(video))
+            return Response("Removed **{0}** from the queue".format(video))
 
         except:
             strindex = leftover_args[0]
@@ -566,19 +566,19 @@ class ManipulateCommands:
 
             for entry in player.queue.entries:
                 print(
-                    "Looking at ***REMOVED***0***REMOVED***. [***REMOVED***1***REMOVED***]".format(entry.title, entry.url))
+                    "Looking at {0}. [{1}]".format(entry.title, entry.url))
 
                 if entry.title == strindex or entry.url == strindex:
-                    print("Found ***REMOVED***0***REMOVED*** and will remove it".format(
+                    print("Found {0} and will remove it".format(
                         leftover_args[0]))
                     await self.cmd_remove(player, message, channel, author, [iteration])
                     GieselaServer.send_player_information_update(server.id)
                     return
                 iteration += 1
 
-        return Response("Didn't find anything that goes by ***REMOVED***0***REMOVED***".format(leftover_args[0]))
+        return Response("Didn't find anything that goes by {0}".format(leftover_args[0]))
 
-    @command_info("1.9.5", 1477774380, ***REMOVED***
+    @command_info("1.9.5", 1477774380, {
         "3.4.2": (1497552134, "Added a way to not only replay the current song, but also the last one"),
         "3.4.8": (1497649772, "Fixed the issue which blocked Giesela from replaying the last song"),
         "3.5.2": (1497714171, "Can now replay an index from the history"),
@@ -586,13 +586,13 @@ class ManipulateCommands:
         "3.6.0": (1497903889, "Replay <index> didn't work correctly"),
         "3.8.9": (1499466672, "Part of the `Giesenesis` rewrite"),
         "4.7.7": (1504104609, "Cloning the entry now")
-    ***REMOVED***)
+    })
     async def cmd_replay(self, player, choose_last=""):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***replay [last]`
+        `{command_prefix}replay [last]`
         ///|Replay history
-        `***REMOVED***command_prefix***REMOVED***replay <index>`
+        `{command_prefix}replay <index>`
         Replay a song from the history
         ///|Explanation
         Replay the currently playing song. If there's nothing playing, or the \"last\" keyword is given, replay the last song
@@ -609,7 +609,7 @@ class ManipulateCommands:
             replay_entry = player.queue.history[index]
             player.queue.replay(index)
 
-            return Response("Replaying *****REMOVED******REMOVED*****".format(replay_entry.title))
+            return Response("Replaying **{}**".format(replay_entry.title))
         except:
             pass
 
@@ -625,12 +625,12 @@ class ManipulateCommands:
             return Response("There's nothing for me to replay")
 
         player.queue.replay()
-        return Response("Replaying *****REMOVED******REMOVED*****".format(replay_entry.title))
+        return Response("Replaying **{}**".format(replay_entry.title))
 
     async def cmd_shuffle(self, channel, player):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***shuffle`
+        `{command_prefix}shuffle`
         ///|Explanation
         Shuffles the queue.
         """
@@ -648,13 +648,13 @@ class ManipulateCommands:
         await self.safe_delete_message(hand, quiet=True)
         return Response(":ok_hand:")
 
-    @command_info("1.0.0", 1477180800, ***REMOVED***
+    @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command")
-    ***REMOVED***)
+    })
     async def cmd_clear(self, player, author):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***clear`
+        `{command_prefix}clear`
         ///|Explanation
         Clears the queue.
         """
@@ -662,15 +662,15 @@ class ManipulateCommands:
         player.queue.clear()
         return Response(":put_litter_in_its_place:")
 
-    @command_info("1.0.0", 1477180800, ***REMOVED***
+    @command_info("1.0.0", 1477180800, {
         "3.3.7": (1497471674, "adapted the new \"seek\" command instead of \"skipto\""),
         "3.5.2": (1497714839, "Removed all the useless permission stuff and updated help text"),
         "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite")
-    ***REMOVED***)
+    })
     async def cmd_skip(self, player, skip_amount=None):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***skip [all]`
+        `{command_prefix}skip [all]`
         ///|Explanation
         Skips the current song.
         When given the keyword "all", skips all timestamped-entries in the current timestamp-entry.
@@ -682,7 +682,7 @@ class ManipulateCommands:
         if not player.current_entry:
             if player.queue.peek():
                 if player.queue.peek()._is_downloading:
-                    return Response("The next song (***REMOVED******REMOVED***) is downloading, please wait.".format(player.queue.peek().title))
+                    return Response("The next song ({}) is downloading, please wait.".format(player.queue.peek().title))
 
                 elif player.queue.peek().is_downloaded:
                     return Response("Something strange is happening.")
@@ -699,13 +699,13 @@ class ManipulateCommands:
 
         player.skip()
 
-    @command_info("1.0.0", 1477180800, ***REMOVED***
+    @command_info("1.0.0", 1477180800, {
         "4.6.2": (1502895107, "Zero-based index")
-    ***REMOVED***)
+    })
     async def cmd_promote(self, player, position=None):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***promote [song position]`
+        `{command_prefix}promote [song position]`
         ///|Explanation
         Promotes the last song in the queue to the front.
         If you specify a position, it promotes the song at that position to the front.
@@ -741,7 +741,7 @@ class ManipulateCommands:
 
             entry = player.queue.promote_position(position)
 
-        reply_text = "Promoted *****REMOVED******REMOVED***** to the :top: of the queue. Estimated time until playing: ***REMOVED******REMOVED***"
+        reply_text = "Promoted **{}** to the :top: of the queue. Estimated time until playing: {}"
         btext = entry.title
 
         try:
@@ -752,16 +752,16 @@ class ManipulateCommands:
 
         return Response(reply_text.format(btext, time_until))
 
-    @command_info("4.5.5", 1502073539, ***REMOVED***
+    @command_info("4.5.5", 1502073539, {
         "4.9.9": (1508224474, "Fixed the move command description")
-    ***REMOVED***)
+    })
     async def cmd_move(self, player, from_index, to_index):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***move <from index> <to index>`
+        `{command_prefix}move <from index> <to index>`
         ///|Explanation
         Moves an entry from a given position.
-        For example, `***REMOVED***command_prefix***REMOVED***move 22 2` will move entry 22 in the queue to position 2 in the queue.
+        For example, `{command_prefix}move 22 2` will move entry 22 in the queue to position 2 in the queue.
         """
 
         if from_index.isnumeric():
@@ -777,21 +777,21 @@ class ManipulateCommands:
         queue_length = len(player.queue.entries)
 
         if not 0 <= from_index < queue_length:
-            return Response("`<from index>` must be between 1 and ***REMOVED******REMOVED***".format(queue_length))
+            return Response("`<from index>` must be between 1 and {}".format(queue_length))
 
         if not 0 <= to_index < queue_length:
-            return Response("`<to index>` must be between 1 and ***REMOVED******REMOVED***".format(queue_length))
+            return Response("`<to index>` must be between 1 and {}".format(queue_length))
 
         moved_entry = player.queue.move(from_index, to_index)
-        return Response("Moved *****REMOVED******REMOVED***** from position `***REMOVED******REMOVED***` to `***REMOVED******REMOVED***`.".format(moved_entry.title, from_index + 1, to_index + 1))
+        return Response("Moved **{}** from position `{}` to `{}`.".format(moved_entry.title, from_index + 1, to_index + 1))
 
-    @command_info("4.0.2", 1500360351, ***REMOVED***
+    @command_info("4.0.2", 1500360351, {
         "4.0.4": (1500399607, "Can now explode an entry in the queue by its index")
-    ***REMOVED***)
+    })
     async def cmd_explode(self, player, channel, author, leftover_args):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***explode [playlist link | index]`
+        `{command_prefix}explode [playlist link | index]`
         ///|Explanation
         Split a timestamp-entry into its sub-entries.
         """
@@ -820,7 +820,7 @@ class ManipulateCommands:
 
         sub_queue = entry.sub_queue
 
-        progress_message = await self.safe_send_message(channel, "Exploding ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***".format(
+        progress_message = await self.safe_send_message(channel, "Exploding {} entr{}".format(
             len(sub_queue),
             "y" if len(sub_queue) == 1 else "ies"
         ))
@@ -837,7 +837,7 @@ class ManipulateCommands:
 
             progress_message = await self.safe_edit_message(
                 progress_message,
-                "Explosion in progress\n***REMOVED******REMOVED*** `***REMOVED******REMOVED***%`".format(
+                "Explosion in progress\n{} `{}%`".format(
                     create_bar(prg, length=20),
                     round(100 * prg)
                 ),
@@ -846,7 +846,7 @@ class ManipulateCommands:
 
         await self.safe_delete_message(progress_message)
 
-        return Response("Exploded *****REMOVED******REMOVED***** into ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***".format(
+        return Response("Exploded **{}** into {} entr{}".format(
             entry.whole_title,
             len(sub_queue),
             "y" if len(sub_queue) == 1 else "ies"
@@ -855,18 +855,18 @@ class ManipulateCommands:
 
 class DisplayCommands:
 
-    @command_info("1.0.0", 1477180800, ***REMOVED***
+    @command_info("1.0.0", 1477180800, {
         "3.5.4": (1497721686, "Updating the looks of the \"now playing\" message and a bit of cleanup"),
         "3.6.2": (1498143480, "Updated design of default entry and included a link to the video"),
         "3.6.5": (1498152579, "Timestamp-entries now also include a thumbnail"),
         "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite"),
         "4.2.0": (1500888926, "Adjustments for new Entry types"),
         "4.2.6": (1500964548, "Using playlist covers when possible")
-    ***REMOVED***)
+    })
     async def cmd_np(self, player, channel, server, message):
         """
         ///|Usage
-        ***REMOVED***command_prefix***REMOVED***np
+        {command_prefix}np
         ///|Explanation
         Displays the current song in chat.
         """
@@ -883,12 +883,12 @@ class DisplayCommands:
             if isinstance(entry, RadioSongEntry):
                 progress_ratio = entry.song_progress / \
                     (entry.song_duration or 1)
-                desc = "***REMOVED******REMOVED*** `[***REMOVED******REMOVED***/***REMOVED******REMOVED***]`".format(
+                desc = "{} `[{}/{}]`".format(
                     create_bar(progress_ratio, length=20),
                     to_timestamp(entry.song_progress),
                     to_timestamp(entry.song_duration)
                 )
-                foot = "🔴 Live from ***REMOVED******REMOVED***".format(entry.station_name)
+                foot = "🔴 Live from {}".format(entry.station_name)
 
                 em = Embed(
                     title=entry.title,
@@ -903,10 +903,10 @@ class DisplayCommands:
                     name=entry.artist
                 )
             elif isinstance(entry, RadioStationEntry):
-                desc = "`***REMOVED******REMOVED***`".format(
+                desc = "`{}`".format(
                     to_timestamp(player.progress)
                 )
-                foot = "🔴 Live from ***REMOVED******REMOVED***".format(entry.station_name)
+                foot = "🔴 Live from {}".format(entry.station_name)
 
                 em = Embed(
                     title=entry.title,
@@ -918,7 +918,7 @@ class DisplayCommands:
                 em.set_footer(text=foot)
                 em.set_thumbnail(url=entry.cover)
             elif isinstance(entry, StreamEntry):
-                desc = "🔴 Live [`***REMOVED******REMOVED***`]".format(to_timestamp(player.progress))
+                desc = "🔴 Live [`{}`]".format(to_timestamp(player.progress))
 
                 em = Embed(
                     title=entry.title,
@@ -930,7 +930,7 @@ class DisplayCommands:
                 artist_name = entry.artist
                 artist_avatar = entry.artist_image
                 progress_ratio = player.progress / entry.end_seconds
-                desc = "***REMOVED******REMOVED*** `[***REMOVED******REMOVED***/***REMOVED******REMOVED***]`".format(
+                desc = "{} `[{}/{}]`".format(
                     create_bar(progress_ratio, length=20),
                     to_timestamp(player.progress),
                     to_timestamp(entry.end_seconds)
@@ -953,12 +953,12 @@ class DisplayCommands:
                 sub_entry = entry.current_sub_entry
                 index = sub_entry["index"] + 1
                 progress_ratio = sub_entry["progress"] / sub_entry["duration"]
-                desc = "***REMOVED******REMOVED*** `[***REMOVED******REMOVED***/***REMOVED******REMOVED***]`".format(
+                desc = "{} `[{}/{}]`".format(
                     create_bar(progress_ratio, length=20),
                     to_timestamp(sub_entry["progress"]),
                     to_timestamp(sub_entry["duration"])
                 )
-                foot = "***REMOVED******REMOVED******REMOVED******REMOVED*** sub-entry of \"***REMOVED******REMOVED***\" [***REMOVED******REMOVED***/***REMOVED******REMOVED***]".format(
+                foot = "{}{} sub-entry of \"{}\" [{}/{}]".format(
                     index,
                     ordinal(index),
                     entry.whole_title,
@@ -986,7 +986,7 @@ class DisplayCommands:
                     )
             elif isinstance(entry, YoutubeEntry):
                 progress_ratio = player.progress / entry.end_seconds
-                desc = "***REMOVED******REMOVED*** `[***REMOVED******REMOVED***/***REMOVED******REMOVED***]`".format(
+                desc = "{} `[{}/{}]`".format(
                     create_bar(progress_ratio, length=20),
                     to_timestamp(player.progress),
                     to_timestamp(entry.end_seconds)
@@ -1014,20 +1014,20 @@ class DisplayCommands:
                 self.server_specific_data[server]["last_np_msg"] = await self.safe_send_message(channel, embed=em)
         else:
             return Response(
-                "There are no songs queued! Queue something with ***REMOVED******REMOVED***play.".
+                "There are no songs queued! Queue something with {}play.".
                 format(self.config.command_prefix))
 
-    @command_info("1.0.0", 1477180800, ***REMOVED***
+    @command_info("1.0.0", 1477180800, {
         "3.5.1": (1497706997, "Queue doesn't show the current entry anymore, always shows the whole queue and a bit of cleanup"),
         "3.5.5": (1497795534, "Total time takes current entry into account"),
         "3.5.8": (1497825017, "Doesn't show the whole queue right away anymore, instead the queue command takes a quantity argument which defaults to 15"),
         "3.8.0": (1499110875, "Displaying real index of sub-entries (timestamp-entry)"),
         "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite")
-    ***REMOVED***)
+    })
     async def cmd_queue(self, channel, player, num="15"):
         """
         ///|Usage
-        ***REMOVED***command_prefix***REMOVED***queue [quantity]
+        {command_prefix}queue [quantity]
         ///|Explanation
         Show the first 15 entries of the current song queue.
         One can specify the amount of entries to be shown.
@@ -1054,7 +1054,7 @@ class DisplayCommands:
                 "start"] >= player.progress]
             for item in sub_queue:
                 lines.append(
-                    "            ►`***REMOVED******REMOVED***.` *****REMOVED******REMOVED*****".format(
+                    "            ►`{}.` **{}**".format(
                         item["index"] + 1,
                         nice_cut(item["name"], 35)
                     )
@@ -1064,20 +1064,20 @@ class DisplayCommands:
         for i, item in enumerate(entries, 1):
             origin_text = ""
             if "playlist" in item.meta:
-                origin_text = "from playlist *****REMOVED******REMOVED*****".format(
+                origin_text = "from playlist **{}**".format(
                     item.meta["playlist"]["name"]
                 )
             elif "author" in item.meta:
-                origin_text = "by *****REMOVED******REMOVED*****".format(
+                origin_text = "by **{}**".format(
                     item.meta["author"].name
                 )
 
-            lines.append("`***REMOVED******REMOVED***.` *****REMOVED******REMOVED***** ***REMOVED******REMOVED***".format(
+            lines.append("`{}.` **{}** {}".format(
                 i, nice_cut(item.title, 40), origin_text))
 
         if len(lines) < 2:
             return Response(
-                "There are no songs queued! Use `***REMOVED******REMOVED***help` to find out how to queue something.".
+                "There are no songs queued! Use `{}help` to find out how to queue something.".
                 format(self.config.command_prefix))
 
         total_time = sum(
@@ -1086,32 +1086,32 @@ class DisplayCommands:
             total_time += player.current_entry.end_seconds - player.progress
 
         lines.append(
-            "\nShowing ***REMOVED******REMOVED*** out of ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***".format(
+            "\nShowing {} out of {} entr{}".format(
                 len(entries),
                 len(player.queue.entries),
                 "y" if len(player.queue.entries) == 1 else "ies"
             )
         )
         lines.append(
-            "**Total duration:** `***REMOVED******REMOVED***`".format(
+            "**Total duration:** `{}`".format(
                 format_time(total_time, True, 5, 2)
             )
         )
 
         return Response("\n".join(lines))
 
-    @command_info("3.3.3", 1497197957, ***REMOVED***
+    @command_info("3.3.3", 1497197957, {
         "3.3.8": (1497474312, "added failsafe for player not currently playing something"),
         "3.5.8": (1497825334, "Adjusted design to look more like `queue`'s style"),
         "3.8.9": (1499465102, "Part of the `Giesenesis` rewrite"),
         "4.0.1": (1500346108, "Quantity parameter. Increased history limit"),
         "4.1.7": (1500876373, "Displaying the amount of entries displayed in relation to the total entries"),
         "4.2.9": (1501176845, "Showing the correct amount of entries displayed")
-    ***REMOVED***)
+    })
     async def cmd_history(self, channel, player, num="15"):
         """
         ///|Usage
-        ***REMOVED***command_prefix***REMOVED***history [quantity]
+        {command_prefix}history [quantity]
         ///|Explanation
         Show the last [quantity] songs. If [quantity] isn't provided, show up to 15 songs
         """
@@ -1138,7 +1138,7 @@ class DisplayCommands:
             finish_time = entry.meta.get("finish_time")
             seconds_passed = time.time() - finish_time
             lines.append(
-                "`***REMOVED******REMOVED***.` *****REMOVED******REMOVED***** ***REMOVED******REMOVED*** ago".format(
+                "`{}.` **{}** {} ago".format(
                     ind,
                     nice_cut(entry.title, 40),
                     format_time(seconds_passed, max_specifications=2)
@@ -1146,7 +1146,7 @@ class DisplayCommands:
             )
 
         lines.append(
-            "\nShowing ***REMOVED******REMOVED*** out of ***REMOVED******REMOVED*** entr***REMOVED******REMOVED***".format(
+            "\nShowing {} out of {} entr{}".format(
                 len(entries),
                 len(player.queue.history),
                 "y" if len(player.queue.history) == 1 else "ies"

@@ -35,10 +35,10 @@ class Queue(EventEmitter):
         return iter(self.entries)
 
     def get_web_dict(self):
-        data = ***REMOVED***
+        data = {
             "entries": [entry.to_web_dict(True) for entry in self.entries.copy()],
             "history": [entry.to_web_dict(True) for entry in self.history.copy()]
-        ***REMOVED***
+        }
         return data
 
     def shuffle(self):
@@ -95,7 +95,7 @@ class Queue(EventEmitter):
         GieselaServer.send_player_information(self.player.voice_client.server.id)
 
     async def add_stream_entry(self, stream_url, **meta):
-        info = ***REMOVED***"title": stream_url, "extractor": None***REMOVED***
+        info = {"title": stream_url, "extractor": None}
         try:
             info = await self.downloader.extract_info(self.loop, stream_url, download=False)
 
@@ -110,13 +110,13 @@ class Queue(EventEmitter):
 
                 else:  # it might be a file path that just doesn't exist
                     raise ExtractionError(
-                        "Invalid input: ***REMOVED***0.exc_info[0]***REMOVED***: ***REMOVED***0.exc_info[1].reason***REMOVED***".format(e))
+                        "Invalid input: {0.exc_info[0]}: {0.exc_info[1].reason}".format(e))
 
             else:
-                raise ExtractionError("Unknown error: ***REMOVED******REMOVED***".format(e))
+                raise ExtractionError("Unknown error: {}".format(e))
 
         except Exception as e:
-            print("Could not extract information from ***REMOVED******REMOVED*** (***REMOVED******REMOVED***), falling back to direct".format(
+            print("Could not extract information from {} ({}), falling back to direct".format(
                 stream_url, e))
 
         dest_url = stream_url
@@ -192,7 +192,7 @@ class Queue(EventEmitter):
                 self.loop, query, download=False, process=False)
         except Exception as e:
             raise ExtractionError(
-                "Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***".format(query, e))
+                "Could not extract information from {}\n\n{}".format(query, e))
 
         if not info:
             raise ExtractionError("Couldn't extract info")
@@ -237,7 +237,7 @@ class Queue(EventEmitter):
             try:
                 entry = await self.get_entry(url, **meta)
             except (ExtractionError, WrongEntryTypeError) as e:
-                print("Error while dealing with url \"***REMOVED******REMOVED***\":\n***REMOVED******REMOVED***".format(url, e))
+                print("Error while dealing with url \"{}\":\n{}".format(url, e))
                 yield ind, None
                 continue
 
@@ -248,7 +248,7 @@ class Queue(EventEmitter):
             info = await self.downloader.extract_info(self.loop, song_url, download=False)
         except Exception as e:
             raise ExtractionError(
-                "Could not extract information from ***REMOVED******REMOVED***\n\n***REMOVED******REMOVED***".format(song_url, e))
+                "Could not extract information from {}\n\n{}".format(song_url, e))
 
         if not info:
             raise ExtractionError(
@@ -445,7 +445,7 @@ class Queue(EventEmitter):
             if "playlist" in entry.meta:
                 playlist_name = entry.meta["playlist"]["name"]
                 asyncio.ensure_future(self.bot.playlists.mark_entry_broken(self, playlist_name, entry))
-                print("[PLAYER] ***REMOVED******REMOVED***'s ***REMOVED******REMOVED*** is broken!".format(playlist_name, entry.title))
+                print("[PLAYER] {}'s {} is broken!".format(playlist_name, entry.title))
         except:
             pass
 

@@ -48,7 +48,7 @@ class Playlists:
 
         duration = sum(entry.duration for entry in data["entries"])
 
-        playlist_info = ***REMOVED***
+        playlist_info = {
             "name":         data["name"],
             "id":           data["id"],
             "cover":        data["cover_url"],
@@ -58,7 +58,7 @@ class Playlists:
             "entries":      [entry.to_web_dict(skip_calc=True) for entry in data["entries"]],
             "duration":     duration,
             "human_dur":    format_time(duration, max_specifications=1)
-        ***REMOVED***
+        }
 
         return playlist_info
 
@@ -75,7 +75,7 @@ class Playlists:
         else:
             playlist_author = WebAuthor.from_id(playlist_author)
 
-        playlist_information = ***REMOVED***
+        playlist_information = {
             "id":           playlist_id,
             "name":         plsection.get("name", False) or playlist_id.title().replace("_", " "),
             "location":     plsection["location"],
@@ -83,7 +83,7 @@ class Playlists:
             "replay_count": int(plsection["replays"]),
             "description":  plsection.get("description"),
             "cover_url":    plsection.get("cover_url")
-        ***REMOVED***
+        }
 
         entries = []
         # this is gonna be a list of serialised entries populated with the broken or outdated
@@ -139,33 +139,33 @@ class Playlists:
 
         serialized_entries = []
         for index, entry in enumerate(sorted(entries, key=lambda entry: entry.sortby)):
-            added_timestamp = entry.meta.get("playlist", ***REMOVED******REMOVED***).get("timestamp", round(time.time()))
+            added_timestamp = entry.meta.get("playlist", {}).get("timestamp", round(time.time()))
 
-            entry.meta["playlist"] = ***REMOVED***
+            entry.meta["playlist"] = {
                 "cover": cover_url,
                 "name": name,
                 "id": playlist_id,
                 "index": index,
                 "timestamp": added_timestamp
-            ***REMOVED***
+            }
 
             serialized_entries.append(entry.to_dict())
 
-        json.dump(serialized_entries, open("***REMOVED******REMOVED******REMOVED******REMOVED***.gpl".format(self.playlist_save_location, playlist_id), "w+"), indent=4)
+        json.dump(serialized_entries, open("{}{}.gpl".format(self.playlist_save_location, playlist_id), "w+"), indent=4)
 
-        playlist_data = self.playlists.get(playlist_id, ***REMOVED******REMOVED***)
+        playlist_data = self.playlists.get(playlist_id, {})
 
         if not isinstance(author, WebAuthor):
             author = WebAuthor.from_id(author)
 
-        playlist_data.update(***REMOVED***
-            "location": "***REMOVED******REMOVED******REMOVED******REMOVED***.gpl".format(self.playlist_save_location, playlist_id),
+        playlist_data.update({
+            "location": "{}{}.gpl".format(self.playlist_save_location, playlist_id),
             "author": author.to_dict(),
             "replays": replays,
             "description": description,
             "cover_url": cover_url,
             "name": name
-        ***REMOVED***)
+        })
 
         self.playlists[playlist_id] = playlist_data
 
@@ -299,4 +299,4 @@ class Playlists:
         with open(playlist["location"], "w") as f:
             json.dump(serialized_entries, f, indent=4)
 
-        print("marked ***REMOVED******REMOVED*** from ***REMOVED******REMOVED*** as broken".format(entry.title, playlist_name))
+        print("marked {} from {} as broken".format(entry.title, playlist_name))

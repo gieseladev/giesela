@@ -47,7 +47,7 @@ class Entry:
 
     @staticmethod
     def create_meta_dict(meta):
-        meta_dict = ***REMOVED******REMOVED***
+        meta_dict = {}
         for key, value in meta.items():
             if key is None or value is None:
                 continue
@@ -56,18 +56,18 @@ class Entry:
             if str(key).lower() not in Entry.meta_dict_keys:
                 continue
 
-            ser_value = ***REMOVED***"type": value.__class__.__name__***REMOVED***
+            ser_value = {"type": value.__class__.__name__}
             if isinstance(value, Entry.can_encode) or value is None:
-                ser_value.update(***REMOVED***
+                ser_value.update({
                     "type": "built-in/" + ser_value["type"],
                     "value": value
-                ***REMOVED***)
+                })
             else:
                 if isinstance(value, Entry.default_encode):
-                    ser_value.update(***REMOVED***
+                    ser_value.update({
                         "id": value.id,
                         "name": value.name,
-                    ***REMOVED***)
+                    })
 
             meta_dict[key] = ser_value
 
@@ -75,7 +75,7 @@ class Entry:
 
     @staticmethod
     def meta_from_dict(data, bot):
-        meta = ***REMOVED******REMOVED***
+        meta = {}
         for key, ser_value in data.items():
             value = None
             value_type = ser_value["type"]
@@ -237,7 +237,7 @@ class StreamEntry(BaseEntry):
         if meta_dict:
             meta = Entry.meta_from_dict(meta_dict, queue.bot)
         else:
-            meta = ***REMOVED******REMOVED***
+            meta = {}
 
         url = data["url"]
         title = data["title"]
@@ -247,32 +247,32 @@ class StreamEntry(BaseEntry):
     def to_dict(self):
         meta_dict = Entry.create_meta_dict(self.meta)
 
-        data = ***REMOVED***
+        data = {
             "version":  Entry.version,
             "type":     self.__class__.__name__,
             "url":      self.url,
             "title":    self._title,
             "meta":     meta_dict
-        ***REMOVED***
+        }
         return data
 
     def to_web_dict(self, skip_calc=False):
         origin = None
         if self.meta:
             if "playlist" in self.meta:
-                origin = ***REMOVED***"type": "playlist"***REMOVED***
+                origin = {"type": "playlist"}
                 origin.update(self.meta["playlist"])
             elif "author" in self.meta:
-                origin = ***REMOVED***"type": "user"***REMOVED***
+                origin = {"type": "user"}
                 web_author = WebAuthor.from_id(self.meta["author"].id)
                 origin.update(web_author.to_dict())
 
-        data = ***REMOVED***
+        data = {
             "type":     self.__class__.__name__,
             "url":      self.url,
             "origin":   origin,
             "title":    self.title
-        ***REMOVED***
+        }
 
         return data
 
@@ -328,7 +328,7 @@ class RadioStationEntry(StreamEntry):
         if meta_dict:
             meta = Entry.meta_from_dict(meta_dict, queue.bot)
         else:
-            meta = ***REMOVED******REMOVED***
+            meta = {}
 
         url = data["url"]
         title = data["title"]
@@ -338,9 +338,9 @@ class RadioStationEntry(StreamEntry):
 
     def to_dict(self):
         d = super().to_dict()
-        d.update(***REMOVED***
+        d.update({
             "station_data": self.station_data.to_dict()
-        ***REMOVED***)
+        })
 
         return d
 
@@ -348,14 +348,14 @@ class RadioStationEntry(StreamEntry):
         origin = None
         if self.meta:
             if "playlist" in self.meta:
-                origin = ***REMOVED***"type": "playlist"***REMOVED***
+                origin = {"type": "playlist"}
                 origin.update(self.meta["playlist"])
             elif "author" in self.meta:
-                origin = ***REMOVED***"type": "user"***REMOVED***
+                origin = {"type": "user"}
                 web_author = WebAuthor.from_id(self.meta["author"].id)
                 origin.update(web_author.to_dict())
 
-        data = ***REMOVED***
+        data = {
             "type":                 self.__class__.__name__,
             "url":                  self.url,
             "thumbnail":            self.thumbnail,
@@ -364,7 +364,7 @@ class RadioStationEntry(StreamEntry):
             "title":                self.title,
             "cover":                self.cover,
             "link":                 self.link
-        ***REMOVED***
+        }
 
         return data
 
@@ -385,7 +385,7 @@ class RadioSongEntry(RadioStationEntry):
 
     @property
     def lyrics_title(self):
-        return "***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".format(self.title, self.artist)
+        return "{} - {}".format(self.title, self.artist)
 
     def _get_new_song_info(self):
         self._current_song_info = RadioSongExtractor.get_current_song(
@@ -446,14 +446,14 @@ class RadioSongEntry(RadioStationEntry):
     def to_web_dict(self, skip_calc=False):
         data = super().to_web_dict(skip_calc=skip_calc)
 
-        data.update(***REMOVED***
+        data.update({
             "station":          self.station_data.to_dict(),
             "title":            self.title,
             "artist":           self.artist,
             "cover":            self.cover,
             "song_progress":    self.song_progress,
             "song_duration":    self.song_duration
-        ***REMOVED***)
+        })
 
         return data
 
@@ -513,7 +513,7 @@ class YoutubeEntry(BaseEntry):
         if meta_dict:
             meta = Entry.meta_from_dict(meta_dict, queue.bot)
         else:
-            meta = ***REMOVED******REMOVED***
+            meta = {}
 
         filename = data["expected_filename"]
         video_id = data["video_id"]
@@ -556,7 +556,7 @@ class YoutubeEntry(BaseEntry):
     def to_dict(self):
         meta_dict = Entry.create_meta_dict(self.meta)
 
-        data = ***REMOVED***
+        data = {
             "version":              Entry.version,
             "type":                 self.__class__.__name__,
             "expected_filename":    self.expected_filename,
@@ -568,28 +568,28 @@ class YoutubeEntry(BaseEntry):
             "thumbnail_brightness": self._thumbnail_brightness,
             "description":          self.description,
             "meta":                 meta_dict
-        ***REMOVED***
+        }
         return data
 
     def to_web_dict(self, skip_calc=False):
         origin = None
         if self.meta:
             if "playlist" in self.meta:
-                origin = ***REMOVED***"type": "playlist"***REMOVED***
+                origin = {"type": "playlist"}
                 origin.update(self.meta["playlist"])
             elif "author" in self.meta:
-                origin = ***REMOVED***"type": "user"***REMOVED***
+                origin = {"type": "user"}
                 web_author = WebAuthor.from_id(self.meta["author"].id)
                 origin.update(web_author.to_dict())
 
-        data = ***REMOVED***
+        data = {
             "type":                 self.__class__.__name__,
             "url":                  self.url,
             "thumbnail":            self.thumbnail,
             "origin":               origin,
             "title":                self.title,
             "duration":             self.duration,
-        ***REMOVED***
+        }
 
         if not skip_calc:
             data["thumbnail_brightness"] = self.thumbnail_brightness
@@ -763,7 +763,7 @@ class TimestampEntry(YoutubeEntry):
         if meta_dict:
             meta = Entry.meta_from_dict(meta_dict, queue.bot)
         else:
-            meta = ***REMOVED******REMOVED***
+            meta = {}
 
         filename = data["expected_filename"]
         video_id = data["video_id"]
@@ -779,20 +779,20 @@ class TimestampEntry(YoutubeEntry):
 
     def to_dict(self):
         d = super().to_dict()
-        d.update(***REMOVED***
+        d.update({
             "sub_queue": self.sub_queue
-        ***REMOVED***)
+        })
 
         return d
 
     def to_web_dict(self, skip_calc=False):
         data = super().to_web_dict(skip_calc=skip_calc)
 
-        data.update(***REMOVED***
+        data.update({
             "whole_title":  self.whole_title,
             "title":        self.title,
             "sub_entry":    self.current_sub_entry
-        ***REMOVED***)
+        })
 
         return data
 
@@ -810,11 +810,11 @@ class GieselaEntry(YoutubeEntry):
 
     @property
     def title(self):
-        return "***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".format(self.artist, self.song_title)
+        return "{} - {}".format(self.artist, self.song_title)
 
     @property
     def lyrics_title(self):
-        return "***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".format(self.song_title, self.artist)
+        return "{} - {}".format(self.song_title, self.artist)
 
     @property
     def sortby(self):
@@ -829,7 +829,7 @@ class GieselaEntry(YoutubeEntry):
         if meta_dict:
             meta = Entry.meta_from_dict(meta_dict, queue.bot)
         else:
-            meta = ***REMOVED******REMOVED***
+            meta = {}
 
         filename = data["expected_filename"]
         video_id = data["video_id"]
@@ -850,7 +850,7 @@ class GieselaEntry(YoutubeEntry):
 
     @classmethod
     def upgrade(cls, previous_entry, song_title, artist, artist_image, album, cover):
-        kwargs = ***REMOVED***
+        kwargs = {
             "queue":                previous_entry.queue,
             "video_id":             previous_entry.video_id,
             "url":                  previous_entry.url,
@@ -864,7 +864,7 @@ class GieselaEntry(YoutubeEntry):
             "artist_image":         artist_image,
             "album":                album,
             "cover":                cover
-        ***REMOVED***
+        }
 
         kwargs.update(previous_entry.meta)
 
@@ -872,25 +872,25 @@ class GieselaEntry(YoutubeEntry):
 
     def to_dict(self):
         d = super().to_dict()
-        d.update(***REMOVED***
+        d.update({
             "song_title":   self.song_title,
             "artist":       self.artist,
             "artist_image": self.artist_image,
             "cover":        self.cover,
             "album":        self.album
-        ***REMOVED***)
+        })
 
         return d
 
     def to_web_dict(self, skip_calc=False):
         data = super().to_web_dict(skip_calc=skip_calc)
 
-        data.update(***REMOVED***
+        data.update({
             "title":    self.song_title,
             "artist":   self.artist,
             "album":    self.album,
             "cover":    self.cover
-        ***REMOVED***)
+        })
 
         return data
 
@@ -931,7 +931,7 @@ class SpotifyEntry(GieselaEntry):
         if meta_dict:
             meta = Entry.meta_from_dict(meta_dict, queue.bot)
         else:
-            meta = ***REMOVED******REMOVED***
+            meta = {}
 
         filename = data["expected_filename"]
         video_id = data["video_id"]
@@ -947,8 +947,8 @@ class SpotifyEntry(GieselaEntry):
 
     def to_dict(self):
         d = super().to_dict()
-        d.update(***REMOVED***
+        d.update({
             "spotify_data": self.spotify_data.get_dict()
-        ***REMOVED***)
+        })
 
         return d

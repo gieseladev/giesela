@@ -15,7 +15,7 @@ class MiscCommands:
     async def cmd_9gag(self, channel, author, post_id):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***9gag <id>`
+        `{command_prefix}9gag <id>`
         ///|Explanation
         Display the 9gag post with the specified id
         """
@@ -28,7 +28,7 @@ class MiscCommands:
             em = Embed(title=post.title, url=post.hyperlink, colour=9316352)
             em.set_author(name=author.display_name, icon_url=author.avatar_url)
             em.set_image(url=post.content_url)
-            em.set_footer(text="***REMOVED******REMOVED*** upvotes | ***REMOVED******REMOVED*** comments".format(
+            em.set_footer(text="{} upvotes | {} comments".format(
                 post.upvotes, post.comment_count))
 
             await self.send_message(channel, embed=em)
@@ -45,7 +45,7 @@ class MiscCommands:
 
             em = Embed(title=post.title, url=post.hyperlink, colour=9316352)
             em.set_author(name=author.display_name, icon_url=author.avatar_url)
-            em.set_footer(text="***REMOVED******REMOVED*** upvotes | ***REMOVED******REMOVED*** comments".format(
+            em.set_footer(text="{} upvotes | {} comments".format(
                 post.upvotes, post.comment_count))
 
             await self.send_message(channel, embed=em)
@@ -60,7 +60,7 @@ class MiscCommands:
                 name=comment.name,
                 icon_url=comment.avatar,
                 url=comment.profile_url)
-            em.set_footer(text="***REMOVED******REMOVED*** upvotes | ***REMOVED******REMOVED*** replies".format(
+            em.set_footer(text="{} upvotes | {} replies".format(
                 comment.score, comment.reply_count))
             if comment.content_type == ContentType.TEXT:
                 em.description = comment.content
@@ -73,23 +73,23 @@ class MiscCommands:
     async def cmd_register(self, server, author, token):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***register <token>`
+        `{command_prefix}register <token>`
         ///|Explanation
-        Use this command in order to use the [Giesela-Website](***REMOVED***web_url***REMOVED***).
+        Use this command in order to use the [Giesela-Website]({web_url}).
         """
 
         if GieselaServer.register_information(server.id, author.id, token.lower()):
             return Response("You've successfully registered yourself. Go back to your browser and check it out")
         else:
-            return Response("Something went wrong while registering. It could be that your code `***REMOVED******REMOVED***` is wrong. Please make sure that you've entered it correctly.".format(token.upper()))
+            return Response("Something went wrong while registering. It could be that your code `{}` is wrong. Please make sure that you've entered it correctly.".format(token.upper()))
 
-    @command_info("3.5.7", 1497823283, ***REMOVED***
+    @command_info("3.5.7", 1497823283, {
         "3.8.9": (1499645741, "`Giesenesis` rewrite was here")
-    ***REMOVED***)
+    })
     async def cmd_interact(self, channel, message):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***interact <query>`
+        `{command_prefix}interact <query>`
         ///|Explanation
         Use everyday language to control Giesela
         ///|Disclaimer
@@ -98,19 +98,19 @@ class MiscCommands:
 
         await self.send_typing(channel)
 
-        matcher = "^\***REMOVED******REMOVED***?interact".format(self.config.command_prefix)
+        matcher = "^\{}?interact".format(self.config.command_prefix)
         query = re.sub(matcher, "", message.content,
                        flags=re.MULTILINE).strip()
         if not query:
             return Response("Please provide a query for me to work with")
 
-        print("[INTERACT] \"***REMOVED******REMOVED***\"".format(query))
+        print("[INTERACT] \"{}\"".format(query))
 
-        params = ***REMOVED***
+        params = {
             "v": date.today().strftime("%d/%m/%y"),
             "q": query
-        ***REMOVED***
-        headers = ***REMOVED***"Authorization": "Bearer HVSTOLU3UQLR7YOYXCONQCCIQNHXZYDM"***REMOVED***
+        }
+        headers = {"Authorization": "Bearer HVSTOLU3UQLR7YOYXCONQCCIQNHXZYDM"}
         resp = requests.get("https://api.wit.ai/message",
                             params=params, headers=headers)
         data = resp.json()
@@ -120,15 +120,15 @@ class MiscCommands:
 
         for entity, data in entities.items():
             d = data[0]
-            msg += "*****REMOVED******REMOVED***** [***REMOVED******REMOVED***] (***REMOVED******REMOVED***% sure)\n".format(entity,
+            msg += "**{}** [{}] ({}% sure)\n".format(entity,
                                                      d["value"], round(d["confidence"] * 100, 1))
 
-        return Response("This what I think you coulda meant (wip)\n***REMOVED******REMOVED***".format(msg))
+        return Response("This what I think you coulda meant (wip)\n{}".format(msg))
 
     async def cmd_getvideolink(self, player, message, channel, author, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***getvideolink ["pause video"]
+            {command_prefix}getvideolink ["pause video"]
 
         Sends the video link that gets you to the current location of the bot. Use "pause video" as argument to help you sync up the video.
         """
@@ -143,7 +143,7 @@ class MiscCommands:
             player.pause()
             minutes, seconds = divmod(player.progress, 60)
             await self.safe_send_message(
-                channel, player.current_entry.url + "#t=***REMOVED***0***REMOVED***m***REMOVED***1***REMOVED***s".format(
+                channel, player.current_entry.url + "#t={0}m{1}s".format(
                     minutes, seconds))
             msg = await self.safe_send_message(
                 channel, "Resuming video in a few seconds!")
@@ -164,19 +164,19 @@ class MiscCommands:
         else:
             minutes, seconds = divmod(player.progress + 3, 60)
             await self.safe_send_message(
-                channel, player.current_entry.url + "#t=***REMOVED***0***REMOVED***m***REMOVED***1***REMOVED***s".format(
+                channel, player.current_entry.url + "#t={0}m{1}s".format(
                     minutes, seconds))
 
-    @command_info("3.7.3", 1498306682, ***REMOVED***
+    @command_info("3.7.3", 1498306682, {
         "3.7.4": (1498312423, "Fixed severe bug and added musixmatch as a source"),
         "3.9.2": (1499709472, "Fixed typo"),
         "4.5.6": (1502185982, "In order to properly make lyrics work with Webiesela, the source is seperated from the lyrics"),
         "4.5.7": (1502186654, "Lyrics are now temporarily cached within the entry")
-    ***REMOVED***)
+    })
     async def cmd_lyrics(self, player, channel):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***lyrics`
+        `{command_prefix}lyrics`
         ///|Explanation
         Try to find lyrics for the current entry and display 'em
         """
@@ -190,6 +190,6 @@ class MiscCommands:
         lyrics = player.current_entry.lyrics
 
         if not lyrics:
-            return Response("Couldn't find any lyrics for *****REMOVED******REMOVED*****".format(title))
+            return Response("Couldn't find any lyrics for **{}**".format(title))
         else:
-            return Response("*****REMOVED***title***REMOVED*****\n\n***REMOVED***lyrics***REMOVED***\n**Lyrics from \"***REMOVED***source***REMOVED***\"**".format(**lyrics))
+            return Response("**{title}**\n\n{lyrics}\n**Lyrics from \"{source}\"**".format(**lyrics))

@@ -56,7 +56,7 @@ class Comment:
         return self.likes - self.dislikes
 
     def __repr__(self):
-        return "Comment(***REMOVED***0.name***REMOVED***, ***REMOVED***0.avatar***REMOVED***, ***REMOVED***0.profile_url***REMOVED***, ***REMOVED***0.content***REMOVED***, ***REMOVED***0.likes***REMOVED***, ***REMOVED***0.dislikes***REMOVED***, ***REMOVED***0.timestamp***REMOVED***)".format(self)
+        return "Comment({0.name}, {0.avatar}, {0.profile_url}, {0.content}, {0.likes}, {0.dislikes}, {0.timestamp})".format(self)
 
 
 class Post:
@@ -78,9 +78,9 @@ class Post:
         soup = BeautifulSoup(data, ConfigDefaults.html_parser)
         post_title = soup.h2.text
         post_upvotes = int(re.sub(r"\W", "", soup.findAll(
-            "span", ***REMOVED***"class": "badge-item-love-count"***REMOVED***)[0].text))
+            "span", {"class": "badge-item-love-count"})[0].text))
 
-        with request.urlopen("https://comment-cdn.9gag.com/v1/cacheable/comment-list.json?url=http%3A%2F%2F9gag.com%2Fgag%2F***REMOVED******REMOVED***&level=2&count=10&appId=a_dd8f2b7d304a10edaf6f29517ea0ca4100a43d1b&order=score".format(post_id)) as f:
+        with request.urlopen("https://comment-cdn.9gag.com/v1/cacheable/comment-list.json?url=http%3A%2F%2F9gag.com%2Fgag%2F{}&level=2&count=10&appId=a_dd8f2b7d304a10edaf6f29517ea0ca4100a43d1b&order=score".format(post_id)) as f:
             response = json.loads(f.read().decode("utf-8"))
 
         post_comments = []
@@ -90,10 +90,10 @@ class Post:
         post_comments.sort(key=lambda comment: comment.score, reverse=True)
 
         container = soup.findAll(
-            "div", ***REMOVED***"class": "badge-post-container"***REMOVED***)[0]
+            "div", {"class": "badge-post-container"})[0]
 
         post_image = container.findAll(
-            "img", ***REMOVED***"class": "badge-item-img"***REMOVED***)[0]["src"]
+            "img", {"class": "badge-item-img"})[0]["src"]
 
         post_content_type = ContentType.IMAGE
         post_content_url = post_image
@@ -101,12 +101,12 @@ class Post:
         post_video = container.findAll("video")
         if len(post_video) > 0:
             post_video = post_video[0].findAll(
-                "source", ***REMOVED***"type": "video/mp4"***REMOVED***)[0]["src"]
+                "source", {"type": "video/mp4"})[0]["src"]
             post_content_type = ContentType.VIDEO
             post_content_url = post_video
 
         comment_count = int(re.sub(r"\W", "", soup.findAll(
-            "span", ***REMOVED***"class": "badge-item-comment-count"***REMOVED***)[0].text))
+            "span", {"class": "badge-item-comment-count"})[0].text))
 
         return cls(post_id, post_title, post_upvotes, post_comments, post_content_type, post_content_url, comment_count)
 
@@ -115,7 +115,7 @@ class Post:
         return "https://9gag.com/gag/" + self.id
 
     def __repr__(self):
-        return "Post(\"***REMOVED***0.id***REMOVED***\", \"***REMOVED***0.title***REMOVED***\", ***REMOVED***0.upvotes***REMOVED***, ***REMOVED***0.comments***REMOVED***, ***REMOVED***0.content_type***REMOVED***, \"***REMOVED***0.content_url***REMOVED***\")".format(self)
+        return "Post(\"{0.id}\", \"{0.title}\", {0.upvotes}, {0.comments}, {0.content_type}, \"{0.content_url}\")".format(self)
 
 
 def get_post(post_id):

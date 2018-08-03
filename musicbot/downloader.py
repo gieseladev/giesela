@@ -6,10 +6,10 @@ import youtube_dl
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
-ytdl_format_options = ***REMOVED***
-    "format": "bestaudio/best",
+
+ytdl_format_options = {
+    "format": "bestaudio/best", 
     "extractaudio": True,
-    "audioformat": "mp3",
     "outtmpl": "%(extractor)s-%(id)s-%(title)s.%(ext)s",
     "restrictfilenames": True,
     "noplaylist": True,
@@ -21,7 +21,7 @@ ytdl_format_options = ***REMOVED***
     "default_search": "auto",
     "source_address": "0.0.0.0",
     "geo_bypass": True
-***REMOVED***
+}
 
 # Duck your useless bugreports message that gets two link embeds and
 # confuses users

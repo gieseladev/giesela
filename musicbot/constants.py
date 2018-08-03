@@ -4,7 +4,7 @@ MAIN_VERSION = "4.9.12"
 SUB_VERSION = "jiesusala"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
-all_sub_versions = ***REMOVED***
+all_sub_versions = {
     "4.9.x": "Jiesusala",
     "4.8.x": "GUIsela",
     "4.7.x": "Ibiezela",
@@ -25,7 +25,7 @@ all_sub_versions = ***REMOVED***
     "3.2.x": "GG iesela",
     "3.1.x": "Age of Giesela",
     "3.0.x": "Giesela PLUS"
-***REMOVED***
+}
 
 AUDIO_CACHE_PATH = "cache/audio_cache"
 ABS_AUDIO_CACHE_PATH = os.path.join(os.getcwd(), AUDIO_CACHE_PATH)

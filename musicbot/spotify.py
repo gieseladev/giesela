@@ -37,7 +37,7 @@ class SpotifyPlaylist:
         self.href = href
 
     def __str__(self):
-        return "[SpotifyPlaylist] ***REMOVED******REMOVED*** by ***REMOVED******REMOVED*** with ***REMOVED******REMOVED*** tracks".format(self.name, self.author, len(self.tracks))
+        return "[SpotifyPlaylist] {} by {} with {} tracks".format(self.name, self.author, len(self.tracks))
 
     @classmethod
     def from_spotify_playlist(cls, playlist):
@@ -50,7 +50,7 @@ class SpotifyPlaylist:
             page = get_spotify_client().next(page)
             tracks.extend([SpotifyTrack.from_data(playlist_track["track"], simple=True) for playlist_track in page["items"]])
 
-        kwargs = ***REMOVED***
+        kwargs = {
             "_id":          playlist["id"],
             "name":         playlist["name"],
             "description":  playlist["description"],
@@ -59,7 +59,7 @@ class SpotifyPlaylist:
             "images":       playlist["images"],
             "uri":          playlist["uri"],
             "href":         playlist["href"]
-        ***REMOVED***
+        }
 
         return cls(**kwargs)
 
@@ -102,7 +102,7 @@ class SpotifyPlaylist:
 
         entries = [entry for entry in done if entry]
 
-        print("[Spotify] it took ***REMOVED******REMOVED*** seconds to convert the entries".format(time.time() - start))
+        print("[Spotify] it took {} seconds to convert the entries".format(time.time() - start))
         return entries
 
 
@@ -177,10 +177,10 @@ class SpotifyArtist:
         self._genres = data["genres"]
 
     def __str__(self):
-        return "Artist \"***REMOVED***0.name***REMOVED***\" [***REMOVED***0.popularity***REMOVED***]".format(self)
+        return "Artist \"{0.name}\" [{0.popularity}]".format(self)
 
     def get_dict(self):
-        data = ***REMOVED***
+        data = {
             "id": self.id,
             "name": self.name,
             "images": self.images,
@@ -188,7 +188,7 @@ class SpotifyArtist:
             "popularity": self.popularity,
             "uri": self.uri,
             "href": self.href
-        ***REMOVED***
+        }
         return data
 
 
@@ -214,16 +214,16 @@ class SpotifyAlbum:
         return cls(data["id"], data["name"], [SpotifyArtist.from_dict(artist) for artist in data["artists"]], data["images"], data["uri"])
 
     def __str__(self):
-        return "Album \"***REMOVED***0.name***REMOVED***\" by ***REMOVED***0.artists***REMOVED***".format(self)
+        return "Album \"{0.name}\" by {0.artists}".format(self)
 
     def get_dict(self):
-        data = ***REMOVED***
+        data = {
             "id": self.id,
             "name": self.name,
             "artists": [artist.get_dict() for artist in self.artists],
             "images": self.images,
             "uri": self.uri
-        ***REMOVED***
+        }
         return data
 
 
@@ -262,7 +262,7 @@ class SpotifyTrack:
 
     @classmethod
     def from_url(cls, url):
-        match = re.search(r"open\.spotify\.com\/track\/(\w***REMOVED***22***REMOVED***)", url)
+        match = re.search(r"open\.spotify\.com\/track\/(\w{22})", url)
 
         if not match:
             raise UrlError("<url> can't be parsed")
@@ -301,7 +301,7 @@ class SpotifyTrack:
         return " & ".join(artist.name for artist in self.artists[:2])
 
     def get_dict(self):
-        data = ***REMOVED***
+        data = {
             "id": self.id,
             "name": self.name,
             "artists": [artist.get_dict() for artist in self.artists] if self.artists else None,
@@ -313,13 +313,13 @@ class SpotifyTrack:
             "uri": self.uri,
             "query": self.query,
             "certainty": self.certainty
-        ***REMOVED***
+        }
         return data
 
     async def get_spotify_entry(self, queue, callback=None, **meta):
         from musicbot.entry import SpotifyEntry
 
-        search_query = re.sub(r"[^\w\s]", "", "***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(self.artists[0].name, self.name))
+        search_query = re.sub(r"[^\w\s]", "", "{} {}".format(self.artists[0].name, self.name))
 
         try:
             info = (await queue.downloader.extract_info(queue.loop, search_query, download=False, process=True, retry_on_error=True))["entries"][0]
@@ -371,8 +371,8 @@ def get_certainty(query, song_name, artist_name):
     song_name_edited = song_name_edited.strip().lower()
 
     poss = []
-    poss.append(similarity(query.lower(), "***REMOVED***0***REMOVED*** ***REMOVED***1***REMOVED***".format(song_name_edited, artist_name)))
-    poss.append(similarity(query.lower(), "***REMOVED***1***REMOVED*** ***REMOVED***0***REMOVED***".format(song_name_edited, artist_name)))
+    poss.append(similarity(query.lower(), "{0} {1}".format(song_name_edited, artist_name)))
+    poss.append(similarity(query.lower(), "{1} {0}".format(song_name_edited, artist_name)))
 
     return max(poss)
 
@@ -394,4 +394,4 @@ def model_from_url(url):
 if __name__ == "__main__":
     start = time.time()
     print(SpotifyPlaylist.from_url("https://open.spotify.com/user/spotify/playlist/37i9dQZF1DWVcbzTgVpNRm"))
-    print("it took ***REMOVED******REMOVED*** seconds to get the playlist".format(time.time() - start))
+    print("it took {} seconds to get the playlist".format(time.time() - start))

@@ -1,6 +1,6 @@
-***REMOVED***
-  "now_playing": ***REMOVED***
-    "generic": "Şu anda çalan *****REMOVED***title***REMOVED*****",
-    "timestamp_entry": "Şu anda çalan *****REMOVED***sub_entry***REMOVED***** (***REMOVED***index***REMOVED******REMOVED***ordinal***REMOVED***) \"***REMOVED***title***REMOVED***\"den"
-  ***REMOVED***
-***REMOVED***
+{
+  "now_playing": {
+    "generic": "Şu anda çalan **{title}**",
+    "timestamp_entry": "Şu anda çalan **{sub_entry}** ({index}{ordinal}) \"{title}\"den"
+  }
+}

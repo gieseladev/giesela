@@ -84,14 +84,14 @@ class HelpfulError(MusicbotException):
 
     @property
     def message(self):
-        return ("\n***REMOVED******REMOVED***\n***REMOVED******REMOVED***\n***REMOVED******REMOVED***\n").format(
+        return ("\n{}\n{}\n{}\n").format(
             self.preface,
             self._pretty_wrap(self.issue,    "  Problem:  "),
             self._pretty_wrap(self.solution, "  Solution: "))
 
     @property
     def message_no_format(self):
-        return "\n***REMOVED******REMOVED***\n***REMOVED******REMOVED***\n***REMOVED******REMOVED***\n".format(
+        return "\n{}\n{}\n{}\n".format(
             self.preface,
             self._pretty_wrap(self.issue,    "  Problem:  ", width=None),
             self._pretty_wrap(self.solution, "  Solution: ", width=None))

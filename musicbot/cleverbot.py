@@ -30,7 +30,7 @@ class CleverWrap:
         """
         self.name = name
         self.key = api_key
-        self.history = ***REMOVED******REMOVED***
+        self.history = {}
         self.convo_id = ""
         self.cs = ""
         self.count = 0
@@ -45,13 +45,13 @@ class CleverWrap:
         Returns: string
         """
 
-        params = ***REMOVED***
+        params = {
             "input": text,
             "key": self.key,
             "cs": self.cs,
             "conversation_id": self.convo_id,
             "wrapper": "CleverWrap.py"
-        ***REMOVED***
+        }
 
         reply = self._send(params)
         self._process_reply(reply)
@@ -78,8 +78,8 @@ class CleverWrap:
         self.output = reply.get("output", None).encode(
             "latin-1").decode("utf-8")
         self.convo_id = reply.get("conversation_id", None)
-        self.history = ***REMOVED***key: value for key,
-                        value in reply.items() if key.startswith("interaction")***REMOVED***
+        self.history = {key: value for key,
+                        value in reply.items() if key.startswith("interaction")}
         self.time_taken = int(reply.get("time_taken", None))
         self.time_elapsed = int(reply.get("time_elapsed", None))
 

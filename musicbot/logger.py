@@ -8,9 +8,9 @@ from openpyxl import Workbook
 class OnlineLogger:
 
     def __init__(self, musicbot):
-        self.member_data = ***REMOVED******REMOVED***
-        self.ongoing_online_phases = ***REMOVED******REMOVED***
-        self.ongoing_playing_phases = ***REMOVED******REMOVED***
+        self.member_data = {}
+        self.ongoing_online_phases = {}
+        self.ongoing_playing_phases = {}
         self.listeners = []
         self.musicbot = musicbot
 
@@ -34,7 +34,7 @@ class OnlineLogger:
             return index_to_alphabet(ind - remainder) + alphabet[remainder].upper()
 
         wb = Workbook()
-        all_phases = ***REMOVED******REMOVED***
+        all_phases = {}
         for mem in self.ongoing_online_phases:
             phases = all_phases.get(mem, None)
             if phases is None:
@@ -52,11 +52,11 @@ class OnlineLogger:
             ws = wb.create_sheet(self.musicbot.get_global_user(member).name)
             index = 1
             for action in sorted(all_phases[member], key=lambda phase: phase.start):
-                ws["A***REMOVED******REMOVED***".format(index)] = action.type_string
-                ws["B***REMOVED******REMOVED***".format(index)] = action.detailed_string
-                ws["C***REMOVED******REMOVED***".format(index)] = action.start_string
-                ws["D***REMOVED******REMOVED***".format(index)] = action.end_string
-                ws["E***REMOVED******REMOVED***".format(index)] = action.duration_string
+                ws["A{}".format(index)] = action.type_string
+                ws["B{}".format(index)] = action.detailed_string
+                ws["C{}".format(index)] = action.start_string
+                ws["D{}".format(index)] = action.end_string
+                ws["E{}".format(index)] = action.duration_string
                 index += 1
 
             for dimension in ws.column_dimensions.values():
@@ -65,9 +65,9 @@ class OnlineLogger:
         wb.save("cache/last_survey_data.xlsx")
 
     def reset(self):
-        self.ongoing_online_phases = ***REMOVED******REMOVED***
-        self.ongoing_playing_phases = ***REMOVED******REMOVED***
-        self.member_data = ***REMOVED******REMOVED***
+        self.ongoing_online_phases = {}
+        self.ongoing_playing_phases = {}
+        self.member_data = {}
 
     def update_stats(self, user_id, is_online, game_playing):
         user_data = self.get_user_data(user_id)
@@ -152,9 +152,9 @@ class PlayingPhase:
 
     def __str__(self):
         if self.end is None:
-            return "Started \"***REMOVED***0***REMOVED***\" at ***REMOVED***1.month:0>2***REMOVED***-***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.game.name, self.start)
+            return "Started \"{0}\" at {1.month:0>2}-{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.game.name, self.start)
 
-        return "Played \"***REMOVED***0***REMOVED***\" from ***REMOVED***1.month:0>2***REMOVED***-***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED*** to ***REMOVED***2.month:0>2***REMOVED***-***REMOVED***2.day:0>2***REMOVED*** ***REMOVED***2.hour:0>2***REMOVED***:***REMOVED***2.minute:0>2***REMOVED***".format(self.game.name, self.start, self.end)
+        return "Played \"{0}\" from {1.month:0>2}-{1.day:0>2} {1.hour:0>2}:{1.minute:0>2} to {2.month:0>2}-{2.day:0>2} {2.hour:0>2}:{2.minute:0>2}".format(self.game.name, self.start, self.end)
 
     @property
     def duration_string(self):
@@ -170,11 +170,11 @@ class PlayingPhase:
 
     @property
     def start_string(self):
-        return "***REMOVED***0.year:0>4***REMOVED***/***REMOVED***0.month:0>2***REMOVED***/***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(self.start)
+        return "{0.year:0>4}/{0.month:0>2}/{0.day:0>2} {0.hour:0>2}:{0.minute:0>2}".format(self.start)
 
     @property
     def end_string(self):
-        return "***REMOVED***0.year:0>4***REMOVED***/***REMOVED***0.month:0>2***REMOVED***/***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(self.end) if self.end is not None else "Until now"
+        return "{0.year:0>4}/{0.month:0>2}/{0.day:0>2} {0.hour:0>2}:{0.minute:0>2}".format(self.end) if self.end is not None else "Until now"
 
 
 class OnlinePhase:
@@ -188,9 +188,9 @@ class OnlinePhase:
 
     def __str__(self):
         if self.end is None:
-            return "Came online at ***REMOVED***0.month:0>2***REMOVED***-***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(self.start)
+            return "Came online at {0.month:0>2}-{0.day:0>2} {0.hour:0>2}:{0.minute:0>2}".format(self.start)
 
-        return "Was online from ***REMOVED***0.month:0>2***REMOVED***-***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED*** to ***REMOVED***1.month:0>2***REMOVED***-***REMOVED***1.day:0>2***REMOVED*** ***REMOVED***1.hour:0>2***REMOVED***:***REMOVED***1.minute:0>2***REMOVED***".format(self.start, self.end)
+        return "Was online from {0.month:0>2}-{0.day:0>2} {0.hour:0>2}:{0.minute:0>2} to {1.month:0>2}-{1.day:0>2} {1.hour:0>2}:{1.minute:0>2}".format(self.start, self.end)
 
     @property
     def duration_string(self):
@@ -206,8 +206,8 @@ class OnlinePhase:
 
     @property
     def start_string(self):
-        return "***REMOVED***0.year:0>4***REMOVED***/***REMOVED***0.month:0>2***REMOVED***/***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(self.start)
+        return "{0.year:0>4}/{0.month:0>2}/{0.day:0>2} {0.hour:0>2}:{0.minute:0>2}".format(self.start)
 
     @property
     def end_string(self):
-        return "***REMOVED***0.year:0>4***REMOVED***/***REMOVED***0.month:0>2***REMOVED***/***REMOVED***0.day:0>2***REMOVED*** ***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(self.end) if self.end is not None else "Until now"
+        return "{0.year:0>4}/{0.month:0>2}/{0.day:0>2} {0.hour:0>2}:{0.minute:0>2}".format(self.end) if self.end is not None else "Until now"

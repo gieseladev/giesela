@@ -51,11 +51,11 @@ log = logging.getLogger("Giesela")
 
 stream_handler = logging.StreamHandler()
 stream_handler.setLevel(logging.WARNING)
-stream_handler.setFormatter(logging.Formatter("***REMOVED***time***REMOVED*** - <name> [***REMOVED***levelname***REMOVED***] ***REMOVED***message***REMOVED***", style="***REMOVED***"))
+stream_handler.setFormatter(logging.Formatter("{time} - <name> [{levelname}] {message}", style="{"))
 
 file_handler = logging.FileHandler("logs.txt")
 file_handler.setLevel(logging.DEBUG)
-file_handler.setFormatter(logging.Formatter("***REMOVED***asctime***REMOVED*** - <***REMOVED***name***REMOVED***> [***REMOVED***levelname***REMOVED***] ***REMOVED***message***REMOVED***", style="***REMOVED***"))
+file_handler.setFormatter(logging.Formatter("{asctime} - <{name}> [{levelname}] {message}", style="{"))
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -68,14 +68,14 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
     def __init__(self):
         WebAuthor.bot = self
 
-        self.players = ***REMOVED******REMOVED***
+        self.players = {}
         self.locks = defaultdict(asyncio.Lock)
         self.voice_client_connect_lock = asyncio.Lock()
 
         self.config = Config(ConfigDefaults.options_file)
         self.playlists = Playlists(ConfigDefaults.playlists_file)
         self.random_sets = RandomSets(ConfigDefaults.random_sets)
-        self.online_loggers = ***REMOVED******REMOVED***
+        self.online_loggers = {}
         self.cah = GameCAH(self)
 
         self.blacklist = set(load_file(self.config.blacklist_file))
@@ -85,8 +85,8 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         self.exit_signal = None
         self.init_ok = False
         self.cached_client_id = None
-        self.chatters = ***REMOVED******REMOVED***
-        self.blocked_commands = Settings.get_setting("blocked_commands", default=***REMOVED******REMOVED***)
+        self.chatters = {}
+        self.blocked_commands = Settings.get_setting("blocked_commands", default={})
         self.users_in_menu = set()
 
         if not self.autoplaylist:
@@ -95,7 +95,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
         self.use_autoplaylist = self.config.auto_playlist
 
-        ssd_defaults = ***REMOVED***"last_np_msg": None, "auto_paused": False***REMOVED***
+        ssd_defaults = {"last_np_msg": None, "auto_paused": False}
         self.server_specific_data = defaultdict(lambda: dict(ssd_defaults))
 
         super().__init__()
@@ -224,7 +224,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                                              title=entry.whole_title
                                              )
             elif isinstance(entry, RadioSongEntry):
-                newmsg = localization.format(player.voice_client.server, "player.now_playing.generic", title="***REMOVED******REMOVED*** - ***REMOVED******REMOVED***".format(entry.artist, entry.title))
+                newmsg = localization.format(player.voice_client.server, "player.now_playing.generic", title="{} - {}".format(entry.artist, entry.title))
             else:
                 newmsg = localization.format(player.voice_client.server, "player.now_playing.generic", title=entry.title)
 
@@ -303,7 +303,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
             name = entry.title
 
-            name = u"***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(prefix, name)[:128]
+            name = u"{} {}".format(prefix, name)[:128]
             game = discord.Game(type=0, name=name)
 
         await self.change_presence(game=game)
@@ -474,11 +474,11 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         for option in all_options:
             opt, val = option
 
-            opt_string = "  ***REMOVED******REMOVED***: ".format(opt)
+            opt_string = "  {}: ".format(opt)
 
             lines = wrap(str(val), 100 - len(opt_string))
             if len(lines) > 1:
-                val_string = "***REMOVED******REMOVED***\n***REMOVED******REMOVED***\n".format(
+                val_string = "{}\n{}\n".format(
                     lines[0],
                     indent("\n".join(lines[1:]), len(opt_string) * " ")
                 )
@@ -515,7 +515,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
             return
 
         if message.author.id in self.users_in_menu:
-            print("***REMOVED******REMOVED*** is currently in a menu. Ignoring \"***REMOVED******REMOVED***\"".format(
+            print("{} is currently in a menu. Ignoring \"{}\"".format(
                 message.author, message_content))
             return
 
@@ -554,12 +554,12 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 return
 
         if message.author.id in self.blacklist and message.author.id != self.config.owner_id:
-            print("[User blacklisted] ***REMOVED***0.id***REMOVED***/***REMOVED***0.name***REMOVED*** (***REMOVED***1***REMOVED***)".format(
+            print("[User blacklisted] {0.id}/{0.name} ({1})".format(
                 message.author, message_content))
             return
 
         else:
-            print("[Command] ***REMOVED***0.id***REMOVED***/***REMOVED***0.name***REMOVED*** (***REMOVED***1***REMOVED***)".format(
+            print("[Command] {0.id}/{0.name} ({1})".format(
                 message.author, message_content))
 
         argspec = inspect.signature(handler)
@@ -568,7 +568,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
         raw_content = message_content[len(raw_command):]
 
         try:
-            handler_kwargs = ***REMOVED******REMOVED***
+            handler_kwargs = {}
             if params.pop("message", None):
                 handler_kwargs["message"] = message
 
@@ -643,7 +643,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                 )
 
         except (exceptions.CommandError, exceptions.HelpfulError, exceptions.ExtractionError) as e:
-            print("***REMOVED***0.__class__***REMOVED***: ***REMOVED***0.message***REMOVED***".format(e))
+            print("{0.__class__}: {0.message}".format(e))
 
             expirein = e.expire_in if self.config.delete_messages else None
             alsodelete = message if self.config.delete_invoking else None
@@ -683,7 +683,7 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
             msg = await self.safe_send_message(
                 channel,
-                "Hello there,\nMy name is ***REMOVED******REMOVED***!\n\n*Type ***REMOVED******REMOVED***help to find out more.*".
+                "Hello there,\nMy name is {}!\n\n*Type {}help to find out more.*".
                 format(self.user.mention, self.config.command_prefix))
             if msg is not None:
                 return
@@ -729,12 +729,12 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
 
     async def on_any_update(self, before, after):
         if before.server.id in self.online_loggers:
-            timestamp = "***REMOVED***0.hour:0>2***REMOVED***:***REMOVED***0.minute:0>2***REMOVED***".format(datetime.now())
+            timestamp = "{0.hour:0>2}:{0.minute:0>2}".format(datetime.now())
             notification = None
-            mem_name = "\"***REMOVED******REMOVED***\"".format(after.display_name) if len(
+            mem_name = "\"{}\"".format(after.display_name) if len(
                 after.display_name.split()) > 1 else after.display_name
             if before.status != after.status:
-                notification = "`***REMOVED******REMOVED***` ***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(timestamp, mem_name, ***REMOVED***
+                notification = "`{}` {} {}".format(timestamp, mem_name, {
                     discord.Status.online:
                     "came **online**",
                     discord.Status.offline:
@@ -743,32 +743,32 @@ class MusicBot(Client, AdminCommands, FunCommands, InfoCommands,  MiscCommands, 
                     "went **away**",
                     discord.Status.dnd:
                     "doesn't want to be disturbed"
-                ***REMOVED***[after.status])
+                }[after.status])
             if before.game != after.game:
                 text = ""
                 if after.game is None:
-                    text = "stopped playing *****REMOVED******REMOVED*****".format(before.game.name)
+                    text = "stopped playing **{}**".format(before.game.name)
                 else:
-                    text = "started playing *****REMOVED******REMOVED*****".format(after.game.name)
+                    text = "started playing **{}**".format(after.game.name)
                 if notification is None:
-                    notification = "`***REMOVED******REMOVED***` ***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(timestamp, mem_name,
+                    notification = "`{}` {} {}".format(timestamp, mem_name,
                                                        text)
                 else:
-                    notification += "\nand ***REMOVED******REMOVED***".format(text)
+                    notification += "\nand {}".format(text)
 
             if before.voice.voice_channel != after.voice.voice_channel:
                 text = ""
                 if after.voice.voice_channel is None:
-                    text = "quit *****REMOVED******REMOVED***** (voice channel)".format(
+                    text = "quit **{}** (voice channel)".format(
                         before.voice.voice_channel.name)
                 else:
-                    text = "joined *****REMOVED******REMOVED***** (voice channel)".format(
+                    text = "joined **{}** (voice channel)".format(
                         after.voice.voice_channel.name)
                 if notification is None:
-                    notification = "`***REMOVED******REMOVED***` ***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(timestamp, mem_name,
+                    notification = "`{}` {} {}".format(timestamp, mem_name,
                                                        text)
                 else:
-                    notification += "\nand ***REMOVED******REMOVED***".format(text)
+                    notification += "\nand {}".format(text)
 
             if notification is not None:
                 for listener in self.online_loggers[

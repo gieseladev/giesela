@@ -230,7 +230,7 @@ def main():
 
         sleeptime = min(loops * 2, max_wait_time)
         if sleeptime:
-            print("Restarting in ***REMOVED******REMOVED*** seconds...".format(loops * 2))
+            print("Restarting in {} seconds...".format(loops * 2))
             time.sleep(sleeptime)
 
 

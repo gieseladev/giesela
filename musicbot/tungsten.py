@@ -18,12 +18,12 @@ class Tungsten(object):
         """Create a Tungsten object with a set appid"""
         self.appid = appid
 
-    def query(self, input="", params=***REMOVED******REMOVED***):
+    def query(self, input="", params={}):
         """Query Wolfram Alpha and return a Result object"""
         # Get and construct query parameters
         # Default parameters
-        payload = ***REMOVED***"input": input,
-                   "appid": self.appid***REMOVED***
+        payload = {"input": input,
+                   "appid": self.appid}
         # Additional parameters (from params), formatted for url
         for key, value in params.items():
             # Check if value is list or tuple type (needs to be comma joined)
@@ -120,7 +120,7 @@ class Pod(object):
         Example: pod.format["plaintext"] will return a list of every plaintext
                  content in the pod's subpods
         """
-        formats = ***REMOVED******REMOVED***
+        formats = {}
 
         # Iterate through all the tags (formats) in subpods
         # "state" is a tag but not an acceptable format
@@ -138,11 +138,11 @@ class Pod(object):
 
                 # img needs special content packaging
                 if elem.tag == "img":
-                    content = ***REMOVED***"url": elem.get("src"),
+                    content = {"url": elem.get("src"),
                                "alt": elem.get("alt"),
                                "title": elem.get("title"),
                                "width": int(elem.get("width", 0)),
-                               "height": int(elem.get("height", 0))***REMOVED***
+                               "height": int(elem.get("height", 0))}
 
                 # Create / append to return dict
                 if elem.tag not in formats:

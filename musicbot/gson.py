@@ -11,9 +11,9 @@ class GSONEncoder(json.JSONEncoder):
         if isinstance(o, Serialisable):
             ser_o = o.to_dict()
 
-            return ***REMOVED***
+            return {
                 "name": o.__name__,
                 "data": ser_o
-            ***REMOVED***
+            }
 
         return super().default(o)

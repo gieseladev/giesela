@@ -9,7 +9,7 @@ from musicbot.constants import VERSION
 from musicbot.spotify import get_certainty
 from musicbot.utils import similarity
 
-client = discogs_client.Client("Giesela/***REMOVED******REMOVED***".format(VERSION), user_token="vrzQalQXQdNAZYnwYlWunuJSyMjFlcGKXwglcITo")
+client = discogs_client.Client("Giesela/{}".format(VERSION), user_token="vrzQalQXQdNAZYnwYlWunuJSyMjFlcGKXwglcITo")
 
 
 class DiscogsException:
@@ -81,7 +81,7 @@ def _extract_artist_image(release):
 
 
 def _get_entry(query):
-    fields = ***REMOVED******REMOVED***
+    fields = {}
 
     results = client.search(query, type="release")
 

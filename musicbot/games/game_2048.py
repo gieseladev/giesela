@@ -21,7 +21,7 @@ class Game2048:
 
     def __str__(self):
         ret = ""
-        iS = ***REMOVED******REMOVED***
+        iS = {}
         for j in self.grid:
             for i in range(len(j)):
                 iS[i] = max((iS.get(i) if iS.get(

@@ -35,14 +35,14 @@ def check_cache(query, load=True):
     file_path = path.join(lyrics_folder, escape_query(query))
 
     if path.isfile(file_path):
-        print("[LYRICS] cached \"***REMOVED******REMOVED***\"".format(query))
+        print("[LYRICS] cached \"{}\"".format(query))
 
         lyrics = json.load(open(file_path, "r+"))
 
         if lyrics.get("version", 0) >= required_version:
             return lyrics
         else:
-            print("[LYRICS] \"***REMOVED******REMOVED***\" are outdated".format(query))
+            print("[LYRICS] \"{}\" are outdated".format(query))
             return None
     else:
         return None
@@ -60,7 +60,7 @@ def cache_lyrics(query, lyrics):
 
         json.dump(lyrics, open(file_path, "w+"), indent=4)
 
-        print("[LYRICS] saved \"***REMOVED******REMOVED***\"".format(query))
+        print("[LYRICS] saved \"{}\"".format(query))
         return True
 
 
@@ -79,20 +79,20 @@ def search_for_lyrics(query):
 
 
 def search_for_lyrics_google(query):
-    params = ***REMOVED***
+    params = {
         "key":  static_config.google_api_key,
         "cx":   "002017775112634544492:7y5bpl2sn78",
         "q":    query
-    ***REMOVED***
+    }
     resp = requests.get("https://www.googleapis.com/customsearch/v1", params=params)
     data = resp.json()
     items = data.get("items", [])
 
     for item in items:
-        match = re.match(r"^(?:https?:\/\/)?(?:www\.)?([\w\-]+)\.(\w***REMOVED***2,***REMOVED***)\/?$", item["displayLink"])
+        match = re.match(r"^(?:https?:\/\/)?(?:www\.)?([\w\-]+)\.(\w{2,})\/?$", item["displayLink"])
 
         if match:
-            display_link = "***REMOVED******REMOVED***.***REMOVED******REMOVED***".format(*match.groups())
+            display_link = "{}.{}".format(*match.groups())
         else:
             print("[Lyrics] Couldn't figure out url", item["displayLink"])
             continue
@@ -104,7 +104,7 @@ def search_for_lyrics_google(query):
             try:
                 lyrics = lyric_parsers[display_link](item["link"])
             except BaseException:
-                print("Couldn't extract lyrics from ***REMOVED******REMOVED***:\n***REMOVED******REMOVED***".format(item["link"], traceback.format_exc()))
+                print("Couldn't extract lyrics from {}:\n{}".format(item["link"], traceback.format_exc()))
 
             if lyrics:
                 lyrics["source"] = display_link
@@ -125,16 +125,16 @@ def _extract_lyrics_genius(url):
 
     bs = BeautifulSoup(content, ConfigDefaults.html_parser)
 
-    lyrics_window = bs.find_all("div", ***REMOVED***"class": "lyrics"***REMOVED***)[0]
+    lyrics_window = bs.find_all("div", {"class": "lyrics"})[0]
     lyrics = lyrics_window.text
 
-    title = bs.find("h1", attrs=***REMOVED***"class": "header_with_cover_art-primary_info-title"***REMOVED***).text.strip()
+    title = bs.find("h1", attrs={"class": "header_with_cover_art-primary_info-title"}).text.strip()
 
-    return ***REMOVED***
+    return {
         "url": url,
         "title": title,
         "lyrics": lyrics.strip()
-    ***REMOVED***
+    }
 
 
 def _extract_lyrics_lyricsmode(url):
@@ -143,16 +143,16 @@ def _extract_lyrics_lyricsmode(url):
 
     bs = BeautifulSoup(content, ConfigDefaults.html_parser)
     lyrics_window = bs.find_all(
-        "p", ***REMOVED***"id": "lyrics_text", "class": "ui-annotatable"***REMOVED***)[0]
+        "p", {"id": "lyrics_text", "class": "ui-annotatable"})[0]
     lyrics = lyrics_window.text
 
-    title = bs.find("h1", attrs=***REMOVED***"class": "song_name fs32"***REMOVED***).text.strip()
+    title = bs.find("h1", attrs={"class": "song_name fs32"}).text.strip()
 
-    return ***REMOVED***
+    return {
         "url": url,
         "title": title,
         "lyrics": lyrics.strip()
-    ***REMOVED***
+    }
 
 
 def _extract_lyrics_lyrical_nonsense(url):
@@ -165,16 +165,16 @@ def _extract_lyrics_lyrical_nonsense(url):
         bs = BeautifulSoup(content, ConfigDefaults.html_parser)
         # take the Romaji version if there is one, otherwise use the default
         # one
-        lyrics_window = bs.find_all("div", ***REMOVED***"id": "Romaji"***REMOVED***)[0] or bs.find_all("div", ***REMOVED***"id": "Lyrics"***REMOVED***)[0]
+        lyrics_window = bs.find_all("div", {"id": "Romaji"})[0] or bs.find_all("div", {"id": "Lyrics"})[0]
         lyrics = lyrics_window.text
 
         title = bs.select("div.titletext2new h3")[0].text.strip()
 
-        return ***REMOVED***
+        return {
             "url": url,
             "title": title,
             "lyrics": lyrics.strip()
-        ***REMOVED***
+        }
     except IndexError:
         return None
 
@@ -182,23 +182,23 @@ def _extract_lyrics_lyrical_nonsense(url):
 def _extract_lyrics_musixmatch(url):
     lyrics = None
 
-    headers = ***REMOVED***"user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1"***REMOVED***
+    headers = {"user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1"}
     resp = requests.get(url, headers=headers)
     content = resp.text
 
     bs = BeautifulSoup(content, ConfigDefaults.html_parser)
 
-    if bs.find_all("div", attrs=***REMOVED***"class": "mxm-empty-state", "data-reactid": "87"***REMOVED***):
+    if bs.find_all("div", attrs={"class": "mxm-empty-state", "data-reactid": "87"}):
         print("[Lyrics] >Musixmatch this page doesn't have any lyrics")
         return False
 
-    lyrics_frame = bs.find_all("div", ***REMOVED***"class": "mxm-lyrics"***REMOVED***)
+    lyrics_frame = bs.find_all("div", {"class": "mxm-lyrics"})
 
     if not lyrics_frame:
         print("[Lyrics] >Musixmatch this isn't a lyrics page")
         return False
     else:
-        lyrics_window = lyrics_frame[0].find_all("div", ***REMOVED***"class": "mxm-lyrics"***REMOVED***)
+        lyrics_window = lyrics_frame[0].find_all("div", {"class": "mxm-lyrics"})
 
     if not lyrics_window:
         print("[Lyrics] >Musixmatch this isn't a lyrics page")
@@ -211,22 +211,22 @@ def _extract_lyrics_musixmatch(url):
 
     lyrics = lyrics_window.text
 
-    title = bs.find("h1", attrs=***REMOVED***"class": "mxm-track-title__track"***REMOVED***).contents[-2].strip()
+    title = bs.find("h1", attrs={"class": "mxm-track-title__track"}).contents[-2].strip()
 
-    return ***REMOVED***
+    return {
         "url": url,
         "title": title,
         "lyrics": lyrics.strip()
-    ***REMOVED***
+    }
 
 
 def _extract_lyrics_azlyrics(url):
-    headers = ***REMOVED***"user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1"***REMOVED***
+    headers = {"user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1"}
     resp = requests.get(url, headers=headers)
     bs = BeautifulSoup(resp.text, ConfigDefaults.html_parser)
 
-    center = bs.body.find("div", ***REMOVED***"class": "col-xs-12 col-lg-8 text-center"***REMOVED***)
-    lyrics = center.find("div", ***REMOVED***"class": None***REMOVED***).text
+    center = bs.body.find("div", {"class": "col-xs-12 col-lg-8 text-center"})
+    lyrics = center.find("div", {"class": None}).text
 
     lyrics = re.sub(r"<br>", " ", lyrics)
     lyrics = re.sub(r"<i?>\W*", "[", lyrics)
@@ -236,11 +236,11 @@ def _extract_lyrics_azlyrics(url):
 
     title = center.find("h1").text.strip()[1:-8]
 
-    return ***REMOVED***
+    return {
         "url": url,
         "title": title,
         "lyrics": lyrics.strip()
-    ***REMOVED***
+    }
 
 
 def _extract_lyrics_animelyrics(url):
@@ -271,28 +271,28 @@ def _extract_lyrics_animelyrics(url):
         raw = requests.get(re.sub(r"\.html?", ".txt", url),
                            allow_redirects=False)
         content = raw.text.strip()
-        match = re.search(r"-***REMOVED***10,***REMOVED***(.+?)-***REMOVED***10,***REMOVED***",
+        match = re.search(r"-{10,}(.+?)-{10,}",
                           content, flags=re.DOTALL)
         if match:
             lyrics = match.group(1).strip()
 
-    title = bs.find("td", attrs=***REMOVED***"valign": "top"***REMOVED***).find("h1").text.strip()
+    title = bs.find("td", attrs={"valign": "top"}).find("h1").text.strip()
 
-    return ***REMOVED***
+    return {
         "url": url,
         "title": title,
         "lyrics": lyrics.strip()
-    ***REMOVED***
+    }
 
 
-lyric_parsers = ***REMOVED***
+lyric_parsers = {
     "genius.com":           _extract_lyrics_genius,
     "lyricsmode.com":       _extract_lyrics_lyricsmode,
     "lyrical-nonsense.com": _extract_lyrics_lyrical_nonsense,
     "musixmatch.com":       _extract_lyrics_musixmatch,
     "azlyrics.com":         _extract_lyrics_azlyrics,
     "animelyrics.com":      _extract_lyrics_animelyrics
-***REMOVED***
+}
 
 # print(search_for_lyrics_google("I Want Her Back At Home - The Vernons"))
 # print(_extract_lyrics_musixmatch("https://www.musixmatch.com/lyrics/The-Vernons-3/I-Want-Her-Back-At-Home"))

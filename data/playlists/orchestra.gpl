@@ -1,0 +1,2471 @@
+[
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-u5FyRZbqfeM-Hans_Zimmer_-_Chevaliers_de_Sangreal.NA",
+        "video_id": "u5FyRZbqfeM",
+        "url": "https://www.youtube.com/watch?v=u5FyRZbqfeM",
+        "title": "Hans Zimmer - Chevaliers de Sangreal",
+        "duration": 249,
+        "thumbnail": "https://i.ytimg.com/vi/u5FyRZbqfeM/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "From the movie \"The Davinci Code,\" here's Chevaliers de Sangreal by Hans Zimmer.\n\nDisclaimer: I do not own the music by Hans Zimmer.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 0,
+                    "timestamp": 1513949458
+                }
+            }
+        },
+        "song_title": "Chevaliers De Sangreal",
+        "artist": "Hans Zimmer",
+        "artist_image": "https://i.scdn.co/image/3d05c3dffd54fb06b0191f258e88ca3b5832250f",
+        "cover": "https://i.scdn.co/image/0cb369073704b39fdbe58d8b90adcec082fa2079",
+        "album": "The Da Vinci Code",
+        "spotify_data": {
+            "id": "64q5EfFKR9hYJ1FHqSClxe",
+            "name": "Chevaliers De Sangreal",
+            "artists": [
+                {
+                    "id": "0YC192cP3KPCRWx8zr8MfZ",
+                    "name": "Hans Zimmer",
+                    "images": [
+                        {
+                            "height": 563,
+                            "url": "https://i.scdn.co/image/14657235e8724181f8b32c6bfa54cdbf86d70852",
+                            "width": 1000
+                        },
+                        {
+                            "height": 360,
+                            "url": "https://i.scdn.co/image/960a8d4afdf777c543618e384428aacffdcf517a",
+                            "width": 640
+                        },
+                        {
+                            "height": 113,
+                            "url": "https://i.scdn.co/image/94ad4486b19037fa88ed58a946698365f4a7bb73",
+                            "width": 200
+                        },
+                        {
+                            "height": 36,
+                            "url": "https://i.scdn.co/image/3d05c3dffd54fb06b0191f258e88ca3b5832250f",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "soundtrack"
+                    ],
+                    "popularity": 81,
+                    "uri": "spotify:artist:0YC192cP3KPCRWx8zr8MfZ",
+                    "href": "https://open.spotify.com/artist/0YC192cP3KPCRWx8zr8MfZ"
+                }
+            ],
+            "artist": "Hans Zimmer",
+            "cover_url": "https://i.scdn.co/image/0cb369073704b39fdbe58d8b90adcec082fa2079",
+            "duration": 247.4,
+            "album": {
+                "id": "4GuLx38y1727p45spIvslr",
+                "name": "The Da Vinci Code",
+                "artists": [
+                    {
+                        "id": "0YC192cP3KPCRWx8zr8MfZ",
+                        "name": "Hans Zimmer",
+                        "images": [
+                            {
+                                "height": 563,
+                                "url": "https://i.scdn.co/image/14657235e8724181f8b32c6bfa54cdbf86d70852",
+                                "width": 1000
+                            },
+                            {
+                                "height": 360,
+                                "url": "https://i.scdn.co/image/960a8d4afdf777c543618e384428aacffdcf517a",
+                                "width": 640
+                            },
+                            {
+                                "height": 113,
+                                "url": "https://i.scdn.co/image/94ad4486b19037fa88ed58a946698365f4a7bb73",
+                                "width": 200
+                            },
+                            {
+                                "height": 36,
+                                "url": "https://i.scdn.co/image/3d05c3dffd54fb06b0191f258e88ca3b5832250f",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "soundtrack"
+                        ],
+                        "popularity": 81,
+                        "uri": "spotify:artist:0YC192cP3KPCRWx8zr8MfZ",
+                        "href": "https://open.spotify.com/artist/0YC192cP3KPCRWx8zr8MfZ"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/0cb369073704b39fdbe58d8b90adcec082fa2079",
+                        "width": 629
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/cd91877a19c5a6af174c22312313a5ea25dc8b18",
+                        "width": 295
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/758e15e7bf0cc38329a7145d625a2defe92aae65",
+                        "width": 63
+                    }
+                ],
+                "uri": "spotify:album:4GuLx38y1727p45spIvslr"
+            },
+            "popularity": 49,
+            "uri": "spotify:track:64q5EfFKR9hYJ1FHqSClxe",
+            "query": "Hans Zimmer - Chevaliers De Sangreal",
+            "certainty": 0.9714285714285714
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-HCaVyvgomEk-Rupert_Gregson-Williams_Duck_Shoot.NA",
+        "video_id": "HCaVyvgomEk",
+        "url": "https://www.youtube.com/watch?v=HCaVyvgomEk",
+        "title": "Rupert Gregson-Williams \u2013 Duck Shoot",
+        "duration": 249,
+        "thumbnail": "https://i.ytimg.com/vi/HCaVyvgomEk/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Music by Rupert Gregson-Williams\n\nSoundtrack of 'The Crown'",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 1,
+                    "timestamp": 1513953474
+                }
+            }
+        },
+        "song_title": "Duck Shoot",
+        "artist": "Rupert Gregson-Williams",
+        "artist_image": "https://i.scdn.co/image/bf3ce3bf0640f8312616a51264fa327a9f62c85d",
+        "cover": "https://i.scdn.co/image/04cae5d665de23227aafad28172faaf83adab7c4",
+        "album": "The Crown: Season One (Soundtrack from the Netflix Original Series)",
+        "spotify_data": {
+            "id": "5HARZiEbfWnwXdv7ckqh5z",
+            "name": "Duck Shoot",
+            "artists": [
+                {
+                    "id": "2vuXYcTqreOLLnlKtMV5UG",
+                    "name": "Rupert Gregson-Williams",
+                    "images": [
+                        {
+                            "height": 1000,
+                            "url": "https://i.scdn.co/image/d05709b256a284d60ebed670fd51f028708073ad",
+                            "width": 1000
+                        },
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/43fbbb2bd28a42e949cb3621f098e796599b357f",
+                            "width": 640
+                        },
+                        {
+                            "height": 200,
+                            "url": "https://i.scdn.co/image/8be3b48eb19787b62b2f787448c79164e8a7680d",
+                            "width": 200
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/bf3ce3bf0640f8312616a51264fa327a9f62c85d",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "epicore",
+                        "scorecore",
+                        "soundtrack",
+                        "video game music"
+                    ],
+                    "popularity": 62,
+                    "uri": "spotify:artist:2vuXYcTqreOLLnlKtMV5UG",
+                    "href": "https://open.spotify.com/artist/2vuXYcTqreOLLnlKtMV5UG"
+                }
+            ],
+            "artist": "Rupert Gregson-Williams",
+            "cover_url": "https://i.scdn.co/image/04cae5d665de23227aafad28172faaf83adab7c4",
+            "duration": 247.173,
+            "album": {
+                "id": "6ng66yiXAHS3lYzt7C6AD5",
+                "name": "The Crown: Season One (Soundtrack from the Netflix Original Series)",
+                "artists": [
+                    {
+                        "id": "0LyfQWJT6nXafLPZqxe9Of",
+                        "name": "Various Artists",
+                        "images": [],
+                        "genres": [],
+                        "popularity": 0,
+                        "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of",
+                        "href": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/04cae5d665de23227aafad28172faaf83adab7c4",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/17ba9cd47d7f931b66177ae083d2278364f3e0eb",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/89007eafeef95b851e1f216030bb540d64e155ad",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:6ng66yiXAHS3lYzt7C6AD5"
+            },
+            "popularity": 44,
+            "uri": "spotify:track:5HARZiEbfWnwXdv7ckqh5z",
+            "query": "Rupert Gregson-Williams Duck Shoot",
+            "certainty": 1.0
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-imDUJf44Wr4-Epic_One_Piece_Soundtrack_-_Hito_no_Dokuro_ni_Tee_Dasuna_HD.NA",
+        "video_id": "imDUJf44Wr4",
+        "url": "https://www.youtube.com/watch?v=imDUJf44Wr4",
+        "title": "[ Epic ] One Piece Soundtrack - Hito no Dokuro ni Tee Dasuna!!! [ HD ]",
+        "duration": 108,
+        "thumbnail": "https://i.ytimg.com/vi/imDUJf44Wr4/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "One Piece Original Soundtrack\nDokuro wa Shinnen no Shouchou - Hito no Dokuro ni Tee Dasuna!!!\n____________________________________________________________________",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 2,
+                    "timestamp": 1514291944
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-RkwUkPUt5SU-Fairy_Tail_-_Mystogan_-_Theme_HD.NA",
+        "video_id": "RkwUkPUt5SU",
+        "url": "https://www.youtube.com/watch?v=RkwUkPUt5SU",
+        "title": "Fairy Tail - Mystogan - Theme [HD]",
+        "duration": 159,
+        "thumbnail": "https://i.ytimg.com/vi/RkwUkPUt5SU/maxresdefault.jpg",
+        "thumbnail_brightness": 86.59403136857742,
+        "description": "[Fairy Tail] [Mystogan] [Theme Song] [Full] [HD]",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 3,
+                    "timestamp": 1514294340
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-Loi4bYzXvAw-FAIRY_TAIL_Main_Theme_-_SLOW.NA",
+        "video_id": "Loi4bYzXvAw",
+        "url": "https://www.youtube.com/watch?v=Loi4bYzXvAw",
+        "title": "FAIRY TAIL Main Theme - SLOW",
+        "duration": 155,
+        "thumbnail": "https://i.ytimg.com/vi/Loi4bYzXvAw/maxresdefault.jpg",
+        "thumbnail_brightness": 33.86329422744203,
+        "description": "=)\nFAIRY TAIL Main Theme - SLOW",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 4,
+                    "timestamp": 1514293640
+                }
+            }
+        },
+        "song_title": "Fairy Tail Main Theme (Slow Version)",
+        "artist": "Tifita",
+        "artist_image": "https://i.scdn.co/image/ce543e283b150b4ffa33ea47eaa6aa9a79e62560",
+        "cover": "https://i.scdn.co/image/7bcee79d507d6bc3dab39cd35860c0c416fde59e",
+        "album": "Fairy Tail: Piano Solo",
+        "spotify_data": {
+            "id": "2aTGErrRuP4pl3ePrBdoQd",
+            "name": "Fairy Tail Main Theme (Slow Version)",
+            "artists": [
+                {
+                    "id": "6DW5rPPuI0hjWzcPzshJpr",
+                    "name": "Tifita",
+                    "images": [
+                        {
+                            "height": 614,
+                            "url": "https://i.scdn.co/image/ce543e283b150b4ffa33ea47eaa6aa9a79e62560",
+                            "width": 640
+                        },
+                        {
+                            "height": 307,
+                            "url": "https://i.scdn.co/image/3641e8b64abb088f4504789cfb6475afe2759fe2",
+                            "width": 320
+                        },
+                        {
+                            "height": 154,
+                            "url": "https://i.scdn.co/image/ba5f6ac85b039e4e848384e7c259bff0ede7f666",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "otacore",
+                        "scorecore"
+                    ],
+                    "popularity": 44,
+                    "uri": "spotify:artist:6DW5rPPuI0hjWzcPzshJpr",
+                    "href": "https://open.spotify.com/artist/6DW5rPPuI0hjWzcPzshJpr"
+                }
+            ],
+            "artist": "Tifita",
+            "cover_url": "https://i.scdn.co/image/7bcee79d507d6bc3dab39cd35860c0c416fde59e",
+            "duration": 129.0,
+            "album": {
+                "id": "4OujQcw6cKh5TDKxjoUksp",
+                "name": "Fairy Tail: Piano Solo",
+                "artists": [
+                    {
+                        "id": "6DW5rPPuI0hjWzcPzshJpr",
+                        "name": "Tifita",
+                        "images": [
+                            {
+                                "height": 614,
+                                "url": "https://i.scdn.co/image/ce543e283b150b4ffa33ea47eaa6aa9a79e62560",
+                                "width": 640
+                            },
+                            {
+                                "height": 307,
+                                "url": "https://i.scdn.co/image/3641e8b64abb088f4504789cfb6475afe2759fe2",
+                                "width": 320
+                            },
+                            {
+                                "height": 154,
+                                "url": "https://i.scdn.co/image/ba5f6ac85b039e4e848384e7c259bff0ede7f666",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "otacore",
+                            "scorecore"
+                        ],
+                        "popularity": 44,
+                        "uri": "spotify:artist:6DW5rPPuI0hjWzcPzshJpr",
+                        "href": "https://open.spotify.com/artist/6DW5rPPuI0hjWzcPzshJpr"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/7bcee79d507d6bc3dab39cd35860c0c416fde59e",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/aabc3298d6603c6f64a099a9183ef7875ad64daa",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/b0425f3b1807b266780521431fb71516658e06a3",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:4OujQcw6cKh5TDKxjoUksp"
+            },
+            "popularity": 34,
+            "uri": "spotify:track:2aTGErrRuP4pl3ePrBdoQd",
+            "query": "FAIRY TAIL Main - SLOW",
+            "certainty": 0.68
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-MOouedHZtKQ-Focus_Music_-_Hero_s_Journey.NA",
+        "video_id": "MOouedHZtKQ",
+        "url": "https://www.youtube.com/watch?v=MOouedHZtKQ",
+        "title": "Focus Music - Hero`s Journey",
+        "duration": 150,
+        "thumbnail": "https://i.ytimg.com/vi/MOouedHZtKQ/maxresdefault.jpg",
+        "thumbnail_brightness": 111.1802729359443,
+        "description": "Album: Hollywood Trailers 2 ( Emotions ) Backup Channel Guys. Please subscribe and let it grow - https://www.youtube.com/user/MrEpicGoose",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 5,
+                    "timestamp": 1514292231
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-pS-gbqbVd8c-Game_of_Thrones_-_Season_6_OST_-_Light_of_the_Seven_EP_10_Trial_scene.NA",
+        "video_id": "pS-gbqbVd8c",
+        "url": "https://www.youtube.com/watch?v=pS-gbqbVd8c",
+        "title": "Game of Thrones: Season 6 OST - Light of the Seven (EP 10 Trial scene)",
+        "duration": 589,
+        "thumbnail": "https://i.ytimg.com/vi/pS-gbqbVd8c/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Official Season 6 Soundtrack available on iTunes: https://www.youtube.com/redirect?event=video_description&v=pS-gbqbVd8c&redir_token=FXJnv5T5JaNzXLUzZsATPP5uhrJ8MTUxNDAzNTAzOUAxNTEzOTQ4NjM5&q=https%3A%2F%2Fitunes.apple.com%2Fus%2Falbum%2Fgame-thrones-season-6-music%2Fid1126106075\n\nFULL SOUNDTRACK PLAYLIST: https://www.youtube.com/playlist?list=PLrqrQt36ddwDhQFbwqz5cB5C6Ab71ykQR\n\nSoundtrack composed by Ramin Djawadi.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 6,
+                    "timestamp": 1513949458
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-OvXdIYuXjzo-Game_of_Thrones_Season_6_OST_-_17._Winter_Has_Come.NA",
+        "video_id": "OvXdIYuXjzo",
+        "url": "https://www.youtube.com/watch?v=OvXdIYuXjzo",
+        "title": "Game of Thrones Season 6 OST - 17. Winter Has Come",
+        "duration": 195,
+        "thumbnail": "https://i.ytimg.com/vi/OvXdIYuXjzo/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "T\u00e9l\u00e9chargez gratuitement toutes les B.O. de Game of Thrones en MP3 320kbps (et tous les \u00e9pisodes de la s\u00e9rie) sur Game of Thrones DDL :\nhttp://gameofthrones.vovf.net/b-o\n\nDownload all Game of Thrones's O.S.T. in MP3 320kbps here :\nhttp://gameofthrones.vovf.net/b-o",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 7,
+                    "timestamp": 1513949458
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-RX2y3ncQGR4-Game_of_Thrones_Season_6_OST_-_23._The_Tower_Bonus_Track.NA",
+        "video_id": "RX2y3ncQGR4",
+        "url": "https://www.youtube.com/watch?v=RX2y3ncQGR4",
+        "title": "Game of Thrones Season 6 OST - 23. The Tower (Bonus Track)",
+        "duration": 154,
+        "thumbnail": "https://i.ytimg.com/vi/RX2y3ncQGR4/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "T\u00e9l\u00e9chargez gratuitement toutes les B.O. de Game of Thrones en MP3 320kbps (et tous les \u00e9pisodes de la s\u00e9rie) sur Game of Thrones DDL :\nhttp://gameofthrones.vovf.net/b-o\n\nDownload all Game of Thrones's O.S.T. in MP3 320kbps here :\nhttp://gameofthrones.vovf.net/b-o",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 8,
+                    "timestamp": 1513949458
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-UDVtMYqUAyw-Interstellar_Main_Theme_-_Extra_Extended_-_Soundtrack_by_Hans_Zimmer.NA",
+        "video_id": "IDsCtDRV2uA",
+        "url": "https://www.youtube.com/watch?v=IDsCtDRV2uA",
+        "title": "Hans Zimmer - Interstellar Main Theme",
+        "duration": 248,
+        "thumbnail": "https://i.ytimg.com/vi/UDVtMYqUAyw/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Interstellar Main Theme - Extra Extented - Soundtrack by Hans Zimmer",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 9,
+                    "timestamp": 1513789029
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-f2omHyq6Lrg-Hans_Zimmer_-_Red_Warrior_HQ_-_The_Last_Samurai_Soundtrack.NA",
+        "video_id": "f2omHyq6Lrg",
+        "url": "https://www.youtube.com/watch?v=f2omHyq6Lrg",
+        "title": "Hans Zimmer - Red Warrior [HQ] - The Last Samurai Soundtrack",
+        "duration": 236,
+        "thumbnail": "https://i.ytimg.com/vi/f2omHyq6Lrg/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Music: A blessing from Allah\n\nA doorbell, footsteps, the honking of a car horn, paper crackles... We can tell where just about all the sounds we hear in our daily lives come from. Many sounds, apart from those that we associate with some previous events, have no effect on our souls. But this does not apply to every sound we hear.\n\nMusic is a blessing Allah created as a delightful pleasure for human beings. It is a miracle the way that people take pleasure from sound waves. Sound waves moving through the air are collected, and then converted into nerve impulses and transmitted to the brain. This sound being distinguished as music by the brain and perceived as something that will be enjoyable takes place by Allah bestowing the significance He chooses on the sound and depicting it to us as pleasurable. When the sense of hearing is examined in technical terms, the processes involved in hearing the sound of a creaking door and in listening to a symphony are exactly the same.  Vibrations between a frequency of 15 Hertz (the tone emitted by a 10 m organ pipe) and 20,000 Hertz are collected by the external ear and transmitted into the ear passage, finally arriving at the ear membrane. This membrane then causes the small bones in the middle ear to vibrate, and sound vibrations are converted into mechanical ones.  These mechanical vibrations cause the fluid inside an organ in the inner ear called the cochlea to vibrate. Tiny hair-like structures on the inner face of the cochlea convert these vibrations into nerve impulses and forward them to the brain, where they are interpreted.\n\nIt is of course impossible for the brain, a piece of flesh weighing around 1.5 kilograms, to produce meaning from these sounds or to know joy, excitement or peace. It is of course Almighty Allah Who creates sounds, gives them meaning and thus produces an effect in our souls. The way that such a flawless system is able to operate in a perfect fashion is one of the proofs of Allah's existence and greatness. Allah produces music within the silence of the brain, and it is also He Who creates its impact. It is only by Allah's will that the sounds of instruments playing one after the other produce pleasure, happiness and excitement in the human soul. This is a great mercy and blessing from Allah.\n\nIf you tried to number Allah's blessings, you could never count them. Allah is Ever-Forgiving, Most Merciful. (Surat an-Nahl, 18)\n\nMankind! Remember Allah's blessing to you. Is there any creator other than Allah providing for you from heaven and Earth? There is no deity but Him. So how have you been perverted? (Surah Fatir, 3)",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 10,
+                    "timestamp": 1513949458
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-5AWYSS7IODE-IMAscore_-_Legions.NA",
+        "video_id": "5AWYSS7IODE",
+        "url": "https://www.youtube.com/watch?v=5AWYSS7IODE",
+        "title": "IMAscore - Legions",
+        "duration": 115,
+        "thumbnail": "https://i.ytimg.com/vi/5AWYSS7IODE/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Unchain the legions and go on an epic journey of courage and honour! Check out our new epic trailer music release: LEGIONS!\n\nComposed by Andreas K\u00fcbler\n\nFollow us:\n\nFacebook: http://www.facebook.com/IMAscore\nSoundcloud: https://soundcloud.com/IMAscore\nTwitter: http://www.twitter.com/IMAscore\nYouTube: http://www.youtube.com/IMAscoregermany\n\nGet more information and demos on http://www.IMAscore.com\n\nAll rights of the producer and of the owner of the works reproduced reserved. Unauthorized copying, hiring, lending, public performance and broadcasting of this recording prohibited.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 11,
+                    "timestamp": 1513949458
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "DiscogsEntry",
+        "expected_filename": "cache/audio_cache/youtube-ZJlJ2j_mcxg-Hans_Zimmer_Lorne_Balfe_-_In_The_Beginning.NA",
+        "video_id": "ZJlJ2j_mcxg",
+        "url": "https://www.youtube.com/watch?v=ZJlJ2j_mcxg",
+        "title": "Hans Zimmer & Lorne Balfe - In The Beginning",
+        "duration": 228,
+        "thumbnail": "https://i.ytimg.com/vi/ZJlJ2j_mcxg/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Composers : Hans Zimmer & Lorne Balfe\nTitle : In The Beginning\n\nAlbum : The Bible (Original TV Series Soundtrack)",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 12,
+                    "timestamp": 1513949458
+                }
+            }
+        },
+        "song_title": "In The Beginning",
+        "artist": "Hans Zimmer",
+        "artist_image": "https://img.discogs.com/yf2Yp-guB2Wnlyh-I5SuLlCtUmQ=/600x600/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-59656-1249632712.png.jpg",
+        "cover": "https://img.discogs.com/jPZfMsuakbuLZUFnnuc2cZiQbJY=/fit-in/600x595/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-4540713-1468079667-5858.jpeg.jpg",
+        "album": "The Bible (The Original Score Soundtrack To The Epic Mini Series)"
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-Bc9ZuSmb1BU-Jeremy_Soule_-_Skyrim_Main_Theme_Full.NA",
+        "video_id": "Bc9ZuSmb1BU",
+        "url": "https://www.youtube.com/watch?v=Bc9ZuSmb1BU",
+        "title": "Jeremy Soule - Dragonborn",
+        "duration": 236,
+        "thumbnail": "https://i.ytimg.com/vi/Bc9ZuSmb1BU/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "This is the full main theme of Skyrim by Jeremy Soule.\nA chorus of 30 voices sings in the dragon tounge.\n\nLyrics:\n\nDragon language\n\nDovahkiin, Dovahkiin\nnaal ok zin los vahriin\nwah dein vokul mahfaeraak ahst vaal!\nAhrk fin norok paal graan\nfod nust hon zindro zaan\nDovahkiin, fah hin kogaan mu draal!\n\nHuzrah nu, kul do od, wah aan bok lingrah vod\nAahrk fin tey, boziik fun, do fin gein!\n\nWo lost fron wah ney dov\nahrk fin reyliik do jul\nvoth aan suleyk wah ronit faal krein!\n\nAlduin, feyn do jun,\nkruziik vokun staadnau,\nvoth aan bahlok wah diivon fin lein!\n\nNuz aan sul, fent alok,\nfod fin vul dovah nok,\nfen kos nahlot mahfaeraak ahrk ruz!\nPaaz Keizaal fen kos stin nol bein Alduin jot!\n\nDovahkiin, Dovahkiin\nnaal ok zin los vahriin\nwah dein vokul mahfaeraak ahst vaal!\nAhrk fin norok paal graan\nfod nust hon zindro zaan\nDovahkiin, fah hin kogaan mu draal!\n\n---------------------------------------------------------------------------------------------\n\nEnglish\n\nDragonborn, Dragonborn\nby his honor is sworn\nTo keep evil forever at bay!\nAnd the fiercest foes rout\nwhen they hear triumph's shout,\nDragonborn, for your blessing we pray!\n\nHearken now, sons of snow, to an age, long ago\nand the tale, boldly told, of the one!\n\nWho was kin to both wyrm\nand the races of man\nwith a power to rival the sun\n\nAlduin, Bane of Kings,\nancient shadow unbound,\nwith a hunger to swallow the world!\n\nBut a day, shall arise,\nwhen the dark dragon's lies,\nwill be silenced forever and then!\nFair Skyrim will be free from foul Alduin's maw!\n\nDragonborn, Dragonborn\nby his honor is sworn\nTo keep evil forever at bay!\nAnd the fiercest foes rout\nwhen they hear triumph's shout,\nDragonborn, for your blessing we pray!",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 13,
+                    "timestamp": 1513789029
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-Vr0U0QcTFII-King_Arthur_-_Hans_Zimmer.NA",
+        "video_id": "Vr0U0QcTFII",
+        "url": "https://www.youtube.com/watch?v=Vr0U0QcTFII",
+        "title": "King Arthur - Hans Zimmer",
+        "duration": 533,
+        "thumbnail": "https://i.ytimg.com/vi/Vr0U0QcTFII/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Selections from the score.  Sorry no movie, I don't have this one :(",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 14,
+                    "timestamp": 1513949458
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-hIffDjeRE_Q-Louis_Viallet_-_Adrenaline_Epic_Battle_Adventure_Extended.NA",
+        "video_id": "hIffDjeRE_Q",
+        "url": "https://www.youtube.com/watch?v=hIffDjeRE_Q",
+        "title": "Louis Viallet - Adrenaline",
+        "duration": 170,
+        "thumbnail": "https://i.ytimg.com/vi/hIffDjeRE_Q/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "\u2716 Follow Me on Facebook: http://fbl.me/ThePrimeCronus\n\u2716 Follow Me on G-Plus: http://goo.gl/EJXouj\n\u2716 Subscribe to ThePrimeCronus II: http://goo.gl/P5T9gI\n\u2716 Subscribe to One Hour Station: http://goo.gl/44ZRnG\n\u2716 Subscribe to ThePrimeThanatos:  http://goo.gl/QZJrLb\n\u2716 Subscribe to Prime Athena: (Anime)  https://goo.gl/lOL6ic\n\n\n\u2716 Support:\nFacebook: https://www.facebook.com/LouisViallet63\nYouTube: https://www.youtube.com/channel/UCgEWGMy_n5Ke3agk3RRVkBA\nBandcamp: https://louisviallet.bandcamp.com\n\n\n\u2716 Image:\nSunny Nair\nhttps://sun_stars7.artstation.com/\n\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\nNote for the new Artists:\n\n\u2716\u2716 If you would like to submit your track, visual art for promotion.\n\u2716\u2716 If you want to add any kind of information which belongs to the video (audio or visual)\n\u2716\u2716 If you have any issues regarding any of the videos.\n\nPlease look for my email address in my channel's about page, please do not send me message on this channel.\n\n\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\nSubmission Requirements:\n\n\u2716\u2716 Audio - Please specify the genre on submission\n\u2716\u2716 Please provide all your social media links for description.\n\u2716\u2716 Audio - Must be minimum 320kbps\n\n\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\nCopyright Info \u00a9\n\n\u2714 Be aware all music and pictures belongs to the original artists.\n\u2714 I am in no position to give anyone permission to use this.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 15,
+                    "timestamp": 1513789029
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-2dp4sCusKWU-Louis_Viallet_-_Fight_For_Glory_Epic_Choral_Orchestral_Action.NA",
+        "video_id": "2dp4sCusKWU",
+        "url": "https://www.youtube.com/watch?v=2dp4sCusKWU",
+        "title": "Louis Viallet - Fight For Glory (Epic Choral Orchestral Action)",
+        "duration": 83,
+        "thumbnail": "https://i.ytimg.com/vi/2dp4sCusKWU/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Facebook: https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.facebook.com%2FTrailerMusicWorld&v=2dp4sCusKWU&redir_token=Vx3i8W3zWEZxyPy5RnXeKVI7DMt8MTUxNDAzNTQ5MUAxNTEzOTQ5MDkx&event=video_description\nMain Channel: http://www.youtube.com/user/TrailerMusicWorldI\n\n\nFacebook: https://www.facebook.com/LouisViallet63\nYouTube: https://www.youtube.com/channel/UCgEWGMy_n5Ke3agk3RRVkBA\nBandcamp: https://louisviallet.bandcamp.com\n\n\nTitle: Fight For Glory\nComposer: Louis Viallet\nGenre: Epic Powerful Orchestral Action Trailer Score\nImage: https://www.youtube.com/redirect?q=http%3A%2F%2Fwall.alphacoders.com%2Fbig.php%3Fi%3D715943&v=2dp4sCusKWU&redir_token=Vx3i8W3zWEZxyPy5RnXeKVI7DMt8MTUxNDAzNTQ5MUAxNTEzOTQ5MDkx&event=video_description",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 16,
+                    "timestamp": 1513949458
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-87cfHWjsuQQ-MB_Warband_Perisno_Main_Theme_Mythic_Legends.NA",
+        "video_id": "87cfHWjsuQQ",
+        "url": "https://www.youtube.com/watch?v=87cfHWjsuQQ",
+        "title": "MB Warband Perisno Main Theme / Mythic Legends",
+        "duration": 232,
+        "thumbnail": "https://i.ytimg.com/vi/87cfHWjsuQQ/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "This surely is a wonderful music ;)\nThe True Song itself is named: \"Mythic Legends\" by Peter Crowley!",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 17,
+                    "timestamp": 1513949458
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-f_sMuo8Lujg-Narnia_-_The_Battle_Song.NA",
+        "video_id": "f_sMuo8Lujg",
+        "url": "https://www.youtube.com/watch?v=f_sMuo8Lujg",
+        "title": "Narnia - The Battle Song",
+        "duration": 429,
+        "thumbnail": "https://i.ytimg.com/vi/f_sMuo8Lujg/hqdefault.jpg",
+        "thumbnail_brightness": 109.54953832327871,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 18,
+                    "timestamp": 1514300260
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-m3zvVGJrTP8-Hans_Zimmer_-_No_Time_For_Caution_Interstellar_Soundtrack_Docking_Interstellar_OST.NA",
+        "video_id": "m3zvVGJrTP8",
+        "url": "https://www.youtube.com/watch?v=m3zvVGJrTP8",
+        "title": "Hans Zimmer - No Time For Caution (Interstellar Soundtrack)(Docking)(Interstellar OST)",
+        "duration": 240,
+        "thumbnail": "https://i.ytimg.com/vi/m3zvVGJrTP8/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Interstellar Docking Scene Music - No Time For Caution - Hans Zimmer\n\nInterstellar is a 2014 science fiction film directed by Christopher Nolan. Starring Matthew McConaughey, Anne Hathaway, Jessica Chastain, and Michael Caine, the film features a team of space travelers who travel through a wormhole in search of a new habitable planet. It was written by Jonathan Nolan and Christopher Nolan, Christopher combined his idea with an existing script by his brother that was developed in 2007 for Paramount Pictures and producer Lynda Obst. Nolan is producing the film with Obst and Emma Thomas. Theoretical physicist Kip Thorne, whose works inspired the film, acted as both an executive producer and a scientific consultant for the film.\n\nWarner Bros., who produced and distributed some of Nolan's previous films, negotiated with Paramount, traditionally a rival studio, to have a financial stake in Interstellar. Legendary Pictures, which formerly partnered with Warner Bros., also sought a stake. The three companies co-financed the film, and the production companies Syncopy and Lynda Obst Productions were enlisted. The director also hired cinematographer Hoyte van Hoytema since his long-time collaborator Wally Pfister was busy working on Transcendence, his directorial debut. Interstellar was filmed with a combination of anamorphic 35 mm and IMAX 70 mm film photography. Filming took place in the last quarter of 2013 in locations in the province of Alberta, Canada, in southern Iceland, and in Los Angeles, California. The visual effects company Double Negative created visual effects for Interstellar.\n\nInterstellar premiered on October 26, 2014 in Los Angeles, California. Commercially, it is scheduled for a limited release in North America (United States and Canada) on November 5, 2014 and a wide release on November 7, 2014. It will also be released in Belgium, France and Switzerland on November 5, 2014 and in additional territories in the following days, including the United Kingdom on November 7, 2014. For the limited release in North America, it will be released in 70 mm and 35 mm film formats in approximately 240 theaters which still project the formats, including at least 41 70 mm IMAX theaters. For the wide release, it will expand to theaters that will show it in digital format. Paramount Pictures will distribute the film in North America, and Warner Bros. will distribute it in the remaining territories\n\nInterstellar OST - No Time For Caution - Hans Zimmer (Original Motion Picture Soundtrack)\n\n\nInterstellar Docking Soundtrack\n\n\n\n\nInterstellar OST,Interstellar Soundtrack,Interstellar Docking,Interstellar No Time For Caution,Interstellar\n\n\uc778\ud130\uc2a4\ud154\ub77c,\uc778\ud130\uc2a4\ud154\ub77c \uc74c\uc545,\uc778\ud130\uc2a4\ud154\ub77c \ub3c4\ud0b9,\uc778\ud130\uc2a4\ud154\ub77c \uba85\uc7a5\uba74,\uc778\ud130\uc2a4\ud154\ub77c \ud2b8\ub808\uc77c\ub7ec,\uc778\ud130\uc2a4\ud154\ub77c OST",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 19,
+                    "timestamp": 1513949458
+                }
+            }
+        },
+        "song_title": "No Time for Caution",
+        "artist": "Hans Zimmer",
+        "artist_image": "https://i.scdn.co/image/94ad4486b19037fa88ed58a946698365f4a7bb73",
+        "cover": "https://i.scdn.co/image/eed15df0d0849836293b9f787fabf077ce9e9f2e",
+        "album": "Interstellar: Original Motion Picture Soundtrack (Deluxe Digital Version)",
+        "spotify_data": {
+            "id": "1yzSSn5Sj1azuo7RgwvDb3",
+            "name": "No Time for Caution",
+            "artists": [
+                {
+                    "id": "0YC192cP3KPCRWx8zr8MfZ",
+                    "name": "Hans Zimmer",
+                    "images": [
+                        {
+                            "height": 563,
+                            "url": "https://i.scdn.co/image/14657235e8724181f8b32c6bfa54cdbf86d70852",
+                            "width": 1000
+                        },
+                        {
+                            "height": 360,
+                            "url": "https://i.scdn.co/image/960a8d4afdf777c543618e384428aacffdcf517a",
+                            "width": 640
+                        },
+                        {
+                            "height": 113,
+                            "url": "https://i.scdn.co/image/94ad4486b19037fa88ed58a946698365f4a7bb73",
+                            "width": 200
+                        },
+                        {
+                            "height": 36,
+                            "url": "https://i.scdn.co/image/3d05c3dffd54fb06b0191f258e88ca3b5832250f",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "soundtrack"
+                    ],
+                    "popularity": 81,
+                    "uri": "spotify:artist:0YC192cP3KPCRWx8zr8MfZ",
+                    "href": "https://open.spotify.com/artist/0YC192cP3KPCRWx8zr8MfZ"
+                }
+            ],
+            "artist": "Hans Zimmer",
+            "cover_url": "https://i.scdn.co/image/eed15df0d0849836293b9f787fabf077ce9e9f2e",
+            "duration": 246.271,
+            "album": {
+                "id": "5OVGwMCexoHavOar6v4al5",
+                "name": "Interstellar: Original Motion Picture Soundtrack (Deluxe Digital Version)",
+                "artists": [
+                    {
+                        "id": "0YC192cP3KPCRWx8zr8MfZ",
+                        "name": "Hans Zimmer",
+                        "images": [
+                            {
+                                "height": 563,
+                                "url": "https://i.scdn.co/image/14657235e8724181f8b32c6bfa54cdbf86d70852",
+                                "width": 1000
+                            },
+                            {
+                                "height": 360,
+                                "url": "https://i.scdn.co/image/960a8d4afdf777c543618e384428aacffdcf517a",
+                                "width": 640
+                            },
+                            {
+                                "height": 113,
+                                "url": "https://i.scdn.co/image/94ad4486b19037fa88ed58a946698365f4a7bb73",
+                                "width": 200
+                            },
+                            {
+                                "height": 36,
+                                "url": "https://i.scdn.co/image/3d05c3dffd54fb06b0191f258e88ca3b5832250f",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "soundtrack"
+                        ],
+                        "popularity": 81,
+                        "uri": "spotify:artist:0YC192cP3KPCRWx8zr8MfZ",
+                        "href": "https://open.spotify.com/artist/0YC192cP3KPCRWx8zr8MfZ"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/eed15df0d0849836293b9f787fabf077ce9e9f2e",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ad59534ffa0a7b3477cec616f9fc3e2edab71e06",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/398054462a0f56f58f05482b9beb3ebfb31cda15",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:5OVGwMCexoHavOar6v4al5"
+            },
+            "popularity": 56,
+            "uri": "spotify:track:1yzSSn5Sj1azuo7RgwvDb3",
+            "query": "Hans Zimmer - No Time For Caution",
+            "certainty": 0.96875
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-fpN2HFSFZCE-One_Piece_Luffy_s_Fierce_Attack_Extended_Version.NA",
+        "video_id": "fpN2HFSFZCE",
+        "url": "https://www.youtube.com/watch?v=fpN2HFSFZCE",
+        "title": "One Piece Luffy's Fierce Attack [Extended Version]",
+        "duration": 370,
+        "thumbnail": "https://i.ytimg.com/vi/fpN2HFSFZCE/maxresdefault.jpg",
+        "thumbnail_brightness": 175.6244128471367,
+        "description": "Luffy's Fierce Attack One Piece Epic Battle Theme     Luffy Moukou",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 20,
+                    "timestamp": 1514293569
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-K6rtEH9rqxw-Pearl_Harbor_-_Brothers.NA",
+        "video_id": "K6rtEH9rqxw",
+        "url": "https://www.youtube.com/watch?v=K6rtEH9rqxw",
+        "title": "Pearl Harbor - Brothers",
+        "duration": 245,
+        "thumbnail": "https://i.ytimg.com/vi/K6rtEH9rqxw/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "this is the sountrack from the movie Pearl Harbor its called Brothers\n\nits composed by hans zimmer",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 21,
+                    "timestamp": 1513949458
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-ZHW8X-8GUGI-Petar_Milinkovi_-_Armies_of_Heaven_Epic_Heroic_Uplifting_Orchestral.NA",
+        "video_id": "ZHW8X-8GUGI",
+        "url": "https://www.youtube.com/watch?v=ZHW8X-8GUGI",
+        "title": "Petar Milinkovic - Armies of Heaven",
+        "duration": 277,
+        "thumbnail": "https://i.ytimg.com/vi/ZHW8X-8GUGI/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Auto-Replay: https://www.youtube.com/redirect?event=video_description&v=ZHW8X-8GUGI&q=http%3A%2F%2Fwww.epic-music-world.com%2Freplay%2F%3Fid%3DZHW8X-8GUGI&redir_token=ezMPuqbrecwu6RhyRjEUHTIyAHB8MTUxNDAzMzY2N0AxNTEzOTQ3MjY3\nLearn how to make trailer music for Hollywood trailers: https://goo.gl/vc9SR7\n\u2582\n\nEpic Music World Websites:\n\n\u25b8 Keep Me Alive (Donation): https://goo.gl/iIsogi\n\u25b8 Epic Music World I: http://bit.ly/1Oo4n11\n\u25b8 Facebook: https://www.youtube.com/redirect?event=video_description&v=ZHW8X-8GUGI&q=https%3A%2F%2Fwww.facebook.com%2FEpicMusicWorld2%2F&redir_token=ezMPuqbrecwu6RhyRjEUHTIyAHB8MTUxNDAzMzY2N0AxNTEzOTQ3MjY3\n\u25b8 Website: http://www.epic-music-world.com\n\u25b8 Soundcloud: https://soundcloud.com/epicmusicworld\n\u25b8 Instagram: https://www.youtube.com/redirect?event=video_description&v=ZHW8X-8GUGI&q=https%3A%2F%2Fwww.instagram.com%2Fepicmusicworld%2F&redir_token=ezMPuqbrecwu6RhyRjEUHTIyAHB8MTUxNDAzMzY2N0AxNTEzOTQ3MjY3\n\u2582\n\nArtist Websites: Petar Milinkovi\u0107\n\n\u25b8 Audiojungle: https://www.youtube.com/redirect?event=video_description&v=ZHW8X-8GUGI&q=https%3A%2F%2Faudiojungle.net%2Fitem%2Farmies-of-heaven%2F17266911&redir_token=ezMPuqbrecwu6RhyRjEUHTIyAHB8MTUxNDAzMzY2N0AxNTEzOTQ3MjY3\n\u25b8 Facebook: https://www.youtube.com/redirect?event=video_description&v=ZHW8X-8GUGI&q=https%3A%2F%2Fwww.facebook.com%2Ftalekeeperstudios&redir_token=ezMPuqbrecwu6RhyRjEUHTIyAHB8MTUxNDAzMzY2N0AxNTEzOTQ3MjY3\n\u25b8 Facebook Personal: https://www.youtube.com/redirect?event=video_description&v=ZHW8X-8GUGI&q=https%3A%2F%2Fwww.facebook.com%2Fpeter.milinkovic&redir_token=ezMPuqbrecwu6RhyRjEUHTIyAHB8MTUxNDAzMzY2N0AxNTEzOTQ3MjY3\n\u25b8 Official: http://talekeeper-studios.com/\n\u2582\n\nVideo Details:\n\nTitle: Armies of Heaven\nArtist: Talekeeper Music\nComposer: Petar Milinkovi\u0107\n\nAnimation by Realtime Motion Studios: http://realtime-motion-studios.r4u.nl/\n\u2582\n\nImage Artist: litkung\n\n\u25b8 Image: https://www.youtube.com/redirect?event=video_description&v=ZHW8X-8GUGI&q=http%3A%2F%2Flitkung.deviantart.com%2Fart%2FBrave-Frontier-Scarlet-Rhapsody-499205018&redir_token=ezMPuqbrecwu6RhyRjEUHTIyAHB8MTUxNDAzMzY2N0AxNTEzOTQ3MjY3\n\u25b8 Image Artist: http://litkung.deviantart.com/\n\u25b8 Facebook: https://www.facebook.com/LitkungV1/\n\u2582\n\nNote for the new Artists:\n\n** If you would like to submit your track for promotion,\n** If you have important other questions,\n** If you want to adding any kind of information which belongs to the video (audio or visual)\n** If you have any problem with audio or visual stuff in my videos\n\nthen please come to my site: https://www.youtube.com/redirect?event=video_description&v=ZHW8X-8GUGI&q=https%3A%2F%2Fwww.facebook.com%2FEpicMusicWorld2%2F&redir_token=ezMPuqbrecwu6RhyRjEUHTIyAHB8MTUxNDAzMzY2N0AxNTEzOTQ3MjY3\n\nNote:\nPlease note that submitting tracks does not guarantee upload.\n\u279d To keep the quality of my channel i won't upload every single soundtrack, please compare your music to the other uploads, to get an idea what the standards for uploads are.\n\u279d If you don\u2019t get a response back, then your track was not chosen.\n\u2582\n\nCopyright Info \u00a9\n\n\u2714 Be aware all music and pictures belongs to the original artists.\n\u2714 This video was given a special license directly from the artists.\n\u2716 I am in no position to give anyone permission to use this\n\n.\u279d Please ask the artists and NOT me for permission !!!",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 22,
+                    "timestamp": 1513949458
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-27mB8verLK8-Pirates_Of_The_Caribbean_Theme_Song.NA",
+        "video_id": "27mB8verLK8",
+        "url": "https://www.youtube.com/watch?v=27mB8verLK8",
+        "title": "Pirates Of The Caribbean Theme Song",
+        "duration": 173,
+        "thumbnail": "https://i.ytimg.com/vi/27mB8verLK8/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Theme Song From Pirates Of The Caribbean",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 23,
+                    "timestamp": 1513953474
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-QN9SduuzoC4-Randy_Dominguez_-_Warrior_Epic_Powerful_Heroic_Action_Score.NA",
+        "video_id": "QN9SduuzoC4",
+        "url": "https://www.youtube.com/watch?v=QN9SduuzoC4",
+        "title": "Randy Dominguez - Warrior",
+        "duration": 248,
+        "thumbnail": "https://i.ytimg.com/vi/QN9SduuzoC4/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Auto-Replay: https://www.youtube.com/redirect?q=http%3A%2F%2Fwww.epic-music-world.com%2Freplay%2F%3Fid%3DQN9SduuzoC4&v=QN9SduuzoC4&redir_token=k6o8mH6j4kjW0zS63iHiL_jGJDB8MTUxNDAzMzIwMUAxNTEzOTQ2ODAx&event=video_description\n\u2582\n\nEpic Music World Websites:\n\n\u25b8 Keep Me Alive (Donation): https://goo.gl/iIsogi\n\u25b8 Epic Music World I: http://bit.ly/1Oo4n11\n\u25b8 Facebook: https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.facebook.com%2FEpicMusicWorld2%2F&v=QN9SduuzoC4&redir_token=k6o8mH6j4kjW0zS63iHiL_jGJDB8MTUxNDAzMzIwMUAxNTEzOTQ2ODAx&event=video_description\n\u25b8 Website: http://www.epic-music-world.com\n\u25b8 Soundcloud: https://soundcloud.com/epicmusicworld\n\u25b8 Instagram: https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.instagram.com%2Fepicmusicworld%2F&v=QN9SduuzoC4&redir_token=k6o8mH6j4kjW0zS63iHiL_jGJDB8MTUxNDAzMzIwMUAxNTEzOTQ2ODAx&event=video_description\n\u2582\n\nArtist Websites: Randy Dominguez\n\n\u25b8 Instagram - https://www.instagram.com/randydmusic/\n\u25b8 Soundcloud - https://www.youtube.com/redirect?q=https%3A%2F%2Fsoundcloud.com%2Frandydominguezmusic&v=QN9SduuzoC4&redir_token=k6o8mH6j4kjW0zS63iHiL_jGJDB8MTUxNDAzMzIwMUAxNTEzOTQ2ODAx&event=video_description\n\u25b8 Facebook - https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.facebook.com%2Frandydominguezmusic&v=QN9SduuzoC4&redir_token=k6o8mH6j4kjW0zS63iHiL_jGJDB8MTUxNDAzMzIwMUAxNTEzOTQ2ODAx&event=video_description\n\u25b8 Twitter - https://www.twitter.com/randydcomposer\n\u2582\n\nVideo Details:\n\nTitle: Warrior\nComposer: Randy Dominguez\n\nAnimation by Realtime Motion Studios: http://realtime-motion-studios.r4u.nl/\n\u2582\n\nImage Artist: CGlas\n\n\u25b8 Image: https://www.youtube.com/redirect?q=http%3A%2F%2Fcglas.deviantart.com%2Fart%2FBronze-Crusader-505791855&v=QN9SduuzoC4&redir_token=k6o8mH6j4kjW0zS63iHiL_jGJDB8MTUxNDAzMzIwMUAxNTEzOTQ2ODAx&event=video_description\n\u25b8 Image Artist: http://cglas.deviantart.com/\n\u25b8 Contact: yonghuidesign@gmail.com\n\u25b8 Patreon: https://www.patreon.com/CGlas?ty=h\n\u25b8 Tumblr: http://cglas.tumblr.com/tagged/cglas\n\u25b8 Artstation: https://www.artstation.com/artist/cglas\n\u25b8 Facebook: https://www.facebook.com/CGlasDesign\n\u25b8 Twitter: https://twitter.com/glolas\n\u2582\n\nNote for the new Artists:\n\n** If you would like to submit your track for promotion,\n** If you have important other questions,\n** If you want to adding any kind of information which belongs to the video (audio or visual)\n** If you have any problem with audio or visual stuff in my videos\n\nthen please come to my site: http://on.fb.me/1BHngSt\n\nNote:\nPlease note that submitting tracks does not guarantee upload.\n\u279d To keep the quality of my channel i won't upload every single soundtrack, please compare your music to the other uploads, to get an idea what the standards for uploads are.\n\u279d If you don\u2019t get a response back, then your track was not chosen.\n\u2582\n\nCopyright Info \u00a9\n\n\u2714 Be aware all music and pictures belongs to the original artists.\n\u2714 This video was given a special license directly from the artists.\n\u2716 I am in no position to give anyone permission to use this\n\n.\u279d Please ask the artists and NOT me for permission !!!",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 24,
+                    "timestamp": 1513949458
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-yVIRcnlRKF8-Requiem_For_A_Dream_Full_Song_HD.NA",
+        "video_id": "yVIRcnlRKF8",
+        "url": "https://www.youtube.com/watch?v=yVIRcnlRKF8",
+        "title": "Requiem For A Dream Full Song HD",
+        "duration": 385,
+        "thumbnail": "https://i.ytimg.com/vi/yVIRcnlRKF8/maxresdefault.jpg",
+        "thumbnail_brightness": 67.88760736932302,
+        "description": "Requiem For A Dream Full Song",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 25,
+                    "timestamp": 1514295015
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-QF_2VmjzP9I-Robert_Slump_-_Unsung_Heroes_Epic_Powerful_Dramatic_Hybrid_Score.NA",
+        "video_id": "QF_2VmjzP9I",
+        "url": "https://www.youtube.com/watch?v=QF_2VmjzP9I",
+        "title": "Robert Slump - Unsung Heroes",
+        "duration": 147,
+        "thumbnail": "https://i.ytimg.com/vi/QF_2VmjzP9I/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Auto-Replay: https://www.youtube.com/redirect?v=QF_2VmjzP9I&event=video_description&redir_token=2AN6CKu3bafR81kV_fyETMGO68F8MTUxNDAzNTU1MEAxNTEzOTQ5MTUw&q=http%3A%2F%2Fwww.epic-music-world.com%2Freplay%2F%3Fid%3DQF_2VmjzP9I\n\u2582\n\nEpic Music World Websites:\n\n\u25b8 Epic Music World I: http://bit.ly/1Oo4n11\n\u25b8 Facebook: http://on.fb.me/1BHngSt\n\u25b8 Website: http://www.epic-music-world.com\n\u25b8 Soundcloud: https://soundcloud.com/epicmusicworld\n\u2582\n\nArtist Websites: Robert Slump\n\n\u25b8 Facebook: https://www.facebook.com/RobertSlump\n\u25b8Twitter: https://twitter.com/RobertSlump\n\u25b8Full Royalty Free Music Portfolio: http://audiojungle.net/user/RobertSlump\n\u2582\n\nVideo Details:\n\nTitle: Unsung Heroes\nComposer: Robert Slump\n\nAnimation by Realtime Motion Studios: http://realtime-motion-studios.r4u.nl/\n\u2582\n\nImage Artist: entroz\n\n\u25b8 Image: https://www.youtube.com/redirect?v=QF_2VmjzP9I&event=video_description&redir_token=2AN6CKu3bafR81kV_fyETMGO68F8MTUxNDAzNTU1MEAxNTEzOTQ5MTUw&q=http%3A%2F%2Fentroz.deviantart.com%2Fart%2FCliffside-Ritual-600278078\n\u25b8 Image Artist: http://entroz.deviantart.com/\n\u25b8 Email: egeusz@gmail.com\n\u2582\n\nNote for the new Artists:\n\n** If you would like to submit your track for promotion,\n** If you have important other questions,\n** If you want to adding any kind of information which belongs to the video (audio or visual)\n** If you have any problem with audio or visual stuff in my videos\n\nthen please come to my site: http://on.fb.me/1BHngSt\n\nNote:\nPlease note that submitting tracks does not guarantee upload. It depends on quality and style of the music.\n\u2582\n\nCopyright Info \u00a9\n\n\u2714 Be aware all music and pictures belongs to the original artists.\n\u2714 This video was given a special license directly from the artists.\n\u2716 I am in no position to give anyone permission to use this\n\n.\u279d Please ask the artists and NOT me for permission !!!",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 26,
+                    "timestamp": 1513949458
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-yftHyhH7oio-Saint_Seiya_Omega_OST_-_Eternal_Saints.NA",
+        "video_id": "yftHyhH7oio",
+        "url": "https://www.youtube.com/watch?v=yftHyhH7oio",
+        "title": "Saint Seiya Omega OST - Eternal Saints",
+        "duration": 246,
+        "thumbnail": "https://i.ytimg.com/vi/yftHyhH7oio/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 27,
+                    "timestamp": 1513950443
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-x7G-VZg6EFk-Snorre_Tidemand_-_Leap_Of_Faith_Epic_Powerful_Heroic_Score.NA",
+        "video_id": "x7G-VZg6EFk",
+        "url": "https://www.youtube.com/watch?v=x7G-VZg6EFk",
+        "title": "Snorre Tidemand - Leap Of Faith",
+        "duration": 198,
+        "thumbnail": "https://i.ytimg.com/vi/x7G-VZg6EFk/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Auto-Replay: https://www.youtube.com/redirect?q=http%3A%2F%2Fwww.epic-music-world.com%2Freplay%2F%3Fid%3Dx7G-VZg6EFk&v=x7G-VZg6EFk&event=video_description&redir_token=xIfTXD8L5fnP_SL0HSsSXTJU9Wt8MTUxNDAzNTYwMEAxNTEzOTQ5MjAw\n\u2582\n\nEpic Music World Websites:\n\n\u25b8 Keep Me Alive (Donation): https://goo.gl/iIsogi\n\u25b8 Epic Music World I: http://bit.ly/1Oo4n11\n\u25b8 Facebook: http://on.fb.me/1BHngSt\n\u25b8 Website: http://www.epic-music-world.com\n\u25b8 Soundcloud: https://soundcloud.com/epicmusicworld\n\u25b8 Instagram: https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.instagram.com%2Fepicmusicworld%2F&v=x7G-VZg6EFk&event=video_description&redir_token=xIfTXD8L5fnP_SL0HSsSXTJU9Wt8MTUxNDAzNTYwMEAxNTEzOTQ5MjAw\n\u25b8 Epic Music Library: https://goo.gl/HKv5Ah\n\u2582\n\nArtist Websites: Snorre Tidemand\n\n\u25b8 SoundCloud: https://soundcloud.com/tidemand\n\u25b8 Facebook: https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.facebook.com%2Fsnorretidemandcomposer%2F&v=x7G-VZg6EFk&event=video_description&redir_token=xIfTXD8L5fnP_SL0HSsSXTJU9Wt8MTUxNDAzNTYwMEAxNTEzOTQ5MjAw\n\u25b8 Youtube: https://www.youtube.com/channel/UCqg1aZfME_lCcgaK9_FIsXw\n\u2582\n\nVideo Details:\n\nTitle: Leap Of Faith\nArtist: Snorre Tidemand\n\u2582\n\nImage Artist: jacky5493\n\n\u25b8 Image: https://www.youtube.com/redirect?q=http%3A%2F%2Fjacky5493.deviantart.com%2Fart%2FOverwatch-Hanzo-610112226&v=x7G-VZg6EFk&event=video_description&redir_token=xIfTXD8L5fnP_SL0HSsSXTJU9Wt8MTUxNDAzNTYwMEAxNTEzOTQ5MjAw\n\u25b8 Image Artist: http://jacky5493.deviantart.com/\n\u25b8 Facebook: https://www.facebook.com/jackyartist/\n\u25b8 Pixiv: https://www.youtube.com/redirect?q=http%3A%2F%2Fwww.pixiv.net%2Fmember.php%3Fid%3D3342095&v=x7G-VZg6EFk&event=video_description&redir_token=xIfTXD8L5fnP_SL0HSsSXTJU9Wt8MTUxNDAzNTYwMEAxNTEzOTQ5MjAw\n\u2582\n\nNote for the new Artists:\n\n** If you would like to submit your track for promotion,\n** If you have important other questions,\n** If you want to adding any kind of information which belongs to the video (audio or visual)\n** If you have any problem with audio or visual stuff in my videos\n\nthen please come to my site: http://on.fb.me/1BHngSt\n\nNote:\nPlease note that submitting tracks does not guarantee upload.\n\u279d To keep the quality of my channel i won't upload every single soundtrack, please compare your music to the other uploads, to get an idea what the standards for uploads are.\n\u279d If you don\u2019t get a response back, then your track was not chosen.\n\u2582\n\nCopyright Info \u00a9\n\n\u2714 Be aware all music and pictures belongs to the original artists.\n\u2714 This video was given a special license directly from the artists.\n\u2716 I am in no position to give anyone permission to use this\n\n.\u279d Please ask the artists and NOT me for permission !!!",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 28,
+                    "timestamp": 1513949458
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-Tazx_vCZCv4-Soundmopi_-_Return_Of_The_Hero_Epic_Heroic_Choral_Action.NA",
+        "video_id": "Tazx_vCZCv4",
+        "url": "https://www.youtube.com/watch?v=Tazx_vCZCv4",
+        "title": "Soundmopi - Return of the Hero",
+        "duration": 241,
+        "thumbnail": "https://i.ytimg.com/vi/Tazx_vCZCv4/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Auto-Replay: https://www.youtube.com/redirect?q=http%3A%2F%2Fwww.epic-music-world.com%2Freplay%2F%3Fid%3DTazx_vCZCv4&event=video_description&v=Tazx_vCZCv4&redir_token=Ot9L0RoH9IrUlLjckHMMl8y7K0R8MTUxMzg3NDcxOEAxNTEzNzg4MzE4\n\u2582\n\nEpic Music World Websites:\n\n\u25b8 Keep Me Alive (Donation): https://goo.gl/iIsogi\n\u25b8 Epic Music World I: http://bit.ly/1Oo4n11\n\u25b8 Facebook: https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.facebook.com%2FEpicMusicWorld2%2F&event=video_description&v=Tazx_vCZCv4&redir_token=Ot9L0RoH9IrUlLjckHMMl8y7K0R8MTUxMzg3NDcxOEAxNTEzNzg4MzE4\n\u25b8 Website: http://www.epic-music-world.com\n\u25b8 Soundcloud: https://soundcloud.com/epicmusicworld\n\u25b8 Instagram: https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.instagram.com%2Fepicmusicworld%2F&event=video_description&v=Tazx_vCZCv4&redir_token=Ot9L0RoH9IrUlLjckHMMl8y7K0R8MTUxMzg3NDcxOEAxNTEzNzg4MzE4\n\u2582\n\nArtist Websites: Soundmopi\n\n\u25b8 Licence:\nhttps://www.youtube.com/redirect?q=http%3A%2F%2Faudiojungle.net%2Fitem%2Freturn-of-the-hero%2F17171682&event=video_description&v=Tazx_vCZCv4&redir_token=Ot9L0RoH9IrUlLjckHMMl8y7K0R8MTUxMzg3NDcxOEAxNTEzNzg4MzE4\n\n\u25b8 Audiojungle: http://audiojungle.net/user/soundmopi\n\u25b8 Twitter: https://twitter.com/Soundmopi\n\u25b8 Youtube:https://www.youtube.com/user/Soundmopi\n\u2582\n\nVideo Details:\n\nTitle: Return Of The Hero\nArtist: Soundmopi\n\nAnimation by Realtime Motion Studios: http://realtime-motion-studios.r4u.nl/\n\u2582\n\nImage Artist: raikoart\n\n\u25b8 Image: https://www.youtube.com/redirect?q=http%3A%2F%2Fraikoart.deviantart.com%2Fart%2FCommission-Roen-Deneith-627985078&event=video_description&v=Tazx_vCZCv4&redir_token=Ot9L0RoH9IrUlLjckHMMl8y7K0R8MTUxMzg3NDcxOEAxNTEzNzg4MzE4\n\u25b8 Image Artist: http://raikoart.deviantart.com/\n\u25b8 Instagram: https://www.instagram.com/raikoart/\n\u25b8 Twitter: https://twitter.com/raikoart\n\u25b8 Tumblr: http://raikoart.tumblr.com/\n\u25b8 Facebook: https://www.facebook.com/raikoart\n\u2582\n\nNote for the new Artists:\n\n** If you would like to submit your track for promotion,\n** If you have important other questions,\n** If you want to adding any kind of information which belongs to the video (audio or visual)\n** If you have any problem with audio or visual stuff in my videos\n\nthen please come to my site: http://on.fb.me/1BHngSt\n\nNote:\nPlease note that submitting tracks does not guarantee upload.\n\u279d To keep the quality of my channel i won't upload every single soundtrack, please compare your music to the other uploads, to get an idea what the standards for uploads are.\n\u279d If you don\u2019t get a response back, then your track was not chosen.\n\u2582\n\nCopyright Info \u00a9\n\n\u2714 Be aware all music and pictures belongs to the original artists.\n\u2714 This video was given a special license directly from the artists.\n\u2716 I am in no position to give anyone permission to use this\n\n.\u279d Please ask the artists and NOT me for permission !!!",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 29,
+                    "timestamp": 1513789029
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-qwJj2EpC8vg-Strength_of_a_Thousand_Men_-_Two_Steps_from_Hell.NA",
+        "video_id": "qwJj2EpC8vg",
+        "url": "https://www.youtube.com/watch?v=qwJj2EpC8vg",
+        "title": "Strength of a Thousand Men - Two Steps from Hell",
+        "duration": 399,
+        "thumbnail": "https://i.ytimg.com/vi/qwJj2EpC8vg/maxresdefault.jpg",
+        "thumbnail_brightness": 99.15340450948403,
+        "description": "https://www.youtube.com/redirect?v=qwJj2EpC8vg&redir_token=kCQpUYiwVgjajb5pcQ1QodHuyjF8MTUxNDM3ODQ2NkAxNTE0MjkyMDY2&event=video_description&q=https%3A%2F%2Fwww.instagram.com%2F_tobias_96_%2F%3Fhl%3Dde\nhttps://www.youtube.com/redirect?v=qwJj2EpC8vg&redir_token=kCQpUYiwVgjajb5pcQ1QodHuyjF8MTUxNDM3ODQ2NkAxNTE0MjkyMDY2&event=video_description&q=https%3A%2F%2Fswagillustrationfunnypanda.tumblr.com%2F\nI have no rights on the video but if you want to show some support, follow my friend:)",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 30,
+                    "timestamp": 1514296300
+                }
+            }
+        },
+        "song_title": "Strength of a Thousand Men",
+        "artist": "Thomas Bergersen & Two Steps from Hell",
+        "artist_image": "https://i.scdn.co/image/43da48b56b7dee24939fb2d8e5eb96a0164a9102",
+        "cover": "https://i.scdn.co/image/82bbde4d3da870ddc5aab746c5c06e9a84c64359",
+        "album": "Archangel",
+        "spotify_data": {
+            "id": "3GJZLvGXaVszYdSBLMtJFX",
+            "name": "Strength of a Thousand Men",
+            "artists": [
+                {
+                    "id": "6BF0bXbsdujMSMeFZBGcBq",
+                    "name": "Thomas Bergersen",
+                    "images": [
+                        {
+                            "height": 968,
+                            "url": "https://i.scdn.co/image/428477061b058bc6dbaa292640ffaa80fbb0df00",
+                            "width": 648
+                        },
+                        {
+                            "height": 956,
+                            "url": "https://i.scdn.co/image/42779feb6f2f0a34155e60a4164391ac4dc28ce8",
+                            "width": 640
+                        },
+                        {
+                            "height": 299,
+                            "url": "https://i.scdn.co/image/9cb6b539f282918d4dc6c956fac3420e5075abb4",
+                            "width": 200
+                        },
+                        {
+                            "height": 96,
+                            "url": "https://i.scdn.co/image/43da48b56b7dee24939fb2d8e5eb96a0164a9102",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "epicore",
+                        "scorecore",
+                        "soundtrack",
+                        "video game music"
+                    ],
+                    "popularity": 69,
+                    "uri": "spotify:artist:6BF0bXbsdujMSMeFZBGcBq",
+                    "href": "https://open.spotify.com/artist/6BF0bXbsdujMSMeFZBGcBq"
+                },
+                {
+                    "id": "2qvP9yerCZCS0U1gZU8wYp",
+                    "name": "Two Steps from Hell",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/4ce872b5ae495aad20f387e3b6a417500f58d00d",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/d3876d716c284adc6eb7d2297d58524ac343728a",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/13a701b394253cc61abbc54d61d4f20da252d28a",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "epicore",
+                        "scorecore",
+                        "soundtrack",
+                        "video game music"
+                    ],
+                    "popularity": 70,
+                    "uri": "spotify:artist:2qvP9yerCZCS0U1gZU8wYp",
+                    "href": "https://open.spotify.com/artist/2qvP9yerCZCS0U1gZU8wYp"
+                }
+            ],
+            "artist": "Thomas Bergersen & Two Steps from Hell",
+            "cover_url": "https://i.scdn.co/image/82bbde4d3da870ddc5aab746c5c06e9a84c64359",
+            "duration": 136.892,
+            "album": {
+                "id": "1TVpHhBK3pSTqizgLLh16s",
+                "name": "Archangel",
+                "artists": [
+                    {
+                        "id": "2qvP9yerCZCS0U1gZU8wYp",
+                        "name": "Two Steps from Hell",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/4ce872b5ae495aad20f387e3b6a417500f58d00d",
+                                "width": 640
+                            },
+                            {
+                                "height": 300,
+                                "url": "https://i.scdn.co/image/d3876d716c284adc6eb7d2297d58524ac343728a",
+                                "width": 300
+                            },
+                            {
+                                "height": 64,
+                                "url": "https://i.scdn.co/image/13a701b394253cc61abbc54d61d4f20da252d28a",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "epicore",
+                            "scorecore",
+                            "soundtrack",
+                            "video game music"
+                        ],
+                        "popularity": 70,
+                        "uri": "spotify:artist:2qvP9yerCZCS0U1gZU8wYp",
+                        "href": "https://open.spotify.com/artist/2qvP9yerCZCS0U1gZU8wYp"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/82bbde4d3da870ddc5aab746c5c06e9a84c64359",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/3d189d8b940bc747b1d2c5fe012df7729272e704",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/0ace594d2f8719ba10dc9d928393d4301f8d49a2",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:1TVpHhBK3pSTqizgLLh16s"
+            },
+            "popularity": 59,
+            "uri": "spotify:track:3GJZLvGXaVszYdSBLMtJFX",
+            "query": "Strength of a Thousand Men - Two Steps Hell",
+            "certainty": 0.7441860465116279
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-5-4XD-wbalY-John_Murphy_-_Sunshine_Adagio_in_D_Minor.NA",
+        "video_id": "5-4XD-wbalY",
+        "url": "https://www.youtube.com/watch?v=5-4XD-wbalY",
+        "title": "John Murphy - Sunshine (Adagio in D Minor)",
+        "duration": 266,
+        "thumbnail": "https://i.ytimg.com/vi/5-4XD-wbalY/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Re-Upload.\n\nJohn Murphy (born 4 March 1965) is an English film composer. He is a self-taught multi-instrumental musician who began his career in the 1980s working notably with The Lotus Eaters, Thomas Lang, Gary Wall (singer) and Claudia Br\u00fccken.\nMurphy is best known for composing the music for Guy Ritchie's Lock, Stock and Two Smoking Barrels, Michael Mann's Miami Vice, Matthew Vaughn's Kick-Ass, and the Danny Boyle films 28 Days Later, Millions, and Sunshine. His instrumental tracks \"In the House -- In a Heartbeat\" and \"Adagio in D Minor\" have been featured in a variety of TV shows, commercials and film trailers.\n\nSunshine is a 2007 British science fiction adventure thriller film directed by Danny Boyle. The film was adapted from a screenplay written by Alex Garland about the crew of a spacecraft on a dangerous mission to the Sun. In 2057, with the Earth in peril from the dying Sun, the crew is sent on a mission to reignite the star with a nuclear bomb with the mass of Manhattan. The script was based on a scientific back-story that took the characters on a psychological journey. The director cast a group of international actors for the film, and had the actors live together and learn about topics related to their roles, as a form of method acting. To have the actors realistically react to visual effects that would be implemented in post-production, the filmmakers constructed live sets to serve as cues.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 31,
+                    "timestamp": 1514234753
+                }
+            }
+        },
+        "song_title": "Sunshine (Adagio in D Minor)",
+        "artist": "John Murphy",
+        "artist_image": "https://i.scdn.co/image/1147fab4262966801eab420a65bfd20fa7922bcb",
+        "cover": "https://i.scdn.co/image/2802b0fa4ca97837a17efda14f98ad3fef6e84c3",
+        "album": "Sunshine (Adagio in D Minor)",
+        "spotify_data": {
+            "id": "50ExtKr8j9cHTY3OEw282G",
+            "name": "Sunshine (Adagio in D Minor)",
+            "artists": [
+                {
+                    "id": "4UGoqrmNHDJ166XD6DtZni",
+                    "name": "John Murphy",
+                    "images": [
+                        {
+                            "height": 540,
+                            "url": "https://i.scdn.co/image/0bfa4f0ba0f22882dc28d5a52541e31a83f837e9",
+                            "width": 1000
+                        },
+                        {
+                            "height": 346,
+                            "url": "https://i.scdn.co/image/be29758491767e252a334ff3a410c0aa1760a561",
+                            "width": 640
+                        },
+                        {
+                            "height": 108,
+                            "url": "https://i.scdn.co/image/2df608e5607ecb4b67879418e15f333e6ff51a69",
+                            "width": 200
+                        },
+                        {
+                            "height": 35,
+                            "url": "https://i.scdn.co/image/1147fab4262966801eab420a65bfd20fa7922bcb",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "epicore",
+                        "scorecore",
+                        "soundtrack",
+                        "video game music"
+                    ],
+                    "popularity": 50,
+                    "uri": "spotify:artist:4UGoqrmNHDJ166XD6DtZni",
+                    "href": "https://open.spotify.com/artist/4UGoqrmNHDJ166XD6DtZni"
+                }
+            ],
+            "artist": "John Murphy",
+            "cover_url": "https://i.scdn.co/image/2802b0fa4ca97837a17efda14f98ad3fef6e84c3",
+            "duration": 284.834,
+            "album": {
+                "id": "03AWGUwhN41Glz0JKCZ7a8",
+                "name": "Sunshine (Adagio in D Minor)",
+                "artists": [
+                    {
+                        "id": "4UGoqrmNHDJ166XD6DtZni",
+                        "name": "John Murphy",
+                        "images": [
+                            {
+                                "height": 540,
+                                "url": "https://i.scdn.co/image/0bfa4f0ba0f22882dc28d5a52541e31a83f837e9",
+                                "width": 1000
+                            },
+                            {
+                                "height": 346,
+                                "url": "https://i.scdn.co/image/be29758491767e252a334ff3a410c0aa1760a561",
+                                "width": 640
+                            },
+                            {
+                                "height": 108,
+                                "url": "https://i.scdn.co/image/2df608e5607ecb4b67879418e15f333e6ff51a69",
+                                "width": 200
+                            },
+                            {
+                                "height": 35,
+                                "url": "https://i.scdn.co/image/1147fab4262966801eab420a65bfd20fa7922bcb",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "epicore",
+                            "scorecore",
+                            "soundtrack",
+                            "video game music"
+                        ],
+                        "popularity": 50,
+                        "uri": "spotify:artist:4UGoqrmNHDJ166XD6DtZni",
+                        "href": "https://open.spotify.com/artist/4UGoqrmNHDJ166XD6DtZni"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/2802b0fa4ca97837a17efda14f98ad3fef6e84c3",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/c338a56e1befed3478fc9e751f13be95562ccf35",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/82dee41b888af12866c2678291cdbfeaa371f1d9",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:03AWGUwhN41Glz0JKCZ7a8"
+            },
+            "popularity": 49,
+            "uri": "spotify:track:50ExtKr8j9cHTY3OEw282G",
+            "query": "John Murphy - Sunshine",
+            "certainty": 0.9523809523809523
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-_0UJk4EUzB0-Sunshine_Soundtrack_~_Surface_of_the_Sun_~_Film_Version_~_High_Definition_Audio.NA",
+        "video_id": "_0UJk4EUzB0",
+        "url": "https://www.youtube.com/watch?v=_0UJk4EUzB0",
+        "title": "Sunshine Soundtrack ~ Surface of the Sun ~ Film Version ~ High Definition Audio",
+        "duration": 293,
+        "thumbnail": "https://i.ytimg.com/vi/_0UJk4EUzB0/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "An edit of \"Sunshine\" and \"Capa's Jump\" to match the film version, in full High Definition audio. Used in many trailers and films, including X-Men Days of Future Past and Kick-Ass.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 32,
+                    "timestamp": 1514234753
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache/audio_cache/youtube-3-aUGjLBThM-A_Land_of_War_and_Poetry_feat._Jeremy_Soule_-_TESO_-_Morrowind_Main_Theme_HD.NA",
+        "video_id": "3-aUGjLBThM",
+        "url": "https://www.youtube.com/watch?v=3-aUGjLBThM",
+        "title": "TESO Morrowind Main Theme",
+        "duration": 240,
+        "thumbnail": "https://i.ytimg.com/vi/3-aUGjLBThM/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "The main theme as heard on The Elder Scrolls Online: Morrowind log-in screen.\nDisclaimer: I don't own any copyright for this music. This track is shared for non-profit use without infringing on the copyright owners's rights at the best of my knowledge.\n_____\nLyrics, in Ald Chimeris...\"Ald Chimeris\" being the Elvish precursor tongue of the Dark Elves that\u2019s similar to Ayleidoon and descended from Ehlnofex. (Thanks to LoreMaster Lawrence Schick for that LoreMorsel.)\n\nResdayniil kan tarcel\nGhardooni ye fevel\nArcta nu malatanya\nVengha ehlnada-dra\nNu nu vane metanane\n\nLyrics, in English\n\nResdayn folk, dare resist\nInvaders and weakness\nWe must face the truth of life\nVenerate the god-ancestors\nWe chose for ourselves",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 33,
+                    "timestamp": 1513789029
+                }
+            }
+        },
+        "song_title": "TESO Morrowind Main Theme",
+        "artist": "Brad Derrick & Jeremy Soule",
+        "artist_image": "https://i.scdn.co/image/4323ac1814377275c0082897caef3fb3d9665ca7",
+        "cover": "https://i.scdn.co/image/c0f5a65d557cb760f0eea8ba18d2a72e275eb87b",
+        "album": "The Elder Scrolls Online: Morrowind (Original Game Soundtrack)"
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-opP4PcZ7aN4-Pearl_Harbor_Soundtrack_-_Tennessee_Hans_Zimmer.NA",
+        "video_id": "opP4PcZ7aN4",
+        "url": "https://www.youtube.com/watch?v=opP4PcZ7aN4",
+        "title": "Pearl Harbor Soundtrack - Tennessee (Hans Zimmer)",
+        "duration": 224,
+        "thumbnail": "https://i.ytimg.com/vi/opP4PcZ7aN4/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "The theme song to the movie \"Pearl Harbor\". By Hans Zimmer.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 34,
+                    "timestamp": 1513949458
+                }
+            }
+        },
+        "song_title": "Tennessee (Theme From \"Pearl Harbor\")",
+        "artist": "Pianoramix",
+        "artist_image": "https://i.scdn.co/image/d17b45bf8b46b6cfaa65b9bfbbad8c6d1d4f29dc",
+        "cover": "https://i.scdn.co/image/e6e569db9b468bab3f67494a7f1c453207f6eff1",
+        "album": "20 Classic Piano Movie Themes",
+        "spotify_data": {
+            "id": "3Z06EliZoGmilYjkYlwk1r",
+            "name": "Tennessee (Theme From \"Pearl Harbor\")",
+            "artists": [
+                {
+                    "id": "6j72UsuAqGlOse1erEyNOa",
+                    "name": "Pianoramix",
+                    "images": [
+                        {
+                            "height": 634,
+                            "url": "https://i.scdn.co/image/c29fccbb84c370937bcf9595cb08bc4aaa9e0156",
+                            "width": 640
+                        },
+                        {
+                            "height": 317,
+                            "url": "https://i.scdn.co/image/808f77d342eca84f5deb4757a9fd92cd2f80da83",
+                            "width": 320
+                        },
+                        {
+                            "height": 158,
+                            "url": "https://i.scdn.co/image/d17b45bf8b46b6cfaa65b9bfbbad8c6d1d4f29dc",
+                            "width": 160
+                        }
+                    ],
+                    "genres": [
+                        "classify"
+                    ],
+                    "popularity": 58,
+                    "uri": "spotify:artist:6j72UsuAqGlOse1erEyNOa",
+                    "href": "https://open.spotify.com/artist/6j72UsuAqGlOse1erEyNOa"
+                }
+            ],
+            "artist": "Pianoramix",
+            "cover_url": "https://i.scdn.co/image/e6e569db9b468bab3f67494a7f1c453207f6eff1",
+            "duration": 222.473,
+            "album": {
+                "id": "0NCPe0RUTNa7V6l2g7PG9y",
+                "name": "20 Classic Piano Movie Themes",
+                "artists": [
+                    {
+                        "id": "6j72UsuAqGlOse1erEyNOa",
+                        "name": "Pianoramix",
+                        "images": [
+                            {
+                                "height": 634,
+                                "url": "https://i.scdn.co/image/c29fccbb84c370937bcf9595cb08bc4aaa9e0156",
+                                "width": 640
+                            },
+                            {
+                                "height": 317,
+                                "url": "https://i.scdn.co/image/808f77d342eca84f5deb4757a9fd92cd2f80da83",
+                                "width": 320
+                            },
+                            {
+                                "height": 158,
+                                "url": "https://i.scdn.co/image/d17b45bf8b46b6cfaa65b9bfbbad8c6d1d4f29dc",
+                                "width": 160
+                            }
+                        ],
+                        "genres": [
+                            "classify"
+                        ],
+                        "popularity": 58,
+                        "uri": "spotify:artist:6j72UsuAqGlOse1erEyNOa",
+                        "href": "https://open.spotify.com/artist/6j72UsuAqGlOse1erEyNOa"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/e6e569db9b468bab3f67494a7f1c453207f6eff1",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/757ca6768b9e8d378a5291a7f739766a4a151b34",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ddfed76cba4edef0a22c27084b130c008a5dc65e",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:0NCPe0RUTNa7V6l2g7PG9y"
+            },
+            "popularity": 42,
+            "uri": "spotify:track:3Z06EliZoGmilYjkYlwk1r",
+            "query": "Pearl Harbor - Tennessee",
+            "certainty": 0.6363636363636364
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-LLhBEeT4wQg-Hans_Zimmer_-_The_Crown_Main_Title_2016.NA",
+        "video_id": "LLhBEeT4wQg",
+        "url": "https://www.youtube.com/watch?v=LLhBEeT4wQg",
+        "title": "Hans Zimmer - The Crown Main Title (2016)",
+        "duration": 84,
+        "thumbnail": "https://i.ytimg.com/vi/LLhBEeT4wQg/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Original theme from NETFLIX's The Crown.\nThe Crown is an American-British television drama series, created and written by Peter Morgan and produced by Left Bank Pictures for Netflix. The show is a biographical story about the reign of Queen Elizabeth II of the United Kingdom.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 35,
+                    "timestamp": 1513953474
+                }
+            }
+        },
+        "song_title": "The Crown Main Title",
+        "artist": "Hans Zimmer",
+        "artist_image": "https://i.scdn.co/image/3d05c3dffd54fb06b0191f258e88ca3b5832250f",
+        "cover": "https://i.scdn.co/image/04cae5d665de23227aafad28172faaf83adab7c4",
+        "album": "The Crown: Season One (Soundtrack from the Netflix Original Series)",
+        "spotify_data": {
+            "id": "52IkG0BbNmrz4zUcnsN7Uf",
+            "name": "The Crown Main Title",
+            "artists": [
+                {
+                    "id": "0YC192cP3KPCRWx8zr8MfZ",
+                    "name": "Hans Zimmer",
+                    "images": [
+                        {
+                            "height": 563,
+                            "url": "https://i.scdn.co/image/14657235e8724181f8b32c6bfa54cdbf86d70852",
+                            "width": 1000
+                        },
+                        {
+                            "height": 360,
+                            "url": "https://i.scdn.co/image/960a8d4afdf777c543618e384428aacffdcf517a",
+                            "width": 640
+                        },
+                        {
+                            "height": 113,
+                            "url": "https://i.scdn.co/image/94ad4486b19037fa88ed58a946698365f4a7bb73",
+                            "width": 200
+                        },
+                        {
+                            "height": 36,
+                            "url": "https://i.scdn.co/image/3d05c3dffd54fb06b0191f258e88ca3b5832250f",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "soundtrack"
+                    ],
+                    "popularity": 81,
+                    "uri": "spotify:artist:0YC192cP3KPCRWx8zr8MfZ",
+                    "href": "https://open.spotify.com/artist/0YC192cP3KPCRWx8zr8MfZ"
+                }
+            ],
+            "artist": "Hans Zimmer",
+            "cover_url": "https://i.scdn.co/image/04cae5d665de23227aafad28172faaf83adab7c4",
+            "duration": 84.093,
+            "album": {
+                "id": "6ng66yiXAHS3lYzt7C6AD5",
+                "name": "The Crown: Season One (Soundtrack from the Netflix Original Series)",
+                "artists": [
+                    {
+                        "id": "0LyfQWJT6nXafLPZqxe9Of",
+                        "name": "Various Artists",
+                        "images": [],
+                        "genres": [],
+                        "popularity": 0,
+                        "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of",
+                        "href": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/04cae5d665de23227aafad28172faaf83adab7c4",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/17ba9cd47d7f931b66177ae083d2278364f3e0eb",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/89007eafeef95b851e1f216030bb540d64e155ad",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:6ng66yiXAHS3lYzt7C6AD5"
+            },
+            "popularity": 42,
+            "uri": "spotify:track:52IkG0BbNmrz4zUcnsN7Uf",
+            "query": "Hans Zimmer - The Crown Main Title",
+            "certainty": 0.9696969696969697
+        }
+    },
+    {
+        "version": 103,
+        "type": "DiscogsEntry",
+        "expected_filename": "cache/audio_cache/youtube-eHFA_wEK_00-The_Dark_Knight_Rises_-_Main_Theme.NA",
+        "video_id": "eHFA_wEK_00",
+        "url": "https://www.youtube.com/watch?v=eHFA_wEK_00",
+        "title": "The Dark Knight Rises - Main Theme",
+        "duration": 463,
+        "thumbnail": "https://i.ytimg.com/vi/eHFA_wEK_00/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "The main theme of The Dark Knight Rises directed by Christopher Nolan. Soundtrack composed by Hans Zimmer. Christian Bale stars as The Batman, Anne Hathaway as Catwoman/Selina Kyle and Tom Hardy stars as Bane, Batman's nemesis. Watch in 1080p HD for best experience.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 36,
+                    "timestamp": 1513949458
+                }
+            }
+        },
+        "song_title": "The Dark Knight Rises: Main Theme",
+        "artist": "Hans Zimmer",
+        "artist_image": "https://img.discogs.com/yf2Yp-guB2Wnlyh-I5SuLlCtUmQ=/600x600/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-59656-1249632712.png.jpg",
+        "cover": "https://img.discogs.com/rtgbDzxRWqRPb_7-mBRw9xI3m-s=/fit-in/600x593/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-9875447-1487781666-1347.jpeg.jpg",
+        "album": "The Classics"
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-0P47yvI7SWM-The_Pacific_-_Honor_Soundtrack_Main_Title_Theme_by_Hans_Zimmer.NA",
+        "video_id": "0P47yvI7SWM",
+        "url": "https://www.youtube.com/watch?v=0P47yvI7SWM",
+        "title": "The Pacific - Honor Soundtrack (Main Title Theme by Hans Zimmer)",
+        "duration": 178,
+        "thumbnail": "https://i.ytimg.com/vi/0P47yvI7SWM/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "The Pacific - Honor Soundtrack (Main Title Theme by Hans Zimmer)",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 37,
+                    "timestamp": 1513789029
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-DzxNfni04CI-Game_of_Thrones_-_The_Queen_s_Justice_-_Ramin_Djawadi_Season_7_Soundtrack_official.NA",
+        "video_id": "DzxNfni04CI",
+        "url": "https://www.youtube.com/watch?v=DzxNfni04CI",
+        "title": "Game of Thrones - The Queen's Justice - Ramin Djawadi (Season 7 Soundtrack) [official]",
+        "duration": 82,
+        "thumbnail": "https://i.ytimg.com/vi/DzxNfni04CI/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "The Queen's Justice by Ramin Djawadi\nGame Of Thrones Season 7\nSoundtrack avail here: https://lnk.to/got7ID\n\nTracklisting:\n1 - Main Titles (Game Of Thrones Theme)\n2 - Dragonstone\n3 - Shall We Begin?\n4 - The Queen's Justice\n5 - A Game I Like To Play\n6 - I Am the Storm\n7 - The Gift\n8 - Dragonglass\n9 - Spoils of War (Part 1)\n10 - Spoils of War (Part 2)\n11 - The Dagger\n12 - Home\n13 - Gorgeous Beasts\n14 - The Long Farewell\n15 - Against All Odds\n16 - See You for What You Are\n17 - Casterly Rock\n18 - A Lion's Legacy\n19 - Message for Cersei\n20 - Ironborn\n21 - No One Walks Away from Me\n22 - Truth\n23 - The Army of the Dead\n24 - Winter Is Here\n\n\nFollow us:\nTwitter: https://twitter.com/watertowermusic\nFacebook: https://www.facebook.com/WaterTowerMusic\nInstagram: https://instagram.com/watertowermusic\nSpotify: https://www.youtube.com/redirect?event=video_description&q=https%3A%2F%2Fopen.spotify.com%2Fuser%2Fwatertower_music&redir_token=eJrNTV9l7E5uJmiQYnUUf7yH8wx8MTUxNDAzNTMwM0AxNTEzOTQ4OTAz&v=DzxNfni04CI",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 38,
+                    "timestamp": 1513949458
+                }
+            }
+        },
+        "song_title": "The Queen's Justice",
+        "artist": "Ramin Djawadi",
+        "artist_image": "https://i.scdn.co/image/7f2676e08576f569de15238efe3f2e3cc84c82b6",
+        "cover": "https://i.scdn.co/image/33d7ffda5f47aa5a2d29f7391399d1b39e65f026",
+        "album": "Game Of Thrones: Season 7 (Music from the HBO\u00ae Series)",
+        "spotify_data": {
+            "id": "2CVJoNRUdw38j4UYWRxxeg",
+            "name": "The Queen's Justice",
+            "artists": [
+                {
+                    "id": "1hCkSJcXREhrodeIHQdav8",
+                    "name": "Ramin Djawadi",
+                    "images": [
+                        {
+                            "height": 1000,
+                            "url": "https://i.scdn.co/image/7f2676e08576f569de15238efe3f2e3cc84c82b6",
+                            "width": 1000
+                        },
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/8b25e1f43d221c46603a1789d803fd1e8d0aae69",
+                            "width": 640
+                        },
+                        {
+                            "height": 200,
+                            "url": "https://i.scdn.co/image/f7989b0b86fa25bd9230d950a5c28545b47210e2",
+                            "width": 200
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/69b0802011e74bb1e357a0849ce27f534f8ab663",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "scorecore",
+                        "soundtrack"
+                    ],
+                    "popularity": 77,
+                    "uri": "spotify:artist:1hCkSJcXREhrodeIHQdav8",
+                    "href": "https://open.spotify.com/artist/1hCkSJcXREhrodeIHQdav8"
+                }
+            ],
+            "artist": "Ramin Djawadi",
+            "cover_url": "https://i.scdn.co/image/33d7ffda5f47aa5a2d29f7391399d1b39e65f026",
+            "duration": 81.506,
+            "album": {
+                "id": "4ONwe8mcjVjNrzk9QL4H2w",
+                "name": "Game Of Thrones: Season 7 (Music from the HBO\u00ae Series)",
+                "artists": [
+                    {
+                        "id": "1hCkSJcXREhrodeIHQdav8",
+                        "name": "Ramin Djawadi",
+                        "images": [
+                            {
+                                "height": 1000,
+                                "url": "https://i.scdn.co/image/7f2676e08576f569de15238efe3f2e3cc84c82b6",
+                                "width": 1000
+                            },
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/8b25e1f43d221c46603a1789d803fd1e8d0aae69",
+                                "width": 640
+                            },
+                            {
+                                "height": 200,
+                                "url": "https://i.scdn.co/image/f7989b0b86fa25bd9230d950a5c28545b47210e2",
+                                "width": 200
+                            },
+                            {
+                                "height": 64,
+                                "url": "https://i.scdn.co/image/69b0802011e74bb1e357a0849ce27f534f8ab663",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "scorecore",
+                            "soundtrack"
+                        ],
+                        "popularity": 77,
+                        "uri": "spotify:artist:1hCkSJcXREhrodeIHQdav8",
+                        "href": "https://open.spotify.com/artist/1hCkSJcXREhrodeIHQdav8"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/33d7ffda5f47aa5a2d29f7391399d1b39e65f026",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/b3b9f198b0b78529a53b92df0a4ebc425e3bf1b6",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/d71e48dfe0a788d687aa777185c930ce4667a04c",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:4ONwe8mcjVjNrzk9QL4H2w"
+            },
+            "popularity": 53,
+            "uri": "spotify:track:2CVJoNRUdw38j4UYWRxxeg",
+            "query": "Game of Thrones - The Queen's Justice - Ramin Djawadi",
+            "certainty": 0.7674418604651163
+        }
+    },
+    {
+        "version": 103,
+        "type": "GieselaEntry",
+        "expected_filename": "cache/audio_cache/youtube-ECewrAld3zw-Game_of_Thrones_-_The_Rains_Of_Castamere_by_The_National.NA",
+        "video_id": "L9SIS6wBxpI",
+        "url": "https://www.youtube.com/watch?v=L9SIS6wBxpI",
+        "title": "The Rains Of Castamere",
+        "duration": 171,
+        "thumbnail": "https://i.ytimg.com/vi/ECewrAld3zw/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "\u2666Learn how to make trailer music for Hollywood trailers: https://goo.gl/1SD1xn\nWith a click on the link, you support me and good talented friends of mine. Only if you want!\n\n\u27a1SONG BY THE ROCKBAND: THE NATIONAL\u2b05\n\nGame Of Thrones on YouTube: https://www.youtube.com/user/GameofThrones\n\nGame Of Thrones on Facebook: https://www.youtube.com/redirect?v=ECewrAld3zw&redir_token=dM9CfsLSJl6YMTPCXYvZh_ysnup8MTUxNDAzNDk4NkAxNTEzOTQ4NTg2&event=video_description&q=https%3A%2F%2Fwww.facebook.com%2FGameOfThrones%2F%3Ffref%3Dnf\n\nGame Of Thrones official page: http://gameofthrones.com/\n\nGame Of Thrones on Twitter: https://twitter.com/GameOfThrones\n\n[\u266a]\n\nHBO's channel on YouTube: https://www.youtube.com/user/HBO\n\nHBO's channel on Facebook: https://www.facebook.com/HBO/?fref=nf\n\nHBO's official page: http://hbo.com/\n\nHBO's channel on Twitter: https://twitter.com/hbo\n\n[\u266a]\n\nLYRICS:\n\nAnd who are you, the proud lord said,\nthat I must bow so low?\nOnly a cat of a different coat,\nthat's all the truth I know.\nIn a coat of gold or a coat of red,\na lion still has claws,\nAnd mine are long and sharp, my lord,\nas long and sharp as yours.\nAnd so he spoke, and so he spoke,\nthat lord of Castamere,\nAnd now the rains weep o'er his hall,\nwith no one there to hear.\nYes now the rains weep o'er his hall,\nand not a soul to hear.\n\nMetroLyrics: http://www.metrolyrics.com/",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 39,
+                    "timestamp": 1513949458
+                }
+            }
+        },
+        "song_title": "The Rains Of Castamere",
+        "artist": "The National",
+        "artist_image": "https://i.scdn.co/image/d62e489c0921ecbf324b92c635236302b98fd026",
+        "cover": "https://i.scdn.co/image/55bf60bd09f4683ea1b6f0570f33e40a59d9db0b",
+        "album": "Game Of Thrones: Season 2 (Music From The HBO Series)"
+    },
+    {
+        "version": 103,
+        "type": "VGMEntry",
+        "expected_filename": "cache/audio_cache/youtube-UXLoBe5Ug6o-To_Zanarkand_ORCHESTRA.NA",
+        "video_id": "UXLoBe5Ug6o",
+        "url": "https://www.youtube.com/watch?v=UXLoBe5Ug6o",
+        "title": "To Zanarkand (ORCHESTRA)",
+        "duration": 272,
+        "thumbnail": "https://i.ytimg.com/vi/UXLoBe5Ug6o/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Final Fantasy X OST \"To Zanarkand\"\nOrchestra version.",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 40,
+                    "timestamp": 1514295121
+                }
+            }
+        },
+        "song_title": "The Way To Zanarkand",
+        "artist": "Andrew Filipski",
+        "artist_image": "http://vgmdb.net/db/assets/portraits/20194-1471099737.jpg",
+        "cover": "https://medium-media.vgm.io/albums/74/70647/70647-1502480196.jpg",
+        "album": "SPIRA: Music from Final Fantasy X (Zanarkand Mix)"
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-LiEoUiEh6uQ-Theme_for_Rohan_by_Chance_Thomas.NA",
+        "video_id": "LiEoUiEh6uQ",
+        "url": "https://www.youtube.com/watch?v=LiEoUiEh6uQ",
+        "title": "\"Theme for Rohan\" by Chance Thomas",
+        "duration": 205,
+        "thumbnail": "https://i.ytimg.com/vi/LiEoUiEh6uQ/maxresdefault.jpg",
+        "thumbnail_brightness": 28.73104566775323,
+        "description": "From Chance Thomas,\n\n\"I'll never forget my first hearing of the Rohan refrain composed by Howard Shore for 2002's The Two Towers. As the Hardanger melody rang out across the theater, I was completely mesmerized. This was the Rohan of my dreams, suddenly given voice in melody! It was stunningly, intuitively perfect. Of all the themes to be found running through Peter Jackson's trilogy, this one really resonated with me.\n\nFast forward 10 years. LOTRO has tasked me with creating a theme for their Rohan, a new and different theme than Shore's. What? How is this possible??? Shore's theme was so perfect in the film. The only way I could approach such a task was to think about Rohan in broader terms than the movie presented.\n\nHow does one more broadly define Rohan? A storied nation in decline? A land simmering on the verge of all-out war? Anglo-Saxon reference with Medieval overtones? Hearty people, individual and family tenderness, triumph and tragedy, crops and kinships, determined men and women, though wary and weary? Nobility, hope, sadness and uncertainty? Yes, yes, yes, yes and yes! All of these intangibles somehow had to thread themselves through a new theme for Rohan.\n\nAnd so it begins. The theme is introduced on classical violin played in a Celtic fiddle style. The initial modality is minor, setting up the somber tone. The melody moves on hooks of appoggiatura, so prevalent in Old English music. This places the theme squarely in the Northwestern European tradition, tying it tightly to Tolkien's Anglo-Saxon source material.\n\nOther instruments join the theme, including European Whistle, Bass Recorder and Uillean Pipes. All of these colors come from Northwestern Europe of centuries past, clueing us again that the theme is contemporary to the rise of Anglo-Saxon culture.\n\nThe progressing harmonies alternate between minor and major tonalities, suggesting the ongoing struggle of the Rohirrim. Triplet melodies against a 6/4 meter further reinforce the cultural resonance.\n\nAs our new theme approaches its apex, there is a strong triumphant modulation toward a sense of ultimate victory. And yet the resolve, though major, is a weak resolve (adding even a suspension to the chord) leaving a fragile uncertainty hanging in the air.\n\nThese ample cultural tie-ins and musical devices are certainly geeky. But they're meaningless if the tune fails to transport LOTRO's players to the Rohan of their imaginations while playing the game. Ultimately, this is the test of all thematic music, a test which I hope desperately to pass. Time and taste will tell if I rose to triumph or fell to ruin in my quest to hit the mark.\"",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 41,
+                    "timestamp": 1514296972
+                }
+            }
+        },
+        "song_title": "Theme for Rohan",
+        "artist": "Chance Thomas",
+        "artist_image": "https://i.scdn.co/image/972017a0110d1b9fa7e95ebc11d2cfb3791ca8d9",
+        "cover": "https://i.scdn.co/image/99f9f0bb34b8d48276315d7971f1485aeda619e5",
+        "album": "The Lord of the Rings Online (10th Anniversary Commemorative Soundtrack)",
+        "spotify_data": {
+            "id": "5XwMltbUk1QdRmGq5AVsLK",
+            "name": "Theme for Rohan",
+            "artists": [
+                {
+                    "id": "1VPqJ10EqqXOQNDw1ppYeh",
+                    "name": "Chance Thomas",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/99f9f0bb34b8d48276315d7971f1485aeda619e5",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/02bbf1dfa7df9f228d9951e223c733bed794d2d6",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/972017a0110d1b9fa7e95ebc11d2cfb3791ca8d9",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "video game music"
+                    ],
+                    "popularity": 29,
+                    "uri": "spotify:artist:1VPqJ10EqqXOQNDw1ppYeh",
+                    "href": "https://open.spotify.com/artist/1VPqJ10EqqXOQNDw1ppYeh"
+                }
+            ],
+            "artist": "Chance Thomas",
+            "cover_url": "https://i.scdn.co/image/99f9f0bb34b8d48276315d7971f1485aeda619e5",
+            "duration": 207.28,
+            "album": {
+                "id": "1lkI0MpnnccE364waiYGOY",
+                "name": "The Lord of the Rings Online (10th Anniversary Commemorative Soundtrack)",
+                "artists": [
+                    {
+                        "id": "1VPqJ10EqqXOQNDw1ppYeh",
+                        "name": "Chance Thomas",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/99f9f0bb34b8d48276315d7971f1485aeda619e5",
+                                "width": 640
+                            },
+                            {
+                                "height": 300,
+                                "url": "https://i.scdn.co/image/02bbf1dfa7df9f228d9951e223c733bed794d2d6",
+                                "width": 300
+                            },
+                            {
+                                "height": 64,
+                                "url": "https://i.scdn.co/image/972017a0110d1b9fa7e95ebc11d2cfb3791ca8d9",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "video game music"
+                        ],
+                        "popularity": 29,
+                        "uri": "spotify:artist:1VPqJ10EqqXOQNDw1ppYeh",
+                        "href": "https://open.spotify.com/artist/1VPqJ10EqqXOQNDw1ppYeh"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/99f9f0bb34b8d48276315d7971f1485aeda619e5",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/02bbf1dfa7df9f228d9951e223c733bed794d2d6",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/972017a0110d1b9fa7e95ebc11d2cfb3791ca8d9",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:1lkI0MpnnccE364waiYGOY"
+            },
+            "popularity": 27,
+            "uri": "spotify:track:5XwMltbUk1QdRmGq5AVsLK",
+            "query": "for Rohan Chance Thomas",
+            "certainty": 0.8846153846153846
+        }
+    },
+    {
+        "version": 103,
+        "type": "YoutubeEntry",
+        "expected_filename": "cache/audio_cache/youtube-KyMg9o_TW0Y-Tiago_D._Ferreira_-_Hope_Epic_Heroic_Emotional_Vocal.NA",
+        "video_id": "KyMg9o_TW0Y",
+        "url": "https://www.youtube.com/watch?v=KyMg9o_TW0Y",
+        "title": "Tiago D Ferreira - Hope",
+        "duration": 215,
+        "thumbnail": "https://i.ytimg.com/vi/KyMg9o_TW0Y/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Auto-Replay: https://www.youtube.com/redirect?q=http%3A%2F%2Fwww.epic-music-world.com%2Freplay%2F%3Fid%3DKyMg9o_TW0Y&redir_token=uS_zvSLPYIvu9VnGbu8bmSE6iah8MTUxNDAzMzg4NUAxNTEzOTQ3NDg1&v=KyMg9o_TW0Y&event=video_description\n\u2582\n\nEpic Music World Websites:\n\n\u25b8 Keep Me Alive (Donation): https://goo.gl/iIsogi\n\u25b8 Epic Music World I: http://bit.ly/1Oo4n11\n\u25b8 Facebook: https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.facebook.com%2FEpicMusicWorld2%2F&redir_token=uS_zvSLPYIvu9VnGbu8bmSE6iah8MTUxNDAzMzg4NUAxNTEzOTQ3NDg1&v=KyMg9o_TW0Y&event=video_description\n\u25b8 Website: http://www.epic-music-world.com\n\u25b8 Soundcloud: https://soundcloud.com/epicmusicworld\n\u25b8 Instagram: https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.instagram.com%2Fepicmusicworld%2F&redir_token=uS_zvSLPYIvu9VnGbu8bmSE6iah8MTUxNDAzMzg4NUAxNTEzOTQ3NDg1&v=KyMg9o_TW0Y&event=video_description\n\u2582\n\nArtist Websites: Tiago D. Ferreira\n\n\u25b8 Youtube: https://www.youtube.com/user/blankpulsemusic\n\u25b8 Bandcamp: https://tdfermusic.bandcamp.com/\n\u25b8 Spotify: https://www.youtube.com/redirect?q=https%3A%2F%2Fopen.spotify.com%2Fartist%2F2rZwCNek1iEonxsxmgmAmj&redir_token=uS_zvSLPYIvu9VnGbu8bmSE6iah8MTUxNDAzMzg4NUAxNTEzOTQ3NDg1&v=KyMg9o_TW0Y&event=video_description\n\u25b8 Facebook: https://www.facebook.com/tdfermusic\n\u2582\n\nVideo Details:\n\nTitle: Hope\nComposer: Tiago D. Ferreira\n\nAnimation by Realtime Motion Studios: http://realtime-motion-studios.r4u.nl/\n\u2582\n\nImage Artist: GUWEIZ\n\n\u25b8 Image: https://www.youtube.com/redirect?q=http%3A%2F%2Fguweiz.deviantart.com%2Fart%2FDemon-620988500&redir_token=uS_zvSLPYIvu9VnGbu8bmSE6iah8MTUxNDAzMzg4NUAxNTEzOTQ3NDg1&v=KyMg9o_TW0Y&event=video_description\n\u25b8 Image Artist: http://guweiz.deviantart.com/\n\u25b8 Instagram: https://www.instagram.com/guweiz/\n\u25b8 Twitter: https://twitter.com/ttguweiz\n\u25b8 Tumblr: http://guweiz.tumblr.com/\n\u25b8 Facebook: https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.facebook.com%2FGuweiz-189581388055662%2F%3Fref%3Daymt_homepage_panel&redir_token=uS_zvSLPYIvu9VnGbu8bmSE6iah8MTUxNDAzMzg4NUAxNTEzOTQ3NDg1&v=KyMg9o_TW0Y&event=video_description\n\u2582\n\nNote for the new Artists:\n\n** If you would like to submit your track for promotion,\n** If you have important other questions,\n** If you want to adding any kind of information which belongs to the video (audio or visual)\n** If you have any problem with audio or visual stuff in my videos\n\nthen please come to my site: http://on.fb.me/1BHngSt\n\nNote:\nPlease note that submitting tracks does not guarantee upload.\n\u279d To keep the quality of my channel i won't upload every single soundtrack, please compare your music to the other uploads, to get an idea what the standards for uploads are.\n\u279d If you don\u2019t get a response back, then your track was not chosen.\n\u2582\n\nCopyright Info \u00a9\n\n\u2714 Be aware all music and pictures belongs to the original artists.\n\u2714 This video was given a special license directly from the artists.\n\u2716 I am in no position to give anyone permission to use this\n\n.\u279d Please ask the artists and NOT me for permission !!!",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 42,
+                    "timestamp": 1513949458
+                }
+            }
+        }
+    },
+    {
+        "version": 103,
+        "type": "SpotifyEntry",
+        "expected_filename": "cache/audio_cache/youtube-RxabLA7UQ9k-Hans_Zimmer_-_Time_Inception.NA",
+        "video_id": "RxabLA7UQ9k",
+        "url": "https://www.youtube.com/watch?v=RxabLA7UQ9k",
+        "title": "Hans Zimmer - Time (Inception)",
+        "duration": 275,
+        "thumbnail": "https://i.ytimg.com/vi/RxabLA7UQ9k/hqdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Soundtrack of Inception. Music by Hans Zimmer.\n\nThe movie name is Inception! :)",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "206459363739566080",
+                "name": "Lophorius"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 43,
+                    "timestamp": 1513789029
+                }
+            }
+        },
+        "song_title": "Time",
+        "artist": "Hans Zimmer",
+        "artist_image": "https://i.scdn.co/image/94ad4486b19037fa88ed58a946698365f4a7bb73",
+        "cover": "https://i.scdn.co/image/6072343320a01ddb0a605a687be95ae4d7b73c9c",
+        "album": "Inception (Music From The Motion Picture)",
+        "spotify_data": {
+            "id": "6ZFbXIJkuI1dVNWvzJzown",
+            "name": "Time",
+            "artists": [
+                {
+                    "id": "0YC192cP3KPCRWx8zr8MfZ",
+                    "name": "Hans Zimmer",
+                    "images": [
+                        {
+                            "height": 563,
+                            "url": "https://i.scdn.co/image/14657235e8724181f8b32c6bfa54cdbf86d70852",
+                            "width": 1000
+                        },
+                        {
+                            "height": 360,
+                            "url": "https://i.scdn.co/image/960a8d4afdf777c543618e384428aacffdcf517a",
+                            "width": 640
+                        },
+                        {
+                            "height": 113,
+                            "url": "https://i.scdn.co/image/94ad4486b19037fa88ed58a946698365f4a7bb73",
+                            "width": 200
+                        },
+                        {
+                            "height": 36,
+                            "url": "https://i.scdn.co/image/3d05c3dffd54fb06b0191f258e88ca3b5832250f",
+                            "width": 64
+                        }
+                    ],
+                    "genres": [
+                        "soundtrack"
+                    ],
+                    "popularity": 81,
+                    "uri": "spotify:artist:0YC192cP3KPCRWx8zr8MfZ",
+                    "href": "https://open.spotify.com/artist/0YC192cP3KPCRWx8zr8MfZ"
+                }
+            ],
+            "artist": "Hans Zimmer",
+            "cover_url": "https://i.scdn.co/image/6072343320a01ddb0a605a687be95ae4d7b73c9c",
+            "duration": 275.546,
+            "album": {
+                "id": "2qvA7HmSg1iM6XMiFF76dp",
+                "name": "Inception (Music From The Motion Picture)",
+                "artists": [
+                    {
+                        "id": "0YC192cP3KPCRWx8zr8MfZ",
+                        "name": "Hans Zimmer",
+                        "images": [
+                            {
+                                "height": 563,
+                                "url": "https://i.scdn.co/image/14657235e8724181f8b32c6bfa54cdbf86d70852",
+                                "width": 1000
+                            },
+                            {
+                                "height": 360,
+                                "url": "https://i.scdn.co/image/960a8d4afdf777c543618e384428aacffdcf517a",
+                                "width": 640
+                            },
+                            {
+                                "height": 113,
+                                "url": "https://i.scdn.co/image/94ad4486b19037fa88ed58a946698365f4a7bb73",
+                                "width": 200
+                            },
+                            {
+                                "height": 36,
+                                "url": "https://i.scdn.co/image/3d05c3dffd54fb06b0191f258e88ca3b5832250f",
+                                "width": 64
+                            }
+                        ],
+                        "genres": [
+                            "soundtrack"
+                        ],
+                        "popularity": 81,
+                        "uri": "spotify:artist:0YC192cP3KPCRWx8zr8MfZ",
+                        "href": "https://open.spotify.com/artist/0YC192cP3KPCRWx8zr8MfZ"
+                    }
+                ],
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/6072343320a01ddb0a605a687be95ae4d7b73c9c",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ac6cb7cc9b6d9b373f161990debdbe0f5f82532a",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/d4c31ab1259e50e285b7608449e96a0bc80429bd",
+                        "width": 64
+                    }
+                ],
+                "uri": "spotify:album:2qvA7HmSg1iM6XMiFF76dp"
+            },
+            "popularity": 71,
+            "uri": "spotify:track:6ZFbXIJkuI1dVNWvzJzown",
+            "query": "Hans Zimmer - Time",
+            "certainty": 0.9411764705882353
+        }
+    },
+    {
+        "version": 103,
+        "type": "DiscogsEntry",
+        "expected_filename": "cache/audio_cache/youtube-Be0HqIhC48c-Traditional_Shinsekai_Yori.NA",
+        "video_id": "Be0HqIhC48c",
+        "url": "https://www.youtube.com/watch?v=Be0HqIhC48c",
+        "title": "Traditional(Shinsekai Yori)",
+        "duration": 91,
+        "thumbnail": "https://i.ytimg.com/vi/Be0HqIhC48c/maxresdefault.jpg",
+        "thumbnail_brightness": null,
+        "description": "Traditional from Shinsekai Yori\nNote:- I'm not the creator of this Music or the Images, All rights belongs to respective owners. This video is purely fan-made.\n\nSubscribe for more OST!",
+        "meta": {
+            "author": {
+                "type": "Member",
+                "id": "203302899277627392",
+                "name": "siku2"
+            },
+            "playlist": {
+                "type": "built-in/dict",
+                "value": {
+                    "cover": "https://i.imgur.com/IoYuDqI.jpg",
+                    "name": "Orchestra",
+                    "id": "orchestra",
+                    "index": 44,
+                    "timestamp": 1514850499
+                }
+            }
+        },
+        "song_title": "Traditional",
+        "artist": "Krallice",
+        "artist_image": "https://img.discogs.com/l1EJzcIT-V4GIz3mJ595xU4Euas=/600x450/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-1182892-1219326975.jpeg.jpg",
+        "cover": "https://img.discogs.com/3msol81NFaOv3tAz3gdOKAYsQ-U=/fit-in/572x572/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-3011980-1311649448.jpeg.jpg",
+        "album": "Traditional"
+    }
+]

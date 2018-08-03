@@ -61,7 +61,7 @@ class LoadingBar(EditableEmbed):
         self.item_name_plural = options.get("item_name_plural", "items")
         self.show_percentage = options.get("show_percentage", True)
 
-        self.custom_embed_data = options.get("custom_embed_data", ***REMOVED******REMOVED***)
+        self.custom_embed_data = options.get("custom_embed_data", {})
 
         self.progress = 0
         self.times = []
@@ -88,18 +88,18 @@ class LoadingBar(EditableEmbed):
         footer = ""
 
         if self.show_percentage:
-            description += " `***REMOVED******REMOVED***%`".format(round(100 * self.progress))
+            description += " `{}%`".format(round(100 * self.progress))
 
         if self.total_items:
             items_done = round(self.progress * self.total_items)
-            footer += " ***REMOVED******REMOVED***/***REMOVED******REMOVED***".format(items_done, self.total_items)
+            footer += " {}/{}".format(items_done, self.total_items)
 
             if self.show_time_left and self.avg_time:
                 time_left = (sum(self.times) / self.progress) if self.progress else 0
-                description += "\n***REMOVED******REMOVED*** left".format(utils.format_time(time_left, max_specifications=2, combine_with_and=True))
+                description += "\n{} left".format(utils.format_time(time_left, max_specifications=2, combine_with_and=True))
 
         if self.show_ipm and self.avg_time:
-            footer += " at ***REMOVED******REMOVED*** ***REMOVED******REMOVED*** per minute".format(round(60 / self.avg_time, 1), self.item_name_plural)
+            footer += " at {} {} per minute".format(round(60 / self.avg_time, 1), self.item_name_plural)
 
         self._current_embed.description = description.strip()
         self._current_embed.set_footer(text=footer.strip())

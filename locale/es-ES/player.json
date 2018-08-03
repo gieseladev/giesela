@@ -1,6 +1,6 @@
-***REMOVED***
-  "now_playing": ***REMOVED***
-    "generic": "Now playing *****REMOVED***title***REMOVED*****",
-    "timestamp_entry": "Now playing *****REMOVED***sub_entry***REMOVED***** (***REMOVED***index***REMOVED******REMOVED***ordinal***REMOVED*** entry) from \"***REMOVED***title***REMOVED***\""
-  ***REMOVED***
-***REMOVED***
+{
+  "now_playing": {
+    "generic": "Now playing **{title}**",
+    "timestamp_entry": "Now playing **{sub_entry}** ({index}{ordinal} entry) from \"{title}\""
+  }
+}

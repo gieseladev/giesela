@@ -44,7 +44,7 @@ class Playlist(Serialisable, WebSerialisable):
 
     def to_dict(self):
         if self._dirty or self._serialised_data is None:
-            self._serialised_data = ***REMOVED***
+            self._serialised_data = {
                 "id":                   self.id,
                 "name":                 self.name,
                 "description":          self.description,
@@ -52,7 +52,7 @@ class Playlist(Serialisable, WebSerialisable):
                 "author":               WebAuthor.from_user(self.author).to_dict(),
                 "serialised_entries":   self.serialised_entries,
                 "stats":                self.stats.to_dict()
-            ***REMOVED***
+            }
 
             self._dirty = False
 

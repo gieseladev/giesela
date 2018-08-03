@@ -46,7 +46,7 @@ class HumanPlayer(ConnectFourPlayer):
             content = msg.content.lower().strip()
 
             if content in ("abort", "exit"):
-                game.log("***REMOVED******REMOVED*** stopped the game".format(self.name))
+                game.log("{} stopped the game".format(self.name))
                 game.abort()
                 break
 
@@ -65,7 +65,7 @@ class HumanPlayer(ConnectFourPlayer):
                         await game.bot.safe_delete_message(msg)
                         break
                 else:
-                    await game.bot.safe_send_message(game.channel, "Your number should be between 1 and ***REMOVED******REMOVED***".format(len(game.grid)), expire_in=5)
+                    await game.bot.safe_send_message(game.channel, "Your number should be between 1 and {}".format(len(game.grid)), expire_in=5)
             else:
                 await game.bot.safe_send_message(game.channel, "Please send a number", expire_in=5)
 
@@ -113,7 +113,7 @@ class VirtualGameState:
         return VirtualGameState(grid_copy, (1 if self.current_player == 2 else 2), self.iteration + 1)
 
     def _count_n_horizontal(self, n, player=None):
-        counted = ***REMOVED******REMOVED***
+        counted = {}
 
         for i in range(len(self.grid[0])):
             streak = 1
@@ -143,7 +143,7 @@ class VirtualGameState:
             return counted.get(player, 0)
 
     def _count_n_vertical(self, n, player=None):
-        counted = ***REMOVED******REMOVED***
+        counted = {}
 
         for column in self.grid:
             streak = 1
@@ -171,7 +171,7 @@ class VirtualGameState:
             return counted.get(player, 0)
 
     def _count_n_diagonal_lown(self, n, player=None):
-        counted = ***REMOVED******REMOVED***
+        counted = {}
 
         for i in range(0, len(self.grid[0])):
             row = 0
@@ -244,7 +244,7 @@ class VirtualGameState:
             return counted.get(player, 0)
 
     def _count_n_diagonal_rown(self, n, player=None):
-        counted = ***REMOVED******REMOVED***
+        counted = {}
 
         for i in range(0, len(self.grid[0])):
             row = i
@@ -330,11 +330,11 @@ class VirtualGameState:
         return False
 
     def evaluate(self):
-        weights = ***REMOVED***
+        weights = {
             4: 100000,
             3: 10,
             2: 1
-        ***REMOVED***
+        }
 
         me = sum([self.count_n(streak, player=1) * weight for streak, weight in weights.items()])
         opponent = sum([self.count_n(streak, player=2) * weight for streak, weight in weights.items()])
@@ -352,7 +352,7 @@ class AIPlayer(ConnectFourPlayer):
 
     @property
     def name(self):
-        return "Giesela (lvl ***REMOVED******REMOVED***)".format(self.level)
+        return "Giesela (lvl {})".format(self.level)
 
     def _debug_log_grid(self, grid):
         lines = []
@@ -407,7 +407,7 @@ class AIPlayer(ConnectFourPlayer):
 
         column = self.minimax(game_state)[0]
 
-        game.log("bot placing at ***REMOVED******REMOVED***".format(column))
+        game.log("bot placing at {}".format(column))
         game.place_stone(self, column)
 
 
@@ -490,7 +490,7 @@ class GameConnectFour:
             else:
                 raise WrongPlayerCount("Can only play Connect Four with 1 or 2 players, not " + str(len(users)))
         else:
-            raise WrongUserType("No idea what to do with \"***REMOVED******REMOVED***\"...".format(type(users)))
+            raise WrongUserType("No idea what to do with \"{}\"...".format(type(users)))
 
         return cls(bot, channel, future, players, size=size)
 
@@ -512,7 +512,7 @@ class GameConnectFour:
 
     def abort(self):
         self.log("aborted")
-        asyncio.ensure_future(self.display_end("***REMOVED******REMOVED*** ABORTED".format(self.current_player.name)), loop=self.loop)
+        asyncio.ensure_future(self.display_end("{} ABORTED".format(self.current_player.name)), loop=self.loop)
         self.future.set_result(None)
 
     def draw_grid(self):
@@ -553,9 +553,9 @@ class GameConnectFour:
         winner = self.check_win()
 
         if winner:
-            asyncio.ensure_future(self.display_end("***REMOVED******REMOVED*** WINS".format(self.current_player.name)), loop=self.loop)
+            asyncio.ensure_future(self.display_end("{} WINS".format(self.current_player.name)), loop=self.loop)
 
-            self.log("***REMOVED******REMOVED*** won".format(self.current_player.name))
+            self.log("{} won".format(self.current_player.name))
             self.future.set_result(winner)
         else:
             if self.check_end():
@@ -572,7 +572,7 @@ class GameConnectFour:
 
     async def display_end(self, text):
         drawn_grid = "\n".join("".join(val) for val in self.draw_grid())
-        end_message = "***REMOVED******REMOVED***\n\n*****REMOVED******REMOVED*****".format(drawn_grid, text)
+        end_message = "{}\n\n**{}**".format(drawn_grid, text)
 
         if self.round_interface_message:
             self.round_interface_message = await self.bot.safe_edit_message(self.round_interface_message, end_message, keep_at_bottom=True)
@@ -582,10 +582,10 @@ class GameConnectFour:
         asyncio.ensure_future(self.bot._wait_delete_msg(self.round_interface_message, 10), loop=self.loop)
 
     async def play_turn(self):
-        self.log("playing turn ***REMOVED******REMOVED***".format(self.current_turn))
+        self.log("playing turn {}".format(self.current_turn))
 
         drawn_grid = "\n".join("".join(val) for val in self.draw_grid())
-        round_message = "*****REMOVED******REMOVED***'s Turn**\n\n***REMOVED******REMOVED***\n\n".format(self.current_player.name, drawn_grid)
+        round_message = "**{}'s Turn**\n\n{}\n\n".format(self.current_player.name, drawn_grid)
 
         if not isinstance(self.current_player, AIPlayer):
             round_message += "What column would you like to play next?"
@@ -618,7 +618,7 @@ class GameConnectFour:
                 break
 
         self.grid[column][i].possess(player)
-        self.log("***REMOVED******REMOVED*** placed stone in column ***REMOVED******REMOVED***, row ***REMOVED******REMOVED***".format(player.name, column, i))
+        self.log("{} placed stone in column {}, row {}".format(player.name, column, i))
 
         self.next_turn()
         return True

@@ -48,7 +48,7 @@ class StationInfo(Serialisable, WebSerialisable):
         return cls(**data)
 
     def to_dict(self):
-        data = ***REMOVED***
+        data = {
             "id":           self.id,
             "name":         self.name,
             "aliases":      self._aliases,
@@ -59,7 +59,7 @@ class StationInfo(Serialisable, WebSerialisable):
             "poll_time":    self.poll_time,
             "uncertainty":  self.uncertainty,
             "thumbnails":   self.thumbnails
-        ***REMOVED***
+        }
         return data
 
     def to_web_dict(self):
@@ -69,7 +69,7 @@ class StationInfo(Serialisable, WebSerialisable):
 class RadioStations:
     _initialised = False
     stations = []
-    thumbnails = ***REMOVED******REMOVED***
+    thumbnails = {}
 
     def init():
         if not RadioStations._initialised:
@@ -103,13 +103,13 @@ class RadioSongExtractor:
 
     def init():
         if not RadioSongExtractor._initialised:
-            RadioSongExtractor.extractors = ***REMOVED***
+            RadioSongExtractor.extractors = {
                 "energybern":   RadioSongExtractor._get_current_song_energy_bern,
                 "capitalfm":    RadioSongExtractor._get_current_song_capital_fm,
                 "bbc":          RadioSongExtractor._get_current_song_bbc,
                 # "radio32":      RadioSongExtractor._get_current_song_radio32,
                 "radiobern1":   RadioSongExtractor._get_current_song_radiobern1
-            ***REMOVED***
+            }
             RadioSongExtractor._initialised = True
 
     def has_data(station_info):
@@ -156,14 +156,14 @@ class RadioSongExtractor:
             if duration:
                 progress = min(progress, duration)
 
-            return ***REMOVED***
+            return {
                 "title": title,
                 "artist": artist,
                 "cover": cover,
                 "youtube": link,
                 "duration": duration,
                 "progress": progress
-            ***REMOVED***
+            }
         except:
             raise
             return None
@@ -184,19 +184,19 @@ class RadioSongExtractor:
             duration = (end_time - start_time).total_seconds()
             progress = (datetime.now(tz=tz_info) - start_time).total_seconds()
 
-            title = soup.find("span", attrs=***REMOVED***"class": "track", "itemprop": "name"***REMOVED***).text.strip()
-            artist = soup.find("span", attrs=***REMOVED***"class": "artist", "itemprop": "byArtist"***REMOVED***).text
+            title = soup.find("span", attrs={"class": "track", "itemprop": "name"}).text.strip()
+            artist = soup.find("span", attrs={"class": "artist", "itemprop": "byArtist"}).text
             artist = re.sub(r"[\n\s]+", " ", artist).strip()
             cover = soup.select(".song_wrapper .img_wrapper img")[0]["data-src"]
 
-            return ***REMOVED***
+            return {
                 "title": title,
                 "artist": artist,
                 "cover": cover,
                 "youtube": "http://www.capitalfm.com",
                 "duration": duration,
                 "progress": progress
-            ***REMOVED***
+            }
         except:
             raise
             return None
@@ -216,14 +216,14 @@ class RadioSongExtractor:
             progress = round(
                 (datetime.now() - start_time).total_seconds())
 
-            return ***REMOVED***
+            return {
                 "title": song_data["name"],
                 "artist": song_data["artistName"],
                 "cover": song_data["imageUrl"],
                 "youtube": "http://www.bbc.co.uk/radio",
                 "duration": duration,
                 "progress": progress
-            ***REMOVED***
+            }
         except:
             raise
             return None
@@ -245,14 +245,14 @@ class RadioSongExtractor:
             now_playing = data["coming"][0]
             duration = parse_timestamp(now_playing["duration"])
 
-        return ***REMOVED***
+        return {
             "title": now_playing["title"],
             "artist": now_playing["interpret"].replace(",", " & "),
             "cover": now_playing["imageFullURL"],
             "youtube": "http://www.radio32.ch/",
             "duration": duration,
             "progress": time.time() - start_time
-        ***REMOVED***
+        }
 
     def _get_current_song_radiobern1():
         resp = requests.get("http://player.radiobern1.ch/data/generated_content/bern1/production/playlist/playlist_live.json")
@@ -267,11 +267,11 @@ class RadioSongExtractor:
         duration = parse_timestamp(np["duration"])
         progress = time.time() - parse(np["playtime"]).timestamp()
 
-        return ***REMOVED***
+        return {
             "title": title,
             "artist": artist,
             "cover": cover,
             "youtube": "http://www.radiobern1.ch/",
             "duration": duration,
             "progress": progress
-        ***REMOVED***
+        }

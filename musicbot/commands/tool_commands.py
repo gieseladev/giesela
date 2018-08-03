@@ -17,15 +17,15 @@ from openpyxl import Workbook
 
 class ToolCommands:
 
-    @command_info("2.0.3", 1485516420, ***REMOVED***
+    @command_info("2.0.3", 1485516420, {
         "3.7.5": (1481827320, "The command finally works like it should"),
         "3.9.9": (1499977057, "moving Giesela too"),
         "4.1.8": (1500882643, "Updating to new player model")
-    ***REMOVED***)
+    })
     async def cmd_moveus(self, server, channel, author, user_mentions, leftover_args):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***moveus <channel name>`
+        `{command_prefix}moveus <channel name>`
         ///|Explanation
         Move everyone in your current channel to another one!
         """
@@ -59,14 +59,14 @@ class ToolCommands:
         if move_myself:
             await self.get_player(server, target_channel)
 
-    @command_info("1.0.0", 1477180800, ***REMOVED***
+    @command_info("1.0.0", 1477180800, {
         "2.0.2": (1481827560, "Can now use @mentions to \"goto\" a user"),
         "4.1.8": (1500881315, "Merging with old goto command")
-    ***REMOVED***)
+    })
     async def cmd_summon(self, server, author, user_mentions, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***summon [@mention | name]
+            {command_prefix}summon [@mention | name]
 
         Call the bot to the summoner's voice channel.
         """
@@ -95,7 +95,7 @@ class ToolCommands:
     async def cmd_countmsgs(self, server, author, channel_id, number):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***countmsgs <channel> <number>`
+        `{command_prefix}countmsgs <channel> <number>`
         ///|Explanation
         Count up to <number> messages in <channel> and return stats by user.
         """
@@ -109,7 +109,7 @@ class ToolCommands:
             return index_to_alphabet(ind -
                                      remainder) + alphabet[remainder].upper()
 
-        msgs_by_member = ***REMOVED******REMOVED***
+        msgs_by_member = {}
         msgs_by_date = OrderedDict()
         answers_by_date = OrderedDict()
         channel = server.get_channel(channel_id)
@@ -127,10 +127,10 @@ class ToolCommands:
 
             if last_answer is None or last_answer.author != msg.author:
                 dt = answers_by_date.get(
-                    "***REMOVED***0.day:0>2***REMOVED***/***REMOVED***0.month:0>2***REMOVED***/***REMOVED***0.year:0>4***REMOVED***".format(
-                        msg.timestamp), ***REMOVED******REMOVED***)
+                    "{0.day:0>2}/{0.month:0>2}/{0.year:0>4}".format(
+                        msg.timestamp), {})
                 dt[msg.author.id] = dt.get(msg.author.id, 0) + increment
-                answers_by_date["***REMOVED***0.day:0>2***REMOVED***/***REMOVED***0.month:0>2***REMOVED***/***REMOVED***0.year:0>4***REMOVED***".
+                answers_by_date["{0.day:0>2}/{0.month:0>2}/{0.year:0>4}".
                                 format(msg.timestamp)] = dt
                 last_answer = msg
 
@@ -139,10 +139,10 @@ class ToolCommands:
             existing_msgs[1] += len(re.sub(r"\W", r"", msg.content))
             msgs_by_member[msg.author.id] = existing_msgs
             dt = msgs_by_date.get(
-                "***REMOVED***0.day:0>2***REMOVED***/***REMOVED***0.month:0>2***REMOVED***/***REMOVED***0.year:0>4***REMOVED***".format(msg.timestamp),
-                ***REMOVED******REMOVED***)
+                "{0.day:0>2}/{0.month:0>2}/{0.year:0>4}".format(msg.timestamp),
+                {})
             dt[msg.author.id] = dt.get(msg.author.id, 0) + increment
-            msgs_by_date["***REMOVED***0.day:0>2***REMOVED***/***REMOVED***0.month:0>2***REMOVED***/***REMOVED***0.year:0>4***REMOVED***".format(
+            msgs_by_date["{0.day:0>2}/{0.month:0>2}/{0.year:0>4}".format(
                 msg.timestamp)] = dt
             last_msg = msg
 
@@ -151,15 +151,15 @@ class ToolCommands:
         ws.title = "Messages"
         ws2 = wb.create_sheet("Answers")
         ws["A2"] = "TOTAL"
-        sorted_user_index = ***REMOVED******REMOVED***
+        sorted_user_index = {}
         i = 1
         for member in sorted(msgs_by_member):
             data = msgs_by_member[member]
-            ws["***REMOVED******REMOVED******REMOVED******REMOVED***".format("A", i)] = server.get_member(
+            ws["{}{}".format("A", i)] = server.get_member(
                 member
             ).name if server.get_member(member) is not None else "Unknown"
-            ws["***REMOVED******REMOVED******REMOVED******REMOVED***".format("B", i)] = data[0]
-            ws["***REMOVED******REMOVED******REMOVED******REMOVED***".format("C", i)] = data[1]
+            ws["{}{}".format("B", i)] = data[0]
+            ws["{}{}".format("C", i)] = data[1]
             sorted_user_index[member] = index_to_alphabet(i)
             i += 1
 
@@ -167,7 +167,7 @@ class ToolCommands:
         for date in reversed(msgs_by_date.keys()):
             ws["A" + str(i)] = date
             for mem in msgs_by_date[date]:
-                ws["***REMOVED******REMOVED******REMOVED******REMOVED***".format(sorted_user_index.get(mem),
+                ws["{}{}".format(sorted_user_index.get(mem),
                                  i)] = msgs_by_date[date][mem]
             i += 1
 
@@ -175,7 +175,7 @@ class ToolCommands:
         for date in reversed(answers_by_date.keys()):
             ws2["A" + str(i)] = date
             for mem in answers_by_date[date]:
-                ws2["***REMOVED******REMOVED******REMOVED******REMOVED***".format(sorted_user_index.get(mem),
+                ws2["{}{}".format(sorted_user_index.get(mem),
                                   i)] = answers_by_date[date][mem]
             i += 1
 
@@ -194,12 +194,12 @@ class ToolCommands:
         channel = message.channel_mentions[0]
         msgs = []
         async for msg in self.logs_from(channel, limit=int(number)):
-            msg_data = ***REMOVED***
+            msg_data = {
                 "name": msg.author.name,
                 "timestamp": str(round(msg.timestamp.timestamp())),
                 "content": msg.content,
                 "attachments": msg.attachments
-            ***REMOVED***
+            }
             msgs.append(msg_data)
 
         json.dump(msgs[::-1], open("cache/last_message_archive.json", "w+"))
@@ -249,7 +249,7 @@ class ToolCommands:
     async def cmd_notifyme(self, server, author):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***notifyme
+            {command_prefix}notifyme
 
         Get notified when someone starts playing
         """
@@ -276,14 +276,14 @@ class ToolCommands:
 
             return Response("Nevermore you shall be annoyed!")
 
-    @command_info("2.2.1", 1493757540, ***REMOVED***
+    @command_info("2.2.1", 1493757540, {
         "3.7.8": (1499019245, "Fixed quoting by content.")
-    ***REMOVED***)
+    })
     async def cmd_quote(self, author, channel, message, leftover_args):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***quote [#channel] <message id> [message id...]`
-        `***REMOVED***command_prefix***REMOVED***quote [#channel] [@mention] \"<message content>\"`
+        `{command_prefix}quote [#channel] <message id> [message id...]`
+        `{command_prefix}quote [#channel] [@mention] \"<message content>\"`
         ///|Explanation
         Quote a message
         """
@@ -312,7 +312,7 @@ class ToolCommands:
                         break
             else:
                 if target_author is not None:
-                    return Response("Didn't find a message with that content from ***REMOVED******REMOVED***".format(target_author.mention))
+                    return Response("Didn't find a message with that content from {}".format(target_author.mention))
                 else:
                     return Response("Didn't find a message with that content")
 
@@ -321,45 +321,45 @@ class ToolCommands:
             try:
                 quote_message = await self.get_message(channel, message_id)
             except:
-                return Response("Didn't find a message with the id `***REMOVED******REMOVED***`".
+                return Response("Didn't find a message with the id `{}`".
                                 format(message_id))
 
-            author_data = ***REMOVED***
+            author_data = {
                 "name": quote_message.author.display_name,
                 "icon_url": quote_message.author.avatar_url
-            ***REMOVED***
-            embed_data = ***REMOVED***
+            }
+            embed_data = {
                 "description": quote_message.content,
                 "timestamp": quote_message.timestamp,
                 "colour": quote_message.author.colour
-            ***REMOVED***
+            }
             em = Embed(**embed_data)
             em.set_author(**author_data)
             await self.send_message(quote_to_channel, embed=em)
         return
 
-    @command_info("3.2.5", 1496428380, ***REMOVED***
+    @command_info("3.2.5", 1496428380, {
         "3.3.9": (1497521393, "Added edit sub-command"),
         "3.4.1": (1497550771, "Added the filter \"mine\" to the listing function"),
         "3.4.6": (1497617827, "when listing bookmarks, they musn't be \"inline\"."),
         "3.5.8": (1497827057, "Editing bookmarks now works as expected"),
         "4.6.1": (1502582759, "Updated to new entry model"),
         "4.7.8": (1504105817, "Using the new copy method for entries to make sure that they're \"clean\"")
-    ***REMOVED***)
+    })
     async def cmd_bookmark(self, author, player, leftover_args):
         """
         ///|Creation
-        ***REMOVED***command_prefix***REMOVED***bookmark [name] [timestamp]
+        {command_prefix}bookmark [name] [timestamp]
         ///|Explanation
         Create a new bookmark for the current entry. If no name is provided the entry's title will be used and if there's no timestamp provided the current timestamp will be used.
         ///|Using
-        ***REMOVED***command_prefix***REMOVED***bookmark <id | name>
+        {command_prefix}bookmark <id | name>
         ///|Editing
-        ***REMOVED***command_prefix***REMOVED***bookmark edit <id> [new name] [new timestamp]
+        {command_prefix}bookmark edit <id> [new name] [new timestamp]
         ///|Listing
-        ***REMOVED***command_prefix***REMOVED***bookmark list [mine]
+        {command_prefix}bookmark list [mine]
         ///|Removal
-        ***REMOVED***command_prefix***REMOVED***bookmark remove <id | name>
+        {command_prefix}bookmark remove <id | name>
         """
         if len(leftover_args) > 0:
             arg = leftover_args[0].lower()
@@ -377,8 +377,8 @@ class ToolCommands:
                     bm_timestamp = to_timestamp(bm["timestamp"])
                     bm_id = bm["id"]
 
-                    t = "*****REMOVED******REMOVED*****".format(bm_name)
-                    v = "`***REMOVED******REMOVED***` starting at `***REMOVED******REMOVED***` *by* *****REMOVED******REMOVED*****".format(bm_id, bm_timestamp, bm_author)
+                    t = "**{}**".format(bm_name)
+                    v = "`{}` starting at `{}` *by* **{}**".format(bm_id, bm_timestamp, bm_author)
 
                     em.add_field(name=t, value=v, inline=False)
 
@@ -391,7 +391,7 @@ class ToolCommands:
                 if not bm:
                     return Response("Didn't find a bookmark with that query")
                 if bookmark.remove_bookmark(bm["id"]):
-                    return Response("Removed bookmark `***REMOVED******REMOVED***`".format(bm["name"]))
+                    return Response("Removed bookmark `{}`".format(bm["name"]))
                 else:
                     return Response("Something went wrong")
 
@@ -401,7 +401,7 @@ class ToolCommands:
 
                 bm_id = leftover_args[1]
                 if bm_id not in bookmark:
-                    return Response("No bookmark with id `***REMOVED******REMOVED***` found".format(bm_id))
+                    return Response("No bookmark with id `{}` found".format(bm_id))
 
                 if len(leftover_args) < 3:
                     return Response("Please also specify what you want to change")
@@ -413,9 +413,9 @@ class ToolCommands:
                     new_name = " ".join(leftover_args[2:])
 
                 if bookmark.edit_bookmark(bm_id, new_name, new_timestamp):
-                    return Response("Successfully edited bookmark `***REMOVED******REMOVED***`".format(bm_id))
+                    return Response("Successfully edited bookmark `{}`".format(bm_id))
                 else:
-                    return Response("Something went wrong while editing `***REMOVED******REMOVED***`".format(bm_id))
+                    return Response("Something went wrong while editing `{}`".format(bm_id))
 
             else:
                 bm = bookmark.get_bookmark(" ".join(leftover_args))
@@ -426,7 +426,7 @@ class ToolCommands:
                     player.queue._add_entry(entry)
 
                     author = WebAuthor.from_dict(bm["author"])
-                    return Response("Loaded bookmark `***REMOVED***0***REMOVED***` by *****REMOVED***1***REMOVED*****".format(bm["name"], author.display_name))
+                    return Response("Loaded bookmark `{0}` by **{1}**".format(bm["name"], author.display_name))
 
                 elif player.current_entry:
                     bm_timestamp = player.progress
@@ -447,7 +447,7 @@ class ToolCommands:
                             bm_name = " ".join(leftover_args)
 
                     id = bookmark.add_bookmark(player.current_entry, bm_timestamp, author.id, bm_name)
-                    return Response("Created a new bookmark with the id `***REMOVED***0***REMOVED***` (\"***REMOVED***2***REMOVED***\", `***REMOVED***3***REMOVED***`)\nUse `***REMOVED***1***REMOVED***bookmark ***REMOVED***0***REMOVED***` to load it ".format(id, self.config.command_prefix, bm_name, to_timestamp(bm_timestamp)))
+                    return Response("Created a new bookmark with the id `{0}` (\"{2}\", `{3}`)\nUse `{1}bookmark {0}` to load it ".format(id, self.config.command_prefix, bm_name, to_timestamp(bm_timestamp)))
                 else:
                     return Response("There's no such bookmark and there's nothing playing either")
 
@@ -456,7 +456,7 @@ class ToolCommands:
                 id = bookmark.add_bookmark(player.current_entry.copy(),
                                            player.progress, author.id)
                 return Response(
-                    "Created a new bookmark with the id `***REMOVED***0***REMOVED***`\nUse `***REMOVED***1***REMOVED***bookmark ***REMOVED***0***REMOVED***` to load it ".
+                    "Created a new bookmark with the id `{0}`\nUse `{1}bookmark {0}` to load it ".
                     format(id, self.config.command_prefix))
             else:
                 return await self.cmd_bookmark(author, player, [
@@ -464,23 +464,23 @@ class ToolCommands:
                 ])
 
     @block_user
-    @command_info("2.0.3", 1486054560, ***REMOVED***
+    @command_info("2.0.3", 1486054560, {
         "3.7.2": (1498252803, "no arguments provided crash Fixed")
-    ***REMOVED***)
+    })
     async def cmd_random(self, channel, author, leftover_args):
         """
         ///|Basic
-        `***REMOVED***command_prefix***REMOVED***random <item1>, <item2>, [item3], [item4]`
+        `{command_prefix}random <item1>, <item2>, [item3], [item4]`
         ///|Use an existing set
-        `***REMOVED***command_prefix***REMOVED***random <setname>`
+        `{command_prefix}random <setname>`
         ///|List all the existing sets
-        `***REMOVED***command_prefix***REMOVED***random list`
+        `{command_prefix}random list`
         ///|Creation
-        `***REMOVED***command_prefix***REMOVED***random create <name>, <option1>, <option2>, [option3], [option4]`
+        `{command_prefix}random create <name>, <option1>, <option2>, [option3], [option4]`
         ///|Editing
-        `***REMOVED***command_prefix***REMOVED***random edit <name>, [add | remove | replace], <item> [, item2, item3]`
+        `{command_prefix}random edit <name>, [add | remove | replace], <item> [, item2, item3]`
         ///|Removal
-        `***REMOVED***command_prefix***REMOVED***random remove <name>`
+        `{command_prefix}random remove <name>`
         ///|Explanation
         Choose a random item out of a list or use a pre-defined list.
         """
@@ -501,7 +501,7 @@ class ToolCommands:
             set_items = items[1:]
             if self.random_sets.create_set(set_name, set_items):
                 return Response(
-                    "Created set *****REMOVED***0***REMOVED*****\nUse `***REMOVED***1***REMOVED***random ***REMOVED***0***REMOVED***` to use it!".format(
+                    "Created set **{0}**\nUse `{1}random {0}` to use it!".format(
                         set_name, self.config.command_prefix),
                     delete_after=60)
             else:
@@ -511,7 +511,7 @@ class ToolCommands:
         elif items[0].split()[0].lower().strip() == "list":
             return_string = ""
             for s in self.random_sets.get_sets():
-                return_string += "*****REMOVED******REMOVED*****\n```\n***REMOVED******REMOVED***```\n\n".format(
+                return_string += "**{}**\n```\n{}```\n\n".format(
                     s[0], ", ".join(s[1]))
 
             return Response(return_string)
@@ -566,13 +566,13 @@ class ToolCommands:
 
         if len(items) <= 0 or items is None:
             return Response(
-                "Is your name \"***REMOVED***0***REMOVED***\" by any chance?\n(This is not how this command works. Use `***REMOVED***1***REMOVED***help random` to find out how not to be a stupid *****REMOVED***0***REMOVED***** anymore)".
+                "Is your name \"{0}\" by any chance?\n(This is not how this command works. Use `{1}help random` to find out how not to be a stupid **{0}** anymore)".
                 format(author.name, self.config.command_prefix),
                 delete_after=30)
 
         if len(items) <= 1:
-            # return Response("Only you could use `***REMOVED***1***REMOVED***random` for one item...
-            # Well done, ***REMOVED***0***REMOVED***!".format(author.name, self.config.command_prefix),
+            # return Response("Only you could use `{1}random` for one item...
+            # Well done, {0}!".format(author.name, self.config.command_prefix),
             # delete_after=30)
 
             query = "_".join(items[0].split())

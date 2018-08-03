@@ -41,18 +41,18 @@ class GieselaWebSocket(WebSocket):
 
         try:
             server_id, author = GieselaServer.get_token_information(self.token)
-            identification = "[***REMOVED******REMOVED***@***REMOVED******REMOVED***] | ***REMOVED******REMOVED***".format(author.name, self.discord_server.name, self.address[0])
+            identification = "[{}@{}] | {}".format(author.name, self.discord_server.name, self.address[0])
         except AttributeError:
             identification = self.address
 
-        print("[WEBSOCKET] <***REMOVED******REMOVED***> ***REMOVED******REMOVED***".format(identification, message))
+        print("[WEBSOCKET] <{}> {}".format(identification, message))
 
     def handleMessage(self):
         try:
             try:
                 data = json.loads(self.data)
             except JSONDecodeError:
-                print("[WEBSOCKET] <***REMOVED******REMOVED***> sent non-json: ***REMOVED******REMOVED***".format(self.address, self.data))
+                print("[WEBSOCKET] <{}> sent non-json: {}".format(self.address, self.data))
                 return
 
             token = data.get("token", None)
@@ -66,10 +66,10 @@ class GieselaWebSocket(WebSocket):
                     self.handleAuthenticatedMessage(data)
                     return
                 else:
-                    print("[WEBSOCKET] <***REMOVED******REMOVED***> invalid token provided".format(
+                    print("[WEBSOCKET] <{}> invalid token provided".format(
                         self.address))
             else:
-                print("[WEBSOCKET] <***REMOVED******REMOVED***> no token provided".format(self.address))
+                print("[WEBSOCKET] <{}> no token provided".format(self.address))
 
             register = data.get("request", None) == "register"
             if register:
@@ -79,24 +79,24 @@ class GieselaWebSocket(WebSocket):
 
                 self.registration_token = registration_token
 
-                print("[WEBSOCKET] <***REMOVED******REMOVED***> Waiting for registration with token: ***REMOVED******REMOVED***".format(
+                print("[WEBSOCKET] <{}> Waiting for registration with token: {}".format(
                     self.address, registration_token))
 
-                answer = ***REMOVED***
+                answer = {
                     "response": True,
                     "registration_token": registration_token,
                     "command_prefix": static_config.command_prefix
-                ***REMOVED***
+                }
 
                 self.sendMessage(json.dumps(answer))
                 return
             else:
-                print("[WEBSOCKET] <***REMOVED******REMOVED***> Didn't ask to be registered".format(
+                print("[WEBSOCKET] <{}> Didn't ask to be registered".format(
                     self.address))
-                answer = ***REMOVED***
+                answer = {
                     "response": True,
                     "error": (ErrorCode.registration_required, "registration required")
-                ***REMOVED***
+                }
                 self.sendMessage(json.dumps(answer))
 
         except Exception as e:
@@ -124,7 +124,7 @@ class GieselaWebSocket(WebSocket):
         if searcher == "SpotifySearcher":
             if kind == "playlist":
                 playlist = spotify.SpotifyPlaylist.from_url(url)
-                self.log("adding Spotify playlist ***REMOVED******REMOVED***".format(playlist))
+                self.log("adding Spotify playlist {}".format(playlist))
                 entry_gen = playlist.get_spotify_entries_generator(player.queue)
                 success = True
             elif kind == "entry":
@@ -159,20 +159,20 @@ class GieselaWebSocket(WebSocket):
             traceback.print_exc()
 
     def handleAuthenticatedMessage(self, data):
-        answer = ***REMOVED***
+        answer = {
             "response": True,
             "request_id": data.get("id")
-        ***REMOVED***
+        }
 
         request = data.get("request")
         command = data.get("command")
-        command_data = data.get("command_data", ***REMOVED******REMOVED***)
+        command_data = data.get("command_data", {})
 
         if request:
             # send all the information one can acquire
             if request == "send_information":
                 self.log("asked for general information")
-                info = ***REMOVED******REMOVED***
+                info = {}
                 player_info = GieselaServer.get_player_information(self.token)
                 user_info = GieselaServer.get_token_information(self.token)[1].to_dict()
 
@@ -284,7 +284,7 @@ class GieselaWebSocket(WebSocket):
 
             elif command == "replay":
                 replay_index = command_data.get("index")
-                success = self._call_function_main_thread(player.queue.replay, replay_index, wait_for_result=True)
+                success = bool(self._call_function_main_thread(player.queue.replay, replay_index, wait_for_result=True))
                 self.log("replayed", replay_index)
 
             elif command == "cycle_repeat":
@@ -347,7 +347,7 @@ class GieselaWebSocket(WebSocket):
 
                 # enter async env with run_coroutine_threadsafe. Handle Spotify and then just feed the queue add_entry with the url.
 
-                self.log("playing ***REMOVED******REMOVED*** from ***REMOVED******REMOVED*** with mode ***REMOVED******REMOVED***".format(kind, searcher, mode))
+                self.log("playing {} from {} with mode {}".format(kind, searcher, mode))
                 self._call_function_main_thread(self.play_entry, player, answer, kind, item, searcher, mode)
                 # let the play_entry function handle the response
                 return
@@ -357,7 +357,7 @@ class GieselaWebSocket(WebSocket):
         self.sendMessage(json.dumps(answer))
 
     def handleConnected(self):
-        print("[WEBSOCKET] <***REMOVED******REMOVED***> connected".format(self.address))
+        print("[WEBSOCKET] <{}> connected".format(self.address))
         GieselaServer.clients.append(self)
 
     def handleClose(self):
@@ -368,19 +368,19 @@ class GieselaWebSocket(WebSocket):
 
         if self.registration_token:
             if GieselaServer.awaiting_registration.pop(self.registration_token, None):
-                print("[WEBSOCKET] Removed <***REMOVED******REMOVED***>'s registration_token from awaiting list".format(
+                print("[WEBSOCKET] Removed <{}>'s registration_token from awaiting list".format(
                     self.address))
 
-        print("[WEBSOCKET] <***REMOVED******REMOVED***> disconnected".format(self.address))
+        print("[WEBSOCKET] <{}> disconnected".format(self.address))
 
     def register(self, server_id, author):
         salt = uuid.uuid4().hex
         token = hashlib.sha256((server_id + author.id + salt).encode("utf-8")).hexdigest()
         self.token = token
         GieselaServer.set_token_information(token, server_id, author)
-        data = ***REMOVED***"token": token***REMOVED***
+        data = {"token": token}
         self.sendMessage(json.dumps(data))
-        print("[WEBSOCKET] <***REMOVED******REMOVED***> successfully registered ***REMOVED******REMOVED***".format(
+        print("[WEBSOCKET] <{}> successfully registered {}".format(
             self.address, author))
 
 
@@ -389,16 +389,16 @@ class GieselaServer:
     authenticated_clients = []
     server = None
     bot = None
-    _tokens = ***REMOVED******REMOVED***  # token: (server_id, author)
-    awaiting_registration = ***REMOVED******REMOVED***
+    _tokens = {}  # token: (server_id, author)
+    awaiting_registration = {}
 
     def run(bot):
         GieselaServer.bot = bot
 
         try:
-            GieselaServer._tokens = ***REMOVED***t: (s, WebAuthor.from_id(u)) for t, (s, u) in json.load(
-                open("data/websocket_token.json", "r")).items()***REMOVED***
-            print("[WEBSOCKET] loaded ***REMOVED******REMOVED*** tokens".format(
+            GieselaServer._tokens = {t: (s, WebAuthor.from_id(u)) for t, (s, u) in json.load(
+                open("data/websocket_token.json", "r")).items()}
+            print("[WEBSOCKET] loaded {} tokens".format(
                 len(GieselaServer._tokens)))
         except FileNotFoundError:
             print("[WEBSOCKET] failed to load tokens, there are none saved")
@@ -425,7 +425,7 @@ class GieselaServer:
 
     def set_token_information(token, server_id, author):
         GieselaServer._tokens[token] = (server_id, author)
-        json.dump(***REMOVED***t: (s, u.id) for t, (s, u) in GieselaServer._tokens.items()***REMOVED***,
+        json.dump({t: (s, u.id) for t, (s, u) in GieselaServer._tokens.items()},
                   open("data/websocket_token.json", "w+"), indent=4)
 
     def generate_registration_token():
@@ -455,7 +455,7 @@ class GieselaServer:
             player = asyncio.run_coroutine_threadsafe(GieselaServer.bot.get_player(server_id), GieselaServer.bot.loop).result()
             return player
         except Exception as e:
-            print("[WEBSOCKET] encountered error while getting player:\n***REMOVED******REMOVED***".format(e))
+            print("[WEBSOCKET] encountered error while getting player:\n{}".format(e))
             traceback.print_exc()
             return None
 
@@ -470,7 +470,7 @@ class GieselaServer:
         else:
             entry = None
 
-        data = ***REMOVED***
+        data = {
             "entry":                entry,
             "queue":                player.queue.get_web_dict(),
             "volume":               player.volume,
@@ -478,17 +478,17 @@ class GieselaServer:
             "state":                player.state.value,
             "repeat_state_name":    str(player.repeatState),
             "repeat_state":         player.repeatState.value,
-        ***REMOVED***
+        }
 
         return data
 
     def _send_player_information(server_id):
-        message = ***REMOVED***
+        message = {
             "info":
-            ***REMOVED***
+            {
                 "player": GieselaServer.get_player_information(server_id=server_id)
-            ***REMOVED***
-        ***REMOVED***
+            }
+        }
 
         GieselaServer._broadcast_message(server_id, json.dumps(message))
 
@@ -502,7 +502,7 @@ class GieselaServer:
         frame = inspect.currentframe()
         outer_frames = inspect.getouterframes(frame)
         caller = outer_frames[1]
-        print("[WEBSOCKET] Broadcasting player update to ***REMOVED******REMOVED*** socket(s). Caused by \"***REMOVED******REMOVED***\"".format(len(GieselaServer.authenticated_clients), caller.function))
+        print("[WEBSOCKET] Broadcasting player update to {} socket(s). Caused by \"{}\"".format(len(GieselaServer.authenticated_clients), caller.function))
 
         threading.Thread(target=GieselaServer._send_player_information, args=(server_id, )).start()
 
@@ -516,10 +516,10 @@ class GieselaServer:
         frame = inspect.currentframe()
         outer_frames = inspect.getouterframes(frame)
         caller = outer_frames[1]
-        print("[WEBSOCKET] Broadcasting update to ***REMOVED******REMOVED*** socket(s). Caused by \"***REMOVED******REMOVED***\"".format(len(GieselaServer.authenticated_clients), caller.function))
+        print("[WEBSOCKET] Broadcasting update to {} socket(s). Caused by \"{}\"".format(len(GieselaServer.authenticated_clients), caller.function))
 
-        message = ***REMOVED***
+        message = {
             "update": kwargs
-        ***REMOVED***
+        }
 
         GieselaServer.broadcast_message(server_id, json.dumps(message))

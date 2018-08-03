@@ -274,7 +274,7 @@ class WebSocket(object):
                         k = key.encode("ascii") + GUID_STR.encode("ascii")
                         k_s = base64.b64encode(
                             hashlib.sha1(k).digest()).decode("ascii")
-                        hStr = HANDSHAKE_STR % ***REMOVED***"acceptstr": k_s***REMOVED***
+                        hStr = HANDSHAKE_STR % {"acceptstr": k_s}
                         self.sendq.append((BINARY, hStr.encode("ascii")))
                         self.handshaked = True
                         self.handleConnected()
@@ -586,7 +586,7 @@ class SimpleWebSocketServer(object):
         self.serversocket.bind((host, port))
         self.serversocket.listen(5)
         self.selectInterval = selectInterval
-        self.connections = ***REMOVED******REMOVED***
+        self.connections = {}
         self.listeners = [self.serversocket]
 
     def _decorateSocket(self, sock):

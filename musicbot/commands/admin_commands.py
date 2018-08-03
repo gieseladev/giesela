@@ -16,7 +16,7 @@ class AdminCommands:
     async def cmd_blacklist(self, message, user_mentions, option, something):
         """
         ///|Usage
-        ***REMOVED***command_prefix***REMOVED***blacklist [ + | - | add | remove ] @UserName [@UserName2 ...]
+        {command_prefix}blacklist [ + | - | add | remove ] @UserName [@UserName2 ...]
         ///|Explanation
         Add or remove users to the blacklist.
         """
@@ -66,7 +66,7 @@ class AdminCommands:
     async def cmd_id(self, author, user_mentions):
         """
         ///|Usage
-        ***REMOVED***command_prefix***REMOVED***id [@user]
+        {command_prefix}id [@user]
         ///|Explanation
         Tells the user their id or the id of another user.
         """
@@ -83,7 +83,7 @@ class AdminCommands:
     async def cmd_joinserver(self, message, server_link=None):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***joinserver invite_link
+            {command_prefix}joinserver invite_link
 
         Asks the bot to join a server.  Note: Bot accounts cannot use invite links.
         """
@@ -91,7 +91,7 @@ class AdminCommands:
         if self.user.bot:
             url = await self.generate_invite_link()
             return Response(
-                "Bot accounts can't use invite links!  Click here to invite me: \n***REMOVED******REMOVED***".
+                "Bot accounts can't use invite links!  Click here to invite me: \n{}".
                 format(url),
                 reply=True,
                 delete_after=30)
@@ -103,12 +103,12 @@ class AdminCommands:
 
         except:
             raise exceptions.CommandError(
-                "Invalid URL provided:\n***REMOVED******REMOVED***\n".format(server_link))
+                "Invalid URL provided:\n{}\n".format(server_link))
 
     async def cmd_listids(self, server, author, leftover_args, cat="all"):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***listids [categories]
+            {command_prefix}listids [categories]
 
         Lists the ids for various things.  Categories are:
            all, users, roles, channels
@@ -177,7 +177,7 @@ class AdminCommands:
     async def cmd_setname(self, leftover_args, name):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***setname name
+            {command_prefix}setname name
 
         Changes the bot's username.
         Note: This operation is limited by discord to twice per hour.
@@ -196,7 +196,7 @@ class AdminCommands:
     async def cmd_setnick(self, server, channel, leftover_args, nick):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***setnick nick
+            {command_prefix}setnick nick
 
         Changes the bot's nickname.
         """
@@ -218,7 +218,7 @@ class AdminCommands:
     async def cmd_setavatar(self, message, url=None):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***setavatar [url]
+            {command_prefix}setavatar [url]
 
         Changes the bot's avatar.
         Attaching a file and leaving the url parameter blank also works.
@@ -243,7 +243,7 @@ class AdminCommands:
     async def cmd_clean(self, message, channel, server, author, search_range=50):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***clean [range]
+            {command_prefix}clean [range]
 
         Removes up to [range] messages the bot has posted in chat. Default: 50, Max: 1000
         """
@@ -277,7 +277,7 @@ class AdminCommands:
                 deleted = await self.purge_from(
                     channel, check=check, limit=search_range, before=message)
                 return Response(
-                    "Cleaned up ***REMOVED******REMOVED*** message***REMOVED******REMOVED***.".format(
+                    "Cleaned up {} message{}.".format(
                         len(deleted), "s" * bool(deleted)))
 
         deleted = 0
@@ -305,12 +305,12 @@ class AdminCommands:
                         pass
 
         return Response(
-            "Cleaned up ***REMOVED******REMOVED*** message***REMOVED******REMOVED***.".format(deleted, "s" * bool(deleted)))
+            "Cleaned up {} message{}.".format(deleted, "s" * bool(deleted)))
 
     async def cmd_say(self, channel, message, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***say <message>
+            {command_prefix}say <message>
         Make the bot say something
         """
 
@@ -322,7 +322,7 @@ class AdminCommands:
     async def cmd_broadcast(self, server, message, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***broadcast message
+            {command_prefix}broadcast message
 
         Broadcast a message to every user of the server
         """
@@ -368,14 +368,14 @@ class AdminCommands:
             await self.safe_send_message(m, msg)
 
     @owner_only
-    @command_info("3.1.6", 1498672140, ***REMOVED***
+    @command_info("3.1.6", 1498672140, {
         "3.6.4": (1498146841, "Can now specify the required arguments in order to block a command"),
         "3.9.8": (1499976133, "Saving the blocked commands")
-    ***REMOVED***)
+    })
     async def cmd_blockcommand(self, command, leftover_args):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***blockcommand <command> [args] <"reason">`
+        `{command_prefix}blockcommand <command> [args] <"reason">`
         ///|Explanation
         Block a command
         """
@@ -401,9 +401,9 @@ class AdminCommands:
 
             self.blocked_commands[command.lower()] = (args, reason)
             Settings["blocked_commands"] = self.blocked_commands
-            return Response("Blocked command `***REMOVED******REMOVED*** ***REMOVED******REMOVED***`".format(command, " ".join(args)))
+            return Response("Blocked command `{} {}`".format(command, " ".join(args)))
 
-    @command_info("2.0.2", 1484676180, ***REMOVED***
+    @command_info("2.0.2", 1484676180, {
         "3.8.3": (1499184914, "Can now use multiline statements without having to use tricks like /n/"),
         "3.8.5": (1499279145, "Better code display"),
         "3.9.6": (1499889309, "Escaping the result and adding the shortcut entry for player.current_entry"),
@@ -411,15 +411,15 @@ class AdminCommands:
         "4.4.7": (1501683507, "Not showing empty result message"),
         "4.4.8": (1501684956, "including the console log"),
         "4.5.2": (1501965475, "only showing console log when it contains something")
-    ***REMOVED***)
+    })
     async def cmd_execute(self, channel, author, server, raw_content, player=None):
         statement = raw_content.strip()
-        beautiful_statement = "```python\n***REMOVED******REMOVED***\n```".format(statement)
+        beautiful_statement = "```python\n{}\n```".format(statement)
 
-        statement = "async def func():\n***REMOVED******REMOVED***".format(indent(statement, "\t"))
-        await self.safe_send_message(channel, "**RUNNING CODE**\n***REMOVED******REMOVED***".format(beautiful_statement))
+        statement = "async def func():\n{}".format(indent(statement, "\t"))
+        await self.safe_send_message(channel, "**RUNNING CODE**\n{}".format(beautiful_statement))
 
-        env = ***REMOVED******REMOVED***
+        env = {}
         env.update(globals())
         env.update(locals())
         env.update(entry=player.current_entry)
@@ -430,7 +430,7 @@ class AdminCommands:
             exec(statement, env)
         except SyntaxError as e:
             return Response(
-                "**While compiling the statement the following error occured**\n***REMOVED******REMOVED***\n***REMOVED******REMOVED***".
+                "**While compiling the statement the following error occured**\n{}\n{}".
                 format(traceback.format_exc(), str(e)))
 
         func = env["func"]
@@ -440,19 +440,19 @@ class AdminCommands:
                 ret = await func()
         except Exception as e:
             return Response(
-                "**While executing the statement the following error occured**\n***REMOVED******REMOVED***\n***REMOVED******REMOVED***".
+                "**While executing the statement the following error occured**\n{}\n{}".
                 format(traceback.format_exc(), str(e)))
 
         res = escape_dis(str(ret))
         if ret is not None and res:
-            result = "**RESULT**\n***REMOVED******REMOVED***".format(res)
+            result = "**RESULT**\n{}".format(res)
         else:
             result = ""
 
         log = console.getvalue().strip()
 
         if log:
-            result += "\n**Console**\n```\n***REMOVED******REMOVED***\n```".format(log)
+            result += "\n**Console**\n```\n{}\n```".format(log)
 
         result = result.strip()
         if result:
@@ -463,13 +463,13 @@ class AdminCommands:
         await self.safe_send_message(channel, ":wave:")
         raise exceptions.TerminateSignal
 
-    @command_info("1.0.0", 1477180800, ***REMOVED***
+    @command_info("1.0.0", 1477180800, {
         "4.3.7": (1501264004, "Fixed command")
-    ***REMOVED***)
+    })
     async def cmd_disconnect(self, server):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***disconnect
+            {command_prefix}disconnect
 
         Make the bot leave his current voice channel.
         """

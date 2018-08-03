@@ -17,7 +17,7 @@ from musicbot.config import static_config
 LOCALE_FOLDER = "locale"
 FALLBACK_LANGUAGE = "_default"
 
-locales = ***REMOVED******REMOVED***
+locales = {}
 
 
 class Settings:
@@ -26,7 +26,7 @@ class Settings:
         return static_config.user_languages.get(_id) or static_config.server_languages.get(_id)
 
     def set_language(obj, lang):
-        assert has_language(lang), "Can't set the language to ***REMOVED******REMOVED***, this language doesn't exist".format(lang)
+        assert has_language(lang), "Can't set the language to {}, this language doesn't exist".format(lang)
 
         if isinstance(obj, discord.Server):
             static_config.server_languages[obj.id] = lang
@@ -66,7 +66,7 @@ def traverse(dictionary, directions):
             current_frame = current_frame[loc]
         except KeyError:
             ref = ".".join(directions[:ind])
-            raise KeyError("***REMOVED******REMOVED*** doesn't exist in ***REMOVED******REMOVED***".format(loc, ref))
+            raise KeyError("{} doesn't exist in {}".format(loc, ref))
 
     return current_frame
 
@@ -80,7 +80,7 @@ def has_language(lang):
 def load_language(lang):
     loc = path.join(LOCALE_FOLDER, lang)
 
-    lan_data = ***REMOVED******REMOVED***
+    lan_data = {}
 
     if path.isdir(loc):
         files = os.listdir(loc)
@@ -98,7 +98,7 @@ def load_language(lang):
 
             lan_data[file_key] = data
     else:
-        raise ValueError("Language ***REMOVED******REMOVED*** doesn't exist".format(lang))
+        raise ValueError("Language {} doesn't exist".format(lang))
 
     return lan_data
 
@@ -112,7 +112,7 @@ class Locale:
         return self.get(key)
 
     def __str__(self):
-        return "Locale ***REMOVED******REMOVED***".format(self.language)
+        return "Locale {}".format(self.language)
 
     def get(self, string_id):
         location = unravel_id(string_id)
@@ -122,7 +122,7 @@ class Locale:
     def format(self, string_id, *args, **kwargs):
         string = self.get(string_id)
 
-        assert isinstance(string, str), "\"***REMOVED******REMOVED***\" isn't explicit!".format(string_id)
+        assert isinstance(string, str), "\"{}\" isn't explicit!".format(string_id)
 
         return string.format(*args, **kwargs)
 
@@ -142,7 +142,7 @@ def get_locale(lang, use_fallback=True):
             if use_fallback:
                 return _fallback
 
-            raise KeyError("Language ***REMOVED******REMOVED*** doesn't exist".format(lang))
+            raise KeyError("Language {} doesn't exist".format(lang))
 
     return locales[lang]
 

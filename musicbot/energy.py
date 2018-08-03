@@ -64,11 +64,11 @@ def get_playouts():
     amz_date = t.strftime("%Y%m%dT%H%M%SZ")
     datestamp = t.strftime("%Y%m%d")
 
-    credential_scope = "***REMOVED******REMOVED***/***REMOVED******REMOVED***/***REMOVED******REMOVED***/aws4_request".format(datestamp, region, service)
+    credential_scope = "{}/{}/{}/aws4_request".format(datestamp, region, service)
 
     params = [
         ("X-Amz-Algorithm", algorithm),
-        ("X-Amz-Credential", "***REMOVED******REMOVED***/***REMOVED******REMOVED***".format(access_key, credential_scope)),
+        ("X-Amz-Credential", "{}/{}".format(access_key, credential_scope)),
         ("X-Amz-Date", amz_date),
         ("X-Amz-Security-Token", session_token),
         ("X-Amz-SignedHeaders", "host")
@@ -77,7 +77,7 @@ def get_playouts():
     canonical_uri = "/broadcast/channels/bern/playouts"
     payload_hash = hashlib.sha256("".encode("utf-8")).hexdigest()
     canonical_headers = "host:" + host + "\n"
-    canonical_querystring = "&".join(["***REMOVED******REMOVED***=***REMOVED******REMOVED***".format(key, parse.quote_plus(value)) for key, value in params])
+    canonical_querystring = "&".join(["{}={}".format(key, parse.quote_plus(value)) for key, value in params])
 
     canonical_request = "GET" + "\n" + canonical_uri + "\n" + canonical_querystring + "\n" + canonical_headers + "\n" + "host" + "\n" + payload_hash
 

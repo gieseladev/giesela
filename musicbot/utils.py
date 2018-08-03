@@ -24,27 +24,27 @@ from PIL import Image, ImageStat
 
 
 def wrap_string(target, wrapping, handle_special=True, reverse_closer=True):
-    special_wrap = ***REMOVED***
+    special_wrap = {
         "(": ")",
         "[": "]",
-        "***REMOVED***": "***REMOVED***",
+        "{": "}",
         "<": ">"
-    ***REMOVED*** if handle_special else ***REMOVED******REMOVED***
+    } if handle_special else {}
     opener = wrapping
     closer = special_wrap.get(wrapping, wrapping)
     if reverse_closer:
         closer = closer[::-1]
 
-    return "***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***".format(opener, target, closer)
+    return "{}{}{}".format(opener, target, closer)
 
 
 def create_cmd_params(params: dict):
     param_list = []
     for key, value in params.items():
         if value is not None:
-            param_list.append("-***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(key, value))
+            param_list.append("-{} {}".format(key, value))
         else:
-            param_list.append("-***REMOVED******REMOVED***".format(key))
+            param_list.append("-{}".format(key))
 
     return " ".join(param_list)
 
@@ -73,7 +73,7 @@ def owner_only(func):
     return wrapper
 
 
-def command_info(version, timestamp, changelog=***REMOVED******REMOVED***):
+def command_info(version, timestamp, changelog={}):
     def function_decorator(func):
         func.version = version
         func.timestamp = datetime.datetime.fromtimestamp(timestamp)
@@ -193,7 +193,7 @@ def create_bar(progress, length=10, full_char="■", half_char=None, empty_char=
     if residue > 0 and use_halves:
         chrs.append(half_char)
 
-    return ("***REMOVED***0:" + empty_char + "<" + str(length) + "***REMOVED***").format("".join(chrs))
+    return ("{0:" + empty_char + "<" + str(length) + "}").format("".join(chrs))
 
 
 def get_image_brightness(**kwargs):
@@ -240,21 +240,21 @@ def prettydate(d):
             if months == 1:
                 return "1 month ago"
             else:
-                return "***REMOVED******REMOVED*** months ago".format(months)
+                return "{} months ago".format(months)
         else:
-            return "***REMOVED******REMOVED*** days ago".format(days)
+            return "{} days ago".format(days)
     elif s <= 1:
         return "just now"
     elif s < 60:
-        return "***REMOVED******REMOVED*** seconds ago".format(round_to_interval(s))
+        return "{} seconds ago".format(round_to_interval(s))
     elif s < 120:
         return "1 minute ago"
     elif s < 3600:
-        return "***REMOVED******REMOVED*** minutes ago".format(round_to_interval(s / 60))
+        return "{} minutes ago".format(round_to_interval(s / 60))
     elif s < 7200:
         return "1 hour ago"
     else:
-        return "***REMOVED******REMOVED*** hours ago".format(round_to_interval(s / 3600))
+        return "{} hours ago".format(round_to_interval(s / 3600))
 
 
 def ordinal(n, combine=False):
@@ -264,7 +264,7 @@ def ordinal(n, combine=False):
     If combine then return the number concatenated with the ordinal
     """
     number_string = str(n) if combine else ""
-    special_cases = ***REMOVED***1: "st", 2: "nd", 3: "rd"***REMOVED***
+    special_cases = {1: "st", 2: "nd", 3: "rd"}
     if not 10 <= n % 100 <= 20 and n % 10 in special_cases:
         return number_string + special_cases[n % 10]
     return number_string + "th"
@@ -285,7 +285,7 @@ def clean_songname(query):
         # replace common indicators for the artist with a simple dash
         ((r"[\|:\/]", r"(^|\W)by(\W|$)"), " - "),
         # remove all parentheses and their content and remove "opening 5" stuff
-        ((r"\(.*\)", r"(?:^|\b)op(?:ening)?(?:\s+\d***REMOVED***1,2***REMOVED***)?(?:\b|$)"), " "),
+        ((r"\(.*\)", r"(?:^|\b)op(?:ening)?(?:\s+\d{1,2})?(?:\b|$)"), " "),
         # replace several artist things with &
         ((r"(?:^|\b)(?:feat|ft)(?:\b|$)", ), " & "),
         # replace w/ with with
@@ -293,8 +293,8 @@ def clean_songname(query):
     )
 
     special_regex = (
-        # (r"\b([\w\s]***REMOVED***3,***REMOVED***)\b(?=.*\1)", ""),
-        # (r"\(f(?:ea)?t\.?\s?([\w\s\&\-\']***REMOVED***2,***REMOVED***)\)", r" & \1"),
+        # (r"\b([\w\s]{3,})\b(?=.*\1)", ""),
+        # (r"\(f(?:ea)?t\.?\s?([\w\s\&\-\']{2,})\)", r" & \1"),
     )
     special_regex_after = (
         # rip w/
@@ -355,22 +355,22 @@ def timestamp_to_queue(timestamps, song_dur):
             1 < len(entries) else song_dur
 
         dur = next_start - start
-        sub_entry = ***REMOVED***
+        sub_entry = {
             "name":     timestamps[key].strip(punctuation + whitespace),
             "duration": dur,
             "start":    start,
             "index":    index,
             "end":      next_start
-        ***REMOVED***
+        }
         queue.append(sub_entry)
 
     return queue
 
 
 def _run_timestamp_matcher(text):
-    songs = ***REMOVED******REMOVED***
+    songs = {}
 
-    timestamp_match = r"(?:(\d***REMOVED***1,2***REMOVED***):)?(\d***REMOVED***1,2***REMOVED***):(\d***REMOVED***2***REMOVED***)(?:\s?.?\s?(?:\d***REMOVED***1,2***REMOVED***:)?(?:\d***REMOVED***1,2***REMOVED***):(?:\d***REMOVED***2***REMOVED***))?"
+    timestamp_match = r"(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?"
 
     for match in re.finditer(
             r"^[\s\->]*" + timestamp_match + r"\W+(.+?)$",
@@ -424,13 +424,13 @@ def get_video_timestamps(description, video_id, song_dur=None):
         if song_dur and song_dur < 200:  # I don't trust comments when the song is only about 3 mins loading
             return None
 
-        params = ***REMOVED***
+        params = {
             "key":          static_config.google_api_key,
             "part":         "snippet",
             "order":        "relevance",
             "textFormat":   "plainText",
             "videoId":      video_id
-        ***REMOVED***
+        }
         resp = requests.get("https://www.googleapis.com/youtube/v3/commentThreads", params=params)
         data = resp.json()
         for comment in data["items"]:
@@ -458,13 +458,13 @@ def _choose_best_thumbnail(thumbnails):
 
 
 def get_related_videos(videoId):
-    params = ***REMOVED***
+    params = {
         "part":             "snippet",
         "relatedToVideoId": videoId,
         "topicId":          "/m/04rlf",
         "type":             "video",
         "key":              static_config.google_api_key
-    ***REMOVED***
+    }
     resp = requests.get(
         "https://www.googleapis.com/youtube/v3/search", params=params)
     data = resp.json()
@@ -473,13 +473,13 @@ def get_related_videos(videoId):
         return None
     video_list = []
     for vid in videos:
-        video = ***REMOVED***
+        video = {
             "id":           vid["id"]["videoId"],
             "title":        vid["snippet"]["title"],
             "channel":      vid["snippet"]["channelTitle"],
             "thumbnail":    _choose_best_thumbnail(vid["snippet"]["thumbnails"]),
             "url":          "https://www.youtube.com/watch?v=" + vid["id"]["videoId"]
-        ***REMOVED***
+        }
 
         video_list.append(video)
 
@@ -518,12 +518,12 @@ def hex_to_dec(hex_code):
 
 
 def dec_to_hex(dec_colour):
-    return "#***REMOVED***:0>6***REMOVED***".format(hex(dec_colour)[2:]).upper()
+    return "#{:0>6}".format(hex(dec_colour)[2:]).upper()
 
 
 def to_timestamp(seconds):
     sec = int(seconds)
-    s = "***REMOVED***0:0>2***REMOVED***".format(sec % 60)
+    s = "{0:0>2}".format(sec % 60)
     m = (sec // 60) % 60
     h = (sec // 60 // 60) % 24
     d = (sec // 60 // 60 // 24)
@@ -531,9 +531,9 @@ def to_timestamp(seconds):
     work_string = ""
     if d > 0:
         return ":".join(
-            str(x) for x in (d, "***REMOVED***0:0>2***REMOVED***".format(h), "***REMOVED***0:0>2***REMOVED***".format(m), s))
+            str(x) for x in (d, "{0:0>2}".format(h), "{0:0>2}".format(m), s))
     elif h > 0:
-        return ":".join(str(x) for x in (h, "***REMOVED***0:0>2***REMOVED***".format(m), s))
+        return ":".join(str(x) for x in (h, "{0:0>2}".format(m), s))
     else:
         return ":".join(str(x) for x in (m, s))
 
@@ -555,7 +555,7 @@ def format_time_ffmpeg(s):
     mins = int(total_minutes % 60 - (sec / 3600) - (msec / 3600000))
     hours = int(total_hours - (mins / 60) - (sec / 3600) - (msec / 3600000))
 
-    return "***REMOVED***:02d***REMOVED***:***REMOVED***:02d***REMOVED***:***REMOVED***:02d***REMOVED***".format(hours, mins, sec)
+    return "{:02d}:{:02d}:{:02d}".format(hours, mins, sec)
 
 
 def round_to_interval(num, interval=5):
@@ -573,19 +573,19 @@ def format_time(s, round_seconds=True, round_base=1, max_specifications=3, combi
     return_list = []
     if days > 0:
         return_list.append(
-            "***REMOVED******REMOVED*** ***REMOVED******REMOVED******REMOVED******REMOVED***".format("a" if days == 1 and replace_one else days, ["d", "day", "day"][unit_length], "s"
+            "{} {}{}".format("a" if days == 1 and replace_one else days, ["d", "day", "day"][unit_length], "s"
                              if days is not 1 and unit_length != 0 else ""))
     if hours > 0:
         return_list.append(
-            "***REMOVED******REMOVED*** ***REMOVED******REMOVED******REMOVED******REMOVED***".format("an" if hours == 1 and replace_one else hours, ["h", "hr", "hour"][unit_length],
+            "{} {}{}".format("an" if hours == 1 and replace_one else hours, ["h", "hr", "hour"][unit_length],
                              "s" if hours is not 1 and unit_length != 0 else ""))
     if minutes > 0:
         return_list.append(
-            "***REMOVED******REMOVED*** ***REMOVED******REMOVED******REMOVED******REMOVED***".format("a" if minutes == 1 and replace_one else
+            "{} {}{}".format("a" if minutes == 1 and replace_one else
                              minutes, ["m", "min", "minute"][unit_length], "s" if minutes is not 1 and unit_length != 0 else ""))
     if seconds > 0 or s is 0:
         return_list.append(
-            "***REMOVED******REMOVED*** ***REMOVED******REMOVED******REMOVED******REMOVED***".format("a" if seconds == 1 and replace_one else
+            "{} {}{}".format("a" if seconds == 1 and replace_one else
                              seconds, ["s", "sec", "second"][unit_length], "s" if seconds is not 1 and unit_length != 0 else ""))
 
     if max_specifications is not None:

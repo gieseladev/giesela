@@ -1,5 +1,5 @@
-***REMOVED***
-  "thumbnails": ***REMOVED***
+{
+  "thumbnails": {
     "generic": [
       "https://i.imgur.com/6UDo0V3.jpg",
       "https://i.imgur.com/Bo1NDGB.jpg",
@@ -37,8 +37,8 @@
       "https://i.imgur.com/d8Fae4S.jpg",
       "https://i.imgur.com/gl9HK0w.jpg"
     ]
-  ***REMOVED***,
-  "stations": [***REMOVED***
+  },
+  "stations": [{
       "id": "capitalfm",
       "name": "Capital FM",
       "aliases": ["kappable", "kappablefm", "kappable fm", "cfm"],
@@ -48,8 +48,8 @@
       "url": "media-ice.musicradio.com/CapitalMP3",
       "poll_time": 40,
       "thumbnails": ["generic", "england"]
-    ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "id": "energybern",
       "name": "Energy Bern",
       "aliases": ["energy"],
@@ -59,8 +59,8 @@
       "url": "http://energybern.ice.infomaniak.ch/energybern-high.mp3",
       "uncertainty": 6,
       "thumbnails": ["generic", "switzerland"]
-    ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "id": "radiobern1",
       "name": "Radio Bern1",
       "aliases": ["bern1", "bern"],
@@ -69,8 +69,8 @@
       "website": "http://www.radiobern1.ch/",
       "url": "http://radio.nello.tv/radiobern164k",
       "thumbnails": ["generic", "switzerland"]
-    ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "id": "radio32",
       "name": "Radio 32",
       "aliases": ["32"],
@@ -79,8 +79,8 @@
       "website": "http://radio32.ch",
       "url": "http://stream.radio32.ch/radio32",
       "thumbnails": ["generic", "switzerland"]
-    ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "id": "bbc",
       "name": "BBC",
       "aliases": ["bbq"],
@@ -89,6 +89,6 @@
       "website": "http://bbc.com",
       "url": "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_q",
       "thumbnails": ["generic", "england", "https://i.imgur.com/3fy23iE.jpg"]
-    ***REMOVED***
+    }
   ]
-***REMOVED***
+}

@@ -13,7 +13,7 @@ class MetaSettings(type):
 
 
 class Settings(metaclass=MetaSettings):
-    settings = ***REMOVED******REMOVED***
+    settings = {}
 
     def load_settings():
         Settings.settings = pickle.load(open(static_config.settings_file, "r+b"))

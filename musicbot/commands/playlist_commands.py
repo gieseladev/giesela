@@ -19,7 +19,7 @@ from musicbot.utils import (Response, block_user, command_info, create_bar,
 class PlaylistCommands:
 
     @block_user
-    @command_info("1.9.5", 1479599760, ***REMOVED***
+    @command_info("1.9.5", 1479599760, {
         "3.4.6": (1497617827, "when Giesela can't add the entry to the playlist she tries to figure out **why** it didn't work"),
         "3.4.7": (1497619770, "Fixed an annoying bug in which the builder wouldn't show any entries if the amount of entries was a multiple of 20"),
         "3.5.1": (1497706811, "Giesela finally keeps track whether a certain entry comes from a playlist or not"),
@@ -44,25 +44,25 @@ class PlaylistCommands:
         "4.3.5": (1501249495, "Displaying the type of entry using colour-coding and fixed search indices"),
         "4.4.0": (1501361106, "Finally showing changed entries in changelog isn't bugged anymore."),
         "4.4.5": (1501627577, "Updated GPL file-storing System")
-    ***REMOVED***)
+    })
     async def cmd_playlist(self, channel, author, server, player, leftover_args):
         """
         ///|Load
-        `***REMOVED***command_prefix***REMOVED***playlist load <savename> [add | replace] [none | random] [startindex] [endindex (inclusive)]`
+        `{command_prefix}playlist load <savename> [add | replace] [none | random] [startindex] [endindex (inclusive)]`
 
         Trust me, it's more complicated than it looks
         ///(NL)|List all playlists
-        `***REMOVED***command_prefix***REMOVED***playlist showall [alphabetical | author | entries | playtime | random | replays]`
+        `{command_prefix}playlist showall [alphabetical | author | entries | playtime | random | replays]`
         ///(NL)|Build a new playlist
-        `***REMOVED***command_prefix***REMOVED***playlist builder <savename>`
+        `{command_prefix}playlist builder <savename>`
         ///(NL)|Save the current queue
-        `***REMOVED***command_prefix***REMOVED***playlist save <savename>`
+        `{command_prefix}playlist save <savename>`
         ///(NL)|Clone
-        `***REMOVED***command_prefix***REMOVED***playlist clone <fromname> <savename> [startindex | endindex (inclusive)]`
+        `{command_prefix}playlist clone <fromname> <savename> [startindex | endindex (inclusive)]`
         ///(NL)|Delete a playlist
-        `***REMOVED***command_prefix***REMOVED***playlist delete <savename>`
+        `{command_prefix}playlist delete <savename>`
         ///(NL)|Information
-        `***REMOVED***command_prefix***REMOVED***playlist <savename>`
+        `{command_prefix}playlist <savename>`
         """
 
         argument = leftover_args[0].lower() if len(leftover_args) > 0 else ""
@@ -110,7 +110,7 @@ class PlaylistCommands:
 
             if not clone_entries:
                 if broken_entries:
-                    return Response("Can't play `***REMOVED***0***REMOVED***`, there are *****REMOVED***1***REMOVED***** broken entr***REMOVED***2***REMOVED*** in this playlist.\nOpen the playlist builder to fix ***REMOVED***3***REMOVED*** (`***REMOVED***4***REMOVED***playlist builder ***REMOVED***0***REMOVED***`)".format(
+                    return Response("Can't play `{0}`, there are **{1}** broken entr{2} in this playlist.\nOpen the playlist builder to fix {3} (`{4}playlist builder {0}`)".format(
                         playlist["name"],
                         len(broken_entries),
                         "y" if len(broken_entries) == 1 else "ies",
@@ -118,7 +118,7 @@ class PlaylistCommands:
                         self.config.command_prefix
                     ))
                 else:
-                    return Response("There's nothing in `***REMOVED******REMOVED***` to play".format(playlist["name"]))
+                    return Response("There's nothing in `{}` to play".format(playlist["name"]))
 
             if load_mode == "replace":
                 player.queue.clear()
@@ -129,7 +129,7 @@ class PlaylistCommands:
                 from_index = int(
                     additional_args[2]) - 1 if len(additional_args) > 2 else 0
                 if from_index >= len(clone_entries) or from_index < 0:
-                    return Response("Can't load the playlist starting from entry ***REMOVED******REMOVED***. This value is out of bounds.".format(from_index))
+                    return Response("Can't load the playlist starting from entry {}. This value is out of bounds.".format(from_index))
             except ValueError:
                 return Response("Start index must be a number")
 
@@ -137,7 +137,7 @@ class PlaylistCommands:
                 to_index = int(additional_args[3]) if len(
                     additional_args) > 3 else len(clone_entries)
                 if to_index > len(clone_entries) or to_index < 0:
-                    return Response("Can't load the playlist from the ***REMOVED******REMOVED***. to the ***REMOVED******REMOVED***. entry. These values are out of bounds.".format(from_index, to_index))
+                    return Response("Can't load the playlist from the {}. to the {}. entry. These values are out of bounds.".format(from_index, to_index))
             except ValueError:
                 return Response("End index must be a number")
 
@@ -146,11 +146,11 @@ class PlaylistCommands:
 
             clone_entries = clone_entries[from_index:to_index]
 
-            sort_modes = ***REMOVED***
+            sort_modes = {
                 "alphabetical": (lambda entry: entry.title, False),
                 "random": None,
                 "length": (lambda entry: entry.duration, True)
-            ***REMOVED***
+            }
 
             sort_mode = additional_args[1].lower(
             ) if len(additional_args) > 1 and additional_args[1].lower(
@@ -168,9 +168,9 @@ class PlaylistCommands:
             self.playlists.bump_replay_count(savename)
 
             if not broken_entries:
-                return Response("Loaded `***REMOVED******REMOVED***`".format(savename.title()))
+                return Response("Loaded `{}`".format(savename.title()))
             else:
-                text = "Loaded ***REMOVED***0***REMOVED*** entr***REMOVED***1***REMOVED*** from `***REMOVED***2***REMOVED***`. *****REMOVED***3***REMOVED***** entr***REMOVED***4***REMOVED*** couldn't be loaded.\nOpen the playlist builder to repair ***REMOVED***5***REMOVED***. (`***REMOVED***6***REMOVED***playlist builder ***REMOVED***2***REMOVED***`)"
+                text = "Loaded {0} entr{1} from `{2}`. **{3}** entr{4} couldn't be loaded.\nOpen the playlist builder to repair {5}. (`{6}playlist builder {2}`)"
                 return Response(text.format(
                     len(clone_entries),
                     "y" if len(clone_entries) == 1 else "ies",
@@ -187,7 +187,7 @@ class PlaylistCommands:
                     "Can't delete this playlist, there's no playlist with this name.")
 
             self.playlists.remove_playlist(savename)
-            return Response("****REMOVED******REMOVED**** has been deleted".format(playlist["name"]))
+            return Response("*{}* has been deleted".format(playlist["name"]))
 
         elif argument == "clone":
             if savename not in self.playlists.playlists.keys():
@@ -215,14 +215,14 @@ class PlaylistCommands:
                 1 if len(additional_args) > 1 else 0
             if from_index >= len(clone_entries) or from_index < 0:
                 return Response(
-                    "Can't clone the playlist starting from entry ***REMOVED******REMOVED***. This entry is out of bounds.".
+                    "Can't clone the playlist starting from entry {}. This entry is out of bounds.".
                     format(from_index))
 
             to_index = int(additional_args[
                 2]) if len(additional_args) > 2 else len(clone_entries)
             if to_index > len(clone_entries) or to_index < 0:
                 return Response(
-                    "Can't clone the playlist from the ***REMOVED******REMOVED***. to the ***REMOVED******REMOVED***. entry. These values are out of bounds.".
+                    "Can't clone the playlist from the {}. to the {}. entry. These values are out of bounds.".
                     format(from_index, to_index))
 
             if to_index - from_index <= 0:
@@ -239,8 +239,8 @@ class PlaylistCommands:
                 self.playlists.set_playlist(additional_args[0].lower(), clone_entries, additional_args[0].title(), author.id)
 
             return Response(
-                "*****REMOVED******REMOVED***** ***REMOVED******REMOVED***has been cloned to *****REMOVED******REMOVED*****".format(
-                    playlist["name"], "(from the ***REMOVED******REMOVED***. to the ***REMOVED******REMOVED***. index) ".format(
+                "**{}** {}has been cloned to **{}**".format(
+                    playlist["name"], "(from the {}. to the {}. index) ".format(
                         str(from_index + 1), str(to_index + 1)) if
                     from_index is not 0 or to_index is not len(clone_entries)
                     else "", additional_args[0].title()))
@@ -248,12 +248,12 @@ class PlaylistCommands:
         elif argument == "showall":
             if len(self.playlists.playlists.keys()) < 1:
                 return Response(
-                    "There are no saved playlists.\n**You** could add one though. Type `***REMOVED******REMOVED***help playlist` to see how!".format(
+                    "There are no saved playlists.\n**You** could add one though. Type `{}help playlist` to see how!".format(
                         self.config.command_prefix))
 
             response_text = "**Playlists**\n__                 __\n\n"
 
-            sort_modes = ***REMOVED***
+            sort_modes = {
                 "alphabetical": (lambda playlist: playlist, False),
                 "entries": (
                     lambda playlist: len(self.playlists.get_playlist(playlist, player.queue)["entries"]),
@@ -272,7 +272,7 @@ class PlaylistCommands:
                     lambda playlist: self.playlists.get_playlist(playlist, player.queue)["replay_count"],
                     True
                 )
-            ***REMOVED***
+            }
 
             sort_mode = leftover_args[1].lower() if len(leftover_args) > 1 and leftover_args[
                 1].lower() in sort_modes.keys() else "replays"
@@ -288,15 +288,15 @@ class PlaylistCommands:
 
             for pl in sorted_saved_playlists:
                 infos = self.playlists.get_playlist(pl, player.queue)
-                response_text += "◦ *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** entr***REMOVED******REMOVED***)\n".format(
+                response_text += "◦ **{}** ({} entr{})\n".format(
                     infos["name"],
                     len(infos["entries"]),
                     "ies" if len(infos["entries"]) is not 1 else "y"
                 )
 
             response_text += "\n**Reference**\n" + "\n".join([
-                "`***REMOVED***command_prefix***REMOVED***playlist <name>` to learn more about a playlist",
-                "`***REMOVED***command_prefix***REMOVED***playlist builder <name>` to edit a playlist"
+                "`{command_prefix}playlist <name>` to learn more about a playlist",
+                "`{command_prefix}playlist builder <name>` to edit a playlist"
             ]).format(command_prefix=self.config.command_prefix)
 
             return Response(response_text)
@@ -319,7 +319,7 @@ class PlaylistCommands:
                                                 player.queue)
             entries = infos["entries"]
 
-            desc_text = "***REMOVED******REMOVED***\n\n***REMOVED******REMOVED*** entr***REMOVED******REMOVED*** (***REMOVED******REMOVED*** broken)\n***REMOVED******REMOVED*** long".format(
+            desc_text = "{}\n\n{} entr{} ({} broken)\n{} long".format(
                 infos["description"] or "This playlist doesn't have a description",
                 len(infos["entries"]),
                 "ies" if infos["entries"] is not 1 else "y",
@@ -351,7 +351,7 @@ class PlaylistCommands:
                 entries_to_display = entries_to_display[:15]
                 vals = []
                 for entry in entries_to_display:
-                    vals.append("***REMOVED******REMOVED*** `***REMOVED******REMOVED***`".format(
+                    vals.append("{} `{}`".format(
                         nice_cut(entry.title, 50),
                         to_timestamp(entry.end_seconds)
                     ))
@@ -366,11 +366,11 @@ class PlaylistCommands:
 
                 if len(entries) > 15:
                     em.add_field(
-                        name="**... and ***REMOVED******REMOVED*** more**".format(len(entries) - 15),
+                        name="**... and {} more**".format(len(entries) - 15),
                         value="To view them, open the playlist builder")
 
             em.set_footer(
-                text="To edit this playlist type \"***REMOVED******REMOVED***playlist builder ***REMOVED******REMOVED***\"".
+                text="To edit this playlist type \"{}playlist builder {}\"".
                 format(self.config.command_prefix, argument))
 
             await self.send_message(channel, embed=em)
@@ -399,7 +399,7 @@ class PlaylistCommands:
                 entry_generator = player.queue.get_entries_from_urls_gen(*urls, **meta)
 
             total_entries = len(urls)
-            progress_message = await self.safe_send_message(channel, "***REMOVED******REMOVED***\n***REMOVED******REMOVED*** [0%]".format(message.format(entries_left=total_entries), create_bar(0, length=20)))
+            progress_message = await self.safe_send_message(channel, "{}\n{} [0%]".format(message.format(entries_left=total_entries), create_bar(0, length=20)))
             times = []
             start_time = time.time()
 
@@ -424,7 +424,7 @@ class PlaylistCommands:
 
                     progress_message_future = asyncio.ensure_future(self.safe_edit_message(
                         progress_message,
-                        "***REMOVED******REMOVED***\n***REMOVED******REMOVED*** [***REMOVED******REMOVED***%]\n***REMOVED******REMOVED*** remaining".format(
+                        "{}\n{} [{}%]\n{} remaining".format(
                             message.format(entries_left=entries_left),
                             create_bar((ind + 1) / total_entries, length=20),
                             round(100 * (ind + 1) / total_entries),
@@ -445,24 +445,24 @@ class PlaylistCommands:
         abort = False
         save = False
         entries_page = 0
-        pl_changes = ***REMOVED***
+        pl_changes = {
             "remove_entries": [],       # used for changelog
             "added_entries": [],        # changelog
             "changed_entries": set(),   # changelog
             "new_name": None,
             "new_desc": None,
             "new_cover": None
-        ***REMOVED***
+        }
         savename = _savename
         user_savename = savename
 
         interface_string = "\n".join([
-            "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** | ***REMOVED******REMOVED***)",
+            "**{}** by **{}** ({} song{} | {})",
             "",
-            "***REMOVED******REMOVED***",  # this is where all the entries go
+            "{}",  # this is where all the entries go
             "",
             "**Commands:**",
-            "`add <query>`: Add an entry (works like the normal `***REMOVED******REMOVED***play` command)",
+            "`add <query>`: Add an entry (works like the normal `{}play` command)",
             "`remove <index> [index 2] [index 3]`: Remove an entry by its index",
             "`edit <index>`: edit an entry",
             "`rename <new name>`: rename the playlist",
@@ -476,7 +476,7 @@ class PlaylistCommands:
         ])
 
         extras_string = "\n".join([
-            "*****REMOVED******REMOVED***** by *****REMOVED******REMOVED***** (***REMOVED******REMOVED*** song***REMOVED******REMOVED*** | ***REMOVED******REMOVED***)",
+            "**{}** by **{}** ({} song{} | {})",
             "",
             "**Extra functions:**",
             "`removeduplicates`: remove all duplicates from the playlist",
@@ -493,11 +493,11 @@ class PlaylistCommands:
         if playlist.get("broken_entries"):
             broken_entries = playlist["broken_entries"]
             if len(broken_entries) > 1:
-                m = "There are ***REMOVED***entries_left***REMOVED*** broken/outdated entries in this playlist. I'm going to fix them, please stand by."
+                m = "There are {entries_left} broken/outdated entries in this playlist. I'm going to fix them, please stand by."
                 new_entries, hopeless_entries = await _get_entries_from_urls(broken_entries, m, fix=True)
                 playlist["entries"].extend(new_entries)
                 if hopeless_entries:
-                    await self.safe_send_message(channel, "I couldn't save the following entries\n***REMOVED******REMOVED***".format(
+                    await self.safe_send_message(channel, "I couldn't save the following entries\n{}".format(
                         "\n".join(
                             "**" + broken_entries[entry_index]["title"] + "**" for entry_index in hopeless_entries
                         )
@@ -505,10 +505,10 @@ class PlaylistCommands:
 
             else:
                 broken_entry = broken_entries[0]
-                info = await self.safe_send_message(channel, "*****REMOVED******REMOVED***** is broken, please wait while I fix it for ya.".format(broken_entry["title"]))
+                info = await self.safe_send_message(channel, "**{}** is broken, please wait while I fix it for ya.".format(broken_entry["title"]))
                 new_entry = await fix_entry(player.queue, broken_entry)
                 if not new_entry:
-                    await self.safe_send_message(channel, "Couldn't safe *****REMOVED******REMOVED*****".format(broken_entry["title"]))
+                    await self.safe_send_message(channel, "Couldn't safe **{}**".format(broken_entry["title"]))
                 else:
                     playlist["entries"].append(new_entry)
                     await self.safe_delete_message(info)
@@ -530,9 +530,9 @@ class PlaylistCommands:
                             items_per_page)) if len(entries) > 0 else 0
 
             for i in range(start, end):
-                entries_text += "`***REMOVED***:0>2***REMOVED***.` ***REMOVED******REMOVED*** ***REMOVED******REMOVED***\n".format(i + 1, nice_cut(entries[i].title, 50), self.config.entry_type_emojis.get(entries[i].__class__.__name__, ""))
+                entries_text += "`{:0>2}.` {} {}\n".format(i + 1, nice_cut(entries[i].title, 50), self.config.entry_type_emojis.get(entries[i].__class__.__name__, ""))
 
-            entries_text += "\nPage ***REMOVED******REMOVED*** of ***REMOVED******REMOVED***".format(entries_page + 1,
+            entries_text += "\nPage {} of {}".format(entries_page + 1,
                                                      iterations + 1)
 
             msg_content = interface_string.format(
@@ -578,7 +578,7 @@ class PlaylistCommands:
                         start_time = time.time()
                         entry = await player.queue.get_entry_from_query(query, author=author)
                         if isinstance(entry, list):
-                            entries, _ = await _get_entries_from_urls(entry, "Parsing ***REMOVED***entries_left***REMOVED*** entries", author=author)
+                            entries, _ = await _get_entries_from_urls(entry, "Parsing {entries_left} entries", author=author)
                         else:
                             entries = [entry, ]
                         if time.time() - start_time > 40:
@@ -591,7 +591,7 @@ class PlaylistCommands:
                     except Exception as e:
                         await self.safe_send_message(
                             channel,
-                            "**Something went terribly wrong there:**\n```\n***REMOVED******REMOVED***\n```".format(
+                            "**Something went terribly wrong there:**\n```\n{}\n```".format(
                                 e)
                         )
                     await self.safe_delete_message(msg)
@@ -660,7 +660,7 @@ class PlaylistCommands:
                 for certainty, entry in results[:5]:
                     entry_index = entries.index(entry) + 1
                     lines.append(
-                        "`***REMOVED******REMOVED***.` *****REMOVED******REMOVED*****".format(entry_index, entry.title))
+                        "`{}.` **{}**".format(entry_index, entry.title))
 
                 msg = "**Found the following entries:**\n" + \
                     "\n".join(lines) + \
@@ -762,35 +762,35 @@ class PlaylistCommands:
             if new_playlist:
                 self.playlists.remove_playlist(savename)
 
-            return Response("Closed *****REMOVED******REMOVED***** without saving".format(playlist["name"]))
+            return Response("Closed **{}** without saving".format(playlist["name"]))
             print("Closed the playlist builder")
 
         if save:
             if any((pl_changes["added_entries"], pl_changes["remove_entries"], pl_changes["new_name"], pl_changes["new_desc"], pl_changes["new_cover"], pl_changes["changed_entries"])):
                 c_log = "**CHANGES**\n\n"
                 if pl_changes["added_entries"]:
-                    new_entries_string = "\n".join(["    `***REMOVED******REMOVED***.` ***REMOVED******REMOVED***".format(ind, nice_cut(
+                    new_entries_string = "\n".join(["    `{}.` {}".format(ind, nice_cut(
                         entry.title, 40)) for ind, entry in enumerate(pl_changes["added_entries"], 1)])
-                    c_log += "**New entries**\n***REMOVED******REMOVED***\n".format(new_entries_string)
+                    c_log += "**New entries**\n{}\n".format(new_entries_string)
                 if pl_changes["remove_entries"]:
                     removed_entries_string = "\n".join(
-                        ["    `***REMOVED******REMOVED***.` ***REMOVED******REMOVED***".format(ind + 1, nice_cut(entry.title, 40)) for ind, entry in pl_changes["remove_entries"]])
-                    c_log += "**Removed entries**\n***REMOVED******REMOVED***\n".format(
+                        ["    `{}.` {}".format(ind + 1, nice_cut(entry.title, 40)) for ind, entry in pl_changes["remove_entries"]])
+                    c_log += "**Removed entries**\n{}\n".format(
                         removed_entries_string)
                 if pl_changes["changed_entries"]:
                     changed_entries_string = "\n".join(
-                        ["    `***REMOVED******REMOVED***.` ***REMOVED******REMOVED***".format(ind + 1, nice_cut(entry.title, 40)) for ind, entry in pl_changes["changed_entries"]])
+                        ["    `{}.` {}".format(ind + 1, nice_cut(entry.title, 40)) for ind, entry in pl_changes["changed_entries"]])
 
-                    c_log += "**Edited entries**\n***REMOVED******REMOVED***\n".format(
+                    c_log += "**Edited entries**\n{}\n".format(
                         changed_entries_string)
                 if pl_changes["new_name"]:
-                    c_log += "**Renamed playlist**\n    From `***REMOVED******REMOVED***` to `***REMOVED******REMOVED***`\n".format(
+                    c_log += "**Renamed playlist**\n    From `{}` to `{}`\n".format(
                         savename.title(), pl_changes["new_name"].title())
                 if pl_changes["new_desc"]:
-                    c_log += "**Changed description**\n    To `***REMOVED******REMOVED***`\n".format(
+                    c_log += "**Changed description**\n    To `{}`\n".format(
                         pl_changes["new_desc"])
                 if pl_changes["new_cover"]:
-                    c_log += "**Changed cover**\n    To `***REMOVED******REMOVED***`\n".format(
+                    c_log += "**Changed cover**\n    To `{}`\n".format(
                         pl_changes["new_cover"])
             else:
                 c_log = "No changes were made"
@@ -808,7 +808,7 @@ class PlaylistCommands:
             await self.loop.run_in_executor(None, partial)
             print("Closed the playlist builder and saved the playlist")
 
-            return Response("Successfully saved *****REMOVED******REMOVED*****\n\n***REMOVED******REMOVED***".format(
+            return Response("Successfully saved **{}**\n\n{}".format(
                 playlist["name"], c_log))
 
     async def entry_manipulator(self, player, channel, author, playlist_name, entry):
@@ -818,8 +818,8 @@ class PlaylistCommands:
             if "sub_queue" in keys:
                 return set(), TimestampEntry
 
-            missing_for_giesela = ***REMOVED***
-                "album", "artist", "artist_image_url", "cover_url"***REMOVED*** - keys
+            missing_for_giesela = {
+                "album", "artist", "artist_image_url", "cover_url"} - keys
             if not missing_for_giesela:
                 return set(), GieselaEntry
 
@@ -828,7 +828,7 @@ class PlaylistCommands:
         def build_new_entry(fields):
             _, entry_type = get_entry_type(fields)
 
-            args = ***REMOVED***
+            args = {
                 "title":                fields["title"],
                 "queue":                player.queue,
                 "video_id":             fields["_video_id"],
@@ -837,16 +837,16 @@ class PlaylistCommands:
                 "thumbnail":            fields["thumbnail"],
                 "description":          fields["_description"],
                 "expected_filename":    fields["_expected_filename"]
-            ***REMOVED***
+            }
 
             if entry_type is GieselaEntry:
-                args.update(***REMOVED***
+                args.update({
                     "song_title":   fields["title"],
                     "artist":       fields["artist"],
                     "artist_image": fields["artist_image_url"],
                     "album":        fields["album"],
                     "cover":        fields["cover_url"]
-                ***REMOVED***)
+                })
 
             elif entry_type is TimestampEntry:
                 args["sub_queue"] = timestamp_to_queue(
@@ -855,7 +855,7 @@ class PlaylistCommands:
             args.update(fields["_meta"])
             return entry_type(**args)
 
-        entry_fields = ***REMOVED***
+        entry_fields = {
             "__title":              entry._title,
             "_video_id":            entry.video_id,
             "url":                  entry.url,
@@ -865,20 +865,20 @@ class PlaylistCommands:
             "_meta":                entry.meta,
             "title":                entry.title,
             "thumbnail":            entry.thumbnail,
-        ***REMOVED***
+        }
         if isinstance(entry, GieselaEntry):
-            entry_fields.update(***REMOVED***
+            entry_fields.update({
                 "title":            entry.song_title,
                 "artist":           entry.artist,
                 "artist_image_url": entry.artist_image,
                 "album":            entry.album,
                 "cover_url":        entry.cover
-            ***REMOVED***)
+            })
         elif isinstance(entry, TimestampEntry):
-            entry_fields.update(***REMOVED***
+            entry_fields.update({
                 "title":        entry.whole_title,
-                "sub_queue":    ***REMOVED***entry["start"]: entry["name"] for entry in entry.sub_queue***REMOVED***
-            ***REMOVED***)
+                "sub_queue":    {entry["start"]: entry["name"] for entry in entry.sub_queue}
+            })
 
         commands = "\n".join([
             "`set <property> <query>` set a <property> (i.e. the cover) to <query>",
@@ -887,10 +887,10 @@ class PlaylistCommands:
             "`exit` abort",
             "`save` apply changes"
         ])
-        error_format = "**Error**\n***REMOVED***error_message***REMOVED***\n\n"
+        error_format = "**Error**\n{error_message}\n\n"
         information_format = ""
         line = wrap_string(80 * " ", "__")
-        interface_format = "**ENTRY EDITOR**\n\n***REMOVED******REMOVED***error***REMOVED******REMOVED******REMOVED***line***REMOVED***\n\n***REMOVED******REMOVED***fields***REMOVED******REMOVED***\n***REMOVED***line***REMOVED***\n***REMOVED******REMOVED***timestamps***REMOVED******REMOVED***\n***REMOVED******REMOVED***information***REMOVED******REMOVED***\n\n**Commands**\n***REMOVED***commands***REMOVED***".format(
+        interface_format = "**ENTRY EDITOR**\n\n{{error}}{line}\n\n{{fields}}\n{line}\n{{timestamps}}\n{{information}}\n\n**Commands**\n{commands}".format(
             line=line, commands=commands)
 
         error = None
@@ -917,7 +917,7 @@ class PlaylistCommands:
                     duration = next_start - start
 
                     lines.append(
-                        "   `***REMOVED******REMOVED***.` *****REMOVED******REMOVED***** (***REMOVED******REMOVED***)".format(to_timestamp(start),
+                        "   `{}.` **{}** ({})".format(to_timestamp(start),
                                                       title, to_timestamp(duration))
                     )
 
@@ -950,12 +950,12 @@ class PlaylistCommands:
                 info_text = "This is a GieselaEntry. That's as good as it gets"
             else:
                 missing = list(missing)
-                beautified_parameter = ***REMOVED***
+                beautified_parameter = {
                     "artist":           "the **artist**",
                     "album":            "an **album**",
                     "artist_image_url": "a **picture of the artist**",
                     "cover_url":        "a **cover**"
-                ***REMOVED***
+                }
 
                 properties_needed = ""
                 if len(missing) > 1:
@@ -964,7 +964,7 @@ class PlaylistCommands:
 
                 properties_needed += beautified_parameter[missing[-1]]
 
-                info_text = "This is currently a normal entry. Provide ***REMOVED******REMOVED*** in order to get to a GieselaEntry".format(
+                info_text = "This is currently a normal entry. Provide {} in order to get to a GieselaEntry".format(
                     properties_needed)
 
             msg_text = interface_format.format(error=error_text, fields=fields_text, timestamps=timestamps, information=info_text)
@@ -986,7 +986,7 @@ class PlaylistCommands:
             command, _, _rest = response.content.strip().partition(" ")
             command = command.lower()
 
-            targets = ***REMOVED***
+            targets = {
                 "title": "title",
                 "artist image": "artist_image_url",
                 "artist": "artist",
@@ -995,7 +995,7 @@ class PlaylistCommands:
                 "thumbnail": "thumbnail",
                 "timestamps": "sub_queue",
                 "url": "url"
-            ***REMOVED***
+            }
 
             responsible_text, property_target = (
                 [(k, t) for k, t in targets.items() if _rest.lower().startswith(k)] or (("", None),))[0]
@@ -1021,17 +1021,17 @@ class PlaylistCommands:
                                 video_url = info.get("webpage_url")
                                 video_duration = info.get("duration", 0)
 
-                                entry_fields.update(***REMOVED***
+                                entry_fields.update({
                                     "_video_id":    video_id,
                                     "url":          video_url,
                                     "_duration":    video_duration,
-                                ***REMOVED***)
+                                })
                             else:
                                 error = "Something went wrong but I have no idea what"
                         else:
                             if property_target in ("cover_url", "thumbnail", "artist_image_url"):
                                 if is_image(rest):
-                                    url = await upload_song_image(self.loop, playlist_name, "***REMOVED******REMOVED*** ***REMOVED******REMOVED***".format(entry_fields["_video_id"], property_target), rest)
+                                    url = await upload_song_image(self.loop, playlist_name, "{} {}".format(entry_fields["_video_id"], property_target), rest)
                                     if url:
                                         entry_fields[property_target] = url
                                     else:
@@ -1088,7 +1088,7 @@ class PlaylistCommands:
 
             await self.safe_delete_message(response)
 
-    @command_info("2.9.2", 1479945600, ***REMOVED***
+    @command_info("2.9.2", 1479945600, {
         "3.3.6": (1497387101, "added the missing \"s\", should be working again"),
         "3.4.4": (1497611753, "Changed command name from \"addplayingtoplaylist\" to \"addtoplaylist\", thanks Paulo"),
         "3.5.5": (1497792167, "Now displaying what entry has been added to the playlist"),
@@ -1099,11 +1099,11 @@ class PlaylistCommands:
         "4.6.9": (1503754385, "Fixed typo"),
         "4.7.8": (1504105737, "Using the new copy method for entries to make sure that they're \"clean\""),
         "4.9.12": (1512834598, "Can now actually use command with query overload.")
-    ***REMOVED***)
+    })
     async def cmd_addtoplaylist(self, channel, author, player, playlistname, leftover_args):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***addtoplaylist <playlistname> [query]`
+        `{command_prefix}addtoplaylist <playlistname> [query]`
         ///|Explanation
         Add the current entry to a playlist.
         If you either provide a link or a name, that song is added to the playlist.
@@ -1123,7 +1123,7 @@ class PlaylistCommands:
             try:
                 add_entry = await player.queue.get_entry_from_query(query, channel=channel, author=author)
             except ExtractionError as e:
-                return Response("```\n***REMOVED******REMOVED***```".format(e))
+                return Response("```\n{}```".format(e))
 
         else:
             if not player.current_entry:
@@ -1146,10 +1146,10 @@ class PlaylistCommands:
                     "Your name is too short. Please choose one with at least three letters."
                 )
             self.playlists.set_playlist(playlistname, [add_entry], playlistname, author.id)
-            player._current_entry.meta["playlist"] = ***REMOVED***
+            player._current_entry.meta["playlist"] = {
                 "name": playlistname
-            ***REMOVED***
-            return Response("Created a new playlist `***REMOVED******REMOVED***` and added *****REMOVED******REMOVED*****.".format(playlistname.title(),
+            }
+            return Response("Created a new playlist `{}` and added **{}**.".format(playlistname.title(),
                                                                                    add_entry.title))
 
         res = self.playlists.in_playlist(
@@ -1157,7 +1157,7 @@ class PlaylistCommands:
         if res:
             notification = await self.safe_send_message(
                 channel,
-                "There's already an entry similar to this one in `***REMOVED******REMOVED***`\n*****REMOVED******REMOVED*****\n\nDo you still want to add *****REMOVED******REMOVED*****? `yes`/`no`".format(
+                "There's already an entry similar to this one in `{}`\n**{}**\n\nDo you still want to add **{}**? `yes`/`no`".format(
                     playlistname.title(),
                     res.title,
                     add_entry.title
@@ -1169,16 +1169,16 @@ class PlaylistCommands:
                 await self.safe_delete_message(response)
 
             if not (response and response.content.lower().strip().startswith("y")):
-                return Response("Didn't add *****REMOVED******REMOVED***** to `***REMOVED******REMOVED***`".format(add_entry.title, playlistname.title()))
+                return Response("Didn't add **{}** to `{}`".format(add_entry.title, playlistname.title()))
 
         self.playlists.edit_playlist(
             playlistname, player.queue, new_entries=[add_entry])
-        player._current_entry.meta["playlist"] = ***REMOVED***
+        player._current_entry.meta["playlist"] = {
             "name": playlistname
-        ***REMOVED***
-        return Response("Added *****REMOVED******REMOVED***** to playlist `***REMOVED******REMOVED***`.".format(add_entry.title, playlistname.title()))
+        }
+        return Response("Added **{}** to playlist `{}`.".format(add_entry.title, playlistname.title()))
 
-    @command_info("2.9.2", 1479945600, ***REMOVED***
+    @command_info("2.9.2", 1479945600, {
         "3.3.6": (1497387101, "added the missing \"s\", should be working again"),
         "3.4.4": (1497611753, "Changed command name from \"removeplayingfromplaylist\" to \"removefromplaylist\", thanks Paulo"),
         "3.5.8": (1497826917, "Now displaying the names of the song and the playlist"),
@@ -1186,11 +1186,11 @@ class PlaylistCommands:
         "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite"),
         "4.3.6": (1501249709, "Fixed variable name error"),
         "4.7.8": (1504105737, "Using the new copy method for entries to make sure that they're \"clean\"")
-    ***REMOVED***)
+    })
     async def cmd_removefromplaylist(self, channel, author, player, playlistname=None):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***removefromplaylist [playlistname]`
+        `{command_prefix}removefromplaylist [playlistname]`
         ///|Explanation
         Remove the current entry from its playlist or from the specified playlist.
         """
@@ -1202,7 +1202,7 @@ class PlaylistCommands:
             if "playlist" in player.current_entry.meta:
                 playlist_id = player.current_entry.meta["playlist"]["id"]
                 self.playlists.edit_playlist(playlist_id, player.queue, remove_entries=[player.current_entry, ])
-                return Response("Removed *****REMOVED******REMOVED***** from playlist `***REMOVED******REMOVED***`".format(player.current_entry.title, player.current_entry.meta["playlist"]["name"]))
+                return Response("Removed **{}** from playlist `{}`".format(player.current_entry.title, player.current_entry.meta["playlist"]["name"]))
             else:
                 return Response("Please specify the playlist's name!")
 
@@ -1211,16 +1211,16 @@ class PlaylistCommands:
         remove_entry = player.current_entry.copy()
 
         if playlist_id not in self.playlists.playlists.keys():
-            return Response("There's no playlist `***REMOVED******REMOVED***`.".format(playlist_id))
+            return Response("There's no playlist `{}`.".format(playlist_id))
 
         playlist_data = self.playlists.get_playlist(playlist_id, queue, False)
 
         self.playlists.edit_playlist(playlist_id, player.queue, remove_entries=[remove_entry])
         player._current_entry.meta.pop("playlist", None)
-        return Response("Removed *****REMOVED******REMOVED***** from playlist `***REMOVED******REMOVED***`.".format(remove_entry.title, playlist_data["name"]))
+        return Response("Removed **{}** from playlist `{}`.".format(remove_entry.title, playlist_data["name"]))
 
     @block_user
-    @command_info("4.1.9", 1500882702, ***REMOVED***
+    @command_info("4.1.9", 1500882702, {
         "4.2.2": (1500911879, "Entry not in a playlist handling"),
         "4.2.6": (1500963901, "Can now use the entry manipulator on non-playlist entries"),
         "4.3.3": (1501235095, "Fixed strange message formatting bug."),
@@ -1228,11 +1228,11 @@ class PlaylistCommands:
         "4.3.9": (1501340523, "Can now set image-properties with attachments"),
         "4.5.4": (1501967725, "One may now edit an entry's url"),
         "4.7.8": (1504105737, "Using the new copy method for entries to make sure that they're \"clean\"")
-    ***REMOVED***)
+    })
     async def cmd_editentry(self, channel, author, player, leftover_args):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***editentry [playlistname]`
+        `{command_prefix}editentry [playlistname]`
         ///|Explanation
         Start the entry manipulator on the current entry
         """
@@ -1244,7 +1244,7 @@ class PlaylistCommands:
 
         entry = player.current_entry.copy()
 
-        playlistname = "_".join(leftover_args) or entry.meta.get("playlist", ***REMOVED******REMOVED***).get("id", None) or ""
+        playlistname = "_".join(leftover_args) or entry.meta.get("playlist", {}).get("id", None) or ""
 
         if playlistname not in self.playlists.playlists.keys():
             playlistname = None
@@ -1260,8 +1260,8 @@ class PlaylistCommands:
 
             if playlistname:
                 self.playlists.edit_playlist(playlistname, player.queue, edit_entries=[(entry, new_entry)])
-                return Response("Successfully edited *****REMOVED******REMOVED***** from `***REMOVED******REMOVED***`".format(new_entry.title, playlistname.replace("_", " ").title()))
+                return Response("Successfully edited **{}** from `{}`".format(new_entry.title, playlistname.replace("_", " ").title()))
             else:
                 return Response("Saved changes to current entry.")
         else:
-            return Response("Didn't save changes to *****REMOVED******REMOVED*****".format(entry.title))
+            return Response("Didn't save changes to **{}**".format(entry.title))

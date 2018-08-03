@@ -31,13 +31,13 @@ class WebAuthor(Serialisable):
         return WebAuthor.bot.get_global_user(self.id)
 
     def __str__(self):
-        return "[***REMOVED******REMOVED***/***REMOVED******REMOVED***]".format(self.id, self.name)
+        return "[{}/{}]".format(self.id, self.name)
 
     def to_dict(self):
-        return ***REMOVED***
+        return {
             "id": self.id,
             "name": self.name,
             "display_name": self.display_name,
             "avatar_url": self.avatar_url.replace(".webp", ".png"),
             "colour": self.colour
-        ***REMOVED***
+        }

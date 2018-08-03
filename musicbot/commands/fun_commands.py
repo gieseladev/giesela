@@ -9,19 +9,19 @@ from musicbot.games.game_2048 import Game2048
 from musicbot.games.game_cah import GameCAH
 from musicbot.games.game_connect_four import GameConnectFour
 from musicbot.games.game_hangman import GameHangman
-from musicbot.utils import (Response, block_user, command_info, owner_only,
+from musicbot.utils import (Response, block_user, escape_dis, command_info, owner_only,
                             random_line)
 
 
 class FunCommands:
 
-    @command_info("1.9.5", 1477781586, ***REMOVED***
+    @command_info("1.9.5", 1477781586, {
         "4.8.7": (1504288917, "Improved command")
-    ***REMOVED***)
+    })
     async def cmd_c(self, author, channel, leftover_args):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***c <message>`
+        `{command_prefix}c <message>`
         ///|Explanation
         Chat with Giesela
         """
@@ -54,19 +54,19 @@ class FunCommands:
     async def cmd_cah(self, message, channel, author, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***cah create
-            ***REMOVED***command_prefix***REMOVED***cah join <token>
-            ***REMOVED***command_prefix***REMOVED***cah leave <token>
+            {command_prefix}cah create
+            {command_prefix}cah join <token>
+            {command_prefix}cah leave <token>
 
-            ***REMOVED***command_prefix***REMOVED***cah start <token>
-            ***REMOVED***command_prefix***REMOVED***cah stop <token>
+            {command_prefix}cah start <token>
+            {command_prefix}cah stop <token>
 
         Play a cards against humanity game
 
         References:
-            ***REMOVED***command_prefix***REMOVED***help cards
+            {command_prefix}help cards
                 -learn how to create/edit cards
-            ***REMOVED***command_prefix***REMOVED***help qcards
+            {command_prefix}help qcards
                 -learn about how to create/edit question cards
         """
 
@@ -76,13 +76,13 @@ class FunCommands:
             if self.cah.is_user_in_game(author.id):
                 g = self.cah.get_game(author.id)
                 return Response(
-                    "You can't host a game if you're already in one\nUse `***REMOVED******REMOVED***cah leave ***REMOVED******REMOVED***` to leave your current game".
+                    "You can't host a game if you're already in one\nUse `{}cah leave {}` to leave your current game".
                     format(self.config.command_prefix, g.token),
                     delete_after=15)
 
             token = self.cah.new_game(author.id)
             return Response(
-                "Created a new game.\nUse `***REMOVED***0***REMOVED***cah join ***REMOVED***1***REMOVED***` to join this game and\nwhen everyone's in use `***REMOVED***0***REMOVED***cah start ***REMOVED***1***REMOVED***`".
+                "Created a new game.\nUse `{0}cah join {1}` to join this game and\nwhen everyone's in use `{0}cah start {1}`".
                 format(self.config.command_prefix, token),
                 delete_after=1000)
         elif argument == "join":
@@ -94,7 +94,7 @@ class FunCommands:
             if self.cah.is_user_in_game(author.id):
                 g = self.cah.get_game_from_user_id(author.id)
                 return Response(
-                    "You can only be part of one game at a time!\nUse `***REMOVED******REMOVED***cah leave ***REMOVED******REMOVED***` to leave your current game".
+                    "You can only be part of one game at a time!\nUse `{}cah leave {}` to leave your current game".
                     format(self.config.command_prefix, g.token),
                     delete_after=15)
 
@@ -109,11 +109,11 @@ class FunCommands:
                     "You're already in this game!")
 
             if self.cah.user_join_game(author.id, token):
-                return Response("Successfully joined the game *****REMOVED******REMOVED*****".format(
+                return Response("Successfully joined the game **{}**".format(
                     token.upper()))
             else:
                 return Response(
-                    "Failed to join game *****REMOVED******REMOVED*****".format(token.upper()))
+                    "Failed to join game **{}**".format(token.upper()))
         elif argument == "leave":
             token = leftover_args[
                 1].lower() if len(leftover_args) > 1 else None
@@ -132,10 +132,10 @@ class FunCommands:
 
             if self.cah.player_leave_game(author.id, token):
                 return Response(
-                    "Successfully left the game *****REMOVED******REMOVED*****".format(token.upper()))
+                    "Successfully left the game **{}**".format(token.upper()))
             else:
                 return Response(
-                    "Failed to leave game *****REMOVED******REMOVED*****".format(token.upper()))
+                    "Failed to leave game **{}**".format(token.upper()))
         elif argument == "start":
             token = leftover_args[
                 1].lower() if len(leftover_args) > 1 else None
@@ -152,7 +152,7 @@ class FunCommands:
 
             if not g.enough_players():
                 return Response(
-                    "There are not enough players to start this game.\nUse `***REMOVED******REMOVED***cah join ***REMOVED******REMOVED***` to join a game".
+                    "There are not enough players to start this game.\nUse `{}cah join {}` to join a game".
                     format(self.config.command_prefix, g.token),
                     delete_after=15)
 
@@ -172,23 +172,23 @@ class FunCommands:
 
             self.cah.stop_game(g.token)
             return Response(
-                "Stopped the game *****REMOVED******REMOVED*****".format(token))
+                "Stopped the game **{}**".format(token))
 
     @block_user
     async def cmd_cards(self, server, channel, author, message, leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***cards list [@mention] [text | likes | occurences | date | random | id | author | none]
+            {command_prefix}cards list [@mention] [text | likes | occurences | date | random | id | author | none]
                 -list all the available cards
-            ***REMOVED***command_prefix***REMOVED***cards create <text>
+            {command_prefix}cards create <text>
                 -create a new card with text
-            ***REMOVED***command_prefix***REMOVED***cards edit <id> <new_text>
+            {command_prefix}cards edit <id> <new_text>
                 -edit a card by its id
-            ***REMOVED***command_prefix***REMOVED***cards info <id>
+            {command_prefix}cards info <id>
                 -Get more detailed information about a card
-            ***REMOVED***command_prefix***REMOVED***cards search <query>
+            {command_prefix}cards search <query>
                 -Search for a card
-            ***REMOVED***command_prefix***REMOVED***cards delete <id>
+            {command_prefix}cards delete <id>
                 -Delete a question card
 
         Here you manage the non question cards
@@ -197,8 +197,8 @@ class FunCommands:
         argument = leftover_args[0].lower() if len(leftover_args) > 0 else None
 
         if argument == "list":
-            sort_modes = ***REMOVED***"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (
-                lambda entry: entry.creation_date, True, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "likes": (lambda entry: entry.like_dislike_ratio, True, lambda entry: "***REMOVED******REMOVED***%".format(int(entry.like_dislike_ratio * 100)))***REMOVED***
+            sort_modes = {"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (
+                lambda entry: entry.creation_date, True, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "likes": (lambda entry: entry.like_dislike_ratio, True, lambda entry: "{}%".format(int(entry.like_dislike_ratio * 100)))}
 
             cards = self.cah.cards.cards.copy(
             ) if message.mentions is None or len(message.mentions) < 1 else [
@@ -235,7 +235,7 @@ class FunCommands:
             if len(results) < 1:
                 return Response("**Didn't find any cards!**")
 
-            card_string = "***REMOVED***0.id***REMOVED***. \"***REMOVED***1***REMOVED***\""
+            card_string = "{0.id}. \"{1}\""
             cards = []
             for card in results:
                 cards.append(
@@ -250,7 +250,7 @@ class FunCommands:
 
             card = self.cah.cards.get_card(card_id)
             if card is not None:
-                info = "Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ndrawn ***REMOVED***0.picked_up_count***REMOVED*** time***REMOVED***5***REMOVED***\nliked by ***REMOVED***6***REMOVED***% of players\ncreated ***REMOVED***3***REMOVED***```\nUse `***REMOVED***4***REMOVED***cards edit ***REMOVED***0.id***REMOVED***` to edit this card"
+                info = "Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ndrawn {0.picked_up_count} time{5}\nliked by {6}% of players\ncreated {3}```\nUse `{4}cards edit {0.id}` to edit this card"
                 return Response(
                     info.format(card,
                                 self.get_global_user(card.creator_id).mention,
@@ -260,7 +260,7 @@ class FunCommands:
                                 1 else "", int(card.like_dislike_ratio * 100)))
 
             return Response(
-                "There's no card with that id. Use `***REMOVED******REMOVED***cards list` to list all the possible cards".
+                "There's no card with that id. Use `{}cards list` to list all the possible cards".
                 format(self.config.command_prefix))
         elif argument == "create":
             text = " ".join(
@@ -278,11 +278,11 @@ class FunCommands:
             already_has_card, card = self.cah.cards.card_with_text(text)
             if already_has_card:
                 return Response(
-                    "There's already a card with a fairly similar content. <***REMOVED***0***REMOVED***>\nUse `***REMOVED***1***REMOVED***cards info ***REMOVED***0***REMOVED***` to find out more about this card".
+                    "There's already a card with a fairly similar content. <{0}>\nUse `{1}cards info {0}` to find out more about this card".
                     format(card.id, self.config.command_prefix))
 
             card_id = self.cah.cards.add_card(text, author.id)
-            return Response("Successfully created card *****REMOVED******REMOVED*****".format(card_id))
+            return Response("Successfully created card **{}**".format(card_id))
         elif argument == "edit":
             card_id = leftover_args[
                 1].lower().strip() if len(leftover_args) > 1 else None
@@ -311,12 +311,12 @@ class FunCommands:
             already_has_card, card = self.cah.cards.card_with_text(text)
             if already_has_card and card.id != card_id_value:
                 return Response(
-                    "There's already a card with a fairly similar content. <***REMOVED***0***REMOVED***>\nUse `***REMOVED***1***REMOVED***cards info ***REMOVED***0***REMOVED***` to find out more about this card".
+                    "There's already a card with a fairly similar content. <{0}>\nUse `{1}cards info {0}` to find out more about this card".
                     format(card.id, self.config.command_prefix))
 
             if self.cah.cards.edit_card(card_id, text):
                 return Response(
-                    "Edited card <*****REMOVED******REMOVED*****>".format(card_id))
+                    "Edited card <**{}**>".format(card_id))
             else:
                 return Response(
                     "There's no card with that id")
@@ -330,10 +330,10 @@ class FunCommands:
 
             if self.cah.cards.remove_card(card_id):
                 return Response(
-                    "Deleted card <*****REMOVED******REMOVED*****>".format(card_id))
+                    "Deleted card <**{}**>".format(card_id))
             else:
                 return Response(
-                    "Could not remove card <*****REMOVED******REMOVED*****>".format(card_id),
+                    "Could not remove card <**{}**>".format(card_id),
                     delete_after=15)
         else:
             return await self.cmd_help(channel, ["cards"])
@@ -344,8 +344,8 @@ class FunCommands:
                           cards,
                           display_additional=None):
         cmds = ("n", "p", "exit")
-        site_interface = "**Cards | Page ***REMOVED***0***REMOVED*** of ***REMOVED***1***REMOVED*****\n```\n***REMOVED***2***REMOVED***\n```\nShit you can do:\n`n`: Switch to the next page\n`p`: Switch to the previous page\n`exit`: Exit the viewer"
-        card_string = "<***REMOVED******REMOVED***> [***REMOVED******REMOVED***]***REMOVED******REMOVED***"
+        site_interface = "**Cards | Page {0} of {1}**\n```\n{2}\n```\nShit you can do:\n`n`: Switch to the next page\n`p`: Switch to the previous page\n`exit`: Exit the viewer"
+        card_string = "<{}> [{}]{}"
 
         items_per_page = 20
         timeout = 60
@@ -369,7 +369,7 @@ class FunCommands:
                 page_cards_texts.append(
                     card_string.format(
                         p_c.id, p_c.text, "" if display_additional is None or
-                        display_additional(p_c) is None else " | ***REMOVED******REMOVED***".format(
+                        display_additional(p_c) is None else " | {}".format(
                             display_additional(p_c))))
 
             interface_msg = await self.safe_send_message(
@@ -406,17 +406,17 @@ class FunCommands:
                          leftover_args):
         """
         Usage:
-            ***REMOVED***command_prefix***REMOVED***qcards list [@mention] [text | likes | occurences | date | author | id | blanks | random | none]
+            {command_prefix}qcards list [@mention] [text | likes | occurences | date | author | id | blanks | random | none]
                 -list all the available question cards
-            ***REMOVED***command_prefix***REMOVED***qcards create <text (use $ for blanks)>
+            {command_prefix}qcards create <text (use $ for blanks)>
                 -create a new question card with text and if you want the number of cards to draw
-            ***REMOVED***command_prefix***REMOVED***qcards edit <id> <new_text>
+            {command_prefix}qcards edit <id> <new_text>
                 -edit a question card by its id
-            ***REMOVED***command_prefix***REMOVED***qcards info <id>
+            {command_prefix}qcards info <id>
                 -Get more detailed information about a question card
-            ***REMOVED***command_prefix***REMOVED***qcards search <query>
+            {command_prefix}qcards search <query>
                 -Search for a question card
-            ***REMOVED***command_prefix***REMOVED***qcards delete <id>
+            {command_prefix}qcards delete <id>
                 -Delete a question card
 
         Here you manage the question cards
@@ -425,8 +425,8 @@ class FunCommands:
         argument = leftover_args[0].lower() if len(leftover_args) > 0 else None
 
         if argument == "list":
-            sort_modes = ***REMOVED***"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (lambda entry: entry.creation_date, True, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(
-                entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "blanks": (lambda entry: entry.number_of_blanks, True, lambda entry: entry.number_of_blanks), "likes": (lambda entry: entry.like_dislike_ratio, True, lambda entry: "***REMOVED******REMOVED***%".format(int(entry.like_dislike_ratio * 100)))***REMOVED***
+            sort_modes = {"text": (lambda entry: entry.text, False, lambda entry: None), "random": None, "occurences": (lambda entry: entry.occurences, True, lambda entry: entry.occurences), "date": (lambda entry: entry.creation_date, True, lambda entry: prettydate(entry.creation_date)), "author": (lambda entry: entry.creator_id, False, lambda entry: self.get_global_user(
+                entry.creator_id).name), "id": (lambda entry: entry.id, False, lambda entry: None), "blanks": (lambda entry: entry.number_of_blanks, True, lambda entry: entry.number_of_blanks), "likes": (lambda entry: entry.like_dislike_ratio, True, lambda entry: "{}%".format(int(entry.like_dislike_ratio * 100)))}
 
             cards = self.cah.cards.question_cards.copy(
             ) if message.mentions is None or len(message.mentions) < 1 else [
@@ -464,7 +464,7 @@ class FunCommands:
                 return Response(
                     "**Didn't find any question cards!**")
 
-            card_string = "***REMOVED***0.id***REMOVED***. \"***REMOVED***1***REMOVED***\""
+            card_string = "{0.id}. \"{1}\""
             cards = []
             for card in results:
                 cards.append(
@@ -481,7 +481,7 @@ class FunCommands:
 
             card = self.cah.cards.get_question_card(card_id)
             if card is not None:
-                info = "Question Card *****REMOVED***0.id***REMOVED***** by ***REMOVED***1***REMOVED***\n```\n\"***REMOVED***0.text***REMOVED***\"\nused ***REMOVED***0.occurences***REMOVED*** time***REMOVED***2***REMOVED***\ncreated ***REMOVED***3***REMOVED***```\nUse `***REMOVED***4***REMOVED***cards edit ***REMOVED***0.id***REMOVED***` to edit this card`"
+                info = "Question Card **{0.id}** by {1}\n```\n\"{0.text}\"\nused {0.occurences} time{2}\ncreated {3}```\nUse `{4}cards edit {0.id}` to edit this card`"
                 return Response(
                     info.format(card,
                                 self.get_global_user(card.creator_id).mention,
@@ -510,12 +510,12 @@ class FunCommands:
                 text)
             if already_has_card:
                 return Response(
-                    "There's already a question card with a fairly similar content. <***REMOVED***0***REMOVED***>\nUse `***REMOVED***1***REMOVED***qcards info ***REMOVED***0***REMOVED***` to find out more about this card".
+                    "There's already a question card with a fairly similar content. <{0}>\nUse `{1}qcards info {0}` to find out more about this card".
                     format(card.id, self.config.command_prefix))
 
             card_id = self.cah.cards.add_question_card(text, author.id)
             return Response(
-                "Successfully created question card *****REMOVED******REMOVED*****".format(card_id))
+                "Successfully created question card **{}**".format(card_id))
         elif argument == "edit":
             card_id = leftover_args[
                 1].lower().strip() if len(leftover_args) > 1 else None
@@ -551,12 +551,12 @@ class FunCommands:
                 text)
             if already_has_card and card.id != card_id_value:
                 return Response(
-                    "There's already a question card with a fairly similar content. <***REMOVED***0***REMOVED***>\nUse `***REMOVED***1***REMOVED***qcards info ***REMOVED***0***REMOVED***` to find out more about this question card".
+                    "There's already a question card with a fairly similar content. <{0}>\nUse `{1}qcards info {0}` to find out more about this question card".
                     format(card.id, self.config.command_prefix))
 
             if self.cah.cards.edit_question_card(card_id, text):
                 return Response(
-                    "Edited question card <*****REMOVED******REMOVED*****>".format(card_id),
+                    "Edited question card <**{}**>".format(card_id),
                     delete_after=15)
             else:
                 return Response(
@@ -571,11 +571,11 @@ class FunCommands:
 
             if self.cah.cards.remove_question_card(card_id):
                 return Response(
-                    "Deleted question card <*****REMOVED******REMOVED*****>".format(card_id),
+                    "Deleted question card <**{}**>".format(card_id),
                     delete_after=15)
             else:
                 return Response(
-                    "Could not remove question card <*****REMOVED******REMOVED*****>".format(card_id),
+                    "Could not remove question card <**{}**>".format(card_id),
                     delete_after=15)
         else:
             return await self.cmd_help(channel, ["qcards"])
@@ -586,8 +586,8 @@ class FunCommands:
                            cards,
                            display_additional=None):
         cmds = ("n", "p", "exit")
-        site_interface = "**Question Cards | Page ***REMOVED***0***REMOVED*** of ***REMOVED***1***REMOVED*****\n```\n***REMOVED***2***REMOVED***\n```\nShit you can do:\n`n`: Switch to the next page\n`p`: Switch to the previous page\n`exit`: Exit the viewer"
-        card_string = "<***REMOVED******REMOVED***> \"***REMOVED******REMOVED***\"***REMOVED******REMOVED***"
+        site_interface = "**Question Cards | Page {0} of {1}**\n```\n{2}\n```\nShit you can do:\n`n`: Switch to the next page\n`p`: Switch to the previous page\n`exit`: Exit the viewer"
+        card_string = "<{}> \"{}\"{}"
 
         items_per_page = 20
         timeout = 60
@@ -613,7 +613,7 @@ class FunCommands:
                         p_c.id,
                         p_c.text.replace("$", "_____"), "" if
                         display_additional is None or display_additional(p_c)
-                        is None else " | ***REMOVED******REMOVED***".format(display_additional(p_c))))
+                        is None else " | {}".format(display_additional(p_c))))
 
             interface_msg = await self.safe_send_message(
                 channel,
@@ -645,30 +645,30 @@ class FunCommands:
             channel, "Closed the question card viewer!", expire_in=20)
 
     @block_user
-    @command_info("1.9.5", 1478998740, ***REMOVED***
+    @command_info("1.9.5", 1478998740, {
         "2.0.2": (1481387640, "Added Hangman game and generalised game hub command"),
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "4.6.3": (1503158773, "Added Connect Four")
-    ***REMOVED***)
+    })
     async def cmd_game(self, message, channel, author, leftover_args, game=None):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***game [name]`
+        `{command_prefix}game [name]`
         ///|Explanation
         Play a game
         ///|References
         Cards against humanity can be played with the `cah` command.
-        Use `***REMOVED***command_prefix***REMOVED***help cah` to learn more
+        Use `{command_prefix}help cah` to learn more
         """
 
         all_funcs = dir(self)
         all_games = list(filter(lambda x: re.search("^g_\w+", x), all_funcs))
         all_game_names = [x[2:] for x in all_games]
-        game_list = [***REMOVED***
+        game_list = [{
             "name": x[2:],
             "handler": getattr(self, x, None),
             "description": getattr(self, x, None).__doc__.strip(" \t\n\r")
-        ***REMOVED*** for x in all_games]
+        } for x in all_games]
 
         if message.mentions is not None and len(message.mentions) > 0:
             author = message.mentions[0]
@@ -682,7 +682,7 @@ class FunCommands:
             for current_game in game_list:
                 msg = await self.safe_send_message(
                     channel,
-                    "How about this game:\n\n*****REMOVED******REMOVED*****\n***REMOVED******REMOVED***\n\nType `y`, `n` or `exit`".
+                    "How about this game:\n\n**{}**\n{}\n\nType `y`, `n` or `exit`".
                     format(current_game["name"], current_game["description"]))
                 response = await self.wait_for_message(
                     100, author=author, channel=channel, check=check)
@@ -756,13 +756,13 @@ class FunCommands:
                 msg = await self.send_file(
                     channel,
                     game.getImage(cache_location) + ".png",
-                    content="**2048**\n***REMOVED******REMOVED*** turn ***REMOVED******REMOVED***".format(
+                    content="**2048**\n{} turn {}".format(
                         str(turn_index) +
-                        ("th" if 4 <= turn_index % 100 <= 20 else ***REMOVED***
+                        ("th" if 4 <= turn_index % 100 <= 20 else {
                             1: "st",
                             2: "nd",
                             3: "rd"
-                        ***REMOVED***.get(turn_index % 10, "th")), turn_information))
+                        }.get(turn_index % 10, "th")), turn_information))
                 turn_information = ""
                 await self.add_reaction(msg, "⬅")
                 await self.add_reaction(msg, "⬆")
@@ -789,7 +789,7 @@ class FunCommands:
                     if str(reaction.emoji) == "💾" and reaction.count > 1:
                         await self.safe_send_message(
                             user,
-                            "The save code is: *****REMOVED***0***REMOVED*****\nUse `***REMOVED***1***REMOVED***game 2048 ***REMOVED***2***REMOVED***` to continue your current game".
+                            "The save code is: **{0}**\nUse `{1}game 2048 {2}` to continue your current game".
                             format(
                                 escape_dis(game.get_save()),
                                 self.config.command_prefix, game.get_save()))
@@ -815,13 +815,13 @@ class FunCommands:
             if game.won():
                 await self.safe_send_message(
                     channel,
-                    "**2048**\nCongratulations, you won after ***REMOVED******REMOVED*** turns".format(
+                    "**2048**\nCongratulations, you won after {} turns".format(
                         str(turn_index)))
                 game_running = False
 
             if game.lost():
                 await self.safe_send_message(
-                    channel, "**2048**\nYou lost after ***REMOVED******REMOVED*** turns".format(
+                    channel, "**2048**\nYou lost after {} turns".format(
                         str(turn_index)))
                 game_running = False
 
@@ -855,7 +855,7 @@ class FunCommands:
             current_status = game.get_beautified_string()
             msg = await self.safe_send_message(
                 channel,
-                "**Hangman**\n***REMOVED******REMOVED*** tr***REMOVED******REMOVED*** left\n\n***REMOVED******REMOVED***\n\n`Send the letter you want to guess or type \"exit\" to exit.`".
+                "**Hangman**\n{} tr{} left\n\n{}\n\n`Send the letter you want to guess or type \"exit\" to exit.`".
                 format(game.tries_left, "ies"
                        if game.tries_left != 1 else "y", current_status))
             response = await self.wait_for_message(
@@ -872,7 +872,7 @@ class FunCommands:
             if response.content.lower() == word:
                 await self.safe_send_message(
                     channel,
-                    "Congratulations, you got it!\nThe word is: ****REMOVED******REMOVED****".format(
+                    "Congratulations, you got it!\nThe word is: *{}*".format(
                         word))
                 return
 
@@ -882,7 +882,7 @@ class FunCommands:
             if game.won:
                 await self.safe_send_message(
                     channel,
-                    "Congratulations, you got it!\nThe word is: ****REMOVED******REMOVED****".format(
+                    "Congratulations, you got it!\nThe word is: *{}*".format(
                         word))
                 running = False
 
@@ -918,7 +918,7 @@ class FunCommands:
                 if challanged_user.bot:
                     to_delete.append(await self.safe_send_message(channel, "You can't challange a bot"))
 
-                await self.safe_send_message(challanged_user, "*****REMOVED******REMOVED***** challanded you to a game of **Connect 4**. Do you accept?".format(author.display_name))
+                await self.safe_send_message(challanged_user, "**{}** challanded you to a game of **Connect 4**. Do you accept?".format(author.display_name))
                 resp = await self.wait_for_message(timeout=60, author=challanged_user)
 
                 if resp:
@@ -928,7 +928,7 @@ class FunCommands:
                     players = [author, challanged_user]
                     break
                 else:
-                    to_delete.append(await self.safe_send_message(channel, "*****REMOVED******REMOVED***** declined!".format(author.display_name)))
+                    to_delete.append(await self.safe_send_message(channel, "**{}** declined!".format(author.display_name)))
 
             elif msg.content.lower().strip() in ("ai", "computer", "giesela", "you"):
                 players = author

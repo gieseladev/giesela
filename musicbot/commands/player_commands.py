@@ -6,15 +6,15 @@ from musicbot.utils import (Response, block_user, command_info, create_bar,
 
 class PlayerCommands:
 
-    @command_info("1.0.0", 1477180800, ***REMOVED***
+    @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite"),
         "4.9.9": (1508219627, "Pause can unpause as well just because")
-    ***REMOVED***)
+    })
     async def cmd_pause(self, player):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***pause`
+        `{command_prefix}pause`
         ///|Explanation
         Pause playback of the current song. If the player is paused, it will unpause.
         """
@@ -26,15 +26,15 @@ class PlayerCommands:
         else:
             return Response("Cannot pause what is not playing")
 
-    @command_info("1.0.0", 1477180800, ***REMOVED***
+    @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite"),
         "4.0.5": (1500533467, "fixed typo")
-    ***REMOVED***)
+    })
     async def cmd_resume(self, player):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***resume`
+        `{command_prefix}resume`
         ///|Explanation
         Resumes playback of the current song.
         """
@@ -45,13 +45,13 @@ class PlayerCommands:
         else:
             return Response("Hard to unpause something that's not paused, amirite?")
     
-    @command_info("4.9.9", 1508219263, ***REMOVED***
+    @command_info("4.9.9", 1508219263, {
         "4.9.9": (1508224340, "Fixed stop logic to avoid total kill on player")
-    ***REMOVED***)    
+    })    
     async def cmd_stop(self, player):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***stop`
+        `{command_prefix}stop`
         ///|Explanation
         Stops the player completely and removes all entries from the queue.
         """
@@ -59,16 +59,16 @@ class PlayerCommands:
         player.queue.clear()
         player.stop()
 
-    @command_info("1.0.0", 1477180800, ***REMOVED***
+    @command_info("1.0.0", 1477180800, {
         "3.5.2": (1497712233, "Updated documentaion for this command"),
         "3.8.8": (1499421755, "improved volume bar"),
         "4.5.0": (1501792292, "Switched to a non-linear volume scale system"),
         "4.5.8": (1502197622, "Muting is a thing now.")
-    ***REMOVED***)
+    })
     async def cmd_volume(self, message, player, leftover_args):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***volume [+ | -][volume]`
+        `{command_prefix}volume [+ | -][volume]`
         ///|Explanation
         Sets the playback volume. Accepted values are from 1 to 100.
         Putting + or - before the volume will make the volume change relative to the current volume.
@@ -77,7 +77,7 @@ class PlayerCommands:
         new_volume = "".join(leftover_args)
 
         if not new_volume:
-            return Response("Current volume: ***REMOVED******REMOVED***%\n***REMOVED******REMOVED***".format(
+            return Response("Current volume: {}%\n{}".format(
                 int(player.volume * 100), create_bar(player.volume, 20)))
 
         relative = False
@@ -95,18 +95,18 @@ class PlayerCommands:
 
         except ValueError:
             raise exceptions.CommandError(
-                "***REMOVED******REMOVED*** is not a valid number".format(new_volume))
+                "{} is not a valid number".format(new_volume))
 
         if relative:
             vol_change = new_volume
             new_volume += (player.volume * 100)
 
         if special_operation is not None:
-            operations = ***REMOVED***
+            operations = {
                 "*": lambda x, y: x * y,
                 "/": lambda x, y: x / y,
                 "%": lambda x, y: x % y,
-            ***REMOVED***
+            }
             op = operations[special_operation]
             new_volume = op(player.volume * 100, new_volume)
 
@@ -122,22 +122,22 @@ class PlayerCommands:
         else:
             if relative:
                 raise exceptions.CommandError(
-                    "Unreasonable volume change provided: ***REMOVED******REMOVED******REMOVED***:+***REMOVED*** -> ***REMOVED******REMOVED***%.  Provide a change between ***REMOVED******REMOVED*** and ***REMOVED***:+***REMOVED***.".
+                    "Unreasonable volume change provided: {}{:+} -> {}%.  Provide a change between {} and {:+}.".
                     format(old_volume, vol_change, old_volume + vol_change,
                            1 - old_volume, 100 - old_volume))
             else:
                 raise exceptions.CommandError(
-                    "Unreasonable volume provided: ***REMOVED******REMOVED***%. Provide a value between 1 and 100.".
+                    "Unreasonable volume provided: {}%. Provide a value between 1 and 100.".
                     format(new_volume))
 
-    @command_info("2.0.3", 1487538840, ***REMOVED***
+    @command_info("2.0.3", 1487538840, {
         "3.3.7": (1497471402, "changed command from \"skipto\" to \"seek\""),
         "4.7.7": (1504104996, "New seeking system")
-    ***REMOVED***)
+    })
     async def cmd_seek(self, player, timestamp):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***seek <timestamp>`
+        `{command_prefix}seek <timestamp>`
         ///|Explanation
         Go to the given timestamp formatted (minutes:seconds)
         """
@@ -154,14 +154,14 @@ class PlayerCommands:
             return Response(
                 "Timestamp exceeds song duration!")
 
-    @command_info("2.2.1", 1493975700, ***REMOVED***
+    @command_info("2.2.1", 1493975700, {
         "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite"),
         "4.7.7": (1504104996, "New seeking system")
-    ***REMOVED***)
+    })
     async def cmd_fwd(self, player, timestamp):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***fwd <timestamp>`
+        `{command_prefix}fwd <timestamp>`
         ///|Explanation
         Forward <timestamp> into the current entry
         """
@@ -178,15 +178,15 @@ class PlayerCommands:
             return Response(
                 "Timestamp exceeds song duration!")
 
-    @command_info("2.2.1", 1493975700, ***REMOVED***
+    @command_info("2.2.1", 1493975700, {
         "3.4.3": (1497609912, "Can now rewind past the current song"),
         "3.8.9": (1499516220, "Part of the `Giesenesis` rewrite"),
         "4.7.7": (1504104996, "New seeking system")
-    ***REMOVED***)
+    })
     async def cmd_rwd(self, player, timestamp=None):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***rwd [timestamp]`
+        `{command_prefix}rwd [timestamp]`
         ///|Explanation
         Rewind <timestamp> into the current entry or if the current entry is a timestamp-entry, rewind to the previous song
         """
@@ -244,7 +244,7 @@ class PlayerCommands:
     async def cmd_repeat(self, player):
         """
         ///|Usage
-        `***REMOVED***command_prefix***REMOVED***repeat`
+        `{command_prefix}repeat`
         ///|Explanation
         Cycles through the repeat options. Default is no repeat, switchable to repeat all or repeat current song.
         """

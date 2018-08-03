@@ -6,13 +6,13 @@ import pickle
 def encode_setting(value):
     def json_handler(v): return json.dumps(v) + "\\json"
 
-    handlers = ***REMOVED***
+    handlers = {
         "int": lambda v: str(v) + "\\i",
         "float": lambda v: str(v) + "\\f",
         "list": json_handler,
         "tuple": json_handler,
         "dict": json_handler
-    ***REMOVED***
+    }
     return handlers.get(type(value).__name__, lambda v: str(v))(value)
 
 
@@ -22,14 +22,14 @@ def decode_setting(value):
         return value
 
     if value in ["True", "False", "None"]:
-        return ***REMOVED***"True": True, "False": False, "None": None***REMOVED***[value]
+        return {"True": True, "False": False, "None": None}[value]
 
-    handlers = ***REMOVED***
+    handlers = {
         "i": lambda v: int(v),
         "f": lambda v: float(v),
         "json": lambda v: json.loads(v),
         "pickle": lambda v: pickle.loads(bytes.fromhex(v))
-    ***REMOVED***
+    }
     val, sep, val_type = value.rpartition("\\")
     if not val:
         return value
@@ -96,14 +96,14 @@ class ConfigDefaults:
 
     html_parser = "html.parser"
 
-    entry_type_emojis = ***REMOVED***
+    entry_type_emojis = {
         "YoutubeEntry":     ":black_circle:",
         "TimestampEntry":   ":large_blue_circle:",
         "GieselaEntry":     ":white_circle:",
         "SpotifyEntry":     ":red_circle:",
         "DiscogsEntry":     ":large_orange_diamond:",
         "VGMEntry":         ":large_blue_diamond:"
-    ***REMOVED***
+    }
 
     owner_id = None
     command_prefix = "!"
@@ -114,8 +114,8 @@ class ConfigDefaults:
     web_url = "http://giesela.org"
 
     client_language = "en-gb"
-    server_languages = ***REMOVED******REMOVED***
-    user_languages = ***REMOVED******REMOVED***
+    server_languages = {}
+    user_languages = {}
 
     history_limit = 200
 

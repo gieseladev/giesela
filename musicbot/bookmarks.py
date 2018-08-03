@@ -30,7 +30,7 @@ class Bookmarks:
     def __init__(self):
         self.loaded = False
         self.version = 0
-        self.bookmarks = ***REMOVED******REMOVED***
+        self.bookmarks = {}
 
     @ensure_loaded
     def __contains__(self, key):
@@ -43,11 +43,11 @@ class Bookmarks:
 
     @ensure_loaded
     def save(self):
-        save_data = ***REMOVED***
+        save_data = {
             "version": hex(self.version + 1)[2:],
             "gp_version": hex(Bookmarks.gp_version)[2:],
             "bookmarks": self.bookmarks
-        ***REMOVED***
+        }
         json.dump(save_data, open("data/bookmarks.gb", "w+"), indent=2)
 
     def load(self):
@@ -57,7 +57,7 @@ class Bookmarks:
             if int(saved_data.get("gp_version", "0"), 16) < Bookmarks.gp_version:
                 print("[Bookmarks] Can't load the bookmarks, they're outdated")
                 self.version = 0
-                self.bookmarks = ***REMOVED******REMOVED***
+                self.bookmarks = {}
                 self.loaded = True
             else:
                 self.version = int(saved_data["version"], 16)
@@ -109,13 +109,13 @@ class Bookmarks:
         bookmark_name = bookmark_name if bookmark_name else clean_songname(entry.title)
         entry_data = entry.to_dict()
 
-        data = ***REMOVED***
+        data = {
             "id": bookmark_id,
             "name": bookmark_name,
             "entry": entry_data,
             "timestamp": timestamp,
             "author": author.to_dict()
-        ***REMOVED***
+        }
 
         self.bookmarks[bookmark_id] = data
 
@@ -129,7 +129,7 @@ class Bookmarks:
 
         data = self.bookmarks[id]  # grab previous data
 
-        new_data = ***REMOVED******REMOVED***
+        new_data = {}
         if new_name:
             new_data["name"] = new_name
         if new_timestamp is not None:  # again, 0=False thus I need to check it this way

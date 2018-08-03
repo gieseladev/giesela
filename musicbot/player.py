@@ -61,7 +61,7 @@ class PatchedBuff:
             self.rmss.append(rms)
 
             max_rms = sorted(self.rmss)[-1]
-            meter_text = "avg rms: ***REMOVED***:.2f***REMOVED***, max rms: ***REMOVED***:.2f***REMOVED*** ".format(
+            meter_text = "avg rms: {:.2f}, max rms: {:.2f} ".format(
                 self._avg(self.rmss), max_rms)
             self._pprint_meter(rms / max(1, max_rms),
                                text=meter_text, shift=True)
@@ -88,10 +88,10 @@ class PatchedBuff:
 
         if shift:
             outstr = text + \
-                "***REMOVED******REMOVED***".format(char * (int((tx - len(text)) * perc) - 1))
+                "{}".format(char * (int((tx - len(text)) * perc) - 1))
         else:
             outstr = text + \
-                "***REMOVED******REMOVED***".format(char * (int(tx * perc) - 1))[len(text):]
+                "{}".format(char * (int(tx * perc) - 1))[len(text):]
 
         print(outstr.ljust(tx - 1), end="\r")
 
@@ -317,7 +317,7 @@ class MusicPlayer(EventEmitter):
                 print("Error trying to delete " + filename)
                 break
         else:
-            print("[Config:SaveVideos] Could not delete file ***REMOVED******REMOVED***, giving up and moving on".format(
+            print("[Config:SaveVideos] Could not delete file {}, giving up and moving on".format(
                 os.path.relpath(filename)))
 
     def play(self, _continue=False):
@@ -367,13 +367,13 @@ class MusicPlayer(EventEmitter):
             # In-case there was a player, kill it. RIP.
             self._kill_current_player()
 
-            before_options = ***REMOVED***
+            before_options = {
                 "nostdin": None
-            ***REMOVED***
-            options = ***REMOVED***
+            }
+            options = {
                 "vn": None,
                 "b:a": "128k"
-            ***REMOVED***
+            }
 
             if not isinstance(entry, StreamEntry):
                 start_seconds = int(entry.start_seconds)
@@ -382,9 +382,9 @@ class MusicPlayer(EventEmitter):
                 options["to"] = format_time_ffmpeg(int(entry.end_seconds) - start_seconds)
 
             if "filters" in entry.meta:
-                options.update(***REMOVED***
+                options.update({
                     "filter:a": "\"" + ",".join(entry.meta["filters"]) + "\""
-                ***REMOVED***)
+                })
 
             self._current_player = self._monkeypatch_player(self.voice_client.create_ffmpeg_player(
                 entry.filename,
@@ -404,7 +404,7 @@ class MusicPlayer(EventEmitter):
             stderr_thread = Thread(
                 target=filter_stderr,
                 args=(self._current_player.process, self._stderr_future),
-                name="***REMOVED******REMOVED*** stderr reader".format(self._current_player.name)
+                name="{} stderr reader".format(self._current_player.name)
             )
 
             stderr_thread.start()
@@ -557,7 +557,7 @@ def filter_stderr(popen: subprocess.Popen, future: asyncio.Future):
     while True:
         data = popen.stderr.readline()
         if data:
-            print("Data from ffmpeg: ***REMOVED******REMOVED***".format(data))
+            print("Data from ffmpeg: {}".format(data))
             try:
                 if check_stderr(data):
                     sys.stderr.buffer.write(data)
