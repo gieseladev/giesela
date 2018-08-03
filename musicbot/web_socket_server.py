@@ -284,7 +284,7 @@ class GieselaWebSocket(WebSocket):
 
             elif command == "replay":
                 replay_index = command_data.get("index")
-                success = self._call_function_main_thread(player.queue.replay, replay_index, wait_for_result=True)
+                success = bool(self._call_function_main_thread(player.queue.replay, replay_index, wait_for_result=True))
                 self.log("replayed", replay_index)
 
             elif command == "cycle_repeat":
