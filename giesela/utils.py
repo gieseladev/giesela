@@ -680,14 +680,14 @@ def md5sum(filename, limit=0):
 
 def get_dev_version():
     page = requests.get(
-        "https://raw.githubusercontent.com/GieselaDev/Giesela/dev/giesela/constants.py"
+        "https://raw.githubusercontent.com/GieselaDev/Giesela/dev/musicbot/constants.py"
     )
     matches = re.search(
         r"MAIN_VERSION = \"(\d+\.\d+\.\d+)\"\nSUB_VERSION = \"(.*?)\"",
         page.content.decode("utf-8"))
 
     if matches is None:
-        return None
+        return None, None
 
     return matches.groups()
 
@@ -728,8 +728,12 @@ def html2md(html):
 
 
 def get_version_changelog(version_code=None):
+    version_code = version_code or get_dev_version()[0]
+    if not version_code:
+        return ["Changelog not available"]
+
     base_url = "https://gieseladev.github.io/Giesela/changelogs/changelog-"
-    v_code = re.sub(r"\D", "", version_code or get_dev_version()[0])
+    v_code = re.sub(r"\D", "", version_code)
 
     resp = requests.get(base_url + v_code)
 

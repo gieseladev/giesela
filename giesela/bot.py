@@ -7,7 +7,6 @@ import sys
 import traceback
 from collections import defaultdict
 from contextlib import suppress
-from pathlib import Path
 from random import choice
 from textwrap import indent, wrap
 
@@ -41,36 +40,7 @@ from giesela.webiesela import WebieselaServer
 
 load_opus_lib()
 
-log = logging.getLogger("Giesela")
-
-stream_handler = logging.StreamHandler()
-stream_handler.setLevel(logging.WARNING)
-stream_handler.setFormatter(logging.Formatter("{time} - <name> [{levelname}] {message}", style="{"))
-
-Path("logs").mkdir(exist_ok=True)
-
-file_handler = logging.FileHandler("logs/logs.txt")
-file_handler.setLevel(logging.DEBUG)
-file_handler.setFormatter(logging.Formatter("{asctime} - <{name}> [{levelname}] {message}", style="{"))
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    handlers=[stream_handler, file_handler]
-)
-
-
-async def on_server_update(before: discord.Guild, after: discord.Guild):
-    if before.region != after.region:
-        print("[Servers] \"%s\" changed regions: %s -> %s" %
-              (after.name, before.region, after.region))
-
-
-async def on_reaction_remove(reaction, user):
-    await ui_utils.handle_reaction(reaction, user)
-
-
-async def on_reaction_add(reaction, user):
-    await ui_utils.handle_reaction(reaction, user)
+log = logging.getLogger(__name__)
 
 
 def _delete_old_audiocache(path=ABS_AUDIO_CACHE_PATH):
@@ -98,14 +68,12 @@ def find_home_channel(server, most_members=True):
     if most_members and channels_by_member:
         channel = channels_by_member[0]
     else:
-        channel = find(
-            lambda c: c.type == ChannelType.voice and any(x in c.name.lower().split()
-                                                          for x in ["giesela", "giesela", "bot", "music", "reign"]),
-            server.channels
-        )
+        channel = find(lambda c: c.type == ChannelType.voice and any(x in c.name.lower().split()
+                                                                     for x in ["giesela", "giesela", "bot", "music", "reign"]),
+                       server.channels
+                       )
     if channel is None:
-        channel = choice(
-            list(filter(lambda c: c.type == ChannelType.voice, server.channels)))
+        channel = choice(list(filter(lambda c: c.type == ChannelType.voice, server.channels)))
 
     return channel
 
@@ -179,15 +147,14 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
                     .on("finished-playing", self.on_player_finished_playing) \
                     .on("entry-added", self.on_player_entry_added)
 
-                print("[PLAYER] Created a new player")
+                log.info("[PLAYER] Created a new player")
 
                 self.players[server.id] = player
 
         return self.players[server.id]
 
     async def on_player_play(self, player, entry):
-        WebieselaServer.send_player_information(
-            player.voice_client.guild.id)
+        WebieselaServer.send_player_information(player.voice_client.guild.id)
         await self.update_now_playing(entry)
 
         channel = entry.meta.get("channel", None)
@@ -224,35 +191,34 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
 
             if self.guild_specific_data[channel.guild]["last_np_msg"]:
                 self.guild_specific_data[channel.guild][
-                    "last_np_msg"] = await self.safe_edit_message(
-                    last_np_msg, newmsg, send_if_fail=True)
+                    "last_np_msg"] = await self.safe_edit_message(last_np_msg, newmsg, send_if_fail=True)
             else:
                 self.guild_specific_data[channel.guild][
-                    "last_np_msg"] = await self.safe_send_message(
-                    channel, newmsg)
+                    "last_np_msg"] = await self.safe_send_message(channel, newmsg)
 
     async def on_player_resume(self, player, entry, **_):
         await self.update_now_playing(entry)
-        WebieselaServer.send_small_update(
-            player.voice_client.guild.id, state=player.state.value, state_name=str(player.state), progress=player.progress)
+        WebieselaServer.send_small_update(player.voice_client.guild.id, state=player.state.value, state_name=str(player.state),
+                                          progress=player.progress)
 
     async def on_player_pause(self, player, entry, **_):
         await self.update_now_playing(entry, True)
-        WebieselaServer.send_small_update(
-            player.voice_client.guild.id, state=player.state.value, state_name=str(player.state), progress=player.progress)
+        WebieselaServer.send_small_update(player.voice_client.guild.id, state=player.state.value, state_name=str(player.state),
+                                          progress=player.progress)
 
     async def on_player_stop(self, **_):
         await self.update_now_playing()
-        # GieselaServer.send_player_information(
-        #     player.voice_client.guild.id)
+        # GieselaServer.send_player_information(#     player.voice_client.guild.id)
 
     async def on_player_finished_playing(self, player, **_):
         if not player.queue.entries and not player.current_entry:
-            WebieselaServer.send_player_information(
-                player.voice_client.guild.id)
+            WebieselaServer.send_player_information(player.voice_client.guild.id)
 
     async def on_player_entry_added(self, queue, entry, **_):
         pass
+
+    async def send_typing(self, channel: discord.TextChannel):
+        await channel.trigger_typing()
 
     async def update_now_playing(self, entry=None, is_paused=False):
         game = None
@@ -287,7 +253,7 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
         msg = None
         try:
             if split_message and content and len(content) > max_letters:
-                print("Message too long, splitting it up")
+                log.info("Message too long, splitting it up")
                 msgs = paginate(content, length=DISCORD_MSG_CHAR_LIMIT)
 
                 for msg in msgs:
@@ -299,7 +265,7 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
                     if also_delete and isinstance(also_delete, discord.Message):
                         asyncio.ensure_future(self._wait_delete_msg(also_delete, expire_in))
             else:
-                msg = await dest.send(dest, content, tts=tts, embed=embed)
+                msg = await dest.send(content, tts=tts, embed=embed)
 
                 if msg and expire_in:
                     asyncio.ensure_future(self._wait_delete_msg(msg, expire_in))
@@ -309,13 +275,13 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
 
         except discord.Forbidden:
             if not quiet:
-                print("Warning: Cannot send message to %s, no permission" %
-                      dest.name)
+                log.info("Warning: Cannot send message to %s, no permission" %
+                         dest.name)
 
         except discord.NotFound:
             if not quiet:
-                print("Warning: Cannot send message to %s, invalid channel?"
-                      % dest.name)
+                log.info("Warning: Cannot send message to %s, invalid channel?"
+                         % dest.name)
 
         return msg
 
@@ -325,14 +291,13 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
 
         except discord.Forbidden:
             if not quiet:
-                print("Warning: Cannot delete message \"%s\", no permission"
-                      % message.clean_content)
+                log.info("Warning: Cannot delete message \"%s\", no permission"
+                         % message.clean_content)
 
         except discord.NotFound:
             if not quiet:
-                print(
-                    "Warning: Cannot delete message \"%s\", message not found"
-                    % message.clean_content)
+                log.info("Warning: Cannot delete message \"%s\", message not found"
+                         % message.clean_content)
         except:
             if not quiet:
                 raise
@@ -351,16 +316,15 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
 
         except discord.NotFound:
             if not quiet:
-                print(
-                    "Warning: Cannot edit message \"%s\", message not found" %
-                    message.clean_content)
+                log.info("Warning: Cannot edit message \"%s\", message not found" %
+                         message.clean_content)
             if send_if_fail:
                 if not quiet:
-                    print("Sending instead")
+                    log.info("Sending instead")
                 return await self.safe_send_message(message.channel, new, embed=embed)
 
     async def edit_profile(self, **fields):
-        return await super().user.edit(password=self.config._password, **fields)
+        return await super().user.edit(**fields)
 
     def _cleanup(self):
         try:
@@ -380,20 +344,12 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
 
     def run(self):
         try:
-            self.loop.run_until_complete(self.start(*self.config.auth))
-
-        except discord.errors.LoginFailure:
-            # Add if token, else
-            raise exceptions.HelpfulError(
-                "Bot cannot login, bad credentials.",
-                "Fix your Email or Password or Token in the options file.  "
-                "Remember that each field should be on their own line.")
-
+            super().run(self.config._token)
         finally:
             try:
                 self._cleanup()
             except Exception as e:
-                print("Error in cleanup:", e)
+                log.info("Error in cleanup:", e)
 
             self.loop.close()
             if self.exit_signal:
@@ -403,8 +359,8 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
         ex_type, ex, stack = sys.exc_info()
 
         if ex_type == exceptions.HelpfulError:
-            print("Exception in " + str(event))
-            print(ex.message)
+            log.info("Exception in " + str(event))
+            log.info(ex.message)
 
             await asyncio.sleep(2)  # don't ask
             await self.logout()
@@ -414,26 +370,25 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
             await self.logout()
 
         else:
-            traceback.print_exc()
+            await super().on_error(event, *args, **kwargs)
 
     async def on_ready(self):
-        print("\rConnected!  Giesela v%s\n" % BOTVERSION)
+        log.info("\rConnected!  Giesela v%s\n" % BOTVERSION)
 
         if self.config.owner_id == self.user.id:
-            raise exceptions.HelpfulError(
-                "Your OwnerID is incorrect or you've used the wrong credentials.",
-                "The bot needs its own account to function.  "
-                "The OwnerID is the id of the owner, not the bot.  "
-                "Figure out which one is which and use the correct information."
-            )
+            raise exceptions.HelpfulError("Your OwnerID is incorrect or you've used the wrong credentials.",
+                                          "The bot needs its own account to function.  "
+                                          "The OwnerID is the id of the owner, not the bot.  "
+                                          "Figure out which one is which and use the correct information."
+                                          )
 
         self.init_ok = True
 
-        print("Bot:   %s/%s#%s" % (self.user.id, self.user.name,
-                                   self.user.discriminator))
+        log.info("Bot:   %s/%s#%s" % (self.user.id, self.user.name,
+                                      self.user.discriminator))
 
         if not self.guilds:
-            print("Giesela is not on any servers.")
+            log.info("Giesela is not on any servers.")
 
         config_string = "\nConfig:\n"
 
@@ -445,36 +400,46 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
 
             lines = wrap(str(val), 100 - len(opt_string))
             if len(lines) > 1:
-                val_string = "{}\n{}\n".format(
-                    lines[0],
-                    indent("\n".join(lines[1:]), len(opt_string) * " ")
-                )
+                val_string = "{}\n{}\n".format(lines[0],
+                                               indent("\n".join(lines[1:]), len(opt_string) * " ")
+                                               )
             else:
                 val_string = lines[0]
 
             config_string += opt_string + val_string + "\n"
 
-        print(config_string)
+        log.info(config_string)
 
         if not self.config.save_videos and os.path.isdir(ABS_AUDIO_CACHE_PATH):
             if _delete_old_audiocache():
-                print("Deleting old audio cache")
+                log.info("Deleting old audio cache")
             else:
-                print("Could not delete old audio cache, moving on.")
+                log.info("Could not delete old audio cache, moving on.")
 
-        print("Ready to go!")
+        log.info("Ready to go!")
 
         if self.config.open_websocket:
             WebieselaServer.run(self)
 
+    async def on_server_update(self, before: discord.Guild, after: discord.Guild):
+        if before.region != after.region:
+            log.info("[Servers] \"%s\" changed regions: %s -> %s" %
+                     (after.name, before.region, after.region))
+
+    async def on_reaction_remove(self, reaction, user):
+        await ui_utils.handle_reaction(reaction, user)
+
+    async def on_reaction_add(self, reaction, user):
+        await ui_utils.handle_reaction(reaction, user)
+
     async def on_message(self, message):
+        log.debug("message", message)
         await self.wait_until_ready()
 
         message_content = message.content.strip()
 
         if message.author.id in self.users_in_menu:
-            print("{} is currently in a menu. Ignoring \"{}\"".format(
-                message.author, message_content))
+            log.info("{} is currently in a menu. Ignoring \"{}\"".format(message.author, message_content))
             return
 
         if not message_content.startswith(self.config.command_prefix) and message.channel.id not in self.config.owned_channels:
@@ -485,14 +450,13 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
             return
 
         raw_command, *args = message_content.split()
-        command = raw_command.lstrip(
-            self.config.command_prefix).lower().strip()
+        command = raw_command.lstrip(self.config.command_prefix).lower().strip()
 
         handler = getattr(self, "cmd_%s" % command, None)
         if not handler:
             if self.config.delete_unrelated_in_owned and message.channel.id in self.config.owned_channels:
                 await self.safe_delete_message(message)
-                print("Removed message because it's unrelated")
+                log.info("Removed message because it's unrelated")
 
             return
 
@@ -502,16 +466,14 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
                 await self.safe_send_message(message.channel, reason)
                 return
 
-        if message.channel.is_private:
+        if isinstance(message.channel, discord.DMChannel):
             if not (message.author.id == self.config.owner_id and command ==
-                    "joinserver") and not command in self.config.private_chat_commands:
-                await self.safe_send_message(
-                    message.channel,
-                    localization.get(message.author, "errors.private_chat")
-                )
+                    "joinserver") and command not in self.config.private_chat_commands:
+                await self.safe_send_message(message.channel,
+                                             localization.get(message.author, "errors.private_chat")
+                                             )
                 return
-        print("[Command] {0.id}/{0.name} ({1})".format(
-            message.author, message_content))
+        log.info("[Command] {0.id}/{0.name} ({1})".format(message.author, message_content))
 
         argspec = inspect.signature(handler)
         params = argspec.parameters.copy()
@@ -539,13 +501,11 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
                 handler_kwargs["player"] = await self.get_player(message.guild)
 
             if params.pop("user_mentions", None):
-                handler_kwargs["user_mentions"] = list(
-                    map(message.guild.get_member, message.raw_mentions))
+                handler_kwargs["user_mentions"] = list(map(message.guild.get_member, message.raw_mentions))
 
             if params.pop("channel_mentions", None):
-                handler_kwargs["channel_mentions"] = list(
-                    map(message.guild.get_channel,
-                        message.raw_channel_mentions))
+                handler_kwargs["channel_mentions"] = list(map(message.guild.get_channel,
+                                                              message.raw_channel_mentions))
 
             if params.pop("voice_channel", None):
                 handler_kwargs[
@@ -556,9 +516,8 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
 
             args_expected = []
             for key, param in list(params.items()):
-                doc_key = "[%s=%s]" % (
-                    key, param.default
-                ) if param.default is not inspect.Parameter.empty else key
+                doc_key = "[%s=%s]" % (key, param.default
+                                       ) if param.default is not inspect.Parameter.empty else key
                 args_expected.append(doc_key)
 
                 if not args and param.default is not inspect.Parameter.empty:
@@ -583,27 +542,25 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
                 if content and response.reply:
                     content = "%s, %s" % (message.author.mention, content)
 
-                await self.safe_send_message(
-                    message.channel,
-                    content,
-                    expire_in=response.delete_after
-                    if self.config.delete_messages else 0,
-                    also_delete=message
-                    if self.config.delete_invoking else None,
-                    embed=response.embed
-                )
+                await self.safe_send_message(message.channel,
+                                             content,
+                                             expire_in=response.delete_after
+                                             if self.config.delete_messages else 0,
+                                             also_delete=message
+                                             if self.config.delete_invoking else None,
+                                             embed=response.embed
+                                             )
 
         except (exceptions.CommandError, exceptions.HelpfulError, exceptions.ExtractionError) as e:
-            print("{0.__class__}: {0.message}".format(e))
+            log.info("{0.__class__}: {0.message}".format(e))
 
             expirein = e.expire_in if self.config.delete_messages else None
             alsodelete = message if self.config.delete_invoking else None
 
-            await self.safe_send_message(
-                message.channel,
-                "```\n%s\n```" % e.message,
-                expire_in=expirein,
-                also_delete=alsodelete)
+            await self.safe_send_message(message.channel,
+                                         "```\n%s\n```" % e.message,
+                                         expire_in=expirein,
+                                         also_delete=alsodelete)
 
         except exceptions.Signal:
             raise
@@ -613,18 +570,16 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
 
             traceback.print_exc()
             if self.config.debug_mode:
-                await self.safe_send_message(
-                    message.channel, "```\n%s\n```" % traceback.format_exc())
+                await self.safe_send_message(message.channel, "```\n%s\n```" % traceback.format_exc())
 
     async def on_server_join(self, server):
         for channel in server.channels:
             if channel.type is not ChannelType.text:
                 continue
 
-            msg = await self.safe_send_message(
-                channel,
-                "Hello there,\nMy name is {}!\n\n*Type {}help to find out more.*".
-                    format(self.user.mention, self.config.command_prefix))
+            msg = await self.safe_send_message(channel,
+                                               "Hello there,\nMy name is {}!\n\n*Type {}help to find out more.*".format(self.user.mention,
+                                                                                                                        self.config.command_prefix))
             if msg is not None:
                 return
 
@@ -649,12 +604,12 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
             if sum(1 for vm in my_channel.voice_members if not vm.bot) == 1 and not user_left_voice_channel:
                 player = await self.get_player(after.guild)
                 if player.is_paused:
-                    print("[AUTOPAUSE] Resuming")
+                    log.info("[AUTOPAUSE] Resuming")
                     player.resume()
 
             # I am now alone
             if sum(1 for vm in my_channel.voice_members if not vm.bot) == 0:
                 player = await self.get_player(after.guild)
                 if player.is_playing:
-                    print("[AUTOPAUSE] Pausing")
+                    log.info("[AUTOPAUSE] Pausing")
                     player.pause()

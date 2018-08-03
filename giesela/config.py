@@ -60,6 +60,9 @@ class Config:
 
     def get_all_options(self):
         options = []
+        if not self.config.has_section("Settings"):
+            return []
+
         for option in self.config.options("Settings"):
             custom_value = getattr(self, option)
             default_value = getattr(ConfigDefaults, option)
