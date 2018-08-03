@@ -9,7 +9,7 @@ import discord
 
 from giesela import exceptions
 from giesela.settings import Settings
-from giesela.utils import Response, command_info, escape_dis, owner_only, write_file
+from giesela.utils import Response, command_info, escape_dis, owner_only
 
 
 async def cmd_id(author, user_mentions):
@@ -30,83 +30,6 @@ async def cmd_id(author, user_mentions):
 
 
 class AdminCommands:
-
-    async def cmd_blacklist(self, user_mentions, option):
-        """
-        ///|Usage
-        {command_prefix}blacklist [ + | - | add | remove ] @UserName [@UserName2 ...]
-        ///|Explanation
-        Add or remove users to the blacklist.
-        """
-
-        if not user_mentions:
-            raise exceptions.CommandError("No users listed.", expire_in=20)
-
-        if option not in ["+", "-", "add", "remove"]:
-            raise exceptions.CommandError(
-                "Invalid option \" % s\" specified, use +, -, add, or remove" %
-                option)
-
-        for user in user_mentions.copy():
-            if user.id == self.config.owner_id:
-                print(
-                    "[Commands:Blacklist] The owner cannot be blacklisted.")
-                user_mentions.remove(user)
-
-        old_len = len(self.blacklist)
-
-        if option in ["+", "add"]:
-            self.blacklist.update(user.id for user in user_mentions)
-
-            write_file(self.config.blacklist_file, self.blacklist)
-
-            return Response(
-                "%s users have been added to the blacklist" %
-                (len(self.blacklist) - old_len),
-                reply=True)
-
-        else:
-            if self.blacklist.isdisjoint(user.id for user in user_mentions):
-                return Response(
-                    "none of those users are in the blacklist.",
-                    reply=True)
-
-            else:
-                self.blacklist.difference_update(user.id
-                                                 for user in user_mentions)
-                write_file(self.config.blacklist_file, self.blacklist)
-
-                return Response(
-                    "%s users have been removed from the blacklist" %
-                    (old_len - len(self.blacklist)),
-                    reply=True)
-
-    @owner_only
-    async def cmd_joinserver(self, server_link=None):
-        """
-        Usage:
-            {command_prefix}joinserver invite_link
-
-        Asks the bot to join a server.  Note: Bot accounts cannot use invite links.
-        """
-
-        if self.user.bot:
-            url = await self.generate_invite_link()
-            return Response(
-                "Bot accounts can't use invite links!  Click here to invite me: \n{}".
-                    format(url),
-                reply=True,
-                delete_after=30)
-
-        try:
-            if server_link:
-                await self.accept_invite(server_link)
-                return Response(":+1:")
-
-        except:
-            raise exceptions.CommandError(
-                "Invalid URL provided:\n{}\n".format(server_link))
-
     async def cmd_listids(self, server, author, leftover_args, cat="all"):
         """
         Usage:
@@ -232,7 +155,7 @@ class AdminCommands:
             thing = url.strip("<>")
 
         try:
-            with aiohttp.Timeout(10):
+            with aiohttp.ClientTimeout(10):
                 async with self.aiosession.get(thing) as res:
                     await self.edit_profile(avatar=await res.read())
 
@@ -283,8 +206,7 @@ class AdminCommands:
                         len(deleted), "s" * bool(deleted)))
 
         deleted = 0
-        async for entry in self.logs_from(
-                channel, search_range, before=message):
+        async for entry in channel.history(search_range, before=message):
             if entry == self.guild_specific_data[channel.guild]["last_np_msg"]:
                 continue
 
@@ -430,8 +352,7 @@ class AdminCommands:
             exec(statement, env)
         except SyntaxError as e:
             return Response(
-                "**While compiling the statement the following error occured**\n{}\n{}".
-                    format(traceback.format_exc(), str(e)))
+                "**While compiling the statement the following error occured**\n{}\n{}".format(traceback.format_exc(), str(e)))
 
         func = env["func"]
 
@@ -440,8 +361,7 @@ class AdminCommands:
                 ret = await func()
         except Exception as e:
             return Response(
-                "**While executing the statement the following error occured**\n{}\n{}".
-                    format(traceback.format_exc(), str(e)))
+                "**While executing the statement the following error occured**\n{}\n{}".format(traceback.format_exc(), str(e)))
 
         res = escape_dis(str(ret))
         if ret is not None and res:

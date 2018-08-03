@@ -167,10 +167,10 @@ class InfoCommands:
                 inline=False)
 
             for cl in c_info.changelog:
-                v, t, l = cl
+                v, t, line = cl
                 em.add_field(
                     name="Version `{}`".format(v),
-                    value="`{}`\n{}".format(prettydate(t), l),
+                    value="`{}`\n{}".format(prettydate(t), line),
                     inline=False)
 
             return Response(embed=em)

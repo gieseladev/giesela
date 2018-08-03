@@ -6,7 +6,7 @@ language: python
 python:
 - "3.6-dev"
 
-install:
+before_install:
 - sudo apt-get install build-essential unzip -y
 - sudo apt-get install software-properties-common -y
 - sudo add-apt-repository ppa:fkrull/deadsnakes -y
@@ -14,8 +14,12 @@ install:
 - sudo add-apt-repository ppa:chris-lea/libsodium -y
 - sudo apt-get update -y --allow-unauthenticated
 - sudo apt-get install ffmpeg libopus-dev libffi-dev libsodium-dev -y
+
+
+install:
 - pip install pytest pytest-asyncio
-- pip install -r requirements.txt
+- pip install pipenv
+- pipenv sync
 
 script:
 - python -m pytest

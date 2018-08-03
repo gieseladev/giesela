@@ -174,8 +174,8 @@ class ToolCommands:
 
         if len(items) <= 0 or items is None:
             return Response(
-                "Is your name \"{0}\" by any chance?\n(This is not how this command works. Use `{1}help random` to find out how not to be a stupid **{0}** anymore)".
-                    format(author.name, self.config.command_prefix),
+                "Is your name \"{0}\" by any chance?\n(This is not how this command works. Use `{1}help random` to find out how not to be a stupid **{0}** anymore)".format(
+                    author.name, self.config.command_prefix),
                 delete_after=30)
 
         await self.safe_send_message(channel, "I choose **" + choice(items) + "**")

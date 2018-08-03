@@ -1,7 +1,7 @@
-'''
+"""
 The MIT License (MIT)
 Copyright (c) 2013 Dave P.
-'''
+"""
 import base64
 import codecs
 import errno
@@ -634,7 +634,7 @@ class SimpleWebSocketServer(object):
                             if opcode == CLOSE:
                                 raise Exception("received client close")
 
-                except Exception as n:
+                except Exception:
                     _handleClose(client)
                     del self.connections[ready]
                     self.listeners.remove(ready)
@@ -650,7 +650,7 @@ class SimpleWebSocketServer(object):
                         self.connections[fileno] = self._constructWebSocket(
                             newsock, address)
                         self.listeners.append(fileno)
-                    except Exception as n:
+                    except Exception:
                         if sock is not None:
                             sock.close()
                 else:
@@ -659,7 +659,7 @@ class SimpleWebSocketServer(object):
                     client = self.connections[ready]
                     try:
                         client._handleData()
-                    except Exception as n:
+                    except Exception:
                         _handleClose(client)
                         del self.connections[ready]
                         self.listeners.remove(ready)

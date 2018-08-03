@@ -160,8 +160,7 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
         channel = entry.meta.get("channel", None)
 
         if channel:
-            last_np_msg = self.guild_specific_data[channel.guild][
-                "last_np_msg"]
+            last_np_msg = self.guild_specific_data[channel.guild]["last_np_msg"]
             if last_np_msg and last_np_msg.channel == channel:
 
                 # if the last np message isn't the last message in the channel;
@@ -190,11 +189,9 @@ class Giesela(Client, AdminCommands, InfoCommands, MiscCommands, PlayerCommands,
                 newmsg = localization.format(player.voice_client.guild, "player.now_playing.generic", title=entry.title)
 
             if self.guild_specific_data[channel.guild]["last_np_msg"]:
-                self.guild_specific_data[channel.guild][
-                    "last_np_msg"] = await self.safe_edit_message(last_np_msg, newmsg, send_if_fail=True)
+                self.guild_specific_data[channel.guild]["last_np_msg"] = await self.safe_edit_message(last_np_msg, newmsg, send_if_fail=True)
             else:
-                self.guild_specific_data[channel.guild][
-                    "last_np_msg"] = await self.safe_send_message(channel, newmsg)
+                self.guild_specific_data[channel.guild]["last_np_msg"] = await self.safe_send_message(channel, newmsg)
 
     async def on_player_resume(self, player, entry, **_):
         await self.update_now_playing(entry)

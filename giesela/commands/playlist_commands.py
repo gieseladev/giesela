@@ -220,15 +220,13 @@ class PlaylistCommands:
                          1 if len(additional_args) > 1 else 0
             if from_index >= len(clone_entries) or from_index < 0:
                 return Response(
-                    "Can't clone the playlist starting from entry {}. This entry is out of bounds.".
-                        format(from_index))
+                    "Can't clone the playlist starting from entry {}. This entry is out of bounds.".format(from_index))
 
             to_index = int(additional_args[
                                2]) if len(additional_args) > 2 else len(clone_entries)
             if to_index > len(clone_entries) or to_index < 0:
                 return Response(
-                    "Can't clone the playlist from the {}. to the {}. entry. These values are out of bounds.".
-                        format(from_index, to_index))
+                    "Can't clone the playlist from the {}. to the {}. entry. These values are out of bounds.".format(from_index, to_index))
 
             if to_index - from_index <= 0:
                 return Response(
@@ -376,8 +374,7 @@ class PlaylistCommands:
                         value="To view them, open the playlist builder")
 
             em.set_footer(
-                text="To edit this playlist type \"{}playlist builder {}\"".
-                    format(self.config.command_prefix, argument))
+                text="To edit this playlist type \"{}playlist builder {}\"".format(self.config.command_prefix, argument))
 
             await self.send_message(channel, embed=em)
 

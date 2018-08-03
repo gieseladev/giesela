@@ -414,12 +414,12 @@ class WebieselaServer:
         except FileNotFoundError:
             print("[WEBSOCKET] failed to load tokens, there are none saved")
 
-        WebieselaServer.guild = SimpleWebSocketServer("",
-                                                      8000,
-                                                      GieselaWebSocket)
-        atexit.register(WebieselaServer.guild.close)
+        WebieselaServer.server = SimpleWebSocketServer("",
+                                                       8000,
+                                                       GieselaWebSocket)
+        atexit.register(WebieselaServer.server.close)
         # new thread because it's blocking
-        threading.Thread(target=WebieselaServer.guild.serveforever).start()
+        threading.Thread(target=WebieselaServer.server.serveforever).start()
         print("[WEBSOCKET] up and running")
 
     @staticmethod

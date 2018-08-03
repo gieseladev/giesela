@@ -370,8 +370,7 @@ def timestamp_to_queue(timestamps, song_dur):
     entries = sorted(list(timestamps.keys()))
     for index, key in enumerate(entries):
         start = int(key)
-        next_start = int(entries[index + 1]) if index + \
-                                                1 < len(entries) else song_dur
+        next_start = int(entries[index + 1]) if index + 1 < len(entries) else song_dur
 
         dur = next_start - start
         sub_entry = {
@@ -591,8 +590,8 @@ def format_time(s, round_seconds=True, round_base=1, max_specifications=3, combi
     return_list = []
     if days > 0:
         return_list.append(
-            "{} {}{}".format("a" if days == 1 and replace_one else days, ["d", "day", "day"][unit_length], "s"
-            if days is not 1 and unit_length != 0 else ""))
+            "{} {}{}".format("a" if days == 1 and replace_one else days, ["d", "day", "day"][unit_length],
+                             "s" if days is not 1 and unit_length != 0 else ""))
     if hours > 0:
         return_list.append(
             "{} {}{}".format("an" if hours == 1 and replace_one else hours, ["h", "hr", "hour"][unit_length],

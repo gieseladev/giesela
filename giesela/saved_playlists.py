@@ -31,7 +31,7 @@ class Playlists:
         try:
             with open(self.playlists_file, "r+") as f:
                 self.playlists = json.load(f)
-        except (FileNotFoundError, json.JSONDecodeError) as e:
+        except (FileNotFoundError, json.JSONDecodeError):
             return
 
     def save_playlists(self):
