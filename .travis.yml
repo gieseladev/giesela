@@ -1,33 +1,46 @@
+sudo: required
+cache: pip
+
 language: python
+
 python:
-  # - "3.7-dev"
-  - "3.6-dev"
+- "3.6-dev"
+
 install:
-  - sudo apt-get install build-essential unzip -y
-  - sudo apt-get install software-properties-common -y
-  - sudo add-apt-repository ppa:fkrull/deadsnakes -y
-  - sudo add-apt-repository ppa:mc3man/trusty-media -y
-  - sudo add-apt-repository ppa:chris-lea/libsodium -y
-  - sudo apt-get update -y --allow-unauthenticated
-  - sudo apt-get install ffmpeg libopus-dev libffi-dev libsodium-dev -y
-  - pip install pytest
-  - pip install pytest-asyncio
-  - pip install -r requirements.txt
+- sudo apt-get install build-essential unzip -y
+- sudo apt-get install software-properties-common -y
+- sudo add-apt-repository ppa:fkrull/deadsnakes -y
+- sudo add-apt-repository ppa:mc3man/trusty-media -y
+- sudo add-apt-repository ppa:chris-lea/libsodium -y
+- sudo apt-get update -y --allow-unauthenticated
+- sudo apt-get install ffmpeg libopus-dev libffi-dev libsodium-dev -y
+- pip install pytest pytest-asyncio
+- pip install -r requirements.txt
+
 script:
-  - python -m pytest
+- python -m pytest
+
 notifications:
   email:
-  on_failure: always
-  on_success: always
+    on_failure: always
+    on_success: always
+
 after_success:
-  - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
-  - chmod +x send.sh
-  - ./send.sh success $WEBHOOK_URL
+- wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
+- chmod +x send.sh
+- ./send.sh success $WEBHOOK_URL
+
 after_failure:
-  - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
-  - chmod +x send.sh
-  - ./send.sh failure $WEBHOOK_URL
-sudo: required
-dist: trusty
-os: linux
-cache: pip
+- wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
+- chmod +x send.sh
+- ./send.sh failure $WEBHOOK_URL
+
+before_deploy:
+- echo building docker image...
+- docker build -t "$DOCKER_REPO" .
+
+deploy:
+  provider: script
+  script: bash ./.travis/docker_push.sh
+  on:
+    all_branches: true

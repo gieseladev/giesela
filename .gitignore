@@ -1,13 +1,6 @@
+.idea/
+.pytest_cache/
+
 *.pyc
 
-venv
-venv_run.bat
-
-logs
-cache
-
-data/playlists.json
-data/websocket_token.json
-config/options.ini
-data/settings.bin
-logs.txt
+venv/
