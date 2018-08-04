@@ -21,17 +21,7 @@ ytdl_format_options = {
     "geo_bypass": True
 }
 
-# Duck your useless bugreports message that gets two link embeds and
-# confuses users
 youtube_dl.utils.bug_reports_message = lambda: ""
-
-"""
-    Alright, here"s the problem.  To catch youtube-dl errors for their useful information, I have to
-    catch the exceptions with `ignoreerrors` off.  To not break when ytdl hits a dumb video
-    (rental videos, etc), I have to have `ignoreerrors` on.  I can change these whenever, but with async
-    that"s bad.  So I need multiple ytdl objects.
-
-"""
 
 
 class Downloader:

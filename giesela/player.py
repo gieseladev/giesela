@@ -1,128 +1,35 @@
 import asyncio
-import audioop
+import enum
+import logging
 import os
 import subprocess
 import sys
 import traceback
-from array import array
-from collections import deque
-from enum import Enum
-from shutil import get_terminal_size
 from threading import Thread
+from typing import TYPE_CHECKING
 
-from giesela.config import static_config
+from discord import VoiceChannel
+
 from giesela.entry import RadioSongEntry, StreamEntry, TimestampEntry
 from giesela.exceptions import FFmpegError, FFmpegWarning
-from giesela.lib.event_emitter import EventEmitter
+from giesela.lib import EventEmitter
 from giesela.queue import Queue
 from giesela.utils import create_cmd_params, format_time_ffmpeg
 from giesela.webiesela import WebieselaServer
 
+if TYPE_CHECKING:
+    pass
 
-def _pprint_meter(perc, *, char="#", text="", shift=True):
-    tx, ty = get_terminal_size()
-
-    if shift:
-        outstr = text + \
-                 "{}".format(char * (int((tx - len(text)) * perc) - 1))
-    else:
-        outstr = text + \
-                 "{}".format(char * (int(tx * perc) - 1))[len(text):]
-
-    print(outstr.ljust(tx - 1), end="\r")
+log = logging.getLogger(__name__)
 
 
-def _avg(i):
-    return sum(i) / len(i)
-
-
-def _frame_vol(frame, mult, *, maxv=2, use_audioop=True):
-    if use_audioop:
-        return audioop.mul(frame, 2, min(mult, maxv))
-    else:
-        # ffmpeg returns s16le pcm frames.
-        frame_array = array("h", frame)
-
-        for i in range(len(frame_array)):
-            frame_array[i] = int(frame_array[i] * min(mult, min(1, maxv)))
-
-        return frame_array.tobytes()
-
-
-class PatchedBuff:
-    """
-        PatchedBuff monkey patches a readable object, allowing you to vary what the volume is as the song is playing.
-    """
-
-    def __init__(self, buff, *, draw=False):
-        self.buff = buff
-        self.frame_count = 0
-        self._volume = 1.0
-
-        self.draw = draw
-        self.use_audioop = True
-        self.frame_skip = 2
-        self.rmss = deque([2048], maxlen=90)
-
-    def __del__(self):
-        if self.draw:
-            print(" " * (get_terminal_size().columns - 1), end="\r")
-
-    @property
-    def volume(self):
-        return self._volume
-
-    @volume.setter
-    def volume(self, v):
-        value = v ** static_config.volume_power
-        self._volume = value
-
-    def read(self, frame_size):
-        self.frame_count += 1
-
-        frame = self.buff.read(frame_size)
-
-        if self.volume != 1:
-            frame = _frame_vol(frame, self.volume, maxv=2)
-
-        if self.draw and not self.frame_count % self.frame_skip:
-            # these should be processed for every frame, but "overhead"
-            rms = audioop.rms(frame, 2)
-            self.rmss.append(rms)
-
-            max_rms = sorted(self.rmss)[-1]
-            meter_text = "avg rms: {:.2f}, max rms: {:.2f} ".format(
-                _avg(self.rmss), max_rms)
-            _pprint_meter(rms / max(1, max_rms),
-                          text=meter_text, shift=True)
-
-        return frame
-
-
-class MusicPlayerState(Enum):
-    STOPPED = 0  # When the player isn't playing anything
-    PLAYING = 1  # The player is actively playing music.
-    PAUSED = 2  # The player is paused on a song.
-    WAITING = 3  # The player has finished its song but is still downloading the next one
-    DEAD = 4  # The player has been killed.
-
-    def __str__(self):
-        return self.name
-
-
-class MusicPlayerRepeatState(Enum):
+class RepeatState(enum.IntEnum):
     NONE = 0  # queue plays as normal
     ALL = 1  # Entire queue repeats
     SINGLE = 2  # Currently playing song repeats forever
 
     def __str__(self):
         return self.name
-
-
-def _monkeypatch_player(player):
-    original_buff = player.buff
-    player.buff = PatchedBuff(original_buff)
-    return player
 
 
 async def _delete_file(filename):
@@ -146,38 +53,35 @@ async def _delete_file(filename):
 
 class MusicPlayer(EventEmitter):
 
-    def __init__(self, bot, voice_client):
+    def __init__(self, bot, channel: VoiceChannel):
         super().__init__()
         self.bot = bot
         self.loop = bot.loop
-        self.voice_client = voice_client
+        self.channel = channel
+        self.voice_client = None
+
         self.queue = Queue(bot, self)
         self.queue.on("entry-added", self.on_entry_added)
 
         self._play_lock = asyncio.Lock()
         self._current_player = None
         self._current_entry = None
-        self.state = MusicPlayerState.STOPPED
-        self.repeatState = MusicPlayerRepeatState.NONE
-        self.skipRepeat = False
-
-        self.loop.create_task(self.websocket_check())
-        self.handle_manually = False
+        self.repeat_state = RepeatState.NONE
 
         self.volume = bot.config.default_volume
         self.chapter_updater = None
 
     @property
-    def volume(self):
+    def volume(self) -> float:
         return self._volume
 
     @volume.setter
-    def volume(self, value):
+    def volume(self, value: float):
         self._volume = value
         if self._current_player:
             self._current_player.buff.volume = value
 
-        WebieselaServer.send_small_update(self.voice_client.guild.id, volume=value)
+        WebieselaServer.small_update(self.voice_client.guild.id, volume=value)
 
     def on_entry_added(self):
         if self.is_stopped:
@@ -199,7 +103,7 @@ class MusicPlayer(EventEmitter):
             # no idea how that should happen but eh...
             return False
 
-        WebieselaServer.send_small_update(self.voice_client.guild.id, repeat_state=self.repeatState.value, repeat_state_name=str(self.repeatState))
+        WebieselaServer.small_update(self.voice_client.guild.id, repeat_state=self.repeatState.value, repeat_state_name=str(self.repeatState))
         return True
 
     def stop(self):
@@ -472,44 +376,6 @@ class MusicPlayer(EventEmitter):
 
             print("[CHAPTER-UPDATER] Emitting next now playing event")
             self.emit("play", player=self, entry=self.current_entry)
-
-    def reload_voice(self, voice_client):
-        self.voice_client = voice_client
-        if self._current_player:
-            self._current_player.player = voice_client.play_audio
-            self._current_player._resumed.clear()
-            self._current_player._connected.set()
-
-    async def websocket_check(self):
-        if self.bot.config.debug_mode:
-            print("[Debug] Creating websocket check loop")
-
-        while not self.is_dead:
-            try:
-                self.voice_client.ws.ensure_open()
-                assert self.voice_client.ws.open
-            except:
-                if self.bot.config.debug_mode:
-                    print("[Debug] Voice websocket is %s, reconnecting" %
-                          self.voice_client.ws.state_name)
-
-                try:
-                    await self.voice_client.disconnect()
-                except:
-                    print("Error disconnecting during reconnect")
-                    traceback.print_exc()
-
-                await asyncio.sleep(0.1)
-
-                new_vc = await self.bot.join_voice_channel(self.voice_client.channel)
-                self.reload_voice(new_vc)
-
-                if self.is_paused:
-                    self.resume()
-
-                await asyncio.sleep(4)
-            finally:
-                await asyncio.sleep(1)
 
     @property
     def current_entry(self):

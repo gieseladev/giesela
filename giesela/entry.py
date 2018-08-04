@@ -17,8 +17,7 @@ from giesela.web_author import WebAuthor
 
 
 class Entry:
-    version_code = "1.0.3"
-    version = int(version_code.replace(".", ""))
+    version = 3
     can_encode = (int, dict, list, str, int, float, bool)
     default_encode = (VoiceChannel, Member, Guild, User)
     meta_dict_keys = ("author", "playlist")

@@ -5,6 +5,7 @@ import traceback
 from random import shuffle
 
 from discord import Embed
+from discord.ext.commands import Bot
 
 from giesela import exceptions, spotify
 from giesela.entry import (GieselaEntry, RadioSongEntry, RadioStationEntry,
@@ -1161,4 +1162,8 @@ class DisplayCommands:
 
 
 class QueueCommands(EnqueueCommands, ManipulateCommands, DisplayCommands):
+    pass
+
+
+def setup(bot: Bot):
     pass

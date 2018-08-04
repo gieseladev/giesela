@@ -5,6 +5,7 @@ import time
 from random import shuffle
 
 from discord import Embed
+from discord.ext.commands import Bot
 
 from giesela.entry import GieselaEntry, TimestampEntry, YoutubeEntry
 from giesela.entry_updater import fix_entry, fix_generator
@@ -1277,3 +1278,7 @@ class PlaylistCommands:
                 return Response("Saved changes to current entry.")
         else:
             return Response("Didn't save changes to **{}**".format(entry.title))
+
+
+def setup(bot: Bot):
+    pass

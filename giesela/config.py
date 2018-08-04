@@ -128,8 +128,8 @@ class ConfigDefaults:
     auto_pause = True
     delete_messages = False
     delete_invoking = False
-    debug_mode = False
-    open_websocket = True
+    debug_mode = True
+    start_webiesela = True
     delete_unrelated_in_owned = False
 
     options_file = "data/options.ini"

@@ -1,42 +1,45 @@
-from giesela.utils import dec_to_hex
+from typing import TYPE_CHECKING
+
+from discord import User
+
+if TYPE_CHECKING:
+    from .bot import Giesela
 
 
 class WebAuthor:
-    bot = None
+    bot: "Giesela" = None
 
-    def __init__(self, id, name, display_name, avatar_url, colour):
+    def __init__(self, id: int, name: str, display_name: str, avatar_url: str):
         self.id = id
         self.name = name
         self.display_name = display_name
         self.avatar_url = avatar_url
-        self.colour = colour
+
+    def __str__(self) -> str:
+        return "[{}/{}]".format(self.id, self.name)
 
     @classmethod
-    def from_id(cls, author_id):
-        user = WebAuthor.bot.get_global_user(author_id)
+    def from_id(cls, author_id: int) -> "WebAuthor":
+        user = cls.bot.get_user(author_id)
 
         return cls.from_user(user)
 
     @classmethod
-    def from_user(cls, user):
-        return cls(user.id, user.name, user.display_name, user.avatar_url, dec_to_hex(user.colour.value))
+    def from_user(cls, user: User) -> "WebAuthor":
+        return cls(user.id, user.name, user.display_name, user.avatar_url_as(format="png"))
 
     @classmethod
     def from_dict(cls, data):
         return cls(**data)
 
     @property
-    def discord_user(self):
-        return WebAuthor.bot.get_global_user(self.id)
+    def discord_user(self) -> User:
+        return WebAuthor.bot.get_user(self.id)
 
-    def __str__(self):
-        return "[{}/{}]".format(self.id, self.name)
-
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return {
             "id": self.id,
             "name": self.name,
             "display_name": self.display_name,
-            "avatar_url": self.avatar_url.replace(".webp", ".png"),
-            "colour": self.colour
+            "avatar_url": self.avatar_url
         }

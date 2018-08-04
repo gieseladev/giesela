@@ -3,19 +3,25 @@ import atexit
 import hashlib
 import inspect
 import json
+import random
 import threading
 import traceback
 import uuid
 from json.decoder import JSONDecodeError
-from random import choice
 from string import ascii_lowercase
+from typing import Callable, Dict, TYPE_CHECKING, Tuple
+
+from discord import Member
 
 from giesela import spotify
 from giesela.config import static_config
 from giesela.entry import TimestampEntry
+from giesela.lib.web_socket_server import SimpleWebSocketServer, WebSocket
 from giesela.radio import RadioStations, get_all_stations
-from giesela.simple_web_socket_server import SimpleWebSocketServer, WebSocket
 from giesela.web_author import WebAuthor
+
+if TYPE_CHECKING:
+    from giesela.bot import Giesela
 
 
 class ErrorCode:
@@ -46,7 +52,7 @@ class GieselaWebSocket(WebSocket):
     def discord_server(self):
         if not self._discord_server:
             server_id, *_ = WebieselaServer.get_token_information(self.token)
-            self._discord_server = WebieselaServer.bot.get_server(server_id)
+            self._discord_server = WebieselaServer.bot.get_guild(server_id)
 
         return self._discord_server
 
@@ -88,8 +94,7 @@ class GieselaWebSocket(WebSocket):
             register = data.get("request", None) == "register"
             if register:
                 registration_token = generate_registration_token()
-                WebieselaServer.awaiting_registration[
-                    registration_token] = self.register  # setting the callback
+                WebieselaServer.awaiting_registration[registration_token] = self.register  # setting the callback
 
                 self.registration_token = registration_token
 
@@ -336,8 +341,7 @@ class GieselaWebSocket(WebSocket):
                 self.log("enqueued radio station", station.name, "(mode " + play_mode + ")")
 
                 if station:
-                    _call_function_main_thread(player.queue.add_radio_entry, station, now=(play_mode == "now"), wait_for_result=True,
-                                               revert=True)
+                    _call_function_main_thread(player.queue.add_radio_entry, station, now=(play_mode == "now"), wait_for_result=True, revert=True)
                     success = True
                 else:
                     success = False
@@ -371,8 +375,7 @@ class GieselaWebSocket(WebSocket):
 
         if self.registration_token:
             if WebieselaServer.awaiting_registration.pop(self.registration_token, None):
-                print("[WEBSOCKET] Removed <{}>'s registration_token from awaiting list".format(
-                    self.address))
+                print("[WEBSOCKET] Removed <{}>'s registration_token from awaiting list".format(self.address))
 
         print("[WEBSOCKET] <{}> disconnected".format(self.address))
 
@@ -383,13 +386,12 @@ class GieselaWebSocket(WebSocket):
         WebieselaServer.set_token_information(token, server_id, author)
         data = {"token": token}
         self.sendMessage(json.dumps(data))
-        print("[WEBSOCKET] <{}> successfully registered {}".format(
-            self.address, author))
+        print("[WEBSOCKET] <{}> successfully registered {}".format(self.address, author))
 
 
 def generate_registration_token():
     while True:
-        token = "".join(choice(ascii_lowercase) for _ in range(5))
+        token = "".join(random.choice(ascii_lowercase) for _ in range(5))
         if token not in WebieselaServer.awaiting_registration:
             return token
 
@@ -397,10 +399,10 @@ def generate_registration_token():
 class WebieselaServer:
     clients = []
     authenticated_clients = []
-    server = None
-    bot = None
-    _tokens = {}  # token: (server_id, author)
-    awaiting_registration = {}
+    server: SimpleWebSocketServer = None
+    bot: "Giesela" = None
+    _tokens: Dict[str, Tuple[int, Member]] = {}
+    awaiting_registration: Dict[str, Callable] = {}
 
     @staticmethod
     def run(bot):
@@ -522,7 +524,7 @@ class WebieselaServer:
         threading.Thread(target=WebieselaServer._send_player_information, args=(server_id,)).start()
 
     @staticmethod
-    def send_small_update(server_id, **kwargs):
+    def small_update(server_id, **kwargs):
         if not WebieselaServer.bot:
             return
 

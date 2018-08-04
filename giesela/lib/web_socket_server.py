@@ -23,10 +23,7 @@ __all__ = ["WebSocket",
 
 
 def _check_unicode(val):
-    if VER >= 3:
-        return isinstance(val, str)
-    else:
-        return isinstance(val, unicode)
+    return isinstance(val, str)
 
 
 class HTTPRequest(BaseHTTPRequestHandler):

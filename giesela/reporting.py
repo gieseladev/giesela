@@ -5,7 +5,7 @@ from raven.handlers.logging import SentryHandler
 
 from giesela.constants import VERSION
 
-log = logging.getLogger("Giesela")
+log = logging.getLogger("giesela")
 
 raven_client = raven.Client(release=VERSION)
 

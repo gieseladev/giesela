@@ -155,6 +155,3 @@ def get(lang, string_id):
 
 def format(lang, string_id, *args, **kwargs):
     return get_locale(lang).format(string_id, *args, **kwargs)
-
-# if __name__ == "__main__":
-#     print(format("de-de", "player.now_playing.generic", title="test"))

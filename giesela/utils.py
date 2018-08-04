@@ -1,6 +1,5 @@
 import datetime
 import inspect
-import math
 import random
 import re
 import time
@@ -15,6 +14,7 @@ from string import punctuation, whitespace
 from threading import Thread
 
 import aiohttp
+import math
 import requests
 from PIL import Image, ImageStat
 from bs4 import BeautifulSoup

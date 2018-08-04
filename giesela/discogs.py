@@ -1,4 +1,3 @@
-import json
 import re
 import traceback
 
@@ -112,7 +111,3 @@ async def get_entry(loop, query):
     except:
         traceback.print_exc()
         return None
-
-
-if __name__ == "__main__":
-    print(json.dumps(_get_entry("77 bombay street - up in the sky"), indent=4))

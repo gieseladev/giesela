@@ -1,8 +1,11 @@
+import logging
 from io import BytesIO
 
 from imgurpython import ImgurClient
 from imgurpython.helpers.error import (ImgurClientError,
                                        ImgurClientRateLimitError)
+
+log = logging.getLogger(__name__)
 
 client_id = "a2ef870c9cfc5c0"
 client_secret = "9006ebbaed1dd639ef79de176ae10419664ac4c6"
@@ -94,7 +97,7 @@ def _upload_song_image(playlist_name, identifier, url):
     except ImgurClientError:
         return False
     except ImgurClientRateLimitError:
-        print("[IMGUR] RATE LIMIT!")
+        log.warning("RATE LIMIT!")
         return False
 
     return resp.get("link")
@@ -103,7 +106,3 @@ def _upload_song_image(playlist_name, identifier, url):
 async def upload_song_image(loop, playlist_name, identifier, url):
     identifier = identifier.replace("_", " ").replace("url", "").strip().title()
     return await loop.run_in_executor(None, _upload_song_image, playlist_name, identifier, url)
-
-# print(client.credits)
-# _upload_song_image("simonisanerd", "HiJaKl2 thumbnail",
-#                    "https://lh3.googleusercontent.com/CbCjzp0eJoLIm0OmfJ5-xTB8namB7Pvw95hvhBZq-CbnkbF0tvig9XTOt8EFHiBgaBVb")

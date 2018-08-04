@@ -96,7 +96,3 @@ def get_playouts():
     resp = requests.get("https://api.energy.ch/broadcast/channels/bern/playouts", params=params)
 
     return resp.json()
-
-
-if __name__ == "__main__":
-    print(get_playouts()[0])  # just a test
