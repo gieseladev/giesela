@@ -9,26 +9,26 @@ from itertools import islice
 
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
-from giesela.VGMdb import get_entry as get_vgm_track
-from giesela.discogs import get_entry as get_discogs_track
 from giesela.entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry,
                            SpotifyEntry, StreamEntry, TimestampEntry,
                            VGMEntry, YoutubeEntry)
 from giesela.exceptions import ExtractionError, WrongEntryTypeError
+from giesela.lib.api.VGMdb import get_entry as get_vgm_track
+from giesela.lib.api.discogs import get_entry as get_discogs_track
+from giesela.lib.api.spotify import get_spotify_track
 from giesela.lib.event_emitter import EventEmitter
-from giesela.spotify import get_spotify_track
 from giesela.utils import clean_songname, get_header, get_video_sub_queue
 from giesela.webiesela import WebieselaServer
 
 
 class Queue(EventEmitter):
 
-    def __init__(self, bot, player):
+    def __init__(self, bot, player, downloader):
         super().__init__()
         self.bot = bot
-        self.player = player
         self.loop = bot.loop
-        self.downloader = bot.downloader
+        self.player = player
+        self.downloader = downloader
         self.entries = deque()
         self.history = []
 
@@ -378,7 +378,7 @@ class Queue(EventEmitter):
             entry.get_ready_future()
 
         if not more_to_come:
-            WebieselaServer.send_player_information(self.player.voice_client.guild.id)
+            WebieselaServer.send_player_information(entry.meta["channel"].guild.id)
             self.emit("entry-added", queue=self, entry=entry)
 
     def promote_position(self, position):

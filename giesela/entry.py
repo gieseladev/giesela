@@ -8,11 +8,10 @@ from discord import Guild, Member, User, VoiceChannel
 
 from giesela.exceptions import (BrokenEntryError, ExtractionError,
                                 OutdatedEntryError)
+from giesela.lib.api.spotify import SpotifyTrack
 from giesela.lyrics import search_for_lyrics
 from giesela.radio import RadioSongExtractor, StationInfo
-from giesela.spotify import SpotifyTrack
-from giesela.utils import (clean_songname, get_header, get_image_brightness,
-                           md5sum, slugify)
+from giesela.utils import clean_songname, get_header, get_image_brightness
 from giesela.web_author import WebAuthor
 
 
@@ -605,7 +604,7 @@ class YoutubeEntry(BaseEntry):
             # audio_cache\youtube-9R8aSKwTEMg-NOMA_-_Brain_Power.m4a
 
             if self.expected_filename is None:
-                self.expected_filename = slugify("unknown" + self.title)
+                self.expected_filename = "unknown" + self.title
 
             extractor = os.path.basename(self.expected_filename).split("-")[0]
 
@@ -636,14 +635,14 @@ class YoutubeEntry(BaseEntry):
                     # print("Remote size: %s Local size: %s" % (rsize, lsize))
 
                     if lsize != rsize:
-                        await self._really_download(hash=True)
+                        await self._really_download()
                     else:
                         # print("[Download] Cached:", self.url)
                         self.filename = lfile
 
                 else:
                     # print("File not found in cache (%s)" % expected_fname_noex)
-                    await self._really_download(hash=True)
+                    await self._really_download()
 
             else:
                 ldir = os.listdir(self.download_folder)
@@ -681,7 +680,7 @@ class YoutubeEntry(BaseEntry):
         finally:
             self._is_downloading = False
 
-    async def _really_download(self, *, hash=False):
+    async def _really_download(self):
         print("[Download] Started:", self.url)
 
         try:
@@ -696,22 +695,7 @@ class YoutubeEntry(BaseEntry):
             raise ExtractionError("ytdl broke and hell if I know why")
             # What the duck do I do now?
 
-        self.filename = unhashed_fname = self.queue.downloader.ytdl.prepare_filename(
-            result)
-
-        if hash:
-            # insert the 8 last characters of the file hash to the file name to
-            # ensure uniqueness
-            self.filename = md5sum(
-                unhashed_fname,
-                8).join("-.").join(unhashed_fname.rsplit(".", 1))
-
-            if os.path.isfile(self.filename):
-                # Oh bother it was actually there.
-                os.unlink(unhashed_fname)
-            else:
-                # Move the temporary file to it's final location.
-                os.rename(unhashed_fname, self.filename)
+        self.filename = unhashed_fname = self.queue.downloader.ytdl.prepare_filename(result)
 
 
 class TimestampEntry(YoutubeEntry):

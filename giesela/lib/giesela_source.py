@@ -5,7 +5,7 @@ Another fancy thing is the possibility to wait for the player to reach a certain
 
 import asyncio
 import logging
-from collections import namedtuple
+from typing import List, NamedTuple
 
 from discord import FFmpegPCMAudio, PCMVolumeTransformer
 
@@ -17,13 +17,20 @@ CHANNEL_COUNT = 2
 
 BYTES_PER_SECOND = SAMPLE_RATE * (BIT_DEPTH / 8) * CHANNEL_COUNT
 
-PlayerTimestamp = namedtuple("PlayerTimestamp", ["timestamp", "bytestamp", "future"])
+
+class PlayerTimestamp(NamedTuple):
+    timestamp: float
+    bytestamp: float
+    future: asyncio.Future
 
 
-class GieselaPlayer(PCMVolumeTransformer):
+class GieselaSource(PCMVolumeTransformer):
     """The player."""
+    source: str
+    bytes_read: int
+    waiters: List[PlayerTimestamp]
 
-    def __init__(self, source, volume):
+    def __init__(self, source: str, volume: float):
         """Initialise."""
         ffmpeg_source = self.get_ffmpeg(source)
         super().__init__(ffmpeg_source, volume)
@@ -31,17 +38,17 @@ class GieselaPlayer(PCMVolumeTransformer):
         self.bytes_read = 0
         self.waiters = []
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Return string rep."""
         return "<GieselaPlayer {}s at {}%>".format(self.progress, round(self.volume * 100))
 
     @property
-    def progress(self):
+    def progress(self) -> float:
         """Get progress into song in seconds."""
         return self.bytes_read / BYTES_PER_SECOND
 
     @classmethod
-    def get_ffmpeg(cls, source, start=None):
+    def get_ffmpeg(cls, source: str, start: float = None) -> FFmpegPCMAudio:
         """Return a FFmpeg audio instance."""
         kwargs = {
             "pipe": False,
@@ -53,7 +60,7 @@ class GieselaPlayer(PCMVolumeTransformer):
             kwargs["before_options"] += f"-ss {start}"
         return FFmpegPCMAudio(source, **kwargs)
 
-    def wait_for_timestamp(self, timestamp, future=None):
+    def wait_for_timestamp(self, timestamp: float, future: asyncio.Future = None) -> asyncio.Future:
         """Return a Future which is  set to True when the player passes timestamp."""
         future = future or asyncio.Future()
         bytestamp = timestamp * BYTES_PER_SECOND
@@ -65,7 +72,7 @@ class GieselaPlayer(PCMVolumeTransformer):
         self.waiters.insert(ind, PlayerTimestamp(timestamp, bytestamp, future))
         return future
 
-    def seek(self, s):
+    def seek(self, s: float):
         """Seek to s in the stream."""
         self.bytes_read = BYTES_PER_SECOND * s
         self.original = self.get_ffmpeg(self.source, start=s)
@@ -88,5 +95,5 @@ class GieselaPlayer(PCMVolumeTransformer):
     def cleanup(self):
         """Clean up and make sure to tell the waiters that it's over."""
         for waiter in self.waiters:
-            waiter.set_result(False)
+            waiter.future.set_result(False)
         super().cleanup()

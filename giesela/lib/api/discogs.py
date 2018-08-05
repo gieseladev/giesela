@@ -5,7 +5,7 @@ import discogs_client
 from discogs_client.exceptions import HTTPError
 
 from giesela.constants import VERSION
-from giesela.spotify import get_certainty
+from giesela.lib.api.spotify import get_certainty
 from giesela.utils import similarity
 
 client = discogs_client.Client("Giesela/{}".format(VERSION), user_token="vrzQalQXQdNAZYnwYlWunuJSyMjFlcGKXwglcITo")

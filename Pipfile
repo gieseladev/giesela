@@ -17,6 +17,7 @@ lyricsfinder = "*"
 pynacl = "*"
 aiohttp = "*"
 websockets = "*"
+colorlog = "*"
 
 [dev-packages]
 pytest = "*"

@@ -7,7 +7,8 @@ LOGGING = {
     "version": 1,
     "formatters": {
         "brief": {
-            "format": "{asctime} {module} {levelname} >> {message}",
+            "()": "colorlog.ColoredFormatter",
+            "format": "{black}{asctime}{reset} {blue}{module}{reset} {log_color}{levelname}{reset}: {message}",
             "style": "{"
         },
         "detailed": {

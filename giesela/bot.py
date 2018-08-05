@@ -6,11 +6,11 @@ import sys
 from textwrap import indent, wrap
 
 import aiohttp
-from discord.ext.commands import AutoShardedBot
+from discord.ext.commands import AutoShardedBot, CommandError, Context
 
-from giesela import cogs, downloader, exceptions
+from giesela import cogs, exceptions, reporting
 from giesela.config import Config, ConfigDefaults
-from giesela.constants import ABS_AUDIO_CACHE_PATH, AUDIO_CACHE_PATH, VERSION as BOTVERSION
+from giesela.constants import ABS_AUDIO_CACHE_PATH, VERSION as BOTVERSION
 from giesela.lib.ui import ui_utils
 from giesela.saved_playlists import Playlists
 from giesela.web_author import WebAuthor
@@ -46,15 +46,17 @@ class Giesela(AutoShardedBot):
 
         self.exit_signal = None
         self.aiosession = aiohttp.ClientSession(loop=self.loop)
-        self.http.user_agent += " Giesela/" + BOTVERSION
+        self.http.user_agent += f" Giesela/{BOTVERSION}"
 
         self.playlists = Playlists(ConfigDefaults.playlists_file)
-
-        self.downloader = downloader.Downloader(download_folder=AUDIO_CACHE_PATH)
 
         for ext in cogs.EXTENSIONS:
             log.info(f"loading extension {ext}")
             self.load_extension(ext)
+
+    async def logout(self):
+        await self.aiosession.close()
+        await super().logout()
 
     def _cleanup(self):
         try:
@@ -95,9 +97,17 @@ class Giesela(AutoShardedBot):
         else:
             log.exception(f"Error in {event} ({args}, {kwargs})")
 
+    async def on_command_error(self, ctx: Context, exception: Exception):
+        if isinstance(exception, CommandError):
+            await ctx.send(str(exception))
+        else:
+            reporting.raven_client.captureException((type(exception), exception, exception.__traceback__))
+
+        log.exception("CommandError:", exc_info=(type(exception), exception, exception.__traceback__))
+
     async def on_ready(self):
         log.info(f"\rConnected!  Giesela v{BOTVERSION}")
-        log.info(f"Bot:   {self.user}")
+        log.info(f"Bot: {self.user}")
 
         config_string = ""
         all_options = self.config.get_all_options()

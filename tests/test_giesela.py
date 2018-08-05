@@ -1,5 +1,3 @@
-"""Test Giesela."""
-
 import os
 
 import pytest
@@ -13,5 +11,5 @@ async def test_start():
     token = os.getenv("token")
 
     await bot.login(token)
+    await bot.aiosession.close()
     await bot.http.close()
-    await bot.close()

@@ -1,3 +1,4 @@
+from .api import *
 from .event_emitter import EventEmitter
-from .giesela_player import GieselaPlayer
+from .giesela_source import GieselaSource
 from .ui import *

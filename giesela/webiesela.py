@@ -13,9 +13,9 @@ from typing import Callable, Dict, TYPE_CHECKING, Tuple
 
 from discord import Member
 
-from giesela import spotify
 from giesela.config import static_config
 from giesela.entry import TimestampEntry
+from giesela.lib.api import spotify
 from giesela.lib.web_socket_server import SimpleWebSocketServer, WebSocket
 from giesela.radio import RadioStations, get_all_stations
 from giesela.web_author import WebAuthor

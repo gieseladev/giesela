@@ -11,7 +11,10 @@ from discord.ext.commands import Bot, Context
 class AdminTools:
     def __init__(self, bot: Bot):
         self.bot = bot
-        self.aiosession = getattr(bot, "aiosession", aiohttp.ClientSession(loop=self.bot.loop))
+        self.aiosession = getattr(bot, "aiosession", None)
+
+        if not self.aiosession:
+            self.aiosession = aiohttp.ClientSession(loop=self.bot.loop)
 
     @commands.command()
     @commands.is_owner()

@@ -9,8 +9,8 @@ import requests
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
 
-from giesela import energy
 from giesela.config import ConfigDefaults
+from giesela.lib.api import energy
 from giesela.utils import parse_timestamp
 
 

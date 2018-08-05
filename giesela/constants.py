@@ -1,6 +1,6 @@
 import os.path
 
-MAIN_VERSION = "5.0.1"
+MAIN_VERSION = "5.0.2"
 SUB_VERSION = "refreshed"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 
@@ -12,4 +12,3 @@ maj_versions = {
 
 AUDIO_CACHE_PATH = "cache/audio_cache"
 ABS_AUDIO_CACHE_PATH = os.path.join(os.getcwd(), AUDIO_CACHE_PATH)
-DISCORD_MSG_CHAR_LIMIT = 2000

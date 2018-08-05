@@ -1,17 +1,9 @@
-import datetime
-import inspect
-import random
 import re
-import time
 import traceback
-import unicodedata
 import urllib.parse
 from difflib import SequenceMatcher
-from functools import wraps
-from hashlib import md5
 from io import BytesIO
 from string import punctuation, whitespace
-from threading import Thread
 
 import aiohttp
 import math
@@ -20,7 +12,6 @@ from PIL import Image, ImageStat
 from bs4 import BeautifulSoup
 
 from giesela.config import ConfigDefaults, static_config
-from giesela.constants import DISCORD_MSG_CHAR_LIMIT
 
 
 def wrap_string(target, wrapping, handle_special=True, reverse_closer=True):
@@ -59,99 +50,6 @@ def is_image(url):
         return False
 
 
-def owner_only(func):
-    @wraps(func)
-    async def wrapper(self, *args, **kwargs):
-        # Only allow the owner to use these commands
-        orig_msg = _get_variable("message")
-
-        if not orig_msg or orig_msg.author.id == self.config.owner_id:
-            return await func(self, *args, **kwargs)
-        else:
-            return Response("only the owner can use this command")
-
-    return wrapper
-
-
-def command_info(version, timestamp, changelog=None):
-    if changelog is None:
-        changelog = {}
-
-    def function_decorator(func):
-        func.version = version
-        func.timestamp = datetime.datetime.fromtimestamp(timestamp)
-        func.changelog = [(ver, datetime.datetime.fromtimestamp(time), log)
-                          for ver, (time, log) in changelog.items()]
-
-        return func
-
-    return function_decorator
-
-
-def _get_variable(name):
-    stack = inspect.stack()
-    try:
-        for frames in stack:
-            frame = None
-            try:
-                frame = frames[0]
-                current_locals = frame.f_locals
-                if name in current_locals:
-                    return current_locals[name]
-            finally:
-                del frame
-    finally:
-        del stack
-
-
-def block_user(func):
-    @wraps(func)
-    async def wrapper(self, *args, **kwargs):
-        orig_msg = _get_variable("message")
-
-        self.users_in_menu.add(orig_msg.author.id)
-        print("Now blocking " + str(orig_msg.author))
-        try:
-            res = await func(self, *args, **kwargs)
-            self.users_in_menu.remove(orig_msg.author.id)
-            print("Unblocking " + str(orig_msg.author))
-            return res
-        except Exception as e:  # just making sure that no one gets stuck in a menu and can't use any commands anymore
-            self.users_in_menu.remove(orig_msg.author.id)
-            raise e
-
-    return wrapper
-
-
-class Response:
-
-    def __init__(self, content=None, reply=False, delete_after=0, embed=None):
-        self.content = content
-        self.reply = reply
-        self.delete_after = delete_after
-        self.embed = embed
-
-
-class run_function_every:
-
-    def __init__(self, function, timeout):
-        self.thread = Thread(target=self._sender, args=(function, timeout))
-        self.stop = False
-
-    def _sender(self, function, timeout):
-        while True:
-            if self.stop:
-                return
-            function()
-            time.sleep(timeout)
-
-    def __enter__(self):
-        self.thread.start()
-
-    def __exit__(self, type, value, traceback):
-        self.stop = True
-
-
 def similarity(a: str, b: str) -> float:
     return SequenceMatcher(None, a, b).ratio()
 
@@ -171,31 +69,6 @@ def nice_cut(s, max_length, ending="..."):
             return chunk
 
     return chunk  # this really shouldn't happen...
-
-
-def load_file(filename, skip_commented_lines=True, comment_char="#"):
-    try:
-        with open(filename, encoding="utf8") as f:
-            results = []
-            for line in f:
-                line = line.strip()
-
-                if line and not (skip_commented_lines and
-                                 line.startswith(comment_char)):
-                    results.append(line)
-
-            return results
-
-    except IOError as e:
-        print("Error loading", filename, e)
-        return []
-
-
-def write_file(filename, contents):
-    with open(filename, "w", encoding="utf8") as f:
-        for item in contents:
-            f.write(str(item))
-            f.write("\n")
 
 
 def create_bar(progress, length=10, full_char="■", half_char=None, empty_char="□"):
@@ -243,37 +116,6 @@ def get_image_brightness(**kwargs):
         return mean[0]
     else:
         return 0
-
-
-def prettydate(d):
-    diff = datetime.datetime.now() - d
-    s = diff.seconds
-    if diff.days < 0:
-        return d.strftime("%d %b %y")
-    elif diff.days == 1:
-        return "1 day ago"
-    elif diff.days > 1:
-        days = diff.days
-        if days > 20:
-            months = divmod(days + 15, 30)[0]
-            if months == 1:
-                return "1 month ago"
-            else:
-                return "{} months ago".format(months)
-        else:
-            return "{} days ago".format(days)
-    elif s <= 1:
-        return "just now"
-    elif s < 60:
-        return "{} seconds ago".format(round_to_interval(s))
-    elif s < 120:
-        return "1 minute ago"
-    elif s < 3600:
-        return "{} minutes ago".format(round_to_interval(s / 60))
-    elif s < 7200:
-        return "1 hour ago"
-    else:
-        return "{} hours ago".format(round_to_interval(s / 3600))
 
 
 def ordinal(n, combine=False):
@@ -531,14 +373,6 @@ def parse_timestamp(timestamp):
     return secs
 
 
-def hex_to_dec(hex_code):
-    return int(hex_code.lstrip("#"), 16)
-
-
-def dec_to_hex(dec_colour):
-    return "#{:0>6}".format(hex(dec_colour)[2:]).upper()
-
-
 def to_timestamp(seconds):
     sec = int(seconds)
     s = "{0:0>2}".format(sec % 60)
@@ -553,13 +387,6 @@ def to_timestamp(seconds):
         return ":".join(str(x) for x in (h, "{0:0>2}".format(m), s))
     else:
         return ":".join(str(x) for x in (m, s))
-
-
-def slugify(value):
-    value = unicodedata.normalize("NFKD", value).encode(
-        "ascii", "ignore").decode("ascii")
-    value = re.sub(r"[^\w\s-]", "", value).strip().lower()
-    return re.sub(r"[-\s]+", "-", value)
 
 
 def format_time_ffmpeg(s):
@@ -614,67 +441,13 @@ def format_time(s, round_seconds=True, round_base=1, max_specifications=3, combi
     return " ".join(return_list)
 
 
-def escape_dis(s):
-    escape_char = "\\"
-    escape_list = ["_", "*"]
-    for c in escape_list:
-        s = re.sub(re.escape(c), escape_char + c, s)
-
-    return s
-
-
-def random_line(afile):
-    with open(afile) as myfile:
-        line = next(myfile)
-        for num, aline in enumerate(myfile):
-            if random.randrange(num + 2):
-                continue
-            line = aline
-        return line
-
-
-def paginate(content, *, length=DISCORD_MSG_CHAR_LIMIT, reserve=0):
-    """
-    Split up a large string or list of strings into chunks for sending to discord.
-    """
-    if type(content) == str:
-        contentlist = content.split("\n")
-    elif type(content) == list:
-        contentlist = content
-    else:
-        raise ValueError("Content must be str or list, not %s" % type(content))
-
-    chunks = []
-    currentchunk = ""
-
-    for line in contentlist:
-        if len(currentchunk) + len(line) < length - reserve:
-            currentchunk += line + "\n"
-        else:
-            chunks.append(currentchunk)
-            currentchunk = line + "\n"
-
-    if currentchunk:
-        chunks.append(currentchunk)
-
-    return chunks
-
-
-async def get_header(session, url, headerfield=None, *, timeout=5):
+async def get_header(session, url, header_field=None, *, timeout=5):
     with aiohttp.ClientTimeout(timeout):
         async with session.head(url) as response:
-            if headerfield:
-                return response.headers.get(headerfield)
+            if header_field:
+                return response.headers.get(header_field)
             else:
                 return response.headers
-
-
-def md5sum(filename, limit=0):
-    fhash = md5()
-    with open(filename, "rb") as f:
-        for chunk in iter(lambda: f.read(8192), b""):
-            fhash.update(chunk)
-    return fhash.hexdigest()[-limit:]
 
 
 def get_dev_version():
@@ -687,20 +460,6 @@ def get_dev_version():
 
     if matches is None:
         return None, None
-
-    return matches.groups()
-
-
-def get_master_version():
-    page = requests.get(
-        "https://raw.githubusercontent.com/GieselaDev/Giesela/master/giesela/constants.py"
-    )
-    matches = re.search(
-        r"MAIN_VERSION = \"(\d.\d.\d)\"\nSUB_VERSION = \"(.*?)\"",
-        page.content.decode("utf-8"))
-
-    if matches is None:
-        return None
 
     return matches.groups()
 

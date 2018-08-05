@@ -10,7 +10,7 @@ from discord.ext.commands import Bot
 from giesela.entry import GieselaEntry, TimestampEntry, YoutubeEntry
 from giesela.entry_updater import fix_entry, fix_generator
 from giesela.exceptions import ExtractionError, WrongEntryTypeError
-from giesela.imgur import upload_playlist_cover, upload_song_image
+from giesela.lib.api.imgur import upload_playlist_cover, upload_song_image
 from giesela.utils import (Response, block_user, command_info, create_bar,
                            format_time, hex_to_dec, is_image, nice_cut,
                            parse_timestamp, timestamp_to_queue, to_timestamp,

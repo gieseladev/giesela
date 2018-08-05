@@ -1,11 +1,11 @@
 import logging
-from typing import Dict, Union
+from typing import Dict, Optional, Union
 
-from discord import Game, Guild, Message
+from discord import Game, Guild, Member, Message, VoiceChannel, VoiceState
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import BaseEntry, Giesela, MusicPlayer, RadioSongEntry, TimestampEntry, WebieselaServer, localization
+from giesela import BaseEntry, Downloader, Giesela, MusicPlayer, RadioSongEntry, TimestampEntry, WebieselaServer, constants, localization
 from giesela.utils import create_bar, ordinal, parse_timestamp
 
 log = logging.getLogger(__name__)
@@ -13,16 +13,25 @@ log = logging.getLogger(__name__)
 
 class Player:
     bot: Giesela
+    downloader: Downloader
+
     players: Dict[int, MusicPlayer]
     status_messages: Dict[int, Message]
 
     def __init__(self, bot: Giesela):
         self.bot = bot
 
+        self.downloader = Downloader(download_folder=constants.AUDIO_CACHE_PATH)
+
         self.players = {}
         self.status_messages = {}
 
-    async def get_player(self, guild: Guild) -> MusicPlayer:
+    async def get_player(self, guild: Guild, *, create: bool = True, channel: VoiceChannel = None) -> Optional[MusicPlayer]:
+        if guild.id not in self.players:
+            if create:
+                self.players[guild.id] = MusicPlayer(self.bot, self.downloader, channel or guild.voice_channels[0])  # TODO: smart detection
+            else:
+                return None
         return self.players[guild.id]
 
     async def on_player_play(self, player: MusicPlayer, entry: BaseEntry):
@@ -97,36 +106,38 @@ class Player:
 
         await self.bot.change_presence(activity=game)
 
-    async def on_voice_state_update(self, before, after):
+    async def on_voice_state_update(self, member: Member, before: VoiceState, after: VoiceState):
+        giesela_voice = member.guild.me.voice
+        if not giesela_voice:
+            return
+
         if not self.bot.config.auto_pause:
+            return
+
+        if before.channel == after.channel:
+            return
+
+        # Ignore other bots
+        if member.guild.me != member and member.bot:
             return
 
         user_left_voice_channel = False
 
-        if before.voice and not after.voice:
+        if before.channel and not after.channel:
             user_left_voice_channel = True
 
-        if after.guild.me != after and after.bot:
-            return
+        player = await self.get_player(member.guild)
 
-        if before.voice.channel != after.voice.channel:
-            my_channel = after.guild.me.voice.channel
-            if not my_channel:
-                return
-
-            # I was alone but a non-bot joined
-            if sum(1 for vm in my_channel.members if not vm.bot) == 1 and not user_left_voice_channel:
-                player = await self.get_player(after.guild)
-                if player.is_paused:
-                    log.info("[AUTOPAUSE] Resuming")
-                    player.resume()
-
-            # I am now alone
-            if sum(1 for vm in my_channel.members if not vm.bot) == 0:
-                player = await self.get_player(after.guild)
-                if player.is_playing:
-                    log.info("[AUTOPAUSE] Pausing")
-                    player.pause()
+        # Only Giesela left
+        if user_left_voice_channel:
+            if sum(1 for vm in before.channel.members if not vm.bot) == 0:
+                log.info("auto-pausing")
+                player.pause()
+        else:
+            # if the first new person joined
+            if sum(1 for vm in after.channel.members if not vm.bot) == 1:
+                log.info("auto-resuming")
+                player.resume()
 
     @commands.command()
     async def summon(self, ctx: Context):
@@ -137,21 +148,29 @@ class Player:
         else:
             raise commands.CommandError("Couldn't find voice channel")
 
-        player = await self.get_player(ctx.guild)
-        player.move_to(target)
+        player = await self.get_player(ctx.guild, channel=target)
+        await player.move_to(target)
 
-        if player.is_stopped:
-            player.play()
+        if not player.player:
+            await player.play()
+
+    @commands.command()
+    async def disconnect(self, ctx: Context):
+        """Disconnect from the voice channel"""
+        player = await self.get_player(ctx.guild, create=False)
+        if player:
+            await player.disconnect()
 
     @commands.command()
     async def pause(self, ctx: Context):
         """Pause playback of the current song. If the player is paused, it will unpause."""
         player = await self.get_player(ctx.guild)
 
-        if player.is_playing:
-            player.pause()
-        elif player.is_paused:
-            player.resume()
+        if player.voice_client:
+            if player.voice_client.is_playing():
+                player.pause()
+            else:
+                player.resume()
         else:
             raise commands.CommandError("Cannot pause what is not playing")
 
@@ -160,9 +179,8 @@ class Player:
         """Resumes playback of the current song."""
         player = await self.get_player(ctx.guild)
 
-        if player.is_paused:
+        if player.voice_client:
             player.resume()
-
         else:
             raise commands.CommandError("Hard to unpause something that's not paused, amirite?")
 
@@ -170,8 +188,6 @@ class Player:
     async def stop(self, ctx: Context):
         """Stops the player completely and removes all entries from the queue."""
         player = await self.get_player(ctx.guild)
-
-        player.queue.clear()
         player.stop()
 
     @commands.command()
@@ -232,8 +248,7 @@ class Player:
         if player.current_entry is None:
             raise commands.CommandError("Nothing playing!")
 
-        if not player.seek(seconds):
-            raise commands.CommandError("Timestamp exceeds song duration!")
+        player.seek(seconds)
 
     @commands.command()
     async def seek(self, ctx: Context, timestamp: str):
@@ -277,7 +292,7 @@ class Player:
         """Try to find lyrics for the current entry and display 'em"""
         player = await self.get_player(ctx.guild)
 
-        with ctx.typing():
+        async with ctx.typing():
             if not player.current_entry:
                 raise commands.CommandError("There's no way for me to find lyrics for something that doesn't even exist!")
 
@@ -287,7 +302,7 @@ class Player:
             if not lyrics:
                 raise commands.CommandError("Couldn't find any lyrics for **{}**".format(title))
             else:
-                await ctx.send("**{title}**\n\n{lyrics}\n**Lyrics from \"{source}\"**".format(**lyrics))
+                await ctx.send(f"**{lyrics.title}**\n\n{lyrics.lyrics[:1000]}\n**Lyrics from \"{lyrics.origin.source_name}\"**")
 
 
 def setup(bot: Giesela):

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "faf73f3a19caa6835d5fdc4bba6fb48aa198bd575cc7dcce62002eb235b0c52d"
+            "sha256": "97597b6de7b044c13f0a8936becfc8d6d6fd1973cb0797243be549ebc9616704"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -111,6 +111,22 @@
                 "sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691"
             ],
             "version": "==3.0.4"
+        },
+        "colorama": {
+            "hashes": [
+                "sha256:463f8483208e921368c9f306094eb6f725c6ca42b0f97e313cb5d5512459feda",
+                "sha256:48eb22f4f8461b1df5734a074b57042430fb06e1d61bd1e11b078c0fe6d7a1f1"
+            ],
+            "markers": "sys_platform == 'win32'",
+            "version": "==0.3.9"
+        },
+        "colorlog": {
+            "hashes": [
+                "sha256:418db638c9577f37f0fae4914074f395847a728158a011be2a193ac491b9779d",
+                "sha256:8b234ebae1ba1237bc79c0d5f1f47b31a3f3e90c0b4c2b0ebdde63a174d3b97b"
+            ],
+            "index": "pypi",
+            "version": "==3.1.4"
         },
         "discogs-client": {
             "hashes": [
@@ -339,10 +355,10 @@
         },
         "youtube-dl": {
             "hashes": [
-                "sha256:6309c38d22946e3063f9226fa24d8c2876cf62cebed38ef47726f918c4d843d3",
-                "sha256:ce486648f581ae9d0f5fb85c0f88de871d5e2eede79b913293317e328fda4837"
+                "sha256:1ff26eaca0dc438c5ed7021ebe652a441ad320e1f52f20a01c75eadac9f68654",
+                "sha256:b26a6e0379ae6300c5fca3b610e89473577eaeb4e559877bfe81f6035f9e12f9"
             ],
-            "version": "==2018.7.29"
+            "version": "==2018.8.4"
         }
     },
     "develop": {

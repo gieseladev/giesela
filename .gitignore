@@ -1,7 +1,10 @@
 .idea/
 .pytest_cache/
 
-*.pyc
-
-venv/
+cache/
+data/lyrics/
+data/playlists/
 logs/
+venv/
+
+*.pyc
