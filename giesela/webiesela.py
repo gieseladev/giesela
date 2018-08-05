@@ -3,25 +3,29 @@ import atexit
 import hashlib
 import inspect
 import json
+import logging
 import random
 import threading
 import traceback
 import uuid
 from json.decoder import JSONDecodeError
+from pathlib import Path
 from string import ascii_lowercase
-from typing import Callable, Dict, TYPE_CHECKING, Tuple
+from typing import Callable, Dict, Optional, TYPE_CHECKING, Tuple
 
 from discord import Member
 
 from giesela.config import static_config
 from giesela.entry import TimestampEntry
 from giesela.lib.api import spotify
-from giesela.lib.web_socket_server import SimpleWebSocketServer, WebSocket
+from giesela.lib.web_socket_server import SimpleSSLWebSocketServer, SimpleWebSocketServer, WebSocket
 from giesela.radio import RadioStations, get_all_stations
 from giesela.web_author import WebAuthor
 
 if TYPE_CHECKING:
     from giesela.bot import Giesela
+
+log = logging.getLogger(__name__)
 
 
 class ErrorCode:
@@ -396,6 +400,34 @@ def generate_registration_token():
             return token
 
 
+def find_cert_files() -> Tuple[Optional[str], Optional[str]]:
+    folder = Path(static_config.webiesela_cert)
+    folder.mkdir(exist_ok=True)
+
+    files = list(folder.glob("*"))
+
+    if not files:
+        return None, None
+    if len(files) == 1:
+        return str(files[0].absolute()), None
+    if len(files) == 2:
+        certfile = keyfile = None
+        for file in files:
+            if file.suffix:
+                target = file.suffix[1:].lower()
+            else:
+                target = file.name.lower()
+            if target in ("cert", "crt", "certificate"):
+                certfile = str(file.absolute())
+            elif target in ("private", "privatekey", "key", "keyfile"):
+                keyfile = str(file.absolute())
+            else:
+                raise EnvironmentError(f"Can't distinguis certificate from keyfile in your cert folder ({folder})")
+        return certfile, keyfile
+    else:
+        raise EnvironmentError(f"Your certificates folder has too many files in it! ({folder})")
+
+
 class WebieselaServer:
     clients = []
     authenticated_clients = []
@@ -416,9 +448,15 @@ class WebieselaServer:
         except FileNotFoundError:
             print("[WEBSOCKET] failed to load tokens, there are none saved")
 
-        WebieselaServer.server = SimpleWebSocketServer("",
-                                                       8000,
-                                                       GieselaWebSocket)
+        cert_file, key_file = find_cert_files()
+        if cert_file:
+            log.info("found cert file, creating SSL Server!")
+            server = SimpleSSLWebSocketServer("", static_config.webiesela_port, GieselaWebSocket, cert_file, key_file)
+        else:
+            log.warning("no certificate found, using default server")
+            server = SimpleWebSocketServer("", static_config.webiesela_port, GieselaWebSocket)
+
+        WebieselaServer.server = server
         atexit.register(WebieselaServer.server.close)
         # new thread because it's blocking
         threading.Thread(target=WebieselaServer.server.serveforever).start()

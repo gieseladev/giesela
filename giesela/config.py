@@ -107,6 +107,8 @@ class ConfigDefaults:
         "DiscogsEntry": ":large_orange_diamond:",
         "VGMEntry": ":large_blue_diamond:"
     }
+    
+    webiesela_port = 8000
 
     owner_id = None
     command_prefix = os.getenv("command_prefix", "!")
@@ -132,6 +134,7 @@ class ConfigDefaults:
     start_webiesela = True
     delete_unrelated_in_owned = False
 
+    webiesela_cert = "data/cert"
     options_file = "data/options.ini"
     radios_file = "data/radio_stations.json"
     playlists_file = "data/playlists.json"  # deprecated

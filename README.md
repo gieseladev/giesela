@@ -26,3 +26,13 @@ You can mount `/giesela/data` which holds the data for the configuration file,
 the playlists and the lyrics (I think that's everything)
 
 `/giesela/logs` holds the log files (if there even are any...)
+
+### Secure Websockets for Webiesela
+Giesela Refresh ~~finally~~ supports SSL encryption for Webiesela. All you have to do
+to enable it is place (mount) your certificate file in the `/giesela/data/cert` folder.
+
+If you have a separate file for the private key you also need to place it in the same
+folder and make sure Giesela can identify which is which. You can do this by either
+naming the files `CERTIFICATE` vs `PRIVATEKEY` / `KEYFILE` or you can just give them
+the suffix `.cert` vs `.key`. There are of course other possibilities, but I'm too lazy
+to name them all!

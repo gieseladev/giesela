@@ -101,29 +101,6 @@ class RadioStations:
         return None
 
 
-def _get_current_song_radiobern1():
-    resp = requests.get("http://player.radiobern1.ch/data/generated_content/bern1/production/playlist/playlist_live.json")
-
-    data = resp.json()
-    np = data["live"]
-
-    title = np["title"]
-    artist = np["interpret"]
-    cover = np["imageURL"]
-
-    duration = parse_timestamp(np["duration"])
-    progress = time.time() - parse(np["playtime"]).timestamp()
-
-    return {
-        "title": title,
-        "artist": artist,
-        "cover": cover,
-        "youtube": "http://www.radiobern1.ch/",
-        "duration": duration,
-        "progress": progress
-    }
-
-
 def _get_current_song_radio32():
     resp = requests.get("http://lggxoaexvb.cyon.link/song/current")
     data = resp.json()
@@ -263,7 +240,6 @@ def init_extractor():
             "capitalfm": _get_current_song_capital_fm,
             "bbc": _get_current_song_bbc,
             # "radio32":      RadioSongExtractor._get_current_song_radio32,
-            "radiobern1": _get_current_song_radiobern1
         }
         RadioSongExtractor._initialised = True
 

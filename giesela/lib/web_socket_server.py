@@ -9,13 +9,10 @@ import hashlib
 import socket
 import ssl
 import struct
-import sys
 from collections import deque
-from select import select
-
-VER = sys.version_info[0]
 from http.server import BaseHTTPRequestHandler
-from io import StringIO, BytesIO
+from io import BytesIO
+from select import select
 
 __all__ = ["WebSocket",
            "SimpleWebSocketServer",
@@ -29,10 +26,7 @@ def _check_unicode(val):
 class HTTPRequest(BaseHTTPRequestHandler):
 
     def __init__(self, request_text):
-        if VER >= 3:
-            self.rfile = BytesIO(request_text)
-        else:
-            self.rfile = StringIO(request_text)
+        self.rfile = BytesIO(request_text)
         self.raw_requestline = self.rfile.readline()
         self.error_code = self.error_message = None
         self.parse_request()
@@ -276,12 +270,8 @@ class WebSocket(object):
             if not data:
                 raise Exception("remote socket closed")
 
-            if VER >= 3:
-                for d in data:
-                    self._parseMessage(d)
-            else:
-                for d in data:
-                    self._parseMessage(ord(d))
+            for d in data:
+                self._parseMessage(d)
 
     def close(self, status=1000, reason=u""):
         """
@@ -684,9 +674,6 @@ class SimpleSSLWebSocketServer(SimpleWebSocketServer):
         self.context = ssl.SSLContext(version)
         self.context.load_cert_chain(certfile, keyfile)
 
-    def close(self):
-        super(SimpleSSLWebSocketServer, self).close()
-
     def _decorateSocket(self, sock):
         sslsock = self.context.wrap_socket(sock, server_side=True)
         return sslsock
@@ -695,6 +682,3 @@ class SimpleSSLWebSocketServer(SimpleWebSocketServer):
         ws = self.websocketclass(self, sock, address)
         ws.usingssl = True
         return ws
-
-    def serveforever(self):
-        super(SimpleSSLWebSocketServer, self).serveforever()
