@@ -1,5 +1,5 @@
-from giesela.entry import Entry, GieselaEntry
-from giesela.exceptions import ExtractionError, WrongEntryTypeError
+from .entry import Entry, GieselaEntry
+from .exceptions import ExtractionError, WrongEntryTypeError
 
 
 def between(val, low, high):

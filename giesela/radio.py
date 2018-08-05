@@ -9,9 +9,9 @@ import requests
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
 
-from giesela.config import ConfigDefaults
-from giesela.lib.api import energy
-from giesela.utils import parse_timestamp
+from .config import ConfigDefaults
+from .lib.api import energy
+from .utils import parse_timestamp
 
 
 class StationInfo:

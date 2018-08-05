@@ -13,17 +13,18 @@ from pathlib import Path
 from string import ascii_lowercase
 from typing import Callable, Dict, Optional, TYPE_CHECKING, Tuple
 
-from discord import Member
+from discord import Guild, Member
 
-from giesela.config import static_config
-from giesela.entry import TimestampEntry
-from giesela.lib.api import spotify
-from giesela.lib.web_socket_server import SimpleSSLWebSocketServer, SimpleWebSocketServer, WebSocket
-from giesela.radio import RadioStations, get_all_stations
-from giesela.web_author import WebAuthor
+from .config import static_config
+from .entry import TimestampEntry
+from .lib.api import spotify
+from .lib.web_socket_server import SimpleSSLWebSocketServer, SimpleWebSocketServer, WebSocket
+from .radio import RadioStations, get_all_stations
+from .web_author import WebAuthor
 
 if TYPE_CHECKING:
-    from giesela.bot import Giesela
+    from .bot import Giesela
+    from .cogs.webiesela import Webiesela
 
 log = logging.getLogger(__name__)
 
@@ -47,18 +48,21 @@ def _call_function_main_thread(func, *args, wait_for_result=False, **kwargs):
 
 
 class GieselaWebSocket(WebSocket):
+    _discord_guild: Optional[Guild]
+    token: str
+    registration_token: str
 
     def init(self):
         self.registration_token = None
-        self._discord_server = None
+        self._discord_guild = None
 
     @property
     def discord_server(self):
-        if not self._discord_server:
+        if not self._discord_guild:
             server_id, *_ = WebieselaServer.get_token_information(self.token)
-            self._discord_server = WebieselaServer.bot.get_guild(server_id)
+            self._discord_guild = WebieselaServer.bot.get_guild(server_id)
 
-        return self._discord_server
+        return self._discord_guild
 
     def log(self, *messages):
         message = " ".join(str(msg) for msg in messages)
@@ -412,6 +416,7 @@ def find_cert_files() -> Tuple[Optional[str], Optional[str]]:
         return str(files[0].absolute()), None
     if len(files) == 2:
         certfile = keyfile = None
+
         for file in files:
             if file.suffix:
                 target = file.suffix[1:].lower()
@@ -432,19 +437,21 @@ class WebieselaServer:
     clients = []
     authenticated_clients = []
     server: SimpleWebSocketServer = None
+    cog: "Webiesela" = None
     bot: "Giesela" = None
     _tokens: Dict[str, Tuple[int, Member]] = {}
     awaiting_registration: Dict[str, Callable] = {}
 
-    @staticmethod
-    def run(bot):
-        WebieselaServer.bot = bot
+    @classmethod
+    def run(cls, cog: "Webiesela"):
+        cls.cog = cog
+        cls.bot = cog.bot
 
         try:
-            WebieselaServer._tokens = {t: (s, WebAuthor.from_id(u)) for t, (s, u) in json.load(
+            cls._tokens = {t: (s, WebAuthor.from_id(u)) for t, (s, u) in json.load(
                 open("data/websocket_token.json", "r")).items()}
             print("[WEBSOCKET] loaded {} tokens".format(
-                len(WebieselaServer._tokens)))
+                len(cls._tokens)))
         except FileNotFoundError:
             print("[WEBSOCKET] failed to load tokens, there are none saved")
 
@@ -456,15 +463,15 @@ class WebieselaServer:
             log.warning("no certificate found, using default server")
             server = SimpleWebSocketServer("", static_config.webiesela_port, GieselaWebSocket)
 
-        WebieselaServer.server = server
-        atexit.register(WebieselaServer.server.close)
+        cls.server = server
+        atexit.register(cls.server.close)
         # new thread because it's blocking
-        threading.Thread(target=WebieselaServer.server.serveforever).start()
+        threading.Thread(target=cls.server.serveforever).start()
         print("[WEBSOCKET] up and running")
 
-    @staticmethod
-    def register_information(server_id, author_id, token):
-        callback = WebieselaServer.awaiting_registration.pop(token, None)
+    @classmethod
+    def register_information(cls, server_id, author_id, token):
+        callback = cls.awaiting_registration.pop(token, None)
         author = WebAuthor.from_id(author_id)
         if not callback:
             return False
@@ -472,47 +479,47 @@ class WebieselaServer:
         callback(server_id, author)
         return True
 
-    @staticmethod
-    def get_token_information(token):
-        return WebieselaServer._tokens.get(token, None)
+    @classmethod
+    def get_token_information(cls, token):
+        return cls._tokens.get(token, None)
 
-    @staticmethod
-    def set_token_information(token, server_id, author):
-        WebieselaServer._tokens[token] = (server_id, author)
-        json.dump({t: (s, u.id) for t, (s, u) in WebieselaServer._tokens.items()},
+    @classmethod
+    def set_token_information(cls, token, server_id, author):
+        cls._tokens[token] = (server_id, author)
+        json.dump({t: (s, u.id) for t, (s, u) in cls._tokens.items()},
                   open("data/websocket_token.json", "w+"), indent=4)
 
-    @staticmethod
-    def _broadcast_message(server_id, json_message):
-        for auth_client in WebieselaServer.authenticated_clients:
+    @classmethod
+    def _broadcast_message(cls, server_id, json_message):
+        for auth_client in cls.authenticated_clients:
             # does this update concern this socket
-            if WebieselaServer.get_token_information(auth_client.token)[0] == server_id:
+            if cls.get_token_information(auth_client.token)[0] == server_id:
                 auth_client.sendMessage(json_message)
 
-    @staticmethod
-    def broadcast_message(server_id, message):
+    @classmethod
+    def broadcast_message(cls, server_id, message):
         try:
-            threading.Thread(target=WebieselaServer._broadcast_message, args=(server_id, message)).start()
+            threading.Thread(target=cls._broadcast_message, args=(server_id, message)).start()
         except Exception:
             traceback.print_exc()
 
-    @staticmethod
-    def get_player(token=None, server_id=None):
+    @classmethod
+    def get_player(cls, token=None, server_id=None):
         if not token and not server_id:
             raise ValueError("Specify at least one of the two")
-        server_id = WebieselaServer.get_token_information(
+        server_id = cls.get_token_information(
             token)[0] if token else server_id
         try:
-            player = asyncio.run_coroutine_threadsafe(WebieselaServer.bot.get_player(server_id), WebieselaServer.bot.loop).result()
+            player = asyncio.run_coroutine_threadsafe(cls.cog.get_player(server_id), cls.bot.loop).result()
             return player
         except Exception as e:
-            print("[WEBSOCKET] encountered error while getting player:\n{}".format(e))
+            log.warning("encountered error while getting player:\n{}".format(e))
             traceback.print_exc()
             return None
 
-    @staticmethod
-    def get_player_information(token=None, server_id=None):
-        player = WebieselaServer.get_player(token=token, server_id=server_id)
+    @classmethod
+    def get_player_information(cls, token=None, server_id=None):
+        player = cls.get_player(token=token, server_id=server_id)
         if not player:
             return None
 
@@ -534,48 +541,47 @@ class WebieselaServer:
 
         return data
 
-    @staticmethod
-    def _send_player_information(server_id):
+    @classmethod
+    def _send_player_information(cls, server_id):
         message = {
             "info":
                 {
-                    "player": WebieselaServer.get_player_information(server_id=server_id)
+                    "player": cls.get_player_information(server_id=server_id)
                 }
         }
 
-        WebieselaServer._broadcast_message(server_id, json.dumps(message))
+        cls._broadcast_message(server_id, json.dumps(message))
 
-    @staticmethod
-    def send_player_information(server_id):
-        if not WebieselaServer.bot:
+    @classmethod
+    def send_player_information(cls, server_id):
+        if not cls.bot:
             return
 
-        if not WebieselaServer.authenticated_clients:
-            return
-
-        frame = inspect.currentframe()
-        outer_frames = inspect.getouterframes(frame)
-        caller = outer_frames[1]
-        print("[WEBSOCKET] Broadcasting player update to {} socket(s). Caused by \"{}\"".format(len(WebieselaServer.authenticated_clients),
-                                                                                                caller.function))
-
-        threading.Thread(target=WebieselaServer._send_player_information, args=(server_id,)).start()
-
-    @staticmethod
-    def small_update(server_id, **kwargs):
-        if not WebieselaServer.bot:
-            return
-
-        if not WebieselaServer.authenticated_clients:
+        if not cls.authenticated_clients:
             return
 
         frame = inspect.currentframe()
         outer_frames = inspect.getouterframes(frame)
         caller = outer_frames[1]
-        print("[WEBSOCKET] Broadcasting update to {} socket(s). Caused by \"{}\"".format(len(WebieselaServer.authenticated_clients), caller.function))
+        log.debug("Broadcasting player update to {} socket(s). Caused by \"{}\"".format(len(cls.authenticated_clients), caller.function))
+
+        threading.Thread(target=cls._send_player_information, args=(server_id,)).start()
+
+    @classmethod
+    def small_update(cls, server_id, **kwargs):
+        if not cls.bot:
+            return
+
+        if not cls.authenticated_clients:
+            return
+
+        frame = inspect.currentframe()
+        outer_frames = inspect.getouterframes(frame)
+        caller = outer_frames[1]
+        log.debug("Broadcasting update to {} socket(s). Caused by \"{}\"".format(len(cls.authenticated_clients), caller.function))
 
         message = {
             "update": kwargs
         }
 
-        WebieselaServer.broadcast_message(server_id, json.dumps(message))
+        cls.broadcast_message(server_id, json.dumps(message))

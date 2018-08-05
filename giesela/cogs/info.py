@@ -2,7 +2,7 @@ from discord import Embed
 from discord.ext import commands
 from discord.ext.commands import Bot, Context
 
-from giesela.constants import VERSION as BOTVERSION
+from giesela import VERSION as BOTVERSION
 from giesela.utils import (get_dev_version,
                            get_version_changelog)
 

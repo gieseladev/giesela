@@ -11,7 +11,7 @@ import requests
 from PIL import Image, ImageStat
 from bs4 import BeautifulSoup
 
-from giesela.config import ConfigDefaults, static_config
+from .config import ConfigDefaults, static_config
 
 
 def wrap_string(target, wrapping, handle_special=True, reverse_closer=True):

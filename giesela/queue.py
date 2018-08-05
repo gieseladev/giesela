@@ -9,16 +9,14 @@ from itertools import islice
 
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
-from giesela.entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry,
-                           SpotifyEntry, StreamEntry, TimestampEntry,
-                           VGMEntry, YoutubeEntry)
-from giesela.exceptions import ExtractionError, WrongEntryTypeError
-from giesela.lib.api.VGMdb import get_entry as get_vgm_track
-from giesela.lib.api.discogs import get_entry as get_discogs_track
-from giesela.lib.api.spotify import get_spotify_track
-from giesela.lib.event_emitter import EventEmitter
-from giesela.utils import clean_songname, get_header, get_video_sub_queue
-from giesela.webiesela import WebieselaServer
+from .entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry, SpotifyEntry, StreamEntry, TimestampEntry, VGMEntry, YoutubeEntry)
+from .exceptions import ExtractionError, WrongEntryTypeError
+from .lib.api.VGMdb import get_entry as get_vgm_track
+from .lib.api.discogs import get_entry as get_discogs_track
+from .lib.api.spotify import get_spotify_track
+from .lib.event_emitter import EventEmitter
+from .utils import clean_songname, get_header, get_video_sub_queue
+from .webiesela import WebieselaServer
 
 
 class Queue(EventEmitter):

@@ -8,7 +8,7 @@ from typing import Optional
 import lyricsfinder
 from lyricsfinder import Lyrics
 
-from giesela.config import static_config
+from .config import static_config
 
 lyrics_folder = path.join(os.getcwd(), static_config.lyrics_cache)
 

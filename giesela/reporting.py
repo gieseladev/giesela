@@ -3,7 +3,7 @@ import logging
 import raven
 from raven.handlers.logging import SentryHandler
 
-from giesela.constants import VERSION
+from .constants import VERSION
 
 log = logging.getLogger("giesela")
 

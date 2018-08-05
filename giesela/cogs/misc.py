@@ -1,7 +1,7 @@
 from discord.ext import commands
 from discord.ext.commands import Bot, Context
 
-from giesela.webiesela import WebieselaServer
+from giesela import WebieselaServer
 
 
 class Misc:

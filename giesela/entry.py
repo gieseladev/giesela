@@ -6,13 +6,12 @@ import traceback
 
 from discord import Guild, Member, User, VoiceChannel
 
-from giesela.exceptions import (BrokenEntryError, ExtractionError,
-                                OutdatedEntryError)
-from giesela.lib.api.spotify import SpotifyTrack
-from giesela.lyrics import search_for_lyrics
-from giesela.radio import RadioSongExtractor, StationInfo
-from giesela.utils import clean_songname, get_header, get_image_brightness
-from giesela.web_author import WebAuthor
+from .exceptions import (BrokenEntryError, ExtractionError, OutdatedEntryError)
+from .lib.api.spotify import SpotifyTrack
+from .lyrics import search_for_lyrics
+from .radio import RadioSongExtractor, StationInfo
+from .utils import clean_songname, get_header, get_image_brightness
+from .web_author import WebAuthor
 
 
 class Entry:

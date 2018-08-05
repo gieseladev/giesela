@@ -8,12 +8,12 @@ from textwrap import indent, wrap
 import aiohttp
 from discord.ext.commands import AutoShardedBot, CommandError, Context
 
-from giesela import cogs, exceptions, reporting
-from giesela.config import Config, ConfigDefaults
-from giesela.constants import ABS_AUDIO_CACHE_PATH, VERSION as BOTVERSION
-from giesela.lib.ui import ui_utils
-from giesela.saved_playlists import Playlists
-from giesela.web_author import WebAuthor
+from . import cogs, exceptions, reporting
+from .config import Config, ConfigDefaults
+from .constants import ABS_AUDIO_CACHE_PATH, VERSION as BOTVERSION
+from .lib.ui import ui_utils
+from .saved_playlists import Playlists
+from .web_author import WebAuthor
 
 log = logging.getLogger(__name__)
 

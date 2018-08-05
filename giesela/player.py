@@ -8,10 +8,11 @@ from typing import Optional, TYPE_CHECKING
 
 from discord import VoiceChannel, VoiceClient
 
-from giesela import BaseEntry, Downloader, RadioSongEntry, StreamEntry, TimestampEntry
-from giesela.lib import EventEmitter, GieselaSource
-from giesela.queue import Queue
-from giesela.webiesela import WebieselaServer
+from .downloader import Downloader
+from .entry import BaseEntry, RadioSongEntry, StreamEntry, TimestampEntry
+from .lib import EventEmitter, GieselaSource
+from .queue import Queue
+from .webiesela import WebieselaServer
 
 if TYPE_CHECKING:
     from giesela import Giesela

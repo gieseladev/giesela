@@ -6,12 +6,12 @@ import time
 from io import BytesIO
 from pathlib import Path
 
-from giesela import mosaic
-from giesela.entry import Entry, SpotifyEntry
-from giesela.exceptions import BrokenEntryError, OutdatedEntryError
-from giesela.lib.api.imgur import _upload_playlist_cover
-from giesela.utils import format_time, similarity
-from giesela.web_author import WebAuthor
+from . import mosaic
+from .entry import Entry, SpotifyEntry
+from .exceptions import BrokenEntryError, OutdatedEntryError
+from .lib.api.imgur import _upload_playlist_cover
+from .utils import format_time, similarity
+from .web_author import WebAuthor
 
 
 class Playlists:

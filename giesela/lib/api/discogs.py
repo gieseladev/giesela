@@ -4,7 +4,7 @@ import traceback
 import discogs_client
 from discogs_client.exceptions import HTTPError
 
-from giesela.constants import VERSION
+from giesela import VERSION
 from giesela.lib.api.spotify import get_certainty
 from giesela.utils import similarity
 
