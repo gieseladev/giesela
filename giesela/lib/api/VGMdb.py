@@ -1,5 +1,4 @@
 import re
-import traceback
 
 import requests
 
@@ -105,5 +104,4 @@ async def get_entry(loop, query):
     except (VGMException.ArtistNotComplete, VGMException.TrackNotFound, VGMException.NoResults):
         return None
     except Exception:
-        traceback.print_exc()
         return None

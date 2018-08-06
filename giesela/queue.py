@@ -46,11 +46,11 @@ class Queue(EventEmitter):
 
     def shuffle(self):
         random.shuffle(self.entries)
-        WebieselaServer.send_player_information(self.player.voice_client.guild.id)
+        WebieselaServer.send_player_information(self.player.channel.guild.id)
 
     def clear(self):
         self.entries.clear()
-        WebieselaServer.send_player_information(self.player.voice_client.guild.id)
+        WebieselaServer.send_player_information(self.player.channel.guild.id)
 
     def move(self, from_index, to_index):
         if not (0 <= from_index < len(self.entries) and 0 <= to_index < len(self.entries)):
@@ -66,7 +66,7 @@ class Queue(EventEmitter):
         if self.peek() is move_entry:
             move_entry.get_ready_future()
 
-        WebieselaServer.send_player_information(self.player.voice_client.guild.id)
+        WebieselaServer.send_player_information(self.player.channel.guild.id)
 
         return move_entry
 
@@ -96,7 +96,7 @@ class Queue(EventEmitter):
         q = self.bot.config.history_limit - 1
         self.history = [entry, *self.history[:q]]
 
-        WebieselaServer.send_player_information(self.player.voice_client.guild.id)
+        WebieselaServer.send_player_information(self.player.channel.guild.id)
 
     async def add_stream_entry(self, stream_url, **meta):
         info = {"title": stream_url, "extractor": None}
@@ -157,7 +157,7 @@ class Queue(EventEmitter):
                 self.player.handle_manually = True
 
             self.player.play_entry(entry)
-            WebieselaServer.send_player_information(self.player.voice_client.guild.id)
+            WebieselaServer.send_player_information(self.player.channel.guild.id)
         else:
             self._add_entry(entry)
 
@@ -362,7 +362,7 @@ class Queue(EventEmitter):
         for entry in entries:
             self._add_entry(entry, placement=placement, more_to_come=True)
 
-        WebieselaServer.send_player_information(self.player.voice_client.guild.id)
+        WebieselaServer.send_player_information(self.player.channel.guild.id)
         self.emit("entry-added", queue=self, entry=entry)
 
     def _add_entry(self, entry, placement=None, more_to_come=False):
@@ -397,7 +397,7 @@ class Queue(EventEmitter):
 
         entry.get_ready_future()
 
-        WebieselaServer.send_player_information(self.player.voice_client.guild.id)
+        WebieselaServer.send_player_information(self.player.channel.guild.id)
 
         return entry
 
@@ -407,7 +407,7 @@ class Queue(EventEmitter):
         self.emit("entry-added", queue=self, entry=entry)
         entry.get_ready_future()
 
-        WebieselaServer.send_player_information(self.player.voice_client.guild.id)
+        WebieselaServer.send_player_information(self.player.channel.guild.id)
 
         return entry
 
@@ -421,7 +421,7 @@ class Queue(EventEmitter):
         self.emit("entry-removed", queue=self, entry=entry)
         self.entries.rotate(position)
 
-        WebieselaServer.send_player_information(self.player.voice_client.guild.id)
+        WebieselaServer.send_player_information(self.player.channel.guild.id)
 
         return entry
 

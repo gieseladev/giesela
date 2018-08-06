@@ -6,7 +6,6 @@ import json
 import logging
 import random
 import threading
-import traceback
 import uuid
 from json.decoder import JSONDecodeError
 from pathlib import Path
@@ -127,7 +126,7 @@ class GieselaWebSocket(WebSocket):
                 self.sendMessage(json.dumps(answer))
 
         except Exception:
-            traceback.print_exc()
+            log.exception("error while handling message")
             raise
 
     async def play_entry(self, player, answer, kind, item, searcher, mode):
@@ -171,7 +170,7 @@ class GieselaWebSocket(WebSocket):
                 if entry:
                     player.queue._add_entry(entry, placement=placement)
         except Exception:
-            traceback.print_exc()
+            log.exception("error while adding entry")
 
     def handle_authenticated_msg(self, data):
         answer = {
@@ -501,7 +500,7 @@ class WebieselaServer:
         try:
             threading.Thread(target=cls._broadcast_message, args=(server_id, message)).start()
         except Exception:
-            traceback.print_exc()
+            log.exception("error while broadcasting")
 
     @classmethod
     def get_player(cls, token=None, server_id=None):
@@ -514,7 +513,6 @@ class WebieselaServer:
             return player
         except Exception as e:
             log.warning("encountered error while getting player:\n{}".format(e))
-            traceback.print_exc()
             return None
 
     @classmethod

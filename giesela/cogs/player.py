@@ -50,7 +50,7 @@ class Player:
         return self.players[guild.id]
 
     async def on_player_play(self, player: MusicPlayer, entry: BaseEntry):
-        WebieselaServer.send_player_information(player.voice_client.guild.id)
+        WebieselaServer.send_player_information(player.channel.guild.id)
         await self.update_now_playing(entry)
 
         channel = entry.meta.get("channel", None)
@@ -85,18 +85,18 @@ class Player:
 
     async def on_player_resume(self, player, entry, **_):
         await self.update_now_playing(entry)
-        WebieselaServer.small_update(player.voice_client.guild.id, state=player.state.value, state_name=str(player.state), progress=player.progress)
+        WebieselaServer.small_update(player.channel.guild.id, state=player.state.value, state_name=str(player.state), progress=player.progress)
 
     async def on_player_pause(self, player, entry, **_):
         await self.update_now_playing(entry, True)
-        WebieselaServer.small_update(player.voice_client.guild.id, state=player.state.value, state_name=str(player.state), progress=player.progress)
+        WebieselaServer.small_update(player.channel.guild.id, state=player.state.value, state_name=str(player.state), progress=player.progress)
 
     async def on_player_stop(self, **_):
         await self.update_now_playing()
 
     async def on_player_finished_playing(self, player, **_):
         if not player.queue.entries and not player.current_entry:
-            WebieselaServer.send_player_information(player.voice_client.guild.id)
+            WebieselaServer.send_player_information(player.channel.guild.id)
 
     async def update_now_playing(self, entry=None, is_paused=False):
         game = None

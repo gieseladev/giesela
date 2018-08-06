@@ -1,8 +1,8 @@
 import asyncio
 import copy
+import logging
 import os
 import time
-import traceback
 
 from discord import Guild, Member, User, VoiceChannel
 
@@ -12,6 +12,8 @@ from .lyrics import search_for_lyrics
 from .radio import RadioSongExtractor, StationInfo
 from .utils import clean_songname, get_header, get_image_brightness
 from .web_author import WebAuthor
+
+log = logging.getLogger(__name__)
 
 
 class Entry:
@@ -191,7 +193,7 @@ class BaseEntry:
                 cb(future)
 
             except Exception:
-                traceback.print_exc()
+                log.exception(f"error while running {cb} on {future}")
 
     def __eq__(self, other):
         return self is other
@@ -674,7 +676,7 @@ class YoutubeEntry(BaseEntry):
             self._for_each_future(lambda future: future.set_result(self))
 
         except Exception as e:
-            traceback.print_exc()
+            log.exception("error while downloading")
             self._for_each_future(lambda future: future.set_exception(e))
 
         finally:

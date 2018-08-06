@@ -1,5 +1,5 @@
+import logging
 import re
-import traceback
 import urllib.parse
 from difflib import SequenceMatcher
 from io import BytesIO
@@ -12,6 +12,8 @@ from PIL import Image, ImageStat
 from bs4 import BeautifulSoup
 
 from .config import ConfigDefaults, static_config
+
+log = logging.getLogger(__name__)
 
 
 def wrap_string(target, wrapping, handle_special=True, reverse_closer=True):
@@ -529,5 +531,5 @@ def get_version_changelog(version_code=None):
 
         return changes
     except Exception:
-        traceback.print_exc()
+        log.exception("error while parsing changelog")
         return ["Couldn't find the changelog"]

@@ -2,7 +2,6 @@ import asyncio
 import enum
 import logging
 import os
-import traceback
 from asyncio import AbstractEventLoop
 from typing import Optional, TYPE_CHECKING
 
@@ -40,8 +39,7 @@ async def _delete_file(filename):
                 await asyncio.sleep(0.25)
 
         except Exception:
-            traceback.print_exc()
-            print("Error trying to delete " + filename)
+            log.exception(f"Error trying to delete {filename}")
             break
     else:
         log.warning("[Config:SaveVideos] Could not delete file {}, giving up and moving on".format(os.path.relpath(filename)))

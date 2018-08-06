@@ -107,7 +107,7 @@ class ConfigDefaults:
         "DiscogsEntry": ":large_orange_diamond:",
         "VGMEntry": ":large_blue_diamond:"
     }
-    
+
     webiesela_port = 8000
 
     owner_id = None

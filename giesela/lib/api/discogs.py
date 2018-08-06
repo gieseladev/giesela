@@ -1,5 +1,4 @@
 import re
-import traceback
 
 import discogs_client
 from discogs_client.exceptions import HTTPError
@@ -109,5 +108,4 @@ async def get_entry(loop, query):
     except (DiscogsException.TrackNotFound, DiscogsException.NoResults, DiscogsException.ArtistNotFound, DiscogsException.WrongTrack):
         return None
     except Exception:
-        traceback.print_exc()
         return None
