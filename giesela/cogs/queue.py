@@ -8,7 +8,8 @@ from discord import Embed, Message
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Downloader, Giesela, MusicPlayer, RadioSongExtractor, RadioStations, get_all_stations, get_random_station
+from giesela import Downloader, Giesela, MusicPlayer, RadioSongExtractor, RadioStations, TimestampEntry, WebieselaServer, get_all_stations, \
+    get_random_station
 from giesela.lib.api import spotify
 from giesela.lib.ui import ItemPicker, LoadingBar
 from giesela.utils import (create_bar, format_time, html2md)
@@ -29,6 +30,83 @@ class QueueBase:
 
     async def get_player(self, *args, **kwargs) -> Optional[MusicPlayer]:
         return await self.player_cog.get_player(*args, **kwargs)
+
+
+async def _play_url(ctx: Context, player: MusicPlayer, url: str, placement=None):
+    async with ctx.typing():
+        query = url.strip("<>")
+
+        try:
+            entry = await player.queue.get_entry_from_query(query, author=ctx.author, channel=ctx.channel)
+        except BaseException as e:
+            raise commands.CommandError("There was a tiny problem with your request:\n```\n{}\n```".format(e))
+
+        if not entry:
+            await ctx.send("Couldn't find anything for me to add")
+            return
+
+        if isinstance(entry, list):
+            print("[PLAY] This is a playlist!")
+            # playlist handling
+            entries_added = 0
+            entries_not_added = 0
+
+            entry_generator = player.queue.get_entries_from_urls_gen(*entry, author=ctx.author, channel=ctx.channel)
+
+            total_entries = len(entry)
+            progress_message = await ctx.send("Parsing {} entries\n{} [0%]".format(total_entries, create_bar(0, length=20)))
+            times = []
+            abs_start = time.time()
+            start_time = abs_start
+
+            progress_message_future = None
+
+            async for ind, entry in entry_generator:
+                if entry:
+                    player.queue._add_entry(entry, placement)
+                    entries_added += 1
+                else:
+                    entries_not_added += 1
+
+                times.append(time.time() - start_time)
+                start_time = time.time()
+
+                if not progress_message_future or progress_message_future.done():
+                    avg_time = sum(times) / float(len(times))
+                    entries_left = total_entries - ind - 1
+                    expected_time = format_time(
+                        avg_time * entries_left,
+                        max_specifications=1,
+                        unit_length=1
+                    )
+                    completion_ratio = (ind + 1) / total_entries
+
+                    if progress_message_future:
+                        progress_message = progress_message_future.result()
+
+                    progress_message_future = asyncio.ensure_future(
+                        progress_message.edit(content="Parsing {} entr{} at {} entries/min\n{} [{}%]\n{} remaining".format(
+                            entries_left,
+                            "y" if entries_left == 1 else "ies",
+                            round(60 / avg_time, 1),
+                            create_bar(completion_ratio, length=20),
+                            round(100 * completion_ratio),
+                            expected_time
+                        ))
+                    )
+
+            delta_time = time.time() - abs_start
+
+            progress_message_future.cancel()
+            await progress_message.delete()
+            await ctx.send("Added {} entries to the queue\nSkipped {} entries\nIt took {} to add all entries".format(
+                entries_added,
+                entries_not_added,
+                format_time(delta_time, unit_length=1)
+            ))
+        else:
+            player.queue._add_entry(entry, placement)
+            await ctx.send("Enqueued **{}**".format(entry.title))
 
 
 class EnqueueCog(QueueBase):
@@ -99,82 +177,6 @@ class EnqueueCog(QueueBase):
         await player.queue.add_radio_entry(station_info, channel=ctx.channel, author=ctx.author, now=True)
         await ctx.send(f"I choose\n**{station_info.name}**")
 
-    async def _play_url(self, ctx: Context, player: MusicPlayer, url: str, placement=None):
-        async with ctx.typing():
-            query = url.strip("<>")
-
-            try:
-                entry = await player.queue.get_entry_from_query(query, author=ctx.author, channel=ctx.channel)
-            except BaseException as e:
-                raise commands.CommandError("There was a tiny problem with your request:\n```\n{}\n```".format(e))
-
-            if not entry:
-                await ctx.send("Couldn't find anything for me to add")
-                return
-
-            if isinstance(entry, list):
-                print("[PLAY] This is a playlist!")
-                # playlist handling
-                entries_added = 0
-                entries_not_added = 0
-
-                entry_generator = player.queue.get_entries_from_urls_gen(*entry, author=ctx.author, channel=ctx.channel)
-
-                total_entries = len(entry)
-                progress_message = await ctx.send("Parsing {} entries\n{} [0%]".format(total_entries, create_bar(0, length=20)))
-                times = []
-                abs_start = time.time()
-                start_time = abs_start
-
-                progress_message_future = None
-
-                async for ind, entry in entry_generator:
-                    if entry:
-                        player.queue._add_entry(entry, placement)
-                        entries_added += 1
-                    else:
-                        entries_not_added += 1
-
-                    times.append(time.time() - start_time)
-                    start_time = time.time()
-
-                    if not progress_message_future or progress_message_future.done():
-                        avg_time = sum(times) / float(len(times))
-                        entries_left = total_entries - ind - 1
-                        expected_time = format_time(
-                            avg_time * entries_left,
-                            max_specifications=1,
-                            unit_length=1
-                        )
-                        completion_ratio = (ind + 1) / total_entries
-
-                        if progress_message_future:
-                            progress_message = progress_message_future.result()
-
-                        progress_message_future = asyncio.ensure_future(
-                            progress_message.edit(content="Parsing {} entr{} at {} entries/min\n{} [{}%]\n{} remaining".format(
-                                entries_left,
-                                "y" if entries_left == 1 else "ies",
-                                round(60 / avg_time, 1),
-                                create_bar(completion_ratio, length=20),
-                                round(100 * completion_ratio),
-                                expected_time
-                            ))
-                        )
-
-                delta_time = time.time() - abs_start
-
-                progress_message_future.cancel()
-                await progress_message.delete()
-                await ctx.send("Added {} entries to the queue\nSkipped {} entries\nIt took {} to add all entries".format(
-                    entries_added,
-                    entries_not_added,
-                    format_time(delta_time, unit_length=1)
-                ))
-            else:
-                player.queue._add_entry(entry, placement)
-                await ctx.send("Enqueued **{}**".format(entry.title))
-
     @commands.command()
     async def play(self, ctx: Context, url: str, placement: str = None):
         """Adds the song to the queue.
@@ -193,7 +195,7 @@ class EnqueueCog(QueueBase):
             elif placement.isnumeric():
                 placement = int(placement) - 1
 
-        await self._play_url(ctx, player, url, placement)
+        await _play_url(ctx, player, url, placement)
 
     @commands.command()
     async def search(self, ctx: Context, *query: str):
@@ -285,7 +287,7 @@ class EnqueueCog(QueueBase):
                 current_result_index %= total_results
             elif command == "play":
                 async with ctx.typing():
-                    await self._play_url(ctx, player, current_result["webpage_url"])
+                    await _play_url(ctx, player, current_result["webpage_url"])
                     await delete_msgs()
                     await ctx.send("Alright, coming right up!")
                 return
@@ -412,329 +414,126 @@ class EnqueueCog(QueueBase):
             await ctx.send("Couldn't find anything")
 
 
-# class ManipulateCommands:
-#
-#     @commands.command()
-#     async def remove(self, server, player, message, channel, author, leftover_args):
-#         """
-#         ///|Usage
-#         `{command_prefix}remove <index | start index | url> [end index]`
-#         ///|Explanation
-#         Remove an index or a url from the queue.
-#         """
-#
-#         if not leftover_args:
-#             leftover_args = ["0"]
-#
-#         if len(player.queue.entries) < 0:
-#             return Response("There are no entries in the queue!")
-#
-#         if len(leftover_args) >= 2:
-#             indices = (
-#                 int(leftover_args[0]) - 1,
-#                 int(leftover_args[1]) - 1
-#             )
-#
-#             start_index = min(indices)
-#             end_index = max(indices)
-#
-#             if start_index >= len(player.queue.entries) or start_index < 0:
-#                 return Response("The start index is out of bounds")
-#             if end_index >= len(player.queue.entries) or end_index < 0:
-#                 return Response("The end index is out of bounds")
-#
-#             for i in range(end_index, start_index - 1, -1):
-#                 del player.queue.entries[i]
-#
-#             WebieselaServer.send_player_information_update(server.id)
-#             return Response(
-#                 "Removed {} entries from the queue".format(
-#                     end_index - start_index + 1)
-#             )
-#
-#         try:
-#             index = int(leftover_args[0]) - 1
-#
-#             if index > len(player.queue.entries) - 1 or index < 0:
-#                 return Response("This index cannot be found in the queue")
-#
-#             video = player.queue.entries[index].title
-#             del player.queue.entries[index]
-#             WebieselaServer.send_player_information_update(server.id)
-#             return Response("Removed **{0}** from the queue".format(video))
-#
-#         except:
-#             strindex = leftover_args[0]
-#             iteration = 1
-#
-#             for entry in player.queue.entries:
-#                 print(
-#                     "Looking at {0}. [{1}]".format(entry.title, entry.url))
-#
-#                 if entry.title == strindex or entry.url == strindex:
-#                     print("Found {0} and will remove it".format(
-#                         leftover_args[0]))
-#                     await self.remove(player, message, channel, author, [iteration])
-#                     WebieselaServer.send_player_information_update(server.id)
-#                     return
-#                 iteration += 1
-#
-#         return Response("Didn't find anything that goes by {0}".format(leftover_args[0]))
-#
-#     @commands.command()
-#     async def replay(self, player, choose_last=""):
-#         """
-#         ///|Usage
-#         `{command_prefix}replay [last]`
-#         ///|Replay history
-#         `{command_prefix}replay <index>`
-#         Replay a song from the history
-#         ///|Explanation
-#         Replay the currently playing song. If there's nothing playing, or the \"last\" keyword is given, replay the last song
-#         """
-#
-#         try:
-#             index = int(choose_last) - 1
-#             if index >= len(player.queue.history):
-#                 return Response("History doesn't go back that far.")
-#             if index < 0:
-#                 return Response(
-#                     "Am I supposed to replay the future or what...?")
-#
-#             replay_entry = player.queue.history[index]
-#             player.queue.replay(index)
-#
-#             return Response("Replaying **{}**".format(replay_entry.title))
-#         except:
-#             pass
-#
-#         replay_entry = player.current_entry
-#         if (not player.current_entry) or choose_last.lower() == "last":
-#             if not player.queue.history:
-#                 return Response(
-#                     "Cannot replay the last song as there is no last song")
-#
-#             replay_entry = player.queue.history[0]
-#
-#         if not replay_entry:
-#             return Response("There's nothing for me to replay")
-#
-#         player.queue.replay()
-#         return Response("Replaying **{}**".format(replay_entry.title))
-#
-#     @commands.command()
-#     async def shuffle(self, channel, player):
-#         """
-#         ///|Usage
-#         `{command_prefix}shuffle`
-#         ///|Explanation
-#         Shuffles the queue.
-#         """
-#
-#         player.queue.shuffle()
-#
-#         cards = [":spades:", ":clubs:", ":hearts:", ":diamonds:"]
-#         hand = await self.send_message(channel, " ".join(cards))
-#
-#         for x in range(4):
-#             await asyncio.sleep(0.6)
-#             shuffle(cards)
-#             await self.safe_edit_message(hand, " ".join(cards))
-#
-#         await self.safe_delete_message(hand, quiet=True)
-#         return Response(":ok_hand:")
-#
-#     @commands.command()
-#     async def clear(self, player):
-#         """
-#         ///|Usage
-#         `{command_prefix}clear`
-#         ///|Explanation
-#         Clears the queue.
-#         """
-#
-#         player.queue.clear()
-#         return Response(":put_litter_in_its_place:")
-#
-#     @commands.command()
-#     async def skip(self, player, skip_amount=None):
-#         """
-#         ///|Usage
-#         `{command_prefix}skip [all]`
-#         ///|Explanation
-#         Skips the current song.
-#         When given the keyword "all", skips all timestamped-entries in the current timestamp-entry.
-#         """
-#
-#         if player.is_stopped:
-#             return Response("Can't skip! The player is not playing!")
-#
-#         if not player.current_entry:
-#             if player.queue.peek():
-#                 if player.queue.peek()._is_downloading:
-#                     return Response("The next song ({}) is downloading, please wait.".format(player.queue.peek().title))
-#
-#                 elif player.queue.peek().is_downloaded:
-#                     return Response("Something strange is happening.")
-#                 else:
-#                     return Response("Something odd is happening.")
-#             else:
-#                 return Response("Something strange is happening.")
-#
-#         if isinstance(player.current_entry, TimestampEntry) and (not skip_amount or skip_amount.lower() != "all"):
-#             return await self.seek(
-#                 player,
-#                 str(player.current_entry.current_sub_entry["end"])
-#             )
-#
-#         player.skip()
-#
-#     @commands.command()
-#     async def promote(self, player, position=None):
-#         """
-#         ///|Usage
-#         `{command_prefix}promote [song position]`
-#         ///|Explanation
-#         Promotes the last song in the queue to the front.
-#         If you specify a position, it promotes the song at that position to the front.
-#         """
-#
-#         if player.is_stopped:
-#             raise exceptions.CommandError(
-#                 "Can't modify the queue! The player is not playing!")
-#
-#         length = len(player.queue.entries)
-#
-#         if length < 2:
-#             raise exceptions.CommandError(
-#                 "Can't promote! Please add at least 2 songs to the queue!")
-#
-#         if not position:
-#             entry = player.queue.promote_last()
-#         else:
-#             try:
-#                 position = int(position) - 1
-#             except ValueError:
-#                 raise exceptions.CommandError(
-#                     "This is not a valid song number! Please choose a song \
-#                     number between 2 and %s!" % length)
-#
-#             if position == 0:
-#                 raise exceptions.CommandError(
-#                     "This song is already at the top of the queue!")
-#             if position < 0 or position >= length:
-#                 raise exceptions.CommandError(
-#                     "Can't promote a song not in the queue! Please choose a song \
-#                     number between 2 and %s!" % length)
-#
-#             entry = player.queue.promote_position(position)
-#
-#         reply_text = "Promoted **{}** to the :top: of the queue. Estimated time until playing: {}"
-#         btext = entry.title
-#
-#         try:
-#             time_until = await player.queue.estimate_time_until(1, player)
-#         except:
-#             traceback.print_exc()
-#             time_until = ""
-#
-#         return Response(reply_text.format(btext, time_until))
-#
-#     @commands.command()
-#     async def move(self, player, from_index, to_index):
-#         """
-#         ///|Usage
-#         `{command_prefix}move <from index> <to index>`
-#         ///|Explanation
-#         Moves an entry from a given position.
-#         For example, `{command_prefix}move 22 2` will move entry 22 in the queue to position 2 in the queue.
-#         """
-#
-#         if from_index.isnumeric():
-#             from_index = int(from_index) - 1
-#         else:
-#             return Response("`<from index>` must be a number")
-#
-#         if to_index.isnumeric():
-#             to_index = int(to_index) - 1
-#         else:
-#             return Response("`<to index>` must be a number")
-#
-#         queue_length = len(player.queue.entries)
-#
-#         if not 0 <= from_index < queue_length:
-#             return Response("`<from index>` must be between 1 and {}".format(queue_length))
-#
-#         if not 0 <= to_index < queue_length:
-#             return Response("`<to index>` must be between 1 and {}".format(queue_length))
-#
-#         moved_entry = player.queue.move(from_index, to_index)
-#         return Response("Moved **{}** from position `{}` to `{}`.".format(moved_entry.title, from_index + 1, to_index + 1))
-#
-#     @commands.command()
-#     async def explode(self, player, channel, author, leftover_args):
-#         """
-#         ///|Usage
-#         `{command_prefix}explode [playlist link | index]`
-#         ///|Explanation
-#         Split a timestamp-entry into its sub-entries.
-#         """
-#
-#         await self.send_typing(channel)
-#
-#         if leftover_args:
-#             query = " ".join(leftover_args).strip()
-#             if query.isnumeric():
-#                 index = int(query) - 1
-#                 if 0 <= index < len(player.queue.entries):
-#                     entry = player.queue.entries[index]
-#                 else:
-#                     return Response("Your index is out of bounds")
-#             else:
-#                 entry = await player.queue.get_entry_from_query(query, channel=channel, author=author)
-#         elif player.current_entry:
-#             entry = player.current_entry
-#         else:
-#             return Response("Can't explode what's not there")
-#
-#         if not isinstance(entry, TimestampEntry):
-#             return Response("Can only explode timestamp-entries")
-#
-#         sub_queue = entry.sub_queue
-#
-#         progress_message = await self.safe_send_message(channel, "Exploding {} entr{}".format(
-#             len(sub_queue),
-#             "y" if len(sub_queue) == 1 else "ies"
-#         ))
-#
-#         for ind, sub_entry in enumerate(sub_queue, 1):
-#             add_entry = await player.queue.get_entry_from_query(
-#                 sub_entry["name"],
-#                 author=entry.meta.get("author", author),
-#                 channel=entry.meta.get("channel", channel)
-#             )
-#             player.queue._add_entry(add_entry)
-#
-#             prg = ind / len(sub_queue)
-#
-#             progress_message = await self.safe_edit_message(
-#                 progress_message,
-#                 "Explosion in progress\n{} `{}%`".format(
-#                     create_bar(prg, length=20),
-#                     round(100 * prg)
-#                 ),
-#                 keep_at_bottom=True
-#             )
-#
-#         await self.safe_delete_message(progress_message)
-#
-#         return Response("Exploded **{}** into {} entr{}".format(
-#             entry.whole_title,
-#             len(sub_queue),
-#             "y" if len(sub_queue) == 1 else "ies"
-#         ))
-#
-#
+class ManipulateCog(QueueBase):
+
+    @commands.command()
+    async def remove(self, ctx: Context, index: int):
+        """Remove an entry from the queue."""
+        player = await self.get_player(ctx.guild)
+
+        if not player.queue.entries:
+            raise commands.CommandError("There are no entries in the queue!")
+
+        index -= 1
+
+        if not 0 <= index < len(player.queue.entries):
+            raise commands.CommandError("This index cannot be found in the queue")
+
+        title = player.queue.entries[index].title
+        del player.queue.entries[index]
+        WebieselaServer.send_player_information(ctx.guild.id)
+        await ctx.send(f"Removed **{title}** from the queue")
+
+    @commands.command()
+    async def replay(self, ctx: Context, index: str = None):
+        """Replay an entry.
+
+        If there's nothing playing, or the "last" keyword is given, replay the last song.
+        Otherwise replay the nth entry in the history.
+        """
+        player = await self.get_player(ctx.guild)
+
+        if index:
+            if index.isnumeric():
+                index = int(index) - 1
+                if not 0 <= index < len(player.queue.history):
+                    raise commands.CommandError("Can't find that index")
+            elif index in ("previous", "last"):
+                if player.queue.history:
+                    index = 0
+                else:
+                    raise commands.CommandError("No history to replay!")
+            entry = player.queue.history[index]
+        else:
+            index = None
+            entry = player.current_entry
+
+        if player.queue.replay(index):
+            await ctx.send(f"Replaying **{entry.title}**")
+        else:
+            raise commands.CommandError(f"Couldn't replay {entry.title}!")
+
+    @commands.command()
+    async def shuffle(self, ctx: Context):
+        """Shuffle the queue."""
+        player = await self.get_player(ctx.guild)
+        player.queue.shuffle()
+        await ctx.send(":ok_hand:")
+
+    @commands.command()
+    async def clear(self, ctx: Context):
+        """Clear the queue."""
+        player = await self.get_player(ctx.guild)
+        player.queue.clear()
+        await ctx.send(":put_litter_in_its_place:")
+
+    @commands.command()
+    async def skip(self, ctx: Context, skip: str = None):
+        """Skip the current song.
+
+        When given the keyword "all", skips all timestamped-entries in the current timestamp-entry.
+        """
+        player = await self.get_player(ctx.guild)
+
+        if player.is_stopped:
+            raise commands.CommandError("Can't skip! The player is not playing!")
+
+        if skip != "all" and isinstance(player.current_entry, TimestampEntry):
+            await player.seek(player.current_entry.current_sub_entry["end"])
+        else:
+            player.skip()
+
+    @commands.command()
+    async def promote(self, ctx: Context, position: int = None):
+        """Promote an entry.
+
+        If you don-t specify a position, it promotes the last song.
+        """
+        player = await self.get_player(ctx.guild)
+
+        if len(player.queue.entries) < 2:
+            raise commands.CommandError("Can't promote! Please add at least 2 songs to the queue!")
+
+        if position is not None:
+            position -= 1
+            if not 0 < position < len(player.queue.entries):
+                raise commands.CommandError("Index out of range")
+            entry = player.queue.promote_position(position)
+        else:
+            entry = player.queue.promote_last()
+
+        await ctx.send(f"Promoted **{entry.title}** to the :top: of the queue.")
+
+    @commands.command()
+    async def move(self, ctx: Context, from_pos: int, to_pos: int):
+        """Move an entry."""
+        player = await self.get_player(ctx.guild)
+
+        from_index = from_pos - 1
+        to_index = to_pos - 1
+
+        queue_length = len(player.queue.entries)
+
+        if not 0 <= from_index < queue_length:
+            raise commands.CommandError("`from_pos` must be between 1 and {}".format(queue_length))
+
+        if not 0 <= to_index < queue_length:
+            raise commands.CommandError("`to_pos` must be between 1 and {}".format(queue_length))
+
+        entry = player.queue.move(from_index, to_index)
+        await ctx.send(f"Moved **{entry.title}** from position `{from_pos}` to `{to_pos}`.")
+
+
 # class DisplayCommands:
 #
 #     @commands.command()
@@ -1028,7 +827,7 @@ class EnqueueCog(QueueBase):
 #         return Response("\n".join(lines))
 
 
-class Queue(EnqueueCog):
+class Queue(EnqueueCog, ManipulateCog):
     pass
 
 

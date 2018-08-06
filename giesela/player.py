@@ -100,6 +100,18 @@ class MusicPlayer(EventEmitter):
 
         WebieselaServer.small_update(self.voice_client.guild.id, volume=value)
 
+    @property
+    def is_playing(self) -> bool:
+        return self.voice_client and self.voice_client.is_playing()
+
+    @property
+    def is_paused(self) -> bool:
+        return self.voice_client and self.voice_client.is_paused()
+
+    @property
+    def connected(self) -> bool:
+        return self.voice_client and self.voice_client.is_connected()
+
     async def connect(self, **kwargs):
         if self.voice_client:
             await self.voice_client.connect(**kwargs)

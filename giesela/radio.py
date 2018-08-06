@@ -129,108 +129,99 @@ def _get_current_song_radio32():
 
 
 def _get_current_song_bbc():
-    try:
-        resp = requests.get(
-            "http://np.radioplayer.co.uk/qp/v3/onair?rpIds=340")
-        data = json.loads(
-            re.match(r"callback\((.+)\)", resp.text).group(1))
-        song_data = data["results"]["340"][-1]
-        start_time = datetime.fromtimestamp(
-            int(song_data["startTime"]))
-        stop_time = datetime.fromtimestamp(
-            int(song_data["stopTime"]))
-        duration = round((stop_time - start_time).total_seconds())
-        progress = round(
-            (datetime.now() - start_time).total_seconds())
+    resp = requests.get(
+        "http://np.radioplayer.co.uk/qp/v3/onair?rpIds=340")
+    data = json.loads(
+        re.match(r"callback\((.+)\)", resp.text).group(1))
+    song_data = data["results"]["340"][-1]
+    start_time = datetime.fromtimestamp(
+        int(song_data["startTime"]))
+    stop_time = datetime.fromtimestamp(
+        int(song_data["stopTime"]))
+    duration = round((stop_time - start_time).total_seconds())
+    progress = round(
+        (datetime.now() - start_time).total_seconds())
 
-        return {
-            "title": song_data["name"],
-            "artist": song_data["artistName"],
-            "cover": song_data["imageUrl"],
-            "youtube": "http://www.bbc.co.uk/radio",
-            "duration": duration,
-            "progress": progress
-        }
-    except:
-        raise
+    return {
+        "title": song_data["name"],
+        "artist": song_data["artistName"],
+        "cover": song_data["imageUrl"],
+        "youtube": "http://www.bbc.co.uk/radio",
+        "duration": duration,
+        "progress": progress
+    }
 
 
 def _get_current_song_capital_fm():
-    try:
-        resp = requests.get("http://www.capitalfm.com/digital/radio/last-played-songs/")
-        soup = BeautifulSoup(resp.text, ConfigDefaults.html_parser)
+    resp = requests.get("http://www.capitalfm.com/digital/radio/last-played-songs/")
+    soup = BeautifulSoup(resp.text, ConfigDefaults.html_parser)
 
-        tz_info = timezone(timedelta(hours=1))
+    tz_info = timezone(timedelta(hours=1))
 
-        time_on = soup.select(".last_played_songs .show.on_now .details .time")[0].contents[-1].strip()
-        start, end = time_on.split("-", maxsplit=1)
+    time_on = soup.select(".last_played_songs .show.on_now .details .time")[0].contents[-1].strip()
+    start, end = time_on.split("-", maxsplit=1)
 
-        start_time = datetime.combine(date.today(), datetime.strptime(start.strip(), "%I%p").time(), tz_info)
-        end_time = datetime.combine(date.today(), datetime.strptime(end.strip(), "%I%p").time(), tz_info)
+    start_time = datetime.combine(date.today(), datetime.strptime(start.strip(), "%I%p").time(), tz_info)
+    end_time = datetime.combine(date.today(), datetime.strptime(end.strip(), "%I%p").time(), tz_info)
 
-        duration = (end_time - start_time).total_seconds()
-        progress = (datetime.now(tz=tz_info) - start_time).total_seconds()
+    duration = (end_time - start_time).total_seconds()
+    progress = (datetime.now(tz=tz_info) - start_time).total_seconds()
 
-        title = soup.find("span", attrs={"class": "track", "itemprop": "name"}).text.strip()
-        artist = soup.find("span", attrs={"class": "artist", "itemprop": "byArtist"}).text
-        artist = re.sub(r"[\n\s]+", " ", artist).strip()
-        cover = soup.select(".song_wrapper .img_wrapper img")[0]["data-src"]
+    title = soup.find("span", attrs={"class": "track", "itemprop": "name"}).text.strip()
+    artist = soup.find("span", attrs={"class": "artist", "itemprop": "byArtist"}).text
+    artist = re.sub(r"[\n\s]+", " ", artist).strip()
+    cover = soup.select(".song_wrapper .img_wrapper img")[0]["data-src"]
 
-        return {
-            "title": title,
-            "artist": artist,
-            "cover": cover,
-            "youtube": "http://www.capitalfm.com",
-            "duration": duration,
-            "progress": progress
-        }
-    except:
-        raise
+    return {
+        "title": title,
+        "artist": artist,
+        "cover": cover,
+        "youtube": "http://www.capitalfm.com",
+        "duration": duration,
+        "progress": progress
+    }
 
 
 def _get_current_song_energy_bern():
-    try:
-        playouts = energy.get_playouts()
+    playouts = energy.get_playouts()
 
-        now_playing = playouts[0]
-        progress = (datetime.now(tz=timezone(timedelta(hours=0))) - parse(now_playing["created_at"])).total_seconds()
+    now_playing = playouts[0]
+    progress = (datetime.now(tz=timezone(timedelta(hours=0))) - parse(now_playing["created_at"])).total_seconds()
 
-        title = "Unknown"
-        artist = "Unknown"
-        cover = None
-        link = None
-        duration = None
+    title = "Unknown"
+    artist = "Unknown"
+    cover = None
+    link = None
+    duration = None
 
-        if now_playing.get("type") == "music":
-            song = now_playing["song"]
+    if now_playing.get("type") == "music":
+        song = now_playing["song"]
 
-            title = song["title"]
-            artist = song["artists_full"]
-            cover = song["cover_url"]
-            link = song["youtube_url"] or song["spotify_url"] or "https://energy.ch/play/bern"
-            duration = song["duration"]
+        title = song["title"]
+        artist = song["artists_full"]
+        cover = song["cover_url"]
+        link = song["youtube_url"] or song["spotify_url"] or "https://energy.ch/play/bern"
+        duration = song["duration"]
 
-        elif now_playing.get("type") == "news":
-            program = now_playing["program"]
+    elif now_playing.get("type") == "news":
+        program = now_playing["program"]
 
-            title = program["title"]
-            artist = "Energy Bern"
-            cover = program["cover_url"]
-            link = "https://energy.ch/play/bern"
+        title = program["title"]
+        artist = "Energy Bern"
+        cover = program["cover_url"]
+        link = "https://energy.ch/play/bern"
 
-        if duration:
-            progress = min(progress, duration)
+    if duration:
+        progress = min(progress, duration)
 
-        return {
-            "title": title,
-            "artist": artist,
-            "cover": cover,
-            "youtube": link,
-            "duration": duration,
-            "progress": progress
-        }
-    except:
-        raise
+    return {
+        "title": title,
+        "artist": artist,
+        "cover": cover,
+        "youtube": link,
+        "duration": duration,
+        "progress": progress
+    }
 
 
 def init_extractor():

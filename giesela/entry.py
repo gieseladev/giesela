@@ -157,8 +157,9 @@ class BaseEntry:
         return self.to_dict()
 
     def get_ready_future(self):
-        """
-        Returns a future that will fire when the song is ready to be played. The future will either fire with the result (being the entry) or an exception
+        """Returns a future that will fire when the song is ready to be played.
+
+        The future will either fire with the result (being the entry) or an exception
         as to why the song download failed.
         """
         future = asyncio.Future()
@@ -189,7 +190,7 @@ class BaseEntry:
             try:
                 cb(future)
 
-            except:
+            except Exception:
                 traceback.print_exc()
 
     def __eq__(self, other):
@@ -622,7 +623,7 @@ class YoutubeEntry(BaseEntry):
                         rsize = int(
                             await get_header(self.queue.bot.aiosession,
                                              self.url, "CONTENT-LENGTH"))
-                    except:
+                    except Exception:
                         rsize = 0
 
                     lfile = os.path.join(self.download_folder,
@@ -694,7 +695,7 @@ class YoutubeEntry(BaseEntry):
             raise ExtractionError("ytdl broke and hell if I know why")
             # What the duck do I do now?
 
-        self.filename = unhashed_fname = self.queue.downloader.ytdl.prepare_filename(result)
+        self.filename = self.queue.downloader.ytdl.prepare_filename(result)
 
 
 class TimestampEntry(YoutubeEntry):

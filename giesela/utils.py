@@ -296,7 +296,8 @@ def get_video_timestamps(description, video_id, song_dur=None):
         for comment in data["items"]:
             songs = _run_timestamp_matcher(comment["snippet"]["topLevelComment"]["snippet"]["textDisplay"])
             if songs is not None and len(songs) > 2:
-                if song_dur:  # If we know the song duration I don't want ANY of those duckers to be out of bounds. That's the amount of distrust I have
+                # If we know the song duration I don't want ANY of those duckers to be out of bounds. That's the amount of distrust I have
+                if song_dur:
                     for ts in songs.keys():
                         if ts > song_dur:
                             print(
@@ -304,7 +305,7 @@ def get_video_timestamps(description, video_id, song_dur=None):
                             )
                             return None  # Yes **NONE**!
                 return songs
-    except:
+    except Exception:
         pass
 
     return None
@@ -362,7 +363,7 @@ def parse_timestamp(timestamp):
     for i in range(len(parts)):
         try:
             v = int(parts[i])
-        except:
+        except Exception:
             continue
 
         j = len(parts) - i - 1

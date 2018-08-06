@@ -104,6 +104,6 @@ async def get_entry(loop, query):
         return await loop.run_in_executor(None, _get_entry, query)
     except (VGMException.ArtistNotComplete, VGMException.TrackNotFound, VGMException.NoResults):
         return None
-    except:
+    except Exception:
         traceback.print_exc()
         return None

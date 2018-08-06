@@ -7,12 +7,12 @@ import textwrap
 from asyncio import CancelledError, Future
 from typing import Any, Awaitable, Callable, Dict, List, Optional, Tuple, TypeVar, Union
 
-from discord import Embed, Emoji, Message, TextChannel, User
+from discord import Embed, Message, TextChannel, User
 
 from . import events, utils
 from .basic import EditableEmbed
+from .utils import EmojiType
 
-EmojiType = Union[Emoji, str]
 EmojiHandlerType = Callable[[EmojiType, User], Awaitable]
 _CT = TypeVar("_CT", bound=EmojiHandlerType)
 

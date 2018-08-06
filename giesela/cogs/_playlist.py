@@ -24,8 +24,8 @@ class PlaylistCommands:
         "3.4.6": (1497617827, "when Giesela can't add the entry to the playlist she tries to figure out **why** it didn't work"),
         "3.4.7": (1497619770, "Fixed an annoying bug in which the builder wouldn't show any entries if the amount of entries was a multiple of 20"),
         "3.5.1": (1497706811, "Giesela finally keeps track whether a certain entry comes from a playlist or not"),
-        "3.5.8": (1497827857,
-                  "Default sort mode when loading playlists is now random and removing an entry in the playlist builder no longer messes with the current page."),
+        "3.5.8": (1497827857, "Default sort mode when loading playlists is now random and removing an entry in "
+                              "the playlist builder no longer messes with the current page."),
         "3.6.1": (1497969463, "when saving a playlist, list all changes"),
         "3.6.8": (1498162378, "checking whether start and end indices are numbers"),
         "3.6.9": (1498163686, "Special handling for sorting in playlist builder"),

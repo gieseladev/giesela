@@ -1,9 +1,11 @@
 import asyncio
 import datetime
+import logging
 import os
 import random
 import time
 import urllib
+import urllib.error
 from collections import deque
 from itertools import islice
 
@@ -17,6 +19,8 @@ from .lib.api.spotify import get_spotify_track
 from .lib.event_emitter import EventEmitter
 from .utils import clean_songname, get_header, get_video_sub_queue
 from .webiesela import WebieselaServer
+
+log = logging.getLogger(__name__)
 
 
 class Queue(EventEmitter):
@@ -66,23 +70,24 @@ class Queue(EventEmitter):
 
         return move_entry
 
-    def replay(self, index=0, revert=False):
-        if not 0 <= index < len(self.history):
-            return False
-
-        if self.history:
-            history_entry = self.history[index].copy()
-
-            self._add_entry(history_entry, placement=0, more_to_come=True)
-
-            if revert and self.player.current_entry:
-                self.player.skip()
+    def replay(self, index: int = None, revert: bool = False) -> bool:
+        if index is None:
+            entry = self.player.current_entry
+            if entry:
+                entry = entry.copy()
             else:
-                WebieselaServer.send_player_information(self.player.voice_client.guild.id)
+                return False
+        else:
+            if not 0 <= index < len(self.history):
+                return False
+            entry = self.history[index].copy()
 
-            return True
+        self._add_entry(entry, placement=0)
 
-        return False
+        if revert and self.player.current_entry:
+            self.player.skip()
+
+        return True
 
     def push_history(self, entry):
         entry = entry.copy()
@@ -102,7 +107,7 @@ class Queue(EventEmitter):
             if e.exc_info[0] == UnsupportedError:
                 print("[STREAM] Assuming content is a direct stream")
 
-            elif e.exc_info[0] == urllib.URLError:
+            elif e.exc_info[0] == urllib.error.URLError:
                 if os.path.exists(os.path.abspath(stream_url)):
                     raise ExtractionError(
                         "This is not a stream, this is a file path.")
@@ -444,8 +449,8 @@ class Queue(EventEmitter):
                 playlist_name = entry.meta["playlist"]["name"]
                 asyncio.ensure_future(self.bot.playlists.mark_entry_broken(self, playlist_name, entry))
                 print("[PLAYER] {}'s {} is broken!".format(playlist_name, entry.title))
-        except:
-            pass
+        except Exception:
+            log.exception(f"Couldn't ready entry {entry}")
 
         return await self.get_next_entry(predownload_next)
 

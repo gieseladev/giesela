@@ -6,11 +6,12 @@ import sys
 from textwrap import indent, wrap
 
 import aiohttp
+from discord import Colour, Embed
 from discord.ext.commands import AutoShardedBot, CommandError, Context
 
 from . import cogs, exceptions, reporting
 from .config import Config, ConfigDefaults
-from .constants import ABS_AUDIO_CACHE_PATH, VERSION as BOTVERSION
+from .constants import ABS_AUDIO_CACHE_PATH, VERSION as BOT_VERSION
 from .lib.ui import events
 from .saved_playlists import Playlists
 from .web_author import WebAuthor
@@ -18,18 +19,18 @@ from .web_author import WebAuthor
 log = logging.getLogger(__name__)
 
 
-def _delete_old_audiocache(path=ABS_AUDIO_CACHE_PATH):
+def _delete_old_audio_cache(path=ABS_AUDIO_CACHE_PATH):
     try:
         shutil.rmtree(path)
         return True
-    except:
+    except Exception:
         try:
             os.rename(path, path + "__")
-        except:
+        except Exception:
             return False
         try:
             shutil.rmtree(path)
-        except:
+        except Exception:
             os.rename(path + "__", path)
             return False
 
@@ -37,6 +38,8 @@ def _delete_old_audiocache(path=ABS_AUDIO_CACHE_PATH):
 
 
 class Giesela(AutoShardedBot):
+    config: Config
+    aiosession: aiohttp.ClientSession
 
     def __init__(self, *args, **kwargs):
         self.config = Config(ConfigDefaults.options_file)
@@ -46,7 +49,7 @@ class Giesela(AutoShardedBot):
 
         self.exit_signal = None
         self.aiosession = aiohttp.ClientSession(loop=self.loop)
-        self.http.user_agent += f" Giesela/{BOTVERSION}"
+        self.http.user_agent += f" Giesela/{BOT_VERSION}"
 
         self.playlists = Playlists(ConfigDefaults.playlists_file)
 
@@ -61,7 +64,7 @@ class Giesela(AutoShardedBot):
     def _cleanup(self):
         try:
             self.loop.run_until_complete(self.logout())
-        except:  # Can be ignored
+        except BaseException:  # Can be ignored
             pass
 
         pending = asyncio.Task.all_tasks()
@@ -71,7 +74,7 @@ class Giesela(AutoShardedBot):
             gathered.cancel()
             self.loop.run_until_complete(gathered)
             gathered.exception()
-        except:  # Can be ignored
+        except BaseException:  # Can be ignored
             pass
 
     def run(self):
@@ -87,7 +90,7 @@ class Giesela(AutoShardedBot):
             if self.exit_signal:
                 raise self.exit_signal
 
-    async def on_error(self, event, *args, **kwargs):
+    async def on_error(self, event: str, *args, **kwargs):
         ex_type, ex, stack = sys.exc_info()
 
         if issubclass(ex_type, exceptions.Signal):
@@ -99,14 +102,15 @@ class Giesela(AutoShardedBot):
 
     async def on_command_error(self, ctx: Context, exception: Exception):
         if isinstance(exception, CommandError):
-            await ctx.send(str(exception))
+            embed = Embed(title=type(exception).__name__, description=str(exception), colour=Colour.red())
+            await ctx.send(embed=embed)
         else:
             reporting.raven_client.captureException((type(exception), exception, exception.__traceback__))
 
         log.exception("CommandError:", exc_info=(type(exception), exception, exception.__traceback__))
 
     async def on_ready(self):
-        log.info(f"\rConnected!  Giesela v{BOTVERSION}")
+        log.info(f"\rConnected!  Giesela v{BOT_VERSION}")
         log.info(f"Bot: {self.user}")
 
         config_string = ""

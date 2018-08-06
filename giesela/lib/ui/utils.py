@@ -1,4 +1,8 @@
-from discord import Embed
+from typing import Union
+
+from discord import Embed, Emoji
+
+EmojiType = Union[Emoji, str]
 
 
 def create_bar(progress: float, length: int = 10, *, full_char: str = "■", half_char: str = None, empty_char: str = "□"):

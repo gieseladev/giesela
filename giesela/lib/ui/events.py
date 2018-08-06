@@ -1,11 +1,14 @@
 import asyncio
+from typing import Callable, Iterable, Union
 
-from discord import Emoji
+from discord import Emoji, Message, Reaction, User
+
+from .utils import EmojiType
 
 _reaction_listeners = []
 
 
-async def handle_reaction(reaction, user):
+async def handle_reaction(reaction: Reaction, user: User):
     global _reaction_listeners
 
     removed = []
@@ -29,17 +32,21 @@ async def handle_reaction(reaction, user):
         del _reaction_listeners[idx]
 
 
-async def wait_for_reaction_change(emoji=None, *, user=None, timeout=None, message=None, check=None):
+async def wait_for_reaction_change(emoji: Union[EmojiType, Iterable[EmojiType]] = None, *, user: User = None, timeout: float = None,
+                                   message: Message = None, check: Callable[[Reaction, User], bool] = None):
     global _reaction_listeners
 
     if emoji is None:
-        emoji_check = lambda r: True
+        def emoji_check(*_) -> True:
+            return True
     elif isinstance(emoji, (str, Emoji)):
-        emoji_check = lambda r: r.emoji == emoji
+        def emoji_check(r: Reaction) -> bool:
+            return r.emoji == emoji
     else:
-        emoji_check = lambda r: r.emoji in emoji
+        def emoji_check(r: Reaction) -> bool:
+            return r.emoji in emoji
 
-    def predicate(reaction, reaction_user):
+    def predicate(reaction: Reaction, reaction_user: User) -> bool:
         result = emoji_check(reaction)
 
         if message is not None:

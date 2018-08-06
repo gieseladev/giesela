@@ -328,7 +328,7 @@ class SpotifyTrack:
 
         try:
             info = (await queue.downloader.extract_info(queue.loop, search_query, download=False, process=True, retry_on_error=True))["entries"][0]
-        except:
+        except Exception:
             print("[Spotify]", search_query, "failed")
 
             if callable(callback):

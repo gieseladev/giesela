@@ -13,6 +13,19 @@ from giesela.utils import create_bar, ordinal, parse_timestamp
 log = logging.getLogger(__name__)
 
 
+def _seek(player: MusicPlayer, seconds: Union[str, float]):
+    if isinstance(seconds, str):
+        seconds = parse_timestamp(seconds)
+
+    if seconds is None:
+        raise commands.CommandError("Please provide a valid timestamp")
+
+    if player.current_entry is None:
+        raise commands.CommandError("Nothing playing!")
+
+    player.seek(seconds)
+
+
 class Player:
     bot: Giesela
     downloader: Downloader
@@ -240,23 +253,11 @@ class Player:
             else:
                 raise commands.CommandError(f"Unreasonable volume provided: {volume}%. Provide a value between 1 and 100.")
 
-    def _seek(self, player: MusicPlayer, seconds: Union[str, float]):
-        if isinstance(seconds, str):
-            seconds = parse_timestamp(seconds)
-
-        if seconds is None:
-            raise commands.CommandError("Please provide a valid timestamp")
-
-        if player.current_entry is None:
-            raise commands.CommandError("Nothing playing!")
-
-        player.seek(seconds)
-
     @commands.command()
     async def seek(self, ctx: Context, timestamp: str):
         """Seek to the given timestamp formatted (minutes:seconds)"""
         player = await self.get_player(ctx.guild)
-        self._seek(player, timestamp)
+        _seek(player, timestamp)
 
     @commands.command()
     async def fwd(self, ctx: Context, timestamp: str):
@@ -267,7 +268,7 @@ class Player:
         if secs:
             secs += player.progress
 
-        self._seek(player, secs)
+        _seek(player, secs)
 
     @commands.command()
     async def rwd(self, ctx: Context, timestamp: str = None):
@@ -287,7 +288,7 @@ class Player:
                 player.replay()
                 return
 
-        self._seek(player, secs)
+        _seek(player, secs)
 
     @commands.group(invoke_without_command=True)
     async def lyrics(self, ctx: Context, *query: str):

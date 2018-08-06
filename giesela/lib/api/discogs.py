@@ -108,6 +108,6 @@ async def get_entry(loop, query):
         return await loop.run_in_executor(None, _get_entry, query)
     except (DiscogsException.TrackNotFound, DiscogsException.NoResults, DiscogsException.ArtistNotFound, DiscogsException.WrongTrack):
         return None
-    except:
+    except Exception:
         traceback.print_exc()
         return None

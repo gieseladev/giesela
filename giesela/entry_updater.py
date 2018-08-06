@@ -16,7 +16,7 @@ async def _rebuild_entry(queue, entry):
             new_entry = GieselaEntry.upgrade(new_entry, entry["song_title"], entry["artist"], entry["artist_image"], entry["album"], entry["cover"])
 
         return new_entry
-    except:
+    except Exception:
         return None
 
 
@@ -97,12 +97,12 @@ async def fix_entry(queue, entry):
         entry["version"] = Entry.version
         entry.pop("broken", None)
         return Entry.from_dict(queue, entry)
-    except:
+    except Exception:
         try:
             print("[Entry-Fixer] \"{}\"({}) something went wrong with that, rebuilding!".format(entry.get("title", "Unknown title")[:25],
                                                                                                 entry.get("url", "Unknown URL")))
             return await _rebuild_entry(queue, entry)
-        except:
+        except Exception:
             print("[Entry-Fixer] \"{}\"({}) rebuilding didn't work either... This entry is rip!".format(entry.get("title", "Unknown title")[:25],
                                                                                                         entry.get("url", "Unknown URL")))
             return None
