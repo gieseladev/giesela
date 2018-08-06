@@ -9,3 +9,5 @@ logs/
 venv/
 
 *.pyc
+*.key
+*.crt

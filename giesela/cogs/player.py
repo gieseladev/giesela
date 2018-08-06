@@ -12,6 +12,8 @@ from giesela.utils import create_bar, ordinal, parse_timestamp
 
 log = logging.getLogger(__name__)
 
+LOAD_ORDER = -1
+
 
 def _seek(player: MusicPlayer, seconds: Union[str, float]):
     if isinstance(seconds, str):

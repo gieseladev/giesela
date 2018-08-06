@@ -166,12 +166,12 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
         await self.delete()
         return result
 
-    @emoji_handler("◀")
+    @emoji_handler("◀", pos=1)
     async def previous_page(self, *_):
         self._current_index -= 1
         await self.show_page()
 
-    @emoji_handler("▶")
+    @emoji_handler("▶", pos=2)
     async def next_page(self, *_):
         self._current_index += 1
         await self.show_page()

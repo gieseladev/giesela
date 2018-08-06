@@ -15,14 +15,17 @@ from giesela.lib.ui import ItemPicker, LoadingBar
 from giesela.utils import (create_bar, format_time, html2md)
 from .player import Player
 
+LOAD_ORDER = 1
+
 
 class QueueBase:
     bot: Giesela
-    player_cog: Player
+
+    player_cog: Optional[Player]
 
     def __init__(self, bot: Giesela):
         self.bot = bot
-        self.player_cog = bot.get_cog("Player")
+        self.player_cog = bot.cogs["Player"]
 
     @property
     def downloader(self) -> Downloader:
@@ -159,7 +162,7 @@ class EnqueueCog(QueueBase):
 
             embeds.append(em)
 
-        item_picker = ItemPicker(ctx.channel, ctx.author, items=embeds)
+        item_picker = ItemPicker(ctx.channel, ctx.author, embeds=embeds)
         result = await item_picker.choose()
 
         if result is None:

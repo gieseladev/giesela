@@ -107,6 +107,10 @@ class MusicPlayer(EventEmitter):
         return self.voice_client and self.voice_client.is_paused()
 
     @property
+    def is_stopped(self) -> bool:
+        return not bool(self.player)
+
+    @property
     def connected(self) -> bool:
         return self.voice_client and self.voice_client.is_connected()
 

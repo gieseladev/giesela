@@ -53,7 +53,7 @@ class Giesela(AutoShardedBot):
 
         self.playlists = Playlists(ConfigDefaults.playlists_file)
 
-        for ext in cogs.EXTENSIONS:
+        for ext in cogs.get_extensions():
             log.info(f"loading extension {ext}")
             self.load_extension(ext)
 
