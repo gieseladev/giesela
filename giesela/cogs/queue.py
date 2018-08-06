@@ -171,7 +171,7 @@ class EnqueueCog(QueueBase):
 
     @radio.command("random")
     async def radio_random(self, ctx: Context):
-        """Play a random radio station"""
+        """Play a random radio station."""
         player = await self.get_player(ctx.guild)
         station_info = get_random_station()
         await player.queue.add_radio_entry(station_info, channel=ctx.channel, author=ctx.author, now=True)
