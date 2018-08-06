@@ -2,17 +2,17 @@ import asyncio
 import random
 import time
 from random import shuffle
-from typing import Optional
+from typing import Dict, Optional
 
 from discord import Embed, Message
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Downloader, Giesela, MusicPlayer, RadioSongExtractor, RadioStations, TimestampEntry, WebieselaServer, get_all_stations, \
-    get_random_station
+from giesela import Downloader, Giesela, GieselaEntry, MusicPlayer, RadioSongEntry, RadioSongExtractor, RadioStationEntry, RadioStations, StreamEntry, \
+    TimestampEntry, WebieselaServer, YoutubeEntry, get_all_stations, get_random_station
 from giesela.lib.api import spotify
-from giesela.lib.ui import ItemPicker, LoadingBar
-from giesela.utils import (create_bar, format_time, html2md)
+from giesela.lib.ui import ItemPicker, LoadingBar, VerticalTextViewer
+from giesela.utils import (create_bar, format_time, html2md, nice_cut, ordinal, to_timestamp)
 from .player import Player
 
 LOAD_ORDER = 1
@@ -84,9 +84,6 @@ async def _play_url(ctx: Context, player: MusicPlayer, url: str, placement=None)
                     )
                     completion_ratio = (ind + 1) / total_entries
 
-                    if progress_message_future:
-                        progress_message = progress_message_future.result()
-
                     progress_message_future = asyncio.ensure_future(
                         progress_message.edit(content="Parsing {} entr{} at {} entries/min\n{} [{}%]\n{} remaining".format(
                             entries_left,
@@ -121,7 +118,7 @@ class EnqueueCog(QueueBase):
         This could mean an actual stream like Twitch, Youtube Gaming or even a radio stream, or simply streaming
         media without predownloading it.
         """
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
         song_url = url.strip("<>")
 
         async with ctx.typing():
@@ -135,7 +132,7 @@ class EnqueueCog(QueueBase):
         You can leave the parameters blank in order to get a tour around all the channels,
         you can specify the station you want to listen to or you can let the bot choose for you by entering \"random\"
         """
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
 
         if station:
             station_info = RadioStations.get_station(station.lower())
@@ -175,7 +172,7 @@ class EnqueueCog(QueueBase):
     @radio.command("random")
     async def radio_random(self, ctx: Context):
         """Play a random radio station."""
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
         station_info = get_random_station()
         await player.queue.add_radio_entry(station_info, channel=ctx.channel, author=ctx.author, now=True)
         await ctx.send(f"I choose\n**{station_info.name}**")
@@ -187,7 +184,7 @@ class EnqueueCog(QueueBase):
         If no link is provided, the first
         result from a youtube search is added to the queue.
         """
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
 
         if placement:
             placement = placement.lower()
@@ -203,7 +200,7 @@ class EnqueueCog(QueueBase):
     @commands.command()
     async def search(self, ctx: Context, *query: str):
         """Searches for a video and adds the one you choose."""
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
 
         if not query:
             raise commands.CommandError("Please specify a search query.")
@@ -366,7 +363,7 @@ class EnqueueCog(QueueBase):
     @commands.command()
     async def spotify(self, ctx: Context, url: str):
         """Load a playlist or track from Spotify!"""
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
         await ctx.message.delete()
         model = spotify.model_from_url(url)
 
@@ -422,7 +419,7 @@ class ManipulateCog(QueueBase):
     @commands.command()
     async def remove(self, ctx: Context, index: int):
         """Remove an entry from the queue."""
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
 
         if not player.queue.entries:
             raise commands.CommandError("There are no entries in the queue!")
@@ -444,7 +441,7 @@ class ManipulateCog(QueueBase):
         If there's nothing playing, or the "last" keyword is given, replay the last song.
         Otherwise replay the nth entry in the history.
         """
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
 
         if index:
             if index.isnumeric():
@@ -469,14 +466,14 @@ class ManipulateCog(QueueBase):
     @commands.command()
     async def shuffle(self, ctx: Context):
         """Shuffle the queue."""
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
         player.queue.shuffle()
         await ctx.send(":ok_hand:")
 
     @commands.command()
     async def clear(self, ctx: Context):
         """Clear the queue."""
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
         player.queue.clear()
         await ctx.send(":put_litter_in_its_place:")
 
@@ -486,7 +483,7 @@ class ManipulateCog(QueueBase):
 
         When given the keyword "all", skips all timestamped-entries in the current timestamp-entry.
         """
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
 
         if player.is_stopped:
             raise commands.CommandError("Can't skip! The player is not playing!")
@@ -502,7 +499,7 @@ class ManipulateCog(QueueBase):
 
         If you don-t specify a position, it promotes the last song.
         """
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
 
         if len(player.queue.entries) < 2:
             raise commands.CommandError("Can't promote! Please add at least 2 songs to the queue!")
@@ -520,7 +517,7 @@ class ManipulateCog(QueueBase):
     @commands.command()
     async def move(self, ctx: Context, from_pos: int, to_pos: int):
         """Move an entry."""
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
 
         from_index = from_pos - 1
         to_index = to_pos - 1
@@ -537,300 +534,247 @@ class ManipulateCog(QueueBase):
         await ctx.send(f"Moved **{entry.title}** from position `{from_pos}` to `{to_pos}`.")
 
 
-# class DisplayCommands:
-#
-#     @commands.command()
-#     async def np(self, player, channel, server):
-#         """
-#         ///|Usage
-#         {command_prefix}np
-#         ///|Explanation
-#         Displays the current song in chat.
-#         """
-#
-#         if player.current_entry:
-#             if self.guild_specific_data[server]["last_np_msg"]:
-#                 await self.safe_delete_message(
-#                     self.guild_specific_data[server]["last_np_msg"])
-#                 self.guild_specific_data[server]["last_np_msg"] = None
-#
-#             entry = player.current_entry
-#             em = None
-#
-#             if isinstance(entry, RadioSongEntry):
-#                 progress_ratio = entry.song_progress / \
-#                                  (entry.song_duration or 1)
-#                 desc = "{} `[{}/{}]`".format(
-#                     create_bar(progress_ratio, length=20),
-#                     to_timestamp(entry.song_progress),
-#                     to_timestamp(entry.song_duration)
-#                 )
-#                 foot = "🔴 Live from {}".format(entry.station_name)
-#
-#                 em = Embed(
-#                     title=entry.title,
-#                     description=desc,
-#                     url=entry.link,
-#                     colour=hex_to_dec("#a23dd1")
-#                 )
-#
-#                 em.set_footer(text=foot)
-#                 em.set_thumbnail(url=entry.cover)
-#                 em.set_author(
-#                     name=entry.artist
-#                 )
-#             elif isinstance(entry, RadioStationEntry):
-#                 desc = "`{}`".format(
-#                     to_timestamp(player.progress)
-#                 )
-#                 foot = "🔴 Live from {}".format(entry.station_name)
-#
-#                 em = Embed(
-#                     title=entry.title,
-#                     description=desc,
-#                     url=entry.link,
-#                     colour=hex_to_dec("#be7621")
-#                 )
-#
-#                 em.set_footer(text=foot)
-#                 em.set_thumbnail(url=entry.cover)
-#             elif isinstance(entry, StreamEntry):
-#                 desc = "🔴 Live [`{}`]".format(to_timestamp(player.progress))
-#
-#                 em = Embed(
-#                     title=entry.title,
-#                     description=desc,
-#                     colour=hex_to_dec("#a23dd1")
-#                 )
-#
-#             if isinstance(entry, GieselaEntry):
-#                 artist_name = entry.artist
-#                 artist_avatar = entry.artist_image
-#                 progress_ratio = player.progress / entry.end_seconds
-#                 desc = "{} `[{}/{}]`".format(
-#                     create_bar(progress_ratio, length=20),
-#                     to_timestamp(player.progress),
-#                     to_timestamp(entry.end_seconds)
-#                 )
-#
-#                 em = Embed(
-#                     title=entry.song_title,
-#                     description=desc,
-#                     url=entry.url,
-#                     colour=hex_to_dec("#F9FF6E")
-#                 )
-#
-#                 em.set_thumbnail(url=entry.cover)
-#                 em.set_author(
-#                     name=artist_name,
-#                     icon_url=artist_avatar
-#                 )
-#                 em.add_field(name="Album", value=entry.album)
-#             elif isinstance(entry, TimestampEntry):
-#                 sub_entry = entry.current_sub_entry
-#                 index = sub_entry["index"] + 1
-#                 progress_ratio = sub_entry["progress"] / sub_entry["duration"]
-#                 desc = "{} `[{}/{}]`".format(
-#                     create_bar(progress_ratio, length=20),
-#                     to_timestamp(sub_entry["progress"]),
-#                     to_timestamp(sub_entry["duration"])
-#                 )
-#                 foot = "{}{} sub-entry of \"{}\" [{}/{}]".format(
-#                     index,
-#                     ordinal(index),
-#                     entry.whole_title,
-#                     to_timestamp(player.progress),
-#                     to_timestamp(entry.end_seconds)
-#                 )
-#
-#                 em = Embed(
-#                     title=sub_entry["name"],
-#                     description=desc,
-#                     url=entry.url,
-#                     colour=hex_to_dec("#00FFFF")
-#                 )
-#
-#                 em.set_footer(text=foot)
-#                 em.set_thumbnail(url=entry.thumbnail)
-#                 if "playlist" in entry.meta:
-#                     pl = entry.meta["playlist"]
-#                     em.set_author(name=pl["name"], icon_url=pl.get("cover", None) or Embed.Empty)
-#                 elif "author" in entry.meta:
-#                     author = entry.meta["author"]
-#                     em.set_author(
-#                         name=author.display_name,
-#                         icon_url=author.avatar_url
-#                     )
-#             elif isinstance(entry, YoutubeEntry):
-#                 progress_ratio = player.progress / entry.end_seconds
-#                 desc = "{} `[{}/{}]`".format(
-#                     create_bar(progress_ratio, length=20),
-#                     to_timestamp(player.progress),
-#                     to_timestamp(entry.end_seconds)
-#                 )
-#
-#                 em = Embed(
-#                     title=entry.title,
-#                     description=desc,
-#                     url=entry.url,
-#                     colour=hex_to_dec("#a9b244")
-#                 )
-#
-#                 em.set_thumbnail(url=entry.thumbnail)
-#                 if "playlist" in entry.meta:
-#                     pl = entry.meta["playlist"]
-#                     em.set_author(name=pl["name"], icon_url=pl.get("cover", None) or Embed.Empty)
-#                 elif "author" in entry.meta:
-#                     author = entry.meta["author"]
-#                     em.set_author(
-#                         name=author.display_name,
-#                         icon_url=author.avatar_url
-#                     )
-#
-#             if em:
-#                 self.guild_specific_data[server]["last_np_msg"] = await self.safe_send_message(channel, embed=em)
-#         else:
-#             return Response(
-#                 "There are no songs queued! Queue something with {}play.".format(self.config.command_prefix))
-#
-#     @command_info("1.0.0", 1477180800, {
-#         "3.5.1": (1497706997, "Queue doesn't show the current entry anymore, always shows the whole queue and a bit of cleanup"),
-#         "3.5.5": (1497795534, "Total time takes current entry into account"),
-#         "3.5.8": (1497825017, "Doesn't show the whole queue right away anymore, "
-#                               "instead the queue command takes a quantity argument which defaults to 15"),
-#         "3.8.0": (1499110875, "Displaying real index of sub-entries (timestamp-entry)"),
-#         "3.8.9": (1499461647, "Part of the `Giesenesis` rewrite")
-#     })
-#     async def queue(self, player, num="15"):
-#         """
-#         ///|Usage
-#         {command_prefix}queue [quantity]
-#         ///|Explanation
-#         Show the first 15 entries of the current song queue.
-#         One can specify the amount of entries to be shown.
-#         """
-#
-#         try:
-#             quantity = int(num)
-#
-#             if quantity < 1:
-#                 return Response("Please provide a reasonable quantity")
-#         except ValueError:
-#             if num.lower() == "all":
-#                 quantity = len(player.queue.entries)
-#             else:
-#                 return Response("Quantity must be a number")
-#
-#         lines = ["**QUEUE**\n"]
-#
-#         if player.current_entry and isinstance(player.current_entry, TimestampEntry):
-#             sub_queue = player.current_entry.sub_queue
-#             sub_queue = [sub_entry for sub_entry in sub_queue if sub_entry[
-#                 "start"] >= player.progress]
-#             for item in sub_queue:
-#                 lines.append(
-#                     "            ►`{}.` **{}**".format(
-#                         item["index"] + 1,
-#                         nice_cut(item["name"], 35)
-#                     )
-#                 )
-#
-#         entries = list(player.queue.entries)[:quantity]
-#         for i, item in enumerate(entries, 1):
-#             origin_text = ""
-#             if "playlist" in item.meta:
-#                 origin_text = "from playlist **{}**".format(
-#                     item.meta["playlist"]["name"]
-#                 )
-#             elif "author" in item.meta:
-#                 origin_text = "by **{}**".format(
-#                     item.meta["author"].name
-#                 )
-#
-#             lines.append("`{}.` **{}** {}".format(
-#                 i, nice_cut(item.title, 40), origin_text))
-#
-#         if len(lines) < 2:
-#             return Response(
-#                 "There are no songs queued! Use `{}help` to find out how to queue something.".format(self.config.command_prefix))
-#
-#         total_time = sum(
-#             [entry.end_seconds for entry in player.queue.entries])
-#         if player.current_entry:
-#             total_time += player.current_entry.end_seconds - player.progress
-#
-#         lines.append(
-#             "\nShowing {} out of {} entr{}".format(
-#                 len(entries),
-#                 len(player.queue.entries),
-#                 "y" if len(player.queue.entries) == 1 else "ies"
-#             )
-#         )
-#         lines.append(
-#             "**Total duration:** `{}`".format(
-#                 format_time(total_time, True, 5, 2)
-#             )
-#         )
-#
-#         return Response("\n".join(lines))
-#
-#     @command_info("3.3.3", 1497197957, {
-#         "3.3.8": (1497474312, "added failsafe for player not currently playing something"),
-#         "3.5.8": (1497825334, "Adjusted design to look more like `queue`'s style"),
-#         "3.8.9": (1499465102, "Part of the `Giesenesis` rewrite"),
-#         "4.0.1": (1500346108, "Quantity parameter. Increased history limit"),
-#         "4.1.7": (1500876373, "Displaying the amount of entries displayed in relation to the total entries"),
-#         "4.2.9": (1501176845, "Showing the correct amount of entries displayed")
-#     })
-#     async def history(self, player, num="15"):
-#         """
-#         ///|Usage
-#         {command_prefix}history [quantity]
-#         ///|Explanation
-#         Show the last [quantity] songs. If [quantity] isn't provided, show up to 15 songs
-#         """
-#
-#         try:
-#             quantity = int(num)
-#
-#             if quantity < 1:
-#                 return Response("Please provide a reasonable quantity")
-#         except ValueError:
-#             if num.lower() == "all":
-#                 quantity = len(player.queue.entries)
-#             else:
-#                 return Response("Quantity must be a number")
-#
-#         if not player.queue.history:
-#             return Response("There **is** no history")
-#
-#         lines = ["**HISTORY**"]
-#
-#         entries = player.queue.history[:quantity]
-#
-#         for ind, entry in enumerate(entries, 1):
-#             finish_time = entry.meta.get("finish_time")
-#             seconds_passed = time.time() - finish_time
-#             lines.append(
-#                 "`{}.` **{}** {} ago".format(
-#                     ind,
-#                     nice_cut(entry.title, 40),
-#                     format_time(seconds_passed, max_specifications=2)
-#                 )
-#             )
-#
-#         lines.append(
-#             "\nShowing {} out of {} entr{}".format(
-#                 len(entries),
-#                 len(player.queue.history),
-#                 "y" if len(player.queue.history) == 1 else "ies"
-#             )
-#         )
-#
-#         return Response("\n".join(lines))
+class DisplayCog(QueueBase):
+    np_messages: Dict[int, Message]
+
+    def __init__(self, bot: Giesela):
+        super().__init__(bot)
+
+        self.np_messages = {}
+
+    @commands.command()
+    async def np(self, ctx: Context):
+        """Show the current entry."""
+        player = await self.get_player(ctx)
+
+        if not player.current_entry:
+            raise commands.CommandError("Nothin playing")
+
+        entry = player.current_entry
+
+        if isinstance(entry, RadioSongEntry):
+            progress_ratio = entry.song_progress / \
+                             (entry.song_duration or 1)
+            desc = "{} `[{}/{}]`".format(
+                create_bar(progress_ratio, length=20),
+                to_timestamp(entry.song_progress),
+                to_timestamp(entry.song_duration)
+            )
+            foot = "🔴 Live from {}".format(entry.station_name)
+
+            em = Embed(
+                title=entry.title,
+                description=desc,
+                url=entry.link,
+                colour=0xa23dd1
+            )
+
+            em.set_footer(text=foot)
+            em.set_thumbnail(url=entry.cover)
+            em.set_author(
+                name=entry.artist
+            )
+        elif isinstance(entry, RadioStationEntry):
+            desc = "`{}`".format(
+                to_timestamp(player.progress)
+            )
+            foot = "🔴 Live from {}".format(entry.station_name)
+
+            em = Embed(
+                title=entry.title,
+                description=desc,
+                url=entry.link,
+                colour=0xbe7621
+            )
+
+            em.set_footer(text=foot)
+            em.set_thumbnail(url=entry.cover)
+        elif isinstance(entry, StreamEntry):
+            desc = "🔴 Live [`{}`]".format(to_timestamp(player.progress))
+
+            em = Embed(
+                title=entry.title,
+                description=desc,
+                colour=0xa23dd1
+            )
+        elif isinstance(entry, GieselaEntry):
+            artist_name = entry.artist
+            artist_avatar = entry.artist_image
+            progress_ratio = player.progress / entry.end_seconds
+            desc = "{} `[{}/{}]`".format(
+                create_bar(progress_ratio, length=20),
+                to_timestamp(player.progress),
+                to_timestamp(entry.end_seconds)
+            )
+
+            em = Embed(
+                title=entry.song_title,
+                description=desc,
+                url=entry.url,
+                colour=0xF9FF6E
+            )
+
+            em.set_thumbnail(url=entry.cover)
+            em.set_author(
+                name=artist_name,
+                icon_url=artist_avatar
+            )
+            em.add_field(name="Album", value=entry.album)
+        elif isinstance(entry, TimestampEntry):
+            sub_entry = entry.current_sub_entry
+            index = sub_entry["index"] + 1
+            progress_ratio = sub_entry["progress"] / sub_entry["duration"]
+            desc = "{} `[{}/{}]`".format(
+                create_bar(progress_ratio, length=20),
+                to_timestamp(sub_entry["progress"]),
+                to_timestamp(sub_entry["duration"])
+            )
+            foot = "{}{} sub-entry of \"{}\" [{}/{}]".format(
+                index,
+                ordinal(index),
+                entry.whole_title,
+                to_timestamp(player.progress),
+                to_timestamp(entry.end_seconds)
+            )
+
+            em = Embed(
+                title=sub_entry["name"],
+                description=desc,
+                url=entry.url,
+                colour=0x00FFFF
+            )
+
+            em.set_footer(text=foot)
+            em.set_thumbnail(url=entry.thumbnail)
+            if "playlist" in entry.meta:
+                pl = entry.meta["playlist"]
+                em.set_author(name=pl["name"], icon_url=pl.get("cover", None) or Embed.Empty)
+            elif "author" in entry.meta:
+                author = entry.meta["author"]
+                em.set_author(
+                    name=author.display_name,
+                    icon_url=author.avatar_url
+                )
+        elif isinstance(entry, YoutubeEntry):
+            progress_ratio = player.progress / entry.end_seconds
+            desc = "{} `[{}/{}]`".format(
+                create_bar(progress_ratio, length=20),
+                to_timestamp(player.progress),
+                to_timestamp(entry.end_seconds)
+            )
+
+            em = Embed(
+                title=entry.title,
+                description=desc,
+                url=entry.url,
+                colour=0xa9b244
+            )
+
+            em.set_thumbnail(url=entry.thumbnail)
+            if "playlist" in entry.meta:
+                pl = entry.meta["playlist"]
+                em.set_author(name=pl["name"], icon_url=pl.get("cover", None) or Embed.Empty)
+            elif "author" in entry.meta:
+                author = entry.meta["author"]
+                em.set_author(
+                    name=author.display_name,
+                    icon_url=author.avatar_url
+                )
+        else:
+            await ctx.send("what the hell are you playing?")
+            return
+
+        msg = self.np_messages.get(ctx.guild.id)
+        if msg:
+            await msg.edit(embed=em)
+        else:
+            self.np_messages[ctx.guild.id] = await ctx.send(embed=em)
+
+    @commands.command()
+    async def queue(self, ctx: Context):
+        """Display the queue."""
+        player = await self.get_player(ctx)
+
+        lines = []
+
+        if player.current_entry and isinstance(player.current_entry, TimestampEntry):
+            sub_queue = player.current_entry.sub_queue
+            sub_queue = [sub_entry for sub_entry in sub_queue if sub_entry["start"] >= player.progress]
+            for item in sub_queue:
+                lines.append(
+                    "            ►`{}.` **{}**".format(
+                        item["index"] + 1,
+                        nice_cut(item["name"], 35)
+                    )
+                )
+
+        for i, item in enumerate(player.queue.entries, 1):
+            origin_text = ""
+            if "playlist" in item.meta:
+                origin_text = "from playlist **{}**".format(
+                    item.meta["playlist"]["name"]
+                )
+            elif "author" in item.meta:
+                origin_text = "by **{}**".format(
+                    item.meta["author"].name
+                )
+
+            lines.append("`{}.` **{}** {}".format(
+                i, nice_cut(item.title, 40), origin_text))
+
+        if not lines:
+            raise commands.CommandError("No entries in the queue")
+
+        total_time = sum([entry.end_seconds for entry in player.queue.entries])
+        if player.current_entry:
+            total_time += player.current_entry.end_seconds - player.progress
+
+        frame = {
+            "title": "Queue",
+            "author": {
+                "name": "{progress_bar}"
+            },
+            "footer": {
+                "text": f"Total duration: {format_time(total_time, True, 5, 2)}"
+
+            }
+        }
+
+        viewer = VerticalTextViewer(ctx.channel, ctx.author, content=lines, embed_frame=frame)
+        await viewer.display()
+
+    @commands.command()
+    async def history(self, ctx: Context):
+        """Show the past entries"""
+        player = await self.get_player(ctx)
+        lines = []
+
+        for ind, entry in enumerate(player.queue.history, 1):
+            finish_time = entry.meta.get("finish_time")
+            seconds_passed = time.time() - finish_time
+            lines.append(
+                "`{}.` **{}** {} ago".format(
+                    ind,
+                    nice_cut(entry.title, 40),
+                    format_time(seconds_passed, max_specifications=2)
+                )
+            )
+
+        if not lines:
+            raise commands.CommandError("No history")
+
+        frame = {
+            "title": "History",
+            "author": {
+                "name": "{progress_bar}"
+            }
+        }
+
+        viewer = VerticalTextViewer(ctx.channel, ctx.author, content=lines, embed_frame=frame)
+        await viewer.display()
 
 
-class Queue(EnqueueCog, ManipulateCog):
+class Queue(EnqueueCog, ManipulateCog, DisplayCog):
     pass
 
 

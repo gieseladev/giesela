@@ -1,4 +1,5 @@
 import logging
+from functools import partial
 from typing import Dict, Optional, Union
 
 from discord import Game, Guild, Member, Message, VoiceChannel, VoiceState
@@ -8,11 +9,12 @@ from discord.ext.commands import Context
 from giesela import BaseEntry, Downloader, Giesela, MusicPlayer, RadioSongEntry, TimestampEntry, WebieselaServer, constants, localization, \
     lyrics as lyricsfinder
 from giesela.lib.ui import VerticalTextViewer
-from giesela.utils import create_bar, ordinal, parse_timestamp
+from giesela.utils import create_bar, ordinal, parse_timestamp, similarity
 
 log = logging.getLogger(__name__)
 
 LOAD_ORDER = -1
+VOICE_CHANNEL_NAMES = ("music", "giesela", "musicbot")
 
 
 def _seek(player: MusicPlayer, seconds: Union[str, float]):
@@ -26,6 +28,26 @@ def _seek(player: MusicPlayer, seconds: Union[str, float]):
         raise commands.CommandError("Nothing playing!")
 
     player.seek(seconds)
+
+
+async def find_giesela_channel(bot: Giesela, guild: Guild) -> VoiceChannel:
+    if not guild.voice_channels:
+        raise EnvironmentError("HOW EVEN?!? There are no voice channels... WHAT")
+    if bot.config.voice_channel_home:
+        return await bot.get_channel(bot.config.voice_channel_home)
+
+    _max_similarity = 0
+    _channel = None
+    for channel in guild.voice_channels:
+        _similarity = max(*map(partial(similarity, channel.name.lower()), VOICE_CHANNEL_NAMES))
+        if _similarity > _max_similarity:
+            _max_similarity = _similarity
+            _channel = channel
+
+    if _channel:
+        return _channel
+
+    return guild.voice_channels[0]
 
 
 class Player:
@@ -43,10 +65,22 @@ class Player:
         self.players = {}
         self.status_messages = {}
 
-    async def get_player(self, guild: Guild, *, create: bool = True, channel: VoiceChannel = None) -> Optional[MusicPlayer]:
+    async def get_player(self, target: Union[Guild, Context], *,
+                         create: bool = True, channel: VoiceChannel = None, member: Member = None) -> Optional[MusicPlayer]:
+        if isinstance(target, Context):
+            guild = target.guild
+            member = member or target.author
+        else:
+            guild = target
+
         if guild.id not in self.players:
             if create:
-                self.players[guild.id] = MusicPlayer(self.bot, self.downloader, channel or guild.voice_channels[0])  # TODO: smart detection
+                if not channel:
+                    if member and member.voice:
+                        channel = member.voice.channel
+                    else:
+                        channel = await find_giesela_channel(self.bot, guild)
+                self.players[guild.id] = MusicPlayer(self.bot, self.downloader, channel)
             else:
                 return None
         return self.players[guild.id]
@@ -181,7 +215,7 @@ class Player:
     @commands.command()
     async def pause(self, ctx: Context):
         """Pause playback of the current song. If the player is paused, it will unpause."""
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
 
         if player.voice_client:
             if player.voice_client.is_playing():
@@ -194,7 +228,7 @@ class Player:
     @commands.command()
     async def resume(self, ctx: Context):
         """Resumes playback of the current song."""
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
 
         if player.voice_client:
             player.resume()
@@ -204,7 +238,7 @@ class Player:
     @commands.command()
     async def stop(self, ctx: Context):
         """Stops the player completely and removes all entries from the queue."""
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
         player.stop()
 
     @commands.command()
@@ -214,7 +248,7 @@ class Player:
         Sets the playback volume. Accepted values are from 1 to 100.
         Putting + or - before the volume will make the volume change relative to the current volume.
         """
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
 
         if not volume:
             await ctx.send("Current volume: {}%\n{}".format(int(player.volume * 100), create_bar(player.volume, 20)))
@@ -258,13 +292,13 @@ class Player:
     @commands.command()
     async def seek(self, ctx: Context, timestamp: str):
         """Seek to the given timestamp formatted (minutes:seconds)"""
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
         _seek(player, timestamp)
 
     @commands.command()
     async def fwd(self, ctx: Context, timestamp: str):
         """Forward <timestamp> into the current entry"""
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
 
         secs = parse_timestamp(timestamp)
         if secs:
@@ -278,7 +312,7 @@ class Player:
 
         If the current entry is a timestamp-entry, rewind to the previous song
         """
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
         secs = parse_timestamp(timestamp)
         if secs:
             secs = player.progress - secs
@@ -295,7 +329,7 @@ class Player:
     @commands.group(invoke_without_command=True)
     async def lyrics(self, ctx: Context, *query: str):
         """Try to find lyrics for the current entry and display 'em"""
-        player = await self.get_player(ctx.guild)
+        player = await self.get_player(ctx)
 
         async with ctx.typing():
             if query:

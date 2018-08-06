@@ -109,19 +109,16 @@ class Queue(EventEmitter):
 
             elif e.exc_info[0] == urllib.error.URLError:
                 if os.path.exists(os.path.abspath(stream_url)):
-                    raise ExtractionError(
-                        "This is not a stream, this is a file path.")
+                    raise ExtractionError("This is not a stream, this is a file path.")
 
                 else:  # it might be a file path that just doesn't exist
-                    raise ExtractionError(
-                        "Invalid input: {0.exc_info[0]}: {0.exc_info[1].reason}".format(e))
+                    raise ExtractionError("Invalid input: {0.exc_info[0]}: {0.exc_info[1].reason}".format(e))
 
             else:
                 raise ExtractionError("Unknown error: {}".format(e))
 
         except Exception as e:
-            print("Could not extract information from {} ({}), falling back to direct".format(
-                stream_url, e))
+            print("Could not extract information from {} ({}), falling back to direct".format(stream_url, e))
 
         dest_url = stream_url
         if info.get("extractor"):

@@ -1,7 +1,5 @@
 import asyncio
 import logging
-import os
-import shutil
 import sys
 from textwrap import indent, wrap
 
@@ -11,30 +9,12 @@ from discord.ext.commands import AutoShardedBot, CommandError, Context
 
 from . import cogs, exceptions, reporting
 from .config import Config, ConfigDefaults
-from .constants import ABS_AUDIO_CACHE_PATH, VERSION as BOT_VERSION
+from .constants import VERSION as BOT_VERSION
 from .lib.ui import events
 from .saved_playlists import Playlists
 from .web_author import WebAuthor
 
 log = logging.getLogger(__name__)
-
-
-def _delete_old_audio_cache(path=ABS_AUDIO_CACHE_PATH):
-    try:
-        shutil.rmtree(path)
-        return True
-    except Exception:
-        try:
-            os.rename(path, path + "__")
-        except Exception:
-            return False
-        try:
-            shutil.rmtree(path)
-        except Exception:
-            os.rename(path + "__", path)
-            return False
-
-    return True
 
 
 class Giesela(AutoShardedBot):
@@ -79,7 +59,7 @@ class Giesela(AutoShardedBot):
 
     def run(self):
         try:
-            super().run(self.config._token)
+            super().run(self.config.token)
         finally:
             try:
                 self._cleanup()

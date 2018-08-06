@@ -134,12 +134,11 @@ class MusicPlayer(EventEmitter):
 
     def on_entry_added(self, **_):
         if not self.current_entry:
-            asyncio.ensure_future(self.play())
+            self.loop.create_task(self.play())
 
     def skip(self):
         if self.voice_client:
             self.voice_client.stop()
-        asyncio.ensure_future(self.play())
 
     def stop(self):
         if self.voice_client:
@@ -269,8 +268,7 @@ class MusicPlayer(EventEmitter):
                 return
 
             if self.current_entry.title == before_title:
-                print(
-                    "[CHAPTER-UPDATER] The same thing is still playing. Back to sleep!")
+                print("[CHAPTER-UPDATER] The same thing is still playing. Back to sleep!")
                 continue
 
             print("[CHAPTER-UPDATER] Emitting next now playing event")
