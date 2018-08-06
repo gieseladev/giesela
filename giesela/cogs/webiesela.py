@@ -1,5 +1,8 @@
 import logging
 
+from discord.ext import commands
+from discord.ext.commands import Context
+
 from giesela import Giesela, MusicPlayer, WebieselaServer
 from .player import Player
 
@@ -21,6 +24,17 @@ class Webiesela:
         if self.bot.config.start_webiesela:
             log.info("starting Webiesela")
             WebieselaServer.run(self)
+
+    @commands.command()
+    async def register(self, ctx: Context, token: str):
+        """Use this command in order to use [Webiesela]({web_url})."""
+
+        if WebieselaServer.register_information(ctx.guild.id, ctx.author.id, token.lower()):
+            await ctx.send("You've successfully registered yourself. Go back to your browser and check it out")
+        else:
+            await ctx.send("Something went wrong while registering."
+                           f"It could be that your code `{token.upper()}` is wrong."
+                           "Please make sure that you've entered it correctly.")
 
 
 def setup(bot: Giesela):

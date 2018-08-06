@@ -2,6 +2,7 @@
 .pytest_cache/
 
 cache/
+data/cert/
 data/lyrics/
 data/playlists/
 logs/

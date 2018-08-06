@@ -5,7 +5,9 @@ from discord import Game, Guild, Member, Message, VoiceChannel, VoiceState
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import BaseEntry, Downloader, Giesela, MusicPlayer, RadioSongEntry, TimestampEntry, WebieselaServer, constants, localization
+from giesela import BaseEntry, Downloader, Giesela, MusicPlayer, RadioSongEntry, TimestampEntry, WebieselaServer, constants, localization, \
+    lyrics as lyricsfinder
+from giesela.lib.ui import VerticalTextViewer
 from giesela.utils import create_bar, ordinal, parse_timestamp
 
 log = logging.getLogger(__name__)
@@ -238,7 +240,7 @@ class Player:
             else:
                 raise commands.CommandError(f"Unreasonable volume provided: {volume}%. Provide a value between 1 and 100.")
 
-    def _seek(self, player: MusicPlayer, seconds: Union[str, int]):
+    def _seek(self, player: MusicPlayer, seconds: Union[str, float]):
         if isinstance(seconds, str):
             seconds = parse_timestamp(seconds)
 
@@ -287,22 +289,36 @@ class Player:
 
         self._seek(player, secs)
 
-    @commands.command()
-    async def lyrics(self, ctx: Context):
+    @commands.group(invoke_without_command=True)
+    async def lyrics(self, ctx: Context, *query: str):
         """Try to find lyrics for the current entry and display 'em"""
         player = await self.get_player(ctx.guild)
 
         async with ctx.typing():
-            if not player.current_entry:
-                raise commands.CommandError("There's no way for me to find lyrics for something that doesn't even exist!")
-
-            title = player.current_entry.title
-            lyrics = player.current_entry.lyrics
-
-            if not lyrics:
-                raise commands.CommandError("Couldn't find any lyrics for **{}**".format(title))
+            if query:
+                query = " ".join(query)
+                lyrics = lyricsfinder.search_for_lyrics(query)
             else:
-                await ctx.send(f"**{lyrics.title}**\n\n{lyrics.lyrics[:1000]}\n**Lyrics from \"{lyrics.origin.source_name}\"**")
+                if not player.current_entry:
+                    raise commands.CommandError("There's no way for me to find lyrics for something that doesn't even exist!")
+                query = player.current_entry.title
+                lyrics = player.current_entry.lyrics
+
+        if not lyrics:
+            raise commands.CommandError("Couldn't find any lyrics for **{}**".format(query))
+
+        frame = {
+            "title": lyrics.title,
+            "url": lyrics.origin.url,
+            "author": {
+                "name": "{progress_bar}"
+            },
+            "footer": {
+                "text": f"Lyrics from {lyrics.origin.source_name}"
+            }
+        }
+        viewer = VerticalTextViewer(ctx.channel, ctx.author, embed_frame=frame, content=lyrics.lyrics)
+        await viewer.display()
 
 
 def setup(bot: Giesela):

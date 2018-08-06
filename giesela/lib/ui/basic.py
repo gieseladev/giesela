@@ -1,35 +1,40 @@
 import asyncio
 import time
+from typing import Any, Callable, List, Optional
 
-from discord import Embed
+from discord import Embed, Message, TextChannel
 
 from giesela import utils
-from . import ui_utils
 
 
 class EditableEmbed:
-    """
-        Provides the base for an interface
-    """
+    channel: TextChannel
+    _message: Optional[Message]
 
-    def __init__(self):
-        self._interface_message = None
+    def __init__(self, channel: TextChannel, message: Message = None):
+        self.channel = channel
 
-    async def exit(self):
-        if self._interface_message:
-            await self.bot.safe_delete_message(self._interface_message)
+        self._message = message
 
-    async def update_message(self, embed, on_new=None):
-        if not self._interface_message:
-            self._interface_message = await self.bot.safe_send_message(self.channel, embed=embed)
+    @property
+    def message(self) -> Optional[Message]:
+        return self._message
+
+    async def delete(self):
+        if self.message:
+            await self.message.delete()
+
+    async def edit(self, embed: Embed, on_new: Callable[[Message], Any] = None):
+        if not self.message:
+            self._message = await self.channel.send(embed=embed)
 
             if callable(on_new):
-                res = on_new(self._interface_message)
+                res = on_new(self.message)
 
                 if asyncio.iscoroutine(res):
                     await res
         else:
-            self._interface_message = await self.bot.safe_edit_message(self._interface_message, embed=embed)
+            await self._message.edit(embed=embed)
 
 
 class LoadingBar(EditableEmbed):
@@ -45,12 +50,20 @@ class LoadingBar(EditableEmbed):
 
         custom_embed_data -- data to pass over to the Embed
     """
+    header: str
+    colour: int
+    total_items: Optional[int]
+    show_time_left: bool
+    show_ipm: bool
+    item_name_plural: str
+    show_percentage: bool
+    custom_embed_data: dict
 
-    def __init__(self, bot, channel, **options):
-        self.bot = bot
-        self.channel = channel
+    progress: int
+    times: List[float]
 
-        super().__init__()
+    def __init__(self, channel: TextChannel, **options):
+        super().__init__(channel)
 
         self.header = options.get("header", "Please Wait")
         self.colour = options.get("colour", 0xf90a7d)
@@ -70,7 +83,7 @@ class LoadingBar(EditableEmbed):
         self._message_future = None
 
     @property
-    def avg_time(self):
+    def avg_time(self) -> Optional[float]:
         return (sum(self.times) / len(self.times)) if self.times else None
 
     def time_it(self):
@@ -79,7 +92,7 @@ class LoadingBar(EditableEmbed):
 
         self._current_time = time.time()
 
-    def build_next_embed(self):
+    def build_next_embed(self) -> Embed:
         if not self._current_embed:
             self._current_embed = Embed(title=self.header, colour=self.colour, **self.custom_embed_data)
 
@@ -105,7 +118,7 @@ class LoadingBar(EditableEmbed):
 
         return self._current_embed
 
-    async def set_progress(self, percentage):
+    async def set_progress(self, percentage: float):
         self.time_it()
 
         self.progress = percentage
@@ -115,142 +128,7 @@ class LoadingBar(EditableEmbed):
         if self._message_future:
             await self._message_future
 
-        self._message_future = asyncio.ensure_future(self.update_message(next_embed))
+        self._message_future = asyncio.ensure_future(self.edit(next_embed))
 
     async def done(self):
-        await self.exit()
-
-
-class ItemPicker(EditableEmbed):
-    """
-        Keyword arguments:
-        user -- user to respond to
-        items -- list of Embeds to use
-        item_callback -- function to call which returns an Embed
-    """
-
-    emojis = ("◀", "▶", "✅", "❎")
-    abort = "❎"
-    select = "✅"
-
-    _prev = "◀"
-    _next = "▶"
-
-    def __init__(self, bot, channel, user=None, **kwargs):
-        super().__init__()
-
-        self.bot = bot
-        self.channel = channel
-        self.user = user
-
-        self.items = kwargs.get("items")
-        self.item_callback = kwargs.get("item_callback")
-
-        self._current_index = 0
-
-    @property
-    async def next_item(self):
-        if self.items:
-            return self.items[self._current_index % len(self.items)]
-        elif self.item_callback:
-            res = self.item_callback(self._current_index)
-
-            if asyncio.iscoroutine(res):
-                res = await res
-
-            return res
-
-    async def add_reactions(self, msg):
-        for emoji in ItemPicker.emojis:
-            await self.bot.add_reaction(msg, emoji)
-
-    async def result(self):
-        while True:
-            next_embed = await self.next_item
-            await self.update_message(next_embed, on_new=self.add_reactions)
-
-            reaction, user = await ui_utils.wait_for_reaction_change(emoji=ItemPicker.emojis, user=self.user, message=self._interface_message)
-
-            emoji = reaction.emoji
-
-            if emoji == ItemPicker.abort:
-                await self.exit()
-                return None
-
-            elif emoji == ItemPicker.select:
-                await self.exit()
-                return self._current_index
-
-            elif emoji == ItemPicker._prev:
-                self._current_index -= 1
-            elif emoji == ItemPicker._next:
-                self._current_index += 1
-
-
-class EmbedViewer(EditableEmbed):
-    """
-        Keyword arguments:
-        user -- user to respond to
-        embeds -- list of Embeds to use
-        embed_callback -- function to call which returns an Embed based on the current index
-    """
-
-    emojis = ("◀", "▶", "❎")
-    abort = "❎"
-
-    _prev = "◀"
-    _next = "▶"
-
-    def __init__(self, bot, channel, user=None, **kwargs):
-        super().__init__()
-
-        self.bot = bot
-        self.channel = channel
-        self.user = user
-
-        self.embeds = kwargs.get("embeds")
-        self.embed_callback = kwargs.get("embed_callback")
-
-        self._current_index = 0
-
-    @property
-    async def next_embed(self):
-        if self.embeds:
-            return self.embeds[self._current_index % len(self.embeds)]
-        elif self.embed_callback:
-            res = self.embed_callback(self._current_index)
-
-            if asyncio.iscoroutine(res):
-                res = await res
-
-            return res
-
-    async def add_reactions(self, msg):
-        for emoji in EmbedViewer.emojis:
-            await self.bot.add_reaction(msg, emoji)
-
-    async def display(self):
-        while True:
-            next_embed = await self.next_embed
-            await self.update_message(next_embed, on_new=self.add_reactions)
-
-            reaction, user = await ui_utils.wait_for_reaction_change(emoji=EmbedViewer.emojis, user=self.user, message=self._interface_message)
-
-            emoji = reaction.emoji
-
-            if emoji == EmbedViewer.abort:
-                await self.exit()
-                return None
-
-            elif emoji == EmbedViewer._prev:
-                self._current_index -= 1
-            elif emoji == EmbedViewer._next:
-                self._current_index += 1
-
-
-class VerticalEmbedViewer(EmbedViewer):
-    emojis = ("🔼", "🔽", "❎")
-    abort = "❎"
-
-    _prev = "🔼"
-    _next = "🔽"
+        await self.delete()

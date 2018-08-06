@@ -38,7 +38,7 @@ class AdminTools:
         try:
             exec(statement, env)
         except SyntaxError as e:
-            await ctx.send("**While compiling the statement the following error occured**\n{}\n{}".format(traceback.format_exc(), str(e)))
+            await ctx.send("**While compiling the statement the following error occurred**\n{}\n{}".format(traceback.format_exc(), str(e)))
             return
 
         func = env["func"]
@@ -47,7 +47,7 @@ class AdminTools:
             with redirect_stdout(console):
                 ret = await func()
         except Exception as e:
-            await ctx.send("**While executing the statement the following error occured**\n{}\n{}".format(traceback.format_exc(), str(e)))
+            await ctx.send("**While executing the statement the following error occurred**\n{}\n{}".format(traceback.format_exc(), str(e)))
             return
 
         res = str(ret)

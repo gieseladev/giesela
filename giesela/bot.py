@@ -11,7 +11,7 @@ from discord.ext.commands import AutoShardedBot, CommandError, Context
 from . import cogs, exceptions, reporting
 from .config import Config, ConfigDefaults
 from .constants import ABS_AUDIO_CACHE_PATH, VERSION as BOTVERSION
-from .lib.ui import ui_utils
+from .lib.ui import events
 from .saved_playlists import Playlists
 from .web_author import WebAuthor
 
@@ -132,7 +132,7 @@ class Giesela(AutoShardedBot):
         log.info("Ready to go!")
 
     async def on_reaction_remove(self, reaction, user):
-        await ui_utils.handle_reaction(reaction, user)
+        await events.handle_reaction(reaction, user)
 
     async def on_reaction_add(self, reaction, user):
-        await ui_utils.handle_reaction(reaction, user)
+        await events.handle_reaction(reaction, user)

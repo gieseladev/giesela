@@ -80,7 +80,7 @@ class GieselaWebSocket(WebSocket):
             try:
                 data = json.loads(self.data)
             except JSONDecodeError:
-                print("[WEBSOCKET] <{}> sent non-json: {}".format(self.address, self.data))
+                log.warning("[WEBSOCKET] <{}> sent non-json: {}".format(self.address, self.data))
                 return
 
             token = data.get("token", None)
