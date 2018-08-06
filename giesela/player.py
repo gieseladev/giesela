@@ -180,7 +180,8 @@ class MusicPlayer(EventEmitter):
             log.exception("Playback error")
 
         entry = self.current_entry
-        self.queue.push_history(entry)
+        if entry:
+            self.queue.push_history(entry)
         self._current_entry = None
 
         if not self.bot.config.save_videos and entry:
