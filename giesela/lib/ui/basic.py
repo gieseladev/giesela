@@ -8,6 +8,11 @@ from giesela import utils
 
 
 class EditableEmbed:
+    """
+    Args:
+        channel: Channel to send the message in
+        message: Optional message to use
+    """
     channel: TextChannel
     _message: Optional[Message]
 
@@ -39,16 +44,16 @@ class EditableEmbed:
 
 class LoadingBar(EditableEmbed):
     """
-        Keyword arguments:
-        header -- Embed's title
-        colour -- custom colour for the Embed
-        total_items -- display the amount of items to parse
-        show_time_left -- whether to display "time_left" (requires total_items to be set)
-        show_ipm -- whether to the amount of items per minute
-        item_name_plural -- item name put into plural form
-        show_percentage -- whether to show the current percentage
+        Keyword Args:
+            header: Embed's title
+            colour: custom colour for the Embed
+            total_items: display the amount of items to parse
+            show_time_left: whether to display "time_left" (requires total_items to be set)
+            show_ipm: whether to the amount of items per minute
+            item_name_plural: item name put into plural form
+            show_percentage: whether to show the current percentage
 
-        custom_embed_data -- data to pass over to the Embed
+            custom_embed_data: data to pass over to the Embed
     """
     header: str
     colour: int
@@ -61,6 +66,10 @@ class LoadingBar(EditableEmbed):
 
     progress: int
     times: List[float]
+
+    _current_time: int
+    _current_embed: Embed
+    _message_future: asyncio.Future
 
     def __init__(self, channel: TextChannel, **options):
         super().__init__(channel)

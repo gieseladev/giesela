@@ -81,8 +81,8 @@ class EnqueueCog(QueueBase):
 
             embeds.append(em)
 
-        item_picker = ItemPicker(self.bot, ctx.channel, user=ctx.author, items=embeds)
-        result = await item_picker.result()
+        item_picker = ItemPicker(ctx.channel, ctx.author, items=embeds)
+        result = await item_picker.choose()
 
         if result is None:
             await ctx.send("Okay then")
@@ -392,7 +392,7 @@ class EnqueueCog(QueueBase):
             entries_added = 0
             entries_not_added = 0
 
-            loading_bar = LoadingBar(self.bot, ctx.channel, header="Loading Playlist", total_items=total_tracks, item_name_plural="tracks")
+            loading_bar = LoadingBar(ctx.channel, header="Loading Playlist", total_items=total_tracks, item_name_plural="tracks")
 
             async for ind, entry in playlist.get_spotify_entries_generator(player.queue, channel=ctx.channel, author=ctx.author):
                 if entry:
