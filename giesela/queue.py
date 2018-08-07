@@ -308,15 +308,34 @@ class Queue(EventEmitter):
             video_description
         )
 
-        spotify_searcher = asyncio.Task(get_spotify_track(self.loop, clean_title))
-        vmg_searcher = asyncio.Task(get_vgm_track(self.loop, clean_title))
-        discogs_searcher = asyncio.Task(get_discogs_track(self.loop, clean_title))
+        spotify_searcher = asyncio.ensure_future(get_spotify_track(self.loop, clean_title))
+        vgm_searcher = asyncio.ensure_future(get_vgm_track(self.loop, clean_title))
+        discogs_searcher = asyncio.ensure_future(get_discogs_track(self.loop, clean_title))
 
-        await asyncio.wait([spotify_searcher, vmg_searcher, discogs_searcher])
+        spotify_track = None
+        vgm_track = None
+        discogs_track = None
 
-        spotify_track = spotify_searcher.result()
-        vgm_track = vmg_searcher.result()
-        discogs_track = discogs_searcher.result()
+        pending = (spotify_searcher, vgm_searcher, discogs_searcher)
+
+        while pending:
+            done, pending = await asyncio.wait(pending, return_when=asyncio.FIRST_COMPLETED, timeout=3)
+            done = next(iter(done), None)
+            if not done:
+                break
+
+            result = done.result()
+            if not result:
+                continue
+            if done is spotify_searcher:
+                spotify_track = result
+            elif done is vgm_searcher:
+                vgm_track = result
+            elif done is discogs_searcher:
+                discogs_track = result
+            else:
+                log.error(f"Couldn't identify searcher? Dunno...")
+            break
 
         if vgm_track:
             entry = VGMEntry(
@@ -324,7 +343,7 @@ class Queue(EventEmitter):
                 **vgm_track,
                 **meta
             )
-        elif spotify_track.certainty > .6:
+        elif spotify_track and spotify_track.certainty > .6:
             entry = SpotifyEntry(
                 *base_arguments,
                 spotify_track,
