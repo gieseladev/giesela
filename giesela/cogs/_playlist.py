@@ -7,12 +7,10 @@ from random import shuffle
 from discord import Embed
 from discord.ext.commands import Bot
 
-from giesela.entry import GieselaEntry, TimestampEntry, YoutubeEntry
+from giesela import ExtractionError, GieselaEntry, TimestampEntry, WrongEntryTypeError, YoutubeEntry
 from giesela.entry_updater import fix_entry, fix_generator
-from giesela.exceptions import ExtractionError, WrongEntryTypeError
 from giesela.lib.api.imgur import upload_playlist_cover, upload_song_image
-from giesela.utils import (Response, block_user, command_info, create_bar,
-                           format_time, hex_to_dec, is_image, nice_cut,
+from giesela.utils import (create_bar, format_time, is_image, nice_cut,
                            parse_timestamp, timestamp_to_queue, to_timestamp,
                            wrap_string)
 
@@ -1281,4 +1279,4 @@ class PlaylistCommands:
 
 
 def setup(bot: Bot):
-    pass
+    bot.add_cog(PlaylistCog(bot))

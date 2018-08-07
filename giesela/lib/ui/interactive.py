@@ -132,7 +132,6 @@ class _Abortable(Stoppable, metaclass=abc.ABCMeta):
 class _HorizontalPageViewer(InteractableEmbed, Startable, metaclass=abc.ABCMeta):
     """
     Keyword Args:
-        user: `User` to respond to
         embeds: list of `Embed` to use
         embed_callback: function to call which returns an `Embed` based on the current index
     """

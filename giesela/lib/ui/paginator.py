@@ -1,65 +1,85 @@
-from typing import Iterable, List
+from typing import Iterable, List, Optional
 
 from discord import Embed
 
-from .utils import copy_embed
+from . import utils
+from .utils import EmbedLimits
 
 
 class EmbedPaginator:
-    MAX_FIELDS = 25
-    MAX_FIELD_NAME = 256
-    MAX_FIELD_VALUE = 1024
-    MAX_TOTAL = 2000
+    """
+    Keyword Args:
+        template: Embed to use as a template
+        special_template: Embed to use for first embed
+        fields_per_embed: Amount of fields before using a new embed
+    """
+    template: Embed
+    fields_per_page: int
 
-    every_embed: Embed
-    first_embed: Embed
-
-    _cur_embed: Embed
+    _embed: Embed
     _embeds: List[Embed]
 
-    def __init__(self, *, first_embed: Embed = None, every_embed: Embed = None):
-        self.every_embed = every_embed or Embed()
-        self.first_embed = first_embed or self.every_embed
+    def __init__(self, **kwargs):
+        self.template = kwargs.pop("template", Embed())
+        _special_template = kwargs.pop("special_template", None)
+        if isinstance(_special_template, Embed):
+            self._first_embed = _special_template
+        elif isinstance(_special_template, dict):
+            self._special_template_map = _special_template
 
-        self._cur_embed = copy_embed(first_embed) if first_embed else self.create_embed()
+        self.fields_per_page = kwargs.get("fields_per_page", EmbedLimits.FIELDS_LIMIT)
+
         self._embeds = []
 
     def __str__(self) -> str:
         return f"<EmbedPaginator>"
 
+    def __len__(self) -> int:
+        return len(self._embeds)
+
     def __iter__(self) -> Iterable[Embed]:
-        return iter(self.embeds)
+        return iter(self._embeds)
 
-    @property
-    def predefined_count(self) -> int:
-        em = self._cur_embed
-        return len(em.title or "") + len(em.description or "") + len(em.author.name or "") + len(em.footer.text or "")
-
-    @property
-    def total_count(self) -> int:
-        return self.predefined_count + sum(len(field.name) + len(field.value) for field in self._cur_embed.fields)
+    def __getitem__(self, item: int) -> Embed:
+        return self._embeds[item]
 
     @property
     def embeds(self) -> List[Embed]:
-        self.close_embed()
         return self._embeds
 
-    def create_embed(self) -> Embed:
-        return copy_embed(self.every_embed)
+    @property
+    def current_embed(self) -> Optional[Embed]:
+        if self._embeds:
+            return self._embeds[-1]
 
-    def close_embed(self):
-        self._embeds.append(self._cur_embed)
-        self._cur_embed = self.create_embed()
+    def _add_embed(self) -> Embed:
+        template = None
+        number = len(self)
+
+        if number == 0:
+            template = getattr(self, "_first_embed", None)
+
+        if not template and hasattr(self, "_special_template_map"):
+            template = self._special_template_map.get(number)
+
+        template = template or self.template
+        embed = utils.copy_embed(template)
+        self._embeds.append(embed)
+        return embed
 
     def add_field(self, name: str, value: str, inline: bool = False):
-        if len(name) > self.MAX_FIELD_NAME:
-            raise ValueError(f"Field name mustn't be longer than {self.MAX_FIELD_NAME} characters")
-        if len(value) > self.MAX_FIELD_VALUE:
-            raise ValueError(f"Field value mustn't be longer than {self.MAX_FIELD_VALUE} characters")
-        count = len(name) + len(value)
-        if self.total_count + count > self.MAX_TOTAL:
-            self.close_embed()
-        em = self._cur_embed
-        em.add_field(name=name, value=value, inline=inline)
-        if len(em.fields) >= self.MAX_FIELDS:
-            self.close_embed()
+        embed = self.current_embed
+        if not embed:
+            embed = self._add_embed()
+
+        if len(name) > EmbedLimits.FIELD_NAME_LIMIT:
+            raise ValueError(f"Field name mustn't be longer than {EmbedLimits.FIELD_NAME_LIMIT} characters")
+        if len(value) > EmbedLimits.FIELD_VALUE_LIMIT:
+            raise ValueError(f"Field value mustn't be longer than {EmbedLimits.FIELD_VALUE_LIMIT} characters")
+
+        count = utils.count_embed_chars(embed) + len(name) + len(value)
+
+        if len(embed.fields) >= self.fields_per_page or count > EmbedLimits.CHAR_LIMIT:
+            embed = self._add_embed()
+
+        embed.add_field(name=name, value=value, inline=inline)

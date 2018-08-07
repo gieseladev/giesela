@@ -421,12 +421,12 @@ def find_cert_files() -> Tuple[Optional[str], Optional[str]]:
                 target = file.suffix[1:].lower()
             else:
                 target = file.name.lower()
-            if target in ("cert", "crt", "certificate"):
+            if target in ("cer", "cert", "crt", "certificate", "pem"):
                 certfile = str(file.absolute())
             elif target in ("private", "privatekey", "key", "keyfile"):
                 keyfile = str(file.absolute())
             else:
-                raise EnvironmentError(f"Can't distinguis certificate from keyfile in your cert folder ({folder})")
+                raise EnvironmentError(f"Can't distinguish public from private in your cert folder ({folder})")
         return certfile, keyfile
     else:
         raise EnvironmentError(f"Your certificates folder has too many files in it! ({folder})")

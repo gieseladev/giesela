@@ -422,11 +422,11 @@ class Queue(EventEmitter):
 
         return entry
 
-    async def get_next_entry(self, predownload_next=True):
+    async def get_next_entry(self, pre_download_next=True):
         """
             A coroutine which will return the next song or None if no songs left to play.
 
-            Additionally, if predownload_next is set to True, it will attempt to download the next
+            Additionally, if pre_download_next is set to True, it will attempt to download the next
             song to be played - so that it's ready by the time we get to it.
         """
         if not self.entries:
@@ -434,7 +434,7 @@ class Queue(EventEmitter):
 
         entry = self.entries.popleft()
 
-        if predownload_next:
+        if pre_download_next:
             next_entry = self.peek()
             if next_entry:
                 next_entry.get_ready_future()
@@ -449,7 +449,7 @@ class Queue(EventEmitter):
         except Exception:
             log.exception(f"Couldn't ready entry {entry}")
 
-        return await self.get_next_entry(predownload_next)
+        return await self.get_next_entry(pre_download_next)
 
     def peek(self):
         """

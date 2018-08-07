@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import sys
+from contextlib import suppress
 from textwrap import indent, wrap
 
 import aiohttp
@@ -11,7 +12,6 @@ from . import cogs, exceptions, reporting
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOT_VERSION
 from .lib.ui import events
-from .saved_playlists import Playlists
 from .web_author import WebAuthor
 
 log = logging.getLogger(__name__)
@@ -31,8 +31,6 @@ class Giesela(AutoShardedBot):
         self.aiosession = aiohttp.ClientSession(loop=self.loop)
         self.http.user_agent += f" Giesela/{BOT_VERSION}"
 
-        self.playlists = Playlists(ConfigDefaults.playlists_file)
-
         for ext in cogs.get_extensions():
             log.info(f"loading extension {ext}")
             self.load_extension(ext)
@@ -42,20 +40,16 @@ class Giesela(AutoShardedBot):
         await super().logout()
 
     def _cleanup(self):
-        try:
+        with suppress(Exception):
             self.loop.run_until_complete(self.logout())
-        except BaseException:  # Can be ignored
-            pass
 
         pending = asyncio.Task.all_tasks()
         gathered = asyncio.gather(*pending)
 
-        try:
+        with suppress(Exception):
             gathered.cancel()
             self.loop.run_until_complete(gathered)
             gathered.exception()
-        except BaseException:  # Can be ignored
-            pass
 
     def run(self):
         try:
@@ -87,7 +81,7 @@ class Giesela(AutoShardedBot):
         else:
             reporting.raven_client.captureException((type(exception), exception, exception.__traceback__))
 
-        log.exception("CommandError:", exc_info=(type(exception), exception, exception.__traceback__))
+        log.exception("CommandError:", exc_info=exception)
 
     async def on_ready(self):
         log.info(f"\rConnected!  Giesela v{BOT_VERSION}")
@@ -102,9 +96,7 @@ class Giesela(AutoShardedBot):
 
             lines = wrap(str(val), 100 - len(opt_string))
             if len(lines) > 1:
-                val_string = "{}\n{}\n".format(lines[0],
-                                               indent("\n".join(lines[1:]), len(opt_string) * " ")
-                                               )
+                val_string = "{}\n{}\n".format(lines[0], indent("\n".join(lines[1:]), len(opt_string) * " "))
             else:
                 val_string = lines[0]
 

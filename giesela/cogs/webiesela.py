@@ -8,7 +8,7 @@ from .player import Player
 
 log = logging.getLogger(__name__)
 
-LOAD_ORDER = 1
+LOAD_ORDER = 2
 
 
 class Webiesela:

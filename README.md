@@ -2,7 +2,8 @@
 
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/giesela/localized.svg)](https://crowdin.com/project/giesela)
 [![Build Status](https://travis-ci.org/GieselaDev/Giesela.svg?branch=refresh)](https://travis-ci.org/GieselaDev/Giesela)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/GieselaDev/Giesela/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/gieseladev/giesela.svg?branch=refresh)](https://github.com/GieselaDev/Giesela/blob/refresh/LICENSE)
+
 
 ## What is Refresh?
 This is the `refresh` version of Giesela. What does that mean exactly? Who knows...
@@ -10,24 +11,43 @@ Anyway, this is a stripped-down, containerised version of Giesela. It's still th
 old, crappy version of Giesela that ~~we've all~~  I've grown to hate, but at least it's
 containerised which -as we all know- improves everything by about 1000%...
 
+In all seriousness though, there have been some changes [listed here](#whats-new).
+While some might seem trivial, it is important to keep in mind that there are
+a lot of smaller/internal changes that aren't listed which -over time- add up to
+be quiet important.
+
+### Which version should I run?
+~~Neither tbh~~
+**This one!**
+
+
 ## Running
 Instead of making things hard, why don't we just ignore manual setup and go straight
 to something as easy as running a [Docker Container][docker-container].
 
 Get the official image from `giesela/giesela:refresh` and just run it!
 
+
 ## Configuration
 Configuring has never been as easy (maybe?)
 
-### Environment
-You can set the environment variables `token` to set the [Discord Bot Token][discord-token]
-and `command_prefix` to set the prefix for messages addressed to Giesela.
+### Environment Variables
+`token` **required**:
+    You need to set the [Discord Bot Token][discord-token] for Giesela to work.
+
+`google_api_key` **required**:
+    Api key for Google's API.
+    
+`command_prefix` *optional*:
+    Change set the prefix for messages addressed to Giesela (default "!").
+
 
 ### Volumes
 You can mount `/giesela/data` which holds the data for the configuration file,
 the playlists and the lyrics (I think that's everything)
 
 `/giesela/logs` holds the log files (if there even are any...)
+
 
 ### Secure Websockets for Webiesela
 Giesela Refresh ~~finally~~ supports SSL encryption for Webiesela. All you have to do
@@ -39,6 +59,7 @@ naming the files `CERTIFICATE` vs `PRIVATEKEY` / `KEYFILE` or you can just give 
 the suffix `.cert` vs `.key`. There are of course other possibilities, but I'm too lazy
 to name them all!
 
+
 ## What's new?
 - Better interface
     * Interactive Messages for Lyrics, Queue
@@ -48,6 +69,7 @@ to name them all!
 - Using [Discord.py's Commands framework][discordpy-commands]
 - Removed a bunch of commands (I know this doesn't really sound like a good thing, but
     most of these commands were useless or broken anyway)
+- New and improved playlist system
 
 
 [docker-container]: https://www.docker.com/what-container

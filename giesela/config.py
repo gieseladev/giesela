@@ -8,7 +8,7 @@ from typing import Any
 class ConfigDefaults:
     token = os.getenv("token")
 
-    google_api_key = "AIzaSyDb9eZgqs86NlNtekfFHKWN5jaaR-eZFQY"
+    google_api_key = os.getenv("google_api_key")
 
     html_parser = "html.parser"
 
@@ -22,14 +22,11 @@ class ConfigDefaults:
     }
 
     webiesela_port = 8000
+    start_webiesela = True
 
-    owner_id = None
     command_prefix = os.getenv("command_prefix", "!")
     voice_channel_home = None
-    bound_channels = set()
-    owned_channels = set()
     idle_game = ""
-    web_url = "http://giesela.org"
 
     client_language = "en-gb"
     server_languages = {}
@@ -41,18 +38,11 @@ class ConfigDefaults:
     volume_power = 3
     save_videos = True
     auto_pause = True
-    delete_messages = False
-    delete_invoking = False
-    debug_mode = True
-    start_webiesela = True
-    delete_unrelated_in_owned = False
 
     webiesela_cert = "data/cert"
     options_file = "data/options.ini"
     radios_file = "data/radio_stations.json"
-    playlists_file = "data/playlists.json"  # deprecated
-    playlists_location = "data/playlists"
-    settings_file = "data/settings.bin"
+    playlists_file = "data/playlists/playlists"
     lyrics_cache = "data/lyrics"
 
 
@@ -142,4 +132,4 @@ class Config(ConfigDefaults):
             super().__setattr__(key, value)
 
 
-static_config = Config(ConfigDefaults.options_file)
+static_config: Config = Config(ConfigDefaults.options_file)

@@ -5,23 +5,59 @@ from discord import Embed, Emoji
 EmojiType = Union[Emoji, str]
 
 
-def create_bar(progress: float, length: int = 10, *, full_char: str = "■", half_char: str = None, empty_char: str = "□"):
-    fill_to_double = round(2 * length * progress)
-    residue = fill_to_double % 2
-    fill_to = fill_to_double / 2
-    if half_char:
-        fill_to = int(fill_to)
-    else:
-        fill_to = round(fill_to)
+class EmbedLimits:
+    TITLE_LIMIT = 256
+    DESCRIPTION_LIMIT = 2048
+    FIELDS_LIMIT = 25
+    FIELD_NAME_LIMIT = 256
+    FIELD_VALUE_LIMIT = 1024
+    FOOTER_TEXT_LIMIT = 2048
+    AUTHOR_NAME_LIMIT = 256
 
-    full_bar = fill_to * full_char
-
-    if half_char and residue > 0:
-        full_bar += half_char
-
-    bar = full_bar.ljust(length, empty_char)
-    return bar
+    CHAR_LIMIT = 6000
 
 
 def copy_embed(embed: Embed) -> Embed:
     return Embed.from_data(embed.to_dict())
+
+
+def format_embed(embed: Embed, _copy=True, **fmt) -> Embed:
+    if _copy:
+        embed = copy_embed(embed)
+
+    if embed.title:
+        embed.title = embed.title.format(**fmt)
+
+    if embed.description:
+        embed.description = embed.description.format(**fmt)
+
+    if embed.author.name:
+        embed.author.name = embed.author.name.format(**fmt)
+
+    if embed.footer.text:
+        embed.footer.text = embed.footer.text(**fmt)
+
+    for i, field in enumerate(embed.fields):
+        embed.set_field_at(i, name=field.name.format(**fmt), value=field.value.format(**fmt), inline=field.inline)
+
+    return embed
+
+
+def count_embed_chars(embed: Embed) -> int:
+    count = 0
+
+    if embed.title:
+        count += len(embed.title)
+
+    if embed.description:
+        count += len(embed.description)
+
+    if embed.author.name:
+        count += len(embed.author.name)
+
+    if embed.footer.text:
+        count += len(embed.footer.text)
+
+    count += sum(len(field.name) + len(field.value) for field in embed.fields)
+
+    return count

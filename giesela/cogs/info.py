@@ -97,15 +97,15 @@ class Info:
 
 class GieselaHelpFormatter(HelpFormatter):
     async def format(self):
-        every_embed = Embed(colour=Colour.green())
-        first_embed = copy_embed(every_embed)
+        template_embed = Embed(colour=Colour.green())
+        first_embed = copy_embed(template_embed)
         first_embed.title = "Giesela Help"
 
         description = self.command.description if not self.is_cog() else inspect.getdoc(self.command)
         if description:
             first_embed.description = description
 
-        paginator = EmbedPaginator(first_embed=first_embed, every_embed=every_embed)
+        paginator = EmbedPaginator(template=template_embed, special_template=first_embed)
 
         def get_commands_text(_commands):
             max_width = self.max_name_size
