@@ -170,7 +170,6 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
     @emoji_handler("⏮", pos=1)
     async def prev_entry(self, *_):
         self.player.queue.replay(0, revert=True)
-        await self.trigger_update()
 
     @emoji_handler("⏪", pos=2)
     async def fast_rewind(self, *_):
@@ -192,7 +191,7 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         self.player.skip()
 
     async def slow_update(self):
-        await asyncio.sleep(1)
+        await asyncio.sleep(.5)
         await self.trigger_update()
 
     async def on_any_emoji(self, *_):

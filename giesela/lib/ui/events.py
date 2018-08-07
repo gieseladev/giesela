@@ -33,7 +33,7 @@ async def handle_reaction(reaction: Reaction, user: User):
 
 
 async def wait_for_reaction_change(emoji: Union[EmojiType, Iterable[EmojiType]] = None, *, user: User = None, timeout: float = None,
-                                   message: Message = None, check: Callable[[Reaction, User], bool] = None):
+                                   message: Message = None, check: Callable[[Reaction, User], bool] = None, allow_bots: bool = False):
     global _reaction_listeners
 
     if emoji is None:
@@ -47,7 +47,7 @@ async def wait_for_reaction_change(emoji: Union[EmojiType, Iterable[EmojiType]] 
             return r.emoji in emoji
 
     def predicate(reaction: Reaction, reaction_user: User) -> bool:
-        if reaction.me:
+        if reaction_user.bot and not allow_bots:
             return False
 
         result = emoji_check(reaction)

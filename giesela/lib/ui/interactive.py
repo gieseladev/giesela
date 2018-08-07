@@ -2,6 +2,7 @@ import abc
 import asyncio
 import copy
 import inspect
+import logging
 import operator
 import textwrap
 from asyncio import CancelledError
@@ -13,6 +14,8 @@ from . import events, utils
 from .abstract import Startable, Stoppable
 from .basic import EditableEmbed
 from .utils import EmojiType
+
+log = logging.getLogger(__name__)
 
 EmojiHandlerType = Callable[[EmojiType, User], Awaitable]
 _CT = TypeVar("_CT", bound=EmojiHandlerType)
@@ -107,6 +110,9 @@ class InteractableEmbed(EditableEmbed, Stoppable):
                 result = await self._listener
             except CancelledError:
                 pass
+            except Exception as e:
+                log.warning("Error while listening", exc_info=e)
+
         return result
 
     async def on_any_emoji(self, emoji: EmojiType, user: User):

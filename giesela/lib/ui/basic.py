@@ -3,7 +3,7 @@ import logging
 import time
 from typing import Any, Awaitable, Callable, List, Optional, Union
 
-from discord import Embed, Message, TextChannel
+from discord import Embed, Message, NotFound, TextChannel
 
 from giesela import utils
 from .abstract import Startable, Stoppable
@@ -34,16 +34,21 @@ class EditableEmbed:
             await self.message.delete()
 
     async def edit(self, embed: Embed, on_new: Callable[[Message], Any] = None):
-        if not self.message:
-            self._message = await self.channel.send(embed=embed)
+        if self.message:
+            try:
+                await self._message.edit(embed=embed)
+            except NotFound:
+                log.warning(f"message for {self} was deleted")
+            else:
+                return
 
-            if callable(on_new):
-                res = on_new(self.message)
+        self._message = await self.channel.send(embed=embed)
 
-                if asyncio.iscoroutine(res):
-                    await res
-        else:
-            await self._message.edit(embed=embed)
+        if callable(on_new):
+            res = on_new(self.message)
+
+            if asyncio.iscoroutine(res):
+                await res
 
 
 class LoadingBar(EditableEmbed):
@@ -203,6 +208,8 @@ class IntervalUpdatingMessage(UpdatingMessage, Startable, Stoppable):
                     self._runner_ready.set()
 
                 await asyncio.sleep(self.interval)
+            except asyncio.CancelledError:
+                return
             except Exception:
                 if self._runner_ready.is_set():
                     log.exception("Error in loop")
