@@ -47,6 +47,9 @@ async def wait_for_reaction_change(emoji: Union[EmojiType, Iterable[EmojiType]] 
             return r.emoji in emoji
 
     def predicate(reaction: Reaction, reaction_user: User) -> bool:
+        if reaction.me:
+            return False
+
         result = emoji_check(reaction)
 
         if message is not None:
