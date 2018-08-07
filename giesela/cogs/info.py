@@ -33,13 +33,13 @@ class Info:
                     "● " + l for l in get_version_changelog()
                 )
 
-            desc = "Current Version is `{}`\nDevelopment is at `{}`\n\n{}".format(
-                BOTVERSION, dev_code + "_" + dev_name, changelog)[:2000]
+        desc = "Current Version is `{}`\nDevelopment is at `{}`\n\n{}".format(
+            BOTVERSION, dev_code + "_" + dev_name, changelog)[:2000]
 
-            em = Embed(title="Version \"{}\"".format(v_name.replace("_", " ").title()), description=desc,
-                       url="https://gieseladev.github.io/Giesela", colour=0x67BE2E)
+        em = Embed(title="Version \"{}\"".format(v_name.replace("_", " ").title()), description=desc,
+                   url="https://gieseladev.github.io/Giesela", colour=0x67BE2E)
 
-            await ctx.send(embed=em)
+        await ctx.send(embed=em)
 
     @commands.command()
     async def help(self, ctx, *cmds):

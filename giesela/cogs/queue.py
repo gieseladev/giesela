@@ -37,77 +37,77 @@ class QueueBase:
 
 
 async def _play_url(ctx: Context, player: MusicPlayer, url: str, placement: int = None):
-    async with ctx.typing():
-        query = url.strip("<>")
+    query = url.strip("<>")
 
-        try:
+    try:
+        async with ctx.typing():
             entry = await player.queue.get_entry_from_query(query, author=ctx.author, channel=ctx.channel)
-        except BaseException as e:
-            raise commands.CommandError("There was a tiny problem with your request:\n```\n{}\n```".format(e))
+    except BaseException as e:
+        raise commands.CommandError("There was a tiny problem with your request:\n```\n{}\n```".format(e))
 
-        if not entry:
-            await ctx.send("Couldn't find anything for me to add")
-            return
+    if not entry:
+        await ctx.send("Couldn't find anything for me to add")
+        return
 
-        if isinstance(entry, list):
-            print("[PLAY] This is a playlist!")
-            # playlist handling
-            entries_added = 0
-            entries_not_added = 0
+    if isinstance(entry, list):
+        print("[PLAY] This is a playlist!")
+        # playlist handling
+        entries_added = 0
+        entries_not_added = 0
 
-            entry_generator = player.queue.get_entries_from_urls_gen(*entry, author=ctx.author, channel=ctx.channel)
+        entry_generator = player.queue.get_entries_from_urls_gen(*entry, author=ctx.author, channel=ctx.channel)
 
-            total_entries = len(entry)
-            progress_message = await ctx.send("Parsing {} entries\n{} [0%]".format(total_entries, create_bar(0, length=20)))
-            times = []
-            abs_start = time.time()
-            start_time = abs_start
+        total_entries = len(entry)
+        progress_message = await ctx.send("Parsing {} entries\n{} [0%]".format(total_entries, create_bar(0, length=20)))
+        times = []
+        abs_start = time.time()
+        start_time = abs_start
 
-            progress_message_future = None
+        progress_message_future = None
 
-            async for ind, entry in entry_generator:
-                if entry:
-                    player.queue._add_entry(entry, placement)
-                    entries_added += 1
-                else:
-                    entries_not_added += 1
+        async for ind, entry in entry_generator:
+            if entry:
+                player.queue._add_entry(entry, placement)
+                entries_added += 1
+            else:
+                entries_not_added += 1
 
-                times.append(time.time() - start_time)
-                start_time = time.time()
+            times.append(time.time() - start_time)
+            start_time = time.time()
 
-                if not progress_message_future or progress_message_future.done():
-                    avg_time = sum(times) / float(len(times))
-                    entries_left = total_entries - ind - 1
-                    expected_time = format_time(
-                        avg_time * entries_left,
-                        max_specifications=1,
-                        unit_length=1
-                    )
-                    completion_ratio = (ind + 1) / total_entries
+            if not progress_message_future or progress_message_future.done():
+                avg_time = sum(times) / float(len(times))
+                entries_left = total_entries - ind - 1
+                expected_time = format_time(
+                    avg_time * entries_left,
+                    max_specifications=1,
+                    unit_length=1
+                )
+                completion_ratio = (ind + 1) / total_entries
 
-                    progress_message_future = asyncio.ensure_future(
-                        progress_message.edit(content="Parsing {} entr{} at {} entries/min\n{} [{}%]\n{} remaining".format(
-                            entries_left,
-                            "y" if entries_left == 1 else "ies",
-                            round(60 / avg_time, 1),
-                            create_bar(completion_ratio, length=20),
-                            round(100 * completion_ratio),
-                            expected_time
-                        ))
-                    )
+                progress_message_future = asyncio.ensure_future(
+                    progress_message.edit(content="Parsing {} entr{} at {} entries/min\n{} [{}%]\n{} remaining".format(
+                        entries_left,
+                        "y" if entries_left == 1 else "ies",
+                        round(60 / avg_time, 1),
+                        create_bar(completion_ratio, length=20),
+                        round(100 * completion_ratio),
+                        expected_time
+                    ))
+                )
 
-            delta_time = time.time() - abs_start
+        delta_time = time.time() - abs_start
 
-            progress_message_future.cancel()
-            await progress_message.delete()
-            await ctx.send("Added {} entries to the queue\nSkipped {} entries\nIt took {} to add all entries".format(
-                entries_added,
-                entries_not_added,
-                format_time(delta_time, unit_length=1)
-            ))
-        else:
-            player.queue._add_entry(entry, placement)
-            await ctx.send("Enqueued **{}**".format(entry.title))
+        progress_message_future.cancel()
+        await progress_message.delete()
+        await ctx.send("Added {} entries to the queue\nSkipped {} entries\nIt took {} to add all entries".format(
+            entries_added,
+            entries_not_added,
+            format_time(delta_time, unit_length=1)
+        ))
+    else:
+        player.queue._add_entry(entry, placement)
+        await ctx.send("Enqueued **{}**".format(entry.title))
 
 
 class EnqueueCog(QueueBase):
@@ -124,7 +124,7 @@ class EnqueueCog(QueueBase):
 
         async with ctx.typing():
             await player.queue.add_stream_entry(song_url, channel=ctx.channel, author=ctx.author)
-            await ctx.send(":+1:")
+        await ctx.send(":+1:")
 
     @commands.group(inovke_without_command=True)
     async def radio(self, ctx: Context, station: str = None):
@@ -224,20 +224,19 @@ class EnqueueCog(QueueBase):
         search_query = "ytsearch{}:{}".format(number, query)
 
         search_msg = await ctx.send("Searching for videos...")
-        async with ctx.typing():
-            try:
+        try:
+            async with ctx.typing():
                 info = await self.downloader.extract_info(
                     player.queue.loop,
                     search_query,
                     download=False,
                     process=True
                 )
-
-            except Exception as e:
-                await search_msg.edit(content=str(e))
-                return
-            else:
-                await search_msg.delete()
+        except Exception as e:
+            await search_msg.edit(content=str(e))
+            return
+        else:
+            await search_msg.delete()
 
         if not info:
             await ctx.send("No videos found.")
@@ -289,10 +288,9 @@ class EnqueueCog(QueueBase):
                 current_result_index += {"n": 1, "p": -1}[command]
                 current_result_index %= total_results
             elif command == "play":
-                async with ctx.typing():
-                    await _play_url(ctx, player, current_result["webpage_url"])
-                    await delete_msgs()
-                    await ctx.send("Alright, coming right up!")
+                await _play_url(ctx, player, current_result["webpage_url"])
+                await delete_msgs()
+                await ctx.send("Alright, coming right up!")
                 return
 
             await delete_msgs()
