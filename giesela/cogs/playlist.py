@@ -26,6 +26,9 @@ class Playlist:
     @playlist.command("show", aliases=["showall", "all"])
     async def playlist_show(self, ctx: Context):
         """Show all the playlists"""
+        if not self.playlist_manager:
+            raise commands.CommandError("No playlists!")
+        
         template = Embed(title="Playlists", colour=Colour.blue())
         paginator = EmbedPaginator(template=template, fields_per_page=5)
 

@@ -109,6 +109,11 @@ class Playlist:
 
     def init(self):
         pass
+        # TODO decide whether we need this
+        # TODO automatic cover generation
+        # TODO manipulating
+        # TODO playing!
+
 
     @classmethod
     def from_gpl(cls, manager: "PlaylistManager", data: dict) -> "Playlist":
@@ -162,6 +167,8 @@ class PlaylistManager:
             playlist.manager = self
             self._playlists[playlist.gpl_id] = playlist
 
+        log.debug(f"playlist manager ready ({len(self)} loaded)")
+
     def __len__(self) -> int:
         return len(self._playlists)
 
@@ -184,7 +191,6 @@ class PlaylistManager:
     def init(self):
         for playlist in self.playlists:
             playlist.init()
-        log.debug(f"playlist manager ready ({len(self)} loaded)")
 
     def import_from_gpl(self, playlist: Union[dict, str]) -> Optional[Playlist]:
         if isinstance(playlist, str):
@@ -204,8 +210,7 @@ class PlaylistManager:
         playlist.save()
 
     def save_playlist(self, playlist: Playlist):
-        if playlist.gpl_id in self._playlists:
-            self._playlists[playlist.gpl_id] = playlist
+        self._playlists[playlist.gpl_id] = playlist
         self.storage[playlist.gpl_id.hex] = playlist
 
     def get_playlist(self, gpl_id: UUIDType, default: Any = _DEFAULT) -> Optional[Playlist]:

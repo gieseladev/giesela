@@ -135,6 +135,7 @@ class Player:
             WebieselaServer.send_player_information(player.channel.guild.id)
 
     async def update_now_playing(self, entry=None, is_paused=False):
+        # TODO fix
         game = None
 
         active_players = sum(1 for p in self.players.values() if p.is_playing)
@@ -158,6 +159,7 @@ class Player:
         await self.bot.change_presence(activity=game)
 
     async def on_voice_state_update(self, member: Member, before: VoiceState, after: VoiceState):
+        # TODO don't start playing when alone in channel from the start
         giesela_voice = member.guild.me.voice
         if not giesela_voice:
             return

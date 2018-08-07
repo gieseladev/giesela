@@ -10,7 +10,7 @@ from typing import Any, Awaitable, Callable, Dict, List, Optional, Tuple, TypeVa
 
 from discord import Embed, Message, TextChannel, User
 
-from . import events, utils
+from . import events, text
 from .abstract import Startable, Stoppable
 from .basic import EditableEmbed
 from .utils import EmojiType
@@ -340,7 +340,7 @@ class VerticalTextViewer(InteractableEmbed, _Abortable):
         f_args = dict(viewer=self,
                       current_line=self.current_line + 1,
                       total_lines=self.total_lines,
-                      progress_bar=utils.create_bar(_progress, min(self.window_width, 30)))
+                      progress_bar=text.create_bar(_progress, min(self.window_width, 30)))
 
         def format_rich(rich: str, attr: str):
             nonlocal embed, f_args
