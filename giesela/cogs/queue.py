@@ -8,11 +8,12 @@ from discord import Embed, Message
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Downloader, Giesela, GieselaEntry, MusicPlayer, RadioSongEntry, RadioSongExtractor, RadioStationEntry, RadioStations, StreamEntry, \
-    TimestampEntry, WebieselaServer, YoutubeEntry, get_all_stations, get_random_station
+from giesela import Downloader, Giesela, MusicPlayer, RadioSongExtractor, RadioStations, TimestampEntry, WebieselaServer, get_all_stations, \
+    get_random_station
 from giesela.lib.api import spotify
 from giesela.lib.ui import ItemPicker, LoadingBar, VerticalTextViewer
-from giesela.utils import (create_bar, format_time, html2md, nice_cut, ordinal, to_timestamp)
+from giesela.lib.ui.custom import NowPlayingEmbed
+from giesela.utils import (create_bar, format_time, html2md, nice_cut)
 from .player import Player
 
 LOAD_ORDER = 1
@@ -35,7 +36,7 @@ class QueueBase:
         return await self.player_cog.get_player(*args, **kwargs)
 
 
-async def _play_url(ctx: Context, player: MusicPlayer, url: str, placement=None):
+async def _play_url(ctx: Context, player: MusicPlayer, url: str, placement: int = None):
     async with ctx.typing():
         query = url.strip("<>")
 
@@ -194,6 +195,8 @@ class EnqueueCog(QueueBase):
                 placement = "random"
             elif placement.isnumeric():
                 placement = int(placement) - 1
+            else:
+                raise commands.CommandError("Invalid placement. Did you forget to put quotes around your query?")
 
         await _play_url(ctx, player, url, placement)
 
@@ -535,7 +538,7 @@ class ManipulateCog(QueueBase):
 
 
 class DisplayCog(QueueBase):
-    np_messages: Dict[int, Message]
+    np_messages: Dict[int, NowPlayingEmbed]
 
     def __init__(self, bot: Giesela):
         super().__init__(bot)
@@ -545,150 +548,15 @@ class DisplayCog(QueueBase):
     @commands.command()
     async def np(self, ctx: Context):
         """Show the current entry."""
+        np_embed = self.np_messages.get(ctx.guild.id)
+        if np_embed:
+            await np_embed.delete()
+
         player = await self.get_player(ctx)
+        np_embed = NowPlayingEmbed(ctx.channel, player)
+        self.np_messages[ctx.guild.id] = np_embed
 
-        if not player.current_entry:
-            raise commands.CommandError("Nothin playing")
-
-        entry = player.current_entry
-
-        if isinstance(entry, RadioSongEntry):
-            progress_ratio = entry.song_progress / \
-                             (entry.song_duration or 1)
-            desc = "{} `[{}/{}]`".format(
-                create_bar(progress_ratio, length=20),
-                to_timestamp(entry.song_progress),
-                to_timestamp(entry.song_duration)
-            )
-            foot = "🔴 Live from {}".format(entry.station_name)
-
-            em = Embed(
-                title=entry.title,
-                description=desc,
-                url=entry.link,
-                colour=0xa23dd1
-            )
-
-            em.set_footer(text=foot)
-            em.set_thumbnail(url=entry.cover)
-            em.set_author(
-                name=entry.artist
-            )
-        elif isinstance(entry, RadioStationEntry):
-            desc = "`{}`".format(
-                to_timestamp(player.progress)
-            )
-            foot = "🔴 Live from {}".format(entry.station_name)
-
-            em = Embed(
-                title=entry.title,
-                description=desc,
-                url=entry.link,
-                colour=0xbe7621
-            )
-
-            em.set_footer(text=foot)
-            em.set_thumbnail(url=entry.cover)
-        elif isinstance(entry, StreamEntry):
-            desc = "🔴 Live [`{}`]".format(to_timestamp(player.progress))
-
-            em = Embed(
-                title=entry.title,
-                description=desc,
-                colour=0xa23dd1
-            )
-        elif isinstance(entry, GieselaEntry):
-            artist_name = entry.artist
-            artist_avatar = entry.artist_image
-            progress_ratio = player.progress / entry.end_seconds
-            desc = "{} `[{}/{}]`".format(
-                create_bar(progress_ratio, length=20),
-                to_timestamp(player.progress),
-                to_timestamp(entry.end_seconds)
-            )
-
-            em = Embed(
-                title=entry.song_title,
-                description=desc,
-                url=entry.url,
-                colour=0xF9FF6E
-            )
-
-            em.set_thumbnail(url=entry.cover)
-            em.set_author(
-                name=artist_name,
-                icon_url=artist_avatar
-            )
-            em.add_field(name="Album", value=entry.album)
-        elif isinstance(entry, TimestampEntry):
-            sub_entry = entry.current_sub_entry
-            index = sub_entry["index"] + 1
-            progress_ratio = sub_entry["progress"] / sub_entry["duration"]
-            desc = "{} `[{}/{}]`".format(
-                create_bar(progress_ratio, length=20),
-                to_timestamp(sub_entry["progress"]),
-                to_timestamp(sub_entry["duration"])
-            )
-            foot = "{}{} sub-entry of \"{}\" [{}/{}]".format(
-                index,
-                ordinal(index),
-                entry.whole_title,
-                to_timestamp(player.progress),
-                to_timestamp(entry.end_seconds)
-            )
-
-            em = Embed(
-                title=sub_entry["name"],
-                description=desc,
-                url=entry.url,
-                colour=0x00FFFF
-            )
-
-            em.set_footer(text=foot)
-            em.set_thumbnail(url=entry.thumbnail)
-            if "playlist" in entry.meta:
-                pl = entry.meta["playlist"]
-                em.set_author(name=pl["name"], icon_url=pl.get("cover", None) or Embed.Empty)
-            elif "author" in entry.meta:
-                author = entry.meta["author"]
-                em.set_author(
-                    name=author.display_name,
-                    icon_url=author.avatar_url
-                )
-        elif isinstance(entry, YoutubeEntry):
-            progress_ratio = player.progress / entry.end_seconds
-            desc = "{} `[{}/{}]`".format(
-                create_bar(progress_ratio, length=20),
-                to_timestamp(player.progress),
-                to_timestamp(entry.end_seconds)
-            )
-
-            em = Embed(
-                title=entry.title,
-                description=desc,
-                url=entry.url,
-                colour=0xa9b244
-            )
-
-            em.set_thumbnail(url=entry.thumbnail)
-            if "playlist" in entry.meta:
-                pl = entry.meta["playlist"]
-                em.set_author(name=pl["name"], icon_url=pl.get("cover", None) or Embed.Empty)
-            elif "author" in entry.meta:
-                author = entry.meta["author"]
-                em.set_author(
-                    name=author.display_name,
-                    icon_url=author.avatar_url
-                )
-        else:
-            await ctx.send("what the hell are you playing?")
-            return
-
-        msg = self.np_messages.get(ctx.guild.id)
-        if msg:
-            await msg.edit(embed=em)
-        else:
-            self.np_messages[ctx.guild.id] = await ctx.send(embed=em)
+        await np_embed.start()
 
     @commands.command()
     async def queue(self, ctx: Context):

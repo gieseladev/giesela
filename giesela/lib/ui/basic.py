@@ -1,10 +1,14 @@
 import asyncio
+import logging
 import time
-from typing import Any, Callable, List, Optional
+from typing import Any, Awaitable, Callable, List, Optional, Union
 
 from discord import Embed, Message, TextChannel
 
 from giesela import utils
+from .abstract import Startable, Stoppable
+
+log = logging.getLogger(__name__)
 
 
 class EditableEmbed:
@@ -72,17 +76,16 @@ class LoadingBar(EditableEmbed):
     _message_future: asyncio.Future
 
     def __init__(self, channel: TextChannel, **options):
-        super().__init__(channel)
+        self.header = options.pop("header", "Please Wait")
+        self.colour = options.pop("colour", 0xf90a7d)
+        self.total_items = options.pop("total_items", None)
+        self.show_time_left = options.pop("show_time_left", True)
+        self.show_ipm = options.pop("show_ipm", True)
+        self.item_name_plural = options.pop("item_name_plural", "items")
+        self.show_percentage = options.pop("show_percentage", True)
 
-        self.header = options.get("header", "Please Wait")
-        self.colour = options.get("colour", 0xf90a7d)
-        self.total_items = options.get("total_items", None)
-        self.show_time_left = options.get("show_time_left", True)
-        self.show_ipm = options.get("show_ipm", True)
-        self.item_name_plural = options.get("item_name_plural", "items")
-        self.show_percentage = options.get("show_percentage", True)
-
-        self.custom_embed_data = options.get("custom_embed_data", {})
+        self.custom_embed_data = options.pop("custom_embed_data", {})
+        super().__init__(channel, **options)
 
         self.progress = 0
         self.times = []
@@ -141,3 +144,89 @@ class LoadingBar(EditableEmbed):
 
     async def done(self):
         await self.delete()
+
+
+class UpdatingMessage(EditableEmbed):
+    """
+    Keyword Args:
+        callback: Callable to call for a new Embed
+    """
+    callback: Optional[Callable[..., Union[Embed, Awaitable[Embed]]]]
+
+    def __init__(self, channel: TextChannel, **kwargs):
+        self.callback = kwargs.pop("callback", None)
+        super().__init__(channel, **kwargs)
+
+    async def get_embed(self) -> Embed:
+        if not self.callback:
+            raise ValueError("No Callback given")
+
+        embed = self.callback()
+        if asyncio.iscoroutine(embed):
+            embed = await embed
+        return embed
+
+    async def on_create_message(self, msg: Message):
+        pass
+
+    async def trigger_update(self):
+        await self.edit(await self.get_embed(), on_new=self.on_create_message)
+
+
+class IntervalUpdatingMessage(UpdatingMessage, Startable, Stoppable):
+    """
+    Keyword Args:
+        interval: Amount of seconds to wait between update
+    """
+    interval: int
+
+    _runner: Optional[asyncio.Task]
+    _runner_ready: asyncio.Event
+
+    def __init__(self, channel: TextChannel, **kwargs):
+        self.interval = kwargs.pop("interval", 5)
+        super().__init__(channel, **kwargs)
+
+        self._runner = None
+        self._runner_ready = asyncio.Event()
+
+    async def _run_loop(self):
+        _last_updater: Optional[asyncio.Task] = None
+        while True:
+            try:
+                if _last_updater and not _last_updater.done():
+                    await _last_updater
+                _last_updater = asyncio.ensure_future(self.trigger_update())
+
+                if not self._runner_ready.is_set():
+                    await _last_updater
+                    self._runner_ready.set()
+
+                await asyncio.sleep(self.interval)
+            except Exception:
+                if self._runner_ready.is_set():
+                    log.exception("Error in loop")
+                else:
+                    self._runner_ready.set()
+                    raise
+
+    async def start(self):
+        if self._runner:
+            raise ValueError("Already running!")
+        self._runner_ready.clear()
+        self._runner = asyncio.ensure_future(self._run_loop())
+        await self._runner_ready.wait()
+        exc = self._runner.done() and self._runner.exception()
+        if exc:
+            raise exc
+
+        await super().start()
+
+    async def stop(self):
+        if self._runner:
+            self._runner.cancel()
+        await super().stop()
+
+    async def delete(self):
+        await self.stop()
+        await super().delete()

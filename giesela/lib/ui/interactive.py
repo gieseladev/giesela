@@ -4,12 +4,13 @@ import copy
 import inspect
 import operator
 import textwrap
-from asyncio import CancelledError, Future
+from asyncio import CancelledError
 from typing import Any, Awaitable, Callable, Dict, List, Optional, Tuple, TypeVar, Union
 
 from discord import Embed, Message, TextChannel, User
 
 from . import events, utils
+from .abstract import Startable, Stoppable
 from .basic import EditableEmbed
 from .utils import EmojiType
 
@@ -26,17 +27,16 @@ def emoji_handler(*reactions: EmojiType, pos: int = None):
     return decorator
 
 
-class InteractableEmbed(EditableEmbed):
+class InteractableEmbed(EditableEmbed, Stoppable):
     user: Optional[User]
     handlers: Dict[EmojiType, EmojiHandlerType]
 
     _emojis: List[Tuple[EmojiType, int]]
     _stop_signal: bool
-    _listener: Future
+    _listener: asyncio.Task
 
-    def __init__(self, channel: TextChannel, user: User = None):
-        super().__init__(channel)
-
+    def __init__(self, channel: TextChannel, user: User = None, **kwargs):
+        super().__init__(channel, **kwargs)
         self.user = user
         self.handlers = {}
         self._emojis = []
@@ -63,10 +63,19 @@ class InteractableEmbed(EditableEmbed):
             pos = 10
         self._emojis.append((emoji, pos))
 
-    def stop(self, force=False):
+    async def stop(self):
         self._stop_signal = True
-        if force and self._listener:
+
+        await super().stop()
+
+    def cancel(self):
+        if self._listener:
             self._listener.cancel()
+
+    async def delete(self):
+        self.cancel()
+        await self.stop()
+        await super().delete()
 
     async def add_reactions(self, msg: Message = None):
         if not msg:
@@ -93,7 +102,7 @@ class InteractableEmbed(EditableEmbed):
 
         result = None
         while not self._stop_signal:
-            self._listener = self.listen_once()
+            self._listener = asyncio.ensure_future(self.listen_once())
             try:
                 result = await self._listener
             except CancelledError:
@@ -107,18 +116,14 @@ class InteractableEmbed(EditableEmbed):
         pass
 
 
-class _Abortable(metaclass=abc.ABCMeta):
-    @abc.abstractmethod
-    def stop(self):
-        pass
-
+class _Abortable(Stoppable, metaclass=abc.ABCMeta):
     @emoji_handler("❎", pos=1000)
     async def abort(self, *_) -> None:
-        self.stop()
+        await self.stop()
         return None
 
 
-class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
+class _HorizontalPageViewer(InteractableEmbed, Startable, metaclass=abc.ABCMeta):
     """
     Keyword Args:
         user: `User` to respond to
@@ -133,12 +138,12 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
         self.embeds = kwargs.pop("embeds", None)
         self.embed_callback = kwargs.pop("embed_callback", None)
+        super().__init__(channel, user, **kwargs)
 
         if not (bool(self.embeds) ^ bool(self.embed_callback)):
             raise ValueError("You need to provide either the `embeds` or the `embed_callback` keyword argument")
 
         self._current_index = 0
-        super().__init__(channel, user)
 
     @property
     def current_index(self) -> int:
@@ -183,7 +188,7 @@ class ItemPicker(_HorizontalPageViewer, _Abortable):
 
     @emoji_handler("✅", pos=999)
     async def select(self, *_) -> int:
-        self.stop()
+        await self.stop()
         return self.current_index
 
 
@@ -236,14 +241,15 @@ class VerticalTextViewer(InteractableEmbed, _Abortable):
         self.window_height = kwargs.pop("window_height", 20)
         self.max_window_length = kwargs.pop("max_window_length", 2000)
 
-        self.scroll_amount = kwargs.pop("scroll_amount", self.window_height // 2)
+        self.scroll_amount = kwargs.pop("scroll_amount", max(self.window_height // 3, 1))
 
         if not (bool(self.lines) ^ bool(self.line_callback)):
             raise ValueError("You need to provide either the `content` or the `content_callback` keyword argument")
 
+        super().__init__(channel, user, **kwargs)
+
         self._current_line = 0
         self._lines_displayed = 0
-        super().__init__(channel, user)
 
     @property
     def current_line(self) -> int:
@@ -252,6 +258,16 @@ class VerticalTextViewer(InteractableEmbed, _Abortable):
     @property
     def lines_displayed(self) -> int:
         return self._lines_displayed
+
+    @property
+    def first_line_visible(self) -> bool:
+        return self.current_line == 0
+
+    @property
+    def last_line_visible(self) -> bool:
+        if self.lines:
+            return self.current_line + self.lines_displayed >= self.total_lines
+        return False
 
     @property
     def total_lines(self) -> Optional[int]:
@@ -355,6 +371,9 @@ class VerticalTextViewer(InteractableEmbed, _Abortable):
 
     @emoji_handler("🔼")
     async def scroll_up(self, *_):
+        if self.first_line_visible:
+            return
+
         if self.lines:
             self._current_line = max(0, self._current_line - self.scroll_amount)
         else:
@@ -363,6 +382,9 @@ class VerticalTextViewer(InteractableEmbed, _Abortable):
 
     @emoji_handler("🔽")
     async def scroll_down(self, *_):
+        if self.last_line_visible:
+            return
+
         if self.lines:
             self._current_line = min(len(self.lines) - 1, self._current_line + self.scroll_amount)
         else:
