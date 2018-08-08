@@ -111,6 +111,10 @@ class MusicPlayer(EventEmitter):
         return not bool(self.player)
 
     @property
+    def state(self) -> int:
+        return 1 if self.is_playing else 2 if self.is_paused else 0
+
+    @property
     def connected(self) -> bool:
         return self.voice_client and self.voice_client.is_connected()
 
@@ -155,7 +159,7 @@ class MusicPlayer(EventEmitter):
     def seek(self, secs: float):
         if self.player:
             self.player.seek(secs)
-        self.emit("play", player=self, entry=self.current_entry)
+        self.emit("seek", player=self, entry=self.current_entry)
 
     def pause(self):
         if isinstance(self.current_entry, StreamEntry):

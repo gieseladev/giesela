@@ -10,7 +10,8 @@ class EmbedPaginator:
     """
     Keyword Args:
         template: Embed to use as a template
-        special_template: Embed to use for first embed
+        special_template: Embed or Dict[int, Embed]. Former will be used for the first embed and the latter
+            will be used for a given index
         fields_per_embed: Amount of fields before using a new embed
     """
     template: Embed
@@ -28,6 +29,8 @@ class EmbedPaginator:
             self._special_template_map = _special_template
 
         self.fields_per_page = kwargs.get("fields_per_page", EmbedLimits.FIELDS_LIMIT)
+        if not 0 < self.fields_per_page <= EmbedLimits.FIELDS_LIMIT:
+            raise ValueError(f"Fields per page must be between 1 and {EmbedLimits.FIELDS_LIMIT}")
 
         self._embeds = []
 
@@ -53,9 +56,9 @@ class EmbedPaginator:
             return self._embeds[-1]
 
     def _add_embed(self) -> Embed:
-        template = None
         number = len(self)
 
+        template = None
         if number == 0:
             template = getattr(self, "_first_embed", None)
 

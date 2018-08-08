@@ -76,7 +76,8 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
             artist_name = entry.artist
             artist_avatar = entry.artist_image
             progress_ratio = self.player.progress / entry.end_seconds
-            desc = "{} `[{}/{}]`".format(
+            desc = "{} {} `[{}/{}]`".format(
+                "►" if self.player.is_paused else "❚❚",
                 create_bar(progress_ratio, length=20),
                 to_timestamp(self.player.progress),
                 to_timestamp(entry.end_seconds)
@@ -99,7 +100,8 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
             sub_entry = entry.current_sub_entry
             index = sub_entry["index"] + 1
             progress_ratio = sub_entry["progress"] / sub_entry["duration"]
-            desc = "{} `[{}/{}]`".format(
+            desc = "{} {} `[{}/{}]`".format(
+                "►" if self.player.is_paused else "❚❚",
                 create_bar(progress_ratio, length=20),
                 to_timestamp(sub_entry["progress"]),
                 to_timestamp(sub_entry["duration"])
@@ -132,7 +134,8 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
                 )
         elif isinstance(entry, YoutubeEntry):
             progress_ratio = self.player.progress / entry.end_seconds
-            desc = "{} `[{}/{}]`".format(
+            desc = "{} {} `[{}/{}]`".format(
+                "►" if self.player.is_paused else "❚❚",
                 create_bar(progress_ratio, length=20),
                 to_timestamp(self.player.progress),
                 to_timestamp(entry.end_seconds)
@@ -161,7 +164,7 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         return em
 
     async def on_create_message(self, msg: Message):
-        await super().add_reactions(msg)
+        await self.add_reactions(msg)
 
     async def start(self):
         await super().start()
@@ -190,9 +193,9 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
     async def next_entry(self, *_):
         self.player.skip()
 
-    async def slow_update(self):
+    async def delayed_update(self):
         await asyncio.sleep(.5)
         await self.trigger_update()
 
     async def on_any_emoji(self, *_):
-        asyncio.ensure_future(self.slow_update())
+        asyncio.ensure_future(self.delayed_update())

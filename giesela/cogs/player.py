@@ -6,10 +6,9 @@ from discord import Game, Guild, Member, Message, VoiceChannel, VoiceState
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import BaseEntry, Downloader, Giesela, MusicPlayer, RadioSongEntry, TimestampEntry, WebieselaServer, constants, localization, \
-    lyrics as lyricsfinder
+from giesela import BaseEntry, Downloader, Giesela, MusicPlayer, WebieselaServer, constants, lyrics as lyricsfinder
 from giesela.lib.ui import VerticalTextViewer
-from giesela.utils import create_bar, ordinal, parse_timestamp, similarity
+from giesela.utils import create_bar, parse_timestamp, similarity
 
 log = logging.getLogger(__name__)
 
@@ -80,52 +79,43 @@ class Player:
                         channel = member.voice.channel
                     else:
                         channel = await find_giesela_channel(self.bot, guild)
-                self.players[guild.id] = MusicPlayer(self.bot, self.downloader, channel)
+                player = MusicPlayer(self.bot, self.downloader, channel)
+                player.on("play", self.on_player_play) \
+                    .on("resume", self.on_player_resume) \
+                    .on("pause", self.on_player_pause) \
+                    .on("stop", self.on_player_stop) \
+                    .on("finished-playing", self.on_player_finished_playing)
+                self.players[guild.id] = player
             else:
                 return None
         return self.players[guild.id]
 
+    @classmethod
+    def auto_pause(cls, player: MusicPlayer, joined: bool = None):
+        channel = player.channel
+        if not channel:
+            return
+
+        # if the first new person joined
+        if joined is True and sum(1 for vm in channel.members if not vm.bot) == 1:
+            log.info("auto-resuming")
+            player.resume()
+        elif sum(1 for vm in channel.members if not vm.bot) == 0:
+            log.info("auto-pausing")
+            player.pause()
+
     async def on_player_play(self, player: MusicPlayer, entry: BaseEntry):
+        self.auto_pause(player)
         WebieselaServer.send_player_information(player.channel.guild.id)
         await self.update_now_playing(entry)
 
-        channel = entry.meta.get("channel", None)
-
-        if channel:
-            last_np_msg = self.status_messages.get(channel.guild.id)
-            if last_np_msg and last_np_msg.channel == channel:
-
-                # if the last np message isn't the last message in the channel;
-                # delete it
-                async for lmsg in channel.history(limit=1):
-                    if lmsg != last_np_msg and last_np_msg:
-                        await last_np_msg.delete()
-                        del self.status_messages[channel.guild.id]
-
-            if isinstance(entry, TimestampEntry):
-                sub_entry = entry.current_sub_entry
-                sub_title = sub_entry["name"]
-                sub_index = sub_entry["index"] + 1
-                new_msg = localization.format(player.voice_client.guild, "player.now_playing.timestamp_entry", sub_entry=sub_title, index=sub_index,
-                                              ordinal=ordinal(sub_index), title=entry.whole_title)
-            elif isinstance(entry, RadioSongEntry):
-                new_msg = localization.format(player.voice_client.guild, "player.now_playing.generic",
-                                              title="{} - {}".format(entry.artist, entry.title))
-            else:
-                new_msg = localization.format(player.voice_client.guild, "player.now_playing.generic", title=entry.title)
-
-            if channel.guild.id in self.status_messages:
-                self.status_messages[channel.guild.id] = await last_np_msg.edit(content=new_msg)
-            else:
-                self.status_messages[channel.guild.id] = await channel.send(new_msg)
-
-    async def on_player_resume(self, player, entry, **_):
+    async def on_player_resume(self, player: MusicPlayer, entry: BaseEntry, **_):
+        WebieselaServer.small_update(player.channel.guild.id, state=player.state, progress=player.progress)
         await self.update_now_playing(entry)
-        WebieselaServer.small_update(player.channel.guild.id, state=player.state.value, state_name=str(player.state), progress=player.progress)
 
-    async def on_player_pause(self, player, entry, **_):
-        await self.update_now_playing(entry, True)
-        WebieselaServer.small_update(player.channel.guild.id, state=player.state.value, state_name=str(player.state), progress=player.progress)
+    async def on_player_pause(self, player: MusicPlayer, entry: BaseEntry, **_):
+        WebieselaServer.small_update(player.channel.guild.id, state=player.state, progress=player.progress)
+        await self.update_now_playing(entry, is_paused=True)
 
     async def on_player_stop(self, **_):
         await self.update_now_playing()
@@ -134,8 +124,7 @@ class Player:
         if not player.queue.entries and not player.current_entry:
             WebieselaServer.send_player_information(player.channel.guild.id)
 
-    async def update_now_playing(self, entry=None, is_paused=False):
-        # TODO fix
+    async def update_now_playing(self, entry: BaseEntry = None, is_paused: bool = False):
         game = None
 
         active_players = sum(1 for p in self.players.values() if p.is_playing)
@@ -149,7 +138,7 @@ class Player:
             game = Game(name=self.bot.config.idle_game)
 
         if entry:
-            prefix = "\u275A\u275A " if is_paused else ""
+            prefix = "❚❚ " if is_paused else ""
 
             name = entry.title
 
@@ -159,7 +148,6 @@ class Player:
         await self.bot.change_presence(activity=game)
 
     async def on_voice_state_update(self, member: Member, before: VoiceState, after: VoiceState):
-        # TODO don't start playing when alone in channel from the start
         giesela_voice = member.guild.me.voice
         if not giesela_voice:
             return
@@ -174,23 +162,14 @@ class Player:
         if member.guild.me != member and member.bot:
             return
 
-        user_left_voice_channel = False
+        user_joined = False
 
-        if before.channel and not after.channel:
-            user_left_voice_channel = True
+        if after.channel and not before.channel:
+            user_joined = True
 
         player = await self.get_player(member.guild)
 
-        # Only Giesela left
-        if user_left_voice_channel:
-            if sum(1 for vm in before.channel.members if not vm.bot) == 0:
-                log.info("auto-pausing")
-                player.pause()
-        else:
-            # if the first new person joined
-            if sum(1 for vm in after.channel.members if not vm.bot) == 1:
-                log.info("auto-resuming")
-                player.resume()
+        self.auto_pause(player, joined=user_joined)
 
     @commands.command()
     async def summon(self, ctx: Context):
