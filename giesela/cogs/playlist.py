@@ -1,7 +1,8 @@
 import json
+import random
 from io import BytesIO
 
-from discord import Colour, Embed, File
+from discord import Colour, Embed, File, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -41,6 +42,11 @@ class Playlist:
             raise commands.CommandError(f"Couldn't this playlist {playlist}")
         return _playlist
 
+    async def play_playlist(self, ctx: Context, playlist: Playlist):
+        player = await self.player_cog.get_player(ctx)
+        await playlist.play(player.queue, channel=ctx.channel, author=ctx.author)
+        await ctx.send("Loaded playlist", embed=playlist_embed(playlist))
+
     @commands.group(invoke_without_command=True, aliases=["pl"])
     async def playlist(self, ctx: Context, playlist: str = None):
         """Playlist stuff"""
@@ -53,14 +59,21 @@ class Playlist:
         viewer = PlaylistViewer(self.bot, ctx.channel, ctx.author, playlist)
         await viewer.display()
 
-    @playlist.command("play", aliases=["load"])
+    @playlist.group("play", aliases=["load"])
     async def playlist_play(self, ctx: Context, playlist: str):
         """Play a playlist"""
         playlist = self.find_playlist(playlist)
+        await self.play_playlist(ctx, playlist)
 
-        player = await self.player_cog.get_player(ctx)
-        await playlist.play(player.queue, channel=ctx.channel, author=ctx.author)
-        await ctx.send("Loaded playlist", embed=playlist_embed(playlist))
+    @playlist_play.command("random")
+    async def playlist_play_random(self, ctx: Context):
+        """Play a random playlist"""
+        playlists = list(self.playlist_manager.playlists)
+        if not playlists:
+            raise commands.CommandError("No playlists to choose from")
+
+        playlist = random.choice(playlists)
+        await self.play_playlist(ctx, playlist)
 
     @playlist.command("delete", aliases=["rm", "remove"])
     async def playlist_delete(self, ctx: Context, playlist: str):
@@ -74,6 +87,15 @@ class Playlist:
         embed = playlist_embed(playlist)
         playlist.delete()
         await ctx.send("Deleted playlist", embed=embed)
+
+    @playlist.command("transfer")
+    async def playlist_transfer(self, ctx: Context, playlist: str, user: User):
+        """Transfer a playlist to someone else."""
+        playlist = self.find_playlist(playlist)
+        if playlist.author.id != ctx.author.id:
+            raise commands.CommandError(f"Only the author of this playlist may transfer it ({playlist.author.mention})")
+        playlist.transfer(user)
+        await ctx.send(f"Transferred **{playlist.name}** to {user.mention}")
 
     @playlist.command("show", aliases=["showall", "all"])
     async def playlist_show(self, ctx: Context):

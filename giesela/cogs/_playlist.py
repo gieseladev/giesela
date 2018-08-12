@@ -2,10 +2,6 @@ import asyncio
 import functools
 import re
 import time
-from random import shuffle
-
-from discord import Embed
-from discord.ext.commands import Bot
 
 from giesela import ExtractionError, GieselaEntry, TimestampEntry, WrongEntryTypeError, YoutubeEntry
 from giesela.entry_updater import fix_entry, fix_generator
@@ -98,101 +94,6 @@ class PlaylistCommands:
             return Response(
                 "Uhm, something went wrong I guess :D")
 
-        elif argument == "load":
-            if savename not in self.playlists.playlists.keys():
-                return Response(
-                    "Can't load this playlist, there's no playlist with this name.")
-
-            playlist = self.playlists.get_playlist(
-                savename, player.queue, channel=channel)
-            clone_entries = playlist["entries"]
-            broken_entries = playlist["broken_entries"]
-
-            if not clone_entries:
-                if broken_entries:
-                    return Response(
-                        "Can't play `{0}`, there are **{1}** broken entr{2} in this playlist.\nOpen the playlist builder to fix {3} (`{4}playlist builder {0}`)".format(
-                            playlist["name"],
-                            len(broken_entries),
-                            "y" if len(broken_entries) == 1 else "ies",
-                            "it" if len(broken_entries) == 1 else "them",
-                            self.config.command_prefix
-                        ))
-                else:
-                    return Response("There's nothing in `{}` to play".format(playlist["name"]))
-
-            if load_mode == "replace":
-                player.queue.clear()
-                if player.current_entry is not None:
-                    player.skip()
-
-            try:
-                from_index = int(
-                    additional_args[2]) - 1 if len(additional_args) > 2 else 0
-                if from_index >= len(clone_entries) or from_index < 0:
-                    return Response("Can't load the playlist starting from entry {}. This value is out of bounds.".format(from_index))
-            except ValueError:
-                return Response("Start index must be a number")
-
-            try:
-                to_index = int(additional_args[3]) if len(
-                    additional_args) > 3 else len(clone_entries)
-                if to_index > len(clone_entries) or to_index < 0:
-                    return Response(
-                        "Can't load the playlist from the {}. to the {}. entry. These values are out of bounds.".format(from_index, to_index))
-            except ValueError:
-                return Response("End index must be a number")
-
-            if to_index - from_index <= 0:
-                return Response("No songs to play. RIP.")
-
-            clone_entries = clone_entries[from_index:to_index]
-
-            sort_modes = {
-                "alphabetical": (lambda entry: entry.title, False),
-                "random": None,
-                "length": (lambda entry: entry.duration, True)
-            }
-
-            sort_mode = additional_args[1].lower(
-            ) if len(additional_args) > 1 and additional_args[1].lower(
-            ) in sort_modes.keys() else "random"
-
-            if sort_mode == "random":
-                shuffle(clone_entries)
-            elif sort_mode != "none":
-                clone_entries = sorted(
-                    clone_entries,
-                    key=sort_modes[sort_mode][0],
-                    reverse=sort_modes[sort_mode][1])
-
-            player.queue.add_entries(clone_entries)
-            self.playlists.bump_replay_count(savename)
-
-            if not broken_entries:
-                return Response("Loaded `{}`".format(savename.title()))
-            else:
-                text = "Loaded {0} entr{1} from `{2}`. **{3}** entr{4} couldn't be loaded.\nOpen the playlist builder to repair {5}. (`{6}playlist builder {2}`)"
-                return Response(text.format(
-                    len(clone_entries),
-                    "y" if len(clone_entries) == 1 else "ies",
-                    playlist["name"],
-                    len(broken_entries),
-                    "y" if len(broken_entries) == 1 else "ies",
-                    "it" if len(broken_entries) == 1 else "them",
-                    self.config.command_prefix
-                ))
-
-        elif argument == "delete":
-            if savename not in self.playlists.playlists.keys():
-                return Response(
-                    "Can't delete this playlist, there's no playlist with this name.")
-
-            playlist = self.playlists.get_playlist(savename, player.queue, channel=channel)
-
-            self.playlists.remove_playlist(savename)
-            return Response("*{}* has been deleted".format(playlist["name"]))
-
         elif argument == "clone":
             if savename not in self.playlists.playlists.keys():
                 return Response(
@@ -249,62 +150,6 @@ class PlaylistCommands:
                     from_index is not 0 or to_index is not len(clone_entries)
                     else "", additional_args[0].title()))
 
-        elif argument == "showall":
-            if len(self.playlists.playlists.keys()) < 1:
-                return Response(
-                    "There are no saved playlists.\n**You** could add one though. Type `{}help playlist` to see how!".format(
-                        self.config.command_prefix))
-
-            response_text = "**Playlists**\n__                 __\n\n"
-
-            sort_modes = {
-                "alphabetical": (lambda playlist: playlist, False),
-                "entries": (
-                    lambda playlist: len(self.playlists.get_playlist(playlist, player.queue)["entries"]),
-                    True
-                ),
-                "author": (
-                    lambda playlist: self.playlists.get_playlist(playlist, player.queue)["author"].name,
-                    False
-                ),
-                "random": None,
-                "playtime": (
-                    lambda playlist: sum([x.duration for x in self.playlists.get_playlist(playlist, player.queue)["entries"]]),
-                    True
-                ),
-                "replays": (
-                    lambda playlist: self.playlists.get_playlist(playlist, player.queue)["replay_count"],
-                    True
-                )
-            }
-
-            sort_mode = leftover_args[1].lower() if len(leftover_args) > 1 and leftover_args[
-                1].lower() in sort_modes.keys() else "replays"
-
-            if sort_mode == "random":
-                sorted_saved_playlists = list(self.playlists.playlists.keys())
-                shuffle(sorted_saved_playlists)
-            else:
-                sorted_saved_playlists = sorted(
-                    self.playlists.playlists,
-                    key=sort_modes[sort_mode][0],
-                    reverse=sort_modes[sort_mode][1])
-
-            for pl in sorted_saved_playlists:
-                infos = self.playlists.get_playlist(pl, player.queue)
-                response_text += "◦ **{}** ({} entr{})\n".format(
-                    infos["name"],
-                    len(infos["entries"]),
-                    "ies" if len(infos["entries"]) is not 1 else "y"
-                )
-
-            response_text += "\n**Reference**\n" + "\n".join([
-                "`{command_prefix}playlist <name>` to learn more about a playlist",
-                "`{command_prefix}playlist builder <name>` to edit a playlist"
-            ]).format(command_prefix=self.config.command_prefix)
-
-            return Response(response_text)
-
         elif argument == "builder":
             if len(savename) < 3:
                 return Response(
@@ -317,69 +162,6 @@ class PlaylistCommands:
             response = await self.playlist_builder(channel, author, player, savename)
             return response
 
-        elif argument in self.playlists.playlists.keys():
-            infos = self.playlists.get_playlist(argument.lower(),
-                                                player.queue)
-            entries = infos["entries"]
-
-            desc_text = "{}\n\n{} entr{} ({} broken)\n{} long".format(
-                infos["description"] or "This playlist doesn't have a description",
-                len(infos["entries"]),
-                "ies" if infos["entries"] is not 1 else "y",
-                len(infos["broken_entries"]),
-                format_time(
-                    sum([x.duration for x in entries]),
-                    combine_with_and=True,
-                    replace_one=True,
-                    max_specifications=2
-                )
-            )
-            em = Embed(
-                title=infos["name"],
-                description=desc_text,
-                colour=hex_to_dec("#b93649"),
-                url="http://giesela.org"
-            )
-            pl_author = infos["author"]
-            em.set_author(
-                name=pl_author.display_name, icon_url=pl_author.avatar_url)
-
-            if infos["cover_url"]:
-                em.set_thumbnail(url=infos["cover_url"])
-
-            entries_to_display = entries.copy()
-
-            if entries_to_display:
-                shuffle(entries_to_display)
-                entries_to_display = entries_to_display[:15]
-                vals = []
-                for entry in entries_to_display:
-                    vals.append("{} `{}`".format(
-                        nice_cut(entry.title, 50),
-                        to_timestamp(entry.end_seconds)
-                    ))
-
-                val = "\n".join(vals)
-
-                em.add_field(
-                    name="Some of the entries:",
-                    value=val,
-                    inline=False
-                )
-
-                if len(entries) > 15:
-                    em.add_field(
-                        name="**... and {} more**".format(len(entries) - 15),
-                        value="To view them, open the playlist builder")
-
-            em.set_footer(
-                text="To edit this playlist type \"{}playlist builder {}\"".format(self.config.command_prefix, argument))
-
-            await self.send_message(channel, embed=em)
-
-            return
-
-        return await self.cmd_help(channel, ["playlist"])
 
     async def playlist_builder(self, channel, author, player, _savename):
         new_playlist = False
@@ -1276,7 +1058,3 @@ class PlaylistCommands:
                 return Response("Saved changes to current entry.")
         else:
             return Response("Didn't save changes to **{}**".format(entry.title))
-
-
-def setup(bot: Bot):
-    bot.add_cog(PlaylistCog(bot))

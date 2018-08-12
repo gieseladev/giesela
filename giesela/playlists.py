@@ -76,6 +76,8 @@ class Playlist:
     cover: Optional[str]
     entries: List[PlaylistEntry]
 
+    _author: User
+
     def __init__(self, **kwargs):
         self.manager = None
 
@@ -129,6 +131,11 @@ class Playlist:
             self._author = self.manager.bot.get_user(self.author_id)
         return self._author
 
+    @author.setter
+    def author(self, author: User):
+        self.author_id = author.id
+        self._author = author
+
     def init(self):
         pass
         # TODO decide whether init is necessary
@@ -161,6 +168,10 @@ class Playlist:
     def delete(self):
         self.manager.remove_playlist(self)
         log.debug(f"deleted playlist {self}")
+
+    def transfer(self, new_author: User):
+        self.author = new_author
+        self.save()
 
     async def play(self, queue: Queue, **meta):
         await queue.load_playlist(self, **meta)
