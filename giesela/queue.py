@@ -7,17 +7,17 @@ import time
 import urllib
 import urllib.error
 from collections import deque
-from itertools import islice
-from typing import TYPE_CHECKING
+from typing import AsyncIterator, Iterable, Iterator, List, Optional, TYPE_CHECKING, Tuple, Union
 
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
-from .entry import (DiscogsEntry, RadioSongEntry, RadioStationEntry, SpotifyEntry, StreamEntry, TimestampEntry, VGMEntry, YoutubeEntry)
+from .entry import (BaseEntry, DiscogsEntry, RadioSongEntry, RadioStationEntry, SpotifyEntry, StreamEntry, TimestampEntry, VGMEntry, YoutubeEntry)
 from .exceptions import ExtractionError, WrongEntryTypeError
 from .lib.api.VGMdb import get_entry as get_vgm_track
 from .lib.api.discogs import get_entry as get_discogs_track
 from .lib.api.spotify import get_spotify_track
 from .lib.event_emitter import EventEmitter
+from .radio import StationInfo
 from .utils import clean_songname, get_header, get_video_sub_queue
 from .webiesela import WebieselaServer
 
@@ -38,7 +38,7 @@ class Queue(EventEmitter):
         self.entries = deque()
         self.history = []
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[BaseEntry]:
         return iter(self.entries)
 
     def get_web_dict(self):
@@ -56,9 +56,9 @@ class Queue(EventEmitter):
         self.entries.clear()
         WebieselaServer.send_player_information(self.player.channel.guild.id)
 
-    def move(self, from_index, to_index):
+    def move(self, from_index: int, to_index: int) -> Optional[BaseEntry]:
         if not (0 <= from_index < len(self.entries) and 0 <= to_index < len(self.entries)):
-            return False
+            return None
 
         self.entries.rotate(-from_index)
         move_entry = self.entries.popleft()
@@ -93,7 +93,7 @@ class Queue(EventEmitter):
 
         return True
 
-    def push_history(self, entry):
+    def push_history(self, entry: BaseEntry):
         entry = entry.copy()
 
         entry.meta["finish_time"] = time.time()
@@ -109,7 +109,7 @@ class Queue(EventEmitter):
         WebieselaServer.send_player_information(self.player.channel.guild.id)
         self.emit("entry-added", queue=self)
 
-    async def add_stream_entry(self, stream_url, **meta):
+    async def add_stream_entry(self, stream_url: str, **meta) -> Tuple[BaseEntry, int]:
         info = {"title": stream_url, "extractor": None}
         try:
             info = await self.downloader.extract_info(self.loop, stream_url, download=False)
@@ -152,7 +152,7 @@ class Queue(EventEmitter):
 
         return entry, len(self.entries)
 
-    async def add_radio_entry(self, station_info, now=False, **meta):
+    async def add_radio_entry(self, station_info: StationInfo, now: bool = False, **meta):
         if station_info.has_current_song_info:
             entry = RadioSongEntry(self, station_info, **meta)
         else:
@@ -169,36 +169,7 @@ class Queue(EventEmitter):
         else:
             self._add_entry(entry)
 
-    async def add_entry(self, song_url, **meta):
-        """
-            Validates and adds a song_url to be played. This does not start the download of the song.
-
-            Returns the entry & the position it is in the queue.
-
-            :param song_url: The song url to add to the queue.
-            :param meta: Any additional metadata to add to the queue entry.
-        """
-
-        entry = await self.get_entry(song_url, **meta)
-        self._add_entry(entry)
-        return entry, len(self.entries)
-
-    async def add_entry_next(self, song_url, **meta):
-        """
-            Validates and adds a song_url to be played. This does not start the download of the song.
-
-            Returns the entry & the position it is in the queue.
-
-            :param song_url: The song url to add to the queue.
-            :param meta: Any additional metadata to add to the queue entry.
-        """
-
-        entry = await self.get_entry(song_url, **meta)
-        self._add_entry(entry, 0)
-        return entry, len(self.entries)
-
-    async def get_entry_from_query(self, query, **meta):
-
+    async def get_entry_from_query(self, query: str, **meta) -> Optional[Union[BaseEntry, List[str]]]:
         try:
             info = await self.downloader.extract_info(
                 self.loop, query, download=False, process=False)
@@ -232,7 +203,7 @@ class Queue(EventEmitter):
         else:
             return await self.get_entry(info, **meta)
 
-    async def get_entry_gen(self, url, **meta):
+    async def get_entry_gen(self, url: str, **meta) -> AsyncIterator[Tuple[int, BaseEntry]]:
         info = await self.downloader.extract_info(self.loop, url, download=False, process=False)
 
         if "entries" in info:
@@ -244,7 +215,7 @@ class Queue(EventEmitter):
 
             return _tuple_gen_creator([await self.get_entry(info, **meta)])
 
-    async def get_entries_from_urls_gen(self, *urls, **meta):
+    async def get_entries_from_urls_gen(self, *urls: str, **meta) -> AsyncIterator[Tuple[int, BaseEntry]]:
         for ind, url in enumerate(urls):
             try:
                 entry = await self.get_entry(url, **meta)
@@ -255,7 +226,7 @@ class Queue(EventEmitter):
 
             yield ind, entry
 
-    async def get_ytdl_data(self, song_url):
+    async def get_ytdl_data(self, song_url: str) -> dict:
         try:
             info = await self.downloader.extract_info(self.loop, song_url, download=False)
         except Exception as e:
@@ -292,7 +263,7 @@ class Queue(EventEmitter):
 
         return info
 
-    async def get_entry(self, song_url, **meta):
+    async def get_entry(self, song_url: str, **meta) -> BaseEntry:
         if isinstance(song_url, dict):
             info = song_url
         else:
@@ -384,7 +355,7 @@ class Queue(EventEmitter):
 
         return entry
 
-    def add_entries(self, entries, placement=None):
+    def add_entries(self, entries: Iterable[BaseEntry], placement: Union[str, int] = None):
         entry = None
         for entry in entries:
             self._add_entry(entry, placement=placement, more_to_come=True)
@@ -392,7 +363,7 @@ class Queue(EventEmitter):
         WebieselaServer.send_player_information(self.player.channel.guild.id)
         self.emit("entry-added", queue=self, entry=entry)
 
-    def _add_entry(self, entry, placement=None, more_to_come=False):
+    def _add_entry(self, entry: BaseEntry, placement: Union[str, int] = None, more_to_come: bool = False):
         if placement is not None:
             if placement == "random":
                 if len(self.entries) > 0:
@@ -411,9 +382,9 @@ class Queue(EventEmitter):
             WebieselaServer.send_player_information(entry.meta["channel"].guild.id)
             self.emit("entry-added", queue=self, entry=entry)
 
-    def promote_position(self, position):
+    def promote_position(self, position: int) -> Optional[BaseEntry]:
         if not 0 <= position < len(self.entries):
-            return False
+            return None
 
         self.entries.rotate(-position)
         entry = self.entries.popleft()
@@ -428,7 +399,10 @@ class Queue(EventEmitter):
 
         return entry
 
-    def promote_last(self):
+    def promote_last(self) -> Optional[BaseEntry]:
+        if len(self.entries) < 2:
+            return None
+
         entry = self.entries.pop()
         self.entries.appendleft(entry)
         self.emit("entry-added", queue=self, entry=entry)
@@ -438,7 +412,7 @@ class Queue(EventEmitter):
 
         return entry
 
-    def remove_position(self, position):
+    def remove_position(self, position: int) -> Optional[BaseEntry]:
         if not 0 <= position < len(self.entries):
             return None
 
@@ -452,7 +426,7 @@ class Queue(EventEmitter):
 
         return entry
 
-    async def get_next_entry(self, pre_download_next=True):
+    async def get_next_entry(self, pre_download_next=True) -> Optional[BaseEntry]:
         """
             A coroutine which will return the next song or None if no songs left to play.
 
@@ -481,17 +455,17 @@ class Queue(EventEmitter):
 
         return await self.get_next_entry(pre_download_next)
 
-    def peek(self):
+    def peek(self) -> BaseEntry:
         """
             Returns the next entry that should be scheduled to be played.
         """
         if self.entries:
             return self.entries[0]
 
-    async def estimate_time_until(self, position, player):
-        estimated_time = sum([e.end_seconds for e in islice(self.entries, position - 1)])
+    async def estimate_time_until(self, index: int) -> datetime.timedelta:
+        estimated_time = sum(e.end_seconds for e in self.entries[:index])
 
-        if not player.is_stopped and player.current_entry:
-            estimated_time += player.current_entry.duration - player.progress
+        if self.player.current_entry:
+            estimated_time += self.player.current_entry.duration - self.player.progress
 
         return datetime.timedelta(seconds=estimated_time)
