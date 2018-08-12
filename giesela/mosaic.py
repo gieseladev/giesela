@@ -1,30 +1,35 @@
+import asyncio
+import logging
 import random
+from contextlib import suppress
 from io import BytesIO
+from typing import Iterable, List, Optional, TYPE_CHECKING
 
 import math
-import requests
 from PIL import Image, ImageDraw
+from aiohttp import ClientSession
+
+from giesela.lib.api.imgur import upload_playlist_cover
+from .entry import GieselaEntry
+
+if TYPE_CHECKING:
+    from .playlists import Playlist
+
+log = logging.getLogger(__name__)
 
 
-def grab_images(*urls, size=None):
-    images = []
+def _create_normal_collage(*images: Image, size: int = 1024, crop_images: bool = False) -> Image.Image:
+    if len(images) < 4:
+        raise ValueError("Need at least 4 images!")
 
-    for img_url in urls:
-        resp = requests.get(img_url)
-        content = BytesIO(resp.content)
-        im = Image.open(content)
-
-        if size:
-            im = im.resize((size, size))
-
-        images.append(im)
-
-    return images
-
-
-def _create_normal_collage(*images, size=1024, crop_images=False):
     if len(images) not in (4, 9, 16):
-        raise ValueError("Can only create images with 4, 9 or 16 pictures")
+        if len(images) > 16:
+            target_length = 16
+        elif len(images) > 9:
+            target_length = 9
+        else:
+            target_length = 4
+        images = random.sample(images, target_length)
 
     s = round(math.sqrt(len(images)))
 
@@ -52,7 +57,10 @@ def _create_normal_collage(*images, size=1024, crop_images=False):
     return final
 
 
-def _create_piechart(*images, size=1024):
+def _create_pie_chart(*images: Image.Image, size: int = 1024) -> Image.Image:
+    if len(images) > 5:
+        images = random.sample(images, 5)
+
     final = Image.new("RGBA", (size, size))
 
     angle = 360 / len(images)
@@ -74,12 +82,12 @@ def _create_piechart(*images, size=1024):
     return final
 
 
-def _create_focused_collage(*images, size=1024):
-    if len(images) % 2 != 0:
-        raise ValueError("Can only do this with multiples of two")
-
+def _create_focused_collage(*images: Image.Image, size: int = 1024) -> Image.Image:
     if len(images) < 4:
         raise ValueError("Amount of images should be at least 4")
+
+    if len(images) % 2 != 0:
+        images = random.sample(images, len(images) - 1)
 
     final = Image.new("RGB", (size, size))
 
@@ -104,9 +112,12 @@ def _create_focused_collage(*images, size=1024):
     return final
 
 
-def _create_stacked_collage(*images, size=1024, size_ratio=.55):
-    if len(images) != 5:
+def _create_stacked_collage(*images: Image.Image, size: int = 1024, size_ratio: float = .55) -> Image.Image:
+    if len(images) < 5:
         raise AttributeError("Can only do this for 5 images")
+
+    if len(images) != 5:
+        images = random.sample(images, 5)
 
     final = Image.new("RGB", (size, size))
 
@@ -135,26 +146,60 @@ def _create_stacked_collage(*images, size=1024, size_ratio=.55):
     return final
 
 
-def create_random_cover(*images, size=1024):
-    if not 1 <= len(images) <= 10:
-        raise AttributeError("Provide between 1 and 10 pictures")
+def create_random_cover(*images: Image.Image, size: int = 1024) -> Image.Image:
+    if not images:
+        raise AttributeError("Provide at least one picture")
 
-    possible = []
+    possible = [_create_pie_chart]
 
-    for test, func in possible_sizes:
-        if test(len(images)):
-            possible.append(func)
+    if len(images) >= 4:
+        possible.extend((_create_focused_collage, _create_normal_collage))
 
-    if not possible:
-        possible.append(_create_piechart)
+    if len(images) >= 5:
+        possible.append(_create_stacked_collage)
 
     generator = random.choice(possible)
-
     return generator(*images, size=size)
 
 
-possible_sizes = (
-    (lambda n: n in (4, 9), _create_normal_collage),
-    (lambda n: n % 2 == 0, _create_focused_collage),
-    (lambda n: n == 5, _create_stacked_collage)
-)
+async def _download_image(session: ClientSession, url: str, size: int = None) -> Optional[Image.Image]:
+    async with session.get(url) as resp:
+        with suppress(Exception):
+            content = BytesIO(await resp.read())
+            im = Image.open(content)
+            if size:
+                im = im.resize((size, size))
+
+            return im
+
+
+async def download_images(session: ClientSession, links: Iterable[str], size: int = None) -> List[Image.Image]:
+    tasks = []
+    for link in links:
+        tasks.append(_download_image(session, link, size))
+    return await asyncio.gather(*tasks)
+
+
+async def generate_playlist_cover(playlist: "Playlist", size: int = 1024) -> Optional[str]:
+    covers = [entry.cover for entry in playlist.entries if isinstance(entry, GieselaEntry)]
+    log.debug(f"generating cover for {playlist}, found ({len(covers)} cover(s))")
+    if not covers:
+        return None
+
+    if len(covers) > 10:
+        covers = random.sample(covers, 10)
+
+    async with ClientSession() as session:
+        images = await download_images(session, covers, size)
+
+    log.debug(f"extracted {len(images)} image(s)")
+
+    if not images:
+        return None
+
+    _cover = create_random_cover(*images, size=size)
+    cover = BytesIO()
+    _cover.save(cover, format="PNG")
+    cover.seek(0)
+
+    return await upload_playlist_cover(asyncio.get_event_loop(), playlist.name, cover)

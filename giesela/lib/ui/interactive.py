@@ -154,8 +154,7 @@ class _HorizontalPageViewer(InteractableEmbed, Startable, metaclass=abc.ABCMeta)
     def current_index(self) -> int:
         return self._current_index
 
-    @property
-    async def current_embed(self) -> Embed:
+    async def get_current_embed(self) -> Embed:
         if self.embeds:
             return self.embeds[self.current_index % len(self.embeds)]
         elif self.embed_callback:
@@ -167,7 +166,7 @@ class _HorizontalPageViewer(InteractableEmbed, Startable, metaclass=abc.ABCMeta)
             return res
 
     async def show_page(self):
-        next_embed = await self.current_embed
+        next_embed = await self.get_current_embed()
         await self.edit(next_embed, on_new=self.add_reactions)
 
     async def start(self) -> Any:
@@ -279,8 +278,7 @@ class VerticalTextViewer(InteractableEmbed, _Abortable):
         if self.lines:
             return len(self.lines)
 
-    @property
-    async def current_content(self) -> str:
+    async def get_current_content(self) -> str:
         lines = []
         _current_length = 0
         _current_line = self.current_line
@@ -306,9 +304,8 @@ class VerticalTextViewer(InteractableEmbed, _Abortable):
         self._lines_displayed = len(lines)
         return "\n".join(lines)
 
-    @property
-    async def current_embed(self) -> Embed:
-        content = await self.current_content
+    async def get_current_embed(self) -> Embed:
+        content = await self.get_current_content()
 
         if self.embed_frame:
             embed = copy.deepcopy(self.embed_frame)
@@ -371,7 +368,7 @@ class VerticalTextViewer(InteractableEmbed, _Abortable):
         await self.delete()
 
     async def show_window(self):
-        next_embed = await self.current_embed
+        next_embed = await self.get_current_embed()
         await self.edit(next_embed, on_new=self.add_reactions)
 
     @emoji_handler("🔼")

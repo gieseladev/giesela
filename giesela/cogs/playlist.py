@@ -5,30 +5,65 @@ from discord import Colour, Embed, File
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, PlaylistManager, utils
+from giesela import Giesela, Playlist, PlaylistManager, utils
 from giesela.lib.ui import EmbedPaginator, EmbedViewer
+from giesela.lib.ui.custom import PlaylistViewer
+from .info import help_formatter
+from .player import Player
 
 LOAD_ORDER = 1
+
+
+def playlist_embed(playlist: Playlist) -> Embed:
+    description = playlist.description or "No description"
+    embed = Embed(title=playlist.name, description=description)
+    embed.set_thumbnail(url=playlist.cover)
+    embed.set_author(name=playlist.author.display_name, icon_url=playlist.author.avatar_url)
+    embed.set_footer(text=f"Playlist with {len(playlist)} entries")
+    return embed
 
 
 class Playlist:
     bot: Giesela
     playlist_manager: PlaylistManager
 
+    player_cog: Player
+
     def __init__(self, bot: Giesela):
         self.bot = bot
         self.playlist_manager = PlaylistManager.load(self.bot, self.bot.config.playlists_file)
 
+        self.player_cog = bot.cogs["Player"]
+
     @commands.group(invoke_without_command=True, aliases=["pl"])
-    async def playlist(self, ctx: Context):
+    async def playlist(self, ctx: Context, playlist: str = None):
         """Playlist stuff"""
+        if playlist:
+            playlist = self.playlist_manager.find_playlist(playlist)
+
+        if not playlist:
+            await help_formatter.send_help_for(ctx, self.playlist)
+
+        viewer = PlaylistViewer(self.bot, ctx.channel, ctx.author, playlist)
+        await viewer.display()
+
+    @playlist.command("play", aliases=["load"])
+    async def playlist_play(self, ctx: Context, playlist: str):
+        """Play a playlist"""
+        _playlist = self.playlist_manager.find_playlist(playlist)
+        if not _playlist:
+            raise commands.CommandError(f"Couldn't this playlist {playlist}")
+
+        player = await self.player_cog.get_player(ctx)
+        await _playlist.play(player.queue, channel=ctx.channel, author=ctx.author)
+        await ctx.send("Loaded playlist", embed=playlist_embed(_playlist))
 
     @playlist.command("show", aliases=["showall", "all"])
     async def playlist_show(self, ctx: Context):
         """Show all the playlists"""
         if not self.playlist_manager:
             raise commands.CommandError("No playlists!")
-        
+
         template = Embed(title="Playlists", colour=Colour.blue())
         paginator = EmbedPaginator(template=template, fields_per_page=5)
 

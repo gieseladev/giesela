@@ -8,6 +8,7 @@ import urllib
 import urllib.error
 from collections import deque
 from itertools import islice
+from typing import TYPE_CHECKING
 
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
@@ -19,6 +20,9 @@ from .lib.api.spotify import get_spotify_track
 from .lib.event_emitter import EventEmitter
 from .utils import clean_songname, get_header, get_video_sub_queue
 from .webiesela import WebieselaServer
+
+if TYPE_CHECKING:
+    from giesela import Playlist
 
 log = logging.getLogger(__name__)
 
@@ -97,6 +101,13 @@ class Queue(EventEmitter):
         self.history = [entry, *self.history[:q]]
 
         WebieselaServer.send_player_information(self.player.channel.guild.id)
+
+    async def load_playlist(self, playlist: "Playlist", **meta):
+        for playlist_entry in playlist:
+            entry = playlist_entry.get_entry(self, **meta)
+            self._add_entry(entry, more_to_come=True)
+        WebieselaServer.send_player_information(self.player.channel.guild.id)
+        self.emit("entry-added", queue=self)
 
     async def add_stream_entry(self, stream_url, **meta):
         info = {"title": stream_url, "extractor": None}

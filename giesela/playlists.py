@@ -3,11 +3,11 @@ import logging
 import uuid
 from pathlib import Path
 from shelve import DbfilenameShelf, Shelf
-from typing import Any, Dict, Iterable, List, Optional, Union
+from typing import Any, Dict, Iterable, List, Optional, Type, Union
 
 from discord import User
 
-from . import utils
+from . import entry as entry_module, mosaic, utils
 from .bot import Giesela
 from .entry import BaseEntry, Entry
 from .queue import Queue
@@ -19,6 +19,7 @@ _DEFAULT = object()
 
 class PlaylistEntry:
     playlist: "Playlist"
+    # TODO marking as broken, playlist metadata?
 
     _entry: dict
 
@@ -38,8 +39,16 @@ class PlaylistEntry:
     def __setstate__(self, state: dict):
         self._entry = state
 
-    def __getattr__(self, item: str) -> Any:
-        return self._entry[item]
+    def __getattr__(self, item: str) -> Optional[Any]:
+        return self._entry.get(item)
+
+    @property
+    def __class__(self) -> BaseEntry:
+        if self.type:
+            cls = getattr(entry_module, self.type, None)
+        else:
+            cls = None
+        return cls or type(self)
 
     @classmethod
     def from_gpl(cls, data: dict) -> "PlaylistEntry":
@@ -48,8 +57,10 @@ class PlaylistEntry:
     def to_gpl(self) -> dict:
         return self._entry
 
-    def entry(self, queue: Queue) -> BaseEntry:
-        return Entry.from_dict(queue, self._entry)
+    def get_entry(self, queue: Queue, **meta) -> BaseEntry:
+        entry = Entry.from_dict(queue, self._entry)
+        entry.meta.update(meta)
+        return entry
 
 
 PLAYLIST_SLOTS = ("gpl_id", "name", "description", "author_id", "cover", "entries")
@@ -90,12 +101,23 @@ class Playlist:
     def __len__(self) -> int:
         return len(self.entries)
 
+    def __iter__(self) -> Iterable[PlaylistEntry]:
+        return iter(self.entries)
+
     def __getstate__(self) -> dict:
         return {key: getattr(self, key) for key in PLAYLIST_SLOTS}
 
     def __setstate__(self, state: dict):
         for key in PLAYLIST_SLOTS:
             setattr(self, key, state[key])
+
+    def __enter__(self) -> "Playlist":
+        return self
+
+    def __exit__(self, exc_type: Optional[Type[Exception]], exc: Optional[Exception], exc_tb: Optional):
+        self.save()
+        if exc:
+            raise exc
 
     @property
     def duration(self) -> int:
@@ -109,11 +131,9 @@ class Playlist:
 
     def init(self):
         pass
-        # TODO decide whether we need this
+        # TODO decide whether init is necessary
         # TODO automatic cover generation
         # TODO manipulating
-        # TODO playing!
-
 
     @classmethod
     def from_gpl(cls, manager: "PlaylistManager", data: dict) -> "Playlist":
@@ -136,6 +156,13 @@ class Playlist:
 
     def save(self):
         self.manager.save_playlist(self)
+        log.debug(f"saved playlist {self}")
+
+    async def play(self, queue: Queue, **meta):
+        await queue.load_playlist(self, **meta)
+
+    async def generate_cover(self) -> Optional[str]:
+        return await mosaic.generate_playlist_cover(self)
 
 
 UUIDType = Union[str, int, uuid.UUID]
