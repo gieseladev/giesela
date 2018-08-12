@@ -2,7 +2,6 @@ import logging
 import re
 import urllib.parse
 from difflib import SequenceMatcher
-from functools import partial
 from io import BytesIO
 from string import punctuation, whitespace
 from typing import Tuple, Union
@@ -56,7 +55,7 @@ def is_image(url):
 
 def similarity(a: str, b: Union[str, Tuple[str, ...]]) -> float:
     if isinstance(b, tuple):
-        return max(map(partial(similarity, a), b))
+        return max(similarity(a, _b) for _b in b if _b)
     return SequenceMatcher(None, a, b).ratio()
 
 

@@ -135,14 +135,11 @@ class Playlists:
 
                 cover_image = mosaic.create_random_cover(*images)
 
-                print("[Playlists] generated mosaic, uploading to Imgur")
-
                 image_file = BytesIO()
                 cover_image.save(image_file, format="PNG")
                 image_file.seek(0)
 
                 cover_url = _upload_playlist_cover(playlist_id, image_file)
-                print("[Playlists] Uploaded Cover to Imgur")
             else:
                 print("[Playlists] not enough covers to generate a cover for", playlist_id)
 

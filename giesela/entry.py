@@ -80,9 +80,9 @@ class Entry:
             if value_type.startswith("built-in"):
                 value = ser_value["value"]
             elif value_type in ("Member", "User"):
-                value = bot.get_global_user(ser_value["id"])
+                value = bot.get_user(ser_value["id"])
             elif value_type == "Guild":
-                value = bot.get_server(ser_value["id"])
+                value = bot.get_guild(ser_value["id"])
             elif value == "VoiceChannel":
                 value = bot.get_channel(ser_value["id"])
 

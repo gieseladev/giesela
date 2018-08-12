@@ -79,7 +79,7 @@ class Giesela(AutoShardedBot):
             embed = Embed(title=type(exception).__name__, description=str(exception), colour=Colour.red())
             await ctx.send(embed=embed)
         else:
-            reporting.raven_client.captureException((type(exception), exception, exception.__traceback__))
+            reporting.raven_client.captureException(exception)
 
         log.exception("CommandError:", exc_info=exception)
 

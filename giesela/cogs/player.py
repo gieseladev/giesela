@@ -2,7 +2,7 @@ import logging
 from functools import partial
 from typing import Dict, Optional, Union
 
-from discord import Game, Guild, Member, Message, VoiceChannel, VoiceState
+from discord import Game, Guild, Member, Message, User, VoiceChannel, VoiceState
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -29,7 +29,7 @@ def _seek(player: MusicPlayer, seconds: Union[str, float]):
     player.seek(seconds)
 
 
-async def find_giesela_channel(bot: Giesela, guild: Guild) -> VoiceChannel:
+async def find_giesela_channel(bot: Giesela, guild: Guild, user: User = None) -> VoiceChannel:
     if not guild.voice_channels:
         raise EnvironmentError("HOW EVEN?!? There are no voice channels... WHAT")
     if bot.config.voice_channel_home:
@@ -38,6 +38,9 @@ async def find_giesela_channel(bot: Giesela, guild: Guild) -> VoiceChannel:
     _max_similarity = 0
     _channel = None
     for channel in guild.voice_channels:
+        if user and user in channel.members:
+            return channel
+
         _similarity = max(*map(partial(similarity, channel.name.lower()), VOICE_CHANNEL_NAMES))
         if _similarity > _max_similarity:
             _max_similarity = _similarity
@@ -65,7 +68,7 @@ class Player:
         self.status_messages = {}
 
     async def get_player(self, target: Union[Guild, Context], *,
-                         create: bool = True, channel: VoiceChannel = None, member: Member = None) -> Optional[MusicPlayer]:
+                         create: bool = True, channel: VoiceChannel = None, member: Union[User, Member] = None) -> Optional[MusicPlayer]:
         if isinstance(target, Context):
             guild = target.guild
             member = member or target.author
@@ -75,10 +78,11 @@ class Player:
         if guild.id not in self.players:
             if create:
                 if not channel:
-                    if member and member.voice:
+                    if isinstance(member, Member) and member.voice:
                         channel = member.voice.channel
                     else:
-                        channel = await find_giesela_channel(self.bot, guild)
+                        channel = await find_giesela_channel(self.bot, guild, user=member)
+
                 player = MusicPlayer(self.bot, self.downloader, channel)
                 player.on("play", self.on_player_play) \
                     .on("resume", self.on_player_resume) \
