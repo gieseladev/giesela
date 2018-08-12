@@ -228,6 +228,7 @@ class MusicPlayer(EventEmitter):
         self.emit("play", player=self, entry=entry)
 
     def update_chapter_updater(self, pause=False):
+        # TODO implement this
         if self.chapter_updater:
             print("[CHAPTER-UPDATER] Cancelling old updater")
             self.chapter_updater.cancel()

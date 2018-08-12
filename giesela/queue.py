@@ -446,10 +446,7 @@ class Queue(EventEmitter):
         try:
             return await entry.get_ready_future()
         except ExtractionError:
-            if "playlist" in entry.meta:
-                playlist_name = entry.meta["playlist"]["name"]
-                asyncio.ensure_future(self.bot.playlists.mark_entry_broken(self, playlist_name, entry))
-                print("[PLAYER] {}'s {} is broken!".format(playlist_name, entry.title))
+            log.warning(f"{entry} is broken!")
         except Exception:
             log.exception(f"Couldn't ready entry {entry}")
 
