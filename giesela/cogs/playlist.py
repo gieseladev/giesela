@@ -35,6 +35,12 @@ class Playlist:
 
         self.player_cog = bot.cogs["Player"]
 
+    def find_playlist(self, playlist: str) -> Playlist:
+        _playlist = self.playlist_manager.find_playlist(playlist)
+        if not _playlist:
+            raise commands.CommandError(f"Couldn't this playlist {playlist}")
+        return _playlist
+
     @commands.group(invoke_without_command=True, aliases=["pl"])
     async def playlist(self, ctx: Context, playlist: str = None):
         """Playlist stuff"""
@@ -50,13 +56,24 @@ class Playlist:
     @playlist.command("play", aliases=["load"])
     async def playlist_play(self, ctx: Context, playlist: str):
         """Play a playlist"""
-        _playlist = self.playlist_manager.find_playlist(playlist)
-        if not _playlist:
-            raise commands.CommandError(f"Couldn't this playlist {playlist}")
+        playlist = self.find_playlist(playlist)
 
         player = await self.player_cog.get_player(ctx)
-        await _playlist.play(player.queue, channel=ctx.channel, author=ctx.author)
-        await ctx.send("Loaded playlist", embed=playlist_embed(_playlist))
+        await playlist.play(player.queue, channel=ctx.channel, author=ctx.author)
+        await ctx.send("Loaded playlist", embed=playlist_embed(playlist))
+
+    @playlist.command("delete", aliases=["rm", "remove"])
+    async def playlist_delete(self, ctx: Context, playlist: str):
+        """Delete a playlist
+
+        Please mind, that only the author of a playlist can delete it.
+        """
+        playlist = self.find_playlist(playlist)
+        if playlist.author.id != ctx.author.id:
+            raise commands.CommandError(f"Only the author of this playlist may delete it ({playlist.author.mention})")
+        embed = playlist_embed(playlist)
+        playlist.delete()
+        await ctx.send("Deleted playlist", embed=embed)
 
     @playlist.command("show", aliases=["showall", "all"])
     async def playlist_show(self, ctx: Context):
@@ -101,14 +118,12 @@ class Playlist:
     @playlist.command("export")
     async def playlist_export(self, ctx: Context, playlist: str):
         """Export a playlist"""
-        _playlist = self.playlist_manager.find_playlist(playlist)
-        if not _playlist:
-            raise commands.CommandError(f"No playlist found for \"{playlist}\"")
+        playlist = self.find_playlist(playlist)
 
-        serialised = json.dumps(_playlist.to_gpl(), indent=None, separators=(",", ":"))
+        serialised = json.dumps(playlist.to_gpl(), indent=None, separators=(",", ":"))
         data = BytesIO(serialised.encode("utf-8"))
         data.seek(0)
-        file = File(data, filename=f"{_playlist.name}.gpl")
+        file = File(data, filename=f"{playlist.name}.gpl")
         await ctx.send("Here you go", file=file)
 
 

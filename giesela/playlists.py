@@ -158,6 +158,10 @@ class Playlist:
         self.manager.save_playlist(self)
         log.debug(f"saved playlist {self}")
 
+    def delete(self):
+        self.manager.remove_playlist(self)
+        log.debug(f"deleted playlist {self}")
+
     async def play(self, queue: Queue, **meta):
         await queue.load_playlist(self, **meta)
 
@@ -235,6 +239,13 @@ class PlaylistManager:
             raise ValueError("Playlist with this id already exists, remove it first!")
         playlist.manager = self
         playlist.save()
+
+    def remove_playlist(self, playlist: Playlist):
+        if playlist.gpl_id not in self._playlists:
+            raise ValueError("This playlist doesn't belong to this manager...")
+        playlist.manager = None
+        del self._playlists[playlist.gpl_id]
+        del self.storage[playlist.gpl_id.hex]
 
     def save_playlist(self, playlist: Playlist):
         self._playlists[playlist.gpl_id] = playlist
