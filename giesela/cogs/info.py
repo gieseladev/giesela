@@ -1,7 +1,8 @@
 import inspect
 import itertools
+from typing import List, Union
 
-from discord import Colour, Embed
+from discord import Colour, Embed, Message
 from discord.ext import commands
 from discord.ext.commands import Bot, Command, Context, HelpFormatter
 
@@ -16,7 +17,7 @@ class Info:
         self.bot = bot
 
         bot.remove_command("help")
-        self.formatter = GieselaHelpFormatter(width=50)
+        self.formatter = help_formatter
 
     @commands.command()
     async def version(self, ctx: Context):
@@ -42,14 +43,8 @@ class Info:
         await ctx.send(embed=em)
 
     @commands.command()
-    async def help(self, ctx, *cmds):
-        """Help me
-
-        [p]help [Category]
-        [p]help [Command]
-
-        Just use whatever you want ¯\_(ツ)_/¯
-        """
+    async def help(self, ctx: Context, *cmds):
+        """Get the help you need"""
 
         async def _command_not_found(_name: str):
             _em = Embed(description=f"No command called **{_name}**", colour=Colour.red())
@@ -57,7 +52,7 @@ class Info:
 
         bot = ctx.bot
         if len(cmds) == 0:
-            embeds = await self.formatter.format_help_for(ctx, bot)
+            cmd = bot
         elif len(cmds) == 1:
             # try to see if it is a cog name
             name = cmds[0]
@@ -68,8 +63,6 @@ class Info:
                 if cmd is None:
                     await _command_not_found(name)
                     return
-
-            embeds = await self.formatter.format_help_for(ctx, cmd)
         else:
             # handle groups
             name = cmds[0]
@@ -89,10 +82,7 @@ class Info:
                     await ctx.send(embed=em)
                     return
 
-            embeds = await self.formatter.format_help_for(ctx, cmd)
-
-        for embed in embeds:
-            await ctx.send(embed=embed)
+        await self.formatter.send_help_for(ctx, cmd)
 
 
 class GieselaHelpFormatter(HelpFormatter):
@@ -158,6 +148,17 @@ class GieselaHelpFormatter(HelpFormatter):
             paginator.add_field("Commands", f"```css\n{value}```")
 
         return get_final_embeds()
+
+    async def send_help_for(self, context: Context, command_or_bot: Union[commands.Bot, commands.Command]) -> List[Message]:
+        embeds = await self.format_help_for(context, command_or_bot)
+        messages = []
+        for embed in embeds:
+            msg = await context.send(embed=embed)
+            messages.append(msg)
+        return messages
+
+
+help_formatter = GieselaHelpFormatter(width=50)
 
 
 def setup(bot: Bot):
