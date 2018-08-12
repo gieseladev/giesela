@@ -13,7 +13,7 @@ from discord import Embed, Message, TextChannel, User
 from . import events, text
 from .abstract import Startable, Stoppable
 from .basic import EditableEmbed
-from .utils import EmojiType
+from .utils import EmbedLimits, EmojiType
 
 log = logging.getLogger(__name__)
 
@@ -122,7 +122,7 @@ class InteractableEmbed(EditableEmbed, Stoppable):
         pass
 
 
-class _Abortable(Stoppable, metaclass=abc.ABCMeta):
+class _Abortable(Stoppable, abc.ABC):
     @emoji_handler("❎", pos=1000)
     async def abort(self, *_) -> None:
         await self.stop()
@@ -243,7 +243,7 @@ class VerticalTextViewer(InteractableEmbed, _Abortable):
         self.line_callback = kwargs.pop("line_callback", None)
 
         self.window_height = kwargs.pop("window_height", 20)
-        self.max_window_length = kwargs.pop("max_window_length", 2000)
+        self.max_window_length = kwargs.pop("max_window_length", EmbedLimits.DESCRIPTION_LIMIT)
 
         self.scroll_amount = kwargs.pop("scroll_amount", max(self.window_height // 3, 1))
 
