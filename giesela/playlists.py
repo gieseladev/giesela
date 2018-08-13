@@ -227,7 +227,7 @@ class PlaylistManager:
             storage_location = Path(storage_location)
         storage_location.parent.mkdir(exist_ok=True)
         storage_location = storage_location.absolute()
-        shelf = DbfilenameShelf(storage_location.absolute())
+        shelf = DbfilenameShelf(str(storage_location))
         inst = cls(bot, shelf)
         inst.init()
         return inst
