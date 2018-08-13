@@ -223,8 +223,10 @@ class PlaylistManager:
 
     @classmethod
     def load(cls, bot: Giesela, storage_location: Union[str, Path]) -> "PlaylistManager":
-        if isinstance(storage_location, Path):
-            storage_location = storage_location.absolute()
+        if isinstance(storage_location, str):
+            storage_location = Path(storage_location)
+        storage_location.parent.mkdir(exist_ok=True)
+        storage_location = storage_location.absolute()
         shelf = DbfilenameShelf(storage_location)
         inst = cls(bot, shelf)
         inst.init()
