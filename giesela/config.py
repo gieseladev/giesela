@@ -21,7 +21,7 @@ class ConfigDefaults:
         "VGMEntry": ":large_blue_diamond:"
     }
 
-    webiesela_port = 8000
+    webiesela_port = 30000
     start_webiesela = True
 
     command_prefix = os.getenv("command_prefix", "!")

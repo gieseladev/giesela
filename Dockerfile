@@ -2,7 +2,7 @@ FROM python:stretch
 
 LABEL maintainer=Simon
 
-EXPOSE 8000
+EXPOSE 30000
 
 # Install required packages
 RUN apt-get -yqq update
