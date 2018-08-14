@@ -136,6 +136,9 @@ class Playlist:
         self.init()
 
     def __enter__(self) -> "Playlist":
+        if hasattr(self, "__opened__"):
+            raise ValueError("Playlist is already open!")
+        
         setattr(self, "__opened__", True)
         return self
 
