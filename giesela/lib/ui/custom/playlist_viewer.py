@@ -2,7 +2,7 @@ from discord import TextChannel, User
 
 from giesela import Giesela, Playlist
 from giesela.cogs.player import Player
-from ..interactive import EmbedViewer, emoji_handler
+from ..interactive import EmbedViewer
 
 
 class PlaylistViewer(EmbedViewer):
@@ -17,7 +17,7 @@ class PlaylistViewer(EmbedViewer):
         self.player_cog = bot.cogs["Player"]
         self.playlist = playlist
 
-    @emoji_handler("▶", pos=999)
-    async def play_playlist(self, **_):
-        player = await self.player_cog.get_player(self.channel.guild, member=self.user)
-        await self.playlist.play(player.queue, channel=self.channel, author=self.user)
+    # @emoji_handler("▶", pos=999)
+    # async def play_playlist(self, **_):
+    #     player = await self.player_cog.get_player(self.channel.guild, member=self.user)
+    #     await self.playlist.play(player.queue, channel=self.channel, author=self.user)

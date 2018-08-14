@@ -7,7 +7,7 @@ from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import Giesela, Playlist, PlaylistManager, utils
-from giesela.lib.ui import EmbedPaginator, EmbedViewer
+from giesela.lib.ui import EmbedPaginator, EmbedViewer, PromptYesNo
 from giesela.lib.ui.custom import PlaylistViewer
 from .info import help_formatter
 from .player import Player
@@ -84,6 +84,7 @@ class Playlist:
         playlist = self.find_playlist(playlist)
         if playlist.author.id != ctx.author.id:
             raise commands.CommandError(f"Only the author of this playlist may delete it ({playlist.author.mention})")
+        # TODO let bot owner do as they please!
         embed = playlist_embed(playlist)
         playlist.delete()
         await ctx.send("Deleted playlist", embed=embed)
@@ -126,6 +127,8 @@ class Playlist:
         embed = Embed(colour=Colour.green())
         embed.set_author(name="Loaded the following playlists")
 
+        #TODO it's only possible to load one playlist at a time so don't act like you can load multiple xD
+
         for attachment in ctx.message.attachments:
             playlist_data = BytesIO()
             await attachment.save(playlist_data)
@@ -147,6 +150,40 @@ class Playlist:
         data.seek(0)
         file = File(data, filename=f"{playlist.name}.gpl")
         await ctx.send("Here you go", file=file)
+
+    @commands.command("addtoplaylist", aliases=["atp", "quickadd", "pladd"])
+    async def playlist_quickadd(self, ctx: Context, playlist: str):
+        """Add the current entry to a playlist."""
+        playlist = self.find_playlist(playlist)
+        player = await self.player_cog.get_player(ctx)
+        entry = player.current_entry
+        if not entry:
+            raise commands.CommandError("There's nothing playing right now")
+        # TODO verify if can edit!
+        if entry in playlist:
+            if not await PromptYesNo(ctx.channel, text=f"{entry.title} is already in this playlist, are you sure you want to add it again?"):
+                return
+
+        playlist.add(entry)
+
+        await ctx.send(f"Added **{entry.title}** to **{playlist.name}**")
+
+    @commands.command("removefromplaylist", aliases=["rfp", "quickremove", "quickrm", "plremove", "plrm"])
+    async def playlist_quickremove(self, ctx: Context, playlist: str):
+        """Remove the current entry from a playlist."""
+        playlist = self.find_playlist(playlist)
+        player = await self.player_cog.get_player(ctx)
+        entry = player.current_entry
+        if not entry:
+            raise commands.CommandError("There's nothing playing right now")
+
+        if entry not in playlist:
+            raise commands.CommandError(f"{entry.title} isn't in this playlist!")
+        # TODO verify if can edit!
+
+        playlist.remove(entry)
+
+        await ctx.send(f"Removed **{entry.title}** from **{playlist.name}**")
 
 
 def setup(bot: Giesela):

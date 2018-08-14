@@ -3,7 +3,7 @@ import logging
 import uuid
 from pathlib import Path
 from shelve import DbfilenameShelf, Shelf
-from typing import Any, Dict, Iterable, List, Optional, Type, Union
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type, Union
 
 from discord import User
 
@@ -23,6 +23,8 @@ class PlaylistEntry:
 
     _entry: dict
 
+    url: str
+
     def __init__(self, entry: Union[BaseEntry, dict]):
         self.playlist = None
 
@@ -31,13 +33,16 @@ class PlaylistEntry:
         self._entry = entry
 
     def __repr__(self) -> str:
-        return f"Entry {self._entry['title']} of {self.playlist}"
+        return f"Entry {self.title} of {self.playlist}"
+
+    def __setstate__(self, state: dict):
+        self._entry = state
 
     def __getstate__(self) -> dict:
         return self._entry
 
-    def __setstate__(self, state: dict):
-        self._entry = state
+    def __reduce__(self) -> Tuple[Callable, tuple, dict]:
+        return object.__new__, (PlaylistEntry,), self.__getstate__()
 
     def __getattr__(self, item: str) -> Optional[Any]:
         return self._entry.get(item)
@@ -48,7 +53,7 @@ class PlaylistEntry:
             cls = getattr(entry_module, self.type, None)
         else:
             cls = None
-        return cls or type(self)
+        return cls or PlaylistEntry
 
     @classmethod
     def from_gpl(cls, data: dict) -> "PlaylistEntry":
@@ -63,7 +68,7 @@ class PlaylistEntry:
         return entry
 
 
-PLAYLIST_SLOTS = ("gpl_id", "name", "description", "author_id", "cover", "entries")
+PLAYLIST_SLOTS = {"gpl_id", "name", "description", "author_id", "cover", "entries"}
 
 
 class Playlist:
@@ -91,8 +96,7 @@ class Playlist:
             self.author_id = kwargs.pop("author_id")
         self.cover = kwargs.pop("cover", None)
         self.entries = kwargs.pop("entries")
-        for entry in self.entries:
-            entry.playlist = self
+        self.init()
 
     def __repr__(self) -> str:
         return f"Playlist {self.gpl_id}"
@@ -103,8 +107,14 @@ class Playlist:
     def __len__(self) -> int:
         return len(self.entries)
 
-    def __iter__(self) -> Iterable[PlaylistEntry]:
+    def __contains__(self, entry: BaseEntry) -> bool:
+        return self.has(entry)
+
+    def __iter__(self) -> Iterator[PlaylistEntry]:
         return iter(self.entries)
+
+    def __reversed__(self) -> Iterator[PlaylistEntry]:
+        return reversed(self.entries)
 
     def __getstate__(self) -> dict:
         return {key: getattr(self, key) for key in PLAYLIST_SLOTS}
@@ -112,6 +122,7 @@ class Playlist:
     def __setstate__(self, state: dict):
         for key in PLAYLIST_SLOTS:
             setattr(self, key, state[key])
+        self.init()
 
     def __enter__(self) -> "Playlist":
         return self
@@ -137,8 +148,8 @@ class Playlist:
         self._author = author
 
     def init(self):
-        pass
-        # TODO decide whether init is necessary
+        for entry in self.entries:
+            entry.playlist = self
         # TODO automatic cover generation
         # TODO manipulating
 
@@ -160,6 +171,24 @@ class Playlist:
         data["gpl_id"] = data.pop("gpl_id").hex
         data["entries"] = [entry.to_gpl() for entry in data.pop("entries")]
         return data
+
+    def add(self, entry: BaseEntry):
+        entry = PlaylistEntry(entry)
+        entry.playlist = self
+        self.entries.append(entry)
+        self.save()
+
+    def remove(self, entry: BaseEntry):
+        for _entry in reversed(self):
+            if _entry.url == entry.url:
+                self.entries.remove(_entry)
+        self.save()
+
+    def has(self, entry: BaseEntry) -> bool:
+        for _entry in self:
+            if _entry.url == entry.url:
+                return True
+        return False
 
     def save(self):
         self.manager.save_playlist(self)
@@ -233,8 +262,7 @@ class PlaylistManager:
         return inst
 
     def init(self):
-        for playlist in self.playlists:
-            playlist.init()
+        pass
 
     def import_from_gpl(self, playlist: Union[dict, str]) -> Optional[Playlist]:
         if isinstance(playlist, str):
