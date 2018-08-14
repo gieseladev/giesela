@@ -24,6 +24,17 @@ def playlist_embed(playlist: Playlist) -> Embed:
     return embed
 
 
+def ensure_user_can_edit_playlist(playlist: Playlist, user: User):
+    if not playlist.can_edit(user):
+        raise commands.CommandError("You're not allowed to edit this playlist!")
+
+
+def ensure_user_is_author(playlist: Playlist, user: User, operation="perform this command"):
+    # TODO let bot owner do as they please!
+    if not playlist.is_author(user):
+        raise commands.CommandError(f"Only the author of this may {operation} ({playlist.author.mention})!")
+
+
 class Playlist:
     bot: Giesela
     playlist_manager: PlaylistManager
@@ -77,14 +88,9 @@ class Playlist:
 
     @playlist.command("delete", aliases=["rm", "remove"])
     async def playlist_delete(self, ctx: Context, playlist: str):
-        """Delete a playlist
-
-        Please mind, that only the author of a playlist can delete it.
-        """
+        """Delete a playlist"""
         playlist = self.find_playlist(playlist)
-        if playlist.author.id != ctx.author.id:
-            raise commands.CommandError(f"Only the author of this playlist may delete it ({playlist.author.mention})")
-        # TODO let bot owner do as they please!
+        ensure_user_is_author(playlist, ctx.author, "delete it")
         embed = playlist_embed(playlist)
         playlist.delete()
         await ctx.send("Deleted playlist", embed=embed)
@@ -93,10 +99,49 @@ class Playlist:
     async def playlist_transfer(self, ctx: Context, playlist: str, user: User):
         """Transfer a playlist to someone else."""
         playlist = self.find_playlist(playlist)
-        if playlist.author.id != ctx.author.id:
-            raise commands.CommandError(f"Only the author of this playlist may transfer it ({playlist.author.mention})")
+        ensure_user_is_author(playlist, ctx.author, "transfer it")
         playlist.transfer(user)
         await ctx.send(f"Transferred **{playlist.name}** to {user.mention}")
+
+    @playlist.group("editor", invoke_without_command=True, aliases=["editors"])
+    async def playlist_editor(self, ctx: Context, playlist: str):
+        """Manage editors of a playlist."""
+        playlist = self.find_playlist(playlist)
+
+        text = f"author: {playlist.author.mention}\n"
+
+        if playlist.editors:
+            editors = "\n".join(f"  - {editor.mention}" for editor in playlist.editors)
+            text += f"editors:\n" \
+                    f"{editors}"
+        else:
+            text += "No editors"
+
+        await ctx.send(embed=Embed(title=playlist.name, description=text, colour=Colour.blue()))
+
+    @playlist_editor.command("add")
+    async def playlist_editor_add(self, ctx: Context, playlist: str, user: User):
+        """Give someone the permission to edit your playlist."""
+        playlist = self.find_playlist(playlist)
+        ensure_user_is_author(playlist, user)
+
+        if playlist.is_editor(user):
+            raise commands.CommandError(f"{user.mention} is already an editor of **{playlist.name}**")
+
+        playlist.add_editor(user)
+        await ctx.send(f"Added {user.mention} as an editor for **{playlist.name}**")
+
+    @playlist_editor.command("remove", aliases=["rm"])
+    async def playlist_editor_remove(self, ctx: Context, playlist: str, user: User):
+        """Remove an editor from your playlist."""
+        playlist = self.find_playlist(playlist)
+        ensure_user_is_author(playlist, user)
+
+        if not playlist.is_editor(user):
+            raise commands.CommandError(f"{user.mention} isn't an editor of **{playlist.name}**")
+
+        playlist.remove_editor(user)
+        await ctx.send(f"Removed {user.mention} as an editor for **{playlist.name}**")
 
     @playlist.command("show", aliases=["showall", "all"])
     async def playlist_show(self, ctx: Context):
@@ -125,18 +170,18 @@ class Playlist:
             raise commands.CommandError("Nothing attached...")
 
         embed = Embed(colour=Colour.green())
-        embed.set_author(name="Loaded the following playlists")
+        embed.set_author(name="Loaded Playlist")
 
-        #TODO it's only possible to load one playlist at a time so don't act like you can load multiple xD
+        attachment = ctx.message.attachments[0]
 
-        for attachment in ctx.message.attachments:
-            playlist_data = BytesIO()
-            await attachment.save(playlist_data)
-            playlist = self.playlist_manager.import_from_gpl(playlist_data.read().decode("utf-8"))
-            if playlist:
-                embed.add_field(name=playlist.name, value=f"by {playlist.author.name}\n{len(playlist)} entries")
-        if not embed.fields:
-            raise commands.CommandError("Couldn't load any playlists")
+        playlist_data = BytesIO()
+        await attachment.save(playlist_data)
+        playlist = self.playlist_manager.import_from_gpl(playlist_data.read().decode("utf-8"))
+
+        if playlist:
+            embed.add_field(name=playlist.name, value=f"by {playlist.author.name}\n{len(playlist)} entries")
+        else:
+            raise commands.CommandError("Couldn't load playlist")
 
         await ctx.send(embed=embed)
 
@@ -151,15 +196,17 @@ class Playlist:
         file = File(data, filename=f"{playlist.name}.gpl")
         await ctx.send("Here you go", file=file)
 
-    @commands.command("addtoplaylist", aliases=["atp", "quickadd", "pladd"])
+    @commands.command("addtoplaylist", aliases=["quickadd", "pladd", "pl+"])
     async def playlist_quickadd(self, ctx: Context, playlist: str):
         """Add the current entry to a playlist."""
         playlist = self.find_playlist(playlist)
+        ensure_user_can_edit_playlist(playlist, ctx.author)
+
         player = await self.player_cog.get_player(ctx)
         entry = player.current_entry
         if not entry:
             raise commands.CommandError("There's nothing playing right now")
-        # TODO verify if can edit!
+
         if entry in playlist:
             if not await PromptYesNo(ctx.channel, text=f"{entry.title} is already in this playlist, are you sure you want to add it again?"):
                 return
@@ -168,10 +215,12 @@ class Playlist:
 
         await ctx.send(f"Added **{entry.title}** to **{playlist.name}**")
 
-    @commands.command("removefromplaylist", aliases=["rfp", "quickremove", "quickrm", "plremove", "plrm"])
+    @commands.command("removefromplaylist", aliases=["quickremove", "quickrm", "plremove", "plrm", "pl-"])
     async def playlist_quickremove(self, ctx: Context, playlist: str):
         """Remove the current entry from a playlist."""
         playlist = self.find_playlist(playlist)
+        ensure_user_can_edit_playlist(playlist, ctx.author)
+
         player = await self.player_cog.get_player(ctx)
         entry = player.current_entry
         if not entry:
@@ -179,7 +228,6 @@ class Playlist:
 
         if entry not in playlist:
             raise commands.CommandError(f"{entry.title} isn't in this playlist!")
-        # TODO verify if can edit!
 
         playlist.remove(entry)
 

@@ -3,7 +3,7 @@ import logging
 import uuid
 from pathlib import Path
 from shelve import DbfilenameShelf, Shelf
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type, Union
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Set, Tuple, Type, Union
 
 from discord import User
 
@@ -68,7 +68,9 @@ class PlaylistEntry:
         return entry
 
 
-PLAYLIST_SLOTS = {"gpl_id", "name", "description", "author_id", "cover", "entries"}
+PLAYLIST_SLOTS = ("gpl_id", "name", "description", "author_id", "cover", "entries", "editor_ids")
+# This makes backward-compatible saves somewhat possible
+PLAYLIST_SLOT_DEFAULTS = {"description": None, "cover": None, "entries": [], "editor_ids": []}
 
 
 class Playlist:
@@ -80,8 +82,10 @@ class Playlist:
     author_id: int
     cover: Optional[str]
     entries: List[PlaylistEntry]
+    editor_ids: Set[int]
 
     _author: User
+    _editors: List[User]
 
     def __init__(self, **kwargs):
         self.manager = None
@@ -89,13 +93,19 @@ class Playlist:
         self.gpl_id = kwargs.pop("gpl_id", uuid.uuid4())
         self.name = kwargs.pop("name")
         self.description = kwargs.pop("description", None)
-        author = kwargs.pop("author", None)
-        if author:
-            self.author_id = self.author.id
-        else:
-            self.author_id = kwargs.pop("author_id")
         self.cover = kwargs.pop("cover", None)
         self.entries = kwargs.pop("entries")
+        self.editor_ids = kwargs.pop("editors", [])
+
+        author = kwargs.pop("author", None)
+        if author:
+            if isinstance(author, dict):
+                self.author_id = author["id"]
+            else:
+                self.author_id = author.id
+        else:
+            self.author_id = kwargs.pop("author_id")
+
         self.init()
 
     def __repr__(self) -> str:
@@ -121,13 +131,16 @@ class Playlist:
 
     def __setstate__(self, state: dict):
         for key in PLAYLIST_SLOTS:
-            setattr(self, key, state[key])
+            value = state[key] if key in state else PLAYLIST_SLOT_DEFAULTS[key]
+            setattr(self, key, value)
         self.init()
 
     def __enter__(self) -> "Playlist":
+        setattr(self, "__opened__", True)
         return self
 
     def __exit__(self, exc_type: Optional[Type[Exception]], exc: Optional[Exception], exc_tb: Optional):
+        delattr(self, "__opened__")
         self.save()
         if exc:
             raise exc
@@ -141,6 +154,12 @@ class Playlist:
         if not getattr(self, "_author", False):
             self._author = self.manager.bot.get_user(self.author_id)
         return self._author
+
+    @property
+    def editors(self) -> List[User]:
+        if not getattr(self, "_editors", False):
+            self._editors = list(filter(None, map(self.manager.bot.get_user, self.editor_ids)))
+        return self._editors
 
     @author.setter
     def author(self, author: User):
@@ -191,6 +210,9 @@ class Playlist:
         return False
 
     def save(self):
+        if hasattr(self, "__opened__"):
+            log.debug("not saving playlist because it's open")
+            return
         self.manager.save_playlist(self)
         log.debug(f"saved playlist {self}")
 
@@ -201,6 +223,31 @@ class Playlist:
     def transfer(self, new_author: User):
         self.author = new_author
         self.save()
+
+    def add_editor(self, user: User):
+        if self.is_editor(user):
+            return
+        self.editor_ids.add(user.id)
+        if hasattr(self, "_editors"):
+            self._editors.append(user)
+        self.save()
+
+    def remove_editor(self, user: User):
+        if not self.is_editor(user):
+            return
+        self.editor_ids.remove(user.id)
+        if hasattr(self, "_editors"):
+            self._editors.remove(user)
+        self.save()
+
+    def is_author(self, user: User) -> bool:
+        return user.id == self.author_id
+
+    def is_editor(self, user: User) -> bool:
+        return user.id in self.editor_ids
+
+    def can_edit(self, user: User) -> bool:
+        return self.is_author(user) or self.is_editor(user)
 
     async def play(self, queue: Queue, **meta):
         await queue.load_playlist(self, **meta)
