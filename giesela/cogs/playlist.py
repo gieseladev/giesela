@@ -24,15 +24,18 @@ def playlist_embed(playlist: Playlist) -> Embed:
     return embed
 
 
-def ensure_user_can_edit_playlist(playlist: Playlist, user: User):
-    if not playlist.can_edit(user):
+async def is_owner(ctx: Context) -> bool:
+    return await ctx.bot.is_owner(ctx.author)
+
+
+async def ensure_user_can_edit_playlist(playlist: Playlist, ctx: Context):
+    if not (playlist.can_edit(ctx.author) or await is_owner(ctx)):
         raise commands.CommandError("You're not allowed to edit this playlist!")
 
 
-def ensure_user_is_author(playlist: Playlist, user: User, operation="perform this command"):
-    # TODO let bot owner do as they please!
-    if not playlist.is_author(user):
-        raise commands.CommandError(f"Only the author of this may {operation} ({playlist.author.mention})!")
+async def ensure_user_is_author(playlist: Playlist, ctx: Context, operation="perform this command"):
+    if not (playlist.is_author(ctx.author) or await is_owner(ctx)):
+        raise commands.CommandError(f"Only the author of this playlist may {operation} ({playlist.author.mention})!")
 
 
 class Playlist:
@@ -90,7 +93,7 @@ class Playlist:
     async def playlist_delete(self, ctx: Context, playlist: str):
         """Delete a playlist"""
         playlist = self.find_playlist(playlist)
-        ensure_user_is_author(playlist, ctx.author, "delete it")
+        await ensure_user_is_author(playlist, ctx, "delete it")
         embed = playlist_embed(playlist)
         playlist.delete()
         await ctx.send("Deleted playlist", embed=embed)
@@ -99,7 +102,7 @@ class Playlist:
     async def playlist_transfer(self, ctx: Context, playlist: str, user: User):
         """Transfer a playlist to someone else."""
         playlist = self.find_playlist(playlist)
-        ensure_user_is_author(playlist, ctx.author, "transfer it")
+        await ensure_user_is_author(playlist, ctx, "transfer it")
         playlist.transfer(user)
         await ctx.send(f"Transferred **{playlist.name}** to {user.mention}")
 
@@ -123,7 +126,7 @@ class Playlist:
     async def playlist_editor_add(self, ctx: Context, playlist: str, user: User):
         """Give someone the permission to edit your playlist."""
         playlist = self.find_playlist(playlist)
-        ensure_user_is_author(playlist, user)
+        await ensure_user_is_author(playlist, ctx, "add editors")
 
         if playlist.is_editor(user):
             raise commands.CommandError(f"{user.mention} is already an editor of **{playlist.name}**")
@@ -135,7 +138,7 @@ class Playlist:
     async def playlist_editor_remove(self, ctx: Context, playlist: str, user: User):
         """Remove an editor from your playlist."""
         playlist = self.find_playlist(playlist)
-        ensure_user_is_author(playlist, user)
+        await ensure_user_is_author(playlist, ctx, "remove editors")
 
         if not playlist.is_editor(user):
             raise commands.CommandError(f"{user.mention} isn't an editor of **{playlist.name}**")
@@ -200,7 +203,7 @@ class Playlist:
     async def playlist_quickadd(self, ctx: Context, playlist: str):
         """Add the current entry to a playlist."""
         playlist = self.find_playlist(playlist)
-        ensure_user_can_edit_playlist(playlist, ctx.author)
+        await ensure_user_can_edit_playlist(playlist, ctx)
 
         player = await self.player_cog.get_player(ctx)
         entry = player.current_entry
@@ -219,7 +222,7 @@ class Playlist:
     async def playlist_quickremove(self, ctx: Context, playlist: str):
         """Remove the current entry from a playlist."""
         playlist = self.find_playlist(playlist)
-        ensure_user_can_edit_playlist(playlist, ctx.author)
+        await ensure_user_can_edit_playlist(playlist, ctx)
 
         player = await self.player_cog.get_player(ctx)
         entry = player.current_entry
