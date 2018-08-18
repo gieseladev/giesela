@@ -29,6 +29,10 @@ class EditableEmbed:
     def message(self) -> Optional[Message]:
         return self._message
 
+    async def update_message_state(self):
+        if self.message:
+            self._message = await self.channel.get_message(self.message.id)
+
     async def delete(self):
         if self.message:
             await self.message.delete()

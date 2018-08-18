@@ -70,6 +70,7 @@ class Playlist:
 
         if not playlist:
             await help_formatter.send_help_for(ctx, self.playlist)
+            return
 
         viewer = PlaylistViewer(self.bot, ctx.channel, ctx.author, playlist)
         await viewer.display()

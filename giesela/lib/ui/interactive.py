@@ -13,7 +13,7 @@ from discord import Embed, Message, TextChannel, User
 from . import events, text
 from .abstract import Startable, Stoppable
 from .basic import EditableEmbed
-from .utils import EmbedLimits, EmojiType
+from .utils import EmbedLimits, EmojiType, format_embed
 
 log = logging.getLogger(__name__)
 
@@ -66,6 +66,26 @@ class InteractableEmbed(EditableEmbed, Stoppable):
             pos = 10
         self._emojis.append((emoji, pos))
 
+    async def disable_handler(self, handler: Union[EmojiType, List[EmojiType], EmojiHandlerType]):
+        if isinstance(handler, Callable):
+            emojis = getattr(handler, "_handles", None)
+            if not emojis:
+                raise ValueError(f"{handler} doesn't handle any emoji")
+        elif isinstance(handler, list):
+            emojis = handler
+        else:
+            emojis = [handler]
+
+        futures = []
+
+        for emoji in emojis:
+            _handler = self.handlers[emoji]
+            setattr(_handler.__func__, "_disabled", True)
+            fut = asyncio.ensure_future(self.remove_reaction(emoji))
+            futures.append(fut)
+
+        await asyncio.gather(*futures)
+
     async def stop(self):
         self._stop_signal = True
 
@@ -86,6 +106,21 @@ class InteractableEmbed(EditableEmbed, Stoppable):
         for emoji in self.emojis:
             await msg.add_reaction(emoji)
 
+    async def remove_reaction(self, emoji: EmojiType):
+        if not self.message:
+            return
+
+        await self.update_message_state()
+
+        for reaction in self.message.reactions:
+            if reaction.emoji == emoji:
+                break
+        else:
+            return
+
+        async for user in reaction.users():
+            await self.message.remove_reaction(emoji, user)
+
     async def listen_once(self) -> Any:
         if not self.message:
             raise Exception("There's no message to listen to")
@@ -95,6 +130,9 @@ class InteractableEmbed(EditableEmbed, Stoppable):
         await self.on_any_emoji(emoji, user)
 
         handler = self.handlers.get(emoji)
+        if hasattr(handler, "_disabled"):
+            return
+
         if not handler:
             return await self.on_unhandled_emoji(emoji, user)
         else:
@@ -122,7 +160,7 @@ class InteractableEmbed(EditableEmbed, Stoppable):
         pass
 
 
-class _Abortable(Stoppable, abc.ABC):
+class Abortable(Stoppable, abc.ABC):
     @emoji_handler("❎", pos=1000)
     async def abort(self, *_) -> None:
         await self.stop()
@@ -186,7 +224,7 @@ class _HorizontalPageViewer(InteractableEmbed, Startable, metaclass=abc.ABCMeta)
         await self.show_page()
 
 
-class ItemPicker(_HorizontalPageViewer, _Abortable):
+class ItemPicker(_HorizontalPageViewer, Abortable):
     async def choose(self) -> Optional[int]:
         return await self.start()
 
@@ -196,12 +234,12 @@ class ItemPicker(_HorizontalPageViewer, _Abortable):
         return self.current_index
 
 
-class EmbedViewer(_HorizontalPageViewer, _Abortable):
+class EmbedViewer(_HorizontalPageViewer, Abortable):
     async def display(self) -> None:
         return await self.start()
 
 
-class VerticalTextViewer(InteractableEmbed, _Abortable):
+class VerticalTextViewer(InteractableEmbed, Abortable):
     """
     Keyword Args:
         embed_frame: Template `Embed` to use
@@ -334,24 +372,11 @@ class VerticalTextViewer(InteractableEmbed, _Abortable):
 
     def format_embed(self, embed: Embed) -> Embed:
         _progress = (self.current_line + self.lines_displayed) / self.total_lines
-        f_args = dict(viewer=self,
-                      current_line=self.current_line + 1,
-                      total_lines=self.total_lines,
-                      progress_bar=text.create_bar(_progress, min(self.window_width, 30)))
-
-        def format_rich(rich: str, attr: str):
-            nonlocal embed, f_args
-            _rich = getattr(embed, rich, None)
-            if _rich:
-                if attr in _rich:
-                    _rich[attr] = _rich[attr].format(**f_args)
-
-        format_rich("_author", "name")
-        format_rich("_footer", "text")
-
-        if embed.description:
-            embed.description = embed.description.format(**f_args)
-        return embed
+        return format_embed(embed, _copy=False,
+                            viewer=self,
+                            current_line=self.current_line + 1,
+                            total_lines=self.total_lines,
+                            progress_bar=text.create_bar(_progress, min(self.window_width, 30)))
 
     async def get_line(self, line: int) -> str:
         if self.lines:
@@ -371,7 +396,7 @@ class VerticalTextViewer(InteractableEmbed, _Abortable):
         next_embed = await self.get_current_embed()
         await self.edit(next_embed, on_new=self.add_reactions)
 
-    @emoji_handler("🔼")
+    @emoji_handler("🔼", pos=2)
     async def scroll_up(self, *_):
         if self.first_line_visible:
             return
@@ -382,7 +407,7 @@ class VerticalTextViewer(InteractableEmbed, _Abortable):
             self._current_line -= self.scroll_amount
         await self.show_window()
 
-    @emoji_handler("🔽")
+    @emoji_handler("🔽", pos=1)
     async def scroll_down(self, *_):
         if self.last_line_visible:
             return
