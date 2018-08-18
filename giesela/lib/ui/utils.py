@@ -32,10 +32,10 @@ def format_embed(embed: Embed, _copy=True, **fmt) -> Embed:
         embed.description = embed.description.format(**fmt)
 
     if embed.author.name:
-        embed.author.name = embed.author.name.format(**fmt)
+        embed.set_author(name=embed.author.name.format(**fmt), url=embed.author.url, icon_url=embed.author.icon_url)
 
     if embed.footer.text:
-        embed.footer.text = embed.footer.text(**fmt)
+        embed.set_footer(text=embed.footer.text.format(**fmt), icon_url=embed.footer.icon_url)
 
     for i, field in enumerate(embed.fields):
         embed.set_field_at(i, name=field.name.format(**fmt), value=field.value.format(**fmt), inline=field.inline)
