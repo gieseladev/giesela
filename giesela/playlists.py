@@ -173,8 +173,7 @@ class Playlist:
     def init(self):
         for entry in self.entries:
             entry.playlist = self
-        # TODO automatic cover generation
-        # TODO manipulating
+        # TODO builder is missing
 
     @classmethod
     def from_gpl(cls, manager: "PlaylistManager", data: dict) -> "Playlist":
@@ -341,9 +340,14 @@ class PlaylistManager:
             try:
                 playlist = json.loads(playlist)
             except json.JSONDecodeError:
-                return None
+                return
 
-        playlist = Playlist.from_gpl(self, playlist)
+        try:
+            playlist = Playlist.from_gpl(self, playlist)
+        except Exception as e:
+            log.warning("Couldn't import playlist", exc_info=e)
+            return
+
         self.add_playlist(playlist)
         return playlist
 

@@ -1,8 +1,9 @@
 import json
 import random
 from io import BytesIO
+from typing import Optional
 
-from discord import Colour, Embed, File, User
+from discord import Attachment, Colour, Embed, File, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -37,6 +38,12 @@ async def ensure_user_can_edit_playlist(playlist: Playlist, ctx: Context):
 async def ensure_user_is_author(playlist: Playlist, ctx: Context, operation="perform this command"):
     if not (playlist.is_author(ctx.author) or await is_owner(ctx)):
         raise commands.CommandError(f"Only the author of this playlist may {operation} ({playlist.author.mention})!")
+
+
+async def save_attachment(attachment: Attachment) -> BytesIO:
+    data = BytesIO()
+    await attachment.save(data)
+    return data
 
 
 class Playlist:
@@ -226,27 +233,69 @@ class Playlist:
         viewer = EmbedViewer(ctx.channel, ctx.author, embeds=paginator)
         await viewer.display()
 
-    @playlist.command("import", aliases=["imp"])
-    async def playlist_import(self, ctx: Context):
-        """Import a playlist from a GPL file."""
-        if not ctx.message.attachments:
-            raise commands.CommandError("Nothing attached...")
+    async def import_playlist(self, data) -> Optional[Embed]:
+        playlist = self.playlist_manager.import_from_gpl(data)
+
+        if not playlist:
+            return
 
         embed = Embed(colour=Colour.green())
         embed.set_author(name="Loaded Playlist")
+        embed.add_field(name=playlist.name, value=f"by {playlist.author.name}\n{len(playlist)} entries")
+        return embed
 
-        attachment = ctx.message.attachments[0]
+    @playlist.group("import", invoke_without_command=True, aliases=["imp"])
+    async def playlist_import(self, ctx: Context):
+        """Import a playlist from a GPL file."""
+        if not ctx.message.attachments:
+            raise commands.CommandError("Please attach a GPL file!")
 
-        playlist_data = BytesIO()
-        await attachment.save(playlist_data)
-        playlist = self.playlist_manager.import_from_gpl(playlist_data.read().decode("utf-8"))
+        playlist_data = await save_attachment(ctx.message.attachments[0])
+        embed = await self.import_playlist(playlist_data.read().decode("utf-8"))
 
-        if playlist:
-            embed.add_field(name=playlist.name, value=f"by {playlist.author.name}\n{len(playlist)} entries")
+        if embed:
+            await ctx.send(embed=embed)
         else:
-            raise commands.CommandError("Couldn't load playlist")
+            raise commands.CommandError("Couldn't load playlist\n"
+                                        "If this is a playlist from the ancient times (before version 5.0.0) "
+                                        "use the command `playlist import old` which requires you to provide the name of the playlist.")
 
-        await ctx.send(embed=embed)
+    @playlist_import.command("old", aliases=["ancient"])
+    async def playlist_import_old(self, ctx: Context, name: str, author: User = None):
+        """Import an old playlist.
+
+        Old playlists didn't store meta data. In order to import them you need to provide the bare minimum of meta data
+        which is the name and the author (which defaults to the person executing the command)
+        """
+        if not ctx.message.attachments:
+            raise commands.CommandError("Please attach a GPL file!")
+
+        author = author or ctx.author
+
+        _entry_data = await save_attachment(ctx.message.attachments[0])
+        entry_data = _entry_data.read().decode("utf-8")
+        try:
+            entries = json.loads(entry_data)
+        except json.JSONDecodeError:
+            raise commands.CommandError("This file is invalid. This cannot be imported!")
+
+        if isinstance(entries, dict):
+            raise commands.CommandError("This isn't an old playlist. Please use the `playlist import` command instead!")
+        elif not isinstance(entries, list):
+            raise commands.CommandError("What is this garbage? This isn't an old playlist and cannot be imported!")
+
+        playlist_data = {
+            "name": name,
+            "author_id": author.id,
+            "entries": entries
+        }
+
+        embed = await self.import_playlist(playlist_data)
+        if embed:
+            await ctx.send(embed=embed)
+        else:
+            raise commands.CommandError("Couldn't import playlist. This probably doesn't have anything to do with the playlist being old. "
+                                        "It's just broken...")
 
     @playlist.command("export")
     async def playlist_export(self, ctx: Context, playlist: str):
