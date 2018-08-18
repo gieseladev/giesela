@@ -1,6 +1,6 @@
 import os.path
 
-MAIN_VERSION = "5.3.2"
+MAIN_VERSION = "5.3.3"
 SUB_VERSION = "refreshed"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 

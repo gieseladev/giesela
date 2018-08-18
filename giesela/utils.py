@@ -10,9 +10,8 @@ import aiohttp
 import math
 import requests
 from PIL import Image, ImageStat
-from bs4 import BeautifulSoup
 
-from .config import ConfigDefaults, static_config
+from .config import static_config
 
 log = logging.getLogger(__name__)
 
@@ -30,17 +29,6 @@ def wrap_string(target, wrapping, handle_special=True, reverse_closer=True):
         closer = closer[::-1]
 
     return "{}{}{}".format(opener, target, closer)
-
-
-def create_cmd_params(params: dict):
-    param_list = []
-    for key, value in params.items():
-        if value is not None:
-            param_list.append("-{} {}".format(key, value))
-        else:
-            param_list.append("-{}".format(key))
-
-    return " ".join(param_list)
 
 
 def is_image(url):
@@ -395,19 +383,6 @@ def to_timestamp(seconds):
         return ":".join(str(x) for x in (m, s))
 
 
-def format_time_ffmpeg(s):
-    total_msec = s * 1000
-    total_seconds = s
-    total_minutes = s / 60
-    total_hours = s / 3600
-    msec = int(total_msec % 1000)
-    sec = int(total_seconds % 60 - (msec / 3600000))
-    mins = int(total_minutes % 60 - (sec / 3600) - (msec / 3600000))
-    hours = int(total_hours - (mins / 60) - (sec / 3600) - (msec / 3600000))
-
-    return "{:02d}:{:02d}:{:02d}".format(hours, mins, sec)
-
-
 def round_to_interval(num, interval=5):
     return int(interval * round(float(num) / interval))
 
@@ -456,20 +431,6 @@ async def get_header(session, url, header_field=None, *, timeout=5):
                 return response.headers
 
 
-def get_dev_version():
-    page = requests.get(
-        "https://raw.githubusercontent.com/GieselaDev/Giesela/dev/musicbot/constants.py"
-    )
-    matches = re.search(
-        r"MAIN_VERSION = \"(\d+\.\d+\.\d+)\"\nSUB_VERSION = \"(.*?)\"",
-        page.content.decode("utf-8"))
-
-    if matches is None:
-        return None, None
-
-    return matches.groups()
-
-
 def html2md(html):
     """Convert html to markdown.
 
@@ -489,50 +450,3 @@ def html2md(html):
         html = re.sub(target, replacement, html)
 
     return html
-
-
-def get_version_changelog(version_code=None):
-    version_code = version_code or get_dev_version()[0]
-    if not version_code:
-        return ["Changelog not available"]
-
-    base_url = "https://gieseladev.github.io/Giesela/changelogs/changelog-"
-    v_code = re.sub(r"\D", "", version_code)
-
-    resp = requests.get(base_url + v_code)
-
-    if not resp.ok:
-        return ["Changelog not yet available"]
-
-    changelog_page = resp.text
-
-    bs = BeautifulSoup(changelog_page, ConfigDefaults.html_parser)
-    html_to_markdown = [
-        (r"<\/?li>", "\t"),  # indent list elements
-        (r"<\/?ul>", ""),  # remove their wrapper
-
-        # HTML tag to Markdown
-        (r"<code.+?>(.+?)<\/code>", r"`\1`"),  # code
-        (r"<strong>(.+?)<\/strong>", r"**\1**"),  # bold
-        (r"<a\shref=\"(.+?)\">(.+?)<\/a>", r"[`\2`](\1)"),  # links
-        # that's all
-
-        (r"\n\W+\n", "\n")  # remove useless stuff between new lines
-    ]
-
-    changes = []
-
-    try:
-        for sib in (bs.body.li, *bs.body.li.next_siblings):
-            line = str(sib).strip()
-            for match, repl in html_to_markdown:
-                line = re.sub(match, repl, line)
-
-            line = line.strip()
-            if line:
-                changes.append(line)
-
-        return changes
-    except Exception:
-        log.exception("error while parsing changelog")
-        return ["Couldn't find the changelog"]
