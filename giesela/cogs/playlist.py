@@ -18,7 +18,8 @@ LOAD_ORDER = 1
 def playlist_embed(playlist: Playlist) -> Embed:
     description = playlist.description or "No description"
     embed = Embed(title=playlist.name, description=description)
-    embed.set_thumbnail(url=playlist.cover)
+    if playlist.cover:
+        embed.set_thumbnail(url=playlist.cover)
     embed.set_author(name=playlist.author.display_name, icon_url=playlist.author.avatar_url)
     embed.set_footer(text=f"Playlist with {len(playlist)} entries")
     return embed
@@ -73,7 +74,7 @@ class Playlist:
         viewer = PlaylistViewer(self.bot, ctx.channel, ctx.author, playlist)
         await viewer.display()
 
-    @playlist.group("play", aliases=["load"])
+    @playlist.group("play", aliases=["load", "start", "listen"])
     async def playlist_play(self, ctx: Context, playlist: str):
         """Play a playlist"""
         playlist = self.find_playlist(playlist)
