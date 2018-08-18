@@ -4,7 +4,7 @@ from textwrap import indent, wrap
 
 import aiohttp
 from discord import Colour, Embed
-from discord.ext.commands import AutoShardedBot, CommandError, Context
+from discord.ext.commands import AutoShardedBot, CommandError, CommandInvokeError, Context
 
 from . import cogs, exceptions, reporting
 from .config import Config, ConfigDefaults
@@ -55,11 +55,25 @@ class Giesela(AutoShardedBot):
             log.exception(f"Error in {event} ({args}, {kwargs})")
 
     async def on_command_error(self, ctx: Context, exception: Exception):
+        report = True
+
         if isinstance(exception, CommandError):
-            embed = Embed(title=type(exception).__name__, description=str(exception), colour=Colour.red())
+            if isinstance(exception, CommandInvokeError):
+                original = exception.original
+                description = "There was an internal error while processing your command." \
+                              "This shouldn't happen (obviously) and it isn't your fault *(maybe)*.\n"
+
+                embed = Embed(title="Internal Error", description=description, colour=Colour.red())
+                embed.add_field(name="Please ask someone (who knows their shit) to take a look at this:",
+                                value=f"```python\n{original!r}```",
+                                inline=False)
+            else:
+                embed = Embed(title=type(exception).__name__, description=str(exception), colour=Colour.red())
+                report = False
             await ctx.send(embed=embed)
-        else:
-            reporting.raven_client.captureException(exception)
+
+        if report:
+            reporting.raven_client.captureException((type(exception), exception, exception.__traceback__))
 
         log.exception("CommandError:", exc_info=exception)
 
