@@ -1,7 +1,5 @@
-import asyncio
 import logging
 import sys
-from contextlib import suppress
 from textwrap import indent, wrap
 
 import aiohttp
@@ -39,28 +37,10 @@ class Giesela(AutoShardedBot):
         await self.aiosession.close()
         await super().logout()
 
-    def _cleanup(self):
-        with suppress(Exception):
-            self.loop.run_until_complete(self.logout())
-
-        pending = asyncio.Task.all_tasks()
-        gathered = asyncio.gather(*pending)
-
-        with suppress(Exception):
-            gathered.cancel()
-            self.loop.run_until_complete(gathered)
-            gathered.exception()
-
     def run(self):
         try:
             super().run(self.config.token)
         finally:
-            try:
-                self._cleanup()
-            except Exception as e:
-                log.info("Error in cleanup:", e)
-
-            self.loop.close()
             if self.exit_signal:
                 raise self.exit_signal
 
