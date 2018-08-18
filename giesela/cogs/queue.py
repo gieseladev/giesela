@@ -489,10 +489,8 @@ class ManipulateCog(QueueBase):
         if player.is_stopped:
             raise commands.CommandError("Can't skip! The player is not playing!")
 
-        if skip != "all" and isinstance(player.current_entry, TimestampEntry):
-            await player.seek(player.current_entry.current_sub_entry["end"])
-        else:
-            player.skip()
+        skip_to_next = skip == "all"
+        player.skip(skip_to_next)
 
     @commands.command()
     async def promote(self, ctx: Context, position: int = None):

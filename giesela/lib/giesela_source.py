@@ -5,7 +5,7 @@ Another fancy thing is the possibility to wait for the player to reach a certain
 
 import asyncio
 import logging
-from typing import List, NamedTuple
+from typing import Any, Callable, List, TypeVar, Union
 
 from discord import FFmpegPCMAudio, PCMVolumeTransformer
 
@@ -18,10 +18,43 @@ CHANNEL_COUNT = 2
 BYTES_PER_SECOND = SAMPLE_RATE * (BIT_DEPTH / 8) * CHANNEL_COUNT
 
 
-class PlayerTimestamp(NamedTuple):
+class PlayerTimestamp:
     timestamp: float
     bytestamp: float
+    only_when_latest: bool
     future: asyncio.Future
+
+    _triggered: bool
+
+    def __init__(self, timestamp: float, only_when_latest: bool, future: asyncio.Future):
+        self.timestamp = timestamp
+        self.bytestamp = timestamp * BYTES_PER_SECOND
+        self.only_when_latest = only_when_latest
+        self.future = future
+        self._triggered = False
+
+    @property
+    def triggered(self) -> bool:
+        return self._triggered
+
+    def trigger(self):
+        setattr(self, "_triggered", True)
+        self.future.set_result(True)
+
+    def cancel(self):
+        self.future.set_result(False)
+
+
+RT = TypeVar("RT")
+
+
+async def callback_after_future(future: asyncio.Future, callback: Callable[[], RT]) -> RT:
+    """Wait for a future to return and then call a function"""
+    await future
+    res = callback()
+    if asyncio.iscoroutine(res):
+        res = await res
+    return res
 
 
 class GieselaSource(PCMVolumeTransformer):
@@ -60,22 +93,54 @@ class GieselaSource(PCMVolumeTransformer):
             kwargs["before_options"] += f"-ss {start}"
         return FFmpegPCMAudio(source, **kwargs)
 
-    def wait_for_timestamp(self, timestamp: float, future: asyncio.Future = None) -> asyncio.Future:
-        """Return a Future which is  set to True when the player passes timestamp."""
-        future = future or asyncio.Future()
+    def _update_waiters(self):
+        only_latest = []
+
+        for waiter in self.waiters.copy():
+            if self.bytes_read >= waiter.bytestamp:
+                if waiter.only_when_latest:
+                    only_latest.append(waiter)
+                else:
+                    waiter.trigger()
+                self.waiters.remove(waiter)
+            else:
+                # Because we're making sure that the waiters are in ascending (bytestamp) order we know that this is the last one.
+                break
+
+        if only_latest:
+            only_latest.pop().trigger()
+            for waiter in only_latest:
+                waiter.cancel()
+
+    def wait_for_timestamp(self, timestamp: float, *, only_when_latest: bool = False,
+                           target: Union[asyncio.Future, Callable[[], Any]] = None) -> asyncio.Future:
+        return_val = None
+
+        if isinstance(target, asyncio.Future):
+            future = target
+        elif target:
+            # create future which will be used in PlayerTimestamp
+            future = asyncio.Future()
+            # call the target after the future returns
+            wrapped = callback_after_future(future, target)
+            return_val = asyncio.ensure_future(wrapped)
+        else:
+            future = asyncio.Future()
+
         bytestamp = timestamp * BYTES_PER_SECOND
         ind = 0
         for ind, waiter in enumerate(self.waiters):
             if bytestamp < waiter.bytestamp:
                 break
 
-        self.waiters.insert(ind, PlayerTimestamp(timestamp, bytestamp, future))
-        return future
+        self.waiters.insert(ind, PlayerTimestamp(timestamp, only_when_latest, future))
+        return return_val or future
 
     def seek(self, s: float):
         """Seek to s in the stream."""
         self.bytes_read = BYTES_PER_SECOND * s
         self.original = self.get_ffmpeg(self.source, start=s)
+        self._update_waiters()
 
     def read(self):
         """Read and increase frame count."""
@@ -83,17 +148,11 @@ class GieselaSource(PCMVolumeTransformer):
         self.bytes_read += len(ret)
 
         if self.waiters:
-            for waiter in self.waiters.copy():
-                if self.bytes_read >= waiter.bytestamp:
-                    waiter.future.set_result(True)
-                    self.waiters.remove(waiter)
-                else:
-                    # Because we're making sure that the waiters are in ascending (bytestamp) order we know that this is the last one.
-                    break
+            self._update_waiters()
         return ret
 
     def cleanup(self):
         """Clean up and make sure to tell the waiters that it's over."""
         for waiter in self.waiters:
-            waiter.future.set_result(False)
+            waiter.cancel()
         super().cleanup()

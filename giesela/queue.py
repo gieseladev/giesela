@@ -12,7 +12,7 @@ from typing import AsyncIterator, Iterable, Iterator, List, Optional, TYPE_CHECK
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
 from .entry import (BaseEntry, DiscogsEntry, RadioSongEntry, RadioStationEntry, SpotifyEntry, StreamEntry, TimestampEntry, VGMEntry, YoutubeEntry)
-from .exceptions import ExtractionError, WrongEntryTypeError
+from .exceptions import BrokenEntryError, ExtractionError, WrongEntryTypeError
 from .lib.api.VGMdb import get_entry as get_vgm_track
 from .lib.api.discogs import get_entry as get_discogs_track
 from .lib.api.spotify import get_spotify_track
@@ -104,7 +104,10 @@ class Queue(EventEmitter):
 
     async def load_playlist(self, playlist: "Playlist", **meta):
         for playlist_entry in playlist:
-            entry = playlist_entry.get_entry(self, **meta)
+            try:
+                entry = playlist_entry.get_entry(self, **meta)
+            except BrokenEntryError:
+                continue
             self._add_entry(entry, more_to_come=True)
         WebieselaServer.send_player_information(self.player.channel.guild.id)
         self.emit("entry-added", queue=self)

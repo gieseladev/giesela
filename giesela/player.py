@@ -140,9 +140,12 @@ class MusicPlayer(EventEmitter):
         if not self.current_entry:
             self.loop.create_task(self.play())
 
-    def skip(self):
+    def skip(self, force: bool = False):
         if self.voice_client:
-            self.voice_client.stop()
+            if not force and isinstance(self.current_entry, TimestampEntry):
+                self.seek(self.current_entry.current_sub_entry["end"])
+            else:
+                self.voice_client.stop()
 
     def stop(self):
         if self.voice_client:
@@ -224,57 +227,30 @@ class MusicPlayer(EventEmitter):
         source = self.create_source(entry)
 
         self.voice_client.play(source, after=self._playback_finished)
+        self.setup_chapters()
+
         log.info(f"playing {entry} in {self.voice_client}")
         self.emit("play", player=self, entry=entry)
 
-    def update_chapter_updater(self, pause=False):
-        # TODO implement this
-        if self.chapter_updater:
-            print("[CHAPTER-UPDATER] Cancelling old updater")
-            self.chapter_updater.cancel()
+    def setup_chapters(self):
+        if isinstance(self.current_entry, TimestampEntry):
+            sub_queue = self.current_entry.sub_queue
+            for sub_entry in sub_queue:
+                self.player.wait_for_timestamp(sub_entry["start"], only_when_latest=True, target=self.update_chapter)
+        elif isinstance(self.current_entry, RadioSongEntry):
+            delay = None
+            if self.current_entry.poll_time:
+                log.debug("Radio stations enforces a custom wait time")
+                delay = self.current_entry.poll_time
+            elif self.current_entry.song_duration > self.current_entry.uncertainty:
+                delay = self.current_entry.song_duration - self.current_entry.song_progress + self.current_entry.uncertainty
 
-        if not pause and isinstance(self.current_entry, (RadioSongEntry, TimestampEntry)):
-            print("[CHAPTER-UPDATER] Creating new updater")
-            self.chapter_updater = asyncio.ensure_future(self.update_chapter(), loop=self.loop)
+            delay = delay if delay and delay > 0 else 40
+            self.loop.call_later(delay, self.repeat_chapter_setup)
+
+    def repeat_chapter_setup(self):
+        self.update_chapter()
+        self.setup_chapters()
 
     async def update_chapter(self):
-        while True:
-            if self.current_entry:
-                if isinstance(self.current_entry, TimestampEntry):
-                    sub_entry = self.current_entry.current_sub_entry
-                    # just to be sure, add an extra 2 seconds
-                    delay = (sub_entry["duration"] - sub_entry["progress"]) + 2
-
-                elif isinstance(self.current_entry, RadioSongEntry):
-                    if self.current_entry.poll_time:
-                        print("[CHAPTER-UPDATER] this radio stations enforces a custom wait time")
-
-                        delay = self.current_entry.poll_time
-                    elif self.current_entry.song_duration > 5:
-                        delay = self.current_entry.song_duration - self.current_entry.song_progress + self.current_entry.uncertainty
-                        if delay <= 0:
-                            delay = 40
-                    else:
-                        delay = 40
-                else:
-                    return  # this is not the kind of entry that requires an update
-            else:
-                print("[CHAPTER-UPDATER] There's nothing playing")
-                return
-
-            print("[CHAPTER-UPDATER] Waiting " + str(round(delay, 1)) +
-                  " seconds before emitting now playing event")
-
-            before_title = self.current_entry.title
-
-            await asyncio.sleep(delay)
-            if not self.current_entry:
-                # print("[CHAPTER-UPDATER] Waited for nothing. There's nothing playing anymore")
-                return
-
-            if self.current_entry.title == before_title:
-                print("[CHAPTER-UPDATER] The same thing is still playing. Back to sleep!")
-                continue
-
-            print("[CHAPTER-UPDATER] Emitting next now playing event")
-            self.emit("play", player=self, entry=self.current_entry)
+        self.emit("play", player=self, entry=self.current_entry)
