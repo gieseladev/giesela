@@ -1,5 +1,8 @@
+import asyncio
 import logging
+from asyncio import AbstractEventLoop
 from io import BytesIO
+from typing import Optional, Union
 
 from imgurpython import ImgurClient
 from imgurpython.helpers.error import (ImgurClientError,
@@ -24,7 +27,7 @@ def delete_previous_playlist_cover(file_name):
             return
 
 
-def _upload_playlist_cover(playlist_name, url):
+def _upload_playlist_cover(playlist_name: str, url: Union[str, BytesIO]) -> Optional[str]:
     file_name = playlist_name.strip().lower().replace(" ", "_")
     name = playlist_name.replace("_", " ").title()
 
@@ -43,15 +46,16 @@ def _upload_playlist_cover(playlist_name, url):
         else:
             resp = client.upload_from_url(url, config=config)
     except ImgurClientError:
-        return False
+        return
     except ImgurClientRateLimitError:
         print("[IMGUR] RATE LIMIT!")
-        return False
+        return
 
     return resp.get("link")
 
 
-async def upload_playlist_cover(loop, name, url):
+async def upload_playlist_cover(name: str, url: Union[str, BytesIO], *, loop: AbstractEventLoop = None) -> Optional[str]:
+    loop = loop or asyncio.get_event_loop()
     return await loop.run_in_executor(None, _upload_playlist_cover, name, url)
 
 

@@ -10,6 +10,7 @@ from discord import User
 from . import entry as entry_module, mosaic, utils
 from .bot import Giesela
 from .entry import BaseEntry, Entry
+from .lib.api import imgur
 from .queue import Queue
 
 log = logging.getLogger(__name__)
@@ -138,7 +139,7 @@ class Playlist:
     def __enter__(self) -> "Playlist":
         if hasattr(self, "__opened__"):
             raise ValueError("Playlist is already open!")
-        
+
         setattr(self, "__opened__", True)
         return self
 
@@ -211,6 +212,27 @@ class Playlist:
             if _entry.url == entry.url:
                 return True
         return False
+
+    def rename(self, name: str):
+        self.name = name
+        self.save()
+
+    def set_description(self, description: str):
+        self.description = description
+        self.save()
+
+    async def set_cover(self, cover: str = None) -> bool:
+        if cover:
+            cover = await imgur.upload_playlist_cover(self.name, cover)
+        else:
+            cover = await self.generate_cover()
+
+        if not cover:
+            return False
+
+        self.cover = cover
+        self.save()
+        return True
 
     def save(self):
         if hasattr(self, "__opened__"):

@@ -198,8 +198,10 @@ async def generate_playlist_cover(playlist: "Playlist", size: int = 1024) -> Opt
         return None
 
     _cover = create_random_cover(*images, size=size)
+    log.debug("generated cover")
     cover = BytesIO()
     _cover.save(cover, format="PNG")
     cover.seek(0)
 
-    return await upload_playlist_cover(asyncio.get_event_loop(), playlist.name, cover)
+    log.debug("uploading cover...")
+    return await upload_playlist_cover(playlist.name, cover)

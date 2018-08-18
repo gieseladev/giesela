@@ -7,7 +7,7 @@ from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import Giesela, Playlist, PlaylistManager, utils
-from giesela.lib.ui import EmbedPaginator, EmbedViewer, PromptYesNo
+from giesela.lib.ui import EditableEmbed, EmbedPaginator, EmbedViewer, PromptYesNo
 from giesela.lib.ui.custom import PlaylistViewer
 from .info import help_formatter
 from .player import Player
@@ -89,6 +89,64 @@ class Playlist:
 
         playlist = random.choice(playlists)
         await self.play_playlist(ctx, playlist)
+
+    @playlist.command("rename", aliases=["newname", "rn"])
+    async def playlist_rename(self, ctx: Context, playlist: str, name: str):
+        """Rename a playlist"""
+        playlist = self.find_playlist(playlist)
+        await ensure_user_is_author(playlist, ctx, "rename it")
+        old_name = playlist.name
+        playlist.rename(name)
+        await ctx.send(f"**{old_name}** is now **{playlist.name}**")
+
+    @playlist.command("description", aliases=["describe", "desc"])
+    async def playlist_description(self, ctx: Context, playlist: str, *description: str):
+        """Describe your playlist to make it better"""
+        playlist = self.find_playlist(playlist)
+        await ensure_user_is_author(playlist, ctx, "change its description")
+        description = " ".join(description)
+        playlist.set_description(description)
+        await ctx.send(f"Set the description of **{playlist.name}** to:\n"
+                       f"```\n"
+                       f"{description}```")
+
+    @playlist.group("cover", invoke_without_command=True, aliases=["image", "picture"])
+    async def playlist_cover(self, ctx: Context, playlist: str, cover: str):
+        """Set the cover of a playlist"""
+        if cover in ("auto",):
+            await ctx.invoke(self.playlist_cover_auto, playlist)
+            return
+
+        playlist = self.find_playlist(playlist)
+        await ensure_user_is_author(playlist, ctx, "change its cover")
+
+        if not cover:
+            raise commands.CommandError("No cover provided!")
+
+        if await playlist.set_cover(cover):
+            embed = Embed(description=f"Changed the cover of **{playlist.name}**")
+            embed.set_image(url=playlist.cover)
+            await ctx.send(embed=embed)
+        else:
+            raise commands.CommandError(f"Couldn't change the cover to <{cover}>, are you sure this is a valid url for an image?")
+
+    @playlist_cover.command("auto")
+    async def playlist_cover_auto(self, ctx: Context, playlist: str):
+        """Automatically generate a cover
+
+        If you're too lazy to make one yourself, why not let Giesela do it?
+        """
+        playlist = self.find_playlist(playlist)
+        await ensure_user_is_author(playlist, ctx, "change its cover")
+        msg = EditableEmbed(ctx.channel)
+        await msg.edit(Embed(description="working...", colour=Colour.blue()))
+
+        if await playlist.set_cover():
+            embed = Embed(description=f"This is the new face of **{playlist.name}**", colour=Colour.green())
+            embed.set_image(url=playlist.cover)
+            await msg.edit(embed=embed)
+        else:
+            await msg.edit(Embed(description=f"Couldn't generate a cover...", colour=Colour.red()))
 
     @playlist.command("delete", aliases=["rm", "remove"])
     async def playlist_delete(self, ctx: Context, playlist: str):
