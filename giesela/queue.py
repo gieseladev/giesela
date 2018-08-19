@@ -103,7 +103,9 @@ class Queue(EventEmitter):
         WebieselaServer.send_player_information(self.player.channel.guild.id)
 
     async def load_playlist(self, playlist: "Playlist", **meta):
-        for playlist_entry in playlist:
+        entries = playlist.entries.copy()
+        random.shuffle(entries)
+        for playlist_entry in entries:
             try:
                 entry = playlist_entry.get_entry(self, **meta)
             except BrokenEntryError:
