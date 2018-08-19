@@ -7,6 +7,8 @@ import aiohttp
 from discord.ext import commands
 from discord.ext.commands import Bot, Context
 
+from giesela import RestartSignal, TerminateSignal
+
 
 class AdminTools:
     def __init__(self, bot: Bot):
@@ -70,14 +72,14 @@ class AdminTools:
     async def shutdown(self, ctx: Context):
         """Shutdown"""
         await ctx.send(":wave:")
-        await self.bot.logout()
+        raise TerminateSignal
 
     @commands.command()
     @commands.is_owner()
     async def restart(self, ctx: Context):
         """Restart"""
         await ctx.send(":wave:")
-        await self.bot.logout()
+        raise RestartSignal
 
     @commands.command()
     @commands.is_owner()
