@@ -1,6 +1,8 @@
 #! /usr/bin/env bash
 
+import asyncio
 import logging.config
+import sys
 from pathlib import Path
 
 LOGGING = {
@@ -50,14 +52,32 @@ def setup_logging():
     logging.config.dictConfig(LOGGING)
 
 
+def unload_package(name: str):
+    for module in sys.modules.copy():
+        package = module.split(".")[0]
+        if package == name:
+            sys.modules.pop(module)
+
+
 def main():
     setup_logging()
 
-    from giesela import Giesela
-    print("creating Giesela")
-    bot = Giesela()
-    print("running...")
-    bot.run()
+    log = logging.getLogger("giesela")
+
+    while True:
+        unload_package("giesela")
+
+        from giesela import Giesela, RestartSignal, TerminateSignal
+
+        log.info("creating Giesela")
+        bot = Giesela()
+        log.info("running...")
+        try:
+            bot.run()
+        except RestartSignal:
+            asyncio.set_event_loop(asyncio.new_event_loop())
+        except TerminateSignal:
+            sys.exit(0)
 
 
 if __name__ == "__main__":

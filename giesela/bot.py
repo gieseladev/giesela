@@ -1,6 +1,6 @@
 import logging
-import sys
 from textwrap import indent, wrap
+from typing import Optional, Type
 
 import aiohttp
 from discord import Colour, Embed
@@ -18,6 +18,8 @@ log = logging.getLogger(__name__)
 class Giesela(AutoShardedBot):
     config: Config
     aiosession: aiohttp.ClientSession
+
+    exit_signal: Optional[Type[exceptions.Signal]]
 
     def __init__(self, *args, **kwargs):
         self.config = Config(ConfigDefaults.options_file)
@@ -45,14 +47,7 @@ class Giesela(AutoShardedBot):
                 raise self.exit_signal
 
     async def on_error(self, event: str, *args, **kwargs):
-        ex_type, ex, stack = sys.exc_info()
-
-        if issubclass(ex_type, exceptions.Signal):
-            self.exit_signal = ex_type
-            await self.logout()
-
-        else:
-            log.exception(f"Error in {event} ({args}, {kwargs})")
+        log.exception(f"Error in {event} ({args}, {kwargs})")
 
     async def on_command_error(self, ctx: Context, exception: Exception):
         report = True
@@ -60,6 +55,12 @@ class Giesela(AutoShardedBot):
         if isinstance(exception, CommandError):
             if isinstance(exception, CommandInvokeError):
                 original = exception.original
+
+                if isinstance(original, exceptions.Signal):
+                    self.exit_signal = type(original)
+                    await self.logout()
+                    return
+
                 description = "There was an internal error while processing your command." \
                               "This shouldn't happen (obviously) and it isn't your fault *(maybe)*.\n"
 

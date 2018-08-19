@@ -6,9 +6,8 @@ EXPOSE 30000
 
 # Install required packages
 RUN apt-get -yqq update
-RUN apt-get -yqq --no-install-recommends install ffmpeg supervisor
+RUN apt-get -yqq --no-install-recommends install ffmpeg
 
-COPY .docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 VOLUME ["/giesela/data", "/giesela/logs"]
 
 WORKDIR /giesela

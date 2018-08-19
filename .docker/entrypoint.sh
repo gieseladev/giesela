@@ -8,4 +8,4 @@ else
    echo "Data folder exists"
 fi
 
-exec /usr/bin/supervisord
+exec pipenv run python run.py
