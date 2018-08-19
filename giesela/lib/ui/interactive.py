@@ -8,17 +8,20 @@ import textwrap
 from asyncio import CancelledError
 from typing import Any, Awaitable, Callable, Dict, List, Optional, Tuple, TypeVar, Union
 
-from discord import Embed, Message, TextChannel, User
+from discord import Client, Embed, Message, Reaction, TextChannel, User
 
 from . import events, text
-from .abstract import Startable, Stoppable
+from .abstract import MessageHandler, ReactionHandler, Startable, Stoppable
 from .basic import EditableEmbed
 from .utils import EmbedLimits, EmojiType, format_embed
 
 log = logging.getLogger(__name__)
 
 EmojiHandlerType = Callable[[EmojiType, User], Awaitable]
+MessageHandlerType = Callable[[Message], Awaitable]
+
 _CT = TypeVar("_CT", bound=EmojiHandlerType)
+_CMT = TypeVar("_CMT", bound=MessageHandlerType)
 
 
 def emoji_handler(*reactions: EmojiType, pos: int = None):
@@ -30,21 +33,87 @@ def emoji_handler(*reactions: EmojiType, pos: int = None):
     return decorator
 
 
-class InteractableEmbed(EditableEmbed, Stoppable):
+def message_handler(name: str = None):
+    def decorator(func: _CMT) -> _CMT:
+        func._name = name or func.__name__
+        return func
+
+    return decorator
+
+
+class CanSignalStop(metaclass=abc.ABCMeta):
+    _stop_signal: bool
+
+    def __init__(self, *args, **kwargs):
+        self.reset_signal()
+        super().__init__(*args, **kwargs)
+
+    @property
+    def stop_signal(self) -> bool:
+        return self._stop_signal
+
+    def signal_stop(self):
+        self._stop_signal = True
+
+    def reset_signal(self):
+        self._stop_signal = False
+
+
+class Listener(CanSignalStop, metaclass=abc.ABCMeta):
+    _listener: asyncio.Task
+    _current_listener: asyncio.Task
+    _result: Any
+
+    def __init__(self, *args, **kwargs):
+        self._listener = None
+        self._current_listener = None
+        self._result = None
+        super().__init__(*args, **kwargs)
+
+    @property
+    def result(self) -> Any:
+        return self._result
+
+    def cancel_listener(self):
+        self.signal_stop()
+        if self._listener:
+            self._listener.cancel()
+
+    @abc.abstractmethod
+    async def listen_once(self) -> Any:
+        pass
+
+    async def listen(self) -> Any:
+        if self._listener and not self._listener.done():
+            return await self._listener
+
+        self.reset_signal()
+
+        result = None
+        while not self.stop_signal:
+            self._current_listener = asyncio.ensure_future(self.listen_once())
+            try:
+                result = await self._current_listener
+            except CancelledError:
+                pass
+            except Exception as e:
+                log.warning("Error while listening once", exc_info=e)
+
+        self._result = result
+        return result
+
+
+class InteractableEmbed(Listener, EditableEmbed, ReactionHandler, Startable, Stoppable):
     user: Optional[User]
     handlers: Dict[EmojiType, EmojiHandlerType]
 
     _emojis: List[Tuple[EmojiType, int]]
-    _stop_signal: bool
-    _listener: asyncio.Task
 
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
         super().__init__(channel, **kwargs)
         self.user = user
         self.handlers = {}
         self._emojis = []
-        self._stop_signal = False
-        self._listener = None
 
         for name, method in inspect.getmembers(self, predicate=inspect.ismethod):
             handles = getattr(method, "_handles", None)
@@ -57,6 +126,10 @@ class InteractableEmbed(EditableEmbed, Stoppable):
     def emojis(self) -> Tuple[EmojiType]:
         self._emojis.sort(key=operator.itemgetter(1))
         return next(zip(*self._emojis), tuple())
+
+    @property
+    def result(self) -> Any:
+        return self._result
 
     def register_handler(self, emoji: EmojiType, handler: EmojiHandlerType, pos: int = None):
         if emoji in self.handlers:
@@ -86,17 +159,16 @@ class InteractableEmbed(EditableEmbed, Stoppable):
 
         await asyncio.gather(*futures)
 
+    async def start(self):
+        self._listener = asyncio.ensure_future(self.listen())
+        await super().start()
+
     async def stop(self):
-        self._stop_signal = True
+        self.cancel_listener()
 
         await super().stop()
 
-    def cancel(self):
-        if self._listener:
-            self._listener.cancel()
-
     async def delete(self):
-        self.cancel()
         await self.stop()
         await super().delete()
 
@@ -121,11 +193,8 @@ class InteractableEmbed(EditableEmbed, Stoppable):
         async for user in reaction.users():
             await self.message.remove_reaction(emoji, user)
 
-    async def listen_once(self) -> Any:
-        if not self.message:
-            raise Exception("There's no message to listen to")
-
-        reaction, user = await events.wait_for_reaction_change(emoji=self.emojis, user=self.user, message=self.message)
+    async def on_reaction(self, reaction: Reaction, user: User) -> Any:
+        await super().on_reaction(reaction, user)
         emoji = reaction.emoji
         await self.on_any_emoji(emoji, user)
 
@@ -138,20 +207,12 @@ class InteractableEmbed(EditableEmbed, Stoppable):
         else:
             return await handler(emoji, user)
 
-    async def listen(self) -> Any:
-        self._stop_signal = False
+    async def listen_once(self) -> Any:
+        if not self.message:
+            raise Exception("There's no message to listen to")
 
-        result = None
-        while not self._stop_signal:
-            self._listener = asyncio.ensure_future(self.listen_once())
-            try:
-                result = await self._listener
-            except CancelledError:
-                pass
-            except Exception as e:
-                log.warning("Error while listening", exc_info=e)
-
-        return result
+        reaction, user = await events.wait_for_reaction_change(emoji=self.emojis, user=self.user, message=self.message)
+        return await self.on_reaction(reaction, user)
 
     async def on_any_emoji(self, emoji: EmojiType, user: User):
         pass
@@ -160,14 +221,51 @@ class InteractableEmbed(EditableEmbed, Stoppable):
         pass
 
 
-class Abortable(Stoppable, abc.ABC):
+class MessageableEmbed(Listener, EditableEmbed, MessageHandler, Startable, Stoppable):
+    """
+    Keyword Args:
+        bot: `discord.Client`. Bot to use for receiving messages.
+        delete_msgs: Optional `bool`. Whether to delete incoming messages.
+    """
+
+    bot: Client
+    user: Optional[User]
+
+    def __init__(self, channel: TextChannel, user: User = None, **kwargs):
+        self.bot = kwargs.pop("bot")
+        self.delete_msgs = kwargs.pop("delete_msgs", True)
+        super().__init__(channel, **kwargs)
+
+        self.user = user
+
+    async def start(self):
+        self._listener = asyncio.ensure_future(self.listen())
+
+        await super().start()
+
+    async def stop(self):
+        self.cancel_listener()
+        await super().stop()
+
+    def message_check(self, message: Message) -> bool:
+        pass
+
+    async def listen_once(self) -> Any:
+        msg = await self.bot.wait_for("message", check=self.message_check)
+        await self.on_message(msg)
+
+    async def on_message(self, message: Message):
+        await super().on_message(message)
+
+
+class Abortable(CanSignalStop, metaclass=abc.ABCMeta):
     @emoji_handler("❎", pos=1000)
     async def abort(self, *_) -> None:
-        await self.stop()
+        self.signal_stop()
         return None
 
 
-class _HorizontalPageViewer(InteractableEmbed, Startable, metaclass=abc.ABCMeta):
+class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
     """
     Keyword Args:
         embeds: list of `Embed` to use
@@ -209,9 +307,7 @@ class _HorizontalPageViewer(InteractableEmbed, Startable, metaclass=abc.ABCMeta)
 
     async def start(self) -> Any:
         await self.show_page()
-        result = await self.listen()
-        await self.delete()
-        return result
+        await super().start()
 
     @emoji_handler("◀", pos=1)
     async def previous_page(self, *_):
@@ -230,7 +326,7 @@ class ItemPicker(_HorizontalPageViewer, Abortable):
 
     @emoji_handler("✅", pos=999)
     async def select(self, *_) -> int:
-        await self.stop()
+        self.signal_stop()
         return self.current_index
 
 
@@ -239,7 +335,7 @@ class EmbedViewer(_HorizontalPageViewer, Abortable):
         return await self.start()
 
 
-class VerticalTextViewer(InteractableEmbed, Abortable):
+class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
     """
     Keyword Args:
         embed_frame: Template `Embed` to use
@@ -386,6 +482,10 @@ class VerticalTextViewer(InteractableEmbed, Abortable):
             if asyncio.iscoroutine(content):
                 content = await content
             return content
+
+    async def start(self):
+        await self.show_window()
+        await super().start()
 
     async def display(self) -> None:
         await self.show_window()

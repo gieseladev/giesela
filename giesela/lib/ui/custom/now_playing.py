@@ -168,7 +168,6 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
 
     async def start(self):
         await super().start()
-        await self.listen()
 
     @emoji_handler("⏮", pos=1)
     async def prev_entry(self, *_):

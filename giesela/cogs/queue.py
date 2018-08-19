@@ -406,7 +406,7 @@ class EnqueueCog(QueueBase):
 
                 await loading_bar.set_progress((ind + 1) / total_tracks)
 
-            await loading_bar.done()
+            await loading_bar.delete()
 
             em.set_footer(text="{} tracks loaded | {} failed".format(entries_added, entries_not_added))
             await interface_msg.edit(content="**Loaded playlist**", embed=em)

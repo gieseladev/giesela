@@ -19,19 +19,18 @@ class PromptYesNo(InteractableEmbed):
     def __await__(self) -> Awaitable[bool]:
         return self.prompt()
 
-    async def prompt(self, *, delete: bool = True) -> bool:
+    async def prompt(self) -> bool:
         await self.edit(self.embed, on_new=self.add_reactions)
         res = await self.listen()
-        if delete:
-            await self.delete()
+        await self.delete()
         return res
 
     @emoji_handler("☑", pos=1)
     async def handle_true(self, **_):
-        await self.stop()
+        self.signal_stop()
         return True
 
     @emoji_handler("❎", pos=2)
     async def handle_false(self, **_):
-        await self.stop()
+        self.signal_stop()
         return False

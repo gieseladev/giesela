@@ -151,9 +151,6 @@ class LoadingBar(EditableEmbed):
 
         self._message_future = asyncio.ensure_future(self.edit(next_embed))
 
-    async def done(self):
-        await self.delete()
-
 
 class UpdatingMessage(EditableEmbed):
     """
