@@ -6,7 +6,7 @@ import logging
 import operator
 import textwrap
 from asyncio import CancelledError
-from typing import Any, Awaitable, Callable, Dict, List, Optional, Tuple, TypeVar, Union
+from typing import Any, Awaitable, Callable, Dict, Iterable, List, Optional, Tuple, TypeVar, Union
 
 from discord import Client, Embed, Message, Reaction, TextChannel, User
 
@@ -33,9 +33,10 @@ def emoji_handler(*reactions: EmojiType, pos: int = None):
     return decorator
 
 
-def message_handler(name: str = None):
+def message_handler(name: str = None, *, aliases: Iterable[str] = None):
     def decorator(func: _CMT) -> _CMT:
         func._name = name or func.__name__
+        func._handles = [name] + (list(aliases) if aliases else [])
         return func
 
     return decorator
@@ -153,7 +154,10 @@ class InteractableEmbed(Listener, EditableEmbed, ReactionHandler, Startable, Sto
 
         for emoji in emojis:
             _handler = self.handlers[emoji]
-            setattr(_handler.__func__, "_disabled", True)
+            func = getattr(_handler, "__func__", None)
+            if func:
+                setattr(func, "_disabled", True)
+
             fut = asyncio.ensure_future(self.remove_reaction(emoji))
             futures.append(fut)
 
@@ -362,7 +366,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
     _current_line: int
     _lines_displayed: int
 
-    def __init__(self, channel: TextChannel, user: User, **kwargs):
+    def __init__(self, channel: TextChannel, user: User = None, **kwargs):
         self.embed_frame = kwargs.pop("embed_frame", None)
         if isinstance(self.embed_frame, Embed):
             self.embed_frame = self.embed_frame.to_dict()

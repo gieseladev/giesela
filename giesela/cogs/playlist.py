@@ -61,7 +61,7 @@ class Playlist:
     def find_playlist(self, playlist: str) -> Playlist:
         _playlist = self.playlist_manager.find_playlist(playlist)
         if not _playlist:
-            raise commands.CommandError(f"Couldn't this playlist {playlist}")
+            raise commands.CommandError(f"Couldn't find playlist \"{playlist}\"")
         return _playlist
 
     async def play_playlist(self, ctx: Context, playlist: Playlist):
@@ -73,13 +73,12 @@ class Playlist:
     async def playlist(self, ctx: Context, playlist: str = None):
         """Playlist stuff"""
         if playlist:
-            playlist = self.playlist_manager.find_playlist(playlist)
-
-        if not playlist:
+            playlist = self.find_playlist(playlist)
+        else:
             await help_formatter.send_help_for(ctx, self.playlist)
             return
 
-        viewer = PlaylistViewer(self.bot, ctx.channel, ctx.author, playlist)
+        viewer = PlaylistViewer(ctx.channel, user=ctx.author, bot=self.bot, playlist=playlist)
         await viewer.display()
 
     @playlist.group("play", aliases=["load", "start", "listen"])
@@ -97,6 +96,12 @@ class Playlist:
 
         playlist = random.choice(playlists)
         await self.play_playlist(ctx, playlist)
+
+    @playlist.command("builder", aliases=["build", "edit", "manipulate"])
+    async def playlist_builder(self, ctx: Context, playlist: str):
+        """Edit a playlist"""
+        playlist = self.find_playlist(playlist)
+        await ensure_user_can_edit_playlist(playlist, ctx)
 
     @playlist.command("rename", aliases=["newname", "rn"])
     async def playlist_rename(self, ctx: Context, playlist: str, name: str):
