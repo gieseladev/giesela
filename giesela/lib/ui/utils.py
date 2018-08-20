@@ -69,7 +69,7 @@ def count_embed_chars(embed: Embed) -> int:
     return count
 
 
-class FakeClient:
+class _FakeClient:
     def __init__(self, *args, loop=None, **kwargs):
         self.loop = asyncio.get_event_loop() if loop is None else loop
         self._listeners = {}
@@ -78,13 +78,20 @@ class FakeClient:
     _run_event = Client._run_event
 
 
-class MenuCommandGroup(BotBase, FakeClient):
+class MenuCommandGroup(BotBase, _FakeClient):
+    """
+    Keyword Args:
+        keep_default_help: `bool`. Defaults to `False`.
+    """
     bot: Client
 
     def __init__(self, bot: Client, **kwargs):
         self.bot = bot
+        keep_default_help = kwargs.pop("keep_default_help", False)
         super().__init__("", **kwargs)
         self.user = bot.user
+        if not keep_default_help:
+            self.remove_command("help")
 
     async def on_command(self, ctx: Context):
         ctx.bot = self.bot

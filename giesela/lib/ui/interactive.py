@@ -8,8 +8,7 @@ import textwrap
 from typing import Any, Awaitable, Callable, Dict, List, Optional, Tuple, TypeVar, Union
 
 from discord import Client, Embed, Message, Reaction, TextChannel, User
-from discord.ext.commands import Command
-from discord.ext.commands.bot import BotBase
+from discord.ext.commands import Bot, Command
 
 from . import events, text
 from .abstract import HasListener, MessageHandler, ReactionHandler, Startable, Stoppable
@@ -403,7 +402,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         return lines
 
     def format_embed(self, embed: Embed) -> Embed:
-        _progress = (self.current_line + 1 + (self.lines_displayed / 2)) / self.total_lines
+        _progress = self.current_line / self.total_lines
         _visible = self.lines_displayed / self.total_lines
         progress_bar = text.keep_whitespace(text.create_scroll_bar(_progress, _visible, min(self.window_width, 30)))
 

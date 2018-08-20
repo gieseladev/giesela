@@ -1,3 +1,5 @@
+import math
+
 ZERO_WIDTH_SPACE = r"​"  # please pay attention to your cursor
 
 DEFAULT_FULL_CHAR = "■"
@@ -25,6 +27,13 @@ def wrap(text: str, char: str, closing: str = None) -> str:
 
 def keep_whitespace(text: str) -> str:
     return wrap(text, ZERO_WIDTH_SPACE)
+
+
+def shorten(text: str, width: int, overflow: str = "...") -> str:
+    if len(text) > width:
+        over_len = len(overflow)
+        text = text[:-over_len] + overflow
+    return text
 
 
 def create_player_bar(progress: float, length: int = 20, handle_char: str = "🔘", bar_char: str = LINE_CHAR) -> str:
@@ -59,18 +68,18 @@ def create_bar(progress: float, length: int = 10, *, full_char: str = DEFAULT_FU
 
 def create_scroll_bar(progress: float, visible: float, length: int = 10, *, full_char: str = DEFAULT_FULL_CHAR,
                       empty_char: str = DEFAULT_EMPTY_CHAR) -> str:
-    start_fill = progress - (visible / 2)
-    end_fill = progress + (visible / 2)
-    start_index = start_fill * length
-    end_index = end_fill * length
+    start_fill = progress
+    end_fill = progress + visible
+    start_index = math.floor(start_fill * length)
+    end_index = math.ceil(end_fill * length)
 
     fill_length = round(end_index - start_index)
     if fill_length < 1:
-        if int(start_index) == length:
+        if start_index == length:
             start_index -= 1
         fill_length += 1
 
     filled = fill_length * full_char
-    empty = int(start_index) * empty_char
+    empty = start_index * empty_char
 
     return (empty + filled).ljust(length, empty_char)
