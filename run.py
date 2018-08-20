@@ -65,8 +65,6 @@ def main():
     log = logging.getLogger("giesela")
 
     while True:
-        unload_package("giesela")
-
         from giesela import Giesela, RestartSignal, TerminateSignal
 
         log.info("creating Giesela")
@@ -75,9 +73,14 @@ def main():
         try:
             bot.run()
         except RestartSignal:
+            log.info("restarting")
             asyncio.set_event_loop(asyncio.new_event_loop())
+            unload_package("giesela")
         except TerminateSignal:
-            sys.exit(0)
+            break
+        else:
+            log.info("shut down")
+            break
 
 
 if __name__ == "__main__":
