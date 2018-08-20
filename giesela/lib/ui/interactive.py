@@ -193,7 +193,14 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
         return True
 
     async def wait_for_message(self) -> Any:
-        msg = await self.bot.wait_for("message", check=self.message_check)
+        while True:
+            msg = await self.bot.wait_for("message", check=self.message_check)
+            if isinstance(self.bot, Bot):
+                ctx = await self.bot.get_context(msg)
+                if ctx.invoked_with:
+                    continue
+            break
+
         return await self.on_message(msg)
 
     async def on_message(self, message: Message):
