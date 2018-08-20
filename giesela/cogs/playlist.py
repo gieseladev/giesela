@@ -103,7 +103,7 @@ class Playlist:
         playlist = self.find_playlist(playlist)
         await ensure_user_can_edit_playlist(playlist, ctx)
         builder = PlaylistEditor(ctx.channel, ctx.author, bot=self.bot, playlist=playlist)
-        await builder.start()
+        await builder.display()
 
     @playlist.command("rename", aliases=["newname", "rn"])
     async def playlist_rename(self, ctx: Context, playlist: str, name: str):

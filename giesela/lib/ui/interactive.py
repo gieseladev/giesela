@@ -403,12 +403,15 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         return lines
 
     def format_embed(self, embed: Embed) -> Embed:
-        _progress = (self.current_line + self.lines_displayed) / self.total_lines
+        _progress = (self.current_line + 1 + (self.lines_displayed / 2)) / self.total_lines
+        _visible = self.lines_displayed / self.total_lines
+        progress_bar = text.keep_whitespace(text.create_scroll_bar(_progress, _visible, min(self.window_width, 30)))
+
         return format_embed(embed, _copy=False,
                             viewer=self,
                             current_line=self.current_line + 1,
                             total_lines=self.total_lines,
-                            progress_bar=text.create_bar(_progress, min(self.window_width, 30)))
+                            progress_bar=progress_bar)
 
     async def get_line(self, line: int) -> str:
         if self.lines:

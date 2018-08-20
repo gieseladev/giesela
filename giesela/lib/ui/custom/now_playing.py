@@ -4,8 +4,15 @@ from discord import Embed, Message, TextChannel
 
 from giesela import GieselaEntry, MusicPlayer, RadioSongEntry, RadioStationEntry, StreamEntry, \
     TimestampEntry, YoutubeEntry
-from giesela.utils import (create_bar, ordinal, to_timestamp)
+from giesela.lib.ui import create_player_bar
+from giesela.utils import (ordinal, to_timestamp)
 from .. import InteractableEmbed, IntervalUpdatingMessage, emoji_handler
+
+
+def create_progress_bar(progress: float, duration: float) -> str:
+    progress_ratio = progress / duration
+    progress_bar = create_player_bar(progress_ratio, 20)
+    return progress_bar
 
 
 class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
@@ -21,145 +28,108 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         super().__init__(channel, **kwargs)
         self.player = player
 
+    def get_stream_entry_embed(self, entry: StreamEntry) -> Embed:
+        desc = f"🔴 Live [`{to_timestamp(self.player.progress)}`]"
+        footer = {}
+        cover = None
+        colour = 0xa23dd1
+
+        if isinstance(entry, RadioStationEntry):
+            station_name = entry.station_name
+            footer = dict(text=f"From {station_name}", icon_url=entry.thumbnail)
+            cover = entry.cover
+            colour = 0xbe7621
+
+        em = Embed(
+            title=entry.title,
+            description=desc,
+            url=entry.link,
+            colour=colour
+        )
+        if footer:
+            em.set_footer(**footer)
+        if cover:
+            em.set_thumbnail(url=cover)
+        return em
+
     async def get_embed(self) -> Embed:
         entry = self.player.current_entry
 
         if not entry:
             return Embed(description="Nothing playing")
 
-        if isinstance(entry, RadioSongEntry):
-            progress_ratio = entry.song_progress / \
-                             (entry.song_duration or 1)
-            desc = "{} `[{}/{}]`".format(
-                create_bar(progress_ratio, length=20),
-                to_timestamp(entry.song_progress),
-                to_timestamp(entry.song_duration)
-            )
-            foot = "🔴 Live from {}".format(entry.station_name)
+        if isinstance(entry, StreamEntry) and not isinstance(entry, RadioSongEntry):
+            return self.get_stream_entry_embed(entry)
 
-            em = Embed(
-                title=entry.title,
-                description=desc,
-                url=entry.link,
-                colour=0xa23dd1
-            )
+        fields = []
+        author = {}
+        footer = {}
 
-            em.set_footer(text=foot)
-            em.set_thumbnail(url=entry.cover)
-            em.set_author(
-                name=entry.artist
-            )
-        elif isinstance(entry, RadioStationEntry):
-            desc = "`{}`".format(
-                to_timestamp(self.player.progress)
-            )
-            foot = "🔴 Live from {}".format(entry.station_name)
+        playing_state = "►" if self.player.is_paused else "❚❚"
+        progress_bar = None
+        song_progress = self.player.progress
+        song_duration = entry.duration
 
-            em = Embed(
-                title=entry.title,
-                description=desc,
-                url=entry.link,
-                colour=0xbe7621
-            )
+        title = entry.title
+        colour = 0xa9b244
 
-            em.set_footer(text=foot)
-            em.set_thumbnail(url=entry.cover)
-        elif isinstance(entry, StreamEntry):
-            desc = "🔴 Live [`{}`]".format(to_timestamp(self.player.progress))
-
-            em = Embed(
-                title=entry.title,
-                description=desc,
-                colour=0xa23dd1
-            )
-        elif isinstance(entry, GieselaEntry):
-            artist_name = entry.artist
-            artist_avatar = entry.artist_image
-            progress_ratio = self.player.progress / entry.end_seconds
-            desc = "{} {} `[{}/{}]`".format(
-                "►" if self.player.is_paused else "❚❚",
-                create_bar(progress_ratio, length=20),
-                to_timestamp(self.player.progress),
-                to_timestamp(entry.end_seconds)
-            )
-
-            em = Embed(
-                title=entry.song_title,
-                description=desc,
-                url=entry.url,
-                colour=0xF9FF6E
-            )
-
-            em.set_thumbnail(url=entry.cover)
-            em.set_author(
-                name=artist_name,
-                icon_url=artist_avatar
-            )
-            em.add_field(name="Album", value=entry.album)
-        elif isinstance(entry, TimestampEntry):
-            sub_entry = entry.current_sub_entry
-            index = sub_entry["index"] + 1
-            progress_ratio = sub_entry["progress"] / sub_entry["duration"]
-            desc = "{} {} `[{}/{}]`".format(
-                "►" if self.player.is_paused else "❚❚",
-                create_bar(progress_ratio, length=20),
-                to_timestamp(sub_entry["progress"]),
-                to_timestamp(sub_entry["duration"])
-            )
-            foot = "{}{} sub-entry of \"{}\" [{}/{}]".format(
-                index,
-                ordinal(index),
-                entry.whole_title,
-                to_timestamp(self.player.progress),
-                to_timestamp(entry.end_seconds)
-            )
-
-            em = Embed(
-                title=sub_entry["name"],
-                description=desc,
-                url=entry.url,
-                colour=0x00FFFF
-            )
-
-            em.set_footer(text=foot)
-            em.set_thumbnail(url=entry.thumbnail)
-            if "playlist" in entry.meta:
-                pl = entry.meta["playlist"]
-                em.set_author(name=pl["name"], icon_url=pl.get("cover", None) or Embed.Empty)
-            elif "author" in entry.meta:
-                author = entry.meta["author"]
-                em.set_author(
-                    name=author.display_name,
-                    icon_url=author.avatar_url
-                )
-        elif isinstance(entry, YoutubeEntry):
-            progress_ratio = self.player.progress / entry.end_seconds
-            desc = "{} {} `[{}/{}]`".format(
-                "►" if self.player.is_paused else "❚❚",
-                create_bar(progress_ratio, length=20),
-                to_timestamp(self.player.progress),
-                to_timestamp(entry.end_seconds)
-            )
-
-            em = Embed(
-                title=entry.title,
-                description=desc,
-                url=entry.url,
-                colour=0xa9b244
-            )
-
-            em.set_thumbnail(url=entry.thumbnail)
-            if "playlist" in entry.meta:
-                pl = entry.meta["playlist"]
-                em.set_author(name=pl["name"], icon_url=pl.get("cover", None) or Embed.Empty)
-            elif "author" in entry.meta:
-                author = entry.meta["author"]
-                em.set_author(
-                    name=author.display_name,
-                    icon_url=author.avatar_url
-                )
+        if isinstance(entry, (RadioSongEntry, GieselaEntry)):
+            author = dict(name=entry.artist)
+            cover = entry.cover
         else:
-            em = Embed(description="No idea what you're playing")
+            cover = entry.thumbnail
+            if "playlist" in entry.meta:
+                # TODO is this even possible anymore?
+                pl = entry.meta["playlist"]
+                author = dict(name=pl["name"], icon_url=pl.get("cover", False) or Embed.Empty)
+            elif "author" in entry.meta:
+                author = entry.meta["author"]
+                author = dict(name=author.display_name, icon_url=author.avatar_url)
+
+        if isinstance(entry, RadioSongEntry):
+            colour = 0xa23dd1
+            footer = dict(text="🔴 Live from {entry.station_name}", icon_url=entry.thumbnail)
+            song_progress = entry.song_progress
+            song_duration = entry.song_duration
+        elif isinstance(entry, GieselaEntry):
+            colour = 0xF9FF6E
+            author["icon_url"] = entry.artist_image
+            fields.append(dict(name="Album", value=entry.album))
+        elif isinstance(entry, TimestampEntry):
+            colour = 0x00FFFF
+            sub_entry = entry.current_sub_entry
+            title = sub_entry["name"]
+            sub_index = sub_entry["index"]
+
+            footer = dict(text=f"{sub_index + 1}{ordinal(sub_index + 1)} sub-entry of \"{entry.whole_title}\" "
+                               f"[{to_timestamp(song_progress)}/{to_timestamp(song_duration)}]")
+
+            song_progress = sub_entry["progress"]
+            song_duration = sub_entry["duration"]
+
+            cover = entry.thumbnail
+        elif isinstance(entry, YoutubeEntry):
+            colour = 0xa9b244
+
+        progress_bar = progress_bar or create_progress_bar(song_progress, song_duration)
+        desc = f"{playing_state} {progress_bar} `[{to_timestamp(song_progress)}/{to_timestamp(song_duration)}]`"
+
+        em = Embed(
+            title=title,
+            description=desc,
+            url=entry.url,
+            colour=colour
+        )
+
+        for field in fields:
+            em.add_field(**field)
+
+        if footer:
+            em.set_footer(**footer)
+        if cover:
+            em.set_thumbnail(url=cover)
+        if author:
+            em.set_author(**author)
 
         return em
 

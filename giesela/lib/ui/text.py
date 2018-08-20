@@ -1,4 +1,45 @@
-def create_bar(progress: float, length: int = 10, *, full_char: str = "■", half_char: str = None, empty_char: str = "□"):
+ZERO_WIDTH_SPACE = r"​"  # please pay attention to your cursor
+
+DEFAULT_FULL_CHAR = "■"
+DEFAULT_EMPTY_CHAR = "□"
+
+LINE_CHAR = "▬"
+
+CLOSING_MAP = {
+    "<": ">"
+}
+
+
+def find_closing(char: str) -> str:
+    if len(char) > 1:
+        s = "".join(find_closing(c) for c in char)
+        return s[::-1]
+
+    return CLOSING_MAP.get(char, char)
+
+
+def wrap(text: str, char: str, closing: str = None) -> str:
+    closing = closing or find_closing(char)
+    return char + text + closing
+
+
+def keep_whitespace(text: str) -> str:
+    return wrap(text, ZERO_WIDTH_SPACE)
+
+
+def create_player_bar(progress: float, length: int = 20, handle_char: str = "🔘", bar_char: str = LINE_CHAR) -> str:
+    position = round(progress * length)
+
+    if position > 0:
+        bar = (position - 1) * bar_char + handle_char
+    else:
+        bar = handle_char
+
+    return bar.ljust(length, bar_char)
+
+
+def create_bar(progress: float, length: int = 10, *, full_char: str = DEFAULT_FULL_CHAR, half_char: str = None,
+               empty_char: str = DEFAULT_EMPTY_CHAR) -> str:
     fill_to_double = round(2 * length * progress)
     residue = fill_to_double % 2
     fill_to = fill_to_double / 2
@@ -16,5 +57,20 @@ def create_bar(progress: float, length: int = 10, *, full_char: str = "■", hal
     return bar
 
 
-def create_scroll_bar(length: int = 10, *, full_char: str = "■", empty_char: str = "□"):
-    pass
+def create_scroll_bar(progress: float, visible: float, length: int = 10, *, full_char: str = DEFAULT_FULL_CHAR,
+                      empty_char: str = DEFAULT_EMPTY_CHAR) -> str:
+    start_fill = progress - (visible / 2)
+    end_fill = progress + (visible / 2)
+    start_index = start_fill * length
+    end_index = end_fill * length
+
+    fill_length = round(end_index - start_index)
+    if fill_length < 1:
+        if int(start_index) == length:
+            start_index -= 1
+        fill_length += 1
+
+    filled = fill_length * full_char
+    empty = int(start_index) * empty_char
+
+    return (empty + filled).ljust(length, empty_char)
