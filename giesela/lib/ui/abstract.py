@@ -68,7 +68,7 @@ class Listener(CanSignalStop, metaclass=abc.ABCMeta):
     def result(self) -> Any:
         return self._result
 
-    def cancel_listener(self):
+    def cancel(self):
         self.signal_stop()
         if self._listener:
             self._listener.cancel()
@@ -101,7 +101,7 @@ class Listener(CanSignalStop, metaclass=abc.ABCMeta):
         return result
 
     def listen(self) -> Any:
-        if not self._listener:
+        if not self._listener or self._listener.done():
             self._listener = asyncio.ensure_future(self._listen())
         return self._listener
 
@@ -137,6 +137,13 @@ class HasListener(Startable, Stoppable):
             for listener in self._listeners:
                 self.stop_listener(listener)
 
+    def cancel_listener(self, listener: str = None):
+        if listener:
+            self._listeners[listener].cancel()
+        else:
+            for listener in self._listeners:
+                self.stop_listener(listener)
+
     def listener_result(self, listener: str, default: Any = _DEFAULT) -> Any:
         try:
             return self._listeners[listener].result
@@ -146,8 +153,13 @@ class HasListener(Startable, Stoppable):
             else:
                 return default
 
-    def wait_for_listener(self, listener: str) -> asyncio.Task:
-        return self._listeners[listener].listen()
+    def wait_for_listener(self, listener: str = None, *, return_when=asyncio.FIRST_COMPLETED) -> asyncio.Task:
+        if listener:
+            return self._listeners[listener].listen()
+        else:
+            listeners = [listener.listen() for listener in self._listeners.values()]
+            coro = asyncio.wait(listeners, return_when=return_when)
+            return asyncio.ensure_future(coro)
 
     async def start(self):
         self.start_listener()

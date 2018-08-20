@@ -20,7 +20,7 @@ class EmbedPrompt(InteractableEmbed):
         return self.prompt()
 
     async def prompt(self) -> bool:
-        await self.edit(self.embed, on_new=self.add_reactions)
+        await self.edit(self.embed)
         res = await self.wait_for_listener("reactions")
         await self.delete()
         return res

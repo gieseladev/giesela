@@ -102,6 +102,9 @@ class InteractableEmbed(HasListener, EditableEmbed, ReactionHandler, Startable, 
         for emoji in self.emojis:
             await msg.add_reaction(emoji)
 
+    async def edit(self, embed: Embed, on_new: Callable[[Message], Any] = None):
+        await super().edit(embed, on_new or self.add_reactions)
+
     async def remove_reaction(self, emoji: EmojiType):
         if not self.message:
             return
@@ -155,7 +158,7 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
     bot: Client
     user: Optional[User]
 
-    _group: BotBase
+    _group: MenuCommandGroup
 
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
         self.bot = kwargs.pop("bot")
@@ -238,7 +241,7 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
 
     async def show_page(self):
         next_embed = await self.get_current_embed()
-        await self.edit(next_embed, on_new=self.add_reactions)
+        await self.edit(next_embed)
 
     async def start(self) -> Any:
         await self.show_page()
@@ -432,7 +435,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
 
     async def show_window(self):
         next_embed = await self.get_current_embed()
-        await self.edit(next_embed, on_new=self.add_reactions)
+        await self.edit(next_embed)
 
     @emoji_handler("🔼", pos=2)
     async def scroll_up(self, *_):

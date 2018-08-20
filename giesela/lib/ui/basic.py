@@ -36,6 +36,7 @@ class EditableEmbed:
     async def delete(self):
         if self.message:
             await self.message.delete()
+            self._message = None
 
     async def edit(self, embed: Embed, on_new: Callable[[Message], Any] = None):
         if self.message:
