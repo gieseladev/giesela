@@ -162,7 +162,7 @@ class MusicPlayer(EventEmitter):
     def seek(self, secs: float):
         if self.player:
             self.player.seek(secs)
-        self.emit("seek", player=self, entry=self.current_entry)
+        self.emit("seek", player=self, entry=self.current_entry, timestamp=secs)
 
     def pause(self):
         if isinstance(self.current_entry, StreamEntry):
@@ -219,6 +219,7 @@ class MusicPlayer(EventEmitter):
 
         if not entry:
             log.debug("queue empty")
+            self.stop()
             return
 
         await entry.get_ready_future()
