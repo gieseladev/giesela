@@ -341,6 +341,7 @@ class Player:
         }
         viewer = VerticalTextViewer(ctx.channel, ctx.author, embed_frame=frame, content=lyrics.lyrics)
         await viewer.display()
+        await ctx.message.delete()
 
 
 def setup(bot: Giesela):

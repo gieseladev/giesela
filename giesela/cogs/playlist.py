@@ -80,6 +80,7 @@ class Playlist:
 
         viewer = PlaylistViewer(ctx.channel, user=ctx.author, bot=self.bot, playlist=playlist)
         await viewer.display()
+        await ctx.message.delete()
 
     @playlist.group("play", aliases=["load", "start", "listen"])
     async def playlist_play(self, ctx: Context, playlist: str):
@@ -104,6 +105,7 @@ class Playlist:
         await ensure_user_can_edit_playlist(playlist, ctx)
         builder = PlaylistBuilder(ctx.channel, ctx.author, bot=self.bot, playlist=playlist)
         await builder.display()
+        # TODO display changelog and delete invoking message when there is no changelog to be displayed
 
     @playlist.command("rename", aliases=["newname", "rn"])
     async def playlist_rename(self, ctx: Context, playlist: str, name: str):
@@ -239,6 +241,7 @@ class Playlist:
         # TODO use special viewer with play (and other) features
         viewer = EmbedViewer(ctx.channel, ctx.author, embeds=paginator)
         await viewer.display()
+        await ctx.message.delete()
 
     async def import_playlist(self, data) -> Optional[Embed]:
         playlist = self.playlist_manager.import_from_gpl(data)

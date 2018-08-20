@@ -606,6 +606,7 @@ class DisplayCog(QueueBase):
 
         viewer = VerticalTextViewer(ctx.channel, ctx.author, content=lines, embed_frame=frame)
         await viewer.display()
+        await ctx.message.delete()
 
     @commands.command()
     async def history(self, ctx: Context):
@@ -636,6 +637,7 @@ class DisplayCog(QueueBase):
 
         viewer = VerticalTextViewer(ctx.channel, ctx.author, content=lines, embed_frame=frame)
         await viewer.display()
+        await ctx.message.delete()
 
 
 class Queue(EnqueueCog, ManipulateCog, DisplayCog):
