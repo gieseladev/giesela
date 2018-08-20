@@ -174,6 +174,14 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
         self.user = user
         self.create_listener("messages", listen_once=self.wait_for_message)
 
+    @property
+    def commands(self) -> List[Command]:
+        return self._group.commands
+
+    async def stop(self):
+        self.cancel_listener("messages")
+        await super().stop()
+
     async def delete(self):
         await self.stop()
         await super().delete()
@@ -181,6 +189,7 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
     def message_check(self, message: Message) -> bool:
         if self.user and message.author.id != self.user.id:
             return False
+
         return True
 
     async def wait_for_message(self) -> Any:
@@ -199,6 +208,7 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
 class Abortable(HasListener, metaclass=abc.ABCMeta):
     @emoji_handler("❎", pos=1000)
     async def abort(self, *_) -> None:
+        """Abort"""
         self.stop_listener()
         return None
 
@@ -207,6 +217,7 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
     """
     Keyword Args:
         embeds: list of `Embed` to use
+            no_controls_for_single_embed: `bool`. Don't show page controls when only one embed
         embed_callback: function to call which returns an `Embed` based on the current index
     """
     embeds: Optional[List[Embed]]
@@ -216,6 +227,10 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
 
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
         self.embeds = kwargs.pop("embeds", None)
+        if self.embeds and kwargs.pop("no_controls_for_single_embed", True) and len(self.embeds) == 1:
+            del self.previous_page
+            del self.next_page
+
         self.embed_callback = kwargs.pop("embed_callback", None)
         super().__init__(channel, user, **kwargs)
 
@@ -249,11 +264,13 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
 
     @emoji_handler("◀", pos=1)
     async def previous_page(self, *_):
+        """Switch to the previous page"""
         self._current_index -= 1
         await self.show_page()
 
     @emoji_handler("▶", pos=2)
     async def next_page(self, *_):
+        """Switch to the next page"""
         self._current_index += 1
         await self.show_page()
 
@@ -430,7 +447,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
 
     async def display(self) -> None:
         await self.show_window()
-        await self.wait_for_listener("reactions")
+        await self.wait_for_listener()
         await self.delete()
 
     async def show_window(self):
@@ -439,6 +456,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
 
     @emoji_handler("🔼", pos=2)
     async def scroll_up(self, *_):
+        """Scroll up"""
         if self.first_line_visible:
             return
 
@@ -450,6 +468,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
 
     @emoji_handler("🔽", pos=1)
     async def scroll_down(self, *_):
+        """Scroll down"""
         if self.last_line_visible:
             return
 

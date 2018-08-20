@@ -1,12 +1,14 @@
 import abc
+import textwrap
 from typing import List
 
-from discord import Embed, TextChannel, User
+from discord import Colour, Embed, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import Giesela, Playlist
 from giesela.cogs.player import Player
+from ..help import HasHelp, get_command_help, get_message_help, get_reaction_help
 from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
 
 
@@ -27,7 +29,8 @@ def create_entry_list(playlist: Playlist) -> List[str]:
 
     for ind, entry in enumerate(playlist, 1):
         index = str(ind).rjust(index_padding, "0")
-        entries.append(f"`{index}.` {entry.title}")
+        title = textwrap.shorten(entry.title, 50)
+        entries.append(f"`{index}.` {title}")
 
     return entries
 
@@ -43,9 +46,7 @@ class _PlaylistEmbed(metaclass=abc.ABCMeta):
     playlist: Playlist
 
     def __init__(self, *args, **kwargs):
-        self.bot = kwargs["bot"]
         self.player_cog = self.bot.cogs["Player"]
-        self.playlist = kwargs.pop("playlist")
         super().__init__(*args, **kwargs)
 
     async def play(self, channel: TextChannel, user: User):
@@ -60,10 +61,11 @@ class PlaylistViewer(_PlaylistEmbed, VerticalTextViewer):
     """
 
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
-        playlist = kwargs.pop("playlist")
-        entries = create_entry_list(playlist)
-        embed_frame = create_basic_embed(playlist)
-        super().__init__(channel, user, content=entries, embed_frame=embed_frame, playlist=playlist, **kwargs)
+        self.bot = kwargs.pop("bot")
+        self.playlist = kwargs.pop("playlist")
+        entries = create_entry_list(self.playlist)
+        embed_frame = create_basic_embed(self.playlist)
+        super().__init__(channel, user, content=entries, embed_frame=embed_frame, **kwargs)
 
     @emoji_handler("🎵", pos=999)
     async def play_playlist(self, *_):
@@ -71,12 +73,25 @@ class PlaylistViewer(_PlaylistEmbed, VerticalTextViewer):
         await self.disable_handler(self.play_playlist)
 
 
-class PlaylistEditor(_PlaylistEmbed, MessageableEmbed, VerticalTextViewer):
+class PlaylistBuilder(_PlaylistEmbed, MessageableEmbed, HasHelp, VerticalTextViewer):
+
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
-        playlist = kwargs.pop("playlist")
-        entries = create_entry_list(playlist)
-        embed_frame = create_basic_embed(playlist)
-        super().__init__(channel, user, content=entries, embed_frame=embed_frame, playlist=playlist, **kwargs)
+        self.bot = kwargs["bot"]
+        self.playlist = kwargs.pop("playlist")
+        entries = create_entry_list(self.playlist)
+        embed_frame = create_basic_embed(self.playlist)
+        super().__init__(channel, user, content=entries, embed_frame=embed_frame, **kwargs)
+
+    def get_help_embed(self) -> Embed:
+        embed = Embed(title="Playlist Builder Help", colour=Colour.blue())
+
+        reaction_help = get_reaction_help(self)
+        embed.add_field(name="Buttons", value=reaction_help)
+
+        message_help = get_message_help(self)
+        embed.add_field(name="Commands", value=message_help, inline=False)
+
+        return embed
 
     @emoji_handler("💾", pos=999)
     async def save_changes(self, *_):
@@ -90,8 +105,18 @@ class PlaylistEditor(_PlaylistEmbed, MessageableEmbed, VerticalTextViewer):
 
     @emoji_handler("❓", pos=1001)
     async def show_help(self, *_):
-        """Show some help"""
-        pass
+        """Open this very box"""
+        self.trigger_help_embed(self.channel, self.user)
+
+    @commands.command()
+    async def help(self, ctx: Context, *cmds: str):
+        """Even more help"""
+        if not cmds:
+            await self.show_help_embed(self.channel, self.user)
+            return
+
+        embed = await get_command_help(ctx, *cmds)
+        self.trigger_help_embed(self.channel, self.user, embed=embed)
 
     @commands.command("edit")
     async def edit_entry(self, ctx: Context, index: int):

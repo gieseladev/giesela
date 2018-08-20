@@ -29,7 +29,7 @@ class Info:
 
     @commands.command()
     async def help(self, ctx: Context, *cmds):
-        """Get the help you need"""
+        """Get the help you c̶l̶e̶a̶r̶l̶y̶ need"""
 
         async def _command_not_found(_name: str):
             _em = Embed(description=f"No command called **{_name}**", colour=Colour.red())
@@ -71,6 +71,19 @@ class Info:
 
 
 class GieselaHelpFormatter(HelpFormatter):
+    def get_commands_text(self, _commands):
+        max_width = self.max_name_size
+        value = ""
+        for name, cmd in _commands:
+            if name in cmd.aliases:
+                # skip aliases
+                continue
+
+            entry = f"{name:<{max_width}} | {cmd.short_doc}"
+            shortened = self.shorten(entry)
+            value += shortened + "\n"
+        return value
+
     async def format(self):
         template_embed = Embed(colour=Colour.green())
         first_embed = copy_embed(template_embed)
@@ -81,19 +94,6 @@ class GieselaHelpFormatter(HelpFormatter):
             first_embed.description = description
 
         paginator = EmbedPaginator(template=template_embed, special_template=first_embed)
-
-        def get_commands_text(_commands):
-            max_width = self.max_name_size
-            value = ""
-            for name, cmd in _commands:
-                if name in cmd.aliases:
-                    # skip aliases
-                    continue
-
-                entry = f"{name:<{max_width}} | {cmd.short_doc}"
-                shortened = self.shorten(entry)
-                value += shortened + "\n"
-            return value
 
         def get_final_embeds():
             embeds = paginator.embeds
@@ -126,10 +126,10 @@ class GieselaHelpFormatter(HelpFormatter):
                 command_list = list(command_list)
                 if len(command_list) > 0:
                     name = category
-                    value = get_commands_text(command_list)
+                    value = self.get_commands_text(command_list)
                     paginator.add_field(name, f"```css\n{value}```")
         else:
-            value = get_commands_text(await self.filter_command_list())
+            value = self.get_commands_text(await self.filter_command_list())
             paginator.add_field("Commands", f"```css\n{value}```")
 
         return get_final_embeds()
