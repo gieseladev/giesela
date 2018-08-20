@@ -5,7 +5,7 @@ from discord import Colour, Embed, TextChannel
 from .interactive import InteractableEmbed, emoji_handler
 
 
-class PromptYesNo(InteractableEmbed):
+class EmbedPrompt(InteractableEmbed):
     embed: Embed
 
     def __init__(self, channel: TextChannel, **kwargs):
@@ -21,16 +21,19 @@ class PromptYesNo(InteractableEmbed):
 
     async def prompt(self) -> bool:
         await self.edit(self.embed, on_new=self.add_reactions)
-        res = await self.listen()
+        res = await self.wait_for_listener("reactions")
         await self.delete()
         return res
 
+
+class PromptYesNo(EmbedPrompt):
+
     @emoji_handler("☑", pos=1)
     async def handle_true(self, **_):
-        self.signal_stop()
+        self.stop_listener()
         return True
 
     @emoji_handler("❎", pos=2)
     async def handle_false(self, **_):
-        self.signal_stop()
+        self.stop_listener()
         return False

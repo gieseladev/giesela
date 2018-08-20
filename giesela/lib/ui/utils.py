@@ -1,6 +1,12 @@
+import asyncio
+import logging
 from typing import Union
 
-from discord import Embed, Emoji
+from discord import Client, Embed, Emoji
+from discord.ext.commands import Context
+from discord.ext.commands.bot import BotBase
+
+log = logging.getLogger(__name__)
 
 EmojiType = Union[Emoji, str]
 
@@ -61,3 +67,24 @@ def count_embed_chars(embed: Embed) -> int:
     count += sum(len(field.name) + len(field.value) for field in embed.fields)
 
     return count
+
+
+class FakeClient:
+    def __init__(self, *args, loop=None, **kwargs):
+        self.loop = asyncio.get_event_loop() if loop is None else loop
+        self._listeners = {}
+
+    dispatch = Client.dispatch
+    _run_event = Client._run_event
+
+
+class MenuCommandGroup(BotBase, FakeClient):
+    bot: Client
+
+    def __init__(self, bot: Client, **kwargs):
+        self.bot = bot
+        super().__init__("", **kwargs)
+        self.user = bot.user
+
+    async def on_command(self, ctx: Context):
+        ctx.bot = self.bot

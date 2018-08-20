@@ -1,2 +1,2 @@
 from .now_playing import NowPlayingEmbed
-from .playlist import PlaylistViewer
+from .playlist import PlaylistEditor, PlaylistViewer

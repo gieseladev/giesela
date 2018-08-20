@@ -9,7 +9,7 @@ from discord.ext.commands import Context
 
 from giesela import Giesela, Playlist, PlaylistManager, utils
 from giesela.lib.ui import EditableEmbed, EmbedPaginator, EmbedViewer, PromptYesNo
-from giesela.lib.ui.custom import PlaylistViewer
+from giesela.lib.ui.custom import PlaylistEditor, PlaylistViewer
 from .info import help_formatter
 from .player import Player
 
@@ -102,6 +102,8 @@ class Playlist:
         """Edit a playlist"""
         playlist = self.find_playlist(playlist)
         await ensure_user_can_edit_playlist(playlist, ctx)
+        builder = PlaylistEditor(ctx.channel, ctx.author, bot=self.bot, playlist=playlist)
+        await builder.start()
 
     @playlist.command("rename", aliases=["newname", "rn"])
     async def playlist_rename(self, ctx: Context, playlist: str, name: str):

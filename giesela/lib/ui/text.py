@@ -14,3 +14,7 @@ def create_bar(progress: float, length: int = 10, *, full_char: str = "■", hal
 
     bar = full_bar.ljust(length, empty_char)
     return bar
+
+
+def create_scroll_bar(length: int = 10, *, full_char: str = "■", empty_char: str = "□"):
+    pass

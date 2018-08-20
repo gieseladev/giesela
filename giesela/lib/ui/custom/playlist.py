@@ -2,10 +2,12 @@ import abc
 from typing import List
 
 from discord import Embed, TextChannel, User
+from discord.ext import commands
+from discord.ext.commands import Context
 
 from giesela import Giesela, Playlist
 from giesela.cogs.player import Player
-from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler, message_handler
+from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
 
 
 def create_basic_embed(playlist: Playlist) -> Embed:
@@ -41,7 +43,7 @@ class _PlaylistEmbed(metaclass=abc.ABCMeta):
     playlist: Playlist
 
     def __init__(self, *args, **kwargs):
-        self.bot = kwargs.pop("bot")
+        self.bot = kwargs["bot"]
         self.player_cog = self.bot.cogs["Player"]
         self.playlist = kwargs.pop("playlist")
         super().__init__(*args, **kwargs)
@@ -71,31 +73,37 @@ class PlaylistViewer(_PlaylistEmbed, VerticalTextViewer):
 
 class PlaylistEditor(_PlaylistEmbed, MessageableEmbed, VerticalTextViewer):
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
-        super().__init__(channel, user, **kwargs)
+        playlist = kwargs.pop("playlist")
+        entries = create_entry_list(playlist)
+        embed_frame = create_basic_embed(playlist)
+        super().__init__(channel, user, content=entries, embed_frame=embed_frame, playlist=playlist, **kwargs)
 
     @emoji_handler("💾", pos=999)
     async def save_changes(self, *_):
-        self.signal_stop()
+        """Close and save"""
+        self.stop_listener()
 
     @emoji_handler("❎", pos=1000)
     async def abort(self, *_):
-        self.signal_stop()
+        """Close without saving"""
+        self.stop_listener()
 
     @emoji_handler("❓", pos=1001)
     async def show_help(self, *_):
+        """Show some help"""
         pass
 
-    @message_handler("edit")
-    async def edit_entry(self, index: int):
+    @commands.command("edit")
+    async def edit_entry(self, ctx: Context, index: int):
         """Edit an entry"""
-        pass
+        print("this is the life", flush=True)
 
-    @message_handler("add")
-    async def add_entry(self, *query: str):
+    @commands.command("add")
+    async def add_entry(self, ctx: Context, *query: str):
         """Add an entry"""
         query = " ".join(query)
 
-    @message_handler("remove", aliases=["rm"])
-    async def remove_entry(self, *indices: int):
+    @commands.command("remove", aliases=["rm"])
+    async def remove_entry(self, ctx: Context, *indices: int):
         """Remove entries"""
         pass
