@@ -315,7 +315,7 @@ class Playlist:
         serialised = json.dumps(playlist.to_gpl(), indent=None, separators=(",", ":"))
         data = BytesIO(serialised.encode("utf-8"))
         data.seek(0)
-        file = File(data, filename=f"{playlist.name}.gpl")
+        file = File(data, filename=f"{playlist.name.lower()}.gpl")
         await ctx.send("Here you go", file=file)
 
     @commands.command("addtoplaylist", aliases=["quickadd", "pladd", "pl+"])
