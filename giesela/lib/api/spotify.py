@@ -252,7 +252,7 @@ class SpotifyTrack:
         search_result = get_spotify_client().search(
             query, limit=1, type="track")
         if len(search_result) < 1 or len(search_result["tracks"]["items"]) < 1:
-            return cls.EmptyTrack(query)
+            return None
 
         track = search_result["tracks"]["items"][0]
 
@@ -363,7 +363,8 @@ class SpotifyTrack:
 
 async def get_spotify_track(loop, query):
     track: SpotifyTrack = await loop.run_in_executor(None, SpotifyTrack.from_query, query)
-    return track.entry_data
+    if track:
+        return track.entry_data
 
 
 def get_certainty(query, song_name, artist_name):
