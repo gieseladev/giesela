@@ -457,14 +457,13 @@ class RadioSongEntry(RadioStationEntry):
 
 class YoutubeEntry(BaseEntry):
 
-    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, expected_filename=None, thumbnail_brightness=None, **meta):
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, expected_filename=None, thumbnail_brightness=None, **meta):
         super().__init__(queue, url, **meta)
 
         self.video_id = video_id
         self._title = title
         self.thumbnail = thumbnail
         self._thumbnail_brightness = thumbnail_brightness
-        self.description = description
         self.duration = duration
 
         self.end_seconds = meta.get("end_seconds", duration)
@@ -517,9 +516,8 @@ class YoutubeEntry(BaseEntry):
         duration = data["duration"]
         thumbnail = data["thumbnail"]
         thumbnail_brightness = data.get("thumbnail_brightness")
-        description = data["description"]
 
-        return cls(queue, video_id, url, title, duration, thumbnail, description, expected_filename=filename,
+        return cls(queue, video_id, url, title, duration, thumbnail, expected_filename=filename,
                    thumbnail_brightness=thumbnail_brightness, **meta)
 
     def seek(self, secs):
@@ -562,7 +560,6 @@ class YoutubeEntry(BaseEntry):
             "duration": self.duration,
             "thumbnail": self.thumbnail,
             "thumbnail_brightness": self._thumbnail_brightness,
-            "description": self.description,
             "meta": meta_dict
         }
         return data
@@ -702,9 +699,9 @@ class YoutubeEntry(BaseEntry):
 
 class TimestampEntry(YoutubeEntry):
 
-    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, sub_queue, expected_filename=None, thumbnail_brightness=None,
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, sub_queue, expected_filename=None, thumbnail_brightness=None,
                  **meta):
-        super().__init__(queue, video_id, url, title, duration, thumbnail, description, expected_filename=expected_filename,
+        super().__init__(queue, video_id, url, title, duration, thumbnail, expected_filename=expected_filename,
                          thumbnail_brightness=thumbnail_brightness, **meta)
 
         self.sub_queue = sub_queue
@@ -755,10 +752,9 @@ class TimestampEntry(YoutubeEntry):
         duration = data["duration"]
         thumbnail = data["thumbnail"]
         thumbnail_brightness = data.get("thumbnail_brightness")
-        description = data["description"]
         sub_queue = data["sub_queue"]
 
-        return cls(queue, video_id, url, title, duration, thumbnail, description, sub_queue, expected_filename=filename,
+        return cls(queue, video_id, url, title, duration, thumbnail, sub_queue, expected_filename=filename,
                    thumbnail_brightness=thumbnail_brightness, **meta)
 
     def to_dict(self):
@@ -783,9 +779,9 @@ class TimestampEntry(YoutubeEntry):
 
 class GieselaEntry(YoutubeEntry):
 
-    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover,
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, song_title, artist, artist_image, album, cover,
                  expected_filename=None, thumbnail_brightness=None, **meta):
-        super().__init__(queue, video_id, url, title, duration, thumbnail, description, expected_filename=expected_filename,
+        super().__init__(queue, video_id, url, title, duration, thumbnail, expected_filename=expected_filename,
                          thumbnail_brightness=thumbnail_brightness, **meta)
 
         self.song_title = song_title
@@ -824,7 +820,6 @@ class GieselaEntry(YoutubeEntry):
         duration = data["duration"]
         thumbnail = data["thumbnail"]
         thumbnail_brightness = data.get("thumbnail_brightness")
-        description = data["description"]
 
         song_title = data["song_title"]
         artist = data["artist"]
@@ -832,7 +827,7 @@ class GieselaEntry(YoutubeEntry):
         cover = data["cover"]
         album = data["album"]
 
-        return cls(queue, video_id, url, title, duration, thumbnail, description, song_title, artist, artist_image, album, cover,
+        return cls(queue, video_id, url, title, duration, thumbnail, song_title, artist, artist_image, album, cover,
                    expected_filename=filename, thumbnail_brightness=thumbnail_brightness, **meta)
 
     @classmethod
@@ -844,7 +839,6 @@ class GieselaEntry(YoutubeEntry):
             "title": previous_entry._title,
             "duration": previous_entry.duration,
             "thumbnail": previous_entry.thumbnail,
-            "description": previous_entry.description,
             "expected_filename": previous_entry.expected_filename,
             "song_title": song_title,
             "artist": artist,
@@ -892,10 +886,10 @@ class DiscogsEntry(GieselaEntry):
 
 class SpotifyEntry(GieselaEntry):
 
-    def __init__(self, queue, video_id, url, title, duration, thumbnail, description, spotify_track, expected_filename=None,
+    def __init__(self, queue, video_id, url, title, duration, thumbnail, spotify_track, expected_filename=None,
                  thumbnail_brightness=None, **meta):
         super().__init__(
-            queue, video_id, url, title, duration, thumbnail, description,
+            queue, video_id, url, title, duration, thumbnail,
             spotify_track.name,
             spotify_track.artist_string,
             spotify_track.artists[0].image,
@@ -928,10 +922,9 @@ class SpotifyEntry(GieselaEntry):
         duration = data["duration"]
         thumbnail = data["thumbnail"]
         thumbnail_brightness = data.get("thumbnail_brightness")
-        description = data["description"]
         spotify_data = SpotifyTrack.from_dict(data["spotify_data"])
 
-        return cls(queue, video_id, url, title, duration, thumbnail, description, spotify_data, expected_filename=filename,
+        return cls(queue, video_id, url, title, duration, thumbnail, spotify_data, expected_filename=filename,
                    thumbnail_brightness=thumbnail_brightness, **meta)
 
     def to_dict(self):

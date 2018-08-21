@@ -291,8 +291,7 @@ class Queue(EventEmitter):
             video_url,
             video_title,
             video_duration,
-            video_thumbnail,
-            video_description
+            video_thumbnail
         )
 
         spotify_searcher = asyncio.ensure_future(get_spotify_track(self.loop, clean_title))
@@ -343,8 +342,7 @@ class Queue(EventEmitter):
                 **meta
             )
         else:
-            sub_queue = get_video_sub_queue(
-                video_description, video_id, video_duration)
+            sub_queue = get_video_sub_queue(video_description, video_id, video_duration)
 
             if sub_queue:
                 entry = TimestampEntry(
