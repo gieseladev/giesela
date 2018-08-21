@@ -36,6 +36,7 @@ class Giesela(AutoShardedBot):
             self.load_extension(ext)
 
     async def logout(self):
+        self.dispatch("logout")
         await self.aiosession.close()
         await super().logout()
 

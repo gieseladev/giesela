@@ -69,6 +69,9 @@ class Playlist:
         await playlist.play(player.queue, channel=ctx.channel, author=ctx.author)
         await ctx.send("Loaded playlist", embed=playlist_embed(playlist))
 
+    async def on_logout(self):
+        self.playlist_manager.close()
+
     @commands.group(invoke_without_command=True, aliases=["pl"])
     async def playlist(self, ctx: Context, playlist: str = None):
         """Playlist stuff"""
