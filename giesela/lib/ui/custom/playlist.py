@@ -6,9 +6,8 @@ from discord import Colour, Embed, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, Playlist
+from giesela import Downloader, EditPlaylistProxy, Giesela, Playlist, PlaylistEntry
 from giesela.cogs.player import Player
-from giesela.playlists import EditPlaylistProxy, PlaylistEntry
 from ..help import HasHelp, get_command_help, get_message_help, get_reaction_help
 from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
 
@@ -94,10 +93,12 @@ class PlaylistViewer(_PlaylistEmbed):
 class PlaylistBuilder(HasHelp, _PlaylistEmbed, MessageableEmbed):
     PASS_BOT = True
 
+    downloader: Downloader
     playlist_editor: EditPlaylistProxy
 
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
         super().__init__(channel, user, **kwargs)
+        self.downloader = self.player_cog.downloader
         self.playlist_editor = self.playlist.edit()
 
     @property
@@ -146,13 +147,15 @@ class PlaylistBuilder(HasHelp, _PlaylistEmbed, MessageableEmbed):
     @commands.command("edit")
     async def edit_entry(self, ctx: Context, index: int):
         """Edit an entry"""
-        print("this is the life", flush=True)
+        raise commands.CommandError("No entry editor yet... Sorry")
 
     @commands.command("add")
     async def add_entry(self, ctx: Context, *query: str):
         """Add an entry"""
         query = " ".join(query)
-        entry = None  # TODO get entry
+        entry = await self.downloader.get_entry_from_query(query)
+        if isinstance(entry, list):
+            raise commands.CommandError("No playlist support yet, kthx")
         entry = self.playlist_editor.add_entry(entry)
         await self.show_line(self.playlist_editor.index_of(entry))
 
@@ -171,3 +174,26 @@ class PlaylistBuilder(HasHelp, _PlaylistEmbed, MessageableEmbed):
             await self.show_window()
 
         print(self.playlist_editor.get_changelog())
+
+    @commands.command("undo", aliases=["revert"])
+    async def undo_action(self, ctx: Context):
+        """Undo something"""
+        change = self.playlist_editor.undo()
+
+    @commands.command("redo")
+    async def redo_action(self, ctx: Context):
+        """Redo something"""
+        change = self.playlist_editor.redo()
+        # TODO redo/undo output
+
+    @commands.command("show", aliases=["goto"])
+    async def show_target(self, target: str):
+        """Show a specific line or entry."""
+        if target.isnumeric():
+            line = int(target)
+        else:
+            entry = self.playlist_editor.search_entry(target)
+            if not entry:
+                raise commands.CommandError(f"Couldn't find entry {target}")
+            line = self.playlist_editor.index_of(entry)
+        await self.show_line(line)
