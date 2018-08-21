@@ -225,6 +225,7 @@ class Player:
         """Stops the player completely and removes all entries from the queue."""
         player = await self.get_player(ctx)
         player.stop()
+        player.queue.clear()
 
     @commands.command()
     async def volume(self, ctx: Context, volume: str = None):
