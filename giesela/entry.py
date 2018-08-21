@@ -135,7 +135,7 @@ class BaseEntry:
         return bool(self.filename)
 
     @property
-    def sortby(self):
+    def sort_attr(self):
         return self.url
 
     @property
@@ -218,7 +218,7 @@ class StreamEntry(BaseEntry):
         return self._title
 
     @property
-    def sortby(self):
+    def sort_attr(self):
         return self._title
 
     def set_start(self, sec):
@@ -377,7 +377,7 @@ class RadioSongEntry(RadioStationEntry):
         self.uncertainty = station_data.uncertainty
 
     @property
-    def sortby(self):
+    def sort_attr(self):
         return self.title
 
     @property
@@ -486,7 +486,7 @@ class YoutubeEntry(BaseEntry):
         return self._thumbnail_brightness
 
     @property
-    def sortby(self):
+    def sort_attr(self):
         return clean_songname(self._title)
 
     @property
@@ -799,7 +799,7 @@ class GieselaEntry(YoutubeEntry):
         return "{} - {}".format(self.song_title, self.artist)
 
     @property
-    def sortby(self):
+    def sort_attr(self):
         return self.song_title
 
     @classmethod

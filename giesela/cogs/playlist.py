@@ -104,8 +104,13 @@ class Playlist:
         playlist = self.find_playlist(playlist)
         await ensure_user_can_edit_playlist(playlist, ctx)
         builder = PlaylistBuilder(ctx.channel, ctx.author, bot=self.bot, playlist=playlist)
-        await builder.display()
-        # TODO display changelog and delete invoking message when there is no changelog to be displayed
+        changelog = await builder.display()
+        if changelog:
+            desc = "\n".join(changelog)
+            embed = Embed(title=f"Saved changes to {playlist.name}", description=desc, colour=Colour.green())
+            await ctx.send(embed=embed)
+        else:
+            await ctx.message.delete()
 
     @playlist.command("rename", aliases=["newname", "rn"])
     async def playlist_rename(self, ctx: Context, playlist: str, name: str):

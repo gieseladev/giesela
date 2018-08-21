@@ -346,8 +346,8 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
             self.embed_frame = self.embed_frame.to_dict()
 
         self.lines = kwargs.pop("content", None)
+        self.window_width = kwargs.pop("window_width", 75)
         if isinstance(self.lines, str):
-            self.window_width = kwargs.pop("window_width", 75)
             self.lines = self.split_content(self.lines, self.window_width)
         elif self.lines:
             self.window_width = max(len(line) for line in self.lines)
@@ -359,7 +359,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
 
         self.scroll_amount = kwargs.pop("scroll_amount", max(self.window_height // 3, 1))
 
-        if not (bool(self.lines) ^ bool(self.line_callback)):
+        if not (issubclass(type(self), VerticalTextViewer) or bool(self.lines) ^ bool(self.line_callback)):
             raise ValueError("You need to provide either the `content` or the `content_callback` keyword argument")
 
         super().__init__(channel, user, **kwargs)
@@ -396,7 +396,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         _current_line = self.current_line
 
         while len(lines) < self.window_height:
-            if self.lines and _current_line >= len(self.lines):
+            if self.total_lines and _current_line >= self.total_lines:
                 break
 
             line = await self.get_line(_current_line)
@@ -408,7 +408,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
                 break
 
         if not lines:
-            if self.lines:
+            if self.total_lines:
                 raise ValueError(f"One of the provided lines is too long to be displayed within {self.max_window_length} chars")
             elif self.line_callback:
                 raise ValueError(f"Callback {self.line_callback} provided line that can't be displayed within {self.max_window_length} chars")
@@ -458,24 +458,31 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
     async def get_line(self, line: int) -> str:
         if self.lines:
             return self.lines[line]
-        else:
+        elif self.line_callback:
             content = self.line_callback(line)
             if asyncio.iscoroutine(content):
                 content = await content
             return content
+        else:
+            raise Exception(f"{self} didn't override `get_line` or provide any form of content!")
 
     async def start(self):
         await self.show_window()
         await super().start()
 
-    async def display(self) -> None:
+    async def display(self) -> Any:
         await self.show_window()
-        await self.wait_for_listener()
+        res = await self.wait_for_listener()
         await self.delete()
+        return res
 
     async def show_window(self):
         next_embed = await self.get_current_embed()
         await self.edit(next_embed)
+
+    async def show_line(self, line: int):
+        self._current_line = max(line - (self._lines_displayed // 2), 0)
+        await self.show_window()
 
     @emoji_handler("🔼", pos=2)
     async def scroll_up(self, *_):
@@ -483,7 +490,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         if self.first_line_visible:
             return
 
-        if self.lines:
+        if self.total_lines:
             self._current_line = max(0, self._current_line - self.scroll_amount)
         else:
             self._current_line -= self.scroll_amount
@@ -495,8 +502,8 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         if self.last_line_visible:
             return
 
-        if self.lines:
-            self._current_line = min(len(self.lines) - 1, self._current_line + self.scroll_amount)
+        if self.total_lines:
+            self._current_line = min(self.total_lines - 1, self._current_line + self.scroll_amount)
         else:
             self._current_line += self.scroll_amount
         await self.show_window()

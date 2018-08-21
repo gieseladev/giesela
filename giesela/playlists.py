@@ -1,11 +1,13 @@
+import bisect
 import json
 import logging
 import uuid
+from collections import defaultdict, deque
 from pathlib import Path
 from shelve import DbfilenameShelf, Shelf
-from typing import Any, Callable, Container, Dict, Iterable, Iterator, List, Mapping, Optional, Set, Tuple, Type, TypeVar, Union
+from typing import Any, Callable, Container, Deque, Dict, Iterable, Iterator, List, Mapping, Optional, Set, Tuple, Type, TypeVar, Union
 
-from discord import User
+from discord import TextChannel, User
 
 from . import entry as entry_module, mosaic, utils
 from .bot import Giesela
@@ -17,6 +19,7 @@ log = logging.getLogger(__name__)
 
 _DEFAULT = object()
 
+UUIDType = Union[str, int, uuid.UUID]
 _KT = TypeVar("_KT")
 
 
@@ -24,10 +27,21 @@ def filter_dict(d: Mapping[_KT, Any], keys: Container[_KT]) -> dict:
     return {key: value for key, value in d.items() if key in keys}
 
 
-ENTRY_SLOTS = ("version", "type", "expected_filename",  # meta
+def get_uuid(gpl_id: UUIDType) -> uuid.UUID:
+    if isinstance(gpl_id, str):
+        return uuid.UUID(hex=gpl_id)
+    elif isinstance(gpl_id, int):
+        return uuid.UUID(int=gpl_id)
+    elif isinstance(gpl_id, uuid.UUID):
+        return gpl_id
+    else:
+        raise TypeError("Can't resolve uuid")
+
+
+ENTRY_SLOTS = ("version", "type",  # meta
                "video_id", "url", "title", "duration", "thumbnail",  # basic
                "song_title", "artist", "artist_image", "cover", "album",  # complex
-               "spotify_data")  # deprecated
+               "spotify_data", "expected_filename")  # deprecated
 
 
 class PlaylistEntry:
@@ -51,6 +65,9 @@ class PlaylistEntry:
     def __repr__(self) -> str:
         return f"Entry {self.title} of {self.playlist}"
 
+    def __hash__(self) -> int:
+        return hash(self.url)
+
     def __setstate__(self, state: dict):
         self._entry = state
 
@@ -63,6 +80,31 @@ class PlaylistEntry:
     def __getattr__(self, item: str) -> Optional[Any]:
         return self._entry.get(item)
 
+    def __eq__(self, other) -> bool:
+        if isinstance(other, (PlaylistEntry, BaseEntry)):
+            return self.url == other.url
+        return NotImplemented
+
+    def __lt__(self, other) -> bool:
+        if isinstance(other, (PlaylistEntry, BaseEntry)):
+            return self.sort_attr.__lt__(other.sort_attr)
+        return NotImplemented
+
+    def __le__(self, other) -> bool:
+        if isinstance(other, (PlaylistEntry, BaseEntry)):
+            return self.sort_attr.__le__(other.sort_attr)
+        return NotImplemented
+
+    def __gt__(self, other) -> bool:
+        if isinstance(other, (PlaylistEntry, BaseEntry)):
+            return self.sort_attr.__gt__(other.sort_attr)
+        return NotImplemented
+
+    def __ge__(self, other) -> bool:
+        if isinstance(other, (PlaylistEntry, BaseEntry)):
+            return self.sort_attr.__ge__(other.sort_attr)
+        return NotImplemented
+
     @property
     def __class__(self) -> BaseEntry:
         if self.type:
@@ -71,6 +113,14 @@ class PlaylistEntry:
             cls = None
         return cls or PlaylistEntry
 
+    @property
+    def title(self) -> str:
+        return self.song_title or self._entry["title"]
+
+    @property
+    def sort_attr(self) -> str:
+        return self.title
+
     @classmethod
     def from_gpl(cls, data: dict) -> "PlaylistEntry":
         return cls(data)
@@ -78,8 +128,17 @@ class PlaylistEntry:
     def to_gpl(self) -> dict:
         return self._entry
 
-    def get_entry(self, queue: Queue, **meta) -> BaseEntry:
+    def edit(self, **changes):
+        changes = filter_dict(changes, ENTRY_SLOTS)
+        self._entry.update(changes)
+
+    def copy(self) -> "PlaylistEntry":
+        data = self.to_gpl().copy()
+        return self.from_gpl(data)
+
+    def get_entry(self, queue: Queue, *, author: User, channel: TextChannel, **meta) -> BaseEntry:
         entry = Entry.from_dict(queue, self._entry)
+        meta.update(author=author, channel=channel, playlist=self)
         entry.meta.update(meta)
         return entry
 
@@ -110,7 +169,7 @@ class Playlist:
         self.name = kwargs.pop("name")
         self.description = kwargs.pop("description", None)
         self.cover = kwargs.pop("cover", None)
-        self.entries = kwargs.pop("entries")
+        self.entries = sorted(kwargs.pop("entries"))
         self.editor_ids = kwargs.pop("editors", [])
 
         author = kwargs.pop("author", None)
@@ -133,7 +192,7 @@ class Playlist:
     def __len__(self) -> int:
         return len(self.entries)
 
-    def __contains__(self, entry: BaseEntry) -> bool:
+    def __contains__(self, entry: Union[BaseEntry, PlaylistEntry]) -> bool:
         return self.has(entry)
 
     def __iter__(self) -> Iterator[PlaylistEntry]:
@@ -188,7 +247,6 @@ class Playlist:
     def init(self):
         for entry in self.entries:
             entry.playlist = self
-        # TODO builder is missing
 
     @classmethod
     def from_gpl(cls, manager: "PlaylistManager", data: dict) -> "Playlist":
@@ -214,19 +272,36 @@ class Playlist:
         data["entries"] = [entry.to_gpl() for entry in data.pop("entries")]
         return data
 
-    def add(self, entry: BaseEntry):
-        entry = PlaylistEntry(entry)
+    def add(self, entry: Union[BaseEntry, PlaylistEntry]):
+        if not isinstance(entry, PlaylistEntry):
+            entry = PlaylistEntry(entry)
+        if entry in self:
+            raise ValueError(f"{entry} is already in {self}")
+
         entry.playlist = self
-        self.entries.append(entry)
+        bisect.insort_left(self.entries, entry)
         self.save()
 
-    def remove(self, entry: BaseEntry):
+    def remove(self, entry: Union[BaseEntry, PlaylistEntry]):
         for _entry in reversed(self):
             if _entry.url == entry.url:
                 self.entries.remove(_entry)
+                break
+        else:
+            raise KeyError(f"{entry} isn't in {self}")
         self.save()
 
-    def has(self, entry: BaseEntry) -> bool:
+    def edit_entry(self, entry: Union[BaseEntry, PlaylistEntry], changes: Dict[str, Any]):
+        for _entry in self:
+            if _entry == entry:
+                break
+        else:
+            raise KeyError(f"{entry} isn't in {self}")
+
+        _entry.edit(**changes)
+        self.save()
+
+    def has(self, entry: Union[BaseEntry, PlaylistEntry]) -> bool:
         for _entry in self:
             if _entry.url == entry.url:
                 return True
@@ -259,6 +334,9 @@ class Playlist:
             return
         self.manager.save_playlist(self)
         log.debug(f"saved playlist {self}")
+
+    def edit(self) -> "EditPlaylistProxy":
+        return EditPlaylistProxy(self)
 
     def delete(self):
         self.manager.remove_playlist(self)
@@ -300,18 +378,207 @@ class Playlist:
         return await mosaic.generate_playlist_cover(self)
 
 
-UUIDType = Union[str, int, uuid.UUID]
+class EditChange:
+    ADDED = 1
+    REMOVED = 2
+    EDITED = 3
+
+    ALL_TYPES = (ADDED, REMOVED, EDITED)
+
+    change_type: int
+    success: Optional[bool]
+    entry: PlaylistEntry
+    changes: Optional[Dict[str, Any]]
+
+    def __init__(self, change_type: int, *, entry: PlaylistEntry, changes: Dict[str, Any] = None):
+        if change_type not in self.ALL_TYPES:
+            raise ValueError(f"Unknown change type {change_type}")
+
+        self.success = None
+        self.entry = entry
+        self.changes = changes
+        self.change_type = change_type
+
+    def __repr__(self) -> str:
+        return f"EditChange(EditChange.{self.name(self.change_type).upper()}, {self.entry})"
+
+    def __str__(self) -> str:
+        action = self.name(self.change_type)
+        success = "❌" if self.success is False else ""
+
+        return f"{success}{action} \"{self.entry.title}\""
+
+    @classmethod
+    def added(cls, entry: PlaylistEntry):
+        return cls(EditChange.ADDED, entry=entry)
+
+    @classmethod
+    def removed(cls, entry: PlaylistEntry):
+        return cls(EditChange.REMOVED, entry=entry)
+
+    @classmethod
+    def edited(cls, entry: PlaylistEntry, changes: Dict[str, Any]):
+        return cls(EditChange.EDITED, entry=entry, changes=changes)
+
+    @classmethod
+    def name(cls, change_type: int) -> str:
+        if change_type == cls.ADDED:
+            action = "added"
+        elif change_type == cls.REMOVED:
+            action = "removed"
+        elif change_type == cls.EDITED:
+            action = "edited"
+        else:
+            action = "unknown"
+        return action
+
+    def apply(self, playlist: Playlist) -> bool:
+        try:
+            if self.change_type == self.ADDED:
+                playlist.add(self.entry)
+            elif self.change_type == self.REMOVED:
+                playlist.remove(self.entry)
+            elif self.change_type == self.EDITED:
+                playlist.edit_entry(self.entry, self.changes)
+        except (KeyError, ValueError):
+            self.success = False
+            return False
+        else:
+            self.success = True
+            return True
 
 
-def get_uuid(gpl_id: UUIDType) -> uuid.UUID:
-    if isinstance(gpl_id, str):
-        return uuid.UUID(hex=gpl_id)
-    elif isinstance(gpl_id, int):
-        return uuid.UUID(int=gpl_id)
-    elif isinstance(gpl_id, uuid.UUID):
-        return gpl_id
-    else:
-        raise TypeError("Can't resolve uuid")
+class EditPlaylistProxy:
+    _playlist: Playlist
+    _entries: List[PlaylistEntry]
+    _added_entries: List[PlaylistEntry]
+    _removed_entries: List[PlaylistEntry]
+
+    _changes: Deque[EditChange]
+
+    def __init__(self, playlist: Playlist):
+        self._playlist = playlist
+        self._entries = playlist.entries.copy()
+        self._added_entries = []
+        self._removed_entries = []
+
+        self._changes = deque()
+        self._undo_stack = deque(maxlen=25)
+
+    def __str__(self) -> str:
+        return ", ".join(self.simple_changelog())
+
+    def __getattr__(self, item):
+        return getattr(self._playlist, item)
+
+    @property
+    def entries(self) -> List[PlaylistEntry]:
+        return self._entries
+
+    def undo(self) -> Optional[EditChange]:
+        if self._changes:
+            change = self._changes.pop()
+            self._undo_stack.appendleft(change)
+            return change
+
+    def redo(self) -> Optional[EditChange]:
+        if self._undo_stack:
+            change = self._undo_stack.popleft()
+            self._changes.append(change)
+            return change
+
+    def find_change(self, change_type: int, entry) -> EditChange:
+        for change in self._changes:
+            if change.change_type == change_type and change.entry == entry:
+                return change
+        raise KeyError(f"Couldn't find that change: {EditChange.name(change_type)} {entry}")
+
+    def index_of(self, entry: PlaylistEntry) -> int:
+        index = bisect.bisect_left(self._entries, entry)
+        if index == len(self._entries) or self._entries[index] != entry:
+            raise ValueError(f"{entry} doesn't seem to be in {self._playlist}")
+
+        return index
+
+    def add_entry(self, entry: Union[BaseEntry, PlaylistEntry]) -> PlaylistEntry:
+        if not isinstance(entry, PlaylistEntry):
+            entry = PlaylistEntry(entry)
+
+        if entry in self._entries:
+            raise KeyError(f"{entry} already in {self._playlist}")
+
+        self._undo_stack.clear()
+        if entry in self._removed_entries:
+            self._removed_entries.remove(entry)
+            change = self.find_change(EditChange.REMOVED, entry)
+            self._changes.remove(change)
+        else:
+            self._added_entries.append(entry)
+            self._changes.append(EditChange.added(entry))
+
+        bisect.insort_left(self._entries, entry)
+        return entry
+
+    def remove_entry(self, entry: Union[int, PlaylistEntry]) -> PlaylistEntry:
+        if isinstance(entry, int):
+            entry = self._entries[entry]
+
+        if entry not in self._entries:
+            raise KeyError(f"{entry} not in {self._playlist}")
+
+        self._undo_stack.clear()
+        if entry in self._added_entries:
+            self._added_entries.remove(entry)
+            change = self.find_change(EditChange.ADDED, entry)
+            self._changes.remove(change)
+        else:
+            self._removed_entries.append(entry)
+            self._changes.append(EditChange.removed(entry))
+
+        self._entries.remove(entry)
+        return entry
+
+    def edit_entry(self, entry: [int, PlaylistEntry], changes: Dict[str, Any]) -> PlaylistEntry:
+        if isinstance(entry, int):
+            index = entry
+            entry = self._entries[entry]
+        else:
+            index = bisect.bisect_left(self._entries, entry)
+            if index == len(self._entries) or self._entries[index] != entry:
+                raise ValueError(f"{entry} doesn't seem to be in {self._playlist}")
+
+        self._undo_stack.clear()
+        self._changes.append(EditChange.edited(entry, changes))
+
+        edited_entry = entry.copy()
+        edited_entry.edit(**changes)
+        self._entries[index] = edited_entry
+
+        return edited_entry
+
+    def apply(self):
+        with self._playlist as playlist:
+            for change in self._changes:
+                change.apply(playlist)
+
+    def simple_changelog(self) -> List[str]:
+        counts = defaultdict()
+        for change in self._changes:
+            if change.success is not False:
+                counts[change.change_type] += 1
+        keys = sorted(counts.keys())
+
+        logs = []
+        for key in keys:
+            action = EditChange.name(key)
+            count = counts[key]
+            inflected_entry = "entry" if count == 0 else "entries"
+            logs.append(f"{action} {count} {inflected_entry}")
+        return logs
+
+    def get_changelog(self, limit: int = None) -> List[str]:
+        changes = deque(self._changes, maxlen=limit)
+        return list(map(str, changes))
 
 
 class PlaylistManager:
