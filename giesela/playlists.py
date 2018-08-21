@@ -178,6 +178,12 @@ class Playlist:
     @classmethod
     def from_gpl(cls, manager: "PlaylistManager", data: dict) -> "Playlist":
         data = {key: value for key, value in data.items() if key in PLAYLIST_SLOTS}
+
+        gpl_id = data.pop("gpl_id", None)
+        if gpl_id:
+            gpl_id = uuid.UUID(hex=gpl_id)
+            data["gpl_id"] = gpl_id
+
         _entries = data.pop("entries")
         entries = []
         for _entry in _entries:
