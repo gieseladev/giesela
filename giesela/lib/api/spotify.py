@@ -305,6 +305,14 @@ class SpotifyTrack:
     def artist_string(self):
         return " & ".join(artist.name for artist in self.artists[:2])
 
+    @property
+    def artist_image(self) -> str:
+        return self.artists[0].image
+
+    @property
+    def entry_data(self):
+        return dict(song_title=self.name, artist=self.artist_string, artist_image=self.artist_image, cover=self.cover_url, album=self.album.name)
+
     def get_dict(self):
         data = {
             "id": self.id,
@@ -322,7 +330,7 @@ class SpotifyTrack:
         return data
 
     async def get_spotify_entry(self, queue, callback=None, **meta):
-        from giesela.entry import SpotifyEntry
+        from giesela.entry import GieselaEntry
 
         search_query = re.sub(r"[^\w\s]", "", "{} {}".format(self.artists[0].name, self.name))
 
@@ -338,23 +346,12 @@ class SpotifyTrack:
 
             return None
 
-        args = (
-            queue,
-            info.get("id"),
-            info.get("webpage_url"),
-            info.get("title"),
-            info.get("duration", 0),
-            info.get("thumbnail"),
-            info.get("description"),
-            self
-        )
+        args = (queue.downloader.ytdl.prepare_filename(info), info.get("webpage_url"), info.get("duration"))
+        kwargs = dict(video_id=info.get("id"), title=info.get("title"), thumbnail=info.get("thumbnail"))
+        kwargs.update(meta)
+        kwargs.update(self.entry_data)
 
-        # print("\n".join(str(a) for a in args) + "\n\n")
-
-        entry = SpotifyEntry(
-            *args,
-            **meta
-        )
+        entry = GieselaEntry(*args, **kwargs)
 
         if callable(callback):
             fut = callback(entry, self)
@@ -365,7 +362,8 @@ class SpotifyTrack:
 
 
 async def get_spotify_track(loop, query):
-    return await loop.run_in_executor(None, SpotifyTrack.from_query, query)
+    track: SpotifyTrack = await loop.run_in_executor(None, SpotifyTrack.from_query, query)
+    return track.entry_data
 
 
 def get_certainty(query, song_name, artist_name):
@@ -393,9 +391,3 @@ def model_from_url(url):
         pass
 
     return None
-
-
-if __name__ == "__main__":
-    start = time.time()
-    print(SpotifyPlaylist.from_url("https://open.spotify.com/user/spotify/playlist/37i9dQZF1DWVcbzTgVpNRm"))
-    print("it took {} seconds to get the playlist".format(time.time() - start))

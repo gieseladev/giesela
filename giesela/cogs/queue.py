@@ -41,7 +41,7 @@ async def _play_url(ctx: Context, player: MusicPlayer, url: str, placement: int 
 
     try:
         async with ctx.typing():
-            entry = await player.queue.get_entry_from_query(query, author=ctx.author, channel=ctx.channel)
+            entry = await player.downloader.get_entry_from_query(query, author=ctx.author, channel=ctx.channel)
     except BaseException as e:
         raise commands.CommandError("There was a tiny problem with your request:\n```\n{}\n```".format(e))
 
@@ -55,7 +55,7 @@ async def _play_url(ctx: Context, player: MusicPlayer, url: str, placement: int 
         entries_added = 0
         entries_not_added = 0
 
-        entry_generator = player.queue.get_entries_from_urls_gen(*entry, author=ctx.author, channel=ctx.channel)
+        entry_generator = player.downloader.get_entries_from_urls_gen(*entry, author=ctx.author, channel=ctx.channel)
 
         total_entries = len(entry)
         progress_message = await ctx.send("Parsing {} entries\n{} [0%]".format(total_entries, create_bar(0, length=20)))

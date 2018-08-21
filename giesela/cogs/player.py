@@ -62,7 +62,7 @@ class Player:
     def __init__(self, bot: Giesela):
         self.bot = bot
 
-        self.downloader = Downloader(download_folder=constants.AUDIO_CACHE_PATH)
+        self.downloader = Downloader(self.bot, download_folder=constants.AUDIO_CACHE_PATH)
 
         self.players = {}
         self.status_messages = {}

@@ -222,7 +222,7 @@ class MusicPlayer(EventEmitter):
             self.stop()
             return
 
-        await entry.get_ready_future()
+        await entry.get_ready_future(self.queue)
 
         self._current_entry = entry
         source = self.create_source(entry)

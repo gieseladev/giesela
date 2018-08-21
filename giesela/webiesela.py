@@ -147,7 +147,7 @@ class GieselaWebSocket(WebSocket):
                 success = True
 
         elif searcher in ("YoutubeSearcher", "SoundcloudSearcher"):
-            entry_gen = await player.queue.get_entry_gen(url)
+            entry_gen = await player.downloader.get_entry_gen(url)
             success = True
 
         answer["success"] = bool(success)
@@ -235,7 +235,7 @@ class GieselaWebSocket(WebSocket):
                     success = False
 
                     if isinstance(player.current_entry, TimestampEntry):
-                        success = player.seek(player.current_entry.current_sub_entry["end"])
+                        success = player.seek(player.current_entry.get_sub_entry(player)["end"])
 
                     if not success:
                         player.skip()

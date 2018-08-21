@@ -7,18 +7,14 @@ import time
 import urllib
 import urllib.error
 from collections import deque
-from typing import AsyncIterator, Iterable, Iterator, List, Optional, TYPE_CHECKING, Tuple, Union
+from typing import Iterable, Iterator, Optional, TYPE_CHECKING, Tuple, Union
 
-from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
+from youtube_dl.utils import DownloadError, UnsupportedError
 
-from .entry import (BaseEntry, DiscogsEntry, RadioSongEntry, RadioStationEntry, SpotifyEntry, StreamEntry, TimestampEntry, VGMEntry, YoutubeEntry)
-from .exceptions import BrokenEntryError, ExtractionError, WrongEntryTypeError
-from .lib.api.VGMdb import get_entry as get_vgm_track
-from .lib.api.discogs import get_entry as get_discogs_track
-from .lib.api.spotify import get_spotify_track
+from .entry import (BaseEntry, RadioSongEntry, RadioStationEntry, StreamEntry)
+from .exceptions import BrokenEntryError, ExtractionError
 from .lib.event_emitter import EventEmitter
 from .radio import StationInfo
-from .utils import clean_songname, get_header, get_video_sub_queue
 from .webiesela import WebieselaServer
 
 if TYPE_CHECKING:
@@ -107,7 +103,7 @@ class Queue(EventEmitter):
         random.shuffle(entries)
         for playlist_entry in entries:
             try:
-                entry = playlist_entry.get_entry(self, **meta)
+                entry = playlist_entry.get_entry(**meta)
             except BrokenEntryError:
                 continue
             self._add_entry(entry, more_to_come=True)
@@ -164,7 +160,7 @@ class Queue(EventEmitter):
             entry = RadioStationEntry(self, station_info, **meta)
 
         if now:
-            await entry._download()
+            await entry._download(self)
 
             if self.player.current_entry:
                 self.player.handle_manually = True
@@ -173,190 +169,6 @@ class Queue(EventEmitter):
             WebieselaServer.send_player_information(self.player.channel.guild.id)
         else:
             self._add_entry(entry)
-
-    async def get_entry_from_query(self, query: str, **meta) -> Optional[Union[BaseEntry, List[str]]]:
-        try:
-            info = await self.downloader.extract_info(
-                self.loop, query, download=False, process=False)
-        except Exception as e:
-            raise ExtractionError(
-                "Could not extract information from {}\n\n{}".format(query, e))
-
-        if not info:
-            raise ExtractionError("Couldn't extract info")
-
-        if info.get("url", "").startswith("ytsearch"):
-            info = await self.downloader.extract_info(
-                self.loop,
-                query,
-                download=False,
-                process=True,
-                retry_on_error=True
-            )
-
-            if not info:
-                raise ExtractorError("Couldn't extract info")
-
-            if not info.get("entries", []):
-                return None
-
-            query = info["entries"][0]["webpage_url"]
-            info = await self.downloader.extract_info(self.loop, query, download=False, process=False)
-
-        if "entries" in info:
-            return [entry["url"] for entry in info["entries"]]
-        else:
-            return await self.get_entry(info, **meta)
-
-    async def get_entry_gen(self, url: str, **meta) -> AsyncIterator[Tuple[int, BaseEntry]]:
-        info = await self.downloader.extract_info(self.loop, url, download=False, process=False)
-
-        if "entries" in info:
-            return self.get_entries_from_urls_gen(*[entry["url"] for entry in info["entries"]])
-        else:
-            async def _tuple_gen_creator(collection):
-                for i, el in enumerate(collection):
-                    yield i, el
-
-            return _tuple_gen_creator([await self.get_entry(info, **meta)])
-
-    async def get_entries_from_urls_gen(self, *urls: str, **meta) -> AsyncIterator[Tuple[int, BaseEntry]]:
-        for ind, url in enumerate(urls):
-            try:
-                entry = await self.get_entry(url, **meta)
-            except (ExtractionError, WrongEntryTypeError) as e:
-                print("Error while dealing with url \"{}\":\n{}".format(url, e))
-                yield ind, None
-                continue
-
-            yield ind, entry
-
-    async def get_ytdl_data(self, song_url: str) -> dict:
-        try:
-            info = await self.downloader.extract_info(self.loop, song_url, download=False)
-        except Exception as e:
-            raise ExtractionError(
-                "Could not extract information from {}\n\n{}".format(song_url, e))
-
-        if not info:
-            raise ExtractionError(
-                "Could not extract information from %s" % song_url)
-
-        if info.get("_type", None) == "playlist":
-            raise WrongEntryTypeError("This is a playlist.", True, info.get(
-                "webpage_url", None) or info.get("url", None))
-
-        if info["extractor"] in ["generic", "Dropbox"]:
-            try:
-                content_type = await get_header(self.bot.aiosession, info["url"], "CONTENT-TYPE")
-                print("Got content type", content_type)
-
-            except Exception as e:
-                print("[Warning] Failed to get content type for url %s (%s)" % (
-                    song_url, e))
-                content_type = None
-
-            if content_type:
-                if content_type.startswith(("application/", "image/")):
-                    if "/ogg" not in content_type:  # How does a server say `application/ogg` what the actual fuck
-                        raise ExtractionError(
-                            "Invalid content type \"%s\" for url %s" % (content_type, song_url))
-
-                elif not content_type.startswith(("audio/", "video/")):
-                    print("[Warning] Questionable content type \"%s\" for url %s" % (
-                        content_type, song_url))
-
-        return info
-
-    async def get_entry(self, song_url: str, **meta) -> BaseEntry:
-        if isinstance(song_url, dict):
-            info = song_url
-        else:
-            info = await self.get_ytdl_data(song_url)
-
-        video_id = info.get("id")
-        video_title = info.get("title")
-        video_description = info.get("description")
-        video_thumbnail = info.get("thumbnail")
-        video_url = info.get("webpage_url")
-        video_duration = info.get("duration", 0)
-
-        clean_title = clean_songname(video_title) or video_title
-
-        meta["expected_filename"] = self.downloader.ytdl.prepare_filename(info)
-
-        base_arguments = (
-            self,
-            video_id,
-            video_url,
-            video_title,
-            video_duration,
-            video_thumbnail
-        )
-
-        spotify_searcher = asyncio.ensure_future(get_spotify_track(self.loop, clean_title))
-        vgm_searcher = asyncio.ensure_future(get_vgm_track(self.loop, clean_title))
-        discogs_searcher = asyncio.ensure_future(get_discogs_track(self.loop, clean_title))
-
-        spotify_track = None
-        vgm_track = None
-        discogs_track = None
-
-        pending = (spotify_searcher, vgm_searcher, discogs_searcher)
-
-        while pending:
-            done, pending = await asyncio.wait(pending, return_when=asyncio.FIRST_COMPLETED, timeout=3)
-            done = next(iter(done), None)
-            if not done:
-                break
-
-            result = done.result()
-            if not result:
-                continue
-            if done is spotify_searcher:
-                spotify_track = result
-            elif done is vgm_searcher:
-                vgm_track = result
-            elif done is discogs_searcher:
-                discogs_track = result
-            else:
-                log.error(f"Couldn't identify searcher? Dunno...")
-            break
-
-        if vgm_track:
-            entry = VGMEntry(
-                *base_arguments,
-                **vgm_track,
-                **meta
-            )
-        elif spotify_track and spotify_track.certainty > .6:
-            entry = SpotifyEntry(
-                *base_arguments,
-                spotify_track,
-                **meta
-            )
-        elif discogs_track:
-            entry = DiscogsEntry(
-                *base_arguments,
-                **discogs_track,
-                **meta
-            )
-        else:
-            sub_queue = get_video_sub_queue(video_description, video_id, video_duration)
-
-            if sub_queue:
-                entry = TimestampEntry(
-                    *base_arguments,
-                    sub_queue,
-                    **meta
-                )
-            else:
-                entry = YoutubeEntry(
-                    *base_arguments,
-                    **meta
-                )
-
-        return entry
 
     def add_entries(self, entries: Iterable[BaseEntry], placement: Union[str, int] = None):
         entry = None
@@ -379,7 +191,7 @@ class Queue(EventEmitter):
             self.entries.append(entry)
 
         if self.peek() is entry:
-            entry.get_ready_future()
+            entry.get_ready_future(self)
 
         if not more_to_come:
             WebieselaServer.send_player_information(entry.meta["channel"].guild.id)
@@ -444,10 +256,10 @@ class Queue(EventEmitter):
         if pre_download_next:
             next_entry = self.peek()
             if next_entry:
-                next_entry.get_ready_future()
+                asyncio.ensure_future(next_entry.get_ready_future(self))
 
         try:
-            return await entry.get_ready_future()
+            return await entry.get_ready_future(self)
         except ExtractionError:
             log.warning(f"{entry} is broken!")
         except Exception:

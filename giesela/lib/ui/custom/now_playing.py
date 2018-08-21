@@ -35,9 +35,9 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         colour = 0xa23dd1
 
         if isinstance(entry, RadioStationEntry):
-            station_name = entry.station_name
+            station_name = entry.station_info.name
             footer = dict(text=f"From {station_name}", icon_url=entry.thumbnail)
-            cover = entry.cover
+            cover = entry.station_info.cover
             colour = 0xbe7621
 
         em = Embed(
@@ -97,7 +97,7 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
             fields.append(dict(name="Album", value=entry.album))
         elif isinstance(entry, TimestampEntry):
             colour = 0x00FFFF
-            sub_entry = entry.current_sub_entry
+            sub_entry = entry.get_sub_entry(self.player)
             title = sub_entry["name"]
             sub_index = sub_entry["index"]
 
