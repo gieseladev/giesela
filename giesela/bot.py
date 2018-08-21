@@ -46,6 +46,10 @@ class Giesela(AutoShardedBot):
             if self.exit_signal:
                 raise self.exit_signal
 
+    async def on_command(self, ctx: Context):
+        if ctx.command:
+            log.debug(f"{ctx.author} invoked {ctx.command.qualified_name}")
+
     async def on_error(self, event: str, *args, **kwargs):
         log.exception(f"Error in {event} ({args}, {kwargs})")
 
