@@ -27,6 +27,15 @@ def filter_dict(d: Mapping[_KT, Any], keys: Container[_KT]) -> dict:
     return {key: value for key, value in d.items() if key in keys}
 
 
+def normalise_entry_data(entry: Dict[str, Any]) -> Dict[str, Any]:
+    if entry.get("type", None) in ("VGMEntry", "DiscogsEntry", "SpotifyEntry"):
+        entry["type"] = "GieselaEntry"
+    if "expected_filename" in entry:
+        entry["filename"] = entry["expected_filename"]
+
+    return filter_dict(entry, ENTRY_SLOTS)
+
+
 def get_uuid(gpl_id: UUIDType) -> uuid.UUID:
     if isinstance(gpl_id, str):
         return uuid.UUID(hex=gpl_id)
@@ -38,10 +47,9 @@ def get_uuid(gpl_id: UUIDType) -> uuid.UUID:
         raise TypeError("Can't resolve uuid")
 
 
-ENTRY_SLOTS = ("version", "type",  # meta
+ENTRY_SLOTS = ("version", "type", "filename",  # meta
                "video_id", "url", "title", "duration", "thumbnail",  # basic
-               "song_title", "artist", "artist_image", "cover", "album",  # complex
-               "spotify_data", "expected_filename")  # deprecated
+               "song_title", "artist", "artist_image", "cover", "album")  # complex
 
 
 class PlaylistEntry:
@@ -58,7 +66,7 @@ class PlaylistEntry:
         if isinstance(entry, BaseEntry):
             entry = entry.to_dict()
 
-        entry = filter_dict(entry, ENTRY_SLOTS)
+        entry = normalise_entry_data(entry)
 
         self._entry = entry
 
@@ -136,8 +144,8 @@ class PlaylistEntry:
         data = self.to_gpl().copy()
         return self.from_gpl(data)
 
-    def get_entry(self, queue: Queue, *, author: User, channel: TextChannel, **meta) -> BaseEntry:
-        entry = Entry.from_dict(queue, self._entry)
+    def get_entry(self, *, author: User, channel: TextChannel, **meta) -> BaseEntry:
+        entry = Entry.from_dict(self._entry)
         meta.update(author=author, channel=channel, playlist=self)
         entry.meta.update(meta)
         return entry
@@ -500,6 +508,20 @@ class EditPlaylistProxy:
 
         return index
 
+    def search_entry(self, target: str, *, threshold: float = .2) -> Optional[PlaylistEntry]:
+        _entry = None
+        _similarity = 0
+        for entry in self._entries:
+            similarity = utils.similarity(target, entry.title, lower=True)
+            if similarity > _similarity:
+                _entry = entry
+                _similarity = similarity
+
+        if _similarity <= threshold:
+            return None
+
+        return _entry
+
     def add_entry(self, entry: Union[BaseEntry, PlaylistEntry]) -> PlaylistEntry:
         if not isinstance(entry, PlaylistEntry):
             entry = PlaylistEntry(entry)
@@ -622,7 +644,10 @@ class PlaylistManager:
     def init(self):
         pass
 
-    def import_from_gpl(self, playlist: Union[dict, str]) -> Optional[Playlist]:
+    def close(self):
+        self.storage.close()
+
+    def import_from_gpl(self, playlist: Union[dict, str], *, author: User = None) -> Optional[Playlist]:
         if isinstance(playlist, str):
             try:
                 playlist = json.loads(playlist)
@@ -635,12 +660,14 @@ class PlaylistManager:
             log.warning("Couldn't import playlist", exc_info=e)
             return
 
+        playlist.author = author
+
         self.add_playlist(playlist)
         return playlist
 
     def add_playlist(self, playlist: Playlist):
         if playlist.gpl_id in self._playlists:
-            raise ValueError("Playlist with this id already exists, remove it first!")
+            raise KeyError("Playlist with this id already exists, remove it first!")
         playlist.manager = self
         playlist.save()
 

@@ -256,8 +256,8 @@ class Playlist:
         await viewer.display()
         await ctx.message.delete()
 
-    async def import_playlist(self, data) -> Optional[Embed]:
-        playlist = self.playlist_manager.import_from_gpl(data)
+    async def import_playlist(self, data, author: User = None) -> Optional[Embed]:
+        playlist = self.playlist_manager.import_from_gpl(data, author=author)
 
         if not playlist:
             return
@@ -268,13 +268,16 @@ class Playlist:
         return embed
 
     @playlist.group("import", invoke_without_command=True, aliases=["imp"])
-    async def playlist_import(self, ctx: Context):
+    async def playlist_import(self, ctx: Context, author: User = None):
         """Import a playlist from a GPL file."""
         if not ctx.message.attachments:
             raise commands.CommandError("Please attach a GPL file!")
 
         playlist_data = await save_attachment(ctx.message.attachments[0])
-        embed = await self.import_playlist(playlist_data.read().decode("utf-8"))
+        try:
+            embed = await self.import_playlist(playlist_data.read().decode("utf-8"), author or ctx.author)
+        except KeyError:
+            raise commands.CommandError("This playlist already exists. You need to delete it first before you can import it")
 
         if embed:
             await ctx.send(embed=embed)
