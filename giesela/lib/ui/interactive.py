@@ -69,7 +69,17 @@ class InteractableEmbed(HasListener, EditableEmbed, ReactionHandler, Startable, 
             pos = 10
         self._emojis.append((emoji, pos))
 
-    async def disable_handler(self, handler: Union[EmojiType, List[EmojiType], EmojiHandlerType]):
+    async def remove_handler(self, handler: Union[EmojiType, List[EmojiType], EmojiHandlerType]):
+        emojis = self.disable_handler(handler)
+        futures = []
+
+        for emoji in emojis:
+            fut = asyncio.ensure_future(self.remove_reaction(emoji))
+            futures.append(fut)
+
+        await asyncio.gather(*futures)
+
+    def disable_handler(self, handler: Union[EmojiType, List[EmojiType], EmojiHandlerType]) -> List[EmojiType]:
         if isinstance(handler, Callable):
             emojis = getattr(handler, "_handles", None)
             if not emojis:
@@ -79,18 +89,17 @@ class InteractableEmbed(HasListener, EditableEmbed, ReactionHandler, Startable, 
         else:
             emojis = [handler]
 
-        futures = []
-
         for emoji in emojis:
             _handler = self.handlers[emoji]
-            func = getattr(_handler, "__func__", None)
-            if func:
-                setattr(func, "_disabled", True)
+            func = getattr(_handler, "__func__", _handler)
+            setattr(func, "_disabled", True)
+        return emojis
 
-            fut = asyncio.ensure_future(self.remove_reaction(emoji))
-            futures.append(fut)
-
-        await asyncio.gather(*futures)
+    def is_disabled(self, handler: Union[EmojiType, EmojiHandlerType]) -> bool:
+        if isinstance(handler, EmojiType.__args__):
+            handler = self.handlers[handler]
+        func = getattr(handler, "__func__", handler)
+        return getattr(func, "_disabled", False)
 
     async def delete(self):
         await self.stop()
@@ -100,7 +109,8 @@ class InteractableEmbed(HasListener, EditableEmbed, ReactionHandler, Startable, 
         if not msg:
             msg = self.message
         for emoji in self.emojis:
-            await msg.add_reaction(emoji)
+            if not self.is_disabled(emoji):
+                await msg.add_reaction(emoji)
 
     async def edit(self, embed: Embed, on_new: Callable[[Message], Any] = None):
         await super().edit(embed, on_new or self.add_reactions)
@@ -234,15 +244,18 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
 
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
         self.embeds = kwargs.pop("embeds", None)
-        if self.embeds and kwargs.pop("no_controls_for_single_embed", True) and len(self.embeds) == 1:
-            del self.previous_page
-            del self.next_page
+        no_controls_for_single_embed = kwargs.pop("no_controls_for_single_embed", True)
 
         self.embed_callback = kwargs.pop("embed_callback", None)
-        super().__init__(channel, user, **kwargs)
 
         if not (bool(self.embeds) ^ bool(self.embed_callback)):
             raise ValueError("You need to provide either the `embeds` or the `embed_callback` keyword argument")
+
+        super().__init__(channel, user, **kwargs)
+
+        if self.embeds and no_controls_for_single_embed and len(self.embeds) == 1:
+            self.disable_handler(self.previous_page)
+            self.disable_handler(self.next_page)
 
         self._current_index = 0
 
@@ -293,8 +306,11 @@ class ItemPicker(_HorizontalPageViewer, Abortable):
 
 
 class EmbedViewer(_HorizontalPageViewer, Abortable):
-    async def display(self) -> None:
-        return await self.start()
+    async def display(self) -> Any:
+        await self.start()
+        result = await self.wait_for_listener()
+        await self.delete()
+        return result
 
 
 class VerticalTextViewer(InteractableEmbed, Abortable, Startable):

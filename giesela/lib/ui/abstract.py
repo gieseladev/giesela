@@ -153,13 +153,19 @@ class HasListener(Startable, Stoppable):
             else:
                 return default
 
+    async def _wait_for_all_listeners(self, return_when):
+        listeners = [listener.listen() for listener in self._listeners.values()]
+        done, pending = await asyncio.wait(listeners, return_when=return_when)
+        if len(done) == 1:
+            return next(iter(done)).result()
+        else:
+            return [task.result() for task in done]
+
     def wait_for_listener(self, listener: str = None, *, return_when=asyncio.FIRST_COMPLETED) -> asyncio.Task:
         if listener:
             return self._listeners[listener].listen()
         else:
-            listeners = [listener.listen() for listener in self._listeners.values()]
-            coro = asyncio.wait(listeners, return_when=return_when)
-            return asyncio.ensure_future(coro)
+            return asyncio.ensure_future(self._wait_for_all_listeners(return_when))
 
     async def start(self):
         self.start_listener()

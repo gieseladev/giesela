@@ -116,7 +116,7 @@ class HelpEmbed(InteractableEmbed):
         super().__init__(channel, user, **kwargs)
 
     def __await__(self):
-        return self.display()
+        return self.display().__await__()
 
     async def display(self, embed: Embed = None):
         await self.edit(embed or self.help_embed)

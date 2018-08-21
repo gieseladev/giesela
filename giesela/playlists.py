@@ -3,7 +3,7 @@ import logging
 import uuid
 from pathlib import Path
 from shelve import DbfilenameShelf, Shelf
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Set, Tuple, Type, Union
+from typing import Any, Callable, Container, Dict, Iterable, Iterator, List, Mapping, Optional, Set, Tuple, Type, TypeVar, Union
 
 from discord import User
 
@@ -16,6 +16,18 @@ from .queue import Queue
 log = logging.getLogger(__name__)
 
 _DEFAULT = object()
+
+_KT = TypeVar("_KT")
+
+
+def filter_dict(d: Mapping[_KT, Any], keys: Container[_KT]) -> dict:
+    return {key: value for key, value in d.items() if key in keys}
+
+
+ENTRY_SLOTS = ("version", "type", "expected_filename",  # meta
+               "video_id", "url", "title", "duration", "thumbnail",  # basic
+               "song_title", "artist", "artist_image", "cover", "album",  # complex
+               "spotify_data")  # deprecated
 
 
 class PlaylistEntry:
@@ -31,6 +43,9 @@ class PlaylistEntry:
 
         if isinstance(entry, BaseEntry):
             entry = entry.to_dict()
+
+        entry = filter_dict(entry, ENTRY_SLOTS)
+
         self._entry = entry
 
     def __repr__(self) -> str:
@@ -181,8 +196,7 @@ class Playlist:
 
         gpl_id = data.pop("gpl_id", None)
         if gpl_id:
-            gpl_id = uuid.UUID(hex=gpl_id)
-            data["gpl_id"] = gpl_id
+            data["gpl_id"] = get_uuid(gpl_id)
 
         _entries = data.pop("entries")
         entries = []

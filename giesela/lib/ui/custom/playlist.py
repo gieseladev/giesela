@@ -70,7 +70,7 @@ class PlaylistViewer(_PlaylistEmbed, VerticalTextViewer):
     @emoji_handler("🎵", pos=999)
     async def play_playlist(self, *_):
         await self.play(self.channel, self.user)
-        await self.disable_handler(self.play_playlist)
+        await self.remove_handler(self.play_playlist)
 
 
 class PlaylistBuilder(_PlaylistEmbed, MessageableEmbed, HasHelp, VerticalTextViewer):

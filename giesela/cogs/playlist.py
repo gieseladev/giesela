@@ -170,6 +170,11 @@ class Playlist:
         """Delete a playlist"""
         playlist = self.find_playlist(playlist)
         await ensure_user_is_author(playlist, ctx, "delete it")
+
+        res = await PromptYesNo(ctx.channel, user=ctx.author, text=f"Do you really want to delete **{playlist.name}**?")
+        if not res:
+            return
+
         embed = playlist_embed(playlist)
         playlist.delete()
         await ctx.send("Deleted playlist", embed=embed)
@@ -222,7 +227,7 @@ class Playlist:
         playlist.remove_editor(user)
         await ctx.send(f"Removed {user.mention} as an editor for **{playlist.name}**")
 
-    @playlist.command("show", aliases=["showall", "all"])
+    @playlist.command("show", aliases=["showall", "all", "list"])
     async def playlist_show(self, ctx: Context):
         """Show all the playlists"""
         if not self.playlist_manager:
@@ -238,7 +243,7 @@ class Playlist:
                                                f"\n"
                                                f"{description}")
 
-        # TODO use special viewer with play (and other) features
+        # MAYBE use special viewer with play (and other) features
         viewer = EmbedViewer(ctx.channel, ctx.author, embeds=paginator)
         await viewer.display()
         await ctx.message.delete()
@@ -315,7 +320,7 @@ class Playlist:
         serialised = json.dumps(playlist.to_gpl(), indent=None, separators=(",", ":"))
         data = BytesIO(serialised.encode("utf-8"))
         data.seek(0)
-        file = File(data, filename=f"{playlist.name.lower()}.gpl")
+        file = File(data, filename=f"{playlist.name.lower()}.gpl2")
         await ctx.send("Here you go", file=file)
 
     @commands.command("addtoplaylist", aliases=["quickadd", "pladd", "pl+"])
@@ -330,7 +335,8 @@ class Playlist:
             raise commands.CommandError("There's nothing playing right now")
 
         if entry in playlist:
-            if not await PromptYesNo(ctx.channel, text=f"{entry.title} is already in this playlist, are you sure you want to add it again?"):
+            if not await PromptYesNo(ctx.channel, user=ctx.author,
+                                     text=f"{entry.title} is already in this playlist, are you sure you want to add it again?"):
                 return
 
         playlist.add(entry)
