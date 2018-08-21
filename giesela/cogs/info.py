@@ -127,10 +127,12 @@ class GieselaHelpFormatter(HelpFormatter):
                 if len(command_list) > 0:
                     name = category
                     value = self.get_commands_text(command_list)
-                    paginator.add_field(name, f"```css\n{value}```")
+                    if value:
+                        paginator.add_field(name, f"```css\n{value}```")
         else:
             value = self.get_commands_text(await self.filter_command_list())
-            paginator.add_field("Commands", f"```css\n{value}```")
+            if value:
+                paginator.add_field("Commands", f"```css\n{value}```")
 
         return get_final_embeds()
 
