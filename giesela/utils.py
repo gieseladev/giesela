@@ -4,7 +4,7 @@ import urllib.parse
 from difflib import SequenceMatcher
 from io import BytesIO
 from string import punctuation, whitespace
-from typing import Tuple, Union
+from typing import Callable, Iterable, Tuple, Union
 
 import aiohttp
 import math
@@ -41,10 +41,21 @@ def is_image(url):
         return False
 
 
-def similarity(a: str, b: Union[str, Tuple[str, ...]]) -> float:
+def similarity(a: str, b: Union[str, Tuple[str, ...]], *, lower: bool = False, junk: Union[Callable[[str], bool], Iterable[str]] = None,
+               auto_junk: bool = True) -> float:
     if isinstance(b, tuple):
-        return max(similarity(a, _b) for _b in b if _b)
-    return SequenceMatcher(None, a, b).ratio()
+        return max(similarity(a, _b, lower=lower, junk=junk, auto_junk=auto_junk) for _b in b if _b)
+
+    if lower:
+        a = a.lower()
+        b = b.lower()
+
+    if junk and not isinstance(junk, Callable):
+        _junk = set(junk)
+
+        def junk(s: str) -> bool: return s in _junk
+
+    return SequenceMatcher(junk, a, b, autojunk=auto_junk).ratio()
 
 
 def nice_cut(s, max_length, ending="..."):

@@ -388,7 +388,7 @@ class PlaylistManager:
         _playlist = None
         _similarity = 0
         for playlist in self:
-            similarity = utils.similarity(name, (playlist.name, playlist.description))
+            similarity = utils.similarity(name, (playlist.name, playlist.description), lower=True)
             if similarity > _similarity:
                 _playlist = playlist
                 _similarity = similarity
