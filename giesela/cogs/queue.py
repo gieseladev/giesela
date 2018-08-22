@@ -575,16 +575,11 @@ class DisplayCog(QueueBase):
         for i, item in enumerate(player.queue.entries, 1):
             origin_text = ""
             if "playlist" in item.meta:
-                origin_text = "from playlist **{}**".format(
-                    item.meta["playlist"]["name"]
-                )
+                origin_text = "from playlist **{}**".format(item.meta["playlist"].name)
             elif "author" in item.meta:
-                origin_text = "by **{}**".format(
-                    item.meta["author"].name
-                )
+                origin_text = "by **{}**".format(item.meta["author"].name)
 
-            lines.append("`{}.` **{}** {}".format(
-                i, nice_cut(item.title, 40), origin_text))
+            lines.append("`{}.` **{}** {}".format(i, nice_cut(item.title, 40), origin_text))
 
         if not lines:
             raise commands.CommandError("No entries in the queue")
