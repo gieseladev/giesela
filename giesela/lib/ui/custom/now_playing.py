@@ -2,8 +2,7 @@ import asyncio
 
 from discord import Embed, Message, TextChannel
 
-from giesela import GieselaEntry, MusicPlayer, RadioSongEntry, RadioStationEntry, StreamEntry, \
-    TimestampEntry, YoutubeEntry
+from giesela import GieselaEntry, MusicPlayer, Playlist, RadioSongEntry, RadioStationEntry, StreamEntry, TimestampEntry, YoutubeEntry
 from giesela.lib.ui import create_player_bar
 from giesela.utils import (ordinal, to_timestamp)
 from .. import InteractableEmbed, IntervalUpdatingMessage, emoji_handler
@@ -79,9 +78,8 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         else:
             cover = entry.thumbnail
             if "playlist" in entry.meta:
-                # TODO is this even possible anymore?
-                pl = entry.meta["playlist"]
-                author = dict(name=pl["name"], icon_url=pl.get("cover", False) or Embed.Empty)
+                pl: Playlist = entry.meta["playlist"]
+                author = dict(name=pl.name, icon_url=pl.cover or Embed.Empty)
             elif "author" in entry.meta:
                 author = entry.meta["author"]
                 author = dict(name=author.display_name, icon_url=author.avatar_url)
