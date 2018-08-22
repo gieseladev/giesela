@@ -1,13 +1,17 @@
+import functools
 import inspect
 import itertools
+import logging
 from typing import List, Union
 
-from discord import Colour, Embed, Message
+from discord import ClientException, Colour, Embed, Message
 from discord.ext import commands
 from discord.ext.commands import Bot, Command, Context, HelpFormatter
 
 from giesela import VERSION as BOTVERSION
 from giesela.lib.ui import EmbedPaginator, copy_embed
+
+log = logging.getLogger(__name__)
 
 
 class Info:
@@ -16,6 +20,25 @@ class Info:
 
         bot.remove_command("help")
         self.formatter = help_formatter
+
+    async def on_ready(self):
+        for command in self.bot.commands:
+            self.ensure_help_sub_command(command)
+
+    def ensure_help_sub_command(self, group: commands.Group):
+        if not isinstance(group, commands.Group):
+            return
+
+        func = functools.partial(self._send_help, cmd=group.name)
+        func.__module__ = __package__
+        sub_cmd = Command(name="help", callback=func, aliases=["?"], hidden=True)
+        sub_cmd.params.pop("cmd")
+        sub_cmd.params["cmds"] = inspect.Parameter("cmds", inspect.Parameter.VAR_POSITIONAL, annotation=str)
+
+        try:
+            group.add_command(sub_cmd)
+        except ClientException:
+            log.debug(f"{group} already defines a help function")
 
     @commands.command()
     async def version(self, ctx: Context):
@@ -27,15 +50,16 @@ class Info:
 
         await ctx.send(embed=em)
 
-    @commands.command()
-    async def help(self, ctx: Context, *cmds):
-        """Get the help you c̶l̶e̶a̶r̶l̶y̶ need"""
-
+    async def _send_help(self, ctx: Context, *cmds: str, cmd: str = None):
         async def _command_not_found(_name: str):
             _em = Embed(description=f"No command called **{_name}**", colour=Colour.red())
             await ctx.send(embed=_em)
 
         bot = ctx.bot
+        cmds = list(cmds)
+        if cmd:
+            cmds.insert(0, cmd)
+
         if len(cmds) == 0:
             cmd = bot
         elif len(cmds) == 1:
@@ -68,6 +92,11 @@ class Info:
                     return
 
         await self.formatter.send_help_for(ctx, cmd)
+
+    @commands.command(aliases=["?"])
+    async def help(self, ctx: Context, *cmds):
+        """Get the help you c̶l̶e̶a̶r̶l̶y̶ need"""
+        await self._send_help(ctx, *cmds)
 
 
 class GieselaHelpFormatter(HelpFormatter):

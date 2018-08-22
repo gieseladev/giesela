@@ -155,6 +155,7 @@ class PlaylistBuilder(HasHelp, _PlaylistEmbed, MessageableEmbed):
         query = " ".join(query)
         entry = await self.downloader.get_entry_from_query(query)
         if isinstance(entry, list):
+            # TODO support this
             raise commands.CommandError("No playlist support yet, kthx")
         entry = self.playlist_editor.add_entry(entry)
         await self.show_line(self.playlist_editor.index_of(entry))
