@@ -8,7 +8,7 @@ import textwrap
 from typing import Any, Awaitable, Callable, Dict, List, Optional, Tuple, TypeVar, Union
 
 from discord import Client, Embed, Message, Reaction, TextChannel, User
-from discord.ext.commands import Bot, Command
+from discord.ext.commands import Bot, Command, CommandError, CommandInvokeError, Context
 
 from . import events, text
 from .abstract import HasListener, MessageHandler, ReactionHandler, Startable, Stoppable
@@ -169,15 +169,19 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
     user: Optional[User]
 
     _group: MenuCommandGroup
+    error: Optional[str]
 
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
         self.bot = kwargs.pop("bot")
         self.delete_msgs = kwargs.pop("delete_msgs", True)
         self._group = MenuCommandGroup(self.bot)
+        self.error = None
 
         for name, member in inspect.getmembers(self):
             if isinstance(member, Command):
                 self._group.add_command(member)
+            elif name.startswith("on_") and member != self.on_message:
+                self._group.add_listener(member)
 
         super().__init__(channel, **kwargs)
 
@@ -212,6 +216,21 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
             break
 
         return await self.on_message(msg)
+
+    @classmethod
+    async def on_error(cls, event: str, *args, **kwargs):
+        log.exception(f"Error in {event} ({args}, {kwargs})")
+
+    async def on_command_error(self, ctx: Context, exception: Exception):
+        if isinstance(exception, CommandError):
+            if isinstance(exception, CommandInvokeError):
+                original = exception.original
+
+                self.error = f"Internal Error: ```python\n{original!r}```"
+            else:
+                self.error = str(exception)
+
+        log.exception("CommandError:", exc_info=exception)
 
     async def on_message(self, message: Message):
         await super().on_message(message)
@@ -329,7 +348,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         window_length: Max amount of characters to show at once
         scroll_amount: Amount of lines to scroll
     """
-    embed_frame: Dict[str, Any]
+    _embed_frame: Dict[str, Any]
     lines: List[str]
     line_callback: Callable[[int], Union[str, Awaitable[str]]]
 
@@ -341,9 +360,9 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
     _lines_displayed: int
 
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
-        self.embed_frame = kwargs.pop("embed_frame", None)
-        if isinstance(self.embed_frame, Embed):
-            self.embed_frame = self.embed_frame.to_dict()
+        self._embed_frame = kwargs.pop("embed_frame", None)
+        if isinstance(self._embed_frame, Embed):
+            self._embed_frame = self._embed_frame.to_dict()
 
         self.lines = kwargs.pop("content", None)
         self.window_width = kwargs.pop("window_width", 75)
@@ -370,6 +389,16 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
     @property
     def current_line(self) -> int:
         return self._current_line
+
+    @property
+    def embed_frame(self) -> Embed:
+        if self._embed_frame:
+            embed = copy.deepcopy(self._embed_frame)
+            embed = Embed.from_data(embed)
+        else:
+            embed = Embed()
+            embed.set_footer(text="{progress_bar}")
+        return embed
 
     @property
     def lines_displayed(self) -> int:
@@ -418,14 +447,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
 
     async def get_current_embed(self) -> Embed:
         content = await self.get_current_content()
-
-        if self.embed_frame:
-            embed = copy.deepcopy(self.embed_frame)
-            embed = Embed.from_data(embed)
-        else:
-            embed = Embed()
-            embed.set_footer()
-
+        embed = self.embed_frame
         embed = self.format_embed(embed)
         embed.description = content
         return embed

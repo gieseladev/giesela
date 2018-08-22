@@ -109,8 +109,7 @@ class Playlist:
         builder = PlaylistBuilder(ctx.channel, ctx.author, bot=self.bot, playlist=playlist)
         changelog = await builder.display()
         if changelog:
-            desc = "\n".join(changelog)
-            embed = Embed(title=f"Saved changes to {playlist.name}", description=desc, colour=Colour.green())
+            embed = Embed(title=f"Saved changes to {playlist.name}", description=changelog, colour=Colour.green())
             await ctx.send(embed=embed)
         else:
             await ctx.message.delete()

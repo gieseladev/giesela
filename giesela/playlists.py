@@ -13,6 +13,7 @@ from . import entry as entry_module, mosaic, utils
 from .bot import Giesela
 from .entry import BaseEntry, Entry
 from .lib.api import imgur
+from .lib.ui import text as text_utils
 from .queue import Queue
 
 log = logging.getLogger(__name__)
@@ -416,6 +417,15 @@ class EditChange:
 
         return f"{success}{action} \"{self.entry.title}\""
 
+    @property
+    def symbol(self) -> str:
+        if self.change_type == EditChange.ADDED:
+            return "+"
+        elif self.change_type == EditChange.REMOVED:
+            return "−"
+        elif self.change_type == EditChange.EDITED:
+            return "\✏"
+
     @classmethod
     def added(cls, entry: PlaylistEntry):
         return cls(EditChange.ADDED, entry=entry)
@@ -613,6 +623,16 @@ class EditPlaylistProxy:
     def get_changelog(self, limit: int = None) -> List[str]:
         changes = deque(self._changes, maxlen=limit)
         return list(map(str, changes))
+
+    def prepare_changelog(self, width: int = 70, limit: int = None) -> str:
+        changes = deque(self._changes, maxlen=limit)
+        changelog = []
+        for change in changes:
+            symbol = change.symbol
+            text = f" {symbol} \"{change.entry.title}\""
+            changelog.append(text_utils.shorten(text, width, "...\""))
+
+        return "\n".join(changelog)
 
 
 class PlaylistManager:

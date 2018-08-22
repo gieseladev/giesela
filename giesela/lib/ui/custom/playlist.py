@@ -105,6 +105,19 @@ class PlaylistBuilder(HasHelp, _PlaylistEmbed, MessageableEmbed):
     def entries(self) -> List[PlaylistEntry]:
         return self.playlist_editor.entries
 
+    @property
+    def embed_frame(self) -> Embed:
+        embed = super().embed_frame
+        changelog = self.playlist_editor.prepare_changelog(limit=5)
+        if changelog:
+            embed.add_field(name="Recent Changes", value=changelog, inline=False)
+        if self.error:
+            embed.colour = Colour.red()
+            embed.add_field(name="Error", value=f"**{self.error}**")
+            self.error = None
+
+        return embed
+
     def get_help_embed(self) -> Embed:
         embed = Embed(title="Playlist Builder Help", colour=Colour.blue())
 
@@ -116,12 +129,16 @@ class PlaylistBuilder(HasHelp, _PlaylistEmbed, MessageableEmbed):
 
         return embed
 
+    async def on_command_error(self, ctx: Context, exception: Exception):
+        await super().on_command_error(ctx, exception)
+        await self.show_window()
+
     @emoji_handler("💾", pos=999)
-    async def save_changes(self, *_) -> List[str]:
+    async def save_changes(self, *_) -> str:
         """Close and save"""
         self.stop_listener()
         self.playlist_editor.apply()
-        return self.playlist_editor.get_changelog()
+        return self.playlist_editor.prepare_changelog()
 
     @emoji_handler("❎", pos=1000)
     async def abort(self, *_) -> None:
@@ -180,14 +197,17 @@ class PlaylistBuilder(HasHelp, _PlaylistEmbed, MessageableEmbed):
     async def undo_action(self, ctx: Context):
         """Undo something"""
         change = self.playlist_editor.undo()
+        if not change:
+            raise commands.CommandError("Nothing to undo")
         await self.show_window()
 
     @commands.command("redo")
     async def redo_action(self, ctx: Context):
         """Redo something"""
         change = self.playlist_editor.redo()
+        if not change:
+            raise commands.CommandError("Nothing to redo")
         await self.show_window()
-        # TODO redo/undo output
 
     @commands.command("show", aliases=["goto"])
     async def show_target(self, ctx: Context, *target: str):
