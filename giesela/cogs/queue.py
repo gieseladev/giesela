@@ -584,9 +584,9 @@ class DisplayCog(QueueBase):
         if not lines:
             raise commands.CommandError("No entries in the queue")
 
-        total_time = sum([entry.end_seconds for entry in player.queue.entries])
+        total_time = sum([entry.duration for entry in player.queue.entries])
         if player.current_entry:
-            total_time += player.current_entry.end_seconds - player.progress
+            total_time += player.current_entry.duration - player.progress
 
         frame = {
             "title": "Queue",
