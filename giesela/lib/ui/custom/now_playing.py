@@ -1,6 +1,6 @@
 import asyncio
 
-from discord import Embed, Message, TextChannel
+from discord import Embed, Message, TextChannel, User
 
 from giesela import GieselaEntry, MusicPlayer, Playlist, RadioSongEntry, RadioStationEntry, StreamEntry, TimestampEntry, YoutubeEntry
 from giesela.lib.ui import create_player_bar
@@ -72,17 +72,16 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         title = entry.title
         colour = 0xa9b244
 
+        entry_author: User = entry.meta.get("author")
+        playlist: Playlist = entry.meta.get("playlist")
+
         if isinstance(entry, (RadioSongEntry, GieselaEntry)):
             author = dict(name=entry.artist)
             cover = entry.cover
         else:
             cover = entry.thumbnail
-            if "playlist" in entry.meta:
-                pl: Playlist = entry.meta["playlist"]
-                author = dict(name=pl.name, icon_url=pl.cover or Embed.Empty)
-            elif "author" in entry.meta:
-                author = entry.meta["author"]
-                author = dict(name=author.display_name, icon_url=author.avatar_url)
+            if entry_author:
+                author = dict(name=entry_author.display_name, icon_url=entry_author.avatar_url)
 
         if isinstance(entry, RadioSongEntry):
             colour = 0xa23dd1
@@ -111,6 +110,11 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
 
         progress_bar = progress_bar or create_progress_bar(song_progress, song_duration)
         desc = f"{playing_state} {progress_bar} `[{to_timestamp(song_progress)}/{to_timestamp(song_duration)}]`"
+
+        if playlist:
+            fields.append(dict(name="Playlist", value=playlist.name))
+            if not cover:
+                cover = playlist.cover
 
         em = Embed(
             title=title,
