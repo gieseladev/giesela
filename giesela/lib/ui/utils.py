@@ -75,7 +75,7 @@ class _FakeClient:
         self._listeners = {}
 
     dispatch = Client.dispatch
-    _run_event = Client._run_event
+    _run_event = getattr(Client, "_run_event")
 
 
 class MenuCommandGroup(BotBase, _FakeClient):

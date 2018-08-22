@@ -20,10 +20,10 @@ log = logging.getLogger(__name__)
 _DEFAULT = object()
 
 UUIDType = Union[str, int, uuid.UUID]
-_KT = TypeVar("_KT")
+KT = TypeVar("KT")
 
 
-def filter_dict(d: Mapping[_KT, Any], keys: Container[_KT]) -> dict:
+def filter_dict(d: Mapping[KT, Any], keys: Container[KT]) -> dict:
     return {key: value for key, value in d.items() if key in keys}
 
 

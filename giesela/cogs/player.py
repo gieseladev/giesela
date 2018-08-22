@@ -1,5 +1,4 @@
 import logging
-from functools import partial
 from typing import Dict, Optional, Union
 
 from discord import Game, Guild, Member, Message, User, VoiceChannel, VoiceState
@@ -41,7 +40,7 @@ async def find_giesela_channel(bot: Giesela, guild: Guild, user: User = None) ->
         if user and user in channel.members:
             return channel
 
-        _similarity = max(*map(partial(similarity, channel.name.lower()), VOICE_CHANNEL_NAMES))
+        _similarity = max(similarity(channel.name.lower(), name) for name in VOICE_CHANNEL_NAMES)
         if _similarity > _max_similarity:
             _max_similarity = _similarity
             _channel = channel
@@ -124,7 +123,8 @@ class Player:
     async def on_player_stop(self, **_):
         await self.update_now_playing()
 
-    async def on_player_finished_playing(self, player, **_):
+    @classmethod
+    async def on_player_finished_playing(cls, player: MusicPlayer, **_):
         if not player.queue.entries and not player.current_entry:
             WebieselaServer.send_player_information(player.channel.guild.id)
 

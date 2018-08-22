@@ -139,6 +139,7 @@ class BaseEntry(metaclass=abc.ABCMeta):
                 expected_fname_noex, fname_ex = os.path.basename(self.filename).rsplit(".", 1)
 
                 if expected_fname_noex in flistdir:
+                    # noinspection PyUnusedLocal
                     rsize = 0
 
                     with suppress(Exception):

@@ -47,7 +47,8 @@ class Giesela(AutoShardedBot):
             if self.exit_signal:
                 raise self.exit_signal
 
-    async def on_command(self, ctx: Context):
+    @classmethod
+    async def on_command(cls, ctx: Context):
         if ctx.command:
             log.debug(f"{ctx.author} invoked {ctx.command.qualified_name}")
 
@@ -107,8 +108,10 @@ class Giesela(AutoShardedBot):
 
         log.info("Ready to go!")
 
-    async def on_reaction_remove(self, reaction, user):
+    @classmethod
+    async def on_reaction_remove(cls, reaction, user):
         await events.handle_reaction(reaction, user)
 
-    async def on_reaction_add(self, reaction, user):
+    @classmethod
+    async def on_reaction_add(cls, reaction, user):
         await events.handle_reaction(reaction, user)

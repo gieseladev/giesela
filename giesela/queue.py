@@ -7,10 +7,12 @@ import time
 import urllib
 import urllib.error
 from collections import deque
-from typing import Iterable, Iterator, Optional, TYPE_CHECKING, Tuple, Union
+from typing import Deque, Iterable, Iterator, List, Optional, TYPE_CHECKING, Tuple, Union
 
 from youtube_dl.utils import DownloadError, UnsupportedError
 
+from .bot import Giesela
+from .downloader import Downloader
 from .entry import (BaseEntry, RadioSongEntry, RadioStationEntry, StreamEntry)
 from .exceptions import BrokenEntryError, ExtractionError
 from .lib.event_emitter import EventEmitter
@@ -18,19 +20,26 @@ from .radio import StationInfo
 from .webiesela import WebieselaServer
 
 if TYPE_CHECKING:
-    from giesela import Playlist
+    from giesela import Playlist, MusicPlayer
 
 log = logging.getLogger(__name__)
 
 
 class Queue(EventEmitter):
+    bot: Giesela
+    player: "MusicPlayer"
+    downloader: Downloader
 
-    def __init__(self, bot, player, downloader):
+    entries: Deque[BaseEntry]
+    history: List[BaseEntry]
+
+    def __init__(self, bot: Giesela, player: "MusicPlayer", downloader: Downloader):
         super().__init__()
         self.bot = bot
         self.loop = bot.loop
         self.player = player
         self.downloader = downloader
+
         self.entries = deque()
         self.history = []
 
@@ -39,8 +48,8 @@ class Queue(EventEmitter):
 
     def get_web_dict(self):
         data = {
-            "entries": [entry.to_web_dict(True) for entry in self.entries.copy()],
-            "history": [entry.to_web_dict(True) for entry in self.history.copy()]
+            "entries": [entry.to_web_dict(self.player) for entry in self.entries.copy()],
+            "history": [entry.to_web_dict(self.player) for entry in self.history.copy()]
         }
         return data
 
@@ -64,7 +73,7 @@ class Queue(EventEmitter):
         self.entries.rotate(to_index)
 
         if self.peek() is move_entry:
-            move_entry.get_ready_future()
+            move_entry.get_ready_future(self)
 
         WebieselaServer.send_player_information(self.player.channel.guild.id)
 
@@ -165,7 +174,7 @@ class Queue(EventEmitter):
             if self.player.current_entry:
                 self.player.handle_manually = True
 
-            self.player.play_entry(entry)
+            await self.player.play(entry)
             WebieselaServer.send_player_information(self.player.channel.guild.id)
         else:
             self._add_entry(entry)
@@ -208,7 +217,7 @@ class Queue(EventEmitter):
         self.entries.appendleft(entry)
         self.emit("entry-added", queue=self, entry=entry)
 
-        entry.get_ready_future()
+        entry.get_ready_future(self)
 
         WebieselaServer.send_player_information(self.player.channel.guild.id)
 
@@ -221,7 +230,7 @@ class Queue(EventEmitter):
         entry = self.entries.pop()
         self.entries.appendleft(entry)
         self.emit("entry-added", queue=self, entry=entry)
-        entry.get_ready_future()
+        entry.get_ready_future(self)
 
         WebieselaServer.send_player_information(self.player.channel.guild.id)
 
@@ -241,7 +250,7 @@ class Queue(EventEmitter):
 
         return entry
 
-    async def get_next_entry(self, pre_download_next=True) -> Optional[BaseEntry]:
+    async def get_next_entry(self, pre_download_next: bool = True) -> Optional[BaseEntry]:
         """
             A coroutine which will return the next song or None if no songs left to play.
 
@@ -275,7 +284,7 @@ class Queue(EventEmitter):
             return self.entries[0]
 
     async def estimate_time_until(self, index: int) -> datetime.timedelta:
-        estimated_time = sum(e.end_seconds for e in self.entries[:index])
+        estimated_time = sum(e.duration for e in self.entries[:index])
 
         if self.player.current_entry:
             estimated_time += self.player.current_entry.duration - self.player.progress

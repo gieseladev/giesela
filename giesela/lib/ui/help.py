@@ -54,7 +54,7 @@ def get_reaction_help(target: InteractableEmbed, *, include_undocumented: bool =
             else:
                 continue
 
-        handles = handler._handles
+        handles = getattr(handler, "_handles")
         if len(handles) == 1:
             name = handles[0]
         else:
