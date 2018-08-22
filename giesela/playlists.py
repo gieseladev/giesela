@@ -582,7 +582,6 @@ class EditPlaylistProxy:
         return entry
 
     def edit_entry(self, entry: [int, PlaylistEntry], changes: Dict[str, Any]) -> PlaylistEntry:
-        # TODO support undo
         if isinstance(entry, int):
             index = entry
             entry = self._entries[entry]
