@@ -179,16 +179,19 @@ class PlaylistBuilder(HasHelp, _PlaylistEmbed, MessageableEmbed):
     async def undo_action(self, ctx: Context):
         """Undo something"""
         change = self.playlist_editor.undo()
+        await self.show_window()
 
     @commands.command("redo")
     async def redo_action(self, ctx: Context):
         """Redo something"""
         change = self.playlist_editor.redo()
+        await self.show_window()
         # TODO redo/undo output
 
     @commands.command("show", aliases=["goto"])
-    async def show_target(self, target: str):
+    async def show_target(self, ctx: Context, *target: str):
         """Show a specific line or entry."""
+        target = " ".join(target)
         if target.isnumeric():
             line = int(target)
         else:

@@ -459,16 +459,12 @@ class EditChange:
 class EditPlaylistProxy:
     _playlist: Playlist
     _entries: List[PlaylistEntry]
-    _added_entries: List[PlaylistEntry]
-    _removed_entries: List[PlaylistEntry]
 
     _changes: Deque[EditChange]
 
     def __init__(self, playlist: Playlist):
         self._playlist = playlist
         self._entries = playlist.entries.copy()
-        self._added_entries = []
-        self._removed_entries = []
 
         self._changes = deque()
         self._undo_stack = deque(maxlen=25)
@@ -483,16 +479,33 @@ class EditPlaylistProxy:
     def entries(self) -> List[PlaylistEntry]:
         return self._entries
 
+    def rebuild_entries(self):
+        entries = self._playlist.entries.copy()
+        for change in self._changes:
+            if change.change_type == EditChange.ADDED:
+                bisect.insort_left(entries, change.entry)
+            elif change.change_type == EditChange.REMOVED:
+                entries.remove(change.entry)
+            elif change.EDITED:
+                index = entries.index(change.entry)
+                entry = change.entry.copy()
+                entry.edit(**change.changes)
+                entries[index] = entry
+
+        self._entries = entries
+
     def undo(self) -> Optional[EditChange]:
         if self._changes:
             change = self._changes.pop()
-            self._undo_stack.appendleft(change)
+            self._undo_stack.append(change)
+            self.rebuild_entries()
             return change
 
     def redo(self) -> Optional[EditChange]:
         if self._undo_stack:
-            change = self._undo_stack.popleft()
+            change = self._undo_stack.pop()
             self._changes.append(change)
+            self.rebuild_entries()
             return change
 
     def find_change(self, change_type: int, entry) -> EditChange:
@@ -530,13 +543,12 @@ class EditPlaylistProxy:
             raise KeyError(f"{entry} already in {self._playlist}")
 
         self._undo_stack.clear()
-        if entry in self._removed_entries:
-            self._removed_entries.remove(entry)
+        try:
             change = self.find_change(EditChange.REMOVED, entry)
-            self._changes.remove(change)
-        else:
-            self._added_entries.append(entry)
+        except KeyError:
             self._changes.append(EditChange.added(entry))
+        else:
+            self._changes.remove(change)
 
         bisect.insort_left(self._entries, entry)
         return entry
@@ -549,18 +561,18 @@ class EditPlaylistProxy:
             raise KeyError(f"{entry} not in {self._playlist}")
 
         self._undo_stack.clear()
-        if entry in self._added_entries:
-            self._added_entries.remove(entry)
+        try:
             change = self.find_change(EditChange.ADDED, entry)
-            self._changes.remove(change)
-        else:
-            self._removed_entries.append(entry)
+        except KeyError:
             self._changes.append(EditChange.removed(entry))
+        else:
+            self._changes.remove(change)
 
         self._entries.remove(entry)
         return entry
 
     def edit_entry(self, entry: [int, PlaylistEntry], changes: Dict[str, Any]) -> PlaylistEntry:
+        # TODO support undo
         if isinstance(entry, int):
             index = entry
             entry = self._entries[entry]
