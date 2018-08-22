@@ -146,7 +146,7 @@ class PlaylistEntry:
 
     def get_entry(self, *, author: User, channel: TextChannel, **meta) -> BaseEntry:
         entry = Entry.from_dict(self._entry)
-        meta.update(author=author, channel=channel, playlist=self)
+        meta.update(author=author, channel=channel, playlist=self.playlist, playlist_entry=self)
         entry.meta.update(meta)
         return entry
 
