@@ -281,8 +281,8 @@ class Player:
         player = await self.get_player(ctx)
         _seek(player, timestamp)
 
-    @commands.command()
-    async def fwd(self, ctx: Context, timestamp: str):
+    @commands.command(aliases=["fwd", "fw"])
+    async def forward(self, ctx: Context, timestamp: str):
         """Forward <timestamp> into the current entry"""
         player = await self.get_player(ctx)
 
@@ -292,8 +292,8 @@ class Player:
 
         _seek(player, secs)
 
-    @commands.command()
-    async def rwd(self, ctx: Context, timestamp: str = None):
+    @commands.command(aliases=["rwd", "rw"])
+    async def rewind(self, ctx: Context, timestamp: str = None):
         """Rewind <timestamp> into the current entry.
 
         If the current entry is a timestamp-entry, rewind to the previous song

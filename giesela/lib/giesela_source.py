@@ -138,6 +138,7 @@ class GieselaSource(PCMVolumeTransformer):
 
     def seek(self, s: float):
         """Seek to s in the stream."""
+        s = max(s, 0)
         self.bytes_read = BYTES_PER_SECOND * s
         self.original = self.get_ffmpeg(self.source, start=s)
         self._update_waiters()
