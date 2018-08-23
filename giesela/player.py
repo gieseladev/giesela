@@ -55,6 +55,9 @@ class MusicPlayer(EventEmitter):
 
     queue: Queue
 
+    _current_entry: Optional[BaseEntry]
+    _volume: float
+
     def __init__(self, bot: "Giesela", downloader: Downloader, channel: VoiceChannel):
         super().__init__()
         self.bot = bot
@@ -160,14 +163,16 @@ class MusicPlayer(EventEmitter):
             return
 
     def seek(self, secs: float):
+        if isinstance(self.current_entry, StreamEntry):
+            return
+        
         if self.player:
             self.player.seek(secs)
         self.emit("seek", player=self, entry=self.current_entry, timestamp=secs)
 
     def pause(self):
         if isinstance(self.current_entry, StreamEntry):
-            self.stop()
-            return
+            return self.stop()
 
         if self.voice_client and self.voice_client.is_playing():
             self.voice_client.pause()
@@ -227,7 +232,10 @@ class MusicPlayer(EventEmitter):
         self._current_entry = entry
         source = self.create_source(entry)
 
-        self.voice_client.play(source, after=self._playback_finished)
+        if self.voice_client.is_playing():
+            self.voice_client.source = source
+        else:
+            self.voice_client.play(source, after=self._playback_finished)
         self.setup_chapters()
 
         log.info(f"playing {entry} in {self.voice_client}")
@@ -241,16 +249,16 @@ class MusicPlayer(EventEmitter):
         elif isinstance(self.current_entry, RadioSongEntry):
             delay = None
             if self.current_entry.poll_time:
-                log.debug("Radio stations enforces a custom wait time")
                 delay = self.current_entry.poll_time
-            elif self.current_entry.song_duration > self.current_entry.uncertainty:
+                log.debug(f"Radio stations enforces a custom wait time ({delay}s)")
+            elif self.current_entry.song_duration and self.current_entry.song_duration > self.current_entry.uncertainty:
                 delay = self.current_entry.song_duration - self.current_entry.song_progress + self.current_entry.uncertainty
 
             delay = delay if delay and delay > 0 else 40
             self.loop.call_later(delay, self.repeat_chapter_setup)
 
     def repeat_chapter_setup(self):
-        self.update_chapter()
+        asyncio.ensure_future(self.update_chapter())
         self.setup_chapters()
 
     async def update_chapter(self):

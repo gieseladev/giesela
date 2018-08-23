@@ -8,13 +8,14 @@ from discord import Embed, Message
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Downloader, Giesela, MusicPlayer, RadioSongExtractor, RadioStations, TimestampEntry, WebieselaServer, get_all_stations, \
+from giesela import Downloader, Giesela, MusicPlayer, RadioSongExtractor, RadioStations, TimestampEntry, get_all_stations, \
     get_random_station
 from giesela.lib.api import spotify
 from giesela.lib.ui import ItemPicker, LoadingBar, VerticalTextViewer
 from giesela.lib.ui.custom import NowPlayingEmbed
 from giesela.utils import (create_bar, format_time, html2md, nice_cut)
 from .player import Player
+from .webiesela import WebieselaServer
 
 LOAD_ORDER = 1
 
@@ -123,10 +124,11 @@ class EnqueueCog(QueueBase):
         song_url = url.strip("<>")
 
         async with ctx.typing():
-            await player.queue.add_stream_entry(song_url, channel=ctx.channel, author=ctx.author)
+            entry = await player.downloader.get_stream_entry(song_url, channel=ctx.channel, author=ctx.author)
+            player.queue._add_entry(entry)
         await ctx.send(":+1:")
 
-    @commands.group(inovke_without_command=True)
+    @commands.group(invoke_without_command=True)
     async def radio(self, ctx: Context, station: str = None):
         """Play a radio station.
 
@@ -147,9 +149,9 @@ class EnqueueCog(QueueBase):
         possible_stations = get_all_stations()
         shuffle(possible_stations)
 
-        embeds = []
+        async def get_station(index: int) -> Embed:
+            station = possible_stations[index % len(possible_stations)]
 
-        for station in possible_stations:
             em = Embed(colour=0xb3f75d)
             em.set_author(name=station.name, url=station.website)
             em.set_thumbnail(url=station.cover)
@@ -157,16 +159,15 @@ class EnqueueCog(QueueBase):
             if station.has_current_song_info:
                 data = await RadioSongExtractor.async_get_current_song(self.bot.loop, station)
                 em.add_field(name="Currently playing", value="{artist} - {title}".format(**data))
+            return em
 
-            embeds.append(em)
-
-        item_picker = ItemPicker(ctx.channel, ctx.author, embeds=embeds)
+        item_picker = ItemPicker(ctx.channel, ctx.author, embed_callback=get_station)
         result = await item_picker.choose()
 
         if result is None:
             await ctx.send("Okay then")
         else:
-            station = possible_stations[result]
+            station = possible_stations[result % len(possible_stations)]
             await player.queue.add_radio_entry(station, channel=ctx.channel, author=ctx.author)
             await ctx.send(f"There you go fam!\n**{station.name}**")
 
@@ -226,12 +227,7 @@ class EnqueueCog(QueueBase):
         search_msg = await ctx.send("Searching for videos...")
         try:
             async with ctx.typing():
-                info = await self.downloader.extract_info(
-                    player.queue.loop,
-                    search_query,
-                    download=False,
-                    process=True
-                )
+                info = await self.downloader.extract_info(search_query, process=True)
         except Exception as e:
             await search_msg.edit(content=str(e))
             return

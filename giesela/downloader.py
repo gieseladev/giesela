@@ -2,14 +2,18 @@ import asyncio
 import functools
 import logging
 import os
+import re
+import urllib
+import urllib.error
 from concurrent.futures import ThreadPoolExecutor
-from typing import AsyncIterator, List, Optional, Tuple, Union
+from typing import AsyncIterator, List, Optional, Pattern, Tuple, Union
+from urllib.parse import urlparse
 
 import youtube_dl
-from youtube_dl.utils import ExtractorError
+from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
 from .bot import Giesela
-from .entry import BaseEntry, GieselaEntry, TimestampEntry, YoutubeEntry
+from .entry import BaseEntry, GieselaEntry, StreamEntry, TimestampEntry, YoutubeEntry
 from .exceptions import ExtractionError, WrongEntryTypeError
 from .lib.api.VGMdb import get_entry as get_vgm_track
 from .lib.api.discogs import get_entry as get_discogs_track
@@ -21,7 +25,6 @@ log = logging.getLogger(__name__)
 ytdl_format_options = {
     "format": "bestaudio/best",
     "extractaudio": True,
-    "outtmpl": "%(extractor)s-%(id)s-%(title)s.%(ext)s",
     "restrictfilenames": True,
     "noplaylist": True,
     "nocheckcertificate": True,
@@ -36,6 +39,12 @@ ytdl_format_options = {
 
 youtube_dl.utils.bug_reports_message = lambda: ""
 
+_RE_RM_UNWANTED: Pattern = re.compile(r"[^a-z0-9]")
+_RE_RM_HOST_PARTS: Pattern = re.compile(r"(\.\w{2,3}$)|(^www\.)")
+
+RE_RM_UNWANTED = functools.partial(_RE_RM_UNWANTED.sub, "_")
+RE_RM_HOST_PARTS = functools.partial(_RE_RM_HOST_PARTS.sub, "")
+
 
 class Downloader:
 
@@ -44,56 +53,62 @@ class Downloader:
         self.loop = bot.loop
 
         self.thread_pool = ThreadPoolExecutor(max_workers=2)
+
         self.unsafe_ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
         self.safe_ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
         self.safe_ytdl.params["ignoreerrors"] = True
+
+        self._patch_ytdl(self.unsafe_ytdl, self.safe_ytdl)
+
         self.download_folder = download_folder
-
-        if download_folder:
-            otmpl = self.unsafe_ytdl.params["outtmpl"]
-            self.unsafe_ytdl.params["outtmpl"] = os.path.join(download_folder, otmpl)
-
-            otmpl = self.safe_ytdl.params["outtmpl"]
-            self.safe_ytdl.params["outtmpl"] = os.path.join(download_folder, otmpl)
 
     @property
     def ytdl(self):
         return self.safe_ytdl
 
-    async def extract_info(self, loop, *args, on_error=None, retry_on_error=False, **kwargs):
+    def _patch_ytdl(self, *ytdls: youtube_dl.YoutubeDL):
+        """
+        You might look at this and think: "Isn't this a little bit dirty?",
+        to which I say: "yes, but you should've seen my previous work-around!"
+        """
+        for ytdl in ytdls:
+            ytdl.prepare_filename = self.prepare_filename
+
+    def prepare_filename(self, url: Union[dict, str]) -> str:
+        if isinstance(url, dict):
+            url = url["webpage_url"]
+        parsed = urlparse(url)
+        host = RE_RM_UNWANTED(RE_RM_HOST_PARTS(parsed.hostname.lower()))
+        path = RE_RM_UNWANTED(parsed.path)
+        query = RE_RM_UNWANTED(parsed.query)
+
+        return os.path.join(self.download_folder, f"{host}-{path}-{query}.audio")
+
+    async def extract_info(self, *args, on_error=None, filename: str = None, **kwargs):
         """
             Runs ytdl.extract_info within the threadpool. Returns a future that will fire when it"s done.
             If `on_error` is passed and an exception is raised, the exception will be caught and passed to
             on_error as an argument.
         """
-        if callable(on_error):
-            try:
-                return await loop.run_in_executor(self.thread_pool, functools.partial(self.unsafe_ytdl.extract_info, *args, **kwargs))
+        kwargs["download"] = bool(filename)
+        try:
+            return await self.loop.run_in_executor(self.thread_pool, functools.partial(self.unsafe_ytdl.extract_info, *args, **kwargs))
+        except Exception as e:
+            if not on_error:
+                raise
 
-            except Exception as e:
+            if asyncio.iscoroutinefunction(on_error):
+                asyncio.ensure_future(on_error(e), loop=self.loop)
 
-                # (youtube_dl.utils.ExtractorError, youtube_dl.utils.DownloadError)
-                # I hope I don"t have to deal with ContentTooShortErrors
-                if asyncio.iscoroutinefunction(on_error):
-                    asyncio.ensure_future(on_error(e), loop=loop)
+            elif asyncio.iscoroutine(on_error):
+                asyncio.ensure_future(on_error, loop=self.loop)
 
-                elif asyncio.iscoroutine(on_error):
-                    asyncio.ensure_future(on_error, loop=loop)
-
-                else:
-                    loop.call_soon_threadsafe(on_error, e)
-
-                if retry_on_error:
-                    return await self.safe_extract_info(loop, *args, **kwargs)
-        else:
-            return await loop.run_in_executor(self.thread_pool, functools.partial(self.unsafe_ytdl.extract_info, *args, **kwargs))
-
-    async def safe_extract_info(self, loop, *args, **kwargs):
-        return await loop.run_in_executor(self.thread_pool, functools.partial(self.safe_ytdl.extract_info, *args, **kwargs))
+            else:
+                self.loop.call_soon_threadsafe(on_error, e)
 
     async def get_ytdl_data(self, song_url: str) -> dict:
         try:
-            info = await self.extract_info(self.loop, song_url, download=False)
+            info = await self.extract_info(song_url)
         except Exception as e:
             raise ExtractionError(
                 "Could not extract information from {}\n\n{}".format(song_url, e))
@@ -128,6 +143,37 @@ class Downloader:
 
         return info
 
+    async def get_stream_entry(self, stream_url: str, **meta) -> BaseEntry:
+        info = {"title": stream_url, "url": stream_url}
+
+        try:
+            info = await self.extract_info(stream_url)
+
+        except DownloadError as e:
+            if e.exc_info[0] == UnsupportedError:
+                print("[STREAM] Assuming content is a direct stream")
+
+            elif e.exc_info[0] == urllib.error.URLError:
+                if os.path.exists(os.path.abspath(stream_url)):
+                    raise ExtractionError("This is not a stream, this is a file path.")
+
+                else:  # it might be a file path that just doesn't exist
+                    raise ExtractionError("Invalid input: {0.exc_info[0]}: {0.exc_info[1].reason}".format(e))
+
+            else:
+                raise ExtractionError("Unknown error: {}".format(e))
+
+        except Exception as e:
+            print("Could not extract information from {} ({}), falling back to direct".format(stream_url, e))
+
+        if info.get("extractor") == "twitch:stream":
+            title = info.get("description")
+        else:
+            title = info.get("title", "Untitled Stream")
+
+        entry = StreamEntry(info["url"], title=title, **meta)
+        return entry
+
     async def get_entry(self, song_url: Union[str, dict], **meta) -> BaseEntry:
         if isinstance(song_url, dict):
             info = song_url
@@ -143,7 +189,7 @@ class Downloader:
 
         clean_title = clean_songname(video_title) or video_title
 
-        filename = self.ytdl.prepare_filename(info)
+        filename = self.prepare_filename(video_url)
         args = (filename, video_url, video_duration)
         kwargs = dict(video_id=video_id, title=video_title, thumbnail=video_thumbnail)
         kwargs.update(meta)
@@ -183,7 +229,7 @@ class Downloader:
 
     async def get_entry_from_query(self, query: str, **meta) -> Optional[Union[BaseEntry, List[str]]]:
         try:
-            info = await self.extract_info(self.loop, query, download=False, process=False)
+            info = await self.extract_info(query, process=False)
         except Exception as e:
             raise ExtractionError("Could not extract information from {}\n\n{}".format(query, e))
 
@@ -191,13 +237,7 @@ class Downloader:
             raise ExtractionError("Couldn't extract info")
 
         if info.get("url", "").startswith("ytsearch"):
-            info = await self.extract_info(
-                self.loop,
-                query,
-                download=False,
-                process=True,
-                retry_on_error=True
-            )
+            info = await self.extract_info(query, process=True)
 
             if not info:
                 raise ExtractorError("Couldn't extract info")
@@ -206,7 +246,7 @@ class Downloader:
                 return None
 
             query = info["entries"][0]["webpage_url"]
-            info = await self.extract_info(self.loop, query, download=False, process=False)
+            info = await self.extract_info(query, process=False)
 
         if "entries" in info:
             return [entry["url"] for entry in info["entries"]]
@@ -214,7 +254,7 @@ class Downloader:
             return await self.get_entry(info, **meta)
 
     async def get_entry_gen(self, url: str, **meta) -> AsyncIterator[Tuple[int, BaseEntry]]:
-        info = await self.extract_info(self.loop, url, download=False, process=False)
+        info = await self.extract_info(url, process=False)
 
         if "entries" in info:
             return self.get_entries_from_urls_gen(*[entry["url"] for entry in info["entries"]])
