@@ -301,6 +301,12 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
         await self.show_page()
         await super().start()
 
+    async def display(self) -> Any:
+        await self.start()
+        result = await self.wait_for_listener()
+        await self.delete()
+        return result
+
     @emoji_handler("◀", pos=1)
     async def previous_page(self, *_):
         """Switch to the previous page"""
@@ -316,7 +322,7 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
 
 class ItemPicker(_HorizontalPageViewer, Abortable):
     async def choose(self) -> Optional[int]:
-        return await self.start()
+        return await self.display()
 
     @emoji_handler("✅", pos=999)
     async def select(self, *_) -> int:
@@ -325,11 +331,7 @@ class ItemPicker(_HorizontalPageViewer, Abortable):
 
 
 class EmbedViewer(_HorizontalPageViewer, Abortable):
-    async def display(self) -> Any:
-        await self.start()
-        result = await self.wait_for_listener()
-        await self.delete()
-        return result
+    pass
 
 
 class VerticalTextViewer(InteractableEmbed, Abortable, Startable):

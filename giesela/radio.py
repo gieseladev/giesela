@@ -11,7 +11,6 @@ from dateutil.parser import parse
 
 from .config import ConfigDefaults
 from .lib.api import energy
-from .utils import parse_timestamp
 
 
 class StationInfo:
@@ -67,23 +66,14 @@ class StationInfo:
 
 
 def get_all_stations():
-    init()
+    RadioStations.init()
     return RadioStations.stations
 
 
 def get_random_station():
-    init()
+    RadioStations.init()
     station = choice(RadioStations.stations)
     return station
-
-
-def init():
-    if not RadioStations._initialised:
-        data = json.load(open(ConfigDefaults.radios_file, "r"))
-        RadioStations.thumbnails = data["thumbnails"]
-        RadioStations.stations = [StationInfo.from_dict(
-            station) for station in data["stations"]]
-        _initialised = True
 
 
 class RadioStations:
@@ -92,40 +82,22 @@ class RadioStations:
     thumbnails = {}
 
     @staticmethod
+    def init():
+        if not RadioStations._initialised:
+            data = json.load(open(ConfigDefaults.radios_file, "r"))
+            RadioStations.thumbnails = data["thumbnails"]
+            RadioStations.stations = [StationInfo.from_dict(
+                station) for station in data["stations"]]
+            _initialised = True
+
+    @staticmethod
     def get_station(query):
-        init()
+        RadioStations.init()
         for station in RadioStations.stations:
             if station.id == query or query in station.aliases:
                 return station
 
         return None
-
-
-def _get_current_song_radio32():
-    resp = requests.get("http://lggxoaexvb.cyon.link/song/current")
-    data = resp.json()
-    now_playing = data["live"][0]
-
-    start_time = parse(now_playing["playtime"]).timestamp()
-    duration = parse_timestamp(now_playing["duration"])
-
-    end_time = start_time + duration
-
-    if time.time() >= end_time:
-        print("[RADIO] <radio 32> \"live\" is outdated, switching to coming[0]")
-        start_time += duration
-
-        now_playing = data["coming"][0]
-        duration = parse_timestamp(now_playing["duration"])
-
-    return {
-        "title": now_playing["title"],
-        "artist": now_playing["interpret"].replace(",", " & "),
-        "cover": now_playing["imageFullURL"],
-        "youtube": "http://www.radio32.ch/",
-        "duration": duration,
-        "progress": time.time() - start_time
-    }
 
 
 def _get_current_song_bbc():
@@ -229,8 +201,7 @@ def init_extractor():
         RadioSongExtractor.extractors = {
             "energybern": _get_current_song_energy_bern,
             "capitalfm": _get_current_song_capital_fm,
-            "bbc": _get_current_song_bbc,
-            # "radio32":      RadioSongExtractor._get_current_song_radio32,
+            "bbc": _get_current_song_bbc
         }
         RadioSongExtractor._initialised = True
 

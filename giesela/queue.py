@@ -1,19 +1,14 @@
 import asyncio
 import datetime
 import logging
-import os
 import random
 import time
-import urllib
-import urllib.error
 from collections import deque
-from typing import Deque, Iterable, Iterator, List, Optional, TYPE_CHECKING, Tuple, Union
-
-from youtube_dl.utils import DownloadError, UnsupportedError
+from typing import Deque, Iterable, Iterator, List, Optional, TYPE_CHECKING, Union
 
 from .bot import Giesela
 from .downloader import Downloader
-from .entry import (BaseEntry, RadioSongEntry, RadioStationEntry, StreamEntry)
+from .entry import (BaseEntry, RadioSongEntry, RadioStationEntry)
 from .exceptions import BrokenEntryError, ExtractionError
 from .lib.event_emitter import EventEmitter
 from .radio import StationInfo
@@ -119,65 +114,18 @@ class Queue(EventEmitter):
         WebieselaServer.send_player_information(self.player.channel.guild.id)
         self.emit("entry-added", queue=self)
 
-    async def add_stream_entry(self, stream_url: str, **meta) -> Tuple[BaseEntry, int]:
-        info = {"title": stream_url, "extractor": None}
-        try:
-            info = await self.downloader.extract_info(self.loop, stream_url, download=False)
-
-        except DownloadError as e:
-            if e.exc_info[0] == UnsupportedError:
-                print("[STREAM] Assuming content is a direct stream")
-
-            elif e.exc_info[0] == urllib.error.URLError:
-                if os.path.exists(os.path.abspath(stream_url)):
-                    raise ExtractionError("This is not a stream, this is a file path.")
-
-                else:  # it might be a file path that just doesn't exist
-                    raise ExtractionError("Invalid input: {0.exc_info[0]}: {0.exc_info[1].reason}".format(e))
-
-            else:
-                raise ExtractionError("Unknown error: {}".format(e))
-
-        except Exception as e:
-            print("Could not extract information from {} ({}), falling back to direct".format(stream_url, e))
-
-        dest_url = stream_url
-        if info.get("extractor"):
-            dest_url = info.get("url")
-
-        if info.get("extractor", None) == "twitch:stream":
-            title = info.get("description")
-        else:
-            title = info.get("title", "Untitled")
-
-        entry = StreamEntry(
-            self,
-            stream_url,
-            title,
-            destination=dest_url,
-            **meta
-        )
-
-        self._add_entry(entry)
-
-        return entry, len(self.entries)
-
-    async def add_radio_entry(self, station_info: StationInfo, now: bool = False, **meta):
+    async def add_radio_entry(self, station_info: StationInfo, now: bool = False, **meta) -> RadioStationEntry:
         if station_info.has_current_song_info:
-            entry = RadioSongEntry(self, station_info, **meta)
+            entry = RadioSongEntry(station_info, **meta)
         else:
-            entry = RadioStationEntry(self, station_info, **meta)
+            entry = RadioStationEntry(station_info, **meta)
 
         if now:
-            await entry._download(self)
-
-            if self.player.current_entry:
-                self.player.handle_manually = True
-
             await self.player.play(entry)
-            WebieselaServer.send_player_information(self.player.channel.guild.id)
         else:
             self._add_entry(entry)
+
+        return entry
 
     def add_entries(self, entries: Iterable[BaseEntry], placement: Union[str, int] = None):
         entry = None

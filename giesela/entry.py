@@ -4,13 +4,12 @@ import copy
 import logging
 import os
 import time
-from contextlib import suppress
 from typing import Any, Dict, List, Optional, TYPE_CHECKING
 
 from .exceptions import (ExtractionError, OutdatedEntryError)
 from .lyrics import search_for_lyrics
 from .radio import RadioSongExtractor, StationInfo
-from .utils import clean_songname, get_header
+from .utils import clean_songname
 
 if TYPE_CHECKING:
     from .queue import Queue
@@ -20,14 +19,14 @@ log = logging.getLogger(__name__)
 
 
 class BaseEntry(metaclass=abc.ABCMeta):
-    filename: str
+    filename: Optional[str]
     url: str
     meta: Dict[str, Any]
     duration: Optional[int]
 
     _lyrics: Optional[str]
 
-    def __init__(self, filename: str, url: str, duration: int = None, **meta):
+    def __init__(self, filename: Optional[str], url: str, duration: int = None, **meta):
         self.filename = filename
         self.url = url
         self.meta = meta
@@ -99,7 +98,6 @@ class BaseEntry(metaclass=abc.ABCMeta):
         future = asyncio.Future()
         if self.is_downloaded:
             future.set_result(self)
-
         else:
             asyncio.ensure_future(self._download(queue))
             self._waiting_futures.append(future)
@@ -128,53 +126,30 @@ class BaseEntry(metaclass=abc.ABCMeta):
         downloader = queue.downloader
         download_folder = downloader.download_folder
 
+        if not self.filename:
+            self.filename = downloader.prepare_filename(self.url)
+
         if not os.path.exists(download_folder):
             os.makedirs(download_folder)
 
         try:
-            extractor = os.path.basename(self.filename).split("-")[0]
+            downloaded_file_names = os.listdir(download_folder)
+            downloaded_names = [f.rsplit(".", 1)[0] for f in downloaded_file_names]
+            expected_file_name = os.path.basename(self.filename)
+            expected_name = expected_file_name.rsplit(".", 1)[0]
 
-            if extractor == "generic":
-                flistdir = [f.rsplit("-", 1)[0] for f in os.listdir(download_folder)]
-                expected_fname_noex, fname_ex = os.path.basename(self.filename).rsplit(".", 1)
+            if expected_file_name in downloaded_file_names:
+                log.debug(f"found {self} in cache")
+            elif expected_name in downloaded_names:
+                real_filename = downloaded_file_names[downloaded_names.index(expected_name)]
 
-                if expected_fname_noex in flistdir:
-                    # noinspection PyUnusedLocal
-                    rsize = 0
+                expected = self.filename.rsplit(".", 1)[-1]
+                seen = real_filename.rsplit(".", 1)[-1]
 
-                    with suppress(Exception):
-                        rsize = int(await get_header(queue.bot.aiosession, self.url, "CONTENT-LENGTH"))
-
-                    lfile = os.path.join(download_folder, os.listdir(download_folder)[flistdir.index(expected_fname_noex)])
-                    lsize = os.path.getsize(lfile)
-
-                    if lsize != rsize:
-                        await self._really_download(queue)
-                    else:
-                        log.debug(f"found {self} in cache")
-                        self.filename = lfile
-                else:
-                    await self._really_download(queue)
+                log.debug(f"found {self} (with different extension \"{expected}\" vs \"{seen}\") in cache")
+                self.filename = os.path.join(download_folder, real_filename)
             else:
-                ldir = os.listdir(download_folder)
-                flistdir = [f.rsplit(".", 1)[0] for f in ldir]
-                expected_fname_base = os.path.basename(self.filename)
-                expected_fname_noex = expected_fname_base.rsplit(".", 1)[0]
-
-                if expected_fname_base in ldir:
-                    self.filename = os.path.join(download_folder, expected_fname_base)
-                    log.debug(f"found {self} in cache")
-                elif expected_fname_noex in flistdir:
-                    real_filename = ldir[flistdir.index(expected_fname_noex)]
-
-                    expected = self.filename.rsplit(".", 1)[-1]
-                    seen = real_filename.rsplit(".", 1)[-1]
-
-                    log.debug(f"found {self} (with different extension \"{expected}\" vs \"{seen}\") in cache")
-                    self.filename = os.path.join(download_folder, real_filename)
-
-                else:
-                    await self._really_download(queue)
+                await self._really_download(queue)
 
             self._for_each_future(lambda future: future.set_result(self))
 
@@ -189,7 +164,7 @@ class BaseEntry(metaclass=abc.ABCMeta):
         log.info(f"downloading {self}")
 
         try:
-            result = await queue.downloader.extract_info(queue.loop, self.url, download=True)
+            result = await queue.downloader.extract_info(self.url, filename=self.filename)
         except Exception as e:
             raise ExtractionError(e)
 
@@ -198,14 +173,14 @@ class BaseEntry(metaclass=abc.ABCMeta):
         if not result:
             raise ExtractionError("ytdl broke and hell if I know why")
 
-        self.filename = queue.downloader.ytdl.prepare_filename(result)
+        self.filename = queue.downloader.prepare_filename(result["webpage_url"])
 
 
 class StreamEntry(BaseEntry):
     _title: str
 
-    def __init__(self, *args, title: str, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, url: str, title: str, **kwargs):
+        super().__init__(url, url, None, **kwargs)
 
         self._title = title
 
@@ -216,6 +191,12 @@ class StreamEntry(BaseEntry):
     @property
     def sort_attr(self):
         return self.title
+
+    @property
+    def is_downloaded(self) -> bool:
+        if self._is_downloading:
+            return False
+        return bool(self.filename)
 
     def to_dict(self):
         data = super().to_dict()
@@ -229,12 +210,11 @@ class StreamEntry(BaseEntry):
         url = self.filename if fallback else self.url
 
         try:
-            result = await queue.downloader.extract_info(queue.loop, url, download=False)
+            result = await queue.downloader.extract_info(url, download=False)
         except Exception as e:
             if not fallback and self.filename:
                 return await self._download(queue, fallback=True)
             raise ExtractionError(e)
-
         else:
             self.filename = result["url"]
         finally:
@@ -244,8 +224,9 @@ class StreamEntry(BaseEntry):
 class RadioStationEntry(StreamEntry):
     station_info: StationInfo
 
-    def __init__(self, *args, station_info: StationInfo, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, station_info: StationInfo, **kwargs):
+        kwargs.setdefault("title", station_info.name)
+        super().__init__(station_info.url, **kwargs)
         self.station_info = station_info
 
     @property
@@ -270,6 +251,10 @@ class RadioStationEntry(StreamEntry):
         data.update(station_data=self.station_info.to_dict())
         return data
 
+    @property
+    def is_downloaded(self) -> bool:
+        return True
+
 
 class RadioSongEntry(RadioStationEntry):
     _current_song_info: Dict[str, Any]
@@ -292,7 +277,7 @@ class RadioSongEntry(RadioStationEntry):
 
     @property
     def title(self) -> str:
-        return f"{self.artist} - {self.title}"
+        return f"{self.artist} - {self.song_title}"
 
     def _get_new_song_info(self):
         self._current_song_info = RadioSongExtractor.get_current_song(self.station_info)

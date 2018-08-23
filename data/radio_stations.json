@@ -51,7 +51,7 @@
       "language": "en",
       "cover": "https://i.imgur.com/7HKaC0z.png",
       "website": "http://capitalfm.com",
-      "url": "media-ice.musicradio.com/CapitalMP3",
+      "url": "http://media-ice.musicradio.com/CapitalMP3",
       "poll_time": 40,
       "thumbnails": [
         "generic",
@@ -69,37 +69,6 @@
       "website": "http://energy.ch",
       "url": "http://energybern.ice.infomaniak.ch/energybern-high.mp3",
       "uncertainty": 6,
-      "thumbnails": [
-        "generic",
-        "switzerland"
-      ]
-    },
-    {
-      "id": "radiobern1",
-      "name": "Radio Bern1",
-      "aliases": [
-        "bern1",
-        "bern"
-      ],
-      "language": "ch",
-      "cover": "https://i.imgur.com/0PepcdB.png",
-      "website": "http://www.radiobern1.ch/",
-      "url": "http://radio.nello.tv/radiobern164k",
-      "thumbnails": [
-        "generic",
-        "switzerland"
-      ]
-    },
-    {
-      "id": "radio32",
-      "name": "Radio 32",
-      "aliases": [
-        "32"
-      ],
-      "language": "ch",
-      "cover": "http://i.imgur.com/wklJano.png",
-      "website": "http://radio32.ch",
-      "url": "http://stream.radio32.ch/radio32",
       "thumbnails": [
         "generic",
         "switzerland"

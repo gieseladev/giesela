@@ -10,7 +10,7 @@ from .. import InteractableEmbed, IntervalUpdatingMessage, emoji_handler
 
 def create_progress_bar(progress: float, duration: float) -> str:
     progress_ratio = progress / duration
-    progress_bar = create_player_bar(progress_ratio, 20)
+    progress_bar = create_player_bar(progress_ratio, 18)
     return progress_bar
 
 
@@ -35,7 +35,7 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
 
         if isinstance(entry, RadioStationEntry):
             station_name = entry.station_info.name
-            footer = dict(text=f"From {station_name}", icon_url=entry.thumbnail)
+            footer = dict(text=f"From {station_name}")
             cover = entry.station_info.cover
             colour = 0xbe7621
 
@@ -85,7 +85,7 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
 
         if isinstance(entry, RadioSongEntry):
             colour = 0xa23dd1
-            footer = dict(text="🔴 Live from {entry.station_name}", icon_url=entry.thumbnail)
+            footer = dict(text=f"🔴 Live from {entry.station_info.name}", icon_url=entry.station_info.cover)
             song_progress = entry.song_progress
             song_duration = entry.song_duration
         elif isinstance(entry, GieselaEntry):

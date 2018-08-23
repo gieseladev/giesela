@@ -335,7 +335,7 @@ class SpotifyTrack:
         search_query = re.sub(r"[^\w\s]", "", "{} {}".format(self.artists[0].name, self.name))
 
         try:
-            info = (await queue.downloader.extract_info(queue.loop, search_query, download=False, process=True, retry_on_error=True))["entries"][0]
+            info = (await queue.downloader.extract_info(search_query, process=True))["entries"][0]
         except Exception:
             print("[Spotify]", search_query, "failed")
 
