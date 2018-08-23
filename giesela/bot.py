@@ -1,9 +1,10 @@
+import copy
 import logging
 from textwrap import indent, wrap
-from typing import Optional, Type
+from typing import Iterable, Optional, Type
 
 import aiohttp
-from discord import Colour, Embed
+from discord import Colour, Embed, Message
 from discord.ext.commands import AutoShardedBot, CommandError, CommandInvokeError, Context
 
 from . import cogs, exceptions, reporting
@@ -51,6 +52,22 @@ class Giesela(AutoShardedBot):
     async def on_command(cls, ctx: Context):
         if ctx.command:
             log.debug(f"{ctx.author} invoked {ctx.command.qualified_name}")
+
+    async def on_message(self, message: Message):
+        content = message.content
+        if "&&" in content:
+            await self.chain_commands(message)
+        else:
+            await super().on_message(message)
+
+    async def chain_commands(self, message: Message, commands: Iterable[str] = None):
+        if not commands:
+            commands = map(str.lstrip, message.content.split("&&"))
+
+        for command in commands:
+            msg = copy.copy(message)
+            msg.content = command
+            await self.on_message(msg)
 
     async def on_error(self, event: str, *args, **kwargs):
         log.exception(f"Error in {event} ({args}, {kwargs})")
