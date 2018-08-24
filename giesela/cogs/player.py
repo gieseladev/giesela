@@ -7,6 +7,7 @@ from discord.ext.commands import Context
 
 from giesela import BaseEntry, Downloader, Giesela, MusicPlayer, WebieselaServer, constants, lyrics as lyricsfinder
 from giesela.lib.ui import VerticalTextViewer
+from giesela.lib.ui.custom import EntryEditor
 from giesela.utils import create_bar, parse_timestamp, similarity
 
 log = logging.getLogger(__name__)
@@ -312,7 +313,21 @@ class Player:
 
         _seek(player, secs)
 
-    @commands.group(invoke_without_command=True)
+    @commands.command("editentry", aliases=["editnp"])
+    async def edit_entry(self, ctx: Context):
+        """Edit the current entry"""
+        player = await self.get_player(ctx)
+        if not player.current_entry:
+            raise commands.CommandError("There's nothing playing right now")
+        editor = EntryEditor(ctx.channel, ctx.author, bot=self.bot, entry=player.current_entry)
+        new_entry = await editor.display()
+        if new_entry and player.current_entry is editor.original_entry:
+            player.modify_current_entry(new_entry)
+            await ctx.send(f"Saved changes to **{new_entry.title}**")
+        else:
+            await ctx.message.delete()
+
+    @commands.command()
     async def lyrics(self, ctx: Context, *query: str):
         """Try to find lyrics for the current entry and display 'em"""
         player = await self.get_player(ctx)

@@ -165,7 +165,7 @@ class MusicPlayer(EventEmitter):
     def seek(self, secs: float):
         if isinstance(self.current_entry, StreamEntry):
             return
-        
+
         if self.player:
             self.player.seek(secs)
         self.emit("seek", player=self, entry=self.current_entry, timestamp=secs)
@@ -177,6 +177,15 @@ class MusicPlayer(EventEmitter):
         if self.voice_client and self.voice_client.is_playing():
             self.voice_client.pause()
             self.emit("pause", player=self, entry=self.current_entry)
+
+    def modify_current_entry(self, entry: BaseEntry):
+        if not self.current_entry:
+            raise ValueError("No current entry")
+        if self.current_entry.url != entry.url:
+            raise ValueError("Edited entry doesn't share current entry's url")
+
+        self._current_entry = entry
+        self.emit("play", player=self, entry=entry)
 
     def kill(self):
         if self.voice_client:

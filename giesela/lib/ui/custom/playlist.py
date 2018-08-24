@@ -1,15 +1,17 @@
 import abc
 import textwrap
-from typing import List
+from typing import List, TYPE_CHECKING
 
 from discord import Colour, Embed, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import Downloader, EditPlaylistProxy, Giesela, Playlist, PlaylistEntry
-from giesela.cogs.player import Player
 from ..help import AutoHelpEmbed
 from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
+
+if TYPE_CHECKING:
+    from giesela.cogs.player import Player
 
 
 def create_basic_embed(playlist: Playlist) -> Embed:
@@ -44,7 +46,7 @@ class _PlaylistEmbed(VerticalTextViewer, metaclass=abc.ABCMeta):
     PASS_BOT: bool = False
 
     bot: Giesela
-    player_cog = Player
+    player_cog: "Player"
     playlist: Playlist
 
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
@@ -172,8 +174,6 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
             await self.show_line(indices[0])
         else:
             await self.show_window()
-
-        print(self.playlist_editor.get_changelog())
 
     @commands.command("undo", aliases=["revert"])
     async def undo_action(self, ctx: Context):

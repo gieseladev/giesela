@@ -174,6 +174,13 @@ class HasHelp(Stoppable, metaclass=abc.ABCMeta):
             self._current_help = self._help_embed_cls(channel, user, help_embed=embed)
             return await self._current_help.display()
 
+    def toggle_help_embed(self, channel: TextChannel, user: User = None):
+        if self._showing_help:
+            task = asyncio.ensure_future(self._current_help.delete())
+        else:
+            task = self.trigger_help_embed(channel, user)
+        return task
+
     def trigger_help_embed(self, *args, **kwargs):
         return asyncio.ensure_future(self.show_help_embed(*args, **kwargs))
 
@@ -205,13 +212,13 @@ class AutoHelpEmbed(HasHelp, metaclass=abc.ABCMeta):
     @emoji_handler("❓", pos=10000)
     async def show_help(self, _, user: User):
         """Open this very box"""
-        self.trigger_help_embed(self.channel, user)
+        self.toggle_help_embed(self.channel, user)
 
     @commands.command()
     async def help(self, ctx: Context, *cmds: str):
         """Even more help"""
         if not cmds:
-            self.trigger_help_embed(self.channel, ctx.author)
+            self.toggle_help_embed(self.channel, ctx.author)
             return
 
         embed = await get_command_help(ctx, *cmds)

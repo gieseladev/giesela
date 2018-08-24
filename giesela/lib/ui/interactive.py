@@ -179,7 +179,8 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
 
         for name, member in inspect.getmembers(self):
             if isinstance(member, Command):
-                self._group.add_command(member)
+                if member.parent is None:
+                    self._group.add_command(member)
             elif name.startswith("on_") and member != self.on_message:
                 self._group.add_listener(member)
 

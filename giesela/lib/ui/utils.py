@@ -94,4 +94,4 @@ class MenuCommandGroup(BotBase, _FakeClient):
             self.remove_command("help")
 
     async def on_command(self, ctx: Context):
-        ctx.bot = self.bot
+        ctx.client = self.bot

@@ -81,9 +81,6 @@ class BaseEntry(metaclass=abc.ABCMeta):
     def from_dict(cls, data: Dict[str, Any]) -> "BaseEntry":
         return cls(**data)
 
-    def copy(self) -> "BaseEntry":
-        return copy.copy(self)
-
     def to_dict(self) -> Dict[str, Any]:
         return dict(version=Entry.VERSION, type=type(self).__name__, filename=self.filename, url=self.url, duration=self.duration)
 
@@ -93,6 +90,9 @@ class BaseEntry(metaclass=abc.ABCMeta):
         del data["filename"]
         data.update(link=self.link)
         return data
+
+    def copy(self) -> "BaseEntry":
+        return copy.copy(self)
 
     def get_ready_future(self, queue: "Queue") -> asyncio.Future:
         future = asyncio.Future()
@@ -407,9 +407,10 @@ class GieselaEntry(YoutubeEntry):
 
     @classmethod
     def upgrade(cls, entry: BaseEntry, **kwargs):
-        kwargs.update(entry.meta)
-        kwargs.update(entry.to_dict())
-        return cls.from_dict(kwargs)
+        data = entry.to_dict()
+        data.update(entry.meta)
+        data.update(kwargs)
+        return cls.from_dict(data)
 
     def to_dict(self):
         data = super().to_dict()

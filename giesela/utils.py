@@ -4,7 +4,7 @@ import urllib.parse
 from difflib import SequenceMatcher
 from io import BytesIO
 from string import punctuation, whitespace
-from typing import Callable, Iterable, Tuple, Union
+from typing import Callable, Iterable, List, NamedTuple, Optional, Pattern, TYPE_CHECKING, Tuple, Union
 
 import aiohttp
 import math
@@ -12,6 +12,9 @@ import requests
 from PIL import Image, ImageStat
 
 from .config import static_config
+
+if TYPE_CHECKING:
+    from giesela import BaseEntry
 
 log = logging.getLogger(__name__)
 
@@ -31,14 +34,36 @@ def wrap_string(target, wrapping, handle_special=True, reverse_closer=True):
     return "{}{}{}".format(opener, target, closer)
 
 
-def is_image(url):
+async def content_is_image(session: aiohttp.ClientSession, url: str) -> bool:
     try:
-        resp = requests.head(url, timeout=.5)
-        if resp.headers.get("content-type") in ["image/jpeg", "image/png"]:
-            return True
+        async with session.head(url) as resp:
+            content_type = resp.headers["content-type"]
+    except aiohttp.ClientError:
         return False
-    except requests.exceptions.RequestException:
-        return False
+
+    return content_type.startswith("image/")
+
+
+async def search_image(session: aiohttp.ClientSession, query: str, *, min_squareness: float = None, num_pages: int = 3) -> Optional[str]:
+    items_per_page = 10
+    params = dict(key=static_config.google_api_key, cx="002017775112634544492:t0ynfpg8y0e", searchType="image", count=items_per_page,
+                  fields="items(image)", q=query)
+
+    for i in range(num_pages):
+        params["start"] = i * items_per_page + 1
+
+        async with session.get("https://www.googleapis.com/customsearch/v1", params=params) as resp:
+            data = await resp.json()
+
+        for item in data["items"]:
+            image = item.get("image")
+            if image:
+                if min_squareness:
+                    height = image["height"]
+                    width = image["width"]
+                    if min(height, width) / max(height, width) < min_squareness:
+                        continue
+                return image["thumbnailLink"]
 
 
 def similarity(a: str, b: Union[str, Tuple[str, ...]], *, lower: bool = False, junk: Union[Callable[[str], bool], Iterable[str]] = None,
@@ -133,6 +158,29 @@ def ordinal(n, combine=False):
     if not 10 <= n % 100 <= 20 and n % 10 in special_cases:
         return number_string + special_cases[n % 10]
     return number_string + "th"
+
+
+class SplitSongName(NamedTuple):
+    name: str
+    artist: Optional[str]
+
+
+RE_SPLIT_SONG_NAME_PATTERNS: List[Pattern] = [
+    re.compile(r"(?P<name>.+)\s+by\s+(?P<artist>.+)"),
+    re.compile(r"(?P<artist>.+)\s+[-|]\s+(?P<name>.+)")
+]
+
+
+def split_song_name(title: Union[str, "BaseEntry"]) -> SplitSongName:
+    if not isinstance(title, str):
+        title = getattr(title, "_title", False) or title.title
+
+    for pattern in RE_SPLIT_SONG_NAME_PATTERNS:
+        match = pattern.match(title)
+        if match:
+            return SplitSongName(*match.group("name", "artist"))
+
+    return SplitSongName(title, None)
 
 
 def clean_songname(query):
