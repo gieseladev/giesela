@@ -4,7 +4,7 @@ import logging
 import random
 import time
 from collections import deque
-from typing import Deque, Iterable, Iterator, List, Optional, TYPE_CHECKING, Union
+from typing import Deque, Iterable, Iterator, Optional, TYPE_CHECKING, Union
 
 from .bot import Giesela
 from .downloader import Downloader
@@ -26,7 +26,7 @@ class Queue(EventEmitter):
     downloader: Downloader
 
     entries: Deque[BaseEntry]
-    history: List[BaseEntry]
+    history: Deque[BaseEntry]
 
     def __init__(self, bot: Giesela, player: "MusicPlayer", downloader: Downloader):
         super().__init__()
@@ -36,7 +36,7 @@ class Queue(EventEmitter):
         self.downloader = downloader
 
         self.entries = deque()
-        self.history = []
+        self.history = deque(maxlen=self.bot.config.history_limit)
 
     def __iter__(self) -> Iterator[BaseEntry]:
         return iter(self.entries)
@@ -97,8 +97,7 @@ class Queue(EventEmitter):
         entry = entry.copy()
 
         entry.meta["finish_time"] = time.time()
-        q = self.bot.config.history_limit - 1
-        self.history = [entry, *self.history[:q]]
+        self.history.append(entry)
 
         WebieselaServer.send_player_information(self.player.channel.guild.id)
 

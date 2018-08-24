@@ -443,17 +443,22 @@ class ManipulateCog(QueueBase):
         if index:
             if index.isnumeric():
                 index = int(index) - 1
-                if not 0 <= index < len(player.queue.history):
-                    raise commands.CommandError("Can't find that index")
             elif index in ("previous", "last"):
-                if player.queue.history:
-                    index = 0
-                else:
-                    raise commands.CommandError("No history to replay!")
+                index = 0
+            else:
+                raise commands.CommandError("No idea what you're trying to replay")
+
+        if index is not None or not player.current_entry:
+            index = index or 0
+            if not player.queue.history:
+                raise commands.CommandError("No history to replay!")
+            elif not 0 <= index < len(player.queue.history):
+                raise commands.CommandError("Can't find that index")
             entry = player.queue.history[index]
-        else:
-            index = None
+        elif player.current_entry:
             entry = player.current_entry
+        else:
+            raise commands.CommandError("Nothing to replay")
 
         if player.queue.replay(index):
             await ctx.send(f"Replaying **{entry.title}**")
