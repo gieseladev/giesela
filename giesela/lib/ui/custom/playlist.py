@@ -8,7 +8,7 @@ from discord.ext.commands import Context
 
 from giesela import Downloader, EditPlaylistProxy, Giesela, Playlist, PlaylistEntry
 from giesela.cogs.player import Player
-from ..help import HasHelp, get_command_help, get_message_help, get_reaction_help
+from ..help import AutoHelpEmbed
 from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
 
 
@@ -90,7 +90,7 @@ class PlaylistViewer(_PlaylistEmbed):
         await self.remove_handler(self.play_playlist)
 
 
-class PlaylistBuilder(HasHelp, _PlaylistEmbed, MessageableEmbed):
+class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
     PASS_BOT = True
 
     downloader: Downloader
@@ -100,6 +100,14 @@ class PlaylistBuilder(HasHelp, _PlaylistEmbed, MessageableEmbed):
         super().__init__(channel, user, **kwargs)
         self.downloader = self.player_cog.downloader
         self.playlist_editor = self.playlist.edit()
+
+    @property
+    def help_title(self) -> str:
+        return "Playlist Builder Help"
+
+    @property
+    def help_description(self) -> str:
+        return "Idk what to write here so I'm just using this for now, okay? okay."
 
     @property
     def entries(self) -> List[PlaylistEntry]:
@@ -115,17 +123,6 @@ class PlaylistBuilder(HasHelp, _PlaylistEmbed, MessageableEmbed):
             embed.colour = Colour.red()
             embed.add_field(name="Error", value=f"**{self.error}**")
             self.error = None
-
-        return embed
-
-    def get_help_embed(self) -> Embed:
-        embed = Embed(title="Playlist Builder Help", colour=Colour.blue())
-
-        reaction_help = get_reaction_help(self)
-        embed.add_field(name="Buttons", value=reaction_help)
-
-        message_help = get_message_help(self)
-        embed.add_field(name="Commands", value=message_help, inline=False)
 
         return embed
 
@@ -145,21 +142,6 @@ class PlaylistBuilder(HasHelp, _PlaylistEmbed, MessageableEmbed):
         """Close without saving"""
         self.stop_listener()
         return None
-
-    @emoji_handler("❓", pos=1001)
-    async def show_help(self, *_):
-        """Open this very box"""
-        self.trigger_help_embed(self.channel, self.user)
-
-    @commands.command()
-    async def help(self, ctx: Context, *cmds: str):
-        """Even more help"""
-        if not cmds:
-            await self.show_help_embed(self.channel, self.user)
-            return
-
-        embed = await get_command_help(ctx, *cmds)
-        self.trigger_help_embed(self.channel, self.user, embed=embed)
 
     @commands.command("edit")
     async def edit_entry(self, ctx: Context, index: int):

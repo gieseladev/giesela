@@ -6,6 +6,7 @@ from collections import OrderedDict
 from typing import Dict, Optional, Type
 
 from discord import Colour, Embed, TextChannel, User
+from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela.cogs.info import help_formatter
@@ -175,3 +176,43 @@ class HasHelp(Stoppable, metaclass=abc.ABCMeta):
 
     def trigger_help_embed(self, *args, **kwargs):
         return asyncio.ensure_future(self.show_help_embed(*args, **kwargs))
+
+
+class AutoHelpEmbed(HasHelp, metaclass=abc.ABCMeta):
+    channel: TextChannel
+
+    @property
+    def help_title(self) -> str:
+        return f"{type(self).__name__} Help"
+
+    @property
+    def help_description(self) -> Optional[str]:
+        return None
+
+    def get_help_embed(self) -> Embed:
+        embed = Embed(title=self.help_title, description=self.help_description, colour=Colour.blue())
+
+        if isinstance(self, InteractableEmbed):
+            reaction_help = get_reaction_help(self)
+            embed.add_field(name="Buttons", value=reaction_help)
+
+        if isinstance(self, MessageableEmbed):
+            message_help = get_message_help(self)
+            embed.add_field(name="Commands", value=message_help, inline=False)
+
+        return embed
+
+    @emoji_handler("❓", pos=10000)
+    async def show_help(self, _, user: User):
+        """Open this very box"""
+        self.trigger_help_embed(self.channel, user)
+
+    @commands.command()
+    async def help(self, ctx: Context, *cmds: str):
+        """Even more help"""
+        if not cmds:
+            self.trigger_help_embed(self.channel, ctx.author)
+            return
+
+        embed = await get_command_help(ctx, *cmds)
+        self.trigger_help_embed(self.channel, ctx.author, embed=embed)

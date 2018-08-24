@@ -91,9 +91,10 @@ class Giesela(AutoShardedBot):
         if ctx.command:
             log.debug(f"{ctx.author} invoked {ctx.command.qualified_name}")
 
-    async def on_command_finished(self, ctx: GieselaContext, exception: Exception = None):
-        await asyncio.sleep(self.config.message_decay_delay)
-        await ctx.decay()
+    async def on_command_finished(self, ctx: Context, exception: Exception = None):
+        if isinstance(ctx, GieselaContext):
+            await asyncio.sleep(self.config.message_decay_delay)
+            await ctx.decay()
 
     async def on_command_completion(self, ctx: Context):
         self.dispatch("command_finished", ctx)
