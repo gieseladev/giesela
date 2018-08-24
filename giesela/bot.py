@@ -1,7 +1,9 @@
+import asyncio
 import copy
 import logging
+import operator
 from textwrap import indent, wrap
-from typing import Iterable, Optional, Type
+from typing import Iterable, List, Optional, Type
 
 import aiohttp
 from discord import Colour, Embed, Message
@@ -14,6 +16,23 @@ from .lib.ui import events
 from .web_author import WebAuthor
 
 log = logging.getLogger(__name__)
+
+
+class GieselaContext(Context):
+    _sent_messages: List[Message]
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self._sent_messages = []
+
+    async def send(self, *args, **kwargs) -> Message:
+        msg = await super().send(*args, **kwargs)
+        self._sent_messages.append(msg)
+        return msg
+
+    async def decay(self):
+        coros = (self.message.delete(), *map(operator.methodcaller("delete"), self._sent_messages))
+        await asyncio.gather(*coros, return_exceptions=True)
 
 
 class Giesela(AutoShardedBot):
@@ -48,11 +67,6 @@ class Giesela(AutoShardedBot):
             if self.exit_signal:
                 raise self.exit_signal
 
-    @classmethod
-    async def on_command(cls, ctx: Context):
-        if ctx.command:
-            log.debug(f"{ctx.author} invoked {ctx.command.qualified_name}")
-
     async def on_message(self, message: Message):
         content = message.content
         if "&&" in content:
@@ -69,8 +83,20 @@ class Giesela(AutoShardedBot):
             msg.content = command
             await self.on_message(msg)
 
-    async def on_error(self, event: str, *args, **kwargs):
-        log.exception(f"Error in {event} ({args}, {kwargs})")
+    async def get_context(self, message: Message, *, cls: Context = GieselaContext) -> Context:
+        return await super().get_context(message, cls=cls)
+
+    @classmethod
+    async def on_command(cls, ctx: Context):
+        if ctx.command:
+            log.debug(f"{ctx.author} invoked {ctx.command.qualified_name}")
+
+    async def on_command_finished(self, ctx: GieselaContext, exception: Exception = None):
+        await asyncio.sleep(self.config.message_decay_delay)
+        await ctx.decay()
+
+    async def on_command_completion(self, ctx: Context):
+        self.dispatch("command_finished", ctx)
 
     async def on_command_error(self, ctx: Context, exception: Exception):
         report = True
@@ -101,6 +127,8 @@ class Giesela(AutoShardedBot):
 
         log.exception("CommandError:", exc_info=exception)
 
+        self.dispatch("command_finished", ctx, exception=exception)
+
     async def on_ready(self):
         log.info(f"\rConnected!  Giesela v{BOT_VERSION}")
         log.info(f"Bot: {self.user}")
@@ -124,6 +152,9 @@ class Giesela(AutoShardedBot):
             log.info("Config:\n" + config_string)
 
         log.info("Ready to go!")
+
+    async def on_error(self, event: str, *args, **kwargs):
+        log.exception(f"Error in {event} ({args}, {kwargs})")
 
     @classmethod
     async def on_reaction_remove(cls, reaction, user):

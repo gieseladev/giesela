@@ -12,19 +12,12 @@ class ConfigDefaults:
 
     html_parser = "html.parser"
 
-    entry_type_emojis = {
-        "YoutubeEntry": ":black_circle:",
-        "TimestampEntry": ":large_blue_circle:",
-        "GieselaEntry": ":white_circle:",
-        "SpotifyEntry": ":red_circle:",
-        "DiscogsEntry": ":large_orange_diamond:",
-        "VGMEntry": ":large_blue_diamond:"
-    }
-
     webiesela_port = 30000
     start_webiesela = True
 
     command_prefix = os.getenv("command_prefix", "!")
+    message_decay_delay = 30
+
     voice_channel_home = None
     idle_game = ""
 
@@ -35,7 +28,6 @@ class ConfigDefaults:
     history_limit = 200
 
     default_volume = 0.6
-    volume_power = 3
     save_videos = True
     auto_pause = True
 

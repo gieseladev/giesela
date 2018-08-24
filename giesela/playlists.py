@@ -55,7 +55,7 @@ ENTRY_SLOTS = ("version", "type", "filename",  # meta
 
 class PlaylistEntry:
     playlist: "Playlist"
-    # TODO marking as broken, playlist metadata?
+    # TODO marking as broken
 
     _entry: dict
 
