@@ -10,6 +10,7 @@ from discord.ext.commands import Context
 from giesela import BaseEntry, GieselaEntry, utils
 from ..help import AutoHelpEmbed
 from ..interactive import InteractableEmbed, MessageableEmbed, emoji_handler
+from ..prompts import PromptYesNo
 
 
 class EditableEntryData:
@@ -47,6 +48,10 @@ class EditableEntryData:
         func = functools.partial(getattr, self)
         # noinspection PyTypeChecker
         return all(map(func, self._attrs))
+
+    @property
+    def is_dirty(self) -> bool:
+        return bool(self._dirty)
 
     @property
     def missing_attrs(self) -> List[str]:
@@ -141,8 +146,14 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
         return image
 
     @emoji_handler("💾", pos=999)
-    async def save_changes(self, *_) -> Optional[GieselaEntry]:
+    async def save_changes(self, _, user: User) -> Optional[GieselaEntry]:
         """Apply changes and close"""
+        if self.entry.is_dirty and not self.entry.is_complete:
+            prompt = PromptYesNo(self.channel, user=user,
+                                 text="This entry isn't complete yet, all changes will be discarded. Are you sure you want to quit?")
+            if not await prompt:
+                return
+
         self.stop_listener()
         return self.changed_entry
 
