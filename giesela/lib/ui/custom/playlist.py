@@ -7,6 +7,7 @@ from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import Downloader, EditPlaylistProxy, Giesela, Playlist, PlaylistEntry
+from .entry_editor import EntryEditor
 from ..help import AutoHelpEmbed
 from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
 
@@ -148,7 +149,15 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
     @commands.command("edit")
     async def edit_entry(self, ctx: Context, index: int):
         """Edit an entry"""
-        raise commands.CommandError("No entry editor yet... Sorry")
+        index -= 1
+        if not 0 <= index < len(self.entries):
+            raise commands.CommandError(f"Index out of bounds  ({index + 1} not in 1 - {len(self.entries)})")
+        entry = self.entries[index]
+        editor = EntryEditor(ctx.channel, ctx.author, bot=self.bot, entry=entry.get_entry(author=ctx.author, channel=ctx.channel))
+        new_entry = await editor.display()
+        if new_entry:
+            self.playlist_editor.edit_entry(entry, new_entry.to_dict())
+            await self.show_line(index)
 
     @commands.command("add")
     async def add_entry(self, ctx: Context, *query: str):
@@ -202,4 +211,5 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
             if not entry:
                 raise commands.CommandError(f"Couldn't find entry {target}")
             line = self.playlist_editor.index_of(entry)
+        # TODO highlight line
         await self.show_line(line)

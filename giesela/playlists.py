@@ -124,7 +124,9 @@ class PlaylistEntry:
 
     @property
     def title(self) -> str:
-        return self.song_title or self._entry["title"]
+        if self.artist and self.song_title:
+            return f"{self.artist} - {self.song_title}"
+        return self._entry["title"]
 
     @property
     def sort_attr(self) -> str:
@@ -254,6 +256,7 @@ class Playlist:
         self._author = author
 
     def init(self):
+        self.entries.sort()
         for entry in self.entries:
             entry.playlist = self
 
