@@ -111,7 +111,7 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
 
     @property
     def help_title(self) -> str:
-        return "Entry Editor"
+        return "Entry Editor Help"
 
     async def display(self) -> Optional[GieselaEntry]:
         await self.update()
@@ -121,6 +121,8 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
 
     async def update(self):
         embed = self.entry.get_embed()
+        embed.title = "open url"
+        embed.url = self._entry.url
         if self.error:
             embed.colour = Colour.red()
             embed.add_field(name="Error", value=f"**{self.error}**", inline=False)
