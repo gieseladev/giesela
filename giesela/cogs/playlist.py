@@ -7,10 +7,9 @@ from discord import Attachment, Colour, Embed, File, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, Playlist, PlaylistManager, utils
+from giesela import Giesela, Playlist, PlaylistManager, help_formatter, utils
 from giesela.lib.ui import EditableEmbed, EmbedPaginator, EmbedViewer, PromptYesNo
 from giesela.lib.ui.custom import PlaylistBuilder, PlaylistViewer
-from .info import help_formatter
 from .player import Player
 
 LOAD_ORDER = 1

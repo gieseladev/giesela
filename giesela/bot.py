@@ -3,13 +3,13 @@ import copy
 import logging
 import operator
 from textwrap import indent, wrap
-from typing import Iterable, List, Optional, Type
+from typing import Iterable, List, Optional, Tuple, Type
 
 import aiohttp
 from discord import Colour, Embed, Message
-from discord.ext.commands import AutoShardedBot, CommandError, CommandInvokeError, Context
+from discord.ext.commands import AutoShardedBot, Command, CommandError, CommandInvokeError, CommandNotFound, Context
 
-from . import cogs, exceptions, reporting
+from . import cogs, exceptions, reporting, utils
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOT_VERSION
 from .lib.ui import events
@@ -83,6 +83,16 @@ class Giesela(AutoShardedBot):
             msg.content = command
             await self.on_message(msg)
 
+    def find_commands(self, query: str, *, threshold: float = .5) -> List[Tuple[Command, float]]:
+        commands = []
+
+        for command in self.walk_commands():
+            similarity = utils.similarity(query, (command.name, command.help), lower=True)
+            if similarity > threshold:
+                commands.append((command, similarity))
+        commands.sort(key=operator.itemgetter(1), reverse=True)
+        return commands
+
     async def get_context(self, message: Message, *, cls: Context = GieselaContext) -> Context:
         return await super().get_context(message, cls=cls)
 
@@ -119,8 +129,21 @@ class Giesela(AutoShardedBot):
                                 value=f"```python\n{original!r}```",
                                 inline=False)
             else:
-                embed = Embed(title=type(exception).__name__, description=str(exception), colour=Colour.red())
+                embed = None
+                if isinstance(exception, CommandNotFound):
+                    query = ctx.invoked_with + ctx.view.read_rest()
+                    commands = self.find_commands(query)
+                    if commands:
+                        commands = set(next(zip(*commands)))
+                        embed = Embed(title="Did you mean:", colour=Colour.orange())
+                        for cmd in commands:
+                            if len(embed.fields) >= 25:
+                                break
+                            embed.add_field(name=cmd.qualified_name, value=f"`{cmd.short_doc}`")
+                if not embed:
+                    embed = Embed(title=type(exception).__name__, description=str(exception), colour=Colour.red())
                 report = False
+
             await ctx.send(embed=embed)
 
         if report:

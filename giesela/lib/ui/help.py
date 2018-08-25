@@ -9,7 +9,7 @@ from discord import Colour, Embed, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela.cogs.info import help_formatter
+from giesela import help_formatter
 from . import text
 from .abstract import Stoppable
 from .interactive import InteractableEmbed, MessageableEmbed, emoji_handler
