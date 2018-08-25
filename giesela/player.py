@@ -74,6 +74,14 @@ class MusicPlayer(EventEmitter):
 
         self._volume = bot.config.default_volume
 
+    def __str__(self) -> str:
+        playing = f"playing {self.current_entry}" if self.is_playing else ""
+        return f"<MusicPlayer for {self.vc_qualified_name} {playing}>"
+
+    @property
+    def vc_qualified_name(self) -> str:
+        return f"{self.channel.guild.name}#{self.channel.name}"
+
     @property
     def player(self) -> Optional[GieselaSource]:
         if self.voice_client:
@@ -250,8 +258,7 @@ class MusicPlayer(EventEmitter):
             self.voice_client.play(source, after=self._playback_finished)
         self.setup_chapters()
 
-        vc_qualified_name = f"{self.channel.guild.name}#{self.channel.name}"
-        log.info(f"playing {entry} in {vc_qualified_name}")
+        log.info(f"playing {entry} in {self.vc_qualified_name}")
         self.emit("play", player=self, entry=entry)
 
     def setup_chapters(self):

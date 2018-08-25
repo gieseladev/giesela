@@ -108,13 +108,14 @@ class Player:
             return
         delay = self.bot.config.vc_disconnect_delay
         if delay is not None:
-            log.debug(f"auto disconnect in {delay} seconds")
+            log.debug(f"auto disconnect {player} in {delay} seconds")
             self._disconnects[guild_id] = asyncio.ensure_future(_delayed_disconnect(player, delay))
 
     def stop_disconnect(self, player: MusicPlayer):
         guild_id = player.channel.guild.id
         task = self._disconnects.pop(guild_id, None)
         if task:
+            log.debug(f"cancelled disconnect for {player}")
             task.cancel()
 
     def auto_pause(self, player: MusicPlayer, joined: bool = None):
@@ -124,11 +125,11 @@ class Player:
 
         # if the first new person joined
         if joined is True and sum(1 for vm in channel.members if not vm.bot) == 1:
-            log.info("auto-resuming")
+            log.info(f"auto-resuming {player}")
             self.stop_disconnect(player)
             player.resume()
         elif sum(1 for vm in channel.members if not vm.bot) == 0:
-            log.info("auto-pausing")
+            log.info(f"auto-pausing {player}")
             self.start_disconnect(player)
             player.pause()
 
