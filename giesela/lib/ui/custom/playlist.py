@@ -143,6 +143,7 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         await super().on_command_error(ctx, exception)
         await self.show_window()
 
+    # I hope you're using python 3.7 because I have absolutely no intention of rewriting this :P
     @contextlib.asynccontextmanager
     async def processing(self, ctx: Context, value: str, title: str = "Processing"):
         self._processing = (value, title)
