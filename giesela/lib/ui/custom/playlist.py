@@ -1,12 +1,14 @@
 import abc
+import asyncio
+import contextlib
 import textwrap
-from typing import List, TYPE_CHECKING
+from typing import List, TYPE_CHECKING, Tuple
 
 from discord import Colour, Embed, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Downloader, EditPlaylistProxy, Giesela, Playlist, PlaylistEntry
+from giesela import Downloader, EditPlaylistProxy, Giesela, Optional, Playlist, PlaylistEntry
 from .entry_editor import EntryEditor
 from ..help import AutoHelpEmbed
 from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
@@ -99,10 +101,14 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
     downloader: Downloader
     playlist_editor: EditPlaylistProxy
 
+    _processing: Optional[Tuple[str, str]]
+
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
         super().__init__(channel, user, **kwargs)
         self.downloader = self.player_cog.downloader
         self.playlist_editor = self.playlist.edit()
+
+        self._processing = None
 
     @property
     def help_title(self) -> str:
@@ -122,6 +128,10 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         changelog = self.playlist_editor.prepare_changelog(limit=5)
         if changelog:
             embed.add_field(name="Recent Changes", value=changelog, inline=False)
+        if self._processing:
+            embed.colour = Colour.blue()
+            value, name = self._processing
+            embed.add_field(name=name, value=value)
         if self.error:
             embed.colour = Colour.red()
             embed.add_field(name="Error", value=f"**{self.error}**")
@@ -132,6 +142,17 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
     async def on_command_error(self, ctx: Context, exception: Exception):
         await super().on_command_error(ctx, exception)
         await self.show_window()
+
+    @contextlib.asynccontextmanager
+    async def processing(self, ctx: Context, value: str, title: str = "Processing"):
+        self._processing = (value, title)
+        asyncio.ensure_future(self.show_window())
+
+        try:
+            async with ctx.typing():
+                yield None
+        finally:
+            self._processing = None
 
     @emoji_handler("💾", pos=999)
     async def save_changes(self, *_) -> str:
@@ -163,7 +184,10 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
     async def add_entry(self, ctx: Context, *query: str):
         """Add an entry"""
         query = " ".join(query)
-        entry = await self.downloader.get_entry_from_query(query)
+
+        async with self.processing(ctx, f"\"{query}\"", "Searching..."):
+            entry = await self.downloader.get_entry_from_query(query)
+
         if isinstance(entry, list):
             # TODO support this
             raise commands.CommandError("No playlist support yet, kthx")
