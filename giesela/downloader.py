@@ -39,10 +39,12 @@ ytdl_format_options = {
 
 youtube_dl.utils.bug_reports_message = lambda: ""
 
-_RE_RM_UNWANTED: Pattern = re.compile(r"[^a-z0-9]")
+_RE_RM_UNWANTED: Pattern = re.compile(r"[^a-zA-Z0-9]")
+_RE_RM_NECESSARY: Pattern = re.compile(r"[^a-zA-Z0-9_-]")
 _RE_RM_HOST_PARTS: Pattern = re.compile(r"(\.\w{2,3}$)|(^www\.)")
 
 RE_RM_UNWANTED = functools.partial(_RE_RM_UNWANTED.sub, "_")
+RE_RM_NECESSARY = functools.partial(_RE_RM_NECESSARY.sub, "")
 RE_RM_HOST_PARTS = functools.partial(_RE_RM_HOST_PARTS.sub, "")
 
 
@@ -80,7 +82,7 @@ class Downloader:
         parsed = urlparse(url)
         host = RE_RM_UNWANTED(RE_RM_HOST_PARTS(parsed.hostname.lower()))
         path = RE_RM_UNWANTED(parsed.path)
-        query = RE_RM_UNWANTED(parsed.query)
+        query = RE_RM_NECESSARY(parsed.query)
 
         return os.path.join(self.download_folder, f"{host}-{path}-{query}.audio")
 
