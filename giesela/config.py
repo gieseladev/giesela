@@ -17,6 +17,7 @@ class ConfigDefaults:
 
     command_prefix = os.getenv("command_prefix", "!")
     message_decay_delay = 30
+    vc_disconnect_delay = 20
 
     voice_channel_home = None
     idle_game = ""

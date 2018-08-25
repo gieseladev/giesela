@@ -1,7 +1,8 @@
+import asyncio
 import logging
 from typing import Dict, Optional, Union
 
-from discord import Game, Guild, Member, Message, User, VoiceChannel, VoiceState
+from discord import Game, Guild, Member, User, VoiceChannel, VoiceState
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -52,12 +53,19 @@ async def find_giesela_channel(bot: Giesela, guild: Guild, user: User = None) ->
     return guild.voice_channels[0]
 
 
+async def _delayed_disconnect(player: MusicPlayer, delay: int):
+    await asyncio.sleep(delay)
+    if player.connected:
+        await player.disconnect()
+
+
 class Player:
     bot: Giesela
     downloader: Downloader
 
     players: Dict[int, MusicPlayer]
-    status_messages: Dict[int, Message]
+
+    _disconnects: Dict[int, asyncio.Task]
 
     def __init__(self, bot: Giesela):
         self.bot = bot
@@ -65,7 +73,7 @@ class Player:
         self.downloader = Downloader(self.bot, download_folder=constants.AUDIO_CACHE_PATH)
 
         self.players = {}
-        self.status_messages = {}
+        self._disconnects = {}
 
     async def get_player(self, target: Union[Guild, Context], *,
                          create: bool = True, channel: VoiceChannel = None, member: Union[User, Member] = None) -> Optional[MusicPlayer]:
@@ -94,8 +102,22 @@ class Player:
                 return None
         return self.players[guild.id]
 
-    @classmethod
-    def auto_pause(cls, player: MusicPlayer, joined: bool = None):
+    def start_disconnect(self, player: MusicPlayer):
+        guild_id = player.channel.guild.id
+        if guild_id in self._disconnects:
+            return
+        delay = self.bot.config.vc_disconnect_delay
+        if delay is not None:
+            log.debug(f"auto disconnect in {delay} seconds")
+            self._disconnects[guild_id] = asyncio.ensure_future(_delayed_disconnect(player, delay))
+
+    def stop_disconnect(self, player: MusicPlayer):
+        guild_id = player.channel.guild.id
+        task = self._disconnects.pop(guild_id, None)
+        if task:
+            task.cancel()
+
+    def auto_pause(self, player: MusicPlayer, joined: bool = None):
         channel = player.channel
         if not channel:
             return
@@ -103,9 +125,11 @@ class Player:
         # if the first new person joined
         if joined is True and sum(1 for vm in channel.members if not vm.bot) == 1:
             log.info("auto-resuming")
+            self.stop_disconnect(player)
             player.resume()
         elif sum(1 for vm in channel.members if not vm.bot) == 0:
             log.info("auto-pausing")
+            self.start_disconnect(player)
             player.pause()
 
     async def on_player_play(self, player: MusicPlayer, entry: BaseEntry):

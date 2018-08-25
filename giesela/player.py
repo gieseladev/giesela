@@ -129,7 +129,10 @@ class MusicPlayer(EventEmitter):
 
     async def disconnect(self, **kwargs):
         if self.voice_client:
+            self.stop()
             await self.voice_client.disconnect(**kwargs)
+            self.voice_client = None
+        self.emit("disconnect", player=self)
 
     async def move_to(self, target: VoiceChannel):
         self.channel = target
@@ -247,7 +250,8 @@ class MusicPlayer(EventEmitter):
             self.voice_client.play(source, after=self._playback_finished)
         self.setup_chapters()
 
-        log.info(f"playing {entry} in {self.voice_client}")
+        vc_qualified_name = f"{self.channel.guild.name}#{self.channel.name}"
+        log.info(f"playing {entry} in {vc_qualified_name}")
         self.emit("play", player=self, entry=entry)
 
     def setup_chapters(self):

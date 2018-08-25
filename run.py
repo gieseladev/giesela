@@ -29,7 +29,8 @@ LOGGING = {
             "class": "logging.FileHandler",
             "level": "DEBUG",
             "formatter": "detailed",
-            "filename": "logs/giesela.txt"
+            "filename": "logs/giesela.txt",
+            "mode": "w"
         }
     },
     "loggers": {
