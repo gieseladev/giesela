@@ -422,12 +422,7 @@ class EditChange:
 
     @property
     def symbol(self) -> str:
-        if self.change_type == EditChange.ADDED:
-            return "+"
-        elif self.change_type == EditChange.REMOVED:
-            return "−"
-        elif self.change_type == EditChange.EDITED:
-            return "\✏"
+        return self.get_symbol(self.change_type)
 
     @classmethod
     def added(cls, entry: PlaylistEntry):
@@ -453,6 +448,15 @@ class EditChange:
             action = "unknown"
         return action
 
+    @classmethod
+    def get_symbol(cls, change_type: int) -> str:
+        if change_type == EditChange.ADDED:
+            return "+"
+        elif change_type == EditChange.REMOVED:
+            return "-"
+        elif change_type == EditChange.EDITED:
+            return "\✏"
+
     def apply(self, playlist: Playlist) -> bool:
         try:
             if self.change_type == self.ADDED:
@@ -472,12 +476,14 @@ class EditChange:
 class EditPlaylistProxy:
     _playlist: Playlist
     _entries: List[PlaylistEntry]
+    _entry_map: Dict[PlaylistEntry, EditChange]
 
     _changes: Deque[EditChange]
 
     def __init__(self, playlist: Playlist):
         self._playlist = playlist
         self._entries = playlist.entries.copy()
+        self._entry_map = {}
 
         self._changes = deque()
         self._undo_stack = deque(maxlen=25)
@@ -492,14 +498,19 @@ class EditPlaylistProxy:
     def entries(self) -> List[PlaylistEntry]:
         return self._entries
 
+    @property
+    def entry_map(self) -> Dict[PlaylistEntry, EditChange]:
+        return self._entry_map
+
     def rebuild_entries(self):
         entries = self._playlist.entries.copy()
+        self._entry_map.clear()
+
         for change in self._changes:
-            if change.change_type == EditChange.ADDED:
-                bisect.insort_left(entries, change.entry)
-            elif change.change_type == EditChange.REMOVED:
-                entries.remove(change.entry)
-            elif change.EDITED:
+            self._entry_map[change.entry] = change
+            if change.change_type == change.ADDED:
+                bisect.insort_left(self._entries, change.entry)
+            elif change.change_type == change.EDITED:
                 index = entries.index(change.entry)
                 entry = change.entry.copy()
                 entry.edit(**change.changes)
@@ -520,6 +531,9 @@ class EditPlaylistProxy:
             self._changes.append(change)
             self.rebuild_entries()
             return change
+
+    def get_change(self, entry: PlaylistEntry) -> Optional[EditChange]:
+        return self._entry_map.get(entry)
 
     def find_change(self, change_type: int, entry) -> EditChange:
         for change in self._changes:
@@ -559,9 +573,12 @@ class EditPlaylistProxy:
         try:
             change = self.find_change(EditChange.REMOVED, entry)
         except KeyError:
-            self._changes.append(EditChange.added(entry))
+            change = EditChange.added(entry)
+            self._changes.append(change)
+            self._entry_map[entry] = change
         else:
             self._changes.remove(change)
+            self._entry_map.pop(entry)
 
         bisect.insort_left(self._entries, entry)
         return entry
@@ -577,11 +594,13 @@ class EditPlaylistProxy:
         try:
             change = self.find_change(EditChange.ADDED, entry)
         except KeyError:
-            self._changes.append(EditChange.removed(entry))
+            change = EditChange.removed(entry)
+            self._changes.append(change)
+            self._entry_map[entry] = change
         else:
             self._changes.remove(change)
+            self._entry_map.pop(entry)
 
-        self._entries.remove(entry)
         return entry
 
     def edit_entry(self, entry: [int, PlaylistEntry], changes: Dict[str, Any]) -> PlaylistEntry:
@@ -594,7 +613,9 @@ class EditPlaylistProxy:
                 raise ValueError(f"{entry} doesn't seem to be in {self._playlist}")
 
         self._undo_stack.clear()
-        self._changes.append(EditChange.edited(entry, changes))
+        change = EditChange.edited(entry, changes)
+        self._changes.append(change)
+        self._entry_map[entry] = change
 
         edited_entry = entry.copy()
         edited_entry.edit(**changes)

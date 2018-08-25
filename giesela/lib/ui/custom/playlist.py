@@ -28,18 +28,6 @@ def create_basic_embed(playlist: Playlist) -> Embed:
     return embed
 
 
-def create_entry_list(playlist: Playlist) -> List[str]:
-    entries = []
-    index_padding = len(str(len(playlist)))
-
-    for ind, entry in enumerate(playlist, 1):
-        index = str(ind).rjust(index_padding, "0")
-        title = textwrap.shorten(entry.title, 50)
-        entries.append(f"`{index}.` {title}")
-
-    return entries
-
-
 class _PlaylistEmbed(VerticalTextViewer, metaclass=abc.ABCMeta):
     """
     Keyword Args:
@@ -139,6 +127,15 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
 
         return embed
 
+    async def get_line(self, line: int) -> str:
+        entry = self.entries[line]
+        index = str(line + 1).rjust(self.index_padding, "0")
+        title = textwrap.shorten(entry.title, 50)
+        change = self.playlist_editor.get_change(entry)
+        symbol = f"{change.symbol} " if change else ""
+
+        return f"{symbol}`{index}.` {title}"
+
     async def on_command_error(self, ctx: Context, exception: Exception):
         await super().on_command_error(ctx, exception)
         await self.show_window()
@@ -192,7 +189,10 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         if isinstance(entry, list):
             # TODO support this
             raise commands.CommandError("No playlist support yet, kthx")
-        entry = self.playlist_editor.add_entry(entry)
+        try:
+            entry = self.playlist_editor.add_entry(entry)
+        except KeyError:
+            raise commands.CommandError(f"\"{entry.title}\" is already in the playlist")
         await self.show_line(self.playlist_editor.index_of(entry))
 
     @commands.command("remove", aliases=["rm"])
