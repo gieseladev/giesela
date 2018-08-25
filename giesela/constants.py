@@ -1,4 +1,4 @@
-import os.path
+from os import path
 
 MAIN_VERSION = "5.4.3"
 SUB_VERSION = "refreshed"
@@ -10,5 +10,4 @@ maj_versions = {
     "3": "Giesenesis"
 }
 
-AUDIO_CACHE_PATH = "cache/audio_cache"
-ABS_AUDIO_CACHE_PATH = os.path.join(os.getcwd(), AUDIO_CACHE_PATH)
+AUDIO_CACHE_PATH = path.join("cache", "audio_cache")
