@@ -8,6 +8,8 @@ from discord.ext import commands
 from discord.ext.commands import Bot, Context
 
 from giesela import RestartSignal, TerminateSignal
+from giesela.lib.ui.custom import ShellUI
+from giesela.shell import InterpreterUnavailable
 
 
 class AdminTools:
@@ -66,6 +68,17 @@ class AdminTools:
         result = result.strip()
         if result:
             await ctx.send(result)
+
+    @commands.command()
+    @commands.is_owner()
+    async def shell(self, ctx: Context, interpreter: str = "python"):
+        """Open the GieselaShell™"""
+        try:
+            shell = ShellUI(ctx, shell=interpreter)
+        except InterpreterUnavailable as e:
+            raise commands.CommandError(e.msg)
+
+        await shell.display()
 
     @commands.command()
     @commands.is_owner()

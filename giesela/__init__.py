@@ -9,4 +9,5 @@ from .formatter import GieselaHelpFormatter, help_formatter
 from .player import MusicPlayer
 from .playlists import EditPlaylistProxy, Playlist, PlaylistEntry, PlaylistManager
 from .radio import *
+from .shell import GieselaShell
 from .webiesela import WebieselaServer

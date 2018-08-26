@@ -428,7 +428,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         _current_line = self.current_line
 
         while len(lines) < self.window_height:
-            if self.total_lines and _current_line >= self.total_lines:
+            if self.total_lines is not None and _current_line >= self.total_lines:
                 break
 
             line = await self.get_line(_current_line)
@@ -470,8 +470,8 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         return lines
 
     def format_embed(self, embed: Embed) -> Embed:
-        _progress = self.current_line / self.total_lines
-        _visible = self.lines_displayed / self.total_lines
+        _progress = (self.current_line / self.total_lines) if self.total_lines else 0
+        _visible = (self.lines_displayed / self.total_lines) if self.total_lines else 1
         progress_bar = text.keep_whitespace(text.create_scroll_bar(_progress, _visible, min(self.window_width, 30)))
 
         return format_embed(embed, _copy=False,

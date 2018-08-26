@@ -18,6 +18,7 @@ pynacl = "*"
 aiohttp = "*"
 websockets = "*"
 colorlog = "*"
+"js2py" = "*"
 
 [dev-packages]
 pytest = "*"

@@ -7,9 +7,17 @@ DEFAULT_EMPTY_CHAR = "□"
 
 LINE_CHAR = "▬"
 
+ESCAPE_CHARS = list(r"<>_*`\\")
+
 CLOSING_MAP = {
     "<": ">"
 }
+
+
+def escape_discord(text: str) -> str:
+    for char in ESCAPE_CHARS:
+        text = text.replace(char, f"\\{char}")
+    return text
 
 
 def find_closing(char: str) -> str:

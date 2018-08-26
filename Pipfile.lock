@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "97597b6de7b044c13f0a8936becfc8d6d6fd1973cb0797243be549ebc9616704"
+            "sha256": "441b85e2c0161e97cdf193860d68e9e56b920452688b3c7b3bd35d92fda8c791"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -54,19 +54,19 @@
         },
         "beautifulsoup4": {
             "hashes": [
-                "sha256:272081ad78c5495ba67083a0e50920163701fa6fe67fbb5eefeb21b5dd88c40b",
-                "sha256:5a3d659840960a4107047b6328d6d4cdaaee69939bf11adc07466a1856c99a80",
-                "sha256:bd43a3b26d2886acd63070c43da821b60dea603eb6d45bab0294aac6129adbfa"
+                "sha256:194ec62a25438adcb3fdb06378b26559eda1ea8a747367d34c33cef9c7f48d57",
+                "sha256:90f8e61121d6ae58362ce3bed8cd997efb00c914eae0ff3d363c32f9a9822d10",
+                "sha256:f0abd31228055d698bb392a826528ea08ebb9959e6bea17c606fd9c9009db938"
             ],
             "index": "pypi",
-            "version": "==4.6.1"
+            "version": "==4.6.3"
         },
         "certifi": {
             "hashes": [
-                "sha256:13e698f54293db9f89122b0581843a782ad0934a4fe0172d2a980ba77fc61bb7",
-                "sha256:9fa520c1bacfb634fa7af20a76bcbd3d5fb390481724c597da32c719a7dca4b0"
+                "sha256:4c1d68a1408dd090d2f3a869aa94c3947cc1d967821d1ed303208c9f41f0f2f4",
+                "sha256:b6e8b28b2b7e771a41ecdd12d4d43262ecab52adebbafa42c77d6b57fb6ad3a4"
             ],
-            "version": "==2018.4.16"
+            "version": "==2018.8.13"
         },
         "cffi": {
             "hashes": [
@@ -154,6 +154,14 @@
         "imgurpython": {
             "file": "https://github.com/Imgur/imgurpython/archive/master.zip"
         },
+        "js2py": {
+            "hashes": [
+                "sha256:322709555aafc38773961ac3ce7cd606bd513d1389e78dcad73625e13025fb5a",
+                "sha256:f4e344d0cc30c8f3e7c11033d4d6b7f57c2c9a27b263bebce392d58d23efbce4"
+            ],
+            "index": "pypi",
+            "version": "==0.59"
+        },
         "lyricsfinder": {
             "hashes": [
                 "sha256:05fdfff9739cae6b75984f6fdb25c3ccd4c54628b6b59a4b3256a73487aeb88f"
@@ -229,6 +237,12 @@
             ],
             "version": "==2.18"
         },
+        "pyjsparser": {
+            "hashes": [
+                "sha256:e4a659df3db42a2ff9fbc961eb6d4076a0b945e1aadfc20d48f913ad5dca011d"
+            ],
+            "version": "==2.5.2"
+        },
         "pynacl": {
             "hashes": [
                 "sha256:04e30e5bdeeb2d5b34107f28cd2f5bbfdc6c616f3be88fc6f53582ff1669eeca",
@@ -274,6 +288,13 @@
             "index": "pypi",
             "version": "==2.7.3"
         },
+        "pytz": {
+            "hashes": [
+                "sha256:a061aa0a9e06881eb8b3b2b43f05b9439d6583c206d0a6c340ff72a7b6669053",
+                "sha256:ffb9ef1de172603304d9d2819af6f5ece76f2e85ec10692a524dd876e72bf277"
+            ],
+            "version": "==2018.5"
+        },
         "raven": {
             "hashes": [
                 "sha256:3fd787d19ebb49919268f06f19310e8112d619ef364f7989246fc8753d469888",
@@ -302,6 +323,12 @@
             ],
             "index": "pypi",
             "version": "==2.4.4"
+        },
+        "tzlocal": {
+            "hashes": [
+                "sha256:4ebeb848845ac898da6519b9b31879cf13b6626f7184c496037b818e238f2c4e"
+            ],
+            "version": "==1.5.1"
         },
         "urllib3": {
             "hashes": [
@@ -355,10 +382,10 @@
         },
         "youtube-dl": {
             "hashes": [
-                "sha256:1ff26eaca0dc438c5ed7021ebe652a441ad320e1f52f20a01c75eadac9f68654",
-                "sha256:b26a6e0379ae6300c5fca3b610e89473577eaeb4e559877bfe81f6035f9e12f9"
+                "sha256:2f3c84fe20d6ed3ff7c7f456bf90d98d00218cc448040314a5762e441f2ad5ae",
+                "sha256:fbd00aed2cd5664d19a71b818ea4efb26337fc44d6a4d5913723f99ccbdc3e7b"
             ],
-            "version": "==2018.8.4"
+            "version": "==2018.8.22"
         }
     },
     "develop": {
@@ -410,11 +437,11 @@
         },
         "pytest": {
             "hashes": [
-                "sha256:86a8dbf407e437351cef4dba46736e9c5a6e3c3ac71b2e942209748e76ff2086",
-                "sha256:e74466e97ac14582a8188ff4c53e6cc3810315f342f6096899332ae864c1d432"
+                "sha256:3459a123ad5532852d36f6f4501dfe1acf4af1dd9541834a164666aa40395b02",
+                "sha256:96bfd45dbe863b447a3054145cd78a9d7f31475d2bce6111b133c0cc4f305118"
             ],
             "index": "pypi",
-            "version": "==3.7.1"
+            "version": "==3.7.2"
         },
         "pytest-asyncio": {
             "hashes": [
