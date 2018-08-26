@@ -104,8 +104,10 @@ class Player:
 
     def start_disconnect(self, player: MusicPlayer):
         guild_id = player.channel.guild.id
-        if guild_id in self._disconnects:
+        task = self._disconnects.get(guild_id)
+        if task and not task.done():
             return
+
         delay = self.bot.config.vc_disconnect_delay
         if delay is not None:
             log.debug(f"auto disconnect {player} in {delay} seconds")
