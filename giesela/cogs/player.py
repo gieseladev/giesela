@@ -118,8 +118,11 @@ class Player:
             log.debug(f"cancelled disconnect for {player}")
             task.cancel()
 
-    def auto_pause(self, player: MusicPlayer, joined: bool = None):
-        channel = player.channel
+    def auto_pause(self, player: MusicPlayer, joined: bool = False):
+        if not self.bot.config.auto_pause:
+            return
+
+        channel = player.voice_channel
         if not channel:
             return
 
@@ -180,9 +183,6 @@ class Player:
     async def on_voice_state_update(self, member: Member, before: VoiceState, after: VoiceState):
         giesela_voice = member.guild.me.voice
         if not giesela_voice:
-            return
-
-        if not self.bot.config.auto_pause:
             return
 
         if before.channel == after.channel:

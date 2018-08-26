@@ -129,6 +129,10 @@ class MusicPlayer(EventEmitter):
     def connected(self) -> bool:
         return self.voice_client and self.voice_client.is_connected()
 
+    @property
+    def voice_channel(self) -> VoiceChannel:
+        return self.bot.get_channel(self.channel.id)
+
     async def connect(self, **kwargs):
         if self.voice_client:
             await self.voice_client.connect(**kwargs)
@@ -147,6 +151,7 @@ class MusicPlayer(EventEmitter):
 
         if self.voice_client:
             await self.voice_client.move_to(target)
+            self.channel = target
         else:
             await self.connect()
 
