@@ -413,7 +413,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
 
     @property
     def last_line_visible(self) -> bool:
-        if self.lines:
+        if self.total_lines:
             return self.current_line + self.lines_displayed >= self.total_lines
         return False
 

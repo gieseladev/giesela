@@ -115,7 +115,7 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
     @property
     def embed_frame(self) -> Embed:
         embed = super().embed_frame
-        changelog = self.playlist_editor.prepare_changelog(limit=5)
+        changelog = self.playlist_editor.prepare_changelog(width=50, limit=3)
         if changelog:
             embed.add_field(name="Recent Changes", value=changelog, inline=False)
         if self._processing:

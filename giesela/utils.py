@@ -166,8 +166,8 @@ class SplitSongName(NamedTuple):
 
 
 RE_SPLIT_SONG_NAME_PATTERNS: List[Pattern] = [
-    re.compile(r"(?P<name>.+)\s+by\s+(?P<artist>.+)"),
-    re.compile(r"(?P<artist>.+)\s+[-|]\s+(?P<name>.+)")
+    re.compile(r"(?P<name>.+)\b\s*by\b\s*(?P<artist>.+)"),
+    re.compile(r"(?P<artist>.+)\b\s*[-|]\b\s*(?P<name>.+)")
 ]
 
 
