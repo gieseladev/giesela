@@ -1,5 +1,4 @@
 import asyncio
-import enum
 import logging
 import os
 from asyncio import AbstractEventLoop
@@ -17,15 +16,6 @@ if TYPE_CHECKING:
     from giesela import Giesela
 
 log = logging.getLogger(__name__)
-
-
-class RepeatState(enum.IntEnum):
-    NONE = 0  # queue plays as normal
-    ALL = 1  # Entire queue repeats
-    SINGLE = 2  # Currently playing song repeats forever
-
-    def __str__(self):
-        return self.name
 
 
 async def _delete_file(filename):

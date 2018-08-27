@@ -142,6 +142,8 @@ class PlaylistEntry:
     def edit(self, **changes):
         changes = filter_dict(changes, ENTRY_SLOTS)
         self._entry.update(changes)
+        if self.playlist:
+            self.playlist.save()
 
     def copy(self) -> "PlaylistEntry":
         data = self.to_gpl().copy()
@@ -311,7 +313,6 @@ class Playlist:
             raise KeyError(f"{entry} isn't in {self}")
 
         _entry.edit(**changes)
-        self.save()
 
     def has(self, entry: Union[BaseEntry, PlaylistEntry]) -> bool:
         for _entry in self:

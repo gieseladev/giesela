@@ -349,6 +349,10 @@ class Player:
         editor = EntryEditor(ctx.channel, ctx.author, bot=self.bot, entry=player.current_entry)
         new_entry = await editor.display()
         if new_entry and player.current_entry is editor.original_entry:
+            playlist_entry = new_entry.meta.get("playlist_entry")
+            if playlist_entry:
+                playlist_entry.edit(**editor.entry.get_changes())
+
             player.modify_current_entry(new_entry)
             await ctx.send(f"Saved changes to **{new_entry.title}**")
         else:
