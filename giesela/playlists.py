@@ -321,6 +321,20 @@ class Playlist:
                 return True
         return False
 
+    def search_entry(self, target: str, *, threshold: float = .8) -> Optional[PlaylistEntry]:
+        _entry = None
+        _similarity = 0
+        for entry in self.entries:
+            similarity = utils.similarity(target, (entry.title, entry.artist, entry.song_title), lower=True)
+            if similarity > _similarity:
+                _entry = entry
+                _similarity = similarity
+
+        if _similarity <= threshold:
+            return None
+
+        return _entry
+
     def rename(self, name: str):
         self.name = name
         self.save()

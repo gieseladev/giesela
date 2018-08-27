@@ -346,6 +346,15 @@ class Playlist:
         if entry in playlist:
             raise commands.CommandError(f"**{entry.title}** is already in this playlist!")
 
+        similar_entry = playlist.search_entry(entry.title)
+        if similar_entry:
+            prompt = PromptYesNo(ctx.channel, user=ctx.author,
+                                 text=f"\"{entry.title}\" might already be in this playlist (\"{similar_entry.title}\"), "
+                                      f"are you sure you want to add it again?")
+            if not await prompt:
+                await ctx.message.delete()
+                return
+
         playlist_entry = playlist.add(entry)
 
         if "playlist" not in entry.meta:
