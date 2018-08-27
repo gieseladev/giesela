@@ -2,7 +2,7 @@ import asyncio
 import random
 import time
 from random import shuffle
-from typing import Dict, Optional
+from typing import Dict, Iterable, Optional
 
 from discord import Embed, Message
 from discord.ext import commands
@@ -68,7 +68,7 @@ async def _play_url(ctx: Context, player: MusicPlayer, url: str, placement: int 
 
         async for ind, entry in entry_generator:
             if entry:
-                player.queue._add_entry(entry, placement)
+                player.queue.add_entry(entry, placement)
                 entries_added += 1
             else:
                 entries_not_added += 1
@@ -107,7 +107,7 @@ async def _play_url(ctx: Context, player: MusicPlayer, url: str, placement: int 
             format_time(delta_time, unit_length=1)
         ))
     else:
-        player.queue._add_entry(entry, placement)
+        player.queue.add_entry(entry, placement)
         await ctx.send("Enqueued **{}**".format(entry.title))
 
 
@@ -125,7 +125,7 @@ class EnqueueCog(QueueBase):
 
         async with ctx.typing():
             entry = await player.downloader.get_stream_entry(song_url, channel=ctx.channel, author=ctx.author)
-            player.queue._add_entry(entry)
+            player.queue.add_entry(entry)
         await ctx.send(":+1:")
 
     @commands.group(invoke_without_command=True)
@@ -179,27 +179,33 @@ class EnqueueCog(QueueBase):
         await player.queue.add_radio_entry(station_info, channel=ctx.channel, author=ctx.author, now=True)
         await ctx.send(f"I choose\n**{station_info.name}**")
 
-    @commands.command()
-    async def play(self, ctx: Context, url: str, placement: str = None):
-        """Adds the song to the queue.
+    async def _play_cmd(self, ctx: Context, url: Iterable[str], placement: int = None):
+        player = await self.get_player(ctx)
+        url = " ".join(url)
+
+        await _play_url(ctx, player, url, placement)
+
+    @commands.group(invoke_without_command=True, aliases=["p", "enqueue", "queue"])
+    async def play(self, ctx: Context, *url: str):
+        """Add an entry to the queue
 
         If no link is provided, the first
         result from a youtube search is added to the queue.
         """
+        await self._play_cmd(ctx, url)
+
+    @play.command("next")
+    async def play_next(self, ctx: Context, *url: str):
+        """Add an entry to the front of the queue"""
+        await self._play_cmd(ctx, url, placement=0)
+
+    @play.command("random", aliases=["soon", "anytime"])
+    async def play_random(self, ctx: Context, *url: str):
+        """Add an entry at a random position"""
         player = await self.get_player(ctx)
 
-        if placement:
-            placement = placement.lower()
-            if placement in ["next", "now", "first"]:
-                placement = 0
-            elif placement in ["anytime", "anywhere", "random"]:
-                placement = "random"
-            elif placement.isnumeric():
-                placement = int(placement) - 1
-            else:
-                raise commands.CommandError("Invalid placement. Did you forget to put quotes around your query?")
-
-        await _play_url(ctx, player, url, placement)
+        placement = random.randrange(0, len(player.queue))
+        await self._play_cmd(ctx, url, placement=placement)
 
     @commands.command()
     async def search(self, ctx: Context, *query: str):
@@ -291,72 +297,6 @@ class EnqueueCog(QueueBase):
 
             await delete_msgs()
 
-    # @commands.command()
-    # async def suggest(self, player, channel, author):
-    #     """
-    #     ///|Usage
-    #     `{command_prefix}suggest`
-    #     ///|Explanation
-    #     Find similar videos to the current one
-    #     """
-    #
-    #     if not player.current_entry:
-    #         return Response("Can't give you any suggestions when there's nothing playing.")
-    #
-    #     if not isinstance(player.current_entry, YoutubeEntry):
-    #         return Response("Can't provide any suggestions for this entry type")
-    #
-    #     vid_id = player.current_entry.video_id
-    #
-    #     videos = get_related_videos(vid_id)
-    #
-    #     if not videos:
-    #         return Response("Couldn't find anything.")
-    #
-    #     result_string = "**Result {0}/{1}**\n{2}"
-    #     interface_string = "**Commands:**\n`play` play this result\n\n`n` next result\n`p` previous result\n`exit` abort and exit"
-    #
-    #     current_result_index = 0
-    #     total_results = len(videos)
-    #
-    #     while True:
-    #         current_result = videos[current_result_index]
-    #
-    #         result_message = await self.safe_send_message(channel,
-    #                                                       result_string.format(current_result_index + 1, total_results, current_result["url"]))
-    #         interface_message = await self.safe_send_message(channel, interface_string)
-    #         response_message = await self.wait_for_message(100, author=author, channel=channel,
-    #                                                        check=lambda msg: msg.content.strip().lower().split()[0] in ("play", "n", "p", "exit"))
-    #
-    #         if not response_message:
-    #             await self.safe_delete_message(result_message)
-    #             await self.safe_delete_message(interface_message)
-    #             await self.safe_delete_message(response_message)
-    #             return Response("Aborting. [Timeout]")
-    #
-    #         content = response_message.content.strip()
-    #         command, *args = content.lower().split()
-    #
-    #         if command == "exit":
-    #             await self.safe_delete_message(result_message)
-    #             await self.safe_delete_message(interface_message)
-    #             await self.safe_delete_message(response_message)
-    #             return Response("Okay then. Suggest again soon *(Sorry, I couldn't resist)*")
-    #         elif command in "np":
-    #             # feels hacky but is actully genius
-    #             current_result_index += {"n": 1, "p": -1}[command]
-    #             current_result_index %= total_results
-    #         elif command == "play":
-    #             await self.send_typing(channel)
-    #             await self.play(player, channel, author, [], current_result["url"])
-    #             await self.safe_delete_message(result_message)
-    #             await self.safe_delete_message(interface_message)
-    #             await self.safe_delete_message(response_message)
-    #
-    #         await self.safe_delete_message(result_message)
-    #         await self.safe_delete_message(interface_message)
-    #         await self.safe_delete_message(response_message)
-
     @commands.command()
     async def spotify(self, ctx: Context, url: str):
         """Load a playlist or track from Spotify!"""
@@ -375,7 +315,7 @@ class EnqueueCog(QueueBase):
             await ctx.send(embed=em)
 
             entry = await model.get_spotify_entry(player.queue, author=ctx.author, channel=ctx.channel)
-            player.queue._add_entry(entry)
+            player.queue.add_entry(entry)
 
         elif isinstance(model, spotify.SpotifyPlaylist):
             playlist = model
@@ -395,7 +335,7 @@ class EnqueueCog(QueueBase):
 
             async for ind, entry in playlist.get_spotify_entries_generator(player.queue, channel=ctx.channel, author=ctx.author):
                 if entry:
-                    player.queue._add_entry(entry)
+                    player.queue.add_entry(entry)
                     entries_added += 1
                 else:
                     entries_not_added += 1

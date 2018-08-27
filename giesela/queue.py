@@ -41,6 +41,9 @@ class Queue(EventEmitter):
     def __iter__(self) -> Iterator[BaseEntry]:
         return iter(self.entries)
 
+    def __len__(self) -> int:
+        return len(self.entries)
+
     def get_web_dict(self):
         data = {
             "entries": [entry.to_web_dict(self.player) for entry in self.entries.copy()],
@@ -50,10 +53,12 @@ class Queue(EventEmitter):
 
     def shuffle(self):
         random.shuffle(self.entries)
+        self.emit("queue-shuffled", queue=self)
         WebieselaServer.send_player_information(self.player.channel.guild.id)
 
     def clear(self):
         self.entries.clear()
+        self.emit("queue-cleared", queue=self)
         WebieselaServer.send_player_information(self.player.channel.guild.id)
 
     def move(self, from_index: int, to_index: int) -> Optional[BaseEntry]:
@@ -69,6 +74,8 @@ class Queue(EventEmitter):
 
         if self.peek() is move_entry:
             move_entry.get_ready_future(self)
+
+        self.emit("entry-moved", queue=self, entry=move_entry, from_index=from_index, to_index=to_index)
 
         WebieselaServer.send_player_information(self.player.channel.guild.id)
 
@@ -86,7 +93,7 @@ class Queue(EventEmitter):
                 return False
             entry = self.history[index].copy()
 
-        self._add_entry(entry, placement=0)
+        self.add_entry(entry, placement=0)
 
         if revert and self.player.current_entry:
             self.player.skip()
@@ -109,7 +116,7 @@ class Queue(EventEmitter):
                 entry = playlist_entry.get_entry(**meta)
             except BrokenEntryError:
                 continue
-            self._add_entry(entry, more_to_come=True)
+            self.add_entry(entry, more_to_come=True)
         WebieselaServer.send_player_information(self.player.channel.guild.id)
         self.emit("entry-added", queue=self)
 
@@ -122,26 +129,20 @@ class Queue(EventEmitter):
         if now:
             await self.player.play(entry)
         else:
-            self._add_entry(entry)
+            self.add_entry(entry)
 
         return entry
 
     def add_entries(self, entries: Iterable[BaseEntry], placement: Union[str, int] = None):
         entry = None
         for entry in entries:
-            self._add_entry(entry, placement=placement, more_to_come=True)
+            self.add_entry(entry, placement=placement, more_to_come=True)
 
         WebieselaServer.send_player_information(self.player.channel.guild.id)
         self.emit("entry-added", queue=self, entry=entry)
 
-    def _add_entry(self, entry: BaseEntry, placement: Union[str, int] = None, more_to_come: bool = False):
+    def add_entry(self, entry: BaseEntry, placement: int = None, more_to_come: bool = False):
         if placement is not None:
-            if placement == "random":
-                if len(self.entries) > 0:
-                    placement = random.randrange(0, len(self.entries))
-                else:
-                    placement = 0
-
             self.entries.insert(placement, entry)
         else:
             self.entries.append(entry)
@@ -162,7 +163,7 @@ class Queue(EventEmitter):
 
         self.entries.rotate(position)
         self.entries.appendleft(entry)
-        self.emit("entry-added", queue=self, entry=entry)
+        self.emit("entry-promoted", queue=self, entry=entry)
 
         entry.get_ready_future(self)
 
@@ -176,7 +177,7 @@ class Queue(EventEmitter):
 
         entry = self.entries.pop()
         self.entries.appendleft(entry)
-        self.emit("entry-added", queue=self, entry=entry)
+        self.emit("entry-promoted", queue=self, entry=entry)
         entry.get_ready_future(self)
 
         WebieselaServer.send_player_information(self.player.channel.guild.id)
@@ -224,9 +225,6 @@ class Queue(EventEmitter):
         return await self.get_next_entry(pre_download_next)
 
     def peek(self) -> BaseEntry:
-        """
-            Returns the next entry that should be scheduled to be played.
-        """
         if self.entries:
             return self.entries[0]
 

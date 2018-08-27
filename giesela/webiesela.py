@@ -168,7 +168,7 @@ class GieselaWebSocket(WebSocket):
         try:
             async for ind, entry in entry_gen:
                 if entry:
-                    player.queue._add_entry(entry, placement=placement)
+                    player.queue.add_entry(entry, placement=placement)
         except Exception:
             log.exception("error while adding entry")
 
@@ -313,7 +313,7 @@ class GieselaWebSocket(WebSocket):
 
                 if playlist:
                     if 0 <= playlist_index < len(playlist["entries"]):
-                        _call_function_main_thread(player.queue._add_entry, playlist["entries"][playlist_index])
+                        _call_function_main_thread(player.queue.add_entry, playlist["entries"][playlist_index])
                         self.log("loaded index", playlist_index, "from playlist", playlist_id)
                         success = True
                     else:
