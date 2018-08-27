@@ -508,8 +508,12 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         next_embed = await self.get_current_embed()
         await self.edit(next_embed)
 
+    def set_focus_line(self, line: int):
+        displayed = self._lines_displayed or self.window_height
+        self._current_line = max(line - (displayed // 2), 0)
+
     async def show_line(self, line: int):
-        self._current_line = max(line - (self._lines_displayed // 2), 0)
+        self.set_focus_line(line)
         await self.show_window()
 
     @emoji_handler("🔼", pos=2)

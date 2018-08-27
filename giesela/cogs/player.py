@@ -363,6 +363,8 @@ class Player:
         """Try to find lyrics for the current entry and display 'em"""
         player = await self.get_player(ctx)
 
+        _progress_guess = None
+
         async with ctx.typing():
             if query:
                 query = " ".join(query)
@@ -372,6 +374,7 @@ class Player:
                     raise commands.CommandError("There's no way for me to find lyrics for something that doesn't even exist!")
                 query = player.current_entry.lyrics_search_query
                 lyrics = player.current_entry.lyrics
+                _progress_guess = player.progress / player.current_entry.duration
 
         if not lyrics:
             raise commands.CommandError("Couldn't find any lyrics for **{}**".format(query))
@@ -387,6 +390,9 @@ class Player:
             }
         }
         viewer = VerticalTextViewer(ctx.channel, ctx.author, embed_frame=frame, content=lyrics.lyrics)
+        if _progress_guess:
+            line = round(_progress_guess * viewer.total_lines)
+            viewer.set_focus_line(line)
         await viewer.display()
         await ctx.message.delete()
 
