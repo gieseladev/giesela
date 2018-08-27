@@ -370,7 +370,7 @@ class Player:
             else:
                 if not player.current_entry:
                     raise commands.CommandError("There's no way for me to find lyrics for something that doesn't even exist!")
-                query = player.current_entry.title
+                query = player.current_entry.lyrics_search_query
                 lyrics = player.current_entry.lyrics
 
         if not lyrics:

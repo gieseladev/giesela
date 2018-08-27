@@ -272,10 +272,6 @@ class RadioSongEntry(RadioStationEntry):
         self.uncertainty = self.station_info.uncertainty
 
     @property
-    def sort_attr(self):
-        return self.title
-
-    @property
     def title(self) -> str:
         return f"{self.artist} - {self.song_title}"
 
@@ -404,6 +400,10 @@ class GieselaEntry(YoutubeEntry):
     @property
     def sort_attr(self):
         return self.song_title
+
+    @property
+    def lyrics_search_query(self) -> str:
+        return f"{self.song_title} - {self.artist}"
 
     @classmethod
     def upgrade(cls, entry: BaseEntry, **kwargs):
