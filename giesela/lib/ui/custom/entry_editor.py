@@ -62,8 +62,11 @@ class EditableEntryData:
         if isinstance(entry, GieselaEntry):
             return cls(entry.song_title, entry.artist, entry.artist_image, entry.cover, entry.album)
 
+        editor = cls(entry.title)
         info = utils.split_song_name(entry)
-        return cls(info.name, info.artist)
+        editor.song_title = info.name
+        editor.artist = info.artist
+        return editor
 
     def reset_attr(self, attr: str):
         if attr in self._dirty:
