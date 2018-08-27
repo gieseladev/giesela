@@ -4,7 +4,7 @@ cache: pip
 language: python
 
 python:
-- "3.6-dev"
+- "3.7-dev"
 
 before_install:
 - sudo apt-get install build-essential unzip -y
