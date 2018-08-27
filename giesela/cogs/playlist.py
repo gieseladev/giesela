@@ -1,6 +1,8 @@
 import asyncio
 import json
+import operator
 import random
+import textwrap
 from io import BytesIO
 from typing import Dict, Optional
 
@@ -392,6 +394,28 @@ class PlaylistCog:
         data.seek(0)
         file = File(data, filename=f"{playlist.name.lower()}.gpl2")
         await ctx.send("Here you go", file=file)
+
+    @playlist.command("contains", aliases=["hasentry", "has", "find", "search"])
+    async def playlist_contains(self, ctx: Context, playlist: str, *, query: str):
+        """Check whether a playlist contains an entry"""
+        playlist = self.find_playlist(playlist)
+        entries = list(playlist.search_all_entries(query, threshold=.5))
+        if not entries:
+            raise commands.CommandError(f"Couldn't find \"{query}\"")
+        entries.sort(key=operator.itemgetter(1))
+        entries = next(zip(*entries[:10]))
+        indices = list(map(playlist.index_of, entries))
+        pad_length = len(str(max(indices)))
+
+        lines = []
+        for i, entry in enumerate(entries):
+            index = str(indices[i] + 1).rjust(pad_length, "0")
+            title = textwrap.shorten(entry.title, 50)
+            line = f"• `{index}.` {title}"
+            lines.append(line)
+
+        em = Embed(title="Found the following entries", description="\n".join(lines), colour=Colour.blue())
+        await ctx.send(embed=em)
 
     @commands.command("addtoplaylist", aliases=["quickadd", "pladd", "pl+"])
     async def playlist_quickadd(self, ctx: Context, playlist: str):

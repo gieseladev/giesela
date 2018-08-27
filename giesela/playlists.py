@@ -321,10 +321,19 @@ class Playlist:
                 return True
         return False
 
+    def index_of(self, entry: PlaylistEntry) -> int:
+        index = bisect.bisect_left(self.entries, entry)
+        if index == len(self.entries) or self.entries[index] != entry:
+            raise ValueError(f"{entry} doesn't seem to be in {self.entries}")
+
+        return index
+
     def search_entry(self, target: str, *, threshold: float = .8) -> Optional[PlaylistEntry]:
         _entry = None
         _similarity = 0
         for entry in self.entries:
+            if entry.url == target:
+                return entry
             similarity = utils.similarity(target, (entry.title, entry.artist, entry.song_title), lower=True)
             if similarity > _similarity:
                 _entry = entry
@@ -334,6 +343,14 @@ class Playlist:
             return None
 
         return _entry
+
+    def search_all_entries(self, target: str, *, threshold: float = .8) -> Iterator[Tuple[PlaylistEntry, float]]:
+        for entry in self.entries:
+            if entry.url == target:
+                yield entry, 1
+            similarity = utils.similarity(target, (entry.title, entry.artist, entry.song_title), lower=True)
+            if similarity > threshold:
+                yield entry, similarity
 
     def rename(self, name: str):
         self.name = name
