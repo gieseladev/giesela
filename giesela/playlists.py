@@ -182,7 +182,7 @@ class Playlist:
         self.name = kwargs.pop("name")
         self.description = kwargs.pop("description", None)
         self.cover = kwargs.pop("cover", None)
-        self.entries = sorted(kwargs.pop("entries"))
+        self.entries = sorted(kwargs.pop("entries", []))
         self.editor_ids = kwargs.pop("editors", [])
 
         author = kwargs.pop("author", None)

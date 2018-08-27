@@ -45,7 +45,7 @@ async def save_attachment(attachment: Attachment) -> BytesIO:
     return data
 
 
-class Playlist:
+class PlaylistCog:
     bot: Giesela
     playlist_manager: PlaylistManager
 
@@ -100,11 +100,7 @@ class Playlist:
         playlist = random.choice(playlists)
         await self.play_playlist(ctx, playlist)
 
-    @playlist.command("builder", aliases=["build", "edit", "manipulate"])
-    async def playlist_builder(self, ctx: Context, playlist: str):
-        """Edit a playlist"""
-        playlist = self.find_playlist(playlist)
-        await ensure_user_can_edit_playlist(playlist, ctx)
+    async def _playlist_builder(self, ctx: Context, playlist: Playlist):
         builder = PlaylistBuilder(ctx.channel, ctx.author, bot=self.bot, playlist=playlist)
         changelog = await builder.display()
         if changelog:
@@ -112,6 +108,30 @@ class Playlist:
             await ctx.send(embed=embed)
         else:
             await ctx.message.delete()
+
+    @playlist.command("create", aliases=["new"])
+    async def playlist_create(self, ctx: Context, *, name: str):
+        """Create a new playlist"""
+        if not name:
+            raise commands.CommandError("Your name is stupid, choose another one!")
+
+        similar_playlist = self.playlist_manager.find_playlist(name, threshold=.6)
+        if similar_playlist:
+            prompt = PromptYesNo(ctx.channel, user=ctx.author, text=f"There's already a playlist with a similar name (\"{similar_playlist.name}\"). "
+                                                                    f"Do you really want to create the playlist \"{name}\"")
+            if not await prompt:
+                return
+        playlist = Playlist(name=name, author=ctx.author)
+        playlist.manager = self.playlist_manager
+
+        await self._playlist_builder(ctx, playlist)
+
+    @playlist.command("builder", aliases=["build", "edit", "manipulate"])
+    async def playlist_builder(self, ctx: Context, playlist: str):
+        """Edit a playlist"""
+        playlist = self.find_playlist(playlist)
+        await ensure_user_can_edit_playlist(playlist, ctx)
+        await self._playlist_builder(ctx, playlist)
 
     @playlist.command("rename", aliases=["newname", "rn"])
     async def playlist_rename(self, ctx: Context, playlist: str, name: str):
@@ -392,4 +412,5 @@ class Playlist:
 
 
 def setup(bot: Giesela):
-    bot.add_cog(Playlist(bot))
+    PlaylistCog.__name__ = "Playlist"
+    bot.add_cog(PlaylistCog(bot))
