@@ -104,7 +104,7 @@ class Queue(EventEmitter):
         entry = entry.copy()
 
         entry.meta["finish_time"] = time.time()
-        self.history.append(entry)
+        self.history.appendleft(entry)
 
         WebieselaServer.send_player_information(self.player.channel.guild.id)
 
