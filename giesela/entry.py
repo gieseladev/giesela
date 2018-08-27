@@ -373,7 +373,7 @@ class TimestampEntry(YoutubeEntry):
         if player.current_entry is not self:
             return None
 
-        self.sub_entry_at(player.progress)
+        return self.sub_entry_at(player.progress)
 
     def to_dict(self) -> Dict[str, Any]:
         data = super().to_dict()

@@ -285,7 +285,7 @@ def _run_timestamp_matcher(text):
     timestamp_match = r"(?:(\d{1,2}):)?(\d{1,2}):(\d{2})(?:\s?.?\s?(?:\d{1,2}:)?(?:\d{1,2}):(?:\d{2}))?"
 
     for match in re.finditer(
-            r"^[\s\->]*" + timestamp_match + r"\W+(.+?)$",
+            r"^[^\w]*" + timestamp_match + r"\W+(.+?)$",
             text,
             flags=re.MULTILINE):
         timestamp = int(match.group(3))

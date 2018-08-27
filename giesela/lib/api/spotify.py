@@ -363,7 +363,7 @@ class SpotifyTrack:
 
 async def get_spotify_track(loop, query):
     track: SpotifyTrack = await loop.run_in_executor(None, SpotifyTrack.from_query, query)
-    if track:
+    if track and track.certainty > .6:
         return track.entry_data
 
 

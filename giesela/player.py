@@ -152,7 +152,8 @@ class MusicPlayer(EventEmitter):
     def skip(self, force: bool = False):
         if self.voice_client:
             if not force and isinstance(self.current_entry, TimestampEntry):
-                self.seek(self.current_entry.current_sub_entry["end"])
+                sub_entry = self.current_entry.get_sub_entry(self)
+                self.seek(sub_entry["end"])
             else:
                 self.voice_client.stop()
 

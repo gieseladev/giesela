@@ -98,7 +98,7 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
             title = sub_entry["name"]
             sub_index = sub_entry["index"]
 
-            footer = dict(text=f"{sub_index + 1}{ordinal(sub_index + 1)} sub-entry of \"{entry.whole_title}\" "
+            footer = dict(text=f"{sub_index + 1}{ordinal(sub_index + 1)} sub-entry of \"{entry.title}\" "
                                f"[{to_timestamp(song_progress)}/{to_timestamp(song_duration)}]")
 
             song_progress = sub_entry["progress"]
