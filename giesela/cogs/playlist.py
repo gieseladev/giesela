@@ -344,11 +344,13 @@ class Playlist:
             raise commands.CommandError("There's nothing playing right now")
 
         if entry in playlist:
-            if not await PromptYesNo(ctx.channel, user=ctx.author,
-                                     text=f"{entry.title} is already in this playlist, are you sure you want to add it again?"):
-                return
+            raise commands.CommandError(f"**{entry.title}** is already in this playlist!")
 
-        playlist.add(entry)
+        playlist_entry = playlist.add(entry)
+
+        if "playlist" not in entry.meta:
+            entry.meta["playlist"] = playlist
+            entry.meta["playlist_entry"] = playlist_entry
 
         await ctx.send(f"Added **{entry.title}** to **{playlist.name}**")
 
@@ -367,6 +369,8 @@ class Playlist:
             raise commands.CommandError(f"{entry.title} isn't in this playlist!")
 
         playlist.remove(entry)
+        entry.meta.pop("playlist")
+        entry.meta.pop("playlist_entry")
 
         await ctx.send(f"Removed **{entry.title}** from **{playlist.name}**")
 

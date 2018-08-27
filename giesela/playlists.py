@@ -286,7 +286,7 @@ class Playlist:
         data["entries"] = [entry.to_gpl() for entry in data.pop("entries")]
         return data
 
-    def add(self, entry: Union[BaseEntry, PlaylistEntry]):
+    def add(self, entry: Union[BaseEntry, PlaylistEntry]) -> PlaylistEntry:
         if not isinstance(entry, PlaylistEntry):
             entry = PlaylistEntry(entry)
         if entry in self:
@@ -295,6 +295,7 @@ class Playlist:
         entry.playlist = self
         bisect.insort_left(self.entries, entry)
         self.save()
+        return entry
 
     def remove(self, entry: Union[BaseEntry, PlaylistEntry]):
         for _entry in reversed(self):
