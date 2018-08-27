@@ -78,6 +78,7 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         if isinstance(entry, (RadioSongEntry, GieselaEntry)):
             author = dict(name=entry.artist)
             cover = entry.cover
+            title = entry.song_title
         else:
             cover = entry.thumbnail
             if entry_author:

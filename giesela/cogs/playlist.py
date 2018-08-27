@@ -364,15 +364,22 @@ class Playlist:
         await ctx.send(f"Added **{entry.title}** to **{playlist.name}**")
 
     @commands.command("removefromplaylist", aliases=["quickremove", "quickrm", "plremove", "plrm", "pl-"])
-    async def playlist_quickremove(self, ctx: Context, playlist: str):
+    async def playlist_quickremove(self, ctx: Context, playlist: str = None):
         """Remove the current entry from a playlist."""
-        playlist = self.find_playlist(playlist)
-        await ensure_user_can_edit_playlist(playlist, ctx)
-
         player = await self.player_cog.get_player(ctx)
         entry = player.current_entry
         if not entry:
             raise commands.CommandError("There's nothing playing right now")
+
+        if playlist:
+            playlist = self.find_playlist(playlist)
+        else:
+            playlist = entry.meta.get("playlist")
+            if not playlist:
+                raise commands.CommandError("This entry isn't part of a playlist."
+                                            "You cannot remove it unless you specify the name!")
+
+        await ensure_user_can_edit_playlist(playlist, ctx)
 
         if entry not in playlist:
             raise commands.CommandError(f"{entry.title} isn't in this playlist!")
