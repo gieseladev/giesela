@@ -185,7 +185,7 @@ class EnqueueCog(QueueBase):
 
         await _play_url(ctx, player, url, placement)
 
-    @commands.group(invoke_without_command=True, aliases=["p", "enqueue", "queue"])
+    @commands.group(invoke_without_command=True, aliases=["p", "enqueue"])
     async def play(self, ctx: Context, *url: str):
         """Add an entry to the queue
 

@@ -553,7 +553,7 @@ class EditPlaylistProxy:
         _entry = None
         _similarity = 0
         for entry in self._entries:
-            similarity = utils.similarity(target, entry.title, lower=True)
+            similarity = utils.similarity(target, (entry.title, entry.artist, entry.song_title), lower=True)
             if similarity > _similarity:
                 _entry = entry
                 _similarity = similarity

@@ -89,6 +89,7 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
     downloader: Downloader
     playlist_editor: EditPlaylistProxy
 
+    _highlighted_line: Optional[int]
     _processing: Optional[Tuple[str, str]]
 
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
@@ -96,6 +97,7 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         self.downloader = self.player_cog.downloader
         self.playlist_editor = self.playlist.edit()
 
+        self._highlighted_line = None
         self._processing = None
 
     @property
@@ -131,6 +133,9 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         entry = self.entries[line]
         index = str(line + 1).rjust(self.index_padding, "0")
         title = textwrap.shorten(entry.title, 50)
+        if self._highlighted_line == line:
+            title = f"**{title}**"
+
         change = self.playlist_editor.get_change(entry)
         symbol = f"{change.symbol} " if change else ""
 
@@ -230,11 +235,12 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         """Show a specific line or entry."""
         target = " ".join(target)
         if target.isnumeric():
-            line = int(target)
+            line = int(target) - 1
         else:
             entry = self.playlist_editor.search_entry(target)
             if not entry:
                 raise commands.CommandError(f"Couldn't find entry {target}")
             line = self.playlist_editor.index_of(entry)
-        # TODO highlight line
+
+        self._highlighted_line = line
         await self.show_line(line)
