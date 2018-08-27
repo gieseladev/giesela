@@ -283,6 +283,9 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
     def current_index(self) -> int:
         return self._current_index
 
+    def set_index(self, index: int):
+        self._current_index = index
+
     async def get_current_embed(self) -> Embed:
         if self.embeds:
             return self.embeds[self.current_index % len(self.embeds)]

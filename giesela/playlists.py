@@ -343,9 +343,10 @@ class Playlist:
         self.description = description
         self.save()
 
-    async def set_cover(self, cover: str = None) -> bool:
+    async def set_cover(self, cover: str = None, *, no_upload: bool = False) -> bool:
         if cover:
-            cover = await imgur.upload_playlist_cover(self.name, cover)
+            if not no_upload:
+                cover = await imgur.upload_playlist_cover(self.name, cover)
         else:
             cover = await self.generate_cover()
 

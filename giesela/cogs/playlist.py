@@ -1,14 +1,15 @@
+import asyncio
 import json
 import random
 from io import BytesIO
-from typing import Optional
+from typing import Dict, Optional
 
 from discord import Attachment, Colour, Embed, File, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import Giesela, Playlist, PlaylistManager, help_formatter, utils
-from giesela.lib.ui import EditableEmbed, EmbedPaginator, EmbedViewer, PromptYesNo
+from giesela.lib.ui import EmbedPaginator, EmbedViewer, ItemPicker, PromptYesNo
 from giesela.lib.ui.custom import PlaylistBuilder, PlaylistViewer
 from .player import Player
 
@@ -181,15 +182,55 @@ class PlaylistCog:
         """
         playlist = self.find_playlist(playlist)
         await ensure_user_is_author(playlist, ctx, "change its cover")
-        msg = EditableEmbed(ctx.channel)
-        await msg.edit(Embed(description="working...", colour=Colour.blue()))
 
-        if await playlist.set_cover():
-            embed = Embed(description=f"This is the new face of **{playlist.name}**", colour=Colour.green())
-            embed.set_image(url=playlist.cover)
-            await msg.edit(embed=embed)
-        else:
-            await msg.edit(Embed(description=f"Couldn't generate a cover...", colour=Colour.red()))
+        _error: Exception = None
+        covers: Dict[int, str] = {}
+        cover_generator: asyncio.Task = asyncio.ensure_future(playlist.generate_cover())
+
+        async def get_cover_page(page_index: int) -> Embed:
+            nonlocal cover_generator
+
+            relative_index = max(page_index - (min(covers) if covers else 0), 0) + 1
+            total_covers = max(len(covers), relative_index)
+
+            em = Embed(description="How about this one?", colour=Colour.orange())
+            em.set_footer(text=f"Showing cover {relative_index}/{total_covers}")
+
+            _cover = covers.get(page_index)
+            if not _cover:
+                em.description = "Still Generating..."
+                em.colour = Colour.blue()
+                await picker.edit(em)
+                _cover = await cover_generator
+                if not _cover:
+                    em.description = "Couldn't generate cover"
+                    em.colour = Colour.red()
+                    return em
+                cover_generator = asyncio.ensure_future(playlist.generate_cover())
+
+                covers[page_index] = _cover
+                return await get_cover_page(page_index)
+
+            em.set_image(url=_cover)
+            return em
+
+        picker = ItemPicker(ctx.channel, ctx.author, embed_callback=get_cover_page)
+
+        try:
+            index = await picker.choose()
+        except ValueError:
+            raise commands.CommandError("Couldn't generate a cover...")
+
+        if not index:
+            await ctx.message.delete()
+            return
+
+        cover = covers[index]
+        await playlist.set_cover(cover, no_upload=True)
+
+        embed = Embed(description=f"This is the new face of **{playlist.name}**", colour=Colour.green())
+        embed.set_image(url=playlist.cover)
+        await ctx.send(embed=embed)
 
     @playlist.command("delete", aliases=["rm", "remove"])
     async def playlist_delete(self, ctx: Context, playlist: str):
