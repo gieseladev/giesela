@@ -242,5 +242,8 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
                 raise commands.CommandError(f"Couldn't find entry {target}")
             line = self.playlist_editor.index_of(entry)
 
+        if line >= len(self.entries):
+            raise commands.CommandError("Line number too big!")
+
         self._highlighted_line = line
         await self.show_line(line)
