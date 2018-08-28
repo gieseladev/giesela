@@ -50,7 +50,8 @@ def get_uuid(gpl_id: UUIDType) -> uuid.UUID:
 
 ENTRY_SLOTS = ("version", "type", "filename",  # meta
                "video_id", "url", "title", "duration", "thumbnail",  # basic
-               "song_title", "artist", "artist_image", "cover", "album")  # complex
+               "sub_queue",
+               "song_title", "artist", "artist_image", "cover", "album")  # gieselaentry
 
 
 class PlaylistEntry:
@@ -142,6 +143,7 @@ class PlaylistEntry:
     def edit(self, **changes):
         changes = filter_dict(changes, ENTRY_SLOTS)
         self._entry.update(changes)
+        log.debug(f"applying changes {changes} to {self}")
         if self.playlist:
             self.playlist.save()
 
@@ -322,11 +324,7 @@ class Playlist:
         return False
 
     def index_of(self, entry: PlaylistEntry) -> int:
-        index = bisect.bisect_left(self.entries, entry)
-        if index == len(self.entries) or self.entries[index] != entry:
-            raise ValueError(f"{entry} doesn't seem to be in {self.entries}")
-
-        return index
+        return self.entries.index(entry)
 
     def search_entry(self, target: str, *, threshold: float = .8) -> Optional[PlaylistEntry]:
         _entry = None
@@ -379,7 +377,7 @@ class Playlist:
             log.debug("not saving playlist because it's open")
             return
         self.manager.save_playlist(self)
-        log.debug(f"saved playlist {self}")
+        log.debug(f"saved {self}")
 
     def edit(self) -> "EditPlaylistProxy":
         return EditPlaylistProxy(self)
@@ -576,11 +574,7 @@ class EditPlaylistProxy:
         raise KeyError(f"Couldn't find that change: {EditChange.name(change_type)} {entry}")
 
     def index_of(self, entry: PlaylistEntry) -> int:
-        index = bisect.bisect_left(self._entries, entry)
-        if index == len(self._entries) or self._entries[index] != entry:
-            raise ValueError(f"{entry} doesn't seem to be in {self._playlist}")
-
-        return index
+        return self._entries.index(entry)
 
     def search_entry(self, target: str, *, threshold: float = .2) -> Optional[PlaylistEntry]:
         _entry = None
@@ -642,9 +636,7 @@ class EditPlaylistProxy:
             index = entry
             entry = self._entries[entry]
         else:
-            index = bisect.bisect_left(self._entries, entry)
-            if index == len(self._entries) or self._entries[index] != entry:
-                raise ValueError(f"{entry} doesn't seem to be in {self._playlist}")
+            index = self.index_of(entry)
 
         self._undo_stack.clear()
         change = EditChange.edited(entry, changes)

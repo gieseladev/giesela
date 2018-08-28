@@ -348,15 +348,18 @@ class Player:
             raise commands.CommandError("There's nothing playing right now")
         editor = EntryEditor(ctx.channel, ctx.author, bot=self.bot, entry=player.current_entry)
         new_entry = await editor.display()
-        if new_entry and player.current_entry is editor.original_entry:
-            playlist_entry = new_entry.meta.get("playlist_entry")
-            if playlist_entry:
-                playlist_entry.edit(**editor.entry.get_changes())
 
+        if not new_entry:
+            await ctx.message.delete()
+            return
+
+        if player.current_entry is editor.original_entry:
             player.modify_current_entry(new_entry)
             await ctx.send(f"Saved changes to **{new_entry.title}**")
-        else:
-            await ctx.message.delete()
+
+        playlist_entry = player.current_entry.meta.get("playlist_entry")
+        if playlist_entry:
+            playlist_entry.edit(**new_entry.to_dict())
 
     @commands.command()
     async def lyrics(self, ctx: Context, *query: str):
