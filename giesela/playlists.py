@@ -7,7 +7,7 @@ from pathlib import Path
 from shelve import DbfilenameShelf, Shelf
 from typing import Any, Callable, Container, Deque, Dict, Iterable, Iterator, List, Mapping, Optional, Set, Tuple, Type, TypeVar, Union
 
-from discord import TextChannel, User
+from discord import User
 
 from . import entry as entry_module, mosaic, utils
 from .bot import Giesela
@@ -151,9 +151,12 @@ class PlaylistEntry:
         data = self.to_gpl().copy()
         return self.from_gpl(data)
 
-    def get_entry(self, *, author: User, channel: TextChannel, **meta) -> BaseEntry:
-        entry = Entry.from_dict(self._entry)
-        meta.update(author=author, channel=channel, playlist=self.playlist, playlist_entry=self)
+    def build_entry(self) -> BaseEntry:
+        return Entry.from_dict(self._entry)
+
+    def get_entry(self, *, author: User, **meta) -> BaseEntry:
+        entry = self.build_entry()
+        meta.update(author=author, playlist=self.playlist, playlist_entry=self)
         entry.meta.update(meta)
         return entry
 

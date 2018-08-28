@@ -4,7 +4,7 @@ import contextlib
 import textwrap
 from typing import List, TYPE_CHECKING, Tuple
 
-from discord import Colour, Embed, TextChannel, User
+from discord import Colour, Embed, Guild, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -71,9 +71,9 @@ class _PlaylistEmbed(VerticalTextViewer, metaclass=abc.ABCMeta):
 
         return f"`{index}.` {title}"
 
-    async def play(self, channel: TextChannel, user: User):
-        player = await self.player_cog.get_player(channel.guild, member=user)
-        await self.playlist.play(player.queue, channel=channel, author=user)
+    async def play(self, guild: Guild, user: User):
+        player = await self.player_cog.get_player(guild, member=user)
+        await self.playlist.play(player.queue, author=user)
 
 
 class PlaylistViewer(_PlaylistEmbed):
@@ -86,7 +86,7 @@ class PlaylistViewer(_PlaylistEmbed):
 
     @emoji_handler("🎵", pos=999)
     async def play_playlist(self, *_):
-        await self.play(self.channel, self.user)
+        await self.play(self.channel.guild, self.user)
         await self.remove_handler(self.play_playlist)
 
 
@@ -184,7 +184,7 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         if not 0 <= index < len(self.entries):
             raise commands.CommandError(f"Index out of bounds  ({index + 1} not in 1 - {len(self.entries)})")
         entry = self.entries[index]
-        editor = EntryEditor(ctx.channel, ctx.author, bot=self.bot, entry=entry.get_entry(author=ctx.author, channel=ctx.channel))
+        editor = EntryEditor(ctx.channel, ctx.author, bot=self.bot, entry=entry.get_entry(author=ctx.author))
         new_entry = await editor.display()
         if new_entry:
             self.playlist_editor.edit_entry(entry, new_entry.to_dict())

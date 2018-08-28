@@ -42,7 +42,7 @@ async def _play_url(ctx: Context, player: MusicPlayer, url: str, placement: int 
 
     try:
         async with ctx.typing():
-            entry = await player.downloader.get_entry_from_query(query, author=ctx.author, channel=ctx.channel)
+            entry = await player.downloader.get_entry_from_query(query, author=ctx.author)
     except BaseException as e:
         raise commands.CommandError("There was a tiny problem with your request:\n```\n{}\n```".format(e))
 
@@ -56,7 +56,7 @@ async def _play_url(ctx: Context, player: MusicPlayer, url: str, placement: int 
         entries_added = 0
         entries_not_added = 0
 
-        entry_generator = player.downloader.get_entries_from_urls_gen(*entry, author=ctx.author, channel=ctx.channel)
+        entry_generator = player.downloader.get_entries_from_urls_gen(*entry, author=ctx.author)
 
         total_entries = len(entry)
         progress_message = await ctx.send("Parsing {} entries\n{} [0%]".format(total_entries, create_bar(0, length=20)))
@@ -124,7 +124,7 @@ class EnqueueCog(QueueBase):
         song_url = url.strip("<>")
 
         async with ctx.typing():
-            entry = await player.downloader.get_stream_entry(song_url, channel=ctx.channel, author=ctx.author)
+            entry = await player.downloader.get_stream_entry(song_url, author=ctx.author)
             player.queue.add_entry(entry)
         await ctx.send(":+1:")
 
@@ -140,7 +140,7 @@ class EnqueueCog(QueueBase):
         if station:
             station_info = RadioStations.get_station(station.lower())
             if station_info:
-                await player.queue.add_radio_entry(station_info, channel=ctx.channel, author=ctx.author, now=True)
+                await player.queue.add_radio_entry(station_info, author=ctx.author, now=True)
                 await ctx.send(f"Your favourite:\n**{station_info.name}**")
                 return
 
@@ -168,7 +168,7 @@ class EnqueueCog(QueueBase):
             await ctx.send("Okay then")
         else:
             station = possible_stations[result % len(possible_stations)]
-            await player.queue.add_radio_entry(station, channel=ctx.channel, author=ctx.author)
+            await player.queue.add_radio_entry(station, author=ctx.author)
             await ctx.send(f"There you go fam!\n**{station.name}**")
 
     @radio.command("random")
@@ -176,7 +176,7 @@ class EnqueueCog(QueueBase):
         """Play a random radio station."""
         player = await self.get_player(ctx)
         station_info = get_random_station()
-        await player.queue.add_radio_entry(station_info, channel=ctx.channel, author=ctx.author, now=True)
+        await player.queue.add_radio_entry(station_info, author=ctx.author, now=True)
         await ctx.send(f"I choose\n**{station_info.name}**")
 
     async def _play_cmd(self, ctx: Context, url: Iterable[str], placement: int = None):
@@ -314,7 +314,7 @@ class EnqueueCog(QueueBase):
 
             await ctx.send(embed=em)
 
-            entry = await model.get_spotify_entry(player.queue, author=ctx.author, channel=ctx.channel)
+            entry = await model.get_spotify_entry(player.queue, author=ctx.author)
             player.queue.add_entry(entry)
 
         elif isinstance(model, spotify.SpotifyPlaylist):
@@ -333,7 +333,7 @@ class EnqueueCog(QueueBase):
 
             loading_bar = LoadingBar(ctx.channel, header="Loading Playlist", total_items=total_tracks, item_name_plural="tracks")
 
-            async for ind, entry in playlist.get_spotify_entries_generator(player.queue, channel=ctx.channel, author=ctx.author):
+            async for ind, entry in playlist.get_spotify_entries_generator(player.queue, author=ctx.author):
                 if entry:
                     player.queue.add_entry(entry)
                     entries_added += 1

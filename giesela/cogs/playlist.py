@@ -81,7 +81,7 @@ class PlaylistCog:
 
     async def play_playlist(self, ctx: Context, playlist: Playlist):
         player = await self.player_cog.get_player(ctx)
-        await playlist.play(player.queue, channel=ctx.channel, author=ctx.author)
+        await playlist.play(player.queue, author=ctx.author)
         await ctx.send("Loaded playlist", embed=playlist_embed(playlist))
 
     async def _playlist_builder(self, ctx: Context, playlist: Playlist):

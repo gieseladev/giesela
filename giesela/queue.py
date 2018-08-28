@@ -151,7 +151,7 @@ class Queue(EventEmitter):
             entry.get_ready_future(self)
 
         if not more_to_come:
-            WebieselaServer.send_player_information(entry.meta["channel"].guild.id)
+            WebieselaServer.send_player_information(self.player.guild.id)
             self.emit("entry-added", queue=self, entry=entry)
 
     def promote_position(self, position: int) -> Optional[BaseEntry]:

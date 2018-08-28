@@ -75,11 +75,13 @@ class Player:
         self.players = {}
         self._disconnects = {}
 
-    async def get_player(self, target: Union[Guild, Context], *,
+    async def get_player(self, target: Union[Guild, Context, int], *,
                          create: bool = True, channel: VoiceChannel = None, member: Union[User, Member] = None) -> Optional[MusicPlayer]:
         if isinstance(target, Context):
             guild = target.guild
             member = member or target.author
+        elif isinstance(target, int):
+            guild = self.bot.get_guild(target)
         else:
             guild = target
 

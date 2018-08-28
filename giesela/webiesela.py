@@ -4,16 +4,17 @@ import hashlib
 import inspect
 import json
 import logging
+import os
 import random
 import threading
-import uuid
 from json.decoder import JSONDecodeError
 from pathlib import Path
 from string import ascii_lowercase
-from typing import Callable, Dict, Optional, TYPE_CHECKING, Tuple
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, TYPE_CHECKING, Tuple, TypeVar
 
-from discord import Guild, Member
+from discord import Guild
 
+from . import utils
 from .config import static_config
 from .entry import TimestampEntry
 from .lib.api import spotify
@@ -22,7 +23,7 @@ from .radio import RadioStations, get_all_stations
 from .web_author import WebAuthor
 
 if TYPE_CHECKING:
-    from .bot import Giesela
+    from giesela import MusicPlayer, Giesela
     from .cogs.webiesela import Webiesela
 
 log = logging.getLogger(__name__)
@@ -32,12 +33,15 @@ class ErrorCode:
     registration_required = 1000
 
 
-async def _tuple_generator(collection):
+IT = TypeVar("IT")
+
+
+async def _tuple_generator(collection: Iterable[IT]) -> Iterator[Tuple[int, IT]]:
     for i, el in enumerate(collection):
         yield i, el
 
 
-def _call_function_main_thread(func, *args, wait_for_result=False, **kwargs):
+def _call_function_main_thread(func: Callable, *args, wait_for_result: bool = False, **kwargs) -> Any:
     fut = asyncio.run_coroutine_threadsafe(asyncio.coroutine(func)(*args, **kwargs), WebieselaServer.bot.loop)
 
     if wait_for_result:
@@ -49,17 +53,17 @@ def _call_function_main_thread(func, *args, wait_for_result=False, **kwargs):
 class GieselaWebSocket(WebSocket):
     _discord_guild: Optional[Guild]
     token: str
-    registration_token: str
+    registration_token: Optional[str]
 
     def init(self):
         self.registration_token = None
         self._discord_guild = None
 
     @property
-    def discord_server(self):
+    def discord_guild(self) -> Guild:
         if not self._discord_guild:
-            server_id, *_ = WebieselaServer.get_token_information(self.token)
-            self._discord_guild = WebieselaServer.bot.get_guild(server_id)
+            guild_id, *_ = WebieselaServer.get_token_information(self.token)
+            self._discord_guild = WebieselaServer.bot.get_guild(guild_id)
 
         return self._discord_guild
 
@@ -67,12 +71,12 @@ class GieselaWebSocket(WebSocket):
         message = " ".join(str(msg) for msg in messages)
 
         try:
-            server_id, author = WebieselaServer.get_token_information(self.token)
-            identification = "[{}@{}] | {}".format(author.name, self.discord_server.name, self.address[0])
+            guild_id, author = WebieselaServer.get_token_information(self.token)
+            identification = "[{}@{}] | {}".format(author.name, self.discord_guild.name, self.address[0])
         except AttributeError:
             identification = self.address
 
-        print("[WEBSOCKET] <{}> {}".format(identification, message))
+        log.info("<{}> {}".format(identification, message))
 
     def handleMessage(self):
         try:
@@ -93,10 +97,10 @@ class GieselaWebSocket(WebSocket):
                     self.handle_authenticated_msg(data)
                     return
                 else:
-                    print("[WEBSOCKET] <{}> invalid token provided".format(
+                    log.warning("[WEBSOCKET] <{}> invalid token provided".format(
                         self.address))
             else:
-                print("[WEBSOCKET] <{}> no token provided".format(self.address))
+                log.warning("[WEBSOCKET] <{}> no token provided".format(self.address))
 
             register = data.get("request", None) == "register"
             if register:
@@ -105,7 +109,7 @@ class GieselaWebSocket(WebSocket):
 
                 self.registration_token = registration_token
 
-                print("[WEBSOCKET] <{}> Waiting for registration with token: {}".format(
+                log.info("[WEBSOCKET] <{}> Waiting for registration with token: {}".format(
                     self.address, registration_token))
 
                 answer = {
@@ -117,7 +121,7 @@ class GieselaWebSocket(WebSocket):
                 self.sendMessage(json.dumps(answer))
                 return
             else:
-                print("[WEBSOCKET] <{}> Didn't ask to be registered".format(
+                log.warning("[WEBSOCKET] <{}> Didn't ask to be registered".format(
                     self.address))
                 answer = {
                     "response": True,
@@ -129,7 +133,7 @@ class GieselaWebSocket(WebSocket):
             log.exception("error while handling message")
             raise
 
-    async def play_entry(self, player, answer, kind, item, searcher, mode):
+    async def play_entry(self, player: "MusicPlayer", answer: Dict[str, Any], kind: str, item: Dict[str, Any], searcher: str, mode: str):
         success = False
         entry_gen = []
 
@@ -172,7 +176,18 @@ class GieselaWebSocket(WebSocket):
         except Exception:
             log.exception("error while adding entry")
 
-    def handle_authenticated_msg(self, data):
+    def playlists_overview(self, player: "MusicPlayer") -> List[Dict[str, Any]]:
+        _playlists = WebieselaServer.cog.playlist_manager.playlists
+        playlists = []
+        for playlist in _playlists:
+            author = WebAuthor.from_user(playlist.author).to_dict()
+            entries = [entry.build_entry().to_web_dict(player) for entry in playlist]
+            pl = dict(id=playlist.gpl_id.hex, name=playlist.name, description=playlist.description, cover=playlist.cover, author=author,
+                      entries=entries, duration=playlist.duration, human_dur=utils.format_time(playlist.duration, max_specifications=1))
+            playlists.append(pl)
+        return playlists
+
+    def handle_authenticated_msg(self, data: Dict[str, Any]):
         answer = {
             "response": True,
             "request_id": data.get("id")
@@ -181,8 +196,11 @@ class GieselaWebSocket(WebSocket):
         request = data.get("request")
         command = data.get("command")
         command_data = data.get("command_data", {})
+        guild_id, author = WebieselaServer.get_token_information(self.token)
 
         if request:
+            player = WebieselaServer.get_player(token=self.token)
+
             # send all the information one can acquire
             if request == "send_information":
                 self.log("asked for general information")
@@ -197,8 +215,7 @@ class GieselaWebSocket(WebSocket):
             elif request == "send_playlists":
                 self.log("asked for playlists")
 
-                player = WebieselaServer.get_player(token=self.token)
-                answer["playlists"] = player.bot.playlists.get_all_web_playlists(player.queue)
+                answer["playlists"] = self.playlists_overview(player)
 
             elif request == "send_radio_stations":
                 self.log("asked for the radio stations")
@@ -207,7 +224,6 @@ class GieselaWebSocket(WebSocket):
 
             elif request == "send_lyrics":
                 self.log("asked for lyrics")
-                player = WebieselaServer.get_player(token=self.token)
 
                 if player.current_entry:
                     lyrics = player.current_entry.lyrics
@@ -288,7 +304,7 @@ class GieselaWebSocket(WebSocket):
 
             elif command == "remove":
                 remove_index = command_data.get("index")
-                success = bool(_call_function_main_thread(player.queue.remove_position, remove_index, wait_for_result=True) is not None)
+                success = bool(_call_function_main_thread(player.queue.remove_position, remove_index, wait_for_result=True))
                 self.log("removed", remove_index)
 
             elif command == "promote":
@@ -309,11 +325,12 @@ class GieselaWebSocket(WebSocket):
                 playlist_id = command_data.get("playlist_id")
                 playlist_index = command_data.get("index")
 
-                playlist = WebieselaServer.bot.playlists.get_playlist(playlist_id, player.queue)
+                playlist = WebieselaServer.cog.playlist_manager.get_playlist(playlist_id)
 
                 if playlist:
-                    if 0 <= playlist_index < len(playlist["entries"]):
-                        _call_function_main_thread(player.queue.add_entry, playlist["entries"][playlist_index])
+                    if 0 <= playlist_index < len(playlist):
+                        entry = playlist.entries[playlist_index].get_entry(author=author.discord_user)
+                        _call_function_main_thread(player.queue.add_entry, entry, wait_for_result=True)
                         self.log("loaded index", playlist_index, "from playlist", playlist_id)
                         success = True
                     else:
@@ -326,13 +343,13 @@ class GieselaWebSocket(WebSocket):
                 load_mode = command_data.get("mode")
 
                 if playlist_id:
-                    playlist = WebieselaServer.bot.playlists.get_playlist(playlist_id, player.queue)
+                    playlist = WebieselaServer.cog.playlist_manager.get_playlist(playlist_id)
 
                     if playlist:
                         if load_mode == "replace":
                             player.queue.clear()
 
-                        _call_function_main_thread(player.queue.add_entries, playlist["entries"])
+                        _call_function_main_thread(playlist.play, player.queue, author=author.discord_user, wait_for_result=True)
                         self.log("loaded playlist", playlist_id, "with mode", load_mode)
                         success = True
                     else:
@@ -371,7 +388,7 @@ class GieselaWebSocket(WebSocket):
         self.sendMessage(json.dumps(answer))
 
     def handleConnected(self):
-        print("[WEBSOCKET] <{}> connected".format(self.address))
+        log.info("[WEBSOCKET] <{}> connected".format(self.address))
         WebieselaServer.clients.append(self)
 
     def handleClose(self):
@@ -382,21 +399,22 @@ class GieselaWebSocket(WebSocket):
 
         if self.registration_token:
             if WebieselaServer.awaiting_registration.pop(self.registration_token, None):
-                print("[WEBSOCKET] Removed <{}>'s registration_token from awaiting list".format(self.address))
+                log.info("[WEBSOCKET] Removed <{}>'s registration_token from awaiting list".format(self.address))
 
-        print("[WEBSOCKET] <{}> disconnected".format(self.address))
+        log.info("[WEBSOCKET] <{}> disconnected".format(self.address))
 
-    def register(self, server_id, author):
-        salt = uuid.uuid4().hex
-        token = hashlib.sha256((server_id + author.id + salt).encode("utf-8")).hexdigest()
+    def register(self, guild_id: int, author: WebAuthor):
+        salt = os.urandom(20)
+        user_identifier = f"{guild_id}:{author.id}"
+        token = hashlib.sha256(user_identifier.encode("utf-8") + salt).hexdigest()
         self.token = token
-        WebieselaServer.set_token_information(token, server_id, author)
+        WebieselaServer.set_token_information(token, guild_id, author)
         data = {"token": token}
         self.sendMessage(json.dumps(data))
-        print("[WEBSOCKET] <{}> successfully registered {}".format(self.address, author))
+        log.info("[WEBSOCKET] <{}> successfully registered {}".format(self.address, author))
 
 
-def generate_registration_token():
+def generate_registration_token() -> str:
     while True:
         token = "".join(random.choice(ascii_lowercase) for _ in range(5))
         if token not in WebieselaServer.awaiting_registration:
@@ -438,7 +456,7 @@ class WebieselaServer:
     server: SimpleWebSocketServer = None
     cog: "Webiesela" = None
     bot: "Giesela" = None
-    _tokens: Dict[str, Tuple[int, Member]] = {}
+    _tokens: Dict[str, Tuple[int, WebAuthor]] = {}
     awaiting_registration: Dict[str, Callable] = {}
 
     @classmethod
@@ -449,10 +467,10 @@ class WebieselaServer:
         try:
             cls._tokens = {t: (s, WebAuthor.from_id(u)) for t, (s, u) in json.load(
                 open("data/websocket_token.json", "r")).items()}
-            print("[WEBSOCKET] loaded {} tokens".format(
+            log.info("[WEBSOCKET] loaded {} tokens".format(
                 len(cls._tokens)))
         except FileNotFoundError:
-            print("[WEBSOCKET] failed to load tokens, there are none saved")
+            log.warning("[WEBSOCKET] failed to load tokens, there are none saved")
 
         cert_file, key_file = find_cert_files()
         if cert_file:
@@ -466,63 +484,62 @@ class WebieselaServer:
         atexit.register(cls.server.close)
         # new thread because it's blocking
         threading.Thread(target=cls.server.serveforever).start()
-        print("[WEBSOCKET] up and running")
+        log.debug("[WEBSOCKET] up and running")
 
     @classmethod
-    def register_information(cls, server_id, author_id, token):
+    def register_information(cls, guild_id: int, author_id: int, token: str) -> bool:
         callback = cls.awaiting_registration.pop(token, None)
         author = WebAuthor.from_id(author_id)
         if not callback:
             return False
 
-        callback(server_id, author)
+        callback(guild_id, author)
         return True
 
     @classmethod
-    def get_token_information(cls, token):
+    def get_token_information(cls, token: str) -> Optional[Tuple[int, WebAuthor]]:
         return cls._tokens.get(token, None)
 
     @classmethod
-    def set_token_information(cls, token, server_id, author):
-        cls._tokens[token] = (server_id, author)
+    def set_token_information(cls, token: str, guild_id: int, author: WebAuthor):
+        cls._tokens[token] = (guild_id, author)
         json.dump({t: (s, u.id) for t, (s, u) in cls._tokens.items()},
                   open("data/websocket_token.json", "w+"), indent=4)
 
     @classmethod
-    def _broadcast_message(cls, server_id, json_message):
+    def _broadcast_message(cls, guild_id: int, json_message: str):
         for auth_client in cls.authenticated_clients:
             # does this update concern this socket
-            if cls.get_token_information(auth_client.token)[0] == server_id:
+            if cls.get_token_information(auth_client.token)[0] == guild_id:
                 auth_client.sendMessage(json_message)
 
     @classmethod
-    def broadcast_message(cls, server_id, message):
+    def broadcast_message(cls, guild_id: int, message: str):
         try:
-            threading.Thread(target=cls._broadcast_message, args=(server_id, message)).start()
+            threading.Thread(target=cls._broadcast_message, args=(guild_id, message)).start()
         except Exception:
             log.exception("error while broadcasting")
 
     @classmethod
-    def get_player(cls, token=None, server_id=None):
-        if not token and not server_id:
+    def get_player(cls, token: str = None, guild_id: int = None) -> Optional["MusicPlayer"]:
+        if not token and not guild_id:
             raise ValueError("Specify at least one of the two")
-        server_id = cls.get_token_information(
-            token)[0] if token else server_id
+        guild_id = cls.get_token_information(token)[0] if token else guild_id
         try:
-            player = asyncio.run_coroutine_threadsafe(cls.cog.get_player(server_id), cls.bot.loop).result()
+            player = asyncio.run_coroutine_threadsafe(cls.cog.get_player(guild_id), cls.bot.loop).result()
             return player
         except Exception as e:
             log.warning("encountered error while getting player:\n{}".format(e))
             return None
 
     @classmethod
-    def get_player_information(cls, token=None, server_id=None):
-        player = cls.get_player(token=token, server_id=server_id)
+    def get_player_information(cls, token: str = None, guild_id: int = None) -> Optional[Dict[str, Any]]:
+        player = cls.get_player(token=token, guild_id=guild_id)
         if not player:
             return None
 
         if player.current_entry:
-            entry = player.current_entry.to_web_dict()
+            entry = player.current_entry.to_web_dict(player)
             entry["progress"] = player.progress
         else:
             entry = None
@@ -531,27 +548,24 @@ class WebieselaServer:
             "entry": entry,
             "queue": player.queue.get_web_dict(),
             "volume": player.volume,
-            "state_name": str(player.state),
-            "state": player.state.value,
-            "repeat_state_name": str(player.repeatState),
-            "repeat_state": player.repeatState.value,
+            "state": player.state
         }
 
         return data
 
     @classmethod
-    def _send_player_information(cls, server_id):
+    def _send_player_information(cls, guild_id: int):
         message = {
             "info":
                 {
-                    "player": cls.get_player_information(server_id=server_id)
+                    "player": cls.get_player_information(guild_id=guild_id)
                 }
         }
 
-        cls._broadcast_message(server_id, json.dumps(message))
+        cls._broadcast_message(guild_id, json.dumps(message))
 
     @classmethod
-    def send_player_information(cls, server_id):
+    def send_player_information(cls, guild_id: int):
         if not cls.bot:
             return
 
@@ -563,10 +577,10 @@ class WebieselaServer:
         caller = outer_frames[1]
         log.debug("Broadcasting player update to {} socket(s). Caused by \"{}\"".format(len(cls.authenticated_clients), caller.function))
 
-        threading.Thread(target=cls._send_player_information, args=(server_id,)).start()
+        threading.Thread(target=cls._send_player_information, args=(guild_id,)).start()
 
     @classmethod
-    def small_update(cls, server_id, **kwargs):
+    def small_update(cls, guild_id: int, **kwargs):
         if not cls.bot:
             return
 
@@ -582,4 +596,4 @@ class WebieselaServer:
             "update": kwargs
         }
 
-        cls.broadcast_message(server_id, json.dumps(message))
+        cls.broadcast_message(guild_id, json.dumps(message))

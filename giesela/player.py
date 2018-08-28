@@ -4,7 +4,7 @@ import os
 from asyncio import AbstractEventLoop
 from typing import Optional, TYPE_CHECKING
 
-from discord import VoiceChannel, VoiceClient
+from discord import Guild, VoiceChannel, VoiceClient
 
 from .downloader import Downloader
 from .entry import BaseEntry, RadioSongEntry, StreamEntry, TimestampEntry
@@ -71,6 +71,10 @@ class MusicPlayer(EventEmitter):
     @property
     def vc_qualified_name(self) -> str:
         return f"{self.channel.guild.name}#{self.channel.name}"
+
+    @property
+    def guild(self) -> Guild:
+        return self.channel.guild
 
     @property
     def player(self) -> Optional[GieselaSource]:
