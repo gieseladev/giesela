@@ -8,7 +8,7 @@ from discord import Colour, Embed, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Downloader, EditPlaylistProxy, Giesela, Optional, Playlist, PlaylistEntry
+from giesela import Downloader, EditPlaylistProxy, Giesela, Optional, Playlist, PlaylistEntry, utils
 from .entry_editor import EntryEditor
 from ..help import AutoHelpEmbed
 from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
@@ -43,7 +43,7 @@ class _PlaylistEmbed(VerticalTextViewer, metaclass=abc.ABCMeta):
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
         self.bot = kwargs.pop("bot")
         self.playlist = kwargs.pop("playlist")
-        embed_frame = create_basic_embed(self.playlist)
+        embed_frame = kwargs.pop("embed_frame", False) or create_basic_embed(self.playlist)
 
         if self.PASS_BOT:
             kwargs["bot"] = self.bot
@@ -77,6 +77,13 @@ class _PlaylistEmbed(VerticalTextViewer, metaclass=abc.ABCMeta):
 
 
 class PlaylistViewer(_PlaylistEmbed):
+    def __init__(self, *args, **kwargs):
+        playlist = kwargs["playlist"]
+        embed = create_basic_embed(playlist)
+        embed.add_field(name="Length", value=f"{len(playlist)} entries")
+        embed.add_field(name="Duration", value=utils.format_time(playlist.duration))
+        super().__init__(*args, embed_frame=embed, **kwargs)
+
     @emoji_handler("🎵", pos=999)
     async def play_playlist(self, *_):
         await self.play(self.channel, self.user)

@@ -75,7 +75,7 @@ class PlaylistCog:
         self.playlist_manager.close()
 
     @commands.group(invoke_without_command=True, aliases=["pl"])
-    async def playlist(self, ctx: Context, playlist: str = None):
+    async def playlist(self, ctx: Context, *, playlist: str = None):
         """Playlist stuff"""
         if playlist:
             playlist = self.find_playlist(playlist)
@@ -87,8 +87,8 @@ class PlaylistCog:
         await viewer.display()
         await ctx.message.delete()
 
-    @playlist.group("play", aliases=["load", "start", "listen"])
-    async def playlist_play(self, ctx: Context, playlist: str):
+    @playlist.group("play", invoke_without_command=True, aliases=["load", "start", "listen"])
+    async def playlist_play(self, ctx: Context, *, playlist: str):
         """Play a playlist"""
         playlist = self.find_playlist(playlist)
         await self.play_playlist(ctx, playlist)
@@ -130,14 +130,14 @@ class PlaylistCog:
         await self._playlist_builder(ctx, playlist)
 
     @playlist.command("builder", aliases=["build", "edit", "manipulate"])
-    async def playlist_builder(self, ctx: Context, playlist: str):
+    async def playlist_builder(self, ctx: Context, *, playlist: str):
         """Edit a playlist"""
         playlist = self.find_playlist(playlist)
         await ensure_user_can_edit_playlist(playlist, ctx)
         await self._playlist_builder(ctx, playlist)
 
     @playlist.command("rename", aliases=["newname", "rn"])
-    async def playlist_rename(self, ctx: Context, playlist: str, name: str):
+    async def playlist_rename(self, ctx: Context, playlist: str, *, name: str):
         """Rename a playlist"""
         playlist = self.find_playlist(playlist)
         await ensure_user_is_author(playlist, ctx, "rename it")
@@ -146,15 +146,13 @@ class PlaylistCog:
         await ctx.send(f"**{old_name}** is now **{playlist.name}**")
 
     @playlist.command("description", aliases=["describe", "desc"])
-    async def playlist_description(self, ctx: Context, playlist: str, *description: str):
+    async def playlist_description(self, ctx: Context, playlist: str, *, description: str):
         """Describe your playlist to make it better"""
         playlist = self.find_playlist(playlist)
         await ensure_user_is_author(playlist, ctx, "change its description")
-        description = " ".join(description)
         playlist.set_description(description)
-        await ctx.send(f"Set the description of **{playlist.name}** to:\n"
-                       f"```\n"
-                       f"{description}```")
+        em = Embed(title=f"New description of {playlist.name}:", description=description)
+        await ctx.send(embed=em)
 
     @playlist.group("cover", invoke_without_command=True, aliases=["image", "picture"])
     async def playlist_cover(self, ctx: Context, playlist: str, cover: str):
@@ -177,7 +175,7 @@ class PlaylistCog:
             raise commands.CommandError(f"Couldn't change the cover to <{cover}>, are you sure this is a valid url for an image?")
 
     @playlist_cover.command("auto")
-    async def playlist_cover_auto(self, ctx: Context, playlist: str):
+    async def playlist_cover_auto(self, ctx: Context, *, playlist: str):
         """Automatically generate a cover
 
         If you're too lazy to make one yourself, why not let Giesela do it?
@@ -235,7 +233,7 @@ class PlaylistCog:
         await ctx.send(embed=embed)
 
     @playlist.command("delete", aliases=["rm", "remove"])
-    async def playlist_delete(self, ctx: Context, playlist: str):
+    async def playlist_delete(self, ctx: Context, *, playlist: str):
         """Delete a playlist"""
         playlist = self.find_playlist(playlist)
         await ensure_user_is_author(playlist, ctx, "delete it")
@@ -418,7 +416,7 @@ class PlaylistCog:
         await ctx.send(embed=em)
 
     @commands.command("addtoplaylist", aliases=["quickadd", "pladd", "pl+"])
-    async def playlist_quickadd(self, ctx: Context, playlist: str):
+    async def playlist_quickadd(self, ctx: Context, *, playlist: str):
         """Add the current entry to a playlist."""
         playlist = self.find_playlist(playlist)
         await ensure_user_can_edit_playlist(playlist, ctx)
@@ -449,7 +447,7 @@ class PlaylistCog:
         await ctx.send(f"Added **{entry.title}** to **{playlist.name}**")
 
     @commands.command("removefromplaylist", aliases=["quickremove", "quickrm", "plremove", "plrm", "pl-"])
-    async def playlist_quickremove(self, ctx: Context, playlist: str = None):
+    async def playlist_quickremove(self, ctx: Context, *, playlist: str = None):
         """Remove the current entry from a playlist."""
         player = await self.player_cog.get_player(ctx)
         entry = player.current_entry
