@@ -7,8 +7,8 @@ from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import BaseEntry, Downloader, Giesela, MusicPlayer, WebieselaServer, constants, lyrics as lyricsfinder
-from giesela.lib.ui import VerticalTextViewer
-from giesela.lib.ui.custom import EntryEditor
+from giesela.ui import VerticalTextViewer
+from giesela.ui.custom import EntryEditor
 from giesela.utils import create_bar, parse_timestamp, similarity
 
 log = logging.getLogger(__name__)

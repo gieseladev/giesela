@@ -103,12 +103,12 @@ class ShellUI(AutoHelpEmbed, MessageableEmbed, VerticalTextViewer):
         await self.show_window()
 
     @commands.command()
-    async def prettify(self, ctx: Context):
+    async def prettify(self, _):
         """Beautify previous output"""
         self.shell.prettify()
         await self.show_window()
 
     @commands.command("upload", aliases=["up", "save"])
-    async def upload_history_cmd(self, ctx: Context, full: bool = False):
+    async def upload_history_cmd(self, _, full: bool = False):
         """Upload history"""
         await self._upload_history(skip_errors=not full)

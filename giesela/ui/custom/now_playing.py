@@ -3,7 +3,7 @@ import asyncio
 from discord import Embed, Message, TextChannel, User
 
 from giesela import GieselaEntry, MusicPlayer, Playlist, RadioSongEntry, RadioStationEntry, StreamEntry, TimestampEntry, YoutubeEntry
-from giesela.lib.ui import create_player_bar
+from giesela.ui import create_player_bar
 from giesela.utils import (ordinal, to_timestamp)
 from .. import InteractableEmbed, IntervalUpdatingMessage, emoji_handler
 

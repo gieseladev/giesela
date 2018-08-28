@@ -6,7 +6,7 @@ from discord import Colour, Embed, Message
 from discord.ext import commands
 from discord.ext.commands import Command, Context, HelpFormatter
 
-from .lib.ui import EmbedPaginator, copy_embed
+from giesela.ui import EmbedPaginator, copy_embed
 
 
 class GieselaHelpFormatter(HelpFormatter):

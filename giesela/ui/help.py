@@ -9,7 +9,7 @@ from discord import Colour, Embed, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import help_formatter
+from giesela.lib import help_formatter
 from . import text
 from .abstract import Stoppable
 from .interactive import InteractableEmbed, MessageableEmbed, emoji_handler
@@ -69,8 +69,8 @@ def get_reaction_help(target: InteractableEmbed, *, include_undocumented: bool =
 
 
 def get_message_help(target: MessageableEmbed) -> str:
-    commands = target.commands
-    return get_doc_list({cmd.name: cmd.short_doc for cmd in commands})
+    command_list = target.commands
+    return get_doc_list({cmd.name: cmd.short_doc for cmd in command_list})
 
 
 async def get_command_help(ctx: Context, *cmds: str) -> Optional[Embed]:

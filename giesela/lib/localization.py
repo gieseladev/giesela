@@ -12,7 +12,7 @@ from os import path
 
 import discord
 
-from .config import static_config
+from giesela.config import static_config
 
 LOCALE_FOLDER = "locale"
 FALLBACK_LANGUAGE = "_default"

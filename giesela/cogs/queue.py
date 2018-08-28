@@ -11,8 +11,8 @@ from discord.ext.commands import Context
 from giesela import Downloader, Giesela, MusicPlayer, RadioSongExtractor, RadioStations, TimestampEntry, get_all_stations, \
     get_random_station
 from giesela.lib.api import spotify
-from giesela.lib.ui import ItemPicker, LoadingBar, VerticalTextViewer
-from giesela.lib.ui.custom import NowPlayingEmbed
+from giesela.ui import ItemPicker, LoadingBar, VerticalTextViewer
+from giesela.ui.custom import NowPlayingEmbed
 from giesela.utils import (create_bar, format_time, html2md, nice_cut)
 from .player import Player
 from .webiesela import WebieselaServer
@@ -150,14 +150,14 @@ class EnqueueCog(QueueBase):
         shuffle(possible_stations)
 
         async def get_station(index: int) -> Embed:
-            station = possible_stations[index % len(possible_stations)]
+            _station = possible_stations[index % len(possible_stations)]
 
             em = Embed(colour=0xb3f75d)
-            em.set_author(name=station.name, url=station.website)
-            em.set_thumbnail(url=station.cover)
+            em.set_author(name=_station.name, url=_station.website)
+            em.set_thumbnail(url=_station.cover)
 
-            if station.has_current_song_info:
-                data = await RadioSongExtractor.async_get_current_song(self.bot.loop, station)
+            if _station.has_current_song_info:
+                data = await RadioSongExtractor.async_get_current_song(self.bot.loop, _station)
                 em.add_field(name="Currently playing", value="{artist} - {title}".format(**data))
             return em
 

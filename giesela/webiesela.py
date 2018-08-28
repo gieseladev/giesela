@@ -15,13 +15,13 @@ from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, TYPE
 
 from discord import Guild
 
+from giesela.lib.web_author import WebAuthor
 from . import utils
 from .config import static_config
 from .entry import TimestampEntry
 from .lib.api import spotify
 from .lib.web_socket_server import SimpleSSLWebSocketServer, SimpleWebSocketServer, WebSocket
 from .radio import RadioStations, get_all_stations
-from .web_author import WebAuthor
 
 if TYPE_CHECKING:
     from giesela import MusicPlayer, Giesela
@@ -49,6 +49,18 @@ def _call_function_main_thread(func: Callable, *args, wait_for_result: bool = Fa
         return fut.result()
     else:
         return fut
+
+
+def playlists_overview(player: "MusicPlayer") -> List[Dict[str, Any]]:
+    _playlists = WebieselaServer.cog.playlist_manager.playlists
+    playlists = []
+    for playlist in _playlists:
+        author = WebAuthor.from_user(playlist.author).to_dict()
+        entries = [entry.build_entry().to_web_dict(player) for entry in playlist]
+        pl = dict(id=playlist.gpl_id.hex, name=playlist.name, description=playlist.description, cover=playlist.cover, author=author,
+                  entries=entries, duration=playlist.duration, human_dur=utils.format_time(playlist.duration, max_specifications=1))
+        playlists.append(pl)
+    return playlists
 
 
 class GieselaWebSocket(WebSocket):
@@ -179,17 +191,6 @@ class GieselaWebSocket(WebSocket):
         except Exception:
             log.exception("error while adding entry")
 
-    def playlists_overview(self, player: "MusicPlayer") -> List[Dict[str, Any]]:
-        _playlists = WebieselaServer.cog.playlist_manager.playlists
-        playlists = []
-        for playlist in _playlists:
-            author = WebAuthor.from_user(playlist.author).to_dict()
-            entries = [entry.build_entry().to_web_dict(player) for entry in playlist]
-            pl = dict(id=playlist.gpl_id.hex, name=playlist.name, description=playlist.description, cover=playlist.cover, author=author,
-                      entries=entries, duration=playlist.duration, human_dur=utils.format_time(playlist.duration, max_specifications=1))
-            playlists.append(pl)
-        return playlists
-
     def handle_authenticated_msg(self, data: Dict[str, Any]):
         answer = {
             "response": True,
@@ -218,7 +219,7 @@ class GieselaWebSocket(WebSocket):
             elif request == "send_playlists":
                 self.log("asked for playlists")
 
-                answer["playlists"] = self.playlists_overview(player)
+                answer["playlists"] = playlists_overview(player)
 
             elif request == "send_radio_stations":
                 self.log("asked for the radio stations")

@@ -167,21 +167,21 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
         return None
 
     @commands.command("title", aliases=["name"])
-    async def set_title(self, ctx: Context, *title: str):
+    async def set_title(self, _, *title: str):
         """Set the title"""
         title = " ".join(title)
         self.entry.song_title = title
         await self.update()
 
     @commands.group("artist", invoke_without_command=True)
-    async def set_artist(self, ctx: Context, *name: str):
+    async def set_artist(self, _, *name: str):
         """Set the artist name"""
         name = " ".join(name)
         self.entry.artist = name
         await self.update()
 
     @set_artist.group("image", invoke_without_command=True)
-    async def set_artist_image(self, ctx: Context, image: str):
+    async def set_artist_image(self, _, image: str):
         """Set the artist image"""
         if not await utils.content_is_image(self.aiosession, image):
             raise commands.CommandError("This doesn't look like an image, sorry!")
@@ -190,7 +190,7 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
         await self.update()
 
     @set_artist_image.command("auto", aliases=["search"])
-    async def set_artist_image_auto(self, ctx: Context, query: str = None):
+    async def set_artist_image_auto(self, _, query: str = None):
         """Search for an artist image"""
         if not query:
             if self.entry.artist:
@@ -201,7 +201,7 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
         await self.update()
 
     @commands.group("cover", invoke_without_command=True, aliases=["image"])
-    async def set_cover(self, ctx: Context, cover: str):
+    async def set_cover(self, _, cover: str):
         """Set the cover"""
         if not await utils.content_is_image(self.aiosession, cover):
             raise commands.CommandError("This doesn't look like an image, sorry!")
@@ -210,7 +210,7 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
         await self.update()
 
     @set_cover.command("auto", aliases=["search"])
-    async def set_cover_auto(self, ctx: Context, query: str = None):
+    async def set_cover_auto(self, _, query: str = None):
         """Search for a cover"""
         if not query:
             if self.entry.artist:
@@ -221,7 +221,7 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
         await self.update()
 
     @commands.command("album")
-    async def set_album(self, ctx: Context, *album: str):
+    async def set_album(self, _, *album: str):
         """Set the album"""
         album = " ".join(album)
         self.entry.album = album

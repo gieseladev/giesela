@@ -9,11 +9,12 @@ from typing import Any, Callable, Container, Deque, Dict, Iterable, Iterator, Li
 
 from discord import User
 
-from . import entry as entry_module, mosaic, utils
+from giesela.lib import mosaic
+from giesela.ui import text as text_utils
+from . import entry as entry_module, utils
 from .bot import Giesela
 from .entry import BaseEntry, Entry
 from .lib.api import imgur
-from .lib.ui import text as text_utils
 from .queue import Queue
 
 log = logging.getLogger(__name__)
@@ -251,16 +252,16 @@ class Playlist:
             self._author = self.manager.bot.get_user(self.author_id)
         return self._author
 
+    @author.setter
+    def author(self, author: User):
+        self.author_id = author.id
+        self._author = author
+
     @property
     def editors(self) -> List[User]:
         if not getattr(self, "_editors", False):
             self._editors = list(filter(None, map(self.manager.bot.get_user, self.editor_ids)))
         return self._editors
-
-    @author.setter
-    def author(self, author: User):
-        self.author_id = author.id
-        self._author = author
 
     def init(self):
         self.entries.sort()
@@ -393,6 +394,7 @@ class Playlist:
         log.debug(f"deleted playlist {self}")
 
     def transfer(self, new_author: User):
+        # noinspection PyAttributeOutsideInit
         self.author = new_author
         self.save()
 

@@ -9,11 +9,12 @@ import aiohttp
 from discord import Colour, Embed, Message
 from discord.ext.commands import AutoShardedBot, Command, CommandError, CommandInvokeError, CommandNotFound, Context
 
-from . import cogs, exceptions, reporting, utils
+from giesela.lib import reporting
+from giesela.lib.web_author import WebAuthor
+from giesela.ui import events
+from . import cogs, exceptions, utils
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOT_VERSION
-from .lib.ui import events
-from .web_author import WebAuthor
 
 log = logging.getLogger(__name__)
 

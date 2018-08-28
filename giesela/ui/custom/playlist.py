@@ -208,7 +208,7 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         await self.show_line(self.playlist_editor.index_of(entry))
 
     @commands.command("remove", aliases=["rm"])
-    async def remove_entry(self, ctx: Context, *indices: int):
+    async def remove_entry(self, _, *indices: int):
         """Remove entries"""
         if not indices:
             raise commands.CommandError("Please provide at least one index to remove")
@@ -222,7 +222,7 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
             await self.show_window()
 
     @commands.command("undo", aliases=["revert"])
-    async def undo_action(self, ctx: Context):
+    async def undo_action(self, _):
         """Undo something"""
         change = self.playlist_editor.undo()
         if not change:
@@ -230,7 +230,7 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         await self.show_window()
 
     @commands.command("redo")
-    async def redo_action(self, ctx: Context):
+    async def redo_action(self, _):
         """Redo something"""
         change = self.playlist_editor.redo()
         if not change:
@@ -238,7 +238,7 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         await self.show_window()
 
     @commands.command("show", aliases=["goto"])
-    async def show_target(self, ctx: Context, *target: str):
+    async def show_target(self, _, *target: str):
         """Show a specific line or entry."""
         target = " ".join(target)
         if target.isnumeric():

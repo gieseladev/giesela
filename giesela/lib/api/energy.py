@@ -22,8 +22,8 @@ def get_signature_key(key, datestamp, region_name, service_name):
     Does some hashing magic (Don't ask me, I just do what Amazon tells me so please don't hurt me)
     """
 
-    def sign(key, msg):
-        return hmac.new(key, msg.encode("utf-8"), hashlib.sha256).digest()
+    def sign(_key, msg):
+        return hmac.new(_key, msg.encode("utf-8"), hashlib.sha256).digest()
 
     k_date = sign(("AWS4" + key).encode("utf-8"), datestamp)
     k_region = sign(k_date, region_name)

@@ -8,8 +8,8 @@ from discord.ext import commands
 from discord.ext.commands import Bot, Context
 
 from giesela import RestartSignal, TerminateSignal
-from giesela.lib.ui.custom import ShellUI
 from giesela.shell import InterpreterUnavailable
+from giesela.ui.custom import ShellUI
 
 
 class AdminTools:

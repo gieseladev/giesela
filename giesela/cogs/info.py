@@ -6,7 +6,8 @@ from discord import ClientException, Colour, Embed
 from discord.ext import commands
 from discord.ext.commands import Bot, Command, Context
 
-from giesela import VERSION as BOTVERSION, help_formatter
+from giesela import VERSION as BOTVERSION
+from giesela.lib import help_formatter
 
 log = logging.getLogger(__name__)
 

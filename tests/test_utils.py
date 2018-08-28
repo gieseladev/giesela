@@ -1,4 +1,4 @@
-from giesela.lib.ui import create_bar, create_player_bar, create_scroll_bar
+from giesela.ui import create_bar, create_player_bar, create_scroll_bar
 
 
 def test_bar():

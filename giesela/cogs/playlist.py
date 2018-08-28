@@ -10,9 +10,10 @@ from discord import Attachment, Colour, Embed, File, User
 from discord.ext import commands
 from discord.ext.commands import BadArgument, Context, Converter, view as string_view
 
-from giesela import Giesela, Playlist, PlaylistManager, help_formatter, utils
-from giesela.lib.ui import EmbedPaginator, EmbedViewer, ItemPicker, PromptYesNo
-from giesela.lib.ui.custom import PlaylistBuilder, PlaylistViewer
+from giesela import Giesela, Playlist, PlaylistManager, utils
+from giesela.lib import help_formatter
+from giesela.ui import EmbedPaginator, EmbedViewer, ItemPicker, PromptYesNo
+from giesela.ui.custom import PlaylistBuilder, PlaylistViewer
 from .player import Player
 
 LOAD_ORDER = 1

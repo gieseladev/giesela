@@ -3,14 +3,14 @@ from typing import TYPE_CHECKING
 from discord import User
 
 if TYPE_CHECKING:
-    from .bot import Giesela
+    from giesela.bot import Giesela
 
 
 class WebAuthor:
     bot: "Giesela" = None
 
-    def __init__(self, id: int, name: str, display_name: str, avatar_url: str):
-        self.id = id
+    def __init__(self, user_id: int, name: str, display_name: str, avatar_url: str):
+        self.id = user_id
         self.name = name
         self.display_name = display_name
         self.avatar_url = avatar_url

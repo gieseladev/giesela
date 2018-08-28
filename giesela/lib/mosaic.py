@@ -9,11 +9,11 @@ import math
 from PIL import Image, ImageDraw
 from aiohttp import ClientSession
 
+from giesela.entry import GieselaEntry
 from giesela.lib.api.imgur import upload_playlist_cover
-from .entry import GieselaEntry
 
 if TYPE_CHECKING:
-    from .playlists import Playlist
+    from giesela.playlists import Playlist
 
 log = logging.getLogger(__name__)
 

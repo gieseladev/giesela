@@ -109,8 +109,8 @@ class SpotifyPlaylist:
 
 class SpotifyArtist:
 
-    def __init__(self, id, name, images, popularity, genres, uri, href, top_tracks=None):
-        self.id = id
+    def __init__(self, artist_id, name, images, popularity, genres, uri, href, top_tracks=None):
+        self.id = artist_id
         self.name = name
         self._images = images
         self._popularity = popularity
@@ -195,8 +195,8 @@ class SpotifyArtist:
 
 class SpotifyAlbum:
 
-    def __init__(self, id, name, artists, images, uri):
-        self.id = id
+    def __init__(self, album_id, name, artists, images, uri):
+        self.id = album_id
         self.name = name
         self.artists = artists
         self.images = images
@@ -231,8 +231,8 @@ class SpotifyAlbum:
 
 class SpotifyTrack:
 
-    def __init__(self, id, name, artists, duration, album, popularity, uri, query=None, certainty=1):
-        self.id = id
+    def __init__(self, track_id, name, artists, duration, album, popularity, uri, query=None, certainty=1):
+        self.id = track_id
         self.name = name
         self.artists = artists
         self.duration = duration
