@@ -84,6 +84,26 @@ class PlaylistCog:
         await playlist.play(player.queue, channel=ctx.channel, author=ctx.author)
         await ctx.send("Loaded playlist", embed=playlist_embed(playlist))
 
+    async def _playlist_builder(self, ctx: Context, playlist: Playlist):
+        builder = PlaylistBuilder(ctx.channel, ctx.author, bot=self.bot, playlist=playlist)
+        changelog = await builder.display()
+        if changelog:
+            embed = Embed(title=f"Saved changes to {playlist.name}", description=changelog, colour=Colour.green())
+            await ctx.send(embed=embed)
+        else:
+            await ctx.message.delete()
+
+    async def import_playlist(self, data, author: User = None) -> Optional[Embed]:
+        playlist = self.playlist_manager.import_from_gpl(data, author=author)
+
+        if not playlist:
+            return
+
+        embed = Embed(colour=Colour.green())
+        embed.set_author(name="Loaded Playlist")
+        embed.add_field(name=playlist.name, value=f"by {playlist.author.name}\n{len(playlist)} entries")
+        return embed
+
     async def on_logout(self):
         self.playlist_manager.close()
 
@@ -115,15 +135,6 @@ class PlaylistCog:
 
         playlist = random.choice(playlists)
         await self.play_playlist(ctx, playlist)
-
-    async def _playlist_builder(self, ctx: Context, playlist: Playlist):
-        builder = PlaylistBuilder(ctx.channel, ctx.author, bot=self.bot, playlist=playlist)
-        changelog = await builder.display()
-        if changelog:
-            embed = Embed(title=f"Saved changes to {playlist.name}", description=changelog, colour=Colour.green())
-            await ctx.send(embed=embed)
-        else:
-            await ctx.message.delete()
 
     @playlist.command("create", aliases=["new"])
     async def playlist_create(self, ctx: Context, *, name: UnquotedStr):
@@ -327,17 +338,6 @@ class PlaylistCog:
         viewer = EmbedViewer(ctx.channel, ctx.author, embeds=paginator)
         await viewer.display()
         await ctx.message.delete()
-
-    async def import_playlist(self, data, author: User = None) -> Optional[Embed]:
-        playlist = self.playlist_manager.import_from_gpl(data, author=author)
-
-        if not playlist:
-            return
-
-        embed = Embed(colour=Colour.green())
-        embed.set_author(name="Loaded Playlist")
-        embed.add_field(name=playlist.name, value=f"by {playlist.author.name}\n{len(playlist)} entries")
-        return embed
 
     @playlist.group("import", invoke_without_command=True, aliases=["imp"])
     async def playlist_import(self, ctx: Context, author: User = None):
