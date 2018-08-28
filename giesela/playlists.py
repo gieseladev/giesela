@@ -768,10 +768,12 @@ class PlaylistManager:
         playlist.manager = None
         del self._playlists[playlist.gpl_id]
         del self.storage[playlist.gpl_id.hex]
+        self.storage.sync()
 
     def save_playlist(self, playlist: Playlist):
         self._playlists[playlist.gpl_id] = playlist
         self.storage[playlist.gpl_id.hex] = playlist
+        self.storage.sync()
 
     def get_playlist(self, gpl_id: UUIDType, default: Any = _DEFAULT) -> Optional[Playlist]:
         try:
