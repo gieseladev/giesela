@@ -140,19 +140,21 @@ class GieselaWebSocket(WebSocket):
 
         url = item["url"]
 
+        guild_id, author = WebieselaServer.get_token_information(self.token)
+
         if searcher == "SpotifySearcher":
             if kind == "playlist":
                 playlist = spotify.SpotifyPlaylist.from_url(url)
                 self.log("adding Spotify playlist {}".format(playlist))
-                entry_gen = playlist.get_spotify_entries_generator(player.queue)
+                entry_gen = playlist.get_spotify_entries_generator(player.queue, author=author.discord_user)
                 success = True
             elif kind == "entry":
                 entry = spotify.SpotifyTrack.from_url(url)
-                entry_gen = _tuple_generator([await entry.get_spotify_entry(player.queue)])
+                entry_gen = _tuple_generator([await entry.get_spotify_entry(player.queue, author=author.discord_user)])
                 success = True
 
         elif searcher in ("YoutubeSearcher", "SoundcloudSearcher"):
-            entry_gen = await player.downloader.get_entry_gen(url)
+            entry_gen = await player.downloader.get_entry_gen(url, author=author.discord_user)
             success = True
 
         answer["success"] = bool(success)
