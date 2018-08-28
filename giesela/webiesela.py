@@ -5,6 +5,7 @@ import inspect
 import json
 import logging
 import os
+import pickle
 import random
 import threading
 from json.decoder import JSONDecodeError
@@ -465,10 +466,10 @@ class WebieselaServer:
         cls.bot = cog.bot
 
         try:
-            cls._tokens = {t: (s, WebAuthor.from_id(u)) for t, (s, u) in json.load(
-                open("data/websocket_token.json", "r")).items()}
-            log.info("[WEBSOCKET] loaded {} tokens".format(
-                len(cls._tokens)))
+            with open("data/websocket_token.bin", "rb") as fp:
+                data = pickle.load(fp)
+            cls._tokens = {t: (s, WebAuthor.from_id(u)) for t, (s, u) in data.items()}
+            log.info("[WEBSOCKET] loaded {} tokens".format(len(cls._tokens)))
         except FileNotFoundError:
             log.warning("[WEBSOCKET] failed to load tokens, there are none saved")
 
@@ -503,8 +504,10 @@ class WebieselaServer:
     @classmethod
     def set_token_information(cls, token: str, guild_id: int, author: WebAuthor):
         cls._tokens[token] = (guild_id, author)
-        json.dump({t: (s, u.id) for t, (s, u) in cls._tokens.items()},
-                  open("data/websocket_token.json", "w+"), indent=4)
+        data = {t: (s, u.id) for t, (s, u) in cls._tokens.items()}
+
+        with open("data/websocket_token.bin", "wb+") as fp:
+            pickle.dump(data, fp)
 
     @classmethod
     def _broadcast_message(cls, guild_id: int, json_message: str):
