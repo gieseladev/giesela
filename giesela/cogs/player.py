@@ -121,22 +121,24 @@ class Player:
             task.cancel()
 
     def auto_pause(self, player: MusicPlayer, joined: bool = False):
-        if not self.bot.config.auto_pause:
-            return
-
         channel = player.voice_channel
         if not channel:
             return
 
+        non_bot_vm = sum(1 for vm in channel.members if not vm.bot)
+
         # if the first new person joined
-        if joined is True and sum(1 for vm in channel.members if not vm.bot) == 1:
-            log.info(f"auto-resuming {player}")
+        if joined is True and non_bot_vm == 1:
             self.stop_disconnect(player)
-            player.resume()
-        elif sum(1 for vm in channel.members if not vm.bot) == 0:
-            log.info(f"auto-pausing {player}")
+            if self.bot.config.auto_pause:
+                log.info(f"auto-resuming {player}")
+                player.resume()
+
+        elif non_bot_vm == 0:
             self.start_disconnect(player)
-            player.pause()
+            if self.bot.config.auto_pause:
+                log.info(f"auto-pausing {player}")
+                player.pause()
 
     async def on_player_play(self, player: MusicPlayer, entry: BaseEntry):
         self.auto_pause(player)
@@ -194,13 +196,9 @@ class Player:
         if member.guild.me != member and member.bot:
             return
 
-        user_joined = False
-
-        if after.channel and not before.channel:
-            user_joined = True
-
         player = await self.get_player(member.guild)
 
+        user_joined = after.channel != before.channel
         self.auto_pause(player, joined=user_joined)
 
     @commands.command()
