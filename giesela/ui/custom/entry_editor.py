@@ -190,9 +190,11 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
         await self.update()
 
     @set_artist_image.command("auto", aliases=["search"])
-    async def set_artist_image_auto(self, _, query: str = None):
+    async def set_artist_image_auto(self, _, *query: str):
         """Search for an artist image"""
-        if not query:
+        if query:
+            query = " ".join(query)
+        else:
             if self.entry.artist:
                 query = self.entry.artist
             else:
@@ -210,9 +212,11 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
         await self.update()
 
     @set_cover.command("auto", aliases=["search"])
-    async def set_cover_auto(self, _, query: str = None):
+    async def set_cover_auto(self, _, *query: str):
         """Search for a cover"""
-        if not query:
+        if query:
+            query = " ".join(query)
+        else:
             if self.entry.artist:
                 query = f"{self.entry.song_title} - {self.entry.artist}"
             else:

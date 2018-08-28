@@ -2,7 +2,7 @@ import asyncio
 import random
 import time
 from random import shuffle
-from typing import Dict, Iterable, Optional
+from typing import Dict, Optional
 
 from discord import Embed, Message
 from discord.ext import commands
@@ -179,14 +179,13 @@ class EnqueueCog(QueueBase):
         await player.queue.add_radio_entry(station_info, author=ctx.author, now=True)
         await ctx.send(f"I choose\n**{station_info.name}**")
 
-    async def _play_cmd(self, ctx: Context, url: Iterable[str], placement: int = None):
+    async def _play_cmd(self, ctx: Context, url: str, placement: int = None):
         player = await self.get_player(ctx)
-        url = " ".join(url)
 
         await _play_url(ctx, player, url, placement)
 
     @commands.group(invoke_without_command=True, aliases=["p", "enqueue"])
-    async def play(self, ctx: Context, *url: str):
+    async def play(self, ctx: Context, *, url: str):
         """Add an entry to the queue
 
         If no link is provided, the first
@@ -195,12 +194,12 @@ class EnqueueCog(QueueBase):
         await self._play_cmd(ctx, url)
 
     @play.command("next")
-    async def play_next(self, ctx: Context, *url: str):
+    async def play_next(self, ctx: Context, *, url: str):
         """Add an entry to the front of the queue"""
         await self._play_cmd(ctx, url, placement=0)
 
     @play.command("random", aliases=["soon", "anytime"])
-    async def play_random(self, ctx: Context, *url: str):
+    async def play_random(self, ctx: Context, *, url: str):
         """Add an entry at a random position"""
         player = await self.get_player(ctx)
 
