@@ -8,6 +8,8 @@ data/playlists/
 logs/
 venv/
 
+data/websocket_token.json
+
 *.pyc
 *.key
 *.crt
