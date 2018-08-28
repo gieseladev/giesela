@@ -315,7 +315,10 @@ class Playlist:
         else:
             raise KeyError(f"{entry} isn't in {self}")
 
+        index = self.index_of(_entry)
+        _entry = self.entries.pop(index)
         _entry.edit(**changes)
+        bisect.insort_left(self.entries, _entry)
 
     def has(self, entry: Union[BaseEntry, PlaylistEntry]) -> bool:
         for _entry in self:
@@ -541,12 +544,13 @@ class EditPlaylistProxy:
         for change in self._changes:
             self._entry_map[change.entry] = change
             if change.change_type == change.ADDED:
-                bisect.insort_left(self._entries, change.entry)
+                bisect.insort_left(entries, change.entry)
             elif change.change_type == change.EDITED:
-                index = entries.index(change.entry)
+                index = self.index_of(change.entry)
+                entries.pop(index)
                 entry = change.entry.copy()
                 entry.edit(**change.changes)
-                entries[index] = entry
+                bisect.insort_left(entries, entry)
 
         self._entries = entries
 
@@ -572,6 +576,11 @@ class EditPlaylistProxy:
             if change.change_type == change_type and change.entry == entry:
                 return change
         raise KeyError(f"Couldn't find that change: {EditChange.name(change_type)} {entry}")
+
+    def resort_entry(self, entry: PlaylistEntry):
+        index = self.index_of(entry)
+        self._entries.pop(index)
+        bisect.insort_left(self._entries, entry)
 
     def index_of(self, entry: PlaylistEntry) -> int:
         return self._entries.index(entry)
@@ -646,6 +655,7 @@ class EditPlaylistProxy:
         edited_entry = entry.copy()
         edited_entry.edit(**changes)
         self._entries[index] = edited_entry
+        self.resort_entry(edited_entry)
 
         return edited_entry
 
