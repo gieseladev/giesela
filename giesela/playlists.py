@@ -164,7 +164,7 @@ class PlaylistEntry:
 
 PLAYLIST_SLOTS = ("gpl_id", "name", "description", "author_id", "cover", "entries", "editor_ids")
 # This makes backward-compatible saves somewhat possible
-PLAYLIST_SLOT_DEFAULTS = {"description": None, "cover": None, "entries": [], "editor_ids": []}
+PLAYLIST_SLOT_DEFAULTS = {"description": None, "cover": None, "entries": [], "editor_ids": set()}
 
 
 class Playlist:
@@ -189,7 +189,7 @@ class Playlist:
         self.description = kwargs.pop("description", None)
         self.cover = kwargs.pop("cover", None)
         self.entries = sorted(kwargs.pop("entries", []))
-        self.editor_ids = kwargs.pop("editors", [])
+        self.editor_ids = set(kwargs.pop("editors", []))
 
         author = kwargs.pop("author", None)
         if author:
@@ -264,6 +264,9 @@ class Playlist:
         return self._editors
 
     def init(self):
+        # TODO remove this after some time!
+        self.editor_ids = set(self.editor_ids)
+
         self.entries.sort()
         for entry in self.entries:
             entry.playlist = self

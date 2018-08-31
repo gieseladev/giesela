@@ -29,6 +29,14 @@ def playlist_embed(playlist: Playlist) -> Embed:
     return embed
 
 
+def add_playlist_footer(embed: Embed, playlist: Playlist) -> Embed:
+    if playlist.cover:
+        embed.set_footer(text=playlist.name, icon_url=playlist.cover)
+    else:
+        embed.set_footer(text=playlist.name)
+    return embed
+
+
 async def is_owner(ctx: Context) -> bool:
     return await ctx.bot.is_owner(ctx.author)
 
@@ -277,23 +285,28 @@ class PlaylistCog:
         playlist = self.find_playlist(playlist)
         await ensure_user_is_author(playlist, ctx, "transfer it")
         playlist.transfer(user)
-        await ctx.send(f"Transferred **{playlist.name}** to {user.mention}")
+
+        em = Embed(title=f"Transferred to {user.mention}")
+        add_playlist_footer(em, playlist)
+        await ctx.send(embed=em)
 
     @playlist.group("editor", invoke_without_command=True, aliases=["editors"])
     async def playlist_editor(self, ctx: Context, *, playlist: UnquotedStr):
         """Manage editors of a playlist."""
         playlist = self.find_playlist(playlist)
 
-        text = f"author: {playlist.author.mention}\n"
+        em = Embed(title="Editors", colour=Colour.blue())
+        em.set_author(name=playlist.author.display_name, icon_url=playlist.author.avatar_url)
+
+        add_playlist_footer(em, playlist)
 
         if playlist.editors:
-            editors = "\n".join(f"  - {editor.mention}" for editor in playlist.editors)
-            text += f"editors:\n" \
-                    f"{editors}"
+            editors_text = "\n".join(f"  - {editor.mention}" for editor in playlist.editors)
+            em.description = editors_text
         else:
-            text += "No editors"
+            em.title = "There are no editors"
 
-        await ctx.send(embed=Embed(title=playlist.name, description=text, colour=Colour.blue()))
+        await ctx.send(embed=em)
 
     @playlist_editor.command("add")
     async def playlist_editor_add(self, ctx: Context, playlist: str, user: User):
@@ -305,7 +318,10 @@ class PlaylistCog:
             raise commands.CommandError(f"{user.mention} is already an editor of **{playlist.name}**")
 
         playlist.add_editor(user)
-        await ctx.send(f"Added {user.mention} as an editor for **{playlist.name}**")
+
+        em = Embed(title=f"Added {user.display_name} as an editor")
+        add_playlist_footer(em, playlist)
+        await ctx.send(embed=em)
 
     @playlist_editor.command("remove", aliases=["rm"])
     async def playlist_editor_remove(self, ctx: Context, playlist: str, user: User):
@@ -317,7 +333,9 @@ class PlaylistCog:
             raise commands.CommandError(f"{user.mention} isn't an editor of **{playlist.name}**")
 
         playlist.remove_editor(user)
-        await ctx.send(f"Removed {user.mention} as an editor for **{playlist.name}**")
+        em = Embed(title=f"Removed {user.display_name} as an editor")
+        add_playlist_footer(em, playlist)
+        await ctx.send(embed=em)
 
     @playlist.command("show", aliases=["showall", "all", "list"])
     async def playlist_show(self, ctx: Context):
@@ -426,7 +444,8 @@ class PlaylistCog:
             line = f"• `{index}.` {title}"
             lines.append(line)
 
-        em = Embed(title="Found the following entries", description="\n".join(lines), colour=Colour.blue())
+        em = Embed(title=f"Found the following entries", description="\n".join(lines), colour=Colour.blue())
+        add_playlist_footer(em, playlist)
         await ctx.send(embed=em)
 
     @commands.command("addtoplaylist", aliases=["quickadd", "pladd", "pl+"])
@@ -458,7 +477,10 @@ class PlaylistCog:
             entry.meta["playlist"] = playlist
             entry.meta["playlist_entry"] = playlist_entry
 
-        await ctx.send(f"Added **{entry.title}** to **{playlist.name}**")
+        em = Embed(title=f"Added **{entry.title}**", colour=Colour.green())
+        add_playlist_footer(em, playlist)
+
+        await ctx.send(embed=em)
 
     @commands.command("removefromplaylist", aliases=["quickremove", "quickrm", "plremove", "plrm", "pl-"])
     async def playlist_quickremove(self, ctx: Context, *, playlist: UnquotedStr = None):
@@ -485,7 +507,10 @@ class PlaylistCog:
         entry.meta.pop("playlist")
         entry.meta.pop("playlist_entry")
 
-        await ctx.send(f"Removed **{entry.title}** from **{playlist.name}**")
+        em = Embed(title=f"Removed **{entry.title}**", colour=Colour.green())
+        add_playlist_footer(em, playlist)
+
+        await ctx.send(embed=em)
 
 
 def setup(bot: Giesela):
