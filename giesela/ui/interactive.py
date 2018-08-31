@@ -8,7 +8,8 @@ import textwrap
 from typing import Any, Awaitable, Callable, Dict, List, Optional, Tuple, TypeVar, Union
 
 from discord import Client, Embed, Message, Reaction, TextChannel, User
-from discord.ext.commands import Bot, Command, CommandError, CommandInvokeError, Context
+from discord.ext.commands import Command, CommandError, CommandInvokeError, Context
+from discord.ext.commands.bot import BotBase
 
 from . import events, text
 from .abstract import HasListener, MessageHandler, ReactionHandler, Startable, Stoppable
@@ -112,8 +113,11 @@ class InteractableEmbed(HasListener, EditableEmbed, ReactionHandler, Startable, 
             if not self.is_disabled(emoji):
                 await msg.add_reaction(emoji)
 
+    def plan_add_reactions(self, msg: Message = None):
+        asyncio.ensure_future(self.add_reactions(msg))
+
     async def edit(self, embed: Embed, on_new: Callable[[Message], Any] = None):
-        await super().edit(embed, on_new or self.add_reactions)
+        await super().edit(embed, on_new or self.plan_add_reactions)
 
     async def remove_reaction(self, emoji: EmojiType):
         if not self.message:
@@ -210,7 +214,8 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
     async def wait_for_message(self) -> Any:
         while True:
             msg = await self.bot.wait_for("message", check=self.message_check)
-            if isinstance(self.bot, Bot):
+
+            if isinstance(self.bot, BotBase):
                 ctx = await self.bot.get_context(msg)
                 if ctx.invoked_with:
                     continue

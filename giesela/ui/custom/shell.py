@@ -1,3 +1,4 @@
+from textwrap import TextWrapper
 from typing import Optional, Tuple
 
 from discord import Embed, Message
@@ -5,14 +6,41 @@ from discord.ext import commands
 from discord.ext.commands import CommandNotFound, Context
 
 from giesela import GieselaShell
+from giesela.shell import ShellLine
 from ..help import AutoHelpEmbed
 from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
+
+_TEXT_WRAPPER = dict(width=70, max_lines=10, drop_whitespace=False, replace_whitespace=False)
+TEXT_WRAPPER = TextWrapper(**_TEXT_WRAPPER)
+
+
+def prepare_shell_line(line: ShellLine) -> str:
+    raw_code = line.code
+
+    if line.oneliner:
+        code = f">>> `{raw_code}`"
+    else:
+        code = f"```{line.interpreter.highlight_language}\n{raw_code}```"
+
+    if not line.result_str:
+        return code
+
+    result = TEXT_WRAPPER.fill(line.result_str)
+    result_lines = result.splitlines()
+
+    if line.error:
+        result = f"```fix\n{result}```"
+    elif len(result_lines) > 1:
+        result = f"```\n{result}```"
+
+    return f"{code}\n{result}"
 
 
 class ShellUI(AutoHelpEmbed, MessageableEmbed, VerticalTextViewer):
     ctx: Context
     shell: GieselaShell
 
+    run_timeout: Optional[int]
     upload_url: Optional[Tuple[str, str]]
 
     def __init__(self, ctx: Context, **kwargs):
@@ -29,6 +57,7 @@ class ShellUI(AutoHelpEmbed, MessageableEmbed, VerticalTextViewer):
         super().__init__(ctx.channel, ctx.author, bot=ctx.bot, **kwargs)
 
         self.ctx = ctx
+        self.run_timeout = None
         self.upload_url = None
 
     @property
@@ -58,7 +87,8 @@ class ShellUI(AutoHelpEmbed, MessageableEmbed, VerticalTextViewer):
         return embed
 
     async def get_line(self, line: int) -> str:
-        return str(self.shell.history[line])
+        shell_line = self.shell.history[line]
+        return prepare_shell_line(shell_line)
 
     async def on_command_error(self, ctx: Context, exception: Exception):
         if isinstance(exception, CommandNotFound):
@@ -67,7 +97,7 @@ class ShellUI(AutoHelpEmbed, MessageableEmbed, VerticalTextViewer):
             await super().on_command_error(ctx, exception)
 
     async def _run(self, content: str):
-        await self.shell.run(content, timeout=5)
+        await self.shell.run(content, timeout=self.run_timeout)
         await self.show_window()
 
     async def on_line(self, ctx: Context):

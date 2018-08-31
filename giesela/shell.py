@@ -1,7 +1,6 @@
 import abc
 import asyncio
 import contextlib
-import functools
 import logging
 import pprint
 import sys
@@ -240,33 +239,65 @@ class PythonInterpreter(GieselaInterpreter):
     language_name = "Python"
     highlight_language = "py"
 
+    WRAP_TEMPLATE = "async def func():\n" \
+                    "{code}"
+
     @classmethod
-    def get_compiled(cls, code: str) -> Callable:
+    def wrap_code(cls, code: str, return_last: bool = True) -> str:
+        if return_last:
+            *lines, last_line = code.splitlines()
+        else:
+            lines = code.splitlines()
+            last_line = "None"
+
+        last_line = f"return {last_line}, locals()"
+
+        code = "\n".join(f"\t{line}" for line in lines)
+        code = prepare_code(f"{code}\n\t{last_line}")
+
+        return cls.WRAP_TEMPLATE.format(code=code)
+
+    @classmethod
+    def _compile_wrap(cls, code: str, context: Dict[str, Any]) -> Optional[Callable]:
         try:
-            compiled = compile(code, "<GieselaShell>", "eval")
+            _scope = {}
+            exec(code, context, _scope)
         except SyntaxError:
             pass
         else:
-            func = functools.partial(eval, compiled)
-            func._exec = False
+            func = _scope.get("func")
+            return func
+
+    @classmethod
+    def get_compiled(cls, code: str, context: Dict[str, Any]) -> Callable:
+        with_return = cls.wrap_code(code)
+
+        func = cls._compile_wrap(with_return, context)
+        if func:
+            func._returns = True
+            return func
+
+        no_return = cls.wrap_code(code, return_last=False)
+        func = cls._compile_wrap(no_return, context)
+
+        if func:
+            func._returns = False
             return func
 
         try:
-            compiled = compile(code, "<GieselaShell>", "exec")
+            compile(code, "<GieselaShell>", "exec")
         except SyntaxError as e:
             raise ShellException("Syntax error", original=e, code=code)
-        else:
-            func = functools.partial(exec, compiled)
-            func._exec = True
-            return func
+
+        raise ShellException("Couldn't compile line")
 
     async def run(self, code: str) -> Any:
-        func = self.get_compiled(code)
-        result = func(self.context)
-        if asyncio.iscoroutine(result):
-            result = await result
+        func = self.get_compiled(code, self.context)
+        result, local_vars = await func()
 
-        if getattr(func, "_exec", False) and result is None:
+        self.variables.update(local_vars)
+
+        if not getattr(func, "_returns", True) and result is None:
             result = EmptyResult
 
         return result
@@ -283,18 +314,9 @@ class ShellLine(NamedTuple):
     error: Optional[ShellException] = None
 
     def __str__(self) -> str:
-        if self.oneliner:
-            code = f"`{self.code}`"
-        else:
-            highlight = self.interpreter.highlight_language
-            code = f"```{highlight}\n{self.code}```"
+        s = f">>> {self.code}"
         result = self.result_str
-
-        s = f">>> {code}"
         if result:
-            if self.error or not is_one_line(result):
-                result_highlight = "fix" if self.error else ""
-                result = f"```{result_highlight}\n{result}```"
             s = f"{s}\n{result}"
 
         return s

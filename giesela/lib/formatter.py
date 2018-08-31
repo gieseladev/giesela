@@ -82,7 +82,7 @@ class GieselaHelpFormatter(HelpFormatter):
 
         return get_final_embeds()
 
-    async def send_help_for(self, context: Context, command_or_bot: Union[commands.Bot, commands.Command]) -> List[Message]:
+    async def send_help_for(self, context: Context, command_or_bot: Union[commands.bot.BotBase, commands.Command]) -> List[Message]:
         embeds = await self.format_help_for(context, command_or_bot)
         messages = []
         for embed in embeds:
