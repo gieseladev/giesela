@@ -98,6 +98,7 @@ class Player:
                     .on("resume", self.on_player_resume) \
                     .on("pause", self.on_player_pause) \
                     .on("stop", self.on_player_stop) \
+                    .on("volume_change", self.on_player_volume_change) \
                     .on("finished-playing", self.on_player_finished_playing)
                 self.players[guild.id] = player
             else:
@@ -157,6 +158,10 @@ class Player:
 
     async def on_player_stop(self, **_):
         await self.update_now_playing()
+
+    @classmethod
+    async def on_player_volume_change(cls, player: MusicPlayer, new: float, **_):
+        WebieselaServer.small_update(player.guild.id, volume=new)
 
     @classmethod
     async def on_player_finished_playing(cls, player: MusicPlayer, **_):

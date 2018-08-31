@@ -10,7 +10,6 @@ from .downloader import Downloader
 from .entry import BaseEntry, RadioSongEntry, StreamEntry, TimestampEntry
 from .lib import EventEmitter, GieselaSource
 from .queue import Queue
-from .webiesela import WebieselaServer
 
 if TYPE_CHECKING:
     from giesela import Giesela
@@ -96,12 +95,13 @@ class MusicPlayer(EventEmitter):
         return self._volume
 
     @volume.setter
-    def volume(self, value: float):
-        self._volume = value
+    def volume(self, volume: float):
+        old_volume = self._volume
+        self._volume = volume
         if self.player:
-            self.player.volume = value
+            self.player.volume = volume
 
-        WebieselaServer.small_update(self.voice_client.guild.id, volume=value)
+        self.emit("volume_change", player=self, old=old_volume, new=volume)
 
     @property
     def is_playing(self) -> bool:
