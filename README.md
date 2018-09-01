@@ -9,16 +9,16 @@
 This is the `refresh` version of Giesela. What does that mean exactly? Who knows...
 Anyway, this is a stripped-down, containerised version of Giesela. It's still the same
 old, crappy version of Giesela that ~~we've all~~  I've grown to hate, but at least it's
-containerised which -as we all know- improves everything by about 1000%...
+containerised which - as we all know - improves everything by about 1000%...
 
 In all seriousness though, there have been some changes [listed here](#whats-new).
 While some might seem trivial, it is important to keep in mind that there are
-a lot of smaller/internal changes that aren't listed which -over time- add up to
-be quiet important.
+a lot of smaller/internal changes that aren't listed which - over time - add up to
+be quite important.
 
 ### Which version should I run?
 ~~Neither tbh~~
-**This one!**
+**This one!** The old version has reached its end-of-life and won't receive any support.
 
 
 ## Running

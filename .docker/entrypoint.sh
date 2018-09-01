@@ -6,7 +6,7 @@ if [ -z "$(ls -A /giesela/data)" ]; then
    cp -r /giesela/_data/* /giesela/data
 else
    echo "Data folder exists"
-   cp -ru /giesela/_data/* /giesela/data
+   cp -u /giesela/_data/radio_stations.yml /giesela/data
 fi
 
 exec pipenv run python run.py

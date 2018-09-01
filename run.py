@@ -26,11 +26,12 @@ LOGGING = {
             "stream": "ext://sys.stdout"
         },
         "file": {
-            "class": "logging.FileHandler",
+            "class": "logging.handlers.RotatingFileHandler",
             "level": "DEBUG",
             "formatter": "detailed",
-            "filename": "logs/giesela.txt",
-            "mode": "w"
+            "filename": "logs/giesela.log",
+            "mode": "w",
+            "backupCount": 3
         }
     },
     "loggers": {
@@ -64,9 +65,12 @@ def main():
     setup_logging()
 
     log = logging.getLogger("giesela")
+    handler = logging._handlers.get("file")
 
     while True:
         from giesela import Giesela, RestartSignal, TerminateSignal
+
+        handler.doRollover()
 
         log.info("creating Giesela")
         bot = Giesela()
