@@ -1,6 +1,6 @@
 import logging
 import time
-from typing import Any, Dict, Iterator, List, NamedTuple, Optional, Set, Tuple, Union
+from typing import Any, Dict, Iterator, List, NamedTuple, Optional, Tuple, Union
 
 import yaml
 from aiohttp import ClientSession
@@ -130,7 +130,7 @@ class RadioStation:
     manager: "RadioStationManager"
 
     name: str
-    aliases: Set[str]
+    aliases: List[str]
     stream: str
     website: Optional[str]
     logo: Optional[str]
@@ -141,7 +141,7 @@ class RadioStation:
 
     def __init__(self, **kwargs):
         self.name = kwargs.pop("name")
-        self.aliases = set(kwargs.pop("aliases", []))
+        self.aliases = kwargs.pop("aliases", [])
         self.stream = kwargs.pop("stream")
         self.website = kwargs.pop("website", None)
         self.logo = kwargs.pop("logo", None)
@@ -166,7 +166,7 @@ class RadioStation:
         return cls(**config)
 
     def to_dict(self) -> Dict[str, Any]:
-        return dict(name=self.name, aliases=list(self.aliases), website=self.website, logo=self.logo)
+        return dict(name=self.name, aliases=self.aliases, website=self.website, logo=self.logo)
 
     def is_alias(self, name: str) -> bool:
         return name.lower() == self.name.lower() or name in self.aliases

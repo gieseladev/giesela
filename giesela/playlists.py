@@ -5,7 +5,7 @@ import uuid
 from collections import defaultdict, deque
 from pathlib import Path
 from shelve import DbfilenameShelf, Shelf
-from typing import Any, Callable, Container, Deque, Dict, Iterable, Iterator, List, Mapping, Optional, Set, Tuple, Type, TypeVar, Union
+from typing import Any, Callable, Container, Deque, Dict, Iterable, Iterator, List, Mapping, Optional, Tuple, Type, TypeVar, Union
 
 from discord import User
 
@@ -164,7 +164,7 @@ class PlaylistEntry:
 
 PLAYLIST_SLOTS = ("gpl_id", "name", "description", "author_id", "cover", "entries", "editor_ids")
 # This makes backward-compatible saves somewhat possible
-PLAYLIST_SLOT_DEFAULTS = {"description": None, "cover": None, "entries": [], "editor_ids": set()}
+PLAYLIST_SLOT_DEFAULTS = {"description": None, "cover": None, "entries": [], "editor_ids": []}
 
 
 class Playlist:
@@ -176,7 +176,7 @@ class Playlist:
     author_id: int
     cover: Optional[str]
     entries: List[PlaylistEntry]
-    editor_ids: Set[int]
+    editor_ids: List[int]
 
     _author: User
     _editors: List[User]
@@ -189,7 +189,7 @@ class Playlist:
         self.description = kwargs.pop("description", None)
         self.cover = kwargs.pop("cover", None)
         self.entries = sorted(kwargs.pop("entries", []))
-        self.editor_ids = set(kwargs.pop("editors", []))
+        self.editor_ids = kwargs.pop("editors", [])
 
         author = kwargs.pop("author", None)
         if author:
@@ -264,8 +264,9 @@ class Playlist:
         return self._editors
 
     def init(self):
-        # TODO remove this after some time!
-        self.editor_ids = set(self.editor_ids)
+        # TODO remove after some time
+        # making sure that it's a list
+        self.editor_ids = list(self.editor_ids)
 
         self.entries.sort()
         for entry in self.entries:
@@ -404,7 +405,7 @@ class Playlist:
     def add_editor(self, user: User):
         if self.is_editor(user):
             return
-        self.editor_ids.add(user.id)
+        self.editor_ids.append(user.id)
         if hasattr(self, "_editors"):
             self._editors.append(user)
         self.save()
