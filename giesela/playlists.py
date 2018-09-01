@@ -143,10 +143,15 @@ class PlaylistEntry:
 
     def edit(self, **changes):
         changes = filter_dict(changes, ENTRY_SLOTS)
-        self._entry.update(changes)
         log.debug(f"applying changes {changes} to {self}")
+        before_sort_attr = self.sort_attr
+        self._entry.update(changes)
         if self.playlist:
-            self.playlist.save()
+            if self.sort_attr != before_sort_attr:
+                log.debug(f"{self} sort attribute has changed, re-ordering playlist")
+                self.playlist.reorder_entry(self)
+            else:
+                self.playlist.save()
 
     def copy(self) -> "PlaylistEntry":
         data = self.to_gpl().copy()
@@ -316,17 +321,23 @@ class Playlist:
             raise KeyError(f"{entry} isn't in {self}")
         self.save()
 
+    def reorder_entry(self, entry: PlaylistEntry):
+        if entry not in self:
+            raise KeyError(f"{entry} isn't in {self}")
+
+        # TODO TEST!
+        index = self.index_of(entry)
+        _entry = self.entries.pop(index)
+        bisect.insort_left(self.entries, _entry)
+        self.save()
+
     def edit_entry(self, entry: Union[BaseEntry, PlaylistEntry], changes: Dict[str, Any]):
         for _entry in self:
             if _entry == entry:
                 break
         else:
             raise KeyError(f"{entry} isn't in {self}")
-
-        index = self.index_of(_entry)
-        _entry = self.entries.pop(index)
         _entry.edit(**changes)
-        bisect.insort_left(self.entries, _entry)
 
     def has(self, entry: Union[BaseEntry, PlaylistEntry]) -> bool:
         for _entry in self:
