@@ -39,7 +39,7 @@ Configuring has never been as easy (maybe?)
     Api key for Google's API.
     
 `command_prefix` *optional*:
-    Change set the prefix for messages addressed to Giesela (default "!").
+    Set the prefix for messages addressed to Giesela (default "!").
 
 
 ### Volumes
@@ -56,20 +56,29 @@ to enable it is place (mount) your certificate file in the `/giesela/data/cert` 
 If you have a separate file for the private key you also need to place it in the same
 folder and make sure Giesela can identify which is which. You can do this by either
 naming the files `CERTIFICATE` vs `PRIVATEKEY` / `KEYFILE` or you can just give them
-the suffix `.cert` vs `.key`. There are of course other possibilities, but I'm too lazy
+the suffix `.cert` vs `.key`. There are of course other possible name combinations which Giesela understands, but I'm too lazy
 to name them all!
 
 
 ## What's new?
 - Better interface
-    * Interactive Messages for Lyrics, Queue
+    * Interactive Messages for:
+        - Lyrics
+        - Queue / History
+        - Playlist Editor / Entry Editor
+        - Shell
+        - Searching
     * Improved help/error
     * Self-updating now-playing message with built-in player control buttons
 - New player with "native" support for seeking
 - Using [Discord.py's Commands framework][discordpy-commands]
 - Removed a bunch of commands (I know this doesn't really sound like a good thing, but
     most of these commands were useless or broken anyway)
+- Optimised Entry system
 - New and improved playlist system
+- Newly added playlist features:
+    * Playlist editors
+- New radio station system which makes it easy (at least easier) to add new radio stations
 
 
 [docker-container]: https://www.docker.com/what-container
