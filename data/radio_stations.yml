@@ -13,20 +13,6 @@
       selector: div.now-playing__track__img-wrapper img
       attribute: data-src
 
-- name: Energy Bern
-  aliases:
-  - energy
-  logo: https://cdn.energy.ch/energych-broadcast/covers/channels/90x90-c/logo_primary_bern_1494402282.png
-  website: https://energy.ch/
-  stream: https://energybern.ice.infomaniak.ch/energybern-high.mp3
-  current_song:
-    url: https://energy.ch/play/bern
-    song_title: div.card-title.ellipsis
-    artist: div.card-description ellipsis
-    cover:
-      selector: div.card-cover img
-      attribute: src
-
 - name: ANISON.FM
   aliases:
   - anison

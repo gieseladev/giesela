@@ -31,6 +31,9 @@ class Resolver:
             attribute = config.pop("attribute", None)
         return cls(selector, attribute)
 
+    def process_value(self, value: str) -> str:
+        return " ".join(value.split()).strip()
+
     def resolve_one(self, bs: Tag) -> str:
         target = bs.select_one(self.selector)
 
@@ -42,7 +45,7 @@ class Resolver:
         else:
             value = str(target.text)
 
-        return value.strip()
+        return self.process_value(value)
 
 
 class Scraper:
@@ -87,7 +90,7 @@ class Scraper:
             except Exception:
                 if not silent:
                     raise
-                log.exception("Couldn't fetch {key} with {resolver}")
+                log.exception(f"Couldn't fetch {key} with {resolver}")
                 value = None
 
             data[key] = value
@@ -189,7 +192,7 @@ class RadioStation:
             return None
         data = await self.song_scraper.scrape(self.manager.aiosession)
 
-        kwargs = {key: value for key, value in data.items() if key in RADIO_SONG_DATA_FIELDS}
+        kwargs = {key: value for key, value in data.items() if key in RADIO_SONG_DATA_FIELDS and value is not None}
 
         if "remaining_duration" in data:
             remaining = utils.parse_timestamp(data["remaining_duration"])
