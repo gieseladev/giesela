@@ -43,8 +43,11 @@ Configuring has never been as easy (maybe?)
 
 
 ### Volumes
-You can mount `/giesela/data` which holds the data for the configuration file,
-the playlists and the lyrics (I think that's everything)
+You can mount `/giesela/data` which holds a lot of Giesela's static data
+(certificates, lyrics, options, and so on).
+
+> Keep in mind that these files will be overwritten with newer versions if there are any.
+Currently this only affects `radio_stations.yml`
 
 `/giesela/logs` holds the log files (if there even are any...)
 
@@ -56,8 +59,8 @@ to enable it is place (mount) your certificate file in the `/giesela/data/cert` 
 If you have a separate file for the private key you also need to place it in the same
 folder and make sure Giesela can identify which is which. You can do this by either
 naming the files `CERTIFICATE` vs `PRIVATEKEY` / `KEYFILE` or you can just give them
-the suffix `.cert` vs `.key`. There are of course other possible name combinations which Giesela understands, but I'm too lazy
-to name them all!
+the suffix `.cert` vs `.key`. There are of course other possible name combinations
+which Giesela understands, but I'm too lazy to name them all!
 
 
 ## What's new?
