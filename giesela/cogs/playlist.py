@@ -432,7 +432,7 @@ class PlaylistCog:
         entries = list(playlist.search_all_entries(query, threshold=.5))
         if not entries:
             raise commands.CommandError(f"Couldn't find \"{query}\"")
-        entries.sort(key=operator.itemgetter(1))
+        entries.sort(key=operator.itemgetter(1), reverse=True)
         entries = next(zip(*entries[:10]))
         indices = list(map(playlist.index_of, entries))
         pad_length = len(str(max(indices)))
