@@ -1,12 +1,13 @@
 import asyncio
 import functools
 import logging
+import operator
 import os
 import re
 import urllib
 import urllib.error
 from concurrent.futures import ThreadPoolExecutor
-from typing import AsyncIterator, List, Optional, Pattern, Tuple, Union
+from typing import AsyncIterator, Awaitable, Iterable, List, Optional, Pattern, Tuple, Union
 from urllib.parse import urlparse
 
 import youtube_dl
@@ -255,11 +256,23 @@ class Downloader:
         else:
             return await self.get_entry(info, **meta)
 
-    async def get_entry_gen(self, url: str, **meta) -> AsyncIterator[Tuple[int, BaseEntry]]:
+    async def get_entries_from_query(self, query: str, results: int = 5, **meta) -> List[Awaitable[BaseEntry]]:
+        query = f"ytsearch{results}:{query}"
+        try:
+            info = await self.extract_info(query, process=True)
+        except Exception as e:
+            raise ExtractionError(f"Could not extract information from {query}\n\n{e}")
+
+        if "entries" not in info:
+            raise ExtractionError(f"Couldn't find any entries for {query}")
+
+        return [asyncio.ensure_future(self.get_entry(entry, **meta)) for entry in info["entries"]]
+
+    async def get_entry_gen(self, url: str, **meta) -> AsyncIterator[Tuple[int, Optional[BaseEntry]]]:
         info = await self.extract_info(url, process=False)
 
         if "entries" in info:
-            return self.get_entries_from_urls_gen(*[entry["url"] for entry in info["entries"]])
+            return self.get_entries_from_urls_gen(map(operator.itemgetter("url"), info["entries"]), **meta)
         else:
             async def _tuple_gen_creator(collection):
                 for i, el in enumerate(collection):
@@ -267,13 +280,12 @@ class Downloader:
 
             return _tuple_gen_creator([await self.get_entry(info, **meta)])
 
-    async def get_entries_from_urls_gen(self, *urls: str, **meta) -> AsyncIterator[Tuple[int, BaseEntry]]:
+    async def get_entries_from_urls_gen(self, urls: Iterable[str], **meta) -> AsyncIterator[Tuple[int, Optional[BaseEntry]]]:
         for ind, url in enumerate(urls):
             try:
                 entry = await self.get_entry(url, **meta)
-            except (ExtractionError, WrongEntryTypeError) as e:
-                print("Error while dealing with url \"{}\":\n{}".format(url, e))
-                yield ind, None
-                continue
+            except (ExtractionError, WrongEntryTypeError):
+                log.exception(f"Error while dealing with url \"{url}\"")
+                entry = None
 
             yield ind, entry

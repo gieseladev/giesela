@@ -273,7 +273,7 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
 
         self.embed_callback = kwargs.pop("embed_callback", None)
 
-        if not (bool(self.embeds) ^ bool(self.embed_callback)):
+        if not (issubclass(type(self), _HorizontalPageViewer) or bool(self.embeds) ^ bool(self.embed_callback)):
             raise ValueError("You need to provide either the `embeds` or the `embed_callback` keyword argument")
 
         super().__init__(channel, user, **kwargs)
@@ -301,6 +301,8 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
                 res = await res
 
             return res
+        else:
+            raise Exception("Didn't override \"get_current_embed\" or provide any form of content")
 
     async def show_page(self):
         next_embed = await self.get_current_embed()

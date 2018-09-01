@@ -4,7 +4,7 @@ import time
 from random import shuffle
 from typing import Dict, Optional
 
-from discord import Embed, Message
+from discord import Embed
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -12,7 +12,7 @@ from giesela import Downloader, Giesela, MusicPlayer, RadioSongExtractor, RadioS
     get_random_station
 from giesela.lib.api import spotify
 from giesela.ui import ItemPicker, LoadingBar, VerticalTextViewer
-from giesela.ui.custom import NowPlayingEmbed
+from giesela.ui.custom import EntrySearchUI, NowPlayingEmbed
 from giesela.utils import (create_bar, format_time, html2md, nice_cut)
 from .player import Player
 from .webiesela import WebieselaServer
@@ -56,7 +56,7 @@ async def _play_url(ctx: Context, player: MusicPlayer, url: str, placement: int 
         entries_added = 0
         entries_not_added = 0
 
-        entry_generator = player.downloader.get_entries_from_urls_gen(*entry, author=ctx.author)
+        entry_generator = player.downloader.get_entries_from_urls_gen(entry, author=ctx.author)
 
         total_entries = len(entry)
         progress_message = await ctx.send("Parsing {} entries\n{} [0%]".format(total_entries, create_bar(0, length=20)))
@@ -207,94 +207,20 @@ class EnqueueCog(QueueBase):
         await self._play_cmd(ctx, url, placement=placement)
 
     @commands.command()
-    async def search(self, ctx: Context, *query: str):
+    async def search(self, ctx: Context, *, query: str):
         """Searches for a video and adds the one you choose."""
         player = await self.get_player(ctx)
 
-        if not query:
-            raise commands.CommandError("Please specify a search query.")
+        async with ctx.typing():
+            results = await player.downloader.get_entries_from_query(query, author=ctx.author)
+        searcher = EntrySearchUI(ctx.channel, player, results, user=ctx.author, bot=self.bot)
 
-        try:
-            number = int(query[0])
-            if number > 20:
-                raise commands.CommandError("You musn't search for more than 20 videos")
-
-            query = " ".join(query[1:])
-
-            if not query:
-                raise commands.CommandError("You have to specify the query too.")
-        except ValueError:
-            number = 5
-            query = " ".join(query)
-
-        search_query = "ytsearch{}:{}".format(number, query)
-
-        search_msg = await ctx.send("Searching for videos...")
-        try:
-            async with ctx.typing():
-                info = await self.downloader.extract_info(search_query, process=True)
-        except Exception as e:
-            await search_msg.edit(content=str(e))
-            return
+        entry = await searcher.choose()
+        if entry:
+            player.queue.add_entry(entry)
+            await ctx.send(f"Enqueued **{entry.title}**")
         else:
-            await search_msg.delete()
-
-        if not info:
-            await ctx.send("No videos found.")
-            return
-
-        result_string = "**Result {0}/{1}**\n{2}"
-        interface_string = "**Commands:**\n" \
-                           "`play` play this result\n" \
-                           "`addtoplaylist <playlist name>` add this result to a playlist\n" \
-                           "\n" \
-                           "`n` next result\n" \
-                           "`p` previous result\n" \
-                           "`exit` abort and exit"
-
-        current_result_index = 0
-        total_results = len(info["entries"])
-
-        def msg_check(msg: Message) -> bool:
-            if msg.author == ctx.author and msg.channel == ctx.channel:
-                return msg.content.strip().lower().split()[0] in ("play", "n", "p", "exit")
-            return False
-
-        async def delete_msgs():
-            nonlocal result_message, interface_message, response_message
-            await asyncio.wait([result_message.delete(), interface_message.delete(), response_message.delete()])
-
-        while True:
-            current_result = info["entries"][current_result_index]
-
-            result_message = await ctx.send(result_string.format(current_result_index + 1, total_results, current_result["webpage_url"]))
-            interface_message = await ctx.send(interface_string)
-
-            response_message = await self.bot.wait_for("message", check=msg_check, timeout=100)
-
-            if not response_message:
-                await delete_msgs()
-                await ctx.send("Aborting search. [Timeout]")
-                return
-
-            content = response_message.content.strip()
-            command, *args = content.lower().split()
-
-            if command == "exit":
-                await delete_msgs()
-                await ctx.send("Okay then. Search again soon")
-                return
-            elif command in "np":
-                # feels hacky but is actully genius
-                current_result_index += {"n": 1, "p": -1}[command]
-                current_result_index %= total_results
-            elif command == "play":
-                await _play_url(ctx, player, current_result["webpage_url"])
-                await delete_msgs()
-                await ctx.send("Alright, coming right up!")
-                return
-
-            await delete_msgs()
+            await ctx.message.delete()
 
     @commands.command()
     async def spotify(self, ctx: Context, url: str):
