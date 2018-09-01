@@ -34,7 +34,7 @@ class ConfigDefaults:
 
     webiesela_cert = "data/cert"
     options_file = "data/options.ini"
-    radios_file = "data/radio_stations.json"
+    radio_stations_config = "data/radio_stations.yml"
     playlists_file = "data/playlists/playlists"
     lyrics_cache = "data/lyrics"
 

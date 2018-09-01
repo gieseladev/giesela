@@ -3,9 +3,10 @@ import logging
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, MusicPlayer, PlaylistManager, WebieselaServer
+from giesela import Giesela, MusicPlayer, PlaylistManager, RadioStationManager, WebieselaServer
 from .player import Player
 from .playlist import PlaylistCog
+from .radio import Radio
 
 log = logging.getLogger(__name__)
 
@@ -18,12 +19,16 @@ class Webiesela:
     player_cog: Player
     playlist_cog: PlaylistCog
     playlist_manager: PlaylistManager
+    radio_cog: Radio
+    radio_station_manager: RadioStationManager
 
     def __init__(self, bot: Giesela):
         self.bot = bot
         self.player_cog = bot.cogs["Player"]
         self.playlist_cog = bot.cogs["Playlist"]
         self.playlist_manager = self.playlist_cog.playlist_manager
+        self.radio_cog = bot.cogs["Radio"]
+        self.radio_station_manager = self.radio_cog.station_manager
 
     async def get_player(self, *args, **kwargs) -> MusicPlayer:
         return await self.player_cog.get_player(*args, **kwargs)

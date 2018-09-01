@@ -21,7 +21,6 @@ from .config import static_config
 from .entry import TimestampEntry
 from .lib.api import spotify
 from .lib.web_socket_server import SimpleSSLWebSocketServer, SimpleWebSocketServer, WebSocket
-from .radio import RadioStations, get_all_stations
 
 if TYPE_CHECKING:
     from giesela import MusicPlayer, Giesela
@@ -61,6 +60,15 @@ def playlists_overview(player: "MusicPlayer") -> List[Dict[str, Any]]:
                   entries=entries, duration=playlist.duration, human_dur=utils.format_time(playlist.duration, max_specifications=1))
         playlists.append(pl)
     return playlists
+
+
+def radio_stations_overview() -> List[Dict[str, Any]]:
+    stations = []
+    for station in WebieselaServer.cog.radio_station_manager:
+        data = station.to_dict()
+        data.update(id=station.name, language="DEPRECATED", cover=station.logo)
+        stations.append(data)
+    return stations
 
 
 class GieselaWebSocket(WebSocket):
@@ -224,7 +232,7 @@ class GieselaWebSocket(WebSocket):
             elif request == "send_radio_stations":
                 self.log("asked for the radio stations")
 
-                answer["radio_stations"] = [station.to_dict() for station in get_all_stations()]
+                answer["radio_stations"] = radio_stations_overview()
 
             elif request == "send_lyrics":
                 self.log("asked for lyrics")
@@ -364,11 +372,10 @@ class GieselaWebSocket(WebSocket):
             elif command == "play_radio":
                 station_id = command_data.get("id")
                 play_mode = command_data.get("mode", "now")
-                station = RadioStations.get_station(station_id)
-
-                self.log("enqueued radio station", station.name, "(mode " + play_mode + ")")
+                station = WebieselaServer.cog.radio_station_manager.find_station(station_id)
 
                 if station:
+                    self.log("enqueued radio station", station.name, "(mode " + play_mode + ")")
                     _call_function_main_thread(player.queue.add_radio_entry, station, now=(play_mode == "now"), wait_for_result=True, revert=True)
                     success = True
                 else:

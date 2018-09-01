@@ -11,7 +11,7 @@ from .downloader import Downloader
 from .entry import (BaseEntry, RadioSongEntry, RadioStationEntry)
 from .exceptions import BrokenEntryError, ExtractionError
 from .lib.event_emitter import EventEmitter
-from .radio import StationInfo
+from .radio import RadioStation
 from .webiesela import WebieselaServer
 
 if TYPE_CHECKING:
@@ -120,11 +120,12 @@ class Queue(EventEmitter):
         WebieselaServer.send_player_information(self.player.channel.guild.id)
         self.emit("entry-added", queue=self)
 
-    async def add_radio_entry(self, station_info: StationInfo, now: bool = False, **meta) -> RadioStationEntry:
-        if station_info.has_current_song_info:
-            entry = RadioSongEntry(station_info, **meta)
+    async def add_radio_entry(self, station: RadioStation, now: bool = False, **meta) -> RadioStationEntry:
+        if station.has_song_data:
+            song_data = await station.get_song_data()
+            entry = RadioSongEntry(station, song_data, **meta)
         else:
-            entry = RadioStationEntry(station_info, **meta)
+            entry = RadioStationEntry(station, **meta)
 
         if now:
             await self.player.play(entry)

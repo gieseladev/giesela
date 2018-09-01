@@ -6,6 +6,6 @@ from .entry import *
 from .exceptions import *
 from .player import MusicPlayer
 from .playlists import EditPlaylistProxy, Playlist, PlaylistEntry, PlaylistManager
-from .radio import *
+from .radio import RadioStation, RadioStationManager
 from .shell import GieselaShell
 from .webiesela import WebieselaServer

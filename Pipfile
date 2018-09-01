@@ -19,6 +19,8 @@ aiohttp = "*"
 websockets = "*"
 colorlog = "*"
 "js2py" = "*"
+lxml = "*"
+pyyaml = "*"
 
 [dev-packages]
 pytest = "*"

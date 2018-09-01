@@ -1,230 +1,249 @@
-import json
-import re
+import logging
 import time
-from datetime import date, datetime, timedelta, timezone
-from itertools import chain
-from random import choice
+from typing import Any, Dict, Iterator, List, NamedTuple, Optional, Set, Tuple, Union
 
-import requests
+import yaml
+from aiohttp import ClientSession
 from bs4 import BeautifulSoup
-from dateutil.parser import parse
+from bs4.element import Tag
 
-from .config import ConfigDefaults
-from .lib.api import energy
+from . import utils
+from .bot import Giesela
+
+log = logging.getLogger(__name__)
 
 
-class StationInfo:
+class Resolver:
+    selector: str
+    attribute: Optional[str]
 
-    def __init__(self, id, name, aliases, language, cover, url, website, thumbnails, poll_time=None, uncertainty=2):
-        self.id = id
-        self.name = name
-        self._aliases = aliases
-        self.aliases = [name, *aliases]
-        self.language = language
-        self.cover = cover
-        self.url = url
-        self.website = website
-        self.thumbnails = list(
-            chain(*[RadioStations.thumbnails[pointer] if pointer in RadioStations.thumbnails else [pointer] for pointer in thumbnails]))
-
-        self.has_current_song_info = RadioSongExtractor.has_data(self)
-        self.poll_time = poll_time
-        self.uncertainty = uncertainty
-
-        self._current_thumbnail = None
-        self._ct_timestamp = 0
-
-    @property
-    def thumbnail(self):
-        if not self._current_thumbnail or time.time() > self._ct_timestamp:
-            self._current_thumbnail = choice(self.thumbnails)
-            self._ct_timestamp = time.time() + (self.poll_time or 20)
-
-        return self._current_thumbnail
+    def __init__(self, selector: str, attribute: str = None):
+        self.selector = selector
+        self.attribute = attribute
 
     @classmethod
-    def from_dict(cls, data):
-        return cls(**data)
+    def from_config(cls, config: Union[str, Dict[str, Any]]) -> "Resolver":
+        if isinstance(config, str):
+            selector = config
+            attribute = None
+        else:
+            selector = config.pop("selector")
+            attribute = config.pop("attribute", None)
+        return cls(selector, attribute)
 
-    def to_dict(self):
-        data = {
-            "id": self.id,
-            "name": self.name,
-            "aliases": self._aliases,
-            "language": self.language,
-            "cover": self.cover,
-            "website": self.website,
-            "url": self.url,
-            "poll_time": self.poll_time,
-            "uncertainty": self.uncertainty,
-            "thumbnails": self.thumbnails
-        }
+    def resolve_one(self, bs: Tag) -> str:
+        target = bs.select_one(self.selector)
+
+        if self.attribute:
+            value = target[self.attribute]
+            if value and isinstance(value, list):
+                value = " ".join(value)
+            value = str(value)
+        else:
+            value = str(target.text)
+
+        return value.strip()
+
+
+class Scraper:
+    url: str
+    targets: Dict[str, Resolver]
+
+    def __init__(self, url: str, targets: Dict[str, Resolver]):
+        self.url = url
+        self.targets = targets
+
+    @property
+    def keys(self) -> List[str]:
+        return list(self.targets.keys())
+
+    @classmethod
+    def from_config(cls, config: Dict[str, Union[str, Dict[str, Any]]]) -> "Scraper":
+        url = config.pop("url")
+        targets = {key: Resolver.from_config(value) for key, value in config.items()}
+        return cls(url, targets)
+
+    def absolute_url(self, url: str, *, https: bool = True) -> str:
+        if url.startswith("//"):
+            pre = "https" if https else "http"
+            return f"{pre}:{url}"
+        elif url.startswith("/") or not url.startswith(("http://", "https://")):
+            base_url = self.url.rstrip("/")
+            url = url.lstrip("/")
+            return f"{base_url}/{url}"
+        return url
+
+    async def get_soup(self, session: ClientSession) -> BeautifulSoup:
+        async with session.get(self.url) as resp:
+            text = await resp.text()
+        return BeautifulSoup(text, "lxml")
+
+    async def scrape(self, session: ClientSession, *, silent: bool = True) -> Dict[str, Any]:
+        bs = await self.get_soup(session)
+        data = {}
+        for key, resolver in self.targets.items():
+            try:
+                value = resolver.resolve_one(bs)
+            except Exception:
+                if not silent:
+                    raise
+                log.exception("Couldn't fetch {key} with {resolver}")
+                value = None
+
+            data[key] = value
+
         return data
 
-    def to_web_dict(self):
-        return self.to_dict()
+
+RADIO_SONG_DATA_URL_FIELDS = ("artist_image", "cover")
+RADIO_SONG_DATA_FIELDS = ("song_title", "artist", "album", "progress", "duration") + RADIO_SONG_DATA_URL_FIELDS
+SONG_SCRAPER_FIELDS = ("url", "remaining_duration") + RADIO_SONG_DATA_FIELDS
 
 
-def get_all_stations():
-    RadioStations.init()
-    return RadioStations.stations
+class RadioSongData(NamedTuple):
+    timestamp: float
+
+    song_title: str = None
+    artist: str = None
+    artist_image: str = None
+    album: str = None
+    cover: str = None
+    progress: float = None
+    duration: float = None
+
+    def __str__(self) -> str:
+        origin = self.artist or self.album
+        if self.song_title:
+            if origin:
+                return f"{origin} - {self.song_title}"
+            return self.song_title
+        return origin or "Unknown Song"
+
+    def to_dict(self) -> Dict[str, Any]:
+        return dict(self._asdict())
 
 
-def get_random_station():
-    RadioStations.init()
-    station = choice(RadioStations.stations)
-    return station
+class RadioStation:
+    manager: "RadioStationManager"
 
+    name: str
+    aliases: Set[str]
+    stream: str
+    website: Optional[str]
+    logo: Optional[str]
 
-class RadioStations:
-    _initialised = False
-    stations = []
-    thumbnails = {}
+    song_scraper: Optional[Scraper]
+    update_interval: int
+    extra_update_delay: int
 
-    @staticmethod
-    def init():
-        if not RadioStations._initialised:
-            data = json.load(open(ConfigDefaults.radios_file, "r"))
-            RadioStations.thumbnails = data["thumbnails"]
-            RadioStations.stations = [StationInfo.from_dict(
-                station) for station in data["stations"]]
-            _initialised = True
+    def __init__(self, **kwargs):
+        self.name = kwargs.pop("name")
+        self.aliases = set(kwargs.pop("aliases", []))
+        self.stream = kwargs.pop("stream")
+        self.website = kwargs.pop("website", None)
+        self.logo = kwargs.pop("logo", None)
 
-    @staticmethod
-    def get_station(query):
-        RadioStations.init()
-        for station in RadioStations.stations:
-            if station.id == query or query in station.aliases:
-                return station
+        self.song_scraper = kwargs.pop("song_scraper", None)
+        self.update_interval = kwargs.pop("update_interval", 40)
+        self.extra_update_delay = kwargs.pop("extra_update_delay", 0.5)
 
-        return None
+    def __str__(self) -> str:
+        return f"Radio {self.name}"
 
+    @property
+    def has_song_data(self) -> bool:
+        return bool(self.song_scraper)
 
-def _get_current_song_bbc():
-    resp = requests.get(
-        "http://np.radioplayer.co.uk/qp/v3/onair?rpIds=340")
-    data = json.loads(
-        re.match(r"callback\((.+)\)", resp.text).group(1))
-    song_data = data["results"]["340"][-1]
-    start_time = datetime.fromtimestamp(
-        int(song_data["startTime"]))
-    stop_time = datetime.fromtimestamp(
-        int(song_data["stopTime"]))
-    duration = round((stop_time - start_time).total_seconds())
-    progress = round(
-        (datetime.now() - start_time).total_seconds())
+    @classmethod
+    def from_config(cls, config: Dict[str, Any]) -> "RadioStation":
+        song_scraper_config = config.pop("current_song", None)
+        if song_scraper_config:
+            song_scraper = Scraper.from_config({key: value for key, value in song_scraper_config.items() if key in SONG_SCRAPER_FIELDS})
+            config["song_scraper"] = song_scraper
+        return cls(**config)
 
-    return {
-        "title": song_data["name"],
-        "artist": song_data["artistName"],
-        "cover": song_data["imageUrl"],
-        "youtube": "http://www.bbc.co.uk/radio",
-        "duration": duration,
-        "progress": progress
-    }
+    def to_dict(self) -> Dict[str, Any]:
+        return dict(name=self.name, aliases=list(self.aliases), website=self.website, logo=self.logo)
 
+    def is_alias(self, name: str) -> bool:
+        return name.lower() == self.name.lower() or name in self.aliases
 
-def _get_current_song_capital_fm():
-    resp = requests.get("http://www.capitalfm.com/digital/radio/last-played-songs/")
-    soup = BeautifulSoup(resp.text, ConfigDefaults.html_parser)
-
-    tz_info = timezone(timedelta(hours=1))
-
-    time_on = soup.select(".last_played_songs .show.on_now .details .time")[0].contents[-1].strip()
-    start, end = time_on.split("-", maxsplit=1)
-
-    start_time = datetime.combine(date.today(), datetime.strptime(start.strip(), "%I%p").time(), tz_info)
-    end_time = datetime.combine(date.today(), datetime.strptime(end.strip(), "%I%p").time(), tz_info)
-
-    duration = (end_time - start_time).total_seconds()
-    progress = (datetime.now(tz=tz_info) - start_time).total_seconds()
-
-    title = soup.find("span", attrs={"class": "track", "itemprop": "name"}).text.strip()
-    artist = soup.find("span", attrs={"class": "artist", "itemprop": "byArtist"}).text
-    artist = re.sub(r"[\n\s]+", " ", artist).strip()
-    cover = soup.select(".song_wrapper .img_wrapper img")[0]["data-src"]
-
-    return {
-        "title": title,
-        "artist": artist,
-        "cover": cover,
-        "youtube": "http://www.capitalfm.com",
-        "duration": duration,
-        "progress": progress
-    }
-
-
-def _get_current_song_energy_bern():
-    playouts = energy.get_playouts()
-
-    now_playing = playouts[0]
-    progress = (datetime.now(tz=timezone(timedelta(hours=0))) - parse(now_playing["created_at"])).total_seconds()
-
-    title = "Unknown"
-    artist = "Unknown"
-    cover = None
-    link = None
-    duration = None
-
-    if now_playing.get("type") == "music":
-        song = now_playing["song"]
-
-        title = song["title"]
-        artist = song["artists_full"]
-        cover = song["cover_url"]
-        link = song["youtube_url"] or song["spotify_url"] or "https://energy.ch/play/bern"
-        duration = song["duration"]
-
-    elif now_playing.get("type") == "news":
-        program = now_playing["program"]
-
-        title = program["title"]
-        artist = "Energy Bern"
-        cover = program["cover_url"]
-        link = "https://energy.ch/play/bern"
-
-    if duration:
-        progress = min(progress, duration)
-
-    return {
-        "title": title,
-        "artist": artist,
-        "cover": cover,
-        "youtube": link,
-        "duration": duration,
-        "progress": progress
-    }
-
-
-def init_extractor():
-    if not RadioSongExtractor._initialised:
-        RadioSongExtractor.extractors = {
-            "energybern": _get_current_song_energy_bern,
-            "capitalfm": _get_current_song_capital_fm,
-            "bbc": _get_current_song_bbc
-        }
-        RadioSongExtractor._initialised = True
-
-
-class RadioSongExtractor:
-    _initialised = False
-    extractors = None
-
-    @staticmethod
-    def has_data(station_info):
-        init_extractor()
-        return station_info.id in RadioSongExtractor.extractors
-
-    @staticmethod
-    def get_current_song(station_info):
-        init_extractor()
-        extractor = RadioSongExtractor.extractors.get(station_info.id, None)
-
-        if not extractor:
-            return None
+    def handle_remaining_duration(self, song_id: str, remaining: int) -> Tuple[int, int]:
+        prev_id, duration = getattr(self, "_remaining_duration_data", (None, None))
+        if prev_id == song_id and duration >= remaining:
+            progress = duration - remaining
         else:
-            return extractor()
+            progress = 0
+            duration = remaining
+            setattr(self, "_remaining_duration_data", (song_id, duration))
+        return progress, duration
 
-    @staticmethod
-    async def async_get_current_song(loop, station_info):
-        return await loop.run_in_executor(None, RadioSongExtractor.get_current_song, station_info)
+    def fix_url_fields(self, data: Dict[str, Any]):
+        for field in RADIO_SONG_DATA_URL_FIELDS:
+            if field in data:
+                value = data[field]
+                data[field] = self.song_scraper.absolute_url(value)
+
+    async def get_song_data(self) -> Optional[RadioSongData]:
+        if not self.song_scraper:
+            return None
+        data = await self.song_scraper.scrape(self.manager.aiosession)
+
+        kwargs = {key: value for key, value in data.items() if key in RADIO_SONG_DATA_FIELDS}
+
+        if "remaining_duration" in data:
+            remaining = utils.parse_timestamp(data["remaining_duration"])
+            song_id = "".join(filter(None, map(kwargs.get, ("song_title", "artist", "album"))))
+            if song_id:
+                progress, duration = self.handle_remaining_duration(song_id, remaining)
+                kwargs.update(progress=progress, duration=duration)
+        else:
+            if "duration" in kwargs:
+                kwargs["duration"] = utils.parse_timestamp(data["duration"])
+            if "progress" in kwargs:
+                kwargs["progress"] = utils.parse_timestamp(data["progress"])
+
+        self.fix_url_fields(kwargs)
+
+        return RadioSongData(time.time(), **kwargs)
+
+
+class RadioStationManager:
+    bot: Giesela
+    stations: List[RadioStation]
+
+    aiosession: ClientSession
+
+    def __init__(self, bot: Giesela, stations: List[RadioStation] = None):
+        self.bot = bot
+        self.stations = stations or []
+
+        self.aiosession = getattr(bot, "aiosession", None) or ClientSession()
+
+    def __iter__(self) -> Iterator[RadioStation]:
+        return iter(self.stations)
+
+    @classmethod
+    def load(cls, bot: Giesela, fp: Union[str, List[Dict[str, Any]]]) -> "RadioStationManager":
+        if isinstance(fp, str):
+            with open(fp, "r") as f:
+                stations = yaml.safe_load(f)
+        else:
+            stations = fp
+
+        inst = cls(bot)
+
+        for station_data in stations:
+            station = RadioStation.from_config(station_data)
+            inst.add_station(station)
+
+        return inst
+
+    def add_station(self, station: RadioStation):
+        station.manager = self
+        self.stations.append(station)
+
+    def find_station(self, query: str) -> Optional[RadioStation]:
+        for station in self:
+            if station.is_alias(query):
+                return station

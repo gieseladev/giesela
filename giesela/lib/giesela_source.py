@@ -5,7 +5,7 @@ Another fancy thing is the possibility to wait for the player to reach a certain
 
 import asyncio
 import logging
-from typing import Any, Callable, List, TypeVar, Union
+from typing import Any, Callable, List, Optional, TypeVar, Union
 
 from discord import FFmpegPCMAudio, PCMVolumeTransformer
 
@@ -113,7 +113,7 @@ class GieselaSource(PCMVolumeTransformer):
                 waiter.cancel()
 
     def wait_for_timestamp(self, timestamp: float, *, only_when_latest: bool = False,
-                           target: Union[asyncio.Future, Callable[[], Any]] = None) -> asyncio.Future:
+                           target: Union[asyncio.Future, Callable[[], Any]] = None) -> Optional[asyncio.Future]:
         return_val = None
 
         if isinstance(target, asyncio.Future):
@@ -125,7 +125,7 @@ class GieselaSource(PCMVolumeTransformer):
             wrapped = callback_after_future(future, target)
             return_val = asyncio.ensure_future(wrapped)
         else:
-            future = asyncio.Future()
+            future = return_val = asyncio.Future()
 
         bytestamp = timestamp * BYTES_PER_SECOND
         ind = 0
@@ -134,7 +134,7 @@ class GieselaSource(PCMVolumeTransformer):
                 break
 
         self.waiters.insert(ind, PlayerTimestamp(timestamp, only_when_latest, future))
-        return return_val or future
+        return return_val
 
     def seek(self, s: float):
         """Seek to s in the stream."""

@@ -1,0 +1,30 @@
+- name: Capital FM
+  aliases:
+  - cfm
+  - capital
+  logo: https://i.imgur.com/7HKaC0z.png
+  website: https://capitalfm.com
+  stream: http://media-ice.musicradio.com/CapitalMP3
+  current_song:
+    url: https://www.capitalfm.com/digital/radio/last-played-songs/
+    song_title: span.now-playing__text-content__details__track
+    artist: span.now-playing__text-content__details__artist
+    cover:
+      selector: div.now-playing__track__img-wrapper img
+      attribute: data-src
+
+- name: ANISON.FM
+  aliases:
+  - anison
+  logo: https://anison.fm/images/logo-og.png
+  website: https://en.anison.fm
+  stream: http://pool.anison.fm:9000/AniSonFM(320)
+  current_song:
+    url: https://en.anison.fm/
+    song_title: div#on_air span.title
+    artist: div#on_air span.anime
+    album: div#on_air span.anime
+    cover:
+      selector: a#curent_poster img
+      attribute: src
+    remaining_duration: span#duration

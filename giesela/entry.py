@@ -8,7 +8,7 @@ from typing import Any, Dict, List, Optional, TYPE_CHECKING
 
 from .exceptions import (ExtractionError, OutdatedEntryError)
 from .lyrics import search_for_lyrics
-from .radio import RadioSongExtractor, StationInfo
+from .radio import RadioSongData, RadioStation
 from .utils import clean_songname
 
 if TYPE_CHECKING:
@@ -184,8 +184,11 @@ class StreamEntry(BaseEntry):
 
         self._title = title
 
+    def __repr__(self) -> str:
+        return f"<{type(self).__name__}: {self._title}>"
+
     @property
-    def title(self):
+    def title(self) -> str:
         return self._title
 
     @property
@@ -198,7 +201,7 @@ class StreamEntry(BaseEntry):
             return False
         return bool(self.filename)
 
-    def to_dict(self):
+    def to_dict(self) -> Dict[str, Any]:
         data = super().to_dict()
         data.update(title=self._title)
         return data
@@ -222,33 +225,25 @@ class StreamEntry(BaseEntry):
 
 
 class RadioStationEntry(StreamEntry):
-    station_info: StationInfo
+    station: RadioStation
 
-    def __init__(self, station_info: StationInfo, **kwargs):
-        kwargs.setdefault("title", station_info.name)
-        super().__init__(station_info.url, **kwargs)
-        self.station_info = station_info
-
-    @property
-    def title(self):
-        return self._title
+    def __init__(self, station: RadioStation, **kwargs):
+        kwargs.setdefault("title", station.name)
+        super().__init__(station.stream, **kwargs)
+        self.station = station
 
     @property
-    def thumbnail(self):
-        return self.station_info.thumbnail
-
-    @property
-    def link(self):
-        return self.station_info.website
+    def link(self) -> str:
+        return self.station.website or self.station.stream
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "RadioStationEntry":
-        data["station_info"] = StationInfo.from_dict(data.pop("station_info"))
+        data["station"] = RadioStation.from_config(data.pop("station"))
         return cls(**data)
 
     def to_dict(self) -> Dict[str, Any]:
         data = super().to_dict()
-        data.update(station_data=self.station_info.to_dict())
+        data.update(station=self.station.to_dict())
         return data
 
     @property
@@ -257,65 +252,59 @@ class RadioStationEntry(StreamEntry):
 
 
 class RadioSongEntry(RadioStationEntry):
-    _current_song_info: Dict[str, Any]
-    _csi_poll_time: float
+    _current_song_data: RadioSongData
 
-    poll_time: float
-    uncertainty: float
+    def __init__(self, station: RadioStation, song_data: RadioSongData, **kwargs):
+        super().__init__(station, **kwargs)
+        self._current_song_data = song_data
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._current_song_info = None
-        self._csi_poll_time = 0
+    async def update(self):
+        self._current_song_data = await self.station.get_song_data()
 
-        self.poll_time = self.station_info.poll_time
-        self.uncertainty = self.station_info.uncertainty
+    @property
+    def next_update_delay(self) -> float:
+        if self.song_data.duration and self.song_data.progress is not None:
+            timeout = self.song_data.duration - self.song_progress
+        else:
+            timeout = self.station.update_interval - self.song_data_age
+
+        if timeout <= 0:
+            return 0
+        else:
+            return timeout + self.station.extra_update_delay
+
+    @property
+    def song_data_age(self) -> float:
+        return time.time() - self._current_song_data.timestamp
+
+    @property
+    def song_data(self) -> RadioSongData:
+        return self._current_song_data
+
+    @property
+    def song_progress(self) -> Optional[float]:
+        if self.song_data.progress is not None:
+            progress = self.song_data.progress + self.song_data_age
+            if self.song_data.duration:
+                progress = min(progress, self.song_data.duration)
+            return progress
 
     @property
     def title(self) -> str:
-        return f"{self.artist} - {self.song_title}"
-
-    def _get_new_song_info(self):
-        self._current_song_info = RadioSongExtractor.get_current_song(self.station_info)
-        self._csi_poll_time = time.time()
-
-    @property
-    def current_song_info(self):
-        if self._current_song_info is None or (time.time() - self._csi_poll_time) > 5:
-            self._get_new_song_info()
-
-        return self._current_song_info
-
-    @property
-    def song_progress(self) -> float:
-        return self.current_song_info["progress"]
-
-    @property
-    def song_duration(self) -> float:
-        return self.current_song_info["duration"]
-
-    @property
-    def link(self) -> str:
-        return self.current_song_info["youtube"] or super().link
-
-    @property
-    def song_title(self) -> str:
-        return self.current_song_info["title"]
-
-    @property
-    def artist(self) -> str:
-        return self.current_song_info["artist"]
-
-    @property
-    def cover(self) -> str:
-        return self.current_song_info["cover"]
+        artist = self.song_data.artist
+        song = self.song_data.song_title
+        if song:
+            return f"{artist or self.station.name} - {song}"
+        elif artist:
+            return f"{self.station.name} - {artist}"
+        else:
+            return super().title
 
     def to_web_dict(self, player: "MusicPlayer"):
         data = super().to_web_dict(player)
 
         if player.current_entry is self:
-            data.update(song_progress=self.song_progress, song_duration=self.song_duration, song_title=self.song_title, artist=self.artist,
-                        cover=self.cover)
+            data.update(song_progress=self.song_progress, song_data=self.song_data.to_dict())
 
         return data
 

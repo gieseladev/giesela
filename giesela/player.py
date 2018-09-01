@@ -256,30 +256,25 @@ class MusicPlayer(EventEmitter):
             self.voice_client.source = source
         else:
             self.voice_client.play(source, after=self._playback_finished)
-        self.setup_chapters()
+        await self.setup_chapters()
 
         log.info(f"playing {entry} in {self.vc_qualified_name}")
         self.emit("play", player=self, entry=entry)
 
-    def setup_chapters(self):
+    async def setup_chapters(self):
         if isinstance(self.current_entry, TimestampEntry):
             sub_queue = self.current_entry.sub_queue
             for sub_entry in sub_queue:
                 self.player.wait_for_timestamp(sub_entry["start"], only_when_latest=True, target=self.update_chapter)
-        elif isinstance(self.current_entry, RadioSongEntry):
-            delay = None
-            if self.current_entry.poll_time:
-                delay = self.current_entry.poll_time
-                log.debug(f"Radio stations enforces a custom wait time ({delay}s)")
-            elif self.current_entry.song_duration and self.current_entry.song_duration > self.current_entry.uncertainty:
-                delay = self.current_entry.song_duration - self.current_entry.song_progress + self.current_entry.uncertainty
 
-            delay = delay if delay and delay > 0 else 40
+        elif isinstance(self.current_entry, RadioSongEntry):
+            await self.current_entry.update()
+            delay = max(self.current_entry.next_update_delay, 1)
             self.loop.call_later(delay, self.repeat_chapter_setup)
 
     def repeat_chapter_setup(self):
         asyncio.ensure_future(self.update_chapter())
-        self.setup_chapters()
+        asyncio.ensure_future(self.setup_chapters())
 
     async def update_chapter(self):
         self.emit("play", player=self, entry=self.current_entry)

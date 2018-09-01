@@ -34,9 +34,9 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         colour = 0xa23dd1
 
         if isinstance(entry, RadioStationEntry):
-            station_name = entry.station_info.name
+            station_name = entry.station.name
             footer = dict(text=f"From {station_name}")
-            cover = entry.station_info.cover
+            cover = entry.station.logo
             colour = 0xbe7621
 
         em = Embed(
@@ -71,27 +71,33 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
 
         title = entry.title
         colour = 0xa9b244
+        cover = None
 
         entry_author: User = entry.meta.get("author")
         playlist: Playlist = entry.meta.get("playlist")
 
-        if isinstance(entry, (RadioSongEntry, GieselaEntry)):
-            author = dict(name=entry.artist)
+        if isinstance(entry, GieselaEntry):
+            author = dict(name=entry.artist, icon_url=entry.artist_image)
             cover = entry.cover
             title = entry.song_title
+        elif isinstance(entry, RadioSongEntry):
+            cover = entry.song_data.cover
+            author = dict(name=entry.song_data.artist or Embed.Empty, icon_url=entry.song_data.artist_image or Embed.Empty)
+            if entry.song_data.song_title:
+                title = entry.song_data.song_title
         else:
-            cover = entry.thumbnail
+            if isinstance(entry, YoutubeEntry):
+                cover = entry.thumbnail
             if entry_author:
                 author = dict(name=entry_author.display_name, icon_url=entry_author.avatar_url)
 
         if isinstance(entry, RadioSongEntry):
             colour = 0xa23dd1
-            footer = dict(text=f"🔴 Live from {entry.station_info.name}", icon_url=entry.station_info.cover)
+            footer = dict(text=f"🔴 Live from {entry.station.name}", icon_url=entry.station.logo or Embed.Empty)
             song_progress = entry.song_progress
-            song_duration = entry.song_duration
+            song_duration = entry.song_data.duration
         elif isinstance(entry, GieselaEntry):
             colour = 0xF9FF6E
-            author["icon_url"] = entry.artist_image
             fields.append(dict(name="Album", value=entry.album))
         elif isinstance(entry, TimestampEntry):
             colour = 0x00FFFF
@@ -109,8 +115,11 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         elif isinstance(entry, YoutubeEntry):
             colour = 0xa9b244
 
-        progress_bar = progress_bar or create_progress_bar(song_progress, song_duration)
-        desc = f"{playing_state} {progress_bar} `[{to_timestamp(song_progress)}/{to_timestamp(song_duration)}]`"
+        if song_progress is not None and song_duration is not None:
+            progress_bar = progress_bar or create_progress_bar(song_progress, song_duration)
+            desc = f"{playing_state} {progress_bar} `[{to_timestamp(song_progress)}/{to_timestamp(song_duration)}]`"
+        else:
+            desc = f"{playing_state}"
 
         if playlist:
             fields.append(dict(name="Playlist", value=playlist.name))

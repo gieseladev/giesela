@@ -1,17 +1,15 @@
 import asyncio
 import random
 import time
-from random import shuffle
 from typing import Dict, Optional
 
 from discord import Embed
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Downloader, Giesela, MusicPlayer, RadioSongExtractor, RadioStations, TimestampEntry, get_all_stations, \
-    get_random_station
+from giesela import Downloader, Giesela, MusicPlayer, TimestampEntry
 from giesela.lib.api import spotify
-from giesela.ui import ItemPicker, LoadingBar, VerticalTextViewer
+from giesela.ui import LoadingBar, VerticalTextViewer
 from giesela.ui.custom import EntrySearchUI, NowPlayingEmbed
 from giesela.utils import (create_bar, format_time, html2md, nice_cut)
 from .player import Player
@@ -127,57 +125,6 @@ class EnqueueCog(QueueBase):
             entry = await player.downloader.get_stream_entry(song_url, author=ctx.author)
             player.queue.add_entry(entry)
         await ctx.send(":+1:")
-
-    @commands.group(invoke_without_command=True)
-    async def radio(self, ctx: Context, station: str = None):
-        """Play a radio station.
-
-        You can leave the parameters blank in order to get a tour around all the channels,
-        you can specify the station you want to listen to or you can let the bot choose for you by entering \"random\"
-        """
-        player = await self.get_player(ctx)
-
-        if station:
-            station_info = RadioStations.get_station(station.lower())
-            if station_info:
-                await player.queue.add_radio_entry(station_info, author=ctx.author, now=True)
-                await ctx.send(f"Your favourite:\n**{station_info.name}**")
-                return
-
-        # help the user find the right station
-
-        possible_stations = get_all_stations()
-        shuffle(possible_stations)
-
-        async def get_station(index: int) -> Embed:
-            _station = possible_stations[index % len(possible_stations)]
-
-            em = Embed(colour=0xb3f75d)
-            em.set_author(name=_station.name, url=_station.website)
-            em.set_thumbnail(url=_station.cover)
-
-            if _station.has_current_song_info:
-                data = await RadioSongExtractor.async_get_current_song(self.bot.loop, _station)
-                em.add_field(name="Currently playing", value="{artist} - {title}".format(**data))
-            return em
-
-        item_picker = ItemPicker(ctx.channel, ctx.author, embed_callback=get_station)
-        result = await item_picker.choose()
-
-        if result is None:
-            await ctx.send("Okay then")
-        else:
-            station = possible_stations[result % len(possible_stations)]
-            await player.queue.add_radio_entry(station, author=ctx.author)
-            await ctx.send(f"There you go fam!\n**{station.name}**")
-
-    @radio.command("random")
-    async def radio_random(self, ctx: Context):
-        """Play a random radio station."""
-        player = await self.get_player(ctx)
-        station_info = get_random_station()
-        await player.queue.add_radio_entry(station_info, author=ctx.author, now=True)
-        await ctx.send(f"I choose\n**{station_info.name}**")
 
     async def _play_cmd(self, ctx: Context, url: str, placement: int = None):
         player = await self.get_player(ctx)
