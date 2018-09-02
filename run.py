@@ -48,6 +48,27 @@ LOGGING = {
 }
 
 
+def setup_sentry(*, release: str = None):
+    from raven import Client
+    from raven.handlers.logging import SentryHandler
+
+    if any(isinstance(handler, SentryHandler) for handler in logging.root.handlers):
+        logging.info("sentry already setup")
+        return
+
+    sentry_client = Client(release=release)
+    sentry_handler = SentryHandler(sentry_client)
+    sentry_handler.setLevel(logging.ERROR)
+
+    def record_filter(record: logging.LogRecord) -> bool:
+        return getattr(record, "report", True)
+
+    sentry_handler.addFilter(record_filter)
+
+    logging.root.addHandler(sentry_handler)
+    logging.getLogger("giesela").addHandler(sentry_handler)
+
+
 def setup_logging():
     Path("logs").mkdir(exist_ok=True)
 
@@ -81,7 +102,10 @@ def main():
     log = logging.getLogger("giesela")
 
     while True:
-        from giesela import Giesela, RestartSignal, TerminateSignal
+        log.debug("loading Giesela code...")
+
+        from giesela import Giesela, RestartSignal, TerminateSignal, constants
+        setup_sentry(release=constants.VERSION)
 
         log.info("creating Giesela")
         bot = Giesela()

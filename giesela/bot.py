@@ -9,7 +9,6 @@ import aiohttp
 from discord import Colour, Embed, Message
 from discord.ext.commands import AutoShardedBot, Command, CommandError, CommandInvokeError, CommandNotFound, Context
 
-from giesela.lib import reporting
 from giesela.lib.web_author import WebAuthor
 from giesela.ui import events
 from . import cogs, exceptions, utils
@@ -147,10 +146,7 @@ class Giesela(AutoShardedBot):
 
             await ctx.send(embed=embed)
 
-        if report:
-            reporting.raven_client.captureException((type(exception), exception, exception.__traceback__))
-
-        log.exception("CommandError:", exc_info=exception)
+        log.exception("CommandError:", exc_info=exception, extra=dict(report=report))
 
         self.dispatch("command_finished", ctx, exception=exception)
 
