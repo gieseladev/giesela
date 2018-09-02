@@ -5,7 +5,7 @@ import uuid
 from collections import defaultdict, deque
 from pathlib import Path
 from shelve import DbfilenameShelf, Shelf
-from typing import Any, Callable, Container, Deque, Dict, Iterable, Iterator, List, Mapping, Optional, Tuple, Type, TypeVar, Union
+from typing import Any, Callable, Container, Deque, Dict, Iterable, Iterator, List, Mapping, Optional, TYPE_CHECKING, Tuple, Type, TypeVar, Union
 
 from discord import User
 
@@ -15,7 +15,9 @@ from . import entry as entry_module, utils
 from .bot import Giesela
 from .entry import BaseEntry, Entry
 from .lib.api import imgur
-from .queue import Queue
+
+if TYPE_CHECKING:
+    from .queue import EntryQueue
 
 log = logging.getLogger(__name__)
 
@@ -450,8 +452,8 @@ class Playlist:
     def can_edit(self, user: User) -> bool:
         return self.is_author(user) or self.is_editor(user)
 
-    async def play(self, queue: Queue, **meta):
-        await queue.load_playlist(self, **meta)
+    async def play(self, queue: "EntryQueue", **meta):
+        await queue.add_playlist(self, **meta)
 
     async def generate_cover(self) -> Optional[str]:
         return await mosaic.generate_playlist_cover(self)

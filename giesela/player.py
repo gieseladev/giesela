@@ -1,3 +1,4 @@
+import abc
 import asyncio
 import enum
 import logging
@@ -10,6 +11,7 @@ from websockets import ConnectionClosed
 from .entry import BaseEntry, RadioSongEntry, TimestampEntry
 from .lib import EventEmitter, has_events
 from .lib.lavalink import LavalinkAPI, LavalinkEvent, LavalinkPlayerState, TrackEventDataType
+from .queue import EntryQueue
 
 if TYPE_CHECKING:
     from giesela import Giesela
@@ -24,28 +26,47 @@ class GieselaPlayerState(enum.IntEnum):
     IDLE = 3
 
 
+class StateInterpreter(metaclass=abc.ABCMeta):
+    state: GieselaPlayerState
+
+    @property
+    def is_playing(self) -> bool:
+        return self.state == GieselaPlayerState.PLAYING
+
+    @property
+    def is_paused(self) -> bool:
+        return self.state == GieselaPlayerState.PAUSED
+
+    @property
+    def is_connected(self) -> bool:
+        return self.state != GieselaPlayerState.DISCONNECTED
+
+
 @has_events("connect", "disconnect", "pause", "resume", "seek", "skip", "stop", "play", "finished", "chapter")
-class GieselaPlayer(EventEmitter):
+class GieselaPlayer(EventEmitter, StateInterpreter):
     voice_channel_id: Optional[int]
 
     _last_state: Optional[LavalinkPlayerState]
     _current_entry: Optional[BaseEntry]
+    _start_position: float
 
     def __init__(self, manager: "PlayerManager", guild_id: int, voice_channel_id: int = None):
         super().__init__(loop=manager.loop)
         self.manager = manager
         self.bot = manager.bot
+        self.config = self.bot.config
 
         self.state = GieselaPlayerState.DISCONNECTED
         self.guild_id = guild_id
         self.voice_channel_id = voice_channel_id
 
-        # self.queue = Queue(self)
-        # self.queue.on("entry-added", self.on_entry_added)
+        self.queue = EntryQueue(self)
+        self.queue.on("entry-added", self.on_entry_added)
 
-        self._volume = self.bot.config.default_volume
+        self._volume = self.config.default_volume
         self._last_state = None
         self._current_entry = None
+        self._start_position = 0
 
     def __str__(self) -> str:
         playing = f"playing {self.current_entry}" if self.is_playing else ""
@@ -72,18 +93,15 @@ class GieselaPlayer(EventEmitter):
         return self._volume / 1000
 
     @property
-    def connected(self) -> bool:
-        return self.state != GieselaPlayerState.DISCONNECTED
-
-    @property
     def progress(self) -> float:
         state = self._last_state
         if not state:
             return 0
         if self.state == GieselaPlayerState.PLAYING:
-            return state.estimate_seconds_now
+            progress = state.estimate_seconds_now
         else:
-            return state.seconds
+            progress = state.seconds
+        return progress - self._start_position
 
     async def connect(self, channel: Union[VoiceChannel, int] = None):
         if isinstance(channel, VoiceChannel):
@@ -117,7 +135,6 @@ class GieselaPlayer(EventEmitter):
 
     async def seek(self, seconds: float):
         await self.manager.send_seek(self.guild_id, seconds)
-        # TODO update internal position
         self.emit("seek", player=self, timestamp=seconds)
 
     async def skip(self, force: bool = False):
@@ -156,11 +173,11 @@ class GieselaPlayer(EventEmitter):
             self.loop.create_task(self.play())
 
     async def play(self, entry: BaseEntry = None):
-        if not self.voice_client:
+        if not self.is_connected:
             await self.connect()
 
         if not entry:
-            entry = await self.queue.get_next_entry()
+            entry = self.queue.get_next()
 
         if not entry:
             log.debug("queue empty")
@@ -168,6 +185,7 @@ class GieselaPlayer(EventEmitter):
             return
 
         self._current_entry = entry
+        self._start_position = entry.start_position or 0
 
         await self.manager.send_play(self.guild_id, entry.track_urn, entry.start_position, entry.end_position)
 

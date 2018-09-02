@@ -58,7 +58,7 @@ async def find_giesela_channel(bot: Giesela, guild: Guild, user: User = None) ->
 
 async def _delayed_disconnect(player: GieselaPlayer, delay: int):
     await asyncio.sleep(delay)
-    if player.connected:
+    if player.is_connected:
         await player.disconnect()
 
 
@@ -214,7 +214,7 @@ class Player:
         player = await self.get_player(ctx.guild, channel=target)
         await player.connect(target)
 
-        if not player.player:
+        if not player.is_playing:
             await player.play()
 
     @commands.command()

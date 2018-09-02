@@ -45,7 +45,7 @@ class EventEmitter:
         self.loop = loop or asyncio.get_event_loop()
 
     def emit(self, event: str, *args, **kwargs):
-        if self._can_emit_event(event):
+        if not self._can_emit_event(event):
             raise ValueError(f"{self} can't emit {event}")
 
         method_name = f"on_{event}"

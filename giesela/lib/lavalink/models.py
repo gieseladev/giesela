@@ -1,7 +1,7 @@
 import enum
 import time
 from dataclasses import dataclass  # since < 3.7 is out of the picture anyway, why not use dataclasses as well xD
-from typing import Any, Dict, List, NamedTuple, Union
+from typing import Any, Dict, List, NamedTuple, Optional, Union
 
 __all__ = ["LavalinkEvent", "TrackEndReason", "LavalinkEventData", "TrackEndEventData", "TrackExceptionEventData", "TrackStuckEventData",
            "TrackEventDataType", "LavalinkPlayerState", "TrackLoadType", "TrackPlaylistInfo", "TrackInfo", "Track", "LoadTracksResult"]
@@ -122,11 +122,15 @@ class LoadTracksResult(NamedTuple):
         return len(self.tracks)
 
     @property
-    def track(self) -> Track:
+    def track(self) -> Optional[Track]:
         if self.load_type == TrackLoadType.SINGLE:
             return self.tracks[0]
-        else:
-            raise TypeError(f"{self.load_type} doesn't have a singular track")
+        elif self.load_type == TrackLoadType.PLAYLIST:
+            index = self.playlist_info.selected_track
+            if index >= 0:
+                return self.tracks[index]
+
+        return None
 
     @classmethod
     def from_result(cls, data: Dict[str, Any]) -> "LoadTracksResult":
