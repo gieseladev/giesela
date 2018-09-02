@@ -1,7 +1,10 @@
 import enum
-from typing import Any, Dict, List, NamedTuple
+import time
+from dataclasses import dataclass  # since < 3.7 is out of the picture anyway, why not use dataclasses as well xD
+from typing import Any, Dict, List, NamedTuple, Union
 
-__all__ = ["LavalinkEvent", "LavalinkPlayerState", "TrackLoadType", "TrackPlaylistInfo", "TrackInfo", "Track", "LoadTracksResult"]
+__all__ = ["LavalinkEvent", "TrackEndReason", "LavalinkEventData", "TrackEndEventData", "TrackExceptionEventData", "TrackStuckEventData",
+           "TrackEventDataType", "LavalinkPlayerState", "TrackLoadType", "TrackPlaylistInfo", "TrackInfo", "Track", "LoadTracksResult"]
 
 
 class LavalinkEvent(enum.Enum):
@@ -10,9 +13,69 @@ class LavalinkEvent(enum.Enum):
     TRACK_STUCK = "TrackStuckEvent"
 
 
+class TrackEndReason(enum.Enum):
+    FINISHED = "FINISHED"
+    LOAD_FAILED = "LOAD_FAILED"
+    STOPPED = "STOPPED"
+    REPLACED = "REPLACED"
+    CLEANUP = "CLEANUP"
+
+    @property
+    def start_next(self) -> bool:
+        return self in (TrackEndReason.FINISHED, TrackEndReason.LOAD_FAILED)
+
+
+@dataclass
+class LavalinkEventData:
+    track: str
+
+    # noinspection PyArgumentList
+    @classmethod
+    def from_data(cls, event: LavalinkEvent, data: Dict[str, Any]):
+        track = data["track"]
+
+        if event == LavalinkEvent.TRACK_END:
+            reason = TrackEndReason(data["reason"])
+            return TrackEndEventData(track, reason)
+        elif event == LavalinkEvent.TRACK_EXCEPTION:
+            return TrackExceptionEventData(track, data["error"])
+        elif event == LavalinkEvent.TRACK_STUCK:
+            return TrackStuckEventData(track, data["thresholdMs"])
+
+
+@dataclass
+class TrackEndEventData(LavalinkEventData):
+    reason: TrackEndReason
+
+
+@dataclass
+class TrackExceptionEventData(LavalinkEventData):
+    error: str
+
+
+@dataclass
+class TrackStuckEventData(LavalinkEventData):
+    threshold_ms: int
+
+
+TrackEventDataType = Union[TrackEndEventData, TrackExceptionEventData, TrackStuckEventData]
+
+
 class LavalinkPlayerState(NamedTuple):
     time: int
     position: int
+
+    @property
+    def seconds(self) -> float:
+        return self.position / 1000
+
+    @property
+    def age(self) -> float:
+        return time.time() - self.time
+
+    @property
+    def estimate_seconds_now(self) -> float:
+        return self.seconds + self.age
 
 
 class TrackLoadType(enum.Enum):
@@ -53,7 +116,7 @@ class Track(NamedTuple):
 class LoadTracksResult(NamedTuple):
     load_type: TrackLoadType
     playlist_info: TrackPlaylistInfo = None
-    tracks: List[Track] = []
+    tracks: List[Track] = None
 
     def __len__(self) -> int:
         return len(self.tracks)

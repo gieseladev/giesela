@@ -1,12 +1,13 @@
 import asyncio
 import logging
+import operator
 from typing import Dict, Optional, Union
 
 from discord import Game, Guild, Member, User, VoiceChannel, VoiceState
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import BaseEntry, Downloader, Giesela, MusicPlayer, WebieselaServer, constants, lyrics as lyricsfinder
+from giesela import BaseEntry, Giesela, GieselaPlayer, PlayerManager, WebieselaServer, lyrics as lyricsfinder
 from giesela.ui import VerticalTextViewer
 from giesela.ui.custom import EntryEditor
 from giesela.utils import create_bar, parse_timestamp, similarity
@@ -14,10 +15,9 @@ from giesela.utils import create_bar, parse_timestamp, similarity
 log = logging.getLogger(__name__)
 
 LOAD_ORDER = -1
-VOICE_CHANNEL_NAMES = ("music", "giesela", "musicbot")
 
 
-def _seek(player: MusicPlayer, seconds: Union[str, float]):
+async def _seek(player: GieselaPlayer, seconds: Union[str, float]):
     if isinstance(seconds, str):
         seconds = parse_timestamp(seconds)
 
@@ -27,7 +27,10 @@ def _seek(player: MusicPlayer, seconds: Union[str, float]):
     if player.current_entry is None:
         raise commands.CommandError("Nothing playing!")
 
-    player.seek(seconds)
+    await player.seek(seconds)
+
+
+VOICE_CHANNEL_NAMES = ("music", "giesela", "musicbot")
 
 
 async def find_giesela_channel(bot: Giesela, guild: Guild, user: User = None) -> VoiceChannel:
@@ -53,59 +56,50 @@ async def find_giesela_channel(bot: Giesela, guild: Guild, user: User = None) ->
     return guild.voice_channels[0]
 
 
-async def _delayed_disconnect(player: MusicPlayer, delay: int):
+async def _delayed_disconnect(player: GieselaPlayer, delay: int):
     await asyncio.sleep(delay)
     if player.connected:
         await player.disconnect()
 
 
 class Player:
-    bot: Giesela
-    downloader: Downloader
-
-    players: Dict[int, MusicPlayer]
-
     _disconnects: Dict[int, asyncio.Task]
 
     def __init__(self, bot: Giesela):
         self.bot = bot
+        config = bot.config
+        self.player_manager = PlayerManager(bot, config.lavalink_password, config.lavalink_rest_url, config.lavalink_ws_url)
 
-        self.downloader = Downloader(self.bot, download_folder=constants.AUDIO_CACHE_PATH)
-
-        self.players = {}
         self._disconnects = {}
 
     async def get_player(self, target: Union[Guild, Context, int], *,
-                         create: bool = True, channel: VoiceChannel = None, member: Union[User, Member] = None) -> Optional[MusicPlayer]:
+                         create: bool = True, channel: VoiceChannel = None, member: Union[User, Member] = None) -> Optional[GieselaPlayer]:
         if isinstance(target, Context):
-            guild = target.guild
+            guild_id = target.guild.id
             member = member or target.author
         elif isinstance(target, int):
-            guild = self.bot.get_guild(target)
+            guild_id = target
+        elif isinstance(target, Guild):
+            guild_id = target.id
         else:
-            guild = target
+            raise TypeError(f"Unknown target: {target}")
 
-        if guild.id not in self.players:
-            if create:
-                if not channel:
-                    if isinstance(member, Member) and member.voice:
-                        channel = member.voice.channel
-                    else:
-                        channel = await find_giesela_channel(self.bot, guild, user=member)
-
-                player = MusicPlayer(self.bot, self.downloader, channel)
-                player.on("play", self.on_player_play) \
-                    .on("resume", self.on_player_resume) \
-                    .on("pause", self.on_player_pause) \
-                    .on("stop", self.on_player_stop) \
-                    .on("volume_change", self.on_player_volume_change) \
-                    .on("finished-playing", self.on_player_finished_playing)
-                self.players[guild.id] = player
-            else:
+        player = self.player_manager.players.get(guild_id)
+        if not player:
+            if not create:
                 return None
-        return self.players[guild.id]
 
-    def start_disconnect(self, player: MusicPlayer):
+            if not channel:
+                if isinstance(member, Member) and member.voice:
+                    channel = member.voice.channel
+                else:
+                    guild = self.bot.get_guild(guild_id)
+                    channel = await find_giesela_channel(self.bot, guild, user=member)
+
+            player = self.player_manager.get_player(guild_id, channel.id)
+        return player
+
+    def start_disconnect(self, player: GieselaPlayer):
         guild_id = player.channel.guild.id
         task = self._disconnects.get(guild_id)
         if task and not task.done():
@@ -116,14 +110,14 @@ class Player:
             log.debug(f"auto disconnect {player} in {delay} seconds")
             self._disconnects[guild_id] = asyncio.ensure_future(_delayed_disconnect(player, delay))
 
-    def stop_disconnect(self, player: MusicPlayer):
+    def stop_disconnect(self, player: GieselaPlayer):
         guild_id = player.channel.guild.id
         task = self._disconnects.pop(guild_id, None)
         if task:
             log.debug(f"cancelled disconnect for {player}")
             task.cancel()
 
-    def auto_pause(self, player: MusicPlayer, joined: bool = False):
+    def auto_pause(self, player: GieselaPlayer, joined: bool = False):
         channel = player.voice_channel
         if not channel:
             return
@@ -143,40 +137,40 @@ class Player:
                 log.info(f"auto-pausing {player}")
                 player.pause()
 
-    async def on_player_play(self, player: MusicPlayer, entry: BaseEntry):
+    async def on_player_play(self, player: GieselaPlayer, entry: BaseEntry):
         self.auto_pause(player)
         WebieselaServer.send_player_information(player.channel.guild.id)
         await self.update_now_playing(entry)
 
-    async def on_player_resume(self, player: MusicPlayer, entry: BaseEntry, **_):
+    async def on_player_resume(self, player: GieselaPlayer):
         WebieselaServer.small_update(player.channel.guild.id, state=player.state, progress=player.progress)
-        await self.update_now_playing(entry)
+        await self.update_now_playing(player.current_entry)
 
-    async def on_player_pause(self, player: MusicPlayer, entry: BaseEntry, **_):
+    async def on_player_pause(self, player: GieselaPlayer):
         WebieselaServer.small_update(player.channel.guild.id, state=player.state, progress=player.progress)
-        await self.update_now_playing(entry, is_paused=True)
+        await self.update_now_playing(player.current_entry, is_paused=True)
 
     async def on_player_stop(self, **_):
         await self.update_now_playing()
 
     @classmethod
-    async def on_player_volume_change(cls, player: MusicPlayer, new: float, **_):
-        WebieselaServer.small_update(player.guild.id, volume=new)
+    async def on_player_volume_change(cls, player: GieselaPlayer, new_volume: float):
+        WebieselaServer.small_update(player.guild.id, volume=new_volume)
 
     @classmethod
-    async def on_player_finished_playing(cls, player: MusicPlayer, **_):
+    async def on_player_finished_playing(cls, player: GieselaPlayer, **_):
         if not player.queue.entries and not player.current_entry:
             WebieselaServer.send_player_information(player.channel.guild.id)
 
     async def update_now_playing(self, entry: BaseEntry = None, is_paused: bool = False):
         game = None
 
-        active_players = sum(1 for p in self.players.values() if p.is_playing)
+        active_players = sum(1 for p in self.player_manager.players.values() if p.is_playing)
 
         if active_players > 1:
             game = Game(name="Music")
         elif active_players == 1:
-            player = next(player for player in self.players.values() if player.is_playing)
+            player = self.player_manager.find_player(operator.attrgetter("is_playing"))
             entry = player.current_entry
         else:
             game = Game(name=self.bot.config.idle_game)
@@ -218,7 +212,7 @@ class Player:
             raise commands.CommandError("Couldn't find voice channel")
 
         player = await self.get_player(ctx.guild, channel=target)
-        await player.move_to(target)
+        await player.connect(target)
 
         if not player.player:
             await player.play()
@@ -232,14 +226,16 @@ class Player:
 
     @commands.command()
     async def pause(self, ctx: Context):
-        """Pause playback of the current song. If the player is paused, it will unpause."""
+        """Pause playback of the current song
+
+        If the player is paused, it will resume.
+        """
         player = await self.get_player(ctx)
 
-        if player.voice_client:
-            if player.voice_client.is_playing():
-                player.pause()
-            else:
-                player.resume()
+        if player.is_playing:
+            await player.pause()
+        elif player.is_paused:
+            await player.resume()
         else:
             raise commands.CommandError("Cannot pause what is not playing")
 
@@ -248,8 +244,8 @@ class Player:
         """Resumes playback of the current song."""
         player = await self.get_player(ctx)
 
-        if player.voice_client:
-            player.resume()
+        if player.is_paused:
+            await player.resume()
         else:
             raise commands.CommandError("Hard to unpause something that's not paused, amirite?")
 
@@ -257,7 +253,7 @@ class Player:
     async def stop(self, ctx: Context):
         """Stops the player completely and removes all entries from the queue."""
         player = await self.get_player(ctx)
-        player.stop()
+        await player.stop()
         player.queue.clear()
 
     @commands.command()
@@ -269,50 +265,46 @@ class Player:
         """
         player = await self.get_player(ctx)
 
+        old_volume = round(player.volume * 100)
+
         if not volume:
-            await ctx.send("Current volume: {}%\n{}".format(int(player.volume * 100), create_bar(player.volume, 20)))
+            bar = create_bar(player.volume, 20)
+            await ctx.send(f"Current volume: {old_volume}%\n{bar}")
             return
 
         relative = False
-        if volume[0] in "+-":
+        if volume.startswith(("+", "-")):
             relative = True
-        elif volume in ("mute", "muted", "silent"):
-            volume = 0
-        elif volume in ("loud", "full"):
-            volume = 100
+            volume = volume[1:]
 
         try:
             volume = int(volume)
-
         except ValueError:
             raise commands.CommandError(f"{volume} is not a valid number")
 
         if relative:
             vol_change = volume
-            volume += (player.volume * 100)
+            volume += round(player.volume * 100)
         else:
             vol_change = volume - player.volume
 
-        old_volume = int(player.volume * 100)
-
-        if 0 <= volume <= 100:
-            player.volume = volume / 100
-
-            await ctx.send(f"updated volume from {old_volume} to {volume}")
-            return
-        else:
+        if not 0 <= volume <= 100:
             if relative:
                 raise commands.CommandError(f"Unreasonable volume change provided: "
                                             f"{old_volume}{vol_change:+} -> {old_volume + vol_change}%. "
-                                            f"Provide a change between {1-old_volume} and {100 - old_volume:+}.")
+                                            f"Provide a change between {-old_volume} and {100 - old_volume}.")
             else:
-                raise commands.CommandError(f"Unreasonable volume provided: {volume}%. Provide a value between 1 and 100.")
+                raise commands.CommandError(f"Unreasonable volume provided: {volume}%. Provide a value between 0 and 100.")
+
+        player.volume = volume / 100
+
+        await ctx.send(f"updated volume from {old_volume} to {volume}")
 
     @commands.command()
     async def seek(self, ctx: Context, timestamp: str):
         """Seek to the given timestamp formatted (minutes:seconds)"""
         player = await self.get_player(ctx)
-        _seek(player, timestamp)
+        await _seek(player, timestamp)
 
     @commands.command(aliases=["fwd", "fw"])
     async def forward(self, ctx: Context, timestamp: str):
@@ -323,7 +315,7 @@ class Player:
         if secs:
             secs += player.progress
 
-        _seek(player, secs)
+        await _seek(player, secs)
 
     @commands.command(aliases=["rwd", "rw"])
     async def rewind(self, ctx: Context, timestamp: str = None):
@@ -343,7 +335,7 @@ class Player:
                 player.replay()
                 return
 
-        _seek(player, secs)
+        await _seek(player, secs)
 
     @commands.command("editentry", aliases=["editnp"])
     async def edit_entry(self, ctx: Context):

@@ -51,10 +51,7 @@ class EventEmitter:
         method_name = f"on_{event}"
         method = getattr(self, method_name, None)
         if method and asyncio.iscoroutinefunction(method):
-            try:
-                await method(*args, **kwargs)
-            except Exception:
-                log.exception(f"Couldn't run local listener {method} for {event}")
+            asyncio.ensure_future(safe_await(method(*args, **kwargs)), loop=self.loop)
 
         if event not in self._events:
             return
@@ -62,7 +59,7 @@ class EventEmitter:
         for cb in self._events[event]:
             try:
                 if asyncio.iscoroutinefunction(cb):
-                    asyncio.ensure_future(cb(*args, **kwargs), loop=self.loop)
+                    asyncio.ensure_future(safe_await(cb(*args, **kwargs)), loop=self.loop)
                 else:
                     cb(*args, **kwargs)
 

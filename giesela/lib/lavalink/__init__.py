@@ -1,2 +1,2 @@
-from .lavalink_api import LavalinkAPI
+from .api import LavalinkAPI
 from .models import *

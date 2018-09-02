@@ -7,7 +7,7 @@ from discord import Embed
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Downloader, Giesela, MusicPlayer, TimestampEntry
+from giesela import Downloader, Giesela, GieselaPlayer, TimestampEntry
 from giesela.lib.api import spotify
 from giesela.ui import LoadingBar, VerticalTextViewer
 from giesela.ui.custom import EntrySearchUI, NowPlayingEmbed
@@ -31,11 +31,11 @@ class QueueBase:
     def downloader(self) -> Downloader:
         return self.player_cog.downloader
 
-    async def get_player(self, *args, **kwargs) -> Optional[MusicPlayer]:
+    async def get_player(self, *args, **kwargs) -> Optional[GieselaPlayer]:
         return await self.player_cog.get_player(*args, **kwargs)
 
 
-async def _play_url(ctx: Context, player: MusicPlayer, url: str, placement: int = None):
+async def _play_url(ctx: Context, player: GieselaPlayer, url: str, placement: int = None):
     query = url.strip("<>")
 
     try:

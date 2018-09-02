@@ -4,7 +4,7 @@ from .constants import *
 from .downloader import Downloader
 from .entry import *
 from .exceptions import *
-from .player import MusicPlayer
+from .player import GieselaPlayer, GieselaPlayerState, PlayerManager
 from .playlists import EditPlaylistProxy, Playlist, PlaylistEntry, PlaylistManager
 from .radio import RadioStation, RadioStationManager
 from .shell import GieselaShell

@@ -15,20 +15,20 @@ from .radio import RadioStation
 from .webiesela import WebieselaServer
 
 if TYPE_CHECKING:
-    from giesela import Playlist, MusicPlayer
+    from giesela import Playlist, GieselaPlayer
 
 log = logging.getLogger(__name__)
 
 
 class Queue(EventEmitter):
     bot: Giesela
-    player: "MusicPlayer"
+    player: "GieselaPlayer"
     downloader: Downloader
 
     entries: Deque[BaseEntry]
     history: Deque[BaseEntry]
 
-    def __init__(self, bot: Giesela, player: "MusicPlayer", downloader: Downloader):
+    def __init__(self, bot: Giesela, player: "GieselaPlayer", downloader: Downloader):
         super().__init__()
         self.bot = bot
         self.loop = bot.loop

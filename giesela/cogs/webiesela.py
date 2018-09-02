@@ -3,7 +3,7 @@ import logging
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, MusicPlayer, PlaylistManager, RadioStationManager, WebieselaServer
+from giesela import Giesela, PlaylistManager, RadioStationManager, WebieselaServer
 from .player import Player
 from .playlist import PlaylistCog
 from .radio import Radio
@@ -30,7 +30,7 @@ class Webiesela:
         self.radio_cog = bot.cogs["Radio"]
         self.radio_station_manager = self.radio_cog.station_manager
 
-    async def get_player(self, *args, **kwargs) -> MusicPlayer:
+    async def get_player(self, *args, **kwargs):
         return await self.player_cog.get_player(*args, **kwargs)
 
     async def on_ready(self):

@@ -5,7 +5,7 @@ from discord import Embed
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, MusicPlayer, RadioStation, RadioStationManager
+from giesela import Giesela, GieselaPlayer, RadioStation, RadioStationManager
 from giesela.ui import ItemPicker
 from .player import Player
 
@@ -18,7 +18,7 @@ def get_station_embed(station: RadioStation) -> Embed:
     return em
 
 
-async def play_station(ctx: Context, player: MusicPlayer, station: RadioStation, *, now: bool = True):
+async def play_station(ctx: Context, player: GieselaPlayer, station: RadioStation, *, now: bool = True):
     await player.queue.add_radio_entry(station, author=ctx.author, now=now)
     embed = get_station_embed(station)
     await ctx.send("Now playing", embed=embed)

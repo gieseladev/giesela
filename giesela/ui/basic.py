@@ -239,6 +239,7 @@ class IntervalUpdatingMessage(UpdatingMessage, Startable, Stoppable):
         self._runner_ready.clear()
         self._runner = asyncio.ensure_future(self._run_loop())
         await self._runner_ready.wait()
+        # noinspection PyArgumentList
         exc = self._runner.done() and self._runner.exception()
         if exc:
             raise exc

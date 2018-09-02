@@ -1,14 +1,15 @@
 import asyncio
+import enum
 import logging
-from asyncio import AbstractEventLoop
 from typing import Any, Dict, Optional, TYPE_CHECKING, Union
 
-from discord import Guild, VoiceChannel, VoiceClient
+from discord import Guild, VoiceChannel
+from discord.gateway import DiscordWebSocket
+from websockets import ConnectionClosed
 
-from .downloader import Downloader
-from .entry import BaseEntry, RadioSongEntry, StreamEntry, TimestampEntry
-from .lib import EventEmitter, GieselaSource
-from .queue import Queue
+from .entry import BaseEntry, RadioSongEntry, TimestampEntry
+from .lib import EventEmitter, has_events
+from .lib.lavalink import LavalinkAPI, LavalinkEvent, LavalinkPlayerState, TrackEventDataType
 
 if TYPE_CHECKING:
     from giesela import Giesela
@@ -16,234 +17,163 @@ if TYPE_CHECKING:
 log = logging.getLogger(__name__)
 
 
-class LavalinkPlayer(EventEmitter):
-    bot: "Giesela"
-    loop: AbstractEventLoop
+class GieselaPlayerState(enum.IntEnum):
+    DISCONNECTED = 0
+    PLAYING = 1
+    PAUSED = 2
+    IDLE = 3
 
-    _channel: VoiceChannel
-    voice_client: VoiceClient
 
-    queue: Queue
+@has_events("connect", "disconnect", "pause", "resume", "seek", "skip", "stop", "play", "finished", "chapter")
+class GieselaPlayer(EventEmitter):
+    voice_channel_id: Optional[int]
 
+    _last_state: Optional[LavalinkPlayerState]
     _current_entry: Optional[BaseEntry]
-    _volume: float
 
-    def __init__(self, bot: "Giesela", downloader: Downloader, channel: VoiceChannel):
-        super().__init__()
-        self.bot = bot
-        self.loop = bot.loop
-        self.downloader = downloader
+    def __init__(self, manager: "PlayerManager", guild_id: int, voice_channel_id: int = None):
+        super().__init__(loop=manager.loop)
+        self.manager = manager
+        self.bot = manager.bot
 
-        self._channel = channel
-        self.voice_client = next((voice_client for voice_client in bot.voice_clients if voice_client.guild == channel.guild), None)
+        self.state = GieselaPlayerState.DISCONNECTED
+        self.guild_id = guild_id
+        self.voice_channel_id = voice_channel_id
 
-        self.queue = Queue(bot, self, downloader)
-        self.queue.on("entry-added", self.on_entry_added)
+        # self.queue = Queue(self)
+        # self.queue.on("entry-added", self.on_entry_added)
 
+        self._volume = self.bot.config.default_volume
+        self._last_state = None
         self._current_entry = None
-
-        self._volume = bot.config.default_volume
 
     def __str__(self) -> str:
         playing = f"playing {self.current_entry}" if self.is_playing else ""
-        return f"<MusicPlayer for {self.vc_qualified_name} {playing}>"
+        return f"<GieselaPlayer for {self.qualified_channel_name} {playing}>"
 
     @property
-    def channel(self) -> VoiceChannel:
-        return self._channel
-
-    @channel.setter
-    def channel(self, value: Union[int, VoiceChannel]):
-        if isinstance(value, int):
-            value = self.bot.get_channel(value)
-        if not isinstance(value, VoiceChannel):
-            raise TypeError(f"{value} isn't a voice channel")
-
-        self._channel = value
+    def qualified_channel_name(self) -> str:
+        return f"{self.guild.name}#{self.voice_channel.name}"
 
     @property
-    def vc_qualified_name(self) -> str:
-        return f"{self.channel.guild.name}#{self.channel.name}"
+    def voice_channel(self) -> VoiceChannel:
+        return self.bot.get_channel(self.voice_channel_id)
 
     @property
     def guild(self) -> Guild:
-        return self._channel.guild
-
-    @property
-    def player(self) -> Optional[GieselaSource]:
-        if self.voice_client:
-            return self.voice_client.source
+        return self.bot.get_guild(self.guild_id)
 
     @property
     def current_entry(self) -> Optional[BaseEntry]:
         return self._current_entry
 
     @property
-    def progress(self) -> float:
-        if self.player:
-            return self.player.progress
-        return 0
-
-    @property
-    def volume(self) -> float:
+    def volume_percentage(self) -> float:
         return self._volume / 1000
 
     @property
-    def is_playing(self) -> bool:
-        return self.voice_client and self.voice_client.is_playing()
-
-    @property
-    def is_paused(self) -> bool:
-        return self.voice_client and self.voice_client.is_paused()
-
-    @property
-    def is_stopped(self) -> bool:
-        return not bool(self.player)
-
-    @property
-    def state(self) -> int:
-        return 1 if self.is_playing else 2 if self.is_paused else 0
-
-    @property
     def connected(self) -> bool:
-        return self.voice_client and self.voice_client.is_connected()
+        return self.state != GieselaPlayerState.DISCONNECTED
 
     @property
-    def voice_channel(self) -> VoiceChannel:
-        return self.bot.get_channel(self._channel.id)
-
-    async def connect(self, **kwargs):
-        if self.voice_client:
-            await self.voice_client.connect(**kwargs)
+    def progress(self) -> float:
+        state = self._last_state
+        if not state:
+            return 0
+        if self.state == GieselaPlayerState.PLAYING:
+            return state.estimate_seconds_now
         else:
-            self.voice_client = await self._channel.connect(**kwargs)
+            return state.seconds
 
-    async def disconnect(self, **kwargs):
-        if self.voice_client:
-            self.stop()
-            await self.voice_client.disconnect(**kwargs)
-            self.voice_client = None
+    async def connect(self, channel: Union[VoiceChannel, int] = None):
+        if isinstance(channel, VoiceChannel):
+            channel = channel.id
+
+        if channel and not self.voice_channel_id:
+            raise ValueError("No voice channel specified")
+
+        await self.manager.connect_player(self.guild_id, channel)
+        self.state = GieselaPlayerState.IDLE
+        self.emit("connect", player=self)
+
+    async def disconnect(self):
+        if not self.is_connected:
+            return
+        await self.stop()
+
+        await self.manager.disconnect_player(self.guild_id)
+        self.state = GieselaPlayerState.DISCONNECTED
         self.emit("disconnect", player=self)
 
-    async def move_to(self, target: VoiceChannel):
-        self._channel = target
+    async def pause(self):
+        await self.manager.send_pause(self.guild_id)
+        self.state = GieselaPlayerState.PAUSED
+        self.emit("pause", player=self)
 
-        if self.voice_client:
-            await self.voice_client.move_to(target)
-            self._channel = target
+    async def resume(self):
+        await self.manager.send_resume(self.guild_id)
+        self.state = GieselaPlayerState.PLAYING
+        self.emit("resume", player=self)
+
+    async def seek(self, seconds: float):
+        await self.manager.send_seek(self.guild_id, seconds)
+        # TODO update internal position
+        self.emit("seek", player=self, timestamp=seconds)
+
+    async def skip(self, force: bool = False):
+        if not force and isinstance(self.current_entry, TimestampEntry):
+            sub_entry = self.current_entry.get_sub_entry(self)
+            await self.seek(sub_entry["end"])
         else:
-            await self.connect()
+            await self.manager.send_stop(self.guild_id)
+        self.emit("skip", player=self)
 
-    def on_entry_added(self, **_):
-        if not self.current_entry:
-            self.loop.create_task(self.play())
-
-    def skip(self, force: bool = False):
-        if self.voice_client:
-            if not force and isinstance(self.current_entry, TimestampEntry):
-                sub_entry = self.current_entry.get_sub_entry(self)
-                self.seek(sub_entry["end"])
-            else:
-                self.voice_client.stop()
-
-    def stop(self):
-        if self.voice_client:
-            self.voice_client.stop()
-
+    async def stop(self):
+        await self.manager.send_stop(self.guild_id)
+        self.state = GieselaPlayerState.IDLE
         self.emit("stop", player=self)
-
-    def resume(self):
-        if self.voice_client and self.voice_client.is_paused():
-            self.voice_client.resume()
-            self.emit("resume", player=self, entry=self.current_entry)
-            return
-
-    def seek(self, secs: float):
-        if isinstance(self.current_entry, StreamEntry):
-            return
-
-        if self.player:
-            self.player.seek(secs)
-        self.emit("seek", player=self, entry=self.current_entry, timestamp=secs)
-
-    def pause(self):
-        if isinstance(self.current_entry, StreamEntry):
-            return self.stop()
-
-        if self.voice_client and self.voice_client.is_playing():
-            self.voice_client.pause()
-            self.emit("pause", player=self, entry=self.current_entry)
 
     def modify_current_entry(self, entry: BaseEntry):
         if not self.current_entry:
             raise ValueError("No current entry")
-        if self.current_entry.url != entry.url:
+        if self.current_entry != entry:
             raise ValueError("Edited entry doesn't share current entry's url")
 
         self._current_entry = entry
         self.emit("play", player=self, entry=entry)
 
-    def kill(self):
-        if self.voice_client:
-            self.voice_client.stop()
-        self.queue.clear()
-        self._events.clear()
-
-    def _playback_finished(self, error: Exception = None):
-        log.debug("playback finished")
-
-        if error:
-            log.exception("Playback error")
-
+    def playback_finished(self, play_next: bool = True):
         entry = self.current_entry
         if entry:
             self.queue.push_history(entry)
+
         self._current_entry = None
+        self.state = GieselaPlayerState.IDLE
 
-        if not self.bot.config.save_videos and entry:
-            if any([entry.filename == e.filename for e in self.queue.entries]):
-                print("[Config:SaveVideos] Skipping deletion, found song in queue")
-            else:
-                asyncio.ensure_future(_delete_file(entry.filename))
+        self.emit("finished", player=self, entry=entry)
 
-        self.emit("finished-playing", player=self, entry=entry)
-
-        if self.voice_client and self.voice_client.is_connected():
+        if play_next:
             self.loop.create_task(self.play())
-        else:
-            log.info("disconnected")
-
-    def create_source(self, entry: BaseEntry) -> GieselaSource:
-        return GieselaSource(entry.filename, self.volume)
 
     async def play(self, entry: BaseEntry = None):
         if not self.voice_client:
             await self.connect()
-
-        if self.voice_client.is_paused():
-            self.resume()
-            return
 
         if not entry:
             entry = await self.queue.get_next_entry()
 
         if not entry:
             log.debug("queue empty")
-            self.stop()
+            await self.stop()
             return
 
-        await entry.get_ready_future(self.queue)
-
         self._current_entry = entry
-        source = self.create_source(entry)
 
-        if self.voice_client.is_playing():
-            self.voice_client.source = source
-        else:
-            self.voice_client.play(source, after=self._playback_finished)
+        await self.manager.send_play(self.guild_id, entry.track_urn, entry.start_position, entry.end_position)
+
         await self.setup_chapters()
 
-        log.info(f"playing {entry} in {self.vc_qualified_name}")
+        log.info(f"playing {entry} in {self.qualified_channel_name}")
         self.emit("play", player=self, entry=entry)
 
     async def setup_chapters(self):
@@ -262,30 +192,77 @@ class LavalinkPlayer(EventEmitter):
         asyncio.ensure_future(self.setup_chapters())
 
     async def update_chapter(self):
-        self.emit("play", player=self, entry=self.current_entry)
+        self.emit("chapter", player=self)
+
+    async def handle_event(self, event: LavalinkEvent, data: TrackEventDataType):
+        play_next = True
+
+        if event == LavalinkEvent.TRACK_END:
+            if not data.reason.start_next:
+                log.info("not playing next because Lavalink said so I guess")
+                play_next = False
+        elif event == LavalinkEvent.TRACK_EXCEPTION:
+            log.error(f"Lavalink reported an error: {data.error}")
+
+        await self.playback_finished(play_next)
+
+    async def update_state(self, state: LavalinkPlayerState):
+        self._last_state = state
+
+    def on_entry_added(self, **_):
+        if not self.current_entry:
+            self.loop.create_task(self.play())
 
 
-class LavalinkClient(EventEmitter):
+class PlayerManager(LavalinkAPI):
     bot: "Giesela"
-    players: Dict[int, LavalinkPlayer]
+    players: Dict[int, GieselaPlayer]
 
     _voice_state: Dict[str, Any]
 
-    def __init__(self, bot: "Giesela"):
-        super().__init__()
-        self.bot = bot
-        bot.add_listener(self.on_socket_response)
+    def __init__(self, bot: "Giesela", password: str, rest_url: str, ws_url: str):
+        super().__init__(bot, password=password, rest_url=rest_url, ws_url=ws_url)
         self.players = {}
 
         self._voice_state = {}
 
-    def get_player(self, guild_id: int, *, create: bool = True) -> Optional[LavalinkPlayer]:
+        bot.add_listener(self.on_socket_response)
+
+    def get_player(self, guild_id: int, voice_channel_id: int = None, *, create: bool = True) -> Optional[GieselaPlayer]:
         player = self.players.get(guild_id)
         if not player and create:
             # TODO create
-            player = LavalinkPlayer(self.bot)
+            player = GieselaPlayer(self, guild_id, voice_channel_id)
             self.players[guild_id] = player
         return player
+
+    def get_discord_websocket(self, guild_id: int) -> DiscordWebSocket:
+        # noinspection PyProtectedMember
+        return self.bot._connection._get_websocket(guild_id)
+
+    async def connect_player(self, guild_id: int, channel_id: int):
+        ws = self.get_discord_websocket(guild_id)
+        await ws.voice_state(guild_id, channel_id)
+
+    async def disconnect_player(self, guild_id: int):
+        ws = self.get_discord_websocket(guild_id)
+        await ws.voice_state(guild_id, None)
+
+    async def on_event(self, guild_id: int, event: LavalinkEvent, data: TrackEventDataType):
+        player = self.players.get(guild_id)
+        if not player:
+            log.info(f"No player in guild {guild_id}... Not handling {event}")
+            return
+
+        await player.handle_event(event, data)
+
+    async def on_player_update(self, guild_id: int, state: LavalinkPlayerState):
+        player = self.players.get(guild_id)
+        if not player:
+            log.info(f"No player in guild {guild_id}... Not updating {state}")
+            return
+
+        await player.update_state(state)
 
     async def on_socket_response(self, data: Dict[str, Any]):
         if not data or data.get("t") not in {"VOICE_STATE_UPDATE", "VOICE_SERVER_UPDATE"}:
@@ -313,5 +290,9 @@ class LavalinkClient(EventEmitter):
         if all(key in self._voice_state for key in ("op", "guildId", "sessionId", "event")):
             guild_id = event_data["guild_id"]
             log.debug(f"sending voice_state for guild {guild_id}")
-            await self.ws.send(**self._voice_state)
+            await self.send_raw(self._voice_state)
             self._voice_state.clear()
+
+    async def on_disconnect(self, error: ConnectionClosed):
+        for player in self.players.values():
+            await player.disconnect()

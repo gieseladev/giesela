@@ -2,7 +2,7 @@ import asyncio
 
 from discord import Embed, Message, TextChannel, User
 
-from giesela import GieselaEntry, MusicPlayer, Playlist, RadioSongEntry, RadioStationEntry, StreamEntry, TimestampEntry, YoutubeEntry
+from giesela import GieselaEntry, GieselaPlayer, Playlist, RadioSongEntry, TimestampEntry, YoutubeEntry
 from giesela.ui import create_player_bar
 from giesela.utils import (ordinal, to_timestamp)
 from .. import InteractableEmbed, IntervalUpdatingMessage, emoji_handler
@@ -20,45 +20,18 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         seek_amount: Amount of seconds to forward/rewind
     """
     seek_amount: float
-    player: MusicPlayer
+    player: GieselaPlayer
 
-    def __init__(self, channel: TextChannel, player: MusicPlayer, **kwargs):
+    def __init__(self, channel: TextChannel, player: GieselaPlayer, **kwargs):
         self.seek_amount = kwargs.pop("seek_amount", 30)
         super().__init__(channel, **kwargs)
         self.player = player
-
-    def get_stream_entry_embed(self, entry: StreamEntry) -> Embed:
-        desc = f"🔴 Live [`{to_timestamp(self.player.progress)}`]"
-        footer = {}
-        cover = None
-        colour = 0xa23dd1
-
-        if isinstance(entry, RadioStationEntry):
-            station_name = entry.station.name
-            footer = dict(text=f"From {station_name}")
-            cover = entry.station.logo
-            colour = 0xbe7621
-
-        em = Embed(
-            title=entry.title,
-            description=desc,
-            url=entry.link,
-            colour=colour
-        )
-        if footer:
-            em.set_footer(**footer)
-        if cover:
-            em.set_thumbnail(url=cover)
-        return em
 
     async def get_embed(self) -> Embed:
         entry = self.player.current_entry
 
         if not entry:
             return Embed(description="Nothing playing")
-
-        if isinstance(entry, StreamEntry) and not isinstance(entry, RadioSongEntry):
-            return self.get_stream_entry_embed(entry)
 
         fields = []
         author = {}
@@ -157,22 +130,22 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
 
     @emoji_handler("⏪", pos=2)
     async def fast_rewind(self, *_):
-        self.player.seek(self.player.progress - self.seek_amount)
+        await self.player.seek(self.player.progress - self.seek_amount)
 
     @emoji_handler("⏯", pos=3)
     async def play_pause(self, *_):
         if self.player.is_playing:
-            self.player.pause()
+            await self.player.pause()
         else:
-            self.player.resume()
+            await self.player.resume()
 
     @emoji_handler("⏩", pos=4)
     async def fast_forward(self, *_):
-        self.player.seek(self.player.progress + self.seek_amount)
+        await self.player.seek(self.player.progress + self.seek_amount)
 
     @emoji_handler("⏭", pos=5)
     async def next_entry(self, *_):
-        self.player.skip()
+        await self.player.skip()
 
     async def delayed_update(self):
         await asyncio.sleep(.5)

@@ -28,9 +28,12 @@ class ConfigDefaults:
 
     history_limit = 200
 
-    default_volume = 0.6
-    save_videos = True
+    lavalink_ws_url = os.getenv("lavalink_ws_url")
+    lavalink_rest_url = os.getenv("lavalink_rest_url")
+    lavalink_password = os.getenv("lavalink_password")
+
     auto_pause = True
+    default_volume = 100
 
     webiesela_cert = "data/cert"
     options_file = "data/options.ini"

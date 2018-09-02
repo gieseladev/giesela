@@ -26,6 +26,9 @@ Instead of making things hard, why don't we just ignore manual setup and go stra
 to something as easy as running a [Docker Container][docker-container].
 
 Get the official image from `giesela/giesela:refresh` and just run it!
+Even better, if you just want it to run without having to do all that much
+you can use [docker-compose] which comes with the necessary services like
+[Lavalink][lavalink]. (You still have to do some configuration tho)
 
 
 ## Configuration
@@ -40,6 +43,18 @@ Configuring has never been as easy (maybe?)
     
 `command_prefix` *optional*:
     Set the prefix for messages addressed to Giesela (default "!").
+    
+#### If you don't use `docker compose` using the provided `docker_compose.yml`
+you also need to provide the following variables:
+
+`lavalink_ws_url`:
+    The complete (including scheme and port) url of [Lavalink][lavalink]'s websocket
+
+`lavalink_rest_url`:
+    Complete url for [Lavalink][lavalink]'s REST server
+
+`lavalink_password`:
+    The password used to interact with [Lavalink][lavalink]
 
 
 ### Volumes
@@ -73,7 +88,6 @@ which Giesela understands, but I'm too lazy to name them all!
         - Searching
     * Improved help/error
     * Self-updating now-playing message with built-in player control buttons
-- New player with "native" support for seeking
 - Using [Discord.py's Commands framework][discordpy-commands]
 - Removed a bunch of commands (I know this doesn't really sound like a good thing, but
     most of these commands were useless or broken anyway)
@@ -82,9 +96,13 @@ which Giesela understands, but I'm too lazy to name them all!
 - Newly added playlist features:
     * Playlist editors
 - New radio station system which makes it easy (at least easier) to add new radio stations
+- Using [Lavalink](lavalink)
 
 
 [docker-container]: https://www.docker.com/what-container
+[docker-compose]: https://docs.docker.com/compose
 
 [discord-token]: https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token
 [discordpy-commands]: https://discordpy.readthedocs.io/en/rewrite/ext/commands/index.html "Commands Framework"
+
+[lavalink]: https://github.com/Frederikam/Lavalink

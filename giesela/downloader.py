@@ -14,7 +14,7 @@ import youtube_dl
 from youtube_dl.utils import DownloadError, ExtractorError, UnsupportedError
 
 from .bot import Giesela
-from .entry import BaseEntry, GieselaEntry, StreamEntry, TimestampEntry, YoutubeEntry
+from .entry import BaseEntry, GieselaEntry, TimestampEntry, YoutubeEntry
 from .exceptions import ExtractionError, WrongEntryTypeError
 from .lib.api.VGMdb import get_entry as get_vgm_track
 from .lib.api.discogs import get_entry as get_discogs_track

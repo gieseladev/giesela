@@ -23,7 +23,7 @@ from .lib.api import spotify
 from .lib.web_socket_server import SimpleSSLWebSocketServer, SimpleWebSocketServer, WebSocket
 
 if TYPE_CHECKING:
-    from giesela import MusicPlayer, Giesela
+    from giesela import GieselaPlayer, Giesela
     from .cogs.webiesela import Webiesela
 
 log = logging.getLogger(__name__)
@@ -50,7 +50,7 @@ def _call_function_main_thread(func: Callable, *args, wait_for_result: bool = Fa
         return fut
 
 
-def playlists_overview(player: "MusicPlayer") -> List[Dict[str, Any]]:
+def playlists_overview(player: "GieselaPlayer") -> List[Dict[str, Any]]:
     _playlists = WebieselaServer.cog.playlist_manager.playlists
     playlists = []
     for playlist in _playlists:
@@ -154,7 +154,7 @@ class GieselaWebSocket(WebSocket):
             log.exception("error while handling message")
             raise
 
-    async def play_entry(self, player: "MusicPlayer", answer: Dict[str, Any], kind: str, item: Dict[str, Any], searcher: str, mode: str):
+    async def play_entry(self, player: "GieselaPlayer", answer: Dict[str, Any], kind: str, item: Dict[str, Any], searcher: str, mode: str):
         success = False
         entry_gen = []
 
@@ -534,7 +534,7 @@ class WebieselaServer:
             log.exception("error while broadcasting")
 
     @classmethod
-    def get_player(cls, token: str = None, guild_id: int = None) -> Optional["MusicPlayer"]:
+    def get_player(cls, token: str = None, guild_id: int = None) -> Optional["GieselaPlayer"]:
         if not token and not guild_id:
             raise ValueError("Specify at least one of the two")
         guild_id = cls.get_token_information(token)[0] if token else guild_id

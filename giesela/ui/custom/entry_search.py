@@ -3,7 +3,7 @@ from typing import Awaitable, List, Optional
 from discord import Embed, TextChannel, User
 from discord.ext import commands
 
-from giesela import BaseEntry, GieselaEntry, MusicPlayer, YoutubeEntry, utils
+from giesela import BaseEntry, GieselaEntry, GieselaPlayer, YoutubeEntry, utils
 from ..help import AutoHelpEmbed
 from ..interactive import ItemPicker, MessageableEmbed
 
@@ -26,10 +26,10 @@ def get_entry_embed(entry: BaseEntry) -> Embed:
 
 
 class EntrySearchUI(AutoHelpEmbed, MessageableEmbed, ItemPicker):
-    player: MusicPlayer
+    player: GieselaPlayer
     results: List[Awaitable[BaseEntry]]
 
-    def __init__(self, channel: TextChannel, player: MusicPlayer, results: List[Awaitable[BaseEntry]], user: User = None, **kwargs):
+    def __init__(self, channel: TextChannel, player: GieselaPlayer, results: List[Awaitable[BaseEntry]], user: User = None, **kwargs):
         super().__init__(channel, user=user, **kwargs)
         self.player = player
         self.results = results

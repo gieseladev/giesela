@@ -14,11 +14,11 @@ class LavalinkREST(AbstractLavalinkClient):
     def __init__(self, *, rest_url: str, aiosession: ClientSession = None, **kwargs):
         super().__init__(**kwargs)
         self.aiosession = aiosession or getattr(self.bot, "aiosession")
-        self.api_url = rest_url.rstrip("/")
+        self.rest_url = rest_url.rstrip("/")
         self._auth_header = dict(authorization=self._password)
 
     async def get_tracks_raw(self, query: str) -> Dict[str, Any]:
-        url = f"{self.api_url}/loadtracks"
+        url = f"{self.rest_url}/loadtracks"
         params = dict(identifier=query)
 
         async with self.aiosession.get(url, params=params, headers=self._auth_header) as resp:
