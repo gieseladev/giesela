@@ -52,7 +52,7 @@ Currently this only affects `radio_stations.yml`
 `/giesela/logs` holds the log files (if there even are any...)
 
 
-### Secure Websockets for Webiesela
+### Secure WebSockets for Webiesela
 Giesela Refresh ~~finally~~ supports SSL encryption for Webiesela. All you have to do
 to enable it is place (mount) your certificate file in the `/giesela/data/cert` folder.
 

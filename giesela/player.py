@@ -1,8 +1,7 @@
 import asyncio
 import logging
-import os
 from asyncio import AbstractEventLoop
-from typing import Optional, TYPE_CHECKING
+from typing import Any, Dict, Optional, TYPE_CHECKING, Union
 
 from discord import Guild, VoiceChannel, VoiceClient
 
@@ -17,29 +16,11 @@ if TYPE_CHECKING:
 log = logging.getLogger(__name__)
 
 
-async def _delete_file(filename):
-    for x in range(30):
-        try:
-            os.unlink(filename)
-            break
-
-        except PermissionError as e:
-            if e.errno == 32:  # File is in use
-                await asyncio.sleep(0.25)
-
-        except Exception:
-            log.exception(f"Error trying to delete {filename}")
-            break
-    else:
-        log.warning("[Config:SaveVideos] Could not delete file {}, giving up and moving on".format(os.path.relpath(filename)))
-
-
-class MusicPlayer(EventEmitter):
+class LavalinkPlayer(EventEmitter):
     bot: "Giesela"
     loop: AbstractEventLoop
-    downloader: Downloader
 
-    channel: VoiceChannel
+    _channel: VoiceChannel
     voice_client: VoiceClient
 
     queue: Queue
@@ -53,7 +34,7 @@ class MusicPlayer(EventEmitter):
         self.loop = bot.loop
         self.downloader = downloader
 
-        self.channel = channel
+        self._channel = channel
         self.voice_client = next((voice_client for voice_client in bot.voice_clients if voice_client.guild == channel.guild), None)
 
         self.queue = Queue(bot, self, downloader)
@@ -68,12 +49,25 @@ class MusicPlayer(EventEmitter):
         return f"<MusicPlayer for {self.vc_qualified_name} {playing}>"
 
     @property
+    def channel(self) -> VoiceChannel:
+        return self._channel
+
+    @channel.setter
+    def channel(self, value: Union[int, VoiceChannel]):
+        if isinstance(value, int):
+            value = self.bot.get_channel(value)
+        if not isinstance(value, VoiceChannel):
+            raise TypeError(f"{value} isn't a voice channel")
+
+        self._channel = value
+
+    @property
     def vc_qualified_name(self) -> str:
         return f"{self.channel.guild.name}#{self.channel.name}"
 
     @property
     def guild(self) -> Guild:
-        return self.channel.guild
+        return self._channel.guild
 
     @property
     def player(self) -> Optional[GieselaSource]:
@@ -92,16 +86,7 @@ class MusicPlayer(EventEmitter):
 
     @property
     def volume(self) -> float:
-        return self._volume
-
-    @volume.setter
-    def volume(self, volume: float):
-        old_volume = self._volume
-        self._volume = volume
-        if self.player:
-            self.player.volume = volume
-
-        self.emit("volume_change", player=self, old=old_volume, new=volume)
+        return self._volume / 1000
 
     @property
     def is_playing(self) -> bool:
@@ -125,13 +110,13 @@ class MusicPlayer(EventEmitter):
 
     @property
     def voice_channel(self) -> VoiceChannel:
-        return self.bot.get_channel(self.channel.id)
+        return self.bot.get_channel(self._channel.id)
 
     async def connect(self, **kwargs):
         if self.voice_client:
             await self.voice_client.connect(**kwargs)
         else:
-            self.voice_client = await self.channel.connect(**kwargs)
+            self.voice_client = await self._channel.connect(**kwargs)
 
     async def disconnect(self, **kwargs):
         if self.voice_client:
@@ -141,11 +126,11 @@ class MusicPlayer(EventEmitter):
         self.emit("disconnect", player=self)
 
     async def move_to(self, target: VoiceChannel):
-        self.channel = target
+        self._channel = target
 
         if self.voice_client:
             await self.voice_client.move_to(target)
-            self.channel = target
+            self._channel = target
         else:
             await self.connect()
 
@@ -278,3 +263,55 @@ class MusicPlayer(EventEmitter):
 
     async def update_chapter(self):
         self.emit("play", player=self, entry=self.current_entry)
+
+
+class LavalinkClient(EventEmitter):
+    bot: "Giesela"
+    players: Dict[int, LavalinkPlayer]
+
+    _voice_state: Dict[str, Any]
+
+    def __init__(self, bot: "Giesela"):
+        super().__init__()
+        self.bot = bot
+        bot.add_listener(self.on_socket_response)
+        self.players = {}
+
+        self._voice_state = {}
+
+    def get_player(self, guild_id: int, *, create: bool = True) -> Optional[LavalinkPlayer]:
+        player = self.players.get(guild_id)
+        if not player and create:
+            # TODO create
+            player = LavalinkPlayer(self.bot)
+            self.players[guild_id] = player
+        return player
+
+    async def on_socket_response(self, data: Dict[str, Any]):
+        if not data or data.get("t") not in {"VOICE_STATE_UPDATE", "VOICE_SERVER_UPDATE"}:
+            return
+
+        if data["t"] == "VOICE_SERVER_UPDATE":
+            event_data = data["d"]
+            self._voice_state.update({
+                "op": "voiceUpdate",
+                "guildId": event_data["guild_id"],
+                "event": event_data
+            })
+        else:
+            event_data = data["d"]
+            if int(event_data["user_id"]) != self.bot.user.id:
+                return
+
+            self._voice_state.update({"sessionId": event_data["session_id"]})
+
+            guild_id = int(event_data["guild_id"])
+
+            if guild_id in self.players:
+                self.players[guild_id].channel = event_data["channel_id"]
+
+        if all(key in self._voice_state for key in ("op", "guildId", "sessionId", "event")):
+            guild_id = event_data["guild_id"]
+            log.debug(f"sending voice_state for guild {guild_id}")
+            await self.ws.send(**self._voice_state)
+            self._voice_state.clear()

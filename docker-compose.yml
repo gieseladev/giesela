@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  giesela:
+    build: .
+    image: giesela/giesela:refresh
+    container_name: Giesela
+    restart: always
+    ports:
+    - 30000:30000
+    networks:
+    - backend
+    environment:
+    - token
+    - google_api_key
+    - command_prefix
+    - SENTRY_DSN
+    - lavalink_password=Giesela
+    - lavalink_server_ws=ws://lavalink_server:2334
+    - lavalink_server_url=http://lavalink_server:2333
+
+  #  webiesela:
+  #    image: giesela/webiesela
+  #    container_name: Webiesela
+  #    restart: always
+  #    ports:
+  #      - 80:80
+
+  lavalink:
+    image: fredboat/lavalink:master-v3
+    container_name: Lavalink
+    restart: always
+    networks:
+    - backend
+    volumes:
+    - ./.docker/lavalink.yml:/opt/Lavalink/application.yml
+
+networks:
+  backend:
+    external: false

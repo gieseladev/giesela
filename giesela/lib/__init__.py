@@ -1,4 +1,3 @@
 from .api import *
-from .event_emitter import EventEmitter
+from .event_emitter import EventEmitter, has_events
 from .formatter import GieselaHelpFormatter, help_formatter
-from .giesela_source import GieselaSource
