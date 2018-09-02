@@ -364,7 +364,7 @@ class Player:
 
         playlist_entry = player.current_entry.meta.get("playlist_entry")
         if playlist_entry:
-            playlist_entry.edit(**new_entry.to_dict())
+            playlist_entry.replace(new_entry)
 
     @commands.command()
     async def lyrics(self, ctx: Context, *query: str):

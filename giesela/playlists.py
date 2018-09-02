@@ -141,17 +141,30 @@ class PlaylistEntry:
     def to_gpl(self) -> dict:
         return self._entry
 
+    def replace(self, data: Union[BaseEntry, Dict[str, Any]]):
+        if isinstance(data, BaseEntry):
+            data = data.to_dict()
+
+        before_sort_attr = self.sort_attr
+        self._entry = filter_dict(data, ENTRY_SLOTS)
+        self.save(reorder=self.sort_attr != before_sort_attr)
+
     def edit(self, **changes):
         changes = filter_dict(changes, ENTRY_SLOTS)
         log.debug(f"applying changes {changes} to {self}")
         before_sort_attr = self.sort_attr
         self._entry.update(changes)
+        self.save(reorder=self.sort_attr != before_sort_attr)
+
+    def save(self, *, reorder: bool = False):
         if self.playlist:
-            if self.sort_attr != before_sort_attr:
+            if reorder:
                 log.debug(f"{self} sort attribute has changed, re-ordering playlist")
                 self.playlist.reorder_entry(self)
             else:
                 self.playlist.save()
+        else:
+            log.warning("Can't save {self}, no playlist...")
 
     def copy(self) -> "PlaylistEntry":
         data = self.to_gpl().copy()
