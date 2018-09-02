@@ -2,6 +2,7 @@
 
 import asyncio
 import logging.config
+import logging.handlers
 import sys
 from pathlib import Path
 
@@ -30,7 +31,6 @@ LOGGING = {
             "level": "DEBUG",
             "formatter": "detailed",
             "filename": "logs/giesela.log",
-            "mode": "w",
             "backupCount": 3
         }
     },
@@ -52,6 +52,8 @@ def setup_logging():
     Path("logs").mkdir(exist_ok=True)
 
     logging.config.dictConfig(LOGGING)
+    handler = logging._handlers.get("file")  # type: logging.handlers.RotatingFileHandler
+    handler.doRollover()
 
 
 def unload_package(name: str):
@@ -65,15 +67,13 @@ def main():
     setup_logging()
 
     log = logging.getLogger("giesela")
-    handler = logging._handlers.get("file")
 
     while True:
         from giesela import Giesela, RestartSignal, TerminateSignal
 
-        handler.doRollover()
-
         log.info("creating Giesela")
         bot = Giesela()
+        log.info(f"Giesela runtime #id: {id(bot)}")
         log.info("running...")
         try:
             bot.run()
