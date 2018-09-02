@@ -12,7 +12,7 @@ from discord.ext.commands import BadArgument, Context, Converter, view as string
 
 from giesela import Giesela, Playlist, PlaylistManager, utils
 from giesela.lib import help_formatter
-from giesela.ui import EmbedPaginator, EmbedViewer, ItemPicker, PromptYesNo
+from giesela.ui import EmbedPaginator, EmbedViewer, ItemPicker, PromptYesNo, VerticalTextViewer
 from giesela.ui.custom import PlaylistBuilder, PlaylistViewer
 from .player import Player
 
@@ -97,8 +97,9 @@ class PlaylistCog:
         builder = PlaylistBuilder(ctx.channel, ctx.author, bot=self.bot, playlist=playlist)
         changelog = await builder.display()
         if changelog:
-            embed = Embed(title=f"Saved changes to {playlist.name}", description=changelog, colour=Colour.green())
-            await ctx.send(embed=embed)
+            frame = Embed(title=f"Saved changes to {playlist.name}", colour=Colour.green())
+            viewer = VerticalTextViewer(ctx.channel, content=changelog, embed_frame=frame)
+            await viewer.display()
         else:
             await ctx.message.delete()
 

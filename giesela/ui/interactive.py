@@ -213,6 +213,7 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
 
     async def wait_for_message(self) -> Any:
         while True:
+            # noinspection PyUnresolvedReferences
             msg = await self.bot.wait_for("message", check=self.message_check)
 
             if isinstance(self.bot, BotBase):
@@ -259,7 +260,7 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
     """
     Keyword Args:
         embeds: list of `Embed` to use
-            no_controls_for_single_embed: `bool`. Don't show page controls when only one embed
+            no_controls_for_single_page: `bool`. Don't show page controls when only one embed
         embed_callback: function to call which returns an `Embed` based on the current index
     """
     embeds: Optional[List[Embed]]
@@ -269,7 +270,7 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
 
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
         self.embeds = kwargs.pop("embeds", None)
-        no_controls_for_single_embed = kwargs.pop("no_controls_for_single_embed", True)
+        no_controls_for_single_page = kwargs.pop("no_controls_for_single_page", True)
 
         self.embed_callback = kwargs.pop("embed_callback", None)
 
@@ -278,7 +279,7 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
 
         super().__init__(channel, user, **kwargs)
 
-        if self.embeds and no_controls_for_single_embed and len(self.embeds) == 1:
+        if self.embeds and no_controls_for_single_page and len(self.embeds) == 1:
             self.disable_handler(self.previous_page)
             self.disable_handler(self.next_page)
 
@@ -353,6 +354,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
             When providing a string the following kwargs are applicable:
             window_height: number of lines to show at once
             window_size: Max number of characters to fit in window
+        no_controls_for_single_page: Whether to show buttons for embeds which can't be scrolled
 
         line_callback: Callable which takes returns the content of a line
             when given its index
@@ -384,6 +386,8 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         elif self.lines:
             self.window_width = max(len(line) for line in self.lines)
 
+        no_controls_for_single_page = kwargs.pop("no_controls_for_single_page", True)
+
         self.line_callback = kwargs.pop("line_callback", None)
 
         self.window_height = kwargs.pop("window_height", 20)
@@ -398,6 +402,12 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
 
         self._current_line = 0
         self._lines_displayed = 0
+
+        if self.lines and no_controls_for_single_page:
+            if len(self.lines) <= self.window_height and sum(map(len, self.lines)) <= self.max_window_length:
+                log.info("Not showing scroll controls because Embed only one page")
+                self.disable_handler(self.scroll_up)
+                self.disable_handler(self.scroll_down)
 
     @property
     def current_line(self) -> int:
