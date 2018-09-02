@@ -338,7 +338,6 @@ class Playlist:
         if entry not in self:
             raise KeyError(f"{entry} isn't in {self}")
 
-        # TODO TEST!
         index = self.index_of(entry)
         _entry = self.entries.pop(index)
         bisect.insort_left(self.entries, _entry)

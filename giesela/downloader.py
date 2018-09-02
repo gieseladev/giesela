@@ -280,6 +280,13 @@ class Downloader:
 
             return _tuple_gen_creator([await self.get_entry(info, **meta)])
 
+    def get_entries_from_urls(self, urls: Iterable[str], **meta) -> List[Awaitable[BaseEntry]]:
+        tasks = []
+        for url in urls:
+            task = self.get_entry(url, **meta)
+            tasks.append(asyncio.ensure_future(task))
+        return tasks
+
     async def get_entries_from_urls_gen(self, urls: Iterable[str], **meta) -> AsyncIterator[Tuple[int, Optional[BaseEntry]]]:
         for ind, url in enumerate(urls):
             try:

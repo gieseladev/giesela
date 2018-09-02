@@ -1,6 +1,7 @@
 import abc
 import asyncio
 import contextlib
+import logging
 import textwrap
 from typing import List, TYPE_CHECKING, Tuple
 
@@ -8,13 +9,15 @@ from discord import Colour, Embed, Guild, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Downloader, EditPlaylistProxy, Giesela, Optional, Playlist, PlaylistEntry, utils
+from giesela import BaseEntry, Downloader, EditPlaylistProxy, Giesela, Optional, Playlist, PlaylistEntry, utils
 from .entry_editor import EntryEditor
 from ..help import AutoHelpEmbed
 from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
 
 if TYPE_CHECKING:
     from giesela.cogs.player import Player
+
+log = logging.getLogger(__name__)
 
 
 def create_basic_embed(playlist: Playlist) -> Embed:
@@ -154,15 +157,53 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
 
     # I hope you're using python 3.7 because I have absolutely no intention of rewriting this :P
     @contextlib.asynccontextmanager
-    async def processing(self, ctx: Context, value: str, title: str = "Processing"):
+    async def processing(self, value: str, title: str = "Processing"):
         self._processing = (value, title)
         asyncio.ensure_future(self.show_window())
 
         try:
-            async with ctx.typing():
+            async with self.channel.typing():
                 yield None
         finally:
             self._processing = None
+
+    async def update_processing(self, *, value: str = None, title: str = None):
+        if not self._processing:
+            raise ValueError("Not processing anything")
+
+        new_value, new_title = self._processing
+        new_value = value or new_value
+        new_title = title or new_title
+        self._processing = (new_value, new_title)
+
+        await self.show_window()
+
+    async def _add_playlist(self, entries: List[str]) -> List[BaseEntry]:
+        tasks = self.downloader.get_entries_from_urls(entries)
+        _total_tasks = len(tasks)
+        _show_task = None
+        entries = []
+
+        async with self.processing("Preparing...", title="Processing Playlist"):
+            for i, task in enumerate(tasks, 1):
+                try:
+                    entry = await task
+                except asyncio.CancelledError:
+                    break
+                except Exception:
+                    log.exception("Something went wrong while loading playlist")
+                    continue
+
+                entries.append(entry)
+
+                if not _show_task or _show_task.done():
+                    progress = str(round(100 * i / _total_tasks))
+                    _show_task = asyncio.ensure_future(self.update_processing(value=f"{progress}% done"))
+
+            if _show_task:
+                await _show_task
+
+        return entries
 
     @emoji_handler("💾", pos=999)
     async def save_changes(self, *_) -> str:
@@ -195,17 +236,20 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         """Add an entry"""
         query = " ".join(query)
 
-        async with self.processing(ctx, f"\"{query}\"", "Searching..."):
+        async with self.processing(f"\"{query}\"", "Searching..."):
             entry = await self.downloader.get_entry_from_query(query)
 
         if isinstance(entry, list):
-            # TODO support this
-            raise commands.CommandError("No playlist support yet, kthx")
-        try:
-            entry = self.playlist_editor.add_entry(entry)
-        except KeyError:
-            raise commands.CommandError(f"\"{entry.title}\" is already in the playlist")
-        await self.show_line(self.playlist_editor.index_of(entry))
+            entries = await self._add_playlist(entry)
+            for entry in entries:
+                self.playlist_editor.add_entry(entry)
+            await self.show_window()
+        else:
+            try:
+                entry = self.playlist_editor.add_entry(entry)
+            except KeyError:
+                raise commands.CommandError(f"\"{entry.title}\" is already in the playlist")
+            await self.show_line(self.playlist_editor.index_of(entry))
 
     @commands.command("remove", aliases=["rm"])
     async def remove_entry(self, _, *indices: int):

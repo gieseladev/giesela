@@ -84,6 +84,7 @@ class LoadingBar(EditableEmbed):
     _current_time: int
     _current_embed: Embed
     _message_future: asyncio.Future
+    _cancelled_messages: int
 
     def __init__(self, channel: TextChannel, **options):
         self.header = options.pop("header", "Please Wait")
@@ -103,6 +104,7 @@ class LoadingBar(EditableEmbed):
         self._current_time = time.time()
         self._current_embed = None
         self._message_future = None
+        self._cancelled_messages = 0
 
     @property
     def avg_time(self) -> Optional[float]:
@@ -140,17 +142,29 @@ class LoadingBar(EditableEmbed):
 
         return self._current_embed
 
-    async def set_progress(self, percentage: float):
+    def set_progress(self, percentage: float):
         self.time_it()
 
         self.progress = percentage
 
         next_embed = self.build_next_embed()
 
-        if self._message_future:
-            await self._message_future
+        if self._message_future and not self._message_future.done():
+            if self._cancelled_messages <= 2:
+                self._message_future.cancel()
+                self._cancelled_messages += 1
+            else:
+                log.warning("Can't keep up with progress, not updating until caught up!")
+                return
+        else:
+            self._cancelled_messages = 0
 
         self._message_future = asyncio.ensure_future(self.edit(next_embed))
+
+    def tick(self):
+        if self.total_items:
+            progress = self.progress + (1 / self.total_items)
+            self.set_progress(progress)
 
 
 class UpdatingMessage(EditableEmbed):
