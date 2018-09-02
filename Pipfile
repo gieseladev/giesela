@@ -21,6 +21,7 @@ colorlog = "*"
 "js2py" = "*"
 lxml = "*"
 pyyaml = "*"
+uvloop = {version = "*", markers = "sys_platform != 'win32'"}
 
 [dev-packages]
 pytest = "*"

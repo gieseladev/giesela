@@ -56,6 +56,17 @@ def setup_logging():
     handler.doRollover()
 
 
+def setup_uvloop():
+    import asyncio
+    try:
+        import uvloop
+    except ImportError:
+        logging.info("Not using uvloop")
+    else:
+        asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+        logging.info("using uvloop")
+
+
 def unload_package(name: str):
     for module in sys.modules.copy():
         package = module.split(".")[0]
@@ -65,6 +76,7 @@ def unload_package(name: str):
 
 def main():
     setup_logging()
+    setup_uvloop()
 
     log = logging.getLogger("giesela")
 
