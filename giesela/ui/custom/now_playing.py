@@ -1,17 +1,58 @@
 import asyncio
+from typing import Any
 
-from discord import Embed, Message, TextChannel, User
+from discord import Colour, Embed, Message, TextChannel
 
-from giesela import GieselaEntry, GieselaPlayer, Playlist
+from giesela import BaseEntry, ChapterEntry, GieselaPlayer, RadioEntry, SpecificChapterData, utils
 from giesela.ui import create_player_bar
-from giesela.utils import (ordinal, to_timestamp)
 from .. import InteractableEmbed, IntervalUpdatingMessage, emoji_handler
 
 
-def create_progress_bar(progress: float, duration: float) -> str:
-    progress_ratio = progress / duration
-    progress_bar = create_player_bar(progress_ratio, 18)
+def create_progress_bar(progress: float, duration: float, *, length: int = 18) -> str:
+    progress_ratio = progress / duration if duration > 0 else 0
+    progress_bar = create_player_bar(progress_ratio, length)
     return progress_bar
+
+
+def get_description(player: GieselaPlayer, progress: float, duration: float = None) -> str:
+    prefix = ""
+    progress_ts = utils.to_timestamp(progress)
+
+    if duration is None:
+        prefix = r"\🔴 "
+        content = "**Live**"
+        suffix = f"Playing for {progress_ts}"
+    else:
+        content = create_progress_bar(progress, duration)
+        duration_ts = utils.to_timestamp(duration)
+        suffix = f"`{progress_ts}/{duration_ts}`"
+
+    if player.is_paused:
+        prefix = "❚❚ "
+
+    return f"{prefix}{content} | {suffix}"
+
+
+class ObjectChain:
+    def __init__(self, *targets: Any):
+        self._targets = list(targets)
+
+    def __getattr__(self, item: str):
+        _return_none = False
+
+        for target in self._targets:
+            try:
+                value = getattr(target, item)
+            except AttributeError:
+                continue
+            else:
+                if value is not None:
+                    return value
+                else:
+                    _return_none = True
+
+        if not _return_none:
+            raise AttributeError(f"{self.targets} don't have {item}")
 
 
 class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
@@ -33,88 +74,49 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         if not entry:
             return Embed(description="Nothing playing")
 
-        fields = []
-        author = {}
-        footer = {}
+        basic_entry = entry.entry
+        progress = entry.progress
+        duration = basic_entry.duration
 
-        playing_state = "►" if self.player.is_paused else "❚❚"
-        progress_bar = None
-        song_progress = self.player.progress
-        song_duration = entry.duration
+        if not isinstance(basic_entry, BaseEntry):
+            return Embed(title=str(basic_entry), footer="Unsupported entry type")
 
-        title = entry.title
-        colour = 0xa9b244
-        cover = None
+        if entry.has_chapters:
+            chapter = entry.chapter
+            if isinstance(chapter, SpecificChapterData):
+                progress = chapter.get_chapter_progress(progress)
+                duration = chapter.duration
 
-        entry_author: User = entry.meta.get("author")
-        playlist: Playlist = entry.meta.get("playlist")
-
-        if isinstance(entry, GieselaEntry):
-            author = dict(name=entry.artist, icon_url=entry.artist_image)
-            cover = entry.cover
-            title = entry.song_title
-        elif isinstance(entry, RadioSongEntry):
-            cover = entry.song_data.cover
-            author = dict(name=entry.song_data.artist or Embed.Empty, icon_url=entry.song_data.artist_image or Embed.Empty)
-            if entry.song_data.song_title:
-                title = entry.song_data.song_title
+            target = ObjectChain(chapter, basic_entry)
         else:
-            if isinstance(entry, YoutubeEntry):
-                cover = entry.thumbnail
-            if entry_author:
-                author = dict(name=entry_author.display_name, icon_url=entry_author.avatar_url)
+            chapter = None
+            target = basic_entry
 
-        if isinstance(entry, RadioSongEntry):
-            colour = 0xa23dd1
-            footer = dict(text=f"🔴 Live from {entry.station.name}", icon_url=entry.station.logo or Embed.Empty)
-            song_progress = entry.song_progress
-            song_duration = entry.song_data.duration
-        elif isinstance(entry, GieselaEntry):
-            colour = 0xF9FF6E
-            fields.append(dict(name="Album", value=entry.album))
-        elif isinstance(entry, TimestampEntry):
-            colour = 0x00FFFF
-            sub_entry = entry.get_sub_entry(self.player)
-            title = sub_entry["name"]
-            sub_index = sub_entry["index"]
+        requester = entry.get("requester", None)
 
-            footer = dict(text=f"{sub_index + 1}{ordinal(sub_index + 1)} sub-entry of \"{entry.title}\" "
-                               f"[{to_timestamp(song_progress)}/{to_timestamp(song_duration)}]")
+        description = get_description(self.player, progress, duration)
 
-            song_progress = sub_entry["progress"]
-            song_duration = sub_entry["duration"]
+        em = Embed(title=target.title, description=description, colour=Colour.greyple())
 
-            cover = entry.thumbnail
-        elif isinstance(entry, YoutubeEntry):
-            colour = 0xa9b244
+        if target.artist or target.artist_image:
+            em.set_author(name=target.artist or "Unknown Artist", icon_url=target.artist_image or Embed.Empty)
 
-        if song_progress is not None and song_duration is not None:
-            progress_bar = progress_bar or create_progress_bar(song_progress, song_duration)
-            desc = f"{playing_state} {progress_bar} `[{to_timestamp(song_progress)}/{to_timestamp(song_duration)}]`"
-        else:
-            desc = f"{playing_state}"
+        if target.cover:
+            em.set_thumbnail(url=target.cover)
 
-        if playlist:
-            fields.append(dict(name="Playlist", value=playlist.name))
-            if not cover:
-                cover = playlist.cover
+        if target.album:
+            em.add_field(name="Album", value=target.album)
 
-        em = Embed(
-            title=title,
-            description=desc,
-            url=entry.url,
-            colour=colour
-        )
+        if isinstance(basic_entry, RadioEntry):
+            em.add_field(name="Radio Station", value=basic_entry.station.name)
 
-        for field in fields:
-            em.add_field(**field)
+        if requester:
+            em.add_field(name="Requested by", value=requester.mention)
 
-        if footer:
-            em.set_footer(**footer)
-        if cover:
-            em.set_thumbnail(url=cover)
-        if author:
-            em.set_author(**author)
+        if chapter and isinstance(basic_entry, ChapterEntry):
+            index = basic_entry.chapters.index(chapter)
+            total_chapters = len(basic_entry.chapters)
+            em.set_footer(text=f"Chapter {index}/{total_chapters} of {entry}")
 
         return em
 

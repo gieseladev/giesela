@@ -3,7 +3,7 @@ from typing import Awaitable, List, Optional
 from discord import Embed, TextChannel, User
 from discord.ext import commands
 
-from giesela import BaseEntry, GieselaEntry, GieselaPlayer, utils
+from giesela import BaseEntry, GieselaPlayer, utils
 from ..help import AutoHelpEmbed
 from ..interactive import ItemPicker, MessageableEmbed
 
@@ -14,7 +14,7 @@ def get_entry_embed(entry: BaseEntry) -> Embed:
     if isinstance(entry, YoutubeEntry):
         em.set_thumbnail(url=entry.thumbnail)
 
-    if isinstance(entry, GieselaEntry):
+    if isinstance(entry, _GieselaEntry):
         em.title = entry.song_title
         em.set_author(name=entry.artist, icon_url=entry.artist_image)
         em.add_field(name="Album", value=entry.album)

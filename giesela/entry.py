@@ -1,7 +1,7 @@
 import abc
 import copy
 import logging
-from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Dict, Iterator, List, Optional, TYPE_CHECKING, Type, Union
 
 from discord import User
 
@@ -11,7 +11,14 @@ from .radio import RadioSongData, RadioStation
 if TYPE_CHECKING:
     from .player import GieselaPlayer
 
+__all__ = ["PlayableEntry", "BaseEntry",
+           "ChapterData", "SpecificChapterData", "HasChapters",
+           "BasicEntry", "ChapterEntry", "RadioEntry",
+           "EntryWrapper", "PlayerEntry", "QueueEntry", "HistoryEntry"]
+
 log = logging.getLogger(__name__)
+
+_DEFAULT = object()
 
 
 class PlayableEntry(metaclass=abc.ABCMeta):
@@ -29,6 +36,9 @@ class PlayableEntry(metaclass=abc.ABCMeta):
 
     def __repr__(self) -> str:
         return f"<{type(self).__name__}: {self.uri}>"
+
+    def __str__(self) -> str:
+        return self.uri
 
     def __hash__(self) -> int:
         return hash(self.track)
@@ -93,7 +103,26 @@ class PlayableEntry(metaclass=abc.ABCMeta):
                     duration=self._duration, start_position=self.start_position, end_position=self.end_position)
 
 
-class ChapterData:
+class BaseEntry(metaclass=abc.ABCMeta):
+    title: str
+    artist: Optional[str]
+    cover: Optional[str]
+    artist_image: Optional[str]
+    album: Optional[str]
+
+    def __str__(self) -> str:
+        if self.artist:
+            return f"{self.artist} - {self.title}"
+        return self.title
+
+    @property
+    def sort_attr(self):
+        if self.artist:
+            return self.artist, self.title
+        return self.title
+
+
+class ChapterData(BaseEntry):
 
     def __init__(self, *, title: str, artist: str = None, cover: str = None, artist_image: str = None, album: str = None):
         self.title = title
@@ -112,7 +141,7 @@ class SpecificChapterData(ChapterData):
         super().__init__(**kwargs)
         self.start = start
 
-        if not (duration is not None ^ end is not None):
+        if not ((duration is not None) ^ (end is not None)):
             raise ValueError("Either duration or end required!")
 
         self.duration = duration or end - start
@@ -131,32 +160,23 @@ class SpecificChapterData(ChapterData):
 
 
 class HasChapters(metaclass=abc.ABCMeta):
+    @property
+    def has_chapters(self) -> bool:
+        return True
+
     @abc.abstractmethod
     async def get_chapter(self, progress: float) -> ChapterData:
         pass
 
 
-class BaseEntry(PlayableEntry, metaclass=abc.ABCMeta):
-    title: str
-    artist: Optional[str]
-
-    def __str__(self) -> str:
-        if self.artist:
-            return f"{self.artist} - {self.title}"
-        return self.title
-
-    @property
-    def sort_attr(self):
-        if self.artist:
-            return self.artist, self.title
-        return self.title
-
-
-class BasicEntry(BaseEntry):
-    def __init__(self, *, title: str, artist: str, **kwargs):
+class BasicEntry(BaseEntry, PlayableEntry):
+    def __init__(self, *, title: str, artist: str, cover: str = None, artist_image: str = None, album: str = None, **kwargs):
         super().__init__(**kwargs)
         self.title = title
         self.artist = artist
+        self.cover = cover
+        self.artist_image = artist_image
+        self.album = album
 
     @classmethod
     def kwargs_from_track_info(cls, track: str, info: lavalink.TrackInfo):
@@ -166,21 +186,7 @@ class BasicEntry(BaseEntry):
 
     def to_dict(self):
         data = super().to_dict()
-        data.update(title=self.title, artist=self.artist)
-        return data
-
-
-class GieselaEntry(BasicEntry):
-    def __init__(self, *, cover: str, artist_image: str, album: str = None, **kwargs):
-        super().__init__(**kwargs)
-
-        self.cover = cover
-        self.artist_image = artist_image
-        self.album = album
-
-    def to_dict(self):
-        data = super().to_dict()
-        data.update(cover=self.cover, artist_image=self.artist_image, album=self.album)
+        data.update(title=self.title, artist=self.artist, cover=self.cover, artist_image=self.artist_image, album=self.album)
         return data
 
 
@@ -189,6 +195,10 @@ class ChapterEntry(BasicEntry, HasChapters):
     def __init__(self, chapters: List[SpecificChapterData], **kwargs):
         super().__init__(**kwargs)
         self.chapters = chapters
+
+    @property
+    def has_chapters(self):
+        return bool(self.chapters)
 
     async def get_chapter(self, timestamp: float) -> Optional[ChapterData]:
         return next((chapter for chapter in self.chapters if chapter.contains(timestamp)), None)
@@ -200,27 +210,28 @@ class ChapterEntry(BasicEntry, HasChapters):
         return data
 
 
-class RadioEntry(BaseEntry, HasChapters):
+class RadioEntry(BaseEntry, PlayableEntry, HasChapters):
     _song_data: Optional[RadioSongData]
     _chapter: Optional[ChapterData]
 
     def __init__(self, *, station: RadioStation, **kwargs):
         super().__init__(**kwargs)
         self.station = station
+        self.title = station.name
+        self.cover = station.logo
+        self.artist = None
+        self.artist_image = None
+        self.album = None
+
         self._song_data = None
         self._chapter = None
 
     def __str__(self) -> str:
-        if self.artist:
-            origin = self.artist if self.title else self.station.name
-            title = self.title or self.artist
-        elif self.title:
-            origin = self.station.name
-            title = self.title
-        else:
-            return self.station.name
+        return self.title
 
-        return f"{origin} - {title}"
+    @property
+    def has_chapters(self):
+        return self.station.has_song_data
 
     async def get_chapter(self, progress: float):
         if self.needs_update:
@@ -233,7 +244,7 @@ class RadioEntry(BaseEntry, HasChapters):
 
         kwargs = dict(title=data.title, artist=data.artist, cover=data.cover, artist_image=data.artist_image, album=data.album)
         if data.progress is not None and data.duration is not None:
-            chapter = SpecificChapterData(start=progress - data.progress, duration=data.duration, **kwargs)
+            chapter = SpecificChapterData(start=progress - data.estimated_progress, duration=data.duration, **kwargs)
         else:
             chapter = ChapterData(**kwargs)
 
@@ -258,7 +269,7 @@ class RadioEntry(BaseEntry, HasChapters):
 
 
 class EntryWrapper(metaclass=abc.ABCMeta):
-    def __init__(self, *, entry: Union[PlayableEntry, "EntryWrapper"]):
+    def __init__(self, *, entry: Union[PlayableEntry, "EntryWrapper"], **_):
         self._entry = entry
 
     def __repr__(self) -> str:
@@ -276,6 +287,47 @@ class EntryWrapper(metaclass=abc.ABCMeta):
     def wrapped(self) -> Union[PlayableEntry, "EntryWrapper"]:
         return self._entry
 
+    def add_wrapper(self, wrapper: Type["EntryWrapper"], **kwargs):
+        wrap = wrapper(entry=self._entry, **kwargs)
+        self._entry = wrap
+
+    def remove_wrapper(self, wrapper: Type["EntryWrapper"]):
+        if isinstance(self, wrapper):
+            raise ValueError("Can't remove top-level wrapper")
+        elif isinstance(self.wrapped, wrapper):
+            self._entry = self.wrapped._entry
+        elif isinstance(self.wrapped, EntryWrapper):
+            self.wrapped.remove_wrapper(wrapper)
+        else:
+            raise TypeError(f"No {wrapper} found in {self}")
+
+    def get_wrapper(self, wrapper: Type["EntryWrapper"]) -> Optional["EntryWrapper"]:
+        if isinstance(self, wrapper):
+            return self
+        elif isinstance(self.wrapped, EntryWrapper):
+            return self.wrapped.get_wrapper(wrapper)
+
+    def walk_wrappers(self) -> Iterator["EntryWrapper"]:
+        current = self
+        while isinstance(current, EntryWrapper):
+            yield current
+            current = current.wrapped
+
+    def get(self, item: str, default: Any = _DEFAULT):
+        for wrapper in self.walk_wrappers():
+            try:
+                return getattr(wrapper, item)
+            except AttributeError:
+                continue
+
+        if default is not _DEFAULT:
+            return default
+
+        raise AttributeError(f"Couldn't find {item} in {self}")
+
+    def has_wrapper(self, wrapper: Type["EntryWrapper"]) -> bool:
+        return bool(self.get_wrapper(wrapper))
+
     def to_dict(self) -> Dict[str, Any]:
         return dict(entry=self._entry.to_dict())
 
@@ -287,7 +339,12 @@ class PlayerEntry(EntryWrapper):
         super().__init__(**kwargs)
         self.player = player
 
-        self.has_chapters = isinstance(self.entry, HasChapters)
+        entry = self.entry
+        if isinstance(entry, HasChapters):
+            self.has_chapters = entry.has_chapters
+        else:
+            self.has_chapters = False
+
         self._chapter = None
 
     @property

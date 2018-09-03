@@ -128,9 +128,9 @@ class RadioSongData(NamedTuple):
 
     @property
     def estimated_progress(self) -> Optional[float]:
-        if self.progress:
+        if self.progress is not None:
             progress = self.progress + self.age
-            if self.duration and progress > self.duration:
+            if self.duration is not None and progress > self.duration:
                 progress = self.duration
             return progress
 
@@ -159,7 +159,7 @@ class RadioStation:
         self.logo = kwargs.pop("logo", None)
 
         self.song_scraper = kwargs.pop("song_scraper", None)
-        self.update_interval = kwargs.pop("update_interval", 40)
+        self.update_interval = kwargs.pop("update_interval", 25)
         self.extra_update_delay = kwargs.pop("extra_update_delay", 0.5)
 
     def __str__(self) -> str:
@@ -208,7 +208,7 @@ class RadioStation:
 
         if "remaining_duration" in data:
             remaining = utils.parse_timestamp(data["remaining_duration"])
-            song_id = "".join(filter(None, map(kwargs.get, ("song_title", "artist", "album"))))
+            song_id = "".join(filter(None, map(kwargs.get, ("title", "artist", "album"))))
             if song_id:
                 progress, duration = self.handle_remaining_duration(song_id, remaining)
                 kwargs.update(progress=progress, duration=duration)

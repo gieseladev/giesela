@@ -80,7 +80,7 @@ class LavalinkPlayerState(NamedTuple):
 
     @property
     def age(self) -> float:
-        return time.time() - self.time_seconds
+        return max(time.time() - self.time_seconds, 0)
 
     @property
     def estimate_seconds_now(self) -> float:

@@ -1,13 +1,12 @@
 import random
 import time
-from typing import Dict
 
 from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import Giesela, GieselaPlayer
 from giesela.ui import VerticalTextViewer
-from giesela.ui.custom import EntrySearchUI, NowPlayingEmbed
+from giesela.ui.custom import EntrySearchUI
 from giesela.utils import (format_time, nice_cut)
 from .player import Player
 
@@ -216,74 +215,55 @@ class ManipulateCog(QueueBase):
 
 
 class DisplayCog(QueueBase):
-    np_messages: Dict[int, NowPlayingEmbed]
-
-    def __init__(self, bot: Giesela):
-        super().__init__(bot)
-
-        self.np_messages = {}
 
     @commands.command()
-    async def np(self, ctx: Context):
-        """Show the current entry."""
-        np_embed = self.np_messages.get(ctx.guild.id)
-        if np_embed:
-            await np_embed.delete()
-
+    async def queue(self, ctx: Context):
+        """Display the queue."""
         player = await self.get_player(ctx)
-        np_embed = NowPlayingEmbed(ctx.channel, player)
-        self.np_messages[ctx.guild.id] = np_embed
 
-        await np_embed.start()
+        lines = []
 
-    # @commands.command()
-    # async def queue(self, ctx: Context):
-    #     """Display the queue."""
-    #     player = await self.get_player(ctx)
-    #
-    #     lines = []
-    #
-    #     if player.current_entry and isinstance(player.current_entry, TimestampEntry):
-    #         sub_queue = player.current_entry.sub_queue
-    #         sub_queue = [sub_entry for sub_entry in sub_queue if sub_entry["start"] >= player.progress]
-    #         for item in sub_queue:
-    #             lines.append(
-    #                 "            ►`{}.` **{}**".format(
-    #                     item["index"] + 1,
-    #                     nice_cut(item["name"], 35)
-    #                 )
-    #             )
-    #
-    #     for i, item in enumerate(player.queue.entries, 1):
-    #         origin_text = ""
-    #         if "playlist" in item.meta:
-    #             origin_text = "from playlist **{}**".format(item.meta["playlist"].name)
-    #         elif "author" in item.meta:
-    #             origin_text = "by **{}**".format(item.meta["author"].name)
-    #
-    #         lines.append("`{}.` **{}** {}".format(i, nice_cut(item.title, 40), origin_text))
-    #
-    #     if not lines:
-    #         raise commands.CommandError("No entries in the queue")
-    #
-    #     total_time = sum([entry.duration for entry in player.queue.entries])
-    #     if player.current_entry:
-    #         total_time += player.current_entry.duration - player.progress
-    #
-    #     frame = {
-    #         "title": "Queue",
-    #         "author": {
-    #             "name": "{progress_bar}"
-    #         },
-    #         "footer": {
-    #             "text": f"Total duration: {format_time(total_time, True, 5, 2)}"
-    #
-    #         }
-    #     }
-    #
-    #     viewer = VerticalTextViewer(ctx.channel, ctx.author, content=lines, embed_frame=frame)
-    #     await viewer.display()
-    #     await ctx.message.delete()
+        if player.current_entry and isinstance(player.current_entry):
+            sub_queue = player.current_entry.sub_queue
+            sub_queue = [sub_entry for sub_entry in sub_queue if sub_entry["start"] >= player.progress]
+            for item in sub_queue:
+                lines.append(
+                    "            ►`{}.` **{}**".format(
+                        item["index"] + 1,
+                        nice_cut(item["name"], 35)
+                    )
+                )
+
+        for i, item in enumerate(player.queue.entries, 1):
+            origin_text = ""
+            if "playlist" in item.meta:
+                origin_text = "from playlist **{}**".format(item.meta["playlist"].name)
+            elif "author" in item.meta:
+                origin_text = "by **{}**".format(item.meta["author"].name)
+
+            lines.append("`{}.` **{}** {}".format(i, nice_cut(item.title, 40), origin_text))
+
+        if not lines:
+            raise commands.CommandError("No entries in the queue")
+
+        total_time = sum([entry.duration for entry in player.queue.entries])
+        if player.current_entry:
+            total_time += player.current_entry.duration - player.progress
+
+        frame = {
+            "title": "Queue",
+            "author": {
+                "name": "{progress_bar}"
+            },
+            "footer": {
+                "text": f"Total duration: {format_time(total_time, True, 5, 2)}"
+
+            }
+        }
+
+        viewer = VerticalTextViewer(ctx.channel, ctx.author, content=lines, embed_frame=frame)
+        await viewer.display()
+        await ctx.message.delete()
 
     @commands.command()
     async def history(self, ctx: Context):

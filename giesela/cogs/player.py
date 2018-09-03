@@ -8,7 +8,7 @@ from discord.ext.commands import Context
 
 from giesela import Giesela, GieselaPlayer, PlayerManager, WebieselaServer, lyrics as lyricsfinder
 from giesela.ui import VerticalTextViewer
-from giesela.ui.custom import EntryEditor
+from giesela.ui.custom import EntryEditor, NowPlayingEmbed
 from giesela.utils import create_bar, parse_timestamp, similarity
 
 log = logging.getLogger(__name__)
@@ -62,6 +62,7 @@ async def _delayed_disconnect(player: GieselaPlayer, delay: int):
 
 
 class Player:
+    np_messages: Dict[int, NowPlayingEmbed]
     _disconnects: Dict[int, asyncio.Task]
 
     def __init__(self, bot: Giesela):
@@ -69,6 +70,7 @@ class Player:
         self.player_manager = PlayerManager(bot) \
             .on("player_create", self.add_player_listeners)
 
+        self.np_messages = {}
         self._disconnects = {}
 
     @property
@@ -214,6 +216,19 @@ class Player:
 
         user_joined = after.channel != before.channel
         await self.auto_pause(player, joined=user_joined)
+
+    @commands.command()
+    async def np(self, ctx: Context):
+        """Show the current entry."""
+        np_embed = self.np_messages.get(ctx.guild.id)
+        if np_embed:
+            await np_embed.delete()
+
+        player = await self.get_player(ctx)
+        np_embed = NowPlayingEmbed(ctx.channel, player)
+        self.np_messages[ctx.guild.id] = np_embed
+
+        await np_embed.start()
 
     @commands.command()
     async def summon(self, ctx: Context):
@@ -378,7 +393,7 @@ class Player:
                 if not player.current_entry:
                     raise commands.CommandError("There's no way for me to find lyrics for something that doesn't even exist!")
                 query = str(player.current_entry.entry)
-                _progress_guess = player.progress / player.current_entry.duration
+                _progress_guess = player.progress / player.current_entry.entry.duration
 
             lyrics = lyricsfinder.search_for_lyrics(query)
 

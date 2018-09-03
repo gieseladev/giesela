@@ -1,15 +1,14 @@
 import asyncio
 import logging
+import math
 import random
 from contextlib import suppress
 from io import BytesIO
 from typing import Iterable, List, Optional, TYPE_CHECKING
 
-import math
 from PIL import Image, ImageDraw
 from aiohttp import ClientSession
 
-from giesela.entry import GieselaEntry
 from giesela.lib.api.imgur import upload_playlist_cover
 
 if TYPE_CHECKING:
@@ -181,7 +180,7 @@ async def download_images(session: ClientSession, links: Iterable[str], size: in
 
 
 async def generate_playlist_cover(playlist: "Playlist", size: int = 1024) -> Optional[str]:
-    covers = [entry.cover for entry in playlist.entries if isinstance(entry, GieselaEntry)]
+    covers = [entry.cover for entry in playlist.entries if entry.cover]
     log.debug(f"generating cover for {playlist}, found ({len(covers)} cover(s))")
     if not covers:
         return None

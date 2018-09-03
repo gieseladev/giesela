@@ -10,7 +10,7 @@ from discord import Attachment, Colour, Embed, File, User
 from discord.ext import commands
 from discord.ext.commands import BadArgument, Context, Converter, view as string_view
 
-from giesela import Giesela, Playlist, PlaylistManager, utils
+from giesela import BasicEntry, Giesela, Playlist, PlaylistManager, utils
 from giesela.lib import help_formatter
 from giesela.ui import EmbedPaginator, EmbedViewer, ItemPicker, PromptYesNo, VerticalTextViewer
 from giesela.ui.custom import PlaylistBuilder, PlaylistViewer
@@ -426,8 +426,8 @@ class PlaylistCog:
         file = File(data, filename=f"{playlist.name.lower()}.gpl2")
         await ctx.send("Here you go", file=file)
 
-    @playlist.command("contains", aliases=["hasentry", "has", "find", "search"])
-    async def playlist_contains(self, ctx: Context, playlist: str, *, query: str):
+    @playlist.command("search", aliases=["contains", "has", "find"])
+    async def playlist_search(self, ctx: Context, playlist: str, *, query: str):
         """Check whether a playlist contains an entry"""
         playlist = self.find_playlist(playlist)
         entries = list(playlist.search_all_entries(query, threshold=.5))
@@ -460,25 +460,28 @@ class PlaylistCog:
         if not entry:
             raise commands.CommandError("There's nothing playing right now")
 
-        if entry in playlist:
-            raise commands.CommandError(f"**{entry.title}** is already in this playlist!")
+        basic_entry = entry.entry
 
-        similar_entry = playlist.search_entry(entry.title)
+        if not isinstance(basic_entry, BasicEntry):
+            raise commands.CommandError(f"{basic_entry} can't be added to a playlist")
+
+        if basic_entry in playlist:
+            raise commands.CommandError(f"**{basic_entry}** is already in this playlist!")
+
+        similar_entry = playlist.search_entry(str(basic_entry))
         if similar_entry:
             prompt = PromptYesNo(ctx.channel, user=ctx.author,
-                                 text=f"\"{entry.title}\" might already be in this playlist (\"{similar_entry.title}\"), "
+                                 text=f"\"{basic_entry}\" might already be in this playlist (\"{similar_entry.title}\"), "
                                       f"are you sure you want to add it again?")
             if not await prompt:
                 await ctx.message.delete()
                 return
 
-        playlist_entry = playlist.add(entry)
+        playlist_entry = playlist.add(basic_entry)
+        if not entry.has_wrapper():
+            pass
 
-        if "playlist" not in entry.meta:
-            entry.meta["playlist"] = playlist
-            entry.meta["playlist_entry"] = playlist_entry
-
-        em = Embed(title=f"Added **{entry.title}**", colour=Colour.green())
+        em = Embed(title=f"Added **{basic_entry}**", colour=Colour.green())
         add_playlist_footer(em, playlist)
 
         await ctx.send(embed=em)
@@ -494,21 +497,23 @@ class PlaylistCog:
         if playlist:
             playlist = self.find_playlist(playlist)
         else:
-            playlist = entry.meta.get("playlist")
-            if not playlist:
+            playlist_wrapper = entry.get_wrapper()  # TODO playlist wrapper
+            if not playlist_wrapper:
                 raise commands.CommandError("This entry isn't part of a playlist."
                                             "You cannot remove it unless you specify the name!")
+            playlist = playlist_wrapper.playlist
 
         await ensure_user_can_edit_playlist(playlist, ctx)
 
-        if entry not in playlist:
-            raise commands.CommandError(f"{entry.title} isn't in this playlist!")
+        basic_entry: BasicEntry = entry.entry
 
-        playlist.remove(entry)
-        entry.meta.pop("playlist")
-        entry.meta.pop("playlist_entry")
+        if basic_entry not in playlist:
+            raise commands.CommandError(f"{entry} isn't in this playlist!")
 
-        em = Embed(title=f"Removed **{entry.title}**", colour=Colour.green())
+        playlist.remove(basic_entry)
+        entry.remove_wrapper()  # TODO remove wrapper
+
+        em = Embed(title=f"Removed **{entry}**", colour=Colour.green())
         add_playlist_footer(em, playlist)
 
         await ctx.send(embed=em)

@@ -133,8 +133,11 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
         elif op == "playerUpdate":
             guild_id = int(data["guildId"])
             state = data["state"]
-            state = LavalinkPlayerState(state["time"], state["position"])
-            self.emit("player_update", guild_id=guild_id, state=state)
+            if "position" in state:
+                state = LavalinkPlayerState(state["time"], state["position"])
+                self.emit("player_update", guild_id=guild_id, state=state)
+            else:
+                log.warning("player update didn't contain a position value...")
         elif op == "stats":
             kwargs = data.copy()
             kwargs.pop("op")

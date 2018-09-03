@@ -19,23 +19,24 @@ def get_station_embed(station: RadioStation) -> Embed:
 
 
 async def play_station(ctx: Context, player: GieselaPlayer, station: RadioStation, *, now: bool = True):
-    await player.queue.add_radio_entry(station, author=ctx.author, now=now)
+    entry = await player.extractor.get_radio_entry(station)
+    player.queue.add_entry(entry, ctx.author)
     embed = get_station_embed(station)
     await ctx.send("Now playing", embed=embed)
 
 
 class Radio:
     bot: Giesela
-    player_cog: Player
     station_manager: RadioStationManager
+
+    player_cog: Player
 
     def __init__(self, bot: Giesela):
         self.bot = bot
-        self.player_cog = bot.cogs["Player"]
         self.station_manager = RadioStationManager.load(bot, bot.config.radio_stations_config)
+        self.player_cog = bot.cogs["Player"]
 
-    async def get_player(self, *args, **kwargs):
-        return await self.player_cog.get_player(*args, **kwargs)
+        self.get_player = self.player_cog.get_player
 
     def find_station(self, station: str) -> RadioStation:
         _station = self.station_manager.find_station(station)
@@ -61,7 +62,7 @@ class Radio:
         item_picker = ItemPicker(ctx.channel, ctx.author, embed_callback=get_station)
         result = await item_picker.choose()
 
-        if result:
+        if result is not None:
             return stations[result % len(stations)]
 
     @commands.group(invoke_without_command=True)

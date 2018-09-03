@@ -7,24 +7,23 @@ from discord.embeds import EmptyEmbed
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import BaseEntry, GieselaEntry, utils
+from giesela import BasicEntry, utils
 from ..help import AutoHelpEmbed
 from ..interactive import InteractableEmbed, MessageableEmbed, emoji_handler
-from ..prompts import PromptYesNo
 
 
 class EditableEntryData:
-    song_title: str
+    title: str
     artist: Optional[str]
     artist_image: Optional[str]
     cover: Optional[str]
     album: Optional[str]
 
-    _attrs = ("song_title", "artist", "artist_image", "cover", "album")
+    _attrs = ("title", "artist", "artist_image", "cover", "album")
     _dirty = List[str]
 
-    def __init__(self, song_title: str, artist: str = None, artist_image: str = None, cover: str = None, album: str = None):
-        self._song_title = song_title
+    def __init__(self, title: str, artist: str = None, artist_image: str = None, cover: str = None, album: str = None):
+        self._song_title = title
         self._artist = artist
         self._artist_image = artist_image
         self._cover = cover
@@ -58,15 +57,8 @@ class EditableEntryData:
         return [attr for attr in self._attrs if not getattr(self, attr)]
 
     @classmethod
-    def from_entry(cls, entry: BaseEntry) -> "EditableEntryData":
-        if isinstance(entry, GieselaEntry):
-            return cls(entry.song_title, entry.artist, entry.artist_image, entry.cover, entry.album)
-
-        editor = cls(entry.title)
-        info = utils.split_song_name(entry)
-        editor.song_title = info.name
-        editor.artist = info.artist
-        return editor
+    def from_entry(cls, entry: BasicEntry) -> "EditableEntryData":
+        return cls(entry.title, entry.artist, entry.artist_image, entry.cover, entry.album)
 
     def reset_attr(self, attr: str):
         if attr in self._dirty:
@@ -75,7 +67,7 @@ class EditableEntryData:
 
     def get_embed(self) -> Embed:
         embed = Embed()
-        embed.add_field(name="Title", value=self.song_title)
+        embed.add_field(name="Title", value=self.title)
         embed.set_author(name=self.artist or "Unknown Artist", icon_url=self.artist_image or EmptyEmbed)
         embed.add_field(name="Album", value=self.album or "Unknown Album")
         if self.cover:
@@ -96,7 +88,7 @@ class EditableEntryData:
 
 
 class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
-    _entry: BaseEntry
+    _entry: BasicEntry
     entry: EditableEntryData
 
     aiosession: aiohttp.ClientSession
@@ -109,19 +101,20 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
         self.aiosession = getattr(self.bot, "aiosession", False) or aiohttp.ClientSession()
 
     @property
-    def original_entry(self) -> BaseEntry:
+    def original_entry(self) -> BasicEntry:
         return self._entry
 
     @property
-    def changed_entry(self) -> Optional[GieselaEntry]:
-        if self.entry.is_complete:
-            return GieselaEntry.upgrade(self._entry, **self.entry.get_changes())
+    def changed_entry(self) -> BasicEntry:
+        pass
+        # TODO do this
+        # return BasicEntry(self._entry, **self.entry.get_changes())
 
     @property
     def help_title(self) -> str:
         return "Entry Editor Help"
 
-    async def display(self) -> Optional[GieselaEntry]:
+    async def display(self) -> Optional[BasicEntry]:
         await self.update()
         result = await self.wait_for_listener()
         await self.delete()
@@ -129,6 +122,7 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
 
     async def update(self):
         embed = self.entry.get_embed()
+        # TODO create a property which returns a url or None
         embed.title = "open url"
         embed.url = self._entry.url
         if self.error:
@@ -149,13 +143,13 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
         return image
 
     @emoji_handler("💾", pos=999)
-    async def save_changes(self, _, user: User) -> Optional[GieselaEntry]:
+    async def save_changes(self, _, user: User) -> BasicEntry:
         """Apply changes and close"""
-        if self.entry.is_dirty and not self.entry.is_complete:
-            prompt = PromptYesNo(self.channel, user=user,
-                                 text="This entry isn't complete yet, all changes will be discarded. Are you sure you want to quit?")
-            if not await prompt:
-                return
+        # if self.entry.is_dirty and not self.entry.is_complete:
+        #     prompt = PromptYesNo(self.channel, user=user,
+        #                          text="This entry isn't complete yet, all changes will be discarded. Are you sure you want to quit?")
+        #     if not await prompt:
+        #         return
 
         self.stop_listener()
         return self.changed_entry
@@ -170,7 +164,7 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
     async def set_title(self, _, *title: str):
         """Set the title"""
         title = " ".join(title)
-        self.entry.song_title = title
+        self.entry.title = title
         await self.update()
 
     @commands.group("artist", invoke_without_command=True)
@@ -218,9 +212,9 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
             query = " ".join(query)
         else:
             if self.entry.artist:
-                query = f"{self.entry.song_title} - {self.entry.artist}"
+                query = f"{self.entry.title} - {self.entry.artist}"
             else:
-                query = self.entry.song_title
+                query = self.entry.title
         self.entry.cover = await self.search_for_image(query)
         await self.update()
 

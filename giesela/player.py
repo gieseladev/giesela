@@ -39,6 +39,10 @@ class PlayerStateInterpreter(metaclass=abc.ABCMeta):
         return self.state == GieselaPlayerState.PAUSED
 
     @property
+    def is_stopped(self) -> bool:
+        return self.state == GieselaPlayerState.IDLE
+
+    @property
     def is_connected(self) -> bool:
         return self.state != GieselaPlayerState.DISCONNECTED
 
@@ -112,6 +116,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         if isinstance(channel, VoiceChannel):
             channel = channel.id
 
+        # FIXME when using the player too soon (maybe before connected?) it doesn't play
         channel = channel or self.voice_channel_id
 
         if not channel:
