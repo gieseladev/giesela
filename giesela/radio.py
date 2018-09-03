@@ -122,6 +122,18 @@ class RadioSongData(NamedTuple):
             return self.title
         return origin or "Unknown Song"
 
+    @property
+    def age(self) -> float:
+        return time.time() - self.timestamp
+
+    @property
+    def estimated_progress(self) -> Optional[float]:
+        if self.progress:
+            progress = self.progress + self.age
+            if self.duration and progress > self.duration:
+                progress = self.duration
+            return progress
+
     def to_dict(self) -> Dict[str, Any]:
         return dict(self._asdict())
 

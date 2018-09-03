@@ -215,6 +215,10 @@ class LavalinkStats(NamedTuple):
     cpu: LavalinkCPUStats
     frame_stats: LavalinkFrameStats = None
 
+    @property
+    def uptime_seconds(self) -> float:
+        return utils.from_milli(self.uptime)
+
     @classmethod
     def from_data(cls, data):
         data["playing_players"] = data.pop("playingPlayers")

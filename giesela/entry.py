@@ -1,8 +1,6 @@
 import abc
 import copy
 import logging
-import time
-from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from discord import User
@@ -93,19 +91,70 @@ class PlayableEntry(metaclass=abc.ABCMeta):
                     duration=self._duration, start_position=self.start_position, end_position=self.end_position)
 
 
-class BaseEntry(PlayableEntry):
+class ChapterData:
 
+    def __init__(self, *, title: str, artist: str = None, cover: str = None, artist_image: str = None, album: str = None):
+        self.title = title
+        self.artist = artist
+        self.cover = cover
+        self.artist_image = artist_image
+        self.album = album
+
+    def to_dict(self) -> Dict[str, Any]:
+        return dict(title=self.title,
+                    artist=self.artist, cover=self.cover, artist_image=self.artist_image, album=self.album)
+
+
+class SpecificChapterData(ChapterData):
+    def __init__(self, *, start: float, duration: float = None, end: float = None, **kwargs):
+        super().__init__(**kwargs)
+        self.start = start
+
+        if not (duration is not None ^ end is not None):
+            raise ValueError("Either duration or end required!")
+
+        self.duration = duration or end - start
+        self.end = end or start + duration
+
+    def contains(self, timestamp: float) -> bool:
+        return self.start <= timestamp < self.end
+
+    def get_chapter_progress(self, progress: float) -> float:
+        return progress - self.start
+
+    def to_dict(self):
+        data = super().to_dict()
+        data.update(start=self.start, duration=self.duration)
+        return data
+
+
+class HasChapters(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
+    async def get_chapter(self, progress: float) -> ChapterData:
+        pass
+
+
+class BaseEntry(PlayableEntry, metaclass=abc.ABCMeta):
+    title: str
+    artist: Optional[str]
+
+    def __str__(self) -> str:
+        if self.artist:
+            return f"{self.artist} - {self.title}"
+        return self.title
+
+    @property
+    def sort_attr(self):
+        if self.artist:
+            return self.artist, self.title
+        return self.title
+
+
+class BasicEntry(BaseEntry):
     def __init__(self, *, title: str, artist: str, **kwargs):
         super().__init__(**kwargs)
         self.title = title
         self.artist = artist
-
-    def __str__(self) -> str:
-        return f"{self.artist} - {self.title}"
-
-    @property
-    def sort_attr(self):
-        return self.artist, self.title
 
     @classmethod
     def kwargs_from_track_info(cls, track: str, info: lavalink.TrackInfo):
@@ -119,11 +168,45 @@ class BaseEntry(PlayableEntry):
         return data
 
 
-class RadioEntry(PlayableEntry):
-    def __init__(self, *, station: RadioStation, song_data: RadioSongData = None, **kwargs):
+class GieselaEntry(BasicEntry):
+    def __init__(self, *, cover: str, artist_image: str, album: str = None, **kwargs):
+        super().__init__(**kwargs)
+
+        self.cover = cover
+        self.artist_image = artist_image
+        self.album = album
+
+    def to_dict(self):
+        data = super().to_dict()
+        data.update(cover=self.cover, artist_image=self.artist_image, album=self.album)
+        return data
+
+
+class ChapterEntry(BasicEntry, HasChapters):
+
+    def __init__(self, chapters: List[SpecificChapterData], **kwargs):
+        super().__init__(**kwargs)
+        self.chapters = chapters
+
+    async def get_chapter(self, timestamp: float) -> Optional[ChapterData]:
+        return next((chapter for chapter in self.chapters if chapter.contains(timestamp)), None)
+
+    def to_dict(self) -> Dict[str, Any]:
+        data = super().to_dict()
+        chapters = [chapter.to_dict() for chapter in self.chapters]
+        data.update(chapters=chapters)
+        return data
+
+
+class RadioEntry(BaseEntry, HasChapters):
+    _song_data: Optional[RadioSongData]
+    _chapter: Optional[ChapterData]
+
+    def __init__(self, *, station: RadioStation, **kwargs):
         super().__init__(**kwargs)
         self.station = station
-        self._current_song_data = song_data
+        self._song_data = None
+        self._chapter = None
 
     def __str__(self) -> str:
         if self.artist:
@@ -137,107 +220,39 @@ class RadioEntry(PlayableEntry):
 
         return f"{origin} - {title}"
 
-    async def update(self):
-        self._current_song_data = await self.station.get_song_data()
+    async def get_chapter(self, progress: float):
+        if self.needs_update:
+            await self.update(progress)
+        return self._chapter
+
+    async def update(self, progress: float):
+        data = await self.station.get_song_data()
+        self._song_data = data
+
+        kwargs = dict(title=data.title, artist=data.artist, cover=data.cover, artist_image=data.artist_image, album=data.album)
+        if data.progress is not None and data.duration is not None:
+            chapter = SpecificChapterData(start=progress - data.progress, duration=data.duration, **kwargs)
+        else:
+            chapter = ChapterData(**kwargs)
+
+        self._chapter = chapter
 
     @property
-    def next_update_delay(self) -> Optional[float]:
-        if not self._current_song_data:
-            return
+    def needs_update(self) -> bool:
+        if not self.station.has_song_data:
+            return False
+        data = self._song_data
+        if not data:
+            return True
 
-        if self.song_data.duration and self.song_data.progress is not None:
-            timeout = self.song_data.duration - self.song_progress
-        else:
-            timeout = self.station.update_interval - self.song_data_age
+        if data.estimated_progress is not None:
+            return data.estimated_progress >= data.duration
 
-        if timeout <= 0:
-            return 0
-        else:
-            return timeout + self.station.extra_update_delay
-
-    @property
-    def song_data_age(self) -> Optional[float]:
-        if self._current_song_data:
-            return time.time() - self._current_song_data.timestamp
+        return data.age >= self.station.update_interval
 
     @property
     def song_data(self) -> Optional[RadioSongData]:
-        return self._current_song_data
-
-    @property
-    def song_progress(self) -> Optional[float]:
-        if self.song_data and self.song_data.progress is not None:
-            progress = self.song_data.progress + self.song_data_age
-            if self.song_data.duration:
-                progress = min(progress, self.song_data.duration)
-            return progress
-
-    @property
-    def title(self) -> Optional[str]:
-        return self.song_data and self.song_data.title
-
-    @property
-    def artist(self) -> Optional[str]:
-        return self.song_data and self.song_data.artist
-
-    @property
-    def artist_image(self) -> Optional[str]:
-        return self.song_data and self.song_data.artist_image
-
-    @property
-    def cover(self) -> Optional[str]:
-        return self.song_data and self.song_data.cover
-
-    @property
-    def album(self) -> Optional[str]:
-        return self.song_data and self.song_data.album
-
-
-@dataclass
-class ChapterData:
-    start: float
-    duration: float
-    title: str
-
-    @property
-    def end(self) -> float:
-        return self.start + self.duration
-
-    def contains(self, timestamp: float) -> bool:
-        return self.start <= timestamp < self.end
-
-    def to_dict(self) -> Dict[str, Any]:
-        return dict(start=self.start, duration=self.duration, title=self.title)
-
-
-class ChapterEntry(BaseEntry):
-
-    def __init__(self, chapters: List[ChapterData], **kwargs):
-        super().__init__(**kwargs)
-        self.chapters = chapters
-
-    def get_chapter(self, timestamp: float) -> Optional[ChapterData]:
-        return next((chapter for chapter in self.chapters if chapter.contains(timestamp)), None)
-
-    def to_dict(self) -> Dict[str, Any]:
-        data = super().to_dict()
-        chapters = [chapter.to_dict() for chapter in self.chapters]
-        data.update(chapters=chapters)
-        return data
-
-
-class GieselaEntry(BaseEntry):
-    def __init__(self, *, artist_image: str, cover: str, album: str = None, **kwargs):
-        super().__init__(**kwargs)
-
-        self.artist_image = artist_image
-        self.cover = cover
-        self.album = album
-
-    def to_dict(self):
-        data = super().to_dict()
-        data.update(artist_image=self.artist_image, cover=self.cover, album=self.album)
-        return data
+        return self._song_data
 
 
 class EntryWrapper(metaclass=abc.ABCMeta):
@@ -264,9 +279,14 @@ class EntryWrapper(metaclass=abc.ABCMeta):
 
 
 class PlayerEntry(EntryWrapper):
+    _chapter: Optional[ChapterData]
+
     def __init__(self, *, player: "GieselaPlayer", **kwargs):
         super().__init__(**kwargs)
         self.player = player
+
+        self.has_chapters = isinstance(self.entry, HasChapters)
+        self._chapter = None
 
     @property
     def progress(self) -> float:
@@ -275,6 +295,21 @@ class PlayerEntry(EntryWrapper):
     @property
     def time_left(self) -> float:
         return self.entry.duration - self.progress
+
+    @property
+    def chapter(self) -> Optional[ChapterData]:
+        return self._chapter
+
+    async def get_chapter(self) -> Optional[ChapterData]:
+        entry = self.entry
+        if self.has_chapters:
+            # noinspection PyUnresolvedReferences
+            return await entry.get_chapter(self.progress)
+
+    async def update_chapter(self):
+        if self.has_chapters:
+            chapter = await self.get_chapter()
+            self._chapter = chapter
 
 
 class QueueEntry(EntryWrapper):
