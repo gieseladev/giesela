@@ -1,4 +1,4 @@
-server: # REST server
+server: # REST and WS server
   port: 2333
   address: 0.0.0.0
 spring:
@@ -7,9 +7,6 @@ spring:
 lavalink:
   server:
     password: "Giesela"
-    ws:
-      port: 2334
-      host: 0.0.0.0
     sources:
       youtube: true
       bandcamp: true
@@ -27,6 +24,12 @@ metrics:
   prometheus:
     enabled: false
     endpoint: /metrics
+
+sentry:
+  dsn: ""
+#  tags:
+#    some_key: some_value
+#    another_key: another_value
 
 logging:
   file:

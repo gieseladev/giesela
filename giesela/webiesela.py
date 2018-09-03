@@ -18,8 +18,6 @@ from discord import Guild
 from giesela.lib.web_author import WebAuthor
 from . import utils
 from .config import static_config
-from .entry import TimestampEntry
-from .lib.api import spotify
 from .lib.web_socket_server import SimpleSSLWebSocketServer, SimpleWebSocketServer, WebSocket
 
 if TYPE_CHECKING:

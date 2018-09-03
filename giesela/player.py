@@ -8,7 +8,8 @@ from discord import Guild, VoiceChannel
 from discord.gateway import DiscordWebSocket
 from websockets import ConnectionClosed
 
-from .entry import BaseEntry, RadioSongEntry, TimestampEntry
+from .entry import BaseEntry, PlayerEntry, QueueEntry
+from .extractor import Extractor
 from .lib import EventEmitter, has_events
 from .lib.lavalink import LavalinkAPI, LavalinkEvent, LavalinkPlayerState, TrackEventDataType
 from .queue import EntryQueue
@@ -26,7 +27,7 @@ class GieselaPlayerState(enum.IntEnum):
     IDLE = 3
 
 
-class StateInterpreter(metaclass=abc.ABCMeta):
+class PlayerStateInterpreter(metaclass=abc.ABCMeta):
     state: GieselaPlayerState
 
     @property
@@ -43,16 +44,17 @@ class StateInterpreter(metaclass=abc.ABCMeta):
 
 
 @has_events("connect", "disconnect", "pause", "resume", "seek", "skip", "stop", "play", "finished", "chapter")
-class GieselaPlayer(EventEmitter, StateInterpreter):
+class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
     voice_channel_id: Optional[int]
 
     _last_state: Optional[LavalinkPlayerState]
-    _current_entry: Optional[BaseEntry]
+    _current_entry: Optional[PlayerEntry]
     _start_position: float
 
     def __init__(self, manager: "PlayerManager", guild_id: int, voice_channel_id: int = None):
         super().__init__(loop=manager.loop)
         self.manager = manager
+        self.extractor = manager.extractor
         self.bot = manager.bot
         self.config = self.bot.config
 
@@ -60,8 +62,9 @@ class GieselaPlayer(EventEmitter, StateInterpreter):
         self.guild_id = guild_id
         self.voice_channel_id = voice_channel_id
 
-        self.queue = EntryQueue(self)
-        self.queue.on("entry-added", self.on_entry_added)
+        self.queue = EntryQueue(self) \
+            .on("entry_added", self.on_entry_added) \
+            .on("entries_added", self.on_entry_added)
 
         self._volume = self.config.default_volume
         self._last_state = None
@@ -69,7 +72,7 @@ class GieselaPlayer(EventEmitter, StateInterpreter):
         self._start_position = 0
 
     def __str__(self) -> str:
-        playing = f"playing {self.current_entry}" if self.is_playing else ""
+        playing = f"playing {self.current_entry!r}" if self.is_playing else ""
         return f"<GieselaPlayer for {self.qualified_channel_name} {playing}>"
 
     @property
@@ -85,7 +88,7 @@ class GieselaPlayer(EventEmitter, StateInterpreter):
         return self.bot.get_guild(self.guild_id)
 
     @property
-    def current_entry(self) -> Optional[BaseEntry]:
+    def current_entry(self) -> Optional[PlayerEntry]:
         return self._current_entry
 
     @property
@@ -107,7 +110,9 @@ class GieselaPlayer(EventEmitter, StateInterpreter):
         if isinstance(channel, VoiceChannel):
             channel = channel.id
 
-        if channel and not self.voice_channel_id:
+        channel = channel or self.voice_channel_id
+
+        if not channel:
             raise ValueError("No voice channel specified")
 
         await self.manager.connect_player(self.guild_id, channel)
@@ -137,15 +142,14 @@ class GieselaPlayer(EventEmitter, StateInterpreter):
         await self.manager.send_seek(self.guild_id, seconds)
         self.emit("seek", player=self, timestamp=seconds)
 
-    async def skip(self, force: bool = False):
-        if not force and isinstance(self.current_entry, TimestampEntry):
-            sub_entry = self.current_entry.get_sub_entry(self)
-            await self.seek(sub_entry["end"])
-        else:
-            await self.manager.send_stop(self.guild_id)
+    async def skip(self):
+        self._current_entry = None
+        await self.manager.send_stop(self.guild_id)
+        await self.play()
         self.emit("skip", player=self)
 
     async def stop(self):
+        self._current_entry = None
         await self.manager.send_stop(self.guild_id)
         self.state = GieselaPlayerState.IDLE
         self.emit("stop", player=self)
@@ -172,7 +176,7 @@ class GieselaPlayer(EventEmitter, StateInterpreter):
         if play_next:
             self.loop.create_task(self.play())
 
-    async def play(self, entry: BaseEntry = None):
+    async def play(self, entry: QueueEntry = None):
         if not self.is_connected:
             await self.connect()
 
@@ -184,26 +188,28 @@ class GieselaPlayer(EventEmitter, StateInterpreter):
             await self.stop()
             return
 
-        self._current_entry = entry
-        self._start_position = entry.start_position or 0
+        playable_entry = entry.entry
+        self._current_entry = PlayerEntry(player=self, entry=entry)
+        self._start_position = playable_entry.start_position or 0
 
-        await self.manager.send_play(self.guild_id, entry.track_urn, entry.start_position, entry.end_position)
+        await self.manager.send_play(self.guild_id, playable_entry.track, playable_entry.start_position, playable_entry.end_position)
+        self.state = GieselaPlayerState.PLAYING
 
-        await self.setup_chapters()
+        # await self.setup_chapters()
 
-        log.info(f"playing {entry} in {self.qualified_channel_name}")
+        log.info(f"playing {self.current_entry} in {self.qualified_channel_name}")
         self.emit("play", player=self, entry=entry)
 
-    async def setup_chapters(self):
-        if isinstance(self.current_entry, TimestampEntry):
-            sub_queue = self.current_entry.sub_queue
-            for sub_entry in sub_queue:
-                self.player.wait_for_timestamp(sub_entry["start"], only_when_latest=True, target=self.update_chapter)
-
-        elif isinstance(self.current_entry, RadioSongEntry):
-            await self.current_entry.update()
-            delay = max(self.current_entry.next_update_delay, 1)
-            self.loop.call_later(delay, self.repeat_chapter_setup)
+    # async def setup_chapters(self):
+    #     if isinstance(self.current_entry, TimestampEntry):
+    #         sub_queue = self.current_entry.sub_queue
+    #         for sub_entry in sub_queue:
+    #             self.player.wait_for_timestamp(sub_entry["start"], only_when_latest=True, target=self.update_chapter)
+    #
+    #     elif isinstance(self.current_entry, RadioSongEntry):
+    #         await self.current_entry.update()
+    #         delay = max(self.current_entry.next_update_delay, 1)
+    #         self.loop.call_later(delay, self.repeat_chapter_setup)
 
     def repeat_chapter_setup(self):
         asyncio.ensure_future(self.update_chapter())
@@ -211,6 +217,10 @@ class GieselaPlayer(EventEmitter, StateInterpreter):
 
     async def update_chapter(self):
         self.emit("chapter", player=self)
+
+    def on_entry_added(self, **_):
+        if not self.current_entry:
+            self.loop.create_task(self.play())
 
     async def handle_event(self, event: LavalinkEvent, data: TrackEventDataType):
         play_next = True
@@ -222,14 +232,12 @@ class GieselaPlayer(EventEmitter, StateInterpreter):
         elif event == LavalinkEvent.TRACK_EXCEPTION:
             log.error(f"Lavalink reported an error: {data.error}")
 
+        # TODO send a stop signal just to be sure (@.vlexar)
+
         await self.playback_finished(play_next)
 
     async def update_state(self, state: LavalinkPlayerState):
         self._last_state = state
-
-    def on_entry_added(self, **_):
-        if not self.current_entry:
-            self.loop.create_task(self.play())
 
 
 class PlayerManager(LavalinkAPI):
@@ -238,8 +246,10 @@ class PlayerManager(LavalinkAPI):
 
     _voice_state: Dict[str, Any]
 
-    def __init__(self, bot: "Giesela", password: str, rest_url: str, ws_url: str):
-        super().__init__(bot, password=password, rest_url=rest_url, ws_url=ws_url)
+    def __init__(self, bot: "Giesela"):
+        super().__init__(bot, password=bot.config.lavalink_password, address=bot.config.lavalink_address, secure=bot.config.lavalink_secure)
+        self.extractor = Extractor(self)
+
         self.players = {}
 
         self._voice_state = {}
@@ -260,10 +270,12 @@ class PlayerManager(LavalinkAPI):
 
     async def connect_player(self, guild_id: int, channel_id: int):
         ws = self.get_discord_websocket(guild_id)
+        log.debug(f"connecting {guild_id} to {channel_id}")
         await ws.voice_state(guild_id, channel_id)
 
     async def disconnect_player(self, guild_id: int):
         ws = self.get_discord_websocket(guild_id)
+        log.debug(f"disconnecting {guild_id}")
         await ws.voice_state(guild_id, None)
 
     async def on_event(self, guild_id: int, event: LavalinkEvent, data: TrackEventDataType):

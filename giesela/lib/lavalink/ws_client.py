@@ -2,22 +2,19 @@ import asyncio
 import json
 import logging
 from collections import deque
-from typing import Any, Deque, Dict, Optional
+from typing import Any, Deque, Dict, List, Optional
 
 import websockets
 from websockets import ConnectionClosed, WebSocketClientProtocol
 
 from giesela.lib import EventEmitter, has_events
+from . import utils
 from .abstract import AbstractLavalinkClient
-from .models import LavalinkEvent, LavalinkEventData, LavalinkPlayerState
+from .models import LavalinkEvent, LavalinkEventData, LavalinkPlayerState, LavalinkStats
 
 log = logging.getLogger(__name__)
 
 __all__ = ["LavalinkWebSocket"]
-
-
-def to_ms(seconds: float) -> int:
-    return round(1000 * seconds)
 
 
 @has_events("event", "unknown_event", "player_update", "disconnect")
@@ -25,16 +22,19 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
     _ws: Optional[WebSocketClientProtocol]
     _send_queue: Deque[Dict[str, Any]]
 
+    _stats = Deque[LavalinkStats]
+
     _shutdown_signal: bool
 
-    def __init__(self, *, ws_url: str, shard_count: int = None, retry_attempts: int = 3, **kwargs):
+    def __init__(self, *, shard_count: int = None, retry_attempts: int = 3, max_stats: int = 5, **kwargs):
         super().__init__(**kwargs)
 
         self._ws = None
         self._send_queue = deque()
 
+        self._stats = deque(maxlen=max_stats)
+
         self._ws_retry_attempts = retry_attempts
-        self._url = ws_url
         self._shard_count = shard_count
 
         self._shutdown_signal = False
@@ -44,6 +44,15 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
     @property
     def connected(self):
         return self._ws is not None and self._ws.open
+
+    @property
+    def statistics(self) -> Optional[LavalinkStats]:
+        if self._stats:
+            return self._stats[0]
+
+    @property
+    def all_statistics(self) -> List[LavalinkStats]:
+        return list(self._stats)
 
     def shutdown(self):
         self._shutdown_signal = True
@@ -71,14 +80,14 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
             "Num-Shards": shard_count,
             "User-Id": str(user_id)
         }
-        log.debug(f"Connecting to Lavalink {self._url} with {headers}...")
+        log.debug(f"Connecting to Lavalink {self._ws_url} with {headers}...")
 
         self._shutdown_signal = False
 
         try:
-            self._ws = await websockets.connect(self._url, loop=self.loop, extra_headers=headers)
+            self._ws = await websockets.connect(self._ws_url, loop=self.loop, extra_headers=headers)
         except OSError:
-            log.exception(f"Couldn't Connect to {self._url}")
+            log.exception(f"Couldn't Connect to {self._ws_url}")
         else:
             log.info("Connected to Lavalink!")
             self.loop.create_task(self.listen())
@@ -99,6 +108,39 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
                 return True
         return False
 
+    async def handle_data(self, data: Dict[str, Any]):
+        op = data.get("op", None)
+        log.debug(f"Received websocket data {data}")
+
+        if not op:
+            log.warning(f"No op!")
+            return
+
+        if op == "event":
+            event_type = data["type"]
+
+            try:
+                event = LavalinkEvent(event_type)
+            except ValueError:
+                log.exception(f"Received unknown event {event_type}")
+                self.emit("unknown_event", event_type=event_type, raw_data=data)
+            else:
+                log.debug(f"Received event of type {event}")
+                guild_id = int(data["guildId"])
+                event_data = LavalinkEventData.from_data(event, data)
+                self.emit("event", guild_id=guild_id, event=event, data=event_data)
+
+        elif op == "playerUpdate":
+            guild_id = int(data["guildId"])
+            state = data["state"]
+            state = LavalinkPlayerState(state["time"], state["position"])
+            self.emit("player_update", guild_id=guild_id, state=state)
+        elif op == "stats":
+            kwargs = data.copy()
+            kwargs.pop("op")
+            stats = LavalinkStats.from_data(kwargs)
+            self._stats.appendleft(stats)
+
     async def listen(self):
         while not self._shutdown_signal:
             try:
@@ -117,49 +159,34 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
                     log.error("Unable to reconnect to Lavalink!")
                     break
 
-            op = data.get("op", None)
-            log.debug(f"Received websocket data {data}")
-
-            if not op:
-                log.warning(f"No op!")
-                continue
-
-            if op == "event":
-                event_type = data["type"]
-
-                try:
-                    event = LavalinkEvent(event_type)
-                except ValueError:
-                    log.exception(f"Received unknown event {event_type}")
-                    self.emit("unknown_event", event_type=event_type, raw_data=data)
-                else:
-                    log.debug(f"Received event of type {event}")
-                    guild_id = int(data["guildId"])
-                    event_data = LavalinkEventData.from_data(event, data)
-                    self.emit("event", guild_id=guild_id, event=event, data=event_data)
-
-            elif op == "playerUpdate":
-                guild_id = int(data["guildId"])
-                state = data["state"]
-                state = LavalinkPlayerState(state["time"], state["position"])
-                self.emit("player_update", guild_id=guild_id, state=state)
+            try:
+                await self.handle_data(data)
+            except Exception:
+                log.exception(f"Couldn't handle message {data}")
 
         log.debug("Closing WebSocket...")
         await self._ws.close()
 
     async def send_raw(self, data: Dict[str, Any]):
         if self.connected:
+            log.debug(f"sending: {data}")
             await self._ws.send(json.dumps(data))
         else:
-            log.debug("not connected, adding to queue")
+            log.debug(f"not connected, adding message to queue ({data})")
             self._send_queue.append(data)
 
     async def send(self, op: str, guild_id: int, **kwargs):
-        kwargs.update(op=op, guild_id=str(guild_id))
+        kwargs.update(op=op, guildId=str(guild_id))
         return await self.send_raw(kwargs)
 
     async def send_play(self, guild_id: int, track: str, start_time: float = None, end_time: float = None):
-        return await self.send("play", guild_id, track=track, startTime=to_ms(start_time), endTime=to_ms(end_time))
+        times = {}
+        if start_time:
+            times["startTime"] = utils.to_milli(start_time)
+        if end_time:
+            times["endTime"] = utils.to_milli(end_time)
+
+        return await self.send("play", guild_id, track=track, **times)
 
     async def send_stop(self, guild_id: int):
         return await self.send("stop", guild_id)
@@ -171,10 +198,10 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
         return await self.send("pause", guild_id, pause=pause)
 
     async def send_seek(self, guild_id: int, position: float):
-        return await self.send("seek", guild_id, position=to_ms(position))
+        return await self.send("seek", guild_id, position=utils.to_milli(position))
 
     async def send_volume(self, guild_id: int, volume: float):
-        return await self.send("volume", guild_id, volume=to_ms(volume))
+        return await self.send("volume", guild_id, volume=utils.to_milli(volume))
 
     async def send_destroy(self, guild_id: int):
         return await self.send("destroy", guild_id)

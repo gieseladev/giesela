@@ -70,7 +70,7 @@ class EventEmitter:
         return self.registered_events is None or event in self.registered_events
 
     def on(self, event: str, cb: Callable, *, ignore_multiple: bool = True):
-        if self._can_emit_event(event):
+        if not self._can_emit_event(event):
             raise ValueError(f"{self} doesn't emit {event}")
 
         listeners = self._events[event]

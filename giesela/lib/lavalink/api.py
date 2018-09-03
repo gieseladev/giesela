@@ -11,8 +11,8 @@ __all__ = ["LavalinkAPI"]
 
 
 class LavalinkAPI(LavalinkREST, LavalinkWebSocket):
-    def __init__(self, bot: Client, password: str, rest_url: str, ws_url: str, **kwargs):
-        super().__init__(bot=bot, password=password, rest_url=rest_url, ws_url=ws_url, **kwargs)
+    def __init__(self, bot: Client, password: str, address: str, secure: bool, **kwargs):
+        super().__init__(bot=bot, password=password, lavalink_address=address, lavalink_secure=secure, **kwargs)
 
     async def on_event(self, guild_id: int, event: LavalinkEvent, data: TrackEventDataType):
         pass

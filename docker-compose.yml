@@ -16,8 +16,7 @@ services:
     - command_prefix
     - SENTRY_DSN
     - lavalink_password=Giesela
-    - lavalink_server_ws=ws://lavalink_server:2334
-    - lavalink_server_url=http://lavalink_server:2333
+    - lavalink_server_address=lavalink_server:2333
 
   #  webiesela:
   #    image: giesela/webiesela
@@ -27,7 +26,7 @@ services:
   #      - 80:80
 
   lavalink:
-    image: fredboat/lavalink:master-v3
+    image: fredboat/lavalink:experimental_magma
     container_name: Lavalink
     restart: always
     networks:

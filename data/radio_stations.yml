@@ -7,7 +7,7 @@
   stream: http://media-ice.musicradio.com/CapitalMP3
   current_song:
     url: https://www.capitalfm.com/digital/radio/last-played-songs/
-    song_title: span.now-playing__text-content__details__track
+    title: span.now-playing__text-content__details__track
     artist: span.now-playing__text-content__details__artist
     cover:
       selector: div.now-playing__track__img-wrapper img
@@ -22,7 +22,7 @@
   stream: http://pool.anison.fm:9000/AniSonFM(320)
   current_song:
     url: https://en.anison.fm/
-    song_title: div#on_air span.title
+    title: div#on_air span.title
     artist: div#on_air span.anime
     album: div#on_air span.anime
     cover:

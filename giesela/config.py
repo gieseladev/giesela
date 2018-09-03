@@ -28,8 +28,8 @@ class ConfigDefaults:
 
     history_limit = 200
 
-    lavalink_ws_url = os.getenv("lavalink_ws_url")
-    lavalink_rest_url = os.getenv("lavalink_rest_url")
+    lavalink_address = os.getenv("lavalink_address")
+    lavalink_secure = bool(os.getenv("lavalink_secure"))
     lavalink_password = os.getenv("lavalink_password")
 
     auto_pause = True

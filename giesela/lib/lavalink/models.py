@@ -3,8 +3,13 @@ import time
 from dataclasses import dataclass  # since < 3.7 is out of the picture anyway, why not use dataclasses as well xD
 from typing import Any, Dict, List, NamedTuple, Optional, Union
 
-__all__ = ["LavalinkEvent", "TrackEndReason", "LavalinkEventData", "TrackEndEventData", "TrackExceptionEventData", "TrackStuckEventData",
-           "TrackEventDataType", "LavalinkPlayerState", "TrackLoadType", "TrackPlaylistInfo", "TrackInfo", "Track", "LoadTracksResult"]
+from . import utils
+
+__all__ = ["LavalinkEvent",
+           "TrackEndReason", "LavalinkEventData", "TrackEndEventData", "TrackExceptionEventData", "TrackStuckEventData", "TrackEventDataType",
+           "LavalinkPlayerState",
+           "TrackLoadType", "TrackPlaylistInfo", "TrackInfo", "Track", "LoadTracksResult", "LoadTrackSearcher",
+           "LavalinkStats"]
 
 
 class LavalinkEvent(enum.Enum):
@@ -67,7 +72,7 @@ class LavalinkPlayerState(NamedTuple):
 
     @property
     def seconds(self) -> float:
-        return self.position / 1000
+        return utils.from_milli(self.position)
 
     @property
     def age(self) -> float:
@@ -101,6 +106,21 @@ class TrackInfo(NamedTuple):
     title: str
     uri: str
 
+    @property
+    def seconds(self) -> float:
+        return utils.from_milli(self.position)
+
+    @property
+    def duration(self) -> Optional[float]:
+        if self.is_stream:
+            return None
+        return utils.from_milli(self.length)
+
+    @property
+    def start_position(self) -> Optional[float]:
+        if self.position:
+            return utils.from_milli(self.position)
+
 
 class Track(NamedTuple):
     track: str
@@ -109,7 +129,10 @@ class Track(NamedTuple):
     @classmethod
     def from_result(cls, data: Dict[str, Any]) -> "Track":
         track = data["track"]
-        info = TrackInfo(**data["info"])
+        info = data["info"]
+        info["is_seekable"] = info.pop("isSeekable")
+        info["is_stream"] = info.pop("isStream")
+        info = TrackInfo(**info)
         return Track(track, info)
 
 
@@ -144,3 +167,60 @@ class LoadTracksResult(NamedTuple):
         tracks = list(map(Track.from_result, data["tracks"]))
 
         return LoadTracksResult(load_type, playlist_info, tracks)
+
+
+class LoadTrackSearcher(enum.Enum):
+    YOUTUBE = "ytsearch"
+    SOUNDCLOUD = "scsearch"
+
+
+class LavalinkMemoryStats(NamedTuple):
+    free: int
+    reservable: int
+    used: int
+    allocated: int
+
+    @classmethod
+    def from_data(cls, data):
+        return LavalinkMemoryStats(**data)
+
+
+class LavalinkCPUStats(NamedTuple):
+    cores: int
+    system_load: float
+    lavalink_load: float
+
+    @classmethod
+    def from_data(cls, data):
+        data["system_load"] = data.pop("systemLoad")
+        data["lavalink_load"] = data.pop("lavalinkLoad")
+        return LavalinkCPUStats(**data)
+
+
+class LavalinkFrameStats(NamedTuple):
+    sent: int
+    deficit: int
+    nulled: int
+
+    @classmethod
+    def from_data(cls, data):
+        return LavalinkFrameStats(**data)
+
+
+class LavalinkStats(NamedTuple):
+    players: int
+    playing_players: int
+    uptime: int
+    memory: LavalinkMemoryStats
+    cpu: LavalinkCPUStats
+    frame_stats: LavalinkFrameStats = None
+
+    @classmethod
+    def from_data(cls, data):
+        data["playing_players"] = data.pop("playingPlayers")
+        data["memory"] = LavalinkMemoryStats.from_data(data["memory"])
+        data["cpu"] = LavalinkCPUStats.from_data(data["cpu"])
+        frame_stats = data.pop("frameStats", None)
+        if frame_stats:
+            data["frame_stats"] = LavalinkFrameStats.from_data(frame_stats)
+        return cls(**data)

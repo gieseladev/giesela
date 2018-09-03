@@ -99,14 +99,14 @@ class Scraper:
 
 
 RADIO_SONG_DATA_URL_FIELDS = ("artist_image", "cover")
-RADIO_SONG_DATA_FIELDS = ("song_title", "artist", "album", "progress", "duration") + RADIO_SONG_DATA_URL_FIELDS
+RADIO_SONG_DATA_FIELDS = ("title", "artist", "album", "progress", "duration") + RADIO_SONG_DATA_URL_FIELDS
 SONG_SCRAPER_FIELDS = ("url", "remaining_duration") + RADIO_SONG_DATA_FIELDS
 
 
 class RadioSongData(NamedTuple):
     timestamp: float
 
-    song_title: str = None
+    title: str = None
     artist: str = None
     artist_image: str = None
     album: str = None
@@ -116,10 +116,10 @@ class RadioSongData(NamedTuple):
 
     def __str__(self) -> str:
         origin = self.artist or self.album
-        if self.song_title:
+        if self.title:
             if origin:
-                return f"{origin} - {self.song_title}"
-            return self.song_title
+                return f"{origin} - {self.title}"
+            return self.title
         return origin or "Unknown Song"
 
     def to_dict(self) -> Dict[str, Any]:

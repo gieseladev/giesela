@@ -4,14 +4,17 @@ from discord import Client
 
 
 class AbstractLavalinkClient:
-    bot: Client
     loop: asyncio.AbstractEventLoop
 
-    _password: str
-
-    def __init__(self, *, bot: Client, password: str, **kwargs):
+    def __init__(self, *, bot: Client, password: str, lavalink_address: str, lavalink_secure: bool, **kwargs):
         self.bot = bot
         self.loop = bot.loop
         self._password = password
+
+        lavalink_address = lavalink_address.rstrip("/")
+        ws_scheme = "wss" if lavalink_secure else "ws"
+        http_scheme = "https" if lavalink_secure else "http"
+        self._ws_url = f"{ws_scheme}://{lavalink_address}"
+        self._rest_url = f"{http_scheme}://{lavalink_address}"
 
         super().__init__(**kwargs)

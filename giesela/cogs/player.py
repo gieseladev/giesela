@@ -68,9 +68,13 @@ class Player:
     def __init__(self, bot: Giesela):
         self.bot = bot
         config = bot.config
-        self.player_manager = PlayerManager(bot, config.lavalink_password, config.lavalink_rest_url, config.lavalink_ws_url)
+        self.player_manager = PlayerManager(bot)
 
         self._disconnects = {}
+
+    @property
+    def extractor(self):
+        return self.player_manager.extractor
 
     async def get_player(self, target: Union[Guild, Context, int], *,
                          create: bool = True, channel: VoiceChannel = None, member: Union[User, Member] = None) -> Optional[GieselaPlayer]:
@@ -100,7 +104,7 @@ class Player:
         return player
 
     def start_disconnect(self, player: GieselaPlayer):
-        guild_id = player.channel.guild.id
+        guild_id = player.guild_id
         task = self._disconnects.get(guild_id)
         if task and not task.done():
             return
@@ -111,13 +115,13 @@ class Player:
             self._disconnects[guild_id] = asyncio.ensure_future(_delayed_disconnect(player, delay))
 
     def stop_disconnect(self, player: GieselaPlayer):
-        guild_id = player.channel.guild.id
+        guild_id = player.guild_id
         task = self._disconnects.pop(guild_id, None)
         if task:
             log.debug(f"cancelled disconnect for {player}")
             task.cancel()
 
-    def auto_pause(self, player: GieselaPlayer, joined: bool = False):
+    async def auto_pause(self, player: GieselaPlayer, joined: bool = False):
         channel = player.voice_channel
         if not channel:
             return
@@ -129,16 +133,16 @@ class Player:
             self.stop_disconnect(player)
             if self.bot.config.auto_pause:
                 log.info(f"auto-resuming {player}")
-                player.resume()
+                await player.resume()
 
         elif non_bot_vm == 0:
             self.start_disconnect(player)
             if self.bot.config.auto_pause:
                 log.info(f"auto-pausing {player}")
-                player.pause()
+                await player.pause()
 
     async def on_player_play(self, player: GieselaPlayer, entry: BaseEntry):
-        self.auto_pause(player)
+        await self.auto_pause(player)
         WebieselaServer.send_player_information(player.channel.guild.id)
         await self.update_now_playing(entry)
 
@@ -200,7 +204,7 @@ class Player:
         player = await self.get_player(member.guild)
 
         user_joined = after.channel != before.channel
-        self.auto_pause(player, joined=user_joined)
+        await self.auto_pause(player, joined=user_joined)
 
     @commands.command()
     async def summon(self, ctx: Context):

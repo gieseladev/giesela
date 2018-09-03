@@ -3,7 +3,7 @@ from typing import Awaitable, List, Optional
 from discord import Embed, TextChannel, User
 from discord.ext import commands
 
-from giesela import BaseEntry, GieselaEntry, GieselaPlayer, YoutubeEntry, utils
+from giesela import BaseEntry, GieselaEntry, GieselaPlayer, utils
 from ..help import AutoHelpEmbed
 from ..interactive import ItemPicker, MessageableEmbed
 

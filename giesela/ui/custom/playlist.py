@@ -9,7 +9,7 @@ from discord import Colour, Embed, Guild, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import BaseEntry, Downloader, EditPlaylistProxy, Giesela, Optional, Playlist, PlaylistEntry, utils
+from giesela import BaseEntry, EditPlaylistProxy, Giesela, Optional, Playlist, PlaylistEntry, utils
 from .entry_editor import EntryEditor
 from ..help import AutoHelpEmbed
 from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
@@ -96,7 +96,6 @@ class PlaylistViewer(_PlaylistEmbed):
 class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
     PASS_BOT = True
 
-    downloader: Downloader
     playlist_editor: EditPlaylistProxy
 
     _highlighted_line: Optional[int]

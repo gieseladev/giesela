@@ -2,13 +2,13 @@ import abc
 import copy
 import logging
 import time
-from typing import Any, Dict, List, Optional, TYPE_CHECKING
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from discord import User
 
-from .exceptions import (OutdatedEntryError)
+from .lib import lavalink
 from .radio import RadioSongData, RadioStation
-from .utils import clean_songname
 
 if TYPE_CHECKING:
     from .player import GieselaPlayer
@@ -16,88 +16,135 @@ if TYPE_CHECKING:
 log = logging.getLogger(__name__)
 
 
-class BaseEntry(metaclass=abc.ABCMeta):
-    track_urn: str
-    requester: Optional[User]
-
+class PlayableEntry(metaclass=abc.ABCMeta):
     start_position: Optional[float]
     end_position: Optional[float]
 
-    def __init__(self, *, track_urn: str, start_position: float = None, end_position: float = None, requester: User = None):
-        self.track_urn = track_urn
-        self.requester = requester
+    def __init__(self, *, track: str, uri: str, seekable: bool, duration: float = None, start_position: float = None, end_position: float = None):
+        self._track = track
+        self._uri = uri
+        self._is_seekable = seekable
+        self._duration = duration
 
         self.start_position = start_position
         self.end_position = end_position
 
     def __repr__(self) -> str:
-        return f"<{type(self).__name__}: {self.track_urn}>"
+        return f"<{type(self).__name__}: {self.uri}>"
 
     def __hash__(self) -> int:
-        return id(self)
+        return hash(self.track)
 
-    def __eq__(self, other: "BaseEntry") -> bool:
-        if isinstance(other, BaseEntry):
-            return self.track_urn == other.track_urn
+    def __eq__(self, other: "PlayableEntry") -> bool:
+        if isinstance(other, PlayableEntry):
+            return self.uri == other.uri
         return NotImplemented
 
     @property
-    def sort_attr(self) -> str:
-        return self.track_urn
+    def track(self) -> str:
+        return self._track
+
+    @property
+    def uri(self) -> str:
+        return self._uri
+
+    @property
+    def sort_attr(self):
+        return self.uri
+
+    @property
+    def track_length(self) -> Optional[float]:
+        return self._duration
+
+    @property
+    def duration(self) -> Optional[float]:
+        start = self.start_position or 0
+        end = self.end_position
+
+        if end is None:
+            if self._duration is None:
+                return None
+            else:
+                end = self._duration
+
+        return end - start
+
+    @property
+    def is_stream(self) -> bool:
+        return self._duration is None
+
+    @property
+    def is_seekable(self) -> bool:
+        return self._is_seekable
+
+    @classmethod
+    def kwargs_from_track_info(cls, track: str, info: lavalink.TrackInfo) -> Dict[str, Any]:
+        return dict(track=track, uri=info.uri, seekable=info.is_seekable, duration=info.duration, start_position=info.start_position)
+
+    @classmethod
+    def from_track_info(cls, track: str, info: lavalink.TrackInfo) -> "PlayableEntry":
+        return cls(**cls.kwargs_from_track_info(track, info))
 
     def copy(self):
         return copy.copy(self)
 
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "BaseEntry":
-        return cls(**data)
-
     def to_dict(self) -> Dict[str, Any]:
-        return dict(type=type(self).__name__, track_urn=self.track_urn, start_position=self.start_position, end_position=self.end_position)
-
-    def to_web_dict(self, player: "GieselaPlayer") -> Dict[str, Any]:
-        return self.to_dict()
+        return dict(type=type(self).__name__, track=self._track, uri=self._uri, seekable=self._is_seekable,
+                    duration=self._duration, start_position=self.start_position, end_position=self.end_position)
 
 
-class RadioStationEntry(BaseEntry):
-    station: RadioStation
+class BaseEntry(PlayableEntry):
 
-    def __init__(self, station: RadioStation, **kwargs):
-        kwargs.setdefault("title", station.name)
-        super().__init__(station.stream, **kwargs)
-        self.station = station
+    def __init__(self, *, title: str, artist: str, **kwargs):
+        super().__init__(**kwargs)
+        self.title = title
+        self.artist = artist
+
+    def __str__(self) -> str:
+        return f"{self.artist} - {self.title}"
 
     @property
-    def link(self) -> str:
-        return self.station.website or self.station.stream
+    def sort_attr(self):
+        return self.artist, self.title
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "RadioStationEntry":
-        data["station"] = RadioStation.from_config(data.pop("station"))
-        return cls(**data)
+    def kwargs_from_track_info(cls, track: str, info: lavalink.TrackInfo):
+        kwargs = super().kwargs_from_track_info(track, info)
+        kwargs.update(title=info.title, artist=info.author)
+        return kwargs
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self):
         data = super().to_dict()
-        data.update(station=self.station.to_dict())
+        data.update(title=self.title, artist=self.artist)
         return data
 
-    @property
-    def is_downloaded(self) -> bool:
-        return True
 
-
-class RadioSongEntry(RadioStationEntry):
-    _current_song_data: RadioSongData
-
-    def __init__(self, station: RadioStation, song_data: RadioSongData, **kwargs):
-        super().__init__(station, **kwargs)
+class RadioEntry(PlayableEntry):
+    def __init__(self, *, station: RadioStation, song_data: RadioSongData = None, **kwargs):
+        super().__init__(**kwargs)
+        self.station = station
         self._current_song_data = song_data
+
+    def __str__(self) -> str:
+        if self.artist:
+            origin = self.artist if self.title else self.station.name
+            title = self.title or self.artist
+        elif self.title:
+            origin = self.station.name
+            title = self.title
+        else:
+            return self.station.name
+
+        return f"{origin} - {title}"
 
     async def update(self):
         self._current_song_data = await self.station.get_song_data()
 
     @property
-    def next_update_delay(self) -> float:
+    def next_update_delay(self) -> Optional[float]:
+        if not self._current_song_data:
+            return
+
         if self.song_data.duration and self.song_data.progress is not None:
             timeout = self.song_data.duration - self.song_progress
         else:
@@ -109,166 +156,145 @@ class RadioSongEntry(RadioStationEntry):
             return timeout + self.station.extra_update_delay
 
     @property
-    def song_data_age(self) -> float:
-        return time.time() - self._current_song_data.timestamp
+    def song_data_age(self) -> Optional[float]:
+        if self._current_song_data:
+            return time.time() - self._current_song_data.timestamp
 
     @property
-    def song_data(self) -> RadioSongData:
+    def song_data(self) -> Optional[RadioSongData]:
         return self._current_song_data
 
     @property
     def song_progress(self) -> Optional[float]:
-        if self.song_data.progress is not None:
+        if self.song_data and self.song_data.progress is not None:
             progress = self.song_data.progress + self.song_data_age
             if self.song_data.duration:
                 progress = min(progress, self.song_data.duration)
             return progress
 
     @property
-    def title(self) -> str:
-        artist = self.song_data.artist
-        song = self.song_data.song_title
-        if song:
-            return f"{artist or self.station.name} - {song}"
-        elif artist:
-            return f"{self.station.name} - {artist}"
-        else:
-            return super().title
-
-    def to_web_dict(self, player: "GieselaPlayer"):
-        data = super().to_web_dict(player)
-
-        if player.current_entry is self:
-            data.update(song_progress=self.song_progress, song_data=self.song_data.to_dict())
-
-        return data
-
-
-class YoutubeEntry(BaseEntry):
-    video_id: str
-    _title: str
-    thumbnail: str
-
-    def __init__(self, *args, video_id: str, title: str, thumbnail: str, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        self.video_id = video_id
-        self._title = title
-        self.thumbnail = thumbnail
+    def title(self) -> Optional[str]:
+        return self.song_data and self.song_data.title
 
     @property
-    def title(self) -> str:
-        return clean_songname(self._title)
+    def artist(self) -> Optional[str]:
+        return self.song_data and self.song_data.artist
 
     @property
-    def sort_attr(self) -> str:
-        return self.title
+    def artist_image(self) -> Optional[str]:
+        return self.song_data and self.song_data.artist_image
+
+    @property
+    def cover(self) -> Optional[str]:
+        return self.song_data and self.song_data.cover
+
+    @property
+    def album(self) -> Optional[str]:
+        return self.song_data and self.song_data.album
+
+
+@dataclass
+class ChapterData:
+    start: float
+    duration: float
+    title: str
+
+    @property
+    def end(self) -> float:
+        return self.start + self.duration
+
+    def contains(self, timestamp: float) -> bool:
+        return self.start <= timestamp < self.end
+
+    def to_dict(self) -> Dict[str, Any]:
+        return dict(start=self.start, duration=self.duration, title=self.title)
+
+
+class ChapterEntry(BaseEntry):
+
+    def __init__(self, chapters: List[ChapterData], **kwargs):
+        super().__init__(**kwargs)
+        self.chapters = chapters
+
+    def get_chapter(self, timestamp: float) -> Optional[ChapterData]:
+        return next((chapter for chapter in self.chapters if chapter.contains(timestamp)), None)
 
     def to_dict(self) -> Dict[str, Any]:
         data = super().to_dict()
-        data.update(video_id=self.video_id, title=self.title, thumbnail=self.thumbnail)
+        chapters = [chapter.to_dict() for chapter in self.chapters]
+        data.update(chapters=chapters)
         return data
 
 
-class TimestampEntry(YoutubeEntry):
-    sub_queue: List[dict]
+class GieselaEntry(BaseEntry):
+    def __init__(self, *, artist_image: str, cover: str, album: str = None, **kwargs):
+        super().__init__(**kwargs)
 
-    def __init__(self, *args, sub_queue: List[dict], **kwargs):
-        super().__init__(*args, **kwargs)
-
-        self.sub_queue = sub_queue
-
-    def sub_entry_at(self, timestamp: float) -> Optional[dict]:
-        sub_entry = None
-        for entry in self.sub_queue:
-            if timestamp >= entry["start"] or sub_entry is None:
-                sub_entry = entry
-            else:
-                break
-
-        sub_entry["progress"] = max(timestamp - sub_entry["start"], 0)
-        return sub_entry
-
-    def get_sub_entry(self, player: "GieselaPlayer") -> Optional[dict]:
-        if player.current_entry is not self:
-            return None
-
-        return self.sub_entry_at(player.progress)
-
-    def to_dict(self) -> Dict[str, Any]:
-        data = super().to_dict()
-        data.update(sub_queue=self.sub_queue)
-        return data
-
-
-class GieselaEntry(YoutubeEntry):
-    song_title: str
-    artist: str
-    artist_image: str
-    cover: str
-    album: str
-
-    def __init__(self, *args, song_title: str, artist: str, artist_image: str, album: str, cover: str, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        self.song_title = song_title
-        self.artist = artist
         self.artist_image = artist_image
         self.cover = cover
         self.album = album
 
-    @property
-    def title(self) -> str:
-        return f"{self.artist} - {self.song_title}"
-
-    @property
-    def sort_attr(self):
-        return self.song_title
-
-    @property
-    def lyrics_search_query(self) -> str:
-        return f"{self.song_title} - {self.artist}"
-
-    @classmethod
-    def upgrade(cls, entry: BaseEntry, **kwargs):
-        data = entry.to_dict()
-        data.update(entry.meta)
-        data.update(kwargs)
-        return cls.from_dict(data)
-
     def to_dict(self):
         data = super().to_dict()
-        data.update(song_title=self.song_title, artist=self.artist, artist_image=self.artist_image, cover=self.cover, album=self.album)
+        data.update(artist_image=self.artist_image, cover=self.cover, album=self.album)
         return data
 
 
-class Entry:
-    VERSION = 3
-    MAPPING = {
-        "RadioSongEntry": RadioSongEntry,
-        "RadioStationEntry": RadioStationEntry,
-        "YoutubeEntry": YoutubeEntry,
-        "TimestampEntry": TimestampEntry,
-        "GieselaEntry": GieselaEntry
-    }
+class EntryWrapper(metaclass=abc.ABCMeta):
+    def __init__(self, *, entry: Union[PlayableEntry, "EntryWrapper"]):
+        self._entry = entry
 
-    def __new__(cls, *args, **kwargs):
-        raise Exception("This class is static")
+    def __repr__(self) -> str:
 
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "BaseEntry":
-        entry_version = data.get("version", 0)
+        return f"{type(self).__name__} -> {repr(self.wrapped)}"
 
-        if entry_version < Entry.VERSION:
-            raise OutdatedEntryError("Version parameter signifies an outdated entry")
+    @property
+    def entry(self) -> PlayableEntry:
+        if isinstance(self._entry, EntryWrapper):
+            return self._entry.entry
+        else:
+            return self._entry
 
-        entry_type = data.get("type", None)
-        if not entry_type:
-            raise KeyError("Data does not include a type parameter")
+    @property
+    def wrapped(self) -> Union[PlayableEntry, "EntryWrapper"]:
+        return self._entry
 
-        target = cls.MAPPING.get(entry_type, None)
+    def to_dict(self) -> Dict[str, Any]:
+        return dict(entry=self._entry.to_dict())
 
-        if not target:
-            raise TypeError("Cannot create an entry with this type")
 
-        return target.from_dict(data)
+class PlayerEntry(EntryWrapper):
+    def __init__(self, *, player: "GieselaPlayer", **kwargs):
+        super().__init__(**kwargs)
+        self.player = player
+
+    @property
+    def progress(self) -> float:
+        return self.player.progress
+
+    @property
+    def time_left(self) -> float:
+        return self.entry.duration - self.progress
+
+
+class QueueEntry(EntryWrapper):
+    def __init__(self, *, requester: User, request_timestamp: float, **kwargs):
+        super().__init__(**kwargs)
+        self.requester = requester
+        self.request_timestamp = request_timestamp
+
+    def to_dict(self):
+        data = super().to_dict()
+        data.update(request_timestamp=self.request_timestamp)
+        return data
+
+
+class HistoryEntry(EntryWrapper):
+    def __init__(self, *, finish_timestamp: float, **kwargs):
+        super().__init__(**kwargs)
+        self.finish_timestamp = finish_timestamp
+
+    def to_dict(self):
+        data = super().to_dict()
+        data.update(finish_timestamp=self.finish_timestamp)
+        return data

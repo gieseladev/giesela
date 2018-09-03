@@ -13,7 +13,7 @@ from giesela.lib import mosaic
 from giesela.ui import text as text_utils
 from . import entry as entry_module, utils
 from .bot import Giesela
-from .entry import BaseEntry, Entry
+from .entry import BaseEntry
 from .lib.api import imgur
 
 if TYPE_CHECKING:
