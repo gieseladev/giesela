@@ -1,13 +1,12 @@
 import asyncio
 import logging
-import operator
 from typing import Dict, Optional, Union
 
 from discord import Game, Guild, Member, User, VoiceChannel, VoiceState
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import BaseEntry, Giesela, GieselaPlayer, PlayerManager, WebieselaServer, lyrics as lyricsfinder
+from giesela import Giesela, GieselaPlayer, PlayerManager, WebieselaServer, lyrics as lyricsfinder
 from giesela.ui import VerticalTextViewer
 from giesela.ui.custom import EntryEditor
 from giesela.utils import create_bar, parse_timestamp, similarity
@@ -67,8 +66,8 @@ class Player:
 
     def __init__(self, bot: Giesela):
         self.bot = bot
-        config = bot.config
-        self.player_manager = PlayerManager(bot)
+        self.player_manager = PlayerManager(bot) \
+            .on("player_create", self.add_player_listeners)
 
         self._disconnects = {}
 
@@ -141,40 +140,50 @@ class Player:
                 log.info(f"auto-pausing {player}")
                 await player.pause()
 
-    async def on_player_play(self, player: GieselaPlayer, entry: BaseEntry):
+    async def on_player_play(self, player: GieselaPlayer):
         await self.auto_pause(player)
-        WebieselaServer.send_player_information(player.channel.guild.id)
-        await self.update_now_playing(entry)
+        await self.update_now_playing()
+        WebieselaServer.send_player_information(player.guild_id)
 
     async def on_player_resume(self, player: GieselaPlayer):
-        WebieselaServer.small_update(player.channel.guild.id, state=player.state, progress=player.progress)
-        await self.update_now_playing(player.current_entry)
+        await self.update_now_playing()
+        WebieselaServer.small_update(player.guild_id, state=player.state, progress=player.progress)
 
     async def on_player_pause(self, player: GieselaPlayer):
-        WebieselaServer.small_update(player.channel.guild.id, state=player.state, progress=player.progress)
-        await self.update_now_playing(player.current_entry, is_paused=True)
+        await self.update_now_playing(is_paused=True)
+        WebieselaServer.small_update(player.guild_id, state=player.state, progress=player.progress)
 
     async def on_player_stop(self, **_):
         await self.update_now_playing()
 
     @classmethod
-    async def on_player_volume_change(cls, player: GieselaPlayer, new_volume: float):
-        WebieselaServer.small_update(player.guild.id, volume=new_volume)
+    async def on_player_volume_change(cls, player: GieselaPlayer, new_volume: float, **_):
+        WebieselaServer.small_update(player.guild_id, volume=new_volume)
 
     @classmethod
     async def on_player_finished_playing(cls, player: GieselaPlayer, **_):
         if not player.queue.entries and not player.current_entry:
-            WebieselaServer.send_player_information(player.channel.guild.id)
+            WebieselaServer.send_player_information(player.guild_id)
 
-    async def update_now_playing(self, entry: BaseEntry = None, is_paused: bool = False):
+    async def add_player_listeners(self, player: GieselaPlayer):
+        player \
+            .on("play", self.on_player_play) \
+            .on("resume", self.on_player_resume) \
+            .on("pause", self.on_player_pause) \
+            .on("stop", self.on_player_stop) \
+            .on("volume_change", self.on_player_volume_change) \
+            .on("finished", self.on_player_finished_playing)
+
+    async def update_now_playing(self, is_paused: bool = False):
+        entry = None
         game = None
 
-        active_players = sum(1 for p in self.player_manager.players.values() if p.is_playing)
+        active_players = [player for player in self.player_manager if player.is_playing or player.is_paused]
 
-        if active_players > 1:
+        if len(active_players) > 1:
             game = Game(name="Music")
-        elif active_players == 1:
-            player = self.player_manager.find_player(operator.attrgetter("is_playing"))
+        elif len(active_players) == 1:
+            player = active_players[0]
             entry = player.current_entry
         else:
             game = Game(name=self.bot.config.idle_game)
@@ -182,7 +191,7 @@ class Player:
         if entry:
             prefix = "❚❚ " if is_paused else ""
 
-            name = entry.title
+            name = str(entry.entry)
 
             name = f"{prefix}{name}"[:128]
             game = Game(name=name)
@@ -312,7 +321,7 @@ class Player:
 
     @commands.command(aliases=["fwd", "fw"])
     async def forward(self, ctx: Context, timestamp: str):
-        """Forward <timestamp> into the current entry"""
+        """Fast-forward the current entry"""
         player = await self.get_player(ctx)
 
         secs = parse_timestamp(timestamp)
@@ -322,8 +331,8 @@ class Player:
         await _seek(player, secs)
 
     @commands.command(aliases=["rwd", "rw"])
-    async def rewind(self, ctx: Context, timestamp: str = None):
-        """Rewind <timestamp> into the current entry.
+    async def rewind(self, ctx: Context, timestamp: str):
+        """Rewind the current entry.
 
         If the current entry is a timestamp-entry, rewind to the previous song
         """
@@ -331,13 +340,6 @@ class Player:
         secs = parse_timestamp(timestamp)
         if secs:
             secs = player.progress - secs
-
-        if not secs:
-            if not player.queue.history:
-                raise commands.CommandError("Please provide a valid timestamp (no history to rewind into)")
-            else:
-                player.replay()
-                return
 
         await _seek(player, secs)
 
@@ -372,13 +374,13 @@ class Player:
         async with ctx.typing():
             if query:
                 query = " ".join(query)
-                lyrics = lyricsfinder.search_for_lyrics(query)
             else:
                 if not player.current_entry:
                     raise commands.CommandError("There's no way for me to find lyrics for something that doesn't even exist!")
-                query = player.current_entry.lyrics_search_query
-                lyrics = player.current_entry.lyrics
+                query = str(player.current_entry.entry)
                 _progress_guess = player.progress / player.current_entry.duration
+
+            lyrics = lyricsfinder.search_for_lyrics(query)
 
         if not lyrics:
             raise commands.CommandError("Couldn't find any lyrics for **{}**".format(query))

@@ -33,7 +33,7 @@ class ConfigDefaults:
     lavalink_password = os.getenv("lavalink_password")
 
     auto_pause = True
-    default_volume = 100
+    default_volume = .1
 
     webiesela_cert = "data/cert"
     options_file = "data/options.ini"

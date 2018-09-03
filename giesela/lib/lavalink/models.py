@@ -75,8 +75,12 @@ class LavalinkPlayerState(NamedTuple):
         return utils.from_milli(self.position)
 
     @property
+    def time_seconds(self) -> float:
+        return utils.from_milli(self.time)
+
+    @property
     def age(self) -> float:
-        return time.time() - self.time
+        return time.time() - self.time_seconds
 
     @property
     def estimate_seconds_now(self) -> float:

@@ -8,7 +8,6 @@ from discord import User
 
 from .entry import BaseEntry, HistoryEntry, PlayableEntry, PlayerEntry, QueueEntry
 from .lib import EventEmitter, has_events
-from .webiesela import WebieselaServer
 
 if TYPE_CHECKING:
     from giesela import GieselaPlayer
@@ -51,12 +50,10 @@ class EntryQueue(EventEmitter):
     def shuffle(self):
         random.shuffle(self.entries)
         self.emit("shuffle", queue=self)
-        WebieselaServer.send_player_information(self.player.channel.guild.id)
 
     def clear(self):
         self.entries.clear()
         self.emit("clear", queue=self)
-        WebieselaServer.send_player_information(self.player.channel.guild.id)
 
     def move(self, from_index: int, to_index: int = None) -> Optional[QueueEntry]:
         if not all(0 <= x < len(self) for x in (from_index, to_index)):
@@ -70,8 +67,6 @@ class EntryQueue(EventEmitter):
             self.entries.appendleft(move_entry)
 
         self.emit("move_entry", queue=self, entry=move_entry, from_index=from_index, to_index=to_index)
-
-        WebieselaServer.send_player_information(self.player.channel.guild.id)
 
         return move_entry
 
@@ -93,8 +88,6 @@ class EntryQueue(EventEmitter):
         self.history.appendleft(entry)
 
         self.emit("history_push", queue=self, entry=entry)
-
-        WebieselaServer.send_player_information(self.player.channel.guild.id)
 
     # async def add_playlist(self, playlist: "Playlist", **meta):
     #     entries = playlist.entries.copy()
@@ -126,7 +119,6 @@ class EntryQueue(EventEmitter):
         entries = list(wrap_queue_entry(entry, requester) for entry in entries)
         self.entries.extend(entries)
 
-        WebieselaServer.send_player_information(self.player.channel.guild.id)
         self.emit("entries_added", queue=self, entries=entries)
 
     def add_entry(self, entry: BaseEntry, requester: User, *, placement: int = None) -> QueueEntry:
@@ -136,7 +128,6 @@ class EntryQueue(EventEmitter):
         else:
             self.entries.append(entry)
 
-        WebieselaServer.send_player_information(self.player.guild.id)
         self.emit("entry_added", queue=self, entry=entry)
 
         return entry
@@ -151,8 +142,6 @@ class EntryQueue(EventEmitter):
         entry = self.entries.pop(target)
 
         self.emit("entry_removed", queue=self, entry=entry)
-
-        WebieselaServer.send_player_information(self.player.channel.guild.id)
 
         return entry
 

@@ -80,8 +80,10 @@ class PlayableEntry(metaclass=abc.ABCMeta):
         return dict(track=track, uri=info.uri, seekable=info.is_seekable, duration=info.duration, start_position=info.start_position)
 
     @classmethod
-    def from_track_info(cls, track: str, info: lavalink.TrackInfo) -> "PlayableEntry":
-        return cls(**cls.kwargs_from_track_info(track, info))
+    def from_track_info(cls, track: str, info: lavalink.TrackInfo, **extra) -> "PlayableEntry":
+        kwargs = cls.kwargs_from_track_info(track, info)
+        kwargs.update(extra)
+        return cls(**kwargs)
 
     def copy(self):
         return copy.copy(self)
@@ -306,10 +308,13 @@ class PlayerEntry(EntryWrapper):
             # noinspection PyUnresolvedReferences
             return await entry.get_chapter(self.progress)
 
-    async def update_chapter(self):
+    async def update_chapter(self) -> bool:
         if self.has_chapters:
             chapter = await self.get_chapter()
-            self._chapter = chapter
+            if chapter != self._chapter:
+                self._chapter = chapter
+                return True
+        return False
 
 
 class QueueEntry(EntryWrapper):

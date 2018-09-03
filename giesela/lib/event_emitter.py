@@ -44,19 +44,19 @@ class EventEmitter:
 
         self.loop = loop or asyncio.get_event_loop()
 
-    def emit(self, event: str, *args, **kwargs):
-        if not self._can_emit_event(event):
-            raise ValueError(f"{self} can't emit {event}")
+    def emit(self, evt_name: str, *args, **kwargs):
+        if not self._can_emit_event(evt_name):
+            raise ValueError(f"{self} can't emit {evt_name}")
 
-        method_name = f"on_{event}"
+        method_name = f"on_{evt_name}"
         method = getattr(self, method_name, None)
         if method and asyncio.iscoroutinefunction(method):
             asyncio.ensure_future(safe_await(method(*args, **kwargs)), loop=self.loop)
 
-        if event not in self._events:
+        if evt_name not in self._events:
             return
 
-        for cb in self._events[event]:
+        for cb in self._events[evt_name]:
             try:
                 if asyncio.iscoroutinefunction(cb):
                     asyncio.ensure_future(safe_await(cb(*args, **kwargs)), loop=self.loop)
