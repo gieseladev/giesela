@@ -1,7 +1,7 @@
 import asyncio
-import json
 import operator
 import random
+import rapidjson
 import textwrap
 from io import BytesIO
 from typing import Dict, Optional
@@ -158,7 +158,7 @@ class PlaylistCog:
                                                                     f"Do you really want to create the playlist \"{name}\"")
             if not await prompt:
                 return
-        playlist = Playlist(name=name, author=ctx.author)
+        playlist = Playlist(name=name, author_id=ctx.author.id)
         playlist.manager = self.playlist_manager
 
         await self._playlist_builder(ctx, playlist)
@@ -390,25 +390,16 @@ class PlaylistCog:
 
         author = author or ctx.author
 
-        _entry_data = await save_attachment(ctx.message.attachments[0])
-        entry_data = _entry_data.read().decode("utf-8")
+        data = await save_attachment(ctx.message.attachments[0])
+        _gpl_data = data.read().decode("utf-8")
         try:
-            entries = json.loads(entry_data)
-        except json.JSONDecodeError:
-            raise commands.CommandError("This file is invalid. This cannot be imported!")
+            gpl_data = rapidjson.loads(_gpl_data)
+        except ValueError:
+            raise commands.CommandError("This file is invalid. This \"playlist\" cannot be imported!")
 
-        if isinstance(entries, dict):
-            raise commands.CommandError("This isn't an old playlist. Please use the `playlist import` command instead!")
-        elif not isinstance(entries, list):
-            raise commands.CommandError("What is this garbage? This isn't an old playlist and cannot be imported!")
+        # TODO compatibility should be part of basic import
 
-        playlist_data = {
-            "name": name,
-            "author_id": author.id,
-            "entries": entries
-        }
-
-        embed = await self.import_playlist(playlist_data)
+        embed = await self.import_playlist(gpl_data)
         if embed:
             await ctx.send(embed=embed)
         else:
@@ -420,7 +411,7 @@ class PlaylistCog:
         """Export a playlist"""
         playlist = self.find_playlist(playlist)
 
-        serialised = json.dumps(playlist.to_gpl(), indent=None, separators=(",", ":"))
+        serialised = rapidjson.dumps(playlist.to_gpl())
         data = BytesIO(serialised.encode("utf-8"))
         data.seek(0)
         file = File(data, filename=f"{playlist.name.lower()}.gpl{GPL_VERSION}")

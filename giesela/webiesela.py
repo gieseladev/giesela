@@ -2,13 +2,12 @@ import asyncio
 import atexit
 import hashlib
 import inspect
-import json
 import logging
 import os
 import pickle
 import random
+import rapidjson
 import threading
-from json.decoder import JSONDecodeError
 from pathlib import Path
 from string import ascii_lowercase
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, TYPE_CHECKING, Tuple, TypeVar
@@ -100,8 +99,8 @@ class GieselaWebSocket(WebSocket):
     def handleMessage(self):
         try:
             try:
-                data = json.loads(self.data)
-            except JSONDecodeError:
+                data = rapidjson.loads(self.data)
+            except ValueError:
                 log.warning("[WEBSOCKET] <{}> sent non-json: {}".format(self.address, self.data))
                 return
 
@@ -137,7 +136,7 @@ class GieselaWebSocket(WebSocket):
                     "command_prefix": static_config.command_prefix
                 }
 
-                self.sendMessage(json.dumps(answer))
+                self.sendMessage(rapidjson.dumps(answer))
                 return
             else:
                 log.warning("[WEBSOCKET] <{}> Didn't ask to be registered".format(
@@ -146,7 +145,7 @@ class GieselaWebSocket(WebSocket):
                     "response": True,
                     "error": (ErrorCode.registration_required, "registration required")
                 }
-                self.sendMessage(json.dumps(answer))
+                self.sendMessage(rapidjson.dumps(answer))
 
         except Exception:
             log.exception("error while handling message")
@@ -176,7 +175,7 @@ class GieselaWebSocket(WebSocket):
             success = True
 
         answer["success"] = bool(success)
-        self.sendMessage(json.dumps(answer))
+        self.sendMessage(rapidjson.dumps(answer))
 
         if mode in "random":
             placement = mode
@@ -394,7 +393,7 @@ class GieselaWebSocket(WebSocket):
 
             answer["success"] = bool(success)
 
-        self.sendMessage(json.dumps(answer))
+        self.sendMessage(rapidjson.dumps(answer))
 
     def handleConnected(self):
         log.info("[WEBSOCKET] <{}> connected".format(self.address))
@@ -419,7 +418,7 @@ class GieselaWebSocket(WebSocket):
         self.token = token
         WebieselaServer.set_token_information(token, guild_id, author)
         data = {"token": token}
-        self.sendMessage(json.dumps(data))
+        self.sendMessage(rapidjson.dumps(data))
         log.info("[WEBSOCKET] <{}> successfully registered {}".format(self.address, author))
 
 
@@ -573,7 +572,7 @@ class WebieselaServer:
                 }
         }
 
-        cls._broadcast_message(guild_id, json.dumps(message))
+        cls._broadcast_message(guild_id, rapidjson.dumps(message))
 
     @classmethod
     def send_player_information(cls, guild_id: int):
@@ -607,4 +606,4 @@ class WebieselaServer:
             "update": kwargs
         }
 
-        cls.broadcast_message(guild_id, json.dumps(message))
+        cls.broadcast_message(guild_id, rapidjson.dumps(message))

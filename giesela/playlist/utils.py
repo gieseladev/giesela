@@ -5,7 +5,7 @@ from typing import Iterable, Iterator, Optional, TYPE_CHECKING, Tuple, Union
 from giesela import BaseEntry, utils
 
 if TYPE_CHECKING:
-    from .playlist_entry import PlaylistEntry
+    from .entry import PlaylistEntry
 
 __all__ = ["get_uuid", "search_entries", "search_entry"]
 

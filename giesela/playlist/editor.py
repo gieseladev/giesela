@@ -8,7 +8,7 @@ from discord import User
 from giesela import PlayableEntry
 from giesela.ui import text as text_utils
 from . import utils
-from .playlist_entry import PlaylistEntry
+from .entry import PlaylistEntry
 
 if TYPE_CHECKING:
     from .playlist import Playlist
@@ -178,7 +178,7 @@ class EditPlaylistProxy:
         return utils.search_entry(self._pl_entries, target, threshold=threshold)
 
     def add_entry(self, entry: PlayableEntry, author: User) -> PlaylistEntry:
-        pl_entry = PlaylistEntry(entry, author_id=author)
+        pl_entry = PlaylistEntry(entry, author_id=author.id)
 
         self._undo_stack.clear()
         try:

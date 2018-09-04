@@ -1,5 +1,5 @@
-import json
 import os
+import rapidjson
 import re
 from os import path
 from pathlib import Path
@@ -40,7 +40,7 @@ def check_cache(query: str, load: bool = True) -> Optional[Lyrics]:
 
         if load:
             with open(file_path, "r+") as fp:
-                lyrics = Lyrics.from_dict(json.load(fp))
+                lyrics = Lyrics.from_dict(rapidjson.load(fp))
             return lyrics
     return None
 

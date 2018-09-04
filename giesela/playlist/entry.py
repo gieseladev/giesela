@@ -40,17 +40,6 @@ class PlaylistEntry:
         me = repr(self._entry)
         return f"{me} - {playlist}"
 
-    def __getstate__(self) -> dict:
-        return dict(entry=self._entry, author_id=self._author_id,
-                    added_at=self._added_at, last_editor_id=self._last_editor_id, last_edit_at=self._last_edit_at)
-
-    def __setstate__(self, state: dict):
-        self._entry = state["entry"]
-        self._author_id = state.get("author_id")
-        self._added_at = state.get("added_at") or time.time()
-        self._last_editor_id = state.get("last_editor_id")
-        self._last_edit_at = state.get("last_edit_at")
-
     def __hash__(self) -> int:
         return hash(self._entry)
 
@@ -114,9 +103,9 @@ class PlaylistEntry:
         return self._last_edit_at or self.added_at
 
     def to_gpl(self):
-        data = self.__getstate__()
         entry = self._entry.to_dict()
-        data["entry"] = entry
+        data = dict(entry=entry, author_id=self._author_id,
+                    added_at=self._added_at, last_editor_id=self._last_editor_id, last_edit_at=self._last_edit_at)
         return {key: value for key, value in data.items() if value is not None}
 
     def replace(self, entry: PlayableEntry, editor: User = None):

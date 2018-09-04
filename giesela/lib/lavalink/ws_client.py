@@ -1,6 +1,6 @@
 import asyncio
-import json
 import logging
+import rapidjson
 from collections import deque
 from typing import Any, Deque, Dict, List, Optional
 
@@ -152,7 +152,7 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
     async def listen(self):
         while not self._shutdown_signal:
             try:
-                data = json.loads(await self._ws.recv())
+                data = rapidjson.loads(await self._ws.recv())
             except ConnectionClosed as e:
                 log.warning(f"Disconnected {e}")
 
@@ -208,7 +208,7 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
     async def send_raw(self, data: Dict[str, Any]):
         if self.connected:
             log.debug(f"sending: {data}")
-            await self._ws.send(json.dumps(data))
+            await self._ws.send(rapidjson.dumps(data))
         else:
             log.debug(f"not connected, adding message to queue ({data})")
             self._send_queue.append(data)

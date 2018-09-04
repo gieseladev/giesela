@@ -22,6 +22,7 @@ colorlog = "*"
 lxml = "*"
 pyyaml = "*"
 uvloop = {version = "*", markers = "sys_platform != 'win32'"}
+python-rapidjson = "*"
 
 [dev-packages]
 pytest = "*"

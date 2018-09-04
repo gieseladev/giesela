@@ -10,7 +10,7 @@ from giesela.lib import mosaic
 from giesela.lib.api import imgur
 from . import utils
 from .editor import EditPlaylistProxy
-from .playlist_entry import PlaylistEntry
+from .entry import PlaylistEntry
 
 if TYPE_CHECKING:
     from giesela.queue import EntryQueue
@@ -22,9 +22,6 @@ log = logging.getLogger(__name__)
 
 PLAYLIST_SLOTS = ("gpl_id", "name", "description", "author_id", "cover", "entries", "editor_ids")
 
-# This makes backward-compatible saves somewhat possible
-PLAYLIST_SLOT_DEFAULTS = {"description": None, "cover": None, "entries": [], "editor_ids": []}
-
 
 class Playlist:
     manager: "PlaylistManager"
@@ -34,8 +31,9 @@ class Playlist:
     description: Optional[str]
     author_id: int
     cover: Optional[str]
-    entries: List[PlaylistEntry]
     editor_ids: List[int]
+
+    entries: List[PlaylistEntry]
 
     _author: User
     _editors: List[User]
@@ -49,15 +47,7 @@ class Playlist:
         self.cover = kwargs.pop("cover", None)
         self.entries = kwargs.pop("entries", [])
         self.editor_ids = kwargs.pop("editors", [])
-
-        author = kwargs.pop("author", None)
-        if author:
-            if isinstance(author, dict):
-                self.author_id = author["id"]
-            else:
-                self.author_id = author.id
-        else:
-            self.author_id = kwargs.pop("author_id")
+        self.author_id = kwargs.pop("author_id")
 
         self.init()
 
@@ -78,15 +68,6 @@ class Playlist:
 
     def __reversed__(self) -> Iterator[PlaylistEntry]:
         return reversed(self.entries)
-
-    def __getstate__(self) -> dict:
-        return {key: getattr(self, key) for key in PLAYLIST_SLOTS}
-
-    def __setstate__(self, state: dict):
-        for key in PLAYLIST_SLOTS:
-            value = state[key] if key in state else PLAYLIST_SLOT_DEFAULTS[key]
-            setattr(self, key, value)
-        self.init()
 
     def __enter__(self) -> "Playlist":
         if hasattr(self, "__opened__"):
@@ -132,28 +113,25 @@ class Playlist:
             entry.playlist = self
 
     @classmethod
-    def from_gpl(cls, manager: "PlaylistManager", data: dict) -> "Playlist":
-        data = {key: value for key, value in data.items() if key in PLAYLIST_SLOTS}
-
+    def from_gpl(cls, data: dict) -> "Playlist":
         gpl_id = data.pop("gpl_id", None)
         if gpl_id:
-            data["gpl_id"] = utils.get_uuid(gpl_id)
+            gpl_id = utils.get_uuid(gpl_id)
 
         _entries = data.pop("entries")
         entries = []
         for _entry in _entries:
             entry = PlaylistEntry.from_gpl(_entry)
             entries.append(entry)
-        inst = cls(entries=entries, **data)
-        inst.manager = manager
-        inst.init()
+
+        inst = cls(gpl_id=gpl_id, entries=entries, **data)
         return inst
 
     def to_gpl(self) -> dict:
-        data = self.__getstate__()
-        data["gpl_id"] = data.pop("gpl_id").hex
-        data["entries"] = [entry.to_gpl() for entry in data.pop("entries")]
-        return data
+        data = dict(gpl_id=self.gpl_id.hex, name=self.name, description=self.description, author_id=self.author_id, cover=self.cover,
+                    editor_ids=self.editor_ids)
+        data["entries"] = [entry.to_gpl() for entry in self.entries]
+        return {key: value for key, value in data.items() if value}
 
     def add(self, entry: PlaylistEntry) -> PlaylistEntry:
         if entry in self:
