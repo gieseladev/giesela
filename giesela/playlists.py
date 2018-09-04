@@ -23,6 +23,8 @@ log = logging.getLogger(__name__)
 
 _DEFAULT = object()
 
+GPL_VERSION = 3
+
 UUIDType = Union[str, int, uuid.UUID]
 KT = TypeVar("KT")
 
@@ -282,7 +284,7 @@ class Playlist:
         return self._editors
 
     def init(self):
-        # TODO remove after some time
+        # TODO remove after some time (added: 2018-09-01)
         # making sure that it's a list
         self.editor_ids = list(self.editor_ids)
 
