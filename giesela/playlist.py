@@ -1,6 +1,7 @@
 import bisect
 import json
 import logging
+import time
 import uuid
 from collections import defaultdict, deque
 from pathlib import Path
@@ -74,6 +75,8 @@ def search_entry(entries, target: str, *, threshold: float = .8) -> Optional["Pl
     _similarity = 0
     for pl_entry, similarity in search_entries(entries, target, threshold=threshold):
         if similarity > _similarity:
+            if similarity == 1:
+                return pl_entry
             _entry = pl_entry
             _similarity = similarity
 
@@ -97,19 +100,28 @@ class LoadedPlaylistEntry(EntryWrapper):
 class PlaylistEntry:
     playlist: "Playlist" = None
 
-    def __init__(self, entry: PlayableEntry):
+    def __init__(self, entry: PlayableEntry, *, author_id: User, added_at: int = None, last_editor_id: User = None, last_edit_at: int = None):
         self._entry = entry
+        self._author_id = author_id
+        self._added_at = added_at or time.time()
+        self._last_editor_id = last_editor_id
+        self._last_edit_at = last_edit_at
 
     def __repr__(self) -> str:
         playlist = repr(self.playlist)
         me = repr(self._entry)
         return f"{me} - {playlist}"
 
-    def __getstate__(self):
-        return dict(entry=self._entry)
+    def __getstate__(self) -> dict:
+        return dict(entry=self._entry, author_id=self._author_id,
+                    added_at=self._added_at, last_editor_id=self._last_editor_id, last_edit_at=self._last_edit_at)
 
     def __setstate__(self, state: dict):
         self._entry = state["entry"]
+        self._author_id = state.get("author_id")
+        self._added_at = state.get("added_at") or time.time()
+        self._last_editor_id = state.get("last_editor_id")
+        self._last_edit_at = state.get("last_edit_at")
 
     def __hash__(self) -> int:
         return hash(self._entry)
@@ -149,17 +161,43 @@ class PlaylistEntry:
 
     @classmethod
     def from_gpl(cls, data: dict) -> "PlaylistEntry":
-        data["entry"] = load_entry_from_dict(data.pop("entry"))
+        data["entry"] = load_entry_from_dict(data["entry"])
         return cls(**data)
 
-    def to_gpl(self):
-        entry = self._entry.to_dict()
-        # TODO add meta?
-        return dict(entry=entry)
+    @property
+    def author(self) -> Optional[User]:
+        if self._author_id:
+            return self.playlist.manager.bot.get_user(self._author_id)
 
-    def replace(self, entry: PlayableEntry):
+    @property
+    def added_at(self) -> int:
+        return self._added_at
+
+    @property
+    def last_editor(self) -> Optional[User]:
+        if self._last_editor_id:
+            editor = self.playlist.manager.bot.get_user(self._last_editor_id)
+        else:
+            editor = None
+        return editor or self.author
+
+    @property
+    def last_edit_at(self) -> int:
+        return self._last_edit_at or self.added_at
+
+    def to_gpl(self):
+        data = self.__getstate__()
+        entry = self._entry.to_dict()
+        data["entry"] = entry
+        return {key: value for key, value in data.items() if value is not None}
+
+    def replace(self, entry: PlayableEntry, editor: User = None):
         before_sort_attr = self.sort_attr
         self._entry = entry
+        if editor:
+            self._last_editor_id = editor.id
+            self._last_edit_at = time.time()
+
         self.save(reorder=self.sort_attr != before_sort_attr)
 
     def save(self, *, reorder: bool = False):
@@ -316,9 +354,7 @@ class Playlist:
         data["entries"] = [entry.to_gpl() for entry in data.pop("entries")]
         return data
 
-    def add(self, entry: Union[PlayableEntry, PlaylistEntry]) -> PlaylistEntry:
-        if not isinstance(entry, PlaylistEntry):
-            entry = PlaylistEntry(entry)
+    def add(self, entry: PlaylistEntry) -> PlaylistEntry:
         if entry in self:
             raise ValueError(f"{entry} is already in {self}")
 
@@ -326,6 +362,10 @@ class Playlist:
         bisect.insort_left(self.entries, entry)
         self.save()
         return entry
+
+    def add_entry(self, entry: PlayableEntry, author: User) -> PlaylistEntry:
+        pl_entry = PlaylistEntry(entry, author_id=author.id)
+        return self.add(pl_entry)
 
     def remove(self, entry: PlaylistEntry):
         if entry not in self:
@@ -588,8 +628,8 @@ class EditPlaylistProxy:
     def search_entry(self, target: str, *, threshold: float = .2) -> Optional[PlaylistEntry]:
         return search_entry(self._pl_entries, target, threshold=threshold)
 
-    def add_entry(self, entry: PlayableEntry) -> PlaylistEntry:
-        pl_entry = PlaylistEntry(entry)
+    def add_entry(self, entry: PlayableEntry, author: User) -> PlaylistEntry:
+        pl_entry = PlaylistEntry(entry, author_id=author)
 
         self._undo_stack.clear()
         try:

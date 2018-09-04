@@ -1,10 +1,10 @@
 import asyncio
-from typing import Any
 
 from discord import Colour, Embed, Message, TextChannel
 
 from giesela import BaseEntry, ChapterEntry, GieselaPlayer, RadioEntry, SpecificChapterData, utils
 from giesela.ui import create_player_bar
+from giesela.utils import ObjectChain
 from .. import InteractableEmbed, IntervalUpdatingMessage, emoji_handler
 
 
@@ -31,28 +31,6 @@ def get_description(player: GieselaPlayer, progress: float, duration: float = No
         prefix = "❚❚ "
 
     return f"{prefix}{content} | {suffix}"
-
-
-class ObjectChain:
-    def __init__(self, *targets: Any):
-        self._targets = list(targets)
-
-    def __getattr__(self, item: str):
-        _return_none = False
-
-        for target in self._targets:
-            try:
-                value = getattr(target, item)
-            except AttributeError:
-                continue
-            else:
-                if value is not None:
-                    return value
-                else:
-                    _return_none = True
-
-        if not _return_none:
-            raise AttributeError(f"{self.targets} don't have {item}")
 
 
 class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):

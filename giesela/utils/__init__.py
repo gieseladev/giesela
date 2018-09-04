@@ -1,4 +1,5 @@
 import logging
+import math
 import re
 import urllib.parse
 from difflib import SequenceMatcher
@@ -7,11 +8,11 @@ from string import punctuation, whitespace
 from typing import Callable, Iterable, List, NamedTuple, Optional, Pattern, TYPE_CHECKING, Tuple, Union
 
 import aiohttp
-import math
 import requests
 from PIL import Image, ImageStat
 
-from .config import static_config
+from giesela.config import static_config
+from .object_chain import ObjectChain
 
 if TYPE_CHECKING:
     from giesela import BaseEntry

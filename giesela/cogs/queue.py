@@ -2,12 +2,11 @@ import random
 import time
 from datetime import datetime
 
-from discord import Embed
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, GieselaPlayer, utils
-from giesela.ui import VerticalTextViewer, text as text_utils
+from giesela import Giesela, utils
+from giesela.ui import VerticalTextViewer, prefab, text as text_utils
 from giesela.ui.custom import EntrySearchUI
 from .player import Player
 
@@ -23,6 +22,7 @@ class QueueBase:
         self.bot = bot
         self.player_cog = bot.cogs["Player"]
         self.get_player = self.player_cog.get_player
+        self.extractor = self.player_cog.extractor
 
 
 def pad_index(index: int, padding: int) -> str:
@@ -30,17 +30,22 @@ def pad_index(index: int, padding: int) -> str:
     return text_utils.wrap(padded_index, "`")
 
 
-async def _play_cmd(ctx: Context, player: GieselaPlayer, target: str, placement: int = None):
-    entry = await player.extractor.get_entry(target)
-    print(entry)
-    player.queue.add_entry(entry, ctx.author, placement=placement)
-
-
 class EnqueueCog(QueueBase):
-    async def _play_cmd(self, ctx: Context, url: str, placement: int = None):
+    async def _play_cmd(self, ctx: Context, target: str, placement: int = None):
         player = await self.get_player(ctx)
 
-        await _play_cmd(ctx, player, url, placement)
+        with await ctx.typing():
+            result = await self.extractor.get(target)
+
+        if not result:
+            raise commands.CommandError(f"Couldn't find anything for {target}")
+
+        if isinstance(result, list):
+            player.queue.add_entries(result, requester=ctx.author)  # TODO handle placement
+            await ctx.send(f"Added {len(result)} entries to the queue")
+        else:
+            player.queue.add_entry(result, requester=ctx.author, placement=placement)
+            await ctx.send(f"Added **{result}** to the queue")
 
     @commands.group(invoke_without_command=True, aliases=["p", "enqueue"])
     async def play(self, ctx: Context, *, url: str):
@@ -70,7 +75,7 @@ class EnqueueCog(QueueBase):
         player = await self.get_player(ctx)
 
         async with ctx.typing():
-            results = await player.downloader.get_entries_from_query(query, author=ctx.author)
+            results = await self.extractor.search_entries(query)
         searcher = EntrySearchUI(ctx.channel, player, results, user=ctx.author, bot=self.bot)
 
         entry = await searcher.choose()
@@ -130,16 +135,19 @@ class ManipulateCog(QueueBase):
                 raise commands.CommandError("No history to replay!")
             elif not 0 <= index < len(player.queue.history):
                 raise commands.CommandError("Can't find that index")
-            entry = player.queue.history[index]
+
+            entry = player.queue.history[index].entry
+
         elif player.current_entry:
-            entry = player.current_entry
+            entry = player.current_entry.entry
+
         else:
             raise commands.CommandError("Nothing to replay")
 
-        if player.queue.replay(index):
-            await ctx.send(f"Replaying **{entry.title}**")
+        if player.queue.replay(ctx.author, index):
+            await ctx.send(f"Replaying **{entry}**")
         else:
-            raise commands.CommandError(f"Couldn't replay {entry.title}!")
+            raise commands.CommandError(f"Couldn't replay {entry}!")
 
     @commands.command()
     async def shuffle(self, ctx: Context):
@@ -184,11 +192,11 @@ class ManipulateCog(QueueBase):
                 raise commands.CommandError("Doesn't really make sense to promote an entry which is already at the front of the queue, eh?")
             elif not 0 <= position < len(player.queue):
                 raise commands.CommandError("Index out of range")
-            entry = player.queue.move(position)
+            queue_entry = player.queue.move(position)
         else:
-            entry = player.queue.move(len(player.queue) - 1)
+            queue_entry = player.queue.move(len(player.queue) - 1)
 
-        await ctx.send(f"Promoted **{entry.entry}**")
+        await ctx.send(f"Promoted **{queue_entry.entry}**")
 
     @commands.command()
     async def move(self, ctx: Context, from_pos: int, to_pos: int):
@@ -219,13 +227,15 @@ class DisplayCog(QueueBase):
         if not 0 <= index < len(player.queue):
             raise commands.CommandError(f"Index {index + 1} not in queue")
 
-        entry = player.queue.entries[index]
-        # TODO more information and to the same for history
-        em = Embed(title=str(entry.entry), timestamp=datetime.utcfromtimestamp(entry.request_timestamp))
+        queue_entry = player.queue.entries[index]
 
-        em.add_field(name="Requested by", value=entry.requester.mention)
+        em = prefab.get_entry_embed(queue_entry)
 
-        waiting_for = utils.format_time(time.time() - entry.request_timestamp)
+        em.timestamp = datetime.utcfromtimestamp(queue_entry.request_timestamp)
+
+        em.add_field(name="Requested by", value=queue_entry.requester.mention)
+
+        waiting_for = utils.format_time(time.time() - queue_entry.request_timestamp)
         em.add_field(name="Waiting For", value=waiting_for)
 
         time_until = utils.format_time(player.queue.time_until(index))

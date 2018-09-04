@@ -70,12 +70,10 @@ class Player:
         self.player_manager = PlayerManager(bot) \
             .on("player_create", self.add_player_listeners)
 
+        self.extractor = self.player_manager.extractor
+
         self.np_messages = {}
         self._disconnects = {}
-
-    @property
-    def extractor(self):
-        return self.player_manager.extractor
 
     async def get_player(self, target: Union[Guild, Context, int], *,
                          create: bool = True, channel: VoiceChannel = None, member: Union[User, Member] = None) -> Optional[GieselaPlayer]:

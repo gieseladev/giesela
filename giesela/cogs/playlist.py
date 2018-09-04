@@ -10,7 +10,7 @@ from discord import Attachment, Colour, Embed, File, User
 from discord.ext import commands
 from discord.ext.commands import BadArgument, Context, Converter, view as string_view
 
-from giesela import Giesela, LoadedPlaylistEntry, Playlist, PlaylistManager, utils
+from giesela import GPL_VERSION, Giesela, LoadedPlaylistEntry, Playlist, PlaylistManager, utils
 from giesela.lib import help_formatter
 from giesela.ui import EmbedPaginator, EmbedViewer, ItemPicker, PromptYesNo, VerticalTextViewer
 from giesela.ui.custom import PlaylistBuilder, PlaylistViewer
@@ -423,7 +423,7 @@ class PlaylistCog:
         serialised = json.dumps(playlist.to_gpl(), indent=None, separators=(",", ":"))
         data = BytesIO(serialised.encode("utf-8"))
         data.seek(0)
-        file = File(data, filename=f"{playlist.name.lower()}.gpl2")
+        file = File(data, filename=f"{playlist.name.lower()}.gpl{GPL_VERSION}")
         await ctx.send("Here you go", file=file)
 
     @playlist.command("search", aliases=["contains", "has", "find"])
@@ -488,10 +488,13 @@ class PlaylistCog:
         if not player_entry:
             raise commands.CommandError("There's nothing playing right now")
 
+        entry = player_entry.entry
+
         if playlist:
             playlist = self.find_playlist(playlist)
-            # TODO find playlist entry
-            raise commands.CommandError("Not implemented currently")
+            playlist_entry = playlist.search_entry(entry.track, threshold=1)
+            if not playlist_entry:
+                raise commands.CommandError(f"Couldn't find {entry} in {playlist.name}")
         else:
             playlist = player_entry.get("playlist", None)
             if not playlist:
@@ -504,7 +507,6 @@ class PlaylistCog:
         playlist.remove(playlist_entry)
         player_entry.remove_wrapper(LoadedPlaylistEntry)
 
-        entry = playlist_entry.entry
         em = Embed(title=f"Removed **{entry}**", colour=Colour.green())
         add_playlist_footer(em, playlist)
 

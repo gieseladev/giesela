@@ -1,6 +1,6 @@
 import logging
 import re
-from typing import List, Pattern, Union
+from typing import List, Optional, Pattern, Union
 
 from .entry import BasicEntry, RadioEntry
 from .errors import ExtractionError
@@ -49,7 +49,18 @@ class Extractor:
 
         return self.basic_entry_from_load_result(track, result.playlist_info)
 
-    async def get(self, target: str, searcher=LoadTrackSearcher.YOUTUBE) -> Union[BasicEntry, List[BasicEntry], None]:
+    async def search_entries(self, query: str, searcher=LoadTrackSearcher.YOUTUBE) -> Optional[List[BasicEntry]]:
+        result = await self.client.search_tracks(query, searcher)
+        if not result.load_type.has_results:
+            raise ExtractionError(f"No results for {query}")
+
+        entries = []
+        for track in result.tracks:
+            entry = self.basic_entry_from_load_result(track)
+            entries.append(entry)
+        return entries
+
+    async def get(self, target: str, *, search_one=True, searcher=LoadTrackSearcher.YOUTUBE) -> Union[BasicEntry, List[BasicEntry], None]:
         if self.is_url(target):
             result = await self.client.get_tracks(target)
         else:
@@ -59,6 +70,9 @@ class Extractor:
             return None
 
         playlist_info = result.playlist_info
+
+        if result.load_type == TrackLoadType.SEARCH_RESULT and search_one:
+            return self.basic_entry_from_load_result(result.tracks[0], playlist_info)
 
         if result.track:
             return self.basic_entry_from_load_result(result.track, playlist_info)

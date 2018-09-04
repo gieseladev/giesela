@@ -76,7 +76,7 @@ class _PlaylistEmbed(VerticalTextViewer, metaclass=abc.ABCMeta):
 
     async def play(self, guild: Guild, user: User):
         player = await self.player_cog.get_player(guild, member=user)
-        await self.playlist.play(player.queue, author=user)
+        await self.playlist.play(player.queue, user)
 
 
 class PlaylistViewer(_PlaylistEmbed):
@@ -216,11 +216,11 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
 
         if isinstance(result, list):
             for entry in result:
-                self.playlist_editor.add_entry(entry)
+                self.playlist_editor.add_entry(entry, ctx.author)
             await self.show_window()
         else:
             try:
-                entry = self.playlist_editor.add_entry(result)
+                entry = self.playlist_editor.add_entry(result, ctx.author)
             except KeyError:
                 raise commands.CommandError(f"\"{result}\" is already in the playlist")
             await self.show_line(self.playlist_editor.index_of(entry))
