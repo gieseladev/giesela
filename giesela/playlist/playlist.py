@@ -1,0 +1,269 @@
+import bisect
+import logging
+import uuid
+from typing import Iterator, List, Optional, TYPE_CHECKING, Tuple, Type
+
+from discord import User
+
+from giesela import PlayableEntry, utils
+from giesela.lib import mosaic
+from giesela.lib.api import imgur
+from . import utils
+from .editor import EditPlaylistProxy
+from .playlist_entry import PlaylistEntry
+
+if TYPE_CHECKING:
+    from giesela.queue import EntryQueue
+    from .manager import PlaylistManager
+
+__all__ = ["Playlist"]
+
+log = logging.getLogger(__name__)
+
+PLAYLIST_SLOTS = ("gpl_id", "name", "description", "author_id", "cover", "entries", "editor_ids")
+
+# This makes backward-compatible saves somewhat possible
+PLAYLIST_SLOT_DEFAULTS = {"description": None, "cover": None, "entries": [], "editor_ids": []}
+
+
+class Playlist:
+    manager: "PlaylistManager"
+
+    gpl_id: uuid.UUID
+    name: str
+    description: Optional[str]
+    author_id: int
+    cover: Optional[str]
+    entries: List[PlaylistEntry]
+    editor_ids: List[int]
+
+    _author: User
+    _editors: List[User]
+
+    def __init__(self, **kwargs):
+        self.manager = None
+
+        self.gpl_id = kwargs.pop("gpl_id", uuid.uuid4())
+        self.name = kwargs.pop("name")
+        self.description = kwargs.pop("description", None)
+        self.cover = kwargs.pop("cover", None)
+        self.entries = kwargs.pop("entries", [])
+        self.editor_ids = kwargs.pop("editors", [])
+
+        author = kwargs.pop("author", None)
+        if author:
+            if isinstance(author, dict):
+                self.author_id = author["id"]
+            else:
+                self.author_id = author.id
+        else:
+            self.author_id = kwargs.pop("author_id")
+
+        self.init()
+
+    def __repr__(self) -> str:
+        return f"Playlist {self.gpl_id}"
+
+    def __str__(self) -> str:
+        return f"Playlist \"{self.name}\""
+
+    def __len__(self) -> int:
+        return len(self.entries)
+
+    def __contains__(self, entry: PlaylistEntry) -> bool:
+        return self.has(entry)
+
+    def __iter__(self) -> Iterator[PlaylistEntry]:
+        return iter(self.entries)
+
+    def __reversed__(self) -> Iterator[PlaylistEntry]:
+        return reversed(self.entries)
+
+    def __getstate__(self) -> dict:
+        return {key: getattr(self, key) for key in PLAYLIST_SLOTS}
+
+    def __setstate__(self, state: dict):
+        for key in PLAYLIST_SLOTS:
+            value = state[key] if key in state else PLAYLIST_SLOT_DEFAULTS[key]
+            setattr(self, key, value)
+        self.init()
+
+    def __enter__(self) -> "Playlist":
+        if hasattr(self, "__opened__"):
+            raise ValueError("Playlist is already open!")
+
+        setattr(self, "__opened__", True)
+        return self
+
+    def __exit__(self, exc_type: Optional[Type[Exception]], exc: Optional[Exception], exc_tb: Optional):
+        delattr(self, "__opened__")
+        self.save()
+        if exc:
+            raise exc
+
+    @property
+    def total_duration(self) -> int:
+        return sum(entry.entry.duration for entry in self.entries)
+
+    @property
+    def author(self) -> User:
+        if not getattr(self, "_author", False):
+            self._author = self.manager.bot.get_user(self.author_id)
+        return self._author
+
+    @author.setter
+    def author(self, author: User):
+        self.author_id = author.id
+        self._author = author
+
+    @property
+    def editors(self) -> List[User]:
+        if not getattr(self, "_editors", False):
+            self._editors = list(filter(None, map(self.manager.bot.get_user, self.editor_ids)))
+        return self._editors
+
+    def init(self):
+        # TODO remove after some time (added: 2018-09-01)
+        # making sure that it's a list
+        self.editor_ids = list(self.editor_ids)
+
+        self.entries.sort()
+        for entry in self.entries:
+            entry.playlist = self
+
+    @classmethod
+    def from_gpl(cls, manager: "PlaylistManager", data: dict) -> "Playlist":
+        data = {key: value for key, value in data.items() if key in PLAYLIST_SLOTS}
+
+        gpl_id = data.pop("gpl_id", None)
+        if gpl_id:
+            data["gpl_id"] = utils.get_uuid(gpl_id)
+
+        _entries = data.pop("entries")
+        entries = []
+        for _entry in _entries:
+            entry = PlaylistEntry.from_gpl(_entry)
+            entries.append(entry)
+        inst = cls(entries=entries, **data)
+        inst.manager = manager
+        inst.init()
+        return inst
+
+    def to_gpl(self) -> dict:
+        data = self.__getstate__()
+        data["gpl_id"] = data.pop("gpl_id").hex
+        data["entries"] = [entry.to_gpl() for entry in data.pop("entries")]
+        return data
+
+    def add(self, entry: PlaylistEntry) -> PlaylistEntry:
+        if entry in self:
+            raise ValueError(f"{entry} is already in {self}")
+
+        entry.playlist = self
+        bisect.insort_left(self.entries, entry)
+        self.save()
+        return entry
+
+    def add_entry(self, entry: PlayableEntry, author: User) -> PlaylistEntry:
+        pl_entry = PlaylistEntry(entry, author_id=author.id)
+        return self.add(pl_entry)
+
+    def remove(self, entry: PlaylistEntry):
+        if entry not in self:
+            raise KeyError(f"{entry} isn't in {self}")
+        self.entries.remove(entry)
+        self.save()
+
+    def reorder_entry(self, entry: PlaylistEntry):
+        if entry not in self:
+            raise KeyError(f"{entry} isn't in {self}")
+
+        index = self.index_of(entry)
+        _entry = self.entries.pop(index)
+        bisect.insort_left(self.entries, _entry)
+        self.save()
+
+    def has(self, entry: PlaylistEntry) -> bool:
+        return entry in self.entries
+
+    def index_of(self, entry: PlaylistEntry) -> int:
+        return self.entries.index(entry)
+
+    def search_entry(self, target: str, *, threshold: float = .8) -> Optional[PlaylistEntry]:
+        return utils.search_entry(self.entries, target, threshold=threshold)
+
+    def search_all_entries(self, target: str, *, threshold: float = .8) -> Iterator[Tuple[PlaylistEntry, float]]:
+        return utils.search_entries(self.entries, target, threshold=threshold)
+
+    def rename(self, name: str):
+        self.name = name
+        self.save()
+
+    def set_description(self, description: str):
+        self.description = description
+        self.save()
+
+    async def set_cover(self, cover: str = None, *, no_upload: bool = False) -> bool:
+        if cover:
+            if not no_upload:
+                cover = await imgur.upload_playlist_cover(self.name, cover)
+        else:
+            cover = await self.generate_cover()
+
+        if not cover:
+            return False
+
+        self.cover = cover
+        self.save()
+        return True
+
+    def save(self):
+        if hasattr(self, "__opened__"):
+            log.debug("not saving playlist because it's open")
+            return
+        self.manager.save_playlist(self)
+        log.debug(f"saved {self}")
+
+    def edit(self) -> "EditPlaylistProxy":
+        return EditPlaylistProxy(self)
+
+    def delete(self):
+        self.manager.remove_playlist(self)
+        log.debug(f"deleted playlist {self}")
+
+    def transfer(self, new_author: User):
+        # noinspection PyAttributeOutsideInit
+        self.author = new_author
+        self.save()
+
+    def add_editor(self, user: User):
+        if self.is_editor(user):
+            return
+        self.editor_ids.append(user.id)
+        if hasattr(self, "_editors"):
+            self._editors.append(user)
+        self.save()
+
+    def remove_editor(self, user: User):
+        if not self.is_editor(user):
+            return
+        self.editor_ids.remove(user.id)
+        if hasattr(self, "_editors"):
+            self._editors.remove(user)
+        self.save()
+
+    def is_author(self, user: User) -> bool:
+        return user.id == self.author_id
+
+    def is_editor(self, user: User) -> bool:
+        return user.id in self.editor_ids
+
+    def can_edit(self, user: User) -> bool:
+        return self.is_author(user) or self.is_editor(user)
+
+    async def play(self, queue: "EntryQueue", requester: User, front: bool = False):
+        entries = [pl_entry.get_wrapper() for pl_entry in self]
+        queue.add_entries(entries, requester, front=front)
+
+    async def generate_cover(self) -> Optional[str]:
+        return await mosaic.generate_playlist_cover(self)
