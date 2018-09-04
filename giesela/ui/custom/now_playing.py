@@ -92,6 +92,7 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
             chapter = None
             target = basic_entry
 
+        playlist = entry.get("playlist", None)
         requester = entry.get("requester", None)
 
         description = get_description(self.player, progress, duration)
@@ -107,8 +108,11 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         if target.album:
             em.add_field(name="Album", value=target.album)
 
+        if playlist:
+            em.set_footer(text=playlist.name, icon_url=playlist.cover or Embed.Empty)
+
         if isinstance(basic_entry, RadioEntry):
-            em.add_field(name="Radio Station", value=basic_entry.station.name)
+            em.set_footer(text=basic_entry.station.name, icon_url=basic_entry.station.logo or Embed.Empty)
 
         if requester:
             em.add_field(name="Requested by", value=requester.mention)

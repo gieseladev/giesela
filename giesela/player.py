@@ -157,7 +157,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         if not entry:
             raise ValueError(f"{self} has no current entry")
         if not entry.entry.is_seekable:
-            raise ValueError(f"{entry} is not seekable!")
+            raise TypeError(f"{entry} is not seekable!")
         await self.manager.send_seek(self.guild_id, seconds)
         self.emit("seek", player=self, timestamp=seconds)
 
