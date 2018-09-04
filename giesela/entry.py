@@ -331,7 +331,11 @@ class EntryWrapper(metaclass=abc.ABCMeta):
         return bool(self.get_wrapper(wrapper))
 
     def to_dict(self) -> Dict[str, Any]:
-        return dict(entry=self._entry.to_dict())
+        if isinstance(self.wrapped, EntryWrapper):
+            data = self.wrapped.to_dict()
+        else:
+            data = dict(entry=self._entry.to_dict())
+        return data
 
 
 class PlayerEntry(EntryWrapper):
@@ -385,7 +389,7 @@ class QueueEntry(EntryWrapper):
 
     def to_dict(self):
         data = super().to_dict()
-        data.update(request_timestamp=self.request_timestamp)
+        data.update(requester=self.requester, request_timestamp=self.request_timestamp)
         return data
 
 
