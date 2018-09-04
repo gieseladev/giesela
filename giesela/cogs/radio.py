@@ -18,11 +18,12 @@ def get_station_embed(station: RadioStation) -> Embed:
     return em
 
 
-async def play_station(ctx: Context, player: GieselaPlayer, station: RadioStation, *, now: bool = True):
-    entry = await player.extractor.get_radio_entry(station)
+async def play_station(ctx: Context, player: GieselaPlayer, station: RadioStation):
+    async with ctx.typing():
+        entry = await player.extractor.get_radio_entry(station)
     player.queue.add_entry(entry, ctx.author)
     embed = get_station_embed(station)
-    await ctx.send("Now playing", embed=embed)
+    await ctx.send(f"Added **{entry}** to the queue!", embed=embed)
 
 
 class Radio:

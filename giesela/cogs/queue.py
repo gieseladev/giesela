@@ -1,5 +1,6 @@
 import random
 import time
+from datetime import datetime
 
 from discord import Embed
 from discord.ext import commands
@@ -220,7 +221,7 @@ class DisplayCog(QueueBase):
 
         entry = player.queue.entries[index]
         # TODO more information and to the same for history
-        em = Embed(title=str(entry.entry), timestamp=entry.request_timestamp)
+        em = Embed(title=str(entry.entry), timestamp=datetime.utcfromtimestamp(entry.request_timestamp))
 
         em.add_field(name="Requested by", value=entry.requester.mention)
 

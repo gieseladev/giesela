@@ -26,17 +26,22 @@ class Webiesela:
         self.bot = bot
         self.player_cog = bot.cogs["Player"]
         self.playlist_cog = bot.cogs["Playlist"]
+
+        self.get_player = self.player_cog.get_player
+
         self.playlist_manager = self.playlist_cog.playlist_manager
         self.radio_cog = bot.cogs["Radio"]
         self.radio_station_manager = self.radio_cog.station_manager
-
-    async def get_player(self, *args, **kwargs):
-        return await self.player_cog.get_player(*args, **kwargs)
 
     async def on_ready(self):
         if self.bot.config.start_webiesela:
             log.info("starting Webiesela")
             WebieselaServer.run(self)
+
+    async def on_shutdown(self):
+        if self.bot.config.start_webiesela:
+            log.debug("stopping Webiesela")
+            WebieselaServer.server.close()
 
     @commands.command()
     async def register(self, ctx: Context, token: str):
