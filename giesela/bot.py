@@ -55,10 +55,10 @@ class Giesela(AutoShardedBot):
             log.info(f"loading extension {ext}")
             self.load_extension(ext)
 
-    async def logout(self):
-        self.dispatch("logout")
+    async def close(self):
+        await self.blocking_dispatch("shutdown")
         await self.aiosession.close()
-        await super().logout()
+        await super().close()
 
     def run(self):
         try:
@@ -184,3 +184,61 @@ class Giesela(AutoShardedBot):
     @classmethod
     async def on_reaction_add(cls, reaction, user):
         await events.handle_reaction(reaction, user)
+
+    async def blocking_dispatch(self, event: str, *args, **kwargs):
+        log.debug(f"Dispatching event {event}")
+        method = f"on_{event}"
+        handler = f"_handle_{event}"
+
+        listeners = self._listeners.get(event)
+        if listeners:
+            removed = []
+            for i, (future, condition) in enumerate(listeners):
+                if future.cancelled():
+                    removed.append(i)
+                    continue
+
+                try:
+                    result = condition(*args)
+                except Exception as e:
+                    future.set_exception(e)
+                    removed.append(i)
+                else:
+                    if result:
+                        if len(args) == 0:
+                            future.set_result(None)
+                        elif len(args) == 1:
+                            future.set_result(args[0])
+                        else:
+                            future.set_result(args)
+                        removed.append(i)
+
+            if len(removed) == len(listeners):
+                self._listeners.pop(event)
+            else:
+                for idx in reversed(removed):
+                    del listeners[idx]
+
+        try:
+            actual_handler = getattr(self, handler)
+        except AttributeError:
+            pass
+        else:
+            actual_handler(*args, **kwargs)
+
+        coros = []
+
+        try:
+            coro = getattr(self, method)
+        except AttributeError:
+            pass
+        else:
+            coro = self._run_event(coro, method, *args, **kwargs)
+            coros.append(coro)
+
+        for ev in self.extra_events.get(method, []):
+            coro = self._run_event(ev, event, *args, **kwargs)
+            coros.append(coro)
+
+        if coros:
+            await asyncio.wait(coros)

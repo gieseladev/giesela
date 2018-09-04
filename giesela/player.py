@@ -262,8 +262,9 @@ class PlayerManager(LavalinkAPI):
         self.players = {}
 
         self._voice_state = {}
-
+        # TODO use logout event to close?
         bot.add_listener(self.on_socket_response)
+        bot.add_listener(self.on_shutdown)
 
     def __iter__(self) -> Iterator[GieselaPlayer]:
         return iter(self.players.values())
@@ -334,6 +335,10 @@ class PlayerManager(LavalinkAPI):
             log.debug(f"sending voice_state for guild {guild_id}")
             await self.send_raw(self._voice_state)
             self._voice_state.clear()
+
+    async def on_shutdown(self):
+        log.info("Disconnecting from Lavalink")
+        await self.shutdown()
 
     async def on_disconnect(self, error: ConnectionClosed):
         for player in self:

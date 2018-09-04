@@ -770,6 +770,7 @@ class PlaylistManager:
         pass
 
     def close(self):
+        log.info("closing playlists")
         self.storage.close()
 
     def import_from_gpl(self, playlist: Union[dict, str], *, author: User = None) -> Optional[Playlist]:

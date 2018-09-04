@@ -54,8 +54,9 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
     def all_statistics(self) -> List[LavalinkStats]:
         return list(self._stats)
 
-    def shutdown(self):
+    async def shutdown(self):
         self._shutdown_signal = True
+        await self._ws.close(reason="Shutdown")
 
     async def _try_connect(self):
         try:

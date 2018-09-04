@@ -114,7 +114,7 @@ class PlaylistCog:
         embed.add_field(name=playlist.name, value=f"by {playlist.author.name}\n{len(playlist)} entries")
         return embed
 
-    async def on_logout(self):
+    async def on_shutdown(self):
         self.playlist_manager.close()
 
     @commands.group(invoke_without_command=True, aliases=["pl"])
