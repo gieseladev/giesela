@@ -1,0 +1,2 @@
+class GieselaError(Exception):
+    pass

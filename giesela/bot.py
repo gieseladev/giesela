@@ -11,7 +11,7 @@ from discord.ext.commands import AutoShardedBot, Command, CommandError, CommandI
 
 from giesela.lib.web_author import WebAuthor
 from giesela.ui import events
-from . import cogs, exceptions, utils
+from . import cogs, signals, utils
 from .config import Config, ConfigDefaults
 from .constants import VERSION as BOT_VERSION
 
@@ -39,7 +39,7 @@ class Giesela(AutoShardedBot):
     config: Config
     aiosession: aiohttp.ClientSession
 
-    exit_signal: Optional[Type[exceptions.Signal]]
+    exit_signal: Optional[Type[signals.ExitSignal]]
 
     def __init__(self, *args, **kwargs):
         self.config = Config(ConfigDefaults.options_file)
@@ -116,7 +116,7 @@ class Giesela(AutoShardedBot):
             if isinstance(exception, CommandInvokeError):
                 original = exception.original
 
-                if isinstance(original, exceptions.Signal):
+                if isinstance(original, signals.ExitSignal):
                     self.exit_signal = type(original)
                     await self.logout()
                     return
