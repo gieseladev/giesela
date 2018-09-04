@@ -13,7 +13,8 @@ if TYPE_CHECKING:
     from .queue import EntryQueue
     from .player import GieselaPlayer
 
-__all__ = ["PlayableEntry", "BaseEntry",
+__all__ = ["load_entry_from_dict",
+           "PlayableEntry", "BaseEntry",
            "ChapterData", "SpecificChapterData", "HasChapters",
            "BasicEntry", "ChapterEntry", "RadioEntry",
            "CanWrapEntryType",
@@ -23,13 +24,74 @@ log = logging.getLogger(__name__)
 
 _DEFAULT = object()
 
+_ENTRY_MAP: Dict[str, Type["PlayableEntry"]] = {}
+
+
+class _RegisterEntryMeta(abc.ABCMeta, type):
+    def __new__(mcs, *args):
+        cls = super().__new__(mcs, *args)
+        _ENTRY_MAP[cls.__name__] = cls
+        return cls
+
+
+def load_entry_from_dict(data: Dict[str, Any]) -> "PlayableEntry":
+    _cls = data.pop("cls", None)
+    if not _cls:
+        raise KeyError("Data doesn't have a cls")
+    cls = _ENTRY_MAP.get(_cls)
+    if not cls:
+        raise KeyError(f"Cls {_cls} unknown!")
+    return cls.from_dict(data)
+
 
 class Reducible(metaclass=abc.ABCMeta):
     def to_dict(self) -> Dict[str, Any]:
         return {}
 
+    @classmethod
+    def from_dict(cls, data):
+        # noinspection PyArgumentList
+        return cls(**data)
 
-class PlayableEntry(Reducible, metaclass=abc.ABCMeta):
+
+class OrderByAttribute(metaclass=abc.ABCMeta):
+    @property
+    @abc.abstractmethod
+    def sort_attr(self) -> str:
+        pass
+
+    def __eq__(self, other):
+        try:
+            return self.sort_attr.__eq__(other.sort_attr)
+        except AttributeError:
+            return NotImplemented
+
+    def __gt__(self, other):
+        try:
+            return self.sort_attr.__gt__(other.sort_attr)
+        except AttributeError:
+            return NotImplemented
+
+    def __lt__(self, other):
+        try:
+            return self.sort_attr.__lt__(other.sort_attr)
+        except AttributeError:
+            return NotImplemented
+
+    def __ge__(self, other):
+        try:
+            return self.sort_attr.__ge__(other.sort_attr)
+        except AttributeError:
+            return NotImplemented
+
+    def __le__(self, other):
+        try:
+            return self.sort_attr.__le__(other.sort_attr)
+        except AttributeError:
+            return NotImplemented
+
+
+class PlayableEntry(Reducible, OrderByAttribute, metaclass=_RegisterEntryMeta):
     start_position: Optional[float]
     end_position: Optional[float]
 
@@ -108,7 +170,7 @@ class PlayableEntry(Reducible, metaclass=abc.ABCMeta):
 
     def to_dict(self) -> Dict[str, Any]:
         data = super().to_dict()
-        data.update(type=type(self).__name__, track=self._track, uri=self._uri, seekable=self._is_seekable)
+        data.update(cls=type(self).__name__, track=self._track, uri=self._uri, seekable=self._is_seekable)
         if self._duration:
             data["duration"] = self._duration
         if self.start_position is not None:
@@ -139,7 +201,7 @@ class BaseEntry(Reducible, metaclass=abc.ABCMeta):
     def to_dict(self) -> Dict[str, Any]:
         data = super().to_dict()
         pairs = (("title", self.title), ("artist", self.artist), ("cover", self.cover), ("artist_image", self.artist_image), ("album", self.album))
-        data.update((key, value for key, value in pairs if value))
+        data.update(((key, value) for key, value in pairs if value))
         return data
 
 
@@ -298,8 +360,17 @@ class EntryWrapper(metaclass=abc.ABCMeta):
     def wrapped(self) -> "CanWrapEntryType":
         return self._entry
 
-    def add_wrapper(self, wrapper: Type["EntryWrapper"], **kwargs):
-        wrap = wrapper(entry=self._entry, **kwargs)
+    @property
+    def lowest_wrapper(self) -> "EntryWrapper":
+        *_, wrapper = self.walk_wrappers()
+        return wrapper
+
+    def add_wrapper(self, wrapper: Union[Type["EntryWrapper"], "EntryWrapper"], **kwargs):
+        if isinstance(wrapper, EntryWrapper):
+            wrap = wrapper
+            wrap._entry = self._entry
+        else:
+            wrap = wrapper(entry=self._entry, **kwargs)
         self._entry = wrap
 
     def remove_wrapper(self, wrapper: Type["EntryWrapper"]):

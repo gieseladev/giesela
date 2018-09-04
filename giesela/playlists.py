@@ -5,15 +5,15 @@ import uuid
 from collections import defaultdict, deque
 from pathlib import Path
 from shelve import DbfilenameShelf, Shelf
-from typing import Any, Callable, Container, Deque, Dict, Iterable, Iterator, List, Mapping, Optional, TYPE_CHECKING, Tuple, Type, TypeVar, Union
+from typing import Any, Container, Deque, Dict, Iterable, Iterator, List, Mapping, Optional, TYPE_CHECKING, Tuple, Type, TypeVar, Union
 
 from discord import User
 
 from giesela.lib import mosaic
 from giesela.ui import text as text_utils
-from . import entry as entry_module, utils
+from . import utils
 from .bot import Giesela
-from .entry import BaseEntry
+from .entry import BaseEntry, EntryWrapper, PlayableEntry, load_entry_from_dict
 from .lib.api import imgur
 
 if TYPE_CHECKING:
@@ -37,7 +37,7 @@ def normalise_entry_data(entry: Dict[str, Any]) -> Dict[str, Any]:
     if "expected_filename" in entry:
         entry["filename"] = entry["expected_filename"]
 
-    return filter_dict(entry, ENTRY_SLOTS)
+    return entry
 
 
 def get_uuid(gpl_id: UUIDType) -> uuid.UUID:
@@ -51,117 +51,119 @@ def get_uuid(gpl_id: UUIDType) -> uuid.UUID:
         raise TypeError("Can't resolve uuid")
 
 
-ENTRY_SLOTS = ("version", "type", "filename",  # meta
-               "video_id", "url", "title", "duration", "thumbnail",  # basic
-               "sub_queue",
-               "song_title", "artist", "artist_image", "cover", "album")  # gieselaentry
+def search_entries(entries: Iterable["PlaylistEntry"], target: str, *, threshold: float = .8) -> Iterator[Tuple["PlaylistEntry", float]]:
+    for pl_entry in entries:
+        entry = pl_entry.entry
+        if entry.uri == target or entry.track == target:
+            yield pl_entry, 1
+
+        if isinstance(entry, BaseEntry):
+            comp = (str(entry), entry.title, entry.artist)
+        else:
+            comp = str(entry)
+
+        similarity = utils.similarity(target, comp, lower=True)
+        if similarity > threshold:
+            yield pl_entry, similarity
+
+
+def search_entry(entries, target: str, *, threshold: float = .8) -> Optional["PlaylistEntry"]:
+    _entry = None
+    _similarity = 0
+    for pl_entry, similarity in search_entries(entries, target, threshold=threshold):
+        if similarity > _similarity:
+            _entry = pl_entry
+            _similarity = similarity
+
+    if _similarity <= threshold:
+        return None
+
+    return _entry
+
+
+class LoadedPlaylistEntry(EntryWrapper):
+    def __init__(self, *, playlist: "Playlist", playlist_entry: "PlaylistEntry", **kwargs):
+        super().__init__(**kwargs)
+        self.playlist = playlist
+        self.playlist_entry = playlist_entry
+
+    @classmethod
+    def create(cls, playlist_entry: "PlaylistEntry") -> "LoadedPlaylistEntry":
+        return cls(playlist_entry=playlist_entry, playlist=playlist_entry.playlist, entry=playlist_entry.entry)
 
 
 class PlaylistEntry:
-    playlist: "Playlist"
-    # TODO marking as broken
+    playlist: "Playlist" = None
 
-    _entry: dict
-
-    url: str
-
-    def __init__(self, entry: Union[BaseEntry, dict]):
-        self.playlist = None
-
-        if isinstance(entry, BaseEntry):
-            entry = entry.to_dict()
-
-        entry = normalise_entry_data(entry)
-
+    def __init__(self, entry: PlayableEntry):
         self._entry = entry
 
     def __repr__(self) -> str:
-        return f"Entry {self.title} of {self.playlist}"
+        playlist = repr(self.playlist)
+        me = repr(self._entry)
+        return f"{me} - {playlist}"
 
-    def __hash__(self) -> int:
-        return hash(self.url)
+    def __getstate__(self):
+        return dict(entry=self._entry)
 
     def __setstate__(self, state: dict):
-        self._entry = state
+        self._entry = state["entry"]
 
-    def __getstate__(self) -> dict:
-        return self._entry
-
-    def __reduce__(self) -> Tuple[Callable, tuple, dict]:
-        return object.__new__, (PlaylistEntry,), self.__getstate__()
-
-    def __getattr__(self, item: str) -> Optional[Any]:
-        return self._entry.get(item)
+    def __hash__(self) -> int:
+        return hash(self._entry)
 
     def __eq__(self, other) -> bool:
-        if isinstance(other, (PlaylistEntry, BaseEntry)):
-            return self.url == other.url
+        if isinstance(other, PlaylistEntry):
+            return self._entry == other._entry
         return NotImplemented
 
     def __lt__(self, other) -> bool:
-        if isinstance(other, (PlaylistEntry, BaseEntry)):
-            return self.sort_attr.__lt__(other.sort_attr)
+        if isinstance(other, PlaylistEntry):
+            return self._entry.__lt__(other._entry)
         return NotImplemented
 
     def __le__(self, other) -> bool:
-        if isinstance(other, (PlaylistEntry, BaseEntry)):
-            return self.sort_attr.__le__(other.sort_attr)
+        if isinstance(other, PlaylistEntry):
+            return self._entry.__le__(other._entry)
         return NotImplemented
 
     def __gt__(self, other) -> bool:
-        if isinstance(other, (PlaylistEntry, BaseEntry)):
-            return self.sort_attr.__gt__(other.sort_attr)
+        if isinstance(other, PlaylistEntry):
+            return self._entry.__gt__(other._entry)
         return NotImplemented
 
     def __ge__(self, other) -> bool:
-        if isinstance(other, (PlaylistEntry, BaseEntry)):
-            return self.sort_attr.__ge__(other.sort_attr)
+        if isinstance(other, PlaylistEntry):
+            return self._entry.__ge__(other._entry)
         return NotImplemented
 
     @property
-    def __class__(self) -> BaseEntry:
-        if self.type:
-            cls = getattr(entry_module, self.type, None)
-        else:
-            cls = None
-        return cls or PlaylistEntry
+    def entry(self):
+        return self._entry
 
     @property
-    def title(self) -> str:
-        if self.artist and self.song_title:
-            return f"{self.artist} - {self.song_title}"
-        return self._entry["title"]
-
-    @property
-    def sort_attr(self) -> str:
-        return self.title
+    def sort_attr(self):
+        return self._entry.sort_attr
 
     @classmethod
     def from_gpl(cls, data: dict) -> "PlaylistEntry":
-        return cls(data)
+        data["entry"] = load_entry_from_dict(data.pop("entry"))
+        return cls(**data)
 
-    def to_gpl(self) -> dict:
-        return self._entry
+    def to_gpl(self):
+        entry = self._entry.to_dict()
+        # TODO add meta?
+        return dict(entry=entry)
 
-    def replace(self, data: Union[BaseEntry, Dict[str, Any]]):
-        if isinstance(data, BaseEntry):
-            data = data.to_dict()
-
+    def replace(self, entry: PlayableEntry):
         before_sort_attr = self.sort_attr
-        self._entry = filter_dict(data, ENTRY_SLOTS)
-        self.save(reorder=self.sort_attr != before_sort_attr)
-
-    def edit(self, **changes):
-        changes = filter_dict(changes, ENTRY_SLOTS)
-        log.debug(f"applying changes {changes} to {self}")
-        before_sort_attr = self.sort_attr
-        self._entry.update(changes)
+        self._entry = entry
         self.save(reorder=self.sort_attr != before_sort_attr)
 
     def save(self, *, reorder: bool = False):
         if self.playlist:
             if reorder:
-                log.debug(f"{self} sort attribute has changed, re-ordering playlist")
+                log.debug(f"{self} sort attribute has changed, re-ordering in playlist")
                 self.playlist.reorder_entry(self)
             else:
                 self.playlist.save()
@@ -172,14 +174,10 @@ class PlaylistEntry:
         data = self.to_gpl().copy()
         return self.from_gpl(data)
 
-    def build_entry(self) -> BaseEntry:
-        return Entry.from_dict(self._entry)
-
-    def get_entry(self, *, author: User, **meta) -> BaseEntry:
-        entry = self.build_entry()
-        meta.update(author=author, playlist=self.playlist, playlist_entry=self)
-        entry.meta.update(meta)
-        return entry
+    def get_wrapper(self) -> LoadedPlaylistEntry:
+        if not self.playlist:
+            raise ValueError("This entry doesn't belong to a playlist")
+        return LoadedPlaylistEntry.create(self)
 
 
 PLAYLIST_SLOTS = ("gpl_id", "name", "description", "author_id", "cover", "entries", "editor_ids")
@@ -208,7 +206,7 @@ class Playlist:
         self.name = kwargs.pop("name")
         self.description = kwargs.pop("description", None)
         self.cover = kwargs.pop("cover", None)
-        self.entries = sorted(kwargs.pop("entries", []))
+        self.entries = kwargs.pop("entries", [])
         self.editor_ids = kwargs.pop("editors", [])
 
         author = kwargs.pop("author", None)
@@ -231,7 +229,7 @@ class Playlist:
     def __len__(self) -> int:
         return len(self.entries)
 
-    def __contains__(self, entry: Union[BaseEntry, PlaylistEntry]) -> bool:
+    def __contains__(self, entry: PlaylistEntry) -> bool:
         return self.has(entry)
 
     def __iter__(self) -> Iterator[PlaylistEntry]:
@@ -263,8 +261,8 @@ class Playlist:
             raise exc
 
     @property
-    def duration(self) -> int:
-        return sum(entry.duration for entry in self.entries)
+    def total_duration(self) -> int:
+        return sum(entry.entry.duration for entry in self.entries)
 
     @property
     def author(self) -> User:
@@ -316,7 +314,7 @@ class Playlist:
         data["entries"] = [entry.to_gpl() for entry in data.pop("entries")]
         return data
 
-    def add(self, entry: Union[BaseEntry, PlaylistEntry]) -> PlaylistEntry:
+    def add(self, entry: Union[PlayableEntry, PlaylistEntry]) -> PlaylistEntry:
         if not isinstance(entry, PlaylistEntry):
             entry = PlaylistEntry(entry)
         if entry in self:
@@ -327,13 +325,10 @@ class Playlist:
         self.save()
         return entry
 
-    def remove(self, entry: Union[BaseEntry, PlaylistEntry]):
-        for _entry in reversed(self):
-            if _entry.url == entry.url:
-                self.entries.remove(_entry)
-                break
-        else:
+    def remove(self, entry: PlaylistEntry):
+        if entry not in self:
             raise KeyError(f"{entry} isn't in {self}")
+        self.entries.remove(entry)
         self.save()
 
     def reorder_entry(self, entry: PlaylistEntry):
@@ -345,46 +340,17 @@ class Playlist:
         bisect.insort_left(self.entries, _entry)
         self.save()
 
-    def edit_entry(self, entry: Union[BaseEntry, PlaylistEntry], changes: Dict[str, Any]):
-        for _entry in self:
-            if _entry == entry:
-                break
-        else:
-            raise KeyError(f"{entry} isn't in {self}")
-        _entry.edit(**changes)
-
-    def has(self, entry: Union[BaseEntry, PlaylistEntry]) -> bool:
-        for _entry in self:
-            if _entry.url == entry.url:
-                return True
-        return False
+    def has(self, entry: PlaylistEntry) -> bool:
+        return entry in self.entries
 
     def index_of(self, entry: PlaylistEntry) -> int:
         return self.entries.index(entry)
 
     def search_entry(self, target: str, *, threshold: float = .8) -> Optional[PlaylistEntry]:
-        _entry = None
-        _similarity = 0
-        for entry in self.entries:
-            if entry.url == target:
-                return entry
-            similarity = utils.similarity(target, (entry.title, entry.artist, entry.song_title), lower=True)
-            if similarity > _similarity:
-                _entry = entry
-                _similarity = similarity
-
-        if _similarity <= threshold:
-            return None
-
-        return _entry
+        return search_entry(self.entries, target, threshold=threshold)
 
     def search_all_entries(self, target: str, *, threshold: float = .8) -> Iterator[Tuple[PlaylistEntry, float]]:
-        for entry in self.entries:
-            if entry.url == target:
-                yield entry, 1
-            similarity = utils.similarity(target, (entry.title, entry.artist, entry.song_title), lower=True)
-            if similarity > threshold:
-                yield entry, similarity
+        return search_entries(self.entries, target, threshold=threshold)
 
     def rename(self, name: str):
         self.name = name
@@ -452,8 +418,9 @@ class Playlist:
     def can_edit(self, user: User) -> bool:
         return self.is_author(user) or self.is_editor(user)
 
-    async def play(self, queue: "EntryQueue", **meta):
-        await queue.add_playlist(self, **meta)
+    async def play(self, queue: "EntryQueue", requester: User, front: bool = False):
+        entries = [pl_entry.get_wrapper() for pl_entry in self]
+        queue.add_entries(entries, requester, front=front)
 
     async def generate_cover(self) -> Optional[str]:
         return await mosaic.generate_playlist_cover(self)
@@ -466,44 +433,41 @@ class EditChange:
 
     ALL_TYPES = (ADDED, REMOVED, EDITED)
 
-    change_type: int
     success: Optional[bool]
-    entry: PlaylistEntry
-    changes: Optional[Dict[str, Any]]
 
-    def __init__(self, change_type: int, *, entry: PlaylistEntry, changes: Dict[str, Any] = None):
+    def __init__(self, change_type: int, *, pl_entry: PlaylistEntry, new_entry: Optional[PlayableEntry] = None):
         if change_type not in self.ALL_TYPES:
             raise ValueError(f"Unknown change type {change_type}")
 
         self.success = None
-        self.entry = entry
-        self.changes = changes
+        self.pl_entry = pl_entry
+        self.new_entry = new_entry
         self.change_type = change_type
 
     def __repr__(self) -> str:
-        return f"EditChange(EditChange.{self.name(self.change_type).upper()}, {self.entry})"
+        return f"EditChange(EditChange.{self.name(self.change_type).upper()}, {self.pl_entry})"
 
     def __str__(self) -> str:
         action = self.name(self.change_type)
         success = "❌" if self.success is False else ""
 
-        return f"{success}{action} \"{self.entry.title}\""
+        return f"{success}{action} \"{self.pl_entry.entry}\""
 
     @property
     def symbol(self) -> str:
         return self.get_symbol(self.change_type)
 
     @classmethod
-    def added(cls, entry: PlaylistEntry):
-        return cls(EditChange.ADDED, entry=entry)
+    def added(cls, pl_entry: PlaylistEntry):
+        return cls(EditChange.ADDED, pl_entry=pl_entry)
 
     @classmethod
-    def removed(cls, entry: PlaylistEntry):
-        return cls(EditChange.REMOVED, entry=entry)
+    def removed(cls, pl_entry: PlaylistEntry):
+        return cls(EditChange.REMOVED, pl_entry=pl_entry)
 
     @classmethod
-    def edited(cls, entry: PlaylistEntry, changes: Dict[str, Any]):
-        return cls(EditChange.EDITED, entry=entry, changes=changes)
+    def edited(cls, pl_entry: PlaylistEntry, new_entry: PlayableEntry):
+        return cls(EditChange.EDITED, pl_entry=pl_entry, new_entry=new_entry)
 
     @classmethod
     def name(cls, change_type: int) -> str:
@@ -529,11 +493,11 @@ class EditChange:
     def apply(self, playlist: Playlist) -> bool:
         try:
             if self.change_type == self.ADDED:
-                playlist.add(self.entry)
+                playlist.add(self.pl_entry)
             elif self.change_type == self.REMOVED:
-                playlist.remove(self.entry)
+                playlist.remove(self.pl_entry)
             elif self.change_type == self.EDITED:
-                playlist.edit_entry(self.entry, self.changes)
+                self.pl_entry.replace(self.new_entry)
         except (KeyError, ValueError):
             self.success = False
             return False
@@ -544,14 +508,14 @@ class EditChange:
 
 class EditPlaylistProxy:
     _playlist: Playlist
-    _entries: List[PlaylistEntry]
+    _pl_entries: List[PlaylistEntry]
     _entry_map: Dict[PlaylistEntry, EditChange]
 
     _changes: Deque[EditChange]
 
     def __init__(self, playlist: Playlist):
         self._playlist = playlist
-        self._entries = playlist.entries.copy()
+        self._pl_entries = playlist.entries.copy()
         self._entry_map = {}
 
         self._changes = deque()
@@ -564,29 +528,29 @@ class EditPlaylistProxy:
         return getattr(self._playlist, item)
 
     @property
-    def entries(self) -> List[PlaylistEntry]:
-        return self._entries
+    def pl_entries(self) -> List[PlaylistEntry]:
+        return self._pl_entries
 
     @property
-    def entry_map(self) -> Dict[PlaylistEntry, EditChange]:
+    def pl_entry_map(self) -> Dict[PlaylistEntry, EditChange]:
         return self._entry_map
 
     def rebuild_entries(self):
-        entries = self._playlist.entries.copy()
+        pl_entries = self._playlist.entries.copy()
         self._entry_map.clear()
 
         for change in self._changes:
-            self._entry_map[change.entry] = change
+            self._entry_map[change.pl_entry] = change
             if change.change_type == change.ADDED:
-                bisect.insort_left(entries, change.entry)
+                bisect.insort_left(pl_entries, change.pl_entry)
             elif change.change_type == change.EDITED:
-                index = self.index_of(change.entry)
-                entries.pop(index)
-                entry = change.entry.copy()
-                entry.edit(**change.changes)
-                bisect.insort_left(entries, entry)
+                index = self.index_of(change.pl_entry)
+                pl_entries.pop(index)
+                entry = change.pl_entry.copy()
+                entry.replace(change.new_entry)
+                bisect.insort_left(pl_entries, entry)
 
-        self._entries = entries
+        self._pl_entries = pl_entries
 
     def undo(self) -> Optional[EditChange]:
         if self._changes:
@@ -605,90 +569,75 @@ class EditPlaylistProxy:
     def get_change(self, entry: PlaylistEntry) -> Optional[EditChange]:
         return self._entry_map.get(entry)
 
-    def find_change(self, change_type: int, entry) -> EditChange:
+    def find_change(self, change_type: int, pl_entry: PlaylistEntry) -> EditChange:
         for change in self._changes:
-            if change.change_type == change_type and change.entry == entry:
+            if change.change_type == change_type and change.pl_entry == pl_entry:
                 return change
-        raise KeyError(f"Couldn't find that change: {EditChange.name(change_type)} {entry}")
+        raise KeyError(f"Couldn't find that change: {EditChange.name(change_type)} {pl_entry}")
 
     def resort_entry(self, entry: PlaylistEntry):
         index = self.index_of(entry)
-        self._entries.pop(index)
-        bisect.insort_left(self._entries, entry)
+        self._pl_entries.pop(index)
+        bisect.insort_left(self._pl_entries, entry)
 
     def index_of(self, entry: PlaylistEntry) -> int:
-        return self._entries.index(entry)
+        return self._pl_entries.index(entry)
 
     def search_entry(self, target: str, *, threshold: float = .2) -> Optional[PlaylistEntry]:
-        _entry = None
-        _similarity = 0
-        for entry in self._entries:
-            similarity = utils.similarity(target, (entry.title, entry.artist, entry.song_title), lower=True)
-            if similarity > _similarity:
-                _entry = entry
-                _similarity = similarity
+        return search_entry(self._pl_entries, target, threshold=threshold)
 
-        if _similarity <= threshold:
-            return None
-
-        return _entry
-
-    def add_entry(self, entry: Union[BaseEntry, PlaylistEntry]) -> PlaylistEntry:
-        if not isinstance(entry, PlaylistEntry):
-            entry = PlaylistEntry(entry)
-
-        if entry in self._entries:
-            raise KeyError(f"{entry} already in {self._playlist}")
+    def add_entry(self, entry: PlayableEntry) -> PlaylistEntry:
+        pl_entry = PlaylistEntry(entry)
 
         self._undo_stack.clear()
         try:
-            change = self.find_change(EditChange.REMOVED, entry)
+            change = self.find_change(EditChange.REMOVED, pl_entry)
         except KeyError:
-            change = EditChange.added(entry)
+            change = EditChange.added(pl_entry)
             self._changes.append(change)
-            self._entry_map[entry] = change
+            self._entry_map[pl_entry] = change
         else:
             self._changes.remove(change)
-            self._entry_map.pop(entry)
+            self._entry_map.pop(pl_entry)
 
-        bisect.insort_left(self._entries, entry)
-        return entry
+        bisect.insort_left(self._pl_entries, pl_entry)
+        return pl_entry
 
-    def remove_entry(self, entry: Union[int, PlaylistEntry]) -> PlaylistEntry:
-        if isinstance(entry, int):
-            entry = self._entries[entry]
+    def remove_entry(self, pl_entry: Union[int, PlaylistEntry]) -> PlaylistEntry:
+        if isinstance(pl_entry, int):
+            pl_entry = self._pl_entries[pl_entry]
 
-        if entry not in self._entries:
-            raise KeyError(f"{entry} not in {self._playlist}")
+        if pl_entry not in self._pl_entries:
+            raise KeyError(f"{pl_entry} not in {self._playlist}")
 
         self._undo_stack.clear()
         try:
-            change = self.find_change(EditChange.ADDED, entry)
+            change = self.find_change(EditChange.ADDED, pl_entry)
         except KeyError:
-            change = EditChange.removed(entry)
+            change = EditChange.removed(pl_entry)
             self._changes.append(change)
-            self._entry_map[entry] = change
+            self._entry_map[pl_entry] = change
         else:
             self._changes.remove(change)
-            self._entry_map.pop(entry)
+            self._entry_map.pop(pl_entry)
 
-        return entry
+        return pl_entry
 
-    def edit_entry(self, entry: [int, PlaylistEntry], changes: Dict[str, Any]) -> PlaylistEntry:
-        if isinstance(entry, int):
-            index = entry
-            entry = self._entries[entry]
+    def edit_entry(self, pl_entry: [int, PlaylistEntry], new_entry: PlayableEntry) -> PlaylistEntry:
+        if isinstance(pl_entry, int):
+            index = pl_entry
+            pl_entry = self._pl_entries[pl_entry]
         else:
-            index = self.index_of(entry)
+            index = self.index_of(pl_entry)
 
         self._undo_stack.clear()
-        change = EditChange.edited(entry, changes)
+        change = EditChange.edited(pl_entry, new_entry)
         self._changes.append(change)
-        self._entry_map[entry] = change
+        self._entry_map[pl_entry] = change
 
-        edited_entry = entry.copy()
-        edited_entry.edit(**changes)
-        self._entries[index] = edited_entry
+        edited_entry = pl_entry.copy()
+        edited_entry.replace(new_entry)
+        self._pl_entries[index] = edited_entry
         self.resort_entry(edited_entry)
 
         return edited_entry
@@ -722,7 +671,7 @@ class EditPlaylistProxy:
         changelog = []
         for change in changes:
             symbol = change.symbol
-            text = f" {symbol} \"{change.entry.title}\""
+            text = f" {symbol} \"{change.pl_entry.entry}\""
             changelog.append(text_utils.shorten(text, width, "...\""))
 
         return "\n".join(changelog)
@@ -739,9 +688,13 @@ class PlaylistManager:
 
         self._playlists = {}
         for gpl_id in self.storage:
-            playlist = self.storage[gpl_id]
-            playlist.manager = self
-            self._playlists[playlist.gpl_id] = playlist
+            try:
+                playlist = self.storage[gpl_id]
+            except Exception:
+                log.exception(f"Couldn't load playlist {gpl_id}")
+            else:
+                playlist.manager = self
+                self._playlists[playlist.gpl_id] = playlist
 
         log.debug(f"playlist manager ready ({len(self)} loaded)")
 
@@ -763,11 +716,7 @@ class PlaylistManager:
         storage_location = storage_location.absolute()
         shelf = DbfilenameShelf(str(storage_location))
         inst = cls(bot, shelf)
-        inst.init()
         return inst
-
-    def init(self):
-        pass
 
     def close(self):
         log.info("closing playlists")

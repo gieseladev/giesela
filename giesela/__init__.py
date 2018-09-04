@@ -5,7 +5,7 @@ from .entry import *
 from .errors import *
 from .extractor import Extractor
 from .player import GieselaPlayer, GieselaPlayerState, PlayerManager
-from .playlists import EditPlaylistProxy, Playlist, PlaylistEntry, PlaylistManager
+from .playlists import EditPlaylistProxy, LoadedPlaylistEntry, Playlist, PlaylistEntry, PlaylistManager
 from .radio import RadioStation, RadioStationManager
 from .shell import GieselaShell
 from .signals import *

@@ -7,7 +7,7 @@ from typing import Deque, Iterable, Iterator, Optional, TYPE_CHECKING, Union
 
 from discord import User
 
-from .entry import HistoryEntry, PlayableEntry, PlayerEntry, QueueEntry
+from .entry import CanWrapEntryType, HistoryEntry, PlayableEntry, PlayerEntry, QueueEntry
 from .lib import EventEmitter, has_events
 
 if TYPE_CHECKING:
@@ -89,7 +89,7 @@ class EntryQueue(EventEmitter):
 
         self.emit("history_push", queue=self, entry=entry)
 
-    def add_entries(self, entries: Iterable[PlayableEntry], requester: User, *, front: bool = False):
+    def add_entries(self, entries: Iterable[CanWrapEntryType], requester: User, *, front: bool = False):
         entries = list(self.wrap_queue_entry(entry, requester) for entry in entries)
         if front:
             self.entries.extendleft(entries)
@@ -98,7 +98,7 @@ class EntryQueue(EventEmitter):
 
         self.emit("entries_added", queue=self, entries=entries)
 
-    def add_entry(self, entry: PlayableEntry, requester: User, *, placement: int = None) -> QueueEntry:
+    def add_entry(self, entry: CanWrapEntryType, requester: User, *, placement: int = None) -> QueueEntry:
         entry = self.wrap_queue_entry(entry, requester)
         if placement is not None:
             self.entries.insert(placement, entry)

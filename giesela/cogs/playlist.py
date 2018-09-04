@@ -10,7 +10,7 @@ from discord import Attachment, Colour, Embed, File, User
 from discord.ext import commands
 from discord.ext.commands import BadArgument, Context, Converter, view as string_view
 
-from giesela import BasicEntry, Giesela, Playlist, PlaylistManager, utils
+from giesela import Giesela, LoadedPlaylistEntry, Playlist, PlaylistManager, utils
 from giesela.lib import help_formatter
 from giesela.ui import EmbedPaginator, EmbedViewer, ItemPicker, PromptYesNo, VerticalTextViewer
 from giesela.ui.custom import PlaylistBuilder, PlaylistViewer
@@ -90,7 +90,7 @@ class PlaylistCog:
 
     async def play_playlist(self, ctx: Context, playlist: Playlist):
         player = await self.player_cog.get_player(ctx)
-        await playlist.play(player.queue, author=ctx.author)
+        await playlist.play(player.queue, requester=ctx.author)
         await ctx.send("Loaded playlist", embed=playlist_embed(playlist))
 
     async def _playlist_builder(self, ctx: Context, playlist: Playlist):
@@ -350,7 +350,7 @@ class PlaylistCog:
         for playlist in self.playlist_manager:
             description = playlist.description or "No description"
             paginator.add_field(playlist.name, f"by **{playlist.author.name}**\n"
-                                               f"{len(playlist)} entries ({utils.format_time(playlist.duration)} long)\n"
+                                               f"{len(playlist)} entries ({utils.format_time(playlist.total_duration)} long)\n"
                                                f"\n"
                                                f"{description}")
 
@@ -456,32 +456,26 @@ class PlaylistCog:
         await ensure_user_can_edit_playlist(playlist, ctx)
 
         player = await self.player_cog.get_player(ctx)
-        entry = player.current_entry
-        if not entry:
+        player_entry = player.current_entry
+        if not player_entry:
             raise commands.CommandError("There's nothing playing right now")
 
-        basic_entry = entry.entry
+        entry = player_entry.entry
 
-        if not isinstance(basic_entry, BasicEntry):
-            raise commands.CommandError(f"{basic_entry} can't be added to a playlist")
-
-        if basic_entry in playlist:
-            raise commands.CommandError(f"**{basic_entry}** is already in this playlist!")
-
-        similar_entry = playlist.search_entry(str(basic_entry))
-        if similar_entry:
+        similar_pl_entry = playlist.search_entry(str(entry))
+        if similar_pl_entry:
             prompt = PromptYesNo(ctx.channel, user=ctx.author,
-                                 text=f"\"{basic_entry}\" might already be in this playlist (\"{similar_entry.title}\"), "
+                                 text=f"\"{entry}\" might already be in this playlist (\"{similar_pl_entry.entry}\"), "
                                       f"are you sure you want to add it again?")
             if not await prompt:
                 await ctx.message.delete()
                 return
 
-        playlist_entry = playlist.add(basic_entry)
-        if not entry.has_wrapper():
-            pass
+        playlist_entry = playlist.add(entry)
+        if not player_entry.has_wrapper(LoadedPlaylistEntry):
+            player_entry.lowest_wrapper.add_wrapper(LoadedPlaylistEntry.create(playlist_entry))
 
-        em = Embed(title=f"Added **{basic_entry}**", colour=Colour.green())
+        em = Embed(title=f"Added **{entry}**", colour=Colour.green())
         add_playlist_footer(em, playlist)
 
         await ctx.send(embed=em)
@@ -490,29 +484,27 @@ class PlaylistCog:
     async def playlist_quickremove(self, ctx: Context, *, playlist: UnquotedStr = None):
         """Remove the current entry from a playlist."""
         player = await self.player_cog.get_player(ctx)
-        entry = player.current_entry
-        if not entry:
+        player_entry = player.current_entry
+        if not player_entry:
             raise commands.CommandError("There's nothing playing right now")
 
         if playlist:
             playlist = self.find_playlist(playlist)
+            # TODO find playlist entry
+            raise commands.CommandError("Not implemented currently")
         else:
-            playlist_wrapper = entry.get_wrapper()  # TODO playlist wrapper
-            if not playlist_wrapper:
+            playlist = player_entry.get("playlist", None)
+            if not playlist:
                 raise commands.CommandError("This entry isn't part of a playlist."
                                             "You cannot remove it unless you specify the name!")
-            playlist = playlist_wrapper.playlist
+            playlist_entry = player_entry.get("playlist_entry")
 
         await ensure_user_can_edit_playlist(playlist, ctx)
 
-        basic_entry: BasicEntry = entry.entry
+        playlist.remove(playlist_entry)
+        player_entry.remove_wrapper(LoadedPlaylistEntry)
 
-        if basic_entry not in playlist:
-            raise commands.CommandError(f"{entry} isn't in this playlist!")
-
-        playlist.remove(basic_entry)
-        entry.remove_wrapper()  # TODO remove wrapper
-
+        entry = playlist_entry.entry
         em = Embed(title=f"Removed **{entry}**", colour=Colour.green())
         add_playlist_footer(em, playlist)
 

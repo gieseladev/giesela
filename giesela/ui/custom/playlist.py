@@ -3,13 +3,13 @@ import asyncio
 import contextlib
 import logging
 import textwrap
-from typing import List, TYPE_CHECKING, Tuple
+from typing import List, Optional, TYPE_CHECKING, Tuple
 
 from discord import Colour, Embed, Guild, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import BaseEntry, EditPlaylistProxy, Giesela, Optional, Playlist, PlaylistEntry, utils
+from giesela import EditPlaylistProxy, Giesela, Playlist, PlaylistEntry, utils
 from .entry_editor import EntryEditor
 from ..help import AutoHelpEmbed
 from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
@@ -56,21 +56,21 @@ class _PlaylistEmbed(VerticalTextViewer, metaclass=abc.ABCMeta):
         self.player_cog = self.bot.cogs["Player"]
 
     @property
-    def entries(self) -> List[PlaylistEntry]:
+    def pl_entries(self) -> List[PlaylistEntry]:
         return self.playlist.entries
 
     @property
     def index_padding(self) -> int:
-        return len(str(len(self.entries)))
+        return len(str(len(self.pl_entries)))
 
     @property
     def total_lines(self) -> int:
-        return len(self.entries)
+        return len(self.pl_entries)
 
     async def get_line(self, line: int) -> str:
-        entry = self.entries[line]
+        pl_entry = self.pl_entries[line]
         index = str(line + 1).rjust(self.index_padding, "0")
-        title = textwrap.shorten(entry.title, 50)
+        title = textwrap.shorten(str(pl_entry.entry), 50)
 
         return f"`{index}.` {title}"
 
@@ -103,7 +103,7 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
 
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
         super().__init__(channel, user, **kwargs)
-        self.downloader = self.player_cog.downloader
+        self.extractor = self.player_cog.extractor
         self.playlist_editor = self.playlist.edit()
 
         self._highlighted_line = None
@@ -118,8 +118,8 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         return "Idk what to write here so I'm just using this for now, okay? okay."
 
     @property
-    def entries(self) -> List[PlaylistEntry]:
-        return self.playlist_editor.entries
+    def pl_entries(self) -> List[PlaylistEntry]:
+        return self.playlist_editor.pl_entries
 
     @property
     def embed_frame(self) -> Embed:
@@ -139,13 +139,13 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         return embed
 
     async def get_line(self, line: int) -> str:
-        entry = self.entries[line]
+        pl_entry = self.pl_entries[line]
         index = str(line + 1).rjust(self.index_padding, "0")
-        title = textwrap.shorten(entry.title, 50)
+        title = textwrap.shorten(str(pl_entry.entry), 50)
         if self._highlighted_line == line:
             title = f"**{title}**"
 
-        change = self.playlist_editor.get_change(entry)
+        change = self.playlist_editor.get_change(pl_entry)
         symbol = f"{change.symbol} " if change else ""
 
         return f"{symbol}`{index}.` {title}"
@@ -177,33 +177,6 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
 
         await self.show_window()
 
-    async def _add_playlist(self, entries: List[str]) -> List[BaseEntry]:
-        tasks = self.downloader.get_entries_from_urls(entries)
-        _total_tasks = len(tasks)
-        _show_task = None
-        entries = []
-
-        async with self.processing("Preparing...", title="Processing Playlist"):
-            for i, task in enumerate(tasks, 1):
-                try:
-                    entry = await task
-                except asyncio.CancelledError:
-                    break
-                except Exception:
-                    log.exception("Something went wrong while loading playlist")
-                    continue
-
-                entries.append(entry)
-
-                if not _show_task or _show_task.done():
-                    progress = str(round(100 * i / _total_tasks))
-                    _show_task = asyncio.ensure_future(self.update_processing(value=f"{progress}% done"))
-
-            if _show_task:
-                await _show_task
-
-        return entries
-
     @emoji_handler("💾", pos=999)
     async def save_changes(self, *_) -> str:
         """Close and save"""
@@ -221,13 +194,13 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
     async def edit_entry(self, ctx: Context, index: int):
         """Edit an entry"""
         index -= 1
-        if not 0 <= index < len(self.entries):
-            raise commands.CommandError(f"Index out of bounds  ({index + 1} not in 1 - {len(self.entries)})")
-        entry = self.entries[index]
-        editor = EntryEditor(ctx.channel, ctx.author, bot=self.bot, entry=entry.get_entry(author=ctx.author))
+        if not 0 <= index < len(self.pl_entries):
+            raise commands.CommandError(f"Index out of bounds  ({index + 1} not in 1 - {len(self.pl_entries)})")
+        entry = self.pl_entries[index]
+        editor = EntryEditor(ctx.channel, ctx.author, bot=self.bot, entry=entry.entry)
         new_entry = await editor.display()
         if new_entry:
-            self.playlist_editor.edit_entry(entry, new_entry.to_dict())
+            self.playlist_editor.edit_entry(entry, new_entry)
             await self.show_line(index)
 
     @commands.command("add")
@@ -235,19 +208,21 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         """Add an entry"""
         query = " ".join(query)
 
-        async with self.processing(f"\"{query}\"", "Searching..."):
-            entry = await self.downloader.get_entry_from_query(query)
+        async with self.processing(f"\"{query}\""):
+            result = await self.extractor.get(query)
 
-        if isinstance(entry, list):
-            entries = await self._add_playlist(entry)
-            for entry in entries:
+        if not result:
+            raise commands.CommandError("No results found")
+
+        if isinstance(result, list):
+            for entry in result:
                 self.playlist_editor.add_entry(entry)
             await self.show_window()
         else:
             try:
-                entry = self.playlist_editor.add_entry(entry)
+                entry = self.playlist_editor.add_entry(result)
             except KeyError:
-                raise commands.CommandError(f"\"{entry.title}\" is already in the playlist")
+                raise commands.CommandError(f"\"{result}\" is already in the playlist")
             await self.show_line(self.playlist_editor.index_of(entry))
 
     @commands.command("remove", aliases=["rm"])
@@ -292,7 +267,7 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
                 raise commands.CommandError(f"Couldn't find entry {target}")
             line = self.playlist_editor.index_of(entry)
 
-        if line >= len(self.entries):
+        if line >= len(self.pl_entries):
             raise commands.CommandError("Line number too big!")
 
         self._highlighted_line = line

@@ -27,7 +27,7 @@ class TrackEndReason(enum.Enum):
 
     @property
     def start_next(self) -> bool:
-        return self in (TrackEndReason.FINISHED, TrackEndReason.LOAD_FAILED)
+        return self in {TrackEndReason.FINISHED, TrackEndReason.LOAD_FAILED}
 
 
 @dataclass
@@ -93,6 +93,10 @@ class TrackLoadType(enum.Enum):
     SEARCH_RESULT = "SEARCH_RESULT"
     NO_MATCHES = "NO_MATCHES"
     LOAD_FAILED = "LOAD_FAILED"
+
+    @property
+    def has_results(self) -> bool:
+        return self not in {TrackLoadType.NO_MATCHES, TrackLoadType.LOAD_FAILED}
 
 
 class TrackPlaylistInfo(NamedTuple):
