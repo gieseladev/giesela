@@ -16,6 +16,7 @@ if TYPE_CHECKING:
 __all__ = ["PlayableEntry", "BaseEntry",
            "ChapterData", "SpecificChapterData", "HasChapters",
            "BasicEntry", "ChapterEntry", "RadioEntry",
+           "CanWrapEntryType",
            "EntryWrapper", "PlayerEntry", "QueueEntry", "HistoryEntry"]
 
 log = logging.getLogger(__name__)
@@ -23,7 +24,12 @@ log = logging.getLogger(__name__)
 _DEFAULT = object()
 
 
-class PlayableEntry(metaclass=abc.ABCMeta):
+class Reducible(metaclass=abc.ABCMeta):
+    def to_dict(self) -> Dict[str, Any]:
+        return {}
+
+
+class PlayableEntry(Reducible, metaclass=abc.ABCMeta):
     start_position: Optional[float]
     end_position: Optional[float]
 
@@ -101,11 +107,18 @@ class PlayableEntry(metaclass=abc.ABCMeta):
         return copy.copy(self)
 
     def to_dict(self) -> Dict[str, Any]:
-        return dict(type=type(self).__name__, track=self._track, uri=self._uri, seekable=self._is_seekable,
-                    duration=self._duration, start_position=self.start_position, end_position=self.end_position)
+        data = super().to_dict()
+        data.update(type=type(self).__name__, track=self._track, uri=self._uri, seekable=self._is_seekable)
+        if self._duration:
+            data["duration"] = self._duration
+        if self.start_position is not None:
+            data["start_position"] = self.start_position
+        if self.end_position is not None:
+            data["end_position"] = self.end_position
+        return data
 
 
-class BaseEntry(metaclass=abc.ABCMeta):
+class BaseEntry(Reducible, metaclass=abc.ABCMeta):
     title: str
     artist: Optional[str]
     cover: Optional[str]
@@ -123,6 +136,12 @@ class BaseEntry(metaclass=abc.ABCMeta):
             return self.artist, self.title
         return self.title
 
+    def to_dict(self) -> Dict[str, Any]:
+        data = super().to_dict()
+        pairs = (("title", self.title), ("artist", self.artist), ("cover", self.cover), ("artist_image", self.artist_image), ("album", self.album))
+        data.update((key, value for key, value in pairs if value))
+        return data
+
 
 class ChapterData(BaseEntry):
 
@@ -132,10 +151,6 @@ class ChapterData(BaseEntry):
         self.cover = cover
         self.artist_image = artist_image
         self.album = album
-
-    def to_dict(self) -> Dict[str, Any]:
-        return dict(title=self.title,
-                    artist=self.artist, cover=self.cover, artist_image=self.artist_image, album=self.album)
 
 
 class SpecificChapterData(ChapterData):
@@ -185,11 +200,6 @@ class BasicEntry(BaseEntry, PlayableEntry):
         kwargs = super().kwargs_from_track_info(track, info)
         kwargs.update(title=info.title, artist=info.author)
         return kwargs
-
-    def to_dict(self):
-        data = super().to_dict()
-        data.update(title=self.title, artist=self.artist, cover=self.cover, artist_image=self.artist_image, album=self.album)
-        return data
 
 
 class ChapterEntry(BasicEntry, HasChapters):
@@ -271,11 +281,10 @@ class RadioEntry(BaseEntry, PlayableEntry, HasChapters):
 
 
 class EntryWrapper(metaclass=abc.ABCMeta):
-    def __init__(self, *, entry: Union[PlayableEntry, "EntryWrapper"], **_):
+    def __init__(self, *, entry: "CanWrapEntryType", **_):
         self._entry = entry
 
     def __repr__(self) -> str:
-
         return f"{type(self).__name__} -> {repr(self.wrapped)}"
 
     @property
@@ -286,7 +295,7 @@ class EntryWrapper(metaclass=abc.ABCMeta):
             return self._entry
 
     @property
-    def wrapped(self) -> Union[PlayableEntry, "EntryWrapper"]:
+    def wrapped(self) -> "CanWrapEntryType":
         return self._entry
 
     def add_wrapper(self, wrapper: Type["EntryWrapper"], **kwargs):
@@ -336,6 +345,9 @@ class EntryWrapper(metaclass=abc.ABCMeta):
         else:
             data = dict(entry=self._entry.to_dict())
         return data
+
+
+CanWrapEntryType = Union[EntryWrapper, PlayableEntry]
 
 
 class PlayerEntry(EntryWrapper):
