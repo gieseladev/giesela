@@ -12,7 +12,7 @@ from aiohttp import ClientSession
 from giesela.lib.api.imgur import upload_playlist_cover
 
 if TYPE_CHECKING:
-    from giesela.playlists import Playlist
+    from giesela.playlist import Playlist
 
 log = logging.getLogger(__name__)
 
