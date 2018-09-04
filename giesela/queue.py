@@ -6,17 +6,13 @@ from typing import Deque, Iterable, Iterator, Optional, TYPE_CHECKING, Union
 
 from discord import User
 
-from .entry import BaseEntry, HistoryEntry, PlayableEntry, PlayerEntry, QueueEntry
+from .entry import HistoryEntry, PlayableEntry, PlayerEntry, QueueEntry
 from .lib import EventEmitter, has_events
 
 if TYPE_CHECKING:
     from giesela import GieselaPlayer
 
 log = logging.getLogger(__name__)
-
-
-def wrap_queue_entry(entry: PlayableEntry, requester: User) -> QueueEntry:
-    return QueueEntry(entry=entry, requester=requester, request_timestamp=time.time())
 
 
 @has_events("shuffle", "clear", "move_entry", "replay", "history_push", "playlist_load", "entries_added", "entry_added", "entry_removed")
@@ -47,6 +43,9 @@ class EntryQueue(EventEmitter):
             item = abs(item) - 1
             return self.history[item]
 
+    def wrap_queue_entry(self, entry: PlayableEntry, requester: User) -> QueueEntry:
+        return QueueEntry(entry=entry, queue=self, requester=requester, request_timestamp=time.time())
+
     def shuffle(self):
         random.shuffle(self.entries)
         self.emit("shuffle", queue=self)
@@ -55,9 +54,9 @@ class EntryQueue(EventEmitter):
         self.entries.clear()
         self.emit("clear", queue=self)
 
-    def move(self, from_index: int, to_index: int = None) -> Optional[QueueEntry]:
+    def move(self, from_index: int, to_index: int = 0) -> QueueEntry:
         if not all(0 <= x < len(self) for x in (from_index, to_index)):
-            return None
+            raise ValueError(f"indices must be in range 0-{len(self)} ({from_index}, {to_index})")
 
         move_entry = self.entries.pop(from_index)
         if to_index:
@@ -78,7 +77,7 @@ class EntryQueue(EventEmitter):
                 return None
             entry = self.history.pop(index)
 
-        entry = wrap_queue_entry(entry.entry, requester)
+        entry = self.wrap_queue_entry(entry.entry, requester)
         self.entries.appendleft(entry)
         self.emit("replay", queue=self, entry=entry, index=index or 0)
         return entry
@@ -89,40 +88,17 @@ class EntryQueue(EventEmitter):
 
         self.emit("history_push", queue=self, entry=entry)
 
-    # async def add_playlist(self, playlist: "Playlist", **meta):
-    #     entries = playlist.entries.copy()
-    #     random.shuffle(entries)
-    #     for playlist_entry in entries:
-    #         try:
-    #             entry = playlist_entry.get_entry(**meta)
-    #         except BrokenEntryError:
-    #             continue
-    #         self.add_entry(entry)
-    #     WebieselaServer.send_player_information(self.player.channel.guild.id)
-    #     self.emit("playlist_load", queue=self)
-
-    # async def add_radio_entry(self, station: RadioStation, now: bool = False, **meta) -> RadioStationEntry:
-    #     if station.has_song_data:
-    #         song_data = await station.get_song_data()
-    #         entry = RadioSongEntry(station, song_data, **meta)
-    #     else:
-    #         entry = RadioStationEntry(station, **meta)
-    #
-    #     if now:
-    #         await self.player.play(entry)
-    #     else:
-    #         self.add_entry(entry)
-    #
-    #     return entry
-
-    def add_entries(self, entries: Iterable[PlayableEntry], requester: User):
-        entries = list(wrap_queue_entry(entry, requester) for entry in entries)
-        self.entries.extend(entries)
+    def add_entries(self, entries: Iterable[PlayableEntry], requester: User, *, front: bool = False):
+        entries = list(self.wrap_queue_entry(entry, requester) for entry in entries)
+        if front:
+            self.entries.extendleft(entries)
+        else:
+            self.entries.extend(entries)
 
         self.emit("entries_added", queue=self, entries=entries)
 
-    def add_entry(self, entry: BaseEntry, requester: User, *, placement: int = None) -> QueueEntry:
-        entry = wrap_queue_entry(entry, requester)
+    def add_entry(self, entry: PlayableEntry, requester: User, *, placement: int = None) -> QueueEntry:
+        entry = self.wrap_queue_entry(entry, requester)
         if placement is not None:
             self.entries.insert(placement, entry)
         else:
@@ -149,10 +125,13 @@ class EntryQueue(EventEmitter):
         if self.entries:
             return self.entries.popleft()
 
-    def seconds_until(self, index: int, *, with_current: bool = True) -> float:
+    def time_until(self, index: int, *, with_current: bool = True) -> float:
         estimated_time = sum(e.entry.duration for e in self.entries[:index])
 
         if with_current and self.player.current_entry:
             estimated_time += self.player.current_entry.time_left
 
         return estimated_time
+
+    def total_duration(self) -> float:
+        return sum(entry.entry.duration for entry in self.entries)

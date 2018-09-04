@@ -1,13 +1,13 @@
 import random
 import time
 
+from discord import Embed
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, GieselaPlayer
-from giesela.ui import VerticalTextViewer
+from giesela import Giesela, GieselaPlayer, utils
+from giesela.ui import VerticalTextViewer, text as text_utils
 from giesela.ui.custom import EntrySearchUI
-from giesela.utils import (format_time, nice_cut)
 from .player import Player
 
 LOAD_ORDER = 1
@@ -24,6 +24,11 @@ class QueueBase:
         self.get_player = self.player_cog.get_player
 
 
+def pad_index(index: int, padding: int) -> str:
+    padded_index = text_utils.keep_whitespace(f"{index}.".ljust(padding))
+    return text_utils.wrap(padded_index, "`")
+
+
 async def _play_cmd(ctx: Context, player: GieselaPlayer, target: str, placement: int = None):
     entry = await player.extractor.get_entry(target)
     print(entry)
@@ -31,22 +36,6 @@ async def _play_cmd(ctx: Context, player: GieselaPlayer, target: str, placement:
 
 
 class EnqueueCog(QueueBase):
-
-    @commands.command()
-    async def stream(self, ctx: Context, url: str):
-        """Enqueue a media stream.
-
-        This could mean an actual stream like Twitch, Youtube Gaming or even a radio stream, or simply streaming
-        media without predownloading it.
-        """
-        player = await self.get_player(ctx)
-        song_url = url.strip("<>")
-
-        async with ctx.typing():
-            entry = await player.downloader.get_stream_entry(song_url, author=ctx.author)
-            player.queue.add_entry(entry)
-        await ctx.send(":+1:")
-
     async def _play_cmd(self, ctx: Context, url: str, placement: int = None):
         player = await self.get_player(ctx)
 
@@ -93,23 +82,29 @@ class EnqueueCog(QueueBase):
 
 class ManipulateCog(QueueBase):
 
-    # @commands.command()
-    # async def remove(self, ctx: Context, index: int):
-    #     """Remove an entry from the queue."""
-    #     player = await self.get_player(ctx)
-    #
-    #     if not player.queue.entries:
-    #         raise commands.CommandError("There are no entries in the queue!")
-    #
-    #     index -= 1
-    #
-    #     if not 0 <= index < len(player.queue.entries):
-    #         raise commands.CommandError("This index cannot be found in the queue")
-    #
-    #     title = player.queue.entries[index].title
-    #     del player.queue.entries[index]
-    #     WebieselaServer.send_player_information(ctx.guild.id)
-    #     await ctx.send(f"Removed **{title}** from the queue")
+    @commands.group(invoke_without_command=True, aliases=["rm"])
+    async def remove(self, ctx: Context, index: int):
+        """Remove an entry from the queue."""
+        player = await self.get_player(ctx)
+
+        index -= 1
+
+        if not 0 <= index < len(player.queue.entries):
+            raise commands.CommandError("This index cannot be found in the queue")
+
+        entry = player.queue.remove(index)
+        await ctx.send(f"Removed **{entry.entry}** from the queue")
+
+    @remove.command("last")
+    async def remove_last(self, ctx: Context):
+        """Remove the last entry"""
+        player = await self.get_player(ctx)
+        if not player.queue.entries:
+            raise commands.CommandError("No entries in the queue")
+
+        index = len(player.queue) - 1
+        entry = player.queue.remove(index)
+        await ctx.send(f"Removed **{entry.entry}** from the queue")
 
     @commands.command()
     async def replay(self, ctx: Context, index: str = None):
@@ -147,37 +142,35 @@ class ManipulateCog(QueueBase):
 
     @commands.command()
     async def shuffle(self, ctx: Context):
-        """Shuffle the queue."""
+        """Shuffle the queue"""
         player = await self.get_player(ctx)
         player.queue.shuffle()
-        await ctx.send(":ok_hand:")
+        await ctx.send("Shuffled the queue")
 
     @commands.command()
     async def clear(self, ctx: Context):
-        """Clear the queue."""
+        """Clear the queue"""
         player = await self.get_player(ctx)
         player.queue.clear()
-        await ctx.send(":put_litter_in_its_place:")
+        await ctx.send("Cleared the queue")
 
     @commands.command()
     async def skip(self, ctx: Context, skip: str = None):
-        """Skip the current song.
-
-        When given the keyword "all", skips all timestamped-entries in the current timestamp-entry.
-        """
+        """Skip the current song"""
         player = await self.get_player(ctx)
 
         if player.is_stopped:
             raise commands.CommandError("Can't skip! The player is not playing!")
 
         skip_to_next = skip == "all"
+        # TODO skip chapter
         await player.skip()
 
     @commands.command()
     async def promote(self, ctx: Context, position: int = None):
-        """Promote an entry.
+        """Move an entry to the front
 
-        If you don-t specify a position, it promotes the last song.
+        If not position specified, promote the last song.
         """
         player = await self.get_player(ctx)
 
@@ -186,69 +179,83 @@ class ManipulateCog(QueueBase):
 
         if position is not None:
             position -= 1
-            if not 0 < position < len(player.queue.entries):
+            if position == 0:
+                raise commands.CommandError("Doesn't really make sense to promote an entry which is already at the front of the queue, eh?")
+            elif not 0 <= position < len(player.queue):
                 raise commands.CommandError("Index out of range")
-            entry = player.queue.promote_position(position)
+            entry = player.queue.move(position)
         else:
-            entry = player.queue.promote_last()
+            entry = player.queue.move(len(player.queue) - 1)
 
-        await ctx.send(f"Promoted **{entry.title}** to the :top: of the queue.")
+        await ctx.send(f"Promoted **{entry.entry}**")
 
     @commands.command()
     async def move(self, ctx: Context, from_pos: int, to_pos: int):
-        """Move an entry."""
+        """Move an entry"""
         player = await self.get_player(ctx)
 
         from_index = from_pos - 1
         to_index = to_pos - 1
 
-        queue_length = len(player.queue.entries)
+        queue_length = len(player.queue)
 
         if not 0 <= from_index < queue_length:
-            raise commands.CommandError("`from_pos` must be between 1 and {}".format(queue_length))
+            raise commands.CommandError(f"`from_pos` must be between 1 and {queue_length}")
 
         if not 0 <= to_index < queue_length:
-            raise commands.CommandError("`to_pos` must be between 1 and {}".format(queue_length))
+            raise commands.CommandError(f"`to_pos` must be between 1 and {queue_length}")
 
         entry = player.queue.move(from_index, to_index)
-        await ctx.send(f"Moved **{entry.title}** from position `{from_pos}` to `{to_pos}`.")
+        await ctx.send(f"Moved **{entry.entry}** from position `{from_pos}` to `{to_pos}`.")
 
 
 class DisplayCog(QueueBase):
 
+    async def _show_queue_entry_info(self, ctx: Context, index: int):
+        player = await self.get_player(ctx)
+        index -= 1
+
+        if not 0 <= index < len(player.queue):
+            raise commands.CommandError(f"Index {index + 1} not in queue")
+
+        entry = player.queue.entries[index]
+        # TODO more information and to the same for history
+        em = Embed(title=str(entry.entry), timestamp=entry.request_timestamp)
+
+        em.add_field(name="Requested by", value=entry.requester.mention)
+
+        waiting_for = utils.format_time(time.time() - entry.request_timestamp)
+        em.add_field(name="Waiting For", value=waiting_for)
+
+        time_until = utils.format_time(player.queue.time_until(index))
+        em.add_field(name="Playing in", value=time_until)
+
+        await ctx.send(embed=em)
+
     @commands.command()
-    async def queue(self, ctx: Context):
-        """Display the queue."""
+    async def queue(self, ctx: Context, index: int = None):
+        """Show the queue"""
+        if index is not None:
+            await self._show_queue_entry_info(ctx, index)
+            return
+
         player = await self.get_player(ctx)
 
         lines = []
+        index_padding = len(str(len(player.queue.entries))) + 1
 
-        if player.current_entry and isinstance(player.current_entry):
-            sub_queue = player.current_entry.sub_queue
-            sub_queue = [sub_entry for sub_entry in sub_queue if sub_entry["start"] >= player.progress]
-            for item in sub_queue:
-                lines.append(
-                    "            ►`{}.` **{}**".format(
-                        item["index"] + 1,
-                        nice_cut(item["name"], 35)
-                    )
-                )
+        for ind, entry in enumerate(player.queue.entries, 1):
+            index = pad_index(ind, index_padding)
+            basic_entry = entry.entry
 
-        for i, item in enumerate(player.queue.entries, 1):
-            origin_text = ""
-            if "playlist" in item.meta:
-                origin_text = "from playlist **{}**".format(item.meta["playlist"].name)
-            elif "author" in item.meta:
-                origin_text = "by **{}**".format(item.meta["author"].name)
-
-            lines.append("`{}.` **{}** {}".format(i, nice_cut(item.title, 40), origin_text))
+            # TODO limit length
+            line = f"{index} **{basic_entry}**"
+            lines.append(line)
 
         if not lines:
             raise commands.CommandError("No entries in the queue")
 
-        total_time = sum([entry.duration for entry in player.queue.entries])
-        if player.current_entry:
-            total_time += player.current_entry.duration - player.progress
+        total_duration = utils.format_time(player.queue.total_duration(), True, 5, 2)
 
         frame = {
             "title": "Queue",
@@ -256,7 +263,7 @@ class DisplayCog(QueueBase):
                 "name": "{progress_bar}"
             },
             "footer": {
-                "text": f"Total duration: {format_time(total_time, True, 5, 2)}"
+                "text": f"Total duration: {total_duration}"
 
             }
         }
@@ -271,16 +278,17 @@ class DisplayCog(QueueBase):
         player = await self.get_player(ctx)
         lines = []
 
+        index_padding = len(str(len(player.queue.history))) + 1
+
         for ind, entry in enumerate(player.queue.history, 1):
-            finish_time = entry.meta.get("finish_time")
-            seconds_passed = time.time() - finish_time
-            lines.append(
-                "`{}.` **{}** {} ago".format(
-                    ind,
-                    nice_cut(entry.title, 40),
-                    format_time(seconds_passed, max_specifications=2)
-                )
-            )
+            basic_entry = entry.entry
+            time_passed = utils.format_time(entry.time_passed, max_specifications=1)
+
+            index = pad_index(ind, index_padding)
+
+            # TODO limit length
+            line = f"{index} **{basic_entry}** | {time_passed} ago"
+            lines.append(line)
 
         if not lines:
             raise commands.CommandError("No history")

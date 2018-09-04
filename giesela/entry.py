@@ -1,6 +1,7 @@
 import abc
 import copy
 import logging
+import time
 from typing import Any, Dict, Iterator, List, Optional, TYPE_CHECKING, Type, Union
 
 from discord import User
@@ -9,6 +10,7 @@ from .lib import lavalink
 from .radio import RadioSongData, RadioStation
 
 if TYPE_CHECKING:
+    from .queue import EntryQueue
     from .player import GieselaPlayer
 
 __all__ = ["PlayableEntry", "BaseEntry",
@@ -375,8 +377,9 @@ class PlayerEntry(EntryWrapper):
 
 
 class QueueEntry(EntryWrapper):
-    def __init__(self, *, requester: User, request_timestamp: float, **kwargs):
+    def __init__(self, *, queue: "EntryQueue", requester: User, request_timestamp: float, **kwargs):
         super().__init__(**kwargs)
+        self.queue = queue
         self.requester = requester
         self.request_timestamp = request_timestamp
 
@@ -389,7 +392,15 @@ class QueueEntry(EntryWrapper):
 class HistoryEntry(EntryWrapper):
     def __init__(self, *, finish_timestamp: float, **kwargs):
         super().__init__(**kwargs)
+
+        if not isinstance(self.wrapped, QueueEntry):
+            raise TypeError(f"HistoryEntry can only be wrapped around {QueueEntry}, not {type(self.wrapped)}")
+
         self.finish_timestamp = finish_timestamp
+
+    @property
+    def time_passed(self) -> float:
+        return time.time() - self.finish_timestamp
 
     def to_dict(self):
         data = super().to_dict()

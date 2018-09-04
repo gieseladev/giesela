@@ -8,10 +8,10 @@ from discord import Guild, VoiceChannel
 from discord.gateway import DiscordWebSocket
 from websockets import ConnectionClosed
 
-from .entry import BaseEntry, PlayerEntry, QueueEntry
+from .entry import PlayerEntry, QueueEntry
 from .extractor import Extractor
 from .lib import EventEmitter, has_events
-from .lib.lavalink import LavalinkAPI, LavalinkEvent, LavalinkPlayerState, TrackEventDataType
+from .lib.lavalink import LavalinkAPI, LavalinkEvent, LavalinkPlayerState, TrackEndReason, TrackEventDataType
 from .queue import EntryQueue
 
 if TYPE_CHECKING:
@@ -112,6 +112,12 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
             progress = state.seconds
         return progress - self._start_position
 
+    @property
+    def can_seek(self) -> bool:
+        if self._current_entry:
+            return self._current_entry.entry.is_seekable
+        return False
+
     async def connect(self, channel: Union[VoiceChannel, int] = None):
         if isinstance(channel, VoiceChannel):
             channel = channel.id
@@ -163,7 +169,6 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
     async def skip(self):
         self._current_entry = None
-        await self.manager.send_stop(self.guild_id)
         await self.play()
         self.emit("skip", player=self)
 
@@ -173,24 +178,16 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         self.state = GieselaPlayerState.IDLE
         self.emit("stop", player=self)
 
-    def modify_current_entry(self, entry: BaseEntry):
-        if not self.current_entry:
-            raise ValueError("No current entry")
-        if self.current_entry != entry:
-            raise ValueError("Edited entry doesn't share current entry's url")
-
-        self._current_entry = entry
-        self.emit("play", player=self, entry=entry)
-
-    def playback_finished(self, play_next: bool = True):
+    def playback_finished(self, play_next: bool = True, skipped: bool = False):
         entry = self.current_entry
         if entry:
             self.queue.push_history(entry)
 
-        self._current_entry = None
-        self.state = GieselaPlayerState.IDLE
+        if not skipped:
+            self._current_entry = None
+            self.state = GieselaPlayerState.IDLE
 
-        self.emit("finished", player=self, entry=entry)
+            self.emit("finished", player=self, entry=entry)
 
         if play_next:
             self.loop.create_task(self.play())
@@ -235,8 +232,13 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
     async def handle_event(self, event: LavalinkEvent, data: TrackEventDataType):
         play_next = True
+        skipped = False
 
         if event == LavalinkEvent.TRACK_END:
+            if data.reason == TrackEndReason.REPLACED:
+                log.info("track was replaced (probably skipped), not handling finished")
+                skipped = True
+
             if not data.reason.start_next:
                 log.info("not playing next because Lavalink said so I guess")
                 play_next = False
@@ -245,7 +247,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
         # TODO send a stop signal just to be sure (@.vlexar)
 
-        self.playback_finished(play_next)
+        self.playback_finished(play_next, skipped)
 
 
 @has_events("player_create")

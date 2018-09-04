@@ -136,7 +136,8 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
 
     @emoji_handler("⏪", pos=2)
     async def fast_rewind(self, *_):
-        await self.player.seek(self.player.progress - self.seek_amount)
+        if self.player.can_seek:
+            await self.player.seek(self.player.progress - self.seek_amount)
 
     @emoji_handler("⏯", pos=3)
     async def play_pause(self, *_):
@@ -147,7 +148,8 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
 
     @emoji_handler("⏩", pos=4)
     async def fast_forward(self, *_):
-        await self.player.seek(self.player.progress + self.seek_amount)
+        if self.player.can_seek:
+            await self.player.seek(self.player.progress + self.seek_amount)
 
     @emoji_handler("⏭", pos=5)
     async def next_entry(self, *_):
