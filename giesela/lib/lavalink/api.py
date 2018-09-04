@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 from discord import Client
 from websockets import ConnectionClosed
@@ -24,4 +24,7 @@ class LavalinkAPI(LavalinkREST, LavalinkWebSocket):
         pass
 
     async def on_disconnect(self, error: ConnectionClosed):
+        pass
+
+    async def on_voice_channel_update(self, guild_id: int, channel_id: Optional[int]):
         pass

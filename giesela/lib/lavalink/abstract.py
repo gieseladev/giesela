@@ -1,12 +1,15 @@
 import asyncio
+from typing import Union
 
-from discord import Client
+from discord.ext.commands import AutoShardedBot, Bot
+
+BotType = Union[Bot, AutoShardedBot]
 
 
 class AbstractLavalinkClient:
     loop: asyncio.AbstractEventLoop
 
-    def __init__(self, *, bot: Client, password: str, lavalink_address: str, lavalink_secure: bool, **kwargs):
+    def __init__(self, *, bot: BotType, password: str, lavalink_address: str, lavalink_secure: bool, **kwargs):
         self.bot = bot
         self.loop = bot.loop
         self._password = password

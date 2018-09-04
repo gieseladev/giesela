@@ -2,7 +2,7 @@ import abc
 import asyncio
 import enum
 import logging
-from typing import Any, Dict, Iterator, Optional, TYPE_CHECKING, Union
+from typing import Dict, Iterator, Optional, TYPE_CHECKING, Union
 
 from discord import Guild, VoiceChannel
 from discord.gateway import DiscordWebSocket
@@ -83,10 +83,18 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
     @property
     def qualified_channel_name(self) -> str:
-        return f"{self.guild.name}#{self.voice_channel.name}"
+        vc = self.voice_channel
+        vc_id = vc.name if vc else self.voice_channel_id
+        if vc_id:
+            return f"{self.guild.name}#{vc_id}"
+        else:
+            return self.guild.name
 
     @property
-    def voice_channel(self) -> VoiceChannel:
+    def voice_channel(self) -> Optional[VoiceChannel]:
+        voice_state = self.guild.me.voice
+        if voice_state and voice_state.channel:
+            return voice_state.channel
         return self.bot.get_channel(self.voice_channel_id)
 
     @property
@@ -122,7 +130,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         if isinstance(channel, VoiceChannel):
             channel = channel.id
 
-        # FIXME when using the player too soon (maybe before connected?) it doesn't play
+        # FIXME when already connected or something the player doesn't play...
         channel = channel or self.voice_channel_id
 
         if not channel:
@@ -255,17 +263,12 @@ class PlayerManager(LavalinkAPI):
     bot: "Giesela"
     players: Dict[int, GieselaPlayer]
 
-    _voice_state: Dict[str, Any]
-
     def __init__(self, bot: "Giesela"):
         super().__init__(bot, password=bot.config.lavalink_password, address=bot.config.lavalink_address, secure=bot.config.lavalink_secure)
         self.extractor = Extractor(self)
 
         self.players = {}
 
-        self._voice_state = {}
-        # TODO use logout event to close?
-        bot.add_listener(self.on_socket_response)
         bot.add_listener(self.on_shutdown)
 
     def __iter__(self) -> Iterator[GieselaPlayer]:
@@ -309,34 +312,14 @@ class PlayerManager(LavalinkAPI):
 
         await player.update_state(state)
 
-    async def on_socket_response(self, data: Dict[str, Any]):
-        if not data or data.get("t") not in {"VOICE_STATE_UPDATE", "VOICE_SERVER_UPDATE"}:
+    async def on_voice_channel_update(self, guild_id: int, channel_id: Optional[int]):
+        if not channel_id:
             return
 
-        if data["t"] == "VOICE_SERVER_UPDATE":
-            event_data = data["d"]
-            self._voice_state.update({
-                "op": "voiceUpdate",
-                "guildId": event_data["guild_id"],
-                "event": event_data
-            })
-        else:
-            event_data = data["d"]
-            if int(event_data["user_id"]) != self.bot.user.id:
-                return
-
-            self._voice_state.update({"sessionId": event_data["session_id"]})
-
-            guild_id = int(event_data["guild_id"])
-
-            if guild_id in self.players:
-                self.players[guild_id].channel = event_data["channel_id"]
-
-        if all(key in self._voice_state for key in ("op", "guildId", "sessionId", "event")):
-            guild_id = event_data["guild_id"]
-            log.debug(f"sending voice_state for guild {guild_id}")
-            await self.send_raw(self._voice_state)
-            self._voice_state.clear()
+        player = self.players.get(guild_id)
+        if player:
+            log.info(f"updating channel_id for {player}")
+            player.voice_channel_id = channel_id
 
     async def on_shutdown(self):
         log.info("Disconnecting from Lavalink")

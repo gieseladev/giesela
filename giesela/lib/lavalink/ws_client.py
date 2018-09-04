@@ -17,7 +17,7 @@ log = logging.getLogger(__name__)
 __all__ = ["LavalinkWebSocket"]
 
 
-@has_events("event", "unknown_event", "player_update", "disconnect")
+@has_events("event", "unknown_event", "player_update", "disconnect", "voice_channel_update")
 class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
     _ws: Optional[WebSocketClientProtocol]
     _send_queue: Deque[Dict[str, Any]]
@@ -41,6 +41,9 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
 
         self.loop.create_task(self._try_connect())
 
+        self._voice_state = {}
+        self.bot.add_listener(self.on_socket_response)
+
     @property
     def connected(self):
         return self._ws is not None and self._ws.open
@@ -56,6 +59,7 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
 
     async def shutdown(self):
         self._shutdown_signal = True
+        self.bot.remove_listener(self.on_socket_response)
         await self._ws.close(reason="Shutdown")
 
     async def _try_connect(self):
@@ -170,6 +174,36 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
 
         log.debug("Closing WebSocket...")
         await self._ws.close()
+
+    async def on_socket_response(self, data: Dict[str, Any]):
+        if not data or data.get("t") not in {"VOICE_STATE_UPDATE", "VOICE_SERVER_UPDATE"}:
+            return
+
+        if data["t"] == "VOICE_SERVER_UPDATE":
+            event_data = data["d"]
+            self._voice_state.update({
+                "op": "voiceUpdate",
+                "guildId": event_data["guild_id"],
+                "event": event_data
+            })
+        else:
+            event_data = data["d"]
+            if int(event_data["user_id"]) != self.bot.user.id:
+                return
+
+            self._voice_state.update({"sessionId": event_data["session_id"]})
+
+            guild_id = int(event_data["guild_id"])
+            channel_id = event_data.get("channel_id")
+            channel_id = int(channel_id) if channel_id else None
+
+            self.emit("voice_channel_update", guild_id=guild_id, channel_id=channel_id)
+
+        if all(key in self._voice_state for key in ("op", "guildId", "sessionId", "event")):
+            guild_id = event_data["guild_id"]
+            log.debug(f"sending voice_state for guild {guild_id}")
+            await self.send_raw(self._voice_state)
+            self._voice_state.clear()
 
     async def send_raw(self, data: Dict[str, Any]):
         if self.connected:
