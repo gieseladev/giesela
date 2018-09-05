@@ -28,10 +28,10 @@ class LoadedPlaylistEntry(EntryWrapper):
 class PlaylistEntry:
     playlist: "Playlist" = None
 
-    def __init__(self, entry: PlayableEntry, *, author_id: User, added_at: int = None, last_editor_id: User = None, last_edit_at: int = None):
+    def __init__(self, entry: PlayableEntry, author_id: User = None, *, added_at: int = None, last_editor_id: User = None, last_edit_at: int = None):
         self._entry = entry
         self._author_id = author_id
-        self._added_at = added_at or time.time()
+        self._added_at = added_at or round(time.time())
         self._last_editor_id = last_editor_id
         self._last_edit_at = last_edit_at
 
@@ -113,7 +113,7 @@ class PlaylistEntry:
         self._entry = entry
         if editor:
             self._last_editor_id = editor.id
-            self._last_edit_at = time.time()
+            self._last_edit_at = round(time.time())
 
         self.save(reorder=self.sort_attr != before_sort_attr)
 

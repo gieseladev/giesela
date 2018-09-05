@@ -1,3 +1,4 @@
+from .compat import *
 from .editor import *
 from .entry import *
 from .manager import *

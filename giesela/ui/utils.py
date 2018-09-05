@@ -1,9 +1,10 @@
 import asyncio
+import inspect
 import logging
-from typing import Union
+from typing import Callable, Dict, List, Union
 
 from discord import Client, Embed, Emoji
-from discord.ext.commands import Context
+from discord.ext.commands import Command, Context
 from discord.ext.commands.bot import BotBase
 
 log = logging.getLogger(__name__)
@@ -78,12 +79,26 @@ class _FakeClient:
     _run_event = getattr(Client, "_run_event")
 
 
+class CustomParamsCommand(Command):
+    def __init__(self, name: str, callback: Callable, params: Dict[str, inspect.Parameter], **kwargs):
+        super().__init__(name, callback, **kwargs)
+        self.params = params
+
+    @property
+    def callback(self) -> Callable:
+        return self._callback
+
+    @callback.setter
+    def callback(self, value: Callable):
+        self._callback = value
+
+
 class MenuCommandGroup(BotBase, _FakeClient):
     """
     Keyword Args:
         keep_default_help: `bool`. Defaults to `False`.
     """
-    bot: Client
+    _dynamic_commands: List[str]
 
     def __init__(self, bot: Client, **kwargs):
         self.bot = bot
@@ -93,5 +108,20 @@ class MenuCommandGroup(BotBase, _FakeClient):
         if not keep_default_help:
             self.remove_command("help")
 
-    async def on_command(self, ctx: Context):
+        self._dynamic_commands = []
+
+    def __getattr__(self, item):
+        return getattr(self.bot, item)
+
+    async def invoke(self, ctx: Context):
         ctx.client = self.bot
+        await super().invoke(ctx)
+
+    def add_dynamic_command(self, cmd: Command):
+        self.add_command(cmd)
+        self._dynamic_commands.append(cmd.name)
+
+    def clear_dynamic_commands(self):
+        for cmd_name in self._dynamic_commands:
+            self.remove_command(cmd_name)
+        self._dynamic_commands.clear()

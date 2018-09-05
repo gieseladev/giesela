@@ -12,8 +12,9 @@ from discord.ext.commands import BadArgument, Context, Converter, view as string
 
 from giesela import GPL_VERSION, Giesela, LoadedPlaylistEntry, Playlist, PlaylistManager, utils
 from giesela.lib import help_formatter
+from giesela.playlist import compat as pl_compat
 from giesela.ui import EmbedPaginator, EmbedViewer, ItemPicker, PromptYesNo, VerticalTextViewer
-from giesela.ui.custom import PlaylistBuilder, PlaylistViewer
+from giesela.ui.custom import PlaylistBuilder, PlaylistRecoveryUI, PlaylistViewer
 from .player import Player
 
 LOAD_ORDER = 1
@@ -71,7 +72,6 @@ class UnquotedStr(str, Converter):
 
 
 class PlaylistCog:
-    bot: Giesela
     playlist_manager: PlaylistManager
 
     player_cog: Player
@@ -81,6 +81,7 @@ class PlaylistCog:
         self.playlist_manager = PlaylistManager.load(self.bot, self.bot.config.playlists_file)
 
         self.player_cog = bot.cogs["Player"]
+        self.extractor = self.player_cog.extractor
 
     def find_playlist(self, playlist: str) -> Playlist:
         _playlist = self.playlist_manager.find_playlist(playlist)
@@ -109,10 +110,7 @@ class PlaylistCog:
         if not playlist:
             return
 
-        embed = Embed(colour=Colour.green())
-        embed.set_author(name="Loaded Playlist")
-        embed.add_field(name=playlist.name, value=f"by {playlist.author.name}\n{len(playlist)} entries")
-        return embed
+        return playlist_embed(playlist)
 
     async def on_shutdown(self):
         self.playlist_manager.close()
@@ -372,23 +370,16 @@ class PlaylistCog:
             raise commands.CommandError("This playlist already exists. You need to delete it first before you can import it")
 
         if embed:
-            await ctx.send(embed=embed)
+            await ctx.send("Imported playlist:", embed=embed)
         else:
             raise commands.CommandError("Couldn't load playlist\n"
-                                        "If this is a playlist from the ancient times (before version 5.0.0) "
-                                        "use the command `playlist import old` which requires you to provide the name of the playlist.")
+                                        "If this is a playlist from an older version, please try `playlist import recover`.")
 
-    @playlist_import.command("old", aliases=["ancient"])
-    async def playlist_import_old(self, ctx: Context, name: str, author: User = None):
-        """Import an old playlist.
-
-        Old playlists didn't store meta data. In order to import them you need to provide the bare minimum of meta data
-        which is the name and the author (which defaults to the person executing the command)
-        """
+    @playlist_import.command("broken", aliases=["recover", "old"])
+    async def playlist_import_broken(self, ctx: Context):
+        """Import a broken playlist"""
         if not ctx.message.attachments:
             raise commands.CommandError("Please attach a GPL file!")
-
-        author = author or ctx.author
 
         data = await save_attachment(ctx.message.attachments[0])
         _gpl_data = data.read().decode("utf-8")
@@ -397,14 +388,30 @@ class PlaylistCog:
         except ValueError:
             raise commands.CommandError("This file is invalid. This \"playlist\" cannot be imported!")
 
-        # TODO compatibility should be part of basic import
+        recovery = pl_compat.get_recovery_plan(gpl_data)
 
-        embed = await self.import_playlist(gpl_data)
-        if embed:
-            await ctx.send(embed=embed)
-        else:
-            raise commands.CommandError("Couldn't import playlist. This probably doesn't have anything to do with the playlist being old. "
-                                        "It's just broken...")
+        if not recovery:
+            raise commands.CommandError("Giesela can't recover this playlist")
+
+        recovery_ui = PlaylistRecoveryUI(ctx.channel, ctx.author, bot=ctx.bot, extractor=self.extractor, recovery=recovery)
+        result = await recovery_ui.display()
+
+        if not result:
+            await ctx.message.delete()
+            return
+
+        playlist = recovery_ui.build_playlist()
+
+        if not playlist:
+            raise commands.CommandError("Couldn't recover playlist")
+
+        try:
+            self.playlist_manager.add_playlist(playlist)
+        except KeyError:
+            raise commands.CommandError("This playlist already exists")
+
+        embed = playlist_embed(playlist)
+        await ctx.send("Imported playlist:", embed=embed)
 
     @playlist.command("export")
     async def playlist_export(self, ctx: Context, *, playlist: UnquotedStr):
@@ -462,7 +469,7 @@ class PlaylistCog:
                 await ctx.message.delete()
                 return
 
-        playlist_entry = playlist.add(entry)
+        playlist_entry = playlist.add_entry(entry, ctx.author)
         if not player_entry.has_wrapper(LoadedPlaylistEntry):
             player_entry.lowest_wrapper.add_wrapper(LoadedPlaylistEntry.create(playlist_entry))
 

@@ -1,5 +1,6 @@
 import bisect
 import logging
+import random
 import uuid
 from typing import Iterator, List, Optional, TYPE_CHECKING, Tuple, Type
 
@@ -28,8 +29,9 @@ class Playlist:
 
     gpl_id: uuid.UUID
     name: str
-    description: Optional[str]
     author_id: int
+
+    description: Optional[str]
     cover: Optional[str]
     editor_ids: List[int]
 
@@ -41,13 +43,15 @@ class Playlist:
     def __init__(self, **kwargs):
         self.manager = None
 
-        self.gpl_id = kwargs.pop("gpl_id", uuid.uuid4())
+        self.gpl_id = kwargs.pop("gpl_id", None) or uuid.uuid4()
         self.name = kwargs.pop("name")
+        self.author_id = kwargs.pop("author_id")
+
         self.description = kwargs.pop("description", None)
         self.cover = kwargs.pop("cover", None)
-        self.entries = kwargs.pop("entries", [])
         self.editor_ids = kwargs.pop("editors", [])
-        self.author_id = kwargs.pop("author_id")
+
+        self.entries = kwargs.pop("entries", [])
 
         self.init()
 
@@ -239,8 +243,10 @@ class Playlist:
     def can_edit(self, user: User) -> bool:
         return self.is_author(user) or self.is_editor(user)
 
-    async def play(self, queue: "EntryQueue", requester: User, front: bool = False):
+    async def play(self, queue: "EntryQueue", requester: User, *, front: bool = False, shuffle: bool = True):
         entries = [pl_entry.get_wrapper() for pl_entry in self]
+        if shuffle:
+            random.shuffle(entries)
         queue.add_entries(entries, requester, front=front)
 
     async def generate_cover(self) -> Optional[str]:

@@ -106,12 +106,15 @@ class InteractableEmbed(HasListener, EditableEmbed, ReactionHandler, Startable, 
         await self.stop()
         await super().delete()
 
+    async def _add_reaction(self, emoji: EmojiType, msg: Message = None):
+        msg = msg or self.message
+        if not self.is_disabled(emoji):
+            await msg.add_reaction(emoji)
+
     async def add_reactions(self, msg: Message = None):
-        if not msg:
-            msg = self.message
+        msg = msg or self.message
         for emoji in self.emojis:
-            if not self.is_disabled(emoji):
-                await msg.add_reaction(emoji)
+            await self._add_reaction(emoji, msg)
 
     def plan_add_reactions(self, msg: Message = None):
         asyncio.ensure_future(self.add_reactions(msg))
@@ -139,12 +142,26 @@ class InteractableEmbed(HasListener, EditableEmbed, ReactionHandler, Startable, 
             raise Exception("There's no message to listen to")
 
         reaction, user = await events.wait_for_reaction_change(emoji=self.emojis, user=self.user, message=self.message)
-        return await self.on_reaction(reaction, user)
+        try:
+            return await self.on_reaction(reaction, user)
+        except Exception as e:
+            return await self.on_emoji_handler_error(e, reaction, user)
+
+    @classmethod
+    async def _try_run_coro(cls, coro):
+        try:
+            await coro
+        except Exception:
+            log.error(f"Error while running {coro}")
+
+    @classmethod
+    def try_run(cls, coro):
+        asyncio.ensure_future(cls._try_run_coro(coro))
 
     async def on_reaction(self, reaction: Reaction, user: User) -> Any:
         await super().on_reaction(reaction, user)
         emoji = reaction.emoji
-        await self.on_any_emoji(emoji, user)
+        self.try_run(self.on_any_emoji(emoji, user))
 
         handler = self.handlers.get(emoji)
         if hasattr(handler, "_disabled"):
@@ -160,6 +177,9 @@ class InteractableEmbed(HasListener, EditableEmbed, ReactionHandler, Startable, 
 
     async def on_unhandled_emoji(self, emoji: EmojiType, user: User):
         pass
+
+    async def on_emoji_handler_error(self, error: Exception, reaction: Reaction, user: User):
+        log.exception(f"Something went wrong while handling {reaction} by {user}", exc_info=error)
 
 
 class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, Stoppable):
@@ -192,6 +212,10 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
 
         self.user = user
         self.create_listener("messages", listen_once=self.wait_for_message)
+
+    @property
+    def menu_command(self) -> MenuCommandGroup:
+        return self._group
 
     @property
     def commands(self) -> List[Command]:

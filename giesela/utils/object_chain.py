@@ -1,5 +1,7 @@
 from typing import Any
 
+__all__ = ["ObjectChain"]
+
 
 class ObjectChain:
     def __init__(self, *targets: Any):

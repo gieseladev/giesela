@@ -12,7 +12,8 @@ import requests
 from PIL import Image, ImageStat
 
 from giesela.config import static_config
-from .object_chain import ObjectChain
+from .object_chain import *
+from .structures import *
 
 if TYPE_CHECKING:
     from giesela import BaseEntry

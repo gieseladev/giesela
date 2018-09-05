@@ -142,7 +142,7 @@ class HasListener(Startable, Stoppable):
             self._listeners[listener].cancel()
         else:
             for listener in self._listeners:
-                self.stop_listener(listener)
+                self.cancel_listener(listener)
 
     def listener_result(self, listener: str, default: Any = _DEFAULT) -> Any:
         try:

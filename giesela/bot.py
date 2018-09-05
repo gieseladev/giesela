@@ -241,4 +241,4 @@ class Giesela(AutoShardedBot):
             coros.append(coro)
 
         if coros:
-            await asyncio.wait(coros)
+            await asyncio.gather(*coros)

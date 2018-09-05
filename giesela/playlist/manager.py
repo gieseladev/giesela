@@ -3,7 +3,7 @@ import logging
 import rapidjson
 import uuid
 from pathlib import Path
-from typing import Any, Dict, Iterable, Optional, Union
+from typing import Any, Dict, Iterable, List, Optional, Union
 
 from discord import User
 
@@ -20,6 +20,7 @@ _DEFAULT = object()
 
 class PlaylistManager:
     _playlists: Dict[uuid.UUID, Playlist]
+    _broken_playlists: List[compat.PlaylistRecovery]
 
     def __init__(self, bot: Giesela, storage):
         self.bot = bot
@@ -43,12 +44,15 @@ class PlaylistManager:
             except Exception:
                 log.exception(f"Couldn't load playlist {gpl_id}")
 
-                playlist = compat.recover_broken_save(gpl_data)
+                recovery = compat.get_recovery_plan(gpl_data)
 
-                if not playlist:
-                    log.warning(f"Couldn't recover playlist {gpl_id}")
-                    # TODO remove
-                    continue
+                if recovery:
+                    self._broken_playlists.append(recovery)
+                else:
+                    log.warning(f"Can't recover playlist {gpl_id}")
+                    to_delete.append(gpl_id)
+
+                continue
 
             playlist.manager = self
             self._playlists[playlist.gpl_id] = playlist

@@ -1,7 +1,9 @@
+import asyncio
 import logging
 import re
 from typing import List, Optional, Pattern, Union
 
+from . import utils
 from .entry import BasicEntry, RadioEntry
 from .errors import ExtractionError
 from .lib.lavalink import LoadTrackSearcher, Track, TrackLoadType, TrackPlaylistInfo
@@ -16,6 +18,7 @@ RE_HTTP_SCHEME: Pattern = re.compile(r"^https?://")
 class Extractor:
     def __init__(self, client: LavalinkREST):
         self.client = client
+        self.loop = self.client.loop
 
     @classmethod
     def is_url(cls, url: str) -> bool:
@@ -23,10 +26,9 @@ class Extractor:
         return bool(match)
 
     @classmethod
-    def basic_entry_from_load_result(cls, track: Track, playlist_info: TrackPlaylistInfo = None) -> BasicEntry:
-        extra = {}
+    def basic_entry_from_load_result(cls, track: Track, playlist_info: TrackPlaylistInfo = None, **extra) -> BasicEntry:
         if playlist_info:
-            extra["album"] = playlist_info.name
+            extra.setdefault("album", playlist_info.name)
 
         return BasicEntry.from_track_info(track.track, track.info, **extra)
 
@@ -48,6 +50,19 @@ class Extractor:
                 raise TypeError("This is a playlist")
 
         return self.basic_entry_from_load_result(track, result.playlist_info)
+
+    async def get_entries_batch(self, ids: List[str], *, batch_size: int = 50) -> List[BasicEntry]:
+        batch_gen = utils.batch_gen(ids, batch_size)
+        entries = []
+
+        for batch in batch_gen:
+            coros = []
+            for identifier in batch:
+                coros.append(self.get_entry(identifier))
+            batch_entries = await asyncio.wait(coros, loop=self.loop)
+            entries.extend(batch_entries)
+
+        return entries
 
     async def search_entries(self, query: str, searcher=LoadTrackSearcher.YOUTUBE) -> Optional[List[BasicEntry]]:
         result = await self.client.search_tracks(query, searcher)
