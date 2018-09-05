@@ -61,7 +61,6 @@ class EntryQueue(EventEmitter):
 
         move_entry = self.entries.pop(from_index)
         if to_index:
-            # FIXME this shouldn't work when from_index < to_index
             self.entries.insert(to_index, move_entry)
         else:
             self.entries.appendleft(move_entry)
@@ -89,12 +88,18 @@ class EntryQueue(EventEmitter):
 
         self.emit("history_push", queue=self, entry=entry)
 
-    def add_entries(self, entries: Iterable[CanWrapEntryType], requester: User, *, front: bool = False):
+    def add_entries(self, entries: Iterable[CanWrapEntryType], requester: User, *, position: int = None):
         entries = list(self.wrap_queue_entry(entry, requester) for entry in entries)
-        if front:
-            self.entries.extendleft(entries)
-        else:
+        if position is None:
             self.entries.extend(entries)
+        else:
+            if not 0 <= position < len(self.entries):
+                raise ValueError(f"position out of bounds must be 0 <= {position} < {len(self.entries)}")
+
+            self.entries.rotate(position)
+            entry_amount = len(entries)
+            self.entries.extendleft(reversed(entries))
+            self.entries.rotate(-(position + entry_amount))
 
         self.emit("entries_added", queue=self, entries=entries)
 

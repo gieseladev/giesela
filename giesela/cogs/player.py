@@ -7,9 +7,9 @@ from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import Giesela, GieselaPlayer, PlayerManager, WebieselaServer, lyrics as lyricsfinder
-from giesela.ui import VerticalTextViewer
+from giesela.ui import VerticalTextViewer, text as text_utils
 from giesela.ui.custom import EntryEditor, NowPlayingEmbed
-from giesela.utils import create_bar, parse_timestamp, similarity
+from giesela.utils import parse_timestamp, similarity
 
 log = logging.getLogger(__name__)
 
@@ -294,7 +294,7 @@ class Player:
         old_volume = round(player.volume * 100)
 
         if not volume:
-            bar = create_bar(player.volume, 20)
+            bar = text_utils.create_bar(player.volume, 20)
             await ctx.send(f"Current volume: {old_volume}%\n{bar}")
             return
 

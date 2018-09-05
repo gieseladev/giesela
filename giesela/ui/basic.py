@@ -6,6 +6,7 @@ from typing import Any, Awaitable, Callable, List, Optional, Union
 from discord import Embed, Message, NotFound, TextChannel
 
 from giesela import utils
+from . import text
 from .abstract import Startable, Stoppable
 
 log = logging.getLogger(__name__)
@@ -120,7 +121,7 @@ class LoadingBar(EditableEmbed):
         if not self._current_embed:
             self._current_embed = Embed(title=self.header, colour=self.colour, **self.custom_embed_data)
 
-        description = utils.create_bar(self.progress, length=15)
+        description = text.create_bar(self.progress, length=15)
         footer = ""
 
         if self.show_percentage:

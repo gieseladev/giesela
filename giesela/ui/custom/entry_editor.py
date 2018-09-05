@@ -122,9 +122,8 @@ class EntryEditor(AutoHelpEmbed, MessageableEmbed, InteractableEmbed):
 
     async def update(self):
         embed = self.entry.get_embed()
-        # TODO create a property which returns a url or None
         embed.title = "open url"
-        embed.url = self._entry.url
+        embed.url = self._entry.url or Embed.Empty
         if self.error:
             embed.colour = Colour.red()
             embed.add_field(name="Error", value=f"**{self.error}**", inline=False)

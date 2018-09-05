@@ -1,39 +1,21 @@
 import logging
-import math
 import re
-import urllib.parse
 from difflib import SequenceMatcher
-from io import BytesIO
 from string import punctuation, whitespace
 from typing import Callable, Iterable, List, NamedTuple, Optional, Pattern, TYPE_CHECKING, Tuple, Union
 
 import aiohttp
 import requests
-from PIL import Image, ImageStat
 
 from giesela.config import static_config
 from .object_chain import *
 from .structures import *
+from .url import *
 
 if TYPE_CHECKING:
     from giesela import BaseEntry
 
 log = logging.getLogger(__name__)
-
-
-def wrap_string(target, wrapping, handle_special=True, reverse_closer=True):
-    special_wrap = {
-        "(": ")",
-        "[": "]",
-        "{": "}",
-        "<": ">"
-    } if handle_special else {}
-    opener = wrapping
-    closer = special_wrap.get(wrapping, wrapping)
-    if reverse_closer:
-        closer = closer[::-1]
-
-    return "{}{}{}".format(opener, target, closer)
 
 
 async def content_is_image(session: aiohttp.ClientSession, url: str) -> bool:
@@ -83,83 +65,6 @@ def similarity(a: str, b: Union[str, Tuple[str, ...]], *, lower: bool = False, j
         def junk(s: str) -> bool: return s in _junk
 
     return SequenceMatcher(junk, a, b, autojunk=auto_junk).ratio()
-
-
-def nice_cut(s, max_length, ending="..."):
-    if len(s) <= max_length:
-        return s
-
-    parts = s.split()
-    chunk = ""
-    for part in parts:
-        # if there's enough space to fit in EVERYTHING
-        if len(chunk) + len(part) + len(ending) <= max_length:
-            chunk += part + " "
-        else:
-            chunk = chunk.rstrip() + ending
-            return chunk
-
-    return chunk  # this really shouldn't happen...
-
-
-def create_bar(progress, length=10, full_char="■", half_char=None, empty_char="□"):
-    use_halves = half_char is not None
-    fill_to = 2 * round(length * progress)
-    residue = fill_to % 2
-    chrs = []
-    for i in range(1, length + 1):
-        if i <= fill_to / 2:
-            chrs.append(full_char)
-        else:
-            break
-
-    if residue > 0 and use_halves:
-        chrs.append(half_char)
-
-    return ("{0:" + empty_char + "<" + str(length) + "}").format("".join(chrs))
-
-
-def get_image_brightness(**kwargs):
-    """
-    Keyword Arguments:
-    image       -- A Pillow Image object
-    location    -- a file path to the image
-    url         -- the online location of the image
-    """
-    if "image" in kwargs:
-        im = kwargs["image"]
-    elif "location" in kwargs:
-        im = Image.open(kwargs["location"])
-    elif "url" in kwargs:
-        resp = requests.get(kwargs["url"])
-        content = BytesIO(resp.content)
-        im = Image.open(content)
-    else:
-        raise AttributeError("No image provided")
-
-    stat = ImageStat.Stat(im)
-    mean = stat.mean
-
-    if len(mean) >= 3:
-        r, g, b, *_ = mean
-        return math.sqrt(0.241 * (r ** 2) + 0.691 * (g ** 2) + 0.068 * (b ** 2))
-    elif len(mean) == 1:
-        return mean[0]
-    else:
-        return 0
-
-
-def ordinal(n, combine=False):
-    """
-    Return the ordinal of the number n.
-
-    If combine then return the number concatenated with the ordinal
-    """
-    number_string = str(n) if combine else ""
-    special_cases = {1: "st", 2: "nd", 3: "rd"}
-    if not 10 <= n % 100 <= 20 and n % 10 in special_cases:
-        return number_string + special_cases[n % 10]
-    return number_string + "th"
 
 
 class SplitSongName(NamedTuple):
@@ -365,42 +270,6 @@ def get_video_timestamps(description, video_id, song_dur=None):
     return None
 
 
-def _choose_best_thumbnail(thumbnails):
-    ranks = ["maxres", "high", "medium", "standard", "default"]
-    for res in ranks:
-        if res in thumbnails:
-            return thumbnails[res]["url"]
-
-
-def get_related_videos(video_id):
-    params = {
-        "part": "snippet",
-        "relatedToVideoId": video_id,
-        "topicId": "/m/04rlf",
-        "type": "video",
-        "key": static_config.google_api_key
-    }
-    resp = requests.get(
-        "https://www.googleapis.com/youtube/v3/search", params=params)
-    data = resp.json()
-    videos = data["items"]
-    if not videos:
-        return None
-    video_list = []
-    for vid in videos:
-        video = {
-            "id": vid["id"]["videoId"],
-            "title": vid["snippet"]["title"],
-            "channel": vid["snippet"]["channelTitle"],
-            "thumbnail": _choose_best_thumbnail(vid["snippet"]["thumbnails"]),
-            "url": "https://www.youtube.com/watch?v=" + vid["id"]["videoId"]
-        }
-
-        video_list.append(video)
-
-    return video_list
-
-
 def parse_timestamp(timestamp):
     parts = timestamp.split(":")
     if len(parts) < 1:  # Shouldn't occur, but who knows?
@@ -448,7 +317,7 @@ def round_to_interval(num, interval=5):
     return int(interval * round(float(num) / interval))
 
 
-def format_time(s, round_seconds=True, round_base=1, max_specifications=3, combine_with_and=False, replace_one=False, unit_length=2):
+def format_time(s, round_seconds=True, round_base=1, max_specifications=2, combine_with_and=False, replace_one=False, unit_length=2):
     if round_seconds:
         s = round_to_interval(s, round_base)
 
@@ -481,33 +350,3 @@ def format_time(s, round_seconds=True, round_base=1, max_specifications=3, combi
         return_list.insert(-1, "and")
 
     return " ".join(return_list)
-
-
-async def get_header(session, url, header_field=None, *, timeout=5):
-    with aiohttp.ClientTimeout(timeout):
-        async with session.head(url) as response:
-            if header_field:
-                return response.headers.get(header_field)
-            else:
-                return response.headers
-
-
-def html2md(html):
-    """Convert html to markdown.
-
-    :param html: html text to convert.
-    """
-    html_to_markdown = [
-        # HTML tag to Markdown
-        (r"<code.+?>(.+?)<\/code>", r"`\1`"),  # code
-        (r"<strong>(.+?)<\/strong>", r"**\1**"),  # bold
-        (r"<a\shref=\"(.+?)\">(.+?)<\/a>", r"[`\2`](\1)"),  # links
-        # that's all
-    ]
-
-    html = urllib.parse.unquote(html)
-
-    for target, replacement in html_to_markdown:
-        html = re.sub(target, replacement, html)
-
-    return html

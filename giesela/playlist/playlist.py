@@ -243,11 +243,11 @@ class Playlist:
     def can_edit(self, user: User) -> bool:
         return self.is_author(user) or self.is_editor(user)
 
-    async def play(self, queue: "EntryQueue", requester: User, *, front: bool = False, shuffle: bool = True):
+    async def play(self, queue: "EntryQueue", requester: User, *, position: int = None, shuffle: bool = True):
         entries = [pl_entry.get_wrapper() for pl_entry in self]
         if shuffle:
             random.shuffle(entries)
-        queue.add_entries(entries, requester, front=front)
+        queue.add_entries(entries, requester, position=position)
 
     async def generate_cover(self) -> Optional[str]:
         return await mosaic.generate_playlist_cover(self)

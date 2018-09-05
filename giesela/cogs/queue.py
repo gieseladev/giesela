@@ -41,7 +41,7 @@ class EnqueueCog(QueueBase):
             raise commands.CommandError(f"Couldn't find anything for {target}")
 
         if isinstance(result, list):
-            player.queue.add_entries(result, requester=ctx.author)  # TODO handle placement
+            player.queue.add_entries(result, requester=ctx.author, placement=placement)
             await ctx.send(f"Added {len(result)} entries to the queue")
         else:
             player.queue.add_entry(result, requester=ctx.author, placement=placement)
@@ -259,8 +259,7 @@ class DisplayCog(QueueBase):
             index = pad_index(ind, index_padding)
             basic_entry = entry.entry
 
-            # TODO limit length
-            line = f"{index} **{basic_entry}**"
+            line = f"{index} **{text_utils.shorten(basic_entry, 50)}**"
             lines.append(line)
 
         if not lines:
@@ -297,8 +296,7 @@ class DisplayCog(QueueBase):
 
             index = pad_index(ind, index_padding)
 
-            # TODO limit length
-            line = f"{index} **{basic_entry}** | {time_passed} ago"
+            line = f"{index} **{text_utils.shorten(basic_entry, 50)}** | {time_passed} ago"
             lines.append(line)
 
         if not lines:
