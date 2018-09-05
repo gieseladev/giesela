@@ -2,6 +2,7 @@ from typing import List, Optional
 
 from discord import Embed, TextChannel, User
 from discord.ext import commands
+from discord.ext.commands import Context
 
 from giesela import GieselaPlayer, PlayableEntry
 from giesela.ui import prefab
@@ -39,7 +40,7 @@ class EntrySearchUI(AutoHelpEmbed, MessageableEmbed, ItemPicker):
             return self.current_result
 
     @commands.command("play")
-    async def play_result(self, _):
+    async def play_result(self, ctx: Context):
         """Play next"""
         result = self.current_result
-        self.player.queue.add_entry(result, placement=0)
+        self.player.queue.add_entry(result, ctx.author)

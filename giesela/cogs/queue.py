@@ -80,7 +80,7 @@ class EnqueueCog(QueueBase):
 
         entry = await searcher.choose()
         if entry:
-            player.queue.add_entry(entry)
+            player.queue.add_entry(entry, ctx.author)
             await ctx.send(f"Enqueued **{entry.title}**")
         else:
             await ctx.message.delete()
