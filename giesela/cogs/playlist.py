@@ -388,7 +388,7 @@ class PlaylistCog:
         except ValueError:
             raise commands.CommandError("This file is invalid. This \"playlist\" cannot be imported!")
 
-        recovery = pl_compat.get_recovery_plan(gpl_data)
+        recovery = pl_compat.get_recovery_plan(self.playlist_manager, gpl_data)
 
         if not recovery:
             raise commands.CommandError("Giesela can't recover this playlist")

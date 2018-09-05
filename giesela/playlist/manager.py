@@ -44,7 +44,7 @@ class PlaylistManager:
             except Exception:
                 log.exception(f"Couldn't load playlist {gpl_id}")
 
-                recovery = compat.get_recovery_plan(gpl_data)
+                recovery = compat.get_recovery_plan(self, gpl_data)
 
                 if recovery:
                     self._broken_playlists.append(recovery)
@@ -101,7 +101,8 @@ class PlaylistManager:
             log.warning("Couldn't import playlist", exc_info=e)
             return
 
-        playlist.author = author
+        if author:
+            playlist.author = author
 
         self.add_playlist(playlist)
         return playlist

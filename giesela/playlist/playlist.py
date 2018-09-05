@@ -94,6 +94,7 @@ class Playlist:
     def author(self) -> User:
         if not getattr(self, "_author", False):
             self._author = self.manager.bot.get_user(self.author_id)
+
         return self._author
 
     @author.setter

@@ -22,6 +22,8 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
     extractor: Extractor
     recovery: PlaylistRecovery
 
+    _current_task: asyncio.Task
+
     def __init__(self, channel: TextChannel, user: User = None, **kwargs):
         self.extractor = kwargs.pop("extractor")
         self.recovery = kwargs.pop("recovery")
@@ -30,8 +32,8 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
 
         self.recovery.provide_extractor(self.extractor)
 
+        self._current_task = None
         self._is_done = False
-        self._args = {}
 
     @property
     def help_title(self) -> str:
@@ -41,18 +43,15 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
     def help_description(self) -> str:
         return "The playlist recovery progress includes a number of steps. Some of which might even require your input!"
 
-    @property
-    def all_args_collected(self) -> bool:
-        if self.recovery.needs_input:
-            return all(key in self._args for key in self.recovery.current_step.required_input)
-        return True
-
     def build_playlist(self) -> Optional[Playlist]:
         return self.recovery.try_build()
 
     async def display(self):
         await self.after_advance()
         await self.wait_for_listener()
+        if self._current_task:
+            self._current_task.cancel()
+
         await self.delete()
         return self._is_done
 
@@ -65,14 +64,14 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
         embed = self.get_embed_frame()
         step = self.recovery.current_step
 
-        if self.recovery.needs_input:
+        if self.recovery.is_input:
             embed.colour = Colour.blue()
             embed.title = "Input required"
             embed.description = "Please provide the following values"
 
             for arg in step.required_input:
-                value = self._args.get(arg, "`Please set`")
-                embed.add_field(name=arg.title(), value=value)
+                value = step.args.get(arg, "`Please set`")
+                embed.add_field(name=arg, value=value)
 
         elif step.description:
             embed.description = step.description
@@ -97,18 +96,17 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
 
     async def show_window(self):
         await self.update_window()
-        asyncio.ensure_future(self.maybe_advance())
+        self._current_task = asyncio.ensure_future(self.maybe_advance())
 
     async def after_advance(self):
         self.menu_command.clear_dynamic_commands()
-        self._args.clear()
 
         if self.recovery.done:
             log.debug(f"recovery done {self.recovery}")
             self._is_done = True
             self.cancel_listener()
         else:
-            if self.recovery.needs_input:
+            if self.recovery.is_input:
                 step = self.recovery.current_step
                 for name, value_type in step.required_input.items():
                     cmd = self.create_dynamic_input_command(name, value_type)
@@ -125,7 +123,7 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
         await self.after_advance()
 
     async def maybe_advance(self):
-        if self.recovery.can_advance:
+        if self.recovery.can_advance and not self.recovery.is_input:
             await self.advance()
 
     async def _show_progress(self):
@@ -152,7 +150,7 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
             await self.edit(embed)
 
     async def set_input(self, arg: str, value: Any):
-        self._args[arg] = value
+        await self.recovery.provide_input({arg: value})
         await self.update_window()
 
     def create_dynamic_input_command(self, name: str, value: Type) -> commands.Command:
@@ -174,10 +172,9 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
 
         This button is only necessary when your input is required.
         """
-        if not self.recovery.needs_input:
+        if not self.recovery.is_input:
             raise commands.CommandError("Don't need any input right now, thx")
-        if not self.all_args_collected:
+        if not self.recovery.can_advance:
             raise commands.CommandError("Not all required values set yet")
 
-        await self.recovery.provide_input(**self._args)
-        asyncio.ensure_future(self.advance())
+        self._current_task = asyncio.ensure_future(self.advance())

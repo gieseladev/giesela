@@ -2,7 +2,7 @@ import abc
 import asyncio
 import enum
 import logging
-from typing import Any, Dict, Iterable, List, Optional, TYPE_CHECKING, Type, Union
+from typing import Any, Dict, Iterable, List, Mapping, Optional, TYPE_CHECKING, Type, Union
 
 from discord import User
 
@@ -10,6 +10,7 @@ from giesela import ExtractionError, Extractor
 
 if TYPE_CHECKING:
     from .playlist import Playlist
+    from .manager import PlaylistManager
 
 __all__ = ["PlaylistRecovery", "get_recovery_plan"]
 
@@ -44,38 +45,46 @@ class FixStep(metaclass=abc.ABCMeta):
 class InputStep(FixStep, abc.ABC):
     _args: Dict[str, Any]
 
-    def __init__(self, *, required_input: Dict[str, Type], **kwargs):
+    def __init__(self, *, required_input: Dict[str, Type], supplied_input: Dict[str, Any] = None, **kwargs):
         kwargs.setdefault("description", "Getting input")
         super().__init__(**kwargs)
-        self.required_input = required_input
+
+        self._required_input = required_input
+        self._args = supplied_input or {}
 
     @property
     def can_apply(self) -> bool:
-        return self.has_input
+        return self.has_all_input
 
     @property
-    def has_input(self) -> bool:
-        return hasattr(self, "_args")
+    def has_all_input(self) -> bool:
+        return set(self._args) == set(self._required_input)
+
+    @property
+    def required_input(self) -> Dict[str, Any]:
+        return self._required_input
+
+    @property
+    def missing_input(self) -> Dict[str, Any]:
+        required = self._required_input.copy()
+        for arg in self._args:
+            required.pop(arg)
+        return required
 
     @property
     def args(self) -> Dict[str, Any]:
-        if not self.has_input:
-            raise ValueError("No input provided")
         return self._args
 
     async def provide(self, **kwargs):
-        self._args = {}
-        required = self.required_input.copy()
         for key, value in kwargs.items():
-            required_type = required.pop(key, None)
+            required_type = self._required_input.get(key)
             if not required_type:
                 raise KeyError(f"Key {key} not required input")
+
             if not isinstance(value, required_type):
                 raise TypeError(f"{key} needs to be of type {required_type}, not {type(value)}")
-            self._args[key] = value
 
-        if required:
-            raise ValueError(f"Not all required arguments provided ({list(required)} missing)")
+            self._args[key] = value
 
 
 class ExtractorStep(FixStep, abc.ABC):
@@ -100,21 +109,28 @@ class ExtractorStep(FixStep, abc.ABC):
         setattr(self, "_extractor", value)
 
 
-class V1toV2(InputStep):
-    def __init__(self, **kwargs):
+class AddPlaylistMeta(InputStep):
+    def __init__(self, *, name: str = None, author: User = None, **kwargs):
         kwargs["required_input"] = dict(name=str, author=User)
+        kwargs["supplied_input"] = {key: value for key, value in dict(name=name, author=author).items() if value}
         super().__init__(**kwargs)
 
     async def apply(self, data: GPLType):
         if not isinstance(data, list):
             raise ValueError("v1 data needs to be a list...")
-        return dict(name=self.args["name"], author_id=self.args["author"].id, entries=data)
+        author = self.args["author"]
+        if isinstance(author, User):
+            author = author.id
+
+        return dict(name=self.args["name"], author_id=author, entries=data)
 
 
-class V2toV3(ExtractorStep):
+class UpdateEntries(ExtractorStep):
     def __init__(self, **kwargs):
         kwargs.setdefault("description", "Extracting additional data...")
         super().__init__(**kwargs)
+
+        self.broken_entries = []
 
         self._total_entries = 0
         self._handled_entries = 0
@@ -149,6 +165,7 @@ class V2toV3(ExtractorStep):
             entry = await self.extractor.get_entry(uri)
         except (ExtractionError, TypeError):
             log.warning(f"Couldn't extract {uri}")
+            self.broken_entries.append(entry)
             return
 
         entry = entry.to_dict()
@@ -176,13 +193,14 @@ class V2toV3(ExtractorStep):
 class PlaylistRecovery:
     current_step: Optional[FixStep]
 
-    def __init__(self, steps: List[FixStep], data: GPLType):
+    def __init__(self, steps: List[FixStep], data: GPLType, basic_info: Dict[str, Any] = None):
         self.steps = steps
         self.step_iter = iter(steps)
         self.current_step = None
         self._next_step()
 
         self.data = data
+        self.information = basic_info
 
     def __iter__(self) -> Iterable[FixStep]:
         return iter(self.steps)
@@ -202,9 +220,12 @@ class PlaylistRecovery:
             return 0
 
     @property
+    def is_input(self) -> bool:
+        return isinstance(self.current_step, InputStep)
+
+    @property
     def needs_input(self) -> bool:
-        step = self.current_step
-        return isinstance(step, InputStep) and not step.has_input
+        return self.is_input and not self.current_step.has_all_input
 
     @property
     def needs_extractor(self) -> bool:
@@ -223,7 +244,7 @@ class PlaylistRecovery:
     def extractor_steps(self) -> List[ExtractorStep]:
         return [step for step in self if isinstance(step, ExtractorStep)]
 
-    async def provide_input(self, **args):
+    async def provide_input(self, args):
         if isinstance(self.current_step, InputStep):
             await self.current_step.provide(**args)
         else:
@@ -281,7 +302,69 @@ def get_version(data: GPLType) -> Optional[GPLVersion]:
     return GPLVersion.v3
 
 
-def get_recovery_plan(data: GPLType) -> Optional[PlaylistRecovery]:
+def _extract_old_entry_meta(entries: List[Dict[str, Any]]) -> Dict[str, Any]:
+    author_id = None
+    playlist_name = None
+    playlist_cover = None
+
+    for entry in entries:
+        try:
+            meta = entry["meta"]
+        except Exception:
+            continue
+
+        try:
+            playlist = meta["playlist"]["value"]
+            playlist_name = playlist.get("name")
+            playlist_cover = playlist.get("cover")
+        except Exception:
+            pass
+
+        try:
+            author = meta["author"]
+            author_id = int(author["id"])
+        except Exception:
+            pass
+
+        if author_id and playlist_name and playlist_cover:
+            break
+
+    return dict((key, value) for key, value in (("author_id", author_id), ("name", playlist_name), ("cover", playlist_cover)) if value)
+
+
+def _try_extract_keys(data: Mapping, keys: Iterable):
+    _data = {}
+    for key in keys:
+        try:
+            _data[key] = data[key]
+        except KeyError:
+            continue
+    return _data
+
+
+def get_playlist_information(data: GPLType, version: GPLVersion = None) -> Dict[str, Any]:
+    version = version or get_version(data)
+
+    if not version:
+        return {}
+
+    info = {}
+
+    if version == GPLVersion.v1:
+        info = _extract_old_entry_meta(data)
+    elif version == GPLVersion.v2:
+        info = _extract_old_entry_meta(data.get("entries"))
+
+    if version >= GPLVersion.v2:
+        extracted = _try_extract_keys(data, ("name", "description", "author_id", "cover", "editor_ids", "gpl_id"))
+        for key, value in extracted.items():
+            if value:
+                info[key] = value
+
+    return info
+
+
+def get_recovery_plan(manager: "PlaylistManager", data: GPLType) -> Optional[PlaylistRecovery]:
     version = get_version(data)
     if not version:
         # nothing we can do about this
@@ -289,12 +372,15 @@ def get_recovery_plan(data: GPLType) -> Optional[PlaylistRecovery]:
 
     steps = []
 
+    info = get_playlist_information(data, version)
+
     if version <= GPLVersion.v1:
-        steps.append(V1toV2())
+        author = manager.bot.get_user(info.get("author_id"))
+        steps.append(AddPlaylistMeta(name=info.get("name"), author=author))
     if version <= GPLVersion.v2:
-        steps.append(V2toV3())
+        steps.append(UpdateEntries())
 
     if not steps:
         return None
 
-    return PlaylistRecovery(steps, data)
+    return PlaylistRecovery(steps, data, info)
