@@ -253,15 +253,17 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
         log.exception(f"Error in {event} ({args}, {kwargs})")
 
     async def on_command_error(self, ctx: Context, exception: Exception):
+        report = False
         if isinstance(exception, CommandError):
             if isinstance(exception, CommandInvokeError):
                 original = exception.original
 
                 self.error = f"Internal Error: ```python\n{original!r}```"
+                report = True
             else:
                 self.error = str(exception)
 
-        log.exception("CommandError:", exc_info=exception)
+        log.exception("CommandError:", exc_info=exception, extra=dict(report=report))
 
     async def on_message(self, message: Message):
         await super().on_message(message)
