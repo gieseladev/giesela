@@ -111,13 +111,13 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
             if self.recovery.needs_input:
                 step = self.recovery.current_step
                 for name, value_type in step.required_input.items():
-                    cmd = self.create_arg_command(name, value_type)
+                    cmd = self.create_dynamic_input_command(name, value_type)
                     self.menu_command.add_dynamic_command(cmd)
 
             await self.show_window()
 
     async def advance(self):
-        progress_update = asyncio.ensure_future(self.show_progress())
+        progress_update = asyncio.ensure_future(self._show_progress())
         try:
             await self.recovery.advance()
         finally:
@@ -128,7 +128,7 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
         if self.recovery.can_advance:
             await self.advance()
 
-    async def show_progress(self):
+    async def _show_progress(self):
         step = self.recovery.current_step
         last_progress = None
         while True:
@@ -155,7 +155,7 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
         self._args[arg] = value
         await self.update_window()
 
-    def create_arg_command(self, name: str, value: Type) -> commands.Command:
+    def create_dynamic_input_command(self, name: str, value: Type) -> commands.Command:
         help_text = f"Set the {name} input"
 
         async def set_value(_, **kwargs):
@@ -170,6 +170,10 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
 
     @emoji_handler("✅")
     async def submit_input(self, *_):
+        """Submit your input
+
+        This button is only necessary when your input is required.
+        """
         if not self.recovery.needs_input:
             raise commands.CommandError("Don't need any input right now, thx")
         if not self.all_args_collected:

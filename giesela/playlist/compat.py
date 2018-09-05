@@ -125,7 +125,8 @@ class V2toV3(ExtractorStep):
             return 0
         return self._handled_entries / self._total_entries
 
-    def test_valid_entry(self, entry: Dict[str, Any]) -> bool:
+    @classmethod
+    def test_valid_entry(cls, entry: Dict[str, Any]) -> bool:
         try:
             entry = entry["entry"]
             track = entry["track"]
