@@ -56,7 +56,8 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
         return self._is_done
 
     def get_embed_frame(self) -> Embed:
-        embed = Embed(title="Playlist Recovery", colour=Colour.dark_green())
+        name = self.recovery.information.get("name", "Playlist")
+        embed = Embed(title=f"{name} Recovery", colour=Colour.dark_green())
         embed.set_footer(text=f"Step {self.recovery.current_step_index + 1}/{len(self.recovery)}")
         return embed
 
