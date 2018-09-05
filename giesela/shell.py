@@ -1,6 +1,7 @@
 import abc
 import asyncio
 import contextlib
+import functools
 import logging
 import pprint
 import sys
@@ -239,7 +240,7 @@ class PythonInterpreter(GieselaInterpreter):
     language_name = "Python"
     highlight_language = "py"
 
-    WRAP_TEMPLATE = "async def func():\n" \
+    WRAP_TEMPLATE = "async def func({{args}}):\n" \
                     "{code}"
 
     @classmethod
@@ -259,6 +260,8 @@ class PythonInterpreter(GieselaInterpreter):
 
     @classmethod
     def _compile_wrap(cls, code: str, context: Dict[str, Any]) -> Optional[Callable]:
+        args = list(context)
+        code = code.format(args=",".join(args))
         try:
             _scope = {}
             exec(code, context, _scope)
@@ -266,7 +269,7 @@ class PythonInterpreter(GieselaInterpreter):
             pass
         else:
             func = _scope.get("func")
-            return func
+            return functools.partial(func, **context)
 
     @classmethod
     def get_compiled(cls, code: str, context: Dict[str, Any]) -> Callable:
