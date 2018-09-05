@@ -84,7 +84,7 @@ class PlaylistViewer(_PlaylistEmbed):
         playlist = kwargs["playlist"]
         embed = create_basic_embed(playlist)
         embed.add_field(name="Length", value=f"{len(playlist)} entries")
-        embed.add_field(name="Duration", value=utils.format_time(playlist.duration))
+        embed.add_field(name="Duration", value=utils.format_time(playlist.total_duration))
         super().__init__(*args, embed_frame=embed, **kwargs)
 
     @emoji_handler("🎵", pos=999)
