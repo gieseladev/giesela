@@ -185,9 +185,12 @@ class _BaseEditor(AutoHelpEmbed, InteractableEmbed, MessageableEmbed):
         embed = self.get_embed()
         await self.edit(embed)
 
-    async def on_command_error(self, ctx: Context, exception: Exception):
+    async def on_command_error(self, ctx: Optional[Context], exception: Exception):
         await super().on_command_error(ctx, exception)
         await self.update()
+
+    async def on_emoji_handler_error(self, error: Exception, *_):
+        await self.on_command_error(None, error)
 
     async def search_for_image(self, query: str) -> str:
         image = await utils.search_image(self.aiosession, query, min_squareness=.8)
@@ -195,9 +198,15 @@ class _BaseEditor(AutoHelpEmbed, InteractableEmbed, MessageableEmbed):
             raise commands.CommandError("Couldn't find an image")
         return image
 
+    async def assert_save_possible(self) -> bool:
+        return True
+
     @emoji_handler("💾", pos=999)
     async def save_changes(self, *_):
         """Apply changes and close"""
+        if not await self.assert_save_possible():
+            return
+
         self.stop_listener()
         return self.edited
 
@@ -324,9 +333,18 @@ class ChapterEditor(_BaseEditor):
     async def _set_end(self, timestamp: float):
         if timestamp <= self.editor.start:
             raise commands.CommandError("duration must not be 0 or less")
-        if timestamp >= self.entry_editor.base.duration:
+        if timestamp > self.entry_editor.base.duration:
             raise commands.CommandError("end must not exceed entry duration")
         await self.set_timestamp("end", timestamp)
+
+    async def assert_save_possible(self):
+        if self.editor.duration <= 0:
+            raise commands.CommandError("Duration must not be 0 or less!")
+        if self.editor.start > self.entry_editor.base.duration:
+            raise commands.CommandError("Start must not exceed entry duration")
+        if self.editor.end > self.entry_editor.base.duration:
+            raise commands.CommandError("End must not exceed entry duration")
+        return await super().assert_save_possible()
 
     @commands.command("duration")
     async def set_duration(self, _, duration: str):
