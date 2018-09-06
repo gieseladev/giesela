@@ -41,7 +41,8 @@ class EditBase(BaseEntry):
         em.set_author(name=self.artist or "Unknown Artist", icon_url=self.artist_image or Embed.Empty)
         if self.cover:
             em.set_thumbnail(url=self.cover)
-        em.add_field(name="Album", value=self.album or "Unknown Album")
+        if self.album:
+            em.add_field(name="Album", value=self.album)
         return em
 
 
