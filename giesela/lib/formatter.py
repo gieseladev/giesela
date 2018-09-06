@@ -1,10 +1,11 @@
 import inspect
 import itertools
+import operator
 from typing import Iterable, List, Tuple, Union
 
 from discord import Colour, Embed, Message
 from discord.ext import commands
-from discord.ext.commands import Command, Context, HelpFormatter
+from discord.ext.commands import Command, Context, Group, HelpFormatter
 
 from giesela.ui import EmbedPaginator, copy_embed
 
@@ -19,16 +20,22 @@ class GieselaHelpFormatter(HelpFormatter):
     def get_commands_text(self, _commands: Iterable[Tuple[str, Command]]) -> str:
         _commands = list(_commands)
         max_width = self.get_max_width(_commands)
-        value = ""
+        lines = []
         for name, cmd in _commands:
             if name in cmd.aliases:
                 # skip aliases
                 continue
 
             entry = f"{name:<{max_width}} | {cmd.short_doc}"
-            shortened = self.shorten(entry)
-            value += shortened + "\n"
-        return value
+            lines.append(self.shorten(entry))
+
+            if isinstance(cmd, Group):
+                sub_cmds = sorted(cmd.commands, key=operator.attrgetter("name"))
+                for sub_cmd in sub_cmds:
+                    name = sub_cmd.name
+                    lines.append(f" └ {name}")
+
+        return "\n".join(lines)
 
     async def format(self):
         template_embed = Embed(colour=Colour.green())
