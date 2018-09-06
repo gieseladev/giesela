@@ -305,7 +305,7 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
 
         super().__init__(channel, **kwargs)
 
-        if self.embeds and no_controls_for_single_page and len(self.embeds) == 1:
+        if self.embeds and len(self.embeds) == 1 and no_controls_for_single_page:
             self.disable_handler(self.previous_page)
             self.disable_handler(self.next_page)
 

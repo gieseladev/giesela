@@ -190,7 +190,7 @@ class PlaylistCog:
     async def playlist_cover(self, ctx: Context, playlist: str, cover: str):
         """Set the cover of a playlist"""
         if cover in ("auto",):
-            await ctx.invoke(self.playlist_cover_auto, playlist)
+            await ctx.invoke(self.playlist_cover_auto, playlist=playlist)
             return
 
         playlist = self.find_playlist(playlist)
