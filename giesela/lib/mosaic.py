@@ -4,9 +4,9 @@ import math
 import random
 from contextlib import suppress
 from io import BytesIO
-from typing import Iterable, List, Optional, TYPE_CHECKING
+from typing import Iterable, List, Optional, TYPE_CHECKING, Tuple
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
 from aiohttp import ClientSession
 
 from giesela.lib.api.imgur import upload_playlist_cover
@@ -64,11 +64,6 @@ def _create_pie_chart(*images: Image.Image, size: int = 1024) -> Image.Image:
 
     angle = 360 / len(images)
 
-    mask = Image.new("1", (size, size))
-    draw = ImageDraw.Draw(mask)
-
-    draw.pieslice((0, 0, size, size), -90, -90 + angle, fill=1)
-
     for ind, image in enumerate(images):
         mask = Image.new("1", (size, size))
         draw = ImageDraw.Draw(mask)
@@ -109,6 +104,55 @@ def _create_focused_collage(*images: Image.Image, size: int = 1024) -> Image.Ima
         final.paste(right, box=(focus_image_size, (i + 1) * other_images_size))
 
     return final
+
+
+def get_center_pos(im: Image.Image, canvas: Image.Image) -> Tuple[int, int]:
+    x = (canvas.width - im.width) // 2
+    y = (canvas.height - im.height) // 2
+    return x, y
+
+
+def _create_octagonal_focused_collage(*images: Image.Image, size: int = 1024) -> Image.Image:
+    if len(images) < 5:
+        raise ValueError("Need at least 5 images")
+
+    if len(images) > 6:
+        images = random.sample(images, 6)
+    else:
+        images = list(images)
+
+    if len(images) > 5:
+        background: Image.Image = images.pop()
+        background = background.filter(ImageFilter.GaussianBlur(5))
+        background.draft("RGBA", (size, size))
+    else:
+        hue = random.randrange(0, 360)
+        colour = f"hsv({hue}, 60%, 60%)"
+        background = Image.new("RGB", (size, size), color=colour)
+
+    half_size = 2 * (size // 2,)
+
+    half_mask = Image.new("1", half_size, color=1).rotate(45)
+
+    center_image: Image.Image = images.pop()
+    center_image = center_image.resize(half_size)
+
+    background.paste(center_image, box=get_center_pos(center_image, background), mask=half_mask)
+
+    for i in range(4):
+        corner_image: Image.Image = images.pop()
+        corner_image = corner_image.resize(half_size)
+
+        top = i < 2
+        left = i % 2 == 0
+
+        x = -corner_image.width // 4 if left else size - 3 * corner_image.width // 4
+        y = -corner_image.height // 4 if top else size - 3 * corner_image.height // 4
+
+        corner_image = ImageEnhance.Color(corner_image).enhance(.5)
+        background.paste(corner_image, box=(x, y), mask=half_mask)
+
+    return background
 
 
 def _create_stacked_collage(*images: Image.Image, size: int = 1024, size_ratio: float = .55) -> Image.Image:
@@ -155,7 +199,7 @@ def create_random_cover(*images: Image.Image, size: int = 1024) -> Image.Image:
         possible.extend((_create_focused_collage, _create_normal_collage))
 
     if len(images) >= 5:
-        possible.append(_create_stacked_collage)
+        possible.extend((_create_stacked_collage, _create_octagonal_focused_collage))
 
     generator = random.choice(possible)
     return generator(*images, size=size)
@@ -176,11 +220,13 @@ async def download_images(session: ClientSession, links: Iterable[str], size: in
     tasks = []
     for link in links:
         tasks.append(_download_image(session, link, size))
-    return await asyncio.gather(*tasks)
+
+    images = await asyncio.gather(*tasks)
+    return list(filter(None, images))
 
 
 async def generate_playlist_cover(playlist: "Playlist", size: int = 1024) -> Optional[str]:
-    covers = [pl_entry.entry.cover for pl_entry in playlist.entries if pl_entry.entry.cover]
+    covers = {pl_entry.entry.cover for pl_entry in playlist.entries if pl_entry.entry.cover}
     log.debug(f"generating cover for {playlist}, found ({len(covers)} cover(s))")
     if not covers:
         return None
