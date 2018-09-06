@@ -31,7 +31,8 @@ class Resolver:
             attribute = config.pop("attribute", None)
         return cls(selector, attribute)
 
-    def process_value(self, value: str) -> str:
+    @classmethod
+    def process_value(cls, value: str) -> str:
         return " ".join(value.split()).strip()
 
     def resolve_one(self, bs: Tag) -> str:

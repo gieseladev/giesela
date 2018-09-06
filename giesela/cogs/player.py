@@ -408,7 +408,7 @@ class Player:
                 "text": f"Lyrics from {lyrics.origin.source_name}"
             }
         }
-        viewer = VerticalTextViewer(ctx.channel, ctx.author, embed_frame=frame, content=lyrics.lyrics)
+        viewer = VerticalTextViewer(ctx.channel, user=ctx.author, embed_frame=frame, content=lyrics.lyrics)
         if _progress_guess:
             line = round(_progress_guess * viewer.total_lines)
             viewer.set_focus_line(line)

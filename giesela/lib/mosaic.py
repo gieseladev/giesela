@@ -180,7 +180,7 @@ async def download_images(session: ClientSession, links: Iterable[str], size: in
 
 
 async def generate_playlist_cover(playlist: "Playlist", size: int = 1024) -> Optional[str]:
-    covers = [entry.cover for entry in playlist.entries if entry.cover]
+    covers = [pl_entry.entry.cover for pl_entry in playlist.entries if pl_entry.entry.cover]
     log.debug(f"generating cover for {playlist}, found ({len(covers)} cover(s))")
     if not covers:
         return None

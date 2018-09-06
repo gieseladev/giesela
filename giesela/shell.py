@@ -54,7 +54,8 @@ class UploadAdapter(metaclass=abc.ABCMeta):
     def __init__(self, **kwargs):
         pass
 
-    def filter_history(self, history: List["ShellLine"], *, skip_errors: bool = True) -> List["ShellLine"]:
+    @classmethod
+    def filter_history(cls, history: List["ShellLine"], *, skip_errors: bool = True) -> List["ShellLine"]:
         if skip_errors:
             history = [line for line in history if not line.error]
         return history

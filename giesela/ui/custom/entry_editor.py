@@ -56,8 +56,9 @@ class EditChapter(SpecificChapterData, EditBase):
 
     def get_embed(self) -> Embed:
         embed = super().get_embed()
-        if embed._fields:
-            embed._fields[-1].update(inline=False)
+        fields = getattr(embed, "_fields", False)
+        if fields:
+            fields[-1].update(inline=False)
 
         embed.add_field(name="Start", value=utils.to_timestamp(self.start))
         embed.add_field(name="Duration", value=utils.to_timestamp(self.duration))
@@ -383,7 +384,8 @@ class EntryEditor(VerticalTextViewer, _BaseEditor):
     def get_embed(self) -> Embed:
         embed = super().get_embed()
         if self.editor.chapters:
-            embed._fields.insert(0, dict(inline=False, name="Chapters", value="{progress_bar}"))
+            fields = getattr(embed, "_fields")
+            fields.insert(0, dict(inline=False, name="Chapters", value="{progress_bar}"))
         return embed
 
     def get_chapter_editor(self, chapter: SpecificChapterData) -> ChapterEditor:

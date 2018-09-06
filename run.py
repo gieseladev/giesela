@@ -73,6 +73,7 @@ def setup_logging():
     Path("logs").mkdir(exist_ok=True)
 
     logging.config.dictConfig(LOGGING)
+    # noinspection PyProtectedMember
     handler = logging._handlers.get("file")  # type: logging.handlers.RotatingFileHandler
     handler.doRollover()
 

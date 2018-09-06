@@ -181,7 +181,7 @@ class GieselaWebSocket(WebSocket):
             placement = mode
         elif mode in "now":
             if player.current_entry:
-                player.skip()
+                _call_function_main_thread(player.skip)
 
             placement = 0
         elif mode == "next":

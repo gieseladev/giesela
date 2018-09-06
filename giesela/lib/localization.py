@@ -153,5 +153,6 @@ def get(lang, string_id):
     return get_locale(lang).get(string_id)
 
 
+# noinspection PyShadowingBuiltins
 def format(lang, string_id, *args, **kwargs):
     return get_locale(lang).format(string_id, *args, **kwargs)

@@ -246,7 +246,7 @@ class PlaylistCog:
             em.set_image(url=_cover)
             return em
 
-        picker = ItemPicker(ctx.channel, ctx.author, embed_callback=get_cover_page)
+        picker = ItemPicker(ctx.channel, user=ctx.author, embed_callback=get_cover_page)
 
         try:
             index = await picker.choose()
@@ -353,7 +353,7 @@ class PlaylistCog:
                                                f"{description}")
 
         # MAYBE use special viewer with play (and other) features
-        viewer = EmbedViewer(ctx.channel, ctx.author, embeds=paginator)
+        viewer = EmbedViewer(ctx.channel, user=ctx.author, embeds=paginator)
         await viewer.display()
         await ctx.message.delete()
 

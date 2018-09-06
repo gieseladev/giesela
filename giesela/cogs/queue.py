@@ -278,7 +278,7 @@ class DisplayCog(QueueBase):
             }
         }
 
-        viewer = VerticalTextViewer(ctx.channel, ctx.author, content=lines, embed_frame=frame)
+        viewer = VerticalTextViewer(ctx.channel, user=ctx.author, content=lines, embed_frame=frame)
         await viewer.display()
         await ctx.message.delete()
 
@@ -309,7 +309,7 @@ class DisplayCog(QueueBase):
             }
         }
 
-        viewer = VerticalTextViewer(ctx.channel, ctx.author, content=lines, embed_frame=frame)
+        viewer = VerticalTextViewer(ctx.channel, user=ctx.author, content=lines, embed_frame=frame)
         await viewer.display()
         await ctx.message.delete()
 

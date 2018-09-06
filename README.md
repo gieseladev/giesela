@@ -94,9 +94,9 @@ which Giesela understands, but I'm too lazy to name them all!
 - Optimised Entry system
 - New and improved playlist system
 - Newly added playlist features:
-    * Playlist editors
+    * Restriciting edit access to selected editors
 - New radio station system which makes it easy (at least easier) to add new radio stations
-- Using [Lavalink](lavalink)
+- Using [Lavalink][lavalink]
 
 
 [docker-container]: https://www.docker.com/what-container

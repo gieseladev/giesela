@@ -60,7 +60,7 @@ class Radio:
                 em.set_footer(text=song_data.album or "Unknown Album", icon_url=song_data.cover or Embed.Empty)
             return em
 
-        item_picker = ItemPicker(ctx.channel, ctx.author, embed_callback=get_station)
+        item_picker = ItemPicker(ctx.channel, user=ctx.author, embed_callback=get_station)
         result = await item_picker.choose()
 
         if result is not None:
