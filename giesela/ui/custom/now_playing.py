@@ -47,31 +47,31 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         self.player = player
 
     async def get_embed(self) -> Embed:
-        entry = self.player.current_entry
+        player_entry = self.player.current_entry
 
-        if not entry:
+        if not player_entry:
             return Embed(description="Nothing playing")
 
-        basic_entry = entry.entry
-        progress = entry.progress
-        duration = basic_entry.duration
+        entry = player_entry.entry
+        progress = player_entry.progress
+        duration = entry.duration
 
-        if not isinstance(basic_entry, BaseEntry):
-            return Embed(title=str(basic_entry), footer="Unsupported entry type")
+        if not isinstance(entry, BaseEntry):
+            return Embed(title=str(entry), footer="Unsupported entry type")
 
-        if entry.has_chapters:
-            chapter = entry.chapter
+        if player_entry.has_chapters:
+            chapter = player_entry.chapter
             if isinstance(chapter, SpecificChapterData):
                 progress = chapter.get_chapter_progress(progress)
                 duration = chapter.duration
 
-            target = ObjectChain(chapter, basic_entry)
+            target = ObjectChain(chapter, entry)
         else:
             chapter = None
-            target = basic_entry
+            target = entry
 
-        playlist = entry.get("playlist", None)
-        requester = entry.get("requester", None)
+        playlist = player_entry.get("playlist", None)
+        requester = player_entry.get("requester", None)
 
         description = get_description(self.player, progress, duration)
 
@@ -89,16 +89,16 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         if playlist:
             em.set_footer(text=playlist.name, icon_url=playlist.cover or Embed.Empty)
 
-        if isinstance(basic_entry, RadioEntry):
-            em.set_footer(text=basic_entry.station.name, icon_url=basic_entry.station.logo or Embed.Empty)
+        if isinstance(entry, RadioEntry):
+            em.set_footer(text=entry.station.name, icon_url=entry.station.logo or Embed.Empty)
 
         if requester:
             em.add_field(name="Requested by", value=requester.mention)
 
-        if chapter and isinstance(basic_entry, ChapterEntry):
-            index = basic_entry.chapters.index(chapter)
-            total_chapters = len(basic_entry.chapters)
-            em.set_footer(text=f"Chapter {index}/{total_chapters} of {entry}")
+        if chapter and isinstance(entry, ChapterEntry):
+            index = entry.chapters.index(chapter)
+            total_chapters = len(entry.chapters)
+            em.set_footer(text=f"Chapter {index + 1}/{total_chapters} of {entry}", icon_url=entry.cover or Embed.Empty)
 
         return em
 

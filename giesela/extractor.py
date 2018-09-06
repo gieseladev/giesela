@@ -82,6 +82,7 @@ class Extractor:
             result = await self.client.search_tracks(target, searcher)
 
         if not result.load_type.has_results:
+            log.debug(f"no results: {result}")
             return None
 
         playlist_info = result.playlist_info

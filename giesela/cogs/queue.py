@@ -34,7 +34,7 @@ class EnqueueCog(QueueBase):
     async def _play_cmd(self, ctx: Context, target: str, placement: int = None):
         player = await self.get_player(ctx)
 
-        with await ctx.typing():
+        async with ctx.typing():
             result = await self.extractor.get(target)
 
         if not result:

@@ -50,9 +50,14 @@ class Reducible(metaclass=abc.ABCMeta):
         return {}
 
     @classmethod
-    def from_dict(cls, data):
-        # noinspection PyArgumentList
-        return cls(**data)
+    def from_dict(cls, data: Dict[str, Any]):
+        try:
+            # noinspection PyArgumentList
+            return cls(**data)
+        except Exception:
+            if isinstance(data, cls):
+                return data
+            raise
 
 
 class OrderByAttribute(metaclass=abc.ABCMeta):
@@ -96,7 +101,8 @@ class PlayableEntry(Reducible, OrderByAttribute, metaclass=_RegisterEntryMeta):
     start_position: Optional[float]
     end_position: Optional[float]
 
-    def __init__(self, *, track: str, uri: str, seekable: bool, duration: float = None, start_position: float = None, end_position: float = None):
+    def __init__(self, *, track: str, uri: str, seekable: bool, duration: float = None, start_position: float = None, end_position: float = None,
+                 **_):
         self._track = track
         self._uri = uri
         self._is_seekable = seekable
@@ -210,6 +216,9 @@ class BaseEntry(Reducible, metaclass=abc.ABCMeta):
         data.update(((key, value) for key, value in pairs if value))
         return data
 
+    def copy(self):
+        return copy.copy(self)
+
 
 class ChapterData(BaseEntry):
 
@@ -224,13 +233,32 @@ class ChapterData(BaseEntry):
 class SpecificChapterData(ChapterData):
     def __init__(self, *, start: float, duration: float = None, end: float = None, **kwargs):
         super().__init__(**kwargs)
-        self.start = start
+        self._start = start
 
-        if not ((duration is not None) ^ (end is not None)):
+        if duration is not None:
+            self.duration = duration
+        elif end is not None:
+            self.end = end
+        else:
             raise ValueError("Either duration or end required!")
 
-        self.duration = duration or end - start
-        self.end = end or start + duration
+    @property
+    def start(self) -> float:
+        return self._start
+
+    @start.setter
+    def start(self, value: float):
+        start_delta = value - self._start
+        self._start = value
+        self.duration -= start_delta
+
+    @property
+    def end(self) -> float:
+        return self.start + self.duration
+
+    @end.setter
+    def end(self, value: float):
+        self.duration = value - self.start
 
     def contains(self, timestamp: float) -> bool:
         return self.start <= timestamp < self.end
@@ -255,7 +283,7 @@ class HasChapters(metaclass=abc.ABCMeta):
 
 
 class BasicEntry(BaseEntry, PlayableEntry):
-    def __init__(self, *, title: str, artist: str, cover: str = None, artist_image: str = None, album: str = None, **kwargs):
+    def __init__(self, *, title: str, artist: str = None, cover: str = None, artist_image: str = None, album: str = None, **kwargs):
         super().__init__(**kwargs)
         self.title = title
         self.artist = artist
@@ -272,13 +300,20 @@ class BasicEntry(BaseEntry, PlayableEntry):
 
 class ChapterEntry(BasicEntry, HasChapters):
 
-    def __init__(self, chapters: List[SpecificChapterData], **kwargs):
+    def __init__(self, *, chapters: List[SpecificChapterData], **kwargs):
         super().__init__(**kwargs)
         self.chapters = chapters
 
     @property
     def has_chapters(self):
         return bool(self.chapters)
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]):
+        chapters = data.pop("chapters", [])
+        chapters = [SpecificChapterData.from_dict(chapter) for chapter in chapters]
+        data["chapters"] = chapters
+        return cls(**data)
 
     async def get_chapter(self, timestamp: float) -> Optional[ChapterData]:
         return next((chapter for chapter in self.chapters if chapter.contains(timestamp)), None)
@@ -434,12 +469,6 @@ class PlayerEntry(EntryWrapper):
         super().__init__(**kwargs)
         self.player = player
 
-        entry = self.entry
-        if isinstance(entry, HasChapters):
-            self.has_chapters = entry.has_chapters
-        else:
-            self.has_chapters = False
-
         self._chapter = None
 
     @property
@@ -451,8 +480,18 @@ class PlayerEntry(EntryWrapper):
         return self.entry.duration - self.progress
 
     @property
+    def has_chapters(self) -> bool:
+        entry = self.entry
+        return entry.has_chapters if isinstance(entry, HasChapters) else False
+
+    @property
     def chapter(self) -> Optional[ChapterData]:
         return self._chapter
+
+    def change_entry(self, new_entry: PlayableEntry):
+        wrapper = self.lowest_wrapper
+        wrapper._entry = new_entry
+        # TODO should emit event
 
     async def get_chapter(self) -> Optional[ChapterData]:
         entry = self.entry

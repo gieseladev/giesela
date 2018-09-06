@@ -38,7 +38,7 @@ class InteractableEmbed(HasListener, EditableEmbed, ReactionHandler, Startable, 
 
     _emojis: List[Tuple[EmojiType, int]]
 
-    def __init__(self, channel: TextChannel, user: User = None, **kwargs):
+    def __init__(self, channel: TextChannel, *, user: User = None, **kwargs):
         super().__init__(channel, **kwargs)
         self.user = user
         self.handlers = {}
@@ -195,7 +195,7 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
     _group: MenuCommandGroup
     error: Optional[str]
 
-    def __init__(self, channel: TextChannel, user: User = None, **kwargs):
+    def __init__(self, channel: TextChannel, *, user: User = None, **kwargs):
         self.bot = kwargs.pop("bot")
         self.delete_msgs = kwargs.pop("delete_msgs", True)
         self._group = MenuCommandGroup(self.bot)
@@ -294,7 +294,7 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
 
     _current_index: int
 
-    def __init__(self, channel: TextChannel, user: User = None, **kwargs):
+    def __init__(self, channel: TextChannel, **kwargs):
         self.embeds = kwargs.pop("embeds", None)
         no_controls_for_single_page = kwargs.pop("no_controls_for_single_page", True)
 
@@ -303,7 +303,7 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
         if not (issubclass(type(self), _HorizontalPageViewer) or bool(self.embeds) ^ bool(self.embed_callback)):
             raise ValueError("You need to provide either the `embeds` or the `embed_callback` keyword argument")
 
-        super().__init__(channel, user, **kwargs)
+        super().__init__(channel, **kwargs)
 
         if self.embeds and no_controls_for_single_page and len(self.embeds) == 1:
             self.disable_handler(self.previous_page)
@@ -400,7 +400,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
     _current_line: int
     _lines_displayed: int
 
-    def __init__(self, channel: TextChannel, user: User = None, **kwargs):
+    def __init__(self, channel: TextChannel, **kwargs):
         self._embed_frame = kwargs.pop("embed_frame", None)
         if isinstance(self._embed_frame, Embed):
             self._embed_frame = self._embed_frame.to_dict()
@@ -424,7 +424,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         if not (issubclass(type(self), VerticalTextViewer) or bool(self.lines) ^ bool(self.line_callback)):
             raise ValueError("You need to provide either the `content` or the `content_callback` keyword argument")
 
-        super().__init__(channel, user, **kwargs)
+        super().__init__(channel, **kwargs)
 
         self._current_line = 0
         self._lines_displayed = 0

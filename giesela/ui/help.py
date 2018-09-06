@@ -112,9 +112,9 @@ async def get_command_help(ctx: Context, *cmds: str) -> Optional[Embed]:
 class HelpEmbed(InteractableEmbed):
     help_embed: Embed
 
-    def __init__(self, channel: TextChannel, user: User = None, **kwargs):
-        self.help_embed = kwargs.pop("help_embed")
-        super().__init__(channel, user, **kwargs)
+    def __init__(self, channel: TextChannel, *, help_embed: Embed, **kwargs):
+        self.help_embed = help_embed
+        super().__init__(channel, **kwargs)
 
     def __await__(self):
         return self.display().__await__()
@@ -155,7 +155,7 @@ class HasHelp(Stoppable, metaclass=abc.ABCMeta):
     def get_help_embed(self) -> Embed:
         pass
 
-    async def show_help_embed(self, channel: TextChannel, user: User = None, *, embed: Embed = None):
+    async def show_help_embed(self, channel: TextChannel, *, embed: Embed = None, **kwargs):
         if self._showing_help and not (embed or self._showing_custom):
             return
 
@@ -171,18 +171,18 @@ class HasHelp(Stoppable, metaclass=abc.ABCMeta):
             await self._current_help.stop()
             return await self._current_help.display(embed)
         else:
-            self._current_help = self._help_embed_cls(channel, user, help_embed=embed)
+            self._current_help = self._help_embed_cls(channel, help_embed=embed, **kwargs)
             return await self._current_help.display()
 
-    def toggle_help_embed(self, channel: TextChannel, user: User = None):
+    def toggle_help_embed(self, channel: TextChannel, **kwargs):
         if self._showing_help:
             task = asyncio.ensure_future(self._current_help.delete())
         else:
-            task = self.trigger_help_embed(channel, user)
+            task = self.trigger_help_embed(channel, **kwargs)
         return task
 
-    def trigger_help_embed(self, *args, **kwargs):
-        return asyncio.ensure_future(self.show_help_embed(*args, **kwargs))
+    def trigger_help_embed(self, channel: TextChannel, **kwargs):
+        return asyncio.ensure_future(self.show_help_embed(channel, **kwargs))
 
 
 class AutoHelpEmbed(HasHelp, metaclass=abc.ABCMeta):
@@ -212,14 +212,14 @@ class AutoHelpEmbed(HasHelp, metaclass=abc.ABCMeta):
     @emoji_handler("❓", pos=10000)
     async def show_help(self, _, user: User):
         """Open this very box"""
-        self.toggle_help_embed(self.channel, user)
+        self.toggle_help_embed(self.channel, user=user)
 
     @commands.command()
     async def help(self, ctx: Context, *cmds: str):
         """Even more help"""
         if not cmds:
-            self.toggle_help_embed(self.channel, ctx.author)
+            self.toggle_help_embed(self.channel, user=ctx.author)
             return
 
         embed = await get_command_help(ctx, *cmds)
-        self.trigger_help_embed(self.channel, ctx.author, embed=embed)
+        self.trigger_help_embed(self.channel, user=ctx.author, embed=embed)

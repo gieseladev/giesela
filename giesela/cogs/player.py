@@ -362,18 +362,18 @@ class Player:
         player = await self.get_player(ctx)
         if not player.current_entry:
             raise commands.CommandError("There's nothing playing right now")
-        editor = EntryEditor(ctx.channel, ctx.author, bot=self.bot, entry=player.current_entry)
+        editor = EntryEditor(ctx.channel, user=ctx.author, bot=self.bot, entry=player.current_entry.entry)
         new_entry = await editor.display()
 
         if not new_entry:
             await ctx.message.delete()
             return
 
-        if player.current_entry is editor.original_entry:
-            player.modify_current_entry(new_entry)
-            await ctx.send(f"Saved changes to **{new_entry.title}**")
+        if player.current_entry and player.current_entry.entry is editor.original:
+            player.current_entry.change_entry(new_entry)
+            await ctx.send(f"Saved changes to **{new_entry}**")
 
-        playlist_entry = player.current_entry.meta.get("playlist_entry")
+        playlist_entry = player.current_entry.get("playlist_entry", None)
         if playlist_entry:
             playlist_entry.replace(new_entry)
 
