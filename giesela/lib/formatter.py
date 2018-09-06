@@ -33,7 +33,7 @@ class GieselaHelpFormatter(HelpFormatter):
                 sub_cmds = sorted(cmd.commands, key=operator.attrgetter("name"))
                 for sub_cmd in sub_cmds:
                     name = sub_cmd.name
-                    lines.append(f" └ {name}")
+                    lines.append(f" ┗ {name}")
 
         return "\n".join(lines)
 
