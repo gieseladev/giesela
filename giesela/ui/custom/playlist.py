@@ -43,7 +43,7 @@ class _PlaylistEmbed(VerticalTextViewer, metaclass=abc.ABCMeta):
     player_cog: "Player"
     playlist: Playlist
 
-    def __init__(self, channel: TextChannel, user: User = None, **kwargs):
+    def __init__(self, channel: TextChannel, **kwargs):
         self.bot = kwargs.pop("bot")
         self.playlist = kwargs.pop("playlist")
         embed_frame = kwargs.pop("embed_frame", False) or create_basic_embed(self.playlist)
@@ -51,7 +51,7 @@ class _PlaylistEmbed(VerticalTextViewer, metaclass=abc.ABCMeta):
         if self.PASS_BOT:
             kwargs["bot"] = self.bot
 
-        super().__init__(channel, user, embed_frame=embed_frame, **kwargs)
+        super().__init__(channel, embed_frame=embed_frame, **kwargs)
 
         self.player_cog = self.bot.cogs["Player"]
 
@@ -197,7 +197,7 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
         if not 0 <= index < len(self.pl_entries):
             raise commands.CommandError(f"Index out of bounds  ({index + 1} not in 1 - {len(self.pl_entries)})")
         entry = self.pl_entries[index]
-        editor = EntryEditor(ctx.channel, ctx.author, bot=self.bot, entry=entry.entry)
+        editor = EntryEditor(ctx.channel, user=ctx.author, bot=self.bot, entry=entry.entry)
         new_entry = await editor.display()
         if new_entry:
             self.playlist_editor.edit_entry(entry, new_entry)
