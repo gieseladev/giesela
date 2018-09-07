@@ -10,12 +10,11 @@ from discord.ext.commands import Command, Context, Group, HelpFormatter
 from giesela.ui import EmbedPaginator, copy_embed
 
 
+# TODO clean this up xD
 class GieselaHelpFormatter(HelpFormatter):
-    def get_max_width(self, _commands: Iterable[Tuple[str, Command]]) -> int:
-        try:
-            return self.max_name_size
-        except AttributeError:
-            return max(len(name) for name, command in _commands)
+    @classmethod
+    def get_max_width(cls, _commands: Iterable[Tuple[str, Command]]) -> int:
+        return max(len(name) for name, command in _commands)
 
     def get_commands_text(self, _commands: Iterable[Tuple[str, Command]]) -> str:
         _commands = list(_commands)
