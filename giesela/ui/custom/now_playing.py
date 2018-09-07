@@ -1,4 +1,5 @@
 import asyncio
+from typing import Optional
 
 from discord import Colour, Embed, Message, TextChannel
 
@@ -14,8 +15,12 @@ def create_progress_bar(progress: float, duration: float, *, length: int = 18) -
     return progress_bar
 
 
-def get_description(player: GieselaPlayer, progress: float, duration: float = None) -> str:
-    prefix = ""
+def get_description(progress: float, duration: float = None, is_playing: bool = None) -> str:
+    if is_playing is None:
+        prefix = ""
+    else:
+        prefix = "❚❚ | " if is_playing else "► | "
+
     progress_ts = utils.to_timestamp(progress)
 
     if duration is None:
@@ -27,9 +32,6 @@ def get_description(player: GieselaPlayer, progress: float, duration: float = No
         duration_ts = utils.to_timestamp(duration)
         suffix = f"`{progress_ts}/{duration_ts}`"
 
-    if player.is_paused:
-        prefix = "❚❚ "
-
     return f"{prefix}{content} | {suffix}"
 
 
@@ -38,13 +40,19 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
     Keyword Args:
         seek_amount: Amount of seconds to forward/rewind
     """
-    seek_amount: float
-    player: GieselaPlayer
+    _delayed_update_task: Optional[asyncio.Task]
+    _show_detailed_task: Optional[asyncio.Task]
 
-    def __init__(self, channel: TextChannel, player: GieselaPlayer, **kwargs):
-        self.seek_amount = kwargs.pop("seek_amount", 30)
+    def __init__(self, channel: TextChannel, *, player: GieselaPlayer, seek_amount: float = 30, show_detailed_duration: float = 20, **kwargs):
         super().__init__(channel, **kwargs)
         self.player = player
+        self.seek_amount = seek_amount
+
+        self.show_detailed_duration = show_detailed_duration
+        self.showing_detailed = False
+
+        self._delayed_update_task = None
+        self._show_detailed_task = None
 
     async def get_embed(self) -> Embed:
         player_entry = self.player.current_entry
@@ -73,7 +81,7 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         playlist = player_entry.get("playlist", None)
         requester = player_entry.get("requester", None)
 
-        description = get_description(self.player, progress, duration)
+        description = get_description(progress, duration, self.player.is_playing)
 
         em = Embed(title=target.title, description=description, colour=Colour.greyple())
 
@@ -92,7 +100,7 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         if isinstance(entry, RadioEntry):
             em.set_footer(text=entry.station.name, icon_url=entry.station.logo or Embed.Empty)
 
-        if requester:
+        if requester and self.showing_detailed:
             em.add_field(name="Requested by", value=requester.mention)
 
         if chapter and isinstance(entry, ChapterEntry):
@@ -100,7 +108,24 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
             total_chapters = len(entry.chapters)
             em.set_footer(text=f"Chapter {index + 1}/{total_chapters} of {entry}", icon_url=entry.cover or Embed.Empty)
 
+            if self.showing_detailed:
+                em.add_field(name="Total Progress", value=get_description(self.player.progress, entry.duration))
+
+        next_entry = self.player.queue.peek()
+        if next_entry and self.showing_detailed:
+            em.add_field(name="Up Next", value=str(next_entry.entry), inline=False)
+
         return em
+
+    async def _show_detailed(self):
+        self.showing_detailed = True
+        try:
+            await self.trigger_update()
+            await asyncio.sleep(self.show_detailed_duration)
+        finally:
+            self.showing_detailed = False
+
+        await self.trigger_update()
 
     async def on_create_message(self, msg: Message):
         await self.add_reactions(msg)
@@ -133,9 +158,22 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
     async def next_entry(self, *_):
         await self.player.skip()
 
+    @emoji_handler("🔎", pos=10)
+    async def show_detailed(self, *_):
+        task = self._show_detailed_task
+        if task and not task.done():
+            task.cancel()
+            return
+
+        self._show_detailed_task = asyncio.ensure_future(self._show_detailed())
+
     async def delayed_update(self):
         await asyncio.sleep(.5)
         await self.trigger_update()
 
     async def on_any_emoji(self, *_):
-        asyncio.ensure_future(self.delayed_update())
+        task = self._delayed_update_task
+        if task and not task.done():
+            return
+
+        self._delayed_update_task = asyncio.ensure_future(self.delayed_update())

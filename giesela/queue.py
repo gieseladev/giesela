@@ -131,6 +131,10 @@ class EntryQueue(EventEmitter):
         if self.entries:
             return self.entries.popleft()
 
+    def peek(self) -> Optional[QueueEntry]:
+        if self.entries:
+            return self.entries[0]
+
     def time_until(self, index: int, *, with_current: bool = True) -> float:
         entries = itertools.islice(self.entries, index)
         estimated_time = sum(e.entry.duration for e in entries)
