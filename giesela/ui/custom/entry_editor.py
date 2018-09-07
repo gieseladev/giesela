@@ -384,8 +384,12 @@ class EntryEditor(VerticalTextViewer, _BaseEditor):
     def get_embed(self) -> Embed:
         embed = super().get_embed()
         if self.editor.chapters:
-            fields = getattr(embed, "_fields")
-            fields.insert(0, dict(inline=False, name="Chapters", value="{progress_bar}"))
+            field = dict(inline=False, name="Chapters", value="{progress_bar}")
+            fields = getattr(embed, "_fields", None)
+            if fields is None:
+                embed.add_field(**field)
+            else:
+                fields.insert(0, field)
         return embed
 
     def get_chapter_editor(self, chapter: SpecificChapterData) -> ChapterEditor:

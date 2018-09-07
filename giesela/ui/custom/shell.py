@@ -54,7 +54,7 @@ class ShellUI(AutoHelpEmbed, MessageableEmbed, VerticalTextViewer):
 
         self.shell = shell
 
-        super().__init__(ctx.channel, ctx.author, bot=ctx.bot, **kwargs)
+        super().__init__(ctx.channel, user=ctx.author, bot=ctx.bot, **kwargs)
 
         self.ctx = ctx
         self.run_timeout = None

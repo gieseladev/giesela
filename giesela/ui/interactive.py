@@ -428,6 +428,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
 
         self._current_line = 0
         self._lines_displayed = 0
+        self._ran_out_of_lines = False
 
         if self.lines and no_controls_for_single_page:
             if len(self.lines) <= self.window_height and sum(map(len, self.lines)) <= self.max_window_length:
@@ -475,6 +476,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
 
         while len(lines) < self.window_height:
             if self.total_lines is not None and _current_line >= self.total_lines:
+                self._ran_out_of_lines = True
                 break
 
             line = await self.get_line(_current_line)
@@ -483,6 +485,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
                 _current_length += len(line)
                 _current_line += 1
             else:
+                self._ran_out_of_lines = False
                 break
 
         if not lines:
@@ -553,6 +556,8 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
 
     def set_focus_line(self, line: int):
         displayed = self._lines_displayed or self.window_height
+        if self._ran_out_of_lines and self.total_lines:
+            displayed = self.total_lines
         self._current_line = max(line - (displayed // 2), 0)
 
     async def show_line(self, line: int):
