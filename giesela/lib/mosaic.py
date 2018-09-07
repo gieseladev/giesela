@@ -6,7 +6,7 @@ from contextlib import suppress
 from io import BytesIO
 from typing import Iterable, List, Optional, TYPE_CHECKING, Tuple
 
-from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageOps
 from aiohttp import ClientSession
 
 from giesela.lib.api.imgur import upload_playlist_cover
@@ -54,6 +54,67 @@ def _create_normal_collage(*images: Image, size: int = 1024, crop_images: bool =
             final.paste(im, box=(left, top))
 
     return final
+
+
+def _create_striped_collage(*images: Image, size: int = 1024) -> Image.Image:
+    if len(images) < 2:
+        raise ValueError("Need at least 2 images")
+
+    if len(images) > 5:
+        images = random.sample(images, 5)
+
+    stripe_width = size // len(images)
+    canvas = Image.new("RGB", (size, size))
+
+    for i, image in enumerate(images):
+        box = (i * stripe_width, 0, (i + 1) * stripe_width, size)
+        image = image.crop(box=box)
+        canvas.paste(image, box=box)
+
+    return canvas
+
+
+def _create_partitioned_striped_collage(*images: Image, size: int = 1024) -> Image.Image:
+    if len(images) < 3:
+        raise ValueError("Need at least 3 images")
+
+    min_pick = 1
+    max_pick = max(round(len(images) / 3), 3)
+
+    if len(images) == 3:
+        max_pick = 2
+
+    images = list(images)
+    stripes = []
+    while images:
+        im_count = random.randint(min(len(images), min_pick), min(len(images), max_pick))
+        stripe = [images.pop() for _ in range(im_count)]
+        stripes.append(stripe)
+
+    stripe_width = size // len(stripes)
+    canvas = Image.new("RGB", (size, size), color="white")
+
+    min_height = size // 6
+
+    for i, stripe in enumerate(stripes):
+        image_count = len(stripe)
+        max_height = size - image_count * min_height
+        heights = []
+        start = 0
+        for _ in range(image_count - 1):
+            height = random.randint(min_height, max_height)
+            new_start = start + height
+            heights.append((start, new_start))
+            start = new_start
+        heights.append((start, size))
+
+        for j, image in enumerate(stripe):
+            start, stop = heights[j]
+            box = (i * stripe_width, start, (i + 1) * stripe_width, stop)
+            image = ImageOps.fit(image, (stripe_width, stop - start))
+            canvas.paste(image, box=box)
+
+    return canvas
 
 
 def _create_pie_chart(*images: Image.Image, size: int = 1024) -> Image.Image:
@@ -124,10 +185,9 @@ def _create_octagonal_focused_collage(*images: Image.Image, size: int = 1024) ->
     if len(images) > 5:
         background: Image.Image = images.pop()
         background = background.filter(ImageFilter.GaussianBlur(5))
-        background.draft("RGBA", (size, size))
     else:
         hue = random.randrange(0, 360)
-        colour = f"hsv({hue}, 60%, 60%)"
+        colour = f"hsv({hue}, 60%, 15%)"
         background = Image.new("RGB", (size, size), color=colour)
 
     half_size = 2 * (size // 2,)
@@ -194,6 +254,12 @@ def create_random_cover(*images: Image.Image, size: int = 1024) -> Image.Image:
         raise AttributeError("Provide at least one picture")
 
     possible = [_create_pie_chart]
+
+    if len(images) >= 2:
+        possible.extend((_create_striped_collage,))
+
+    if len(images) >= 3:
+        possible.extend((_create_partitioned_striped_collage,))
 
     if len(images) >= 4:
         possible.extend((_create_focused_collage, _create_normal_collage))
