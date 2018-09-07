@@ -9,6 +9,7 @@ import requests
 
 from giesela.config import static_config
 from .object_chain import *
+from .scraper import *
 from .structures import *
 from .url import *
 

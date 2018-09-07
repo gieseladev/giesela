@@ -10,7 +10,7 @@ import rapidjson
 import threading
 from pathlib import Path
 from string import ascii_lowercase
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, TYPE_CHECKING, Tuple, TypeVar
+from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Tuple
 
 from discord import Guild
 
@@ -30,14 +30,6 @@ class ErrorCode:
     registration_required = 1000
 
 
-IT = TypeVar("IT")
-
-
-async def _tuple_generator(collection: Iterable[IT]) -> Iterator[Tuple[int, IT]]:
-    for i, el in enumerate(collection):
-        yield i, el
-
-
 def _call_function_main_thread(func: Callable, *args, wait_for_result: bool = False, **kwargs) -> Any:
     fut = asyncio.run_coroutine_threadsafe(asyncio.coroutine(func)(*args, **kwargs), WebieselaServer.bot.loop)
 
@@ -47,14 +39,14 @@ def _call_function_main_thread(func: Callable, *args, wait_for_result: bool = Fa
         return fut
 
 
-def playlists_overview(player: "GieselaPlayer") -> List[Dict[str, Any]]:
+def playlists_overview() -> List[Dict[str, Any]]:
     _playlists = WebieselaServer.cog.playlist_manager.playlists
     playlists = []
     for playlist in _playlists:
         author = WebAuthor.from_user(playlist.author).to_dict()
-        entries = [entry.build_entry().to_web_dict(player) for entry in playlist]
+        entries = [pl_entry.entry.to_dict() for pl_entry in playlist]
         pl = dict(id=playlist.gpl_id.hex, name=playlist.name, description=playlist.description, cover=playlist.cover, author=author,
-                  entries=entries, duration=playlist.duration, human_dur=utils.format_time(playlist.duration, max_specifications=1))
+                  entries=entries, duration=playlist.total_duration, human_dur=utils.format_time(playlist.total_duration, max_specifications=1))
         playlists.append(pl)
     return playlists
 
@@ -66,6 +58,25 @@ def radio_stations_overview() -> List[Dict[str, Any]]:
         data.update(id=station.name, language="DEPRECATED", cover=station.logo)
         stations.append(data)
     return stations
+
+
+def patch_entry_data(data: Dict[str, Any]):
+    requester = data.pop("requester")
+    data["requester"] = dict(id=requester.id, name=requester.name)
+
+
+def get_queue_information(player: "GieselaPlayer") -> Dict[str, Any]:
+    queue = []
+    for entry in player.queue.entries:
+        data = entry.to_dict()
+        patch_entry_data(data)
+        queue.append(data)
+    history = []
+    for entry in player.queue.history:
+        data = entry.to_dict()
+        patch_entry_data(data)
+        history.append(data)
+    return dict(queue=queue, history=history)
 
 
 class GieselaWebSocket(WebSocket):
@@ -159,19 +170,8 @@ class GieselaWebSocket(WebSocket):
 
         guild_id, author = WebieselaServer.get_token_information(self.token)
 
-        if searcher == "SpotifySearcher":
-            if kind == "playlist":
-                playlist = spotify.SpotifyPlaylist.from_url(url)
-                self.log("adding Spotify playlist {}".format(playlist))
-                entry_gen = playlist.get_spotify_entries_generator(player.queue, author=author.discord_user)
-                success = True
-            elif kind == "entry":
-                entry = spotify.SpotifyTrack.from_url(url)
-                entry_gen = _tuple_generator([await entry.get_spotify_entry(player.queue, author=author.discord_user)])
-                success = True
-
-        elif searcher in ("YoutubeSearcher", "SoundcloudSearcher"):
-            entry_gen = await player.downloader.get_entry_gen(url, author=author.discord_user)
+        if searcher in ("YoutubeSearcher", "SoundcloudSearcher"):
+            entry_gen = await player.extractor.get(url)
             success = True
 
         answer["success"] = bool(success)
@@ -192,7 +192,7 @@ class GieselaWebSocket(WebSocket):
         try:
             async for ind, entry in entry_gen:
                 if entry:
-                    player.queue.add_entry(entry, placement=placement)
+                    player.queue.add_entry(entry, requester=author.discord_user, placement=placement)
         except Exception:
             log.exception("error while adding entry")
 
@@ -224,22 +224,12 @@ class GieselaWebSocket(WebSocket):
             elif request == "send_playlists":
                 self.log("asked for playlists")
 
-                answer["playlists"] = playlists_overview(player)
+                answer["playlists"] = playlists_overview()
 
             elif request == "send_radio_stations":
                 self.log("asked for the radio stations")
 
                 answer["radio_stations"] = radio_stations_overview()
-
-            elif request == "send_lyrics":
-                self.log("asked for lyrics")
-
-                if player.current_entry:
-                    lyrics = player.current_entry.lyrics
-                else:
-                    lyrics = None
-
-                answer["lyrics"] = lyrics
 
         if command:
             player = WebieselaServer.get_player(token=self.token)
@@ -248,22 +238,19 @@ class GieselaWebSocket(WebSocket):
             if command == "play_pause":
                 if player.is_playing:
                     self.log("paused")
-                    player.pause()
+                    _call_function_main_thread(player.pause, wait_for_result=True)
                     success = True
                 elif player.is_paused:
                     self.log("resumed")
-                    player.resume()
+                    _call_function_main_thread(player.resume, wait_for_result=True)
                     success = True
 
             elif command == "skip":
                 if player.current_entry:
                     success = False
 
-                    if isinstance(player.current_entry, TimestampEntry):
-                        success = player.seek(player.current_entry.get_sub_entry(player)["end"])
-
                     if not success:
-                        player.skip()
+                        _call_function_main_thread(player.skip, wait_for_result=True)
                         success = True
 
                     self.log("skipped")
@@ -275,7 +262,7 @@ class GieselaWebSocket(WebSocket):
                 target_seconds = command_data.get("value")
                 if target_seconds and player.current_entry:
                     if 0 <= target_seconds <= player.current_entry.duration:
-                        success = player.seek(target_seconds)
+                        _call_function_main_thread(player.seek, target_seconds, wait_for_result=True)
                         self.log("sought to", target_seconds)
                     else:
                         success = False
@@ -286,7 +273,7 @@ class GieselaWebSocket(WebSocket):
                 target_volume = command_data.get("value")
                 if target_volume is not None:
                     if 0 <= target_volume <= 1:
-                        player.volume = target_volume
+                        _call_function_main_thread(player.set_volume, target_volume, wait_for_result=True)
                         self.log("set volume to", round(target_volume * 100, 1), "%")
                         success = True
                     else:
@@ -313,22 +300,18 @@ class GieselaWebSocket(WebSocket):
 
             elif command == "remove":
                 remove_index = command_data.get("index")
-                success = bool(_call_function_main_thread(player.queue.remove_position, remove_index, wait_for_result=True))
+                success = bool(_call_function_main_thread(player.queue.remove, remove_index, wait_for_result=True))
                 self.log("removed", remove_index)
 
             elif command == "promote":
                 promote_index = command_data.get("index")
-                success = bool(_call_function_main_thread(player.queue.promote_position, promote_index, wait_for_result=True))
+                success = bool(_call_function_main_thread(player.queue.move, promote_index, wait_for_result=True))
                 self.log("promoted", promote_index)
 
             elif command == "replay":
                 replay_index = command_data.get("index")
                 success = bool(_call_function_main_thread(player.queue.replay, replay_index, wait_for_result=True))
                 self.log("replayed", replay_index)
-
-            elif command == "cycle_repeat":
-                success = _call_function_main_thread(player.repeat, wait_for_result=True)
-                self.log("set repeat state to", player.repeatState)
 
             elif command == "playlist_play":
                 playlist_id = command_data.get("playlist_id")
@@ -338,8 +321,8 @@ class GieselaWebSocket(WebSocket):
 
                 if playlist:
                     if 0 <= playlist_index < len(playlist):
-                        entry = playlist.entries[playlist_index].get_entry(author=author.discord_user)
-                        _call_function_main_thread(player.queue.add_entry, entry, wait_for_result=True)
+                        entry = playlist.entries[playlist_index].entry
+                        _call_function_main_thread(player.queue.add_entry, entry, requester=author.discord_user, wait_for_result=True)
                         self.log("loaded index", playlist_index, "from playlist", playlist_id)
                         success = True
                     else:
@@ -358,7 +341,7 @@ class GieselaWebSocket(WebSocket):
                         if load_mode == "replace":
                             player.queue.clear()
 
-                        _call_function_main_thread(playlist.play, player.queue, author=author.discord_user, wait_for_result=True)
+                        _call_function_main_thread(playlist.play, player.queue, requester=author.discord_user, wait_for_result=True)
                         self.log("loaded playlist", playlist_id, "with mode", load_mode)
                         success = True
                     else:
@@ -373,7 +356,8 @@ class GieselaWebSocket(WebSocket):
 
                 if station:
                     self.log("enqueued radio station", station.name, "(mode " + play_mode + ")")
-                    _call_function_main_thread(player.queue.add_radio_entry, station, now=(play_mode == "now"), wait_for_result=True, revert=True)
+                    entry = _call_function_main_thread(player.extractor.get_radio_entry, station, wait_for_result=True)
+                    _call_function_main_thread(player.queue.add_entry, entry, requester=author.discord_user, wait_for_result=True)
                     success = True
                 else:
                     success = False
@@ -549,16 +533,16 @@ class WebieselaServer:
             return None
 
         if player.current_entry:
-            entry = player.current_entry.to_web_dict(player)
-            entry["progress"] = player.progress
+            entry = player.current_entry.to_dict()
+            patch_entry_data(entry)
         else:
             entry = None
 
         data = {
             "entry": entry,
-            "queue": player.queue.get_web_dict(),
+            "queue": get_queue_information(player),
             "volume": player.volume,
-            "state": player.state
+            "state": player.state.value
         }
 
         return data

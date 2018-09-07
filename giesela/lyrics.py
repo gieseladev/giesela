@@ -15,6 +15,8 @@ lyrics_folder = path.join(os.getcwd(), static_config.lyrics_cache)
 Path(lyrics_folder).mkdir(parents=True, exist_ok=True)
 
 
+# TODO use gitils
+
 def ensure_cache_folder():
     if path.isdir(lyrics_folder):
         return True
