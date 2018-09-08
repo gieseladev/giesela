@@ -6,7 +6,7 @@ from discord import Game, Guild, Member, User, VoiceChannel, VoiceState
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, GieselaPlayer, PlayerManager, WebieselaServer, lyrics as lyricsfinder
+from giesela import Giesela, GieselaPlayer, PlayerManager, WebieselaServer
 from giesela.ui import VerticalTextViewer, text as text_utils
 from giesela.ui.custom import EntryEditor, NowPlayingEmbed
 from giesela.utils import parse_timestamp, similarity
@@ -35,8 +35,9 @@ VOICE_CHANNEL_NAMES = ("music", "giesela", "musicbot")
 async def find_giesela_channel(bot: Giesela, guild: Guild, user: User = None) -> VoiceChannel:
     if not guild.voice_channels:
         raise EnvironmentError("HOW EVEN?!? There are no voice channels... WHAT")
-    if bot.config.voice_channel_home:
-        return await bot.get_channel(bot.config.voice_channel_home)
+    voice_channel_id = await bot.config.get_guild(guild.id).player.voice_channel_id
+    if voice_channel_id:
+        return await bot.get_channel(voice_channel_id)
 
     _max_similarity = 0
     _channel = None
@@ -55,7 +56,7 @@ async def find_giesela_channel(bot: Giesela, guild: Guild, user: User = None) ->
     return guild.voice_channels[0]
 
 
-async def _delayed_disconnect(player: GieselaPlayer, delay: int):
+async def _delayed_disconnect(player: GieselaPlayer, delay: float):
     await asyncio.sleep(delay)
     if player.is_connected:
         await player.disconnect()
@@ -67,6 +68,8 @@ class Player:
 
     def __init__(self, bot: Giesela):
         self.bot = bot
+        self.config = bot.config
+
         self.player_manager = PlayerManager(bot) \
             .on("player_create", self.add_player_listeners)
 
@@ -99,17 +102,18 @@ class Player:
                     guild = self.bot.get_guild(guild_id)
                     channel = await find_giesela_channel(self.bot, guild, user=member)
 
-            player = self.player_manager.get_player(guild_id, channel.id)
+            volume = await self.config.get_guild(guild_id).player.volume
+            player = await self.player_manager.get_player(guild_id, volume, channel.id)
         return player
 
-    def start_disconnect(self, player: GieselaPlayer):
+    async def start_disconnect(self, player: GieselaPlayer):
         guild_id = player.guild_id
         task = self._disconnects.get(guild_id)
         if task and not task.done():
             return
 
-        delay = self.bot.config.vc_disconnect_delay
-        if delay is not None:
+        delay = await self.config.get_guild(guild_id).player.auto_disconnect
+        if delay:
             log.debug(f"auto disconnect {player} in {delay} seconds")
             self._disconnects[guild_id] = asyncio.ensure_future(_delayed_disconnect(player, delay))
 
@@ -126,17 +130,18 @@ class Player:
             return
 
         non_bot_vm = sum(1 for vm in channel.members if not vm.bot)
+        auto_pause = await self.bot.config.get_guild(player.guild_id).player.auto_pause
 
         # if the first new person joined
         if joined is True and non_bot_vm == 1:
             self.stop_disconnect(player)
-            if self.bot.config.auto_pause:
+            if auto_pause:
                 log.info(f"auto-resuming {player}")
                 await player.resume()
 
         elif non_bot_vm == 0:
-            self.start_disconnect(player)
-            if self.bot.config.auto_pause:
+            await self.start_disconnect(player)
+            if auto_pause:
                 log.info(f"auto-pausing {player}")
                 await player.pause()
 
@@ -186,7 +191,8 @@ class Player:
             player = active_players[0]
             entry = player.current_entry
         else:
-            game = Game(name=self.bot.config.idle_game)
+            idle_game = self.bot.config.app.misc.idle_game
+            game = Game(name=idle_game)
 
         if entry:
             prefix = "❚❚ " if is_paused else ""
@@ -393,7 +399,8 @@ class Player:
                 query = str(player.current_entry.entry)
                 _progress_guess = player.progress / player.current_entry.entry.duration
 
-            lyrics = lyricsfinder.search_for_lyrics(query)
+            raise commands.CommandError("Down for maintenance?")
+            lyrics = None
 
         if not lyrics:
             raise commands.CommandError("Couldn't find any lyrics for **{}**".format(query))

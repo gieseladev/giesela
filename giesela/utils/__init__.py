@@ -7,7 +7,6 @@ from typing import Callable, Iterable, List, NamedTuple, Optional, Pattern, TYPE
 import aiohttp
 import requests
 
-from giesela.config import static_config
 from .object_chain import *
 from .scraper import *
 from .structures import *
@@ -29,9 +28,10 @@ async def content_is_image(session: aiohttp.ClientSession, url: str) -> bool:
     return content_type.startswith("image/")
 
 
-async def search_image(session: aiohttp.ClientSession, query: str, *, min_squareness: float = None, num_pages: int = 3) -> Optional[str]:
+async def search_image(session: aiohttp.ClientSession, google_api_token: str, query: str, *, min_squareness: float = None, num_pages: int = 3) -> \
+        Optional[str]:
     items_per_page = 10
-    params = dict(key=static_config.google_api_key, cx="002017775112634544492:t0ynfpg8y0e", searchType="image", count=items_per_page,
+    params = dict(key=google_api_token, cx="002017775112634544492:t0ynfpg8y0e", searchType="image", count=items_per_page,
                   fields="items(image)", q=query)
 
     for i in range(num_pages):
@@ -225,7 +225,7 @@ def get_video_sub_queue(description, video_id, song_dur):
     return timestamp_to_queue(timestamps, song_dur)
 
 
-def get_video_timestamps(description, video_id, song_dur=None):
+def get_video_timestamps(google_api_token: str, description, video_id, song_dur=None):
     if song_dur:
         song_dur += 5  # I'm not that harsh, one second more or less ain't that bad
 
@@ -245,7 +245,7 @@ def get_video_timestamps(description, video_id, song_dur=None):
             return None
 
         params = {
-            "key": static_config.google_api_key,
+            "key": google_api_token,
             "part": "snippet",
             "order": "relevance",
             "textFormat": "plainText",

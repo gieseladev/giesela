@@ -34,7 +34,7 @@ class Radio:
 
     def __init__(self, bot: Giesela):
         self.bot = bot
-        self.station_manager = RadioStationManager.load(bot, bot.config.radio_stations_config)
+        self.station_manager = RadioStationManager.load(bot, bot.config.app.files.radio_stations)
         self.player_cog = bot.cogs["Player"]
 
         self.get_player = self.player_cog.get_player

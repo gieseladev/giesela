@@ -23,6 +23,8 @@ lxml = "*"
 pyyaml = "*"
 uvloop = {version = "*", markers = "sys_platform != 'win32'"}
 python-rapidjson = "*"
+aioredis = "*"
+motor = "*"
 
 [dev-packages]
 pytest = "*"
