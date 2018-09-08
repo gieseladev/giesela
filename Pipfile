@@ -25,6 +25,7 @@ uvloop = {version = "*", markers = "sys_platform != 'win32'"}
 python-rapidjson = "*"
 aioredis = "*"
 motor = "*"
+dnspython = "*"
 
 [dev-packages]
 pytest = "*"

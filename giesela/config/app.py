@@ -10,12 +10,19 @@ class Tokens(ConfigObject):
     google_api: str = Truthy()
 
 
+class RedisSentinel(ConfigObject):
+    host: str = Truthy()
+    port: int = Truthy()
+
+
 class RedisDatabases(ConfigObject):
-    config: int = 1
+    config: str = "config"
+    queue: str = "queue"
 
 
 class Redis(ConfigObject):
-    uri: str = Truthy()
+    sentinels: List[RedisSentinel]
+    master: str = Truthy()
     databases: RedisDatabases
 
 

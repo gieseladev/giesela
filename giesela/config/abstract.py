@@ -1,6 +1,6 @@
 import inspect
 import typing
-from typing import Any, Dict, Iterable, Union
+from typing import Any, Dict, Iterator, List, Tuple, Type, Union
 
 from .errors import ConfigError, ConfigKeyMissing, ConfigValueError
 
@@ -22,11 +22,19 @@ def convert_typing(value, cls):
 
     if origin is list:
         cls = args[0]
-        if not isinstance(value, Iterable):
-            return None
+        if isinstance(value, dict):
+            item_iter = []
+            for key, value in value.items():
+                key = int(key)
+                item_iter.append((key, value))
+            item_iter.sort()
+        elif isinstance(value, list):
+            item_iter = enumerate(value)
+        else:
+            return _DEFAULT
 
         converted = []
-        for i, val in enumerate(value):
+        for i, val in item_iter:
             converted_val = convert(val, cls)
             if converted_val is _DEFAULT:
                 raise ConfigValueError(f"Couldn't convert {{name}} {val} to {cls}", f"[{i}]", val)
@@ -99,6 +107,7 @@ class Truthy(Check):
 
 
 class ConfigObject:
+    __attrs__: Dict[str, Type]
 
     @classmethod
     def from_config(cls, data: Dict[str, Any]):
@@ -106,7 +115,12 @@ class ConfigObject:
 
         inst = object.__new__(cls)
 
+        inst.__attrs__ = hints.copy()
+
         for name, _type in hints.items():
+            if name.startswith("_"):
+                continue
+
             try:
                 _check = getattr(inst, name)
                 check = _check if isinstance(_check, Check) else None
@@ -147,3 +161,21 @@ class ConfigObject:
 
         inst.__init__()
         return inst
+
+
+def traverse_config(config: ConfigObject, key: Union[str, List[str]]):
+    if isinstance(key, str):
+        key = key.split(".")
+    target = config
+    for _key in key:
+        target = getattr(target, _key)
+    return target
+
+
+def config_items(config: ConfigObject) -> Iterator[Tuple[str, Any]]:
+    for key in config_keys(config):
+        yield key, getattr(config, key)
+
+
+def config_keys(config: ConfigObject):
+    return config.__attrs__.keys()

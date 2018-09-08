@@ -3,14 +3,16 @@ import logging
 from pathlib import Path
 from typing import Any, Dict, List, Union
 
+import aioredis
 import yaml
 from aioredis import Redis
 from motor.core import AgnosticCollection
 from motor.motor_asyncio import AsyncIOMotorClient
 
+from . import abstract
 from .app import Application
 from .errors import ConfigError
-from .guild import _AsyncGuild
+from .guild import Guild, _AsyncGuild
 from .utils import *
 
 log = logging.getLogger(__name__)
@@ -41,8 +43,9 @@ class FlattenProxy:
 
 
 class GuildConfig(_AsyncGuild):
-    def __init__(self, guild_id: int, redis: Redis, config_coll: AgnosticCollection):
+    def __init__(self, guild_id: int, defaults: Guild, redis: Redis, config_coll: AgnosticCollection):
         self.guild_id = guild_id
+        self.defaults = defaults
 
         self._redis = redis
         self._mongodb = config_coll
@@ -58,16 +61,29 @@ class GuildConfig(_AsyncGuild):
         log.debug(f"writing to redis: {redis_document}")
         await self._redis.mset(*redis_document.items())
 
+    async def remove(self):
+        await self._mongodb.delete_one(dict(_id=self.guild_id))
+
     async def set(self, key: str, value):
-        # TODO should maybe run some value checks?
+        # TODO should maybe run some key/value checks?
 
         mongodb_update = self._mongodb.update_one(dict(_id=self.guild_id), {"$set": {key: value}}, upsert=True)
         redis_update = self._redis.set(key, value)
 
         await asyncio.gather(mongodb_update, redis_update)
 
+    async def load(self) -> Guild:
+        document = await self._mongodb.find_one(self.guild_id)
+        return Guild.from_config(document)
+
     async def get(self, key: str):
         value = await self._redis.get(key)
+        if value is None:
+            value = abstract.traverse_config(self.defaults, key)
+            if isinstance(value, abstract.ConfigObject):
+                raise AttributeError(f"{key} points to a ConfigObject {value}")
+            return value
+
         return from_redis(value)
 
 
@@ -108,6 +124,11 @@ class Config:
         return cls(app)
 
     async def load_guild_config(self):
+        if not self.redis:
+            sentinels = [(sentinel.host, sentinel.port) for sentinel in self.app.redis.sentinels]
+            print(sentinels)
+            sentinel = await aioredis.create_sentinel(sentinels)
+            self.redis = sentinel.master_for(self.app.redis.master)
         guilds = {}
 
         config_coll = self.mongodb.guild_config
@@ -115,8 +136,8 @@ class Config:
         tasks = []
 
         async for guild_config in config_coll.find():
-            guild_id = guild_config["id"]
-            guild = GuildConfig(guild_id, self.redis, config_coll)
+            guild_id = guild_config.pop("id")
+            guild = GuildConfig(guild_id, self.app.guild_defaults, self.redis, config_coll)
             tasks.append(guild.dump_to_redis(guild_config))
 
             guilds[guild_id] = guild
@@ -125,11 +146,17 @@ class Config:
 
         self.guilds = guilds
 
+    async def remove_guild(self, guild_id: int):
+        log.info(f"removing guild {guild_id}")
+        guild = self.guilds.pop(guild_id, None)
+        if guild:
+            await guild.remove()
+
     def get_guild(self, guild_id: int) -> GuildConfig:
         if not self.loaded_guild_config:
             raise ConfigError("Guild configurations haven't been loaded yet!")
 
         if guild_id not in self.guilds:
             # TODO check mongodb first
-            self.guilds[guild_id] = GuildConfig()
+            raise ValueError("Guild doesn't exist yet and logic not implemented rip")
         return self.guilds[guild_id]
