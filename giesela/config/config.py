@@ -54,7 +54,8 @@ class GuildConfig(_AsyncGuild):
         return FlattenProxy(self, key=[item])
 
     def __setattr__(self, key, value):
-        raise Exception("Can't set guild config like that!")
+        # TODO do this right somehow
+        pass
 
     async def dump_to_redis(self, document: Dict[str, Any]):
         redis_document = to_redis(document)
@@ -74,7 +75,11 @@ class GuildConfig(_AsyncGuild):
 
     async def load(self) -> Guild:
         document = await self._mongodb.find_one(self.guild_id)
-        return Guild.from_config(document)
+        if document:
+            return Guild.from_config(document)
+        else:
+            # MAYBE protect from edits
+            return self.defaults
 
     async def get(self, key: str):
         value = await self._redis.get(key)
@@ -94,9 +99,10 @@ class Config:
     def __init__(self, app: Application):
         self.app = app
         self.mongo_client = AsyncIOMotorClient(self.app.mongodb.uri)
-        self.redis = None  # TODO create
+        self.redis = None
 
         self.mongodb = self.mongo_client[self.app.mongodb.database]
+        self.config_coll = self.mongodb.guild_config
 
         self.guilds = None
 
@@ -125,24 +131,25 @@ class Config:
 
     async def load_guild_config(self):
         if not self.redis:
-            sentinels = [(sentinel.host, sentinel.port) for sentinel in self.app.redis.sentinels]
-            print(sentinels)
-            sentinel = await aioredis.create_sentinel(sentinels)
-            self.redis = sentinel.master_for(self.app.redis.master)
+            # sentinels = [(sentinel.host, sentinel.port) for sentinel in self.app.redis.sentinels]
+            # print(sentinels)
+            # sentinel = await aioredis.create_sentinel(sentinels)
+            # self.redis = sentinel.master_for(self.app.redis.master)
+            self.redis = await aioredis.create_redis("redis://35.199.50.55:6900")
 
         guilds = {}
-        config_coll = self.mongodb.guild_config
 
         tasks = []
 
-        async for guild_config in config_coll.find():
+        async for guild_config in self.config_coll.find():
             guild_id = guild_config.pop("id")
-            guild = GuildConfig(guild_id, self.app.guild_defaults, self.redis, config_coll)
+            guild = GuildConfig(guild_id, self.app.guild_defaults, self.redis, self.config_coll)
             tasks.append(guild.dump_to_redis(guild_config))
 
             guilds[guild_id] = guild
 
-        await asyncio.wait(tasks)
+        if tasks:
+            await asyncio.wait(tasks)
 
         self.guilds = guilds
 
@@ -157,6 +164,6 @@ class Config:
             raise ConfigError("Guild configurations haven't been loaded yet!")
 
         if guild_id not in self.guilds:
-            # TODO check mongodb first
-            raise ValueError("Guild doesn't exist yet and logic not implemented rip")
+            # TODO move this to a factory function
+            self.guilds[guild_id] = GuildConfig(guild_id, self.app.guild_defaults, self.redis, self.config_coll)
         return self.guilds[guild_id]

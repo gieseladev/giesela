@@ -462,7 +462,7 @@ class WebieselaServer:
         except FileNotFoundError:
             log.warning("[WEBSOCKET] failed to load tokens, there are none saved")
 
-        cert_file, key_file = find_cert_files(cog.config.files.certificates)
+        cert_file, key_file = find_cert_files(cog.config.app.files.certificates)
         if cert_file:
             log.info("found cert file, creating SSL Server!")
             server = SimpleSSLWebSocketServer("", cog.config.app.webiesela.port, GieselaWebSocket, cert_file, key_file)

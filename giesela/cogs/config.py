@@ -13,8 +13,8 @@ class Config:
         self.bot = bot
         self.config = bot.config
 
-    @commands.group(invoke_without_command=True)
-    async def config(self, ctx: Context, key: str = None):
+    @commands.group("config", invoke_without_command=True)
+    async def config_command(self, ctx: Context, key: str = None):
         """Config stuff"""
         guild_config = await self.config.get_guild(ctx.guild.id).load()
 
@@ -45,7 +45,7 @@ class Config:
         em.description = "\n".join(lines)
         await ctx.send(embed=em)
 
-    @config.command("set")
+    @config_command.command("set")
     async def config_set(self, ctx: Context, key: str, *, value: str):
         """Set a config"""
         guild_config = self.config.get_guild(ctx.guild.id)
