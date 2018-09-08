@@ -38,7 +38,7 @@ class Webiesela:
             WebieselaServer.run(self)
 
     async def on_shutdown(self):
-        if self.config.app.webiesela.start:
+        if self.config.app.webiesela.start and WebieselaServer.server:
             log.debug("stopping Webiesela")
             WebieselaServer.server.close()
 
