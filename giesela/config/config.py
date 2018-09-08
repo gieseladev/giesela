@@ -129,8 +129,8 @@ class Config:
             print(sentinels)
             sentinel = await aioredis.create_sentinel(sentinels)
             self.redis = sentinel.master_for(self.app.redis.master)
-        guilds = {}
 
+        guilds = {}
         config_coll = self.mongodb.guild_config
 
         tasks = []

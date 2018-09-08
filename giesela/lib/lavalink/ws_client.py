@@ -66,6 +66,8 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
     async def _try_connect(self):
         try:
             await self.connect()
+        except asyncio.CancelledError:
+            log.warning("connecting cancelled!")
         except Exception:
             log.exception("Couldn't connect")
 
