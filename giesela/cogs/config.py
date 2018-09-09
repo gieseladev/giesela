@@ -47,6 +47,7 @@ class Config:
         em.description = "\n".join(lines)
         await ctx.send(embed=em)
 
+    @commands.is_owner()
     @config_command.command("set")
     async def config_set(self, ctx: Context, key: str, *, value: str):
         """Set a config"""

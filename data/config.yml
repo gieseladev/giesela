@@ -5,11 +5,7 @@ tokens:
   google_api: ""
 
 redis:
-  sentinels:
-  - host: ""
-    port: 26379
-
-  master: ""
+  uri: ""
   # prefixes used to distinguish stuff
   databases:
     config: "config"

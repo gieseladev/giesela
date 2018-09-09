@@ -1,11 +1,12 @@
 import asyncio
+import itertools
 import logging
 from pathlib import Path
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Optional, Union
 
+import aioredis
 import yaml
-from aredis import StrictRedis
-from aredis.sentinel import Sentinel
+from aioredis import ConnectionsPool
 from motor.core import AgnosticCollection
 from motor.motor_asyncio import AsyncIOMotorClient
 
@@ -45,7 +46,7 @@ class FlattenProxy:
 class GuildConfig(_AsyncGuild):
     __slots__ = ("guild_id", "defaults", "_redis", "_prefix", "_mongodb", "__frozen__")
 
-    def __init__(self, guild_id: int, defaults: Guild, redis: StrictRedis, prefix: str, config_coll: AgnosticCollection):
+    def __init__(self, guild_id: int, defaults: Guild, redis: ConnectionsPool, prefix: str, config_coll: AgnosticCollection):
         self.guild_id = guild_id
         self.defaults = defaults
 
@@ -63,7 +64,8 @@ class GuildConfig(_AsyncGuild):
     async def dump_to_redis(self, document: Dict[str, Any]):
         redis_document = to_redis(document, self._prefix)
         log.debug(f"writing to redis: {redis_document}")
-        await self._redis.mset(redis_document)
+        args = itertools.chain.from_iterable(redis_document.items())
+        await self._redis.execute(b"MSET", *args)
 
     async def remove(self):
         await self._mongodb.delete_one(dict(_id=self.guild_id))
@@ -94,7 +96,7 @@ class GuildConfig(_AsyncGuild):
         log.debug(f"{self.guild_id} setting {key} to {value}")
 
         mongodb_update = self._mongodb.update_one(dict(_id=self.guild_id), {"$set": {key: value}}, upsert=True)
-        redis_update = self._redis.set(self._prefix_key(key), value)
+        redis_update = self._redis.execute(b"SET", self._prefix_key(key), value)
 
         await asyncio.gather(mongodb_update, redis_update)
 
@@ -108,7 +110,7 @@ class GuildConfig(_AsyncGuild):
             return self.defaults
 
     async def get(self, key: str):
-        value = await self._redis.get(self._prefix_key(key))
+        value = await self._redis.execute(b"GET", self._prefix_key(key))
         if value is None:
             value = abstract.traverse_config(self.defaults, key)
             if isinstance(value, abstract.ConfigObject):
@@ -119,15 +121,13 @@ class GuildConfig(_AsyncGuild):
 
 
 class Config:
-    app: Application
     guilds: Dict[int, GuildConfig]
+    redis: Optional[ConnectionsPool]
 
     def __init__(self, app: Application):
         self.app = app
         self.mongo_client = AsyncIOMotorClient(self.app.mongodb.uri)
-
-        sentinel = Sentinel([(sentinel.host, sentinel.port) for sentinel in self.app.redis.sentinels])
-        self.redis = sentinel.master_for(self.app.redis.master)
+        self.redis = None
 
         self.mongodb = self.mongo_client[self.app.mongodb.database]
         self.config_coll = self.mongodb.guild_config
@@ -157,10 +157,16 @@ class Config:
         app = Application.from_config(raw_config)
         return cls(app)
 
+    async def connect_redis(self):
+        self.redis = await aioredis.create_pool(self.app.redis.uri)
+
     def _create_guild(self, guild_id: int) -> GuildConfig:
         return GuildConfig(guild_id, self.app.guild_defaults, self.redis, self.app.redis.databases.config, self.config_coll)
 
     async def load_guild_config(self):
+        if not self.redis:
+            await self.connect_redis()
+
         guilds = {}
         tasks = []
 
