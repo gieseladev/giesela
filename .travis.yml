@@ -24,7 +24,7 @@ install:
 - pipenv sync
 - docker-compose up -d lavalink redis mongodb
 
-before_script:
+script:
 - |
   env "tokens.discord"="${discord_token}" \
   "tokens.google_api"="${google_api_key}" \
@@ -32,10 +32,7 @@ before_script:
   "mongodb.uri"="mongodb://localhost:27017" \
   "lavalink.nodes.1.password"="Giesela" \
   "lavalink.nodes.1.address"="localhost:2333" \
-  bash
-
-script:
-- python -m pytest
+  python -m pytest
 
 before_deploy:
 - echo building docker image...
