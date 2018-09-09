@@ -15,20 +15,20 @@ matrix:
       dist: xenial    # required for Python 3.8 nightly (travis-ci/travis-ci#9069)
       sudo: required  # required for Python 3.8 nightly (travis-ci/travis-ci#9069)
 
+services:
+- docker
 
-before_install:
-- sudo apt-get install build-essential unzip -y
-- sudo apt-get install software-properties-common -y
-- sudo add-apt-repository ppa:mc3man/xerus-media -y
-- sudo add-apt-repository ppa:deadsnakes/ppa -y
-- sudo apt-get update -y --allow-unauthenticated
-- sudo apt-get install ffmpeg libopus-dev libffi-dev libsodium-dev -y
-
+env:
+- redis.uri=redis://localhost:6379
+- mongodb.uri=mongodb://localhost:27017
+- lavalink.nodes.1.password=<not required for test>
+- lavalink.nodes.1.address=<not required for test>
 
 install:
 - pip install pytest pytest-asyncio
 - pip install pipenv
 - pipenv sync
+- docker-compose up -d lavalink redis mongodb
 
 script:
 - python -m pytest

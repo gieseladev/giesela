@@ -1,18 +1,18 @@
 # you may set all of these values in env variables using dot notation. (ex: tokens.discord=TOKEN) the value will be treated as YAML!
 
 tokens:
-  discord: ""
-  google_api: ""
+  discord: "" # REQUIRED
+  google_api: "" # REQUIRED
 
 redis:
-  uri: ""
+  uri: "" # REQUIRED
   # prefixes used to distinguish stuff
   databases:
     config: "config"
     queue: "queue"
 
 mongodb:
-  uri: ""
+  uri: "" # REQUIRED
   database: "Giesela"
 
 lavalink:
@@ -20,8 +20,8 @@ lavalink:
   nodes:
   # whether to use wss/https
   - secure: false
-    address: ""
-    password: ""
+    address: "" # REQUIRED
+    password: "" # REQUIRED
 
 webiesela:
   # if you don't want to run webiesela, set to false
