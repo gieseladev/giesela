@@ -40,7 +40,7 @@ class Giesela(AutoShardedBot):
     exit_signal: Optional[Type[signals.ExitSignal]]
 
     def __init__(self):
-        self.config = Config.load(constants.CONFIG_LOCATION)
+        self.config = Config.load_app(constants.CONFIG_LOCATION)
 
         super().__init__(None, )
         WebAuthor.bot = self
@@ -59,8 +59,8 @@ class Giesela(AutoShardedBot):
         await super().close()
 
     async def start(self):
-        log.info("loading guild configs")
-        await self.config.load_guild_config()
+        log.info("loading config")
+        await self.config.load_config()
         log.info("starting")
         await super().start(self.config.app.tokens.discord)
 

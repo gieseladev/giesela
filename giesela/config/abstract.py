@@ -1,6 +1,6 @@
 import inspect
 import typing
-from typing import Any, Dict, Iterator, List, Tuple, Type, Union
+from typing import Any, Dict, Iterator, Sequence, Tuple, Type, Union
 
 from .errors import ConfigError, ConfigKeyMissing, ConfigValueError, TraverseError
 
@@ -106,7 +106,24 @@ class Truthy(Check):
         return "Truthy check"
 
 
-class ConfigObject:
+class ConfigMeta(type):
+    def __new__(mcs, *args):
+        cls = super().__new__(mcs, *args)
+
+        cls.__attrs__ = {}
+        hints = typing.get_type_hints(cls)
+        for name, _type in hints.items():
+            if name.startswith("_"):
+                continue
+            cls.__attrs__[name] = _type
+
+        return cls
+
+    def __getitem__(self, item):
+        return self.__attrs__[item]
+
+
+class ConfigObject(metaclass=ConfigMeta):
     __attrs__: Dict[str, Type]
 
     @classmethod
@@ -115,13 +132,9 @@ class ConfigObject:
 
         inst = object.__new__(cls)
 
-        inst.__attrs__ = {}
-
         for name, _type in hints.items():
             if name.startswith("_"):
                 continue
-
-            inst.__attrs__[name] = _type
 
             try:
                 _check = getattr(inst, name)
@@ -162,7 +175,7 @@ class ConfigObject:
         return inst
 
 
-def traverse_config(config: ConfigObject, key: Union[str, List[str]]):
+def traverse_config(config: ConfigObject, key: Union[str, Sequence[str]]):
     if isinstance(key, str):
         key = key.split(".")
     target = config
@@ -193,5 +206,5 @@ def config_keys(config: ConfigObject):
     return config.__attrs__.keys()
 
 
-def config_type(config: ConfigObject, key: str):
-    return config.__attrs__[key]
+def config_type(config: Type[ConfigObject], key: str):
+    return config[key]

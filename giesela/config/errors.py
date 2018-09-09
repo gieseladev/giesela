@@ -39,5 +39,5 @@ class ConfigValueError(ConfigError, ValueError):
 
 class TraverseError(ConfigError, AttributeError):
     def __init__(self, msg: str, parent: str, key: str, **extra):
-        super().__init__(msg, parent, **extra)
+        super().__init__(msg, parent, target=key, **extra)
         self.target = key

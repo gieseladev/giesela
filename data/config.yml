@@ -36,26 +36,31 @@ files:
   playlists: "playlists/playlists"
 
 misc:
-  idle_game: Waiting for someone to queue something
   # custom search engine id to use for image search
   image_cx: "002017775112634544492:t0ynfpg8y0e"
 
-guild_defaults:
-  commands:
-    prefix: "!"
-    # prefix to be used in sub menus, SHOULD NOT be the same as prefix!
-    menu_prefix: ""
-    # amount of seconds to wait after command before deleting all involved messages (set to 0 to disable)
-    message_decay: 30
+# defaults for cross-guild configuration. These settings can be changed during runtime
+runtime:
+  misc:
+    idle_game: Waiting for someone to queue something
 
-  player:
-    # volume to start with
-    volume: .1
-    # pause when alone in channel
-    auto_pause: true
-    # seconds to wait before disconnecting when alone in channel, set to 0 if you don't want Giesela to ever disconnect
-    auto_disconnect: 20
+  # defaults for guild configs
+  guild:
+    commands:
+      prefix: "!"
+      # prefix to be used in sub menus, SHOULD NOT be the same as prefix!
+      menu_prefix: ""
+      # amount of seconds to wait after command before deleting all involved messages (set to 0 to disable)
+      message_decay: 30
 
-    # limits for queue and history (0 for infinite)
-    queue_limit: ~
-    history_limit: 200
+    player:
+      # volume to start with
+      volume: .1
+      # pause when alone in channel
+      auto_pause: true
+      # seconds to wait before disconnecting when alone in channel, set to 0 if you don't want Giesela to ever disconnect
+      auto_disconnect: 20
+
+      # limits for queue and history (0 for infinite)
+      queue_limit: ~
+      history_limit: 200

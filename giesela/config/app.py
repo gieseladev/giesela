@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import List
 
 from .abstract import ConfigObject, Truthy
-from .guild import Guild
+from .runtime import Runtime
 
 
 class Tokens(ConfigObject):
@@ -58,7 +58,6 @@ class Files(ConfigObject):
 
 
 class Misc(ConfigObject):
-    idle_game: str = "Waiting for someone to queue something..."
     image_cx: str = "002017775112634544492:t0ynfpg8y0e"
 
 
@@ -70,4 +69,5 @@ class Application(ConfigObject):
     webiesela: Webiesela
     files: Files
     misc: Misc
-    guild_defaults: Guild
+
+    runtime: Runtime
