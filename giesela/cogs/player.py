@@ -78,6 +78,9 @@ class Player:
         self.np_messages = {}
         self._disconnects = {}
 
+    async def on_ready(self):
+        await self.update_now_playing()
+
     async def get_player(self, target: Union[Guild, Context, int], *,
                          create: bool = True, channel: VoiceChannel = None, member: Union[User, Member] = None) -> Optional[GieselaPlayer]:
         if isinstance(target, Context):
@@ -191,7 +194,7 @@ class Player:
             player = active_players[0]
             entry = player.current_entry
         else:
-            idle_game = self.bot.config.app.misc.idle_game
+            idle_game = await self.bot.config.runtime.misc.idle_game
             game = Game(name=idle_game)
 
         if entry:

@@ -37,6 +37,8 @@ class FlattenProxy:
         if key:
             self.traverse(*key)
 
+        # TODO handle lists by converting them to dictionaries and using __getitem__ hook
+
     def __await__(self):
         return self.resolve().__await__()
 
