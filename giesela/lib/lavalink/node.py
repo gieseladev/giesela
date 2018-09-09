@@ -7,10 +7,10 @@ from .models import LavalinkEvent, LavalinkPlayerState, TrackEventDataType
 from .rest_client import LavalinkREST
 from .ws_client import LavalinkWebSocket
 
-__all__ = ["LavalinkAPI"]
+__all__ = ["LavalinkNode"]
 
 
-class LavalinkAPI(LavalinkREST, LavalinkWebSocket):
+class LavalinkNode(LavalinkREST, LavalinkWebSocket):
     def __init__(self, bot: Client, password: str, address: str, secure: bool, **kwargs):
         super().__init__(bot=bot, password=password, lavalink_address=address, lavalink_secure=secure, **kwargs)
 

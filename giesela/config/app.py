@@ -1,3 +1,4 @@
+import enum
 from pathlib import Path
 from typing import List
 
@@ -25,7 +26,15 @@ class Mongodb(ConfigObject):
     database: str = "Giesela"
 
 
+class LavalinkNodeRegion(enum.Enum):
+    GLOBAL = "global"
+    EU = "eu"  # Eu first, America second
+    US = "us"
+    ASIA = "asia"
+
+
 class LavalinkNode(ConfigObject):
+    region: LavalinkNodeRegion = LavalinkNodeRegion.GLOBAL
     address: str = Truthy()
     password: str = Truthy()
     secure: bool = False

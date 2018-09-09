@@ -11,7 +11,7 @@ from websockets import ConnectionClosed
 from .entry import PlayerEntry, QueueEntry
 from .extractor import Extractor
 from .lib import EventEmitter, has_events
-from .lib.lavalink import LavalinkAPI, LavalinkEvent, LavalinkPlayerState, TrackEndReason, TrackEventDataType
+from .lib.lavalink import LavalinkEvent, LavalinkNodeBalancer, LavalinkPlayerState, TrackEndReason, TrackEventDataType
 from .queue import EntryQueue
 
 if TYPE_CHECKING:
@@ -259,7 +259,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
 
 @has_events("player_create")
-class PlayerManager(LavalinkAPI):
+class PlayerManager(LavalinkNodeBalancer):
     bot: "Giesela"
     players: Dict[int, GieselaPlayer]
 
