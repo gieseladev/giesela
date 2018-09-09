@@ -6,23 +6,24 @@ language: python
 matrix:
   fast_finish: true
   allow_failures:
-    - python: "3.8-dev"
+  - python: "3.8-dev"
   include:
-    - python: "3.7"
-      dist: xenial    # required for Python 3.7+ (travis-ci/travis-ci#9069)
-      sudo: required  # required for Python 3.7+ (travis-ci/travis-ci#9069)
-    - python: "3.8-dev"
-      dist: xenial    # required for Python 3.8 nightly (travis-ci/travis-ci#9069)
-      sudo: required  # required for Python 3.8 nightly (travis-ci/travis-ci#9069)
+  - python: "3.7"
+    dist: xenial    # required for Python 3.7+ (travis-ci/travis-ci#9069)
+    sudo: required  # required for Python 3.7+ (travis-ci/travis-ci#9069)
+  - python: "3.8-dev"
+    dist: xenial    # required for Python 3.8 nightly (travis-ci/travis-ci#9069)
+    sudo: required  # required for Python 3.8 nightly (travis-ci/travis-ci#9069)
 
 services:
 - docker
 
 env:
-- redis.uri=redis://localhost:6379
-- mongodb.uri=mongodb://localhost:27017
-- lavalink.nodes.1.password=<not required for test>
-- lavalink.nodes.1.address=<not required for test>
+  global:
+  - redis.uri="redis://localhost:6379"
+  - mongodb.uri="mongodb://localhost:27017"
+  - lavalink.nodes.1.password="Giesela"
+  - lavalink.nodes.1.address="localhost:2333"
 
 install:
 - pip install pytest pytest-asyncio
