@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-"discord.py" = {file = "https://github.com/Rapptz/discord.py/archive/rewrite.zip"}
+"discord.py" = {file = "https://github.com/GieselaDev/discord.py/archive/rewrite.zip"}
 imgurpython = {file = "https://github.com/Imgur/imgurpython/archive/master.zip"}
 spotipy = "*"
 "beautifulsoup4" = "*"
