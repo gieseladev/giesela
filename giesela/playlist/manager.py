@@ -30,7 +30,7 @@ class PlaylistManager:
 
         to_delete = []
 
-        for gpl_id in self.storage:
+        for gpl_id in self.storage.keys():
             gpl_data = self.storage[gpl_id]
             try:
                 gpl_data = rapidjson.loads(gpl_data)
