@@ -7,12 +7,12 @@ import yaml
 __all__ = ["to_redis", "from_redis", "flatten_data", "unflatten_data", "unflatten_list", "lower_data", "lower_list", "depth_update", "get_env_config"]
 
 
-def to_redis(data: Dict[str, Any]) -> Dict[str, str]:
+def to_redis(data: Dict[str, Any], prefix: str) -> Dict[str, str]:
     data = flatten_data(data)
     final = {}
     for key, value in data.items():
         value = rapidjson.dumps(value)
-        final[key] = value
+        final[prefix + key] = value
     return final
 
 

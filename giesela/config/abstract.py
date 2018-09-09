@@ -2,7 +2,7 @@ import inspect
 import typing
 from typing import Any, Dict, Iterator, List, Tuple, Type, Union
 
-from .errors import ConfigError, ConfigKeyMissing, ConfigValueError
+from .errors import ConfigError, ConfigKeyMissing, ConfigValueError, TraverseError
 
 __all__ = ["ConfigObject", "Check", "Truthy"]
 
@@ -31,7 +31,7 @@ def convert_typing(value, cls):
         elif isinstance(value, list):
             item_iter = enumerate(value)
         else:
-            return _DEFAULT
+            raise ConfigValueError(f"{type(value)} from {{name}} cannot be converted to {cls}", None, value)
 
         converted = []
         for i, val in item_iter:
@@ -74,7 +74,7 @@ def convert(value, cls):
     else:
         return value
 
-    return _DEFAULT
+    raise ConfigValueError(f"Couldn't convert {type(value)} to cls ({{name}})", None, value)
 
 
 class Check:
@@ -140,7 +140,7 @@ class ConfigObject:
                         if default is _DEFAULT:
                             raise KeyError
 
-                except KeyError:
+                except AttributeError:
                     raise ConfigKeyMissing("Config is missing a key ({key})", name)
 
                 setattr(inst, name, default)
@@ -151,9 +151,6 @@ class ConfigObject:
             except ConfigError as e:
                 e.trace_key(name)
                 raise e
-
-            if value is _DEFAULT:
-                raise ConfigValueError(f"{{key}} needs value of type {_type}, not {type(raw_value)}", name, raw_value)
 
             if check and not check.check(value):
                 msg = check.fail_msg or "Provided value for {key} didn't pass {check}"
@@ -169,8 +166,12 @@ def traverse_config(config: ConfigObject, key: Union[str, List[str]]):
     if isinstance(key, str):
         key = key.split(".")
     target = config
-    for _key in key:
-        target = getattr(target, _key)
+    for i, _key in enumerate(key):
+        try:
+            target = getattr(target, _key)
+        except AttributeError as e:
+            parent = ".".join(key[:i])
+            raise TraverseError(*e.args, parent=parent, key=_key)
     return target
 
 
@@ -179,5 +180,18 @@ def config_items(config: ConfigObject) -> Iterator[Tuple[str, Any]]:
         yield key, getattr(config, key)
 
 
+def config_dict(config: ConfigObject) -> Dict[str, Any]:
+    data = {}
+    for key, value in config_items(config):
+        if isinstance(value, ConfigObject):
+            value = config_dict(value)
+        data[key] = value
+    return data
+
+
 def config_keys(config: ConfigObject):
     return config.__attrs__.keys()
+
+
+def config_type(config: ConfigObject, key: str):
+    return config.__attrs__[key]

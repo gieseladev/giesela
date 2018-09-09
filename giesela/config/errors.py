@@ -2,13 +2,14 @@ from typing import Any, Optional
 
 from giesela.errors import GieselaError
 
-__all__ = ["ConfigError", "ConfigKeyMissing", "ConfigValueError"]
+__all__ = ["ConfigError", "ConfigKeyMissing", "ConfigValueError",
+           "TraverseError"]
 
 
 class ConfigError(GieselaError):
     def __init__(self, msg: str, key: str = None, **extra):
         self.msg = msg
-        self.key = key
+        self.key = key or None
         self.extra = extra
 
     def __str__(self) -> str:
@@ -25,12 +26,18 @@ class ConfigError(GieselaError):
             self.key = f"{name}.{key}"
 
 
-class ConfigKeyMissing(ConfigError):
+class ConfigKeyMissing(ConfigError, KeyError):
     def __init__(self, msg: str, key: str, **extra):
         super().__init__(msg, key, **extra)
 
 
-class ConfigValueError(ConfigError):
+class ConfigValueError(ConfigError, ValueError):
     def __init__(self, msg: str, key: Optional[str], value: Any, **extra):
         super().__init__(msg, key, value=value, **extra)
         self.value = value
+
+
+class TraverseError(ConfigError, AttributeError):
+    def __init__(self, msg: str, parent: str, key: str, **extra):
+        super().__init__(msg, parent, **extra)
+        self.target = key

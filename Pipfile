@@ -23,9 +23,10 @@ lxml = "*"
 pyyaml = "*"
 uvloop = {version = "*", markers = "sys_platform != 'win32'"}
 python-rapidjson = "*"
-aioredis = "*"
 motor = "*"
 dnspython = "*"
+"cacf39d" = {file = "https://github.com/aio-libs/aioredis/archive/master.zip"}
+aredis = "*"
 
 [dev-packages]
 pytest = "*"

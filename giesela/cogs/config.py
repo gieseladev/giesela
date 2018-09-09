@@ -4,7 +4,7 @@ from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import Giesela
-from giesela.config import abstract
+from giesela.config import TraverseError, abstract
 from giesela.config.abstract import ConfigObject
 
 
@@ -20,9 +20,10 @@ class Config:
 
         if key:
             try:
-                config = abstract.traverse_config(key)
-            except ValueError as e:
-                raise commands.CommandError(str(e))
+                config = abstract.traverse_config(guild_config, key)
+            except TraverseError as e:
+                parent = e.key or "Config"
+                raise commands.CommandError(f"**{key}** doesn't exist. ({parent} doesn't have \"{e.target}\")")
         else:
             config = guild_config
 
@@ -31,7 +32,7 @@ class Config:
             await ctx.send(embed=em)
             return
 
-        em = Embed(title=key or "Config")
+        em = Embed(title=key or "Guild Config")
 
         lines = []
 
@@ -40,7 +41,8 @@ class Config:
                 keys = abstract.config_keys(value)
                 em.add_field(name=key, value="\n".join(keys))
             else:
-                lines.append(f"`{key}` : `{value}`")
+                value = f"`{value}`" if value else "~"
+                lines.append(f"**{key}** : {value}")
 
         em.description = "\n".join(lines)
         await ctx.send(embed=em)
@@ -55,7 +57,16 @@ class Config:
             raise commands.CommandError("Couldn't parse value")
 
         # TODO make sure not overriding ConfigObject
-        await guild_config.set(key, value)
+        try:
+            await guild_config.set(key, value)
+        except KeyError:
+            raise commands.CommandError(f"Cannot set \"{key}\" directly")
+        except TraverseError as e:
+            parent = e.key or "Config"
+            raise commands.CommandError(f"**{key}** doesn't exist. ({parent} doesn't have \"{e.target}\")")
+
+        em = Embed(description=f"Set **{key}** to {value}")
+        await ctx.send(embed=em)
 
     async def on_guild_remove(self, guild: Guild):
         await self.config.remove_guild(guild.id)
