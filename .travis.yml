@@ -25,13 +25,14 @@ install:
 - docker-compose up -d lavalink redis mongodb
 
 before_script:
-- env "tokens.discord"="${discord_token}"\
-    "tokens.google_api"="${google_api_key}"\
-    "redis.uri"="redis://localhost:6379"\
-    "mongodb.uri"="mongodb://localhost:27017"\
-    "lavalink.nodes.1.password"="Giesela"\
-    "lavalink.nodes.1.address"="localhost:2333"\
-    bash
+- |
+  env "tokens.discord"="${discord_token}" \
+  "tokens.google_api"="${google_api_key}" \
+  "redis.uri"="redis://localhost:6379" \
+  "mongodb.uri"="mongodb://localhost:27017" \
+  "lavalink.nodes.1.password"="Giesela" \
+  "lavalink.nodes.1.address"="localhost:2333" \
+  bash
 
 script:
 - python -m pytest
