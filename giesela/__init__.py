@@ -1,5 +1,5 @@
 from .bot import Giesela
-from .config import *
+from .config import Config
 from .constants import *
 from .entry import *
 from .errors import *

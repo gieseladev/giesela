@@ -29,7 +29,7 @@ class EntryQueue(EventEmitter):
         self.config = player.config
 
         self.entries = deque()
-        self.history = deque(maxlen=self.config.history_limit)
+        self.history = deque()  # TODO sensibly apply max constraints from config
 
     def __iter__(self) -> Iterator[QueueEntry]:
         return iter(self.entries)

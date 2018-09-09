@@ -106,7 +106,7 @@ class Player:
                     channel = await find_giesela_channel(self.bot, guild, user=member)
 
             volume = await self.config.get_guild(guild_id).player.volume
-            player = await self.player_manager.get_player(guild_id, volume, channel.id)
+            player = self.player_manager.get_player(guild_id, volume, channel.id)
         return player
 
     async def start_disconnect(self, player: GieselaPlayer):
