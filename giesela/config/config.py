@@ -105,7 +105,6 @@ class GuildConfig(_AsyncGuild):
             data.update(document)
             return Guild.from_config(data)
         else:
-            # MAYBE protect from edits
             return self.defaults
 
     async def get(self, key: str):

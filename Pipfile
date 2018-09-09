@@ -9,9 +9,7 @@ imgurpython = {file = "https://github.com/Imgur/imgurpython/archive/master.zip"}
 spotipy = "*"
 "beautifulsoup4" = "*"
 discogs-client = "*"
-python-dateutil = "*"
 raven = "*"
-youtube_dl = "*"
 pillow = "*"
 lyricsfinder = "*"
 pynacl = "*"
@@ -25,7 +23,6 @@ uvloop = {version = "*", markers = "sys_platform != 'win32'"}
 python-rapidjson = "*"
 motor = "*"
 dnspython = "*"
-"cacf39d" = {file = "https://github.com/aio-libs/aioredis/archive/master.zip"}
 aredis = "*"
 
 [dev-packages]

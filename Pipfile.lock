@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bf8d431f6924ff8fca4e33f55dc41ed21a301ddc1df5b385578ade814d83940a"
+            "sha256": "ae6dc756405891311bb208593269a4ecfb47d0c7385f972cabd44ac86fcb8300"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -74,9 +74,6 @@
             ],
             "index": "pypi",
             "version": "==4.6.3"
-        },
-        "cacf39d": {
-            "file": "https://github.com/aio-libs/aioredis/archive/master.zip"
         },
         "certifi": {
             "hashes": [
@@ -394,14 +391,6 @@
             "index": "pypi",
             "version": "==1.2.1"
         },
-        "python-dateutil": {
-            "hashes": [
-                "sha256:1adb80e7a782c12e52ef9a8182bebeb73f1d7e24e374397af06fb4956c8dc5c0",
-                "sha256:e27001de32f627c22380a688bcc43ce83504a7bc5da472209b4c70f02829f0b8"
-            ],
-            "index": "pypi",
-            "version": "==2.7.3"
-        },
         "python-rapidjson": {
             "hashes": [
                 "sha256:0156939b77d7a4f2ef5f627cabbfcae52f993325626cefc783fe529d42092f51",
@@ -554,13 +543,6 @@
             ],
             "markers": "python_version >= '3.4.1'",
             "version": "==1.2.6"
-        },
-        "youtube-dl": {
-            "hashes": [
-                "sha256:42c2e82280c943ce618969c3ceeea56666554f311e86a8082c72ec91a63885a9",
-                "sha256:fc7d1c9e69c44cdf3b11b056d382502e1851bdcd900ff0ced61b6c65d2e4098c"
-            ],
-            "version": "==2018.9.8"
         }
     },
     "develop": {
