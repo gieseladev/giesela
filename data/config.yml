@@ -38,8 +38,6 @@ files:
   certificates: "cert/"
   radio_stations: "radio_stations.yml"
   playlists: "playlists/playlists"
-  # TODO DEPRECATE
-  lyrics: "lyrics/"
 
 misc:
   idle_game: Waiting for someone to queue something

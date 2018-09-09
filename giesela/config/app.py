@@ -52,11 +52,10 @@ class Files(ConfigObject):
     certificates: str = "cert/"
     radio_stations: str = "radio_stations.yml"
     playlists: str = "playlists/playlists"
-    lyrics: str = "lyrics/"
 
     def __init__(self):
         # these should be relative to data folder
-        for key in ("certificates", "radio_stations", "playlists", "lyrics"):
+        for key in ("certificates", "radio_stations", "playlists"):
             path = Path(getattr(self, key))
             if not path.root:
                 # noinspection PyUnresolvedReferences

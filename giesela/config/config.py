@@ -49,13 +49,16 @@ class GuildConfig(_AsyncGuild):
 
         self._redis = redis
         self._mongodb = config_coll
+        self.__frozen__ = True
 
     def __getattr__(self, item):
         return FlattenProxy(self, key=[item])
 
     def __setattr__(self, key, value):
-        # TODO do this right somehow
-        pass
+        if not getattr(self, "__frozen__", False):
+            return super().__setattr__(key, value)
+
+        raise AttributeError("Must not be changed...")
 
     async def dump_to_redis(self, document: Dict[str, Any]):
         redis_document = to_redis(document)
@@ -66,6 +69,11 @@ class GuildConfig(_AsyncGuild):
         await self._mongodb.delete_one(dict(_id=self.guild_id))
 
     async def set(self, key: str, value):
+        # just let the exception bubble xD
+        target = abstract.traverse_config(self.defaults, key)
+        if isinstance(target, abstract.ConfigObject):
+            raise KeyError(f"Cannot set {key} as it's a config object!")
+
         # TODO should maybe run some key/value checks?
 
         mongodb_update = self._mongodb.update_one(dict(_id=self.guild_id), {"$set": {key: value}}, upsert=True)
@@ -129,21 +137,21 @@ class Config:
         app = Application.from_config(raw_config)
         return cls(app)
 
+    def _create_guild(self, guild_id: int) -> GuildConfig:
+        return GuildConfig(guild_id, self.app.guild_defaults, self.redis, self.config_coll)
+
     async def load_guild_config(self):
         if not self.redis:
-            # sentinels = [(sentinel.host, sentinel.port) for sentinel in self.app.redis.sentinels]
-            # print(sentinels)
-            # sentinel = await aioredis.create_sentinel(sentinels)
-            # self.redis = sentinel.master_for(self.app.redis.master)
-            self.redis = await aioredis.create_redis("redis://35.199.50.55:6900")
+            sentinels = [(sentinel.host, sentinel.port) for sentinel in self.app.redis.sentinels]
+            sentinel = await aioredis.create_sentinel(sentinels)
+            self.redis = sentinel.master_for(self.app.redis.master)
 
         guilds = {}
-
         tasks = []
 
         async for guild_config in self.config_coll.find():
             guild_id = guild_config.pop("id")
-            guild = GuildConfig(guild_id, self.app.guild_defaults, self.redis, self.config_coll)
+            guild = self._create_guild(guild_id)
             tasks.append(guild.dump_to_redis(guild_config))
 
             guilds[guild_id] = guild
@@ -164,6 +172,5 @@ class Config:
             raise ConfigError("Guild configurations haven't been loaded yet!")
 
         if guild_id not in self.guilds:
-            # TODO move this to a factory function
-            self.guilds[guild_id] = GuildConfig(guild_id, self.app.guild_defaults, self.redis, self.config_coll)
+            self.guilds[guild_id] = self._create_guild(guild_id)
         return self.guilds[guild_id]

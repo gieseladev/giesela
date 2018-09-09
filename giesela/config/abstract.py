@@ -115,11 +115,13 @@ class ConfigObject:
 
         inst = object.__new__(cls)
 
-        inst.__attrs__ = hints.copy()
+        inst.__attrs__ = {}
 
         for name, _type in hints.items():
             if name.startswith("_"):
                 continue
+
+            inst.__attrs__[name] = _type
 
             try:
                 _check = getattr(inst, name)
