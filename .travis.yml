@@ -4,6 +4,7 @@ cache: pip
 language: python
 
 matrix:
+  fast_finish: true
   allow_failures:
     - python: "3.8-dev"
   include:
@@ -41,3 +42,4 @@ deploy:
   script: bash ./.travis/docker_push.sh
   on:
     all_branches: true
+    python: "3.7"
