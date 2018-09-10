@@ -263,7 +263,7 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
             else:
                 self.error = str(exception)
 
-        log.exception("CommandError:", exc_info=exception, extra=dict(report=report))
+        log.exception("CommandError:", exc_info=exception, extra=dict(report=report, tags=dict(guild_id=ctx.guild.id, author_id=ctx.author.id)))
 
     async def on_message(self, message: Message):
         await super().on_message(message)

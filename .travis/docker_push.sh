@@ -1,7 +1,16 @@
 #!/bin/bash
 
-if [ "$TRAVIS_BRANCH" == "refresh" ]; then
-    DOCKER_TAG="refresh"
+containsElement () {
+  local e match="$1"
+  shift
+  for e; do [[ "$e" == "$match" ]] && return 0; done
+  return 1
+}
+
+default_tags=("refresh" "refresh-lavalink" "refresh-lavalink_config")
+
+if containsElement "$TRAVIS_BRANCH" "${default_tags[@]}"; then
+    DOCKER_TAG="$TRAVIS_BRANCH"
 fi
 
 if [ -n "$DOCKER_TAG" ]; then

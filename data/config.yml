@@ -1,0 +1,66 @@
+# you may set all of these values in env variables using dot notation. (ex: tokens.discord=TOKEN) the value will be treated as YAML!
+
+tokens:
+  discord: "" # REQUIRED
+  google_api: "" # REQUIRED
+
+redis:
+  uri: "" # REQUIRED
+  # prefixes used to distinguish stuff
+  databases:
+    config: "config"
+    queue: "queue"
+
+mongodb:
+  uri: "" # REQUIRED
+  database: "Giesela"
+
+lavalink:
+  # list of lavalink nodes to use
+  nodes:
+  # whether to use wss/https
+  - secure: false
+    address: "" # REQUIRED
+    password: "" # REQUIRED
+
+webiesela:
+  # if you don't want to run webiesela, set to false
+  start: true
+  port: 30000
+
+files:
+  data: "data"
+  # these are relative to data (unless absolute)
+  certificates: "cert/"
+  radio_stations: "radio_stations.yml"
+  playlists: "playlists/playlists"
+
+misc:
+  # custom search engine id to use for image search
+  image_cx: "002017775112634544492:t0ynfpg8y0e"
+
+# defaults for cross-guild configuration. These settings can be changed during runtime
+runtime:
+  misc:
+    idle_game: Waiting for someone to queue something
+
+  # defaults for guild configs
+  guild:
+    commands:
+      prefix: "!"
+      # prefix to be used in sub menus, SHOULD NOT be the same as prefix!
+      menu_prefix: ""
+      # amount of seconds to wait after command before deleting all involved messages (set to 0 to disable)
+      message_decay: 30
+
+    player:
+      # volume to start with
+      volume: .1
+      # pause when alone in channel
+      auto_pause: true
+      # seconds to wait before disconnecting when alone in channel, set to 0 if you don't want Giesela to ever disconnect
+      auto_disconnect: 20
+
+      # limits for queue and history (0 for infinite)
+      queue_limit: ~
+      history_limit: 200

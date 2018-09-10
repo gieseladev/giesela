@@ -78,7 +78,7 @@ class PlaylistCog:
 
     def __init__(self, bot: Giesela):
         self.bot = bot
-        self.playlist_manager = PlaylistManager.load(self.bot, self.bot.config.playlists_file)
+        self.playlist_manager = PlaylistManager.load(self.bot, self.bot.config.app.files.playlists)
 
         self.player_cog = bot.cogs["Player"]
         self.extractor = self.player_cog.extractor

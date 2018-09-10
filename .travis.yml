@@ -3,26 +3,36 @@ cache: pip
 
 language: python
 
-python:
-- "3.7-dev"
+matrix:
+  fast_finish: true
+  allow_failures:
+  - python: "3.8-dev"
+  include:
+  - python: "3.7"
+    dist: xenial    # required for Python 3.7+ (travis-ci/travis-ci#9069)
+    sudo: required  # required for Python 3.7+ (travis-ci/travis-ci#9069)
+  - python: "3.8-dev"
+    dist: xenial    # required for Python 3.8 nightly (travis-ci/travis-ci#9069)
+    sudo: required  # required for Python 3.8 nightly (travis-ci/travis-ci#9069)
 
-before_install:
-- sudo apt-get install build-essential unzip -y
-- sudo apt-get install software-properties-common -y
-- sudo add-apt-repository ppa:fkrull/deadsnakes -y
-- sudo add-apt-repository ppa:mc3man/trusty-media -y
-- sudo add-apt-repository ppa:chris-lea/libsodium -y
-- sudo apt-get update -y --allow-unauthenticated
-- sudo apt-get install ffmpeg libopus-dev libffi-dev libsodium-dev -y
-
+services:
+- docker
 
 install:
 - pip install pytest pytest-asyncio
 - pip install pipenv
 - pipenv sync
+- docker-compose up -d lavalink redis mongodb
 
 script:
-- python -m pytest
+- |
+  env "tokens.discord"="${discord_token}" \
+  "tokens.google_api"="${google_api_key}" \
+  "redis.uri"="redis://localhost:6379" \
+  "mongodb.uri"="mongodb://localhost:27017" \
+  "lavalink.nodes.1.password"="Giesela" \
+  "lavalink.nodes.1.address"="localhost:2333" \
+  python -m pytest
 
 before_deploy:
 - echo building docker image...
@@ -33,3 +43,4 @@ deploy:
   script: bash ./.travis/docker_push.sh
   on:
     all_branches: true
+    python: "3.7"

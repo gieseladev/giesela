@@ -16,7 +16,6 @@ from discord import Guild
 
 from giesela.lib.web_author import WebAuthor
 from . import utils
-from .config import static_config
 from .lib.web_socket_server import SimpleSSLWebSocketServer, SimpleWebSocketServer, WebSocket
 
 if TYPE_CHECKING:
@@ -143,8 +142,7 @@ class GieselaWebSocket(WebSocket):
 
                 answer = {
                     "response": True,
-                    "registration_token": registration_token,
-                    "command_prefix": static_config.command_prefix
+                    "registration_token": registration_token
                 }
 
                 self.sendMessage(rapidjson.dumps(answer))
@@ -413,8 +411,8 @@ def generate_registration_token() -> str:
             return token
 
 
-def find_cert_files() -> Tuple[Optional[str], Optional[str]]:
-    folder = Path(static_config.webiesela_cert)
+def find_cert_files(directory: str) -> Tuple[Optional[str], Optional[str]]:
+    folder = Path(directory)
     folder.mkdir(exist_ok=True)
 
     files = list(folder.glob("*"))
@@ -464,13 +462,13 @@ class WebieselaServer:
         except FileNotFoundError:
             log.warning("[WEBSOCKET] failed to load tokens, there are none saved")
 
-        cert_file, key_file = find_cert_files()
+        cert_file, key_file = find_cert_files(cog.config.app.files.certificates)
         if cert_file:
             log.info("found cert file, creating SSL Server!")
-            server = SimpleSSLWebSocketServer("", static_config.webiesela_port, GieselaWebSocket, cert_file, key_file)
+            server = SimpleSSLWebSocketServer("", cog.config.app.webiesela.port, GieselaWebSocket, cert_file, key_file)
         else:
             log.warning("no certificate found, using default server")
-            server = SimpleWebSocketServer("", static_config.webiesela_port, GieselaWebSocket)
+            server = SimpleWebSocketServer("", cog.config.app.webiesela.port, GieselaWebSocket)
 
         cls.server = server
         atexit.register(cls.server.close)

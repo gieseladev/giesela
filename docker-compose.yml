@@ -6,17 +6,18 @@ services:
     image: giesela/giesela:refresh
     container_name: Giesela
     restart: always
+    volumes:
+    - ./data:/giesela/data
     ports:
     - 30000:30000
     networks:
     - backend
     environment:
-    - token
-    - google_api_key
-    - command_prefix
     - SENTRY_DSN
-    - lavalink_password=Giesela
-    - lavalink_server_address=lavalink_server:2333
+    - redis.uri=redis://redis:6379
+    - mongodb.uri=mongodb://mongodb:27017
+    - lavalink.nodes.1.password=Giesela
+    - lavalink.nodes.1.address=lavalink_server:2333
 
   #  webiesela:
   #    image: giesela/webiesela
@@ -29,10 +30,30 @@ services:
     image: fredboat/lavalink:experimental_magma
     container_name: Lavalink
     restart: always
+    expose:
+    - 2333
     networks:
     - backend
     volumes:
     - ./.docker/lavalink.yml:/opt/Lavalink/application.yml
+
+  redis:
+    image: redis
+    container_name: Redis
+    restart: always
+    expose:
+    - 6379
+    networks:
+    - backend
+
+  mongodb:
+    image: mongo
+    container_name: MongoDB
+    restart: always
+    expose:
+    - 27017
+    networks:
+    - backend
 
 networks:
   backend:

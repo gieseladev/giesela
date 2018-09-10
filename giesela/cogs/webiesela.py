@@ -14,8 +14,6 @@ LOAD_ORDER = 2
 
 
 class Webiesela:
-    bot: Giesela
-
     player_cog: Player
     playlist_cog: PlaylistCog
     playlist_manager: PlaylistManager
@@ -24,6 +22,7 @@ class Webiesela:
 
     def __init__(self, bot: Giesela):
         self.bot = bot
+        self.config = bot.config
         self.player_cog = bot.cogs["Player"]
         self.playlist_cog = bot.cogs["Playlist"]
 
@@ -34,12 +33,12 @@ class Webiesela:
         self.radio_station_manager = self.radio_cog.station_manager
 
     async def on_ready(self):
-        if self.bot.config.start_webiesela:
+        if self.config.app.webiesela.start:
             log.info("starting Webiesela")
             WebieselaServer.run(self)
 
     async def on_shutdown(self):
-        if self.bot.config.start_webiesela:
+        if self.config.app.webiesela.start and WebieselaServer.server:
             log.debug("stopping Webiesela")
             WebieselaServer.server.close()
 

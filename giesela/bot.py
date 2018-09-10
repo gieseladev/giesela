@@ -2,7 +2,6 @@ import asyncio
 import copy
 import logging
 import operator
-from textwrap import indent, wrap
 from typing import Iterable, List, Optional, Tuple, Type
 
 import aiohttp
@@ -11,9 +10,8 @@ from discord.ext.commands import AutoShardedBot, Command, CommandError, CommandI
 
 from giesela.lib.web_author import WebAuthor
 from giesela.ui import events
-from . import cogs, signals, utils
-from .config import Config, ConfigDefaults
-from .constants import VERSION as BOT_VERSION
+from . import cogs, constants, signals, utils
+from .config import Config
 
 log = logging.getLogger(__name__)
 
@@ -41,15 +39,15 @@ class Giesela(AutoShardedBot):
 
     exit_signal: Optional[Type[signals.ExitSignal]]
 
-    def __init__(self, *args, **kwargs):
-        self.config = Config(ConfigDefaults.options_file)
+    def __init__(self):
+        self.config = Config.load_app(constants.CONFIG_LOCATION)
 
-        super().__init__(self.config.command_prefix, *args, **kwargs)
+        super().__init__(None, )
         WebAuthor.bot = self
 
         self.exit_signal = None
         self.aiosession = aiohttp.ClientSession(loop=self.loop)
-        self.http.user_agent += f" Giesela/{BOT_VERSION}"
+        self.http.user_agent += f" Giesela/{constants.VERSION}"
 
         for ext in cogs.get_extensions():
             log.info(f"loading extension {ext}")
@@ -60,9 +58,15 @@ class Giesela(AutoShardedBot):
         await self.aiosession.close()
         await super().close()
 
+    async def start(self):
+        log.info("loading config")
+        await self.config.load_config()
+        log.info("starting")
+        await super().start(self.config.app.tokens.discord)
+
     def run(self):
         try:
-            super().run(self.config.token)
+            super().run()
         finally:
             if self.exit_signal:
                 raise self.exit_signal
@@ -93,6 +97,10 @@ class Giesela(AutoShardedBot):
         commands.sort(key=operator.itemgetter(1), reverse=True)
         return commands
 
+    async def get_prefix(self, message: Message) -> str:
+        guild_id = message.guild.id
+        return await self.config.get_guild(guild_id).commands.prefix
+
     async def get_context(self, message: Message, *, cls: Context = GieselaContext) -> Context:
         return await super().get_context(message, cls=cls)
 
@@ -103,7 +111,8 @@ class Giesela(AutoShardedBot):
 
     async def on_command_finished(self, ctx: Context, **_):
         if isinstance(ctx, GieselaContext):
-            await asyncio.sleep(self.config.message_decay_delay)
+            decay_delay = await self.config.get_guild(ctx.guild.id).commands.message_decay
+            await asyncio.sleep(decay_delay)
             await ctx.decay()
 
     async def on_command_completion(self, ctx: Context):
@@ -146,33 +155,13 @@ class Giesela(AutoShardedBot):
 
             await ctx.send(embed=embed)
 
-        log.exception("CommandError:", exc_info=exception, extra=dict(report=report))
+        log.exception("CommandError:", exc_info=exception, extra=dict(report=report, tags=dict(guild_id=ctx.guild.id, author_id=ctx.author.id)))
 
         self.dispatch("command_finished", ctx, exception=exception)
 
-    async def on_ready(self):
-        log.info(f"\rConnected!  Giesela v{BOT_VERSION}")
-        log.info(f"Bot: {self.user}")
-
-        config_string = ""
-        all_options = self.config.get_all_options()
-        for option in all_options:
-            opt, val = option
-
-            opt_string = "  {}: ".format(opt)
-
-            lines = wrap(str(val), 100 - len(opt_string))
-            if len(lines) > 1:
-                val_string = "{}\n{}\n".format(lines[0], indent("\n".join(lines[1:]), len(opt_string) * " "))
-            else:
-                val_string = lines[0]
-
-            config_string += opt_string + val_string + "\n"
-
-        if config_string:
-            log.info("Config:\n" + config_string)
-
-        log.info("Ready to go!")
+    @classmethod
+    async def on_ready(cls):
+        log.info(f"\rConnected!  Giesela v{constants.VERSION}")
 
     async def on_error(self, event: str, *args, **kwargs):
         log.exception(f"Error in {event} ({args}, {kwargs})")

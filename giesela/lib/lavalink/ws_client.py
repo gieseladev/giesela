@@ -60,11 +60,14 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
     async def shutdown(self):
         self._shutdown_signal = True
         self.bot.remove_listener(self.on_socket_response)
-        await self._ws.close(reason="Shutdown")
+        if self._ws:
+            await self._ws.close(reason="Shutdown")
 
     async def _try_connect(self):
         try:
             await self.connect()
+        except asyncio.CancelledError:
+            log.warning("connecting cancelled!")
         except Exception:
             log.exception("Couldn't connect")
 
