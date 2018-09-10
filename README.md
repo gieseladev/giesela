@@ -12,9 +12,6 @@ old, crappy version of Giesela that ~~we've all~~  I've grown to hate, but at le
 containerised which - as we all know - improves everything by about 1000%...
 
 In all seriousness though, there have been some changes [listed here](#whats-new).
-While some might seem trivial, it is important to keep in mind that there are
-a lot of smaller/internal changes that aren't listed which - over time - add up to
-be quite important.
 
 ### Which version should I run?
 ~~Neither tbh~~
@@ -32,29 +29,8 @@ you can use [docker-compose] which comes with the necessary services like
 
 
 ## Configuration
-Configuring has never been as easy (maybe?)
-
-### Environment Variables
-`token` **required**:
-    You need to set the [Discord Bot Token][discord-token] for Giesela to work.
-
-`google_api_key` **required**:
-    Api key for Google's API.
-    
-`command_prefix` *optional*:
-    Set the prefix for messages addressed to Giesela (default "!").
-    
-#### If you don't use `docker compose` using the provided `docker_compose.yml`
-you also need to provide the following variables:
-
-`lavalink_ws_url`:
-    The complete (including scheme and port) url of [Lavalink][lavalink]'s websocket
-
-`lavalink_rest_url`:
-    Complete url for [Lavalink][lavalink]'s REST server
-
-`lavalink_password`:
-    The password used to interact with [Lavalink][lavalink]
+Please look at the `config.yml` file in the `data` directory for
+instructions on how to configure Giesela.
 
 
 ### Volumes
@@ -97,6 +73,11 @@ which Giesela understands, but I'm too lazy to name them all!
     * Restriciting edit access to selected editors
 - New radio station system which makes it easy (at least easier) to add new radio stations
 - Using [Lavalink][lavalink]
+- Overhauled config system with the following features:
+    * App settings which can't be changed at runtime
+    * Global settings which may be changed at runtime
+    * Guild specific settings which also can be changed at runtime
+    * Specific options which aren't set, take their value from the parent. (Guild -> Global -> Application)
 
 
 [docker-container]: https://www.docker.com/what-container
