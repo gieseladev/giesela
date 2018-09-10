@@ -202,7 +202,7 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
 
             self.emit("voice_channel_update", guild_id=guild_id, channel_id=channel_id)
 
-        if all(key in self._voice_state for key in ("op", "guildId", "sessionId", "event")):
+        if self._voice_state.keys() == {"op", "guildId", "sessionId", "event"}:
             guild_id = event_data["guild_id"]
             log.debug(f"sending voice_state for guild {guild_id}")
             await self.send_raw(self._voice_state)

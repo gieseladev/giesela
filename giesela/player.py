@@ -278,13 +278,14 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
     async def load_from_redis(self, redis: Redis):
         key = f"{self.config.app.redis.databases.queue}:{self.guild_id}:current_entry"
         raw_entry = await redis.get(key)
-        print("got", raw_entry)
+
         if raw_entry:
             log.debug(f"loading current entry {self}")
             data = rapidjson.loads(raw_entry)
+
             progress = data.pop("progress")
-            data["player"] = self
-            player_entry = PlayerEntry.from_dict(data)
+
+            player_entry = PlayerEntry.from_dict(data, player=self, queue=self.queue)
             entry = player_entry.entry
 
             if entry.start_position:
@@ -375,6 +376,7 @@ class PlayerManager(LavalinkAPI):
         log.debug(f"writing {len(players)} player(s) to redis")
         key = f"{self.bot.config.app.redis.databases.queue}:players"
 
+        # TODO should probably clear players before dumping!
         await asyncio.gather(
             redis.hmset(key, *itertools.chain.from_iterable(players)),
             *coros,

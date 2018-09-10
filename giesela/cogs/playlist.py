@@ -470,7 +470,7 @@ class PlaylistCog:
                 return
 
         playlist_entry = playlist.add_entry(entry, ctx.author)
-        if not player_entry.has_wrapper(LoadedPlaylistEntry):
+        if not player_entry.has_wrapped(LoadedPlaylistEntry):
             player_entry.lowest_wrapper.add_wrapper(LoadedPlaylistEntry.create(playlist_entry))
 
         em = Embed(title=f"Added **{entry}**", colour=Colour.green())

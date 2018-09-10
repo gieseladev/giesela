@@ -77,8 +77,7 @@ class EntryQueue(EventEmitter):
         log.info(f"loading {len(entries)} queue entries from redis")
         for raw_entry in entries:
             data = rapidjson.loads(raw_entry)
-            data["queue"] = self
-            entry = QueueEntry.from_dict(data)
+            entry = QueueEntry.from_dict(data, queue=self)
             self.entries.append(entry)
 
     async def _load_history_from_redis(self, redis):
@@ -88,8 +87,7 @@ class EntryQueue(EventEmitter):
         log.info(f"loading {len(entries)} history entries from redis")
         for raw_entry in entries:
             data = rapidjson.loads(raw_entry)
-            data["queue"] = self
-            entry = HistoryEntry.from_dict(data)
+            entry = HistoryEntry.from_dict(data, queue=self)
             self.history.append(entry)
 
     async def load_from_redis(self, redis: Redis):
@@ -198,4 +196,4 @@ class EntryQueue(EventEmitter):
         return estimated_time
 
     def total_duration(self) -> float:
-        return sum(entry.entry.duration for entry in self.entries)
+        return sum(entry.entry.duration for entry in self.entries if entry.entry.duration)

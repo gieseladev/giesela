@@ -171,6 +171,9 @@ class RadioStationManager:
         station.manager = self
         self.stations.append(station)
 
+    def get_station(self, name: str) -> Optional[RadioStation]:
+        return next((station for station in self if station.name == name), None)
+
     def find_station(self, query: str) -> Optional[RadioStation]:
         for station in self:
             if station.is_alias(query):
