@@ -7,7 +7,7 @@ import time
 from collections import deque
 from typing import Deque, Iterable, Iterator, Optional, TYPE_CHECKING, Union
 
-from aioredis import RedisConnection
+from aioredis import Redis
 from discord import User
 
 from .entry import CanWrapEntryType, HistoryEntry, PlayableEntry, PlayerEntry, QueueEntry
@@ -47,36 +47,33 @@ class EntryQueue(EventEmitter):
             item = abs(item) - 1
             return self.history[item]
 
-    async def dump_to_redis(self, redis: RedisConnection):
+    async def dump_to_redis(self, redis: Redis):
         prefix = f"{self.config.app.redis.databases.queue}:{self.player.guild_id}"
         queue_key = f"{prefix}:queue"
         history_key = f"{prefix}:history"
 
-        await asyncio.gather(
-            redis.execute(b"DEL", queue_key),
-            redis.execute(b"DEL", history_key),
-            loop=self.loop
-        )
+        await redis.delete(queue_key, history_key)
 
         coros = []
         if self.entries:
             log.debug(f"writing queue to redis ({len(self.entries)} entr(y/ies))")
             queue = (rapidjson.dumps(entry.to_dict()) for entry in self.entries)
-            coros.append(redis.execute(b"RPUSH", queue_key, *queue))
+            coros.append(redis.rpush(queue_key, *queue))
 
         if self.history:
             log.debug(f"writing history to redis ({len(self.history)} entr(y/ies))")
             history = (rapidjson.dumps(entry.to_dict()) for entry in self.history)
-            coros.append(redis.execute(b"RPUSH", history_key, *history))
+            coros.append(redis.rpush(history_key, *history))
 
         await asyncio.gather(
             *coros,
             loop=self.loop
         )
 
-    async def _load_queue_from_redis(self, redis):
+    async def _load_queue_from_redis(self, redis: Redis):
         key = f"{self.config.app.redis.databases.queue}:{self.player.guild_id}:queue"
-        entries = await redis.execute(b"LRANGE", key, 0, -1)
+
+        entries = await redis.lrange(key, 0, -1)
         log.info(f"loading {len(entries)} queue entries from redis")
         for raw_entry in entries:
             data = rapidjson.loads(raw_entry)
@@ -86,7 +83,8 @@ class EntryQueue(EventEmitter):
 
     async def _load_history_from_redis(self, redis):
         key = f"{self.config.app.redis.databases.queue}:{self.player.guild_id}:history"
-        entries = await redis.execute(b"LRANGE", key, 0, -1)
+
+        entries = await redis.lrange(key, 0, -1)
         log.info(f"loading {len(entries)} history entries from redis")
         for raw_entry in entries:
             data = rapidjson.loads(raw_entry)
@@ -94,7 +92,7 @@ class EntryQueue(EventEmitter):
             entry = HistoryEntry.from_dict(data)
             self.history.append(entry)
 
-    async def load_from_redis(self, redis: RedisConnection):
+    async def load_from_redis(self, redis: Redis):
         await asyncio.gather(self._load_queue_from_redis(redis),
                              self._load_history_from_redis(redis),
                              loop=self.loop)

@@ -6,6 +6,7 @@ import logging
 import rapidjson
 from typing import Dict, Iterator, Optional, TYPE_CHECKING, Union
 
+from aioredis import Redis
 from discord import Guild, VoiceChannel
 from discord.gateway import DiscordWebSocket
 from websockets import ConnectionClosed
@@ -259,7 +260,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
         self.playback_finished(play_next, skipped)
 
-    async def dump_to_redis(self, redis):
+    async def dump_to_redis(self, redis: Redis):
         key = f"{self.config.app.redis.databases.queue}:{self.guild_id}:current_entry"
         if self._current_entry:
             entry_data = self._current_entry.to_dict()
@@ -267,16 +268,16 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
             data = rapidjson.dumps(entry_data)
             log.debug(f"writing current entry to redis {self}")
 
-            await redis.execute(b"SET", key, data)
+            await redis.set(key, data)
         else:
             log.debug(f"deleting current entry {self}")
-            await redis.execute(b"DEL", key)
+            await redis.delete(key)
 
         await self.queue.dump_to_redis(redis)
 
-    async def load_from_redis(self, redis):
+    async def load_from_redis(self, redis: Redis):
         key = f"{self.config.app.redis.databases.queue}:{self.guild_id}:current_entry"
-        raw_entry = await redis.execute(b"GET", key)
+        raw_entry = await redis.get(key)
         print("got", raw_entry)
         if raw_entry:
             log.debug(f"loading current entry {self}")
@@ -375,7 +376,7 @@ class PlayerManager(LavalinkAPI):
         key = f"{self.bot.config.app.redis.databases.queue}:players"
 
         await asyncio.gather(
-            redis.execute(b"HMSET", key, *itertools.chain.from_iterable(players)),
+            redis.hmset(key, *itertools.chain.from_iterable(players)),
             *coros,
             loop=self.loop
         )
@@ -383,12 +384,11 @@ class PlayerManager(LavalinkAPI):
     async def load_from_redis(self):
         redis = self.bot.config.redis
         key = f"{self.bot.config.app.redis.databases.queue}:players"
-        res = iter(await redis.execute(b"HGETALL", key))
-        guilds = zip(res, res)
+        guilds = await redis.hgetall(key)
 
         coros = []
 
-        for guild_id, voice_channel_id in guilds:
+        for guild_id, voice_channel_id in guilds.items():
             guild_id = int(guild_id)
             voice_channel_id = int(voice_channel_id)
 
