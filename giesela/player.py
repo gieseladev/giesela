@@ -1,7 +1,9 @@
 import abc
 import asyncio
 import enum
+import itertools
 import logging
+import rapidjson
 from typing import Dict, Iterator, Optional, TYPE_CHECKING, Union
 
 from discord import Guild, VoiceChannel
@@ -257,6 +259,44 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
         self.playback_finished(play_next, skipped)
 
+    async def dump_to_redis(self, redis):
+        key = f"{self.config.app.redis.databases.queue}:{self.guild_id}:current_entry"
+        if self._current_entry:
+            entry_data = self._current_entry.to_dict()
+            entry_data["progress"] = self.progress
+            data = rapidjson.dumps(entry_data)
+            log.debug(f"writing current entry to redis {self}")
+
+            await redis.execute(b"SET", key, data)
+        else:
+            log.debug(f"deleting current entry {self}")
+            await redis.execute(b"DEL", key)
+
+        await self.queue.dump_to_redis(redis)
+
+    async def load_from_redis(self, redis):
+        key = f"{self.config.app.redis.databases.queue}:{self.guild_id}:current_entry"
+        raw_entry = await redis.execute(b"GET", key)
+        print("got", raw_entry)
+        if raw_entry:
+            log.debug(f"loading current entry {self}")
+            data = rapidjson.loads(raw_entry)
+            progress = data.pop("progress")
+            data["player"] = self
+            player_entry = PlayerEntry.from_dict(data)
+            entry = player_entry.entry
+
+            if entry.start_position:
+                progress += entry.start_position
+
+            self._current_entry = player_entry
+            await self.manager.connect_player(self.guild_id, self.voice_channel_id)
+            await self.manager.send_play(self.guild_id, entry.track, progress, entry.end_position)
+            self.state = GieselaPlayerState.PLAYING
+
+        await self.queue.load_from_redis(redis)
+        self.on_entry_added()
+
 
 @has_events("player_create")
 class PlayerManager(LavalinkAPI):
@@ -271,12 +311,14 @@ class PlayerManager(LavalinkAPI):
         self.players = {}
 
         bot.add_listener(self.on_shutdown)
+        bot.add_listener(self.on_ready)
 
     def __iter__(self) -> Iterator[GieselaPlayer]:
         return iter(self.players.values())
 
     def get_player(self, guild_id: int, volume: float, voice_channel_id: int = None, *, create: bool = True) -> Optional[GieselaPlayer]:
         player = self.players.get(guild_id)
+        # TODO do volume differently
         if not player and create:
             player = GieselaPlayer(self, guild_id, volume, voice_channel_id)
             self.emit("player_create", player=player)
@@ -322,8 +364,46 @@ class PlayerManager(LavalinkAPI):
             log.info(f"updating channel_id for {player}")
             player.voice_channel_id = channel_id
 
+    async def dump_to_redis(self):
+        redis = self.bot.config.redis
+        coros = []
+        for player in self.players.values():
+            coros.append(player.dump_to_redis(redis))
+
+        players = [(guild_id, player.voice_channel_id) for guild_id, player in self.players.items() if player.voice_channel_id]
+        log.debug(f"writing {len(players)} player(s) to redis")
+        key = f"{self.bot.config.app.redis.databases.queue}:players"
+
+        await asyncio.gather(
+            redis.execute(b"HMSET", key, *itertools.chain.from_iterable(players)),
+            *coros,
+            loop=self.loop
+        )
+
+    async def load_from_redis(self):
+        redis = self.bot.config.redis
+        key = f"{self.bot.config.app.redis.databases.queue}:players"
+        res = iter(await redis.execute(b"HGETALL", key))
+        guilds = zip(res, res)
+
+        coros = []
+
+        for guild_id, voice_channel_id in guilds:
+            guild_id = int(guild_id)
+            voice_channel_id = int(voice_channel_id)
+
+            volume = await self.bot.config.get_guild(guild_id).player.volume
+            player = self.get_player(guild_id, volume, voice_channel_id)
+            coros.append(player.load_from_redis(redis))
+
+        await asyncio.gather(*coros, loop=self.loop)
+
+    async def on_ready(self):
+        await self.load_from_redis()
+
     async def on_shutdown(self):
         log.info("Disconnecting from Lavalink")
+        await self.dump_to_redis()
         await self.shutdown()
 
     async def on_disconnect(self, error: ConnectionClosed):

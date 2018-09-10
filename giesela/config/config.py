@@ -210,7 +210,7 @@ class Config:
 
     runtime: RuntimeConfig
     guilds: Dict[int, GuildConfig]
-    redis: Optional[ConnectionsPool]
+    redis: ConnectionsPool
 
     def __init__(self, app: Application):
         self.app = app

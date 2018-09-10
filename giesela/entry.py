@@ -383,7 +383,7 @@ class RadioEntry(BaseEntry, PlayableEntry, HasChapters):
         return self._song_data
 
 
-class EntryWrapper(metaclass=abc.ABCMeta):
+class EntryWrapper(Reducible, metaclass=_RegisterEntryMeta):
     def __init__(self, *, entry: "CanWrapEntryType", **_):
         self._entry = entry
 
@@ -455,8 +455,15 @@ class EntryWrapper(metaclass=abc.ABCMeta):
         if isinstance(self.wrapped, EntryWrapper):
             data = self.wrapped.to_dict()
         else:
-            data = dict(entry=self._entry.to_dict())
+            data = dict(cls=type(self).__name__, entry=self._entry.to_dict())
         return data
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]):
+        raw_entry = data.pop("entry")
+        entry = load_entry_from_dict(raw_entry)
+        data["entry"] = entry
+        return super().from_dict(data)
 
 
 CanWrapEntryType = Union[EntryWrapper, PlayableEntry]
@@ -509,15 +516,19 @@ class PlayerEntry(EntryWrapper):
 
 
 class QueueEntry(EntryWrapper):
-    def __init__(self, *, queue: "EntryQueue", requester: User, request_timestamp: float, **kwargs):
+    def __init__(self, *, queue: "EntryQueue", requester_id: int, request_timestamp: float, **kwargs):
         super().__init__(**kwargs)
         self.queue = queue
-        self.requester = requester
+        self.requester_id = requester_id
         self.request_timestamp = request_timestamp
+
+    @property
+    def requester(self) -> User:
+        return self.queue.player.bot.get_user(self.requester_id)
 
     def to_dict(self):
         data = super().to_dict()
-        data.update(requester=self.requester, request_timestamp=self.request_timestamp)
+        data.update(requester_id=self.requester_id, request_timestamp=self.request_timestamp)
         return data
 
 

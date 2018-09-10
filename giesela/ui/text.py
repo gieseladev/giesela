@@ -38,6 +38,7 @@ def keep_whitespace(text: str) -> str:
 
 
 def shorten(text: str, width: int, overflow: str = "...") -> str:
+    text = str(text)
     if len(text) > width:
         over_len = len(overflow)
         text = text[:-over_len] + overflow
