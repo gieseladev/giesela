@@ -20,6 +20,7 @@ lavalink:
   nodes:
   # whether to use wss/https
   - secure: false
+    region: global
     address: "" # REQUIRED
     password: "" # REQUIRED
 

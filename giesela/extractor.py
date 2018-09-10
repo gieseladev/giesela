@@ -18,7 +18,7 @@ RE_HTTP_SCHEME: Pattern = re.compile(r"^https?://")
 class Extractor:
     def __init__(self, client: LavalinkNodeBalancer):
         self._client = client
-        self.loop = self.client.loop
+        self.loop = client.loop
 
     @property
     def client(self) -> LavalinkREST:
