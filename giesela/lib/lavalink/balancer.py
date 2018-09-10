@@ -110,7 +110,8 @@ class LavalinkNodeBalancer(EventEmitter):
         # noinspection PyTypeChecker
         self._node_pool = deque(itertools.chain.from_iterable(nodes.values()), maxlen=len(nodes))
 
-        map(self._add_listeners, self._nodes.values())
+        for node in self._node_pool:
+            self._add_listeners(node)
 
     def __enter__(self):
         return self.get_rest_node()
@@ -148,7 +149,7 @@ class LavalinkNodeBalancer(EventEmitter):
 
     async def shutdown(self):
         coros = []
-        for node in self._nodes.values():
+        for node in self._node_pool:
             coros.append(node.shutdown())
 
         await asyncio.gather(*coros, loop=self.loop)

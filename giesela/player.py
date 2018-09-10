@@ -250,7 +250,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
         if self._current_entry:
             entry = self._current_entry.entry
-            await self.node.send_play(self.guild_id, entry.track, self.progress, entry.end_position)
+            await self.node.send_play(self.guild_id, entry.track, self._start_position + self.progress, entry.end_position)
 
         if self.is_paused:
             await self.pause()
@@ -269,8 +269,6 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
                 play_next = False
         elif event == LavalinkEvent.TRACK_EXCEPTION:
             log.error(f"Lavalink reported an error: {data.error}")
-
-        # TODO send a stop signal just to be sure (@.vlexar)
 
         self.playback_finished(play_next, skipped)
 

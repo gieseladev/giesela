@@ -1,5 +1,6 @@
 import asyncio
 import collections
+import inspect
 import logging
 from typing import Awaitable, Callable, Dict, List, Optional, Set, Type, TypeVar
 
@@ -58,10 +59,9 @@ class EventEmitter:
 
         for cb in self._events[evt_name]:
             try:
-                if asyncio.iscoroutinefunction(cb):
-                    asyncio.ensure_future(safe_await(cb(*args, **kwargs)), loop=self.loop)
-                else:
-                    cb(*args, **kwargs)
+                result = cb(*args, **kwargs)
+                if inspect.isawaitable(result):
+                    asyncio.ensure_future(safe_await(result))
 
             except Exception:
                 log.exception(f"Couldn't call {cb}:")
