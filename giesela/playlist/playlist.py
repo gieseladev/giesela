@@ -43,6 +43,7 @@ class Playlist:
     def __init__(self, **kwargs):
         self.manager = None
 
+        # FIXME playlist needs to save when the gpl_id is generated
         self.gpl_id = kwargs.pop("gpl_id", None) or uuid.uuid4()
         self.name = kwargs.pop("name")
         self.author_id = kwargs.pop("author_id")

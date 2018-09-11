@@ -5,7 +5,7 @@ import random
 import rapidjson
 import time
 from collections import deque
-from typing import Deque, Iterable, Iterator, Optional, TYPE_CHECKING, Union
+from typing import Deque, Iterable, Iterator, Optional, TYPE_CHECKING, TypeVar, Union
 
 from aioredis import Redis
 from discord import User
@@ -17,6 +17,15 @@ if TYPE_CHECKING:
     from giesela import GieselaPlayer
 
 log = logging.getLogger(__name__)
+
+_VT = TypeVar("_VT")
+
+
+def deque_pop_index(queue: Deque[_VT], index: int) -> _VT:
+    queue.rotate(-index)
+    value = queue.popleft()
+    queue.rotate(index)
+    return value
 
 
 @has_events("shuffle", "clear", "move_entry", "replay", "history_push", "playlist_load", "entries_added", "entry_added", "entry_removed")
@@ -110,7 +119,7 @@ class EntryQueue(EventEmitter):
         if not all(0 <= x < len(self) for x in (from_index, to_index)):
             raise ValueError(f"indices must be in range 0-{len(self)} ({from_index}, {to_index})")
 
-        move_entry = self.entries.pop(from_index)
+        move_entry = deque_pop_index(self.entries, from_index)
         if to_index:
             self.entries.insert(to_index, move_entry)
         else:
@@ -126,7 +135,7 @@ class EntryQueue(EventEmitter):
         else:
             if not 0 <= index < len(self):
                 return None
-            entry = self.history.pop(index)
+            entry = deque_pop_index(self.history, index)
 
         entry = self.wrap_queue_entry(entry.entry, requester)
         self.entries.appendleft(entry)
@@ -172,7 +181,7 @@ class EntryQueue(EventEmitter):
         if not 0 <= target < len(self):
             return None
 
-        entry = self.entries.pop(target)
+        entry = deque_pop_index(self.entries, target)
 
         self.emit("entry_removed", queue=self, entry=entry)
 
