@@ -30,14 +30,14 @@ class Radio:
     bot: Giesela
     station_manager: RadioStationManager
 
-    player_cog: Player
+    get_player: Player.get_player
 
     def __init__(self, bot: Giesela):
         self.bot = bot
         self.station_manager = RadioStationManager.load(bot, bot.config.app.files.radio_stations)
-        self.player_cog = bot.cogs["Player"]
+        self.bot.store_reference("radio_station_manager", self.station_manager)
 
-        self.get_player = self.player_cog.get_player
+        self.get_player = self.bot.get_player
 
     def find_station(self, station: str) -> RadioStation:
         _station = self.station_manager.find_station(station)

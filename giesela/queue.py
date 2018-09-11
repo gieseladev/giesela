@@ -38,6 +38,7 @@ class EntryQueue(EventEmitter):
     def __init__(self, player: "GieselaPlayer"):
         super().__init__()
         self.player = player
+        self.bot = player.bot
         self.config = player.config
 
         self.entries = deque()

@@ -75,6 +75,9 @@ class Player:
 
         self.extractor = self.player_manager.extractor
 
+        self.bot.store_reference("get_player", self.get_player)
+        self.bot.store_reference("extractor", self.extractor)
+
         self.np_messages = {}
         self._disconnects = {}
 

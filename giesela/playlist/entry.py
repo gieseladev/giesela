@@ -38,7 +38,7 @@ class LoadedPlaylistEntry(EntryWrapper):
     @property
     def playlist_manager(self) -> "PlaylistManager":
         queue = self.highest_wrapper.get("queue")
-        return queue.player.bot.cogs["Playlist"].playlist_manager
+        return queue.bot.playlist_manager
 
     @property
     def playlist(self) -> "Playlist":

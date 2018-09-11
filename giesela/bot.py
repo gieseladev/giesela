@@ -40,18 +40,33 @@ class Giesela(AutoShardedBot):
     exit_signal: Optional[Type[signals.ExitSignal]]
 
     def __init__(self):
-        self.config = Config.load_app(constants.CONFIG_LOCATION)
-
         super().__init__(None, )
-        WebAuthor.bot = self
+        WebAuthor.bot = self  # TODO remove this garbage
+
+        self._storage = {}
 
         self.exit_signal = None
-        self.aiosession = aiohttp.ClientSession(loop=self.loop)
+        self.config = Config.load_app(constants.CONFIG_LOCATION)
+
+        self.store_reference("aiosession", aiohttp.ClientSession(loop=self.loop))
+
         self.http.user_agent += f" Giesela/{constants.VERSION}"
 
         for ext in cogs.get_extensions():
             log.info(f"loading extension {ext}")
             self.load_extension(ext)
+
+    def __getattr__(self, item: str):
+        stored = self._storage.get(item)
+        if stored:
+            return stored
+
+        raise AttributeError(f"{self} doesn't have attribute {item}")
+
+    def store_reference(self, key: str, value, *, override: bool = False):
+        if key in self._storage and not override:
+            raise KeyError(f"{key} is already in storage!")
+        self._storage[key] = value
 
     async def close(self):
         if self.is_closed():
