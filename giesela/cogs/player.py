@@ -337,8 +337,7 @@ class Player:
             else:
                 raise commands.CommandError(f"Unreasonable volume provided: {volume}%. Provide a value between 0 and 100.")
 
-        player.volume = volume / 100
-
+        await player.set_volume(volume / 100)
         await ctx.send(f"updated volume from {old_volume} to {volume}")
 
     @commands.command()
