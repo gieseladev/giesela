@@ -93,6 +93,9 @@ class Giesela(AutoShardedBot):
                 raise self.exit_signal
 
     async def on_message(self, message: Message):
+        if not message.guild:
+            # TODO handle dms...
+            return
         content = message.content
         if "&&" in content:
             await self.chain_commands(message)
@@ -119,6 +122,7 @@ class Giesela(AutoShardedBot):
         return commands
 
     async def get_prefix(self, message: Message) -> str:
+        # TODO how to handle dm?
         guild_id = message.guild.id
         return await self.config.get_guild(guild_id).commands.prefix
 
