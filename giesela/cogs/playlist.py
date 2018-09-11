@@ -155,7 +155,9 @@ class PlaylistCog:
             prompt = PromptYesNo(ctx.channel, user=ctx.author, text=f"There's already a playlist with a similar name (\"{similar_playlist.name}\"). "
                                                                     f"Do you really want to create the playlist \"{name}\"")
             if not await prompt:
+                await ctx.message.delete()
                 return
+
         playlist = Playlist(name=name, author_id=ctx.author.id)
         playlist.manager = self.playlist_manager
 

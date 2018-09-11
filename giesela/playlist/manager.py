@@ -52,17 +52,20 @@ class PlaylistManager:
                     log.warning(f"Can't recover playlist {gpl_id}")
                     to_delete.append(gpl_id)
 
-                continue
+            else:
+                playlist.manager = self
+                self._playlists[playlist.gpl_id] = playlist
 
-            playlist.manager = self
-            self._playlists[playlist.gpl_id] = playlist
+                if playlist.is_dirty():
+                    log.info(f"{playlist} seems to have changed during loading, saving")
+                    playlist.save()
 
         if to_delete:
             log.info(f"removing {len(to_delete)} playlists")
             for gpl_id in to_delete:
                 del self.storage[gpl_id]
 
-        log.debug(f"playlist manager ready ({len(self)} loaded)")
+        log.info(f"playlist manager ready ({len(self)} loaded)")
 
     def __len__(self) -> int:
         return len(self._playlists)

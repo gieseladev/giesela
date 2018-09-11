@@ -40,19 +40,27 @@ class Playlist:
     _author: User
     _editors: List[User]
 
-    def __init__(self, **kwargs):
+    def __init__(self, *, gpl_id: utils.UUIDType = None, name: str, author_id: int,
+                 description: str = None, cover: str = None, editors: List[int] = None, entries: List[PlaylistEntry] = None):
         self.manager = None
+        self._dirty = False
 
-        # FIXME playlist needs to save when the gpl_id is generated
-        self.gpl_id = kwargs.pop("gpl_id", None) or uuid.uuid4()
-        self.name = kwargs.pop("name")
-        self.author_id = kwargs.pop("author_id")
+        if gpl_id:
+            gpl_id = utils.get_uuid(gpl_id)
+        else:
+            gpl_id = uuid.uuid4()
+            log.info(f"Assigning uuid {gpl_id} to playlist {author_id}-{name}")
+            self._dirty = True
 
-        self.description = kwargs.pop("description", None)
-        self.cover = kwargs.pop("cover", None)
-        self.editor_ids = kwargs.pop("editors", [])
+        self.gpl_id = gpl_id
+        self.name = name
+        self.author_id = author_id
 
-        self.entries = kwargs.pop("entries", [])
+        self.description = description
+        self.cover = cover
+        self.editor_ids = editors or []
+
+        self.entries = entries or []
 
         self.init()
 
@@ -120,17 +128,13 @@ class Playlist:
 
     @classmethod
     def from_gpl(cls, data: dict) -> "Playlist":
-        gpl_id = data.pop("gpl_id", None)
-        if gpl_id:
-            gpl_id = utils.get_uuid(gpl_id)
-
         _entries = data.pop("entries")
         entries = []
         for _entry in _entries:
             entry = PlaylistEntry.from_gpl(_entry)
             entries.append(entry)
 
-        inst = cls(gpl_id=gpl_id, entries=entries, **data)
+        inst = cls(entries=entries, **data)
         return inst
 
     def to_gpl(self) -> dict:
@@ -205,11 +209,22 @@ class Playlist:
         self.save()
         return True
 
+    def is_dirty(self) -> bool:
+        if self._dirty:
+            return True
+        else:
+            return any(entry.is_dirty() for entry in self.entries)
+
     def save(self):
         if hasattr(self, "__opened__"):
             log.debug("not saving playlist because it's open")
             return
         self.manager.save_playlist(self)
+
+        self._dirty = False
+        for entry in self.entries:
+            entry._dirty = False
+
         log.debug(f"saved {self}")
 
     def edit(self) -> "EditPlaylistProxy":

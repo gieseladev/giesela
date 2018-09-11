@@ -68,8 +68,17 @@ class PlaylistEntry:
 
     def __init__(self, entry: PlayableEntry, entry_id: utils.UUIDType = None, author_id: User = None, *,
                  added_at: int = None, last_editor_id: User = None, last_edit_at: int = None):
+        self._dirty = False
+
         self._entry = entry
-        self._entry_id = utils.get_uuid(entry_id) if entry_id else uuid.uuid4()
+
+        if entry_id:
+            entry_id = utils.get_uuid(entry_id)
+        else:
+            entry_id = uuid.uuid4()
+            self._dirty = True
+
+        self._entry_id = entry_id
 
         self._author_id = author_id
         self._added_at = added_at or round(time.time())
@@ -150,7 +159,7 @@ class PlaylistEntry:
 
     def to_gpl(self):
         entry = self._entry.to_dict()
-        data = dict(entry=entry, entry_id=self._entry_id, author_id=self._author_id,
+        data = dict(entry=entry, entry_id=self._entry_id.hex, author_id=self._author_id,
                     added_at=self._added_at, last_editor_id=self._last_editor_id, last_edit_at=self._last_edit_at)
         return {key: value for key, value in data.items() if value is not None}
 
@@ -162,6 +171,9 @@ class PlaylistEntry:
             self._last_edit_at = round(time.time())
 
         self.save(reorder=self.sort_attr != before_sort_attr)
+
+    def is_dirty(self) -> bool:
+        return self._dirty
 
     def save(self, *, reorder: bool = False):
         if self.playlist:
