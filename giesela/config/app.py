@@ -11,14 +11,15 @@ class Tokens(ConfigObject):
     google_api: str = Truthy()
 
 
-class RedisDatabases(ConfigObject):
+class RedisNamespaces(ConfigObject):
     config: str = "config"
     queue: str = "queue"
 
 
 class Redis(ConfigObject):
     uri: str = Truthy()
-    databases: RedisDatabases
+    database: int = 0
+    namespaces: RedisNamespaces
 
 
 class Mongodb(ConfigObject):

@@ -6,8 +6,9 @@ tokens:
 
 redis:
   uri: "" # REQUIRED
+  database: 0
   # prefixes used to distinguish stuff
-  databases:
+  namespaces:
     config: "config"
     queue: "queue"
 

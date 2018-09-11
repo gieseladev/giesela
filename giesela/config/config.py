@@ -247,16 +247,21 @@ class Config:
         return cls(app)
 
     async def connect_redis(self):
+        log.debug("connecting to redis")
         pool = await aioredis.create_pool(self.app.redis.uri)
         self.redis = Redis(pool)
 
+        db = self.app.redis.database
+        log.debug(f"selecting database {db}")
+        await self.redis.select(db)
+
     def _create_guild(self, guild_id: int) -> GuildConfig:
-        return GuildConfig(self.runtime, _id=guild_id, redis=self.redis, prefix=self.app.redis.databases.config, config_coll=self.config_coll)
+        return GuildConfig(self.runtime, _id=guild_id, redis=self.redis, prefix=self.app.redis.namespaces.config, config_coll=self.config_coll)
 
     async def _load_runtime(self):
         log.info("loading runtime")
 
-        self.runtime = RuntimeConfig(self.app.runtime, _id=self.RUNTIME_ID, redis=self.redis, prefix=self.app.redis.databases.config,
+        self.runtime = RuntimeConfig(self.app.runtime, _id=self.RUNTIME_ID, redis=self.redis, prefix=self.app.redis.namespaces.config,
                                      config_coll=self.config_coll)
 
         runtime_config = await self.config_coll.find_one(self.RUNTIME_ID)

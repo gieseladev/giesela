@@ -58,7 +58,7 @@ class EntryQueue(EventEmitter):
             return self.history[item]
 
     async def dump_to_redis(self, redis: Redis):
-        prefix = f"{self.config.app.redis.databases.queue}:{self.player.guild_id}"
+        prefix = f"{self.config.app.redis.namespaces.queue}:{self.player.guild_id}"
         queue_key = f"{prefix}:queue"
         history_key = f"{prefix}:history"
 
@@ -81,7 +81,7 @@ class EntryQueue(EventEmitter):
         )
 
     async def _load_queue_from_redis(self, redis: Redis):
-        key = f"{self.config.app.redis.databases.queue}:{self.player.guild_id}:queue"
+        key = f"{self.config.app.redis.namespaces.queue}:{self.player.guild_id}:queue"
 
         entries = await redis.lrange(key, 0, -1)
         log.info(f"loading {len(entries)} queue entries from redis")
@@ -91,7 +91,7 @@ class EntryQueue(EventEmitter):
             self.entries.append(entry)
 
     async def _load_history_from_redis(self, redis):
-        key = f"{self.config.app.redis.databases.queue}:{self.player.guild_id}:history"
+        key = f"{self.config.app.redis.namespaces.queue}:{self.player.guild_id}:history"
 
         entries = await redis.lrange(key, 0, -1)
         log.info(f"loading {len(entries)} history entries from redis")

@@ -206,7 +206,9 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
     def playback_finished(self, play_next: bool = True, skipped: bool = False):
         entry = self.current_entry
+
         if entry:
+            log.debug(f"finished playing {entry}")
             self.queue.push_history(entry)
 
         if not skipped:
@@ -291,7 +293,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         self.playback_finished(play_next, skipped)
 
     async def dump_to_redis(self, redis: Redis):
-        key = f"{self.config.app.redis.databases.queue}:{self.guild_id}:current_entry"
+        key = f"{self.config.app.redis.namespaces.queue}:{self.guild_id}:current_entry"
         if self._current_entry:
             entry_data = self._current_entry.to_dict()
             entry_data["progress"] = self.progress
@@ -306,7 +308,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         await self.queue.dump_to_redis(redis)
 
     async def load_from_redis(self, redis: Redis):
-        key = f"{self.config.app.redis.databases.queue}:{self.guild_id}:current_entry"
+        key = f"{self.config.app.redis.namespaces.queue}:{self.guild_id}:current_entry"
         raw_entry = await redis.get(key)
 
         if raw_entry:
@@ -404,7 +406,7 @@ class PlayerManager(LavalinkNodeBalancer):
 
         log.debug(f"writing {len(coros)} player(s) to redis")
 
-        key = f"{self.bot.config.app.redis.databases.queue}:players"
+        key = f"{self.bot.config.app.redis.namespaces.queue}:players"
         await redis.delete(key)
 
         await asyncio.gather(
@@ -415,7 +417,7 @@ class PlayerManager(LavalinkNodeBalancer):
 
     async def load_from_redis(self):
         redis = self.bot.config.redis
-        key = f"{self.bot.config.app.redis.databases.queue}:players"
+        key = f"{self.bot.config.app.redis.namespaces.queue}:players"
         guilds = await redis.hgetall(key)
 
         coros = []
