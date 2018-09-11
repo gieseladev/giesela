@@ -57,6 +57,9 @@ class Giesela(AutoShardedBot):
         if self.is_closed():
             return
 
+        if not self.exit_signal:
+            self.exit_signal = signals.TerminateSignal
+
         await self.blocking_dispatch("shutdown")
         await self.aiosession.close()
         await super().close()

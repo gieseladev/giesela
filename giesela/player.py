@@ -438,6 +438,10 @@ class PlayerManager(LavalinkNodeBalancer):
         await self.shutdown()
 
     async def on_disconnect(self, node: LavalinkNode, error: ConnectionClosed):
+        if self.bot.exit_signal:
+            log.debug(f"ignoring {node} disconnect because Giesela is shutting down")
+            return
+
         coros = []
         for player in self:
             if player.node is node:

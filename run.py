@@ -121,8 +121,9 @@ def main():
         except TerminateSignal:
             break
         else:
-            log.info("shut down")
             break
+
+    log.info("shut down")
 
 
 if __name__ == "__main__":
