@@ -110,20 +110,23 @@ class Player:
 
     async def start_disconnect(self, player: GieselaPlayer):
         guild_id = player.guild_id
+        delay = await self.config.get_guild(guild_id).player.auto_disconnect
+
+        if not delay:
+            return
+
         task = self._disconnects.get(guild_id)
         if task and not task.done():
             return
 
-        delay = await self.config.get_guild(guild_id).player.auto_disconnect
-        if delay:
-            log.debug(f"auto disconnect {player} in {delay} seconds")
-            self._disconnects[guild_id] = asyncio.ensure_future(_delayed_disconnect(player, delay))
+        log.info(f"auto disconnect {player} in {delay} seconds")
+        self._disconnects[guild_id] = asyncio.ensure_future(_delayed_disconnect(player, delay))
 
     def stop_disconnect(self, player: GieselaPlayer):
         guild_id = player.guild_id
         task = self._disconnects.pop(guild_id, None)
         if task:
-            log.debug(f"cancelled disconnect for {player}")
+            log.info(f"cancelled disconnect for {player}")
             task.cancel()
 
     async def auto_pause(self, player: GieselaPlayer, joined: bool = False):
@@ -412,8 +415,8 @@ class Player:
                 elif player_entry.entry.duration:
                     _progress_guess = player_entry.progress / player_entry.entry.duration
 
-            raise commands.CommandError("Down for maintenance?")
             lyrics = None
+            raise commands.CommandError("Down for maintenance?")
 
         if not lyrics:
             raise commands.CommandError("Couldn't find any lyrics for **{}**".format(query))
