@@ -203,7 +203,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         if play_next:
             self.loop.create_task(self.play())
 
-    async def play(self, entry: QueueEntry = None):
+    async def play(self, entry: QueueEntry = None, *, start: float = None):
         if not self.is_connected:
             await self.connect()
 
@@ -219,7 +219,12 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         self._current_entry = PlayerEntry(player=self, entry=entry)
         self._start_position = playable_entry.start_position or 0
 
-        await self.manager.send_play(self.guild_id, playable_entry.track, playable_entry.start_position, playable_entry.end_position)
+        if start is not None:
+            start += playable_entry.start_position or 0
+        else:
+            start = playable_entry.start_position
+
+        await self.manager.send_play(self.guild_id, playable_entry.track, start, playable_entry.end_position)
         self.state = GieselaPlayerState.PLAYING
 
         log.info(f"playing {self.current_entry} in {self.qualified_channel_name}")
@@ -256,8 +261,6 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         elif event == LavalinkEvent.TRACK_EXCEPTION:
             log.error(f"Lavalink reported an error: {data.error}")
 
-        # TODO send a stop signal just to be sure (@.vlexar)
-
         self.playback_finished(play_next, skipped)
 
     async def dump_to_redis(self, redis: Redis):
@@ -286,15 +289,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
             progress = data.pop("progress")
 
             player_entry = PlayerEntry.from_dict(data, player=self, queue=self.queue)
-            entry = player_entry.entry
-
-            if entry.start_position:
-                progress += entry.start_position
-
-            self._current_entry = player_entry
-            await self.manager.connect_player(self.guild_id, self.voice_channel_id)
-            await self.manager.send_play(self.guild_id, entry.track, progress, entry.end_position)
-            self.state = GieselaPlayerState.PLAYING
+            await self.play(player_entry.wrapped, start=progress)
 
         await self.queue.load_from_redis(redis)
         self.on_entry_added()
@@ -368,15 +363,19 @@ class PlayerManager(LavalinkAPI):
 
     async def dump_to_redis(self):
         redis = self.bot.config.redis
+
         coros = []
-        for player in self.players.values():
-            coros.append(player.dump_to_redis(redis))
+        players = []
+        for guild_id, player in self.players.items():
+            if player.voice_channel_id:
+                players.append((guild_id, player.voice_channel_id))
+                coros.append(player.dump_to_redis(redis))
 
-        players = [(guild_id, player.voice_channel_id) for guild_id, player in self.players.items() if player.voice_channel_id]
-        log.debug(f"writing {len(players)} player(s) to redis")
+        log.debug(f"writing {len(coros)} player(s) to redis")
+
         key = f"{self.bot.config.app.redis.databases.queue}:players"
+        await redis.delete(key)
 
-        # TODO should probably clear players before dumping!
         await asyncio.gather(
             redis.hmset(key, *itertools.chain.from_iterable(players)),
             *coros,
