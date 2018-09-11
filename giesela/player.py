@@ -58,7 +58,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
     _current_entry: Optional[PlayerEntry]
     _start_position: float
 
-    def __init__(self, manager: "PlayerManager", guild_id: int, volume: float, voice_channel_id: int = None):
+    def __init__(self, manager: "PlayerManager", guild_id: int, voice_channel_id: int = None):
         super().__init__(loop=manager.loop)
         self.manager = manager
         self.extractor = manager.extractor
@@ -73,7 +73,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
             .on("entry_added", self.on_entry_added) \
             .on("entries_added", self.on_entry_added)
 
-        self._volume = volume
+        self._volume = None
         self._last_state = None
         self._current_entry = None
         self._start_position = 0
@@ -109,7 +109,9 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         return self._current_entry
 
     @property
-    def volume(self) -> float:
+    async def volume(self) -> float:
+        if self._volume is None:
+            self._volume = await self.config.get_guild(self.guild_id).player.volume
         return self._volume
 
     @property
@@ -140,6 +142,8 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
             raise ValueError("No voice channel specified")
 
         await self.manager.connect_player(self.guild_id, channel)
+        await self.manager.send_volume(self.guild_id, await self.volume)
+
         self.state = GieselaPlayerState.IDLE
         self.emit("connect", player=self)
 
@@ -313,11 +317,11 @@ class PlayerManager(LavalinkAPI):
     def __iter__(self) -> Iterator[GieselaPlayer]:
         return iter(self.players.values())
 
-    def get_player(self, guild_id: int, volume: float, voice_channel_id: int = None, *, create: bool = True) -> Optional[GieselaPlayer]:
+    def get_player(self, guild_id: int, voice_channel_id: int = None, *, create: bool = True) -> Optional[GieselaPlayer]:
         player = self.players.get(guild_id)
         # TODO do volume differently
         if not player and create:
-            player = GieselaPlayer(self, guild_id, volume, voice_channel_id)
+            player = GieselaPlayer(self, guild_id, voice_channel_id)
             self.emit("player_create", player=player)
             self.players[guild_id] = player
         return player
@@ -393,8 +397,7 @@ class PlayerManager(LavalinkAPI):
             guild_id = int(guild_id)
             voice_channel_id = int(voice_channel_id)
 
-            volume = await self.bot.config.get_guild(guild_id).player.volume
-            player = self.get_player(guild_id, volume, voice_channel_id)
+            player = self.get_player(guild_id, voice_channel_id)
             coros.append(player.load_from_redis(redis))
 
         await asyncio.gather(*coros, loop=self.loop)
