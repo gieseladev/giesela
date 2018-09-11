@@ -7,7 +7,7 @@ containsElement () {
   return 1
 }
 
-default_tags=("refresh" "refresh-lavalink" "refresh-lavalink_config")
+default_tags=("refresh" "refresh-lavalink" "refresh-lavalink_nodes")
 
 if containsElement "$TRAVIS_BRANCH" "${default_tags[@]}"; then
     DOCKER_TAG="$TRAVIS_BRANCH"
