@@ -315,8 +315,13 @@ class ChapterEntry(BasicEntry, HasChapters):
         data["chapters"] = chapters
         return cls(**data)
 
-    async def get_chapter(self, timestamp: float) -> Optional[ChapterData]:
+    async def get_chapter(self, timestamp: float) -> Optional[SpecificChapterData]:
         return next((chapter for chapter in self.chapters if chapter.contains(timestamp)), None)
+
+    async def get_next_chapter(self, timestamp: float) -> Optional[SpecificChapterData]:
+        for chapter in self.chapters:
+            if timestamp > chapter.start:
+                return chapter
 
     def to_dict(self) -> Dict[str, Any]:
         data = super().to_dict()
@@ -326,6 +331,8 @@ class ChapterEntry(BasicEntry, HasChapters):
 
 
 class RadioEntry(BaseEntry, PlayableEntry, HasChapters):
+    wrapper: "EntryWrapper"
+
     _song_data: Optional[RadioSongData]
     _chapter: Optional[ChapterData]
 
@@ -354,18 +361,8 @@ class RadioEntry(BaseEntry, PlayableEntry, HasChapters):
 
     @property
     def station_manager(self) -> RadioStationManager:
-        wrapper = getattr(self, "wrapper", None)
-
-        if wrapper:
-            queue = wrapper.highest_wrapper.get("queue", None)
-        else:
-            queue = None
-
-        # TODO there has got to be a better way, right?
-
-        if not queue:
-            raise ValueError("Radio station must be added to queue before accessing any values!")
-
+        wrapper = getattr(self, "wrapper")
+        queue = wrapper.highest_wrapper.get("queue")
         return queue.player.bot.cogs["Radio"].station_manager
 
     @property
@@ -567,6 +564,11 @@ class PlayerEntry(EntryWrapper):
         if self.has_chapters:
             # noinspection PyUnresolvedReferences
             return await entry.get_chapter(self.progress)
+
+    async def get_next_chapter(self) -> Optional[ChapterData]:
+        entry = self.entry
+        if isinstance(entry, ChapterEntry):
+            return await entry.get_next_chapter(self.progress)
 
     async def update_chapter(self) -> bool:
         if self.has_chapters:

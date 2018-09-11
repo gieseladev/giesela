@@ -163,17 +163,25 @@ class ManipulateCog(QueueBase):
         player.queue.clear()
         await ctx.send("Cleared the queue")
 
-    @commands.command()
-    async def skip(self, ctx: Context, skip: str = None):
-        """Skip the current song"""
+    @commands.group()
+    async def skip(self, ctx: Context):
+        """Skip the current chapter/entry"""
         player = await self.get_player(ctx)
 
         if player.is_stopped:
             raise commands.CommandError("Can't skip! The player is not playing!")
 
-        skip_to_next = skip == "all"
-        # TODO skip chapter
         await player.skip()
+
+    @skip.command("all")
+    async def skip_all(self, ctx: Context):
+        """Skip current entry"""
+        player = await self.get_player(ctx)
+
+        if player.is_stopped:
+            raise commands.CommandError("Can't skip! The player is not playing!")
+
+        await player.skip(respect_chapter=False)
 
     @commands.command()
     async def promote(self, ctx: Context, position: int = None):

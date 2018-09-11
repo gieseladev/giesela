@@ -11,7 +11,7 @@ from discord import Guild, VoiceChannel
 from discord.gateway import DiscordWebSocket
 from websockets import ConnectionClosed
 
-from .entry import PlayerEntry, QueueEntry
+from .entry import PlayerEntry, QueueEntry, SpecificChapterData
 from .extractor import Extractor
 from .lib import EventEmitter, has_events
 from .lib.lavalink import LavalinkAPI, LavalinkEvent, LavalinkPlayerState, TrackEndReason, TrackEventDataType
@@ -182,7 +182,13 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         await self.manager.send_seek(self.guild_id, seconds)
         self.emit("seek", player=self, timestamp=seconds)
 
-    async def skip(self):
+    async def skip(self, *, respect_chapters: bool = True):
+        if respect_chapters:
+            next_chapter = await self.current_entry.get_next_chapter()
+
+            if next_chapter and isinstance(next_chapter, SpecificChapterData):
+                return await self.seek(next_chapter.start)
+
         self._current_entry = None
         await self.play()
         self.emit("skip", player=self)

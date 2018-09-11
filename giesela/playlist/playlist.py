@@ -172,9 +172,9 @@ class Playlist:
     def index_of(self, entry: PlaylistEntry) -> int:
         return self.entries.index(entry)
 
-    def get_entry(self, entry_id: utils.UUIDType) -> PlaylistEntry:
+    def get_entry(self, entry_id: utils.UUIDType) -> Optional[PlaylistEntry]:
         entry_id = utils.get_uuid(entry_id)
-        return next(entry for entry in self if entry.entry_id == entry_id)
+        return next((entry for entry in self if entry.entry_id == entry_id), None)
 
     def search_entry(self, target: str, *, threshold: float = .8) -> Optional[PlaylistEntry]:
         return utils.search_entry(self.entries, target, threshold=threshold)

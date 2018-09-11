@@ -161,6 +161,9 @@ class Player:
         WebieselaServer.small_update(player.guild_id, state=player.state, progress=player.progress)
 
     async def on_player_stop(self, **_):
+        if self.bot.is_closed():
+            return
+
         try:
             await self.update_now_playing()
         except asyncio.CancelledError:
@@ -381,13 +384,13 @@ class Player:
             await ctx.message.delete()
             return
 
+        playlist_entry = player.current_entry.get("playlist_entry", None)
+        if playlist_entry:
+            playlist_entry.replace(new_entry, editor=ctx.author)
+
         if player.current_entry and player.current_entry.entry is editor.original:
             player.current_entry.change_entry(new_entry)
             await ctx.send(f"Saved changes to **{new_entry}**")
-
-        playlist_entry = player.current_entry.get("playlist_entry", None)
-        if playlist_entry:
-            playlist_entry.replace(new_entry)
 
     @commands.command()
     async def lyrics(self, ctx: Context, *query: str):

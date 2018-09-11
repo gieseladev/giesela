@@ -38,7 +38,7 @@ class LoadedPlaylistEntry(EntryWrapper):
     @property
     def playlist_manager(self) -> "PlaylistManager":
         queue = self.highest_wrapper.get("queue")
-        return queue.bot.cogs["Playlist"].playlist_manager
+        return queue.player.bot.cogs["Playlist"].playlist_manager
 
     @property
     def playlist(self) -> "Playlist":
@@ -49,6 +49,7 @@ class LoadedPlaylistEntry(EntryWrapper):
     @property
     def playlist_entry(self) -> "PlaylistEntry":
         if not self._playlist_entry:
+            # MAYBE remove this wrapper if it isn't part of a playlist anymore!
             self._playlist_entry = self.playlist.get_entry(self._entry_id)
         return self._playlist_entry
 
@@ -78,7 +79,7 @@ class PlaylistEntry:
     def __repr__(self) -> str:
         playlist = repr(self.playlist)
         me = repr(self._entry)
-        uid = self._entry_id.hex
+        uid = self._entry_id
         return f"{me} ({uid}) - {playlist}"
 
     def __hash__(self) -> int:
