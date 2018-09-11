@@ -271,12 +271,12 @@ def get_video_timestamps(google_api_token: str, description, video_id, song_dur=
     return None
 
 
-def parse_timestamp(timestamp):
+def parse_timestamp(timestamp: str, *, tolerant: bool = False) -> Optional[float]:
     parts = timestamp.split(":")
-    if len(parts) < 1:  # Shouldn't occur, but who knows?
+    if not parts:  # Shouldn't occur, but who knows?
         return None
 
-    values = (
+    factors = (
         1,  # seconds
         60,  # minutes
         60 * 60,  # hours
@@ -284,16 +284,20 @@ def parse_timestamp(timestamp):
     )
 
     secs = 0
-    for i in range(len(parts)):
+    for i, part in enumerate(reversed(parts)):
         try:
-            v = int(parts[i])
-        except Exception:
+            value = int(part)
+        except ValueError:
             continue
 
-        j = len(parts) - i - 1
-        if j >= len(values):  # Can't convert
+        try:
+            factor = factors[i]
+        except IndexError:
+            if not tolerant:
+                return None
             continue
-        secs += v * values[j]
+        else:
+            secs += value * factor
 
     return secs
 

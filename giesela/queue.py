@@ -1,10 +1,13 @@
+import asyncio
 import itertools
 import logging
 import random
+import rapidjson
 import time
 from collections import deque
 from typing import Deque, Iterable, Iterator, Optional, TYPE_CHECKING, Union
 
+from aioredis import Redis
 from discord import User
 
 from .entry import CanWrapEntryType, HistoryEntry, PlayableEntry, PlayerEntry, QueueEntry
@@ -44,8 +47,56 @@ class EntryQueue(EventEmitter):
             item = abs(item) - 1
             return self.history[item]
 
+    async def dump_to_redis(self, redis: Redis):
+        prefix = f"{self.config.app.redis.databases.queue}:{self.player.guild_id}"
+        queue_key = f"{prefix}:queue"
+        history_key = f"{prefix}:history"
+
+        await redis.delete(queue_key, history_key)
+
+        coros = []
+        if self.entries:
+            log.debug(f"writing queue to redis ({len(self.entries)} entr(y/ies))")
+            queue = (rapidjson.dumps(entry.to_dict()) for entry in self.entries)
+            coros.append(redis.rpush(queue_key, *queue))
+
+        if self.history:
+            log.debug(f"writing history to redis ({len(self.history)} entr(y/ies))")
+            history = (rapidjson.dumps(entry.to_dict()) for entry in self.history)
+            coros.append(redis.rpush(history_key, *history))
+
+        await asyncio.gather(
+            *coros,
+            loop=self.loop
+        )
+
+    async def _load_queue_from_redis(self, redis: Redis):
+        key = f"{self.config.app.redis.databases.queue}:{self.player.guild_id}:queue"
+
+        entries = await redis.lrange(key, 0, -1)
+        log.info(f"loading {len(entries)} queue entries from redis")
+        for raw_entry in entries:
+            data = rapidjson.loads(raw_entry)
+            entry = QueueEntry.from_dict(data, queue=self)
+            self.entries.append(entry)
+
+    async def _load_history_from_redis(self, redis):
+        key = f"{self.config.app.redis.databases.queue}:{self.player.guild_id}:history"
+
+        entries = await redis.lrange(key, 0, -1)
+        log.info(f"loading {len(entries)} history entries from redis")
+        for raw_entry in entries:
+            data = rapidjson.loads(raw_entry)
+            entry = HistoryEntry.from_dict(data, queue=self)
+            self.history.append(entry)
+
+    async def load_from_redis(self, redis: Redis):
+        await asyncio.gather(self._load_queue_from_redis(redis),
+                             self._load_history_from_redis(redis),
+                             loop=self.loop)
+
     def wrap_queue_entry(self, entry: PlayableEntry, requester: User) -> QueueEntry:
-        return QueueEntry(entry=entry, queue=self, requester=requester, request_timestamp=time.time())
+        return QueueEntry(entry=entry, queue=self, requester_id=requester.id, request_timestamp=time.time())
 
     def shuffle(self):
         random.shuffle(self.entries)
@@ -137,7 +188,7 @@ class EntryQueue(EventEmitter):
 
     def time_until(self, index: int, *, with_current: bool = True) -> float:
         entries = itertools.islice(self.entries, index)
-        estimated_time = sum(e.entry.duration for e in entries)
+        estimated_time = sum(entry.entry.duration for entry in entries if entry.entry.duration)
 
         if with_current and self.player.current_entry:
             estimated_time += self.player.current_entry.time_left
@@ -145,4 +196,4 @@ class EntryQueue(EventEmitter):
         return estimated_time
 
     def total_duration(self) -> float:
-        return sum(entry.entry.duration for entry in self.entries)
+        return sum(entry.entry.duration for entry in self.entries if entry.entry.duration)

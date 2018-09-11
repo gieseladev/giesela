@@ -14,13 +14,13 @@ log = logging.getLogger(__name__)
 UUIDType = Union[str, int, uuid.UUID]
 
 
-def get_uuid(gpl_id: UUIDType) -> uuid.UUID:
-    if isinstance(gpl_id, str):
-        return uuid.UUID(hex=gpl_id)
-    elif isinstance(gpl_id, int):
-        return uuid.UUID(int=gpl_id)
-    elif isinstance(gpl_id, uuid.UUID):
-        return gpl_id
+def get_uuid(uid: UUIDType) -> uuid.UUID:
+    if isinstance(uid, str):
+        return uuid.UUID(hex=uid)
+    elif isinstance(uid, int):
+        return uuid.UUID(int=uid)
+    elif isinstance(uid, uuid.UUID):
+        return uid
     else:
         raise TypeError("Can't resolve uuid")
 

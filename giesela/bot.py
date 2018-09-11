@@ -54,6 +54,9 @@ class Giesela(AutoShardedBot):
             self.load_extension(ext)
 
     async def close(self):
+        if self.is_closed():
+            return
+
         await self.blocking_dispatch("shutdown")
         await self.aiosession.close()
         await super().close()

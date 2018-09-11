@@ -1,14 +1,17 @@
 import abc
 import asyncio
 import enum
+import itertools
 import logging
+import rapidjson
 from typing import Dict, Iterator, Optional, TYPE_CHECKING, Union
 
+from aioredis import Redis
 from discord import Guild, VoiceChannel
 from discord.gateway import DiscordWebSocket
 from websockets import ConnectionClosed
 
-from .entry import PlayerEntry, QueueEntry
+from .entry import PlayerEntry, QueueEntry, SpecificChapterData
 from .extractor import Extractor
 from .lib import EventEmitter, has_events
 from .lib.lavalink import LavalinkEvent, LavalinkNode, LavalinkNodeBalancer, LavalinkPlayerState, TrackEndReason, TrackEventDataType
@@ -55,7 +58,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
     _current_entry: Optional[PlayerEntry]
     _start_position: float
 
-    def __init__(self, manager: "PlayerManager", node: LavalinkNode, guild_id: int, volume: float, voice_channel_id: int = None):
+    def __init__(self, manager: "PlayerManager", node: LavalinkNode, guild_id: int, voice_channel_id: int = None):
         super().__init__(loop=manager.loop)
         self.manager = manager
         self.node = node
@@ -71,7 +74,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
             .on("entry_added", self.on_entry_added) \
             .on("entries_added", self.on_entry_added)
 
-        self._volume = volume
+        self._volume = None
         self._last_state = None
         self._current_entry = None
         self._start_position = 0
@@ -107,7 +110,9 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         return self._current_entry
 
     @property
-    def volume(self) -> float:
+    async def volume(self) -> float:
+        if self._volume is None:
+            self._volume = await self.config.get_guild(self.guild_id).player.volume
         return self._volume
 
     @property
@@ -141,6 +146,8 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
             raise ValueError("No voice channel specified")
 
         await self.manager.connect_player(self.guild_id, channel)
+        await self.manager.send_volume(self.guild_id, await self.volume)
+
         self.state = GieselaPlayerState.IDLE
         self.emit("connect", player=self)
 
@@ -180,7 +187,13 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         await self.node.send_seek(self.guild_id, seconds)
         self.emit("seek", player=self, timestamp=seconds)
 
-    async def skip(self):
+    async def skip(self, *, respect_chapters: bool = True):
+        if respect_chapters:
+            next_chapter = await self.current_entry.get_next_chapter()
+
+            if next_chapter and isinstance(next_chapter, SpecificChapterData):
+                return await self.seek(next_chapter.start)
+
         self._current_entry = None
         await self.play()
         self.emit("skip", player=self)
@@ -205,7 +218,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         if play_next:
             self.loop.create_task(self.play())
 
-    async def play(self, entry: QueueEntry = None):
+    async def play(self, entry: QueueEntry = None, *, start: float = None):
         if not self.is_connected:
             await self.connect()
 
@@ -221,7 +234,12 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         self._current_entry = PlayerEntry(player=self, entry=entry)
         self._start_position = playable_entry.start_position or 0
 
-        await self.node.send_play(self.guild_id, playable_entry.track, playable_entry.start_position, playable_entry.end_position)
+        if start is not None:
+            start += playable_entry.start_position or 0
+        else:
+            start = playable_entry.start_position
+
+        await self.node.send_play(self.guild_id, playable_entry.track, start, playable_entry.end_position)
         self.state = GieselaPlayerState.PLAYING
 
         log.info(f"playing {self.current_entry} in {self.qualified_channel_name}")
@@ -272,6 +290,37 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
         self.playback_finished(play_next, skipped)
 
+    async def dump_to_redis(self, redis: Redis):
+        key = f"{self.config.app.redis.databases.queue}:{self.guild_id}:current_entry"
+        if self._current_entry:
+            entry_data = self._current_entry.to_dict()
+            entry_data["progress"] = self.progress
+            data = rapidjson.dumps(entry_data)
+            log.debug(f"writing current entry to redis {self}")
+
+            await redis.set(key, data)
+        else:
+            log.debug(f"deleting current entry {self}")
+            await redis.delete(key)
+
+        await self.queue.dump_to_redis(redis)
+
+    async def load_from_redis(self, redis: Redis):
+        key = f"{self.config.app.redis.databases.queue}:{self.guild_id}:current_entry"
+        raw_entry = await redis.get(key)
+
+        if raw_entry:
+            log.debug(f"loading current entry {self}")
+            data = rapidjson.loads(raw_entry)
+
+            progress = data.pop("progress")
+
+            player_entry = PlayerEntry.from_dict(data, player=self, queue=self.queue)
+            await self.play(player_entry.wrapped, start=progress)
+
+        await self.queue.load_from_redis(redis)
+        self.on_entry_added()
+
 
 @has_events("player_create")
 class PlayerManager(LavalinkNodeBalancer):
@@ -289,15 +338,17 @@ class PlayerManager(LavalinkNodeBalancer):
         self.players = {}
 
         bot.add_listener(self.on_shutdown)
+        bot.add_listener(self.on_ready)
 
     def __iter__(self) -> Iterator[GieselaPlayer]:
         return iter(self.players.values())
 
-    def get_player(self, guild_id: int, volume: float, voice_channel_id: int = None, *, create: bool = True) -> Optional[GieselaPlayer]:
+    def get_player(self, guild_id: int, voice_channel_id: int = None, *, create: bool = True) -> Optional[GieselaPlayer]:
         player = self.players.get(guild_id)
+
         if not player and create:
             guild = self.bot.get_guild(guild_id)
-            player = GieselaPlayer(self, self.pick_node(guild.region), guild_id, volume, voice_channel_id)
+            player = GieselaPlayer(self, self.pick_node(guild.region), guild_id, voice_channel_id)
             self.emit("player_create", player=player)
             self.players[guild_id] = player
         return player
@@ -341,8 +392,49 @@ class PlayerManager(LavalinkNodeBalancer):
             log.info(f"updating channel_id for {player}")
             player.voice_channel_id = channel_id
 
+    async def dump_to_redis(self):
+        redis = self.bot.config.redis
+
+        coros = []
+        players = []
+        for guild_id, player in self.players.items():
+            if player.voice_channel_id:
+                players.append((guild_id, player.voice_channel_id))
+                coros.append(player.dump_to_redis(redis))
+
+        log.debug(f"writing {len(coros)} player(s) to redis")
+
+        key = f"{self.bot.config.app.redis.databases.queue}:players"
+        await redis.delete(key)
+
+        await asyncio.gather(
+            redis.hmset(key, *itertools.chain.from_iterable(players)),
+            *coros,
+            loop=self.loop
+        )
+
+    async def load_from_redis(self):
+        redis = self.bot.config.redis
+        key = f"{self.bot.config.app.redis.databases.queue}:players"
+        guilds = await redis.hgetall(key)
+
+        coros = []
+
+        for guild_id, voice_channel_id in guilds.items():
+            guild_id = int(guild_id)
+            voice_channel_id = int(voice_channel_id)
+
+            player = self.get_player(guild_id, voice_channel_id)
+            coros.append(player.load_from_redis(redis))
+
+        await asyncio.gather(*coros, loop=self.loop)
+
+    async def on_ready(self):
+        await self.load_from_redis()
+
     async def on_shutdown(self):
         log.info("Disconnecting from Lavalink")
+        await self.dump_to_redis()
         await self.shutdown()
 
     async def on_disconnect(self, node: LavalinkNode, error: ConnectionClosed):

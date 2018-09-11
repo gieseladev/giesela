@@ -1,5 +1,5 @@
 from textwrap import TextWrapper
-from typing import Optional, Tuple
+from typing import Any, Mapping, Optional, Tuple
 
 from discord import Embed, Message
 from discord.ext import commands
@@ -43,9 +43,10 @@ class ShellUI(AutoHelpEmbed, MessageableEmbed, VerticalTextViewer):
     run_timeout: Optional[int]
     upload_url: Optional[Tuple[str, str]]
 
-    def __init__(self, ctx: Context, **kwargs):
+    def __init__(self, ctx: Context, *, variables: Mapping[str, Any] = None, **kwargs):
         shell = kwargs.pop("shell", None)
-        interpreter_kwargs = dict(ctx=ctx)
+        interpreter_kwargs = variables or {}
+        interpreter_kwargs.update(ctx=ctx)
 
         if isinstance(shell, str):
             shell = GieselaShell.find_interpreter(shell, **interpreter_kwargs)

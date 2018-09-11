@@ -74,7 +74,12 @@ class AdminTools:
     async def shell(self, ctx: Context, interpreter: str = "python"):
         """Open the GieselaShell™"""
         try:
-            shell = ShellUI(ctx, shell=interpreter)
+            player = await self.bot.cogs["Player"].get_player(ctx)
+        except KeyError:
+            player = None
+
+        try:
+            shell = ShellUI(ctx, shell=interpreter, variables=dict(player=player))
         except InterpreterUnavailable as e:
             raise commands.CommandError(e.msg)
 

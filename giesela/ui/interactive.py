@@ -252,7 +252,7 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
     async def on_error(cls, event: str, *args, **kwargs):
         log.exception(f"Error in {event} ({args}, {kwargs})")
 
-    async def on_command_error(self, ctx: Context, exception: Exception):
+    async def on_command_error(self, ctx: Optional[Context], exception: Exception):
         report = False
         if isinstance(exception, CommandError):
             if isinstance(exception, CommandInvokeError):
@@ -263,7 +263,12 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
             else:
                 self.error = str(exception)
 
-        log.exception("CommandError:", exc_info=exception, extra=dict(report=report, tags=dict(guild_id=ctx.guild.id, author_id=ctx.author.id)))
+        if ctx:
+            tags = dict(guild_id=ctx.guild.id, author_id=ctx.author.id)
+        else:
+            tags = None
+
+        log.exception("CommandError:", exc_info=exception, extra=dict(report=report, tags=tags))
 
     async def on_message(self, message: Message):
         await super().on_message(message)
@@ -474,6 +479,8 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         _current_length = 0
         _current_line = self.current_line
 
+        line = None
+
         while len(lines) < self.window_height:
             if self.total_lines is not None and _current_line >= self.total_lines:
                 self._ran_out_of_lines = True
@@ -490,7 +497,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
 
         if not lines:
             if self.total_lines:
-                raise ValueError(f"One of the provided lines is too long to be displayed within {self.max_window_length} chars")
+                raise ValueError(f"One of the provided lines is too long to be displayed within {self.max_window_length} chars: ({line})")
             elif self.line_callback:
                 raise ValueError(f"Callback {self.line_callback} provided line that can't be displayed within {self.max_window_length} chars")
 

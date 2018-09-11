@@ -6,7 +6,7 @@ from discord import Colour, Embed, TextChannel
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import BaseEntry, BasicEntry, ChapterEntry, PlayableEntry, SpecificChapterData, utils
+from giesela import BaseEntry, BasicEntry, ChapterEntry, Giesela, PlayableEntry, SpecificChapterData, utils
 from .. import text as text_utils
 from ..help import AutoHelpEmbed
 from ..interactive import InteractableEmbed, MessageableEmbed, VerticalTextViewer, emoji_handler
@@ -82,8 +82,8 @@ class EditEntry(EditBase):
 
     def get_surrounding_chapters(self, start: float) -> SurroundingChapter:
         i = 0
-        prev_chapter = None
-        next_chapter = None
+        prev_chapter = next_chapter = None
+
         for i, prev_chapter in enumerate(self.chapters, 1):
             if start >= prev_chapter.end:
                 if i + 1 < len(self.chapters):
@@ -97,6 +97,8 @@ class EditEntry(EditBase):
                     i = 1
                     next_chapter = self.chapters[1] if len(self.chapters) > 1 else None
                 else:
+                    i = 0
+                    prev_chapter = None
                     next_chapter = _chapter
 
         return SurroundingChapter(prev_chapter, i, next_chapter)
@@ -105,15 +107,17 @@ class EditEntry(EditBase):
         surrounding = self.get_surrounding_chapters(chapter.start)
         index = surrounding.index
 
-        for prev_chapter in self.chapters[index - 1:: -1]:
-            if chapter.start >= prev_chapter.end:
-                break
-            prev_chapter.end = chapter.start
+        if surrounding.previous:
+            for prev_chapter in self.chapters[index - 1:: -1]:
+                if chapter.start >= prev_chapter.end:
+                    break
+                prev_chapter.end = chapter.start
 
-        for next_chapter in self.chapters[index + 1:]:
-            if next_chapter.start >= chapter.end:
-                break
-            next_chapter.start = chapter.end
+        if surrounding.next:
+            for next_chapter in self.chapters[index:]:
+                if next_chapter.start >= chapter.end:
+                    break
+                next_chapter.start = chapter.end
 
         self.chapters.insert(index, chapter)
 
@@ -121,7 +125,7 @@ class EditEntry(EditBase):
             if chapter.duration <= 0:
                 self.chapters.remove(chapter)
 
-        return index
+        return min(index, len(self.chapters) - 1)
 
     @classmethod
     def from_entry(cls, entry: PlayableEntry):
@@ -156,6 +160,7 @@ class EditEntry(EditBase):
 
 
 class _BaseEditor(AutoHelpEmbed, InteractableEmbed, MessageableEmbed):
+    bot: Giesela
     aiosession: aiohttp.ClientSession
 
     def __init__(self, channel: TextChannel, *, editor: EditBase, **kwargs):
@@ -195,7 +200,8 @@ class _BaseEditor(AutoHelpEmbed, InteractableEmbed, MessageableEmbed):
         await self.on_command_error(None, error)
 
     async def search_for_image(self, query: str) -> str:
-        image = await utils.search_image(self.aiosession, query, min_squareness=.8)
+        api_key = self.bot.config.app.tokens.google_api
+        image = await utils.search_image(self.aiosession, api_key, query, min_squareness=.8)
         if not image:
             raise commands.CommandError("Couldn't find an image")
         return image
@@ -312,7 +318,7 @@ class ChapterEditor(_BaseEditor):
     @classmethod
     def parse_time_value(cls, value: str):
         timestamp = utils.parse_timestamp(value)
-        if not timestamp:
+        if timestamp is None:
             raise commands.CommandError(f"Couldn't parse timestamp {value}")
         return timestamp
 

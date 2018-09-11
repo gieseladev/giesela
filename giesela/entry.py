@@ -7,7 +7,7 @@ from typing import Any, Dict, Iterator, List, Optional, TYPE_CHECKING, Type, Uni
 from discord import User
 
 from .lib import lavalink
-from .radio import RadioSongData, RadioStation
+from .radio import RadioSongData, RadioStation, RadioStationManager
 from .utils import url
 
 if TYPE_CHECKING:
@@ -50,7 +50,7 @@ class Reducible(metaclass=abc.ABCMeta):
         return {}
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]):
+    def from_dict(cls, data: Dict[str, Any]) -> Any:
         try:
             # noinspection PyArgumentList
             return cls(**data)
@@ -315,8 +315,13 @@ class ChapterEntry(BasicEntry, HasChapters):
         data["chapters"] = chapters
         return cls(**data)
 
-    async def get_chapter(self, timestamp: float) -> Optional[ChapterData]:
+    async def get_chapter(self, timestamp: float) -> Optional[SpecificChapterData]:
         return next((chapter for chapter in self.chapters if chapter.contains(timestamp)), None)
+
+    async def get_next_chapter(self, timestamp: float) -> Optional[SpecificChapterData]:
+        for chapter in self.chapters:
+            if timestamp > chapter.start:
+                return chapter
 
     def to_dict(self) -> Dict[str, Any]:
         data = super().to_dict()
@@ -326,14 +331,24 @@ class ChapterEntry(BasicEntry, HasChapters):
 
 
 class RadioEntry(BaseEntry, PlayableEntry, HasChapters):
+    wrapper: "EntryWrapper"
+
     _song_data: Optional[RadioSongData]
     _chapter: Optional[ChapterData]
 
-    def __init__(self, *, station: RadioStation, **kwargs):
+    def __init__(self, *, station: Union[RadioStation, str], **kwargs):
         super().__init__(**kwargs)
-        self.station = station
-        self.title = station.name
-        self.cover = station.logo
+        if isinstance(station, RadioStation):
+            self._station = station
+            self._station_name = station.name
+            self.title = station.name
+            self.cover = station.logo
+        else:
+            self._station_name = station
+            self._station = None
+            self.title = station
+            self.cover = None
+
         self.artist = None
         self.artist_image = None
         self.album = None
@@ -343,6 +358,19 @@ class RadioEntry(BaseEntry, PlayableEntry, HasChapters):
 
     def __str__(self) -> str:
         return self.title
+
+    @property
+    def station_manager(self) -> RadioStationManager:
+        wrapper = getattr(self, "wrapper")
+        queue = wrapper.highest_wrapper.get("queue")
+        return queue.player.bot.cogs["Radio"].station_manager
+
+    @property
+    def station(self) -> RadioStation:
+        if not self._station:
+            self._station = self.station_manager.find_station(self._station_name)
+
+        return self._station
 
     @property
     def has_chapters(self):
@@ -382,10 +410,33 @@ class RadioEntry(BaseEntry, PlayableEntry, HasChapters):
     def song_data(self) -> Optional[RadioSongData]:
         return self._song_data
 
+    def to_dict(self):
+        data = super().to_dict()
+        data["station"] = self._station_name
+        return data
 
-class EntryWrapper(metaclass=abc.ABCMeta):
+
+def load_wrapper_from_dict(data: Dict[str, Any], **pass_down) -> Union["EntryWrapper", PlayableEntry]:
+    _cls = data.pop("cls", None)
+    if not _cls:
+        raise KeyError("Data doesn't have a cls")
+    cls = _ENTRY_MAP.get(_cls)
+    if not cls:
+        raise KeyError(f"Cls {_cls} unknown!")
+
+    if issubclass(cls, EntryWrapper):
+        return cls.from_dict(data, **pass_down)
+
+    return cls.from_dict(data)
+
+
+# TODO at this point this has just become a double-linked list, might as well use a real list or something xD
+class EntryWrapper(Reducible, metaclass=_RegisterEntryMeta):
+    wrapper: Optional["EntryWrapper"]
+
     def __init__(self, *, entry: "CanWrapEntryType", **_):
-        self._entry = entry
+        self.wrapper = None
+        self._set_entry(entry)
 
     def __repr__(self) -> str:
         return f"{type(self).__name__} -> {repr(self.wrapped)}"
@@ -397,6 +448,10 @@ class EntryWrapper(metaclass=abc.ABCMeta):
         else:
             return self._entry
 
+    def _set_entry(self, entry: "CanWrapEntryType"):
+        self._entry = entry
+        entry.wrapper = self
+
     @property
     def wrapped(self) -> "CanWrapEntryType":
         return self._entry
@@ -406,35 +461,43 @@ class EntryWrapper(metaclass=abc.ABCMeta):
         *_, wrapper = self.walk_wrappers()
         return wrapper
 
+    @property
+    def highest_wrapper(self) -> "EntryWrapper":
+        *_, wrapper = self.walk_wrappers(down=False)
+        return wrapper
+
     def add_wrapper(self, wrapper: Union[Type["EntryWrapper"], "EntryWrapper"], **kwargs):
         if isinstance(wrapper, EntryWrapper):
             wrap = wrapper
             wrap._entry = self._entry
         else:
             wrap = wrapper(entry=self._entry, **kwargs)
-        self._entry = wrap
+        self._set_entry(wrap)
 
     def remove_wrapper(self, wrapper: Type["EntryWrapper"]):
         if isinstance(self, wrapper):
             raise ValueError("Can't remove top-level wrapper")
         elif isinstance(self.wrapped, wrapper):
-            self._entry = self.wrapped._entry
+            self._set_entry(self.wrapped.entry)
         elif isinstance(self.wrapped, EntryWrapper):
             self.wrapped.remove_wrapper(wrapper)
         else:
             raise TypeError(f"No {wrapper} found in {self}")
 
-    def get_wrapper(self, wrapper: Type["EntryWrapper"]) -> Optional["EntryWrapper"]:
+    def get_wrapped(self, wrapper: Type["EntryWrapper"]) -> Optional["EntryWrapper"]:
         if isinstance(self, wrapper):
             return self
         elif isinstance(self.wrapped, EntryWrapper):
-            return self.wrapped.get_wrapper(wrapper)
+            return self.wrapped.get_wrapped(wrapper)
 
-    def walk_wrappers(self) -> Iterator["EntryWrapper"]:
+    def walk_wrappers(self, down: bool = True) -> Iterator["EntryWrapper"]:
         current = self
         while isinstance(current, EntryWrapper):
             yield current
-            current = current.wrapped
+            if down:
+                current = current.wrapped
+            else:
+                current = current.wrapper
 
     def get(self, item: str, default: Any = _DEFAULT):
         for wrapper in self.walk_wrappers():
@@ -448,15 +511,18 @@ class EntryWrapper(metaclass=abc.ABCMeta):
 
         raise AttributeError(f"Couldn't find {item} in {self}")
 
-    def has_wrapper(self, wrapper: Type["EntryWrapper"]) -> bool:
-        return bool(self.get_wrapper(wrapper))
+    def has_wrapped(self, wrapper: Type["EntryWrapper"]) -> bool:
+        return bool(self.get_wrapped(wrapper))
 
     def to_dict(self) -> Dict[str, Any]:
-        if isinstance(self.wrapped, EntryWrapper):
-            data = self.wrapped.to_dict()
-        else:
-            data = dict(entry=self._entry.to_dict())
-        return data
+        return dict(cls=type(self).__name__, entry=self.wrapped.to_dict())
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any], **pass_down):
+        raw_entry = data.pop("entry")
+        entry = load_wrapper_from_dict(raw_entry, **pass_down)
+        data["entry"] = entry
+        return super().from_dict(data)
 
 
 CanWrapEntryType = Union[EntryWrapper, PlayableEntry]
@@ -499,6 +565,11 @@ class PlayerEntry(EntryWrapper):
             # noinspection PyUnresolvedReferences
             return await entry.get_chapter(self.progress)
 
+    async def get_next_chapter(self) -> Optional[ChapterData]:
+        entry = self.entry
+        if isinstance(entry, ChapterEntry):
+            return await entry.get_next_chapter(self.progress)
+
     async def update_chapter(self) -> bool:
         if self.has_chapters:
             chapter = await self.get_chapter()
@@ -507,18 +578,32 @@ class PlayerEntry(EntryWrapper):
                 return True
         return False
 
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any], **pass_down):
+        data["player"] = pass_down["player"]
+        return super().from_dict(data, **pass_down)
+
 
 class QueueEntry(EntryWrapper):
-    def __init__(self, *, queue: "EntryQueue", requester: User, request_timestamp: float, **kwargs):
+    def __init__(self, *, queue: "EntryQueue", requester_id: int, request_timestamp: float, **kwargs):
         super().__init__(**kwargs)
         self.queue = queue
-        self.requester = requester
+        self.requester_id = requester_id
         self.request_timestamp = request_timestamp
+
+    @property
+    def requester(self) -> User:
+        return self.queue.player.bot.get_user(self.requester_id)
 
     def to_dict(self):
         data = super().to_dict()
-        data.update(requester=self.requester, request_timestamp=self.request_timestamp)
+        data.update(requester_id=self.requester_id, request_timestamp=self.request_timestamp)
         return data
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any], **pass_down):
+        data["queue"] = pass_down["queue"]
+        return super().from_dict(data, **pass_down)
 
 
 class HistoryEntry(EntryWrapper):

@@ -8,7 +8,7 @@ from typing import Any, Dict, List, Optional, Type, Union
 
 import aioredis
 import yaml
-from aioredis import ConnectionsPool
+from aioredis import Redis
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorCollection
 
 from . import abstract
@@ -92,7 +92,7 @@ class FlattenProxy:
         log.debug(f"{config._id} setting {key} to {value}")
 
         mongodb_update = config._mongodb.update_one(dict(_id=config._id), {"$set": {key: value}}, upsert=True)
-        redis_update = config._redis.execute(b"SET", config._prefix_key(key), rapidjson.dumps(value))
+        redis_update = config._redis.set(config._prefix_key(key), rapidjson.dumps(value))
 
         await asyncio.gather(mongodb_update, redis_update)
 
@@ -102,7 +102,7 @@ class _RedisConfig(metaclass=abc.ABCMeta):
 
     __slots__ = ("_id", "_redis", "_prefix", "_mongodb")
 
-    def __init__(self, *, _id: Any, redis: ConnectionsPool, prefix: str, config_coll: AsyncIOMotorCollection):
+    def __init__(self, *, _id: Any, redis: Redis, prefix: str, config_coll: AsyncIOMotorCollection):
         self._id = _id
 
         self._redis = redis
@@ -120,7 +120,7 @@ class _RedisConfig(metaclass=abc.ABCMeta):
         log.debug(f"writing to redis: {redis_document}")
         args = itertools.chain.from_iterable(redis_document.items())
 
-        await self._redis.execute(b"MSET", *args)
+        await self._redis.mset(*args)
 
     async def remove(self):
         await self._mongodb.delete_one(dict(_id=self._id))
@@ -139,7 +139,7 @@ class _RedisConfig(metaclass=abc.ABCMeta):
     async def get(self, key: str):
         prefixed_key = self._prefix_key(key)
         log.debug(f"getting from redis {prefixed_key}")
-        value = await self._redis.execute(b"GET", prefixed_key)
+        value = await self._redis.get(prefixed_key)
         if value is None:
             log.debug(f"key not in redis, using nil handler {key}")
             return await self.handle_nil_value(key)
@@ -210,7 +210,7 @@ class Config:
 
     runtime: RuntimeConfig
     guilds: Dict[int, GuildConfig]
-    redis: Optional[ConnectionsPool]
+    redis: Redis
 
     def __init__(self, app: Application):
         self.app = app
@@ -247,7 +247,8 @@ class Config:
         return cls(app)
 
     async def connect_redis(self):
-        self.redis = await aioredis.create_pool(self.app.redis.uri)
+        pool = await aioredis.create_pool(self.app.redis.uri)
+        self.redis = Redis(pool)
 
     def _create_guild(self, guild_id: int) -> GuildConfig:
         return GuildConfig(self.runtime, _id=guild_id, redis=self.redis, prefix=self.app.redis.databases.config, config_coll=self.config_coll)

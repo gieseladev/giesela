@@ -601,12 +601,15 @@ class SimpleWebSocketServer(object):
                 if client.sendq:
                     writers.append(fileno)
 
-            if self.selectInterval:
-                rList, wList, xList = select(
-                    self.listeners, writers, self.listeners, self.selectInterval)
-            else:
-                rList, wList, xList = select(
-                    self.listeners, writers, self.listeners)
+            try:
+                if self.selectInterval:
+                    rList, wList, xList = select(
+                        self.listeners, writers, self.listeners, self.selectInterval)
+                else:
+                    rList, wList, xList = select(
+                        self.listeners, writers, self.listeners)
+            except ValueError:
+                break
 
             for ready in wList:
                 client = self.connections[ready]

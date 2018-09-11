@@ -105,8 +105,7 @@ class Player:
                     guild = self.bot.get_guild(guild_id)
                     channel = await find_giesela_channel(self.bot, guild, user=member)
 
-            volume = await self.config.get_guild(guild_id).player.volume
-            player = self.player_manager.get_player(guild_id, volume, channel.id)
+            player = self.player_manager.get_player(guild_id, channel.id)
         return player
 
     async def start_disconnect(self, player: GieselaPlayer):
@@ -162,7 +161,13 @@ class Player:
         WebieselaServer.small_update(player.guild_id, state=player.state, progress=player.progress)
 
     async def on_player_stop(self, **_):
-        await self.update_now_playing()
+        if self.bot.is_closed():
+            return
+
+        try:
+            await self.update_now_playing()
+        except asyncio.CancelledError:
+            log.debug("activity update was cancelled, assuming shutdown")
 
     @classmethod
     async def on_player_volume_change(cls, player: GieselaPlayer, new_volume: float, **_):
@@ -299,11 +304,12 @@ class Player:
         Putting + or - before the volume will make the volume change relative to the current volume.
         """
         player = await self.get_player(ctx)
+        player_volume = await player.volume
 
-        old_volume = round(player.volume * 100)
+        old_volume = round(player_volume * 100)
 
         if not volume:
-            bar = text_utils.create_bar(player.volume, 20)
+            bar = text_utils.create_bar(player_volume, 20)
             await ctx.send(f"Current volume: {old_volume}%\n{bar}")
             return
 
@@ -319,9 +325,9 @@ class Player:
 
         if relative:
             vol_change = volume
-            volume += round(player.volume * 100)
+            volume += round(player_volume * 100)
         else:
-            vol_change = volume - player.volume
+            vol_change = volume - player_volume
 
         if not 0 <= volume <= 100:
             if relative:
@@ -378,13 +384,13 @@ class Player:
             await ctx.message.delete()
             return
 
+        playlist_entry = player.current_entry.get("playlist_entry", None)
+        if playlist_entry:
+            playlist_entry.replace(new_entry, editor=ctx.author)
+
         if player.current_entry and player.current_entry.entry is editor.original:
             player.current_entry.change_entry(new_entry)
             await ctx.send(f"Saved changes to **{new_entry}**")
-
-        playlist_entry = player.current_entry.get("playlist_entry", None)
-        if playlist_entry:
-            playlist_entry.replace(new_entry)
 
     @commands.command()
     async def lyrics(self, ctx: Context, *query: str):
