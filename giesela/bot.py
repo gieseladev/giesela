@@ -99,6 +99,8 @@ class Giesela(AutoShardedBot):
         content = message.content
         if "&&" in content:
             await self.chain_commands(message)
+        elif "||" in content:
+            await self.run_commands_parallel(message)
         else:
             await super().on_message(message)
 
@@ -110,6 +112,18 @@ class Giesela(AutoShardedBot):
             msg = copy.copy(message)
             msg.content = command
             await self.on_message(msg)
+
+    async def run_commands_parallel(self, message: Message, commands: Iterable[str] = None):
+        if not commands:
+            commands = map(str.lstrip, message.content.split("||"))
+
+        coros = []
+        for command in commands:
+            msg = copy.copy(message)
+            msg.content = command
+            coros.append(self.on_message(msg))
+
+        await asyncio.gather(*coros)
 
     def find_commands(self, query: str, *, threshold: float = .5) -> List[Tuple[Command, float]]:
         commands = []
