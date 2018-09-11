@@ -325,7 +325,7 @@ class PlayerManager(LavalinkAPI):
 
     def get_player(self, guild_id: int, voice_channel_id: int = None, *, create: bool = True) -> Optional[GieselaPlayer]:
         player = self.players.get(guild_id)
-        # TODO do volume differently
+
         if not player and create:
             player = GieselaPlayer(self, guild_id, voice_channel_id)
             self.emit("player_create", player=player)

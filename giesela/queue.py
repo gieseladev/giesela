@@ -188,7 +188,7 @@ class EntryQueue(EventEmitter):
 
     def time_until(self, index: int, *, with_current: bool = True) -> float:
         entries = itertools.islice(self.entries, index)
-        estimated_time = sum(e.entry.duration for e in entries)
+        estimated_time = sum(entry.entry.duration for entry in entries if entry.entry.duration)
 
         if with_current and self.player.current_entry:
             estimated_time += self.player.current_entry.time_left

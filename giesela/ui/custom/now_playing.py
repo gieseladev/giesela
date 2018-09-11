@@ -91,7 +91,7 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         if target.cover:
             em.set_thumbnail(url=target.cover)
 
-        if target.album:
+        if target.album and self.showing_detailed:
             em.add_field(name="Album", value=target.album)
 
         if playlist:
