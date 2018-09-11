@@ -14,7 +14,7 @@ from websockets import ConnectionClosed
 from .entry import PlayerEntry, QueueEntry, SpecificChapterData
 from .extractor import Extractor
 from .lib import EventEmitter, has_events
-from .lib.lavalink import LavalinkAPI, LavalinkEvent, LavalinkPlayerState, TrackEndReason, TrackEventDataType
+from .lib.lavalink import LavalinkEvent, LavalinkNode, LavalinkNodeBalancer, LavalinkPlayerState, TrackEndReason, TrackEventDataType
 from .queue import EntryQueue
 
 if TYPE_CHECKING:
@@ -58,9 +58,10 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
     _current_entry: Optional[PlayerEntry]
     _start_position: float
 
-    def __init__(self, manager: "PlayerManager", guild_id: int, voice_channel_id: int = None):
+    def __init__(self, manager: "PlayerManager", node: LavalinkNode, guild_id: int, voice_channel_id: int = None):
         super().__init__(loop=manager.loop)
         self.manager = manager
+        self.node = node
         self.extractor = manager.extractor
         self.bot = manager.bot
         self.config = self.bot.config
@@ -132,11 +133,14 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         return False
 
     async def connect(self, channel: Union[VoiceChannel, int] = None):
-        if isinstance(channel, VoiceChannel):
-            channel = channel.id
+        if channel is not None:
+            if isinstance(channel, VoiceChannel):
+                channel = channel.id
+            self.voice_channel_id = channel
+        else:
+            channel = self.voice_channel_id
 
         # FIXME when already connected or something the player doesn't play...
-        channel = channel or self.voice_channel_id
 
         if not channel:
             raise ValueError("No voice channel specified")
@@ -159,17 +163,18 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
     async def set_volume(self, value: float):
         old_volume = self._volume
         value = max(min(value, 1000), 0)
-        await self.manager.send_volume(self.guild_id, value)
+        # TODO the default volume isn't set
+        await self.node.send_volume(self.guild_id, value)
         self._volume = value
         self.emit("volume_change", player=self, old_volume=old_volume, new_volume=value)
 
     async def pause(self):
-        await self.manager.send_pause(self.guild_id)
+        await self.node.send_pause(self.guild_id)
         self.state = GieselaPlayerState.PAUSED
         self.emit("pause", player=self)
 
     async def resume(self):
-        await self.manager.send_resume(self.guild_id)
+        await self.node.send_resume(self.guild_id)
         self.state = GieselaPlayerState.PLAYING
         self.emit("resume", player=self)
 
@@ -179,7 +184,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
             raise ValueError(f"{self} has no current entry")
         if not entry.entry.is_seekable:
             raise TypeError(f"{entry} is not seekable!")
-        await self.manager.send_seek(self.guild_id, seconds)
+        await self.node.send_seek(self.guild_id, seconds)
         self.emit("seek", player=self, timestamp=seconds)
 
     async def skip(self, *, respect_chapters: bool = True):
@@ -195,7 +200,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
     async def stop(self):
         self._current_entry = None
-        await self.manager.send_stop(self.guild_id)
+        await self.node.send_stop(self.guild_id)
         self.state = GieselaPlayerState.IDLE
         self.emit("stop", player=self)
 
@@ -234,7 +239,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         else:
             start = playable_entry.start_position
 
-        await self.manager.send_play(self.guild_id, playable_entry.track, start, playable_entry.end_position)
+        await self.node.send_play(self.guild_id, playable_entry.track, start, playable_entry.end_position)
         self.state = GieselaPlayerState.PLAYING
 
         log.info(f"playing {self.current_entry} in {self.qualified_channel_name}")
@@ -255,6 +260,18 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
         if updated:
             self.emit("chapter", player=self)
+
+    async def migrate_node(self, new_node: LavalinkNode):
+        self.node = new_node
+        if self.is_connected:
+            await self.manager.connect_player(self.guild_id, self.voice_channel_id)
+
+        if self._current_entry:
+            entry = self._current_entry.entry
+            await self.node.send_play(self.guild_id, entry.track, self._start_position + self.progress, entry.end_position)
+
+        if self.is_paused:
+            await self.pause()
 
     async def handle_event(self, event: LavalinkEvent, data: TrackEventDataType):
         play_next = True
@@ -306,15 +323,18 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
 
 @has_events("player_create")
-class PlayerManager(LavalinkAPI):
-    bot: "Giesela"
+class PlayerManager(LavalinkNodeBalancer):
     players: Dict[int, GieselaPlayer]
 
     def __init__(self, bot: "Giesela"):
-        lavalink_config = bot.config.app.lavalink.nodes[0]
-        super().__init__(bot, password=lavalink_config.password, address=lavalink_config.address, secure=lavalink_config.secure)
-        self.extractor = Extractor(self)
+        nodes = []
+        for node in bot.config.app.lavalink.nodes:
+            _node = LavalinkNode(bot, password=node.password, address=node.address, secure=node.secure, region=node.region)
+            nodes.append(_node)
 
+        super().__init__(bot.loop, nodes)
+        self.bot = bot
+        self.extractor = Extractor(self)
         self.players = {}
 
         bot.add_listener(self.on_shutdown)
@@ -327,7 +347,8 @@ class PlayerManager(LavalinkAPI):
         player = self.players.get(guild_id)
 
         if not player and create:
-            player = GieselaPlayer(self, guild_id, voice_channel_id)
+            guild = self.bot.get_guild(guild_id)
+            player = GieselaPlayer(self, self.pick_node(guild.region), guild_id, voice_channel_id)
             self.emit("player_create", player=player)
             self.players[guild_id] = player
         return player
@@ -346,7 +367,7 @@ class PlayerManager(LavalinkAPI):
         log.debug(f"disconnecting {guild_id}")
         await ws.voice_state(guild_id, None)
 
-    async def on_event(self, guild_id: int, event: LavalinkEvent, data: TrackEventDataType):
+    async def on_event(self, guild_id: int, event: LavalinkEvent, data: TrackEventDataType, **_):
         player = self.players.get(guild_id)
         if not player:
             log.info(f"No player in guild {guild_id}... Not handling {event}")
@@ -354,7 +375,7 @@ class PlayerManager(LavalinkAPI):
 
         await player.handle_event(event, data)
 
-    async def on_player_update(self, guild_id: int, state: LavalinkPlayerState):
+    async def on_player_update(self, guild_id: int, state: LavalinkPlayerState, **_):
         player = self.players.get(guild_id)
         if not player:
             log.info(f"No player in guild {guild_id}... Not updating {state}")
@@ -362,7 +383,7 @@ class PlayerManager(LavalinkAPI):
 
         await player.update_state(state)
 
-    async def on_voice_channel_update(self, guild_id: int, channel_id: Optional[int]):
+    async def on_voice_channel_update(self, guild_id: int, channel_id: Optional[int], **_):
         if not channel_id:
             return
 
@@ -416,6 +437,13 @@ class PlayerManager(LavalinkAPI):
         await self.dump_to_redis()
         await self.shutdown()
 
-    async def on_disconnect(self, error: ConnectionClosed):
+    async def on_disconnect(self, node: LavalinkNode, error: ConnectionClosed):
+        coros = []
         for player in self:
-            await player.disconnect()
+            if player.node is node:
+                log.info(f"moving {player} to another node")
+                voice_region = player.guild.region
+                new_node = self.pick_node(voice_region)
+                coros.append(player.migrate_node(new_node))
+
+        await asyncio.gather(*coros, loop=self.loop)

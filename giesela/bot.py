@@ -164,7 +164,7 @@ class Giesela(AutoShardedBot):
 
     @classmethod
     async def on_ready(cls):
-        log.info(f"\rConnected!  Giesela v{constants.VERSION}")
+        log.info(f"Connected!  Giesela v{constants.VERSION}")
 
     async def on_error(self, event: str, *args, **kwargs):
         log.exception(f"Error in {event} ({args}, {kwargs})")

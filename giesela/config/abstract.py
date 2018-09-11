@@ -1,3 +1,4 @@
+import enum
 import inspect
 import typing
 from typing import Any, Dict, Iterator, Sequence, Tuple, Type, Union
@@ -54,9 +55,6 @@ def convert_typing(value, cls):
 
 
 def convert(value, cls):
-    if isinstance(value, Exception):
-        raise value
-
     if inspect.isclass(cls) and issubclass(cls, ConfigObject):
         return cls.from_config(value)
 
@@ -65,6 +63,13 @@ def convert(value, cls):
 
     if isinstance(value, cls):
         return value
+
+    if isinstance(cls, enum.Enum):
+        try:
+            return cls(value)
+        except ValueError:
+            values = ", ".join([mem.value for mem in cls.__members__])
+            raise ConfigValueError(f"{{key}} must be one of {values}", None, value)
 
     try:
         # handle simple conversions like int -> str, int -> float and so on
@@ -158,6 +163,9 @@ class ConfigObject(metaclass=ConfigMeta):
 
                 setattr(inst, name, default)
                 continue
+
+            if isinstance(raw_value, Exception):
+                raise raw_value
 
             try:
                 value = convert(raw_value, _type)

@@ -15,7 +15,7 @@ LOGGING = {
             "style": "{"
         },
         "detailed": {
-            "format": "{asctime} {module} ({name}) {levelname} >> {message}",
+            "format": "{asctime} {name} {levelname} >> {message}",
             "style": "{"
         }
     },
@@ -24,7 +24,7 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "brief",
             "level": "DEBUG",
-            "stream": "ext://sys.stdout"
+            "stream": "ext://sys.__stdout__"
         },
         "file": {
             "class": "logging.handlers.RotatingFileHandler",

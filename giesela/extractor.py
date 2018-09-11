@@ -6,7 +6,7 @@ from typing import List, Optional, Pattern, Union
 from . import utils
 from .entry import BasicEntry, RadioEntry
 from .errors import ExtractionError
-from .lib.lavalink import LoadTrackSearcher, Track, TrackLoadType, TrackPlaylistInfo
+from .lib.lavalink import LavalinkNodeBalancer, LoadTrackSearcher, Track, TrackLoadType, TrackPlaylistInfo
 from .lib.lavalink.rest_client import LavalinkREST
 from .radio import RadioStation
 
@@ -16,9 +16,13 @@ RE_HTTP_SCHEME: Pattern = re.compile(r"^https?://")
 
 
 class Extractor:
-    def __init__(self, client: LavalinkREST):
-        self.client = client
-        self.loop = self.client.loop
+    def __init__(self, client: LavalinkNodeBalancer):
+        self._client = client
+        self.loop = client.loop
+
+    @property
+    def client(self) -> LavalinkREST:
+        return self._client.get_rest_node()
 
     @classmethod
     def is_url(cls, url: str) -> bool:

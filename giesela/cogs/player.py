@@ -6,7 +6,7 @@ from discord import Game, Guild, Member, User, VoiceChannel, VoiceState
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, GieselaPlayer, PlayerManager, WebieselaServer
+from giesela import Giesela, GieselaPlayer, PlayerManager, SpecificChapterData, WebieselaServer
 from giesela.ui import VerticalTextViewer, text as text_utils
 from giesela.ui.custom import EntryEditor, NowPlayingEmbed
 from giesela.utils import parse_timestamp, similarity
@@ -406,7 +406,12 @@ class Player:
                 if not player.current_entry:
                     raise commands.CommandError("There's no way for me to find lyrics for something that doesn't even exist!")
                 query = str(player.current_entry.entry)
-                _progress_guess = player.progress / player.current_entry.entry.duration
+                player_entry = player.current_entry
+                chapter = player_entry.chapter
+                if isinstance(chapter, SpecificChapterData):
+                    _progress_guess = chapter.get_chapter_progress(player_entry.progress) / chapter.duration
+                elif player_entry.entry.duration:
+                    _progress_guess = player_entry.progress / player_entry.entry.duration
 
             raise commands.CommandError("Down for maintenance?")
             lyrics = None

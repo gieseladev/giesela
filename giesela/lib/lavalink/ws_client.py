@@ -26,7 +26,7 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
 
     _shutdown_signal: bool
 
-    def __init__(self, *, shard_count: int = None, retry_attempts: int = 3, max_stats: int = 5, **kwargs):
+    def __init__(self, *, shard_count: int = None, retry_attempts: Optional[int] = 10, max_stats: int = 5, **kwargs):
         super().__init__(**kwargs)
 
         self._ws = None
@@ -106,14 +106,25 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
                 self._send_queue.clear()
 
     async def _attempt_reconnect(self) -> bool:
-        log.info("Connection closed; Trying to reconnect in 30 seconds")
-        for i in range(0, self._ws_retry_attempts):
-            await asyncio.sleep(30)
-            log.info(f"Reconnecting... (Attempt {i + 1})")
+        attempt = 0
+        log.info(f"Connection closed; Trying to reconnect")
+
+        while True:
+            delay = 2 ** attempt
+            log.debug(f"waiting for {delay} seconds")
+            await asyncio.sleep(delay)
+            log.info(f"Reconnecting... (Attempt {attempt + 1})")
             await self.connect()
 
             if self._ws.open:
                 return True
+            else:
+                attempt += 1
+
+            if self._ws_retry_attempts and attempt >= self._ws_retry_attempts:
+                log.info("exceeded max retry attempts!")
+                break
+
         return False
 
     async def handle_data(self, data: Dict[str, Any]):
