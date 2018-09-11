@@ -146,7 +146,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
             raise ValueError("No voice channel specified")
 
         await self.manager.connect_player(self.guild_id, channel)
-        await self.manager.send_volume(self.guild_id, await self.volume)
+        await self.node.send_volume(self.guild_id, await self.volume)
 
         self.state = GieselaPlayerState.IDLE
         self.emit("connect", player=self)
