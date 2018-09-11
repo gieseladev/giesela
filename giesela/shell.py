@@ -113,6 +113,7 @@ class ShellInterpreter(metaclass=abc.ABCMeta):
 
     def __init__(self, **kwargs):
         self.variables = {}
+        self.variables.update(kwargs)
 
     def __repr__(self) -> str:
         return f"{type(self).__name__}"
@@ -265,7 +266,7 @@ class PythonInterpreter(GieselaInterpreter):
         code = code.format(args=",".join(args))
         try:
             _scope = {}
-            exec(code, context, _scope)
+            exec(code, context.copy(), _scope)
         except SyntaxError:
             pass
         else:
