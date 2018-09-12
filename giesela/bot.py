@@ -93,9 +93,6 @@ class Giesela(AutoShardedBot):
                 raise self.exit_signal
 
     async def on_message(self, message: Message):
-        if not message.guild:
-            # TODO handle dms...
-            return
         content = message.content
         if "&&" in content:
             await self.chain_commands(message)
@@ -136,9 +133,21 @@ class Giesela(AutoShardedBot):
         return commands
 
     async def get_prefix(self, message: Message) -> str:
-        # TODO how to handle dm?
-        guild_id = message.guild.id
-        return await self.config.get_guild(guild_id).commands.prefix
+        if message.guild:
+            guild_id = message.guild.id
+            return await self.config.get_guild(guild_id).commands.prefix
+        else:
+            prefixes = []
+            user_id = message.author.id
+            for guild in self.guilds:
+                if guild.get_member(user_id):
+                    prefixes.append(self.config.get_guild(guild.id).commands.prefix)
+
+            if not prefixes:
+                # if the user is in no guild (lol?), return the default guild prefix
+                return await self.config.runtime.guild.commands.prefix
+
+            return await asyncio.gather(*prefixes)
 
     async def get_context(self, message: Message, *, cls: Context = GieselaContext) -> Context:
         return await super().get_context(message, cls=cls)
@@ -149,10 +158,11 @@ class Giesela(AutoShardedBot):
             log.debug(f"{ctx.author} invoked {ctx.command.qualified_name}")
 
     async def on_command_finished(self, ctx: Context, **_):
-        if isinstance(ctx, GieselaContext):
+        if isinstance(ctx, GieselaContext) and ctx.guild:
             decay_delay = await self.config.get_guild(ctx.guild.id).commands.message_decay
-            await asyncio.sleep(decay_delay)
-            await ctx.decay()
+            if decay_delay:
+                await asyncio.sleep(decay_delay)
+                await ctx.decay()
 
     async def on_command_completion(self, ctx: Context):
         self.dispatch("command_finished", ctx)
@@ -194,6 +204,7 @@ class Giesela(AutoShardedBot):
 
             await ctx.send(embed=embed)
 
+        # TODO use sentry directly and add even more details
         log.exception("CommandError:", exc_info=exception, extra=dict(report=report, tags=dict(guild_id=ctx.guild.id, author_id=ctx.author.id)))
 
         self.dispatch("command_finished", ctx, exception=exception)
