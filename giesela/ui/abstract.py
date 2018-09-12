@@ -6,7 +6,7 @@ from typing import Any, Callable, Dict
 
 from discord import Client, Message, User
 
-from .utils import EmojiType
+from .ui_utils import EmojiType
 
 log = logging.getLogger(__name__)
 

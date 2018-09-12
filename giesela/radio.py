@@ -96,7 +96,7 @@ class RadioStation:
     def is_alias(self, name: str) -> bool:
         return name.lower() == self.name.lower() or name in self.aliases
 
-    def handle_remaining_duration(self, song_id: str, remaining: int) -> Tuple[int, int]:
+    def handle_remaining_duration(self, song_id: str, remaining: float) -> Tuple[float, float]:
         prev_id, duration = getattr(self, "_remaining_duration_data", (None, None))
         if prev_id == song_id and duration >= remaining:
             progress = duration - remaining

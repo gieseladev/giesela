@@ -9,6 +9,7 @@ from typing import Any, Dict, List, Optional, Type, Union
 import aioredis
 import yaml
 from aioredis import Redis
+# noinspection PyProtectedMember
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorCollection
 
 from . import abstract

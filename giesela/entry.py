@@ -8,7 +8,7 @@ from discord import User
 
 from .lib import lavalink
 from .radio import RadioSongData, RadioStation, RadioStationManager
-from .utils import url
+from .utils import url_utils
 
 if TYPE_CHECKING:
     from .queue import EntryQueue
@@ -135,7 +135,7 @@ class PlayableEntry(Reducible, OrderByAttribute, metaclass=_RegisterEntryMeta):
 
     @property
     def url(self) -> Optional[str]:
-        if url.is_url(self.uri):
+        if url_utils.is_url(self.uri):
             return self.uri
 
     @property
