@@ -1,7 +1,6 @@
 import abc
 import asyncio
 import enum
-import itertools
 import logging
 import rapidjson
 from typing import Dict, Iterator, Optional, TYPE_CHECKING, Union
@@ -163,7 +162,6 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
     async def set_volume(self, value: float):
         old_volume = self._volume
         value = max(min(value, 1000), 0)
-        # TODO the default volume isn't set
         await self.node.send_volume(self.guild_id, value)
         self._volume = value
         self.emit("volume_change", player=self, old_volume=old_volume, new_volume=value)
@@ -401,16 +399,19 @@ class PlayerManager(LavalinkNodeBalancer):
         players = []
         for guild_id, player in self.players.items():
             if player.voice_channel_id:
-                players.append((guild_id, player.voice_channel_id))
+                players.extend((guild_id, player.voice_channel_id))
                 coros.append(player.dump_to_redis(redis))
-
-        log.debug(f"writing {len(coros)} player(s) to redis")
 
         key = f"{self.bot.config.app.redis.namespaces.queue}:players"
         await redis.delete(key)
 
+        if not coros:
+            return
+
+        log.debug(f"writing {len(coros)} player(s) to redis")
+
         await asyncio.gather(
-            redis.hmset(key, *itertools.chain.from_iterable(players)),
+            redis.hmset(key, *players),
             *coros,
             loop=self.loop
         )

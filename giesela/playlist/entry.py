@@ -49,8 +49,13 @@ class LoadedPlaylistEntry(EntryWrapper):
     @property
     def playlist_entry(self) -> "PlaylistEntry":
         if not self._playlist_entry:
-            # MAYBE remove this wrapper if it isn't part of a playlist anymore!
-            self._playlist_entry = self.playlist.get_entry(self._entry_id)
+            entry = self.playlist.get_entry(self._entry_id)
+            if entry:
+                self._playlist_entry = entry
+            else:
+                # this will cause playlist_entry to raise AttributeError!
+                del self._playlist_entry
+
         return self._playlist_entry
 
     @classmethod

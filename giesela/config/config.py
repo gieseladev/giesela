@@ -88,13 +88,24 @@ class FlattenProxy:
 
         config = self._config
 
-        # noinspection PyProtectedMember
-        log.debug(f"{config._id} setting {key} to {value}")
+        config_id = config._id
+        log.debug(f"{config_id} setting {key} to {value}")
 
         mongodb_update = config._mongodb.update_one(dict(_id=config._id), {"$set": {key: value}}, upsert=True)
         redis_update = config._redis.set(config._prefix_key(key), rapidjson.dumps(value))
 
         await asyncio.gather(mongodb_update, redis_update)
+
+    async def reset(self):
+        key = self.get_qualified_key()
+
+        if not self._virtual_parent or isinstance(self._virtual_target, abstract.ConfigObject):
+            raise KeyError(f"Cannot set {key}! It's a config object!")
+
+        config_id = self._config._id
+        log.debug(f"{config_id} resetting {key}")
+
+        await self._config._reset(key)
 
 
 class _RedisConfig(metaclass=abc.ABCMeta):
@@ -117,6 +128,9 @@ class _RedisConfig(metaclass=abc.ABCMeta):
 
     async def dump_to_redis(self, document: Dict[str, Any]):
         redis_document = to_redis(document, self._prefix)
+        if not redis_document:
+            return
+
         log.debug(f"writing to redis: {redis_document}")
         args = itertools.chain.from_iterable(redis_document.items())
 
@@ -128,6 +142,14 @@ class _RedisConfig(metaclass=abc.ABCMeta):
     async def set(self, key: str, value):
         proxy = FlattenProxy(self, key.split("."))
         await proxy.set(value)
+
+    async def reset(self, key: str):
+        proxy = FlattenProxy(self, key.split("."))
+        await proxy.reset()
+
+    async def _reset(self, key: str):
+        await asyncio.gather(self._mongodb.update_one(dict(_id=self._id), {"$unset": {key: True}}),
+                             self._redis.delete(self._prefix_key(key)))
 
     @abc.abstractmethod
     async def load(self) -> abstract.ConfigObject:
@@ -161,6 +183,13 @@ class RuntimeConfig(_RedisConfig, _AsyncRuntime):
         data.update(document)
         await super().dump_to_redis(data)
 
+    async def _reset(self, key: str):
+        # delete the value from mongodb but set it to the default in redis!
+        value = abstract.traverse_config(self.default, key)
+
+        await asyncio.gather(self._mongodb.update_one(dict(_id=self._id), {"$unset": {key: True}}),
+                             self._redis.set(self._prefix_key(key), rapidjson.dumps(value)))
+
     async def load(self) -> Runtime:
         log.debug("getting runtime config from mongo")
         document = await self._mongodb.find_one(self._id)
@@ -171,12 +200,6 @@ class RuntimeConfig(_RedisConfig, _AsyncRuntime):
         else:
             log.debug("config didn't exist, using default")
             return self.default
-
-    async def handle_nil_value(self, key):
-        value = abstract.traverse_config(self.defaults, key)
-        if isinstance(value, abstract.ConfigObject):
-            raise AttributeError(f"{key} points to a ConfigObject {value}")
-        return value
 
 
 class GuildConfig(_RedisConfig, _AsyncGuild):

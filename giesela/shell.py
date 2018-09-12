@@ -263,6 +263,7 @@ class PythonInterpreter(GieselaInterpreter):
     @classmethod
     def _compile_wrap(cls, code: str, context: Dict[str, Any]) -> Optional[Callable]:
         args = list(context)
+        # TODO escape {} in code
         code = code.format(args=",".join(args))
         try:
             _scope = {}
