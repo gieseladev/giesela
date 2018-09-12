@@ -5,15 +5,15 @@ from io import StringIO
 
 import aiohttp
 from discord.ext import commands
-from discord.ext.commands import Bot, Context
+from discord.ext.commands import Context
 
-from giesela import RestartSignal, TerminateSignal
+from giesela import Giesela, RestartSignal, TerminateSignal
 from giesela.shell import InterpreterUnavailable
 from giesela.ui.custom import ShellUI
 
 
 class AdminTools:
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: Giesela):
         self.bot = bot
         self.aiosession = getattr(bot, "aiosession", None)
 
@@ -73,10 +73,7 @@ class AdminTools:
     @commands.is_owner()
     async def shell(self, ctx: Context, interpreter: str = "python"):
         """Open the GieselaShell™"""
-        try:
-            player = await self.bot.cogs["Player"].get_player(ctx)
-        except KeyError:
-            player = None
+        player = await self.bot.get_player(ctx)
 
         try:
             shell = ShellUI(ctx, shell=interpreter, variables=dict(player=player))
@@ -142,5 +139,5 @@ class AdminTools:
         return
 
 
-def setup(bot: Bot):
+def setup(bot: Giesela):
     bot.add_cog(AdminTools(bot))

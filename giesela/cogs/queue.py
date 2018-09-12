@@ -5,7 +5,7 @@ from datetime import datetime
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, utils
+from giesela import Extractor, Giesela, utils
 from giesela.ui import VerticalTextViewer, prefab, text as text_utils
 from giesela.ui.custom import EntrySearchUI
 from .player import Player
@@ -16,13 +16,14 @@ LOAD_ORDER = 1
 class QueueBase:
     bot: Giesela
 
-    player_cog: Player
+    get_player: Player.get_player
+    extractor: Extractor
 
     def __init__(self, bot: Giesela):
         self.bot = bot
-        self.player_cog = bot.cogs["Player"]
-        self.get_player = self.player_cog.get_player
-        self.extractor = self.player_cog.extractor
+
+        self.get_player = self.bot.get_player
+        self.extractor = self.bot.extractor
 
 
 def pad_index(index: int, padding: int) -> str:
@@ -76,7 +77,7 @@ class EnqueueCog(QueueBase):
 
         async with ctx.typing():
             results = await self.extractor.search_entries(query)
-        searcher = EntrySearchUI(ctx.channel, player, results, user=ctx.author, bot=self.bot)
+        searcher = EntrySearchUI(ctx.channel, player=player, results=results, user=ctx.author, bot=self.bot)
 
         entry = await searcher.choose()
         if entry:
@@ -181,7 +182,7 @@ class ManipulateCog(QueueBase):
         if player.is_stopped:
             raise commands.CommandError("Can't skip! The player is not playing!")
 
-        await player.skip(respect_chapter=False)
+        await player.skip(respect_chapters=False)
 
     @commands.command()
     async def promote(self, ctx: Context, position: int = None):
@@ -286,7 +287,7 @@ class DisplayCog(QueueBase):
             }
         }
 
-        viewer = VerticalTextViewer(ctx.channel, user=ctx.author, content=lines, embed_frame=frame)
+        viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=lines, embed_frame=frame)
         await viewer.display()
         await ctx.message.delete()
 
@@ -317,7 +318,7 @@ class DisplayCog(QueueBase):
             }
         }
 
-        viewer = VerticalTextViewer(ctx.channel, user=ctx.author, content=lines, embed_frame=frame)
+        viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=lines, embed_frame=frame)
         await viewer.display()
         await ctx.message.delete()
 

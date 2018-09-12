@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from discord import Embed, TextChannel, User
+from discord import Embed, TextChannel
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -11,8 +11,8 @@ from ..interactive import ItemPicker, MessageableEmbed
 
 
 class EntrySearchUI(AutoHelpEmbed, MessageableEmbed, ItemPicker):
-    def __init__(self, channel: TextChannel, player: GieselaPlayer, results: List[PlayableEntry], user: User = None, **kwargs):
-        super().__init__(channel, user=user, **kwargs)
+    def __init__(self, channel: TextChannel, *, player: GieselaPlayer, results: List[PlayableEntry], **kwargs):
+        super().__init__(channel, **kwargs)
         self.player = player
         self.results = results
 

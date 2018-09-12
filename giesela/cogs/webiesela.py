@@ -4,9 +4,6 @@ from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import Giesela, PlaylistManager, RadioStationManager, WebieselaServer
-from .player import Player
-from .playlist import PlaylistCog
-from .radio import Radio
 
 log = logging.getLogger(__name__)
 
@@ -14,23 +11,16 @@ LOAD_ORDER = 2
 
 
 class Webiesela:
-    player_cog: Player
-    playlist_cog: PlaylistCog
     playlist_manager: PlaylistManager
-    radio_cog: Radio
     radio_station_manager: RadioStationManager
 
     def __init__(self, bot: Giesela):
         self.bot = bot
         self.config = bot.config
-        self.player_cog = bot.cogs["Player"]
-        self.playlist_cog = bot.cogs["Playlist"]
 
-        self.get_player = self.player_cog.get_player
-
-        self.playlist_manager = self.playlist_cog.playlist_manager
-        self.radio_cog = bot.cogs["Radio"]
-        self.radio_station_manager = self.radio_cog.station_manager
+        self.get_player = self.bot.get_player
+        self.playlist_manager = self.bot.playlist_manager
+        self.radio_station_manager = self.bot.radio_station_manager
 
     async def on_ready(self):
         if self.config.app.webiesela.start:

@@ -2,14 +2,14 @@ import asyncio
 import copy
 import logging
 import operator
-from typing import Iterable, List, Optional, Tuple, Type
+import rapidjson
+from typing import Any, Iterable, List, Optional, Tuple, Type
 
 import aiohttp
 from discord import Colour, Embed, Message
 from discord.ext.commands import AutoShardedBot, Command, CommandError, CommandInvokeError, CommandNotFound, Context
 
 from giesela.lib.web_author import WebAuthor
-from giesela.ui import events
 from . import cogs, constants, signals, utils
 from .config import Config
 
@@ -40,18 +40,43 @@ class Giesela(AutoShardedBot):
     exit_signal: Optional[Type[signals.ExitSignal]]
 
     def __init__(self):
-        self.config = Config.load_app(constants.CONFIG_LOCATION)
-
         super().__init__(None, )
-        WebAuthor.bot = self
+        WebAuthor.bot = self  # TODO remove this garbage
+
+        self._storage = {}
 
         self.exit_signal = None
-        self.aiosession = aiohttp.ClientSession(loop=self.loop)
+        self.config = Config.load_app(constants.CONFIG_LOCATION)
+
+        self.store_reference("aiosession", aiohttp.ClientSession(loop=self.loop))
+
         self.http.user_agent += f" Giesela/{constants.VERSION}"
 
         for ext in cogs.get_extensions():
             log.info(f"loading extension {ext}")
             self.load_extension(ext)
+
+    def __getattr__(self, item: str):
+        stored = self._storage.get(item)
+        if stored is not None:
+            return stored
+
+        raise AttributeError(f"{self} doesn't have attribute {item}")
+
+    def store_reference(self, key: str, value, *, override: bool = False):
+        if key in self._storage and not override:
+            raise KeyError(f"{key} is already in storage!")
+        self._storage[key] = value
+
+    async def persist(self, name: str, data: Any):
+        key = f"{self.config.app.redis.namespaces.persist}:{name}"
+        await self.config.redis.set(key, rapidjson.dumps(data))
+
+    async def restore(self, name: str) -> Optional[Any]:
+        key = f"{self.config.app.redis.namespaces.persist}:{name}"
+        value = await self.config.redis.get(key)
+        if value is not None:
+            return rapidjson.loads(value)
 
     async def close(self):
         if self.is_closed():
@@ -81,6 +106,8 @@ class Giesela(AutoShardedBot):
         content = message.content
         if "&&" in content:
             await self.chain_commands(message)
+        elif "||" in content:
+            await self.run_commands_parallel(message)
         else:
             await super().on_message(message)
 
@@ -93,6 +120,18 @@ class Giesela(AutoShardedBot):
             msg.content = command
             await self.on_message(msg)
 
+    async def run_commands_parallel(self, message: Message, commands: Iterable[str] = None):
+        if not commands:
+            commands = map(str.lstrip, message.content.split("||"))
+
+        coros = []
+        for command in commands:
+            msg = copy.copy(message)
+            msg.content = command
+            coros.append(self.on_message(msg))
+
+        await asyncio.gather(*coros)
+
     def find_commands(self, query: str, *, threshold: float = .5) -> List[Tuple[Command, float]]:
         commands = []
 
@@ -104,8 +143,21 @@ class Giesela(AutoShardedBot):
         return commands
 
     async def get_prefix(self, message: Message) -> str:
-        guild_id = message.guild.id
-        return await self.config.get_guild(guild_id).commands.prefix
+        if message.guild:
+            guild_id = message.guild.id
+            return await self.config.get_guild(guild_id).commands.prefix
+        else:
+            prefixes = []
+            user_id = message.author.id
+            for guild in self.guilds:
+                if guild.get_member(user_id):
+                    prefixes.append(self.config.get_guild(guild.id).commands.prefix)
+
+            if not prefixes:
+                # if the user is in no guild (lol?), return the default guild prefix
+                return await self.config.runtime.guild.commands.prefix
+
+            return await asyncio.gather(*prefixes)
 
     async def get_context(self, message: Message, *, cls: Context = GieselaContext) -> Context:
         return await super().get_context(message, cls=cls)
@@ -116,10 +168,11 @@ class Giesela(AutoShardedBot):
             log.debug(f"{ctx.author} invoked {ctx.command.qualified_name}")
 
     async def on_command_finished(self, ctx: Context, **_):
-        if isinstance(ctx, GieselaContext):
+        if isinstance(ctx, GieselaContext) and ctx.guild:
             decay_delay = await self.config.get_guild(ctx.guild.id).commands.message_decay
-            await asyncio.sleep(decay_delay)
-            await ctx.decay()
+            if decay_delay:
+                await asyncio.sleep(decay_delay)
+                await ctx.decay()
 
     async def on_command_completion(self, ctx: Context):
         self.dispatch("command_finished", ctx)
@@ -139,7 +192,7 @@ class Giesela(AutoShardedBot):
                 description = "There was an internal error while processing your command." \
                               "This shouldn't happen (obviously) and it isn't your fault *(maybe)*.\n"
 
-                embed = Embed(title="Internal Error", description=description, colour=Colour.red())
+                embed = Embed(title="Internal Error", description=description, colour=Colour.dark_red())
                 embed.add_field(name="Please ask someone (who knows their shit) to take a look at this:",
                                 value=f"```python\n{original!r}```",
                                 inline=False)
@@ -161,6 +214,7 @@ class Giesela(AutoShardedBot):
 
             await ctx.send(embed=embed)
 
+        # TODO use sentry directly and add even more details
         log.exception("CommandError:", exc_info=exception, extra=dict(report=report, tags=dict(guild_id=ctx.guild.id, author_id=ctx.author.id)))
 
         self.dispatch("command_finished", ctx, exception=exception)
@@ -171,14 +225,6 @@ class Giesela(AutoShardedBot):
 
     async def on_error(self, event: str, *args, **kwargs):
         log.exception(f"Error in {event} ({args}, {kwargs})")
-
-    @classmethod
-    async def on_reaction_remove(cls, reaction, user):
-        await events.handle_reaction(reaction, user)
-
-    @classmethod
-    async def on_reaction_add(cls, reaction, user):
-        await events.handle_reaction(reaction, user)
 
     async def blocking_dispatch(self, event: str, *args, **kwargs):
         log.debug(f"Dispatching event {event}")

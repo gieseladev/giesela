@@ -13,14 +13,6 @@ log = logging.getLogger(__name__)
 
 
 class EditableEmbed:
-    """
-    Args:
-        channel: Channel to send the message in
-        message: Optional message to use
-    """
-    channel: TextChannel
-    _message: Optional[Message]
-
     def __init__(self, channel: TextChannel, message: Message = None):
         self.channel = channel
 
@@ -169,14 +161,8 @@ class LoadingBar(EditableEmbed):
 
 
 class UpdatingMessage(EditableEmbed):
-    """
-    Keyword Args:
-        callback: Callable to call for a new Embed
-    """
-    callback: Optional[Callable[..., Union[Embed, Awaitable[Embed]]]]
-
-    def __init__(self, channel: TextChannel, **kwargs):
-        self.callback = kwargs.pop("callback", None)
+    def __init__(self, channel: TextChannel, *, callback: Callable[[], Union[Embed, Awaitable[Embed]]] = None, **kwargs):
+        self.callback = callback
         super().__init__(channel, **kwargs)
 
     async def get_embed(self) -> Embed:
@@ -196,18 +182,12 @@ class UpdatingMessage(EditableEmbed):
 
 
 class IntervalUpdatingMessage(UpdatingMessage, Startable, Stoppable):
-    """
-    Keyword Args:
-        interval: Amount of seconds to wait between update
-    """
-    interval: int
-
     _runner: Optional[asyncio.Task]
-    _runner_ready: asyncio.Event
 
-    def __init__(self, channel: TextChannel, **kwargs):
-        self.interval = kwargs.pop("interval", 5)
+    def __init__(self, channel: TextChannel, *, interval: float = 5, **kwargs):
         super().__init__(channel, **kwargs)
+
+        self.interval = interval
 
         self._runner = None
         self._runner_ready = asyncio.Event()

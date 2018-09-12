@@ -1,7 +1,6 @@
 import abc
 import asyncio
 import enum
-import itertools
 import logging
 import rapidjson
 from typing import Dict, Iterator, Optional, TYPE_CHECKING, Union
@@ -154,6 +153,8 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
     async def disconnect(self):
         if not self.is_connected:
             return
+
+        # TODO stop, store progress and current entry somehow any continue on connect
         await self.stop()
 
         await self.manager.disconnect_player(self.guild_id)
@@ -163,7 +164,6 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
     async def set_volume(self, value: float):
         old_volume = self._volume
         value = max(min(value, 1000), 0)
-        # TODO the default volume isn't set
         await self.node.send_volume(self.guild_id, value)
         self._volume = value
         self.emit("volume_change", player=self, old_volume=old_volume, new_volume=value)
@@ -206,7 +206,9 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
     def playback_finished(self, play_next: bool = True, skipped: bool = False):
         entry = self.current_entry
+
         if entry:
+            log.debug(f"finished playing {entry}")
             self.queue.push_history(entry)
 
         if not skipped:
@@ -291,7 +293,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         self.playback_finished(play_next, skipped)
 
     async def dump_to_redis(self, redis: Redis):
-        key = f"{self.config.app.redis.databases.queue}:{self.guild_id}:current_entry"
+        key = f"{self.config.app.redis.namespaces.queue}:{self.guild_id}:current_entry"
         if self._current_entry:
             entry_data = self._current_entry.to_dict()
             entry_data["progress"] = self.progress
@@ -306,7 +308,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         await self.queue.dump_to_redis(redis)
 
     async def load_from_redis(self, redis: Redis):
-        key = f"{self.config.app.redis.databases.queue}:{self.guild_id}:current_entry"
+        key = f"{self.config.app.redis.namespaces.queue}:{self.guild_id}:current_entry"
         raw_entry = await redis.get(key)
 
         if raw_entry:
@@ -398,31 +400,35 @@ class PlayerManager(LavalinkNodeBalancer):
         coros = []
         players = []
         for guild_id, player in self.players.items():
-            if player.voice_channel_id:
-                players.append((guild_id, player.voice_channel_id))
-                coros.append(player.dump_to_redis(redis))
+            # This handles "None"
+            voice_channel_id = rapidjson.dumps(player.voice_channel_id)
+            players.extend((guild_id, voice_channel_id))
+            coros.append(player.dump_to_redis(redis))
+
+        key = f"{self.bot.config.app.redis.namespaces.queue}:players"
+        await redis.delete(key)
+
+        if not coros:
+            return
 
         log.debug(f"writing {len(coros)} player(s) to redis")
 
-        key = f"{self.bot.config.app.redis.databases.queue}:players"
-        await redis.delete(key)
-
         await asyncio.gather(
-            redis.hmset(key, *itertools.chain.from_iterable(players)),
+            redis.hmset(key, *players),
             *coros,
             loop=self.loop
         )
 
     async def load_from_redis(self):
         redis = self.bot.config.redis
-        key = f"{self.bot.config.app.redis.databases.queue}:players"
+        key = f"{self.bot.config.app.redis.namespaces.queue}:players"
         guilds = await redis.hgetall(key)
 
         coros = []
 
         for guild_id, voice_channel_id in guilds.items():
             guild_id = int(guild_id)
-            voice_channel_id = int(voice_channel_id)
+            voice_channel_id = rapidjson.loads(voice_channel_id)
 
             player = self.get_player(guild_id, voice_channel_id)
             coros.append(player.load_from_redis(redis))

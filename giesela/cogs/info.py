@@ -42,9 +42,9 @@ class Info:
     async def version(self, ctx: Context):
         """Some more information about the current version and what's to come."""
         v_code, v_name = BOTVERSION.split("_", 1)
-        desc = f"Current Version is `{v_code}`"
+        desc = f"Giesela v`{v_code}` (**{v_name}**)"
 
-        em = Embed(title="Version \"{}\"".format(v_name.replace("_", " ").title()), description=desc, colour=0x67BE2E)
+        em = Embed(title=f"Version", description=desc, colour=0x67BE2E)
 
         await ctx.send(embed=em)
 

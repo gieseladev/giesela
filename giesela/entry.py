@@ -363,7 +363,7 @@ class RadioEntry(BaseEntry, PlayableEntry, HasChapters):
     def station_manager(self) -> RadioStationManager:
         wrapper = getattr(self, "wrapper")
         queue = wrapper.highest_wrapper.get("queue")
-        return queue.player.bot.cogs["Radio"].station_manager
+        return queue.bot.station_manager
 
     @property
     def station(self) -> RadioStation:
@@ -593,7 +593,7 @@ class QueueEntry(EntryWrapper):
 
     @property
     def requester(self) -> User:
-        return self.queue.player.bot.get_user(self.requester_id)
+        return self.queue.bot.get_user(self.requester_id)
 
     def to_dict(self):
         data = super().to_dict()

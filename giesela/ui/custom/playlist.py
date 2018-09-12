@@ -80,12 +80,12 @@ class _PlaylistEmbed(VerticalTextViewer, metaclass=abc.ABCMeta):
 
 
 class PlaylistViewer(_PlaylistEmbed):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, channel: TextChannel, **kwargs):
         playlist = kwargs["playlist"]
         embed = create_basic_embed(playlist)
         embed.add_field(name="Length", value=f"{len(playlist)} entries")
         embed.add_field(name="Duration", value=utils.format_time(playlist.total_duration))
-        super().__init__(*args, embed_frame=embed, **kwargs)
+        super().__init__(channel, embed_frame=embed, **kwargs)
 
     @emoji_handler("🎵", pos=999)
     async def play_playlist(self, *_):
@@ -101,8 +101,8 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
     _highlighted_line: Optional[int]
     _processing: Optional[Tuple[str, str]]
 
-    def __init__(self, channel: TextChannel, user: User = None, **kwargs):
-        super().__init__(channel, user, **kwargs)
+    def __init__(self, channel: TextChannel, **kwargs):
+        super().__init__(channel, **kwargs)
         self.extractor = self.player_cog.extractor
         self.playlist_editor = self.playlist.edit()
 

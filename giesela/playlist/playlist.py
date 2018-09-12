@@ -70,6 +70,9 @@ class Playlist:
     def __str__(self) -> str:
         return f"Playlist \"{self.name}\""
 
+    def __bool__(self) -> bool:
+        return True
+
     def __len__(self) -> int:
         return len(self.entries)
 

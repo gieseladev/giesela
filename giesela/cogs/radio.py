@@ -30,14 +30,14 @@ class Radio:
     bot: Giesela
     station_manager: RadioStationManager
 
-    player_cog: Player
+    get_player: Player.get_player
 
     def __init__(self, bot: Giesela):
         self.bot = bot
         self.station_manager = RadioStationManager.load(bot, bot.config.app.files.radio_stations)
-        self.player_cog = bot.cogs["Player"]
+        self.bot.store_reference("radio_station_manager", self.station_manager)
 
-        self.get_player = self.player_cog.get_player
+        self.get_player = self.bot.get_player
 
     def find_station(self, station: str) -> RadioStation:
         _station = self.station_manager.find_station(station)
@@ -60,7 +60,7 @@ class Radio:
                 em.set_footer(text=song_data.album or "Unknown Album", icon_url=song_data.cover or Embed.Empty)
             return em
 
-        item_picker = ItemPicker(ctx.channel, user=ctx.author, embed_callback=get_station)
+        item_picker = ItemPicker(ctx.channel, bot=self.bot, user=ctx.author, embed_callback=get_station)
         result = await item_picker.choose()
 
         if result is not None:

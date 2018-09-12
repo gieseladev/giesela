@@ -32,7 +32,7 @@ script:
   "mongodb.uri"="mongodb://localhost:27017" \
   "lavalink.nodes.1.password"="Giesela" \
   "lavalink.nodes.1.address"="localhost:2333" \
-  python -m pytest
+  python -m pytest -v
 
 before_deploy:
 - echo building docker image...

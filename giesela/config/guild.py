@@ -6,13 +6,13 @@ from .abstract import ConfigObject
 class Commands(ConfigObject):
     prefix: str = "!"
     menu_prefix: str = ""
-    message_decay: float = 30
+    message_decay: Optional[float] = 30
 
 
 class _AsyncCommands:
     prefix: Awaitable[str]
     menu_prefix: Awaitable[str]
-    message_decay: Awaitable[float]
+    message_decay: Awaitable[Optional[float]]
 
 
 class Player(ConfigObject):

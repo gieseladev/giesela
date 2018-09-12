@@ -10,7 +10,7 @@ from discord import Attachment, Colour, Embed, File, User
 from discord.ext import commands
 from discord.ext.commands import BadArgument, Context, Converter, view as string_view
 
-from giesela import GPL_VERSION, Giesela, LoadedPlaylistEntry, Playlist, PlaylistManager, utils
+from giesela import Extractor, GPL_VERSION, Giesela, LoadedPlaylistEntry, Playlist, PlaylistManager, utils
 from giesela.lib import help_formatter
 from giesela.playlist import compat as pl_compat
 from giesela.ui import EmbedPaginator, EmbedViewer, ItemPicker, PromptYesNo, VerticalTextViewer
@@ -74,14 +74,17 @@ class UnquotedStr(str, Converter):
 class PlaylistCog:
     playlist_manager: PlaylistManager
 
-    player_cog: Player
+    get_player: Player.get_player
+    extractor: Extractor
 
     def __init__(self, bot: Giesela):
         self.bot = bot
         self.playlist_manager = PlaylistManager.load(self.bot, self.bot.config.app.files.playlists)
 
-        self.player_cog = bot.cogs["Player"]
-        self.extractor = self.player_cog.extractor
+        self.bot.store_reference("playlist_manager", self.playlist_manager)
+
+        self.get_player = self.bot.get_player
+        self.extractor = self.bot.extractor
 
     def find_playlist(self, playlist: str) -> Playlist:
         _playlist = self.playlist_manager.find_playlist(playlist)
@@ -90,16 +93,16 @@ class PlaylistCog:
         return _playlist
 
     async def play_playlist(self, ctx: Context, playlist: Playlist):
-        player = await self.player_cog.get_player(ctx)
+        player = await self.get_player(ctx)
         await playlist.play(player.queue, requester=ctx.author)
         await ctx.send("Loaded playlist", embed=playlist_embed(playlist))
 
     async def _playlist_builder(self, ctx: Context, playlist: Playlist):
-        builder = PlaylistBuilder(ctx.channel, ctx.author, bot=self.bot, playlist=playlist)
+        builder = PlaylistBuilder(ctx.channel, user=ctx.author, bot=self.bot, playlist=playlist)
         changelog = await builder.display()
         if changelog:
             frame = Embed(title=f"Saved changes to {playlist.name}", colour=Colour.green())
-            viewer = VerticalTextViewer(ctx.channel, content=changelog, embed_frame=frame)
+            viewer = VerticalTextViewer(ctx.channel, bot=self.bot, content=changelog, embed_frame=frame)
             await viewer.display()
         else:
             await ctx.message.delete()
@@ -248,7 +251,7 @@ class PlaylistCog:
             em.set_image(url=_cover)
             return em
 
-        picker = ItemPicker(ctx.channel, user=ctx.author, embed_callback=get_cover_page)
+        picker = ItemPicker(ctx.channel, bot=self.bot, user=ctx.author, embed_callback=get_cover_page)
 
         try:
             index = await picker.choose()
@@ -355,7 +358,7 @@ class PlaylistCog:
                                                f"{description}")
 
         # MAYBE use special viewer with play (and other) features
-        viewer = EmbedViewer(ctx.channel, user=ctx.author, embeds=paginator)
+        viewer = EmbedViewer(ctx.channel, bot=self.bot, user=ctx.author, embeds=paginator)
         await viewer.display()
         await ctx.message.delete()
 
@@ -395,7 +398,7 @@ class PlaylistCog:
         if not recovery:
             raise commands.CommandError("Giesela can't recover this playlist")
 
-        recovery_ui = PlaylistRecoveryUI(ctx.channel, ctx.author, bot=ctx.bot, extractor=self.extractor, recovery=recovery)
+        recovery_ui = PlaylistRecoveryUI(ctx.channel, user=ctx.author, bot=ctx.bot, extractor=self.extractor, recovery=recovery)
         result = await recovery_ui.display()
 
         if not result:
@@ -455,7 +458,7 @@ class PlaylistCog:
         playlist = self.find_playlist(playlist)
         await ensure_user_can_edit_playlist(playlist, ctx)
 
-        player = await self.player_cog.get_player(ctx)
+        player = await self.get_player(ctx)
         player_entry = player.current_entry
         if not player_entry:
             raise commands.CommandError("There's nothing playing right now")
@@ -483,7 +486,7 @@ class PlaylistCog:
     @commands.command("removefromplaylist", aliases=["quickremove", "quickrm", "plremove", "plrm", "pl-"])
     async def playlist_quickremove(self, ctx: Context, *, playlist: UnquotedStr = None):
         """Remove the current entry from a playlist."""
-        player = await self.player_cog.get_player(ctx)
+        player = await self.get_player(ctx)
         player_entry = player.current_entry
         if not player_entry:
             raise commands.CommandError("There's nothing playing right now")
