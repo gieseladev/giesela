@@ -98,7 +98,7 @@ class PlaylistCog:
         await ctx.send("Loaded playlist", embed=playlist_embed(playlist))
 
     async def _playlist_builder(self, ctx: Context, playlist: Playlist):
-        builder = PlaylistBuilder(ctx.channel, ctx.author, bot=self.bot, playlist=playlist)
+        builder = PlaylistBuilder(ctx.channel, user=ctx.author, bot=self.bot, playlist=playlist)
         changelog = await builder.display()
         if changelog:
             frame = Embed(title=f"Saved changes to {playlist.name}", colour=Colour.green())
@@ -398,7 +398,7 @@ class PlaylistCog:
         if not recovery:
             raise commands.CommandError("Giesela can't recover this playlist")
 
-        recovery_ui = PlaylistRecoveryUI(ctx.channel, ctx.author, bot=ctx.bot, extractor=self.extractor, recovery=recovery)
+        recovery_ui = PlaylistRecoveryUI(ctx.channel, user=ctx.author, bot=ctx.bot, extractor=self.extractor, recovery=recovery)
         result = await recovery_ui.display()
 
         if not result:

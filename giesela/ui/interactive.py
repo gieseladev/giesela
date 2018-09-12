@@ -138,6 +138,10 @@ class InteractableEmbed(HasListener, HasBot, EditableEmbed, ReactionHandler, Sta
             await self.message.remove_reaction(emoji, user)
 
     def reaction_check(self, payload: RawReactionActionEvent) -> bool:
+        if not self.message:
+            # we're not ready for that shit yet
+            return False
+
         if self.message.id != payload.message_id:
             return False
         if payload.user_id == self.bot.user.id:
