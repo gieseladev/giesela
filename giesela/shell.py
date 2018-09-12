@@ -407,7 +407,8 @@ class GieselaShell:
         except ShellException as e:
             error = e
         except BaseException as e:
-            log.exception("Something unexpected happened")
+            # TODO don't even log these...
+            log.exception("Something unexpected happened", extra=dict(report=False))
             error = ShellException("An unhandled error occurred", original=e)
 
         line = ShellLine(self.interpreter, code, result, error)
