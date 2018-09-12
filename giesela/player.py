@@ -398,9 +398,10 @@ class PlayerManager(LavalinkNodeBalancer):
         coros = []
         players = []
         for guild_id, player in self.players.items():
-            if player.voice_channel_id:
-                players.extend((guild_id, player.voice_channel_id))
-                coros.append(player.dump_to_redis(redis))
+            # This handles "None"
+            voice_channel_id = rapidjson.dumps(player.voice_channel_id)
+            players.extend((guild_id, voice_channel_id))
+            coros.append(player.dump_to_redis(redis))
 
         key = f"{self.bot.config.app.redis.namespaces.queue}:players"
         await redis.delete(key)
@@ -425,7 +426,7 @@ class PlayerManager(LavalinkNodeBalancer):
 
         for guild_id, voice_channel_id in guilds.items():
             guild_id = int(guild_id)
-            voice_channel_id = int(voice_channel_id)
+            voice_channel_id = rapidjson.loads(voice_channel_id)
 
             player = self.get_player(guild_id, voice_channel_id)
             coros.append(player.load_from_redis(redis))
