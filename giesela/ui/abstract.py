@@ -4,7 +4,9 @@ import logging
 from asyncio import CancelledError
 from typing import Any, Callable, Dict
 
-from discord import Message, Reaction, User
+from discord import Client, Message, User
+
+from .utils import EmojiType
 
 log = logging.getLogger(__name__)
 
@@ -23,9 +25,16 @@ class Startable(metaclass=abc.ABCMeta):
         pass
 
 
+class HasBot(metaclass=abc.ABCMeta):
+    def __init__(self, *args, bot: Client, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.bot = bot
+
+
 class ReactionHandler(metaclass=abc.ABCMeta):
     @abc.abstractmethod
-    async def on_reaction(self, reaction: Reaction, user: User):
+    async def on_reaction(self, emojj: EmojiType, user: User):
         pass
 
 

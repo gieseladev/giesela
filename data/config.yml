@@ -11,6 +11,7 @@ redis:
   namespaces:
     config: "config"
     queue: "queue"
+    persist: "persist"
 
 mongodb:
   uri: "" # REQUIRED

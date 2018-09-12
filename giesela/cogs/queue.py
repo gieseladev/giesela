@@ -77,7 +77,7 @@ class EnqueueCog(QueueBase):
 
         async with ctx.typing():
             results = await self.extractor.search_entries(query)
-        searcher = EntrySearchUI(ctx.channel, player, results, user=ctx.author, bot=self.bot)
+        searcher = EntrySearchUI(ctx.channel, player=player, results=results, user=ctx.author, bot=self.bot)
 
         entry = await searcher.choose()
         if entry:
@@ -287,7 +287,7 @@ class DisplayCog(QueueBase):
             }
         }
 
-        viewer = VerticalTextViewer(ctx.channel, user=ctx.author, content=lines, embed_frame=frame)
+        viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=lines, embed_frame=frame)
         await viewer.display()
         await ctx.message.delete()
 
@@ -318,7 +318,7 @@ class DisplayCog(QueueBase):
             }
         }
 
-        viewer = VerticalTextViewer(ctx.channel, user=ctx.author, content=lines, embed_frame=frame)
+        viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=lines, embed_frame=frame)
         await viewer.display()
         await ctx.message.delete()
 

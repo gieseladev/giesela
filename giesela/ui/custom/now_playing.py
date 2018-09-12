@@ -112,7 +112,7 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
                 em.add_field(name="Total Progress", value=get_description(self.player.progress, entry.duration))
 
         next_entry = self.player.queue.peek()
-        if next_entry and self.showing_detailed:
+        if next_entry:
             em.add_field(name="Up Next", value=str(next_entry.entry), inline=False)
 
         return em
@@ -129,9 +129,6 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
 
     async def on_create_message(self, msg: Message):
         await self.add_reactions(msg)
-
-    async def start(self):
-        await super().start()
 
     @emoji_handler("⏮", pos=1)
     async def prev_entry(self, *_):

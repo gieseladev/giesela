@@ -2,14 +2,14 @@ import asyncio
 import copy
 import logging
 import operator
-from typing import Iterable, List, Optional, Tuple, Type
+import rapidjson
+from typing import Any, Iterable, List, Optional, Tuple, Type
 
 import aiohttp
 from discord import Colour, Embed, Message
 from discord.ext.commands import AutoShardedBot, Command, CommandError, CommandInvokeError, CommandNotFound, Context
 
 from giesela.lib.web_author import WebAuthor
-from giesela.ui import events
 from . import cogs, constants, signals, utils
 from .config import Config
 
@@ -67,6 +67,16 @@ class Giesela(AutoShardedBot):
         if key in self._storage and not override:
             raise KeyError(f"{key} is already in storage!")
         self._storage[key] = value
+
+    async def persist(self, name: str, data: Any):
+        key = f"{self.config.app.redis.namespaces.persist}:{name}"
+        await self.config.redis.set(key, rapidjson.dumps(data))
+
+    async def restore(self, name: str) -> Optional[Any]:
+        key = f"{self.config.app.redis.namespaces.persist}:{name}"
+        value = await self.config.redis.get(key)
+        if value is not None:
+            return rapidjson.loads(value)
 
     async def close(self):
         if self.is_closed():
@@ -215,14 +225,6 @@ class Giesela(AutoShardedBot):
 
     async def on_error(self, event: str, *args, **kwargs):
         log.exception(f"Error in {event} ({args}, {kwargs})")
-
-    @classmethod
-    async def on_reaction_remove(cls, reaction, user):
-        await events.handle_reaction(reaction, user)
-
-    @classmethod
-    async def on_reaction_add(cls, reaction, user):
-        await events.handle_reaction(reaction, user)
 
     async def blocking_dispatch(self, event: str, *args, **kwargs):
         log.debug(f"Dispatching event {event}")

@@ -7,12 +7,12 @@ import operator
 import textwrap
 from typing import Any, Awaitable, Callable, Dict, List, Optional, Tuple, TypeVar, Union
 
-from discord import Client, Embed, Message, Reaction, TextChannel, User
+from discord import Embed, Emoji, Message, RawReactionActionEvent, TextChannel, User
 from discord.ext.commands import Command, CommandError, CommandInvokeError, Context
 from discord.ext.commands.bot import BotBase
 
-from . import events, text
-from .abstract import HasListener, MessageHandler, ReactionHandler, Startable, Stoppable
+from . import text
+from .abstract import HasBot, HasListener, MessageHandler, ReactionHandler, Startable, Stoppable
 from .basic import EditableEmbed
 from .utils import EmbedLimits, EmojiType, MenuCommandGroup, format_embed
 
@@ -32,7 +32,7 @@ def emoji_handler(*reactions: EmojiType, pos: int = None):
     return decorator
 
 
-class InteractableEmbed(HasListener, EditableEmbed, ReactionHandler, Startable, Stoppable):
+class InteractableEmbed(HasListener, HasBot, EditableEmbed, ReactionHandler, Startable, Stoppable):
     user: Optional[User]
     handlers: Dict[EmojiType, EmojiHandlerType]
 
@@ -137,15 +137,36 @@ class InteractableEmbed(HasListener, EditableEmbed, ReactionHandler, Startable, 
         async for user in reaction.users():
             await self.message.remove_reaction(emoji, user)
 
+    def reaction_check(self, payload: RawReactionActionEvent) -> bool:
+        if self.message.id != payload.message_id:
+            return False
+        if payload.user_id == self.bot.user.id:
+            return False
+        if self.user and self.user.id != payload.user_id:
+            return False
+        if payload.emoji.is_unicode_emoji():
+            return payload.emoji.name in self.emojis
+        else:
+            return any(True for emoji in self.emojis if isinstance(emoji, Emoji) and emoji.id == payload.emoji.id)
+
     async def wait_for_reaction(self) -> Any:
         if not self.message:
             raise Exception("There's no message to listen to")
 
-        reaction, user = await events.wait_for_reaction_change(emoji=self.emojis, user=self.user, message=self.message)
+        (done, *_), *_ = await asyncio.wait((
+            self.bot.wait_for("raw_reaction_add", check=self.reaction_check),
+            self.bot.wait_for("raw_reaction_remove", check=self.reaction_check)),
+            return_when=asyncio.FIRST_COMPLETED)
+
+        payload: RawReactionActionEvent = done.result()
+
+        emoji = payload.emoji.name if payload.emoji.is_unicode_emoji() else self.bot.get_emoji(payload.emoji.id)
+        user = self.bot.get_user(payload.user_id)
+
         try:
-            return await self.on_reaction(reaction, user)
+            return await self.on_reaction(emoji, user)
         except Exception as e:
-            return await self.on_emoji_handler_error(e, reaction, user)
+            return await self.on_emoji_handler_error(e, emoji, user)
 
     @classmethod
     async def _try_run_coro(cls, coro):
@@ -158,9 +179,8 @@ class InteractableEmbed(HasListener, EditableEmbed, ReactionHandler, Startable, 
     def try_run(cls, coro):
         asyncio.ensure_future(cls._try_run_coro(coro))
 
-    async def on_reaction(self, reaction: Reaction, user: User) -> Any:
-        await super().on_reaction(reaction, user)
-        emoji = reaction.emoji
+    async def on_reaction(self, emoji: EmojiType, user: User) -> Any:
+        await super().on_reaction(emoji, user)
         self.try_run(self.on_any_emoji(emoji, user))
 
         handler = self.handlers.get(emoji)
@@ -178,28 +198,24 @@ class InteractableEmbed(HasListener, EditableEmbed, ReactionHandler, Startable, 
     async def on_unhandled_emoji(self, emoji: EmojiType, user: User):
         pass
 
-    async def on_emoji_handler_error(self, error: Exception, reaction: Reaction, user: User):
-        log.exception(f"Something went wrong while handling {reaction} by {user}", exc_info=error)
+    async def on_emoji_handler_error(self, error: Exception, emoji: EmojiType, user: User):
+        log.exception(f"Something went wrong while handling {emoji} by {user}", exc_info=error)
 
 
-class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, Stoppable):
-    """
-    Keyword Args:
-        bot: `discord.Client`. Bot to use for receiving messages.
-        delete_msgs: Optional `bool`. Whether to delete incoming messages.
-    """
-
-    bot: Client
+class MessageableEmbed(HasListener, HasBot, EditableEmbed, MessageHandler, Startable, Stoppable):
     user: Optional[User]
 
     _group: MenuCommandGroup
     error: Optional[str]
 
-    def __init__(self, channel: TextChannel, *, user: User = None, **kwargs):
-        self.bot = kwargs.pop("bot")
-        self.delete_msgs = kwargs.pop("delete_msgs", True)
-        self._group = MenuCommandGroup(self.bot)
+    def __init__(self, channel: TextChannel, *, user: User = None, delete_msgs: bool = True, **kwargs):
+        super().__init__(channel, **kwargs)
+
+        self.user = user
+        self.delete_msgs = delete_msgs
+
         self.error = None
+        self._group = MenuCommandGroup(self.bot)
 
         for name, member in inspect.getmembers(self):
             if isinstance(member, Command):
@@ -208,9 +224,6 @@ class MessageableEmbed(HasListener, EditableEmbed, MessageHandler, Startable, St
             elif name.startswith("on_") and member != self.on_message:
                 self._group.add_listener(member)
 
-        super().__init__(channel, **kwargs)
-
-        self.user = user
         self.create_listener("messages", listen_once=self.wait_for_message)
 
     @property

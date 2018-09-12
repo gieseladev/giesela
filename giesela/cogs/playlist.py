@@ -102,7 +102,7 @@ class PlaylistCog:
         changelog = await builder.display()
         if changelog:
             frame = Embed(title=f"Saved changes to {playlist.name}", colour=Colour.green())
-            viewer = VerticalTextViewer(ctx.channel, content=changelog, embed_frame=frame)
+            viewer = VerticalTextViewer(ctx.channel, bot=self.bot, content=changelog, embed_frame=frame)
             await viewer.display()
         else:
             await ctx.message.delete()
@@ -251,7 +251,7 @@ class PlaylistCog:
             em.set_image(url=_cover)
             return em
 
-        picker = ItemPicker(ctx.channel, user=ctx.author, embed_callback=get_cover_page)
+        picker = ItemPicker(ctx.channel, bot=self.bot, user=ctx.author, embed_callback=get_cover_page)
 
         try:
             index = await picker.choose()
@@ -358,7 +358,7 @@ class PlaylistCog:
                                                f"{description}")
 
         # MAYBE use special viewer with play (and other) features
-        viewer = EmbedViewer(ctx.channel, user=ctx.author, embeds=paginator)
+        viewer = EmbedViewer(ctx.channel, bot=self.bot, user=ctx.author, embeds=paginator)
         await viewer.display()
         await ctx.message.delete()
 

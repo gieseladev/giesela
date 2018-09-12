@@ -2,7 +2,7 @@ import asyncio
 import logging
 from typing import Dict, Optional, Union
 
-from discord import Game, Guild, Member, User, VoiceChannel, VoiceState
+from discord import Game, Guild, Member, Message, NotFound, TextChannel, User, VoiceChannel, VoiceState
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -82,7 +82,32 @@ class Player:
         self._disconnects = {}
 
     async def on_ready(self):
+        np_messages = await self.bot.restore("np_messages")
+        if np_messages:
+            log.info(f"restoring {len(np_messages)} np_message(s)")
+            for guild_id, (channel_id, message_id) in np_messages:
+                channel = self.bot.get_channel(channel_id)
+                if not channel:
+                    log.warning(f"Couldn't restore np_message for guild {guild_id}")
+                    continue
+
+                try:
+                    message = await channel.get_message(message_id)
+                except NotFound:
+                    log.warning(f"Couldn't find np_message for guild {guild_id}")
+                else:
+                    await self._create_np_message(channel, guild_id, message)
+
         await self.update_now_playing()
+
+    async def on_shutdown(self):
+        np_messages = []
+        for guild_id, embed in self.np_messages.items():
+            msg = embed.message
+            np_messages.append((guild_id, (msg.channel.id, msg.id)))
+
+        log.debug(f"saving {len(np_messages)} np message(s)")
+        await self.bot.persist("np_messages", np_messages)
 
     async def get_player(self, target: Union[Guild, Context, int], *,
                          create: bool = True, channel: VoiceChannel = None, member: Union[User, Member] = None) -> Optional[GieselaPlayer]:
@@ -235,18 +260,20 @@ class Player:
         user_joined = after.channel != before.channel
         await self.auto_pause(player, joined=user_joined)
 
-    @commands.command()
-    async def np(self, ctx: Context):
-        """Show the current entry."""
-        np_embed = self.np_messages.get(ctx.guild.id)
+    async def _create_np_message(self, channel: TextChannel, guild_id: int, message: Message = None):
+        np_embed = self.np_messages.get(guild_id)
         if np_embed:
             await np_embed.delete()
 
-        player = await self.get_player(ctx)
-        np_embed = NowPlayingEmbed(ctx.channel, player=player)
-        self.np_messages[ctx.guild.id] = np_embed
-
+        player = await self.get_player(guild_id)
+        np_embed = NowPlayingEmbed(channel, bot=self.bot, player=player, message=message)
+        self.np_messages[guild_id] = np_embed
         await np_embed.start()
+
+    @commands.command()
+    async def np(self, ctx: Context):
+        """Show the current entry."""
+        await self._create_np_message(ctx.channel, ctx.guild.id)
 
     @commands.command()
     async def summon(self, ctx: Context):
@@ -434,7 +461,7 @@ class Player:
                 "text": f"Lyrics from {lyrics.origin.source_name}"
             }
         }
-        viewer = VerticalTextViewer(ctx.channel, user=ctx.author, embed_frame=frame, content=lyrics.lyrics)
+        viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, embed_frame=frame, content=lyrics.lyrics)
         if _progress_guess:
             line = round(_progress_guess * viewer.total_lines)
             viewer.set_focus_line(line)

@@ -14,6 +14,7 @@ class Tokens(ConfigObject):
 class RedisNamespaces(ConfigObject):
     config: str = "config"
     queue: str = "queue"
+    persist: str = "persist"
 
 
 class Redis(ConfigObject):
