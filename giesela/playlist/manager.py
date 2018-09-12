@@ -67,6 +67,9 @@ class PlaylistManager:
 
         log.info(f"playlist manager ready ({len(self)} loaded)")
 
+    def __bool__(self) -> bool:
+        return True
+
     def __len__(self) -> int:
         return len(self._playlists)
 

@@ -153,6 +153,8 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
     async def disconnect(self):
         if not self.is_connected:
             return
+
+        # TODO stop, store progress and current entry somehow any continue on connect
         await self.stop()
 
         await self.manager.disconnect_player(self.guild_id)

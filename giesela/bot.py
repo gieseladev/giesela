@@ -58,7 +58,7 @@ class Giesela(AutoShardedBot):
 
     def __getattr__(self, item: str):
         stored = self._storage.get(item)
-        if stored:
+        if stored is not None:
             return stored
 
         raise AttributeError(f"{self} doesn't have attribute {item}")

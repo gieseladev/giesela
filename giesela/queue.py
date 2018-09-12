@@ -47,6 +47,9 @@ class EntryQueue(EventEmitter):
     def __iter__(self) -> Iterator[QueueEntry]:
         return iter(self.entries)
 
+    def __bool__(self) -> bool:
+        return True
+
     def __len__(self) -> int:
         return len(self.entries)
 
