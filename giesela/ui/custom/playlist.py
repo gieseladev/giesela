@@ -9,8 +9,9 @@ from discord import Colour, Embed, Guild, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import EditPlaylistProxy, Giesela, Playlist, PlaylistEntry, utils
+from giesela import EditPlaylistProxy, Playlist, PlaylistEntry, utils
 from .entry_editor import EntryEditor
+from ..abstract import HasBot
 from ..help import AutoHelpEmbed
 from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
 
@@ -31,28 +32,15 @@ def create_basic_embed(playlist: Playlist) -> Embed:
     return embed
 
 
-class _PlaylistEmbed(VerticalTextViewer, metaclass=abc.ABCMeta):
-    """
-    Keyword Args:
-        bot: `Giesela`.
-        playlist: `Playlist`.
-    """
-    PASS_BOT: bool = False
-
-    bot: Giesela
+class _PlaylistEmbed(VerticalTextViewer, HasBot, metaclass=abc.ABCMeta):
     player_cog: "Player"
-    playlist: Playlist
 
-    def __init__(self, channel: TextChannel, **kwargs):
-        self.bot = kwargs.pop("bot")
-        self.playlist = kwargs.pop("playlist")
+    def __init__(self, channel: TextChannel, *, playlist: Playlist, **kwargs):
         embed_frame = kwargs.pop("embed_frame", False) or create_basic_embed(self.playlist)
-
-        if self.PASS_BOT:
-            kwargs["bot"] = self.bot
 
         super().__init__(channel, embed_frame=embed_frame, **kwargs)
 
+        self.playlist = playlist
         self.player_cog = self.bot.cogs["Player"]
 
     @property
@@ -94,8 +82,6 @@ class PlaylistViewer(_PlaylistEmbed):
 
 
 class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
-    PASS_BOT = True
-
     playlist_editor: EditPlaylistProxy
 
     _highlighted_line: Optional[int]

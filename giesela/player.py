@@ -12,8 +12,8 @@ from websockets import ConnectionClosed
 
 from .entry import PlayerEntry, QueueEntry, SpecificChapterData
 from .extractor import Extractor
-from .lib import EventEmitter, has_events
-from .lib.lavalink import LavalinkEvent, LavalinkNode, LavalinkNodeBalancer, LavalinkPlayerState, TrackEndReason, TrackEventDataType
+from .lib import EventEmitter, LavalinkNode, LavalinkNodeBalancer, has_events
+from .lib.lavalink import LavalinkEvent, LavalinkPlayerState, TrackEndReason, TrackEventDataType
 from .queue import EntryQueue
 
 if TYPE_CHECKING:
@@ -139,8 +139,6 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         else:
             channel = self.voice_channel_id
 
-        # FIXME when already connected or something the player doesn't play...
-
         if not channel:
             raise ValueError("No voice channel specified")
 
@@ -154,7 +152,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         if not self.is_connected:
             return
 
-        # TODO stop, store progress and current entry somehow any continue on connect
+        # TODO stop, store progress and current entry somehow and continue on connect
         await self.stop()
 
         await self.manager.disconnect_player(self.guild_id)

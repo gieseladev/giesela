@@ -13,7 +13,7 @@ from giesela.playlist import Playlist, PlaylistRecovery
 from .. import text
 from ..help import AutoHelpEmbed
 from ..interactive import Abortable, InteractableEmbed, MessageableEmbed, emoji_handler
-from ..utils import CustomParamsCommand
+from ..ui_utils import CustomParamsCommand
 
 log = logging.getLogger(__name__)
 

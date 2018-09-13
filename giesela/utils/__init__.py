@@ -10,7 +10,7 @@ import requests
 from .object_chain import *
 from .scraper import *
 from .structures import *
-from .url import *
+from .url_utils import *
 
 if TYPE_CHECKING:
     from giesela import BaseEntry

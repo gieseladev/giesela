@@ -2,8 +2,8 @@ from typing import Iterable, List, Optional
 
 from discord import Embed
 
-from . import utils
-from .utils import EmbedLimits
+from . import ui_utils
+from .ui_utils import EmbedLimits
 
 
 class EmbedPaginator:
@@ -66,7 +66,7 @@ class EmbedPaginator:
             template = self._special_template_map.get(number)
 
         template = template or self.template
-        embed = utils.copy_embed(template)
+        embed = ui_utils.copy_embed(template)
         self._embeds.append(embed)
         return embed
 
@@ -80,7 +80,7 @@ class EmbedPaginator:
         if len(value) > EmbedLimits.FIELD_VALUE_LIMIT:
             raise ValueError(f"Field value mustn't be longer than {EmbedLimits.FIELD_VALUE_LIMIT} characters")
 
-        count = utils.count_embed_chars(embed) + len(name) + len(value)
+        count = ui_utils.count_embed_chars(embed) + len(name) + len(value)
 
         if len(embed.fields) >= self.fields_per_page or count > EmbedLimits.CHAR_LIMIT:
             embed = self._add_embed()

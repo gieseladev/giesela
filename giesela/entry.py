@@ -8,7 +8,7 @@ from discord import User
 
 from .lib import lavalink
 from .radio import RadioSongData, RadioStation, RadioStationManager
-from .utils import url
+from .utils import url_utils
 
 if TYPE_CHECKING:
     from .queue import EntryQueue
@@ -135,7 +135,7 @@ class PlayableEntry(Reducible, OrderByAttribute, metaclass=_RegisterEntryMeta):
 
     @property
     def url(self) -> Optional[str]:
-        if url.is_url(self.uri):
+        if url_utils.is_url(self.uri):
             return self.uri
 
     @property
@@ -363,7 +363,7 @@ class RadioEntry(BaseEntry, PlayableEntry, HasChapters):
     def station_manager(self) -> RadioStationManager:
         wrapper = getattr(self, "wrapper")
         queue = wrapper.highest_wrapper.get("queue")
-        return queue.bot.station_manager
+        return queue.bot.radio_station_manager
 
     @property
     def station(self) -> RadioStation:
@@ -478,7 +478,8 @@ class EntryWrapper(Reducible, metaclass=_RegisterEntryMeta):
         if isinstance(self, wrapper):
             raise ValueError("Can't remove top-level wrapper")
         elif isinstance(self.wrapped, wrapper):
-            self._set_entry(self.wrapped.entry)
+            self.wrapped.wrapper = None
+            self._set_entry(self.wrapped.wrapped)
         elif isinstance(self.wrapped, EntryWrapper):
             self.wrapped.remove_wrapper(wrapper)
         else:

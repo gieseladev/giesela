@@ -16,7 +16,7 @@ class GieselaHelpFormatter(HelpFormatter):
     def get_max_width(cls, _commands: Iterable[Tuple[str, Command]]) -> int:
         if not _commands:
             return 0
-        
+
         return max(len(name) for name, command in _commands)
 
     def get_commands_text(self, _commands: Iterable[Tuple[str, Command]]) -> str:
