@@ -1,7 +1,9 @@
 import random
 import time
+from contextlib import suppress
 from datetime import datetime
 
+from discord import Forbidden
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -88,7 +90,8 @@ class EnqueueCog(QueueBase):
             player.queue.add_entry(entry, ctx.author)
             await ctx.send(f"Enqueued **{entry.title}**")
         else:
-            await ctx.message.delete()
+            with suppress(Forbidden):
+                await ctx.message.delete()
 
 
 class ManipulateCog(QueueBase):
@@ -308,7 +311,9 @@ class DisplayCog(QueueBase):
         # TODO use custom viewers for these which have some fancy buttons
         viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=lines, embed_frame=frame)
         await viewer.display()
-        await ctx.message.delete()
+
+        with suppress(Forbidden):
+            await ctx.message.delete()
 
     @commands.guild_only()
     @commands.command()
@@ -340,7 +345,9 @@ class DisplayCog(QueueBase):
 
         viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=lines, embed_frame=frame)
         await viewer.display()
-        await ctx.message.delete()
+
+        with suppress(Forbidden):
+            await ctx.message.delete()
 
 
 class Queue(EnqueueCog, ManipulateCog, DisplayCog):

@@ -1,7 +1,8 @@
 import random
+from contextlib import suppress
 from typing import Optional
 
-from discord import Embed
+from discord import Embed, Forbidden
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -81,7 +82,8 @@ class Radio:
         else:
             station = await self.pick_station(ctx)
             if not station:
-                await ctx.message.delete()
+                with suppress(Forbidden):
+                    await ctx.message.delete()
                 return
 
         await play_station(ctx, player, station)

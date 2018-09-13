@@ -3,10 +3,11 @@ import operator
 import random
 import rapidjson
 import textwrap
+from contextlib import suppress
 from io import BytesIO
 from typing import Dict, Optional
 
-from discord import Attachment, Colour, Embed, File, User
+from discord import Attachment, Colour, Embed, File, Forbidden, User
 from discord.ext import commands
 from discord.ext.commands import BadArgument, Context, Converter, view as string_view
 
@@ -105,7 +106,8 @@ class PlaylistCog:
             viewer = VerticalTextViewer(ctx.channel, bot=self.bot, content=changelog, embed_frame=frame)
             await viewer.display()
         else:
-            await ctx.message.delete()
+            with suppress(Forbidden):
+                await ctx.message.delete()
 
     async def import_playlist(self, data, author: User = None) -> Optional[Embed]:
         playlist = self.playlist_manager.import_from_gpl(data, author=author)
@@ -129,7 +131,9 @@ class PlaylistCog:
 
         viewer = PlaylistViewer(ctx.channel, user=ctx.author, bot=self.bot, playlist=playlist)
         await viewer.display()
-        await ctx.message.delete()
+
+        with suppress(Forbidden):
+            await ctx.message.delete()
 
     @commands.guild_only()
     @playlist.group("play", invoke_without_command=True, aliases=["load", "start", "listen"])
@@ -160,7 +164,8 @@ class PlaylistCog:
             prompt = PromptYesNo(ctx.channel, user=ctx.author, text=f"There's already a playlist with a similar name (\"{similar_playlist.name}\"). "
                                                                     f"Do you really want to create the playlist \"{name}\"")
             if not await prompt:
-                await ctx.message.delete()
+                with suppress(Forbidden):
+                    await ctx.message.delete()
                 return
 
         playlist = Playlist(name=name, author_id=ctx.author.id)
@@ -261,7 +266,8 @@ class PlaylistCog:
             raise commands.CommandError("Couldn't generate a cover...")
 
         if not index:
-            await ctx.message.delete()
+            with suppress(Forbidden):
+                await ctx.message.delete()
             return
 
         cover = covers[index]
@@ -362,7 +368,9 @@ class PlaylistCog:
         # MAYBE use special viewer with play (and other) features
         viewer = EmbedViewer(ctx.channel, bot=self.bot, user=ctx.author, embeds=paginator)
         await viewer.display()
-        await ctx.message.delete()
+
+        with suppress(Forbidden):
+            await ctx.message.delete()
 
     @playlist.group("import", invoke_without_command=True, aliases=["imp"])
     async def playlist_import(self, ctx: Context, author: User = None):
@@ -404,7 +412,8 @@ class PlaylistCog:
         result = await recovery_ui.display()
 
         if not result:
-            await ctx.message.delete()
+            with suppress(Forbidden):
+                await ctx.message.delete()
             return
 
         playlist = recovery_ui.build_playlist()
@@ -473,7 +482,8 @@ class PlaylistCog:
                                  text=f"\"{entry}\" might already be in this playlist (\"{similar_pl_entry.entry}\"), "
                                       f"are you sure you want to add it again?")
             if not await prompt:
-                await ctx.message.delete()
+                with suppress(Forbidden):
+                    await ctx.message.delete()
                 return
 
         playlist_entry = playlist.add_entry(entry, ctx.author)

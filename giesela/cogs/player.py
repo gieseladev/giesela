@@ -1,8 +1,9 @@
 import asyncio
 import logging
+from contextlib import suppress
 from typing import Dict, Optional, Union
 
-from discord import Game, Guild, Member, Message, NotFound, TextChannel, User, VoiceChannel, VoiceState
+from discord import Forbidden, Game, Guild, Member, Message, NotFound, TextChannel, User, VoiceChannel, VoiceState
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -426,7 +427,8 @@ class Player:
         new_entry = await editor.display()
 
         if not new_entry:
-            await ctx.message.delete()
+            with suppress(Forbidden):
+                await ctx.message.delete()
             return
 
         playlist_entry: PlaylistEntry = current_entry.get("playlist_entry", None)
@@ -484,7 +486,9 @@ class Player:
             line = round(_progress_guess * viewer.total_lines)
             viewer.set_focus_line(line)
         await viewer.display()
-        await ctx.message.delete()
+
+        with suppress(Forbidden):
+            await ctx.message.delete()
 
 
 def setup(bot: Giesela):
