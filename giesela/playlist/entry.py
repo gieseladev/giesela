@@ -96,6 +96,9 @@ class PlaylistEntry:
         uid = self._entry_id
         return f"{me} ({uid}) - {playlist}"
 
+    def __str__(self) -> str:
+        return str(self.entry)
+
     def __hash__(self) -> int:
         return hash(self._entry_id)
 

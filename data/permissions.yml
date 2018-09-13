@@ -1,0 +1,32 @@
+roles:
+  runtime:
+  - id: admin
+    name: "Admin"
+    permissions:
+      match: *
+
+  - id: op
+    name: "Operator"
+    permissions:
+    - admin.appearance
+    - playlist.all
+
+  guild:
+  - id: dj
+    name: "Music Master"
+    inherit_from: active
+    permissions:
+    - music
+
+  - id: active
+    inherit_from: passive
+    name: "Active Listener"
+    permissions:
+    - music.queue.manipulate.enqueue
+
+  - id: passive
+    name: "Passive Listener"
+    permissions:
+    - music.queue.inspect
+    - playlist.owned
+    - webiesela

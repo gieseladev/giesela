@@ -35,10 +35,8 @@ def create_basic_embed(playlist: Playlist) -> Embed:
 class _PlaylistEmbed(VerticalTextViewer, HasBot, metaclass=abc.ABCMeta):
     player_cog: "Player"
 
-    def __init__(self, channel: TextChannel, *, playlist: Playlist, **kwargs):
-        embed_frame = kwargs.pop("embed_frame", False) or create_basic_embed(self.playlist)
-
-        super().__init__(channel, embed_frame=embed_frame, **kwargs)
+    def __init__(self, channel: TextChannel, *, playlist: Playlist, embed_frame=None, **kwargs):
+        super().__init__(channel, embed_frame=embed_frame or create_basic_embed(playlist), **kwargs)
 
         self.playlist = playlist
         self.player_cog = self.bot.cogs["Player"]

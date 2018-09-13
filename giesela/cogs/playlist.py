@@ -455,7 +455,7 @@ class PlaylistCog:
         lines = []
         for i, entry in enumerate(entries):
             index = str(indices[i] + 1).rjust(pad_length, "0")
-            title = textwrap.shorten(entry.title, 50)
+            title = textwrap.shorten(str(entry), 50)
             line = f"• `{index}.` {title}"
             lines.append(line)
 

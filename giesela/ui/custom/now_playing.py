@@ -132,7 +132,8 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
 
     @emoji_handler("⏮", pos=1)
     async def prev_entry(self, *_):
-        self.player.queue.replay(0, revert=True)
+        # TODO player revert instead of queue!
+        self.player.queue.replay(0)
 
     @emoji_handler("⏪", pos=2)
     async def fast_rewind(self, *_):
