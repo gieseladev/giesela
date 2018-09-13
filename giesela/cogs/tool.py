@@ -9,6 +9,7 @@ class Tools:
     def __init__(self, bot: Bot):
         self.bot = bot
 
+    @commands.guild_only()
     @commands.command()
     async def moveus(self, ctx: Context, target: VoiceChannel):
         """Move everyone in your current channel to another one!"""

@@ -32,6 +32,7 @@ class Webiesela:
             log.debug("stopping Webiesela")
             WebieselaServer.server.close()
 
+    @commands.guild_only()
     @commands.command()
     async def register(self, ctx: Context, token: str):
         """Use this command in order to use Webiesela."""

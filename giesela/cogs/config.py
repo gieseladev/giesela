@@ -78,6 +78,7 @@ class Config:
     async def on_guild_remove(self, guild: Guild):
         await self.config.remove_guild(guild.id)
 
+    @commands.guild_only()
     @commands.group("config", invoke_without_command=True)
     async def config_command(self, ctx: Context, key: str = None):
         """Config stuff"""
@@ -91,6 +92,7 @@ class Config:
         await show_config(ctx, global_config, key, "Global Config")
 
     @commands.is_owner()
+    @commands.guild_only()
     @config_command.command("set")
     async def config_set(self, ctx: Context, key: str, *, value: str):
         """Set a config value"""
@@ -104,6 +106,7 @@ class Config:
         await set_config_value(ctx, self.config.runtime, key, value)
 
     @commands.is_owner()
+    @commands.guild_only()
     @config_command.command("reset")
     async def config_reset(self, ctx: Context, key: str):
         """Reset a config value"""

@@ -20,8 +20,8 @@ class AdminTools:
         if not self.aiosession:
             self.aiosession = aiohttp.ClientSession(loop=self.bot.loop)
 
-    @commands.command()
     @commands.is_owner()
+    @commands.command()
     async def execute(self, ctx: Context):
         """Execute a statement"""
         pre = len(ctx.prefix + ctx.command.qualified_name)
@@ -69,8 +69,8 @@ class AdminTools:
         if result:
             await ctx.send(result)
 
-    @commands.command()
     @commands.is_owner()
+    @commands.command()
     async def shell(self, ctx: Context, interpreter: str = "python"):
         """Open the GieselaShell™"""
         player = await self.bot.get_player(ctx)
@@ -82,30 +82,30 @@ class AdminTools:
 
         await shell.display()
 
-    @commands.command()
     @commands.is_owner()
+    @commands.command()
     async def shutdown(self, ctx: Context):
         """Shutdown"""
         await ctx.send(":wave:")
         raise TerminateSignal
 
-    @commands.command()
     @commands.is_owner()
+    @commands.command()
     async def restart(self, ctx: Context):
         """Restart"""
         await ctx.send(":wave:")
         raise RestartSignal
 
-    @commands.command()
     @commands.is_owner()
+    @commands.command()
     async def say(self, ctx: Context, msg: str):
         """Say something"""
 
         await ctx.message.delete()
         await ctx.send(msg)
 
-    @commands.command()
     @commands.is_owner()
+    @commands.command()
     async def setname(self, ctx: Context, name: str):
         """Set name..."""
 
@@ -117,8 +117,8 @@ class AdminTools:
         await ctx.send(":ok_hand:")
         return
 
-    @commands.command()
     @commands.is_owner()
+    @commands.command()
     async def setavatar(self, ctx: Context, url: str = None):
         """Set avatar"""
 

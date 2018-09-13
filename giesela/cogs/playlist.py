@@ -131,12 +131,14 @@ class PlaylistCog:
         await viewer.display()
         await ctx.message.delete()
 
+    @commands.guild_only()
     @playlist.group("play", invoke_without_command=True, aliases=["load", "start", "listen"])
     async def playlist_play(self, ctx: Context, *, playlist: UnquotedStr):
         """Play a playlist"""
         playlist = self.find_playlist(playlist)
         await self.play_playlist(ctx, playlist)
 
+    @commands.guild_only()
     @playlist_play.command("random")
     async def playlist_play_random(self, ctx: Context):
         """Play a random playlist"""

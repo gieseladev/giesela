@@ -229,7 +229,8 @@ class Player:
             entry = player.current_entry
         else:
             idle_game = await self.bot.config.runtime.misc.idle_game
-            game = Game(name=idle_game.format(active_players=len(active_players), guilds=len(self.bot.guilds), players=len(self.player_manager)))
+            game = Game(
+                name=idle_game.format(active_players=len(active_players), guilds=len(self.bot.guilds), players=len(self.player_manager.players)))
 
         if entry:
             prefix = "❚❚ " if is_paused else ""
@@ -268,11 +269,13 @@ class Player:
         self.np_messages[guild_id] = np_embed
         await np_embed.start()
 
+    @commands.guild_only()
     @commands.command()
     async def np(self, ctx: Context):
         """Show the current entry."""
         await self._create_np_message(ctx.channel, ctx.guild.id)
 
+    @commands.guild_only()
     @commands.command()
     async def summon(self, ctx: Context):
         """Call the bot to the summoner's voice channel."""
@@ -288,6 +291,7 @@ class Player:
         if not player.is_playing:
             await player.play()
 
+    @commands.guild_only()
     @commands.command()
     async def disconnect(self, ctx: Context):
         """Disconnect from the voice channel"""
@@ -295,6 +299,7 @@ class Player:
         if player:
             await player.disconnect()
 
+    @commands.guild_only()
     @commands.command()
     async def pause(self, ctx: Context):
         """Pause playback of the current song
@@ -310,6 +315,7 @@ class Player:
         else:
             raise commands.CommandError("Cannot pause what is not playing")
 
+    @commands.guild_only()
     @commands.command()
     async def resume(self, ctx: Context):
         """Resumes playback of the current song."""
@@ -320,6 +326,7 @@ class Player:
         else:
             raise commands.CommandError("Hard to unpause something that's not paused, amirite?")
 
+    @commands.guild_only()
     @commands.command()
     async def stop(self, ctx: Context):
         """Stops the player completely and removes all entries from the queue."""
@@ -328,6 +335,7 @@ class Player:
         await player.stop()
         player.queue.clear()
 
+    @commands.guild_only()
     @commands.command()
     async def volume(self, ctx: Context, volume: str = None):
         """Change volume.
@@ -372,12 +380,14 @@ class Player:
         await player.set_volume(volume / 100)
         await ctx.send(f"updated volume from {old_volume} to {volume}")
 
+    @commands.guild_only()
     @commands.command()
     async def seek(self, ctx: Context, timestamp: str):
         """Seek to the given timestamp formatted (minutes:seconds)"""
         player = await self.get_player(ctx)
         await _seek(player, timestamp)
 
+    @commands.guild_only()
     @commands.command(aliases=["fwd", "fw"])
     async def forward(self, ctx: Context, timestamp: str):
         """Fast-forward the current entry"""
@@ -389,6 +399,7 @@ class Player:
 
         await _seek(player, secs)
 
+    @commands.guild_only()
     @commands.command(aliases=["rwd", "rw"])
     async def rewind(self, ctx: Context, timestamp: str):
         """Rewind the current entry.
@@ -402,6 +413,7 @@ class Player:
 
         await _seek(player, secs)
 
+    @commands.guild_only()
     @commands.command("editentry", aliases=["editnp"])
     async def edit_entry(self, ctx: Context):
         """Edit the current entry"""
@@ -429,6 +441,7 @@ class Player:
             player.current_entry.change_entry(new_entry)
             await ctx.send(f"Saved changes to **{new_entry}**")
 
+    @commands.guild_only()
     @commands.command()
     async def lyrics(self, ctx: Context, *query: str):
         """Try to find lyrics for the current entry and display 'em"""

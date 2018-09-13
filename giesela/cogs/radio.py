@@ -66,6 +66,7 @@ class Radio:
         if result is not None:
             return stations[result % len(stations)]
 
+    @commands.guild_only()
     @commands.group(invoke_without_command=True)
     async def radio(self, ctx: Context, station: str = None):
         """Play a radio station.
@@ -85,6 +86,7 @@ class Radio:
 
         await play_station(ctx, player, station)
 
+    @commands.guild_only()
     @radio.command("random")
     async def radio_random(self, ctx: Context):
         """Play a random radio station."""
