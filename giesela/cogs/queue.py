@@ -251,7 +251,7 @@ class DisplayCog(QueueBase):
         time_until = utils.format_time(player.queue.time_until(index))
         em.add_field(name="Playing in", value=time_until)
 
-        # TODO make interactive with buttons like PROMOTE/
+        # TODO make interactive with buttons like PROMOTE/REMOVE
         # TODO history_entry_info?!?
 
         await ctx.send(embed=em)
