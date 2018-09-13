@@ -63,9 +63,9 @@ class CanSignalStop(metaclass=abc.ABCMeta):
 
 
 class Listener(CanSignalStop, metaclass=abc.ABCMeta):
-    _listener: asyncio.Task
+    _listener: asyncio.Future
     _result: Any
-    _listen_once: Callable[[], Any]
+    _listen_once: Callable[["Listener"], Any]
 
     def __init__(self, *args, **kwargs):
         self._listener = None
@@ -170,7 +170,7 @@ class HasListener(Startable, Stoppable):
         else:
             return [task.result() for task in done]
 
-    def wait_for_listener(self, listener: str = None, *, return_when=asyncio.FIRST_COMPLETED) -> asyncio.Task:
+    def wait_for_listener(self, listener: str = None, *, return_when=asyncio.FIRST_COMPLETED) -> asyncio.Future:
         if listener:
             return self._listeners[listener].listen()
         else:

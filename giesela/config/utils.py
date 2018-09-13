@@ -41,7 +41,7 @@ def flatten_data(data: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def unflatten_data(data: Dict[str, Any]) -> Dict[str, Any]:
-    final = {}
+    final: Dict[str, Any] = {}
 
     for key, value in data.items():
         if isinstance(value, list):

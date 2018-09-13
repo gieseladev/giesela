@@ -110,7 +110,7 @@ class FlattenProxy:
 
 
 class _RedisConfig(metaclass=abc.ABCMeta):
-    PROXY: abstract.ConfigObject
+    PROXY: Type[abstract.ConfigObject]
 
     __slots__ = ("_id", "_redis", "_prefix", "_mongodb")
 

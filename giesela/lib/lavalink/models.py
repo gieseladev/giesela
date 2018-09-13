@@ -129,6 +129,8 @@ class TrackInfo(NamedTuple):
         if self.position:
             return utils.from_milli(self.position)
 
+        return None
+
 
 class Track(NamedTuple):
     track: str
@@ -146,8 +148,8 @@ class Track(NamedTuple):
 
 class LoadTracksResult(NamedTuple):
     load_type: TrackLoadType
-    playlist_info: TrackPlaylistInfo = None
-    tracks: List[Track] = None
+    playlist_info: Optional[TrackPlaylistInfo]
+    tracks: Optional[List[Track]]
 
     def __len__(self) -> int:
         return len(self.tracks)
@@ -221,7 +223,7 @@ class LavalinkStats(NamedTuple):
     uptime: int
     memory: LavalinkMemoryStats
     cpu: LavalinkCPUStats
-    frame_stats: LavalinkFrameStats = None
+    frame_stats: Optional[LavalinkFrameStats]
 
     @property
     def uptime_seconds(self) -> float:

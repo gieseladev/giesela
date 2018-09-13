@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 AT = TypeVar("AT")
 
 
-async def safe_await(cb: Awaitable[AT]) -> AT:
+async def safe_await(cb: Awaitable[AT]) -> Optional[AT]:
     try:
         result = await cb
     except Exception:
@@ -23,8 +23,8 @@ def has_events(*events: str) -> Callable[[Type["EventEmitter"]], Type["EventEmit
         _events = list(events)
         for _cls in cls.__mro__:
             _events.extend(getattr(_cls, "_emitted_events", []))
-        _events = set(_events)
-        setattr(cls, "_emitted_events", _events)
+
+        setattr(cls, "_emitted_events", set(_events))
 
         return cls
 
@@ -41,7 +41,7 @@ class EventEmitter:
     def __init__(self, *, loop: asyncio.AbstractEventLoop = None):
         self._events = collections.defaultdict(list)
 
-        self.registered_events = tuple(getattr(self, "_emitted_events", ()))
+        self.registered_events = set(getattr(self, "_emitted_events", ()))
 
         self.loop = loop or asyncio.get_event_loop()
 

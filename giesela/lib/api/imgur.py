@@ -46,10 +46,10 @@ def _upload_playlist_cover(playlist_name: str, url: Union[str, BytesIO]) -> Opti
         else:
             resp = client.upload_from_url(url, config=config)
     except ImgurClientError:
-        return
+        return None
     except ImgurClientRateLimitError:
         print("[IMGUR] RATE LIMIT!")
-        return
+        return None
 
     return resp.get("link")
 

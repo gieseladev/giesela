@@ -192,7 +192,7 @@ def traverse_config(config: ConfigObject, key: Union[str, Sequence[str]]):
             target = getattr(target, _key)
         except AttributeError as e:
             parent = ".".join(key[:i])
-            raise TraverseError(*e.args, parent=parent, key=_key)
+            raise TraverseError(e.args[0], parent=parent, key=_key)
     return target
 
 
