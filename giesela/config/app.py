@@ -12,9 +12,10 @@ class Tokens(ConfigObject):
 
 
 class RedisNamespaces(ConfigObject):
-    config: str = "config"
-    queue: str = "queue"
-    persist: str = "persist"
+    config: str = Truthy("config")
+    permissions: str = Truthy("permissions")
+    queue: str = Truthy("queue")
+    persist: str = Truthy("persist")
 
 
 class Redis(ConfigObject):
@@ -26,6 +27,7 @@ class Redis(ConfigObject):
 class Mongodb(ConfigObject):
     uri: str = Truthy()
     database: str = "Giesela"
+    # TODO make collection names configurable!
 
 
 class LavalinkNodeRegion(enum.Enum):

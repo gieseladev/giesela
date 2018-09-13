@@ -2,16 +2,22 @@ roles:
   runtime:
   - id: admin
     name: "Admin"
+    auto_assign: owner
     permissions:
       match: *
 
-  - id: op
-    name: "Operator"
+  - id: mod
+    name: "Moderator"
     permissions:
     - admin.appearance
     - playlist.all
 
   guild:
+  - id: guild_owner
+    name: "Server Admin"
+    auto_assign: guild_owner
+
+
   - id: dj
     name: "Music Master"
     inherit_from: active
