@@ -12,8 +12,8 @@ from websockets import ConnectionClosed
 
 from .entry import PlayerEntry, QueueEntry, SpecificChapterData
 from .extractor import Extractor
-from .lib import EventEmitter, has_events
-from .lib.lavalink import LavalinkEvent, LavalinkNode, LavalinkNodeBalancer, LavalinkPlayerState, TrackEndReason, TrackEventDataType
+from .lib import EventEmitter, LavalinkNode, LavalinkNodeBalancer, has_events
+from .lib.lavalink import LavalinkEvent, LavalinkPlayerState, TrackEndReason, TrackEventDataType
 from .queue import EntryQueue
 
 if TYPE_CHECKING:

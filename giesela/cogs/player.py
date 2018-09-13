@@ -326,6 +326,7 @@ class Player:
     async def stop(self, ctx: Context):
         """Stops the player completely and removes all entries from the queue."""
         player = await self.get_player(ctx)
+        # TODO show prompt
         await player.stop()
         player.queue.clear()
 
@@ -416,6 +417,7 @@ class Player:
             await ctx.message.delete()
             return
 
+        # FIXME Absolutely don't just change the playlist entry unless the user is an editor of said playlist
         playlist_entry = player.current_entry.get("playlist_entry", None)
         if playlist_entry:
             playlist_entry.replace(new_entry, editor=ctx.author)

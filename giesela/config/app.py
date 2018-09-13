@@ -51,6 +51,10 @@ class Webiesela(ConfigObject):
     port: int = 30000
 
 
+class GiTils(ConfigObject):
+    url: str = Truthy("https://gitils.giesela.io")
+
+
 class Files(ConfigObject):
     data: str = "data"
 
@@ -78,6 +82,7 @@ class Application(ConfigObject):
     mongodb: Mongodb
     lavalink: Lavalink
     webiesela: Webiesela
+    gitils: GiTils
     files: Files
     misc: Misc
 

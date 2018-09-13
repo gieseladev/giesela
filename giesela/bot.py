@@ -12,6 +12,7 @@ from discord.ext.commands import AutoShardedBot, Command, CommandError, CommandI
 from giesela.lib.web_author import WebAuthor
 from . import cogs, constants, signals, utils
 from .config import Config
+from .lib import GiTilsClient
 
 log = logging.getLogger(__name__)
 
@@ -36,6 +37,7 @@ class GieselaContext(Context):
 class Giesela(AutoShardedBot):
     config: Config
     aiosession: aiohttp.ClientSession
+    gitils: GiTilsClient
 
     exit_signal: Optional[Type[signals.ExitSignal]]
 
@@ -49,6 +51,7 @@ class Giesela(AutoShardedBot):
         self.config = Config.load_app(constants.CONFIG_LOCATION)
 
         self.store_reference("aiosession", aiohttp.ClientSession(loop=self.loop))
+        self.store_reference("gitils", GiTilsClient(self.aiosession, self.config.app.gitils.url))
 
         self.http.user_agent += f" Giesela/{constants.VERSION}"
 

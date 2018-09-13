@@ -363,7 +363,7 @@ class RadioEntry(BaseEntry, PlayableEntry, HasChapters):
     def station_manager(self) -> RadioStationManager:
         wrapper = getattr(self, "wrapper")
         queue = wrapper.highest_wrapper.get("queue")
-        return queue.bot.station_manager
+        return queue.bot.radio_station_manager
 
     @property
     def station(self) -> RadioStation:

@@ -19,7 +19,7 @@ SONG_SCRAPER_FIELDS = ("url", "remaining_duration") + RADIO_SONG_DATA_FIELDS
 class RadioSongData(NamedTuple):
     timestamp: float
 
-    title: str = None
+    title: str
     artist: str = None
     artist_image: str = None
     album: str = None
@@ -115,6 +115,8 @@ class RadioStation:
     async def get_song_data(self) -> Optional[RadioSongData]:
         if not self.song_scraper:
             return None
+
+        log.debug(f"scraping current song data for {self}")
         data = await self.song_scraper.scrape(self.manager.aiosession)
 
         kwargs = {key: value for key, value in data.items() if key in RADIO_SONG_DATA_FIELDS and value is not None}
@@ -168,6 +170,10 @@ class RadioStationManager:
         return inst
 
     def add_station(self, station: RadioStation):
+        _station = self.get_station(station.name)
+        if _station:
+            raise ValueError(f"{self} already has {station} ({_station})")
+
         station.manager = self
         self.stations.append(station)
 

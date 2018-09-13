@@ -31,6 +31,9 @@ webiesela:
   start: true
   port: 30000
 
+gitils:
+  url: https://gitils.giesela.io
+
 files:
   data: "data"
   # these are relative to data (unless absolute)

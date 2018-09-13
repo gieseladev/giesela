@@ -162,6 +162,7 @@ class ManipulateCog(QueueBase):
         """Clear the queue"""
         player = await self.get_player(ctx)
         player.queue.clear()
+        # TODO show prompt!
         await ctx.send("Cleared the queue")
 
     @commands.group()
@@ -250,6 +251,9 @@ class DisplayCog(QueueBase):
         time_until = utils.format_time(player.queue.time_until(index))
         em.add_field(name="Playing in", value=time_until)
 
+        # TODO make interactive with buttons like PROMOTE/
+        # TODO history_entry_info?!?
+
         await ctx.send(embed=em)
 
     @commands.command()
@@ -287,6 +291,7 @@ class DisplayCog(QueueBase):
             }
         }
 
+        # TODO use custom viewers for these which have some fancy buttons
         viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=lines, embed_frame=frame)
         await viewer.display()
         await ctx.message.delete()
