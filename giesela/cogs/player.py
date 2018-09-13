@@ -6,7 +6,7 @@ from discord import Game, Guild, Member, Message, NotFound, TextChannel, User, V
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, GieselaPlayer, PlayerManager, SpecificChapterData, WebieselaServer
+from giesela import Giesela, GieselaPlayer, LoadedPlaylistEntry, PlayerManager, PlaylistEntry, SpecificChapterData, WebieselaServer
 from giesela.ui import VerticalTextViewer, text as text_utils
 from giesela.ui.custom import EntryEditor, NowPlayingEmbed
 from giesela.utils import parse_timestamp, similarity
@@ -224,14 +224,12 @@ class Player:
 
         active_players = [player for player in self.player_manager if player.is_playing or player.is_paused]
 
-        if len(active_players) > 1:
-            game = Game(name="Music")
-        elif len(active_players) == 1:
+        if len(active_players) == 1:
             player = active_players[0]
             entry = player.current_entry
         else:
             idle_game = await self.bot.config.runtime.misc.idle_game
-            game = Game(name=idle_game)
+            game = Game(name=idle_game.format(active_players=len(active_players), guilds=len(self.bot.guilds), players=len(self.player_manager)))
 
         if entry:
             prefix = "❚❚ " if is_paused else ""
@@ -410,19 +408,24 @@ class Player:
         player = await self.get_player(ctx)
         if not player.current_entry:
             raise commands.CommandError("There's nothing playing right now")
-        editor = EntryEditor(ctx.channel, user=ctx.author, bot=self.bot, entry=player.current_entry.entry)
+
+        current_entry = player.current_entry
+        editor = EntryEditor(ctx.channel, user=ctx.author, bot=self.bot, entry=current_entry.entry)
         new_entry = await editor.display()
 
         if not new_entry:
             await ctx.message.delete()
             return
 
-        # FIXME Absolutely don't just change the playlist entry unless the user is an editor of said playlist
-        playlist_entry = player.current_entry.get("playlist_entry", None)
+        playlist_entry: PlaylistEntry = current_entry.get("playlist_entry", None)
         if playlist_entry:
-            playlist_entry.replace(new_entry, editor=ctx.author)
+            if playlist_entry.playlist.can_edit(ctx.author):
+                playlist_entry.replace(new_entry, editor=ctx.author)
+            else:
+                log.debug(f"removing playlist wrapper from {current_entry}")
+                current_entry.remove_wrapper(LoadedPlaylistEntry)
 
-        if player.current_entry and player.current_entry.entry is editor.original:
+        if player.current_entry is current_entry:
             player.current_entry.change_entry(new_entry)
             await ctx.send(f"Saved changes to **{new_entry}**")
 

@@ -478,7 +478,8 @@ class EntryWrapper(Reducible, metaclass=_RegisterEntryMeta):
         if isinstance(self, wrapper):
             raise ValueError("Can't remove top-level wrapper")
         elif isinstance(self.wrapped, wrapper):
-            self._set_entry(self.wrapped.entry)
+            self.wrapped.wrapper = None
+            self._set_entry(self.wrapped.wrapped)
         elif isinstance(self.wrapped, EntryWrapper):
             self.wrapped.remove_wrapper(wrapper)
         else:
