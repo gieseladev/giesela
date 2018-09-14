@@ -6,7 +6,7 @@ import rapidjson
 from typing import Dict, Iterator, Optional, TYPE_CHECKING, Union
 
 from aioredis import Redis
-from discord import Guild, VoiceChannel
+from discord import Guild, User, VoiceChannel
 from discord.gateway import DiscordWebSocket
 from websockets import ConnectionClosed
 
@@ -185,6 +185,22 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         await self.node.send_seek(self.guild_id, seconds)
         self.emit("seek", player=self, timestamp=seconds)
 
+    async def revert(self, requester: User, *, respect_chapters: bool = True):
+        if respect_chapters:
+            previous_chapter = await self.current_entry.get_previous_chapter()
+
+            if previous_chapter and isinstance(previous_chapter, SpecificChapterData):
+                return await self.seek(previous_chapter.start)
+
+        if self.queue.history:
+            point_of_no_revert = await self.config.get_guild(self.guild_id).player.restart_entry_point
+            if point_of_no_revert is None or self.progress > point_of_no_revert:
+                entry = self.queue.get_replay_entry(requester)
+                await self.play(entry)
+                self.emit("revert", player=self)
+
+        return await self.seek(0)
+
     async def skip(self, *, respect_chapters: bool = True):
         if respect_chapters:
             next_chapter = await self.current_entry.get_next_chapter()
@@ -192,7 +208,6 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
             if next_chapter and isinstance(next_chapter, SpecificChapterData):
                 return await self.seek(next_chapter.start)
 
-        self._current_entry = None
         await self.play()
         self.emit("skip", player=self)
 

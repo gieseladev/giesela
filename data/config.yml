@@ -67,6 +67,10 @@ runtime:
       # seconds to wait before disconnecting when alone in channel, set to 0 if you don't want Giesela to ever disconnect
       auto_disconnect: 20
 
+      # the amount of seconds after which the "revert" button restarts the current entry instead of going back in history.
+      # This behaviour can be disabled by setting it to null (~)
+      restart_entry_point: 3
+
       # limits for queue and history (0 for infinite)
       queue_limit: ~
       history_limit: 200

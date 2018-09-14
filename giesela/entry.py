@@ -320,7 +320,12 @@ class ChapterEntry(BasicEntry, HasChapters):
 
     async def get_next_chapter(self, timestamp: float) -> Optional[SpecificChapterData]:
         for chapter in self.chapters:
-            if timestamp > chapter.start:
+            if chapter.start > timestamp:
+                return chapter
+
+    async def get_previous_chapter(self, timestamp: float) -> Optional[SpecificChapterData]:
+        for chapter in reversed(self.chapters):
+            if timestamp > chapter.end:
                 return chapter
 
     def to_dict(self) -> Dict[str, Any]:
@@ -570,6 +575,11 @@ class PlayerEntry(EntryWrapper):
         entry = self.entry
         if isinstance(entry, ChapterEntry):
             return await entry.get_next_chapter(self.progress)
+
+    async def get_previous_chapter(self) -> Optional[ChapterData]:
+        entry = self.entry
+        if isinstance(entry, ChapterEntry):
+            return await entry.get_previous_chapter(self.progress)
 
     async def update_chapter(self) -> bool:
         if self.has_chapters:

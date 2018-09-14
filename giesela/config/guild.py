@@ -20,6 +20,8 @@ class Player(ConfigObject):
     auto_pause: bool = True
     auto_disconnect: float = 20
 
+    restart_entry_point: Optional[float] = 3
+
     queue_limit: Optional[int] = None
     history_limit: int = 200
 
@@ -30,6 +32,8 @@ class _AsyncPlayer:
     volume: Awaitable[float]
     auto_pause: Awaitable[bool]
     auto_disconnect: Awaitable[float]
+
+    restart_entry_point: Awaitable[Optional[float]]
 
     queue_limit: Awaitable[Optional[int]]
     history_limit: Awaitable[int]

@@ -133,7 +133,7 @@ class EntryQueue(EventEmitter):
 
         return move_entry
 
-    def replay(self, requester: User, index: int = None) -> Optional[QueueEntry]:
+    def get_replay_entry(self, requester: User, index: int = None) -> Optional[QueueEntry]:
         if index is None:
             entry = self.history.popleft()
         else:
@@ -141,7 +141,10 @@ class EntryQueue(EventEmitter):
                 return None
             entry = deque_pop_index(self.history, index)
 
-        entry = self.wrap_queue_entry(entry.entry, requester)
+        return self.wrap_queue_entry(entry.entry, requester)
+
+    def replay(self, requester: User, index: int = None) -> Optional[QueueEntry]:
+        entry = self.get_replay_entry(requester, index)
         self.entries.appendleft(entry)
         self.emit("replay", queue=self, entry=entry, index=index or 0)
         return entry
