@@ -467,6 +467,7 @@ class PlaylistCog:
         add_playlist_footer(em, playlist)
         await ctx.send(embed=em)
 
+    @commands.guild_only()
     @commands.command("addtoplaylist", aliases=["quickadd", "pladd", "pl+"])
     async def playlist_quickadd(self, ctx: Context, *, playlist: UnquotedStr):
         """Add the current entry to a playlist."""
@@ -499,6 +500,7 @@ class PlaylistCog:
 
         await ctx.send(embed=em)
 
+    @commands.guild_only()
     @commands.command("removefromplaylist", aliases=["quickremove", "quickrm", "plremove", "plrm", "pl-"])
     async def playlist_quickremove(self, ctx: Context, *, playlist: UnquotedStr = None):
         """Remove the current entry from a playlist."""
