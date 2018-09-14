@@ -239,11 +239,8 @@ class _BaseEditor(AutoHelpEmbed, InteractableEmbed, MessageableEmbed):
         await self.update()
 
     @set_artist.group("image", invoke_without_command=True)
-    async def set_artist_image(self, _, image: str):
+    async def set_artist_image(self, _, image: utils.ImageUrl):
         """Set the artist image"""
-        if not await utils.content_is_image(self.aiosession, image):
-            raise commands.CommandError("This doesn't look like an image, sorry!")
-
         self.editor.artist_image = image
         await self.update()
 
@@ -261,11 +258,8 @@ class _BaseEditor(AutoHelpEmbed, InteractableEmbed, MessageableEmbed):
         await self.update()
 
     @commands.group("cover", invoke_without_command=True, aliases=["image"])
-    async def set_cover(self, _, cover: str):
+    async def set_cover(self, _, cover: utils.ImageUrl):
         """Set the cover"""
-        if not await utils.content_is_image(self.aiosession, cover):
-            raise commands.CommandError("This doesn't look like an image, sorry!")
-
         self.editor.cover = cover
         await self.update()
 

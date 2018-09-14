@@ -1,7 +1,7 @@
 import asyncio
 from typing import Optional
 
-from discord import Colour, Embed, Message, TextChannel
+from discord import Colour, Embed, Message, TextChannel, User
 
 from giesela import BaseEntry, ChapterEntry, GieselaPlayer, RadioEntry, SpecificChapterData, utils
 from giesela.ui import create_player_bar
@@ -15,16 +15,17 @@ def create_progress_bar(progress: float, duration: float, *, length: int = 18) -
     return progress_bar
 
 
-def get_description(progress: float, duration: float = None, is_playing: bool = None) -> str:
+def get_description(progress: float, duration: float = None, *, is_playing: bool = None, is_stream: bool = False) -> str:
     if is_playing is None:
         prefix = ""
+    elif is_stream:
+        prefix = r"\🔴 "
     else:
         prefix = "❚❚ | " if is_playing else "► | "
 
     progress_ts = utils.to_timestamp(progress)
 
     if duration is None:
-        prefix = r"\🔴 "
         content = "**Live**"
         suffix = f"Playing for {progress_ts}"
     else:
@@ -81,7 +82,8 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         playlist = player_entry.get("playlist", None)
         requester = player_entry.get("requester", None)
 
-        description = get_description(progress, duration, self.player.is_playing)
+        # noinspection PyUnresolvedReferences
+        description = get_description(progress, duration, is_playing=self.player.is_playing, is_stream=entry.is_stream)
 
         em = Embed(title=target.title, description=description, colour=Colour.greyple())
 
@@ -131,9 +133,9 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         await self.add_reactions(msg)
 
     @emoji_handler("⏮", pos=1)
-    async def prev_entry(self, *_):
+    async def prev_entry(self, _, user: User):
         # TODO player revert instead of queue!
-        self.player.queue.replay(0)
+        self.player.queue.replay(user, 0)
 
     @emoji_handler("⏪", pos=2)
     async def fast_rewind(self, *_):

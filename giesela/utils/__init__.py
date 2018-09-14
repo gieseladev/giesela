@@ -7,6 +7,7 @@ from typing import Callable, Iterable, List, NamedTuple, Optional, Pattern, TYPE
 import aiohttp
 import requests
 
+from .converters import *
 from .object_chain import *
 from .scraper import *
 from .structures import *
@@ -16,16 +17,6 @@ if TYPE_CHECKING:
     from giesela import BaseEntry
 
 log = logging.getLogger(__name__)
-
-
-async def content_is_image(session: aiohttp.ClientSession, url: str) -> bool:
-    try:
-        async with session.head(url) as resp:
-            content_type = resp.headers["content-type"]
-    except aiohttp.ClientError:
-        return False
-
-    return content_type.startswith("image/")
 
 
 async def search_image(session: aiohttp.ClientSession, google_api_token: str, query: str, *, min_squareness: float = None, num_pages: int = 3) -> \
