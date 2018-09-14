@@ -43,4 +43,5 @@ class EntrySearchUI(AutoHelpEmbed, MessageableEmbed, ItemPicker):
     async def play_result(self, ctx: Context):
         """Play next"""
         result = self.current_result
+        # TODO permissions
         self.player.queue.add_entry(result, ctx.author)

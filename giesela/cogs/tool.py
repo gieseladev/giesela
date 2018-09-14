@@ -16,6 +16,8 @@ class Tools:
         author_channel = ctx.author.voice.channel
         voice_members = author_channel.members
 
+        # TODO permissions!
+
         for voice_member in voice_members:
             await voice_member.edit(voice_channel=target)
 

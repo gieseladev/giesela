@@ -7,7 +7,7 @@ from discord import Forbidden, Game, Guild, Member, Message, NotFound, TextChann
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, GieselaPlayer, LoadedPlaylistEntry, PlayerManager, PlaylistEntry, SpecificChapterData, WebieselaServer
+from giesela import Giesela, GieselaPlayer, LoadedPlaylistEntry, PlayerManager, PlaylistEntry, SpecificChapterData, WebieselaServer, permission, perms
 from giesela.ui import VerticalTextViewer, text as text_utils
 from giesela.ui.custom import EntryEditor, NowPlayingEmbed
 from giesela.utils import parse_timestamp, similarity
@@ -271,12 +271,14 @@ class Player:
         await np_embed.start()
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.inspect.current)
     @commands.command()
     async def np(self, ctx: Context):
         """Show the current entry."""
         await self._create_np_message(ctx.channel, ctx.guild.id)
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.summon)
     @commands.command()
     async def summon(self, ctx: Context):
         """Call the bot to the summoner's voice channel."""
@@ -287,20 +289,24 @@ class Player:
             raise commands.CommandError("Couldn't find voice channel")
 
         player = await self.get_player(ctx.guild, channel=target)
+        # TODO check whether user is stealing and require perms.music.summon.steal!
         await player.connect(target)
 
         if not player.is_playing:
             await player.play()
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.summon)
     @commands.command()
     async def disconnect(self, ctx: Context):
         """Disconnect from the voice channel"""
         player = await self.get_player(ctx.guild, create=False)
         if player:
+            # TODO require "steal" if user is disconnecting for other users
             await player.disconnect()
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.player.manipulate.pause)
     @commands.command()
     async def pause(self, ctx: Context):
         """Pause playback of the current song
@@ -317,6 +323,7 @@ class Player:
             raise commands.CommandError("Cannot pause what is not playing")
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.player.manipulate.pause)
     @commands.command()
     async def resume(self, ctx: Context):
         """Resumes playback of the current song."""
@@ -328,6 +335,7 @@ class Player:
             raise commands.CommandError("Hard to unpause something that's not paused, amirite?")
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.player.manipulate.skip, perms.music.queue.manipulate.remove)
     @commands.command()
     async def stop(self, ctx: Context):
         """Stops the player completely and removes all entries from the queue."""
@@ -337,6 +345,7 @@ class Player:
         player.queue.clear()
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.player.manipulate.volume)
     @commands.command()
     async def volume(self, ctx: Context, volume: str = None):
         """Change volume.
@@ -382,6 +391,7 @@ class Player:
         await ctx.send(f"updated volume from {old_volume} to {volume}")
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.player.manipulate.skip.seek)
     @commands.command()
     async def seek(self, ctx: Context, timestamp: str):
         """Seek to the given timestamp formatted (minutes:seconds)"""
@@ -389,6 +399,7 @@ class Player:
         await _seek(player, timestamp)
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.player.manipulate.skip.seek)
     @commands.command(aliases=["fwd", "fw"])
     async def forward(self, ctx: Context, timestamp: str):
         """Fast-forward the current entry"""
@@ -401,6 +412,7 @@ class Player:
         await _seek(player, secs)
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.player.manipulate.skip.seek)
     @commands.command(aliases=["rwd", "rw"])
     async def rewind(self, ctx: Context, timestamp: str):
         """Rewind the current entry.
@@ -415,6 +427,7 @@ class Player:
         await _seek(player, secs)
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.manipulate.edit)
     @commands.command("editentry", aliases=["editnp"])
     async def edit_entry(self, ctx: Context):
         """Edit the current entry"""
@@ -443,11 +456,9 @@ class Player:
             player.current_entry.change_entry(new_entry)
             await ctx.send(f"Saved changes to **{new_entry}**")
 
-    @commands.guild_only()
     @commands.command()
     async def lyrics(self, ctx: Context, *query: str):
         """Try to find lyrics for the current entry and display 'em"""
-        player = await self.get_player(ctx)
 
         _progress_guess = None
 
@@ -455,11 +466,18 @@ class Player:
             if query:
                 query = " ".join(query)
             else:
+                if ctx.guild is None:
+                    raise commands.CommandError("You need to provide a query if you want to use this command outside of a guild")
+
+                # TODO only allow lyrics command without query for perms.music.queue.query.current
+                player = await self.get_player(ctx)
                 if not player.current_entry:
                     raise commands.CommandError("There's no way for me to find lyrics for something that doesn't even exist!")
+
                 query = str(player.current_entry.entry)
                 player_entry = player.current_entry
                 chapter = player_entry.chapter
+
                 if isinstance(chapter, SpecificChapterData):
                     _progress_guess = chapter.get_chapter_progress(player_entry.progress) / chapter.duration
                 elif player_entry.entry.duration:

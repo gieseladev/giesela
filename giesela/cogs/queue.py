@@ -7,7 +7,7 @@ from discord import Forbidden
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Extractor, Giesela, utils
+from giesela import Extractor, Giesela, permission, perms, utils
 from giesela.ui import VerticalTextViewer, prefab, text as text_utils
 from giesela.ui.custom import EntrySearchUI
 from .player import Player
@@ -36,6 +36,7 @@ def pad_index(index: int, padding: int) -> str:
 class EnqueueCog(QueueBase):
     async def _play_cmd(self, ctx: Context, target: str, placement: int = None):
         player = await self.get_player(ctx)
+        # TODO check permissions!
 
         async with ctx.typing():
             result = await self.extractor.get(target)
@@ -61,12 +62,14 @@ class EnqueueCog(QueueBase):
         await self._play_cmd(ctx, url)
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.manipulate.move)
     @play.command("next")
     async def play_next(self, ctx: Context, *, url: str):
         """Add an entry to the front of the queue"""
         await self._play_cmd(ctx, url, placement=0)
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.manipulate.move)
     @play.command("random", aliases=["soon", "anytime"])
     async def play_random(self, ctx: Context, *, url: str):
         """Add an entry at a random position"""
@@ -88,6 +91,7 @@ class EnqueueCog(QueueBase):
         entry = await searcher.choose()
         if entry:
             player.queue.add_entry(entry, ctx.author)
+            # TODO perms
             await ctx.send(f"Enqueued **{entry.title}**")
         else:
             with suppress(Forbidden):
@@ -97,6 +101,7 @@ class EnqueueCog(QueueBase):
 class ManipulateCog(QueueBase):
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.manipulate.remove)
     @commands.group(invoke_without_command=True, aliases=["rm"])
     async def remove(self, ctx: Context, index: int):
         """Remove an entry from the queue."""
@@ -111,6 +116,7 @@ class ManipulateCog(QueueBase):
         await ctx.send(f"Removed **{entry.entry}** from the queue")
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.manipulate.remove)
     @remove.command("last")
     async def remove_last(self, ctx: Context):
         """Remove the last entry"""
@@ -123,6 +129,7 @@ class ManipulateCog(QueueBase):
         await ctx.send(f"Removed **{entry.entry}** from the queue")
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.manipulate.enqueue.replay)
     @commands.command()
     async def replay(self, ctx: Context, index: str = None):
         """Replay an entry.
@@ -161,6 +168,7 @@ class ManipulateCog(QueueBase):
             raise commands.CommandError(f"Couldn't replay {entry}!")
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.manipulate.move)
     @commands.command()
     async def shuffle(self, ctx: Context):
         """Shuffle the queue"""
@@ -169,6 +177,7 @@ class ManipulateCog(QueueBase):
         await ctx.send("Shuffled the queue")
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.manipulate.remove)
     @commands.command()
     async def clear(self, ctx: Context):
         """Clear the queue"""
@@ -178,6 +187,7 @@ class ManipulateCog(QueueBase):
         await ctx.send("Cleared the queue")
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.player.manipulate.skip)
     @commands.group()
     async def skip(self, ctx: Context):
         """Skip the current chapter/entry"""
@@ -186,9 +196,11 @@ class ManipulateCog(QueueBase):
         if player.is_stopped:
             raise commands.CommandError("Can't skip! The player is not playing!")
 
+        # TODO require perms.music.player.manipulate.skip.seek for chapters
         await player.skip()
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.player.manipulate.skip)
     @skip.command("all")
     async def skip_all(self, ctx: Context):
         """Skip current entry"""
@@ -200,6 +212,7 @@ class ManipulateCog(QueueBase):
         await player.skip(respect_chapters=False)
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.manipulate.move)
     @commands.command()
     async def promote(self, ctx: Context, position: int = None):
         """Move an entry to the front
@@ -224,6 +237,7 @@ class ManipulateCog(QueueBase):
         await ctx.send(f"Promoted **{queue_entry.entry}**")
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.manipulate.move)
     @commands.command()
     async def move(self, ctx: Context, from_pos: int, to_pos: int):
         """Move an entry"""
@@ -273,6 +287,7 @@ class DisplayCog(QueueBase):
         await ctx.send(embed=em)
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.inspect.queue)
     @commands.command()
     async def queue(self, ctx: Context, index: int = None):
         """Show the queue"""
@@ -316,6 +331,7 @@ class DisplayCog(QueueBase):
             await ctx.message.delete()
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.inspect.history)
     @commands.command()
     async def history(self, ctx: Context):
         """Show the past entries"""

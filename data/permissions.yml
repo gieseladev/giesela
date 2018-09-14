@@ -4,19 +4,27 @@ roles:
     name: "Admin"
     auto_assign: owner
     permissions:
-      match: *
+      match: "**"
 
   - id: mod
     name: "Moderator"
     permissions:
     - admin.appearance
-    - playlist.all
+    - admin.permissions
+    - playlist
 
   guild:
   - id: guild_owner
     name: "Server Admin"
     auto_assign: guild_owner
+    permissions:
+    - admin.config.guild
+    - admin.permissions.guild
 
+  - id: guild_mod
+    name: "Server Moderator"
+    permissions:
+    - admin.permissions.guild
 
   - id: dj
     name: "Music Master"
@@ -24,15 +32,20 @@ roles:
     permissions:
     - music
 
+  # Can add entries to the queue
   - id: active
     inherit_from: passive
     name: "Active Listener"
     permissions:
     - music.queue.manipulate.enqueue
+    - playlist.create
+    - playlist.export
 
+  # Can do basically everything but not manipulate the queue
   - id: passive
     name: "Passive Listener"
+    description: Basic Permissions for everyone
+    auto_assign: @everyone
     permissions:
     - music.queue.inspect
-    - playlist.owned
     - webiesela

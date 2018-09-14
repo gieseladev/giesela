@@ -1,15 +1,13 @@
-from discord.ext.commands import Context
+from discord.ext.commands import Command
 
-__all__ = ["has_permission", "expect_permission"]
+__all__ = ["has_permission"]
 
 
 def has_permission(*permissions: str):
-    # prepare perms
-    def decorator(func):
-        pass
+    permissions = set(map(str, permissions))
+
+    def decorator(command: Command):
+        command._required_permissions = permissions
+        return command
 
     return decorator
-
-
-async def expect_permission(ctx: Context, *permissions: str):
-    pass

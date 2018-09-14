@@ -235,6 +235,6 @@ class LavalinkStats(NamedTuple):
         data["memory"] = LavalinkMemoryStats.from_data(data["memory"])
         data["cpu"] = LavalinkCPUStats.from_data(data["cpu"])
         frame_stats = data.pop("frameStats", None)
-        if frame_stats:
-            data["frame_stats"] = LavalinkFrameStats.from_data(frame_stats)
+        data["frame_stats"] = LavalinkFrameStats.from_data(frame_stats) if frame_stats else None
+
         return cls(**data)

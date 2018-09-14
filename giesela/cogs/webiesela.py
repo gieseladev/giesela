@@ -3,7 +3,7 @@ import logging
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, PlaylistManager, RadioStationManager, WebieselaServer
+from giesela import Giesela, PlaylistManager, RadioStationManager, WebieselaServer, permission, perms
 
 log = logging.getLogger(__name__)
 
@@ -33,6 +33,7 @@ class Webiesela:
             WebieselaServer.server.close()
 
     @commands.guild_only()
+    @permission.has_permission(perms.webiesela)
     @commands.command()
     async def register(self, ctx: Context, token: str):
         """Use this command in order to use Webiesela."""

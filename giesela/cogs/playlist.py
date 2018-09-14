@@ -11,7 +11,7 @@ from discord import Attachment, Colour, Embed, File, Forbidden, User
 from discord.ext import commands
 from discord.ext.commands import BadArgument, Context, Converter, view as string_view
 
-from giesela import Extractor, GPL_VERSION, Giesela, LoadedPlaylistEntry, Playlist, PlaylistManager, utils
+from giesela import Extractor, GPL_VERSION, Giesela, LoadedPlaylistEntry, Playlist, PlaylistManager, permission, perms, utils
 from giesela.lib import help_formatter
 from giesela.playlist import compat as pl_compat
 from giesela.ui import EmbedPaginator, EmbedViewer, ItemPicker, PromptYesNo, VerticalTextViewer
@@ -136,6 +136,7 @@ class PlaylistCog:
             await ctx.message.delete()
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.manipulate.enqueue.playlist)
     @playlist.group("play", invoke_without_command=True, aliases=["load", "start", "listen"])
     async def playlist_play(self, ctx: Context, *, playlist: UnquotedStr):
         """Play a playlist"""
@@ -143,6 +144,7 @@ class PlaylistCog:
         await self.play_playlist(ctx, playlist)
 
     @commands.guild_only()
+    @permission.has_permission(perms.music.queue.manipulate.enqueue.playlist)
     @playlist_play.command("random")
     async def playlist_play_random(self, ctx: Context):
         """Play a random playlist"""
@@ -153,6 +155,7 @@ class PlaylistCog:
         playlist = random.choice(playlists)
         await self.play_playlist(ctx, playlist)
 
+    @permission.has_permission(perms.playlist.create)
     @playlist.command("create", aliases=["new"])
     async def playlist_create(self, ctx: Context, *, name: UnquotedStr):
         """Create a new playlist"""
@@ -429,6 +432,7 @@ class PlaylistCog:
         embed = playlist_embed(playlist)
         await ctx.send("Imported playlist:", embed=embed)
 
+    @permission.has_permission(perms.playlist.export)
     @playlist.command("export")
     async def playlist_export(self, ctx: Context, *, playlist: UnquotedStr):
         """Export a playlist"""
