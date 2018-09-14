@@ -48,6 +48,7 @@ misc:
 # defaults for cross-guild configuration. These settings can be changed during runtime
 runtime:
   misc:
+    # May use formatting using {<name>} where <name> may be "active_players", "guilds", "players" (hopefully self-explanatory)
     idle_game: Waiting for someone to queue something
 
   # defaults for guild configs

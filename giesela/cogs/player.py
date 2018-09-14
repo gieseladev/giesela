@@ -230,8 +230,8 @@ class Player:
             entry = player.current_entry
         else:
             idle_game = await self.bot.config.runtime.misc.idle_game
-            game = Game(
-                name=idle_game.format(active_players=len(active_players), guilds=len(self.bot.guilds), players=len(self.player_manager.players)))
+            game = Game(name=idle_game.format(
+                active_players=len(active_players), guilds=len(self.bot.guilds), players=len(self.player_manager.players)))
 
         if entry:
             prefix = "❚❚ " if is_paused else ""
