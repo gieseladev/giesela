@@ -101,7 +101,12 @@ class TrackLoadType(enum.Enum):
 
 class TrackPlaylistInfo(NamedTuple):
     name: str
-    selected_track: int
+    selected_track: Optional[int]
+
+    @classmethod
+    def from_result(cls, data: Dict[str, Any]) -> "TrackPlaylistInfo":
+        data["selected_track"] = data.pop("selectedTrack", None)
+        return TrackPlaylistInfo(**data)
 
 
 class TrackInfo(NamedTuple):
@@ -169,10 +174,7 @@ class LoadTracksResult(NamedTuple):
     def from_result(cls, data: Dict[str, Any]) -> "LoadTracksResult":
         load_type = TrackLoadType(data["loadType"])
         playlist_info = data["playlistInfo"]
-        if playlist_info:
-            playlist_info = TrackPlaylistInfo(**playlist_info)
-        else:
-            playlist_info = None
+        playlist_info = TrackPlaylistInfo.from_result(playlist_info) if playlist_info else None
 
         tracks = list(map(Track.from_result, data["tracks"]))
 
