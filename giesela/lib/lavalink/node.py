@@ -14,6 +14,9 @@ class LavalinkNode(LavalinkREST, LavalinkWebSocket):
     def __init__(self, bot: Client, password: str, address: str, secure: bool, **kwargs):
         super().__init__(bot=bot, password=password, lavalink_address=address, lavalink_secure=secure, **kwargs)
 
+    def __str__(self) -> str:
+        return f"{self._ws_url} ({self.region})"
+
     async def on_event(self, guild_id: int, event: LavalinkEvent, data: TrackEventDataType):
         pass
 

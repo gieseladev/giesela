@@ -129,7 +129,7 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
 
     async def handle_data(self, data: Dict[str, Any]):
         op = data.get("op", None)
-        log.debug(f"Received websocket data {data}")
+        log.debug(f"Received websocket data {data} {self}")
 
         if not op:
             log.warning(f"No op!")

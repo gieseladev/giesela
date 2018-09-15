@@ -107,8 +107,10 @@ class LavalinkNodeBalancer(EventEmitter):
             nodes = _create_nodes(nodes)
 
         self._nodes = nodes
+
         # noinspection PyTypeChecker
-        self._node_pool = deque(itertools.chain.from_iterable(nodes.values()), maxlen=len(nodes))
+        node_list = list(itertools.chain.from_iterable(nodes.values()))
+        self._node_pool = deque(node_list, maxlen=len(node_list))
 
         for node in self._node_pool:
             self._add_listeners(node)
@@ -117,6 +119,7 @@ class LavalinkNodeBalancer(EventEmitter):
         return self.get_rest_node()
 
     def _add_listeners(self, node: LavalinkNode):
+        log.debug(f"adding listeners to {node}")
         node \
             .on("event", functools.partial(self.on_event, node=node)) \
             .on("unknown_event", functools.partial(self.on_unknown_event, node=node)) \
