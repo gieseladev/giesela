@@ -61,8 +61,8 @@ runtime:
       message_decay: 30
 
     player:
-      # volume to start with
-      volume: .1
+      # volume percentage to start with (1 is 100%)
+      volume: 1
       # pause when alone in channel
       auto_pause: true
       # seconds to wait before disconnecting when alone in channel, set to 0 if you don't want Giesela to ever disconnect

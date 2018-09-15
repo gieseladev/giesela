@@ -253,7 +253,7 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
         return await self.send("seek", guild_id, position=utils.to_milli(position))
 
     async def send_volume(self, guild_id: int, volume: float):
-        return await self.send("volume", guild_id, volume=utils.to_milli(volume))
+        return await self.send("volume", guild_id, volume=round(100 * volume))
 
     async def send_destroy(self, guild_id: int):
         return await self.send("destroy", guild_id)

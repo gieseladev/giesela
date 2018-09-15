@@ -363,9 +363,10 @@ class PlayerManager(LavalinkNodeBalancer):
 
         if not player and create:
             guild = self.bot.get_guild(guild_id)
-            player = GieselaPlayer(self, self.pick_node(guild.region), guild_id, voice_channel_id)
-            self.emit("player_create", player=player)
-            self.players[guild_id] = player
+            if guild:
+                player = GieselaPlayer(self, self.pick_node(guild.region), guild_id, voice_channel_id)
+                self.emit("player_create", player=player)
+                self.players[guild_id] = player
         return player
 
     def get_discord_websocket(self, guild_id: int) -> DiscordWebSocket:
@@ -437,6 +438,8 @@ class PlayerManager(LavalinkNodeBalancer):
         key = f"{self.bot.config.app.redis.namespaces.queue}:players"
         guilds = await redis.hgetall(key)
 
+        log.info(f"loading {len(guilds)} players from redis")
+
         coros = []
 
         for guild_id, voice_channel_id in guilds.items():
@@ -444,7 +447,10 @@ class PlayerManager(LavalinkNodeBalancer):
             voice_channel_id = rapidjson.loads(voice_channel_id)
 
             player = self.get_player(guild_id, voice_channel_id)
-            coros.append(player.load_from_redis(redis))
+            if player:
+                coros.append(player.load_from_redis(redis))
+            else:
+                log.warning(f"Couldn't load player for {guild_id}")
 
         await asyncio.gather(*coros, loop=self.loop)
 

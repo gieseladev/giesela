@@ -79,7 +79,7 @@ class Extractor:
             entries.append(entry)
         return entries
 
-    async def get(self, target: str, *, search_one=True, searcher=LoadTrackSearcher.YOUTUBE) -> Union[BasicEntry, List[BasicEntry], None]:
+    async def get(self, target: str, *, search_one: bool = True, searcher=LoadTrackSearcher.YOUTUBE) -> Union[BasicEntry, List[BasicEntry], None]:
         if self.is_url(target):
             result = await self.client.get_tracks(target)
         else:
