@@ -170,10 +170,10 @@ class EntryQueue(EventEmitter):
 
         self.emit("entries_added", queue=self, entries=entries)
 
-    def add_entry(self, entry: CanWrapEntryType, requester: User, *, placement: int = None) -> QueueEntry:
+    def add_entry(self, entry: CanWrapEntryType, requester: User, *, position: int = None) -> QueueEntry:
         entry = self.wrap_queue_entry(entry, requester)
-        if placement is not None:
-            self.entries.insert(placement, entry)
+        if position is not None:
+            self.entries.insert(position, entry)
         else:
             self.entries.append(entry)
 

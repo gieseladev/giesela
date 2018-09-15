@@ -190,7 +190,7 @@ class GieselaWebSocket(WebSocket):
         try:
             async for ind, entry in entry_gen:
                 if entry:
-                    player.queue.add_entry(entry, requester=author.discord_user, placement=placement)
+                    player.queue.add_entry(entry, requester=author.discord_user, position=placement)
         except Exception:
             log.exception("error while adding entry")
 

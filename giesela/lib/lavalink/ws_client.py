@@ -168,7 +168,7 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
             try:
                 data = rapidjson.loads(await self._ws.recv())
             except ConnectionClosed as e:
-                log.warning(f"Disconnected {e}")
+                log.warning(f"Disconnected {e} ({self})")
 
                 self.emit("disconnect", error=e)
 
@@ -178,7 +178,7 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
                 if await self._attempt_reconnect():
                     return
                 else:
-                    log.error("Unable to reconnect to Lavalink!")
+                    log.error(f"Unable to reconnect to Lavalink ({self})!")
                     break
 
             try:
@@ -186,7 +186,7 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
             except Exception:
                 log.exception(f"Couldn't handle message {data}")
 
-        log.debug("Closing WebSocket...")
+        log.debug(f"Closing WebSocket... ({self})")
         await self._ws.close()
 
     async def on_socket_response(self, data: Dict[str, Any]):
@@ -220,15 +220,15 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
 
     async def send_voice_state(self):
         guild_id = self._voice_state.get("guildId", "unknown")
-        log.debug(f"sending voice_state for guild {guild_id}")
+        log.debug(f"sending voice_state for guild {guild_id} ({self})")
         await self.send_raw(self._voice_state)
 
     async def send_raw(self, data: Dict[str, Any]):
         if self.connected:
-            log.debug(f"sending: {data}")
+            log.debug(f"{self} sending: {data}")
             await self._ws.send(rapidjson.dumps(data))
         else:
-            log.debug(f"not connected, adding message to queue ({data})")
+            log.debug(f"{self} not connected, adding message to queue ({data})")
             self._send_queue.append(data)
 
     async def send(self, op: str, guild_id: int, **kwargs):

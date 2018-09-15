@@ -45,10 +45,10 @@ class EnqueueCog(QueueBase):
             raise commands.CommandError(f"Couldn't find anything for {target}")
 
         if isinstance(result, list):
-            player.queue.add_entries(result, requester=ctx.author, placement=placement)
+            player.queue.add_entries(result, requester=ctx.author, position=placement)
             await ctx.send(f"Added {len(result)} entries to the queue")
         else:
-            player.queue.add_entry(result, requester=ctx.author, placement=placement)
+            player.queue.add_entry(result, requester=ctx.author, position=placement)
             await ctx.send(f"Added **{result}** to the queue")
 
     @commands.guild_only()
