@@ -19,7 +19,8 @@ class AdminTools:
 
         if not self.aiosession:
             self.aiosession = aiohttp.ClientSession(loop=self.bot.loop)
-
+   
+    @commands.is_owner()
     @permission.has_permission(perms.admin.control.execute)
     @commands.command()
     async def execute(self, ctx: Context):
@@ -68,7 +69,8 @@ class AdminTools:
         result = result.strip()
         if result:
             await ctx.send(result)
-
+    
+    @commands.is_owner()
     @permission.has_permission(perms.admin.control.execute)
     @commands.command()
     async def shell(self, ctx: Context, interpreter: str = "python"):
@@ -82,6 +84,7 @@ class AdminTools:
 
         await shell.display()
 
+    @commands.is_owner()
     @permission.has_permission(perms.admin.control.shutdown)
     @commands.command()
     async def shutdown(self, ctx: Context):
@@ -89,6 +92,7 @@ class AdminTools:
         await ctx.send(":wave:")
         raise TerminateSignal
 
+    @commands.is_owner()
     @permission.has_permission(perms.admin.control.shutdown)
     @commands.command()
     async def restart(self, ctx: Context):
@@ -96,6 +100,7 @@ class AdminTools:
         await ctx.send(":wave:")
         raise RestartSignal
 
+    @commands.is_owner()
     @permission.has_permission(perms.admin.control.impersonate)
     @commands.command()
     async def say(self, ctx: Context, msg: str):
@@ -104,6 +109,7 @@ class AdminTools:
         await ctx.message.delete()
         await ctx.send(msg)
 
+    @commands.is_owner()
     @permission.has_permission(perms.admin.appearance.name)
     @commands.command()
     async def setname(self, ctx: Context, name: str):
@@ -116,7 +122,8 @@ class AdminTools:
 
         await ctx.send(":ok_hand:")
         return
-
+        
+    @commands.is_owner()
     @permission.has_permission(perms.admin.appearance.avatar)
     @commands.command()
     async def setavatar(self, ctx: Context, url: str = None):
