@@ -278,8 +278,10 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
 
     async def migrate_node(self, new_node: LavalinkNode):
         await self.node.send_destroy(self.guild_id)
-
         self.node = new_node
+
+        await self.node.send_voice_state()
+
         if self.is_connected:
             await self.manager.connect_player(self.guild_id, self.voice_channel_id)
 

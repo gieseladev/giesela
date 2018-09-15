@@ -97,7 +97,7 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
         except OSError:
             log.exception(f"Couldn't Connect to {self._ws_url}")
         else:
-            log.info("Connected to Lavalink!")
+            log.info(f"Connected to Lavalink {self}!")
             self.loop.create_task(self.listen())
             if self._send_queue:
                 log.info(f"Sending {len(self._send_queue)} queued messages")
@@ -107,7 +107,7 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
 
     async def _attempt_reconnect(self) -> bool:
         attempt = 0
-        log.info(f"Connection closed; Trying to reconnect")
+        log.info(f"Connection closed ({self}); Trying to reconnect")
 
         while True:
             delay = 2 ** attempt
@@ -193,6 +193,8 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
         if not data or data.get("t") not in {"VOICE_STATE_UPDATE", "VOICE_SERVER_UPDATE"}:
             return
 
+        # TODO don't add the listener here, just do it in the balancer or w/e
+
         if data["t"] == "VOICE_SERVER_UPDATE":
             event_data = data["d"]
             self._voice_state.update({
@@ -214,10 +216,12 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
             self.emit("voice_channel_update", guild_id=guild_id, channel_id=channel_id)
 
         if self._voice_state.keys() == {"op", "guildId", "sessionId", "event"}:
-            guild_id = event_data["guild_id"]
-            log.debug(f"sending voice_state for guild {guild_id}")
-            await self.send_raw(self._voice_state)
-            self._voice_state.clear()
+            await self.send_voice_state()
+
+    async def send_voice_state(self):
+        guild_id = self._voice_state.get("guildId", "unknown")
+        log.debug(f"sending voice_state for guild {guild_id}")
+        await self.send_raw(self._voice_state)
 
     async def send_raw(self, data: Dict[str, Any]):
         if self.connected:
