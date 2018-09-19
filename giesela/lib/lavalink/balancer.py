@@ -150,8 +150,6 @@ class LavalinkNodeBalancer(EventEmitter):
 
         if leftover_nodes:
             yield leftover_nodes
-        else:
-            raise ValueError("No nodes??")
 
     def pick_node(self, voice_region: Union[str, VoiceRegion]):
         return choose_best_node(self.preferred_node_gen(voice_region))
