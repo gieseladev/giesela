@@ -3,12 +3,13 @@ import logging
 from contextlib import suppress
 from typing import Dict, Optional, Union
 
-from discord import Forbidden, Game, Guild, Member, Message, NotFound, TextChannel, User, VoiceChannel, VoiceState
+from discord import Colour, Embed, Forbidden, Game, Guild, Member, Message, NotFound, TextChannel, User, VoiceChannel, VoiceState
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, GieselaPlayer, LoadedPlaylistEntry, PlayerManager, PlaylistEntry, SpecificChapterData, WebieselaServer, permission, perms
-from giesela.ui import VerticalTextViewer, text as text_utils
+from giesela import Giesela, GieselaPlayer, LoadedPlaylistEntry, PlayerManager, PlaylistEntry, SpecificChapterData, WebieselaServer, permission, \
+    perms, utils
+from giesela.ui import VerticalTextViewer
 from giesela.ui.custom import EntryEditor, NowPlayingEmbed
 from giesela.utils import parse_timestamp, similarity
 
@@ -346,55 +347,72 @@ class Player:
 
     @commands.guild_only()
     @permission.has_permission(perms.music.player.manipulate.volume)
-    @commands.command()
+    @commands.group(invoke_without_command=True)
     async def volume(self, ctx: Context, volume: str = None):
-        """Change volume.
+        """Change volume
 
         Sets the playback volume. Accepted values are from 1 to 100.
         Putting + or - before the volume will make the volume change relative to the current volume.
         """
         player = await self.get_player(ctx)
         player_volume = await player.volume
-
-        old_volume = round(player_volume * 100)
+        max_volume = await self.config.get_guild(ctx.guild.id).player.max_volume
 
         if not volume:
-            bar = text_utils.create_bar(player_volume, 20)
-            await ctx.send(f"Current volume: {old_volume}%\n{bar}")
+            symbol = utils.interpolate_seq(("🔈", "🔉", "🔊"), player_volume / max_volume)
+            embed = Embed(title="Volume", description=f"**{round(player_volume * 100)}%** {symbol}", colour=Colour.blue())
+            await ctx.send(embed=embed)
             return
 
-        relative = False
-        if volume.startswith(("+", "-")):
-            relative = True
-            volume = volume[1:]
+        is_percentage = False
+        relative = None
+
+        if volume.endswith("%"):
+            volume = volume.rstrip("%")
+            is_percentage = True
+
+        if volume.startswith("+"):
+            relative = 1
+        elif volume.startswith("-"):
+            relative = -1
+
+        volume.lstrip("+-")
 
         try:
-            volume = int(volume)
+            volume = float(volume)
         except ValueError:
-            raise commands.CommandError(f"{volume} is not a valid number")
+            raise commands.CommandError(f"Volume must be a number, not whatever \"{volume}\" is!")
+
+        if volume > max_volume or (volume.is_integer() and is_percentage):
+            volume /= 100
 
         if relative:
-            vol_change = volume
-            volume += round(player_volume * 100)
-        else:
-            vol_change = volume - player_volume
+            volume += relative * player_volume
 
-        if not 0 <= volume <= 100:
-            if relative:
-                raise commands.CommandError(f"Unreasonable volume change provided: "
-                                            f"{old_volume}{vol_change:+} -> {old_volume + vol_change}%. "
-                                            f"Provide a change between {-old_volume} and {100 - old_volume}.")
-            else:
-                raise commands.CommandError(f"Unreasonable volume provided: {volume}%. Provide a value between 0 and 100.")
+        if not 0 <= volume <= max_volume:
+            raise commands.CommandError(f"New volume must be between 0% and {round(100 * max_volume)}%. **Not {round(100 * volume)}%**")
 
-        await player.set_volume(volume / 100)
-        await ctx.send(f"updated volume from {old_volume} to {volume}")
+        await player.set_volume(volume)
+        symbol = utils.interpolate_seq(("🔈", "🔉", "🔊"), player_volume / max_volume)
+        embed = Embed(description=f"Set volume to **{round(100 * volume)}%** {symbol}", colour=Colour.green())
+        await ctx.send(embed=embed)
+
+    @commands.guild_only()
+    @permission.has_permission(perms.music.player.manipulate.volume)
+    @volume.command("max")
+    async def volume_max(self, ctx: Context):
+        """Set the volume to max"""
+        player = await self.get_player(ctx)
+        max_volume = await self.config.get_guild(ctx.guild.id).player.max_volume
+        await player.set_volume(max_volume)
+        embed = Embed(description=f"Set volume to **{round(100 * max_volume)}%** 🔊", colour=Colour.green())
+        await ctx.send(embed=embed)
 
     @commands.guild_only()
     @permission.has_permission(perms.music.player.manipulate.skip.seek)
     @commands.command()
     async def seek(self, ctx: Context, timestamp: str):
-        """Seek to the given timestamp formatted (minutes:seconds)"""
+        """Seek to a specific point"""
         player = await self.get_player(ctx)
         await _seek(player, timestamp)
 
@@ -415,10 +433,7 @@ class Player:
     @permission.has_permission(perms.music.player.manipulate.skip.seek)
     @commands.command(aliases=["rwd", "rw"])
     async def rewind(self, ctx: Context, timestamp: str):
-        """Rewind the current entry.
-
-        If the current entry is a timestamp-entry, rewind to the previous song
-        """
+        """Rewind the current entry"""
         player = await self.get_player(ctx)
         secs = parse_timestamp(timestamp)
         if secs:

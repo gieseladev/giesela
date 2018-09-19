@@ -16,7 +16,8 @@ class _AsyncCommands:
 
 
 class Player(ConfigObject):
-    volume: float = .1
+    volume: float = 1
+    max_volume: float = 2
     auto_pause: bool = True
     auto_disconnect: float = 20
 
@@ -30,6 +31,7 @@ class Player(ConfigObject):
 
 class _AsyncPlayer:
     volume: Awaitable[float]
+    max_volume: Awaitable[float]
     auto_pause: Awaitable[bool]
     auto_disconnect: Awaitable[float]
 
