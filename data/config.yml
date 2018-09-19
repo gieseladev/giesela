@@ -63,7 +63,7 @@ runtime:
     player:
       # volume percentage to start with (1 is 100%)
       volume: 1
-      # max value one can set
+      # max value one can set. Setting this to more than Lavalink's max volume (which is 10) will probably break things
       max_volume: 2
       # pause when alone in channel
       auto_pause: true
