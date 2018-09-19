@@ -5,7 +5,7 @@ import logging
 import math
 from asyncio import AbstractEventLoop
 from collections import deque
-from typing import Any, Dict, Iterable, List, Optional, Union
+from typing import Any, Dict, Iterable, Iterator, List, Optional, Union
 
 from discord import VoiceRegion
 from websockets import ConnectionClosed
@@ -47,42 +47,42 @@ def calculate_penalty(stats: LavalinkStats):
     return sum((player_penalty, cpu_penalty, deficit_frame_penalty, null_frame_penalty))
 
 
-def choose_best_node(nodes: Iterable[LavalinkNode]) -> LavalinkNode:
-    if not nodes:
-        raise ValueError("No nodes to pick from!")
-
+def choose_best_node(node_lists: Iterable[List[LavalinkNode]]) -> LavalinkNode:
     best_node = lowest_penalty = None
 
     no_stats = []
     not_connected = []
 
-    for node in nodes:
-        if not node.connected:
-            log.debug(f"{node} isn't connected")
-            not_connected.append(node)
-            continue
+    for nodes in node_lists:
+        for node in nodes:
+            if not node.connected:
+                log.debug(f"{node} isn't connected")
+                not_connected.append(node)
+                continue
 
-        stats = node.statistics
-        if not stats:
-            log.debug(f"{node} doesn't have any statistics, not picking!")
-            no_stats.append(node)
-            continue
+            stats = node.statistics
+            if not stats:
+                log.debug(f"{node} doesn't have any statistics, not picking!")
+                no_stats.append(node)
+                continue
 
-        penalty = calculate_penalty(node.statistics)
-        if lowest_penalty is None or penalty < lowest_penalty:
-            lowest_penalty = penalty
-            best_node = node
+            penalty = calculate_penalty(node.statistics)
+            if lowest_penalty is None or penalty < lowest_penalty:
+                lowest_penalty = penalty
+                best_node = node
 
-    if not best_node:
+        if best_node:
+            break
+    else:
         log.warning("Couldn't find a single valid node")
         if no_stats:
             log.info("using node without stats")
-            return no_stats[0]
-        if not_connected:
+            best_node = no_stats[0]
+        elif not_connected:
             log.warning("using node that isn't connected...")
-            return not_connected[0]
-
-        raise ValueError("Couldn't pick a node. This shouldn't even be possible...")
+            best_node = not_connected[0]
+        else:
+            raise ValueError("Couldn't pick a node. This shouldn't even be possible...")
 
     return best_node
 
@@ -127,23 +127,34 @@ class LavalinkNodeBalancer(EventEmitter):
             .on("disconnect", functools.partial(self.on_disconnect, node=node)) \
             .on("voice_channel_update", functools.partial(self.on_voice_channel_update, node=node))
 
-    def get_nodes_for_region(self, voice_region: Union[str, VoiceRegion]) -> List[LavalinkNode]:
+    def preferred_node_gen(self, voice_region: Union[str, VoiceRegion]) -> Iterator[List[LavalinkNode]]:
         region = find_region_for_voice_region(voice_region)
+        all_nodes = []
+
         nodes = self._nodes.get(region)
 
-        if not nodes:
-            log.warning(f"no nodes found for {region}")
-            global_nodes = self._nodes.get(LavalinkNodeRegion.GLOBAL)
-            if global_nodes:
-                nodes = global_nodes
-            else:
-                log.info("no global nodes, using all of them")
-                nodes = list(self._nodes.values())
+        if nodes:
+            all_nodes.extend(nodes)
+            yield nodes
 
-        return nodes
+        log.warning(f"no nodes found for {region}")
+        nodes = self._nodes.get(LavalinkNodeRegion.GLOBAL)
+        if nodes:
+            all_nodes.extend(nodes)
+            yield nodes
+
+        leftover_nodes = []
+        for node in self._node_pool:
+            if node not in all_nodes:
+                leftover_nodes.append(node)
+
+        if leftover_nodes:
+            yield leftover_nodes
+        else:
+            raise ValueError("No nodes??")
 
     def pick_node(self, voice_region: Union[str, VoiceRegion]):
-        return choose_best_node(self.get_nodes_for_region(voice_region))
+        return choose_best_node(self.preferred_node_gen(voice_region))
 
     def get_rest_node(self) -> LavalinkREST:
         node = self._node_pool[0]
