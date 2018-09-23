@@ -34,10 +34,17 @@ class GieselaContext(Context):
         await asyncio.gather(*coros, return_exceptions=True)
 
 
-class Giesela(AutoShardedBot):
-    config: Config
+class _StorageTypeHints:
     aiosession: aiohttp.ClientSession
     gitils: GiTilsClient
+
+    async def ensure_permission(self, ctx: Context, *keys: str): ...
+
+    async def has_permission(self, ctx: Context, *keys: str) -> bool: ...
+
+
+class Giesela(AutoShardedBot, _StorageTypeHints):
+    config: Config
 
     exit_signal: Optional[Type[signals.ExitSignal]]
 

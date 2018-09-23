@@ -3,6 +3,18 @@ from .tree_utils import Node, prepare_tree
 __all__ = ["perms"]
 
 
+class Admin:
+    pass
+
+
+class Player:
+    pass
+
+
+class Playlist:
+    pass
+
+
 class perms(Node):
     class admin(Node):
         class control(Node):
@@ -65,7 +77,8 @@ class perms(Node):
         create: str
         export: str
 
-    webiesela: str
+    class webiesela(Node):
+        pass
 
 
 prepare_tree(perms)

@@ -12,6 +12,7 @@ redis:
     config: "config"
     queue: "queue"
     persist: "persist"
+    permissions: "perms"
 
 mongodb:
   uri: "" # REQUIRED
@@ -42,7 +43,7 @@ files:
   playlists: "playlists/playlists"
 
 misc:
-  # custom search engine id to use for image search
+  # custom search engine id to use for image search. (This particular cse is optimised for finding images and you shouldn't have to change it)
   image_cx: "002017775112634544492:t0ynfpg8y0e"
 
 # defaults for cross-guild configuration. These settings can be changed during runtime

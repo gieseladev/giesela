@@ -6,7 +6,7 @@ class PermNodeMeta(type):
     __namespace__: str
 
     def __str__(self):
-        return self.__namespace__
+        return self.__namespace__ or "root"
 
 
 class Node(metaclass=PermNodeMeta):
@@ -14,22 +14,20 @@ class Node(metaclass=PermNodeMeta):
 
 
 def prepare_tree(tree: type, namespace: str = None):
-    if namespace:
-        qualified_name = f"{namespace}.{tree.__name__}"
-    else:
-        qualified_name = tree.__name__
-
-    tree.__namespace__ = qualified_name
+    tree.__namespace__ = namespace
 
     for name, value in inspect.getmembers(tree):
         if name.startswith("_"):
             continue
 
-        if isinstance(value, PermNodeMeta):
-            prepare_tree(value, qualified_name)
-        else:
-            raise ValueError(f"{value} ({qualified_name}.{name}) shouldn't be in the tree??")
+        qualified_namespace = f"{namespace}.{value.__name__}" if namespace else value.__name__
 
-    for name, value in typing.get_type_hints(tree).items():
-        if value is str:
-            setattr(tree, name, f"{qualified_name}.{name}")
+        if isinstance(value, PermNodeMeta):
+            prepare_tree(value, qualified_namespace)
+        else:
+            raise ValueError(f"{value} ({qualified_namespace}.{name}) shouldn't be in the tree??")
+
+    if namespace:
+        for name, value in typing.get_type_hints(tree).items():
+            if value is str:
+                setattr(tree, name, f"{namespace}.{name}")
