@@ -7,7 +7,7 @@ import aiohttp
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, RestartSignal, TerminateSignal, permission, perms
+from giesela import Giesela, RestartSignal, TerminateSignal, perm_tree, permission
 from giesela.shell import InterpreterUnavailable
 from giesela.ui.custom import ShellUI
 
@@ -20,7 +20,7 @@ class AdminTools:
         if not self.aiosession:
             self.aiosession = aiohttp.ClientSession(loop=self.bot.loop)
 
-    @permission.has_permission(perms.admin.control.execute)
+    @permission.has_permission(perm_tree.admin.control.execute)
     @commands.command()
     async def execute(self, ctx: Context):
         """Execute a statement"""
@@ -69,7 +69,7 @@ class AdminTools:
         if result:
             await ctx.send(result)
 
-    @permission.has_permission(perms.admin.control.execute)
+    @permission.has_permission(perm_tree.admin.control.execute)
     @commands.command()
     async def shell(self, ctx: Context, interpreter: str = "python"):
         """Open the GieselaShell™"""
@@ -82,21 +82,21 @@ class AdminTools:
 
         await shell.display()
 
-    @permission.has_permission(perms.admin.control.shutdown)
+    @permission.has_permission(perm_tree.admin.control.shutdown)
     @commands.command()
     async def shutdown(self, ctx: Context):
         """Shutdown"""
         await ctx.send(":wave:")
         raise TerminateSignal
 
-    @permission.has_permission(perms.admin.control.shutdown)
+    @permission.has_permission(perm_tree.admin.control.shutdown)
     @commands.command()
     async def restart(self, ctx: Context):
         """Restart"""
         await ctx.send(":wave:")
         raise RestartSignal
 
-    @permission.has_permission(perms.admin.control.impersonate)
+    @permission.has_permission(perm_tree.admin.control.impersonate)
     @commands.command()
     async def say(self, ctx: Context, msg: str):
         """Say something"""
@@ -104,7 +104,7 @@ class AdminTools:
         await ctx.message.delete()
         await ctx.send(msg)
 
-    @permission.has_permission(perms.admin.appearance.name)
+    @permission.has_permission(perm_tree.admin.appearance.name)
     @commands.command()
     async def setname(self, ctx: Context, name: str):
         """Set name..."""
@@ -117,7 +117,7 @@ class AdminTools:
         await ctx.send(":ok_hand:")
         return
 
-    @permission.has_permission(perms.admin.appearance.avatar)
+    @permission.has_permission(perm_tree.admin.appearance.avatar)
     @commands.command()
     async def setavatar(self, ctx: Context, url: str = None):
         """Set avatar"""

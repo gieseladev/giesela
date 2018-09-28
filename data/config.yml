@@ -17,6 +17,9 @@ redis:
 mongodb:
   uri: "" # REQUIRED
   database: "Giesela"
+  collections:
+    config: "config"
+    perm_roles: "perm_roles"
 
 lavalink:
   # list of lavalink nodes to use

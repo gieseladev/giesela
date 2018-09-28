@@ -1,21 +1,9 @@
 from .tree_utils import Node, prepare_tree
 
-__all__ = ["perms"]
+__all__ = ["perm_tree", "perm_list"]
 
 
-class Admin:
-    pass
-
-
-class Player:
-    pass
-
-
-class Playlist:
-    pass
-
-
-class perms(Node):
+class perm_tree(Node):
     class admin(Node):
         class control(Node):
             execute: str
@@ -24,61 +12,62 @@ class perms(Node):
 
         class config(Node):
             class runtime(Node):
+                edit: str
                 view: str
 
-            class guild(Node):
-                view: str
+            class guild(runtime): ...
 
         class permissions(Node):
             class runtime(Node):
-                edit_roles: str
                 assign_roles: str
+                edit_roles: str
 
-            class guild(runtime):
-                pass
+            class guild(runtime): ...
 
         class appearance(Node):
             name: str
             avatar: str
 
-    class music(Node):
-        class queue(Node):
-            class manipulate(Node):
-                class enqueue(Node):
-                    replay: str
-                    stream: str
-                    playlist: str
+    class queue(Node):
+        class add(Node):
+            entry: str
+            stream: str
+            playlist: str
 
-                remove: str
-                move: str
-                edit: str
+        remove: str
+        move: str
+        edit: str
 
-            class inspect(Node):
-                current: str
-                history: str
-                queue: str
+        class inspect(Node):
+            current: str
+            history: str
+            queue: str
 
-        class player(Node):
-            class manipulate(Node):
-                class skip(Node):
-                    seek: str
+    class player(Node):
+        skip: str
+        revert: str
+        seek: str
+        pause: str
+        volume: str
 
-                pause: str
-                volume: str
-
-        class summon(Node):
-            steal: str
+    class summon(Node):
+        connect: str
+        move: str
+        steal: str
 
     class playlist(Node):
+        class owned(Node):
+            class create(Node):
+                new: str
+                import_pl: str
+
         class all(Node):
             edit: str
             remove: str
-
-        create: str
-        export: str
+            export: str
 
     class webiesela(Node):
-        pass
+        register: str
 
 
-prepare_tree(perms)
+perm_list = prepare_tree(perm_tree)

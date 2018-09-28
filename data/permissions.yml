@@ -1,51 +1,60 @@
+# The settings in this file are only required for the first start of Giesela. Giesela stores the permission settings in MongoDB.
+# TODO add a command to reload the permissions from this file!
+
 roles:
-  runtime:
-  - id: admin
-    name: "Admin"
-    auto_assign: owner
-    permissions:
-      match: "**"
+- name: "Global Admin"
 
-  - id: mod
-    name: "Moderator"
-    permissions:
-    - admin.appearance
-    - admin.permissions
-    - playlist
+  # A list of targets which automatically receive this role.
+  # In this case the role will be automatically assigned to the owner of the bot.
+  # There are multiple such keywords including "owner, guild_owner, @everyone"
+  auto_assign: owner
 
-  guild:
-  - id: guild_owner
-    name: "Server Admin"
-    auto_assign: guild_owner
-    permissions:
-    - admin.config.guild
-    - admin.permissions.guild
+  # Global roles apply in every guild including dm
+  global: true
 
-  - id: guild_mod
-    name: "Server Moderator"
-    permissions:
-    - admin.permissions.guild
+  # A list of permissions which shall be granted to this role. (Exception for special cases)
+  # By default all permissions are denied! Instead of specifying a permission such as "queue.add.entry" you can specify a permission group
+  # "queue.add" which will grant all the permissions in said group (in this case: "queue.add.entry", "queue.add.playlist", "queue.add.stream")
+  #     Note: You can also use "deny" to explicitly deny a permission
+  grant:
+    # matches all permissions there are
+    match: "*"
 
-  - id: dj
-    name: "Music Master"
-    inherit_from: active
-    permissions:
-    - music
+- name: "Global Moderator"
+  global: true
+  grant:
+  - admin.appearance
+  - admin.permissions
+  - playlist.all
 
-  # Can add entries to the queue
-  - id: active
-    inherit_from: passive
-    name: "Active Listener"
-    permissions:
-    - music.queue.manipulate.enqueue
-    - playlist.create
-    - playlist.export
+- name: "Server Admin"
+  auto_assign: guild_owner
+  grant:
+  - admin.config.guild
+  - admin.permissions.guild
 
-  # Can do basically everything but not manipulate the queue
-  - id: passive
-    name: "Passive Listener"
-    description: Basic Permissions for everyone
-    auto_assign: @everyone
-    permissions:
-    - music.queue.inspect
-    - webiesela
+- name: "Music Master"
+
+  # Inherit all permissions from the specified role.
+  inherit_from: active
+  grant:
+  - queue
+  - player
+  - summon
+
+  # An id must be specified in order to inherit from a role. If the id isn't set, it defaults to a random one.
+  # While the name of a role may be changed, its id stays the same.
+- id: active
+  inherit_from: passive
+  name: "Active Listener"
+  grant:
+  - queue.add
+  - playlist.owned
+
+- id: passive
+  name: "Passive Listener"
+  description: Basic Permissions for everyone
+  auto_assign: @everyone
+  grant:
+  - queue.inspect
+  - webiesela

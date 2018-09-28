@@ -242,7 +242,7 @@ class Config:
         self.redis = None
 
         self.mongodb = self.mongo_client[self.app.mongodb.database]
-        self.config_coll = self.mongodb.config
+        self.config_coll = self.mongodb[self.app.mongodb.collections.config]
 
         self.runtime = None
         self.guilds = None

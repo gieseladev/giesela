@@ -35,6 +35,7 @@ class GieselaContext(Context):
 
 
 class _StorageTypeHints:
+    """Type hints for references stored in Giesela's "storage" by cogs"""
     aiosession: aiohttp.ClientSession
     gitils: GiTilsClient
 

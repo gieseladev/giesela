@@ -3,7 +3,7 @@ from discord import Colour, Embed, Guild
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, permission, perms
+from giesela import Giesela, perm_tree, permission
 from giesela.config import TraverseError, abstract
 from giesela.config.abstract import ConfigObject
 
@@ -79,14 +79,14 @@ class Config:
         await self.config.remove_guild(guild.id)
 
     @commands.guild_only()
-    @permission.has_permission(perms.admin.config.guild.view)
+    @permission.has_permission(perm_tree.admin.config.guild.view)
     @commands.group("config", invoke_without_command=True)
     async def config_command(self, ctx: Context, key: str = None):
         """Config stuff"""
         guild_config = await self.config.get_guild(ctx.guild.id).load()
         await show_config(ctx, guild_config, key, "Guild Config")
 
-    @permission.has_permission(perms.admin.config.runtime.view)
+    @permission.has_permission(perm_tree.admin.config.runtime.view)
     @config_command.group("global", invoke_without_command=True, aliases=["runtime"])
     async def config_global(self, ctx: Context, key: str = None):
         """Global config"""
@@ -94,28 +94,28 @@ class Config:
         await show_config(ctx, global_config, key, "Global Config")
 
     @commands.guild_only()
-    @permission.has_permission(perms.admin.config.guild)
+    @permission.has_permission(perm_tree.admin.config.guild)
     @config_command.command("set")
     async def config_set(self, ctx: Context, key: str, *, value: str):
         """Set a config value"""
         guild_config = self.config.get_guild(ctx.guild.id)
         await set_config_value(ctx, guild_config, key, value)
 
-    @permission.has_permission(perms.admin.config.runtime)
+    @permission.has_permission(perm_tree.admin.config.runtime)
     @config_global.command("set")
     async def config_global_set(self, ctx: Context, key: str, *, value: str):
         """Set a global config value"""
         await set_config_value(ctx, self.config.runtime, key, value)
 
     @commands.guild_only()
-    @permission.has_permission(perms.admin.config.guild)
+    @permission.has_permission(perm_tree.admin.config.guild)
     @config_command.command("reset")
     async def config_reset(self, ctx: Context, key: str):
         """Reset a config value"""
         guild_config = self.config.get_guild(ctx.guild.id)
         await reset_config_value(ctx, guild_config, key)
 
-    @permission.has_permission(perms.admin.config.runtime)
+    @permission.has_permission(perm_tree.admin.config.runtime)
     @config_global.command("reset")
     async def config_global_reset(self, ctx: Context, key: str):
         """Reset a global config value"""

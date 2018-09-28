@@ -24,10 +24,15 @@ class Redis(ConfigObject):
     namespaces: RedisNamespaces
 
 
+class MongodbCollections(ConfigObject):
+    config: str = Truthy("config")
+    perm_roles: str = Truthy("perm_roles")
+
+
 class Mongodb(ConfigObject):
     uri: str = Truthy()
     database: str = "Giesela"
-    # TODO make collection names configurable!
+    collections: MongodbCollections
 
 
 class LavalinkNodeRegion(enum.Enum):

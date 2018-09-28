@@ -7,8 +7,8 @@ from discord import Colour, Embed, Forbidden, Game, Guild, Member, Message, NotF
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, GieselaPlayer, LoadedPlaylistEntry, PlayerManager, PlaylistEntry, SpecificChapterData, WebieselaServer, permission, \
-    perms, utils
+from giesela import Giesela, GieselaPlayer, LoadedPlaylistEntry, PlayerManager, PlaylistEntry, SpecificChapterData, WebieselaServer, perm_tree, \
+    permission, utils
 from giesela.ui import VerticalTextViewer
 from giesela.ui.custom import EntryEditor, NowPlayingEmbed
 from giesela.utils import parse_timestamp, similarity
@@ -272,14 +272,14 @@ class Player:
         await np_embed.start()
 
     @commands.guild_only()
-    @permission.has_permission(perms.music.queue.inspect.current)
+    @permission.has_permission(perm_tree.queue.inspect.current)
     @commands.command()
     async def np(self, ctx: Context):
         """Show the current entry."""
         await self._create_np_message(ctx.channel, ctx.guild.id)
 
     @commands.guild_only()
-    @permission.has_permission(perms.music.summon)
+    @permission.has_permission(perm_tree.summon)
     @commands.command()
     async def summon(self, ctx: Context):
         """Call the bot to the summoner's voice channel."""
@@ -297,7 +297,7 @@ class Player:
             await player.play()
 
     @commands.guild_only()
-    @permission.has_permission(perms.music.summon)
+    @permission.has_permission(perm_tree.summon)
     @commands.command()
     async def disconnect(self, ctx: Context):
         """Disconnect from the voice channel"""
@@ -307,7 +307,7 @@ class Player:
             await player.disconnect()
 
     @commands.guild_only()
-    @permission.has_permission(perms.music.player.manipulate.pause)
+    @permission.has_permission(perm_tree.player.pause)
     @commands.command()
     async def pause(self, ctx: Context):
         """Pause playback of the current song
@@ -324,7 +324,7 @@ class Player:
             raise commands.CommandError("Cannot pause what is not playing")
 
     @commands.guild_only()
-    @permission.has_permission(perms.music.player.manipulate.pause)
+    @permission.has_permission(perm_tree.player.pause)
     @commands.command()
     async def resume(self, ctx: Context):
         """Resumes playback of the current song."""
@@ -336,7 +336,7 @@ class Player:
             raise commands.CommandError("Hard to unpause something that's not paused, amirite?")
 
     @commands.guild_only()
-    @permission.has_permission(perms.music.player.manipulate.skip, perms.music.queue.manipulate.remove)
+    @permission.has_permission(perm_tree.player.skip, perm_tree.queue.remove)
     @commands.command()
     async def stop(self, ctx: Context):
         """Stops the player completely and removes all entries from the queue."""
@@ -346,7 +346,7 @@ class Player:
         player.queue.clear()
 
     @commands.guild_only()
-    @permission.has_permission(perms.music.player.manipulate.volume)
+    @permission.has_permission(perm_tree.player.volume)
     @commands.group(invoke_without_command=True)
     async def volume(self, ctx: Context, volume: str = None):
         """Change volume
@@ -398,7 +398,7 @@ class Player:
         await ctx.send(embed=embed)
 
     @commands.guild_only()
-    @permission.has_permission(perms.music.player.manipulate.volume)
+    @permission.has_permission(perm_tree.player.volume)
     @volume.command("max")
     async def volume_max(self, ctx: Context):
         """Set the volume to max"""
@@ -409,7 +409,7 @@ class Player:
         await ctx.send(embed=embed)
 
     @commands.guild_only()
-    @permission.has_permission(perms.music.player.manipulate.skip.seek)
+    @permission.has_permission(perm_tree.player.seek)
     @commands.command()
     async def seek(self, ctx: Context, timestamp: str):
         """Seek to a specific point"""
@@ -417,7 +417,7 @@ class Player:
         await _seek(player, timestamp)
 
     @commands.guild_only()
-    @permission.has_permission(perms.music.player.manipulate.skip.seek)
+    @permission.has_permission(perm_tree.player.seek)
     @commands.command(aliases=["fwd", "fw"])
     async def forward(self, ctx: Context, timestamp: str):
         """Fast-forward the current entry"""
@@ -430,7 +430,7 @@ class Player:
         await _seek(player, secs)
 
     @commands.guild_only()
-    @permission.has_permission(perms.music.player.manipulate.skip.seek)
+    @permission.has_permission(perm_tree.player.seek)
     @commands.command(aliases=["rwd", "rw"])
     async def rewind(self, ctx: Context, timestamp: str):
         """Rewind the current entry"""
@@ -442,7 +442,7 @@ class Player:
         await _seek(player, secs)
 
     @commands.guild_only()
-    @permission.has_permission(perms.music.queue.manipulate.edit)
+    @permission.has_permission(perm_tree.queue.edit)
     @commands.command("editentry", aliases=["editnp"])
     async def edit_entry(self, ctx: Context):
         """Edit the current entry"""

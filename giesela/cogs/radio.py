@@ -6,7 +6,7 @@ from discord import Embed, Forbidden
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, GieselaPlayer, RadioStation, RadioStationManager, permission, perms
+from giesela import Giesela, GieselaPlayer, RadioStation, RadioStationManager, perm_tree, permission
 from giesela.ui import ItemPicker
 from .player import Player
 
@@ -68,7 +68,7 @@ class Radio:
             return stations[result % len(stations)]
 
     @commands.guild_only()
-    @permission.has_permission(perms.music.queue.manipulate.enqueue.stream)
+    @permission.has_permission(perm_tree.music.queue.manipulate.enqueue.stream)
     @commands.group(invoke_without_command=True)
     async def radio(self, ctx: Context, station: str = None):
         """Play a radio station.
@@ -90,7 +90,7 @@ class Radio:
         await play_station(ctx, player, station)
 
     @commands.guild_only()
-    @permission.has_permission(perms.music.queue.manipulate.enqueue.stream)
+    @permission.has_permission(perm_tree.music.queue.manipulate.enqueue.stream)
     @radio.command("random")
     async def radio_random(self, ctx: Context):
         """Play a random radio station."""

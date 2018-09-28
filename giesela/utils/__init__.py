@@ -1,3 +1,4 @@
+import inspect
 import logging
 import re
 from difflib import SequenceMatcher
@@ -10,6 +11,7 @@ import requests
 from .converters import *
 from .iterables import *
 from .object_chain import *
+from .redis import *
 from .scraper import *
 from .structures import *
 from .url_utils import *
@@ -41,6 +43,7 @@ async def search_image(session: aiohttp.ClientSession, google_api_token: str, qu
                     if min(height, width) / max(height, width) < min_squareness:
                         continue
                 return image["thumbnailLink"]
+    return None
 
 
 def similarity(a: str, b: Union[str, Tuple[str, ...]], *, lower: bool = False, junk: Union[Callable[[str], bool], Iterable[str]] = None,
@@ -52,7 +55,7 @@ def similarity(a: str, b: Union[str, Tuple[str, ...]], *, lower: bool = False, j
         a = a.lower()
         b = b.lower()
 
-    if junk and not isinstance(junk, Callable):
+    if not inspect.isfunction(junk):
         _junk = set(junk)
 
         def junk(s: str) -> bool: return s in _junk

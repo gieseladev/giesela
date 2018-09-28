@@ -3,7 +3,7 @@ from typing import Optional
 
 from discord import Colour, Embed, Message, TextChannel, User
 
-from giesela import BaseEntry, ChapterEntry, GieselaPlayer, RadioEntry, SpecificChapterData, permission, perms, utils
+from giesela import BaseEntry, ChapterEntry, GieselaPlayer, RadioEntry, SpecificChapterData, perm_tree, permission, utils
 from giesela.ui import create_player_bar
 from giesela.utils import ObjectChain
 from .. import InteractableEmbed, IntervalUpdatingMessage, emoji_handler
@@ -133,13 +133,13 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         # TODO permissions
         await self.player.revert(user)
 
-    @permission.has_permission(perms.music.player.manipulate.skip.seek)
+    @permission.has_permission(perm_tree.music.player.manipulate.skip.seek)
     @emoji_handler("⏪", pos=2)
     async def fast_rewind(self, *_):
         if self.player.can_seek:
             await self.player.seek(self.player.progress - self.seek_amount)
 
-    @permission.has_permission(perms.music.player.manipulate.pause)
+    @permission.has_permission(perm_tree.music.player.manipulate.pause)
     @emoji_handler("⏯", pos=3)
     async def play_pause(self, *_):
         if self.player.is_playing:
@@ -147,18 +147,18 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         else:
             await self.player.resume()
 
-    @permission.has_permission(perms.music.player.manipulate.skip.seek)
+    @permission.has_permission(perm_tree.music.player.manipulate.skip.seek)
     @emoji_handler("⏩", pos=4)
     async def fast_forward(self, *_):
         if self.player.can_seek:
             await self.player.seek(self.player.progress + self.seek_amount)
 
-    @permission.has_permission(perms.music.player.manipulate.skip)
+    @permission.has_permission(perm_tree.music.player.manipulate.skip)
     @emoji_handler("⏭", pos=5)
     async def next_entry(self, *_):
         await self.player.skip()
 
-    @permission.has_permission(perms.music.queue.inspect.current)
+    @permission.has_permission(perm_tree.music.queue.inspect.current)
     @emoji_handler("🔎", pos=10)
     async def show_detailed(self, *_):
         task = self._show_detailed_task
