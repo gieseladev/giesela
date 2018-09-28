@@ -24,7 +24,7 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
 
     _current_task: asyncio.Task
 
-    def __init__(self, channel: TextChannel, user: User = None, **kwargs):
+    def __init__(self, channel: TextChannel, user: User = None, **kwargs) -> None:
         self.extractor = kwargs.pop("extractor")
         self.recovery = kwargs.pop("recovery")
 

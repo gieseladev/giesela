@@ -89,6 +89,8 @@ class Giesela(AutoShardedBot, _StorageTypeHints):
         if value is not None:
             return rapidjson.loads(value)
 
+        return None
+
     async def close(self):
         if self.is_closed():
             return

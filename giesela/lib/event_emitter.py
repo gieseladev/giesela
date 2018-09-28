@@ -14,6 +14,7 @@ async def safe_await(cb: Awaitable[AT]) -> Optional[AT]:
         result = await cb
     except Exception:
         log.exception(f"Exception while waiting for {cb}")
+        return None
     else:
         return result
 
@@ -38,7 +39,7 @@ class EventEmitter:
     registered_events: Optional[Set[str]]
     loop: asyncio.AbstractEventLoop
 
-    def __init__(self, *, loop: asyncio.AbstractEventLoop = None):
+    def __init__(self, *, loop: asyncio.AbstractEventLoop = None) -> None:
         self._events = collections.defaultdict(list)
 
         self.registered_events = set(getattr(self, "_emitted_events", ()))

@@ -4,10 +4,10 @@ __all__ = ["has_permission"]
 
 
 def has_permission(*permissions: str):
-    permissions = set(map(str, permissions))
+    perms = set(map(str, permissions))
 
     def decorator(command: Command):
-        command._required_permissions = permissions
+        command._required_permissions = perms
         return command
 
     return decorator

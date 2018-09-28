@@ -27,7 +27,7 @@ class EditChange:
 
     success: Optional[bool]
 
-    def __init__(self, change_type: int, *, pl_entry: PlaylistEntry, new_entry: Optional[PlayableEntry] = None):
+    def __init__(self, change_type: int, *, pl_entry: PlaylistEntry, new_entry: Optional[PlayableEntry] = None) -> None:
         if change_type not in self.ALL_TYPES:
             raise ValueError(f"Unknown change type {change_type}")
 
@@ -104,7 +104,7 @@ class EditPlaylistProxy:
 
     _changes: Deque[EditChange]
 
-    def __init__(self, playlist: "Playlist"):
+    def __init__(self, playlist: "Playlist") -> None:
         self._playlist = playlist
         self._pl_entries = playlist.entries.copy()
         self._entry_map = {}

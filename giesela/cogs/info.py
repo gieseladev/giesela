@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 
 
 class Info:
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: Bot) -> None:
         self.bot = bot
 
         bot.remove_command("help")
@@ -48,13 +48,13 @@ class Info:
 
         await ctx.send(embed=em)
 
-    async def _send_help(self, ctx: Context, *cmds: str, cmd: str = None):
+    async def _send_help(self, ctx: Context, *_cmds: str, cmd: str = None):
         async def _command_not_found(_name: str):
             _em = Embed(description=f"No command called **{_name}**", colour=Colour.red())
             await ctx.send(embed=_em)
 
         bot = ctx.bot
-        cmds = list(cmds)
+        cmds = list(_cmds)
         if cmd:
             cmds.insert(0, cmd)
 
@@ -73,19 +73,19 @@ class Info:
         else:
             # handle groups
             name = cmds[0]
-            cmd = bot.all_commands.get(name)
-            if cmd is None:
+            group = bot.all_commands.get(name)
+            if group is None:
                 await _command_not_found(name)
                 return
 
             for key in cmds[1:]:
                 try:
-                    cmd = cmd.all_commands.get(key)
-                    if cmd is None:
+                    group = group.all_commands.get(key)
+                    if group is None:
                         await _command_not_found(key)
                         return
                 except AttributeError:
-                    em = Embed(description=f"Command **{cmd.name}** has no subcommands", colour=Colour.red())
+                    em = Embed(description=f"Command **{group.name}** has no subcommands", colour=Colour.red())
                     await ctx.send(embed=em)
                     return
 

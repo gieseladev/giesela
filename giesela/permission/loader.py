@@ -12,7 +12,7 @@ class LoadedRole:
     _permissions: Dict[str, bool]
     _bases: List["LoadedRole"]
 
-    def __init__(self, *, role_id: str, role_name: str, is_global: bool, bases: List[str] = None, permissions: Dict[str, bool] = None):
+    def __init__(self, *, role_id: str, role_name: str, is_global: bool, bases: List[str] = None, permissions: Dict[str, bool] = None) -> None:
         self._role_id = role_id
         self._role_name = role_name
         self._is_global = is_global
@@ -51,7 +51,7 @@ class LoadedRole:
             permissions[deny] = False
 
         role_name = data["name"]
-        role_id = data.get("_id") or data.get("id")
+        role_id = data.get("_id") or data.get("id") or role_name
 
         return cls(role_id=role_id, role_name=role_name, is_global=data.get("global", False), bases=bases, permissions=permissions)
 
@@ -103,7 +103,7 @@ class LoadedRole:
 
 class PermLoader:
 
-    def __init__(self, roles: List[LoadedRole]):
+    def __init__(self, roles: List[LoadedRole]) -> None:
         self.roles = roles
 
         self._resolve_inheritance()
@@ -117,9 +117,11 @@ class PermLoader:
     @classmethod
     async def load(cls, fp: Union[TextIO, Path]) -> "PermLoader":
         if isinstance(fp, Path):
-            fp = fp.read_text()
+            _data = fp.read_text()
+        else:
+            _data = fp
 
-        data = yaml.safe_load(fp)
+        data = yaml.safe_load(_data)
 
         roles = LoadedRole.load_roles(data["roles"])
 

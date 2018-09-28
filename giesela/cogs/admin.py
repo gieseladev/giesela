@@ -13,7 +13,7 @@ from giesela.ui.custom import ShellUI
 
 
 class AdminTools:
-    def __init__(self, bot: Giesela):
+    def __init__(self, bot: Giesela) -> None:
         self.bot = bot
         self.aiosession = getattr(bot, "aiosession", None)
 
@@ -124,8 +124,10 @@ class AdminTools:
 
         if ctx.message.attachments:
             thing = ctx.message.attachments[0]["url"]
-        else:
+        elif url:
             thing = url.strip("<>")
+        else:
+            raise commands.CommandError("Please provide a url or attach an image!")
 
         try:
             with aiohttp.ClientTimeout(10):

@@ -15,7 +15,7 @@ log = logging.getLogger(__name__)
 
 
 class EditableEmbed:
-    def __init__(self, channel: TextChannel, message: Message = None):
+    def __init__(self, channel: TextChannel, message: Message = None) -> None:
         self.channel = channel
 
         self._message = message
@@ -34,7 +34,7 @@ class EditableEmbed:
             self._message = None
 
     async def edit(self, embed: Embed, on_new: Callable[[Message], Any] = None):
-        if self.message:
+        if self._message:
             try:
                 await self._message.edit(embed=embed)
             except NotFound:
@@ -73,15 +73,15 @@ class LoadingBar(EditableEmbed):
     show_percentage: bool
     custom_embed_data: dict
 
-    progress: int
+    progress: float
     times: List[float]
 
-    _current_time: int
+    _current_time: float
     _current_embed: Embed
-    _message_future: asyncio.Future
+    _message_future: Optional[asyncio.Future]
     _cancelled_messages: int
 
-    def __init__(self, channel: TextChannel, **options):
+    def __init__(self, channel: TextChannel, **options) -> None:
         self.header = options.pop("header", "Please Wait")
         self.colour = options.pop("colour", 0xf90a7d)
         self.total_items = options.pop("total_items", None)
@@ -163,7 +163,7 @@ class LoadingBar(EditableEmbed):
 
 
 class UpdatingMessage(EditableEmbed):
-    def __init__(self, channel: TextChannel, *, callback: Callable[[], Union[Embed, Awaitable[Embed]]] = None, **kwargs):
+    def __init__(self, channel: TextChannel, *, callback: Callable[[], Union[Embed, Awaitable[Embed]]] = None, **kwargs) -> None:
         self.callback = callback
         super().__init__(channel, **kwargs)
 
@@ -186,7 +186,7 @@ class UpdatingMessage(EditableEmbed):
 class IntervalUpdatingMessage(UpdatingMessage, Startable, Stoppable):
     _runner: Optional[asyncio.Task]
 
-    def __init__(self, channel: TextChannel, *, interval: float = 5, **kwargs):
+    def __init__(self, channel: TextChannel, *, interval: float = 5, **kwargs) -> None:
         super().__init__(channel, **kwargs)
 
         self.interval = interval

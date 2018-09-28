@@ -29,7 +29,7 @@ class FlattenProxy:
     _virtual_target: Type[abstract.ConfigObject]
     _key: List[str]
 
-    def __init__(self, config: "_RedisConfig", key: List[str] = None):
+    def __init__(self, config: "_RedisConfig", key: List[str] = None) -> None:
         self._config = config
         self._virtual_parent = None
         self._virtual_target = config.PROXY
@@ -61,8 +61,7 @@ class FlattenProxy:
         try:
             self._virtual_target = self._virtual_parent[key]
         except KeyError:
-            parent = [*self._key, *keys[:-1]]
-            raise TraverseError("{key} doesn't have {target}", ".".join(parent), key)
+            raise TraverseError("{key} doesn't have {target}", ".".join([*self._key, *keys[:-1]]), key)
 
         self._key.extend(keys)
         return self
@@ -114,7 +113,7 @@ class _RedisConfig(metaclass=abc.ABCMeta):
 
     __slots__ = ("_id", "_redis", "_prefix", "_mongodb")
 
-    def __init__(self, *, _id: Any, redis: Redis, prefix: str, config_coll: AsyncIOMotorCollection):
+    def __init__(self, *, _id: Any, redis: Redis, prefix: str, config_coll: AsyncIOMotorCollection) -> None:
         self._id = _id
 
         self._redis = redis
@@ -175,7 +174,7 @@ class RuntimeConfig(_RedisConfig, _AsyncRuntime):
 
     __slots__ = ("default",)
 
-    def __init__(self, default: Runtime, **kwargs):
+    def __init__(self, default: Runtime, **kwargs) -> None:
         super().__init__(**kwargs)
         self.default = default
 
@@ -208,7 +207,7 @@ class GuildConfig(_RedisConfig, _AsyncGuild):
 
     __slots__ = ("runtime",)
 
-    def __init__(self, runtime: RuntimeConfig, **kwargs):
+    def __init__(self, runtime: RuntimeConfig, **kwargs) -> None:
         super().__init__(**kwargs)
         self.runtime = runtime
 
@@ -232,11 +231,11 @@ class GuildConfig(_RedisConfig, _AsyncGuild):
 class Config:
     RUNTIME_ID = "RUNTIME"
 
-    runtime: RuntimeConfig
-    guilds: Dict[int, GuildConfig]
-    redis: Redis
+    runtime: Optional[RuntimeConfig]
+    guilds: Optional[Dict[int, GuildConfig]]
+    redis: Optional[Redis]
 
-    def __init__(self, app: Application):
+    def __init__(self, app: Application) -> None:
         self.app = app
         self.mongo_client = AsyncIOMotorClient(self.app.mongodb.uri)
         self.redis = None
@@ -256,7 +255,7 @@ class Config:
         if isinstance(fp, str):
             fp = Path(fp)
 
-        raw_config = {}
+        raw_config: Dict[str, Any] = {}
 
         if fp.is_file():
             text = fp.read_text()

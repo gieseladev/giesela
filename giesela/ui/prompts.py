@@ -6,7 +6,7 @@ from .interactive import InteractableEmbed, emoji_handler
 class EmbedPrompt(InteractableEmbed):
     embed: Embed
 
-    def __init__(self, channel: TextChannel, **kwargs):
+    def __init__(self, channel: TextChannel, **kwargs) -> None:
         embed = kwargs.pop("embed", False) or kwargs.pop("text", "Are you sure?")
         if isinstance(embed, str):
             embed = Embed(title=embed, colour=Colour.orange())

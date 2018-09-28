@@ -35,7 +35,7 @@ class EntryQueue(EventEmitter):
     entries: Deque[QueueEntry]
     history: Deque[HistoryEntry]
 
-    def __init__(self, player: "GieselaPlayer"):
+    def __init__(self, player: "GieselaPlayer") -> None:
         super().__init__()
         self.player = player
         self.bot = player.bot

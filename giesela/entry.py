@@ -222,7 +222,7 @@ class BaseEntry(Reducible, metaclass=abc.ABCMeta):
 
 class ChapterData(BaseEntry):
 
-    def __init__(self, *, title: str, artist: str = None, cover: str = None, artist_image: str = None, album: str = None):
+    def __init__(self, *, title: str, artist: str = None, cover: str = None, artist_image: str = None, album: str = None) -> None:
         self.title = title
         self.artist = artist
         self.cover = cover
@@ -231,7 +231,7 @@ class ChapterData(BaseEntry):
 
 
 class SpecificChapterData(ChapterData):
-    def __init__(self, *, start: float, duration: float = None, end: float = None, **kwargs):
+    def __init__(self, *, start: float, duration: float = None, end: float = None, **kwargs) -> None:
         super().__init__(**kwargs)
         self._start = start
 
@@ -283,7 +283,7 @@ class HasChapters(metaclass=abc.ABCMeta):
 
 
 class BasicEntry(BaseEntry, PlayableEntry):
-    def __init__(self, *, title: str, artist: str = None, cover: str = None, artist_image: str = None, album: str = None, **kwargs):
+    def __init__(self, *, title: str, artist: str = None, cover: str = None, artist_image: str = None, album: str = None, **kwargs) -> None:
         super().__init__(**kwargs)
         self.title = title
         self.artist = artist
@@ -300,7 +300,7 @@ class BasicEntry(BaseEntry, PlayableEntry):
 
 class ChapterEntry(BasicEntry, HasChapters):
 
-    def __init__(self, *, chapters: List[SpecificChapterData], **kwargs):
+    def __init__(self, *, chapters: List[SpecificChapterData], **kwargs) -> None:
         super().__init__(**kwargs)
         self.chapters = chapters
 
@@ -341,7 +341,7 @@ class RadioEntry(BaseEntry, PlayableEntry, HasChapters):
     _song_data: Optional[RadioSongData]
     _chapter: Optional[ChapterData]
 
-    def __init__(self, *, station: Union[RadioStation, str], **kwargs):
+    def __init__(self, *, station: Union[RadioStation, str], **kwargs) -> None:
         super().__init__(**kwargs)
         if isinstance(station, RadioStation):
             self._station = station
@@ -439,7 +439,7 @@ def load_wrapper_from_dict(data: Dict[str, Any], **pass_down) -> Union["EntryWra
 class EntryWrapper(Reducible, metaclass=_RegisterEntryMeta):
     wrapper: Optional["EntryWrapper"]
 
-    def __init__(self, *, entry: "CanWrapEntryType", **_):
+    def __init__(self, *, entry: "CanWrapEntryType", **_) -> None:
         self.wrapper = None
         self._set_entry(entry)
 
@@ -537,7 +537,7 @@ CanWrapEntryType = Union[EntryWrapper, PlayableEntry]
 class PlayerEntry(EntryWrapper):
     _chapter: Optional[ChapterData]
 
-    def __init__(self, *, player: "GieselaPlayer", **kwargs):
+    def __init__(self, *, player: "GieselaPlayer", **kwargs) -> None:
         super().__init__(**kwargs)
         self.player = player
 
@@ -596,7 +596,7 @@ class PlayerEntry(EntryWrapper):
 
 
 class QueueEntry(EntryWrapper):
-    def __init__(self, *, queue: "EntryQueue", requester_id: int, request_timestamp: float, **kwargs):
+    def __init__(self, *, queue: "EntryQueue", requester_id: int, request_timestamp: float, **kwargs) -> None:
         super().__init__(**kwargs)
         self.queue = queue
         self.requester_id = requester_id
@@ -618,7 +618,7 @@ class QueueEntry(EntryWrapper):
 
 
 class HistoryEntry(EntryWrapper):
-    def __init__(self, *, finish_timestamp: float, **kwargs):
+    def __init__(self, *, finish_timestamp: float, **kwargs) -> None:
         super().__init__(**kwargs)
 
         if not isinstance(self.wrapped, QueueEntry):

@@ -99,7 +99,7 @@ def _create_nodes(node_list: List[LavalinkNode]) -> Dict[LavalinkNodeRegion, Lav
 @has_events("event", "unknown_event", "player_update", "disconnect", "voice_channel_update")
 class LavalinkNodeBalancer(EventEmitter):
 
-    def __init__(self, loop: AbstractEventLoop, nodes: Union[List[LavalinkNode], Dict[LavalinkNodeRegion, List[LavalinkNode]]]):
+    def __init__(self, loop: AbstractEventLoop, nodes: Union[List[LavalinkNode], Dict[LavalinkNodeRegion, List[LavalinkNode]]]) -> None:
         super().__init__(loop=loop)
         self.loop = loop
 

@@ -83,7 +83,7 @@ def convert(value, cls):
 
 
 class Check:
-    def __init__(self, callback, default: Any = _DEFAULT, *, fail_msg: str = None, raise_original: bool = True):
+    def __init__(self, callback, default: Any = _DEFAULT, *, fail_msg: str = None, raise_original: bool = True) -> None:
         self.callback = callback
         self.default = default
 

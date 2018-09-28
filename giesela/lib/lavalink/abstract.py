@@ -11,7 +11,7 @@ BotType = Union[Bot, AutoShardedBot]
 class AbstractLavalinkClient:
     loop: asyncio.AbstractEventLoop
 
-    def __init__(self, *, bot: BotType, region: LavalinkNodeRegion, password: str, lavalink_address: str, lavalink_secure: bool, **kwargs):
+    def __init__(self, *, bot: BotType, region: LavalinkNodeRegion, password: str, lavalink_address: str, lavalink_secure: bool, **kwargs) -> None:
         self.bot = bot
         self.loop = bot.loop
         self.region = region

@@ -11,7 +11,7 @@ from ..interactive import ItemPicker, MessageableEmbed
 
 
 class EntrySearchUI(AutoHelpEmbed, MessageableEmbed, ItemPicker):
-    def __init__(self, channel: TextChannel, *, player: GieselaPlayer, results: List[PlayableEntry], **kwargs):
+    def __init__(self, channel: TextChannel, *, player: GieselaPlayer, results: List[PlayableEntry], **kwargs) -> None:
         super().__init__(channel, **kwargs)
         self.player = player
         self.results = results

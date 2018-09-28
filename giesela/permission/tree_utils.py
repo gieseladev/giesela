@@ -14,7 +14,7 @@ class Node(metaclass=PermNodeMeta):
 
 
 def prepare_tree(tree: type, namespace: str = None):
-    tree.__namespace__ = namespace
+    setattr(tree, "__namespace__", namespace)
 
     for name, value in inspect.getmembers(tree):
         if name.startswith("_"):

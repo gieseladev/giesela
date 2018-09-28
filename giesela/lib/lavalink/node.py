@@ -11,7 +11,7 @@ __all__ = ["LavalinkNode"]
 
 
 class LavalinkNode(LavalinkREST, LavalinkWebSocket):
-    def __init__(self, bot: Client, password: str, address: str, secure: bool, **kwargs):
+    def __init__(self, bot: Client, password: str, address: str, secure: bool, **kwargs) -> None:
         super().__init__(bot=bot, password=password, lavalink_address=address, lavalink_secure=secure, **kwargs)
 
     def __str__(self) -> str:

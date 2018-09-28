@@ -66,9 +66,9 @@ async def _delayed_disconnect(player: GieselaPlayer, delay: float):
 
 class Player:
     np_messages: Dict[int, NowPlayingEmbed]
-    _disconnects: Dict[int, asyncio.Task]
+    _disconnects: Dict[int, asyncio.Future]
 
-    def __init__(self, bot: Giesela):
+    def __init__(self, bot: Giesela) -> None:
         self.bot = bot
         self.config = bot.config
 

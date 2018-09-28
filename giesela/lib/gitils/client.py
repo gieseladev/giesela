@@ -7,7 +7,7 @@ from .models import *
 
 class GiTilsClient:
 
-    def __init__(self, aiosession: ClientSession, url: str):
+    def __init__(self, aiosession: ClientSession, url: str) -> None:
         self.aiosession = aiosession
         self.url = url
 

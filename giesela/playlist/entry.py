@@ -18,7 +18,7 @@ log = logging.getLogger(__name__)
 
 
 class LoadedPlaylistEntry(EntryWrapper):
-    def __init__(self, *, playlist: Union["Playlist", str], playlist_entry: Union["PlaylistEntry", str], **kwargs):
+    def __init__(self, *, playlist: Union["Playlist", str], playlist_entry: Union["PlaylistEntry", str], **kwargs) -> None:
         super().__init__(**kwargs)
 
         if isinstance(playlist, str):

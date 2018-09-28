@@ -1,4 +1,3 @@
-import inspect
 import logging
 import re
 from difflib import SequenceMatcher
@@ -55,12 +54,15 @@ def similarity(a: str, b: Union[str, Tuple[str, ...]], *, lower: bool = False, j
         a = a.lower()
         b = b.lower()
 
-    if not inspect.isfunction(junk):
+    if isinstance(junk, Iterable):
         _junk = set(junk)
 
-        def junk(s: str) -> bool: return s in _junk
+        def junk_func(s: str) -> bool:
+            return s in _junk
+    elif junk:
+        junk_func = junk
 
-    return SequenceMatcher(junk, a, b, autojunk=auto_junk).ratio()
+    return SequenceMatcher(junk_func, a, b, autojunk=auto_junk).ratio()
 
 
 class SplitSongName(NamedTuple):

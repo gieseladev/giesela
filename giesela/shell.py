@@ -29,7 +29,7 @@ EmptyResult = _EmptyResult()
 
 
 class ShellException(Exception):
-    def __init__(self, msg: str, original: BaseException = None, **kwargs):
+    def __init__(self, msg: str, original: BaseException = None, **kwargs) -> None:
         self.msg = msg
         self.original = original
         self.data = kwargs
@@ -51,7 +51,7 @@ class InterpreterUnavailable(ShellException, OSError):
 class UploadAdapter(metaclass=abc.ABCMeta):
     NAME: str
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         pass
 
     @classmethod
@@ -78,7 +78,7 @@ class HastebinUpload(UploadAdapter):
 
     _aiosession: Optional[aiohttp.ClientSession]
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
         ctx = kwargs.get("ctx")
@@ -111,7 +111,7 @@ class ShellInterpreter(metaclass=abc.ABCMeta):
 
     variables: Dict[str, Any]
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         self.variables = {}
         self.variables.update(kwargs)
 
@@ -152,7 +152,7 @@ class BashInterpreter(ShellInterpreter):
 
     process: Optional[subprocess.Process]
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         self.process = None
 
@@ -201,7 +201,7 @@ class GieselaInterpreter(ShellInterpreter, metaclass=abc.ABCMeta):
     ctx: Context
     bot: Giesela
 
-    def __init__(self, *, ctx: Context, **kwargs):
+    def __init__(self, *, ctx: Context, **kwargs) -> None:
         super().__init__(**kwargs)
         self.ctx = ctx
         self.bot = ctx.bot
@@ -221,7 +221,7 @@ class JavascriptInterpreter(GieselaInterpreter):
     language_name = "Javascript"
     highlight_language = "js"
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
         self.eval_js = js2py.EvalJs(super().context)
@@ -266,10 +266,10 @@ class PythonInterpreter(GieselaInterpreter):
         # TODO escape {} in code
         code = code.format(args=",".join(args))
         try:
-            _scope = {}
+            _scope: Dict[str, Any] = {}
             exec(code, context.copy(), _scope)
         except SyntaxError:
-            pass
+            return None
         else:
             func = _scope.get("func")
             return functools.partial(func, **context)
@@ -349,7 +349,7 @@ class GieselaShell:
     upload_adapter: UploadAdapter
     history: List[ShellLine]
 
-    def __init__(self, interpreter: ShellInterpreter, upload_adapter: UploadAdapter):
+    def __init__(self, interpreter: ShellInterpreter, upload_adapter: UploadAdapter) -> None:
         interpreter.ensure_available()
         self.interpreter = interpreter
         self.upload_adapter = upload_adapter
@@ -361,14 +361,16 @@ class GieselaShell:
         return cls.find_interpreter("python", upload_adapter, **kwargs)
 
     @classmethod
-    def find_interpreter(cls, alias: str, upload_adapter: Type[UploadAdapter] = HastebinUpload, **kwargs) -> Optional["GieselaShell"]:
+    def find_interpreter(cls, alias: str, upload_adapter_type: Type[UploadAdapter] = HastebinUpload, **kwargs) -> Optional["GieselaShell"]:
         interpreter_cls = INTERPRETERS.get(alias.lower())
         if not interpreter_cls:
             return None
         interpreter = interpreter_cls(**kwargs)
 
-        if not isinstance(upload_adapter, UploadAdapter):
-            upload_adapter = upload_adapter(**kwargs)
+        if not isinstance(upload_adapter_type, UploadAdapter):
+            upload_adapter = upload_adapter_type(**kwargs)
+        else:
+            upload_adapter = upload_adapter_type
 
         return cls(interpreter, upload_adapter)
 
@@ -384,7 +386,7 @@ class GieselaShell:
             error = None
             _kwargs = dict(depth=2)
             _kwargs.update(kwargs)
-            pretty = pprint.pformat(obj_of_interest, **_kwargs)
+            pretty: Optional[str] = pprint.pformat(obj_of_interest, **_kwargs)
         else:
             error = ShellException("Nothing to prettify!")
             pretty = None

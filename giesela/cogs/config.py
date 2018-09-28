@@ -1,3 +1,5 @@
+from typing import List, Optional
+
 import yaml
 from discord import Colour, Embed, Guild
 from discord.ext import commands
@@ -8,7 +10,7 @@ from giesela.config import TraverseError, abstract
 from giesela.config.abstract import ConfigObject
 
 
-async def show_config(ctx: Context, config: ConfigObject, key: str, default_name: str):
+async def show_config(ctx: Context, config: ConfigObject, key: Optional[str], default_name: str):
     if key:
         try:
             config = abstract.traverse_config(config, key)
@@ -23,7 +25,7 @@ async def show_config(ctx: Context, config: ConfigObject, key: str, default_name
         await ctx.send(embed=em)
         return
 
-    lines = []
+    lines: List[str] = []
 
     for key, value in abstract.config_items(config):
         if isinstance(value, ConfigObject):
@@ -71,7 +73,7 @@ async def reset_config_value(ctx: Context, config, key: str):
 
 
 class Config:
-    def __init__(self, bot: Giesela):
+    def __init__(self, bot: Giesela) -> None:
         self.bot = bot
         self.config = bot.config
 

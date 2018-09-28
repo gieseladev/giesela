@@ -11,7 +11,7 @@ __all__ = ["LavalinkREST"]
 class LavalinkREST(AbstractLavalinkClient):
     aiosession: ClientSession
 
-    def __init__(self, *, aiosession: ClientSession = None, **kwargs):
+    def __init__(self, *, aiosession: ClientSession = None, **kwargs) -> None:
         super().__init__(**kwargs)
         self.aiosession = aiosession or getattr(self.bot, "aiosession")
         self._auth_header = dict(authorization=self._password)

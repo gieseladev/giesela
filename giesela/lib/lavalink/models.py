@@ -154,7 +154,7 @@ class Track(NamedTuple):
 class LoadTracksResult(NamedTuple):
     load_type: TrackLoadType
     playlist_info: Optional[TrackPlaylistInfo]
-    tracks: Optional[List[Track]]
+    tracks: List[Track]
 
     def __len__(self) -> int:
         return len(self.tracks)
@@ -165,7 +165,7 @@ class LoadTracksResult(NamedTuple):
             return self.tracks[0]
         elif self.load_type == TrackLoadType.PLAYLIST:
             index = self.playlist_info.selected_track
-            if index >= 0:
+            if index is not None and 0 <= index < len(self.tracks):
                 return self.tracks[index]
 
         return None

@@ -25,7 +25,7 @@ def _check_unicode(val):
 
 class HTTPRequest(BaseHTTPRequestHandler):
 
-    def __init__(self, request_text):
+    def __init__(self, request_text) -> None:
         self.rfile = BytesIO(request_text)
         self.raw_requestline = self.rfile.readline()
         self.error_code = self.error_message = None
@@ -64,7 +64,7 @@ MAXPAYLOAD = 33554432
 
 class WebSocket(object):
 
-    def __init__(self, server, sock, address):
+    def __init__(self, server, sock, address) -> None:
         self.guild = server
         self.client = sock
         self.address = address
@@ -568,7 +568,7 @@ def _handleClose(client):
 
 class SimpleWebSocketServer(object):
 
-    def __init__(self, host, port, websocketclass, selectInterval=0.1):
+    def __init__(self, host, port, websocketclass, selectInterval=0.1) -> None:
         self.websocketclass = websocketclass
         self.guildsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.guildsocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)

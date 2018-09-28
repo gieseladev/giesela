@@ -69,7 +69,7 @@ class Files(ConfigObject):
     radio_stations: str = "radio_stations.yml"
     playlists: str = "playlists/playlists"
 
-    def __init__(self):
+    def __init__(self) -> None:
         # these should be relative to data folder
         for key in ("certificates", "radio_stations", "playlists"):
             path = Path(getattr(self, key))

@@ -2,7 +2,7 @@ import abc
 import asyncio
 import logging
 from asyncio import CancelledError
-from typing import Any, Callable, Dict
+from typing import Any, Callable, Dict, Optional
 
 from discord import Client, Message, User
 
@@ -26,7 +26,7 @@ class Startable(metaclass=abc.ABCMeta):
 
 
 class HasBot(metaclass=abc.ABCMeta):
-    def __init__(self, *args, bot: Client, **kwargs):
+    def __init__(self, *args, bot: Client, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
         self.bot = bot
@@ -47,7 +47,7 @@ class MessageHandler(metaclass=abc.ABCMeta):
 class CanSignalStop(metaclass=abc.ABCMeta):
     _stop_signal: bool
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         self.reset_signal()
         super().__init__(*args, **kwargs)
 
@@ -63,14 +63,13 @@ class CanSignalStop(metaclass=abc.ABCMeta):
 
 
 class Listener(CanSignalStop, metaclass=abc.ABCMeta):
-    _listener: asyncio.Future
+    _listener: Optional[asyncio.Future]
     _result: Any
-    _listen_once: Callable[["Listener"], Any]
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, listen_once: Callable[[], Any], **kwargs) -> None:
         self._listener = None
         self._result = None
-        self._listen_once = kwargs.pop("listen_once", None)
+        self._listen_once = listen_once
         super().__init__(*args, **kwargs)
 
     @property
@@ -118,7 +117,7 @@ class Listener(CanSignalStop, metaclass=abc.ABCMeta):
 class HasListener(Startable, Stoppable):
     _listeners: Dict[str, Listener]
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         self._listeners = {}
         super().__init__(*args, **kwargs)
 

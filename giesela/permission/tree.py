@@ -36,6 +36,7 @@ class perm_tree(Node):
 
         remove: str
         move: str
+        replay: str
         edit: str
 
         class inspect(Node):

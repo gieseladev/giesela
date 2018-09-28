@@ -64,7 +64,7 @@ class RadioStation:
     update_interval: int
     extra_update_delay: int
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         self.name = kwargs.pop("name")
         self.aliases = kwargs.pop("aliases", [])
         self.stream = kwargs.pop("stream")
@@ -144,7 +144,7 @@ class RadioStationManager:
 
     aiosession: ClientSession
 
-    def __init__(self, bot: Giesela, stations: List[RadioStation] = None):
+    def __init__(self, bot: Giesela, stations: List[RadioStation] = None) -> None:
         self.bot = bot
         self.stations = stations or []
 
@@ -184,3 +184,4 @@ class RadioStationManager:
         for station in self:
             if station.is_alias(query):
                 return station
+        return None

@@ -4,7 +4,7 @@ __all__ = ["ObjectChain"]
 
 
 class ObjectChain:
-    def __init__(self, *targets: Any):
+    def __init__(self, *targets: Any) -> None:
         self._targets = list(targets)
 
     def __getattr__(self, item: str):

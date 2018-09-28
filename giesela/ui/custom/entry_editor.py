@@ -13,7 +13,7 @@ from ..interactive import InteractableEmbed, MessageableEmbed, VerticalTextViewe
 
 
 class EditBase(BaseEntry):
-    def __init__(self, base, *, title: str, artist: str = None, artist_image: str = None, album: str = None, cover: str = None, **kwargs):
+    def __init__(self, base, *, title: str, artist: str = None, artist_image: str = None, album: str = None, cover: str = None, **kwargs) -> None:
         self.base = base
 
         self.title = title
@@ -47,7 +47,7 @@ class EditBase(BaseEntry):
 
 
 class EditChapter(SpecificChapterData, EditBase):
-    def __init__(self, base: SpecificChapterData, **kwargs):
+    def __init__(self, base: SpecificChapterData, **kwargs) -> None:
         self.base = base
         super().__init__(**kwargs)
 
@@ -75,7 +75,7 @@ class SurroundingChapter(NamedTuple):
 class EditEntry(EditBase):
     chapters: List[SpecificChapterData]
 
-    def __init__(self, base: PlayableEntry, *, chapters: List[SpecificChapterData] = None, **kwargs):
+    def __init__(self, base: PlayableEntry, *, chapters: List[SpecificChapterData] = None, **kwargs) -> None:
         super().__init__(base, **kwargs)
 
         self.chapters = chapters or []
@@ -163,7 +163,7 @@ class _BaseEditor(AutoHelpEmbed, InteractableEmbed, MessageableEmbed):
     bot: Giesela
     aiosession: aiohttp.ClientSession
 
-    def __init__(self, channel: TextChannel, *, editor: EditBase, **kwargs):
+    def __init__(self, channel: TextChannel, *, editor: EditBase, **kwargs) -> None:
         super().__init__(channel, **kwargs)
 
         self.editor = editor
@@ -304,7 +304,7 @@ class _BaseEditor(AutoHelpEmbed, InteractableEmbed, MessageableEmbed):
 class ChapterEditor(_BaseEditor):
     editor: EditChapter
 
-    def __init__(self, channel: TextChannel, *, entry_editor: EditEntry, chapter: SpecificChapterData, **kwargs):
+    def __init__(self, channel: TextChannel, *, entry_editor: EditEntry, chapter: SpecificChapterData, **kwargs) -> None:
         self.entry_editor = entry_editor
         editor = EditChapter.from_entry(chapter)
         super().__init__(channel, editor=editor, **kwargs)
@@ -364,7 +364,7 @@ class ChapterEditor(_BaseEditor):
 class EntryEditor(VerticalTextViewer, _BaseEditor):
     editor: EditEntry
 
-    def __init__(self, channel: TextChannel, *, entry: PlayableEntry, **kwargs):
+    def __init__(self, channel: TextChannel, *, entry: PlayableEntry, **kwargs) -> None:
         self._entry = entry
         editor = EditEntry.from_entry(entry)
         super().__init__(channel, editor=editor, **kwargs)

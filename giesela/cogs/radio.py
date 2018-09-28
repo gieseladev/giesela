@@ -33,7 +33,7 @@ class Radio:
 
     get_player: Player.get_player
 
-    def __init__(self, bot: Giesela):
+    def __init__(self, bot: Giesela) -> None:
         self.bot = bot
         self.station_manager = RadioStationManager.load(bot, bot.config.app.files.radio_stations)
         self.bot.store_reference("radio_station_manager", self.station_manager)
@@ -68,7 +68,7 @@ class Radio:
             return stations[result % len(stations)]
 
     @commands.guild_only()
-    @permission.has_permission(perm_tree.music.queue.manipulate.enqueue.stream)
+    @permission.has_permission(perm_tree.queue.add.stream)
     @commands.group(invoke_without_command=True)
     async def radio(self, ctx: Context, station: str = None):
         """Play a radio station.
@@ -90,7 +90,7 @@ class Radio:
         await play_station(ctx, player, station)
 
     @commands.guild_only()
-    @permission.has_permission(perm_tree.music.queue.manipulate.enqueue.stream)
+    @permission.has_permission(perm_tree.queue.add.stream)
     @radio.command("random")
     async def radio_random(self, ctx: Context):
         """Play a random radio station."""

@@ -78,7 +78,7 @@ class PlaylistCog:
     get_player: Player.get_player
     extractor: Extractor
 
-    def __init__(self, bot: Giesela):
+    def __init__(self, bot: Giesela) -> None:
         self.bot = bot
         self.playlist_manager = PlaylistManager.load(self.bot, self.bot.config.app.files.playlists)
 
@@ -113,7 +113,7 @@ class PlaylistCog:
         playlist = self.playlist_manager.import_from_gpl(data, author=author)
 
         if not playlist:
-            return
+            return None
 
         return playlist_embed(playlist)
 
@@ -136,7 +136,7 @@ class PlaylistCog:
             await ctx.message.delete()
 
     @commands.guild_only()
-    @permission.has_permission(perm_tree.music.queue.manipulate.enqueue.playlist)
+    @permission.has_permission(perm_tree.queue.add.playlist)
     @playlist.group("play", invoke_without_command=True, aliases=["load", "start", "listen"])
     async def playlist_play(self, ctx: Context, *, playlist: UnquotedStr):
         """Play a playlist"""
@@ -144,7 +144,7 @@ class PlaylistCog:
         await self.play_playlist(ctx, playlist)
 
     @commands.guild_only()
-    @permission.has_permission(perm_tree.music.queue.manipulate.enqueue.playlist)
+    @permission.has_permission(perm_tree.queue.add.playlist)
     @playlist_play.command("random")
     async def playlist_play_random(self, ctx: Context):
         """Play a random playlist"""
@@ -155,7 +155,7 @@ class PlaylistCog:
         playlist = random.choice(playlists)
         await self.play_playlist(ctx, playlist)
 
-    @permission.has_permission(perm_tree.playlist.create)
+    @permission.has_permission(perm_tree.playlist.owned.create)
     @playlist.command("create", aliases=["new"])
     async def playlist_create(self, ctx: Context, *, name: UnquotedStr):
         """Create a new playlist"""
@@ -432,11 +432,12 @@ class PlaylistCog:
         embed = playlist_embed(playlist)
         await ctx.send("Imported playlist:", embed=embed)
 
-    @permission.has_permission(perm_tree.playlist.export)
     @playlist.command("export")
     async def playlist_export(self, ctx: Context, *, playlist: UnquotedStr):
         """Export a playlist"""
         playlist = self.find_playlist(playlist)
+
+        # TODO check for playlist.all.export permission for non-editors of this playing
 
         serialised = rapidjson.dumps(playlist.to_gpl())
         data = BytesIO(serialised.encode("utf-8"))

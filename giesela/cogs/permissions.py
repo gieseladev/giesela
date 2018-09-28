@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 
 class Permissions:
-    def __init__(self, bot: Giesela):
+    def __init__(self, bot: Giesela) -> None:
         self.bot = bot
         self.perm_manager = PermManager(bot.config)
 

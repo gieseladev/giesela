@@ -43,7 +43,7 @@ class ShellUI(AutoHelpEmbed, MessageableEmbed, VerticalTextViewer):
     run_timeout: Optional[int]
     upload_url: Optional[Tuple[str, str]]
 
-    def __init__(self, ctx: Context, *, variables: Mapping[str, Any] = None, **kwargs):
+    def __init__(self, ctx: Context, *, variables: Mapping[str, Any] = None, **kwargs) -> None:
         shell = kwargs.pop("shell", None)
         interpreter_kwargs = variables or {}
         interpreter_kwargs.update(ctx=ctx)

@@ -35,7 +35,7 @@ def create_basic_embed(playlist: Playlist) -> Embed:
 class _PlaylistEmbed(VerticalTextViewer, HasBot, metaclass=abc.ABCMeta):
     player_cog: "Player"
 
-    def __init__(self, channel: TextChannel, *, playlist: Playlist, embed_frame=None, **kwargs):
+    def __init__(self, channel: TextChannel, *, playlist: Playlist, embed_frame=None, **kwargs) -> None:
         super().__init__(channel, embed_frame=embed_frame or create_basic_embed(playlist), **kwargs)
 
         self.playlist = playlist
@@ -66,7 +66,7 @@ class _PlaylistEmbed(VerticalTextViewer, HasBot, metaclass=abc.ABCMeta):
 
 
 class PlaylistViewer(_PlaylistEmbed):
-    def __init__(self, channel: TextChannel, **kwargs):
+    def __init__(self, channel: TextChannel, **kwargs) -> None:
         playlist = kwargs["playlist"]
         embed = create_basic_embed(playlist)
         embed.add_field(name="Length", value=f"{len(playlist)} entries")
@@ -85,7 +85,7 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
     _highlighted_line: Optional[int]
     _processing: Optional[Tuple[str, str]]
 
-    def __init__(self, channel: TextChannel, **kwargs):
+    def __init__(self, channel: TextChannel, **kwargs) -> None:
         super().__init__(channel, **kwargs)
         self.extractor = self.player_cog.extractor
         self.playlist_editor = self.playlist.edit()

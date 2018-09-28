@@ -14,7 +14,7 @@ class Webiesela:
     playlist_manager: PlaylistManager
     radio_station_manager: RadioStationManager
 
-    def __init__(self, bot: Giesela):
+    def __init__(self, bot: Giesela) -> None:
         self.bot = bot
         self.config = bot.config
 
@@ -33,7 +33,7 @@ class Webiesela:
             WebieselaServer.server.close()
 
     @commands.guild_only()
-    @permission.has_permission(perm_tree.webiesela)
+    @permission.has_permission(perm_tree.webiesela.register)
     @commands.command()
     async def register(self, ctx: Context, token: str):
         """Use this command in order to use Webiesela."""

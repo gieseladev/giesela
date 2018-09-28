@@ -73,7 +73,9 @@ def count_embed_chars(embed: Embed) -> int:
 
 
 class _FakeClient:
-    def __init__(self, *args, loop=None, **kwargs):
+    _listeners: Dict[str, Callable]
+
+    def __init__(self, *args, loop=None, **kwargs) -> None:
         self.loop = asyncio.get_event_loop() if loop is None else loop
         self._listeners = {}
 
@@ -82,7 +84,7 @@ class _FakeClient:
 
 
 class CustomParamsCommand(Command):
-    def __init__(self, name: str, callback: Callable, params: Dict[str, inspect.Parameter], **kwargs):
+    def __init__(self, name: str, callback: Callable, params: Dict[str, inspect.Parameter], **kwargs) -> None:
         super().__init__(name, callback, **kwargs)
         self.params = params
 
@@ -102,7 +104,7 @@ class MenuCommandGroup(BotBase, _FakeClient):
     """
     _dynamic_commands: List[str]
 
-    def __init__(self, bot: Client, **kwargs):
+    def __init__(self, bot: Client, **kwargs) -> None:
         self.bot = bot
         keep_default_help = kwargs.pop("keep_default_help", False)
         super().__init__("", **kwargs)

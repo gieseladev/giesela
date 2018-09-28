@@ -1,5 +1,6 @@
 import hashlib
 import logging
+from typing import Optional
 
 from aioredis import Redis, ReplyError
 
@@ -9,7 +10,9 @@ log = logging.getLogger(__name__)
 
 
 class RedisCode:
-    def __init__(self, code: bytes):
+    _code_hash: Optional[str]
+
+    def __init__(self, code: bytes) -> None:
         self.code = code
         self._code_hash = None
 

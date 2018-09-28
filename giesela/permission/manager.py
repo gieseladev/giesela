@@ -23,7 +23,7 @@ class PermManager:
 
     def __init__(self, config: Config) -> None:
         self._config = config
-        self._permission_coll = config.mongodb[config.app.mongodb.collections.permissions]
+        self._perm_roles_coll = config.mongodb[config.app.mongodb.collections.perm_roles]
 
     @property
     def _redis(self) -> Redis:
@@ -52,7 +52,7 @@ class PermManager:
         return default
 
     async def get_perm_loader(self) -> PermLoader:
-        return await PermLoader.load_db(self._permission_coll)
+        return await PermLoader.load_db(self._perm_roles_coll)
 
     async def get_roles(self) -> List[LoadedRole]:
         loader = await self.get_perm_loader()

@@ -26,7 +26,7 @@ class GPLVersion(enum.IntEnum):
 
 
 class FixStep(metaclass=abc.ABCMeta):
-    def __init__(self, *, description: str = None):
+    def __init__(self, *, description: str = None) -> None:
         self.description = description
 
     @property
@@ -45,7 +45,7 @@ class FixStep(metaclass=abc.ABCMeta):
 class InputStep(FixStep, abc.ABC):
     _args: Dict[str, Any]
 
-    def __init__(self, *, required_input: Dict[str, Type], supplied_input: Dict[str, Any] = None, **kwargs):
+    def __init__(self, *, required_input: Dict[str, Type], supplied_input: Dict[str, Any] = None, **kwargs) -> None:
         kwargs.setdefault("description", "Getting input")
         super().__init__(**kwargs)
 
@@ -110,7 +110,7 @@ class ExtractorStep(FixStep, abc.ABC):
 
 
 class AddPlaylistMeta(InputStep):
-    def __init__(self, *, name: str = None, author: User = None, **kwargs):
+    def __init__(self, *, name: str = None, author: User = None, **kwargs) -> None:
         kwargs["required_input"] = dict(name=str, author=User)
         kwargs["supplied_input"] = {key: value for key, value in dict(name=name, author=author).items() if value}
         super().__init__(**kwargs)
@@ -126,7 +126,7 @@ class AddPlaylistMeta(InputStep):
 
 
 class UpdateEntries(ExtractorStep):
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         kwargs.setdefault("description", "Extracting additional data...")
         super().__init__(**kwargs)
 
@@ -193,7 +193,7 @@ class UpdateEntries(ExtractorStep):
 class PlaylistRecovery:
     current_step: Optional[FixStep]
 
-    def __init__(self, steps: List[FixStep], data: GPLType, basic_info: Dict[str, Any] = None):
+    def __init__(self, steps: List[FixStep], data: GPLType, basic_info: Dict[str, Any] = None) -> None:
         self.steps = steps
         self.step_iter = iter(steps)
         self.current_step = None

@@ -20,7 +20,7 @@ class EmbedPaginator:
     _embed: Embed
     _embeds: List[Embed]
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         self.template = kwargs.pop("template", Embed())
         _special_template = kwargs.pop("special_template", None)
         if isinstance(_special_template, Embed):
@@ -54,6 +54,7 @@ class EmbedPaginator:
     def current_embed(self) -> Optional[Embed]:
         if self._embeds:
             return self._embeds[-1]
+        return None
 
     def _add_embed(self) -> Embed:
         number = len(self)

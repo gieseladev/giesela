@@ -7,9 +7,9 @@ if TYPE_CHECKING:
 
 
 class WebAuthor:
-    bot: "Giesela" = None
+    bot: "Giesela"
 
-    def __init__(self, user_id: int, name: str, display_name: str, avatar_url: str):
+    def __init__(self, user_id: int, name: str, display_name: str, avatar_url: str) -> None:
         self.id = user_id
         self.name = name
         self.display_name = display_name

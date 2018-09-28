@@ -27,8 +27,8 @@ _CT = TypeVar("_CT", bound=EmojiHandlerType)
 
 def emoji_handler(*reactions: EmojiType, pos: int = None):
     def decorator(func: _CT) -> _CT:
-        func._handles = list(reactions)
-        func._pos = pos
+        setattr(func, "_handles", list(reactions))
+        setattr(func, "_pos", pos)
         return func
 
     return decorator
@@ -40,7 +40,7 @@ class InteractableEmbed(HasListener, HasBot, EditableEmbed, ReactionHandler, Sta
 
     _emojis: List[Tuple[EmojiType, int]]
 
-    def __init__(self, channel: TextChannel, *, user: User = None, **kwargs):
+    def __init__(self, channel: TextChannel, *, user: User = None, **kwargs) -> None:
         super().__init__(channel, **kwargs)
         self.user = user
         self.handlers = {}
@@ -58,7 +58,7 @@ class InteractableEmbed(HasListener, HasBot, EditableEmbed, ReactionHandler, Sta
     @property
     def emojis(self) -> Tuple[EmojiType]:
         self._emojis.sort(key=operator.itemgetter(1))
-        return next(zip(*self._emojis), tuple())
+        return next(zip(*self._emojis), None) or ()
 
     @property
     def result(self) -> Any:
@@ -83,7 +83,7 @@ class InteractableEmbed(HasListener, HasBot, EditableEmbed, ReactionHandler, Sta
         await asyncio.gather(*futures)
 
     def disable_handler(self, handler: Union[EmojiType, List[EmojiType], EmojiHandlerType]) -> List[EmojiType]:
-        if isinstance(handler, Callable):
+        if inspect.isfunction(handler):
             emojis = getattr(handler, "_handles", None)
             if not emojis:
                 raise ValueError(f"{handler} doesn't handle any emoji")
@@ -214,7 +214,7 @@ class MessageableEmbed(HasListener, HasBot, EditableEmbed, MessageHandler, Start
     _group: MenuCommandGroup
     error: Optional[str]
 
-    def __init__(self, channel: TextChannel, *, user: User = None, delete_msgs: bool = True, **kwargs):
+    def __init__(self, channel: TextChannel, *, user: User = None, delete_msgs: bool = True, **kwargs) -> None:
         super().__init__(channel, **kwargs)
 
         self.user = user
@@ -318,7 +318,7 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
 
     _current_index: int
 
-    def __init__(self, channel: TextChannel, **kwargs):
+    def __init__(self, channel: TextChannel, **kwargs) -> None:
         self.embeds = kwargs.pop("embeds", None)
         no_controls_for_single_page = kwargs.pop("no_controls_for_single_page", True)
 
@@ -424,7 +424,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
     _current_line: int
     _lines_displayed: int
 
-    def __init__(self, channel: TextChannel, **kwargs):
+    def __init__(self, channel: TextChannel, **kwargs) -> None:
         self._embed_frame = kwargs.pop("embed_frame", None)
         if isinstance(self._embed_frame, Embed):
             self._embed_frame = self._embed_frame.to_dict()

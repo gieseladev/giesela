@@ -40,7 +40,7 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
     _delayed_update_task: Optional[asyncio.Task]
     _show_detailed_task: Optional[asyncio.Task]
 
-    def __init__(self, channel: TextChannel, *, player: GieselaPlayer, seek_amount: float = 30, show_detailed_duration: float = 20, **kwargs):
+    def __init__(self, channel: TextChannel, *, player: GieselaPlayer, seek_amount: float = 30, show_detailed_duration: float = 20, **kwargs) -> None:
         super().__init__(channel, **kwargs)
         self.player = player
         self.seek_amount = seek_amount
@@ -133,13 +133,13 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         # TODO permissions
         await self.player.revert(user)
 
-    @permission.has_permission(perm_tree.music.player.manipulate.skip.seek)
+    @permission.has_permission(perm_tree.player.seek)
     @emoji_handler("⏪", pos=2)
     async def fast_rewind(self, *_):
         if self.player.can_seek:
             await self.player.seek(self.player.progress - self.seek_amount)
 
-    @permission.has_permission(perm_tree.music.player.manipulate.pause)
+    @permission.has_permission(perm_tree.player.pause)
     @emoji_handler("⏯", pos=3)
     async def play_pause(self, *_):
         if self.player.is_playing:
@@ -147,18 +147,18 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
         else:
             await self.player.resume()
 
-    @permission.has_permission(perm_tree.music.player.manipulate.skip.seek)
+    @permission.has_permission(perm_tree.player.seek)
     @emoji_handler("⏩", pos=4)
     async def fast_forward(self, *_):
         if self.player.can_seek:
             await self.player.seek(self.player.progress + self.seek_amount)
 
-    @permission.has_permission(perm_tree.music.player.manipulate.skip)
+    @permission.has_permission(perm_tree.player.skip)
     @emoji_handler("⏭", pos=5)
     async def next_entry(self, *_):
         await self.player.skip()
 
-    @permission.has_permission(perm_tree.music.queue.inspect.current)
+    @permission.has_permission(perm_tree.queue.inspect.current)
     @emoji_handler("🔎", pos=10)
     async def show_detailed(self, *_):
         task = self._show_detailed_task

@@ -112,7 +112,7 @@ async def get_command_help(ctx: Context, *cmds: str) -> Optional[Embed]:
 class HelpEmbed(InteractableEmbed):
     help_embed: Embed
 
-    def __init__(self, channel: TextChannel, *, help_embed: Embed, **kwargs):
+    def __init__(self, channel: TextChannel, *, help_embed: Embed, **kwargs) -> None:
         self.help_embed = help_embed
         super().__init__(channel, **kwargs)
 
@@ -135,7 +135,7 @@ class HasHelp(Stoppable, metaclass=abc.ABCMeta):
     _help_embed: Optional[Embed]
     _help_embed_cls: Type[HelpEmbed]
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         self._showing_custom = False
         self._current_help = None
         self._help_embed = None

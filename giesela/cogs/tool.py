@@ -6,7 +6,7 @@ from discord.ext.commands import Bot, Context
 class Tools:
     bot: Bot
 
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: Bot) -> None:
         self.bot = bot
 
     @commands.guild_only()

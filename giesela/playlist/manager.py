@@ -22,7 +22,7 @@ class PlaylistManager:
     _playlists: Dict[uuid.UUID, Playlist]
     _broken_playlists: List[compat.PlaylistRecovery]
 
-    def __init__(self, bot: Giesela, storage):
+    def __init__(self, bot: Giesela, storage) -> None:
         self.bot = bot
         self.storage = storage
         self._playlists = {}

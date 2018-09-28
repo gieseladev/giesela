@@ -7,7 +7,7 @@ __all__ = ["ConfigError", "ConfigKeyMissing", "ConfigValueError",
 
 
 class ConfigError(GieselaError):
-    def __init__(self, msg: str, key: str = None, **extra):
+    def __init__(self, msg: str, key: str = None, **extra) -> None:
         self.msg = msg
         self.key = key or None
         self.extra = extra
@@ -27,17 +27,17 @@ class ConfigError(GieselaError):
 
 
 class ConfigKeyMissing(ConfigError, KeyError):
-    def __init__(self, msg: str, key: str, **extra):
+    def __init__(self, msg: str, key: str, **extra) -> None:
         super().__init__(msg, key, **extra)
 
 
 class ConfigValueError(ConfigError, ValueError):
-    def __init__(self, msg: str, key: Optional[str], value: Any, **extra):
+    def __init__(self, msg: str, key: Optional[str], value: Any, **extra) -> None:
         super().__init__(msg, key, value=value, **extra)
         self.value = value
 
 
 class TraverseError(ConfigError, AttributeError):
-    def __init__(self, msg: str, parent: str, key: str, **extra):
+    def __init__(self, msg: str, parent: str, key: str, **extra) -> None:
         super().__init__(msg, parent, target=key, **extra)
         self.target = key

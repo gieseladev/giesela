@@ -14,7 +14,7 @@ class Resolver:
     selector: str
     attribute: Optional[str]
 
-    def __init__(self, selector: str, attribute: str = None):
+    def __init__(self, selector: str, attribute: str = None) -> None:
         self.selector = selector
         self.attribute = attribute
 
@@ -50,7 +50,7 @@ class Scraper:
     url: str
     targets: Dict[str, Resolver]
 
-    def __init__(self, url: str, targets: Dict[str, Resolver]):
+    def __init__(self, url: str, targets: Dict[str, Resolver]) -> None:
         self.url = url
         self.targets = targets
 
@@ -60,7 +60,7 @@ class Scraper:
 
     @classmethod
     def from_config(cls, config: Dict[str, Union[str, Dict[str, Any]]]) -> "Scraper":
-        url = config.pop("url")
+        url: str = config.pop("url")
         targets = {key: Resolver.from_config(value) for key, value in config.items()}
         return cls(url, targets)
 
@@ -84,7 +84,7 @@ class Scraper:
         data = {}
         for key, resolver in self.targets.items():
             try:
-                value = resolver.resolve_one(bs)
+                value: Optional[str] = resolver.resolve_one(bs)
             except Exception:
                 if not silent:
                     raise
