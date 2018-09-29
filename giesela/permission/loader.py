@@ -1,9 +1,11 @@
 from pathlib import Path
-from typing import Any, Dict, List, TextIO, Tuple, Union
+from typing import Any, Dict, Iterable, List, Optional, TextIO, Tuple, Union
 
 import yaml
 from aioredis import Redis
 from motor.motor_asyncio import AsyncIOMotorCollection
+
+from .tree import perm_tree
 
 __all__ = ["LoadedRole", "PermLoader"]
 
@@ -33,6 +35,31 @@ class LoadedRole:
     def role_name(self) -> str:
         return self._role_name
 
+    @property
+    def is_global(self) -> bool:
+        return self._is_global
+
+    @classmethod
+    def _resolve_permission_selector(cls, selector: Dict[str, str]) -> List[str]:
+        target = perm_tree
+
+        match = selector.get("match")
+        if match:
+            return target.match(match)
+
+        raise Exception(f"Unknown permission selector {selector}")
+
+    @classmethod
+    def _specify_permission(cls, perms: Dict[str, bool], targets: Union[Iterable[str], Dict[str, str], None], grant: bool) -> None:
+        if not targets:
+            return
+
+        if isinstance(targets, dict):
+            targets = cls._resolve_permission_selector(targets)
+
+        for target in targets:
+            perms[target] = grant
+
     @classmethod
     def load(cls, data: Dict[str, Any]) -> "LoadedRole":
         bases = data.get("inherits_from")
@@ -40,15 +67,10 @@ class LoadedRole:
         if bases and not isinstance(bases, list):
             bases = [bases]
 
-        grants = data.get("grant") or []
-        denies = data.get("deny") or []
+        permissions = data.get("permissions") or {}
 
-        permissions = {}
-        for grant in grants:
-            permissions[grant] = True
-
-        for deny in denies:
-            permissions[deny] = False
+        cls._specify_permission(permissions, data.get("grant"), True)
+        cls._specify_permission(permissions, data.get("deny"), False)
 
         role_name = data["name"]
         role_id = data.get("_id") or data.get("id") or role_name
@@ -90,7 +112,7 @@ class LoadedRole:
 
         return default
 
-    def _add_base(self, base: "LoadedRole"):
+    def _add_base(self, base: "LoadedRole") -> None:
         self._bases.append(base)
 
     def has_base(self, role_id: str) -> bool:
@@ -99,6 +121,11 @@ class LoadedRole:
                 return True
 
         return False
+
+    def to_dict(self) -> Dict[str, Any]:
+        data = dict(_id=self.role_id, name=self.role_name, inherits_from=self._base_ids)
+        data["global"] = self._is_global
+        return data
 
 
 class PermLoader:
@@ -128,8 +155,17 @@ class PermLoader:
         return cls(roles)
 
     @classmethod
-    async def load_db(cls, collection: AsyncIOMotorCollection) -> "PermLoader":
-        pass
+    async def load_db(cls, role_collection: AsyncIOMotorCollection) -> Optional["PermLoader"]:
+        cursor = await role_collection.find()
+
+        roles = []
+        async for raw_role in cursor:
+            roles.append(LoadedRole.load(raw_role))
+
+        if not roles:
+            return None
+
+        return cls(roles)
 
     def flatten(self) -> List[Tuple[str, bool]]:
         pass

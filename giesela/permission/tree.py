@@ -1,6 +1,6 @@
-from .tree_utils import Node, prepare_tree
+from .tree_utils import Node
 
-__all__ = ["perm_tree", "perm_list"]
+__all__ = ["perm_tree"]
 
 
 class perm_tree(Node):
@@ -71,4 +71,4 @@ class perm_tree(Node):
         register: str
 
 
-perm_list = prepare_tree(perm_tree)
+perm_tree.prepare()

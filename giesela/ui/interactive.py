@@ -56,7 +56,7 @@ class InteractableEmbed(HasListener, HasBot, EditableEmbed, ReactionHandler, Sta
         self.create_listener("reactions", listen_once=self.wait_for_reaction)
 
     @property
-    def emojis(self) -> Tuple[EmojiType]:
+    def emojis(self) -> Tuple[EmojiType, ...]:
         self._emojis.sort(key=operator.itemgetter(1))
         return next(zip(*self._emojis), None) or ()
 

@@ -7,7 +7,7 @@ here = Path(__file__)
 files = here.parent.glob("*")
 
 
-def get_extensions() -> Tuple[str]:
+def get_extensions() -> Tuple[str, ...]:
     _EXTENSIONS = []
     for file in files:
         if file == here or file.name.startswith("_"):

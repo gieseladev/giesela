@@ -63,19 +63,20 @@ class GiTils(ConfigObject):
 
 
 class Files(ConfigObject):
-    data: str = "data"
+    data: str = Truthy("data")
 
-    certificates: str = "cert/"
-    radio_stations: str = "radio_stations.yml"
-    playlists: str = "playlists/playlists"
+    permissions: str = Truthy("permissions.yml")
+    radio_stations: str = Truthy("radio_stations.yml")
+    certificates: str = Truthy("cert/")
+    playlists: str = Truthy("playlists/playlists")
 
     def __init__(self) -> None:
+        data_path = Path(self.data)
         # these should be relative to data folder
-        for key in ("certificates", "radio_stations", "playlists"):
+        for key in ("permissions", "radio_stations", "certificates", "playlists"):
             path = Path(getattr(self, key))
             if not path.root:
-                # noinspection PyUnresolvedReferences
-                path = self.data / path
+                path = data_path / path.joinpath()
             setattr(self, key, str(path))
 
 

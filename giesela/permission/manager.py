@@ -25,9 +25,25 @@ class PermManager:
         self._config = config
         self._perm_roles_coll = config.mongodb[config.app.mongodb.collections.perm_roles]
 
+        self._loaded = False
+
     @property
     def _redis(self) -> Redis:
         return self._config.redis
+
+    async def load(self) -> None:
+        log.info("loading permissions")
+        loader = await self.get_perm_loader()
+        if not loader:
+            loader = PermLoader.load(self._config.app.files.permissions)
+
+        await loader.dump(self._redis)
+
+        self._loaded = True
+
+    async def ensure_loaded(self) -> None:
+        if not self._loaded:
+            await self.load()
 
     def _prefix_key(self, key: str) -> str:
         prefix = self._config.app.redis.namespaces.permissions
