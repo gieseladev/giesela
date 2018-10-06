@@ -154,7 +154,8 @@ class PermRole:
     permissions: Dict[str, bool]
     bases: List["PermRole"]
 
-    def __init__(self, *, role_id: str, role_name: str, position: Optional[int],
+    def __init__(self, *, role_id: str, name: str, position: Optional[int],
+                 description: str = None,
                  guild_id: int = None,
                  targets: List[Union[str, RoleTargetType]] = None,
                  base_ids: List[str] = None,
@@ -164,11 +165,12 @@ class PermRole:
         match = RE_ILLEGAL_ROLE_ID_CHAR.search(role_id)
         if match:
             char = match.string
-            raise PermissionFileError(f"Role {role_name} has an id which contains an illegal character: \"{char}\"! "
+            raise PermissionFileError(f"Role {name} has an id which contains an illegal character: \"{char}\"! "
                                       f"Ids may only contain alphanumeric characters including \"-\", \"_\"")
 
         self.role_id = role_id
-        self.role_name = role_name
+        self.name = name
+        self.description = description
         self.position = position
         self.guild_id = guild_id
 
@@ -179,10 +181,10 @@ class PermRole:
         self.bases = bases or []
 
     def __repr__(self) -> str:
-        return f"Role {self.absolute_role_id}: {self.role_name}"
+        return f"Role {self.absolute_role_id}: {self.name}"
 
     def __str__(self) -> str:
-        return self.role_name
+        return self.name
 
     @property
     def absolute_role_id(self) -> str:
@@ -230,13 +232,12 @@ class PermRole:
         if targets and not isinstance(targets, list):
             targets = [targets]
 
-        role_name = data["name"]
         role_id = data.get("role_id") or data.get("id") or uuid.uuid4().hex
-
+        description = data.get("description")
         guild_id = data.get("guild_id")
         position = data.get("position")
 
-        return cls(role_id=str(role_id), role_name=str(role_name), position=position, guild_id=guild_id,
+        return cls(role_id=str(role_id), name=str(data["name"]), position=position, description=description, guild_id=guild_id,
                    targets=targets, base_ids=base_ids, bases=bases, permissions=permissions)
 
     @classmethod
@@ -295,7 +296,7 @@ class PermRole:
             else:
                 deny.append(key)
 
-        data = dict(_id=self.absolute_role_id, role_id=self.role_id, name=self.role_name, position=self.position, guild_id=self.guild_id,
+        data = dict(_id=self.absolute_role_id, role_id=self.role_id, name=self.name, position=self.position, guild_id=self.guild_id,
                     bases=self.base_ids, grant=grant, deny=deny, targets=[str(target) for target in self.targets])
 
         return data

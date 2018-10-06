@@ -1,12 +1,13 @@
 # The settings in this file are only required for the first start of Giesela. Giesela stores the permission settings in MongoDB.
-# TODO add a command to reload the permissions from this file!
+# Only the bot owner may reload the permission file with the command permreload which overwrites the existing config in the
+# database with the one from this file
 
 roles:
 - name: "Global Admin"
 
   # A list of targets which automatically receive this role.
   # In this case the role will be automatically assigned to the owner of the bot.
-  # There are multiple such keywords including "#owner, #guild_owner, #everyone"
+  # There are multiple such keywords including "#owner, #guild_owner, #guild_admin, #everyone"
   targets:
   - "#owner"
 
@@ -49,7 +50,7 @@ roles:
   - playlist.owned
 
 - id: base
-  name: "Global Pleb"
+  name: "Pleb"
   description: Basic Permissions for everyone
   targets:
   - "#everyone"

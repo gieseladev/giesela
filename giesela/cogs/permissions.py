@@ -75,7 +75,7 @@ class Permissions:
         roles = await self.perm_manager.get_roles_for(target, guild_id=guild_id)
 
         if roles:
-            role_text = "\n".join(f"- {role.role_name}" for role in roles)
+            role_text = "\n".join(f"- {role.name}" for role in roles)
             embed.description = f"```css\n{role_text}```"
         else:
             embed.title = "No roles"
