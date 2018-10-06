@@ -113,13 +113,15 @@ class PermManager:
             self._perm_roles_coll.insert_many(documents, ordered=False)
         )
 
-    async def search_role_gen(self, query: str, guild_id: int = None, is_global: bool = None) -> AsyncIterator["PermRole"]:
+    async def search_role_gen(self, query: str, guild_id: int = None, include_global: bool = True) -> AsyncIterator["PermRole"]:
         query = {"$text": {"$search": query}}
 
         if guild_id:
-            query["guild_id"] = guild_id
-        if is_global is not None:
-            query["global"] = is_global
+            if include_global:
+                rule = {"$in": [guild_id, None]}
+            else:
+                rule = guild_id
+            query["guild_id"] = rule
 
         cursor = self._perm_roles_coll.find(query,
                                             projection=dict(score={"$meta": "textScore"}),
@@ -138,13 +140,16 @@ class PermManager:
     async def get_role(self, role_id: str) -> Optional["PermRole"]:
         return await PermRole.get(self._perm_roles_coll, role_id)
 
-    async def find_roles(self, query: Optional[Dict[str, Any]], guild_id: int = None, is_global: bool = None) -> List["PermRole"]:
+    async def find_roles(self, query: Optional[Dict[str, Any]], guild_id: int = None, include_global: bool = True) -> List["PermRole"]:
         query = query or {}
 
         if guild_id:
-            query["guild_id"] = guild_id
-        if is_global is not None:
-            query["global"] = is_global
+            if include_global:
+                rule = {"$in": [guild_id, None]}
+            else:
+                rule = guild_id
+
+            query["guild_id"] = rule
 
         documents = await self._perm_roles_coll.find(query, sort=[("position", 1)]).to_list(None)
 
@@ -153,18 +158,14 @@ class PermManager:
     async def get_all_roles(self) -> List["PermRole"]:
         return await self.find_roles(None)
 
-    async def get_global_roles(self) -> List["PermRole"]:
-        return await self.find_roles({"global": True})
+    async def get_guild_roles(self, guild_id: int, **kwargs) -> List["PermRole"]:
+        return await self.find_roles(None, guild_id=guild_id, **kwargs)
 
-    async def get_guild_roles(self, guild_id: int, is_global: bool = None) -> List["PermRole"]:
-        return await self.find_roles({}, guild_id, is_global)
-
-    async def get_roles_for(self, targets: Union[List[RoleTarget], User, Member, Role],
-                            guild_id: int = None, is_global: bool = None) -> List["PermRole"]:
+    async def get_roles_for(self, targets: Union[List[RoleTarget], User, Member, Role], **kwargs) -> List["PermRole"]:
         if not isinstance(targets, list):
             targets = await RoleTarget.get_all(self._bot, targets)
 
-        return await self.find_roles({"targets": {"$in": [str(target) for target in targets]}}, guild_id, is_global)
+        return await self.find_roles({"targets": {"$in": [str(target) for target in targets]}}, **kwargs)
 
     async def has(self, user: Union[Member, User], perm: str, default: Any = False) -> bool:
         targets = list(map(str, await RoleTarget.get_all(self._bot, user)))
