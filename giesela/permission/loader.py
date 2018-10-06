@@ -48,11 +48,13 @@ def specify_permission(perms: Dict[str, bool], targets: Union[Iterable[str], Dic
 
 SPECIAL_ROLE_TARGETS = {"owner", "guild_owner", "guild_admin", "everyone"}
 
+GUILD_SPLIT = ":"
+
 
 class RoleTarget:
     def __init__(self, target: Union[str, RoleTargetType]) -> None:
         if isinstance(target, Role):
-            self._target = f"@{target.guild.id}-{target.id}"
+            self._target = f"@{target.guild.id}{GUILD_SPLIT}{target.id}"
         elif isinstance(target, (User, Member)):
             self._target = str(target.id)
         else:
@@ -82,7 +84,7 @@ class RoleTarget:
         if not self.is_special:
             raise TypeError(f"{self} isn't special")
         try:
-            return self._target.rsplit("-", 1)[1]
+            return self._target.rsplit(GUILD_SPLIT, 1)[1]
         except IndexError:
             return self._target[1:]
 
@@ -92,7 +94,7 @@ class RoleTarget:
             raise TypeError("Special targets don't have an id")
 
         if self.is_role:
-            _, target = self._target.rsplit("-", 1)
+            _, target = self._target.rsplit(GUILD_SPLIT, 1)
         else:
             target = self._target
 
@@ -103,7 +105,7 @@ class RoleTarget:
         if not (self.is_role or self.is_special):
             raise TypeError("Users aren't associated with a guild!")
 
-        target, _ = self._target.split("-", 1)
+        target, _ = self._target.split(GUILD_SPLIT, 1)
         return int(target[1:])
 
     @classmethod
@@ -112,7 +114,7 @@ class RoleTarget:
 
         if isinstance(target, Role):
             if target.permissions.administrator:
-                targets.extend((RoleTarget(f"#{target.guild.id}-guild_admin"), RoleTarget("#guild_admin")))
+                targets.extend((RoleTarget(f"#{target.guild.id}{GUILD_SPLIT}guild_admin"), RoleTarget("#guild_admin")))
 
             targets.append(RoleTarget(target))
         else:
@@ -123,7 +125,7 @@ class RoleTarget:
 
             if isinstance(target, Member):
                 if target.guild.owner == target:
-                    targets.extend((RoleTarget(f"#{target.guild.id}-guild_owner"), RoleTarget("#guild_owner")))
+                    targets.extend((RoleTarget(f"#{target.guild.id}{GUILD_SPLIT}guild_owner"), RoleTarget("#guild_owner")))
 
                 for role in reversed(target.roles):
                     targets.extend(await cls.get_all(bot, role))
