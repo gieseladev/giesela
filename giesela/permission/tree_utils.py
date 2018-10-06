@@ -1,6 +1,6 @@
 import inspect
 import typing
-from typing import Any, Dict, List, Tuple, Union
+from typing import Any, Dict, Iterable, List, Tuple, Union
 
 __all__ = ["Node"]
 
@@ -77,11 +77,48 @@ class PermNodeMeta(type):
 
         return target
 
+    def has(cls, key: str) -> bool:
+        try:
+            target = cls.traverse(key)
+        except AttributeError:
+            return False
+        else:
+            return isinstance(target, (str, PermNodeMeta))
+
     def match(cls, query: str) -> List[str]:
         if query == "*":
             return cls.all_permissions
         else:
             raise Exception(f"Unknown match query: {query}")
+
+    def unfold_perms(cls, sorted_perms: List[Tuple[str, bool]]) -> Dict[str, bool]:
+        perms: Dict[str, bool] = {}
+
+        for key, value in sorted_perms:
+            perm = cls.traverse(key)
+            if isinstance(perm, str):
+                perms[perm] = value
+            else:
+                for _perm in perm.all_permissions:
+                    perms[_perm] = value
+
+        return perms
+
+    def prepare_permissions(cls, perms: Iterable[Dict[str, bool]]) -> Dict[str, bool]:
+        return cls.unfold_perms(order_by_spec(combine_permission_dicts(perms)))
+
+
+def combine_permission_dicts(perm_dicts: Iterable[Dict[str, bool]]) -> Dict[str, bool]:
+    perms: Dict[str, bool] = {}
+
+    for perm_dict in perm_dicts:
+        perms.update(perm_dict)
+
+    return perms
+
+
+def order_by_spec(perms: Dict[str, bool]) -> List[Tuple[str, bool]]:
+    return [(key, perms[key]) for key in sorted(perms.keys(), key=len)]
 
 
 class Node(metaclass=PermNodeMeta): ...

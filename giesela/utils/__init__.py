@@ -9,6 +9,7 @@ import requests
 
 from .converters import *
 from .iterables import *
+from .mongodb import *
 from .object_chain import *
 from .redis import *
 from .scraper import *
@@ -61,6 +62,8 @@ def similarity(a: str, b: Union[str, Tuple[str, ...]], *, lower: bool = False, j
             return s in _junk
     elif junk:
         junk_func = junk
+    else:
+        junk_func = None
 
     return SequenceMatcher(junk_func, a, b, autojunk=auto_junk).ratio()
 
@@ -88,8 +91,7 @@ def split_song_name(title: Union[str, "BaseEntry"]) -> SplitSongName:
     return SplitSongName(title, None)
 
 
-def clean_songname(query):
-    """Clean a Youtube video title so it's shorter and easier to read."""
+def clean_songname(query: str) -> str:
     to_remove = (
         "1080", "1080p", "4k", "720", "720p", "album", "amv", "audio", "avi", "creditless", "dvd",
         "edition", "eng", "english", "from", "full", "hd", "jap", "japanese", "lyrics", "mix",

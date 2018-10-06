@@ -3,7 +3,7 @@ import copy
 import logging
 import operator
 import rapidjson
-from typing import Any, Iterable, List, Optional, Tuple, Type
+from typing import Any, Iterable, List, Optional, TYPE_CHECKING, Tuple, Type
 
 import aiohttp
 from discord import Colour, Embed, Message
@@ -13,6 +13,9 @@ from giesela.lib.web_author import WebAuthor
 from . import cogs, constants, signals, utils
 from .config import Config
 from .lib import GiTilsClient
+
+if TYPE_CHECKING:
+    from .permission import PermManager
 
 log = logging.getLogger(__name__)
 
@@ -38,6 +41,7 @@ class _StorageTypeHints:
     """Type hints for references stored in Giesela's "storage" by cogs"""
     aiosession: aiohttp.ClientSession
     gitils: GiTilsClient
+    perm_manager: "PermManager"
 
     async def ensure_permission(self, ctx: Context, *keys: str): ...
 
@@ -102,9 +106,20 @@ class Giesela(AutoShardedBot, _StorageTypeHints):
         await self.aiosession.close()
         await super().close()
 
-    async def start(self):
+    async def _startup_load(self) -> None:
         log.info("loading config")
         await self.config.load_config()
+
+        log.info("loading permissions")
+        await self.perm_manager.load()
+
+    async def start(self) -> None:
+        try:
+            await self._startup_load()
+        except Exception:
+            log.exception("Exception while loading")
+            raise
+
         log.info("starting")
         await super().start(self.config.app.tokens.discord)
 
