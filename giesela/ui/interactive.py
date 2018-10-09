@@ -83,6 +83,9 @@ class InteractableEmbed(HasListener, HasBot, EditableEmbed, ReactionHandler, Sta
         await asyncio.gather(*futures)
 
     def disable_handler(self, handler: Union[EmojiType, List[EmojiType], EmojiHandlerType]) -> List[EmojiType]:
+        if inspect.ismethod(handler):
+            handler = getattr(handler, "__func__")
+
         if inspect.isfunction(handler):
             emojis = getattr(handler, "_handles", None)
             if not emojis:
