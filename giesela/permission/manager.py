@@ -107,14 +107,14 @@ class PermManager:
             self._perm_roles_coll.insert_many(documents, ordered=False)
         )
 
-    async def search_role_gen(self, query: str, guild_id: int = None, include_global: bool = True) -> AsyncIterator["PermRole"]:
+    async def search_role_gen(self, query: str, guild_id: int = None, match_global: bool = None) -> AsyncIterator["PermRole"]:
         query = {"$text": {"$search": query}}
 
         if guild_id:
             query["guild_id"] = {"$in": [guild_id, None]}
 
-        if not include_global:
-            query["global"] = False
+        if match_global is not None:
+            query["global"] = match_global
 
         cursor = self._perm_roles_coll.find(query,
                                             projection=dict(score={"$meta": "textScore"}),
@@ -124,8 +124,8 @@ class PermManager:
             role = PermRole.load(document)
             yield role
 
-    async def search_role(self, query: str, guild_id: int = None, is_global: bool = None) -> Optional["PermRole"]:
-        async for role in self.search_role_gen(query, guild_id, is_global):
+    async def search_role(self, query: str, guild_id: int = None, match_global: bool = None) -> Optional["PermRole"]:
+        async for role in self.search_role_gen(query, guild_id, match_global):
             return role
 
         return None

@@ -5,7 +5,11 @@
 roles:
 - name: "Global Admin"
 
-  # global roles apply in dm and across guilds
+  # global roles apply in dm and across guilds. Global roles CANNOT be used in a guild (you can't assign them to a role or member).
+  # Non-global roles defined in this file are still globally available (I know, it's confusing. Don't blame me) which means that any guild can assign
+  # them to its roles/members but they won't be able to edit them (Only global roles with permissions.roles.edit will be able to edit them).
+  # Non-global roles in this file can be seen as the default roles for a given guild, only that they cannot be removed for a specific guild.
+  # Keep in mind that of course guild-specific roles will be prioritised over these non-global roles which makes it possible "overwrite" them!
   global: true
 
   # A list of targets which automatically receive this role.
