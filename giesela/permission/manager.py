@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import operator
 from typing import Any, AsyncIterator, Dict, List, Optional, Union
 
 import yaml
@@ -13,14 +14,6 @@ from .loader import PermRole, RoleTarget
 log = logging.getLogger(__name__)
 
 # language=lua
-REDIS_RETURN_FIRST = utils.RedisCode(b"""
-for _, key in ipairs(KEYS) do
-    local perm = redis.call("GET", key)
-    if perm then return perm end
-end
-""")
-
-# language=lua
 REDIS_HAS_PERMISSION = utils.RedisCode(b"""
 local prefix = ARGV[1]
 local perm = ARGV[2]
@@ -30,8 +23,8 @@ for _, target in ipairs(KEYS) do
 
     if roles then
         for _, role in ipairs(roles) do
-            local perm_key = prefix .. ":roles:" .. role .. ":" .. perm
-            local has_perm = redis.call("GET", perm_key)
+            local role_key = prefix .. ":roles:" .. role
+            local has_perm = redis.call("HGET", role_key, perm)
             
             if has_perm then return has_perm end
         end
@@ -59,7 +52,8 @@ end
 """)
 
 PERM_ROLES_INDEXES = [
-    IndexModel([("name", "text")], name="role name search", unique=True)
+    IndexModel([("name", "text")], name="role name search"),
+    IndexModel([("guild_id", 1), ("name", 1)], name="unique role name in guild", unique=True)
 ]
 
 
@@ -87,7 +81,7 @@ class PermManager:
         await utils.ensure_indexes(self._perm_roles_coll, PERM_ROLES_INDEXES)
 
         log.info("loading permissions")
-        roles = await self.get_all_roles()
+        roles = await self.get_all_roles(raw=True)
 
         if roles:
             await self._dump(roles)
@@ -99,7 +93,7 @@ class PermManager:
             data = yaml.safe_load(fp)
 
         _roles = data["roles"]
-        roles = list(map(PermRole.load, _roles))
+        roles = [PermRole.load(_role, ignore_errors=False) for _role in _roles]
 
         for i, role in enumerate(roles):
             role.position = i
@@ -117,11 +111,10 @@ class PermManager:
         query = {"$text": {"$search": query}}
 
         if guild_id:
-            if include_global:
-                rule = {"$in": [guild_id, None]}
-            else:
-                rule = guild_id
-            query["guild_id"] = rule
+            query["guild_id"] = {"$in": [guild_id, None]}
+
+        if not include_global:
+            query["global"] = False
 
         cursor = self._perm_roles_coll.find(query,
                                             projection=dict(score={"$meta": "textScore"}),
@@ -137,26 +130,65 @@ class PermManager:
 
         return None
 
-    async def get_role(self, role_id: str) -> Optional["PermRole"]:
-        return await PermRole.get(self._perm_roles_coll, role_id)
-
-    async def find_roles(self, query: Optional[Dict[str, Any]], guild_id: int = None, include_global: bool = True) -> List["PermRole"]:
-        query = query or {}
+    async def find_roles(self, query: Union[Dict[str, Any], str, None], guild_id: int = None, match_global: bool = None) -> List["PermRole"]:
+        if not query:
+            query = {}
+        elif isinstance(query, str):
+            query = dict(_id=query)
 
         if guild_id:
-            if include_global:
-                rule = {"$in": [guild_id, None]}
-            else:
-                rule = guild_id
+            query["guild_id"] = {"$in": [guild_id, None]}
 
-            query["guild_id"] = rule
+        if match_global is not None:
+            query["global"] = match_global
 
-        documents = await self._perm_roles_coll.find(query, sort=[("position", 1)]).to_list(None)
+        pipeline = [
+            {"$match": query},
+            {"$graphLookup": {
+                "from": "perm_roles",
+                "startWith": "$bases",
+                "connectFromField": "bases",
+                "connectToField": "_id",
+                "as": "__base_hierarchy"
+            }}
+        ]
 
-        return list(map(PermRole.load, documents))
+        cursor = self._perm_roles_coll.aggregate(pipeline)
+        documents: List[Dict[str, Any]] = await cursor.to_list(None)
 
-    async def get_all_roles(self) -> List["PermRole"]:
-        return await self.find_roles(None)
+        roles = {}
+
+        targets = documents.copy()
+        while targets:
+            target = targets.pop()
+            role_id = target["_id"]
+            if role_id in roles:
+                continue
+
+            base_hierarchy = target.get("__base_hierarchy")
+            if base_hierarchy:
+                targets.extend(base_hierarchy)
+
+            role = PermRole.load(target)
+            roles[role.role_id] = role
+
+        for role in roles.values():
+            role.load_bases(roles)
+
+        return sorted(roles.values(), key=operator.attrgetter("position"))
+
+    async def get_role(self, role_id: str) -> Optional["PermRole"]:
+        roles = await self.find_roles(role_id)
+        if roles:
+            return roles[0]
+        return None
+
+    async def get_all_roles(self, raw: bool = False) -> List["PermRole"]:
+        if raw:
+            documents = await self._perm_roles_coll.find().to_list(None)
+            return list(map(PermRole.load, documents))
+        else:
+            return await self.find_roles(None)
 
     async def get_guild_roles(self, guild_id: int, **kwargs) -> List["PermRole"]:
         return await self.find_roles(None, guild_id=guild_id, **kwargs)
@@ -167,8 +199,8 @@ class PermManager:
 
         return await self.find_roles({"targets": {"$in": [str(target) for target in targets]}}, **kwargs)
 
-    async def has(self, user: Union[Member, User], perm: str, default: Any = False) -> bool:
-        targets = list(map(str, await RoleTarget.get_all(self._bot, user)))
+    async def has(self, user: Union[Member, User], perm: str, default: Any = False, *, global_only: bool = False) -> bool:
+        targets = list(map(str, await RoleTarget.get_all(self._bot, user, global_only=global_only)))
 
         log.debug(f"checking keys {targets}")
         perm = await REDIS_HAS_PERMISSION.eval(self._redis, keys=targets, args=[self._redis_prefix, perm])
@@ -178,3 +210,19 @@ class PermManager:
             return perm == b"1"
 
         return default
+
+    async def delete_role(self, role: Union[PermRole, str]) -> None:
+        if not isinstance(role, PermRole):
+            role = await self.get_role(role)
+
+        role_id = role.absolute_role_id
+
+        role_key = f"{self._redis_prefix}:roles:{role_id}"
+        target_keys = [f"{self._redis_prefix}:targets:{target}" for target in role.targets]
+
+        await asyncio.gather(
+            self._perm_roles_coll.delete_one(dict(_id=role_id)),
+            self._perm_roles_coll.update_many(dict(bases=role_id), {"$pull": dict(bases=role_id)}),
+            self._redis.delete(role_key),
+            *(self._redis.lrem(target_key, 0, role_id) for target_key in target_keys)
+        )

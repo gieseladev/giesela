@@ -1,9 +1,8 @@
 import asyncio
-import itertools
 import logging
 import re
 import uuid
-from typing import Any, Dict, Iterable, List, Optional, Pattern, Union
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Pattern, Union
 
 from aioredis import Redis
 from discord import Client, Member, Role, User
@@ -19,7 +18,7 @@ log = logging.getLogger(__name__)
 
 RE_ILLEGAL_ROLE_ID_CHAR: Pattern = re.compile(r"([^a-zA-Z0-9\-_])")
 
-RoleTargetType = Union[User, Role]
+RoleTargetType = Union[User, Member, Role]
 
 
 def resolve_permission_selector(selector: Dict[str, str]) -> List[str]:
@@ -32,18 +31,58 @@ def resolve_permission_selector(selector: Dict[str, str]) -> List[str]:
     raise Exception(f"Unknown permission selector {selector}")
 
 
-def specify_permission(perms: Dict[str, bool], targets: Union[Iterable[str], Dict[str, str], None], grant: bool) -> None:
+def specify_permission(perms: Dict[str, bool], targets: Union[Iterable[Union[str, Dict[str, str]]], None], grant: bool) -> None:
     if not targets:
         return None
 
-    if isinstance(targets, dict):
-        targets = resolve_permission_selector(targets)
+    _targets = list(targets)
 
-    for target in targets:
+    while _targets:
+        target = _targets.pop()
+        if isinstance(target, dict):
+            _targets.extend(resolve_permission_selector(target))
+            continue
+
         if not perm_tree.has(target):
             raise PermissionFileError(f"Permission \"{target}\" doesn't exist!")
 
         perms[target] = grant
+
+
+def check_permissions(targets: Optional[Iterable[Union[Dict[str, Any], str]]], ignore_errors: bool = True) -> List[Union[Dict[str, Any], str]]:
+    perms = []
+
+    if not targets:
+        return perms
+
+    for target in targets:
+        if isinstance(target, dict):
+            try:
+                resolve_permission_selector(target)
+            except Exception:
+                if ignore_errors:
+                    log.exception("Invalid permission selector")
+                else:
+                    raise
+            else:
+                perms.append(target)
+
+        elif isinstance(target, str):
+            if perm_tree.has(target):
+                perms.append(target)
+            else:
+                if ignore_errors:
+                    log.warning(f"permission \"{target}\" doesn't exist")
+                    continue
+                else:
+                    raise PermissionFileError(f"Permission \"{target}\" doesn't exist!")
+        else:
+            if ignore_errors:
+                log.warning(f"unknown target type \"{target}\"")
+            else:
+                raise PermissionFileError(f"Permission target {type(target)} unknown")
+
+    return perms
 
 
 SPECIAL_ROLE_TARGETS = {"owner", "guild_owner", "guild_admin", "everyone"}
@@ -55,16 +94,21 @@ class RoleTarget:
     def __init__(self, target: Union[str, RoleTargetType]) -> None:
         if isinstance(target, Role):
             self._target = f"@{target.guild.id}{GUILD_SPLIT}{target.id}"
-        elif isinstance(target, (User, Member)):
+        elif isinstance(target, User):
             self._target = str(target.id)
+        elif isinstance(target, Member):
+            self._target = f"{target.guild.id}{GUILD_SPLIT}{target.id}"
         else:
-            self._target = target
+            self._target = str(target)
 
         if self.is_special:
             if self.special_name not in SPECIAL_ROLE_TARGETS:
                 raise ValueError(f"Special target {self.special_name} doesn't exist")
 
     def __repr__(self) -> str:
+        return f"RoleTarget {self._target}"
+
+    def __str__(self) -> str:
         return self._target
 
     @property
@@ -73,7 +117,13 @@ class RoleTarget:
 
     @property
     def is_user(self) -> bool:
-        return not self.is_role
+        return self._target.isnumeric()
+
+    @property
+    def is_member(self) -> bool:
+        if GUILD_SPLIT in self._target:
+            return all(x.isnumeric() for x in self._target.split(GUILD_SPLIT, 1))
+        return False
 
     @property
     def is_special(self) -> bool:
@@ -93,46 +143,49 @@ class RoleTarget:
         if self.is_special:
             raise TypeError("Special targets don't have an id")
 
-        if self.is_role:
-            _, target = self._target.rsplit(GUILD_SPLIT, 1)
-        else:
+        if self.is_user:
             target = self._target
+        else:
+            _, target = self._target.rsplit(GUILD_SPLIT, 1)
 
         return int(target)
 
     @property
     def guild_id(self) -> int:
-        if not (self.is_role or self.is_special):
+        if self.is_user:
             raise TypeError("Users aren't associated with a guild!")
 
         target, _ = self._target.split(GUILD_SPLIT, 1)
         return int(target[1:])
 
     @classmethod
-    async def get_all(cls, bot: BotBase, target: Union[User, Member, Role]) -> List["RoleTarget"]:
+    async def get_all(cls, bot: BotBase, target: Union[User, Member, Role], *, global_only: bool = False) -> List["RoleTarget"]:
         targets: List[RoleTarget] = []
 
         if isinstance(target, Role):
-            if target.permissions.administrator:
-                targets.extend((RoleTarget(f"#{target.guild.id}{GUILD_SPLIT}guild_admin"), RoleTarget("#guild_admin")))
+            if not global_only:
+                if target.permissions.administrator:
+                    targets.append(RoleTarget(f"#{target.guild.id}{GUILD_SPLIT}guild_admin"))
+                    targets.append(RoleTarget("#guild_admin"))
 
-            targets.append(RoleTarget(target))
+                targets.append(RoleTarget(target))
         else:
             if await bot.is_owner(target):
                 targets.append(RoleTarget("#owner"))
 
-            targets.append(RoleTarget(target))
+            targets.append(RoleTarget(str(target.id)))
 
-            if isinstance(target, Member):
+            if isinstance(target, Member) and not global_only:
+                targets.append(RoleTarget(target))
+
                 if target.guild.owner == target:
-                    targets.extend((RoleTarget(f"#{target.guild.id}{GUILD_SPLIT}guild_owner"), RoleTarget("#guild_owner")))
+                    targets.append(RoleTarget(f"#{target.guild.id}{GUILD_SPLIT}guild_owner"))
+                    targets.append(RoleTarget("#guild_owner"))
 
                 for role in reversed(target.roles):
                     targets.extend(await cls.get_all(bot, role))
 
             targets.append(RoleTarget("#everyone"))
-
-            log.debug(f"targets for {target}: {targets}")
 
         return targets
 
@@ -143,6 +196,9 @@ class RoleTarget:
         if self.is_role:
             guild = bot.get_guild(self.guild_id)
             return guild.get_role(self.id) if guild else None
+        elif self.is_member:
+            guild = bot.get_guild(self.guild_id)
+            return guild.get_member(self.id) if guild else None
         else:
             return bot.get_user(self.id)
 
@@ -151,16 +207,19 @@ class PermRole:
     _base_ids = List[str]
 
     targets: List[RoleTarget]
-    permissions: Dict[str, bool]
+    grant: List[Union[Dict[str, Any], str]]
+    deny: List[Union[Dict[str, Any], str]]
     bases: List["PermRole"]
 
     def __init__(self, *, role_id: str, name: str, position: Optional[int],
                  description: str = None,
                  guild_id: int = None,
+                 is_global: bool = False,
                  targets: List[Union[str, RoleTargetType]] = None,
                  base_ids: List[str] = None,
                  bases: List["PermRole"] = None,
-                 permissions: Dict[str, bool] = None) -> None:
+                 grant: List[Union[Dict[str, Any], str]] = None,
+                 deny: List[Union[Dict[str, Any], str]] = None) -> None:
 
         match = RE_ILLEGAL_ROLE_ID_CHAR.search(role_id)
         if match:
@@ -172,11 +231,18 @@ class PermRole:
         self.name = name
         self.description = description
         self.position = position
-        self.guild_id = guild_id
+
+        self.is_global = is_global
+        if is_global:
+            self.guild_id = None
+        else:
+            self.guild_id = guild_id
 
         self.targets = [RoleTarget(target) if not isinstance(target, RoleTarget) else target for target in targets] if targets else []
         self._base_ids = base_ids or []
-        self.permissions = permissions or {}
+
+        self.grant = grant or {}
+        self.deny = deny or {}
 
         self.bases = bases or []
 
@@ -185,6 +251,16 @@ class PermRole:
 
     def __str__(self) -> str:
         return self.name
+
+    def __gt__(self, other: "PermRole") -> bool:
+        if isinstance(other, PermRole):
+            return self.position < other.position
+        return NotImplemented
+
+    def __lt__(self, other: "PermRole") -> bool:
+        if isinstance(other, PermRole):
+            return self.position > other.position
+        return NotImplemented
 
     @property
     def absolute_role_id(self) -> str:
@@ -200,6 +276,13 @@ class PermRole:
         return self._base_ids
 
     @property
+    def permissions(self) -> Dict[str, bool]:
+        permissions = {}
+        specify_permission(permissions, self.grant, True)
+        specify_permission(permissions, self.deny, False)
+        return permissions
+
+    @property
     def permission_tree(self) -> List[Dict[str, bool]]:
         tree = [self.permissions]
         for role in self.bases:
@@ -207,7 +290,7 @@ class PermRole:
         return tree
 
     @classmethod
-    def load(cls, data: Dict[str, Any]) -> "PermRole":
+    def load(cls, data: Dict[str, Any], *, ignore_errors: bool = True) -> "PermRole":
         base_ids: Optional[List[Union[str, Dict[str, Any]]]] = data.get("bases") or data.get("base")
         bases: List[PermRole] = []
 
@@ -215,17 +298,15 @@ class PermRole:
             if not isinstance(base_ids, list):
                 base_ids = [base_ids]
 
-            if isinstance(base_ids[0], dict):
-                for base in base_ids:
+            for i, base in enumerate(reversed(base_ids), 1):
+                if isinstance(base, dict):
                     base = cls.load(base)
                     bases.append(base)
 
-                base_ids = None
+                    del base_ids[-i]
 
-        permissions = {}
-
-        specify_permission(permissions, data.get("grant"), True)
-        specify_permission(permissions, data.get("deny"), False)
+        grant = check_permissions(data.get("grant"), ignore_errors=ignore_errors)
+        deny = check_permissions(data.get("deny"), ignore_errors=ignore_errors)
 
         targets = data.get("targets") or []
 
@@ -235,23 +316,11 @@ class PermRole:
         role_id = data.get("role_id") or data.get("id") or uuid.uuid4().hex
         description = data.get("description")
         guild_id = data.get("guild_id")
+        is_global = data.get("global", False)
         position = data.get("position")
 
-        return cls(role_id=str(role_id), name=str(data["name"]), position=position, description=description, guild_id=guild_id,
-                   targets=targets, base_ids=base_ids, bases=bases, permissions=permissions)
-
-    @classmethod
-    async def get(cls, collection: AsyncIOMotorCollection, role_id: str) -> Optional["PermRole"]:
-        pipeline = [
-            {"$match": dict(_id=role_id)},
-            {"$lookup": {"from": collection.name, "localField": "bases", "foreignField": "_id", "as": "bases"}}
-        ]
-        cursor = collection.aggregate(pipeline)
-        if not await cursor.fetch_next:
-            return None
-
-        document = cursor.next_object()
-        return cls.load(document)
+        return cls(role_id=str(role_id), name=str(data["name"]), position=position, description=description, guild_id=guild_id, is_global=is_global,
+                   targets=targets, base_ids=base_ids, bases=bases, grant=grant, deny=deny)
 
     def is_explicit(self, key: str, *, bubble: bool = True) -> bool:
         key = str(key)
@@ -277,41 +346,38 @@ class PermRole:
                 if perm is not None:
                     return perm
 
+        prepared_perms = perm_tree.prepare_permissions(self.permission_tree)  # FIXME this doesn't return the same as redis!
+        if key in prepared_perms:
+            return prepared_perms[key]
+
         return default
 
     def has_base(self, role_id: str) -> bool:
-        for role in self.bases:
-            if role.role_id == role_id:
-                return True
+        return role_id in self.base_ids
 
-        return False
+    def load_bases(self, bases: Mapping[str, "PermRole"]) -> None:
+        for base_id in self.base_ids:
+            self.bases.append(bases[base_id])
 
     def to_dict(self) -> Dict[str, Any]:
-        grant = []
-        deny = []
-
-        for key, perm in self.permissions.items():
-            if perm:
-                grant.append(key)
-            else:
-                deny.append(key)
-
         data = dict(_id=self.absolute_role_id, role_id=self.role_id, name=self.name, position=self.position, guild_id=self.guild_id,
-                    bases=self.base_ids, grant=grant, deny=deny, targets=[str(target) for target in self.targets])
+                    bases=self.base_ids, grant=self.grant, deny=self.deny, targets=[str(target) for target in self.targets])
+
+        data["global"] = self.is_global
 
         return data
 
     async def _dump_roles_redis(self, redis: Redis, prefix: str) -> None:
         prefix = f"{prefix}:roles:{self.absolute_role_id}"
+        # noinspection PyTypeChecker
+        prepared_perms = perm_tree.unfold_perms(self.permissions.items())
 
-        pairs = []
+        for key, value in prepared_perms.items():
+            # noinspection PyTypeChecker
+            prepared_perms[key] = int(value)
 
-        for key, perm in self.permissions.items():
-            abs_key = f"{prefix}:{key}"
-            pairs.append((abs_key, int(perm)))
-
-        if pairs:
-            await redis.mset(*itertools.chain.from_iterable(pairs))
+        if prepared_perms:
+            await redis.hmset_dict(prefix, prepared_perms)
 
     async def _dump_targets_redis(self, redis: Redis, prefix: str) -> None:
         prefix = f"{prefix}:targets"
@@ -320,7 +386,7 @@ class PermRole:
 
         for target in self.targets:
             abs_key = f"{prefix}:{target}"
-            coros.append(redis.rpush(abs_key, self.absolute_role_id))
+            coros.append(redis.rpush(abs_key, self.absolute_role_id, *self.base_ids))
 
         if coros:
             await asyncio.gather(*coros)

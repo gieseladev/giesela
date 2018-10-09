@@ -86,12 +86,13 @@ class PermNodeMeta(type):
             return isinstance(target, (str, PermNodeMeta))
 
     def match(cls, query: str) -> List[str]:
-        if query == "*":
-            return cls.all_permissions
+        if "*" in query:
+            start, end = query.split("*", maxsplit=1)
+            return [perm for perm in cls.all_permissions if perm.startswith(start) and perm.endswith(end)]
         else:
             raise Exception(f"Unknown match query: {query}")
 
-    def unfold_perms(cls, sorted_perms: List[Tuple[str, bool]]) -> Dict[str, bool]:
+    def unfold_perms(cls, sorted_perms: Iterable[Tuple[str, bool]]) -> Dict[str, bool]:
         perms: Dict[str, bool] = {}
 
         for key, value in sorted_perms:

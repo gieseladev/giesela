@@ -1,9 +1,12 @@
 # The settings in this file are only required for the first start of Giesela. Giesela stores the permission settings in MongoDB.
-# Only the bot owner may reload the permission file with the command permreload which overwrites the existing config in the
+# Only the bot owner may reload the permission file with the command "permreload" which overwrites the existing config in the
 # database with the one from this file
 
 roles:
 - name: "Global Admin"
+
+  # global roles apply in dm and across guilds
+  global: true
 
   # A list of targets which automatically receive this role.
   # In this case the role will be automatically assigned to the owner of the bot.
@@ -16,20 +19,23 @@ roles:
   # "queue.add" which will grant all the permissions in said group (in this case: "queue.add.entry", "queue.add.playlist", "queue.add.stream")
   #     Note: You can also use "deny" to explicitly deny a permission. !!deny takes precedence over grant!!
   grant:
-    # matches all permissions there are
-    match: "*"
+  # matches all permissions there are
+  - match: "*"
 
 - name: "Global Moderator"
+  global: true
   grant:
   - admin.appearance
-  - admin.permissions
+  - permissions
   - playlist.all
+  deny:
+  - permissions.roles.self
 
 - name: "Server Admin"
   targets: "#guild_owner"
   grant:
-  - admin.config.guild
-  - admin.permissions.guild
+  - config
+  - permissions
 
 - name: "Music Master"
 
@@ -51,6 +57,7 @@ roles:
 
 - id: base
   name: "Pleb"
+  global: true
   description: Basic Permissions for everyone
   targets:
   - "#everyone"
