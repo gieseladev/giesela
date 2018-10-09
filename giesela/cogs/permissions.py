@@ -10,6 +10,7 @@ from discord.ext.commands import Context
 
 from giesela import Giesela, PermManager, PermRole, PermissionDenied, perm_tree
 from giesela.ui import VerticalTextViewer
+from giesela.ui.custom import RoleEditor
 
 log = logging.getLogger(__name__)
 
@@ -23,7 +24,7 @@ class Permissions:
         bot.store_reference("has_permission", self.has_permission)
         bot.store_reference("ensure_permission", self.ensure_permission)
 
-    async def ensure_permission(self, ctx: Context, *keys: str, global_only: bool = False):
+    async def ensure_permission(self, ctx: Context, *keys: str, global_only: bool = False) -> bool:
         perm = await asyncio.gather(*(self.perm_manager.has(ctx.author, key, global_only=global_only) for key in keys), loop=self.bot.loop)
         if all(perm):
             return True
@@ -73,6 +74,13 @@ class Permissions:
             raise commands.CommandError(f"Couldn't find role \"{query}\"")
 
         return role
+
+    async def ensure_can_edit_role(self, ctx: Context, role: PermRole) -> None:
+        highest_role = (await self.get_roles_for(ctx))[0]
+        if role.absolute_role_id == highest_role.absolute_role_id:
+            await self.ensure_permission(ctx, perm_tree.permissions.roles.self, global_only=role.is_global)
+        else:
+            await self.ensure_permission(ctx, perm_tree.permissions.roles.edit, global_only=role.is_global)
 
     @commands.is_owner()
     @commands.command("permreload")
@@ -166,18 +174,24 @@ class Permissions:
     async def remove_role(self, ctx: Context, *, role: str) -> None:
         """Delete a role"""
         role = await self.find_role(role, ctx)
-        highest_role = (await self.get_roles_for(ctx))[0]
-        if role.absolute_role_id == highest_role.absolute_role_id:
-            await self.ensure_permission(ctx, perm_tree.permissions.roles.self, global_only=role.is_global)
-        else:
-            await self.ensure_permission(ctx, perm_tree.permissions.roles.edit, global_only=role.is_global)
+        await self.ensure_can_edit_role(ctx, role)
 
         await self.perm_manager.delete_role(role)
 
     @commands.command("createrole", aliases=["mkrole"])
-    async def create_role(self) -> None:
+    async def create_role(self, ctx: Context) -> None:
         """Create a new role"""
         pass
+
+    @commands.command("editrole")
+    async def edit_role(self, ctx: Context, *, role: str) -> None:
+        """Edit a role"""
+        role = await self.find_role(role, ctx)
+        await self.ensure_can_edit_role(ctx, role)
+
+        editor = RoleEditor(ctx.channel, bot=self.bot, user=ctx.author, perm_manager=self.perm_manager, role=role)
+
+        await editor.display()
 
 
 def setup(bot: Giesela):

@@ -11,7 +11,7 @@ from discord.ext.commands import Context
 
 from giesela.lib import help_formatter
 from . import text
-from .abstract import Stoppable
+from .abstract import HasBot, Stoppable
 from .interactive import InteractableEmbed, MessageableEmbed, emoji_handler
 
 log = logging.getLogger(__name__)
@@ -182,10 +182,16 @@ class HasHelp(Stoppable, metaclass=abc.ABCMeta):
         return task
 
     def trigger_help_embed(self, channel: TextChannel, **kwargs):
-        return asyncio.ensure_future(self.show_help_embed(channel, **kwargs))
+        async def safe_show():
+            try:
+                await self.show_help_embed(channel, **kwargs)
+            except Exception:
+                log.exception("Couldn't show help embed!")
+
+        return asyncio.ensure_future(safe_show())
 
 
-class AutoHelpEmbed(HasHelp, metaclass=abc.ABCMeta):
+class AutoHelpEmbed(HasBot, HasHelp, metaclass=abc.ABCMeta):
     channel: TextChannel
 
     @property
@@ -212,14 +218,14 @@ class AutoHelpEmbed(HasHelp, metaclass=abc.ABCMeta):
     @emoji_handler("❓", pos=10000)
     async def show_help(self, _, user: User):
         """Open this very box"""
-        self.toggle_help_embed(self.channel, user=user)
+        self.toggle_help_embed(self.channel, bot=self.bot, user=user)
 
     @commands.command()
     async def help(self, ctx: Context, *cmds: str):
         """Even more help"""
         if not cmds:
-            self.toggle_help_embed(self.channel, user=ctx.author)
+            self.toggle_help_embed(self.channel, bot=self.bot, user=ctx.author)
             return
 
         embed = await get_command_help(ctx, *cmds)
-        self.trigger_help_embed(self.channel, user=ctx.author, embed=embed)
+        self.trigger_help_embed(self.channel, bot=self.bot, user=ctx.author, embed=embed)

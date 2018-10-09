@@ -177,8 +177,8 @@ class PermManager:
 
         return sorted(roles.values(), key=operator.attrgetter("position"))
 
-    async def get_role(self, role_id: str) -> Optional["PermRole"]:
-        roles = await self.find_roles(role_id)
+    async def get_role(self, role_id: str, **kwargs) -> Optional["PermRole"]:
+        roles = await self.find_roles(role_id, **kwargs)
         if roles:
             return roles[0]
         return None

@@ -151,6 +151,15 @@ class RoleTarget:
         return int(target)
 
     @property
+    def has_guild_id(self) -> bool:
+        try:
+            guild_id = self.guild_id
+        except (TypeError, ValueError):
+            return False
+        else:
+            return bool(guild_id)
+
+    @property
     def guild_id(self) -> int:
         if self.is_user:
             raise TypeError("Users aren't associated with a guild!")
@@ -252,6 +261,12 @@ class PermRole:
     def __str__(self) -> str:
         return self.name
 
+    def __eq__(self, other: "PermRole") -> bool:
+        try:
+            return self.role_id == other.role_id
+        except AttributeError:
+            return NotImplemented
+
     def __gt__(self, other: "PermRole") -> bool:
         if isinstance(other, PermRole):
             return self.position < other.position
@@ -288,6 +303,10 @@ class PermRole:
         for role in self.bases:
             tree.extend(role.permission_tree)
         return tree
+
+    @property
+    def flat_permissions(self) -> Dict[str, bool]:
+        return perm_tree.prepare_permissions(self.permission_tree)
 
     @classmethod
     def load(cls, data: Dict[str, Any], *, ignore_errors: bool = True) -> "PermRole":
@@ -346,7 +365,7 @@ class PermRole:
                 if perm is not None:
                     return perm
 
-        prepared_perms = perm_tree.prepare_permissions(self.permission_tree)  # FIXME this doesn't return the same as redis!
+        prepared_perms = self.flat_permissions  # FIXME this doesn't return the same as redis!
         if key in prepared_perms:
             return prepared_perms[key]
 
