@@ -19,7 +19,8 @@ class AdminTools:
 
         if not self.aiosession:
             self.aiosession = aiohttp.ClientSession(loop=self.bot.loop)
-
+    
+    @commands.has_permissions(administrator=True)
     @permission.has_permission(perm_tree.admin.control.execute)
     @commands.command()
     async def execute(self, ctx: Context):
@@ -68,7 +69,8 @@ class AdminTools:
         result = result.strip()
         if result:
             await ctx.send(result)
-
+    
+    @commands.has_permissions(administrator=True)
     @permission.has_permission(perm_tree.admin.control.execute)
     @commands.command()
     async def shell(self, ctx: Context, interpreter: str = "python"):
@@ -81,14 +83,16 @@ class AdminTools:
             raise commands.CommandError(e.msg)
 
         await shell.display()
-
+    
+    @commands.has_permissions(administrator=True)
     @permission.has_permission(perm_tree.admin.control.shutdown)
     @commands.command()
     async def shutdown(self, ctx: Context):
         """Shutdown"""
         await ctx.send(":wave:")
         raise TerminateSignal
-
+    
+    @commands.has_permissions(administrator=True)
     @permission.has_permission(perm_tree.admin.control.shutdown)
     @commands.command()
     async def restart(self, ctx: Context):
@@ -96,6 +100,7 @@ class AdminTools:
         await ctx.send(":wave:")
         raise RestartSignal
 
+    @commands.has_permissions(administrator=True)
     @permission.has_permission(perm_tree.admin.control.impersonate)
     @commands.command()
     async def say(self, ctx: Context, msg: str):
@@ -104,6 +109,7 @@ class AdminTools:
         await ctx.message.delete()
         await ctx.send(msg)
 
+    @commands.has_permissions(administrator=True)
     @permission.has_permission(perm_tree.admin.appearance.name)
     @commands.command()
     async def setname(self, ctx: Context, name: str):
@@ -117,6 +123,7 @@ class AdminTools:
         await ctx.send(":ok_hand:")
         return
 
+    @commands.has_permissions(administrator=True)
     @permission.has_permission(perm_tree.admin.appearance.avatar)
     @commands.command()
     async def setavatar(self, ctx: Context, url: str = None):
