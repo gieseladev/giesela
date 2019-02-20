@@ -164,8 +164,9 @@ class PlaylistCog:
 
         similar_playlist = self.playlist_manager.find_playlist(name, threshold=.6)
         if similar_playlist:
-            prompt = PromptYesNo(ctx.channel, user=ctx.author, text=f"There's already a playlist with a similar name (\"{similar_playlist.name}\"). "
-                                                                    f"Do you really want to create the playlist \"{name}\"")
+            prompt = PromptYesNo(ctx.channel, bot=self.bot, user=ctx.author,
+                                 text=f"There's already a playlist with a similar name (\"{similar_playlist.name}\"). "
+                                 f"Do you really want to create the playlist \"{name}\"")
             if not await prompt:
                 with suppress(Forbidden):
                     await ctx.message.delete()
@@ -286,7 +287,7 @@ class PlaylistCog:
         playlist = self.find_playlist(playlist)
         await ensure_user_is_author(playlist, ctx, "delete it")
 
-        res = await PromptYesNo(ctx.channel, user=ctx.author, text=f"Do you really want to delete **{playlist.name}**?")
+        res = await PromptYesNo(ctx.channel, bot=self.bot, user=ctx.author, text=f"Do you really want to delete **{playlist.name}**?")
         if not res:
             return
 
@@ -364,9 +365,9 @@ class PlaylistCog:
         for playlist in self.playlist_manager:
             description = playlist.description or "No description"
             paginator.add_field(playlist.name, f"by **{playlist.author.name}**\n"
-                                               f"{len(playlist)} entries ({utils.format_time(playlist.total_duration)} long)\n"
-                                               f"\n"
-                                               f"{description}")
+            f"{len(playlist)} entries ({utils.format_time(playlist.total_duration)} long)\n"
+            f"\n"
+            f"{description}")
 
         # MAYBE use special viewer with play (and other) features
         viewer = EmbedViewer(ctx.channel, bot=self.bot, user=ctx.author, embeds=paginator)
@@ -437,7 +438,7 @@ class PlaylistCog:
         """Export a playlist"""
         playlist = self.find_playlist(playlist)
 
-        # TODO check for playlist.all.export permission for non-editors of this playing
+        # TODO check for playlist.all.export permission for non-editors of this playlist
 
         serialised = rapidjson.dumps(playlist.to_gpl())
         data = BytesIO(serialised.encode("utf-8"))
@@ -484,9 +485,9 @@ class PlaylistCog:
 
         similar_pl_entry = playlist.search_entry(str(entry))
         if similar_pl_entry:
-            prompt = PromptYesNo(ctx.channel, user=ctx.author,
+            prompt = PromptYesNo(ctx.channel, bot=self.bot, user=ctx.author,
                                  text=f"\"{entry}\" might already be in this playlist (\"{similar_pl_entry.entry}\"), "
-                                      f"are you sure you want to add it again?")
+                                 f"are you sure you want to add it again?")
             if not await prompt:
                 with suppress(Forbidden):
                     await ctx.message.delete()

@@ -104,7 +104,7 @@ class PermManager:
 
         await asyncio.gather(
             self._dump(roles),
-            self._perm_roles_coll.insert_many(documents, ordered=False)
+            self._perm_roles_coll.insert_many(documents)
         )
 
     async def search_role_gen(self, query: str, guild_id: int = None, match_global: bool = None) -> AsyncIterator["PermRole"]:
@@ -170,7 +170,7 @@ class PermManager:
                 targets.extend(base_hierarchy)
 
             role = PermRole.load(target)
-            roles[role.role_id] = role
+            roles[role.absolute_role_id] = role
 
         for role in roles.values():
             role.load_bases(roles)
@@ -193,9 +193,9 @@ class PermManager:
     async def get_guild_roles(self, guild_id: int, **kwargs) -> List["PermRole"]:
         return await self.find_roles(None, guild_id=guild_id, **kwargs)
 
-    async def get_roles_for(self, targets: Union[List[RoleTarget], User, Member, Role], **kwargs) -> List["PermRole"]:
+    async def get_roles_for(self, targets: Union[List[RoleTarget], User, Member, Role], global_only: bool = False, **kwargs) -> List["PermRole"]:
         if not isinstance(targets, list):
-            targets = await RoleTarget.get_all(self._bot, targets)
+            targets = await RoleTarget.get_all(self._bot, targets, global_only=global_only)
 
         return await self.find_roles({"targets": {"$in": [str(target) for target in targets]}}, **kwargs)
 

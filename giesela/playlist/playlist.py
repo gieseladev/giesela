@@ -41,7 +41,7 @@ class Playlist:
     _editors: List[User]
 
     def __init__(self, *, gpl_id: utils.UUIDType = None, name: str, author_id: int,
-                 description: str = None, cover: str = None, editors: List[int] = None, entries: List[PlaylistEntry] = None):
+                 description: str = None, cover: str = None, editor_ids: List[int] = None, entries: List[PlaylistEntry] = None):
         self.manager = None
         self._dirty = False
 
@@ -58,7 +58,7 @@ class Playlist:
 
         self.description = description
         self.cover = cover
-        self.editor_ids = editors or []
+        self.editor_ids = editor_ids or []
 
         self.entries = entries or []
 

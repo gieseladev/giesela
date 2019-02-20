@@ -9,7 +9,7 @@ from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import Giesela, PermManager, PermRole, PermissionDenied, perm_tree
-from giesela.ui import VerticalTextViewer
+from giesela.ui import PromptYesNo, VerticalTextViewer
 from giesela.ui.custom import RoleEditor
 
 log = logging.getLogger(__name__)
@@ -76,11 +76,25 @@ class Permissions:
         return role
 
     async def ensure_can_edit_role(self, ctx: Context, role: PermRole) -> None:
-        highest_role = (await self.get_roles_for(ctx))[0]
-        if role.absolute_role_id == highest_role.absolute_role_id:
-            await self.ensure_permission(ctx, perm_tree.permissions.roles.self, global_only=role.is_global)
+        # you may edit a role under two conditions:
+        # - you are part of the role and the role has edit_self enabled
+        # - you have a different role with at least the same priority which grants edit
+
+        in_role = False
+
+        for user_role in await self.perm_manager.get_roles_for(ctx.author, global_only=role.is_global):
+            if user_role == role:
+                in_role = True
+                if role.has(perm_tree.permissions.roles.self):
+                    return
+            else:
+                if user_role.priority >= role.priority:
+                    return
+
+        if in_role:
+            raise PermissionDenied(f"Role \"{role.name}\" may not edit itself. \"{perm_tree.permissions.roles.self}\" required!")
         else:
-            await self.ensure_permission(ctx, perm_tree.permissions.roles.edit, global_only=role.is_global)
+            raise PermissionDenied(f"Permission \"{perm_tree.permissions.roles.edit}\" required!")
 
     @commands.is_owner()
     @commands.command("permreload")
@@ -176,7 +190,9 @@ class Permissions:
         role = await self.find_role(role, ctx)
         await self.ensure_can_edit_role(ctx, role)
 
-        await self.perm_manager.delete_role(role)
+        prompt = PromptYesNo(ctx.channel, bot=self.bot, user=ctx.author, text=f"Do you really want to delete \"{role.name}\"")
+        if await prompt:
+            await self.perm_manager.delete_role(role)
 
     @commands.command("createrole", aliases=["mkrole"])
     async def create_role(self, ctx: Context, *, name: str) -> None:

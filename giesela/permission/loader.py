@@ -230,7 +230,7 @@ class PermRole:
                  grant: List[Union[Dict[str, Any], str]] = None,
                  deny: List[Union[Dict[str, Any], str]] = None) -> None:
 
-        self.role_id = role_id or uuid.uuid4().hex
+        self.role_id = str(role_id) if role_id else uuid.uuid4().hex
         match = RE_ILLEGAL_ROLE_ID_CHAR.search(self.role_id)
         if match:
             char = match.string
@@ -373,10 +373,9 @@ class PermRole:
 
         if key in self.permissions:
             return self.permissions[key]
-
         elif bubble:
             for role in self.bases:
-                perm = role.has(key, default=None)
+                perm = role.has(key, default=None, bubble=bubble)
                 if perm is not None:
                     return perm
 
