@@ -121,7 +121,6 @@ class Playlist:
         return self._editors
 
     def init(self):
-        # TODO remove after some time (added: 2018-09-01)
         # making sure that it's a list
         self.editor_ids = list(self.editor_ids)
 

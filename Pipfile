@@ -9,7 +9,6 @@ imgurpython = {file = "https://github.com/Imgur/imgurpython/archive/master.zip"}
 spotipy = "*"
 "beautifulsoup4" = "*"
 discogs-client = "*"
-raven = "*"
 pillow = "*"
 pynacl = "*"
 aiohttp = "*"
@@ -23,6 +22,7 @@ python-rapidjson = "*"
 motor = "*"
 dnspython = "*"
 aioredis = "*"
+sentry-sdk = "*"
 
 [dev-packages]
 pytest = "*"

@@ -179,9 +179,12 @@ class Permissions:
         await self.perm_manager.delete_role(role)
 
     @commands.command("createrole", aliases=["mkrole"])
-    async def create_role(self, ctx: Context) -> None:
+    async def create_role(self, ctx: Context, *, name: str) -> None:
         """Create a new role"""
-        pass
+        await self.ensure_permission(ctx, perm_tree.permissions.roles.edit, global_only=ctx.guild is None)
+        role = PermRole(role_id=None, name=name, position=None, guild_id=ctx.guild.id if ctx.guild else None)
+        editor = RoleEditor(ctx.channel, bot=self.bot, user=ctx.author, perm_manager=self.perm_manager, role=role)
+        await editor.display()
 
     @commands.command("editrole")
     async def edit_role(self, ctx: Context, *, role: str) -> None:
@@ -190,7 +193,6 @@ class Permissions:
         await self.ensure_can_edit_role(ctx, role)
 
         editor = RoleEditor(ctx.channel, bot=self.bot, user=ctx.author, perm_manager=self.perm_manager, role=role)
-
         await editor.display()
 
 

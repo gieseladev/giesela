@@ -371,6 +371,7 @@ class PlayerManager(LavalinkNodeBalancer):
                 player = GieselaPlayer(self, self.pick_node(guild.region), guild_id, voice_channel_id)
                 self.emit("player_create", player=player)
                 self.players[guild_id] = player
+
         return player
 
     def get_discord_websocket(self, guild_id: int) -> DiscordWebSocket:

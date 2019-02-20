@@ -211,6 +211,9 @@ class PermManager:
 
         return default
 
+    async def save_role(self, role: PermRole) -> bool:
+        pass
+
     async def delete_role(self, role: Union[PermRole, str]) -> None:
         if not isinstance(role, PermRole):
             role = await self.get_role(role)

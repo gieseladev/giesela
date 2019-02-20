@@ -1,4 +1,5 @@
 import math
+from typing import Any, Iterable, Optional
 
 ZERO_WIDTH_SPACE = r"​"  # please pay attention to your cursor
 
@@ -92,3 +93,13 @@ def create_scroll_bar(progress: float, visible: float, length: int = 10, *, full
     empty = start_index * empty_char
 
     return (empty + filled).ljust(length, empty_char)
+
+
+def fluid_list_join(items: Iterable[Any], separator: str = ", ", last_separator: str = " and ", *,
+                    max_len_for_special_last: Optional[int] = 5) -> str:
+    str_items = list(map(str, items))
+
+    if 1 < len(str_items) and (max_len_for_special_last is None or len(str_items) <= max_len_for_special_last):
+        return separator.join(str_items[:-1]) + last_separator + str_items[-1]
+
+    return separator.join(items)

@@ -1,5 +1,5 @@
 import logging
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 from discord import Colour, Embed, TextChannel
 from discord.ext import commands
@@ -7,6 +7,7 @@ from discord.ext.commands import Context
 
 from giesela import PermManager, PermRole, perm_tree, utils
 from giesela.ui import VerticalTextViewer
+from .. import text as text_utils
 from ..help import AutoHelpEmbed
 from ..interactive import MessageableEmbed, emoji_handler
 
@@ -40,7 +41,7 @@ class RoleEditor(AutoHelpEmbed, VerticalTextViewer, MessageableEmbed):
 
         if self.error:
             embed.colour = Colour.red()
-            embed.add_field(name="Error", value=f"**{self.error}**")
+            embed.add_field(name="Error", value=f"**{self.error}**", inline=False)
             self.error = None
 
         return embed
@@ -66,9 +67,12 @@ class RoleEditor(AutoHelpEmbed, VerticalTextViewer, MessageableEmbed):
         key, value = self.flat_permissions[line]
         return f"{table[value]} {key}"
 
-    async def on_command_error(self, ctx: Context, exception: Exception):
+    async def on_command_error(self, ctx: Optional[Context], exception: Exception):
         await super().on_command_error(ctx, exception)
         await self.show_window()
+
+    async def on_emoji_handler_error(self, error: Exception, *args) -> None:
+        await self.on_command_error(None, error)
 
     async def find_role(self, ctx: Context, role: str) -> PermRole:
         kwargs = dict(guild_id=ctx.guild.id if ctx.guild else None, match_global=self.role.is_global or None)
@@ -77,10 +81,28 @@ class RoleEditor(AutoHelpEmbed, VerticalTextViewer, MessageableEmbed):
             raise commands.CommandError(f"Couldn't find role {role}")
         return _role
 
+    async def check_role(self) -> List[str]:
+        missing: List[str] = []
+
+        roles = await self.perm_manager.find_roles(dict(name=self.role.name), guild_id=self.role.guild_id, match_global=self.role.is_global)
+        for role in roles:
+            if role != self.role:
+                missing.append("**role name already exists**")
+                break
+
+        if not self.flat_permissions:
+            missing.append("no permissions set")
+
+        return missing
+
     @emoji_handler("💾", pos=999)
-    async def save_changes(self, *_) -> str:
+    async def save_changes(self, *_) -> bool:
         """Close and save"""
-        pass
+        missing = await self.check_role()
+        if missing:
+            raise commands.CommandError(text_utils.fluid_list_join(missing))
+
+        return await self.perm_manager.save_role(self.role)
 
     @emoji_handler("❎", pos=1000)
     async def abort(self, *_) -> None:
@@ -88,29 +110,34 @@ class RoleEditor(AutoHelpEmbed, VerticalTextViewer, MessageableEmbed):
         self.stop_listener()
         return None
 
+    @commands.command("description", aliases=["describe"])
+    async def set_description(self, _, *, description: str) -> None:
+        """Set the description"""
+        self.role.description = description
+        await self.show_window()
+
     @commands.command("members", aliases=["targets"])
     async def show_members(self, ctx: Context) -> None:
         """Show members of role"""
         pass
 
-    @commands.command("grant")
+    @commands.command("grant", aliases=["allow"])
     async def grant_permission(self, _, permission: str) -> None:
         """Grant a permission"""
         if not perm_tree.has(permission):
             raise commands.CommandError(f"`{permission}` doesn't exist!")
 
-        # TODO use function in PermRole to handle removing from deny when addding to grant!
-        self.role.grant.append(permission)
+        self.role.set_perm(permission, True)
         self.flat_permissions = None
         await self.show_window()
 
-    @commands.command("deny")
+    @commands.command("deny", aliases=["revoke"])
     async def deny_permission(self, _, permission: str) -> None:
         """Deny a permission"""
         if not perm_tree.has(permission):
             raise commands.CommandError(f"`{permission}` doesn't exist!")
 
-        self.role.deny.append(permission)
+        self.role.set_perm(permission, False)
         self.flat_permissions = None
         await self.show_window()
 
@@ -120,7 +147,9 @@ class RoleEditor(AutoHelpEmbed, VerticalTextViewer, MessageableEmbed):
         role = await self.find_role(ctx, role)
         if role == self.role:
             raise commands.CommandError("Cannot inherit from the same role...")
+
         self.role.bases.append(role)
+        self.flat_permissions = None
         await self.show_window()
 
     @commands.command("removebase", aliases=["rmbase", "uninherit"])
@@ -144,4 +173,5 @@ class RoleEditor(AutoHelpEmbed, VerticalTextViewer, MessageableEmbed):
             raise commands.CommandError(f"Couldn't find base \"{role}\"")
 
         self.role.bases.remove(base)
+        self.flat_permissions = None
         await self.show_window()

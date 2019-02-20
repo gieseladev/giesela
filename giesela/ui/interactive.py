@@ -286,7 +286,7 @@ class MessageableEmbed(HasListener, HasBot, EditableEmbed, MessageHandler, Start
                 self.error = str(exception)
 
         if ctx:
-            tags = dict(guild_id=ctx.guild.id, author_id=ctx.author.id)
+            tags = dict(guild_id=ctx.guild.id if ctx.guild else None, author_id=ctx.author.id)
         else:
             tags = None
 
