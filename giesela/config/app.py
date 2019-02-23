@@ -1,4 +1,4 @@
-import enum
+from enum import Enum
 from pathlib import Path
 from typing import List
 
@@ -26,7 +26,7 @@ class Redis(ConfigObject):
 
 class MongodbCollections(ConfigObject):
     config: str = Truthy("config")
-    perm_roles: str = Truthy("perm_roles")
+    permissions: str = Truthy("perm")
 
 
 class Mongodb(ConfigObject):
@@ -35,7 +35,7 @@ class Mongodb(ConfigObject):
     collections: MongodbCollections
 
 
-class LavalinkNodeRegion(enum.Enum):
+class LavalinkNodeRegion(Enum):
     GLOBAL = "global"
     EU = "eu"  # Eu first, America second
     US = "us"

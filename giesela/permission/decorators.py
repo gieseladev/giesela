@@ -1,10 +1,13 @@
 from discord.ext.commands import Command
 
+from .tree_utils import PermissionType
+
 __all__ = ["has_permission", "has_global_permission"]
 
 
-def has_permission(*permissions: str, global_only: bool = False):
-    perms = set(map(str, permissions))
+def has_permission(*permissions: PermissionType, global_only: bool = False):
+    """Command decorator which requires certain permissions"""
+    perms = set(permissions)
 
     def decorator(command: Command):
         if global_only:
@@ -16,5 +19,6 @@ def has_permission(*permissions: str, global_only: bool = False):
     return decorator
 
 
-def has_global_permission(*permissions: str):
+def has_global_permission(*permissions: PermissionType):
+    """Command decorator which requires permission in a global role."""
     return has_permission(*permissions, global_only=True)

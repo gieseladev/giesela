@@ -1,60 +1,29 @@
 import asyncio
+import dataclasses
 import logging
-import operator
-from typing import Any, AsyncIterator, Dict, List, Optional, Union
+from collections import defaultdict
+from itertools import chain
+from typing import Any, Callable, Dict, Iterable, List, TypeVar, Union
 
-import yaml
 from aioredis import Redis
-from discord import Member, Role, User
-from pymongo import IndexModel
+from motor.motor_asyncio import AsyncIOMotorCollection
+from pymongo import DeleteOne, IndexModel, InsertOne, UpdateOne
 
-from giesela import Config, Giesela, utils
-from .loader import PermRole, RoleTarget
+from giesela import Config, Giesela, perm_tree, utils
+from .file_loader import load_from_file
+from .redis_lua import REDIS_DEL_NS, REDIS_HAS_ALL_PERMISSIONS, REDIS_HAS_PERMISSION
+from .role import Role, RoleOrder
+from .role_target import RoleTargetType, Target, get_role_targets_for
+from .tree_utils import PermissionType
 
 log = logging.getLogger(__name__)
-
-# language=lua
-REDIS_HAS_PERMISSION = utils.RedisCode(b"""
-local prefix = ARGV[1]
-local perm = ARGV[2]
-
-for _, target in ipairs(KEYS) do
-    local roles = redis.call("LRANGE", prefix .. ":targets:" .. target, 0, -1)
-
-    if roles then
-        for _, role in ipairs(roles) do
-            local role_key = prefix .. ":roles:" .. role
-            local has_perm = redis.call("HGET", role_key, perm)
-            
-            if has_perm then return has_perm end
-        end
-    end
-end
-""")
-
-# language=lua
-REDIS_DEL_NS = utils.RedisCode(b"""
-redis.replicate_commands()
-
-for _, target in ipairs(ARGV) do
-    local cursor = "0"
-
-    repeat
-        local result = redis.call("SCAN", cursor, "MATCH", target)
-        cursor = result[1]
-        local keys = result[2]
-        
-        if #keys > 0 then
-            redis.call("DEL", unpack(keys))
-        end
-    until (cursor == "0")
-end
-""")
 
 PERM_ROLES_INDEXES = [
     IndexModel([("name", "text")], name="role name search"),
     IndexModel([("guild_id", 1), ("name", 1)], name="unique role name in guild", unique=True)
 ]
+
+T = TypeVar("T")
 
 
 class PermManager:
@@ -63,7 +32,12 @@ class PermManager:
     def __init__(self, bot: Giesela) -> None:
         self._bot = bot
         self._config = bot.config
-        self._perm_roles_coll = self._config.mongodb[self._config.app.mongodb.collections.perm_roles]
+
+        perm_coll_name = self._config.app.mongodb.collections.permissions
+
+        self._roles_coll = self._config.mongodb[f"{perm_coll_name}_roles"]
+        self._role_orders_coll = self._config.mongodb[f"{perm_coll_name}_role_orders"]
+        self._targets_coll = self._config.mongodb[f"{perm_coll_name}_targets"]
 
     @property
     def _redis(self) -> Redis:
@@ -73,159 +47,136 @@ class PermManager:
     def _redis_prefix(self) -> str:
         return self._config.app.redis.namespaces.permissions
 
-    async def _dump(self, roles: List[PermRole]) -> None:
+    async def _dump_to_redis(self, targets: Iterable[Target], role_pool: Union[Dict[str, Role], List[Role]]) -> None:
         await REDIS_DEL_NS.eval(self._redis, args=[f"{self._redis_prefix}:*"])
-        await asyncio.gather(*(role.dump_to_redis(self._redis, self._redis_prefix) for role in roles))
 
-    async def load(self) -> None:
-        await utils.ensure_indexes(self._perm_roles_coll, PERM_ROLES_INDEXES)
+        futures = []
 
-        log.info("loading permissions")
-        roles = await self.get_all_roles(raw=True)
-
-        if roles:
-            await self._dump(roles)
-        else:
-            await self.load_from_file()
-
-    async def load_from_file(self) -> None:
-        with open(self._config.app.files.permissions, "r") as fp:
-            data = yaml.safe_load(fp)
-
-        _roles = data["roles"]
-        roles = [PermRole.load(_role, ignore_errors=False) for _role in _roles]
-
-        for i, role in enumerate(roles):
-            role.position = i
-
-        documents = [role.to_dict() for role in roles]
-
-        await self._perm_roles_coll.delete_many({})
-
-        await asyncio.gather(
-            self._dump(roles),
-            self._perm_roles_coll.insert_many(documents)
-        )
-
-    async def search_role_gen(self, query: str, guild_id: int = None, match_global: bool = None) -> AsyncIterator["PermRole"]:
-        query = {"$text": {"$search": query}}
-
-        if guild_id:
-            query["guild_id"] = {"$in": [guild_id, None]}
-
-        if match_global is not None:
-            query["global"] = match_global
-
-        cursor = self._perm_roles_coll.find(query,
-                                            projection=dict(score={"$meta": "textScore"}),
-                                            sort=[("score", {"$meta": "textScore"}), ("position", 1)])
-
-        async for document in cursor:
-            role = PermRole.load(document)
-            yield role
-
-    async def search_role(self, query: str, guild_id: int = None, match_global: bool = None) -> Optional["PermRole"]:
-        async for role in self.search_role_gen(query, guild_id, match_global):
-            return role
-
-        return None
-
-    async def find_roles(self, query: Union[Dict[str, Any], str, None], guild_id: int = None, match_global: bool = None) -> List["PermRole"]:
-        if not query:
-            query = {}
-        elif isinstance(query, str):
-            query = dict(_id=query)
-
-        if guild_id:
-            query["guild_id"] = {"$in": [guild_id, None]}
-
-        if match_global is not None:
-            query["global"] = match_global
-
-        pipeline = [
-            {"$match": query},
-            {"$graphLookup": {
-                "from": "perm_roles",
-                "startWith": "$bases",
-                "connectFromField": "bases",
-                "connectToField": "_id",
-                "as": "__base_hierarchy"
-            }}
-        ]
-
-        cursor = self._perm_roles_coll.aggregate(pipeline)
-        documents: List[Dict[str, Any]] = await cursor.to_list(None)
-
-        roles = {}
-
-        targets = documents.copy()
-        while targets:
-            target = targets.pop()
-            role_id = target["_id"]
-            if role_id in roles:
+        for target in targets:
+            if not target.role_ids:
+                log.warning(f"Skipping target {target} because it has no roles")
                 continue
 
-            base_hierarchy = target.get("__base_hierarchy")
-            if base_hierarchy:
-                targets.extend(base_hierarchy)
+            key = f"{self._redis_prefix}:targets:{target.target_id}"
+            self._redis.rpush(key, *target.role_ids)
 
-            role = PermRole.load(target)
-            roles[role.absolute_role_id] = role
+        if isinstance(role_pool, list):
+            role_pool = {role.absolute_role_id: role for role in role_pool}
 
-        for role in roles.values():
-            role.load_bases(roles)
+        for role in role_pool.values():
+            compiled_perms = role.compile_permissions(role_pool)
+            if compiled_perms:
+                perms_key = f"{self._redis_prefix}:roles:{role.absolute_role_id}:permissions"
+                futures.append(self._redis.hmset_dict(perms_key, compiled_perms))
+            else:
+                log.warning(f"Skipping role {role} because its compiled permissions are empty")
 
-        return sorted(roles.values(), key=operator.attrgetter("position"))
+        await asyncio.gather(*futures)
 
-    async def get_role(self, role_id: str, **kwargs) -> Optional["PermRole"]:
-        roles = await self.find_roles(role_id, **kwargs)
-        if roles:
-            return roles[0]
-        return None
+    async def load(self) -> None:
+        role_pool: Dict[str, Role] = {}
 
-    async def get_all_roles(self, raw: bool = False) -> List["PermRole"]:
-        if raw:
-            documents = await self._perm_roles_coll.find().to_list(None)
-            return list(map(PermRole.load, documents))
-        else:
-            return await self.find_roles(None)
+        async for role_document in self._roles_coll.find():
+            role = Role(**role_document)
+            role_pool[role.absolute_role_id] = role
 
-    async def get_guild_roles(self, guild_id: int, **kwargs) -> List["PermRole"]:
-        return await self.find_roles(None, guild_id=guild_id, **kwargs)
+        if not role_pool:
+            await self.load_from_file()
+            return
 
-    async def get_roles_for(self, targets: Union[List[RoleTarget], User, Member, Role], global_only: bool = False, **kwargs) -> List["PermRole"]:
-        if not isinstance(targets, list):
-            targets = await RoleTarget.get_all(self._bot, targets, global_only=global_only)
+        sort_map = {}
+        async for order_document in self._role_orders_coll.find():
+            order = RoleOrder(**order_document)
+            for role_id, value in order.build_order_map().items():
+                if role_id in sort_map:
+                    role_str = str(role_pool.get(role_id, role_id))
+                    raise ValueError(f"role {role_str} appears has multiple orderings! (Last found in {order})")
 
-        return await self.find_roles({"targets": {"$in": [str(target) for target in targets]}}, **kwargs)
+                sort_map[role_id] = value
 
-    async def has(self, user: Union[Member, User], perm: str, default: Any = False, *, global_only: bool = False) -> bool:
-        targets = list(map(str, await RoleTarget.get_all(self._bot, user, global_only=global_only)))
+        targets = []
+        async for target_document in self._targets_coll.find():
+            target = Target(**target_document)
+            target.sort_roles(sort_map)
+            targets.append(target)
 
-        log.debug(f"checking keys {targets}")
-        perm = await REDIS_HAS_PERMISSION.eval(self._redis, keys=targets, args=[self._redis_prefix, perm])
-        log.debug(f"got {perm}")
+        await self._dump_to_redis(targets, role_pool)
 
-        if perm is not None:
-            return perm == b"1"
+    async def load_from_file(self) -> None:
+        """Load the permissions from the permission config file"""
+        # FIXME don't mess with ids, it causes issues with other roles that aren't updated!
+        log.info("preparing database for permissions")
+        await utils.ensure_indexes(self._roles_coll, PERM_ROLES_INDEXES)
 
-        return default
+        log.info("Loading permission file")
+        roles, role_orders, targets = load_from_file(self._config.app.files.permissions)
 
-    async def save_role(self, role: PermRole) -> bool:
-        pass
+        async def _perform_bulk_update(collection: AsyncIOMotorCollection,
+                                       update_targets: List[T],
+                                       target_filter: Union[str, Callable[[T], Dict[str, Any]]],
+                                       *,
+                                       delete_first: bool = False,
+                                       ) -> None:
+            updates = []
 
-    async def delete_role(self, role: Union[PermRole, str]) -> None:
-        if not isinstance(role, PermRole):
-            role = await self.get_role(role)
+            for target in update_targets:
+                if isinstance(target_filter, str):
+                    selector = dict(_id=getattr(target, target_filter))
+                else:
+                    selector = target_filter(target)
 
-        role_id = role.absolute_role_id
+                document = dataclasses.asdict(target)
 
-        role_key = f"{self._redis_prefix}:roles:{role_id}"
-        target_keys = [f"{self._redis_prefix}:targets:{target}" for target in role.targets]
+                if delete_first:
+                    updates.extend((
+                        DeleteOne(selector),
+                        InsertOne(document)
+                    ))
+                else:
+                    operation = defaultdict(dict)
 
+                    if "_id" in document:
+                        operation["$setOnInsert"]["_id"] = document.pop("_id")
+
+                    operation["$set"] = document
+
+                    updates.append(UpdateOne(selector, operation, upsert=True))
+
+            if updates:
+                await collection.bulk_write(updates, ordered=delete_first)
+
+        log.debug(f"saving {len(roles)} loaded roles to the database")
         await asyncio.gather(
-            self._perm_roles_coll.delete_one(dict(_id=role_id)),
-            self._perm_roles_coll.update_many(dict(bases=role_id), {"$pull": dict(bases=role_id)}),
-            self._redis.delete(role_key),
-            *(self._redis.lrem(target_key, 0, role_id) for target_key in target_keys)
+            _perform_bulk_update(self._roles_coll, roles, lambda role: {"$or": [
+                {"_id": role.absolute_role_id},
+                {"name": role.name, "guild_id": role.guild_id}
+            ]}, delete_first=True),
+            _perform_bulk_update(self._role_orders_coll, role_orders, "order_id"),
+            _perform_bulk_update(self._targets_coll, targets, "target_id"),
         )
+
+        log.debug(f"dumping to redis")
+        await self._dump_to_redis(targets, roles)
+
+    async def has(self, target: RoleTargetType, *perms: PermissionType, global_only: bool = False) -> bool:
+        perms = list(chain.from_iterable(map(perm_tree.unfold_perm, perms)))
+
+        if len(perms) > 1:
+            return await self.has_many(target, perms, global_only=global_only)
+        elif len(perms) == 1:
+            return await self.has_one(target, perms[0], global_only=global_only)
+        else:
+            # you can always have no permissions
+            return True
+
+    async def has_one(self, target: RoleTargetType, perm: str, *, global_only: bool = False) -> bool:
+        targets = list(map(str, await get_role_targets_for(self._bot, target, global_only=global_only)))
+
+        perm = await REDIS_HAS_PERMISSION.eval(self._redis, keys=targets, args=[self._redis_prefix, perm])
+        return perm == b"1"
+
+    async def has_many(self, target: RoleTargetType, perms: List[str], *, global_only: bool = False) -> bool:
+        targets = list(map(str, await get_role_targets_for(self._bot, target, global_only=global_only)))
+
+        perm = await REDIS_HAS_ALL_PERMISSIONS.eval(self._redis, keys=targets, args=[self._redis_prefix, *perms])
+        return perm == b"1"

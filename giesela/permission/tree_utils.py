@@ -2,10 +2,16 @@ import inspect
 import typing
 from typing import Any, Dict, Iterable, List, Tuple, Union
 
-__all__ = ["Node"]
+__all__ = ["Node", "PermSelector", "PermSpecType", "PermissionType", "CompiledPerms"]
+
+CompiledPerms = Dict[str, int]
+
+PermSelector = Dict[str, Any]
+PermSpecType = Union[PermSelector, str]
 
 
 class PermNodeMeta(type):
+    """Metaclass of a `Node` of a permission tree."""
     __namespace__: str
     __children__: Dict[str, "PermNodeMeta"]
     __perms__: List[str]
@@ -29,10 +35,12 @@ class PermNodeMeta(type):
 
     @property
     def qualified_perms(cls) -> List[str]:
+        """Direct permissions of this node with namespace."""
         return [f"{cls.__namespace__}.{perm}" for perm in cls.__perms__]
 
     @property
     def all_permissions(cls) -> List[str]:
+        """Own qualified permissions and children's qualified permissions"""
         perms = cls.qualified_perms
 
         for child in cls.__children__.values():
@@ -40,6 +48,7 @@ class PermNodeMeta(type):
         return perms
 
     def prepare(cls) -> None:
+        """Prepare this node and all its children."""
         targets: List[PermNodeMeta] = [cls]
 
         while targets:
@@ -59,6 +68,7 @@ class PermNodeMeta(type):
                         setattr(child, perm, qualified_name)
 
     def _render(cls, prefix: str = " ", *, level: int = 0) -> List[str]:
+        """Create an indented tree-like structure of the node and its children."""
         lines: List[str] = []
         for perm in cls.__perms__:
             lines.append(level * prefix + perm)
@@ -70,6 +80,7 @@ class PermNodeMeta(type):
         return lines
 
     def traverse(cls, key: str) -> Union["PermNodeMeta", str]:
+        """Go down the tree and return the result."""
         parts = key.split(".")
         target = cls
         for part in parts:
@@ -78,6 +89,7 @@ class PermNodeMeta(type):
         return target
 
     def has(cls, key: str) -> bool:
+        """Check whether this tree has the qualified permission."""
         try:
             target = cls.traverse(key)
         except AttributeError:
@@ -92,8 +104,18 @@ class PermNodeMeta(type):
         else:
             raise Exception(f"Unknown match query: {query}")
 
-    def unfold_perms(cls, sorted_perms: Iterable[Tuple[str, bool]]) -> Dict[str, bool]:
-        perms: Dict[str, bool] = {}
+    def unfold_perm(cls, perm: "PermissionType") -> List[str]:
+        if isinstance(perm, str):
+            perm = cls.traverse(perm)
+
+        if isinstance(perm, str):
+            return [perm]
+        else:
+            return perm.all_permissions
+
+    def unfold_perms(cls, sorted_perms: Iterable[Tuple[str, int]]) -> CompiledPerms:
+        """Unfold the given permissions to fully qualified permissions."""
+        perms: CompiledPerms = {}
 
         for key, value in sorted_perms:
             perm = cls.traverse(key)
@@ -105,21 +127,47 @@ class PermNodeMeta(type):
 
         return perms
 
-    def prepare_permissions(cls, perms: Iterable[Dict[str, bool]]) -> Dict[str, bool]:
-        return cls.unfold_perms(order_by_spec(combine_permission_dicts(perms)))
+    def resolve_permission_selector(cls, selector: PermSelector) -> List[str]:
+        """Resolve a special selector for permissions."""
+        match = selector.get("match")
+        if match:
+            return cls.match(match)
+
+        raise ValueError(f"Unknown permission selector {selector}")
+
+    def resolve_permission_specifiers(cls, perms: CompiledPerms, specifiers: Iterable[PermSpecType], grant: int) -> None:
+        """Resolve a bunch of permission specifiers and store the result in the provided permission object."""
+        _targets = list(specifiers)
+
+        while _targets:
+            target = _targets.pop()
+            if isinstance(target, dict):
+                _targets.extend(cls.resolve_permission_selector(target))
+                continue
+
+            if not cls.has(target):
+                raise KeyError(f"Permission \"{target}\" doesn't exist!")
+
+            perms[target] = grant
+
+    def compile_permissions(cls, grant: List[PermSpecType], deny: List[PermSpecType]) -> CompiledPerms:
+        """Compile the given permissions into a single object."""
+        perms = {}
+        cls.resolve_permission_specifiers(perms, grant, 1)
+        cls.resolve_permission_specifiers(perms, deny, 0)
+
+        sorted_perms = order_by_least_specificity(perms)
+        return cls.unfold_perms(sorted_perms)
 
 
-def combine_permission_dicts(perm_dicts: Iterable[Dict[str, bool]]) -> Dict[str, bool]:
-    perms: Dict[str, bool] = {}
-
-    for perm_dict in perm_dicts:
-        perms.update(perm_dict)
-
-    return perms
+class Node(metaclass=PermNodeMeta):
+    """Node of a permission tree."""
+    ...
 
 
-def order_by_spec(perms: Dict[str, bool]) -> List[Tuple[str, bool]]:
+PermissionType = Union[str, Node]
+
+
+def order_by_least_specificity(perms: CompiledPerms) -> List[Tuple[str, int]]:
+    """Order the permissions by their specificity in ascending orrder"""
     return [(key, perms[key]) for key in sorted(perms.keys(), key=len)]
-
-
-class Node(metaclass=PermNodeMeta): ...

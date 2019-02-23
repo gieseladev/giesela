@@ -1,70 +1,99 @@
 # The settings in this file are only required for the first start of Giesela. Giesela stores the permission settings in MongoDB.
+# You can still manipulate the permissions using the respective commands though.
+
 # Only the bot owner may reload the permission file with the command "permreload" which overwrites the existing config in the
-# database with the one from this file
+# database with the one from this file.
 
-roles:
-- name: "Global Admin"
+# Giesela uses "roles" to group together a set of permissions which can then be applied to a "target" which can be anything from
+# a specific user to a discord role. A target can have many roles associated with it and a role can be assigned to multiple targets.
+# Each role has a set of permissions it grants and a set of permissions it denies. A role may also inherit permissions from other
+# roles. This will result in the role receiving the permissions from its bases as if they were defined within the role itself.
+# Though the role's permissions will always overwrite the bases' permissions.
 
-  # global roles apply in dm and across guilds. Global roles CANNOT be used in a guild (you can't assign them to a role or member).
-  # Non-global roles defined in this file are still globally available (I know, it's confusing. Don't blame me) which means that any guild can assign
-  # them to its roles/members but they won't be able to edit them (Only global roles with permissions.roles.edit will be able to edit them).
-  # Non-global roles in this file can be seen as the default roles for a given guild, only that they cannot be removed for a specific guild.
-  # Keep in mind that of course guild-specific roles will be prioritised over these non-global roles which makes it possible "overwrite" them!
-  global: true
+# Roles belong to one of three groups:
+# - superglobal
+# - guild
+# - global
+# The roles take precedence over each other in the provided order (superglobal > guild > global) and each
+# role also has a specific position within the group.
 
-  # A list of targets which automatically receive this role.
-  # In this case the role will be automatically assigned to the owner of the bot.
-  # There are multiple such keywords including "#owner, #guild_owner, #guild_admin, #everyone"
-  targets:
-  - "#owner"
+# You can think of the actual permissions as a tree. Let's call it the perm tree. In reality it's more like
+# a forest because there's no single root which all other branches stem from, but for the simplicity's sake
+# you make assume that it's a tree.
+# A permission looks something like this: admin.control.shutdown
+# It's called a tree because next to admin.control.shutdown there's also admin.control.execute (and some more)
+# which all belong to the same branch: admin.control which again belong to admin.
+# As I'm sure you can imagine specifying admin.control is the same as specifying all permissions
+# that are "below" it (i.e. .execute, .shutdown and so on).
+# This means you can easily specify a bunch of related permissions without having to list them all.
+# That's not all though, let's say that a permission which in return specifies less permissions is more "specific"
+# than a permission which specifies a whole bunch of permissions and call this the specificity of it.
+# A more specific permission overwrites a less specific one. That is to say that admin.control.shutdown will
+# overwrite admin.control. This might sound useless at first but it becomes useful when we take the concept of
+# grant and deny into account.
+# If you want to grant a group of permissions (for example: admin.control), but deny (admin.control.shutdown) you can
+# do it without having to manually grant all other permissions, because denying admin.control.shutdown will overwrite
+# the implicit grant from admin.control.
+# Also, in general denied permissions will overwrite the granted permissions with the same specificity. Meaning that
+# both granting and denying admin.control.shutdown will result in it being denied.
+# Note that this behaviour does not apply for bases. Inherited permissions are always overwritten regardless of their specificity.
 
-  # A list of permissions which shall be granted to this role. (Exception for special cases)
-  # By default all permissions are denied! Instead of specifying a permission such as "queue.add.entry" you can specify a permission group
-  # "queue.add" which will grant all the permissions in said group (in this case: "queue.add.entry", "queue.add.playlist", "queue.add.stream")
-  #     Note: You can also use "deny" to explicitly deny a permission. !!deny takes precedence over grant!!
-  grant:
-  # matches all permissions there are
-  - match: "*"
 
-- name: "Global Moderator"
-  global: true
-  grant:
-  - admin.appearance
-  - permissions
-  - playlist.all
-  deny:
-  - permissions.roles.self
+# superglobal roles stand above everything else. They apply to all guilds and direct messages
+superglobal_roles:
+  - name: Global Admin
 
-- name: "Server Admin"
-  targets: "#guild_owner"
-  grant:
-  - config
-  - permissions
+    # A list of targets which automatically receive this role.
+    # In this case the role will be automatically assigned to the owner of the bot.
+    # There are multiple such keywords including #owner, #guild_owner, #guild_admin, #everyone.
+    target: "#owner"
 
-- name: "Music Master"
+    grant:
+      # matches all permissions there are
+      - match: "*"
 
-  # Inherit all permissions from the specified role.
-  bases: active
-  grant:
-  - queue
-  - player
-  - summon
+  - name: Global Moderator
+    grant:
+      - admin.appearance
+      - permissions
+      - playlist.all
+    deny:
+      - permissions.roles.self
 
-  # An id must be specified in order to inherit from a role. If the id isn't set, it defaults to a random one.
-  # While the name of a role may be changed, its id stays the same.
-- id: active
-  bases: base
-  name: "Active Listener"
-  grant:
-  - queue.add
-  - playlist.owned
 
-- id: base
-  name: "Pleb"
-  global: true
-  description: Basic Permissions for everyone
-  targets:
-  - "#everyone"
-  grant:
-  - queue.inspect
-  - webiesela
+# guild roles only apply within the context of a guild.
+# Normally guild roles are only available within the guild they were created in,
+# roles defined in here however apply to all guilds and cannot be modified in a guild context.
+# When modified a new role specific to the guild is created instead with the original role as its base.
+guild_roles:
+  - name: Server Admin
+    target: "#guild_owner"
+    grant:
+      - config
+      - permissions
+
+  - name: Music Master
+
+    # Inherit all permissions from the specified role.
+    base: active
+    grant:
+      - queue
+      - player
+      - summon
+
+    # An id must be specified in order to inherit from a role. If the id isn't set, it defaults to a random one.
+    # While the name of a role may be changed, its id stays the same.
+  - id: active
+    name: Active Listener
+    grant:
+      - queue.add
+      - playlist.owned
+
+# global roles are like superglobal roles only that they don't stand above guild roles.
+# i.e. guild roles will take precedence over the global roles.
+global_roles:
+  - name: Pleb
+    target: "#everyone"
+    grant:
+      - queue.inspect
+      - webiesela

@@ -9,6 +9,7 @@ from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import Giesela, PermManager, PermRole, PermissionDenied, perm_tree
+from giesela.permission.tree_utils import PermissionType
 from giesela.ui import PromptYesNo, VerticalTextViewer
 from giesela.ui.custom import RoleEditor
 
@@ -24,7 +25,7 @@ class Permissions:
         bot.store_reference("has_permission", self.has_permission)
         bot.store_reference("ensure_permission", self.ensure_permission)
 
-    async def ensure_permission(self, ctx: Context, *keys: str, global_only: bool = False) -> bool:
+    async def ensure_permission(self, ctx: Context, *keys: PermissionType, global_only: bool = False) -> bool:
         perm = await asyncio.gather(*(self.perm_manager.has(ctx.author, key, global_only=global_only) for key in keys), loop=self.bot.loop)
         if all(perm):
             return True
@@ -78,7 +79,7 @@ class Permissions:
     async def ensure_can_edit_role(self, ctx: Context, role: PermRole) -> None:
         # you may edit a role under two conditions:
         # - you are part of the role and the role has edit_self enabled
-        # - you have a different role with at least the same priority which grants edit
+        # - you have a higher role which grants edit
 
         in_role = False
 
@@ -88,7 +89,7 @@ class Permissions:
                 if role.has(perm_tree.permissions.roles.self):
                     return
             else:
-                if user_role.priority >= role.priority:
+                if user_role.position >= role.position:
                     return
 
         if in_role:
