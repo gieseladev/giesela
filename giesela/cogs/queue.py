@@ -38,6 +38,8 @@ class EnqueueCog(QueueBase):
         player = await self.get_player(ctx)
         # TODO check permissions!
 
+        target = target.lstrip("<").rstrip(">")
+
         async with ctx.typing():
             result = await self.extractor.get(target)
 

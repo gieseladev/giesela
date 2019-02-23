@@ -49,7 +49,7 @@ class PlayerStateInterpreter(metaclass=abc.ABCMeta):
         return self.state != GieselaPlayerState.DISCONNECTED
 
 
-@has_events("connect", "disconnect", "volume_change", "pause", "resume", "seek", "skip", "stop", "play", "finished", "chapter")
+@has_events("connect", "disconnect", "volume_change", "pause", "resume", "seek", "skip", "revert", "stop", "play", "finished", "chapter")
 class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
     voice_channel_id: Optional[int]
 
@@ -221,6 +221,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         entry = self.current_entry
 
         if entry:
+            # FIXME duplicate history entries
             log.debug(f"finished playing {entry}")
             self.queue.push_history(entry)
 
