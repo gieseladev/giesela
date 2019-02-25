@@ -5,7 +5,7 @@ from typing import Dict, List, Optional, Tuple, Union
 from .tree import perm_tree
 from .tree_utils import CompiledPerms, PermSpecType
 
-__all__ = ["RoleContext", "Role", "RoleOrder", "RoleOrderValue"]
+__all__ = ["RoleContext", "Role", "RoleOrder", "RoleOrderValue", "get_higher_role_contexts", "get_higher_or_equal_role_contexts"]
 
 
 class RoleContext(Enum):
@@ -16,19 +16,52 @@ class RoleContext(Enum):
 
     @property
     def context_value(self) -> int:
-        return ROLE_CONTEXT_ORDER[self]
+        return ROLE_CONTEXT_POSITIONS[self]
 
     @property
     def order_value(self) -> int:
-        return ROLE_CONTEXT_ORDER[self]
+        return ROLE_CONTEXT_POSITIONS[self]
+
+    @property
+    def is_global(self) -> bool:
+        """Whether the role exists outside of a guild"""
+        return self != RoleContext.GUILD
+
+    @property
+    def is_guild(self) -> bool:
+        """Whether the role is specific to a guild"""
+        return self == RoleContext.GUILD
+
+    def get_order_id(self, guild_id: Optional[int]) -> str:
+        if self == RoleContext.GUILD:
+            if not guild_id:
+                raise ValueError(f"guild_id is required for {self}")
+
+            return str(guild_id)
+        else:
+            return self.value
 
 
-ROLE_CONTEXT_ORDER = {context: i for i, context in enumerate((
+ROLE_CONTEXT_ORDER = (
     RoleContext.SUPERGLOBAL,
     RoleContext.GUILD,
     RoleContext.GUILD_DEFAULT,
     RoleContext.GLOBAL
-))}
+)
+
+ROLE_CONTEXT_POSITIONS = {context: i for i, context in enumerate(ROLE_CONTEXT_ORDER)}
+
+
+def get_higher_role_contexts(context: RoleContext) -> List[RoleContext]:
+    position = context.order_value
+
+    return list(ROLE_CONTEXT_ORDER[:position])
+
+
+def get_higher_or_equal_role_contexts(context: RoleContext) -> List[RoleContext]:
+    contexts = get_higher_role_contexts(context)
+    contexts.append(context)
+    return contexts
 
 
 @dataclass
@@ -57,7 +90,14 @@ class Role:
 
     @property
     def is_global(self) -> bool:
-        return self.role_context != RoleContext.GUILD
+        return self.role_context.is_global
+
+    @property
+    def is_guild(self) -> bool:
+        return self.role_context.is_guild
+
+    def compile_own_permissions(self) -> CompiledPerms:
+        return perm_tree.compile_permissions(self.grant, self.deny)
 
     def compile_permissions(self, base_pool: Dict[str, "Role"]) -> CompiledPerms:
         perms = {}
@@ -72,7 +112,7 @@ class Role:
             except Exception as e:
                 raise ValueError(f"Couldn't load base {base_id} of {self}") from e
 
-        perms.update(perm_tree.compile_permissions(self.grant, self.deny))
+        perms.update(self.compile_own_permissions())
 
         return perms
 
@@ -90,24 +130,22 @@ def build_role_order_value(context: Union[RoleContext, int], position: int) -> R
 @dataclass
 class RoleOrder:
     _id: str
+    context: str
+    order_value: int
     order: List[str]
 
     @property
     def order_id(self) -> str:
         return self._id
 
-    def get_context(self) -> RoleContext:
-        try:
-            return RoleContext(self._id)
-        except ValueError:
-            return RoleContext.GUILD_DEFAULT
+    @property
+    def role_context(self) -> RoleContext:
+        return RoleContext(self.context)
 
     def build_order_map(self) -> Dict[str, RoleOrderValue]:
         order_map = {}
 
-        context = self.get_context()
-
         for i, role_id in enumerate(self.order):
-            order_map[role_id] = build_role_order_value(context, i)
+            order_map[role_id] = build_role_order_value(self.order_value, i)
 
         return order_map

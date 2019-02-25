@@ -43,9 +43,7 @@ class _StorageTypeHints:
     gitils: GiTilsClient
     perm_manager: "PermManager"
 
-    async def ensure_permission(self, ctx: Context, *keys: str): ...
-
-    async def has_permission(self, ctx: Context, *keys: str) -> bool: ...
+    async def ensure_permission(self, ctx: Context, *keys: str) -> None: ...
 
 
 class Giesela(AutoShardedBot, _StorageTypeHints):

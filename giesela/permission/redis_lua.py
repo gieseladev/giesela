@@ -2,7 +2,7 @@
 
 from giesela.utils import RedisCode
 
-__all__ = ["REDIS_HAS_PERMISSION", "REDIS_HAS_ALL_PERMISSIONS", "REDIS_DEL_NS"]
+__all__ = ["REDIS_HAS_PERMISSION", "REDIS_HAS_ALL_PERMISSIONS", "REDIS_ANY_TARGET_HAS_ROLE", "REDIS_DEL_NS"]
 
 # language=lua
 REDIS_HAS_PERMISSION = RedisCode(b"""
@@ -39,19 +39,40 @@ for _, target in ipairs(KEYS) do
             for i = #has_perms, 1, -1 do
                 local has_perm = has_perms[i]
 
-                if has_perm == 1 then
+                if has_perm == "1" then
                     table.remove(perms, i)
-                elseif has_perm == 0 then
-                    return 0
+                elseif has_perm == "0" then
+                    return "0"
                 end
             end
 
             if next(perms) == nil then
-                return 1
+                return "1"
             end
         end
     end
 end
+
+return "0"
+""")
+
+# language=lua
+REDIS_ANY_TARGET_HAS_ROLE = RedisCode(b"""
+local target_role_id = ARGV[1]
+
+for _, target in ipairs(KEYS) do
+    local roles = redis.call("LRANGE", target, 0, -1)
+
+    if roles then
+        for _, role_id in ipairs(roles) do
+            if role_id == target_role_id then
+                return "1"
+            end
+        end
+    end
+end
+
+return "0"
 """)
 
 # language=lua

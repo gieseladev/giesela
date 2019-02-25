@@ -1,15 +1,14 @@
 import asyncio
 import contextlib
-import itertools
 import logging
-from typing import List, Union
+from typing import List, Union, overload
 
-from discord import Colour, Embed, Forbidden, Member, Role, User
+from discord import Colour, Embed, Forbidden, Guild, Member, Role, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, PermManager, PermRole, PermissionDenied, perm_tree
-from giesela.permission.tree_utils import PermissionType
+from giesela import Giesela, PermManager, PermissionDenied, Role as PermRole, perm_tree
+from giesela.permission.tree_utils import PermissionType, calculate_final_permissions
 from giesela.ui import PromptYesNo, VerticalTextViewer
 from giesela.ui.custom import RoleEditor
 
@@ -22,12 +21,12 @@ class Permissions:
         self.perm_manager = PermManager(bot)
 
         bot.store_reference("perm_manager", self.perm_manager)
-        bot.store_reference("has_permission", self.has_permission)
         bot.store_reference("ensure_permission", self.ensure_permission)
 
     async def ensure_permission(self, ctx: Context, *keys: PermissionType, global_only: bool = False) -> bool:
-        perm = await asyncio.gather(*(self.perm_manager.has(ctx.author, key, global_only=global_only) for key in keys), loop=self.bot.loop)
-        if all(perm):
+        """Make sure the ctx has the given permissions, raise PermissionDenied otherwise."""
+        has_perm = await self.perm_manager.has(ctx.author, *keys, global_only=global_only)
+        if has_perm:
             return True
         else:
             keys_str = ", ".join(f"\"{key}\"" for key in keys)
@@ -38,13 +37,10 @@ class Permissions:
 
             raise PermissionDenied(text)
 
-    async def has_permission(self, ctx: Context, *keys: str, global_only: bool = False) -> bool:
-        try:
-            await self.ensure_permission(ctx, *keys, global_only=global_only)
-        except PermissionDenied:
-            return False
-        else:
-            return True
+    async def ensure_can_edit_role(self, ctx: Context, role: PermRole) -> None:
+        can_edit = await self.perm_manager.can_edit_role(ctx.author, role)
+        if not can_edit:
+            raise PermissionDenied(f"Cannot edit role {role.name}!")
 
     async def _command_check(self, ctx: Context, attribute: str, global_only: bool) -> bool:
         try:
@@ -63,39 +59,48 @@ class Permissions:
             self._command_check(ctx, "_required_global_permissions", True)
         ))
 
-    async def get_roles_for(self, ctx: Context) -> List[PermRole]:
-        guild_id = ctx.guild.id if ctx.guild else None
-        return await self.perm_manager.get_roles_for(ctx.author, guild_id=guild_id)
+    @overload
+    async def get_roles_for(self, ctx: Member) -> List[PermRole]:
+        ...
 
-    async def find_role(self, query: str, ctx: Context = None) -> PermRole:
-        guild_id = ctx.guild.id if ctx and ctx.guild else None
-        role = await self.perm_manager.get_role(query) or await self.perm_manager.search_role(query, guild_id=guild_id)
+    @overload
+    async def get_roles_for(self, ctx: User, guild_id: int = None) -> List[PermRole]:
+        ...
+
+    @overload
+    async def get_roles_for(self, ctx: Context) -> List[PermRole]:
+        ...
+
+    async def get_roles_for(self, ctx: Union[Context, Member, User], guild_id: int = None) -> List[PermRole]:
+        """Get all roles for the target."""
+        if isinstance(ctx, Context):
+            ctx = ctx.author
+
+        if isinstance(ctx, Member):
+            guild_id = ctx.guild.id
+            target = ctx
+        else:
+            target = ctx
+
+        return await self.perm_manager.get_target_roles_for_guild(target, guild_id=guild_id)
+
+    async def get_role(self, query: str, guild_id: Union[Context, Guild, int] = None) -> PermRole:
+        """Get a role either by its id or its name.
+        Raises:
+            `CommandError`: No role was found
+        """
+        if isinstance(guild_id, Context):
+            guild_id = guild_id.guild
+
+        if isinstance(guild_id, Guild):
+            guild_id = guild_id.id
+
+        role = await self.perm_manager.get_or_search_role_for_guild(query, guild_id)
 
         if not role:
             raise commands.CommandError(f"Couldn't find role \"{query}\"")
 
         return role
-
-    async def ensure_can_edit_role(self, ctx: Context, role: PermRole) -> None:
-        # you may edit a role under two conditions:
-        # - you are part of the role and the role has edit_self enabled
-        # - you have a higher role which grants edit
-
-        in_role = False
-
-        for user_role in await self.perm_manager.get_roles_for(ctx.author, global_only=role.is_global):
-            if user_role == role:
-                in_role = True
-                if role.has(perm_tree.permissions.roles.self):
-                    return
-            else:
-                if user_role.position >= role.position:
-                    return
-
-        if in_role:
-            raise PermissionDenied(f"Role \"{role.name}\" may not edit itself. \"{perm_tree.permissions.roles.self}\" required!")
-        else:
-            raise PermissionDenied(f"Permission \"{perm_tree.permissions.roles.edit}\" required!")
 
     @commands.is_owner()
     @commands.command("permreload")
@@ -121,7 +126,7 @@ class Permissions:
         except AttributeError:
             guild_id = None
 
-        roles = await self.perm_manager.get_roles_for(target, guild_id=guild_id)
+        roles = await self.get_roles_for(target, guild_id=guild_id)
 
         if roles:
             role_text = "\n".join(f"- {role.name}" for role in roles)
@@ -144,7 +149,7 @@ class Permissions:
         except AttributeError:
             guild_id = None
 
-        roles = await self.perm_manager.get_guild_roles(guild_id, match_global=None if ctx.guild else True)
+        roles = await self.perm_manager.get_all_roles_for_guild(guild_id)
 
         if roles:
             role_text = "\n".join(f"- {role.name}" for role in roles)
@@ -160,20 +165,19 @@ class Permissions:
         icon = None
 
         if isinstance(target, str):
-            role = await self.find_role(target, ctx)
+            role = await self.get_role(target, ctx)
             name = role.name
             roles = [role]
         elif isinstance(target, (Member, User, Role)):
             name = target.name
-            roles = await self.perm_manager.get_roles_for(target)
+            roles = await self.get_roles_for(target)
         else:
             name = ctx.author.name
             icon = ctx.author.avatar_url
             roles = await self.get_roles_for(ctx)
 
-        perm_trees = (role.permission_tree for role in roles)
-        perms = perm_tree.prepare_permissions(itertools.chain.from_iterable(perm_trees))
-        keys = sorted(key for key, value in perms.items() if value)
+        perms = calculate_final_permissions(role.compile_own_permissions() for role in roles)
+        keys = sorted(perm_tree.find_shortest_representation(perms))
 
         if not keys:
             raise commands.CommandError(f"{name} doesn't have any permissions")
@@ -188,7 +192,7 @@ class Permissions:
     @commands.command("removerole", aliases=["rmrole"])
     async def remove_role(self, ctx: Context, *, role: str) -> None:
         """Delete a role"""
-        role = await self.find_role(role, ctx)
+        role = await self.get_role(role, ctx)
         await self.ensure_can_edit_role(ctx, role)
 
         prompt = PromptYesNo(ctx.channel, bot=self.bot, user=ctx.author, text=f"Do you really want to delete \"{role.name}\"")
@@ -199,14 +203,14 @@ class Permissions:
     async def create_role(self, ctx: Context, *, name: str) -> None:
         """Create a new role"""
         await self.ensure_permission(ctx, perm_tree.permissions.roles.edit, global_only=ctx.guild is None)
-        role = PermRole(role_id=None, name=name, position=None, guild_id=ctx.guild.id if ctx.guild else None)
-        editor = RoleEditor(ctx.channel, bot=self.bot, user=ctx.author, perm_manager=self.perm_manager, role=role)
-        await editor.display()
+        # role = PermRole(role_id=None, name=name, position=None, guild_id=ctx.guild.id if ctx.guild else None)
+        # editor = RoleEditor(ctx.channel, bot=self.bot, user=ctx.author, perm_manager=self.perm_manager, role=role)
+        # await editor.display()
 
     @commands.command("editrole")
     async def edit_role(self, ctx: Context, *, role: str) -> None:
         """Edit a role"""
-        role = await self.find_role(role, ctx)
+        role = await self.get_role(role, ctx)
         await self.ensure_can_edit_role(ctx, role)
 
         editor = RoleEditor(ctx.channel, bot=self.bot, user=ctx.author, perm_manager=self.perm_manager, role=role)

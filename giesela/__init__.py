@@ -4,7 +4,7 @@ from .constants import *
 from .entry import *
 from .errors import *
 from .extractor import Extractor
-from .permission import PermManager, PermRole, perm_tree
+from .permission import PermManager, Role, has_global_permission, has_permission, perm_tree
 from .player import GieselaPlayer, GieselaPlayerState, PlayerManager
 from .playlist import EditPlaylistProxy, GPL_VERSION, LoadedPlaylistEntry, Playlist, PlaylistEntry, PlaylistManager
 from .radio import RadioStation, RadioStationManager

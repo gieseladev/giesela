@@ -15,6 +15,8 @@ from .role_target import RoleTarget, Target
 from .tree import perm_tree
 from .tree_utils import PermSpecType
 
+__all__ = ["FileRole", "load_from_file"]
+
 
 @dataclass
 class FileRole:
@@ -209,17 +211,26 @@ def build_loaded_role_from_file_role(loaded_role: FileRole, context: RoleContext
 
 
 def _build_roles(roles_to_load: List[FileRole], context: RoleContext, roles: List[Role], role_orders: List[RoleOrder]) -> None:
-    orders: Dict[str, List[str]] = defaultdict(list)
+    orders: Dict[str, Tuple[RoleContext, List[str]]] = {}
 
     for loaded_role in roles_to_load:
+        if loaded_role.guild_id:
+            context = RoleContext.GUILD
+            order_key = str(loaded_role.guild_id)
+        else:
+            order_key = context.value
+
         role = build_loaded_role_from_file_role(loaded_role, context)
         roles.append(role)
 
-        order_key = str(role.guild_id) if role.guild_id else context.value
-        orders[order_key].append(role.absolute_role_id)
+        order_item = orders.get(order_key)
+        if order_item:
+            order_item[1].append(role.absolute_role_id)
+        else:
+            orders[order_key] = (context, [role.absolute_role_id])
 
-    for order_id, role_ids in orders.items():
-        role_orders.append(RoleOrder(order_id, role_ids))
+    for order_id, (context, role_ids) in orders.items():
+        role_orders.append(RoleOrder(order_id, context.value, context.order_value, role_ids))
 
 
 def load_from_data(data: Dict[str, Any]) -> Tuple[List[Role], List[RoleOrder], List[Target]]:
@@ -232,7 +243,7 @@ def load_from_data(data: Dict[str, Any]) -> Tuple[List[Role], List[RoleOrder], L
     role_orders: List[RoleOrder] = []
 
     _build_roles(superglobal_roles, RoleContext.SUPERGLOBAL, roles, role_orders)
-    _build_roles(guild_roles, RoleContext.GUILD, roles, role_orders)
+    _build_roles(guild_roles, RoleContext.GUILD_DEFAULT, roles, role_orders)
     _build_roles(global_roles, RoleContext.GLOBAL, roles, role_orders)
 
     target_roles: Dict[str, List[str]] = defaultdict(list)

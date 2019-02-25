@@ -5,7 +5,7 @@ from discord import Colour, Embed, TextChannel
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import PermManager, PermRole, perm_tree, utils
+from giesela import PermManager, Role, perm_tree, utils
 from giesela.ui import VerticalTextViewer
 from .. import text as text_utils
 from ..help import AutoHelpEmbed
@@ -17,7 +17,7 @@ log = logging.getLogger(__name__)
 class RoleEditor(AutoHelpEmbed, VerticalTextViewer, MessageableEmbed):
     _flat_perms: List[Tuple[str, bool]]
 
-    def __init__(self, channel: TextChannel, *, perm_manager: PermManager, role: PermRole, **kwargs) -> None:
+    def __init__(self, channel: TextChannel, *, perm_manager: PermManager, role: Role, **kwargs) -> None:
         super().__init__(channel, **kwargs)
 
         self.perm_manager = perm_manager
@@ -74,7 +74,7 @@ class RoleEditor(AutoHelpEmbed, VerticalTextViewer, MessageableEmbed):
     async def on_emoji_handler_error(self, error: Exception, *args) -> None:
         await self.on_command_error(None, error)
 
-    async def find_role(self, ctx: Context, role: str) -> PermRole:
+    async def find_role(self, ctx: Context, role: str) -> Role:
         kwargs = dict(guild_id=ctx.guild.id if ctx.guild else None, match_global=self.role.is_global or None)
         _role = await self.perm_manager.get_role(role, **kwargs) or await self.perm_manager.search_role(role, **kwargs)
         if not _role:

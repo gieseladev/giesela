@@ -80,7 +80,7 @@ class EditChange:
         elif change_type == EditChange.REMOVED:
             return "-"
         elif change_type == EditChange.EDITED:
-            return "\✏"
+            return r"\✏"
 
     def apply(self, playlist: "Playlist") -> bool:
         try:

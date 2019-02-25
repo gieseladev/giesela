@@ -17,6 +17,8 @@ class LavalinkEvent(enum.Enum):
     TRACK_EXCEPTION = "TrackExceptionEvent"
     TRACK_STUCK = "TrackStuckEvent"
 
+    WEBSOCKET_CLOSED = "WebSocketClosedEvent"
+
 
 class TrackEndReason(enum.Enum):
     FINISHED = "FINISHED"

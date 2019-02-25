@@ -1,13 +1,17 @@
 import inspect
 import typing
-from typing import Any, Dict, Iterable, List, Tuple, Union
+from collections import defaultdict
+from functools import reduce
+from typing import Any, Dict, Iterable, Iterator, List, Tuple, Union
 
-__all__ = ["Node", "PermSelector", "PermSpecType", "PermissionType", "CompiledPerms"]
+__all__ = ["Node", "PermSelector", "PermSpecType", "PermissionType", "CompiledPerms", "calculate_final_permissions"]
 
 CompiledPerms = Dict[str, int]
 
 PermSelector = Dict[str, Any]
 PermSpecType = Union[PermSelector, str]
+
+NestedPermissionTree = Dict[str, Union[bool, "NestedPermissionTree"]]
 
 
 class PermNodeMeta(type):
@@ -39,13 +43,12 @@ class PermNodeMeta(type):
         return [f"{cls.__namespace__}.{perm}" for perm in cls.__perms__]
 
     @property
-    def all_permissions(cls) -> List[str]:
+    def all_permissions(cls) -> Iterator[str]:
         """Own qualified permissions and children's qualified permissions"""
-        perms = cls.qualified_perms
+        yield from cls.qualified_perms
 
         for child in cls.__children__.values():
-            perms.extend(child.all_permissions)
-        return perms
+            yield from child.all_permissions
 
     def prepare(cls) -> None:
         """Prepare this node and all its children."""
@@ -79,14 +82,21 @@ class PermNodeMeta(type):
 
         return lines
 
-    def traverse(cls, key: str) -> Union["PermNodeMeta", str]:
-        """Go down the tree and return the result."""
+    def traverse_to_parent(cls, key: str) -> Tuple["PermNodeMeta", str]:
+        """Go down the tree and return the parent and the key."""
         parts = key.split(".")
+        key = parts.pop()
+
         target = cls
         for part in parts:
             target = getattr(target, part)
 
-        return target
+        return target, key
+
+    def traverse(cls, key: str) -> Union["PermNodeMeta", str]:
+        """Go down the tree and return the result."""
+        parent, key = cls.traverse_to_parent(key)
+        return getattr(parent, key)
 
     def has(cls, key: str) -> bool:
         """Check whether this tree has the qualified permission."""
@@ -111,7 +121,7 @@ class PermNodeMeta(type):
         if isinstance(perm, str):
             return [perm]
         else:
-            return perm.all_permissions
+            return list(perm.all_permissions)
 
     def unfold_perms(cls, sorted_perms: Iterable[Tuple[str, int]]) -> CompiledPerms:
         """Unfold the given permissions to fully qualified permissions."""
@@ -126,6 +136,71 @@ class PermNodeMeta(type):
                     perms[_perm] = value
 
         return perms
+
+    def _create_nested_tree(cls, perms: Iterable[str]) -> NestedPermissionTree:
+        """Create a nested permission tree.
+
+        The value is True if the permission can be found in the provided permissions,
+        otherwise False.
+        """
+        perm_pool = set(perms)
+
+        def tree_factory():
+            return defaultdict(tree_factory)
+
+        def traverser(acc, curr):
+            return acc[curr]
+
+        tree: NestedPermissionTree = tree_factory()
+        for perm in cls.all_permissions:
+            *parts, key = perm.split(".")
+            container = reduce(traverser, parts, tree)
+            container[key] = perm in perm_pool
+
+        return tree
+
+    def find_shortest_representation(cls, perms: Iterable[str]) -> List[str]:
+        """Find a concise representation of perms."""
+        root_tree = cls._create_nested_tree(perms)
+
+        def simplify(tree: Union[NestedPermissionTree, bool]) -> bool:
+            if isinstance(tree, bool):
+                return tree
+
+            all_simplified = True
+
+            for key in tree.keys():
+                if simplify(tree[key]):
+                    tree[key] = True
+                else:
+                    all_simplified = False
+
+            return all_simplified
+
+        # simplified up to the top-level, indication ALL permissions
+        if simplify(root_tree):
+            return ["*"]
+
+        simplified_perms = []
+
+        def add_simplified_perms(value: Union[NestedPermissionTree, bool], ns: str = None):
+            if isinstance(value, bool):
+                if value:
+                    simplified_perms.append(ns)
+                else:
+                    return
+            else:
+                if ns:
+                    ns_prefix = f"{ns}."
+                else:
+                    ns_prefix = ""
+
+                for key, sub_value in value.items():
+                    add_simplified_perms(sub_value, ns_prefix + key)
+
+        add_simplified_perms(root_tree)
+
+        return simplified_perms
 
     def resolve_permission_selector(cls, selector: PermSelector) -> List[str]:
         """Resolve a special selector for permissions."""
@@ -171,3 +246,20 @@ PermissionType = Union[str, Node]
 def order_by_least_specificity(perms: CompiledPerms) -> List[Tuple[str, int]]:
     """Order the permissions by their specificity in ascending orrder"""
     return [(key, perms[key]) for key in sorted(perms.keys(), key=len)]
+
+
+def calculate_final_permissions(perms: Iterable[CompiledPerms]) -> CompiledPerms:
+    """Combine compiled permissions to get the final permissions
+
+    Args:
+        perms: compiled permissions in order of most to least significant.
+    """
+
+    def reducer(acc_perms: CompiledPerms, new_perms: CompiledPerms) -> CompiledPerms:
+        for key in new_perms.keys():
+            if key not in acc_perms:
+                acc_perms[key] = new_perms[key]
+
+        return acc_perms
+
+    return reduce(reducer, perms, {})

@@ -123,7 +123,7 @@ class RoleTarget:
             return bot.get_user(self.id)
 
 
-async def get_role_targets_for(bot: BotBase, target: RoleTargetType, *, global_only: bool = False) -> List[RoleTarget]:
+async def get_role_targets_for(bot: BotBase, target: RoleTargetType, *, global_only: bool = False, guild_only: bool = False) -> List[RoleTarget]:
     """Get all role targets the provided target belongs to."""
     targets: List[RoleTarget] = []
 
@@ -135,12 +135,13 @@ async def get_role_targets_for(bot: BotBase, target: RoleTargetType, *, global_o
 
             targets.append(RoleTarget(target))
     else:
-        if await bot.is_owner(target):
-            targets.append(RoleTarget("#owner"))
+        if not guild_only:
+            if await bot.is_owner(target):
+                targets.append(RoleTarget("#owner"))
 
-        targets.append(RoleTarget(str(target.id)))
+            targets.append(RoleTarget(str(target.id)))
 
-        if isinstance(target, Member) and not global_only:
+        if not global_only and isinstance(target, Member):
             targets.append(RoleTarget(target))
 
             if target.guild.owner == target:
@@ -152,7 +153,8 @@ async def get_role_targets_for(bot: BotBase, target: RoleTargetType, *, global_o
 
             targets.append(RoleTarget(f"#{target.guild.id}{GUILD_SPLIT}everyone"))
 
-        targets.append(RoleTarget("#everyone"))
+        if not guild_only:
+            targets.append(RoleTarget("#everyone"))
 
     return targets
 
