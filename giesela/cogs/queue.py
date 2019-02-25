@@ -2,6 +2,7 @@ import random
 import time
 from contextlib import suppress
 from datetime import datetime
+from typing import Callable, Iterable, List
 
 from discord import Forbidden
 from discord.ext import commands
@@ -33,23 +34,45 @@ def pad_index(index: int, padding: int) -> str:
     return text_utils.wrap(padded_index, "`")
 
 
+def extract_url_or_query_targets(target: str, url_checker: Callable[[str], bool]) -> List[str]:
+    def strip_symbols_url(url: str) -> str:
+        return url.lstrip("<").rstrip(">")
+
+    def strip_symbols_urls(urls: Iterable[str]) -> Iterable[str]:
+        return map(strip_symbols_url, urls)
+
+    def all_urls(urls: Iterable[str]) -> bool:
+        return all(url_checker(url) for url in urls)
+
+    lines = list(strip_symbols_urls(target.splitlines()))
+    if all_urls(lines):
+        return lines
+
+    cs_data = list(strip_symbols_urls(url.strip() for url in target.split(",")))
+    if all_urls(cs_data):
+        return cs_data
+
+    return [target]
+
+
 class EnqueueCog(QueueBase):
     async def _play_cmd(self, ctx: Context, target: str, placement: int = None):
         player = await self.get_player(ctx)
         # TODO check permissions!
 
-        target = target.lstrip("<").rstrip(">")
+        targets = extract_url_or_query_targets(target, self.extractor.is_url)
 
         async with ctx.typing():
-            result = await self.extractor.get(target)
+            results = await self.extractor.get_many(targets)
 
-        if not result:
+        if not results:
             raise commands.CommandError(f"Couldn't find anything for {target}")
 
-        if isinstance(result, list):
-            player.queue.add_entries(result, requester=ctx.author, position=placement)
-            await ctx.send(f"Added {len(result)} entries to the queue")
+        if len(results) > 1:
+            player.queue.add_entries(results, requester=ctx.author, position=placement)
+            await ctx.send(f"Added {len(results)} entries to the queue")
         else:
+            result = results[0]
             player.queue.add_entry(result, requester=ctx.author, position=placement)
             await ctx.send(f"Added **{result}** to the queue")
 

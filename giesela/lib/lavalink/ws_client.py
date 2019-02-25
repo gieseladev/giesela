@@ -71,6 +71,10 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
         except Exception:
             log.exception("Couldn't connect")
 
+        if not self.connected:
+            log.info(f"{self} couldn't connect, entering reconnect loop")
+            await self._attempt_reconnect()
+
     async def connect(self):
         await self.bot.wait_until_ready()
 
@@ -95,10 +99,10 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
         try:
             self._ws = await websockets.connect(self._ws_url, loop=self.loop, extra_headers=headers)
         except OSError:
-            log.exception(f"Couldn't Connect to {self._ws_url}")
+            log.warning(f"couldn't Connect to {self._ws_url}")
         else:
             log.info(f"Connected to Lavalink {self}!")
-            self.loop.create_task(self.listen())
+            _ = self.loop.create_task(self.listen())
             if self._send_queue:
                 log.info(f"Sending {len(self._send_queue)} queued messages")
                 for msg in self._send_queue:
@@ -116,7 +120,7 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
             log.info(f"Reconnecting... (Attempt {attempt + 1})")
             await self.connect()
 
-            if self._ws.open:
+            if self.connected:
                 return True
             else:
                 attempt += 1

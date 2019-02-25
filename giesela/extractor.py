@@ -1,7 +1,7 @@
 import asyncio
 import logging
 import re
-from typing import List, Optional, Pattern, Union
+from typing import Iterable, List, Optional, Pattern, Union
 
 from . import utils
 from .entry import BasicEntry, RadioEntry
@@ -101,4 +101,18 @@ class Extractor:
         for track in result.tracks:
             entry = self.basic_entry_from_load_result(track, playlist_info)
             entries.append(entry)
+        return entries
+
+    async def get_many(self, targets: Iterable[str], *,
+                       search_one: bool = True,
+                       searcher: LoadTrackSearcher = LoadTrackSearcher.YOUTUBE) -> List[BasicEntry]:
+        results = await asyncio.gather(*(self.get(target, search_one=search_one, searcher=searcher) for target in targets))
+
+        entries = []
+        for result in results:
+            if isinstance(result, list):
+                entries.extend(result)
+            elif result:
+                entries.append(result)
+
         return entries
