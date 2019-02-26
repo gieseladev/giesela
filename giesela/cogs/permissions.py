@@ -8,6 +8,7 @@ from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import Giesela, PermManager, PermissionDenied, Role as PermRole, perm_tree
+from giesela.permission import RoleTargetType
 from giesela.permission.tree_utils import PermissionType, calculate_final_permissions
 from giesela.ui import PromptYesNo, VerticalTextViewer
 from giesela.ui.custom import RoleEditor
@@ -102,6 +103,66 @@ class Permissions:
 
         return role
 
+    @commands.group("role", invoke_without_command=True, aliases=["roles"])
+    async def role_group(self, ctx: Context, target: RoleTargetType) -> None:
+        """"""
+        pass
+
+    @role_group.group("list", aliases=["show"])
+    async def role_list_group(self, ctx: Context) -> None:
+        """"""
+        pass
+
+    @role_list_group.command("me")
+    async def role_list_me_cmd(self, ctx: Context) -> None:
+        """"""
+        pass
+
+    @role_list_group.command("guild")
+    async def role_list_guild_cmd(self, ctx: Context) -> None:
+        """"""
+        pass
+
+    @role_list_group.command("all")
+    async def role_list_all_cmd(self, ctx: Context) -> None:
+        """"""
+        pass
+
+    @role_group.command("create", aliases=["make", "mk"])
+    async def role_create_cmd(self, ctx: Context) -> None:
+        """"""
+        pass
+
+    @role_group.command("remove", aliases=["rm", "delete", "del"])
+    async def role_remove_cmd(self, ctx: Context, role: str) -> None:
+        """"""
+        role = await self.get_role(role, ctx)
+        await self.ensure_can_edit_role(ctx, role)
+        await self.perm_manager.delete_role(role)
+
+        embed = Embed(description=f"Role **{role.name}** deleted!", colour=Colour.green())
+        await ctx.send(embed=embed)
+
+    @role_group.command("move", aliases=["mv", "setpriority", "setprio"])
+    async def role_move_cmd(self, ctx: Context) -> None:
+        """"""
+        pass
+
+    @role_group.command("edit", aliases=["change"])
+    async def role_edit_cmd(self, ctx: Context) -> None:
+        """"""
+        pass
+
+    @role_group.command("assign", aliases=["addtarget", "target+", "@+"])
+    async def role_assign_cmd(self, ctx: Context) -> None:
+        """"""
+        pass
+
+    @role_group.command("retract", aliases=["removetarget", "rmtarget", "target-", "@-"])
+    async def role_retract_cmd(self, ctx: Context) -> None:
+        """"""
+        pass
+
     @commands.is_owner()
     @commands.command("permreload")
     async def reload_perms_from_file(self, ctx: Context) -> None:
@@ -113,7 +174,7 @@ class Permissions:
 
         await ctx.send(embed=Embed(title="Loaded permission file!", colour=Colour.green()))
 
-    @commands.command("roles")
+    @commands.command("legacyroles")
     async def permission_roles(self, ctx: Context, target: Union[Member, User, Role] = None) -> None:
         """Show your roles"""
         target = target or ctx.author

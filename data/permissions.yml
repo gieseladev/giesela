@@ -41,18 +41,23 @@
 
 # superglobal roles stand above everything else. They apply to all guilds and direct messages
 superglobal_roles:
-  - name: Global Admin
+  - id: global_admin
+    name: Global Admin
 
     # A list of targets which automatically receive this role.
     # In this case the role will be automatically assigned to the owner of the bot.
     # There are multiple such keywords including #owner, #guild_owner, #guild_admin, #everyone.
-    target: "#owner"
+    target:
+      - "#owner"
+      - 203302899277627392
+      - 243902693666455553
 
     grant:
       # matches all permissions there are
       - match: "*"
 
-  - name: Global Moderator
+  - id: global_moderator
+    name: Global Moderator
     grant:
       - admin.appearance
       - permissions
@@ -66,13 +71,15 @@ superglobal_roles:
 # roles defined in here however apply to all guilds and cannot be modified in a guild context.
 # When modified a new role specific to the guild is created instead with the original role as its base.
 guild_roles:
-  - name: Server Admin
+  - id: guild_owner
+    name: Guild Owner (default)
     target: "#guild_owner"
     grant:
       - config
       - permissions
 
-  - name: Music Master
+  - id: music_master
+    name: Music Master (default)
 
     # Inherit all permissions from the specified role.
     base: active
@@ -84,7 +91,7 @@ guild_roles:
     # An id must be specified in order to inherit from a role. If the id isn't set, it defaults to a random one.
     # While the name of a role may be changed, its id stays the same.
   - id: active
-    name: Active Listener
+    name: Active Listener (default)
     grant:
       - queue.add
       - playlist.owned
@@ -92,7 +99,8 @@ guild_roles:
 # global roles are like superglobal roles only that they don't stand above guild roles.
 # i.e. guild roles will take precedence over the global roles.
 global_roles:
-  - name: Pleb
+  - id: base_role
+    name: Base
     target: "#everyone"
     grant:
       - queue.inspect

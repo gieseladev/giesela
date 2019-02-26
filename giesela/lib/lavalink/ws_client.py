@@ -98,8 +98,8 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
 
         try:
             self._ws = await websockets.connect(self._ws_url, loop=self.loop, extra_headers=headers)
-        except OSError:
-            log.warning(f"couldn't Connect to {self._ws_url}")
+        except OSError as e:
+            log.warning(f"couldn't Connect to {self._ws_url} {e}")
         else:
             log.info(f"Connected to Lavalink {self}!")
             _ = self.loop.create_task(self.listen())
@@ -232,7 +232,7 @@ class LavalinkWebSocket(AbstractLavalinkClient, EventEmitter):
             log.debug(f"{self} sending: {data}")
             await self._ws.send(rapidjson.dumps(data))
         else:
-            log.debug(f"{self} not connected, adding message to queue ({data})")
+            log.info(f"{self} not connected, adding message to queue ({data})")
             self._send_queue.append(data)
 
     async def send(self, op: str, guild_id: int, **kwargs):

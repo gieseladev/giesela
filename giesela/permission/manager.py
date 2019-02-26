@@ -14,7 +14,7 @@ from giesela import Config, Giesela, utils
 from .file_loader import load_from_file
 from .redis_lua import REDIS_ANY_TARGET_HAS_ROLE, REDIS_DEL_NS, REDIS_HAS_ALL_PERMISSIONS, REDIS_HAS_PERMISSION
 from .role import Role, RoleOrder, get_higher_or_equal_role_contexts
-from .role_target import RoleTargetType, Target, get_role_targets_for
+from .role_target import RoleTarget, RoleTargetType, Target, get_role_targets_for
 from .tree import perm_tree
 from .tree_utils import PermissionType
 
@@ -22,9 +22,18 @@ __all__ = ["PermManager"]
 
 log = logging.getLogger(__name__)
 
+PERM_ROLE_ORDERS_INDEXES = [
+    IndexModel([("order_value", 1), ("context", 1)], name="order context"),
+    IndexModel([("order", 1)], name="order list", unique=True),
+]
+
 PERM_ROLES_INDEXES = [
     IndexModel([("name", "text")], name="role name search"),
-    IndexModel([("guild_id", 1), ("name", 1)], name="unique role name in guild", unique=True)
+    IndexModel([("guild_id", 1), ("name", 1)], name="role name in guild", unique=True)
+]
+
+PERM_TARGETS_INDEXES = [
+    IndexModel([("role_ids", 1)], name="role_ids")
 ]
 
 T = TypeVar("T")
@@ -55,7 +64,10 @@ class PermManager:
         return self._config.app.redis.namespaces.permissions
 
     async def _dump_targets_to_redis(self, targets: Iterable[Target], *, tr: MultiExec = None) -> None:
-        if not tr:
+        if tr:
+            execute_after = False
+        else:
+            execute_after = True
             tr = self._redis.multi_exec()
 
         for target in targets:
@@ -68,27 +80,39 @@ class PermManager:
 
             tr.rpush(key, *target.role_ids)
 
-        await tr.execute()
+        if execute_after:
+            await tr.execute()
 
-    async def _dump_to_redis(self, targets: Iterable[Target], role_pool: Union[Dict[str, Role], List[Role]]) -> None:
-        await REDIS_DEL_NS.eval(self._redis, args=[f"{self._redis_prefix}:*"])
-
-        futures = [
-            self._dump_targets_to_redis(targets)
-        ]
-
-        if isinstance(role_pool, list):
-            role_pool = {role.absolute_role_id: role for role in role_pool}
+    async def _dump_roles_to_redis(self, role_pool: Dict[str, Role], *, tr: MultiExec = None) -> None:
+        if tr:
+            execute_after = False
+        else:
+            execute_after = True
+            tr = self._redis.multi_exec()
 
         for role in role_pool.values():
             compiled_perms = role.compile_permissions(role_pool)
             if compiled_perms:
                 perms_key = f"{self._redis_prefix}:roles:{role.absolute_role_id}:permissions"
-                futures.append(self._redis.hmset_dict(perms_key, compiled_perms))
+                tr.hmset_dict(perms_key, compiled_perms)
             else:
                 log.warning(f"Skipping role {role} because its compiled permissions are empty")
 
-        await asyncio.gather(*futures)
+        if execute_after:
+            await tr.execute()
+
+    async def _dump_to_redis(self, targets: Iterable[Target], role_pool: Union[Dict[str, Role], List[Role]]) -> None:
+        await REDIS_DEL_NS.eval(self._redis, args=[f"{self._redis_prefix}:*"])
+
+        tr = self._redis.multi_exec()
+
+        if isinstance(role_pool, list):
+            role_pool = {role.absolute_role_id: role for role in role_pool}
+
+        await self._dump_targets_to_redis(targets, tr=tr)
+        await self._dump_roles_to_redis(role_pool, tr=tr)
+
+        await tr.execute()
 
     async def load(self) -> None:
         role_pool: Dict[str, Role] = {}
@@ -121,13 +145,16 @@ class PermManager:
 
     async def load_from_file(self) -> None:
         """Load the permissions from the permission config file"""
-        # FIXME don't mess with ids, it causes issues with other roles that aren't updated!
         log.info("preparing database for permissions")
+        await utils.ensure_indexes(self._role_orders_coll, PERM_ROLE_ORDERS_INDEXES)
         await utils.ensure_indexes(self._roles_coll, PERM_ROLES_INDEXES)
+        await utils.ensure_indexes(self._targets_coll, PERM_TARGETS_INDEXES)
 
         log.info("Loading permission file")
         roles, role_orders, targets = load_from_file(self._config.app.files.permissions)
 
+        # FIXME don't mess with ids, it causes issues with other roles that aren't updated!
+        
         async def _perform_bulk_update(collection: AsyncIOMotorCollection,
                                        update_targets: List[T],
                                        target_filter: Union[str, Callable[[T], Dict[str, Any]]],
@@ -205,12 +232,12 @@ class PermManager:
         targets = await get_role_targets_for(self._bot, target, global_only=role.is_global)
         target_keys = [f"{self._redis_prefix}:targets:{target}" for target in targets]
 
-        role_id = role.role_id if isinstance(role, Role) else role
+        role_id = role.absolute_role_id if isinstance(role, Role) else role
         res = REDIS_ANY_TARGET_HAS_ROLE.eval(self._redis, keys=target_keys, args=[role_id])
         return res == b"1"
 
     async def role_has_permission(self, role: RoleOrId, perm: str, *, default: T = False) -> Union[bool, T]:
-        role_id = role.role_id if isinstance(role, Role) else role
+        role_id = role.absolute_role_id if isinstance(role, Role) else role
         has_perm = await self._redis.hget(f"{self._redis_prefix}:roles:{role_id}:permissions", perm)
         if has_perm:
             return has_perm == b"1"
@@ -406,21 +433,20 @@ class PermManager:
                 "order.index": 1
             }})
 
-        print("performing aggregation with pipeline", pipeline)
         return collection.aggregate(pipeline)
 
-    async def _compile_targets_with_role(self, *roles: RoleOrId) -> None:
-        """Recompile targets which have the given roles"""
-        role_ids = [role.absolute_role_id if isinstance(role, Role) else role for role in roles]
-
+    async def _compile_targets_with_match(self, match: Dict[str, Any], *, tr: MultiExec = None) -> None:
+        """Recompile targets which match the given conditions"""
         target_roles: Dict[str, List[str]] = defaultdict(list)
-        cursor = self._aggregate_ordered_targets({"role_ids": {"$in": role_ids}})
+        cursor = self._aggregate_ordered_targets(match)
         async for target_doc in cursor:
-            print("got", target_doc)
             target_roles[target_doc["_id"]].append(target_doc["role_ids"])
 
         targets = [Target(target_id, role_ids) for target_id, role_ids in target_roles.items()]
-        await self._dump_targets_to_redis(targets)
+        await self._dump_targets_to_redis(targets, tr=tr)
+
+    async def _compile_roles_with_match(self, match: Dict[str, Any], *, tr: MultiExec = None) -> None:
+        pass
 
     async def move_role(self, role: Role, position: int) -> None:
         """Move a role to a new position and recompile its targets"""
@@ -441,7 +467,7 @@ class PermManager:
             raise KeyError(f"No role order found for {role}")
 
         log.debug(f"recompiling targets with role {role} after move")
-        await self._compile_targets_with_role(role_id)
+        await self._compile_targets_with_match({"role_ids": role_id})
 
     async def get_role(self, role_id: str) -> Optional[Role]:
         """Get the role with the specified id"""
@@ -517,3 +543,86 @@ class PermManager:
             roles.append(role)
 
         return roles
+
+    async def role_add_target(self, role: RoleOrId, target: RoleTarget) -> None:
+        """Assign a role to a target"""
+        role_id = role.absolute_role_id if isinstance(role, Role) else role
+
+        await self._targets_coll.update_one(
+            {"_id": str(target)},
+            {"$addToSet": {
+                "role_ids": role_id
+            }},
+            upsert=True
+        )
+
+        await self._compile_targets_with_match({"_id": str(target)})
+
+    async def role_remove_target(self, role: RoleOrId, target: RoleTarget) -> None:
+        """Remove a role from a target"""
+        role_id = role.absolute_role_id if isinstance(role, Role) else role
+
+        await self._targets_coll.update_one(
+            {"_id": str(target)},
+            {"$pull": {
+                "role_ids": role_id
+            }}
+        )
+
+        await self._redis.lrem(f"{self._redis_prefix}:targets:{target}", 1, role_id)
+
+    async def delete_role(self, role: RoleOrId) -> None:
+        """Delete a role."""
+        role_id = role.absolute_role_id if isinstance(role, Role) else role
+
+        async with await self._mongo_client.start_session() as sess:
+            async with sess.start_transaction():
+                # remove role itself
+                await self._roles_coll.delete_one({"_id": role_id}, session=sess)
+
+                cursor = self._roles_coll.find({"base_ids": role_id}, projection=["_id"], session=sess)
+                inheriting_role_ids: List[str] = [doc["_id"] async for doc in cursor]
+
+                # remove role inheritors
+                await self._roles_coll.update_many(
+                    {"_id": {"$in": inheriting_role_ids}},
+                    {"$pull": {
+                        "base_ids": role_id
+                    }},
+                    session=sess
+                )
+
+                cursor = self._targets_coll.find({"role_ids": role_id}, projection=["_id"], session=sess)
+                target_ids = [doc["_id"] async for doc in cursor]
+
+                # remove role from targets
+                await self._targets_coll.update_many(
+                    {"_id": {"$in": target_ids}},
+                    {"$pull": {
+                        "role_ids": role_id
+                    }},
+                    session=sess
+                )
+
+                # remove role from orders
+                await self._role_orders_coll.update_one(
+                    {"order": role_id},
+                    {"$pull": {
+                        "order": role_id
+                    }},
+                    session=sess
+                )
+
+        tr = self._redis.multi_exec()
+
+        # redis remove role
+        tr.delete(f"{self._redis_prefix}:roles:{role_id}:permissions")
+
+        # redis recompile roles with role as base
+        await self._compile_roles_with_match({"_id": {"$in": inheriting_role_ids}}, tr=tr)
+
+        # redis remove role from targets
+        for target_id in target_ids:
+            tr.lrem(f"{self._redis_prefix}:targets:{target_id}", 1, role_id)
+
+        await tr.execute()

@@ -5,7 +5,7 @@ import logging
 import math
 from asyncio import AbstractEventLoop
 from collections import deque
-from typing import Any, Dict, Iterable, Iterator, List, Optional, Union
+from typing import Any, Deque, Dict, Iterable, Iterator, List, Optional, Union
 
 from discord import VoiceRegion
 from websockets import ConnectionClosed
@@ -106,11 +106,11 @@ class LavalinkNodeBalancer(EventEmitter):
         if isinstance(nodes, list):
             nodes = _create_nodes(nodes)
 
-        self._nodes = nodes
+        self._nodes: Dict[LavalinkNodeRegion, List[LavalinkNode]] = nodes
 
         # noinspection PyTypeChecker
         node_list = list(itertools.chain.from_iterable(nodes.values()))
-        self._node_pool = deque(node_list, maxlen=len(node_list))
+        self._node_pool: Deque[LavalinkNode] = deque(node_list, maxlen=len(node_list))
 
         for node in self._node_pool:
             self._add_listeners(node)
@@ -155,9 +155,14 @@ class LavalinkNodeBalancer(EventEmitter):
         return choose_best_node(self.preferred_node_gen(voice_region))
 
     def get_rest_node(self) -> LavalinkREST:
-        node = self._node_pool[0]
-        self._node_pool.rotate(1)
-        return node
+        for _ in range(len(self._node_pool)):
+            node = self._node_pool[0]
+            self._node_pool.rotate(1)
+
+            if node.connected:
+                return node
+
+        raise Exception("No connected node found!")
 
     async def shutdown(self):
         coros = []
