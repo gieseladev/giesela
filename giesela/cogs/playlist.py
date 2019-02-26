@@ -25,7 +25,7 @@ def _set_pl_author(embed: Embed, playlist: Playlist) -> None:
     if playlist.author:
         embed.set_author(name=playlist.author.display_name, icon_url=playlist.author.avatar_url)
     else:
-        embed.set_author(name="Unknwon Author")
+        embed.set_author(name="Unknown Author")
 
 
 def playlist_embed(playlist: Playlist) -> Embed:
@@ -399,7 +399,7 @@ class PlaylistCog:
 
         playlist_data = await save_attachment(ctx.message.attachments[0])
         try:
-            embed = await self.import_playlist(playlist_data.read().decode("utf-8"), author or ctx.author)
+            embed = await self.import_playlist(playlist_data.read().decode("utf-8"), author)
         except KeyError:
             raise commands.CommandError("This playlist already exists. You need to delete it first before you can import it")
 
@@ -410,7 +410,7 @@ class PlaylistCog:
                                         "If this is a playlist from an older version, please try `playlist import recover`.")
 
     @playlist_import.command("broken", aliases=["recover", "old"])
-    async def playlist_import_broken(self, ctx: Context):
+    async def playlist_import_broken(self, ctx: Context, claim: bool = False):
         """Import a broken playlist"""
         if not ctx.message.attachments:
             raise commands.CommandError("Please attach a GPL file!")
@@ -439,6 +439,9 @@ class PlaylistCog:
 
         if not playlist:
             raise commands.CommandError("Couldn't recover playlist")
+
+        if claim:
+            playlist.author = ctx.author
 
         try:
             self.playlist_manager.add_playlist(playlist)
