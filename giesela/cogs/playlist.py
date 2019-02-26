@@ -21,12 +21,21 @@ from .player import Player
 LOAD_ORDER = 1
 
 
+def _set_pl_author(embed: Embed, playlist: Playlist) -> None:
+    if playlist.author:
+        embed.set_author(name=playlist.author.display_name, icon_url=playlist.author.avatar_url)
+    else:
+        embed.set_author(name="Unknwon Author")
+
+
 def playlist_embed(playlist: Playlist) -> Embed:
     description = playlist.description or "No description"
     embed = Embed(title=playlist.name, description=description)
     if playlist.cover:
         embed.set_thumbnail(url=playlist.cover)
-    embed.set_author(name=playlist.author.display_name, icon_url=playlist.author.avatar_url)
+
+    _set_pl_author(embed, playlist)
+
     embed.set_footer(text=f"Playlist with {len(playlist)} entries")
     return embed
 
@@ -50,7 +59,8 @@ async def ensure_user_can_edit_playlist(playlist: Playlist, ctx: Context):
 
 async def ensure_user_is_author(playlist: Playlist, ctx: Context, operation="perform this command"):
     if not (playlist.is_author(ctx.author) or await is_owner(ctx)):
-        raise commands.CommandError(f"Only the author of this playlist may {operation} ({playlist.author.mention})!")
+        author_text = playlist.author.mention if playlist.author else playlist.author_id
+        raise commands.CommandError(f"Only the author of this playlist may {operation} ({author_text})!")
 
 
 async def save_attachment(attachment: Attachment) -> BytesIO:
@@ -312,7 +322,7 @@ class PlaylistCog:
         playlist = self.find_playlist(playlist)
 
         em = Embed(title="Editors", colour=Colour.blue())
-        em.set_author(name=playlist.author.display_name, icon_url=playlist.author.avatar_url)
+        _set_pl_author(em, playlist)
 
         add_playlist_footer(em, playlist)
 
@@ -364,10 +374,15 @@ class PlaylistCog:
 
         for playlist in self.playlist_manager:
             description = playlist.description or "No description"
-            paginator.add_field(playlist.name, f"by **{playlist.author.name}**\n"
-            f"{len(playlist)} entries ({utils.format_time(playlist.total_duration)} long)\n"
-            f"\n"
-            f"{description}")
+            author_name = playlist.author.display_name if playlist.author else "Unknown"
+
+            paginator.add_field(
+                playlist.name,
+                f"by **{author_name}**\n"
+                f"{len(playlist)} entries ({utils.format_time(playlist.total_duration)} long)\n"
+                f"\n"
+                f"{description}"
+            )
 
         # MAYBE use special viewer with play (and other) features
         viewer = EmbedViewer(ctx.channel, bot=self.bot, user=ctx.author, embeds=paginator)

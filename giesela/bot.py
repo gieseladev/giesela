@@ -85,10 +85,13 @@ class Giesela(AutoShardedBot, _StorageTypeHints):
         key = f"{self.config.app.redis.namespaces.persist}:{name}"
         await self.config.redis.set(key, rapidjson.dumps(data))
 
-    async def restore(self, name: str) -> Optional[Any]:
+    async def restore(self, name: str, *, delete_after: bool = False) -> Optional[Any]:
         key = f"{self.config.app.redis.namespaces.persist}:{name}"
         value = await self.config.redis.get(key)
         if value is not None:
+            if delete_after:
+                await self.config.redis.delete(key)
+
             return rapidjson.loads(value)
 
         return None

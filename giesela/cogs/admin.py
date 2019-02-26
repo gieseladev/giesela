@@ -1,15 +1,19 @@
+import logging
 import textwrap
 import traceback
 from contextlib import redirect_stdout
 from io import StringIO
 
 import aiohttp
+from discord import Message
 from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import Giesela, RestartSignal, TerminateSignal, perm_tree, permission
 from giesela.shell import InterpreterUnavailable
 from giesela.ui.custom import ShellUI
+
+log = logging.getLogger(__name__)
 
 
 class AdminTools:
@@ -19,7 +23,19 @@ class AdminTools:
 
         if not self.aiosession:
             self.aiosession = aiohttp.ClientSession(loop=self.bot.loop)
-    
+
+    async def on_ready(self):
+        goodbye_message = await self.bot.restore("goodbye_message", delete_after=True)
+        if goodbye_message:
+            channel_id = goodbye_message.get("channel_id")
+            message_id = goodbye_message.get("message_id")
+
+            if channel_id and message_id:
+                try:
+                    await self.bot.http.edit_message(message_id, channel_id, content=":ok_hand: I'm back!")
+                except Exception as e:
+                    log.warning(f"Couldn't update goodbye message: {e}")
+
     @commands.has_permissions(administrator=True)
     @permission.has_permission(perm_tree.admin.control.execute)
     @commands.command()
@@ -61,15 +77,15 @@ class AdminTools:
         else:
             result = ""
 
-        log = console.getvalue().strip()
+        logged = console.getvalue().strip()
 
-        if log:
-            result += "\n**Console**\n```\n{}\n```".format(log)
+        if logged:
+            result += "\n**Console**\n```\n{}\n```".format(logged)
 
         result = result.strip()
         if result:
             await ctx.send(result)
-    
+
     @commands.has_permissions(administrator=True)
     @permission.has_permission(perm_tree.admin.control.execute)
     @commands.command()
@@ -83,7 +99,7 @@ class AdminTools:
             raise commands.CommandError(e.msg)
 
         await shell.display()
-    
+
     @commands.has_permissions(administrator=True)
     @permission.has_permission(perm_tree.admin.control.shutdown)
     @commands.command()
@@ -91,13 +107,19 @@ class AdminTools:
         """Shutdown"""
         await ctx.send(":wave:")
         raise TerminateSignal
-    
+
     @commands.has_permissions(administrator=True)
     @permission.has_permission(perm_tree.admin.control.shutdown)
     @commands.command()
     async def restart(self, ctx: Context):
         """Restart"""
-        await ctx.send(":wave:")
+        msg: Message = await ctx.send(":wave: goodbye")
+
+        await self.bot.persist("goodbye_message", {
+            "channel_id": msg.channel.id,
+            "message_id": msg.id,
+        })
+
         raise RestartSignal
 
     @commands.has_permissions(administrator=True)

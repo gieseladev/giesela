@@ -37,7 +37,7 @@ class Playlist:
 
     entries: List[PlaylistEntry]
 
-    _author: User
+    _author: Optional[User]
     _editors: List[User]
 
     def __init__(self, *, gpl_id: utils.UUIDType = None, name: str, author_id: int,
@@ -103,7 +103,7 @@ class Playlist:
         return sum(entry.entry.duration for entry in self.entries)
 
     @property
-    def author(self) -> User:
+    def author(self) -> Optional[User]:
         if not getattr(self, "_author", False):
             self._author = self.manager.bot.get_user(self.author_id)
 

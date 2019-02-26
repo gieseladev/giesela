@@ -27,7 +27,12 @@ def create_basic_embed(playlist: Playlist) -> Embed:
         embed.add_field(name="Description", value=playlist.description, inline=False)
     if playlist.cover:
         embed.set_thumbnail(url=playlist.cover)
-    embed.set_author(name=playlist.author.display_name, icon_url=playlist.author.avatar_url)
+
+    if playlist.author:
+        embed.set_author(name=playlist.author.display_name, icon_url=playlist.author.avatar_url)
+    else:
+        embed.set_author(name="Unknown Author")
+        
     embed.set_footer(text="{progress_bar}")
     return embed
 

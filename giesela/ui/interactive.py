@@ -252,6 +252,9 @@ class MessageableEmbed(HasListener, HasBot, EditableEmbed, MessageHandler, Start
         await super().delete()
 
     def message_check(self, message: Message) -> bool:
+        if self.channel != message.channel:
+            return False
+
         if self.user and message.author.id != self.user.id:
             return False
 
