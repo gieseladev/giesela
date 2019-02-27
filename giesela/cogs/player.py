@@ -393,7 +393,7 @@ class Player:
             raise commands.CommandError(f"New volume must be between 0% and {round(100 * max_volume)}%. **Not {round(100 * volume)}%**")
 
         await player.set_volume(volume)
-        symbol = utils.interpolate_seq(("🔈", "🔉", "🔊"), player_volume / max_volume)
+        symbol = utils.interpolate_seq(("🔈", "🔉", "🔊"), volume / max_volume)
         embed = Embed(description=f"Set volume to **{round(100 * volume)}%** {symbol}", colour=Colour.green())
         await ctx.send(embed=embed)
 

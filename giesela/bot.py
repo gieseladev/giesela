@@ -136,30 +136,28 @@ class Giesela(AutoShardedBot, _StorageTypeHints):
         if "&&" in content:
             await self.chain_commands(message)
         elif "||" in content:
-            await self.run_commands_parallel(message)
+            await self.chain_commands(message, parallel=True)
         else:
             await super().on_message(message)
 
-    async def chain_commands(self, message: Message, commands: Iterable[str] = None):
+    async def chain_commands(self, message: Message, commands: Iterable[str] = None, *, parallel: bool = False) -> None:
         if not commands:
             commands = map(str.lstrip, message.content.split("&&"))
 
-        for command in commands:
-            msg = copy.copy(message)
-            msg.content = command
-            await self.on_message(msg)
-
-    async def run_commands_parallel(self, message: Message, commands: Iterable[str] = None):
-        if not commands:
-            commands = map(str.lstrip, message.content.split("||"))
-
         coros = []
-        for command in commands:
+        for i, command in enumerate(commands):
+            if i == 0 and not command:
+                return
+
             msg = copy.copy(message)
             msg.content = command
             coros.append(self.on_message(msg))
 
-        await asyncio.gather(*coros)
+        if parallel:
+            await asyncio.gather(*coros)
+        else:
+            for coro in coros:
+                await coro
 
     def find_commands(self, query: str, *, threshold: float = .5) -> List[Tuple[Command, float]]:
         commands = []

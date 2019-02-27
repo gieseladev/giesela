@@ -29,7 +29,7 @@ class Info:
 
         func = functools.partial(self._send_help, cmd=group.name)
         func.__module__ = __package__
-        sub_cmd = Command(name="help", callback=func, aliases=["?"], hidden=True)
+        sub_cmd = Command(name="help", callback=func, aliases=["?"], hidden=True, help=f"Help for {group.qualified_name}")
         sub_cmd.params.pop("cmd")
         sub_cmd.params["cmds"] = inspect.Parameter("cmds", inspect.Parameter.VAR_POSITIONAL, annotation=str)
 
@@ -88,6 +88,8 @@ class Info:
                     em = Embed(description=f"Command **{group.name}** has no subcommands", colour=Colour.red())
                     await ctx.send(embed=em)
                     return
+
+            cmd = group
 
         await self.formatter.send_help_for(ctx, cmd)
 

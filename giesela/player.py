@@ -186,7 +186,7 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         self.emit("seek", player=self, timestamp=seconds)
 
     async def revert(self, requester: User, *, respect_chapters: bool = True):
-        if respect_chapters:
+        if respect_chapters and self.current_entry:
             previous_chapter = await self.current_entry.get_previous_chapter()
 
             if previous_chapter and isinstance(previous_chapter, SpecificChapterData):

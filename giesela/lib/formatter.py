@@ -52,7 +52,8 @@ class GieselaHelpFormatter(HelpFormatter):
 
         def get_final_embeds():
             embeds = paginator.embeds
-            embeds[-1].set_footer(text=self.get_ending_note(), icon_url=embeds[-1].footer.icon_url)
+            if embeds:
+                embeds[-1].set_footer(text=self.get_ending_note(), icon_url=embeds[-1].footer.icon_url)
             return embeds
 
         if isinstance(self.command, Command):

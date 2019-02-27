@@ -279,7 +279,7 @@ class PlaylistCog:
         except ValueError:
             raise commands.CommandError("Couldn't generate a cover...")
 
-        if not index:
+        if index is None:
             with suppress(Forbidden):
                 await ctx.message.delete()
             return
