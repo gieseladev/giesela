@@ -41,6 +41,19 @@ T = TypeVar("T")
 RoleOrId = Union[Role, str]
 
 
+def get_guild_id_selector(guild_id: int = None, *, include_global: bool = True) -> Dict[str, Any]:
+    """Build the selector for the guild_id key"""
+    if guild_id and include_global:
+        return {"$in": [None, str(guild_id)]}
+    elif guild_id:
+        return {"$eq": str(guild_id)}
+    elif include_global:
+        return {"$eq": None}
+    else:
+        # I hope this is always false
+        return {"$exists": False}
+
+
 class PermManager:
     _config: Config
 
@@ -154,7 +167,7 @@ class PermManager:
         roles, role_orders, targets = load_from_file(self._config.app.files.permissions)
 
         # FIXME don't mess with ids, it causes issues with other roles that aren't updated!
-        
+
         async def _perform_bulk_update(collection: AsyncIOMotorCollection,
                                        update_targets: List[T],
                                        target_filter: Union[str, Callable[[T], Dict[str, Any]]],
@@ -237,6 +250,7 @@ class PermManager:
         return res == b"1"
 
     async def role_has_permission(self, role: RoleOrId, perm: str, *, default: T = False) -> Union[bool, T]:
+        """Check whether role has permission"""
         role_id = role.absolute_role_id if isinstance(role, Role) else role
         has_perm = await self._redis.hget(f"{self._redis_prefix}:roles:{role_id}:permissions", perm)
         if has_perm:
@@ -477,12 +491,12 @@ class PermManager:
         else:
             return None
 
-    async def search_role_for_guild(self, query: str, guild_id: int = None) -> Optional[Role]:
+    async def search_role_for_guild(self, query: str, guild_id: int = None, *, include_global: bool = True) -> Optional[Role]:
         """Get the first role that matches the query."""
         cursor = self._roles_coll.find(
             {
                 "$text": {"$search": query},
-                "guild_id": {"$in": [None, str(guild_id)]}
+                "guild_id": get_guild_id_selector(guild_id, include_global=include_global)
             },
             projection={"score": {"$meta": "textScore"}},
             sort=[("score", {"$meta": "textScore"})],
@@ -499,7 +513,7 @@ class PermManager:
         """Get the first role with the specified id or search for it otherwise"""
         return await self.get_role(query) or await self.search_role_for_guild(query, guild_id)
 
-    async def get_target_roles_for_guild(self, target: RoleTargetType, guild_id: int = None) -> List[Role]:
+    async def get_target_roles_for_guild(self, target: RoleTargetType, guild_id: int = None, *, include_global: bool = True) -> List[Role]:
         """Get all roles the given target is in."""
         targets = await get_role_targets_for(self._bot, target)
         target_ids = [str(role_target) for role_target in targets]
@@ -517,7 +531,7 @@ class PermManager:
                     "role": {"$arrayElemAt": ["$role", 0]}
                 }},
                 {"$match": {
-                    "role.guild_id": {"$in": [None, str(guild_id)]}
+                    "role.guild_id": get_guild_id_selector(guild_id, include_global=include_global)
                 }}
             ],
         )
@@ -530,10 +544,10 @@ class PermManager:
 
         return roles
 
-    async def get_all_roles_for_guild(self, guild_id: int = None) -> List[Role]:
+    async def get_all_roles_for_guild(self, guild_id: int = None, *, include_global: bool = True) -> List[Role]:
         """Get all roles the specified guild."""
         cursor = self._aggregate_ordered_roles({
-            "guild_id": {"$in": [None, str(guild_id)]}
+            "guild_id": get_guild_id_selector(guild_id, include_global=include_global)
         })
 
         roles: List[Role] = []

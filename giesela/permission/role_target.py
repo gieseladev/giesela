@@ -130,7 +130,7 @@ async def get_role_targets_for(bot: BotBase, target: RoleTargetType, *, global_o
     if isinstance(target, Role):
         if not global_only:
             if target.permissions.administrator:
-                targets.append(RoleTarget(f"#{target.guild.id}{GUILD_SPLIT}guild_admin"))
+                # targets.append(RoleTarget(f"#{target.guild.id}{GUILD_SPLIT}guild_admin"))
                 targets.append(RoleTarget("#guild_admin"))
 
             targets.append(RoleTarget(target))
@@ -145,13 +145,13 @@ async def get_role_targets_for(bot: BotBase, target: RoleTargetType, *, global_o
             targets.append(RoleTarget(target))
 
             if target.guild.owner == target:
-                targets.append(RoleTarget(f"#{target.guild.id}{GUILD_SPLIT}guild_owner"))
+                # targets.append(RoleTarget(f"#{target.guild.id}{GUILD_SPLIT}guild_owner"))
                 targets.append(RoleTarget("#guild_owner"))
 
             for role in reversed(target.roles):
                 targets.extend(await get_role_targets_for(bot, role))
 
-            targets.append(RoleTarget(f"#{target.guild.id}{GUILD_SPLIT}everyone"))
+            # targets.append(RoleTarget(f"#{target.guild.id}{GUILD_SPLIT}everyone"))
 
         if not guild_only:
             targets.append(RoleTarget("#everyone"))

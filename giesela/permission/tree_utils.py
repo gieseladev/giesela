@@ -70,7 +70,7 @@ class PermNodeMeta(type):
                         qualified_name = f"{child_ns}.{perm}"
                         setattr(child, perm, qualified_name)
 
-    def _render(cls, prefix: str = " ", *, level: int = 0) -> List[str]:
+    def render(cls, prefix: str = " ", *, level: int = 0) -> List[str]:
         """Create an indented tree-like structure of the node and its children."""
         lines: List[str] = []
         for perm in cls.__perms__:
@@ -78,7 +78,7 @@ class PermNodeMeta(type):
 
         for child in cls.__children__.values():
             lines.append(f"{level * prefix}{child.__name__}:")
-            lines.extend(child._render(prefix, level=level + 1))
+            lines.extend(child.render(prefix, level=level + 1))
 
         return lines
 
@@ -240,7 +240,7 @@ class Node(metaclass=PermNodeMeta):
     ...
 
 
-PermissionType = Union[str, Node]
+PermissionType = Union[str, PermNodeMeta]
 
 
 def order_by_least_specificity(perms: CompiledPerms) -> List[Tuple[str, int]]:

@@ -72,14 +72,14 @@ superglobal_roles:
 # When modified a new role specific to the guild is created instead with the original role as its base.
 guild_roles:
   - id: guild_owner
-    name: Guild Owner (default)
+    name: Guild Owner
     target: "#guild_owner"
     grant:
       - config
       - permissions
 
   - id: music_master
-    name: Music Master (default)
+    name: Music Master
 
     # Inherit all permissions from the specified role.
     base: active
@@ -91,7 +91,7 @@ guild_roles:
     # An id must be specified in order to inherit from a role. If the id isn't set, it defaults to a random one.
     # While the name of a role may be changed, its id stays the same.
   - id: active
-    name: Active Listener (default)
+    name: Active Listener
     grant:
       - queue.add
       - playlist.owned

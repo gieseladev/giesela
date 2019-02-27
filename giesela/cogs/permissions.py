@@ -1,19 +1,65 @@
 import asyncio
 import contextlib
+import itertools
 import logging
-from typing import List, Union, overload
+from typing import List, Union, cast, overload
 
 from discord import Colour, Embed, Forbidden, Guild, Member, Role, User
 from discord.ext import commands
-from discord.ext.commands import Context
+from discord.ext.commands import Command, Context
 
-from giesela import Giesela, PermManager, PermissionDenied, Role as PermRole, perm_tree
-from giesela.permission import RoleTargetType
-from giesela.permission.tree_utils import PermissionType, calculate_final_permissions
+from giesela import Giesela, PermissionDenied
+from giesela.permission import PermManager, PermissionType, Role as PermRole, RoleContext, RoleTarget, calculate_final_permissions, has_permission, \
+    perm_tree
 from giesela.ui import PromptYesNo, VerticalTextViewer
 from giesela.ui.custom import RoleEditor
+from giesela.utils import CommandRef
 
 log = logging.getLogger(__name__)
+
+
+def get_role_target(target: Union[Role, Member, User, str]) -> RoleTarget:
+    """Get `RoleTarget` from provided argument.
+
+    Strings can only be used for special values which must be valid
+    raises `CommandError` otherwise.
+    """
+    role_target = RoleTarget(target)
+
+    if isinstance(target, str):
+        if not role_target.is_special:
+            raise commands.CommandError(f"\"{target}\" is not a special target!")
+
+        try:
+            role_target.check()
+        except Exception as e:
+            raise commands.CommandError(f"Target invalid: {target}")
+
+    return role_target
+
+
+def get_role_name_with_flair(role: PermRole) -> str:
+    """Decorate the role name with markdown depending on the role context."""
+    if role.role_context == RoleContext.SUPERGLOBAL:
+        return f"**{role.name}**"
+    elif role.role_context == RoleContext.GUILD_DEFAULT:
+        return f"{role.name} (default)"
+    elif role.role_context == RoleContext.GLOBAL:
+        return f"*{role.name}*"
+
+    return role.name
+
+
+def get_required_perms(cmd: Command, *, global_only: bool = False) -> List[PermissionType]:
+    if global_only:
+        attr = "_required_global_permissions"
+    else:
+        attr = "_required_permissions"
+
+    try:
+        return list(getattr(cmd, attr))
+    except AttributeError:
+        return []
 
 
 class Permissions:
@@ -24,9 +70,11 @@ class Permissions:
         bot.store_reference("perm_manager", self.perm_manager)
         bot.store_reference("ensure_permission", self.ensure_permission)
 
-    async def ensure_permission(self, ctx: Context, *keys: PermissionType, global_only: bool = False) -> bool:
+    async def ensure_permission(self, ctx: Union[Context, User], *keys: PermissionType, global_only: bool = False) -> bool:
         """Make sure the ctx has the given permissions, raise PermissionDenied otherwise."""
-        has_perm = await self.perm_manager.has(ctx.author, *keys, global_only=global_only)
+        user = ctx.author if isinstance(ctx, Context) else ctx
+
+        has_perm = await self.perm_manager.has(user, *keys, global_only=global_only)
         if has_perm:
             return True
         else:
@@ -38,26 +86,18 @@ class Permissions:
 
             raise PermissionDenied(text)
 
-    async def ensure_can_edit_role(self, ctx: Context, role: PermRole) -> None:
-        can_edit = await self.perm_manager.can_edit_role(ctx.author, role)
+    async def ensure_can_edit_role(self, ctx: Union[Context, User], role: PermRole) -> None:
+        """Make sure the given ctx is allowed to edit a role"""
+        user = ctx.author if isinstance(ctx, Context) else ctx
+        can_edit = await self.perm_manager.can_edit_role(user, role)
+
         if not can_edit:
             raise PermissionDenied(f"Cannot edit role {role.name}!")
 
-    async def _command_check(self, ctx: Context, attribute: str, global_only: bool) -> bool:
-        try:
-            required_permissions = getattr(ctx.command, attribute)
-        except AttributeError:
-            log.debug(f"no required permissions for {ctx.command}")
-            return True
-        else:
-            log.debug(f"checking permissions {required_permissions}")
-            await self.ensure_permission(ctx, *required_permissions, global_only=global_only)
-            return True
-
     async def __global_check_once(self, ctx: Context) -> bool:
         return all(await asyncio.gather(
-            self._command_check(ctx, "_required_permissions", False),
-            self._command_check(ctx, "_required_global_permissions", True)
+            self.ensure_permission(ctx, *get_required_perms(ctx.command, global_only=False), global_only=False),
+            self.ensure_permission(ctx, *get_required_perms(ctx.command, global_only=True), global_only=True)
         ))
 
     @overload
@@ -104,40 +144,72 @@ class Permissions:
         return role
 
     @commands.group("role", invoke_without_command=True, aliases=["roles"])
-    async def role_group(self, ctx: Context, target: RoleTargetType) -> None:
-        """"""
-        pass
+    async def role_group(self, ctx: Context) -> None:
+        """Role commands"""
+        raise commands.CommandError("WIP")
 
-    @role_group.group("list", aliases=["show"])
-    async def role_list_group(self, ctx: Context) -> None:
-        """"""
-        pass
+    async def _role_list_show(self, ctx: Context, roles: List[PermRole]) -> None:
+        role_lines: List[str] = []
+        for role in roles:
+            role_name = get_role_name_with_flair(role)
+
+            role_line = f"- {role_name}"
+            role_lines.append(role_line)
+
+        if not role_lines:
+            await ctx.send(embed=Embed(description="There are no roles to show", colour=Colour.blue()))
+            return
+
+        viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=role_lines)
+        await viewer.display()
+
+    @role_group.group("list", invoke_without_command=True, aliases=["show"])
+    async def role_list_group(self, ctx: Context, target: Union[Role, Member, User, str] = None) -> None:
+        """List the roles of a target"""
+        if not target:
+            await self.role_list_guild_cmd.invoke(ctx)
+            return
+
+        guild_id = ctx.guild.id if ctx.guild else None
+        roles = await self.perm_manager.get_target_roles_for_guild(target, guild_id)
+        await self._role_list_show(ctx, roles)
 
     @role_list_group.command("me")
     async def role_list_me_cmd(self, ctx: Context) -> None:
-        """"""
-        pass
+        """List your roles"""
+        guild_id = ctx.guild.id if ctx.guild else None
+        roles = await self.perm_manager.get_target_roles_for_guild(ctx.author, guild_id)
+        await self._role_list_show(ctx, roles)
 
     @role_list_group.command("guild")
     async def role_list_guild_cmd(self, ctx: Context) -> None:
-        """"""
-        pass
+        """List the roles of the guild"""
+        guild_id = ctx.guild.id if ctx.guild else None
+        roles = await self.perm_manager.get_all_roles_for_guild(guild_id, include_global=False)
+        await self._role_list_show(ctx, roles)
 
     @role_list_group.command("all")
     async def role_list_all_cmd(self, ctx: Context) -> None:
-        """"""
-        pass
+        """List all roles"""
+        guild_id = ctx.guild.id if ctx.guild else None
+        roles = await self.perm_manager.get_all_roles_for_guild(guild_id, include_global=True)
+        await self._role_list_show(ctx, roles)
 
     @role_group.command("create", aliases=["make", "mk"])
     async def role_create_cmd(self, ctx: Context) -> None:
         """"""
-        pass
+        raise commands.CommandError("WIP")
 
     @role_group.command("remove", aliases=["rm", "delete", "del"])
     async def role_remove_cmd(self, ctx: Context, role: str) -> None:
         """"""
         role = await self.get_role(role, ctx)
         await self.ensure_can_edit_role(ctx, role)
+
+        prompt = PromptYesNo(ctx.channel, bot=self.bot, user=ctx.author, text=f"Do you really want to delete role **{role.name}**")
+        if not await prompt:
+            return
+
         await self.perm_manager.delete_role(role)
 
         embed = Embed(description=f"Role **{role.name}** deleted!", colour=Colour.green())
@@ -145,28 +217,110 @@ class Permissions:
 
     @role_group.command("move", aliases=["mv", "setpriority", "setprio"])
     async def role_move_cmd(self, ctx: Context) -> None:
-        """"""
-        pass
+        """Move a role"""
+        raise commands.CommandError("WIP")
 
     @role_group.command("edit", aliases=["change"])
-    async def role_edit_cmd(self, ctx: Context) -> None:
-        """"""
-        pass
+    async def role_edit_cmd(self, ctx: Context, ) -> None:
+        """Edit a role"""
+        raise commands.CommandError("WIP")
 
+    @has_permission(perm_tree.permissions.roles.assign)
     @role_group.command("assign", aliases=["addtarget", "target+", "@+"])
-    async def role_assign_cmd(self, ctx: Context) -> None:
-        """"""
-        pass
+    async def role_assign_cmd(self, ctx: Context, role: str, target: Union[Role, Member, User, str]) -> None:
+        """Add a role to a target"""
+        role = await self.get_role(role, ctx)
+        await self.ensure_can_edit_role(ctx, role)
 
+        role_target = get_role_target(target)
+        if role.is_global and role_target.guild_context:
+            raise commands.CommandError(f"Can't assign a global role to a guild target! {role.name}")
+        elif role.is_guild and not role_target.guild_context:
+            raise commands.CommandError(f"Can't assign a guild specific role to a global target! {role.name}")
+
+        await self.perm_manager.role_add_target(role, role_target)
+
+        embed = Embed(description=f"Added {target} to role **{role.name}**", colour=Colour.green())
+        await ctx.send(embed=embed)
+
+    @has_permission(perm_tree.permissions.roles.assign)
     @role_group.command("retract", aliases=["removetarget", "rmtarget", "target-", "@-"])
-    async def role_retract_cmd(self, ctx: Context) -> None:
+    async def role_retract_cmd(self, ctx: Context, role: str, target: Union[Role, Member, User, str]) -> None:
+        """Remove a role from a target"""
+        role = await self.get_role(role, ctx)
+        await self.ensure_can_edit_role(ctx, role)
+        role_target = get_role_target(target)
+
+        await self.perm_manager.role_remove_target(role, role_target)
+
+        embed = Embed(description=f"Removed {target} from role **{role.name}**!", colour=Colour.green())
+        await ctx.send(embed=embed)
+
+    @commands.group("permission", invoke_without_command=True, aliases=["permissions", "perm", "perms"])
+    async def permission_group(self, ctx: Context) -> None:
         """"""
-        pass
+        raise commands.CommandError("WIP")
+
+    @permission_group.command("can", aliases=["may", "has"])
+    async def permission_can_cmd(self, ctx: Context, target: Union[Member, User, Role, str], cmd: CommandRef) -> None:
+        """Check whether a target can use a command"""
+        cmd = cast(Command, cmd)
+
+        if isinstance(target, str):
+            if target.lower() in {"me", "i"}:
+                target = ctx.author
+            else:
+                raise commands.CommandError(f"Unknown target: {target}")
+
+        def _get_flattened_perms(global_only: bool) -> List[str]:
+            return list(itertools.chain.from_iterable(map(perm_tree.unfold_perm, get_required_perms(cmd, global_only=global_only))))
+
+        global_perms = _get_flattened_perms(True)
+        perms = _get_flattened_perms(False)
+
+        missing_global_perms: List[PermissionType] = []
+        for perm in global_perms:
+            has_perm = await self.perm_manager.has(target, perm, global_only=True)
+            if not has_perm:
+                missing_global_perms.append(perm)
+
+        missing_perms: List[PermissionType] = []
+        for perm in perms:
+            has_perm = await self.perm_manager.has(target, perm)
+            if not has_perm:
+                missing_perms.append(perm)
+
+        if missing_perms or missing_global_perms:
+            embed = Embed(description=f"{target} can't use {cmd.qualified_name}", colour=Colour.red())
+
+            if missing_global_perms:
+                missing_global_perms = perm_tree.find_shortest_representation(missing_global_perms)
+                value = "\n".join(f"- {perm}" for perm in sorted(missing_global_perms))
+                embed.add_field(name="Missing global permissions", value=value)
+
+            if missing_perms:
+                missing_perms = perm_tree.find_shortest_representation(missing_perms)
+                value = "\n".join(f"- {perm}" for perm in sorted(missing_perms))
+                embed.add_field(name="Missing permissions", value=value)
+
+            await ctx.send(embed=embed)
+        else:
+            await ctx.send(embed=Embed(description=f"{target} can use {cmd.qualified_name}", colour=Colour.green()))
+
+    @permission_group.command("render")
+    async def permission_render_cmd(self, ctx: Context) -> None:
+        """Render the permission tree"""
+        embed = Embed(title="Permissions")
+        for name, node in perm_tree.__children__.items():
+            rendered = "\n".join(node.render())
+            embed.add_field(name=name, value=f"```\n{rendered}```", inline=False)
+
+        await ctx.send(embed=embed)
 
     @commands.is_owner()
     @commands.command("permreload")
     async def reload_perms_from_file(self, ctx: Context) -> None:
-        """Reload permissions from file."""
+        """Reload permissions from file"""
         try:
             await self.perm_manager.load_from_file()
         except Exception as e:
@@ -174,53 +328,9 @@ class Permissions:
 
         await ctx.send(embed=Embed(title="Loaded permission file!", colour=Colour.green()))
 
-    @commands.command("legacyroles")
-    async def permission_roles(self, ctx: Context, target: Union[Member, User, Role] = None) -> None:
-        """Show your roles"""
-        target = target or ctx.author
+    # LEGACY
 
-        embed = Embed(title="Roles", colour=Colour.blue())
-        embed.set_author(name=target.name, icon_url=target.avatar_url if not isinstance(target, Role) else Embed.Empty)
-
-        try:
-            guild_id = target.guild.id
-        except AttributeError:
-            guild_id = None
-
-        roles = await self.get_roles_for(target, guild_id=guild_id)
-
-        if roles:
-            role_text = "\n".join(f"- {role.name}" for role in roles)
-            embed.description = f"```css\n{role_text}```"
-        else:
-            embed.title = "No roles"
-            embed.description = ("You aren't" if ctx.author == target else f"{target} isn't") + " part of any roles"
-
-        await ctx.send(embed=embed)
-
-    @commands.command("allroles")
-    async def all_roles(self, ctx: Context) -> None:
-        """Show all roles"""
-        embed = Embed(title="Roles", colour=Colour.blue())
-        if ctx.guild:
-            embed.set_author(name=ctx.guild.name, icon_url=ctx.guild.icon_url)
-
-        try:
-            guild_id = ctx.guild.id
-        except AttributeError:
-            guild_id = None
-
-        roles = await self.perm_manager.get_all_roles_for_guild(guild_id)
-
-        if roles:
-            role_text = "\n".join(f"- {role.name}" for role in roles)
-            embed.description = f"```css\n{role_text}```"
-        else:
-            raise commands.CommandError("There are no roles")
-
-        await ctx.send(embed=embed)
-
-    @commands.command("permissions", aliases=["perms"])
+    @commands.command("legacypermissions", aliases=["legacyperms"])
     async def show_permissions(self, ctx: Context, *, target: Union[Member, User, Role, str] = None) -> None:
         """Show permissions"""
         icon = None
@@ -250,25 +360,7 @@ class Permissions:
         with contextlib.suppress(Forbidden):
             await ctx.message.delete()
 
-    @commands.command("removerole", aliases=["rmrole"])
-    async def remove_role(self, ctx: Context, *, role: str) -> None:
-        """Delete a role"""
-        role = await self.get_role(role, ctx)
-        await self.ensure_can_edit_role(ctx, role)
-
-        prompt = PromptYesNo(ctx.channel, bot=self.bot, user=ctx.author, text=f"Do you really want to delete \"{role.name}\"")
-        if await prompt:
-            await self.perm_manager.delete_role(role)
-
-    @commands.command("createrole", aliases=["mkrole"])
-    async def create_role(self, ctx: Context, *, name: str) -> None:
-        """Create a new role"""
-        await self.ensure_permission(ctx, perm_tree.permissions.roles.edit, global_only=ctx.guild is None)
-        # role = PermRole(role_id=None, name=name, position=None, guild_id=ctx.guild.id if ctx.guild else None)
-        # editor = RoleEditor(ctx.channel, bot=self.bot, user=ctx.author, perm_manager=self.perm_manager, role=role)
-        # await editor.display()
-
-    @commands.command("editrole")
+    @commands.command("legacyeditrole")
     async def edit_role(self, ctx: Context, *, role: str) -> None:
         """Edit a role"""
         role = await self.get_role(role, ctx)

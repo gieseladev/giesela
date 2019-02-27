@@ -1,4 +1,5 @@
 import logging
+import random
 import textwrap
 import traceback
 from contextlib import redirect_stdout
@@ -31,13 +32,23 @@ class AdminTools:
             message_id = goodbye_message.get("message_id")
 
             if channel_id and message_id:
+                emoji = random.choice([
+                    # choice
+                    "👌", "✋", "👍", "👎", "🖕", "👊", "🤘", "✊", "💪",
+                    # direction
+                    "☛",
+                    # emotions
+                    "✌", "👏", "👋", "🙌",
+                    # misc
+                    "🤙", "🤞"
+                ])
+
                 try:
-                    await self.bot.http.edit_message(message_id, channel_id, content=":ok_hand: I'm back!")
+                    await self.bot.http.edit_message(message_id, channel_id, content=f"{emoji} I'm back!")
                 except Exception as e:
                     log.warning(f"Couldn't update goodbye message: {e}")
 
-    @commands.has_permissions(administrator=True)
-    @permission.has_permission(perm_tree.admin.control.execute)
+    @permission.has_global_permission(perm_tree.admin.control.execute)
     @commands.command()
     async def execute(self, ctx: Context):
         """Execute a statement"""
@@ -86,8 +97,7 @@ class AdminTools:
         if result:
             await ctx.send(result)
 
-    @commands.has_permissions(administrator=True)
-    @permission.has_permission(perm_tree.admin.control.execute)
+    @permission.has_global_permission(perm_tree.admin.control.execute)
     @commands.command()
     async def shell(self, ctx: Context, interpreter: str = "python"):
         """Open the GieselaShell™"""
@@ -100,16 +110,14 @@ class AdminTools:
 
         await shell.display()
 
-    @commands.has_permissions(administrator=True)
-    @permission.has_permission(perm_tree.admin.control.shutdown)
+    @permission.has_global_permission(perm_tree.admin.control.shutdown)
     @commands.command()
     async def shutdown(self, ctx: Context):
         """Shutdown"""
         await ctx.send(":wave:")
         raise TerminateSignal
 
-    @commands.has_permissions(administrator=True)
-    @permission.has_permission(perm_tree.admin.control.shutdown)
+    @permission.has_global_permission(perm_tree.admin.control.shutdown)
     @commands.command()
     async def restart(self, ctx: Context):
         """Restart"""
@@ -122,8 +130,7 @@ class AdminTools:
 
         raise RestartSignal
 
-    @commands.has_permissions(administrator=True)
-    @permission.has_permission(perm_tree.admin.control.impersonate)
+    @permission.has_global_permission(perm_tree.admin.control.impersonate)
     @commands.command()
     async def say(self, ctx: Context, msg: str):
         """Say something"""
@@ -131,8 +138,7 @@ class AdminTools:
         await ctx.message.delete()
         await ctx.send(msg)
 
-    @commands.has_permissions(administrator=True)
-    @permission.has_permission(perm_tree.admin.appearance.name)
+    @permission.has_global_permission(perm_tree.admin.appearance.name)
     @commands.command()
     async def setname(self, ctx: Context, name: str):
         """Set name..."""
@@ -145,8 +151,7 @@ class AdminTools:
         await ctx.send(":ok_hand:")
         return
 
-    @commands.has_permissions(administrator=True)
-    @permission.has_permission(perm_tree.admin.appearance.avatar)
+    @permission.has_global_permission(perm_tree.admin.appearance.avatar)
     @commands.command()
     async def setavatar(self, ctx: Context, url: str = None):
         """Set avatar"""
