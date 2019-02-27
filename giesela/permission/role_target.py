@@ -111,7 +111,7 @@ class RoleTarget:
 
     def resolve(self, bot: Client) -> Optional[RoleTargetType]:
         if self.is_special:
-            raise TypeError("Special targets can't be resolved")
+            return None
 
         if self.is_role:
             guild = bot.get_guild(self.guild_id)

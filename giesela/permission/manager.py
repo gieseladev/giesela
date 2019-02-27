@@ -1,9 +1,9 @@
 import asyncio
 import dataclasses
 import logging
-from collections import defaultdict
+from collections import defaultdict, deque
 from itertools import chain
-from typing import Any, Callable, Dict, Iterable, List, Optional, TypeVar, Union
+from typing import Any, Callable, Deque, Dict, Iterable, List, Optional, TypeVar, Union
 
 from aioredis import Redis
 from aioredis.commands import MultiExec
@@ -385,6 +385,14 @@ class PermManager:
             sort_by_order=sort_by_order,
         )
 
+    async def _collect_aggregated_targets(self, cursor: AsyncIOMotorCollection) -> List[Target]:
+        """Collect the aggregated documents into a list of `Target`"""
+        target_roles: Dict[str, List[str]] = defaultdict(list)
+        async for target_doc in cursor:
+            target_roles[target_doc["_id"]].append(target_doc["role_ids"])
+
+        return [Target(target_id, role_ids) for target_id, role_ids in target_roles.items()]
+
     def _aggregate_ordered(self, collection: AsyncIOMotorCollection, match: Dict[str, Any] = None, *,
                            pre_lookup: List[Dict[str, Any]] = None,
                            lookup_let: Dict[str, Any],
@@ -451,16 +459,38 @@ class PermManager:
 
     async def _compile_targets_with_match(self, match: Dict[str, Any], *, tr: MultiExec = None) -> None:
         """Recompile targets which match the given conditions"""
-        target_roles: Dict[str, List[str]] = defaultdict(list)
         cursor = self._aggregate_ordered_targets(match)
-        async for target_doc in cursor:
-            target_roles[target_doc["_id"]].append(target_doc["role_ids"])
-
-        targets = [Target(target_id, role_ids) for target_id, role_ids in target_roles.items()]
+        targets = await self._collect_aggregated_targets(cursor)
         await self._dump_targets_to_redis(targets, tr=tr)
 
     async def _compile_roles_with_match(self, match: Dict[str, Any], *, tr: MultiExec = None) -> None:
-        pass
+        role_pool: Dict[str, Role] = {}
+        cursor = self._roles_coll.aggregate([
+            {"$match": match},
+            {"$graphLookup": {
+                "from": self._roles_coll.name,
+                "startWith": "$base_ids",
+                "connectFromField": "base_ids",
+                "connectToField": "_id",
+                "as": "bases"
+            }}
+        ])
+
+        role_docs: Deque[Dict[str, Any]] = deque()
+
+        async for doc in cursor:
+            role_docs.append(doc)
+            while role_docs:
+                role_doc = role_docs.pop()
+                role_id = role_doc["_id"]
+                if role_id in role_pool:
+                    continue
+
+                role_docs.extend(role_doc.pop("bases"))
+                role = Role(**role_doc)
+                role_pool[role_id] = role
+
+        await self._dump_roles_to_redis(role_pool, tr=tr)
 
     async def move_role(self, role: Role, position: int) -> None:
         """Move a role to a new position and recompile its targets"""
@@ -513,6 +543,12 @@ class PermManager:
         """Get the first role with the specified id or search for it otherwise"""
         return await self.get_role(query) or await self.search_role_for_guild(query, guild_id)
 
+    async def get_targets_with_role(self, role: RoleOrId) -> List[Target]:
+        """Get all targets that have the specified role"""
+        role_id = role.role_id if isinstance(role, Role) else role
+        cursor = self._aggregate_ordered_targets({"role_ids": role_id})
+        return await self._collect_aggregated_targets(cursor)
+
     async def get_target_roles_for_guild(self, target: RoleTargetType, guild_id: int = None, *, include_global: bool = True) -> List[Role]:
         """Get all roles the given target is in."""
         targets = await get_role_targets_for(self._bot, target)
@@ -521,6 +557,10 @@ class PermManager:
         cursor = self._aggregate_ordered_targets(
             {"_id": {"$in": target_ids}},
             pre_lookup=[
+                {"$group": {
+                    "_id": "$role_ids",
+                    "role_ids": {"$first": "$role_ids"},
+                }},
                 {"$lookup": {
                     "from": self._roles_coll.name,
                     "localField": "role_ids",

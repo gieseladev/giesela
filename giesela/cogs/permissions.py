@@ -2,17 +2,15 @@ import asyncio
 import contextlib
 import itertools
 import logging
-from typing import List, Union, cast, overload
+from typing import Iterable, List, Optional, Union, cast
 
 from discord import Colour, Embed, Forbidden, Guild, Member, Role, User
 from discord.ext import commands
 from discord.ext.commands import Command, Context
 
 from giesela import Giesela, PermissionDenied
-from giesela.permission import PermManager, PermissionType, Role as PermRole, RoleContext, RoleTarget, calculate_final_permissions, has_permission, \
-    perm_tree
+from giesela.permission import PermManager, PermissionType, Role as PermRole, RoleContext, RoleTarget, Target, has_permission, perm_tree
 from giesela.ui import PromptYesNo, VerticalTextViewer
-from giesela.ui.custom import RoleEditor
 from giesela.utils import CommandRef
 
 log = logging.getLogger(__name__)
@@ -51,6 +49,7 @@ def get_role_name_with_flair(role: PermRole) -> str:
 
 
 def get_required_perms(cmd: Command, *, global_only: bool = False) -> List[PermissionType]:
+    """Get the required permission from the has(_global)_permission decorator."""
     if global_only:
         attr = "_required_global_permissions"
     else:
@@ -100,31 +99,6 @@ class Permissions:
             self.ensure_permission(ctx, *get_required_perms(ctx.command, global_only=True), global_only=True)
         ))
 
-    @overload
-    async def get_roles_for(self, ctx: Member) -> List[PermRole]:
-        ...
-
-    @overload
-    async def get_roles_for(self, ctx: User, guild_id: int = None) -> List[PermRole]:
-        ...
-
-    @overload
-    async def get_roles_for(self, ctx: Context) -> List[PermRole]:
-        ...
-
-    async def get_roles_for(self, ctx: Union[Context, Member, User], guild_id: int = None) -> List[PermRole]:
-        """Get all roles for the target."""
-        if isinstance(ctx, Context):
-            ctx = ctx.author
-
-        if isinstance(ctx, Member):
-            guild_id = ctx.guild.id
-            target = ctx
-        else:
-            target = ctx
-
-        return await self.perm_manager.get_target_roles_for_guild(target, guild_id=guild_id)
-
     async def get_role(self, query: str, guild_id: Union[Context, Guild, int] = None) -> PermRole:
         """Get a role either by its id or its name.
         Raises:
@@ -148,7 +122,7 @@ class Permissions:
         """Role commands"""
         raise commands.CommandError("WIP")
 
-    async def _role_list_show(self, ctx: Context, roles: List[PermRole]) -> None:
+    async def _role_list_show(self, ctx: Context, roles: Iterable[PermRole]) -> None:
         role_lines: List[str] = []
         for role in roles:
             role_name = get_role_name_with_flair(role)
@@ -162,6 +136,38 @@ class Permissions:
 
         viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=role_lines)
         await viewer.display()
+
+        with contextlib.suppress(Forbidden):
+            await ctx.message.delete()
+
+    async def _role_targets_show(self, ctx: Context, targets: Iterable[Union[Target, RoleTarget]]) -> None:
+        guild_id: Optional[int] = ctx.guild.id if ctx.guild else None
+
+        target_lines: List[str] = []
+        for target in targets:
+            role_target = target.role_target if isinstance(target, Target) else target
+            if guild_id and role_target.has_guild_id:
+                # don't show other guild's targets
+                if guild_id != role_target.guild_id:
+                    continue
+
+            real_target = role_target.resolve(self.bot)
+            if real_target:
+                target_line = f"- {real_target}"
+            else:
+                target_line = f"- {role_target}"
+
+            target_lines.append(target_line)
+
+        if not target_lines:
+            await ctx.send(embed=Embed(description="No targets to show", colour=Colour.blue()))
+            return
+
+        viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=target_lines)
+        await viewer.display()
+
+        with contextlib.suppress(Forbidden):
+            await ctx.message.delete()
 
     @role_group.group("list", invoke_without_command=True, aliases=["show"])
     async def role_list_group(self, ctx: Context, target: Union[Role, Member, User, str] = None) -> None:
@@ -227,7 +233,7 @@ class Permissions:
 
     @has_permission(perm_tree.permissions.roles.assign)
     @role_group.command("assign", aliases=["addtarget", "target+", "@+"])
-    async def role_assign_cmd(self, ctx: Context, role: str, target: Union[Role, Member, User, str]) -> None:
+    async def role_assign_cmd(self, ctx: Context, target: Union[Role, Member, User, str], role: str) -> None:
         """Add a role to a target"""
         role = await self.get_role(role, ctx)
         await self.ensure_can_edit_role(ctx, role)
@@ -245,7 +251,7 @@ class Permissions:
 
     @has_permission(perm_tree.permissions.roles.assign)
     @role_group.command("retract", aliases=["removetarget", "rmtarget", "target-", "@-"])
-    async def role_retract_cmd(self, ctx: Context, role: str, target: Union[Role, Member, User, str]) -> None:
+    async def role_retract_cmd(self, ctx: Context, target: Union[Role, Member, User, str], role: str) -> None:
         """Remove a role from a target"""
         role = await self.get_role(role, ctx)
         await self.ensure_can_edit_role(ctx, role)
@@ -255,6 +261,12 @@ class Permissions:
 
         embed = Embed(description=f"Removed {target} from role **{role.name}**!", colour=Colour.green())
         await ctx.send(embed=embed)
+
+    @role_group.command("targets")
+    async def role_targets_cmd(self, ctx: Context, role: str):
+        role = await self.get_role(role, ctx)
+        targets = await self.perm_manager.get_targets_with_role(role)
+        await self._role_targets_show(ctx, targets)
 
     @commands.group("permission", invoke_without_command=True, aliases=["permissions", "perm", "perms"])
     async def permission_group(self, ctx: Context) -> None:
@@ -327,47 +339,6 @@ class Permissions:
             raise commands.CommandError(f"Couldn't load permission file: `{e}`")
 
         await ctx.send(embed=Embed(title="Loaded permission file!", colour=Colour.green()))
-
-    # LEGACY
-
-    @commands.command("legacypermissions", aliases=["legacyperms"])
-    async def show_permissions(self, ctx: Context, *, target: Union[Member, User, Role, str] = None) -> None:
-        """Show permissions"""
-        icon = None
-
-        if isinstance(target, str):
-            role = await self.get_role(target, ctx)
-            name = role.name
-            roles = [role]
-        elif isinstance(target, (Member, User, Role)):
-            name = target.name
-            roles = await self.get_roles_for(target)
-        else:
-            name = ctx.author.name
-            icon = ctx.author.avatar_url
-            roles = await self.get_roles_for(ctx)
-
-        perms = calculate_final_permissions(role.compile_own_permissions() for role in roles)
-        keys = sorted(perm_tree.find_shortest_representation(perms))
-
-        if not keys:
-            raise commands.CommandError(f"{name} doesn't have any permissions")
-
-        frame = Embed(title="Permissions", colour=Colour.blue())
-        frame.set_author(name=name, icon_url=icon or Embed.Empty)
-
-        await VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=keys, embed_frame=frame).display()
-        with contextlib.suppress(Forbidden):
-            await ctx.message.delete()
-
-    @commands.command("legacyeditrole")
-    async def edit_role(self, ctx: Context, *, role: str) -> None:
-        """Edit a role"""
-        role = await self.get_role(role, ctx)
-        await self.ensure_can_edit_role(ctx, role)
-
-        editor = RoleEditor(ctx.channel, bot=self.bot, user=ctx.author, perm_manager=self.perm_manager, role=role)
-        await editor.display()
 
 
 def setup(bot: Giesela):
