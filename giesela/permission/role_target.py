@@ -1,6 +1,6 @@
 import logging
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, Union, cast
 
 from discord import Client, Member, Role, User
 from discord.ext.commands.bot import BotBase
@@ -119,8 +119,10 @@ class RoleTarget:
         elif self.is_member:
             guild = bot.get_guild(self.guild_id)
             return guild.get_member(self.id) if guild else None
-        else:
+        elif self.is_user:
             return bot.get_user(self.id)
+        else:
+            return None
 
 
 async def get_role_targets_for(bot: BotBase, target: RoleTargetType, *, global_only: bool = False, guild_only: bool = False) -> List[RoleTarget]:
@@ -149,6 +151,7 @@ async def get_role_targets_for(bot: BotBase, target: RoleTargetType, *, global_o
                 targets.append(RoleTarget("#guild_owner"))
 
             for role in reversed(target.roles):
+                role = cast(Role, role)
                 targets.extend(await get_role_targets_for(bot, role))
 
             # targets.append(RoleTarget(f"#{target.guild.id}{GUILD_SPLIT}everyone"))

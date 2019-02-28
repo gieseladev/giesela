@@ -77,12 +77,15 @@ class Permissions:
 
             raise PermissionDenied(text)
 
-    async def ensure_can_edit_role(self, ctx: Union[Context, User], role: PermRole) -> None:
+    async def ensure_can_edit_role(self, ctx: Union[Context, User], role: PermRole, *, assign: bool = False) -> None:
         """Make sure the given ctx is allowed to edit a role"""
         user = ctx.author if isinstance(ctx, Context) else ctx
-        can_edit = await self.perm_manager.can_edit_role(user, role)
+        can_edit = await self.perm_manager.can_edit_role(user, role, assign=assign)
 
         if not can_edit:
+            if assign:
+                raise PermissionDenied(f"Cannot assign role {role.name}!")
+
             raise PermissionDenied(f"Cannot edit role {role.name}!")
 
     async def __global_check_once(self, ctx: Context) -> bool:
@@ -135,6 +138,8 @@ class Permissions:
 
     async def _role_targets_show(self, ctx: Context, targets: Iterable[Union[Target, RoleTarget]]) -> None:
         guild_id: Optional[int] = ctx.guild.id if ctx.guild else None
+
+        # TODO sort targets by least specific first
 
         target_lines: List[str] = []
         for target in targets:
@@ -254,7 +259,7 @@ class Permissions:
     async def role_assign_cmd(self, ctx: Context, role: str, target: Union[Role, Member, User, str]) -> None:
         """Add a role to a target"""
         role = await self.get_role(role, ctx)
-        await self.ensure_can_edit_role(ctx, role)
+        await self.ensure_can_edit_role(ctx, role, assign=True)
 
         if await self.perm_manager.has_role(target, role):
             raise commands.CommandError(f"{target} is already in {role.name}")
@@ -264,6 +269,9 @@ class Permissions:
             raise commands.CommandError(f"Can't assign a global role to a guild target! {role.name}")
         elif role.is_guild and not role_target.guild_context:
             raise commands.CommandError(f"Can't assign a guild specific role to a global target! {role.name}")
+
+        if role_target.is_special and role.is_default:
+            raise commands.CommandError(f"Cannot assign special targets to default role {role.name}")
 
         await self.perm_manager.role_add_target(role, role_target)
 
@@ -275,7 +283,7 @@ class Permissions:
     async def role_retract_cmd(self, ctx: Context, role: str, target: Union[Role, Member, User, str]) -> None:
         """Remove a role from a target"""
         role = await self.get_role(role, ctx)
-        await self.ensure_can_edit_role(ctx, role)
+        await self.ensure_can_edit_role(ctx, role, assign=True)
 
         role_target = get_role_target(target, prefer_global=role.is_global)
 

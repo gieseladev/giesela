@@ -14,7 +14,7 @@ from giesela import Giesela, utils
 from giesela.config import Config
 from .file_loader import load_from_file
 from .redis_lua import REDIS_ANY_TARGET_HAS_ROLE, REDIS_DEL_NS, REDIS_HAS_ALL_PERMISSIONS, REDIS_HAS_PERMISSION
-from .role import Role, RoleContext, RoleOrder, get_higher_or_equal_role_contexts
+from .role import GUILD_ROLE_CONTEXTS, Role, RoleContext, RoleOrder, get_higher_or_equal_role_contexts, get_role_context_from_order_id
 from .role_target import RoleTarget, RoleTargetType, Target, get_role_targets_for
 from .tree import perm_tree
 from .tree_utils import PermissionType
@@ -42,17 +42,40 @@ T = TypeVar("T")
 RoleOrId = Union[Role, str]
 
 
-def get_guild_id_selector(guild_id: int = None, *, include_global: bool = True) -> Dict[str, Any]:
-    """Build the selector for the guild_id key"""
-    if guild_id and include_global:
-        return {"$in": [None, str(guild_id)]}
-    elif guild_id:
-        return {"$eq": str(guild_id)}
-    elif include_global:
-        return {"$eq": None}
+def get_guild_id_selector(guild_id: int = None, *,
+                          include_global: bool = True,
+                          include_guild_default: bool = True,
+                          nested_prefix: str = None) -> Dict[str, Any]:
+    """Build the selector for the guild"""
+    selector: Dict[str, Any] = {}
+
+    if nested_prefix:
+        nested_prefix += "."
     else:
-        # I hope this is always false
-        return {"$exists": False}
+        nested_prefix = ""
+
+    if guild_id and (include_global or include_guild_default):
+        gid_selector = {"$in": [None, str(guild_id)]}
+    elif guild_id:
+        gid_selector = {"$eq": str(guild_id)}
+    elif include_global:
+        gid_selector = {"$eq": None}
+    else:
+        raise ValueError("Can't match roles with no guild which have to be in the guild context...")
+
+    selector[nested_prefix + "guild_id"] = gid_selector
+
+    if include_guild_default and not include_global:
+        context_selector = {"$in": [context.value for context in GUILD_ROLE_CONTEXTS]}
+    elif not include_guild_default:
+        context_selector = {"$ne": RoleContext.GUILD_DEFAULT.value}
+    else:
+        context_selector = None
+
+    if context_selector:
+        selector[nested_prefix + "context"] = context_selector
+
+    return selector
 
 
 async def _collect_aggregated_targets(cursor: AsyncIOMotorCursor) -> List[Target]:
@@ -64,8 +87,6 @@ async def _collect_aggregated_targets(cursor: AsyncIOMotorCursor) -> List[Target
 
     return [Target(target_id, role_ids) for target_id, role_ids in target_roles.items()]
 
-
-# TODO Redis use sorted set for Targets!
 
 class PermManager:
     _config: Config
@@ -280,19 +301,24 @@ class PermManager:
 
         return default
 
-    async def can_edit_role(self, target: RoleTargetType, role: Role) -> bool:
+    async def can_edit_role(self, target: RoleTargetType, role: Role, *, assign: bool = False) -> bool:
         """Check whether a target is allowed to edit the given role."""
 
         async def has_edit_lower_perm() -> bool:
-            targets = await get_role_targets_for(self._bot, target, global_only=role.is_global, guild_only=role.is_guild)
+            targets = await get_role_targets_for(self._bot, target, global_only=role.is_global)
             target_ids = [str(role_target) for role_target in targets]
 
             contexts = get_higher_or_equal_role_contexts(role.role_context)
             context_ids = [context.value for context in contexts]
 
+            # GUILD context may assign (but not edit) GUILD_DEFAULT roles!
+            if assign and role.is_default:
+                context_ids.append(RoleContext.GUILD.value)
+
             cursor = self._aggregate_ordered_targets(
                 {"_id": {"$in": target_ids}},
-                lookup_pipeline_match_context={"$in": context_ids}
+                lookup_pipeline_match_context={"$in": context_ids},
+                group_by_role=True
             )
 
             async for document in cursor:
@@ -309,6 +335,10 @@ class PermManager:
 
         async def has_edit_self_perm() -> bool:
             # checks whether the target is part of the role and the role can edit itself!
+
+            # default roles can not edit themselves!
+            if role.is_default and not assign:
+                return False
 
             # check permission first because redis is probably going to be faster
             if await self.role_has_permission(role, perm_tree.permissions.roles.self):
@@ -372,6 +402,7 @@ class PermManager:
         )
 
     def _aggregate_ordered_targets(self, match: Dict[str, Any] = None, *,
+                                   group_by_role: bool = False,
                                    pre_lookup: List[Dict[str, Any]] = None,
                                    lookup_pipeline_match_context: Any = None,
                                    post_lookup: List[Dict[str, Any]] = None,
@@ -390,18 +421,19 @@ class PermManager:
         | order    | order object | see `PermManager._aggregate_ordered` |
         +----------+--------------+--------------------------------------+
         """
-        if not pre_lookup:
-            pre_lookup = []
+        _pre_lookup = [
+            {"$unwind": {
+                "path": "$role_ids"
+            }}
+        ]
 
-        pre_lookup = [
-                         {"$unwind": {
-                             "path": "$role_ids"
-                         }},
-                         {"$group": {
-                             "_id": "$role_ids",
-                             "role_ids": {"$first": "$role_ids"},
-                         }}
-                     ] + pre_lookup
+        if group_by_role:
+            _pre_lookup.append({"$group": {
+                "_id": "$role_ids",
+                "role_ids": {"$first": "$role_ids"},
+            }})
+
+        pre_lookup = _pre_lookup + (pre_lookup or [])
 
         lookup_pipeline_match = {
             "$expr": {"$in": ["$$role_id", "$order"]}
@@ -563,12 +595,15 @@ class PermManager:
         else:
             return None
 
-    async def search_role_for_guild(self, query: str, guild_id: int = None, *, include_global: bool = True) -> Optional[Role]:
+    async def search_role_for_guild(self, query: str, guild_id: int = None, *,
+                                    include_global: bool = True,
+                                    include_guild_default: bool = True) -> Optional[Role]:
         """Get the first role that matches the query."""
+        guild_selector = get_guild_id_selector(guild_id, include_global=include_global, include_guild_default=include_guild_default)
         cursor = self._roles_coll.find(
             {
                 "$text": {"$search": query},
-                "guild_id": get_guild_id_selector(guild_id, include_global=include_global)
+                **guild_selector
             },
             projection={"score": {"$meta": "textScore"}},
             sort=[("score", {"$meta": "textScore"})],
@@ -596,7 +631,7 @@ class PermManager:
         targets = await get_role_targets_for(self._bot, target)
         target_ids = [str(role_target) for role_target in targets]
 
-        cursor = self._aggregate_ordered_targets({"_id": {"$in": target_ids}}, after_sort=[{"$limit": 1}])
+        cursor = self._aggregate_ordered_targets({"_id": {"$in": target_ids}}, after_sort=[{"$limit": 1}], group_by_role=True)
         await cursor.fetch_next
         doc = cursor.next_object()
 
@@ -606,16 +641,24 @@ class PermManager:
         order = doc["order"]
         order_value = order["order_value"]
         if role_context.order_value > order_value:
-            return True
+            context = get_role_context_from_order_id(order["_id"])
+            # make sure they're both either guild roles or global roles!
+            return context.is_global == role_context.is_global
 
         order_index = order["index"]
         if index > order_index:
             return True
 
-    async def get_target_roles_for_guild(self, target: RoleTargetType, guild_id: int = None, *, include_global: bool = True) -> List[Role]:
+    async def get_target_roles_for_guild(self, target: RoleTargetType, guild_id: int = None, *,
+                                         include_global: bool = True,
+                                         include_guild_default: bool = True) -> List[Role]:
         """Get all roles the given target is in."""
         targets = await get_role_targets_for(self._bot, target, global_only=not guild_id, guild_only=guild_id and not include_global)
         target_ids = [str(role_target) for role_target in targets]
+
+        guild_selector = get_guild_id_selector(guild_id, nested_prefix="role",
+                                               include_global=include_global,
+                                               include_guild_default=include_guild_default)
 
         cursor = self._aggregate_ordered_targets(
             {"_id": {"$in": target_ids}},
@@ -633,10 +676,9 @@ class PermManager:
                 {"$addFields": {
                     "role": {"$arrayElemAt": ["$role", 0]}
                 }},
-                {"$match": {
-                    "role.guild_id": get_guild_id_selector(guild_id, include_global=include_global)
-                }}
+                {"$match": guild_selector}
             ],
+            group_by_role=True
         )
 
         roles = []
@@ -647,11 +689,13 @@ class PermManager:
 
         return roles
 
-    async def get_all_roles_for_guild(self, guild_id: int = None, *, include_global: bool = True) -> List[Role]:
+    async def get_all_roles_for_guild(self, guild_id: int = None, *,
+                                      include_global: bool = True,
+                                      include_guild_default: bool = True) -> List[Role]:
         """Get all roles the specified guild."""
-        cursor = self._aggregate_ordered_roles({
-            "guild_id": get_guild_id_selector(guild_id, include_global=include_global)
-        })
+        cursor = self._aggregate_ordered_roles(get_guild_id_selector(guild_id,
+                                                                     include_global=include_global,
+                                                                     include_guild_default=include_guild_default))
 
         roles: List[Role] = []
         async for doc in cursor:

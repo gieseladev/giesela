@@ -1,11 +1,13 @@
+import itertools
 from dataclasses import dataclass
 from enum import Enum
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Dict, Iterator, List, Optional, Tuple, Union
 
 from .tree import perm_tree
 from .tree_utils import CompiledPerms, PermSpecType
 
-__all__ = ["RoleContext", "Role", "RoleOrder", "RoleOrderValue", "get_higher_role_contexts", "get_higher_or_equal_role_contexts"]
+__all__ = ["RoleContext", "Role", "RoleOrder", "RoleOrderValue", "get_role_context_from_order_id", "get_higher_role_contexts",
+           "get_higher_or_equal_role_contexts", "GLOBAL_ROLE_CONTEXTS", "GUILD_ROLE_CONTEXTS"]
 
 
 class RoleContext(Enum):
@@ -21,12 +23,22 @@ class RoleContext(Enum):
     @property
     def is_global(self) -> bool:
         """Whether the role exists outside of a guild"""
-        return self != RoleContext.GUILD
+        return self in GLOBAL_ROLE_CONTEXTS
 
     @property
     def is_guild(self) -> bool:
         """Whether the role is specific to a guild"""
+        return self in GUILD_ROLE_CONTEXTS
+
+    @property
+    def is_guild_specific(self) -> bool:
+        """Check whether context is bound to a guild"""
         return self == RoleContext.GUILD
+
+    @property
+    def is_default(self) -> bool:
+        """Check whether this context is default"""
+        return self == RoleContext.GUILD_DEFAULT
 
     def get_order_id(self, guild_id: Optional[int]) -> str:
         if self == RoleContext.GUILD:
@@ -38,26 +50,63 @@ class RoleContext(Enum):
             return self.value
 
 
-ROLE_CONTEXT_ORDER = (
+ROLE_CONTEXT_ORDER = [
     RoleContext.SUPERGLOBAL,
     RoleContext.GUILD,
     RoleContext.GUILD_DEFAULT,
     RoleContext.GLOBAL
-)
+]
 
 ROLE_CONTEXT_POSITIONS = {context: i for i, context in enumerate(ROLE_CONTEXT_ORDER)}
 
+GLOBAL_ROLE_CONTEXTS = {RoleContext.GLOBAL, RoleContext.SUPERGLOBAL}
+GUILD_ROLE_CONTEXTS = {RoleContext.GUILD, RoleContext.GUILD_DEFAULT}
 
-def get_higher_role_contexts(context: RoleContext) -> List[RoleContext]:
-    position = context.order_value
+ROLE_HIERARCHY: List[List[RoleContext]] = [
+    [RoleContext.SUPERGLOBAL],
+    [RoleContext.GUILD, RoleContext.GUILD_DEFAULT, RoleContext.GLOBAL]
+]
 
-    return list(ROLE_CONTEXT_ORDER[:position])
+
+def get_role_context_from_order_id(_id: str) -> RoleContext:
+    """Get the `RoleContext` from the id of a role order document.
+
+    This works because the id happens to be the role context unless it's for a specific guild
+    in which case it's the id of said guild (as a string).
+    """
+    if _id.isdigit():
+        return RoleContext.GUILD
+    else:
+        return RoleContext(_id)
 
 
-def get_higher_or_equal_role_contexts(context: RoleContext) -> List[RoleContext]:
-    contexts = get_higher_role_contexts(context)
-    contexts.append(context)
-    return contexts
+def get_higher_role_contexts(context: RoleContext) -> Iterator[RoleContext]:
+    """Get all contexts that are "higher" (in the hierarchy) than the given one.
+
+    +--------------------------------+
+    |   +----  SUPERGLOBAL  ----+    |
+    |   |           |           |    |
+    |   v           v           v    |
+    | GUILD   GUILD_DEFAULT   GLOBAL |
+    +--------------------------------+
+
+    The results are ordered from highest to lowest.
+    """
+    for role_context in itertools.chain.from_iterable(ROLE_HIERARCHY):
+        if role_context == context:
+            break
+        else:
+            yield role_context
+
+
+def get_higher_or_equal_role_contexts(context: RoleContext) -> Iterator[RoleContext]:
+    """Get contexts that are at least as high as the given one.
+
+    In reality this is just `get_higher_role_contexts` with the given
+    `RoleContext` added to the end.
+    """
+    yield from get_higher_role_contexts(context)
+    yield context
 
 
 @dataclass
@@ -91,6 +140,14 @@ class Role:
     @property
     def is_guild(self) -> bool:
         return self.role_context.is_guild
+
+    @property
+    def is_default(self) -> bool:
+        """Check whether role is default
+
+        Currently this is only true for role context `RoleContext.GUILD_DEFAULT`
+        """
+        return self.role_context.is_default
 
     def compile_own_permissions(self) -> CompiledPerms:
         return perm_tree.compile_permissions(self.grant, self.deny)
