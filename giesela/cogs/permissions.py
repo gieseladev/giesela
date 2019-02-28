@@ -263,7 +263,7 @@ class Permissions:
 
     @has_permission(perm_tree.permissions.roles.assign)
     @role_group.command("assign", aliases=["addtarget", "target+", "@+"])
-    async def role_assign_cmd(self, ctx: Context, target: Union[Role, Member, User, str], role: str) -> None:
+    async def role_assign_cmd(self, ctx: Context, role: str, target: Union[Role, Member, User, str]) -> None:
         """Add a role to a target"""
         role = await self.get_role(role, ctx)
         await self.ensure_can_edit_role(ctx, role)
@@ -284,7 +284,7 @@ class Permissions:
 
     @has_permission(perm_tree.permissions.roles.assign)
     @role_group.command("retract", aliases=["removetarget", "rmtarget", "target-", "@-"])
-    async def role_retract_cmd(self, ctx: Context, target: Union[Role, Member, User, str], role: str) -> None:
+    async def role_retract_cmd(self, ctx: Context, role: str, target: Union[Role, Member, User, str]) -> None:
         """Remove a role from a target"""
         role = await self.get_role(role, ctx)
         await self.ensure_can_edit_role(ctx, role)
