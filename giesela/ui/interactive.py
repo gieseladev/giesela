@@ -12,7 +12,7 @@ from discord.ext.commands import Command, CommandError, CommandInvokeError, Cont
 from discord.ext.commands.bot import BotBase
 
 from . import text
-from .abstract import HasBot, HasListener, MessageHandler, ReactionHandler, Startable, Stoppable
+from .abstract import HasBot, HasListener, HasUser, MessageHandler, ReactionHandler, Startable, Stoppable
 from .basic import EditableEmbed
 from .ui_utils import EmbedLimits, EmojiType, MenuCommandGroup, format_embed
 
@@ -37,7 +37,7 @@ def emoji_handler(*reactions: EmojiType, pos: int = None):
     return decorator
 
 
-class InteractableEmbed(HasListener, HasBot, EditableEmbed, ReactionHandler, Startable, Stoppable):
+class InteractableEmbed(HasListener, HasBot, HasUser, EditableEmbed, ReactionHandler, Startable, Stoppable):
     user: Optional[User]
     handlers: Dict[EmojiType, EmojiHandlerType]
 
@@ -48,8 +48,7 @@ class InteractableEmbed(HasListener, HasBot, EditableEmbed, ReactionHandler, Sta
                  user: Optional[User],
                  message: Message = None,
                  **kwargs) -> None:
-        super().__init__(channel, bot=bot, message=message, **kwargs)
-        self.user = user
+        super().__init__(channel, bot=bot, user=user, message=message, **kwargs)
         self.handlers = {}
         self._emojis = []
 
@@ -254,7 +253,7 @@ class InteractableEmbed(HasListener, HasBot, EditableEmbed, ReactionHandler, Sta
         await self.on_emoji_handler_error(PermissionDenied(error_text), emoji, user)
 
 
-class MessageableEmbed(HasListener, HasBot, EditableEmbed, MessageHandler, Startable, Stoppable):
+class MessageableEmbed(HasListener, HasBot, HasUser, EditableEmbed, MessageHandler, Startable, Stoppable):
     user: Optional[User]
 
     _group: MenuCommandGroup
@@ -266,9 +265,8 @@ class MessageableEmbed(HasListener, HasBot, EditableEmbed, MessageHandler, Start
                  delete_msgs: bool = True,
                  message: Message = None,
                  **kwargs) -> None:
-        super().__init__(channel, bot=bot, message=message, **kwargs)
+        super().__init__(channel, bot=bot, user=user, message=message, **kwargs)
 
-        self.user = user
         self.delete_msgs = delete_msgs
 
         self.error = None

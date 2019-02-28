@@ -1,6 +1,5 @@
 import asyncio
 import copy
-import inspect
 import logging
 import operator
 import rapidjson
@@ -11,6 +10,7 @@ from discord import Colour, Embed, Message, User
 from discord.ext.commands import AutoShardedBot, Command, CommandError, CommandInvokeError, CommandNotFound, Context
 
 from giesela.lib.web_author import WebAuthor
+from giesela.utils import annotation_only
 from . import cogs, constants, signals, utils
 from .config import Config
 from .lib import GiTilsClient
@@ -38,6 +38,7 @@ class GieselaContext(Context):
         await asyncio.gather(*coros, return_exceptions=True)
 
 
+@annotation_only
 class _StorageTypeHints:
     """Type hints for references stored in Giesela's "storage" by cogs"""
     aiosession: aiohttp.ClientSession
@@ -47,10 +48,6 @@ class _StorageTypeHints:
     async def ensure_permission(self, ctx: Union[Context, User], *keys: "PermissionType", global_only: bool = False) -> True: ...
 
     async def has_permission(self, target: "RoleTargetType", *perms: "PermissionType", global_only: bool = False) -> bool: ...
-
-
-for key, _ in inspect.getmembers(_StorageTypeHints, inspect.isfunction):
-    delattr(_StorageTypeHints, key)
 
 
 class Giesela(AutoShardedBot, _StorageTypeHints):

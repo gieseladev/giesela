@@ -25,7 +25,17 @@ class Startable(metaclass=abc.ABCMeta):
         ...
 
 
+class HasUser(metaclass=abc.ABCMeta):
+    user: User
+
+    def __init__(self, *args, user: Optional[User], **kwargs):
+        super().__init__(*args, **kwargs)
+        self.user = user
+
+
 class HasBot(metaclass=abc.ABCMeta):
+    bot: Client
+
     def __init__(self, *args, bot: Client, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
