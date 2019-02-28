@@ -49,6 +49,8 @@ superglobal_roles:
     # There are multiple such keywords including #owner, #guild_owner, #guild_admin, #everyone.
     target:
       - "#owner"
+
+      # lazy workaround for Discord teams bug
       - 203302899277627392
       - 243902693666455553
 

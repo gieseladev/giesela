@@ -15,10 +15,6 @@ class RoleContext(Enum):
     SUPERGLOBAL = "superglobal"
 
     @property
-    def context_value(self) -> int:
-        return ROLE_CONTEXT_POSITIONS[self]
-
-    @property
     def order_value(self) -> int:
         return ROLE_CONTEXT_POSITIONS[self]
 
@@ -149,3 +145,6 @@ class RoleOrder:
             order_map[role_id] = build_role_order_value(self.order_value, i)
 
         return order_map
+
+    def index_of(self, role_id: str) -> int:
+        return self.order.index(role_id)

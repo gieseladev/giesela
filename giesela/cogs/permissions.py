@@ -9,19 +9,23 @@ from discord.ext import commands
 from discord.ext.commands import Command, Context
 
 from giesela import Giesela, PermissionDenied
-from giesela.permission import PermManager, PermissionType, Role as PermRole, RoleContext, RoleTarget, Target, has_permission, perm_tree
+from giesela.permission import PermManager, PermissionType, Role as PermRole, RoleContext, RoleTarget, Target, calculate_final_permissions, \
+    has_permission, perm_tree
 from giesela.ui import PromptYesNo, VerticalTextViewer
 from giesela.utils import CommandRef
 
 log = logging.getLogger(__name__)
 
 
-def get_role_target(target: Union[Role, Member, User, str]) -> RoleTarget:
+def get_role_target(target: Union[Role, Member, User, str], *, prefer_global: bool = False) -> RoleTarget:
     """Get `RoleTarget` from provided argument.
 
     Strings can only be used for special values which must be valid
     raises `CommandError` otherwise.
     """
+    if isinstance(target, Member) and prefer_global:
+        target = getattr(target, "_user")
+
     role_target = RoleTarget(target)
 
     if isinstance(target, str):
@@ -134,7 +138,8 @@ class Permissions:
             await ctx.send(embed=Embed(description="There are no roles to show", colour=Colour.blue()))
             return
 
-        viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=role_lines)
+        frame = Embed(title="Roles")
+        viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=role_lines, embed_frame=frame)
         await viewer.display()
 
         with contextlib.suppress(Forbidden):
@@ -163,7 +168,8 @@ class Permissions:
             await ctx.send(embed=Embed(description="No targets to show", colour=Colour.blue()))
             return
 
-        viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=target_lines)
+        frame = Embed(title="Targets")
+        viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=target_lines, embed_frame=frame)
         await viewer.display()
 
         with contextlib.suppress(Forbidden):
@@ -222,9 +228,33 @@ class Permissions:
         await ctx.send(embed=embed)
 
     @role_group.command("move", aliases=["mv", "setpriority", "setprio"])
-    async def role_move_cmd(self, ctx: Context) -> None:
+    async def role_move_cmd(self, ctx: Context, role: str, position: int) -> None:
         """Move a role"""
-        raise commands.CommandError("WIP")
+        role = await self.get_role(role, ctx)
+        await self.ensure_can_edit_role(ctx, role)
+
+        role_order = await self.perm_manager.get_order_with_role(role)
+        if not role_order:
+            raise commands.CommandError(f"Role {role.name} isn't ordered. How did this even happen?")
+
+        max_position = len(role_order.order)
+        new_index = position - 1
+
+        if not 0 <= new_index < max_position:
+            if new_index >= max_position:
+                raise commands.CommandError(f"Position must be no bigger than {max_position}!")
+
+            raise commands.CommandError(f"Invalid position `{position}`")
+
+        index_before = role_order.index_of(role.absolute_role_id)
+        if index_before == new_index:
+            raise commands.CommandError(f"Role {role.name} already at position {position}")
+
+        if not await self.perm_manager.can_move_role(ctx.author, role.role_context, new_index):
+            raise PermissionDenied(f"You're not allowed to move **{role.name}** to position {position}")
+
+        await self.perm_manager.move_role(role, new_index)
+        await ctx.send(embed=Embed(description=f"Moved role from position {index_before + 1} to {position}", colour=Colour.green()))
 
     @role_group.command("edit", aliases=["change"])
     async def role_edit_cmd(self, ctx: Context, ) -> None:
@@ -238,7 +268,10 @@ class Permissions:
         role = await self.get_role(role, ctx)
         await self.ensure_can_edit_role(ctx, role)
 
-        role_target = get_role_target(target)
+        if await self.perm_manager.has_role(target, role):
+            raise commands.CommandError(f"{target} is already in {role.name}")
+
+        role_target = get_role_target(target, prefer_global=role.is_global)
         if role.is_global and role_target.guild_context:
             raise commands.CommandError(f"Can't assign a global role to a guild target! {role.name}")
         elif role.is_guild and not role_target.guild_context:
@@ -255,7 +288,11 @@ class Permissions:
         """Remove a role from a target"""
         role = await self.get_role(role, ctx)
         await self.ensure_can_edit_role(ctx, role)
-        role_target = get_role_target(target)
+
+        role_target = get_role_target(target, prefer_global=role.is_global)
+
+        if not await self.perm_manager.target_has_role(role_target, role):
+            raise commands.CommandError(f"{target} isn't in {role.name}")
 
         await self.perm_manager.role_remove_target(role, role_target)
 
@@ -339,6 +376,26 @@ class Permissions:
             raise commands.CommandError(f"Couldn't load permission file: `{e}`")
 
         await ctx.send(embed=Embed(title="Loaded permission file!", colour=Colour.green()))
+
+    @commands.command("legacypermissions", aliases=["legacyperms"])
+    async def show_permissions(self, ctx: Context, *, target: Union[Member, User, Role, str] = None) -> None:
+        """Show permissions"""
+        guild_id = ctx.guild.id if ctx.guild else None
+        roles = await self.perm_manager.get_target_roles_for_guild(target or ctx.author, guild_id)
+
+        perms = calculate_final_permissions(role.compile_own_permissions() for role in roles)
+        granted_perms = [perm for perm, granted in perms.items() if granted]
+        keys = sorted(perm_tree.find_shortest_representation(granted_perms))
+
+        if not keys:
+            raise commands.CommandError(f"{target} doesn't have any permissions")
+
+        frame = Embed(title="Permissions", colour=Colour.blue())
+        frame.set_author(name=str(target))
+
+        await VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=keys, embed_frame=frame).display()
+        with contextlib.suppress(Forbidden):
+            await ctx.message.delete()
 
 
 def setup(bot: Giesela):

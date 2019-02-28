@@ -13,7 +13,7 @@ from pymongo import DeleteOne, IndexModel, InsertOne, UpdateOne
 from giesela import Config, Giesela, utils
 from .file_loader import load_from_file
 from .redis_lua import REDIS_ANY_TARGET_HAS_ROLE, REDIS_DEL_NS, REDIS_HAS_ALL_PERMISSIONS, REDIS_HAS_PERMISSION
-from .role import Role, RoleOrder, get_higher_or_equal_role_contexts
+from .role import Role, RoleContext, RoleOrder, get_higher_or_equal_role_contexts
 from .role_target import RoleTarget, RoleTargetType, Target, get_role_targets_for
 from .tree import perm_tree
 from .tree_utils import PermissionType
@@ -53,6 +53,18 @@ def get_guild_id_selector(guild_id: int = None, *, include_global: bool = True) 
         # I hope this is always false
         return {"$exists": False}
 
+
+async def _collect_aggregated_targets(cursor: AsyncIOMotorCursor) -> List[Target]:
+    """Collect the aggregated documents into a list of `Target`"""
+    target_roles: Dict[str, List[str]] = defaultdict(list)
+
+    async for target_doc in cursor:
+        target_roles[target_doc["_id"]].append(target_doc["role_ids"])
+
+    return [Target(target_id, role_ids) for target_id, role_ids in target_roles.items()]
+
+
+# TODO Redis use sorted set for Targets!
 
 class PermManager:
     _config: Config
@@ -242,11 +254,20 @@ class PermManager:
         return perm == b"1"
 
     async def has_role(self, target: RoleTargetType, role: RoleOrId) -> bool:
+        """Check whether a target has a role"""
         targets = await get_role_targets_for(self._bot, target, global_only=role.is_global)
         target_keys = [f"{self._redis_prefix}:targets:{target}" for target in targets]
 
         role_id = role.absolute_role_id if isinstance(role, Role) else role
-        res = REDIS_ANY_TARGET_HAS_ROLE.eval(self._redis, keys=target_keys, args=[role_id])
+        res = await REDIS_ANY_TARGET_HAS_ROLE.eval(self._redis, keys=target_keys, args=[role_id])
+        return res == b"1"
+
+    async def target_has_role(self, target: RoleTarget, role: RoleOrId) -> bool:
+        """Check whether a roletarget has a role"""
+        role_id = role.absolute_role_id if isinstance(role, Role) else role
+        target_key = f"{self._redis_prefix}:targets:{target}"
+
+        res = await REDIS_ANY_TARGET_HAS_ROLE.eval(self._redis, keys=[target_key], args=[role_id])
         return res == b"1"
 
     async def role_has_permission(self, role: RoleOrId, perm: str, *, default: T = False) -> Union[bool, T]:
@@ -275,6 +296,10 @@ class PermManager:
 
             async for document in cursor:
                 role_id = document["role_ids"]
+                if role_id == role.role_id:
+                    log.debug(f"ignoring edit permission of role {role_id} because it's the role to be edited")
+                    continue
+
                 has_perm = await self.role_has_permission(role_id, perm_tree.permissions.roles.edit, default=None)
                 if has_perm is not None:
                     return has_perm
@@ -297,6 +322,7 @@ class PermManager:
     def _aggregate_ordered_roles(self, match: Dict[str, Any] = None, *,
                                  pre_lookup: List[Dict[str, Any]] = None,
                                  post_lookup: List[Dict[str, Any]] = None,
+                                 after_sort: List[Dict[str, Any]] = None,
                                  sort_by_order: bool = True) -> AsyncIOMotorCursor:
         """Aggregate roles in order.
 
@@ -340,6 +366,7 @@ class PermManager:
                 ]}
             ]}},
             post_lookup=post_lookup,
+            after_sort=after_sort,
             sort_by_order=sort_by_order,
         )
 
@@ -347,6 +374,7 @@ class PermManager:
                                    pre_lookup: List[Dict[str, Any]] = None,
                                    lookup_pipeline_match_context: Any = None,
                                    post_lookup: List[Dict[str, Any]] = None,
+                                   after_sort: List[Dict[str, Any]] = None,
                                    sort_by_order: bool = True) -> AsyncIOMotorCursor:
         """Aggregate targets.
 
@@ -364,9 +392,15 @@ class PermManager:
         if not pre_lookup:
             pre_lookup = []
 
-        pre_lookup.insert(0, {"$unwind": {
-            "path": "$role_ids"
-        }})
+        pre_lookup = [
+                         {"$unwind": {
+                             "path": "$role_ids"
+                         }},
+                         {"$group": {
+                             "_id": "$role_ids",
+                             "role_ids": {"$first": "$role_ids"},
+                         }}
+                     ] + pre_lookup
 
         lookup_pipeline_match = {
             "$expr": {"$in": ["$$role_id", "$order"]}
@@ -382,22 +416,16 @@ class PermManager:
             },
             lookup_pipeline_match=lookup_pipeline_match,
             post_lookup=post_lookup,
+            after_sort=after_sort,
             sort_by_order=sort_by_order,
         )
-
-    async def _collect_aggregated_targets(self, cursor: AsyncIOMotorCollection) -> List[Target]:
-        """Collect the aggregated documents into a list of `Target`"""
-        target_roles: Dict[str, List[str]] = defaultdict(list)
-        async for target_doc in cursor:
-            target_roles[target_doc["_id"]].append(target_doc["role_ids"])
-
-        return [Target(target_id, role_ids) for target_id, role_ids in target_roles.items()]
 
     def _aggregate_ordered(self, collection: AsyncIOMotorCollection, match: Dict[str, Any] = None, *,
                            pre_lookup: List[Dict[str, Any]] = None,
                            lookup_let: Dict[str, Any],
                            lookup_pipeline_match: Dict[str, Any],
                            post_lookup: List[Dict[str, Any]] = None,
+                           after_sort: List[Dict[str, Any]] = None,
                            sort_by_order: bool = True) -> AsyncIOMotorCursor:
         """Aggregate documents such that they include the order from the role orders collection.
 
@@ -455,12 +483,15 @@ class PermManager:
                 "order.index": 1
             }})
 
+            if after_sort:
+                pipeline.extend(after_sort)
+
         return collection.aggregate(pipeline)
 
     async def _compile_targets_with_match(self, match: Dict[str, Any], *, tr: MultiExec = None) -> None:
         """Recompile targets which match the given conditions"""
         cursor = self._aggregate_ordered_targets(match)
-        targets = await self._collect_aggregated_targets(cursor)
+        targets = await _collect_aggregated_targets(cursor)
         await self._dump_targets_to_redis(targets, tr=tr)
 
     async def _compile_roles_with_match(self, match: Dict[str, Any], *, tr: MultiExec = None) -> None:
@@ -491,6 +522,16 @@ class PermManager:
                 role_pool[role_id] = role
 
         await self._dump_roles_to_redis(role_pool, tr=tr)
+
+    async def get_order_with_role(self, role: RoleOrId) -> Optional[RoleOrder]:
+        """Get the order of a role"""
+        role_id = role.absolute_role_id if isinstance(role, Role) else role
+
+        doc = await self._role_orders_coll.find_one({"order": role_id})
+        if doc:
+            return RoleOrder(**doc)
+        else:
+            return None
 
     async def move_role(self, role: Role, position: int) -> None:
         """Move a role to a new position and recompile its targets"""
@@ -545,13 +586,34 @@ class PermManager:
 
     async def get_targets_with_role(self, role: RoleOrId) -> List[Target]:
         """Get all targets that have the specified role"""
-        role_id = role.role_id if isinstance(role, Role) else role
+        role_id = role.absolute_role_id if isinstance(role, Role) else role
         cursor = self._aggregate_ordered_targets({"role_ids": role_id})
-        return await self._collect_aggregated_targets(cursor)
+        return await _collect_aggregated_targets(cursor)
+
+    async def can_move_role(self, target: RoleTargetType, role_context: RoleContext, index: int) -> bool:
+        """Find out whether a target can move a role to the given position."""
+        targets = await get_role_targets_for(self._bot, target)
+        target_ids = [str(role_target) for role_target in targets]
+
+        cursor = self._aggregate_ordered_targets({"_id": {"$in": target_ids}}, after_sort=[{"$limit": 1}])
+        await cursor.fetch_next
+        doc = cursor.next_object()
+
+        if not doc:
+            return False
+
+        order = doc["order"]
+        order_value = order["order_value"]
+        if role_context.order_value > order_value:
+            return True
+
+        order_index = order["index"]
+        if index > order_index:
+            return True
 
     async def get_target_roles_for_guild(self, target: RoleTargetType, guild_id: int = None, *, include_global: bool = True) -> List[Role]:
         """Get all roles the given target is in."""
-        targets = await get_role_targets_for(self._bot, target)
+        targets = await get_role_targets_for(self._bot, target, global_only=not guild_id, guild_only=guild_id and not include_global)
         target_ids = [str(role_target) for role_target in targets]
 
         cursor = self._aggregate_ordered_targets(
