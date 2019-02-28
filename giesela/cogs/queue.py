@@ -8,8 +8,10 @@ from discord import Forbidden
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Extractor, Giesela, perm_tree, permission, utils
-from giesela.ui import VerticalTextViewer, prefab, text as text_utils
+from giesela import Extractor, Giesela, GieselaPlayer, permission, utils
+from giesela.permission import perm_tree
+from giesela.permission.utils import ensure_entry_add_permissions, ensure_revert_chapter_permission, ensure_skip_chapter_permission
+from giesela.ui import PromptYesNo, VerticalTextViewer, prefab, text as text_utils
 from giesela.ui.custom import EntrySearchUI
 from .player import Player
 
@@ -58,7 +60,6 @@ def extract_url_or_query_targets(target: str, url_checker: Callable[[str], bool]
 class EnqueueCog(QueueBase):
     async def _play_cmd(self, ctx: Context, target: str, placement: int = None):
         player = await self.get_player(ctx)
-        # TODO check permissions!
 
         targets = extract_url_or_query_targets(target, self.extractor.is_url)
 
@@ -68,11 +69,14 @@ class EnqueueCog(QueueBase):
         if not results:
             raise commands.CommandError(f"Couldn't find anything for {target}")
 
+        await ensure_entry_add_permissions(ctx, results)
+
         if len(results) > 1:
             player.queue.add_entries(results, requester=ctx.author, position=placement)
             await ctx.send(f"Added {len(results)} entries to the queue")
         else:
             result = results[0]
+
             player.queue.add_entry(result, requester=ctx.author, position=placement)
             await ctx.send(f"Added **{result}** to the queue")
 
@@ -115,12 +119,12 @@ class EnqueueCog(QueueBase):
 
         entry = await searcher.choose()
         if entry:
+            await ensure_entry_add_permissions(ctx, entry)
             player.queue.add_entry(entry, ctx.author)
-            # TODO perms
             await ctx.send(f"Enqueued **{entry.title}**")
-        else:
-            with suppress(Forbidden):
-                await ctx.message.delete()
+
+        with suppress(Forbidden):
+            await ctx.message.delete()
 
 
 class ManipulateCog(QueueBase):
@@ -208,12 +212,15 @@ class ManipulateCog(QueueBase):
         """Clear the queue"""
         player = await self.get_player(ctx)
         player.queue.clear()
-        # TODO show prompt!
+
+        prompt = PromptYesNo(ctx.channel, bot=self.bot, user=ctx.author, text="Do you really want to clear the queue?")
+        if not await prompt:
+            return
+
         await ctx.send("Cleared the queue")
 
     @commands.guild_only()
-    @permission.has_permission(perm_tree.player.skip)
-    @commands.group()
+    @commands.group(invoke_without_command=True)
     async def skip(self, ctx: Context):
         """Skip the current chapter/entry"""
         player = await self.get_player(ctx)
@@ -221,7 +228,8 @@ class ManipulateCog(QueueBase):
         if player.is_stopped:
             raise commands.CommandError("Can't skip! The player is not playing!")
 
-        # TODO require perms.music.player.manipulate.skip.seek for chapters
+        await ensure_skip_chapter_permission(ctx, player)
+
         await player.skip()
 
     @commands.guild_only()
@@ -235,6 +243,31 @@ class ManipulateCog(QueueBase):
             raise commands.CommandError("Can't skip! The player is not playing!")
 
         await player.skip(respect_chapters=False)
+
+    @commands.guild_only()
+    @commands.group(invoke_without_command=True)
+    async def revert(self, ctx: Context) -> None:
+        """Revert the current entry"""
+        player: GieselaPlayer = await self.get_player(ctx)
+
+        if player.is_stopped:
+            raise commands.CommandError("Can't revert! The player is not playing!")
+
+        await ensure_revert_chapter_permission(ctx, player)
+
+        await player.revert(ctx.author)
+
+    @commands.guild_only()
+    @permission.has_permission(perm_tree.player.revert)
+    @revert.command("all")
+    async def revert_all(self, ctx: Context) -> None:
+        """Revert the current entry"""
+        player: GieselaPlayer = await self.get_player(ctx)
+
+        if player.is_stopped:
+            raise commands.CommandError("Can't revert! The player is not playing!")
+
+        await player.revert(ctx.author, respect_chapters=False)
 
     @commands.guild_only()
     @permission.has_permission(perm_tree.queue.move)

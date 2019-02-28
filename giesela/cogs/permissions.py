@@ -10,7 +10,7 @@ from discord.ext.commands import Command, Context
 
 from giesela import Giesela, PermissionDenied
 from giesela.permission import PermManager, PermissionType, Role as PermRole, RoleContext, RoleTarget, Target, calculate_final_permissions, \
-    has_permission, perm_tree
+    get_decorated_permissions, has_permission, perm_tree
 from giesela.ui import PromptYesNo, VerticalTextViewer
 from giesela.utils import CommandRef
 
@@ -52,19 +52,6 @@ def get_role_name_with_flair(role: PermRole) -> str:
     return role.name
 
 
-def get_required_perms(cmd: Command, *, global_only: bool = False) -> List[PermissionType]:
-    """Get the required permission from the has(_global)_permission decorator."""
-    if global_only:
-        attr = "_required_global_permissions"
-    else:
-        attr = "_required_permissions"
-
-    try:
-        return list(getattr(cmd, attr))
-    except AttributeError:
-        return []
-
-
 class Permissions:
     def __init__(self, bot: Giesela) -> None:
         self.bot = bot
@@ -72,8 +59,9 @@ class Permissions:
 
         bot.store_reference("perm_manager", self.perm_manager)
         bot.store_reference("ensure_permission", self.ensure_permission)
+        bot.store_reference("has_permission", self.perm_manager.has)
 
-    async def ensure_permission(self, ctx: Union[Context, User], *keys: PermissionType, global_only: bool = False) -> bool:
+    async def ensure_permission(self, ctx: Union[Context, User], *keys: PermissionType, global_only: bool = False) -> True:
         """Make sure the ctx has the given permissions, raise PermissionDenied otherwise."""
         user = ctx.author if isinstance(ctx, Context) else ctx
 
@@ -99,8 +87,8 @@ class Permissions:
 
     async def __global_check_once(self, ctx: Context) -> bool:
         return all(await asyncio.gather(
-            self.ensure_permission(ctx, *get_required_perms(ctx.command, global_only=False), global_only=False),
-            self.ensure_permission(ctx, *get_required_perms(ctx.command, global_only=True), global_only=True)
+            self.ensure_permission(ctx, *get_decorated_permissions(ctx.command, global_only=False), global_only=False),
+            self.ensure_permission(ctx, *get_decorated_permissions(ctx.command, global_only=True), global_only=True)
         ))
 
     async def get_role(self, query: str, guild_id: Union[Context, Guild, int] = None) -> PermRole:
@@ -342,7 +330,7 @@ class Permissions:
                 raise commands.CommandError(f"Unknown target: {target}")
 
         def _get_flattened_perms(global_only: bool) -> List[str]:
-            return list(itertools.chain.from_iterable(map(perm_tree.unfold_perm, get_required_perms(cmd, global_only=global_only))))
+            return list(itertools.chain.from_iterable(map(perm_tree.unfold_perm, get_decorated_permissions(cmd, global_only=global_only))))
 
         global_perms = _get_flattened_perms(True)
         perms = _get_flattened_perms(False)

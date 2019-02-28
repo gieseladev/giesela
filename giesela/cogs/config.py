@@ -5,9 +5,10 @@ from discord import Colour, Embed, Guild
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, perm_tree, permission
+from giesela import Giesela, permission
 from giesela.config import TraverseError, abstract
 from giesela.config.abstract import ConfigObject
+from giesela.permission import perm_tree
 
 
 async def show_config(ctx: Context, config: ConfigObject, key: Optional[str], default_name: str):

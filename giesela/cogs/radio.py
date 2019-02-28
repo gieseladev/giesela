@@ -6,7 +6,8 @@ from discord import Embed, Forbidden
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, GieselaPlayer, RadioStation, RadioStationManager, perm_tree, permission
+from giesela import Giesela, GieselaPlayer, RadioStation, RadioStationManager, permission
+from giesela.permission import perm_tree
 from giesela.ui import ItemPicker
 from .player import Player
 

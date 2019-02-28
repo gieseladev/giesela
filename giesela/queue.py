@@ -135,9 +135,12 @@ class EntryQueue(EventEmitter):
 
     def get_replay_entry(self, requester: User, index: int = None) -> Optional[QueueEntry]:
         if index is None:
-            entry = self.history.popleft()
+            try:
+                entry = self.history.popleft()
+            except IndexError:
+                return None
         else:
-            if not 0 <= index < len(self):
+            if not 0 <= index < len(self.history):
                 return None
             entry = deque_pop_index(self.history, index)
 
@@ -145,6 +148,9 @@ class EntryQueue(EventEmitter):
 
     def replay(self, requester: User, index: int = None) -> Optional[QueueEntry]:
         entry = self.get_replay_entry(requester, index)
+        if not entry:
+            return None
+
         self.entries.appendleft(entry)
         self.emit("replay", queue=self, entry=entry, index=index or 0)
         return entry

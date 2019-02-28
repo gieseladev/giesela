@@ -190,19 +190,36 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
             previous_chapter = await self.current_entry.get_previous_chapter()
 
             if previous_chapter and isinstance(previous_chapter, SpecificChapterData):
-                return await self.seek(previous_chapter.start)
+                await self.seek(previous_chapter.start)
+                return
 
+        # if we have history entries then decide whether to restart or replay previous
         if self.queue.history:
-            point_of_no_revert = await self.config.get_guild(self.guild_id).player.restart_entry_point
-            if point_of_no_revert is None or self.progress > point_of_no_revert:
+            restart_entry = False
+
+            # restart when the progress is bigger than a certain threshold
+            if self.current_entry:
+                point_of_restart = await self.config.get_guild(self.guild_id).player.restart_entry_point
+                if point_of_restart is None or self.progress > point_of_restart:
+                    restart_entry = True
+
+            if restart_entry:
+                await self.seek(0)
+            else:
+                # otherwise replay the previous entry
                 entry = self.queue.get_replay_entry(requester)
                 await self.play(entry)
-                self.emit("revert", player=self)
+        else:
+            # otherwise only restart
+            if self.current_entry:
+                await self.seek(0)
+            else:
+                return
 
-        return await self.seek(0)
+        self.emit("revert", player=self)
 
     async def skip(self, *, respect_chapters: bool = True):
-        if respect_chapters:
+        if respect_chapters and self.current_entry:
             next_chapter = await self.current_entry.get_next_chapter()
 
             if next_chapter and isinstance(next_chapter, SpecificChapterData):

@@ -3,7 +3,9 @@ from typing import Optional
 
 from discord import Client, Colour, Embed, Message, TextChannel, User
 
-from giesela import BaseEntry, ChapterEntry, GieselaPlayer, RadioEntry, SpecificChapterData, perm_tree, permission, utils
+from giesela import BaseEntry, ChapterEntry, GieselaPlayer, RadioEntry, SpecificChapterData, permission, utils
+from giesela.permission import perm_tree
+from giesela.permission.utils import ensure_revert_chapter_permission, ensure_skip_chapter_permission
 from giesela.ui import create_player_bar
 from giesela.utils import ObjectChain
 from .. import InteractableEmbed, IntervalUpdatingMessage, emoji_handler
@@ -138,7 +140,7 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
 
     @emoji_handler("⏮", pos=1)
     async def prev_entry(self, _, user: User):
-        # TODO permissions
+        await ensure_revert_chapter_permission(user, self.player, bot=self.bot)
         await self.player.revert(user)
 
     @permission.has_permission(perm_tree.player.seek)
@@ -163,7 +165,8 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
 
     @permission.has_permission(perm_tree.player.skip)
     @emoji_handler("⏭", pos=5)
-    async def next_entry(self, *_):
+    async def next_entry(self, _, user: User):
+        await ensure_skip_chapter_permission(user, self.player, bot=self.bot)
         await self.player.skip()
 
     @permission.has_permission(perm_tree.queue.inspect.current)

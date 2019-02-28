@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Union
 
 from discord import Client, Colour, Embed, Message, TextChannel, User
 
@@ -12,8 +12,10 @@ class EmbedPrompt(InteractableEmbed):
                  bot: Client,
                  user: Optional[User],
                  message: Message = None,
+                 embed: Union[Embed, str] = None,
+                 text: str = None,
                  **kwargs) -> None:
-        embed = kwargs.pop("embed", False) or kwargs.pop("text", "Are you sure?")
+        embed = embed or text or "Are you sure?"
         if isinstance(embed, str):
             embed = Embed(title=embed, colour=Colour.orange())
         self.embed = embed

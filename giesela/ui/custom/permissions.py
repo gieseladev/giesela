@@ -5,7 +5,8 @@ from discord import Client, Colour, Embed, Message, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import PermManager, Role, perm_tree, utils
+from giesela import utils
+from giesela.permission import PermManager, Role, perm_tree
 from giesela.ui import VerticalTextViewer
 from .. import text as text_utils
 from ..help import AutoHelpEmbed

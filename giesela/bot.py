@@ -1,12 +1,13 @@
 import asyncio
 import copy
+import inspect
 import logging
 import operator
 import rapidjson
-from typing import Any, Iterable, List, Optional, TYPE_CHECKING, Tuple, Type
+from typing import Any, Iterable, List, Optional, TYPE_CHECKING, Tuple, Type, Union
 
 import aiohttp
-from discord import Colour, Embed, Message
+from discord import Colour, Embed, Message, User
 from discord.ext.commands import AutoShardedBot, Command, CommandError, CommandInvokeError, CommandNotFound, Context
 
 from giesela.lib.web_author import WebAuthor
@@ -15,7 +16,7 @@ from .config import Config
 from .lib import GiTilsClient
 
 if TYPE_CHECKING:
-    from .permission import PermManager
+    from .permission import PermManager, PermissionType, RoleTargetType
 
 log = logging.getLogger(__name__)
 
@@ -43,7 +44,13 @@ class _StorageTypeHints:
     gitils: GiTilsClient
     perm_manager: "PermManager"
 
-    async def ensure_permission(self, ctx: Context, *keys: str) -> None: ...
+    async def ensure_permission(self, ctx: Union[Context, User], *keys: "PermissionType", global_only: bool = False) -> True: ...
+
+    async def has_permission(self, target: "RoleTargetType", *perms: "PermissionType", global_only: bool = False) -> bool: ...
+
+
+for key, _ in inspect.getmembers(_StorageTypeHints, inspect.isfunction):
+    delattr(_StorageTypeHints, key)
 
 
 class Giesela(AutoShardedBot, _StorageTypeHints):
@@ -53,6 +60,7 @@ class Giesela(AutoShardedBot, _StorageTypeHints):
 
     def __init__(self):
         super().__init__(None, )
+
         WebAuthor.bot = self  # TODO remove this garbage
 
         self._storage = {}

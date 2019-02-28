@@ -53,14 +53,14 @@ class perm_tree(Node):
         steal: str
 
     class playlist(Node):
-        class owned(Node):
-            class create(Node):
-                new: str
-                import_pl: str
+        # playlist editing is implicitly granted for authors/editors of playlists
+
+        class create(Node):
+            new: str
+            import_pl: str
 
         class all(Node):
             edit: str
-            remove: str
             export: str
 
     class webiesela(Node):

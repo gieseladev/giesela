@@ -5,6 +5,7 @@ from discord.ext import commands
 from discord.ext.commands import Context
 
 from giesela import GieselaPlayer, PlayableEntry
+from giesela.permission.utils import ensure_entry_add_permissions
 from giesela.ui import prefab
 from ..help import AutoHelpEmbed
 from ..interactive import ItemPicker, MessageableEmbed
@@ -52,5 +53,6 @@ class EntrySearchUI(AutoHelpEmbed, MessageableEmbed, ItemPicker, Generic[T]):
     async def play_result(self, ctx: Context):
         """Play next"""
         result = self.current_result
-        # TODO permissions
+
+        await ensure_entry_add_permissions(ctx, result)
         self.player.queue.add_entry(result, ctx.author)

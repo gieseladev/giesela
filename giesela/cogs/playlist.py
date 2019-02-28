@@ -11,9 +11,11 @@ from discord import Attachment, Colour, Embed, File, Forbidden, User
 from discord.ext import commands
 from discord.ext.commands import BadArgument, Context, Converter, view as string_view
 
-from giesela import Extractor, GPL_VERSION, Giesela, LoadedPlaylistEntry, Playlist, PlaylistManager, perm_tree, permission, utils
+from giesela import Extractor, Giesela, permission, utils
 from giesela.lib import help_formatter
-from giesela.playlist import compat as pl_compat
+from giesela.permission import perm_tree
+from giesela.permission.utils import has_permission
+from giesela.playlist import GPL_VERSION, LoadedPlaylistEntry, Playlist, PlaylistManager, compat as pl_compat
 from giesela.ui import EmbedPaginator, EmbedViewer, ItemPicker, PromptYesNo, VerticalTextViewer
 from giesela.ui.custom import PlaylistBuilder, PlaylistRecoveryUI, PlaylistViewer
 from .player import Player
@@ -48,19 +50,25 @@ def add_playlist_footer(embed: Embed, playlist: Playlist) -> Embed:
     return embed
 
 
-async def is_owner(ctx: Context) -> bool:
-    return await ctx.bot.is_owner(ctx.author)
+async def ensure_user_has_edit_perms(playlist: Playlist, ctx: Context, operation="edit the playlist") -> None:
+    if playlist.can_edit(ctx.author):
+        return
+
+    if await has_permission(ctx, perm_tree.playlist.all.edit):
+        return
+
+    raise commands.CommandError(f"You need to be an editor to {operation}!")
 
 
-async def ensure_user_can_edit_playlist(playlist: Playlist, ctx: Context):
-    if not (playlist.can_edit(ctx.author) or await is_owner(ctx)):
-        raise commands.CommandError("You're not allowed to edit this playlist!")
+async def ensure_user_has_author_perms(playlist: Playlist, ctx: Context, operation="perform this command") -> None:
+    if playlist.is_author(ctx.author):
+        return
 
+    if await has_permission(ctx, perm_tree.playlist.all.edit):
+        return
 
-async def ensure_user_is_author(playlist: Playlist, ctx: Context, operation="perform this command"):
-    if not (playlist.is_author(ctx.author) or await is_owner(ctx)):
-        author_text = playlist.author.mention if playlist.author else playlist.author_id
-        raise commands.CommandError(f"Only the author of this playlist may {operation} ({author_text})!")
+    author_text = playlist.author.mention if playlist.author else playlist.author_id
+    raise commands.CommandError(f"Only the author of this playlist may {operation} ({author_text})!")
 
 
 async def save_attachment(attachment: Attachment) -> BytesIO:
@@ -165,7 +173,7 @@ class PlaylistCog:
         playlist = random.choice(playlists)
         await self.play_playlist(ctx, playlist)
 
-    @permission.has_permission(perm_tree.playlist.owned.create)
+    @permission.has_permission(perm_tree.playlist.create.new)
     @playlist.command("create", aliases=["new"])
     async def playlist_create(self, ctx: Context, *, name: UnquotedStr):
         """Create a new playlist"""
@@ -191,14 +199,14 @@ class PlaylistCog:
     async def playlist_builder(self, ctx: Context, *, playlist: UnquotedStr):
         """Edit a playlist"""
         playlist = self.find_playlist(playlist)
-        await ensure_user_can_edit_playlist(playlist, ctx)
+        await ensure_user_has_edit_perms(playlist, ctx)
         await self._playlist_builder(ctx, playlist)
 
     @playlist.command("rename", aliases=["newname", "rn"])
     async def playlist_rename(self, ctx: Context, playlist: str, *, name: UnquotedStr):
         """Rename a playlist"""
         playlist = self.find_playlist(playlist)
-        await ensure_user_is_author(playlist, ctx, "rename it")
+        await ensure_user_has_author_perms(playlist, ctx, "rename it")
         old_name = playlist.name
         playlist.rename(name)
         await ctx.send(f"**{old_name}** is now **{playlist.name}**")
@@ -207,7 +215,7 @@ class PlaylistCog:
     async def playlist_description(self, ctx: Context, playlist: str, *, description: UnquotedStr):
         """Describe your playlist to make it better"""
         playlist = self.find_playlist(playlist)
-        await ensure_user_is_author(playlist, ctx, "change its description")
+        await ensure_user_has_author_perms(playlist, ctx, "change its description")
         playlist.set_description(description)
         em = Embed(title=f"New description of {playlist.name}:", description=description)
         await ctx.send(embed=em)
@@ -220,7 +228,7 @@ class PlaylistCog:
             return
 
         playlist = self.find_playlist(playlist)
-        await ensure_user_is_author(playlist, ctx, "change its cover")
+        await ensure_user_has_author_perms(playlist, ctx, "change its cover")
 
         if not cover:
             raise commands.CommandError("No cover provided!")
@@ -239,7 +247,7 @@ class PlaylistCog:
         If you're too lazy to make one yourself, why not let Giesela do it?
         """
         playlist = self.find_playlist(playlist)
-        await ensure_user_is_author(playlist, ctx, "change its cover")
+        await ensure_user_has_author_perms(playlist, ctx, "change its cover")
 
         _error: Exception = None
         covers: Dict[int, str] = {}
@@ -295,7 +303,7 @@ class PlaylistCog:
     async def playlist_delete(self, ctx: Context, *, playlist: UnquotedStr):
         """Delete a playlist"""
         playlist = self.find_playlist(playlist)
-        await ensure_user_is_author(playlist, ctx, "delete it")
+        await ensure_user_has_author_perms(playlist, ctx, "delete it")
 
         res = await PromptYesNo(ctx.channel, bot=self.bot, user=ctx.author, text=f"Do you really want to delete **{playlist.name}**?")
         if not res:
@@ -309,7 +317,7 @@ class PlaylistCog:
     async def playlist_transfer(self, ctx: Context, playlist: str, user: User):
         """Transfer a playlist to someone else."""
         playlist = self.find_playlist(playlist)
-        await ensure_user_is_author(playlist, ctx, "transfer it")
+        await ensure_user_has_author_perms(playlist, ctx, "transfer it")
         playlist.transfer(user)
 
         em = Embed(title=f"Transferred to {user.mention}")
@@ -338,7 +346,7 @@ class PlaylistCog:
     async def playlist_editor_add(self, ctx: Context, playlist: str, user: User):
         """Give someone the permission to edit your playlist."""
         playlist = self.find_playlist(playlist)
-        await ensure_user_is_author(playlist, ctx, "add editors")
+        await ensure_user_has_author_perms(playlist, ctx, "add editors")
 
         if playlist.is_editor(user):
             raise commands.CommandError(f"{user.mention} is already an editor of **{playlist.name}**")
@@ -353,7 +361,7 @@ class PlaylistCog:
     async def playlist_editor_remove(self, ctx: Context, playlist: str, user: User):
         """Remove an editor from your playlist."""
         playlist = self.find_playlist(playlist)
-        await ensure_user_is_author(playlist, ctx, "remove editors")
+        await ensure_user_has_author_perms(playlist, ctx, "remove editors")
 
         if not playlist.is_editor(user):
             raise commands.CommandError(f"{user.mention} isn't an editor of **{playlist.name}**")
@@ -391,6 +399,7 @@ class PlaylistCog:
         with suppress(Forbidden):
             await ctx.message.delete()
 
+    @permission.has_permission(perm_tree.playlist.create.import_pl)
     @playlist.group("import", invoke_without_command=True, aliases=["imp"])
     async def playlist_import(self, ctx: Context, author: User = None):
         """Import a playlist from a GPL file."""
@@ -409,6 +418,7 @@ class PlaylistCog:
             raise commands.CommandError("Couldn't load playlist\n"
                                         "If this is a playlist from an older version, please try `playlist import recover`.")
 
+    @permission.has_permission(perm_tree.playlist.create.import_pl)
     @playlist_import.command("broken", aliases=["recover", "old"])
     async def playlist_import_broken(self, ctx: Context, claim: bool = False):
         """Import a broken playlist"""
@@ -456,7 +466,8 @@ class PlaylistCog:
         """Export a playlist"""
         playlist = self.find_playlist(playlist)
 
-        # TODO check for playlist.all.export permission for non-editors of this playlist
+        if not playlist.can_edit(ctx.author):
+            await self.bot.ensure_permission(ctx, perm_tree.playlist.all.export)
 
         serialised = rapidjson.dumps(playlist.to_gpl())
         data = BytesIO(serialised.encode("utf-8"))
@@ -492,7 +503,7 @@ class PlaylistCog:
     async def playlist_quickadd(self, ctx: Context, *, playlist: UnquotedStr):
         """Add the current entry to a playlist."""
         playlist = self.find_playlist(playlist)
-        await ensure_user_can_edit_playlist(playlist, ctx)
+        await ensure_user_has_edit_perms(playlist, ctx)
 
         player = await self.get_player(ctx)
         player_entry = player.current_entry
@@ -543,7 +554,7 @@ class PlaylistCog:
                                             "You cannot remove it unless you specify the name!")
             playlist_entry = player_entry.get("playlist_entry")
 
-        await ensure_user_can_edit_playlist(playlist, ctx)
+        await ensure_user_has_edit_perms(playlist, ctx)
 
         playlist.remove(playlist_entry)
         player_entry.remove_wrapper(LoadedPlaylistEntry)

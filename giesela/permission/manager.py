@@ -10,7 +10,8 @@ from aioredis.commands import MultiExec
 from motor.motor_asyncio import AsyncIOMotorCollection, AsyncIOMotorCursor
 from pymongo import DeleteOne, IndexModel, InsertOne, UpdateOne
 
-from giesela import Config, Giesela, utils
+from giesela import Giesela, utils
+from giesela.config import Config
 from .file_loader import load_from_file
 from .redis_lua import REDIS_ANY_TARGET_HAS_ROLE, REDIS_DEL_NS, REDIS_HAS_ALL_PERMISSIONS, REDIS_HAS_PERMISSION
 from .role import Role, RoleContext, RoleOrder, get_higher_or_equal_role_contexts

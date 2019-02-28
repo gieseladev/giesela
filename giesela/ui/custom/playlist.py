@@ -9,7 +9,8 @@ from discord import Client, Colour, Embed, Guild, Message, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import EditPlaylistProxy, Playlist, PlaylistEntry, utils
+from giesela import utils
+from giesela.playlist import EditPlaylistProxy, Playlist, PlaylistEntry
 from .entry_editor import EntryEditor
 from ..abstract import HasBot
 from ..help import AutoHelpEmbed

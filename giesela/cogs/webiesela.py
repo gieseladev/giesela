@@ -3,7 +3,9 @@ import logging
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, PlaylistManager, RadioStationManager, WebieselaServer, perm_tree, permission
+from giesela import Giesela, RadioStationManager, WebieselaServer, permission
+from giesela.permission import perm_tree
+from giesela.playlist import PlaylistManager
 
 log = logging.getLogger(__name__)
 

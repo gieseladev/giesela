@@ -5,7 +5,7 @@ import inspect
 import logging
 import operator
 import textwrap
-from typing import Any, Awaitable, Callable, Dict, List, Optional, Tuple, TypeVar, Union
+from typing import Any, Awaitable, Callable, Dict, List, Optional, TYPE_CHECKING, Tuple, TypeVar, Union
 
 from discord import Client, Embed, Emoji, Message, RawReactionActionEvent, TextChannel, User
 from discord.ext.commands import Command, CommandError, CommandInvokeError, Context
@@ -15,6 +15,9 @@ from . import text
 from .abstract import HasBot, HasListener, MessageHandler, ReactionHandler, Startable, Stoppable
 from .basic import EditableEmbed
 from .ui_utils import EmbedLimits, EmojiType, MenuCommandGroup, format_embed
+
+if TYPE_CHECKING:
+    from giesela.permission import PermissionType
 
 __all__ = ["emoji_handler", "InteractableEmbed", "MessageableEmbed", "Abortable", "ItemPicker", "EmbedViewer", "VerticalTextViewer"]
 
@@ -166,10 +169,11 @@ class InteractableEmbed(HasListener, HasBot, EditableEmbed, ReactionHandler, Sta
         if not self.message:
             raise Exception("There's no message to listen to")
 
-        (done, *_), *_ = await asyncio.wait((
-            self.bot.wait_for("raw_reaction_add", check=self.reaction_check),
-            self.bot.wait_for("raw_reaction_remove", check=self.reaction_check)),
-            return_when=asyncio.FIRST_COMPLETED)
+        (done, *_), *_ = await asyncio.wait(
+            (self.bot.wait_for("raw_reaction_add", check=self.reaction_check),
+             self.bot.wait_for("raw_reaction_remove", check=self.reaction_check)),
+            return_when=asyncio.FIRST_COMPLETED
+        )
 
         payload: RawReactionActionEvent = done.result()
 
@@ -203,16 +207,51 @@ class InteractableEmbed(HasListener, HasBot, EditableEmbed, ReactionHandler, Sta
         if not handler:
             return await self.on_unhandled_emoji(emoji, user)
         else:
-            return await handler(emoji, user)
+            if await self.check_permissions(handler, emoji, user):
+                return await handler(emoji, user)
+
+    async def check_permissions(self, handler: EmojiHandlerType, emoji: EmojiType, user: User) -> bool:
+        from giesela.permission import get_decorated_permissions
+
+        global_perms = get_decorated_permissions(handler, global_only=True)
+        has_global_perms = await self.bot.has_permission(user, *global_perms, global_only=True)
+        if not has_global_perms:
+            await self.handle_emoji_handler_permission_denied(global_perms, True, emoji, user)
+            return False
+
+        perms = get_decorated_permissions(handler, global_only=False)
+        has_perms = await self.bot.has_permission(user, *perms, global_only=False)
+        if not has_perms:
+            await self.handle_emoji_handler_permission_denied(perms, False, emoji, user)
+            return False
+
+        return True
 
     async def on_any_emoji(self, emoji: EmojiType, user: User):
-        pass
+        ...
 
     async def on_unhandled_emoji(self, emoji: EmojiType, user: User):
-        pass
+        ...
 
     async def on_emoji_handler_error(self, error: Exception, emoji: EmojiType, user: User):
+        from giesela import PermissionDenied
+
+        if isinstance(error, PermissionDenied):
+            return
+
         log.exception(f"Something went wrong while handling {emoji} by {user}", exc_info=error)
+
+    async def handle_emoji_handler_permission_denied(self, perms: List["PermissionType"], global_only: bool, emoji: EmojiType, user: User) -> None:
+        from giesela import PermissionDenied
+
+        perms_text = ", ".join(perms)
+
+        if global_only:
+            error_text = f"Global permission {perms_text} required!"
+        else:
+            error_text = f"Permission {perms_text} required!"
+
+        await self.on_emoji_handler_error(PermissionDenied(error_text), emoji, user)
 
 
 class MessageableEmbed(HasListener, HasBot, EditableEmbed, MessageHandler, Startable, Stoppable):

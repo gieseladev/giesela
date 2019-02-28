@@ -1,15 +1,16 @@
 import asyncio
 import logging
 from contextlib import suppress
-from typing import Dict, Optional, Union
+from typing import Dict, Optional, Union, cast
 
 from discord import Colour, Embed, Forbidden, Game, Guild, Member, Message, NotFound, TextChannel, User, VoiceChannel, VoiceState
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, GieselaPlayer, LoadedPlaylistEntry, PlayerManager, PlaylistEntry, SpecificChapterData, WebieselaServer, perm_tree, \
-    permission, utils
-from giesela.ui import VerticalTextViewer
+from giesela import Giesela, GieselaPlayer, PlayerManager, SpecificChapterData, WebieselaServer, permission, utils
+from giesela.permission import perm_tree
+from giesela.playlist import LoadedPlaylistEntry, PlaylistEntry
+from giesela.ui import PromptYesNo, VerticalTextViewer
 from giesela.ui.custom import EntryEditor, NowPlayingEmbed
 from giesela.utils import parse_timestamp, similarity
 
@@ -62,6 +63,24 @@ async def _delayed_disconnect(player: GieselaPlayer, delay: float):
     await asyncio.sleep(delay)
     if player.is_connected:
         await player.disconnect()
+
+
+def _check_if_stealing(ctx: Context, player: GieselaPlayer) -> bool:
+    vc = player.voice_channel
+    if not vc:
+        return False
+
+    require_steal = False
+    for member in vc.members:
+        member = cast(Member, member)
+        if member == ctx.author:
+            continue
+        elif member == ctx.me:
+            continue
+        else:
+            require_steal = True
+
+    return require_steal
 
 
 class Player:
@@ -278,8 +297,11 @@ class Player:
         """Show the current entry."""
         await self._create_np_message(ctx.channel, ctx.guild.id)
 
+    async def _check_and_ensure_stealing(self, ctx: Context, player: GieselaPlayer) -> None:
+        if _check_if_stealing(ctx, player):
+            await self.bot.ensure_permission(ctx, perm_tree.summon.steal)
+
     @commands.guild_only()
-    @permission.has_permission(perm_tree.summon)
     @commands.command()
     async def summon(self, ctx: Context):
         """Call the bot to the summoner's voice channel."""
@@ -290,21 +312,32 @@ class Player:
             raise commands.CommandError("Couldn't find voice channel")
 
         player = await self.get_player(ctx.guild, channel=target)
-        # TODO check whether user is stealing and require perms.music.summon.steal!
+
+        if player.is_connected:
+            await self.bot.ensure_permission(ctx, perm_tree.summon.move)
+        else:
+            await self.bot.ensure_permission(ctx, perm_tree.summon.connect)
+
+        await self._check_and_ensure_stealing(ctx, player)
+
         await player.connect(target)
 
         if not player.is_playing:
             await player.play()
 
     @commands.guild_only()
-    @permission.has_permission(perm_tree.summon)
+    @permission.has_permission(perm_tree.summon.connect)
     @commands.command()
     async def disconnect(self, ctx: Context):
         """Disconnect from the voice channel"""
         player = await self.get_player(ctx.guild, create=False)
-        if player:
-            # TODO require "steal" if user is disconnecting for other users
-            await player.disconnect()
+
+        if not player:
+            raise commands.CommandError(f"No player in guild {ctx.guild}")
+
+        await self._check_and_ensure_stealing(ctx, player)
+
+        await player.disconnect()
 
     @commands.guild_only()
     @permission.has_permission(perm_tree.player.pause)
@@ -341,9 +374,21 @@ class Player:
     async def stop(self, ctx: Context):
         """Stops the player completely and removes all entries from the queue."""
         player = await self.get_player(ctx)
-        # TODO show prompt
+
+        text = "Do you really want to stop the player"
+
+        queue_length = len(player.queue)
+        if queue_length > 1:
+            text += f" and remove {queue_length} entries from the queue"
+
+        prompt = PromptYesNo(ctx.channel, bot=self.bot, user=ctx.author, text=f"{text}?")
+        if not await prompt:
+            return
+
         await player.stop()
         player.queue.clear()
+
+        await ctx.send(embed=Embed(description="Stopped the player", colour=Colour.green()))
 
     @commands.guild_only()
     @permission.has_permission(perm_tree.player.volume)
@@ -484,7 +529,8 @@ class Player:
                 if ctx.guild is None:
                     raise commands.CommandError("You need to provide a query if you want to use this command outside of a guild")
 
-                # TODO only allow lyrics command without query for perms.music.queue.query.current
+                await self.bot.ensure_permission(ctx, perm_tree.queue.inspect.current)
+
                 player = await self.get_player(ctx)
                 if not player.current_entry:
                     raise commands.CommandError("There's no way for me to find lyrics for something that doesn't even exist!")

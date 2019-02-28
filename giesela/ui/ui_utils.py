@@ -1,11 +1,14 @@
 import asyncio
 import inspect
 import logging
-from typing import Callable, Dict, List, Union
+from typing import Callable, Dict, List, TYPE_CHECKING, Union
 
 from discord import Client, Embed, Emoji
 from discord.ext.commands import Command, Context
 from discord.ext.commands.bot import BotBase
+
+if TYPE_CHECKING:
+    from giesela import Giesela
 
 __all__ = ["EmojiType", "EmbedLimits", "copy_embed", "format_embed", "count_embed_chars", "CustomParamsCommand", "MenuCommandGroup"]
 
@@ -113,6 +116,7 @@ class MenuCommandGroup(BotBase, _FakeClient):
             self.remove_command("help")
 
         self._dynamic_commands = []
+        self.check_once(self._permission_check)
 
     def __getattr__(self, item):
         return getattr(self.bot, item)
@@ -120,6 +124,16 @@ class MenuCommandGroup(BotBase, _FakeClient):
     async def invoke(self, ctx: Context):
         ctx.client = self.bot
         await super().invoke(ctx)
+
+    async def _permission_check(self, ctx: Context) -> bool:
+        from giesela.permission import get_decorated_permissions
+
+        bot: "Giesela" = self.bot
+
+        return all((
+            await bot.ensure_permission(ctx, *get_decorated_permissions(ctx.command, global_only=True), global_only=True),
+            await bot.ensure_permission(ctx, *get_decorated_permissions(ctx.command, global_only=False), global_only=False),
+        ))
 
     def add_dynamic_command(self, cmd: Command):
         self.add_command(cmd)

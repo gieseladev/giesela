@@ -10,7 +10,7 @@
     title: span.now-playing__text-content__details__track
     artist: span.now-playing__text-content__details__artist
     cover:
-      selector: .now-playing__wrapper img
+      selector: .now-playing__track__img-wrapper img
       attribute: data-src
 
 - name: ANISON.FM

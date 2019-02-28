@@ -1,6 +1,7 @@
 import logging
 import random
 import textwrap
+import time
 import traceback
 from contextlib import redirect_stdout
 from io import StringIO
@@ -10,7 +11,8 @@ from discord import Message
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, RestartSignal, TerminateSignal, perm_tree, permission
+from giesela import Giesela, RestartSignal, TerminateSignal, permission, utils
+from giesela.permission import perm_tree
 from giesela.shell import InterpreterUnavailable
 from giesela.ui.custom import ShellUI
 
@@ -43,8 +45,15 @@ class AdminTools:
                     "🤙", "🤞"
                 ])
 
+                ts = goodbye_message.get("timestamp")
+                if ts:
+                    time_diff = int(time.time()) - ts
+                    time_str = utils.format_time(time_diff)
+                else:
+                    time_str = "who knows how long"
+
                 try:
-                    await self.bot.http.edit_message(message_id, channel_id, content=f"{emoji} I'm back!")
+                    await self.bot.http.edit_message(message_id, channel_id, content=f"{emoji} I'm back after {time_str}!")
                 except Exception as e:
                     log.warning(f"Couldn't update goodbye message: {e}")
 
@@ -124,6 +133,7 @@ class AdminTools:
         msg: Message = await ctx.send(":wave: goodbye")
 
         await self.bot.persist("goodbye_message", {
+            "timestamp": int(time.time()),
             "channel_id": msg.channel.id,
             "message_id": msg.id,
         })
