@@ -263,7 +263,7 @@ class PermManager:
         return res == b"1"
 
     async def target_has_role(self, target: RoleTarget, role: RoleOrId) -> bool:
-        """Check whether a roletarget has a role"""
+        """Check whether a `RoleTarget` has a role"""
         role_id = role.absolute_role_id if isinstance(role, Role) else role
         target_key = f"{self._redis_prefix}:targets:{target}"
 
@@ -328,7 +328,7 @@ class PermManager:
 
         Results have the following structure:
         +----------+--------------------+--------------------------------------+
-        |    key   |        type        |             desciprition             |
+        |    key   |        type        |             description              |
         +----------+--------------------+--------------------------------------+
         | _id      | str                | absolute role id                     |
         +----------+--------------------+--------------------------------------+

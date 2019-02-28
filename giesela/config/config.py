@@ -88,11 +88,14 @@ class FlattenProxy:
 
         config = self._config
 
-        config_id = config._id
+        config_id = config.config_id
         log.debug(f"{config_id} setting {key} to {value}")
 
-        mongodb_update = config._mongodb.update_one(dict(_id=config._id), {"$set": {key: value}}, upsert=True)
-        redis_update = config._redis.set(config._prefix_key(key), rapidjson.dumps(value))
+        mongo_coll = getattr(config, "_mongodb")
+        redis_cli = getattr(config, "_redis")
+
+        mongodb_update = mongo_coll.update_one(dict(_id=config.config_id), {"$set": {key: value}}, upsert=True)
+        redis_update = redis_cli.set(config.prefix_key(key), rapidjson.dumps(value))
 
         await asyncio.gather(mongodb_update, redis_update)
 
@@ -102,10 +105,10 @@ class FlattenProxy:
         if not self._virtual_parent or isinstance(self._virtual_target, abstract.ConfigObject):
             raise KeyError(f"Cannot set {key}! It's a config object!")
 
-        config_id = self._config._id
+        config_id = self._config.config_id
         log.debug(f"{config_id} resetting {key}")
 
-        await self._config._reset(key)
+        await self._config.reset_specified_key(key)
 
 
 class _RedisConfig(metaclass=abc.ABCMeta):
@@ -123,7 +126,11 @@ class _RedisConfig(metaclass=abc.ABCMeta):
     def __getattr__(self, item):
         return FlattenProxy(self, key=item.split("."))
 
-    def _prefix_key(self, key: str) -> str:
+    @property
+    def config_id(self) -> Any:
+        return self._id
+
+    def prefix_key(self, key: str) -> str:
         return self._prefix + key
 
     async def dump_to_redis(self, document: Dict[str, Any]):
@@ -147,9 +154,9 @@ class _RedisConfig(metaclass=abc.ABCMeta):
         proxy = FlattenProxy(self, key.split("."))
         await proxy.reset()
 
-    async def _reset(self, key: str):
+    async def reset_specified_key(self, key: str):
         await asyncio.gather(self._mongodb.update_one(dict(_id=self._id), {"$unset": {key: True}}),
-                             self._redis.delete(self._prefix_key(key)))
+                             self._redis.delete(self.prefix_key(key)))
 
     @abc.abstractmethod
     async def load(self) -> abstract.ConfigObject:
@@ -159,7 +166,7 @@ class _RedisConfig(metaclass=abc.ABCMeta):
         raise AttributeError(f"{key} doesn't exist")
 
     async def get(self, key: str):
-        prefixed_key = self._prefix_key(key)
+        prefixed_key = self.prefix_key(key)
         log.debug(f"getting from redis {prefixed_key}")
         value = await self._redis.get(prefixed_key)
         if value is None:
@@ -188,7 +195,7 @@ class RuntimeConfig(_RedisConfig, _AsyncRuntime):
         value = abstract.traverse_config(self.default, key)
 
         await asyncio.gather(self._mongodb.update_one(dict(_id=self._id), {"$unset": {key: True}}),
-                             self._redis.set(self._prefix_key(key), rapidjson.dumps(value)))
+                             self._redis.set(self.prefix_key(key), rapidjson.dumps(value)))
 
     async def load(self) -> Runtime:
         log.debug("getting runtime config from mongo")

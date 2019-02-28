@@ -4,7 +4,7 @@ import logging
 from collections import OrderedDict
 from typing import Any, Optional, Type
 
-from discord import Colour, Embed, TextChannel, User
+from discord import Client, Colour, Embed, Message, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -24,11 +24,16 @@ class PlaylistRecoveryUI(AutoHelpEmbed, MessageableEmbed, Abortable, Interactabl
 
     _current_task: asyncio.Task
 
-    def __init__(self, channel: TextChannel, user: User = None, **kwargs) -> None:
+    def __init__(self, channel: TextChannel, *,
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 delete_msgs: bool = True,
+                 **kwargs) -> None:
         self.extractor = kwargs.pop("extractor")
         self.recovery = kwargs.pop("recovery")
 
-        super().__init__(channel, user=user, **kwargs)
+        super().__init__(channel, bot=bot, user=user, message=message, delete_msgs=delete_msgs, **kwargs)
 
         self.recovery.provide_extractor(self.extractor)
 

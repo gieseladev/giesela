@@ -2,7 +2,7 @@ import asyncio
 from typing import List, NamedTuple, Optional, Type
 
 import aiohttp
-from discord import Colour, Embed, TextChannel
+from discord import Client, Colour, Embed, Message, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -163,8 +163,14 @@ class _BaseEditor(AutoHelpEmbed, InteractableEmbed, MessageableEmbed):
     bot: Giesela
     aiosession: aiohttp.ClientSession
 
-    def __init__(self, channel: TextChannel, *, editor: EditBase, **kwargs) -> None:
-        super().__init__(channel, **kwargs)
+    def __init__(self, channel: TextChannel, *,
+                 editor: EditBase,
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 delete_msgs: bool = True,
+                 **kwargs) -> None:
+        super().__init__(channel, bot=bot, user=user, message=message, delete_msgs=delete_msgs, **kwargs)
 
         self.editor = editor
 
@@ -304,10 +310,17 @@ class _BaseEditor(AutoHelpEmbed, InteractableEmbed, MessageableEmbed):
 class ChapterEditor(_BaseEditor):
     editor: EditChapter
 
-    def __init__(self, channel: TextChannel, *, entry_editor: EditEntry, chapter: SpecificChapterData, **kwargs) -> None:
+    def __init__(self, channel: TextChannel, *,
+                 entry_editor: EditEntry,
+                 chapter: SpecificChapterData,
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 delete_msgs: bool = True,
+                 **kwargs) -> None:
         self.entry_editor = entry_editor
         editor = EditChapter.from_entry(chapter)
-        super().__init__(channel, editor=editor, **kwargs)
+        super().__init__(channel, editor=editor, bot=bot, user=user, message=message, delete_msgs=delete_msgs, **kwargs)
 
     @classmethod
     def parse_time_value(cls, value: str):
@@ -364,10 +377,16 @@ class ChapterEditor(_BaseEditor):
 class EntryEditor(VerticalTextViewer, _BaseEditor):
     editor: EditEntry
 
-    def __init__(self, channel: TextChannel, *, entry: PlayableEntry, **kwargs) -> None:
+    def __init__(self, channel: TextChannel, *,
+                 entry: PlayableEntry,
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 delete_msgs: bool = True,
+                 **kwargs) -> None:
         self._entry = entry
         editor = EditEntry.from_entry(entry)
-        super().__init__(channel, editor=editor, **kwargs)
+        super().__init__(channel, editor=editor, bot=bot, user=user, message=message, delete_msgs=delete_msgs, **kwargs)
 
     @property
     def original(self):

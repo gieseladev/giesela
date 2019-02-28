@@ -15,10 +15,13 @@ log = logging.getLogger(__name__)
 
 
 class EditableEmbed:
-    def __init__(self, channel: TextChannel, message: Message = None) -> None:
+    def __init__(self, channel: TextChannel, message: Message = None, **kwargs) -> None:
         self.channel = channel
 
         self._message = message
+
+        if kwargs:
+            raise ValueError(f"Unexpected kwargs for {self}: {kwargs}")
 
     @property
     def message(self) -> Optional[Message]:
@@ -81,7 +84,7 @@ class LoadingBar(EditableEmbed):
     _message_future: Optional[asyncio.Future]
     _cancelled_messages: int
 
-    def __init__(self, channel: TextChannel, **options) -> None:
+    def __init__(self, channel: TextChannel, *, message: Message = None, **options) -> None:
         self.header = options.pop("header", "Please Wait")
         self.colour = options.pop("colour", 0xf90a7d)
         self.total_items = options.pop("total_items", None)
@@ -91,7 +94,7 @@ class LoadingBar(EditableEmbed):
         self.show_percentage = options.pop("show_percentage", True)
 
         self.custom_embed_data = options.pop("custom_embed_data", {})
-        super().__init__(channel, **options)
+        super().__init__(channel, message=message, **options)
 
         self.progress = 0
         self.times = []
@@ -163,9 +166,12 @@ class LoadingBar(EditableEmbed):
 
 
 class UpdatingMessage(EditableEmbed):
-    def __init__(self, channel: TextChannel, *, callback: Callable[[], Union[Embed, Awaitable[Embed]]] = None, **kwargs) -> None:
+    def __init__(self, channel: TextChannel, *,
+                 callback: Callable[[], Union[Embed, Awaitable[Embed]]] = None,
+                 message: Message = None,
+                 **kwargs) -> None:
         self.callback = callback
-        super().__init__(channel, **kwargs)
+        super().__init__(channel, message=message, **kwargs)
 
     async def get_embed(self) -> Embed:
         if not self.callback:
@@ -186,8 +192,11 @@ class UpdatingMessage(EditableEmbed):
 class IntervalUpdatingMessage(UpdatingMessage, Startable, Stoppable):
     _runner: Optional[asyncio.Task]
 
-    def __init__(self, channel: TextChannel, *, interval: float = 5, **kwargs) -> None:
-        super().__init__(channel, **kwargs)
+    def __init__(self, channel: TextChannel, *,
+                 interval: float = 5,
+                 message: Message = None,
+                 **kwargs) -> None:
+        super().__init__(channel, message=message, **kwargs)
 
         self.interval = interval
 

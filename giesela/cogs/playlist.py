@@ -113,7 +113,7 @@ class PlaylistCog:
         changelog = await builder.display()
         if changelog:
             frame = Embed(title=f"Saved changes to {playlist.name}", colour=Colour.green())
-            viewer = VerticalTextViewer(ctx.channel, bot=self.bot, content=changelog, embed_frame=frame)
+            viewer = VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=changelog, embed_frame=frame)
             await viewer.display()
         else:
             with suppress(Forbidden):

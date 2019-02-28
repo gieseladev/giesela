@@ -104,7 +104,7 @@ class AdminTools:
         player = await self.bot.get_player(ctx)
 
         try:
-            shell = ShellUI(ctx, shell=interpreter, variables=dict(player=player))
+            shell = ShellUI(ctx.channel, shell=interpreter, variables=dict(player=player, ctx=ctx), bot=self.bot, user=ctx.author)
         except InterpreterUnavailable as e:
             raise commands.CommandError(e.msg)
 

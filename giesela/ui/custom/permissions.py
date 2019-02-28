@@ -1,7 +1,7 @@
 import logging
 from typing import List, Optional, Tuple
 
-from discord import Colour, Embed, TextChannel
+from discord import Client, Colour, Embed, Message, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -17,8 +17,15 @@ log = logging.getLogger(__name__)
 class RoleEditor(AutoHelpEmbed, VerticalTextViewer, MessageableEmbed):
     _flat_perms: List[Tuple[str, bool]]
 
-    def __init__(self, channel: TextChannel, *, perm_manager: PermManager, role: Role, **kwargs) -> None:
-        super().__init__(channel, **kwargs)
+    def __init__(self, channel: TextChannel, *,
+                 perm_manager: PermManager,
+                 role: Role,
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 delete_msgs: bool = True,
+                 **kwargs) -> None:
+        super().__init__(channel, bot=bot, user=user, message=message, delete_msgs=delete_msgs, **kwargs)
 
         self.perm_manager = perm_manager
         self.role = role

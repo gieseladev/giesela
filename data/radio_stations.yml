@@ -10,7 +10,7 @@
     title: span.now-playing__text-content__details__track
     artist: span.now-playing__text-content__details__artist
     cover:
-      selector: div.now-playing__track__img-wrapper img
+      selector: .now-playing__wrapper img
       attribute: data-src
 
 - name: ANISON.FM
@@ -26,6 +26,6 @@
     artist: div#on_air span.anime
     album: div#on_air span.anime
     cover:
-      selector: a#curent_poster img
+      selector: "a#curent_poster img"
       attribute: src
     remaining_duration: span#duration

@@ -16,13 +16,13 @@ _DEFAULT = object()
 class Stoppable(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     async def stop(self):
-        pass
+        ...
 
 
 class Startable(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     async def start(self):
-        pass
+        ...
 
 
 class HasBot(metaclass=abc.ABCMeta):
@@ -35,13 +35,13 @@ class HasBot(metaclass=abc.ABCMeta):
 class ReactionHandler(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     async def on_reaction(self, emojj: EmojiType, user: User):
-        pass
+        ...
 
 
 class MessageHandler(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     async def on_message(self, message: Message):
-        pass
+        ...
 
 
 class CanSignalStop(metaclass=abc.ABCMeta):

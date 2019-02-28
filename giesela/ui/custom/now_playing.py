@@ -1,7 +1,7 @@
 import asyncio
 from typing import Optional
 
-from discord import Colour, Embed, Message, TextChannel, User
+from discord import Client, Colour, Embed, Message, TextChannel, User
 
 from giesela import BaseEntry, ChapterEntry, GieselaPlayer, RadioEntry, SpecificChapterData, perm_tree, permission, utils
 from giesela.ui import create_player_bar
@@ -40,8 +40,16 @@ class NowPlayingEmbed(IntervalUpdatingMessage, InteractableEmbed):
     _delayed_update_task: Optional[asyncio.Task]
     _show_detailed_task: Optional[asyncio.Task]
 
-    def __init__(self, channel: TextChannel, *, player: GieselaPlayer, seek_amount: float = 30, show_detailed_duration: float = 20, **kwargs) -> None:
-        super().__init__(channel, **kwargs)
+    def __init__(self, channel: TextChannel, *,
+                 player: GieselaPlayer,
+                 seek_amount: float = 30,
+                 show_detailed_duration: float = 20,
+                 interval: float = 5,
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 **kwargs) -> None:
+        super().__init__(channel, interval=interval, bot=bot, user=user, message=message, **kwargs)
         self.player = player
         self.seek_amount = seek_amount
 

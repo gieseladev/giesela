@@ -1,7 +1,7 @@
 from textwrap import TextWrapper
 from typing import Any, Mapping, Optional, Tuple
 
-from discord import Embed, Message
+from discord import Client, Embed, Message, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import CommandNotFound, Context
 
@@ -37,16 +37,20 @@ def prepare_shell_line(line: ShellLine) -> str:
 
 
 class ShellUI(AutoHelpEmbed, MessageableEmbed, VerticalTextViewer):
-    ctx: Context
     shell: GieselaShell
 
     run_timeout: Optional[int]
     upload_url: Optional[Tuple[str, str]]
 
-    def __init__(self, ctx: Context, *, variables: Mapping[str, Any] = None, **kwargs) -> None:
+    def __init__(self, channel: TextChannel, *,
+                 variables: Mapping[str, Any] = None,
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 delete_msgs: bool = True,
+                 **kwargs) -> None:
         shell = kwargs.pop("shell", None)
         interpreter_kwargs = variables or {}
-        interpreter_kwargs.update(ctx=ctx)
 
         if isinstance(shell, str):
             shell = GieselaShell.find_interpreter(shell, **interpreter_kwargs)
@@ -55,9 +59,8 @@ class ShellUI(AutoHelpEmbed, MessageableEmbed, VerticalTextViewer):
 
         self.shell = shell
 
-        super().__init__(ctx.channel, user=ctx.author, bot=ctx.bot, **kwargs)
+        super().__init__(channel, bot=bot, user=user, message=message, delete_msgs=delete_msgs, **kwargs)
 
-        self.ctx = ctx
         self.run_timeout = None
         self.upload_url = None
 

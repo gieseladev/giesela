@@ -244,8 +244,8 @@ PermissionType = Union[str, PermNodeMeta]
 
 
 def order_by_least_specificity(perms: CompiledPerms) -> List[Tuple[str, int]]:
-    """Order the permissions by their specificity in ascending orrder"""
-    return [(key, perms[key]) for key in sorted(perms.keys(), key=len)]
+    """Order the permissions by their specificity in ascending order"""
+    return [(key, perms[key]) for key in sorted(perms.keys(), key=lambda s: len(s))]
 
 
 def calculate_final_permissions(perms: Iterable[CompiledPerms]) -> CompiledPerms:

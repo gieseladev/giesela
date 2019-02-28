@@ -7,7 +7,7 @@ import operator
 import textwrap
 from typing import Any, Awaitable, Callable, Dict, List, Optional, Tuple, TypeVar, Union
 
-from discord import Embed, Emoji, Message, RawReactionActionEvent, TextChannel, User
+from discord import Client, Embed, Emoji, Message, RawReactionActionEvent, TextChannel, User
 from discord.ext.commands import Command, CommandError, CommandInvokeError, Context
 from discord.ext.commands.bot import BotBase
 
@@ -40,8 +40,12 @@ class InteractableEmbed(HasListener, HasBot, EditableEmbed, ReactionHandler, Sta
 
     _emojis: List[Tuple[EmojiType, int]]
 
-    def __init__(self, channel: TextChannel, *, user: User = None, **kwargs) -> None:
-        super().__init__(channel, **kwargs)
+    def __init__(self, channel: TextChannel, *,
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 **kwargs) -> None:
+        super().__init__(channel, bot=bot, message=message, **kwargs)
         self.user = user
         self.handlers = {}
         self._emojis = []
@@ -217,8 +221,13 @@ class MessageableEmbed(HasListener, HasBot, EditableEmbed, MessageHandler, Start
     _group: MenuCommandGroup
     error: Optional[str]
 
-    def __init__(self, channel: TextChannel, *, user: User = None, delete_msgs: bool = True, **kwargs) -> None:
-        super().__init__(channel, **kwargs)
+    def __init__(self, channel: TextChannel, *,
+                 bot: Client,
+                 user: Optional[User],
+                 delete_msgs: bool = True,
+                 message: Message = None,
+                 **kwargs) -> None:
+        super().__init__(channel, bot=bot, message=message, **kwargs)
 
         self.user = user
         self.delete_msgs = delete_msgs
@@ -299,7 +308,7 @@ class MessageableEmbed(HasListener, HasBot, EditableEmbed, MessageHandler, Start
         await super().on_message(message)
 
         if self.delete_msgs:
-            asyncio.ensure_future(message.delete())
+            _ = asyncio.ensure_future(message.delete())
 
         await self._group.process_commands(message)
 
@@ -324,7 +333,11 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
 
     _current_index: int
 
-    def __init__(self, channel: TextChannel, **kwargs) -> None:
+    def __init__(self, channel: TextChannel, *,
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 **kwargs) -> None:
         self.embeds = kwargs.pop("embeds", None)
         no_controls_for_single_page = kwargs.pop("no_controls_for_single_page", True)
 
@@ -333,7 +346,7 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
         if not (issubclass(type(self), _HorizontalPageViewer) or bool(self.embeds) ^ bool(self.embed_callback)):
             raise ValueError("You need to provide either the `embeds` or the `embed_callback` keyword argument")
 
-        super().__init__(channel, **kwargs)
+        super().__init__(channel, bot=bot, user=user, message=message, **kwargs)
 
         if self.embeds and len(self.embeds) == 1 and no_controls_for_single_page:
             self.disable_handler(self.previous_page)
@@ -399,7 +412,7 @@ class ItemPicker(_HorizontalPageViewer, Abortable):
 
 
 class EmbedViewer(_HorizontalPageViewer, Abortable):
-    pass
+    ...
 
 
 class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
@@ -430,7 +443,11 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
     _current_line: int
     _lines_displayed: int
 
-    def __init__(self, channel: TextChannel, **kwargs) -> None:
+    def __init__(self, channel: TextChannel, *,
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 **kwargs) -> None:
         self._embed_frame = kwargs.pop("embed_frame", None)
         if isinstance(self._embed_frame, Embed):
             self._embed_frame = self._embed_frame.to_dict()
@@ -454,7 +471,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         if not (issubclass(type(self), VerticalTextViewer) or bool(self.lines) ^ bool(self.line_callback)):
             raise ValueError("You need to provide either the `content` or the `content_callback` keyword argument")
 
-        super().__init__(channel, **kwargs)
+        super().__init__(channel, bot=bot, user=user, message=message, **kwargs)
 
         self._current_line = 0
         self._lines_displayed = 0

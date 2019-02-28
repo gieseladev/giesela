@@ -102,7 +102,7 @@ async def get_command_help(ctx: Context, *cmds: str) -> Optional[Embed]:
                 if cmd is None:
                     return _command_not_found(key)
             except AttributeError:
-                em = Embed(description=f"Command **{cmd.name}** has no subcommands", colour=Colour.red())
+                em = Embed(description=f"Command **{cmd.name}** has no sub-commands", colour=Colour.red())
                 return em
 
     embeds = await help_formatter.format_help_for(ctx, cmd)
@@ -112,9 +112,12 @@ async def get_command_help(ctx: Context, *cmds: str) -> Optional[Embed]:
 class HelpEmbed(InteractableEmbed):
     help_embed: Embed
 
-    def __init__(self, channel: TextChannel, *, help_embed: Embed, **kwargs) -> None:
+    def __init__(self, channel: TextChannel, *,
+                 help_embed: Embed,
+                 user: Optional[User],
+                 **kwargs) -> None:
         self.help_embed = help_embed
-        super().__init__(channel, **kwargs)
+        super().__init__(channel, user=user, **kwargs)
 
     def __await__(self):
         return self.display().__await__()
@@ -218,14 +221,14 @@ class AutoHelpEmbed(HasBot, HasHelp, metaclass=abc.ABCMeta):
     @emoji_handler("❓", pos=10000)
     async def show_help(self, _, user: User):
         """Open this very box"""
-        self.toggle_help_embed(self.channel, bot=self.bot, user=user)
+        _ = self.toggle_help_embed(self.channel, bot=self.bot, user=user)
 
     @commands.command()
     async def help(self, ctx: Context, *cmds: str):
         """Even more help"""
         if not cmds:
-            self.toggle_help_embed(self.channel, bot=self.bot, user=ctx.author)
+            _ = self.toggle_help_embed(self.channel, bot=self.bot, user=ctx.author)
             return
 
         embed = await get_command_help(ctx, *cmds)
-        self.trigger_help_embed(self.channel, bot=self.bot, user=ctx.author, embed=embed)
+        _ = self.trigger_help_embed(self.channel, bot=self.bot, user=ctx.author, embed=embed)

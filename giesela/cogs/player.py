@@ -267,7 +267,7 @@ class Player:
             await np_embed.delete()
 
         player = await self.get_player(guild_id)
-        np_embed = NowPlayingEmbed(channel, bot=self.bot, player=player, message=message)
+        np_embed = NowPlayingEmbed(channel, bot=self.bot, player=player, message=message, user=None)
         self.np_messages[guild_id] = np_embed
         await np_embed.start()
 

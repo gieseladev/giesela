@@ -26,6 +26,8 @@ def _check_unicode(val):
 class HTTPRequest(BaseHTTPRequestHandler):
 
     def __init__(self, request_text) -> None:
+        super().__init__(None, None, None)
+
         self.rfile = BytesIO(request_text)
         self.raw_requestline = self.rfile.readline()
         self.error_code = self.error_message = None
@@ -438,7 +440,7 @@ class WebSocket(object):
                         try:
                             self._handlePacket()
                         finally:
-                            self.state = self.HEADERB1
+                            self.state = HEADERB1
                             self.data = bytearray()
 
                     # we have no mask and some payload

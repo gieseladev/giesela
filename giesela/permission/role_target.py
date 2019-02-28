@@ -159,6 +159,7 @@ async def get_role_targets_for(bot: BotBase, target: RoleTargetType, *, global_o
     return targets
 
 
+# noinspection PyUnresolvedReferences
 @dataclass
 class Target:
     """Represents the mapping from `RoleTarget` to `Role`.

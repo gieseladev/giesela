@@ -1,6 +1,6 @@
-from typing import List, Optional
+from typing import Generic, List, Optional, TypeVar
 
-from discord import Embed, TextChannel
+from discord import Client, Embed, Message, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -9,10 +9,19 @@ from giesela.ui import prefab
 from ..help import AutoHelpEmbed
 from ..interactive import ItemPicker, MessageableEmbed
 
+T = TypeVar("T", bound=PlayableEntry)
 
-class EntrySearchUI(AutoHelpEmbed, MessageableEmbed, ItemPicker):
-    def __init__(self, channel: TextChannel, *, player: GieselaPlayer, results: List[PlayableEntry], **kwargs) -> None:
-        super().__init__(channel, **kwargs)
+
+class EntrySearchUI(AutoHelpEmbed, MessageableEmbed, ItemPicker, Generic[T]):
+    def __init__(self, channel: TextChannel, *,
+                 player: GieselaPlayer,
+                 results: List[T],
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 delete_msgs: bool = True,
+                 **kwargs) -> None:
+        super().__init__(channel, bot=bot, user=user, delete_msgs=delete_msgs, message=message, **kwargs)
         self.player = player
         self.results = results
 
@@ -25,7 +34,7 @@ class EntrySearchUI(AutoHelpEmbed, MessageableEmbed, ItemPicker):
         return self.current_index % len(self.results)
 
     @property
-    def current_result(self) -> PlayableEntry:
+    def current_result(self) -> T:
         return self.results[self.normalised_index]
 
     async def get_current_embed(self) -> Embed:
@@ -34,7 +43,7 @@ class EntrySearchUI(AutoHelpEmbed, MessageableEmbed, ItemPicker):
         em.set_footer(text=f"Result {self.normalised_index + 1}/{len(self.results)}")
         return em
 
-    async def choose(self) -> Optional[PlayableEntry]:
+    async def choose(self) -> Optional[T]:
         result = await self.display()
         if result is not None:
             return self.current_result

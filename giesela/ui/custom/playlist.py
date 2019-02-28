@@ -5,7 +5,7 @@ import logging
 import textwrap
 from typing import List, Optional, TYPE_CHECKING, Tuple
 
-from discord import Colour, Embed, Guild, TextChannel, User
+from discord import Client, Colour, Embed, Guild, Message, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -32,7 +32,7 @@ def create_basic_embed(playlist: Playlist) -> Embed:
         embed.set_author(name=playlist.author.display_name, icon_url=playlist.author.avatar_url)
     else:
         embed.set_author(name="Unknown Author")
-        
+
     embed.set_footer(text="{progress_bar}")
     return embed
 
@@ -40,8 +40,14 @@ def create_basic_embed(playlist: Playlist) -> Embed:
 class _PlaylistEmbed(VerticalTextViewer, HasBot, metaclass=abc.ABCMeta):
     player_cog: "Player"
 
-    def __init__(self, channel: TextChannel, *, playlist: Playlist, embed_frame=None, **kwargs) -> None:
-        super().__init__(channel, embed_frame=embed_frame or create_basic_embed(playlist), **kwargs)
+    def __init__(self, channel: TextChannel, *,
+                 playlist: Playlist,
+                 embed_frame=None,
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 **kwargs) -> None:
+        super().__init__(channel, embed_frame=embed_frame or create_basic_embed(playlist), bot=bot, user=user, message=message, **kwargs)
 
         self.playlist = playlist
         self.player_cog = self.bot.cogs["Player"]
@@ -71,12 +77,16 @@ class _PlaylistEmbed(VerticalTextViewer, HasBot, metaclass=abc.ABCMeta):
 
 
 class PlaylistViewer(_PlaylistEmbed):
-    def __init__(self, channel: TextChannel, **kwargs) -> None:
-        playlist = kwargs["playlist"]
+    def __init__(self, channel: TextChannel, *,
+                 playlist: Playlist,
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 **kwargs) -> None:
         embed = create_basic_embed(playlist)
         embed.add_field(name="Length", value=f"{len(playlist)} entries")
         embed.add_field(name="Duration", value=utils.format_time(playlist.total_duration))
-        super().__init__(channel, embed_frame=embed, **kwargs)
+        super().__init__(channel, embed_frame=embed, playlist=playlist, bot=bot, user=user, message=message, **kwargs)
 
     @emoji_handler("🎵", pos=999)
     async def play_playlist(self, *_):
@@ -90,8 +100,15 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
     _highlighted_line: Optional[int]
     _processing: Optional[Tuple[str, str]]
 
-    def __init__(self, channel: TextChannel, **kwargs) -> None:
-        super().__init__(channel, **kwargs)
+    def __init__(self, channel: TextChannel, *,
+                 playlist: Playlist,
+                 embed_frame=None,
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 delete_msgs: bool = True,
+                 **kwargs) -> None:
+        super().__init__(channel, playlist=playlist, embed_frame=embed_frame, bot=bot, user=user, message=message, delete_msgs=delete_msgs, **kwargs)
         self.extractor = self.player_cog.extractor
         self.playlist_editor = self.playlist.edit()
 
@@ -147,7 +164,7 @@ class PlaylistBuilder(AutoHelpEmbed, _PlaylistEmbed, MessageableEmbed):
     @contextlib.asynccontextmanager
     async def processing(self, value: str, title: str = "Processing"):
         self._processing = (value, title)
-        asyncio.ensure_future(self.show_window())
+        _ = asyncio.ensure_future(self.show_window())
 
         try:
             async with self.channel.typing():

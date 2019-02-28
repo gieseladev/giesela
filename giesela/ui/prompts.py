@@ -1,4 +1,6 @@
-from discord import Colour, Embed, TextChannel
+from typing import Optional
+
+from discord import Client, Colour, Embed, Message, TextChannel, User
 
 from .interactive import InteractableEmbed, emoji_handler
 
@@ -6,13 +8,17 @@ from .interactive import InteractableEmbed, emoji_handler
 class EmbedPrompt(InteractableEmbed):
     embed: Embed
 
-    def __init__(self, channel: TextChannel, **kwargs) -> None:
+    def __init__(self, channel: TextChannel, *,
+                 bot: Client,
+                 user: Optional[User],
+                 message: Message = None,
+                 **kwargs) -> None:
         embed = kwargs.pop("embed", False) or kwargs.pop("text", "Are you sure?")
         if isinstance(embed, str):
             embed = Embed(title=embed, colour=Colour.orange())
         self.embed = embed
 
-        super().__init__(channel, **kwargs)
+        super().__init__(channel, bot=bot, user=user, message=message, **kwargs)
 
     def __await__(self):
         return self.prompt().__await__()
