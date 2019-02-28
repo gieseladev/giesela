@@ -29,6 +29,9 @@ def _get_bot_and_target(ctx: TargetType, bot: Optional[Giesela]) -> Tuple[Giesel
 async def has_permission(ctx: TargetType, *perms: PermissionType, bot: Giesela = None, global_only: bool = False) -> bool:
     """Check whether has permissions"""
     bot, target = _get_bot_and_target(ctx, bot)
+    if isinstance(target, Context):
+        target = target.author
+        
     return await bot.has_permission(target, *perms, global_only=global_only)
 
 

@@ -320,7 +320,7 @@ class PlaylistCog:
         await ensure_user_has_author_perms(playlist, ctx, "transfer it")
         playlist.transfer(user)
 
-        em = Embed(title=f"Transferred to {user.mention}")
+        em = Embed(description=f"Transferred to {user.mention}", colour=Colour.green())
         add_playlist_footer(em, playlist)
         await ctx.send(embed=em)
 
