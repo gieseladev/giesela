@@ -34,7 +34,7 @@ def get_role_target(target: Union[Role, Member, User, str], *, prefer_global: bo
 
         try:
             role_target.check()
-        except Exception as e:
+        except Exception:
             raise commands.CommandError(f"Target invalid: {target}")
 
     return role_target
@@ -301,14 +301,34 @@ class Permissions:
 
     @role_group.command("targets")
     async def role_targets_cmd(self, ctx: Context, role: str):
+        """Show the targets of a role"""
         role = await self.get_role(role, ctx)
         targets = await self.perm_manager.get_targets_with_role(role)
         await self._role_targets_show(ctx, targets)
 
     @commands.group("permission", invoke_without_command=True, aliases=["permissions", "perm", "perms"])
-    async def permission_group(self, ctx: Context) -> None:
-        """"""
-        raise commands.CommandError("WIP")
+    async def permission_group(self, ctx: Context, target: Union[Member, User, Role] = None) -> None:
+        """Inspect permissions"""
+        guild_id = ctx.guild.id if ctx.guild else None
+
+        if not target:
+            target = ctx.author
+
+        roles = await self.perm_manager.get_target_roles_for_guild(target, guild_id)
+
+        perms = calculate_final_permissions(role.compile_own_permissions() for role in roles)
+        granted_perms = [perm for perm, granted in perms.items() if granted]
+        keys = sorted(perm_tree.find_shortest_representation(granted_perms))
+
+        if not keys:
+            raise commands.CommandError(f"{target} doesn't have any permissions")
+
+        frame = Embed(title="Permissions", colour=Colour.blue())
+        frame.set_author(name=str(target))
+
+        await VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=keys, embed_frame=frame).display()
+        with contextlib.suppress(Forbidden):
+            await ctx.message.delete()
 
     @permission_group.command("can", aliases=["may", "has"])
     async def permission_can_cmd(self, ctx: Context, target: Union[Member, User, Role, str], cmd: CommandRef) -> None:
@@ -376,26 +396,6 @@ class Permissions:
             raise commands.CommandError(f"Couldn't load permission file: `{e}`")
 
         await ctx.send(embed=Embed(title="Loaded permission file!", colour=Colour.green()))
-
-    @commands.command("legacypermissions", aliases=["legacyperms"])
-    async def show_permissions(self, ctx: Context, *, target: Union[Member, User, Role, str] = None) -> None:
-        """Show permissions"""
-        guild_id = ctx.guild.id if ctx.guild else None
-        roles = await self.perm_manager.get_target_roles_for_guild(target or ctx.author, guild_id)
-
-        perms = calculate_final_permissions(role.compile_own_permissions() for role in roles)
-        granted_perms = [perm for perm, granted in perms.items() if granted]
-        keys = sorted(perm_tree.find_shortest_representation(granted_perms))
-
-        if not keys:
-            raise commands.CommandError(f"{target} doesn't have any permissions")
-
-        frame = Embed(title="Permissions", colour=Colour.blue())
-        frame.set_author(name=str(target))
-
-        await VerticalTextViewer(ctx.channel, bot=self.bot, user=ctx.author, content=keys, embed_frame=frame).display()
-        with contextlib.suppress(Forbidden):
-            await ctx.message.delete()
 
 
 def setup(bot: Giesela):
