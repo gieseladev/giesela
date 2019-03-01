@@ -10,8 +10,9 @@ from discord.ext.commands import Command, Context
 
 from giesela import Giesela, PermissionDenied
 from giesela.permission import PermManager, PermissionType, Role as PermRole, RoleContext, RoleTarget, Target, calculate_final_permissions, \
-    get_decorated_permissions, has_permission, perm_tree
+    create_new_role, get_decorated_permissions, has_permission, perm_tree, sort_targets_by_specificity
 from giesela.ui import PromptYesNo, VerticalTextViewer
+from giesela.ui.custom import RoleEditor, RoleViewer
 from giesela.utils import CommandRef
 
 log = logging.getLogger(__name__)
@@ -113,9 +114,14 @@ class Permissions:
         return role
 
     @commands.group("role", invoke_without_command=True, aliases=["roles"])
-    async def role_group(self, ctx: Context) -> None:
+    async def role_group(self, ctx: Context, role: str) -> None:
         """Role commands"""
-        raise commands.CommandError("WIP")
+        role = await self.get_role(role, ctx)
+        viewer = RoleViewer(ctx.channel, perm_manager=self.perm_manager, role=role, bot=self.bot, user=ctx.author)
+        await viewer.display()
+
+        with contextlib.suppress(Forbidden):
+            await ctx.message.delete()
 
     async def _role_list_show(self, ctx: Context, roles: Iterable[PermRole]) -> None:
         role_lines: List[str] = []
@@ -137,23 +143,29 @@ class Permissions:
             await ctx.message.delete()
 
     async def _role_targets_show(self, ctx: Context, targets: Iterable[Union[Target, RoleTarget]]) -> None:
+        targets_iter = (target.role_target if isinstance(target, Target) else target for target in targets)
+
         guild_id: Optional[int] = ctx.guild.id if ctx.guild else None
 
-        # TODO sort targets by least specific first
+        if guild_id:
+            def _cond(target: RoleTarget) -> bool:
+                try:
+                    # don't show other guild's targets
+                    return guild_id == target.guild_id
+                except TypeError:
+                    return True
+
+            targets_iter = (target for target in targets_iter if _cond(target))
+
+        targets = sort_targets_by_specificity(targets_iter)
 
         target_lines: List[str] = []
         for target in targets:
-            role_target = target.role_target if isinstance(target, Target) else target
-            if guild_id and role_target.has_guild_id:
-                # don't show other guild's targets
-                if guild_id != role_target.guild_id:
-                    continue
-
-            real_target = role_target.resolve(self.bot)
+            real_target = target.resolve(self.bot)
             if real_target:
                 target_line = f"- {real_target}"
             else:
-                target_line = f"- {role_target}"
+                target_line = f"- {target}"
 
             target_lines.append(target_line)
 
@@ -201,9 +213,33 @@ class Permissions:
         await self._role_list_show(ctx, roles)
 
     @role_group.command("create", aliases=["make", "mk"])
-    async def role_create_cmd(self, ctx: Context) -> None:
-        """"""
-        raise commands.CommandError("WIP")
+    async def role_create_cmd(self, ctx: Context, name: str, context: str = None) -> None:
+        """Create a new role"""
+        if context:
+            try:
+                context = RoleContext(context)
+            except ValueError:
+                raise commands.CommandError(f"Unknown context: {context}")
+        else:
+            context = RoleContext.GUILD
+
+        if context.is_guild_specific:
+            if ctx.guild:
+                guild_id = ctx.guild.id
+            else:
+                raise commands.CommandError("Can't create a guild-specific role outside of a guild")
+        else:
+            guild_id = None
+
+        await self.ensure_permission(ctx, perm_tree.permissions.roles.edit, global_only=not context.is_guild_specific)
+        role = create_new_role(name, context, guild_id)
+
+        editor = RoleEditor(ctx.channel, perm_manager=self.perm_manager, role=role, bot=self.bot, user=ctx.author)
+        if await editor.display():
+            await ctx.send(embed=Embed(description=f"Created role **{role.name}**", colour=Colour.green()))
+
+        with contextlib.suppress(Forbidden):
+            await ctx.message.delete()
 
     @role_group.command("remove", aliases=["rm", "delete", "del"])
     async def role_remove_cmd(self, ctx: Context, role: str) -> None:
@@ -250,9 +286,23 @@ class Permissions:
         await ctx.send(embed=Embed(description=f"Moved role from position {index_before + 1} to {position}", colour=Colour.green()))
 
     @role_group.command("edit", aliases=["change"])
-    async def role_edit_cmd(self, ctx: Context, ) -> None:
+    async def role_edit_cmd(self, ctx: Context, role: str) -> None:
         """Edit a role"""
-        raise commands.CommandError("WIP")
+        role = await self.get_role(role, ctx)
+        try:
+            await self.ensure_can_edit_role(ctx, role)
+        except PermissionDenied as e:
+            if role.is_default and await self.perm_manager.has(ctx.author, perm_tree.permissions.roles.edit, global_only=role.is_global):
+                raise PermissionDenied("You may not edit this default role, however, you could try forking it!")
+
+            raise e
+
+        editor = RoleEditor(ctx.channel, perm_manager=self.perm_manager, role=role, bot=self.bot, user=ctx.author)
+        if await editor.display():
+            await ctx.send(embed=Embed(description=f"Saved changes to {role.name}", colour=Colour.green()))
+
+        with contextlib.suppress(Forbidden):
+            await ctx.message.delete()
 
     @has_permission(perm_tree.permissions.roles.assign)
     @role_group.command("assign", aliases=["addtarget", "target+", "@+"])
@@ -261,17 +311,21 @@ class Permissions:
         role = await self.get_role(role, ctx)
         await self.ensure_can_edit_role(ctx, role, assign=True)
 
-        if await self.perm_manager.has_role(target, role):
+        role_target = get_role_target(target, prefer_global=role.is_global)
+
+        if await self.perm_manager.target_has_role(role_target, role):
             raise commands.CommandError(f"{target} is already in {role.name}")
 
-        role_target = get_role_target(target, prefer_global=role.is_global)
         if role.is_global and role_target.guild_context:
-            raise commands.CommandError(f"Can't assign a global role to a guild target! {role.name}")
+            raise commands.CommandError(f"Can't assign a global role (**{role.name}**) to a guild target!")
         elif role.is_guild and not role_target.guild_context:
-            raise commands.CommandError(f"Can't assign a guild specific role to a global target! {role.name}")
+            raise commands.CommandError(f"Can't assign a guild specific role (**{role.name}**) to a global target!")
 
         if role_target.is_special and role.is_default:
             raise commands.CommandError(f"Cannot assign special targets to default role {role.name}")
+
+        if role_target.guild_context and not role.is_guild:
+            raise commands.CommandError(f"Cannot assign global role to guild-specific target")
 
         await self.perm_manager.role_add_target(role, role_target)
 
@@ -314,7 +368,7 @@ class Permissions:
 
         perms = calculate_final_permissions(role.compile_own_permissions() for role in roles)
         granted_perms = [perm for perm, granted in perms.items() if granted]
-        keys = sorted(perm_tree.find_shortest_representation(granted_perms))
+        keys = sorted(perm_tree.find_shortest_representation(granted_perms).keys())
 
         if not keys:
             raise commands.CommandError(f"{target} doesn't have any permissions")
@@ -359,12 +413,12 @@ class Permissions:
             embed = Embed(description=f"{target} can't use {cmd.qualified_name}", colour=Colour.red())
 
             if missing_global_perms:
-                missing_global_perms = perm_tree.find_shortest_representation(missing_global_perms)
+                missing_global_perms = perm_tree.find_shortest_representation(missing_global_perms).keys()
                 value = "\n".join(f"- {perm}" for perm in sorted(missing_global_perms))
                 embed.add_field(name="Missing global permissions", value=value)
 
             if missing_perms:
-                missing_perms = perm_tree.find_shortest_representation(missing_perms)
+                missing_perms = perm_tree.find_shortest_representation(missing_perms).keys()
                 value = "\n".join(f"- {perm}" for perm in sorted(missing_perms))
                 embed.add_field(name="Missing permissions", value=value)
 

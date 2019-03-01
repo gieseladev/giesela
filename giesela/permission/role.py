@@ -1,4 +1,4 @@
-import itertools
+import uuid
 from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, Iterator, List, Optional, Tuple, Union
@@ -6,7 +6,7 @@ from typing import Dict, Iterator, List, Optional, Tuple, Union
 from .tree import perm_tree
 from .tree_utils import CompiledPerms, PermSpecType
 
-__all__ = ["RoleContext", "Role", "RoleOrder", "RoleOrderValue", "get_role_context_from_order_id", "get_higher_role_contexts",
+__all__ = ["RoleContext", "Role", "create_new_role", "RoleOrder", "RoleOrderValue", "get_role_context_from_order_id", "get_higher_role_contexts",
            "get_higher_or_equal_role_contexts", "GLOBAL_ROLE_CONTEXTS", "GUILD_ROLE_CONTEXTS"]
 
 
@@ -62,7 +62,7 @@ ROLE_CONTEXT_POSITIONS = {context: i for i, context in enumerate(ROLE_CONTEXT_OR
 GLOBAL_ROLE_CONTEXTS = {RoleContext.GLOBAL, RoleContext.SUPERGLOBAL}
 GUILD_ROLE_CONTEXTS = {RoleContext.GUILD, RoleContext.GUILD_DEFAULT}
 
-ROLE_HIERARCHY: List[List[RoleContext]] = [
+ROLE_CONTEXT_HIERARCHY: List[List[RoleContext]] = [
     [RoleContext.SUPERGLOBAL],
     [RoleContext.GUILD, RoleContext.GUILD_DEFAULT, RoleContext.GLOBAL]
 ]
@@ -92,11 +92,11 @@ def get_higher_role_contexts(context: RoleContext) -> Iterator[RoleContext]:
 
     The results are ordered from highest to lowest.
     """
-    for role_context in itertools.chain.from_iterable(ROLE_HIERARCHY):
-        if role_context == context:
+    for level in ROLE_CONTEXT_HIERARCHY:
+        if context in level:
             break
         else:
-            yield role_context
+            yield from level
 
 
 def get_higher_or_equal_role_contexts(context: RoleContext) -> Iterator[RoleContext]:
@@ -168,6 +168,13 @@ class Role:
         perms.update(self.compile_own_permissions())
 
         return perms
+
+
+def create_new_role(name: str, context: RoleContext, guild_id: Optional[int]) -> Role:
+    role_id = uuid.uuid4().hex
+    abs_role_id = f"{guild_id}:{role_id}" if guild_id else role_id
+
+    return Role(abs_role_id, role_id, name, context.value, guild_id, [], [], [])
 
 
 RoleOrderValue = Tuple[int, int]

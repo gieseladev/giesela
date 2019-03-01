@@ -19,6 +19,7 @@ class EditableEmbed:
         self.channel = channel
 
         self._message = message
+        self._message_lock = asyncio.Lock()
 
         if kwargs:
             raise ValueError(f"Unexpected kwargs for {self}: {kwargs}")
@@ -37,21 +38,22 @@ class EditableEmbed:
             self._message = None
 
     async def edit(self, embed: Embed, on_new: Callable[[Message], Any] = None):
-        if self._message:
-            try:
-                await self._message.edit(embed=embed)
-            except NotFound:
-                log.warning(f"message for {self} was deleted")
-            else:
-                return
+        async with self._message_lock:
+            if self._message:
+                try:
+                    await self._message.edit(embed=embed)
+                except NotFound:
+                    log.warning(f"message for {self} was deleted")
+                else:
+                    return
 
-        self._message = await self.channel.send(embed=embed)
+            self._message = await self.channel.send(embed=embed)
 
-        if callable(on_new):
-            res = on_new(self.message)
+            if callable(on_new):
+                res = on_new(self.message)
 
-            if asyncio.iscoroutine(res):
-                await res
+                if asyncio.iscoroutine(res):
+                    await res
 
 
 class LoadingBar(EditableEmbed):

@@ -9,6 +9,7 @@ from aioredis import Redis
 from aioredis.commands import MultiExec
 from motor.motor_asyncio import AsyncIOMotorCollection, AsyncIOMotorCursor
 from pymongo import DeleteOne, IndexModel, InsertOne, UpdateOne
+from pymongo.results import UpdateResult
 
 from giesela import Giesela, utils
 from giesela.config import Config
@@ -55,9 +56,9 @@ def get_guild_id_selector(guild_id: int = None, *,
         nested_prefix = ""
 
     if guild_id and (include_global or include_guild_default):
-        gid_selector = {"$in": [None, str(guild_id)]}
+        gid_selector = {"$in": [None, guild_id]}
     elif guild_id:
-        gid_selector = {"$eq": str(guild_id)}
+        gid_selector = {"$eq": guild_id}
     elif include_global:
         gid_selector = {"$eq": None}
     else:
@@ -227,7 +228,9 @@ class PermManager:
                     operation = defaultdict(dict)
 
                     if "_id" in document:
-                        operation["$setOnInsert"]["_id"] = document.pop("_id")
+                        document.pop("_id")
+                        if "_id" not in target_filter:
+                            raise ValueError("_id field can't be set when querying by something other than the _id!")
 
                     operation["$set"] = document
 
@@ -323,7 +326,7 @@ class PermManager:
 
             async for document in cursor:
                 role_id = document["role_ids"]
-                if role_id == role.role_id:
+                if role_id == role.absolute_role_id:
                     log.debug(f"ignoring edit permission of role {role_id} because it's the role to be edited")
                     continue
 
@@ -527,7 +530,8 @@ class PermManager:
         targets = await _collect_aggregated_targets(cursor)
         await self._dump_targets_to_redis(targets, tr=tr)
 
-    async def _compile_roles_with_match(self, match: Dict[str, Any], *, tr: MultiExec = None) -> None:
+    async def _get_role_pool(self, match: Dict[str, Any]) -> Dict[str, Role]:
+        """Get the roles that match the provided selector and all bases."""
         role_pool: Dict[str, Role] = {}
         cursor = self._roles_coll.aggregate([
             {"$match": match},
@@ -550,10 +554,18 @@ class PermManager:
                 if role_id in role_pool:
                     continue
 
-                role_docs.extend(role_doc.pop("bases"))
+                bases = role_doc.pop("bases", None)
+                if bases:
+                    role_docs.extend(bases)
+
                 role = Role(**role_doc)
                 role_pool[role_id] = role
 
+        return role_pool
+
+    async def _compile_roles_with_match(self, match: Dict[str, Any], *, tr: MultiExec = None) -> None:
+        """Compile and dump to redis all roles that match"""
+        role_pool = await self._get_role_pool(match)
         await self._dump_roles_to_redis(role_pool, tr=tr)
 
     async def get_order_with_role(self, role: RoleOrId) -> Optional[RoleOrder]:
@@ -594,6 +606,20 @@ class PermManager:
             return Role(**doc)
         else:
             return None
+
+    async def get_roles(self, role_ids: Iterable[str]) -> List[Role]:
+        """Get the roles with the specified ids"""
+        role_ids = list(role_ids)
+        if not role_ids:
+            return []
+
+        cursor = self._roles_coll.find({"_id": {"$in": role_ids}})
+
+        return [Role(**doc) async for doc in cursor]
+
+    async def get_roles_with_bases(self, *role_ids: str) -> Dict[str, Role]:
+        """Get a role pool for all involved roles"""
+        return await self._get_role_pool({"_id": list(role_ids)})
 
     async def search_role_for_guild(self, query: str, guild_id: int = None, *,
                                     include_global: bool = True,
@@ -707,7 +733,14 @@ class PermManager:
 
     async def role_add_target(self, role: RoleOrId, target: RoleTarget) -> None:
         """Assign a role to a target"""
-        role_id = role.absolute_role_id if isinstance(role, Role) else role
+        if isinstance(role, Role):
+            role_id = role.absolute_role_id
+
+            # sanity check
+            if target.guild_context and not role.is_guild:
+                raise TypeError(f"Cannot assign {role} to {target}")
+        else:
+            role_id = role
 
         await self._targets_coll.update_one(
             {"_id": str(target)},
@@ -787,3 +820,57 @@ class PermManager:
             tr.lrem(f"{self._redis_prefix}:targets:{target_id}", 1, role_id)
 
         await tr.execute()
+
+    async def save_role(self, role: Role) -> None:
+        """Save a role.
+
+        Can be used to save an edited role, but it will not
+        allow for changes to the context, role_id, or the guild_id.
+        """
+        insert_only_keys = {"role_id", "context", "guild_id"}
+        exclude_keys = {"_id"}
+
+        data = dataclasses.asdict(role)
+
+        set_op = {}
+        set_on_insert_op = {}
+
+        for key, value in data.items():
+            if key in exclude_keys:
+                continue
+            elif key in insert_only_keys:
+                set_on_insert_op[key] = value
+            else:
+                set_op[key] = value
+
+        async with await self._mongo_client.start_session() as sess:
+            async with sess.start_transaction():
+                result: UpdateResult = await self._roles_coll.update_one(
+                    {"_id": role.absolute_role_id},
+                    {
+                        "$set": set_op,
+                        "$setOnInsert": set_on_insert_op
+                    },
+                    upsert=True,
+                    session=sess
+                )
+
+                # role was created
+                if result.upserted_id:
+                    log.info("saving new role, adding to role orders")
+                    context = role.role_context
+                    order_id = context.get_order_id(role.guild_id)
+                    await self._role_orders_coll.update_one(
+                        {"_id": order_id},
+                        {
+                            "$setOnInsert": {
+                                "context": context.value,
+                                "order_value": context.order_value
+                            },
+                            "$push": {"order": result.upserted_id}
+                        },
+                        upsert=True,
+                        session=sess
+                    )
+
+        await self._compile_roles_with_match({"_id": role.absolute_role_id})

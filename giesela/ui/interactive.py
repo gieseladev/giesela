@@ -558,7 +558,10 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         _current_length = 0
         _current_line = self.current_line
 
-        line = None
+        if self.total_lines is not None and _current_line >= self.total_lines:
+            _current_line = self.total_lines - 1
+
+        line: str = None
 
         while len(lines) < self.window_height:
             if self.total_lines is not None and _current_line >= self.total_lines:
@@ -587,7 +590,10 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         content = await self.get_current_content()
         embed = self.embed_frame
         embed = self.format_embed(embed)
-        embed.description = content
+
+        if content:
+            embed.description = content
+
         return embed
 
     @classmethod

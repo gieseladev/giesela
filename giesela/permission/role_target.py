@@ -1,13 +1,13 @@
 import logging
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Union, cast
+from typing import Dict, Iterable, List, Optional, Union, cast
 
 from discord import Client, Member, Role, User
 from discord.ext.commands.bot import BotBase
 
 from .role import RoleOrderValue
 
-__all__ = ["RoleTargetType", "RoleTarget", "get_role_targets_for", "Target"]
+__all__ = ["RoleTargetType", "RoleTarget", "get_role_targets_for", "sort_targets_by_specificity", "Target"]
 
 log = logging.getLogger(__name__)
 
@@ -85,6 +85,10 @@ class RoleTarget:
             return bool(guild_id)
 
     @property
+    def guild_specific(self) -> bool:
+        return self.has_guild_id
+
+    @property
     def guild_context(self) -> bool:
         return self.has_guild_id or (self.is_special and self.special_name in GUILD_CONTEXT_ROLE_TARGETS)
 
@@ -93,8 +97,15 @@ class RoleTarget:
         if self.is_user:
             raise TypeError("Users aren't associated with a guild!")
 
-        target, _ = self._target.split(GUILD_SPLIT, 1)
-        return int(target[1:])
+        try:
+            target, _ = self._target.split(GUILD_SPLIT, 1)
+        except ValueError:
+            raise TypeError(f"{self} isn't associated with a guild")
+
+        try:
+            return int(target)
+        except ValueError:
+            return int(target[1:])
 
     def check(self) -> None:
         if self.is_member:
@@ -123,6 +134,40 @@ class RoleTarget:
             return bot.get_user(self.id)
         else:
             return None
+
+
+__special_target_value_table: Dict[str, int] = {
+    "owner": 0,
+    "guild_owner": 2,
+    "guild_admin": 3,
+    "everyone": 6,
+}
+
+
+def sort_targets_by_specificity(targets: Iterable[RoleTarget]) -> List[RoleTarget]:
+    """Sort targets by specificity.
+
+    Order:
+        0. #owner
+        1. user
+        2. #guild_owner
+        3. #guild_admin
+        4. member
+        5. @role
+        6. #everyone
+    """
+
+    def sort_key(target: RoleTarget) -> int:
+        if target.is_special:
+            return __special_target_value_table[target.special_name]
+        elif target.is_user:
+            return 1
+        elif target.is_member:
+            return 4
+        elif target.is_role:
+            return 5
+
+    return sorted(targets, key=sort_key)
 
 
 async def get_role_targets_for(bot: BotBase, target: RoleTargetType, *, global_only: bool = False, guild_only: bool = False) -> List[RoleTarget]:

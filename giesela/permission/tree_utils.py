@@ -1,8 +1,8 @@
 import inspect
 import typing
-from collections import defaultdict
+from collections import defaultdict, deque
 from functools import reduce
-from typing import Any, Dict, Iterable, Iterator, List, Tuple, Union
+from typing import Any, Deque, Dict, Iterable, Iterator, List, Mapping, Optional, Tuple, Union
 
 __all__ = ["Node", "PermSelector", "PermSpecType", "PermissionType", "CompiledPerms", "calculate_final_permissions"]
 
@@ -11,7 +11,8 @@ CompiledPerms = Dict[str, int]
 PermSelector = Dict[str, Any]
 PermSpecType = Union[PermSelector, str]
 
-NestedPermissionTree = Dict[str, Union[bool, "NestedPermissionTree"]]
+NestedPermissionTreeValue = Union[Optional[int], "NestedPermissionTree"]
+NestedPermissionTree = Dict[str, NestedPermissionTreeValue]
 
 
 class PermNodeMeta(type):
@@ -38,9 +39,11 @@ class PermNodeMeta(type):
         return cls.__namespace__ or "root"
 
     @property
-    def qualified_perms(cls) -> List[str]:
+    def qualified_perms(cls) -> Iterator[str]:
         """Direct permissions of this node with namespace."""
-        return [f"{cls.__namespace__}.{perm}" for perm in cls.__perms__]
+        ns = cls.__namespace__
+        for perm in cls.__perms__:
+            yield f"{ns}.{perm}"
 
     @property
     def all_permissions(cls) -> Iterator[str]:
@@ -137,58 +140,87 @@ class PermNodeMeta(type):
 
         return perms
 
-    def _create_nested_tree(cls, perms: Iterable[str]) -> NestedPermissionTree:
+    def _create_nested_tree(cls, perms: Union[Iterable[str], CompiledPerms]) -> NestedPermissionTree:
         """Create a nested permission tree.
 
         The value is True if the permission can be found in the provided permissions,
         otherwise False.
         """
-        perm_pool = set(perms)
 
         def tree_factory():
             return defaultdict(tree_factory)
 
-        def traverser(acc, curr):
-            return acc[curr]
+        if not isinstance(perms, Mapping):
+            perms = {perm: 1 for perm in perms}
 
         tree: NestedPermissionTree = tree_factory()
-        for perm in cls.all_permissions:
-            *parts, key = perm.split(".")
-            container = reduce(traverser, parts, tree)
-            container[key] = perm in perm_pool
+
+        nodes: Deque[Tuple[NestedPermissionTree, PermNodeMeta]] = deque([(tree, cls)])
+        while nodes:
+            subtree, node = nodes.pop()
+            for perm in node.__perms__:
+                subtree[perm] = perms.get(perm)
+
+            for child in node.__children__.values():
+                name = child.__name__
+                ns = child.__namespace__
+                try:
+                    subtree[name] = perms[ns]
+                except KeyError:
+                    nodes.append((subtree[name], child))
 
         return tree
 
-    def find_shortest_representation(cls, perms: Iterable[str]) -> List[str]:
+    def find_shortest_representation(cls, perms: Union[Iterable[str], CompiledPerms]) -> Dict[str, bool]:
         """Find a concise representation of perms."""
         root_tree = cls._create_nested_tree(perms)
 
-        def simplify(tree: Union[NestedPermissionTree, bool]) -> bool:
-            if isinstance(tree, bool):
-                return tree
+        def simplify(tree: NestedPermissionTreeValue) -> Optional[bool]:
+            if isinstance(tree, int):
+                return bool(tree)
+            elif tree is None:
+                return None
 
-            all_simplified = True
+            simplified_to: Optional[bool] = None
+            all_simplified: bool = True
 
             for key in tree.keys():
-                if simplify(tree[key]):
-                    tree[key] = True
+                simplified = simplify(tree[key])
+
+                if simplified is not None:
+                    tree[key] = simplified
+
+                    # if we're still thinking we can simplify upstream ...
+                    if all_simplified:
+                        # ... and we don't know what value it is yet ...
+                        if simplified_to is None:
+                            # ... set the current value to the value we want
+                            simplified_to = simplified
+                        # ... but the value isn't homogeneous
+                        elif simplified_to != simplified:
+                            # ... the upstream must not simplify this
+                            all_simplified = False
                 else:
+                    # ... not all keys are even set so of course it can't be simplified
                     all_simplified = False
 
-            return all_simplified
+            if all_simplified:
+                return simplified_to
+            else:
+                return None
 
+        simplified_root = simplify(root_tree)
         # simplified up to the top-level, indication ALL permissions
-        if simplify(root_tree):
-            return ["*"]
+        if simplified_root is not None:
+            return {"*": simplified_root}
 
-        simplified_perms = []
+        simplified_perms: Dict[str, bool] = {}
 
-        def add_simplified_perms(value: Union[NestedPermissionTree, bool], ns: str = None):
+        def add_simplified_perms(value: NestedPermissionTreeValue, ns: str = None):
             if isinstance(value, bool):
-                if value:
-                    simplified_perms.append(ns)
-                else:
-                    return
+                simplified_perms[ns] = value
+            elif value is None:
+                return
             else:
                 if ns:
                     ns_prefix = f"{ns}."
