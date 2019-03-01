@@ -477,6 +477,8 @@ class PlayerManager(LavalinkNodeBalancer):
         await asyncio.gather(*coros, loop=self.loop)
 
     async def on_ready(self):
+        # TODO I think this is also called when the shard reconnects
+        #  in which case we don't want to reload the queue
         await self.load_from_redis()
 
     async def on_shutdown(self):
