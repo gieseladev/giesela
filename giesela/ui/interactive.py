@@ -558,13 +558,16 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         _current_length = 0
         _current_line = self.current_line
 
-        if self.total_lines is not None and _current_line >= self.total_lines:
-            _current_line = self.total_lines - 1
+        total_lines = self.total_lines
+
+        # don't use is None because we want it to be bigger than 0 as well
+        if total_lines and _current_line >= total_lines:
+            _current_line = total_lines - 1
 
         line: str = None
 
         while len(lines) < self.window_height:
-            if self.total_lines is not None and _current_line >= self.total_lines:
+            if total_lines is not None and _current_line >= total_lines:
                 self._ran_out_of_lines = True
                 break
 

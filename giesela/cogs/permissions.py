@@ -184,7 +184,12 @@ class Permissions:
     async def role_list_group(self, ctx: Context, target: Union[Role, Member, User, str] = None) -> None:
         """List the roles of a target"""
         if not target:
-            await self.role_list_guild_cmd.invoke(ctx)
+            if ctx.guild:
+                cmd = self.role_list_guild_cmd
+            else:
+                cmd = self.role_list_me_cmd
+
+            await cmd.invoke(ctx)
             return
 
         guild_id = ctx.guild.id if ctx.guild else None
@@ -198,6 +203,7 @@ class Permissions:
         roles = await self.perm_manager.get_target_roles_for_guild(ctx.author, guild_id)
         await self._role_list_show(ctx, roles)
 
+    @commands.guild_only()
     @role_list_group.command("guild")
     async def role_list_guild_cmd(self, ctx: Context) -> None:
         """List the roles of the guild"""
@@ -241,9 +247,9 @@ class Permissions:
         with contextlib.suppress(Forbidden):
             await ctx.message.delete()
 
-    @role_group.command("remove", aliases=["rm", "delete", "del"])
-    async def role_remove_cmd(self, ctx: Context, role: str) -> None:
-        """"""
+    @role_group.command("delete", aliases=["del", "remove", "rm"])
+    async def role_delete_cmd(self, ctx: Context, role: str) -> None:
+        """Delete a role."""
         role = await self.get_role(role, ctx)
         await self.ensure_can_edit_role(ctx, role)
 

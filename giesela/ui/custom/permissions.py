@@ -38,7 +38,7 @@ class RoleViewer(AutoHelpEmbed, VerticalTextViewer):
         self._role_pool = {role.absolute_role_id: role}
         self.bases = None
 
-        self.showing_simplified = False
+        self.showing_simplified = True
         self.showing_base_permissions = False
         self.compile_permissions()
 
@@ -154,6 +154,8 @@ class RoleEditor(RoleViewer, MessageableEmbed):
 
         if not self.user:
             raise ValueError("Absolutely need user to be passed for permission checks!")
+
+        self.showing_simplified = False
 
     @property
     def help_title(self) -> str:

@@ -42,8 +42,11 @@ class PermNodeMeta(type):
     def qualified_perms(cls) -> Iterator[str]:
         """Direct permissions of this node with namespace."""
         ns = cls.__namespace__
-        for perm in cls.__perms__:
-            yield f"{ns}.{perm}"
+        if ns:
+            for perm in cls.__perms__:
+                yield f"{ns}.{perm}"
+        else:
+            yield from cls.__perms__
 
     @property
     def all_permissions(cls) -> Iterator[str]:
@@ -158,12 +161,16 @@ class PermNodeMeta(type):
         nodes: Deque[Tuple[NestedPermissionTree, PermNodeMeta]] = deque([(tree, cls)])
         while nodes:
             subtree, node = nodes.pop()
+
+            ns_prefix = f"{node.__namespace__}." if node.__namespace__ else ""
             for perm in node.__perms__:
-                subtree[perm] = perms.get(perm)
+                qualified_perm = ns_prefix + perm
+                subtree[perm] = perms.get(qualified_perm)
 
             for child in node.__children__.values():
                 name = child.__name__
                 ns = child.__namespace__
+
                 try:
                     subtree[name] = perms[ns]
                 except KeyError:

@@ -238,7 +238,6 @@ class GieselaPlayer(EventEmitter, PlayerStateInterpreter):
         entry = self.current_entry
 
         if entry:
-            # FIXME duplicate history entries
             log.debug(f"finished playing {entry}")
             self.queue.push_history(entry)
 

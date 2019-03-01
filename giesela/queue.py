@@ -88,6 +88,8 @@ class EntryQueue(EventEmitter):
 
         entries = await redis.lrange(key, 0, -1)
         log.info(f"loading {len(entries)} queue entries from redis")
+        self.entries.clear()
+
         for raw_entry in entries:
             data = rapidjson.loads(raw_entry)
             entry = QueueEntry.from_dict(data, queue=self)
@@ -98,6 +100,8 @@ class EntryQueue(EventEmitter):
 
         entries = await redis.lrange(key, 0, -1)
         log.info(f"loading {len(entries)} history entries from redis")
+        self.history.clear()
+
         for raw_entry in entries:
             data = rapidjson.loads(raw_entry)
             entry = HistoryEntry.from_dict(data, queue=self)
