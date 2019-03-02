@@ -213,12 +213,6 @@ class RoleEditor(RoleViewer, MessageableEmbed):
         self.stop_listener()
         return True
 
-    @commands.command("description", aliases=["describe"])
-    async def set_description(self, _, *, description: str) -> None:
-        """Set the description"""
-        # TODO should this be a thing?
-        raise commands.CommandError("Should they even have a description?")
-
     async def _set_perm_cmd(self, permission: str, grant: Optional[bool]) -> None:
         if not perm_tree.has(permission):
             raise commands.CommandError(f"`{permission}` doesn't exist!")
