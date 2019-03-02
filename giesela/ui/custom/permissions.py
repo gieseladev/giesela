@@ -105,8 +105,7 @@ class RoleViewer(AutoHelpEmbed, VerticalTextViewer):
     def compile_permissions(self) -> None:
         """Update`permissions`."""
         if self.showing_base_permissions and self.bases is not None:
-            perm_pool = {role.absolute_role_id: role for role in self.bases}
-            compiled = self.role.compile_permissions(perm_pool)
+            compiled = self.role.compile_permissions(self._role_pool)
         else:
             compiled = {}
             perm_tree.resolve_permission_specifiers(compiled, self.role.grant, 1)
@@ -297,6 +296,8 @@ class RoleEditor(RoleViewer, MessageableEmbed):
 
         if role.absolute_role_id not in self._role_pool:
             role_pool = await self.perm_manager.get_roles_with_bases(*role.base_ids)
+            role_pool.setdefault(role.absolute_role_id, role)
+
             if self.role.absolute_role_id in role_pool:
                 raise commands.CommandError(f"Circular reference detected. You cannot inherit a base which inherits from this one.")
 

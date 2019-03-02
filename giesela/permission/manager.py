@@ -619,7 +619,7 @@ class PermManager:
 
     async def get_roles_with_bases(self, *role_ids: str) -> Dict[str, Role]:
         """Get a role pool for all involved roles"""
-        return await self._get_role_pool({"_id": list(role_ids)})
+        return await self._get_role_pool({"_id": {"$in": list(role_ids)}})
 
     async def search_role_for_guild(self, query: str, guild_id: int = None, *,
                                     include_global: bool = True,
