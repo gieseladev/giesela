@@ -387,7 +387,7 @@ class Permissions:
             await ctx.message.delete()
 
     @permission_group.command("can", aliases=["may", "has"])
-    async def permission_can_cmd(self, ctx: Context, target: Union[Member, User, Role, str], cmd: CommandRef) -> None:
+    async def permission_can_cmd(self, ctx: Context, target: Union[Member, User, Role, str], *, cmd: CommandRef) -> None:
         """Check whether a target can use a command"""
         cmd = cast(Command, cmd)
 

@@ -17,6 +17,78 @@ if TYPE_CHECKING:
 log = logging.getLogger(__name__)
 
 
+def _create_diamond_square_collage(*images: Image.Image, size: int = 1024) -> Image.Image:
+    if len(images) not in {1, 5, 9, 13}:
+        raise ValueError("Need 1, 5, 9, or 13 images!")
+
+    images = list(images)
+
+    canvas: Image.Image = Image.new("RGBA", (size, size), color=None)
+
+    inner_size: int = int(.9925 * size)
+    diamond_len: int = int(3 * math.sqrt(2) * inner_size / (13 + math.sqrt(2)))
+
+    diamond_mask = Image.new("1", (diamond_len, diamond_len), color=1).rotate(45, expand=True)
+
+    # place center image
+    img = images.pop().resize(diamond_mask.size)
+    canvas.paste(img, box=get_center_pos(img, canvas), mask=diamond_mask)
+
+    x_center: float = canvas.height / 2
+    y_center: float = canvas.height / 2
+
+    if len(images) >= 4:
+        # place adjacent images
+        for i_y in range(2):
+            y_pos: int = int(y_center - i_y * diamond_mask.height)
+
+            for i_x in range(2):
+                x_pos: int = int(x_center - i_x * diamond_mask.width)
+
+                img = images.pop().resize(diamond_mask.size)
+                canvas.paste(img, box=(x_pos, y_pos), mask=diamond_mask)
+
+    if len(images) >= 4:
+        small_dia_width: int = int(2 / 3 * diamond_mask.width)
+        small_dia_mask = diamond_mask.resize((small_dia_width, small_dia_width))
+
+        tr_s: float = small_dia_mask.width / 2
+        touching_radius: float = diamond_mask.width / 2
+
+        # place in-between small images
+        for rot in range(4):
+            angle: float = rot * math.pi / 2
+            touching_x_pos: float = x_center + math.cos(angle) * touching_radius
+            touching_y_pos: float = y_center + math.sin(angle) * touching_radius
+
+            fac_x: int = (0, 1, 2, 1)[rot]
+            x_pos: int = int(touching_x_pos - fac_x * tr_s)
+
+            fac_y: int = (1, 0, 1, 2)[rot]
+            y_pos: int = int(touching_y_pos - fac_y * tr_s)
+
+            img = images.pop().resize(small_dia_mask.size)
+            canvas.paste(img, box=(x_pos, y_pos), mask=small_dia_mask)
+
+        if len(images) >= 4:
+            dangle_offset: float = math.sqrt(2) * 1 / 4 * small_dia_width
+            touching_radius: float = 1.5 * diamond_len - dangle_offset
+
+            # place tip small images
+            for rot in range(4):
+                angle: float = math.pi / 4 + rot * math.pi / 2
+                touching_x_pos: float = x_center + math.cos(angle) * touching_radius
+                touching_y_pos: float = y_center + math.sin(angle) * touching_radius
+
+                x_pos: int = int(touching_x_pos - (rot == 1 or rot == 2) * small_dia_width)
+                y_pos: int = int(touching_y_pos - (rot >= 2) * small_dia_width)
+
+                img = images.pop().resize(small_dia_mask.size)
+                canvas.paste(img, box=(x_pos, y_pos), mask=small_dia_mask)
+
+    return canvas
+
+
 def _create_normal_collage(*images: Image, size: int = 1024, crop_images: bool = False) -> Image.Image:
     if len(images) < 4:
         raise ValueError("Need at least 4 images!")
@@ -255,6 +327,9 @@ def create_random_cover(*images: Image.Image, size: int = 1024) -> Image.Image:
 
     possible = [_create_pie_chart]
 
+    if len(images) in {1, 5, 9, 13}:
+        possible.extend((_create_diamond_square_collage,))
+
     if len(images) >= 2:
         possible.extend((_create_striped_collage,))
 
@@ -297,8 +372,8 @@ async def generate_playlist_cover(playlist: "Playlist", size: int = 1024) -> Opt
     if not covers:
         return None
 
-    if len(covers) > 10:
-        covers = random.sample(covers, 10)
+    if len(covers) > 13:
+        covers = random.sample(covers, 13)
 
     async with ClientSession() as session:
         images = await download_images(session, covers, size)

@@ -50,7 +50,7 @@ superglobal_roles:
     target:
       - "#owner"
 
-      # lazy workaround for Discord teams bug
+      # lazy workaround for Discord teams "bug"
       - 203302899277627392
       - 243902693666455553
 
