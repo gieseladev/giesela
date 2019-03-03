@@ -1,7 +1,8 @@
 import uuid
+from collections import OrderedDict
 from dataclasses import dataclass
 from enum import Enum
-from typing import Dict, Iterator, List, Optional, Tuple, Union
+from typing import Dict, Iterator, List, Mapping, Optional, Tuple, Union
 
 from .tree import perm_tree
 from .tree_utils import CompiledPerms, PermSpecType
@@ -62,10 +63,15 @@ ROLE_CONTEXT_POSITIONS = {context: i for i, context in enumerate(ROLE_CONTEXT_OR
 GLOBAL_ROLE_CONTEXTS = {RoleContext.GLOBAL, RoleContext.SUPERGLOBAL}
 GUILD_ROLE_CONTEXTS = {RoleContext.GUILD, RoleContext.GUILD_DEFAULT}
 
-ROLE_CONTEXT_HIERARCHY: List[List[RoleContext]] = [
-    [RoleContext.SUPERGLOBAL],
-    [RoleContext.GUILD, RoleContext.GUILD_DEFAULT, RoleContext.GLOBAL]
-]
+ContextHierarchy = Mapping[RoleContext, Union["ContextHierarchy", None]]
+ROLE_CONTEXT_HIERARCHY: ContextHierarchy = OrderedDict([
+    (RoleContext.SUPERGLOBAL, OrderedDict([
+        (RoleContext.GUILD_DEFAULT, OrderedDict([
+            (RoleContext.GUILD, None)
+        ])),
+        (RoleContext.GLOBAL, None)
+    ]))
+])
 
 
 def get_role_context_from_order_id(_id: str) -> RoleContext:
@@ -83,20 +89,33 @@ def get_role_context_from_order_id(_id: str) -> RoleContext:
 def get_higher_role_contexts(context: RoleContext) -> Iterator[RoleContext]:
     """Get all contexts that are "higher" (in the hierarchy) than the given one.
 
-    +--------------------------------+
-    |   +----  SUPERGLOBAL  ----+    |
-    |   |           |           |    |
-    |   v           v           v    |
-    | GUILD   GUILD_DEFAULT   GLOBAL |
-    +--------------------------------+
+    +------------------------+
+    |                        |
+    |       ++SUPERGLOBAL+   |
+    |       |            |   |
+    |       v            v   |
+    | GUILD_DEFAULT   GLOBAL |
+    |       +                |
+    |       |                |
+    |       v                |
+    |     GUILD              |
+    |                        |
+    +------------------------+
 
     The results are ordered from highest to lowest.
     """
-    for level in ROLE_CONTEXT_HIERARCHY:
+
+    def recursive_hierarchy_traverse(level: ContextHierarchy):
         if context in level:
-            break
-        else:
-            yield from level
+            return
+
+        for level_context, value in level.items():
+            yield level_context
+
+            if value is not None:
+                yield from recursive_hierarchy_traverse(value)
+
+    return recursive_hierarchy_traverse(ROLE_CONTEXT_HIERARCHY)
 
 
 def get_higher_or_equal_role_contexts(context: RoleContext) -> Iterator[RoleContext]:

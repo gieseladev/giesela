@@ -195,9 +195,9 @@ class RoleEditor(RoleViewer, MessageableEmbed):
         role = await self.perm_manager.get_or_search_role_for_guild(self.role.name, guild_id=self.role.guild_id)
         if role and role.absolute_role_id != self.role.absolute_role_id:
             if role.name == self.role.name:
-                missing.append("**role name already exists**")
+                missing.append("role name already exists")
 
-        if not any((self.role.grant, self.role.deny)):
+        if not any((self.role.grant, self.role.deny, self.role.base_ids)):
             missing.append("no permissions set")
 
         return missing
@@ -252,9 +252,8 @@ class RoleEditor(RoleViewer, MessageableEmbed):
         if not name:
             raise commands.CommandError("Please provide a name")
 
-        role = await self.find_role(ctx, name)
-
-        if role.absolute_role_id != self.role.absolute_role_id and self.role.name == role.name:
+        role = await self.perm_manager.get_or_search_role_for_guild(name, ctx.guild.id if ctx.guild else None)
+        if role and self.role.name == role.name and role.absolute_role_id != self.role.absolute_role_id:
             raise commands.CommandError(f"Name **{name}** already assigned to a role")
 
         self.role.name = name

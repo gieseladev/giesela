@@ -308,14 +308,11 @@ class PermManager:
         """Check whether a target is allowed to edit the given role."""
 
         async def has_edit_lower_perm() -> bool:
-            targets = await get_role_targets_for(self._bot, target, global_only=role.is_global)
+            global_only = role.is_global or (role.is_default and not assign)
+            targets = await get_role_targets_for(self._bot, target, global_only=global_only)
             target_ids = [str(role_target) for role_target in targets]
 
             contexts: Set[RoleContext] = set(get_higher_or_equal_role_contexts(role.role_context))
-
-            # GUILD context may assign (but not edit) GUILD_DEFAULT roles and vice versa!
-            if assign and role.is_guild:
-                contexts.update((RoleContext.GUILD, RoleContext.GUILD_DEFAULT))
 
             cursor = self._aggregate_ordered_targets(
                 {"_id": {"$in": target_ids}},

@@ -247,6 +247,24 @@ class Permissions:
         with contextlib.suppress(Forbidden):
             await ctx.message.delete()
 
+    @role_group.command("fork", aliases=["clone", "copy"])
+    async def role_fork_cmd(self, ctx: Context, role: str, name: str = None) -> None:
+        """Fork a role"""
+        role = await self.get_role(role, ctx)
+        await self.ensure_can_edit_role(ctx, role)
+
+        forked_name = name or f"{role.name} (fork)"
+
+        forked_role = create_new_role(forked_name, role.role_context, role.guild_id)
+        forked_role.base_ids.append(role.absolute_role_id)
+
+        editor = RoleEditor(ctx.channel, perm_manager=self.perm_manager, role=forked_role, bot=self.bot, user=ctx.author)
+        if await editor.display():
+            await ctx.send(embed=Embed(description=f"Created role **{forked_role.name}** from **{role.name}**", colour=Colour.green()))
+
+        with contextlib.suppress(Forbidden):
+            await ctx.message.delete()
+
     @role_group.command("delete", aliases=["del", "remove", "rm"])
     async def role_delete_cmd(self, ctx: Context, role: str) -> None:
         """Delete a role."""
