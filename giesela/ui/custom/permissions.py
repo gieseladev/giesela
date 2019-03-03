@@ -246,6 +246,21 @@ class RoleEditor(RoleViewer, MessageableEmbed):
         self.compile_permissions()
         await self.show_window()
 
+    @commands.command("rename", aliases=["setname", "name"])
+    async def rename_cmd(self, ctx: Context, name: str) -> None:
+        """Rename the role"""
+        if not name:
+            raise commands.CommandError("Please provide a name")
+
+        role = await self.find_role(ctx, name)
+
+        if role.absolute_role_id != self.role.absolute_role_id and self.role.name == role.name:
+            raise commands.CommandError(f"Name **{name}** already assigned to a role")
+
+        self.role.name = name
+
+        await self.show_window()
+
     @commands.command("grant", aliases=["allow", "add"])
     async def grant_permission(self, _, permission: str) -> None:
         """Grant a permission"""
@@ -277,8 +292,8 @@ class RoleEditor(RoleViewer, MessageableEmbed):
         if role.absolute_role_id in self.role.base_ids:
             raise commands.CommandError(f"Already inheriting from {role.name}")
 
-        if not await self.perm_manager.can_edit_role(ctx.author, role):
-            raise PermissionDenied("You need to be able to edit a role to use it as a base!")
+        if not await self.perm_manager.can_edit_role(ctx.author, role, assign=True):
+            raise PermissionDenied("You need to be able to assign a role to use it as a base!")
 
         if not role.is_default:
             if self.role.role_context != role.role_context:

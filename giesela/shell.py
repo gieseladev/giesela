@@ -249,6 +249,8 @@ class PythonInterpreter(GieselaInterpreter):
     def wrap_code(cls, code: str, return_last: bool = True) -> str:
         if return_last:
             *lines, last_line = code.splitlines()
+            # TODO prepare existing return statements
+            last_line = last_line.partition("#")[0]
         else:
             lines = code.splitlines()
             last_line = "None"

@@ -3,7 +3,7 @@ import dataclasses
 import logging
 from collections import defaultdict, deque
 from itertools import chain
-from typing import Any, Callable, Deque, Dict, Iterable, List, Optional, TypeVar, Union
+from typing import Any, Callable, Deque, Dict, Iterable, List, Optional, Set, TypeVar, Union
 
 from aioredis import Redis
 from aioredis.commands import MultiExec
@@ -311,16 +311,15 @@ class PermManager:
             targets = await get_role_targets_for(self._bot, target, global_only=role.is_global)
             target_ids = [str(role_target) for role_target in targets]
 
-            contexts = get_higher_or_equal_role_contexts(role.role_context)
-            context_ids = [context.value for context in contexts]
+            contexts: Set[RoleContext] = set(get_higher_or_equal_role_contexts(role.role_context))
 
-            # GUILD context may assign (but not edit) GUILD_DEFAULT roles!
-            if assign and role.is_default:
-                context_ids.append(RoleContext.GUILD.value)
+            # GUILD context may assign (but not edit) GUILD_DEFAULT roles and vice versa!
+            if assign and role.is_guild:
+                contexts.update((RoleContext.GUILD, RoleContext.GUILD_DEFAULT))
 
             cursor = self._aggregate_ordered_targets(
                 {"_id": {"$in": target_ids}},
-                lookup_pipeline_match_context={"$in": context_ids},
+                lookup_pipeline_match_context={"$in": [context.value for context in contexts]},
                 group_by_role=True
             )
 
@@ -770,12 +769,21 @@ class PermManager:
         role_id = role.absolute_role_id if isinstance(role, Role) else role
 
         async with await self._mongo_client.start_session() as sess:
+            inheriting_role_ids: List[str] = [doc["_id"] async for doc in self._roles_coll.find(
+                {"base_ids": role_id},
+                projection=["_id"],
+                session=sess
+            )]
+
+            target_ids = [doc["_id"] async for doc in self._targets_coll.find(
+                {"role_ids": role_id},
+                projection=["_id"],
+                session=sess
+            )]
+
             async with sess.start_transaction():
                 # remove role itself
                 await self._roles_coll.delete_one({"_id": role_id}, session=sess)
-
-                cursor = self._roles_coll.find({"base_ids": role_id}, projection=["_id"], session=sess)
-                inheriting_role_ids: List[str] = [doc["_id"] async for doc in cursor]
 
                 # remove role inheritors
                 await self._roles_coll.update_many(
@@ -785,9 +793,6 @@ class PermManager:
                     }},
                     session=sess
                 )
-
-                cursor = self._targets_coll.find({"role_ids": role_id}, projection=["_id"], session=sess)
-                target_ids = [doc["_id"] async for doc in cursor]
 
                 # remove role from targets
                 await self._targets_coll.update_many(
