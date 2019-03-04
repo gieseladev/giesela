@@ -40,14 +40,14 @@ def flatten_data(data: Dict[str, Any]) -> Dict[str, Any]:
     return flat
 
 
-def unflatten_data(data: Dict[str, Any]) -> Dict[str, Any]:
+def unflatten_data(data: Dict[str, Any], delimiter: str = ".") -> Dict[str, Any]:
     final: Dict[str, Any] = {}
 
     for key, value in data.items():
         if isinstance(value, list):
             value = unflatten_list(value)
 
-        *parts, key = key.split(".")
+        *parts, key = key.split(delimiter)
 
         target = final
         for part in parts:
@@ -114,4 +114,4 @@ def get_env_config():
         else:
             env[key] = decoded_value
 
-    return unflatten_data(env)
+    return unflatten_data(env, delimiter="__")
