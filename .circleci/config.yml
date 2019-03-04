@@ -10,6 +10,12 @@ references:
   restore_pipenv_cache: &restore_pipenv_cache
     restore_cache:
       key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+  install_pipenv_cache: &install_pipenv_cache
+    run:
+      name: Installing dependencies
+      command: |
+        sudo pip install pipenv
+        pipenv install --dev
 
 
 orbs:
@@ -27,11 +33,7 @@ jobs:
       - checkout
       - *chown_pipenv_cache
       - *restore_pipenv_cache
-      - run:
-          name: Installing dependencies
-          command: |
-            sudo pip install pipenv
-            pipenv install --dev
+      - *install_pipenv_cache
       - save_cache:
           key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
@@ -45,6 +47,7 @@ jobs:
       - checkout
       - *chown_pipenv_cache
       - *restore_pipenv_cache
+      - *install_pipenv_cache
       - run:
           name: Running tests
           command: pipenv run tests -- --junitxml=test-reports/junit.xml
