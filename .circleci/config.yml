@@ -41,7 +41,7 @@ jobs:
             - "/usr/local/bin"
             - "/usr/local/lib/python3.7/site-packages"
 
-  test:
+  tests:
     executor: python
     steps:
       - checkout
@@ -59,7 +59,7 @@ workflows:
     jobs:
       - install
 
-      - test:
+      - tests:
           requires:
             - install
 
@@ -68,4 +68,4 @@ workflows:
           tag: edge
 
           requires:
-            - test
+            - tests
