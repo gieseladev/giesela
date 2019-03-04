@@ -1,6 +1,12 @@
 version: 2.1
 
 references:
+  chown_pipenv_cache: &chown_pipenv_cache
+    run:
+      name: Changing owner of python packages to circleci
+      command: |
+        sudo chown -R circleci:circleci /usr/local/bin
+        sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
   restore_pipenv_cache: &restore_pipenv_cache
     restore_cache:
       key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
@@ -19,11 +25,7 @@ jobs:
     executor: python
     steps:
       - checkout
-      - run:
-          name: Changing owner of python packages to circleci
-          command: |
-            sudo chown -R circleci:circleci /usr/local/bin
-            sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
+      - *chown_pipenv_cache
       - *restore_pipenv_cache
       - run:
           name: Installing dependencies
@@ -41,6 +43,7 @@ jobs:
     executor: python
     steps:
       - checkout
+      - *chown_pipenv_cache
       - *restore_pipenv_cache
       - run:
           name: Running tests
