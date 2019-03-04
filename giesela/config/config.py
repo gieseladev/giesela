@@ -297,7 +297,11 @@ class Config:
         runtime_config = await self.config_coll.find_one(self.RUNTIME_ID)
         if runtime_config:
             del runtime_config["_id"]
-            await self.runtime.dump_to_redis(runtime_config)
+        else:
+            log.debug("using local RUNTIME config")
+            runtime_config = abstract.config_dict(self.app.runtime)
+
+        await self.runtime.dump_to_redis(runtime_config)
 
     async def _load_guild(self):
         log.info("loading guild")

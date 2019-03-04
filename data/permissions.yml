@@ -96,7 +96,7 @@ guild_roles:
     name: Active Listener
     grant:
       - queue.add
-      - playlist.owned
+      - playlist.create
 
 # global roles are like superglobal roles only that they don't stand above guild roles.
 # i.e. guild roles will take precedence over the global roles.
