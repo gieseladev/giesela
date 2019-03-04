@@ -1,4 +1,4 @@
-FROM python:stretch
+FROM python:alpine
 
 EXPOSE 30000
 

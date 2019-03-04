@@ -1,0 +1,58 @@
+version: 2.1
+
+references:
+  restore_pipenv_cache: &restore_pipenv_cache
+    restore_cache:
+      key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+
+
+orbs:
+  docker-publish: circleci/docker-publish@0.1.6
+
+jobs:
+  install:
+    steps:
+      - checkout
+      - run:
+          name: Chaning owner of python packages to circleci
+          command: |
+            sudo chown -R circleci:circleci /usr/local/bin
+            sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
+      - *restore_pipenv_cache
+      - run:
+          name: Installing dependencies
+          command: |
+            sudo pip install pipenv
+            pipenv install --dev
+      - save_cache:
+          key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.7/site-packages"
+
+  test:
+    steps:
+      - checkout
+      - *restore_pipenv_cache
+      - run:
+          name: Running tests
+          command: pipenv run pytest -- --junitxml=test-reports/junit.xml
+      - store-test-results:
+          path: test-reports
+
+workflows:
+  main:
+    jobs:
+      - install
+
+      - test:
+          requires:
+            - install
+
+      - docker-publish/publish:
+          image: "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
+          tag: edge
+
+          requires:
+            - test

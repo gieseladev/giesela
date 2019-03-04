@@ -103,19 +103,29 @@ def get_higher_role_contexts(context: RoleContext) -> Iterator[RoleContext]:
     +------------------------+
 
     The results are ordered from highest to lowest.
-    """
 
-    def recursive_hierarchy_traverse(level: ContextHierarchy):
+    THIS IS NOT THE ORDER PERMISSIONS ARE CONSIDERED IN!
+    The order reflects the permission to edit the following roles.
+    """
+    contexts: List[RoleContext] = []
+
+    def recursive_hierarchy_traverse(level: ContextHierarchy) -> bool:
         if context in level:
-            return
+            return True
 
         for level_context, value in level.items():
-            yield level_context
+            if value is None:
+                continue
 
-            if value is not None:
-                yield from recursive_hierarchy_traverse(value)
+            if recursive_hierarchy_traverse(value):
+                contexts.append(level_context)
+                return True
 
-    return recursive_hierarchy_traverse(ROLE_CONTEXT_HIERARCHY)
+        return False
+
+    recursive_hierarchy_traverse(ROLE_CONTEXT_HIERARCHY)
+
+    yield from reversed(contexts)
 
 
 def get_higher_or_equal_role_contexts(context: RoleContext) -> Iterator[RoleContext]:
@@ -200,6 +210,7 @@ RoleOrderValue = Tuple[int, int]
 
 
 def build_role_order_value(context: Union[RoleContext, int], position: int) -> RoleOrderValue:
+    """Construct a role order value"""
     if isinstance(context, RoleContext):
         context = context.order_value
 

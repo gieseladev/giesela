@@ -1,6 +1,6 @@
 import logging
 from dataclasses import dataclass
-from typing import Dict, Iterable, List, Optional, Union, cast
+from typing import Any, Dict, Iterable, List, Optional, Union, cast
 
 from discord import Client, Member, Role, User
 from discord.ext.commands.bot import BotBase
@@ -29,6 +29,12 @@ class RoleTarget:
             self._target = f"{target.guild.id}{GUILD_SPLIT}{target.id}"
         else:
             self._target = str(target)
+
+    def __eq__(self, other: Any) -> bool:
+        if isinstance(other, RoleTarget):
+            return self._target == other._target
+        else:
+            return NotImplemented
 
     def __repr__(self) -> str:
         return f"RoleTarget {self._target}"
@@ -166,6 +172,8 @@ def sort_targets_by_specificity(targets: Iterable[RoleTarget]) -> List[RoleTarge
             return 4
         elif target.is_role:
             return 5
+        else:
+            raise TypeError(f"Can't sort unknown target: {target}")
 
     return sorted(targets, key=sort_key)
 

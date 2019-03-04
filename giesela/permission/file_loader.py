@@ -45,7 +45,8 @@ def _ensure_type(obj: Union[Any, None], cls: Type[T], msg: str = None) -> Union[
     The passed message is formatted with the following keyword arguments:
     - obj:      obj
     - cls:      cls
-    - obj_type: type(obj)
+    - obj_cls   type(obj)
+    - obj_type  obj_cls.__name__
 
     If no message is passed, a default message is used.
     """
@@ -53,7 +54,9 @@ def _ensure_type(obj: Union[Any, None], cls: Type[T], msg: str = None) -> Union[
         return None
 
     if not isinstance(obj, cls):
-        msg = msg.format(obj=obj, cls=cls, obj_type=type(obj)) if msg else f"Expected type {cls}, found {type(obj)}: {obj}"
+        obj_cls = type(obj)
+        obj_type = obj_cls.__name__
+        msg = msg.format(obj=obj, cls=cls, obj_cls=obj_cls, obj_type=obj_type) if msg else f"Expected type {cls}, found {obj_type}: {obj}"
         raise PermissionFileError(msg)
 
     return obj
@@ -71,7 +74,7 @@ def _make_list(data: Union[None, T, List[T]]) -> List[T]:
 
 
 def _get_synonym(data: Dict[str, T], *synonyms: str) -> Optional[T]:
-    """Return the first truthy value from the given keys."""
+    """Return the first value from the given keys."""
     for synonym in synonyms:
         try:
             return data[synonym]

@@ -308,6 +308,7 @@ class PermManager:
         """Check whether a target is allowed to edit the given role."""
 
         async def has_edit_lower_perm() -> bool:
+            # when assigning default roles should be allowed
             global_only = role.is_global or (role.is_default and not assign)
             targets = await get_role_targets_for(self._bot, target, global_only=global_only)
             target_ids = [str(role_target) for role_target in targets]
