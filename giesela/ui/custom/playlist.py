@@ -17,7 +17,7 @@ from ..help import AutoHelpEmbed
 from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
 
 if TYPE_CHECKING:
-    from giesela.cogs.player import Player
+    from giesela.extensions.player import Player
 
 log = logging.getLogger(__name__)
 

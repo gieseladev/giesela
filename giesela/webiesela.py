@@ -20,7 +20,7 @@ from .lib.web_socket_server import SimpleSSLWebSocketServer, SimpleWebSocketServ
 
 if TYPE_CHECKING:
     from giesela import GieselaPlayer, Giesela
-    from .cogs.webiesela import Webiesela
+    from .extensions.webiesela import Webiesela
 
 log = logging.getLogger(__name__)
 

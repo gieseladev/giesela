@@ -11,7 +11,7 @@ from discord.ext.commands import AutoShardedBot, Command, CommandError, CommandI
 
 from giesela.lib.web_author import WebAuthor
 from giesela.utils import annotation_only
-from . import cogs, constants, signals, utils
+from . import constants, extensions, signals, utils
 from .config import Config
 from .lib import GiTilsClient
 
@@ -40,7 +40,7 @@ class GieselaContext(Context):
 
 @annotation_only
 class _StorageTypeHints:
-    """Type hints for references stored in Giesela's "storage" by cogs"""
+    """Type hints for references stored in Giesela's "storage" by extensions"""
     aiosession: aiohttp.ClientSession
     gitils: GiTilsClient
     perm_manager: "PermManager"
@@ -70,7 +70,7 @@ class Giesela(AutoShardedBot, _StorageTypeHints):
 
         self.http.user_agent += f" Giesela/{constants.VERSION}"
 
-        for ext in cogs.get_extensions():
+        for ext in extensions.get_extensions():
             log.info(f"loading extension {ext}")
             self.load_extension(ext)
 
