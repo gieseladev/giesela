@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Running tests
           command: pipenv run pytest -- --junitxml=test-reports/junit.xml
-      - store-test-results:
+      - store_test_results:
           path: test-reports
 
 workflows:
