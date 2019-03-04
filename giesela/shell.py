@@ -9,7 +9,6 @@ from asyncio import subprocess
 from typing import Any, Callable, Dict, List, NamedTuple, Optional, Type, Union
 
 import aiohttp
-import js2py
 from discord.ext.commands import Context
 
 from .bot import Giesela
@@ -216,27 +215,6 @@ class GieselaInterpreter(ShellInterpreter, metaclass=abc.ABCMeta):
         return context
 
 
-@register_interpreter("js", "javascript")
-class JavascriptInterpreter(GieselaInterpreter):
-    language_name = "Javascript"
-    highlight_language = "js"
-
-    def __init__(self, **kwargs) -> None:
-        super().__init__(**kwargs)
-
-        self.eval_js = js2py.EvalJs(super().context)
-
-    @property
-    def context(self) -> Dict[str, Any]:
-        return self.eval_js.__dict__
-
-    async def run(self, code: str) -> Any:
-        result = self.eval_js.eval(code)
-        if result is None:
-            result = EmptyResult
-        return result
-
-
 @register_interpreter("py", "python")
 class PythonInterpreter(GieselaInterpreter):
     language_name = "Python"
@@ -411,8 +389,6 @@ class GieselaShell:
         except ShellException as e:
             error = e
         except BaseException as e:
-            # TODO don't even log these...
-            log.exception("Something unexpected happened", extra=dict(report=False))
             error = ShellException("An unhandled error occurred", original=e)
 
         line = ShellLine(self.interpreter, code, result, error)

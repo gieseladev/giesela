@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "331e5c3213f468b6529291c98b59cf1e7c630b64e3583b13ff0f89424defa43f"
+            "sha256": "410dbe78dbc3928e23d5ded41b95baa91262e84ad3bdf0c03678792ce96ed941"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -197,14 +197,6 @@
         "imgurpython": {
             "file": "https://github.com/Imgur/imgurpython/archive/master.zip"
         },
-        "js2py": {
-            "hashes": [
-                "sha256:6deaf6c2e49f91b6800581fbddd24b0ee51164e916e63681a368199f1de593ab",
-                "sha256:aa8d4c9eaa0b55fb19b04a1edbe6871648b0f4bed4e885f98c43ac3065b914d9"
-            ],
-            "index": "pypi",
-            "version": "==0.60"
-        },
         "lxml": {
             "hashes": [
                 "sha256:0358b9e9642bc7d39aac5cffe9884a99a5ca68e5e2c1b89e570ed60da9139908",
@@ -323,12 +315,6 @@
             "markers": "python_version >= '2.7' and python_version != '3.0.*' and python_version != '3.2.*' and python_version != '3.3.*' and python_version != '3.1.*'",
             "version": "==2.19"
         },
-        "pyjsparser": {
-            "hashes": [
-                "sha256:e4a659df3db42a2ff9fbc961eb6d4076a0b945e1aadfc20d48f913ad5dca011d"
-            ],
-            "version": "==2.5.2"
-        },
         "pymongo": {
             "hashes": [
                 "sha256:025f94fc1e1364f00e50badc88c47f98af20012f23317234e51a11333ef986e6",
@@ -420,13 +406,6 @@
             "index": "pypi",
             "version": "==0.7.0"
         },
-        "pytz": {
-            "hashes": [
-                "sha256:32b0891edff07e28efe91284ed9c31e123d84bea3fd98e1f72be2508f43ef8d9",
-                "sha256:d5f05e487007e29e03409f9398d074e158d920d36eb82eaf66fb1136b0c5374c"
-            ],
-            "version": "==2018.9"
-        },
         "pyyaml": {
             "hashes": [
                 "sha256:3d7da3009c0f3e783b2c873687652d83b1bbfd5c88e9813fb7e5b03c0dd3108b",
@@ -466,12 +445,6 @@
                 "sha256:eaed742b48b1f3e2d45ba6f79401b2ed5dc33b2123dfe216adb90d4bfa0ade26"
             ],
             "version": "==1.8"
-        },
-        "tzlocal": {
-            "hashes": [
-                "sha256:4ebeb848845ac898da6519b9b31879cf13b6626f7184c496037b818e238f2c4e"
-            ],
-            "version": "==1.5.1"
         },
         "urllib3": {
             "hashes": [

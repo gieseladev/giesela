@@ -12,7 +12,6 @@ pynacl = "*"
 aiohttp = "*"
 websockets = "*"
 colorlog = "*"
-"js2py" = "*"
 lxml = "*"
 pyyaml = "*"
 uvloop = {version = "*", markers = "sys_platform != 'win32'"}
