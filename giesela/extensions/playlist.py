@@ -394,6 +394,10 @@ class PlaylistCog(commands.Cog, name="Playlist"):
                 f"{description}"
             )
 
+        if not paginator:
+            await ctx.send(embed=Embed(description="Sadly there are no playlists to show you.", colour=Colour.dark_blue()))
+            return
+
         # MAYBE use special viewer with play (and other) features
         viewer = EmbedViewer(ctx.channel, bot=self.bot, user=ctx.author, embeds=paginator)
         await viewer.display()
@@ -568,5 +572,4 @@ class PlaylistCog(commands.Cog, name="Playlist"):
 
 
 def setup(bot: Giesela):
-    PlaylistCog.__name__ = "Playlist"
     bot.add_cog(PlaylistCog(bot))

@@ -1,4 +1,4 @@
-MAIN_VERSION = "5.6.0"
+MAIN_VERSION = "5.6.1"
 SUB_VERSION = "refreshed-ll"
 VERSION = MAIN_VERSION + "_" + SUB_VERSION
 

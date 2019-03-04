@@ -385,7 +385,7 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
 
         super().__init__(channel, bot=bot, user=user, message=message, **kwargs)
 
-        if self.embeds and len(self.embeds) == 1 and no_controls_for_single_page:
+        if self.embeds is not None and len(self.embeds) <= 1 and no_controls_for_single_page:
             self.disable_handler(self.previous_page)
             self.disable_handler(self.next_page)
 
@@ -399,7 +399,7 @@ class _HorizontalPageViewer(InteractableEmbed, metaclass=abc.ABCMeta):
         self._current_index = index
 
     async def get_current_embed(self) -> Embed:
-        if self.embeds:
+        if self.embeds is not None:
             return self.embeds[self.current_index % len(self.embeds)]
         elif self.embed_callback:
             res = self.embed_callback(self.current_index)
