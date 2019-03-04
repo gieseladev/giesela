@@ -19,7 +19,7 @@ from giesela.ui.custom import ShellUI
 log = logging.getLogger(__name__)
 
 
-class AdminTools:
+class AdminCog(commands.Cog, name="Admin"):
     def __init__(self, bot: Giesela) -> None:
         self.bot = bot
         self.aiosession = getattr(bot, "aiosession", None)
@@ -27,6 +27,7 @@ class AdminTools:
         if not self.aiosession:
             self.aiosession = aiohttp.ClientSession(loop=self.bot.loop)
 
+    @commands.Cog.listener()
     async def on_ready(self):
         goodbye_message = await self.bot.restore("goodbye_message", delete_after=True)
         if goodbye_message:
@@ -186,4 +187,4 @@ class AdminTools:
 
 
 def setup(bot: Giesela):
-    bot.add_cog(AdminTools(bot))
+    bot.add_cog(AdminCog(bot))

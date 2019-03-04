@@ -83,7 +83,7 @@ def _check_if_stealing(ctx: Context, player: GieselaPlayer) -> bool:
     return require_steal
 
 
-class Player:
+class PlayerCog(commands.Cog, name="Player"):
     np_messages: Dict[int, NowPlayingEmbed]
     _disconnects: Dict[int, asyncio.Future]
 
@@ -102,6 +102,7 @@ class Player:
         self.np_messages = {}
         self._disconnects = {}
 
+    @commands.Cog.listener()
     async def on_ready(self):
         np_messages = await self.bot.restore("np_messages")
         if np_messages:
@@ -121,6 +122,7 @@ class Player:
 
         await self.update_now_playing()
 
+    @commands.Cog.listener()
     async def on_shutdown(self):
         np_messages = []
         for guild_id, embed in self.np_messages.items():
@@ -263,6 +265,7 @@ class Player:
 
         await self.bot.change_presence(activity=game)
 
+    @commands.Cog.listener()
     async def on_voice_state_update(self, member: Member, before: VoiceState, after: VoiceState):
         giesela_voice = member.guild.me.voice
         if not giesela_voice:
@@ -571,4 +574,4 @@ class Player:
 
 
 def setup(bot: Giesela):
-    bot.add_cog(Player(bot))
+    bot.add_cog(PlayerCog(bot))

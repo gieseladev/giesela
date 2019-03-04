@@ -6,7 +6,7 @@ from giesela import permission
 from giesela.permission import perm_tree
 
 
-class Tools:
+class ToolsCog(commands.Cog, name="Tools"):
     bot: Bot
 
     def __init__(self, bot: Bot) -> None:
@@ -25,4 +25,4 @@ class Tools:
 
 
 def setup(bot: Bot):
-    bot.add_cog(Tools(bot))
+    bot.add_cog(ToolsCog(bot))

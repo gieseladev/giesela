@@ -12,7 +12,7 @@ log = logging.getLogger(__name__)
 LOAD_ORDER = 2
 
 
-class Webiesela:
+class WebieselaCog(commands.Cog, name="Webiesela"):
     playlist_manager: PlaylistManager
     radio_station_manager: RadioStationManager
 
@@ -24,11 +24,13 @@ class Webiesela:
         self.playlist_manager = self.bot.playlist_manager
         self.radio_station_manager = self.bot.radio_station_manager
 
+    @commands.Cog.listener()
     async def on_ready(self):
         if self.config.app.webiesela.start:
             log.info("starting Webiesela")
             WebieselaServer.run(self)
 
+    @commands.Cog.listener()
     async def on_shutdown(self):
         if self.config.app.webiesela.start and WebieselaServer.server:
             log.debug("stopping Webiesela")
@@ -49,4 +51,4 @@ class Webiesela:
 
 
 def setup(bot: Giesela):
-    bot.add_cog(Webiesela(bot))
+    bot.add_cog(WebieselaCog(bot))

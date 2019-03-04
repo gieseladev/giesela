@@ -13,7 +13,7 @@ from giesela.permission import perm_tree
 from giesela.permission.utils import ensure_entry_add_permissions, ensure_revert_chapter_permission, ensure_skip_chapter_permission
 from giesela.ui import PromptYesNo, VerticalTextViewer, prefab, text as text_utils
 from giesela.ui.custom import EntrySearchUI
-from .player import Player
+from .player import PlayerCog
 
 LOAD_ORDER = 1
 
@@ -21,7 +21,7 @@ LOAD_ORDER = 1
 class QueueBase:
     bot: Giesela
 
-    get_player: Player.get_player
+    get_player: PlayerCog.get_player
     extractor: Extractor
 
     def __init__(self, bot: Giesela) -> None:
@@ -424,9 +424,9 @@ class DisplayCog(QueueBase):
             await ctx.message.delete()
 
 
-class Queue(EnqueueCog, ManipulateCog, DisplayCog):
-    pass
+class QueueCollectionCog(EnqueueCog, ManipulateCog, DisplayCog, commands.Cog, name="Queue"):
+    ...
 
 
 def setup(bot: Giesela):
-    bot.add_cog(Queue(bot))
+    bot.add_cog(QueueCollectionCog(bot))

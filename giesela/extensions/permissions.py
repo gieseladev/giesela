@@ -53,7 +53,7 @@ def get_role_name_with_flair(role: PermRole) -> str:
     return role.name
 
 
-class Permissions:
+class PermissionsCog(commands.Cog, name="Permissions"):
     def __init__(self, bot: Giesela) -> None:
         self.bot = bot
         self.perm_manager = PermManager(bot)
@@ -89,7 +89,7 @@ class Permissions:
 
             raise PermissionDenied(f"Cannot edit role {role.name}!")
 
-    async def __global_check_once(self, ctx: Context) -> bool:
+    async def bot_check_once(self, ctx: Context) -> bool:
         return all(await asyncio.gather(
             self.ensure_permission(ctx, *get_decorated_permissions(ctx.command, global_only=False), global_only=False),
             self.ensure_permission(ctx, *get_decorated_permissions(ctx.command, global_only=True), global_only=True)
@@ -473,4 +473,4 @@ class Permissions:
 
 
 def setup(bot: Giesela):
-    bot.add_cog(Permissions(bot))
+    bot.add_cog(PermissionsCog(bot))

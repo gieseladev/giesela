@@ -8,6 +8,7 @@ from typing import List, Optional, TYPE_CHECKING, Tuple
 from discord import Client, Colour, Embed, Guild, Message, TextChannel, User
 from discord.ext import commands
 from discord.ext.commands import Context
+from discord.ext.commands.bot import BotBase
 
 from giesela import utils
 from giesela.playlist import EditPlaylistProxy, Playlist, PlaylistEntry
@@ -17,7 +18,7 @@ from ..help import AutoHelpEmbed
 from ..interactive import MessageableEmbed, VerticalTextViewer, emoji_handler
 
 if TYPE_CHECKING:
-    from giesela.extensions.player import Player
+    from giesela.extensions.player import PlayerCog
 
 log = logging.getLogger(__name__)
 
@@ -39,7 +40,7 @@ def create_basic_embed(playlist: Playlist) -> Embed:
 
 
 class _PlaylistEmbed(VerticalTextViewer, HasBot, metaclass=abc.ABCMeta):
-    player_cog: "Player"
+    player_cog: "PlayerCog"
 
     def __init__(self, channel: TextChannel, *,
                  playlist: Playlist,
@@ -49,6 +50,9 @@ class _PlaylistEmbed(VerticalTextViewer, HasBot, metaclass=abc.ABCMeta):
                  message: Message = None,
                  **kwargs) -> None:
         super().__init__(channel, embed_frame=embed_frame or create_basic_embed(playlist), bot=bot, user=user, message=message, **kwargs)
+
+        if not isinstance(self.bot, BotBase):
+            raise TypeError("Need bot which inherits BotBase!")
 
         self.playlist = playlist
         self.player_cog = self.bot.cogs["Player"]

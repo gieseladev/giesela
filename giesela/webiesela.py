@@ -20,7 +20,7 @@ from .lib.web_socket_server import SimpleSSLWebSocketServer, SimpleWebSocketServ
 
 if TYPE_CHECKING:
     from giesela import GieselaPlayer, Giesela
-    from .extensions.webiesela import Webiesela
+    from .extensions.webiesela import WebieselaCog
 
 log = logging.getLogger(__name__)
 
@@ -444,13 +444,13 @@ class WebieselaServer:
     clients = []
     authenticated_clients = []
     server: SimpleWebSocketServer = None
-    cog: "Webiesela" = None
+    cog: "WebieselaCog" = None
     bot: "Giesela" = None
     _tokens: Dict[str, Tuple[int, WebAuthor]] = {}
     awaiting_registration: Dict[str, Callable] = {}
 
     @classmethod
-    def run(cls, cog: "Webiesela"):
+    def run(cls, cog: "WebieselaCog"):
         cls.cog = cog
         cls.bot = cog.bot
 

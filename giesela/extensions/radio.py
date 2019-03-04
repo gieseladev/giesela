@@ -9,7 +9,7 @@ from discord.ext.commands import Context
 from giesela import Giesela, GieselaPlayer, RadioStation, RadioStationManager, permission
 from giesela.permission import perm_tree
 from giesela.ui import ItemPicker
-from .player import Player
+from .player import PlayerCog
 
 LOAD_ORDER = 1
 
@@ -28,11 +28,11 @@ async def play_station(ctx: Context, player: GieselaPlayer, station: RadioStatio
     await ctx.send(f"Added **{entry}** to the queue!", embed=embed)
 
 
-class Radio:
+class RadioCog(commands.Cog, name="Radio"):
     bot: Giesela
     station_manager: RadioStationManager
 
-    get_player: Player.get_player
+    get_player: PlayerCog.get_player
 
     def __init__(self, bot: Giesela) -> None:
         self.bot = bot
@@ -101,4 +101,4 @@ class Radio:
 
 
 def setup(bot: Giesela):
-    bot.add_cog(Radio(bot))
+    bot.add_cog(RadioCog(bot))

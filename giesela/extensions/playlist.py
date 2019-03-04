@@ -18,7 +18,7 @@ from giesela.permission.utils import has_permission
 from giesela.playlist import GPL_VERSION, LoadedPlaylistEntry, Playlist, PlaylistManager, compat as pl_compat
 from giesela.ui import EmbedPaginator, EmbedViewer, ItemPicker, PromptYesNo, VerticalTextViewer
 from giesela.ui.custom import PlaylistBuilder, PlaylistRecoveryUI, PlaylistViewer
-from .player import Player
+from .player import PlayerCog
 
 LOAD_ORDER = 1
 
@@ -90,10 +90,10 @@ class UnquotedStr(str, Converter):
         return unquote_word(argument)
 
 
-class PlaylistCog:
+class PlaylistCog(commands.Cog, name="Playlist"):
     playlist_manager: PlaylistManager
 
-    get_player: Player.get_player
+    get_player: PlayerCog.get_player
     extractor: Extractor
 
     def __init__(self, bot: Giesela) -> None:
@@ -135,6 +135,7 @@ class PlaylistCog:
 
         return playlist_embed(playlist)
 
+    @commands.Cog.listener()
     async def on_shutdown(self):
         self.playlist_manager.close()
 

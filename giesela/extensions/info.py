@@ -1,5 +1,3 @@
-import functools
-import inspect
 import logging
 
 from discord import ClientException, Colour, Embed
@@ -12,13 +10,14 @@ from giesela.lib import help_formatter
 log = logging.getLogger(__name__)
 
 
-class Info:
+class InfoCog(commands.Cog, name="Info"):
     def __init__(self, bot: Bot) -> None:
         self.bot = bot
 
         bot.remove_command("help")
         self.formatter = help_formatter
 
+    @commands.Cog.listener()
     async def on_ready(self):
         for command in self.bot.commands:
             self.ensure_help_sub_command(command)
@@ -27,11 +26,11 @@ class Info:
         if not isinstance(group, commands.Group):
             return
 
-        func = functools.partial(self._send_help, cmd=group.name)
+        async def func(ctx: Context, *cmds: str) -> None:
+            await self._send_help(ctx, *cmds, cmd=group.name)
+
         func.__module__ = __package__
-        sub_cmd = Command(name="help", callback=func, aliases=["?"], hidden=True, help=f"Help for {group.qualified_name}")
-        sub_cmd.params.pop("cmd")
-        sub_cmd.params["cmds"] = inspect.Parameter("cmds", inspect.Parameter.VAR_POSITIONAL, annotation=str)
+        sub_cmd = Command(func, name="help", aliases=["?"], hidden=True, help=f"Help for {group.qualified_name}")
 
         try:
             group.add_command(sub_cmd)
@@ -100,4 +99,4 @@ class Info:
 
 
 def setup(bot: Bot):
-    bot.add_cog(Info(bot))
+    bot.add_cog(InfoCog(bot))

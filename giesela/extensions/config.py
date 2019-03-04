@@ -73,11 +73,12 @@ async def reset_config_value(ctx: Context, config, key: str):
     await ctx.send(embed=em)
 
 
-class Config:
+class ConfigCog(commands.Cog, name="Config"):
     def __init__(self, bot: Giesela) -> None:
         self.bot = bot
         self.config = bot.config
 
+    @commands.Cog.listener()
     async def on_guild_remove(self, guild: Guild):
         await self.config.remove_guild(guild.id)
 
@@ -126,4 +127,4 @@ class Config:
 
 
 def setup(bot: Giesela):
-    bot.add_cog(Config(bot))
+    bot.add_cog(ConfigCog(bot))

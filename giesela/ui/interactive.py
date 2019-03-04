@@ -514,7 +514,7 @@ class VerticalTextViewer(InteractableEmbed, Abortable, Startable):
         self._lines_displayed = 0
         self._ran_out_of_lines = False
 
-        if self.lines and no_controls_for_single_page:
+        if self.lines is not None and no_controls_for_single_page:
             if len(self.lines) <= self.window_height and sum(map(len, self.lines)) <= self.max_window_length:
                 log.info("Not showing scroll controls because Embed only one page")
                 self.disable_handler(self.scroll_up)

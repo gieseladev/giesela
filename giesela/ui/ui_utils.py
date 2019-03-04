@@ -87,8 +87,8 @@ class _FakeClient:
 
 
 class CustomParamsCommand(Command):
-    def __init__(self, name: str, callback: Callable, params: Dict[str, inspect.Parameter], **kwargs) -> None:
-        super().__init__(name, callback, **kwargs)
+    def __init__(self, name: str, func: Callable, params: Dict[str, inspect.Parameter], **kwargs) -> None:
+        super().__init__(func, name=name, **kwargs)
         self.params = params
 
     @property
