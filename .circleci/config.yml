@@ -64,7 +64,7 @@ workflows:
             - install
 
       - docker-publish/publish:
-          image: "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
+          image: "giesela/${CIRCLE_PROJECT_REPONAME}"
           tag: edge
 
           requires:
