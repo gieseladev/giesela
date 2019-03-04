@@ -18,19 +18,6 @@ from .player import PlayerCog
 LOAD_ORDER = 1
 
 
-class QueueBase:
-    bot: Giesela
-
-    get_player: PlayerCog.get_player
-    extractor: Extractor
-
-    def __init__(self, bot: Giesela) -> None:
-        self.bot = bot
-
-        self.get_player = self.bot.get_player
-        self.extractor = self.bot.extractor
-
-
 def pad_index(index: int, padding: int) -> str:
     padded_index = text_utils.keep_whitespace(f"{index}.".ljust(padding))
     return text_utils.wrap(padded_index, "`")
@@ -57,7 +44,21 @@ def extract_url_or_query_targets(target: str, url_checker: Callable[[str], bool]
     return [target]
 
 
-class EnqueueCog(QueueBase):
+class QueueCog(commands.Cog, name="Queue"):
+    bot: Giesela
+
+    get_player: PlayerCog.get_player
+    extractor: Extractor
+
+    def __init__(self, bot: Giesela) -> None:
+        self.bot = bot
+
+        self.get_player = self.bot.get_player
+        self.extractor = self.bot.extractor
+
+    # ================================================================================================================================================
+    #                                                                     ENQUEUE
+    # ================================================================================================================================================
     async def _play_cmd(self, ctx: Context, target: str, placement: int = None):
         player = await self.get_player(ctx)
 
@@ -126,8 +127,9 @@ class EnqueueCog(QueueBase):
         with suppress(Forbidden):
             await ctx.message.delete()
 
-
-class ManipulateCog(QueueBase):
+    # ================================================================================================================================================
+    #                                                                    MANIPULATE
+    # ================================================================================================================================================
 
     @commands.guild_only()
     @permission.has_permission(perm_tree.queue.remove)
@@ -315,8 +317,9 @@ class ManipulateCog(QueueBase):
         entry = player.queue.move(from_index, to_index)
         await ctx.send(f"Moved **{entry.entry}** from position `{from_pos}` to `{to_pos}`.")
 
-
-class DisplayCog(QueueBase):
+    # ================================================================================================================================================
+    #                                                                    DISPLAY
+    # ================================================================================================================================================
 
     async def _show_queue_entry_info(self, ctx: Context, index: int):
         player = await self.get_player(ctx)
@@ -424,9 +427,5 @@ class DisplayCog(QueueBase):
             await ctx.message.delete()
 
 
-class QueueCollectionCog(EnqueueCog, ManipulateCog, DisplayCog, commands.Cog, name="Queue"):
-    ...
-
-
 def setup(bot: Giesela):
-    bot.add_cog(QueueCollectionCog(bot))
+    bot.add_cog(QueueCog(bot))
