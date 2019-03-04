@@ -8,12 +8,11 @@ from discord import Forbidden
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Extractor, Giesela, GieselaPlayer, permission, utils
+from giesela import Giesela, GieselaPlayer, permission, utils
 from giesela.permission import perm_tree
 from giesela.permission.utils import ensure_entry_add_permissions, ensure_revert_chapter_permission, ensure_skip_chapter_permission
 from giesela.ui import PromptYesNo, VerticalTextViewer, prefab, text as text_utils
 from giesela.ui.custom import EntrySearchUI
-from .player import PlayerCog
 
 LOAD_ORDER = 1
 
@@ -46,9 +45,6 @@ def extract_url_or_query_targets(target: str, url_checker: Callable[[str], bool]
 
 class QueueCog(commands.Cog, name="Queue"):
     bot: Giesela
-
-    get_player: PlayerCog.get_player
-    extractor: Extractor
 
     def __init__(self, bot: Giesela) -> None:
         self.bot = bot

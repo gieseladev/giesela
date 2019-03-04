@@ -4,7 +4,7 @@ import itertools
 import logging
 import rapidjson
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Type, Union
+from typing import Any, Coroutine, Dict, List, Optional, Type, Union
 
 import aioredis
 import yaml
@@ -37,8 +37,6 @@ class FlattenProxy:
 
         if key:
             self.traverse(*key)
-
-        # TODO handle lists by converting them to dictionaries and using __getitem__ hook
 
     def __await__(self):
         return self.resolve().__await__()
@@ -288,30 +286,38 @@ class Config:
     def _create_guild(self, guild_id: int) -> GuildConfig:
         return GuildConfig(self.runtime, _id=guild_id, redis=self.redis, prefix=self.app.redis.namespaces.config, config_coll=self.config_coll)
 
-    async def _load_runtime(self):
+    async def _load_runtime(self, runtime_config: Optional[Dict[str, Any]]) -> None:
+        """Load runtime configuration.
+
+        Args:
+            runtime_config: If not provided (i.e. there is no runtime config) loads the local runtime config.
+        """
         log.info("loading runtime")
 
-        self.runtime = RuntimeConfig(self.app.runtime, _id=self.RUNTIME_ID, redis=self.redis, prefix=self.app.redis.namespaces.config,
-                                     config_coll=self.config_coll)
-
-        runtime_config = await self.config_coll.find_one(self.RUNTIME_ID)
         if runtime_config:
-            del runtime_config["_id"]
+            runtime_config.pop("_id", None)
         else:
             log.debug("using local RUNTIME config")
             runtime_config = abstract.config_dict(self.app.runtime)
 
         await self.runtime.dump_to_redis(runtime_config)
 
-    async def _load_guild(self):
+    async def _load_from_db(self):
+        self.runtime = RuntimeConfig(self.app.runtime, _id=self.RUNTIME_ID, redis=self.redis, prefix=self.app.redis.namespaces.config,
+                                     config_coll=self.config_coll)
+
         log.info("loading guild")
 
-        guilds = {}
-        tasks = []
+        guilds: Dict[int, GuildConfig] = {}
+        tasks: List[Coroutine] = []
+
+        runtime_config: Optional[Dict[str, Any]] = None
 
         async for guild_config in self.config_coll.find():
             guild_id = guild_config.pop("_id")
+
             if guild_id == self.RUNTIME_ID:
+                runtime_config = guild_config
                 continue
 
             guild = self._create_guild(guild_id)
@@ -319,8 +325,7 @@ class Config:
 
             guilds[guild_id] = guild
 
-        if tasks:
-            await asyncio.gather(*tasks)
+        await asyncio.gather(self._load_runtime(runtime_config), *tasks)
 
         self.guilds = guilds
 
@@ -328,7 +333,7 @@ class Config:
         if not self.redis:
             await self.connect_redis()
 
-        await asyncio.gather(self._load_runtime(), self._load_guild())
+        await self._load_from_db()
 
     async def remove_guild(self, guild_id: int):
         log.info(f"removing guild {guild_id}")

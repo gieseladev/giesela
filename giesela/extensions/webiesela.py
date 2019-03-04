@@ -3,9 +3,8 @@ import logging
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, RadioStationManager, WebieselaServer, permission
+from giesela import Giesela, WebieselaServer, permission
 from giesela.permission import perm_tree
-from giesela.playlist import PlaylistManager
 
 log = logging.getLogger(__name__)
 
@@ -13,9 +12,6 @@ LOAD_ORDER = 2
 
 
 class WebieselaCog(commands.Cog, name="Webiesela"):
-    playlist_manager: PlaylistManager
-    radio_station_manager: RadioStationManager
-
     def __init__(self, bot: Giesela) -> None:
         self.bot = bot
         self.config = bot.config

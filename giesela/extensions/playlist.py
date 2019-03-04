@@ -11,14 +11,13 @@ from discord import Attachment, Colour, Embed, File, Forbidden, User
 from discord.ext import commands
 from discord.ext.commands import BadArgument, Context, Converter, view as string_view
 
-from giesela import Extractor, Giesela, permission, utils
+from giesela import Giesela, permission, utils
 from giesela.lib import help_formatter
 from giesela.permission import perm_tree
 from giesela.permission.utils import has_permission
 from giesela.playlist import GPL_VERSION, LoadedPlaylistEntry, Playlist, PlaylistManager, compat as pl_compat
 from giesela.ui import EmbedPaginator, EmbedViewer, ItemPicker, PromptYesNo, VerticalTextViewer
 from giesela.ui.custom import PlaylistBuilder, PlaylistRecoveryUI, PlaylistViewer
-from .player import PlayerCog
 
 LOAD_ORDER = 1
 
@@ -92,9 +91,6 @@ class UnquotedStr(str, Converter):
 
 class PlaylistCog(commands.Cog, name="Playlist"):
     playlist_manager: PlaylistManager
-
-    get_player: PlayerCog.get_player
-    extractor: Extractor
 
     def __init__(self, bot: Giesela) -> None:
         self.bot = bot

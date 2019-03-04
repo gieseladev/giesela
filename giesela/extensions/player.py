@@ -7,7 +7,7 @@ from discord import Colour, Embed, Forbidden, Game, Guild, Member, Message, NotF
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from giesela import Giesela, GieselaPlayer, PlayerManager, SpecificChapterData, WebieselaServer, permission, utils
+from giesela import Giesela, GieselaPlayer, PlayerManager, SpecificChapterData, WebieselaServer, constants, permission, utils
 from giesela.permission import perm_tree
 from giesela.playlist import LoadedPlaylistEntry, PlaylistEntry
 from giesela.ui import PromptYesNo, VerticalTextViewer
@@ -253,7 +253,9 @@ class PlayerCog(commands.Cog, name="Player"):
         else:
             idle_game = await self.bot.config.runtime.misc.idle_game
             game = Game(name=idle_game.format(
-                active_players=len(active_players), guilds=len(self.bot.guilds), players=len(self.player_manager.players)))
+                active_players=len(active_players), guilds=len(self.bot.guilds), players=len(self.player_manager.players),
+                version=constants.VERSION
+            ))
 
         if entry:
             prefix = "❚❚ " if is_paused else ""

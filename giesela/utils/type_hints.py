@@ -1,17 +1,11 @@
-import inspect
-from contextlib import suppress
 from typing import Any, get_type_hints
 
 __all__ = ["annotation_only", "annotate_slots"]
 
 
-def annotation_only(cls: object):
-    """Removes all methods and attributes from a class"""
-    for attr, _ in inspect.getmembers(cls):
-        with suppress(Exception):
-            delattr(cls, attr)
-
-    return cls
+def annotation_only(*_):
+    """Decorating a class with this decorator will render it empty."""
+    return object
 
 
 def annotate_slots(cls: Any):

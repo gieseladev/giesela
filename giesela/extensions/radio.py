@@ -9,7 +9,6 @@ from discord.ext.commands import Context
 from giesela import Giesela, GieselaPlayer, RadioStation, RadioStationManager, permission
 from giesela.permission import perm_tree
 from giesela.ui import ItemPicker
-from .player import PlayerCog
 
 LOAD_ORDER = 1
 
@@ -31,8 +30,6 @@ async def play_station(ctx: Context, player: GieselaPlayer, station: RadioStatio
 class RadioCog(commands.Cog, name="Radio"):
     bot: Giesela
     station_manager: RadioStationManager
-
-    get_player: PlayerCog.get_player
 
     def __init__(self, bot: Giesela) -> None:
         self.bot = bot

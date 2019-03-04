@@ -3,20 +3,17 @@ import copy
 import logging
 import operator
 import rapidjson
-from typing import Any, Iterable, List, Optional, TYPE_CHECKING, Tuple, Type, Union
+from typing import Any, Iterable, List, Optional, Tuple, Type
 
 import aiohttp
-from discord import Colour, Embed, Message, User
+from discord import Colour, Embed, Message
 from discord.ext.commands import AutoShardedBot, Command, CommandError, CommandInvokeError, CommandNotFound, Context
 
-from giesela.lib.web_author import WebAuthor
-from giesela.utils import annotation_only
+from giesela.bot__type_hints import GieselaRefStorageTypeHints
 from . import constants, extensions, signals, utils
 from .config import Config
 from .lib import GiTilsClient
-
-if TYPE_CHECKING:
-    from .permission import PermManager, PermissionType, RoleTargetType
+from .lib.web_author import WebAuthor
 
 log = logging.getLogger(__name__)
 
@@ -38,19 +35,7 @@ class GieselaContext(Context):
         await asyncio.gather(*coros, return_exceptions=True)
 
 
-@annotation_only
-class _StorageTypeHints:
-    """Type hints for references stored in Giesela's "storage" by extensions"""
-    aiosession: aiohttp.ClientSession
-    gitils: GiTilsClient
-    perm_manager: "PermManager"
-
-    async def ensure_permission(self, ctx: Union[Context, User], *keys: "PermissionType", global_only: bool = False) -> True: ...
-
-    async def has_permission(self, target: "RoleTargetType", *perms: "PermissionType", global_only: bool = False) -> bool: ...
-
-
-class Giesela(AutoShardedBot, _StorageTypeHints):
+class Giesela(AutoShardedBot, GieselaRefStorageTypeHints):
     config: Config
 
     exit_signal: Optional[Type[signals.ExitSignal]]
@@ -65,8 +50,8 @@ class Giesela(AutoShardedBot, _StorageTypeHints):
         self.exit_signal = None
         self.config = Config.load_app(constants.CONFIG_LOCATION)
 
-        self.store_reference("aiosession", aiohttp.ClientSession(loop=self.loop))
-        self.store_reference("gitils", GiTilsClient(self.aiosession, self.config.app.gitils.url))
+        self.aiosession = aiohttp.ClientSession(loop=self.loop)
+        self.gitils = GiTilsClient(self.aiosession, self.config.app.gitils.url)
 
         self.http.user_agent += f" Giesela/{constants.VERSION}"
 
@@ -75,15 +60,17 @@ class Giesela(AutoShardedBot, _StorageTypeHints):
             self.load_extension(ext)
 
     def __getattr__(self, item: str):
-        stored = self._storage.get(item)
-        if stored is not None:
-            return stored
+        try:
+            value = self._storage[item]
+        except KeyError as e:
+            raise AttributeError(f"{self} doesn't have attribute {item}") from e
+        else:
+            return value
 
-        raise AttributeError(f"{self} doesn't have attribute {item}")
-
-    def store_reference(self, key: str, value, *, override: bool = False):
+    def store_reference(self, key: str, value: Any, *, override: bool = False) -> None:
         if key in self._storage and not override:
             raise KeyError(f"{key} is already in storage!")
+
         self._storage[key] = value
 
     async def persist(self, name: str, data: Any):
@@ -253,7 +240,7 @@ class Giesela(AutoShardedBot, _StorageTypeHints):
 
     @classmethod
     async def on_ready(cls):
-        log.info(f"Connected!  Giesela v{constants.VERSION}")
+        log.info(f"Connected! Giesela v{constants.VERSION}")
 
     async def on_error(self, event: str, *args, **kwargs):
         log.exception(f"Error in {event} ({args}, {kwargs})")
