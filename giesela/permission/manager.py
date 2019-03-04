@@ -40,7 +40,7 @@ PERM_TARGETS_INDEXES = [
 
 T = TypeVar("T")
 
-RoleOrId = Union[Role, str]
+RoleOrID = Union[Role, str]
 
 
 def get_guild_id_selector(guild_id: int = None, *,
@@ -278,7 +278,7 @@ class PermManager:
         perm = await REDIS_HAS_ALL_PERMISSIONS.eval(self._redis, keys=targets, args=[self._redis_prefix, *perms])
         return perm == b"1"
 
-    async def has_role(self, target: RoleTargetType, role: RoleOrId) -> bool:
+    async def has_role(self, target: RoleTargetType, role: RoleOrID) -> bool:
         """Check whether a target has a role"""
         targets = await get_role_targets_for(self._bot, target, global_only=role.is_global)
         target_keys = [f"{self._redis_prefix}:targets:{target}" for target in targets]
@@ -287,7 +287,7 @@ class PermManager:
         res = await REDIS_ANY_TARGET_HAS_ROLE.eval(self._redis, keys=target_keys, args=[role_id])
         return res == b"1"
 
-    async def target_has_role(self, target: RoleTarget, role: RoleOrId) -> bool:
+    async def target_has_role(self, target: RoleTarget, role: RoleOrID) -> bool:
         """Check whether a `RoleTarget` has a role"""
         role_id = role.absolute_role_id if isinstance(role, Role) else role
         target_key = f"{self._redis_prefix}:targets:{target}"
@@ -295,7 +295,7 @@ class PermManager:
         res = await REDIS_ANY_TARGET_HAS_ROLE.eval(self._redis, keys=[target_key], args=[role_id])
         return res == b"1"
 
-    async def role_has_permission(self, role: RoleOrId, perm: str, *, default: T = False) -> Union[bool, T]:
+    async def role_has_permission(self, role: RoleOrID, perm: str, *, default: T = False) -> Union[bool, T]:
         """Check whether role has permission"""
         role_id = role.absolute_role_id if isinstance(role, Role) else role
         has_perm = await self._redis.hget(f"{self._redis_prefix}:roles:{role_id}:permissions", perm)
@@ -565,7 +565,7 @@ class PermManager:
         role_pool = await self._get_role_pool(match)
         await self._dump_roles_to_redis(role_pool, tr=tr)
 
-    async def get_order_with_role(self, role: RoleOrId) -> Optional[RoleOrder]:
+    async def get_order_with_role(self, role: RoleOrID) -> Optional[RoleOrder]:
         """Get the order of a role"""
         role_id = role.absolute_role_id if isinstance(role, Role) else role
 
@@ -643,7 +643,7 @@ class PermManager:
         """Get the first role with the specified id or search for it otherwise"""
         return await self.get_role(query) or await self.search_role_for_guild(query, guild_id)
 
-    async def get_targets_with_role(self, role: RoleOrId) -> List[Target]:
+    async def get_targets_with_role(self, role: RoleOrID) -> List[Target]:
         """Get all targets that have the specified role"""
         role_id = role.absolute_role_id if isinstance(role, Role) else role
         cursor = self._aggregate_ordered_targets({"role_ids": role_id})
@@ -728,7 +728,7 @@ class PermManager:
 
         return roles
 
-    async def role_add_target(self, role: RoleOrId, target: RoleTarget) -> None:
+    async def role_add_target(self, role: RoleOrID, target: RoleTarget) -> None:
         """Assign a role to a target"""
         if isinstance(role, Role):
             role_id = role.absolute_role_id
@@ -749,7 +749,7 @@ class PermManager:
 
         await self._compile_targets_with_match({"_id": str(target)})
 
-    async def role_remove_target(self, role: RoleOrId, target: RoleTarget) -> None:
+    async def role_remove_target(self, role: RoleOrID, target: RoleTarget) -> None:
         """Remove a role from a target"""
         role_id = role.absolute_role_id if isinstance(role, Role) else role
 
@@ -762,7 +762,7 @@ class PermManager:
 
         await self._redis.lrem(f"{self._redis_prefix}:targets:{target}", 1, role_id)
 
-    async def delete_role(self, role: RoleOrId) -> None:
+    async def delete_role(self, role: RoleOrID) -> None:
         """Delete a role."""
         role_id = role.absolute_role_id if isinstance(role, Role) else role
 

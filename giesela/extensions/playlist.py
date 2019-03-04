@@ -94,9 +94,14 @@ class PlaylistCog(commands.Cog, name="Playlist"):
 
     def __init__(self, bot: Giesela) -> None:
         self.bot = bot
-        self.playlist_manager = PlaylistManager.load(self.bot, self.bot.config.app.files.playlists)
 
-        self.bot.store_reference("playlist_manager", self.playlist_manager)
+        try:
+            playlist_manager = self.bot.playlist_manager
+        except AttributeError:
+            playlist_manager = PlaylistManager.load(self.bot, self.bot.config.app.files.playlists)
+            self.bot.store_reference("playlist_manager", playlist_manager)
+
+        self.playlist_manager = playlist_manager
 
         self.get_player = self.bot.get_player
         self.extractor = self.bot.extractor

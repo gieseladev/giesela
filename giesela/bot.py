@@ -3,6 +3,7 @@ import copy
 import logging
 import operator
 import rapidjson
+from contextlib import suppress
 from typing import Any, Iterable, List, Optional, Tuple, Type
 
 import aiohttp
@@ -72,6 +73,12 @@ class Giesela(AutoShardedBot, GieselaRefStorageTypeHints):
             raise KeyError(f"{key} is already in storage!")
 
         self._storage[key] = value
+
+    def remove_reference(self, *keys: str) -> None:
+        """Remove references previously assigned with `Giesela.store_reference`"""
+        for key in keys:
+            with suppress(KeyError):
+                del self._storage[key]
 
     async def persist(self, name: str, data: Any):
         key = f"{self.config.app.redis.namespaces.persist}:{name}"

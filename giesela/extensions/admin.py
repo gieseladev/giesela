@@ -1,3 +1,4 @@
+import inspect
 import logging
 import random
 import textwrap
@@ -5,9 +6,11 @@ import time
 import traceback
 from contextlib import redirect_stdout
 from io import StringIO
+from pathlib import Path
+from typing import Optional
 
 import aiohttp
-from discord import Message
+from discord import Colour, Embed, Message
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -22,10 +25,7 @@ log = logging.getLogger(__name__)
 class AdminCog(commands.Cog, name="Admin"):
     def __init__(self, bot: Giesela) -> None:
         self.bot = bot
-        self.aiosession = getattr(bot, "aiosession", None)
-
-        if not self.aiosession:
-            self.aiosession = aiohttp.ClientSession(loop=self.bot.loop)
+        self.aiosession = self.bot.aiosession
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -184,6 +184,41 @@ class AdminCog(commands.Cog, name="Admin"):
 
         await ctx.send(":ok_hand:")
         return
+
+    @permission.has_global_permission(perm_tree.admin.control.execute)
+    @commands.command(name="reloadext", aliases=["extreload"])
+    async def reload_extension_cmd(self, ctx: Context, extension: str) -> None:
+        """Reload an extension"""
+
+        def _get_extension_name(ext: str) -> Optional[str]:
+            if ext in self.bot.extensions:
+                return ext
+
+            ext = Path(ext).stem
+            if ext in self.bot.extensions:
+                return ext
+
+            ext = f"giesela.extensions.{ext}"
+            if ext in self.bot.extensions:
+                return ext
+
+            return None
+
+        ext_name = _get_extension_name(extension)
+
+        if not ext_name:
+            cog = self.bot.get_cog(extension)
+            if not cog:
+                raise commands.CommandError(f"Couldn't find extension or cog {extension}")
+
+            ext_name = _get_extension_name(inspect.getfile(type(cog)))
+            if not ext_name:
+                raise commands.CommandError(f"No extension for cog {extension})")
+
+        self.bot.unload_extension(ext_name)
+        self.bot.load_extension(ext_name)
+
+        await ctx.send(embed=Embed(description=f"Extension {extension} reloaded!", colour=Colour.green()))
 
 
 def setup(bot: Giesela):

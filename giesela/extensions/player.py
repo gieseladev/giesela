@@ -102,6 +102,9 @@ class PlayerCog(commands.Cog, name="Player"):
         self.np_messages = {}
         self._disconnects = {}
 
+    def cog_unload(self) -> None:
+        self.bot.remove_reference("get_player", "extractor")
+
     @commands.Cog.listener()
     async def on_ready(self):
         np_messages = await self.bot.restore("np_messages")

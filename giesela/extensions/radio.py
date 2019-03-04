@@ -33,8 +33,14 @@ class RadioCog(commands.Cog, name="Radio"):
 
     def __init__(self, bot: Giesela) -> None:
         self.bot = bot
-        self.station_manager = RadioStationManager.load(bot, bot.config.app.files.radio_stations)
-        self.bot.store_reference("radio_station_manager", self.station_manager)
+
+        try:
+            station_manager = self.bot.radio_station_manager
+        except AttributeError:
+            station_manager = RadioStationManager.load(bot, bot.config.app.files.radio_stations)
+            self.bot.store_reference("radio_station_manager", station_manager)
+
+        self.station_manager = station_manager
 
         self.get_player = self.bot.get_player
 

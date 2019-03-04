@@ -56,11 +56,17 @@ def get_role_name_with_flair(role: PermRole) -> str:
 class PermissionsCog(commands.Cog, name="Permissions"):
     def __init__(self, bot: Giesela) -> None:
         self.bot = bot
-        self.perm_manager = PermManager(bot)
 
-        bot.store_reference("perm_manager", self.perm_manager)
-        bot.store_reference("ensure_permission", self.ensure_permission)
-        bot.store_reference("has_permission", self.perm_manager.has)
+        try:
+            perm_manager = self.bot.perm_manager
+        except AttributeError:
+            perm_manager = PermManager(bot)
+            bot.store_reference("perm_manager", perm_manager)
+
+        self.perm_manager = perm_manager
+
+        bot.store_reference("ensure_permission", self.ensure_permission, override=True)
+        bot.store_reference("has_permission", self.perm_manager.has, override=True)
 
     async def ensure_permission(self, ctx: Union[Context, User], *keys: PermissionType, global_only: bool = False) -> True:
         """Make sure the ctx has the given permissions, raise PermissionDenied otherwise."""
