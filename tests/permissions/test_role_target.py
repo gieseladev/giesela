@@ -37,11 +37,7 @@ async def test_get_roles_for():
             return user.id == owner_id
 
     def mock_create(cls: Type[T], **attrs) -> T:
-        inst = object.__new__(cls)
-        for k, v in attrs.items():
-            setattr(inst, k, v)
-
-        return inst
+        return object.__new__(type(cls.__name__, (cls,), attrs))
 
     bot = cast(Bot, MockBot())
 
@@ -50,9 +46,10 @@ async def test_get_roles_for():
     assert await get_role_targets_for(bot, owner, guild_only=True) == []
 
     guild = mock_create(Guild, id=123124, owner_id=56456456)
-    user = mock_create(User, id=56456456)
-    member = mock_create(Member, _user=user, guild=guild, roles=[])
+
+    member = mock_create(Member, id=56456456, guild=guild, roles=[])
     setattr(guild, "_members", {member.id: member})
+
     assert await get_role_targets_for(bot, member) == [RoleTarget("56456456"), RoleTarget("123124:56456456"), RoleTarget("#guild_owner"),
                                                        RoleTarget("#everyone")]
 
