@@ -50,7 +50,9 @@ jobs:
       - *install_pipenv_cache
       - run:
           name: Running tests
-          command: pipenv run tests -- --junitxml=test-reports/junit.xml
+          command: |
+            mkdir -p test-reports
+            pipenv run tests -- --junitxml=test-reports/junit.xml
       - store_test_results:
           path: test-reports
 
