@@ -27,13 +27,13 @@ def from_redis(data):
     return unflatten_data(final)
 
 
-def flatten_data(data: Dict[str, Any]) -> Dict[str, Any]:
+def flatten_data(data: Dict[str, Any], delimiter: str = ".") -> Dict[str, Any]:
     flat = {}
     for key, value in data.items():
         if isinstance(value, dict):
             value = flatten_data(value)
             for sub_key, val in value.items():
-                flat[f"{key}.{sub_key}"] = val
+                flat[f"{key}{delimiter}{sub_key}"] = val
         else:
             flat[key] = value
 
