@@ -9,12 +9,18 @@ references:
 orbs:
   docker-publish: circleci/docker-publish@0.1.6
 
+executors:
+  python:
+    docker:
+      - image: circleci/python:3.7
+
 jobs:
   install:
+    executor: python
     steps:
       - checkout
       - run:
-          name: Chaning owner of python packages to circleci
+          name: Changing owner of python packages to circleci
           command: |
             sudo chown -R circleci:circleci /usr/local/bin
             sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
@@ -32,6 +38,7 @@ jobs:
             - "/usr/local/lib/python3.7/site-packages"
 
   test:
+    executor: python
     steps:
       - checkout
       - *restore_pipenv_cache
