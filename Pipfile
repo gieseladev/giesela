@@ -6,9 +6,7 @@ name = "pypi"
 [packages]
 "discord.py" = {file = "https://github.com/GieselaDev/discord.py/archive/rewrite.zip"}
 imgurpython = {file = "https://github.com/Imgur/imgurpython/archive/master.zip"}
-spotipy = "*"
 "beautifulsoup4" = "*"
-discogs-client = "*"
 pillow = "*"
 pynacl = "*"
 aiohttp = "*"
@@ -30,3 +28,6 @@ pytest-asyncio = "*"
 
 [requires]
 python_version = "3.7"
+
+[scripts]
+tests = "python -m pytest"

@@ -47,7 +47,7 @@ jobs:
       - *restore_pipenv_cache
       - run:
           name: Running tests
-          command: pipenv run pytest -- --junitxml=test-reports/junit.xml
+          command: pipenv run tests -- --junitxml=test-reports/junit.xml
       - store_test_results:
           path: test-reports
 

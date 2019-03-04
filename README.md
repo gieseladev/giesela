@@ -1,7 +1,7 @@
 # Giesela Refresh
 
+[![CircleCI](https://circleci.com/gh/gieseladev/giesela.svg?style=svg)](https://circleci.com/gh/gieseladev/giesela)
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/giesela/localized.svg)](https://crowdin.com/project/giesela)
-[![Build Status](https://travis-ci.org/GieselaDev/Giesela.svg?branch=refresh)](https://travis-ci.org/GieselaDev/Giesela)
 [![License](https://img.shields.io/github/license/gieseladev/giesela.svg?branch=refresh)](https://github.com/GieselaDev/Giesela/blob/refresh/LICENSE)
 
 
@@ -60,6 +60,3 @@ which Giesela understands, but I'm too lazy to name them all!
 
 [docker-container]: https://www.docker.com/what-container
 [docker-compose]: https://docs.docker.com/compose
-
-[discord-token]: https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token
-[discordpy-commands]: https://discordpy.readthedocs.io/en/rewrite/ext/commands/index.html "Commands Framework"
