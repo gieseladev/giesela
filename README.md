@@ -3,6 +3,6 @@
 
 # Peers required
 
-- [Ari](/gieseladev/ari) (`io.giesela.ari`)
-- [Elakshi](/gieseladev/elakshi) (`io.giesela.elakshi`)
-- [Wampus](/gieseladev/wampus) (`com.disord`)
+- [Ari](https://github.com/gieseladev/ari-player) (`io.giesela.ari`)
+- [Elakshi](https://github.com/gieseladev/elakshi) (`io.giesela.elakshi`)
+- [Wampus](https://github.com/gieseladev/wampus) (`com.disord`)
