@@ -1,4 +1,5 @@
 .idea/
+sqlboiler.*
 
 # Binaries for programs and plugins
 *.exe
