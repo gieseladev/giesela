@@ -57,3 +57,10 @@ func (e *Enforcer) HasPermission(guildID string, userID string, permissions ...P
 
 	return false, nil
 }
+
+func (e *Enforcer) HasRateLimit(guildID string, userID string) (bool, error) {
+	// TODO get rate limits for user and check increase
+	//		members have take the "strongest" rate limit from their roles.
+	//		there's also the global user rate limit which applies across all guilds.
+	panic("not implemented yet")
+}

@@ -50,9 +50,36 @@ func ResultFromError(err error) client.InvokeResult {
 	case client.RPCError:
 		return WAMPErrorResult(err.Err)
 	default:
-		res := InternalErrorResult("internal error")
+		res := InternalErrorResult()
 		res.Kwargs = wamputil.SetDictValue(res.Kwargs, "error", err.Error())
 		AttachEventID(&res, sentry.CaptureException(err))
 		return res
+	}
+}
+
+func InvalidArgumentResult(args ...interface{}) client.InvokeResult {
+	return client.InvokeResult{
+		Err:  wamp.ErrInvalidArgument,
+		Args: args,
+	}
+}
+
+func ErrorResultTrace(res *client.InvokeResult, trace string) {
+	const traceKey = "trace"
+	traces, ok := wamputil.List(wamputil.GetDictValue(res.Kwargs, traceKey))
+
+	if ok {
+		traces = append(traces, trace)
+	} else {
+		traces = wamp.List{trace}
+	}
+
+	res.Kwargs = wamputil.SetDictValue(res.Kwargs, traceKey, traces)
+}
+
+func CallResult(res *wamp.Result) client.InvokeResult {
+	return client.InvokeResult{
+		Args:   res.Arguments,
+		Kwargs: res.ArgumentsKw,
 	}
 }

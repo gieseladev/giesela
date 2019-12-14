@@ -19,13 +19,7 @@ type API struct {
 	enforcer     *rbac.Enforcer
 }
 
-func (api *API) registerProcedures() error {
-	return nil
-}
-
-// TODO store the user info in the context!
-
-func (api *API) getUserInfo(invocation *wamp.Invocation) (*UserInfo, error) {
+func (api *API) addUserInfo(ctx context.Context, invocation *wamp.Invocation) (context.Context, error) {
 	// TODO get bound userID from caller id
 	_, ok := invocation.Details["caller"]
 	if !ok {
@@ -45,40 +39,39 @@ func (api *API) getUserInfo(invocation *wamp.Invocation) (*UserInfo, error) {
 		return nil, wamputil.NewError(wamp.ErrInvalidArgument, "missing guild id")
 	}
 
-	return &UserInfo{
+	user := &UserInfo{
 		UserID:  userID,
 		GuildID: guildID,
-	}, nil
+	}
+
+	if hub := sentry.GetHubFromContext(ctx); hub != nil {
+		hub.ConfigureScope(func(s *sentry.Scope) {
+			s.SetUser(sentry.User{ID: userID})
+			s.SetTag("guild", guildID)
+		})
+	}
+
+	return WithUserInfo(ctx, user), nil
 }
 
-func (api *API) ensurePermission(ctx context.Context, invocation *wamp.Invocation, permissions ...rbac.Permission) *client.InvokeResult {
-	user, err := api.getUserInfo(invocation)
+func (api *API) checkRateLimit(ctx context.Context) (bool, error) {
+	user := UserInfoFromContextMust(ctx)
+
+	allowed, err := api.enforcer.HasRateLimit(user.GuildID, user.UserID)
 	if err != nil {
-		res := ResultFromError(err)
-		return &res
+		return false, err
 	}
+
+	return allowed, nil
+}
+
+func (api *API) checkPermission(ctx context.Context, permissions ...rbac.Permission) (bool, error) {
+	user := UserInfoFromContextMust(ctx)
 
 	allowed, err := api.enforcer.HasPermission(user.GuildID, user.UserID, permissions...)
 	if err != nil {
-		res := InternalErrorResult("something went wrong while checking permissions")
-		AttachEventID(&res, sentry.CaptureException(err))
-
-		return &res
-	}
-	if !allowed {
-		return &client.InvokeResult{
-			Args:   wamp.List{"required permissions missing"},
-			Kwargs: wamp.Dict{"permissions": permissions},
-			Err:    gieselaURI + "error.forbidden",
-		}
+		return false, err
 	}
 
-	return nil
-}
-
-func (api *API) ensureRateLimit(ctx context.Context, invocation *wamp.Invocation) *client.InvokeResult {
-	// TODO get rate limits for user and check increase
-	//		members have take the "strongest" rate limit from their roles.
-	//		there's also the global user rate limit which applies across all guilds.
-	return nil
+	return allowed, nil
 }

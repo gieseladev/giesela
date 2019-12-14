@@ -14,6 +14,38 @@ func GetListValue(list wamp.List, i int) (interface{}, bool) {
 	return list[i], true
 }
 
+func PopListValue(list *wamp.List, i int) (interface{}, bool) {
+	l := *list
+	lastIdx := len(l) - 1
+
+	if len(l) == 0 {
+		return nil, false
+	}
+
+	var v interface{}
+	switch i {
+	case 0:
+		v, *list = l[0], l[1:]
+		return v, true
+	case -1:
+		v, *list = l[lastIdx], l[:lastIdx]
+		return v, true
+	}
+
+	if i < 0 || i >= len(l) {
+		return nil, false
+	}
+
+	if i < len(l)-1 {
+		copy(l[i:], l[i+1:])
+	}
+
+	l[lastIdx] = nil
+	*list = l[:lastIdx]
+
+	return v, true
+}
+
 // GetDictValue safely gets the value of the given key from a wamp.Dict.
 func GetDictValue(dict wamp.Dict, key string) (interface{}, bool) {
 	if dict == nil {
@@ -40,4 +72,12 @@ func Snowflake(value interface{}, ok bool) (string, bool) {
 	}
 
 	return typecast.AsSnowflake(value)
+}
+
+func List(value interface{}, ok bool) (wamp.List, bool) {
+	if !ok {
+		return nil, false
+	}
+
+	return typecast.AsList(value)
 }
