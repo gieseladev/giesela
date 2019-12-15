@@ -5,7 +5,6 @@ import (
 	"github.com/gammazero/nexus/v3/client"
 	"github.com/gammazero/nexus/v3/wamp"
 	"github.com/getsentry/sentry-go"
-	"strconv"
 	"time"
 )
 
@@ -24,12 +23,7 @@ func New() *Handler {
 func (h *Handler) Wrap(handler client.InvocationHandler) client.InvocationHandler {
 	return func(ctx context.Context, invocation *wamp.Invocation) client.InvokeResult {
 		hub := sentry.CurrentHub().Clone()
-
-		hub.ConfigureScope(func(s *sentry.Scope) {
-			s.SetTag("registration_id", strconv.FormatUint(uint64(invocation.Registration), 10))
-			s.SetTag("request_id", strconv.FormatUint(uint64(invocation.Request), 10))
-		})
-
+		ScopeAddMessage(hub.Scope(), invocation)
 		ctx = sentry.SetHubOnContext(ctx, hub)
 
 		defer h.recoverWithSentry(hub, ctx)
